@@ -22,8 +22,8 @@
   },
   "current_validation": {
     "mode": "rust-runtime-floor",
-    "runner": "cargo test -p mir-runtime --test alpha_local_runtime",
-    "note": "Validated in this package by a non-public in-memory Rust local-runtime floor. The source-ish .mir file is not parsed by the current runner."
+    "runner": "python3 scripts/alpha_local_runtime_samples.py check-all --format json",
+    "note": "Validated by a non-public in-memory Rust local-runtime floor plus the dedicated alpha-local runtime runner; the source-ish .mir file is not parsed by the current runner."
   },
   "deferred": [
     "parser integration",

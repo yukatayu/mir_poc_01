@@ -41,6 +41,10 @@ distributed durable save/load completion ではない。
   - `CUT-11`: a useless checkpoint Z-cycle is inadmissible in the checker floor
 - current first cut intentionally still does **not** claim:
   communication-induced checkpoint repair, stale lease/witness load verdict split, distributed save/load runtime, or durable cut completion
+- `P-A0-23` Stage-B-first recut additionally reuses:
+  - `scripts/alpha_local_runtime_samples.py stage-b-closeout`
+  - `CUT-04/17` as the local-only save/load subset for current-scope Stage B closeout only
+  this does not widen the CUT family itself and does not discharge `CUT-10/12/16`
 
 ## decisions mirrored from specs/15
 
@@ -64,6 +68,7 @@ distributed durable save/load completion ではない。
 - `CUT-17` local stale-membership rejection bridge
 - consistent-cut predicate/checker first cut for `CUT-05/07/08/09/11/13/14/15`
 - explicit distributed-save non-claim remains in place
+- Stage B current-scope closeout may consume exactly `CUT-04/17` as supporting local-runtime evidence without promoting the full family to complete
 
 ### next executable cut
 
@@ -96,5 +101,5 @@ distributed durable save/load completion ではない。
 
 ## next package
 
-- after `P-A0-14` honest CUT widening closeout:
-  CUT-local reopen stays blocked on `CUT-10/12/16` because lease/witness store and communication-induced checkpoint protocol are not yet actualized. The next promoted package should therefore prefer Stage-E remaining-row widening unless a new save/load substrate package is explicitly opened.
+- after `P-A0-23` Stage B closeout:
+  CUT-family reopen still stays blocked on `CUT-10/12/16` because lease/witness store and communication-induced checkpoint protocol are not yet actualized. Reusing `CUT-04/17` for Stage B closeout does not change that blocker state.

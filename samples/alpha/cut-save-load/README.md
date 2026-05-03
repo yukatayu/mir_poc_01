@@ -4,6 +4,7 @@
 - Phase: Phase 2 / 6
 - Stage: Stage A -> F bridge
 - `scripts/alpha_cut_save_load_samples.py` actualizes `CUT-04` as a local-only save/load runtime bridge and `CUT-17` as a local stale-membership rejection bridge over the existing Rust local runtime substrate.
+- the same `CUT-04/17` pair is also reused by `scripts/alpha_local_runtime_samples.py stage-b-closeout` as the local-only save/load subset required for current-scope Stage B closeout.
 - `scripts/alpha_cut_save_load_checker.py` continues to cover selected negative/deferred rows via sidecar-declared `expected_static.checked_reason_codes`.
 - This family is still not an active runnable root, and distributed/durable save/load remains out of scope.
 
@@ -36,6 +37,7 @@
   - runtime-backed rows: `CUT-04/17`
   - checker-backed rows: `CUT-05/07/08/09/11/13/14/15`
   - planned-only rows: `CUT-01/02/03/06/10/12/16`
+- Stage B closeout may reuse only `CUT-04/17`; this does not promote the whole family to 100% or discharge `CUT-10/12/16`.
 - `CUT-05` / `07` / `08` / `09` / `11` / `13` / `14` / `15` currently carry checker-floor seed rows for the first structural cut-validity/deferred-surface cut.
 - the current mixed cut does not yet cover:
   `CUT-12` communication-induced checkpoint repair or `CUT-10/16` lease/witness-store-backed non-resurrection verdict split
@@ -51,6 +53,7 @@ cargo test -p mir-runtime --test alpha_cut_save_load_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume
 cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership
 python3 scripts/alpha_cut_save_load_samples.py check-all --format json
+python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json
 python3 -m unittest \
   scripts.tests.test_alpha_cut_save_load_checker \
   scripts.tests.test_alpha_cut_save_load_samples

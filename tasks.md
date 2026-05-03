@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 03:01 JST
+最終更新: 2026-05-03 10:08 JST
 
 ## この文書について
 
@@ -13,13 +13,13 @@
 - active executable floor は維持されています:
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
-  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、Stage A floor を崩さずに Stage B local runtime へ向かう theory-freeze / checker-runtime preparation lane を進めます。
-- Alpha-0 closeout validation freshness は 2026-05-03 03:01 JST に更新済みです:
-  `P-A0-22` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LIF-01/05..08` の negative-static checker floor、`LIF-02/03/04` の helper-local synthetic acceptance floor、`LIF-13` の helper-local synthetic snapshot-selected floor、`LIF-11` の helper-local synthetic anchor-handoff floor、`VAR-02/03/05/07/09/10/15` の negative-static checker floor、`VAR-01/04/06` の helper-local synthetic acceptance floor、`VAR-08/11/13` の runtime-mirror floor、`LR-01/02` non-public Rust local-runtime floor、`LI-01..05` non-public Rust layer-insertion floor、`NET-02/03/04/05/07/09` non-public Rust Stage-C network / Docker floor、`AV-01/02/06/08/09` + `HP-11/12/15` runtime-private package/avatar manifest-admission floor、`CUT-04/17` runtime-backed local save/load rows、`CUT-11` checker-backed Z-cycle inadmissibility row、`VIS-01/02/03/05/06/07/08/10/11` dedicated Stage-E subset runner、and `E2E-01/02/03/04/05/06/07/09/10` thin integrated bridge floor が actualize 済みです。`P-A0-22` は these floors を widen せず、`LIF-15` と `VAR-14` を future carrier blocker split として固定しました。
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、large-stage-first で alpha-0.5 closeout を終え、次は Stage C transport closeout へ向かいます。
+- Alpha-0 closeout validation freshness は 2026-05-03 10:08 JST に更新済みです:
+  `P-A0-23` gate では local-runtime / CUT runtime floors、new `scripts/alpha_local_runtime_samples.py` unit and closeout checks、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `LR-01/02` non-public Rust local-runtime floor に `CUT-04/17` supporting local-only save/load subset を加えた current-scope Stage B closeout が actualize 済みであり、distributed save/load、`CUT-10/12/16`、parser/runtime bridge、active runnable-root promotion は引き続き未claimです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..22` closeout 後、remaining positive rows の row-specific actualization は `LIF-13` と `LIF-11` まで narrow carrier で進み、`LIF-15` / `VAR-14` は future carrier blocker split に留まる current line として読みます。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..23` closeout 後、large-stage-first queue として Stage C transport closeout を次 line に置きます。`LIF-15` / `VAR-14` は future carrier blocker split に留まり、stage-first line を横切って先に actualize しません。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 40% local-runtime floor, Stage C 35% network / Docker floor, Stage D 40% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
+  Stage B 100% alpha-0.5 local-runtime closeout, Stage C 35% network / Docker floor, Stage D 40% hot-plug/runtime-package floor, Stage E 60% widened subset devtools bridge, Stage F 60% thin integrated alpha demo bridge
 - Concrete phase:
-  Phase 8 — integrated alpha demo closeout
+  Phase 5 — Stage C transport completion after the alpha-0.5 closeout
 - Package status:
-  `P-A0-22` remote/adapter blocker split is the current promoted package in repo state, and it actualizes no new row
+  `P-A0-23` Stage B alpha-0.5 closeout is the current promoted package in repo state, and it fixes Stage B current-scope completion without widening distributed save/load claims
 - Current status:
-  `P-A0-22` は `LIF-15` を planned-only `remote_observe_scope = alpha-remote-observe-floor`、`VAR-14` を planned-only `adapter_transform_scope = alpha-adapter-transform-floor` として split し、current helper-local acceptance/snapshot/anchor-handoff/runtime-mirror floors を widen しなかった。negative side は `reason_codes_scope = alpha-static-floor`、acceptance side は `acceptance_scope = alpha-acceptance-floor`、snapshot-selected side は `snapshot_scope = alpha-snapshot-selected-floor`、anchor-handoff side は `anchor_handoff_scope = alpha-anchor-handoff-floor`、runtime-sensitive side は `runtime_mirror.scope = alpha-runtime-mirror-floor` で別 carrier のままである。future `alpha-remote-observe-floor` と `alpha-adapter-transform-floor` は still planned-only inventory であり、parser/runtime bridge、runtime-package completion、final public checker API、runtime/public variance enforcement を意味しない。
+  `P-A0-23` は `scripts/alpha_local_runtime_samples.py` により `LR-01/02` dedicated local-runtime runner と `CUT-04/17` supporting local-only save/load subset を束ね、alpha-0.5 current-scope closeout を固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers は維持されるが、current queue authority は Stage C transport closeout へ移っている。
 - Next autonomous package:
-  no safe `P-A0-23` is promoted; the next reopen must choose either a dedicated `LIF-15` remote-observe carrier cut or a dedicated `VAR-14` adapter-transform carrier cut
+  promote Stage C transport closeout over the existing Docker/local-subprocess floor before reopening new lifetime/variance carrier cuts
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -91,6 +91,7 @@
 | alpha network / Docker floor | `crates/mir-runtime`, `samples/alpha/network-docker/`, `scripts/alpha_network_docker_e2e.py` | `cargo test -p mir-runtime --test alpha_network_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout`; `python3 scripts/alpha_network_docker_e2e.py check-all --format json` | production WAN / durable replay / final public transport ABI |
 | alpha avatar/package floor | `crates/mir-runtime`, `samples/alpha/avatar-runtime/`, `samples/alpha/hotplug-runtime/`, `scripts/alpha_avatar_runtime_samples.py` | `cargo test -p mir-runtime --test alpha_avatar_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`; `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json` | final avatar API / native execution / final package ABI |
 | alpha cut/save-load bridge | `crates/mirrorea-core`, `crates/mir-runtime`, `samples/alpha/cut-save-load/`, `scripts/alpha_cut_save_load_samples.py` | `cargo test -p mirrorea-core --test runtime_substrate`; `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership`; `python3 scripts/alpha_cut_save_load_samples.py check-all --format json` | distributed save/load / durable cut / `CUT-10/12/16` completion |
+| alpha local runtime closeout | `crates/mir-runtime`, `samples/alpha/local-runtime/`, `samples/alpha/cut-save-load/`, `scripts/alpha_local_runtime_samples.py` | `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership`; `python3 scripts/alpha_local_runtime_samples.py check-all --format json`; `python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json` | distributed save/load / CUT family completion / active runnable-root promotion |
 | alpha visualization / devtools bridge | `samples/alpha/visualization/`, `scripts/alpha_visualization_samples.py` | `python3 scripts/alpha_visualization_samples.py list --format json`; `python3 scripts/alpha_visualization_samples.py check-all --format json`; `python3 scripts/alpha_visualization_samples.py closeout --format json`; `python3 -m unittest scripts.tests.test_alpha_visualization_samples` | Stage E completion / final viewer API / telemetry service |
 | alpha integrated E2E bridge | `samples/alpha/e2e/`, `scripts/alpha_e2e_samples.py` | `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`; `python3 scripts/alpha_e2e_samples.py check-all --format json`; `python3 scripts/alpha_e2e_samples.py closeout --format json` | Stage F completion / distributed save-load completion / remaining Stage-E rows |
 | projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py check-all --format json` | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
@@ -103,7 +104,7 @@
 | Stage | Progress | Name | Status | Main evidence | Not yet claimed |
 |---|---:|---|---|---|---|
 | A | 90% | repo-local alpha-ready floor | mostly reached | clean-near-end、Sugoroku、typed external preview、network canary、projection/codegen bridge、viewer prototype、hot-plug narrow floor | final public product |
-| B | 40% | alpha 0.5 local runtime | first Rust local-runtime floor + local save/load accepted/rejected subset actualized | `specs/13..17`、`plan/39..43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_cut_save_load_samples.py` | integrated local runtime completion / distributed save-load completion |
+| B | 100% | alpha 0.5 local runtime | current-scope closeout reached as local runtime + local-only save/load subset | `specs/15/17`、`plan/41/43`、`samples/alpha/local-runtime/`、`samples/alpha/cut-save-load/`、`crates/mir-runtime/src/alpha_local_runtime.rs`、`scripts/alpha_local_runtime_samples.py`、`scripts/alpha_cut_save_load_samples.py` | distributed save-load completion / CUT family completion / final public runtime ABI |
 | C | 35% | alpha 0.7 transport | first Rust network / Docker floor actualized | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` | production WAN / durable replay / partition completion / final transport ABI |
 | D | 40% | alpha 0.8 hot-plug lifecycle | attach-time layer floor, package-admission subset, and runtime-mirror bridge actualized | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/contract-variance/` runtime-mirror rows + `samples/alpha/hotplug-runtime/` + `samples/alpha/avatar-runtime/` | detach / migration / final ABI |
 | E | 60% | alpha 0.9 devtools | widened Stage-E subset runner actualized; completion still partial | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + viewer prototype inventory + existing alpha bridge evidence | remaining `VIS-04/09/12` / final viewer / telemetry API |
@@ -140,9 +141,9 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | next carrier-choice reopen after `P-A0-22` | repo | blocked pending narrower cut selection | choose whether the first future carrier package is `LIF-15` remote-observe or `VAR-14` adapter-transform, without widening current floors or claiming parser/runtime bridge |
-| 2 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 3 | Post-`U1` first public-facing implementation tranche | repo after user choice | blocked | chosen public / host / packaging surface has enough scope to implement without guessing |
+| 1 | Stage C transport closeout | repo | ready | close the existing Docker/local-subprocess transport floor as the next large-stage package without widening to WAN/federation or final transport ABI |
+| 2 | Stage D lifecycle closeout after Stage C | repo | later | re-read existing hot-plug / package / runtime-mirror evidence after Stage C and decide the narrow close condition for alpha-0.8 |
+| 3 | `U1` actual commitment | user + repo | open | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 
 ## self-driven maintenance tasks
 
@@ -182,6 +183,7 @@ These are safe to do without new product decisions.
 | `P-A0-20` | snapshot-selected floor | closed | dedicated helper-local synthetic snapshot-selected carrier for `LIF-13` only, without widening acceptance/runtime-mirror floors, and report `1127` |
 | `P-A0-21` | anchor-handoff floor | closed | dedicated helper-local synthetic anchor-handoff carrier for `LIF-11` only, without widening acceptance/snapshot/runtime-mirror floors, and report `1128` |
 | `P-A0-22` | remote / adapter blocker split | closed | docs-first split fixing planned-only `alpha-remote-observe-floor` for `LIF-15` and `alpha-adapter-transform-floor` for `VAR-14`, without actualizing either row, and report `1129` |
+| `P-A0-23` | Stage B alpha-0.5 closeout | closed | dedicated local-runtime runner plus Stage B closeout surface over `LR-01/02` and `CUT-04/17` supporting subset; distributed save/load and CUT family completion remain later |
 
 ## user decision blockers
 

@@ -121,6 +121,12 @@ current alpha-local stage reading は次を使う。
   - existing repo-local alpha-ready floor
 - `Stage B`
   - integrated local Mirrorea runtime
+  - current-scope closeout for this stage is:
+    - one accepted local queue / `MessageEnvelope` dispatch / event DAG export path
+    - one stale-membership rejection path before state mutation
+    - one local-only save/load resume path
+    - one local-only save/load stale-membership non-resurrection path
+  - Stage B closeout does not imply distributed save/load completion, `CUT-10/12/16` completion, or active runnable-root promotion of `samples/alpha/`
 - `Stage C`
   - real transport narrow cut
 - `Stage D`
@@ -164,6 +170,23 @@ negative test floor:
 - incompatible patch reject
 - invalid cut reject
 - unsigned native package reject
+
+## Stage B current-scope closeout boundary
+
+`Stage B` current-scope closeout is narrower than full `specs/15` family completion.
+
+- admissible evidence:
+  - `LR-01` local accepted dispatch path
+  - `LR-02` stale-membership rejection path
+  - `CUT-04` local-only save/load resume path
+  - `CUT-17` local-only save/load stale-membership non-resurrection path
+- this combination is sufficient to call alpha-0.5 local runtime complete for current scope
+- this does not imply:
+  - distributed/durable save/load completion
+  - `CUT-10/12/16` completion
+  - parser/runtime front-door execution of `samples/alpha/*.mir`
+  - Stage C/D/E/F completion
+  - final public runtime ABI
 
 ## relationship to Reversed Library
 

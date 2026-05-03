@@ -18,8 +18,9 @@
 - `LIF-15` は planned-only `remote_observe_scope = alpha-remote-observe-floor` に split 済みであり、place identity / target identity / membership epoch / participant incarnation / frontier / label-redaction / covariance の future carrier inventory を要求する
 - `VAR-14` は planned-only `adapter_transform_scope = alpha-adapter-transform-floor` に split 済みであり、source-target contract / pre-post preservation / effect-failure containment / provided surface / observation-redaction-retention / fallback representation の future carrier inventory を要求する
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
+- `local-runtime/` には `scripts/alpha_local_runtime_samples.py` が `LR-01/02` dedicated runner と current-scope Stage B closeout surface を追加し、`CUT-04/17` は supporting local-only save/load subset としてだけ再利用される
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
-- `local-runtime/` には first Rust local-runtime floor、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
+- `local-runtime/` には current-scope Stage B closeout surface、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には first Rust Stage-C network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
 - `visualization/` には thin runner `scripts/alpha_visualization_samples.py` が `VIS-01/02/03/05/06/07/08/10/11` を actualize したが、`VIS-04/09/12` は planned-only のままであり、Stage E / Stage F completion claim には使わない
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize したが、`E2E-08` は planned-only のままであり、Stage F completion claim には使わない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
@@ -63,6 +64,8 @@ cargo test -p mirrorea-core --test runtime_substrate
 cargo test -p mir-runtime --test alpha_cut_save_load_runtime
 python3 scripts/alpha_cut_save_load_samples.py check-all --format json
 cargo test -p mir-runtime --test alpha_local_runtime
+python3 scripts/alpha_local_runtime_samples.py check-all --format json
+python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json
 cargo test -p mir-runtime --test alpha_layer_insertion_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout
 cargo test -p mir-runtime --test alpha_network_runtime

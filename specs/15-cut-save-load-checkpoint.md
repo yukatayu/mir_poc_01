@@ -112,8 +112,13 @@ current alpha-local implementation claim として admissible なのは次であ
 - local Place save/load
 - consistent-cut checker for proposed multi-Place snapshots
 - negative samples for inconsistent distributed cut
+- current Stage B closeout may reuse only the local-only subset
+  `CUT-04` and `CUT-17`
+  together with the integrated local-runtime floor
 
 これだけで distributed durable save/load completion を claim しない。
+また、`CUT-04/17` を使って Stage B を閉じても、
+`CUT-10/12/16` や family 全体の completion は意味しない。
 
 ## distributed save/load deferred scope
 
