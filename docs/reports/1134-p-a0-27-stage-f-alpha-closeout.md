@@ -194,7 +194,8 @@ Review the post-Stage-F blocker set and promote one narrow later-family lane, or
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit `e0cfab0` (`mirrorea: close p-a0-27 stage-f alpha closeout`) was pushed to `origin/main`.
+- This report section was finalized in a docs-only follow-up commit after the main package push.
 
 ## Sub-agent session close status
 
