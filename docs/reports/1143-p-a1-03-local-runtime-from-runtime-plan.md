@@ -281,7 +281,8 @@ Close `P-A1-04` by introducing a narrow manifest-driven practical package/hot-pl
 
 ## Commit / push status
 
-Pending at report write.
+- Commit created and pushed: `d960987` (`mirrorea: close p-a1-03 local runtime floor`)
+- Report metadata follow-up pending at the moment of this edit.
 
 ## Sub-agent session close status
 
