@@ -51,7 +51,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
   規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
   規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。こちらが今後の `100%` の基準であり、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を揃えた実用 toolchain を目標にします。
-  2026-05-03 時点では、`samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader に加え、`crates/mir-ast::practical_alpha1_checker` と `scripts/practical_alpha1_check.py` による first practical checker floor が入っています。これは final textual grammar、full `specs/18` typed-checking completion、reusable runtime API、product-like CLI ではありません。
+  2026-05-03 時点では、`samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader、`crates/mir-ast::practical_alpha1_checker` と `scripts/practical_alpha1_check.py` による first practical checker floor、さらに `crates/mir-ast::practical_alpha1_runtime_plan`、`crates/mir-runtime::practical_alpha1_local_runtime`、example `mir_practical_alpha1_run_local`、`scripts/practical_alpha1_run_local.py` による first practical local-runtime floor が入っています。現在 actualize 済みの runtime row は `RUN-01/02` のみであり、これは distinct runtime-plan carrier を介した alpha-local local-runtime floor です。final textual grammar、full `specs/18` typed-checking completion、package/hot-plug API、Docker/local TCP 実行、local save/load command、final public runtime/devtools API、product-like CLI ではありません。
 
 現行の Stage A..F `100%` は evidence closeout であり、practical alpha-1 `100%` ではありません。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
@@ -184,6 +184,17 @@ Lean foundations と generated stub の同期:
 
 ```bash
 python3 scripts/current_l2_lean_sample_sync.py
+```
+
+practical alpha-1 front-door / checker / first local-runtime floor:
+
+```bash
+cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
+cargo test -p mir-ast practical_alpha1_checker -- --nocapture
+cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture
+cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture
+python3 scripts/practical_alpha1_check.py check-all --format json
+python3 scripts/practical_alpha1_run_local.py check-all --format json
 ```
 
 ## 読み始める順序

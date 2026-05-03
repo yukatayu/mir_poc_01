@@ -27,7 +27,12 @@
   - `python3 scripts/practical_alpha1_check.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/chk-*/` through `crates/mir-ast::practical_alpha1_checker`
   - it is a non-final checker-only command and does not emit runtime plans
-  - practical `run-local` / `run-docker` scripts remain later work
+- practical alpha-1 first local-runtime floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_run_local.py check-all --format json`
+  - this exercises `samples/practical-alpha1/packages/run-*/` through `crates/mir-ast::practical_alpha1_runtime_plan` and `crates/mir-runtime::practical_alpha1_local_runtime`
+  - it consumes checked practical package input through a distinct runtime-plan boundary
+  - it is a non-final local-runtime command and does not claim Docker transport, package/hot-plug, save/load, or final public runtime/devtools API
+  - practical `run-docker` remains later work
 
 ### current-L2 helper / detached loop / support
 
@@ -58,7 +63,7 @@
   - `P-A0-12` は `alpha_cut_save_load_samples.py` を `scripts/` に actualize した。これは `samples/alpha/cut-save-load/` の `CUT-04` local-only save/load bridge を専用 command として検証し、`alpha_e2e_samples.py` 側では `E2E-06` へ composition する。distributed/durable save/load completion や Z-cycle handling は主張しない
   - `P-A0-13` / `P-A0-15` / `P-A0-26` は `alpha_visualization_samples.py` を widen し、`samples/alpha/visualization/` の `VIS-01/02/03/05/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の dedicated Stage-E subset runner として検証し、`stage-e-closeout` command で current-scope Stage E completion surface を与える。`VIS-04/09/12`、Stage F completion、final public viewer/telemetry API は引き続き主張しない
   - `P-A0-14` は `alpha_cut_save_load_samples.py` と `alpha_cut_save_load_checker.py` を widen し、`CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle inadmissibility row を actualize した。これは saved local state が stale membership を accepted resumed dispatch へ resurrect しないことと、useless checkpoint cycle が checker floor で inadmissible であることだけを示す。`CUT-10/12/16`、distributed/durable save/load completion、Z-cycle repair、final public ABI は主張しない
-  - practical alpha-1 front-door scripts (`practical_alpha1_check.py`、`practical_alpha1_run_local.py`、`practical_alpha1_run_docker.py` など) は `P-A1-01` 時点でもまだ未実装であり、current command set には cargo-based library front-door validation だけを入れる
+  - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py` が追加されたが、`run-docker`、package/hot-plug、save/load、viewer/product command は still later である
 
 ### storage / env
 

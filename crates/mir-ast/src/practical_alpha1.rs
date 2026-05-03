@@ -3,7 +3,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::error::Category;
 
 pub const PRACTICAL_ALPHA1_FORMAT_VERSION: &str = "mirrorea-practical-alpha1-v0";
@@ -78,7 +78,7 @@ impl fmt::Display for PracticalAlpha1FrontDoorError {
 
 impl std::error::Error for PracticalAlpha1FrontDoorError {}
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1Package {
     pub format_version: String,
     pub package_id: String,
@@ -97,35 +97,37 @@ pub struct PracticalAlpha1Package {
     pub native: Option<PracticalAlpha1NativeManifest>,
     #[serde(default, alias = "checker")]
     pub alpha_local_checker_input: Option<PracticalAlpha1AlphaLocalCheckerInput>,
+    #[serde(default, alias = "runtime")]
+    pub alpha_local_runtime_input: Option<PracticalAlpha1AlphaLocalRuntimeInput>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1World {
     pub id: String,
     pub entry_place: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1Place {
     pub id: String,
     pub authority: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1FallbackChain {
     pub id: String,
     pub capability: String,
     pub options: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1LayerAttachment {
     pub id: String,
     pub kind: String,
     pub attach_mode: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1PackageManifest {
     pub version: String,
     #[serde(default)]
@@ -138,19 +140,19 @@ pub struct PracticalAlpha1PackageManifest {
     pub failure_row: Vec<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1NativeManifest {
     pub entry_ref: String,
     pub signature_present: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PracticalAlpha1AlphaLocalCheckerInput {
     pub family: PracticalAlpha1AlphaLocalCheckerFamily,
     pub case: PracticalAlpha1AlphaLocalCheckerCase,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PracticalAlpha1AlphaLocalCheckerFamily {
     LifetimeFallback,
@@ -159,7 +161,7 @@ pub enum PracticalAlpha1AlphaLocalCheckerFamily {
     PackageAdmission,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum PracticalAlpha1AlphaLocalCheckerCase {
     RawDanglingReference {
@@ -219,6 +221,93 @@ pub enum PracticalAlpha1AlphaLocalCheckerCase {
         sample_id: String,
         allowed_capability_prefixes: Vec<String>,
     },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalRuntimeInput {
+    pub queue_kind: String,
+    pub runtime_places: Vec<PracticalAlpha1RuntimePlaceSeed>,
+    pub bootstrap_participants: Vec<PracticalAlpha1RuntimeBootstrapParticipant>,
+    #[serde(default)]
+    pub pre_dispatch_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
+    pub dispatch_program: PracticalAlpha1RuntimeDispatchProgram,
+    pub initial_envelopes: Vec<PracticalAlpha1RuntimeEnvelope>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimePlaceSeed {
+    pub place_id: String,
+    pub kind: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimeBootstrapParticipant {
+    pub principal: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimeMembershipAdvance {
+    pub kind: PracticalAlpha1RuntimeMembershipAdvanceKind,
+    pub principal: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1RuntimeMembershipAdvanceKind {
+    AddParticipant,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum PracticalAlpha1RuntimeDispatchProgram {
+    SugorokuRollHandoff {
+        envelope_id: String,
+        roll_value: u64,
+        handoff_target: String,
+        publication_witness_ref: String,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimeEnvelope {
+    pub envelope_id: String,
+    pub from_place: String,
+    pub to_place: String,
+    pub transport: String,
+    #[serde(default)]
+    pub transport_medium: Option<String>,
+    pub transport_seam: String,
+    pub payload_kind: String,
+    pub payload_ref: String,
+    pub principal_claim: PracticalAlpha1RuntimePrincipalClaim,
+    #[serde(default)]
+    pub auth_evidence: Option<PracticalAlpha1RuntimeAuthEvidence>,
+    pub emitter_principal: String,
+    pub membership_epoch: u64,
+    pub member_incarnation: u64,
+    pub freshness_checks: Vec<String>,
+    pub capability_requirements: Vec<String>,
+    pub authorization_checks: Vec<String>,
+    pub witness_refs: Vec<String>,
+    pub dispatch_outcome: String,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimePrincipalClaim {
+    pub principal: String,
+    pub participant_place: String,
+    pub claimed_authority: String,
+    pub claimed_capabilities: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RuntimeAuthEvidence {
+    pub kind: String,
+    pub subject: String,
+    pub issuer: String,
+    pub bindings: Vec<String>,
+    pub notes: Vec<String>,
 }
 
 pub fn load_practical_alpha1_package_path(

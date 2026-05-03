@@ -118,6 +118,28 @@ observation/redaction/retention constraints、
 package positive admissionなどを含む
 full typed-checking completion と同一視しない。
 
+## first local runtime floor boundary
+
+`P-A1-03` の current actualization は、
+reusable runtime 全体の completion ではなく、
+**first practical local-runtime floor** である。
+
+- checked package carrier、runtime plan、local runtime report は分ける
+- checker report を runtime plan や runtime report と同一視しない
+- current actualized row は:
+  - `RUN-01`
+  - `RUN-02`
+- current floor は local queue / `MessageEnvelope` / membership frontier / event DAG export hook を扱う
+- capability / auth / witness lane は carrier に残すが、この package で full runtime enforcement を claim しない
+- current floor は package/hot-plug practical API completionを意味しない
+- current floor は Docker/local TCP transport completionを意味しない
+- current floor は local save/load command completionを意味しない
+- current floor は final public runtime/devtools ABI を意味しない
+
+したがって、`P-A1-03` closeout は useful practical runtime floor だが、
+reusable runtime family 全体、package/hot-plug、transport、
+save/load、devtools completion と同一視しない。
+
 ### 3. reusable runtime
 
 - multiple `Place` を持つ reusable runtime API がある

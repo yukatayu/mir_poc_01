@@ -1,0 +1,113 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "run-01-local-sugoroku",
+  "package_kind": "world",
+  "world": {
+    "id": "practical_sugoroku_world",
+    "entry_place": "GamePlace[SugorokuGame#1]"
+  },
+  "places": [
+    {
+      "id": "WorldPlace[AlphaRoom#1]",
+      "authority": "shared_host"
+    },
+    {
+      "id": "GamePlace[SugorokuGame#1]",
+      "authority": "shared_host"
+    }
+  ],
+  "layers": [
+    {
+      "id": "debug_trace_layer",
+      "kind": "Debug",
+      "attach_mode": "requested"
+    }
+  ],
+  "alpha_local_checker_input": {
+    "family": "contract_variance",
+    "case": {
+      "kind": "transparent_observe_only_layer",
+      "sample_id": "CHK-VAR-01",
+      "layer_kind": "Debug",
+      "effect_delta": [],
+      "failure_delta": [],
+      "precondition_strengthened": false,
+      "postcondition_weakened": false
+    }
+  },
+  "alpha_local_runtime_input": {
+    "queue_kind": "in_process_fifo",
+    "runtime_places": [
+      {
+        "place_id": "WorldPlace[AlphaRoom#1]",
+        "kind": "WorldPlace"
+      },
+      {
+        "place_id": "GamePlace[SugorokuGame#1]",
+        "kind": "SugorokuGamePlace"
+      }
+    ],
+    "bootstrap_participants": [
+      {
+        "principal": "Alice"
+      },
+      {
+        "principal": "Bob"
+      }
+    ],
+    "dispatch_program": {
+      "kind": "sugoroku_roll_handoff",
+      "envelope_id": "roll_request#1",
+      "roll_value": 4,
+      "handoff_target": "Bob",
+      "publication_witness_ref": "draw_pub#1"
+    },
+    "initial_envelopes": [
+      {
+        "envelope_id": "roll_request#1",
+        "from_place": "ParticipantPlace[Alice]",
+        "to_place": "GamePlace[SugorokuGame#1]",
+        "transport": "local_queue",
+        "transport_medium": "same_process_fifo",
+        "transport_seam": "local_queue",
+        "payload_kind": "sugoroku_roll_request",
+        "payload_ref": "roll(Alice,4)",
+        "principal_claim": {
+          "principal": "Alice",
+          "participant_place": "ParticipantPlace[Alice]",
+          "claimed_authority": "SugorokuDiceOwner",
+          "claimed_capabilities": [
+            "RollDice",
+            "PublishRoll",
+            "HandoffTurn"
+          ]
+        },
+        "auth_evidence": null,
+        "emitter_principal": "Alice",
+        "membership_epoch": 0,
+        "member_incarnation": 0,
+        "freshness_checks": [
+          "membership_epoch matches local runtime frontier",
+          "member_incarnation matches active participant"
+        ],
+        "capability_requirements": [
+          "RollDice",
+          "PublishRoll",
+          "HandoffTurn"
+        ],
+        "authorization_checks": [
+          "current dice owner is Alice",
+          "handoff target Bob is active"
+        ],
+        "witness_refs": [
+          "game_started_witness"
+        ],
+        "dispatch_outcome": "queued_local_dispatch",
+        "notes": [
+          "checked practical local queue plan only",
+          "not a final public runtime API"
+        ]
+      }
+    ]
+  }
+}

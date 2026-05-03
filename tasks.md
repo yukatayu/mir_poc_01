@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 16:29 JST
+最終更新: 2026-05-03 17:39 JST
 
 ## この文書について
 
@@ -15,8 +15,8 @@
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - practical alpha-1 line が新しい promoted package line です:
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
-- `P-A1-02` first checker-floor validation freshness は 2026-05-03 16:29 JST に更新済みです:
-  `crates/mir-ast::practical_alpha1_checker`、distinct lowered checker IR、Rust example `mir_practical_alpha1_check`、`scripts/practical_alpha1_check.py`、`CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` expected reports、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。途中の `--format` root option order bug と expected JSON stale-field drift は RED→GREEN で修正し、`cargo test -p mir-ast practical_alpha1_checker -- --nocapture` は 3 tests、`cargo test -p mir-ast` は 78 tests、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_validate_docs` は 18 tests、`python3 scripts/practical_alpha1_check.py check-all --format json` は 10/10 pass、source hierarchy は `73/73/0`、docs scaffold は complete で pass した。これは non-final alpha-local checker floor の freshness であり、full `specs/18` typed-checking completion、runtime plan execution、run-local / run-docker、save/load、devtools、product prototype success はまだ claim しない。
+- `P-A1-03` first local-runtime validation freshness は 2026-05-03 17:39 JST に更新済みです:
+  `crates/mir-ast::practical_alpha1_runtime_plan`、`crates/mir-runtime::practical_alpha1_local_runtime`、example `mir_practical_alpha1_run_local`、`scripts/practical_alpha1_run_local.py`、`RUN-01/02` expected reports、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で `runtime_plan_emitted` を `false` へ補正し、`closeout` surface は `check_all()` 由来へ直し、runtime-plan malformed input と checker-rejected runtime package の negative coverage を追加した。`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test alpha_local_runtime`、`cargo test -p mir-ast`、`python3 scripts/practical_alpha1_check.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_run_local.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_validate_docs` が pass した。これは non-final alpha-local local-runtime floor の freshness であり、package/hot-plug API、run-docker、save/load、devtools、product prototype success はまだ claim しない。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -26,7 +26,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-03` local runtime from runtime plan を next gate とする。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-04` package/hot-plug practical API を next gate とする。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -73,15 +73,15 @@
 ## Current Practical Alpha-1 stage
 
 - Large stage:
-  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` local runtime from runtime plan is promoted next
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` package/hot-plug practical API is promoted next
 - Concrete phase:
-  Phase 3/9 — front-door and first checker floor are closed; runtime-plan execution is next
+  Phase 4/9 — front-door、first checker floor、first local-runtime floor are closed; package/hot-plug practical API is next
 - Package status:
-  `P-A1-02` typed IR/checker first floor is the last closed package in repo state
+  `P-A1-03` local runtime from runtime plan is the last closed package in repo state
 - Current status:
-  `P-A1-02` は `crates/mir-ast::practical_alpha1_checker`、distinct lowered checker IR、Rust example `mir_practical_alpha1_check`、`scripts/practical_alpha1_check.py`、および `CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` を actualize し、source/package front-door に続く first checker floor を practical line に追加した。これは non-final alpha-local checker floor であり、full `specs/18` typed-checking completion や runtime plan execution はまだ later である。
+  `P-A1-03` は `crates/mir-ast::practical_alpha1_runtime_plan`、`crates/mir-runtime::practical_alpha1_local_runtime`、example `mir_practical_alpha1_run_local`、`scripts/practical_alpha1_run_local.py`、および `RUN-01/02` practical fixtures を actualize し、source/package front-door と first checker floor に続く first local-runtime floor を practical line に追加した。これは non-final alpha-local local-runtime floor であり、package/hot-plug API、Docker/local TCP、save/load、devtools はまだ later である。
 - Next autonomous package:
-  `P-A1-03` local runtime from runtime plan
+  `P-A1-04` package/hot-plug practical API
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -125,8 +125,8 @@
 | `PA1-0` / `P-A1-00` | 100% | closed | practical/evidence progress semantics repair、`specs/18` + `plan/44`、snapshot docs sync、validators、report、commit/push |
 | `PA1-1` / `P-A1-01` | 100% | closed | limited alpha source/package format、initial practical sample fixtures、front-door parser/loader、positive/negative parse tests、report、commit/push |
 | `PA1-2` / `P-A1-02` | 100% | closed | distinct lowered IR、non-final checker report、`scripts/practical_alpha1_check.py`、`CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` の explicit accepted/rejected evidence |
-| `PA1-3` / `P-A1-03` | 10% | promoted next | checked package を reusable runtime-plan boundary が consume し、practical source package から local world を起動し event DAG を export |
-| `PA1-4` / `P-A1-04` | 10% | pending | package manifest schema、admission checker、debug/rate-limit/auth layer attach、object package attach、typed negatives |
+| `PA1-3` / `P-A1-03` | 100% | closed | checked package を distinct runtime-plan boundary が consume し、practical source package から local world を起動し event DAG を export |
+| `PA1-4` / `P-A1-04` | 10% | promoted next | package manifest schema、admission checker、debug/rate-limit/auth layer attach、object package attach、typed negatives |
 | `PA1-5` / `P-A1-05` | 10% | pending | same practical package input で Docker/local TCP を動かし、route trace と separated lanes を export |
 | `PA1-6` / `P-A1-06` | 10% | pending | JSON schema、viewer command、event DAG / route / membership / hot-plug / fallback の可視化 |
 | `PA1-7` / `P-A1-07` | 10% | pending | practical `save` / `load` command、local roundtrip、stale membership non-resurrection、invalid distributed cut reject |
@@ -179,12 +179,11 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A1-03` local runtime from runtime plan | repo | ready | run a local world from checked practical package without sample-ID keyed bridge |
-| 2 | `P-A1-04` package/hot-plug practical API | repo | after `P-A1-03` | attach debug/auth/rate-limit/object package from practical manifest-driven path |
-| 3 | `P-A1-04..08` practical toolchain completion | repo | staged later | hot-plug practical API, transport E2E, devtools, save/load, and product prototype sequence |
-| 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
-| 5 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 6 | maintenance / dashboard freshness | repo | active | keep practical/evidence split wording and validation anchors current while package line advances |
+| 1 | `P-A1-04` package/hot-plug practical API | repo | ready | attach debug/auth/rate-limit/object package from practical manifest-driven path without collapsing runtime/package boundaries |
+| 2 | `P-A1-05..08` practical toolchain completion | repo | staged later | transport E2E, devtools, save/load, and product prototype sequence after package API exists |
+| 3 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
+| 4 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 5 | maintenance / dashboard freshness | repo | active | keep practical/evidence split wording and validation anchors current while package line advances |
 
 ## self-driven maintenance tasks
 
@@ -233,8 +232,8 @@ These are safe to do without new product decisions.
 | `P-A1-00` | practical-alpha-rebaseline | closed | add `specs/18` / `plan/44`, rebase future `100%` to practical alpha-1 readiness, and retain Stage A..F `100%` only as current-scope evidence closeout |
 | `P-A1-01` | alpha-source front-door design | closed | limited alpha source/package format, initial practical sample fixtures, front-door parser/loader, parse positive/negative tests |
 | `P-A1-02` | typed IR/checker first floor | closed | reusable checker route over practical front-door output, distinct lowered IR, non-final checker report, explicit accepted/rejected evidence |
-| `P-A1-03` | local runtime from runtime plan | promoted next | consume checked practical package in a reusable local runtime path |
-| `P-A1-04` | package/hot-plug practical API | pending | practical manifest admission plus debug/rate-limit/auth/object attach path |
+| `P-A1-03` | local runtime from runtime plan | closed | consume checked practical package in a reusable local runtime path with a distinct runtime-plan carrier and non-final local-runtime report |
+| `P-A1-04` | package/hot-plug practical API | promoted next | practical manifest admission plus debug/rate-limit/auth/object attach path |
 | `P-A1-05` | transport practical E2E | pending | same practical package input for local and Docker/local TCP modes |
 | `P-A1-06` | devtools viewer | pending | practical export schema and viewer command |
 | `P-A1-07` | local save/load command | pending | practical save/load CLI or library path with negative stale-state checks |

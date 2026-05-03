@@ -90,6 +90,20 @@ repository-memory roadmap を置く。
 - reusable runtime API
 - event DAG export
 - local world runnable sample
+- current actualized cut:
+  - `crates/mir-ast/src/practical_alpha1_runtime_plan.rs`
+  - `crates/mir-runtime/src/practical_alpha1_local_runtime.rs`
+  - example `crates/mir-runtime/examples/mir_practical_alpha1_run_local.rs`
+  - `scripts/practical_alpha1_run_local.py`
+  - `samples/practical-alpha1/packages/run-01-local-sugoroku/`
+  - `samples/practical-alpha1/packages/run-02-stale-membership-rejected/`
+  - `samples/practical-alpha1/expected/run-01-local-sugoroku.expected.json`
+  - `samples/practical-alpha1/expected/run-02-stale-membership-rejected.expected.json`
+- current non-claim:
+  - package/hot-plug API completion ではない
+  - Docker/local TCP execution ではない
+  - local save/load command ではない
+  - final public runtime / devtools ABI ではない
 
 ### PA1-4 — package / hot-plug practical API
 
@@ -141,10 +155,12 @@ recommended current promoted line:
 8. `P-A1-07` local save/load command
 9. `P-A1-08` product prototype
 
-current reading after `P-A1-02`:
+current reading after `P-A1-03`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02` are closed
-- `P-A1-03` is the promoted next package
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03` are closed
+- `P-A1-03` fixed the distinct carrier split:
+  `checked package -> runtime plan -> local runtime report`
+- `P-A1-04` is the promoted next package
 
 ## readiness reading
 
@@ -161,8 +177,8 @@ rough initial reading after `P-A0-28` and before `P-A1-00` close:
 
 practical alpha-1 overall readiness should therefore stay low until
 front-door, reusable checker/runtime, and practical sample root exist.
-`P-A1-02` 後は initial practical sample root、library-first front-door、distinct lowered IR と first checker floor は存在するが、
-runtime/product surfaces が未完成であり、typed checking も first floor に留まるため overall readiness は moderate 未満に保つ。
+`P-A1-03` 後は initial practical sample root、library-first front-door、distinct lowered IR、first checker floor、distinct runtime-plan carrier、first practical local-runtime floor は存在するが、
+package/hot-plug、transport、save/load、devtools、product prototype が未完成であり、typed checking も first floor に留まるため overall readiness は still moderate に留める。
 
 ## sample-root roadmap
 
@@ -179,7 +195,7 @@ samples/practical-alpha1/
   docker/
 ```
 
-- current first cut uses `packages/` and `expected/` for `SRC-01..05`
+- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`
 - `source/` and `docker/` are reserved for later textual-source / Docker packages
 
 ## validator roadmap
@@ -193,6 +209,12 @@ samples/practical-alpha1/
 `P-A1-01` may require `samples/practical-alpha1/README.md` and the root directory,
 but should not require practical runner scripts before they are added.
 
+`P-A1-03` adds the first practical local-runtime validation path:
+
+- `cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`
+- `cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`
+- `python3 scripts/practical_alpha1_run_local.py check-all --format json`
+
 ## non-claims carried forward
 
 - current alpha-0 evidence closeout is not public alpha / `U1`
@@ -204,12 +226,13 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- after `P-A1-02`, the next safe package is expected to be `P-A1-03`
-  if the checker output can be consumed as a runtime-plan input boundary
-  without freezing a final public runtime or CLI API
+- after `P-A1-03`, the next safe package is expected to be `P-A1-04`
+  if the new local-runtime floor stays distinct from package/hot-plug admission,
+  transport execution, save/load command, and final public runtime/devtools ABI
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
-  - consume checked practical packages in `P-A1-03` through a distinct runtime-plan boundary
+  - keep `P-A1-03` as the first local-runtime floor over `RUN-01/02`
+  - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
 - queue authority remains `progress.md` / `tasks.md`

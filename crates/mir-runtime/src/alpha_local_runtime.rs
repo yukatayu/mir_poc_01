@@ -14,7 +14,7 @@ const ALICE_PLACE: &str = "ParticipantPlace[Alice]";
 const BOB_PLACE: &str = "ParticipantPlace[Bob]";
 const QUEUE_KIND: &str = "in_process_fifo";
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct LocalRuntimeDispatchRecord {
     pub dispatch_order: usize,
     pub envelope_id: String,
@@ -32,7 +32,7 @@ pub struct LocalRuntimeDispatchRecord {
     pub notes: Vec<String>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct EventDagNode {
     pub event_id: String,
     pub event_kind: String,
@@ -41,14 +41,14 @@ pub struct EventDagNode {
     pub notes: Vec<String>,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct EventDagEdge {
     pub from_event: String,
     pub to_event: String,
     pub relation: String,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct EventDagExport {
     pub scope: String,
     pub nodes: Vec<EventDagNode>,
