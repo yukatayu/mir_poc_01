@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 11:18 JST
+最終更新: 2026-05-03 11:38 JST
 
 ## この文書について
 
@@ -13,13 +13,13 @@
 - active executable floor は維持されています:
   `samples/clean-near-end/`、Sugoroku world、avatar follow、typed external preview、network canary、projection/codegen bridge、viewer prototype inventory。`samples/current-l2/` は base source corpus、`samples/lean/` は Lean evidence / generated theorem stub corpus として分けて扱います。
 - Mirrorea Spaces alpha-0 line は current self-driven package として reopen しています:
-  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、large-stage-first で alpha-0.9 devtools closeout を終え、次は Stage F integrated alpha closeout へ向かいます。
-- Alpha-0 closeout validation freshness は 2026-05-03 11:18 JST に更新済みです:
-  `P-A0-26` gate では `alpha_visualization_samples.py` unit、`alpha_e2e_samples.py` unit の closeout wording sync、sequential `alpha_visualization_samples.py check-all` 9/9、new `stage-e-closeout` surface、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `VIS-01/02/03/05/06/07/08/10/11` existing visualization subset を current-scope Stage E closeout として actualize 済みであり、`VIS-04/09/12`、final public viewer/telemetry API、active runnable-root promotion、Stage F completion は引き続き未claimです。
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` を軸に、large-stage-first で current-scope Stage F alpha closeout まで完了し、次は later-family blocker lane の選別に入ります。
+- Alpha-0 closeout validation freshness は 2026-05-03 11:38 JST に更新済みです:
+  `P-A0-27` gate では `alpha_e2e_samples.py` unit の RED/GREEN、alpha runtime/layer/network/avatar/cut Rust tests と closeout examples、sequential `alpha_cut_save_load_samples.py check-all`、`alpha_visualization_samples.py check-all`、`alpha_visualization_samples.py stage-e-closeout`、`alpha_network_docker_e2e.py check-all`、`alpha_avatar_runtime_samples.py check-all`、`alpha_e2e_samples.py check-all`、new `stage-f-closeout` surface、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass しました。current repo state では `E2E-01/02/03/04/05/06/07/09/10` existing integrated bridge subset を current-scope Stage F closeout として actualize 済みであり、`E2E-08`、public alpha / `U1`、active runnable-root promotion、distributed save/load completion は引き続き未claimです。
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..26` closeout 後、large-stage-first queue として Stage F integrated alpha closeout を次 line に置きます。`LIF-15` / `VAR-14` は future carrier blocker split に留まり、stage-first line を横切って先に actualize しません。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は alpha-local package `P-A0-01..27` closeout 後、large-stage-first queue は current scope で一巡しています。`LIF-15` / `VAR-14` は future carrier blocker split に留まり、次 reopen は later-family blocker lane の選別が必要です。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -66,15 +66,15 @@
 ## Current Alpha-0 / Mirrorea Spaces stage
 
 - Large stage:
-  Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 60% thin integrated alpha demo bridge
+  Stage B 100% alpha-0.5 local-runtime closeout, Stage C 100% alpha-0.7 transport closeout, Stage D 100% alpha-0.8 hot-plug lifecycle closeout, Stage E 100% alpha-0.9 devtools closeout, Stage F 100% current-scope Spaces alpha closeout
 - Concrete phase:
-  Phase 6/7 — Stage F integrated alpha closeout after the alpha-0.9 devtools closeout
+  Phase 7/7 — current-scope alpha line complete; later-family and public-boundary blockers remain
 - Package status:
-  `P-A0-26` Stage E devtools closeout is the current promoted package in repo state, and it fixes Stage E current-scope completion without widening planned `VIS-04/09/12` or public-API claims
+  `P-A0-27` Stage F integrated alpha closeout is the last closed package in repo state; no safe `P-A0-28` is auto-promoted
 - Current status:
-  `P-A0-26` は `scripts/alpha_visualization_samples.py stage-e-closeout` により `VIS-01/02/03/05/06/07/08/10/11` existing visualization subset を束ね、alpha-0.9 current-scope closeout を固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers は維持されるが、current queue authority は Stage F integrated alpha closeout へ移っている。
+  `P-A0-27` は `scripts/alpha_e2e_samples.py stage-f-closeout` により `E2E-01/02/03/04/05/06/07/09/10` existing integrated bridge subset と current-scope Stage E closeout dependency を束ね、alpha-1 current-scope closeout を固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers は維持されるが、current queue authority は later-family blocker selection または separate public-boundary `U1` lane へ移っている。
 - Next autonomous package:
-  promote Stage F integrated alpha closeout over the existing bridge runner before reopening new lifetime/variance carrier cuts or later-family blockers
+  no safe `P-A0-28` is auto-promoted; next reopen must choose one later-family blocker lane (`CUT-10/12/16`, `LIF-15`, `VAR-14`, transport/lifecycle widenings) without collapsing the separate public-boundary `U1` lane
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into this alpha-local package series
 
@@ -94,7 +94,7 @@
 | alpha cut/save-load bridge | `crates/mirrorea-core`, `crates/mir-runtime`, `samples/alpha/cut-save-load/`, `scripts/alpha_cut_save_load_samples.py` | `cargo test -p mirrorea-core --test runtime_substrate`; `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership`; `python3 scripts/alpha_cut_save_load_samples.py check-all --format json` | distributed save/load / durable cut / `CUT-10/12/16` completion |
 | alpha local runtime closeout | `crates/mir-runtime`, `samples/alpha/local-runtime/`, `samples/alpha/cut-save-load/`, `scripts/alpha_local_runtime_samples.py` | `cargo test -p mir-runtime --test alpha_local_runtime --test alpha_cut_save_load_runtime`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku`; `cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- stale-membership`; `python3 scripts/alpha_local_runtime_samples.py check-all --format json`; `python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json` | distributed save/load / CUT family completion / active runnable-root promotion |
 | alpha visualization / devtools bridge | `samples/alpha/visualization/`, `scripts/alpha_visualization_samples.py` | `python3 scripts/alpha_visualization_samples.py list --format json`; `python3 scripts/alpha_visualization_samples.py check-all --format json`; `python3 scripts/alpha_visualization_samples.py closeout --format json`; `python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json`; `python3 -m unittest scripts.tests.test_alpha_visualization_samples` | final viewer API / telemetry service / `VIS-04/09/12` completion |
-| alpha integrated E2E bridge | `samples/alpha/e2e/`, `scripts/alpha_e2e_samples.py` | `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`; `python3 scripts/alpha_e2e_samples.py check-all --format json`; `python3 scripts/alpha_e2e_samples.py closeout --format json` | Stage F completion / public alpha completion / late save-load / later-family blockers |
+| alpha integrated E2E bridge | `samples/alpha/e2e/`, `scripts/alpha_e2e_samples.py` | `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`; `python3 scripts/alpha_e2e_samples.py check-all --format json`; `python3 scripts/alpha_e2e_samples.py closeout --format json`; `python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json` | public alpha / `U1` completion / late save-load / later-family blockers |
 | projection / placement | `scripts/projection_codegen_samples.py` + committed generated manifest | `python3 scripts/projection_codegen_samples.py check-all --format json` | final emitted executable family / generated place-program emission / placement optimizer / deployment planner / equivalence checker / proof completion / final public emitted-program ABI |
 | viewer prototype | `scripts/visual_debugger_viewer_samples.py` | `python3 scripts/visual_debugger_viewer_samples.py closeout --format json` | final viewer API / telemetry service |
 | hot-plug runtime | `crates/mirrorea-core`, `crates/mir-runtime` | `cargo test -p mir-runtime --test hotplug_runtime_skeleton` | rollback / durable migration / distributed ordering / final ABI |
@@ -109,7 +109,7 @@
 | C | 100% | alpha 0.7 transport | current-scope closeout reached as Docker/local-subprocess transport narrow cut | helper-local `NET-02..05` canaries + `samples/alpha/network-docker/` + `alpha_network_runtime` + `alpha_network_docker_e2e.py` + `stage-c-closeout` | `NET-06/08/10` / production WAN / durable replay / partition completion / final transport ABI |
 | D | 100% | alpha 0.8 hot-plug lifecycle | current-scope closeout reached as attach-time layer subset + runtime-private package/avatar admission subset | `P19..P21` floor + `samples/alpha/layer-insertion/` + `samples/alpha/avatar-runtime/` + `samples/alpha/hotplug-runtime/` + `scripts/alpha_hotplug_lifecycle_samples.py` | detach / migration / native execution / final ABI |
 | E | 100% | alpha 0.9 devtools | current-scope closeout reached as implemented visualization/devtools subset | `samples/alpha/visualization/` + `scripts/alpha_visualization_samples.py` + `stage-e-closeout` + viewer prototype inventory + existing alpha bridge evidence | `VIS-04/09/12` / final viewer / telemetry API |
-| F | 60% | alpha 1 Spaces alpha | thin integrated bridge + honest local save/load subset + Stage-E closeout actualized; current-scope close condition still unfixed | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_e2e_samples.py` + `scripts/alpha_visualization_samples.py stage-e-closeout` + `scripts/alpha_cut_save_load_samples.py` + scope spec | Stage F current-scope closeout / public alpha completion / full VRChat / Reversed Library completion |
+| F | 100% | alpha 1 Spaces alpha | current-scope closeout reached as thin integrated bridge + Stage-E closeout + local-only save/load subset + checker-backed invalid distributed-cut non-claim | `samples/alpha/e2e/` thin bridge runner + `scripts/alpha_e2e_samples.py` + `stage-f-closeout` + `scripts/alpha_visualization_samples.py stage-e-closeout` + `scripts/alpha_cut_save_load_samples.py` + scope spec | public alpha completion / full VRChat / Reversed Library completion |
 | G | 0% | Spaces product expansion | future | upper-layer roadmap only | alpha scope |
 | H | 0% | Atlas | future | upper-layer roadmap only | alpha scope |
 | I | 0% | Reversed Library | future | upper-layer roadmap only | alpha scope |
@@ -136,6 +136,7 @@
 | `P21` | `Macro 6-7` | closed | runtime-side engine-state progression narrow floor |
 | `P-A0-25` | `Macro 6-7` | closed | Stage D current-scope closeout over existing layer/package/avatar floors |
 | `P-A0-26` | `Macro 6-7` | closed | Stage E current-scope closeout over the existing visualization/devtools subset |
+| `P-A0-27` | `Macro 6-7` | closed | Stage F current-scope closeout over the existing integrated alpha bridge |
 | post-`P21` rollback / durable migration | `Macro 8` prep | closed docs-first | first recommendation boundary; no actual rollback / migration engine completion |
 | post-`P21` distributed activation ordering | `Macro 8` prep | closed docs-first | second recommendation boundary; no actual distributed activation protocol |
 | post-`P21` final public hot-plug ABI | `Macro 8` mixed gate | closed docs-first | third recommendation bridge: `freeze prerequisite fixed; public ABI still unfrozen` |
@@ -144,9 +145,9 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | Stage F integrated alpha closeout | repo | ready | close the thin integrated bridge as the next large-stage package without reopening distributed save/load claims or public API decisions |
+| 1 | post-Stage-F later-family blocker selection | repo | ready for narrow design only | choose one later-family lane (`CUT-10/12/16`, `LIF-15`, `VAR-14`, transport/lifecycle widenings) without overclaiming current-scope alpha closeout |
 | 2 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
-| 3 | post-Stage-F later-family blockers | repo | later | keep `CUT-10/12/16`, `LIF-15`, `VAR-14`, detach/migration/native/public-ABI lines explicit after the current-scope alpha demo closes |
+| 3 | maintenance / dashboard freshness | repo | active | keep Stage-F-closed snapshot wording and validation anchors current while no next package is promoted |
 
 ## self-driven maintenance tasks
 
@@ -190,6 +191,7 @@ These are safe to do without new product decisions.
 | `P-A0-24` | Stage C transport closeout | closed | dedicated Docker/local-subprocess closeout surface over `NET-02/03/04/05/07/09`; `NET-06/08/10` and WAN/final-ABI claims remain later |
 | `P-A0-25` | Stage D lifecycle closeout | closed | dedicated Stage D closeout surface over `LI-01/02/03/04/05` and `AV-01/02/06/08/09` / `HP-11/12/15`; detach/migration/native/final-ABI claims remain later |
 | `P-A0-26` | Stage E devtools closeout | closed | dedicated Stage E closeout surface over `VIS-01/02/03/05/06/07/08/10/11`; `VIS-04/09/12` and public viewer/telemetry claims remain later |
+| `P-A0-27` | Stage F integrated alpha closeout | closed | dedicated Stage F closeout surface over `E2E-01/02/03/04/05/06/07/09/10` plus current-scope Stage E dependency; `E2E-08` and public alpha / `U1` claims remain later |
 
 ## user decision blockers
 

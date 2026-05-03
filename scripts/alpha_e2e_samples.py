@@ -10,6 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+import alpha_visualization_samples
 from current_l2_family_checker_support import filter_reason_rows, status_for_rows
 from current_l2_reason_codes_assist import (
     read_actual_reason_code_candidates,
@@ -82,20 +83,21 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
 ]
 
 PLANNED_ONLY_ROWS = ["E2E-08"]
+STAGE_F_REQUIRED_ROWS = [row["sample_id"] for row in IMPLEMENTED_ROWS]
 
 STOP_LINES = [
     "do not promote samples/alpha/e2e to an active runnable root",
-    "do not mark Stage F complete until a dedicated current-scope Stage F closeout surface is fixed",
+    "do not treat current-scope Stage F closeout as public alpha/U1 completion",
     "do not treat checker-backed invalid distributed cut rejection as distributed save/load completion",
     "do not treat helper-local or Docker-local evidence as production runtime / WAN / durable replay evidence",
     "do not treat Reversed Library seed rows as Mirrorea Spaces alpha completion evidence",
 ]
 
 LIMITATIONS = [
-    "thin integrated runner over existing Stage B/C/D/F bridge floors only",
+    "thin integrated runner over existing Stage B/C/D/E bridge floors only",
     "no parser/front-door execution of samples/alpha/e2e/*.mir",
     "Stage-E current-scope closeout is fixed separately by alpha_visualization_samples.py",
-    "no Stage F completion claim",
+    "no public alpha/U1 completion claim",
 ]
 
 NEGATIVE_COVERAGE = {
@@ -857,21 +859,58 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/alpha_avatar_runtime_samples.py check-all --format json",
             "python3 scripts/alpha_e2e_samples.py run E2E-06 --format json",
             "python3 scripts/alpha_e2e_samples.py check-all --format json",
+            "python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json",
         ],
         "stop_lines": list(STOP_LINES),
         "limitations": list(LIMITATIONS),
         "stage_e_complete": True,
-        "stage_f_complete": False,
+        "stage_f_complete": True,
         "remaining_blockers": [
-            "dedicated current-scope Stage F closeout surface is not fixed yet",
-            "Stage F completion claim remains blocked on that plus broader lifecycle widening",
+            "E2E-08 upper-layer seed remains planned-only and outside the current-scope Stage F closeout set",
+            "distributed save/load, detach/migration/native execution, and public alpha/U1 completion remain later lines",
         ],
+    }
+
+
+def stage_f_closeout() -> dict[str, Any]:
+    bridge_check = check_all()
+    stage_e_payload = alpha_visualization_samples.stage_e_closeout()
+    failed = bridge_check.get("failed") or []
+    stage_e_complete = bool(stage_e_payload.get("stage_e_complete"))
+    return {
+        "stage": "Stage F",
+        "stage_name": "Mirrorea Spaces alpha demo",
+        "stage_f_complete": not failed and stage_e_complete,
+        "implemented_rows": list(STAGE_F_REQUIRED_ROWS),
+        "planned_only_rows": list(PLANNED_ONLY_ROWS),
+        "bridge_check": bridge_check,
+        "stage_e_closeout": stage_e_payload,
+        "positive_coverage_refs": dict(POSITIVE_COVERAGE),
+        "negative_coverage_refs": dict(NEGATIVE_COVERAGE),
+        "upper_layer_seed_completed": False,
+        "distributed_save_load_claimed": False,
+        "public_alpha_claimed": False,
+        "active_root_promoted": False,
+        "note": (
+            "Stage F closeout is satisfied only by E2E-01/02/03/04/05/06/07/09/10 "
+            "plus the current-scope Stage E closeout. It does not claim E2E-08, "
+            "distributed save/load completion, public alpha/U1 completion, or active "
+            "runnable-root promotion."
+        ),
     }
 
 
 def format_pretty(payload: Any) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']} {row['summary']}" for row in payload)
+    if isinstance(payload, dict) and payload.get("stage") == "Stage F":
+        lines = [
+            f"{payload['stage']} {payload['stage_name']}",
+            f"  stage_f_complete: {payload.get('stage_f_complete')}",
+            f"  implemented_rows: {', '.join(payload.get('implemented_rows', []))}",
+            f"  planned_only_rows: {', '.join(payload.get('planned_only_rows', []))}",
+        ]
+        return "\n".join(lines)
     if isinstance(payload, dict) and "sample_id" in payload:
         lines = [
             f"{payload['sample_id']} alpha_e2e",
@@ -901,6 +940,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     closeout_parser = subparsers.add_parser("closeout")
     closeout_parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
+
+    stage_f_parser = subparsers.add_parser("stage-f-closeout")
+    stage_f_parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
     return parser
 
 
@@ -916,6 +958,8 @@ def main(argv: list[str]) -> int:
         payload = check_all()
     elif args.command == "closeout":
         payload = closeout()
+    elif args.command == "stage-f-closeout":
+        payload = stage_f_closeout()
     else:  # pragma: no cover
         raise AssertionError(f"unhandled command: {args.command}")
 

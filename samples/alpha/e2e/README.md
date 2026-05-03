@@ -1,12 +1,12 @@
 # alpha sample family — End-to-End
 
-- Status: mixed runner-backed non-public bridge + planned rows
+- Status: current-scope Stage F closeout surface over existing bridge rows + planned row
 - Phase: Phase 8
 - Stage: Stage F
 - `python3 scripts/alpha_e2e_samples.py` actualizes `E2E-01/02/03/04/05/06/07/09/10` as a thin integrated bridge over already-actualized Stage B/C/D/F subset floors.
 - `E2E-08` Reversed Library seed remains planned-only.
-- This family is still not an active runnable root, and Stage F remains incomplete.
-- `scripts/alpha_visualization_samples.py stage-e-closeout` now fixes Stage E current-scope completion, but Stage F still needs its own current-scope closeout surface.
+- This family is still not an active runnable root, and current-scope Stage F completion is now fixed by `scripts/alpha_e2e_samples.py stage-f-closeout`.
+- `scripts/alpha_visualization_samples.py stage-e-closeout` remains a required dependency surface for the current-scope Stage F closeout, but this does not promote public alpha / `U1`.
 
 ## Rows
 
@@ -34,7 +34,7 @@
 - `E2E-07` is checker-backed invalid distributed cut evidence only. It must not be read as distributed save/load runtime completion.
 - current save/load-adjacent deferred rows have narrowed to `CUT-12` communication-induced checkpoint repair and `CUT-10/16` lease/witness-store-backed non-resurrection splits. `CUT-11` checker-backed Z-cycle inadmissibility and `CUT-17` local stale-membership rejection are already part of the current alpha-local evidence line.
 - Promotion to the repo's active runnable root still requires dedicated validation commands, report evidence, and snapshot updates beyond this alpha-local bridge.
-- `VIS-04/09/12` remain later planned families, but they are outside the current-scope Stage E closeout set. The immediate blocker for Stage F is the absence of a dedicated current-scope Stage F closeout surface.
+- `VIS-04/09/12` remain later planned families, but they are outside the current-scope Stage E closeout set. `CUT-10/12/16`, `LIF-15`, `VAR-14`, detach/migration/native/public-boundary lines remain later reopen candidates after the current-scope Stage F closeout.
 
 ## Validation anchor for this package
 
@@ -57,6 +57,7 @@ python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
 python3 scripts/alpha_e2e_samples.py run E2E-06 --format json
 python3 scripts/alpha_e2e_samples.py check-all --format json
 python3 scripts/alpha_e2e_samples.py closeout --format json
+python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json
 python3 -m unittest \
   scripts.tests.test_alpha_cut_save_load_checker \
   scripts.tests.test_alpha_cut_save_load_samples \

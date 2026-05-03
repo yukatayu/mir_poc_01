@@ -262,6 +262,36 @@ negative test floor:
   - final public telemetry service
   - Stage F completion
 
+## Stage F current-scope closeout boundary
+
+`Stage F` current-scope closeout is narrower than full public-alpha or upper-layer completion.
+
+- admissible evidence:
+  - `E2E-01` local integrated Sugoroku path
+  - `E2E-02` Docker two-node transport path
+  - `E2E-03` debug-layer attach path
+  - `E2E-04` declared-failure rate-limit preview path
+  - `E2E-05` placeholder/custom avatar runtime path
+  - `E2E-06` local save/load continue path
+  - `E2E-07` distributed inconsistent save negative path
+  - `E2E-09` auth-layer contract-update path
+  - `E2E-10` package-missing-runtime fallback path
+  - current-scope `Stage E` closeout surface
+- this combination is sufficient to call alpha-1 Spaces alpha complete for current scope
+- this does not imply:
+  - `E2E-08` completion
+  - distributed/durable save/load completion
+  - `CUT-10/12/16` completion
+  - `LIF-15` or `VAR-14` completion
+  - detach runtime completion
+  - durable migration
+  - distributed activation ordering
+  - native execution realization
+  - active runnable-root promotion of `samples/alpha/`
+  - public alpha / `U1` completion
+  - final public parser / checker / runtime / viewer / telemetry / transport / hot-plug ABI
+  - full VRChat / Reversed Library completion
+
 ## relationship to Reversed Library
 
 Reversed Library / 裏返した図書館 is upper-layer flagship application.

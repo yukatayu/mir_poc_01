@@ -47,11 +47,11 @@
   "what_it_does_not_prove": [
     "distributed save/load runtime",
     "Z-cycle handling completion",
-    "Stage E completion"
+    "Stage F completion"
   ],
   "deferred": [
     "CUT-12 communication-induced checkpoint repair",
     "CUT-10/16 stale lease/witness load verdict split",
-    "Stage F completion after remaining Stage-E rows close"
+    "Stage F completion after the dedicated current-scope closeout surface lands"
   ]
 }

@@ -23,11 +23,11 @@ class AlphaE2ESamplesTests(unittest.TestCase):
         )
         self.assertTrue(all(row["family"] == "alpha-e2e" for row in rows))
 
-    def test_closeout_keeps_stage_f_incomplete_after_stage_e_closeout(self) -> None:
+    def test_closeout_syncs_stage_f_completion_after_stage_f_closeout(self) -> None:
         payload = runner.closeout()
         self.assertEqual(payload["planned_only_rows"], ["E2E-08"])
         self.assertTrue(payload["stage_e_complete"])
-        self.assertFalse(payload["stage_f_complete"])
+        self.assertTrue(payload["stage_f_complete"])
         self.assertIn(
             "cargo test -p mirrorea-core --test runtime_substrate",
             payload["validation_floor"],
@@ -45,9 +45,63 @@ class AlphaE2ESamplesTests(unittest.TestCase):
             payload["validation_floor"],
         )
         self.assertIn(
+            "python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json",
+            payload["validation_floor"],
+        )
+        self.assertIn(
             "CUT-05 -> E2E-07", payload["negative_coverage_refs"]["invalid_cut_reject"]
         )
         self.assertIn("CUT-04 -> E2E-06", payload["positive_coverage_refs"]["local_save_load"])
+
+    def test_stage_f_closeout_requires_all_integrated_rows(self) -> None:
+        with mock.patch.object(
+            runner,
+            "check_all",
+            return_value={"sample_count": 9, "passed": [row["sample_id"] for row in runner.IMPLEMENTED_ROWS], "failed": []},
+        ), mock.patch.object(
+            runner.alpha_visualization_samples,
+            "stage_e_closeout",
+            return_value={
+                "stage": "Stage E",
+                "stage_name": "alpha 0.9 devtools",
+                "stage_e_complete": True,
+                "implemented_rows": ["VIS-01"],
+                "planned_only_rows": ["VIS-04", "VIS-09", "VIS-12"],
+            },
+        ):
+            payload = runner.stage_f_closeout()
+
+        self.assertEqual(payload["stage"], "Stage F")
+        self.assertEqual(payload["stage_name"], "Mirrorea Spaces alpha demo")
+        self.assertTrue(payload["stage_f_complete"])
+        self.assertEqual(payload["implemented_rows"], [row["sample_id"] for row in runner.IMPLEMENTED_ROWS])
+        self.assertEqual(payload["planned_only_rows"], ["E2E-08"])
+        self.assertTrue(payload["stage_e_closeout"]["stage_e_complete"])
+        self.assertFalse(payload["upper_layer_seed_completed"])
+        self.assertFalse(payload["distributed_save_load_claimed"])
+        self.assertFalse(payload["public_alpha_claimed"])
+
+    def test_stage_f_closeout_surfaces_component_or_stage_e_failures(self) -> None:
+        with mock.patch.object(
+            runner,
+            "check_all",
+            return_value={"sample_count": 9, "passed": ["E2E-01"], "failed": [{"sample_id": "E2E-02", "error": "docker unavailable"}]},
+        ), mock.patch.object(
+            runner.alpha_visualization_samples,
+            "stage_e_closeout",
+            return_value={
+                "stage": "Stage E",
+                "stage_name": "alpha 0.9 devtools",
+                "stage_e_complete": False,
+                "implemented_rows": ["VIS-01"],
+                "planned_only_rows": ["VIS-04", "VIS-09", "VIS-12"],
+            },
+        ):
+            payload = runner.stage_f_closeout()
+
+        self.assertFalse(payload["stage_f_complete"])
+        self.assertFalse(payload["stage_e_closeout"]["stage_e_complete"])
+        self.assertEqual(payload["bridge_check"]["failed"][0]["sample_id"], "E2E-02")
 
     def test_build_e2e10_report_records_placeholder_fallback(self) -> None:
         component_report = {

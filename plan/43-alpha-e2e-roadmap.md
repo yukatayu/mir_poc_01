@@ -74,7 +74,9 @@ final public product completion ではない。
 - `E2E-06` is now backed by the local-only `CUT-04` save/load bridge
 - `CUT-17` local stale-membership rejection and `CUT-11` checker-backed Z-cycle inadmissibility now narrow the integrated save/load non-claim surface without implying distributed repair/runtime completion
 - `E2E-08` upper-layer seed remains outside the actualized subset
-- current reading is `Stage F bridge + local save/load path actualized, Stage F current-scope closeout still unfixed`
+- current-scope closeout is now fixed by:
+  - `python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json`
+- this closes alpha-1 only for `E2E-01/02/03/04/05/06/07/09/10` plus the current-scope Stage E closeout surface; it does not claim `E2E-08`, distributed save/load completion, active runnable-root promotion, public alpha / `U1`, or final public runtime/viewer/transport/hot-plug ABI
 
 ## phase 0..8 packages
 
@@ -183,17 +185,18 @@ Phase 1+ runtime floor:
   `python3 scripts/alpha_e2e_samples.py run E2E-06 --format json`
   `python3 scripts/alpha_e2e_samples.py check-all --format json`
   `python3 scripts/alpha_e2e_samples.py closeout --format json`
+  `python3 scripts/alpha_e2e_samples.py stage-f-closeout --format json`
   `python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_e2e_samples`
 
 ## stop lines
 
-- do not mark Stage F complete without integrated runtime/network/hot-plug/devtools evidence
+- do not treat current-scope Stage F closeout as public alpha / `U1` completion
 - do not call skeleton/planned sample rows runnable
 - do not call Docker canary production transport
 - do not call local save distributed save/load
 - do not treat checker-backed invalid distributed cut rejection as distributed save/load runtime completion
 - do not call `VIS-04/09/12` implemented or part of the current-scope Stage E closeout
-- do not call the current Stage-F bridge runner dedicated alpha visualization/devtools completion
+- do not call `E2E-08` part of the current-scope Stage F closeout set
 - do not call Reversed Library implemented during Spaces alpha work
 
 ## next reopen point
@@ -202,5 +205,6 @@ Phase 1+ runtime floor:
 - after `P-A0-24`, Stage C current-scope closeout is fixed and queue authority shifts to Stage D lifecycle closeout
 - after `P-A0-25`, Stage D current-scope closeout is fixed and queue authority shifts to Stage E devtools closeout
 - after `P-A0-26`, Stage E current-scope closeout is fixed and queue authority shifts to Stage F integrated alpha closeout
+- after `P-A0-27`, current-scope Stage F closeout is fixed and the large-stage-first alpha line is complete for current scope; next reopen must choose a later-family blocker lane or public-boundary lane rather than widening Stage F itself
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
-- next reopen should prefer Stage F integrated alpha closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
+- no safe next package is auto-promoted here; `CUT-10/12/16`, `LIF-15`, `VAR-14`, detach/migration/native, and `U1` remain separate reopen candidates
