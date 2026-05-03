@@ -1,11 +1,11 @@
 # alpha sample family — Visualization / Devtools
 
-- Status: mixed subset runner + planned rows
+- Status: current-scope Stage E closeout surface over the widened subset runner + planned rows
 - Phase: Phase 4 / 5
 - Stage: Stage E
 - `scripts/alpha_visualization_samples.py` actualizes a dedicated non-public subset runner for `VIS-01/02/03/05/06/07/08/10/11`.
 - `VIS-04/09/12` remain planned-only.
-- Stage E completion is still not claimed.
+- `scripts/alpha_visualization_samples.py stage-e-closeout` fixes current-scope Stage E completion over the implemented subset only.
 
 ## Rows
 
@@ -31,6 +31,7 @@
 - planned-only rows still record intended verdicts and blockers for later checker/runtime work.
 - `VIS-02` is a report-local place-catalog projection bundle over `LI-01`; `VIS-05` is a report-local membership epoch/incarnation timeline bundle over `CUT-17`.
 - `VIS-04` stays planned-only because current repo wording still keeps `witness_timeline_view` as a later gate; existing witness-order evidence remains derivable but not a distinct actualized row.
+- current-scope Stage E closeout does not require `VIS-04/09/12`, and does not imply a final public viewer API or telemetry service.
 - this family is not an active runnable root and does not freeze a final public viewer API or telemetry schema.
 
 ## Validation anchor for this package
@@ -39,5 +40,6 @@
 python3 scripts/alpha_visualization_samples.py list --format json
 python3 scripts/alpha_visualization_samples.py check-all --format json
 python3 scripts/alpha_visualization_samples.py closeout --format json
+python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json
 python3 -m unittest scripts.tests.test_alpha_visualization_samples
 ```

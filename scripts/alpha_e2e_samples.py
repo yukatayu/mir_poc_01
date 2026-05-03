@@ -85,7 +85,7 @@ PLANNED_ONLY_ROWS = ["E2E-08"]
 
 STOP_LINES = [
     "do not promote samples/alpha/e2e to an active runnable root",
-    "do not mark Stage F complete while remaining Stage-E visualization/devtools rows remain incomplete",
+    "do not mark Stage F complete until a dedicated current-scope Stage F closeout surface is fixed",
     "do not treat checker-backed invalid distributed cut rejection as distributed save/load completion",
     "do not treat helper-local or Docker-local evidence as production runtime / WAN / durable replay evidence",
     "do not treat Reversed Library seed rows as Mirrorea Spaces alpha completion evidence",
@@ -94,7 +94,7 @@ STOP_LINES = [
 LIMITATIONS = [
     "thin integrated runner over existing Stage B/C/D/F bridge floors only",
     "no parser/front-door execution of samples/alpha/e2e/*.mir",
-    "Stage-E subset runner exists, but Stage E completion is still partial",
+    "Stage-E current-scope closeout is fixed separately by alpha_visualization_samples.py",
     "no Stage F completion claim",
 ]
 
@@ -351,7 +351,7 @@ def _build_e2e_01_report() -> dict[str, Any]:
                 "final Stage F completion",
             ],
             "deferred": [
-                "remaining Stage-E visualization/devtools rows",
+                "dedicated current-scope Stage F closeout surface",
                 "parser/front-door execution",
             ],
         }
@@ -610,12 +610,12 @@ def _build_e2e_06_report() -> dict[str, Any]:
             "what_it_does_not_prove": [
                 "distributed save/load runtime",
                 "Z-cycle handling completion",
-                "Stage E completion",
+                "Stage F completion",
             ],
             "deferred": [
                 "CUT-12 communication-induced checkpoint repair",
                 "CUT-10/16 stale lease/witness load verdict split",
-                "Stage F completion after remaining Stage-E rows close",
+                "Stage F completion after the dedicated current-scope closeout surface lands",
             ],
         }
     )
@@ -850,6 +850,7 @@ def closeout() -> dict[str, Any]:
             "cargo run -q -p mir-runtime --example mirrorea_alpha_network_runtime -- closeout",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout",
             "python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_visualization_samples scripts.tests.test_alpha_e2e_samples scripts.tests.test_validate_docs",
+            "python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json",
             "python3 scripts/alpha_cut_save_load_samples.py check-all --format json",
             "python3 scripts/alpha_visualization_samples.py check-all --format json",
             "python3 scripts/alpha_network_docker_e2e.py check-all --format json",
@@ -859,11 +860,11 @@ def closeout() -> dict[str, Any]:
         ],
         "stop_lines": list(STOP_LINES),
         "limitations": list(LIMITATIONS),
-        "stage_e_complete": False,
+        "stage_e_complete": True,
         "stage_f_complete": False,
         "remaining_blockers": [
-            "remaining Stage-E rows `VIS-04/09/12` still need honest actualization or explicit deferral",
-            "Stage F completion claim remains blocked on the above plus broader lifecycle widening",
+            "dedicated current-scope Stage F closeout surface is not fixed yet",
+            "Stage F completion claim remains blocked on that plus broader lifecycle widening",
         ],
     }
 

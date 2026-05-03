@@ -6,7 +6,7 @@
 - `python3 scripts/alpha_e2e_samples.py` actualizes `E2E-01/02/03/04/05/06/07/09/10` as a thin integrated bridge over already-actualized Stage B/C/D/F subset floors.
 - `E2E-08` Reversed Library seed remains planned-only.
 - This family is still not an active runnable root, and Stage F remains incomplete.
-- `scripts/alpha_visualization_samples.py` now actualizes the dedicated Stage-E subset runner, but `VIS-04/09/12` still remain open, so Stage F completion is still blocked.
+- `scripts/alpha_visualization_samples.py stage-e-closeout` now fixes Stage E current-scope completion, but Stage F still needs its own current-scope closeout surface.
 
 ## Rows
 
@@ -34,7 +34,7 @@
 - `E2E-07` is checker-backed invalid distributed cut evidence only. It must not be read as distributed save/load runtime completion.
 - current save/load-adjacent deferred rows have narrowed to `CUT-12` communication-induced checkpoint repair and `CUT-10/16` lease/witness-store-backed non-resurrection splits. `CUT-11` checker-backed Z-cycle inadmissibility and `CUT-17` local stale-membership rejection are already part of the current alpha-local evidence line.
 - Promotion to the repo's active runnable root still requires dedicated validation commands, report evidence, and snapshot updates beyond this alpha-local bridge.
-- remaining Stage-E visualization/devtools rows `VIS-04/09/12` and broader lifecycle widening remain the blocker for any future Stage F completion claim.
+- `VIS-04/09/12` remain later planned families, but they are outside the current-scope Stage E closeout set. The immediate blocker for Stage F is the absence of a dedicated current-scope Stage F closeout surface.
 
 ## Validation anchor for this package
 

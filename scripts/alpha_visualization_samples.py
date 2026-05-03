@@ -70,6 +70,7 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
 ]
 
 PLANNED_ONLY_ROWS = ["VIS-04", "VIS-09", "VIS-12"]
+STAGE_E_REQUIRED_ROWS = [row["sample_id"] for row in IMPLEMENTED_ROWS]
 
 STOP_LINES = [
     "do not treat samples/alpha/visualization as an active runnable root",
@@ -851,7 +852,7 @@ def check_all() -> dict[str, Any]:
 def closeout() -> dict[str, Any]:
     return {
         "sample_root": "samples/alpha/visualization",
-        "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
+        "implemented_rows": list(STAGE_E_REQUIRED_ROWS),
         "planned_only_rows": list(PLANNED_ONLY_ROWS),
         "validation_floor": [
             "cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- local-sugoroku",
@@ -864,6 +865,7 @@ def closeout() -> dict[str, Any]:
             "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- debug-non-admin",
             "cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- incompatible",
             "python3 scripts/alpha_visualization_samples.py check-all --format json",
+            "python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json",
             "python3 -m unittest scripts.tests.test_alpha_visualization_samples",
         ],
         "stop_lines": list(STOP_LINES),
@@ -872,9 +874,40 @@ def closeout() -> dict[str, Any]:
     }
 
 
+def stage_e_closeout() -> dict[str, Any]:
+    visualization_check = check_all()
+    failed = visualization_check.get("failed") or []
+    return {
+        "stage": "Stage E",
+        "stage_name": "alpha 0.9 devtools",
+        "stage_e_complete": not failed,
+        "implemented_rows": list(STAGE_E_REQUIRED_ROWS),
+        "planned_only_rows": list(PLANNED_ONLY_ROWS),
+        "visualization_check": visualization_check,
+        "planned_rows_completed": False,
+        "final_public_viewer_api_claimed": False,
+        "final_public_telemetry_api_claimed": False,
+        "stage_f_complete": False,
+        "active_root_promoted": False,
+        "note": (
+            "Stage E closeout is satisfied only by VIS-01/02/03/05/06/07/08/10/11. "
+            "It does not claim VIS-04/09/12, a final public viewer or telemetry API, "
+            "Stage F completion, or active runnable-root promotion."
+        ),
+    }
+
+
 def format_pretty(payload: Any) -> str:
     if isinstance(payload, list):
         return "\n".join(f"{row['sample_id']} {row['summary']}" for row in payload)
+    if isinstance(payload, dict) and payload.get("stage") == "Stage E":
+        lines = [
+            f"{payload['stage']} {payload['stage_name']}",
+            f"  stage_e_complete: {payload.get('stage_e_complete')}",
+            f"  implemented_rows: {', '.join(payload.get('implemented_rows', []))}",
+            f"  planned_only_rows: {', '.join(payload.get('planned_only_rows', []))}",
+        ]
+        return "\n".join(lines)
     if isinstance(payload, dict) and "sample_id" in payload:
         lines = [
             f"{payload['sample_id']} alpha_visualization",
@@ -902,6 +935,12 @@ def main(argv: list[str] | None = None) -> int:
     closeout_parser = subparsers.add_parser("closeout", help="report implemented/planned inventory")
     closeout_parser.add_argument("--format", choices=("text", "json"), default="text")
 
+    stage_e_parser = subparsers.add_parser(
+        "stage-e-closeout",
+        help="report the current-scope Stage E closeout result over the implemented visualization subset",
+    )
+    stage_e_parser.add_argument("--format", choices=("text", "json"), default="text")
+
     args = parser.parse_args(argv)
 
     if args.command == "list":
@@ -910,6 +949,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = run_sample(args.sample_id)
     elif args.command == "check-all":
         payload = check_all()
+    elif args.command == "stage-e-closeout":
+        payload = stage_e_closeout()
     else:
         payload = closeout()
 

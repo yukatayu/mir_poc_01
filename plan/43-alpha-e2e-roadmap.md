@@ -60,8 +60,11 @@ final public product completion ではない。
 - first actualized subset is now a dedicated Stage-E subset runner `scripts/alpha_visualization_samples.py` over existing alpha/helper/runtime evidence:
   `VIS-01/02/03/05/06/07/08/10/11`
 - current subset is grounded in `LR-01.event_dag`, `NET-02.observer_route_trace`, `P16-VIEW-02`, `AV-08.representation_state`, `NET-07.observer_route_trace`, `LI-01/02.post_attach_trace_rows`, and `LI-01/05` retention-policy evidence
-- `VIS-04/09/12` remain planned-only, so this is still not Stage E completion
+- current-scope closeout is now fixed by:
+  - `python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json`
+- `VIS-04/09/12` remain planned-only, but they are outside the current-scope Stage E closeout set
 - `VIS-02` is limited to a report-local place-catalog projection over `LI-01`, and `VIS-05` is limited to a report-local membership epoch/incarnation timeline over `CUT-17`; neither freezes a final viewer API
+- this closes alpha-0.9 only for the existing devtools subset; it does not claim `VIS-04/09/12`, final public viewer/telemetry API, or Stage F completion
 
 ### Stage F
 
@@ -71,7 +74,7 @@ final public product completion ではない。
 - `E2E-06` is now backed by the local-only `CUT-04` save/load bridge
 - `CUT-17` local stale-membership rejection and `CUT-11` checker-backed Z-cycle inadmissibility now narrow the integrated save/load non-claim surface without implying distributed repair/runtime completion
 - `E2E-08` upper-layer seed remains outside the actualized subset
-- current reading is `Stage F bridge + local save/load path actualized, Stage F completion still blocked on dedicated alpha devtools`
+- current reading is `Stage F bridge + local save/load path actualized, Stage F current-scope closeout still unfixed`
 
 ## phase 0..8 packages
 
@@ -155,6 +158,7 @@ Phase 1+ runtime floor:
 - current Stage E subset floor:
   `python3 scripts/alpha_visualization_samples.py check-all --format json`
   `python3 scripts/alpha_visualization_samples.py closeout --format json`
+  `python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json`
   `python3 -m unittest scripts.tests.test_alpha_visualization_samples`
 - current Phase 6 first-cut floor:
   `cargo test -p mirrorea-core --test runtime_substrate`
@@ -188,7 +192,7 @@ Phase 1+ runtime floor:
 - do not call Docker canary production transport
 - do not call local save distributed save/load
 - do not treat checker-backed invalid distributed cut rejection as distributed save/load runtime completion
-- do not call the current Stage-E subset runner Stage E completion
+- do not call `VIS-04/09/12` implemented or part of the current-scope Stage E closeout
 - do not call the current Stage-F bridge runner dedicated alpha visualization/devtools completion
 - do not call Reversed Library implemented during Spaces alpha work
 
@@ -197,5 +201,6 @@ Phase 1+ runtime floor:
 - after `P-A0-23`, Stage B current-scope closeout is fixed and queue authority shifts to Stage C-first completion work
 - after `P-A0-24`, Stage C current-scope closeout is fixed and queue authority shifts to Stage D lifecycle closeout
 - after `P-A0-25`, Stage D current-scope closeout is fixed and queue authority shifts to Stage E devtools closeout
+- after `P-A0-26`, Stage E current-scope closeout is fixed and queue authority shifts to Stage F integrated alpha closeout
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
-- next reopen should prefer Stage E devtools closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
+- next reopen should prefer Stage F integrated alpha closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found

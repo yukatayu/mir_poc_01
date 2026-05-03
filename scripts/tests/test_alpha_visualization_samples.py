@@ -38,6 +38,10 @@ class AlphaVisualizationSamplesTests(unittest.TestCase):
             "python3 scripts/alpha_visualization_samples.py check-all --format json",
             payload["validation_floor"],
         )
+        self.assertIn(
+            "python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json",
+            payload["validation_floor"],
+        )
         self.assertFalse(payload["stage_e_complete"])
 
     def test_list_samples_exposes_subset_runner_rows(self) -> None:
@@ -125,6 +129,38 @@ class AlphaVisualizationSamplesTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(RuntimeError, "over_retention_detected"):
             runner._validate_expected_fields("VIS-11", row, report)
+
+    def test_stage_e_closeout_requires_all_visualization_rows(self) -> None:
+        with mock.patch.object(
+            runner,
+            "check_all",
+            return_value={
+                "sample_count": 9,
+                "passed": [row["sample_id"] for row in runner.IMPLEMENTED_ROWS],
+                "failed": [],
+                "stage_e_complete": False,
+            },
+        ):
+            payload = runner.stage_e_closeout()
+        self.assertTrue(payload["stage_e_complete"])
+        self.assertFalse(payload["planned_rows_completed"])
+        self.assertFalse(payload["final_public_viewer_api_claimed"])
+        self.assertFalse(payload["active_root_promoted"])
+
+    def test_stage_e_closeout_surfaces_failures(self) -> None:
+        with mock.patch.object(
+            runner,
+            "check_all",
+            return_value={
+                "sample_count": 9,
+                "passed": ["VIS-01"],
+                "failed": [{"sample_id": "VIS-02", "error": "boom"}],
+                "stage_e_complete": False,
+            },
+        ):
+            payload = runner.stage_e_closeout()
+        self.assertFalse(payload["stage_e_complete"])
+        self.assertEqual(payload["visualization_check"]["failed"][0]["sample_id"], "VIS-02")
 
 
 if __name__ == "__main__":

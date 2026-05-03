@@ -238,6 +238,30 @@ negative test floor:
   - final public runtime package / avatar ABI
   - Stage E/F completion
 
+## Stage E current-scope closeout boundary
+
+`Stage E` current-scope closeout is narrower than full visualization/devtools-family completion.
+
+- admissible evidence:
+  - `VIS-01` event DAG export
+  - `VIS-02` place-catalog projection view
+  - `VIS-03` route trace export
+  - `VIS-05` membership epoch/incarnation timeline
+  - `VIS-06` hot-plug lifecycle bundle
+  - `VIS-07` fallback degradation view
+  - `VIS-08` observer-redacted route trace
+  - `VIS-10` on-demand trace-only gating
+  - `VIS-11` retention-policy enforcement
+- this combination is sufficient to call alpha-0.9 devtools complete for current scope
+- this does not imply:
+  - `VIS-04/09/12` completion
+  - witness timeline completion
+  - privileged admin-full visualization completion
+  - detach-stops-trace runtime completion
+  - final public viewer API
+  - final public telemetry service
+  - Stage F completion
+
 ## relationship to Reversed Library
 
 Reversed Library / 裏返した図書館 is upper-layer flagship application.

@@ -23,10 +23,10 @@ class AlphaE2ESamplesTests(unittest.TestCase):
         )
         self.assertTrue(all(row["family"] == "alpha-e2e" for row in rows))
 
-    def test_closeout_keeps_stage_e_and_f_incomplete(self) -> None:
+    def test_closeout_keeps_stage_f_incomplete_after_stage_e_closeout(self) -> None:
         payload = runner.closeout()
         self.assertEqual(payload["planned_only_rows"], ["E2E-08"])
-        self.assertFalse(payload["stage_e_complete"])
+        self.assertTrue(payload["stage_e_complete"])
         self.assertFalse(payload["stage_f_complete"])
         self.assertIn(
             "cargo test -p mirrorea-core --test runtime_substrate",
@@ -38,6 +38,10 @@ class AlphaE2ESamplesTests(unittest.TestCase):
         )
         self.assertIn(
             "python3 scripts/alpha_visualization_samples.py check-all --format json",
+            payload["validation_floor"],
+        )
+        self.assertIn(
+            "python3 scripts/alpha_visualization_samples.py stage-e-closeout --format json",
             payload["validation_floor"],
         )
         self.assertIn(
