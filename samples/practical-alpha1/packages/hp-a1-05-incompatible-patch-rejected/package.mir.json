@@ -1,0 +1,36 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "hp-a1-05-incompatible-patch-rejected",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "unsafe_debug_shadow_layer",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace.full"
+    ],
+    "effect_row": [
+      "emit_typed_debug_trace"
+    ],
+    "failure_row": []
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "HP-A1-05",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+    "capability_refs": [
+      "AttachDebugLayer(AlphaRoom#1)",
+      "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
+    ],
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "notes": [
+      "practical layer-only hotplug first floor",
+      "incompatible patch must reject before activation cut"
+    ]
+  }
+}

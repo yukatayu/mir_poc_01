@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor and first local-runtime sample family.
+This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, and layer-only first hot-plug sample family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is not yet the active runnable root for the whole repo.
@@ -10,6 +10,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor a
   package fixtures with `alpha_local_checker_input` plus expected checker reports.
 - `P-A1-03` adds the first local-runtime cut here:
   checked package fixtures with `alpha_local_runtime_input` plus expected local-runtime reports.
+- `P-A1-04a` adds the first practical hot-plug cut here:
+  layer package fixtures with `alpha_local_hotplug_input` plus exact expected hot-plug reports.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -32,6 +34,12 @@ This root is the current practical alpha-1 front-door plus first checker-floor a
 - `packages/run-*/`
   - `RUN-01`: checked practical Sugoroku-style local dispatch with event DAG export
   - `RUN-02`: stale-membership rejection before local state mutation
+- `packages/hp-a1-*/`
+  - `HP-A1-01`: debug layer attach accepted through manifest-driven hot-plug plan
+  - `HP-A1-02`: non-admin debug attach rejected before activation cut
+  - `HP-A1-03`: auth layer accepted only through explicit contract-update path
+  - `HP-A1-04`: rate-limit layer accepted with explicit preview rejection evidence
+  - `HP-A1-05`: incompatible patch rejected before activation cut
 
 ## Current boundary
 
@@ -39,6 +47,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor a
 - Textual `.mir` source remains later work.
 - The current checker floor is non-final and checker-only.
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
+- The current hot-plug floor is also non-final and is limited to `HP-A1-01..05`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
+- Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete package/hot-plug practical API, Docker/local TCP transport, local save/load command, or final public runtime/devtools ABI.
+- It does not complete object package attach, missing-witness/stale-membership hot-plug negatives, Docker/local TCP transport, local save/load command, or final public runtime/devtools ABI.

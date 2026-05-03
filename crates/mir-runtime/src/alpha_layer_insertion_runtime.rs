@@ -590,6 +590,24 @@ fn build_report(
     })
 }
 
+pub(crate) fn build_layer_insertion_report_over_default_attachpoint(
+    request: LayerAttachRequest,
+    accepted_trace_rows: Option<Vec<LayerTraceRow>>,
+    runtime_preview: Option<LayerRuntimePreview>,
+    source_runtime_sample_ref: Option<String>,
+) -> Result<LayerInsertionReport, MirroreaCoreError> {
+    let shell = bootstrap_shell()?;
+    let policy = message_dispatch_attachpoint_policy();
+    build_report(
+        &shell,
+        policy,
+        request,
+        accepted_trace_rows,
+        runtime_preview,
+        source_runtime_sample_ref,
+    )
+}
+
 fn evaluate_compatibility(
     policy: &AttachPointPolicy,
     layer: &LayerContract,
@@ -939,7 +957,7 @@ fn layer_attach_request(
     })
 }
 
-fn debug_layer_contract() -> LayerContract {
+pub(crate) fn debug_layer_contract() -> LayerContract {
     LayerContract {
         layer_name: "debug_trace_layer".to_string(),
         layer_kind: LayerKind::Debug,
@@ -975,7 +993,7 @@ fn debug_layer_contract() -> LayerContract {
     }
 }
 
-fn auth_layer_contract() -> LayerContract {
+pub(crate) fn auth_layer_contract() -> LayerContract {
     LayerContract {
         layer_name: "auth_gate_layer".to_string(),
         layer_kind: LayerKind::Auth,
@@ -1010,7 +1028,7 @@ fn auth_layer_contract() -> LayerContract {
     }
 }
 
-fn rate_limit_layer_contract() -> LayerContract {
+pub(crate) fn rate_limit_layer_contract() -> LayerContract {
     LayerContract {
         layer_name: "rate_limit_layer".to_string(),
         layer_kind: LayerKind::RateLimit,
@@ -1045,7 +1063,7 @@ fn rate_limit_layer_contract() -> LayerContract {
     }
 }
 
-fn incompatible_patch_contract() -> LayerContract {
+pub(crate) fn incompatible_patch_contract() -> LayerContract {
     LayerContract {
         layer_name: "unsafe_debug_shadow_layer".to_string(),
         layer_kind: LayerKind::Debug,
@@ -1082,7 +1100,7 @@ fn incompatible_patch_contract() -> LayerContract {
     }
 }
 
-fn debug_layer_signature() -> LayerSignature {
+pub(crate) fn debug_layer_signature() -> LayerSignature {
     layer_signature(
         "debug_trace_layer",
         &["ManageAttachPoint(AlphaRoom#1::MessageDispatch)"],
@@ -1100,7 +1118,7 @@ fn debug_layer_signature() -> LayerSignature {
     )
 }
 
-fn auth_layer_signature() -> LayerSignature {
+pub(crate) fn auth_layer_signature() -> LayerSignature {
     layer_signature(
         "auth_gate_layer",
         &["ManageAttachPoint(AlphaRoom#1::MessageDispatch)"],
@@ -1113,7 +1131,7 @@ fn auth_layer_signature() -> LayerSignature {
     )
 }
 
-fn rate_limit_layer_signature() -> LayerSignature {
+pub(crate) fn rate_limit_layer_signature() -> LayerSignature {
     layer_signature(
         "rate_limit_layer",
         &["ManageAttachPoint(AlphaRoom#1::MessageDispatch)"],
@@ -1126,7 +1144,7 @@ fn rate_limit_layer_signature() -> LayerSignature {
     )
 }
 
-fn incompatible_patch_signature() -> LayerSignature {
+pub(crate) fn incompatible_patch_signature() -> LayerSignature {
     layer_signature(
         "unsafe_debug_shadow_layer",
         &["ManageAttachPoint(AlphaRoom#1::MessageDispatch)"],

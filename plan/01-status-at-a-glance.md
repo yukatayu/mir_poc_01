@@ -195,7 +195,8 @@
 - `P-A1-01` は closed であり、first practical front-door package として `samples/practical-alpha1/`、`SRC-01..05`、および `crates/mir-ast/src/practical_alpha1.rs` の limited `package.mir.json` loader floor を actualize した
 - `P-A1-02` は closed であり、distinct lowered IR、`crates/mir-ast/src/practical_alpha1_checker.rs`、`scripts/practical_alpha1_check.py`、`CHK-LIF-01..04` / `CHK-VAR-01..03` / `CHK-CUT-01` / `CHK-PKG-01/02` による first practical checker floor を actualize した
 - `P-A1-03` は closed であり、`crates/mir-ast/src/practical_alpha1_runtime_plan.rs`、`crates/mir-runtime/src/practical_alpha1_local_runtime.rs`、`scripts/practical_alpha1_run_local.py`、`RUN-01/02` practical fixtures により checked practical package -> runtime plan -> local runtime report の first local-runtime floor を actualize した
-- `P-A1-04` は next promoted package であり、package / hot-plug practical API gate とする
+- `P-A1-04a` は closed であり、`crates/mir-ast/src/practical_alpha1_hotplug_plan.rs`、`crates/mir-runtime/src/practical_alpha1_hotplug.rs`、example `mir_practical_alpha1_attach`、`scripts/practical_alpha1_attach.py`、`HP-A1-01..05` practical fixtures により checked practical package -> hotplug plan -> non-final hot-plug report の layer-only first floor を actualize した
+- `P-A1-04b` は next promoted package であり、`PA1-4` package / hot-plug practical API の freshness/object seam を詰める
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
 - current promoted line は later-family blocker widening ではなく、

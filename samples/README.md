@@ -16,7 +16,7 @@
   - Stage A..F `100%` は evidence closeout として読む
 - `practical-alpha1/`
   practical alpha-1 front-door sample root
-  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family
+  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family、layer-only practical hot-plug fixture family
   - active canonical runnable root や full toolchain root ではまだない
 - `not_implemented/`
   residual planned skeleton family
@@ -70,8 +70,8 @@
   - `not_implemented/` は residual / historical planned family の preservation root
 - `alpha/` と `practical-alpha1/` を混同しない
   - `alpha/` は evidence closeout root
-  - `practical-alpha1/` は practical source/package front-door root であり、current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、first local-runtime fixtures を持つ
-  - `practical-alpha1/` もまだ active canonical runnable root ではなく、package/hot-plug、runtime/transport/devtools/save-load/product surfaces は later packages に残る
+  - `practical-alpha1/` は practical source/package front-door root であり、current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、first local-runtime fixtures、layer-only practical hot-plug fixtures を持つ
+  - `practical-alpha1/` もまだ active canonical runnable root ではなく、object package attach、freshness/witness negatives、runtime/transport/devtools/save-load/product surfaces は later packages に残る
 
 ## current commands
 
@@ -87,6 +87,7 @@ python3 scripts/visual_debugger_viewer_samples.py check-all --format json
 cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
 python3 scripts/practical_alpha1_check.py check-all --format json
 python3 scripts/practical_alpha1_run_local.py check-all --format json
+python3 scripts/practical_alpha1_attach.py check-all --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

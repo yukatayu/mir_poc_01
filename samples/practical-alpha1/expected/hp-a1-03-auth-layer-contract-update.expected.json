@@ -1,0 +1,392 @@
+{
+  "surface_kind": "practical_alpha1_nonfinal_hotplug_report",
+  "scope_kind": "alpha_local",
+  "hotplug_scope": "practical-alpha1-hotplug-floor",
+  "hotplug_plan_scope": "practical-alpha1-hotplug-plan-floor",
+  "sample_id": "HP-A1-03",
+  "package_id": "hp-a1-03-auth-layer-contract-update",
+  "package_kind": "layer",
+  "attach_profile": "auth_gate_layer",
+  "manifest_checks": [
+    {
+      "check_name": "attach_profile_supported",
+      "passed": true,
+      "observed": "attach_profile=auth_gate_layer",
+      "reason_refs": [
+        "attach_profile_supported"
+      ]
+    },
+    {
+      "check_name": "required_attach_capability_declared",
+      "passed": true,
+      "observed": "requires_capabilities contains admin.attach_layer",
+      "reason_refs": [
+        "required_attach_capability_declared"
+      ]
+    },
+    {
+      "check_name": "provided_capability_declared",
+      "passed": true,
+      "observed": "provided_capabilities contains observe.auth_audit",
+      "reason_refs": [
+        "provided_capability_declared"
+      ]
+    },
+    {
+      "check_name": "effect_row_declared",
+      "passed": true,
+      "observed": "effect_row contains emit_auth_audit",
+      "reason_refs": [
+        "effect_row_declared"
+      ]
+    },
+    {
+      "check_name": "failure_row_declared",
+      "passed": true,
+      "observed": "failure_row=AuthFailed",
+      "reason_refs": [
+        "failure_row_declared"
+      ]
+    }
+  ],
+  "layer_compatibility": {
+    "contract_mode": "explicit_contract_update",
+    "accepted_path": "explicit_contract_update",
+    "checks": [
+      {
+        "check_name": "layer_kind_allowed",
+        "result": "passed",
+        "reason_refs": [
+          "layer_kind_allowed"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "attach_point_matches",
+        "result": "passed",
+        "reason_refs": [
+          "attach_point_matches_policy"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "input_contravariance",
+        "result": "passed",
+        "reason_refs": [
+          "input_type_contravariant_or_equal"
+        ],
+        "notes": [
+          "current floor uses exact type-name equality for attach-time comparison"
+        ]
+      },
+      {
+        "check_name": "output_covariance",
+        "result": "passed",
+        "reason_refs": [
+          "output_type_covariant_or_equal"
+        ],
+        "notes": [
+          "current floor uses exact type-name equality for attach-time comparison"
+        ]
+      },
+      {
+        "check_name": "precondition_weakening",
+        "result": "passed",
+        "reason_refs": [
+          "precondition_weakened_or_equal"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "postcondition_strengthening",
+        "result": "passed",
+        "reason_refs": [
+          "postcondition_strengthened_or_equal"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "effect_row_containment",
+        "result": "passed",
+        "reason_refs": [
+          "effect_row_within_declared_budget"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "failure_row_containment",
+        "result": "skipped",
+        "reason_refs": [
+          "failure_row_change_guarded_by_contract_update"
+        ],
+        "notes": [
+          "transparent containment is not claimed for auth/current explicit-update rows"
+        ]
+      },
+      {
+        "check_name": "contract_update_activation_cut",
+        "result": "passed",
+        "reason_refs": [
+          "contract_update_activation_cut_present"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "capability_monotonicity",
+        "result": "passed",
+        "reason_refs": [
+          "call_capability_not_strengthened"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "provided_capabilities_preserved",
+        "result": "passed",
+        "reason_refs": [
+          "provided_capabilities_preserved"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "provided_interface_preserved",
+        "result": "passed",
+        "reason_refs": [
+          "provided_interface_preserved"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "observation_label_containment",
+        "result": "passed",
+        "reason_refs": [
+          "observation_labels_contained"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "redaction_monotonicity",
+        "result": "passed",
+        "reason_refs": [
+          "redaction_monotone"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "retention_scope_monotonicity",
+        "result": "passed",
+        "reason_refs": [
+          "retention_scope_allowed"
+        ],
+        "notes": []
+      },
+      {
+        "check_name": "trace_mode_policy",
+        "result": "passed",
+        "reason_refs": [
+          "trace_mode_allowed"
+        ],
+        "notes": []
+      }
+    ],
+    "passed_reason_refs": [
+      "layer_kind_allowed",
+      "attach_point_matches_policy",
+      "input_type_contravariant_or_equal",
+      "output_type_covariant_or_equal",
+      "precondition_weakened_or_equal",
+      "postcondition_strengthened_or_equal",
+      "effect_row_within_declared_budget",
+      "failure_row_change_guarded_by_contract_update",
+      "contract_update_activation_cut_present",
+      "call_capability_not_strengthened",
+      "provided_capabilities_preserved",
+      "provided_interface_preserved",
+      "observation_labels_contained",
+      "redaction_monotone",
+      "retention_scope_allowed",
+      "trace_mode_allowed"
+    ],
+    "failed_reason_refs": [],
+    "notes": [
+      "current floor compares exact type names plus finite set containment over declared rows",
+      "full theorem-backed implication discharge and final contract algebra remain later"
+    ]
+  },
+  "hotplug_runtime_report": {
+    "skeleton_scope": "report_local_orchestration_skeleton",
+    "request_lanes": [
+      "request_id",
+      "attachpoint_ref",
+      "patch_ref",
+      "operation_kind",
+      "requesting_principal",
+      "requesting_participant_place",
+      "message_envelope_ref",
+      "auth_evidence_ref",
+      "capability_refs",
+      "witness_refs",
+      "notes"
+    ],
+    "verdict_lanes": [
+      "request_ref",
+      "verdict_kind",
+      "compatibility_reason_refs",
+      "authorization_reason_refs",
+      "membership_freshness_reason_refs",
+      "notes"
+    ],
+    "request": {
+      "request_id": "layer_attach_request#HP-A1-03",
+      "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "patch_ref": "LayerPatch[auth_gate_layer]",
+      "operation_kind": "attach",
+      "requesting_principal": "ExampleAdmin",
+      "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+      "message_envelope_ref": "layer_attach_envelope#HP-A1-03",
+      "auth_evidence_ref": "activation_cut#auth_contract_update",
+      "capability_refs": [
+        "AttachAuthLayer(AlphaRoom#1)",
+        "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
+      ],
+      "witness_refs": [
+        "membership_frontier_snapshot#practical_hotplug"
+      ],
+      "notes": [
+        "contract_mode=explicit_contract_update",
+        "verdict is computed from current attach-time compatibility checks"
+      ]
+    },
+    "verdict": {
+      "request_ref": "layer_attach_request#HP-A1-03",
+      "verdict_kind": "accepted",
+      "compatibility_reason_refs": [
+        "layer_kind_allowed",
+        "attach_point_matches_policy",
+        "input_type_contravariant_or_equal"
+      ],
+      "authorization_reason_refs": [
+        "attach_capability_present",
+        "admin_attach_authority_confirmed"
+      ],
+      "membership_freshness_reason_refs": [
+        "membership_frontier_verified",
+        "membership_epoch_current"
+      ],
+      "notes": [
+        "verdict is not imported as a pre-admitted carrier in this floor",
+        "completed hot-plug lifecycle still remains later"
+      ]
+    },
+    "runtime_snapshot": {
+      "place_catalog": {
+        "places": {
+          "AttachPoint[AlphaRoom#1::MessageDispatch]": "AttachPoint",
+          "GamePlace[SugorokuGame#1]": "SugorokuGamePlace",
+          "ParticipantPlace[Alice]": "ParticipantPlace",
+          "ParticipantPlace[Bob]": "ParticipantPlace",
+          "ParticipantPlace[ExampleAdmin]": "ParticipantPlace",
+          "ParticipantPlace[Mallory]": "ParticipantPlace",
+          "WorldPlace[AlphaRoom#1]": "WorldPlace"
+        }
+      },
+      "membership": {
+        "membership_epoch": 0,
+        "members": {
+          "Alice": {
+            "place": "ParticipantPlace[Alice]",
+            "active": true,
+            "incarnation": 0,
+            "joined_at_epoch": 0,
+            "left_at_epoch": null
+          },
+          "Bob": {
+            "place": "ParticipantPlace[Bob]",
+            "active": true,
+            "incarnation": 0,
+            "joined_at_epoch": 0,
+            "left_at_epoch": null
+          },
+          "ExampleAdmin": {
+            "place": "ParticipantPlace[ExampleAdmin]",
+            "active": true,
+            "incarnation": 0,
+            "joined_at_epoch": 0,
+            "left_at_epoch": null
+          },
+          "Mallory": {
+            "place": "ParticipantPlace[Mallory]",
+            "active": true,
+            "incarnation": 0,
+            "joined_at_epoch": 0,
+            "left_at_epoch": null
+          }
+        }
+      }
+    },
+    "consumed_substrates": [
+      "LogicalPlaceRuntimeShell",
+      "MembershipRegistry",
+      "PlaceCatalog",
+      "HotPlugRequest",
+      "HotPlugVerdict"
+    ],
+    "retained_later_refs": [
+      "helper_local_lifecycle_ids",
+      "completed_engine",
+      "rollback_protocol",
+      "durable_migration",
+      "distributed_activation_ordering",
+      "final_public_hotplug_abi"
+    ],
+    "notes": [
+      "consumer-side runtime/report assembly over admitted carriers and existing substrate",
+      "no helper-local lifecycle ids imported as canonical runtime state"
+    ]
+  },
+  "active_layers_after": [
+    "auth_gate_layer"
+  ],
+  "runtime_preview": {
+    "preview_kind": "auth_contract_update_preview",
+    "terminal_outcome": "accepted_contract_update",
+    "reason_refs": [
+      "contract_update_activation_cut_present",
+      "auth_failed_declared_on_new_contract_version"
+    ],
+    "notes": [
+      "transparent overlay is intentionally not claimed for auth",
+      "runtime auth session semantics remain later"
+    ]
+  },
+  "activation_cut_ref": "activation_cut#auth_contract_update",
+  "terminal_outcome": "accepted_contract_update",
+  "reason_family": null,
+  "rejection_reason_refs": [],
+  "retained_later_refs": [
+    "object_package_attach",
+    "stale_membership_attach_reject",
+    "missing_witness_attach_reject",
+    "detach_minimal_contract",
+    "docker_transport_execution",
+    "local_save_load_execution",
+    "final_public_hotplug_api"
+  ],
+  "stop_lines": [
+    "do not treat the practical alpha-1 attach command as object/runtime/avatar package completion",
+    "do not treat the practical alpha-1 attach command as stale-membership or missing-witness completion",
+    "do not treat the practical alpha-1 attach command as Docker transport, save/load, or final public hotplug ABI completion",
+    "do not promote samples/practical-alpha1 to an active runnable root in the hotplug package"
+  ],
+  "limitations": [
+    "alpha-local non-final practical layer-only hotplug first floor only",
+    "limited HP-A1-01..05 practical sample families only",
+    "no object package attach, stale-membership reject, missing-witness reject, detach-minimal contract, Docker/local TCP, save/load, or final public ABI"
+  ],
+  "public_cli_frozen": false,
+  "run_local_claimed": false,
+  "run_docker_claimed": false,
+  "save_load_claimed": false,
+  "object_attach_claimed": false,
+  "freshness_negative_complete": false,
+  "stage_pa1_4_complete": false
+}

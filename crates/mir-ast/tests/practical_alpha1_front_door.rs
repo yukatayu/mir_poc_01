@@ -28,7 +28,11 @@ fn practical_alpha1_front_door_manifest_keeps_nonfinal_package_json_cut() {
             "places",
             "fallback_chains",
             "layers",
-            "manifest"
+            "manifest",
+            "native",
+            "alpha_local_checker_input",
+            "alpha_local_runtime_input",
+            "alpha_local_hotplug_input",
         ]
     );
     assert_eq!(

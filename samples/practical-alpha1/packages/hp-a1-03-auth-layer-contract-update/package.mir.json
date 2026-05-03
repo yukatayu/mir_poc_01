@@ -1,0 +1,40 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "hp-a1-03-auth-layer-contract-update",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "auth_gate_layer",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.auth_audit"
+    ],
+    "effect_row": [
+      "emit_auth_audit"
+    ],
+    "failure_row": [
+      "AuthFailed"
+    ]
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "HP-A1-03",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+    "capability_refs": [
+      "AttachAuthLayer(AlphaRoom#1)",
+      "ManageAttachPoint(AlphaRoom#1::MessageDispatch)"
+    ],
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "activation_cut_ref": "activation_cut#auth_contract_update",
+    "contract_update_ref": "activation_cut#auth_contract_update",
+    "notes": [
+      "practical layer-only hotplug first floor",
+      "auth layer remains explicit contract-update path"
+    ]
+  }
+}

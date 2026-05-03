@@ -24,6 +24,10 @@ const PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS: &[&str] = &[
     "fallback_chains",
     "layers",
     "manifest",
+    "native",
+    "alpha_local_checker_input",
+    "alpha_local_runtime_input",
+    "alpha_local_hotplug_input",
 ];
 
 const PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS: &[&str] = &[
@@ -99,6 +103,8 @@ pub struct PracticalAlpha1Package {
     pub alpha_local_checker_input: Option<PracticalAlpha1AlphaLocalCheckerInput>,
     #[serde(default, alias = "runtime")]
     pub alpha_local_runtime_input: Option<PracticalAlpha1AlphaLocalRuntimeInput>,
+    #[serde(default, alias = "hotplug")]
+    pub alpha_local_hotplug_input: Option<PracticalAlpha1AlphaLocalHotPlugInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -131,6 +137,8 @@ pub struct PracticalAlpha1LayerAttachment {
 pub struct PracticalAlpha1PackageManifest {
     pub version: String,
     #[serde(default)]
+    pub attach_profile: Option<PracticalAlpha1AttachProfile>,
+    #[serde(default)]
     pub requires_capabilities: Vec<String>,
     #[serde(default)]
     pub provided_capabilities: Vec<String>,
@@ -138,6 +146,15 @@ pub struct PracticalAlpha1PackageManifest {
     pub effect_row: Vec<String>,
     #[serde(default)]
     pub failure_row: Vec<String>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1AttachProfile {
+    DebugTraceLayer,
+    AuthGateLayer,
+    RateLimitLayer,
+    UnsafeDebugShadowLayer,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -232,6 +249,22 @@ pub struct PracticalAlpha1AlphaLocalRuntimeInput {
     pub pre_dispatch_membership_advances: Vec<PracticalAlpha1RuntimeMembershipAdvance>,
     pub dispatch_program: PracticalAlpha1RuntimeDispatchProgram,
     pub initial_envelopes: Vec<PracticalAlpha1RuntimeEnvelope>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalHotPlugInput {
+    pub sample_id: String,
+    pub attachpoint_ref: String,
+    pub requesting_principal: String,
+    pub requesting_participant_place: String,
+    pub capability_refs: Vec<String>,
+    pub witness_refs: Vec<String>,
+    #[serde(default)]
+    pub activation_cut_ref: Option<String>,
+    #[serde(default)]
+    pub contract_update_ref: Option<String>,
+    #[serde(default)]
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

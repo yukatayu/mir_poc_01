@@ -1,0 +1,35 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "hp-a1-02-non-admin-debug-rejected",
+  "package_kind": "layer",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "debug_trace_layer",
+    "requires_capabilities": [
+      "admin.attach_layer"
+    ],
+    "provided_capabilities": [
+      "observe.debug_trace"
+    ],
+    "effect_row": [
+      "emit_typed_debug_trace"
+    ],
+    "failure_row": []
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "HP-A1-02",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+    "requesting_principal": "Mallory",
+    "requesting_participant_place": "ParticipantPlace[Mallory]",
+    "capability_refs": [
+      "ObserveRoom(AlphaRoom#1)"
+    ],
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "notes": [
+      "practical layer-only hotplug first floor",
+      "non-admin debug attach must reject before activation cut"
+    ]
+  }
+}

@@ -140,6 +140,36 @@ reusable runtime 全体の completion ではなく、
 reusable runtime family 全体、package/hot-plug、transport、
 save/load、devtools completion と同一視しない。
 
+## first package / hot-plug floor boundary
+
+`P-A1-04a` の current actualization は、
+package / hot-plug stage 全体の completion ではなく、
+**layer-only practical hot-plug first floor** である。
+
+- checked package carrier、hotplug plan、hot-plug report は分ける
+- current front-door attach path は `layer` package に限定する
+- current actualized row は:
+  - `HP-A1-01`
+  - `HP-A1-02`
+  - `HP-A1-03`
+  - `HP-A1-04`
+  - `HP-A1-05`
+- accepted proof は exact hot-plug report と manifest checks で示す
+- rejected proof は exact hot-plug report の `terminal_outcome`、`reason_family`、`rejection_reason_refs` で示す
+- current floor は debug/auth/rate-limit layer の manifest-driven attach path を actualize する
+- current floor は incompatible patch reject と missing attach capability/admin reject を actualize する
+- current floor は object package attach completionを意味しない
+- current floor は missing witness reject completionを意味しない
+- current floor は stale membership reject completionを意味しない
+- current floor は detach minimal contract completionを意味しない
+- current floor は Docker/local TCP transport completionを意味しない
+- current floor は final public hot-plug/package ABI を意味しない
+
+したがって、`P-A1-04a` closeout は useful practical package/hot-plug floor だが、
+`specs/18` package / hot-plug stage 全体、
+object package attach、freshness/witness negatives、
+detach contract completion と同一視しない。
+
 ### 3. reusable runtime
 
 - multiple `Place` を持つ reusable runtime API がある

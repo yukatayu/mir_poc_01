@@ -27,6 +27,13 @@ full compatibility or final public avatar API ではない。
   - layer subset `LI-01/02/03/04/05`
   - package/avatar subset `AV-01/02/06/08/09` and `HP-11/12/15`
   - no detach runtime, durable migration, distributed activation ordering, native execution realization, or final public ABI claim
+- practical alpha-1 `P-A1-04a` reuses `alpha_layer_insertion_runtime` only as a lower attach-time authority for manifest-driven layer packages:
+  - `crates/mir-ast/src/practical_alpha1_hotplug_plan.rs`
+  - `crates/mir-runtime/src/practical_alpha1_hotplug.rs`
+  - example `mir_practical_alpha1_attach`
+  - `scripts/practical_alpha1_attach.py`
+  - current executable rows: `HP-A1-01..05`
+  - this is a separate practical layer-only first floor, not a promotion of Alpha-0 avatar/runtime-package rows into a practical public/package ABI
 - remaining rows `AV-03/04/05/07/10` and `HP-01/07/08/09/10/13/14` stay planned or mirrored elsewhere
 
 ## decisions mirrored from specs/16

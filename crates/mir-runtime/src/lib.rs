@@ -20,6 +20,7 @@ pub mod clean_near_end;
 pub mod current_l2;
 pub mod current_l2_cli;
 pub mod hotplug_runtime;
+pub mod practical_alpha1_hotplug;
 pub mod practical_alpha1_local_runtime;
 
 pub fn crate_name() -> &'static str {
