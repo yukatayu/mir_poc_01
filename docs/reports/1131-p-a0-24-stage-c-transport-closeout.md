@@ -165,7 +165,7 @@ Proceed with Stage D lifecycle closeout as the next large-stage package: re-read
 
 ## Commit / push status
 
-Pending at report write.
+Package closeout commit `870d370` (`mirrorea: close p-a0-24 stage-c transport closeout`) was pushed to `origin/main`.
 
 ## Sub-agent session close status
 
