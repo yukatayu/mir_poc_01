@@ -175,7 +175,9 @@ Proceed to `P-A0-27` and define a dedicated current-scope Stage F closeout surfa
 
 ## Commit / push status
 
-Pending at report write.
+- Commit: `ef10e2b` (`mirrorea: close p-a0-26 stage-e devtools closeout`)
+- Push: `origin/main` へ push 済み
+- Follow-up: commit / push metadata sync のため、この report 自身を docs-only で 1 回更新する
 
 ## Sub-agent session close status
 
