@@ -19,8 +19,9 @@
 - `VAR-14` は planned-only `adapter_transform_scope = alpha-adapter-transform-floor` に split 済みであり、source-target contract / pre-post preservation / effect-failure containment / provided surface / observation-redaction-retention / fallback representation の future carrier inventory を要求する
 - `cut-save-load/` には selected negative rows の checker floor に加えて、`scripts/alpha_cut_save_load_samples.py` が `CUT-04` local-only save/load bridge、`CUT-17` stale-membership rejection bridge、`CUT-11` checker-backed Z-cycle inadmissibility row を actualize している
 - `local-runtime/` には `scripts/alpha_local_runtime_samples.py` が `LR-01/02` dedicated runner と current-scope Stage B closeout surface を追加し、`CUT-04/17` は supporting local-only save/load subset としてだけ再利用される
+- `scripts/alpha_hotplug_lifecycle_samples.py` は `layer-insertion/` の `LI-01/02/03/04/05` と `avatar-runtime/` / `hotplug-runtime/` の `AV-01/02/06/08/09` / `HP-11/12/15` を current-scope Stage D closeout surface として束ねる
 - active runnable evidence は引き続き `samples/clean-near-end/` と related helpers にある
-- `local-runtime/` には current-scope Stage B closeout surface、`layer-insertion/` には first Rust layer-insertion floor、`network-docker/` には current-scope Stage C transport closeout surface over the existing Rust network floor + Docker Compose runner、`avatar-runtime/` には first runtime-private package/avatar admission floor + thin runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
+- `local-runtime/` には current-scope Stage B closeout surface、`layer-insertion/` と `avatar-runtime/` / `hotplug-runtime/` には current-scope Stage D lifecycle closeout surface over the existing Rust layer/package/avatar floors、`network-docker/` には current-scope Stage C transport closeout surface over the existing Rust network floor + Docker Compose runner が入るが、いずれも non-public sample-ID keyed runner であり、active sample root への昇格ではない
 - `visualization/` には thin runner `scripts/alpha_visualization_samples.py` が `VIS-01/02/03/05/06/07/08/10/11` を actualize したが、`VIS-04/09/12` は planned-only のままであり、Stage E / Stage F completion claim には使わない
 - `e2e/` には thin integrated bridge runner `scripts/alpha_e2e_samples.py` が `E2E-01/02/03/04/05/06/07/09/10` を actualize したが、`E2E-08` は planned-only のままであり、Stage F completion claim には使わない
 - `hotplug-runtime/` と `contract-variance/` の overlapping rows は引き続き planned/sample-mirror authority であり、current attach-time runtime floor は `layer-insertion/` 側に置く
@@ -73,6 +74,7 @@ python3 scripts/alpha_network_docker_e2e.py check-all --format json
 python3 scripts/alpha_network_docker_e2e.py stage-c-closeout --format json
 cargo test -p mir-runtime --test alpha_avatar_runtime
 python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
+python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json
 python3 scripts/alpha_visualization_samples.py check-all --format json
 python3 scripts/alpha_e2e_samples.py run E2E-06 --format json
 python3 scripts/alpha_e2e_samples.py check-all --format json
@@ -102,6 +104,7 @@ python3 -m unittest \
 - do not treat helper-local synthetic acceptance rows as parser/runtime implementation or final public checker verdict
 - do not treat the current Rust local-runtime floor as hot-plug/package/avatar/network completion
 - do not treat the current Rust layer-insertion floor as completed lifecycle / detach / migration / public ABI completion
+- do not treat the current Stage D hot-plug lifecycle closeout surface as detach runtime / migration / native execution / public ABI completion
 - do not treat the current Rust/Docker Stage-C network floor as production transport / WAN federation / final public transport ABI completion
 - do not treat the current runtime-private avatar/package floor as final avatar API / native execution / final runtime package ABI completion
 - do not treat the current visualization subset runner or integrated `e2e/` bridge runner as Stage E or Stage F completion

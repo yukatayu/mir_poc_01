@@ -22,6 +22,11 @@ full compatibility or final public avatar API ではない。
   - example `mirrorea_alpha_avatar_runtime`
   - thin runner `scripts/alpha_avatar_runtime_samples.py`
   - current executable rows: `AV-01/02/06/08/09` and `HP-11/12/15`
+- `P-A0-25` fixes the current-scope Stage D closeout surface:
+  - `scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout`
+  - layer subset `LI-01/02/03/04/05`
+  - package/avatar subset `AV-01/02/06/08/09` and `HP-11/12/15`
+  - no detach runtime, durable migration, distributed activation ordering, native execution realization, or final public ABI claim
 - remaining rows `AV-03/04/05/07/10` and `HP-01/07/08/09/10/13/14` stay planned or mirrored elsewhere
 
 ## decisions mirrored from specs/16
@@ -112,3 +117,5 @@ must keep visible:
   widen runtime-private hot-plug and avatar sample bridge without promoting any concrete format to core
 - after `P-A0-10`:
   integrate the current local-runtime / layer-insertion / network / avatar-package floors into Stage-F demo closeout evidence without claiming final avatar API or native execution
+- after `P-A0-25`:
+  move queue authority to Stage E devtools closeout while keeping detach/migration/native-execution/final-ABI lines explicitly later

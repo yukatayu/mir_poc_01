@@ -5,6 +5,7 @@
 - Stage: Stage D
 - `HP-02..06` は `../layer-insertion/` に first runtime-sensitive mirrors を持つ。
 - `HP-11/12/15` は `mirrorea_alpha_avatar_runtime` と `scripts/alpha_avatar_runtime_samples.py` により runtime-private native-policy subset として実行される。
+- `scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout` now treats `HP-11/12/15` as the required package-policy subset for Stage D current-scope closeout.
 - この directory 自体は broader hot-plug lifecycle family の planned/sample-mirror authority を保つ。
 
 ## Rows
@@ -33,6 +34,7 @@
 - `.expected.json` sidecars for `HP-11/12/15` are now generated from current runtime-private example output and act as bridge evidence for the native-policy subset runner.
 - `HP-02..06` are still not directly executed from this directory in the current repo state; the dedicated Rust attach-time floor lives under `../layer-insertion/`.
 - `HP-01/07/08/09/10/13/14` remain planned-only rows.
+- Stage D current-scope closeout does not imply `HP-08/09/13/14`, detach runtime, durable migration, distributed activation ordering, or final public hot-plug ABI.
 - Promotion to active/runnable root status requires dedicated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
@@ -40,5 +42,6 @@
 ```bash
 cargo test -p mir-runtime --test alpha_avatar_runtime
 python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
+python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json
 find samples/alpha/hotplug-runtime -maxdepth 1 -type f | sort
 ```

@@ -4,6 +4,7 @@
 - Phase: Phase 7
 - Stage: Stage D -> F bridge
 - `mirrorea_alpha_avatar_runtime` と `scripts/alpha_avatar_runtime_samples.py` が `AV-01/02/06/08/09` を runtime-private package/avatar admission floor として実行する。
+- `scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout` now treats `AV-01/02/06/08/09` as the required avatar/package subset for Stage D current-scope closeout.
 - この family は active runnable root ではなく、sample-ID keyed non-public runner evidence として扱う。
 
 ## Rows
@@ -26,6 +27,7 @@
 - `.mir` files here remain source-ish anchors rather than parsed inputs.
 - `.expected.json` sidecars for `AV-01/02/06/08/09` are generated from current runtime-private example output and act as bridge evidence for the runner/checker floor.
 - `AV-03/04/05/07/10` remain planned-only rows.
+- Stage D current-scope closeout does not imply `AV-03/04/05/07/10`, native execution realization, dependent-aware detach lifecycle, or final public avatar/package ABI.
 - Promotion to active/runnable root status requires integrated validation commands, report evidence, and snapshot updates.
 
 ## Validation anchor for this package
@@ -34,4 +36,5 @@
 cargo test -p mir-runtime --test alpha_avatar_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout
 python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
+python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json
 ```

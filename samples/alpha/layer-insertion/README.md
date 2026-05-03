@@ -1,10 +1,11 @@
 # alpha sample family — Layer Insertion
 
-- Status: first Rust layer-insertion runtime floor
+- Status: current-scope Stage D lifecycle closeout layer subset over the existing Rust layer-insertion runtime floor
 - Phase: Phase 4
 - Stage: Stage D
 - Current runner is a non-public Rust attach-time layer-insertion floor in `mir-runtime`.
 - This family is still not an active parser/runtime sample root.
+- `scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout` now treats `LI-01..05` as the required layer subset for Stage D current-scope closeout.
 
 ## Current reading
 
@@ -43,4 +44,5 @@
 find samples/alpha/layer-insertion -maxdepth 1 -type f | sort
 cargo test -p mir-runtime --test alpha_layer_insertion_runtime
 cargo run -q -p mir-runtime --example mirrorea_alpha_layer_insertion_runtime -- closeout
+python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json
 ```

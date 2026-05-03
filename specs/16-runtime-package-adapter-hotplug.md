@@ -232,6 +232,38 @@ detach is not free-form deletion.
 - activation / detach boundary remains explicit
 - durable migration / completed rollback / distributed activation ordering are separate later lines
 
+## Stage D current-scope closeout boundary
+
+`Stage D` current-scope closeout is narrower than full hot-plug lifecycle completion.
+
+- admissible runtime-private package / avatar rows:
+  - `AV-01` placeholder avatar runtime accepted
+  - `AV-02` custom Mir avatar runtime accepted
+  - `AV-06` untrusted native avatar rejected
+  - `AV-08` runtime-unavailable placeholder fallback
+  - `AV-09` undeclared effect widening rejected
+  - `HP-11` unsigned native package rejected
+  - `HP-12` signed over-capability package rejected
+  - `HP-15` revoked/stale-signed native package rejected
+- admissible attach-time layer rows:
+  - `LI-01` authorized debug layer attach
+  - `LI-02` non-admin debug layer rejection before activation
+  - `LI-03` explicit contract-update auth path
+  - `LI-04` declared-failure rate-limit preview path
+  - `LI-05` incompatible patch rejection before activation
+- this combination is sufficient to call alpha-0.8 hot-plug lifecycle complete for current scope
+- this does not imply:
+  - `HP-08/09/13/14` detach / dependent / rollback-sensitive semantics
+  - `AV-03/04/05/07/10` adapter / shader / detach-sensitive semantics
+  - native execution realization
+  - durable migration
+  - distributed activation ordering
+  - final public layer attachment ABI
+  - final public runtime package / avatar ABI
+
+signature/provenance rows remain provenance only.
+They do not prove semantic safety by themselves.
+
 ## proof / checker obligations
 
 future checker / proof line が preserve すべき obligation は次である。

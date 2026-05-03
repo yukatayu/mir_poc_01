@@ -208,6 +208,36 @@ negative test floor:
   - final public transport ABI
   - Stage D/E/F completion
 
+## Stage D current-scope closeout boundary
+
+`Stage D` current-scope closeout is narrower than full hot-plug lifecycle completion.
+
+- admissible evidence:
+  - `LI-01` authorized debug layer attach with trace only after activation
+  - `LI-02` non-admin debug layer rejection before activation
+  - `LI-03` explicit contract-update auth path
+  - `LI-04` declared-failure rate-limit preview path
+  - `LI-05` incompatible patch rejection before activation
+  - `AV-01` placeholder avatar runtime accepted
+  - `AV-02` custom Mir avatar runtime accepted
+  - `AV-06` untrusted native avatar rejected
+  - `AV-08` runtime-unavailable placeholder fallback
+  - `AV-09` undeclared effect widening rejected
+  - `HP-11` unsigned native package rejected
+  - `HP-12` signed over-capability package rejected
+  - `HP-15` revoked/stale-signed native package rejected
+- this combination is sufficient to call alpha-0.8 hot-plug lifecycle complete for current scope
+- this does not imply:
+  - detach runtime completion
+  - durable migration
+  - distributed activation ordering
+  - native execution realization
+  - `HP-08/09/13/14`
+  - `AV-03/04/05/07/10`
+  - final public layer attachment ABI
+  - final public runtime package / avatar ABI
+  - Stage E/F completion
+
 ## relationship to Reversed Library
 
 Reversed Library / 裏返した図書館 is upper-layer flagship application.

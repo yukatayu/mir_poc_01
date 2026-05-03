@@ -46,6 +46,13 @@ final public product completion ではない。
 - hot-plug lifecycle
 - first actualized subset is now a non-public Rust layer-insertion floor over the Stage-B local-runtime cut:
   attach-time contract comparison, accepted debug attach, rejected non-admin attach, explicit auth contract-update path, declared-failure rate-limit path, incompatible patch reject
+- runtime-private package/avatar admission subset remains:
+  `AV-01/02/06/08/09` and `HP-11/12/15`
+- current-scope closeout is now fixed by:
+  - example `mirrorea_alpha_layer_insertion_runtime -- closeout`
+  - `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+  - `python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json`
+- this closes alpha-0.8 only for the existing attach-time layer subset plus runtime-private package/avatar admission subset; it does not claim detach runtime, durable migration, distributed activation ordering, native execution realization, or final public layer/package/avatar ABI
 
 ### Stage E
 
@@ -144,6 +151,7 @@ Phase 1+ runtime floor:
   `cargo test -p mir-runtime --test alpha_avatar_runtime`
   `cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout`
   `python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`
+  `python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json`
 - current Stage E subset floor:
   `python3 scripts/alpha_visualization_samples.py check-all --format json`
   `python3 scripts/alpha_visualization_samples.py closeout --format json`
@@ -188,5 +196,6 @@ Phase 1+ runtime floor:
 
 - after `P-A0-23`, Stage B current-scope closeout is fixed and queue authority shifts to Stage C-first completion work
 - after `P-A0-24`, Stage C current-scope closeout is fixed and queue authority shifts to Stage D lifecycle closeout
+- after `P-A0-25`, Stage D current-scope closeout is fixed and queue authority shifts to Stage E devtools closeout
 - later helper-local LIF/VAR carriers remain valid and separate, but they are no longer the next promoted line while the large-stage-first sequence is active
-- next reopen should prefer Stage D lifecycle closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
+- next reopen should prefer Stage E devtools closeout over new lifetime/variance carrier widening unless a new plan inconsistency is found
