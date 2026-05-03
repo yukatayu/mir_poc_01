@@ -134,8 +134,12 @@ python3 scripts/practical_alpha1_attach.py closeout --format json
 python3 -m unittest scripts.tests.test_practical_alpha1_check scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_validate_docs
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
+cargo fmt
 cargo fmt --check
 git diff --check
+git add <package files>
+git commit --no-gpg-sign -m "mirrorea: close p-a1-04b practical hotplug freshness seam"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -164,6 +168,10 @@ git diff --check
 - `python3 -m unittest ...` passed 32 tests.
 - `python3 scripts/check_source_hierarchy.py` reported `73/73/0`.
 - An intermediate `python3 scripts/validate_docs.py` run failed before this closeout report existed because the latest report was a reviewer memo (`2026-05-03-pa1-04b-theory-spec-review.md`) without template-required sections. Adding this numbered closeout report resolves that latest-report guard by design.
+- Final docs/format guards passed:
+  - `python3 scripts/validate_docs.py` reported `Documentation scaffold looks complete.` and `Found 1150 numbered report(s).`
+  - `cargo fmt --check` passed after one `cargo fmt` normalization on touched Rust files
+  - `git diff --check` was clean
 
 ## What changed in understanding
 
@@ -229,9 +237,10 @@ current practical package summary を `P-A1-04b` close に更新し、`PA1-4` �
 
 ## Commit / push status
 
-Pending at report write.
+- Package implementation commit `780956b` (`mirrorea: close p-a1-04b practical hotplug freshness seam`) was created and pushed to `origin/main`.
+- This report metadata is being synchronized in a docs-only follow-up commit.
 
 ## Sub-agent session close status
 
-- Reviewer agents were used for theory/spec, runtime/object-attach, docs/snapshot, and sample/validation review.
-- Close status pending at report write; they will be closed after local closeout is committed.
+- Reviewer agents were used for theory/spec (`Tesla`), runtime/object-attach (`Volta`), docs/snapshot (`Dirac`), and sample/validation (`Faraday`) review.
+- All four reviewer sessions were closed after package push.
