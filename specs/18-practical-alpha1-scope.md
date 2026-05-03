@@ -248,6 +248,27 @@ final public transport API と同一視しない。
 
 を JSON/export + viewer で確認できる。
 
+#### first practical devtools export floor boundary
+
+- current repo state で actualize 済みなのは full devtools completion ではなく、
+  exact practical reports を source とする distinct devtools export bundle +
+  non-final viewer の first floor である
+- current admissible rows は次に限る
+  - `VIS-A1-01`
+    - practical local-runtime report から event DAG と publication / witness / handoff relation を export する
+  - `VIS-A1-02`
+    - practical transport report から observer-safe route trace を export する
+  - `VIS-A1-06`
+    - practical transport report から auth lane を transport metadata から分離した redacted observer view を export する
+- current carrier split は次である
+  - `exact practical reports -> distinct devtools export bundle -> non-final viewer`
+- この floor は new runtime semantics を追加しない
+- この floor は full `PA1-6` completion を意味しない
+- この floor は `VIS-A1-03` membership timeline、`VIS-A1-04` hot-plug lifecycle、
+  `VIS-A1-05` fallback degradation、`VIS-A1-07` retention/on-demand trace の completion を意味しない
+- この floor は local save/load、product prototype、WAN/federation、
+  final public viewer / telemetry / runtime-devtools ABI を意味しない
+
 ### 8. product prototype
 
 少なくとも 1 つの small product prototype を

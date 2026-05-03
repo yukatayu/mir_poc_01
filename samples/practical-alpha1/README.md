@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, and non-final practical transport sample family.
+This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, and first practical devtools export bundle family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is not yet the active runnable root for the whole repo.
@@ -18,6 +18,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   explicit deferred detach minimal contract with `operation_kind = detach` and `detach_boundary_ref`.
 - `P-A1-05` adds the first practical transport cut here:
   local TCP / Docker Compose TCP package transport with distinct transport-plan/report carriers and exact expected `TR-A1-01..07` reports.
+- `P-A1-06` adds the first practical devtools export cut here:
+  `scripts/practical_alpha1_export_devtools.py` emits distinct devtools bundles with exact expected `VIS-A1-01/02/06` JSON and a non-final static HTML viewer surface.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -58,6 +60,10 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `TR-A1-05`: missing witness rejected at the practical transport admission boundary
   - `TR-A1-06`: observer-safe route trace emitted with separated lanes
   - `TR-A1-07`: auth evidence preserved in a lane distinct from transport delivery
+- `expected/vis-a1-*.expected.json`
+  - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
+  - `VIS-A1-02`: observer-safe route trace export
+  - `VIS-A1-06`: redacted observer view with auth-lane separation
 
 ## Current boundary
 
@@ -67,9 +73,11 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
+- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/06`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
+- Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, local save/load command, devtools export, product prototype, or final public runtime/devtools/transport ABI.
+- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, local save/load command, full devtools export, product prototype, or final public runtime/devtools/transport ABI.

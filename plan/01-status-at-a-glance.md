@@ -27,6 +27,7 @@
 - `scripts/sugoroku_world_samples.py` が logical multi-place runtime attachment emulator を持つ
 - `scripts/projection_codegen_samples.py` と `samples/generated/projection-placement/manifest.json` が projection/codegen current first-cut の committed generated bridge evidence と live-anchor alignment floor を持つ
 - `scripts/visual_debugger_viewer_samples.py` が helper/runtime typed visualization inventory を typed public prototype inventory へ正規化する current first-cut surface を持つ
+- `scripts/practical_alpha1_export_devtools.py` が exact practical local-runtime / transport reports を distinct practical devtools export bundle へ正規化する current first-cut surface を持つ
 - `scripts/alpha_visualization_samples.py` が alpha-local `VIS-01/02/03/05/06/07/08/10/11` を dedicated Stage-E subset runner として actualize し、`stage-e-closeout` で current-scope Stage E closeout surface を与えている
 - `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` が repository memory / report / dashboard 側の baseline check になる
 

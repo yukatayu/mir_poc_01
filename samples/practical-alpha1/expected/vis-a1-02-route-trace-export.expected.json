@@ -1,0 +1,195 @@
+{
+  "sample_id": "VIS-A1-02",
+  "bundle_kind": "route_trace_export",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-02",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-transport",
+      "sample_id": "TR-A1-06",
+      "carrier_scope": "practical-alpha1-transport-floor",
+      "surface_kind": "practical_alpha1_nonfinal_transport_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "observer_route_trace",
+      "panel_kind": "route_trace",
+      "label": "practical:observer-route-trace",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-06"
+      ],
+      "focus_refs": [
+        "tr-a1-06_request#1",
+        "delivery_receipt:tr-a1-06_request#1"
+      ],
+      "notes": [
+        "observer-safe route trace stays typed and redacted",
+        "non-final practical transport report is the only source"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "tr-a1-06_request#1",
+      "telemetry_kind": "route_hop",
+      "label": "practical:route-hop",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-06"
+      ],
+      "channel": "ParticipantPlace[Alice] -> GamePlace[SugorokuGame#1]",
+      "value_summary": "delivery_requested",
+      "notes": [
+        "hop_index=1",
+        "payload_kind=observer_route_trace_probe"
+      ]
+    },
+    {
+      "telemetry_id": "delivery_receipt:tr-a1-06_request#1",
+      "telemetry_kind": "route_hop",
+      "label": "practical:route-hop",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-06"
+      ],
+      "channel": "GamePlace[SugorokuGame#1] -> ParticipantPlace[Alice]",
+      "value_summary": "accepted",
+      "notes": [
+        "hop_index=2",
+        "payload_kind=dispatch_receipt"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "observer_route_trace"
+  ],
+  "panel_kinds": [
+    "route_trace"
+  ],
+  "telemetry_ids": [
+    "tr-a1-06_request#1",
+    "delivery_receipt:tr-a1-06_request#1"
+  ],
+  "telemetry_kinds": [
+    "route_hop"
+  ],
+  "retention_scopes": [
+    "helper_local_ephemeral"
+  ],
+  "redaction_policies": [
+    "observer_safe_route_trace"
+  ],
+  "export_sections": {
+    "observer_route_trace": [
+      {
+        "hop_index": 1,
+        "envelope_id": "tr-a1-06_request#1",
+        "from_place": "ParticipantPlace[Alice]",
+        "to_place": "GamePlace[SugorokuGame#1]",
+        "transport_medium": "loopback_tcp",
+        "transport_seam": "network_transport_lane",
+        "payload_kind": "observer_route_trace_probe",
+        "dispatch_outcome": "delivery_requested",
+        "authority": "ObserveRouteTrace(NetworkTransportLane)",
+        "retention_scope": "helper_local_ephemeral",
+        "witness_ref_count": 1,
+        "auth_lane_present": false,
+        "redaction": "observer_safe_route_trace"
+      },
+      {
+        "hop_index": 2,
+        "envelope_id": "delivery_receipt:tr-a1-06_request#1",
+        "from_place": "GamePlace[SugorokuGame#1]",
+        "to_place": "ParticipantPlace[Alice]",
+        "transport_medium": "loopback_tcp",
+        "transport_seam": "network_transport_lane",
+        "payload_kind": "dispatch_receipt",
+        "dispatch_outcome": "accepted",
+        "authority": "ObserveRouteTrace(NetworkTransportLane)",
+        "retention_scope": "helper_local_ephemeral",
+        "witness_ref_count": 1,
+        "auth_lane_present": false,
+        "redaction": "observer_safe_route_trace"
+      }
+    ],
+    "message_envelope_lanes": [
+      "envelope_id",
+      "from_place",
+      "to_place",
+      "transport",
+      "transport_medium",
+      "transport_seam",
+      "payload_kind",
+      "payload_ref",
+      "principal_claim",
+      "auth_evidence",
+      "emitter_principal",
+      "membership_epoch",
+      "member_incarnation",
+      "freshness_checks",
+      "capability_requirements",
+      "authorization_checks",
+      "witness_refs",
+      "dispatch_outcome",
+      "notes"
+    ],
+    "transport_plan_scope": "practical-alpha1-transport-plan-floor",
+    "transport_surface": "local_tcp",
+    "world_membership_epoch": 0,
+    "world_active_participants": [
+      "Alice",
+      "Bob"
+    ]
+  },
+  "what_it_proves": [
+    "observer-safe route trace can be exported from the exact practical transport report",
+    "route trace remains typed and redacted at the export boundary",
+    "transport report stays distinct from the devtools bundle that consumes it"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion",
+    "auth-lane/redacted observer completion beyond the exact route-trace report",
+    "full membership timeline completion"
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "sample_id": "VIS-A1-06",
+  "bundle_kind": "redacted_observer_view",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-06",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-transport",
+      "sample_id": "TR-A1-07",
+      "carrier_scope": "practical-alpha1-transport-floor",
+      "surface_kind": "practical_alpha1_nonfinal_transport_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "redacted_observer_route",
+      "panel_kind": "redacted_observer_view",
+      "label": "practical:redacted-observer-route",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-07"
+      ],
+      "focus_refs": [
+        "tr-a1-07_request#1",
+        "delivery_receipt:tr-a1-07_request#1"
+      ],
+      "notes": [
+        "auth lane remains separate from transport metadata",
+        "route trace omits raw auth payloads"
+      ]
+    },
+    {
+      "panel_id": "auth_lane_summary",
+      "panel_kind": "auth_lane",
+      "label": "practical:auth-lane-summary",
+      "authority": "InspectAuthLane(NetworkTransportLane)",
+      "redaction": "binding_summary_only",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-07"
+      ],
+      "focus_refs": [
+        "route=GamePlace[SugorokuGame#1]",
+        "transport=network_transport_lane"
+      ],
+      "notes": [
+        "auth lane preserved separately from transport metadata"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "tr-a1-07_request#1",
+      "telemetry_kind": "observer_route_hop",
+      "label": "practical:redacted-observer-hop",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-07"
+      ],
+      "channel": "ParticipantPlace[Alice] -> GamePlace[SugorokuGame#1]",
+      "value_summary": "delivery_requested",
+      "notes": [
+        "hop_index=1",
+        "auth_lane_present=True"
+      ]
+    },
+    {
+      "telemetry_id": "delivery_receipt:tr-a1-07_request#1",
+      "telemetry_kind": "observer_route_hop",
+      "label": "practical:redacted-observer-hop",
+      "authority": "ObserveRouteTrace(NetworkTransportLane)",
+      "redaction": "observer_safe_route_trace",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-07"
+      ],
+      "channel": "GamePlace[SugorokuGame#1] -> ParticipantPlace[Alice]",
+      "value_summary": "accepted",
+      "notes": [
+        "hop_index=2",
+        "auth_lane_present=True"
+      ]
+    },
+    {
+      "telemetry_id": "auth_lane#TR-A1-07",
+      "telemetry_kind": "auth_lane",
+      "label": "practical:auth-lane",
+      "authority": "InspectAuthLane(NetworkTransportLane)",
+      "redaction": "binding_summary_only",
+      "retention_scope": "helper_local_ephemeral",
+      "source_report_refs": [
+        "TR-A1-07"
+      ],
+      "channel": "network_transport_lane",
+      "value_summary": "subject=Alice issuer=LocalAuthService",
+      "notes": [
+        "auth lane preserved separately from transport metadata"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "redacted_observer_route",
+    "auth_lane_summary"
+  ],
+  "panel_kinds": [
+    "auth_lane",
+    "redacted_observer_view"
+  ],
+  "telemetry_ids": [
+    "tr-a1-07_request#1",
+    "delivery_receipt:tr-a1-07_request#1",
+    "auth_lane#TR-A1-07"
+  ],
+  "telemetry_kinds": [
+    "auth_lane",
+    "observer_route_hop"
+  ],
+  "retention_scopes": [
+    "helper_local_ephemeral"
+  ],
+  "redaction_policies": [
+    "binding_summary_only",
+    "observer_safe_route_trace"
+  ],
+  "export_sections": {
+    "observer_route_trace": [
+      {
+        "hop_index": 1,
+        "envelope_id": "tr-a1-07_request#1",
+        "from_place": "ParticipantPlace[Alice]",
+        "to_place": "GamePlace[SugorokuGame#1]",
+        "transport_medium": "loopback_tcp",
+        "transport_seam": "network_transport_lane",
+        "payload_kind": "auth_lane_probe",
+        "dispatch_outcome": "delivery_requested",
+        "authority": "ObserveRouteTrace(NetworkTransportLane)",
+        "retention_scope": "helper_local_ephemeral",
+        "witness_ref_count": 1,
+        "auth_lane_present": true,
+        "redaction": "observer_safe_route_trace"
+      },
+      {
+        "hop_index": 2,
+        "envelope_id": "delivery_receipt:tr-a1-07_request#1",
+        "from_place": "GamePlace[SugorokuGame#1]",
+        "to_place": "ParticipantPlace[Alice]",
+        "transport_medium": "loopback_tcp",
+        "transport_seam": "network_transport_lane",
+        "payload_kind": "dispatch_receipt",
+        "dispatch_outcome": "accepted",
+        "authority": "ObserveRouteTrace(NetworkTransportLane)",
+        "retention_scope": "helper_local_ephemeral",
+        "witness_ref_count": 1,
+        "auth_lane_present": true,
+        "redaction": "observer_safe_route_trace"
+      }
+    ],
+    "auth_lane": {
+      "auth_present": true,
+      "subject": "Alice",
+      "issuer": "LocalAuthService",
+      "bindings": [
+        "route=GamePlace[SugorokuGame#1]",
+        "transport=network_transport_lane"
+      ],
+      "preserved_separately": true,
+      "transport_lane": "network_transport_lane",
+      "notes": [
+        "auth lane preserved separately from transport metadata"
+      ]
+    },
+    "auth_evidence_lanes": [
+      "kind",
+      "subject",
+      "issuer",
+      "bindings",
+      "notes"
+    ],
+    "message_envelope_lanes": [
+      "envelope_id",
+      "from_place",
+      "to_place",
+      "transport",
+      "transport_medium",
+      "transport_seam",
+      "payload_kind",
+      "payload_ref",
+      "principal_claim",
+      "auth_evidence",
+      "emitter_principal",
+      "membership_epoch",
+      "member_incarnation",
+      "freshness_checks",
+      "capability_requirements",
+      "authorization_checks",
+      "witness_refs",
+      "dispatch_outcome",
+      "notes"
+    ],
+    "transport_plan_scope": "practical-alpha1-transport-plan-floor"
+  },
+  "what_it_proves": [
+    "redacted observer view is exportable from the exact practical auth-lane transport report",
+    "auth lane stays separate from transport metadata in the exported bundle",
+    "observer route trace remains typed and redacted at the viewer boundary"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion",
+    "full membership timeline completion",
+    "full hot-plug lifecycle completion",
+    "full fallback degradation completion",
+    "retention/on-demand completion"
+  ]
+}

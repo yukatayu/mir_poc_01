@@ -47,6 +47,13 @@
   - current actualized rows are `TR-A1-01..07`
   - `TR-A1-02` uses `samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml` to run a world server plus participant client over Docker Compose TCP
   - it is a non-final transport command and does not claim WAN/federation, save/load, devtools export, product prototype, or final public transport API
+- practical alpha-1 first devtools export floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
+  - this exercises `VIS-A1-01/02/06` over exact practical local-runtime / transport reports
+  - it consumes exact practical reports through a distinct devtools export bundle boundary
+  - current actualized rows are `VIS-A1-01/02/06`
+  - `render-html` emits a non-final static HTML viewer file over the same bundle payload
+  - it is a non-final devtools command and does not claim full devtools completion, membership timeline, hot-plug lifecycle, fallback degradation, retention/on-demand trace, save/load, product prototype, or final public viewer/telemetry API
 
 ### current-L2 helper / detached loop / support
 
@@ -78,6 +85,7 @@
   - `P-A0-13` / `P-A0-15` / `P-A0-26` は `alpha_visualization_samples.py` を widen し、`samples/alpha/visualization/` の `VIS-01/02/03/05/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の dedicated Stage-E subset runner として検証し、`stage-e-closeout` command で current-scope Stage E completion surface を与える。`VIS-04/09/12`、Stage F completion、final public viewer/telemetry API は引き続き主張しない
   - `P-A0-14` は `alpha_cut_save_load_samples.py` と `alpha_cut_save_load_checker.py` を widen し、`CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle inadmissibility row を actualize した。これは saved local state が stale membership を accepted resumed dispatch へ resurrect しないことと、useless checkpoint cycle が checker floor で inadmissible であることだけを示す。`CUT-10/12/16`、distributed/durable save/load completion、Z-cycle repair、final public ABI は主張しない
   - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py`、`P-A1-04a..c` で `practical_alpha1_attach.py` が widened されたが、final object package attach、detach runtime lifecycle、`run-docker`、save/load、viewer/product command は still later である
+  - `P-A1-06` では `practical_alpha1_export_devtools.py` を追加し、event DAG export、observer-safe route trace export、redacted observer view を distinct devtools bundle + non-final viewer surface として actualize した。membership timeline、hot-plug lifecycle、fallback degradation、retention/on-demand trace は still later である
 
 ### storage / env
 
