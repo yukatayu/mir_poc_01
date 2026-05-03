@@ -217,6 +217,12 @@ repository-memory roadmap を置く。
 - local save/load
 - devtools export
 - hands-on docs
+- current blocker after `P-A1-07`:
+  existing practical carriers can be composed honestly only up to local/Docker + layer attach + local save/load + devtools export. `custom Mir avatar runtime` and `unsupported runtime fallback` are not yet actualized in the practical root.
+- current recommendation:
+  do not promote `P-A1-08` under the current wording. Either
+  - recut it as a **first practical product prototype preview** over one world package plus companion layer/object packages and a thin aggregate bundle surface, with avatar scope narrowed to `HP-A1-06` placeholder object preview companion evidence, or
+  - cut practical `AV-A1-*` carriers first, then return to the product prototype package.
 
 ## current recommendation on implementation order
 
@@ -254,7 +260,7 @@ current reading after `P-A1-07`:
   `checked package -> runtime plan`, plus `one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
 - `P-A1-07` actualized `SL-A1-01/02` as local-only roundtrip resume and stale-membership non-resurrection first-floor rows
 - `CHK-CUT-01` is reused in `P-A1-07` only as an orphan-receive checker guard, not as full consistent-cut or `Z-cycle` completion
-- `P-A1-08` is the promoted next package after the `P-A1-07` first floor
+- `P-A1-08` current wording is blocked for recut after the `P-A1-07` first floor
 
 ## readiness reading
 

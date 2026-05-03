@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-03 23:18 JST
+最終更新: 2026-05-03 23:32 JST
 
 ## この文書について
 
@@ -17,6 +17,8 @@
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
 - `P-A1-07` first practical local save/load floor は 2026-05-03 23:18 JST に close しました:
   `crates/mir-ast::practical_alpha1_save_load_plan`、`crates/mir-runtime::practical_alpha1_save_load`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`scripts/tests/test_practical_alpha1_save_load.py`、`samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`、`samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`、exact expected `sl-a1-*.expected.json`、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で save/load path を local-runtime report 直列化へ寄せず、one exact practical local-runtime frontier と distinct save-load plan に依存する saved local frontier + non-final save-load report に narrow した。`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を actualize し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast practical_alpha1_checker -- --nocapture`、`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture`、`python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-02 --format json`、`python3 scripts/practical_alpha1_save_load.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs` が pass した。これは first practical local save/load floor であり、distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、final public save-load ABI はまだ claim しない。
+- `P-A1-08` practical product prototype wording は 2026-05-03 23:32 JST に recut-required blocker として固定しました:
+  reviewer 3 系統の一致 finding は、current practical carriers だけで safe に compose できるのは local/Docker + layer attach + local save/load + devtools export の thin bundle までであり、`specs/18` / `plan/44` が product prototype に要求している `custom Mir avatar runtime` と `unsupported runtime fallback` は current practical root に未actualize だというものです。現行 wording のままでは overclaim になるため、`P-A1-08` は promote せず、`P-A1-08` を `first practical product prototype preview` へ recut するか、practical `AV-A1-*` carrier を先に作るかの user decision を待ちます。docs-only blocker sync として `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` を通し、`plan/44` / `Documentation.md` / snapshot docs に反映しました。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -26,7 +28,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-08` practical product prototype が next gate である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `P-A1-08` current wording が recut-required で止まっている。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -75,13 +77,13 @@
 - Large stage:
   `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 100% transport practical E2E closeout; `PA1-6` 45% first practical devtools export floor closed; `PA1-7` 45% first practical local save/load floor closed
 - Concrete phase:
-  Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、first practical devtools export floor、first practical local save/load floor are in place; next stage is `P-A1-08` practical product prototype
+  Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、first practical devtools export floor、first practical local save/load floor are in place; `P-A1-08` current wording is blocked for recut
 - Package status:
   `P-A1-07` first practical local save/load floor is the last closed package in repo state
 - Current status:
   `P-A1-07` は distinct save-load plan、saved local frontier、non-final save-load report を actualize し、`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を current admissible set に入れた。saved carrier は `runtime_snapshot` だけではなく `current_owner` / `visible_history` / `pending_envelopes = []` を保持し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定される。distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、product prototype はまだ later である。
 - Next autonomous package:
-  `P-A1-08` practical product prototype
+  blocked pending `P-A1-08` recut or prior practical avatar carrier selection
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -130,7 +132,7 @@
 | `PA1-5` / `P-A1-05` | 100% | closed | same practical package input で local TCP / Docker Compose TCP を動かし、`TR-A1-01..07` と distinct transport-plan/report carrier を exact expected reports まで揃える |
 | `PA1-6` / `P-A1-06` | 45% | first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/06`, while `VIS-A1-03/04/05/07` remain deferred |
 | `PA1-7` / `P-A1-07` | 45% | first floor closed | practical `save` / `load` command の first floor として `SL-A1-01/02`、distinct save-load plan、saved local frontier、non-final save-load report を actualizeし、`CHK-CUT-01` reuse を orphan-receive guard に限定する |
-| `PA1-8` / `P-A1-08` | 0% | pending | small product prototype を local + Docker で動かし、layer/package attach、avatar fallback、save/load、devtools export、hands-on docs を揃える |
+| `PA1-8` / `P-A1-08` | 0% | blocked for recut | current wording overclaims avatar/product lane; safe next shape is either a thin product-preview bundle or a prior practical `AV-A1-*` carrier package |
 
 ## current-scope evidence closeout map
 
@@ -179,7 +181,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `P-A1-08` practical toolchain/product prototype | repo | promoted next | bind local + Docker + hot-plug + save/load + devtools into one small product-like world package after the lower floors exist |
+| 1 | `P-A1-08` product prototype recut | repo + user | blocked for review | choose whether to recut `P-A1-08` into a thin product-preview bundle over existing carriers or to cut practical `AV-A1-*` carriers first |
 | 2 | remaining `P-A1-06` devtools observables | repo | staged later | widen from `VIS-A1-01/02/06` to `VIS-A1-03/04/05/07` only when practical evidence exists without synthetic overclaim |
 | 3 | save/load widening after `P-A1-07` | repo | staged later | reopen only when stale witness / stale lease / distributed durable save/load semantics can be added without collapsing the saved local frontier boundary |
 | 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
@@ -240,7 +242,7 @@ These are safe to do without new product decisions.
 | `P-A1-05` | transport practical E2E | closed | same practical package input now lowers to distinct practical transport-plan/report carriers and exact expected `TR-A1-01..07` reports over local TCP and Docker Compose TCP surfaces |
 | `P-A1-06` | devtools viewer | closed | first practical devtools export floor over exact practical reports, with `VIS-A1-01/02/06` actualized and `VIS-A1-03/04/05/07` deferred |
 | `P-A1-07` | local save/load command | closed | practical save/load CLI/library path with `SL-A1-01/02`, distinct save-load plan, saved local frontier, and negative stale-membership check |
-| `P-A1-08` | practical alpha product prototype | pending | one small product-like world package with local + Docker + hot-plug + save/load + devtools |
+| `P-A1-08` | practical alpha product prototype | blocked for recut | current wording overclaims avatar/product lane; next safe move is recut-to-preview or prior practical `AV-A1-*` carrier package |
 
 ## user decision blockers
 
@@ -302,13 +304,13 @@ These are safe to do without new product decisions.
 ### Blocker 7. avatar compatibility first target
 
 - overview:
-  choose whether first alpha avatar scope is placeholder-only, custom Mir avatar runtime, VRM skeleton, or VRChat-compat skeleton.
+  choose whether practical `P-A1-08` may narrow avatar scope to placeholder object preview companion evidence first, or whether `custom Mir avatar runtime` / `unsupported runtime fallback` must be actualized before any product-prototype package promotion.
 - affects:
-  `P-A0-07`, `P-A0-08`, runtime package scope, adapter policy.
+  `P-A1-08`, practical sample-root scope, runtime package scope, adapter policy, non-claim wording.
 - current recommendation:
-  `placeholder + custom Mir runtime first`, with VRM / VRChat kept as non-core skeletons.
+  if user wants continuous narrow progress, recut `P-A1-08` to a first practical product-preview bundle and keep avatar scope at `HP-A1-06` placeholder object preview companion evidence; if user wants the current `specs/18` wording literally, cut practical `AV-A1-*` carriers first.
 - reason:
-  it demonstrates the substrate without importing product-specific runtime assumptions into Mir core.
+  current practical carriers do not yet actualize `custom Mir avatar runtime` or `unsupported runtime fallback`, so promoting the product prototype package without this choice would overclaim runtime semantics.
 
 ### Blocker 8. native binary policy
 
