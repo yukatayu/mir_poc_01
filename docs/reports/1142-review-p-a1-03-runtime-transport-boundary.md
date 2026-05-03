@@ -84,6 +84,9 @@ cargo fmt --check
 git diff --check
 cargo test -p mir-runtime --test alpha_local_runtime
 python3 scripts/alpha_local_runtime_samples.py stage-b-closeout --format json
+git add docs/reports/1142-review-p-a1-03-runtime-transport-boundary.md
+git commit --no-gpg-sign -m "mirrorea: review p-a1-03 runtime boundary"
+git push origin main
 ```
 
 ## Evidence / outputs / test results
@@ -221,7 +224,8 @@ Implement `P-A1-03` by introducing a distinct runtime-plan carrier from checked 
 
 ## Commit / push status
 
-Pending at report update time. A docs-only commit/push is expected after validators pass.
+Docs-only review commit `3d3203d` (`mirrorea: review p-a1-03 runtime boundary`) was created and pushed to `origin/main`.
+This section is synchronized in a follow-up docs-only commit so the report records the actual pushed hash.
 
 ## Sub-agent session close status
 
