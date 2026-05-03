@@ -219,10 +219,12 @@ practical hot-plug family を `HP-A1-07` まで反映し、`PA1-4` closeout、`P
 
 ## Commit / push status
 
-Pending at report write.
+- Package implementation committed as `c3f0648` (`mirrorea: close p-a1-04c practical detach minimal contract`).
+- Pushed to `origin/main`.
+- This report section is synchronized in a docs-only follow-up commit after the package push.
 
 ## Sub-agent session close status
 
 - Reviewer agents were used for theory/spec, runtime/transport, docs/progress consistency, and sample/validation review.
 - Four reviewer memo reports were produced and incorporated.
-- Sessions remain open at report write and will be closed after package commit/push.
+- Reviewer sessions were closed after the package commit/push once their findings were mirrored into code, docs, and this report.
