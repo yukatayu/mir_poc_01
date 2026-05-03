@@ -17,8 +17,11 @@ Review `P-A1-03` from a maintainer/spec-editor perspective and identify concrete
 
 ## Start state / dirty state
 
-- Start state: worktree clean.
-- Dirty state during task: none introduced before report creation.
+- Start state: worktree already had a preexisting untracked report artifact:
+  - `docs/reports/1142-review-p-a1-03-runtime-transport-boundary.md`
+- Dirty state during task:
+  - this task added `docs/reports/1140-p-a1-03-runtime-plan-local-runtime-boundary-review.md`
+  - the preexisting untracked `1142` report was left untouched
 
 ## Documents consulted
 
@@ -163,7 +166,8 @@ Define the `P-A1-03` runtime-plan carrier explicitly, including which checker ou
 
 ## Commit / push status
 
-Pending at report write.
+- Commit created and pushed: `715ff07` (`docs: add p-a1-03 boundary review`)
+- Preexisting untracked file `docs/reports/1142-review-p-a1-03-runtime-transport-boundary.md` remains outside this task's commit scope.
 
 ## Sub-agent session close status
 
