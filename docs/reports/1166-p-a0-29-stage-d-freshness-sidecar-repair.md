@@ -191,7 +191,8 @@ updated the alpha-0 Stage D rows/timestamps, added report `1166` to the relevant
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit `aa78c60` (`mirrorea: close p-a0-29 stage-d freshness repair`) was pushed to `origin/main`.
+- This report status block is being finalized in a docs-only follow-up commit after the package push.
 
 ## Sub-agent session close status
 
