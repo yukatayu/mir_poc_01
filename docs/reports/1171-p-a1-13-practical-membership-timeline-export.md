@@ -181,7 +181,9 @@ last closed package, practical package map, ordered current work, and autonomous
 
 ## Commit / push status
 
-Pending at report write.
+- Main package commit: `6af893c` (`mirrorea: close p-a1-13 practical membership timeline export`)
+- Push status: pushed to `origin/main`
+- Report metadata follow-up: pending at report write; finalized in a docs-only follow-up commit after push.
 
 ## Sub-agent session close status
 
