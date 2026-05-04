@@ -88,14 +88,22 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
             bundle["what_it_does_not_prove"],
         )
 
-    def test_invalid_distributed_save_preview_uses_checker_reject(self) -> None:
+    def test_invalid_distributed_save_preview_uses_save_load_preflight_reject(self) -> None:
         bundle = runner.run_sample("PE2E-06")
+        self.assertEqual(bundle["source_reports"][0]["family"], "practical-alpha1-save-load")
+        self.assertEqual(bundle["source_reports"][0]["sample_id"], "SL-A1-03")
         self.assertEqual(
-            bundle["preview_sections"]["checker_reject"]["verdict"], "rejected"
+            bundle["preview_sections"]["save_load_preflight_reject"]["terminal_outcome"],
+            "rejected_invalid_distributed_cut_preflight",
         )
         self.assertEqual(
-            bundle["preview_sections"]["checker_reject"]["rejected_kind"],
+            bundle["preview_sections"]["save_load_preflight_reject"]["source_rejected_kind"],
             "orphan_receive",
+        )
+        self.assertFalse(
+            bundle["preview_sections"]["save_load_preflight_reject"][
+                "saved_local_frontier_emitted"
+            ]
         )
 
     def test_render_html_uses_run_sample_exact_parity(self) -> None:

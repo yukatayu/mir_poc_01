@@ -92,7 +92,7 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
     },
     {
         "sample_id": "PE2E-06",
-        "summary": "preview invalid distributed save rejection through the explicit checker guard",
+        "summary": "preview invalid distributed save rejection through the exact save-load preflight reject report",
         "preview_dir": "samples/practical-alpha1/previews/pe2e-a1-06-invalid-distributed-save-rejected",
         "expected_report": "samples/practical-alpha1/expected/pe2e-a1-06-invalid-distributed-save-rejected.expected.json",
         "bundle_kind": "invalid_distributed_save_rejected_preview",
@@ -570,41 +570,50 @@ def _invalid_distributed_save_reject_bundle(
 ) -> dict[str, Any]:
     _expect_id(preview, "PE2E-06")
     _expect_kind(preview, "invalid_distributed_save_rejected_preview")
-    _required_source_reports(preview, ["CHK-CUT-01"])
-    checker_package = _resolve_preview_package(preview_file, preview["checker_package"])
-    checker_report = _checker_report("CHK-CUT-01")
-    rejected = checker_report["rejected_rows"][0]
-    diagnostic = checker_report["diagnostics"][0]
+    _required_source_reports(preview, ["SL-A1-03"])
+    save_load_package = _resolve_preview_package(preview_file, preview["save_load_package"])
+    save_load_report = _save_load_report("SL-A1-03")
+    source_checker_report = save_load_report["source_checker_report"]
     payload = _base_bundle(
         sample_id="PE2E-06",
         bundle_kind="invalid_distributed_save_rejected_preview",
-        source_packages=[_package_ref(checker_package, "checker_package")],
+        source_packages=[_package_ref(save_load_package, "save_load_package")],
         source_reports=[
             _source_report_ref(
-                family="practical-alpha1-checker",
-                sample_id="CHK-CUT-01",
-                carrier_scope=checker_report["checker_scope"],
-                surface_kind=checker_report["surface_kind"],
+                family="practical-alpha1-save-load",
+                sample_id="SL-A1-03",
+                carrier_scope=save_load_report["save_load_scope"],
+                surface_kind=save_load_report["surface_kind"],
             )
         ],
     )
     payload["preview_sections"] = {
-        "checker_reject": {
-            "package_id": checker_report["package_id"],
-            "verdict": checker_report["verdict"],
-            "family": checker_report["family"],
-            "rejected_kind": rejected["kind"],
-            "diagnostic_message": diagnostic["message"],
+        "save_load_preflight_reject": {
+            "package_id": save_load_report["package_id"],
+            "terminal_outcome": save_load_report["terminal_outcome"],
+            "save_load_scope": save_load_report["save_load_scope"],
+            "preflight_scope": save_load_report["preflight_scope"],
+            "checker_guard_refs": save_load_report["checker_guard_refs"],
+            "source_checker_sample_id": source_checker_report["sample_id"],
+            "source_rejected_kind": source_checker_report["rejected_kind"],
+            "diagnostic_message": source_checker_report["diagnostic_message"],
+            "saved_local_frontier_emitted": save_load_report[
+                "saved_local_frontier_emitted"
+            ],
+            "distributed_save_load_claimed": save_load_report[
+                "distributed_save_load_claimed"
+            ],
         }
     }
     payload["what_it_proves"] = [
         "invalid distributed save/load remains an explicit rejected practical preview row",
-        "the preview reuses the exact checker guard rather than inferring success from missing runtime evidence",
-        "product-preview composition can include a negative toolchain result without overclaiming distributed save/load support",
+        "the preview consumes the exact save-load preflight reject row rather than bypassing the widened save/load lane",
+        "product-preview composition can include a negative save/load result without collapsing the runtime-backed saved-frontier branch",
     ]
     payload["what_it_does_not_prove"] = list(COMMON_NON_CLAIMS) + [
         "distributed durable save/load",
         "runtime distributed checkpoint execution",
+        "saved local frontier build for an invalid distributed cut",
         "full consistent-cut completion",
     ]
     return payload

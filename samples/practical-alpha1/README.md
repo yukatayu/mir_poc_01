@@ -32,6 +32,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - `P-A1-16` widens the same practical local save/load cut here:
   `SL-A1-03` is an exact checker-backed save-load preflight reject row over invalid distributed-cut evidence, and does not build a saved local frontier or attempt runtime execution.
+- `P-A1-17` realigns the same practical product-preview cut here:
+  `PE2E-06` consumes the exact `SL-A1-03` save-load preflight reject report rather than direct checker evidence, and still does not claim runtime execution or distributed durability.
 - `P-A1-10` adds the first practical avatar preview companion cut here:
   `scripts/practical_alpha1_avatar.py` emits exact expected `AV-A1-01/02/03` reports over checked package input, a distinct hotplug plan, and exact hot-plug source reports.
 - `P-A1-08` adds the first practical product-preview cut here:
@@ -106,7 +108,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `PE2E-03`: debug-layer companion preview
   - `PE2E-04`: placeholder object companion preview
   - `PE2E-05`: local save/load continue preview
-  - `PE2E-06`: invalid distributed save rejected preview
+  - `PE2E-06`: invalid distributed save rejected preview over exact `SL-A1-03` save-load preflight reject evidence
   - `PE2E-07`: devtools viewer preview
   - `PE2E-08`: custom-avatar companion preview over `AV-A1-02`
   - `PE2E-09`: unsupported-runtime visible fallback companion preview over `AV-A1-03`
@@ -134,6 +136,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
 - `SL-A1-03` is a distinct checker-backed save-load preflight reject row; it lowers an exact rejected checker report into a save-load preflight report and does not build a saved local frontier.
 - Preview manifests are lowered through exact practical reports, exact practical devtools bundles, and exact avatar preview companion reports before non-final product-preview bundle assembly.
+- `PE2E-06` now uses exact `SL-A1-03` save-load preflight evidence as its source authority rather than direct checker consumption.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
 - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview.

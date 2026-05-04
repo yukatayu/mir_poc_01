@@ -1,9 +1,8 @@
 {
   "preview_id": "PE2E-06",
   "preview_kind": "invalid_distributed_save_rejected_preview",
-  "checker_package": "../../packages/chk-cut-01-invalid-distributed-cut-rejected",
+  "save_load_package": "../../packages/sl-a1-03-invalid-distributed-cut-preflight",
   "required_source_reports": [
-    {"sample_id": "CHK-CUT-01"}
+    {"sample_id": "SL-A1-03"}
   ]
 }
-

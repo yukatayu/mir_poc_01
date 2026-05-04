@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-04 16:25 JST
+最終更新: 2026-05-04 17:28 JST
 
 ## この文書について
 
@@ -37,6 +37,8 @@
   `VIS-A1-07` を actualize し、exact `SL-A1-02` save-load report に widened した `retention_scope = report_local_inventory` と `retained_artifacts` catalog を source に、retained frontier / stale-membership reject artifact への hit/miss query trace を distinct devtools bundle と non-final viewer surface へ下ろしました。`python3 scripts/practical_alpha1_save_load.py check-all --format json`、`python3 scripts/practical_alpha1_export_devtools.py check-all --format json`、`closeout --format json`、`render-html VIS-A1-07 --format json`、`cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture`、`python3 -m unittest scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` を通した。これは report-local retention query observability widening に限り、durable retained-artifact service、cross-session/remote retrieval、retention expiry lifecycle、distributed durable save/load completion は actualize していない。
 - `P-A1-16` practical invalid distributed-cut save-load preflight は 2026-05-04 16:48 JST に close しました:
   `scripts/practical_alpha1_save_load.py` を widen し、`SL-A1-03` を exact rejected `CHK-CUT-01` checker report から distinct save-load preflight reject report を組み立てる row として actualize した。runtime-backed branch `SL-A1-01/02` は one exact practical local-runtime frontier と distinct save-load plan から saved local frontier と non-final save-load report を組み立てるまま維持し、preflight branch `SL-A1-03` は runtime execution や saved local frontier build を行わない。`python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json`、`run SL-A1-02 --format json`、`run SL-A1-03 --format json`、`check-all --format json`、`closeout --format json`、`python3 scripts/practical_alpha1_product_preview.py run PE2E-06 --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは widened practical local save/load first floor に限り、stale witness / stale lease non-resurrection completion、distributed durable save/load、queue/channel/transport persistence、same-session runtime execution はまだ claim しない。
+- `P-A1-17` practical save-load preview carrier alignment は 2026-05-04 17:28 JST に close しました:
+  `scripts/practical_alpha1_product_preview.py`、`samples/practical-alpha1/previews/pe2e-a1-06-invalid-distributed-save-rejected/preview.json`、exact expected `pe2e-a1-06-invalid-distributed-save-rejected.expected.json` を narrow に realign し、`PE2E-06` が direct checker evidence ではなく exact `SL-A1-03` save-load preflight reject report を consume するよう揃えた。これにより product-preview lane は invalid distributed save rejected preview の source authority を widened save/load lane 側へ戻しつつ、runtime-backed `SL-A1-01/02` saved-frontier branch と checker-backed `SL-A1-03` preflight branch の separation を保った。`python3 scripts/practical_alpha1_save_load.py run SL-A1-03 --format json`、`check-all --format json`、`python3 scripts/practical_alpha1_product_preview.py run PE2E-06 --format json`、`check-all --format json`、`closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_product_preview scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは exact source-carrier alignment に限り、runtime distributed checkpoint execution、broader save/load semantics、same-session runtime execution はまだ claim しない。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -46,7 +48,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` / `P-A1-15` / `P-A1-16` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では `PE2E-06` source-carrier alignment か stale witness / stale lease non-resurrection widening が next reopen condition である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` / `P-A1-15` / `P-A1-16` / `P-A1-17` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では broader save/load widening か同程度に narrow な exact-evidence widening が next reopen condition である。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -97,11 +99,11 @@
 - Concrete phase:
   Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、widened practical devtools export floor、first practical local save/load floor、first practical product-preview floor、first practical avatar preview companion floor are in place; same-session product runtime and later devtools/save-load widening remain open
 - Package status:
-  `P-A1-16` practical invalid distributed-cut save-load preflight is the last closed package in repo state
+  `P-A1-17` practical save-load preview carrier alignment is the last closed package in repo state
 - Current status:
-  `P-A1-16` により save/load lane が `SL-A1-03` exact checker-backed preflight reject を持つ widened first floor まで進んだ。runtime-backed `SL-A1-01/02`、`P-A1-15` の `VIS-A1-07`、`P-A1-13` の `VIS-A1-03`、`P-A1-11` の `PE2E-08/09`、`P-A1-08` の `PE2E-01..07`、`P-A1-10` の `AV-A1-01/02/03`、`P-A1-09` の `VIS-A1-04`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは distributed durable membership timeline、witness/lease co-timeline、durable retained-artifact service、native avatar execution、same-session runtime attach/detach execution、unsupported-runtime execution success、full product prototype completion、full save/load completion ではない。
+  `P-A1-17` により `PE2E-06` が direct checker evidence ではなく exact `SL-A1-03` save-load preflight reject report を consume するよう揃った。runtime-backed `SL-A1-01/02`、`P-A1-15` の `VIS-A1-07`、`P-A1-13` の `VIS-A1-03`、`P-A1-11` の `PE2E-08/09`、`P-A1-08` の `PE2E-01..07`、`P-A1-10` の `AV-A1-01/02/03`、`P-A1-09` の `VIS-A1-04`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは distributed durable membership timeline、witness/lease co-timeline、durable retained-artifact service、native avatar execution、same-session runtime attach/detach execution、unsupported-runtime execution success、full product prototype completion、full save/load completion ではない。
 - Next autonomous package:
-  safe next package is `PE2E-06` source-carrier alignment only if exact `SL-A1-03` preflight evidence can replace direct checker consumption without collapsing the saved-local-frontier boundary
+  no safe `P-A1-18` is promoted yet; reopen only when broader save/load widening or another equally narrow exact-evidence package can be stated without collapsing the saved-local-frontier boundary
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -150,13 +152,14 @@
 | `PA1-5` / `P-A1-05` | 100% | closed | same practical package input で local TCP / Docker Compose TCP を動かし、`TR-A1-01..07` と distinct transport-plan/report carrier を exact expected reports まで揃える |
 | `PA1-6` / `P-A1-06` + `P-A1-09` + `P-A1-12` + `P-A1-13` + `P-A1-15` | 100% | widened first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/03/04/05/06/07`, with `VIS-A1-07` narrowed to report-local retained-artifact catalog + hit/miss query trace only |
 | `PA1-7` / `P-A1-07` + `P-A1-16` | 100% | widened first floor closed | practical `save` / `load` command の widened first floor として runtime-backed `SL-A1-01/02`、checker-backed preflight `SL-A1-03`、distinct save-load plan、saved local frontier、non-final save-load report、distinct preflight reject report を actualizeし、`CHK-CUT-01` reuse を orphan-receive guard に限定する |
-| `PA1-8` / `P-A1-08` + `P-A1-10` + `P-A1-11` | 80% | widened practical product-preview floor + avatar companion floors closed | `PE2E-01..09` now consume exact practical reports/devtools bundles and exact `AV-A1-02/03` avatar preview reports while `AV-A1-01/02/03` remain a distinct avatar-preview companion floor; same-session product runtime and full product completion remain later |
+| `PA1-8` / `P-A1-08` + `P-A1-10` + `P-A1-11` + `P-A1-17` | 80% | widened practical product-preview floor + avatar companion floors closed | `PE2E-01..09` now consume exact practical reports/devtools bundles, `PE2E-06` exact `SL-A1-03` save-load preflight evidence, and exact `AV-A1-02/03` avatar preview reports while `AV-A1-01/02/03` remain a distinct avatar-preview companion floor; same-session product runtime and full product completion remain later |
 | `P-A1-10` | 100% | closed | exact hot-plug source reports plus checked package input actualize `AV-A1-01/02/03` as a distinct avatar-preview companion floor without claiming native execution or final avatar ABI |
 | `P-A1-11` | 100% | closed | exact avatar preview reports widen `PE2E-08/09` as thin product-preview companion bundles without claiming native execution, same-session runtime attachment, or unsupported-runtime execution success |
 | `P-A1-12` | 100% | closed | exact avatar preview fallback evidence widens `VIS-A1-05` as a devtools fallback degradation export without claiming native execution, unsupported-runtime execution success, same-session runtime attachment, or full devtools completion |
 | `P-A1-13` | 100% | closed | exact save-load evidence widens `VIS-A1-03` as a devtools membership timeline export without claiming distributed durable timeline, witness/lease co-timeline, or full devtools completion |
 | `P-A1-15` | 100% | closed | exact save-load retained-artifact evidence widens `VIS-A1-07` as a report-local retention-query export without claiming durable retained-artifact service, remote retrieval, expiry lifecycle, or full devtools/save-load completion |
 | `P-A1-16` | 100% | closed | exact rejected checker evidence widens the save/load lane with `SL-A1-03` as a distinct preflight reject row without claiming runtime execution, saved-frontier build, distributed durable save/load, or full save/load completion |
+| `P-A1-17` | 100% | closed | exact `SL-A1-03` save-load preflight evidence realigns `PE2E-06` away from direct checker consumption without claiming runtime distributed checkpoint execution, broader save/load semantics, or same-session product runtime |
 
 ## current-scope evidence closeout map
 
@@ -206,12 +209,11 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | `PE2E-06` source-carrier alignment after `P-A1-16` | repo | staged next | reopen only when exact `SL-A1-03` preflight evidence can replace direct checker consumption without broadening runtime execution semantics |
-| 2 | broader save/load widening after `P-A1-16` | repo | staged later | reopen only when stale witness / stale lease, or other broader save/load semantics can be added without collapsing the saved local frontier boundary |
-| 3 | same-session product runtime semantics beyond `PE2E-01..09` | repo | staged later | do not widen product-preview beyond thin exact-evidence bundles until runtime semantics can be added without collapsing companion preview or fallback rows |
-| 4 | remaining exact-evidence widenings | repo | staged later | reopen only when a new row can be closed without inventing public/runtime semantics |
-| 5 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
-| 6 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
+| 1 | broader save/load widening after `P-A1-17` | repo | not yet promoted | reopen only when stale witness / stale lease, or other broader save/load semantics can be added without collapsing the saved local frontier boundary |
+| 2 | same-session product runtime semantics beyond `PE2E-01..09` | repo | staged later | do not widen product-preview beyond thin exact-evidence bundles until runtime semantics can be added without collapsing companion preview or fallback rows |
+| 3 | remaining exact-evidence widenings | repo | staged later | reopen only when a new row can be closed without inventing public/runtime semantics |
+| 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
+| 5 | `U1` actual commitment | user + repo | later | actual choices recorded for packaging, host target, first shipped public surface, final catalog breadth |
 | 7 | maintenance / dashboard freshness | repo | active | keep practical/evidence split wording and validation anchors current while package line advances |
 
 ## self-driven maintenance tasks

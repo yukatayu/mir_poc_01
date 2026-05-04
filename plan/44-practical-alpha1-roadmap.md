@@ -263,7 +263,7 @@ repository-memory roadmap を置く。
   - `PE2E-03` debug-layer companion preview
   - `PE2E-04` placeholder object companion preview
   - `PE2E-05` local save/load continue preview
-  - `PE2E-06` invalid distributed save rejected preview
+  - `PE2E-06` invalid distributed save rejected preview over exact `SL-A1-03` preflight evidence
   - `PE2E-07` devtools viewer preview
   - `PE2E-08` custom-avatar companion preview
   - `PE2E-09` unsupported-runtime visible fallback companion preview
@@ -442,8 +442,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-16`:
-  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, devtools widening consumes `SL-A1-02` through both `VIS-A1-03` membership timeline export and `VIS-A1-07` report-local retention query export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export, and save/load widening now consumes exact rejected `CHK-CUT-01` through `SL-A1-03` distinct preflight reject evidence; same-session runtime completion remains later
+- current promoted line after `P-A1-17`:
+  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles and `SL-A1-03` through `PE2E-06` invalid distributed save rejected preview, devtools widening consumes `SL-A1-02` through both `VIS-A1-03` membership timeline export and `VIS-A1-07` report-local retention query export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export, and save/load widening consumes exact rejected `CHK-CUT-01` through `SL-A1-03` distinct preflight reject evidence; same-session runtime completion remains later
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -456,5 +456,5 @@ but should not require practical runner scripts before they are added.
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on `PE2E-06` source-carrier alignment, broader save-load widening, same-session runtime semantics, or an equally narrow remaining exact-evidence widening
+  - reopen next on broader save-load widening, same-session runtime semantics, or an equally narrow remaining exact-evidence widening
 - queue authority remains `progress.md` / `tasks.md`

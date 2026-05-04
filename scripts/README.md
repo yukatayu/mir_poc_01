@@ -80,6 +80,7 @@
   - current actualized rows are `PE2E-01..09`
   - `render-html` emits a non-final static HTML preview over the same exact bundle payloads
   - `PE2E-04` is narrowed to `HP-A1-06` placeholder object preview companion evidence only
+  - `PE2E-06` consumes exact `SL-A1-03` save-load preflight reject evidence rather than direct checker evidence
   - `PE2E-08` consumes `AV-A1-02` as a custom-avatar companion preview bundle with `native_execution_performed = false`
   - `PE2E-09` consumes `AV-A1-03` as an unsupported-runtime visible fallback companion preview bundle while the source avatar lane remains rejected
   - it is a non-final product-preview command and does not claim native execution, same-session runtime attach/detach execution, unsupported-runtime execution success, active runnable-root promotion, or final public CLI / viewer / transport / save-load / package-avatar API

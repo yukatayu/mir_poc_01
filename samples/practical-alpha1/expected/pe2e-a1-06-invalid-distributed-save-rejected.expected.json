@@ -8,34 +8,41 @@
   "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
   "source_packages": [
     {
-      "role": "checker_package",
-      "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
+      "role": "save_load_package",
+      "package_id": "sl-a1-03-invalid-distributed-cut-preflight",
       "package_kind": "world",
-      "front_door_entry": "samples/practical-alpha1/packages/chk-cut-01-invalid-distributed-cut-rejected/package.mir.json",
+      "front_door_entry": "samples/practical-alpha1/packages/sl-a1-03-invalid-distributed-cut-preflight/package.mir.json",
       "front_door_mode": "package.mir.json directory_or_file_loader"
     }
   ],
   "source_reports": [
     {
-      "family": "practical-alpha1-checker",
-      "sample_id": "CHK-CUT-01",
-      "carrier_scope": "practical-alpha1-checker-floor",
-      "surface_kind": "practical_alpha1_nonfinal_checker_report"
+      "family": "practical-alpha1-save-load",
+      "sample_id": "SL-A1-03",
+      "carrier_scope": "practical-alpha1-save-load-floor",
+      "surface_kind": "practical_alpha1_nonfinal_save_load_preflight_report"
     }
   ],
   "preview_sections": {
-    "checker_reject": {
-      "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
-      "verdict": "rejected",
-      "family": "cut_predicate",
-      "rejected_kind": "orphan_receive",
-      "diagnostic_message": "distributed cut includes a receive without its send predecessor"
+    "save_load_preflight_reject": {
+      "package_id": "sl-a1-03-invalid-distributed-cut-preflight",
+      "terminal_outcome": "rejected_invalid_distributed_cut_preflight",
+      "save_load_scope": "practical-alpha1-save-load-floor",
+      "preflight_scope": "practical-alpha1-save-load-preflight-floor",
+      "checker_guard_refs": [
+        "CHK-CUT-01"
+      ],
+      "source_checker_sample_id": "CHK-CUT-01",
+      "source_rejected_kind": "orphan_receive",
+      "diagnostic_message": "distributed cut includes a receive without its send predecessor",
+      "saved_local_frontier_emitted": false,
+      "distributed_save_load_claimed": false
     }
   },
   "what_it_proves": [
     "invalid distributed save/load remains an explicit rejected practical preview row",
-    "the preview reuses the exact checker guard rather than inferring success from missing runtime evidence",
-    "product-preview composition can include a negative toolchain result without overclaiming distributed save/load support"
+    "the preview consumes the exact save-load preflight reject row rather than bypassing the widened save/load lane",
+    "product-preview composition can include a negative save/load result without collapsing the runtime-backed saved-frontier branch"
   ],
   "what_it_does_not_prove": [
     "final public product runtime",
@@ -43,6 +50,7 @@
     "final public CLI or viewer API",
     "distributed durable save/load",
     "runtime distributed checkpoint execution",
+    "saved local frontier build for an invalid distributed cut",
     "full consistent-cut completion"
   ]
 }

@@ -405,7 +405,8 @@ full product prototype completion ではなく、
 - avatar semantics の source authority は引き続き
   `AV-A1-01/02/03` distinct avatar-preview companion floor に置く
 - `PE2E-06` は invalid distributed save/load runtime execution ではなく、
-  explicit checker reject preview に留まる
+  exact `SL-A1-03` save-load preflight reject report を consume する
+  explicit rejected preview に留まる
 - `PE2E-07` は exact devtools bundles の viewer-openability preview であり、
   final public viewer API ではない
 - current floor は monolithic same-session product runtime execution を意味しない
