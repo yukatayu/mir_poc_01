@@ -1,0 +1,78 @@
+{
+  "surface_kind": "practical_alpha1_nonfinal_avatar_preview_report",
+  "scope_kind": "alpha_local",
+  "avatar_scope": "practical-alpha1-avatar-preview-floor",
+  "hotplug_scope": "practical-alpha1-hotplug-floor",
+  "hotplug_plan_scope": "practical-alpha1-hotplug-plan-floor",
+  "sample_id": "AV-A1-02",
+  "package_id": "av-a1-02-custom-mir-avatar-runtime",
+  "package_kind": "object",
+  "attach_profile": "custom_mir_avatar_object_package",
+  "preview_kind": "custom_mir_avatar_runtime_preview",
+  "requested_runtime_route": "custom_mir_avatar_runtime",
+  "source_hotplug_terminal_outcome": "accepted_object_attach_preview",
+  "source_hotplug_reason_family": null,
+  "source_hotplug_rejection_reason_refs": [],
+  "selected_representation": "mir_humanoid_runtime_preview",
+  "fallback_representation": "static_capsule_placeholder",
+  "fallback_applied": false,
+  "fallback_reason": null,
+  "fallback_visible": true,
+  "provided_roles": [
+    "EmbodiedPresence",
+    "Renderable",
+    "Animatable",
+    "AttachmentProvider",
+    "ExpressionProvider"
+  ],
+  "active_roles": [
+    "EmbodiedPresence",
+    "Renderable",
+    "Animatable",
+    "AttachmentProvider",
+    "ExpressionProvider"
+  ],
+  "degraded_roles": [],
+  "required_host_capabilities": [
+    "AttachAvatarRuntime",
+    "HostMirAvatarVM"
+  ],
+  "available_host_capabilities": [
+    "AttachAvatarRuntime",
+    "ManageRuntimePackageRegistry",
+    "RenderPlaceholderMesh",
+    "HostMirAvatarVM"
+  ],
+  "missing_host_capabilities": [],
+  "signature_present": true,
+  "native_execution_performed": false,
+  "object_attach_claimed": false,
+  "final_avatar_abi_frozen": false,
+  "what_it_proves": [
+    "custom Mir avatar runtime route is admitted as a non-final preview",
+    "custom runtime selection stays explicit without claiming native execution"
+  ],
+  "what_it_does_not_prove": [
+    "native execution",
+    "final avatar ABI",
+    "VRM/VRChat/Unity compatibility",
+    "monolithic same-session product runtime"
+  ],
+  "retained_later_refs": [
+    "native_execution_realization",
+    "final_avatar_package_abi",
+    "same_session_runtime_attach_execution",
+    "vrm_vrchat_unity_compatibility",
+    "product_prototype_completion"
+  ],
+  "stop_lines": [
+    "do not treat the practical alpha-1 avatar preview as native execution or final avatar ABI completion",
+    "do not treat the practical alpha-1 avatar preview as successful unsupported-runtime execution",
+    "do not treat the practical alpha-1 avatar preview as an active runnable-root promotion"
+  ],
+  "limitations": [
+    "alpha-local non-final practical avatar preview floor only",
+    "limited AV-A1 practical sample families only",
+    "no native execution, final avatar ABI, or monolithic product runtime completion"
+  ]
+}

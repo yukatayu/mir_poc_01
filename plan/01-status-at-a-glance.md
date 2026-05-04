@@ -206,12 +206,13 @@
 - `P-A1-09` は closed であり、same devtools lane を `VIS-A1-04` exact-report hot-plug lifecycle export まで widen した。これは `HP-A1-01` accepted attach と `HP-A1-07` deferred detach boundary を viewer/export surface へ下ろすだけであり、detach runtime lifecycle execution や product prototype unblock を意味しない
 - `P-A1-07` は closed であり、`crates/mir-ast/src/practical_alpha1_save_load_plan.rs`、`crates/mir-runtime/src/practical_alpha1_save_load.rs`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`SL-A1-01/02` practical fixtures により checked practical package -> runtime plan と one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report の first practical local save/load floor を actualize した
 - `P-A1-08` は closed であり、`samples/practical-alpha1/previews/`、`scripts/practical_alpha1_product_preview.py`、exact expected `pe2e-a1-*.expected.json` により preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle の first practical product-preview floor を actualize した。current rows は `PE2E-01..07` に限り、`PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
+- `P-A1-10` は closed であり、`crates/mir-runtime/src/practical_alpha1_avatar.rs`、example `mir_practical_alpha1_avatar`、`scripts/practical_alpha1_avatar.py`、`AV-A1-01/02/03` practical fixtures により checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report の first practical avatar-preview companion floor を actualize した。`AV-A1-02` は non-final custom Mir avatar preview、`AV-A1-03` は rejected source hot-plug report に対する visible monotone placeholder fallback companion preview に限られる
 - `alpha-0.5` 到達要求は evidence line では既に closed している
   - `P-A0-23` の Stage B closeout が `LR-01/02` と local-only `CUT-04/17` subset を current admissible set として固定しており、2026-05-04 の focused rerun でもその読みを再確認した
   - したがって、同じ `alpha-0.5` label で残る作業は freshness / maintenance package に限られ、promoted implementation line は practical alpha-1 側に残る
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
-- current practical root の `previews/` も still non-final であり、full product prototype completion、custom Mir avatar runtime、unsupported runtime fallback、final public CLI / viewer / package-avatar ABI を意味しない
+- current practical root の `previews/` と `AV-A1-*` avatar preview reports も still non-final であり、full product prototype completion、native avatar execution、same-session product runtime、final public CLI / viewer / package-avatar ABI を意味しない
 - current promoted line は later-family blocker widening ではなく、
   source front-door / checker / reusable runtime / package / transport / devtools / local save-load / product prototype を持つ practical toolchain line へ移る
 - alpha-0 evidence line は useful prerequisite のまま維持するが、

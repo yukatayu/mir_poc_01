@@ -24,6 +24,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-04` hot-plug lifecycle export over exact practical hotplug reports, limited to attach accepted boundary + membership snapshot + deferred detach boundary.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
+- `P-A1-10` adds the first practical avatar preview companion cut here:
+  `scripts/practical_alpha1_avatar.py` emits exact expected `AV-A1-01/02/03` reports over checked package input, a distinct hotplug plan, and exact hot-plug source reports.
 - `P-A1-08` adds the first practical product-preview cut here:
   `samples/practical-alpha1/previews/` plus `scripts/practical_alpha1_product_preview.py` emit exact expected `PE2E-01..07` bundles over preview manifests, exact practical reports, and exact practical devtools bundles.
 - This front-door is non-final and does not freeze the final public grammar.
@@ -69,11 +71,17 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `packages/sl-a1-*/`
   - `SL-A1-01`: one exact local-runtime frontier is saved and resumed through a distinct save-load carrier
   - `SL-A1-02`: one exact local-runtime frontier is saved, later membership freshness advances are injected, and resumed dispatch is rejected
+- `packages/av-a1-*/`
+  - `AV-A1-01`: placeholder avatar preview over an accepted object-package hot-plug source report
+  - `AV-A1-02`: non-final custom Mir avatar preview with `mir_humanoid_runtime_preview` selected and `native_execution_performed = false`
+  - `AV-A1-03`: unsupported runtime request remains rejected at the source hot-plug report, while a visible monotone placeholder fallback preview is emitted as companion evidence
 - `expected/vis-a1-*.expected.json`
   - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
   - `VIS-A1-02`: observer-safe route trace export
   - `VIS-A1-04`: hot-plug lifecycle export over attach accepted and deferred detach boundary reports
   - `VIS-A1-06`: redacted observer view with auth-lane separation
+- `expected/av-a1-*.expected.json`
+  - exact expected non-final practical avatar preview reports over exact hot-plug source reports
 - `expected/sl-a1-*.expected.json`
   - `SL-A1-01`: local-only roundtrip resume through a saved local frontier
   - `SL-A1-02`: stale-membership non-resurrection after restore
@@ -98,15 +106,19 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
+- The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..07`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
+- Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
 - Preview manifests are lowered through exact practical reports and exact practical devtools bundles before non-final product-preview bundle assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
+- `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
+- `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, custom Mir avatar runtime, unsupported runtime fallback, full devtools export, full product prototype, or final public runtime/devtools/transport/save-load/package-avatar ABI.
+- It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, native avatar execution, same-session product runtime, full devtools export, full product prototype, or final public runtime/devtools/transport/save-load/package-avatar ABI.

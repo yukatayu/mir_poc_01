@@ -40,8 +40,11 @@ const OBJECT_ATTACHPOINT: &str = "AttachPoint[AlphaRoom#1::AvatarRuntime]";
 const OBJECT_ATTACHPOINT_CAPABILITY: &str = "ManageAttachPoint(AlphaRoom#1::AvatarRuntime)";
 const OBJECT_INSTALL_CAPABILITY: &str = "InstallRuntimePackage(AlphaRoom#1)";
 const OBJECT_REQUIRED_ATTACH_CAPABILITY: &str = "admin.attach_object_package";
-const OBJECT_RENDER_CAPABILITY: &str = "render.placeholder_avatar";
+const OBJECT_PLACEHOLDER_RENDER_CAPABILITY: &str = "render.placeholder_avatar";
+const OBJECT_CUSTOM_RENDER_CAPABILITY: &str = "render.custom_mir_avatar";
 const OBJECT_FALLBACK_REPRESENTATION: &str = "static_capsule_placeholder";
+const OBJECT_CUSTOM_RUNTIME_REPRESENTATION: &str = "mir_humanoid_runtime_preview";
+const OBJECT_CUSTOM_RUNTIME_HOST_CAPABILITY: &str = "HostMirAvatarVM";
 
 const PRACTICAL_ALPHA1_HOTPLUG_RETAINED_LATER_REFS: &[&str] = &[
     "detach_runtime_lifecycle",
@@ -63,13 +66,26 @@ const PRACTICAL_ALPHA1_HOTPLUG_LIMITATIONS: &[&str] = &[
     "no detach runtime lifecycle, Docker/local TCP, save/load, or final public ABI",
 ];
 
-const OBJECT_HOST_CAPABILITIES: &[&str] = &[
+const PLACEHOLDER_OBJECT_HOST_CAPABILITIES: &[&str] = &[
     "AttachAvatarRuntime",
     "ManageRuntimePackageRegistry",
     "RenderPlaceholderMesh",
 ];
 
-const ABSTRACT_AVATAR_ROLES: &[&str] = &["EmbodiedPresence", "Renderable"];
+const CUSTOM_OBJECT_HOST_CAPABILITIES: &[&str] = &[
+    "AttachAvatarRuntime",
+    "ManageRuntimePackageRegistry",
+    "RenderPlaceholderMesh",
+    OBJECT_CUSTOM_RUNTIME_HOST_CAPABILITY,
+];
+
+const ABSTRACT_AVATAR_ROLES: &[&str] = &[
+    "EmbodiedPresence",
+    "Renderable",
+    "Animatable",
+    "AttachmentProvider",
+    "ExpressionProvider",
+];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PracticalAlpha1HotPlugErrorKind {
@@ -190,6 +206,14 @@ struct LayerProfileBundle {
     layer_signature: mirrorea_core::LayerSignature,
 }
 
+struct ObjectAttachProfileBundle {
+    attach_profile: &'static str,
+    provided_manifest_capability: &'static str,
+    selected_representation: &'static str,
+    available_host_capabilities: &'static [&'static str],
+    attach_preview_note: &'static str,
+}
+
 struct HotPlugGateEvaluation {
     compatibility_reason_refs: Vec<String>,
     authorization_reason_refs: Vec<String>,
@@ -262,7 +286,9 @@ fn attach_practical_alpha1_package_at_path(
         })?;
 
     match attach_profile {
-        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => {
+        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage
+        | PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage
+        | PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage => {
             attach_object_package_preview(package, manifest, &plan, path)
         }
         _ => attach_layer_package(package, manifest, attach_profile, &plan, path),
@@ -392,14 +418,21 @@ fn attach_object_package_preview(
     plan: &PracticalAlpha1HotPlugPlan,
     path: &Path,
 ) -> Result<PracticalAlpha1HotPlugReport, PracticalAlpha1HotPlugError> {
-    let manifest_checks = build_object_manifest_checks(package, manifest);
-    let package_admission_checks = build_object_package_admission_checks(package, manifest);
+    let profile = object_attach_profile_bundle(
+        manifest
+            .attach_profile
+            .expect("object package previews always require attach_profile"),
+    );
+    let manifest_checks = build_object_manifest_checks(package, manifest, &profile);
+    let package_admission_checks =
+        build_object_package_admission_checks(package, manifest, &profile);
     let principal_claim = build_principal_claim(plan, "AttachPointAdministrator")?;
-    let mut shell = build_object_attach_shell().map_err(|error| PracticalAlpha1HotPlugError {
-        kind: PracticalAlpha1HotPlugErrorKind::Runtime,
-        path: path.to_path_buf(),
-        detail: error.to_string(),
-    })?;
+    let mut shell =
+        build_object_attach_shell(&profile).map_err(|error| PracticalAlpha1HotPlugError {
+            kind: PracticalAlpha1HotPlugErrorKind::Runtime,
+            path: path.to_path_buf(),
+            detail: error.to_string(),
+        })?;
     apply_pre_attach_membership_advances(&mut shell, &plan.pre_attach_membership_advances)
         .map_err(|error| PracticalAlpha1HotPlugError {
             kind: PracticalAlpha1HotPlugErrorKind::Runtime,
@@ -437,7 +470,7 @@ fn attach_object_package_preview(
     })?;
 
     let object_attach_preview = if gate.accepted {
-        Some(build_object_attach_preview(package, manifest))
+        Some(build_object_attach_preview(package, manifest, &profile))
     } else {
         None
     };
@@ -911,18 +944,23 @@ fn build_layer_manifest_checks(
 fn build_object_manifest_checks(
     package: &PracticalAlpha1Package,
     manifest: &PracticalAlpha1PackageManifest,
+    profile: &ObjectAttachProfileBundle,
 ) -> Vec<PracticalAlpha1ManifestCheck> {
     vec![
         PracticalAlpha1ManifestCheck {
             check_name: "attach_profile_supported".to_string(),
-            passed: manifest.attach_profile
-                == Some(PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage),
+            passed: manifest
+                .attach_profile
+                .map(|value| attach_profile_name(Some(value)))
+                == Some(profile.attach_profile),
             observed: format!(
                 "attach_profile={}",
                 attach_profile_name(manifest.attach_profile)
             ),
-            reason_refs: vec![if manifest.attach_profile
-                == Some(PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage)
+            reason_refs: vec![if manifest
+                .attach_profile
+                .map(|value| attach_profile_name(Some(value)))
+                == Some(profile.attach_profile)
             {
                 "attach_profile_supported".to_string()
             } else {
@@ -948,21 +986,21 @@ fn build_object_manifest_checks(
             }],
         },
         PracticalAlpha1ManifestCheck {
-            check_name: "placeholder_render_capability_declared".to_string(),
+            check_name: "provided_avatar_capability_declared".to_string(),
             passed: manifest
                 .provided_capabilities
-                .contains(&OBJECT_RENDER_CAPABILITY.to_string()),
+                .contains(&profile.provided_manifest_capability.to_string()),
             observed: format!(
                 "provided_capabilities contains {}",
-                OBJECT_RENDER_CAPABILITY
+                profile.provided_manifest_capability
             ),
             reason_refs: vec![if manifest
                 .provided_capabilities
-                .contains(&OBJECT_RENDER_CAPABILITY.to_string())
+                .contains(&profile.provided_manifest_capability.to_string())
             {
-                "placeholder_render_capability_declared".to_string()
+                "provided_avatar_capability_declared".to_string()
             } else {
-                "placeholder_render_capability_missing".to_string()
+                "provided_avatar_capability_missing".to_string()
             }],
         },
         PracticalAlpha1ManifestCheck {
@@ -1016,8 +1054,10 @@ fn build_object_manifest_checks(
 fn build_object_package_admission_checks(
     package: &PracticalAlpha1Package,
     manifest: &PracticalAlpha1PackageManifest,
+    profile: &ObjectAttachProfileBundle,
 ) -> Vec<PackageAdmissionCheck> {
-    let available_host_capabilities: Vec<String> = OBJECT_HOST_CAPABILITIES
+    let available_host_capabilities: Vec<String> = profile
+        .available_host_capabilities
         .iter()
         .map(|value| (*value).to_string())
         .collect();
@@ -1122,13 +1162,15 @@ fn build_object_package_admission_checks(
 fn build_object_attach_preview(
     package: &PracticalAlpha1Package,
     manifest: &PracticalAlpha1PackageManifest,
+    profile: &ObjectAttachProfileBundle,
 ) -> PracticalAlpha1ObjectAttachPreview {
     PracticalAlpha1ObjectAttachPreview {
         preview_kind: "runtime_package_avatar_preview".to_string(),
-        selected_representation: OBJECT_FALLBACK_REPRESENTATION.to_string(),
+        selected_representation: profile.selected_representation.to_string(),
         provided_roles: manifest.provided_roles.clone(),
         required_host_capabilities: manifest.required_host_capabilities.clone(),
-        available_host_capabilities: OBJECT_HOST_CAPABILITIES
+        available_host_capabilities: profile
+            .available_host_capabilities
             .iter()
             .map(|value| (*value).to_string())
             .collect(),
@@ -1145,13 +1187,15 @@ fn build_object_attach_preview(
         notes: vec![
             "object package attach remains a non-final preview over runtime package admission"
                 .to_string(),
-            "placeholder representation is explicit and visible".to_string(),
+            profile.attach_preview_note.to_string(),
             "no final avatar ABI or native execution is claimed".to_string(),
         ],
     }
 }
 
-fn build_object_attach_shell() -> Result<LogicalPlaceRuntimeShell, MirroreaCoreError> {
+fn build_object_attach_shell(
+    _profile: &ObjectAttachProfileBundle,
+) -> Result<LogicalPlaceRuntimeShell, MirroreaCoreError> {
     let mut shell = LogicalPlaceRuntimeShell::default();
     shell.register_place(OBJECT_ATTACHPOINT, "AttachPoint")?;
     shell.add_initial_participant("ExampleAdmin")?;
@@ -1227,9 +1271,42 @@ fn layer_profile_bundle(profile: PracticalAlpha1AttachProfile) -> LayerProfileBu
             runtime_preview: None,
             layer_signature: incompatible_patch_signature(),
         },
-        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => {
+        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage
+        | PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage
+        | PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage => {
             panic!("object package attach profile is not a layer profile")
         }
+    }
+}
+
+fn object_attach_profile_bundle(
+    profile: PracticalAlpha1AttachProfile,
+) -> ObjectAttachProfileBundle {
+    match profile {
+        PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => ObjectAttachProfileBundle {
+            attach_profile: "placeholder_avatar_object_package",
+            provided_manifest_capability: OBJECT_PLACEHOLDER_RENDER_CAPABILITY,
+            selected_representation: OBJECT_FALLBACK_REPRESENTATION,
+            available_host_capabilities: PLACEHOLDER_OBJECT_HOST_CAPABILITIES,
+            attach_preview_note: "placeholder representation is explicit and visible",
+        },
+        PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage => ObjectAttachProfileBundle {
+            attach_profile: "custom_mir_avatar_object_package",
+            provided_manifest_capability: OBJECT_CUSTOM_RENDER_CAPABILITY,
+            selected_representation: OBJECT_CUSTOM_RUNTIME_REPRESENTATION,
+            available_host_capabilities: CUSTOM_OBJECT_HOST_CAPABILITIES,
+            attach_preview_note: "custom Mir avatar preview remains explicit and does not claim native execution",
+        },
+        PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage => {
+            ObjectAttachProfileBundle {
+                attach_profile: "custom_mir_avatar_fallback_object_package",
+                provided_manifest_capability: OBJECT_CUSTOM_RENDER_CAPABILITY,
+                selected_representation: OBJECT_FALLBACK_REPRESENTATION,
+                available_host_capabilities: PLACEHOLDER_OBJECT_HOST_CAPABILITIES,
+                attach_preview_note: "visible fallback is explicit and monotone after runtime unavailability",
+            }
+        }
+        _ => panic!("layer attach profile is not an object package attach profile"),
     }
 }
 
@@ -1241,6 +1318,12 @@ fn attach_profile_name(profile: Option<PracticalAlpha1AttachProfile>) -> &'stati
         Some(PracticalAlpha1AttachProfile::UnsafeDebugShadowLayer) => "unsafe_debug_shadow_layer",
         Some(PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage) => {
             "placeholder_avatar_object_package"
+        }
+        Some(PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage) => {
+            "custom_mir_avatar_object_package"
+        }
+        Some(PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage) => {
+            "custom_mir_avatar_fallback_object_package"
         }
         None => "<missing>",
     }

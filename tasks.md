@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-04 13:20 JST
+最終更新: 2026-05-04 14:15 JST
 
 ## この文書について
 
@@ -25,6 +25,8 @@
   `scripts/practical_alpha1_export_devtools.py` と exact expected `vis-a1-04-hotplug-lifecycle.expected.json` を追加し、`VIS-A1-04` を exact practical hotplug reports だけから assemble される widened practical devtools observable として actualize した。source は `HP-A1-01` accepted attach と `HP-A1-07` deferred detach boundary に限り、carrier split は `exact practical reports -> distinct devtools export bundle -> non-final viewer` を維持する。これは alpha-0 Stage D lifecycle closeout や detach runtime lifecycle execution ではなく、export-side hot-plug lifecycle observability widening に限る。user の stage-first 指示に従い、product lane を overclaim せず `PA1-6` を安全に reopen して widen した。
 - `P-A1-08` first practical product-preview floor は 2026-05-04 に close しました:
   `samples/practical-alpha1/previews/`、`scripts/practical_alpha1_product_preview.py`、exact expected `pe2e-a1-*.expected.json` を追加し、`preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle` の first practical product-preview floor を actualize しました。current row は `PE2E-01..07` に限り、`PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow されます。これは full practical product prototype completion ではなく、custom Mir avatar runtime、unsupported runtime fallback、same-session runtime attach/detach lifecycle execution、final public CLI / viewer / package-avatar / save-load / transport API は still later です。
+- `P-A1-10` practical avatar preview first floor は 2026-05-04 に close しました:
+  `crates/mir-runtime::practical_alpha1_avatar`、example `mir_practical_alpha1_avatar`、`scripts/practical_alpha1_avatar.py`、`samples/practical-alpha1/packages/av-a1-*/`、exact expected `av-a1-*.expected.json` を追加し、`checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report` の first practical avatar-preview companion floor を actualize しました。current row は `AV-A1-01/02/03` に限り、`AV-A1-02` は non-final custom Mir avatar preview、`AV-A1-03` は rejected source hot-plug report に対する visible monotone placeholder fallback preview に限ります。これは native execution、same-session product runtime completion、final avatar package ABI を意味しません。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -34,7 +36,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では practical avatar semantics widening と later devtools/save-load widening が next reopen point である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では product-preview が exact avatar preview reports をどう consume するかと later devtools/save-load widening が next reopen point である。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -81,15 +83,15 @@
 ## Current Practical Alpha-1 stage
 
 - Large stage:
-  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 100% transport practical E2E closeout; `PA1-6` 60% widened practical devtools export floor closed; `PA1-7` 45% first practical local save/load floor closed; `PA1-8` 60% first practical product-preview floor closed
+  `PA1-0` 100% practical-alpha-rebaseline closeout; `PA1-1` 100% alpha-source front-door closeout; `PA1-2` 100% first typed IR/checker floor closeout; `PA1-3` 100% local runtime from runtime plan closeout; `PA1-4` 100% package/hot-plug practical API closeout; `PA1-5` 100% transport practical E2E closeout; `PA1-6` 60% widened practical devtools export floor closed; `PA1-7` 45% first practical local save/load floor closed; `PA1-8` 70% first practical product-preview + avatar companion floors partially closed
 - Concrete phase:
-  Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、widened practical devtools export floor、first practical local save/load floor、first practical product-preview floor are in place; practical avatar semantics widening remains open
+  Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、widened practical devtools export floor、first practical local save/load floor、first practical product-preview floor、first practical avatar preview companion floor are in place; same-session product runtime and later devtools/save-load widening remain open
 - Package status:
-  `P-A1-08` first practical product-preview floor is the last closed package in repo state
+  `P-A1-10` practical avatar preview first floor is the last closed package in repo state
 - Current status:
-  `P-A1-08` は preview manifest と exact practical reports/devtools bundles だけから `PE2E-01..07` を束ねる first practical product-preview floor を close した。`P-A1-09` の `VIS-A1-04`、`P-A1-07` の `SL-A1-01/02`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは full product prototype completion ではなく、custom Mir avatar runtime、unsupported runtime fallback、same-session runtime attach/detach lifecycle execution、full devtools/save-load completion は later である。
+  `P-A1-10` は checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report の lane を追加し、`AV-A1-01/02/03` を close した。`P-A1-08` の `PE2E-01..07`、`P-A1-09` の `VIS-A1-04`、`P-A1-07` の `SL-A1-01/02`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは native avatar execution、same-session runtime attach/detach execution、full product prototype completion、full devtools/save-load completion ではない。
 - Next autonomous package:
-  no promoted next package at this snapshot; practical `AV-A1-02/03` carrier widening と remaining `VIS-A1-03/05/07` / broader save-load widening のどれを先に narrow actualization するかは still unpromoted
+  exact avatar preview reports を product-preview lane へ narrow に compose する package が最有力であり、remaining `VIS-A1-03/05/07` / broader save-load widening は still later
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -138,7 +140,8 @@
 | `PA1-5` / `P-A1-05` | 100% | closed | same practical package input で local TCP / Docker Compose TCP を動かし、`TR-A1-01..07` と distinct transport-plan/report carrier を exact expected reports まで揃える |
 | `PA1-6` / `P-A1-06` + `P-A1-09` | 60% | widened first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/04/06`, while `VIS-A1-03/05/07` remain deferred |
 | `PA1-7` / `P-A1-07` | 45% | first floor closed | practical `save` / `load` command の first floor として `SL-A1-01/02`、distinct save-load plan、saved local frontier、non-final save-load report を actualizeし、`CHK-CUT-01` reuse を orphan-receive guard に限定する |
-| `PA1-8` / `P-A1-08` | 60% | first practical product-preview floor closed | preview manifest + exact practical reports/devtools bundles + non-final product-preview bundle floor is closed as `PE2E-01..07`; custom avatar/runtime fallback semantics remain later |
+| `PA1-8` / `P-A1-08` + `P-A1-10` | 70% | first practical product-preview floor + avatar companion floor closed | `PE2E-01..07` remain the first practical product-preview floor, and `AV-A1-01/02/03` add a distinct avatar-preview companion floor; same-session product runtime and full product completion remain later |
+| `P-A1-10` | 100% | closed | exact hot-plug source reports plus checked package input actualize `AV-A1-01/02/03` as a distinct avatar-preview companion floor without claiming native execution or final avatar ABI |
 
 ## current-scope evidence closeout map
 
@@ -188,7 +191,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | practical avatar semantics widening | repo | unpromoted | only promote when a narrow carrier for `AV-A1-02` or `AV-A1-03` is specified without collapsing placeholder preview evidence into runtime completion |
+| 1 | product-preview consumption of exact avatar preview reports | repo | promoted next reopen point | widen `PE2E-*` only if `AV-A1-*` exact reports can be composed without collapsing avatar preview into same-session runtime completion |
 | 2 | remaining `P-A1-06` devtools observables | repo | staged later | widen from `VIS-A1-01/02/04/06` to `VIS-A1-03/05/07` only when practical evidence exists without synthetic overclaim |
 | 3 | save/load widening after `P-A1-07` | repo | staged later | reopen only when stale witness / stale lease / distributed durable save/load semantics can be added without collapsing the saved local frontier boundary |
 | 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
@@ -252,6 +255,7 @@ These are safe to do without new product decisions.
 | `P-A1-09` | practical hot-plug lifecycle export | closed | widen the same devtools lane with `VIS-A1-04` over exact `HP-A1-01` and `HP-A1-07` reports, without claiming detach runtime lifecycle execution or product prototype readiness |
 | `P-A1-07` | local save/load command | closed | practical save/load CLI/library path with `SL-A1-01/02`, distinct save-load plan, saved local frontier, and negative stale-membership check |
 | `P-A1-08` | first practical product-preview floor | closed | preview manifests plus exact practical reports/devtools bundles actualize `PE2E-01..07` without claiming custom Mir avatar runtime, unsupported runtime fallback, or full product prototype completion |
+| `P-A1-10` | practical avatar preview first floor | closed | exact hot-plug source reports plus checked package input actualize `AV-A1-01/02/03` as a distinct avatar-preview companion floor without claiming native execution, same-session product runtime, or final avatar ABI |
 
 ## user decision blockers
 
@@ -313,13 +317,13 @@ These are safe to do without new product decisions.
 ### Blocker 7. avatar compatibility first target
 
 - overview:
-  first practical product-preview floor is now closed with placeholder object preview companion evidence, but the next widening still must choose how to actualize `custom Mir avatar runtime` and `unsupported runtime fallback` without collapsing the preview floor into runtime completion.
+  first practical avatar-preview companion floor is now closed, but the next widening still must choose how `PE2E-*` should consume `AV-A1-*` exact reports without collapsing companion preview evidence into same-session runtime completion.
 - affects:
-  next practical avatar carrier package, practical sample-root scope, runtime package scope, adapter policy, non-claim wording.
+  next practical product-preview widening, practical sample-root scope, runtime package scope, adapter policy, non-claim wording.
 - current recommendation:
-  keep `P-A1-08` as the first practical product-preview floor and do not reinterpret `PE2E-04` as runtime completion; only promote a later package when `AV-A1-02` or `AV-A1-03` can be given a distinct narrow carrier.
+  keep `P-A1-08` as the first practical product-preview floor, keep `P-A1-10` as the distinct avatar-preview companion floor, and only promote a later package when `AV-A1-*` exact reports can be composed into `PE2E-*` without implying same-session runtime execution.
 - reason:
-  current practical carriers still do not actualize `custom Mir avatar runtime` or `unsupported runtime fallback`, so widening avatar semantics without a distinct carrier would overclaim runtime semantics.
+  `AV-A1-01/02/03` are now actualized, but they remain non-final companion reports with `native_execution_performed = false`; collapsing them directly into product runtime wording would overclaim runtime semantics.
 
 ### Blocker 8. native binary policy
 

@@ -1,0 +1,66 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "av-a1-02-custom-mir-avatar-runtime",
+  "package_kind": "object",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "custom_mir_avatar_object_package",
+    "requires_capabilities": [
+      "admin.attach_object_package"
+    ],
+    "provided_capabilities": [
+      "render.custom_mir_avatar"
+    ],
+    "provided_roles": [
+      "EmbodiedPresence",
+      "Renderable",
+      "Animatable",
+      "AttachmentProvider",
+      "ExpressionProvider"
+    ],
+    "required_host_capabilities": [
+      "AttachAvatarRuntime",
+      "HostMirAvatarVM"
+    ],
+    "effect_row": [
+      "publish_pose_delta",
+      "emit_avatar_expression"
+    ],
+    "failure_row": [
+      "RuntimeUnavailable",
+      "AssetMissing"
+    ],
+    "observation_labels": [
+      "avatar.pose.owner_visible",
+      "avatar.presence.public"
+    ],
+    "fallback_representation": "static_capsule_placeholder"
+  },
+  "native": {
+    "entry_ref": "mir://avatar/custom/mir_humanoid_runtime_preview",
+    "signature_present": true
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "AV-A1-02",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::AvatarRuntime]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+    "capability_refs": [
+      "ManageAttachPoint(AlphaRoom#1::AvatarRuntime)",
+      "InstallRuntimePackage(AlphaRoom#1)"
+    ],
+    "membership_epoch": 0,
+    "member_incarnation": 0,
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "required_witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "activation_cut_ref": "activation_cut#custom_avatar_preview",
+    "notes": [
+      "non-final practical custom avatar preview",
+      "does not claim native execution or final avatar ABI"
+    ]
+  }
+}

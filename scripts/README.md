@@ -61,6 +61,14 @@
   - current actualized rows are `SL-A1-01/02`
   - `CHK-CUT-01` is reused only as an orphan-receive checker guard
   - it is a non-final save/load command and does not claim distributed durable save/load, stale witness/stale lease non-resurrection completion, queue/channel/transport persistence, product prototype, or final public save-load API
+- practical alpha-1 first avatar preview companion floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_avatar.py check-all --format json`
+  - this exercises `samples/practical-alpha1/packages/av-a1-*/` through `crates/mir-runtime::practical_alpha1_avatar`
+  - it consumes checked practical package input through a distinct hotplug-plan boundary and exact hot-plug source reports
+  - current actualized rows are `AV-A1-01/02/03`
+  - `AV-A1-02` is a non-final custom Mir avatar preview with `native_execution_performed = false`
+  - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview
+  - it is a non-final avatar-preview command and does not claim native execution, final avatar package ABI, same-session product runtime completion, active runnable-root promotion, or VRM / VRChat / Unity compatibility
 - practical alpha-1 first product-preview floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
   - this exercises `samples/practical-alpha1/previews/` through preview manifests over exact practical runtime / hot-plug / transport / save-load reports and exact practical devtools bundles

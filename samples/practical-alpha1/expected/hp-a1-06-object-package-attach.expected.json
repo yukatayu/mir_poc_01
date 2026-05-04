@@ -30,11 +30,11 @@
       ]
     },
     {
-      "check_name": "placeholder_render_capability_declared",
+      "check_name": "provided_avatar_capability_declared",
       "passed": true,
       "observed": "provided_capabilities contains render.placeholder_avatar",
       "reason_refs": [
-        "placeholder_render_capability_declared"
+        "provided_avatar_capability_declared"
       ]
     },
     {

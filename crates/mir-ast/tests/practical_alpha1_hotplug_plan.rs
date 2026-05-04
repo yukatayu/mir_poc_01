@@ -70,6 +70,33 @@ fn practical_hotplug_plan_allows_object_package_attach_preview_fixture() {
 }
 
 #[test]
+fn practical_hotplug_plan_allows_custom_avatar_preview_fixture() {
+    let plan = build_practical_alpha1_hotplug_plan_path(practical_package_dir(
+        "av-a1-02-custom-mir-avatar-runtime",
+    ))
+    .expect("AV-A1-02 should lower into a practical hotplug plan");
+
+    assert_eq!(plan.sample_id, "AV-A1-02");
+    assert_eq!(plan.package_kind, "object");
+    assert_eq!(plan.attach_profile, "custom_mir_avatar_object_package");
+}
+
+#[test]
+fn practical_hotplug_plan_allows_visible_fallback_avatar_fixture() {
+    let plan = build_practical_alpha1_hotplug_plan_path(practical_package_dir(
+        "av-a1-03-unsupported-runtime-fallback",
+    ))
+    .expect("AV-A1-03 should lower into a practical hotplug plan");
+
+    assert_eq!(plan.sample_id, "AV-A1-03");
+    assert_eq!(plan.package_kind, "object");
+    assert_eq!(
+        plan.attach_profile,
+        "custom_mir_avatar_fallback_object_package"
+    );
+}
+
+#[test]
 fn practical_hotplug_plan_lowers_detach_minimal_contract_fixture() {
     let plan = build_practical_alpha1_hotplug_plan_path(practical_package_dir(
         "hp-a1-07-detach-minimal-contract",

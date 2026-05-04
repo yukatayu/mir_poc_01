@@ -148,19 +148,29 @@ fn build_practical_alpha1_hotplug_plan_at_path(
             })?;
 
     match (package.package_kind.as_str(), attach_profile) {
-        ("layer", PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage) => {
+        (
+            "layer",
+            PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage
+            | PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage
+            | PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage,
+        ) => {
             return Err(PracticalAlpha1HotPlugPlanError {
                 kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
                 path: path.to_path_buf(),
                 detail: "object attach profile is not admitted for layer packages".to_string(),
             });
         }
-        ("object", PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage) => {}
+        (
+            "object",
+            PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage
+            | PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage
+            | PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage,
+        ) => {}
         ("object", _) => {
             return Err(PracticalAlpha1HotPlugPlanError {
                 kind: PracticalAlpha1HotPlugPlanErrorKind::MalformedHotPlugInput,
                 path: path.to_path_buf(),
-                detail: "current practical object attach preview requires placeholder_avatar_object_package profile".to_string(),
+                detail: "current practical object attach preview requires a supported avatar object attach profile".to_string(),
             });
         }
         _ => {}
@@ -269,6 +279,12 @@ fn attach_profile_name(profile: PracticalAlpha1AttachProfile) -> &'static str {
         PracticalAlpha1AttachProfile::UnsafeDebugShadowLayer => "unsafe_debug_shadow_layer",
         PracticalAlpha1AttachProfile::PlaceholderAvatarObjectPackage => {
             "placeholder_avatar_object_package"
+        }
+        PracticalAlpha1AttachProfile::CustomMirAvatarObjectPackage => {
+            "custom_mir_avatar_object_package"
+        }
+        PracticalAlpha1AttachProfile::CustomMirAvatarFallbackObjectPackage => {
+            "custom_mir_avatar_fallback_object_package"
         }
     }
 }

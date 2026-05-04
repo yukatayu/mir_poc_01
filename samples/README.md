@@ -16,7 +16,7 @@
   - Stage A..F `100%` は evidence closeout として読む
 - `practical-alpha1/`
   practical alpha-1 front-door sample root
-  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family、distinct transport-plan/report carrier を通る `TR-A1-01..07` practical transport fixture family、exact practical reports を source とする `VIS-A1-01/02/04/06` practical devtools export bundle family、one exact practical local-runtime frontier と distinct save-load plan を前提にする `SL-A1-01/02` practical local save/load fixture family、preview manifest から exact practical reports / exact practical devtools bundles を束ねる `PE2E-01..07` practical product-preview family
+  - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family、exact hot-plug reports を source とする `AV-A1-01/02/03` practical avatar preview fixture family、distinct transport-plan/report carrier を通る `TR-A1-01..07` practical transport fixture family、exact practical reports を source とする `VIS-A1-01/02/04/06` practical devtools export bundle family、one exact practical local-runtime frontier と distinct save-load plan を前提にする `SL-A1-01/02` practical local save/load fixture family、preview manifest から exact practical reports / exact practical devtools bundles を束ねる `PE2E-01..07` practical product-preview family
   - active canonical runnable root や full toolchain root ではまだない
 - `not_implemented/`
   residual planned skeleton family
@@ -71,7 +71,7 @@
 - `alpha/` と `practical-alpha1/` を混同しない
   - `alpha/` は evidence closeout root
   - `practical-alpha1/` は current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、first local-runtime fixtures、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` hot-plug fixtures、`TR-A1-01..07` transport fixtures、`SL-A1-01/02` local save/load fixtures を持つ
-  - `practical-alpha1/` もまだ active canonical runnable root ではなく、`previews/` root に `PE2E-01..07` の first practical product-preview floor を持つが、final object package attach、detach runtime lifecycle、custom Mir avatar runtime、unsupported runtime fallback、WAN/federation、distributed durable save/load、full product surfaces は later packages に残る
+  - `practical-alpha1/` もまだ active canonical runnable root ではなく、`previews/` root に `PE2E-01..07` の first practical product-preview floor を持ち、別 lane で `AV-A1-01/02/03` の first practical avatar preview floor を持つが、native avatar execution、same-session product runtime、final object package attach、detach runtime lifecycle、WAN/federation、distributed durable save/load、full product surfaces は later packages に残る
   - current practical devtools export floor は `VIS-A1-01/02/04/06` に限られ、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary / membership snapshot / deferred detach boundary を export する observability widening に留まる。membership timeline、fallback degradation、retention/on-demand trace は later widening に残る
 
 ## current commands

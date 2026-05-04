@@ -177,6 +177,32 @@ package / hot-plug stage 全体の completion ではなく、
 final object package attach、detach runtime lifecycle、
 detach execution / rollback / migration completion と同一視しない。
 
+## first practical avatar-preview companion floor boundary
+
+- current repo state で actualize 済みなのは final avatar runtime completion ではなく、
+  **first practical avatar-preview companion floor** である
+- current admissible rows は次に限る
+  - `AV-A1-01`
+    - placeholder avatar object package について、
+      exact hot-plug accepted preview seam を distinct avatar preview report へ下ろす
+  - `AV-A1-02`
+    - custom Mir avatar object package について、
+      selected representation を `mir_humanoid_runtime_preview` として示す
+      non-final custom avatar preview report を actualize する
+  - `AV-A1-03`
+    - unsupported custom runtime request について、
+      source hot-plug report は missing host capability で rejected のまま保ちつつ、
+      visible monotone placeholder fallback を示す companion avatar preview report を actualize する
+- current carrier split は次である
+  - `checked practical package -> distinct hotplug plan -> exact hot-plug report -> distinct avatar preview report`
+- `AV-A1-03` は unsupported runtime execution success を示さない
+- `AV-A1-03` の fallback は rejected source hot-plug report に対する visible companion preview であり、
+  hidden successful native execution ではない
+- current floor は `native_execution_performed = false` を保つ
+- current floor は final object package attach completion、
+  final avatar package ABI、same-session product runtime completion、
+  VRM / VRChat / Unity compatibility、active runnable-root promotionを意味しない
+
 ### 3. reusable runtime
 
 - multiple `Place` を持つ reusable runtime API がある
@@ -338,6 +364,8 @@ full product prototype completion ではなく、
 - `PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
 - `PE2E-04` は custom Mir avatar runtime を証明しない
 - `PE2E-04` は unsupported runtime fallback を証明しない
+- avatar semantics の current widening は `PE2E-*` ではなく、
+  `AV-A1-01/02/03` distinct avatar-preview companion floor に置く
 - `PE2E-06` は invalid distributed save/load runtime execution ではなく、
   explicit checker reject preview に留まる
 - `PE2E-07` は exact devtools bundles の viewer-openability preview であり、

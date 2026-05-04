@@ -170,6 +170,8 @@ pub enum PracticalAlpha1AttachProfile {
     RateLimitLayer,
     UnsafeDebugShadowLayer,
     PlaceholderAvatarObjectPackage,
+    CustomMirAvatarObjectPackage,
+    CustomMirAvatarFallbackObjectPackage,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

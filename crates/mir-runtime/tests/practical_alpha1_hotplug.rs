@@ -199,6 +199,51 @@ fn practical_hotplug_matches_object_package_attach_preview_row() {
 }
 
 #[test]
+fn practical_hotplug_matches_custom_avatar_preview_row() {
+    let report = attach_practical_alpha1_package_path(practical_package_dir(
+        "av-a1-02-custom-mir-avatar-runtime",
+    ))
+    .expect("AV-A1-02 should return a non-final custom avatar preview report");
+
+    assert_eq!(report.sample_id, "AV-A1-02");
+    assert_eq!(report.package_kind, "object");
+    assert_eq!(report.attach_profile, "custom_mir_avatar_object_package");
+    assert_eq!(report.terminal_outcome, "accepted_object_attach_preview");
+    let preview = report
+        .object_attach_preview
+        .as_ref()
+        .expect("custom avatar preview should be present");
+    assert_eq!(
+        preview.selected_representation,
+        "mir_humanoid_runtime_preview"
+    );
+    assert!(!preview.native_execution_performed);
+}
+
+#[test]
+fn practical_hotplug_matches_visible_fallback_avatar_source_row() {
+    let report = attach_practical_alpha1_package_path(practical_package_dir(
+        "av-a1-03-unsupported-runtime-fallback",
+    ))
+    .expect("AV-A1-03 should produce an explicit compatibility rejection source report");
+
+    assert_eq!(report.sample_id, "AV-A1-03");
+    assert_eq!(report.package_kind, "object");
+    assert_eq!(
+        report.attach_profile,
+        "custom_mir_avatar_fallback_object_package"
+    );
+    assert_eq!(report.terminal_outcome, "rejected");
+    assert_eq!(report.reason_family.as_deref(), Some("compatibility"));
+    assert!(
+        report
+            .rejection_reason_refs
+            .contains(&"missing_host_capability:HostMirAvatarVM".to_string())
+    );
+    assert!(report.object_attach_preview.is_none());
+}
+
+#[test]
 fn practical_hotplug_matches_detach_minimal_contract_row() {
     let report = attach_practical_alpha1_package_path(practical_package_dir(
         "hp-a1-07-detach-minimal-contract",

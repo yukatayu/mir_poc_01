@@ -1,0 +1,57 @@
+{
+  "format_version": "mirrorea-practical-alpha1-v0",
+  "package_id": "av-a1-01-placeholder-avatar-runtime",
+  "package_kind": "object",
+  "manifest": {
+    "version": "0.1.0",
+    "attach_profile": "placeholder_avatar_object_package",
+    "requires_capabilities": [
+      "admin.attach_object_package"
+    ],
+    "provided_capabilities": [
+      "render.placeholder_avatar"
+    ],
+    "provided_roles": [
+      "EmbodiedPresence",
+      "Renderable"
+    ],
+    "required_host_capabilities": [
+      "AttachAvatarRuntime",
+      "RenderPlaceholderMesh"
+    ],
+    "effect_row": [],
+    "failure_row": [],
+    "observation_labels": [
+      "avatar.presence.public",
+      "avatar.preview.placeholder"
+    ],
+    "fallback_representation": "static_capsule_placeholder"
+  },
+  "native": {
+    "entry_ref": "mir://avatar/placeholder/basic",
+    "signature_present": true
+  },
+  "alpha_local_hotplug_input": {
+    "sample_id": "AV-A1-01",
+    "attachpoint_ref": "AttachPoint[AlphaRoom#1::AvatarRuntime]",
+    "requesting_principal": "ExampleAdmin",
+    "requesting_participant_place": "ParticipantPlace[ExampleAdmin]",
+    "capability_refs": [
+      "ManageAttachPoint(AlphaRoom#1::AvatarRuntime)",
+      "InstallRuntimePackage(AlphaRoom#1)"
+    ],
+    "membership_epoch": 0,
+    "member_incarnation": 0,
+    "witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "required_witness_refs": [
+      "membership_frontier_snapshot#practical_hotplug"
+    ],
+    "activation_cut_ref": "activation_cut#avatar_placeholder_preview",
+    "notes": [
+      "non-final practical avatar placeholder preview",
+      "does not claim native execution or final avatar ABI"
+    ]
+  }
+}
