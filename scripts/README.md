@@ -7,9 +7,9 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..18`、`plan/39..44`、`samples/alpha/`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..24`、`plan/39..49`、`samples/alpha/`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`plan/39..44`、`specs/13..18` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`plan/39..49`、`specs/13..24` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
@@ -31,7 +31,7 @@
   - `python3 scripts/practical_alpha1_run_local.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/run-*/` through `crates/mir-ast::practical_alpha1_runtime_plan` and `crates/mir-runtime::practical_alpha1_local_runtime`
   - it consumes checked practical package input through a distinct runtime-plan boundary
-  - it is a non-final local-runtime command and does not claim Docker transport, package/hot-plug, save/load, or final public runtime/devtools API
+  - it is a non-final first-floor local-runtime command and does not claim same-session operational α-0.5 runtime, Docker transport, package/hot-plug, save/load, or final public runtime/devtools API
   - practical `run-docker` remains later work
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
@@ -83,7 +83,7 @@
   - `PE2E-06` consumes exact `SL-A1-03` save-load preflight reject evidence rather than direct checker evidence
   - `PE2E-08` consumes `AV-A1-02` as a custom-avatar companion preview bundle with `native_execution_performed = false`
   - `PE2E-09` consumes `AV-A1-03` as an unsupported-runtime visible fallback companion preview bundle while the source avatar lane remains rejected
-  - it is a non-final product-preview command and does not claim native execution, same-session runtime attach/detach execution, unsupported-runtime execution success, active runnable-root promotion, or final public CLI / viewer / transport / save-load / package-avatar API
+  - it is a non-final product-preview command and does not claim native execution, same-session runtime attach/detach execution, unsupported-runtime execution success, active runnable-root promotion, operational α-0.5 / α-0.8 / α-0.9 completion, or final public CLI / viewer / transport / save-load / package-avatar API
 
 ### current-L2 helper / detached loop / support
 

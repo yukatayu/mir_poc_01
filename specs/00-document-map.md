@@ -140,12 +140,34 @@
 - `sub-agent-pro/mir_poc_01_research_handoff_2026-04-30.md`
   - 2026-04-30 時点の Codex 向け current-line handoff であり、repo-local alpha-ready current layer、`U1` actual commitment gate、maintenance lane、validation floor、package template を current explanation source として整理する。
   - 規範判断の正本ではないが、`specs/`、`plan/`、`progress.md`、`tasks.md`、`samples_progress.md`、`docs/reports/` へ mirror する説明 source として使ってよい。
- - `specs/18-practical-alpha1-scope.md`
+- `specs/18-practical-alpha1-scope.md`
   - Mirrorea Spaces practical alpha-1 readiness の規範判断を置く。
-  - current-scope evidence closeout と practical alpha-1 `100%` の区別、source front-door / checker / runtime / package / transport / devtools / save-load / product-prototype 条件、非目標、validation boundary を固定する。
- - `plan/44-practical-alpha1-roadmap.md`
+  - current-scope evidence closeout と practical alpha-1 first-floor closeout の区別、source front-door / checker / runtime / package / transport / devtools / save-load / product-prototype 条件、非目標、validation boundary を固定する。
+- `plan/44-practical-alpha1-roadmap.md`
   - practical alpha-1 の repository-memory roadmap を置く。
   - `P-A1-00..` package line、front-door / checker / runtime / transport / devtools / save-load / product prototype の順序、evidence line との分離、next reopen point を整理する。
+- `specs/19-verification-stratification.md`
+  - static checker / model-check / proof side の三層 stratification と residual obligation carrier を固定する。
+- `specs/20-cut-save-load-semantics.md`
+  - event DAG、consistent cut、local save/load、load admissibility、stale non-resurrection、`Z-cycle` 境界を固定する。
+- `specs/21-auth-layer-algebra.md`
+  - auth / rate-limit / debug layer を `Contract -> Contract` transformer として整理し、transparent overlay と explicit contract update を分ける。
+- `specs/22-observability-devtools-semantics.md`
+  - typed observability、observer-safe view、admin/debug view、retention / on-demand trace を固定する。
+- `specs/23-typed-external-host-boundary.md`
+  - stdio builtin を core に入れず、typed external adapter boundary と最小 host-I/O demo requirement を固定する。
+- `specs/24-operational-alpha05-alpha08-readiness.md`
+  - evidence closeout / first-floor closeout / operational-layer-ready / product/public-ready の区別と、α-0.5 / α-0.8 / α-0.9 の completion condition を固定する。
+- `plan/45-operational-alpha05-roadmap.md`
+  - α-0.5 local observable runtime の repository-memory roadmap を置く。
+- `plan/46-operational-alpha08-roadmap.md`
+  - α-0.8 same-session hot-plug runtime の repository-memory roadmap を置く。
+- `plan/47-operational-alpha09-devtools-roadmap.md`
+  - α-0.9 session-bound devtools readiness の repository-memory roadmap を置く。
+- `plan/48-theory-freeze-proof-obligations.md`
+  - theory freeze 後に残る proof / model-check obligation family を整理する。
+- `plan/49-host-io-and-session-runtime-roadmap.md`
+  - session carrier と typed host-I/O lane を分けて進める順序を整理する。
 
 ## 規範的な読書順
 
@@ -164,6 +186,7 @@
 8. `12-decision-register.md`
 9. Mirrorea Spaces alpha-0 line を扱う場合は `13-type-system-lifetime-fallback.md`、`14-contract-subtyping-layer-compatibility.md`、`15-cut-save-load-checkpoint.md`、`16-runtime-package-adapter-hotplug.md`、`17-mirrorea-spaces-alpha-scope.md`
 10. practical alpha-1 line を扱う場合は `18-practical-alpha1-scope.md` も読む
+11. operational readiness / theory freeze を扱う場合は `19-verification-stratification.md`、`20-cut-save-load-semantics.md`、`21-auth-layer-algebra.md`、`22-observability-devtools-semantics.md`、`23-typed-external-host-boundary.md`、`24-operational-alpha05-alpha08-readiness.md` も読む
 
 ## 例示文書
 

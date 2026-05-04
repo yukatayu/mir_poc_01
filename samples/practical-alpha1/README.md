@@ -1,8 +1,9 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, first practical local save/load family, and first practical product-preview family.
+This root is the current practical alpha-1 first-floor front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, first practical local save/load family, and first practical product-preview family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
+- It is also separate from the operational α-0.5 / α-0.8 / α-0.9 readiness line defined in `specs/19..24` and `plan/45..49`.
 - It is not yet the active runnable root for the whole repo.
 - `P-A1-01` introduces the first narrow front-door cut here:
   directory-or-file package loading for limited `package.mir.json` inputs.
@@ -127,6 +128,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
+- The current root is a first-floor toolchain family, not a same-session operational runtime.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.

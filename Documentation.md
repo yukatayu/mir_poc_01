@@ -6,37 +6,33 @@
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/`
-- 現在の進捗 snapshot は `progress.md`
-- 現在の task map は `tasks.md`
+- 進捗 snapshot は `progress.md`
+- current task map は `tasks.md`
 - runnable sample dashboard は `samples_progress.md`
-- 実行証跡と詳細経緯は `docs/reports/`
+- 実行証跡は `docs/reports/`
 
 ## まず repo をどう読むべきか
 
-この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。
-主眼は、そのうち Mir current-L2 の repo-local alpha-ready current layer にあります。
+この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。主眼は Mir current-L2 と、その上に積む Mirrorea shared-space / hot-plug / observability / host-boundary line にあります。
 
-この layer で重要なのは、次の 4 つを混同しないことです。
+読み分けで重要なのは、次の 5 つを混同しないことです。
 
 - **repo-local alpha-ready current layer**
-  repo 内の sample、helper、Lean foundation、report まで含めて動かせる現行の足場
+  `samples/clean-near-end/`、helper、Lean foundation、report まで含めて動かせる current-L2 の実行足場
 - **current-scope evidence closeout**
-  `samples/alpha/` と `specs/13..17` / `plan/39..43` によって蓄積された
-  Mirrorea Spaces alpha-0 の non-public / helper-local / runtime-private closeout 群
-- **practical alpha-1 readiness**
-  source front-door、checker、runtime、package/hot-plug、transport、devtools、
-  local save/load、product prototype を揃えた実用 toolchain
+  `samples/alpha/` と `specs/13..17` / `plan/39..43` による alpha-0 helper-local / runtime-private closeout 群
+- **practical alpha-1 first-floor closeout**
+  `samples/practical-alpha1/` と `specs/18` / `plan/44` による front-door / checker / runtime / hot-plug / transport / devtools / save-load / preview の first-floor toolchain
+- **operational alpha readiness**
+  `specs/19..24` / `plan/45..49` で定義した α-0.5 / α-0.8 / α-0.9 の same-session operational 条件
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
-現在 repo が強いのは前 2 つであり、practical alpha-1 と final public product は別の gate です。
+現在 repo が強いのは前 3 つであり、operational alpha readiness と final public product はまだ別の gate です。
 
-## current active line
+## current active floor
 
-### 1. Clean near-end sample suite
-
-active canonical sample は `samples/clean-near-end/` です。
-base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence は `samples/lean/` に置きます。
+active canonical sample は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence は `samples/lean/` に置きます。
 
 - `typing/`
   finite-index first strong typing layer
@@ -47,342 +43,80 @@ base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evi
 - `modal/`
   `stable` / `later` / `published(room)` / `witnessed(...)` の current mode line
 - `sugoroku-world/`
-  empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice。
-  これは separate helper `scripts/sugoroku_world_samples.py` で実行する repo-local logical multi-place emulator です。
+  empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice
 
 旧 active sample line は active path から外し、archive に退避しています。
 
-### 1.1 Mirrorea future integration line
-
-Mirrorea future-axis は current sample floor の次の promoted line ではなく、整理済みの docs-first / repo-local actualization roadmap-memory family です。2026-05-04 時点では、その中を次の 2 系統に分けて読みます。
-
-- **Mirrorea Spaces alpha-0 evidence line**
-  `specs/13..17` が alpha-local 規範判断、`plan/39..43` が roadmap memory、`samples/alpha/` が mixed scaffold / non-public evidence family を担います。ここで閉じている Stage A..F は current-scope evidence closeout であり、practical alpha-1 readiness ではありません。
-- **Mirrorea Spaces practical alpha-1 line**
-  `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md` が、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を持つ実用 toolchain line を定義します。今後の main progress はこの line に対して数えます。
-  ただし、これは promoted work queue であり、active canonical runnable root への昇格を意味しません。2026-05-04 時点の last actualization package / latest package closeout は `P-A1-17` practical save-load preview carrier alignment です。
-  current repo state では、`samples/practical-alpha1/` と `crates/mir-ast::practical_alpha1` の limited `package.mir.json` loader floor、distinct lowered IR を通る `crates/mir-ast::practical_alpha1_checker` と `scripts/practical_alpha1_check.py` の first checker floor、distinct runtime-plan carrier `crates/mir-ast::practical_alpha1_runtime_plan` と first practical local-runtime floor `crates/mir-runtime::practical_alpha1_local_runtime` / example `mir_practical_alpha1_run_local` / `scripts/practical_alpha1_run_local.py`、distinct hotplug-plan carrier `crates/mir-ast::practical_alpha1_hotplug_plan` と non-final practical hot-plug floor `crates/mir-runtime::practical_alpha1_hotplug` / example `mir_practical_alpha1_attach` / `scripts/practical_alpha1_attach.py`、distinct avatar-preview carrier `crates/mir-runtime::practical_alpha1_avatar` / example `mir_practical_alpha1_avatar` / `scripts/practical_alpha1_avatar.py`、distinct transport-plan carrier `crates/mir-ast::practical_alpha1_transport_plan` と non-final practical transport floor `crates/mir-runtime::practical_alpha1_transport` / example `mir_practical_alpha1_transport` / `scripts/practical_alpha1_transport.py`、distinct devtools-export bundle surface `scripts/practical_alpha1_export_devtools.py`、distinct save-load-plan carrier `crates/mir-ast::practical_alpha1_save_load_plan` と widened practical local save/load floor `crates/mir-runtime::practical_alpha1_save_load` / example `mir_practical_alpha1_save_load` / `scripts/practical_alpha1_save_load.py`、さらに `samples/practical-alpha1/previews/` と `scripts/practical_alpha1_product_preview.py` による widened practical product-preview floor を持ちます。現在 actualize 済みの runtime row は `RUN-01/02`、hot-plug row は `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、avatar preview row は `AV-A1-01/02/03`、transport row は `TR-A1-01..07`、devtools-export widened first-floor row は `VIS-A1-01/02/03/04/05/06/07`、save/load widened first-floor row は `SL-A1-01/02/03`、preview row は `PE2E-01..09` に限ります。carrier は collapse せず、checked package -> runtime plan -> local runtime report、checked package -> hotplug plan -> non-final hot-plug report、checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report、checked package -> transport plan -> non-final transport report、exact practical reports -> distinct devtools export bundle -> non-final viewer、checked package -> runtime plan と one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report、exact rejected checker report -> distinct save-load preflight reject report、preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle の distinct carrier routes を保ちます。`HP-A1-07` は `operation_kind = detach`、`detach_boundary_ref`、`terminal_outcome = deferred_detach_minimal_contract` を持つ explicit deferred boundary row であり、`TR-A1-01..07` は local TCP / Docker Compose TCP accepted path、stale-membership reject、missing-capability reject、missing-witness reject、observer-safe route trace、auth-lane separation を actualize します。`AV-A1-02` は `mir_humanoid_runtime_preview` を選ぶ non-final custom Mir avatar preview に限り、`AV-A1-03` は source hot-plug report を missing host capability rejected のまま保って visible monotone placeholder fallback を示す companion preview に限ります。`VIS-A1-01` は event DAG と publication / witness / handoff relation export、`VIS-A1-02` は observer-safe route trace export、`VIS-A1-03` は exact save-load report から saved frontier・later live membership advance・restored frontier・stale-membership reject を保つ membership timeline export、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary・membership snapshot・deferred detach boundary を export し、`VIS-A1-05` は exact avatar preview report から rejected source lane、degraded roles、missing host capability を保つ fallback degradation export を actualize し、`VIS-A1-06` は auth lane を transport metadata から分離した redacted observer view を actualize します。`VIS-A1-07` は exact `SL-A1-02` save-load report に追加した report-local `retained_artifacts` catalog と `retention_scope = report_local_inventory` を source にして、retained frontier / reject artifact への hit/miss 付き retention query trace を devtools bundle へ下ろす narrow widening に限ります。`VIS-A1-03` は distributed durable membership timeline や witness/lease co-timeline を意味せず、`VIS-A1-04` は alpha-0 Stage D lifecycle closeout や detach runtime lifecycle completion を意味せず、`VIS-A1-05` も native execution や unsupported-runtime execution success を意味せず、`VIS-A1-07` も durable retained-artifact catalog service、cross-session or remote retrieval API、retention expiry / lease lifecycle completion を意味せず、いずれも export-side observability widening に限られます。`SL-A1-01/02` は one exact practical local-runtime frontier の local-only save/load roundtrip と stale-membership non-resurrection first-floor rows、`SL-A1-03` は exact rejected `CHK-CUT-01` checker report を distinct save-load preflight reject report へ写す invalid distributed-cut row に限られます。`PE2E-01..09` は exact existing practical carriers を薄く束ねた product-preview floor であり、`PE2E-04` は引き続き `HP-A1-06` placeholder object preview companion evidence に narrow され、`PE2E-06` は exact `SL-A1-03` save-load preflight reject report を consume する invalid distributed save rejected preview に限られ、`PE2E-08/09` は `AV-A1-02/03` exact avatar preview reports を thin companion bundles として consume します。`CHK-CUT-01` reuse は orphan-receive checker guard reuse に留まり、full consistent-cut / `Z-cycle` / distributed durable save/load completion を意味しません。これは library-first parse/load + checker + local-runtime first floor + practical hot-plug floor + practical avatar preview floor + practical transport floor + widened practical devtools export floor + widened practical local save/load floor + widened practical product-preview floor であり、stale witness / stale lease non-resurrection completion、native avatar execution、same-session runtime attach/detach execution、unsupported-runtime execution success、WAN/federation、final public runtime/devtools/transport/save-load/package-avatar ABI ではありません。next reopen point は broader save/load widening、same-session runtime semantics、または同程度に narrow な exact-evidence widening を safe に昇格できるかどうかである。
-
-alpha-0 evidence line では、`scripts/alpha_lifetime_fallback_checker.py`、`scripts/alpha_contract_variance_checker.py`、`scripts/alpha_cut_save_load_checker.py` が selected negative reason rows を synthetic detached artifacts と照合する non-public checker floor を担い、`scripts/alpha_lifetime_fallback_acceptance.py` と `scripts/alpha_contract_variance_acceptance.py` が `LIF-02/03/04` と `VAR-01/04/06` の helper-local synthetic acceptance floor を actualize し、`scripts/alpha_lifetime_fallback_snapshot.py` が `LIF-13` snapshot floor、`scripts/alpha_lifetime_fallback_anchor_handoff.py` が `LIF-11` anchor-handoff floor、`scripts/alpha_contract_variance_runtime_mirror.py` が `VAR-08/11/13` runtime-mirror floor を actualize しています。`reason_codes_scope`、`acceptance_scope`、`snapshot_scope`、`anchor_handoff_scope`、`runtime_mirror.scope` は別 carrier であり、positive row の証拠は negative reason code の不在ではありません。
-
-同じく alpha-0 evidence line では、`crates/mir-runtime/src/alpha_local_runtime.rs` と `scripts/alpha_local_runtime_samples.py` が `samples/alpha/local-runtime/` の `LR-01/02` dedicated runner と `stage-b-closeout` surface を担い、`CUT-04/17` は current-scope Stage B closeout の supporting local-only save/load subset としてだけ再利用されます。`cargo test -p mirrorea-core --test runtime_substrate`、`crates/mir-runtime/src/alpha_layer_insertion_runtime.rs` と `crates/mir-runtime/src/alpha_network_runtime.rs` と `crates/mir-runtime/src/alpha_avatar_runtime.rs`、`scripts/alpha_network_docker_e2e.py`、`scripts/alpha_avatar_runtime_samples.py`、`scripts/alpha_hotplug_lifecycle_samples.py`、`scripts/alpha_visualization_samples.py`、`scripts/alpha_e2e_samples.py` が current-scope Stage C..F evidence を担います。`P-A0-28` rerun により current-L2 / clean-near-end / Lean / Sugoroku / avatar / typed external / network canary / projection / viewer / hot-plug narrow floor は imported Stage A baseline として数えます。`P-A0-29` は shared `HotPlugVerdict.witness_reason_refs` lane widening に追随して `AV-01/02/06/08/09` と `HP-11/12/15` の committed sidecar を refresh し、Stage D current-scope closeout の freshness を repair しましたが、新しい runtime semantics や scope widening は追加しません。
-
-ただし、これらは引き続き evidence closeout です。`samples/alpha/` runnable-root promotion、parser/runtime front door、reusable practical checker/runtime API、final public product claim はここからは出ません。practical alpha-1 の進捗と next reopen point は `progress.md` / `tasks.md` を参照してください。
-
-practical alpha-1 line の current checker floor では、positive proof を empty diagnostics ではなく `accepted_obligations` で、negative proof を `rejected_rows` と `diagnostics` で明示する。これは alpha-0 helper-local `reason_codes_scope` / `acceptance_scope` / `snapshot_scope` / `anchor_handoff_scope` / `runtime_mirror.scope` を practical line へそのまま昇格したものではなく、practical package input 上の distinct lowered IR と non-final checker report による別 surface である。
-
-`P-A1-03` 以降の current practical runtime floor でも同様に carrier を collapse しない。checked package をそのまま runtime report にしないで、distinct runtime-plan carrier `PracticalAlpha1RuntimePlan` と non-final local-runtime report `PracticalAlpha1LocalRuntimeReport` を分け、`RUN-01` accepted dispatch と `RUN-02` stale-membership rejection を first floor として actualize している。これは package/hot-plug、Docker/local TCP、save/load、devtools viewer completion を意味しない。
-
-`P-A1-04a..c` の current practical hot-plug floor でも同様に carrier を collapse しない。checked practical package をそのまま hot-plug verdict にせず、distinct hotplug-plan carrier `PracticalAlpha1HotPlugPlan` と non-final hot-plug report `PracticalAlpha1HotPlugReport` を分け、`HP-A1-01..05` の manifest-driven layer attach/reject、`HP-A1-04B1` stale-membership reject、`HP-A1-04B2` missing-witness reject、`HP-A1-06` narrow object package attach preview seam、`HP-A1-07` explicit deferred detach minimal contract を actualize している。`membership_epoch` / `member_incarnation` / `required_witness_refs` は attach-time package admission lane として practical floor に残し、detach path では `operation_kind = detach` と `detach_boundary_ref` を distinct carrier lane として持ち、object path でも `object_attach_claimed = false` を保つ。これは final object package attach completion、detach runtime lifecycle、Docker/local TCP、save/load、devtools viewer completion を意味しない。
-
-`P-A0-24` では、既存の Stage-C network floor に新しい transport semantics を追加せず、`scripts/alpha_network_docker_e2e.py stage-c-closeout` を current-scope closeout surface として追加する。admissible rows は `NET-02/03/04/05/07/09` に限り、これは Docker/local-subprocess floor の alpha-0.7 transport closeout であって、`NET-06/08/10`、production WAN/session/replay、network partition completion、transport-medium substitution completion、final public transport ABI を意味しない。
-
-`P-A0-25` では、existing Stage-D layer/package/avatar floors に新しい hot-plug semantics を追加せず、`scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout` を current-scope closeout surface として追加する。admissible rows は `LI-01/02/03/04/05`、`AV-01/02/06/08/09`、`HP-11/12/15` に限り、これは alpha-0.8 hot-plug lifecycle closeout であって、detach runtime、durable migration、distributed activation ordering、native execution realization、`HP-08/09/13/14`、`AV-03/04/05/07/10`、final public layer/package/avatar ABI を意味しない。
-`P-A0-29` では、shared hot-plug verdict lane に `witness_reason_refs` が追加された後の exact sidecar drift だけを修復し、`AV-01/02/06/08/09` と `HP-11/12/15` の expected JSON を refresh した。これは Stage D closeout の freshness repair であり、admissible row の widening、detach runtime completion、native execution claim、public ABI claim ではない。
-
-`P-A0-26` では、existing Stage-E visualization subset に新しい devtools semantics を追加せず、`scripts/alpha_visualization_samples.py stage-e-closeout` を current-scope closeout surface として追加する。admissible rows は `VIS-01/02/03/05/06/07/08/10/11` に限り、これは alpha-0.9 devtools closeout であって、`VIS-04/09/12`、final public viewer API、final public telemetry service、Stage F completion を意味しない。
-
-`P-A0-27` では、existing Stage-F integrated bridge に新しい runtime semantics を追加せず、`scripts/alpha_e2e_samples.py stage-f-closeout` を current-scope closeout surface として追加する。admissible rows は `E2E-01/02/03/04/05/06/07/09/10` に限り、これは **Spaces alpha evidence** の current-scope closeout であって、practical alpha-1 readiness、`E2E-08`、public alpha/U1 completion、distributed save/load completion、active runnable-root promotion、final public parser/runtime/viewer/hot-plug/transport ABI を意味しない。
-
-- conceptual boundary:
-  `Place` は participant と同一ではなく、state / queue / capability / visibility / observation frontier を持つ execution locus として読みます。Sugoroku sample の `world` は host/server-side sugar であり、Mir core primitive にはしません。
-- external / security boundary:
-  standard I/O は Mir core に入れず、external world とは typed external effect adapter で接続します。auth / membership / capability / witness / visualization / telemetry は transport や debug hack に潰さず、typed layer として合成します。
-- current repo-local actualized families:
-  `TermSignature` / `LayerSignature` / `MessageEnvelope` / `AuthEvidence` / helper `verification_handoff_witness` / runtime `verification_model_check`、`MembershipRegistry` / `PlaceCatalog` / `LogicalPlaceRuntimeShell`、engine-neutral `HotPlugRequest` / `HotPlugVerdict`、runtime-side hot-plug skeleton/engine reports、typed external `EXT-03/04`、helper-local network canary `NET-02..05`、Alpha-0 Stage-C network floor `NET-02/03/04/05/07/09`、projection/codegen manifest bridge evidence、viewer prototype inventory は current runnable または closeout-backed surface です。
-  projection/codegen current `equivalence` reading は committed generated manifest と helper/report-local anchor の review-category alignment inventory に限り、generated place-program synthesis、placement optimizer、deployment planner、cross-place equivalence checker、proof completion、final emitted executable family、final public emitted-program ABI ではありません。
-- representative slices and kept-later boundaries:
-  Sugoroku world runtime attachment と avatar fairy follow representative slice は active ですが、`FAIRY-05` は planned のままです。real socket / session / durable replay、rollback / durable migration / distributed activation ordering、exact host schema、final public auth / adapter / visualization / projection / hot-plug / transport surface、final public viewer API / telemetry service、installed binary / backend / packaging adoption は未決または deferred のままです。
-- where to read details:
-  short snapshot はこの `Documentation.md`、hands-on closeout command set は `docs/hands_on/current_phase_closeout_01.md`、reader-facing summary は `docs/research_abstract/mirrorea_future_axis_01.md`、future-axis repository memory は `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..43` を参照してください。
-  practical alpha-1 promoted line については `plan/44-practical-alpha1-roadmap.md` と `docs/hands_on/practical_alpha1_product_preview_01.md`、`scripts/practical_alpha1_avatar.py` も含めて参照してください。
-
-### 1.2 Sample highlighter
-
-repo 直下の `mir_hilight.html` は、current active `.mir` sample を読むための単一 HTML viewer です。
-ブラウザだけで動き、外部 asset は読みません。標準 theme は Solarized Dark で、VS Code Dark、GitHub Light / Dark、Dracula、Monokai などへ切り替えられます。
-行番号、スマホ対応、予約語 highlight、sample 内で宣言された user-defined symbol の別色 highlight、browser-local custom source input を備えています。
-CSS は外部 framework ではなく、HTML 内に直接書いた hand-written original CSS です。
-
-これは final public parser / checker / verifier ではありません。
-文法、active sample path、reserved keyword、定義宣言形、custom input UI が変わった場合は、`mir_hilight.html` の embedded samples、syntax token list、symbol extraction rule、関連 docs / tests を同じ task で更新してください。
-
-### 1.3 Samples progress and storage foundation
-
-`samples_progress.md` は、phase / layer ごとの runnable sample、unit validation、E2E、debug / visualization、blocker、report、build / storage 環境を一覧する dashboard です。
-
-- progress% は runnable sample と validation に紐づけて更新します。
-- `100%` は implementation、positive/negative sample、debug/visualization、docs、report、tests、git commit/push まで揃った current scope に限ります。
-- build / storage では root disk を既成事実化せず、heavy disposable artifact は external workdir を優先します。
-
-### 1.4 Repository structure reading
-
-repo の current filesystem は flat な部分を残していますが、責務は分けて読みます。
-
-- `crates/mir-ast`:
-  parser / AST carrier
-- `crates/mir-semantics`:
-  semantics / proof / model-check bridge
-- `crates/mir-runtime`:
-  current runner / CLI / report-local evidence carrier
-- `crates/mirrorea-*`, `crates/prism-*`, `crates/engine-abi`, `crates/mir-lsp`:
-  separable subsystem boundary の current minimal carrier lane、placeholder、または future lane
-- `samples/README.md`:
-  active / base corpus / planned / prototype / archive / generated sample taxonomy
-- `scripts/README.md`:
-  active runner、repo-local helper、detached loop、storage/env script の taxonomy
-- `plan/19-repository-map-and-taxonomy.md`:
-  staged migration plan と “いま動かさないもの” の repository memory
-
-### 2. first strong typing layer
-
-current typing judgment の読みは、概ね次の形です。
+## Mirrorea line の現在地
 
 ```text
-Σ ; Ψ ; Γ ; Δ ⊢ e : A @ μ ! ε ⇝ C ; O
+OS/network substrate
+  -> Mir core
+  -> Typed external boundary
+  -> Mirrorea fabric/runtime
+  -> practical toolchain
+  -> Spaces product
+  -> Reversed Library
 ```
 
-- `Σ`
-  user-defined index theory、policy、有限 preorder / lattice / powerset / bound
-- `Ψ`
-  mode / stage / place / visibility / witness / durability の環境
-- `Γ`
-  unrestricted context
-- `Δ`
-  linear / affine / capability context
-- `A`
-  ordinary type
-- `μ`
-  mode
-- `ε`
-  effect row
-- `C`
-  finite decidable constraint
-- `O`
-  first decidable fragment の外側へ残す residual obligation
+- **alpha-0 evidence line**
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence closeout を担います。Stage A..F は `100% current-scope evidence closeout` であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
+- **practical alpha-1 first-floor line**
+  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01/02`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
+- **operational alpha theory-freeze line**
+  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout `P-A1-18` はこの bounded theory freeze を行う package です。
 
-ここで強調すべき点は、domain predicate を magical builtin にしていないことです。
+## いま何があり、何がまだ無いか
 
-- authority hierarchy は user-defined finite preorder
-- security label hierarchy は user-defined finite lattice
-- capture は finite capture set
-- lifetime / region は finite preorder
-- cost は simple decidable bound
+既にあるもの:
 
-### 3. order / handoff と `memory_order` 再解釈
+- practical checker / runtime / hot-plug / transport / devtools / save-load / preview の **distinct carrier split**
+- event DAG export、observer-safe route trace、membership timeline export、fallback degradation export、redacted observer view、report-local retention query trace
+- local-only save/load roundtrip と stale-membership non-resurrection first-floor rows
+- attach-time auth / rate-limit / object preview / deferred detach の first-floor rows
 
-current active source line は、低レベル `memory_order_release` などを source principal に据えていません。
-代わりに次の高水準関係を principal にしています。
+まだ無いもの:
 
-- `program_order`
-- `dependency_order`
-- `publication_order`
-- `observation_order`
-- `witness_order`
-- `finalization_order`
-- `scoped_happens_before`
+- `PracticalAlphaSession` に相当する **same-session carrier**
+- typed external host-I/O direct execution lane
+- α-0.5 session 上での unified check -> runtime plan -> run -> observe -> save/load loop
+- α-0.8 same-session hot-plug runtime
+- α-0.9 live/session-bound devtools export
 
-`atomic_cut` も global mutex や global fence ではなく、**local finalization / rollback frontier** として扱います。
+## 重要な境界
 
-### 4. model-check second line
+- `Place` は participant と同一ではなく、state / queue / capability / visibility / observation frontier を持つ execution locus として読む
+- standard I/O は Mir core primitive ではなく、typed external adapter boundary 側に残す
+- auth / authorization / membership / capability / witness は transport に潰さない
+- visualization / telemetry は label / authority / redaction / retention を持つ typed effect として扱う
+- `atomic_cut` は place-local rollback frontier であり、durable/distributed commit ではない
+- local save/load は distributed durable save/load と同一ではない
 
-mutex / weak-memory family は static typing first line に押し込めず、**model-check second line** として分離しています。
+## どこを次に読むか
 
-- `01_peterson_sc_pass`
-  sequential consistency では mutual exclusion が保たれる
-- `02_peterson_relaxed_counterexample`
-  publication / observation edge が欠けると counterexample が出る
-- `03_broken_mutex_counterexample`
-  古典的 broken mutex は interleaving / visibility の問題として second line で捉える
+- live status / next reopen point:
+  `progress.md`、`tasks.md`
+- runnable sample dashboard:
+  `samples_progress.md`
+- practical alpha-1 first-floor:
+  `specs/18-practical-alpha1-scope.md`、`plan/44-practical-alpha1-roadmap.md`
+- operational alpha theory freeze:
+  `specs/19-verification-stratification.md`
+  `specs/20-cut-save-load-semantics.md`
+  `specs/21-auth-layer-algebra.md`
+  `specs/22-observability-devtools-semantics.md`
+  `specs/23-typed-external-host-boundary.md`
+  `specs/24-operational-alpha05-alpha08-readiness.md`
+  `plan/45-operational-alpha05-roadmap.md`
+  `plan/46-operational-alpha08-roadmap.md`
+  `plan/47-operational-alpha09-devtools-roadmap.md`
+  `plan/48-theory-freeze-proof-obligations.md`
+  `plan/49-host-io-and-session-runtime-roadmap.md`
+- hands-on closeout commands:
+  `docs/hands_on/current_phase_closeout_01.md`
 
-### 5. Lean
+## snapshot の読み方
 
-Lean material は 2 段です。
-
-- `samples/lean/foundations/`
-  小さな actual proof fragment
-- `samples/lean/clean-near-end/`
-  active sample suite から生成した theorem stub 群
-
-重要なのは、generated stub は **proof completion の完了宣言ではない** ことです。
-repo は Lean を current layer の mechanization spine として使っていますが、全 sample の domain proof が discharge 済みとは言っていません。
-
-## built-in と user-defined の境界
-
-current helper / sample line で built-in vocabulary に入るのは、repo が closeout で明示している最小の構文語です。
-
-- `module`
-- `index`
-- `policy`
-- `principal`
-- `resource`
-- `effect`
-- `place`
-- `option`
-- `chain`
-- `fallback`
-- `lineage`
-- `perform`
-- `via`
-- `require`
-- `ensure`
-- `atomic_cut`
-- `transition`
-- `stage`
-- `publish`
-- `observe`
-- `handoff`
-- `witness`
-- `model`
-- `property`
-
-それ以外の security label 名、authority 名、capture capability 名、region 名、cost counter 名、witness field 名は user-defined です。
-
-## 現在すぐ動く確認コマンド
-
-suite 全体:
-
-```bash
-python3 scripts/current_l2_guided_samples.py smoke-all --format json
-python3 scripts/current_l2_guided_samples.py closeout --format json
-```
-
-family ごと:
-
-```bash
-python3 scripts/clean_near_end_samples.py run typing --format json
-python3 scripts/clean_near_end_samples.py run order-handoff --format json
-python3 scripts/clean_near_end_samples.py run model-check --format json
-python3 scripts/clean_near_end_samples.py run modal --format json
-python3 scripts/clean_near_end_samples.py matrix --format json
-```
-
-Sugoroku world vertical slice:
-
-```bash
-python3 scripts/sugoroku_world_samples.py list
-python3 scripts/sugoroku_world_samples.py check-all
-python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug summary
-python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug signatures
-python3 scripts/sugoroku_world_samples.py run 03_roll_publish_handoff --debug envelopes
-python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --debug membership
-python3 scripts/sugoroku_world_samples.py model-check
-python3 scripts/sugoroku_world_samples.py closeout --format json
-```
-
-Lean:
-
-```bash
-python3 scripts/current_l2_lean_sample_sync.py
-```
-
-docs:
-
-```bash
-python3 scripts/check_source_hierarchy.py
-python3 scripts/validate_docs.py
-```
-
-Alpha-0 avatar/package floor:
-
-```bash
-cargo test -p mir-runtime --test alpha_avatar_runtime
-cargo run -q -p mir-runtime --example mirrorea_alpha_avatar_runtime -- closeout
-python3 scripts/alpha_avatar_runtime_samples.py check-all --format json
-```
-
-Alpha-0 cut/save-load floor:
-
-```bash
-cargo test -p mirrorea-core --test runtime_substrate
-cargo test -p mir-runtime --test alpha_local_runtime
-cargo test -p mir-runtime --test alpha_cut_save_load_runtime
-cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-resume
-cargo run -q -p mir-runtime --example mirrorea_alpha_local_runtime -- save-load-stale-membership
-python3 scripts/alpha_cut_save_load_samples.py check-all --format json
-```
-
-Alpha-0 visualization/devtools floor:
-
-```bash
-python3 scripts/alpha_visualization_samples.py check-all --format json
-python3 scripts/alpha_visualization_samples.py closeout --format json
-python3 -m unittest scripts.tests.test_alpha_visualization_samples
-```
-
-Alpha-0 integrated E2E bridge:
-
-```bash
-python3 scripts/alpha_e2e_samples.py run E2E-06 --format json
-python3 scripts/alpha_e2e_samples.py check-all --format json
-python3 scripts/alpha_e2e_samples.py closeout --format json
-```
-
-Practical alpha-1 current floors:
-
-```bash
-cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
-cargo test -p mir-ast practical_alpha1_checker -- --nocapture
-cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture
-cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture
-cargo test -p mir-ast --test practical_alpha1_hotplug_plan -- --nocapture
-cargo test -p mir-runtime --test practical_alpha1_hotplug -- --nocapture
-cargo test -p mir-ast --test practical_alpha1_transport_plan -- --nocapture
-cargo test -p mir-runtime --test practical_alpha1_transport -- --nocapture
-cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture
-cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture
-python3 scripts/practical_alpha1_check.py check-all --format json
-python3 scripts/practical_alpha1_run_local.py check-all --format json
-python3 scripts/practical_alpha1_attach.py check-all --format json
-python3 scripts/practical_alpha1_transport.py check-all --format json
-python3 scripts/practical_alpha1_export_devtools.py check-all --format json
-python3 scripts/practical_alpha1_save_load.py check-all --format json
-python3 scripts/practical_alpha1_save_load.py closeout --format json
-```
-
-## どこを見ると理解しやすいか
-
-- `docs/research_abstract/README.md`
-  日本語の簡潔な全体像
-- `docs/hands_on/README.md`
-  current runnable floor と remaining gate を短く辿る hands-on landing page
-- `docs/hands_on/current_phase_closeout_01.md`
-  current phase closeout guide
-- `samples_progress.md`
-  phase / layer ごとの runnable sample、E2E、debug surface、build / storage 環境の dashboard
-- `samples/README.md`
-  active / base corpus / planned / prototype / archive / generated sample の taxonomy
-- `scripts/README.md`
-  active runner / helper / detached loop / storage/env / tests の taxonomy
-- `docs/research_abstract/clean_near_end_typing_01.md`
-  finite-index typing の要点
-- `docs/research_abstract/clean_near_end_order_model_01.md`
-  order / handoff と model-check second line の関係
-- `docs/research_abstract/clean_near_end_modal_01.md`
-  modal / stage / witnessed bridge の current reading
-- `docs/research_abstract/clean_near_end_lean_01.md`
-  Lean foundations と generated stub の current reading
-- `docs/research_abstract/hands_on_typing.md`
-  clean near-end typing をコマンド実行、sample code、output から読む初心者向け手順
-- `docs/research_abstract/hands_on_order_model.md`
-  publication / witness / handoff と `memory_order` 再解釈を手で確認する手順
-- `docs/research_abstract/hands_on_model_checking.md`
-  Peterson / relaxed memory / broken mutex を model-check second line として確認する手順
-- `docs/research_abstract/hands_on_modal.md`
-  `stable` / `later` / `published(room)` / `witnessed(...)` を stage ごとに読む手順
-- `docs/research_abstract/hands_on_lean.md`
-  Lean foundation proof と generated theorem stub の違いを確認する手順
-- `docs/research_abstract/hands_on_sugoroku_00_overview.md`
-  Sugoroku world runtime attachment vertical slice の初心者向け入口
-- `docs/research_abstract/hands_on_sugoroku_sample_matrix.md`
-  Sugoroku 10 sample が phase 4 / 7 / 14 のどの証拠なのかを短く追うための matrix
-- `docs/research_abstract/avatar_fairy_follow_plan_01.md`
-  phase 8 active representative slice / residual planned family / historical prototype の境界
-- `docs/hands_on/avatar_fairy_follow_representative_slice_01.md`
-  phase 8 current runnable slice の最短入口
-- 各 `_detail.md`
-  full sample code と actual output
-
-## この文書で意図的に省いていること
-
-この文書は current snapshot の入口なので、pre-clean-near-end の古い sample line や古い proposal chain の詳細はここでは再説明しません。必要な場合は archive、`plan/90-source-traceability.md`、`docs/reports/` を参照してください。
+- `progress.md` と `samples_progress.md` の裸の `100%` は operational-layer-ready 以上にだけ使う
+- evidence line や first-floor line の達成は、`100% current-scope evidence closeout` または `100% first-floor closeout` と明示して読む
+- rough % は rollback し得る snapshot であり、規範判断の正本ではない

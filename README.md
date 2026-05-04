@@ -45,16 +45,20 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 
 ## Mirrorea の次軸
 
-Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-03 時点では、その中に 2 つの line を分けて持ちます。
+Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-05 時点では、その中に 3 つの line を分けて持ちます。
 
 - **Mirrorea Spaces alpha-0 evidence line**
   規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
-  規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。こちらが今後の `100%` の基準であり、source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype を揃えた実用 toolchain を目標にします。
-  ただし、これは promoted work queue であり、active canonical runnable root への昇格を意味しません。2026-05-04 時点の last actualization package / latest package closeout は `P-A1-17` practical save-load preview carrier alignment です。
+  規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。ここは source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product preview を揃える first-floor toolchain line であり、operational α-0.5 / α-0.8 readiness そのものではありません。
+  ただし、これは promoted work queue であり、active canonical runnable root への昇格を意味しません。2026-05-05 時点の latest package closeout は `P-A1-18` operational alpha theory freeze です。
   2026-05-04 時点では、`samples/practical-alpha1/` の limited `package.mir.json` fixtures と `crates/mir-ast::practical_alpha1` library loader、`crates/mir-ast::practical_alpha1_checker` と `scripts/practical_alpha1_check.py` による first practical checker floor、`crates/mir-ast::practical_alpha1_runtime_plan` と `crates/mir-runtime::practical_alpha1_local_runtime` / example `mir_practical_alpha1_run_local` / `scripts/practical_alpha1_run_local.py` による first practical local-runtime floor、`crates/mir-ast::practical_alpha1_hotplug_plan` と `crates/mir-runtime::practical_alpha1_hotplug` / example `mir_practical_alpha1_attach` / `scripts/practical_alpha1_attach.py` による non-final practical hot-plug floor、`crates/mir-runtime::practical_alpha1_avatar` / example `mir_practical_alpha1_avatar` / `scripts/practical_alpha1_avatar.py` による distinct avatar preview companion floor、`crates/mir-ast::practical_alpha1_transport_plan` と `crates/mir-runtime::practical_alpha1_transport` / example `mir_practical_alpha1_transport` / `scripts/practical_alpha1_transport.py` による current practical transport floor、`scripts/practical_alpha1_export_devtools.py` による widened practical devtools export floor、`crates/mir-ast::practical_alpha1_save_load_plan` と `crates/mir-runtime::practical_alpha1_save_load` / example `mir_practical_alpha1_save_load` / `scripts/practical_alpha1_save_load.py` による widened practical local save/load floor、さらに `samples/practical-alpha1/previews/` と `scripts/practical_alpha1_product_preview.py` による widened practical product-preview floor が入っています。現在 actualize 済みの hot-plug row は `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、avatar preview row は `AV-A1-01/02/03`、transport row は `TR-A1-01..07`、devtools row は `VIS-A1-01/02/03/04/05/06/07`、save/load row は `SL-A1-01/02/03`、preview row は `PE2E-01..09` に限ります。avatar preview floor の carrier split は `checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report` であり、`AV-A1-02` は `mir_humanoid_runtime_preview` を選ぶ non-final custom Mir avatar preview、`AV-A1-03` は source hot-plug report を missing host capability rejected のまま保って visible monotone placeholder fallback を示す companion preview に限られます。preview floor の carrier split は `preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle` であり、`PE2E-04` は引き続き `HP-A1-06` placeholder object preview companion evidence に narrow され、`PE2E-06` は exact `SL-A1-03` save-load preflight reject report を consume する invalid distributed save rejected preview に限られ、`PE2E-08/09` は `AV-A1-02/03` exact avatar preview reports を thin companion bundles として consume します。`VIS-A1-03` は exact `SL-A1-02` save-load report から saved frontier、later live membership advance、restored frontier、stale-membership reject を保つ membership timeline export に限り、distributed durable membership timeline や witness/lease co-timeline completion を意味しません。`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary、membership snapshot、deferred detach boundary を export する observable であり、alpha-0 Stage D lifecycle closeout や detach runtime lifecycle completion を意味しません。`VIS-A1-05` は exact `AV-A1-03` avatar preview report から rejected source lane、degraded roles、missing host capability を保つ fallback degradation export に限り、native execution や unsupported-runtime execution success を意味しません。`VIS-A1-07` は exact `SL-A1-02` save-load report に追加した report-local `retained_artifacts` catalog と `retention_scope = report_local_inventory` を source にして、hit/miss 付き on-demand retention query trace を devtools bundle へ下ろす narrow widening に限り、durable retained-artifact catalog service、cross-session or remote retrieval API、retention expiry/lease lifecycle completion を意味しません。save/load floor は runtime-backed branch と checker-backed preflight branch を分けて持ち、`SL-A1-01/02` は one exact practical local-runtime frontier と distinct save-load plan から saved local frontier と non-final save-load report を組み立てる local-only rows、`SL-A1-03` は exact rejected `CHK-CUT-01` checker report を distinct save-load preflight reject report へ写す invalid distributed-cut row に限られます。`CHK-CUT-01` reuse は orphan-receive guard reuse に留まり、full consistent-cut / `Z-cycle` / distributed durable save/load completion を意味しません。first practical avatar preview floor は native execution、final avatar ABI、same-session product runtime を意味せず、widened practical product-preview floor も same-session runtime attach/detach execution、unsupported-runtime execution success、final product prototype completion、product-like CLI、final public runtime/devtools/transport/save-load/package-avatar API を意味しません。
 
-現行の Stage A..F `100%` は evidence closeout であり、practical alpha-1 `100%` ではありません。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
+- **Operational alpha theory-freeze line**
+  規範判断は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を固定します。
+  現在の repo は evidence closeout と first-floor carriers を多数持ちますが、same-session carrier、typed external host-I/O direct execution lane、same-session hot-plug runtime、session-bound devtools export はまだ未 actualize です。
+
+現行の Stage A..F `100%` は `100% current-scope evidence closeout`、practical alpha-1 row の `100%` は `100% first-floor closeout` と明示して読みます。裸の `100%` は operational-layer-ready 以上にだけ使います。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
 current line で reader が押さえるべき点は次です。
 
@@ -82,8 +86,11 @@ current line で reader が押さえるべき点は次です。
   `docs/hands_on/current_phase_closeout_01.md`
 - reader-facing roadmap summary:
   `docs/research_abstract/mirrorea_future_axis_01.md`
+- operational alpha theory freeze / roadmap:
+  `specs/19-verification-stratification.md`、`specs/20-cut-save-load-semantics.md`、`specs/21-auth-layer-algebra.md`、`specs/22-observability-devtools-semantics.md`、`specs/23-typed-external-host-boundary.md`、`specs/24-operational-alpha05-alpha08-readiness.md`
+  `plan/45-operational-alpha05-roadmap.md`、`plan/46-operational-alpha08-roadmap.md`、`plan/47-operational-alpha09-devtools-roadmap.md`、`plan/48-theory-freeze-proof-obligations.md`、`plan/49-host-io-and-session-runtime-roadmap.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..44`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..49`
 
 ## 何が built-in で、何が user-defined か
 
@@ -224,6 +231,7 @@ python3 scripts/practical_alpha1_product_preview.py render-html PE2E-07 --format
 8. `specs/09-invariants-and-constraints.md`
 9. 必要な subsystem spec と `plan/00-index.md`
 10. practical alpha-1 を扱う task なら `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
+11. operational readiness / theory freeze を扱う task なら `specs/19..24` と `plan/45..49`
 
 task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
 ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。
