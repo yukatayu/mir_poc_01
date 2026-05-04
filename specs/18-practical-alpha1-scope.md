@@ -320,21 +320,33 @@ final public transport API と同一視しない。
     - exact `AV-A1-03` avatar preview report から rejected source lane、degraded roles、missing host capability を保つ fallback degradation を export する
   - `VIS-A1-06`
     - practical transport report から auth lane を transport metadata から分離した redacted observer view を export する
+  - `VIS-A1-07`
+    - exact `SL-A1-02` save-load report から report-local retained-artifact catalog と hit/miss retention query trace を export する
 - current carrier split は次である
   - `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - この floor は new runtime semantics を追加しない
-- この floor は full `PA1-6` completion を意味しない
+- この floor は `PA1-6` current widened first-floor closeout を満たすが、full devtools completion は意味しない
 - `VIS-A1-03` は exact practical save-load report over the report-local membership timeline bundle に限り、
   distributed durable membership timeline、witness/lease co-timeline、detach history completion を意味しない
-- この floor は `VIS-A1-07` retention/on-demand trace の completion を意味しない
-- `VIS-A1-07` は current exact practical carriers だけでは actualize しない
-  - current exact reports にある `retention_scope` は label / authority inventory に留まる
-  - `retained_later_refs` も future-later inventory に留まり、retained artifact id、fetch selector、request/result trace、hit/miss/expired outcome を持たない
-  - この状態で `VIS-A1-07` を widen すると current practical exact-evidence rule を破る
+- `VIS-A1-07` は exact `SL-A1-02` save-load report に widened した
+  report-local `retention_scope = report_local_inventory` と `retained_artifacts`
+  catalog だけを source にする narrow export である
+  - retained artifact id
+  - fetch selector
+  - request/result trace
+  - `hit` / `miss` outcome
+  は export される
+  - ただし `expired` / `leased_out` / remote fetch outcome は current floor に入れない
+  - current floor は durable retained-artifact catalog service を追加しない
+  - current floor は cross-session or remote retrieval API を追加しない
+  - current floor は retention expiry / lease-driven eviction lifecycle を追加しない
 - `VIS-A1-04` は export-side hot-plug lifecycle observability widening に限り、
   detach runtime lifecycle execution、rollback/migration completion、final object package attach completion を意味しない
 - `VIS-A1-05` は export-side fallback degradation observability widening に限り、
   native execution、unsupported-runtime execution success、same-session runtime attach/detach execution を意味しない
+- `VIS-A1-07` は export-side retention-query observability widening に限り、
+  durable retained-artifact catalog service、cross-session or remote retrieval API、
+  retention expiry / lease lifecycle、distributed durable save/load を意味しない
 - この floor は local save/load、product prototype、WAN/federation、
   final public viewer / telemetry / runtime-devtools ABI を意味しない
 

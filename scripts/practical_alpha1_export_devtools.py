@@ -58,7 +58,7 @@ TELEMETRY_LANES = [
 
 STOP_LINES = [
     "do not treat this export bundle as full practical devtools completion",
-    "do not treat this export bundle as retention/on-demand completion or witness/lease co-timeline completion",
+    "do not treat this export bundle as durable retention/on-demand service completion or witness/lease co-timeline completion",
     "do not treat this export bundle as save/load, product prototype, or final public runtime/devtools/telemetry ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the devtools package",
 ]
@@ -66,7 +66,7 @@ STOP_LINES = [
 LIMITATIONS = [
     "non-final practical devtools export floor only",
     "exact practical reports reused as sources; no new runtime semantics added",
-    "remaining practical devtools observables stay deferred",
+    "retention query remains report-local hit/miss only; no expiry or remote retrieval semantics are added",
 ]
 
 COMMON_NON_CLAIMS = [
@@ -78,7 +78,6 @@ COMMON_NON_CLAIMS = [
 ]
 
 DEFERRED_OBSERVABLES = [
-    "VIS-A1-07",
 ]
 
 IMPLEMENTED_ROWS: list[dict[str, Any]] = [
@@ -123,6 +122,13 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_report": "samples/practical-alpha1/expected/vis-a1-06-redacted-observer-view.expected.json",
         "bundle_kind": "redacted_observer_view",
         "actualized_observable": "VIS-A1-06",
+    },
+    {
+        "sample_id": "VIS-A1-07",
+        "summary": "report-local retained-artifact catalog plus on-demand query trace over the exact practical save-load report",
+        "expected_report": "samples/practical-alpha1/expected/vis-a1-07-retention-query.expected.json",
+        "bundle_kind": "retention_query_export",
+        "actualized_observable": "VIS-A1-07",
     },
 ]
 
@@ -1149,6 +1155,174 @@ def _redacted_observer_bundle() -> dict[str, Any]:
     }
 
 
+def _retention_query_bundle() -> dict[str, Any]:
+    report = _save_load_report("SL-A1-02")
+    retained_artifact_catalog = list(report["retained_artifacts"])
+    artifacts_by_selector = {
+        artifact["fetch_selector"]: artifact for artifact in retained_artifact_catalog
+    }
+    query_requests = [
+        {
+            "query_id": "retention_query#saved_membership_frontier",
+            "fetch_selector": "saved_runtime_snapshot.membership",
+            "requested_scope": report["retention_scope"],
+            "query_mode": "exact_report_local_lookup",
+            "notes": [
+                "query remains inside the exact save-load report-local retained-artifact catalog",
+            ],
+        },
+        {
+            "query_id": "retention_query#stale_membership_reject",
+            "fetch_selector": "resumed_dispatch_records[0]",
+            "requested_scope": report["retention_scope"],
+            "query_mode": "exact_report_local_lookup",
+            "notes": [
+                "query retrieves the retained resumed dispatch reject record without re-running runtime semantics",
+            ],
+        },
+        {
+            "query_id": "retention_query#missing_auth_lane",
+            "fetch_selector": "auth_lane",
+            "requested_scope": report["retention_scope"],
+            "query_mode": "exact_report_local_lookup",
+            "notes": [
+                "miss remains explicit instead of inventing a retained artifact outside the exact save-load report",
+            ],
+        },
+    ]
+    query_results = []
+    for request in query_requests:
+        artifact = artifacts_by_selector.get(request["fetch_selector"])
+        if artifact is None:
+            query_results.append(
+                {
+                    "query_id": request["query_id"],
+                    "query_outcome": "miss",
+                    "matched_artifact_id": None,
+                    "artifact_kind": None,
+                    "source_section": None,
+                    "retention_scope": request["requested_scope"],
+                    "redaction": None,
+                    "notes": [
+                        "selector was not present in the exact retained-artifact catalog",
+                    ],
+                }
+            )
+            continue
+        query_results.append(
+            {
+                "query_id": request["query_id"],
+                "query_outcome": "hit",
+                "matched_artifact_id": artifact["artifact_id"],
+                "artifact_kind": artifact["artifact_kind"],
+                "source_section": artifact["source_section"],
+                "retention_scope": artifact["retention_scope"],
+                "redaction": artifact["redaction"],
+                "notes": [
+                    f"resolved via selector={request['fetch_selector']}",
+                    "result remains report-local and exact-evidence only",
+                ],
+            }
+        )
+    panels = [
+        _panel(
+            panel_id="retained_artifact_catalog",
+            panel_kind="retention_catalog",
+            label="practical:retained-artifact-catalog",
+            authority="InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+            redaction="retained_artifact_summary",
+            retention_scope=report["retention_scope"],
+            source_report_refs=["SL-A1-02"],
+            focus_refs=[artifact["artifact_id"] for artifact in retained_artifact_catalog],
+            notes=[
+                "catalog is exact report-local inventory only",
+                "no durable retention service or cross-session storage is implied",
+            ],
+        ),
+        _panel(
+            panel_id="on_demand_query_trace",
+            panel_kind="retention_query_trace",
+            label="practical:retention-query-trace",
+            authority="InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+            redaction="retained_artifact_summary",
+            retention_scope=report["retention_scope"],
+            source_report_refs=["SL-A1-02"],
+            focus_refs=[request["query_id"] for request in query_requests],
+            notes=[
+                "query trace remains helper-local and exact-report-backed",
+                "hit and miss are visible without inventing expiry or remote retrieval semantics",
+            ],
+        ),
+    ]
+    telemetry_rows = [
+        _telemetry(
+            telemetry_id=result["query_id"],
+            telemetry_kind="retention_query_result",
+            label=f"practical:retention-query-{result['query_outcome']}",
+            authority="InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+            redaction="retained_artifact_summary",
+            retention_scope=result["retention_scope"],
+            source_report_refs=["SL-A1-02"],
+            channel=query_requests[index]["fetch_selector"],
+            value_summary=(
+                result["matched_artifact_id"]
+                if result["matched_artifact_id"] is not None
+                else "miss"
+            ),
+            notes=list(result["notes"]),
+        )
+        for index, result in enumerate(query_results)
+    ]
+    return {
+        "sample_id": "VIS-A1-07",
+        "bundle_kind": "retention_query_export",
+        "family": "practical-alpha1-devtools-export",
+        "devtools_scope": DEVTOOLS_SCOPE,
+        "viewer_scope": VIEWER_SCOPE,
+        "surface_kind": SURFACE_KIND,
+        "viewer_mode": VIEWER_MODE,
+        "bundle_boundary": BUNDLE_BOUNDARY,
+        "actualized_observable": "VIS-A1-07",
+        "source_reports": [
+            _source_report_ref(
+                family="practical-alpha1-save-load",
+                sample_id="SL-A1-02",
+                carrier_scope=report["save_load_scope"],
+                surface_kind=report["surface_kind"],
+            )
+        ],
+        "panel_lanes": list(PANEL_LANES),
+        "telemetry_lanes": list(TELEMETRY_LANES),
+        "panels": panels,
+        "telemetry_rows": telemetry_rows,
+        "panel_ids": [panel["panel_id"] for panel in panels],
+        "panel_kinds": sorted({panel["panel_kind"] for panel in panels}),
+        "telemetry_ids": [row["telemetry_id"] for row in telemetry_rows],
+        "telemetry_kinds": sorted({row["telemetry_kind"] for row in telemetry_rows}),
+        "retention_scopes": sorted({panel["retention_scope"] for panel in panels}),
+        "redaction_policies": sorted({panel["redaction"] for panel in panels}),
+        "export_sections": {
+            "retained_artifact_catalog": retained_artifact_catalog,
+            "query_requests": query_requests,
+            "query_results": query_results,
+            "retained_later_refs": report["retained_later_refs"],
+        },
+        "what_it_proves": [
+            "exact practical save-load report is consumable as a distinct report-local retained-artifact catalog",
+            "on-demand query hit/miss traces remain explicit without adding new runtime semantics",
+            "retention query export stays a thin devtools bundle over exact save-load evidence only",
+        ],
+        "what_it_does_not_prove": list(COMMON_NON_CLAIMS)
+        + [
+            "full devtools stage completion by this row alone",
+            "durable retained-artifact catalog service",
+            "cross-session or remote retrieval API",
+            "retention expiry or lease-driven eviction lifecycle",
+            "distributed durable save/load",
+        ],
+    }
+
+
 def list_samples() -> list[dict[str, Any]]:
     return [
         {
@@ -1174,6 +1348,8 @@ def build_bundle(sample_id: str) -> dict[str, Any]:
         return _fallback_degradation_bundle()
     if sample_id == "VIS-A1-06":
         return _redacted_observer_bundle()
+    if sample_id == "VIS-A1-07":
+        return _retention_query_bundle()
     raise ValueError(f"unknown practical alpha-1 devtools sample {sample_id}")
 
 
@@ -1213,7 +1389,7 @@ def check_all() -> dict[str, Any]:
         "devtools_export_first_floor_complete": not failed,
         "actualized_observables": actualized_observables,
         "deferred_observables": list(DEFERRED_OBSERVABLES),
-        "stage_pa1_6_complete": False,
+        "stage_pa1_6_complete": not failed and not DEFERRED_OBSERVABLES,
     }
 
 
@@ -1330,10 +1506,12 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-06 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-07 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-03 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-06 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-07 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py closeout --format json",
             "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_avatar scripts.tests.test_practical_alpha1_save_load scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs",

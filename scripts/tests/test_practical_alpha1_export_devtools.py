@@ -163,12 +163,43 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
             bundle["what_it_does_not_prove"],
         )
 
+    def test_retention_query_bundle_uses_exact_retained_artifact_catalog(self) -> None:
+        bundle = runner.run_sample("VIS-A1-07")
+        self.assertEqual(bundle["sample_id"], "VIS-A1-07")
+        self.assertEqual(
+            [ref["sample_id"] for ref in bundle["source_reports"]],
+            ["SL-A1-02"],
+        )
+        catalog = bundle["export_sections"]["retained_artifact_catalog"]
+        self.assertEqual(
+            [artifact["artifact_id"] for artifact in catalog],
+            [
+                "saved_membership_frontier#SL-A1-02",
+                "restored_membership_frontier#SL-A1-02",
+                "stale_membership_reject#SL-A1-02",
+                "resumed_event_dag#SL-A1-02",
+            ],
+        )
+        results = bundle["export_sections"]["query_results"]
+        self.assertEqual(
+            [result["query_outcome"] for result in results],
+            ["hit", "hit", "miss"],
+        )
+        self.assertEqual(
+            results[0]["matched_artifact_id"], "saved_membership_frontier#SL-A1-02"
+        )
+        self.assertEqual(results[2]["matched_artifact_id"], None)
+        self.assertIn(
+            "durable retained-artifact catalog service",
+            bundle["what_it_does_not_prove"],
+        )
+
     def test_closeout_keeps_remaining_observables_deferred(self) -> None:
         with mock.patch.object(
             runner,
             "check_all",
             return_value={
-                "sample_count": 6,
+                "sample_count": 7,
                 "passed": [
                     "VIS-A1-01",
                     "VIS-A1-02",
@@ -176,6 +207,7 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
                     "VIS-A1-04",
                     "VIS-A1-05",
                     "VIS-A1-06",
+                    "VIS-A1-07",
                 ],
                 "failed": [],
                 "devtools_export_first_floor_complete": True,
@@ -186,16 +218,16 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
                     "VIS-A1-04",
                     "VIS-A1-05",
                     "VIS-A1-06",
+                    "VIS-A1-07",
                 ],
-                "deferred_observables": ["VIS-A1-07"],
+                "deferred_observables": [],
+                "stage_pa1_6_complete": True,
             },
         ):
             payload = runner.closeout()
         self.assertTrue(payload["devtools_export_first_floor_complete"])
-        self.assertEqual(
-            payload["deferred_observables"],
-            ["VIS-A1-07"],
-        )
+        self.assertEqual(payload["deferred_observables"], [])
+        self.assertTrue(payload["stage_pa1_6_complete"])
 
 
 if __name__ == "__main__":

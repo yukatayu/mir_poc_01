@@ -26,8 +26,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-05` fallback degradation export over exact `AV-A1-03` avatar preview evidence, limited to rejected source lane + degraded roles + missing host capability visibility.
 - `P-A1-13` widens the same practical devtools cut here:
   `VIS-A1-03` membership timeline export over exact `SL-A1-02` save-load evidence, limited to saved frontier + later live membership advance + restored frontier + stale-membership reject visibility.
-- `P-A1-14` keeps the next practical devtools observable blocked here:
-  `VIS-A1-07` retention/on-demand trace is not widened because current exact practical carriers expose only `retention_scope` labels and `retained_later_refs` later-family inventory, not an exact retained-artifact catalog or on-demand retrieval trace.
+- `P-A1-15` widens the same practical devtools cut here:
+  `VIS-A1-07` retention-query export over exact `SL-A1-02` save-load evidence, limited to report-local retained-artifact catalog rows plus hit/miss on-demand query trace.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - `P-A1-10` adds the first practical avatar preview companion cut here:
@@ -86,9 +86,11 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `expected/vis-a1-*.expected.json`
   - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
   - `VIS-A1-02`: observer-safe route trace export
+  - `VIS-A1-03`: membership timeline export over exact save-load evidence
   - `VIS-A1-04`: hot-plug lifecycle export over attach accepted and deferred detach boundary reports
   - `VIS-A1-05`: fallback degradation export over rejected-source avatar preview evidence
   - `VIS-A1-06`: redacted observer view with auth-lane separation
+  - `VIS-A1-07`: report-local retention query export over exact save-load retained-artifact evidence
 - `expected/av-a1-*.expected.json`
   - exact expected non-final practical avatar preview reports over exact hot-plug source reports
 - `expected/sl-a1-*.expected.json`
@@ -115,7 +117,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
-- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/03/04/05/06`.
+- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/03/04/05/06/07`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
@@ -124,12 +126,14 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
+- `VIS-A1-07` lowers only report-local retained-artifact catalog rows plus hit/miss query trace from exact `SL-A1-02` save-load evidence.
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
 - Preview manifests are lowered through exact practical reports, exact practical devtools bundles, and exact avatar preview companion reports before non-final product-preview bundle assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
 - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview.
 - `VIS-A1-05` keeps that same rejected source lane and lowers only a visible fallback degradation export bundle; it does not reinterpret the row as native execution or unsupported-runtime execution success.
+- `VIS-A1-07` keeps retention-query evidence report-local; it does not reinterpret the row as durable retained-artifact catalog service, cross-session/remote retrieval, or expiry lifecycle completion.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
 - `PE2E-08` is limited to a custom-avatar companion preview over `AV-A1-02` and does not actualize native execution or same-session runtime attachment.

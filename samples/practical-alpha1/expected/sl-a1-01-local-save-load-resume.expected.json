@@ -240,8 +240,55 @@
   "reason_family": null,
   "state_roundtrip_equal": true,
   "serialized_state_bytes": 1165,
+  "retention_scope": "report_local_inventory",
   "checker_guard_refs": [
     "CHK-CUT-01"
+  ],
+  "retained_artifacts": [
+    {
+      "artifact_id": "saved_membership_frontier#SL-A1-01",
+      "artifact_kind": "membership_frontier",
+      "fetch_selector": "saved_runtime_snapshot.membership",
+      "retention_scope": "report_local_inventory",
+      "redaction": "membership_frontier_summary",
+      "source_section": "saved_runtime_snapshot.membership",
+      "notes": [
+        "exact report-local retained artifact for the saved membership frontier"
+      ]
+    },
+    {
+      "artifact_id": "restored_membership_frontier#SL-A1-01",
+      "artifact_kind": "membership_frontier",
+      "fetch_selector": "restored_runtime_snapshot.membership",
+      "retention_scope": "report_local_inventory",
+      "redaction": "membership_frontier_summary",
+      "source_section": "restored_runtime_snapshot.membership",
+      "notes": [
+        "exact report-local retained artifact for the restored membership frontier"
+      ]
+    },
+      {
+        "artifact_id": "resumed_dispatch_accept#SL-A1-01",
+      "artifact_kind": "dispatch_record",
+      "fetch_selector": "resumed_dispatch_records[0]",
+      "retention_scope": "report_local_inventory",
+      "redaction": "dispatch_reason_summary",
+      "source_section": "resumed_dispatch_records[0]",
+      "notes": [
+        "exact report-local retained artifact for the resumed dispatch verdict"
+      ]
+    },
+    {
+      "artifact_id": "resumed_event_dag#SL-A1-01",
+      "artifact_kind": "event_dag",
+      "fetch_selector": "resumed_event_dag",
+      "retention_scope": "report_local_inventory",
+      "redaction": "event_structure_only",
+      "source_section": "resumed_event_dag",
+      "notes": [
+        "exact report-local retained artifact for the resumed event DAG"
+      ]
+    }
   ],
   "retained_later_refs": [
     "distributed_durable_save_load",

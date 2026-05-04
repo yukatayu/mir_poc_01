@@ -1,0 +1,301 @@
+{
+  "sample_id": "VIS-A1-07",
+  "bundle_kind": "retention_query_export",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-07",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-save-load",
+      "sample_id": "SL-A1-02",
+      "carrier_scope": "practical-alpha1-save-load-floor",
+      "surface_kind": "practical_alpha1_nonfinal_save_load_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "retained_artifact_catalog",
+      "panel_kind": "retention_catalog",
+      "label": "practical:retained-artifact-catalog",
+      "authority": "InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+      "redaction": "retained_artifact_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "focus_refs": [
+        "saved_membership_frontier#SL-A1-02",
+        "restored_membership_frontier#SL-A1-02",
+        "stale_membership_reject#SL-A1-02",
+        "resumed_event_dag#SL-A1-02"
+      ],
+      "notes": [
+        "catalog is exact report-local inventory only",
+        "no durable retention service or cross-session storage is implied"
+      ]
+    },
+    {
+      "panel_id": "on_demand_query_trace",
+      "panel_kind": "retention_query_trace",
+      "label": "practical:retention-query-trace",
+      "authority": "InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+      "redaction": "retained_artifact_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "focus_refs": [
+        "retention_query#saved_membership_frontier",
+        "retention_query#stale_membership_reject",
+        "retention_query#missing_auth_lane"
+      ],
+      "notes": [
+        "query trace remains helper-local and exact-report-backed",
+        "hit and miss are visible without inventing expiry or remote retrieval semantics"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "retention_query#saved_membership_frontier",
+      "telemetry_kind": "retention_query_result",
+      "label": "practical:retention-query-hit",
+      "authority": "InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+      "redaction": "retained_artifact_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "saved_runtime_snapshot.membership",
+      "value_summary": "saved_membership_frontier#SL-A1-02",
+      "notes": [
+        "resolved via selector=saved_runtime_snapshot.membership",
+        "result remains report-local and exact-evidence only"
+      ]
+    },
+    {
+      "telemetry_id": "retention_query#stale_membership_reject",
+      "telemetry_kind": "retention_query_result",
+      "label": "practical:retention-query-hit",
+      "authority": "InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+      "redaction": "retained_artifact_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "resumed_dispatch_records[0]",
+      "value_summary": "stale_membership_reject#SL-A1-02",
+      "notes": [
+        "resolved via selector=resumed_dispatch_records[0]",
+        "result remains report-local and exact-evidence only"
+      ]
+    },
+    {
+      "telemetry_id": "retention_query#missing_auth_lane",
+      "telemetry_kind": "retention_query_result",
+      "label": "practical:retention-query-miss",
+      "authority": "InspectRetainedArtifactCatalog(WorldPlace[AlphaRoom#1])",
+      "redaction": "retained_artifact_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "auth_lane",
+      "value_summary": "miss",
+      "notes": [
+        "selector was not present in the exact retained-artifact catalog"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "retained_artifact_catalog",
+    "on_demand_query_trace"
+  ],
+  "panel_kinds": [
+    "retention_catalog",
+    "retention_query_trace"
+  ],
+  "telemetry_ids": [
+    "retention_query#saved_membership_frontier",
+    "retention_query#stale_membership_reject",
+    "retention_query#missing_auth_lane"
+  ],
+  "telemetry_kinds": [
+    "retention_query_result"
+  ],
+  "retention_scopes": [
+    "report_local_inventory"
+  ],
+  "redaction_policies": [
+    "retained_artifact_summary"
+  ],
+  "export_sections": {
+    "retained_artifact_catalog": [
+      {
+        "artifact_id": "saved_membership_frontier#SL-A1-02",
+        "artifact_kind": "membership_frontier",
+        "fetch_selector": "saved_runtime_snapshot.membership",
+        "retention_scope": "report_local_inventory",
+        "redaction": "membership_frontier_summary",
+        "source_section": "saved_runtime_snapshot.membership",
+        "notes": [
+          "exact report-local retained artifact for the saved membership frontier"
+        ]
+      },
+      {
+        "artifact_id": "restored_membership_frontier#SL-A1-02",
+        "artifact_kind": "membership_frontier",
+        "fetch_selector": "restored_runtime_snapshot.membership",
+        "retention_scope": "report_local_inventory",
+        "redaction": "membership_frontier_summary",
+        "source_section": "restored_runtime_snapshot.membership",
+        "notes": [
+          "exact report-local retained artifact for the restored membership frontier"
+        ]
+      },
+      {
+        "artifact_id": "stale_membership_reject#SL-A1-02",
+        "artifact_kind": "dispatch_record",
+        "fetch_selector": "resumed_dispatch_records[0]",
+        "retention_scope": "report_local_inventory",
+        "redaction": "dispatch_reason_summary",
+        "source_section": "resumed_dispatch_records[0]",
+        "notes": [
+          "exact report-local retained artifact for the resumed dispatch verdict"
+        ]
+      },
+      {
+        "artifact_id": "resumed_event_dag#SL-A1-02",
+        "artifact_kind": "event_dag",
+        "fetch_selector": "resumed_event_dag",
+        "retention_scope": "report_local_inventory",
+        "redaction": "event_structure_only",
+        "source_section": "resumed_event_dag",
+        "notes": [
+          "exact report-local retained artifact for the resumed event DAG"
+        ]
+      }
+    ],
+    "query_requests": [
+      {
+        "query_id": "retention_query#saved_membership_frontier",
+        "fetch_selector": "saved_runtime_snapshot.membership",
+        "requested_scope": "report_local_inventory",
+        "query_mode": "exact_report_local_lookup",
+        "notes": [
+          "query remains inside the exact save-load report-local retained-artifact catalog"
+        ]
+      },
+      {
+        "query_id": "retention_query#stale_membership_reject",
+        "fetch_selector": "resumed_dispatch_records[0]",
+        "requested_scope": "report_local_inventory",
+        "query_mode": "exact_report_local_lookup",
+        "notes": [
+          "query retrieves the retained resumed dispatch reject record without re-running runtime semantics"
+        ]
+      },
+      {
+        "query_id": "retention_query#missing_auth_lane",
+        "fetch_selector": "auth_lane",
+        "requested_scope": "report_local_inventory",
+        "query_mode": "exact_report_local_lookup",
+        "notes": [
+          "miss remains explicit instead of inventing a retained artifact outside the exact save-load report"
+        ]
+      }
+    ],
+    "query_results": [
+      {
+        "query_id": "retention_query#saved_membership_frontier",
+        "query_outcome": "hit",
+        "matched_artifact_id": "saved_membership_frontier#SL-A1-02",
+        "artifact_kind": "membership_frontier",
+        "source_section": "saved_runtime_snapshot.membership",
+        "retention_scope": "report_local_inventory",
+        "redaction": "membership_frontier_summary",
+        "notes": [
+          "resolved via selector=saved_runtime_snapshot.membership",
+          "result remains report-local and exact-evidence only"
+        ]
+      },
+      {
+        "query_id": "retention_query#stale_membership_reject",
+        "query_outcome": "hit",
+        "matched_artifact_id": "stale_membership_reject#SL-A1-02",
+        "artifact_kind": "dispatch_record",
+        "source_section": "resumed_dispatch_records[0]",
+        "retention_scope": "report_local_inventory",
+        "redaction": "dispatch_reason_summary",
+        "notes": [
+          "resolved via selector=resumed_dispatch_records[0]",
+          "result remains report-local and exact-evidence only"
+        ]
+      },
+      {
+        "query_id": "retention_query#missing_auth_lane",
+        "query_outcome": "miss",
+        "matched_artifact_id": null,
+        "artifact_kind": null,
+        "source_section": null,
+        "retention_scope": "report_local_inventory",
+        "redaction": null,
+        "notes": [
+          "selector was not present in the exact retained-artifact catalog"
+        ]
+      }
+    ],
+    "retained_later_refs": [
+      "distributed_durable_save_load",
+      "stale_witness_nonresurrection",
+      "stale_lease_nonresurrection",
+      "docker_transport_save_load",
+      "hotplug_lifecycle_persistence",
+      "final_public_save_load_api"
+    ]
+  },
+  "what_it_proves": [
+    "exact practical save-load report is consumable as a distinct report-local retained-artifact catalog",
+    "on-demand query hit/miss traces remain explicit without adding new runtime semantics",
+    "retention query export stays a thin devtools bundle over exact save-load evidence only"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion by this row alone",
+    "durable retained-artifact catalog service",
+    "cross-session or remote retrieval API",
+    "retention expiry or lease-driven eviction lifecycle",
+    "distributed durable save/load"
+  ]
+}

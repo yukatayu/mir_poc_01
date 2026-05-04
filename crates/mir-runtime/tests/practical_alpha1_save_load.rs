@@ -56,6 +56,20 @@ fn practical_save_load_matches_sl_a1_02_expected_report() {
         observed.resumed_dispatch_records[0].dispatch_outcome,
         "rejected_stale_membership"
     );
+    assert_eq!(observed.retention_scope, "report_local_inventory");
+    assert_eq!(
+        observed
+            .retained_artifacts
+            .iter()
+            .map(|artifact| artifact.artifact_id.as_str())
+            .collect::<Vec<_>>(),
+        vec![
+            "saved_membership_frontier#SL-A1-02",
+            "restored_membership_frontier#SL-A1-02",
+            "stale_membership_reject#SL-A1-02",
+            "resumed_event_dag#SL-A1-02",
+        ]
+    );
 }
 
 #[test]

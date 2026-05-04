@@ -27,6 +27,7 @@ pub const PRACTICAL_ALPHA1_SAVE_LOAD_SCOPE: &str = "practical-alpha1-save-load-f
 pub const PRACTICAL_ALPHA1_SAVE_LOAD_SURFACE_KIND: &str =
     "practical_alpha1_nonfinal_save_load_report";
 pub const PRACTICAL_ALPHA1_SAVE_LOAD_SCOPE_KIND: &str = "alpha_local";
+pub const PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE: &str = "report_local_inventory";
 
 const PRACTICAL_ALPHA1_SAVE_LOAD_RETAINED_LATER_REFS: &[&str] = &[
     "distributed_durable_save_load",
@@ -125,8 +126,12 @@ pub struct PracticalAlpha1SaveLoadReport {
     pub reason_family: Option<String>,
     pub state_roundtrip_equal: bool,
     pub serialized_state_bytes: usize,
+    #[serde(default = "retention_scope_default")]
+    pub retention_scope: String,
     #[serde(default = "checker_guard_refs_default")]
     pub checker_guard_refs: Vec<String>,
+    #[serde(default)]
+    pub retained_artifacts: Vec<PracticalAlpha1RetainedArtifact>,
     #[serde(default = "retained_later_refs_default")]
     pub retained_later_refs: Vec<String>,
     #[serde(default = "stop_lines_default")]
@@ -143,6 +148,18 @@ pub struct PracticalAlpha1SaveLoadReport {
     pub run_docker_claimed: bool,
     #[serde(default)]
     pub save_load_claimed: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1RetainedArtifact {
+    pub artifact_id: String,
+    pub artifact_kind: String,
+    pub fetch_selector: String,
+    pub retention_scope: String,
+    pub redaction: String,
+    pub source_section: String,
+    #[serde(default)]
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -256,6 +273,7 @@ fn execute_practical_alpha1_save_load_plan(
             &resumed_evaluation,
             !plan.post_restore_membership_advances.is_empty(),
         );
+    let retained_artifacts = build_retained_artifacts(plan, &resumed_evaluation);
 
     Ok(PracticalAlpha1SaveLoadReport {
         surface_kind: surface_kind(),
@@ -287,7 +305,9 @@ fn execute_practical_alpha1_save_load_plan(
         reason_family,
         state_roundtrip_equal,
         serialized_state_bytes: serialized_state.len(),
+        retention_scope: retention_scope_default(),
         checker_guard_refs: checker_guard_refs_default(),
+        retained_artifacts,
         retained_later_refs: retained_later_refs_default(),
         stop_lines: stop_lines_default(),
         limitations: limitations_default(),
@@ -297,6 +317,67 @@ fn execute_practical_alpha1_save_load_plan(
         run_docker_claimed: false,
         save_load_claimed: true,
     })
+}
+
+fn build_retained_artifacts(
+    plan: &PracticalAlpha1SaveLoadPlan,
+    evaluation: &DispatchEvaluation,
+) -> Vec<PracticalAlpha1RetainedArtifact> {
+    let sample_id = &plan.sample_id;
+    let dispatch_artifact_id = match evaluation.dispatch_outcome.as_str() {
+        "accepted" => format!("resumed_dispatch_accept#{sample_id}"),
+        "rejected_stale_membership" => format!("stale_membership_reject#{sample_id}"),
+        _ => format!("resumed_dispatch_record#{sample_id}"),
+    };
+
+    vec![
+        PracticalAlpha1RetainedArtifact {
+            artifact_id: format!("saved_membership_frontier#{sample_id}"),
+            artifact_kind: "membership_frontier".to_string(),
+            fetch_selector: "saved_runtime_snapshot.membership".to_string(),
+            retention_scope: PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE.to_string(),
+            redaction: "membership_frontier_summary".to_string(),
+            source_section: "saved_runtime_snapshot.membership".to_string(),
+            notes: vec![
+                "exact report-local retained artifact for the saved membership frontier"
+                    .to_string(),
+            ],
+        },
+        PracticalAlpha1RetainedArtifact {
+            artifact_id: format!("restored_membership_frontier#{sample_id}"),
+            artifact_kind: "membership_frontier".to_string(),
+            fetch_selector: "restored_runtime_snapshot.membership".to_string(),
+            retention_scope: PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE.to_string(),
+            redaction: "membership_frontier_summary".to_string(),
+            source_section: "restored_runtime_snapshot.membership".to_string(),
+            notes: vec![
+                "exact report-local retained artifact for the restored membership frontier"
+                    .to_string(),
+            ],
+        },
+        PracticalAlpha1RetainedArtifact {
+            artifact_id: dispatch_artifact_id,
+            artifact_kind: "dispatch_record".to_string(),
+            fetch_selector: "resumed_dispatch_records[0]".to_string(),
+            retention_scope: PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE.to_string(),
+            redaction: "dispatch_reason_summary".to_string(),
+            source_section: "resumed_dispatch_records[0]".to_string(),
+            notes: vec![
+                "exact report-local retained artifact for the resumed dispatch verdict".to_string(),
+            ],
+        },
+        PracticalAlpha1RetainedArtifact {
+            artifact_id: format!("resumed_event_dag#{sample_id}"),
+            artifact_kind: "event_dag".to_string(),
+            fetch_selector: "resumed_event_dag".to_string(),
+            retention_scope: PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE.to_string(),
+            redaction: "event_structure_only".to_string(),
+            source_section: "resumed_event_dag".to_string(),
+            notes: vec![
+                "exact report-local retained artifact for the resumed event DAG".to_string(),
+            ],
+        },
+    ]
 }
 
 fn validate_base_runtime_frontier(
@@ -867,6 +948,10 @@ fn checker_guard_refs_default() -> Vec<String> {
         .iter()
         .map(|value| (*value).to_string())
         .collect()
+}
+
+fn retention_scope_default() -> String {
+    PRACTICAL_ALPHA1_SAVE_LOAD_RETENTION_SCOPE.to_string()
 }
 
 fn retained_later_refs_default() -> Vec<String> {
