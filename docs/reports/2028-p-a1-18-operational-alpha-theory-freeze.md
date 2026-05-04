@@ -119,7 +119,8 @@
 - `cargo fmt --check`
 - `git diff --check`
 - `git status --short`
-- final commit / push commands はこの report の後段で実行し、結果を同 report に追記する
+- `git commit --no-gpg-sign -m "mirrorea: freeze operational alpha theory boundaries"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -136,7 +137,12 @@
   - pass
 - `git diff --check`
   - pass
-- final commit hash と push result はこの report の後段で追記する
+- `git commit --no-gpg-sign -m "mirrorea: freeze operational alpha theory boundaries"`
+  - pass
+  - created commit `6c166c6`
+- `git push`
+  - pass
+  - pushed `6c166c6` to `origin/main`
 
 ## What changed in understanding
 
@@ -197,7 +203,7 @@
 
 ## Commit / push status
 
-Validation 完了時点では未 commit / 未 push。commit hash と push result は後段で更新する。
+Primary package commit `6c166c6` (`mirrorea: freeze operational alpha theory boundaries`) を作成し、`origin/main` へ push 済み。report metadata の追記が必要な場合は docs-only follow-up commit で扱う。
 
 ## Sub-agent session close status
 
