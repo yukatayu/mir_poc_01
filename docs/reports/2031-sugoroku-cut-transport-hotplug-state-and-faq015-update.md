@@ -91,6 +91,9 @@ python3 scripts/projection_codegen_samples.py closeout --format json
 python3 scripts/network_transport_samples.py check-all --format json
 sed -n '1,260p' tmp_faq/faq_015.md
 date '+%Y-%m-%d %H:%M:%S %Z'
+git add tmp_faq/faq_015.md docs/reports/2031-sugoroku-cut-transport-hotplug-state-and-faq015-update.md
+git commit --no-gpg-sign -m "docs: update faq 015 with sugoroku transport state"
+git push origin docs/layered-repro-guide-001
 ```
 
 ## Evidence / outputs / test results
@@ -190,7 +193,10 @@ date '+%Y-%m-%d %H:%M:%S %Z'
 
 ## Commit / push status
 
-- pending
+- committed and pushed:
+  - `af11c5c037b293a011ce3b6dce40a109e721bddf`
+  - message: `docs: update faq 015 with sugoroku transport state`
+- current file may receive a small follow-up status-only commit if later push metadata needs explicit mirroring.
 
 ## Sub-agent session close status
 
