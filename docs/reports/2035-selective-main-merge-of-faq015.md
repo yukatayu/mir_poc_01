@@ -36,6 +36,7 @@
 - FAQ に selective merge 運用メモを一行追加した。
 - docs branch 側にこの report を作成した。
 - docs branch の FAQ/report commit を作成した。
+- docs branch commit を push した。
 - main へ切り替え、`tmp_faq/faq_015.md` だけを current docs branch から checkout して commit / push した。
 - 必要に応じて docs branch report の commit/push status を更新し、最後に main へ戻る。
 
@@ -58,6 +59,15 @@ git rev-parse --short main
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 git diff --check
+git add tmp_faq/faq_015.md docs/reports/2035-selective-main-merge-of-faq015.md
+git commit --no-gpg-sign -m "docs: prepare selective main merge for faq015"
+git push origin docs/layered-repro-guide-001
+git switch main
+git pull --ff-only origin main
+git checkout docs/layered-repro-guide-001 -- tmp_faq/faq_015.md
+git add tmp_faq/faq_015.md
+git commit --no-gpg-sign -m "docs: add faq 015 rolling explanation memo"
+git push origin main
 ```
 
 ## Evidence / outputs / test results
@@ -67,6 +77,12 @@ git diff --check
 - current reading:
   - main に取り込む value があるのは FAQ 本体
   - reports は docs branch 側の task trace として残すのが自然
+- docs branch push:
+  - `381ac2e962d29384818e8d6d60691138424f65d1`
+  - message: `docs: prepare selective main merge for faq015`
+- main selective merge push:
+  - `dae4a20bfdec65a1dd6f7944f7b38448a7ec3ea3`
+  - message: `docs: add faq 015 rolling explanation memo`
 - `python3 scripts/check_source_hierarchy.py`
   - pass
 - `python3 scripts/validate_docs.py`
@@ -119,7 +135,13 @@ git diff --check
 
 ## Commit / push status
 
-- pending
+- docs branch committed and pushed:
+  - `381ac2e962d29384818e8d6d60691138424f65d1`
+  - message: `docs: prepare selective main merge for faq015`
+- main committed and pushed:
+  - `dae4a20bfdec65a1dd6f7944f7b38448a7ec3ea3`
+  - message: `docs: add faq 015 rolling explanation memo`
+- current file may receive a small follow-up status-only commit if later push metadata needs explicit mirroring.
 
 ## Sub-agent session close status
 
