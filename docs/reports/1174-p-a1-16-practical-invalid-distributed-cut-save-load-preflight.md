@@ -212,7 +212,9 @@
 
 ## Commit / push status
 
-Pending at report write.
+- main closeout commit: `a706253` (`mirrorea: close p-a1-16 save-load preflight reject`)
+- push status: pushed to `origin/main`
+- report metadata was finalized in a docs-only follow-up commit after push
 
 ## Sub-agent session close status
 
