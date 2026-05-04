@@ -179,6 +179,9 @@
       "membership_freshness_reason_refs": [
         "membership_frontier_current"
       ],
+      "witness_reason_refs": [
+        "required_witnesses_present"
+      ],
       "notes": [
         "runtime package admission remains runtime-private and non-public",
         "activation/detach lifecycle completion remains later"
@@ -192,6 +195,7 @@
       "compatibility_reason_refs",
       "authorization_reason_refs",
       "membership_freshness_reason_refs",
+      "witness_reason_refs",
       "notes"
     ]
   },

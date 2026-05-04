@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-04 11:33 JST
+最終更新: 2026-05-04 12:02 JST
 
 ## この文書について
 
@@ -17,6 +17,8 @@
   `specs/18`、`plan/44`、`samples/practical-alpha1/` を軸に、alpha-0 evidence closeout を prerequisite として保持しつつ、front-door -> checker -> runtime -> hot-plug -> transport -> devtools -> save/load -> product prototype の順で practical toolchain を組み上げます。
 - `alpha-0.5` 到達要求は current repo state では既に満たされています:
   `P-A0-23` が `LR-01/02` と local-only `CUT-04/17` subset による Stage B current-scope closeout を閉じており、2026-05-04 01:05 JST に focused validation floor を fresh rerun しました。以後 `alpha-0.5` ラベルで残るのは validation/docs freshness であり、新しい promoted implementation package ではありません。
+- `P-A0-29` Stage D freshness and sidecar repair は 2026-05-04 12:02 JST に close しました:
+  shared `HotPlugVerdict.witness_reason_refs` lane widening の後に stale になっていた `samples/alpha/avatar-runtime/AV-01/02/06/08/09` と `samples/alpha/hotplug-runtime/HP-11/12/15` expected sidecar だけを refresh し、`cargo test -p mir-runtime --test alpha_avatar_runtime` の exact-match floor、`python3 scripts/alpha_avatar_runtime_samples.py check-all --format json`、`python3 scripts/alpha_hotplug_lifecycle_samples.py stage-d-closeout --format json` を current semantics のまま green へ戻した。`python3 -m unittest scripts.tests.test_alpha_hotplug_lifecycle_samples scripts.tests.test_alpha_avatar_runtime_samples scripts.tests.test_validate_docs`、`cargo test -p mir-runtime --test alpha_layer_insertion_runtime`、Rust layer/avatar closeout examples、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` も pass した。これは Stage D current-scope closeout の maintenance repair に限り、新しい runtime semantics、admissible row widening、detach/native/public-ABI claim は追加しない。
 - `P-A1-07` first practical local save/load floor は 2026-05-03 23:18 JST に close しました:
   `crates/mir-ast::practical_alpha1_save_load_plan`、`crates/mir-runtime::practical_alpha1_save_load`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`scripts/tests/test_practical_alpha1_save_load.py`、`samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`、`samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`、exact expected `sl-a1-*.expected.json`、docs validators、source hierarchy、`cargo fmt --check`、`git diff --check` を rerun した。review follow-up で save/load path を local-runtime report 直列化へ寄せず、one exact practical local-runtime frontier と distinct save-load plan に依存する saved local frontier + non-final save-load report に narrow した。`SL-A1-01` local-only roundtrip resume と `SL-A1-02` stale-membership non-resurrection を actualize し、`CHK-CUT-01` reuse は orphan-receive checker guard に限定した。`cargo test -p mir-ast --test practical_alpha1_front_door -- --nocapture`、`cargo test -p mir-ast practical_alpha1_checker -- --nocapture`、`cargo test -p mir-ast practical_alpha1_runtime_plan -- --nocapture`、`cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture`、`cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture`、`python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json`、`python3 scripts/practical_alpha1_save_load.py run SL-A1-02 --format json`、`python3 scripts/practical_alpha1_save_load.py check-all --format json`、`python3 scripts/practical_alpha1_save_load.py closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs` が pass した。これは first practical local save/load floor であり、distributed durable save/load、stale witness / stale lease non-resurrection completion、queue/channel/transport persistence、final public save-load ABI はまだ claim しない。
 - `P-A1-09` practical hot-plug lifecycle export widening は 2026-05-04 に close しました:
@@ -175,6 +177,7 @@
 | `P-A0-25` | `Macro 6-7` | closed | Stage D current-scope closeout over existing layer/package/avatar floors |
 | `P-A0-26` | `Macro 6-7` | closed | Stage E current-scope closeout over the existing visualization/devtools subset |
 | `P-A0-27` | `Macro 6-7` | closed | Stage F current-scope closeout over the existing integrated alpha bridge |
+| `P-A0-29` | `Macro 6-7` | closed | Stage D freshness repair over the existing avatar/package subset after shared `witness_reason_refs` verdict-lane widening |
 | `P-A0-28` | `Macro 6-7` | closed | imported Stage A baseline rerun + stage-order reconciliation for the large-stage-first alpha evidence line |
 | `P-A1-00` | `Macro 8` practical line | closed | practical alpha-1 rebaseline: future `100%` means practical readiness, Stage A..F remain evidence-only, and `specs/18` / `plan/44` become the promoted roadmap memory |
 | post-`P21` rollback / durable migration | `Macro 8` prep | closed docs-first | first recommendation boundary; no actual rollback / migration engine completion |
@@ -235,6 +238,7 @@ These are safe to do without new product decisions.
 | `P-A0-25` | Stage D lifecycle closeout | closed | dedicated Stage D closeout surface over `LI-01/02/03/04/05` and `AV-01/02/06/08/09` / `HP-11/12/15`; detach/migration/native/final-ABI claims remain later |
 | `P-A0-26` | Stage E devtools closeout | closed | dedicated Stage E closeout surface over `VIS-01/02/03/05/06/07/08/10/11`; `VIS-04/09/12` and public viewer/telemetry claims remain later |
 | `P-A0-27` | Stage F integrated alpha closeout | closed | dedicated Stage F closeout surface over `E2E-01/02/03/04/05/06/07/09/10` plus current-scope Stage E dependency; `E2E-08` and public alpha / `U1` claims remain later |
+| `P-A0-29` | Stage D freshness and sidecar repair | closed | refresh stale `AV-01/02/06/08/09` + `HP-11/12/15` expected sidecars after shared `witness_reason_refs` verdict-lane widening; Stage D scope itself remains unchanged |
 | `P-A0-28` | Stage A imported-baseline reconciliation | closed | rerun imported Stage A validation floor and synchronize `specs/17` / `plan/43` / snapshot docs so `Stage A..F` reads sequentially for current scope |
 | `P-A1-00` | practical-alpha-rebaseline | closed | add `specs/18` / `plan/44`, rebase future `100%` to practical alpha-1 readiness, and retain Stage A..F `100%` only as current-scope evidence closeout |
 | `P-A1-01` | alpha-source front-door design | closed | limited alpha source/package format, initial practical sample fixtures, front-door parser/loader, parse positive/negative tests |
