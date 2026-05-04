@@ -22,6 +22,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `scripts/practical_alpha1_export_devtools.py` emits distinct devtools bundles with exact expected `VIS-A1-01/02/06` JSON and a non-final static HTML viewer surface.
 - `P-A1-09` widens the same practical devtools cut here:
   `VIS-A1-04` hot-plug lifecycle export over exact practical hotplug reports, limited to attach accepted boundary + membership snapshot + deferred detach boundary.
+- `P-A1-12` widens the same practical devtools cut here:
+  `VIS-A1-05` fallback degradation export over exact `AV-A1-03` avatar preview evidence, limited to rejected source lane + degraded roles + missing host capability visibility.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - `P-A1-10` adds the first practical avatar preview companion cut here:
@@ -81,6 +83,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
   - `VIS-A1-02`: observer-safe route trace export
   - `VIS-A1-04`: hot-plug lifecycle export over attach accepted and deferred detach boundary reports
+  - `VIS-A1-05`: fallback degradation export over rejected-source avatar preview evidence
   - `VIS-A1-06`: redacted observer view with auth-lane separation
 - `expected/av-a1-*.expected.json`
   - exact expected non-final practical avatar preview reports over exact hot-plug source reports
@@ -108,7 +111,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
-- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/06`.
+- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/05/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
@@ -122,6 +125,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
 - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview.
+- `VIS-A1-05` keeps that same rejected source lane and lowers only a visible fallback degradation export bundle; it does not reinterpret the row as native execution or unsupported-runtime execution success.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
 - `PE2E-08` is limited to a custom-avatar companion preview over `AV-A1-02` and does not actualize native execution or same-session runtime attachment.

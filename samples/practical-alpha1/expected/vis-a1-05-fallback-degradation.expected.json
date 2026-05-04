@@ -1,0 +1,203 @@
+{
+  "sample_id": "VIS-A1-05",
+  "bundle_kind": "fallback_degradation_export",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-05",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-avatar-preview",
+      "sample_id": "AV-A1-03",
+      "carrier_scope": "practical-alpha1-avatar-preview-floor",
+      "surface_kind": "practical_alpha1_nonfinal_avatar_preview_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "avatar_fallback_degradation",
+      "panel_kind": "fallback_degradation",
+      "label": "practical:avatar-fallback-degradation",
+      "authority": "InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+      "redaction": "degraded_role_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "AV-A1-03"
+      ],
+      "focus_refs": [
+        "missing_host_capability:HostMirAvatarVM",
+        "Animatable",
+        "AttachmentProvider",
+        "ExpressionProvider"
+      ],
+      "notes": [
+        "exact avatar preview report stays the only source of fallback/degraded-role evidence",
+        "rejected source lane remains explicit at the viewer boundary"
+      ]
+    },
+    {
+      "panel_id": "host_capability_gap",
+      "panel_kind": "compatibility_gap",
+      "label": "practical:avatar-host-capability-gap",
+      "authority": "InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+      "redaction": "capability_gap_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "AV-A1-03"
+      ],
+      "focus_refs": [
+        "HostMirAvatarVM"
+      ],
+      "notes": [
+        "missing host capability is exported as typed compatibility evidence",
+        "no runtime execution is implied by the export bundle"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "avatar_fallback#AV-A1-03",
+      "telemetry_kind": "fallback_transition",
+      "label": "practical:avatar-fallback-transition",
+      "authority": "InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+      "redaction": "degraded_role_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "AV-A1-03"
+      ],
+      "channel": "custom_mir_avatar_runtime",
+      "value_summary": "selected=static_capsule_placeholder fallback_applied=True",
+      "notes": [
+        "source_terminal_outcome=rejected",
+        "fallback_reason=missing_host_capability:HostMirAvatarVM"
+      ]
+    },
+    {
+      "telemetry_id": "host_capability_gap#AV-A1-03",
+      "telemetry_kind": "capability_gap",
+      "label": "practical:avatar-host-gap",
+      "authority": "InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+      "redaction": "capability_gap_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "AV-A1-03"
+      ],
+      "channel": "custom_mir_avatar_runtime",
+      "value_summary": "missing_host_capability:HostMirAvatarVM",
+      "notes": [
+        "required=AttachAvatarRuntime,HostMirAvatarVM",
+        "available=AttachAvatarRuntime,ManageRuntimePackageRegistry,RenderPlaceholderMesh"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "avatar_fallback_degradation",
+    "host_capability_gap"
+  ],
+  "panel_kinds": [
+    "compatibility_gap",
+    "fallback_degradation"
+  ],
+  "telemetry_ids": [
+    "avatar_fallback#AV-A1-03",
+    "host_capability_gap#AV-A1-03"
+  ],
+  "telemetry_kinds": [
+    "capability_gap",
+    "fallback_transition"
+  ],
+  "retention_scopes": [
+    "report_local_inventory"
+  ],
+  "redaction_policies": [
+    "capability_gap_summary",
+    "degraded_role_summary"
+  ],
+  "export_sections": {
+    "source_avatar_preview": {
+      "sample_id": "AV-A1-03",
+      "preview_kind": "unsupported_runtime_visible_fallback_preview",
+      "requested_runtime_route": "custom_mir_avatar_runtime",
+      "source_hotplug_terminal_outcome": "rejected",
+      "source_hotplug_reason_family": "compatibility",
+      "source_hotplug_rejection_reason_refs": [
+        "missing_host_capability:HostMirAvatarVM"
+      ]
+    },
+    "fallback_degradation": {
+      "selected_representation": "static_capsule_placeholder",
+      "fallback_representation": "static_capsule_placeholder",
+      "fallback_applied": true,
+      "fallback_reason": "missing_host_capability:HostMirAvatarVM",
+      "fallback_visible": true,
+      "active_roles": [
+        "EmbodiedPresence",
+        "Renderable"
+      ],
+      "degraded_roles": [
+        "Animatable",
+        "AttachmentProvider",
+        "ExpressionProvider"
+      ]
+    },
+    "host_capability_gap": {
+      "required_host_capabilities": [
+        "AttachAvatarRuntime",
+        "HostMirAvatarVM"
+      ],
+      "available_host_capabilities": [
+        "AttachAvatarRuntime",
+        "ManageRuntimePackageRegistry",
+        "RenderPlaceholderMesh"
+      ],
+      "missing_host_capabilities": [
+        "HostMirAvatarVM"
+      ],
+      "native_execution_performed": false
+    }
+  },
+  "what_it_proves": [
+    "exact avatar preview fallback evidence is consumable as a distinct fallback degradation export bundle",
+    "rejected source lane, degraded roles, and missing host capability remain explicit at the viewer boundary",
+    "fallback degradation export stays separate from runtime execution and product-preview attachment claims"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion",
+    "full membership timeline completion",
+    "retention/on-demand completion",
+    "native execution",
+    "same-session runtime attach/detach execution",
+    "unsupported-runtime execution success"
+  ]
+}

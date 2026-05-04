@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import practical_alpha1_attach
+import practical_alpha1_avatar
 import practical_alpha1_run_local
 import practical_alpha1_transport
 
@@ -56,7 +57,7 @@ TELEMETRY_LANES = [
 
 STOP_LINES = [
     "do not treat this export bundle as full practical devtools completion",
-    "do not treat this export bundle as membership timeline, fallback degradation, or retention/on-demand completion",
+    "do not treat this export bundle as membership timeline or retention/on-demand completion",
     "do not treat this export bundle as save/load, product prototype, or final public runtime/devtools/telemetry ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the devtools package",
 ]
@@ -77,7 +78,6 @@ COMMON_NON_CLAIMS = [
 
 DEFERRED_OBSERVABLES = [
     "VIS-A1-03",
-    "VIS-A1-05",
     "VIS-A1-07",
 ]
 
@@ -102,6 +102,13 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_report": "samples/practical-alpha1/expected/vis-a1-04-hotplug-lifecycle.expected.json",
         "bundle_kind": "hotplug_lifecycle_export",
         "actualized_observable": "VIS-A1-04",
+    },
+    {
+        "sample_id": "VIS-A1-05",
+        "summary": "fallback degradation export/view over the exact practical avatar preview report",
+        "expected_report": "samples/practical-alpha1/expected/vis-a1-05-fallback-degradation.expected.json",
+        "bundle_kind": "fallback_degradation_export",
+        "actualized_observable": "VIS-A1-05",
     },
     {
         "sample_id": "VIS-A1-06",
@@ -185,6 +192,11 @@ def _hotplug_report(sample_id: str) -> dict[str, Any]:
 @lru_cache(maxsize=None)
 def _transport_report(sample_id: str) -> dict[str, Any]:
     return practical_alpha1_transport.run_sample(sample_id)
+
+
+@lru_cache(maxsize=None)
+def _avatar_report(sample_id: str) -> dict[str, Any]:
+    return practical_alpha1_avatar.run_sample(sample_id)
 
 
 def _source_report_ref(
@@ -644,6 +656,147 @@ def _hotplug_lifecycle_bundle() -> dict[str, Any]:
     }
 
 
+def _fallback_degradation_bundle() -> dict[str, Any]:
+    report = _avatar_report("AV-A1-03")
+    panels = [
+        _panel(
+            panel_id="avatar_fallback_degradation",
+            panel_kind="fallback_degradation",
+            label="practical:avatar-fallback-degradation",
+            authority="InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+            redaction="degraded_role_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["AV-A1-03"],
+            focus_refs=[report["fallback_reason"], *report["degraded_roles"]],
+            notes=[
+                "exact avatar preview report stays the only source of fallback/degraded-role evidence",
+                "rejected source lane remains explicit at the viewer boundary",
+            ],
+        ),
+        _panel(
+            panel_id="host_capability_gap",
+            panel_kind="compatibility_gap",
+            label="practical:avatar-host-capability-gap",
+            authority="InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+            redaction="capability_gap_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["AV-A1-03"],
+            focus_refs=list(report["missing_host_capabilities"]),
+            notes=[
+                "missing host capability is exported as typed compatibility evidence",
+                "no runtime execution is implied by the export bundle",
+            ],
+        ),
+    ]
+    telemetry_rows = [
+        _telemetry(
+            telemetry_id="avatar_fallback#AV-A1-03",
+            telemetry_kind="fallback_transition",
+            label="practical:avatar-fallback-transition",
+            authority="InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+            redaction="degraded_role_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["AV-A1-03"],
+            channel=report["requested_runtime_route"],
+            value_summary=(
+                f"selected={report['selected_representation']} "
+                f"fallback_applied={report['fallback_applied']}"
+            ),
+            notes=[
+                f"source_terminal_outcome={report['source_hotplug_terminal_outcome']}",
+                f"fallback_reason={report['fallback_reason']}",
+            ],
+        ),
+        _telemetry(
+            telemetry_id="host_capability_gap#AV-A1-03",
+            telemetry_kind="capability_gap",
+            label="practical:avatar-host-gap",
+            authority="InspectAvatarFallbackPreview(WorldPlace[AlphaRoom#1])",
+            redaction="capability_gap_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["AV-A1-03"],
+            channel="custom_mir_avatar_runtime",
+            value_summary="missing_host_capability:HostMirAvatarVM",
+            notes=[
+                f"required={','.join(report['required_host_capabilities'])}",
+                f"available={','.join(report['available_host_capabilities'])}",
+            ],
+        ),
+    ]
+    return {
+        "sample_id": "VIS-A1-05",
+        "bundle_kind": "fallback_degradation_export",
+        "family": "practical-alpha1-devtools-export",
+        "devtools_scope": DEVTOOLS_SCOPE,
+        "viewer_scope": VIEWER_SCOPE,
+        "surface_kind": SURFACE_KIND,
+        "viewer_mode": VIEWER_MODE,
+        "bundle_boundary": BUNDLE_BOUNDARY,
+        "actualized_observable": "VIS-A1-05",
+        "source_reports": [
+            _source_report_ref(
+                family="practical-alpha1-avatar-preview",
+                sample_id="AV-A1-03",
+                carrier_scope=report["avatar_scope"],
+                surface_kind=report["surface_kind"],
+            )
+        ],
+        "panel_lanes": list(PANEL_LANES),
+        "telemetry_lanes": list(TELEMETRY_LANES),
+        "panels": panels,
+        "telemetry_rows": telemetry_rows,
+        "panel_ids": [panel["panel_id"] for panel in panels],
+        "panel_kinds": sorted({panel["panel_kind"] for panel in panels}),
+        "telemetry_ids": [row["telemetry_id"] for row in telemetry_rows],
+        "telemetry_kinds": sorted({row["telemetry_kind"] for row in telemetry_rows}),
+        "retention_scopes": sorted({panel["retention_scope"] for panel in panels}),
+        "redaction_policies": sorted({panel["redaction"] for panel in panels}),
+        "export_sections": {
+            "source_avatar_preview": {
+                "sample_id": report["sample_id"],
+                "preview_kind": report["preview_kind"],
+                "requested_runtime_route": report["requested_runtime_route"],
+                "source_hotplug_terminal_outcome": report[
+                    "source_hotplug_terminal_outcome"
+                ],
+                "source_hotplug_reason_family": report["source_hotplug_reason_family"],
+                "source_hotplug_rejection_reason_refs": report[
+                    "source_hotplug_rejection_reason_refs"
+                ],
+            },
+            "fallback_degradation": {
+                "selected_representation": report["selected_representation"],
+                "fallback_representation": report["fallback_representation"],
+                "fallback_applied": report["fallback_applied"],
+                "fallback_reason": report["fallback_reason"],
+                "fallback_visible": report["fallback_visible"],
+                "active_roles": report["active_roles"],
+                "degraded_roles": report["degraded_roles"],
+            },
+            "host_capability_gap": {
+                "required_host_capabilities": report["required_host_capabilities"],
+                "available_host_capabilities": report["available_host_capabilities"],
+                "missing_host_capabilities": report["missing_host_capabilities"],
+                "native_execution_performed": report["native_execution_performed"],
+            },
+        },
+        "what_it_proves": [
+            "exact avatar preview fallback evidence is consumable as a distinct fallback degradation export bundle",
+            "rejected source lane, degraded roles, and missing host capability remain explicit at the viewer boundary",
+            "fallback degradation export stays separate from runtime execution and product-preview attachment claims",
+        ],
+        "what_it_does_not_prove": list(COMMON_NON_CLAIMS)
+        + [
+            "full devtools stage completion",
+            "full membership timeline completion",
+            "retention/on-demand completion",
+            "native execution",
+            "same-session runtime attach/detach execution",
+            "unsupported-runtime execution success",
+        ],
+    }
+
+
 def _redacted_observer_bundle() -> dict[str, Any]:
     report = _transport_report("TR-A1-07")
     route_trace = report["observer_route_trace"]
@@ -778,6 +931,8 @@ def build_bundle(sample_id: str) -> dict[str, Any]:
         return _route_trace_bundle()
     if sample_id == "VIS-A1-04":
         return _hotplug_lifecycle_bundle()
+    if sample_id == "VIS-A1-05":
+        return _fallback_degradation_bundle()
     if sample_id == "VIS-A1-06":
         return _redacted_observer_bundle()
     raise ValueError(f"unknown practical alpha-1 devtools sample {sample_id}")
@@ -926,17 +1081,20 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/practical_alpha1_check.py check-all --format json",
             "python3 scripts/practical_alpha1_run_local.py check-all --format json",
             "python3 scripts/practical_alpha1_attach.py check-all --format json",
+            "python3 scripts/practical_alpha1_avatar.py check-all --format json",
             "python3 scripts/practical_alpha1_transport.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py list --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-01 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-02 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-04 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-06 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-04 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-06 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py closeout --format json",
-            "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs",
+            "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_avatar scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs",
         ],
         "stop_lines": list(STOP_LINES),
         "limitations": list(LIMITATIONS),

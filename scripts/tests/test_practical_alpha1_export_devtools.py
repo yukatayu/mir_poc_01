@@ -104,29 +104,67 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
             bundle["what_it_does_not_prove"],
         )
 
+    def test_fallback_degradation_bundle_uses_exact_avatar_report(self) -> None:
+        bundle = runner.run_sample("VIS-A1-05")
+        self.assertEqual(bundle["sample_id"], "VIS-A1-05")
+        self.assertEqual(
+            [ref["sample_id"] for ref in bundle["source_reports"]],
+            ["AV-A1-03"],
+        )
+        self.assertEqual(
+            bundle["source_reports"][0]["family"],
+            "practical-alpha1-avatar-preview",
+        )
+        self.assertEqual(
+            bundle["export_sections"]["source_avatar_preview"][
+                "source_hotplug_terminal_outcome"
+            ],
+            "rejected",
+        )
+        self.assertEqual(
+            bundle["export_sections"]["fallback_degradation"]["fallback_reason"],
+            "missing_host_capability:HostMirAvatarVM",
+        )
+        self.assertEqual(
+            bundle["export_sections"]["fallback_degradation"]["degraded_roles"],
+            ["Animatable", "AttachmentProvider", "ExpressionProvider"],
+        )
+        self.assertIn("native execution", bundle["what_it_does_not_prove"])
+        self.assertIn(
+            "unsupported-runtime execution success",
+            bundle["what_it_does_not_prove"],
+        )
+
     def test_closeout_keeps_remaining_observables_deferred(self) -> None:
         with mock.patch.object(
             runner,
             "check_all",
             return_value={
-                "sample_count": 4,
-                "passed": ["VIS-A1-01", "VIS-A1-02", "VIS-A1-04", "VIS-A1-06"],
+                "sample_count": 5,
+                "passed": [
+                    "VIS-A1-01",
+                    "VIS-A1-02",
+                    "VIS-A1-04",
+                    "VIS-A1-05",
+                    "VIS-A1-06",
+                ],
                 "failed": [],
                 "devtools_export_first_floor_complete": True,
                 "actualized_observables": [
                     "VIS-A1-01",
                     "VIS-A1-02",
                     "VIS-A1-04",
+                    "VIS-A1-05",
                     "VIS-A1-06",
                 ],
-                "deferred_observables": ["VIS-A1-03", "VIS-A1-05", "VIS-A1-07"],
+                "deferred_observables": ["VIS-A1-03", "VIS-A1-07"],
             },
         ):
             payload = runner.closeout()
         self.assertTrue(payload["devtools_export_first_floor_complete"])
         self.assertEqual(
             payload["deferred_observables"],
-            ["VIS-A1-03", "VIS-A1-05", "VIS-A1-07"],
+            ["VIS-A1-03", "VIS-A1-07"],
         )
 
 

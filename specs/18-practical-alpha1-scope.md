@@ -314,6 +314,8 @@ final public transport API と同一視しない。
     - practical transport report から observer-safe route trace を export する
   - `VIS-A1-04`
     - exact practical hotplug reports から attach accepted boundary、membership snapshot、deferred detach boundary を export する
+  - `VIS-A1-05`
+    - exact `AV-A1-03` avatar preview report から rejected source lane、degraded roles、missing host capability を保つ fallback degradation を export する
   - `VIS-A1-06`
     - practical transport report から auth lane を transport metadata から分離した redacted observer view を export する
 - current carrier split は次である
@@ -321,9 +323,11 @@ final public transport API と同一視しない。
 - この floor は new runtime semantics を追加しない
 - この floor は full `PA1-6` completion を意味しない
 - この floor は `VIS-A1-03` membership timeline、
-  `VIS-A1-05` fallback degradation、`VIS-A1-07` retention/on-demand trace の completion を意味しない
+  `VIS-A1-07` retention/on-demand trace の completion を意味しない
 - `VIS-A1-04` は export-side hot-plug lifecycle observability widening に限り、
   detach runtime lifecycle execution、rollback/migration completion、final object package attach completion を意味しない
+- `VIS-A1-05` は export-side fallback degradation observability widening に限り、
+  native execution、unsupported-runtime execution success、same-session runtime attach/detach execution を意味しない
 - この floor は local save/load、product prototype、WAN/federation、
   final public viewer / telemetry / runtime-devtools ABI を意味しない
 
