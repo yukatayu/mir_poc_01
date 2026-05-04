@@ -14,6 +14,7 @@ from typing import Any
 import practical_alpha1_attach
 import practical_alpha1_avatar
 import practical_alpha1_run_local
+import practical_alpha1_save_load
 import practical_alpha1_transport
 
 
@@ -57,7 +58,7 @@ TELEMETRY_LANES = [
 
 STOP_LINES = [
     "do not treat this export bundle as full practical devtools completion",
-    "do not treat this export bundle as membership timeline or retention/on-demand completion",
+    "do not treat this export bundle as retention/on-demand completion or witness/lease co-timeline completion",
     "do not treat this export bundle as save/load, product prototype, or final public runtime/devtools/telemetry ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the devtools package",
 ]
@@ -77,7 +78,6 @@ COMMON_NON_CLAIMS = [
 ]
 
 DEFERRED_OBSERVABLES = [
-    "VIS-A1-03",
     "VIS-A1-07",
 ]
 
@@ -95,6 +95,13 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_report": "samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json",
         "bundle_kind": "route_trace_export",
         "actualized_observable": "VIS-A1-02",
+    },
+    {
+        "sample_id": "VIS-A1-03",
+        "summary": "membership timeline export/view over the exact practical save-load report",
+        "expected_report": "samples/practical-alpha1/expected/vis-a1-03-membership-timeline.expected.json",
+        "bundle_kind": "membership_timeline_export",
+        "actualized_observable": "VIS-A1-03",
     },
     {
         "sample_id": "VIS-A1-04",
@@ -197,6 +204,11 @@ def _transport_report(sample_id: str) -> dict[str, Any]:
 @lru_cache(maxsize=None)
 def _avatar_report(sample_id: str) -> dict[str, Any]:
     return practical_alpha1_avatar.run_sample(sample_id)
+
+
+@lru_cache(maxsize=None)
+def _save_load_report(sample_id: str) -> dict[str, Any]:
+    return practical_alpha1_save_load.run_sample(sample_id)
 
 
 def _source_report_ref(
@@ -424,6 +436,231 @@ def _route_trace_bundle() -> dict[str, Any]:
             "full devtools stage completion",
             "auth-lane/redacted observer completion beyond the exact route-trace report",
             "full membership timeline completion",
+        ],
+    }
+
+
+def _membership_timeline_bundle() -> dict[str, Any]:
+    report = _save_load_report("SL-A1-02")
+    saved_membership = report["saved_runtime_snapshot"]["membership"]
+    restored_membership = report["restored_runtime_snapshot"]["membership"]
+    restored_members = restored_membership["members"]
+    membership_update = next(
+        node
+        for node in report["resumed_event_dag"]["nodes"]
+        if node["event_kind"] == "membership_update"
+    )
+    resumed_dispatch_record = report["resumed_dispatch_records"][0]
+    timeline_entries = [
+        {
+            "entry_id": "saved_membership_frontier#SL-A1-02",
+            "membership_epoch": saved_membership["membership_epoch"],
+            "principals": sorted(saved_membership["members"]),
+            "source_ref": "saved_runtime_snapshot.membership",
+        },
+        {
+            "entry_id": membership_update["event_id"],
+            "event_id": membership_update["event_id"],
+            "membership_epoch": restored_membership["membership_epoch"],
+            "principals": [
+                principal
+                for principal, member in sorted(restored_members.items())
+                if member["joined_at_epoch"] == restored_membership["membership_epoch"]
+            ],
+            "source_ref": "resumed_event_dag.nodes[membership_update]",
+        },
+        {
+            "entry_id": "restored_membership_frontier#SL-A1-02",
+            "membership_epoch": restored_membership["membership_epoch"],
+            "principals": sorted(restored_members),
+            "source_ref": "restored_runtime_snapshot.membership",
+        },
+    ]
+    panels = [
+        _panel(
+            panel_id="saved_membership_frontier",
+            panel_kind="membership_snapshot",
+            label="practical:saved-membership-frontier",
+            authority="InspectSavedMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            focus_refs=timeline_entries[0]["principals"],
+            notes=[
+                "exact save-load report keeps the saved membership frontier explicit",
+                "saved frontier remains separate from later live membership advance",
+            ],
+        ),
+        _panel(
+            panel_id="membership_frontier_advance",
+            panel_kind="membership_timeline",
+            label="practical:membership-frontier-advance",
+            authority="InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            focus_refs=timeline_entries[1]["principals"],
+            notes=[
+                "the later live membership advance stays explicit after restore and before resumed dispatch",
+                "no synthetic timeline ids are introduced beyond the exact save-load report",
+            ],
+        ),
+        _panel(
+            panel_id="restored_membership_frontier",
+            panel_kind="membership_snapshot",
+            label="practical:restored-membership-frontier",
+            authority="InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            focus_refs=timeline_entries[2]["principals"],
+            notes=[
+                "restored frontier remains typed at the viewer boundary",
+                "stale-membership reject remains visible instead of collapsing into resumed dispatch success",
+            ],
+        ),
+    ]
+    telemetry_rows = [
+        _telemetry(
+            telemetry_id=timeline_entries[0]["entry_id"],
+            telemetry_kind="membership_frontier",
+            label="practical:saved-membership-frontier",
+            authority="InspectSavedMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            channel="WorldPlace[AlphaRoom#1]",
+            value_summary=(
+                f"epoch={timeline_entries[0]['membership_epoch']} "
+                f"principals={len(timeline_entries[0]['principals'])}"
+            ),
+            notes=[
+                timeline_entries[0]["source_ref"],
+                "saved local frontier before restore",
+            ],
+        ),
+        _telemetry(
+            telemetry_id=timeline_entries[1]["event_id"],
+            telemetry_kind="membership_update",
+            label="practical:membership-frontier-advance",
+            authority="InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            channel=membership_update["place_ref"],
+            value_summary=(
+                f"epoch={timeline_entries[1]['membership_epoch']} "
+                f"joined={','.join(timeline_entries[1]['principals'])}"
+            ),
+            notes=list(membership_update.get("notes", [])),
+        ),
+        _telemetry(
+            telemetry_id=timeline_entries[2]["entry_id"],
+            telemetry_kind="membership_frontier",
+            label="practical:restored-membership-frontier",
+            authority="InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            channel="WorldPlace[AlphaRoom#1]",
+            value_summary=(
+                f"epoch={timeline_entries[2]['membership_epoch']} "
+                f"principals={len(timeline_entries[2]['principals'])}"
+            ),
+            notes=[
+                timeline_entries[2]["source_ref"],
+                "restored frontier after later live membership advance",
+            ],
+        ),
+        _telemetry(
+            telemetry_id="stale_membership_reject#SL-A1-02",
+            telemetry_kind="dispatch_reject",
+            label="practical:stale-membership-reject",
+            authority="InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["SL-A1-02"],
+            channel=resumed_dispatch_record["to_place"],
+            value_summary=resumed_dispatch_record["dispatch_outcome"],
+            notes=list(resumed_dispatch_record["reason_refs"]),
+        ),
+    ]
+    return {
+        "sample_id": "VIS-A1-03",
+        "bundle_kind": "membership_timeline_export",
+        "family": "practical-alpha1-devtools-export",
+        "devtools_scope": DEVTOOLS_SCOPE,
+        "viewer_scope": VIEWER_SCOPE,
+        "surface_kind": SURFACE_KIND,
+        "viewer_mode": VIEWER_MODE,
+        "bundle_boundary": BUNDLE_BOUNDARY,
+        "actualized_observable": "VIS-A1-03",
+        "source_reports": [
+            _source_report_ref(
+                family="practical-alpha1-save-load",
+                sample_id="SL-A1-02",
+                carrier_scope=report["save_load_scope"],
+                surface_kind=report["surface_kind"],
+            )
+        ],
+        "panel_lanes": list(PANEL_LANES),
+        "telemetry_lanes": list(TELEMETRY_LANES),
+        "panels": panels,
+        "telemetry_rows": telemetry_rows,
+        "panel_ids": [panel["panel_id"] for panel in panels],
+        "panel_kinds": sorted({panel["panel_kind"] for panel in panels}),
+        "telemetry_ids": [row["telemetry_id"] for row in telemetry_rows],
+        "telemetry_kinds": sorted({row["telemetry_kind"] for row in telemetry_rows}),
+        "retention_scopes": sorted({panel["retention_scope"] for panel in panels}),
+        "redaction_policies": sorted({panel["redaction"] for panel in panels}),
+        "export_sections": {
+            "timeline_entries": timeline_entries,
+            "saved_membership_frontier": {
+                "membership_epoch": saved_membership["membership_epoch"],
+                "joined_at_epochs": {
+                    principal: member["joined_at_epoch"]
+                    for principal, member in sorted(saved_membership["members"].items())
+                },
+                "member_incarnations": {
+                    principal: member["incarnation"]
+                    for principal, member in sorted(saved_membership["members"].items())
+                },
+            },
+            "restored_membership_frontier": {
+                "membership_epoch": restored_membership["membership_epoch"],
+                "joined_at_epochs": {
+                    principal: member["joined_at_epoch"]
+                    for principal, member in sorted(restored_members.items())
+                },
+                "member_incarnations": {
+                    principal: member["incarnation"]
+                    for principal, member in sorted(restored_members.items())
+                },
+            },
+            "resumed_dispatch_record": {
+                "dispatch_outcome": resumed_dispatch_record["dispatch_outcome"],
+                "reason_refs": resumed_dispatch_record["reason_refs"],
+                "generated_event_refs": resumed_dispatch_record["generated_event_refs"],
+                "notes": resumed_dispatch_record["notes"],
+            },
+            "resumed_event_dag": {
+                "event_ids": [node["event_id"] for node in report["resumed_event_dag"]["nodes"]],
+                "edges": report["resumed_event_dag"]["edges"],
+            },
+            "checker_guard_refs": report["checker_guard_refs"],
+        },
+        "what_it_proves": [
+            "exact practical save-load report is consumable as a distinct membership timeline export bundle",
+            "saved frontier, later live membership advance, and restored frontier remain explicit at the viewer boundary",
+            "stale-membership rejection stays visible instead of being silently collapsed into resumed dispatch success",
+        ],
+        "what_it_does_not_prove": list(COMMON_NON_CLAIMS)
+        + [
+            "full devtools stage completion",
+            "retention/on-demand completion",
+            "distributed durable membership timeline across multi-place cuts",
+            "witness/lease co-timeline completion",
+            "detach history completion",
         ],
     }
 
@@ -929,6 +1166,8 @@ def build_bundle(sample_id: str) -> dict[str, Any]:
         return _event_dag_bundle()
     if sample_id == "VIS-A1-02":
         return _route_trace_bundle()
+    if sample_id == "VIS-A1-03":
+        return _membership_timeline_bundle()
     if sample_id == "VIS-A1-04":
         return _hotplug_lifecycle_bundle()
     if sample_id == "VIS-A1-05":
@@ -1082,19 +1321,22 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/practical_alpha1_run_local.py check-all --format json",
             "python3 scripts/practical_alpha1_attach.py check-all --format json",
             "python3 scripts/practical_alpha1_avatar.py check-all --format json",
+            "python3 scripts/practical_alpha1_save_load.py check-all --format json",
             "python3 scripts/practical_alpha1_transport.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py list --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-01 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-02 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-03 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-06 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-03 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-05 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-06 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py closeout --format json",
-            "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_avatar scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs",
+            "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha1_attach scripts.tests.test_practical_alpha1_avatar scripts.tests.test_practical_alpha1_save_load scripts.tests.test_practical_alpha1_transport scripts.tests.test_practical_alpha1_export_devtools scripts.tests.test_validate_docs",
         ],
         "stop_lines": list(STOP_LINES),
         "limitations": list(LIMITATIONS),

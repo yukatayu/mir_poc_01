@@ -181,10 +181,11 @@ repository-memory roadmap を置く。
 
 ### PA1-6 — devtools / viewer
 
-- current widened floor after `P-A1-06`, `P-A1-09`, and `P-A1-12`:
+- current widened floor after `P-A1-06`, `P-A1-09`, `P-A1-12`, and `P-A1-13`:
   - `scripts/practical_alpha1_export_devtools.py`
   - exact expected bundles `samples/practical-alpha1/expected/vis-a1-01-event-dag-export.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json`
+  - `samples/practical-alpha1/expected/vis-a1-03-membership-timeline.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-04-hotplug-lifecycle.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-05-fallback-degradation.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-06-redacted-observer-view.expected.json`
@@ -193,11 +194,11 @@ repository-memory roadmap を置く。
 - current actualized observables:
   - `VIS-A1-01` event DAG + publication / witness / handoff relation export
   - `VIS-A1-02` observer-safe route trace export
+  - `VIS-A1-03` membership timeline export over exact `SL-A1-02` save-load evidence
   - `VIS-A1-04` hot-plug lifecycle export over exact attach accepted and deferred detach boundary reports
   - `VIS-A1-05` fallback degradation export over exact rejected-source avatar preview evidence
   - `VIS-A1-06` redacted observer view with auth-lane separation
 - current deferred observables:
-  - `VIS-A1-03` membership timeline
   - `VIS-A1-07` retention/on-demand trace
 - current non-claim:
   - full devtools / viewer completion ではない
@@ -288,10 +289,11 @@ recommended current promoted line:
 11. `P-A1-10` practical avatar preview first floor
 12. `P-A1-11` product-preview avatar companion widening
 13. `P-A1-12` practical fallback degradation export widening
+14. `P-A1-13` practical membership timeline export widening
 
-current reading after `P-A1-12`:
+current reading after `P-A1-13`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -325,6 +327,8 @@ current reading after `P-A1-12`:
 - `P-A1-11` actualizes `PE2E-08` over `AV-A1-02` and `PE2E-09` over `AV-A1-03`, without collapsing either row into native execution, same-session runtime attachment, or unsupported-runtime execution success
 - `P-A1-12` keeps the devtools carrier split exact-report-based and widens `VIS-A1-05` only as fallback degradation export over `AV-A1-03`
 - `P-A1-12` actualizes `VIS-A1-05` while keeping the source avatar lane rejected, degraded roles explicit, and missing host capability visible; it does not collapse the row into native execution, unsupported-runtime execution success, or product-preview attachment semantics
+- `P-A1-13` keeps the devtools carrier split exact-report-based and widens `VIS-A1-03` only as membership timeline export over `SL-A1-02`
+- `P-A1-13` actualizes `VIS-A1-03` while keeping saved frontier, later live membership advance, restored frontier, and stale-membership reject visible; it does not collapse the row into distributed durable membership timeline, witness/lease co-timeline, or retention/on-demand completion
 
 ## readiness reading
 
@@ -431,8 +435,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-12`:
-  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, and devtools widening now consumes `AV-A1-03` only through `VIS-A1-05` fallback degradation export; same-session runtime completion remains later
+- current promoted line after `P-A1-13`:
+  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, and devtools widening now consumes `SL-A1-02` through `VIS-A1-03` membership timeline export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export; same-session runtime completion remains later
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -440,10 +444,10 @@ but should not require practical runner scripts before they are added.
   - keep `P-A1-04a` / `P-A1-04b` / `P-A1-04c` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
   - keep `P-A1-10` as a distinct avatar-preview companion floor over `AV-A1-01/02/03`, without collapsing it into native execution or final avatar ABI completion
   - keep `P-A1-05` as the first practical transport floor over `TR-A1-01..07` without collapsing it into WAN/federation, save/load, devtools, or product prototype claims
-  - keep `P-A1-06` + `P-A1-09` + `P-A1-12` as the widened practical devtools export floor over `VIS-A1-01/02/04/05/06` without collapsing it into full devtools completion or membership/retention completion, without reading `VIS-A1-04` as detach runtime lifecycle completion, and without reading `VIS-A1-05` as native execution or unsupported-runtime execution success
+  - keep `P-A1-06` + `P-A1-09` + `P-A1-12` + `P-A1-13` as the widened practical devtools export floor over `VIS-A1-01/02/03/04/05/06` without collapsing it into full devtools completion, without reading `VIS-A1-03` as distributed durable membership timeline or witness/lease co-timeline completion, without reading `VIS-A1-04` as detach runtime lifecycle completion, and without reading `VIS-A1-05` as native execution or unsupported-runtime execution success
   - keep `P-A1-11` as a thin product-preview widening over `PE2E-08/09`, without collapsing it into same-session runtime attachment, native execution, or unsupported-runtime execution success
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on remaining `VIS-A1-03/07`, broader save-load widening, or an equally narrow remaining exact-evidence widening
+  - reopen next on remaining `VIS-A1-07`, broader save-load widening, or an equally narrow remaining exact-evidence widening
 - queue authority remains `progress.md` / `tasks.md`

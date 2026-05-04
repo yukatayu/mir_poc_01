@@ -104,6 +104,34 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
             bundle["what_it_does_not_prove"],
         )
 
+    def test_membership_timeline_bundle_uses_exact_save_load_report(self) -> None:
+        bundle = runner.run_sample("VIS-A1-03")
+        self.assertEqual(bundle["sample_id"], "VIS-A1-03")
+        self.assertEqual(
+            [ref["sample_id"] for ref in bundle["source_reports"]],
+            ["SL-A1-02"],
+        )
+        self.assertEqual(
+            bundle["source_reports"][0]["family"],
+            "practical-alpha1-save-load",
+        )
+        self.assertEqual(
+            bundle["export_sections"]["timeline_entries"][1]["event_id"],
+            "membership_advance#1",
+        )
+        self.assertEqual(
+            bundle["export_sections"]["timeline_entries"][2]["membership_epoch"],
+            1,
+        )
+        self.assertEqual(
+            bundle["export_sections"]["resumed_dispatch_record"]["dispatch_outcome"],
+            "rejected_stale_membership",
+        )
+        self.assertIn(
+            "distributed durable membership timeline across multi-place cuts",
+            bundle["what_it_does_not_prove"],
+        )
+
     def test_fallback_degradation_bundle_uses_exact_avatar_report(self) -> None:
         bundle = runner.run_sample("VIS-A1-05")
         self.assertEqual(bundle["sample_id"], "VIS-A1-05")
@@ -140,10 +168,11 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
             runner,
             "check_all",
             return_value={
-                "sample_count": 5,
+                "sample_count": 6,
                 "passed": [
                     "VIS-A1-01",
                     "VIS-A1-02",
+                    "VIS-A1-03",
                     "VIS-A1-04",
                     "VIS-A1-05",
                     "VIS-A1-06",
@@ -153,18 +182,19 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
                 "actualized_observables": [
                     "VIS-A1-01",
                     "VIS-A1-02",
+                    "VIS-A1-03",
                     "VIS-A1-04",
                     "VIS-A1-05",
                     "VIS-A1-06",
                 ],
-                "deferred_observables": ["VIS-A1-03", "VIS-A1-07"],
+                "deferred_observables": ["VIS-A1-07"],
             },
         ):
             payload = runner.closeout()
         self.assertTrue(payload["devtools_export_first_floor_complete"])
         self.assertEqual(
             payload["deferred_observables"],
-            ["VIS-A1-03", "VIS-A1-07"],
+            ["VIS-A1-07"],
         )
 
 

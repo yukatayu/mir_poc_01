@@ -49,12 +49,13 @@
   - it is a non-final transport command and does not claim WAN/federation, save/load, devtools export, product prototype, or final public transport API
 - practical alpha-1 first devtools export floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
-  - this exercises `VIS-A1-01/02/04/05/06` over exact practical local-runtime / hotplug / transport / avatar-preview reports
+  - this exercises `VIS-A1-01/02/03/04/05/06` over exact practical local-runtime / save-load / hotplug / transport / avatar-preview reports
   - it consumes exact practical reports through a distinct devtools export bundle boundary
-  - current actualized rows are `VIS-A1-01/02/04/05/06`
+  - current actualized rows are `VIS-A1-01/02/03/04/05/06`
+  - `VIS-A1-03` consumes exact `SL-A1-02` save-load evidence while preserving the saved frontier, later live membership advance, restored frontier, and stale-membership reject
   - `VIS-A1-05` consumes exact `AV-A1-03` fallback evidence while preserving the rejected source lane, degraded roles, and missing host capability
   - `render-html` emits a non-final static HTML viewer file over the same bundle payload
-  - it is a non-final devtools command and does not claim full devtools completion, membership timeline completion, detach runtime lifecycle execution, retention/on-demand trace, save/load, product prototype, native execution, unsupported-runtime execution success, or final public viewer/telemetry API
+  - it is a non-final devtools command and does not claim full devtools completion, distributed durable membership timeline, detach runtime lifecycle execution, retention/on-demand trace, save/load, product prototype, native execution, unsupported-runtime execution success, or final public viewer/telemetry API
 - practical alpha-1 first local save/load floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_save_load.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/sl-a1-*/` through `crates/mir-ast::practical_alpha1_save_load_plan` and `crates/mir-runtime::practical_alpha1_save_load`
@@ -110,7 +111,7 @@
   - `P-A0-13` / `P-A0-15` / `P-A0-26` は `alpha_visualization_samples.py` を widen し、`samples/alpha/visualization/` の `VIS-01/02/03/05/06/07/08/10/11` を existing alpha/helper/runtime JSON evidence の dedicated Stage-E subset runner として検証し、`stage-e-closeout` command で current-scope Stage E completion surface を与える。`VIS-04/09/12`、Stage F completion、final public viewer/telemetry API は引き続き主張しない
   - `P-A0-14` は `alpha_cut_save_load_samples.py` と `alpha_cut_save_load_checker.py` を widen し、`CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle inadmissibility row を actualize した。これは saved local state が stale membership を accepted resumed dispatch へ resurrect しないことと、useless checkpoint cycle が checker floor で inadmissible であることだけを示す。`CUT-10/12/16`、distributed/durable save/load completion、Z-cycle repair、final public ABI は主張しない
   - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py`、`P-A1-04a..c` で `practical_alpha1_attach.py`、`P-A1-05` で `practical_alpha1_transport.py`、`P-A1-06` で `practical_alpha1_export_devtools.py`、`P-A1-07` で `practical_alpha1_save_load.py` が widened された
-  - `P-A1-06` と `P-A1-09` と `P-A1-12` では event DAG export、observer-safe route trace export、exact-report hot-plug lifecycle export、fallback degradation export、redacted observer view を distinct devtools bundle + non-final viewer surface として actualize した。membership timeline と retention/on-demand trace は still later である
+  - `P-A1-06` と `P-A1-09` と `P-A1-12` と `P-A1-13` では event DAG export、observer-safe route trace export、membership timeline export、exact-report hot-plug lifecycle export、fallback degradation export、redacted observer view を distinct devtools bundle + non-final viewer surface として actualize した。retention/on-demand trace は still later である
   - `P-A1-07` では `SL-A1-01/02` を distinct save-load plan + saved local frontier + non-final save-load report surface として actualize した。distributed durable save/load、stale witness/stale lease non-resurrection completion、queue/channel/transport persistence、product command は still later である
 
 ### storage / env

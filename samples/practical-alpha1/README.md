@@ -24,6 +24,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-04` hot-plug lifecycle export over exact practical hotplug reports, limited to attach accepted boundary + membership snapshot + deferred detach boundary.
 - `P-A1-12` widens the same practical devtools cut here:
   `VIS-A1-05` fallback degradation export over exact `AV-A1-03` avatar preview evidence, limited to rejected source lane + degraded roles + missing host capability visibility.
+- `P-A1-13` widens the same practical devtools cut here:
+  `VIS-A1-03` membership timeline export over exact `SL-A1-02` save-load evidence, limited to saved frontier + later live membership advance + restored frontier + stale-membership reject visibility.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - `P-A1-10` adds the first practical avatar preview companion cut here:
@@ -111,7 +113,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
-- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/05/06`.
+- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/03/04/05/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.

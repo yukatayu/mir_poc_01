@@ -1,0 +1,324 @@
+{
+  "sample_id": "VIS-A1-03",
+  "bundle_kind": "membership_timeline_export",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-03",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-save-load",
+      "sample_id": "SL-A1-02",
+      "carrier_scope": "practical-alpha1-save-load-floor",
+      "surface_kind": "practical_alpha1_nonfinal_save_load_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "saved_membership_frontier",
+      "panel_kind": "membership_snapshot",
+      "label": "practical:saved-membership-frontier",
+      "authority": "InspectSavedMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "focus_refs": [
+        "Alice",
+        "Bob"
+      ],
+      "notes": [
+        "exact save-load report keeps the saved membership frontier explicit",
+        "saved frontier remains separate from later live membership advance"
+      ]
+    },
+    {
+      "panel_id": "membership_frontier_advance",
+      "panel_kind": "membership_timeline",
+      "label": "practical:membership-frontier-advance",
+      "authority": "InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "focus_refs": [
+        "Carol"
+      ],
+      "notes": [
+        "the later live membership advance stays explicit after restore and before resumed dispatch",
+        "no synthetic timeline ids are introduced beyond the exact save-load report"
+      ]
+    },
+    {
+      "panel_id": "restored_membership_frontier",
+      "panel_kind": "membership_snapshot",
+      "label": "practical:restored-membership-frontier",
+      "authority": "InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "focus_refs": [
+        "Alice",
+        "Bob",
+        "Carol"
+      ],
+      "notes": [
+        "restored frontier remains typed at the viewer boundary",
+        "stale-membership reject remains visible instead of collapsing into resumed dispatch success"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "saved_membership_frontier#SL-A1-02",
+      "telemetry_kind": "membership_frontier",
+      "label": "practical:saved-membership-frontier",
+      "authority": "InspectSavedMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "WorldPlace[AlphaRoom#1]",
+      "value_summary": "epoch=0 principals=2",
+      "notes": [
+        "saved_runtime_snapshot.membership",
+        "saved local frontier before restore"
+      ]
+    },
+    {
+      "telemetry_id": "membership_advance#1",
+      "telemetry_kind": "membership_update",
+      "label": "practical:membership-frontier-advance",
+      "authority": "InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "WorldPlace[AlphaRoom#1]",
+      "value_summary": "epoch=1 joined=Carol",
+      "notes": [
+        "a later join advances the live membership frontier after restore and before resumed dispatch"
+      ]
+    },
+    {
+      "telemetry_id": "restored_membership_frontier#SL-A1-02",
+      "telemetry_kind": "membership_frontier",
+      "label": "practical:restored-membership-frontier",
+      "authority": "InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "WorldPlace[AlphaRoom#1]",
+      "value_summary": "epoch=1 principals=3",
+      "notes": [
+        "restored_runtime_snapshot.membership",
+        "restored frontier after later live membership advance"
+      ]
+    },
+    {
+      "telemetry_id": "stale_membership_reject#SL-A1-02",
+      "telemetry_kind": "dispatch_reject",
+      "label": "practical:stale-membership-reject",
+      "authority": "InspectRestoredMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "SL-A1-02"
+      ],
+      "channel": "GamePlace[SugorokuGame#1]",
+      "value_summary": "rejected_stale_membership",
+      "notes": [
+        "membership_epoch_drift",
+        "saved_local_frontier_restored",
+        "saved_owner_history_match",
+        "pending_envelopes_empty_at_save",
+        "local_only_save_load",
+        "membership_frontier_advanced_after_restore",
+        "stale_membership_not_resurrected"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "saved_membership_frontier",
+    "membership_frontier_advance",
+    "restored_membership_frontier"
+  ],
+  "panel_kinds": [
+    "membership_snapshot",
+    "membership_timeline"
+  ],
+  "telemetry_ids": [
+    "saved_membership_frontier#SL-A1-02",
+    "membership_advance#1",
+    "restored_membership_frontier#SL-A1-02",
+    "stale_membership_reject#SL-A1-02"
+  ],
+  "telemetry_kinds": [
+    "dispatch_reject",
+    "membership_frontier",
+    "membership_update"
+  ],
+  "retention_scopes": [
+    "report_local_inventory"
+  ],
+  "redaction_policies": [
+    "membership_frontier_summary"
+  ],
+  "export_sections": {
+    "timeline_entries": [
+      {
+        "entry_id": "saved_membership_frontier#SL-A1-02",
+        "membership_epoch": 0,
+        "principals": [
+          "Alice",
+          "Bob"
+        ],
+        "source_ref": "saved_runtime_snapshot.membership"
+      },
+      {
+        "entry_id": "membership_advance#1",
+        "event_id": "membership_advance#1",
+        "membership_epoch": 1,
+        "principals": [
+          "Carol"
+        ],
+        "source_ref": "resumed_event_dag.nodes[membership_update]"
+      },
+      {
+        "entry_id": "restored_membership_frontier#SL-A1-02",
+        "membership_epoch": 1,
+        "principals": [
+          "Alice",
+          "Bob",
+          "Carol"
+        ],
+        "source_ref": "restored_runtime_snapshot.membership"
+      }
+    ],
+    "saved_membership_frontier": {
+      "membership_epoch": 0,
+      "joined_at_epochs": {
+        "Alice": 0,
+        "Bob": 0
+      },
+      "member_incarnations": {
+        "Alice": 0,
+        "Bob": 0
+      }
+    },
+    "restored_membership_frontier": {
+      "membership_epoch": 1,
+      "joined_at_epochs": {
+        "Alice": 0,
+        "Bob": 0,
+        "Carol": 1
+      },
+      "member_incarnations": {
+        "Alice": 0,
+        "Bob": 0,
+        "Carol": 0
+      }
+    },
+    "resumed_dispatch_record": {
+      "dispatch_outcome": "rejected_stale_membership",
+      "reason_refs": [
+        "membership_epoch_drift",
+        "saved_local_frontier_restored",
+        "saved_owner_history_match",
+        "pending_envelopes_empty_at_save",
+        "local_only_save_load",
+        "membership_frontier_advanced_after_restore",
+        "stale_membership_not_resurrected"
+      ],
+      "generated_event_refs": [
+        "load_resume#1",
+        "membership_advance#1",
+        "reject_stale_membership#2"
+      ],
+      "notes": [
+        "restored local frontier is re-evaluated only after the live membership frontier advances",
+        "saved membership frontier is not resurrected into accepted resumed dispatch",
+        "stale witness and lease non-resurrection remain later rows"
+      ]
+    },
+    "resumed_event_dag": {
+      "event_ids": [
+        "save_local_frontier#1",
+        "load_resume#1",
+        "membership_advance#1",
+        "reject_stale_membership#2"
+      ],
+      "edges": [
+        {
+          "from_event": "save_local_frontier#1",
+          "to_event": "load_resume#1",
+          "relation": "save_load_roundtrip"
+        },
+        {
+          "from_event": "load_resume#1",
+          "to_event": "membership_advance#1",
+          "relation": "load_restore_order"
+        },
+        {
+          "from_event": "membership_advance#1",
+          "to_event": "reject_stale_membership#2",
+          "relation": "membership_dependency_order"
+        }
+      ]
+    },
+    "checker_guard_refs": [
+      "CHK-CUT-01"
+    ]
+  },
+  "what_it_proves": [
+    "exact practical save-load report is consumable as a distinct membership timeline export bundle",
+    "saved frontier, later live membership advance, and restored frontier remain explicit at the viewer boundary",
+    "stale-membership rejection stays visible instead of being silently collapsed into resumed dispatch success"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion",
+    "retention/on-demand completion",
+    "distributed durable membership timeline across multi-place cuts",
+    "witness/lease co-timeline completion",
+    "detach history completion"
+  ]
+}

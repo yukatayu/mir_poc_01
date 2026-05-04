@@ -312,6 +312,8 @@ final public transport API と同一視しない。
     - practical local-runtime report から event DAG と publication / witness / handoff relation を export する
   - `VIS-A1-02`
     - practical transport report から observer-safe route trace を export する
+  - `VIS-A1-03`
+    - exact practical save-load report から saved frontier、later live membership advance、restored frontier を保つ membership timeline を export する
   - `VIS-A1-04`
     - exact practical hotplug reports から attach accepted boundary、membership snapshot、deferred detach boundary を export する
   - `VIS-A1-05`
@@ -322,8 +324,9 @@ final public transport API と同一視しない。
   - `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - この floor は new runtime semantics を追加しない
 - この floor は full `PA1-6` completion を意味しない
-- この floor は `VIS-A1-03` membership timeline、
-  `VIS-A1-07` retention/on-demand trace の completion を意味しない
+- `VIS-A1-03` は exact practical save-load report over the report-local membership timeline bundle に限り、
+  distributed durable membership timeline、witness/lease co-timeline、detach history completion を意味しない
+- この floor は `VIS-A1-07` retention/on-demand trace の completion を意味しない
 - `VIS-A1-04` は export-side hot-plug lifecycle observability widening に限り、
   detach runtime lifecycle execution、rollback/migration completion、final object package attach completion を意味しない
 - `VIS-A1-05` は export-side fallback degradation observability widening に限り、
