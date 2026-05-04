@@ -24,6 +24,8 @@ class PracticalAlpha1SaveLoadTests(unittest.TestCase):
     def test_closeout_reuses_invalid_distributed_cut_checker_guard(self) -> None:
         payload = runner.closeout()
         self.assertEqual(payload["checker_guard_refs"], ["CHK-CUT-01"])
+        self.assertTrue(payload["invalid_distributed_cut_row_actualized"])
+        self.assertTrue(payload["stage_pa1_7_complete"])
 
     def test_check_all_requires_checker_guard(self) -> None:
         original = practical_alpha1_check.run_sample
@@ -41,6 +43,20 @@ class PracticalAlpha1SaveLoadTests(unittest.TestCase):
 
         self.assertFalse(payload["local_save_load_first_floor_complete"])
         self.assertFalse(payload["invalid_distributed_cut_guard_present"])
+
+    def test_run_sample_sl_a1_03_returns_checker_backed_preflight_reject(self) -> None:
+        payload = runner.run_sample("SL-A1-03")
+        self.assertEqual(payload["terminal_outcome"], "rejected_invalid_distributed_cut_preflight")
+        self.assertEqual(payload["checker_guard_refs"], ["CHK-CUT-01"])
+        self.assertEqual(
+            payload["source_checker_report"]["sample_id"],
+            "CHK-CUT-01",
+        )
+        self.assertEqual(
+            payload["source_checker_report"]["rejected_kind"],
+            "orphan_receive",
+        )
+        self.assertFalse(payload["distributed_save_load_claimed"])
 
 
 if __name__ == "__main__":

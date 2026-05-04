@@ -215,23 +215,27 @@ repository-memory roadmap を置く。
 - local roundtrip
 - stale membership non-resurrection
 - invalid distributed cut reject
-- current actualized cut after `P-A1-07`:
+- current actualized cut after `P-A1-07` and `P-A1-16`:
   - `crates/mir-ast/src/practical_alpha1_save_load_plan.rs`
   - `crates/mir-runtime/src/practical_alpha1_save_load.rs`
   - example `crates/mir-runtime/examples/mir_practical_alpha1_save_load.rs`
   - `scripts/practical_alpha1_save_load.py`
   - `samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/`
   - `samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/`
+  - `samples/practical-alpha1/packages/sl-a1-03-invalid-distributed-cut-preflight/`
   - `samples/practical-alpha1/expected/sl-a1-01-local-save-load-resume.expected.json`
   - `samples/practical-alpha1/expected/sl-a1-02-local-load-stale-membership-rejected.expected.json`
+  - `samples/practical-alpha1/expected/sl-a1-03-invalid-distributed-cut-preflight.expected.json`
 - current actualized rows:
   - `SL-A1-01`
   - `SL-A1-02`
+  - `SL-A1-03`
 - current carrier split:
   - `checked package -> runtime plan`
   - `checked package + one exact local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
+  - `exact rejected checker report -> distinct save-load preflight reject report`
 - current guard reuse:
-  - `CHK-CUT-01` is reused only as an existing orphan-receive checker guard
+  - `CHK-CUT-01` is reused only as an exact orphan-receive checker guard for the preflight reject row
 - current non-claim:
   - full save/load completion ではない
   - full consistent-cut / `Z-cycle` completion ではない
@@ -314,7 +318,8 @@ current reading after `P-A1-13`:
 - `P-A1-07` fixed a fifth distinct carrier split:
   `checked package -> runtime plan`, plus `one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
 - `P-A1-07` actualized `SL-A1-01/02` as local-only roundtrip resume and stale-membership non-resurrection first-floor rows
-- `CHK-CUT-01` is reused in `P-A1-07` only as an orphan-receive checker guard, not as full consistent-cut or `Z-cycle` completion
+- `P-A1-16` widened the same save/load lane with `SL-A1-03` as an exact checker-backed invalid distributed-cut preflight reject row before any saved local frontier is built
+- `CHK-CUT-01` is reused in `P-A1-07` / `P-A1-16` only as an orphan-receive checker guard, not as full consistent-cut or `Z-cycle` completion
 - `P-A1-08` fixed a sixth distinct carrier split:
   `preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle`
 - `P-A1-08` actualized `PE2E-01..07` as a first practical product-preview floor over exact existing practical carriers
@@ -365,7 +370,7 @@ samples/practical-alpha1/
   docker/
 ```
 
-- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、`TR-A1-01..07`、`SL-A1-01/02`
+- current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、`TR-A1-01..07`、`SL-A1-01/02/03`
 - `previews/` now holds `PE2E-01..09` preview manifests and `expected/` also carries the exact expected `pe2e-a1-*.expected.json` product-preview bundles
 - `docker/` now contains the Compose fixture used by `TR-A1-02`
 - `source/` is reserved for later textual-source packages
@@ -437,8 +442,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-15`:
-  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, and devtools widening now consumes `SL-A1-02` through both `VIS-A1-03` membership timeline export and `VIS-A1-07` report-local retention query export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export; same-session runtime completion remains later
+- current promoted line after `P-A1-16`:
+  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, devtools widening consumes `SL-A1-02` through both `VIS-A1-03` membership timeline export and `VIS-A1-07` report-local retention query export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export, and save/load widening now consumes exact rejected `CHK-CUT-01` through `SL-A1-03` distinct preflight reject evidence; same-session runtime completion remains later
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -451,5 +456,5 @@ but should not require practical runner scripts before they are added.
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on broader save-load widening, same-session runtime semantics, or an equally narrow remaining exact-evidence widening
+  - reopen next on `PE2E-06` source-carrier alignment, broader save-load widening, same-session runtime semantics, or an equally narrow remaining exact-evidence widening
 - queue authority remains `progress.md` / `tasks.md`

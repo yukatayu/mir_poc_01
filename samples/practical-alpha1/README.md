@@ -30,6 +30,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-07` retention-query export over exact `SL-A1-02` save-load evidence, limited to report-local retained-artifact catalog rows plus hit/miss on-demand query trace.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
+- `P-A1-16` widens the same practical local save/load cut here:
+  `SL-A1-03` is an exact checker-backed save-load preflight reject row over invalid distributed-cut evidence, and does not build a saved local frontier or attempt runtime execution.
 - `P-A1-10` adds the first practical avatar preview companion cut here:
   `scripts/practical_alpha1_avatar.py` emits exact expected `AV-A1-01/02/03` reports over checked package input, a distinct hotplug plan, and exact hot-plug source reports.
 - `P-A1-08` adds the first practical product-preview cut here:
@@ -79,6 +81,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `packages/sl-a1-*/`
   - `SL-A1-01`: one exact local-runtime frontier is saved and resumed through a distinct save-load carrier
   - `SL-A1-02`: one exact local-runtime frontier is saved, later membership freshness advances are injected, and resumed dispatch is rejected
+  - `SL-A1-03`: invalid distributed cut is rejected at a distinct save-load preflight boundary by reusing the exact rejected `CHK-CUT-01` checker report
 - `packages/av-a1-*/`
   - `AV-A1-01`: placeholder avatar preview over an accepted object-package hot-plug source report
   - `AV-A1-02`: non-final custom Mir avatar preview with `mir_humanoid_runtime_preview` selected and `native_execution_performed = false`
@@ -96,6 +99,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `expected/sl-a1-*.expected.json`
   - `SL-A1-01`: local-only roundtrip resume through a saved local frontier
   - `SL-A1-02`: stale-membership non-resurrection after restore
+  - `SL-A1-03`: checker-backed invalid distributed-cut preflight reject before any saved local frontier is built
 - `previews/`
   - `PE2E-01`: local full-toolchain preview
   - `PE2E-02`: Docker full-toolchain preview
@@ -118,7 +122,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/03/04/05/06/07`.
-- The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
+- The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
@@ -128,6 +132,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
 - `VIS-A1-07` lowers only report-local retained-artifact catalog rows plus hit/miss query trace from exact `SL-A1-02` save-load evidence.
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
+- `SL-A1-03` is a distinct checker-backed save-load preflight reject row; it lowers an exact rejected checker report into a save-load preflight report and does not build a saved local frontier.
 - Preview manifests are lowered through exact practical reports, exact practical devtools bundles, and exact avatar preview companion reports before non-final product-preview bundle assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
@@ -135,6 +140,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `VIS-A1-05` keeps that same rejected source lane and lowers only a visible fallback degradation export bundle; it does not reinterpret the row as native execution or unsupported-runtime execution success.
 - `VIS-A1-07` keeps retention-query evidence report-local; it does not reinterpret the row as durable retained-artifact catalog service, cross-session/remote retrieval, or expiry lifecycle completion.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
+- `SL-A1-03` keeps invalid distributed-cut evidence in the save/load lane without claiming runtime checkpoint execution, saved-frontier build, or distributed durable save/load completion.
 - `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
 - `PE2E-08` is limited to a custom-avatar companion preview over `AV-A1-02` and does not actualize native execution or same-session runtime attachment.
 - `PE2E-09` is limited to an unsupported-runtime visible fallback companion preview over rejected `AV-A1-03` and does not actualize execution success.

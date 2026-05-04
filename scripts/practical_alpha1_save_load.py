@@ -20,15 +20,24 @@ import practical_alpha1_check  # noqa: E402
 IMPLEMENTED_ROWS: list[dict[str, str]] = [
     {
         "sample_id": "SL-A1-01",
+        "mode": "runtime_exact_report",
         "summary": "save and restore one exact practical local-runtime frontier, then resume one dispatch",
         "package_dir": "samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume",
         "expected_report": "samples/practical-alpha1/expected/sl-a1-01-local-save-load-resume.expected.json",
     },
     {
         "sample_id": "SL-A1-02",
+        "mode": "runtime_exact_report",
         "summary": "reject resumed dispatch after a later live membership frontier advance",
         "package_dir": "samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected",
         "expected_report": "samples/practical-alpha1/expected/sl-a1-02-local-load-stale-membership-rejected.expected.json",
+    },
+    {
+        "sample_id": "SL-A1-03",
+        "mode": "checker_preflight_reject",
+        "summary": "reject invalid distributed cut at the save-load command preflight via exact checker guard reuse",
+        "package_dir": "samples/practical-alpha1/packages/sl-a1-03-invalid-distributed-cut-preflight",
+        "expected_report": "samples/practical-alpha1/expected/sl-a1-03-invalid-distributed-cut-preflight.expected.json",
     },
 ]
 
@@ -70,7 +79,7 @@ def _load_expected_report(row: dict[str, str]) -> dict[str, Any]:
     return json.loads((REPO_ROOT / row["expected_report"]).read_text())
 
 
-def _build_save_load_report(package_path: str | Path) -> dict[str, Any]:
+def _build_runtime_save_load_report(package_path: str | Path) -> dict[str, Any]:
     completed = subprocess.run(
         [
             "cargo",
@@ -96,14 +105,96 @@ def _build_save_load_report(package_path: str | Path) -> dict[str, Any]:
         ) from error
 
 
+def _checker_preflight_report(
+    row: dict[str, str],
+    package_path: str | Path,
+) -> dict[str, Any]:
+    checker_report = practical_alpha1_check.check_path(package_path)
+    rejected_rows = checker_report.get("rejected_rows", [])
+    diagnostics = checker_report.get("diagnostics", [])
+    if checker_report.get("verdict") != "rejected" or not rejected_rows or not diagnostics:
+        raise RuntimeError(
+            f"{row['sample_id']}: exact checker guard did not return a rejected report"
+        )
+
+    rejected = rejected_rows[0]
+    diagnostic = diagnostics[0]
+    if rejected.get("kind") != "orphan_receive":
+        raise RuntimeError(
+            f"{row['sample_id']}: expected orphan_receive cut reject, found {rejected.get('kind')}"
+        )
+
+    return {
+        "surface_kind": "practical_alpha1_nonfinal_save_load_preflight_report",
+        "scope_kind": "alpha_local",
+        "save_load_scope": "practical-alpha1-save-load-floor",
+        "preflight_scope": "practical-alpha1-save-load-preflight-floor",
+        "sample_id": row["sample_id"],
+        "package_id": checker_report["package_id"],
+        "package_kind": "world",
+        "preflight_mode": "exact_checker_guard_reuse_only",
+        "terminal_outcome": "rejected_invalid_distributed_cut_preflight",
+        "checker_guard_refs": ["CHK-CUT-01"],
+        "source_checker_report": {
+            "sample_id": checker_report["sample_id"],
+            "checker_scope": checker_report["checker_scope"],
+            "surface_kind": checker_report["surface_kind"],
+            "rejected_kind": rejected["kind"],
+            "diagnostic_message": diagnostic["message"],
+        },
+        "notes": [
+            "save/load command reuses the exact checker guard as a distinct preflight reject row",
+            "no saved local frontier is built when the distributed cut is already invalid",
+            "no runtime execution or distributed checkpoint attempt is performed in this row",
+        ],
+        "retained_later_refs": [
+            "distributed_durable_save_load",
+            "stale_witness_nonresurrection",
+            "stale_lease_nonresurrection",
+            "docker_transport_save_load",
+            "hotplug_lifecycle_persistence",
+            "final_public_save_load_api",
+        ],
+        "stop_lines": list(STOP_LINES),
+        "limitations": list(LIMITATIONS)
+        + [
+            "checker-backed save-load preflight reject row only",
+        ],
+        "save_load_claimed": True,
+        "run_local_claimed": False,
+        "base_runtime_frontier_required": False,
+        "saved_local_frontier_emitted": False,
+        "distributed_save_load_claimed": False,
+        "stale_witness_claimed": False,
+        "stale_lease_claimed": False,
+    }
+
+
+def _report_for_row(row: dict[str, str], package_path: str | Path) -> dict[str, Any]:
+    if row["mode"] == "checker_preflight_reject":
+        return _checker_preflight_report(row, package_path)
+    return _build_runtime_save_load_report(package_path)
+
+
+def _row_for_package_path(package_path: str | Path) -> dict[str, str] | None:
+    target = Path(package_path).resolve()
+    for row in IMPLEMENTED_ROWS:
+        if (REPO_ROOT / row["package_dir"]).resolve() == target:
+            return row
+    return None
+
+
 def run_path(package_path: str | Path) -> dict[str, Any]:
-    return _build_save_load_report(package_path)
+    row = _row_for_package_path(package_path)
+    if row is not None:
+        return _report_for_row(row, package_path)
+    return _build_runtime_save_load_report(package_path)
 
 
 def run_sample(sample_id: str) -> dict[str, Any]:
     row = _implemented_row(sample_id)
     expected = _load_expected_report(row)
-    actual = run_path(REPO_ROOT / row["package_dir"])
+    actual = _report_for_row(row, REPO_ROOT / row["package_dir"])
     if actual != expected:
         raise RuntimeError(
             f"{sample_id}: expected save-load report drift\n"
@@ -136,10 +227,26 @@ def check_all() -> dict[str, Any]:
         not failed
         and bool(reports)
         and all(
-            report.get("save_load_plan_scope") == "practical-alpha1-save-load-plan-floor"
-            and report.get("runtime_plan_scope") == "practical-alpha1-runtime-plan-floor"
-            and report.get("save_load_claimed") is True
-            and report.get("run_local_claimed") is False
+            (
+                report.get("surface_kind")
+                == "practical_alpha1_nonfinal_save_load_report"
+                and report.get("save_load_plan_scope")
+                == "practical-alpha1-save-load-plan-floor"
+                and report.get("runtime_plan_scope")
+                == "practical-alpha1-runtime-plan-floor"
+                and report.get("save_load_claimed") is True
+                and report.get("run_local_claimed") is False
+            )
+            or (
+                report.get("surface_kind")
+                == "practical_alpha1_nonfinal_save_load_preflight_report"
+                and report.get("preflight_scope")
+                == "practical-alpha1-save-load-preflight-floor"
+                and report.get("source_checker_report", {}).get("checker_scope")
+                == "practical-alpha1-checker-floor"
+                and report.get("save_load_claimed") is True
+                and report.get("run_local_claimed") is False
+            )
             for report in reports
         )
     )
@@ -149,8 +256,10 @@ def check_all() -> dict[str, Any]:
         "failed": failed,
         "local_save_load_first_floor_complete": not failed
         and invalid_distributed_cut_guard_present,
+        "stage_pa1_7_complete": not failed and invalid_distributed_cut_guard_present,
         "save_load_plan_boundary_present": save_load_plan_boundary_present,
         "invalid_distributed_cut_guard_present": invalid_distributed_cut_guard_present,
+        "invalid_distributed_cut_row_actualized": "SL-A1-03" in passed,
         "checker_guard_refs": ["CHK-CUT-01"],
         "guard_error": guard_error,
         "distributed_save_load_claimed": False,
@@ -166,11 +275,10 @@ def closeout() -> dict[str, Any]:
         "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
         "checker_guard_refs": ["CHK-CUT-01"],
         "validation_floor": [
-            "cargo test -p mir-ast --test practical_alpha1_save_load_plan -- --nocapture",
-            "cargo test -p mir-runtime --test practical_alpha1_save_load -- --nocapture",
             "python3 scripts/practical_alpha1_check.py run CHK-CUT-01 --format json",
             "python3 scripts/practical_alpha1_save_load.py run SL-A1-01 --format json",
             "python3 scripts/practical_alpha1_save_load.py run SL-A1-02 --format json",
+            "python3 scripts/practical_alpha1_save_load.py run SL-A1-03 --format json",
             "python3 scripts/practical_alpha1_save_load.py check-all --format json",
             "python3 -m unittest scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs",
         ],
@@ -179,11 +287,15 @@ def closeout() -> dict[str, Any]:
         "local_save_load_first_floor_complete": check_all_summary[
             "local_save_load_first_floor_complete"
         ],
+        "stage_pa1_7_complete": check_all_summary["stage_pa1_7_complete"],
         "save_load_plan_boundary_present": check_all_summary[
             "save_load_plan_boundary_present"
         ],
         "invalid_distributed_cut_guard_present": check_all_summary[
             "invalid_distributed_cut_guard_present"
+        ],
+        "invalid_distributed_cut_row_actualized": check_all_summary[
+            "invalid_distributed_cut_row_actualized"
         ],
         "distributed_save_load_claimed": check_all_summary[
             "distributed_save_load_claimed"

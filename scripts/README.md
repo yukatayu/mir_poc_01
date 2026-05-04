@@ -60,9 +60,11 @@
 - practical alpha-1 first local save/load floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_save_load.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/sl-a1-*/` through `crates/mir-ast::practical_alpha1_save_load_plan` and `crates/mir-runtime::practical_alpha1_save_load`
-  - it consumes checked practical package input, one exact practical local-runtime frontier, and a distinct save-load plan boundary before building a saved local frontier and a non-final save-load report
-  - current actualized rows are `SL-A1-01/02`
-  - `CHK-CUT-01` is reused only as an orphan-receive checker guard
+  - it keeps 2 branches separate:
+    - runtime-backed `SL-A1-01/02` consume checked practical package input, one exact practical local-runtime frontier, and a distinct save-load plan boundary before building a saved local frontier and a non-final save-load report
+    - checker-backed `SL-A1-03` lowers an exact rejected checker report into a distinct save-load preflight reject report before any saved local frontier is built
+  - current actualized rows are `SL-A1-01/02/03`
+  - `CHK-CUT-01` is reused only as an orphan-receive checker guard for the preflight reject branch
   - it is a non-final save/load command and does not claim distributed durable save/load, stale witness/stale lease non-resurrection completion, queue/channel/transport persistence, product prototype, or final public save-load API
 - practical alpha-1 first avatar preview companion floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_avatar.py check-all --format json`
@@ -113,7 +115,7 @@
   - `P-A0-14` は `alpha_cut_save_load_samples.py` と `alpha_cut_save_load_checker.py` を widen し、`CUT-17` local stale-membership rejection bridge と `CUT-11` checker-backed Z-cycle inadmissibility row を actualize した。これは saved local state が stale membership を accepted resumed dispatch へ resurrect しないことと、useless checkpoint cycle が checker floor で inadmissible であることだけを示す。`CUT-10/12/16`、distributed/durable save/load completion、Z-cycle repair、final public ABI は主張しない
   - practical alpha-1 front-door script surface は staged に actualize している。`P-A1-02` で `practical_alpha1_check.py`、`P-A1-03` で `practical_alpha1_run_local.py`、`P-A1-04a..c` で `practical_alpha1_attach.py`、`P-A1-05` で `practical_alpha1_transport.py`、`P-A1-06` で `practical_alpha1_export_devtools.py`、`P-A1-07` で `practical_alpha1_save_load.py` が widened された
   - `P-A1-06` と `P-A1-09` と `P-A1-12` と `P-A1-13` と `P-A1-15` では event DAG export、observer-safe route trace export、membership timeline export、exact-report hot-plug lifecycle export、fallback degradation export、redacted observer view、report-local retention query export を distinct devtools bundle + non-final viewer surface として actualize した。`VIS-A1-07` は exact `SL-A1-02` save-load report に widened した report-local retained-artifact catalog と hit/miss query trace だけを consume し、durable retained-artifact service や remote retrieval semantics は追加しない
-  - `P-A1-07` では `SL-A1-01/02` を distinct save-load plan + saved local frontier + non-final save-load report surface として actualize した。distributed durable save/load、stale witness/stale lease non-resurrection completion、queue/channel/transport persistence、product command は still later である
+  - `P-A1-07` と `P-A1-16` では `SL-A1-01/02/03` を widened practical save-load floor として actualize した。runtime-backed branch は distinct save-load plan + saved local frontier + non-final save-load report surface、checker-backed branch は exact rejected checker report -> distinct save-load preflight reject report surface を保つ。distributed durable save/load、stale witness/stale lease non-resurrection completion、queue/channel/transport persistence、product command は still later である
 
 ### storage / env
 
