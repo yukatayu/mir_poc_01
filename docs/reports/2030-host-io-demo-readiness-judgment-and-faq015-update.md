@@ -167,7 +167,9 @@ no sample-family implementation status changed.
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `38ace8a` (`docs: record host io demo readiness in faq 015`) was created with `--no-gpg-sign`.
+- The current branch `docs/layered-repro-guide-001` was pushed to `origin/docs/layered-repro-guide-001`.
+- This report section was refreshed after the first push so the recorded status matches the actual branch state.
 
 ## Sub-agent session close status
 
