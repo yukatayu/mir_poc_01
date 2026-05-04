@@ -26,6 +26,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-05` fallback degradation export over exact `AV-A1-03` avatar preview evidence, limited to rejected source lane + degraded roles + missing host capability visibility.
 - `P-A1-13` widens the same practical devtools cut here:
   `VIS-A1-03` membership timeline export over exact `SL-A1-02` save-load evidence, limited to saved frontier + later live membership advance + restored frontier + stale-membership reject visibility.
+- `P-A1-14` keeps the next practical devtools observable blocked here:
+  `VIS-A1-07` retention/on-demand trace is not widened because current exact practical carriers expose only `retention_scope` labels and `retained_later_refs` later-family inventory, not an exact retained-artifact catalog or on-demand retrieval trace.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - `P-A1-10` adds the first practical avatar preview companion cut here:

@@ -327,6 +327,10 @@ final public transport API と同一視しない。
 - `VIS-A1-03` は exact practical save-load report over the report-local membership timeline bundle に限り、
   distributed durable membership timeline、witness/lease co-timeline、detach history completion を意味しない
 - この floor は `VIS-A1-07` retention/on-demand trace の completion を意味しない
+- `VIS-A1-07` は current exact practical carriers だけでは actualize しない
+  - current exact reports にある `retention_scope` は label / authority inventory に留まる
+  - `retained_later_refs` も future-later inventory に留まり、retained artifact id、fetch selector、request/result trace、hit/miss/expired outcome を持たない
+  - この状態で `VIS-A1-07` を widen すると current practical exact-evidence rule を破る
 - `VIS-A1-04` は export-side hot-plug lifecycle observability widening に限り、
   detach runtime lifecycle execution、rollback/migration completion、final object package attach completion を意味しない
 - `VIS-A1-05` は export-side fallback degradation observability widening に限り、

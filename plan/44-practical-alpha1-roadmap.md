@@ -200,6 +200,10 @@ repository-memory roadmap を置く。
   - `VIS-A1-06` redacted observer view with auth-lane separation
 - current deferred observables:
   - `VIS-A1-07` retention/on-demand trace
+- current blocker after `P-A1-14`:
+  - current exact practical carriers expose `retention_scope` labels and `retained_later_refs` only
+  - they do not expose an exact retained-artifact catalog, fetch selector, or on-demand retrieval request/result trace
+  - therefore `VIS-A1-07` stays blocked until a future exact source carrier exists
 - current non-claim:
   - full devtools / viewer completion ではない
   - `VIS-A1-04` は detach runtime lifecycle execution ではない
@@ -437,6 +441,7 @@ but should not require practical runner scripts before they are added.
 
 - current promoted line after `P-A1-13`:
   practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles, and devtools widening now consumes `SL-A1-02` through `VIS-A1-03` membership timeline export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export; same-session runtime completion remains later
+- `P-A1-14` keeps `VIS-A1-07` blocked because the current exact carriers stop at `retention_scope` labels and `retained_later_refs` later-family inventory; they do not yet provide an exact retained-artifact catalog or on-demand retrieval trace
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -449,5 +454,5 @@ but should not require practical runner scripts before they are added.
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on remaining `VIS-A1-07`, broader save-load widening, or an equally narrow remaining exact-evidence widening
+  - reopen next on a future exact retention-query carrier for `VIS-A1-07`, broader save-load widening, or an equally narrow remaining exact-evidence widening
 - queue authority remains `progress.md` / `tasks.md`

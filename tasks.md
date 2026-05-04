@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-04 15:39 JST
+最終更新: 2026-05-04 15:43 JST
 
 ## この文書について
 
@@ -33,6 +33,8 @@
   `scripts/practical_alpha1_export_devtools.py` と exact expected `vis-a1-05-fallback-degradation.expected.json` を widen し、`VIS-A1-05` を `AV-A1-03` exact avatar preview report から rejected source lane、degraded roles、missing host capability を保ったまま export する fallback degradation bundle として actualize しました。current practical devtools floor は `VIS-A1-01/02/04/05/06` に widen されましたが、これは exact avatar preview fallback evidence の narrow consumption に限り、native execution、unsupported-runtime execution success、same-session runtime attach/detach execution、full membership timeline / retention-on-demand completion、full practical product prototype completion を意味しません。
 - `P-A1-13` practical membership timeline export widening は 2026-05-04 に close しました:
   `scripts/practical_alpha1_export_devtools.py` と exact expected `vis-a1-03-membership-timeline.expected.json` を widen し、`VIS-A1-03` を `SL-A1-02` exact save-load report から saved frontier、later live membership advance、restored frontier、stale-membership reject を保ったまま export する membership timeline bundle として actualize しました。current practical devtools floor は `VIS-A1-01/02/03/04/05/06` に widen されましたが、これは exact save-load membership evidence の narrow consumption に限り、distributed durable membership timeline、witness/lease co-timeline、retention/on-demand completion、same-session runtime attach/detach execution、full practical product prototype completion を意味しません。
+- `P-A1-14` practical retention-trace blocker split は 2026-05-04 15:43 JST に close しました:
+  `VIS-A1-07` は actualize せず、current exact practical carriers が expose しているのは `retention_scope` label と `retained_later_refs` inventory だけであり、retained-artifact catalog や on-demand retrieval request/result trace は無いことを blocker として snapshot docs / roadmap memory に固定しました。`python3 scripts/practical_alpha1_export_devtools.py closeout --format json` は `VIS-A1-01/02/03/04/05/06` implemented と `VIS-A1-07` deferred を維持し、`python3 scripts/practical_alpha1_product_preview.py run PE2E-07 --format json` も retention/on-demand completion を claim しないことを再確認しました。これは docs-only blocker package であり、新しい devtools/save-load/runtime semantics は actualize していません。
 - `P-A1-00` rebaseline validation freshness は 2026-05-03 15:27 JST に更新済みです:
   `P-A1-00` gate では `python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass し、new `specs/18` / `plan/44` と progress semantics repair が snapshot docs / validators に反映された。sub-agent review で見つかった `Documentation.md` / dashboard wording drift も反映済みである。これは docs/spec/taxonomy rebaseline package であり、practical front-door / parser / runtime implementation success はまだ claim しない。
 - Alpha-0 evidence closeout line は retained reference です:
@@ -42,7 +44,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では remaining `VIS-A1-07` と broader save/load widening が next reopen point である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` で practical alpha-1 line を昇格し、`P-A1-14` で remaining `VIS-A1-07` を blocker として固定した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では future exact retention-query carrier か broader save/load widening が next reopen condition である。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -93,11 +95,11 @@
 - Concrete phase:
   Phase 8/9 — front-door、first checker floor、first local-runtime floor、current practical package/hot-plug API closeout、current practical transport floor、widened practical devtools export floor、first practical local save/load floor、first practical product-preview floor、first practical avatar preview companion floor are in place; same-session product runtime and later devtools/save-load widening remain open
 - Package status:
-  `P-A1-13` practical membership timeline export widening is the last closed package in repo state
+  `P-A1-14` practical retention-trace blocker split is the last closed package in repo state
 - Current status:
-  `P-A1-13` は `VIS-A1-03` を追加して、devtools lane が `SL-A1-02` exact save-load report を saved frontier、later live membership advance、restored frontier、stale-membership reject を保持した membership timeline export bundle として consume できるところまで進んだ。`P-A1-12` の `VIS-A1-05`、`P-A1-11` の `PE2E-08/09`、`P-A1-08` の `PE2E-01..07`、`P-A1-10` の `AV-A1-01/02/03`、`P-A1-09` の `VIS-A1-04`、`P-A1-07` の `SL-A1-01/02`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは distributed durable membership timeline、witness/lease co-timeline、native avatar execution、same-session runtime attach/detach execution、unsupported-runtime execution success、full product prototype completion、full devtools/save-load completion ではない。
+  `P-A1-13` は last actualization package のままであり、`VIS-A1-03` を追加して devtools lane が `SL-A1-02` exact save-load report を saved frontier、later live membership advance、restored frontier、stale-membership reject を保持した membership timeline export bundle として consume できるところまで進んだ。`P-A1-14` は `VIS-A1-07` を widen せず、current exact practical carriers にあるのは `retention_scope` label と `retained_later_refs` inventory だけであり、retained-artifact catalog や on-demand retrieval request/result trace は無いことを blocker として固定した。`P-A1-12` の `VIS-A1-05`、`P-A1-11` の `PE2E-08/09`、`P-A1-08` の `PE2E-01..07`、`P-A1-10` の `AV-A1-01/02/03`、`P-A1-09` の `VIS-A1-04`、`P-A1-07` の `SL-A1-01/02`、`P-A1-05` の `TR-A1-01..07` は引き続き source carrier として再利用される。これは distributed durable membership timeline、witness/lease co-timeline、native avatar execution、same-session runtime attach/detach execution、unsupported-runtime execution success、full product prototype completion、full devtools/save-load completion ではない。
 - Next autonomous package:
-  remaining `VIS-A1-07` devtools widening が最有力であり、broader save/load widening は still later
+  safe next package is not yet promoted; reopen only after a future exact retention-query carrier, broader save/load semantics cut, or another equally narrow exact-evidence widening is identified
 - Public-decision gate kept separate:
   `U1` remains open and is not collapsed into the practical alpha-1 package series
 
@@ -144,13 +146,14 @@
 | `PA1-3` / `P-A1-03` | 100% | closed | checked package を distinct runtime-plan boundary が consume し、practical source package から local world を起動し event DAG を export |
 | `PA1-4` / `P-A1-04a+b+c` | 100% | closed | `P-A1-04a` closed the first layer/package floor, `P-A1-04b` added missing-witness/stale-membership negatives and the object package attach preview seam, and `P-A1-04c` closed the explicit deferred detach minimal contract boundary |
 | `PA1-5` / `P-A1-05` | 100% | closed | same practical package input で local TCP / Docker Compose TCP を動かし、`TR-A1-01..07` と distinct transport-plan/report carrier を exact expected reports まで揃える |
-| `PA1-6` / `P-A1-06` + `P-A1-09` + `P-A1-12` + `P-A1-13` | 85% | widened first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/03/04/05/06`, while `VIS-A1-07` remains deferred |
+| `PA1-6` / `P-A1-06` + `P-A1-09` + `P-A1-12` + `P-A1-13` | 85% | widened first floor closed | distinct devtools export bundle + non-final viewer over exact practical reports; current actualized observables are `VIS-A1-01/02/03/04/05/06`, while `VIS-A1-07` remains blocked until an exact retention-query carrier exists |
 | `PA1-7` / `P-A1-07` | 45% | first floor closed | practical `save` / `load` command の first floor として `SL-A1-01/02`、distinct save-load plan、saved local frontier、non-final save-load report を actualizeし、`CHK-CUT-01` reuse を orphan-receive guard に限定する |
 | `PA1-8` / `P-A1-08` + `P-A1-10` + `P-A1-11` | 80% | widened practical product-preview floor + avatar companion floors closed | `PE2E-01..09` now consume exact practical reports/devtools bundles and exact `AV-A1-02/03` avatar preview reports while `AV-A1-01/02/03` remain a distinct avatar-preview companion floor; same-session product runtime and full product completion remain later |
 | `P-A1-10` | 100% | closed | exact hot-plug source reports plus checked package input actualize `AV-A1-01/02/03` as a distinct avatar-preview companion floor without claiming native execution or final avatar ABI |
 | `P-A1-11` | 100% | closed | exact avatar preview reports widen `PE2E-08/09` as thin product-preview companion bundles without claiming native execution, same-session runtime attachment, or unsupported-runtime execution success |
 | `P-A1-12` | 100% | closed | exact avatar preview fallback evidence widens `VIS-A1-05` as a devtools fallback degradation export without claiming native execution, unsupported-runtime execution success, same-session runtime attachment, or full devtools completion |
 | `P-A1-13` | 100% | closed | exact save-load evidence widens `VIS-A1-03` as a devtools membership timeline export without claiming distributed durable timeline, witness/lease co-timeline, or full devtools completion |
+| `P-A1-14` | 100% | closed blocker | keeps `VIS-A1-07` deferred because current exact practical carriers expose only `retention_scope` labels and `retained_later_refs`, not retained-artifact catalog or on-demand retrieval request/result trace |
 
 ## current-scope evidence closeout map
 
@@ -200,7 +203,7 @@
 
 | Order | Work item | Owner | Status | Completion condition |
 |---:|---|---|---|---|
-| 1 | remaining `P-A1-06` devtools observables | repo | promoted next reopen point | widen from `VIS-A1-01/02/03/04/05/06` to `VIS-A1-07` only when practical evidence exists without synthetic overclaim |
+| 1 | `VIS-A1-07` retention/on-demand trace blocker | repo | blocked pending exact carrier | reopen only when retained-artifact catalog plus on-demand retrieval request/result trace exists without synthetic overclaim |
 | 2 | save/load widening after `P-A1-07` | repo | staged later | reopen only when stale witness / stale lease / distributed durable save/load semantics can be added without collapsing the saved local frontier boundary |
 | 3 | same-session product runtime semantics beyond `PE2E-01..09` | repo | staged later | do not widen product-preview beyond thin exact-evidence bundles until runtime semantics can be added without collapsing companion preview or fallback rows |
 | 4 | alpha-0 evidence later-family blockers | repo | reserve lane | reopen only if a practical package is blocked by `CUT-10/12/16`, `LIF-15`, `VAR-14`, or transport/lifecycle widening decisions |
@@ -268,6 +271,7 @@ These are safe to do without new product decisions.
 | `P-A1-11` | product-preview avatar companion widening | closed | widen `PE2E-08/09` over exact `AV-A1-02/03` reports without claiming native execution, same-session runtime attachment, or unsupported-runtime execution success |
 | `P-A1-12` | practical fallback degradation export widening | closed | widen `VIS-A1-05` over exact `AV-A1-03` fallback evidence without claiming native execution, unsupported-runtime execution success, same-session runtime attachment, or full devtools completion |
 | `P-A1-13` | practical membership timeline export widening | closed | widen `VIS-A1-03` over exact `SL-A1-02` save-load evidence without claiming distributed durable membership timeline, witness/lease co-timeline, or full devtools completion |
+| `P-A1-14` | practical retention-trace blocker split | closed | keep `VIS-A1-07` blocked until an exact retention-query carrier exists; do not widen from `retention_scope` labels or `retained_later_refs` inventory alone |
 
 ## user decision blockers
 
