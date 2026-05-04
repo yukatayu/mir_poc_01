@@ -117,7 +117,10 @@ git status --short
 
 ## Commit / push status
 
-- pending
+- committed and pushed:
+  - `8b8db87e13a87272ffd0dbe41b945e591826d4be`
+  - message: `docs: summarize current layer alpha status`
+- current file may receive a small follow-up status-only commit if later push metadata needs explicit mirroring.
 
 ## Sub-agent session close status
 
