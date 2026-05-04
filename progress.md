@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-04 17:28 JST
+最終更新: 2026-05-04 19:30 JST
 
 ## この文書について
 
@@ -272,6 +272,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-04 19:30 JST — final docs / roadmap audit を実施し、既存 reports 本文を読まずに normative specs、plan、snapshot docs、sample/script taxonomy を照合した。`specs/18` と `plan/44` の alpha-0 closeout range を `P-A0-01..29` に揃え、`plan/44` の implementation order / current reading を `P-A1-17` 時点へ更新し、`samples/README.md` の practical command list に avatar / product-preview check を追加した。実行結果は新規 report `1176` を参照する。大局的には `PA1-0..7` current practical floors と `PA1-8` widened product-preview / avatar companion floor は実態に即しており、broader save/load、same-session product runtime、public `U1` は still later のまま維持する。
 - 2026-05-04 17:28 JST — `P-A1-17` practical save-load preview carrier alignment を closeout した。`scripts/practical_alpha1_product_preview.py`、`samples/practical-alpha1/previews/pe2e-a1-06-invalid-distributed-save-rejected/preview.json`、exact expected `pe2e-a1-06-invalid-distributed-save-rejected.expected.json` を narrow に realign し、`PE2E-06` が direct checker evidence ではなく exact `SL-A1-03` save-load preflight reject report を consume するよう揃えた。`python3 scripts/practical_alpha1_save_load.py run SL-A1-03 --format json`、`check-all --format json`、`python3 scripts/practical_alpha1_product_preview.py run PE2E-06 --format json`、`check-all --format json`、`closeout --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_product_preview scripts.tests.test_practical_alpha1_save_load scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` を通した。これは exact source-carrier alignment に限り、runtime distributed checkpoint execution、broader save/load semantics、same-session product runtime は still later で、safe な `P-A1-18` はまだ未promoteである。
 - 2026-05-04 15:43 JST — `P-A1-14` practical retention-trace blocker split を closeout した。`VIS-A1-07` を widen せず、current exact practical carriers にあるのは `retention_scope` label と `retained_later_refs` inventory だけで、retained-artifact catalog や on-demand retrieval request/result trace は無いことを blocker として snapshot docs / roadmap memory に固定した。`python3 scripts/practical_alpha1_export_devtools.py closeout --format json` は `VIS-A1-01/02/03/04/05/06` implemented と `VIS-A1-07` deferred を維持し、`python3 scripts/practical_alpha1_product_preview.py run PE2E-07 --format json` も retention/on-demand completion を claim しないことを再確認した。`python3 -m unittest scripts.tests.test_validate_docs`、source hierarchy、docs scaffold、`cargo fmt --check`、`git diff --check` が pass した。これは blocker split に限り、新しい devtools/save-load/runtime semantics は actualize していない。
 

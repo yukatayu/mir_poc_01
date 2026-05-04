@@ -16,7 +16,7 @@ repository-memory roadmap を置く。
 
 ## current repo state
 
-- `P-A0-01..28` により、`specs/13..17` / `plan/39..43` / `samples/alpha/` に基づく
+- `P-A0-01..29` により、`specs/13..17` / `plan/39..43` / `samples/alpha/` に基づく
   current-scope evidence closeout line は一巡している
 - Stage A..F の existing 100% は current-scope evidence closeout であり、
   practical alpha-1 readiness 100% ではない
@@ -253,7 +253,7 @@ repository-memory roadmap を置く。
 - local save/load preview
 - devtools viewer preview
 - hands-on docs
-- current actualized cut after `P-A1-11`:
+- current actualized cut after `P-A1-17`:
   - `samples/practical-alpha1/previews/`
   - `scripts/practical_alpha1_product_preview.py`
   - exact expected bundles `samples/practical-alpha1/expected/pe2e-a1-*.expected.json`
@@ -295,10 +295,14 @@ recommended current promoted line:
 12. `P-A1-11` product-preview avatar companion widening
 13. `P-A1-12` practical fallback degradation export widening
 14. `P-A1-13` practical membership timeline export widening
+15. `P-A1-14` practical retention-trace blocker split
+16. `P-A1-15` practical retention-query export widening
+17. `P-A1-16` practical invalid distributed-cut save-load preflight
+18. `P-A1-17` practical save-load preview carrier alignment
 
-current reading after `P-A1-13`:
+current reading after `P-A1-17`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13`、`P-A1-14`、`P-A1-15`、`P-A1-16`、`P-A1-17` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -335,7 +339,10 @@ current reading after `P-A1-13`:
 - `P-A1-12` actualizes `VIS-A1-05` while keeping the source avatar lane rejected, degraded roles explicit, and missing host capability visible; it does not collapse the row into native execution, unsupported-runtime execution success, or product-preview attachment semantics
 - `P-A1-13` keeps the devtools carrier split exact-report-based and widens `VIS-A1-03` only as membership timeline export over `SL-A1-02`
 - `P-A1-13` actualizes `VIS-A1-03` while keeping saved frontier, later live membership advance, restored frontier, and stale-membership reject visible; it does not collapse the row into distributed durable membership timeline, witness/lease co-timeline, or retention/on-demand completion
+- `P-A1-14` records retention-trace blockers without actualizing a new row, so later retention work cannot silently claim durable retained-artifact service or remote retrieval
 - `P-A1-15` actualizes `VIS-A1-07` only after widening the exact `SL-A1-02` save-load report with report-local `retained_artifacts` catalog evidence; it exports hit/miss query trace without adding durable catalog service, remote retrieval, or expiry lifecycle semantics
+- `P-A1-16` actualizes `SL-A1-03` as a checker-backed invalid distributed-cut preflight reject row over exact `CHK-CUT-01` evidence, before any saved local frontier is built
+- `P-A1-17` realigns `PE2E-06` so the product-preview lane consumes exact `SL-A1-03` save-load preflight evidence rather than direct checker evidence
 
 ## readiness reading
 
@@ -427,6 +434,7 @@ but should not require practical runner scripts before they are added.
 - `python3 scripts/practical_alpha1_transport.py check-all --format json`
 - `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
 - `python3 scripts/practical_alpha1_save_load.py check-all --format json`
+- `python3 scripts/practical_alpha1_avatar.py check-all --format json`
 - `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
 - `python3 scripts/practical_alpha1_product_preview.py render-html PE2E-07 --format json`
 - `python3 scripts/practical_alpha1_product_preview.py closeout --format json`

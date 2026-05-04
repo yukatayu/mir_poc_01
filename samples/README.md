@@ -92,6 +92,8 @@ python3 scripts/practical_alpha1_attach.py check-all --format json
 python3 scripts/practical_alpha1_transport.py check-all --format json
 python3 scripts/practical_alpha1_export_devtools.py check-all --format json
 python3 scripts/practical_alpha1_save_load.py check-all --format json
+python3 scripts/practical_alpha1_avatar.py check-all --format json
+python3 scripts/practical_alpha1_product_preview.py check-all --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

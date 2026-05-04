@@ -33,7 +33,7 @@ library-first toolchain である。
 ## relationship to current alpha-0 evidence
 
 `specs/13..17`、`plan/39..43`、`samples/alpha/`、および
-`P-A0-01..28` の closeout は current-scope evidence closeout として保持する。
+`P-A0-01..29` の closeout は current-scope evidence closeout として保持する。
 
 この evidence は useful であり、practical alpha-1 の前提として数える。
 ただし、それだけで次を意味しない。

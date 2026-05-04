@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-04 17:28 JST
+最終更新: 2026-05-04 19:30 JST
 
 ## この文書について
 
@@ -48,7 +48,7 @@
 - `P0..P18`、`P19`、`P20`、`P21`、`R1..R7`、post-`P21` later-family docs-first trilogy は close 済みです。
   これらは repo-local alpha-ready current layer / docs-first boundary closeout であり、final public parser/API/ABI、rollback、durable migration、distributed ordering、production transport、final viewer/verifier completion ではありません。
 - historical post-`P21` docs-first family は close したままです。
-  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` / `P-A1-15` / `P-A1-16` / `P-A1-17` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..28` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では broader save/load widening か同程度に narrow な exact-evidence widening が next reopen condition である。
+  ただし current promoted implementation line が存在しないという historical snapshot には戻らず、今は `P-A1-00` / `P-A1-01` / `P-A1-02` / `P-A1-03` / `P-A1-04a` / `P-A1-04b` / `P-A1-04c` / `P-A1-05` / `P-A1-06` / `P-A1-07` / `P-A1-09` / `P-A1-08` / `P-A1-10` / `P-A1-11` / `P-A1-12` / `P-A1-13` / `P-A1-15` / `P-A1-16` / `P-A1-17` で practical alpha-1 line を昇格した。alpha-local package `P-A0-01..29` closeout は current-scope evidence reference として残し、`LIF-15` / `VAR-14` は future carrier blocker split に留めたまま、practical line 側では broader save/load widening か同程度に narrow な exact-evidence widening が next reopen condition である。
 - `U1` actual commitment は依然 separate gate です。
   Packaging / installed binary target、host integration target、first shipped public surface scope、final shared-space operational catalog breadth は user-facing decision を要します。
 - self-driven に残るのは maintenance lane です:
@@ -114,7 +114,7 @@
 - Concrete phase:
   Phase 7/7 — current-scope evidence line complete; later-family and public-boundary blockers remain
 - Package status:
-  `P-A0-28` Stage A imported-baseline reconciliation is the latest alpha-0 evidence refresh package
+  `P-A0-29` Stage D freshness and sidecar repair is the latest alpha-0 evidence maintenance package
 - Current status:
   `P-A0-28` は imported Stage A validation floor を rerun し、`specs/17` / `plan/43` / snapshot docs を同期して alpha line の large-stage reading を `Stage A..F` sequential closeout として固定した。negative side / acceptance side / snapshot-selected side / anchor-handoff side / runtime-mirror side の separate carriers と Stage B..F closeouts は維持されるが、current queue authority は practical line とは別に later-family blocker selection または separate public-boundary `U1` lane へ残っている。
 
@@ -325,7 +325,7 @@ These are safe to do without new product decisions.
 - reason:
   broader catalog choices can force durability, replay, fairness, and host integration commitments too early.
 
-### Blocker 6. first network scope
+### Blocker 5. first network scope
 
 - overview:
   choose whether alpha networking stays local-only, reaches Docker/local-subprocess, or targets broader WAN/federation.
@@ -336,7 +336,7 @@ These are safe to do without new product decisions.
 - reason:
   it exercises transport/auth/membership separation without prematurely claiming production WAN.
 
-### Blocker 7. avatar compatibility later target
+### Blocker 6. avatar compatibility later target
 
 - overview:
   first practical avatar-preview companion floor and thin product-preview companion widening are now closed, but any later widening still must choose whether avatar semantics stay companion-only or reopen toward runtime execution semantics.
@@ -347,7 +347,7 @@ These are safe to do without new product decisions.
 - reason:
   `AV-A1-01/02/03` and `PE2E-08/09` are now actualized, but they remain non-final companion evidence with `native_execution_performed = false`; collapsing them directly into product runtime wording would overclaim runtime semantics.
 
-### Blocker 8. native binary policy
+### Blocker 7. native binary policy
 
 - overview:
   choose whether native packages are forbidden, sandboxed/trust-policy limited, or admitted by stronger provenance policy.
@@ -358,7 +358,7 @@ These are safe to do without new product decisions.
 - reason:
   signature alone is not semantic safety; provenance and capability/effect limits both matter.
 
-### Blocker 9. save/load initial scope and UI target
+### Blocker 8. save/load initial scope and UI target
 
 - overview:
   initial local-only save/load floor is now fixed, but the next widening still needs a choice between distributed/durable semantics later and what product-facing UI target should expose save/load.
@@ -414,6 +414,14 @@ python3 scripts/alpha_e2e_samples.py run E2E-06 --format json
 python3 scripts/alpha_e2e_samples.py check-all --format json
 python3 scripts/alpha_e2e_samples.py closeout --format json
 python3 -m unittest scripts.tests.test_alpha_cut_save_load_checker scripts.tests.test_alpha_cut_save_load_samples scripts.tests.test_alpha_visualization_samples scripts.tests.test_alpha_e2e_samples
+python3 scripts/practical_alpha1_check.py check-all --format json
+python3 scripts/practical_alpha1_run_local.py check-all --format json
+python3 scripts/practical_alpha1_attach.py check-all --format json
+python3 scripts/practical_alpha1_transport.py check-all --format json
+python3 scripts/practical_alpha1_export_devtools.py check-all --format json
+python3 scripts/practical_alpha1_save_load.py check-all --format json
+python3 scripts/practical_alpha1_avatar.py check-all --format json
+python3 scripts/practical_alpha1_product_preview.py check-all --format json
 cargo test -p mir-ast
 cargo test -p mirrorea-core
 cargo test -p mir-runtime
