@@ -56,7 +56,7 @@ TELEMETRY_LANES = [
 
 STOP_LINES = [
     "do not treat this export bundle as full practical devtools completion",
-    "do not treat this export bundle as membership timeline, hot-plug lifecycle, fallback degradation, or retention/on-demand completion",
+    "do not treat this export bundle as membership timeline, fallback degradation, or retention/on-demand completion",
     "do not treat this export bundle as save/load, product prototype, or final public runtime/devtools/telemetry ABI completion",
     "do not promote samples/practical-alpha1 to an active runnable root in the devtools package",
 ]
@@ -77,7 +77,6 @@ COMMON_NON_CLAIMS = [
 
 DEFERRED_OBSERVABLES = [
     "VIS-A1-03",
-    "VIS-A1-04",
     "VIS-A1-05",
     "VIS-A1-07",
 ]
@@ -96,6 +95,13 @@ IMPLEMENTED_ROWS: list[dict[str, Any]] = [
         "expected_report": "samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json",
         "bundle_kind": "route_trace_export",
         "actualized_observable": "VIS-A1-02",
+    },
+    {
+        "sample_id": "VIS-A1-04",
+        "summary": "hot-plug lifecycle boundary export/view over exact practical hotplug reports",
+        "expected_report": "samples/practical-alpha1/expected/vis-a1-04-hotplug-lifecycle.expected.json",
+        "bundle_kind": "hotplug_lifecycle_export",
+        "actualized_observable": "VIS-A1-04",
     },
     {
         "sample_id": "VIS-A1-06",
@@ -194,6 +200,18 @@ def _source_report_ref(
         "carrier_scope": carrier_scope,
         "surface_kind": surface_kind,
     }
+
+
+def _reason_refs(verdict: dict[str, Any]) -> list[str]:
+    refs: list[str] = []
+    for field in (
+        "compatibility_reason_refs",
+        "authorization_reason_refs",
+        "membership_freshness_reason_refs",
+        "witness_reason_refs",
+    ):
+        refs.extend(list(verdict.get(field, [])))
+    return refs
 
 
 def _event_dag_bundle() -> dict[str, Any]:
@@ -398,6 +416,234 @@ def _route_trace_bundle() -> dict[str, Any]:
     }
 
 
+def _hotplug_lifecycle_bundle() -> dict[str, Any]:
+    attach_report = _hotplug_report("HP-A1-01")
+    detach_report = _hotplug_report("HP-A1-07")
+    attach_request = attach_report["hotplug_runtime_report"]["request"]
+    attach_verdict = attach_report["hotplug_runtime_report"]["verdict"]
+    detach_request = detach_report["hotplug_runtime_report"]["request"]
+    detach_verdict = detach_report["hotplug_runtime_report"]["verdict"]
+    attach_membership = attach_report["hotplug_runtime_report"]["runtime_snapshot"][
+        "membership"
+    ]
+    detach_membership = detach_report["hotplug_runtime_report"]["runtime_snapshot"][
+        "membership"
+    ]
+    shared_members = sorted(
+        set(attach_membership["members"].keys()) & set(detach_membership["members"].keys())
+    )
+    panels = [
+        _panel(
+            panel_id="attach_lifecycle",
+            panel_kind="hotplug_lifecycle",
+            label="practical:attach-lifecycle",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-01"],
+            focus_refs=[
+                attach_request["request_id"],
+                attach_report["activation_cut_ref"],
+            ],
+            notes=[
+                "exact practical attach report is consumed as a typed lifecycle boundary",
+                "no lifecycle state machine is imported beyond request/verdict/activation-cut evidence",
+            ],
+        ),
+        _panel(
+            panel_id="membership_snapshot",
+            panel_kind="membership_snapshot",
+            label="practical:hotplug-membership-snapshot",
+            authority="InspectMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-01", "HP-A1-07"],
+            focus_refs=shared_members,
+            notes=[
+                "attach and deferred-detach reports keep membership frontier evidence explicit",
+                "membership timeline widening remains a later observable",
+            ],
+        ),
+        _panel(
+            panel_id="detach_lifecycle",
+            panel_kind="hotplug_lifecycle",
+            label="practical:detach-lifecycle",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-07"],
+            focus_refs=[
+                detach_request["request_id"],
+                detach_report["detach_boundary_ref"],
+            ],
+            notes=[
+                "current practical floor exports detach only as an explicit deferred boundary",
+                "rollback, migration, and detach execution remain later",
+            ],
+        ),
+    ]
+    telemetry_rows = [
+        _telemetry(
+            telemetry_id=attach_request["request_id"],
+            telemetry_kind="hotplug_request",
+            label="practical:attach-request",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-01"],
+            channel=attach_request["attachpoint_ref"],
+            value_summary=attach_report["terminal_outcome"],
+            notes=[
+                f"operation_kind={attach_request['operation_kind']}",
+                f"attach_profile={attach_report['attach_profile']}",
+            ],
+        ),
+        _telemetry(
+            telemetry_id=attach_report["activation_cut_ref"],
+            telemetry_kind="activation_cut",
+            label="practical:activation-cut",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-01"],
+            channel=attach_request["attachpoint_ref"],
+            value_summary="accepted_attach_boundary",
+            notes=_reason_refs(attach_verdict),
+        ),
+        _telemetry(
+            telemetry_id="membership_frontier#HP-A1-01+07",
+            telemetry_kind="membership_frontier",
+            label="practical:hotplug-membership-frontier",
+            authority="InspectMembershipFrontier(WorldPlace[AlphaRoom#1])",
+            redaction="membership_frontier_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-01", "HP-A1-07"],
+            channel="WorldPlace[AlphaRoom#1]",
+            value_summary=(
+                f"epoch={attach_membership['membership_epoch']} "
+                f"shared_members={len(shared_members)}"
+            ),
+            notes=[
+                f"detach_epoch={detach_membership['membership_epoch']}",
+                "exact report-local snapshot only; no full membership timeline claimed",
+            ],
+        ),
+        _telemetry(
+            telemetry_id=detach_request["request_id"],
+            telemetry_kind="hotplug_request",
+            label="practical:detach-request",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-07"],
+            channel=detach_request["attachpoint_ref"],
+            value_summary=detach_report["terminal_outcome"],
+            notes=[
+                f"operation_kind={detach_request['operation_kind']}",
+                f"reason_family={detach_report['reason_family']}",
+            ],
+        ),
+        _telemetry(
+            telemetry_id=detach_report["detach_boundary_ref"],
+            telemetry_kind="detach_boundary",
+            label="practical:detach-boundary",
+            authority="InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+            redaction="membership_and_boundary_summary",
+            retention_scope="report_local_inventory",
+            source_report_refs=["HP-A1-07"],
+            channel=detach_request["attachpoint_ref"],
+            value_summary=detach_report["terminal_outcome"],
+            notes=list(detach_report["rejection_reason_refs"]) + _reason_refs(detach_verdict),
+        ),
+    ]
+    return {
+        "sample_id": "VIS-A1-04",
+        "bundle_kind": "hotplug_lifecycle_export",
+        "family": "practical-alpha1-devtools-export",
+        "devtools_scope": DEVTOOLS_SCOPE,
+        "viewer_scope": VIEWER_SCOPE,
+        "surface_kind": SURFACE_KIND,
+        "viewer_mode": VIEWER_MODE,
+        "bundle_boundary": BUNDLE_BOUNDARY,
+        "actualized_observable": "VIS-A1-04",
+        "source_reports": [
+            _source_report_ref(
+                family="practical-alpha1-hotplug",
+                sample_id="HP-A1-01",
+                carrier_scope=attach_report["hotplug_scope"],
+                surface_kind=attach_report["surface_kind"],
+            ),
+            _source_report_ref(
+                family="practical-alpha1-hotplug",
+                sample_id="HP-A1-07",
+                carrier_scope=detach_report["hotplug_scope"],
+                surface_kind=detach_report["surface_kind"],
+            ),
+        ],
+        "panel_lanes": list(PANEL_LANES),
+        "telemetry_lanes": list(TELEMETRY_LANES),
+        "panels": panels,
+        "telemetry_rows": telemetry_rows,
+        "panel_ids": [panel["panel_id"] for panel in panels],
+        "panel_kinds": sorted({panel["panel_kind"] for panel in panels}),
+        "telemetry_ids": [row["telemetry_id"] for row in telemetry_rows],
+        "telemetry_kinds": sorted({row["telemetry_kind"] for row in telemetry_rows}),
+        "retention_scopes": sorted({panel["retention_scope"] for panel in panels}),
+        "redaction_policies": sorted({panel["redaction"] for panel in panels}),
+        "export_sections": {
+            "attach_boundary": {
+                "sample_id": attach_report["sample_id"],
+                "operation_kind": attach_request["operation_kind"],
+                "request_id": attach_request["request_id"],
+                "terminal_outcome": attach_report["terminal_outcome"],
+                "activation_cut_ref": attach_report["activation_cut_ref"],
+                "active_layers_after": attach_report["active_layers_after"],
+                "reason_refs": _reason_refs(attach_verdict),
+            },
+            "membership_snapshot": {
+                "attach_membership_epoch": attach_membership["membership_epoch"],
+                "detach_membership_epoch": detach_membership["membership_epoch"],
+                "same_epoch": attach_membership["membership_epoch"]
+                == detach_membership["membership_epoch"],
+                "shared_members": shared_members,
+            },
+            "detach_boundary": {
+                "sample_id": detach_report["sample_id"],
+                "operation_kind": detach_request["operation_kind"],
+                "request_id": detach_request["request_id"],
+                "terminal_outcome": detach_report["terminal_outcome"],
+                "detach_boundary_ref": detach_report["detach_boundary_ref"],
+                "reason_family": detach_report["reason_family"],
+                "rejection_reason_refs": detach_report["rejection_reason_refs"],
+                "reason_refs": _reason_refs(detach_verdict),
+            },
+            "request_lanes": {
+                "attach": attach_report["hotplug_runtime_report"]["request_lanes"],
+                "detach": detach_report["hotplug_runtime_report"]["request_lanes"],
+            },
+            "verdict_lanes": {
+                "attach": attach_report["hotplug_runtime_report"]["verdict_lanes"],
+                "detach": detach_report["hotplug_runtime_report"]["verdict_lanes"],
+            },
+        },
+        "what_it_proves": [
+            "exact practical hotplug reports are consumable as a distinct hot-plug lifecycle export bundle without adding new runtime semantics",
+            "accepted attach, explicit membership frontier snapshot, and deferred detach boundary remain separate and typed at the viewer boundary",
+            "devtools export reuses exact practical hotplug reports instead of importing helper-local lifecycle ids as canonical runtime state",
+        ],
+        "what_it_does_not_prove": list(COMMON_NON_CLAIMS)
+        + [
+            "full devtools stage completion",
+            "membership timeline completion",
+            "detach runtime lifecycle execution",
+            "rollback or durable migration completion",
+            "fallback degradation completion",
+            "retention/on-demand completion",
+            "final object package attach completion",
+        ],
+    }
+
+
 def _redacted_observer_bundle() -> dict[str, Any]:
     report = _transport_report("TR-A1-07")
     route_trace = report["observer_route_trace"]
@@ -530,6 +776,8 @@ def build_bundle(sample_id: str) -> dict[str, Any]:
         return _event_dag_bundle()
     if sample_id == "VIS-A1-02":
         return _route_trace_bundle()
+    if sample_id == "VIS-A1-04":
+        return _hotplug_lifecycle_bundle()
     if sample_id == "VIS-A1-06":
         return _redacted_observer_bundle()
     raise ValueError(f"unknown practical alpha-1 devtools sample {sample_id}")
@@ -644,7 +892,7 @@ def _render_bundle_html(bundle: dict[str, Any]) -> str:
 
 
 def render_html(sample_id: str, output_path: str | None = None) -> dict[str, Any]:
-    bundle = build_bundle(sample_id)
+    bundle = run_sample(sample_id)
     rendered = _render_bundle_html(bundle)
     if output_path is None:
         temp = tempfile.NamedTemporaryFile(
@@ -682,7 +930,9 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/practical_alpha1_export_devtools.py list --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-01 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-02 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py run VIS-A1-06 --format json",
+            "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-04 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py render-html VIS-A1-06 --format json",
             "python3 scripts/practical_alpha1_export_devtools.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py closeout --format json",

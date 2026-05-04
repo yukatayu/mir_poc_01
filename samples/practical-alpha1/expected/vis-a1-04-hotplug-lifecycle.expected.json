@@ -1,0 +1,361 @@
+{
+  "sample_id": "VIS-A1-04",
+  "bundle_kind": "hotplug_lifecycle_export",
+  "family": "practical-alpha1-devtools-export",
+  "devtools_scope": "practical-alpha1-devtools-export-floor",
+  "viewer_scope": "practical-alpha1-devtools-viewer-floor",
+  "surface_kind": "practical_alpha1_nonfinal_devtools_bundle",
+  "viewer_mode": "static_html_bundle",
+  "bundle_boundary": "non-final practical devtools export bundle over exact practical reports; not a final public viewer or telemetry API",
+  "actualized_observable": "VIS-A1-04",
+  "source_reports": [
+    {
+      "family": "practical-alpha1-hotplug",
+      "sample_id": "HP-A1-01",
+      "carrier_scope": "practical-alpha1-hotplug-floor",
+      "surface_kind": "practical_alpha1_nonfinal_hotplug_report"
+    },
+    {
+      "family": "practical-alpha1-hotplug",
+      "sample_id": "HP-A1-07",
+      "carrier_scope": "practical-alpha1-hotplug-floor",
+      "surface_kind": "practical_alpha1_nonfinal_hotplug_report"
+    }
+  ],
+  "panel_lanes": [
+    "panel_id",
+    "panel_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "focus_refs",
+    "notes"
+  ],
+  "telemetry_lanes": [
+    "telemetry_id",
+    "telemetry_kind",
+    "label",
+    "authority",
+    "redaction",
+    "retention_scope",
+    "source_report_refs",
+    "channel",
+    "value_summary",
+    "notes"
+  ],
+  "panels": [
+    {
+      "panel_id": "attach_lifecycle",
+      "panel_kind": "hotplug_lifecycle",
+      "label": "practical:attach-lifecycle",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-01"
+      ],
+      "focus_refs": [
+        "practical_hotplug_request#hp-a1-01",
+        "activation_cut#debug_trace_layer_attach"
+      ],
+      "notes": [
+        "exact practical attach report is consumed as a typed lifecycle boundary",
+        "no lifecycle state machine is imported beyond request/verdict/activation-cut evidence"
+      ]
+    },
+    {
+      "panel_id": "membership_snapshot",
+      "panel_kind": "membership_snapshot",
+      "label": "practical:hotplug-membership-snapshot",
+      "authority": "InspectMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-01",
+        "HP-A1-07"
+      ],
+      "focus_refs": [
+        "Alice",
+        "Bob",
+        "ExampleAdmin",
+        "Mallory"
+      ],
+      "notes": [
+        "attach and deferred-detach reports keep membership frontier evidence explicit",
+        "membership timeline widening remains a later observable"
+      ]
+    },
+    {
+      "panel_id": "detach_lifecycle",
+      "panel_kind": "hotplug_lifecycle",
+      "label": "practical:detach-lifecycle",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-07"
+      ],
+      "focus_refs": [
+        "practical_hotplug_request#hp-a1-07",
+        "detach_boundary#alpha_local_hotplug_minimal_contract"
+      ],
+      "notes": [
+        "current practical floor exports detach only as an explicit deferred boundary",
+        "rollback, migration, and detach execution remain later"
+      ]
+    }
+  ],
+  "telemetry_rows": [
+    {
+      "telemetry_id": "practical_hotplug_request#hp-a1-01",
+      "telemetry_kind": "hotplug_request",
+      "label": "practical:attach-request",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-01"
+      ],
+      "channel": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "value_summary": "accepted",
+      "notes": [
+        "operation_kind=attach",
+        "attach_profile=debug_trace_layer"
+      ]
+    },
+    {
+      "telemetry_id": "activation_cut#debug_trace_layer_attach",
+      "telemetry_kind": "activation_cut",
+      "label": "practical:activation-cut",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-01"
+      ],
+      "channel": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "value_summary": "accepted_attach_boundary",
+      "notes": [
+        "layer_kind_allowed",
+        "attach_point_matches_policy",
+        "input_type_contravariant_or_equal",
+        "attach_capability_present",
+        "admin_attach_authority_confirmed",
+        "membership_frontier_current",
+        "member_incarnation_current",
+        "required_witnesses_present"
+      ]
+    },
+    {
+      "telemetry_id": "membership_frontier#HP-A1-01+07",
+      "telemetry_kind": "membership_frontier",
+      "label": "practical:hotplug-membership-frontier",
+      "authority": "InspectMembershipFrontier(WorldPlace[AlphaRoom#1])",
+      "redaction": "membership_frontier_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-01",
+        "HP-A1-07"
+      ],
+      "channel": "WorldPlace[AlphaRoom#1]",
+      "value_summary": "epoch=0 shared_members=4",
+      "notes": [
+        "detach_epoch=0",
+        "exact report-local snapshot only; no full membership timeline claimed"
+      ]
+    },
+    {
+      "telemetry_id": "practical_hotplug_request#hp-a1-07",
+      "telemetry_kind": "hotplug_request",
+      "label": "practical:detach-request",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-07"
+      ],
+      "channel": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "value_summary": "deferred_detach_minimal_contract",
+      "notes": [
+        "operation_kind=detach",
+        "reason_family=detach_contract"
+      ]
+    },
+    {
+      "telemetry_id": "detach_boundary#alpha_local_hotplug_minimal_contract",
+      "telemetry_kind": "detach_boundary",
+      "label": "practical:detach-boundary",
+      "authority": "InspectHotPlugBoundary(AttachPoint[AlphaRoom#1::MessageDispatch])",
+      "redaction": "membership_and_boundary_summary",
+      "retention_scope": "report_local_inventory",
+      "source_report_refs": [
+        "HP-A1-07"
+      ],
+      "channel": "AttachPoint[AlphaRoom#1::MessageDispatch]",
+      "value_summary": "deferred_detach_minimal_contract",
+      "notes": [
+        "detach_minimal_contract_deferred",
+        "layer_kind_allowed",
+        "attach_point_matches_policy",
+        "input_type_contravariant_or_equal",
+        "attach_capability_present",
+        "admin_attach_authority_confirmed",
+        "membership_frontier_current",
+        "member_incarnation_current",
+        "required_witnesses_present"
+      ]
+    }
+  ],
+  "panel_ids": [
+    "attach_lifecycle",
+    "membership_snapshot",
+    "detach_lifecycle"
+  ],
+  "panel_kinds": [
+    "hotplug_lifecycle",
+    "membership_snapshot"
+  ],
+  "telemetry_ids": [
+    "practical_hotplug_request#hp-a1-01",
+    "activation_cut#debug_trace_layer_attach",
+    "membership_frontier#HP-A1-01+07",
+    "practical_hotplug_request#hp-a1-07",
+    "detach_boundary#alpha_local_hotplug_minimal_contract"
+  ],
+  "telemetry_kinds": [
+    "activation_cut",
+    "detach_boundary",
+    "hotplug_request",
+    "membership_frontier"
+  ],
+  "retention_scopes": [
+    "report_local_inventory"
+  ],
+  "redaction_policies": [
+    "membership_and_boundary_summary",
+    "membership_frontier_summary"
+  ],
+  "export_sections": {
+    "attach_boundary": {
+      "sample_id": "HP-A1-01",
+      "operation_kind": "attach",
+      "request_id": "practical_hotplug_request#hp-a1-01",
+      "terminal_outcome": "accepted",
+      "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
+      "active_layers_after": [
+        "debug_trace_layer"
+      ],
+      "reason_refs": [
+        "layer_kind_allowed",
+        "attach_point_matches_policy",
+        "input_type_contravariant_or_equal",
+        "attach_capability_present",
+        "admin_attach_authority_confirmed",
+        "membership_frontier_current",
+        "member_incarnation_current",
+        "required_witnesses_present"
+      ]
+    },
+    "membership_snapshot": {
+      "attach_membership_epoch": 0,
+      "detach_membership_epoch": 0,
+      "same_epoch": true,
+      "shared_members": [
+        "Alice",
+        "Bob",
+        "ExampleAdmin",
+        "Mallory"
+      ]
+    },
+    "detach_boundary": {
+      "sample_id": "HP-A1-07",
+      "operation_kind": "detach",
+      "request_id": "practical_hotplug_request#hp-a1-07",
+      "terminal_outcome": "deferred_detach_minimal_contract",
+      "detach_boundary_ref": "detach_boundary#alpha_local_hotplug_minimal_contract",
+      "reason_family": "detach_contract",
+      "rejection_reason_refs": [
+        "detach_minimal_contract_deferred"
+      ],
+      "reason_refs": [
+        "layer_kind_allowed",
+        "attach_point_matches_policy",
+        "input_type_contravariant_or_equal",
+        "attach_capability_present",
+        "admin_attach_authority_confirmed",
+        "membership_frontier_current",
+        "member_incarnation_current",
+        "required_witnesses_present"
+      ]
+    },
+    "request_lanes": {
+      "attach": [
+        "request_id",
+        "attachpoint_ref",
+        "patch_ref",
+        "operation_kind",
+        "requesting_principal",
+        "requesting_participant_place",
+        "message_envelope_ref",
+        "auth_evidence_ref",
+        "capability_refs",
+        "witness_refs",
+        "notes"
+      ],
+      "detach": [
+        "request_id",
+        "attachpoint_ref",
+        "patch_ref",
+        "operation_kind",
+        "requesting_principal",
+        "requesting_participant_place",
+        "message_envelope_ref",
+        "auth_evidence_ref",
+        "capability_refs",
+        "witness_refs",
+        "notes"
+      ]
+    },
+    "verdict_lanes": {
+      "attach": [
+        "request_ref",
+        "verdict_kind",
+        "compatibility_reason_refs",
+        "authorization_reason_refs",
+        "membership_freshness_reason_refs",
+        "witness_reason_refs",
+        "notes"
+      ],
+      "detach": [
+        "request_ref",
+        "verdict_kind",
+        "compatibility_reason_refs",
+        "authorization_reason_refs",
+        "membership_freshness_reason_refs",
+        "witness_reason_refs",
+        "notes"
+      ]
+    }
+  },
+  "what_it_proves": [
+    "exact practical hotplug reports are consumable as a distinct hot-plug lifecycle export bundle without adding new runtime semantics",
+    "accepted attach, explicit membership frontier snapshot, and deferred detach boundary remain separate and typed at the viewer boundary",
+    "devtools export reuses exact practical hotplug reports instead of importing helper-local lifecycle ids as canonical runtime state"
+  ],
+  "what_it_does_not_prove": [
+    "final public viewer API",
+    "final public telemetry schema",
+    "save/load completion",
+    "product prototype completion",
+    "WAN/federation completion",
+    "full devtools stage completion",
+    "membership timeline completion",
+    "detach runtime lifecycle execution",
+    "rollback or durable migration completion",
+    "fallback degradation completion",
+    "retention/on-demand completion",
+    "final object package attach completion"
+  ]
+}

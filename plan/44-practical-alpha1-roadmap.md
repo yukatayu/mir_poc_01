@@ -154,24 +154,26 @@ repository-memory roadmap を置く。
 
 ### PA1-6 — devtools / viewer
 
-- current first floor after `P-A1-06`:
+- current widened floor after `P-A1-06` and `P-A1-09`:
   - `scripts/practical_alpha1_export_devtools.py`
   - exact expected bundles `samples/practical-alpha1/expected/vis-a1-01-event-dag-export.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json`
+  - `samples/practical-alpha1/expected/vis-a1-04-hotplug-lifecycle.expected.json`
   - `samples/practical-alpha1/expected/vis-a1-06-redacted-observer-view.expected.json`
 - current carrier split:
   `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - current actualized observables:
   - `VIS-A1-01` event DAG + publication / witness / handoff relation export
   - `VIS-A1-02` observer-safe route trace export
+  - `VIS-A1-04` hot-plug lifecycle export over exact attach accepted and deferred detach boundary reports
   - `VIS-A1-06` redacted observer view with auth-lane separation
 - current deferred observables:
   - `VIS-A1-03` membership timeline
-  - `VIS-A1-04` hot-plug lifecycle
   - `VIS-A1-05` fallback degradation
   - `VIS-A1-07` retention/on-demand trace
 - current non-claim:
   - full devtools / viewer completion ではない
+  - `VIS-A1-04` は detach runtime lifecycle execution ではない
   - local save/load command ではない
   - product prototype completion ではない
   - final public viewer / telemetry / runtime-devtools ABI ではない
@@ -236,11 +238,12 @@ recommended current promoted line:
 6. `P-A1-05` transport practical E2E
 7. `P-A1-06` devtools / viewer
 8. `P-A1-07` local save/load command
-9. `P-A1-08` product prototype
+9. `P-A1-09` exact-report hot-plug lifecycle export widening
+10. `P-A1-08` product prototype
 
-current reading after `P-A1-07`:
+current reading after `P-A1-09`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -256,11 +259,12 @@ current reading after `P-A1-07`:
 - `P-A1-06` fixed a fourth distinct carrier split:
   `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - `P-A1-06` actualized `VIS-A1-01/02/06` as event DAG + publication/witness/handoff export, observer-safe route trace export, and redacted observer view with auth-lane separation
+- `P-A1-09` safely reopened `PA1-6` before `P-A1-08` and actualized `VIS-A1-04` as exact-report hot-plug lifecycle export over `HP-A1-01` accepted attach and `HP-A1-07` deferred detach boundary, without claiming detach runtime lifecycle execution
 - `P-A1-07` fixed a fifth distinct carrier split:
   `checked package -> runtime plan`, plus `one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report`
 - `P-A1-07` actualized `SL-A1-01/02` as local-only roundtrip resume and stale-membership non-resurrection first-floor rows
 - `CHK-CUT-01` is reused in `P-A1-07` only as an orphan-receive checker guard, not as full consistent-cut or `Z-cycle` completion
-- `P-A1-08` current wording is blocked for recut after the `P-A1-07` first floor
+- `P-A1-08` current wording is blocked for recut even after the `P-A1-09` devtools widening
 
 ## readiness reading
 
@@ -345,16 +349,17 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- after `P-A1-06`, the next safe package is expected to be `P-A1-07`
-  because a distinct practical devtools export bundle now exists without collapsing checker/runtime/hot-plug/transport carriers
+- no safe promoted package exists at the current snapshot after `P-A1-09`
+  because `P-A1-08` still overclaims avatar/product semantics and the remaining `VIS-A1-03/05/07` observables are not yet backed by equivalent exact practical evidence
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
   - keep `P-A1-03` as the first local-runtime floor over `RUN-01/02`
   - keep `P-A1-04a` / `P-A1-04b` / `P-A1-04c` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
   - keep `P-A1-05` as the first practical transport floor over `TR-A1-01..07` without collapsing it into WAN/federation, save/load, devtools, or product prototype claims
-  - keep `P-A1-06` as the first practical devtools export floor over `VIS-A1-01/02/06` without collapsing it into full devtools completion or membership/hot-plug/fallback/retention completion
+  - keep `P-A1-06` + `P-A1-09` as the widened practical devtools export floor over `VIS-A1-01/02/04/06` without collapsing it into full devtools completion or membership/fallback/retention completion, and without reading `VIS-A1-04` as detach runtime lifecycle completion
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
+  - reopen only after either `P-A1-08` is recut to a thin product-preview bundle or prior practical `AV-A1-*` carriers are actually chosen
 - queue authority remains `progress.md` / `tasks.md`

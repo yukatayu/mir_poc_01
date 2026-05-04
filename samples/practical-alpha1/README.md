@@ -20,6 +20,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   local TCP / Docker Compose TCP package transport with distinct transport-plan/report carriers and exact expected `TR-A1-01..07` reports.
 - `P-A1-06` adds the first practical devtools export cut here:
   `scripts/practical_alpha1_export_devtools.py` emits distinct devtools bundles with exact expected `VIS-A1-01/02/06` JSON and a non-final static HTML viewer surface.
+- `P-A1-09` widens the same practical devtools cut here:
+  `VIS-A1-04` hot-plug lifecycle export over exact practical hotplug reports, limited to attach accepted boundary + membership snapshot + deferred detach boundary.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
 - This front-door is non-final and does not freeze the final public grammar.
@@ -68,6 +70,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `expected/vis-a1-*.expected.json`
   - `VIS-A1-01`: event DAG + publication / witness / handoff relation export
   - `VIS-A1-02`: observer-safe route trace export
+  - `VIS-A1-04`: hot-plug lifecycle export over attach accepted and deferred detach boundary reports
   - `VIS-A1-06`: redacted observer view with auth-lane separation
 - `expected/sl-a1-*.expected.json`
   - `SL-A1-01`: local-only roundtrip resume through a saved local frontier
@@ -81,7 +84,7 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
-- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/06`.
+- The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
@@ -91,4 +94,4 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, full devtools export, product prototype, or final public runtime/devtools/transport/save-load ABI.
+- It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, full devtools export, product prototype, or final public runtime/devtools/transport/save-load ABI.
