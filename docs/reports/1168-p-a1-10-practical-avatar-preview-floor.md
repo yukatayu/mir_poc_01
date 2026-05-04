@@ -199,7 +199,9 @@ Close `P-A1-10`, then promote the narrowest safe package that composes `AV-A1-*`
 
 ## Commit / push status
 
-Pending at report write.
+- Main implementation closeout commit: `f85bceb` (`mirrorea: close p-a1-10 practical avatar preview`)
+- Push status at report finalize: pushed to `origin/main`
+- This report section was finalized in a docs-only follow-up commit after the main closeout push.
 
 ## Sub-agent session close status
 
