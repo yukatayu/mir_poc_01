@@ -98,6 +98,15 @@ for p in Path('docs/reports').glob('*.md'):
 print(max(nums) if nums else 0)
 PY
 date '+%Y-%m-%d %H:%M:%S %Z'
+python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
+git diff --check
+git add tmp_faq/faq_015.md docs/reports/2029-typed-pipeline-capability-check-and-faq015-update.md
+git commit --no-gpg-sign -m "docs: update faq 015 with pipeline capability check"
+git push
+git add docs/reports/2029-typed-pipeline-capability-check-and-faq015-update.md
+git commit --no-gpg-sign -m "docs: record faq 015 pipeline push status"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -187,7 +196,9 @@ no sample status changed; this task only re-read and exercised existing surfaces
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `40a4475` (`docs: update faq 015 with pipeline capability check`) was created with `--no-gpg-sign`.
+- The current branch `docs/layered-repro-guide-001` was pushed to `origin/docs/layered-repro-guide-001`.
+- This report section was refreshed after the first push so the recorded status matches the actual branch state.
 
 ## Sub-agent session close status
 
