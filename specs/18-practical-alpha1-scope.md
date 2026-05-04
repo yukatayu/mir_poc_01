@@ -359,12 +359,20 @@ full product prototype completion ではなく、
   - `PE2E-05`
   - `PE2E-06`
   - `PE2E-07`
+  - `PE2E-08`
+  - `PE2E-09`
 - `PE2E-03` は debug layer の **companion preview bundle** であり、
   same-session runtime attach execution を証明しない
 - `PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
 - `PE2E-04` は custom Mir avatar runtime を証明しない
 - `PE2E-04` は unsupported runtime fallback を証明しない
-- avatar semantics の current widening は `PE2E-*` ではなく、
+- `PE2E-08` は `AV-A1-02` exact avatar preview report を consume する
+  custom-avatar companion preview bundle であり、
+  native execution や same-session runtime attach execution を証明しない
+- `PE2E-09` は `AV-A1-03` exact avatar preview report を consume する
+  unsupported-runtime visible fallback companion preview bundle であり、
+  unsupported-runtime execution success を証明しない
+- avatar semantics の source authority は引き続き
   `AV-A1-01/02/03` distinct avatar-preview companion floor に置く
 - `PE2E-06` は invalid distributed save/load runtime execution ではなく、
   explicit checker reject preview に留まる

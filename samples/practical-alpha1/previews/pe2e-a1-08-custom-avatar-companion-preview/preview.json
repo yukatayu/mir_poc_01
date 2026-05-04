@@ -1,0 +1,14 @@
+{
+  "preview_id": "PE2E-08",
+  "preview_kind": "custom_avatar_companion_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "avatar_package": "../../packages/av-a1-02-custom-mir-avatar-runtime",
+  "required_source_reports": [
+    {
+      "sample_id": "RUN-01"
+    },
+    {
+      "sample_id": "AV-A1-02"
+    }
+  ]
+}

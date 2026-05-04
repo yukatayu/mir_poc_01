@@ -1,0 +1,76 @@
+{
+  "sample_id": "PE2E-08",
+  "bundle_kind": "custom_avatar_companion_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "companion_avatar_package",
+      "package_id": "av-a1-02-custom-mir-avatar-runtime",
+      "package_kind": "object",
+      "front_door_entry": "samples/practical-alpha1/packages/av-a1-02-custom-mir-avatar-runtime/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-local-runtime",
+      "sample_id": "RUN-01",
+      "carrier_scope": "practical-alpha1-local-runtime-floor",
+      "surface_kind": "practical_alpha1_nonfinal_local_runtime_report"
+    },
+    {
+      "family": "practical-alpha1-avatar-preview",
+      "sample_id": "AV-A1-02",
+      "carrier_scope": "practical-alpha1-avatar-preview-floor",
+      "surface_kind": "practical_alpha1_nonfinal_avatar_preview_report"
+    }
+  ],
+  "preview_sections": {
+    "runtime_world": {
+      "package_id": "run-01-local-sugoroku",
+      "world_id": "practical_sugoroku_world",
+      "terminal_outcome": "accepted"
+    },
+    "avatar_preview": {
+      "package_id": "av-a1-02-custom-mir-avatar-runtime",
+      "preview_kind": "custom_mir_avatar_runtime_preview",
+      "source_hotplug_terminal_outcome": "accepted_object_attach_preview",
+      "selected_representation": "mir_humanoid_runtime_preview",
+      "fallback_applied": false,
+      "active_roles": [
+        "EmbodiedPresence",
+        "Renderable",
+        "Animatable",
+        "AttachmentProvider",
+        "ExpressionProvider"
+      ],
+      "native_execution_performed": false
+    }
+  },
+  "what_it_proves": [
+    "one practical world package can be previewed with exact companion custom-avatar preview evidence",
+    "custom avatar selection remains explicit in the exact avatar preview report while native execution stays unclaimed",
+    "product-preview composition can consume avatar preview reports without collapsing them into same-session runtime attachment"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "native execution",
+    "same-session runtime attach execution",
+    "final avatar ABI",
+    "successful custom-avatar runtime execution",
+    "VRM/VRChat/Unity compatibility"
+  ]
+}

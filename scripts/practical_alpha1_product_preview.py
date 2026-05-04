@@ -17,6 +17,7 @@ REPO_ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 import practical_alpha1_attach  # noqa: E402
+import practical_alpha1_avatar  # noqa: E402
 import practical_alpha1_check  # noqa: E402
 import practical_alpha1_export_devtools  # noqa: E402
 import practical_alpha1_run_local  # noqa: E402
@@ -35,14 +36,14 @@ PREVIEW_BOUNDARY = (
 STOP_LINES = [
     "do not treat this product-preview bundle as a final practical product runtime",
     "do not treat this product-preview bundle as active canonical runnable-root promotion",
-    "do not treat placeholder object preview evidence as custom Mir avatar runtime or unsupported runtime fallback completion",
+    "do not treat avatar companion preview evidence as native execution, same-session runtime completion, or unsupported-runtime execution success",
     "do not treat this product-preview bundle as a final public CLI, viewer, transport, save-load, or package/avatar API",
 ]
 
 LIMITATIONS = [
     "non-final practical product-preview floor only",
-    "thin bundle over exact practical reports and preview manifests only",
-    "no custom Mir avatar runtime, unsupported runtime fallback, or monolithic same-session product runtime",
+    "thin bundle over preview manifests, exact practical reports, exact practical devtools bundles, and exact avatar preview reports only",
+    "no native avatar execution, same-session runtime attach/detach execution, or monolithic same-session product runtime",
 ]
 
 COMMON_NON_CLAIMS = [
@@ -51,7 +52,7 @@ COMMON_NON_CLAIMS = [
     "final public CLI or viewer API",
 ]
 
-DEFERRED_AVATAR_SEMANTICS = ["AV-A1-02", "AV-A1-03"]
+DEFERRED_AVATAR_SEMANTICS: list[str] = []
 
 IMPLEMENTED_ROWS: list[dict[str, str]] = [
     {
@@ -102,6 +103,20 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
         "preview_dir": "samples/practical-alpha1/previews/pe2e-a1-07-devtools-viewer-preview",
         "expected_report": "samples/practical-alpha1/expected/pe2e-a1-07-devtools-viewer-preview.expected.json",
         "bundle_kind": "devtools_viewer_preview",
+    },
+    {
+        "sample_id": "PE2E-08",
+        "summary": "preview a companion custom-avatar bundle over an exact avatar preview report without claiming same-session runtime execution",
+        "preview_dir": "samples/practical-alpha1/previews/pe2e-a1-08-custom-avatar-companion-preview",
+        "expected_report": "samples/practical-alpha1/expected/pe2e-a1-08-custom-avatar-companion-preview.expected.json",
+        "bundle_kind": "custom_avatar_companion_preview",
+    },
+    {
+        "sample_id": "PE2E-09",
+        "summary": "preview a companion unsupported-runtime visible fallback bundle over an exact avatar preview report without claiming execution success",
+        "preview_dir": "samples/practical-alpha1/previews/pe2e-a1-09-unsupported-runtime-visible-fallback-preview",
+        "expected_report": "samples/practical-alpha1/expected/pe2e-a1-09-unsupported-runtime-visible-fallback-preview.expected.json",
+        "bundle_kind": "unsupported_runtime_visible_fallback_preview",
     },
 ]
 
@@ -233,6 +248,11 @@ def _hotplug_report(sample_id: str) -> dict[str, Any]:
 @lru_cache(maxsize=None)
 def _transport_report(sample_id: str) -> dict[str, Any]:
     return practical_alpha1_transport.run_sample(sample_id)
+
+
+@lru_cache(maxsize=None)
+def _avatar_report(sample_id: str) -> dict[str, Any]:
+    return practical_alpha1_avatar.run_sample(sample_id)
 
 
 @lru_cache(maxsize=None)
@@ -649,6 +669,136 @@ def _devtools_viewer_bundle(preview: dict[str, Any], preview_file: Path) -> dict
     return payload
 
 
+def _custom_avatar_companion_bundle(preview: dict[str, Any], preview_file: Path) -> dict[str, Any]:
+    _expect_id(preview, "PE2E-08")
+    _expect_kind(preview, "custom_avatar_companion_preview")
+    _required_source_reports(preview, ["RUN-01", "AV-A1-02"])
+    world_package = _resolve_preview_package(preview_file, preview["world_package"])
+    avatar_package = _resolve_preview_package(preview_file, preview["avatar_package"])
+    runtime_report = _run_local_report("RUN-01")
+    avatar_report = _avatar_report("AV-A1-02")
+    payload = _base_bundle(
+        sample_id="PE2E-08",
+        bundle_kind="custom_avatar_companion_preview",
+        source_packages=[
+            _package_ref(world_package, "world_package"),
+            _package_ref(avatar_package, "companion_avatar_package"),
+        ],
+        source_reports=[
+            _source_report_ref(
+                family="practical-alpha1-local-runtime",
+                sample_id="RUN-01",
+                carrier_scope=runtime_report["runtime_scope"],
+                surface_kind=runtime_report["surface_kind"],
+            ),
+            _source_report_ref(
+                family="practical-alpha1-avatar-preview",
+                sample_id="AV-A1-02",
+                carrier_scope=avatar_report["avatar_scope"],
+                surface_kind=avatar_report["surface_kind"],
+            ),
+        ],
+    )
+    payload["preview_sections"] = {
+        "runtime_world": {
+            "package_id": runtime_report["package_id"],
+            "world_id": runtime_report["world_id"],
+            "terminal_outcome": runtime_report["terminal_outcome"],
+        },
+        "avatar_preview": {
+            "package_id": avatar_report["package_id"],
+            "preview_kind": avatar_report["preview_kind"],
+            "source_hotplug_terminal_outcome": avatar_report["source_hotplug_terminal_outcome"],
+            "selected_representation": avatar_report["selected_representation"],
+            "fallback_applied": avatar_report["fallback_applied"],
+            "active_roles": avatar_report["active_roles"],
+            "native_execution_performed": avatar_report["native_execution_performed"],
+        },
+    }
+    payload["what_it_proves"] = [
+        "one practical world package can be previewed with exact companion custom-avatar preview evidence",
+        "custom avatar selection remains explicit in the exact avatar preview report while native execution stays unclaimed",
+        "product-preview composition can consume avatar preview reports without collapsing them into same-session runtime attachment",
+    ]
+    payload["what_it_does_not_prove"] = list(COMMON_NON_CLAIMS) + [
+        "native execution",
+        "same-session runtime attach execution",
+        "final avatar ABI",
+        "successful custom-avatar runtime execution",
+        "VRM/VRChat/Unity compatibility",
+    ]
+    return payload
+
+
+def _unsupported_runtime_visible_fallback_bundle(
+    preview: dict[str, Any], preview_file: Path
+) -> dict[str, Any]:
+    _expect_id(preview, "PE2E-09")
+    _expect_kind(preview, "unsupported_runtime_visible_fallback_preview")
+    _required_source_reports(preview, ["RUN-01", "AV-A1-03"])
+    world_package = _resolve_preview_package(preview_file, preview["world_package"])
+    avatar_package = _resolve_preview_package(preview_file, preview["avatar_package"])
+    runtime_report = _run_local_report("RUN-01")
+    avatar_report = _avatar_report("AV-A1-03")
+    payload = _base_bundle(
+        sample_id="PE2E-09",
+        bundle_kind="unsupported_runtime_visible_fallback_preview",
+        source_packages=[
+            _package_ref(world_package, "world_package"),
+            _package_ref(avatar_package, "companion_avatar_package"),
+        ],
+        source_reports=[
+            _source_report_ref(
+                family="practical-alpha1-local-runtime",
+                sample_id="RUN-01",
+                carrier_scope=runtime_report["runtime_scope"],
+                surface_kind=runtime_report["surface_kind"],
+            ),
+            _source_report_ref(
+                family="practical-alpha1-avatar-preview",
+                sample_id="AV-A1-03",
+                carrier_scope=avatar_report["avatar_scope"],
+                surface_kind=avatar_report["surface_kind"],
+            ),
+        ],
+    )
+    payload["preview_sections"] = {
+        "runtime_world": {
+            "package_id": runtime_report["package_id"],
+            "world_id": runtime_report["world_id"],
+            "terminal_outcome": runtime_report["terminal_outcome"],
+        },
+        "avatar_preview": {
+            "package_id": avatar_report["package_id"],
+            "preview_kind": avatar_report["preview_kind"],
+            "source_hotplug_terminal_outcome": avatar_report["source_hotplug_terminal_outcome"],
+            "source_hotplug_reason_family": avatar_report["source_hotplug_reason_family"],
+            "source_hotplug_rejection_reason_refs": avatar_report[
+                "source_hotplug_rejection_reason_refs"
+            ],
+            "selected_representation": avatar_report["selected_representation"],
+            "fallback_applied": avatar_report["fallback_applied"],
+            "fallback_reason": avatar_report["fallback_reason"],
+            "active_roles": avatar_report["active_roles"],
+            "degraded_roles": avatar_report["degraded_roles"],
+            "native_execution_performed": avatar_report["native_execution_performed"],
+        },
+    }
+    payload["what_it_proves"] = [
+        "one practical world package can be previewed with exact companion unsupported-runtime visible fallback evidence",
+        "the source avatar preview retains rejected runtime-route evidence and degraded roles explicitly",
+        "product-preview composition can show unsupported-runtime fallback without reclassifying the source lane as execution success",
+    ]
+    payload["what_it_does_not_prove"] = list(COMMON_NON_CLAIMS) + [
+        "native execution",
+        "same-session runtime attach execution",
+        "final avatar ABI",
+        "successful unsupported-runtime execution",
+        "VRM/VRChat/Unity compatibility",
+    ]
+    return payload
+
+
 def build_bundle(preview: dict[str, Any], preview_file: Path) -> dict[str, Any]:
     sample_id = preview.get("preview_id")
     if sample_id == "PE2E-01":
@@ -665,6 +815,10 @@ def build_bundle(preview: dict[str, Any], preview_file: Path) -> dict[str, Any]:
         return _invalid_distributed_save_reject_bundle(preview, preview_file)
     if sample_id == "PE2E-07":
         return _devtools_viewer_bundle(preview, preview_file)
+    if sample_id == "PE2E-08":
+        return _custom_avatar_companion_bundle(preview, preview_file)
+    if sample_id == "PE2E-09":
+        return _unsupported_runtime_visible_fallback_bundle(preview, preview_file)
     raise RuntimeError(f"unsupported practical product preview id {sample_id!r}")
 
 
@@ -799,6 +953,7 @@ def closeout() -> dict[str, Any]:
             "python3 scripts/practical_alpha1_check.py check-all --format json",
             "python3 scripts/practical_alpha1_run_local.py check-all --format json",
             "python3 scripts/practical_alpha1_attach.py check-all --format json",
+            "python3 scripts/practical_alpha1_avatar.py check-all --format json",
             "python3 scripts/practical_alpha1_transport.py check-all --format json",
             "python3 scripts/practical_alpha1_export_devtools.py check-all --format json",
             "python3 scripts/practical_alpha1_save_load.py check-all --format json",

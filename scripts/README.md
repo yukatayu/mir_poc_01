@@ -71,11 +71,13 @@
   - it is a non-final avatar-preview command and does not claim native execution, final avatar package ABI, same-session product runtime completion, active runnable-root promotion, or VRM / VRChat / Unity compatibility
 - practical alpha-1 first product-preview floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
-  - this exercises `samples/practical-alpha1/previews/` through preview manifests over exact practical runtime / hot-plug / transport / save-load reports and exact practical devtools bundles
-  - current actualized rows are `PE2E-01..07`
+  - this exercises `samples/practical-alpha1/previews/` through preview manifests over exact practical runtime / hot-plug / transport / save-load reports, exact avatar preview companion reports, and exact practical devtools bundles
+  - current actualized rows are `PE2E-01..09`
   - `render-html` emits a non-final static HTML preview over the same exact bundle payloads
   - `PE2E-04` is narrowed to `HP-A1-06` placeholder object preview companion evidence only
-  - it is a non-final product-preview command and does not claim custom Mir avatar runtime, unsupported runtime fallback, monolithic same-session product runtime, active runnable-root promotion, or final public CLI / viewer / transport / save-load / package-avatar API
+  - `PE2E-08` consumes `AV-A1-02` as a custom-avatar companion preview bundle with `native_execution_performed = false`
+  - `PE2E-09` consumes `AV-A1-03` as an unsupported-runtime visible fallback companion preview bundle while the source avatar lane remains rejected
+  - it is a non-final product-preview command and does not claim native execution, same-session runtime attach/detach execution, unsupported-runtime execution success, active runnable-root promotion, or final public CLI / viewer / transport / save-load / package-avatar API
 
 ### current-L2 helper / detached loop / support
 

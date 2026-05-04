@@ -28,6 +28,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `scripts/practical_alpha1_avatar.py` emits exact expected `AV-A1-01/02/03` reports over checked package input, a distinct hotplug plan, and exact hot-plug source reports.
 - `P-A1-08` adds the first practical product-preview cut here:
   `samples/practical-alpha1/previews/` plus `scripts/practical_alpha1_product_preview.py` emit exact expected `PE2E-01..07` bundles over preview manifests, exact practical reports, and exact practical devtools bundles.
+- `P-A1-11` widens the same practical product-preview cut here:
+  `PE2E-08/09` consume exact `AV-A1-02/03` avatar preview reports as thin companion bundles without claiming native execution or unsupported-runtime execution success.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -93,6 +95,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   - `PE2E-05`: local save/load continue preview
   - `PE2E-06`: invalid distributed save rejected preview
   - `PE2E-07`: devtools viewer preview
+  - `PE2E-08`: custom-avatar companion preview over `AV-A1-02`
+  - `PE2E-09`: unsupported-runtime visible fallback companion preview over `AV-A1-03`
 - `expected/pe2e-a1-*.expected.json`
   - exact expected non-final product-preview bundles over the preview manifests
 
@@ -107,18 +111,20 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
-- The current product-preview floor is also non-final and is currently limited to `PE2E-01..07`.
+- The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
-- Preview manifests are lowered through exact practical reports and exact practical devtools bundles before non-final product-preview bundle assembly.
+- Preview manifests are lowered through exact practical reports, exact practical devtools bundles, and exact avatar preview companion reports before non-final product-preview bundle assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.
 - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
 - `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
+- `PE2E-08` is limited to a custom-avatar companion preview over `AV-A1-02` and does not actualize native execution or same-session runtime attachment.
+- `PE2E-09` is limited to an unsupported-runtime visible fallback companion preview over rejected `AV-A1-03` and does not actualize execution success.
 - It does not complete the full `specs/18` typed-checking list.
 - It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, native avatar execution, same-session product runtime, full devtools export, full product prototype, or final public runtime/devtools/transport/save-load/package-avatar ABI.

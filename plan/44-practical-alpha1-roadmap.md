@@ -245,7 +245,7 @@ repository-memory roadmap を置く。
 - local save/load preview
 - devtools viewer preview
 - hands-on docs
-- current actualized cut after `P-A1-08`:
+- current actualized cut after `P-A1-11`:
   - `samples/practical-alpha1/previews/`
   - `scripts/practical_alpha1_product_preview.py`
   - exact expected bundles `samples/practical-alpha1/expected/pe2e-a1-*.expected.json`
@@ -257,13 +257,15 @@ repository-memory roadmap を置く。
   - `PE2E-05` local save/load continue preview
   - `PE2E-06` invalid distributed save rejected preview
   - `PE2E-07` devtools viewer preview
+  - `PE2E-08` custom-avatar companion preview
+  - `PE2E-09` unsupported-runtime visible fallback companion preview
 - current carrier split:
   `preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle`
 - current non-claim:
   - full practical product prototype completion ではない
   - `PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
-  - custom Mir avatar runtime ではない
-  - unsupported runtime fallback ではない
+  - `PE2E-08` は `AV-A1-02` exact avatar preview report を consume する non-final custom-avatar companion preview であり、native execution ではない
+  - `PE2E-09` は `AV-A1-03` exact avatar preview report を consume する unsupported-runtime visible fallback companion preview であり、unsupported-runtime execution success ではない
   - same-session runtime attach / detach lifecycle execution ではない
   - final public CLI / viewer / package-avatar / save-load / transport ABI ではない
 
@@ -282,10 +284,11 @@ recommended current promoted line:
 9. `P-A1-09` exact-report hot-plug lifecycle export widening
 10. `P-A1-08` first practical product-preview floor
 11. `P-A1-10` practical avatar preview first floor
+12. `P-A1-11` product-preview avatar companion widening
 
-current reading after `P-A1-10`:
+current reading after `P-A1-11`:
 
-- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10` are closed
+- `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11` are closed
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -315,6 +318,8 @@ current reading after `P-A1-10`:
   `checked package -> hotplug plan -> exact hot-plug report -> distinct avatar preview report`
 - `P-A1-10` actualized `AV-A1-01/02/03` as placeholder preview, non-final custom Mir avatar preview, and unsupported-runtime visible fallback preview
 - `P-A1-10` keeps `native_execution_performed = false` and does not reinterpret `PE2E-04` as avatar runtime completion
+- `P-A1-11` keeps the product-preview carrier split thin and widens `PE2E-08/09` only as companion bundles over exact avatar preview reports
+- `P-A1-11` actualizes `PE2E-08` over `AV-A1-02` and `PE2E-09` over `AV-A1-03`, without collapsing either row into native execution, same-session runtime attachment, or unsupported-runtime execution success
 
 ## readiness reading
 
@@ -350,7 +355,7 @@ samples/practical-alpha1/
 ```
 
 - current first cut uses `packages/` and `expected/` for `SRC-01..05`、`CHK-*`、`RUN-01/02`、`HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`、`TR-A1-01..07`、`SL-A1-01/02`
-- `previews/` now holds `PE2E-01..07` preview manifests and `expected/` also carries the exact expected `pe2e-a1-*.expected.json` product-preview bundles
+- `previews/` now holds `PE2E-01..09` preview manifests and `expected/` also carries the exact expected `pe2e-a1-*.expected.json` product-preview bundles
 - `docker/` now contains the Compose fixture used by `TR-A1-02`
 - `source/` is reserved for later textual-source packages
 
@@ -421,8 +426,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-10`:
-  practical avatar semantics now have a distinct companion floor, but product-preview widening still has to choose whether and how to consume `AV-A1-*` reports without collapsing them into same-session runtime completion
+- current promoted line after `P-A1-11`:
+  practical avatar semantics now have a distinct companion floor, and product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles; same-session runtime completion remains later
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -431,9 +436,9 @@ but should not require practical runner scripts before they are added.
   - keep `P-A1-10` as a distinct avatar-preview companion floor over `AV-A1-01/02/03`, without collapsing it into native execution or final avatar ABI completion
   - keep `P-A1-05` as the first practical transport floor over `TR-A1-01..07` without collapsing it into WAN/federation, save/load, devtools, or product prototype claims
   - keep `P-A1-06` + `P-A1-09` as the widened practical devtools export floor over `VIS-A1-01/02/04/06` without collapsing it into full devtools completion or membership/fallback/retention completion, and without reading `VIS-A1-04` as detach runtime lifecycle completion
-  - keep `P-A1-08` as the first practical product-preview floor over `PE2E-01..07` without collapsing it into custom Mir avatar runtime, unsupported runtime fallback, or final product prototype completion
+  - keep `P-A1-11` as a thin product-preview widening over `PE2E-08/09`, without collapsing it into same-session runtime attachment, native execution, or unsupported-runtime execution success
   - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
   - carry capability / auth / witness lanes without claiming full runtime enforcement yet
   - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on product-preview consumption of exact avatar preview reports or an equally narrow remaining exact-evidence widening
+  - reopen next on remaining `VIS-A1-03/05/07`, broader save-load widening, or an equally narrow remaining exact-evidence widening
 - queue authority remains `progress.md` / `tasks.md`

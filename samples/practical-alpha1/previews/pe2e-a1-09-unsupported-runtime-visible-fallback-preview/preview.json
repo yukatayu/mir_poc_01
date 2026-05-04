@@ -1,0 +1,14 @@
+{
+  "preview_id": "PE2E-09",
+  "preview_kind": "unsupported_runtime_visible_fallback_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "avatar_package": "../../packages/av-a1-03-unsupported-runtime-fallback",
+  "required_source_reports": [
+    {
+      "sample_id": "RUN-01"
+    },
+    {
+      "sample_id": "AV-A1-03"
+    }
+  ]
+}

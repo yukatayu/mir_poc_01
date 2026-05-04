@@ -1,0 +1,83 @@
+{
+  "sample_id": "PE2E-09",
+  "bundle_kind": "unsupported_runtime_visible_fallback_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "companion_avatar_package",
+      "package_id": "av-a1-03-unsupported-runtime-fallback",
+      "package_kind": "object",
+      "front_door_entry": "samples/practical-alpha1/packages/av-a1-03-unsupported-runtime-fallback/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-local-runtime",
+      "sample_id": "RUN-01",
+      "carrier_scope": "practical-alpha1-local-runtime-floor",
+      "surface_kind": "practical_alpha1_nonfinal_local_runtime_report"
+    },
+    {
+      "family": "practical-alpha1-avatar-preview",
+      "sample_id": "AV-A1-03",
+      "carrier_scope": "practical-alpha1-avatar-preview-floor",
+      "surface_kind": "practical_alpha1_nonfinal_avatar_preview_report"
+    }
+  ],
+  "preview_sections": {
+    "runtime_world": {
+      "package_id": "run-01-local-sugoroku",
+      "world_id": "practical_sugoroku_world",
+      "terminal_outcome": "accepted"
+    },
+    "avatar_preview": {
+      "package_id": "av-a1-03-unsupported-runtime-fallback",
+      "preview_kind": "unsupported_runtime_visible_fallback_preview",
+      "source_hotplug_terminal_outcome": "rejected",
+      "source_hotplug_reason_family": "compatibility",
+      "source_hotplug_rejection_reason_refs": [
+        "missing_host_capability:HostMirAvatarVM"
+      ],
+      "selected_representation": "static_capsule_placeholder",
+      "fallback_applied": true,
+      "fallback_reason": "missing_host_capability:HostMirAvatarVM",
+      "active_roles": [
+        "EmbodiedPresence",
+        "Renderable"
+      ],
+      "degraded_roles": [
+        "Animatable",
+        "AttachmentProvider",
+        "ExpressionProvider"
+      ],
+      "native_execution_performed": false
+    }
+  },
+  "what_it_proves": [
+    "one practical world package can be previewed with exact companion unsupported-runtime visible fallback evidence",
+    "the source avatar preview retains rejected runtime-route evidence and degraded roles explicitly",
+    "product-preview composition can show unsupported-runtime fallback without reclassifying the source lane as execution success"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "native execution",
+    "same-session runtime attach execution",
+    "final avatar ABI",
+    "successful unsupported-runtime execution",
+    "VRM/VRChat/Unity compatibility"
+  ]
+}

@@ -62,6 +62,32 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
         self.assertIn("custom Mir avatar runtime", bundle["what_it_does_not_prove"])
         self.assertIn("unsupported runtime fallback", bundle["what_it_does_not_prove"])
 
+    def test_custom_avatar_companion_preview_uses_exact_avatar_report(self) -> None:
+        bundle = runner.run_sample("PE2E-08")
+        self.assertEqual(
+            bundle["preview_sections"]["avatar_preview"]["selected_representation"],
+            "mir_humanoid_runtime_preview",
+        )
+        self.assertFalse(
+            bundle["preview_sections"]["avatar_preview"]["native_execution_performed"]
+        )
+        self.assertIn(
+            "same-session runtime attach execution",
+            bundle["what_it_does_not_prove"],
+        )
+
+    def test_unsupported_runtime_fallback_preview_retains_rejected_source(self) -> None:
+        bundle = runner.run_sample("PE2E-09")
+        self.assertEqual(
+            bundle["preview_sections"]["avatar_preview"]["source_hotplug_terminal_outcome"],
+            "rejected",
+        )
+        self.assertTrue(bundle["preview_sections"]["avatar_preview"]["fallback_applied"])
+        self.assertIn(
+            "successful unsupported-runtime execution",
+            bundle["what_it_does_not_prove"],
+        )
+
     def test_invalid_distributed_save_preview_uses_checker_reject(self) -> None:
         bundle = runner.run_sample("PE2E-06")
         self.assertEqual(
@@ -112,7 +138,7 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
             runner,
             "check_all",
             return_value={
-                "sample_count": 7,
+                "sample_count": 9,
                 "passed": [
                     "PE2E-01",
                     "PE2E-02",
@@ -121,6 +147,8 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
                     "PE2E-05",
                     "PE2E-06",
                     "PE2E-07",
+                    "PE2E-08",
+                    "PE2E-09",
                 ],
                 "failed": [],
                 "product_preview_first_floor_complete": True,
@@ -133,14 +161,16 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
                     "PE2E-05",
                     "PE2E-06",
                     "PE2E-07",
+                    "PE2E-08",
+                    "PE2E-09",
                 ],
-                "deferred_avatar_semantics": ["AV-A1-02", "AV-A1-03"],
+                "deferred_avatar_semantics": [],
             },
         ):
             payload = runner.closeout()
         self.assertTrue(payload["product_preview_first_floor_complete"])
         self.assertFalse(payload["stage_pa1_8_complete"])
-        self.assertEqual(payload["deferred_avatar_semantics"], ["AV-A1-02", "AV-A1-03"])
+        self.assertEqual(payload["deferred_avatar_semantics"], [])
 
 
 if __name__ == "__main__":
