@@ -153,7 +153,9 @@ Continue from `P-A1-12` and determine whether `VIS-A1-03` or `VIS-A1-07` can be 
 
 ## Commit / push status
 
-Pending at report write.
+- Commit: `bcf0f62` (`mirrorea: close p-a1-12 practical fallback degradation export`)
+- Push: `origin/main` へ push 済み
+- Report metadata follow-up: this section was finalized after the main package commit/push
 
 ## Sub-agent session close status
 
