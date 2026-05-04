@@ -201,7 +201,9 @@ Promote the narrowest remaining exact-evidence widening for practical alpha-1, p
 
 ## Commit / push status
 
-Pending at report write.
+- Main implementation closeout commit: `3343309` (`mirrorea: close p-a1-11 product preview avatar widening`)
+- Push status at report finalize: pushed to `origin/main`
+- This report section was finalized in a docs-only follow-up commit after the main closeout push.
 
 ## Sub-agent session close status
 
