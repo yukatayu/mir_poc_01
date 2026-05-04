@@ -79,6 +79,9 @@ git diff --check
 git add tmp_faq/faq_015.md docs/reports/2028-faq-015-rolling-explanation-memo.md
 git commit --no-gpg-sign -m "docs: add faq 015 rolling explanation memo"
 git push -u origin docs/layered-repro-guide-001
+git add docs/reports/2028-faq-015-rolling-explanation-memo.md
+git commit --no-gpg-sign -m "docs: record faq 015 push status"
+git push
 git rev-parse HEAD
 git status --short
 python3 .agents/skills/discord-report/scripts/discord_notify.py complete --cwd . --result success --summary 'Added FAQ 015 rolling memo for explanation findings and pushed current branch commit' --include-diff
@@ -104,6 +107,7 @@ python3 .agents/skills/discord-report/scripts/discord_notify.py complete --cwd .
   passed.
 - `git diff --check`
   passed.
+- The FAQ/report branch was published at `origin/docs/layered-repro-guide-001`.
 
 ## What changed in understanding
 
@@ -162,7 +166,9 @@ no sample status or validation scope changed in this helper-memo task.
 
 ## Commit / push status
 
-Pending at report write.
+- Closeout commit `31c4140` (`docs: add faq 015 rolling explanation memo`) was created with `--no-gpg-sign`.
+- The current branch `docs/layered-repro-guide-001` was pushed to `origin/docs/layered-repro-guide-001`.
+- This report section was refreshed after the first push so the recorded status matches the actual branch state.
 
 ## Sub-agent session close status
 
