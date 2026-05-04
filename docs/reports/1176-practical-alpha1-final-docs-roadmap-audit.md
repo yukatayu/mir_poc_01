@@ -148,7 +148,11 @@ Local focused review only. No sub-agent reviewer was spawned because this user r
 
 ## Commit / Push Status
 
-Pending after validation. To be finalized after commit and push.
+Primary audit commit pushed:
+
+- `5cb2887` — `docs: audit practical alpha1 roadmap status`
+
+This follow-up metadata update is docs-only and will be committed separately.
 
 ## Sub-Agent Session Close Status
 
