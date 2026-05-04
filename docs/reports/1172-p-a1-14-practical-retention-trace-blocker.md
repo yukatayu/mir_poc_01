@@ -169,7 +169,9 @@ No contradictions were found after the local review.
 
 ## Commit / push status
 
-Pending at report write.
+- Committed as `efc60e6` (`docs: record p-a1-14 retention trace blocker`).
+- Pushed to `origin/main`.
+- A docs-only follow-up commit may update this section if later package work needs a refreshed report-status line.
 
 ## Sub-agent session close status
 
