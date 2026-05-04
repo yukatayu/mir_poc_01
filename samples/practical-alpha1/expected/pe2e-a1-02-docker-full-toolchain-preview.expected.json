@@ -1,0 +1,55 @@
+{
+  "sample_id": "PE2E-02",
+  "bundle_kind": "docker_full_toolchain_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "tr-a1-02-docker-two-node-accepted",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/tr-a1-02-docker-two-node-accepted/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-transport",
+      "sample_id": "TR-A1-02",
+      "carrier_scope": "practical-alpha1-transport-floor",
+      "surface_kind": "practical_alpha1_nonfinal_transport_report"
+    }
+  ],
+  "preview_sections": {
+    "docker_runtime": {
+      "package_id": "tr-a1-02-docker-two-node-accepted",
+      "world_id": "practical_sugoroku_world",
+      "transport_surface": "docker_compose_tcp",
+      "transport_medium": "docker_bridge_tcp",
+      "bridge_kind": "tcp_json_socket",
+      "terminal_outcome": "accepted",
+      "bridge_process_ids": [
+        "world-server",
+        "participant-client"
+      ],
+      "observer_route_hop_count": 2
+    }
+  },
+  "what_it_proves": [
+    "one practical world package is consumable from the package.mir.json front door through the Docker Compose TCP floor",
+    "transport, membership, capability, and witness lanes remain explicit in the exact transport report",
+    "the preview bundle reuses the existing Docker practical report without introducing a new transport semantic lane"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "WAN or federation completion",
+    "local save/load completion",
+    "package hot-plug execution completion",
+    "custom Mir avatar runtime"
+  ]
+}

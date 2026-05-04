@@ -1,0 +1,72 @@
+{
+  "sample_id": "PE2E-04",
+  "bundle_kind": "placeholder_object_companion_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "companion_object_package",
+      "package_id": "hp-a1-06-object-package-attach",
+      "package_kind": "object",
+      "front_door_entry": "samples/practical-alpha1/packages/hp-a1-06-object-package-attach/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-local-runtime",
+      "sample_id": "RUN-01",
+      "carrier_scope": "practical-alpha1-local-runtime-floor",
+      "surface_kind": "practical_alpha1_nonfinal_local_runtime_report"
+    },
+    {
+      "family": "practical-alpha1-hotplug",
+      "sample_id": "HP-A1-06",
+      "carrier_scope": "practical-alpha1-hotplug-floor",
+      "surface_kind": "practical_alpha1_nonfinal_hotplug_report"
+    }
+  ],
+  "preview_sections": {
+    "runtime_world": {
+      "package_id": "run-01-local-sugoroku",
+      "world_id": "practical_sugoroku_world",
+      "terminal_outcome": "accepted"
+    },
+    "object_package": {
+      "package_id": "hp-a1-06-object-package-attach",
+      "terminal_outcome": "accepted_object_attach_preview",
+      "selected_representation": "static_capsule_placeholder",
+      "fallback_representation": "static_capsule_placeholder",
+      "provided_roles": [
+        "EmbodiedPresence",
+        "Renderable"
+      ],
+      "native_execution_performed": false
+    }
+  },
+  "what_it_proves": [
+    "one practical world package can be previewed with exact companion placeholder object-package evidence",
+    "the object path keeps fallback representation explicit in the exact hot-plug preview seam",
+    "product-preview composition can include placeholder object evidence without promoting final avatar runtime semantics"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "same-session runtime attach execution",
+    "custom Mir avatar runtime",
+    "unsupported runtime fallback",
+    "native avatar execution",
+    "final object package attach completion"
+  ]
+}

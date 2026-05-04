@@ -29,6 +29,7 @@
 - `scripts/visual_debugger_viewer_samples.py` が helper/runtime typed visualization inventory を typed public prototype inventory へ正規化する current first-cut surface を持つ
 - `scripts/practical_alpha1_export_devtools.py` が exact practical local-runtime / transport reports を distinct practical devtools export bundle へ正規化する current first-cut surface を持つ
 - `scripts/practical_alpha1_save_load.py` が one exact practical local-runtime frontier と distinct save-load plan から saved local frontier / non-final save-load report を正規化する current first-cut surface を持つ
+- `scripts/practical_alpha1_product_preview.py` が preview manifest と exact practical reports / devtools bundles から non-final practical product-preview bundle を正規化する current first-cut surface を持つ
 - `scripts/alpha_visualization_samples.py` が alpha-local `VIS-01/02/03/05/06/07/08/10/11` を dedicated Stage-E subset runner として actualize し、`stage-e-closeout` で current-scope Stage E closeout surface を与えている
 - `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` が repository memory / report / dashboard 側の baseline check になる
 
@@ -204,11 +205,13 @@
 - `P-A1-06` は closed であり、`scripts/practical_alpha1_export_devtools.py`、exact expected `VIS-A1-01/02/06` bundles により exact practical reports -> distinct devtools export bundle -> non-final viewer の first practical devtools export floor を actualize した
 - `P-A1-09` は closed であり、same devtools lane を `VIS-A1-04` exact-report hot-plug lifecycle export まで widen した。これは `HP-A1-01` accepted attach と `HP-A1-07` deferred detach boundary を viewer/export surface へ下ろすだけであり、detach runtime lifecycle execution や product prototype unblock を意味しない
 - `P-A1-07` は closed であり、`crates/mir-ast/src/practical_alpha1_save_load_plan.rs`、`crates/mir-runtime/src/practical_alpha1_save_load.rs`、example `mir_practical_alpha1_save_load`、`scripts/practical_alpha1_save_load.py`、`SL-A1-01/02` practical fixtures により checked practical package -> runtime plan と one exact practical local-runtime frontier + distinct save-load plan -> saved local frontier -> non-final save-load report の first practical local save/load floor を actualize した
+- `P-A1-08` は closed であり、`samples/practical-alpha1/previews/`、`scripts/practical_alpha1_product_preview.py`、exact expected `pe2e-a1-*.expected.json` により preview manifest -> exact practical reports / exact practical devtools bundles -> non-final product-preview bundle の first practical product-preview floor を actualize した。current rows は `PE2E-01..07` に限り、`PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
 - `alpha-0.5` 到達要求は evidence line では既に closed している
   - `P-A0-23` の Stage B closeout が `LR-01/02` と local-only `CUT-04/17` subset を current admissible set として固定しており、2026-05-04 の focused rerun でもその読みを再確認した
   - したがって、同じ `alpha-0.5` label で残る作業は freshness / maintenance package に限られ、promoted implementation line は practical alpha-1 側に残る
 - `samples/alpha/` は evidence root のままとし、practical front-door root に silently promote しない
 - current practical root は separate に存在するが、まだ active canonical runnable root や product-like CLI root ではない
+- current practical root の `previews/` も still non-final であり、full product prototype completion、custom Mir avatar runtime、unsupported runtime fallback、final public CLI / viewer / package-avatar ABI を意味しない
 - current promoted line は later-family blocker widening ではなく、
   source front-door / checker / reusable runtime / package / transport / devtools / local save-load / product prototype を持つ practical toolchain line へ移る
 - alpha-0 evidence line は useful prerequisite のまま維持するが、

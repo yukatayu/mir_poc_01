@@ -1,0 +1,53 @@
+{
+  "sample_id": "PE2E-05",
+  "bundle_kind": "local_save_load_continue_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "sl-a1-01-local-save-load-resume",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-save-load",
+      "sample_id": "SL-A1-01",
+      "carrier_scope": "practical-alpha1-save-load-floor",
+      "surface_kind": "practical_alpha1_nonfinal_save_load_report"
+    }
+  ],
+  "preview_sections": {
+    "save_load_roundtrip": {
+      "package_id": "sl-a1-01-local-save-load-resume",
+      "terminal_outcome": "accepted",
+      "save_load_scope": "practical-alpha1-save-load-floor",
+      "runtime_plan_scope": "practical-alpha1-runtime-plan-floor",
+      "saved_owner": "Bob",
+      "resumed_owner": "Alice",
+      "resumed_dispatch_ids": [
+        "roll_request#2"
+      ]
+    }
+  },
+  "what_it_proves": [
+    "one practical world package can be previewed through the distinct local save/load floor",
+    "saved local frontier and resumed dispatch remain explicit in the exact save-load report",
+    "the preview keeps local-only save/load separate from Docker transport and distributed durability claims"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "distributed durable save/load",
+    "stale witness non-resurrection completion",
+    "stale lease non-resurrection completion",
+    "queue/channel/transport persistence completion"
+  ]
+}

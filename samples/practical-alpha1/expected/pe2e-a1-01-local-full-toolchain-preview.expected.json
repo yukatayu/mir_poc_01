@@ -1,0 +1,74 @@
+{
+  "sample_id": "PE2E-01",
+  "bundle_kind": "local_full_toolchain_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-local-runtime",
+      "sample_id": "RUN-01",
+      "carrier_scope": "practical-alpha1-local-runtime-floor",
+      "surface_kind": "practical_alpha1_nonfinal_local_runtime_report"
+    },
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-01",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    }
+  ],
+  "preview_sections": {
+    "local_runtime": {
+      "package_id": "run-01-local-sugoroku",
+      "world_id": "practical_sugoroku_world",
+      "entry_place": "GamePlace[SugorokuGame#1]",
+      "runtime_scope": "practical-alpha1-local-runtime-floor",
+      "runtime_plan_scope": "practical-alpha1-runtime-plan-floor",
+      "terminal_outcome": "accepted",
+      "current_owner": "Bob",
+      "requested_layers": [
+        "debug_trace_layer"
+      ]
+    },
+    "event_dag_export": {
+      "bundle_ref": "VIS-A1-01",
+      "panel_ids": [
+        "event_dag_graph",
+        "publication_relation_summary"
+      ],
+      "telemetry_kinds": [
+        "dispatch_record",
+        "handoff",
+        "publish",
+        "roll_commit",
+        "witness"
+      ]
+    }
+  },
+  "what_it_proves": [
+    "one practical world package is consumable from the package.mir.json front door through the local runtime floor",
+    "the same preview keeps the runtime-plan boundary explicit and reuses the exact event-DAG export bundle",
+    "product-preview composition stays a thin bundle over exact practical reports rather than a new runtime semantic lane"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "Docker transport completion",
+    "package hot-plug execution completion",
+    "local save/load completion",
+    "custom Mir avatar runtime"
+  ]
+}

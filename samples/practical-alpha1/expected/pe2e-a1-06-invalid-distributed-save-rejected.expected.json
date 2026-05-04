@@ -1,0 +1,48 @@
+{
+  "sample_id": "PE2E-06",
+  "bundle_kind": "invalid_distributed_save_rejected_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "checker_package",
+      "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/chk-cut-01-invalid-distributed-cut-rejected/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-checker",
+      "sample_id": "CHK-CUT-01",
+      "carrier_scope": "practical-alpha1-checker-floor",
+      "surface_kind": "practical_alpha1_nonfinal_checker_report"
+    }
+  ],
+  "preview_sections": {
+    "checker_reject": {
+      "package_id": "chk-cut-01-invalid-distributed-cut-rejected",
+      "verdict": "rejected",
+      "family": "cut_predicate",
+      "rejected_kind": "orphan_receive",
+      "diagnostic_message": "distributed cut includes a receive without its send predecessor"
+    }
+  },
+  "what_it_proves": [
+    "invalid distributed save/load remains an explicit rejected practical preview row",
+    "the preview reuses the exact checker guard rather than inferring success from missing runtime evidence",
+    "product-preview composition can include a negative toolchain result without overclaiming distributed save/load support"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "distributed durable save/load",
+    "runtime distributed checkpoint execution",
+    "full consistent-cut completion"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "sample_id": "PE2E-03",
+  "bundle_kind": "debug_layer_companion_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "companion_layer_package",
+      "package_id": "hp-a1-01-debug-layer-attach",
+      "package_kind": "layer",
+      "front_door_entry": "samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-local-runtime",
+      "sample_id": "RUN-01",
+      "carrier_scope": "practical-alpha1-local-runtime-floor",
+      "surface_kind": "practical_alpha1_nonfinal_local_runtime_report"
+    },
+    {
+      "family": "practical-alpha1-hotplug",
+      "sample_id": "HP-A1-01",
+      "carrier_scope": "practical-alpha1-hotplug-floor",
+      "surface_kind": "practical_alpha1_nonfinal_hotplug_report"
+    },
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-04",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    }
+  ],
+  "preview_sections": {
+    "runtime_world": {
+      "package_id": "run-01-local-sugoroku",
+      "world_id": "practical_sugoroku_world",
+      "requested_layers": [
+        "debug_trace_layer"
+      ]
+    },
+    "debug_layer_attach": {
+      "package_id": "hp-a1-01-debug-layer-attach",
+      "attach_profile": "debug_trace_layer",
+      "activation_cut_ref": "activation_cut#debug_trace_layer_attach",
+      "terminal_outcome": "accepted"
+    },
+    "lifecycle_export": {
+      "bundle_ref": "VIS-A1-04",
+      "panel_ids": [
+        "attach_lifecycle",
+        "membership_snapshot",
+        "detach_lifecycle"
+      ],
+      "telemetry_ids": [
+        "practical_hotplug_request#hp-a1-01",
+        "activation_cut#debug_trace_layer_attach",
+        "membership_frontier#HP-A1-01+07",
+        "practical_hotplug_request#hp-a1-07",
+        "detach_boundary#alpha_local_hotplug_minimal_contract"
+      ]
+    }
+  },
+  "what_it_proves": [
+    "one practical world package can be previewed with exact companion debug-layer attach evidence",
+    "the attach boundary remains explicit as an exact hot-plug report plus a distinct lifecycle export bundle",
+    "layer/product composition is kept at the thin preview-bundle level rather than collapsed into a new runtime path"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "same-session runtime attach execution",
+    "detach runtime lifecycle execution",
+    "final object package attach completion",
+    "custom Mir avatar runtime"
+  ]
+}

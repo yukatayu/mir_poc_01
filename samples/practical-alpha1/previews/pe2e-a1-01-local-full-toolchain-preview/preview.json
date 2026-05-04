@@ -1,0 +1,10 @@
+{
+  "preview_id": "PE2E-01",
+  "preview_kind": "local_full_toolchain_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "required_source_reports": [
+    {"sample_id": "RUN-01"},
+    {"sample_id": "VIS-A1-01"}
+  ]
+}
+

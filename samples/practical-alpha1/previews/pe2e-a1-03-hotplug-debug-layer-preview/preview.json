@@ -1,0 +1,12 @@
+{
+  "preview_id": "PE2E-03",
+  "preview_kind": "debug_layer_companion_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "layer_package": "../../packages/hp-a1-01-debug-layer-attach",
+  "required_source_reports": [
+    {"sample_id": "RUN-01"},
+    {"sample_id": "HP-A1-01"},
+    {"sample_id": "VIS-A1-04"}
+  ]
+}
+

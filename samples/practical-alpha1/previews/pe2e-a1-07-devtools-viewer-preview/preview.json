@@ -1,0 +1,15 @@
+{
+  "preview_id": "PE2E-07",
+  "preview_kind": "devtools_viewer_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "route_trace_package": "../../packages/tr-a1-06-observer-safe-route-trace",
+  "attach_package": "../../packages/hp-a1-01-debug-layer-attach",
+  "detach_package": "../../packages/hp-a1-07-detach-minimal-contract",
+  "auth_lane_package": "../../packages/tr-a1-07-auth-lane-preserved",
+  "viewer_bundle_ids": [
+    "VIS-A1-01",
+    "VIS-A1-02",
+    "VIS-A1-04",
+    "VIS-A1-06"
+  ]
+}

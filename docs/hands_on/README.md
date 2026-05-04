@@ -26,6 +26,7 @@
 | `typed_external_boundary_canaries_01.md` | typed external `EXT-03/04` synthetic preview helper を読む入口 |
 | `projection_placement_views_01.md` | projection / placement helper and generated bridge evidence を読む入口 |
 | `network_transport_canaries_01.md` | network helper-local canary を production transport と分けて読む入口 |
+| `practical_alpha1_product_preview_01.md` | first practical product-preview floor を full product prototype と分けて読む入口 |
 
 ## 既存の長い入門文書
 

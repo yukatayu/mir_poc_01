@@ -1,0 +1,127 @@
+{
+  "sample_id": "PE2E-07",
+  "bundle_kind": "devtools_viewer_preview",
+  "family": "practical-alpha1-product-preview",
+  "preview_scope": "practical-alpha1-product-preview-floor",
+  "surface_kind": "practical_alpha1_nonfinal_product_preview_bundle",
+  "preview_mode": "thin_exact_report_bundle",
+  "preview_boundary": "non-final practical product-preview bundle over preview manifests, exact practical reports, and source package paths; not a final product runtime or public CLI",
+  "source_packages": [
+    {
+      "role": "world_package",
+      "package_id": "run-01-local-sugoroku",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "route_trace_package",
+      "package_id": "tr-a1-06-observer-safe-route-trace",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/tr-a1-06-observer-safe-route-trace/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "attach_package",
+      "package_id": "hp-a1-01-debug-layer-attach",
+      "package_kind": "layer",
+      "front_door_entry": "samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "detach_package",
+      "package_id": "hp-a1-07-detach-minimal-contract",
+      "package_kind": "layer",
+      "front_door_entry": "samples/practical-alpha1/packages/hp-a1-07-detach-minimal-contract/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    },
+    {
+      "role": "auth_lane_package",
+      "package_id": "tr-a1-07-auth-lane-preserved",
+      "package_kind": "world",
+      "front_door_entry": "samples/practical-alpha1/packages/tr-a1-07-auth-lane-preserved/package.mir.json",
+      "front_door_mode": "package.mir.json directory_or_file_loader"
+    }
+  ],
+  "source_reports": [
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-01",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    },
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-02",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    },
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-04",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    },
+    {
+      "family": "practical-alpha1-devtools-export",
+      "sample_id": "VIS-A1-06",
+      "carrier_scope": "practical-alpha1-devtools-export-floor",
+      "surface_kind": "practical_alpha1_nonfinal_devtools_bundle"
+    }
+  ],
+  "preview_sections": {
+    "viewer_exports": [
+      {
+        "bundle_ref": "VIS-A1-01",
+        "bundle_kind": "event_dag_export",
+        "panel_ids": [
+          "event_dag_graph",
+          "publication_relation_summary"
+        ],
+        "viewer_mode": "static_html_bundle"
+      },
+      {
+        "bundle_ref": "VIS-A1-02",
+        "bundle_kind": "route_trace_export",
+        "panel_ids": [
+          "observer_route_trace"
+        ],
+        "viewer_mode": "static_html_bundle"
+      },
+      {
+        "bundle_ref": "VIS-A1-04",
+        "bundle_kind": "hotplug_lifecycle_export",
+        "panel_ids": [
+          "attach_lifecycle",
+          "membership_snapshot",
+          "detach_lifecycle"
+        ],
+        "viewer_mode": "static_html_bundle"
+      },
+      {
+        "bundle_ref": "VIS-A1-06",
+        "bundle_kind": "redacted_observer_view",
+        "panel_ids": [
+          "redacted_observer_route",
+          "auth_lane_summary"
+        ],
+        "viewer_mode": "static_html_bundle"
+      }
+    ],
+    "render_html_available": true
+  },
+  "what_it_proves": [
+    "exact practical devtools bundles can be gathered under one thin product-preview manifest",
+    "viewer-openability remains grounded in the same exact bundle payloads that validate the devtools floor",
+    "the preview keeps devtools export separate from runtime, transport, and hot-plug carriers"
+  ],
+  "what_it_does_not_prove": [
+    "final public product runtime",
+    "active canonical runnable root promotion",
+    "final public CLI or viewer API",
+    "full devtools stage completion",
+    "membership timeline completion",
+    "fallback degradation completion",
+    "retention/on-demand trace completion"
+  ]
+}

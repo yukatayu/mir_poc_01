@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, and first practical local save/load family.
+This root is the current practical alpha-1 front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, first practical local save/load family, and first practical product-preview family.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is not yet the active runnable root for the whole repo.
@@ -24,6 +24,8 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
   `VIS-A1-04` hot-plug lifecycle export over exact practical hotplug reports, limited to attach accepted boundary + membership snapshot + deferred detach boundary.
 - `P-A1-07` adds the first practical local save/load cut here:
   `scripts/practical_alpha1_save_load.py` emits exact expected `SL-A1-01/02` reports over a distinct save-load plan, a saved local frontier carrier, and a non-final save-load report surface.
+- `P-A1-08` adds the first practical product-preview cut here:
+  `samples/practical-alpha1/previews/` plus `scripts/practical_alpha1_product_preview.py` emit exact expected `PE2E-01..07` bundles over preview manifests, exact practical reports, and exact practical devtools bundles.
 - This front-door is non-final and does not freeze the final public grammar.
 
 ## Current package map
@@ -75,6 +77,16 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - `expected/sl-a1-*.expected.json`
   - `SL-A1-01`: local-only roundtrip resume through a saved local frontier
   - `SL-A1-02`: stale-membership non-resurrection after restore
+- `previews/`
+  - `PE2E-01`: local full-toolchain preview
+  - `PE2E-02`: Docker full-toolchain preview
+  - `PE2E-03`: debug-layer companion preview
+  - `PE2E-04`: placeholder object companion preview
+  - `PE2E-05`: local save/load continue preview
+  - `PE2E-06`: invalid distributed save rejected preview
+  - `PE2E-07`: devtools viewer preview
+- `expected/pe2e-a1-*.expected.json`
+  - exact expected non-final product-preview bundles over the preview manifests
 
 ## Current boundary
 
@@ -86,12 +98,15 @@ This root is the current practical alpha-1 front-door plus first checker-floor, 
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/04/06`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02`.
+- The current product-preview floor is also non-final and is currently limited to `PE2E-01..07`.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked world packages for transport are lowered through a distinct transport-plan carrier before transport report assembly.
 - Exact practical reports are lowered through a distinct devtools export bundle before non-final viewer rendering.
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
+- Preview manifests are lowered through exact practical reports and exact practical devtools bundles before non-final product-preview bundle assembly.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `CHK-CUT-01` reuse in the save/load lane is limited to orphan-receive checker guard reuse only.
+- `PE2E-04` is limited to `HP-A1-06` placeholder object preview companion evidence and does not actualize custom Mir avatar runtime or unsupported runtime fallback.
 - It does not complete the full `specs/18` typed-checking list.
-- It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, full devtools export, product prototype, or final public runtime/devtools/transport/save-load ABI.
+- It does not complete final object package attach, detach runtime lifecycle execution, WAN/federation, distributed durable save/load, stale witness/stale lease non-resurrection completion, custom Mir avatar runtime, unsupported runtime fallback, full devtools export, full product prototype, or final public runtime/devtools/transport/save-load/package-avatar ABI.

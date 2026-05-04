@@ -61,6 +61,13 @@
   - current actualized rows are `SL-A1-01/02`
   - `CHK-CUT-01` is reused only as an orphan-receive checker guard
   - it is a non-final save/load command and does not claim distributed durable save/load, stale witness/stale lease non-resurrection completion, queue/channel/transport persistence, product prototype, or final public save-load API
+- practical alpha-1 first product-preview floor now has an alpha-local script surface
+  - `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
+  - this exercises `samples/practical-alpha1/previews/` through preview manifests over exact practical runtime / hot-plug / transport / save-load reports and exact practical devtools bundles
+  - current actualized rows are `PE2E-01..07`
+  - `render-html` emits a non-final static HTML preview over the same exact bundle payloads
+  - `PE2E-04` is narrowed to `HP-A1-06` placeholder object preview companion evidence only
+  - it is a non-final product-preview command and does not claim custom Mir avatar runtime, unsupported runtime fallback, monolithic same-session product runtime, active runnable-root promotion, or final public CLI / viewer / transport / save-load / package-avatar API
 
 ### current-L2 helper / detached loop / support
 

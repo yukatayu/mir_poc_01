@@ -9,6 +9,7 @@ These JSON files describe the current practical alpha-1 expected artifacts.
 - `tr-a1-*.expected.json` files are exact expected reports for the first practical transport floor.
 - `vis-a1-*.expected.json` files are exact expected bundles for the first practical devtools export floor.
 - `sl-a1-*.expected.json` files are exact expected reports for the first practical local save/load floor.
+- `pe2e-a1-*.expected.json` files are exact expected bundles for the first practical product-preview floor.
 - Positive checker proof uses explicit `accepted_obligations`.
 - Negative checker proof uses explicit `rejected_rows` and `diagnostics`.
 - They are not public API schemas.
@@ -17,3 +18,4 @@ These JSON files describe the current practical alpha-1 expected artifacts.
 - `tr-a1-*.expected.json` may include local TCP / Docker Compose TCP accepted path, stale-membership reject, missing-capability reject, missing-witness reject, observer-safe route trace, and auth-lane separation, but does not imply WAN/federation, save/load, devtools export, product prototype, or final public transport ABI.
 - `vis-a1-*.expected.json` may include event DAG export, publication / witness / handoff relation export, observer-safe route trace export, exact-report hot-plug lifecycle export, and redacted observer view with auth-lane separation, but does not imply full devtools completion, membership timeline completion, detach runtime lifecycle execution, fallback degradation, retention/on-demand trace, save/load, product prototype, or final public viewer / telemetry ABI.
 - `sl-a1-*.expected.json` may include a distinct save-load plan scope, saved local frontier summary, local-only roundtrip resume, and stale-membership non-resurrection, but does not imply distributed durable save/load, stale witness/stale lease non-resurrection completion, queue/channel/transport persistence, product prototype, or final public save-load ABI.
+- `pe2e-a1-*.expected.json` may include preview-manifest references, exact practical runtime / hot-plug / transport / save-load reports, exact devtools bundles, and a non-final static HTML viewer-openability preview, but does not imply custom Mir avatar runtime, unsupported runtime fallback, full product prototype completion, or final public CLI / viewer / transport / save-load / package-avatar ABI.

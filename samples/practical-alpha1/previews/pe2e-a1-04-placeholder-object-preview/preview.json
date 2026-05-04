@@ -1,0 +1,11 @@
+{
+  "preview_id": "PE2E-04",
+  "preview_kind": "placeholder_object_companion_preview",
+  "world_package": "../../packages/run-01-local-sugoroku",
+  "object_package": "../../packages/hp-a1-06-object-package-attach",
+  "required_source_reports": [
+    {"sample_id": "RUN-01"},
+    {"sample_id": "HP-A1-06"}
+  ]
+}
+

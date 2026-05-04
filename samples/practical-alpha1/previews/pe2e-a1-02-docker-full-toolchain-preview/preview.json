@@ -1,0 +1,9 @@
+{
+  "preview_id": "PE2E-02",
+  "preview_kind": "docker_full_toolchain_preview",
+  "world_package": "../../packages/tr-a1-02-docker-two-node-accepted",
+  "required_source_reports": [
+    {"sample_id": "TR-A1-02"}
+  ]
+}
+

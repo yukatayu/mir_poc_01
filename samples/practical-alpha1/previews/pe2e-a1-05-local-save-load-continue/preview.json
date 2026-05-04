@@ -1,0 +1,9 @@
+{
+  "preview_id": "PE2E-05",
+  "preview_kind": "local_save_load_continue_preview",
+  "world_package": "../../packages/sl-a1-01-local-save-load-resume",
+  "required_source_reports": [
+    {"sample_id": "SL-A1-01"}
+  ]
+}
+

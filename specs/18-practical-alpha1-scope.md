@@ -314,6 +314,38 @@ local + Docker で実行できる。
 - local save/load
 - devtools export
 
+#### first practical product-preview boundary
+
+current repo state で actualize 済みなのは、
+full product prototype completion ではなく、
+**first practical product-preview floor** である。
+
+- current carrier split は次に限る
+  - preview manifest
+  - exact practical reports / exact practical devtools bundles
+  - non-final product-preview bundle
+- current preview root は `samples/practical-alpha1/previews/`
+- current actualized preview rows は次に限る
+  - `PE2E-01`
+  - `PE2E-02`
+  - `PE2E-03`
+  - `PE2E-04`
+  - `PE2E-05`
+  - `PE2E-06`
+  - `PE2E-07`
+- `PE2E-03` は debug layer の **companion preview bundle** であり、
+  same-session runtime attach execution を証明しない
+- `PE2E-04` は `HP-A1-06` placeholder object preview companion evidence に narrow される
+- `PE2E-04` は custom Mir avatar runtime を証明しない
+- `PE2E-04` は unsupported runtime fallback を証明しない
+- `PE2E-06` は invalid distributed save/load runtime execution ではなく、
+  explicit checker reject preview に留まる
+- `PE2E-07` は exact devtools bundles の viewer-openability preview であり、
+  final public viewer API ではない
+- current floor は monolithic same-session product runtime execution を意味しない
+- current floor は final public CLI / viewer / package-avatar / save-load / transport ABI を意味しない
+- current floor は practical alpha-1 `100%` completion を意味しない
+
 ## non-goals
 
 practical alpha-1 immediate scope では次を goal にしない。
