@@ -199,7 +199,9 @@ practical alpha-1 line の current actualization と non-claim を `P-A1-15` に
 
 ## Commit / push status
 
-Pending at report write.
+- Primary package commit: `5e2ce33` (`mirrorea: close p-a1-15 practical retention query export`)
+- Push status: pushed to `origin/main`
+- Report status finalized in a docs-only follow-up commit after the primary package push
 
 ## Sub-agent session close status
 
