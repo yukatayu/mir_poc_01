@@ -132,7 +132,10 @@ sed -n '1,320p' plan/44-practical-alpha1-roadmap.md
 
 ## Commit / push status
 
-- pending
+- committed and pushed:
+  - `2be27cd21e3bca71bdd21c10ed200df0b374a56f`
+  - message: `docs: explain alpha1 completion mismatch`
+- current file may receive a small follow-up status-only commit if later push metadata needs explicit mirroring.
 
 ## Sub-agent session close status
 
