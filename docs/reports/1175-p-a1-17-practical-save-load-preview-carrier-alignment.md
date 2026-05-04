@@ -195,7 +195,9 @@
 
 ## Commit / push status
 
-Pending at report write.
+- Main closeout commit: `dd427c2` (`mirrorea: close p-a1-17 save-load preview alignment`)
+- Push status: pushed to `origin/main`
+- Report status section finalized in the docs-only follow-up commit for this package
 
 ## Sub-agent session close status
 
