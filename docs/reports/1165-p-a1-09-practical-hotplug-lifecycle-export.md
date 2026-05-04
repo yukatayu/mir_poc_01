@@ -283,10 +283,10 @@ Recut `P-A1-08` to a first practical product-preview bundle over existing practi
 
 ## Commit / push status
 
-Package closeout is prepared in the worktree. Commit/push status will be updated after validation-final diff review and the actual `git commit --no-gpg-sign` / `git push`.
+Main package commit `f58045c` (`mirrorea: close p-a1-09 practical hotplug lifecycle export`) was pushed to `origin/main`. A docs-only follow-up is used only to finalize report metadata and explicit sub-agent close status after the push.
 
 ## Sub-agent session close status
 
-- `Helmholtz` completed the semantics/spec/queue review and should be closed after package commit
-- `Carver` completed the helper/test review and should be closed after package commit
-- `Mencius` completed the docs/snapshot review and should be closed after package commit
+- `Helmholtz` completed the semantics/spec/queue review and is now closed
+- `Carver` completed the helper/test review and is now closed
+- `Mencius` completed the docs/snapshot review and is now closed
