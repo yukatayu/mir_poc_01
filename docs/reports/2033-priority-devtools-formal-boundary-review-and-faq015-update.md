@@ -147,7 +147,10 @@ git status --short
 
 ## Commit / push status
 
-- pending
+- committed and pushed:
+  - `77c9ed6ab3b0b136e5fec0f732b20bbf5d89e750`
+  - message: `docs: review priority and formal boundary`
+- current file may receive a small follow-up status-only commit if later push metadata needs explicit mirroring.
 
 ## Sub-agent session close status
 
