@@ -214,8 +214,10 @@ git diff --check
   `3f192a0` `mirrorea: add practical alpha1 workflow carrier`
 - report metadata follow-up:
   `8931214` `docs: update p-a1-23 report metadata`
+- final push-status correction:
+  this docs-only report update; exact pushed HEAD is recorded in the final response to avoid another self-referential metadata commit
 - push:
-  pushed to `origin/main` (`f644db5..8931214`) before this final report metadata correction
+  pushed to `origin/main`
 
 ## Sub-agent session close status
 
