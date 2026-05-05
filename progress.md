@@ -1,12 +1,13 @@
 # progress
 
-最終更新: 2026-05-05 11:33 JST
+最終更新: 2026-05-05 11:59 JST
 
 ## この文書について
 
-- この文書は repo 全体の **rough progress snapshot** です。
+- この文書は repo 全体の **operational workflow snapshot** です。
 - 規範判断の正本は `specs/`、長期参照は `plan/`、実行証跡は `docs/reports/`、runnable sample dashboard は `samples_progress.md` です。
-- 裸の `100%` は operational-layer-ready 以上を意味します。evidence line や first-floor line は `100% current-scope evidence closeout` または `100% first-floor closeout` と明示して読みます。
+- 進捗率は primary metric ではありません。`100%` は外部開発者がその layer を実際に使える operational workflow または product/public layer だけに使います。
+- helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類します。
 - 古い package 履歴の詳細は `docs/reports/` と `plan/90-source-traceability.md` を参照し、この snapshot では current checkpoint / next gate / validation floor を優先します。
 
 ## project axis
@@ -23,34 +24,34 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-A1-23` practical α-1 integrated workflow carrier
+  `P-A1-24` operational workflow readiness metric recut
 - current promoted reopen point:
-  α-1 product/public boundary recut / `U1` decision inventory, or maintenance-only freshness work
+  `P-A1-25` α-1 product/public boundary recut / `U1` decision inventory, or maintenance-only freshness work
 - current reading:
   repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、および **bounded practical α-1 integrated workflow carrier** を得た。ただし final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は未固定
 - self-driven status:
   bounded practical workflow までは自走済み。product/public-ready α-1 へ進むには `U1` packaging / host target / shipped surface の user decision が必要
 
-## three-axis progress
+## workflow-readiness axes
 
-| 軸 | Rough % | 読み |
-|---|---:|---|
-| 論理仕様 | 90 | `specs/18..24` で practical workflow boundary と operational α 条件の bounded reading を同期したが、final public/product boundary は未固定 |
-| ユーザ向け仕様 | 81 | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow の読み分けを更新したが、final public surface や `U1` は未固定 |
-| 実装 / 運用 | 87 | current-L2 active floor、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 に加えて `PA1W-01..08` integrated workflow carrier を actualize した |
+| 軸 | Workflow reading | Current status |
+|---|---|---|
+| 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..24` で practical workflow boundary と operational α 条件の bounded reading を同期したが、final public/product boundary は未固定 |
+| ユーザ向け仕様 | reproducible workflow guidance exists for bounded α lines | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow の読み分けを更新したが、final public surface や `U1` は未固定 |
+| 実装 / 運用 | workflow-ready only where session workflow is reproducible | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow は再現可能。first-floor runners / expected JSON / reports は evidence として扱う |
 
 ## line snapshot
 
-| Line | Category | Progress | Current status | Next gap |
-|---|---|---:|---|---|
-| current-L2 active floor | runnable floor | 90 | `samples/clean-near-end/`、Sugoroku、Lean foundations / generated stubs、helper stack は runnable | final public parser/API は未固定 |
-| Spaces alpha-0 | evidence line | 100 | Stage A..F は `100% current-scope evidence closeout` | operational α-0.5 / α-0.8 / α-0.9 とは別 |
-| practical alpha-1 first floors | first-floor line | 100 | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` | product/public-ready α-1 とは別 |
-| practical alpha-1 integrated workflow | bounded workflow line | 100 | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
-| operational α-0.5 | operational line | 100 | `P-A1-20` で `practical_alpha05_session` carrier 上に `crates/mir-runtime::practical_alpha05_host_io`、example `host-io` subcommand、`OA05-07` `AddOne` direct execution lane を接続し、bounded local observable runtime を actualize | α-0.9 session-bound devtools export |
-| operational α-0.8 | operational line | 100 | `P-A1-21` で `crates/mir-runtime::practical_alpha08_hotplug_session`、example `attach` subcommand、`scripts/practical_alpha08_session_hotplug.py`、`OA08-01..10` を追加し、debug/auth/rate-limit/object preview/deferred detach の same-session attach accepted/rejected/deferred/activation cut/observer-safe mutation を actualize | accepted detach execution / distributed ordering は later |
-| operational α-0.9 | operational line | 100 | `P-A1-22` で `crates/mir-runtime::practical_alpha09_devtools`、example `export-devtools` subcommand、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` を追加し、session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を actualize | final public viewer / telemetry ABI、durable audit は later |
-| final public product | product/public | 10 | public boundary inventory はある | `U1` と public surface 決定が必要 |
+| Line | Category | Workflow status | Current status | Next gap |
+|---|---|---|---|---|
+| current-L2 active floor | runnable evidence | evidence-backed runnable floor | `samples/clean-near-end/`、Sugoroku、Lean foundations / generated stubs、helper stack は runnable | final public parser/API は未固定 |
+| Spaces alpha-0 | evidence line | evidence-closed only | Stage A..F は current-scope evidence であり、operational workflow completion ではない | operational α-0.5 / α-0.8 / α-0.9 とは別 |
+| practical alpha-1 first floors | first-floor evidence | evidence-closed only | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence | product/public-ready α-1 とは別 |
+| practical alpha-1 integrated workflow | bounded workflow line | developer-reproducible bounded workflow | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
+| operational α-0.5 | operational line | workflow-ready: local session workflow | `P-A1-20` で local session carrier + typed `AddOne` host-I/O lane を接続し、local observable runtime workflow を再現可能にした | broader host family は later |
+| operational α-0.8 | operational line | workflow-ready: same-session hot-plug workflow | `P-A1-21` で debug/auth/rate-limit/object preview/deferred detach の same-session accepted/rejected/deferred/activation cut/observer-safe mutation を再現可能にした | accepted detach execution / distributed ordering は later |
+| operational α-0.9 | operational line | workflow-ready: session-bound devtools workflow | `P-A1-22` で session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を再現可能にした | final public viewer / telemetry ABI、durable audit は later |
+| final public product | product/public | not workflow-ready | public boundary inventory はある | `U1` と public surface 決定が必要 |
 
 ## subsystem status
 
@@ -78,13 +79,13 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## feature maturity rows
 
-| Feature | Rough % | 読み | 着手可否 |
-|---|---:|---|---|
-| multi-node / fabric | 48 | helper-local transport と alpha-0 evidence はあるが same-session operational shared-space は未完成 | 後段依存 |
-| robustness via contracts / theorem / model-check boundary | 82 | static checker / model-check / proof side の stratification は fixed | 着手可能 |
-| dynamic attach / detach / DAG-safe evolution | 84 | attach-time first-floor rows と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
-| `atomic_cut` と ordering / memory-order family | 74 | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
-| executable sample corpus | 99 | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。残る gap は final/public α-1 boundary と product surface | 着手可能 |
+| Feature | Workflow status | 読み | 着手可否 |
+|---|---|---|---|
+| multi-node / fabric | evidence only | helper-local transport と alpha-0 evidence はあるが same-session operational shared-space は未完成 | 後段依存 |
+| robustness via contracts / theorem / model-check boundary | boundary-fixed | static checker / model-check / proof side の stratification は fixed。外部 proof discharge は evidence expansion | 着手可能 |
+| dynamic attach / detach / DAG-safe evolution | bounded workflow-ready for same-session attach | attach-time first-floor evidence と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
+| `atomic_cut` と ordering / memory-order family | semantics fixed, evidence-backed | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
+| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。残る gap は final/public α-1 boundary と product surface | 着手可能 |
 
 ## current blockers
 
@@ -119,6 +120,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-05 11:59 JST
+  `P-A1-24` で workflow-readiness policy を反映し、進捗率ではなく external developer reproducible workflow を snapshot の primary metric とした。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類する方針へ同期した。
 - 2026-05-05 11:33 JST
   `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`scripts/tests/test_practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、source front-door / checker / same-session runtime / typed host-I/O / hot-plug / save-load / session devtools / product-preview evidence を bounded practical α-1 workflow として束ねた。`VIS-A1-01` の expected devtools bundle も runtime-side positive guard reason refs に同期した。
 - 2026-05-05 11:17 JST

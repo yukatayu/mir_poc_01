@@ -7,7 +7,8 @@
 - この文書は repo 全体の **current task map** です。
 - 規範判断の正本は `specs/`、長期比較と source trace は `plan/`、runnable sample 状態は `samples_progress.md`、実行証跡は `docs/reports/` に置きます。
 - append-only 履歴ではありません。current checkpoint、次に詰める gate、blocker を読める snapshot として保ちます。
-- 裸の `100%` は operational-layer-ready 以上を意味します。evidence line や first-floor line は category を明示して書きます。
+- 進捗率は primary metric ではありません。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として書きます。
+- `100%` は外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使います。
 
 ## current task-level status
 
@@ -26,21 +27,21 @@
 - `P-A1-23` により bounded practical α-1 integrated workflow carrier は actualize 済みです:
   `scripts/practical_alpha1_integrated_workflow.py`、`scripts/tests/test_practical_alpha1_integrated_workflow.py`、`PA1W-01..08` により、existing first-floor front-door / checker / runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 つの bounded developer workflow に束ねました。product/public-ready α-1 ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
-  `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
+  `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
-  Stage A..F は `100% current-scope evidence closeout` として保持し、運用上の α-0.5 / α-0.8 / α-0.9 readiness と混同しません。
+  Stage A..F は current-scope evidence として保持し、運用上の α-0.5 / α-0.8 / α-0.9 readiness と混同しません。
 
 ## ordered self-driven packages
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-24` alpha-1 product/public boundary recut | `Macro 7/8`, `S6` | bounded workflow と product/public-ready α-1 の差を audit し、`U1` decision inventory と public surface stop lines を整理する | final public parser / CLI / viewer / telemetry / packaging / host target の未決項目を明示し、自走実装可能な範囲と user decision gate を分ける | medium |
+| 1 | `P-A1-25` alpha-1 product/public boundary recut | `Macro 7/8`, `S6` | bounded workflow と product/public-ready α-1 の差を audit し、`U1` decision inventory と public surface stop lines を整理する | final public parser / CLI / viewer / telemetry / packaging / host target の未決項目を明示し、自走実装可能な範囲と user decision gate を分ける | medium |
 | 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-24` alpha-1 product/public boundary recut, or user decision on `U1`
+  `P-A1-25` alpha-1 product/public boundary recut, or user decision on `U1`
 - recommendation reason:
   bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 workflow は揃ったため、次の実質 gap は public/product-ready boundary と user-facing shipped surface の決定に移った
 - stop line:
@@ -72,6 +73,6 @@
 
 ## non-promoted references
 
-- `P-A0-23` / Stage B local runtime closeout は `100% current-scope evidence closeout` reference であり、operational α-0.5 same-session runtime package ではない
-- `P-A0-25` / Stage D lifecycle closeout は `100% current-scope evidence closeout` reference であり、operational α-0.8 same-session hot-plug runtime package ではない
-- `P-A0-26` / Stage E devtools closeout は `100% current-scope evidence closeout` reference であり、`P-A1-22` bounded operational α-0.9 session-bound devtools package とは別 category である
+- `P-A0-23` / Stage B local runtime closeout は current-scope evidence reference であり、operational α-0.5 same-session runtime package ではない
+- `P-A0-25` / Stage D lifecycle closeout は current-scope evidence reference であり、operational α-0.8 same-session hot-plug runtime package ではない
+- `P-A0-26` / Stage E devtools closeout は current-scope evidence reference であり、`P-A1-22` bounded operational α-0.9 session-bound devtools package とは別 category である

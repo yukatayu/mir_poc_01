@@ -7,7 +7,7 @@ repository-memory roadmap を置く。
 
 ここで保持するのは、
 
-- practical alpha-1 readiness の段階
+- practical alpha-1 workflow readiness の段階
 - alpha-0 evidence closeout との関係
 - safe next package
 - non-claim / blocker inventory
@@ -17,9 +17,9 @@ repository-memory roadmap を置く。
 ## current repo state
 
 - `P-A0-01..29` により、`specs/13..17` / `plan/39..43` / `samples/alpha/` に基づく
-  current-scope evidence closeout line は一巡している
-- Stage A..F の existing 100% は current-scope evidence closeout であり、
-  practical alpha-1 readiness 100% ではない
+  current-scope evidence line は一巡している
+- Stage A..F の existing closeout は current-scope evidence であり、
+  practical alpha-1 workflow readiness ではない
 - active runnable roots は依然として:
   - `samples/clean-near-end/`
   - `samples/current-l2/`
@@ -38,8 +38,10 @@ repository-memory roadmap を置く。
 
 ## decisions mirrored from specs/18
 
-- future `100%` は practical alpha-1 readiness を指す
-- current-scope evidence closeout は separate metric として保持する
+- practical alpha-1 readiness は進捗率ではなく developer-reproducible workflow で判断する
+- `100%` は外部開発者が actual layer を実際に使える operational workflow または product/public layer にだけ使う
+- helper / sidecar / report / expected JSON / first-floor runner は evidence として分類する
+- current-scope evidence は separate metric として保持する
 - alpha-1 は library-first + CLI + viewer/devtools の toolchain である
 - parser/front-door は required だが final grammar ではなくてよい
 - typed IR / checker / runtime plan / reusable runtime を経由する
@@ -52,7 +54,7 @@ repository-memory roadmap を置く。
 
 ### PA1-0 — rebaseline / honesty repair
 
-- current-scope evidence closeout と practical readiness を分離する
+- current-scope evidence と practical workflow readiness を分離する
 - `specs/18` と `plan/44` を追加する
 - snapshot docs / dashboards / validators を practical semantics に同期する
 
@@ -355,12 +357,14 @@ recommended current promoted line:
 22. `P-A1-21` operational α-0.8 same-session hot-plug runtime
 23. `P-A1-22` operational α-0.9 session-bound devtools export
 24. `P-A1-23` practical α-1 integrated workflow carrier
+25. `P-A1-24` operational workflow readiness metric recut
 
 current reading after `P-A1-23`:
 
 - `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13`、`P-A1-14`、`P-A1-15`、`P-A1-16`、`P-A1-17` are closed
 - `P-A1-18`、`P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are closed as the bounded operational α-0.5 / α-0.8 / α-0.9 sequence
 - `P-A1-23` is closed as a bounded practical α-1 integrated workflow carrier, not as product/public-ready alpha-1
+- `P-A1-24` recuts the repository status metric around externally reproducible operational workflows, and classifies helper / sidecar / report / expected JSON / first-floor runner rows as evidence rather than completion
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -403,6 +407,7 @@ current reading after `P-A1-23`:
 - `P-A1-17` realigns `PE2E-06` so the product-preview lane consumes exact `SL-A1-03` save-load preflight evidence rather than direct checker evidence
 - `P-A1-22` actualizes `OA09-01..09` as bounded session-bound devtools export over the same α-0.5 / α-0.8 carrier, including witness relation, save-load timeline, redacted observer view, and retention/on-demand trace; it does not freeze final public viewer / telemetry ABI or product-ready alpha-1
 - `P-A1-23` actualizes `PA1W-01..08` as a script-level integrated workflow over exact first-floor evidence and bounded operational carriers; it also synchronizes `VIS-A1-01` expected reason refs with the local-runtime positive guard evidence
+- `P-A1-24` removes progress-percentage reading from the active snapshots and keeps `100%` reserved for externally usable operational or product/public layers
 
 ## readiness reading
 
@@ -517,8 +522,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-23`:
-  bounded operational α-0.5 / α-0.8 / α-0.9 and bounded practical α-1 integrated workflow are closed. The next material gap is product/public-ready boundary definition, not another silent widening of practical first-floor evidence.
+- current promoted line after `P-A1-24`:
+  bounded operational α-0.5 / α-0.8 / α-0.9 and bounded practical α-1 integrated workflow are closed, and the repo status vocabulary now treats helper / sidecar / report / expected JSON / first-floor runner rows as evidence. The next material gap is product/public-ready boundary definition, not another silent widening of practical first-floor evidence.
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -527,5 +532,5 @@ but should not require practical runner scripts before they are added.
   - keep `P-A1-23` as bounded workflow ready, not product/public-ready alpha-1
   - do not upgrade `HP-A1-07` into accepted detach runtime execution without a new design package
   - do not claim final public parser / CLI / viewer / telemetry ABI, distributed durable save/load, WAN/federation, or native avatar execution from the integrated workflow
-  - reopen next on `P-A1-24` alpha-1 product/public boundary recut or user decision for `U1`
+  - reopen next on `P-A1-25` alpha-1 product/public boundary recut or user decision for `U1`
 - queue authority remains `progress.md` / `tasks.md`

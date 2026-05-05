@@ -19,9 +19,9 @@
 
 - **repo-local alpha-ready current layer**
   `samples/clean-near-end/`、helper、Lean foundation、report まで含めて動かせる current-L2 の実行足場
-- **current-scope evidence closeout**
+- **current-scope evidence**
   `samples/alpha/` と `specs/13..17` / `plan/39..43` による alpha-0 helper-local / runtime-private closeout 群
-- **practical alpha-1 first-floor closeout**
+- **practical alpha-1 first-floor evidence**
   `samples/practical-alpha1/` と `specs/18` / `plan/44` による front-door / checker / runtime / hot-plug / transport / devtools / save-load / preview の first-floor toolchain
 - **operational alpha readiness**
   `specs/19..24` / `plan/45..49` で定義した α-0.5 / α-0.8 / α-0.9 の same-session operational 条件
@@ -60,9 +60,9 @@ OS/network substrate
 ```
 
 - **alpha-0 evidence line**
-  `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence closeout を担います。Stage A..F は `100% current-scope evidence closeout` であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
+  `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence を担います。Stage A..F は evidence reference であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
 - **practical alpha-1 first-floor / workflow line**
-  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきです。`P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py` と `PA1W-01..08` を追加し、source front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 つの bounded developer workflow として再現できるようにしました。ただし final public product-ready completion は意味しません。
+  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも first-floor evidence です。`P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py` と `PA1W-01..08` を追加し、source front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 つの bounded developer workflow として再現できるようにしました。ただし final public product-ready completion は意味しません。
 - **operational alpha theory-freeze line**
   `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest operational closeout は `P-A1-22` で、`P-A1-18` の bounded theory freeze、`P-A1-19` の session carrier、`P-A1-20` の typed external `AddOne` lane、`P-A1-21` の same-session hot-plug lane に続けて、`crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` により bounded operational α-0.9 session-bound devtools export を actualize しました。
 
@@ -120,7 +120,7 @@ OS/network substrate
 
 ## snapshot の読み方
 
-- `progress.md` と `samples_progress.md` の裸の `100%` は operational-layer-ready 以上にだけ使う
-- evidence line や first-floor line の達成は、`100% current-scope evidence closeout` または `100% first-floor closeout` と明示して読む
+- `progress.md` と `samples_progress.md` は進捗率ではなく workflow status / evidence classification を primary metric にする
+- helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として読む
+- `100%` は外部開発者が実際に再現・使用できる operational workflow または product/public layer だけに使う
 - `PA1W-*` は bounded practical workflow ready として読み、product/public-ready α-1 とは読まない
-- rough % は rollback し得る snapshot であり、規範判断の正本ではない

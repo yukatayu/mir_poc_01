@@ -48,7 +48,7 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-05 時点では、その中に 3 つの line を分けて持ちます。
 
 - **Mirrorea Spaces alpha-0 evidence line**
-  規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence closeout を蓄積する alpha-local scaffolding です。
+  規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
   規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。ここは source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product preview を揃える first-floor toolchain line であり、operational α-0.5 / α-0.8 readiness そのものではありません。
   ただし、これは promoted work queue であり、active canonical runnable root への昇格を意味しません。2026-05-05 時点の latest package closeout は `P-A1-23` practical α-1 integrated workflow carrier です。
@@ -58,7 +58,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
   規範判断は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を固定します。
   `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` direct execution lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は引き続き未固定です。
 
-現行の Stage A..F `100%` は `100% current-scope evidence closeout`、practical alpha-1 row の `100%` は `100% first-floor closeout` と明示して読みます。裸の `100%` は operational-layer-ready 以上にだけ使います。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
+現行の Stage A..F は current-scope evidence、practical alpha-1 first-floor row は first-floor evidence として読みます。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence です。`100%` は、外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使います。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
 current line で reader が押さえるべき点は次です。
 

@@ -6,15 +6,16 @@
 **artifact closeout ではなく operational readiness**
 として読む bounded theory freeze を置く。
 
-- evidence closeout / first-floor closeout / operational readiness / product/public readiness を分ける
+- evidence / first-floor evidence / operational readiness / product/public readiness を分ける
 - current repo の first floors を operational-ready と混同しない
 - final public product completion を claim しない
 
 ## decision level
 
 - `L1`
-  - naked `100%` は practical usability を意味する category にだけ使う
-  - evidence closeout と first-floor closeout は category 名を明示する
+  - `100%` は外部開発者が layer を実際に使える operational workflow または product/public layer にだけ使う
+  - helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類する
+  - evidence と first-floor evidence は operational completion と混同しない
   - α-0.5 / α-0.8 / α-0.9 operational readiness は session-bound workflow を要する
 - `L2`
   - current readiness reading
@@ -23,7 +24,7 @@
 
 ## four completion categories
 
-### 1. evidence closeout
+### 1. evidence
 
 repo-local evidence、validation、report、snapshot docs が同期している状態。
 
@@ -36,7 +37,7 @@ examples:
 
 これは practical usability を意味しない。
 
-### 2. first-floor closeout
+### 2. first-floor evidence
 
 non-final だが、limited carrier / runner / sample family が動く状態。
 
@@ -168,33 +169,32 @@ current repo still lacks at least:
 
 therefore:
 
-- Stage B `100%` = current-scope evidence closeout
-- Stage D `100%` = current-scope evidence closeout
-- Stage E `100%` = current-scope evidence closeout
+- Stage B = current-scope evidence
+- Stage D = current-scope evidence
+- Stage E = current-scope evidence
 - practical `RUN-*` / `HP-A1-*` / `TR-A1-*` / `SL-A1-*` / `VIS-A1-*` / `PE2E-*`
-  = first-floor closeout
-- `OA05-*` / `OA08-*` / `OA09-*` = bounded operational α-0.5 / α-0.8 / α-0.9 closeout rows
+  = first-floor evidence
+- `OA05-*` / `OA08-*` / `OA09-*` = evidence rows for bounded operational α-0.5 / α-0.8 / α-0.9 workflows
 - none of the above imply product/public-ready completion
 
-## progress percentage reading
+## workflow-readiness reading
 
-future snapshot docs should separate category and percentage.
+future snapshot docs should use workflow status as the primary reading.
 
 recommended style:
 
 ```text
-alpha-0.5 evidence closeout: 100%
-alpha-0.5 first-floor closeout: 100%
-alpha-0.5 operational readiness: 100% only after session carrier + host-I/O lane exist
-alpha-0.5 product/public readiness: 0%
+alpha-0.5 evidence rows: evidence-closed
+alpha-0.5 local session workflow: workflow-ready only after session carrier + host-I/O lane exist
+alpha-0.5 product/public readiness: not ready
 ```
 
 same reading for α-0.8 / α-0.9:
 
-- evidence closeout may be `100%`
-- first-floor closeout may be `100%`
-- operational readiness stays below `100%` until workflow conditions are met
-- product/public readiness stays `0%` until public boundary is fixed
+- helper / sidecar / report / expected JSON / first-floor runner rows are evidence
+- operational readiness is claimed only when the corresponding workflow is reproducible
+- product/public readiness remains not ready until public boundary is fixed
+- `100%` is reserved for externally usable operational or product/public layers, not evidence rows
 
 ## required sample matrix
 
@@ -254,6 +254,6 @@ current recommendation:
 
 - practical alpha-1 complete と書かない
 - α-0.5 / α-0.8 / α-0.9 complete と書かない unless the operational conditions are met
-- current first-floor closeout を operational-ready と書かない
+- current first-floor evidence を operational-ready と書かない
 - helper-local preview / exact report bundle を same-session runtime と書かない
 - local save/load を distributed durable save/load と書かない

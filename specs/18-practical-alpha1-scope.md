@@ -3,18 +3,20 @@
 ## role
 
 この文書は、Mirrorea Spaces の
-**practical alpha-1 readiness / 100% 条件 / 非目標 / validation boundary**
+**practical alpha-1 workflow readiness / 非目標 / validation boundary**
 を規範として置く。
 
 - ここで定義するのは final public product ではない
-- ここで定義するのは current-scope evidence closeout と別の readiness metric である
+- ここで定義するのは current-scope evidence と別の workflow readiness metric である
 - `specs/13..17` と `samples/alpha/` の current-scope evidence は前提として保持するが、それだけで practical alpha-1 完了とは呼ばない
 
 ## decision level
 
 - `L1`
-  - future `100%` は practical alpha-1 readiness を指す
-  - current-scope evidence closeout と practical readiness を混同しない
+  - practical alpha-1 readiness は進捗率ではなく developer-reproducible workflow で判断する
+  - `100%` は外部開発者が actual layer を実際に使える operational workflow または product/public layer にだけ使う
+  - helper / sidecar / report / expected JSON / first-floor runner は evidence として分類する
+  - current-scope evidence と practical workflow readiness を混同しない
   - alpha-1 は library-first toolchain である
   - parser/front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product prototype の 8 系統を揃える
 - `L2`
@@ -33,7 +35,7 @@ library-first toolchain である。
 ## relationship to current alpha-0 evidence
 
 `specs/13..17`、`plan/39..43`、`samples/alpha/`、および
-`P-A0-01..29` の closeout は current-scope evidence closeout として保持する。
+`P-A0-01..29` の closeout は current-scope evidence として保持する。
 
 この evidence は useful であり、practical alpha-1 の前提として数える。
 ただし、それだけで次を意味しない。
@@ -102,9 +104,9 @@ exact first-floor reports
 - current floor is not native avatar execution
 - current floor is not product/public-ready alpha-1
 
-## completion condition
+## workflow readiness condition
 
-practical alpha-1 を `100%` と呼ぶには、少なくとも次を全て満たす。
+practical alpha-1 を workflow-ready と呼ぶには、少なくとも次を全て満たす。
 
 ### 1. source front-door
 
@@ -373,7 +375,7 @@ final public transport API と同一視しない。
 - current carrier split は次である
   - `exact practical reports -> distinct devtools export bundle -> non-final viewer`
 - この floor は new runtime semantics を追加しない
-- この floor は `PA1-6` current widened first-floor closeout を満たすが、full devtools completion は意味しない
+- この floor は `PA1-6` current widened first-floor evidence を満たすが、full devtools completion は意味しない
 - `VIS-A1-03` は exact practical save-load report over the report-local membership timeline bundle に限り、
   distributed durable membership timeline、witness/lease co-timeline、detach history completion を意味しない
 - `VIS-A1-07` は exact `SL-A1-02` save-load report に widened した
@@ -452,7 +454,7 @@ full product prototype completion ではなく、
   final public viewer API ではない
 - current floor は monolithic same-session product runtime execution を意味しない
 - current floor は final public CLI / viewer / package-avatar / save-load / transport ABI を意味しない
-- current floor は practical alpha-1 `100%` completion を意味しない
+- current floor は practical alpha-1 workflow-ready completion を意味しない
 
 ## non-goals
 
@@ -510,7 +512,8 @@ Docker が使えない場合は success claim をせず、skip reason を report
 
 ## stop line
 
-- current-scope evidence closeout `100%` を practical alpha-1 `100%` と書かない
+- current-scope evidence を practical alpha-1 workflow-ready と書かない
+- helper / sidecar / report / expected JSON / first-floor runner を completion と書かない
 - helper-local / sidecar / runtime-mirror / non-public floor を product-ready runtime と書かない
 - parser/front-door が無い sample を source-executed と書かない
 - first checker floor を full `specs/18` typed-checking completion と書かない
