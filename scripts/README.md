@@ -45,7 +45,15 @@
   - this exercises exact `HP-A1-01..07` / `AV-A1-03` package evidence through `crates/mir-runtime::practical_alpha08_hotplug_session` and the live `crates/mir-runtime::practical_alpha05_session` carrier
   - current actualized rows are `OA08-01..10`
   - it actualizes same-session `attach` / `observe` over the bounded session carrier plus accepted/rejected/deferred / activation cut / object preview / fallback companion visibility summaries
-  - it does not claim accepted detach execution, distributed durable save/load, α-0.9 live/session-bound devtools export, or final public runtime/devtools/hot-plug API
+  - rejected attach attempts remain non-mutating for active runtime state but are now preserved as session-carried observation entries for α-0.9 export
+  - it does not claim accepted detach execution, distributed durable save/load, or final public runtime/devtools/hot-plug API
+- practical alpha-0.9 session-bound devtools lane now has an alpha-local script surface
+  - `python3 scripts/practical_alpha09_devtools.py check-all --format json`
+  - this exercises one enriched `practical_alpha05_session` carrier through typed host-I/O, same-session hot-plug, local save/load, and `crates/mir-runtime::practical_alpha09_devtools`
+  - current actualized rows are `OA09-01..09`
+  - it exports event DAG, local route trace, membership timeline, witness relation, hot-plug lifecycle, fallback degradation, save-load timeline, observer-safe redacted view, and retention/on-demand trace from the same session carrier
+  - `render-html` emits a non-final static HTML viewer over the same session-bound payload
+  - it does not claim final public viewer/telemetry ABI, durable audit, remote retained-artifact retrieval, WAN/federation route trace, distributed durable save/load, or product-ready alpha-1
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

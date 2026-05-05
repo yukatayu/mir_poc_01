@@ -157,8 +157,9 @@ current repo has useful first-floor observability:
 - `VIS-A1-06` redacted observer view with auth-lane separation
 - `VIS-A1-07` report-local retention query export
 
-しかしこれはまだ
-session-bound α-0.9 completion を意味しない。
+これとは別に、current repo は `OA09-01..09` で bounded session-bound α-0.9 export も持つ。
+`OA09-*` は same runtime session carrier と session-carried observation journal を source にし、
+`VIS-A1-*` の exact-report first-floor category とは分けて読む。
 
 ## soundness targets
 
@@ -180,8 +181,17 @@ current freeze で visible であるべき row family:
 - `VIS-A1-06`
 - `VIS-A1-07`
 - `PE2E-07`
+- `OA09-01`
+- `OA09-02`
+- `OA09-03`
+- `OA09-04`
+- `OA09-05`
+- `OA09-06`
+- `OA09-07`
+- `OA09-08`
+- `OA09-09`
 
-future operational anchors:
+current operational anchors:
 
 - session-bound witness relation panel
 - session-bound save/load timeline

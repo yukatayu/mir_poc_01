@@ -232,8 +232,10 @@ def _validate_attach_row(sample_id: str, payload: dict[str, Any]) -> list[str]:
             failures.append("non-admin debug attach must reject on authorization")
         if report["session_mutated"] is not False:
             failures.append("rejected attach must not mutate the live session")
-        if before != after:
-            failures.append("rejected attach must leave observer export unchanged")
+        if before["event_ids"] != after["event_ids"] or before["active_layers"] != after["active_layers"]:
+            failures.append("rejected attach must leave runtime event DAG and active layers unchanged")
+        if after["hotplug_events"] != ["hotplug:HP-A1-02:rejected"]:
+            failures.append("rejected attach must still become visible as a session observation")
     elif sample_id == "OA08-03":
         if report["terminal_outcome"] != "accepted_contract_update":
             failures.append("auth layer must use the accepted contract-update path")
@@ -255,22 +257,28 @@ def _validate_attach_row(sample_id: str, payload: dict[str, Any]) -> list[str]:
             failures.append("incompatible patch must reject on compatibility")
         if report["session_mutated"] is not False:
             failures.append("incompatible patch reject must not mutate the live session")
-        if before != after:
-            failures.append("incompatible patch reject must leave observer export unchanged")
+        if before["event_ids"] != after["event_ids"] or before["active_layers"] != after["active_layers"]:
+            failures.append("incompatible patch reject must leave runtime event DAG and active layers unchanged")
+        if after["hotplug_events"] != ["hotplug:HP-A1-05:rejected"]:
+            failures.append("incompatible patch reject must still become visible as a session observation")
     elif sample_id == "OA08-06":
         if report["reason_family"] != "membership_freshness":
             failures.append("stale-membership attach must reject on membership freshness")
         if report["session_mutated"] is not False:
             failures.append("stale-membership reject must not mutate the live session")
-        if before != after:
-            failures.append("stale-membership reject must leave observer export unchanged")
+        if before["event_ids"] != after["event_ids"] or before["active_layers"] != after["active_layers"]:
+            failures.append("stale-membership reject must leave runtime event DAG and active layers unchanged")
+        if after["hotplug_events"] != ["hotplug:HP-A1-04B1:rejected"]:
+            failures.append("stale-membership reject must still become visible as a session observation")
     elif sample_id == "OA08-07":
         if report["reason_family"] != "witness":
             failures.append("missing-witness attach must reject on witness evidence")
         if report["session_mutated"] is not False:
             failures.append("missing-witness reject must not mutate the live session")
-        if before != after:
-            failures.append("missing-witness reject must leave observer export unchanged")
+        if before["event_ids"] != after["event_ids"] or before["active_layers"] != after["active_layers"]:
+            failures.append("missing-witness reject must leave runtime event DAG and active layers unchanged")
+        if after["hotplug_events"] != ["hotplug:HP-A1-04B2:rejected"]:
+            failures.append("missing-witness reject must still become visible as a session observation")
     elif sample_id == "OA08-08":
         if report["terminal_outcome"] != "accepted_object_attach_preview":
             failures.append("object package attach must stay preview-only but accepted")
@@ -293,8 +301,10 @@ def _validate_fallback_row(payload: dict[str, Any]) -> list[str]:
         failures.append("unsupported runtime attach must reject on compatibility")
     if report["session_mutated"] is not False:
         failures.append("unsupported runtime rejection must not mutate the live session")
-    if before != after:
-        failures.append("unsupported runtime rejection must leave observer export unchanged")
+    if before["event_ids"] != after["event_ids"] or before["active_layers"] != after["active_layers"]:
+        failures.append("unsupported runtime rejection must leave runtime event DAG and active layers unchanged")
+    if after["hotplug_events"] != ["hotplug:AV-A1-03:rejected"]:
+        failures.append("unsupported runtime rejection must still become visible as a session observation")
     if preview["fallback_visible"] is not True:
         failures.append("avatar companion preview must keep fallback visibility explicit")
     if preview["fallback_reason"] != "missing_host_capability:HostMirAvatarVM":

@@ -17,6 +17,8 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   `crates/mir-runtime::practical_alpha05_host_io`, example `mir_practical_alpha05_session -- host-io`, `samples/practical-alpha1/packages/oa05-07-add-one-host-io`, and `OA05-07` add one minimal typed external `AddOne` direct execution lane without claiming same-session hot-plug completion.
 - `P-A1-21` widens the same session carrier into the bounded α-0.8 operational line here:
   `crates/mir-runtime::practical_alpha08_hotplug_session`, example `mir_practical_alpha05_session -- attach`, `scripts/practical_alpha08_session_hotplug.py`, and `OA08-01..10` add same-session debug / auth / rate-limit / object preview / deferred detach rows without claiming α-0.9 live devtools completion.
+- `P-A1-22` widens the same session carrier into the bounded α-0.9 operational line here:
+  `crates/mir-runtime::practical_alpha09_devtools`, example `mir_practical_alpha05_session -- export-devtools`, `scripts/practical_alpha09_devtools.py`, and `OA09-01..09` add session-bound event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace without claiming final public viewer/telemetry ABI or product-ready alpha-1.
 - `P-A1-04a` adds the first practical hot-plug cut here:
   layer package fixtures with `alpha_local_hotplug_input` plus exact expected hot-plug reports.
 - `P-A1-04b` widens the same practical hot-plug cut here:
@@ -73,6 +75,16 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   - `RUN-04`: missing-witness rejection before local state mutation
 - `packages/oa05-*/`
   - `OA05-07`: bounded α-0.5 same-session `AddOne` host-I/O direct execution lane with observer-safe receipt summary
+- `scripts/practical_alpha09_devtools.py`
+  - `OA09-01`: event DAG live/session export
+  - `OA09-02`: local route trace over session dispatch records
+  - `OA09-03`: membership timeline over current and saved session frontiers
+  - `OA09-04`: witness relation export
+  - `OA09-05`: hot-plug lifecycle over accepted / rejected / deferred session observations
+  - `OA09-06`: fallback degradation without native execution
+  - `OA09-07`: save/load timeline over the session savepoint
+  - `OA09-08`: observer-safe redacted view with admin/debug kept-later marker
+  - `OA09-09`: retention/on-demand trace plus non-final static HTML viewer
 - `packages/hp-a1-*/`
   - `HP-A1-01`: debug layer attach accepted through manifest-driven hot-plug plan
   - `HP-A1-02`: non-admin debug attach rejected before activation cut
@@ -138,7 +150,7 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
-- The current root is still the first-floor fixture family; `practical_alpha05_session` and `practical_alpha08_session_hotplug` now consume it through same-session α-0.5 / α-0.8 carriers, but α-0.9 live/session-bound devtools remains a separate later gate.
+- The current root is still the first-floor fixture family; `practical_alpha05_session`, `practical_alpha08_session_hotplug`, and `practical_alpha09_devtools` now consume it through same-session α-0.5 / α-0.8 / α-0.9 carriers, but final public viewer/telemetry ABI and product-ready alpha-1 remain later gates.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.

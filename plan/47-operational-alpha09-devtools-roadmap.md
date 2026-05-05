@@ -23,13 +23,21 @@ current repo also has useful live/session sources:
 
 - `practical_alpha05_session` observer-safe event DAG / host-I/O summary
 - `practical_alpha08_hotplug_session` same-session hot-plug lifecycle summary
+- `practical_alpha09_devtools` session-bound event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace export
+
+current repo now actualizes:
+
+- `OA09-01..09` as the bounded operational α-0.9 sample matrix
+- example command `mir_practical_alpha05_session -- export-devtools <session-path>`
+- script command `python3 scripts/practical_alpha09_devtools.py check-all --format json`
+- non-final static HTML session viewer via `render-html`
+- explicit `admin_debug_view_status = kept_later`
 
 current repo still lacks:
 
-- session-bound export source
-- explicit witness-relation panel
-- explicit save/load timeline panel
-- admin/full debug view or explicit kept-later marker in operational workflow
+- final public viewer / telemetry ABI
+- durable audit backend
+- remote retained-artifact retrieval / expiry lifecycle
 
 ## decisions mirrored from specs/22 / 24
 
@@ -42,15 +50,15 @@ current repo still lacks:
 
 | Operational need | Existing evidence | Missing for α-0.9 operational readiness |
 |---|---|---|
-| event DAG | `VIS-A1-01` | session source |
-| route trace | `VIS-A1-02` | session source |
-| membership timeline | `VIS-A1-03` | session source |
-| hot-plug lifecycle | `VIS-A1-04`, `OA08-10` | richer session source / viewer surface |
-| fallback degradation | `VIS-A1-05` | session source |
-| redacted observer view | `VIS-A1-06` | session source |
-| retention/on-demand | `VIS-A1-07` | session source |
-| witness relation | partial only | explicit panel |
-| save/load timeline | partial only | explicit panel |
+| event DAG | `VIS-A1-01`, `OA09-01` | none within bounded α-0.9 |
+| route trace | `VIS-A1-02`, `OA09-02` | WAN/federation route trace is later |
+| membership timeline | `VIS-A1-03`, `OA09-03` | distributed durable membership timeline is later |
+| hot-plug lifecycle | `VIS-A1-04`, `OA09-05` | accepted detach execution is later |
+| fallback degradation | `VIS-A1-05`, `OA09-06` | native avatar execution is later |
+| redacted observer view | `VIS-A1-06`, `OA09-08` | admin/full debug view is kept-later |
+| retention/on-demand | `VIS-A1-07`, `OA09-09` | durable audit / remote retrieval is later |
+| witness relation | `OA09-04` | raw witness payload export is not allowed |
+| save/load timeline | `OA09-07` | distributed durable save/load is later |
 
 ## sequencing
 
@@ -78,15 +86,16 @@ minimum operational panel family:
 
 future validation should include session-bound exports, not only exact expected bundle recomposition.
 
-illustrative future commands:
+current commands:
 
 ```bash
+cargo test -p mir-runtime --test practical_alpha09_devtools -- --nocapture
 python3 scripts/practical_alpha09_devtools.py check-all --format json
 python3 scripts/practical_alpha09_devtools.py render-html --format json
 python3 -m unittest scripts.tests.test_practical_alpha09_devtools
 ```
 
-`P-A1-21` still does not create these commands; it only supplies a bounded same-session hot-plug source.
+`P-A1-22` creates these commands and keeps them non-final.
 
 ## deferred
 
@@ -97,5 +106,4 @@ python3 -m unittest scripts.tests.test_practical_alpha09_devtools
 
 ## next reopen point
 
-α-0.9 should remain downstream of session carrier and same-session hot-plug runtime.
-Do not promote it as a standalone viewer-only package first.
+α-0.9 is now bounded operational-ready. The safest next package is not a viewer-only package, but a practical α-1 integrated workflow carrier that reuses the bounded α-0.5 / α-0.8 / α-0.9 line without claiming final public product readiness.

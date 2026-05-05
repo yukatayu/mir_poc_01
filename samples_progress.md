@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 10:18 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 runtime lines, and the remaining α-0.9 gap. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; the α-0.5 session carrier now consumes that root through minimal typed host-I/O plus same-session hot-plug lanes.
+Last updated: 2026-05-05 11:17 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, and bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; the α-0.5 session carrier now consumes that root through minimal typed host-I/O, same-session hot-plug lanes, and session-bound devtools export.
 
 ## Legend
 
@@ -28,7 +28,7 @@ Notes:
 |---|---:|---|---|---|
 | α-0.5 local observable runtime | 100 | bounded operational α-0.5 ready | `RUN-01..04`, `SL-A1-01/02/03`, `VIS-A1-01/03/05/06`, `OA05-01..07`, `specs/19..24`, `plan/45/48/49` | none within the bounded α-0.5 line |
 | α-0.8 same-session hot-plug runtime | 100 | bounded operational α-0.8 ready | `HP-A1-01..07`, `AV-A1-03`, `VIS-A1-04/05`, `OA08-01..10`, `crates/mir-runtime::practical_alpha08_hotplug_session`, `specs/21/22/24`, `plan/46/48/49` | none within the bounded α-0.8 line |
-| α-0.9 session-bound devtools | 20 | theory fixed, live export not yet operational | `VIS-A1-01..07`, viewer prototype, `specs/22/24`, `plan/47` | live event DAG / route trace / membership timeline / witness relation / redacted observer view / retention trace |
+| α-0.9 session-bound devtools | 100 | bounded operational α-0.9 ready | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | none within the bounded α-0.9 line |
 
 ## Practical alpha-1 first-floor map
 
@@ -62,7 +62,7 @@ Notes:
 | α-0.5 accepted local dispatch / stale membership reject / save-load resume / save-load stale-membership reject | `OA05-01/02/05`, `RUN-01/02`, `SL-A1-01/02` | bounded α-0.5 line では gap なし |
 | α-0.5 missing capability / missing witness / fallback degradation / observer-safe export | `OA05-03/04/06`, `RUN-03/04`, `VIS-A1-05/06` | bounded α-0.5 line では gap なし |
 | α-0.8 debug/auth/rate-limit/object attach / incompatible patch / deferred detach / lifecycle export | `OA08-01..10`, `HP-A1-01..07`, `VIS-A1-04/05` | bounded α-0.8 line では gap なし |
-| α-0.9 event DAG / route trace / membership timeline / witness relation / save-load timeline / redacted observer view / retention trace | `VIS-A1-01..07` | live/session export と witness relation row が無い |
+| α-0.9 event DAG / route trace / membership timeline / witness relation / save-load timeline / redacted observer view / retention trace | `OA09-01..09`, `VIS-A1-01..07` | bounded α-0.9 line では gap なし |
 | typed host-I/O minimal demo | `OA05-07`, `crates/mir-runtime::practical_alpha05_host_io` | bounded α-0.5 line では gap なし |
 
 ## Validation anchors for this package
@@ -73,6 +73,8 @@ Notes:
 - `cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha08_session_hotplug -- --nocapture`
+- `cargo test -p mir-runtime --test practical_alpha09_devtools -- --nocapture`
+- `python3 scripts/practical_alpha09_devtools.py check-all --format json`
 - `cargo fmt --check`
 - `git diff --check`
 
@@ -80,6 +82,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-05 11:17 JST | `P-A1-22` α-0.9 session-bound devtools export | pass | `cargo test -p mir-runtime --test practical_alpha09_devtools`、`python3 scripts/practical_alpha09_devtools.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha09_devtools` が pass |
 | 2026-05-05 10:18 JST | `P-A1-21` α-0.8 same-session hot-plug runtime | pass | `cargo test -p mir-runtime --test practical_alpha08_session_hotplug`、`python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha08_session_hotplug` が pass |
 | 2026-05-05 09:47 JST | `P-A1-20` typed host-I/O direct execution lane | pass | `cargo test -p mir-runtime --test practical_alpha05_host_io`、`cargo test -p mir-runtime --test practical_alpha05_session`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha05_session.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha05_session` が pass |
 | 2026-05-05 09:26 JST | `P-A1-19` session runtime carrier | pass | `cargo test -p mir-runtime --test practical_alpha1_local_runtime`、`cargo test -p mir-runtime --test practical_alpha05_session`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha05_session.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha05_session` が pass |

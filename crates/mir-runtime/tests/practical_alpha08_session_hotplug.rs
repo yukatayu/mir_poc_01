@@ -57,8 +57,17 @@ fn practical_alpha08_rejected_attach_leaves_session_frontier_unchanged() {
     assert_eq!(report.terminal_outcome, "rejected");
     assert_eq!(report.reason_family.as_deref(), Some("authorization"));
     assert!(!report.session_mutated);
-    assert_eq!(next_session, session);
-    assert!(report.observer_safe_export_after.hotplug_events.is_empty());
+    assert_eq!(next_session.runtime_snapshot, session.runtime_snapshot);
+    assert_eq!(next_session.event_dag, session.event_dag);
+    assert_eq!(next_session.active_layers, session.active_layers);
+    assert_eq!(
+        next_session.observer_safe_export.hotplug_events,
+        vec!["hotplug:HP-A1-02:rejected"]
+    );
+    assert_eq!(
+        report.observer_safe_export_after.hotplug_events,
+        vec!["hotplug:HP-A1-02:rejected"]
+    );
 }
 
 #[test]

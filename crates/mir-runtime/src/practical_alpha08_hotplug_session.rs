@@ -213,66 +213,48 @@ pub fn run_practical_alpha08_hotplug(
                     ],
                 });
         }
-
-        next.hotplug_lifecycle
-            .push(PracticalAlpha05SessionHotPlugLifecycleEntry {
-                sequence_id,
-                sample_id: source_report.sample_id.clone(),
-                package_id: source_report.package_id.clone(),
-                package_kind: source_report.package_kind.clone(),
-                attach_profile: source_report.attach_profile.clone(),
-                operation_kind: operation_kind.clone(),
-                terminal_outcome: source_report.terminal_outcome.clone(),
-                reason_family: source_report.reason_family.clone(),
-                rejection_reason_refs: source_report.rejection_reason_refs.clone(),
-                request_event_id: request_event_id.clone(),
-                verdict_event_id: verdict_event_id.clone(),
-                activation_cut_ref: source_report.activation_cut_ref.clone(),
-                detach_boundary_ref: source_report.detach_boundary_ref.clone(),
-                session_mutated: true,
-                active_layers_after: next.active_layers.clone(),
-                object_previews_after: object_preview_summaries(&next),
-                runtime_behavior_delta: runtime_behavior_delta.clone(),
-                devtools_delta: devtools_delta.clone(),
-                notes: lifecycle_notes(&source_report),
-            });
-        next.observer_safe_export = observe_practical_alpha05_session(&next);
     }
 
     if !session_mutated {
+        next.session_phase = "hotplug_observed".to_string();
+        next.same_session_hotplug_claimed = true;
         runtime_behavior_delta.clear();
         devtools_delta.clear();
     }
 
-    let observer_safe_export_after = if session_mutated {
-        next.observer_safe_export.clone()
-    } else {
-        observe_practical_alpha05_session(session)
-    };
-    let hotplug_event_ids_after = if session_mutated {
-        next.event_dag
-            .nodes
-            .iter()
-            .map(|node| node.event_id.clone())
-            .collect()
-    } else {
-        session
-            .event_dag
-            .nodes
-            .iter()
-            .map(|node| node.event_id.clone())
-            .collect()
-    };
-    let active_layers_after = if session_mutated {
-        next.active_layers.clone()
-    } else {
-        session.active_layers.clone()
-    };
-    let object_previews_after = if session_mutated {
-        object_preview_summaries(&next)
-    } else {
-        object_preview_summaries(session)
-    };
+    let active_layers_after = next.active_layers.clone();
+    let object_previews_after = object_preview_summaries(&next);
+    next.hotplug_lifecycle
+        .push(PracticalAlpha05SessionHotPlugLifecycleEntry {
+            sequence_id,
+            sample_id: source_report.sample_id.clone(),
+            package_id: source_report.package_id.clone(),
+            package_kind: source_report.package_kind.clone(),
+            attach_profile: source_report.attach_profile.clone(),
+            operation_kind: operation_kind.clone(),
+            terminal_outcome: source_report.terminal_outcome.clone(),
+            reason_family: source_report.reason_family.clone(),
+            rejection_reason_refs: source_report.rejection_reason_refs.clone(),
+            request_event_id: request_event_id.clone(),
+            verdict_event_id: verdict_event_id.clone(),
+            activation_cut_ref: source_report.activation_cut_ref.clone(),
+            detach_boundary_ref: source_report.detach_boundary_ref.clone(),
+            session_mutated,
+            active_layers_after: active_layers_after.clone(),
+            object_previews_after: object_previews_after.clone(),
+            runtime_behavior_delta: runtime_behavior_delta.clone(),
+            devtools_delta: devtools_delta.clone(),
+            notes: lifecycle_notes(&source_report),
+        });
+    next.observer_safe_export = observe_practical_alpha05_session(&next);
+
+    let observer_safe_export_after = next.observer_safe_export.clone();
+    let hotplug_event_ids_after = next
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_id.clone())
+        .collect();
 
     let report = PracticalAlpha08SessionHotPlugReport {
         surface_kind: surface_kind(),

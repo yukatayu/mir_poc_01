@@ -155,11 +155,15 @@ current repo has:
 - bounded α-0.5 same-session runtime carrier
 - minimal typed external host-I/O direct semantic execution lane
 - bounded α-0.8 same-session hot-plug runtime over the same carrier
+- bounded α-0.9 session-bound devtools export over the same carrier
 - exact report bundles and companion preview bundles
 
 current repo still lacks at least:
 
-- session-bound export source for devtools
+- final public viewer / telemetry ABI
+- durable audit backend
+- distributed durable save/load
+- product/public-ready alpha-1 boundary
 
 therefore:
 
@@ -168,7 +172,8 @@ therefore:
 - Stage E `100%` = current-scope evidence closeout
 - practical `RUN-*` / `HP-A1-*` / `TR-A1-*` / `SL-A1-*` / `VIS-A1-*` / `PE2E-*`
   = first-floor closeout
-- none of the above alone imply operational α-0.5 / α-0.8 / α-0.9 completion
+- `OA05-*` / `OA08-*` / `OA09-*` = bounded operational α-0.5 / α-0.8 / α-0.9 closeout rows
+- none of the above imply product/public-ready completion
 
 ## progress percentage reading
 
@@ -240,8 +245,8 @@ without overclaiming runtime breadth.
 
 current recommendation:
 
-- `P-A1-19`、`P-A1-20`、`P-A1-21` are now the bounded actualized operational sequence
-- promote `P-A1-22` next for α-0.9 session-bound devtools export
+- `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are now the bounded actualized operational sequence
+- promote a practical α-1 integrated workflow carrier next if continuing toward usability
 - keep final public viewer / telemetry / product runtime completion after that
 
 ## stop line

@@ -209,6 +209,24 @@ repository-memory roadmap を置く。
   - product prototype completion ではない
   - final public viewer / telemetry / runtime-devtools ABI ではない
 
+operational α-0.9 adjacent actualization after `P-A1-22`:
+
+- `crates/mir-runtime/src/practical_alpha09_devtools.rs`
+- example `crates/mir-runtime/examples/mir_practical_alpha05_session.rs` subcommand `export-devtools`
+- `scripts/practical_alpha09_devtools.py`
+- `crates/mir-runtime/tests/practical_alpha09_devtools.rs`
+- `scripts/tests/test_practical_alpha09_devtools.py`
+- current actualized rows:
+  - `OA09-01..09`
+- current carrier split:
+  `same practical session carrier + session-carried observation journal -> non-final session-bound devtools export -> non-final static viewer`
+- current non-claim:
+  - final public viewer / telemetry ABI ではない
+  - durable audit backend ではない
+  - remote retained-artifact retrieval ではない
+  - distributed durable save/load ではない
+  - product-ready alpha-1 ではない
+
 ### PA1-7 — local save/load command
 
 - practical save/load command
@@ -299,10 +317,16 @@ recommended current promoted line:
 16. `P-A1-15` practical retention-query export widening
 17. `P-A1-16` practical invalid distributed-cut save-load preflight
 18. `P-A1-17` practical save-load preview carrier alignment
+19. `P-A1-18` operational α theory freeze
+20. `P-A1-19` operational α-0.5 session runtime carrier
+21. `P-A1-20` typed external host-I/O direct execution lane
+22. `P-A1-21` operational α-0.8 same-session hot-plug runtime
+23. `P-A1-22` operational α-0.9 session-bound devtools export
 
-current reading after `P-A1-17`:
+current reading after `P-A1-22`:
 
 - `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13`、`P-A1-14`、`P-A1-15`、`P-A1-16`、`P-A1-17` are closed
+- `P-A1-18`、`P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are closed as the bounded operational α-0.5 / α-0.8 / α-0.9 sequence
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -343,6 +367,7 @@ current reading after `P-A1-17`:
 - `P-A1-15` actualizes `VIS-A1-07` only after widening the exact `SL-A1-02` save-load report with report-local `retained_artifacts` catalog evidence; it exports hit/miss query trace without adding durable catalog service, remote retrieval, or expiry lifecycle semantics
 - `P-A1-16` actualizes `SL-A1-03` as a checker-backed invalid distributed-cut preflight reject row over exact `CHK-CUT-01` evidence, before any saved local frontier is built
 - `P-A1-17` realigns `PE2E-06` so the product-preview lane consumes exact `SL-A1-03` save-load preflight evidence rather than direct checker evidence
+- `P-A1-22` actualizes `OA09-01..09` as bounded session-bound devtools export over the same α-0.5 / α-0.8 carrier, including witness relation, save-load timeline, redacted observer view, and retention/on-demand trace; it does not freeze final public viewer / telemetry ABI or product-ready alpha-1
 
 ## readiness reading
 

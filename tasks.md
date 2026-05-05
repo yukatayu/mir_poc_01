@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 10:18 JST
+最終更新: 2026-05-05 11:17 JST
 
 ## この文書について
 
@@ -21,6 +21,8 @@
   `crates/mir-runtime::practical_alpha05_host_io`、example `mir_practical_alpha05_session -- host-io`、`samples/practical-alpha1/packages/oa05-07-add-one-host-io`、`OA05-07` により、typed external `AddOne` direct execution lane を同じ session carrier、event DAG、observer-safe export に接続しました。
 - `P-A1-21` により bounded operational α-0.8 line は actualize 済みです:
   `crates/mir-runtime::practical_alpha08_hotplug_session`、example `mir_practical_alpha05_session -- attach`、`scripts/practical_alpha08_session_hotplug.py`、`OA08-01..10` により、debug / auth / rate-limit / object preview / unsupported-runtime fallback companion source / deferred detach boundary を α-0.5 session carrier 上で same-session accepted/rejected/deferred / activation cut / observer-safe lifecycle summary に接続しました。
+- `P-A1-22` により bounded operational α-0.9 line は actualize 済みです:
+  `crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` により、event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を同じ session carrier から export できるようにしました。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -30,17 +32,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-22` α-0.9 session-bound devtools export | `Macro 7`, `S5 -> S6` | same-session α-0.5 / α-0.8 carrier から event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / save-load timeline / redacted observer view を live export する | same-session runtime に対応した session-bound export source と non-final viewer / export surface を確認できる | heavy |
+| 1 | `P-A1-23` practical α-1 integrated workflow carrier | `Macro 7`, `S6` | existing first-floor front-door / checker / session runtime / host-I/O / hot-plug / save-load / devtools / product-preview evidence を 1 つの bounded practical workflow に束ねる | source package から check -> same-session run -> host-I/O -> attach -> save/load -> devtools viewer -> preview summary を再現でき、final public/product-ready ではないことを明示する | heavy |
 | 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-22` α-0.9 session-bound devtools export
+  `P-A1-23` practical α-1 integrated workflow carrier
 - recommendation reason:
-  bounded operational α-0.5 / α-0.8 は揃ったため、次の実質 gap は route trace / membership timeline / witness relation / save-load timeline / redacted observer view を same session の export source へ束ねる α-0.9 line に移った
+  bounded operational α-0.5 / α-0.8 / α-0.9 は揃ったため、次の実質 gap は first-floor practical α-1 pieces を developer workflow として束ね、product/public-ready と混同しない形で practical usability を検証することに移った
 - stop line:
-  `P-A1-22` の scopeでも distributed durable save/load、final public viewer/telemetry ABI、product/public runtime complete へ踏み込まない
+  `P-A1-23` の scopeでも final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、product/public runtime complete へ踏み込まない
 
 ## research-discovery items
 
@@ -49,6 +51,7 @@
 | proof side discharge granularity | `plan/48` と external prover bridge に影響 | obligation family を coarse に束ねる / static-row ごとに細かく切る | まずは `specs/19` の residual obligation carrier を保ち、proof target 側で coarse-to-fine に展開する |
 | distributed durable save/load line | `specs/20` の後段 family に影響 | local-only line のまま保つ / distributed durable family を reopen する | current promoted reopen point では扱わない。α-0.5 / α-0.8 same-session line 完了後に再評価する |
 | auth policy catalog breadth | `specs/21` と host/runtime package line に影響 | minimal stdlib-like initial set / broader policy catalog | minimal initial set から始め、policy breadth は same-session attach line の実 evidence に合わせて widen する |
+| integrated practical workflow boundary | `specs/18` の practical α-1 読みに影響 | one bounded workflow carrier / final public toolchain claim | bounded workflow carrier を先に作り、final public toolchain claim はしない |
 
 ## user decision items
 
@@ -69,4 +72,4 @@
 
 - `P-A0-23` / Stage B local runtime closeout は `100% current-scope evidence closeout` reference であり、operational α-0.5 same-session runtime package ではない
 - `P-A0-25` / Stage D lifecycle closeout は `100% current-scope evidence closeout` reference であり、operational α-0.8 same-session hot-plug runtime package ではない
-- `P-A0-26` / Stage E devtools closeout は `100% current-scope evidence closeout` reference であり、operational α-0.9 session-bound devtools package ではない
+- `P-A0-26` / Stage E devtools closeout は `100% current-scope evidence closeout` reference であり、`P-A1-22` bounded operational α-0.9 session-bound devtools package とは別 category である
