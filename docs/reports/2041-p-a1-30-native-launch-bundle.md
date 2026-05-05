@@ -221,7 +221,9 @@ Updated. It now lists `build-native-bundle` as the validation anchor for the nat
 
 ## Commit / push status
 
-Pending at report creation.
+- Implementation commit: `f332810 mirrorea: close P-A1-30 native launch bundle`
+- Push status: pushed to `main`.
+- Report metadata follow-up commit: pending.
 
 ## Sub-agent session close status
 
