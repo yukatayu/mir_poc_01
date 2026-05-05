@@ -10,7 +10,9 @@ use std::{
 use mir_ast::product_alpha1::{ProductAlpha1Error, check_product_alpha1_package_path};
 use mir_runtime::product_alpha1_session::{
     ProductAlpha1SessionCarrier, ProductAlpha1SessionError,
-    attach_product_alpha1_package_to_session_path, run_product_alpha1_local_session_path,
+    attach_product_alpha1_package_to_session_path, load_product_alpha1_session,
+    quiescent_save_product_alpha1_session, run_product_alpha1_local_session_path,
+    save_product_alpha1_session,
 };
 use serde_json::{Value, json};
 
@@ -37,14 +39,12 @@ fn run(args: Vec<String>) -> i32 {
         "run-local" => handle_run_local(rest),
         "session" => handle_session(rest),
         "attach" => handle_attach(rest),
-        "transport"
-        | "save"
-        | "load"
-        | "quiescent-save"
-        | "export-devtools"
-        | "view"
-        | "build-native-bundle"
-        | "demo" => (unsupported_command_payload(&command, rest), 2),
+        "save" => handle_save(rest),
+        "load" => handle_load(rest),
+        "quiescent-save" => handle_quiescent_save(rest),
+        "transport" | "export-devtools" | "view" | "build-native-bundle" | "demo" => {
+            (unsupported_command_payload(&command, rest), 2)
+        }
         _ => (
             json!({
                 "status": "unsupported",
@@ -270,6 +270,238 @@ fn handle_attach(args: &[String]) -> (Value, i32) {
     }
 }
 
+fn handle_save(args: &[String]) -> (Value, i32) {
+    let (session_id, savepoint_id) = match parse_session_savepoint_args("save", args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let session_path = session_path_for(&session_id);
+    let _lock = match acquire_session_lock(&session_path) {
+        Ok(lock) => lock,
+        Err(error) => return (io_error_payload("save", error), 2),
+    };
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => return (io_error_payload("save", error), 2),
+    };
+
+    match save_product_alpha1_session(&session, &savepoint_id) {
+        Ok((next_session, report)) => write_session_report_payload("save", next_session, report),
+        Err(error) => (runtime_error_payload("save", error), 2),
+    }
+}
+
+fn handle_load(args: &[String]) -> (Value, i32) {
+    let load_args = match parse_load_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let session_id = match load_args.session_id {
+        Some(session_id) => session_id,
+        None => match find_session_id_for_savepoint(&load_args.savepoint_id) {
+            Ok(session_id) => session_id,
+            Err(error) => return (io_error_payload("load", error), 2),
+        },
+    };
+    let session_path = session_path_for(&session_id);
+    let _lock = match acquire_session_lock(&session_path) {
+        Ok(lock) => lock,
+        Err(error) => return (io_error_payload("load", error), 2),
+    };
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => return (io_error_payload("load", error), 2),
+    };
+
+    match load_product_alpha1_session(&session, &load_args.savepoint_id) {
+        Ok((next_session, report)) => write_session_report_payload("load", next_session, report),
+        Err(error) => (runtime_error_payload("load", error), 2),
+    }
+}
+
+fn handle_quiescent_save(args: &[String]) -> (Value, i32) {
+    let (session_id, savepoint_id) = match parse_session_savepoint_args("quiescent-save", args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let session_path = session_path_for(&session_id);
+    let _lock = match acquire_session_lock(&session_path) {
+        Ok(lock) => lock,
+        Err(error) => return (io_error_payload("quiescent-save", error), 2),
+    };
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => return (io_error_payload("quiescent-save", error), 2),
+    };
+
+    match quiescent_save_product_alpha1_session(&session, &savepoint_id) {
+        Ok((next_session, report)) => {
+            let success = report.terminal_outcome == "saved";
+            let (payload, _) = write_session_report_payload("quiescent-save", next_session, report);
+            (payload, if success { 0 } else { 2 })
+        }
+        Err(error) => (runtime_error_payload("quiescent-save", error), 2),
+    }
+}
+
+fn write_session_report_payload<T: serde::Serialize>(
+    command: &str,
+    next_session: ProductAlpha1SessionCarrier,
+    report: T,
+) -> (Value, i32) {
+    match write_session_unlocked(&next_session) {
+        Ok(session_path) => {
+            let mut value = serde_json::to_value(report)
+                .expect("product alpha-1 session mutation report should serialize");
+            let session_payload = if matches!(command, "save" | "load" | "quiescent-save") {
+                observer_safe_session_payload(&next_session)
+            } else {
+                serde_json::to_value(next_session)
+                    .expect("product alpha-1 session should serialize")
+            };
+            insert_value(&mut value, "session", session_payload);
+            insert_string(
+                &mut value,
+                "session_path",
+                session_path.display().to_string(),
+            );
+            (value, 0)
+        }
+        Err(error) => (io_error_payload(command, error), 2),
+    }
+}
+
+fn observer_safe_session_payload(session: &ProductAlpha1SessionCarrier) -> Value {
+    json!({
+        "surface_kind": session.surface_kind.clone(),
+        "session_id": session.session_id.clone(),
+        "phase": session.phase.clone(),
+        "package_id": session.package_id.clone(),
+        "active_layers": session.active_layers.clone(),
+        "save_load_state": {
+            "ordinary_save_ready": session.save_load_state.ordinary_save_ready,
+            "quiescent_save_ready": session.save_load_state.quiescent_save_ready,
+            "local_savepoint_refs": session.save_load_state.local_savepoint_refs.clone(),
+            "declared_savepoint_classes": session.save_load_state.declared_savepoint_classes.clone(),
+            "required_quiescent_obligations": session.save_load_state.required_quiescent_obligations.clone(),
+            "quiescence_state": {
+                "sealed_place_refs": session.save_load_state.quiescence_state.sealed_place_refs.clone(),
+                "post_cut_send_guard_enabled": session.save_load_state.quiescence_state.post_cut_send_guard_enabled,
+                "rejected_post_cut_sends": session.save_load_state.quiescence_state.rejected_post_cut_sends.clone(),
+            },
+            "residual_reason": session.save_load_state.residual_reason.clone(),
+        },
+        "message_recovery_summary": {
+            "handled_failures": session.message_recovery_state.handled_failures.clone(),
+            "recovery_policy": session.message_recovery_state.recovery_policy.clone(),
+            "failure_observation_count": session.message_recovery_state.failure_observations.len(),
+            "runtime_recovery_claimed": session.message_recovery_state.runtime_recovery_claimed,
+        },
+        "observer_safe_export": session.observer_safe_export.clone(),
+        "product_alpha1_ready": session.product_alpha1_ready,
+        "final_public_api_frozen": session.final_public_api_frozen,
+    })
+}
+
+fn parse_session_savepoint_args(
+    command: &str,
+    args: &[String],
+) -> Result<(String, String), (Value, i32)> {
+    let Some(session_id) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": command,
+                "diagnostic_code": "missing_session_id",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    if is_direct_mir_path(session_id) {
+        return Err((direct_mir_non_goal_payload(command, true), 2));
+    }
+
+    let mut savepoint_id = "latest".to_string();
+    let mut index = 1;
+    while index < args.len() {
+        if args[index] == "--savepoint" {
+            let Some(value) = args.get(index + 1) else {
+                return Err((unexpected_arguments_payload(command, &args[index..]), 2));
+            };
+            savepoint_id = value.clone();
+            index += 2;
+        } else {
+            return Err((unexpected_arguments_payload(command, &args[index..]), 2));
+        }
+    }
+
+    if savepoint_id == "latest" && command != "load" {
+        savepoint_id = if command == "quiescent-save" {
+            "savepoint#r2-latest".to_string()
+        } else {
+            "savepoint#r0-latest".to_string()
+        };
+    }
+
+    Ok((session_id.clone(), savepoint_id))
+}
+
+struct LoadArgs {
+    session_id: Option<String>,
+    savepoint_id: String,
+}
+
+fn parse_load_args(args: &[String]) -> Result<LoadArgs, (Value, i32)> {
+    let Some(first) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "load",
+                "diagnostic_code": "missing_savepoint_id",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    if is_direct_mir_path(first) {
+        return Err((direct_mir_non_goal_payload("load", true), 2));
+    }
+
+    let mut session_id = None;
+    let mut savepoint_id = first.clone();
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--session" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload("load", &args[index..]), 2));
+                };
+                session_id = Some(value.clone());
+                index += 2;
+            }
+            "--savepoint" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload("load", &args[index..]), 2));
+                };
+                session_id = Some(first.clone());
+                savepoint_id = value.clone();
+                index += 2;
+            }
+            _ => return Err((unexpected_arguments_payload("load", &args[index..]), 2)),
+        }
+    }
+
+    Ok(LoadArgs {
+        session_id,
+        savepoint_id,
+    })
+}
+
 fn unsupported_command_payload(command: &str, args: &[String]) -> Value {
     if args.iter().any(|arg| is_direct_mir_path(arg)) {
         return direct_mir_non_goal_payload(command, false);
@@ -388,6 +620,43 @@ fn read_session(session_id: &str) -> Result<ProductAlpha1SessionCarrier, io::Err
 fn read_session_unlocked(path: &Path) -> Result<ProductAlpha1SessionCarrier, io::Error> {
     let text = fs::read_to_string(path)?;
     serde_json::from_str(&text).map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
+}
+
+fn find_session_id_for_savepoint(savepoint_id: &str) -> Result<String, io::Error> {
+    let dir = session_dir();
+    let mut matches = Vec::new();
+    for entry in fs::read_dir(&dir)? {
+        let entry = entry?;
+        let path = entry.path();
+        if path.extension().and_then(|value| value.to_str()) != Some("json") {
+            continue;
+        }
+        let Ok(session) = read_session_unlocked(&path) else {
+            continue;
+        };
+        if session
+            .savepoints
+            .iter()
+            .any(|savepoint| savepoint.savepoint_id == savepoint_id)
+            || (savepoint_id == "latest"
+                && !session.save_load_state.local_savepoint_refs.is_empty())
+        {
+            matches.push(session.session_id);
+        }
+    }
+    matches.sort();
+    matches.dedup();
+    match matches.as_slice() {
+        [session_id] => Ok(session_id.clone()),
+        [] => Err(io::Error::new(
+            io::ErrorKind::NotFound,
+            format!("no product alpha-1 session contains savepoint `{savepoint_id}`"),
+        )),
+        _ => Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!("savepoint `{savepoint_id}` is ambiguous across sessions; pass --session"),
+        )),
+    }
 }
 
 fn write_session(session: &ProductAlpha1SessionCarrier) -> Result<PathBuf, io::Error> {

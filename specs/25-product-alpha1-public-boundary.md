@@ -400,7 +400,7 @@ The promoted product alpha-1 package line is:
 2. `P-A1-26` alpha CLI / package schema stabilization
 3. `P-A1-27` product demo same-session runtime
 4. `P-A1-28` message failure/recovery + quiescent-save first cut
-5. `P-A1-29` product devtools viewer UX
+5. `P-A1-29` product local/Docker transport plus devtools viewer UX
 6. `P-A1-30` native launch bundle
 7. `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout
 

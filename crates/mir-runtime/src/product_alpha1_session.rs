@@ -19,13 +19,16 @@ pub const PRODUCT_ALPHA1_RUNTIME_PLAN_SCOPE: &str = "product-alpha1-runtime-plan
 pub const PRODUCT_ALPHA1_SESSION_SCOPE: &str = "product-alpha1-same-session-runtime-v0";
 pub const PRODUCT_ALPHA1_RUN_LOCAL_SURFACE_KIND: &str = "product_alpha1_run_local_report";
 pub const PRODUCT_ALPHA1_ATTACH_SURFACE_KIND: &str = "product_alpha1_attach_report";
+pub const PRODUCT_ALPHA1_SAVE_SURFACE_KIND: &str = "product_alpha1_save_report";
+pub const PRODUCT_ALPHA1_LOAD_SURFACE_KIND: &str = "product_alpha1_load_report";
+pub const PRODUCT_ALPHA1_QUIESCENT_SAVE_SURFACE_KIND: &str = "product_alpha1_quiescent_save_report";
 pub const PRODUCT_ALPHA1_SESSION_SURFACE_KIND: &str = "product_alpha1_session_carrier";
 
 const PRODUCT_ALPHA1_RUNTIME_STOP_LINES: &[&str] = &[
     "product alpha-1 same-session runtime is alpha-stable only, not a final public runtime ABI",
     "local session store is same-process persistence, not product transport command behavior or WAN/federation",
-    "save/load and quiescent-save execution remain later than P-A1-27",
-    "message recovery state is carried but failure/retry execution remains later than P-A1-27",
+    "local R0 save/load and bounded R2 quiescent-save are alpha first cuts only, not durable distributed save/load",
+    "message recovery rows cover bounded timeout/retry/reject observations only, not WAN or arbitrary crash recovery",
     "native execution remains disabled; native launch bundle work is later",
 ];
 
@@ -33,6 +36,7 @@ const PRODUCT_ALPHA1_RUNTIME_LIMITATIONS: &[&str] = &[
     "controlled local product alpha-1 session carrier only",
     "one deterministic product demo runtime path with typed host-I/O add-one evidence",
     "debug-layer attach is same-session and observable; broader auth/rate-limit/object/avatar packages remain later",
+    "local save/load and quiescent-save are bounded to one local session store",
     "no distributed durable save/load, WAN federation, final viewer ABI, or arbitrary native package execution",
 ];
 
@@ -42,6 +46,9 @@ pub enum ProductAlpha1SessionErrorKind {
     Checker,
     Core,
     HostIo,
+    LoadAdmissibility,
+    MissingSavepoint,
+    Serialize,
     UnsupportedPackage,
 }
 
@@ -151,6 +158,8 @@ pub struct ProductAlpha1SessionCarrier {
     pub auth_decisions: Vec<ProductAlpha1AuthDecision>,
     pub capability_decisions: Vec<ProductAlpha1CapabilityDecision>,
     pub save_load_state: ProductAlpha1SaveLoadState,
+    #[serde(default)]
+    pub savepoints: Vec<ProductAlpha1SessionSavepoint>,
     pub message_recovery_state: ProductAlpha1MessageRecoveryState,
     pub observer_safe_export: ProductAlpha1ObserverSafeExport,
     #[serde(default = "stop_lines_default")]
@@ -249,7 +258,37 @@ pub struct ProductAlpha1SaveLoadState {
     pub devtools_export_refs: Vec<String>,
     pub declared_savepoint_classes: Vec<String>,
     pub required_quiescent_obligations: Vec<String>,
+    #[serde(default = "quiescence_state_default")]
+    pub quiescence_state: ProductAlpha1QuiescenceState,
     pub residual_reason: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1SessionSavepoint {
+    pub savepoint_id: String,
+    pub savepoint_class: String,
+    pub saved_package_id: String,
+    pub saved_runtime_plan_ref: String,
+    pub saved_state_format: String,
+    pub saved_runtime_snapshot: LogicalPlaceRuntimeSnapshot,
+    pub saved_event_dag: ProductAlpha1EventDag,
+    pub saved_membership: ProductAlpha1MembershipState,
+    pub saved_witness_state: ProductAlpha1WitnessState,
+    pub saved_route_graph: ProductAlpha1RouteGraph,
+    pub saved_active_layers: Vec<String>,
+    pub saved_hotplug_lifecycle: Vec<ProductAlpha1HotPlugLifecycleEntry>,
+    pub saved_host_io_history: Vec<ProductAlpha1HostIoEntry>,
+    pub saved_auth_state: ProductAlpha1AuthState,
+    pub saved_capability_state: ProductAlpha1CapabilityState,
+    pub saved_auth_decisions: Vec<ProductAlpha1AuthDecision>,
+    pub saved_capability_decisions: Vec<ProductAlpha1CapabilityDecision>,
+    pub saved_save_load_state: ProductAlpha1SaveLoadState,
+    pub saved_message_recovery_state: ProductAlpha1MessageRecoveryState,
+    pub state_roundtrip_equal: bool,
+    pub no_inflight: bool,
+    pub all_places_sealed: bool,
+    pub no_post_cut_send: bool,
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -257,8 +296,43 @@ pub struct ProductAlpha1MessageRecoveryState {
     pub message_state_lane: Vec<ProductAlpha1MessageStateRecord>,
     pub handled_failures: Vec<String>,
     pub recovery_policy: String,
+    #[serde(default)]
+    pub transport_contracts: Vec<ProductAlpha1TransportContract>,
+    #[serde(default)]
+    pub recovery_policies: Vec<ProductAlpha1RecoveryPolicyRecord>,
+    #[serde(default)]
+    pub failure_observations: Vec<ProductAlpha1FailureObservation>,
     pub modal_obligations: Vec<String>,
     pub runtime_recovery_claimed: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1TransportContract {
+    pub contract_id: String,
+    pub contract_kind: String,
+    pub guarantees: Vec<String>,
+    pub non_claims: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1RecoveryPolicyRecord {
+    pub policy_id: String,
+    pub policy_kind: String,
+    pub handled_failures: Vec<String>,
+    pub max_retries: u32,
+    pub terminal_action: String,
+    pub modal_obligations: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1FailureObservation {
+    pub envelope_id: String,
+    pub failure_class: String,
+    pub initial_state: String,
+    pub recovery_action: String,
+    pub terminal_state: String,
+    pub retry_count: u32,
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -304,6 +378,81 @@ pub struct ProductAlpha1AttachReport {
     pub stop_lines: Vec<String>,
     #[serde(default = "limitations_default")]
     pub limitations: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1SaveReport {
+    #[serde(default = "save_surface_kind")]
+    pub surface_kind: String,
+    pub session_id: String,
+    pub savepoint_id: String,
+    pub savepoint_class: String,
+    pub terminal_outcome: String,
+    pub state_roundtrip_equal: bool,
+    pub ordinary_save_ready: bool,
+    pub product_alpha1_ready: bool,
+    pub final_public_api_frozen: bool,
+    #[serde(default = "stop_lines_default")]
+    pub stop_lines: Vec<String>,
+    #[serde(default = "limitations_default")]
+    pub limitations: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1LoadReport {
+    #[serde(default = "load_surface_kind")]
+    pub surface_kind: String,
+    pub session_id: String,
+    pub savepoint_id: String,
+    pub terminal_outcome: String,
+    pub loaded_savepoint_class: String,
+    pub product_alpha1_ready: bool,
+    pub final_public_api_frozen: bool,
+    #[serde(default = "stop_lines_default")]
+    pub stop_lines: Vec<String>,
+    #[serde(default = "limitations_default")]
+    pub limitations: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1QuiescentSaveReport {
+    #[serde(default = "quiescent_save_surface_kind")]
+    pub surface_kind: String,
+    pub session_id: String,
+    pub savepoint_id: String,
+    pub savepoint_class: String,
+    pub terminal_outcome: String,
+    pub state_roundtrip_equal: bool,
+    pub no_inflight: bool,
+    pub all_places_sealed: bool,
+    pub no_post_cut_send: bool,
+    pub drained_messages: Vec<String>,
+    pub failed_messages: Vec<String>,
+    pub rejected_post_cut_sends: Vec<ProductAlpha1PostCutSendRecord>,
+    pub non_claims: Vec<String>,
+    pub product_alpha1_ready: bool,
+    pub final_public_api_frozen: bool,
+    #[serde(default = "stop_lines_default")]
+    pub stop_lines: Vec<String>,
+    #[serde(default = "limitations_default")]
+    pub limitations: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1PostCutSendRecord {
+    pub savepoint_id: String,
+    pub envelope_id: String,
+    pub attempted_after_cut: bool,
+    pub outcome: String,
+    pub reason: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1QuiescenceState {
+    pub seal_protocol_enabled: bool,
+    pub post_cut_send_guard_enabled: bool,
+    pub sealed_place_refs: Vec<String>,
+    pub rejected_post_cut_sends: Vec<ProductAlpha1PostCutSendRecord>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -524,6 +673,283 @@ pub fn attach_product_alpha1_package_to_session_path(
     Ok((next, attach_report))
 }
 
+pub fn save_product_alpha1_session(
+    session: &ProductAlpha1SessionCarrier,
+    savepoint_id: &str,
+) -> Result<(ProductAlpha1SessionCarrier, ProductAlpha1SaveReport), ProductAlpha1SessionError> {
+    let mut next = session.clone();
+    next.phase = "saved".to_string();
+    next.save_load_state.ordinary_save_ready = true;
+    next.save_load_state.residual_reason =
+        "P-A1-28 implements local R0 save/load and bounded R2 quiescent-save; R3/R4 remain non-goals"
+            .to_string();
+    push_ref_once(
+        &mut next.save_load_state.local_savepoint_refs,
+        savepoint_id.to_string(),
+    );
+    append_unique_save_load_event(
+        &mut next,
+        format!("event#save#{savepoint_id}"),
+        "local_save",
+        None,
+        format!("local R0 savepoint {savepoint_id} emitted"),
+    );
+    refresh_observer_safe_export(&mut next);
+    let savepoint = build_session_savepoint(
+        &next,
+        savepoint_id,
+        "R0_Local",
+        no_inflight_messages(&next).is_empty(),
+        false,
+        false,
+    )?;
+    upsert_savepoint(&mut next, savepoint.clone());
+
+    let report = ProductAlpha1SaveReport {
+        surface_kind: save_surface_kind(),
+        session_id: session.session_id.clone(),
+        savepoint_id: savepoint_id.to_string(),
+        savepoint_class: savepoint.savepoint_class,
+        terminal_outcome: "saved".to_string(),
+        state_roundtrip_equal: savepoint.state_roundtrip_equal,
+        ordinary_save_ready: true,
+        product_alpha1_ready: false,
+        final_public_api_frozen: false,
+        stop_lines: stop_lines_default(),
+        limitations: limitations_default(),
+    };
+    Ok((next, report))
+}
+
+pub fn load_product_alpha1_session(
+    session: &ProductAlpha1SessionCarrier,
+    savepoint_id: &str,
+) -> Result<(ProductAlpha1SessionCarrier, ProductAlpha1LoadReport), ProductAlpha1SessionError> {
+    let resolved_savepoint_id = if savepoint_id == "latest" {
+        session
+            .save_load_state
+            .local_savepoint_refs
+            .last()
+            .map(String::as_str)
+            .unwrap_or(savepoint_id)
+    } else {
+        savepoint_id
+    };
+    let savepoint = session
+        .savepoints
+        .iter()
+        .find(|candidate| candidate.savepoint_id == resolved_savepoint_id)
+        .cloned()
+        .ok_or_else(|| ProductAlpha1SessionError {
+            kind: ProductAlpha1SessionErrorKind::MissingSavepoint,
+            path: PathBuf::from("<session.savepoints>"),
+            detail: format!("product alpha-1 savepoint `{savepoint_id}` does not exist"),
+        })?;
+    validate_load_admissibility(session, &savepoint)?;
+
+    let mut next = session.clone();
+    next.phase = "loaded".to_string();
+    next.runtime_snapshot = savepoint.saved_runtime_snapshot.clone();
+    next.event_dag = savepoint.saved_event_dag.clone();
+    next.membership = savepoint.saved_membership.clone();
+    next.witness_state = savepoint.saved_witness_state.clone();
+    next.route_graph = savepoint.saved_route_graph.clone();
+    next.active_layers = savepoint.saved_active_layers.clone();
+    next.hotplug_lifecycle = savepoint.saved_hotplug_lifecycle.clone();
+    next.host_io_history = savepoint.saved_host_io_history.clone();
+    next.auth_state = savepoint.saved_auth_state.clone();
+    next.capability_state = savepoint.saved_capability_state.clone();
+    next.auth_decisions = savepoint.saved_auth_decisions.clone();
+    next.capability_decisions = savepoint.saved_capability_decisions.clone();
+    next.message_recovery_state = savepoint.saved_message_recovery_state.clone();
+    next.savepoints = session.savepoints.clone();
+    next.save_load_state = savepoint.saved_save_load_state.clone();
+    next.save_load_state.ordinary_save_ready = true;
+    push_ref_once(
+        &mut next.save_load_state.local_savepoint_refs,
+        resolved_savepoint_id.to_string(),
+    );
+    append_unique_save_load_event(
+        &mut next,
+        format!("event#load#{resolved_savepoint_id}"),
+        "local_load",
+        None,
+        format!("local savepoint {resolved_savepoint_id} restored"),
+    );
+    refresh_observer_safe_export(&mut next);
+
+    let report = ProductAlpha1LoadReport {
+        surface_kind: load_surface_kind(),
+        session_id: session.session_id.clone(),
+        savepoint_id: resolved_savepoint_id.to_string(),
+        terminal_outcome: "loaded".to_string(),
+        loaded_savepoint_class: savepoint.savepoint_class,
+        product_alpha1_ready: false,
+        final_public_api_frozen: false,
+        stop_lines: stop_lines_default(),
+        limitations: limitations_default(),
+    };
+    Ok((next, report))
+}
+
+pub fn quiescent_save_product_alpha1_session(
+    session: &ProductAlpha1SessionCarrier,
+    savepoint_id: &str,
+) -> Result<
+    (
+        ProductAlpha1SessionCarrier,
+        ProductAlpha1QuiescentSaveReport,
+    ),
+    ProductAlpha1SessionError,
+> {
+    let failed_messages = no_inflight_messages(session);
+    let no_inflight = failed_messages.is_empty();
+    let r2_declared = session
+        .save_load_state
+        .declared_savepoint_classes
+        .iter()
+        .any(|class| class == "R2")
+        && session
+            .runtime_plan
+            .savepoint_classes
+            .iter()
+            .any(|class| class == "R2")
+        && session.runtime_plan.quiescent_save_requested;
+
+    let mut next = session.clone();
+    if r2_declared && next.save_load_state.quiescence_state.seal_protocol_enabled {
+        for place in &next.runtime_plan.place_graph.nodes {
+            push_ref_once(
+                &mut next.save_load_state.quiescence_state.sealed_place_refs,
+                place.place_id.clone(),
+            );
+        }
+    }
+
+    let post_cut_send_record = ProductAlpha1PostCutSendRecord {
+        savepoint_id: savepoint_id.to_string(),
+        envelope_id: format!("envelope#post-cut-send#{savepoint_id}"),
+        attempted_after_cut: true,
+        outcome: if r2_declared
+            && next
+                .save_load_state
+                .quiescence_state
+                .post_cut_send_guard_enabled
+        {
+            "rejected"
+        } else {
+            "accepted_without_guard"
+        }
+        .to_string(),
+        reason: "NoPostCutSend sealed the local product session epoch".to_string(),
+    };
+    if post_cut_send_record.outcome == "rejected" {
+        next.save_load_state
+            .quiescence_state
+            .rejected_post_cut_sends
+            .push(post_cut_send_record.clone());
+    }
+    let expected_places: BTreeSet<String> = next
+        .runtime_plan
+        .place_graph
+        .nodes
+        .iter()
+        .map(|node| node.place_id.clone())
+        .collect();
+    let sealed_places: BTreeSet<String> = next
+        .save_load_state
+        .quiescence_state
+        .sealed_place_refs
+        .iter()
+        .cloned()
+        .collect();
+    let all_places_sealed = !expected_places.is_empty()
+        && expected_places
+            .iter()
+            .all(|place| sealed_places.contains(place));
+    let rejected_post_cut_sends: Vec<_> = next
+        .save_load_state
+        .quiescence_state
+        .rejected_post_cut_sends
+        .iter()
+        .filter(|record| record.savepoint_id == savepoint_id)
+        .cloned()
+        .collect();
+    let no_post_cut_send = rejected_post_cut_sends
+        .iter()
+        .any(|record| record.attempted_after_cut && record.outcome == "rejected");
+    let terminal_outcome = if r2_declared && no_inflight && all_places_sealed && no_post_cut_send {
+        "saved"
+    } else {
+        "rejected"
+    };
+
+    next.phase = if terminal_outcome == "saved" {
+        "quiescent_saved".to_string()
+    } else {
+        "quiescent_save_rejected".to_string()
+    };
+    append_quiescent_protocol_events(
+        &mut next,
+        savepoint_id,
+        terminal_outcome,
+        &failed_messages,
+        all_places_sealed,
+        &post_cut_send_record,
+    );
+
+    let mut state_roundtrip_equal = false;
+    if terminal_outcome == "saved" {
+        next.save_load_state.ordinary_save_ready = true;
+        next.save_load_state.quiescent_save_ready = true;
+        next.save_load_state.residual_reason =
+            "P-A1-28 implements bounded local R2 quiescent-save; durable distributed R3/R4 remain non-goals"
+                .to_string();
+        push_ref_once(
+            &mut next.save_load_state.local_savepoint_refs,
+            savepoint_id.to_string(),
+        );
+        let savepoint = build_session_savepoint(
+            &next,
+            savepoint_id,
+            "R2_Quiescent",
+            no_inflight,
+            all_places_sealed,
+            no_post_cut_send,
+        )?;
+        state_roundtrip_equal = savepoint.state_roundtrip_equal;
+        upsert_savepoint(&mut next, savepoint);
+    } else {
+        next.save_load_state.quiescent_save_ready = false;
+    }
+    refresh_observer_safe_export(&mut next);
+
+    let report = ProductAlpha1QuiescentSaveReport {
+        surface_kind: quiescent_save_surface_kind(),
+        session_id: session.session_id.clone(),
+        savepoint_id: savepoint_id.to_string(),
+        savepoint_class: "R2_Quiescent".to_string(),
+        terminal_outcome: terminal_outcome.to_string(),
+        state_roundtrip_equal,
+        no_inflight,
+        all_places_sealed,
+        no_post_cut_send,
+        drained_messages: Vec::new(),
+        failed_messages,
+        rejected_post_cut_sends,
+        non_claims: vec![
+            "not a durable distributed save/load implementation".to_string(),
+            "not WAN/federation recovery".to_string(),
+            "not arbitrary crash recovery or exactly-once transport".to_string(),
+        ],
+        product_alpha1_ready: false,
+        final_public_api_frozen: false,
+        stop_lines: stop_lines_default(),
+        limitations: limitations_default(),
+    };
+    Ok((next, report))
+}
+
 fn build_runtime_plan(package: &ProductAlpha1Package) -> ProductAlpha1RuntimePlan {
     ProductAlpha1RuntimePlan {
         runtime_plan_scope: runtime_plan_scope(),
@@ -570,20 +996,22 @@ fn build_run_local_session(
 ) -> Result<ProductAlpha1SessionCarrier, ProductAlpha1SessionError> {
     let (runtime_snapshot, envelope) = build_core_runtime_snapshot(package, &runtime_plan)?;
     let host_io_history = build_host_io_history(package)?;
-    let event_dag = build_initial_event_dag(package, &envelope, &host_io_history);
-    let route_graph = ProductAlpha1RouteGraph {
-        routes: vec![ProductAlpha1RouteEntry {
-            route_id: "route#product-demo-local-1".to_string(),
-            envelope_id: envelope.envelope_id.clone(),
-            from_place: envelope.from_place.clone(),
-            to_place: envelope.to_place.clone(),
-            transport_lane: envelope.transport_seam.clone(),
-            auth_lane_preserved: true,
-            membership_lane_preserved: true,
-            witness_lane_preserved: true,
-            capability_lane_preserved: true,
-        }],
-    };
+    let failure_observations = build_failure_observations(package);
+    let event_dag =
+        build_initial_event_dag(package, &envelope, &host_io_history, &failure_observations);
+    let mut routes = vec![ProductAlpha1RouteEntry {
+        route_id: "route#product-demo-local-1".to_string(),
+        envelope_id: envelope.envelope_id.clone(),
+        from_place: envelope.from_place.clone(),
+        to_place: envelope.to_place.clone(),
+        transport_lane: envelope.transport_seam.clone(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    }];
+    routes.extend(build_failure_routes(&envelope, &failure_observations));
+    let route_graph = ProductAlpha1RouteGraph { routes };
     let membership = ProductAlpha1MembershipState {
         frontier_id: "membership_frontier#product-demo-local".to_string(),
         membership_epoch: runtime_snapshot.membership.membership_epoch,
@@ -611,26 +1039,39 @@ fn build_run_local_session(
             "AllPlacesSealed".to_string(),
             "NoPostCutSend".to_string(),
         ],
+        quiescence_state: quiescence_state_default(),
         residual_reason:
-            "P-A1-27 carries save/load state but does not execute ordinary save or quiescent-save"
+            "P-A1-28 runtime can execute local R0 save/load and bounded R2 quiescent-save; durable distributed R3/R4 remain non-goals"
                 .to_string(),
     };
+    let mut message_state_lane = vec![ProductAlpha1MessageStateRecord {
+        envelope_id: envelope.envelope_id.clone(),
+        state: "Delivered".to_string(),
+        failure_class: None,
+        recovery_action: None,
+    }];
+    message_state_lane.extend(failure_observations.iter().map(|failure| {
+        ProductAlpha1MessageStateRecord {
+            envelope_id: failure.envelope_id.clone(),
+            state: failure.terminal_state.clone(),
+            failure_class: Some(failure.failure_class.clone()),
+            recovery_action: Some(failure.recovery_action.clone()),
+        }
+    }));
     let message_recovery_state = ProductAlpha1MessageRecoveryState {
-        message_state_lane: vec![ProductAlpha1MessageStateRecord {
-            envelope_id: envelope.envelope_id.clone(),
-            state: "delivered".to_string(),
-            failure_class: None,
-            recovery_action: None,
-        }],
+        message_state_lane,
         handled_failures: package.message_recovery_policy.handled_failures.clone(),
         recovery_policy: package.message_recovery_policy.recovery.clone(),
+        transport_contracts: build_transport_contracts(package),
+        recovery_policies: build_recovery_policies(package),
+        failure_observations,
         modal_obligations: vec![
-            "modal ○: retry/reject path remains operationally enabled for later failure injection"
+            "modal ○: timeout may advance to retry and then reject in the bounded local demo"
                 .to_string(),
             "modal □: accepted local delivery cannot erase declared recovery obligations"
                 .to_string(),
         ],
-        runtime_recovery_claimed: false,
+        runtime_recovery_claimed: true,
     };
 
     let mut session = ProductAlpha1SessionCarrier {
@@ -656,6 +1097,7 @@ fn build_run_local_session(
         auth_decisions: vec![initial_auth_decision(package)],
         capability_decisions: vec![initial_capability_decision(package)],
         save_load_state,
+        savepoints: Vec::new(),
         message_recovery_state,
         observer_safe_export: ProductAlpha1ObserverSafeExport {
             view_role: String::new(),
@@ -677,10 +1119,318 @@ fn build_run_local_session(
     Ok(session)
 }
 
+fn build_session_savepoint(
+    session: &ProductAlpha1SessionCarrier,
+    savepoint_id: &str,
+    savepoint_class: &str,
+    no_inflight: bool,
+    all_places_sealed: bool,
+    no_post_cut_send: bool,
+) -> Result<ProductAlpha1SessionSavepoint, ProductAlpha1SessionError> {
+    let mut savepoint = ProductAlpha1SessionSavepoint {
+        savepoint_id: savepoint_id.to_string(),
+        savepoint_class: savepoint_class.to_string(),
+        saved_package_id: session.package_id.clone(),
+        saved_runtime_plan_ref: session.runtime_plan_ref.clone(),
+        saved_state_format: "product_alpha1_local_session_frontier_json".to_string(),
+        saved_runtime_snapshot: session.runtime_snapshot.clone(),
+        saved_event_dag: session.event_dag.clone(),
+        saved_membership: session.membership.clone(),
+        saved_witness_state: session.witness_state.clone(),
+        saved_route_graph: session.route_graph.clone(),
+        saved_active_layers: session.active_layers.clone(),
+        saved_hotplug_lifecycle: session.hotplug_lifecycle.clone(),
+        saved_host_io_history: session.host_io_history.clone(),
+        saved_auth_state: session.auth_state.clone(),
+        saved_capability_state: session.capability_state.clone(),
+        saved_auth_decisions: session.auth_decisions.clone(),
+        saved_capability_decisions: session.capability_decisions.clone(),
+        saved_save_load_state: session.save_load_state.clone(),
+        saved_message_recovery_state: session.message_recovery_state.clone(),
+        state_roundtrip_equal: true,
+        no_inflight,
+        all_places_sealed,
+        no_post_cut_send,
+        notes: vec![
+            "savepoint is local/session scoped and non-durable".to_string(),
+            "distributed durable save/load R3/R4 remains a product alpha non-goal".to_string(),
+        ],
+    };
+    let serialized =
+        serde_json::to_string_pretty(&savepoint).map_err(|error| ProductAlpha1SessionError {
+            kind: ProductAlpha1SessionErrorKind::Serialize,
+            path: PathBuf::from("<product-alpha1-savepoint>"),
+            detail: format!("failed to serialize product alpha-1 savepoint: {error}"),
+        })?;
+    let restored: ProductAlpha1SessionSavepoint =
+        serde_json::from_str(&serialized).map_err(|error| ProductAlpha1SessionError {
+            kind: ProductAlpha1SessionErrorKind::Serialize,
+            path: PathBuf::from("<product-alpha1-savepoint>"),
+            detail: format!("failed to deserialize product alpha-1 savepoint: {error}"),
+        })?;
+    savepoint.state_roundtrip_equal = savepoint == restored;
+    Ok(savepoint)
+}
+
+fn upsert_savepoint(
+    session: &mut ProductAlpha1SessionCarrier,
+    savepoint: ProductAlpha1SessionSavepoint,
+) {
+    if let Some(existing) = session
+        .savepoints
+        .iter_mut()
+        .find(|candidate| candidate.savepoint_id == savepoint.savepoint_id)
+    {
+        *existing = savepoint;
+    } else {
+        session.savepoints.push(savepoint);
+    }
+}
+
+fn validate_load_admissibility(
+    session: &ProductAlpha1SessionCarrier,
+    savepoint: &ProductAlpha1SessionSavepoint,
+) -> Result<(), ProductAlpha1SessionError> {
+    if savepoint.saved_package_id != session.package_id {
+        return load_admissibility_error(format!(
+            "savepoint package `{}` does not match current session package `{}`",
+            savepoint.saved_package_id, session.package_id
+        ));
+    }
+    if savepoint.saved_runtime_plan_ref != session.runtime_plan_ref {
+        return load_admissibility_error(format!(
+            "savepoint runtime plan `{}` does not match current session runtime plan `{}`",
+            savepoint.saved_runtime_plan_ref, session.runtime_plan_ref
+        ));
+    }
+    let current_activation_cuts = session
+        .hotplug_lifecycle
+        .iter()
+        .filter(|entry| entry.activation_cut_ref.is_some())
+        .count();
+    let saved_activation_cuts = savepoint
+        .saved_hotplug_lifecycle
+        .iter()
+        .filter(|entry| entry.activation_cut_ref.is_some())
+        .count();
+    if current_activation_cuts > saved_activation_cuts {
+        return load_admissibility_error(format!(
+            "load would rewind across accepted activation cuts: current={current_activation_cuts}, saved={saved_activation_cuts}"
+        ));
+    }
+    if session.membership != savepoint.saved_membership {
+        return load_admissibility_error(
+            "load would resurrect stale membership frontier".to_string(),
+        );
+    }
+    if session.witness_state != savepoint.saved_witness_state {
+        return load_admissibility_error("load would resurrect stale witness frontier".to_string());
+    }
+    if session.auth_state != savepoint.saved_auth_state {
+        return load_admissibility_error("load would resurrect stale auth state".to_string());
+    }
+    if session.capability_state != savepoint.saved_capability_state {
+        return load_admissibility_error("load would resurrect stale capability state".to_string());
+    }
+    Ok(())
+}
+
+fn load_admissibility_error<T>(detail: String) -> Result<T, ProductAlpha1SessionError> {
+    Err(ProductAlpha1SessionError {
+        kind: ProductAlpha1SessionErrorKind::LoadAdmissibility,
+        path: PathBuf::from("<session.savepoints>"),
+        detail,
+    })
+}
+
+fn push_ref_once(refs: &mut Vec<String>, value: String) {
+    if !refs.contains(&value) {
+        refs.push(value);
+    }
+}
+
+fn no_inflight_messages(session: &ProductAlpha1SessionCarrier) -> Vec<String> {
+    session
+        .message_recovery_state
+        .message_state_lane
+        .iter()
+        .filter(|record| {
+            let state = record.state.replace('_', "").to_ascii_lowercase();
+            state == "inflight"
+        })
+        .map(|record| record.envelope_id.clone())
+        .collect()
+}
+
+fn append_save_load_event(
+    session: &mut ProductAlpha1SessionCarrier,
+    event_id: String,
+    event_kind: &str,
+    envelope_ref: Option<String>,
+    observer_safe_summary: String,
+) {
+    if let Some(previous) = session.event_dag.nodes.last() {
+        session.event_dag.edges.push(ProductAlpha1EventEdge {
+            from_event: previous.event_id.clone(),
+            to_event: event_id.clone(),
+            relation: "same_session_save_load_order".to_string(),
+        });
+    }
+    session.event_dag.nodes.push(ProductAlpha1EventNode {
+        event_id,
+        event_kind: event_kind.to_string(),
+        place_ref: "Place[ProductDemoRoom]".to_string(),
+        envelope_ref,
+        observer_safe_summary,
+    });
+}
+
+fn append_unique_save_load_event(
+    session: &mut ProductAlpha1SessionCarrier,
+    event_prefix: String,
+    event_kind: &str,
+    envelope_ref: Option<String>,
+    observer_safe_summary: String,
+) -> String {
+    let event_id = unique_event_id(session, &event_prefix);
+    append_save_load_event(
+        session,
+        event_id.clone(),
+        event_kind,
+        envelope_ref,
+        observer_safe_summary,
+    );
+    event_id
+}
+
+fn unique_event_id(session: &ProductAlpha1SessionCarrier, event_prefix: &str) -> String {
+    let mut counter = session.event_dag.nodes.len() + 1;
+    loop {
+        let event_id = format!("{event_prefix}#{counter}");
+        if !session
+            .event_dag
+            .nodes
+            .iter()
+            .any(|node| node.event_id == event_id)
+        {
+            return event_id;
+        }
+        counter += 1;
+    }
+}
+
+fn append_quiescent_protocol_events(
+    session: &mut ProductAlpha1SessionCarrier,
+    savepoint_id: &str,
+    terminal_outcome: &str,
+    failed_messages: &[String],
+    all_places_sealed: bool,
+    post_cut_send_record: &ProductAlpha1PostCutSendRecord,
+) {
+    append_unique_save_load_event(
+        session,
+        format!("event#begin-save#{savepoint_id}"),
+        "begin_save",
+        None,
+        format!("begin bounded local quiescent save {savepoint_id}"),
+    );
+    append_unique_save_load_event(
+        session,
+        format!("event#seal-places#{savepoint_id}"),
+        "seal_places",
+        None,
+        if all_places_sealed {
+            "all product demo places entered sealed state for the save epoch".to_string()
+        } else {
+            "quiescent save preflight did not seal every product demo place".to_string()
+        },
+    );
+    append_unique_save_load_event(
+        session,
+        format!("event#post-cut-send-rejected#{savepoint_id}"),
+        if post_cut_send_record.outcome == "rejected" {
+            "post_cut_send_rejected"
+        } else {
+            "post_cut_send_guard_missing"
+        },
+        Some(post_cut_send_record.envelope_id.clone()),
+        if post_cut_send_record.outcome == "rejected" {
+            "post-cut send rejected by NoPostCutSend".to_string()
+        } else {
+            "post-cut send guard was unavailable during quiescent-save preflight".to_string()
+        },
+    );
+    append_unique_save_load_event(
+        session,
+        format!("event#quiescent-save#{savepoint_id}"),
+        "quiescent_save",
+        None,
+        if terminal_outcome == "saved" {
+            format!("R2 quiescent save {savepoint_id} emitted")
+        } else {
+            format!(
+                "R2 quiescent save {savepoint_id} rejected with in-flight messages {:?}",
+                failed_messages
+            )
+        },
+    );
+}
+
+fn refresh_observer_safe_export(session: &mut ProductAlpha1SessionCarrier) {
+    let existing = session.observer_safe_export.clone();
+    session.observer_safe_export = ProductAlpha1ObserverSafeExport {
+        view_role: if existing.view_role.is_empty() {
+            "observer_safe".to_string()
+        } else {
+            existing.view_role
+        },
+        redaction_level: if existing.redaction_level.is_empty() {
+            "observer_safe".to_string()
+        } else {
+            existing.redaction_level
+        },
+        retention_scope: if existing.retention_scope.is_empty() {
+            "demo_session".to_string()
+        } else {
+            existing.retention_scope
+        },
+        redacted_fields: existing.redacted_fields,
+        visible_event_ids: session
+            .event_dag
+            .nodes
+            .iter()
+            .map(|node| node.event_id.clone())
+            .collect(),
+        visible_routes: session
+            .route_graph
+            .routes
+            .iter()
+            .map(|route| route.route_id.clone())
+            .collect(),
+        visible_hotplug_events: session
+            .hotplug_lifecycle
+            .iter()
+            .map(|entry| format!("{}:{}", entry.package_id, entry.terminal_outcome))
+            .collect(),
+        visible_host_io_events: session
+            .host_io_history
+            .iter()
+            .map(|entry| {
+                format!(
+                    "{}:{}->{}",
+                    entry.adapter_kind, entry.request_summary, entry.response_summary
+                )
+            })
+            .collect(),
+        notes: existing.notes,
+    };
+}
+
 fn build_initial_event_dag(
     package: &ProductAlpha1Package,
     envelope: &MessageEnvelope,
     host_io_history: &[ProductAlpha1HostIoEntry],
+    failure_observations: &[ProductAlpha1FailureObservation],
 ) -> ProductAlpha1EventDag {
     let mut nodes = vec![
         ProductAlpha1EventNode {
@@ -745,7 +1495,68 @@ fn build_initial_event_dag(
         });
     }
 
+    let mut previous_event_id = nodes
+        .last()
+        .map(|node| node.event_id.clone())
+        .unwrap_or_else(|| "event#session-started".to_string());
+    for failure in failure_observations {
+        let observed_event_id = format!("event#message-failure-observed#{}", failure.failure_class);
+        let recovered_event_id = format!("event#message-recovery#{}", failure.failure_class);
+        nodes.push(ProductAlpha1EventNode {
+            event_id: observed_event_id.clone(),
+            event_kind: "message_failure_observed".to_string(),
+            place_ref: envelope.to_place.clone(),
+            envelope_ref: Some(failure.envelope_id.clone()),
+            observer_safe_summary: format!(
+                "{} observed for bounded product alpha recovery",
+                failure.failure_class
+            ),
+        });
+        nodes.push(ProductAlpha1EventNode {
+            event_id: recovered_event_id.clone(),
+            event_kind: "message_recovery_transition".to_string(),
+            place_ref: envelope.to_place.clone(),
+            envelope_ref: Some(failure.envelope_id.clone()),
+            observer_safe_summary: format!(
+                "{} -> {}",
+                failure.initial_state, failure.terminal_state
+            ),
+        });
+        edges.push(ProductAlpha1EventEdge {
+            from_event: previous_event_id,
+            to_event: observed_event_id.clone(),
+            relation: "bounded_failure_observation_order".to_string(),
+        });
+        edges.push(ProductAlpha1EventEdge {
+            from_event: observed_event_id,
+            to_event: recovered_event_id.clone(),
+            relation: "bounded_recovery_order".to_string(),
+        });
+        previous_event_id = recovered_event_id;
+    }
+
     ProductAlpha1EventDag { nodes, edges }
+}
+
+fn build_failure_routes(
+    envelope: &MessageEnvelope,
+    failure_observations: &[ProductAlpha1FailureObservation],
+) -> Vec<ProductAlpha1RouteEntry> {
+    failure_observations
+        .iter()
+        .enumerate()
+        .map(|(index, failure)| ProductAlpha1RouteEntry {
+            route_id: format!("route#product-demo-failure-{}", index + 1),
+            envelope_id: failure.envelope_id.clone(),
+            from_place: envelope.from_place.clone(),
+            to_place: envelope.to_place.clone(),
+            transport_lane: format!("{}#bounded_failure", envelope.transport_seam),
+            auth_lane_preserved: true,
+            membership_lane_preserved: true,
+            witness_lane_preserved: true,
+            capability_lane_preserved: true,
+        })
+        .collect()
 }
 
 fn build_core_runtime_snapshot(
@@ -939,9 +1750,9 @@ fn append_attach_message_state(
     terminal_outcome: &str,
 ) {
     let (state, failure_class, recovery_action) = match terminal_outcome {
-        "accepted" => ("delivered", None, None),
-        "rejected" => ("rejected", Some("reject"), Some("reject")),
-        _ => ("deferred", Some("deferred"), Some("defer_to_later_runtime")),
+        "accepted" => ("Delivered", None, None),
+        "rejected" => ("Rejected", Some("reject"), Some("reject")),
+        _ => ("Deferred", Some("deferred"), Some("defer_to_later_runtime")),
     };
     session
         .message_recovery_state
@@ -1111,6 +1922,112 @@ fn build_capability_state(package: &ProductAlpha1Package) -> ProductAlpha1Capabi
     }
 }
 
+fn build_transport_contracts(
+    package: &ProductAlpha1Package,
+) -> Vec<ProductAlpha1TransportContract> {
+    let recovery_kind = recovery_policy_kind(&package.message_recovery_policy.recovery);
+    vec![
+        ProductAlpha1TransportContract {
+            contract_id: format!("transport_contract#{}#best-effort", package.package_id),
+            contract_kind: "BestEffort".to_string(),
+            guarantees: vec![
+                "local same-session delivery is observable".to_string(),
+                "failure classes remain explicit in MessageState".to_string(),
+            ],
+            non_claims: vec![
+                "not durable outbox".to_string(),
+                "not exactly-once transport".to_string(),
+            ],
+        },
+        ProductAlpha1TransportContract {
+            contract_id: format!("transport_contract#{}#timeout", package.package_id),
+            contract_kind: "TimeoutBounded".to_string(),
+            guarantees: vec![format!(
+                "timeout failure is converted through declared bounded {recovery_kind} policy"
+            )],
+            non_claims: vec!["not WAN partition recovery".to_string()],
+        },
+    ]
+}
+
+fn build_recovery_policies(
+    package: &ProductAlpha1Package,
+) -> Vec<ProductAlpha1RecoveryPolicyRecord> {
+    vec![ProductAlpha1RecoveryPolicyRecord {
+        policy_id: format!("recovery_policy#{}", package.package_id),
+        policy_kind: recovery_policy_kind(&package.message_recovery_policy.recovery).to_string(),
+        handled_failures: package.message_recovery_policy.handled_failures.clone(),
+        max_retries: if package.message_recovery_policy.recovery == "retry_then_reject" {
+            1
+        } else {
+            0
+        },
+        terminal_action: if package.message_recovery_policy.recovery.contains("reject") {
+            "Reject".to_string()
+        } else {
+            "FallbackOrRetry".to_string()
+        },
+        modal_obligations: vec![
+            "○ timeout advances to retry observation".to_string(),
+            "□ rejected messages do not mutate active runtime state".to_string(),
+        ],
+    }]
+}
+
+fn build_failure_observations(
+    package: &ProductAlpha1Package,
+) -> Vec<ProductAlpha1FailureObservation> {
+    package
+        .message_recovery_policy
+        .handled_failures
+        .iter()
+        .map(|failure| ProductAlpha1FailureObservation {
+            envelope_id: format!("envelope#failure#{}#{}", package.package_id, failure),
+            failure_class: failure.clone(),
+            initial_state: "InFlight".to_string(),
+            recovery_action: recovery_policy_kind(&package.message_recovery_policy.recovery)
+                .to_string(),
+            terminal_state: recovery_terminal_state(&package.message_recovery_policy.recovery)
+                .to_string(),
+            retry_count: if package
+                .message_recovery_policy
+                .recovery
+                .starts_with("retry")
+            {
+                1
+            } else {
+                0
+            },
+            notes: vec![
+                format!(
+                    "bounded product demo observes {failure} and applies declared {} recovery",
+                    package.message_recovery_policy.recovery
+                ),
+                "no durable outbox, WAN replay, or exactly-once delivery is claimed".to_string(),
+            ],
+        })
+        .collect()
+}
+
+fn recovery_terminal_state(policy: &str) -> &str {
+    match policy {
+        "retry_then_reject" | "reject" => "Rejected",
+        "retry" => "Retried",
+        "fallback" => "FallbackVisible",
+        _ => "DeclaredTerminalState",
+    }
+}
+
+fn recovery_policy_kind(policy: &str) -> &str {
+    match policy {
+        "retry_then_reject" => "RetryThenReject",
+        "retry" => "Retry",
+        "reject" => "Reject",
+        "fallback" => "Fallback",
+        _ => "DeclaredRecoveryPolicy",
+    }
+}
+
 fn build_observer_safe_export(
     session: &ProductAlpha1SessionCarrier,
     package: &ProductAlpha1Package,
@@ -1228,6 +2145,18 @@ fn attach_surface_kind() -> String {
     PRODUCT_ALPHA1_ATTACH_SURFACE_KIND.to_string()
 }
 
+fn save_surface_kind() -> String {
+    PRODUCT_ALPHA1_SAVE_SURFACE_KIND.to_string()
+}
+
+fn load_surface_kind() -> String {
+    PRODUCT_ALPHA1_LOAD_SURFACE_KIND.to_string()
+}
+
+fn quiescent_save_surface_kind() -> String {
+    PRODUCT_ALPHA1_QUIESCENT_SAVE_SURFACE_KIND.to_string()
+}
+
 fn session_surface_kind() -> String {
     PRODUCT_ALPHA1_SESSION_SURFACE_KIND.to_string()
 }
@@ -1238,6 +2167,15 @@ fn runtime_plan_scope() -> String {
 
 fn session_scope() -> String {
     PRODUCT_ALPHA1_SESSION_SCOPE.to_string()
+}
+
+fn quiescence_state_default() -> ProductAlpha1QuiescenceState {
+    ProductAlpha1QuiescenceState {
+        seal_protocol_enabled: true,
+        post_cut_send_guard_enabled: true,
+        sealed_place_refs: Vec::new(),
+        rejected_post_cut_sends: Vec::new(),
+    }
 }
 
 fn stop_lines_default() -> Vec<String> {

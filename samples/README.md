@@ -20,9 +20,9 @@
   - active canonical runnable root や full toolchain root ではまだない
 - `product-alpha1/`
   product/public alpha-1 sample root
-  - `demo/` is the P-A1-26 versioned schema / CLI fixture root and P-A1-27 local same-session runtime fixture root
-  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` and `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` are current validation anchors
-  - this is not yet local/Docker transport command completion, native launch bundle, viewer, quiescent-save, WAN/federation, distributed durable save/load, or final public API
+  - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, and P-A1-28 local save/quiescent-save fixture root
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` and `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` are the entry validation anchors; `save` / `load` / `quiescent-save` use the same session dir
+  - this is not yet local/Docker transport command completion, native launch bundle, viewer, WAN/federation, distributed durable save/load R3/R4, or final public API
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -84,8 +84,8 @@
   - current practical devtools export floor は `VIS-A1-01/02/03/04/05/06/07` に限られ、`VIS-A1-03` は exact `SL-A1-02` save-load report から saved frontier / later live membership advance / restored frontier / stale-membership reject を export する membership timeline widening、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary / membership snapshot / deferred detach boundary を export する observability widening、`VIS-A1-05` は exact `AV-A1-03` avatar preview report から rejected source lane / degraded roles / missing host capability を export する fallback degradation widening、`VIS-A1-07` は exact `SL-A1-02` save-load report に widened した report-local retained-artifact catalog と hit/miss query trace を export する retention-query widening に留まる。これは durable retained-artifact service / remote retrieval / expiry lifecycle を意味しない
 - `product-alpha1/` と `practical-alpha1/` を混同しない
   - `product-alpha1/` は product/public alpha-1 line の source root
-  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture と `P-A1-27` の local same-session `run-local` / `session` / `attach` first cut を持つ
-  - local/Docker product command behavior、quiescent-save、viewer、native launch bundle、release validation は later packages
+  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture、`P-A1-27` の local same-session `run-local` / `session` / `attach` first cut、`P-A1-28` の local R0/R2 save first cut を持つ
+  - local/Docker product command behavior、viewer、native launch bundle、release validation は later packages
 
 ## current commands
 
@@ -112,6 +112,12 @@ python3 scripts/practical_alpha1_save_load.py check-all --format json
 python3 scripts/practical_alpha1_avatar.py check-all --format json
 python3 scripts/practical_alpha1_product_preview.py check-all --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json
+tmpdir=$(mktemp -d /tmp/mirrorea-alpha1-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

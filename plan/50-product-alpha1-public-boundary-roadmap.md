@@ -21,8 +21,6 @@ Current repo already has:
 Current repo still lacks product alpha-1:
 
 - local and Docker transport product command path
-- message failure/recovery checker/runtime report
-- bounded R2 quiescent save implementation
 - product viewer UX over product demo bundle
 - native launch bundle
 - clean-clone release-candidate validation
@@ -146,12 +144,24 @@ Non-claim:
 
 ### `P-A1-28` — message failure/recovery and quiescent save
 
+Status:
+
+- actualized by `crates/mir-runtime::product_alpha1_session`, `mirrorea-alpha save` / `load` / `quiescent-save`, and the product CLI/runtime tests
+
 Target:
 
 - introduce `MessageState`, `TransportContract`, `RecoveryPolicy`
-- implement bounded R2 `quiescent-save` for controlled local/Docker scope
+- implement bounded R2 `quiescent-save` for controlled local session scope
 - report `NoInFlight`, `AllPlacesSealed`, `NoPostCutSend`
 - add positive and negative quiescent-save rows
+
+Delivered:
+
+- same-session `MessageState`, `TransportContract`, `RecoveryPolicy`, DAG-linked failure observation, and modal obligation rows for bounded timeout / retry-then-reject / reject behavior
+- local R0 `save` and `load` commands over the product alpha-1 local session store
+- bounded local R2 `quiescent-save` command with session-carried `NoInFlight`, `AllPlacesSealed`, and `NoPostCutSend` preflight/report flags
+- rejected quiescent-save evidence when an in-flight message remains
+- savepoint roundtrip evidence, load-admissibility rejection across stale membership / stale witness / stale auth-capability / accepted activation cuts, and same-session restore of runtime snapshot, event DAG, membership, witness, route graph, hot-plug lifecycle, auth/capability decisions, save-load state, and recovery state
 
 Validation:
 
@@ -169,16 +179,19 @@ Non-claim:
 - no exactly-once transport
 - no WAN partition recovery
 
-### `P-A1-29` — product devtools viewer UX
+### `P-A1-29` — product local/Docker transport plus devtools viewer UX
 
 Target:
 
+- product `transport --mode local|docker` command behavior over the same session carrier, keeping transport/auth/membership/capability/witness lanes separate
 - product-level static HTML/local viewer
 - product overview, place graph, event DAG, route graph, membership timeline, witness timeline, hot-plug lifecycle, save/quiescent-save, message recovery, fallback, auth/capability, redaction, retention panels
 - observer-safe leak tests
 
 Validation:
 
+- local transport command probe
+- Docker Compose TCP transport command probe or explicit environment-gated skip with non-claim
 - viewer openability
 - JSON bundle structure check
 - redaction tests
@@ -300,7 +313,7 @@ MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- demo --out 
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode local --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode docker --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'session#product-alpha1-demo' --savepoint latest --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load latest --session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json
 cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --format json
@@ -314,8 +327,7 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- message recovery and quiescent-save bounded implementation
-- product viewer UX
+- product local/Docker transport command behavior plus viewer UX
 - native launch bundle
 - clean-clone validation docs
 
@@ -338,6 +350,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-28` message failure/recovery + quiescent-save
+- `P-A1-29` product local/Docker transport plus devtools viewer UX
 
 Queue authority remains `progress.md` / `tasks.md`.

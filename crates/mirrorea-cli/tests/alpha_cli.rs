@@ -231,9 +231,6 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
 
     let command_args: &[(&str, &[&str])] = &[
         ("transport", &[package, "--mode", "local"]),
-        ("save", &["session-alpha1-demo"]),
-        ("load", &["savepoint-alpha1-demo"]),
-        ("quiescent-save", &["session-alpha1-demo"]),
         ("export-devtools", &["session-alpha1-demo", "--out", out]),
         ("view", &[out]),
         ("build-native-bundle", &[package, "--out", out]),
@@ -257,6 +254,179 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
         assert_eq!(value["product_alpha1_ready"], false);
         assert_eq!(value["final_public_api_frozen"], false);
     }
+}
+
+#[test]
+fn save_load_and_quiescent_save_mutate_same_session_file() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-save-load");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+    let debug_layer = demo.join("packages/debug-layer");
+
+    let run = run_cli_with_session_dir(
+        &[
+            "run-local",
+            demo.to_str().expect("demo path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let run_value = json_stdout(&run);
+    assert!(run.status.success());
+    let session_id = run_value["session"]["session_id"].as_str().unwrap();
+
+    let attach = run_cli_with_session_dir(
+        &[
+            "attach",
+            session_id,
+            debug_layer.to_str().expect("debug path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    assert!(attach.status.success());
+
+    let save = run_cli_with_session_dir(
+        &[
+            "save",
+            session_id,
+            "--savepoint",
+            "savepoint#r0-cli",
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let save_value = json_stdout(&save);
+    assert!(save.status.success());
+    assert_eq!(save_value["surface_kind"], "product_alpha1_save_report");
+    assert_eq!(save_value["savepoint_class"], "R0_Local");
+    assert_eq!(save_value["session"]["phase"], "saved");
+
+    let quiescent = run_cli_with_session_dir(
+        &[
+            "quiescent-save",
+            session_id,
+            "--savepoint",
+            "savepoint#r2-cli",
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let quiescent_value = json_stdout(&quiescent);
+    assert!(quiescent.status.success());
+    assert_eq!(
+        quiescent_value["surface_kind"],
+        "product_alpha1_quiescent_save_report"
+    );
+    assert_eq!(quiescent_value["savepoint_class"], "R2_Quiescent");
+    assert_eq!(quiescent_value["no_inflight"], true);
+    assert_eq!(quiescent_value["all_places_sealed"], true);
+    assert_eq!(quiescent_value["no_post_cut_send"], true);
+
+    let load = run_cli_with_session_dir(
+        &[
+            "load",
+            "savepoint#r0-cli",
+            "--session",
+            session_id,
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let load_value = json_stdout(&load);
+    assert!(load.status.success());
+    assert_eq!(load_value["surface_kind"], "product_alpha1_load_report");
+    assert_eq!(load_value["terminal_outcome"], "loaded");
+    assert_eq!(load_value["session"]["phase"], "loaded");
+    assert_eq!(
+        load_value["session"]["active_layers"][0],
+        "product-alpha1-debug-layer"
+    );
+    assert!(
+        !String::from_utf8_lossy(&save.stdout).contains("saved_auth_state"),
+        "save stdout should not expose persisted admin/auth savepoint internals"
+    );
+}
+
+#[test]
+fn repeated_default_save_and_quiescent_save_keep_session_event_ids_unique() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-repeat-save-load");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+
+    let run = run_cli_with_session_dir(
+        &[
+            "run-local",
+            demo.to_str().expect("demo path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let run_value = json_stdout(&run);
+    assert!(run.status.success());
+    let session_id = run_value["session"]["session_id"].as_str().unwrap();
+
+    for command in ["save", "save", "quiescent-save", "quiescent-save"] {
+        let output = run_cli_with_session_dir(
+            &[command, session_id, "--format", "json"],
+            Some(&session_dir),
+        );
+        assert!(
+            output.status.success(),
+            "{command} should succeed without duplicate event ids"
+        );
+    }
+
+    let session = run_cli_with_session_dir(
+        &["session", session_id, "--format", "json"],
+        Some(&session_dir),
+    );
+    let session_value = json_stdout(&session);
+    assert!(session.status.success());
+    let mut event_ids = std::collections::BTreeSet::new();
+    for node in session_value["session"]["event_dag"]["nodes"]
+        .as_array()
+        .expect("event nodes should be present")
+    {
+        let event_id = node["event_id"]
+            .as_str()
+            .expect("event id should be string");
+        assert!(
+            event_ids.insert(event_id.to_string()),
+            "duplicate event id {event_id}"
+        );
+    }
+
+    let load = run_cli_with_session_dir(
+        &[
+            "load",
+            "savepoint#r0-latest",
+            "--session",
+            session_id,
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let load_value = json_stdout(&load);
+    assert!(load.status.success());
+    assert_eq!(load_value["surface_kind"], "product_alpha1_load_report");
+    assert_eq!(load_value["terminal_outcome"], "loaded");
+    assert_eq!(load_value["session"]["phase"], "loaded");
 }
 
 #[test]
