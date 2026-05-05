@@ -264,7 +264,12 @@ Proceed with `P-A1-30` native launch bundle: implement `mirrorea-alpha build-nat
 
 ## Commit / push status
 
-- pending at report creation.
+- package commit:
+  `3a63438` (`mirrorea: close P-A1-29 product transport viewer`)
+- package push:
+  pushed to `origin/main` (`b7e2808..3a63438`).
+- report metadata follow-up:
+  required to record package commit / push status after the first commit.
 
 ## Sub-agent session close status
 
