@@ -6,7 +6,7 @@
 
 - 規範判断の正本は `specs/`
 - 長期の repository memory は `plan/`
-- 進捗 snapshot は `progress.md`
+- workflow / evidence snapshot は `progress.md`
 - current task map は `tasks.md`
 - runnable sample dashboard は `samples_progress.md`
 - 実行証跡は `docs/reports/`

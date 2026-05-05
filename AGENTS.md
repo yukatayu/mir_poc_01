@@ -157,18 +157,20 @@ Every report should contain, in this order:
 
 - `progress.md` は repo 全体の**簡潔な進捗スナップショット**であり、scratchpad ではない。
 - current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` を更新すること。
-- 進捗率や残ステップは rough estimate と明記し、問題が見つかれば巻き戻りうる前提で書くこと。
+- 進捗率は primary metric にしないこと。current status は workflow readiness、evidence classification、remaining gate、blocker を中心に書くこと。
 - `progress.md` の phase 整理は old `Phase 1..7` checkpoint label だけに依存せず、`.docs/progress-task-axes.md` の **macro phase** と **feature maturity stage** を併用すること。
 - old `Phase 7 = FutureWork` のような巨大 bucket を再導入しないこと。
-- `progress.md` の進捗率は、可能な限り
+- `progress.md` では、可能な限り
   - **論理仕様**
   - **ユーザ向け仕様**
   - **実装 / 運用**
-  の 3 軸で並べて書くこと。ここで
-  - 論理仕様 = semantics / invariants / formal boundary の整備度
-  - ユーザ向け仕様 = companion notation / examples / human-facing guidance の整備度
-  - 実装 / 運用 = parser-free PoC / helper / validation loop / 実務フローの整備度
+  の 3 軸で status を並べること。ここで
+  - 論理仕様 = semantics / invariants / formal boundary の readiness と未決 gate
+  - ユーザ向け仕様 = companion notation / examples / human-facing guidance の readiness と未決 gate
+  - 実装 / 運用 = parser-free PoC / helper / validation loop / operational workflow の readiness と未決 gate
   を指す。
+- `100%` は、外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使うこと。
+- helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類すること。
 - `progress.md` には、各章 / 層について **「着手可能か、もしくは user から追加仕様を聞く必要があるか」** を示す欄も置くこと。
   - `着手可能` = 非本質部分を先に進めても手戻りが比較的小さい
   - `要仕様確認` = user 側の目的 / 保証範囲 / 非機能要件が足りず、勝手に詰めると手戻りが大きい
@@ -186,7 +188,7 @@ Every report should contain, in this order:
   - 重さ
   - 自走可否
   を簡潔に mirror すること。phase 読みが変わった task では同じ task の中で更新すること。
-- `progress.md` には、repo の特徴機能ごとの progress row も置き、
+- `progress.md` には、repo の特徴機能ごとの workflow / evidence status row も置き、
   - multi-node / fabric
   - robustness via contracts / theorem / model-check boundary
   - dynamic attach / detach / DAG-safe evolution
@@ -201,9 +203,9 @@ Every report should contain, in this order:
 
 - `samples_progress.md` は phase / layer ごとの runnable sample 状態を一覧する progress dashboard として扱う。
 - append-only の作業ログにせず、table と current status を update-in-place で保つこと。
-- 進捗%は evidence-backed にすること。最低でも sample path、validation command、blocker のどれかに紐づけること。
-- `100%` は、その current scope において implementation、positive/negative sample、debug/visualization、docs、report、tests、progress update、git commit/push まで完了したときだけ使うこと。
-- conceptual-only row は `25%` を超えないこと。
+- workflow readiness は evidence-backed にすること。最低でも sample path、validation command、blocker のどれかに紐づけること。
+- `100%` は外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使うこと。helper / sidecar / report / expected JSON / first-floor runner は evidence として分類し、completion と書かないこと。
+- conceptual-only row は planned / design-only / evidence category に留め、workflow-ready と書かないこと。
 - runnable sample、validation command、debug surface、blocker が変わった task では、同じ task の中で `samples_progress.md` を更新すること。
 - 更新不要な場合でも、report に **`samples_progress.md 更新不要`** と明記すること。
 

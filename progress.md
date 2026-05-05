@@ -120,6 +120,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-05 12:32 JST
+  root tracked Markdown を audit し、`README.md` の practical alpha-1 evidence inventory を canonical docs / dashboard 参照へ圧縮した。`AGENTS.md` と `tasks.md` の stale percentage wording を workflow readiness / evidence classification へ同期し、α-0.5 / α-0.8 / α-0.9 / bounded practical α-1 workflow の concrete behavior validation を再実行した。
 - 2026-05-05 11:59 JST
   `P-A1-24` で workflow-readiness policy を反映し、進捗率ではなく external developer reproducible workflow を snapshot の primary metric とした。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類する方針へ同期した。
 - 2026-05-05 11:33 JST
