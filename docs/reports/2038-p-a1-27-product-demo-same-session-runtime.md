@@ -254,11 +254,11 @@ Proceed with `P-A1-28` message failure/recovery + quiescent-save: implement boun
 ## Commit / push status
 
 - package commit:
-  pending at report creation time.
+  `67fb6c6` (`mirrorea: close P-A1-27 product same-session runtime`)
 - package push:
-  pending at report creation time.
+  pushed to `origin/main` (`98857ff..67fb6c6`).
 - report metadata follow-up:
-  pending if the package commit succeeds.
+  required to record the package commit / push status after the first commit.
 
 ## Sub-agent session close status
 
