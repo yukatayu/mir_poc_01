@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-05 17:48 JST
+最終更新: 2026-05-05 19:41 JST
 
 ## この文書について
 
@@ -82,7 +82,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 | Feature | Workflow status | 読み | 着手可否 |
 |---|---|---|---|
-| multi-node / fabric | evidence only | helper-local transport と alpha-0 evidence はあるが same-session operational shared-space は未完成 | 後段依存 |
+| multi-node / fabric | bounded local/Docker alpha workflow for product scope | product alpha demo は same-session carrier と controlled local/Docker TCP transport を持つ。ただし production multi-node / WAN federation / distributed durable replay ではない | 着手可能 |
 | robustness via contracts / theorem / model-check boundary | boundary-fixed | static checker / model-check / proof side の stratification は fixed。外部 proof discharge は evidence expansion | 着手可能 |
 | dynamic attach / detach / DAG-safe evolution | bounded workflow-ready for same-session attach | attach-time first-floor evidence と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
 | `atomic_cut` と ordering / memory-order family | semantics fixed, evidence-backed | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
@@ -139,7 +139,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
-- 2026-05-05 17:14 JST
+- 2026-05-05 19:41 JST
+  post-`P-A1-31` final docs audit で、`specs/25` success wording、`plan/50` current-state wording、`progress.md` multi-node/fabric row、`tasks.md` distributed durability reopen wording、source hierarchy product handoff presence を product alpha release-candidate 実態へ同期した。reports は audit 対象外。
 - 2026-05-05 17:48 JST
   `P-A1-31` review hardening として、`--skip-docker` を partial non-release probe に降格し、demo attach matrix verification、source-backed admin membership/capability authority、canonical admin session store reopen evidence、observer-safe session artifact、concrete viewer panel rendering、release-check validation floor / JSON semantic checks を追加した。
 - 2026-05-05 17:14 JST

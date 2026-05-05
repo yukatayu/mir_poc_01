@@ -17,17 +17,16 @@ Current repo already has:
 - bounded operational alpha-0.8 same-session hot-plug runtime workflow
 - bounded operational alpha-0.9 session-bound devtools workflow
 - bounded practical alpha-1 integrated workflow carrier
+- product alpha release-candidate workflow through `mirrorea-alpha demo`, local/Docker transport, concrete non-final viewer, local R0/R2 save/load, native host launch bundle, clean-clone hands-on docs, and `scripts/product_alpha1_release_check.py check-all`
 
-Current repo still lacks product alpha-1:
+Current repo still lacks final-public hardening beyond product alpha-1:
 
-- clean-clone release-candidate validation
-- CLI `demo` release walkthrough command
-
-Recent closed first cuts:
-
-- local and Docker transport product command path
-- product viewer UX over product demo bundle
-- native host launch bundle
+- final public grammar / ABI
+- production WAN/federation
+- distributed durable save/load R3/R4
+- arbitrary native package execution
+- final viewer / telemetry service
+- production packaging / hosted-service adoption target
 
 ## alpha defaults from `P-A1-25`
 

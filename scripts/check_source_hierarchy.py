@@ -128,6 +128,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "sub-agent-pro",
         "sub-agent-pro/alpha-0",
         "sub-agent-pro/alpha-1",
+        "sub-agent-pro/product-alpha1-001",
     ],
 }
 

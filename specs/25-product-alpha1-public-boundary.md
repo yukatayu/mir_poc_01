@@ -45,7 +45,7 @@ observe / save / quiescent-save / bundle できる、非 final だが public-ish
 | practical alpha-1 first floors | first-floor evidence | source evidence and fixtures, not product-ready |
 | bounded operational alpha-0.5 / 0.8 / 0.9 | workflow-ready operational layers | required lower layers |
 | bounded practical alpha-1 integrated workflow | reproducible bounded workflow | useful carrier, still not product-ready |
-| product alpha-1 | not workflow-ready at this document's creation | target of `P-A1-26..31` |
+| product alpha-1 | workflow-ready alpha release candidate after `P-A1-31`, not final public product | target of `P-A1-26..31` |
 | final public product | later | non-goal |
 
 ## alpha defaults for `U1`
@@ -431,10 +431,10 @@ The promoted product alpha-1 package line is:
 
 ## success statement
 
-Only after `P-A1-31` validates the full product line may the repo say:
+After `P-A1-31` validates the full product line, the repo may say:
 
 > Mirrorea Spaces product alpha-1 is an alpha, non-final, externally reproducible toolchain for a small shared virtual-space product prototype.
 
-Until then, the correct reading is:
+The current post-`P-A1-31` reading is:
 
-> Product alpha-1 boundary is defined; implementation and release validation remain open.
+> Product alpha-1 release-candidate workflow is externally reproducible in the documented local/Docker alpha scope; final public grammar / ABI / WAN / distributed durable save/load / arbitrary native execution remain non-goals.

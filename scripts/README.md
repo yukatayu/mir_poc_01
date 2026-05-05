@@ -7,7 +7,7 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..25`、`plan/39..50`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..25`、`plan/39..50`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
   required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..50`、`specs/13..25` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`

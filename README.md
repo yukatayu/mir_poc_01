@@ -11,8 +11,8 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-repo が主として検証しているのは、Mir current-L2 の **repo-local alpha-ready current layer** です。
-これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
+repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer** と、Mirrorea Spaces の **product alpha release-candidate workflow** です。
+これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 
 ## 現在の到達点
 

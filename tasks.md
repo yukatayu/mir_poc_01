@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 17:48 JST
+最終更新: 2026-05-05 19:41 JST
 
 ## この文書について
 
@@ -66,7 +66,7 @@
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
 | proof side discharge granularity | `plan/48` と external prover bridge に影響 | obligation family を coarse に束ねる / static-row ごとに細かく切る | まずは `specs/19` の residual obligation carrier を保ち、proof target 側で coarse-to-fine に展開する |
-| distributed durable save/load line | `specs/20` の後段 family に影響 | local-only line のまま保つ / distributed durable family を reopen する | current promoted reopen point では扱わない。α-0.5 / α-0.8 same-session line 完了後に再評価する |
+| distributed durable save/load line | `specs/20` の後段 family に影響 | product alpha local/Docker R0/R2 のまま保つ / distributed durable R3/R4 family を reopen する | current promoted reopen point では扱わない。product alpha release candidate 後の explicit final-public / durability gate としてだけ再評価する |
 | auth policy catalog breadth | `specs/21` と host/runtime package line に影響 | minimal stdlib-like initial set / broader policy catalog | minimal initial set から始め、policy breadth は same-session attach line の実 evidence に合わせて widen する |
 | integrated practical workflow boundary | `specs/18` の practical α-1 読みに影響 | one bounded workflow carrier / final public toolchain claim | `P-A1-23` で bounded workflow carrier は作成済み。final public toolchain claim はしない |
 | product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
