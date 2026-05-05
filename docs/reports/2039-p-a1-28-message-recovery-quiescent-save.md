@@ -263,11 +263,11 @@ Proceed with `P-A1-29` product local/Docker transport plus devtools viewer UX: i
 ## Commit / push status
 
 - package commit:
-  pending.
+  `09fae22` (`mirrorea: close P-A1-28 recovery quiescent save`)
 - package push:
-  pending.
+  pushed to `origin/main` (`6e7bf87..09fae22`).
 - report metadata follow-up:
-  required after the package commit/push records the resulting hash.
+  required to record package commit / push status after the first commit.
 
 ## Sub-agent session close status
 
