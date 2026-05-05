@@ -212,8 +212,10 @@ git diff --check
 
 - package commit:
   `3f192a0` `mirrorea: add practical alpha1 workflow carrier`
+- report metadata follow-up:
+  `8931214` `docs: update p-a1-23 report metadata`
 - push:
-  pending at time of this report metadata update
+  pushed to `origin/main` (`f644db5..8931214`) before this final report metadata correction
 
 ## Sub-agent session close status
 
