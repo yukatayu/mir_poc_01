@@ -246,11 +246,11 @@ Proceed with `P-A1-27` product demo same-session runtime: implement `check -> ru
 ## Commit / push status
 
 - package commit:
-  pending at report creation time.
+  `e2d235b` `mirrorea: close P-A1-26 alpha CLI schema`.
 - package push:
-  pending at report creation time.
+  succeeded; `main -> main` on `origin`.
 - report metadata follow-up:
-  pending if the package commit succeeds.
+  this section was updated after the package push and will be committed separately.
 
 ## Sub-agent session close status
 
