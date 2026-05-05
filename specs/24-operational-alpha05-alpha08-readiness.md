@@ -154,11 +154,11 @@ current repo has:
 - practical first-floor package/checker/runtime/hot-plug/transport/save-load/devtools/product-preview carriers
 - bounded α-0.5 same-session runtime carrier
 - minimal typed external host-I/O direct semantic execution lane
+- bounded α-0.8 same-session hot-plug runtime over the same carrier
 - exact report bundles and companion preview bundles
 
 current repo still lacks at least:
 
-- same-session attach mutation and later-behavior observation
 - session-bound export source for devtools
 
 therefore:
@@ -240,9 +240,9 @@ without overclaiming runtime breadth.
 
 current recommendation:
 
-- promote `P-A1-19` first as α-0.5 session runtime carrier
-- keep `P-A1-20` next for typed external host-I/O direct execution lane
-- keep `P-A1-21` after that for α-0.8 same-session hot-plug runtime
+- `P-A1-19`、`P-A1-20`、`P-A1-21` are now the bounded actualized operational sequence
+- promote `P-A1-22` next for α-0.9 session-bound devtools export
+- keep final public viewer / telemetry / product runtime completion after that
 
 ## stop line
 

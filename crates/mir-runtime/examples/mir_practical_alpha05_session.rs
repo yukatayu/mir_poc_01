@@ -6,6 +6,7 @@ use mir_runtime::practical_alpha05_session::{
     observe_practical_alpha05_session, save_practical_alpha05_session,
     start_practical_alpha05_session_path,
 };
+use mir_runtime::practical_alpha08_hotplug_session::run_practical_alpha08_hotplug_path;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut args = env::args().skip(1);
@@ -76,6 +77,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             maybe_write_session(&next_session, args.next().as_deref())?;
             println!("{}", serde_json::to_string_pretty(&payload)?);
         }
+        "attach" => {
+            let Some(session_path) = args.next() else {
+                usage();
+                process::exit(2);
+            };
+            let Some(package_path) = args.next() else {
+                usage();
+                process::exit(2);
+            };
+            let session = read_session(&session_path)?;
+            let (next_session, payload) =
+                run_practical_alpha08_hotplug_path(&session, &package_path)?;
+            maybe_write_session(&next_session, args.next().as_deref())?;
+            println!("{}", serde_json::to_string_pretty(&payload)?);
+        }
         _ => {
             usage();
             process::exit(2);
@@ -104,6 +120,6 @@ fn maybe_write_session(
 
 fn usage() {
     eprintln!(
-        "usage:\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- start <package-path> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- save <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- load <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- observe <session-path>\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- host-io <session-path> <package-path> [session-out]"
+        "usage:\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- start <package-path> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- save <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- load <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- observe <session-path>\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- host-io <session-path> <package-path> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- attach <session-path> <package-path> [session-out]"
     );
 }

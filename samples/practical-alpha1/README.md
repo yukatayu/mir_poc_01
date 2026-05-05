@@ -15,6 +15,8 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   `RUN-03/04` add local missing-capability and missing-witness rejects, and `scripts/practical_alpha05_session.py` / `crates/mir-runtime::practical_alpha05_session` bind checked runtime execution, observer-safe session export, and local save/load frontier into one same-session carrier without yet claiming typed host-I/O completion.
 - `P-A1-20` widens the same bounded α-0.5 operational line here:
   `crates/mir-runtime::practical_alpha05_host_io`, example `mir_practical_alpha05_session -- host-io`, `samples/practical-alpha1/packages/oa05-07-add-one-host-io`, and `OA05-07` add one minimal typed external `AddOne` direct execution lane without claiming same-session hot-plug completion.
+- `P-A1-21` widens the same session carrier into the bounded α-0.8 operational line here:
+  `crates/mir-runtime::practical_alpha08_hotplug_session`, example `mir_practical_alpha05_session -- attach`, `scripts/practical_alpha08_session_hotplug.py`, and `OA08-01..10` add same-session debug / auth / rate-limit / object preview / deferred detach rows without claiming α-0.9 live devtools completion.
 - `P-A1-04a` adds the first practical hot-plug cut here:
   layer package fixtures with `alpha_local_hotplug_input` plus exact expected hot-plug reports.
 - `P-A1-04b` widens the same practical hot-plug cut here:
@@ -136,7 +138,7 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
-- The current root is still the first-floor fixture family; `practical_alpha05_session` now consumes it through a same-session carrier and one minimal typed host-I/O direct execution lane, but same-session hot-plug remains a separate later gate.
+- The current root is still the first-floor fixture family; `practical_alpha05_session` and `practical_alpha08_session_hotplug` now consume it through same-session α-0.5 / α-0.8 carriers, but α-0.9 live/session-bound devtools remains a separate later gate.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.

@@ -40,6 +40,12 @@
   - current actualized rows are `OA05-01..07`
   - it actualizes same-session `start` / `observe` / `save` / `load` over the bounded local runtime carrier plus session-bound event DAG / observer-safe export and one minimal typed external `AddOne` direct execution lane
   - it does not claim same-session hot-plug runtime, distributed durable save/load, or final public runtime/devtools API
+- practical alpha-0.8 same-session hot-plug lane now has an alpha-local script surface
+  - `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`
+  - this exercises exact `HP-A1-01..07` / `AV-A1-03` package evidence through `crates/mir-runtime::practical_alpha08_hotplug_session` and the live `crates/mir-runtime::practical_alpha05_session` carrier
+  - current actualized rows are `OA08-01..10`
+  - it actualizes same-session `attach` / `observe` over the bounded session carrier plus accepted/rejected/deferred / activation cut / object preview / fallback companion visibility summaries
+  - it does not claim accepted detach execution, distributed durable save/load, α-0.9 live/session-bound devtools export, or final public runtime/devtools/hot-plug API
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

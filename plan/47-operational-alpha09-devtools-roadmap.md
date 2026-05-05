@@ -19,6 +19,11 @@ current repo already has useful first-floor export bundles:
 - `VIS-A1-06` redacted observer view
 - `VIS-A1-07` report-local retention query
 
+current repo also has useful live/session sources:
+
+- `practical_alpha05_session` observer-safe event DAG / host-I/O summary
+- `practical_alpha08_hotplug_session` same-session hot-plug lifecycle summary
+
 current repo still lacks:
 
 - session-bound export source
@@ -40,7 +45,7 @@ current repo still lacks:
 | event DAG | `VIS-A1-01` | session source |
 | route trace | `VIS-A1-02` | session source |
 | membership timeline | `VIS-A1-03` | session source |
-| hot-plug lifecycle | `VIS-A1-04` | session source |
+| hot-plug lifecycle | `VIS-A1-04`, `OA08-10` | richer session source / viewer surface |
 | fallback degradation | `VIS-A1-05` | session source |
 | redacted observer view | `VIS-A1-06` | session source |
 | retention/on-demand | `VIS-A1-07` | session source |
@@ -81,7 +86,7 @@ python3 scripts/practical_alpha09_devtools.py render-html --format json
 python3 -m unittest scripts.tests.test_practical_alpha09_devtools
 ```
 
-P-A1-18 does not create these commands.
+`P-A1-21` still does not create these commands; it only supplies a bounded same-session hot-plug source.
 
 ## deferred
 

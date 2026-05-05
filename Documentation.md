@@ -64,7 +64,7 @@ OS/network substrate
 - **practical alpha-1 first-floor line**
   `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
 - **operational alpha theory-freeze line**
-  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout は `P-A1-20` で、`P-A1-18` の bounded theory freeze と `P-A1-19` の session carrier に続けて、typed external `AddOne` direct execution lane を same-session α-0.5 surface へ接続しました。
+  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout は `P-A1-21` で、`P-A1-18` の bounded theory freeze、`P-A1-19` の session carrier、`P-A1-20` の typed external `AddOne` lane に続けて、debug / auth / rate-limit / object preview / deferred detach を同じ session carrier に接続し、bounded operational α-0.8 same-session hot-plug runtime を actualize しました。
 
 ## いま何があり、何がまだ無いか
 
@@ -75,10 +75,10 @@ OS/network substrate
 - local-only save/load roundtrip と stale-membership non-resurrection first-floor rows
 - attach-time auth / rate-limit / object preview / deferred detach の first-floor rows
 - bounded α-0.5 session carrier 上の minimal typed external `AddOne` direct execution lane
+- bounded α-0.8 same-session hot-plug runtime over the same session carrier
 
 まだ無いもの:
 
-- α-0.8 same-session hot-plug runtime
 - α-0.9 live/session-bound devtools export
 
 ## 重要な境界

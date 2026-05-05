@@ -22,6 +22,7 @@ pub mod current_l2_cli;
 pub mod hotplug_runtime;
 pub mod practical_alpha05_host_io;
 pub mod practical_alpha05_session;
+pub mod practical_alpha08_hotplug_session;
 pub mod practical_alpha1_avatar;
 pub mod practical_alpha1_hotplug;
 pub mod practical_alpha1_local_runtime;

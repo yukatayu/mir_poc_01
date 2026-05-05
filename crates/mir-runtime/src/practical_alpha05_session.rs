@@ -29,24 +29,22 @@ pub const PRACTICAL_ALPHA05_OBSERVER_VIEW_KIND: &str =
 pub const PRACTICAL_ALPHA05_SAVEPOINT_FORMAT: &str = "practical_alpha05_local_frontier_json";
 
 const PRACTICAL_ALPHA05_SESSION_RETAINED_LATER_REFS: &[&str] = &[
-    "typed_external_host_io_direct_execution",
-    "same_session_hotplug_execution",
+    "alpha09_live_devtools_viewer",
     "session_bound_route_trace",
     "distributed_durable_save_load",
     "final_public_runtime_api",
 ];
 
 const PRACTICAL_ALPHA05_SESSION_STOP_LINES: &[&str] = &[
-    "do not treat the practical alpha-0.5 session carrier as same-session hot-plug completion",
-    "do not treat the practical alpha-0.5 session carrier as typed external host-I/O completion before that lane exists",
-    "do not treat the practical alpha-0.5 session carrier as distributed durable save/load completion",
-    "do not treat the practical alpha-0.5 session carrier as a final public runtime or devtools ABI",
+    "do not treat the practical alpha-0.5/0.8 session carrier as distributed durable save/load completion",
+    "do not treat the practical alpha-0.5/0.8 session carrier as alpha-0.9 live devtools viewer completion",
+    "do not treat the practical alpha-0.5/0.8 session carrier as native avatar execution or a final public runtime/devtools/hotplug ABI",
 ];
 
 const PRACTICAL_ALPHA05_SESSION_LIMITATIONS: &[&str] = &[
-    "alpha-local non-final practical alpha-0.5 session floor only",
-    "session carrier is bounded to the current local runtime / savepoint / observer-safe export seam",
-    "no same-session hot-plug, typed external host-I/O lane, distributed durable save/load, or final public ABI",
+    "alpha-local non-final practical alpha-0.5/0.8 session floor only",
+    "session carrier is bounded to the current local runtime / savepoint / typed host-I/O / same-session hot-plug seam",
+    "no distributed durable save/load, alpha-0.9 live devtools viewer, or final public ABI",
 ];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -93,7 +91,15 @@ pub struct PracticalAlpha05ObserverSafeExport {
     pub visible_history: Vec<String>,
     pub witness_inventory: Vec<String>,
     #[serde(default)]
+    pub active_layers: Vec<String>,
+    #[serde(default)]
+    pub object_preview_inventory: Vec<String>,
+    #[serde(default)]
+    pub hotplug_events: Vec<String>,
+    #[serde(default)]
     pub host_io_events: Vec<String>,
+    #[serde(default)]
+    pub runtime_behavior_markers: Vec<String>,
     pub notes: Vec<String>,
 }
 
@@ -104,6 +110,48 @@ pub struct PracticalAlpha05HostIoHistoryEntry {
     pub response_summary: String,
     pub event_request_id: String,
     pub event_response_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha05SessionObjectPreviewState {
+    pub sample_id: String,
+    pub package_id: String,
+    pub selected_representation: String,
+    pub fallback_representation: String,
+    pub provided_roles: Vec<String>,
+    pub required_host_capabilities: Vec<String>,
+    pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha05SessionHotPlugLifecycleEntry {
+    pub sequence_id: usize,
+    pub sample_id: String,
+    pub package_id: String,
+    pub package_kind: String,
+    pub attach_profile: String,
+    pub operation_kind: String,
+    pub terminal_outcome: String,
+    #[serde(default)]
+    pub reason_family: Option<String>,
+    #[serde(default)]
+    pub rejection_reason_refs: Vec<String>,
+    pub request_event_id: String,
+    pub verdict_event_id: String,
+    #[serde(default)]
+    pub activation_cut_ref: Option<String>,
+    #[serde(default)]
+    pub detach_boundary_ref: Option<String>,
+    pub session_mutated: bool,
+    #[serde(default)]
+    pub active_layers_after: Vec<String>,
+    #[serde(default)]
+    pub object_previews_after: Vec<String>,
+    #[serde(default)]
+    pub runtime_behavior_delta: Vec<String>,
+    #[serde(default)]
+    pub devtools_delta: Vec<String>,
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -118,7 +166,15 @@ pub struct PracticalAlpha05SessionSavepoint {
     pub saved_capability_inventory: Vec<String>,
     pub saved_witness_inventory: Vec<String>,
     #[serde(default)]
+    pub saved_active_layers: Vec<String>,
+    #[serde(default)]
+    pub saved_object_preview_inventory: Vec<PracticalAlpha05SessionObjectPreviewState>,
+    #[serde(default)]
+    pub saved_hotplug_lifecycle: Vec<PracticalAlpha05SessionHotPlugLifecycleEntry>,
+    #[serde(default)]
     pub saved_host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
+    #[serde(default)]
+    pub saved_runtime_behavior_markers: Vec<String>,
     pub state_roundtrip_equal: bool,
     pub notes: Vec<String>,
 }
@@ -152,7 +208,15 @@ pub struct PracticalAlpha05SessionReport {
     pub capability_inventory: Vec<String>,
     pub witness_inventory: Vec<String>,
     #[serde(default)]
+    pub active_layers: Vec<String>,
+    #[serde(default)]
+    pub object_preview_inventory: Vec<PracticalAlpha05SessionObjectPreviewState>,
+    #[serde(default)]
+    pub hotplug_lifecycle: Vec<PracticalAlpha05SessionHotPlugLifecycleEntry>,
+    #[serde(default)]
     pub host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
+    #[serde(default)]
+    pub runtime_behavior_markers: Vec<String>,
     pub observer_safe_export: PracticalAlpha05ObserverSafeExport,
     #[serde(default)]
     pub savepoints: Vec<PracticalAlpha05SessionSavepoint>,
@@ -182,7 +246,11 @@ struct PracticalAlpha05SavedLocalFrontier {
     event_dag: EventDagExport,
     capability_inventory: Vec<String>,
     witness_inventory: Vec<String>,
+    active_layers: Vec<String>,
+    object_preview_inventory: Vec<PracticalAlpha05SessionObjectPreviewState>,
+    hotplug_lifecycle: Vec<PracticalAlpha05SessionHotPlugLifecycleEntry>,
     host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
+    runtime_behavior_markers: Vec<String>,
     notes: Vec<String>,
 }
 
@@ -217,10 +285,15 @@ pub fn save_practical_alpha05_session(
         event_dag: session.event_dag.clone(),
         capability_inventory: session.capability_inventory.clone(),
         witness_inventory: session.witness_inventory.clone(),
+        active_layers: session.active_layers.clone(),
+        object_preview_inventory: session.object_preview_inventory.clone(),
+        hotplug_lifecycle: session.hotplug_lifecycle.clone(),
         host_io_history: session.host_io_history.clone(),
+        runtime_behavior_markers: session.runtime_behavior_markers.clone(),
         notes: vec![
             "saved alpha-0.5 local frontier remains local-only and non-final".to_string(),
-            "same-session hot-plug and typed external host-I/O remain later".to_string(),
+            "same-session hot-plug and typed external host-I/O stay bounded to the practical session carrier"
+                .to_string(),
         ],
     };
     let serialized =
@@ -248,11 +321,16 @@ pub fn save_practical_alpha05_session(
         saved_event_dag: restored.event_dag,
         saved_capability_inventory: restored.capability_inventory,
         saved_witness_inventory: restored.witness_inventory,
+        saved_active_layers: restored.active_layers,
+        saved_object_preview_inventory: restored.object_preview_inventory,
+        saved_hotplug_lifecycle: restored.hotplug_lifecycle,
         saved_host_io_history: restored.host_io_history,
+        saved_runtime_behavior_markers: restored.runtime_behavior_markers,
         state_roundtrip_equal,
         notes: vec![
             "savepoint is a local frontier only".to_string(),
-            "no distributed durable checkpoint semantics are implied".to_string(),
+            "no distributed durable checkpoint semantics or alpha-0.9 viewer retention service are implied"
+                .to_string(),
         ],
     });
     next.observer_safe_export = build_observer_safe_export(&next);
@@ -281,7 +359,11 @@ pub fn load_practical_alpha05_session(
     next.event_dag = savepoint.saved_event_dag.clone();
     next.capability_inventory = savepoint.saved_capability_inventory.clone();
     next.witness_inventory = savepoint.saved_witness_inventory.clone();
+    next.active_layers = savepoint.saved_active_layers.clone();
+    next.object_preview_inventory = savepoint.saved_object_preview_inventory.clone();
+    next.hotplug_lifecycle = savepoint.saved_hotplug_lifecycle.clone();
     next.host_io_history = savepoint.saved_host_io_history.clone();
+    next.runtime_behavior_markers = savepoint.saved_runtime_behavior_markers.clone();
     next.observer_safe_export = build_observer_safe_export(&next);
     Ok(next)
 }
@@ -327,7 +409,11 @@ fn start_practical_alpha05_session_at_path(
         event_dag: runtime.event_dag.clone(),
         capability_inventory,
         witness_inventory,
+        active_layers: Vec::new(),
+        object_preview_inventory: Vec::new(),
+        hotplug_lifecycle: Vec::new(),
         host_io_history: Vec::new(),
+        runtime_behavior_markers: Vec::new(),
         observer_safe_export: PracticalAlpha05ObserverSafeExport {
             view_kind: observer_view_kind(),
             authority: String::new(),
@@ -339,7 +425,11 @@ fn start_practical_alpha05_session_at_path(
             event_ids: Vec::new(),
             visible_history: Vec::new(),
             witness_inventory: Vec::new(),
+            active_layers: Vec::new(),
+            object_preview_inventory: Vec::new(),
+            hotplug_events: Vec::new(),
             host_io_events: Vec::new(),
+            runtime_behavior_markers: Vec::new(),
             notes: Vec::new(),
         },
         savepoints: Vec::new(),
@@ -381,6 +471,17 @@ fn build_observer_safe_export(
             .collect(),
         visible_history: session.visible_history.clone(),
         witness_inventory: session.witness_inventory.clone(),
+        active_layers: session.active_layers.clone(),
+        object_preview_inventory: session
+            .object_preview_inventory
+            .iter()
+            .map(|entry| format!("{}:{}", entry.package_id, entry.selected_representation))
+            .collect(),
+        hotplug_events: session
+            .hotplug_lifecycle
+            .iter()
+            .map(|entry| format!("hotplug:{}:{}", entry.sample_id, entry.terminal_outcome))
+            .collect(),
         host_io_events: session
             .host_io_history
             .iter()
@@ -391,10 +492,11 @@ fn build_observer_safe_export(
                 )
             })
             .collect(),
+        runtime_behavior_markers: session.runtime_behavior_markers.clone(),
         notes: vec![
             "session-bound observer-safe export reuses live session state rather than exact report recomposition"
                 .to_string(),
-            "auth/raw transport lanes remain out of scope for this alpha-0.5 local session floor"
+            "auth/raw transport lanes remain bounded to practical observer-safe summaries on this alpha-0.5/0.8 session floor"
                 .to_string(),
         ],
     }

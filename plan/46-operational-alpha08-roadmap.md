@@ -19,14 +19,14 @@ current repo already has:
 - `AV-A1-*` avatar preview companion floor
 - `VIS-A1-04` hot-plug lifecycle export
 - `PE2E-*` companion preview bundles
+- bounded same-session attach carrier over `practical_alpha05_session`
+- `OA08-01..10` same-session operational matrix
 
 current repo still lacks:
 
-- attach against a live session carrier
-- rejected attach without session mutation in the same workflow
-- post-attach behavior/observation change in the same session
-- session-visible object/avatar state transition
-- detach lifecycle execution beyond explicit deferred boundary
+- accepted detach execution
+- session-bound route trace / membership timeline / witness relation / save-load timeline export
+- α-0.9 live viewer/export surface beyond observer-safe session summaries
 
 ## decisions mirrored from specs/21 / 22 / 24
 
@@ -40,21 +40,17 @@ current repo still lacks:
 
 | Operational need | Existing evidence | Missing for α-0.8 operational readiness |
 |---|---|---|
-| debug attach accepted | `HP-A1-01`, `LI-01` | same-session state mutation |
-| non-admin reject | `HP-A1-02`, `LI-02` | same-session rejection path |
-| auth contract update | `HP-A1-03`, `LI-03` | same-session effect on later actions |
-| rate-limit declared failure | `HP-A1-04`, `LI-04` | same-session runtime reject after activation |
-| incompatible patch reject | `HP-A1-05`, `LI-05` | same-session attach workflow |
-| stale membership reject | `HP-A1-04B1` | session attach workflow |
-| missing witness reject | `HP-A1-04B2` | session attach workflow |
-| object/avatar visibility | `HP-A1-06`, `AV-A1-01/02/03` | actual session representation |
-| lifecycle export | `VIS-A1-04` | session-bound export source |
+| debug attach accepted | `HP-A1-01`, `LI-01`, `OA08-01` | none within bounded α-0.8 |
+| non-admin reject | `HP-A1-02`, `LI-02`, `OA08-02` | none within bounded α-0.8 |
+| auth contract update | `HP-A1-03`, `LI-03`, `OA08-03` | richer α-0.9 export source |
+| rate-limit declared failure | `HP-A1-04`, `LI-04`, `OA08-04` | post-attach full runtime replay beyond preview remains later |
+| incompatible patch reject | `HP-A1-05`, `LI-05`, `OA08-05` | none within bounded α-0.8 |
+| stale membership reject | `HP-A1-04B1`, `OA08-06` | none within bounded α-0.8 |
+| missing witness reject | `HP-A1-04B2`, `OA08-07` | none within bounded α-0.8 |
+| object/avatar visibility | `HP-A1-06`, `AV-A1-01/02/03`, `OA08-08/09` | native execution and richer viewer remain later |
+| lifecycle export | `VIS-A1-04`, `OA08-10` | α-0.9 live/session bundle widening |
 
 ## recommended sequencing
-
-### prerequisite
-
-`P-A1-19` should land first or provide an equivalent session carrier.
 
 ### promoted package
 
@@ -69,6 +65,18 @@ target command family may be named differently, but should cover:
 - `detach`
 - `check-all`
 - `closeout`
+
+status:
+
+- actualized
+
+delivered:
+
+- attach against a live session carrier
+- rejected attach without session mutation in the same workflow
+- post-attach observer/runtime behavior change in the same session
+- session-visible object preview state transition
+- deferred detach minimal contract as a same-session lifecycle event
 
 ## required rows
 
@@ -104,10 +112,9 @@ minimum α-0.8 operational matrix:
 
 ## next reopen point
 
-α-0.8 should not be promoted ahead of α-0.5 session carrier.
+α-0.8 is now actualized in bounded form.
 
 recommended order:
 
-1. `P-A1-19`
-2. `P-A1-20`
-3. `P-A1-21`
+1. `P-A1-22` α-0.9 session-bound devtools export
+2. broader host adapter families only after the α-0.9 line is bounded
