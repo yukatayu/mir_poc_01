@@ -146,9 +146,9 @@ git diff --check
 ## Commit / push status
 
 - package commit:
-  pending
+  `138f1d2` `docs: recut alpha readiness around workflows`
 - push:
-  pending
+  pushed to `origin/main` after report metadata follow-up
 
 ## Sub-agent session close status
 
