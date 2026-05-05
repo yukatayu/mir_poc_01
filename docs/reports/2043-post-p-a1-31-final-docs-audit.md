@@ -161,7 +161,8 @@ All findings above were addressed in this task.
 
 ## Commit / push status
 
-Pending at report write.
+- Audit commit: `90072cd` (`docs: audit product alpha1 release candidate status`), pushed to `main`.
+- Report metadata follow-up: pending at this update; final hash is recorded in the user-facing closeout answer to avoid a self-referential metadata loop.
 
 ## Sub-agent session close status
 
