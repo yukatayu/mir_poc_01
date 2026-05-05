@@ -213,9 +213,9 @@ git diff --check
 ## Commit / push status
 
 - package commit:
-  pending at report creation; to be updated after commit / push.
+  `30d3e98` `mirrorea: actualize alpha09 session devtools export`
 - push:
-  pending at report creation; to be updated after commit / push.
+  pushed to `origin/main`
 
 ## Sub-agent session close status
 
