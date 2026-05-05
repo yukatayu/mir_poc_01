@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 15:29 JST
+最終更新: 2026-05-05 15:53 JST
 
 ## この文書について
 
@@ -34,6 +34,8 @@
   `crates/mir-runtime::product_alpha1_session`、`mirrorea-alpha run-local` / `session` / `attach`、CLI local session store により、product demo は runtime plan、core fabric envelope validation、typed host-I/O observation、debug-layer attach lifecycle、membership/witness/route/save-load/recovery state carrier を同じ session file に保持します。local/Docker transport command behavior、message recovery execution、quiescent-save、viewer、native launch bundle、product-ready α-1 completion ではありません。
 - `P-A1-28` により product message recovery / save-load first cut は actualize 済みです:
   `MessageState` / `TransportContract` / `RecoveryPolicy` rows、`mirrorea-alpha save` / `load` / `quiescent-save`、R0 local save/load、bounded R2 local quiescent-save を同じ product session carrier に接続しました。`NoInFlight` / `AllPlacesSealed` / `NoPostCutSend` positive と in-flight reject negative は runnable tests で確認します。R3/R4 durable distributed save/load、WAN/federation、product-ready α-1 completion ではありません。
+- `P-A1-29` により product transport / viewer first cut は actualize 済みです:
+  `mirrorea-alpha transport --mode local` は same-session loopback TCP round trip、`transport --mode docker` は controlled Docker Compose TCP world/participant round trip、`export-devtools` は product session 由来の non-final JSON/HTML bundle、`view --check` は bundle openability / panel presence check を提供します。final public viewer / telemetry ABI、WAN/federation、native launch bundle、release validation、product-ready α-1 completion ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -43,17 +45,16 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-29` product local/Docker transport plus devtools viewer UX | `Macro 7`, `S5 -> S6` | product `transport --mode local|docker` command behavior を閉じ、その same-session carrier を product demo devtools JSON と non-final viewer panels に接続する | transport local/Docker probes、viewer openability、observer-safe leak tests が通る | medium-heavy |
-| 2 | `P-A1-30` native launch bundle | `Macro 7`, `S5 -> S6` | product demo native host launch bundle を作る | bundle manifest / run script / `NativeExecutionPolicy = Disabled` / native non-claims validation が通る | medium |
-| 3 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
-| 4 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 1 | `P-A1-30` native launch bundle | `Macro 7`, `S5 -> S6` | product demo native host launch bundle を作る | bundle manifest / run script / `NativeExecutionPolicy = Disabled` / native non-claims validation が通る | medium |
+| 2 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
+| 3 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-29` product local/Docker transport plus devtools viewer UX
+  `P-A1-30` native launch bundle
 - recommendation reason:
-  `P-A1-28` で product demo local save/load と quiescent-save first cut が入ったため、次の実質 gap は未実装の product transport command behavior と、同じ session carrier を reader-facing devtools/viewer に export する部分へ移った
+  `P-A1-29` で product transport command behavior と non-final viewer export が入ったため、次の実質 gap は native host launch bundle とその provenance / non-execution policy に移った
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、product alpha complete claim へ踏み込まない
 
@@ -66,7 +67,7 @@
 | auth policy catalog breadth | `specs/21` と host/runtime package line に影響 | minimal stdlib-like initial set / broader policy catalog | minimal initial set から始め、policy breadth は same-session attach line の実 evidence に合わせて widen する |
 | integrated practical workflow boundary | `specs/18` の practical α-1 読みに影響 | one bounded workflow carrier / final public toolchain claim | `P-A1-23` で bounded workflow carrier は作成済み。final public toolchain claim はしない |
 | product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
-| product transport command breadth | `P-A1-29` と release validation に影響 | local-only first / local + Docker Compose TCP | product alpha DoD には local/Docker が必要なので、`P-A1-29` の viewer 入力前に同じ session carrier で transport lane を閉じる |
+| product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装済み。`P-A1-31` では clean-clone validation で再確認する |
 | admin/debug product viewer breadth | `P-A1-29` に影響 | observer-safe + kept-later marker / bounded admin debug panel | まず observer-safe leak testを優先し、admin/debug full viewは実装できない場合 explicit kept-later |
 
 ## user decision items

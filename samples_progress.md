@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 15:29 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the product alpha-1 local same-session runtime/save first cut. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; `samples/product-alpha1/` now has product alpha schema/check, local same-session run/session/attach, and local R0/R2 save evidence but is not release-ready.
+Last updated: 2026-05-05 15:53 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the product alpha-1 local same-session runtime/save/transport/viewer first cut. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; `samples/product-alpha1/` now has product alpha schema/check, local same-session run/session/attach, local R0/R2 save evidence, local/Docker transport, and non-final devtools/viewer evidence but is not release-ready.
 
 ## Legend
 
@@ -11,7 +11,7 @@ Primary metric:
 - `evidence-closed`: helper / sidecar / report / expected JSON / first-floor runner evidence is synchronized and validated, but the row is not operational workflow completion.
 - `boundary-fixed`: normative specs / roadmap define the boundary, but no reproducible workflow is present yet.
 - `entrypoint/schema-ready`: alpha CLI and package schema checks are reproducible, but the product workflow is not yet end-to-end.
-- `local-session-first-cut`: alpha CLI can run a local same-session product demo carrier, but release validation remains incomplete.
+- `product-carrier-first-cut`: alpha CLI can run a local same-session product demo carrier through save/load, transport, and non-final viewer export, but native bundle and release validation remain incomplete.
 - `planned`: source or roadmap exists, but no reproducible workflow is present.
 
 Notes:
@@ -28,7 +28,7 @@ Notes:
 | α-0.8 same-session hot-plug runtime | workflow-ready: same-session hot-plug workflow | `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json` | `HP-A1-01..07`, `AV-A1-03`, `VIS-A1-04/05`, `OA08-01..10`, `crates/mir-runtime::practical_alpha08_hotplug_session`, `specs/21/22/24`, `plan/46/48/49` | accepted detach execution / distributed ordering |
 | α-0.9 session-bound devtools | workflow-ready: session-bound devtools workflow | `python3 scripts/practical_alpha09_devtools.py check-all --format json` | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | final public viewer/telemetry ABI, durable audit |
 | practical α-1 integrated workflow | bounded workflow-ready, not product/public-ready | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | `PA1W-01..08`, exact `VIS-A1-01` / `PE2E-01/02/07` evidence, `OA05/OA08/OA09` carriers | product/public-ready α-1, final public viewer/telemetry ABI, distributed durable save/load |
-| product alpha-1 local same-session runtime/save | local-session-first-cut, not release-ready | `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` | `crates/mirrorea-cli`, `crates/mir-ast::product_alpha1`, `crates/mir-runtime::product_alpha1_session`, `samples/product-alpha1/demo`, declared host-I/O runtime input, local session store, debug-layer attach lifecycle, bounded recovery rows, R0 save/load, R2 quiescent-save | local/Docker transport command behavior, product viewer, native launch bundle, release validation |
+| product alpha-1 local same-session runtime/save/transport/viewer | product-carrier-first-cut, not release-ready | `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` | `crates/mirrorea-cli`, `crates/mir-ast::product_alpha1`, `crates/mir-runtime::product_alpha1_session`, `crates/mir-runtime::product_alpha1_transport`, `crates/mir-runtime::product_alpha1_devtools`, `samples/product-alpha1/demo`, `samples/product-alpha1/docker`, local session store, bounded recovery rows, R0/R2 save, local loopback TCP, Docker Compose TCP, non-final viewer bundle | native launch bundle, release validation |
 
 ## Practical alpha-1 first-floor map
 
@@ -80,6 +80,11 @@ Notes:
 - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json`
 - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json`
 - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json`
+- `cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json`
+- `cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha08_session_hotplug -- --nocapture`
@@ -96,6 +101,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-05 15:53 JST | `P-A1-29` product alpha transport + viewer | pass | `mirrorea-alpha transport --mode local` / `--mode docker`、Docker Compose TCP endpoint reports、`export-devtools` bundle、`view --check` を same session carrier に追加。observer-safe redaction、admin/debug `kept_later`、13 panel IDs を確認。native bundle / release validation は later |
 | 2026-05-05 15:06 JST | `P-A1-28` product alpha message recovery + quiescent-save | pass | DAG-linked `MessageState` / `TransportContract` / `RecoveryPolicy` rows、`mirrorea-alpha save` / `load` / `quiescent-save`、R0 local save/load、bounded R2 quiescent-save、load-admissibility reject、duplicate event-ID guard を same session carrier に追加。transport / viewer / native bundle は later |
 | 2026-05-05 14:48 JST | `P-A1-27` product alpha local same-session runtime | pass | `mirrorea-alpha run-local` / `session` / `attach` と `crates/mir-runtime::product_alpha1_session` を追加。同じ local session file に declared typed host-I/O、activation cut、auth/capability decision、hot-plug lifecycle、membership/witness/route/save-load/recovery state を保持。transport / save-load / viewer / native bundle は later |
 | 2026-05-05 14:00 JST | `P-A1-26` product alpha CLI/schema | pass | `mirrorea-alpha check` と product `package.mir.json` schema first cut を追加。later command family は structured unsupported。product workflow-ready claim はまだしない |

@@ -3,18 +3,35 @@ use std::{
     fs::{self, File, OpenOptions},
     io::{self, Write},
     path::{Path, PathBuf},
-    process, thread,
+    process::{self, Command},
+    thread,
     time::Duration,
 };
 
 use mir_ast::product_alpha1::{ProductAlpha1Error, check_product_alpha1_package_path};
-use mir_runtime::product_alpha1_session::{
-    ProductAlpha1SessionCarrier, ProductAlpha1SessionError,
-    attach_product_alpha1_package_to_session_path, load_product_alpha1_session,
-    quiescent_save_product_alpha1_session, run_product_alpha1_local_session_path,
-    save_product_alpha1_session,
+use mir_runtime::{
+    product_alpha1_devtools::{
+        ProductAlpha1DevtoolsBundle, export_product_alpha1_devtools_for_session,
+        render_product_alpha1_viewer_html, validate_product_alpha1_viewer_dir,
+    },
+    product_alpha1_session::{
+        ProductAlpha1SessionCarrier, ProductAlpha1SessionError, ProductAlpha1SessionErrorKind,
+        attach_product_alpha1_package_to_session_path, load_product_alpha1_session,
+        quiescent_save_product_alpha1_session, run_product_alpha1_local_session_path,
+        save_product_alpha1_session,
+    },
+    product_alpha1_transport::{
+        ProductAlpha1TransportEndpointReport, run_product_alpha1_transport_for_session,
+        run_product_alpha1_transport_participant_client, run_product_alpha1_transport_world_server,
+    },
 };
 use serde_json::{Value, json};
+
+const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV: &str =
+    "MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER";
+const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV: &str =
+    "MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN";
+const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: &str = "product-alpha1-docker-compose-fixture-v0";
 
 fn main() {
     let code = run(env::args().skip(1).collect());
@@ -42,8 +59,13 @@ fn run(args: Vec<String>) -> i32 {
         "save" => handle_save(rest),
         "load" => handle_load(rest),
         "quiescent-save" => handle_quiescent_save(rest),
-        "transport" | "export-devtools" | "view" | "build-native-bundle" | "demo" => {
-            (unsupported_command_payload(&command, rest), 2)
+        "transport" => handle_transport(rest),
+        "export-devtools" => handle_export_devtools(rest),
+        "view" => handle_view(rest),
+        "build-native-bundle" | "demo" => (unsupported_command_payload(&command, rest), 2),
+        "__product-transport-world-server" => handle_product_transport_world_server(rest),
+        "__product-transport-participant-client" => {
+            handle_product_transport_participant_client(rest)
         }
         _ => (
             json!({
@@ -344,6 +366,456 @@ fn handle_quiescent_save(args: &[String]) -> (Value, i32) {
     }
 }
 
+fn handle_transport(args: &[String]) -> (Value, i32) {
+    let (session_id, mode) = match parse_transport_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let session_path = session_path_for(&session_id);
+    let _lock = match acquire_session_lock(&session_path) {
+        Ok(lock) => lock,
+        Err(error) => return (io_error_payload("transport", error), 2),
+    };
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => return (io_error_payload("transport", error), 2),
+    };
+
+    let docker_evidence = if mode == "docker" {
+        match run_docker_compose_product_transport(&session, &session_path) {
+            Ok(evidence) => Some(evidence),
+            Err(error) => return (runtime_error_payload("transport", error), 2),
+        }
+    } else {
+        None
+    };
+    match run_product_alpha1_transport_for_session(&session, &mode) {
+        Ok((next_session, mut report)) => {
+            if let Some(evidence) = docker_evidence {
+                report.docker_compose_executed = true;
+                report.docker_compose_execution_status =
+                    "compose_tcp_roundtrip_executed".to_string();
+                report.wire_roundtrip_executed = true;
+                report.wire_bind_addr =
+                    "docker-compose://product_alpha1_net/world:41002".to_string();
+                report.wire_response_status = evidence.participant_report.terminal_outcome.clone();
+                report.docker_compose_file = evidence.compose_file.display().to_string();
+                report.docker_compose_output_dir = evidence.output_dir.display().to_string();
+                report.docker_world_report_path = evidence.world_report_path.display().to_string();
+                report.docker_participant_report_path =
+                    evidence.participant_report_path.display().to_string();
+                report.docker_world_terminal_outcome =
+                    evidence.world_report.terminal_outcome.clone();
+                report.docker_participant_terminal_outcome =
+                    evidence.participant_report.terminal_outcome.clone();
+                report.host_cli_fixture_execution = true;
+                report.package_native_execution_claimed = false;
+                report.native_execution_policy =
+                    "package_native_execution_disabled; host_cli_fixture_execution_only"
+                        .to_string();
+            }
+            write_session_report_payload("transport", next_session, report)
+        }
+        Err(error) => (runtime_error_payload("transport", error), 2),
+    }
+}
+
+fn handle_export_devtools(args: &[String]) -> (Value, i32) {
+    let (session_id, out_dir) = match parse_export_devtools_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let session_path = session_path_for(&session_id);
+    let _lock = match acquire_session_lock(&session_path) {
+        Ok(lock) => lock,
+        Err(error) => return (io_error_payload("export-devtools", error), 2),
+    };
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => return (io_error_payload("export-devtools", error), 2),
+    };
+
+    let export_ref = format!(
+        "devtools#{}",
+        stable_session_id_hash(&out_dir.display().to_string())
+    );
+    let (next_session, bundle) =
+        match export_product_alpha1_devtools_for_session(&session, &export_ref) {
+            Ok(result) => result,
+            Err(error) => return (runtime_error_payload("export-devtools", error), 2),
+        };
+    if let Err(error) = fs::create_dir_all(&out_dir) {
+        return (io_error_payload("export-devtools", error), 2);
+    }
+    let bundle_path = out_dir.join("bundle.json");
+    let html_path = out_dir.join("index.html");
+    if let Err(error) = write_json_artifact(&bundle_path, &bundle) {
+        return (io_error_payload("export-devtools", error), 2);
+    }
+    let html = render_product_alpha1_viewer_html(&bundle);
+    if let Err(error) = fs::write(&html_path, html) {
+        return (io_error_payload("export-devtools", error), 2);
+    }
+    if let Err(error) = write_session_unlocked(&next_session) {
+        return (io_error_payload("export-devtools", error), 2);
+    }
+
+    let mut value =
+        serde_json::to_value(bundle).expect("product alpha-1 devtools bundle should serialize");
+    insert_string(&mut value, "out_dir", out_dir.display().to_string());
+    insert_string(&mut value, "bundle_path", bundle_path.display().to_string());
+    insert_string(&mut value, "html_path", html_path.display().to_string());
+    insert_value(
+        &mut value,
+        "session",
+        observer_safe_session_payload(&next_session),
+    );
+    (value, 0)
+}
+
+fn handle_view(args: &[String]) -> (Value, i32) {
+    let (path, check) = match parse_view_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let viewer_openable = validate_product_alpha1_viewer_dir(&path);
+    let html_path = path.join("index.html");
+    let bundle_path = path.join("bundle.json");
+    let bundle_result = read_product_alpha1_viewer_bundle(&bundle_path);
+    let (bundle_valid, bundle_error, panel_ids) = match &bundle_result {
+        Ok(bundle) => (
+            validate_product_alpha1_viewer_bundle(bundle),
+            None,
+            bundle
+                .panel_ids
+                .iter()
+                .map(|panel| Value::String(panel.clone()))
+                .collect::<Vec<_>>(),
+        ),
+        Err(error) => (false, Some(error.clone()), Vec::new()),
+    };
+    let html_contains_required_panels = if html_path.is_file() {
+        fs::read_to_string(&html_path)
+            .map(|html| {
+                required_product_alpha1_viewer_panels()
+                    .iter()
+                    .all(|panel_id| html.contains(panel_id))
+                    && !html.contains("raw_witness_payload")
+                    && !html.contains("raw_auth_evidence")
+                    && !html.contains("granted_capabilities")
+            })
+            .unwrap_or(false)
+    } else {
+        false
+    };
+    let success = viewer_openable && (!check || (bundle_valid && html_contains_required_panels));
+    (
+        json!({
+            "surface_kind": "product_alpha1_view_report",
+            "status": if success { "accepted" } else { "error" },
+            "diagnostic_code": if success { Value::Null } else { Value::String("invalid_viewer_bundle".to_string()) },
+            "viewer_openable": viewer_openable,
+            "check_requested": check,
+            "bundle_valid": bundle_valid,
+            "bundle_error": bundle_error,
+            "html_contains_required_panels": html_contains_required_panels,
+            "out_dir": path.display().to_string(),
+            "bundle_path": bundle_path.display().to_string(),
+            "html_path": html_path.display().to_string(),
+            "panel_ids": panel_ids,
+            "viewer_mode": "product_alpha1_nonfinal_static_html_viewer",
+            "non_claims": [
+                "not final public viewer API",
+                "not raw admin/debug secret export"
+            ],
+            "product_alpha1_ready": false,
+            "final_public_viewer_frozen": false,
+            "final_public_api_frozen": false
+        }),
+        if success { 0 } else { 2 },
+    )
+}
+
+fn handle_product_transport_world_server(args: &[String]) -> (Value, i32) {
+    let (session_path, endpoint, output_path, fixture_token) =
+        match parse_transport_endpoint_args("__product-transport-world-server", args, "--bind") {
+            Ok(parsed) => parsed,
+            Err(payload) => return payload,
+        };
+    if let Err(payload) =
+        authorize_transport_fixture_helper("__product-transport-world-server", &fixture_token)
+    {
+        return payload;
+    }
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => {
+            return (
+                io_error_payload("__product-transport-world-server", error),
+                2,
+            );
+        }
+    };
+    match run_product_alpha1_transport_world_server(&session, &endpoint, output_path.as_deref()) {
+        Ok(report) => (
+            serde_json::to_value(&report)
+                .expect("product alpha-1 transport endpoint report should serialize"),
+            if report.terminal_outcome == "accepted" {
+                0
+            } else {
+                2
+            },
+        ),
+        Err(error) => (
+            runtime_error_payload("__product-transport-world-server", error),
+            2,
+        ),
+    }
+}
+
+fn handle_product_transport_participant_client(args: &[String]) -> (Value, i32) {
+    let (session_path, endpoint, output_path, fixture_token) = match parse_transport_endpoint_args(
+        "__product-transport-participant-client",
+        args,
+        "--addr",
+    ) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    if let Err(payload) =
+        authorize_transport_fixture_helper("__product-transport-participant-client", &fixture_token)
+    {
+        return payload;
+    }
+    let session = match read_session_unlocked(&session_path) {
+        Ok(session) => session,
+        Err(error) => {
+            return (
+                io_error_payload("__product-transport-participant-client", error),
+                2,
+            );
+        }
+    };
+    match run_product_alpha1_transport_participant_client(
+        &session,
+        &endpoint,
+        output_path.as_deref(),
+    ) {
+        Ok(report) => (
+            serde_json::to_value(&report)
+                .expect("product alpha-1 transport endpoint report should serialize"),
+            if report.terminal_outcome == "accepted" {
+                0
+            } else {
+                2
+            },
+        ),
+        Err(error) => (
+            runtime_error_payload("__product-transport-participant-client", error),
+            2,
+        ),
+    }
+}
+
+#[derive(Debug, Clone)]
+struct DockerComposeProductTransportEvidence {
+    compose_file: PathBuf,
+    output_dir: PathBuf,
+    world_report_path: PathBuf,
+    participant_report_path: PathBuf,
+    world_report: ProductAlpha1TransportEndpointReport,
+    participant_report: ProductAlpha1TransportEndpointReport,
+}
+
+fn run_docker_compose_product_transport(
+    session: &ProductAlpha1SessionCarrier,
+    session_path: &Path,
+) -> Result<DockerComposeProductTransportEvidence, ProductAlpha1SessionError> {
+    check_docker_compose_available()?;
+    let compose_file = product_alpha1_docker_compose_file();
+    if !compose_file.is_file() {
+        return Err(transport_cli_error(
+            &compose_file,
+            format!(
+                "product alpha-1 Docker Compose file is missing: {}",
+                compose_file.display()
+            ),
+        ));
+    }
+    let binary = env::current_exe().map_err(|error| transport_cli_error(session_path, error))?;
+    let output_dir = env::temp_dir().join(format!(
+        "mirrorea-product-alpha1-transport-{}-{}",
+        process::id(),
+        stable_session_id_hash(&session_path.display().to_string())
+    ));
+    fs::create_dir_all(&output_dir).map_err(|error| transport_cli_error(&output_dir, error))?;
+    let session_file =
+        fs::canonicalize(session_path).map_err(|error| transport_cli_error(session_path, error))?;
+    let compose_file =
+        fs::canonicalize(compose_file).map_err(|error| transport_cli_error(session_path, error))?;
+    let project_name = format!(
+        "mirrorea-product-a1-{}",
+        stable_session_id_hash(&output_dir.display().to_string())
+    );
+
+    let mut up = Command::new("docker");
+    up.args([
+        "compose",
+        "-p",
+        &project_name,
+        "-f",
+        compose_file
+            .to_str()
+            .ok_or_else(|| transport_cli_error(&compose_file, "non-utf8 compose path"))?,
+        "up",
+        "--abort-on-container-exit",
+        "--exit-code-from",
+        "participant",
+    ]);
+    up.env("MIRROREA_PRODUCT_ALPHA1_BINARY", binary);
+    up.env("MIRROREA_PRODUCT_ALPHA1_SESSION_FILE", &session_file);
+    up.env("MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR", &output_dir);
+    up.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV, "1");
+    up.env(
+        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV,
+        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN,
+    );
+    let completed = up
+        .output()
+        .map_err(|error| transport_cli_error(session_path, error))?;
+
+    let mut down = Command::new("docker");
+    down.args([
+        "compose",
+        "-p",
+        &project_name,
+        "-f",
+        compose_file
+            .to_str()
+            .ok_or_else(|| transport_cli_error(&compose_file, "non-utf8 compose path"))?,
+        "down",
+        "--remove-orphans",
+        "-v",
+    ]);
+    down.env("MIRROREA_PRODUCT_ALPHA1_SESSION_FILE", &session_file);
+    down.env("MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR", &output_dir);
+    down.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV, "1");
+    down.env(
+        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV,
+        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN,
+    );
+    let _ = down.output();
+
+    if !completed.status.success() {
+        return Err(transport_cli_error(
+            &compose_file,
+            format!(
+                "product alpha-1 Docker Compose transport failed: {}{}",
+                String::from_utf8_lossy(&completed.stdout),
+                String::from_utf8_lossy(&completed.stderr)
+            ),
+        ));
+    }
+
+    let world_report_path = output_dir.join("world.json");
+    let participant_report_path = output_dir.join("participant.json");
+    if !world_report_path.is_file() || !participant_report_path.is_file() {
+        return Err(transport_cli_error(
+            &output_dir,
+            "product alpha-1 Docker Compose transport did not produce both endpoint reports",
+        ));
+    }
+    let world_report: ProductAlpha1TransportEndpointReport = read_json_artifact(&world_report_path)
+        .map_err(|error| transport_cli_error(&world_report_path, error))?;
+    let participant_report: ProductAlpha1TransportEndpointReport =
+        read_json_artifact(&participant_report_path)
+            .map_err(|error| transport_cli_error(&participant_report_path, error))?;
+    validate_docker_endpoint_report("world", session, &world_report, &world_report_path)?;
+    validate_docker_endpoint_report(
+        "participant",
+        session,
+        &participant_report,
+        &participant_report_path,
+    )?;
+    Ok(DockerComposeProductTransportEvidence {
+        compose_file,
+        output_dir,
+        world_report_path,
+        participant_report_path,
+        world_report,
+        participant_report,
+    })
+}
+
+fn check_docker_compose_available() -> Result<(), ProductAlpha1SessionError> {
+    for args in [["--version"].as_slice(), ["compose", "version"].as_slice()] {
+        let completed = Command::new("docker")
+            .args(args)
+            .output()
+            .map_err(|error| transport_cli_error("<docker>", error))?;
+        if !completed.status.success() {
+            return Err(transport_cli_error(
+                "<docker>",
+                format!(
+                    "docker {:?} failed: {}{}",
+                    args,
+                    String::from_utf8_lossy(&completed.stdout),
+                    String::from_utf8_lossy(&completed.stderr)
+                ),
+            ));
+        }
+    }
+    Ok(())
+}
+
+fn validate_docker_endpoint_report(
+    expected_role: &str,
+    session: &ProductAlpha1SessionCarrier,
+    report: &ProductAlpha1TransportEndpointReport,
+    path: &Path,
+) -> Result<(), ProductAlpha1SessionError> {
+    let accepted = report.role == expected_role
+        && report.session_id == session.session_id
+        && report.package_id == session.package_id
+        && report.terminal_outcome == "accepted"
+        && report.rejection_reason_refs.is_empty()
+        && report.transport_medium == "docker_compose_tcp"
+        && report.transport_lane == "product_docker_compose_tcp"
+        && report.auth_lane_preserved
+        && report.membership_lane_preserved
+        && report.capability_lane_preserved
+        && report.witness_lane_preserved
+        && !report.wan_federation_claimed
+        && !report.package_native_execution_claimed;
+    if accepted {
+        Ok(())
+    } else {
+        Err(transport_cli_error(
+            path,
+            format!("invalid product alpha-1 Docker endpoint report: {report:?}"),
+        ))
+    }
+}
+
+fn transport_cli_error(
+    path: impl Into<PathBuf>,
+    detail: impl ToString,
+) -> ProductAlpha1SessionError {
+    ProductAlpha1SessionError {
+        kind: ProductAlpha1SessionErrorKind::Transport,
+        path: path.into(),
+        detail: detail.to_string(),
+    }
+}
+
+fn product_alpha1_docker_compose_file() -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli")
+        .join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml")
+}
+
 fn write_session_report_payload<T: serde::Serialize>(
     command: &str,
     next_session: ProductAlpha1SessionCarrier,
@@ -353,12 +825,13 @@ fn write_session_report_payload<T: serde::Serialize>(
         Ok(session_path) => {
             let mut value = serde_json::to_value(report)
                 .expect("product alpha-1 session mutation report should serialize");
-            let session_payload = if matches!(command, "save" | "load" | "quiescent-save") {
-                observer_safe_session_payload(&next_session)
-            } else {
-                serde_json::to_value(next_session)
-                    .expect("product alpha-1 session should serialize")
-            };
+            let session_payload =
+                if matches!(command, "save" | "load" | "quiescent-save" | "transport") {
+                    observer_safe_session_payload(&next_session)
+                } else {
+                    serde_json::to_value(next_session)
+                        .expect("product alpha-1 session should serialize")
+                };
             insert_value(&mut value, "session", session_payload);
             insert_string(
                 &mut value,
@@ -499,6 +972,231 @@ fn parse_load_args(args: &[String]) -> Result<LoadArgs, (Value, i32)> {
     Ok(LoadArgs {
         session_id,
         savepoint_id,
+    })
+}
+
+fn parse_transport_args(args: &[String]) -> Result<(String, String), (Value, i32)> {
+    let Some(session_id) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "transport",
+                "diagnostic_code": "missing_session_id",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    if is_direct_mir_path(session_id) {
+        return Err((direct_mir_non_goal_payload("transport", true), 2));
+    }
+
+    let mut mode = "local".to_string();
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--mode" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload("transport", &args[index..]), 2));
+                };
+                mode = value.clone();
+                index += 2;
+            }
+            _ => return Err((unexpected_arguments_payload("transport", &args[index..]), 2)),
+        }
+    }
+    Ok((session_id.clone(), mode))
+}
+
+fn parse_export_devtools_args(args: &[String]) -> Result<(String, PathBuf), (Value, i32)> {
+    let Some(session_id) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "export-devtools",
+                "diagnostic_code": "missing_session_id",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    if is_direct_mir_path(session_id) {
+        return Err((direct_mir_non_goal_payload("export-devtools", true), 2));
+    }
+
+    let mut out_dir = None;
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--out" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("export-devtools", &args[index..]),
+                        2,
+                    ));
+                };
+                out_dir = Some(PathBuf::from(value));
+                index += 2;
+            }
+            _ => {
+                return Err((
+                    unexpected_arguments_payload("export-devtools", &args[index..]),
+                    2,
+                ));
+            }
+        }
+    }
+    let Some(out_dir) = out_dir else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "export-devtools",
+                "diagnostic_code": "missing_out_dir",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    Ok((session_id.clone(), out_dir))
+}
+
+fn parse_view_args(args: &[String]) -> Result<(PathBuf, bool), (Value, i32)> {
+    let Some(path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "view",
+                "diagnostic_code": "missing_viewer_path",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    if is_direct_mir_path(path) {
+        return Err((direct_mir_non_goal_payload("view", true), 2));
+    }
+
+    let mut check = false;
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--check" => {
+                check = true;
+                index += 1;
+            }
+            _ => return Err((unexpected_arguments_payload("view", &args[index..]), 2)),
+        }
+    }
+    Ok((PathBuf::from(path), check))
+}
+
+fn parse_transport_endpoint_args(
+    command: &str,
+    args: &[String],
+    endpoint_flag: &str,
+) -> Result<(PathBuf, String, Option<PathBuf>, String), (Value, i32)> {
+    let Some(session_path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": command,
+                "diagnostic_code": "missing_session_file",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    let mut endpoint = None;
+    let mut output_path = None;
+    let mut fixture_token = None;
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            flag if flag == endpoint_flag => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload(command, &args[index..]), 2));
+                };
+                endpoint = Some(value.clone());
+                index += 2;
+            }
+            "--output" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload(command, &args[index..]), 2));
+                };
+                output_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--fixture-token" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload(command, &args[index..]), 2));
+                };
+                fixture_token = Some(value.clone());
+                index += 2;
+            }
+            _ => return Err((unexpected_arguments_payload(command, &args[index..]), 2)),
+        }
+    }
+    let Some(endpoint) = endpoint else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": command,
+                "diagnostic_code": "missing_endpoint",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    let Some(fixture_token) = fixture_token else {
+        return Err((transport_helper_not_authorized_payload(command), 2));
+    };
+    Ok((
+        PathBuf::from(session_path),
+        endpoint,
+        output_path,
+        fixture_token,
+    ))
+}
+
+fn authorize_transport_fixture_helper(
+    command: &str,
+    fixture_token: &str,
+) -> Result<(), (Value, i32)> {
+    let helper_enabled = env::var(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV)
+        .map(|value| value == "1")
+        .unwrap_or(false);
+    let env_token_ok = env::var(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV)
+        .map(|value| value == PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN)
+        .unwrap_or(false);
+    let arg_token_ok = fixture_token == PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN;
+    if helper_enabled && env_token_ok && arg_token_ok {
+        Ok(())
+    } else {
+        Err((transport_helper_not_authorized_payload(command), 2))
+    }
+}
+
+fn transport_helper_not_authorized_payload(command: &str) -> Value {
+    json!({
+        "status": "unsupported",
+        "command": command,
+        "diagnostic_code": "transport_helper_not_authorized",
+        "implemented": false,
+        "message": "product alpha-1 transport endpoint helpers are Docker Compose fixture-internal only",
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
     })
 }
 
@@ -686,6 +1384,83 @@ fn write_session_unlocked(session: &ProductAlpha1SessionCarrier) -> Result<PathB
         }
     }
     Ok(path)
+}
+
+fn write_json_artifact<T: serde::Serialize>(path: &Path, payload: &T) -> Result<(), io::Error> {
+    let text = serde_json::to_string_pretty(payload)
+        .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))?;
+    fs::write(path, format!("{text}\n"))
+}
+
+fn read_json_artifact<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T, io::Error> {
+    let text = fs::read_to_string(path)?;
+    serde_json::from_str(&text).map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
+}
+
+fn read_product_alpha1_viewer_bundle(path: &Path) -> Result<ProductAlpha1DevtoolsBundle, String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    if observer_safe_bundle_text_contains_forbidden_keys(&text) {
+        return Err(
+            "viewer bundle contains forbidden observer-safe raw witness/auth/capability keys"
+                .to_string(),
+        );
+    }
+    serde_json::from_str(&text).map_err(|error| error.to_string())
+}
+
+fn validate_product_alpha1_viewer_bundle(bundle: &ProductAlpha1DevtoolsBundle) -> bool {
+    bundle.surface_kind == "product_alpha1_devtools_export_report"
+        && bundle.viewer_mode == "product_alpha1_nonfinal_static_html_viewer"
+        && bundle.observer_authority.contains("observer_safe")
+        && bundle.redaction_policy == "observer_safe"
+        && bundle.admin_debug_view_status == "kept_later"
+        && !bundle.final_public_viewer_frozen
+        && !bundle.durable_audit_claimed
+        && required_product_alpha1_viewer_panels()
+            .iter()
+            .all(|panel| bundle.panel_ids.iter().any(|value| value == panel))
+        && !viewer_bundle_contains_forbidden_observer_safe_strings(bundle)
+}
+
+fn viewer_bundle_contains_forbidden_observer_safe_strings(
+    bundle: &ProductAlpha1DevtoolsBundle,
+) -> bool {
+    let text = match serde_json::to_string(bundle) {
+        Ok(text) => text,
+        Err(_) => return true,
+    };
+    observer_safe_bundle_text_contains_forbidden_keys(&text)
+}
+
+fn observer_safe_bundle_text_contains_forbidden_keys(text: &str) -> bool {
+    [
+        "raw_witness_payload",
+        "raw_auth_evidence",
+        "witness_refs",
+        "granted_capabilities",
+        "ObserveDebugSummary",
+        "AttachDebugLayer",
+    ]
+    .iter()
+    .any(|needle| text.contains(needle))
+}
+
+fn required_product_alpha1_viewer_panels() -> &'static [&'static str] {
+    &[
+        "product_overview",
+        "place_graph",
+        "event_dag",
+        "message_route_graph",
+        "membership_frontier_timeline",
+        "witness_relation_timeline",
+        "hotplug_lifecycle",
+        "save_load_quiescent_timeline",
+        "message_failure_recovery",
+        "fallback_degradation",
+        "auth_capability_decision",
+        "redaction_toggle",
+        "retention_trace",
+    ]
 }
 
 fn session_path_for(session_id: &str) -> PathBuf {

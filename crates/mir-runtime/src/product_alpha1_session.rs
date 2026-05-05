@@ -49,6 +49,7 @@ pub enum ProductAlpha1SessionErrorKind {
     LoadAdmissibility,
     MissingSavepoint,
     Serialize,
+    Transport,
     UnsupportedPackage,
 }
 

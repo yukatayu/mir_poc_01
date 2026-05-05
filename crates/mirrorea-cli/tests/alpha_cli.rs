@@ -230,9 +230,6 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
     let out = out_dir.to_str().expect("temp out should be utf-8");
 
     let command_args: &[(&str, &[&str])] = &[
-        ("transport", &[package, "--mode", "local"]),
-        ("export-devtools", &["session-alpha1-demo", "--out", out]),
-        ("view", &[out]),
         ("build-native-bundle", &[package, "--out", out]),
         ("demo", &["--out", out]),
     ];
@@ -427,6 +424,206 @@ fn repeated_default_save_and_quiescent_save_keep_session_event_ids_unique() {
     assert_eq!(load_value["surface_kind"], "product_alpha1_load_report");
     assert_eq!(load_value["terminal_outcome"], "loaded");
     assert_eq!(load_value["session"]["phase"], "loaded");
+}
+
+#[test]
+fn transport_export_devtools_and_view_use_same_product_session() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-transport-viewer");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let out_dir = unique_temp_dir("mirrorea-alpha-cli-devtools-out");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+
+    let run = run_cli_with_session_dir(
+        &[
+            "run-local",
+            demo.to_str().expect("demo path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let run_value = json_stdout(&run);
+    assert!(run.status.success());
+    let session_id = run_value["session"]["session_id"].as_str().unwrap();
+
+    let transport = run_cli_with_session_dir(
+        &[
+            "transport",
+            session_id,
+            "--mode",
+            "local",
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let transport_value = json_stdout(&transport);
+    assert!(transport.status.success());
+    assert_eq!(
+        transport_value["surface_kind"],
+        "product_alpha1_transport_report"
+    );
+    assert_eq!(transport_value["mode"], "local");
+    assert_eq!(transport_value["wire_roundtrip_executed"], true);
+    assert_eq!(transport_value["session"]["phase"], "transported");
+
+    let export = run_cli_with_session_dir(
+        &[
+            "export-devtools",
+            session_id,
+            "--out",
+            out_dir.to_str().expect("out dir should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let export_value = json_stdout(&export);
+    assert!(export.status.success());
+    assert_eq!(
+        export_value["surface_kind"],
+        "product_alpha1_devtools_export_report"
+    );
+    assert!(out_dir.join("bundle.json").exists());
+    assert!(out_dir.join("index.html").exists());
+    let bundle_text = fs::read_to_string(out_dir.join("bundle.json")).unwrap();
+    assert!(!bundle_text.contains("witness_refs"));
+    assert!(!bundle_text.contains("granted_capabilities"));
+    assert!(!bundle_text.contains("ObserveDebugSummary"));
+    assert!(!bundle_text.contains("AttachDebugLayer"));
+    assert!(
+        export_value["panel_ids"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|panel| panel == "message_route_graph")
+    );
+
+    let view = run_cli_with_session_dir(
+        &[
+            "view",
+            out_dir.to_str().expect("out dir should be utf-8"),
+            "--check",
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let view_value = json_stdout(&view);
+    assert!(view.status.success());
+    assert_eq!(view_value["surface_kind"], "product_alpha1_view_report");
+    assert_eq!(view_value["viewer_openable"], true);
+    assert_eq!(view_value["bundle_valid"], true);
+    assert_eq!(view_value["html_contains_required_panels"], true);
+    assert_eq!(view_value["final_public_viewer_frozen"], false);
+}
+
+#[test]
+fn view_check_rejects_malformed_or_placeholder_bundle() {
+    let out_dir = unique_temp_dir("mirrorea-alpha-cli-bad-viewer-out");
+    fs::create_dir_all(&out_dir).expect("out dir should be created");
+    fs::write(out_dir.join("bundle.json"), "{}\n").expect("bad bundle should be written");
+    fs::write(
+        out_dir.join("index.html"),
+        "<section id=\"product_overview\"></section>",
+    )
+    .expect("html should be written");
+
+    let view = run_cli(&[
+        "view",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--check",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&view);
+    assert!(!view.status.success());
+    assert_eq!(value["surface_kind"], "product_alpha1_view_report");
+    assert_eq!(value["diagnostic_code"], "invalid_viewer_bundle");
+    assert_eq!(value["bundle_valid"], false);
+}
+
+#[test]
+fn view_check_rejects_tampered_observer_unsafe_bundle_keys() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-tampered-viewer-session");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let out_dir = unique_temp_dir("mirrorea-alpha-cli-tampered-viewer-out");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+
+    let run = run_cli_with_session_dir(
+        &[
+            "run-local",
+            demo.to_str().expect("demo path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let run_value = json_stdout(&run);
+    assert!(run.status.success());
+    let session_id = run_value["session"]["session_id"].as_str().unwrap();
+    let export = run_cli_with_session_dir(
+        &[
+            "export-devtools",
+            session_id,
+            "--out",
+            out_dir.to_str().expect("out dir should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    assert!(export.status.success());
+
+    let bundle_path = out_dir.join("bundle.json");
+    let mut bundle: Value =
+        serde_json::from_str(&fs::read_to_string(&bundle_path).unwrap()).unwrap();
+    bundle["witness_refs"] = serde_json::json!(["private_witness"]);
+    bundle["panels"]["auth_capability_decision"]["capability_decisions"][0]["granted_capabilities"] =
+        serde_json::json!(["private.capability.admin"]);
+    fs::write(&bundle_path, serde_json::to_string_pretty(&bundle).unwrap()).unwrap();
+
+    let view = run_cli(&[
+        "view",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--check",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&view);
+    assert!(!view.status.success());
+    assert_eq!(value["diagnostic_code"], "invalid_viewer_bundle");
+    assert_eq!(value["bundle_valid"], false);
+    assert!(
+        value["bundle_error"]
+            .as_str()
+            .unwrap()
+            .contains("forbidden observer-safe")
+    );
+}
+
+#[test]
+fn product_transport_endpoint_helpers_require_fixture_gate() {
+    let output = run_cli(&[
+        "__product-transport-world-server",
+        "/tmp/nonexistent-product-alpha1-session.json",
+        "--bind",
+        "127.0.0.1:0",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+    assert!(!output.status.success());
+    assert_eq!(value["status"], "unsupported");
+    assert_eq!(value["diagnostic_code"], "transport_helper_not_authorized");
 }
 
 #[test]

@@ -1,0 +1,55 @@
+services:
+  world:
+    image: ubuntu:24.04
+    entrypoint:
+      - /usr/local/bin/mirrorea-alpha
+      - __product-transport-world-server
+      - /session/session.json
+      - --bind
+      - 0.0.0.0:41002
+      - --output
+      - /out/world.json
+      - --fixture-token
+      - product-alpha1-docker-compose-fixture-v0
+      - --format
+      - json
+    environment:
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER: "1"
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: product-alpha1-docker-compose-fixture-v0
+    volumes:
+      - ${MIRROREA_PRODUCT_ALPHA1_BINARY}:/usr/local/bin/mirrorea-alpha:ro
+      - ${MIRROREA_PRODUCT_ALPHA1_SESSION_FILE}:/session/session.json:ro
+      - ${MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR}:/out
+    networks:
+      - product_alpha1_net
+
+  participant:
+    image: ubuntu:24.04
+    depends_on:
+      world:
+        condition: service_started
+    entrypoint:
+      - /usr/local/bin/mirrorea-alpha
+      - __product-transport-participant-client
+      - /session/session.json
+      - --addr
+      - world:41002
+      - --output
+      - /out/participant.json
+      - --fixture-token
+      - product-alpha1-docker-compose-fixture-v0
+      - --format
+      - json
+    environment:
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER: "1"
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: product-alpha1-docker-compose-fixture-v0
+    volumes:
+      - ${MIRROREA_PRODUCT_ALPHA1_BINARY}:/usr/local/bin/mirrorea-alpha:ro
+      - ${MIRROREA_PRODUCT_ALPHA1_SESSION_FILE}:/session/session.json:ro
+      - ${MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR}:/out
+    networks:
+      - product_alpha1_net
+
+networks:
+  product_alpha1_net:
+    driver: bridge

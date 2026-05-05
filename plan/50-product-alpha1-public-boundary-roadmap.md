@@ -20,10 +20,13 @@ Current repo already has:
 
 Current repo still lacks product alpha-1:
 
-- local and Docker transport product command path
-- product viewer UX over product demo bundle
 - native launch bundle
 - clean-clone release-candidate validation
+
+Recent closed first cuts:
+
+- local and Docker transport product command path
+- product viewer UX over product demo bundle
 
 ## alpha defaults from `P-A1-25`
 
@@ -131,14 +134,14 @@ Validation:
 - same-session state transition evidence exists
 - membership / capability / witness / auth lanes remain separate in the route and attach decision surfaces
 - save/load and message recovery state are carried but execution remains explicitly residual
-- `transport --mode local` and `transport --mode docker` product paths remain release blockers for later packages
+- at this P-A1-27 closeout point, `transport --mode local` and `transport --mode docker` product paths remained release blockers for later packages
 
 Non-claim:
 
 - no distributed durable save/load
 - no production WAN / federation
 - no accepted detach execution unless explicitly implemented
-- no local/Docker transport command completion
+- no local/Docker transport command completion in P-A1-27
 - no quiescent-save execution
 - no final product viewer or native launch bundle
 
@@ -181,12 +184,25 @@ Non-claim:
 
 ### `P-A1-29` — product local/Docker transport plus devtools viewer UX
 
+Status:
+
+- closed by `P-A1-29`
+- workflow-ready first cut for same-session product transport and non-final viewer
+- not product alpha release-ready until native bundle and release validation close
+
 Target:
 
 - product `transport --mode local|docker` command behavior over the same session carrier, keeping transport/auth/membership/capability/witness lanes separate
 - product-level static HTML/local viewer
 - product overview, place graph, event DAG, route graph, membership timeline, witness timeline, hot-plug lifecycle, save/quiescent-save, message recovery, fallback, auth/capability, redaction, retention panels
 - observer-safe leak tests
+
+Delivered:
+
+- `crates/mir-runtime::product_alpha1_transport` adds same-session transport mutation reports, loopback TCP local round trip, Docker Compose TCP endpoint functions, explicit lane preservation, and WAN/federation non-claims.
+- `samples/product-alpha1/docker/docker-compose.product-alpha1.yml` runs a world server and participant client over Docker Compose TCP with the mounted `mirrorea-alpha` binary and selected session JSON.
+- `crates/mir-runtime::product_alpha1_devtools` exports a non-final product devtools JSON bundle and static HTML viewer over the product session carrier.
+- `mirrorea-alpha transport`, `export-devtools`, and `view --check` are implemented. `build-native-bundle` and `demo` remain later-package unsupported diagnostics.
 
 Validation:
 
@@ -310,8 +326,8 @@ MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local s
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode local --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode docker --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load latest --session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json
@@ -327,7 +343,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- product local/Docker transport command behavior plus viewer UX
 - native launch bundle
 - clean-clone validation docs
 
@@ -350,6 +365,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-29` product local/Docker transport plus devtools viewer UX
+- `P-A1-30` native launch bundle
 
 Queue authority remains `progress.md` / `tasks.md`.

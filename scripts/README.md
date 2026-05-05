@@ -67,11 +67,17 @@
   - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json`
   - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json`
   - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json`
+  - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json`
+  - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json`
+  - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json`
+  - `cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json`
   - this exercises `samples/product-alpha1/demo/package.mir.json` through `crates/mir-ast::product_alpha1`
   - `check` is implemented for schema acceptance / explicit residual obligations
   - `run-local`、`session`、`attach`、`save`、`load`、`quiescent-save` are implemented for a local file-backed product session carrier through `crates/mir-runtime::product_alpha1_session`
-  - `transport`、`export-devtools`、`view`、`build-native-bundle`、`demo` currently return structured unsupported diagnostics
-  - it does not claim local/Docker transport command completion, product-ready alpha-1, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, viewer completion, native bundle completion, or arbitrary native execution
+  - `transport` is implemented through `crates/mir-runtime::product_alpha1_transport`; local mode uses loopback TCP and Docker mode uses `samples/product-alpha1/docker/docker-compose.product-alpha1.yml` when Docker / Docker Compose are available
+  - `export-devtools` / `view` are implemented through `crates/mir-runtime::product_alpha1_devtools` as a non-final static HTML / JSON viewer bundle
+  - `build-native-bundle` and `demo` currently return structured unsupported diagnostics
+  - it does not claim product-ready alpha-1, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, native bundle completion, or arbitrary native execution
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

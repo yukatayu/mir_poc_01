@@ -23,7 +23,14 @@ This directory is the initial Product Alpha-1 demo package root.
 - R2 local `quiescent-save` with `NoInFlight`, `AllPlacesSealed`, and `NoPostCutSend`
 - observable rejected quiescent-save when an in-flight message remains
 
-It is not yet the full product demo workflow. Local/Docker transport command behavior, devtools viewer, native launch bundle, and release-candidate guide are scheduled for later `P-A1-29..31` packages. R3/R4 durable distributed save/load remains a non-goal.
+`P-A1-29` uses it for:
+
+- same-session `transport --mode local` loopback TCP
+- controlled Docker Compose TCP `transport --mode docker` using `samples/product-alpha1/docker/`
+- non-final `export-devtools` JSON/HTML bundle with observer-safe redaction
+- `view --check` static viewer openability and panel presence validation
+
+It is not yet the full product demo workflow. Native launch bundle and release-candidate guide are scheduled for later `P-A1-30..31` packages. R3/R4 durable distributed save/load remains a non-goal.
 
 Commands:
 
@@ -36,4 +43,20 @@ MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'ses
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json
+viewer_dir=$(mktemp -d /tmp/mirrorea-alpha1-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out "$viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$viewer_dir" --check --format json
 ```
+
+The Docker transport command requires local Docker and Docker Compose. If those
+tools are unavailable, record an environment-gated skip with explicit non-claims
+instead of claiming the Docker probe passed.
+
+Non-claim:
+
+- no R3/R4 durable distributed save/load
+- no exactly-once transport
+- no WAN partition recovery
+- no final public viewer / telemetry ABI
