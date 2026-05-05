@@ -20,6 +20,7 @@ pub mod clean_near_end;
 pub mod current_l2;
 pub mod current_l2_cli;
 pub mod hotplug_runtime;
+pub mod practical_alpha05_host_io;
 pub mod practical_alpha05_session;
 pub mod practical_alpha1_avatar;
 pub mod practical_alpha1_hotplug;

@@ -21,11 +21,11 @@ current repo already has:
 - first devtools export floor
 - product-preview floor
 - bounded session runtime carrier (`practical_alpha05_session`)
+- minimal typed host-I/O direct execution lane (`practical_alpha05_host_io`, `OA05-07`)
 
 current repo still lacks:
 
-- typed host-I/O direct semantic execution lane
-- beginner-facing reproducible README/hands-on for this full workflow
+- fuller beginner-facing worked walkthrough beyond the current README / script command references
 
 ## decisions mirrored from specs/19 / 20 / 22 / 23 / 24
 
@@ -37,15 +37,15 @@ current repo still lacks:
 
 ## current evidence mapping
 
-| Operational need | Existing evidence | Missing for α-0.5 operational readiness |
+| Operational need | Existing evidence | Residual later gap after bounded α-0.5 |
 |---|---|---|
-| package input | `SRC-01..05` | typed host-I/O lane |
-| checker | `CHK-*` | typed host-I/O lane over the same session |
-| local run | `RUN-01..04` | typed host-I/O lane |
-| local save/load | `SL-A1-01/02/03`, `OA05-01/05` | typed host-I/O lane |
+| package input | `SRC-01..05`, `OA05-07` | broader host adapter families |
+| checker | `CHK-*`, `OA05-07` | same-session hot-plug over the same carrier |
+| local run | `RUN-01..04`, `OA05-07` | same-session hot-plug mutation |
+| local save/load | `SL-A1-01/02/03`, `OA05-01/05` | live/session-bound save-load timeline |
 | event DAG export | `VIS-A1-01`, `OA05-01` | wider session-bound live devtools families |
 | observer-safe view | `VIS-A1-06`, `OA05-01` | wider session-bound live devtools families |
-| typed host-I/O | `EXT-03/04` preview only | direct semantic execution lane |
+| typed host-I/O | `OA05-07`, `crates/mir-runtime::practical_alpha05_host_io` | broader host families and fuller live devtools surfaces |
 
 ## recommended implementation order
 
@@ -87,12 +87,21 @@ current command family:
 
 ### 2. `P-A1-20` — typed external host-I/O direct execution lane
 
-add one minimal typed host adapter family:
+actualized:
 
-- `EchoText`
-- or `AddOne`
+- `crates/mir-runtime::practical_alpha05_host_io`
+- example `mir_practical_alpha05_session -- host-io`
+- `samples/practical-alpha1/packages/oa05-07-add-one-host-io`
+- `OA05-07`
 
-This should route through the session/runtime path, not bypass it.
+delivered:
+
+- one minimal typed host adapter family (`AddOne`)
+- input schema / output schema
+- effect row / failure row
+- authority gate
+- observer-safe host receipt summary
+- event DAG request/response nodes on the same session carrier
 
 ## required rows
 
@@ -105,22 +114,27 @@ minimum operational α-0.5 matrix:
 - fallback degradation visible event
 - local save/load resume
 - stale membership non-resurrection
-- invalid distributed cut preflight reject
 - session-bound event DAG export
 - session-bound observer-safe export
 - typed host-I/O minimal demo
 
+current bounded matrix:
+
+- `OA05-01..07`
+
 ## validation direction
 
-future validation when executable packages land:
+current validation floor:
 
 ```bash
+cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture
+cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture
 python3 scripts/practical_alpha05_session.py check-all --format json
 python3 scripts/practical_alpha05_session.py closeout --format json
 python3 -m unittest scripts.tests.test_practical_alpha05_session
 ```
 
-P-A1-19 actualizes the session commands above; `P-A1-20` should add the host-I/O lane and expand validation accordingly.
+`P-A1-19` actualized the session commands above; `P-A1-20` widened them with the host-I/O lane.
 
 ## deferred
 
@@ -131,9 +145,8 @@ P-A1-19 actualizes the session commands above; `P-A1-20` should add the host-I/O
 
 ## next reopen point
 
-recommended next reopen point after `P-A1-18`:
+current recommended next reopen point:
 
-- `P-A1-20`
-- `P-A1-21` only after `P-A1-20`
+- `P-A1-21`
 
 `progress.md` / `tasks.md` remain queue authority.

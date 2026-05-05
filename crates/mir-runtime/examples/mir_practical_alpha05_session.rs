@@ -1,5 +1,6 @@
 use std::{env, fs, path::Path, process};
 
+use mir_runtime::practical_alpha05_host_io::run_practical_alpha05_host_io_path;
 use mir_runtime::practical_alpha05_session::{
     PracticalAlpha05SessionReport, load_practical_alpha05_session,
     observe_practical_alpha05_session, save_practical_alpha05_session,
@@ -60,6 +61,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let payload = observe_practical_alpha05_session(&session);
             println!("{}", serde_json::to_string_pretty(&payload)?);
         }
+        "host-io" => {
+            let Some(session_path) = args.next() else {
+                usage();
+                process::exit(2);
+            };
+            let Some(package_path) = args.next() else {
+                usage();
+                process::exit(2);
+            };
+            let session = read_session(&session_path)?;
+            let (next_session, payload) =
+                run_practical_alpha05_host_io_path(&session, &package_path)?;
+            maybe_write_session(&next_session, args.next().as_deref())?;
+            println!("{}", serde_json::to_string_pretty(&payload)?);
+        }
         _ => {
             usage();
             process::exit(2);
@@ -88,6 +104,6 @@ fn maybe_write_session(
 
 fn usage() {
     eprintln!(
-        "usage:\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- start <package-path> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- save <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- load <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- observe <session-path>"
+        "usage:\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- start <package-path> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- save <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- load <session-path> <savepoint-id> [session-out]\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- observe <session-path>\n  cargo run -q -p mir-runtime --example mir_practical_alpha05_session -- host-io <session-path> <package-path> [session-out]"
     );
 }

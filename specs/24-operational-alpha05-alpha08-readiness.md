@@ -152,12 +152,12 @@ current repo has:
 
 - alpha-0 evidence closeout for Stage B / D / E
 - practical first-floor package/checker/runtime/hot-plug/transport/save-load/devtools/product-preview carriers
+- bounded α-0.5 same-session runtime carrier
+- minimal typed external host-I/O direct semantic execution lane
 - exact report bundles and companion preview bundles
 
 current repo still lacks at least:
 
-- same-session runtime carrier
-- typed external host-I/O direct semantic execution lane
 - same-session attach mutation and later-behavior observation
 - session-bound export source for devtools
 
@@ -179,7 +179,7 @@ recommended style:
 ```text
 alpha-0.5 evidence closeout: 100%
 alpha-0.5 first-floor closeout: 100%
-alpha-0.5 operational readiness: <100 until session carrier + host-I/O lane exist
+alpha-0.5 operational readiness: 100% only after session carrier + host-I/O lane exist
 alpha-0.5 product/public readiness: 0%
 ```
 

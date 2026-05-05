@@ -64,8 +64,7 @@ OS/network substrate
 - **practical alpha-1 first-floor line**
   `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
 - **operational alpha theory-freeze line**
-  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout `P-A1-18` はこの bounded theory freeze を行う package です。
-  `P-A1-19` では `crates/mir-runtime::practical_alpha05_session` と `scripts/practical_alpha05_session.py` によって、accepted local dispatch / observe / save / load を同一 session carrier へ束ねる bounded α-0.5 surface が actualize されました。
+  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout は `P-A1-20` で、`P-A1-18` の bounded theory freeze と `P-A1-19` の session carrier に続けて、typed external `AddOne` direct execution lane を same-session α-0.5 surface へ接続しました。
 
 ## いま何があり、何がまだ無いか
 
@@ -75,10 +74,10 @@ OS/network substrate
 - event DAG export、observer-safe route trace、membership timeline export、fallback degradation export、redacted observer view、report-local retention query trace
 - local-only save/load roundtrip と stale-membership non-resurrection first-floor rows
 - attach-time auth / rate-limit / object preview / deferred detach の first-floor rows
+- bounded α-0.5 session carrier 上の minimal typed external `AddOne` direct execution lane
 
 まだ無いもの:
 
-- typed external host-I/O direct execution lane
 - α-0.8 same-session hot-plug runtime
 - α-0.9 live/session-bound devtools export
 

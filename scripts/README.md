@@ -36,10 +36,10 @@
   - practical `run-docker` remains later work
 - practical alpha-0.5 session carrier now has an alpha-local script surface
   - `python3 scripts/practical_alpha05_session.py check-all --format json`
-  - this exercises `samples/practical-alpha1/packages/run-*/` through `crates/mir-runtime::practical_alpha05_session` and exact `SL-A1-02` / `VIS-A1-05` source evidence
-  - current actualized rows are `OA05-01..06`
-  - it actualizes same-session `start` / `observe` / `save` / `load` over the bounded local runtime carrier plus session-bound event DAG / observer-safe export
-  - it does not yet claim typed external host-I/O direct execution, same-session hot-plug runtime, distributed durable save/load, or final public runtime/devtools API
+  - this exercises `samples/practical-alpha1/packages/run-*/` and `packages/oa05-07-add-one-host-io/` through `crates/mir-runtime::practical_alpha05_session`, `crates/mir-runtime::practical_alpha05_host_io`, and exact `SL-A1-02` / `VIS-A1-05` source evidence
+  - current actualized rows are `OA05-01..07`
+  - it actualizes same-session `start` / `observe` / `save` / `load` over the bounded local runtime carrier plus session-bound event DAG / observer-safe export and one minimal typed external `AddOne` direct execution lane
+  - it does not claim same-session hot-plug runtime, distributed durable save/load, or final public runtime/devtools API
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

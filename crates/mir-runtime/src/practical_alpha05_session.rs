@@ -92,7 +92,18 @@ pub struct PracticalAlpha05ObserverSafeExport {
     pub event_ids: Vec<String>,
     pub visible_history: Vec<String>,
     pub witness_inventory: Vec<String>,
+    #[serde(default)]
+    pub host_io_events: Vec<String>,
     pub notes: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha05HostIoHistoryEntry {
+    pub adapter_kind: String,
+    pub request_summary: String,
+    pub response_summary: String,
+    pub event_request_id: String,
+    pub event_response_id: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -106,6 +117,8 @@ pub struct PracticalAlpha05SessionSavepoint {
     pub saved_event_dag: EventDagExport,
     pub saved_capability_inventory: Vec<String>,
     pub saved_witness_inventory: Vec<String>,
+    #[serde(default)]
+    pub saved_host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
     pub state_roundtrip_equal: bool,
     pub notes: Vec<String>,
 }
@@ -138,6 +151,8 @@ pub struct PracticalAlpha05SessionReport {
     pub event_dag: EventDagExport,
     pub capability_inventory: Vec<String>,
     pub witness_inventory: Vec<String>,
+    #[serde(default)]
+    pub host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
     pub observer_safe_export: PracticalAlpha05ObserverSafeExport,
     #[serde(default)]
     pub savepoints: Vec<PracticalAlpha05SessionSavepoint>,
@@ -167,6 +182,7 @@ struct PracticalAlpha05SavedLocalFrontier {
     event_dag: EventDagExport,
     capability_inventory: Vec<String>,
     witness_inventory: Vec<String>,
+    host_io_history: Vec<PracticalAlpha05HostIoHistoryEntry>,
     notes: Vec<String>,
 }
 
@@ -201,6 +217,7 @@ pub fn save_practical_alpha05_session(
         event_dag: session.event_dag.clone(),
         capability_inventory: session.capability_inventory.clone(),
         witness_inventory: session.witness_inventory.clone(),
+        host_io_history: session.host_io_history.clone(),
         notes: vec![
             "saved alpha-0.5 local frontier remains local-only and non-final".to_string(),
             "same-session hot-plug and typed external host-I/O remain later".to_string(),
@@ -231,6 +248,7 @@ pub fn save_practical_alpha05_session(
         saved_event_dag: restored.event_dag,
         saved_capability_inventory: restored.capability_inventory,
         saved_witness_inventory: restored.witness_inventory,
+        saved_host_io_history: restored.host_io_history,
         state_roundtrip_equal,
         notes: vec![
             "savepoint is a local frontier only".to_string(),
@@ -263,6 +281,7 @@ pub fn load_practical_alpha05_session(
     next.event_dag = savepoint.saved_event_dag.clone();
     next.capability_inventory = savepoint.saved_capability_inventory.clone();
     next.witness_inventory = savepoint.saved_witness_inventory.clone();
+    next.host_io_history = savepoint.saved_host_io_history.clone();
     next.observer_safe_export = build_observer_safe_export(&next);
     Ok(next)
 }
@@ -308,6 +327,7 @@ fn start_practical_alpha05_session_at_path(
         event_dag: runtime.event_dag.clone(),
         capability_inventory,
         witness_inventory,
+        host_io_history: Vec::new(),
         observer_safe_export: PracticalAlpha05ObserverSafeExport {
             view_kind: observer_view_kind(),
             authority: String::new(),
@@ -319,6 +339,7 @@ fn start_practical_alpha05_session_at_path(
             event_ids: Vec::new(),
             visible_history: Vec::new(),
             witness_inventory: Vec::new(),
+            host_io_events: Vec::new(),
             notes: Vec::new(),
         },
         savepoints: Vec::new(),
@@ -360,6 +381,16 @@ fn build_observer_safe_export(
             .collect(),
         visible_history: session.visible_history.clone(),
         witness_inventory: session.witness_inventory.clone(),
+        host_io_events: session
+            .host_io_history
+            .iter()
+            .map(|entry| {
+                format!(
+                    "host_io:{}({})->{}",
+                    entry.adapter_kind, entry.request_summary, entry.response_summary
+                )
+            })
+            .collect(),
         notes: vec![
             "session-bound observer-safe export reuses live session state rather than exact report recomposition"
                 .to_string(),

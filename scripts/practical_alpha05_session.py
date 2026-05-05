@@ -56,10 +56,15 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
         "package_dir": "samples/practical-alpha1/packages/av-a1-03-unsupported-runtime-fallback",
         "kind": "fallback_source",
     },
+    {
+        "sample_id": "OA05-07",
+        "summary": "run one minimal typed external AddOne host-I/O lane on the live alpha-0.5 session",
+        "package_dir": "samples/practical-alpha1/packages/oa05-07-add-one-host-io",
+        "kind": "session_host_io",
+    },
 ]
 
 STOP_LINES = [
-    "do not treat the practical alpha-0.5 session command as typed external host-I/O completion before that lane exists",
     "do not treat the practical alpha-0.5 session command as same-session hot-plug completion",
     "do not treat the practical alpha-0.5 session command as distributed durable save/load completion",
     "do not treat the practical alpha-0.5 session command as a final public runtime or devtools ABI",
@@ -67,7 +72,7 @@ STOP_LINES = [
 
 LIMITATIONS = [
     "alpha-local non-final practical alpha-0.5 session floor only",
-    "typed external host-I/O direct execution lane remains later in P-A1-19",
+    "typed external host-I/O is limited to one minimal AddOne adapter family",
     "same-session hot-plug, distributed durable save/load, and final public ABI remain later",
 ]
 
@@ -128,6 +133,10 @@ def _run_session_observe(session_path: str | Path) -> dict[str, Any]:
     return _cargo_session("observe", str(session_path))
 
 
+def _run_session_host_io(session_path: str | Path, package_path: str | Path) -> dict[str, Any]:
+    return _cargo_session("host-io", str(session_path), str(package_path), str(session_path))
+
+
 def _run_session_sample(row: dict[str, str]) -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix=f"{row['sample_id'].lower()}-") as temp_dir:
         session_path = Path(temp_dir) / "session.json"
@@ -146,6 +155,21 @@ def _run_session_sample(row: dict[str, str]) -> dict[str, Any]:
             payload["loaded_session"] = loaded
             payload["loaded_observer_safe_export"] = _run_session_observe(session_path)
         return payload
+
+
+def _run_session_host_io_sample(row: dict[str, str]) -> dict[str, Any]:
+    with tempfile.TemporaryDirectory(prefix=f"{row['sample_id'].lower()}-") as temp_dir:
+        session_path = Path(temp_dir) / "session.json"
+        started = _run_session_start(REPO_ROOT / row["package_dir"], session_path)
+        host_io_report = _run_session_host_io(session_path, REPO_ROOT / row["package_dir"])
+        observer_after_host_io = _run_session_observe(session_path)
+        return {
+            "sample_id": row["sample_id"],
+            "family": "practical-alpha05-session",
+            "session_report_before_host_io": started,
+            "host_io_report": host_io_report,
+            "observer_safe_export_after_host_io": observer_after_host_io,
+        }
 
 
 def _run_save_load_source(row: dict[str, str]) -> dict[str, Any]:
@@ -172,6 +196,8 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     row = _implemented_row(sample_id)
     if row["kind"] in {"session_start_observe", "session_start_save_load"}:
         return _run_session_sample(row)
+    if row["kind"] == "session_host_io":
+        return _run_session_host_io_sample(row)
     if row["kind"] == "save_load_source":
         return _run_save_load_source(row)
     return _run_fallback_source(row)
@@ -218,6 +244,21 @@ def _validate_sample(sample_id: str, payload: dict[str, Any]) -> list[str]:
             failures.append("fallback source row must point at VIS-A1-05")
         if bundle["export_sections"]["fallback_degradation"]["fallback_visible"] is not True:
             failures.append("fallback degradation must remain visible")
+    elif sample_id == "OA05-07":
+        report = payload["host_io_report"]
+        observer = payload["observer_safe_export_after_host_io"]
+        if report["adapter_kind"] != "add_one":
+            failures.append("typed host-I/O row must execute the AddOne adapter")
+        if report["request_payload"] != {"kind": "int", "value": 41}:
+            failures.append("typed host-I/O row must preserve the typed request payload")
+        if report["response_payload"] != {"kind": "int", "value": 42}:
+            failures.append("typed host-I/O row must preserve the typed response payload")
+        if report["terminal_outcome"] != "accepted":
+            failures.append("typed host-I/O row must finish accepted")
+        if "host_response#1" not in report["session_event_ids_after"]:
+            failures.append("typed host-I/O row must append a host response event")
+        if "host_io:AddOne(41)->42" not in observer["host_io_events"]:
+            failures.append("observer-safe export must carry the redacted host-I/O summary")
     return failures
 
 
@@ -247,7 +288,8 @@ def check_all() -> dict[str, Any]:
         "local_save_load_roundtrip_present": "OA05-01" in passed,
         "stale_membership_non_resurrection_present": "OA05-05" in passed,
         "fallback_degradation_visible_present": "OA05-06" in passed,
-        "typed_host_io_demo_present": False,
+        "typed_host_io_demo_present": "OA05-07" in passed,
+        "operational_alpha05_ready": not failed and "OA05-07" in passed,
     }
 
 
@@ -258,6 +300,8 @@ def closeout() -> dict[str, Any]:
         "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
         "validation_floor": [
             "cargo test -p mir-runtime --test practical_alpha1_local_runtime -- --nocapture",
+            "cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture",
+            "cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture",
             "python3 scripts/practical_alpha1_run_local.py check-all --format json",
             "python3 scripts/practical_alpha05_session.py check-all --format json",
             "python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha05_session",
@@ -278,7 +322,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Practical alpha-0.5 session carrier over the practical local-runtime floor. "
-            "This remains non-final and does not yet include typed external host-I/O."
+            "This remains non-final and includes one minimal typed external AddOne host-I/O lane."
         )
     )
     subparsers = parser.add_subparsers(dest="command", required=True)

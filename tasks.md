@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 09:26 JST
+最終更新: 2026-05-05 09:47 JST
 
 ## この文書について
 
@@ -17,6 +17,8 @@
   `specs/19..24` と `plan/45..49` が verification stratification、`atomic_cut` / save-load semantics、auth layer algebra、typed observability、typed host boundary、operational readiness definition を担います。
 - `P-A1-19` により bounded α-0.5 same-session carrier は actualize 済みです:
   `crates/mir-runtime::practical_alpha05_session`、example `mir_practical_alpha05_session`、`scripts/practical_alpha05_session.py`、`RUN-03/04` capability / witness negatives により、check -> runtime plan -> run-local -> observe -> save -> load を同一 carrier に束ねる実行面が入りました。
+- `P-A1-20` により bounded operational α-0.5 line は actualize 済みです:
+  `crates/mir-runtime::practical_alpha05_host_io`、example `mir_practical_alpha05_session -- host-io`、`samples/practical-alpha1/packages/oa05-07-add-one-host-io`、`OA05-07` により、typed external `AddOne` direct execution lane を同じ session carrier、event DAG、observer-safe export に接続しました。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -26,18 +28,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-20` typed external host-I/O direct execution lane | `Macro 6-7`, `S3 -> S5` | `EchoText` または `AddOne` を stdio builtin ではなく typed external adapter として direct semantic execution する | host input payload schema、effect row、failure row、authority、observation policy を持つ minimal demo が α-0.5 session から観測できる | medium |
-| 2 | `P-A1-21` α-0.8 same-session hot-plug runtime | `Macro 6-7`, `S3 -> S5` | debug / auth / rate-limit / object / avatar-placeholder package を α-0.5 session 上で attach し、accepted / rejected / deferred / activation cut / trace を観測する | same-session hot-plug attach が runtime state と devtools output を変えることを確認できる | heavy |
-| 3 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 1 | `P-A1-21` α-0.8 same-session hot-plug runtime | `Macro 6-7`, `S3 -> S5` | debug / auth / rate-limit / object / avatar-placeholder package を α-0.5 session 上で attach し、accepted / rejected / deferred / activation cut / trace を観測する | same-session hot-plug attach が runtime state と devtools output を変えることを確認できる | heavy |
+| 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-20` typed external host-I/O direct execution lane
+  `P-A1-21` α-0.8 same-session hot-plug runtime
 - recommendation reason:
-  operational α-0.5 の不足は typed external host-I/O direct execution lane に集中しており、α-0.8 same-session hot-plug runtime もこの lane と existing session carrier の両方に依存する
+  bounded operational α-0.5 は揃ったため、次の実質 gap は debug / auth / rate-limit / object / avatar-placeholder package を同一 session に attach して runtime state と observer surface の変化を live 観測する α-0.8 line に移った
 - stop line:
-  `P-A1-20` の scope では host-I/O builtin 化、distributed durable save/load、same-session hot-plug、full public devtools API へ踏み込まない
+  `P-A1-21` の scope でも host-I/O builtin 化、distributed durable save/load、full public devtools API へ踏み込まない
 
 ## research-discovery items
 

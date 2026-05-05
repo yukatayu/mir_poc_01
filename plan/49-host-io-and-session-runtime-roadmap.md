@@ -19,25 +19,25 @@ current practical line already has:
 - exact devtools bundles
 - product-preview bundles
 - bounded session runtime carrier (`practical_alpha05_session`)
+- same-session typed host-I/O against that carrier (`practical_alpha05_host_io`, `OA05-07`)
 
 current practical line still lacks:
 
-- host input -> transform -> host output direct execution lane
-- same-session typed host-I/O against the new carrier
 - session-bound attach mutation
+- broader host adapter families beyond the minimal lane
 
 ## why this is a separate roadmap
 
-with only the bounded session carrier and no host-I/O lane:
+with the bounded session carrier plus one minimal host-I/O lane:
 
-- α-0.5 stays below completion
-- α-0.8 same-session hot-plug still lacks an external execution seam
+- α-0.5 reaches bounded completion
+- α-0.8 same-session hot-plug still lacks attach mutation and lifecycle observation on that same session
 - α-0.9 session-bound devtools still lacks richer live sources
 
-without typed host-I/O lane:
+with only the minimal host-I/O lane:
 
-- α-0.5 remains repo-internal runtime evidence
-- developer workflow still lacks minimal external request/receipt demo
+- developer workflow now has one external request/receipt demo
+- broader host families and same-session attach mutation remain later
 
 ## recommended order
 
@@ -56,14 +56,19 @@ delivered:
 
 ### 2. `P-A1-20` — typed external host-I/O direct execution lane
 
-deliver:
+status:
 
-- one minimal adapter family (`EchoText` or `AddOne`)
+- actualized
+
+delivered:
+
+- one minimal adapter family (`AddOne`)
 - input schema
 - output schema
 - effect / failure row
 - authority gate
 - observer-safe export
+- same-session event DAG request/response nodes
 
 ### 3. `P-A1-21` — same-session hot-plug runtime
 
@@ -88,6 +93,5 @@ P-A1-18 only freezes the roadmap and category boundary.
 
 current recommendation:
 
-- reopen with `P-A1-20`
-- keep `P-A1-21` immediately behind it
-- do not jump directly to `P-A1-21`
+- reopen with `P-A1-21`
+- do not jump directly to α-0.9 live export

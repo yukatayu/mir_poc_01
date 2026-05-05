@@ -30,6 +30,7 @@ const PRACTICAL_ALPHA1_FRONT_DOOR_ACCEPTED_SURFACE_REFS: &[&str] = &[
     "alpha_local_hotplug_input",
     "alpha_local_transport_input",
     "alpha_local_save_load_input",
+    "alpha_local_host_io_input",
 ];
 
 const PRACTICAL_ALPHA1_FRONT_DOOR_CODE_ANCHOR_REFS: &[&str] = &[
@@ -111,6 +112,8 @@ pub struct PracticalAlpha1Package {
     pub alpha_local_transport_input: Option<PracticalAlpha1AlphaLocalTransportInput>,
     #[serde(default, alias = "save_load")]
     pub alpha_local_save_load_input: Option<PracticalAlpha1AlphaLocalSaveLoadInput>,
+    #[serde(default, alias = "host_io")]
+    pub alpha_local_host_io_input: Option<PracticalAlpha1AlphaLocalHostIoInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -327,6 +330,23 @@ pub struct PracticalAlpha1AlphaLocalSaveLoadInput {
     pub notes: Vec<String>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PracticalAlpha1AlphaLocalHostIoInput {
+    pub sample_id: String,
+    pub adapter_kind: PracticalAlpha1HostAdapterKind,
+    pub adapter_entry: String,
+    pub request_schema: String,
+    pub response_schema: String,
+    pub effect_row: Vec<String>,
+    pub failure_row: Vec<String>,
+    pub authority: String,
+    pub observation_policy: String,
+    pub request_payload: PracticalAlpha1HostIoPayload,
+    pub expected_response: PracticalAlpha1HostIoPayload,
+    #[serde(default)]
+    pub notes: Vec<String>,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PracticalAlpha1HotPlugOperationKind {
@@ -346,6 +366,20 @@ pub enum PracticalAlpha1TransportSurface {
 pub enum PracticalAlpha1SaveLoadScenarioKind {
     ResumeOneDispatch,
     RejectStaleMembership,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PracticalAlpha1HostAdapterKind {
+    AddOne,
+    EchoText,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum PracticalAlpha1HostIoPayload {
+    Int { value: i64 },
+    Text { value: String },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
