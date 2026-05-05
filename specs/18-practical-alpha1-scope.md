@@ -104,6 +104,11 @@ exact first-floor reports
 - current floor is not native avatar execution
 - current floor is not product/public-ready alpha-1
 
+Product/public-ready alpha-1 の追加境界は
+`specs/25-product-alpha1-public-boundary.md` に置く。
+この `specs/18` は引き続き practical first-floor / bounded workflow の正本であり、
+alpha-stable CLI、native launch bundle、bounded quiescent save、clean-clone release validation の completion claim を持たない。
+
 ## workflow readiness condition
 
 practical alpha-1 を workflow-ready と呼ぶには、少なくとも次を全て満たす。

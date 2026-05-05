@@ -34,7 +34,8 @@ repository-memory roadmap を置く。
 - `P-A1-23` により、first-floor evidence と bounded operational α-0.5 / α-0.8 / α-0.9 carriers を束ねる
   bounded practical integrated workflow carrier は actualize 済みである
 - ただし final public parser/checker/runtime API、final public viewer / telemetry ABI、
-  distributed durable save/load、product/public-ready α-1 はまだ未固定である
+  distributed durable save/load、product/public-ready α-1 implementation はまだ未完である。
+  product alpha boundary 自体は `P-A1-25` で `specs/25` / `plan/50` に移した。
 
 ## decisions mirrored from specs/18
 
@@ -513,7 +514,7 @@ but should not require practical runner scripts before they are added.
 
 ## non-claims carried forward
 
-- current alpha-0 evidence closeout is not public alpha / `U1`
+- current alpha-0 evidence closeout is not product alpha-1
 - only a narrow non-final `package.mir.json` practical front-door exists so far
 - no final public parser/runtime/checker ABI is fixed
 - no production WAN/federation claim is made
@@ -522,8 +523,8 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-24`:
-  bounded operational α-0.5 / α-0.8 / α-0.9 and bounded practical α-1 integrated workflow are closed, and the repo status vocabulary now treats helper / sidecar / report / expected JSON / first-floor runner rows as evidence. The next material gap is product/public-ready boundary definition, not another silent widening of practical first-floor evidence.
+- current promoted line after `P-A1-25`:
+  bounded operational α-0.5 / α-0.8 / α-0.9 and bounded practical α-1 integrated workflow are closed, and the repo status vocabulary now treats helper / sidecar / report / expected JSON / first-floor runner rows as evidence. `P-A1-25` defines the product/public-ready alpha-1 boundary in `specs/25` / `plan/50`; the next material gap is product alpha CLI / package schema implementation, not another silent widening of practical first-floor evidence.
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
@@ -532,5 +533,5 @@ but should not require practical runner scripts before they are added.
   - keep `P-A1-23` as bounded workflow ready, not product/public-ready alpha-1
   - do not upgrade `HP-A1-07` into accepted detach runtime execution without a new design package
   - do not claim final public parser / CLI / viewer / telemetry ABI, distributed durable save/load, WAN/federation, or native avatar execution from the integrated workflow
-  - reopen next on `P-A1-25` alpha-1 product/public boundary recut or user decision for `U1`
+  - reopen next on `P-A1-26` alpha CLI / package schema stabilization under the alpha defaults in `specs/25` / `plan/50`
 - queue authority remains `progress.md` / `tasks.md`

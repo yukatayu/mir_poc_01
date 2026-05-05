@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-05 11:59 JST
+最終更新: 2026-05-05 13:14 JST
 
 ## この文書について
 
@@ -24,21 +24,21 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-A1-24` operational workflow readiness metric recut
+  `P-A1-25` product/public alpha-1 boundary recut
 - current promoted reopen point:
-  `P-A1-25` α-1 product/public boundary recut / `U1` decision inventory, or maintenance-only freshness work
+  `P-A1-26` alpha CLI / package schema stabilization
 - current reading:
-  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、および **bounded practical α-1 integrated workflow carrier** を得た。ただし final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は未固定
+  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、および **bounded practical α-1 integrated workflow carrier** を得た。`P-A1-25` で product/public-ready alpha-1 の境界、alpha `U1` defaults、`P-A1-26..31` package line を固定した。ただし product alpha-1 implementation、final public viewer / telemetry ABI、durable audit、distributed durable save/load は未完成
 - self-driven status:
-  bounded practical workflow までは自走済み。product/public-ready α-1 へ進むには `U1` packaging / host target / shipped surface の user decision が必要
+  bounded practical workflow までは自走済み。user prompt により alpha `U1` defaults は採用済みなので、`P-A1-26..31` は stop line を守る限り自走可能。final public grammar / ABI / WAN / distributed durable save-load は still user/final decision gate
 
 ## workflow-readiness axes
 
 | 軸 | Workflow reading | Current status |
 |---|---|---|
-| 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..24` で practical workflow boundary と operational α 条件の bounded reading を同期したが、final public/product boundary は未固定 |
-| ユーザ向け仕様 | reproducible workflow guidance exists for bounded α lines | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow の読み分けを更新したが、final public surface や `U1` は未固定 |
-| 実装 / 運用 | workflow-ready only where session workflow is reproducible | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow は再現可能。first-floor runners / expected JSON / reports は evidence として扱う |
+| 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..25` で practical / operational / product alpha boundary を分けた。final public grammar / ABI は未固定 |
+| ユーザ向け仕様 | reproducible workflow guidance exists for bounded α lines | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow / product alpha boundary の読み分けを更新した。clean-clone product alpha guide は `P-A1-31` まで未完成 |
+| 実装 / 運用 | workflow-ready only where session workflow is reproducible | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow は再現可能。product alpha CLI / package schema / native bundle は `P-A1-26..31` の未実装範囲 |
 
 ## line snapshot
 
@@ -48,10 +48,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | Spaces alpha-0 | evidence line | evidence-closed only | Stage A..F は current-scope evidence であり、operational workflow completion ではない | operational α-0.5 / α-0.8 / α-0.9 とは別 |
 | practical alpha-1 first floors | first-floor evidence | evidence-closed only | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence | product/public-ready α-1 とは別 |
 | practical alpha-1 integrated workflow | bounded workflow line | developer-reproducible bounded workflow | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
+| product alpha-1 boundary | product/public alpha line | boundary-fixed, not workflow-ready | `P-A1-25` で `specs/25` / `plan/50` を追加し、CLI、package schema、same-session product demo、message recovery / quiescent-save、viewer、native launch bundle、release validation の package sequence を固定した | `P-A1-26..31` implementation and validation |
 | operational α-0.5 | operational line | workflow-ready: local session workflow | `P-A1-20` で local session carrier + typed `AddOne` host-I/O lane を接続し、local observable runtime workflow を再現可能にした | broader host family は later |
 | operational α-0.8 | operational line | workflow-ready: same-session hot-plug workflow | `P-A1-21` で debug/auth/rate-limit/object preview/deferred detach の same-session accepted/rejected/deferred/activation cut/observer-safe mutation を再現可能にした | accepted detach execution / distributed ordering は later |
 | operational α-0.9 | operational line | workflow-ready: session-bound devtools workflow | `P-A1-22` で session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を再現可能にした | final public viewer / telemetry ABI、durable audit は later |
-| final public product | product/public | not workflow-ready | public boundary inventory はある | `U1` と public surface 決定が必要 |
+| final public product | final-public | not workflow-ready | product alpha boundary は fixed だが、final public grammar / ABI は別 gate | final user/final-public decisions |
 
 ## subsystem status
 
@@ -74,8 +75,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | current-L2 側は強い。operational α line は theory freeze 完了 | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary は fixed、広い discharge は後段 | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | bounded α-0.8 same-session hot-plug runtime まで到達。accepted detach execution / distributed ordering は後段 | heavy | 着手可能 |
-| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line と bounded practical α-1 integrated workflow carrier は actualize 済み。next は product/public boundary と remaining non-final gaps の recut | heavy | 着手可能 |
-| `Macro 8` | domain / application realization | public/product line | heavy | 要仕様確認 |
+| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line、bounded practical α-1 workflow、product alpha boundary recut は完了。next は alpha CLI / package schema | heavy | 着手可能 |
+| `Macro 8` | domain / application realization | product alpha demo line が alpha defaults の下で開いた | heavy | 着手可能 |
 
 ## feature maturity rows
 
@@ -85,13 +86,14 @@ Place をまたいで実行・通信・検証・可視化できる
 | robustness via contracts / theorem / model-check boundary | boundary-fixed | static checker / model-check / proof side の stratification は fixed。外部 proof discharge は evidence expansion | 着手可能 |
 | dynamic attach / detach / DAG-safe evolution | bounded workflow-ready for same-session attach | attach-time first-floor evidence と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
 | `atomic_cut` と ordering / memory-order family | semantics fixed, evidence-backed | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
-| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。残る gap は final/public α-1 boundary と product surface | 着手可能 |
+| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。product alpha demo root / CLI は次 package | 着手可能 |
 
 ## current blockers
 
-- bounded practical α-1 workflow は ready になったが、final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
+- product alpha-1 boundary は fixed したが、canonical CLI、versioned product package schema、product demo root、local/Docker transport product command path、message failure/recovery、bounded R2 quiescent-save、product viewer、native launch bundle、clean-clone validation は未実装
+- final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
 - distributed durable save/load、stale witness / stale lease non-resurrection、queue/channel persistence は current promoted reopen point の外側
-- `U1` packaging / host target / shipped surface / final operational catalog は user decision gate のまま
+- final public grammar / ABI / WAN / distributed durable save-load / engine adapter scope は user/final decision gate のまま
 
 ## validation floor
 
@@ -120,6 +122,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-05 13:14 JST
+  `P-A1-25` で product/public-ready alpha-1 の境界を `specs/25` / `plan/50` に固定し、alpha `U1` defaults、`P-A1-26..31` package line、CLI / package schema / product demo / transport / message recovery / quiescent-save / viewer / native launch bundle / release validation の stop line を snapshot docs と required documentation scaffold に同期した。product alpha-1 implementation はまだ未完。
 - 2026-05-05 12:32 JST
   root tracked Markdown を audit し、`README.md` の practical alpha-1 evidence inventory を canonical docs / dashboard 参照へ圧縮した。`AGENTS.md` と `tasks.md` の stale percentage wording を workflow readiness / evidence classification へ同期し、α-0.5 / α-0.8 / α-0.9 / bounded practical α-1 workflow の concrete behavior validation を再実行した。
 - 2026-05-05 11:59 JST

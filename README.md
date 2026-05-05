@@ -45,7 +45,7 @@ repo が主として検証しているのは、Mir current-L2 の **repo-local a
 
 ## Mirrorea の次軸
 
-Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-05 時点では、その中に 3 つの line を分けて持ちます。
+Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-05 時点では、その中に 4 つの line を分けて持ちます。
 
 - **Mirrorea Spaces alpha-0 evidence line**
   規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence を蓄積する alpha-local scaffolding です。
@@ -57,7 +57,11 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
 
 - **Operational alpha theory-freeze / session-runtime line**
   規範判断は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を固定します。
-  `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` direct execution lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は引き続き未固定です。
+  `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` direct execution lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 implementation は引き続き未完です。
+
+- **Product/Public-ready Mirrorea Spaces alpha-1 line**
+  規範判断は `specs/25-product-alpha1-public-boundary.md`、repository memory は `plan/50-product-alpha1-public-boundary-roadmap.md` に置きます。`P-A1-25` は、bounded workflow と product/public-ready alpha-1 の差を recut し、alpha `U1` defaults として Rust CLI entrypoint、versioned `package.mir.json`、native process + local/Docker host target、non-final viewer、native launch bundleを採ることを固定しました。これは product-ready 実装ではなく、`P-A1-26..31` の promoted line を開く境界定義です。
+  この line は final textual `.mir` grammar、final public ABI、WAN/federation、distributed durable save/load、arbitrary native execution、signature-is-safety、final viewer / telemetry service を claim しません。native output は host launch bundle であり、native package execution ではありません。
 
 現行の Stage A..F は current-scope evidence、practical alpha-1 first-floor row は first-floor evidence として読みます。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence です。`100%` は、外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使います。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
 
@@ -90,8 +94,10 @@ current line で reader が押さえるべき点は次です。
 - operational alpha theory freeze / roadmap:
   `specs/19-verification-stratification.md`、`specs/20-cut-save-load-semantics.md`、`specs/21-auth-layer-algebra.md`、`specs/22-observability-devtools-semantics.md`、`specs/23-typed-external-host-boundary.md`、`specs/24-operational-alpha05-alpha08-readiness.md`
   `plan/45-operational-alpha05-roadmap.md`、`plan/46-operational-alpha08-roadmap.md`、`plan/47-operational-alpha09-devtools-roadmap.md`、`plan/48-theory-freeze-proof-obligations.md`、`plan/49-host-io-and-session-runtime-roadmap.md`
+- product/public alpha-1 boundary:
+  `specs/25-product-alpha1-public-boundary.md`、`plan/50-product-alpha1-public-boundary-roadmap.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..49`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..50`
 
 ## 何が built-in で、何が user-defined か
 
@@ -234,6 +240,7 @@ python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json
 9. 必要な subsystem spec と `plan/00-index.md`
 10. practical alpha-1 を扱う task なら `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
 11. operational readiness / theory freeze を扱う task なら `specs/19..24` と `plan/45..49`
+12. product/public-ready alpha-1 を扱う task なら `specs/25` と `plan/50`
 
 task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
 ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。

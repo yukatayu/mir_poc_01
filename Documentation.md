@@ -15,7 +15,7 @@
 
 この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。主眼は Mir current-L2 と、その上に積む Mirrorea shared-space / hot-plug / observability / host-boundary line にあります。
 
-読み分けで重要なのは、次の 5 つを混同しないことです。
+読み分けで重要なのは、次の 6 つを混同しないことです。
 
 - **repo-local alpha-ready current layer**
   `samples/clean-near-end/`、helper、Lean foundation、report まで含めて動かせる current-L2 の実行足場
@@ -25,10 +25,12 @@
   `samples/practical-alpha1/` と `specs/18` / `plan/44` による front-door / checker / runtime / hot-plug / transport / devtools / save-load / preview の first-floor toolchain
 - **operational alpha readiness**
   `specs/19..24` / `plan/45..49` で定義した α-0.5 / α-0.8 / α-0.9 の same-session operational 条件
+- **product/public-ready Mirrorea Spaces alpha-1**
+  `specs/25` / `plan/50` で定義した alpha-stable CLI、versioned package format、same-session product demo、quiescent save、viewer、native launch bundle、clean-clone validation の product alpha line。final textual `.mir` grammar、WAN/federation、distributed durable save/load、arbitrary native execution、final viewer / telemetry service は non-goal
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
-現在 repo は前 3 つに加えて bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。ただし final public product はまだ別 gate です。
+現在 repo は repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidence に加えて、bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。`P-A1-25` で product/public-ready alpha-1 の境界と alpha defaults は固定しましたが、product alpha-1 implementation / release validation と final public product はまだ別 gate です。
 
 ## current active floor
 
@@ -84,7 +86,7 @@ OS/network substrate
 - final public viewer / telemetry ABI
 - durable audit backend / remote retained-artifact retrieval
 - distributed durable save/load
-- product-ready α-1 / public packaging boundary
+- product-ready α-1 implementation / release validation
 
 ## 重要な境界
 
@@ -115,6 +117,9 @@ OS/network substrate
   `plan/47-operational-alpha09-devtools-roadmap.md`
   `plan/48-theory-freeze-proof-obligations.md`
   `plan/49-host-io-and-session-runtime-roadmap.md`
+- product/public alpha-1 boundary:
+  `specs/25-product-alpha1-public-boundary.md`
+  `plan/50-product-alpha1-public-boundary-roadmap.md`
 - hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 

@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 11:59 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, and the bounded practical α-1 integrated workflow carrier. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; the α-0.5 session carrier now consumes that root through minimal typed host-I/O, same-session hot-plug lanes, session-bound devtools export, and a non-final integrated workflow summary.
+Last updated: 2026-05-05 13:14 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the newly fixed product alpha-1 public boundary. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; product alpha-1 does not yet have a runnable product demo root or canonical CLI.
 
 ## Legend
 
@@ -9,6 +9,7 @@ Primary metric:
 
 - `workflow-ready`: an external developer can reproduce the named layer workflow end-to-end from repo commands.
 - `evidence-closed`: helper / sidecar / report / expected JSON / first-floor runner evidence is synchronized and validated, but the row is not operational workflow completion.
+- `boundary-fixed`: normative specs / roadmap define the boundary, but no reproducible workflow is present yet.
 - `planned`: source or roadmap exists, but no reproducible workflow is present.
 
 Notes:
@@ -17,7 +18,7 @@ Notes:
 - Use `100%` only when a layer is externally usable as a reproducible operational workflow or product/public layer.
 - helper-local preview, report-local inventory, and generated bridge evidence are not final public API.
 
-## Operational readiness snapshot
+## Workflow and Product-Boundary Snapshot
 
 | Line | Workflow status | Reproducible command | Current evidence | Missing actualization |
 |---|---|---|---|---|
@@ -25,6 +26,7 @@ Notes:
 | α-0.8 same-session hot-plug runtime | workflow-ready: same-session hot-plug workflow | `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json` | `HP-A1-01..07`, `AV-A1-03`, `VIS-A1-04/05`, `OA08-01..10`, `crates/mir-runtime::practical_alpha08_hotplug_session`, `specs/21/22/24`, `plan/46/48/49` | accepted detach execution / distributed ordering |
 | α-0.9 session-bound devtools | workflow-ready: session-bound devtools workflow | `python3 scripts/practical_alpha09_devtools.py check-all --format json` | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | final public viewer/telemetry ABI, durable audit |
 | practical α-1 integrated workflow | bounded workflow-ready, not product/public-ready | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | `PA1W-01..08`, exact `VIS-A1-01` / `PE2E-01/02/07` evidence, `OA05/OA08/OA09` carriers | product/public-ready α-1, final public viewer/telemetry ABI, distributed durable save/load |
+| product alpha-1 public boundary | boundary-fixed, not workflow-ready | docs-only: `specs/25`, `plan/50` | alpha `U1` defaults, `P-A1-26..31` package line, CLI/package/demo/quiescent-save/viewer/native-bundle validation target | canonical CLI, product demo root, quiescent-save implementation, product viewer, native launch bundle, release validation |
 
 ## Practical alpha-1 first-floor map
 
@@ -83,6 +85,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-05 13:14 JST | `P-A1-25` product alpha boundary recut | pass | `specs/25` / `plan/50` を required scaffold に追加し、product alpha-1 は boundary-fixed だが not workflow-ready と分類。behavior implementation は未変更 |
 | 2026-05-05 12:32 JST | root Markdown concision + operational workflow verification | pass | α-0.5 / α-0.8 / α-0.9 / bounded practical α-1 workflow `check-all`、focused Python unittest、focused Rust runtime tests、docs/source hierarchy checks が pass。`product_public_ready = false` は維持 |
 | 2026-05-05 11:59 JST | `P-A1-24` workflow-readiness policy sync | pass | progress dashboard を percentage から workflow status / evidence classification へ切り替え、helper / sidecar / report / expected JSON / first-floor runner を completion ではなく evidence として分類 |
 | 2026-05-05 11:33 JST | `P-A1-23` practical α-1 integrated workflow carrier | pass | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_integrated_workflow`、`python3 scripts/practical_alpha1_export_devtools.py check-all --format json`、`python3 scripts/practical_alpha1_product_preview.py check-all --format json` が pass |

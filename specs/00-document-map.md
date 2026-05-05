@@ -168,6 +168,12 @@
   - theory freeze 後に残る proof / model-check obligation family を整理する。
 - `plan/49-host-io-and-session-runtime-roadmap.md`
   - session carrier と typed host-I/O lane を分けて進める順序を整理する。
+- `specs/25-product-alpha1-public-boundary.md`
+  - bounded workflow ではない product/public-ready alpha-1 の規範境界を置く。
+  - alpha-stable CLI、versioned package format、same-session product demo、message recovery / quiescent-save、devtools viewer、native launch bundle、clean-clone validation、final-public non-goal を固定する。
+- `plan/50-product-alpha1-public-boundary-roadmap.md`
+  - product alpha-1 の repository-memory roadmap を置く。
+  - `P-A1-25..31` package sequence、alpha `U1` defaults、sample root / native bundle target、validation direction、blocker split を整理する。
 
 ## 規範的な読書順
 
@@ -187,6 +193,7 @@
 9. Mirrorea Spaces alpha-0 line を扱う場合は `13-type-system-lifetime-fallback.md`、`14-contract-subtyping-layer-compatibility.md`、`15-cut-save-load-checkpoint.md`、`16-runtime-package-adapter-hotplug.md`、`17-mirrorea-spaces-alpha-scope.md`
 10. practical alpha-1 line を扱う場合は `18-practical-alpha1-scope.md` も読む
 11. operational readiness / theory freeze を扱う場合は `19-verification-stratification.md`、`20-cut-save-load-semantics.md`、`21-auth-layer-algebra.md`、`22-observability-devtools-semantics.md`、`23-typed-external-host-boundary.md`、`24-operational-alpha05-alpha08-readiness.md` も読む
+12. product/public-ready alpha-1 line を扱う場合は `25-product-alpha1-public-boundary.md` も読む
 
 ## 例示文書
 

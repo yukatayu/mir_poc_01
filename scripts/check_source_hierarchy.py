@@ -44,6 +44,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "specs/22-observability-devtools-semantics.md",
         "specs/23-typed-external-host-boundary.md",
         "specs/24-operational-alpha05-alpha08-readiness.md",
+        "specs/25-product-alpha1-public-boundary.md",
     ],
     "policies": [
         ".docs/progress-task-axes.md",
@@ -67,6 +68,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/47-operational-alpha09-devtools-roadmap.md",
         "plan/48-theory-freeze-proof-obligations.md",
         "plan/49-host-io-and-session-runtime-roadmap.md",
+        "plan/50-product-alpha1-public-boundary-roadmap.md",
     ],
     "scripts": [
         "scripts",

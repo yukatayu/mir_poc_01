@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 11:33 JST
+最終更新: 2026-05-05 13:14 JST
 
 ## この文書について
 
@@ -26,6 +26,8 @@
   `crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` により、event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を同じ session carrier から export できるようにしました。
 - `P-A1-23` により bounded practical α-1 integrated workflow carrier は actualize 済みです:
   `scripts/practical_alpha1_integrated_workflow.py`、`scripts/tests/test_practical_alpha1_integrated_workflow.py`、`PA1W-01..08` により、existing first-floor front-door / checker / runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 つの bounded developer workflow に束ねました。product/public-ready α-1 ではありません。
+- `P-A1-25` により product/public-ready alpha-1 boundary は fixed されました:
+  `specs/25-product-alpha1-public-boundary.md`、`plan/50-product-alpha1-public-boundary-roadmap.md` により、alpha `U1` defaults、canonical Rust CLI direction、versioned `package.mir.json`、same-session product demo、message recovery / quiescent-save、product viewer、native host launch bundle、release validation の package line を固定しました。product alpha-1 implementation completion、arbitrary native package execution、signature-is-safety ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -35,17 +37,22 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-25` alpha-1 product/public boundary recut | `Macro 7/8`, `S6` | bounded workflow と product/public-ready α-1 の差を audit し、`U1` decision inventory と public surface stop lines を整理する | final public parser / CLI / viewer / telemetry / packaging / host target の未決項目を明示し、自走実装可能な範囲と user decision gate を分ける | medium |
-| 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 1 | `P-A1-26` alpha CLI / package schema stabilization | `Macro 7`, `S5 -> S6` | canonical alpha Rust CLI と versioned product package schema の first cut を作る | full alpha command family の parsing / unsupported diagnostics と package schema diagnostics が focused tests で通る | medium |
+| 2 | `P-A1-27` product demo same-session runtime | `Macro 7/8`, `S5` | `samples/product-alpha1/demo/` を作り、check -> run -> host-I/O -> hot-plug -> local/Docker transport -> observe を one session carrier に接続する | product demo workflow が same-session state transition、transport evidence、negative guard evidence を持つ | heavy |
+| 3 | `P-A1-28` message failure/recovery + quiescent-save | `Macro 6/7`, `S4 -> S5` | `MessageState` / `TransportContract` / `RecoveryPolicy` と bounded R2 quiescent-save を実装する | `NoInFlight` / `AllPlacesSealed` / `NoPostCutSend` positive/negative reports が通る | heavy |
+| 4 | `P-A1-29` product devtools viewer UX | `Macro 7`, `S5 -> S6` | product demo devtools JSON と non-final viewer panels を揃える | viewer openability と observer-safe leak tests が通る | medium |
+| 5 | `P-A1-30` native launch bundle | `Macro 7`, `S5 -> S6` | product demo native host launch bundle を作る | bundle manifest / run script / `NativeExecutionPolicy = Disabled` / native non-claims validation が通る | medium |
+| 6 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
+| 7 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-25` alpha-1 product/public boundary recut, or user decision on `U1`
+  `P-A1-26` alpha CLI / package schema stabilization
 - recommendation reason:
-  bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 workflow は揃ったため、次の実質 gap は public/product-ready boundary と user-facing shipped surface の決定に移った
+  `P-A1-25` で product alpha boundary と alpha `U1` defaults が fixed したため、次の実質 gap は canonical CLI / versioned package schema の implementation に移った
 - stop line:
-  user decision なしに final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、product/public runtime complete へ踏み込まない
+  final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、product alpha complete claim へ踏み込まない
 
 ## research-discovery items
 
@@ -55,13 +62,17 @@
 | distributed durable save/load line | `specs/20` の後段 family に影響 | local-only line のまま保つ / distributed durable family を reopen する | current promoted reopen point では扱わない。α-0.5 / α-0.8 same-session line 完了後に再評価する |
 | auth policy catalog breadth | `specs/21` と host/runtime package line に影響 | minimal stdlib-like initial set / broader policy catalog | minimal initial set から始め、policy breadth は same-session attach line の実 evidence に合わせて widen する |
 | integrated practical workflow boundary | `specs/18` の practical α-1 読みに影響 | one bounded workflow carrier / final public toolchain claim | `P-A1-23` で bounded workflow carrier は作成済み。final public toolchain claim はしない |
+| product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
+| admin/debug product viewer breadth | `P-A1-29` に影響 | observer-safe + kept-later marker / bounded admin debug panel | まず observer-safe leak testを優先し、admin/debug full viewは実装できない場合 explicit kept-later |
 
 ## user decision items
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| `U1` packaging / host target / shipped surface | final public product line | repo-local only / installed binary / hosted service / other | repo はまだ固定しない。operational α line の evidence を揃えてから user decision として reopen する |
-| final shared-space operational catalog breadth | product/public scope | narrow showcase / broader product line | α-0.5 / α-0.8 / α-0.9 operational line 完了前に固定しない |
+| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / installed binary / hosted service / other | product alpha-1 の defaults は `specs/25` で固定済み。final public surface はまだ固定しない |
+| final shared-space operational catalog breadth | product/public scope | product alpha narrow showcase / broader final product line | product alpha-1 では narrow showcase を採る。broader final catalog は product alpha release candidate 後の user/final decision として残す |
+| final public grammar / ABI | final public product line | alpha `package.mir.json` を進化させる / textual grammar を固定する | product alpha-1 では固定しない。alpha package format は migration可能と明記する |
+| hosted service / production WAN | final public product line | local/Docker alpha / hosted service / WAN federation | product alpha-1 では local/Docker に限定する |
 
 ## self-driven maintenance tasks
 

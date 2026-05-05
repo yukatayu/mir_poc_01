@@ -11,6 +11,7 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import validate_docs
+import check_source_hierarchy
 
 
 class ValidateDocsTests(unittest.TestCase):
@@ -124,6 +125,22 @@ class ValidateDocsTests(unittest.TestCase):
         }
         for path in alpha0_required:
             self.assertIn(path, required)
+
+    def test_required_scaffold_includes_product_alpha1_boundary_docs(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        product_alpha1_required = {
+            "specs/25-product-alpha1-public-boundary.md",
+            "plan/50-product-alpha1-public-boundary-roadmap.md",
+        }
+
+        for path in product_alpha1_required:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
 
     def test_main_rejects_template_missing_commands_run_section(self) -> None:
         heading = "## Commands run"

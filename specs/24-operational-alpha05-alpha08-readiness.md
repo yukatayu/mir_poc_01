@@ -165,7 +165,11 @@ current repo still lacks at least:
 - final public viewer / telemetry ABI
 - durable audit backend
 - distributed durable save/load
-- product/public-ready alpha-1 boundary
+- product/public-ready alpha-1 implementation and release validation
+
+`P-A1-25` defines the product/public-ready alpha-1 boundary in
+`specs/25-product-alpha1-public-boundary.md`.
+That boundary definition is not product-ready implementation.
 
 therefore:
 
@@ -193,7 +197,7 @@ same reading for α-0.8 / α-0.9:
 
 - helper / sidecar / report / expected JSON / first-floor runner rows are evidence
 - operational readiness is claimed only when the corresponding workflow is reproducible
-- product/public readiness remains not ready until public boundary is fixed
+- product/public readiness remains not ready until product implementation and release validation are complete
 - `100%` is reserved for externally usable operational or product/public layers, not evidence rows
 
 ## required sample matrix
