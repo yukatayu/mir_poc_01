@@ -18,6 +18,11 @@
   practical alpha-1 front-door sample root
   - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、`RUN-01..04` を含む first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family、exact hot-plug reports を source とする `AV-A1-01/02/03` practical avatar preview fixture family、distinct transport-plan/report carrier を通る `TR-A1-01..07` practical transport fixture family、exact practical reports を source とする `VIS-A1-01/02/03/04/05/06/07` practical devtools export bundle family、runtime-backed `SL-A1-01/02` と checker-backed preflight `SL-A1-03` を含む practical local save/load fixture family、preview manifest から exact practical reports / exact practical devtools bundles / exact avatar preview reports を束ね、`PE2E-06` では exact `SL-A1-03` preflight reject report を consume する `PE2E-01..09` practical product-preview family、そして `PA1W-01..08` bounded practical integrated workflow carrier
   - active canonical runnable root や full toolchain root ではまだない
+- `product-alpha1/`
+  product/public alpha-1 sample root
+  - `demo/` is the P-A1-26 versioned schema / CLI fixture root
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` is the current validation anchor
+  - this is not yet a same-session product workflow, native launch bundle, viewer, WAN/federation, distributed durable save/load, or final public API
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -77,6 +82,10 @@
   - `scripts/practical_alpha09_devtools.py` は同じ root を bounded α-0.9 session-bound devtools carrier として再利用し、`OA09-01..09` で event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を同じ session export へ接続する。final public viewer / telemetry ABI、durable audit、product-ready alpha-1 は later
   - `scripts/practical_alpha1_integrated_workflow.py` は first-floor exact evidence と bounded operational carriers を 1 つの bounded practical α-1 developer workflow として束ね、`PA1W-01..08` で source front-door、checker、same-session runtime、typed host-I/O、hot-plug、save/load、session devtools、product-preview evidence、negative guard、non-final stop lines を確認する。product/public-ready alpha-1、final public viewer/telemetry ABI、distributed durable save/load は later
   - current practical devtools export floor は `VIS-A1-01/02/03/04/05/06/07` に限られ、`VIS-A1-03` は exact `SL-A1-02` save-load report から saved frontier / later live membership advance / restored frontier / stale-membership reject を export する membership timeline widening、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary / membership snapshot / deferred detach boundary を export する observability widening、`VIS-A1-05` は exact `AV-A1-03` avatar preview report から rejected source lane / degraded roles / missing host capability を export する fallback degradation widening、`VIS-A1-07` は exact `SL-A1-02` save-load report に widened した report-local retained-artifact catalog と hit/miss query trace を export する retention-query widening に留まる。これは durable retained-artifact service / remote retrieval / expiry lifecycle を意味しない
+- `product-alpha1/` と `practical-alpha1/` を混同しない
+  - `product-alpha1/` は product/public alpha-1 line の source root
+  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture root だけを持つ
+  - same-session runtime、local/Docker product command behavior、quiescent-save、viewer、native launch bundle、release validation は later packages
 
 ## current commands
 
@@ -102,6 +111,7 @@ python3 scripts/practical_alpha1_export_devtools.py check-all --format json
 python3 scripts/practical_alpha1_save_load.py check-all --format json
 python3 scripts/practical_alpha1_avatar.py check-all --format json
 python3 scripts/practical_alpha1_product_preview.py check-all --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

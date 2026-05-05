@@ -7,9 +7,9 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..25`、`plan/39..50`、`samples/alpha/`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..25`、`plan/39..50`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`plan/39..50`、`specs/13..25` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..50`、`specs/13..25` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
@@ -60,6 +60,12 @@
   - it covers source front-door, checker, same-session runtime, typed host-I/O, same-session hot-plug, local save/load, session-bound devtools, product-preview evidence, negative guards, and explicit non-final stop lines
   - it also revalidates exact devtools/product-preview evidence through `VIS-A1-01` and `PE2E-01/02/07`
   - it does not claim final public parser/checker/runtime API, final public viewer/telemetry ABI, distributed durable save/load, WAN/federation, native avatar execution, or product-ready alpha-1
+- product alpha-1 CLI/schema first cut now has a Rust CLI surface
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json`
+  - this exercises `samples/product-alpha1/demo/package.mir.json` through `crates/mir-ast::product_alpha1`
+  - `check` is implemented for schema acceptance / explicit residual obligations
+  - `run-local`、`session`、`attach`、`transport`、`save`、`load`、`quiescent-save`、`export-devtools`、`view`、`build-native-bundle`、`demo` currently return structured unsupported diagnostics
+  - it does not claim same-session product runtime, product-ready alpha-1, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load, or arbitrary native execution
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

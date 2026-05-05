@@ -6,6 +6,7 @@ members = [
   "crates/mir-ast",
   "crates/mir-semantics",
   "crates/mir-runtime",
+  "crates/mirrorea-cli",
   "crates/mir-lsp",
   "crates/mirrorea-core",
   "crates/mirrorea-control",

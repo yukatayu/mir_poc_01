@@ -20,9 +20,7 @@ Current repo already has:
 
 Current repo still lacks product alpha-1:
 
-- canonical alpha Rust CLI entrypoint
-- versioned product alpha package schema
-- product demo root separate from first-floor fixtures
+- product same-session runtime command behavior beyond `check`
 - same-session product demo command path
 - local and Docker transport product command path
 - message failure/recovery checker/runtime report
@@ -70,6 +68,10 @@ Non-claim:
 
 ### `P-A1-26` — alpha CLI and package schema stabilization
 
+Status:
+
+- actualized by `crates/mirrorea-cli`, `crates/mir-ast::product_alpha1`, and `samples/product-alpha1/demo`
+
 Target:
 
 - add `mirrorea-cli` or equivalent Rust binary crate
@@ -80,8 +82,20 @@ Target:
 - add product demo package schema fixture root if needed for tests
 - return explicit unsupported / not-yet-implemented diagnostics for commands whose behavior lands in later packages
 
+Delivered:
+
+- binary `mirrorea-alpha`
+- product `package.mir.json` schema version `mirrorea-product-alpha1-v0`
+- `check` command with explicit accepted evidence and residual obligations
+- direct `.mir` non-goal diagnostic
+- structured unsupported diagnostics for later command family
+- `samples/product-alpha1/demo/` fixture root
+
 Validation:
 
+- `cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture`
+- `cargo test -p mirrorea-cli --test alpha_cli -- --nocapture`
+- `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json`
 - CLI command parsing tests
 - command availability / unsupported diagnostic tests for the full alpha family
 - product package schema tests
@@ -97,7 +111,7 @@ Non-claim:
 
 Target:
 
-- create `samples/product-alpha1/demo/`
+- extend `samples/product-alpha1/demo/`
 - connect check -> runtime plan -> run-local -> typed host-I/O -> hot-plug -> local/Docker transport -> observe in one session carrier or documented product run directory
 - preserve exact carrier split from practical and operational lines
 
@@ -284,7 +298,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- alpha CLI and schema
 - product demo same-session runtime
 - message recovery and quiescent-save bounded implementation
 - product viewer UX
@@ -310,6 +323,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-26` alpha CLI / package schema stabilization
+- `P-A1-27` product demo same-session runtime
 
 Queue authority remains `progress.md` / `tasks.md`.

@@ -142,6 +142,23 @@ class ValidateDocsTests(unittest.TestCase):
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
 
+    def test_required_scaffold_includes_product_alpha1_sample_docs(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        product_alpha1_sample_docs = {
+            "samples/product-alpha1/README.md",
+            "samples/product-alpha1/demo/README.md",
+            "samples/product-alpha1/demo/package.mir.json",
+        }
+
+        for path in product_alpha1_sample_docs:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
+
     def test_main_rejects_template_missing_commands_run_section(self) -> None:
         heading = "## Commands run"
         template_text = "\n".join(h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading)

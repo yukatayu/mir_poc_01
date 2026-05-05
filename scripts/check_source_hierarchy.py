@@ -77,6 +77,9 @@ REQUIRED_PATHS: dict[str, list[str]] = {
     "samples": [
         "samples/README.md",
         "samples/alpha/README.md",
+        "samples/product-alpha1/README.md",
+        "samples/product-alpha1/demo/README.md",
+        "samples/product-alpha1/demo/package.mir.json",
         "samples/practical-alpha1/README.md",
         "samples/practical-alpha1/packages/README.md",
         "samples/practical-alpha1/source/README.md",
@@ -98,6 +101,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "docs/reports",
         "docs/research_abstract",
         "samples/alpha",
+        "samples/product-alpha1",
+        "samples/product-alpha1/demo",
         "samples/practical-alpha1",
         "samples/practical-alpha1/packages",
         "samples/practical-alpha1/source",

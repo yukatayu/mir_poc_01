@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 13:14 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the newly fixed product alpha-1 public boundary. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; product alpha-1 does not yet have a runnable product demo root or canonical CLI.
+Last updated: 2026-05-05 14:00 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the product alpha-1 CLI/schema first cut. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; `samples/product-alpha1/` now exists as product alpha schema/demo root but is not yet workflow-ready.
 
 ## Legend
 
@@ -10,6 +10,7 @@ Primary metric:
 - `workflow-ready`: an external developer can reproduce the named layer workflow end-to-end from repo commands.
 - `evidence-closed`: helper / sidecar / report / expected JSON / first-floor runner evidence is synchronized and validated, but the row is not operational workflow completion.
 - `boundary-fixed`: normative specs / roadmap define the boundary, but no reproducible workflow is present yet.
+- `entrypoint/schema-ready`: alpha CLI and package schema checks are reproducible, but the product workflow is not yet end-to-end.
 - `planned`: source or roadmap exists, but no reproducible workflow is present.
 
 Notes:
@@ -26,7 +27,7 @@ Notes:
 | α-0.8 same-session hot-plug runtime | workflow-ready: same-session hot-plug workflow | `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json` | `HP-A1-01..07`, `AV-A1-03`, `VIS-A1-04/05`, `OA08-01..10`, `crates/mir-runtime::practical_alpha08_hotplug_session`, `specs/21/22/24`, `plan/46/48/49` | accepted detach execution / distributed ordering |
 | α-0.9 session-bound devtools | workflow-ready: session-bound devtools workflow | `python3 scripts/practical_alpha09_devtools.py check-all --format json` | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | final public viewer/telemetry ABI, durable audit |
 | practical α-1 integrated workflow | bounded workflow-ready, not product/public-ready | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | `PA1W-01..08`, exact `VIS-A1-01` / `PE2E-01/02/07` evidence, `OA05/OA08/OA09` carriers | product/public-ready α-1, final public viewer/telemetry ABI, distributed durable save/load |
-| product alpha-1 public boundary | boundary-fixed, not workflow-ready | docs-only: `specs/25`, `plan/50` | alpha `U1` defaults, `P-A1-26..31` package line, CLI/package/demo/quiescent-save/viewer/native-bundle validation target | canonical CLI, product demo root, quiescent-save implementation, product viewer, native launch bundle, release validation |
+| product alpha-1 CLI/schema | entrypoint/schema-ready, not workflow-ready | `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` | `crates/mirrorea-cli`, `crates/mir-ast::product_alpha1`, `samples/product-alpha1/demo`, structured unsupported diagnostics for later commands | same-session product runtime, local/Docker command behavior, quiescent-save implementation, product viewer, native launch bundle, release validation |
 
 ## Practical alpha-1 first-floor map
 
@@ -69,6 +70,9 @@ Notes:
 - `python3 -m unittest scripts.tests.test_validate_docs`
 - `python3 scripts/check_source_hierarchy.py`
 - `python3 scripts/validate_docs.py`
+- `cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture`
+- `cargo test -p mirrorea-cli --test alpha_cli -- --nocapture`
+- `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json`
 - `cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha08_session_hotplug -- --nocapture`
@@ -85,6 +89,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-05 14:00 JST | `P-A1-26` product alpha CLI/schema | pass | `mirrorea-alpha check` と product `package.mir.json` schema first cut を追加。later command family は structured unsupported。product workflow-ready claim はまだしない |
 | 2026-05-05 13:14 JST | `P-A1-25` product alpha boundary recut | pass | `specs/25` / `plan/50` を required scaffold に追加し、product alpha-1 は boundary-fixed だが not workflow-ready と分類。behavior implementation は未変更 |
 | 2026-05-05 12:32 JST | root Markdown concision + operational workflow verification | pass | α-0.5 / α-0.8 / α-0.9 / bounded practical α-1 workflow `check-all`、focused Python unittest、focused Rust runtime tests、docs/source hierarchy checks が pass。`product_public_ready = false` は維持 |
 | 2026-05-05 11:59 JST | `P-A1-24` workflow-readiness policy sync | pass | progress dashboard を percentage から workflow status / evidence classification へ切り替え、helper / sidecar / report / expected JSON / first-floor runner を completion ではなく evidence として分類 |

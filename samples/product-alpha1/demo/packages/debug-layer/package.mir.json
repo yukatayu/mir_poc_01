@@ -1,0 +1,77 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "product-alpha1-debug-layer",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "layer",
+  "dependencies": [],
+  "effects": [
+    "observe.event_dag"
+  ],
+  "failures": [],
+  "capabilities": [
+    "ObserveDebugSummary"
+  ],
+  "witness_requirements": [],
+  "membership_requirements": [
+    "active_admin_participant"
+  ],
+  "auth_policy": {
+    "policy_id": "debug-layer-auth-policy",
+    "required_bindings": [
+      "admin_membership"
+    ]
+  },
+  "auth_stack": [
+    "membership_auth",
+    "capability_auth"
+  ],
+  "contracts": [
+    {
+      "contract_id": "debug-layer-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "observe.event_dag"
+      ],
+      "failure_row": []
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": [
+      "debug_summary_redacted"
+    ]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": [
+      "raw_witness_payload",
+      "raw_auth_evidence"
+    ]
+  },
+  "retention_policy": {
+    "scope": "demo_session",
+    "retained_artifacts": [
+      "hotplug_lifecycle"
+    ]
+  },
+  "message_recovery_policy": {
+    "handled_failures": [
+      "reject"
+    ],
+    "recovery": "reject"
+  },
+  "savepoint_policy": {
+    "classes": [
+      "R0"
+    ],
+    "quiescent_required": false
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}
