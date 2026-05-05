@@ -33,6 +33,7 @@
   - `mirrorea_future_axis_01.md` は、Mirrorea future-axis の current queue と stop line を reader-facing に短く読むための summary である。
   - `public_api_parser_gate_plan_01.md` は、`P18` repo-side freeze checklist / public-boundary inventory / true user-spec hold line split を reader-facing に短く読むための summary である。
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の current queue narrowing と stop line を reader-facing に短く読むための summary である。
+  - `product_alpha1_01.md` は、product alpha release-candidate workflow、non-final viewer、release-check boundary、final-public non-claims を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -45,6 +46,7 @@
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の最短 command path を reader-facing にまとめた landing page である。
   - `avatar_fairy_follow_representative_slice_01.md` は、phase 8 active representative slice を最短コマンドで追うための landing page である。
   - `typed_external_boundary_canaries_01.md` は、phase 9 synthetic preview helper subset を最短コマンドで追うための landing page である。
+  - `product_alpha1_01.md` は、Product/Public-ready Mirrorea Spaces alpha-1 release-candidate workflow を clean clone から再現するための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を

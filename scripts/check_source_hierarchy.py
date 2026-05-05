@@ -73,6 +73,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
     "scripts": [
         "scripts",
         "scripts/README.md",
+        "scripts/product_alpha1_release_check.py",
+        "scripts/tests/test_product_alpha1_release_check.py",
     ],
     "samples": [
         "samples/README.md",
@@ -80,6 +82,11 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "samples/product-alpha1/README.md",
         "samples/product-alpha1/demo/README.md",
         "samples/product-alpha1/demo/package.mir.json",
+        "samples/product-alpha1/demo/packages/debug-layer/package.mir.json",
+        "samples/product-alpha1/demo/packages/auth-layer/package.mir.json",
+        "samples/product-alpha1/demo/packages/rate-limit-layer/package.mir.json",
+        "samples/product-alpha1/demo/packages/placeholder-object/package.mir.json",
+        "samples/product-alpha1/demo/packages/custom-avatar-preview/package.mir.json",
         "samples/product-alpha1/docker/README.md",
         "samples/product-alpha1/docker/docker-compose.product-alpha1.yml",
         "samples/practical-alpha1/README.md",
@@ -101,7 +108,11 @@ REQUIRED_PATHS: dict[str, list[str]] = {
     ],
     "supporting_dirs": [
         "docs/reports",
+        "docs/hands_on/README.md",
+        "docs/hands_on/product_alpha1_01.md",
+        "docs/research_abstract/README.md",
         "docs/research_abstract",
+        "docs/research_abstract/product_alpha1_01.md",
         "samples/alpha",
         "samples/product-alpha1",
         "samples/product-alpha1/demo",

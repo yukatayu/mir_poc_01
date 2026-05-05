@@ -10,12 +10,12 @@ services:
       - --output
       - /out/world.json
       - --fixture-token
-      - product-alpha1-docker-compose-fixture-v0
+      - ${MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN:?fixture token required}
       - --format
       - json
     environment:
       MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER: "1"
-      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: product-alpha1-docker-compose-fixture-v0
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: ${MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN:?fixture token required}
     volumes:
       - ${MIRROREA_PRODUCT_ALPHA1_BINARY}:/usr/local/bin/mirrorea-alpha:ro
       - ${MIRROREA_PRODUCT_ALPHA1_SESSION_FILE}:/session/session.json:ro
@@ -37,12 +37,12 @@ services:
       - --output
       - /out/participant.json
       - --fixture-token
-      - product-alpha1-docker-compose-fixture-v0
+      - ${MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN:?fixture token required}
       - --format
       - json
     environment:
       MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER: "1"
-      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: product-alpha1-docker-compose-fixture-v0
+      MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: ${MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN:?fixture token required}
     volumes:
       - ${MIRROREA_PRODUCT_ALPHA1_BINARY}:/usr/local/bin/mirrorea-alpha:ro
       - ${MIRROREA_PRODUCT_ALPHA1_SESSION_FILE}:/session/session.json:ro

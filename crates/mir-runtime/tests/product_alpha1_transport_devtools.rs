@@ -128,7 +128,7 @@ fn product_alpha1_devtools_bundle_has_required_panels_and_redaction() {
     );
     assert_eq!(
         bundle.panels.auth_capability_decision.capability_decisions[0].granted_capability_count,
-        2
+        3
     );
     assert_eq!(bundle.admin_debug_view_status, "kept_later");
     assert!(!bundle.final_public_viewer_frozen);

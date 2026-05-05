@@ -223,29 +223,158 @@ fn unimplemented_commands_reject_direct_mir_with_non_goal_diagnostic() {
 }
 
 #[test]
-fn demo_remains_structured_unsupported_until_release_candidate() {
+fn demo_skip_docker_runs_local_probe_without_release_candidate_claim() {
     let out_dir = unique_temp_dir("mirrorea-alpha-out");
-    let out = out_dir.to_str().expect("temp out should be utf-8");
+    let output = run_cli(&[
+        "demo",
+        "--out",
+        out_dir.to_str().expect("temp out should be utf-8"),
+        "--skip-docker",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
 
-    let command_args: &[(&str, &[&str])] = &[("demo", &["--out", out])];
+    assert!(
+        output.status.success(),
+        "demo should run the local product probe: stdout={} stderr={}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert_eq!(value["surface_kind"], "product_alpha1_demo_report");
+    assert_eq!(value["status"], "partial");
+    assert_eq!(value["command"], "demo");
+    assert_eq!(value["product_alpha1_release_candidate_ready"], false);
+    assert_eq!(value["product_alpha1_ready"], false);
+    assert_eq!(value["final_public_api_frozen"], false);
+    assert_eq!(value["docker_transport_included"], false);
+    assert_eq!(
+        value["docker_transport_status"],
+        "skipped_by_flag_non_release"
+    );
+    assert_eq!(value["native_bundle_included"], true);
+    assert_eq!(value["viewer_check_included"], true);
+    assert_eq!(value["quiescent_save_included"], true);
+    assert_eq!(value["local_save_load_included"], true);
+    assert_eq!(value["attach_matrix_verified"], true);
+    assert_eq!(value["same_session_reopen_checked"], true);
+    assert_eq!(value["session_store_view_role"], "admin_debug_local");
+    assert_eq!(value["session_store_contains_private_lanes"], true);
+    assert_eq!(value["complete_redaction_proof_claimed"], false);
 
-    for (command, args) in command_args {
-        let mut argv = vec![*command];
-        argv.extend_from_slice(args);
-        argv.extend_from_slice(&["--format", "json"]);
-        let output = run_cli(&argv);
-        let value = json_stdout(&output);
-
+    let expected_paths = [
+        "reports/check.json",
+        "reports/run-local.json",
+        "reports/attach-product-alpha1-debug-layer.json",
+        "reports/attach-product-alpha1-auth-layer.json",
+        "reports/attach-product-alpha1-rate-limit-layer.json",
+        "reports/attach-product-alpha1-placeholder-object.json",
+        "reports/attach-product-alpha1-custom-avatar-preview.json",
+        "reports/save.json",
+        "reports/load.json",
+        "reports/quiescent-save.json",
+        "reports/transport-local.json",
+        "reports/export-devtools.json",
+        "reports/view.json",
+        "reports/demo.json",
+        "devtools/bundle.json",
+        "devtools/index.html",
+        "native-bundle/manifest.json",
+        "native-bundle/run.sh",
+    ];
+    for relative in expected_paths {
         assert!(
-            !output.status.success(),
-            "{command} should remain unsupported until P-A1-31"
+            out_dir.join(relative).exists(),
+            "demo should write {relative}"
         );
-        assert_eq!(value["status"], "unsupported");
-        assert_eq!(value["command"], *command);
-        assert_eq!(value["implemented"], false);
-        assert_eq!(value["product_alpha1_ready"], false);
-        assert_eq!(value["final_public_api_frozen"], false);
     }
+    let session_path = PathBuf::from(value["session_path"].as_str().unwrap());
+    assert!(session_path.exists(), "demo session_path should exist");
+    let observer_safe_session = fs::read_to_string(&session_path).unwrap();
+    assert!(!observer_safe_session.contains("witness_refs"));
+    assert!(!observer_safe_session.contains("granted_capabilities"));
+    assert!(!observer_safe_session.contains("raw_witness_payload"));
+    assert!(!observer_safe_session.contains("raw_auth_evidence"));
+
+    let admin_session_store_dir = PathBuf::from(value["admin_session_store_dir"].as_str().unwrap());
+    let admin_session_path = PathBuf::from(value["admin_session_path"].as_str().unwrap());
+    assert!(
+        admin_session_path.exists(),
+        "admin session store path should exist"
+    );
+    let reopened = run_cli_with_session_dir(
+        &[
+            "session",
+            value["session_id"].as_str().unwrap(),
+            "--format",
+            "json",
+        ],
+        Some(&admin_session_store_dir),
+    );
+    let reopened_value = json_stdout(&reopened);
+    assert!(reopened.status.success());
+    assert_eq!(reopened_value["session"]["session_id"], value["session_id"]);
+
+    let attach_outcomes = value["attach_outcomes"].as_array().unwrap();
+    assert!(
+        attach_outcomes
+            .iter()
+            .any(|row| row["package_id"] == "product-alpha1-auth-layer"
+                && row["terminal_outcome"] == "accepted")
+    );
+    assert!(attach_outcomes.iter().any(|row| {
+        row["package_id"] == "product-alpha1-rate-limit-layer"
+            && row["terminal_outcome"] == "accepted"
+            && row["declared_failure_rows"]
+                .as_array()
+                .unwrap()
+                .contains(&Value::String("RateLimited".to_string()))
+    }));
+    assert!(attach_outcomes.iter().any(|row| row["package_id"]
+        == "product-alpha1-placeholder-object"
+        && row["terminal_outcome"] == "deferred"));
+    assert!(attach_outcomes.iter().any(|row| row["package_id"]
+        == "product-alpha1-custom-avatar-preview"
+        && row["terminal_outcome"] == "deferred"));
+
+    for relative in [
+        "reports/save.json",
+        "reports/load.json",
+        "reports/quiescent-save.json",
+        "reports/transport-local.json",
+        "reports/export-devtools.json",
+        "devtools/bundle.json",
+    ] {
+        let text = fs::read_to_string(out_dir.join(relative)).unwrap();
+        assert!(!text.contains("witness_refs"));
+        assert!(!text.contains("granted_capabilities"));
+        assert!(!text.contains("raw_witness_payload"));
+        assert!(!text.contains("raw_auth_evidence"));
+        assert!(!text.contains("capability_secret"));
+        assert!(!text.contains("ObserveDebugSummary"));
+        assert!(!text.contains("AttachDebugLayer"));
+    }
+}
+
+#[test]
+fn demo_rejects_package_missing_required_product_attach_matrix() {
+    let package_dir = write_product_package();
+    let out_dir = unique_temp_dir("mirrorea-alpha-out-missing-attach-matrix");
+    let output = run_cli(&[
+        "demo",
+        package_dir.to_str().expect("temp package should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("temp out should be utf-8"),
+        "--skip-docker",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(!output.status.success());
+    assert_eq!(value["status"], "error");
+    assert_eq!(value["diagnostic_code"], "demo_attach_matrix_incomplete");
+    assert_eq!(value["product_alpha1_release_candidate_ready"], false);
 }
 
 #[test]

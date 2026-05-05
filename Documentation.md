@@ -30,7 +30,7 @@
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
-現在 repo は repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidence に加えて、bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。`P-A1-25` で product/public-ready alpha-1 の境界と alpha defaults は固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut を追加しました。`P-A1-27` では `mirrorea-alpha run-local` / `session` / `attach` と product same-session carrier first cut を追加し、`P-A1-28` では bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` を同じ session file に接続しました。`P-A1-29` では同じ session carrier に local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools` JSON/HTML bundle、`view --check` を接続しました。`P-A1-30` では `build-native-bundle` が compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、run script、verification/provenance reports を持つ native host launch bundle を生成します。ただし product alpha-1 release validation、`demo` command、final public product、final public viewer / telemetry ABI、R3/R4 durable distributed save/load、arbitrary native package execution はまだ別 gate / non-goal です。
+現在 repo は repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidence に加えて、bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。`P-A1-25` で product/public-ready alpha-1 の境界と alpha defaults は固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut を追加しました。`P-A1-27` では `mirrorea-alpha run-local` / `session` / `attach` と product same-session carrier first cut を追加し、`P-A1-28` では bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` を同じ session file に接続しました。`P-A1-29` では同じ session carrier に local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools` JSON/HTML bundle、`view --check` を接続しました。`P-A1-30` では `build-native-bundle` が compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、run script、verification/provenance reports を持つ native host launch bundle を生成します。`P-A1-31` では `mirrorea-alpha demo`、`scripts/product_alpha1_release_check.py check-all`、clean-clone hands-on guide / research summary を追加し、product alpha release-candidate workflow を再現可能にしました。ただし final public product、final public grammar / ABI、final public viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution は引き続き別 gate / non-goal です。
 
 ## current active floor
 
@@ -86,7 +86,7 @@ OS/network substrate
 - final public viewer / telemetry ABI
 - durable audit backend / remote retained-artifact retrieval
 - distributed durable save/load
-- product-ready α-1 implementation / release validation
+- final-public product hardening beyond the product alpha release-candidate workflow
 
 ## 重要な境界
 
@@ -120,7 +120,9 @@ OS/network substrate
 - product/public alpha-1 boundary:
   `specs/25-product-alpha1-public-boundary.md`
   `plan/50-product-alpha1-public-boundary-roadmap.md`
-- hands-on closeout commands:
+- hands-on product alpha commands:
+  `docs/hands_on/product_alpha1_01.md`
+- legacy hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 
 ## snapshot の読み方

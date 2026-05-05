@@ -5,8 +5,9 @@ use serde::{Deserialize, Serialize};
 use crate::product_alpha1_session::{
     ProductAlpha1EventDag, ProductAlpha1EventEdge, ProductAlpha1EventNode,
     ProductAlpha1HotPlugLifecycleEntry, ProductAlpha1MessageRecoveryState,
-    ProductAlpha1ObserverSafeExport, ProductAlpha1RouteGraph, ProductAlpha1SaveLoadState,
-    ProductAlpha1SessionCarrier, ProductAlpha1SessionError,
+    ProductAlpha1ObserverSafeExport, ProductAlpha1PlaceEdge, ProductAlpha1PlaceNode,
+    ProductAlpha1RouteGraph, ProductAlpha1SaveLoadState, ProductAlpha1SessionCarrier,
+    ProductAlpha1SessionError,
 };
 
 pub const PRODUCT_ALPHA1_DEVTOOLS_SURFACE_KIND: &str = "product_alpha1_devtools_export_report";
@@ -33,10 +34,10 @@ pub struct ProductAlpha1DevtoolsBundle {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProductAlpha1DevtoolsPanels {
     pub product_overview: ProductAlpha1ProductOverviewPanel,
-    pub place_graph: Vec<String>,
+    pub place_graph: ProductAlpha1PlaceGraphPanel,
     pub event_dag: ProductAlpha1EventDag,
     pub message_route_graph: ProductAlpha1RouteGraph,
-    pub membership_frontier_timeline: Vec<String>,
+    pub membership_frontier_timeline: Vec<ProductAlpha1MembershipFrontierEntry>,
     pub witness_relation_timeline: ProductAlpha1WitnessRelationPanel,
     pub hotplug_lifecycle: Vec<ProductAlpha1HotPlugLifecycleEntry>,
     pub save_load_quiescent_timeline: ProductAlpha1SaveLoadState,
@@ -50,6 +51,7 @@ pub struct ProductAlpha1DevtoolsPanels {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProductAlpha1ProductOverviewPanel {
     pub package_id: String,
+    pub package_version: String,
     pub phase: String,
     pub active_layers: Vec<String>,
     pub view_role: String,
@@ -57,7 +59,38 @@ pub struct ProductAlpha1ProductOverviewPanel {
     pub retention_scope: String,
     pub event_count: usize,
     pub route_count: usize,
+    pub active_member_count: usize,
+    pub latest_savepoint_ref: Option<String>,
+    pub non_claims: Vec<String>,
     pub product_alpha1_ready: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1PlaceGraphPanel {
+    pub nodes: Vec<ProductAlpha1PlaceNodeSummary>,
+    pub edges: Vec<ProductAlpha1PlaceEdgeSummary>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1PlaceNodeSummary {
+    pub observer_safe_place_ref: String,
+    pub place_kind: String,
+    pub private_place_ref_redacted: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1PlaceEdgeSummary {
+    pub from_place: String,
+    pub to_place: String,
+    pub relation: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1MembershipFrontierEntry {
+    pub frontier_id: String,
+    pub membership_epoch: u64,
+    pub active_member_count: usize,
+    pub required_membership_count: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -121,6 +154,7 @@ pub fn export_product_alpha1_devtools(
     let panels = ProductAlpha1DevtoolsPanels {
         product_overview: ProductAlpha1ProductOverviewPanel {
             package_id: session.package_id.clone(),
+            package_version: session.runtime_plan.package_version.clone(),
             phase: session.phase.clone(),
             active_layers: session.active_layers.clone(),
             view_role: session.observer_safe_export.view_role.clone(),
@@ -128,21 +162,27 @@ pub fn export_product_alpha1_devtools(
             retention_scope: session.observer_safe_export.retention_scope.clone(),
             event_count: session.event_dag.nodes.len(),
             route_count: session.route_graph.routes.len(),
+            active_member_count: session.membership.active_members.len(),
+            latest_savepoint_ref: session.save_load_state.local_savepoint_refs.last().cloned(),
+            non_claims: vec![
+                "not final public viewer API".to_string(),
+                "not durable telemetry or audit backend".to_string(),
+                "not raw admin/debug secret export".to_string(),
+            ],
             product_alpha1_ready: false,
         },
-        place_graph: session
-            .runtime_plan
-            .place_graph
-            .nodes
-            .iter()
-            .map(|node| format!("{}:{}", node.place_id, node.place_kind))
-            .collect(),
+        place_graph: observer_safe_place_graph_panel(
+            &session.runtime_plan.place_graph.nodes,
+            &session.runtime_plan.place_graph.edges,
+        ),
         event_dag: session.event_dag.clone(),
         message_route_graph: session.route_graph.clone(),
-        membership_frontier_timeline: vec![format!(
-            "{}@epoch{}",
-            session.membership.frontier_id, session.membership.membership_epoch
-        )],
+        membership_frontier_timeline: vec![ProductAlpha1MembershipFrontierEntry {
+            frontier_id: session.membership.frontier_id.clone(),
+            membership_epoch: session.membership.membership_epoch,
+            active_member_count: session.membership.active_members.len(),
+            required_membership_count: session.membership.required_membership_refs.len(),
+        }],
         witness_relation_timeline: ProductAlpha1WitnessRelationPanel {
             frontier_id: session.witness_state.frontier_id.clone(),
             observer_safe_relation_refs: session.witness_state.observer_safe_relation_refs.clone(),
@@ -255,7 +295,7 @@ pub fn export_product_alpha1_devtools_for_session(
 pub fn render_product_alpha1_viewer_html(bundle: &ProductAlpha1DevtoolsBundle) -> String {
     let mut body = String::new();
     body.push_str("<!doctype html><html><head><meta charset=\"utf-8\"><title>Mirrorea Product Alpha-1 Devtools</title>");
-    body.push_str("<style>body{font-family:system-ui,sans-serif;margin:0;background:#f7f7f5;color:#1e2930}main{max-width:1180px;margin:auto;padding:24px}.panel{border:1px solid #ccd2d8;border-radius:8px;padding:14px;margin:10px 0;background:white}code{background:#edf2f7;padding:2px 4px;border-radius:4px}</style>");
+    body.push_str("<style>body{font-family:system-ui,sans-serif;margin:0;background:#f7f7f5;color:#1e2930}main{max-width:1180px;margin:auto;padding:24px}.panel{border:1px solid #ccd2d8;border-radius:8px;padding:14px;margin:10px 0;background:white}code{background:#edf2f7;padding:2px 4px;border-radius:4px}pre{white-space:pre-wrap;overflow:auto;background:#f3f6f8;border:1px solid #d9e1e7;border-radius:6px;padding:10px;font-size:13px;line-height:1.45}</style>");
     body.push_str("</head><body><main>");
     body.push_str("<h1>Mirrorea Product Alpha-1 Devtools</h1>");
     body.push_str(&format!(
@@ -267,11 +307,13 @@ pub fn render_product_alpha1_viewer_html(bundle: &ProductAlpha1DevtoolsBundle) -
         escape_html(&bundle.retention_scope)
     ));
     for panel_id in &bundle.panel_ids {
+        let panel_payload = panel_payload_json(bundle, panel_id);
         body.push_str(&format!(
-            "<section class=\"panel\" id=\"{}\"><h2>{}</h2><p>{}</p></section>",
+            "<section class=\"panel\" id=\"{}\"><h2>{}</h2><p>{}</p><pre>{}</pre></section>",
             escape_html(panel_id),
             escape_html(panel_id),
-            panel_summary(panel_id)
+            panel_summary(panel_id),
+            escape_html(&panel_payload)
         ));
     }
     body.push_str("</main></body></html>");
@@ -373,6 +415,82 @@ fn panel_summary(panel_id: &str) -> &'static str {
         }
         _ => "Panel is derived from the same product alpha-1 session carrier.",
     }
+}
+
+fn panel_payload_json(bundle: &ProductAlpha1DevtoolsBundle, panel_id: &str) -> String {
+    let payload = match panel_id {
+        "product_overview" => serde_json::to_value(&bundle.panels.product_overview),
+        "place_graph" => serde_json::to_value(&bundle.panels.place_graph),
+        "event_dag" => serde_json::to_value(&bundle.panels.event_dag),
+        "message_route_graph" => serde_json::to_value(&bundle.panels.message_route_graph),
+        "membership_frontier_timeline" => {
+            serde_json::to_value(&bundle.panels.membership_frontier_timeline)
+        }
+        "witness_relation_timeline" => {
+            serde_json::to_value(&bundle.panels.witness_relation_timeline)
+        }
+        "hotplug_lifecycle" => serde_json::to_value(&bundle.panels.hotplug_lifecycle),
+        "save_load_quiescent_timeline" => {
+            serde_json::to_value(&bundle.panels.save_load_quiescent_timeline)
+        }
+        "message_failure_recovery" => serde_json::to_value(&bundle.panels.message_failure_recovery),
+        "fallback_degradation" => serde_json::to_value(&bundle.panels.fallback_degradation),
+        "auth_capability_decision" => serde_json::to_value(&bundle.panels.auth_capability_decision),
+        "redaction_toggle" => serde_json::to_value(&bundle.panels.redaction_toggle),
+        "retention_trace" => serde_json::to_value(&bundle.panels.retention_trace),
+        _ => serde_json::to_value(panel_summary(panel_id)),
+    };
+    payload
+        .and_then(|value| serde_json::to_string_pretty(&value))
+        .unwrap_or_else(|error| format!("{{\"serialization_error\":\"{}\"}}", error))
+}
+
+fn observer_safe_place_graph_panel(
+    nodes: &[ProductAlpha1PlaceNode],
+    edges: &[ProductAlpha1PlaceEdge],
+) -> ProductAlpha1PlaceGraphPanel {
+    let node_summaries = nodes
+        .iter()
+        .enumerate()
+        .map(|(index, node)| ProductAlpha1PlaceNodeSummary {
+            observer_safe_place_ref: observer_safe_place_ref(node, index),
+            place_kind: node.place_kind.clone(),
+            private_place_ref_redacted: is_private_place_ref(node),
+        })
+        .collect();
+    let edge_summaries = edges
+        .iter()
+        .map(|edge| ProductAlpha1PlaceEdgeSummary {
+            from_place: observer_safe_edge_place_ref(nodes, &edge.from_place),
+            to_place: observer_safe_edge_place_ref(nodes, &edge.to_place),
+            relation: edge.relation.clone(),
+        })
+        .collect();
+    ProductAlpha1PlaceGraphPanel {
+        nodes: node_summaries,
+        edges: edge_summaries,
+    }
+}
+
+fn observer_safe_edge_place_ref(nodes: &[ProductAlpha1PlaceNode], place_id: &str) -> String {
+    nodes
+        .iter()
+        .enumerate()
+        .find(|(_, node)| node.place_id == place_id)
+        .map(|(index, node)| observer_safe_place_ref(node, index))
+        .unwrap_or_else(|| "redacted_place#unknown".to_string())
+}
+
+fn observer_safe_place_ref(node: &ProductAlpha1PlaceNode, index: usize) -> String {
+    if is_private_place_ref(node) {
+        format!("participant_place#{}", index + 1)
+    } else {
+        node.place_id.clone()
+    }
+}
+
+fn is_private_place_ref(node: &ProductAlpha1PlaceNode) -> bool {
+    node.place_kind.contains("Participant") || node.place_id.contains("ParticipantPlace[")
 }
 
 fn observer_safe_reason_families(reason_refs: &[String]) -> Vec<String> {

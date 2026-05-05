@@ -158,16 +158,24 @@ fn product_alpha1_run_local_executes_declared_host_io_payload() {
             .replace(r#""value": 41"#, r#""value": 7"#)
             .replace(r#""value": 42"#, r#""value": 8"#);
     let package_dir = write_package("product-alpha1-runtime-input-test", &package_json);
-    fs::create_dir_all(package_dir.join("packages/debug-layer"))
-        .expect("dependency dir should be created");
-    fs::write(
-        package_dir.join("packages/debug-layer/package.mir.json"),
-        fs::read_to_string(
-            repo_root().join("samples/product-alpha1/demo/packages/debug-layer/package.mir.json"),
+    for dependency in [
+        "debug-layer",
+        "auth-layer",
+        "rate-limit-layer",
+        "placeholder-object",
+        "custom-avatar-preview",
+    ] {
+        fs::create_dir_all(package_dir.join(format!("packages/{dependency}")))
+            .expect("dependency dir should be created");
+        fs::write(
+            package_dir.join(format!("packages/{dependency}/package.mir.json")),
+            fs::read_to_string(repo_root().join(format!(
+                "samples/product-alpha1/demo/packages/{dependency}/package.mir.json"
+            )))
+            .expect("dependency package should be readable"),
         )
-        .expect("debug layer package should be readable"),
-    )
-    .expect("dependency package should be written");
+        .expect("dependency package should be written");
+    }
 
     let report = run_product_alpha1_local_session_path(&package_dir)
         .expect("runtime input package should run locally");

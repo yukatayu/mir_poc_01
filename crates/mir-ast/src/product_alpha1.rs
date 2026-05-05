@@ -13,7 +13,7 @@ const PRODUCT_ALPHA1_STOP_LINES: &[&str] = &[
     "product alpha-1 package schema is alpha-stable only, not a final public API",
     "textual .mir final grammar is not accepted by this product alpha-1 front door",
     "native output is a host launch bundle, not arbitrary native package execution",
-    "product alpha-1 readiness remains false until P-A1-31 release validation passes",
+    "standalone package checking does not by itself claim product alpha-1 release readiness; use demo/release validation evidence",
 ];
 
 const PRODUCT_ALPHA1_RESIDUALS: &[(&str, &str, &str)] = &[
@@ -30,22 +30,22 @@ const PRODUCT_ALPHA1_RESIDUALS: &[(&str, &str, &str)] = &[
     (
         "release_validation",
         "same_session_release_validation",
-        "local run/session/attach first cut exists; transport/save/viewer/native/release validation remains scheduled for P-A1-28..31",
+        "standalone checker output must be paired with same-session demo/release validation for product alpha-1 readiness",
     ),
     (
         "release_validation",
         "product_devtools_viewer",
-        "product viewer UX and observer-safe leak tests are scheduled for P-A1-29",
+        "viewer UX and observer-safe leak checks are release-validation evidence, not standalone checker evidence",
     ),
     (
         "release_validation",
         "native_launch_bundle",
-        "native host launch bundle is scheduled for P-A1-30",
+        "native host launch bundle evidence is produced by build-native-bundle/demo, not by standalone package checking",
     ),
     (
         "release_validation",
         "clean_clone_release_validation",
-        "clean-clone product alpha-1 release validation is scheduled for P-A1-31",
+        "clean-clone product alpha-1 release validation is carried by scripts/product_alpha1_release_check.py",
     ),
 ];
 

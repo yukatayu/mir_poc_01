@@ -189,7 +189,7 @@ Status:
 
 - closed by `P-A1-29`
 - workflow-ready first cut for same-session product transport and non-final viewer
-- not product alpha release-ready until native bundle and release validation close
+- at this package close point, product alpha release readiness still needed native bundle and release validation
 
 Target:
 
@@ -227,7 +227,7 @@ Status:
 
 - closed by `P-A1-30`
 - workflow-ready first cut for native host launch bundle generation
-- not product alpha release-ready until clean-clone validation and CLI `demo` close
+- at this package close point, product alpha release readiness still needed clean-clone validation and CLI `demo`
 
 Target:
 
@@ -239,17 +239,18 @@ Delivered:
 
 - `mirrorea-alpha build-native-bundle <package> --out <dir>` emits a native host launch bundle with `bin/mirrorea-alpha`, `packages/`, `devtools/`, `reports/`, `manifest.json`, `launch.json`, `provenance.json`, `run.sh`, and `README.md`.
 - The bundle includes the compiled Rust CLI, versioned product package files, observer-safe devtools JSON/HTML assets, check/run/save/quiescent-save/transport/export reports, verification report, and provenance-only metadata.
-- `run.sh check` and `run.sh view` use the bundled CLI/package/viewer paths and are validated during bundle build. CLI `demo` remains P-A1-31 scope.
+- `run.sh check` and `run.sh view` use the bundled CLI/package/viewer paths and are validated during bundle build. At this package close point, CLI `demo` remained P-A1-31 scope.
 - `manifest.json` and `reports/verification-report.json` record `NativeExecutionPolicy = Disabled`, `package_native_execution_claimed = false`, `arbitrary_native_execution_supported = false`, `direct_mir_to_machine_code_supported = false`, `signature_is_safety_claimed = false`, and `provenance_only = true`.
 - Direct textual `.mir` input to `build-native-bundle` returns the explicit `direct_mir_non_goal` diagnostic without freezing final codegen.
 
 Validation:
 
 - bundle builds
-- run script check/demo paths work
+- run script check/view paths work
 - manifest carries non-claims
 - manifest records `NativeExecutionPolicy = Disabled` unless a later package implements sandboxed execution
-- bundle check rejects arbitrary native package execution
+- copied package admission rejects non-disabled native policies
+- arbitrary native execution negative probe is not claimed by the bundle report
 - signature/provenance is reported separately from semantic safety
 - direct Mir-to-machine-code request returns an unsupported diagnostic
 
@@ -263,6 +264,12 @@ Non-claim:
 
 ### `P-A1-31` — product alpha-1 release candidate
 
+Status:
+
+- closed by `P-A1-31`
+- product alpha release-candidate workflow-ready
+- still alpha, not final public product
+
 Target:
 
 - clean clone guide
@@ -271,6 +278,14 @@ Target:
 - `docs/research_abstract/product_alpha1_01.md`
 - full product validation script
 - release report
+
+Delivered:
+
+- `mirrorea-alpha demo [package] --out <dir>` runs the product release-candidate workflow and writes reports, concrete non-final devtools assets, an observer-safe session artifact, an admin/debug local session store, and a native host launch bundle.
+- `scripts/product_alpha1_release_check.py check-all` runs the required validation floor, focused tests, documented command family, native bundle run script probes, and JSON payload semantics for clean-clone validation.
+- `docs/hands_on/product_alpha1_01.md` and `docs/research_abstract/product_alpha1_01.md` document the reproducible product alpha path and non-claims.
+- `samples/product-alpha1/demo/` now declares source-backed admin membership/capability authority for debug/auth/rate-limit layer packages plus object/avatar-preview packages. Layer attach is accepted when auth/capability evidence is present; object/avatar-preview attach remains deferred boundary evidence.
+- Docker skip paths are partial local probes and do not set release-candidate readiness.
 
 Validation:
 
@@ -345,16 +360,20 @@ tmpdir=$(mktemp -d /tmp/mirrorea-alpha1-demo-XXXXXX)
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/auth-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/rate-limit-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/placeholder-object --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/custom-avatar-preview --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0-release' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0-release' --session 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2-release' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load latest --session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json
 cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --format json
 cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-bundle --format json
-python3 scripts/product_alpha1_release_check.py check-all --format json
+cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-demo --format json
+python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release
 ```
 
 Actual command names may differ only if docs and validation scripts are updated together.
@@ -363,8 +382,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- clean-clone validation docs
-- CLI `demo` release walkthrough
+- maintenance / dashboard freshness
+- post-alpha packaging policy only after a new explicit scope is opened
 
 ### research-discovery items
 
@@ -385,6 +404,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout
+- post-P-A1-31 maintenance or a new user-selected final-public gate
 
 Queue authority remains `progress.md` / `tasks.md`.

@@ -36,7 +36,15 @@ This directory is the initial Product Alpha-1 demo package root.
 - bundled compiled CLI, versioned package files, observer-safe devtools assets, manifest, launch metadata, run script, verification report, and provenance report
 - explicit `NativeExecutionPolicy = Disabled`, package-native execution non-claim, signature-is-safety non-claim, and direct Mir-to-machine-code non-goal diagnostics
 
-It is not yet the full product demo workflow. CLI `demo`, clean-clone guide, and release-candidate validation are scheduled for `P-A1-31`. R3/R4 durable distributed save/load remains a non-goal.
+`P-A1-31` uses it for:
+
+- `demo` release-candidate workflow output
+- source-backed debug/auth/rate-limit layer attach plus deferred object/avatar-preview attach boundary evidence
+- local and Docker Compose TCP transport in the same product command family
+- clean-clone release check through `scripts/product_alpha1_release_check.py`
+- observer-safe `sessions/` output plus admin/debug `session-store/` carrier replay output
+
+It is now the product alpha release-candidate demo root. It is not final public product readiness. R3/R4 durable distributed save/load remains a non-goal.
 
 Commands:
 
@@ -46,6 +54,10 @@ tmpdir=$(mktemp -d /tmp/mirrorea-alpha1-session-XXXXXX)
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- session 'session#product-alpha1-demo' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/auth-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/rate-limit-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/placeholder-object --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/custom-avatar-preview --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json
@@ -58,11 +70,16 @@ bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
 cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
 sh "$bundle_dir/run.sh" check
 sh "$bundle_dir/run.sh" view
+demo_dir=$(mktemp -d /tmp/mirrorea-alpha1-demo-XXXXXX)
+cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out "$demo_dir" --format json
+release_dir=$(mktemp -d /tmp/mirrorea-alpha1-release-XXXXXX)
+python3 scripts/product_alpha1_release_check.py --format json check-all --out "$release_dir"
 ```
 
 The Docker transport command requires local Docker and Docker Compose. If those
 tools are unavailable, record an environment-gated skip with explicit non-claims
-instead of claiming the Docker probe passed.
+instead of claiming the Docker probe passed. `--skip-docker` is a partial local
+probe and does not set release-candidate readiness.
 
 Non-claim:
 

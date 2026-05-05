@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-05 15:53 JST
+最終更新: 2026-05-05 17:48 JST
 
 ## この文書について
 
@@ -24,11 +24,11 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-A1-30` native launch bundle
-- current promoted reopen point:
   `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout
+- current promoted reopen point:
+  post-P-A1-31 maintenance or a new explicit final-public gate
 - current reading:
-  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、および **bounded practical α-1 integrated workflow carrier** を得た。`P-A1-25` で product/public-ready alpha-1 の境界、alpha `U1` defaults、`P-A1-26..31` package line を固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut、`P-A1-27` で local same-session `run-local` / `session` / `attach`、`P-A1-28` で bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` first cut、`P-A1-29` で local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools`、`view --check`、`P-A1-30` で native host launch `build-native-bundle` first cut を追加した。ただし clean-clone release validation、`demo` command、final public viewer / telemetry ABI、durable audit、distributed durable save/load は未完成
+  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、**bounded practical α-1 integrated workflow carrier**、および **product alpha release-candidate workflow** を得た。`P-A1-25` で product/public-ready alpha-1 の境界、alpha `U1` defaults、`P-A1-26..31` package line を固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut、`P-A1-27` で local same-session `run-local` / `session` / `attach`、`P-A1-28` で bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` first cut、`P-A1-29` で local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools`、`view --check`、`P-A1-30` で native host launch `build-native-bundle` first cut、`P-A1-31` で source-backed attach matrix verified `demo` / release check / clean-clone docs を追加した。`--skip-docker` は partial local probe であり release-candidate readiness ではない。ただし final public viewer / telemetry ABI、durable audit、WAN/federation、distributed durable save/load は未完成
 - self-driven status:
   bounded practical workflow までは自走済み。user prompt により alpha `U1` defaults は採用済みなので、`P-A1-26..31` は stop line を守る限り自走可能。final public grammar / ABI / WAN / distributed durable save-load は still user/final decision gate
 
@@ -37,8 +37,8 @@ Place をまたいで実行・通信・検証・可視化できる
 | 軸 | Workflow reading | Current status |
 |---|---|---|
 | 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..25` で practical / operational / product alpha boundary を分けた。final public grammar / ABI は未固定 |
-| ユーザ向け仕様 | reproducible workflow guidance exists for bounded α lines | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow / product alpha boundary の読み分けを更新した。clean-clone product alpha guide は `P-A1-31` まで未完成 |
-| 実装 / 運用 | workflow-ready only where session workflow is reproducible | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow は再現可能。product alpha CLI は `check`、local same-session `run-local` / `session` / `attach`、R0 `save` / `load`、bounded R2 `quiescent-save`、local/Docker `transport`、`export-devtools`、`view --check`、native host `build-native-bundle` first cut まで実装済みだが、release validation / `demo` command は `P-A1-31` の未実装範囲 |
+| ユーザ向け仕様 | reproducible workflow guidance exists for product alpha release candidate | README / Documentation / progress / tasks / samples dashboard に加え、`docs/hands_on/product_alpha1_01.md` と `docs/research_abstract/product_alpha1_01.md` で clean-clone product alpha guide を追加した |
+| 実装 / 運用 | product alpha release-candidate workflow-ready | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow、product alpha `check/run-local/session/attach/save/load/quiescent-save/transport/export-devtools/view/build-native-bundle/demo/release-check` は再現可能。final-public grammar / ABI / WAN / distributed durable save-load は別 gate |
 
 ## line snapshot
 
@@ -48,7 +48,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | Spaces alpha-0 | evidence line | evidence-closed only | Stage A..F は current-scope evidence であり、operational workflow completion ではない | operational α-0.5 / α-0.8 / α-0.9 とは別 |
 | practical alpha-1 first floors | first-floor evidence | evidence-closed only | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence | product/public-ready α-1 とは別 |
 | practical alpha-1 integrated workflow | bounded workflow line | developer-reproducible bounded workflow | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
-| product alpha-1 local same-session runtime | product/public alpha line | local same-session/save/transport/viewer/native-bundle first-cut, not release-ready | `P-A1-25` で boundary を固定し、`P-A1-26` で `mirrorea-alpha check` と schema、`P-A1-27` で `run-local` / `session` / `attach`、`P-A1-28` で bounded recovery rows と local R0/R2 save commands、`P-A1-29` で local/Docker transport と non-final viewer export、`P-A1-30` で native host launch bundle を product carrier に接続した | `P-A1-31` release validation / demo command |
+| product alpha-1 release candidate | product/public alpha line | workflow-ready alpha release candidate, not final public product | `P-A1-25..31` で `mirrorea-alpha` command family、versioned package, same-session runtime, hot-plug, local/Docker transport, non-final devtools/viewer, local R0/R2 save/load, native host launch bundle, `demo`, release check, clean-clone docs を接続した | final public grammar / ABI / WAN / distributed durable save-load |
 | operational α-0.5 | operational line | workflow-ready: local session workflow | `P-A1-20` で local session carrier + typed `AddOne` host-I/O lane を接続し、local observable runtime workflow を再現可能にした | broader host family は later |
 | operational α-0.8 | operational line | workflow-ready: same-session hot-plug workflow | `P-A1-21` で debug/auth/rate-limit/object preview/deferred detach の same-session accepted/rejected/deferred/activation cut/observer-safe mutation を再現可能にした | accepted detach execution / distributed ordering は later |
 | operational α-0.9 | operational line | workflow-ready: session-bound devtools workflow | `P-A1-22` で session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を再現可能にした | final public viewer / telemetry ABI、durable audit は later |
@@ -75,7 +75,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | current-L2 側は強い。operational α line は theory freeze 完了 | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary は fixed、広い discharge は後段 | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | bounded α-0.8 same-session hot-plug runtime まで到達。accepted detach execution / distributed ordering は後段 | heavy | 着手可能 |
-| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line、bounded practical α-1 workflow、product alpha boundary recut、alpha CLI/schema first cut、product local same-session/runtime-save/transport/viewer/native-bundle first cut は完了。next は release-candidate validation | heavy | 着手可能 |
+| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line、bounded practical α-1 workflow、product alpha release-candidate workflow は完了。next は maintenance または final-public gate scoping | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | product alpha demo line が alpha defaults の下で開いた | heavy | 着手可能 |
 
 ## feature maturity rows
@@ -86,11 +86,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | robustness via contracts / theorem / model-check boundary | boundary-fixed | static checker / model-check / proof side の stratification は fixed。外部 proof discharge は evidence expansion | 着手可能 |
 | dynamic attach / detach / DAG-safe evolution | bounded workflow-ready for same-session attach | attach-time first-floor evidence と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
 | `atomic_cut` と ordering / memory-order family | semantics fixed, evidence-backed | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
-| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。product alpha demo root は CLI check、local same-session run/session/attach、R0 save/load、bounded R2 quiescent-save、local/Docker transport、non-final devtools/viewer、native host launch bundle first cut が runnable | 着手可能 |
+| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。product alpha demo root は CLI check、local same-session run/session/attach、R0 save/load、bounded R2 quiescent-save、local/Docker transport、non-final devtools/viewer、native host launch bundle、`demo`、release check が runnable | 着手可能 |
 
 ## current blockers
 
-- product alpha-1 CLI / versioned package schema / demo root / local same-session runtime-save-transport-viewer / native host launch bundle first cut は入ったが、clean-clone release validation と `demo` command は未実装
+- product alpha-1 release-candidate workflow は入ったが、final public grammar / ABI / WAN / distributed durable save-load / production packaging は未固定
 - final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
 - distributed durable save/load、stale witness / stale lease non-resurrection、queue/channel persistence は current promoted reopen point の外側
 - final public grammar / ABI / WAN / distributed durable save-load / engine adapter scope は user/final decision gate のまま
@@ -115,6 +115,8 @@ Place をまたいで実行・通信・検証・可視化できる
   `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json`
   `cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json`
   `cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-bundle --format json`
+  `cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-demo --format json`
+  `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release`
   `cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture`
 - formatting / diff:
   `cargo fmt --check`
@@ -137,6 +139,11 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-05 17:14 JST
+- 2026-05-05 17:48 JST
+  `P-A1-31` review hardening として、`--skip-docker` を partial non-release probe に降格し、demo attach matrix verification、source-backed admin membership/capability authority、canonical admin session store reopen evidence、observer-safe session artifact、concrete viewer panel rendering、release-check validation floor / JSON semantic checks を追加した。
+- 2026-05-05 17:14 JST
+  `P-A1-31` で `mirrorea-alpha demo`、`scripts/product_alpha1_release_check.py check-all`、product alpha hands-on / research docs を追加し、debug/auth/rate-limit layer attach、deferred object/avatar-preview attach、local/Docker transport、viewer、save/load/quiescent-save、native host bundle を release-candidate workflow として束ねた。final public product / grammar / ABI / WAN / distributed durable save-load ではない。
 - 2026-05-05 16:35 JST
   `P-A1-30` で `mirrorea-alpha build-native-bundle` を追加し、compiled CLI、versioned package bundle、observer-safe devtools assets、manifest、launch metadata、run script、verification/provenance reports を含む native host launch bundle first cut を生成した。`NativeExecutionPolicy = Disabled`、package-native execution 非 claim、signature-is-safety 非 claim、direct Mir-to-machine-code 非 goal は CLI tests と probe で確認。`demo` command / release validation はまだ後段。
 - 2026-05-05 15:53 JST

@@ -1,37 +1,25 @@
 {
   "schema_version": "mirrorea-product-alpha1-v0",
-  "package_id": "product-alpha1-demo",
+  "package_id": "product-alpha1-rate-limit-layer",
   "package_version": "0.1.0-alpha.1",
-  "package_kind": "world",
-  "dependencies": [
-    "packages/debug-layer",
-    "packages/auth-layer",
-    "packages/rate-limit-layer",
-    "packages/placeholder-object",
-    "packages/custom-avatar-preview"
-  ],
+  "package_kind": "layer",
+  "dependencies": [],
   "effects": [
-    "typed_host_io.add_one"
+    "rate_limit.enforce"
   ],
   "failures": [
-    "AdapterUnavailable"
+    "RateLimited"
   ],
   "capabilities": [
-    "RollDice",
-    "PublishRoll",
-    "ObserveDebugSummary"
+    "PublishRoll"
   ],
-  "witness_requirements": [
-    "game_started_witness"
-  ],
+  "witness_requirements": [],
   "membership_requirements": [
-    "active_participant",
     "active_admin_participant"
   ],
   "auth_policy": {
-    "policy_id": "demo-auth-policy",
+    "policy_id": "rate-limit-auth-policy",
     "required_bindings": [
-      "participant_membership",
       "admin_membership"
     ]
   },
@@ -41,20 +29,20 @@
   ],
   "contracts": [
     {
-      "contract_id": "demo-world-contract",
+      "contract_id": "rate-limit-layer-contract",
       "variance": "invariant",
       "effect_row": [
-        "typed_host_io.add_one"
+        "rate_limit.enforce"
       ],
       "failure_row": [
-        "AdapterUnavailable"
+        "RateLimited"
       ]
     }
   ],
   "observation_policy": {
     "view_role": "observer_safe",
     "labels": [
-      "observer_safe_summary"
+      "rate_limit_summary"
     ]
   },
   "redaction_policy": {
@@ -67,38 +55,20 @@
   "retention_policy": {
     "scope": "demo_session",
     "retained_artifacts": [
-      "checker_report",
-      "runtime_plan"
+      "rate_limit_decision"
     ]
   },
   "message_recovery_policy": {
     "handled_failures": [
-      "timeout",
       "reject"
     ],
-    "recovery": "retry_then_reject"
+    "recovery": "reject"
   },
   "savepoint_policy": {
     "classes": [
-      "R0",
-      "R2"
+      "R0"
     ],
-    "quiescent_required": true
-  },
-  "runtime_input": {
-    "entry_place": "Place[ProductDemoRoom]",
-    "host_io": {
-      "adapter_kind": "AddOne",
-      "effect_ref": "typed_host_io.add_one",
-      "request_payload": {
-        "kind": "int",
-        "value": 41
-      },
-      "expected_response": {
-        "kind": "int",
-        "value": 42
-      }
-    }
+    "quiescent_required": false
   },
   "native_policy": {
     "execution_policy": "disabled",

@@ -12,7 +12,8 @@ transport fixture for `mirrorea-alpha transport --mode docker`.
     Compose TCP
   - writes observer-safe endpoint reports to `world.json` and `participant.json`
   - gates the internal endpoint helper commands with fixture-only environment
-    variables and a fixture token; these helpers are not an advertised public
+    variables and a per-run fixture token; this is an accidental-use guard for
+    the controlled Docker fixture, not a security boundary or advertised public
     CLI family
   - executes the already-built host CLI binary as transport fixture
     infrastructure only. It does not execute package-native code, and the

@@ -35,6 +35,7 @@ fn practical_alpha1_front_door_manifest_keeps_nonfinal_package_json_cut() {
             "alpha_local_hotplug_input",
             "alpha_local_transport_input",
             "alpha_local_save_load_input",
+            "alpha_local_host_io_input",
         ]
     );
     assert_eq!(

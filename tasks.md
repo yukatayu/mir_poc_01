@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 15:53 JST
+最終更新: 2026-05-05 17:48 JST
 
 ## この文書について
 
@@ -37,7 +37,9 @@
 - `P-A1-29` により product transport / viewer first cut は actualize 済みです:
   `mirrorea-alpha transport --mode local` は same-session loopback TCP round trip、`transport --mode docker` は controlled Docker Compose TCP world/participant round trip、`export-devtools` は product session 由来の non-final JSON/HTML bundle、`view --check` は bundle openability / panel presence check を提供します。final public viewer / telemetry ABI、WAN/federation、native launch bundle、release validation、product-ready α-1 completion ではありません。
 - `P-A1-30` により product native launch bundle first cut は actualize 済みです:
-  `mirrorea-alpha build-native-bundle` は compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、launch metadata、run script、verification/provenance reports を含む native host launch bundle を生成します。`NativeExecutionPolicy = Disabled`、package-native execution 非 claim、signature-is-safety 非 claim、direct Mir-to-machine-code 非 goal を明示します。CLI `demo` command、clean-clone release validation、product-ready α-1 completion ではありません。
+  `mirrorea-alpha build-native-bundle` は compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、launch metadata、run script、verification/provenance reports を含む native host launch bundle を生成します。`NativeExecutionPolicy = Disabled`、package-native execution 非 claim、signature-is-safety 非 claim、direct Mir-to-machine-code 非 goal を明示します。
+- `P-A1-31` により product alpha release-candidate workflow は actualize 済みです:
+  `mirrorea-alpha demo` と `scripts/product_alpha1_release_check.py check-all` により product package front-door、checker、same-session runtime、typed host-I/O、source-backed debug/auth/rate-limit layer attach、deferred object/avatar-preview attach boundary、local/Docker transport、concrete non-final viewer、local save/load、bounded quiescent-save、native host launch bundleを束ねます。`--skip-docker` は partial local probe であり release-candidate ready ではありません。final public product / grammar / ABI / WAN / distributed durable save-load ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -47,17 +49,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs、CLI `demo` を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
-| 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 1 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 2 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout
+  maintenance / dashboard freshness, or explicit final-public gate scoping
 - recommendation reason:
-  `P-A1-30` で native host launch bundle と provenance / non-execution policy が入ったため、次の実質 gap は clean-clone validation、release check、hands-on/research docs、CLI `demo` に移った
+  `P-A1-31` で product alpha release-candidate workflow が閉じたため、次の実質 gap は final-public grammar/API/WAN/distributed durability/packaging のどれを開くかという user/final decision に移った
 - stop line:
-  final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、product alpha complete claim へ踏み込まない
+  final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
 ## research-discovery items
 
@@ -68,8 +70,8 @@
 | auth policy catalog breadth | `specs/21` と host/runtime package line に影響 | minimal stdlib-like initial set / broader policy catalog | minimal initial set から始め、policy breadth は same-session attach line の実 evidence に合わせて widen する |
 | integrated practical workflow boundary | `specs/18` の practical α-1 読みに影響 | one bounded workflow carrier / final public toolchain claim | `P-A1-23` で bounded workflow carrier は作成済み。final public toolchain claim はしない |
 | product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
-| product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装済み。`P-A1-31` では clean-clone validation で再確認する |
-| admin/debug product viewer breadth | `P-A1-29` に影響 | observer-safe + kept-later marker / bounded admin debug panel | まず observer-safe leak testを優先し、admin/debug full viewは実装できない場合 explicit kept-later |
+| product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装し、`P-A1-31` release check で再確認済み |
+| admin/debug product viewer breadth | final public viewer / telemetry ABI に影響 | observer-safe + kept-later marker / bounded admin debug panel | product alpha release candidate では concrete observer-safe static viewer と admin/debug `kept_later` marker に留める。full admin/debug view は final-public gate |
 
 ## user decision items
 

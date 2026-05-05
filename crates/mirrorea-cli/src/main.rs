@@ -5,7 +5,7 @@ use std::{
     path::{Path, PathBuf},
     process::{self, Command},
     thread,
-    time::Duration,
+    time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
 use mir_ast::product_alpha1::{
@@ -25,8 +25,9 @@ use mir_runtime::{
         save_product_alpha1_session,
     },
     product_alpha1_transport::{
-        ProductAlpha1TransportEndpointReport, run_product_alpha1_transport_for_session,
-        run_product_alpha1_transport_participant_client, run_product_alpha1_transport_world_server,
+        ProductAlpha1TransportEndpointReport, ProductAlpha1TransportReport,
+        run_product_alpha1_transport_for_session, run_product_alpha1_transport_participant_client,
+        run_product_alpha1_transport_world_server,
     },
 };
 use serde_json::{Value, json};
@@ -35,7 +36,6 @@ const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV: &str =
     "MIRROREA_PRODUCT_ALPHA1_TRANSPORT_HELPER";
 const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV: &str =
     "MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN";
-const PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN: &str = "product-alpha1-docker-compose-fixture-v0";
 
 fn main() {
     let code = run(env::args().skip(1).collect());
@@ -67,7 +67,7 @@ fn run(args: Vec<String>) -> i32 {
         "export-devtools" => handle_export_devtools(rest),
         "view" => handle_view(rest),
         "build-native-bundle" => handle_build_native_bundle(rest),
-        "demo" => (unsupported_command_payload(&command, rest), 2),
+        "demo" => handle_demo(rest),
         "__product-transport-world-server" => handle_product_transport_world_server(rest),
         "__product-transport-participant-client" => {
             handle_product_transport_participant_client(rest)
@@ -397,27 +397,7 @@ fn handle_transport(args: &[String]) -> (Value, i32) {
     match run_product_alpha1_transport_for_session(&session, &mode) {
         Ok((next_session, mut report)) => {
             if let Some(evidence) = docker_evidence {
-                report.docker_compose_executed = true;
-                report.docker_compose_execution_status =
-                    "compose_tcp_roundtrip_executed".to_string();
-                report.wire_roundtrip_executed = true;
-                report.wire_bind_addr =
-                    "docker-compose://product_alpha1_net/world:41002".to_string();
-                report.wire_response_status = evidence.participant_report.terminal_outcome.clone();
-                report.docker_compose_file = evidence.compose_file.display().to_string();
-                report.docker_compose_output_dir = evidence.output_dir.display().to_string();
-                report.docker_world_report_path = evidence.world_report_path.display().to_string();
-                report.docker_participant_report_path =
-                    evidence.participant_report_path.display().to_string();
-                report.docker_world_terminal_outcome =
-                    evidence.world_report.terminal_outcome.clone();
-                report.docker_participant_terminal_outcome =
-                    evidence.participant_report.terminal_outcome.clone();
-                report.host_cli_fixture_execution = true;
-                report.package_native_execution_claimed = false;
-                report.native_execution_policy =
-                    "package_native_execution_disabled; host_cli_fixture_execution_only"
-                        .to_string();
+                apply_docker_compose_evidence(&mut report, evidence);
             }
             write_session_report_payload("transport", next_session, report)
         }
@@ -483,6 +463,10 @@ fn handle_view(args: &[String]) -> (Value, i32) {
         Ok(parsed) => parsed,
         Err(payload) => return payload,
     };
+    product_alpha1_view_report(&path, check)
+}
+
+fn product_alpha1_view_report(path: &Path, check: bool) -> (Value, i32) {
     let viewer_openable = validate_product_alpha1_viewer_dir(&path);
     let html_path = path.join("index.html");
     let bundle_path = path.join("bundle.json");
@@ -551,6 +535,25 @@ fn handle_build_native_bundle(args: &[String]) -> (Value, i32) {
     }
 
     match build_product_alpha1_native_bundle(&package_path, &out_dir) {
+        Ok(payload) => (payload, 0),
+        Err(payload) => payload,
+    }
+}
+
+fn handle_demo(args: &[String]) -> (Value, i32) {
+    let demo_args = match parse_demo_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    if is_direct_mir_path(&demo_args.package_path.display().to_string()) {
+        return (direct_mir_non_goal_payload("demo", true), 2);
+    }
+
+    match build_product_alpha1_demo(
+        &demo_args.package_path,
+        &demo_args.out_dir,
+        demo_args.include_docker,
+    ) {
         Ok(payload) => (payload, 0),
         Err(payload) => payload,
     }
@@ -677,6 +680,7 @@ fn run_docker_compose_product_transport(
         "mirrorea-product-a1-{}",
         stable_session_id_hash(&output_dir.display().to_string())
     );
+    let fixture_token = docker_compose_fixture_token(session, &session_file, &output_dir);
 
     let mut up = Command::new("docker");
     up.args([
@@ -692,14 +696,11 @@ fn run_docker_compose_product_transport(
         "--exit-code-from",
         "participant",
     ]);
-    up.env("MIRROREA_PRODUCT_ALPHA1_BINARY", binary);
+    up.env("MIRROREA_PRODUCT_ALPHA1_BINARY", &binary);
     up.env("MIRROREA_PRODUCT_ALPHA1_SESSION_FILE", &session_file);
     up.env("MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR", &output_dir);
     up.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV, "1");
-    up.env(
-        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV,
-        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN,
-    );
+    up.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV, &fixture_token);
     let completed = up
         .output()
         .map_err(|error| transport_cli_error(session_path, error))?;
@@ -717,13 +718,11 @@ fn run_docker_compose_product_transport(
         "--remove-orphans",
         "-v",
     ]);
+    down.env("MIRROREA_PRODUCT_ALPHA1_BINARY", &binary);
     down.env("MIRROREA_PRODUCT_ALPHA1_SESSION_FILE", &session_file);
     down.env("MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR", &output_dir);
     down.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_HELPER_ENV, "1");
-    down.env(
-        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV,
-        PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN,
-    );
+    down.env(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV, &fixture_token);
     let _ = down.output();
 
     if !completed.status.success() {
@@ -765,6 +764,28 @@ fn run_docker_compose_product_transport(
         world_report,
         participant_report,
     })
+}
+
+fn docker_compose_fixture_token(
+    session: &ProductAlpha1SessionCarrier,
+    session_file: &Path,
+    output_dir: &Path,
+) -> String {
+    let nonce = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|duration| duration.as_nanos())
+        .unwrap_or_default();
+    stable_bytes_hash(
+        format!(
+            "{}:{}:{}:{}:{}",
+            session.session_id,
+            session.event_dag.nodes.len(),
+            session_file.display(),
+            output_dir.display(),
+            nonce
+        )
+        .as_bytes(),
+    )
 }
 
 fn check_docker_compose_available() -> Result<(), ProductAlpha1SessionError> {
@@ -817,6 +838,27 @@ fn validate_docker_endpoint_report(
     }
 }
 
+fn apply_docker_compose_evidence(
+    report: &mut ProductAlpha1TransportReport,
+    evidence: DockerComposeProductTransportEvidence,
+) {
+    report.docker_compose_executed = true;
+    report.docker_compose_execution_status = "compose_tcp_roundtrip_executed".to_string();
+    report.wire_roundtrip_executed = true;
+    report.wire_bind_addr = "docker-compose://product_alpha1_net/world:41002".to_string();
+    report.wire_response_status = evidence.participant_report.terminal_outcome.clone();
+    report.docker_compose_file = evidence.compose_file.display().to_string();
+    report.docker_compose_output_dir = evidence.output_dir.display().to_string();
+    report.docker_world_report_path = evidence.world_report_path.display().to_string();
+    report.docker_participant_report_path = evidence.participant_report_path.display().to_string();
+    report.docker_world_terminal_outcome = evidence.world_report.terminal_outcome.clone();
+    report.docker_participant_terminal_outcome = evidence.participant_report.terminal_outcome;
+    report.host_cli_fixture_execution = true;
+    report.package_native_execution_claimed = false;
+    report.native_execution_policy =
+        "package_native_execution_disabled; host_cli_fixture_execution_only".to_string();
+}
+
 fn transport_cli_error(
     path: impl Into<PathBuf>,
     detail: impl ToString,
@@ -829,11 +871,440 @@ fn transport_cli_error(
 }
 
 fn product_alpha1_docker_compose_file() -> PathBuf {
+    repo_root().join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml")
+}
+
+fn repo_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent()
         .and_then(Path::parent)
         .expect("crate should live under repo/crates/mirrorea-cli")
-        .join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml")
+        .to_path_buf()
+}
+
+fn default_product_alpha1_demo_path() -> PathBuf {
+    repo_root().join("samples/product-alpha1/demo")
+}
+
+fn build_product_alpha1_demo(
+    package_path: &Path,
+    out_dir: &Path,
+    include_docker: bool,
+) -> Result<Value, (Value, i32)> {
+    let check_report = check_product_alpha1_package_path(package_path)
+        .map_err(|error| (error_payload("demo", error), 2))?;
+    let package = load_product_alpha1_package_path(package_path)
+        .map_err(|error| (error_payload("demo", error), 2))?;
+    let package_root = product_alpha1_package_root(package_path)
+        .map_err(|error| (io_error_payload("demo", error), 2))?;
+    let absolute_out_dir = prepare_product_alpha1_demo_output_dir(&package_root, out_dir)?;
+
+    fs::create_dir_all(&absolute_out_dir).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&absolute_out_dir, error)),
+            2,
+        )
+    })?;
+    let reports_dir = absolute_out_dir.join("reports");
+    let devtools_dir = absolute_out_dir.join("devtools");
+    let observer_safe_sessions_dir = absolute_out_dir.join("sessions");
+    let admin_session_store_dir = absolute_out_dir.join("session-store");
+    let native_bundle_dir = absolute_out_dir.join("native-bundle");
+    fs::create_dir_all(&reports_dir).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&reports_dir, error)),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&devtools_dir).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&devtools_dir, error)),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&observer_safe_sessions_dir).map_err(|error| {
+        (
+            io_error_payload(
+                "demo",
+                io_error_with_path(&observer_safe_sessions_dir, error),
+            ),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&admin_session_store_dir).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&admin_session_store_dir, error)),
+            2,
+        )
+    })?;
+
+    let mut report_paths = Vec::new();
+    write_demo_json(&reports_dir, &mut report_paths, "check.json", &check_report)?;
+
+    let run_report = run_product_alpha1_local_session_path(package_path)
+        .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    let mut session = run_report.session.clone();
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "run-local.json",
+        &run_local_bundle_report_payload(&run_report),
+    )?;
+
+    let mut attach_outcomes = Vec::new();
+    for dependency in &package.dependencies {
+        let dependency_relative = safe_package_dependency_path(dependency).map_err(|error| {
+            (
+                io_error_payload("demo", io_error_with_path(&package_root, error)),
+                2,
+            )
+        })?;
+        let dependency_path = package_root.join(&dependency_relative);
+        let dependency_package = load_product_alpha1_package_path(&dependency_path)
+            .map_err(|error| (error_payload("demo", error), 2))?;
+        let (next_session, attach_report) =
+            attach_product_alpha1_package_to_session_path(&session, &dependency_path)
+                .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+        let report_name = format!(
+            "attach-{}.json",
+            sanitize_session_id(&attach_report.package_id)
+        );
+        write_demo_json(
+            &reports_dir,
+            &mut report_paths,
+            &report_name,
+            &attach_bundle_report_payload(&attach_report, &next_session),
+        )?;
+        attach_outcomes.push(json!({
+            "package_id": attach_report.package_id,
+            "package_kind": attach_report.package_kind,
+            "terminal_outcome": attach_report.terminal_outcome,
+            "active_runtime_mutated": attach_report.active_runtime_mutated,
+            "session_mutated": attach_report.session_mutated,
+            "contract_update_path": attach_report.auth_decision.contract_update_path,
+            "overlay_transparency_claimed": attach_report.auth_decision.overlay_transparency_claimed,
+            "declared_failure_rows": dependency_package.failures,
+            "report_path": format!("reports/{report_name}")
+        }));
+        session = next_session;
+    }
+    validate_product_alpha1_demo_attach_matrix(&attach_outcomes)?;
+
+    let (next_session, save_report) = save_product_alpha1_session(&session, "savepoint#r0-demo")
+        .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    session = next_session;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "save.json",
+        &session_mutation_bundle_report_payload(&save_report, &session),
+    )?;
+
+    let (next_session, load_report) = load_product_alpha1_session(&session, "savepoint#r0-demo")
+        .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    session = next_session;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "load.json",
+        &session_mutation_bundle_report_payload(&load_report, &session),
+    )?;
+
+    let (next_session, quiescent_report) =
+        quiescent_save_product_alpha1_session(&session, "savepoint#r2-demo")
+            .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    let quiescent_saved = quiescent_report.terminal_outcome == "saved";
+    session = next_session;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "quiescent-save.json",
+        &session_mutation_bundle_report_payload(&quiescent_report, &session),
+    )?;
+    if !quiescent_saved {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "quiescent_save_rejected",
+                "implemented": true,
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+
+    let observer_safe_session_path = observer_safe_sessions_dir.join(format!(
+        "session-{}-observer-safe.json",
+        sanitize_session_id(&session.session_id)
+    ));
+    write_json_artifact(
+        &observer_safe_session_path,
+        &observer_safe_session_payload(&session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "demo",
+                io_error_with_path(&observer_safe_session_path, error),
+            ),
+            2,
+        )
+    })?;
+    let mut admin_session_path = write_session_to_dir_unlocked(&session, &admin_session_store_dir)
+        .map_err(|error| {
+            (
+                io_error_payload("demo", io_error_with_path(&admin_session_store_dir, error)),
+                2,
+            )
+        })?;
+    let same_session_reopen_checked = read_session_unlocked(&admin_session_path)
+        .map(|stored| stored.session_id == session.session_id)
+        .unwrap_or(false);
+    if !same_session_reopen_checked {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "session_store_reopen_failed",
+                "implemented": true,
+                "admin_session_path": admin_session_path.display().to_string(),
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+    write_json_artifact(
+        &observer_safe_session_path,
+        &observer_safe_session_payload(&session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "demo",
+                io_error_with_path(&observer_safe_session_path, error),
+            ),
+            2,
+        )
+    })?;
+
+    let (next_session, local_transport_report) =
+        run_product_alpha1_transport_for_session(&session, "local")
+            .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    session = next_session;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "transport-local.json",
+        &session_mutation_bundle_report_payload(&local_transport_report, &session),
+    )?;
+
+    let docker_transport_status = if include_docker {
+        admin_session_path = write_session_to_dir_unlocked(&session, &admin_session_store_dir)
+            .map_err(|error| {
+                (
+                    io_error_payload("demo", io_error_with_path(&admin_session_store_dir, error)),
+                    2,
+                )
+            })?;
+        write_json_artifact(
+            &observer_safe_session_path,
+            &observer_safe_session_payload(&session),
+        )
+        .map_err(|error| {
+            (
+                io_error_payload(
+                    "demo",
+                    io_error_with_path(&observer_safe_session_path, error),
+                ),
+                2,
+            )
+        })?;
+        let docker_evidence = run_docker_compose_product_transport(&session, &admin_session_path)
+            .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+        let (next_session, mut docker_report) =
+            run_product_alpha1_transport_for_session(&session, "docker")
+                .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+        apply_docker_compose_evidence(&mut docker_report, docker_evidence);
+        session = next_session;
+        write_demo_json(
+            &reports_dir,
+            &mut report_paths,
+            "transport-docker.json",
+            &session_mutation_bundle_report_payload(&docker_report, &session),
+        )?;
+        "accepted"
+    } else {
+        "skipped_by_flag_non_release"
+    };
+
+    write_json_artifact(
+        &observer_safe_session_path,
+        &observer_safe_session_payload(&session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "demo",
+                io_error_with_path(&observer_safe_session_path, error),
+            ),
+            2,
+        )
+    })?;
+
+    let export_ref = format!(
+        "devtools#demo#{}",
+        stable_session_id_hash(&absolute_out_dir.display().to_string())
+    );
+    let (next_session, devtools_bundle) =
+        export_product_alpha1_devtools_for_session(&session, &export_ref)
+            .map_err(|error| (runtime_error_payload("demo", error), 2))?;
+    session = next_session;
+    let bundle_path = devtools_dir.join("bundle.json");
+    let html_path = devtools_dir.join("index.html");
+    write_json_artifact(&bundle_path, &devtools_bundle).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&bundle_path, error)),
+            2,
+        )
+    })?;
+    fs::write(
+        &html_path,
+        render_product_alpha1_viewer_html(&devtools_bundle),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&html_path, error)),
+            2,
+        )
+    })?;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "export-devtools.json",
+        &devtools_bundle_report_payload(&devtools_bundle, &session),
+    )?;
+    let (view_report, view_code) = product_alpha1_view_report(&devtools_dir, true);
+    write_demo_json(&reports_dir, &mut report_paths, "view.json", &view_report)?;
+    if view_code != 0 {
+        return Err((view_report, view_code));
+    }
+
+    let native_bundle_report =
+        build_product_alpha1_native_bundle(package_path, &native_bundle_dir)?;
+    write_demo_json(
+        &reports_dir,
+        &mut report_paths,
+        "build-native-bundle.json",
+        &native_bundle_report,
+    )?;
+
+    admin_session_path = write_session_to_dir_unlocked(&session, &admin_session_store_dir)
+        .map_err(|error| {
+            (
+                io_error_payload("demo", io_error_with_path(&admin_session_store_dir, error)),
+                2,
+            )
+        })?;
+    write_json_artifact(
+        &observer_safe_session_path,
+        &observer_safe_session_payload(&session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "demo",
+                io_error_with_path(&observer_safe_session_path, error),
+            ),
+            2,
+        )
+    })?;
+    let redaction_check = demo_observer_safe_artifact_redaction_check(
+        &reports_dir,
+        &devtools_dir,
+        &observer_safe_session_path,
+    )?;
+    let release_candidate_ready = include_docker && docker_transport_status == "accepted";
+    let demo_status = if release_candidate_ready {
+        "accepted"
+    } else {
+        "partial"
+    };
+    if !read_session_unlocked(&admin_session_path)
+        .map(|stored| stored.session_id == session.session_id)
+        .unwrap_or(false)
+    {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "session_store_reopen_failed",
+                "implemented": true,
+                "admin_session_path": admin_session_path.display().to_string(),
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+
+    let mut report_paths_with_demo = report_paths.clone();
+    report_paths_with_demo.push("reports/demo.json".to_string());
+    let demo_report = json!({
+        "surface_kind": "product_alpha1_demo_report",
+        "status": demo_status,
+        "command": "demo",
+        "package_path": package_path.display().to_string(),
+        "out_dir": absolute_out_dir.display().to_string(),
+        "session_id": session.session_id,
+        "session_path": observer_safe_session_path.display().to_string(),
+        "observer_safe_session_path": observer_safe_session_path.display().to_string(),
+        "admin_session_store_dir": admin_session_store_dir.display().to_string(),
+        "admin_session_path": admin_session_path.display().to_string(),
+        "session_store_view_role": "admin_debug_local",
+        "session_store_contains_private_lanes": true,
+        "session_reopen_command": format!(
+            "MIRROREA_ALPHA_SESSION_DIR={} mirrorea-alpha session '{}' --format json",
+            admin_session_store_dir.display(),
+            session.session_id
+        ),
+        "same_session_reopen_checked": true,
+        "report_paths": report_paths_with_demo,
+        "attach_outcomes": attach_outcomes,
+        "attach_matrix_verified": true,
+        "runtime_plan_included": true,
+        "same_session_runtime_included": true,
+        "typed_host_io_included": run_report.typed_host_io_claimed,
+        "local_save_load_included": true,
+        "quiescent_save_included": true,
+        "transport_local_included": true,
+        "docker_transport_included": include_docker,
+        "docker_transport_status": docker_transport_status,
+        "devtools_export_included": true,
+        "viewer_check_included": true,
+        "native_bundle_included": true,
+        "native_bundle_path": native_bundle_dir.display().to_string(),
+        "observer_safe_redaction_check": redaction_check,
+        "observer_safe_redaction_limited_check_passed": true,
+        "complete_redaction_proof_claimed": false,
+        "product_alpha1_release_candidate_ready": release_candidate_ready,
+        "product_alpha1_ready": release_candidate_ready,
+        "final_product_claimed": false,
+        "final_public_api_frozen": false,
+        "non_claims": product_alpha1_release_non_claims()
+    });
+    write_json_artifact(&reports_dir.join("demo.json"), &demo_report).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&reports_dir, error)),
+            2,
+        )
+    })?;
+    Ok(demo_report)
 }
 
 fn build_product_alpha1_native_bundle(
@@ -1282,7 +1753,20 @@ fn observer_safe_session_payload(session: &ProductAlpha1SessionCarrier) -> Value
             "failure_observation_count": session.message_recovery_state.failure_observations.len(),
             "runtime_recovery_claimed": session.message_recovery_state.runtime_recovery_claimed,
         },
-        "observer_safe_export": session.observer_safe_export.clone(),
+        "observer_safe_export": {
+            "view_role": session.observer_safe_export.view_role.clone(),
+            "redaction_level": session.observer_safe_export.redaction_level.clone(),
+            "retention_scope": session.observer_safe_export.retention_scope.clone(),
+            "redacted_fields_count": session.observer_safe_export.redacted_fields.len(),
+            "visible_event_ids": session.observer_safe_export.visible_event_ids.clone(),
+            "visible_routes": session.observer_safe_export.visible_routes.clone(),
+            "visible_hotplug_events": session.observer_safe_export.visible_hotplug_events.clone(),
+            "visible_host_io_events": session.observer_safe_export.visible_host_io_events.clone(),
+            "notes": [
+                "observer-safe export exposes summaries only",
+                "raw witness/auth payload names and values are not rendered in this payload"
+            ]
+        },
         "product_alpha1_ready": session.product_alpha1_ready,
         "final_public_api_frozen": session.final_public_api_frozen,
     })
@@ -1563,6 +2047,72 @@ fn parse_build_native_bundle_args(args: &[String]) -> Result<(PathBuf, PathBuf),
     Ok((PathBuf::from(package_path), out_dir))
 }
 
+struct DemoArgs {
+    package_path: PathBuf,
+    out_dir: PathBuf,
+    include_docker: bool,
+}
+
+fn parse_demo_args(args: &[String]) -> Result<DemoArgs, (Value, i32)> {
+    let mut package_path: Option<PathBuf> = None;
+    let mut out_dir = None;
+    let mut include_docker = true;
+    let mut index = 0;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--out" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload("demo", &args[index..]), 2));
+                };
+                out_dir = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--package" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((unexpected_arguments_payload("demo", &args[index..]), 2));
+                };
+                if package_path.is_some() {
+                    return Err((unexpected_arguments_payload("demo", &args[index..]), 2));
+                }
+                package_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--skip-docker" => {
+                include_docker = false;
+                index += 1;
+            }
+            value if value.starts_with("--") => {
+                return Err((unexpected_arguments_payload("demo", &args[index..]), 2));
+            }
+            value => {
+                if package_path.is_some() {
+                    return Err((unexpected_arguments_payload("demo", &args[index..]), 2));
+                }
+                package_path = Some(PathBuf::from(value));
+                index += 1;
+            }
+        }
+    }
+    let Some(out_dir) = out_dir else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "missing_out_dir",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    Ok(DemoArgs {
+        package_path: package_path.unwrap_or_else(default_product_alpha1_demo_path),
+        out_dir,
+        include_docker,
+    })
+}
+
 fn parse_transport_endpoint_args(
     command: &str,
     args: &[String],
@@ -1643,9 +2193,9 @@ fn authorize_transport_fixture_helper(
         .map(|value| value == "1")
         .unwrap_or(false);
     let env_token_ok = env::var(PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN_ENV)
-        .map(|value| value == PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN)
+        .map(|value| value == fixture_token && value.len() >= 16)
         .unwrap_or(false);
-    let arg_token_ok = fixture_token == PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN;
+    let arg_token_ok = fixture_token.len() >= 16;
     if helper_enabled && env_token_ok && arg_token_ok {
         Ok(())
     } else {
@@ -1662,22 +2212,6 @@ fn transport_helper_not_authorized_payload(command: &str) -> Value {
         "message": "product alpha-1 transport endpoint helpers are Docker Compose fixture-internal only",
         "product_alpha1_ready": false,
         "final_public_api_frozen": false
-    })
-}
-
-fn unsupported_command_payload(command: &str, args: &[String]) -> Value {
-    if args.iter().any(|arg| is_direct_mir_path(arg)) {
-        return direct_mir_non_goal_payload(command, false);
-    }
-
-    json!({
-        "status": "unsupported",
-        "command": command,
-        "diagnostic_code": "not_yet_implemented",
-        "implemented": false,
-        "product_alpha1_ready": false,
-        "final_public_api_frozen": false,
-        "message": "command is part of the alpha-stable family but is scheduled for a later product alpha-1 package"
     })
 }
 
@@ -1829,7 +2363,14 @@ fn write_session(session: &ProductAlpha1SessionCarrier) -> Result<PathBuf, io::E
 }
 
 fn write_session_unlocked(session: &ProductAlpha1SessionCarrier) -> Result<PathBuf, io::Error> {
-    let path = session_path_for(&session.session_id);
+    write_session_to_dir_unlocked(session, &session_dir())
+}
+
+fn write_session_to_dir_unlocked(
+    session: &ProductAlpha1SessionCarrier,
+    dir: &Path,
+) -> Result<PathBuf, io::Error> {
+    let path = session_path_for_dir(dir, &session.session_id);
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent)?;
     }
@@ -1863,14 +2404,42 @@ fn read_json_artifact<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T, 
 }
 
 fn run_local_bundle_report_payload(report: &ProductAlpha1RunLocalReport) -> Value {
-    let mut value =
-        serde_json::to_value(report).expect("product alpha-1 run-local report should serialize");
-    insert_value(
-        &mut value,
-        "session",
-        observer_safe_session_payload(&report.session),
-    );
-    value
+    json!({
+        "surface_kind": report.surface_kind.clone(),
+        "package_id": report.package_id.clone(),
+        "check_report_summary": {
+            "surface_kind": report.check_report.surface_kind.clone(),
+            "verdict": report.check_report.verdict.clone(),
+            "accepted_obligation_count": report.check_report.accepted_obligations.len(),
+            "residual_obligation_count": report.check_report.residual_obligations.len(),
+        },
+        "runtime_plan_summary": {
+            "runtime_plan_scope": report.runtime_plan.runtime_plan_scope.clone(),
+            "package_id": report.runtime_plan.package_id.clone(),
+            "package_version": report.runtime_plan.package_version.clone(),
+            "package_kind": report.runtime_plan.package_kind.clone(),
+            "entry_place": report.runtime_plan.entry_place.clone(),
+            "place_count": report.runtime_plan.place_graph.nodes.len(),
+            "place_edge_count": report.runtime_plan.place_graph.edges.len(),
+            "bootstrap_membership_count": report.runtime_plan.bootstrap_membership.len(),
+            "witness_requirement_count": report.runtime_plan.witness_requirements.len(),
+            "capability_requirement_count": report.runtime_plan.capability_requirements.len(),
+            "effect_row_count": report.runtime_plan.effect_row.len(),
+            "failure_row_count": report.runtime_plan.failure_row.len(),
+            "message_recovery_policy": report.runtime_plan.message_recovery_policy.clone(),
+            "savepoint_classes": report.runtime_plan.savepoint_classes.clone(),
+            "quiescent_save_requested": report.runtime_plan.quiescent_save_requested,
+        },
+        "runtime_plan_emitted": report.runtime_plan_emitted,
+        "local_transport_claimed": report.local_transport_claimed,
+        "local_session_store_claimed": report.local_session_store_claimed,
+        "typed_host_io_claimed": report.typed_host_io_claimed,
+        "session": observer_safe_session_payload(&report.session),
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false,
+        "stop_lines": report.stop_lines.clone(),
+        "limitations": report.limitations.clone(),
+    })
 }
 
 fn attach_bundle_report_payload(
@@ -2020,6 +2589,60 @@ fn prepare_native_bundle_output_dir(
     Ok(absolute_out)
 }
 
+fn prepare_product_alpha1_demo_output_dir(
+    package_root: &Path,
+    out_dir: &Path,
+) -> Result<PathBuf, (Value, i32)> {
+    let absolute_out = absolute_output_path(out_dir).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(out_dir, error)),
+            2,
+        )
+    })?;
+    if absolute_out == package_root || absolute_out.starts_with(package_root) {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "unsafe_output_path",
+                "message": "product demo output directory must not be inside the product package root",
+                "out_dir": out_dir.display().to_string(),
+                "package_root": package_root.display().to_string(),
+                "implemented": true,
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+    if absolute_out.exists() {
+        let mut entries = fs::read_dir(&absolute_out).map_err(|error| {
+            (
+                io_error_payload("demo", io_error_with_path(&absolute_out, error)),
+                2,
+            )
+        })?;
+        if entries.next().is_some() {
+            return Err((
+                json!({
+                    "status": "error",
+                    "command": "demo",
+                    "diagnostic_code": "output_dir_not_empty",
+                    "message": "product demo output directory must be empty to avoid stale release evidence",
+                    "out_dir": absolute_out.display().to_string(),
+                    "implemented": true,
+                    "product_alpha1_release_candidate_ready": false,
+                    "product_alpha1_ready": false,
+                    "final_public_api_frozen": false
+                }),
+                2,
+            ));
+        }
+    }
+    Ok(absolute_out)
+}
+
 fn absolute_output_path(path: &Path) -> Result<PathBuf, io::Error> {
     if path.exists() {
         return fs::canonicalize(path);
@@ -2036,6 +2659,161 @@ fn absolute_output_path(path: &Path) -> Result<PathBuf, io::Error> {
         )
     })?;
     Ok(parent.join(name))
+}
+
+fn write_demo_json<T: serde::Serialize>(
+    reports_dir: &Path,
+    report_paths: &mut Vec<String>,
+    name: &str,
+    payload: &T,
+) -> Result<(), (Value, i32)> {
+    let path = reports_dir.join(name);
+    write_json_artifact(&path, payload).map_err(|error| {
+        (
+            io_error_payload("demo", io_error_with_path(&path, error)),
+            2,
+        )
+    })?;
+    report_paths.push(format!("reports/{name}"));
+    Ok(())
+}
+
+fn validate_product_alpha1_demo_attach_matrix(
+    attach_outcomes: &[Value],
+) -> Result<(), (Value, i32)> {
+    let required = [
+        (
+            "product-alpha1-debug-layer",
+            "layer",
+            "accepted",
+            None::<&str>,
+        ),
+        (
+            "product-alpha1-auth-layer",
+            "layer",
+            "accepted",
+            None::<&str>,
+        ),
+        (
+            "product-alpha1-rate-limit-layer",
+            "layer",
+            "accepted",
+            Some("RateLimited"),
+        ),
+        (
+            "product-alpha1-placeholder-object",
+            "object",
+            "deferred",
+            None::<&str>,
+        ),
+        (
+            "product-alpha1-custom-avatar-preview",
+            "avatar_preview",
+            "deferred",
+            None::<&str>,
+        ),
+    ];
+    let missing = required
+        .iter()
+        .filter_map(|(package_id, package_kind, terminal_outcome, failure)| {
+            let matched = attach_outcomes.iter().any(|row| {
+                row["package_id"] == *package_id
+                    && row["package_kind"] == *package_kind
+                    && row["terminal_outcome"] == *terminal_outcome
+                    && failure.map_or(true, |failure| {
+                        row["declared_failure_rows"]
+                            .as_array()
+                            .map(|rows| rows.iter().any(|value| value == failure))
+                            .unwrap_or(false)
+                    })
+            });
+            (!matched).then(|| {
+                json!({
+                    "package_id": package_id,
+                    "package_kind": package_kind,
+                    "terminal_outcome": terminal_outcome,
+                    "required_failure_row": failure,
+                })
+            })
+        })
+        .collect::<Vec<_>>();
+    if missing.is_empty() {
+        Ok(())
+    } else {
+        Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "demo_attach_matrix_incomplete",
+                "implemented": true,
+                "missing_attach_matrix_rows": missing,
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ))
+    }
+}
+
+fn demo_observer_safe_artifact_redaction_check(
+    reports_dir: &Path,
+    devtools_dir: &Path,
+    observer_safe_session_path: &Path,
+) -> Result<Value, (Value, i32)> {
+    let mut scanned = Vec::new();
+    let mut forbidden_hits = Vec::new();
+    for path in [
+        reports_dir.join("save.json"),
+        reports_dir.join("load.json"),
+        reports_dir.join("quiescent-save.json"),
+        reports_dir.join("transport-local.json"),
+        reports_dir.join("transport-docker.json"),
+        reports_dir.join("export-devtools.json"),
+        reports_dir.join("view.json"),
+        devtools_dir.join("bundle.json"),
+        devtools_dir.join("index.html"),
+        observer_safe_session_path.to_path_buf(),
+    ] {
+        if !path.is_file() {
+            continue;
+        }
+        let text = fs::read_to_string(&path).map_err(|error| {
+            (
+                io_error_payload("demo", io_error_with_path(&path, error)),
+                2,
+            )
+        })?;
+        let relative = path.display().to_string();
+        scanned.push(relative.clone());
+        if observer_safe_bundle_text_contains_forbidden_keys(&text) {
+            forbidden_hits.push(relative);
+        }
+    }
+    if forbidden_hits.is_empty() {
+        Ok(json!({
+            "status": "accepted",
+            "scope": "observer-safe devtools/session/report artifacts only; raw admin session store and source package manifests are excluded",
+            "method": "typed devtools bundle validation plus bounded forbidden raw field/capability key scan",
+            "complete_redaction_proof_claimed": false,
+            "scanned_artifacts": scanned,
+            "forbidden_hit_count": 0
+        }))
+    } else {
+        Err((
+            json!({
+                "status": "error",
+                "command": "demo",
+                "diagnostic_code": "observer_safe_artifact_redaction_failed",
+                "implemented": true,
+                "forbidden_artifacts": forbidden_hits,
+                "product_alpha1_release_candidate_ready": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ))
+    }
 }
 
 fn copy_current_cli_binary(destination: &Path) -> Result<(), io::Error> {
@@ -2325,6 +3103,18 @@ fn native_bundle_non_claims() -> Vec<&'static str> {
     ]
 }
 
+fn product_alpha1_release_non_claims() -> Vec<&'static str> {
+    vec![
+        "not final public CLI/API/ABI",
+        "not final textual .mir grammar",
+        "not WAN/federation",
+        "not distributed durable save/load",
+        "not arbitrary native package execution",
+        "not signature-is-safety",
+        "not final public viewer or telemetry service",
+    ]
+}
+
 fn native_bundle_run_script() -> &'static str {
     r#"#!/usr/bin/env sh
 set -eu
@@ -2481,7 +3271,11 @@ fn required_product_alpha1_viewer_panels() -> &'static [&'static str] {
 }
 
 fn session_path_for(session_id: &str) -> PathBuf {
-    session_dir().join(format!(
+    session_path_for_dir(&session_dir(), session_id)
+}
+
+fn session_path_for_dir(dir: &Path, session_id: &str) -> PathBuf {
+    dir.join(format!(
         "{}.{}.session.json",
         sanitize_session_id(session_id),
         stable_session_id_hash(session_id)

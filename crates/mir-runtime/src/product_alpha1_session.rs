@@ -29,13 +29,13 @@ const PRODUCT_ALPHA1_RUNTIME_STOP_LINES: &[&str] = &[
     "local session store is same-process persistence, not product transport command behavior or WAN/federation",
     "local R0 save/load and bounded R2 quiescent-save are alpha first cuts only, not durable distributed save/load",
     "message recovery rows cover bounded timeout/retry/reject observations only, not WAN or arbitrary crash recovery",
-    "native execution remains disabled; native launch bundle work is later",
+    "native execution remains disabled; native output is a host launch bundle, not package-native execution",
 ];
 
 const PRODUCT_ALPHA1_RUNTIME_LIMITATIONS: &[&str] = &[
     "controlled local product alpha-1 session carrier only",
     "one deterministic product demo runtime path with typed host-I/O add-one evidence",
-    "debug-layer attach is same-session and observable; broader auth/rate-limit/object/avatar packages remain later",
+    "debug/auth/rate-limit layer attach is same-session and observable; object/avatar-preview attach remains deferred boundary evidence",
     "local save/load and quiescent-save are bounded to one local session store",
     "no distributed durable save/load, WAN federation, final viewer ABI, or arbitrary native package execution",
 ];
@@ -1901,13 +1901,12 @@ fn evaluate_capability_decision(
 }
 
 fn build_auth_state(package: &ProductAlpha1Package) -> ProductAlpha1AuthState {
-    let mut bindings: BTreeSet<String> = package
+    let bindings: BTreeSet<String> = package
         .auth_policy
         .required_bindings
         .iter()
         .cloned()
         .collect();
-    bindings.insert("admin_membership".to_string());
     ProductAlpha1AuthState {
         active_bindings: bindings.into_iter().collect(),
         active_membership_refs: bootstrap_membership(package),
@@ -1915,9 +1914,7 @@ fn build_auth_state(package: &ProductAlpha1Package) -> ProductAlpha1AuthState {
 }
 
 fn build_capability_state(package: &ProductAlpha1Package) -> ProductAlpha1CapabilityState {
-    let mut capabilities: BTreeSet<String> = package.capabilities.iter().cloned().collect();
-    capabilities.insert("ObserveDebugSummary".to_string());
-    capabilities.insert("AttachDebugLayer".to_string());
+    let capabilities: BTreeSet<String> = package.capabilities.iter().cloned().collect();
     ProductAlpha1CapabilityState {
         granted_capabilities: capabilities.into_iter().collect(),
     }
@@ -2106,8 +2103,7 @@ fn host_io_error(detail: String) -> ProductAlpha1SessionError {
 }
 
 fn bootstrap_membership(package: &ProductAlpha1Package) -> Vec<String> {
-    let mut values: BTreeSet<String> = package.membership_requirements.iter().cloned().collect();
-    values.insert("active_admin_participant".to_string());
+    let values: BTreeSet<String> = package.membership_requirements.iter().cloned().collect();
     values.into_iter().collect()
 }
 

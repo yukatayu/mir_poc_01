@@ -27,6 +27,7 @@
 | `projection_placement_views_01.md` | projection / placement helper and generated bridge evidence を読む入口 |
 | `network_transport_canaries_01.md` | network helper-local canary を production transport と分けて読む入口 |
 | `practical_alpha1_product_preview_01.md` | first practical product-preview floor を full product prototype と分けて読む入口 |
+| `product_alpha1_01.md` | Product/Public-ready alpha-1 release-candidate workflow を clean clone から再現する入口 |
 
 ## 既存の長い入門文書
 
