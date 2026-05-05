@@ -184,9 +184,9 @@ git diff -- AGENTS.md Documentation.md README.md progress.md samples_progress.md
 ## Commit / push status
 
 - package commit:
-  pending at report creation time.
+  `7468d2c` `docs: verify operational workflow readiness`
 - push:
-  pending at report creation time.
+  will push to `origin/main` after report metadata follow-up.
 
 ## Sub-agent session close status
 
