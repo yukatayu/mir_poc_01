@@ -223,14 +223,14 @@ git diff --stat
 
 ## Commit / push status
 
-- commit:
-  pending
+- primary package commit:
+  `ff6b327` `mirrorea: actualize alpha08 session hotplug runtime`
 - push:
-  pending
+  pushed to `origin/main`
 
 ## Sub-agent session close status
 
 - `019df5a9-44b0-7940-9e4d-b4bfcb262e09`:
-  completed, not yet closed at report write time
+  completed and closed
 - `019df5a9-454a-7712-b9a2-0d4a9274c52e`:
-  completed, not yet closed at report write time
+  completed and closed
