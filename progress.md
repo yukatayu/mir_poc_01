@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-05 11:17 JST
+最終更新: 2026-05-05 11:33 JST
 
 ## この文書について
 
@@ -23,21 +23,21 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-A1-22` α-0.9 session-bound devtools export
+  `P-A1-23` practical α-1 integrated workflow carrier
 - current promoted reopen point:
-  α-1 product/public boundary recut or a narrow `P-A1-23` practical α-1 readiness audit
+  α-1 product/public boundary recut / `U1` decision inventory, or maintenance-only freshness work
 - current reading:
-  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export** を得た。ただし final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は未固定
+  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、および **bounded practical α-1 integrated workflow carrier** を得た。ただし final public viewer / telemetry ABI、durable audit、distributed durable save/load、product-ready α-1 は未固定
 - self-driven status:
-  次は自走可能だが、α-1 を裸の `100%` と呼ぶには public/product boundary との混同を避ける recut が必要
+  bounded practical workflow までは自走済み。product/public-ready α-1 へ進むには `U1` packaging / host target / shipped surface の user decision が必要
 
 ## three-axis progress
 
 | 軸 | Rough % | 読み |
 |---|---:|---|
-| 論理仕様 | 89 | `specs/19..24` で verification stratification、cut/save-load、auth layer algebra、observability、typed external boundary、operational α 条件の bounded freeze を置き、α-0.9 実装境界も source hierarchy に同期した |
-| ユーザ向け仕様 | 78 | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational の読み分けを更新したが、final public surface や `U1` は未固定 |
-| 実装 / 運用 | 84 | current-L2 active floor と practical alpha-1 first floors に加えて bounded operational α-0.5 / α-0.8 / α-0.9 の same-session line を actualize した |
+| 論理仕様 | 90 | `specs/18..24` で practical workflow boundary と operational α 条件の bounded reading を同期したが、final public/product boundary は未固定 |
+| ユーザ向け仕様 | 81 | README / Documentation / progress / tasks / samples dashboard で evidence / first-floor / operational / bounded workflow の読み分けを更新したが、final public surface や `U1` は未固定 |
+| 実装 / 運用 | 87 | current-L2 active floor、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 に加えて `PA1W-01..08` integrated workflow carrier を actualize した |
 
 ## line snapshot
 
@@ -45,7 +45,8 @@ Place をまたいで実行・通信・検証・可視化できる
 |---|---|---:|---|---|
 | current-L2 active floor | runnable floor | 90 | `samples/clean-near-end/`、Sugoroku、Lean foundations / generated stubs、helper stack は runnable | final public parser/API は未固定 |
 | Spaces alpha-0 | evidence line | 100 | Stage A..F は `100% current-scope evidence closeout` | operational α-0.5 / α-0.8 / α-0.9 とは別 |
-| practical alpha-1 | first-floor line | 100 | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` | operational α line は別 package で追う |
+| practical alpha-1 first floors | first-floor line | 100 | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は `100% first-floor closeout` | product/public-ready α-1 とは別 |
+| practical alpha-1 integrated workflow | bounded workflow line | 100 | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
 | operational α-0.5 | operational line | 100 | `P-A1-20` で `practical_alpha05_session` carrier 上に `crates/mir-runtime::practical_alpha05_host_io`、example `host-io` subcommand、`OA05-07` `AddOne` direct execution lane を接続し、bounded local observable runtime を actualize | α-0.9 session-bound devtools export |
 | operational α-0.8 | operational line | 100 | `P-A1-21` で `crates/mir-runtime::practical_alpha08_hotplug_session`、example `attach` subcommand、`scripts/practical_alpha08_session_hotplug.py`、`OA08-01..10` を追加し、debug/auth/rate-limit/object preview/deferred detach の same-session attach accepted/rejected/deferred/activation cut/observer-safe mutation を actualize | accepted detach execution / distributed ordering は later |
 | operational α-0.9 | operational line | 100 | `P-A1-22` で `crates/mir-runtime::practical_alpha09_devtools`、example `export-devtools` subcommand、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` を追加し、session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を actualize | final public viewer / telemetry ABI、durable audit は later |
@@ -72,7 +73,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | current-L2 側は強い。operational α line は theory freeze 完了 | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary は fixed、広い discharge は後段 | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | bounded α-0.8 same-session hot-plug runtime まで到達。accepted detach execution / distributed ordering は後段 | heavy | 着手可能 |
-| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 session surface、minimal host-I/O lane、bounded α-0.8 same-session hot-plug lane、bounded α-0.9 session-bound devtools export は actualize 済み。next は α-1 product/public boundary と remaining non-final gaps の recut | heavy | 着手可能 |
+| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line と bounded practical α-1 integrated workflow carrier は actualize 済み。next は product/public boundary と remaining non-final gaps の recut | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | public/product line | heavy | 要仕様確認 |
 
 ## feature maturity rows
@@ -83,11 +84,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | robustness via contracts / theorem / model-check boundary | 82 | static checker / model-check / proof side の stratification は fixed | 着手可能 |
 | dynamic attach / detach / DAG-safe evolution | 84 | attach-time first-floor rows と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
 | `atomic_cut` と ordering / memory-order family | 74 | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
-| executable sample corpus | 98 | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line は runnable。残る gap は final/public α-1 boundary と product surface | 着手可能 |
+| executable sample corpus | 99 | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。残る gap は final/public α-1 boundary と product surface | 着手可能 |
 
 ## current blockers
 
-- α-0.9 session-bound devtools は bounded ready になったが、final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
+- bounded practical α-1 workflow は ready になったが、final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
 - distributed durable save/load、stale witness / stale lease non-resurrection、queue/channel persistence は current promoted reopen point の外側
 - `U1` packaging / host target / shipped surface / final operational catalog は user decision gate のまま
 
@@ -106,14 +107,20 @@ Place をまたいで実行・通信・検証・可視化できる
 - `cargo test -p mir-runtime --test practical_alpha08_session_hotplug -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha09_devtools -- --nocapture`
 - `python3 scripts/practical_alpha1_run_local.py check-all --format json`
+- `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
+- `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
+- `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json`
 - `python3 scripts/practical_alpha05_session.py check-all --format json`
 - `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`
 - `python3 scripts/practical_alpha09_devtools.py check-all --format json`
 - `python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha05_session`
 - `python3 -m unittest scripts.tests.test_practical_alpha08_session_hotplug scripts.tests.test_practical_alpha09_devtools`
+- `python3 -m unittest scripts.tests.test_practical_alpha1_integrated_workflow`
 
 ## recent log
 
+- 2026-05-05 11:33 JST
+  `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`scripts/tests/test_practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、source front-door / checker / same-session runtime / typed host-I/O / hot-plug / save-load / session devtools / product-preview evidence を bounded practical α-1 workflow として束ねた。`VIS-A1-01` の expected devtools bundle も runtime-side positive guard reason refs に同期した。
 - 2026-05-05 11:17 JST
   `P-A1-22` で `crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` を actualizeし、α-0.5 / α-0.8 session carrier 上の event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を bounded α-0.9 session-bound devtools export に接続した。
 - 2026-05-05 10:18 JST

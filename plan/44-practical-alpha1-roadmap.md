@@ -31,6 +31,10 @@ repository-memory roadmap を置く。
   checker / local-runtime / hot-plug / transport の current practical fixture family まで actualize 済みである
 - practical alpha-1 toolchain の reusable checker/runtime API、
   product-like package root、practical CLI/viewer surface はまだ未完成である
+- `P-A1-23` により、first-floor evidence と bounded operational α-0.5 / α-0.8 / α-0.9 carriers を束ねる
+  bounded practical integrated workflow carrier は actualize 済みである
+- ただし final public parser/checker/runtime API、final public viewer / telemetry ABI、
+  distributed durable save/load、product/public-ready α-1 はまだ未固定である
 
 ## decisions mirrored from specs/18
 
@@ -295,6 +299,34 @@ operational α-0.9 adjacent actualization after `P-A1-22`:
   - same-session runtime attach / detach lifecycle execution ではない
   - final public CLI / viewer / package-avatar / save-load / transport ABI ではない
 
+### PA1-9 — bounded practical integrated workflow carrier
+
+- existing first-floor front-door / checker / runtime / hot-plug / save-load / devtools / product-preview evidence を
+  1 つの developer workflow に束ねる
+- bounded operational α-0.5 / α-0.8 / α-0.9 carrier を workflow evidence として consume する
+- current actualized cut after `P-A1-23`:
+  - `scripts/practical_alpha1_integrated_workflow.py`
+  - `scripts/tests/test_practical_alpha1_integrated_workflow.py`
+  - `samples/practical-alpha1/expected/vis-a1-01-event-dag-export.expected.json`
+- current actualized rows:
+  - `PA1W-01`: source front-door / checker / runtime-plan / local runtime evidence
+  - `PA1W-02`: same-session runtime + typed host-I/O
+  - `PA1W-03`: same-session hot-plug lifecycle
+  - `PA1W-04`: local save/load timeline
+  - `PA1W-05`: session-bound devtools export and non-final viewer
+  - `PA1W-06`: product-preview exact evidence
+  - `PA1W-07`: negative guard summary
+  - `PA1W-08`: non-final product/public boundaries
+- current carrier split:
+  `exact first-floor reports + same-session operational exports -> bounded integrated workflow report`
+- current non-claim:
+  - final public parser / checker / runtime API ではない
+  - final public viewer / telemetry ABI ではない
+  - distributed durable save/load ではない
+  - WAN/federation ではない
+  - native avatar execution ではない
+  - product/public-ready alpha-1 ではない
+
 ## current recommendation on implementation order
 
 recommended current promoted line:
@@ -322,11 +354,13 @@ recommended current promoted line:
 21. `P-A1-20` typed external host-I/O direct execution lane
 22. `P-A1-21` operational α-0.8 same-session hot-plug runtime
 23. `P-A1-22` operational α-0.9 session-bound devtools export
+24. `P-A1-23` practical α-1 integrated workflow carrier
 
-current reading after `P-A1-22`:
+current reading after `P-A1-23`:
 
 - `P-A1-00`、`P-A1-01`、`P-A1-02`、`P-A1-03`、`P-A1-04a`、`P-A1-04b`、`P-A1-04c`、`P-A1-05`、`P-A1-06`、`P-A1-07`、`P-A1-09`、`P-A1-08`、`P-A1-10`、`P-A1-11`、`P-A1-12`、`P-A1-13`、`P-A1-14`、`P-A1-15`、`P-A1-16`、`P-A1-17` are closed
 - `P-A1-18`、`P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are closed as the bounded operational α-0.5 / α-0.8 / α-0.9 sequence
+- `P-A1-23` is closed as a bounded practical α-1 integrated workflow carrier, not as product/public-ready alpha-1
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:
@@ -368,6 +402,7 @@ current reading after `P-A1-22`:
 - `P-A1-16` actualizes `SL-A1-03` as a checker-backed invalid distributed-cut preflight reject row over exact `CHK-CUT-01` evidence, before any saved local frontier is built
 - `P-A1-17` realigns `PE2E-06` so the product-preview lane consumes exact `SL-A1-03` save-load preflight evidence rather than direct checker evidence
 - `P-A1-22` actualizes `OA09-01..09` as bounded session-bound devtools export over the same α-0.5 / α-0.8 carrier, including witness relation, save-load timeline, redacted observer view, and retention/on-demand trace; it does not freeze final public viewer / telemetry ABI or product-ready alpha-1
+- `P-A1-23` actualizes `PA1W-01..08` as a script-level integrated workflow over exact first-floor evidence and bounded operational carriers; it also synchronizes `VIS-A1-01` expected reason refs with the local-runtime positive guard evidence
 
 ## readiness reading
 
@@ -384,7 +419,7 @@ rough initial reading after `P-A0-28` and before `P-A1-00` close:
 
 practical alpha-1 overall readiness should therefore stay low until
 front-door, reusable checker/runtime, and practical sample root exist.
-`P-A1-04c` 後は initial practical sample root、library-first front-door、distinct lowered IR、first checker floor、distinct runtime-plan carrier、first practical local-runtime floor、distinct hotplug-plan carrier、attach-time stale-membership/missing-witness reject、narrow object package attach preview seam、explicit deferred detach minimal contract は存在するが、transport、save/load、devtools、product prototype が未完成であり、typed checking も first floor に留まるため overall readiness は still moderate に留める。
+`P-A1-23` 後は initial practical sample root、library-first front-door、distinct lowered IR、first checker floor、distinct runtime-plan carrier、first practical local-runtime floor、distinct hotplug-plan carrier、transport、save/load、devtools、product-preview、bounded operational α-0.5 / α-0.8 / α-0.9、そして integrated workflow carrier まで存在する。ただし typed checking は first floor を含む staged actualization であり、public parser / public CLI / public viewer / telemetry ABI / product packaging は未固定のため、product/public-ready alpha-1 とは読まない。
 
 ## sample-root roadmap
 
@@ -464,6 +499,13 @@ but should not require practical runner scripts before they are added.
 - `python3 scripts/practical_alpha1_product_preview.py render-html PE2E-07 --format json`
 - `python3 scripts/practical_alpha1_product_preview.py closeout --format json`
 
+`P-A1-23` adds the bounded practical integrated workflow validation path:
+
+- `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json`
+- `python3 -m unittest scripts.tests.test_practical_alpha1_integrated_workflow`
+- `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
+- `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
+
 ## non-claims carried forward
 
 - current alpha-0 evidence closeout is not public alpha / `U1`
@@ -475,19 +517,15 @@ but should not require practical runner scripts before they are added.
 
 ## next reopen point
 
-- current promoted line after `P-A1-17`:
-  practical avatar semantics now have a distinct companion floor, product-preview widening now consumes `AV-A1-02/03` only through `PE2E-08/09` thin companion bundles and `SL-A1-03` through `PE2E-06` invalid distributed save rejected preview, devtools widening consumes `SL-A1-02` through both `VIS-A1-03` membership timeline export and `VIS-A1-07` report-local retention query export plus `AV-A1-03` through `VIS-A1-05` fallback degradation export, and save/load widening consumes exact rejected `CHK-CUT-01` through `SL-A1-03` distinct preflight reject evidence; same-session runtime completion remains later
+- current promoted line after `P-A1-23`:
+  bounded operational α-0.5 / α-0.8 / α-0.9 and bounded practical α-1 integrated workflow are closed. The next material gap is product/public-ready boundary definition, not another silent widening of practical first-floor evidence.
 - current recommendation is:
   - keep the current `package.mir.json` cut explicit and non-final
   - keep `P-A1-02` as the first checker floor rather than force full typed-checking completion
-  - keep `P-A1-03` as the first local-runtime floor over `RUN-01/02`
+  - keep `P-A1-03` as the first local-runtime floor over `RUN-01..04`
   - keep `P-A1-04a` / `P-A1-04b` / `P-A1-04c` as the first practical hot-plug floor over `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
-  - keep `P-A1-10` as a distinct avatar-preview companion floor over `AV-A1-01/02/03`, without collapsing it into native execution or final avatar ABI completion
-  - keep `P-A1-05` as the first practical transport floor over `TR-A1-01..07` without collapsing it into WAN/federation, save/load, devtools, or product prototype claims
-  - keep `P-A1-06` + `P-A1-09` + `P-A1-12` + `P-A1-13` + `P-A1-15` as the widened practical devtools export floor over `VIS-A1-01/02/03/04/05/06/07` without collapsing it into full devtools completion, without reading `VIS-A1-03` as distributed durable membership timeline or witness/lease co-timeline completion, without reading `VIS-A1-04` as detach runtime lifecycle completion, without reading `VIS-A1-05` as native execution or unsupported-runtime execution success, and without reading `VIS-A1-07` as durable retained-artifact service or remote retrieval completion
-  - keep `P-A1-11` as a thin product-preview widening over `PE2E-08/09`, without collapsing it into same-session runtime attachment, native execution, or unsupported-runtime execution success
-  - keep `HP-A1-07` as explicit deferred detach boundary only; do not upgrade it into accepted detach runtime execution
-  - carry capability / auth / witness lanes without claiming full runtime enforcement yet
-  - keep `samples/alpha/` unchanged while practical root grows separately
-  - reopen next on broader save-load widening, same-session runtime semantics, or an equally narrow remaining exact-evidence widening
+  - keep `P-A1-23` as bounded workflow ready, not product/public-ready alpha-1
+  - do not upgrade `HP-A1-07` into accepted detach runtime execution without a new design package
+  - do not claim final public parser / CLI / viewer / telemetry ABI, distributed durable save/load, WAN/federation, or native avatar execution from the integrated workflow
+  - reopen next on `P-A1-24` alpha-1 product/public boundary recut or user decision for `U1`
 - queue authority remains `progress.md` / `tasks.md`

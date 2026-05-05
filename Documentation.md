@@ -28,7 +28,7 @@
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
-現在 repo は前 3 つに加えて bounded operational α-0.5 / α-0.8 / α-0.9 まで actualize 済みです。ただし final public product はまだ別 gate です。
+現在 repo は前 3 つに加えて bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。ただし final public product はまだ別 gate です。
 
 ## current active floor
 
@@ -61,10 +61,10 @@ OS/network substrate
 
 - **alpha-0 evidence line**
   `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence closeout を担います。Stage A..F は `100% current-scope evidence closeout` であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
-- **practical alpha-1 first-floor line**
-  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
+- **practical alpha-1 first-floor / workflow line**
+  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきです。`P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py` と `PA1W-01..08` を追加し、source front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 つの bounded developer workflow として再現できるようにしました。ただし final public product-ready completion は意味しません。
 - **operational alpha theory-freeze line**
-  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout は `P-A1-22` で、`P-A1-18` の bounded theory freeze、`P-A1-19` の session carrier、`P-A1-20` の typed external `AddOne` lane、`P-A1-21` の same-session hot-plug lane に続けて、`crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` により bounded operational α-0.9 session-bound devtools export を actualize しました。
+  `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest operational closeout は `P-A1-22` で、`P-A1-18` の bounded theory freeze、`P-A1-19` の session carrier、`P-A1-20` の typed external `AddOne` lane、`P-A1-21` の same-session hot-plug lane に続けて、`crates/mir-runtime::practical_alpha09_devtools`、example `mir_practical_alpha05_session -- export-devtools`、`scripts/practical_alpha09_devtools.py`、`OA09-01..09` により bounded operational α-0.9 session-bound devtools export を actualize しました。
 
 ## いま何があり、何がまだ無いか
 
@@ -77,6 +77,7 @@ OS/network substrate
 - bounded α-0.5 session carrier 上の minimal typed external `AddOne` direct execution lane
 - bounded α-0.8 same-session hot-plug runtime over the same session carrier
 - bounded α-0.9 session-bound devtools export over the same carrier
+- bounded practical α-1 integrated workflow carrier over the existing first-floor and operational evidence
 
 まだ無いもの:
 
@@ -121,4 +122,5 @@ OS/network substrate
 
 - `progress.md` と `samples_progress.md` の裸の `100%` は operational-layer-ready 以上にだけ使う
 - evidence line や first-floor line の達成は、`100% current-scope evidence closeout` または `100% first-floor closeout` と明示して読む
+- `PA1W-*` は bounded practical workflow ready として読み、product/public-ready α-1 とは読まない
 - rough % は rollback し得る snapshot であり、規範判断の正本ではない

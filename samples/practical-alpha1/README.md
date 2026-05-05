@@ -1,6 +1,6 @@
 # samples/practical-alpha1
 
-This root is the current practical alpha-1 first-floor front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, first practical local save/load family, and first practical product-preview family.
+This root is the current practical alpha-1 first-floor front-door plus first checker-floor, first local-runtime, non-final practical hot-plug sample family, non-final practical transport sample family, first practical devtools export bundle family, first practical local save/load family, first practical product-preview family, and bounded practical integrated workflow carrier.
 
 - It is separate from `samples/alpha/`, which remains the alpha-0 evidence root.
 - It is also separate from the operational α-0.5 / α-0.8 / α-0.9 readiness line defined in `specs/19..24` and `plan/45..49`.
@@ -19,6 +19,8 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   `crates/mir-runtime::practical_alpha08_hotplug_session`, example `mir_practical_alpha05_session -- attach`, `scripts/practical_alpha08_session_hotplug.py`, and `OA08-01..10` add same-session debug / auth / rate-limit / object preview / deferred detach rows without claiming α-0.9 live devtools completion.
 - `P-A1-22` widens the same session carrier into the bounded α-0.9 operational line here:
   `crates/mir-runtime::practical_alpha09_devtools`, example `mir_practical_alpha05_session -- export-devtools`, `scripts/practical_alpha09_devtools.py`, and `OA09-01..09` add session-bound event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace without claiming final public viewer/telemetry ABI or product-ready alpha-1.
+- `P-A1-23` adds a bounded practical α-1 integrated workflow carrier over existing evidence:
+  `scripts/practical_alpha1_integrated_workflow.py`, `scripts/tests/test_practical_alpha1_integrated_workflow.py`, and `PA1W-01..08` bind source front-door / checker / same-session runtime / typed host-I/O / hot-plug / save-load / session devtools / product-preview evidence into one developer workflow without claiming final public parser, viewer/telemetry ABI, distributed durable save/load, or product-ready alpha-1.
 - `P-A1-04a` adds the first practical hot-plug cut here:
   layer package fixtures with `alpha_local_hotplug_input` plus exact expected hot-plug reports.
 - `P-A1-04b` widens the same practical hot-plug cut here:
@@ -85,6 +87,15 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   - `OA09-07`: save/load timeline over the session savepoint
   - `OA09-08`: observer-safe redacted view with admin/debug kept-later marker
   - `OA09-09`: retention/on-demand trace plus non-final static HTML viewer
+- `scripts/practical_alpha1_integrated_workflow.py`
+  - `PA1W-01`: source front-door, checker, runtime plan, and local runtime evidence
+  - `PA1W-02`: same-session runtime carrier plus typed `AddOne` host-I/O
+  - `PA1W-03`: same-session hot-plug lifecycle accepted / rejected / deferred rows
+  - `PA1W-04`: local save/load timeline tied to the same session
+  - `PA1W-05`: session-bound devtools export and non-final viewer
+  - `PA1W-06`: product-preview evidence consumed as exact first-floor evidence
+  - `PA1W-07`: negative membership / capability / witness / hot-plug guards
+  - `PA1W-08`: explicit non-final product/public boundaries
 - `packages/hp-a1-*/`
   - `HP-A1-01`: debug layer attach accepted through manifest-driven hot-plug plan
   - `HP-A1-02`: non-admin debug attach rejected before activation cut
@@ -150,7 +161,7 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
-- The current root is still the first-floor fixture family; `practical_alpha05_session`, `practical_alpha08_session_hotplug`, and `practical_alpha09_devtools` now consume it through same-session α-0.5 / α-0.8 / α-0.9 carriers, but final public viewer/telemetry ABI and product-ready alpha-1 remain later gates.
+- The current root is still the first-floor fixture family; `practical_alpha05_session`, `practical_alpha08_session_hotplug`, `practical_alpha09_devtools`, and `practical_alpha1_integrated_workflow` now consume it through same-session α-0.5 / α-0.8 / α-0.9 carriers and a bounded practical workflow, but final public viewer/telemetry ABI and product-ready alpha-1 remain later gates.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.
@@ -160,6 +171,7 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - Checked world packages for save/load are constrained by a distinct save-load plan and one exact practical local-runtime frontier before saved local frontier/report assembly.
 - `SL-A1-03` is a distinct checker-backed save-load preflight reject row; it lowers an exact rejected checker report into a save-load preflight report and does not build a saved local frontier.
 - Preview manifests are lowered through exact practical reports, exact practical devtools bundles, and exact avatar preview companion reports before non-final product-preview bundle assembly.
+- The integrated workflow lowers existing exact evidence and same-session carrier exports into a non-final workflow report; it is not a public CLI, final viewer API, distributed durable save/load, or product-ready runtime.
 - `PE2E-06` now uses exact `SL-A1-03` save-load preflight evidence as its source authority rather than direct checker consumption.
 - Object package preview still goes through the distinct hotplug-plan carrier and keeps `object_attach_claimed = false`.
 - `AV-A1-02` is a non-final custom Mir avatar preview report, not native execution.

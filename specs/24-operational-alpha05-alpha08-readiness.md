@@ -156,6 +156,7 @@ current repo has:
 - minimal typed external host-I/O direct semantic execution lane
 - bounded α-0.8 same-session hot-plug runtime over the same carrier
 - bounded α-0.9 session-bound devtools export over the same carrier
+- bounded practical α-1 integrated workflow carrier over exact first-floor evidence and bounded operational carriers
 - exact report bundles and companion preview bundles
 
 current repo still lacks at least:
@@ -246,8 +247,8 @@ without overclaiming runtime breadth.
 current recommendation:
 
 - `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are now the bounded actualized operational sequence
-- promote a practical α-1 integrated workflow carrier next if continuing toward usability
-- keep final public viewer / telemetry / product runtime completion after that
+- `P-A1-23` is the bounded practical α-1 integrated workflow carrier over that sequence and exact first-floor evidence
+- keep final public viewer / telemetry / product runtime completion behind a separate product/public boundary decision
 
 ## stop line
 

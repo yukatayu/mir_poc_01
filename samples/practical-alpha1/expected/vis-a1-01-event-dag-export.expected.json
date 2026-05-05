@@ -270,6 +270,8 @@
         "reason_refs": [
           "membership_frontier_current",
           "destination_registered",
+          "capability_sufficient",
+          "required_witnesses_present",
           "local_queue_dispatch_ready"
         ],
         "generated_event_refs": [

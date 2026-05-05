@@ -61,6 +61,47 @@ alpha source / package manifest
 
 runtime は sample-ID keyed bridge だけに依存してはならない。
 
+## bounded integrated workflow floor boundary
+
+`P-A1-23` の current actualization は、
+final public product readiness ではなく、
+**bounded practical alpha-1 integrated workflow floor** である。
+
+- existing first-floor carriers and bounded operational session carriers are composed into one workflow report
+- current actualized row is:
+  - `PA1W-01`
+  - `PA1W-02`
+  - `PA1W-03`
+  - `PA1W-04`
+  - `PA1W-05`
+  - `PA1W-06`
+  - `PA1W-07`
+  - `PA1W-08`
+- current workflow covers:
+  - source front-door / checker / runtime-plan / local-runtime evidence
+  - same-session runtime carrier and typed host-I/O
+  - same-session hot-plug lifecycle
+  - local save/load timeline
+  - session-bound devtools export and non-final viewer
+  - product-preview exact evidence
+  - negative guard summary
+  - explicit final public non-claims
+- current carrier split is:
+
+```text
+exact first-floor reports
+  + bounded operational session exports
+  -> bounded integrated workflow report
+```
+
+- current floor is practical workflow ready for repo-local developer reproduction
+- current floor is not final public parser / checker / runtime API
+- current floor is not final public viewer / telemetry ABI
+- current floor is not distributed durable save/load
+- current floor is not production WAN / federation
+- current floor is not native avatar execution
+- current floor is not product/public-ready alpha-1
+
 ## completion condition
 
 practical alpha-1 を `100%` と呼ぶには、少なくとも次を全て満たす。

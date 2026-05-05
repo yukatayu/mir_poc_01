@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 11:17 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, and bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; the α-0.5 session carrier now consumes that root through minimal typed host-I/O, same-session hot-plug lanes, and session-bound devtools export.
+Last updated: 2026-05-05 11:33 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, and the bounded practical α-1 integrated workflow carrier. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; the α-0.5 session carrier now consumes that root through minimal typed host-I/O, same-session hot-plug lanes, session-bound devtools export, and a non-final integrated workflow summary.
 
 ## Legend
 
@@ -29,6 +29,7 @@ Notes:
 | α-0.5 local observable runtime | 100 | bounded operational α-0.5 ready | `RUN-01..04`, `SL-A1-01/02/03`, `VIS-A1-01/03/05/06`, `OA05-01..07`, `specs/19..24`, `plan/45/48/49` | none within the bounded α-0.5 line |
 | α-0.8 same-session hot-plug runtime | 100 | bounded operational α-0.8 ready | `HP-A1-01..07`, `AV-A1-03`, `VIS-A1-04/05`, `OA08-01..10`, `crates/mir-runtime::practical_alpha08_hotplug_session`, `specs/21/22/24`, `plan/46/48/49` | none within the bounded α-0.8 line |
 | α-0.9 session-bound devtools | 100 | bounded operational α-0.9 ready | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | none within the bounded α-0.9 line |
+| practical α-1 integrated workflow | 100 | bounded practical workflow ready | `PA1W-01..08`, `scripts/practical_alpha1_integrated_workflow.py`, exact `VIS-A1-01` / `PE2E-01/02/07` evidence, `OA05/OA08/OA09` carriers | product/public-ready α-1, final public viewer/telemetry ABI, distributed durable save/load |
 
 ## Practical alpha-1 first-floor map
 
@@ -43,6 +44,7 @@ Notes:
 | `SL-A1-01..03` | 100 | first-floor closeout | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only roundtrip、stale-membership non-resurrection、checker-backed invalid distributed-cut preflight reject |
 | `AV-A1-01..03` | 100 | first-floor closeout | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder / custom preview / unsupported-runtime visible fallback companion floor |
 | `PE2E-01..09` | 100 | first-floor closeout | `python3 scripts/practical_alpha1_product_preview.py check-all --format json` | thin exact-evidence product-preview bundles。same-session runtime ではない |
+| `PA1W-01..08` | 100 | bounded practical workflow ready | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / session devtools / product-preview evidence を 1 workflow に束ねる。product/public-ready α-1 ではない |
 
 ## Alpha-0 evidence reference
 
@@ -75,6 +77,10 @@ Notes:
 - `cargo test -p mir-runtime --test practical_alpha08_session_hotplug -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha09_devtools -- --nocapture`
 - `python3 scripts/practical_alpha09_devtools.py check-all --format json`
+- `python3 scripts/practical_alpha1_export_devtools.py check-all --format json`
+- `python3 scripts/practical_alpha1_product_preview.py check-all --format json`
+- `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json`
+- `python3 -m unittest scripts.tests.test_practical_alpha1_integrated_workflow`
 - `cargo fmt --check`
 - `git diff --check`
 
@@ -82,6 +88,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-05 11:33 JST | `P-A1-23` practical α-1 integrated workflow carrier | pass | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_integrated_workflow`、`python3 scripts/practical_alpha1_export_devtools.py check-all --format json`、`python3 scripts/practical_alpha1_product_preview.py check-all --format json` が pass |
 | 2026-05-05 11:17 JST | `P-A1-22` α-0.9 session-bound devtools export | pass | `cargo test -p mir-runtime --test practical_alpha09_devtools`、`python3 scripts/practical_alpha09_devtools.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha09_devtools` が pass |
 | 2026-05-05 10:18 JST | `P-A1-21` α-0.8 same-session hot-plug runtime | pass | `cargo test -p mir-runtime --test practical_alpha08_session_hotplug`、`python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha08_session_hotplug` が pass |
 | 2026-05-05 09:47 JST | `P-A1-20` typed host-I/O direct execution lane | pass | `cargo test -p mir-runtime --test practical_alpha05_host_io`、`cargo test -p mir-runtime --test practical_alpha05_session`、`cargo test -p mir-runtime --test practical_alpha1_local_runtime`、`python3 scripts/practical_alpha1_run_local.py check-all --format json`、`python3 scripts/practical_alpha05_session.py check-all --format json`、`python3 -m unittest scripts.tests.test_practical_alpha1_run_local scripts.tests.test_practical_alpha05_session` が pass |
