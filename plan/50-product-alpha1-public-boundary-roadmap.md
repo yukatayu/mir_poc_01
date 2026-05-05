@@ -20,13 +20,14 @@ Current repo already has:
 
 Current repo still lacks product alpha-1:
 
-- native launch bundle
 - clean-clone release-candidate validation
+- CLI `demo` release walkthrough command
 
 Recent closed first cuts:
 
 - local and Docker transport product command path
 - product viewer UX over product demo bundle
+- native host launch bundle
 
 ## alpha defaults from `P-A1-25`
 
@@ -202,7 +203,7 @@ Delivered:
 - `crates/mir-runtime::product_alpha1_transport` adds same-session transport mutation reports, loopback TCP local round trip, Docker Compose TCP endpoint functions, explicit lane preservation, and WAN/federation non-claims.
 - `samples/product-alpha1/docker/docker-compose.product-alpha1.yml` runs a world server and participant client over Docker Compose TCP with the mounted `mirrorea-alpha` binary and selected session JSON.
 - `crates/mir-runtime::product_alpha1_devtools` exports a non-final product devtools JSON bundle and static HTML viewer over the product session carrier.
-- `mirrorea-alpha transport`, `export-devtools`, and `view --check` are implemented. `build-native-bundle` and `demo` remain later-package unsupported diagnostics.
+- `mirrorea-alpha transport`, `export-devtools`, and `view --check` are implemented. At this package close point, `build-native-bundle` remained P-A1-30 scope and `demo` remained later-package unsupported diagnostics.
 
 Validation:
 
@@ -222,11 +223,25 @@ Non-claim:
 
 ### `P-A1-30` — native launch bundle
 
+Status:
+
+- closed by `P-A1-30`
+- workflow-ready first cut for native host launch bundle generation
+- not product alpha release-ready until clean-clone validation and CLI `demo` close
+
 Target:
 
 - `build-native-bundle`
 - bundle compiled runtime/CLI, packages, viewer assets, reports, manifest, run script
 - explicit native policy diagnostics
+
+Delivered:
+
+- `mirrorea-alpha build-native-bundle <package> --out <dir>` emits a native host launch bundle with `bin/mirrorea-alpha`, `packages/`, `devtools/`, `reports/`, `manifest.json`, `launch.json`, `provenance.json`, `run.sh`, and `README.md`.
+- The bundle includes the compiled Rust CLI, versioned product package files, observer-safe devtools JSON/HTML assets, check/run/save/quiescent-save/transport/export reports, verification report, and provenance-only metadata.
+- `run.sh check` and `run.sh view` use the bundled CLI/package/viewer paths and are validated during bundle build. CLI `demo` remains P-A1-31 scope.
+- `manifest.json` and `reports/verification-report.json` record `NativeExecutionPolicy = Disabled`, `package_native_execution_claimed = false`, `arbitrary_native_execution_supported = false`, `direct_mir_to_machine_code_supported = false`, `signature_is_safety_claimed = false`, and `provenance_only = true`.
+- Direct textual `.mir` input to `build-native-bundle` returns the explicit `direct_mir_non_goal` diagnostic without freezing final codegen.
 
 Validation:
 
@@ -243,12 +258,15 @@ Non-claim:
 - no direct Mir-to-machine-code
 - no arbitrary native package execution
 - no signature-is-safety claim
+- no CLI `demo` command completion
+- no product alpha release-candidate completion
 
 ### `P-A1-31` — product alpha-1 release candidate
 
 Target:
 
 - clean clone guide
+- CLI `demo`
 - `docs/hands_on/product_alpha1_01.md`
 - `docs/research_abstract/product_alpha1_01.md`
 - full product validation script
@@ -299,12 +317,14 @@ Output shape:
   devtools/
   reports/
   manifest.json
+  launch.json
+  provenance.json
   run.sh
   README.md
 ```
 
 The bundle is a host launch bundle.
-It is not direct Mir native codegen.
+It is not direct Mir native codegen, arbitrary native package execution, or signature-is-safety.
 
 ## release validation direction
 
@@ -343,8 +363,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- native launch bundle
 - clean-clone validation docs
+- CLI `demo` release walkthrough
 
 ### research-discovery items
 
@@ -365,6 +385,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-30` native launch bundle
+- `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout
 
 Queue authority remains `progress.md` / `tasks.md`.

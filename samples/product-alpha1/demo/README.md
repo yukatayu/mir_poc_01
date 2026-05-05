@@ -30,7 +30,13 @@ This directory is the initial Product Alpha-1 demo package root.
 - non-final `export-devtools` JSON/HTML bundle with observer-safe redaction
 - `view --check` static viewer openability and panel presence validation
 
-It is not yet the full product demo workflow. Native launch bundle and release-candidate guide are scheduled for later `P-A1-30..31` packages. R3/R4 durable distributed save/load remains a non-goal.
+`P-A1-30` uses it for:
+
+- `build-native-bundle` native host launch bundle generation
+- bundled compiled CLI, versioned package files, observer-safe devtools assets, manifest, launch metadata, run script, verification report, and provenance report
+- explicit `NativeExecutionPolicy = Disabled`, package-native execution non-claim, signature-is-safety non-claim, and direct Mir-to-machine-code non-goal diagnostics
+
+It is not yet the full product demo workflow. CLI `demo`, clean-clone guide, and release-candidate validation are scheduled for `P-A1-31`. R3/R4 durable distributed save/load remains a non-goal.
 
 Commands:
 
@@ -48,6 +54,10 @@ MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport '
 viewer_dir=$(mktemp -d /tmp/mirrorea-alpha1-viewer-XXXXXX)
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out "$viewer_dir" --format json
 cargo run -q -p mirrorea-cli -- view "$viewer_dir" --check --format json
+bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
+cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
+sh "$bundle_dir/run.sh" check
+sh "$bundle_dir/run.sh" view
 ```
 
 The Docker transport command requires local Docker and Docker Compose. If those
@@ -60,3 +70,6 @@ Non-claim:
 - no exactly-once transport
 - no WAN partition recovery
 - no final public viewer / telemetry ABI
+- no arbitrary native package execution
+- no signature-is-safety claim
+- no direct Mir-to-machine-code

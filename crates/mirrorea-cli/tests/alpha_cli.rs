@@ -223,16 +223,11 @@ fn unimplemented_commands_reject_direct_mir_with_non_goal_diagnostic() {
 }
 
 #[test]
-fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics() {
-    let package_dir = write_product_package();
-    let package = package_dir.to_str().expect("temp dir should be utf-8");
+fn demo_remains_structured_unsupported_until_release_candidate() {
     let out_dir = unique_temp_dir("mirrorea-alpha-out");
     let out = out_dir.to_str().expect("temp out should be utf-8");
 
-    let command_args: &[(&str, &[&str])] = &[
-        ("build-native-bundle", &[package, "--out", out]),
-        ("demo", &["--out", out]),
-    ];
+    let command_args: &[(&str, &[&str])] = &[("demo", &["--out", out])];
 
     for (command, args) in command_args {
         let mut argv = vec![*command];
@@ -243,7 +238,7 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
 
         assert!(
             !output.status.success(),
-            "{command} should be unsupported in P-A1-26"
+            "{command} should remain unsupported until P-A1-31"
         );
         assert_eq!(value["status"], "unsupported");
         assert_eq!(value["command"], *command);
@@ -251,6 +246,306 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
         assert_eq!(value["product_alpha1_ready"], false);
         assert_eq!(value["final_public_api_frozen"], false);
     }
+}
+
+#[test]
+fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+    let out_dir = unique_temp_dir("mirrorea-alpha-native-bundle-out");
+
+    let output = run_cli(&[
+        "build-native-bundle",
+        demo.to_str().expect("demo path should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(
+        output.status.success(),
+        "build-native-bundle should emit a host launch bundle: stdout={} stderr={}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert_eq!(value["surface_kind"], "product_alpha1_native_bundle_report");
+    assert_eq!(value["status"], "accepted");
+    assert_eq!(value["native_execution_policy"], "Disabled");
+    assert_eq!(value["package_native_execution_claimed"], false);
+    assert_eq!(value["arbitrary_native_execution_supported"], false);
+    assert_eq!(value["direct_mir_to_machine_code_supported"], false);
+    assert_eq!(value["signature_is_safety_claimed"], false);
+    assert_eq!(value["provenance_only"], true);
+    assert_eq!(value["product_alpha1_ready"], false);
+
+    let expected_paths = [
+        "bin/mirrorea-alpha",
+        "packages/product-alpha1-demo/package.mir.json",
+        "devtools/bundle.json",
+        "devtools/index.html",
+        "reports/check.json",
+        "reports/run-local.json",
+        "reports/save.json",
+        "reports/quiescent-save.json",
+        "reports/transport-local.json",
+        "reports/export-devtools.json",
+        "reports/verification-report.json",
+        "manifest.json",
+        "launch.json",
+        "provenance.json",
+        "run.sh",
+        "README.md",
+    ];
+    for relative in expected_paths {
+        assert!(
+            out_dir.join(relative).exists(),
+            "bundle should contain {relative}"
+        );
+    }
+    let bundle_readme = fs::read_to_string(out_dir.join("README.md")).unwrap();
+    assert!(bundle_readme.contains("devtools/index.html"));
+    assert!(bundle_readme.contains("devtools/bundle.json"));
+
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+
+        let mode = fs::metadata(out_dir.join("run.sh"))
+            .expect("run.sh metadata should be readable")
+            .permissions()
+            .mode();
+        assert_ne!(mode & 0o111, 0, "run.sh should be executable");
+    }
+
+    let manifest: Value =
+        serde_json::from_str(&fs::read_to_string(out_dir.join("manifest.json")).unwrap()).unwrap();
+    assert_eq!(
+        manifest["surface_kind"],
+        "product_alpha1_native_launch_bundle_manifest"
+    );
+    assert_eq!(manifest["bundle_id"], value["bundle_id"]);
+    assert_eq!(manifest["package"]["package_id"], "product-alpha1-demo");
+    assert_eq!(
+        manifest["native_execution_policy"]["NativeExecutionPolicy"],
+        "Disabled"
+    );
+    assert_eq!(
+        manifest["native_execution_policy"]["package_native_execution_claimed"],
+        false
+    );
+    assert_eq!(
+        manifest["native_execution_policy"]["arbitrary_native_execution_supported"],
+        false
+    );
+    assert_eq!(
+        manifest["native_execution_policy"]["direct_mir_to_machine_code_supported"],
+        false
+    );
+    assert_eq!(
+        manifest["signature_policy"]["signature_is_safety_claimed"],
+        false
+    );
+    assert_eq!(manifest["signature_policy"]["provenance_only"], true);
+    assert_eq!(
+        manifest["launch"]["supported_script_commands"],
+        serde_json::json!(["check", "view"])
+    );
+    assert_eq!(out_dir.join("reports/run-script-demo.json").exists(), false);
+    assert!(
+        manifest["reports"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|report| report["path"] == "reports/verification-report.json")
+    );
+
+    let verification: Value = serde_json::from_str(
+        &fs::read_to_string(out_dir.join("reports/verification-report.json")).unwrap(),
+    )
+    .unwrap();
+    assert_eq!(verification["status"], "accepted");
+    assert_eq!(verification["run_script_check_included"], true);
+    assert_eq!(verification["NativeExecutionPolicy"], "Disabled");
+    assert_eq!(verification["package_native_execution_claimed"], false);
+    assert_eq!(verification["cli_demo_command_claimed"], false);
+    assert_eq!(verification["release_demo_command_deferred"], true);
+    assert_eq!(verification["run_script_demo_path_included"], false);
+    assert_eq!(
+        verification["bundle_admits_only_disabled_native_policies"],
+        true
+    );
+    assert_eq!(
+        verification["arbitrary_native_execution_negative_probe_included"],
+        false
+    );
+    for relative in [
+        "reports/run-local.json",
+        "reports/attach-debug-layer.json",
+        "reports/save.json",
+        "reports/quiescent-save.json",
+        "reports/transport-local.json",
+        "reports/export-devtools.json",
+    ] {
+        let text = fs::read_to_string(out_dir.join(relative)).unwrap();
+        assert!(
+            !text.contains("witness_refs"),
+            "{relative} should not expose raw witness refs"
+        );
+        assert!(
+            !text.contains("granted_capabilities"),
+            "{relative} should not expose raw capability grants"
+        );
+        assert!(
+            !text.contains("ObserveDebugSummary"),
+            "{relative} should not expose private debug capability names"
+        );
+        assert!(
+            !text.contains("AttachDebugLayer"),
+            "{relative} should not expose private attach capability names"
+        );
+    }
+
+    let launch = Command::new("sh")
+        .arg(out_dir.join("run.sh"))
+        .output()
+        .expect("run.sh should launch through sh");
+    assert!(
+        launch.status.success(),
+        "run.sh should verify bundled check/view paths: stdout={} stderr={}",
+        String::from_utf8_lossy(&launch.stdout),
+        String::from_utf8_lossy(&launch.stderr)
+    );
+
+    let demo_local = Command::new("sh")
+        .arg(out_dir.join("run.sh"))
+        .arg("demo-local")
+        .output()
+        .expect("run.sh should launch through sh");
+    assert!(
+        !demo_local.status.success(),
+        "run.sh must not expose a demo-local release walkthrough before P-A1-31"
+    );
+}
+
+#[test]
+fn build_native_bundle_rejects_direct_mir_without_freezing_final_codegen() {
+    let dir = unique_temp_dir("mirrorea-alpha-native-direct-mir-test");
+    fs::create_dir_all(&dir).expect("temp dir should be created");
+    let mir_path = dir.join("demo.mir");
+    fs::write(&mir_path, "world Demo\n").expect("demo .mir file should be written");
+    let out_dir = unique_temp_dir("mirrorea-alpha-native-direct-mir-out");
+
+    let output = run_cli(&[
+        "build-native-bundle",
+        mir_path.to_str().expect("temp path should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(!output.status.success(), "direct .mir should be rejected");
+    assert_eq!(value["status"], "unsupported");
+    assert_eq!(value["command"], "build-native-bundle");
+    assert_eq!(value["diagnostic_code"], "direct_mir_non_goal");
+    assert_eq!(value["implemented"], true);
+    assert_eq!(value["final_public_api_frozen"], false);
+}
+
+#[test]
+fn build_native_bundle_rejects_unsafe_output_paths_and_reuse() {
+    let package_dir = write_product_package();
+    let nested_out = package_dir.join("bundle-out");
+
+    let nested = run_cli(&[
+        "build-native-bundle",
+        package_dir.to_str().expect("package dir should be utf-8"),
+        "--out",
+        nested_out.to_str().expect("nested out should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let nested_value = json_stdout(&nested);
+    assert!(!nested.status.success());
+    assert_eq!(nested_value["diagnostic_code"], "unsafe_output_path");
+    assert_eq!(nested_out.exists(), false);
+
+    let out_dir = unique_temp_dir("mirrorea-alpha-native-nonempty-out");
+    fs::create_dir_all(&out_dir).expect("out dir should be created");
+    fs::write(out_dir.join("stale.json"), "{}\n").expect("stale file should be written");
+    let reused = run_cli(&[
+        "build-native-bundle",
+        package_dir.to_str().expect("package dir should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let reused_value = json_stdout(&reused);
+    assert!(!reused.status.success());
+    assert_eq!(reused_value["diagnostic_code"], "output_dir_not_empty");
+}
+
+#[test]
+fn build_native_bundle_copies_only_declared_package_files() {
+    let package_dir = write_product_package();
+    fs::write(package_dir.join(".secret-note"), "do not ship\n")
+        .expect("stray root file should be written");
+    let stray_dir = package_dir.join("tmp-generated");
+    fs::create_dir_all(&stray_dir).expect("stray dir should be created");
+    fs::write(stray_dir.join("debug.log"), "debug artifact\n")
+        .expect("stray debug artifact should be written");
+    let out_dir = unique_temp_dir("mirrorea-alpha-native-allowlist-out");
+
+    let output = run_cli(&[
+        "build-native-bundle",
+        package_dir.to_str().expect("package dir should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+    assert!(output.status.success());
+    let package_bundle = PathBuf::from(value["package_bundle_path"].as_str().unwrap());
+    assert!(package_bundle.join("package.mir.json").exists());
+    assert!(!package_bundle.join(".secret-note").exists());
+    assert!(!package_bundle.join("tmp-generated/debug.log").exists());
+}
+
+#[test]
+fn build_native_bundle_rejects_non_disabled_native_policy() {
+    let package_dir = write_product_package();
+    let text = fs::read_to_string(package_dir.join("package.mir.json")).unwrap();
+    fs::write(
+        package_dir.join("package.mir.json"),
+        text.replace(
+            "\"execution_policy\": \"disabled\"",
+            "\"execution_policy\": \"enabled\"",
+        ),
+    )
+    .expect("package native policy should be rewritten");
+    let out_dir = unique_temp_dir("mirrorea-alpha-native-enabled-out");
+
+    let output = run_cli(&[
+        "build-native-bundle",
+        package_dir.to_str().expect("package dir should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+    assert!(!output.status.success());
+    assert_ne!(value["status"], "accepted");
+    assert_eq!(value["product_alpha1_ready"], false);
+    assert_eq!(out_dir.exists(), false);
 }
 
 #[test]

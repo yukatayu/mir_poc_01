@@ -20,10 +20,10 @@
   - active canonical runnable root や full toolchain root ではまだない
 - `product-alpha1/`
   product/public alpha-1 sample root
-  - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, P-A1-28 local save/quiescent-save fixture root, and P-A1-29 transport/viewer fixture root
+  - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, P-A1-28 local save/quiescent-save fixture root, P-A1-29 transport/viewer fixture root, and P-A1-30 native host launch bundle fixture root
   - `docker/` holds the controlled Product Alpha-1 Docker Compose TCP fixture used by `mirrorea-alpha transport --mode docker`
-  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` and `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` are the entry validation anchors; `save` / `load` / `quiescent-save` / `transport` / `export-devtools` / `view` use the same session dir or exported viewer dir
-  - this is not yet native launch bundle, release validation, WAN/federation, distributed durable save/load R3/R4, or final public API
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` and `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` are the entry validation anchors; `save` / `load` / `quiescent-save` / `transport` / `export-devtools` / `view` use the same session dir or exported viewer dir, and `build-native-bundle` writes a native host launch bundle to a caller-provided output directory
+  - this is not yet release validation, CLI `demo`, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -85,8 +85,8 @@
   - current practical devtools export floor は `VIS-A1-01/02/03/04/05/06/07` に限られ、`VIS-A1-03` は exact `SL-A1-02` save-load report から saved frontier / later live membership advance / restored frontier / stale-membership reject を export する membership timeline widening、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary / membership snapshot / deferred detach boundary を export する observability widening、`VIS-A1-05` は exact `AV-A1-03` avatar preview report から rejected source lane / degraded roles / missing host capability を export する fallback degradation widening、`VIS-A1-07` は exact `SL-A1-02` save-load report に widened した report-local retained-artifact catalog と hit/miss query trace を export する retention-query widening に留まる。これは durable retained-artifact service / remote retrieval / expiry lifecycle を意味しない
 - `product-alpha1/` と `practical-alpha1/` を混同しない
   - `product-alpha1/` は product/public alpha-1 line の source root
-  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture、`P-A1-27` の local same-session `run-local` / `session` / `attach` first cut、`P-A1-28` の local R0/R2 save first cut、`P-A1-29` の local/Docker transport と non-final viewer first cut を持つ
-  - native launch bundle、release validation は later packages
+  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture、`P-A1-27` の local same-session `run-local` / `session` / `attach` first cut、`P-A1-28` の local R0/R2 save first cut、`P-A1-29` の local/Docker transport と non-final viewer first cut、`P-A1-30` の native host launch bundle first cut を持つ
+  - release validation と CLI `demo` は later packages
 
 ## current commands
 
@@ -119,6 +119,8 @@ MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'ses
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2' --format json
 MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0' --session 'session#product-alpha1-demo' --format json
+bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
+cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する

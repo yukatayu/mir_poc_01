@@ -8,14 +8,18 @@ use std::{
     time::Duration,
 };
 
-use mir_ast::product_alpha1::{ProductAlpha1Error, check_product_alpha1_package_path};
+use mir_ast::product_alpha1::{
+    ProductAlpha1CheckReport, ProductAlpha1Error, ProductAlpha1Package,
+    check_product_alpha1_package_path, load_product_alpha1_package_path,
+};
 use mir_runtime::{
     product_alpha1_devtools::{
         ProductAlpha1DevtoolsBundle, export_product_alpha1_devtools_for_session,
         render_product_alpha1_viewer_html, validate_product_alpha1_viewer_dir,
     },
     product_alpha1_session::{
-        ProductAlpha1SessionCarrier, ProductAlpha1SessionError, ProductAlpha1SessionErrorKind,
+        ProductAlpha1AttachReport, ProductAlpha1RunLocalReport, ProductAlpha1SessionCarrier,
+        ProductAlpha1SessionError, ProductAlpha1SessionErrorKind,
         attach_product_alpha1_package_to_session_path, load_product_alpha1_session,
         quiescent_save_product_alpha1_session, run_product_alpha1_local_session_path,
         save_product_alpha1_session,
@@ -62,7 +66,8 @@ fn run(args: Vec<String>) -> i32 {
         "transport" => handle_transport(rest),
         "export-devtools" => handle_export_devtools(rest),
         "view" => handle_view(rest),
-        "build-native-bundle" | "demo" => (unsupported_command_payload(&command, rest), 2),
+        "build-native-bundle" => handle_build_native_bundle(rest),
+        "demo" => (unsupported_command_payload(&command, rest), 2),
         "__product-transport-world-server" => handle_product_transport_world_server(rest),
         "__product-transport-participant-client" => {
             handle_product_transport_participant_client(rest)
@@ -536,6 +541,21 @@ fn handle_view(args: &[String]) -> (Value, i32) {
     )
 }
 
+fn handle_build_native_bundle(args: &[String]) -> (Value, i32) {
+    let (package_path, out_dir) = match parse_build_native_bundle_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    if is_direct_mir_path(&package_path.display().to_string()) {
+        return (direct_mir_non_goal_payload("build-native-bundle", true), 2);
+    }
+
+    match build_product_alpha1_native_bundle(&package_path, &out_dir) {
+        Ok(payload) => (payload, 0),
+        Err(payload) => payload,
+    }
+}
+
 fn handle_product_transport_world_server(args: &[String]) -> (Value, i32) {
     let (session_path, endpoint, output_path, fixture_token) =
         match parse_transport_endpoint_args("__product-transport-world-server", args, "--bind") {
@@ -814,6 +834,398 @@ fn product_alpha1_docker_compose_file() -> PathBuf {
         .and_then(Path::parent)
         .expect("crate should live under repo/crates/mirrorea-cli")
         .join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml")
+}
+
+fn build_product_alpha1_native_bundle(
+    package_path: &Path,
+    out_dir: &Path,
+) -> Result<Value, (Value, i32)> {
+    let check_report = check_product_alpha1_package_path(package_path)
+        .map_err(|error| (error_payload("build-native-bundle", error), 2))?;
+    let package = load_product_alpha1_package_path(package_path)
+        .map_err(|error| (error_payload("build-native-bundle", error), 2))?;
+    let package_root = product_alpha1_package_root(package_path)
+        .map_err(|error| (io_error_payload("build-native-bundle", error), 2))?;
+    let absolute_out_dir = prepare_native_bundle_output_dir(package_root.as_path(), out_dir)?;
+    let bundle_id = format!(
+        "native-bundle#{}#{}",
+        package.package_id,
+        stable_session_id_hash(&absolute_out_dir.display().to_string())
+    );
+    if package.native_policy.execution_policy != "disabled" {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "native_execution_policy_not_disabled",
+                "message": "product alpha-1 native launch bundles require NativeExecutionPolicy = Disabled",
+                "implemented": true,
+                "package_native_execution_claimed": false,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+
+    fs::create_dir_all(&absolute_out_dir).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&absolute_out_dir, error),
+            ),
+            2,
+        )
+    })?;
+
+    let bin_dir = absolute_out_dir.join("bin");
+    let packages_dir = absolute_out_dir.join("packages");
+    let package_bundle_dir = packages_dir.join(sanitize_session_id(&package.package_id));
+    let devtools_dir = absolute_out_dir.join("devtools");
+    let reports_dir = absolute_out_dir.join("reports");
+    fs::create_dir_all(&bin_dir).map_err(|error| {
+        (
+            io_error_payload("build-native-bundle", io_error_with_path(&bin_dir, error)),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&package_bundle_dir).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&package_bundle_dir, error),
+            ),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&devtools_dir).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&devtools_dir, error),
+            ),
+            2,
+        )
+    })?;
+    fs::create_dir_all(&reports_dir).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+
+    let binary_path = bin_dir.join("mirrorea-alpha");
+    copy_current_cli_binary(&binary_path).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&binary_path, error),
+            ),
+            2,
+        )
+    })?;
+    let package_bundle_summary =
+        copy_declared_package_bundle(&package_root, &package, &package_bundle_dir).map_err(
+            |error| {
+                (
+                    io_error_payload(
+                        "build-native-bundle",
+                        io_error_with_path(&package_bundle_dir, error),
+                    ),
+                    2,
+                )
+            },
+        )?;
+
+    let run_report = run_product_alpha1_local_session_path(package_path)
+        .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+    let mut session = run_report.session.clone();
+    let debug_layer_path = package_root.join("packages/debug-layer");
+    let attach_report = if debug_layer_path.join("package.mir.json").is_file() {
+        let (next_session, report) =
+            attach_product_alpha1_package_to_session_path(&session, &debug_layer_path)
+                .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+        session = next_session;
+        Some((report, session.clone()))
+    } else {
+        None
+    };
+    let (next_session, save_report) = save_product_alpha1_session(&session, "savepoint#r0-bundle")
+        .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+    session = next_session;
+    let save_session = session.clone();
+    let (next_session, quiescent_report) =
+        quiescent_save_product_alpha1_session(&session, "savepoint#r2-bundle")
+            .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+    session = next_session;
+    let quiescent_session = session.clone();
+    let (next_session, transport_report) =
+        run_product_alpha1_transport_for_session(&session, "local")
+            .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+    session = next_session;
+    let transport_session = session.clone();
+    let (next_session, devtools_bundle) =
+        export_product_alpha1_devtools_for_session(&session, "devtools#native-bundle")
+            .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
+    session = next_session;
+    let devtools_session = session.clone();
+
+    write_json_artifact(&reports_dir.join("check.json"), &check_report).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+    write_json_artifact(
+        &reports_dir.join("run-local.json"),
+        &run_local_bundle_report_payload(&run_report),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+    if let Some((attach_report, attach_session)) = &attach_report {
+        write_json_artifact(
+            &reports_dir.join("attach-debug-layer.json"),
+            &attach_bundle_report_payload(attach_report, attach_session),
+        )
+        .map_err(|error| {
+            (
+                io_error_payload(
+                    "build-native-bundle",
+                    io_error_with_path(&reports_dir, error),
+                ),
+                2,
+            )
+        })?;
+    }
+    write_json_artifact(
+        &reports_dir.join("save.json"),
+        &session_mutation_bundle_report_payload(&save_report, &save_session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+    write_json_artifact(
+        &reports_dir.join("quiescent-save.json"),
+        &session_mutation_bundle_report_payload(&quiescent_report, &quiescent_session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+    write_json_artifact(
+        &reports_dir.join("transport-local.json"),
+        &session_mutation_bundle_report_payload(&transport_report, &transport_session),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+    write_json_artifact(&devtools_dir.join("bundle.json"), &devtools_bundle).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&devtools_dir, error),
+            ),
+            2,
+        )
+    })?;
+    fs::write(
+        devtools_dir.join("index.html"),
+        render_product_alpha1_viewer_html(&devtools_bundle),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&devtools_dir, error),
+            ),
+            2,
+        )
+    })?;
+    let export_report = devtools_bundle_report_payload(&devtools_bundle, &devtools_session);
+    write_json_artifact(&reports_dir.join("export-devtools.json"), &export_report).map_err(
+        |error| {
+            (
+                io_error_payload(
+                    "build-native-bundle",
+                    io_error_with_path(&reports_dir, error),
+                ),
+                2,
+            )
+        },
+    )?;
+
+    let run_script_path = out_dir.join("run.sh");
+    fs::write(&run_script_path, native_bundle_run_script()).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&run_script_path, error),
+            ),
+            2,
+        )
+    })?;
+    make_executable(&run_script_path).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&run_script_path, error),
+            ),
+            2,
+        )
+    })?;
+
+    let provenance = native_bundle_provenance_payload(
+        &package,
+        &package_root,
+        &binary_path,
+        &package_bundle_dir,
+    );
+    write_json_artifact(&absolute_out_dir.join("provenance.json"), &provenance).map_err(
+        |error| {
+            (
+                io_error_payload(
+                    "build-native-bundle",
+                    io_error_with_path(&absolute_out_dir, error),
+                ),
+                2,
+            )
+        },
+    )?;
+
+    let report_paths = native_bundle_report_paths(attach_report.is_some());
+    let manifest = native_bundle_manifest_payload(
+        &package,
+        &check_report,
+        &binary_path,
+        &package_bundle_dir,
+        &devtools_dir,
+        &report_paths,
+        &bundle_id,
+        &package_bundle_summary,
+    );
+    write_json_artifact(&absolute_out_dir.join("manifest.json"), &manifest).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&absolute_out_dir, error),
+            ),
+            2,
+        )
+    })?;
+    write_json_artifact(
+        &absolute_out_dir.join("launch.json"),
+        &native_bundle_launch_payload(),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&absolute_out_dir, error),
+            ),
+            2,
+        )
+    })?;
+    fs::write(
+        absolute_out_dir.join("README.md"),
+        native_bundle_readme(&package.package_id, &package.package_version),
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&absolute_out_dir, error),
+            ),
+            2,
+        )
+    })?;
+
+    let run_script_check = run_native_bundle_script(&run_script_path, "check")?;
+    let run_script_view = run_native_bundle_script(&run_script_path, "view")?;
+    let verification_report = native_bundle_verification_payload(
+        &package,
+        &manifest,
+        &run_script_check,
+        &run_script_view,
+        &report_paths,
+        &package_bundle_summary,
+    );
+    write_json_artifact(
+        &reports_dir.join("verification-report.json"),
+        &verification_report,
+    )
+    .map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&reports_dir, error),
+            ),
+            2,
+        )
+    })?;
+
+    Ok(json!({
+        "surface_kind": "product_alpha1_native_bundle_report",
+        "status": "accepted",
+        "command": "build-native-bundle",
+        "implemented": true,
+        "bundle_schema": "mirrorea-product-alpha1-native-launch-bundle-v0",
+        "bundle_id": bundle_id,
+        "bundle_path": absolute_out_dir.display().to_string(),
+        "manifest_path": absolute_out_dir.join("manifest.json").display().to_string(),
+        "run_script_path": run_script_path.display().to_string(),
+        "binary_path": binary_path.display().to_string(),
+        "package_bundle_path": package_bundle_dir.display().to_string(),
+        "devtools_path": devtools_dir.display().to_string(),
+        "verification_report_path": reports_dir.join("verification-report.json").display().to_string(),
+        "native_execution_policy": "Disabled",
+        "NativeExecutionPolicy": "Disabled",
+        "host_launch_bundle_claimed": true,
+        "compiled_rust_cli_included": true,
+        "package_native_execution_claimed": false,
+        "arbitrary_native_execution_supported": false,
+        "direct_mir_to_machine_code_supported": false,
+        "signature_is_safety_claimed": false,
+        "provenance_only": true,
+        "run_script_check_included": true,
+        "run_script_view_check_included": true,
+        "cli_demo_command_claimed": false,
+        "copied_package_paths": package_bundle_summary.copied_relative_paths,
+        "copied_package_native_policies_disabled": package_bundle_summary.all_native_policies_disabled,
+        "report_paths": report_paths,
+        "non_claims": native_bundle_non_claims(),
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    }))
 }
 
 fn write_session_report_payload<T: serde::Serialize>(
@@ -1096,6 +1508,59 @@ fn parse_view_args(args: &[String]) -> Result<(PathBuf, bool), (Value, i32)> {
         }
     }
     Ok((PathBuf::from(path), check))
+}
+
+fn parse_build_native_bundle_args(args: &[String]) -> Result<(PathBuf, PathBuf), (Value, i32)> {
+    let Some(package_path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "missing_package_path",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    let mut out_dir = None;
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--out" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("build-native-bundle", &args[index..]),
+                        2,
+                    ));
+                };
+                out_dir = Some(PathBuf::from(value));
+                index += 2;
+            }
+            _ => {
+                return Err((
+                    unexpected_arguments_payload("build-native-bundle", &args[index..]),
+                    2,
+                ));
+            }
+        }
+    }
+    let Some(out_dir) = out_dir else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "missing_out_dir",
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    Ok((PathBuf::from(package_path), out_dir))
 }
 
 fn parse_transport_endpoint_args(
@@ -1397,6 +1862,558 @@ fn read_json_artifact<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T, 
     serde_json::from_str(&text).map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
 }
 
+fn run_local_bundle_report_payload(report: &ProductAlpha1RunLocalReport) -> Value {
+    let mut value =
+        serde_json::to_value(report).expect("product alpha-1 run-local report should serialize");
+    insert_value(
+        &mut value,
+        "session",
+        observer_safe_session_payload(&report.session),
+    );
+    value
+}
+
+fn attach_bundle_report_payload(
+    report: &ProductAlpha1AttachReport,
+    session: &ProductAlpha1SessionCarrier,
+) -> Value {
+    json!({
+        "surface_kind": report.surface_kind,
+        "session_id": report.session_id,
+        "package_id": report.package_id,
+        "package_kind": report.package_kind,
+        "terminal_outcome": report.terminal_outcome,
+        "session_mutated": report.session_mutated,
+        "request_event_id": report.request_event_id,
+        "verdict_event_id": report.verdict_event_id,
+        "activation_cut_ref": report.activation_cut_ref,
+        "active_layers_after": report.active_layers_after,
+        "active_runtime_mutated": report.active_runtime_mutated,
+        "auth_decision_summary": {
+            "decision_id": report.auth_decision.decision_id,
+            "decision": report.auth_decision.decision,
+            "auth_stack": report.auth_decision.auth_stack,
+            "membership_requirement_count": report.auth_decision.membership_requirements.len(),
+            "capability_requirement_count": report.auth_decision.capability_refs.len(),
+            "private_witness_requirement_count": report.auth_decision.witness_refs.len(),
+            "contract_update_path": report.auth_decision.contract_update_path,
+            "overlay_transparency_claimed": report.auth_decision.overlay_transparency_claimed,
+            "private_reason_ref_count": report.auth_decision.reason_refs.len()
+        },
+        "capability_decision_summary": {
+            "decision_id": report.capability_decision.decision_id,
+            "decision": report.capability_decision.decision,
+            "requested_capability_count": report.capability_decision.requested_capabilities.len(),
+            "granted_capability_count": report.capability_decision.granted_capabilities.len(),
+            "missing_capability_count": report.capability_decision.missing_capabilities.len()
+        },
+        "session": observer_safe_session_payload(session),
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    })
+}
+
+fn session_mutation_bundle_report_payload<T: serde::Serialize>(
+    report: &T,
+    session: &ProductAlpha1SessionCarrier,
+) -> Value {
+    let mut value = serde_json::to_value(report)
+        .expect("product alpha-1 session mutation report should serialize");
+    insert_value(
+        &mut value,
+        "session",
+        observer_safe_session_payload(session),
+    );
+    value
+}
+
+fn devtools_bundle_report_payload(
+    bundle: &ProductAlpha1DevtoolsBundle,
+    session: &ProductAlpha1SessionCarrier,
+) -> Value {
+    let mut value =
+        serde_json::to_value(bundle).expect("product alpha-1 devtools bundle should serialize");
+    insert_string(
+        &mut value,
+        "bundle_path",
+        "devtools/bundle.json".to_string(),
+    );
+    insert_string(&mut value, "html_path", "devtools/index.html".to_string());
+    insert_value(
+        &mut value,
+        "session",
+        observer_safe_session_payload(session),
+    );
+    value
+}
+
+fn product_alpha1_package_root(path: &Path) -> Result<PathBuf, io::Error> {
+    let package_file = if path.is_dir() {
+        path.join("package.mir.json")
+    } else {
+        path.to_path_buf()
+    };
+    let root = package_file
+        .parent()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "package path has no parent"))?;
+    fs::canonicalize(root)
+}
+
+#[derive(Debug, Clone)]
+struct NativeBundlePackageSummary {
+    copied_relative_paths: Vec<String>,
+    all_native_policies_disabled: bool,
+}
+
+fn prepare_native_bundle_output_dir(
+    package_root: &Path,
+    out_dir: &Path,
+) -> Result<PathBuf, (Value, i32)> {
+    let absolute_out = absolute_output_path(out_dir).map_err(|error| {
+        (
+            io_error_payload("build-native-bundle", io_error_with_path(out_dir, error)),
+            2,
+        )
+    })?;
+    if absolute_out == package_root || absolute_out.starts_with(package_root) {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "unsafe_output_path",
+                "message": "native bundle output directory must not be inside the product package root",
+                "out_dir": out_dir.display().to_string(),
+                "package_root": package_root.display().to_string(),
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+    if absolute_out.exists() {
+        let mut entries = fs::read_dir(&absolute_out).map_err(|error| {
+            (
+                io_error_payload(
+                    "build-native-bundle",
+                    io_error_with_path(&absolute_out, error),
+                ),
+                2,
+            )
+        })?;
+        if entries.next().is_some() {
+            return Err((
+                json!({
+                    "status": "error",
+                    "command": "build-native-bundle",
+                    "diagnostic_code": "output_dir_not_empty",
+                    "message": "native bundle output directory must be empty to avoid stale package/report artifacts",
+                    "out_dir": absolute_out.display().to_string(),
+                    "implemented": true,
+                    "product_alpha1_ready": false,
+                    "final_public_api_frozen": false
+                }),
+                2,
+            ));
+        }
+    }
+    Ok(absolute_out)
+}
+
+fn absolute_output_path(path: &Path) -> Result<PathBuf, io::Error> {
+    if path.exists() {
+        return fs::canonicalize(path);
+    }
+    let parent = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty());
+    let parent = parent.unwrap_or_else(|| Path::new("."));
+    let parent = fs::canonicalize(parent)?;
+    let name = path.file_name().ok_or_else(|| {
+        io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "native bundle output path has no final directory name",
+        )
+    })?;
+    Ok(parent.join(name))
+}
+
+fn copy_current_cli_binary(destination: &Path) -> Result<(), io::Error> {
+    let source = env::current_exe()?;
+    fs::copy(source, destination)?;
+    make_executable(destination)
+}
+
+fn copy_declared_package_bundle(
+    package_root: &Path,
+    package: &ProductAlpha1Package,
+    destination: &Path,
+) -> Result<NativeBundlePackageSummary, io::Error> {
+    fs::create_dir_all(destination)?;
+    let mut copied = Vec::new();
+    copy_package_file(
+        &package_root.join("package.mir.json"),
+        &destination.join("package.mir.json"),
+        "package.mir.json",
+        &mut copied,
+    )?;
+    for dependency in &package.dependencies {
+        let dependency_relative = safe_package_dependency_path(dependency)?;
+        let dependency_package_path = package_root.join(&dependency_relative);
+        let dependency = load_product_alpha1_package_path(&dependency_package_path)
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error.to_string()))?;
+        if dependency.native_policy.execution_policy != "disabled" {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!(
+                    "dependency `{}` has unsupported native execution policy `{}`",
+                    dependency.package_id, dependency.native_policy.execution_policy
+                ),
+            ));
+        }
+        let dependency_is_dir = dependency_package_path.is_dir();
+        let source_package_file = if dependency_is_dir {
+            dependency_package_path.join("package.mir.json")
+        } else {
+            dependency_package_path
+        };
+        let dest_relative = if dependency_is_dir {
+            dependency_relative.join("package.mir.json")
+        } else {
+            dependency_relative
+        };
+        let destination_package_file = destination.join(&dest_relative);
+        copy_package_file(
+            &source_package_file,
+            &destination_package_file,
+            &dest_relative.display().to_string(),
+            &mut copied,
+        )?;
+    }
+    copied.sort();
+    copied.dedup();
+    Ok(NativeBundlePackageSummary {
+        copied_relative_paths: copied,
+        all_native_policies_disabled: true,
+    })
+}
+
+fn safe_package_dependency_path(dependency: &str) -> Result<PathBuf, io::Error> {
+    let path = Path::new(dependency);
+    if path.is_absolute()
+        || path
+            .components()
+            .any(|component| matches!(component, std::path::Component::ParentDir))
+    {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!("unsafe dependency path `{dependency}`"),
+        ));
+    }
+    Ok(path.to_path_buf())
+}
+
+fn copy_package_file(
+    source: &Path,
+    destination: &Path,
+    relative: &str,
+    copied: &mut Vec<String>,
+) -> Result<(), io::Error> {
+    if let Some(parent) = destination.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    fs::copy(source, destination)?;
+    copied.push(relative.replace('\\', "/"));
+    Ok(())
+}
+
+fn make_executable(path: &Path) -> Result<(), io::Error> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+
+        let mut permissions = fs::metadata(path)?.permissions();
+        permissions.set_mode(0o755);
+        fs::set_permissions(path, permissions)?;
+    }
+    #[cfg(not(unix))]
+    {
+        let _ = path;
+    }
+    Ok(())
+}
+
+fn io_error_with_path(path: &Path, error: io::Error) -> io::Error {
+    io::Error::new(error.kind(), format!("{}: {}", path.display(), error))
+}
+
+fn native_bundle_report_paths(attach_included: bool) -> Vec<String> {
+    let mut paths = vec![
+        "reports/check.json".to_string(),
+        "reports/run-local.json".to_string(),
+        "reports/save.json".to_string(),
+        "reports/quiescent-save.json".to_string(),
+        "reports/transport-local.json".to_string(),
+        "reports/export-devtools.json".to_string(),
+        "reports/run-script-check.json".to_string(),
+        "reports/run-script-view.json".to_string(),
+        "reports/verification-report.json".to_string(),
+    ];
+    if attach_included {
+        paths.insert(2, "reports/attach-debug-layer.json".to_string());
+    }
+    paths
+}
+
+fn native_bundle_manifest_payload(
+    package: &ProductAlpha1Package,
+    check_report: &ProductAlpha1CheckReport,
+    binary_path: &Path,
+    package_bundle_dir: &Path,
+    devtools_dir: &Path,
+    report_paths: &[String],
+    bundle_id: &str,
+    package_summary: &NativeBundlePackageSummary,
+) -> Value {
+    json!({
+        "surface_kind": "product_alpha1_native_launch_bundle_manifest",
+        "bundle_schema": "mirrorea-product-alpha1-native-launch-bundle-v0",
+        "bundle_id": bundle_id,
+        "built_at": "local-alpha-build",
+        "runtime_binary": {
+            "path": "bin/mirrorea-alpha",
+            "kind": "compiled_rust_cli",
+            "host_path": binary_path.display().to_string(),
+            "fnv64": stable_file_hash(binary_path).unwrap_or_else(|_| "unavailable".to_string())
+        },
+        "package": {
+            "path": format!("packages/{}", sanitize_session_id(&package.package_id)),
+            "host_path": package_bundle_dir.display().to_string(),
+            "package_id": package.package_id,
+            "package_version": package.package_version,
+            "package_kind": package.package_kind,
+            "schema_version": package.schema_version,
+            "checker_verdict": check_report.verdict,
+            "copied_paths": package_summary.copied_relative_paths.clone(),
+            "native_policies_disabled": package_summary.all_native_policies_disabled
+        },
+        "devtools": {
+            "path": "devtools",
+            "host_path": devtools_dir.display().to_string(),
+            "bundle_path": "devtools/bundle.json",
+            "html_path": "devtools/index.html",
+            "viewer_mode": "product_alpha1_nonfinal_static_html_viewer"
+        },
+        "reports": report_paths.iter().map(|path| json!({"path": path})).collect::<Vec<_>>(),
+        "launch": {
+            "script": "run.sh",
+            "metadata": "launch.json",
+            "default_command": "check",
+            "supported_script_commands": ["check", "view"],
+            "cli_demo_command_claimed": false
+        },
+        "native_execution_policy": {
+            "NativeExecutionPolicy": "Disabled",
+            "package_native_execution_claimed": false,
+            "arbitrary_native_execution_supported": false,
+            "direct_mir_to_machine_code_supported": false,
+            "sandboxed_native_execution_supported": false,
+            "required_for_broader_mode": [
+                "sandbox",
+                "effect/failure containment",
+                "resource limits",
+                "timeout",
+                "audit",
+                "revocation"
+            ]
+        },
+        "signature_policy": {
+            "provenance_only": true,
+            "signature_is_safety_claimed": false,
+            "semantic_safety_source": "checker/runtime validation evidence, not signature metadata"
+        },
+        "non_claims": native_bundle_non_claims(),
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    })
+}
+
+fn native_bundle_launch_payload() -> Value {
+    json!({
+        "surface_kind": "product_alpha1_native_launch_metadata",
+        "script": "run.sh",
+        "default_command": "check",
+        "supported_script_commands": ["check", "view"],
+        "uses_bundled_cli": true,
+        "uses_versioned_package_bundle": true,
+        "uses_observer_safe_devtools_bundle": true,
+        "cli_demo_command_claimed": false,
+        "native_execution_policy": "Disabled",
+        "package_native_execution_claimed": false,
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    })
+}
+
+fn native_bundle_provenance_payload(
+    package: &ProductAlpha1Package,
+    package_root: &Path,
+    binary_path: &Path,
+    package_bundle_dir: &Path,
+) -> Value {
+    json!({
+        "surface_kind": "product_alpha1_native_bundle_provenance",
+        "provenance_only": true,
+        "signature_is_safety_claimed": false,
+        "package_id": package.package_id,
+        "package_version": package.package_version,
+        "source_package_root": package_root.display().to_string(),
+        "bundled_package_root": package_bundle_dir.display().to_string(),
+        "runtime_binary_path": binary_path.display().to_string(),
+        "runtime_binary_fnv64": stable_file_hash(binary_path).unwrap_or_else(|_| "unavailable".to_string()),
+        "semantic_safety_source": "product alpha checker/runtime reports",
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    })
+}
+
+fn native_bundle_verification_payload(
+    package: &ProductAlpha1Package,
+    manifest: &Value,
+    run_script_check: &Value,
+    run_script_view: &Value,
+    report_paths: &[String],
+    package_summary: &NativeBundlePackageSummary,
+) -> Value {
+    json!({
+        "surface_kind": "product_alpha1_native_bundle_verification_report",
+        "status": "accepted",
+        "package_id": package.package_id,
+        "bundle_schema": manifest["bundle_schema"].clone(),
+        "NativeExecutionPolicy": "Disabled",
+        "native_execution_policy": "Disabled",
+        "package_native_execution_claimed": false,
+        "arbitrary_native_execution_supported": false,
+        "direct_mir_to_machine_code_supported": false,
+        "signature_is_safety_claimed": false,
+        "provenance_only": true,
+        "run_script_check_included": run_script_check["status"] == "accepted" || run_script_check["verdict"] == "accepted",
+        "run_script_view_check_included": run_script_view["status"] == "accepted",
+        "run_script_demo_path_included": false,
+        "cli_demo_command_claimed": false,
+        "release_demo_command_deferred": true,
+        "manifest_carries_non_claims": true,
+        "bundle_admits_only_disabled_native_policies": package_summary.all_native_policies_disabled,
+        "arbitrary_native_execution_negative_probe_included": false,
+        "native_policy_admission_source": "checked copied package set and build-time disabled-policy rejection",
+        "report_paths": report_paths,
+        "non_claims": native_bundle_non_claims(),
+        "product_alpha1_ready": false,
+        "final_public_api_frozen": false
+    })
+}
+
+fn native_bundle_non_claims() -> Vec<&'static str> {
+    vec![
+        "not direct Mir-to-machine-code",
+        "not arbitrary native package execution",
+        "not signature-is-safety",
+        "not final public CLI/API/ABI",
+        "not final public viewer or telemetry service",
+        "not WAN/federation",
+        "not distributed durable save/load",
+    ]
+}
+
+fn native_bundle_run_script() -> &'static str {
+    r#"#!/usr/bin/env sh
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+BIN="$ROOT/bin/mirrorea-alpha"
+REPORTS="$ROOT/reports"
+PACKAGE_DIR=$(find "$ROOT/packages" -mindepth 1 -maxdepth 1 -type d | sort | sed -n '1p')
+if [ -z "$PACKAGE_DIR" ]; then
+  echo "no bundled product alpha package found" >&2
+  exit 2
+fi
+mkdir -p "$REPORTS"
+COMMAND=${1:-check}
+case "$COMMAND" in
+  check)
+    "$BIN" check "$PACKAGE_DIR" --format json > "$REPORTS/run-script-check.json"
+    cat "$REPORTS/run-script-check.json"
+    ;;
+  view)
+    "$BIN" view "$ROOT/devtools" --check --format json > "$REPORTS/run-script-view.json"
+    cat "$REPORTS/run-script-view.json"
+    ;;
+  *)
+    echo "unsupported native bundle run command: $COMMAND" >&2
+    exit 2
+    ;;
+esac
+"#
+}
+
+fn native_bundle_readme(package_id: &str, package_version: &str) -> String {
+    format!(
+        "# Mirrorea Product Alpha-1 Native Host Launch Bundle\n\nPackage: `{package_id}` `{package_version}`.\n\nThis bundle contains the compiled Rust `mirrorea-alpha` CLI, the versioned product package files, observer-safe devtools viewer assets, validation reports, launch metadata, and provenance metadata.\n\nRun `./run.sh check` to validate the bundled package or `./run.sh view` to validate the bundled viewer. Inspect `devtools/index.html` locally for the static viewer and `devtools/bundle.json` for the observer-safe data bundle.\n\nNativeExecutionPolicy is `Disabled`. This is not direct Mir-to-machine-code, not arbitrary native package execution, not a signature-is-safety claim, and not the P-A1-31 CLI `demo` release walkthrough.\n"
+    )
+}
+
+fn run_native_bundle_script(run_script_path: &Path, command: &str) -> Result<Value, (Value, i32)> {
+    let completed = Command::new("sh")
+        .arg(run_script_path)
+        .arg(command)
+        .output()
+        .map_err(|error| {
+            (
+                io_error_payload(
+                    "build-native-bundle",
+                    io_error_with_path(run_script_path, error),
+                ),
+                2,
+            )
+        })?;
+    if !completed.status.success() {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "native_bundle_run_script_failed",
+                "run_script_command": command,
+                "stdout": String::from_utf8_lossy(&completed.stdout),
+                "stderr": String::from_utf8_lossy(&completed.stderr),
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    }
+    serde_json::from_slice(&completed.stdout).map_err(|error| {
+        (
+            json!({
+                "status": "error",
+                "command": "build-native-bundle",
+                "diagnostic_code": "native_bundle_run_script_invalid_json",
+                "run_script_command": command,
+                "message": error.to_string(),
+                "stdout": String::from_utf8_lossy(&completed.stdout),
+                "implemented": true,
+                "product_alpha1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        )
+    })
+}
+
+fn stable_file_hash(path: &Path) -> Result<String, io::Error> {
+    let bytes = fs::read(path)?;
+    Ok(stable_bytes_hash(&bytes))
+}
+
 fn read_product_alpha1_viewer_bundle(path: &Path) -> Result<ProductAlpha1DevtoolsBundle, String> {
     let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
     if observer_safe_bundle_text_contains_forbidden_keys(&text) {
@@ -1496,8 +2513,12 @@ fn sanitize_session_id(session_id: &str) -> String {
 }
 
 fn stable_session_id_hash(session_id: &str) -> String {
+    stable_bytes_hash(session_id.as_bytes())
+}
+
+fn stable_bytes_hash(bytes: &[u8]) -> String {
     let mut hash = 0xcbf29ce484222325_u64;
-    for byte in session_id.as_bytes() {
+    for byte in bytes {
         hash ^= u64::from(*byte);
         hash = hash.wrapping_mul(0x100000001b3);
     }
