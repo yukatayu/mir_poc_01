@@ -26,6 +26,18 @@ IMPLEMENTED_ROWS: list[dict[str, str]] = [
         "package_dir": "samples/practical-alpha1/packages/run-02-stale-membership-rejected",
         "expected_report": "samples/practical-alpha1/expected/run-02-stale-membership-rejected.expected.json",
     },
+    {
+        "sample_id": "RUN-03",
+        "summary": "reject local dispatch when claimed capability inventory is insufficient",
+        "package_dir": "samples/practical-alpha1/packages/run-03-missing-capability-rejected",
+        "expected_report": "samples/practical-alpha1/expected/run-03-missing-capability-rejected.expected.json",
+    },
+    {
+        "sample_id": "RUN-04",
+        "summary": "reject local dispatch when a required witness is missing",
+        "package_dir": "samples/practical-alpha1/packages/run-04-missing-witness-rejected",
+        "expected_report": "samples/practical-alpha1/expected/run-04-missing-witness-rejected.expected.json",
+    },
 ]
 
 STOP_LINES = [

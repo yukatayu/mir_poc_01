@@ -15,6 +15,12 @@ class PracticalAlpha1RunLocalTests(unittest.TestCase):
     def sidecar_path(self, relative: str) -> Path:
         return REPO_ROOT / relative
 
+    def test_active_runtime_rows_cover_operational_alpha05_negatives(self) -> None:
+        self.assertEqual(
+            [row["sample_id"] for row in runner.IMPLEMENTED_ROWS],
+            ["RUN-01", "RUN-02", "RUN-03", "RUN-04"],
+        )
+
     def test_list_samples_matches_runtime_rows(self) -> None:
         rows = runner.list_samples()
         self.assertEqual(

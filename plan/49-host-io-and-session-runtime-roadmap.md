@@ -18,20 +18,21 @@ current practical line already has:
 - save/load report
 - exact devtools bundles
 - product-preview bundles
+- bounded session runtime carrier (`practical_alpha05_session`)
 
 current practical line still lacks:
 
-- coherent session carrier
 - host input -> transform -> host output direct execution lane
-- session-bound attach / observe / save / load workflow
+- same-session typed host-I/O against the new carrier
+- session-bound attach mutation
 
 ## why this is a separate roadmap
 
-without session carrier:
+with only the bounded session carrier and no host-I/O lane:
 
-- α-0.5 stays fragmented
-- α-0.8 same-session hot-plug cannot be stated honestly
-- α-0.9 session-bound devtools cannot be stated honestly
+- α-0.5 stays below completion
+- α-0.8 same-session hot-plug still lacks an external execution seam
+- α-0.9 session-bound devtools still lacks richer live sources
 
 without typed host-I/O lane:
 
@@ -42,7 +43,11 @@ without typed host-I/O lane:
 
 ### 1. `P-A1-19` — session runtime carrier
 
-deliver:
+status:
+
+- actualized
+
+delivered:
 
 - session id
 - session state carrier
@@ -83,6 +88,6 @@ P-A1-18 only freezes the roadmap and category boundary.
 
 current recommendation:
 
-- reopen with `P-A1-19`
-- keep `P-A1-20` immediately behind it
+- reopen with `P-A1-20`
+- keep `P-A1-21` immediately behind it
 - do not jump directly to `P-A1-21`

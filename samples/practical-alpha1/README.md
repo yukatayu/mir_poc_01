@@ -11,6 +11,8 @@ This root is the current practical alpha-1 first-floor front-door plus first che
   package fixtures with `alpha_local_checker_input` plus expected checker reports.
 - `P-A1-03` adds the first local-runtime cut here:
   checked package fixtures with `alpha_local_runtime_input` plus expected local-runtime reports.
+- `P-A1-19` widens the local-runtime evidence and adds the first bounded α-0.5 session carrier here:
+  `RUN-03/04` add local missing-capability and missing-witness rejects, and `scripts/practical_alpha05_session.py` / `crates/mir-runtime::practical_alpha05_session` bind checked runtime execution, observer-safe session export, and local save/load frontier into one same-session carrier without yet claiming typed host-I/O completion.
 - `P-A1-04a` adds the first practical hot-plug cut here:
   layer package fixtures with `alpha_local_hotplug_input` plus exact expected hot-plug reports.
 - `P-A1-04b` widens the same practical hot-plug cut here:
@@ -63,6 +65,8 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - `packages/run-*/`
   - `RUN-01`: checked practical Sugoroku-style local dispatch with event DAG export
   - `RUN-02`: stale-membership rejection before local state mutation
+  - `RUN-03`: missing-capability rejection before local state mutation
+  - `RUN-04`: missing-witness rejection before local state mutation
 - `packages/hp-a1-*/`
   - `HP-A1-01`: debug layer attach accepted through manifest-driven hot-plug plan
   - `HP-A1-02`: non-admin debug attach rejected before activation cut
@@ -121,14 +125,14 @@ This root is the current practical alpha-1 first-floor front-door plus first che
 - The current front-door reads only `package.mir.json`.
 - Textual `.mir` source remains later work.
 - The current checker floor is non-final and checker-only.
-- The current local-runtime floor is also non-final and is limited to `RUN-01/02`.
+- The current local-runtime floor is also non-final and is limited to `RUN-01..04`.
 - The current hot-plug floor is also non-final and is currently limited to `HP-A1-01..05`, `HP-A1-04B1`, `HP-A1-04B2`, `HP-A1-06`, and `HP-A1-07`.
 - The current transport floor is also non-final and is currently limited to `TR-A1-01..07`.
 - The current devtools-export floor is also non-final and is currently limited to `VIS-A1-01/02/03/04/05/06/07`.
 - The current local save/load floor is also non-final and is currently limited to `SL-A1-01/02/03`.
 - The current avatar-preview floor is also non-final and is currently limited to `AV-A1-01/02/03`.
 - The current product-preview floor is also non-final and is currently limited to `PE2E-01..09`.
-- The current root is a first-floor toolchain family, not a same-session operational runtime.
+- The current root is still the first-floor fixture family; `practical_alpha05_session` now consumes it through a same-session carrier, but typed host-I/O direct execution and same-session hot-plug remain separate later gates.
 - Checked packages are lowered through a distinct runtime-plan carrier before local runtime execution.
 - Checked layer packages are lowered through a distinct hotplug-plan carrier before hot-plug report assembly.
 - Checked avatar packages are lowered through a distinct hotplug-plan boundary and exact hot-plug source reports before avatar preview report assembly.

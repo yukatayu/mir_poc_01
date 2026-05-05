@@ -407,6 +407,8 @@ pub struct PracticalAlpha1RuntimeEnvelope {
     pub capability_requirements: Vec<String>,
     pub authorization_checks: Vec<String>,
     pub witness_refs: Vec<String>,
+    #[serde(default)]
+    pub required_witness_refs: Vec<String>,
     pub dispatch_outcome: String,
     pub notes: Vec<String>,
 }

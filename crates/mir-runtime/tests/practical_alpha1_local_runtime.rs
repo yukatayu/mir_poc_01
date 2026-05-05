@@ -64,6 +64,38 @@ fn practical_local_runtime_matches_run_02_expected_report() {
 }
 
 #[test]
+fn practical_local_runtime_matches_run_03_expected_report() {
+    let observed = run_practical_alpha1_local_runtime_path(practical_package_dir(
+        "run-03-missing-capability-rejected",
+    ))
+    .expect("RUN-03 practical package should run through the practical local runtime floor");
+    let expected = read_expected_report("run-03-missing-capability-rejected.expected.json");
+
+    assert_eq!(observed, expected);
+    assert_eq!(
+        observed.dispatch_records[0].dispatch_outcome,
+        "rejected_missing_capability"
+    );
+    assert_eq!(observed.reason_family.as_deref(), Some("authorization"));
+}
+
+#[test]
+fn practical_local_runtime_matches_run_04_expected_report() {
+    let observed = run_practical_alpha1_local_runtime_path(practical_package_dir(
+        "run-04-missing-witness-rejected",
+    ))
+    .expect("RUN-04 practical package should run through the practical local runtime floor");
+    let expected = read_expected_report("run-04-missing-witness-rejected.expected.json");
+
+    assert_eq!(observed, expected);
+    assert_eq!(
+        observed.dispatch_records[0].dispatch_outcome,
+        "rejected_missing_witness"
+    );
+    assert_eq!(observed.reason_family.as_deref(), Some("witness"));
+}
+
+#[test]
 fn practical_local_runtime_rejects_front_door_only_package_without_runtime_section() {
     let error =
         run_practical_alpha1_local_runtime_path(practical_package_dir("src-01-minimal-world"))

@@ -3,7 +3,7 @@
   "scope_kind": "alpha_local",
   "runtime_scope": "practical-alpha1-local-runtime-floor",
   "runtime_plan_scope": "practical-alpha1-runtime-plan-floor",
-  "package_id": "run-01-local-sugoroku",
+  "package_id": "run-03-missing-capability-rejected",
   "world_id": "practical_sugoroku_world",
   "entry_place": "GamePlace[SugorokuGame#1]",
   "queue_kind": "in_process_fifo",
@@ -80,8 +80,7 @@
         "claimed_authority": "SugorokuDiceOwner",
         "claimed_capabilities": [
           "RollDice",
-          "PublishRoll",
-          "HandoffTurn"
+          "PublishRoll"
         ]
       },
       "auth_evidence": null,
@@ -118,30 +117,22 @@
       "from_place": "ParticipantPlace[Alice]",
       "to_place": "GamePlace[SugorokuGame#1]",
       "payload_kind": "sugoroku_roll_request",
-      "dispatch_outcome": "accepted",
+      "dispatch_outcome": "rejected_missing_capability",
       "checked_membership_epoch": 0,
       "checked_member_incarnation": 0,
       "queue_depth_before": 1,
       "queue_depth_after": 0,
       "reason_refs": [
-        "membership_frontier_current",
-        "destination_registered",
-        "capability_sufficient",
-        "required_witnesses_present",
-        "local_queue_dispatch_ready"
+        "missing_capability:HandoffTurn"
       ],
       "generated_event_refs": [
-        "roll_commit#1",
-        "publish_roll#1",
-        "witness_draw_pub#1",
-        "handoff_turn#1"
+        "reject_missing_capability#1"
       ],
       "witness_refs": [
         "game_started_witness"
       ],
       "notes": [
-        "practical checked package dispatches through the local queue/runtime-plan seam",
-        "publish/witness/handoff remain explicit runtime-side events"
+        "dispatch is rejected before roll/publish/handoff because claimed capabilities are insufficient"
       ]
     }
   ],
@@ -149,70 +140,24 @@
     "scope": "practical_local_event_dag_export_hook",
     "nodes": [
       {
-        "event_id": "roll_commit#1",
-        "event_kind": "roll_commit",
+        "event_id": "reject_missing_capability#1",
+        "event_kind": "dispatch_reject",
         "place_ref": "GamePlace[SugorokuGame#1]",
         "envelope_ref": "roll_request#1",
         "notes": [
-          "practical local runtime accepts Alice's roll request"
-        ]
-      },
-      {
-        "event_id": "publish_roll#1",
-        "event_kind": "publish",
-        "place_ref": "GamePlace[SugorokuGame#1]",
-        "envelope_ref": "roll_request#1",
-        "notes": [
-          "roll result is published into visible history"
-        ]
-      },
-      {
-        "event_id": "witness_draw_pub#1",
-        "event_kind": "witness",
-        "place_ref": "GamePlace[SugorokuGame#1]",
-        "envelope_ref": "roll_request#1",
-        "notes": [
-          "published roll creates witness draw_pub#1"
-        ]
-      },
-      {
-        "event_id": "handoff_turn#1",
-        "event_kind": "handoff",
-        "place_ref": "ParticipantPlace[Bob]",
-        "envelope_ref": "roll_request#1",
-        "notes": [
-          "turn ownership moves from Alice to Bob"
+          "claimed capabilities are checked before roll/publish/handoff"
         ]
       }
     ],
-    "edges": [
-      {
-        "from_event": "roll_commit#1",
-        "to_event": "publish_roll#1",
-        "relation": "publication_order"
-      },
-      {
-        "from_event": "publish_roll#1",
-        "to_event": "witness_draw_pub#1",
-        "relation": "witness_order"
-      },
-      {
-        "from_event": "witness_draw_pub#1",
-        "to_event": "handoff_turn#1",
-        "relation": "handoff_order"
-      }
-    ],
+    "edges": [],
     "notes": [
-      "event DAG export remains a non-public report hook, not a final public devtools schema"
+      "negative practical runtime row records rejection without mutating local game state"
     ]
   },
-  "current_owner": "Bob",
-  "visible_history": [
-    "publish roll_result(Alice, 4) witness=draw_pub#1",
-    "handoff dice_owner Alice -> Bob using witness=draw_pub#1"
-  ],
-  "terminal_outcome": "accepted",
-  "reason_family": null,
+  "current_owner": "Alice",
+  "visible_history": [],
+  "terminal_outcome": "rejected",
+  "reason_family": "authorization",
   "retained_later_refs": [
     "docker_transport_execution",
     "package_hotplug_execution",

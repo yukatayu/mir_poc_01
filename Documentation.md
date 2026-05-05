@@ -62,9 +62,10 @@ OS/network substrate
 - **alpha-0 evidence line**
   `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence closeout を担います。Stage A..F は `100% current-scope evidence closeout` であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
 - **practical alpha-1 first-floor line**
-  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01/02`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
+  `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を担います。`RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は current repo state で actualize 済みですが、いずれも `100% first-floor closeout` として読むべきであり、same-session runtime completion を意味しません。
 - **operational alpha theory-freeze line**
   `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness の completion condition を固定します。2026-05-05 時点の latest closeout `P-A1-18` はこの bounded theory freeze を行う package です。
+  `P-A1-19` では `crates/mir-runtime::practical_alpha05_session` と `scripts/practical_alpha05_session.py` によって、accepted local dispatch / observe / save / load を同一 session carrier へ束ねる bounded α-0.5 surface が actualize されました。
 
 ## いま何があり、何がまだ無いか
 
@@ -77,9 +78,7 @@ OS/network substrate
 
 まだ無いもの:
 
-- `PracticalAlphaSession` に相当する **same-session carrier**
 - typed external host-I/O direct execution lane
-- α-0.5 session 上での unified check -> runtime plan -> run -> observe -> save/load loop
 - α-0.8 same-session hot-plug runtime
 - α-0.9 live/session-bound devtools export
 

@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeSet,
     collections::VecDeque,
     fmt,
     path::{Path, PathBuf},
@@ -126,6 +127,7 @@ struct DispatchEvaluation {
     reason_refs: Vec<String>,
     checked_membership_epoch: u64,
     checked_member_incarnation: u64,
+    reason_family: Option<String>,
 }
 
 pub fn run_practical_alpha1_local_runtime_path(
@@ -191,11 +193,18 @@ fn execute_plan(
     let queued = queue
         .pop_front()
         .ok_or_else(|| MirroreaCoreError::new("runtime-plan floor requires one queued envelope"))?;
+    let queued_plan = plan.initial_envelopes.first().ok_or_else(|| {
+        MirroreaCoreError::new("runtime-plan floor requires one initial envelope")
+    })?;
     let queue_depth_before = 1;
-    let evaluation = evaluate_dispatch(&shell, &queued)?;
+    let evaluation = evaluate_dispatch(
+        &shell,
+        &queued,
+        &required_witness_refs_for_runtime(queued_plan),
+    )?;
     let dispatch_record =
         build_dispatch_record(plan, &queued, &evaluation, queue_depth_before, queue.len());
-    let (current_owner, visible_history, event_dag, reason_family) =
+    let (current_owner, visible_history, event_dag) =
         build_runtime_observations(plan, &queued, &evaluation);
     let terminal_outcome = if evaluation.dispatch_outcome == "accepted" {
         "accepted".to_string()
@@ -221,7 +230,7 @@ fn execute_plan(
         current_owner,
         visible_history,
         terminal_outcome,
-        reason_family,
+        reason_family: evaluation.reason_family.clone(),
         retained_later_refs: retained_later_refs_default(),
         stop_lines: stop_lines_default(),
         limitations: limitations_default(),
@@ -279,6 +288,7 @@ fn message_envelope_from_plan(
 fn evaluate_dispatch(
     shell: &LogicalPlaceRuntimeShell,
     envelope: &MessageEnvelope,
+    required_witness_refs: &[String],
 ) -> Result<DispatchEvaluation, MirroreaCoreError> {
     envelope.validate()?;
     let snapshot = shell.snapshot();
@@ -288,6 +298,7 @@ fn evaluate_dispatch(
             vec!["missing_emitter_membership".to_string()],
             snapshot.membership.membership_epoch,
             0,
+            Some("membership_freshness".to_string()),
         ));
     };
     if !member.active {
@@ -296,6 +307,7 @@ fn evaluate_dispatch(
             vec!["inactive_emitter_membership".to_string()],
             snapshot.membership.membership_epoch,
             member.incarnation,
+            Some("membership_freshness".to_string()),
         ));
     }
     if member.place != envelope.from_place
@@ -306,6 +318,7 @@ fn evaluate_dispatch(
             vec!["emitter_place_drift".to_string()],
             snapshot.membership.membership_epoch,
             member.incarnation,
+            Some("membership_freshness".to_string()),
         ));
     }
     if snapshot.membership.membership_epoch != envelope.membership_epoch {
@@ -314,6 +327,7 @@ fn evaluate_dispatch(
             vec!["membership_epoch_drift".to_string()],
             snapshot.membership.membership_epoch,
             member.incarnation,
+            Some("membership_freshness".to_string()),
         ));
     }
     if member.incarnation != envelope.member_incarnation {
@@ -322,6 +336,7 @@ fn evaluate_dispatch(
             vec!["member_incarnation_drift".to_string()],
             snapshot.membership.membership_epoch,
             member.incarnation,
+            Some("membership_freshness".to_string()),
         ));
     }
     if !snapshot
@@ -334,6 +349,51 @@ fn evaluate_dispatch(
             vec!["unknown_destination_place".to_string()],
             snapshot.membership.membership_epoch,
             member.incarnation,
+            Some("routing".to_string()),
+        ));
+    }
+
+    let claimed_capabilities: BTreeSet<_> = envelope
+        .principal_claim
+        .claimed_capabilities
+        .iter()
+        .cloned()
+        .collect();
+    let required_capabilities: BTreeSet<_> =
+        envelope.capability_requirements.iter().cloned().collect();
+    let missing_capabilities: Vec<String> = required_capabilities
+        .difference(&claimed_capabilities)
+        .cloned()
+        .collect();
+    if !missing_capabilities.is_empty() {
+        return Ok(rejected_evaluation(
+            "rejected_missing_capability",
+            missing_capabilities
+                .into_iter()
+                .map(|capability| format!("missing_capability:{capability}"))
+                .collect(),
+            snapshot.membership.membership_epoch,
+            member.incarnation,
+            Some("authorization".to_string()),
+        ));
+    }
+
+    let actual_witness_refs: BTreeSet<_> = envelope.witness_refs.iter().cloned().collect();
+    let required_witness_refs: BTreeSet<_> = required_witness_refs.iter().cloned().collect();
+    let missing_witness_refs: Vec<String> = required_witness_refs
+        .difference(&actual_witness_refs)
+        .cloned()
+        .collect();
+    if !missing_witness_refs.is_empty() {
+        return Ok(rejected_evaluation(
+            "rejected_missing_witness",
+            missing_witness_refs
+                .into_iter()
+                .map(|witness| format!("missing_witness:{witness}"))
+                .collect(),
+            snapshot.membership.membership_epoch,
+            member.incarnation,
+            Some("witness".to_string()),
         ));
     }
 
@@ -342,10 +402,13 @@ fn evaluate_dispatch(
         reason_refs: vec![
             "membership_frontier_current".to_string(),
             "destination_registered".to_string(),
+            "capability_sufficient".to_string(),
+            "required_witnesses_present".to_string(),
             "local_queue_dispatch_ready".to_string(),
         ],
         checked_membership_epoch: snapshot.membership.membership_epoch,
         checked_member_incarnation: member.incarnation,
+        reason_family: None,
     })
 }
 
@@ -354,12 +417,14 @@ fn rejected_evaluation(
     reason_refs: Vec<String>,
     checked_membership_epoch: u64,
     checked_member_incarnation: u64,
+    reason_family: Option<String>,
 ) -> DispatchEvaluation {
     DispatchEvaluation {
         dispatch_outcome: dispatch_outcome.to_string(),
         reason_refs,
         checked_membership_epoch,
         checked_member_incarnation,
+        reason_family,
     }
 }
 
@@ -385,6 +450,20 @@ fn build_dispatch_record(
                 "practical checked package dispatches through the local queue/runtime-plan seam"
                     .to_string(),
                 "publish/witness/handoff remain explicit runtime-side events".to_string(),
+            ],
+        ),
+        (_, "rejected_missing_capability") => (
+            vec!["reject_missing_capability#1".to_string()],
+            vec![
+                "dispatch is rejected before roll/publish/handoff because claimed capabilities are insufficient"
+                    .to_string(),
+            ],
+        ),
+        (_, "rejected_missing_witness") => (
+            vec!["reject_missing_witness#1".to_string()],
+            vec![
+                "dispatch is rejected before roll/publish/handoff because a required witness is missing"
+                    .to_string(),
             ],
         ),
         _ => (
@@ -418,7 +497,7 @@ fn build_runtime_observations(
     plan: &PracticalAlpha1RuntimePlan,
     envelope: &MessageEnvelope,
     evaluation: &DispatchEvaluation,
-) -> (String, Vec<String>, EventDagExport, Option<String>) {
+) -> (String, Vec<String>, EventDagExport) {
     match (&plan.dispatch_program, evaluation.dispatch_outcome.as_str()) {
         (
             mir_ast::practical_alpha1::PracticalAlpha1RuntimeDispatchProgram::SugorokuRollHandoff {
@@ -502,7 +581,47 @@ fn build_runtime_observations(
                         .to_string(),
                 ],
             };
-            (handoff_target.clone(), visible_history, event_dag, None)
+            (handoff_target.clone(), visible_history, event_dag)
+        }
+        (_, "rejected_missing_capability") => {
+            let event_dag = EventDagExport {
+                scope: "practical_local_event_dag_export_hook".to_string(),
+                nodes: vec![EventDagNode {
+                    event_id: "reject_missing_capability#1".to_string(),
+                    event_kind: "dispatch_reject".to_string(),
+                    place_ref: plan.entry_place.clone(),
+                    envelope_ref: Some(envelope.envelope_id.clone()),
+                    notes: vec![
+                        "claimed capabilities are checked before roll/publish/handoff".to_string(),
+                    ],
+                }],
+                edges: Vec::new(),
+                notes: vec![
+                    "negative practical runtime row records rejection without mutating local game state"
+                        .to_string(),
+                ],
+            };
+            (envelope.emitter_principal.clone(), Vec::new(), event_dag)
+        }
+        (_, "rejected_missing_witness") => {
+            let event_dag = EventDagExport {
+                scope: "practical_local_event_dag_export_hook".to_string(),
+                nodes: vec![EventDagNode {
+                    event_id: "reject_missing_witness#1".to_string(),
+                    event_kind: "dispatch_reject".to_string(),
+                    place_ref: plan.entry_place.clone(),
+                    envelope_ref: Some(envelope.envelope_id.clone()),
+                    notes: vec![
+                        "required witnesses are checked before roll/publish/handoff".to_string(),
+                    ],
+                }],
+                edges: Vec::new(),
+                notes: vec![
+                    "negative practical runtime row records rejection without mutating local game state"
+                        .to_string(),
+                ],
+            };
+            (envelope.emitter_principal.clone(), Vec::new(), event_dag)
         }
         _ => {
             let event_dag = EventDagExport {
@@ -523,13 +642,18 @@ fn build_runtime_observations(
                         .to_string(),
                 ],
             };
-            (
-                envelope.emitter_principal.clone(),
-                Vec::new(),
-                event_dag,
-                Some("membership_freshness".to_string()),
-            )
+            (envelope.emitter_principal.clone(), Vec::new(), event_dag)
         }
+    }
+}
+
+fn required_witness_refs_for_runtime(
+    envelope: &mir_ast::practical_alpha1::PracticalAlpha1RuntimeEnvelope,
+) -> Vec<String> {
+    if envelope.required_witness_refs.is_empty() {
+        envelope.witness_refs.clone()
+    } else {
+        envelope.required_witness_refs.clone()
     }
 }
 

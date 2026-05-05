@@ -16,16 +16,14 @@ current repo already has:
 
 - practical package input floor
 - first checker floor
-- first local-runtime floor
+- widened first local-runtime floor (`RUN-01..04`)
 - first local save/load floor
 - first devtools export floor
 - product-preview floor
+- bounded session runtime carrier (`practical_alpha05_session`)
 
 current repo still lacks:
 
-- unified session carrier
-- session-bound observe / save / load workflow
-- local missing-capability / missing-witness runtime negatives in the same workflow
 - typed host-I/O direct semantic execution lane
 - beginner-facing reproducible README/hands-on for this full workflow
 
@@ -41,19 +39,26 @@ current repo still lacks:
 
 | Operational need | Existing evidence | Missing for α-0.5 operational readiness |
 |---|---|---|
-| package input | `SRC-01..05` | session workflow connection |
-| checker | `CHK-*` | session-bound check/run handoff |
-| local run | `RUN-01/02` | persistent session carrier |
-| local save/load | `SL-A1-01/02/03` | session-bound save/load commands |
-| event DAG export | `VIS-A1-01` | session export source |
-| observer-safe view | `VIS-A1-06` | session export source |
+| package input | `SRC-01..05` | typed host-I/O lane |
+| checker | `CHK-*` | typed host-I/O lane over the same session |
+| local run | `RUN-01..04` | typed host-I/O lane |
+| local save/load | `SL-A1-01/02/03`, `OA05-01/05` | typed host-I/O lane |
+| event DAG export | `VIS-A1-01`, `OA05-01` | wider session-bound live devtools families |
+| observer-safe view | `VIS-A1-06`, `OA05-01` | wider session-bound live devtools families |
 | typed host-I/O | `EXT-03/04` preview only | direct semantic execution lane |
 
 ## recommended implementation order
 
 ### 1. `P-A1-19` — session runtime carrier
 
-introduce a coherent session carrier such as:
+actualized:
+
+- `crates/mir-runtime::practical_alpha05_session`
+- example `mir_practical_alpha05_session`
+- `scripts/practical_alpha05_session.py`
+- `OA05-01..06` bounded operational matrix rows
+
+implemented carrier shape:
 
 ```text
 PracticalAlphaSession {
@@ -71,7 +76,7 @@ PracticalAlphaSession {
 }
 ```
 
-minimum command family may be named differently, but should cover:
+current command family:
 
 - `start`
 - `observe`
@@ -115,7 +120,7 @@ python3 scripts/practical_alpha05_session.py closeout --format json
 python3 -m unittest scripts.tests.test_practical_alpha05_session
 ```
 
-P-A1-18 does not add these commands; it freezes the requirement only.
+P-A1-19 actualizes the session commands above; `P-A1-20` should add the host-I/O lane and expand validation accordingly.
 
 ## deferred
 
@@ -128,7 +133,7 @@ P-A1-18 does not add these commands; it freezes the requirement only.
 
 recommended next reopen point after `P-A1-18`:
 
-- `P-A1-19` first
-- `P-A1-20` immediately after or as a narrowly staged follow-up
+- `P-A1-20`
+- `P-A1-21` only after `P-A1-20`
 
 `progress.md` / `tasks.md` remain queue authority.
