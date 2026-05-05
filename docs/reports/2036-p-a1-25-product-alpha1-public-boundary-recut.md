@@ -172,6 +172,10 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
+git status --short
+git add README.md Documentation.md progress.md tasks.md samples_progress.md scripts/README.md scripts/check_source_hierarchy.py scripts/tests/test_validate_docs.py scripts/validate_docs.py specs/00-document-map.md specs/18-practical-alpha1-scope.md specs/24-operational-alpha05-alpha08-readiness.md specs/25-product-alpha1-public-boundary.md plan/00-index.md plan/44-practical-alpha1-roadmap.md plan/50-product-alpha1-public-boundary-roadmap.md docs/reports/2036-p-a1-25-product-alpha1-public-boundary-recut.md
+git commit --no-gpg-sign -m "mirrorea: close P-A1-25 product alpha boundary"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -195,6 +199,10 @@ git diff --check
     `Documentation scaffold looks complete. Found 1188 numbered report(s).`
   - `cargo fmt --check` passed.
   - `git diff --check` passed.
+- package commit succeeded:
+  `2660ce8` `mirrorea: close P-A1-25 product alpha boundary`.
+- package push succeeded:
+  `main -> main` on `origin`.
 
 ## What changed in understanding
 
@@ -285,11 +293,11 @@ Proceed with `P-A1-26` alpha CLI / package schema stabilization: add the canonic
 ## Commit / push status
 
 - package commit:
-  pending at report creation.
+  `2660ce8` `mirrorea: close P-A1-25 product alpha boundary`
 - push:
-  pending at report creation.
-- expected follow-up:
-  after validation, commit with `git commit --no-gpg-sign -m "mirrorea: close P-A1-25 product alpha boundary"` and push to `origin/main`; if the report needs commit-hash metadata, update it in a separate docs-only follow-up commit.
+  pushed to `origin/main`.
+- report metadata follow-up:
+  this section was updated after the package commit and will be committed / pushed as docs-only metadata.
 
 ## Sub-agent session close status
 
