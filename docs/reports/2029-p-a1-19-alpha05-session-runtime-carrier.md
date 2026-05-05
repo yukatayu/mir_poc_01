@@ -194,7 +194,8 @@ None.
 
 ## Commit / push status
 
-Pending at report write.
+- Primary package commit: `841773d` (`mirrorea: add alpha05 session runtime carrier`)
+- Push status: pushed to `origin/main`
 
 ## Sub-agent session close status
 
