@@ -20,9 +20,9 @@
   - active canonical runnable root や full toolchain root ではまだない
 - `product-alpha1/`
   product/public alpha-1 sample root
-  - `demo/` is the P-A1-26 versioned schema / CLI fixture root
-  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` is the current validation anchor
-  - this is not yet a same-session product workflow, native launch bundle, viewer, WAN/federation, distributed durable save/load, or final public API
+  - `demo/` is the P-A1-26 versioned schema / CLI fixture root and P-A1-27 local same-session runtime fixture root
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json` and `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json` are current validation anchors
+  - this is not yet local/Docker transport command completion, native launch bundle, viewer, quiescent-save, WAN/federation, distributed durable save/load, or final public API
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -84,8 +84,8 @@
   - current practical devtools export floor は `VIS-A1-01/02/03/04/05/06/07` に限られ、`VIS-A1-03` は exact `SL-A1-02` save-load report から saved frontier / later live membership advance / restored frontier / stale-membership reject を export する membership timeline widening、`VIS-A1-04` は exact practical hotplug reports から attach accepted boundary / membership snapshot / deferred detach boundary を export する observability widening、`VIS-A1-05` は exact `AV-A1-03` avatar preview report から rejected source lane / degraded roles / missing host capability を export する fallback degradation widening、`VIS-A1-07` は exact `SL-A1-02` save-load report に widened した report-local retained-artifact catalog と hit/miss query trace を export する retention-query widening に留まる。これは durable retained-artifact service / remote retrieval / expiry lifecycle を意味しない
 - `product-alpha1/` と `practical-alpha1/` を混同しない
   - `product-alpha1/` は product/public alpha-1 line の source root
-  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture root だけを持つ
-  - same-session runtime、local/Docker product command behavior、quiescent-save、viewer、native launch bundle、release validation は later packages
+  - current repo state では `P-A1-26` の schema / CLI entrypoint fixture と `P-A1-27` の local same-session `run-local` / `session` / `attach` first cut を持つ
+  - local/Docker product command behavior、quiescent-save、viewer、native launch bundle、release validation は later packages
 
 ## current commands
 

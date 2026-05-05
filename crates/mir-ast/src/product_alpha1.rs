@@ -29,8 +29,8 @@ const PRODUCT_ALPHA1_RESIDUALS: &[(&str, &str, &str)] = &[
     ),
     (
         "release_validation",
-        "same_session_product_demo",
-        "same-session product demo is scheduled for P-A1-27..31",
+        "same_session_release_validation",
+        "local run/session/attach first cut exists; transport/save/viewer/native/release validation remains scheduled for P-A1-28..31",
     ),
     (
         "release_validation",
@@ -99,6 +99,8 @@ pub struct ProductAlpha1Package {
     pub retention_policy: ProductAlpha1RetentionPolicy,
     pub message_recovery_policy: ProductAlpha1MessageRecoveryPolicy,
     pub savepoint_policy: ProductAlpha1SavepointPolicy,
+    #[serde(default)]
+    pub runtime_input: ProductAlpha1RuntimeInput,
     pub native_policy: ProductAlpha1NativePolicy,
     pub compatibility: ProductAlpha1CompatibilityPolicy,
 }
@@ -152,6 +154,31 @@ pub struct ProductAlpha1MessageRecoveryPolicy {
 pub struct ProductAlpha1SavepointPolicy {
     pub classes: Vec<String>,
     pub quiescent_required: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1RuntimeInput {
+    #[serde(default)]
+    pub entry_place: Option<String>,
+    #[serde(default)]
+    pub host_io: Option<ProductAlpha1HostIoRuntimeInput>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1HostIoRuntimeInput {
+    pub adapter_kind: String,
+    pub effect_ref: String,
+    pub request_payload: ProductAlpha1HostIoPayload,
+    pub expected_response: ProductAlpha1HostIoPayload,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum ProductAlpha1HostIoPayload {
+    Int { value: i64 },
+    Text { value: String },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -483,6 +510,49 @@ fn validate_package_shape(
         }
     }
 
+    if package.package_kind == "world"
+        && package
+            .effects
+            .iter()
+            .any(|effect| effect == "typed_host_io.add_one")
+    {
+        let Some(host_io) = &package.runtime_input.host_io else {
+            return Err(schema_error(
+                path,
+                "world packages declaring `typed_host_io.add_one` must declare runtime_input.host_io"
+                    .to_string(),
+            ));
+        };
+        if host_io.adapter_kind != "AddOne" {
+            return Err(schema_error(
+                path,
+                "runtime_input.host_io.adapter_kind must be `AddOne` for effect `typed_host_io.add_one`"
+                    .to_string(),
+            ));
+        }
+        if host_io.effect_ref != "typed_host_io.add_one" {
+            return Err(schema_error(
+                path,
+                "runtime_input.host_io.effect_ref must match `typed_host_io.add_one`".to_string(),
+            ));
+        }
+        match (&host_io.request_payload, &host_io.expected_response) {
+            (
+                ProductAlpha1HostIoPayload::Int { value },
+                ProductAlpha1HostIoPayload::Int {
+                    value: expected_value,
+                },
+            ) if *expected_value == value + 1 => {}
+            _ => {
+                return Err(schema_error(
+                    path,
+                    "runtime_input.host_io expected_response must equal AddOne(request_payload)"
+                        .to_string(),
+                ));
+            }
+        }
+    }
+
     Ok(())
 }
 
@@ -571,6 +641,14 @@ fn accepted_obligations(package: &ProductAlpha1Package) -> Vec<ProductAlpha1Acce
             "static_checker",
             "contract_rows",
             "contract declarations accepted",
+        ));
+    }
+
+    if package.runtime_input.host_io.is_some() {
+        rows.push(accepted(
+            "static_checker",
+            "runtime_input_host_io",
+            "typed host-I/O runtime input declaration accepted",
         ));
     }
 

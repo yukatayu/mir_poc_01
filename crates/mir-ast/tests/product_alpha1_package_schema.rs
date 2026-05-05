@@ -53,6 +53,15 @@ const MINIMAL_PRODUCT_PACKAGE: &str = r#"{
     "classes": ["R0", "R2"],
     "quiescent_required": true
   },
+  "runtime_input": {
+    "entry_place": "Place[ProductDemoRoom]",
+    "host_io": {
+      "adapter_kind": "AddOne",
+      "effect_ref": "typed_host_io.add_one",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 42}
+    }
+  },
   "native_policy": {
     "execution_policy": "disabled",
     "provenance_required": true

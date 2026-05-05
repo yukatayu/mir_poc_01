@@ -20,8 +20,6 @@ Current repo already has:
 
 Current repo still lacks product alpha-1:
 
-- product same-session runtime command behavior beyond `check`
-- same-session product demo command path
 - local and Docker transport product command path
 - message failure/recovery checker/runtime report
 - bounded R2 quiescent save implementation
@@ -109,25 +107,42 @@ Non-claim:
 
 ### `P-A1-27` — product demo same-session runtime
 
+Status:
+
+- actualized by `crates/mir-runtime::product_alpha1_session`, `mirrorea-alpha run-local` / `session` / `attach`, and `samples/product-alpha1/demo`
+
 Target:
 
 - extend `samples/product-alpha1/demo/`
-- connect check -> runtime plan -> run-local -> typed host-I/O -> hot-plug -> local/Docker transport -> observe in one session carrier or documented product run directory
+- connect check -> runtime plan -> run-local -> typed host-I/O -> hot-plug -> observe in one local file-backed session carrier
 - preserve exact carrier split from practical and operational lines
+
+Delivered:
+
+- product same-session carrier with event DAG, membership, witness, route, hot-plug lifecycle, host-I/O, save-load placeholder, and message recovery state
+- `mirrorea-alpha run-local` writes the product session to a local session store
+- `mirrorea-alpha session` reads the same persisted session
+- `mirrorea-alpha attach` mutates the same session with the debug-layer package
+- core `MessageEnvelope`, `HotPlugRequest`, and `HotPlugVerdict` validation are used in the product runtime path
+- typed host-I/O `AddOne` is represented as request/response observation in the same event DAG
+- observer-safe export keeps raw witness/auth evidence redacted
 
 Validation:
 
-- product demo workflow command passes
+- product demo `run-local` / `session` / `attach` command path passes
 - same-session state transition evidence exists
-- negative membership / capability / witness behavior remains visible
-- negative auth behavior and explicit contract-update behavior remain visible
-- `transport --mode local` and `transport --mode docker` product paths are implemented or explicitly reported as release blockers
+- membership / capability / witness / auth lanes remain separate in the route and attach decision surfaces
+- save/load and message recovery state are carried but execution remains explicitly residual
+- `transport --mode local` and `transport --mode docker` product paths remain release blockers for later packages
 
 Non-claim:
 
 - no distributed durable save/load
 - no production WAN / federation
 - no accepted detach execution unless explicitly implemented
+- no local/Docker transport command completion
+- no quiescent-save execution
+- no final product viewer or native launch bundle
 
 ### `P-A1-28` — message failure/recovery and quiescent save
 
@@ -277,17 +292,18 @@ cargo test -p mir-runtime -- --nocapture
 cargo test -p mirrorea-core -- --nocapture
 cargo test -p mirrorea-cli -- --nocapture
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json
-cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
-cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json
-cargo run -q -p mirrorea-cli -- session /tmp/mirrorea-alpha1-demo/session --format json
-cargo run -q -p mirrorea-cli -- attach /tmp/mirrorea-alpha1-demo/session samples/product-alpha1/demo/packages/debug-layer --format json
-cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode local --format json
-cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode docker --format json
-cargo run -q -p mirrorea-cli -- save /tmp/mirrorea-alpha1-demo/session --format json
-cargo run -q -p mirrorea-cli -- load /tmp/mirrorea-alpha1-demo/session/savepoints/latest --format json
-cargo run -q -p mirrorea-cli -- export-devtools /tmp/mirrorea-alpha1-demo/session --out /tmp/mirrorea-alpha1-devtools --format json
+tmpdir=$(mktemp -d /tmp/mirrorea-alpha1-demo-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- session 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode local --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport samples/product-alpha1/demo --mode docker --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'session#product-alpha1-demo' --savepoint latest --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out /tmp/mirrorea-alpha1-devtools --format json
 cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-alpha1-devtools --check --format json
-cargo run -q -p mirrorea-cli -- quiescent-save /tmp/mirrorea-alpha1-demo/session --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --format json
 cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-bundle --format json
 python3 scripts/product_alpha1_release_check.py check-all --format json
 ```
@@ -298,7 +314,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- product demo same-session runtime
 - message recovery and quiescent-save bounded implementation
 - product viewer UX
 - native launch bundle
@@ -323,6 +338,6 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- `P-A1-27` product demo same-session runtime
+- `P-A1-28` message failure/recovery + quiescent-save
 
 Queue authority remains `progress.md` / `tasks.md`.

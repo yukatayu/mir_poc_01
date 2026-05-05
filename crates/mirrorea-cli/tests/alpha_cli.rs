@@ -1,6 +1,6 @@
 use std::{
     fs,
-    path::PathBuf,
+    path::{Path, PathBuf},
     process::{Command, Output},
     time::{SystemTime, UNIX_EPOCH},
 };
@@ -51,6 +51,15 @@ const PRODUCT_PACKAGE_JSON: &str = r#"{
     "classes": ["R0", "R2"],
     "quiescent_required": true
   },
+  "runtime_input": {
+    "entry_place": "Place[ProductDemoRoom]",
+    "host_io": {
+      "adapter_kind": "AddOne",
+      "effect_ref": "typed_host_io.add_one",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 42}
+    }
+  },
   "native_policy": {
     "execution_policy": "disabled",
     "provenance_required": true
@@ -81,11 +90,28 @@ fn write_product_package() -> PathBuf {
     dir
 }
 
+fn write_product_package_with_id(package_id: &str) -> PathBuf {
+    let dir = unique_temp_dir("mirrorea-alpha-cli-id-test");
+    fs::create_dir_all(&dir).expect("temp package dir should be created");
+    fs::write(
+        dir.join("package.mir.json"),
+        PRODUCT_PACKAGE_JSON.replace("product-alpha1-demo", package_id),
+    )
+    .expect("temp package should be written");
+    dir
+}
+
 fn run_cli(args: &[&str]) -> Output {
-    Command::new(cli_bin())
-        .args(args)
-        .output()
-        .expect("mirrorea-alpha should run")
+    run_cli_with_session_dir(args, None)
+}
+
+fn run_cli_with_session_dir(args: &[&str], session_dir: Option<&Path>) -> Output {
+    let mut command = Command::new(cli_bin());
+    command.args(args);
+    if let Some(session_dir) = session_dir {
+        command.env("MIRROREA_ALPHA_SESSION_DIR", session_dir);
+    }
+    command.output().expect("mirrorea-alpha should run")
 }
 
 fn json_stdout(output: &Output) -> Value {
@@ -204,9 +230,6 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
     let out = out_dir.to_str().expect("temp out should be utf-8");
 
     let command_args: &[(&str, &[&str])] = &[
-        ("run-local", &[package]),
-        ("session", &[package]),
-        ("attach", &["session-alpha1-demo", package]),
         ("transport", &[package, "--mode", "local"]),
         ("save", &["session-alpha1-demo"]),
         ("load", &["savepoint-alpha1-demo"]),
@@ -234,4 +257,110 @@ fn unimplemented_alpha_command_family_returns_structured_unsupported_diagnostics
         assert_eq!(value["product_alpha1_ready"], false);
         assert_eq!(value["final_public_api_frozen"], false);
     }
+}
+
+#[test]
+fn run_local_writes_product_session_and_attach_mutates_same_session_file() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-session-store");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let demo = repo_root.join("samples/product-alpha1/demo");
+    let debug_layer = demo.join("packages/debug-layer");
+
+    let run = run_cli_with_session_dir(
+        &[
+            "run-local",
+            demo.to_str().expect("demo path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let run_value = json_stdout(&run);
+
+    assert!(
+        run.status.success(),
+        "run-local should start a product session"
+    );
+    assert_eq!(run_value["surface_kind"], "product_alpha1_run_local_report");
+    assert_eq!(run_value["session"]["phase"], "run_local");
+    assert_eq!(run_value["session"]["product_alpha1_ready"], false);
+    let session_id = run_value["session"]["session_id"]
+        .as_str()
+        .expect("session_id should be present");
+    let session_path = run_value["session_path"]
+        .as_str()
+        .expect("session_path should be present");
+    assert!(Path::new(session_path).exists());
+
+    let attach = run_cli_with_session_dir(
+        &[
+            "attach",
+            session_id,
+            debug_layer
+                .to_str()
+                .expect("debug layer path should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let attach_value = json_stdout(&attach);
+
+    assert!(
+        attach.status.success(),
+        "attach should mutate the same session"
+    );
+    assert_eq!(attach_value["surface_kind"], "product_alpha1_attach_report");
+    assert_eq!(attach_value["session_id"], session_id);
+    assert_eq!(attach_value["session"]["phase"], "attached");
+    assert_eq!(
+        attach_value["session"]["active_layers"][0],
+        "product-alpha1-debug-layer"
+    );
+    assert_eq!(
+        attach_value["auth_decision"]["overlay_transparency_claimed"],
+        false
+    );
+    assert_eq!(attach_value["session"]["product_alpha1_ready"], false);
+}
+
+#[test]
+fn session_store_paths_do_not_alias_distinct_session_ids() {
+    let session_dir = unique_temp_dir("mirrorea-alpha-cli-session-collision");
+    fs::create_dir_all(&session_dir).expect("session dir should be created");
+    let slash_id = write_product_package_with_id("product/a");
+    let question_id = write_product_package_with_id("product?a");
+
+    let slash = run_cli_with_session_dir(
+        &[
+            "run-local",
+            slash_id.to_str().expect("temp dir should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let slash_value = json_stdout(&slash);
+    let question = run_cli_with_session_dir(
+        &[
+            "run-local",
+            question_id.to_str().expect("temp dir should be utf-8"),
+            "--format",
+            "json",
+        ],
+        Some(&session_dir),
+    );
+    let question_value = json_stdout(&question);
+
+    assert!(slash.status.success());
+    assert!(question.status.success());
+    let slash_path = slash_value["session_path"].as_str().unwrap();
+    let question_path = question_value["session_path"].as_str().unwrap();
+    assert_ne!(slash_path, question_path);
+    assert!(Path::new(slash_path).exists());
+    assert!(Path::new(question_path).exists());
 }

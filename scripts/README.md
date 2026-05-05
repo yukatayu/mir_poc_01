@@ -62,10 +62,13 @@
   - it does not claim final public parser/checker/runtime API, final public viewer/telemetry ABI, distributed durable save/load, WAN/federation, native avatar execution, or product-ready alpha-1
 - product alpha-1 CLI/schema first cut now has a Rust CLI surface
   - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json`
+  - `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json`
+  - `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json`
   - this exercises `samples/product-alpha1/demo/package.mir.json` through `crates/mir-ast::product_alpha1`
   - `check` is implemented for schema acceptance / explicit residual obligations
-  - `run-local`、`session`、`attach`、`transport`、`save`、`load`、`quiescent-save`、`export-devtools`、`view`、`build-native-bundle`、`demo` currently return structured unsupported diagnostics
-  - it does not claim same-session product runtime, product-ready alpha-1, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load, or arbitrary native execution
+  - `run-local`、`session`、`attach` are implemented for a local file-backed product session carrier through `crates/mir-runtime::product_alpha1_session`
+  - `transport`、`save`、`load`、`quiescent-save`、`export-devtools`、`view`、`build-native-bundle`、`demo` currently return structured unsupported diagnostics
+  - it does not claim local/Docker transport command completion, product-ready alpha-1, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load, quiescent-save execution, viewer completion, native bundle completion, or arbitrary native execution
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-05 14:00 JST
+最終更新: 2026-05-05 14:27 JST
 
 ## この文書について
 
@@ -30,6 +30,8 @@
   `specs/25-product-alpha1-public-boundary.md`、`plan/50-product-alpha1-public-boundary-roadmap.md` により、alpha `U1` defaults、canonical Rust CLI direction、versioned `package.mir.json`、same-session product demo、message recovery / quiescent-save、product viewer、native host launch bundle、release validation の package line を固定しました。product alpha-1 implementation completion、arbitrary native package execution、signature-is-safety ではありません。
 - `P-A1-26` により product alpha CLI / schema first cut は actualize 済みです:
   `crates/mirrorea-cli`、binary `mirrorea-alpha`、`crates/mir-ast::product_alpha1`、`samples/product-alpha1/demo/` により、versioned product `package.mir.json` schema、`check` accepted evidence、direct `.mir` non-goal diagnostic、full alpha command family の structured unsupported diagnostic を追加しました。same-session product runtime や product-ready α-1 completion ではありません。
+- `P-A1-27` により product demo same-session runtime first cut は actualize 済みです:
+  `crates/mir-runtime::product_alpha1_session`、`mirrorea-alpha run-local` / `session` / `attach`、CLI local session store により、product demo は runtime plan、core fabric envelope validation、typed host-I/O observation、debug-layer attach lifecycle、membership/witness/route/save-load/recovery state carrier を同じ session file に保持します。local/Docker transport command behavior、message recovery execution、quiescent-save、viewer、native launch bundle、product-ready α-1 completion ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -39,19 +41,18 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-A1-27` product demo same-session runtime | `Macro 7/8`, `S5` | `samples/product-alpha1/demo/` を、check -> run -> host-I/O -> hot-plug -> local/Docker transport -> observe の one session carrier に接続する | product demo workflow が same-session state transition、transport evidence、negative guard evidence を持つ | heavy |
-| 2 | `P-A1-28` message failure/recovery + quiescent-save | `Macro 6/7`, `S4 -> S5` | `MessageState` / `TransportContract` / `RecoveryPolicy` と bounded R2 quiescent-save を実装する | `NoInFlight` / `AllPlacesSealed` / `NoPostCutSend` positive/negative reports が通る | heavy |
-| 3 | `P-A1-29` product devtools viewer UX | `Macro 7`, `S5 -> S6` | product demo devtools JSON と non-final viewer panels を揃える | viewer openability と observer-safe leak tests が通る | medium |
-| 4 | `P-A1-30` native launch bundle | `Macro 7`, `S5 -> S6` | product demo native host launch bundle を作る | bundle manifest / run script / `NativeExecutionPolicy = Disabled` / native non-claims validation が通る | medium |
-| 5 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
-| 6 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 1 | `P-A1-28` message failure/recovery + quiescent-save | `Macro 6/7`, `S4 -> S5` | `MessageState` / `TransportContract` / `RecoveryPolicy` と bounded R2 quiescent-save を実装する | `NoInFlight` / `AllPlacesSealed` / `NoPostCutSend` positive/negative reports が通る | heavy |
+| 2 | `P-A1-29` product devtools viewer UX | `Macro 7`, `S5 -> S6` | product demo devtools JSON と non-final viewer panels を揃える | viewer openability と observer-safe leak tests が通る | medium |
+| 3 | `P-A1-30` native launch bundle | `Macro 7`, `S5 -> S6` | product demo native host launch bundle を作る | bundle manifest / run script / `NativeExecutionPolicy = Disabled` / native non-claims validation が通る | medium |
+| 4 | `P-A1-31` clean-clone product alpha-1 validation / release candidate closeout | `Macro 7/8`, `S6` | clean-clone guide、release check、hands-on/research docs を揃える | `check/run-local/session/attach/transport/save/load/quiescent-save/export-devtools/view/build-native-bundle/demo` を含む full product validation floor と report/commit/push が揃う | heavy |
+| 5 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-A1-27` product demo same-session runtime
+  `P-A1-28` message failure/recovery + quiescent-save
 - recommendation reason:
-  `P-A1-26` で canonical CLI / versioned package schema first cut が入ったため、次の実質 gap は product demo same-session runtime に移った
+  `P-A1-27` で product demo local same-session carrier と CLI session persistence が入ったため、次の実質 gap は declared message recovery obligations と R2 quiescent-save execution に移った
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、product alpha complete claim へ踏み込まない
 
