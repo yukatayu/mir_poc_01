@@ -129,7 +129,7 @@ docker ps -a --format '{{.Names}}' | rg '^mirrorea-product-a1-' | xargs -r docke
 - `cargo test -p mir-runtime -- --nocapture`: pass.
 - `cargo test -p mirrorea-core -- --nocapture`: pass.
 - `cargo test -p mirrorea-cli -- --nocapture`: pass, `alpha_cli` 19 tests.
-- `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release-full-fBoU3V`: pass with `status = accepted`, `product_alpha1_release_candidate_ready = true`, `failed_commands = []`, `planned_count = 29`.
+- `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release-final-TYv85Q`: pass with `status = accepted`, `product_alpha1_release_candidate_ready = true`, `failed_commands = []`, `planned_commands = 29`.
 - `mirrorea-alpha demo ... --skip-docker`: pass as `status = partial`, `product_alpha1_release_candidate_ready = false`.
 - Full Docker demo after cleanup fix: pass with `status = accepted`, `docker_transport_status = accepted`, and zero remaining `mirrorea-product-a1-*` containers/networks.
 
@@ -186,8 +186,9 @@ None for the P-A1-31 required floor. Final public grammar / ABI, WAN/federation,
 
 ## Commit / push status
 
-Pending at report creation.
+- Implementation closeout commit: `afa6269` (`mirrorea: close P-A1-31 release candidate`), pushed to `main`.
+- Report metadata follow-up: pending at this report update; final hash is recorded in the user-facing closeout answer to avoid a self-referential metadata loop.
 
 ## Sub-agent session close status
 
-All six requested reviewer perspectives completed and were incorporated. Agent close commands pending after commit.
+All six requested reviewer perspectives completed and were incorporated. After resume, stored P-A1-31 reviewer agent IDs were no longer addressable by `close_agent`; the two remaining visible inherited agent sessions were closed. No active reviewer session is intentionally retained.
