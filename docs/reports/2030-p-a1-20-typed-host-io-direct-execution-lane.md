@@ -116,6 +116,9 @@ date '+%Y-%m-%d %H:%M:%S %Z'
 git rev-parse HEAD
 git diff --name-only
 git ls-files --others --exclude-standard
+git add Documentation.md README.md crates/mir-ast/src/practical_alpha1.rs crates/mir-runtime/examples/mir_practical_alpha05_session.rs crates/mir-runtime/src/lib.rs crates/mir-runtime/src/practical_alpha05_host_io.rs crates/mir-runtime/src/practical_alpha05_session.rs crates/mir-runtime/tests/practical_alpha05_host_io.rs plan/45-operational-alpha05-roadmap.md plan/49-host-io-and-session-runtime-roadmap.md progress.md samples/README.md samples/practical-alpha1/README.md samples/practical-alpha1/packages/oa05-07-add-one-host-io/package.mir.json samples_progress.md scripts/README.md scripts/practical_alpha05_session.py scripts/tests/test_practical_alpha05_session.py specs/24-operational-alpha05-alpha08-readiness.md tasks.md docs/reports/2030-p-a1-20-typed-host-io-direct-execution-lane.md
+git commit --no-gpg-sign -m "mirrorea: add typed host io direct execution lane"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -215,8 +218,8 @@ None.
 
 ## Commit / push status
 
-- Pending at report creation time.
-- Primary package commit and push will be added after git closeout.
+- Primary package commit: `ae9983f` (`mirrorea: add typed host io direct execution lane`)
+- Push status: pushed to `origin/main`
 
 ## Sub-agent session close status
 
