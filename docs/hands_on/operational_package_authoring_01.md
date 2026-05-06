@@ -6,13 +6,24 @@
 
 ## What To Start From
 
-Use the validated template root:
+Use one of the validated template roots:
 
 ```text
 samples/product-alpha1/operational/templates/world-core-starter/
+samples/product-alpha1/operational/templates/membership-chat-starter/
+samples/product-alpha1/operational/templates/sugoroku-world-starter/
 ```
 
-This root is:
+Starter selection:
+
+- `world-core-starter/`
+  use for bounded `world_core` authoring with no declared dependencies
+- `membership-chat-starter/`
+  use for bounded `membership_chat` authoring when you want the current `EchoText` lane and are willing to retarget a `world_core` dependency before treating the copy as your own package
+- `sugoroku-world-starter/`
+  use for bounded `sugoroku_world` authoring when you want the current `AddOne` lane, witness row, and handoff row and are willing to retarget a `membership_chat` dependency before treating the copy as your own package
+
+Each starter is:
 
 - `template_only`
 - valid for `check` and `run-local`
@@ -21,23 +32,26 @@ This root is:
 ## Validate The Starter As-Is
 
 ```bash
-cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/templates/world-core-starter --format json
+starter_root=samples/product-alpha1/operational/templates/membership-chat-starter
+cargo run -q -p mirrorea-cli -- check "$starter_root" --format json
 session_dir=$(mktemp -d /tmp/mirrorea-ops-authoring-session-XXXXXX)
-MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/templates/world-core-starter --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- run-local "$starter_root" --format json
 ```
 
 Expected bounded evidence:
 
 - `verdict = accepted`
-- `package_kind = world_core`
+- `package_kind` matches the starter you picked
 - `product_alpha1_ready = false`
 - `run-local` emits a same-session carrier rather than a final public runtime ABI
+- `membership-chat-starter/` currently validates against sibling template `../world-core-starter`
+- `sugoroku-world-starter/` currently validates against sibling template `../membership-chat-starter`
 
 ## Create Your Own Working Copy
 
 ```bash
 work_root=$(mktemp -d /tmp/mirrorea-ops-authoring-root-XXXXXX)
-cp -R samples/product-alpha1/operational/templates/world-core-starter "$work_root/my-world-core"
+cp -R "$starter_root" "$work_root/my-package"
 ```
 
 Before treating the copy as your own package, rename at least:
@@ -48,10 +62,12 @@ Before treating the copy as your own package, rename at least:
 - observation labels
 - retention scope
 
+If the starter has `dependencies`, retarget those paths before the first `check` on your copy. Do not leave template-relative paths such as `../world-core-starter` or `../membership-chat-starter` in place unless your copied package intentionally still depends on sibling starter roots inside the template catalog.
+
 For the concrete commands below, assume you changed:
 
 ```json
-"package_id": "my-world-core"
+"package_id": "my-package"
 ```
 
 Keep these invariants:
@@ -91,10 +107,10 @@ you can use the same local-session flow:
 
 ```bash
 session_dir=$(mktemp -d /tmp/mirrorea-ops-authoring-session-XXXXXX)
-MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- run-local "$work_root/my-world-core" --format json
-MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- session 'session#my-world-core' --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- run-local "$work_root/my-package" --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- session 'session#my-package' --format json
 viewer_dir=$(mktemp -d /tmp/mirrorea-ops-authoring-viewer-XXXXXX)
-MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#my-world-core' --out "$viewer_dir" --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#my-package' --out "$viewer_dir" --format json
 cargo run -q -p mirrorea-cli -- view "$viewer_dir" --check --format json
 ```
 
@@ -113,6 +129,8 @@ Current canonical chain is:
 ```text
 WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary
 ```
+
+Current validated starter catalog intentionally stops at `SugorokuWorld`. `portal_worldlink` and `two_shard_hard_boundary` starters remain later because the current bounded authoring guide prioritizes the mainstream world/chat/game chain before future-boundary portal/shard widening.
 
 ## Common Diagnostics
 

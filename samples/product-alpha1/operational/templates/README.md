@@ -12,8 +12,12 @@ Current templates:
 
 - `world-core-starter/`
   validated minimal `world_core` starter for `check` and `run-local`
+- `membership-chat-starter/`
+  validated `membership_chat` starter for `check` and `run-local`; retarget `dependencies` after copying it
+- `sugoroku-world-starter/`
+  validated `sugoroku_world` starter for `check` and `run-local`; retarget `dependencies` after copying it
 
 Guide:
 
 - `docs/hands_on/operational_package_authoring_01.md`
-  bounded `author -> check -> run-local -> session -> export-devtools -> view --check` order
+  bounded starter-selection, rename, and `author -> check -> run-local -> session -> export-devtools -> view --check` order

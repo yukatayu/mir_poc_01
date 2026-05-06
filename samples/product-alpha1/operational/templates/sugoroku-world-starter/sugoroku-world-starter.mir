@@ -1,0 +1,10 @@
+// representative source only; current executable input is package.mir.json
+import MembershipChat version "^0.1"
+
+module SugorokuWorldStarter version "0.1.0"
+
+state dice_owner
+perform roll_dice -> Nat
+publish roll_result
+witness draw_pub
+handoff dice_owner

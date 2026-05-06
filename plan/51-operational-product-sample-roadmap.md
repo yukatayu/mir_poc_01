@@ -67,6 +67,13 @@
 - packet / FFI / projection boundary と auth/membership/capability/witness lane preservation requirement を backend reopen prerequisite として書き出す
 - generic backend build helper や direct codegen claim は追加しない
 
+## P-OPS-10 current scope
+
+- `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を validated `template_only` starter として追加する
+- `membership_chat` / `sugoroku_world` starter が sibling starter roots を dependency anchor にしたまま `check` / `run-local` を通ることを固定する
+- external developer 向け docs で rename obligation に加えて dependency-retarget obligation を明示する
+- `portal_worldlink` / `two_shard_hard_boundary` starter は later とし、template catalog widening を mainstream world/chat/game chain で一度止める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -80,8 +87,10 @@
 
 ## next packages
 
-1. broader operational template catalog
-   next template-only starter widening order
+1. gradient observation profile
+   next operational widening after the first template catalog cut
+2. portal/shard starter decision
+   decide whether future-boundary roots should ever gain validated template-only starters
 
 ## current recommendation
 
@@ -92,12 +101,13 @@
 - `P-OPS-07` で `TwoShardHardBoundary` bounded same-session hard-authority root は actualize 済み
 - `P-OPS-09` で `templates/world-core-starter/` と bounded package authoring guide は actualize 済み
 - `P-OPS-08` で current host launch bundle line を保ったまま backend feasibility inventory は docs-first に actualize 済み
-- 次は broader operational template catalog として、`world_core` 以外の template-only starter widening 順を整理する
+- `P-OPS-10` で `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を追加し、starter catalog を mainstream chain まで widen 済み
+- 次は gradient observation profile とし、portal/shard starter の是非は reserve decision として残す
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか
-- `templates/` を `world_core` 以外の package kinds へどの順で widen するか
+- portal/shard future-boundary rootsに validated starter catalog を与えるべきか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか

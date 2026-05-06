@@ -49,7 +49,7 @@
 - **product alpha-1 line**:
   `specs/25-product-alpha1-public-boundary.md` と `plan/50-product-alpha1-public-boundary-roadmap.md` は、bounded workflow の次に来る product/public-ready alpha-1 の public-ish CLI、package schema、same-session product demo、quiescent save、viewer、native launch bundle、release validation の reopen order を置く
 - **operational product sample line**:
-  `specs/26-operational-product-sample-suite.md` と `plan/51-operational-product-sample-roadmap.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` suite、shared attach packages、deployment/projection inventory、release-check helper、template-only authoring starters、retained portal/shard blueprints、next widening order を置く
+  `specs/26-operational-product-sample-suite.md` と `plan/51-operational-product-sample-roadmap.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` suite、shared attach packages、deployment/projection inventory、release-check helper、template-only authoring starter catalog、retained portal/shard blueprints、next widening order を置く
 - **backend guardrail and operational backend inventory**:
   `plan/23-compiler-backend-llvm-guardrail-roadmap.md` は small VPS / detachable workdir 前提の backend guardrail を置き、`P-OPS-08` current line では `native host launch bundle` / WASM / LLVM comparison inventory を docs-first boundary としてだけ参照する
 - **portal / spatial world future line**:

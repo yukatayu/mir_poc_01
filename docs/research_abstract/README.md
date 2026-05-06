@@ -49,7 +49,7 @@
 - `operational_product_sample_01.md`
   `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` operational suite の bounded runtime / blueprint boundary summary
 - `operational_package_authoring_01.md`
-  `templates/world-core-starter/` と bounded authoring / diagnostics flow の summary
+  `templates/world-core-starter/` / `membership-chat-starter/` / `sugoroku-world-starter/` と bounded authoring / diagnostics flow の summary
 - `operational_backend_inventory_01.md`
   host launch bundle / WASM / LLVM backend boundary comparison inventory の summary
 - `repository_layer_structure_01.md`

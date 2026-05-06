@@ -50,6 +50,8 @@ samples/product-alpha1/operational/
   - `deployments/projection/`
 - template-only authoring starters
   - `templates/world-core-starter/`
+  - `templates/membership-chat-starter/`
+  - `templates/sugoroku-world-starter/`
 - future boundary inventory
   - `future/portal-worldlink/`
   - `future/two-shard-hard-boundary/`

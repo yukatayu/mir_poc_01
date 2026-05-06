@@ -6,11 +6,14 @@
 
 - `samples/product-alpha1/operational/templates/`
 - `samples/product-alpha1/operational/templates/world-core-starter/`
+- `samples/product-alpha1/operational/templates/membership-chat-starter/`
+- `samples/product-alpha1/operational/templates/sugoroku-world-starter/`
 - `docs/hands_on/operational_package_authoring_01.md`
 
 ## What It Gives You
 
-- a validated `world_core` starter root that already passes `check` and `run-local`
+- a validated starter catalog for `world_core`, `membership_chat`, and `sugoroku_world`
+- explicit dependency-retarget guidance for the starters that import upstream operational roots
 - a concrete list of fields that must be renamed before treating the template as your own package
 - the practical order `check -> run-local -> session -> export-devtools -> view --check`
 - common diagnostics for unsupported package kinds, unsupported recovery policies, missing dependency roots, and direct `.mir` front-door misuse

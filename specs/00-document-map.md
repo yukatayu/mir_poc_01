@@ -35,7 +35,7 @@
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の current queue narrowing と stop line を reader-facing に短く読むための summary である。
   - `product_alpha1_01.md` は、product alpha release-candidate workflow、non-final viewer、release-check boundary、final-public non-claims を reader-facing に短く読むための summary である。
   - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` suite、shared attach packages、projection inventory、retained portal/shard blueprints、runtime / docs non-claims を reader-facing に短く読むための summary である。
-  - `operational_package_authoring_01.md` は、validated starter、rename obligations、bounded authoring flow、current diagnostics を reader-facing に短く読むための summary である。
+  - `operational_package_authoring_01.md` は、validated starter catalog、rename / dependency-retarget obligations、bounded authoring flow、current diagnostics を reader-facing に短く読むための summary である。
   - `operational_backend_inventory_01.md` は、host launch bundle / WASM / LLVM comparison inventory と current non-claims を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
@@ -51,7 +51,7 @@
   - `typed_external_boundary_canaries_01.md` は、phase 9 synthetic preview helper subset を最短コマンドで追うための landing page である。
   - `product_alpha1_01.md` は、Product/Public-ready Mirrorea Spaces alpha-1 release-candidate workflow を clean clone から再現するための landing page である。
   - `operational_product_sample_01.md` は、canonical operational product sample suite を clean clone から再現するための landing page である。
-  - `operational_package_authoring_01.md` は、`templates/world-core-starter/` から bounded operational package を author / check / run-local するための landing page である。
+  - `operational_package_authoring_01.md` は、`templates/world-core-starter/`、`membership-chat-starter/`、`sugoroku-world-starter/` から bounded operational package を author / check / run-local するための landing page である。
   - `operational_backend_inventory_01.md` は、operational suite の current host launch bundle line と WASM/LLVM future boundary inventory を読むための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`

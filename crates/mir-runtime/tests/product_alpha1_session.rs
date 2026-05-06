@@ -448,6 +448,50 @@ fn product_alpha1_run_local_accepts_operational_world_core_starter_template() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_membership_chat_starter_template() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/templates/membership-chat-starter"),
+    )
+    .expect("operational membership-chat starter template should run locally");
+
+    assert_eq!(report.package_id, "operational-membership-chat-starter");
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-membership-chat-starter"
+    );
+    assert_eq!(report.runtime_plan.package_kind, "membership_chat");
+    assert_eq!(report.runtime_plan.entry_place, "Place[ChatPlace]");
+    assert_eq!(
+        report.runtime_plan.declared_dependencies,
+        vec!["../world-core-starter".to_owned()]
+    );
+    assert!(report.typed_host_io_claimed);
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
+fn product_alpha1_run_local_accepts_operational_sugoroku_world_starter_template() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/templates/sugoroku-world-starter"),
+    )
+    .expect("operational sugoroku-world starter template should run locally");
+
+    assert_eq!(report.package_id, "operational-sugoroku-world-starter");
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-sugoroku-world-starter"
+    );
+    assert_eq!(report.runtime_plan.package_kind, "sugoroku_world");
+    assert_eq!(report.runtime_plan.entry_place, "Place[SugorokuGamePlace]");
+    assert_eq!(
+        report.runtime_plan.declared_dependencies,
+        vec!["../membership-chat-starter".to_owned()]
+    );
+    assert!(report.typed_host_io_claimed);
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
 fn product_alpha1_run_local_executes_declared_host_io_payload() {
     let package_json =
         fs::read_to_string(repo_root().join("samples/product-alpha1/demo/package.mir.json"))

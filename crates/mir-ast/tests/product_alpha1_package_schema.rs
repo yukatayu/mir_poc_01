@@ -302,6 +302,46 @@ fn product_alpha1_package_schema_accepts_operational_template_world_core_starter
 }
 
 #[test]
+fn product_alpha1_package_schema_accepts_operational_template_membership_chat_starter() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mir-ast");
+
+    let package = load_product_alpha1_package_path(
+        repo_root.join("samples/product-alpha1/operational/templates/membership-chat-starter"),
+    )
+    .expect("operational membership-chat starter should load");
+    let report = check_product_alpha1_package(&package)
+        .expect("operational membership-chat starter should pass schema check");
+
+    assert_eq!(report.package_id, "operational-membership-chat-starter");
+    assert_eq!(report.package_kind, "membership_chat");
+    assert_eq!(report.verdict, "accepted");
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_operational_template_sugoroku_world_starter() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mir-ast");
+
+    let package = load_product_alpha1_package_path(
+        repo_root.join("samples/product-alpha1/operational/templates/sugoroku-world-starter"),
+    )
+    .expect("operational sugoroku-world starter should load");
+    let report = check_product_alpha1_package(&package)
+        .expect("operational sugoroku-world starter should pass schema check");
+
+    assert_eq!(report.package_id, "operational-sugoroku-world-starter");
+    assert_eq!(report.package_kind, "sugoroku_world");
+    assert_eq!(report.verdict, "accepted");
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
 fn product_alpha1_package_schema_check_report_includes_operational_projection_inventory() {
     let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent()

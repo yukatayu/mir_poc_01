@@ -1,0 +1,10 @@
+// representative source only; current executable input is package.mir.json
+import WorldCore version "^0.1"
+
+module MembershipChatStarter version "0.1.0"
+
+effect join(principal)
+effect leave(principal)
+effect send_room_message(text)
+publish chat_message
+observe chat_message redacted observer_safe
