@@ -32,6 +32,11 @@ EXPECTED_SUGOROKU_ROUTE_LANES = {
     "same_session_sugoroku_handoff",
     "same_session_sugoroku_membership_reject",
 }
+EXPECTED_SUGOROKU_PROJECTION_PACKET_NAMES = {
+    "roll_request_packet",
+    "chat_message_packet",
+}
+EXPECTED_SUGOROKU_PROJECTION_FFI_NAMES = {"host_io_adapter"}
 
 
 @dataclass(frozen=True)
@@ -198,6 +203,23 @@ def sugoroku_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
         "event_dag" in panel_ids
         and "message_route_graph" in panel_ids
         and sugoroku_runtime_evidence_observed(result)
+    )
+
+
+def sugoroku_projection_inventory_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    projection_inventory = payload.get("projection_inventory") or {}
+    packet_names = set(projection_inventory.get("packet_boundary_names") or [])
+    ffi_names = set(projection_inventory.get("ffi_boundary_names") or [])
+    return (
+        projection_inventory.get("source_package") == "operational-sugoroku"
+        and projection_inventory.get("target_count") == 2
+        and projection_inventory.get("packet_boundary_count") == 2
+        and projection_inventory.get("ffi_boundary_count") == 1
+        and EXPECTED_SUGOROKU_PROJECTION_PACKET_NAMES.issubset(packet_names)
+        and EXPECTED_SUGOROKU_PROJECTION_FFI_NAMES.issubset(ffi_names)
+        and not projection_inventory.get("llvm_codegen_claimed", True)
+        and not projection_inventory.get("direct_mir_to_machine_code_claimed", True)
     )
 
 
@@ -374,6 +396,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-viewer-")
     chat_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-chat-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
+    sugoroku_check = run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD)))
     membership_chat_run = run_command(
         "run-local:membership-chat",
         cargo_alpha_args("run-local", str(MEMBERSHIP_CHAT)),
@@ -406,7 +429,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     commands = [
         run_command("check:world-core", cargo_alpha_args("check", str(WORLD_CORE))),
         run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
-        run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD))),
+        sugoroku_check,
         membership_chat_run,
         membership_chat_export,
         membership_chat_view,
@@ -454,12 +477,15 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     membership_chat_devtools_ok = membership_chat_devtools_echo_text_observed(
         membership_chat_export
     )
+    projection_inventory_ok = sugoroku_projection_inventory_observed(sugoroku_check)
     sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
     sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
     if not membership_chat_echo_text_ok:
         failed.append("membership-chat-echo-text")
     if not membership_chat_devtools_ok:
         failed.append("membership-chat-devtools")
+    if not projection_inventory_ok:
+        failed.append("projection-inventory")
     if not sugoroku_runtime_ok:
         failed.append("sugoroku-runtime-evidence")
     if not sugoroku_devtools_ok:
@@ -478,6 +504,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "attach_matrix_complete": attach_matrix_ok,
         "membership_chat_echo_text_ok": membership_chat_echo_text_ok,
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
+        "projection_inventory_ok": projection_inventory_ok,
         "sugoroku_runtime_ok": sugoroku_runtime_ok,
         "sugoroku_devtools_ok": sugoroku_devtools_ok,
         "commands": [command_payload(result) for result in commands],

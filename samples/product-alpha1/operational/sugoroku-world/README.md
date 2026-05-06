@@ -6,6 +6,7 @@
 - representative source: `sugoroku-world.mir`
 - current direct host-I/O lane: typed `AddOne` adapter evidence only
 - current bounded runtime evidence: same-session roll / publish / witness / handoff / stale membership reject scenario over the product alpha session carrier
+- current projection inventory: schema-backed summary from `../deployments/projection/projection.profile.json` is accepted by `check` and surfaced in runtime plan / observer-safe devtools, without claiming final server/client binary split or LLVM backend
 - save/load, transport, devtools export, and native host launch bundle are exercised from this root
 
 Validation anchor:

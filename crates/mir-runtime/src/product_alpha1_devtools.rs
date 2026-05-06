@@ -114,7 +114,10 @@ pub struct ProductAlpha1ProjectionTargetGraphPanel {
     pub target_count: usize,
     pub packet_boundary_count: usize,
     pub ffi_boundary_count: usize,
+    pub packet_boundary_names: Vec<String>,
+    pub ffi_boundary_names: Vec<String>,
     pub llvm_codegen_claimed: bool,
+    pub future_backend_requirements_documented: bool,
     pub nodes: Vec<ProductAlpha1NamedGraphNode>,
     pub edges: Vec<ProductAlpha1NamedGraphEdge>,
 }
@@ -628,6 +631,77 @@ fn package_dependency_graph_panel(
 fn projection_target_graph_panel(
     session: &ProductAlpha1SessionCarrier,
 ) -> ProductAlpha1ProjectionTargetGraphPanel {
+    if let Some(projection_inventory) = &session.runtime_plan.projection_inventory {
+        let mut nodes = vec![ProductAlpha1NamedGraphNode {
+            node_id: session.package_id.clone(),
+            node_kind: "source_package".to_string(),
+            current_status: "runnable_alpha_input".to_string(),
+        }];
+        let mut edges = Vec::new();
+        for target_id in &projection_inventory.target_ids {
+            let node_id = format!("target#{target_id}");
+            nodes.push(ProductAlpha1NamedGraphNode {
+                node_id: node_id.clone(),
+                node_kind: "projection_target".to_string(),
+                current_status: "schema_backed_inventory".to_string(),
+            });
+            edges.push(ProductAlpha1NamedGraphEdge {
+                from_node: session.package_id.clone(),
+                to_node: node_id,
+                relation: "projection_target_inventory".to_string(),
+            });
+        }
+        for packet_name in &projection_inventory.packet_boundary_names {
+            let node_id = format!("packet#{packet_name}");
+            nodes.push(ProductAlpha1NamedGraphNode {
+                node_id: node_id.clone(),
+                node_kind: "packet_boundary".to_string(),
+                current_status: "schema_backed_inventory".to_string(),
+            });
+            edges.push(ProductAlpha1NamedGraphEdge {
+                from_node: session.package_id.clone(),
+                to_node: node_id,
+                relation: "declared_packet_boundary".to_string(),
+            });
+        }
+        for ffi_name in &projection_inventory.ffi_boundary_names {
+            let node_id = format!("ffi#{ffi_name}");
+            nodes.push(ProductAlpha1NamedGraphNode {
+                node_id: node_id.clone(),
+                node_kind: "ffi_boundary".to_string(),
+                current_status: "schema_backed_inventory".to_string(),
+            });
+            edges.push(ProductAlpha1NamedGraphEdge {
+                from_node: session.package_id.clone(),
+                to_node: node_id,
+                relation: "declared_ffi_boundary".to_string(),
+            });
+        }
+        nodes.push(ProductAlpha1NamedGraphNode {
+            node_id: "target#native-host-launch-bundle".to_string(),
+            node_kind: "host_launch_bundle".to_string(),
+            current_status: "implemented_for_root_package".to_string(),
+        });
+        edges.push(ProductAlpha1NamedGraphEdge {
+            from_node: session.package_id.clone(),
+            to_node: "target#native-host-launch-bundle".to_string(),
+            relation: "implemented_host_bundle".to_string(),
+        });
+        return ProductAlpha1ProjectionTargetGraphPanel {
+            projection_status: "schema_backed_projection_inventory".to_string(),
+            target_count: projection_inventory.target_count,
+            packet_boundary_count: projection_inventory.packet_boundary_count,
+            ffi_boundary_count: projection_inventory.ffi_boundary_count,
+            packet_boundary_names: projection_inventory.packet_boundary_names.clone(),
+            ffi_boundary_names: projection_inventory.ffi_boundary_names.clone(),
+            llvm_codegen_claimed: projection_inventory.llvm_codegen_claimed,
+            future_backend_requirements_documented: projection_inventory
+                .future_backend_requirements_documented,
+            nodes,
+            edges,
+        };
+    }
+
     let operational = is_operational_product_package(&session.runtime_plan.package_kind);
     let nodes = if operational {
         vec![
@@ -712,7 +786,10 @@ fn projection_target_graph_panel(
         target_count: nodes.len().saturating_sub(1),
         packet_boundary_count: if operational { 2 } else { 1 },
         ffi_boundary_count: 1,
+        packet_boundary_names: Vec::new(),
+        ffi_boundary_names: Vec::new(),
         llvm_codegen_claimed: false,
+        future_backend_requirements_documented: operational,
         nodes,
         edges,
     }

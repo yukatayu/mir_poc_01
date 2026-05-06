@@ -32,6 +32,13 @@
 - `run-local` / `session` / `export-devtools` / `release-check` 上で同じ Sugoroku runtime evidence を再現
 - `scripts/operational_product_samples.py` の semantic check に Sugoroku runtime event/route/failure evidence を追加
 
+## P-OPS-05 current scope
+
+- `deployments/projection/projection.profile.json` を `ops-product-projection-v0` schema-backed inventory として formalize
+- `crates/mir-ast::product_alpha1` の `check` から projection target / packet / FFI inventory summary を accepted obligation として返す
+- `crates/mir-runtime::product_alpha1_session` と `crates/mir-runtime::product_alpha1_devtools` から同 inventory を runtime plan / observer-safe projection panel に反映する
+- `scripts/operational_product_samples.py` の `release-check` / `check-all` に projection inventory semantic check を追加する
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -45,10 +52,10 @@
 
 ## next packages
 
-1. `P-OPS-05`
-   projection manifest / packet / FFI schema formalization
-2. `P-OPS-06`
+1. `P-OPS-06`
    portal / world-link first cut
+2. `P-OPS-07`
+   two-shard hard-boundary model-check sample
 3. `P-OPS-09`
    external developer package authoring guide
 
@@ -56,11 +63,12 @@
 
 - `P-OPS-03` で direct text host boundary は `MembershipChat` に narrow `EchoText` lane として actualize 済み
 - `P-OPS-04` で `SugorokuWorld` の bounded scenario は current product alpha session carrier に寄せて actualize 済み
-- 次は `P-OPS-05` として、projection schema と packet / FFI boundary inventory を manifest-only から schema-backed inventory に進める
-- product alpha current line の bounded runtime semantics を壊さず、portal first cut は projection schema の後段に置く
+- `P-OPS-05` で projection schema と packet / FFI boundary inventory は schema-backed inventory として actualize 済み
+- 次は `P-OPS-06` として、portal/world-link discrete handoff を planned-only inventory から bounded runtime or model-check evidence に進める
+- product alpha current line の bounded runtime semantics と non-claims を壊さず、two-shard hard-boundary model-check は portal first cut の後段に置く
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
-- projection profile を runtime-plan adjacent field に入れるか、manifest-only に保つか
+- current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか

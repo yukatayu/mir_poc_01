@@ -156,3 +156,41 @@ fn product_alpha1_devtools_bundle_has_required_panels_and_redaction() {
         transported.runtime_plan.capability_requirements.len()
     );
 }
+
+#[test]
+fn product_alpha1_operational_sugoroku_devtools_bundle_uses_schema_backed_projection_inventory() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/sugoroku-world"),
+    )
+    .expect("operational sugoroku root should run locally");
+
+    let bundle = export_product_alpha1_devtools(&report.session)
+        .expect("operational sugoroku devtools should export");
+
+    assert_eq!(
+        bundle.panels.projection_target_graph.projection_status,
+        "schema_backed_projection_inventory"
+    );
+    assert_eq!(bundle.panels.projection_target_graph.target_count, 2);
+    assert_eq!(
+        bundle.panels.projection_target_graph.packet_boundary_count,
+        2
+    );
+    assert_eq!(bundle.panels.projection_target_graph.ffi_boundary_count, 1);
+    assert!(
+        bundle
+            .panels
+            .projection_target_graph
+            .packet_boundary_names
+            .iter()
+            .any(|name| name == "roll_request_packet")
+    );
+    assert!(
+        bundle
+            .panels
+            .projection_target_graph
+            .ffi_boundary_names
+            .iter()
+            .any(|name| name == "host_io_adapter")
+    );
+}

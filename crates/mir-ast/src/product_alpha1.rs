@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeSet,
     fmt, fs,
     path::{Path, PathBuf},
 };
@@ -8,6 +9,7 @@ use serde_json::error::Category;
 
 pub const PRODUCT_ALPHA1_SCHEMA_VERSION: &str = "mirrorea-product-alpha1-v0";
 pub const PRODUCT_ALPHA1_PACKAGE_FILE_NAME: &str = "package.mir.json";
+pub const PRODUCT_ALPHA1_PROJECTION_PROFILE_VERSION: &str = "ops-product-projection-v0";
 
 const PRODUCT_ALPHA1_STOP_LINES: &[&str] = &[
     "product alpha-1 package schema is alpha-stable only, not a final public API",
@@ -183,6 +185,75 @@ pub enum ProductAlpha1HostIoPayload {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct ProductAlpha1ProjectionProfile {
+    pub projection_profile_version: String,
+    pub non_final: bool,
+    pub source_package: String,
+    pub targets: Vec<ProductAlpha1ProjectionTarget>,
+    pub packet_boundaries: Vec<ProductAlpha1PacketBoundary>,
+    pub ffi_boundaries: Vec<ProductAlpha1FfiBoundary>,
+    pub backend: ProductAlpha1ProjectionBackend,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1ProjectionTarget {
+    pub target_id: String,
+    pub target_kind: String,
+    pub places: Vec<String>,
+    pub outputs: ProductAlpha1ProjectionTargetOutputs,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1ProjectionTargetOutputs {
+    pub native_binary_emitted: bool,
+    pub host_launch_bundle_part: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1PacketBoundary {
+    pub name: String,
+    pub fields: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1FfiBoundary {
+    pub name: String,
+    pub input_schema: String,
+    pub output_schema: String,
+    pub effect_row: Vec<String>,
+    pub failure_row: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1ProjectionBackend {
+    pub llvm_codegen_claimed: bool,
+    pub direct_mir_to_machine_code_claimed: bool,
+    pub future_backend_requirements_documented: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1ProjectionInventorySummary {
+    pub projection_profile_version: String,
+    pub source_package: String,
+    pub non_final: bool,
+    pub target_count: usize,
+    pub packet_boundary_count: usize,
+    pub ffi_boundary_count: usize,
+    pub target_ids: Vec<String>,
+    pub packet_boundary_names: Vec<String>,
+    pub ffi_boundary_names: Vec<String>,
+    pub llvm_codegen_claimed: bool,
+    pub direct_mir_to_machine_code_claimed: bool,
+    pub future_backend_requirements_documented: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct ProductAlpha1NativePolicy {
     pub execution_policy: String,
     pub provenance_required: bool,
@@ -210,6 +281,8 @@ pub struct ProductAlpha1CheckReport {
     pub accepted_obligations: Vec<ProductAlpha1AcceptedObligation>,
     #[serde(default)]
     pub residual_obligations: Vec<ProductAlpha1ResidualObligation>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub projection_inventory: Option<ProductAlpha1ProjectionInventorySummary>,
     #[serde(default = "stop_lines_default")]
     pub stop_lines: Vec<String>,
     #[serde(default)]
@@ -271,6 +344,16 @@ pub fn check_product_alpha1_package_path(
             "declared dependency package files exist and parse",
         ));
     }
+    if let Some(projection_inventory) =
+        maybe_projection_inventory_for_package(&resolved_path, &package)?
+    {
+        report.accepted_obligations.push(accepted(
+            "static_checker",
+            "projection_inventory",
+            "projection inventory schema accepted",
+        ));
+        report.projection_inventory = Some(projection_inventory);
+    }
     Ok(report)
 }
 
@@ -316,6 +399,7 @@ pub fn check_product_alpha1_package(
         diagnostics: Vec::new(),
         accepted_obligations: accepted_obligations(package),
         residual_obligations: residual_obligations_default(),
+        projection_inventory: None,
         stop_lines: stop_lines_default(),
         product_alpha1_ready: false,
         final_public_api_frozen: false,
@@ -668,6 +752,263 @@ fn resolve_dependency_file(candidate: &Path) -> Option<PathBuf> {
     }
     let nested = candidate.join(PRODUCT_ALPHA1_PACKAGE_FILE_NAME);
     nested.exists().then_some(nested)
+}
+
+fn maybe_projection_inventory_for_package(
+    resolved_path: &Path,
+    package: &ProductAlpha1Package,
+) -> Result<Option<ProductAlpha1ProjectionInventorySummary>, ProductAlpha1Error> {
+    let mut current = resolved_path.parent();
+    while let Some(dir) = current {
+        let candidate = dir.join("deployments/projection/projection.profile.json");
+        if candidate.is_file() {
+            let text = fs::read_to_string(&candidate).map_err(|error| ProductAlpha1Error {
+                kind: ProductAlpha1ErrorKind::Io,
+                path: candidate.clone(),
+                detail: error.to_string(),
+            })?;
+            let profile = parse_projection_profile_text_at_path(&text, &candidate)?;
+            if profile.source_package == package.package_id {
+                return Ok(Some(projection_inventory_summary(&profile)));
+            }
+        }
+        current = dir.parent();
+    }
+    Ok(None)
+}
+
+fn parse_projection_profile_text_at_path(
+    text: &str,
+    path: &Path,
+) -> Result<ProductAlpha1ProjectionProfile, ProductAlpha1Error> {
+    let profile =
+        serde_json::from_str::<ProductAlpha1ProjectionProfile>(text).map_err(|error| {
+            let kind = match error.classify() {
+                Category::Syntax | Category::Eof => ProductAlpha1ErrorKind::JsonParse,
+                Category::Data => ProductAlpha1ErrorKind::SchemaDecode,
+                Category::Io => ProductAlpha1ErrorKind::Io,
+            };
+            ProductAlpha1Error {
+                kind,
+                path: path.to_path_buf(),
+                detail: error.to_string(),
+            }
+        })?;
+
+    validate_projection_profile_shape(&profile, path)?;
+    Ok(profile)
+}
+
+fn validate_projection_profile_shape(
+    profile: &ProductAlpha1ProjectionProfile,
+    path: &Path,
+) -> Result<(), ProductAlpha1Error> {
+    if profile.projection_profile_version != PRODUCT_ALPHA1_PROJECTION_PROFILE_VERSION {
+        return Err(schema_error(
+            path,
+            format!(
+                "unsupported projection_profile_version `{}`; expected `{}`",
+                profile.projection_profile_version, PRODUCT_ALPHA1_PROJECTION_PROFILE_VERSION
+            ),
+        ));
+    }
+    if !profile.non_final {
+        return Err(schema_error(
+            path,
+            "projection inventory must remain `non_final = true` in the current alpha line"
+                .to_string(),
+        ));
+    }
+    if profile.source_package.trim().is_empty() {
+        return Err(schema_error(
+            path,
+            "projection inventory source_package is required".to_string(),
+        ));
+    }
+    if profile.targets.is_empty() {
+        return Err(schema_error(
+            path,
+            "projection inventory requires at least one target".to_string(),
+        ));
+    }
+    if profile.packet_boundaries.is_empty() {
+        return Err(schema_error(
+            path,
+            "projection inventory requires at least one packet boundary".to_string(),
+        ));
+    }
+    if profile.ffi_boundaries.is_empty() {
+        return Err(schema_error(
+            path,
+            "projection inventory requires at least one ffi boundary".to_string(),
+        ));
+    }
+    if profile.backend.llvm_codegen_claimed {
+        return Err(schema_error(
+            path,
+            "projection inventory must keep `llvm_codegen_claimed = false`".to_string(),
+        ));
+    }
+    if profile.backend.direct_mir_to_machine_code_claimed {
+        return Err(schema_error(
+            path,
+            "projection inventory must keep `direct_mir_to_machine_code_claimed = false`"
+                .to_string(),
+        ));
+    }
+    if !profile.backend.future_backend_requirements_documented {
+        return Err(schema_error(
+            path,
+            "projection inventory must document future backend requirements".to_string(),
+        ));
+    }
+
+    let mut target_ids = BTreeSet::new();
+    let mut host_bundle_targets = 0usize;
+    for target in &profile.targets {
+        if target.target_id.trim().is_empty() {
+            return Err(schema_error(
+                path,
+                "projection target target_id is required".to_string(),
+            ));
+        }
+        if !target_ids.insert(target.target_id.clone()) {
+            return Err(schema_error(
+                path,
+                format!("duplicate projection target_id `{}`", target.target_id),
+            ));
+        }
+        if target.target_kind.trim().is_empty() {
+            return Err(schema_error(
+                path,
+                format!(
+                    "projection target `{}` requires target_kind",
+                    target.target_id
+                ),
+            ));
+        }
+        if target.places.is_empty() {
+            return Err(schema_error(
+                path,
+                format!(
+                    "projection target `{}` requires at least one place",
+                    target.target_id
+                ),
+            ));
+        }
+        if target.outputs.native_binary_emitted {
+            return Err(schema_error(
+                path,
+                format!(
+                    "projection target `{}` must keep `native_binary_emitted = false`",
+                    target.target_id
+                ),
+            ));
+        }
+        if target.outputs.host_launch_bundle_part {
+            host_bundle_targets += 1;
+        }
+    }
+    if host_bundle_targets == 0 {
+        return Err(schema_error(
+            path,
+            "projection inventory requires at least one host_launch_bundle_part target".to_string(),
+        ));
+    }
+
+    let mut packet_names = BTreeSet::new();
+    for packet in &profile.packet_boundaries {
+        if packet.name.trim().is_empty() {
+            return Err(schema_error(
+                path,
+                "packet boundary name is required".to_string(),
+            ));
+        }
+        if !packet_names.insert(packet.name.clone()) {
+            return Err(schema_error(
+                path,
+                format!("duplicate packet boundary `{}`", packet.name),
+            ));
+        }
+        if packet.fields.is_empty() {
+            return Err(schema_error(
+                path,
+                format!(
+                    "packet boundary `{}` requires at least one field",
+                    packet.name
+                ),
+            ));
+        }
+    }
+
+    let mut ffi_names = BTreeSet::new();
+    for ffi in &profile.ffi_boundaries {
+        if ffi.name.trim().is_empty() {
+            return Err(schema_error(
+                path,
+                "ffi boundary name is required".to_string(),
+            ));
+        }
+        if !ffi_names.insert(ffi.name.clone()) {
+            return Err(schema_error(
+                path,
+                format!("duplicate ffi boundary `{}`", ffi.name),
+            ));
+        }
+        if ffi.input_schema.trim().is_empty() || ffi.output_schema.trim().is_empty() {
+            return Err(schema_error(
+                path,
+                format!(
+                    "ffi boundary `{}` requires input_schema and output_schema",
+                    ffi.name
+                ),
+            ));
+        }
+        if ffi.effect_row.is_empty() || ffi.failure_row.is_empty() {
+            return Err(schema_error(
+                path,
+                format!(
+                    "ffi boundary `{}` requires explicit effect_row and failure_row",
+                    ffi.name
+                ),
+            ));
+        }
+    }
+
+    Ok(())
+}
+
+fn projection_inventory_summary(
+    profile: &ProductAlpha1ProjectionProfile,
+) -> ProductAlpha1ProjectionInventorySummary {
+    ProductAlpha1ProjectionInventorySummary {
+        projection_profile_version: profile.projection_profile_version.clone(),
+        source_package: profile.source_package.clone(),
+        non_final: profile.non_final,
+        target_count: profile.targets.len(),
+        packet_boundary_count: profile.packet_boundaries.len(),
+        ffi_boundary_count: profile.ffi_boundaries.len(),
+        target_ids: profile
+            .targets
+            .iter()
+            .map(|target| target.target_id.clone())
+            .collect(),
+        packet_boundary_names: profile
+            .packet_boundaries
+            .iter()
+            .map(|packet| packet.name.clone())
+            .collect(),
+        ffi_boundary_names: profile
+            .ffi_boundaries
+            .iter()
+            .map(|ffi| ffi.name.clone())
+            .collect(),
+        llvm_codegen_claimed: profile.backend.llvm_codegen_claimed,
+        direct_mir_to_machine_code_claimed: profile.backend.direct_mir_to_machine_code_claimed,
+        future_backend_requirements_documented: profile
+            .backend
+            .future_backend_requirements_documented,
+    }
 }
 
 fn accepted_obligations(package: &ProductAlpha1Package) -> Vec<ProductAlpha1AcceptedObligation> {

@@ -1,6 +1,6 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` widening を再現するための入口です。
 
 これは final public product ではありません。portal / shard は planned-only inventory を含みますが、runtime 実装 claim ではありません。
 
@@ -22,6 +22,12 @@ cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-c
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
 ```
+
+Expected bounded evidence:
+
+- `sugoroku-world` の `check` payload は `projection_inventory` summary を返し、`source_package = operational-sugoroku`
+- same summary には `target_count = 2`、`packet_boundary_count = 2`、`ffi_boundary_count = 1` が含まれる
+- packet / FFI inventory は schema-backed だが、final server/client binary split や direct LLVM backend claim ではない
 
 ## Run The MembershipChat Text Boundary
 
@@ -67,6 +73,7 @@ If Docker / Docker Compose are unavailable, record the Docker leg as an environm
 Current boundedness:
 
 - `run-local` Sugoroku root は bounded same-session roll / publish / witness / handoff / stale membership reject scenario を 1 本だけ materialize する。final interactive game runtime ではない
+- `run-local` / `session` / `export-devtools` payload には同じ `projection_inventory` summary が入り、observer-safe projection panel から `roll_request_packet` / `chat_message_packet` / `host_io_adapter` を確認できる
 - `export-devtools` / `view --check` では `sugoroku_roll_requested` / `sugoroku_roll_published` / `sugoroku_witness_emitted` / `sugoroku_turn_handoff` / `sugoroku_stale_membership_rejected` と corresponding route lanes を observer-safe に確認できる
 - attach acceptance uses the current same-session product alpha carrier and explicit package declarations; it is not a final external issuer / membership attestation pipeline
 - `quiescent-save` is current bounded `R2` evidence on the same session carrier; it is not durable/distributed proof completion
@@ -83,8 +90,8 @@ python3 scripts/operational_product_samples.py release-check --format json
 
 ## Read The Future Boundary Inventory
 
+- `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
 - `samples/product-alpha1/operational/future/portal-worldlink/`
 - `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
-- `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
 
-これらは current runtime completion ではなく、next package inventory です。
+`projection.profile.json` は current schema-backed inventory です。portal / shard files は current runtime completion ではなく、next package inventory です。

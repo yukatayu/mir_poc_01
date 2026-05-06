@@ -135,6 +135,56 @@ const MINIMAL_ECHO_TEXT_PRODUCT_PACKAGE: &str = r#"{
   }
 }"#;
 
+const MINIMAL_PROJECTION_PROFILE: &str = r#"{
+  "projection_profile_version": "ops-product-projection-v0",
+  "non_final": true,
+  "source_package": "projection-world-core",
+  "targets": [
+    {
+      "target_id": "server",
+      "target_kind": "server_host",
+      "places": ["WorldServerPlace"],
+      "outputs": {
+        "native_binary_emitted": false,
+        "host_launch_bundle_part": true
+      }
+    },
+    {
+      "target_id": "participant-client",
+      "target_kind": "client_host",
+      "places": ["ParticipantPlace[*]", "ClientViewPlace"],
+      "outputs": {
+        "native_binary_emitted": false,
+        "host_launch_bundle_part": true
+      }
+    }
+  ],
+  "packet_boundaries": [
+    {
+      "name": "roll_request_packet",
+      "fields": ["message_id", "payload", "membership_epoch", "witness_refs"]
+    },
+    {
+      "name": "chat_message_packet",
+      "fields": ["message_id", "payload", "membership_epoch", "redaction_policy"]
+    }
+  ],
+  "ffi_boundaries": [
+    {
+      "name": "host_io_adapter",
+      "input_schema": "typed_payload",
+      "output_schema": "typed_payload",
+      "effect_row": ["typed_host_io.add_one"],
+      "failure_row": ["AdapterUnavailable"]
+    }
+  ],
+  "backend": {
+    "llvm_codegen_claimed": false,
+    "direct_mir_to_machine_code_claimed": false,
+    "future_backend_requirements_documented": true
+  }
+}"#;
+
 fn unique_temp_dir(prefix: &str) -> PathBuf {
     let nonce = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -228,6 +278,74 @@ fn product_alpha1_package_schema_accepts_operational_sample_suite_roots() {
         assert_eq!(report.verdict, "accepted");
         assert!(!report.product_alpha1_ready);
     }
+}
+
+#[test]
+fn product_alpha1_package_schema_check_report_includes_operational_projection_inventory() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mir-ast");
+
+    let report = check_product_alpha1_package_path(
+        repo_root.join("samples/product-alpha1/operational/sugoroku-world"),
+    )
+    .expect("operational sugoroku root should include projection inventory");
+
+    let inventory = report
+        .projection_inventory
+        .as_ref()
+        .expect("projection inventory should be present");
+    assert_eq!(inventory.source_package, "operational-sugoroku");
+    assert_eq!(inventory.target_count, 2);
+    assert_eq!(inventory.packet_boundary_count, 2);
+    assert_eq!(inventory.ffi_boundary_count, 1);
+    assert_eq!(inventory.packet_boundary_names.len(), 2);
+    assert!(
+        inventory
+            .packet_boundary_names
+            .iter()
+            .any(|name| name == "roll_request_packet")
+    );
+    assert!(
+        inventory
+            .ffi_boundary_names
+            .iter()
+            .any(|name| name == "host_io_adapter")
+    );
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_projection_inventory_that_claims_native_binary() {
+    let suite_dir = unique_temp_dir("product-alpha1-projection-inventory-test");
+    let package_dir = suite_dir.join("world-core");
+    fs::create_dir_all(&package_dir).expect("temp package dir should be created");
+    fs::create_dir_all(suite_dir.join("deployments/projection"))
+        .expect("projection dir should be created");
+    fs::write(
+        package_dir.join("package.mir.json"),
+        MINIMAL_PRODUCT_PACKAGE
+            .replace("product-alpha1-demo", "projection-world-core")
+            .replace(
+                r#""package_kind": "world""#,
+                r#""package_kind": "world_core""#,
+            ),
+    )
+    .expect("temp package should be written");
+    fs::write(
+        suite_dir.join("deployments/projection/projection.profile.json"),
+        MINIMAL_PROJECTION_PROFILE.replace(
+            r#""native_binary_emitted": false"#,
+            r#""native_binary_emitted": true"#,
+        ),
+    )
+    .expect("projection profile should be written");
+
+    let error = check_product_alpha1_package_path(&package_dir)
+        .expect_err("native binary claim should be rejected in projection inventory");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("native_binary_emitted"));
 }
 
 #[test]

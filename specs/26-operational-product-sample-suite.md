@@ -42,7 +42,7 @@ samples/product-alpha1/operational/
   - `packages/rate-limit-layer/`
   - `packages/placeholder-object/`
   - `packages/custom-avatar-preview/`
-- deployment / projection intent
+- deployment / projection inventory
   - `deployments/local/`
   - `deployments/docker/`
   - `deployments/projection/`
@@ -58,6 +58,7 @@ samples/product-alpha1/operational/
 
 - `.mir` files are representative source only
 - current executable input is `package.mir.json`
+- `deployments/projection/projection.profile.json` may carry schema-backed target / packet / FFI inventory for the runnable root, but it is supplementary inventory rather than executable input
 - `world_core` / `membership_chat` / `sugoroku_world` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
@@ -92,6 +93,7 @@ samples/product-alpha1/operational/
 - imports `MembershipChat`
 - is the runnable root for the first operational workflow
 - actualizes one bounded same-session scenario with roll / publish / witness / handoff / stale membership reject evidence
+- accepts one schema-backed projection inventory summary from `deployments/projection/projection.profile.json`, surfaced through `check`, runtime plan, and observer-safe devtools projection panels
 - keeps save/load visibility, transport visibility, and hot-plug visibility on the same product alpha session carrier
 - current direct execution lane remains bounded to the existing typed host-I/O `AddOne` adapter and does not claim final interactive game runtime completion
 

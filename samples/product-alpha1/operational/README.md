@@ -1,6 +1,6 @@
 # samples/product-alpha1/operational
 
-This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03` and `P-OPS-04`.
+This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, and `P-OPS-05`.
 
 It stays separate from `samples/product-alpha1/demo/`.
 
@@ -15,6 +15,7 @@ Current runnable floor:
 - `membership-chat/`: `check`, `run-local`, bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
 - `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
   deferred `placeholder-object` / `custom-avatar-preview` attach rows are part of the visible workflow, not hidden inventory
+- `deployments/projection/projection.profile.json`: schema-backed non-final projection inventory reflected by `check`, runtime plan, and the observer-safe devtools projection panel for `sugoroku-world`
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family
 
 Current non-claims:

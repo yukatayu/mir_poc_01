@@ -6,8 +6,8 @@ use std::{
 
 use mir_ast::product_alpha1::{
     ProductAlpha1CheckReport, ProductAlpha1Error, ProductAlpha1HostIoPayload,
-    ProductAlpha1HostIoRuntimeInput, ProductAlpha1Package, check_product_alpha1_package_path,
-    load_product_alpha1_package_path,
+    ProductAlpha1HostIoRuntimeInput, ProductAlpha1Package, ProductAlpha1ProjectionInventorySummary,
+    check_product_alpha1_package_path, load_product_alpha1_package_path,
 };
 use mirrorea_core::{
     AuthEvidence, HotPlugRequest, HotPlugVerdict, LogicalPlaceRuntimeShell,
@@ -108,6 +108,8 @@ pub struct ProductAlpha1RuntimePlan {
     pub declared_dependencies: Vec<String>,
     #[serde(default)]
     pub declared_contract_ids: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub projection_inventory: Option<ProductAlpha1ProjectionInventorySummary>,
     pub bootstrap_membership: Vec<String>,
     pub witness_requirements: Vec<String>,
     pub capability_requirements: Vec<String>,
@@ -520,7 +522,7 @@ pub fn run_product_alpha1_local_session_path(
             ),
         });
     }
-    let runtime_plan = build_runtime_plan(&package);
+    let runtime_plan = build_runtime_plan(&package, check_report.projection_inventory.clone());
     let session = build_run_local_session(&package, runtime_plan.clone())?;
     let typed_host_io_claimed = !session.host_io_history.is_empty();
 
@@ -962,7 +964,10 @@ pub fn quiescent_save_product_alpha1_session(
     Ok((next, report))
 }
 
-fn build_runtime_plan(package: &ProductAlpha1Package) -> ProductAlpha1RuntimePlan {
+fn build_runtime_plan(
+    package: &ProductAlpha1Package,
+    projection_inventory: Option<ProductAlpha1ProjectionInventorySummary>,
+) -> ProductAlpha1RuntimePlan {
     let entry_place = package
         .runtime_input
         .entry_place
@@ -982,6 +987,7 @@ fn build_runtime_plan(package: &ProductAlpha1Package) -> ProductAlpha1RuntimePla
             .iter()
             .map(|contract| contract.contract_id.clone())
             .collect(),
+        projection_inventory,
         bootstrap_membership: bootstrap_membership(package),
         witness_requirements: package.witness_requirements.clone(),
         capability_requirements: package.capabilities.clone(),

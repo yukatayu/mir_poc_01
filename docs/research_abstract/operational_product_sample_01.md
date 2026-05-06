@@ -8,6 +8,7 @@
 - `samples/product-alpha1/operational/` を追加した
 - `WorldCore -> MembershipChat -> SugorokuWorld` の source / package chain を固定した
 - `mirrorea-alpha` の current product alpha command familyで再現できる bounded operational workflow を docs と helper script にまとめた
+- `projection.profile.json` を schema-backed target / packet / FFI inventory として `check` / runtime plan / devtools に接続した
 - portal / shard を同 suite 内の future boundary inventory として固定した
 
 ## What Is Runnable Now
@@ -16,13 +17,14 @@
 - `world-core` / `membership-chat` / `sugoroku-world` の `run-local`
 - `membership-chat` の bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary と observer-safe devtools export
 - `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
+- `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
 - `scripts/operational_product_samples.py check-all`
 
 ## What Is Still Declared Or Planned
 
 - representative textual `.mir`
-- projection target / packet / FFI boundary inventory
+- richer server/client binary split realization beyond the current projection inventory summary
 - portal / world-link manifest
 - two-shard hard-boundary future profile
 - broader room-chat-oriented `ChatText` lane

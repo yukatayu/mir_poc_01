@@ -10,7 +10,7 @@ Current status:
 - `demo/` and `docker/` have the `P-A1-29` local/Docker transport and non-final viewer first cut through `mirrorea-alpha transport`, `export-devtools`, and `view`.
 - `demo/` has the `P-A1-30` native host launch bundle first cut through `mirrorea-alpha build-native-bundle`.
 - `demo/` has the `P-A1-31` release-candidate workflow through `mirrorea-alpha demo` and `scripts/product_alpha1_release_check.py check-all`.
-- `operational/` has the `P-OPS-01` canonical operational product sample suite through `WorldCore -> MembershipChat -> SugorokuWorld`, `scripts/operational_product_samples.py`, future portal/shard inventory, the `P-OPS-03` bounded `MembershipChat` `EchoText` direct host boundary, and the `P-OPS-04` bounded Sugoroku roll/publish/witness/handoff/stale-reject runtime evidence.
+- `operational/` has the `P-OPS-01` canonical operational product sample suite through `WorldCore -> MembershipChat -> SugorokuWorld`, `scripts/operational_product_samples.py`, future portal/shard inventory, the `P-OPS-03` bounded `MembershipChat` `EchoText` direct host boundary, the `P-OPS-04` bounded Sugoroku roll/publish/witness/handoff/stale-reject runtime evidence, and the `P-OPS-05` schema-backed projection target / packet / FFI inventory surfaced through `check`, runtime plan, and devtools.
 - The root is product alpha release-candidate workflow-ready, not final public product-ready.
 - Full release-candidate evidence requires Docker Compose TCP. `--skip-docker` is a local probe and reports non-readiness.
 - Product demo source explicitly declares the admin membership/capability authority needed by debug/auth/rate-limit attach; object/avatar-preview attach remains deferred boundary evidence.

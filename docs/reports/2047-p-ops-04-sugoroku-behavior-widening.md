@@ -231,8 +231,8 @@ Open `P-OPS-05 projection manifest / packet / FFI schema` and move the operation
 
 ## Commit / push status
 
-- Commit: pending at report creation time
-- Push: pending at report creation time
+- Commit: `83f6ba143f2103d51c6ae0c5da15342a9c290813`
+- Push: `origin/feature/operational-product-sample-001` へ push 済み
 
 ## Sub-agent session close status
 

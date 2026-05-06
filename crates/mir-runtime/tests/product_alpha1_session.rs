@@ -168,6 +168,23 @@ fn product_alpha1_run_local_accepts_operational_sugoroku_root() {
             .iter()
             .any(|dependency| dependency == "../membership-chat")
     );
+    let projection_inventory = report
+        .check_report
+        .projection_inventory
+        .as_ref()
+        .expect("operational sugoroku check should include projection inventory");
+    assert_eq!(projection_inventory.target_count, 2);
+    assert_eq!(projection_inventory.packet_boundary_count, 2);
+    assert_eq!(projection_inventory.ffi_boundary_count, 1);
+    assert_eq!(
+        report
+            .runtime_plan
+            .projection_inventory
+            .as_ref()
+            .expect("runtime plan should keep projection inventory")
+            .target_count,
+        2
+    );
     assert!(report.typed_host_io_claimed);
     assert!(
         report

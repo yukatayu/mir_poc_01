@@ -199,6 +199,36 @@ class OperationalProductSamplesTests(unittest.TestCase):
             )
         )
 
+    def test_projection_inventory_check_requires_expected_counts(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="check:sugoroku-world",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "projection_inventory": {
+                    "source_package": "operational-sugoroku",
+                    "target_count": 2,
+                    "packet_boundary_count": 2,
+                    "ffi_boundary_count": 1,
+                    "packet_boundary_names": [
+                        "roll_request_packet",
+                        "chat_message_packet",
+                    ],
+                    "ffi_boundary_names": ["host_io_adapter"],
+                    "llvm_codegen_claimed": False,
+                    "direct_mir_to_machine_code_claimed": False,
+                }
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.sugoroku_projection_inventory_observed(
+                result
+            )
+        )
+
     def test_main_accepts_format_after_subcommand(self) -> None:
         stdout = io.StringIO()
         with redirect_stdout(stdout):
