@@ -205,8 +205,8 @@ Open `P-OPS-06 portal / world-link first cut` and move the operational suite por
 
 ## Commit / push status
 
-- Commit: pending at report creation time
-- Push: pending at report creation time
+- Commit: `e5e7e5e6d15c940c2fb9bfa571208ee14e72e9e6`
+- Push: `origin/feature/operational-product-sample-001` へ push 済み
 
 ## Sub-agent session close status
 
