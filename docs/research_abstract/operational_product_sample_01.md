@@ -14,6 +14,7 @@
 
 - `world-core` / `membership-chat` / `sugoroku-world` の `check`
 - `world-core` / `membership-chat` / `sugoroku-world` の `run-local`
+- `membership-chat` の bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
 - `scripts/operational_product_samples.py check-all`
 
@@ -23,7 +24,7 @@
 - projection target / packet / FFI boundary inventory
 - portal / world-link manifest
 - two-shard hard-boundary future profile
-- broader text chat host-I/O lane
+- broader room-chat-oriented `ChatText` lane
 - richer Sugoroku runtime behavior beyond the current bounded carrier
 
 ## Why This Matters

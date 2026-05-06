@@ -4,7 +4,7 @@
 
 - current executable input: `package.mir.json`
 - representative source: `membership-chat.mir`
-- current execution note: typed room text I/O is still a declared boundary; this package is runnable as a product alpha session carrier but does not claim final text chat execution
+- current execution note: `run-local` executes one bounded `EchoText("Taro") -> "Hello, Taro!"` host boundary lane and records observer-safe host-I/O evidence; this is not a final text chat service or stdio builtin
 
 Validation anchor:
 

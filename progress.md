@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-06 21:12 JST
+最終更新: 2026-05-06 22:27 JST
 
 ## この文書について
 
@@ -24,13 +24,13 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-OPS-01` operational product sample suite scaffold and first workflow
+  `P-OPS-03` operational chat / direct text host boundary
 - current promoted reopen point:
-  `P-OPS-03` operational chat / direct text host boundary, with `P-OPS-05` projection schema formalization and `P-OPS-06` portal/world-link first cut as subsequent reopen candidates
+  `P-OPS-04` Sugoroku behavior widening, with `P-OPS-05` projection schema formalization and `P-OPS-06` portal/world-link first cut as subsequent reopen candidates
 - current reading:
-  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、**bounded practical α-1 integrated workflow carrier**、**product alpha release-candidate workflow**、さらにその次段の **canonical operational product sample suite** を得た。`P-A1-25..31` で `mirrorea-alpha` product line と `samples/product-alpha1/demo/` release-candidate workflow を固定した上で、`P-OPS-01` は `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` package/import chain、explicit debug/auth/rate-limit attach packages、local/Docker transport、observer-safe devtools export、R0/R2 save/load、native host launch bundle、projection intent、portal/shard future inventory を 1 つの canonical suite として接続した。portal/shard は planned-only inventory であり、final public grammar / ABI、text host-I/O widening、projection packet/FFI schema formalization、WAN/federation、distributed durable save/load は未完成
+  repo は **theory / first-floor carriers / evidence closeout** に加えて **bounded operational α-0.5 local observable runtime**、**bounded operational α-0.8 same-session hot-plug runtime**、**bounded operational α-0.9 session-bound devtools export**、**bounded practical α-1 integrated workflow carrier**、**product alpha release-candidate workflow**、さらにその次段の **canonical operational product sample suite** を得た。`P-A1-25..31` で `mirrorea-alpha` product line と `samples/product-alpha1/demo/` release-candidate workflow を固定した上で、`P-OPS-01` は `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` package/import chain、explicit debug/auth/rate-limit attach packages、local/Docker transport、observer-safe devtools export、R0/R2 save/load、native host launch bundle、projection intent、portal/shard future inventory を 1 つの canonical suite として接続した。`P-OPS-03` はその上で `MembershipChat` に bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary を actualize し、`run-local` と session-bound devtools export から同じ observer-safe text lane を確認できるようにした。portal/shard は planned-only inventory であり、final public grammar / ABI、projection packet/FFI schema formalization、WAN/federation、distributed durable save/load は未完成
 - self-driven status:
-  bounded practical workflow と operational product suite scaffold までは自走済み。user prompt により alpha `U1` defaults と operational suite line は採用済みなので、next self-driven reopen point は `P-OPS-03` / `P-OPS-05` / `P-OPS-06` の bounded widening packages である。final public grammar / ABI / WAN / distributed durable save-load は still user/final decision gate
+  bounded practical workflow と operational product suite direct text boundary までは自走済み。user prompt により alpha `U1` defaults と operational suite line は採用済みなので、next self-driven reopen point は `P-OPS-04` / `P-OPS-05` / `P-OPS-06` の bounded widening packages である。final public grammar / ABI / WAN / distributed durable save-load は still user/final decision gate
 
 ## workflow-readiness axes
 
@@ -38,7 +38,7 @@ Place をまたいで実行・通信・検証・可視化できる
 |---|---|---|
 | 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..25` で practical / operational / product alpha boundary を分けた。final public grammar / ABI は未固定 |
 | ユーザ向け仕様 | reproducible workflow guidance exists for product alpha release candidate and operational suite | README / Documentation / progress / tasks / samples dashboard に加え、`docs/hands_on/product_alpha1_01.md`、`docs/research_abstract/product_alpha1_01.md`、`docs/hands_on/operational_product_sample_01.md`、`docs/research_abstract/operational_product_sample_01.md` で release-candidate root と operational suite root の使い分けを追加した |
-| 実装 / 運用 | product alpha release-candidate workflow-ready plus canonical operational suite first cut | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow、product alpha `check/run-local/session/attach/save/load/quiescent-save/transport/export-devtools/view/build-native-bundle/demo/release-check`、および operational suite `WorldCore -> MembershipChat -> SugorokuWorld` の `check/run-local/session/attach/save/quiescent-save/transport/export-devtools/view/build-native-bundle/check-all` は再現可能。final-public grammar / ABI / WAN / distributed durable save-load は別 gate |
+| 実装 / 運用 | product alpha release-candidate workflow-ready plus widened canonical operational suite | α-0.5 local session workflow、α-0.8 same-session hot-plug workflow、α-0.9 session-bound devtools workflow、product alpha `check/run-local/session/attach/save/load/quiescent-save/transport/export-devtools/view/build-native-bundle/demo/release-check`、および operational suite `WorldCore -> MembershipChat -> SugorokuWorld` の `check/run-local/session/attach/save/quiescent-save/transport/export-devtools/view/build-native-bundle/check-all` は再現可能で、`membership-chat` は bounded `EchoText` text lane を持つ。final-public grammar / ABI / WAN / distributed durable save-load は別 gate |
 
 ## line snapshot
 
@@ -49,7 +49,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | practical alpha-1 first floors | first-floor evidence | evidence-closed only | `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence | product/public-ready α-1 とは別 |
 | practical alpha-1 integrated workflow | bounded workflow line | developer-reproducible bounded workflow | `P-A1-23` で `scripts/practical_alpha1_integrated_workflow.py`、`PA1W-01..08` を追加し、front-door / checker / same-session runtime / host-I/O / hot-plug / save-load / devtools / preview evidence を 1 workflow に束ねた | final public parser / viewer / telemetry ABI、product packaging は later |
 | product alpha-1 release candidate | product/public alpha line | workflow-ready alpha release candidate, not final public product | `P-A1-25..31` で `mirrorea-alpha` command family、versioned package, same-session runtime, hot-plug, local/Docker transport, non-final devtools/viewer, local R0/R2 save/load, native host launch bundle, `demo`, release check, clean-clone docs を接続した | final public grammar / ABI / WAN / distributed durable save-load |
-| operational product sample suite | operational product line | workflow-ready canonical suite, not final public product | `P-OPS-01` で `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` chain、shared attach packages、projection intent、portal/shard future inventory を bounded operational replay として同期した | direct text host-I/O lane、richer Sugoroku runtime behavior、projection packet/FFI schema、portal/world-link first cut |
+| operational product sample suite | operational product line | workflow-ready canonical suite, not final public product | `P-OPS-01` で `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` chain、shared attach packages、projection intent、portal/shard future inventory を bounded operational replay として同期した。`P-OPS-03` で `membership-chat` に bounded `EchoText` direct host boundary と corresponding devtools evidence を追加した | richer Sugoroku runtime behavior、projection packet/FFI schema、portal/world-link first cut |
 | operational α-0.5 | operational line | workflow-ready: local session workflow | `P-A1-20` で local session carrier + typed `AddOne` host-I/O lane を接続し、local observable runtime workflow を再現可能にした | broader host family は later |
 | operational α-0.8 | operational line | workflow-ready: same-session hot-plug workflow | `P-A1-21` で debug/auth/rate-limit/object preview/deferred detach の same-session accepted/rejected/deferred/activation cut/observer-safe mutation を再現可能にした | accepted detach execution / distributed ordering は later |
 | operational α-0.9 | operational line | workflow-ready: session-bound devtools workflow | `P-A1-22` で session-bound event DAG / route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / redacted view / retention trace を再現可能にした | final public viewer / telemetry ABI、durable audit は later |
@@ -60,9 +60,9 @@ Place をまたいで実行・通信・検証・可視化できる
 - **Mir core**
   finite decidable index fragment、effect row、lifetime/fallback、order/handoff、model-check second line、proof side export boundaryは current-L2 で整理済み
 - **Mirrorea runtime / package line**
-  `TermSignature`、`LayerSignature`、`MessageEnvelope`、`AuthEvidence`、`MembershipRegistry`、`PlaceCatalog`、`HotPlugRequest` / `HotPlugVerdict`、practical hot-plug / transport / save-load carriers、`practical_alpha05_session` session carrier に加えて、product alpha package kinds `world_core` / `membership_chat` / `sugoroku_world`、observer-safe operational devtools inventory、dependency-preserving native host launch bundle copy line、`samples/product-alpha1/operational/` suite がある
+  `TermSignature`、`LayerSignature`、`MessageEnvelope`、`AuthEvidence`、`MembershipRegistry`、`PlaceCatalog`、`HotPlugRequest` / `HotPlugVerdict`、practical hot-plug / transport / save-load carriers、`practical_alpha05_session` session carrier に加えて、product alpha package kinds `world_core` / `membership_chat` / `sugoroku_world`、`membership-chat` bounded `EchoText` host boundary、observer-safe operational devtools inventory、dependency-preserving native host launch bundle copy line、`samples/product-alpha1/operational/` suite がある
 - **Typed external boundary**
-  synthetic preview / canary に加えて、`AddOne` を bounded α-0.5 session carrier 上で direct semantic execution する minimal lane は actualize した。broader host family は later
+  synthetic preview / canary に加えて、`AddOne` を bounded α-0.5 session carrier 上で direct semantic execution する minimal lane と、operational `membership-chat` root 上の bounded `EchoText` direct text lane は actualize した。broader host family は later
 - **Observability / devtools**
   export-side first floors に加え、α-0.9 で same session から event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を引く non-final viewer/export lane が入った。final public telemetry service や durable audit backend は later
 - **PrismCascade / Reversed Library**
@@ -76,7 +76,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | current-L2 側は強い。operational α line は theory freeze 完了 | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary は fixed、広い discharge は後段 | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | bounded α-0.8 same-session hot-plug runtime まで到達。accepted detach execution / distributed ordering は後段 | heavy | 着手可能 |
-| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line、bounded practical α-1 workflow、product alpha release-candidate workflow、operational product suite first cut まで到達。next は text host boundary widening / projection schema formalization / portal first cut | heavy | 着手可能 |
+| `Macro 7` | toolchain / developer surface / public operational interface | α-0.5 / α-0.8 / α-0.9 operational line、bounded practical α-1 workflow、product alpha release-candidate workflow、operational product suite direct text boundaryまで到達。next は Sugoroku behavior widening / projection schema formalization / portal first cut | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | product alpha demo root に加えて `WorldCore -> MembershipChat -> SugorokuWorld` operational suite root が開いた | heavy | 着手可能 |
 
 ## feature maturity rows
@@ -87,12 +87,12 @@ Place をまたいで実行・通信・検証・可視化できる
 | robustness via contracts / theorem / model-check boundary | boundary-fixed | static checker / model-check / proof side の stratification は fixed。外部 proof discharge は evidence expansion | 着手可能 |
 | dynamic attach / detach / DAG-safe evolution | bounded workflow-ready for same-session attach | attach-time first-floor evidence と bounded same-session lifecycle はあるが accepted detach execution / migration / distributed ordering は未完成 | 着手可能 |
 | `atomic_cut` と ordering / memory-order family | semantics fixed, evidence-backed | place-local rollback frontier と consistent-cut boundary は fixed、distributed durable family は later | 着手可能 |
-| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。product alpha demo root は CLI check、local same-session run/session/attach、R0 save/load、bounded R2 quiescent-save、local/Docker transport、non-final devtools/viewer、native host launch bundle、`demo`、release check が runnable。`samples/product-alpha1/operational/` は `world-core` / `membership-chat` / `sugoroku-world` suite、helper `check-all`、future portal/shard inventory を持つ | 着手可能 |
+| executable sample corpus | runnable evidence + bounded workflows | current-L2、practical alpha-1 first floors、bounded operational α-0.5 / α-0.8 / α-0.9 line、bounded practical α-1 integrated workflow は runnable。product alpha demo root は CLI check、local same-session run/session/attach、R0 save/load、bounded R2 quiescent-save、local/Docker transport、non-final devtools/viewer、native host launch bundle、`demo`、release check が runnable。`samples/product-alpha1/operational/` は `world-core` / `membership-chat` / `sugoroku-world` suite、`membership-chat` EchoText lane、helper `check-all`、future portal/shard inventory を持つ | 着手可能 |
 
 ## current blockers
 
 - product alpha-1 release-candidate workflow と operational suite first cut は入ったが、final public grammar / ABI / WAN / distributed durable save-load / production packaging は未固定
-- operational suite では `MembershipChat` の text host-I/O lane、Sugoroku runtime behavior widening、projection packet/FFI schema、portal/world-link discrete handoff actualization が未着手
+- operational suite では Sugoroku runtime behavior widening、projection packet/FFI schema、portal/world-link discrete handoff actualization が未着手
 - final public viewer / telemetry ABI、admin/full debug view、durable audit backend は未固定
 - distributed durable save/load、stale witness / stale lease non-resurrection、queue/channel persistence は current promoted reopen point の外側
 - final public grammar / ABI / WAN / distributed durable save-load / engine adapter scope は user/final decision gate のまま
@@ -125,6 +125,9 @@ Place をまたいで実行・通信・検証・可視化できる
   `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json`
   `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json`
   `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json`
+  `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/membership-chat --format json`
+  `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-membership-chat' --out /tmp/mirrorea-ops-chat-viewer --format json`
+  `cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-ops-chat-viewer --check --format json`
   `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/sugoroku-world --format json`
   `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/debug-layer --format json`
   `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- save 'session#operational-sugoroku' --savepoint 'savepoint#ops-r0' --format json`
@@ -156,6 +159,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 ## recent log
 
+- 2026-05-06 22:27 JST
+  `P-OPS-03` で `MembershipChat` root に bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary を追加し、schema/runtime validation、observer-safe session export、session-bound devtools export、helper `run-membership-chat` / `check-all` semantic checks、hands-on / research docs を同期した。next reopen point は `P-OPS-04`。
 - 2026-05-06 21:12 JST
   `P-OPS-01` closeout hardening として、operational Docker transport を専用 compose file に切り替え、native bundle に shared attach packages と attach reports を含め、helper `release-check` / `check-all` に deferred object/avatar attach rows を組み込み、route/config devtools payload を bounded summary / kept-later wording に寄せた。operational suite は `accepted` で再検証済み。
 - 2026-05-05 19:41 JST

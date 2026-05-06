@@ -511,46 +511,22 @@ fn validate_package_shape(
         }
     }
 
-    if package_kind_supports_runtime_input(&package.package_kind)
-        && package
-            .effects
-            .iter()
-            .any(|effect| effect == "typed_host_io.add_one")
-    {
-        let Some(host_io) = &package.runtime_input.host_io else {
-            return Err(schema_error(
-                path,
-                "world packages declaring `typed_host_io.add_one` must declare runtime_input.host_io"
-                    .to_string(),
-            ));
-        };
-        if host_io.adapter_kind != "AddOne" {
-            return Err(schema_error(
-                path,
-                "runtime_input.host_io.adapter_kind must be `AddOne` for effect `typed_host_io.add_one`"
-                    .to_string(),
-            ));
-        }
-        if host_io.effect_ref != "typed_host_io.add_one" {
-            return Err(schema_error(
-                path,
-                "runtime_input.host_io.effect_ref must match `typed_host_io.add_one`".to_string(),
-            ));
-        }
-        match (&host_io.request_payload, &host_io.expected_response) {
-            (
-                ProductAlpha1HostIoPayload::Int { value },
-                ProductAlpha1HostIoPayload::Int {
-                    value: expected_value,
-                },
-            ) if *expected_value == value + 1 => {}
-            _ => {
+    if package_kind_supports_runtime_input(&package.package_kind) {
+        let declares_supported_host_io = package.effects.iter().any(|effect| {
+            matches!(
+                effect.as_str(),
+                "typed_host_io.add_one" | "typed_host_io.echo_text"
+            )
+        });
+        if declares_supported_host_io {
+            let Some(host_io) = &package.runtime_input.host_io else {
                 return Err(schema_error(
                     path,
-                    "runtime_input.host_io expected_response must equal AddOne(request_payload)"
+                    "world packages declaring typed_host_io.* effects must declare runtime_input.host_io"
                         .to_string(),
                 ));
-            }
+            };
+            validate_host_io_input(host_io, path)?;
         }
     }
 
@@ -562,6 +538,59 @@ fn package_kind_supports_runtime_input(package_kind: &str) -> bool {
         package_kind,
         "world" | "world_core" | "membership_chat" | "sugoroku_world"
     )
+}
+
+fn validate_host_io_input(
+    host_io: &ProductAlpha1HostIoRuntimeInput,
+    path: &Path,
+) -> Result<(), ProductAlpha1Error> {
+    match (
+        host_io.adapter_kind.as_str(),
+        host_io.effect_ref.as_str(),
+        &host_io.request_payload,
+        &host_io.expected_response,
+    ) {
+        (
+            "AddOne",
+            "typed_host_io.add_one",
+            ProductAlpha1HostIoPayload::Int { value },
+            ProductAlpha1HostIoPayload::Int {
+                value: expected_value,
+            },
+        ) if *expected_value == value + 1 => Ok(()),
+        ("AddOne", "typed_host_io.add_one", _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io expected_response must equal AddOne(request_payload)"
+                .to_string(),
+        )),
+        (
+            "EchoText",
+            "typed_host_io.echo_text",
+            ProductAlpha1HostIoPayload::Text { value },
+            ProductAlpha1HostIoPayload::Text {
+                value: expected_value,
+            },
+        ) if *expected_value == format!("Hello, {value}!") => Ok(()),
+        ("EchoText", "typed_host_io.echo_text", _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io expected_response must equal EchoText(request_payload)"
+                .to_string(),
+        )),
+        ("AddOne", _, _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io.effect_ref must match `typed_host_io.add_one`".to_string(),
+        )),
+        ("EchoText", _, _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io.effect_ref must match `typed_host_io.echo_text`".to_string(),
+        )),
+        (adapter_kind, effect_ref, _, _) => Err(schema_error(
+            path,
+            format!(
+                "unsupported runtime_input.host_io adapter/effect pair `{adapter_kind}` / `{effect_ref}`"
+            ),
+        )),
+    }
 }
 
 fn validate_dependency_packages(

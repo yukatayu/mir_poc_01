@@ -23,6 +23,23 @@ cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/members
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
 ```
 
+## Run The MembershipChat Text Boundary
+
+```bash
+chat_session_dir=$(mktemp -d /tmp/mirrorea-ops-chat-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$chat_session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/membership-chat --format json
+MIRROREA_ALPHA_SESSION_DIR="$chat_session_dir" cargo run -q -p mirrorea-cli -- session 'session#operational-membership-chat' --format json
+chat_viewer_dir=$(mktemp -d /tmp/mirrorea-ops-chat-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$chat_session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-membership-chat' --out "$chat_viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$chat_viewer_dir" --check --format json
+```
+
+Expected bounded evidence:
+
+- `typed_host_io_claimed = true`
+- observer-safe host-I/O lane includes `EchoText:Text("Taro")->Text("Hello, Taro!")`
+- event DAG / devtools export show the same request/response without introducing stdio as a Mir core primitive
+
 ## Run The First Operational Workflow
 
 ```bash
@@ -56,6 +73,7 @@ Current boundedness:
 
 ```bash
 python3 scripts/operational_product_samples.py list --format json
+python3 scripts/operational_product_samples.py run-membership-chat --format json
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/operational_product_samples.py release-check --format json
 ```

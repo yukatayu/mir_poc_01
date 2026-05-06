@@ -19,6 +19,7 @@ WORLD_CORE = OPS_ROOT / "world-core"
 MEMBERSHIP_CHAT = OPS_ROOT / "membership-chat"
 SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
 LAYERS_ROOT = OPS_ROOT / "packages"
+EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'EchoText:Text("Taro")->Text("Hello, Taro!")'
 
 
 @dataclass(frozen=True)
@@ -120,16 +121,47 @@ def list_samples() -> dict[str, Any]:
     }
 
 
+def membership_chat_echo_text_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    if not payload.get("typed_host_io_claimed"):
+        return False
+    session = payload.get("session") or {}
+    host_io_history = session.get("host_io_history") or []
+    if not host_io_history or host_io_history[0].get("adapter_kind") != "EchoText":
+        return False
+    observer_safe_export = session.get("observer_safe_export") or {}
+    visible_events = observer_safe_export.get("visible_host_io_events") or []
+    return EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT in visible_events
+
+
+def membership_chat_devtools_echo_text_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    panel_ids = payload.get("panel_ids") or []
+    session = payload.get("session") or {}
+    observer_safe_export = session.get("observer_safe_export") or {}
+    visible_events = observer_safe_export.get("visible_host_io_events") or []
+    return (
+        EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT in visible_events
+        and "event_dag" in panel_ids
+    )
+
+
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
         cargo_alpha_args("run-local", str(root)),
     )
+    semantic_checks: dict[str, bool] = {}
+    if root == MEMBERSHIP_CHAT:
+        semantic_checks["echo_text_observed"] = membership_chat_echo_text_observed(result)
     return {
         "surface_kind": "operational_product_sample_run_report",
         "root": str(root.relative_to(REPO_ROOT)),
-        "status": "accepted" if result.returncode == 0 else "error",
+        "status": "accepted"
+        if result.returncode == 0 and all(semantic_checks.values(),)
+        else "error",
         "command": command_payload(result),
+        "semantic_checks": semantic_checks,
         "final_public_api_frozen": False,
     }
 
@@ -272,12 +304,36 @@ def build_native_bundle() -> dict[str, Any]:
 
 def release_check(skip_docker: bool) -> dict[str, Any]:
     session_dir, env = sugoroku_session_env()
+    chat_session_dir, chat_env = sugoroku_session_env()
     viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-viewer-")
+    chat_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-chat-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
+    membership_chat_run = run_command(
+        "run-local:membership-chat",
+        cargo_alpha_args("run-local", str(MEMBERSHIP_CHAT)),
+        env=chat_env,
+    )
+    membership_chat_export = run_command(
+        "export-devtools:membership-chat",
+        cargo_alpha_args(
+            "export-devtools",
+            "session#operational-membership-chat",
+            "--out",
+            chat_viewer_dir,
+        ),
+        env=chat_env,
+    )
+    membership_chat_view = run_command(
+        "view:membership-chat",
+        cargo_alpha_args("view", chat_viewer_dir, "--check"),
+    )
     commands = [
         run_command("check:world-core", cargo_alpha_args("check", str(WORLD_CORE))),
         run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
         run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD))),
+        membership_chat_run,
+        membership_chat_export,
+        membership_chat_view,
         run_command("run-local:sugoroku", cargo_alpha_args("run-local", str(SUGOROKU_WORLD)), env=env),
         run_command("session:sugoroku", cargo_alpha_args("session", "session#operational-sugoroku"), env=env),
         run_command("save:r0", cargo_alpha_args("save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r0"), env=env),
@@ -312,16 +368,28 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     attach_matrix_ok = attach_matrix_complete(attach_results)
     if not attach_matrix_ok:
         failed.append("attach-matrix")
+    membership_chat_echo_text_ok = membership_chat_echo_text_observed(membership_chat_run)
+    membership_chat_devtools_ok = membership_chat_devtools_echo_text_observed(
+        membership_chat_export
+    )
+    if not membership_chat_echo_text_ok:
+        failed.append("membership-chat-echo-text")
+    if not membership_chat_devtools_ok:
+        failed.append("membership-chat-devtools")
     status = "accepted" if not failed and not skip_docker else "partial" if not failed else "error"
     return {
         "surface_kind": "operational_product_sample_release_check_report",
         "status": status,
         "docker_included": not skip_docker,
         "session_dir": session_dir,
+        "chat_session_dir": chat_session_dir,
         "viewer_dir": viewer_dir,
+        "chat_viewer_dir": chat_viewer_dir,
         "bundle_dir": bundle_dir,
         "failed_commands": failed,
         "attach_matrix_complete": attach_matrix_ok,
+        "membership_chat_echo_text_ok": membership_chat_echo_text_ok,
+        "membership_chat_devtools_ok": membership_chat_devtools_ok,
         "commands": [command_payload(result) for result in commands],
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,

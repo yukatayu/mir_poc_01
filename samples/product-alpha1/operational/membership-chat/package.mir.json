@@ -9,7 +9,8 @@
   "effects": [
     "JoinWorld",
     "LeaveWorld",
-    "SendRoomMessage"
+    "SendRoomMessage",
+    "typed_host_io.echo_text"
   ],
   "failures": [
     "StaleMembership",
@@ -48,6 +49,14 @@
         "StaleMembership",
         "RateLimited"
       ]
+    },
+    {
+      "contract_id": "operational-membership-chat-host-io-contract",
+      "variance": "observe_only",
+      "effect_row": [
+        "typed_host_io.echo_text"
+      ],
+      "failure_row": []
     }
   ],
   "observation_policy": {
@@ -84,6 +93,21 @@
       "R2"
     ],
     "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[ChatPlace]",
+    "host_io": {
+      "adapter_kind": "EchoText",
+      "effect_ref": "typed_host_io.echo_text",
+      "request_payload": {
+        "kind": "text",
+        "value": "Taro"
+      },
+      "expected_response": {
+        "kind": "text",
+        "value": "Hello, Taro!"
+      }
+    }
   },
   "native_policy": {
     "execution_policy": "disabled",

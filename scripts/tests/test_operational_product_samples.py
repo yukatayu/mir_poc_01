@@ -59,6 +59,55 @@ class OperationalProductSamplesTests(unittest.TestCase):
             payload["surface_kind"], "operational_product_sample_suite_list"
         )
 
+    def test_membership_chat_echo_text_observed_requires_expected_event(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:membership-chat",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "typed_host_io_claimed": True,
+                "session": {
+                    "host_io_history": [{"adapter_kind": "EchoText"}],
+                    "observer_safe_export": {
+                        "visible_host_io_events": [
+                            operational_product_samples.EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT
+                        ]
+                    },
+                },
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.membership_chat_echo_text_observed(result)
+        )
+
+    def test_membership_chat_devtools_check_requires_event_dag_and_echo_text(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="export-devtools:membership-chat",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "panel_ids": ["event_dag", "message_route_graph"],
+                "session": {
+                    "observer_safe_export": {
+                        "visible_host_io_events": [
+                            operational_product_samples.EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT
+                        ]
+                    }
+                },
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.membership_chat_devtools_echo_text_observed(
+                result
+            )
+        )
+
     def test_main_accepts_format_after_subcommand(self) -> None:
         stdout = io.StringIO()
         with redirect_stdout(stdout):

@@ -34,7 +34,7 @@ const PRODUCT_ALPHA1_RUNTIME_STOP_LINES: &[&str] = &[
 
 const PRODUCT_ALPHA1_RUNTIME_LIMITATIONS: &[&str] = &[
     "controlled local product alpha-1 session carrier only",
-    "one deterministic product demo runtime path with typed host-I/O add-one evidence",
+    "one deterministic product demo runtime path with declared typed host-I/O evidence",
     "debug/auth/rate-limit layer attach is same-session and observable; object/avatar-preview attach remains deferred boundary evidence",
     "local save/load and quiescent-save are bounded to one local session store",
     "no distributed durable save/load, WAN federation, final viewer ABI, or arbitrary native package execution",
@@ -1685,8 +1685,17 @@ fn execute_product_host_io(
         ("AddOne", ProductAlpha1HostIoPayload::Int { value }) => {
             Ok(ProductAlpha1HostIoPayload::Int { value: value + 1 })
         }
+        ("EchoText", ProductAlpha1HostIoPayload::Text { value }) => {
+            Ok(ProductAlpha1HostIoPayload::Text {
+                value: format!("Hello, {value}!"),
+            })
+        }
         ("AddOne", other) => Err(host_io_error(format!(
             "AddOne adapter only accepts integer payloads, found {}",
+            payload_summary(other)
+        ))),
+        ("EchoText", other) => Err(host_io_error(format!(
+            "EchoText adapter only accepts text payloads, found {}",
             payload_summary(other)
         ))),
         (adapter, _) => Err(host_io_error(format!(
@@ -1698,7 +1707,7 @@ fn execute_product_host_io(
 fn payload_summary(payload: &ProductAlpha1HostIoPayload) -> String {
     match payload {
         ProductAlpha1HostIoPayload::Int { value } => format!("Int({value})"),
-        ProductAlpha1HostIoPayload::Text { value } => format!("Text(len={})", value.len()),
+        ProductAlpha1HostIoPayload::Text { value } => format!("Text({value:?})"),
     }
 }
 

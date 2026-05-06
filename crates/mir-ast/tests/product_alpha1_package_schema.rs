@@ -72,6 +72,69 @@ const MINIMAL_PRODUCT_PACKAGE: &str = r#"{
   }
 }"#;
 
+const MINIMAL_ECHO_TEXT_PRODUCT_PACKAGE: &str = r#"{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "product-alpha1-echo-text",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "membership_chat",
+  "dependencies": [],
+  "effects": ["typed_host_io.echo_text", "SendRoomMessage"],
+  "failures": ["AdapterUnavailable", "RateLimited"],
+  "capabilities": ["JoinWorld", "ObserveWorld", "SendRoomMessage"],
+  "witness_requirements": [],
+  "membership_requirements": ["active_participant"],
+  "auth_policy": {
+    "policy_id": "echo-text-auth-policy",
+    "required_bindings": ["participant_membership"]
+  },
+  "auth_stack": ["membership_auth", "capability_auth"],
+  "contracts": [
+    {
+      "contract_id": "echo-text-chat-contract",
+      "variance": "invariant",
+      "effect_row": ["SendRoomMessage"],
+      "failure_row": ["RateLimited"]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": ["observer_safe_chat_summary"]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": ["raw_witness_payload", "raw_auth_evidence"]
+  },
+  "retention_policy": {
+    "scope": "echo_text_session",
+    "retained_artifacts": ["checker_report", "runtime_plan", "observer_safe_chat_lane"]
+  },
+  "message_recovery_policy": {
+    "handled_failures": ["timeout", "reject"],
+    "recovery": "retry_then_reject"
+  },
+  "savepoint_policy": {
+    "classes": ["R0", "R2"],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[ChatPlace]",
+    "host_io": {
+      "adapter_kind": "EchoText",
+      "effect_ref": "typed_host_io.echo_text",
+      "request_payload": {"kind": "text", "value": "Taro"},
+      "expected_response": {"kind": "text", "value": "Hello, Taro!"}
+    }
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}"#;
+
 fn unique_temp_dir(prefix: &str) -> PathBuf {
     let nonce = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -100,6 +163,33 @@ fn product_alpha1_package_schema_accepts_minimal_world_with_explicit_evidence() 
     }));
     assert!(!report.product_alpha1_ready);
     assert!(!report.final_public_api_frozen);
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_echo_text_host_io_package() {
+    let package = parse_product_alpha1_package_text(MINIMAL_ECHO_TEXT_PRODUCT_PACKAGE)
+        .expect("EchoText product alpha package should parse");
+    let report = check_product_alpha1_package(&package)
+        .expect("EchoText product alpha package should check");
+
+    assert_eq!(report.package_kind, "membership_chat");
+    assert!(report.accepted_obligations.iter().any(|row| {
+        row.kind == "runtime_input_host_io"
+            && row.evidence == "typed host-I/O runtime input declaration accepted"
+    }));
+    assert_eq!(report.verdict, "accepted");
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_invalid_echo_text_expected_response() {
+    let error = parse_product_alpha1_package_text(
+        &MINIMAL_ECHO_TEXT_PRODUCT_PACKAGE.replace("Hello, Taro!", "Goodbye, Taro!"),
+    )
+    .expect_err("EchoText host-I/O shape should be validated");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("EchoText"));
 }
 
 #[test]
