@@ -799,6 +799,7 @@ fn server_client_process_graph_panel(
     session: &ProductAlpha1SessionCarrier,
 ) -> ProductAlpha1ServerClientProcessGraphPanel {
     let operational = is_operational_product_package(&session.runtime_plan.package_kind);
+    let projection_inventory_present = session.runtime_plan.projection_inventory.is_some();
     let mut nodes = vec![ProductAlpha1NamedGraphNode {
         node_id: "process#world-server".to_string(),
         node_kind: "server_process".to_string(),
@@ -831,8 +832,10 @@ fn server_client_process_graph_panel(
         current_status: "implemented".to_string(),
     });
     ProductAlpha1ServerClientProcessGraphPanel {
-        current_execution_mode: if operational {
+        current_execution_mode: if operational && projection_inventory_present {
             "local_same_session_runtime_with_projection_inventory".to_string()
+        } else if operational {
+            "local_same_session_runtime_with_projection_intent".to_string()
         } else {
             "local_same_session_runtime".to_string()
         },
@@ -845,8 +848,12 @@ fn server_client_process_graph_panel(
 fn portal_graph_future_panel(
     session: &ProductAlpha1SessionCarrier,
 ) -> ProductAlpha1FutureBoundaryPanel {
+    let operational = is_operational_product_package(&session.runtime_plan.package_kind);
+    let portal_runtime = session.runtime_plan.package_kind == "portal_worldlink";
     ProductAlpha1FutureBoundaryPanel {
-        current_status: if is_operational_product_package(&session.runtime_plan.package_kind) {
+        current_status: if portal_runtime {
+            "bounded_discrete_handoff_runtime".to_string()
+        } else if operational {
             "planned_manifest_only".to_string()
         } else {
             "kept_later".to_string()
@@ -860,12 +867,20 @@ fn portal_graph_future_panel(
             ProductAlpha1NamedGraphNode {
                 node_id: "portal#world-link".to_string(),
                 node_kind: "portal_boundary".to_string(),
-                current_status: "future_inventory".to_string(),
+                current_status: if portal_runtime {
+                    "same_session_runtime_evidence".to_string()
+                } else {
+                    "future_inventory".to_string()
+                },
             },
             ProductAlpha1NamedGraphNode {
                 node_id: "world#destination".to_string(),
                 node_kind: "future_world".to_string(),
-                current_status: "future_inventory".to_string(),
+                current_status: if portal_runtime {
+                    "bounded_destination_admission_runtime".to_string()
+                } else {
+                    "future_inventory".to_string()
+                },
             },
         ],
         edges: vec![
@@ -1003,6 +1018,47 @@ fn canonical_operational_chain(
                 },
             ],
         ),
+        "portal_worldlink" => (
+            vec![
+                ProductAlpha1NamedGraphNode {
+                    node_id: "WorldCore".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "MembershipChat".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "SugorokuWorld".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "PortalWorldLink".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: "implemented".to_string(),
+                },
+            ],
+            vec![
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "WorldCore".to_string(),
+                    to_node: "MembershipChat".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "MembershipChat".to_string(),
+                    to_node: "SugorokuWorld".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "SugorokuWorld".to_string(),
+                    to_node: "PortalWorldLink".to_string(),
+                    relation: relation.to_string(),
+                },
+            ],
+        ),
         _ => (
             vec![ProductAlpha1NamedGraphNode {
                 node_id: package_id.to_string(),
@@ -1025,7 +1081,7 @@ fn dependency_node_id(dependency: &str) -> String {
 fn is_operational_product_package(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world_core" | "membership_chat" | "sugoroku_world"
+        "world_core" | "membership_chat" | "sugoroku_world" | "portal_worldlink"
     )
 }
 

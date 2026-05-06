@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-06 23:01 JST
+最終更新: 2026-05-06 23:32 JST
 
 ## この文書について
 
@@ -41,13 +41,15 @@
 - `P-A1-31` により product alpha release-candidate workflow は actualize 済みです:
   `mirrorea-alpha demo` と `scripts/product_alpha1_release_check.py check-all` により product package front-door、checker、same-session runtime、typed host-I/O、source-backed debug/auth/rate-limit layer attach、deferred object/avatar-preview attach boundary、local/Docker transport、concrete non-final viewer、local save/load、bounded quiescent-save、native host launch bundleを束ねます。`--skip-docker` は partial local probe であり release-candidate ready ではありません。final public product / grammar / ABI / WAN / distributed durable save-load ではありません。
 - `P-OPS-01` により canonical operational product sample suite first cut は actualize 済みです:
-  `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` により、`WorldCore -> MembershipChat -> SugorokuWorld` package/import chain、explicit debug/auth/rate-limit attach packages、local/Docker transport、observer-safe devtools/view、R0/R2 save/load、native host launch bundle、projection target inventory、portal/shard future inventory を 1 つの suite として再現できます。portal/shard は planned-only であり、final public grammar / ABI / WAN / distributed durable save-load / direct LLVM backend / final server-client split ではありません。
+  `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` により、`WorldCore -> MembershipChat -> SugorokuWorld` package/import chain、explicit debug/auth/rate-limit attach packages、local/Docker transport、observer-safe devtools/view、R0/R2 save/load、native host launch bundle、projection target inventory、portal/shard future inventory を 1 つの suite として再現できます。`future/portal-worldlink/` と shard inventory は planned blueprint であり、final public grammar / ABI / WAN / distributed durable save-load / direct LLVM backend / final server-client split ではありません。
 - `P-OPS-03` により operational direct text host boundary は actualize 済みです:
   `samples/product-alpha1/operational/membership-chat/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`scripts/operational_product_samples.py` により、bounded `EchoText("Taro") -> "Hello, Taro!"` lane を `run-local` / `session` / `export-devtools` から observer-safe に再現できます。これは final room-chat service、multi-message chat transport、stdio builtin ではありません。
 - `P-OPS-04` により operational Sugoroku behavior widening は actualize 済みです:
   `samples/product-alpha1/operational/sugoroku-world/`、`crates/mir-runtime::product_alpha1_session`、`scripts/operational_product_samples.py` により、bounded same-session roll / publish / witness / handoff / stale membership reject scenario を `run-local` / `session` / `export-devtools` / `release-check` から observer-safe に再現できます。これは final interactive game runtime、production networked gameplay、broader negative-row completion ではありません。
 - `P-OPS-05` により operational projection manifest / packet / FFI schema は actualize 済みです:
   `samples/product-alpha1/operational/deployments/projection/projection.profile.json`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、schema-backed projection target / packet / FFI inventory を `check` / runtime plan / observer-safe devtools projection panel / helper `release-check` から再現できます。これは final server/client binary split、placement optimizer、direct LLVM backend completion ではありません。
+- `P-OPS-06` により portal / world-link first cut は actualize 済みです:
+  `samples/product-alpha1/operational/portal-worldlink/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、bounded same-session resolve / handoff offer / witness emit / destination admit evidence を `check` / `run-local` / observer-safe devtools export / helper `release-check` から再現できます。`future/portal-worldlink/` blueprint は保持し、continuous spatial sync / WAN federation / final portal ABI は主張しません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -57,18 +59,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-OPS-06` portal / world-link first cut | `Macro 6/8`, `S0/S1` | WWW hyperlink 相当の discrete handoff sample を実装する | portal root が planned-only ではなく bounded runtime or model-check evidence を持つ | heavy |
-| 2 | `P-OPS-07` two-shard hard-boundary model-check sample | `Macro 6`, `S0/S1` | finite two-shard ownership/handoff line を no-double-owner property つきで置く | shard future line が planned-only から model-check evidence へ進む | heavy |
-| 3 | `P-OPS-09` developer package authoring guide | `Macro 7/8`, `S2` | 外部開発者が operational package を自力で author できる guide と schema example を揃える | clean clone から author/check/run/release-check までの package authoring guide が docs と helper に揃う | medium |
-| 4 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
-| 5 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
+| 1 | `P-OPS-07` two-shard hard-boundary model-check sample | `Macro 6`, `S0/S1` | finite two-shard ownership/handoff line を no-double-owner property つきで置く | shard future line が planned-only から model-check evidence へ進む | heavy |
+| 2 | `P-OPS-09` developer package authoring guide | `Macro 7/8`, `S2` | 外部開発者が operational package を自力で author できる guide と schema example を揃える | clean clone から author/check/run/release-check までの package authoring guide が docs と helper に揃う | medium |
+| 3 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 4 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-OPS-06` portal / world-link first cut
+  `P-OPS-07` two-shard hard-boundary model-check sample
 - recommendation reason:
-  `P-OPS-05` で projection manifest / packet / FFI schema は schema-backed inventory に進んだため、次の最小 widening は portal/world-link discrete handoff を planned-only inventory から bounded runtime or model-check evidence に進めることである。two-shard hard-boundary model-check はその後段に置ける
+  `P-OPS-06` で portal/world-link discrete handoff は bounded runtime evidence に進んだため、次の最小 widening は two-shard hard-boundary model-check sample を置いて portal/shard line の authority boundary を具体化することである
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -84,9 +85,9 @@
 | product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装し、`P-A1-31` release check で再確認済み |
 | admin/debug product viewer breadth | final public viewer / telemetry ABI に影響 | observer-safe + kept-later marker / bounded admin debug panel | product alpha release candidate では concrete observer-safe static viewer と admin/debug `kept_later` marker に留める。full admin/debug view は final-public gate |
 | operational room-chat widening | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current `EchoText` lane 維持 / room-chat-oriented `ChatText` lane へ widen / transport-coupled chat lane を先に入れる | current recommendation は `EchoText` lane を direct text host boundary evidence として維持し、room-oriented widening は `P-OPS-04` 以後に分ける |
-| operational Sugoroku widening beyond bounded carrier | `P-OPS-06+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、portal/shard を先に進めてから broader controls を reopen する |
+| operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| portal / shard actualization order | `specs/27` と future suite line に影響 | portal first / two-shard model-check first / both planned-only 維持 | discrete portal first cut を先に開き、その後に two-shard hard-boundary model-check sample を置く |
+| post-portal shard actualization order | `specs/27` と future suite line に影響 | two-shard model-check first / package authoring guide first / both deferred | portal first cut は actualize 済みなので、next は two-shard hard-boundary model-check sample を先に置く |
 
 ## user decision items
 
@@ -103,7 +104,7 @@
 |---|---|---|---|---|
 | docs freshness audit | `README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、index docs を current queue に合わせる | `python3 scripts/check_source_hierarchy.py`、`python3 scripts/validate_docs.py`、`git diff --check` | new `docs/reports/NNNN-*.md` | snapshot docs で新しい規範判断を勝手に増やさない |
 | runnable dashboard refresh | sample status、validation timestamp、operational gap を evidence-backed に保つ | relevant helper closeout commands | report + `samples_progress.md` | conceptual-only row を workflow-ready と書かない |
-| operational suite guide refresh | `samples/product-alpha1/operational/`、hands-on、research summary、helper CLI surface を同じ package で同期する | `python3 -m unittest scripts.tests.test_operational_product_samples`、`python3 scripts/operational_product_samples.py check-all --format json` | report if touched | portal/shard planned-only inventory を runnable claim に昇格しない |
+| operational suite guide refresh | `samples/product-alpha1/operational/`、hands-on、research summary、helper CLI surface を同じ package で同期する | `python3 -m unittest scripts.tests.test_operational_product_samples`、`python3 scripts/operational_product_samples.py check-all --format json` | report if touched | shard planned-only inventory や portal continuous sync を runnable claim に昇格しない |
 | Rust formatting / regression repair | docs-only package でも formatting floor を崩さない | `cargo fmt --check`、affected tests | report if touched | unrelated feature workを混ぜない |
 
 ## non-promoted references

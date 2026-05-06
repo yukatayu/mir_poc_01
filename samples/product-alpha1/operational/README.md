@@ -1,13 +1,14 @@
 # samples/product-alpha1/operational
 
-This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, and `P-OPS-05`.
+This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, and `P-OPS-06`.
 
 It stays separate from `samples/product-alpha1/demo/`.
 
 - `demo/` remains the product alpha release-candidate workflow root.
 - `operational/` is the next line: a more realistic development/process suite built from `WorldCore -> MembershipChat -> SugorokuWorld`.
 - Representative `.mir` files are explanatory only. Current executable input is versioned `package.mir.json`.
-- Portal / shard files under `future/` are planned manifest / blueprint evidence only.
+- `portal-worldlink/` is the active bounded portal runtime root.
+- Portal / shard files under `future/` are blueprint evidence only.
 
 Current runnable floor:
 
@@ -15,7 +16,9 @@ Current runnable floor:
 - `membership-chat/`: `check`, `run-local`, bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
 - `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
   deferred `placeholder-object` / `custom-avatar-preview` attach rows are part of the visible workflow, not hidden inventory
+- `portal-worldlink/`: `check`, `run-local`, observer-safe `export-devtools`, and bounded same-session portal resolve / handoff offer / witness emit / destination admit evidence
 - `deployments/projection/projection.profile.json`: schema-backed non-final projection inventory reflected by `check`, runtime plan, and the observer-safe devtools projection panel for `sugoroku-world`
+- `future/portal-worldlink/`: retained blueprint root for future portal manifest wording; it is not the executable root
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family
 
 Current non-claims:
@@ -35,5 +38,6 @@ Shortest guide:
 python3 scripts/operational_product_samples.py list --format json
 python3 scripts/operational_product_samples.py run-membership-chat --format json
 python3 scripts/operational_product_samples.py run-sugoroku --format json
+python3 scripts/operational_product_samples.py run-portal-worldlink --format json
 python3 scripts/operational_product_samples.py check-all --format json
 ```

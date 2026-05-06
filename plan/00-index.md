@@ -49,7 +49,7 @@
 - **product alpha-1 line**:
   `specs/25-product-alpha1-public-boundary.md` と `plan/50-product-alpha1-public-boundary-roadmap.md` は、bounded workflow の次に来る product/public-ready alpha-1 の public-ish CLI、package schema、same-session product demo、quiescent save、viewer、native launch bundle、release validation の reopen order を置く
 - **operational product sample line**:
-  `specs/26-operational-product-sample-suite.md` と `plan/51-operational-product-sample-roadmap.md` は、`WorldCore -> MembershipChat -> SugorokuWorld` suite、shared attach packages、deployment/projection inventory、release-check helper、next widening order を置く
+  `specs/26-operational-product-sample-suite.md` と `plan/51-operational-product-sample-roadmap.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink` suite、shared attach packages、deployment/projection inventory、release-check helper、retained portal blueprint、next widening order を置く
 - **portal / spatial world future line**:
   `specs/27-spatial-portal-and-shard-extension-boundary.md` と `plan/52-portal-spatial-world-roadmap.md` は、portal/world-link、two-shard hard boundary、replication profile optionality の future boundary を置く
 - **not final public**:

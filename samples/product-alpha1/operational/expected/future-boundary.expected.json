@@ -1,5 +1,6 @@
 {
-  "portal_worldlink_status": "planned_manifest_only",
+  "portal_worldlink_status": "bounded_discrete_handoff_runtime",
+  "portal_worldlink_blueprint_status": "planned_manifest_only",
   "spatial_shard_status": "planned_only",
   "non_claims": [
     "no WAN federation",

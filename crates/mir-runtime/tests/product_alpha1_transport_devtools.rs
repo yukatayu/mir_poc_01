@@ -194,3 +194,35 @@ fn product_alpha1_operational_sugoroku_devtools_bundle_uses_schema_backed_projec
             .any(|name| name == "host_io_adapter")
     );
 }
+
+#[test]
+fn product_alpha1_operational_portal_worldlink_devtools_bundle_surfaces_discrete_handoff() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/portal-worldlink"),
+    )
+    .expect("operational portal-worldlink root should run locally");
+
+    let bundle = export_product_alpha1_devtools(&report.session)
+        .expect("operational portal-worldlink devtools should export");
+
+    assert_eq!(
+        bundle.panels.portal_graph_future.current_status,
+        "bounded_discrete_handoff_runtime"
+    );
+    assert!(
+        bundle
+            .panels
+            .portal_graph_future
+            .nodes
+            .iter()
+            .any(|node| node.node_id == "portal#world-link")
+    );
+    assert!(
+        bundle
+            .panels
+            .portal_graph_future
+            .edges
+            .iter()
+            .any(|edge| edge.relation == "discrete_handoff")
+    );
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "operational-portal-worldlink",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "portal_worldlink",
+  "dependencies": [
+    "../sugoroku-world"
+  ],
+  "effects": [
+    "PortalResolve",
+    "PortalHandoff",
+    "PortalAdmit"
+  ],
+  "failures": [
+    "DestinationUnavailable",
+    "PortalAdmissionRejected",
+    "MissingCapability",
+    "MissingWitness",
+    "RouteUnavailable"
+  ],
+  "capabilities": [
+    "UsePortal",
+    "AdmitPortalTraveler"
+  ],
+  "witness_requirements": [
+    "portal_offer_pub"
+  ],
+  "membership_requirements": [
+    "active_admin_participant",
+    "portal_traveler"
+  ],
+  "auth_policy": {
+    "policy_id": "operational-portal-worldlink-auth-policy",
+    "required_bindings": [
+      "participant_membership",
+      "admin_membership"
+    ]
+  },
+  "auth_stack": [
+    "membership_auth",
+    "capability_auth"
+  ],
+  "contracts": [
+    {
+      "contract_id": "operational-portal-resolve-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "PortalResolve"
+      ],
+      "failure_row": [
+        "DestinationUnavailable",
+        "RouteUnavailable"
+      ]
+    },
+    {
+      "contract_id": "operational-portal-handoff-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "PortalHandoff"
+      ],
+      "failure_row": [
+        "MissingCapability",
+        "MissingWitness"
+      ]
+    },
+    {
+      "contract_id": "operational-portal-admission-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "PortalAdmit"
+      ],
+      "failure_row": [
+        "PortalAdmissionRejected"
+      ]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": [
+      "observer_safe_portal_summary"
+    ]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": [
+      "raw_witness_payload",
+      "raw_auth_evidence"
+    ]
+  },
+  "retention_policy": {
+    "scope": "operational_portal_session",
+    "retained_artifacts": [
+      "checker_report",
+      "runtime_plan",
+      "portal_graph_summary"
+    ]
+  },
+  "message_recovery_policy": {
+    "handled_failures": [
+      "timeout",
+      "reject"
+    ],
+    "recovery": "retry_then_reject"
+  },
+  "savepoint_policy": {
+    "classes": [
+      "R0",
+      "R2"
+    ],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[PortalBoundaryPlace]"
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}

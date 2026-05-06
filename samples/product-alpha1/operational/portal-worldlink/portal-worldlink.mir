@@ -1,0 +1,31 @@
+// representative source only; current executable input is package.mir.json
+import SugorokuWorld version "^0.1"
+
+module PortalWorldLink version "0.1.0"
+
+place PortalBoundaryPlace
+place DestinationWorldPlace
+
+capability UsePortal
+capability AdmitPortalTraveler
+
+witness portal_offer_pub
+
+perform resolve_portal_link(actor : Principal, destination : WorldRef)
+  require membership.active(actor)
+  require capability(UsePortal)
+  publish portal_resolved(destination)
+
+perform offer_discrete_handoff(actor : Principal, traveler : Principal)
+  require capability(UsePortal)
+  output handoff : PortalOffer
+  publish portal_handoff_offer(traveler)
+  produces witness portal_offer_pub
+
+perform admit_portal_traveler(destination_admin : Principal, traveler : Principal)
+  require witness(portal_offer_pub)
+  require capability(AdmitPortalTraveler)
+  ensure membership.active(traveler)
+  publish portal_admitted(traveler)
+
+observe portal_handoff_offer via portal_graph_panel

@@ -25,12 +25,16 @@ class OperationalProductSamplesTests(unittest.TestCase):
         self.assertIn("samples/product-alpha1/operational/membership-chat", roots)
         self.assertIn("samples/product-alpha1/operational/sugoroku-world", roots)
 
-    def test_sample_rows_marks_future_portal_as_non_runnable(self) -> None:
+    def test_sample_rows_marks_portal_worldlink_as_runnable(self) -> None:
         rows = operational_product_samples.sample_rows()
         portal = next(row for row in rows if row["sample_id"] == "OPS-06")
 
-        self.assertFalse(portal["runnable"])
+        self.assertTrue(portal["runnable"])
         self.assertEqual(portal["package_kind"], "portal_worldlink")
+        self.assertEqual(
+            portal["root"],
+            "samples/product-alpha1/operational/portal-worldlink",
+        )
 
     def test_operational_attach_specs_include_deferred_boundaries(self) -> None:
         specs = operational_product_samples.operational_attach_specs()
@@ -195,6 +199,82 @@ class OperationalProductSamplesTests(unittest.TestCase):
 
         self.assertTrue(
             operational_product_samples.sugoroku_devtools_runtime_evidence_observed(
+                result
+            )
+        )
+
+    def test_portal_run_check_requires_discrete_handoff_evidence(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:portal-worldlink",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "portal_resolve_requested"},
+                            {"event_kind": "portal_handoff_offered"},
+                            {"event_kind": "portal_handoff_witness_emitted"},
+                            {"event_kind": "portal_admission_requested"},
+                            {"event_kind": "portal_admission_accepted"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_portal_resolve"},
+                            {"transport_lane": "same_session_portal_handoff"},
+                            {"transport_lane": "same_session_portal_admit"},
+                        ]
+                    },
+                }
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.portal_runtime_evidence_observed(result)
+        )
+
+    def test_portal_devtools_check_requires_portal_panel_and_runtime_evidence(
+        self,
+    ) -> None:
+        result = operational_product_samples.CommandResult(
+            name="export-devtools:portal-worldlink",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "panel_ids": ["portal_graph_future", "message_route_graph"],
+                "panels": {
+                    "portal_graph_future": {
+                        "current_status": "bounded_discrete_handoff_runtime"
+                    }
+                },
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "portal_resolve_requested"},
+                            {"event_kind": "portal_handoff_offered"},
+                            {"event_kind": "portal_handoff_witness_emitted"},
+                            {"event_kind": "portal_admission_requested"},
+                            {"event_kind": "portal_admission_accepted"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_portal_resolve"},
+                            {"transport_lane": "same_session_portal_handoff"},
+                            {"transport_lane": "same_session_portal_admit"},
+                        ]
+                    },
+                },
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.portal_devtools_runtime_evidence_observed(
                 result
             )
         )

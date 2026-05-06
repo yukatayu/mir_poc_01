@@ -18,6 +18,7 @@ OPS_ROOT = REPO_ROOT / "samples" / "product-alpha1" / "operational"
 WORLD_CORE = OPS_ROOT / "world-core"
 MEMBERSHIP_CHAT = OPS_ROOT / "membership-chat"
 SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
+PORTAL_WORLDLINK = OPS_ROOT / "portal-worldlink"
 LAYERS_ROOT = OPS_ROOT / "packages"
 EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'EchoText:Text("Taro")->Text("Hello, Taro!")'
 EXPECTED_SUGOROKU_EVENT_KINDS = {
@@ -37,6 +38,18 @@ EXPECTED_SUGOROKU_PROJECTION_PACKET_NAMES = {
     "chat_message_packet",
 }
 EXPECTED_SUGOROKU_PROJECTION_FFI_NAMES = {"host_io_adapter"}
+EXPECTED_PORTAL_EVENT_KINDS = {
+    "portal_resolve_requested",
+    "portal_handoff_offered",
+    "portal_handoff_witness_emitted",
+    "portal_admission_requested",
+    "portal_admission_accepted",
+}
+EXPECTED_PORTAL_ROUTE_LANES = {
+    "same_session_portal_resolve",
+    "same_session_portal_handoff",
+    "same_session_portal_admit",
+}
 
 
 @dataclass(frozen=True)
@@ -118,10 +131,10 @@ def sample_rows() -> list[dict[str, Any]]:
         },
         {
             "sample_id": "OPS-06",
-            "root": str((OPS_ROOT / "future" / "portal-worldlink").relative_to(REPO_ROOT)),
+            "root": str(PORTAL_WORLDLINK.relative_to(REPO_ROOT)),
             "package_id": "operational-portal-worldlink",
             "package_kind": "portal_worldlink",
-            "runnable": False,
+            "runnable": True,
         },
     ]
 
@@ -223,6 +236,39 @@ def sugoroku_projection_inventory_observed(result: CommandResult) -> bool:
     )
 
 
+def portal_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    session = payload.get("session") or {}
+    panels = payload.get("panels") or {}
+    event_nodes = (
+        (session.get("event_dag") or {}).get("nodes")
+        or (panels.get("event_dag") or {}).get("nodes")
+        or []
+    )
+    route_entries = (
+        (session.get("route_graph") or {}).get("routes")
+        or (panels.get("message_route_graph") or {}).get("routes")
+        or []
+    )
+    event_kinds = {node.get("event_kind") for node in event_nodes}
+    route_lanes = {route.get("transport_lane") for route in route_entries}
+    return EXPECTED_PORTAL_EVENT_KINDS.issubset(
+        event_kinds
+    ) and EXPECTED_PORTAL_ROUTE_LANES.issubset(route_lanes)
+
+
+def portal_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    panel_ids = payload.get("panel_ids") or []
+    portal_panel = (payload.get("panels") or {}).get("portal_graph_future") or {}
+    return (
+        "portal_graph_future" in panel_ids
+        and "message_route_graph" in panel_ids
+        and portal_panel.get("current_status") == "bounded_discrete_handoff_runtime"
+        and portal_runtime_evidence_observed(result)
+    )
+
+
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
@@ -234,6 +280,10 @@ def run_world_package(root: Path) -> dict[str, Any]:
     elif root == SUGOROKU_WORLD:
         semantic_checks["runtime_evidence_observed"] = (
             sugoroku_runtime_evidence_observed(result)
+        )
+    elif root == PORTAL_WORLDLINK:
+        semantic_checks["runtime_evidence_observed"] = (
+            portal_runtime_evidence_observed(result)
         )
     return {
         "surface_kind": "operational_product_sample_run_report",
@@ -393,8 +443,10 @@ def build_native_bundle() -> dict[str, Any]:
 def release_check(skip_docker: bool) -> dict[str, Any]:
     session_dir, env = sugoroku_session_env()
     chat_session_dir, chat_env = sugoroku_session_env()
+    portal_session_dir, portal_env = sugoroku_session_env()
     viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-viewer-")
     chat_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-chat-viewer-")
+    portal_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-portal-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
     sugoroku_check = run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD)))
     membership_chat_run = run_command(
@@ -416,6 +468,26 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "view:membership-chat",
         cargo_alpha_args("view", chat_viewer_dir, "--check"),
     )
+    portal_check = run_command("check:portal-worldlink", cargo_alpha_args("check", str(PORTAL_WORLDLINK)))
+    portal_run = run_command(
+        "run-local:portal-worldlink",
+        cargo_alpha_args("run-local", str(PORTAL_WORLDLINK)),
+        env=portal_env,
+    )
+    portal_export = run_command(
+        "export-devtools:portal-worldlink",
+        cargo_alpha_args(
+            "export-devtools",
+            "session#operational-portal-worldlink",
+            "--out",
+            portal_viewer_dir,
+        ),
+        env=portal_env,
+    )
+    portal_view = run_command(
+        "view:portal-worldlink",
+        cargo_alpha_args("view", portal_viewer_dir, "--check"),
+    )
     sugoroku_run = run_command(
         "run-local:sugoroku",
         cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
@@ -430,9 +502,13 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         run_command("check:world-core", cargo_alpha_args("check", str(WORLD_CORE))),
         run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
         sugoroku_check,
+        portal_check,
         membership_chat_run,
         membership_chat_export,
         membership_chat_view,
+        portal_run,
+        portal_export,
+        portal_view,
         sugoroku_run,
         sugoroku_session,
         run_command("save:r0", cargo_alpha_args("save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r0"), env=env),
@@ -477,6 +553,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     membership_chat_devtools_ok = membership_chat_devtools_echo_text_observed(
         membership_chat_export
     )
+    portal_runtime_ok = portal_runtime_evidence_observed(portal_run)
+    portal_devtools_ok = portal_devtools_runtime_evidence_observed(portal_export)
     projection_inventory_ok = sugoroku_projection_inventory_observed(sugoroku_check)
     sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
     sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
@@ -484,6 +562,10 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         failed.append("membership-chat-echo-text")
     if not membership_chat_devtools_ok:
         failed.append("membership-chat-devtools")
+    if not portal_runtime_ok:
+        failed.append("portal-runtime-evidence")
+    if not portal_devtools_ok:
+        failed.append("portal-devtools")
     if not projection_inventory_ok:
         failed.append("projection-inventory")
     if not sugoroku_runtime_ok:
@@ -497,13 +579,17 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "docker_included": not skip_docker,
         "session_dir": session_dir,
         "chat_session_dir": chat_session_dir,
+        "portal_session_dir": portal_session_dir,
         "viewer_dir": viewer_dir,
         "chat_viewer_dir": chat_viewer_dir,
+        "portal_viewer_dir": portal_viewer_dir,
         "bundle_dir": bundle_dir,
         "failed_commands": failed,
         "attach_matrix_complete": attach_matrix_ok,
         "membership_chat_echo_text_ok": membership_chat_echo_text_ok,
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
+        "portal_runtime_ok": portal_runtime_ok,
+        "portal_devtools_ok": portal_devtools_ok,
         "projection_inventory_ok": projection_inventory_ok,
         "sugoroku_runtime_ok": sugoroku_runtime_ok,
         "sugoroku_devtools_ok": sugoroku_devtools_ok,
@@ -600,6 +686,8 @@ def main(argv: list[str] | None = None) -> int:
     add_subcommand_format(run_membership_chat_parser)
     run_sugoroku_parser = subparsers.add_parser("run-sugoroku")
     add_subcommand_format(run_sugoroku_parser)
+    run_portal_worldlink_parser = subparsers.add_parser("run-portal-worldlink")
+    add_subcommand_format(run_portal_worldlink_parser)
     attach_layers_parser = subparsers.add_parser("attach-layers")
     add_subcommand_format(attach_layers_parser)
     transport_local_parser = subparsers.add_parser("transport-local")
@@ -635,6 +723,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = run_world_package(MEMBERSHIP_CHAT)
     elif args.command == "run-sugoroku":
         payload = run_world_package(SUGOROKU_WORLD)
+    elif args.command == "run-portal-worldlink":
+        payload = run_world_package(PORTAL_WORLDLINK)
     elif args.command == "attach-layers":
         payload = attach_layers()
     elif args.command == "transport-local":

@@ -36,6 +36,7 @@ samples/product-alpha1/operational/
   - `world-core/`
   - `membership-chat/`
   - `sugoroku-world/`
+  - `portal-worldlink/`
 - shared attach package roots
   - `packages/debug-layer/`
   - `packages/auth-layer/`
@@ -59,7 +60,7 @@ samples/product-alpha1/operational/
 - `.mir` files are representative source only
 - current executable input is `package.mir.json`
 - `deployments/projection/projection.profile.json` may carry schema-backed target / packet / FFI inventory for the runnable root, but it is supplementary inventory rather than executable input
-- `world_core` / `membership_chat` / `sugoroku_world` are product alpha package kinds for this line
+- `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
 
@@ -96,6 +97,15 @@ samples/product-alpha1/operational/
 - accepts one schema-backed projection inventory summary from `deployments/projection/projection.profile.json`, surfaced through `check`, runtime plan, and observer-safe devtools projection panels
 - keeps save/load visibility, transport visibility, and hot-plug visibility on the same product alpha session carrier
 - current direct execution lane remains bounded to the existing typed host-I/O `AddOne` adapter and does not claim final interactive game runtime completion
+
+### PortalWorldLink
+
+`L1`:
+
+- imports `SugorokuWorld`
+- actualizes one bounded same-session discrete portal handoff cut with resolve / handoff offer / witness emit / destination admit evidence
+- keeps `future/portal-worldlink/` as a planned blueprint root rather than silently promoting it into the executable root
+- does not claim WAN federation, continuous spatial sync, or final portal ABI
 
 ## attach / transport / devtools / save-load
 

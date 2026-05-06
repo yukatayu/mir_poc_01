@@ -10,8 +10,8 @@
 - `demo/` は release-candidate workflow root として残し、operational suite と混ぜない
 - current executable input は `package.mir.json`
 - representative `.mir` は explanatory source
-- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`
-- portal / shard は future boundary inventory として同 root に置いてよいが、planned-only を維持する
+- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`、`PortalWorldLink`
+- `future/portal-worldlink/` と shard inventory は同 root に置いてよいが、active portal root と混同せず blueprint / planned-only を維持する
 
 ## P-OPS-01 current scope
 
@@ -39,24 +39,29 @@
 - `crates/mir-runtime::product_alpha1_session` と `crates/mir-runtime::product_alpha1_devtools` から同 inventory を runtime plan / observer-safe projection panel に反映する
 - `scripts/operational_product_samples.py` の `release-check` / `check-all` に projection inventory semantic check を追加する
 
+## P-OPS-06 current scope
+
+- `samples/product-alpha1/operational/portal-worldlink/` を active executable root として追加する
+- `portal_worldlink` package kind を current product alpha executable line に追加する
+- bounded same-session discrete handoff evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
+- `future/portal-worldlink/` blueprint root を残し、active runtime root と明示的に分ける
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
 - final SDK / ABI
 - final server/client split
 - LLVM backend
-- portal runtime actualization
+- continuous portal spatial sync
 - shard replication actualization
 - WAN / federation
 - distributed durable save/load
 
 ## next packages
 
-1. `P-OPS-06`
-   portal / world-link first cut
-2. `P-OPS-07`
+1. `P-OPS-07`
    two-shard hard-boundary model-check sample
-3. `P-OPS-09`
+2. `P-OPS-09`
    external developer package authoring guide
 
 ## current recommendation
@@ -64,8 +69,8 @@
 - `P-OPS-03` で direct text host boundary は `MembershipChat` に narrow `EchoText` lane として actualize 済み
 - `P-OPS-04` で `SugorokuWorld` の bounded scenario は current product alpha session carrier に寄せて actualize 済み
 - `P-OPS-05` で projection schema と packet / FFI boundary inventory は schema-backed inventory として actualize 済み
-- 次は `P-OPS-06` として、portal/world-link discrete handoff を planned-only inventory から bounded runtime or model-check evidence に進める
-- product alpha current line の bounded runtime semantics と non-claims を壊さず、two-shard hard-boundary model-check は portal first cut の後段に置く
+- `P-OPS-06` で `PortalWorldLink` bounded same-session discrete handoff root は actualize 済み
+- 次は `P-OPS-07` として、portal first cut の bounded runtime semantics を壊さず、two-shard hard-boundary model-check sample を置く
 
 ## open questions
 

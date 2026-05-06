@@ -3,15 +3,19 @@
   "root_packages": [
     "operational-world-core",
     "operational-membership-chat",
-    "operational-sugoroku"
+    "operational-sugoroku",
+    "operational-portal-worldlink"
   ],
   "runnable_roots": [
     "world-core",
     "membership-chat",
-    "sugoroku-world"
+    "sugoroku-world",
+    "portal-worldlink"
   ],
   "planned_only_roots": [
-    "future/portal-worldlink",
     "future/two-shard-hard-boundary"
+  ],
+  "blueprint_roots": [
+    "future/portal-worldlink"
   ]
 }

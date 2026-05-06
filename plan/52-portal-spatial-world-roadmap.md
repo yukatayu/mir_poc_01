@@ -7,6 +7,7 @@
 ## 決定済み
 
 - portal は discrete world-link handoff から始める
+- `P-OPS-06` で active `portal-worldlink/` root は bounded same-session discrete handoff として actualize 済み
 - continuous spatial sync は別 family
 - two-shard hard boundary を first promoted model にする
 - vector clock default は採らない
@@ -14,14 +15,19 @@
 
 ## package order
 
-1. `P-OPS-06`
-   portal / world-link first cut
-2. `P-OPS-07`
+1. `P-OPS-07`
    two-shard hard-boundary model-check sample
-3. post-OPS widening
+2. post-OPS widening
    gradient observation profile
-4. much later
+3. much later
    continuous infinite federation / WAN line
+
+## current portal cut
+
+- active executable root は `samples/product-alpha1/operational/portal-worldlink/`
+- `future/portal-worldlink/` は blueprint root として維持する
+- current runtime evidence は resolve / handoff offer / witness emit / destination admit の same-session discrete handoff に限る
+- current stop line は WAN federation、continuous spatial sync、final portal ABI
 
 ## recommended first model
 

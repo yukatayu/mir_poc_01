@@ -9,7 +9,8 @@
 - `WorldCore -> MembershipChat -> SugorokuWorld` の source / package chain を固定した
 - `mirrorea-alpha` の current product alpha command familyで再現できる bounded operational workflow を docs と helper script にまとめた
 - `projection.profile.json` を schema-backed target / packet / FFI inventory として `check` / runtime plan / devtools に接続した
-- portal / shard を同 suite 内の future boundary inventory として固定した
+- `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
+- shard を同 suite 内の future boundary inventory として固定した
 
 ## What Is Runnable Now
 
@@ -18,6 +19,7 @@
 - `membership-chat` の bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary と observer-safe devtools export
 - `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
+- `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
 - `scripts/operational_product_samples.py check-all`
 
@@ -25,8 +27,8 @@
 
 - representative textual `.mir`
 - richer server/client binary split realization beyond the current projection inventory summary
-- portal / world-link manifest
 - two-shard hard-boundary future profile
+- `future/portal-worldlink/` blueprint manifest
 - broader room-chat-oriented `ChatText` lane
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 
@@ -42,7 +44,7 @@
 - direct LLVM backend
 - WAN / federation
 - distributed durable save/load
-- final portal / shard runtime implementation
+- final portal ABI / continuous spatial sync / shard runtime implementation
 
 ## Entry Points
 

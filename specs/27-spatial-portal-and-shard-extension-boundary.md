@@ -26,7 +26,7 @@ portal / world-link / shard / replication profile の future boundary を固定�
 
 - portal / world-link は destination lookup, admission, handoff を分ける
 - portal handoff は witness / capability / membership freshness を transport に潰さない
-- current line の portal manifest は planned-only でよい
+- current line は bounded same-session portal root を actualize してよいが、future blueprint root も並置してよい
 - portal current line は WAN federation completion を主張しない
 
 ## shard boundary

@@ -1,8 +1,8 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` widening を再現するための入口です。
 
-これは final public product ではありません。portal / shard は planned-only inventory を含みますが、runtime 実装 claim ではありません。
+これは final public product ではありません。portal は bounded same-session first cut まで actualize 済みですが、WAN federation / continuous spatial sync / final portal ABI ではありません。shard は planned-only inventory です。
 
 ## Validate The Repository
 
@@ -15,12 +15,13 @@ cargo fmt --check
 git diff --check
 ```
 
-## Check The Three Roots
+## Check The Four Roots
 
 ```bash
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/portal-worldlink --format json
 ```
 
 Expected bounded evidence:
@@ -45,6 +46,24 @@ Expected bounded evidence:
 - `typed_host_io_claimed = true`
 - observer-safe host-I/O lane includes `EchoText:Text("Taro")->Text("Hello, Taro!")`
 - event DAG / devtools export show the same request/response without introducing stdio as a Mir core primitive
+
+## Run The Portal First Cut
+
+```bash
+portal_session_dir=$(mktemp -d /tmp/mirrorea-ops-portal-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$portal_session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/portal-worldlink --format json
+portal_viewer_dir=$(mktemp -d /tmp/mirrorea-ops-portal-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$portal_session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-portal-worldlink' --out "$portal_viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$portal_viewer_dir" --check --format json
+```
+
+Expected bounded evidence:
+
+- `typed_host_io_claimed = false`
+- `run-local` / `export-devtools` payload には `portal_resolve_requested`, `portal_handoff_offered`, `portal_handoff_witness_emitted`, `portal_admission_requested`, `portal_admission_accepted` が入る
+- route lanes は `same_session_portal_resolve`, `same_session_portal_handoff`, `same_session_portal_admit` を observer-safe に保持する
+- devtools `portal_graph_future.current_status = bounded_discrete_handoff_runtime`
+- これは discrete handoff first cut であり、continuous spatial sync や WAN federation completion は主張しない
 
 ## Run The First Operational Workflow
 
@@ -84,6 +103,7 @@ Current boundedness:
 python3 scripts/operational_product_samples.py list --format json
 python3 scripts/operational_product_samples.py run-membership-chat --format json
 python3 scripts/operational_product_samples.py run-sugoroku --format json
+python3 scripts/operational_product_samples.py run-portal-worldlink --format json
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/operational_product_samples.py release-check --format json
 ```
@@ -91,7 +111,8 @@ python3 scripts/operational_product_samples.py release-check --format json
 ## Read The Future Boundary Inventory
 
 - `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
+- `samples/product-alpha1/operational/portal-worldlink/`
 - `samples/product-alpha1/operational/future/portal-worldlink/`
 - `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
 
-`projection.profile.json` は current schema-backed inventory です。portal / shard files は current runtime completion ではなく、next package inventory です。
+`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` は current bounded runtime root、`future/portal-worldlink/` は retained blueprint root、`future/two-shard-hard-boundary/` は next package inventory です。

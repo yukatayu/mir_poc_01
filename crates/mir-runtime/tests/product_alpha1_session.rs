@@ -245,6 +245,69 @@ fn product_alpha1_run_local_accepts_operational_sugoroku_root() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_portal_worldlink_root() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/portal-worldlink"),
+    )
+    .expect("operational portal-worldlink root should run locally");
+
+    assert_eq!(report.package_id, "operational-portal-worldlink");
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-portal-worldlink"
+    );
+    assert_eq!(report.runtime_plan.package_kind, "portal_worldlink");
+    assert_eq!(
+        report.runtime_plan.entry_place,
+        "Place[PortalBoundaryPlace]"
+    );
+    assert!(
+        report
+            .runtime_plan
+            .declared_dependencies
+            .iter()
+            .any(|dependency| dependency == "../sugoroku-world")
+    );
+    assert!(!report.typed_host_io_claimed);
+    let event_kinds = report
+        .session
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_kind.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "portal_resolve_requested",
+        "portal_handoff_offered",
+        "portal_handoff_witness_emitted",
+        "portal_admission_requested",
+        "portal_admission_accepted",
+    ] {
+        assert!(
+            event_kinds.contains(required),
+            "missing portal event kind {required}"
+        );
+    }
+    let route_lanes = report
+        .session
+        .route_graph
+        .routes
+        .iter()
+        .map(|route| route.transport_lane.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "same_session_portal_resolve",
+        "same_session_portal_handoff",
+        "same_session_portal_admit",
+    ] {
+        assert!(
+            route_lanes.contains(required),
+            "missing portal route lane {required}"
+        );
+    }
+}
+
+#[test]
 fn product_alpha1_run_local_accepts_operational_membership_chat_root() {
     let report = run_product_alpha1_local_session_path(
         repo_root().join("samples/product-alpha1/operational/membership-chat"),

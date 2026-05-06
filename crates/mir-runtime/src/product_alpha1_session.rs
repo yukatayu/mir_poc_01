@@ -1724,6 +1724,8 @@ fn materialize_package_runtime_evidence(
 ) {
     if package.package_kind == "sugoroku_world" {
         materialize_sugoroku_runtime_evidence(session, package);
+    } else if package.package_kind == "portal_worldlink" {
+        materialize_portal_runtime_evidence(session, package);
     }
 }
 
@@ -1902,6 +1904,168 @@ fn materialize_sugoroku_runtime_evidence(
                 "membership freshness remains explicit and is not collapsed into transport"
                     .to_string(),
             ],
+        });
+}
+
+fn materialize_portal_runtime_evidence(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+) {
+    let membership_epoch = session.membership.membership_epoch;
+    let member_incarnation = 0;
+    let resolve_envelope_id = "envelope#portal-resolve-1".to_string();
+    let handoff_envelope_id = "envelope#portal-handoff-1".to_string();
+    let admit_envelope_id = "envelope#portal-admit-1".to_string();
+    let witness_ref = package
+        .witness_requirements
+        .first()
+        .cloned()
+        .unwrap_or_else(|| "portal_offer_pub".to_string());
+
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#portal-resolve-request"),
+        "portal_resolve_requested",
+        "ParticipantPlace[active_admin_participant]",
+        Some(resolve_envelope_id.clone()),
+        "portal resolve requested for world-link destination".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#portal-handoff-offered"),
+        "portal_handoff_offered",
+        "Place[PortalBoundaryPlace]",
+        Some(handoff_envelope_id.clone()),
+        "discrete portal handoff offered to destination world".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#portal-handoff-witness-emitted"),
+        "portal_handoff_witness_emitted",
+        "Place[PortalBoundaryPlace]",
+        Some(handoff_envelope_id.clone()),
+        format!("portal witness {witness_ref} emitted for the handoff offer"),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#portal-admission-requested"),
+        "portal_admission_requested",
+        "Place[DestinationWorldPlace]",
+        Some(admit_envelope_id.clone()),
+        "destination world admission requested for portal traveler".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#portal-admission-accepted"),
+        "portal_admission_accepted",
+        "Place[DestinationWorldPlace]",
+        Some(admit_envelope_id.clone()),
+        "destination world admitted the portal traveler".to_string(),
+    );
+
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#portal-resolve-1".to_string(),
+        envelope_id: resolve_envelope_id.clone(),
+        from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+        to_place: "Place[PortalBoundaryPlace]".to_string(),
+        transport_lane: "same_session_portal_resolve".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_portal_resolve_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "UsePortal")
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#portal-handoff-1".to_string(),
+        envelope_id: handoff_envelope_id.clone(),
+        from_place: "Place[PortalBoundaryPlace]".to_string(),
+        to_place: "Place[DestinationWorldPlace]".to_string(),
+        transport_lane: "same_session_portal_handoff".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_portal_handoff_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "UsePortal")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#portal-admit-1".to_string(),
+        envelope_id: admit_envelope_id.clone(),
+        from_place: "Place[DestinationWorldPlace]".to_string(),
+        to_place: "ParticipantPlace[portal_traveler]".to_string(),
+        transport_lane: "same_session_portal_admit".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_portal_admission_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "AdmitPortalTraveler")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: resolve_envelope_id,
+            state: "Delivered".to_string(),
+            failure_class: None,
+            recovery_action: None,
+        });
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: handoff_envelope_id,
+            state: "Delivered".to_string(),
+            failure_class: None,
+            recovery_action: None,
+        });
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: admit_envelope_id,
+            state: "Delivered".to_string(),
+            failure_class: None,
+            recovery_action: None,
         });
 }
 
@@ -2376,7 +2540,7 @@ fn bootstrap_membership(package: &ProductAlpha1Package) -> Vec<String> {
 fn is_world_like_product_alpha1_package_kind(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world" | "world_core" | "membership_chat" | "sugoroku_world"
+        "world" | "world_core" | "membership_chat" | "sugoroku_world" | "portal_worldlink"
     )
 }
 
@@ -2385,6 +2549,7 @@ fn default_entry_place_for_package_kind(package_kind: &str) -> String {
         "world_core" => "Place[WorldServerPlace]".to_string(),
         "membership_chat" => "Place[ChatPlace]".to_string(),
         "sugoroku_world" => "Place[SugorokuGamePlace]".to_string(),
+        "portal_worldlink" => "Place[PortalBoundaryPlace]".to_string(),
         _ => "Place[ProductDemoRoom]".to_string(),
     }
 }
@@ -2488,6 +2653,52 @@ fn representative_place_graph(package_kind: &str, entry_place: &str) -> ProductA
                     from_place: "Place[SugorokuGamePlace]".to_string(),
                     to_place: "Place[HostAdapter]".to_string(),
                     relation: "typed_host_io_adapter_route".to_string(),
+                },
+            ],
+        },
+        "portal_worldlink" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[SugorokuGamePlace]".to_string(),
+                    place_kind: "source_world".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[PortalBoundaryPlace]".to_string(),
+                    place_kind: "portal_boundary".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[DestinationWorldPlace]".to_string(),
+                    place_kind: "destination_world".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[active_admin_participant]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[portal_traveler]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+            ],
+            edges: vec![
+                ProductAlpha1PlaceEdge {
+                    from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+                    to_place: "Place[SugorokuGamePlace]".to_string(),
+                    relation: "source_world_membership".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[SugorokuGamePlace]".to_string(),
+                    to_place: "Place[PortalBoundaryPlace]".to_string(),
+                    relation: "portal_handoff_offer".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[PortalBoundaryPlace]".to_string(),
+                    to_place: "Place[DestinationWorldPlace]".to_string(),
+                    relation: "discrete_handoff".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[DestinationWorldPlace]".to_string(),
+                    to_place: "ParticipantPlace[portal_traveler]".to_string(),
+                    relation: "portal_admission".to_string(),
                 },
             ],
         },
