@@ -132,6 +132,17 @@ WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardB
 
 Current validated starter catalog intentionally stops at `SugorokuWorld`. `portal_worldlink` and `two_shard_hard_boundary` starters remain later because the current bounded authoring guide prioritizes the mainstream world/chat/game chain before future-boundary portal/shard widening.
 
+## Portal/Shard Authoring Boundary
+
+Current decision:
+
+- no `templates/portal-worldlink-starter/`
+- no `templates/two-shard-hard-boundary-starter/`
+- use active executable roots as the current study/copy boundary if you need portal/shard authoring now
+- do not treat `future/portal-worldlink/`, `future/two-shard-hard-boundary/`, or `future/gradient-observation.profile.json` as executable package roots
+
+For the concrete boundary and copy rules, read `operational_portal_shard_starter_boundary_01.md`.
+
 ## Common Diagnostics
 
 Typical mistakes and their current diagnostics:

@@ -13,6 +13,7 @@
 - `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
 - `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
 - `gradient-observation.profile.json` を追加し、observer-only gradient widening を `planned_only` profile として固定した
+- validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定した
 
 ## What Is Runnable Now
 
@@ -34,6 +35,7 @@
 - `future/two-shard-hard-boundary/` blueprint manifest
 - gradient observation runtime / broader replication profile runtime
 - broader room-chat-oriented `ChatText` lane
+- portal/shard starter revisit after a future dedicated widening package
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 
 ## Why This Matters
@@ -53,6 +55,7 @@
 ## Entry Points
 
 - hands-on: `../hands_on/operational_product_sample_01.md`
+- authoring boundary: `../hands_on/operational_portal_shard_starter_boundary_01.md`
 - normative boundary: `../../specs/26-operational-product-sample-suite.md`
 - future boundary: `../../specs/27-spatial-portal-and-shard-extension-boundary.md`
 - roadmap memory: `../../plan/51-operational-product-sample-roadmap.md`

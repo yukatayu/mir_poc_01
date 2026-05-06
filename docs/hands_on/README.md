@@ -32,6 +32,7 @@
 | `operational_package_authoring_01.md` | `templates/world-core-starter/` / `membership-chat-starter/` / `sugoroku-world-starter/` から external developer が bounded operational package を author / check / run-local する入口 |
 | `operational_backend_inventory_01.md` | operational suite の host launch bundle / WASM / LLVM backend boundary を docs-first inventory として読む入口 |
 | `operational_gradient_observation_profile_01.md` | portal/shard future line の observer-only gradient observation profile を docs-first に読む入口 |
+| `operational_portal_shard_starter_boundary_01.md` | portal/shard line を current starter catalog に広げず、active roots と `future/` inventory を分けて読む入口 |
 
 ## 既存の長い入門文書
 

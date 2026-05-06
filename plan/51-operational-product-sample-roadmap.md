@@ -81,6 +81,12 @@
 - hands-on / summary / roadmap / dashboard に gradient observation profile が runtime actualizationではなく `planned_only` inventory であることを明記する
 - current active runtime root は `two-shard-hard-boundary/` のまま保持する
 
+## P-OPS-12 current scope
+
+- validated starter catalog を current line では `world-core` / `membership-chat` / `sugoroku-world` に留める decision を docs-first に actualize する
+- portal/shard authoring は active executable roots を study/copy boundary として扱い、`future/` inventory は non-executable のまま保つ
+- authoring guide / summary / roadmap / dashboard に portal/shard starter non-addition の理由と reopen condition を明記する
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -94,10 +100,10 @@
 
 ## next packages
 
-1. portal/shard starter decision
-   decide whether future-boundary roots should ever gain validated template-only starters
-2. broader room-chat lane widening
+1. broader room-chat lane widening
    decide whether `MembershipChat` should remain on `EchoText` or grow toward room-oriented chat
+2. maintenance / dashboard freshness
+   keep queue wording, indexes, and validation anchors synchronized after the starter-boundary decision
 
 ## current recommendation
 
@@ -110,12 +116,12 @@
 - `P-OPS-08` で current host launch bundle line を保ったまま backend feasibility inventory は docs-first に actualize 済み
 - `P-OPS-10` で `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を追加し、starter catalog を mainstream chain まで widen 済み
 - `P-OPS-11` で `future/gradient-observation.profile.json` と guide を追加し、observer-only widening を `planned_only` inventory として actualize 済み
-- 次は portal/shard starter decision とし、broader room-chat lane widening はその後段に置く
+- `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
+- 次は broader room-chat lane widening とし、maintenance / dashboard freshness はその後段に置く
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか
-- portal/shard future-boundary rootsに validated starter catalog を与えるべきか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか

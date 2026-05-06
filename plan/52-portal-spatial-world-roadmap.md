@@ -16,9 +16,12 @@
 
 ## package order
 
-1. post-OPS widening
+1. completed docs-first widenings
    gradient observation profile
-2. much later
+   portal/shard starter boundary
+2. next semantic/runtime widenings
+   broader room-chat lane
+3. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -50,6 +53,12 @@
 - observer-only overlap zone、freshness fields、replication non-default reading、fallback behavior を reader-facing docs に明記する
 - runtime actualization、model-check completion、portal/shard starter wideningは含めない
 
+## P-OPS-12 current scope
+
+- current line では `portal_worldlink` / `two_shard_hard_boundary` starter duplicates を追加しない decision を docs-first に固定する
+- portal/shard authoring は active executable roots を study/copy boundary として扱い、`future/` inventory は non-executable のまま保つ
+- later starter reopen condition を active-root sourced / future-blueprint distinct / focused validation required に固定する
+
 ## avoid
 
 - portal を transport alias に潰すこと
@@ -62,3 +71,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
+- portal/shard starter を later に reopen するなら、room-chat widening か gradient/model-check widening のどちらの後で扱うべきか

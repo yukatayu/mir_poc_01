@@ -71,6 +71,9 @@ samples/product-alpha1/operational/
 - current backend-adjacent actualization is `native host launch bundle` only; docs may inventory WASM host or LLVM/native projection options as future boundary comparisons, but must not claim them executable
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
 - `templates/` roots may be schema-valid and runnable through bounded `check` / `run-local`, but they remain `template_only` authoring starters rather than promoted operational sample roots
+- current validated starter catalog intentionally stops at `world-core-starter/`, `membership-chat-starter/`, and `sugoroku-world-starter/`
+- `portal-worldlink/` and `two-shard-hard-boundary/` are current active executable roots, not duplicated `template_only` starter roots
+- `future/` portal/shard inventory must remain non-executable even when active roots are used as authoring references
 
 ## package roles
 
@@ -123,6 +126,14 @@ samples/product-alpha1/operational/
 - actualizes one bounded same-session two-shard hard-authority cut with offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidence
 - keeps `future/two-shard-hard-boundary/` and `spatial-shard-future.profile.json` as retained blueprint inventory rather than silently promoting them into the executable root
 - does not claim gradient observation runtime, continuous infinite federation, WAN federation, or general model-check completion
+
+## authoring starter boundary
+
+`L1`:
+
+- current validated starter catalog is limited to `world_core`, `membership_chat`, and `sugoroku_world`
+- current portal/shard authoring may use active executable roots as study/copy references, but does not add `portal_worldlink` or `two_shard_hard_boundary` starter duplicates
+- if a later portal/shard starter is added, it must derive from the active executable root and must keep `future/` blueprint/profile inventory explicit and non-executable
 
 ## attach / transport / devtools / save-load
 

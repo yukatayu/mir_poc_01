@@ -17,7 +17,15 @@ Current templates:
 - `sugoroku-world-starter/`
   validated `sugoroku_world` starter for `check` and `run-local`; retarget `dependencies` after copying it
 
+Not yet in catalog:
+
+- no `portal-worldlink-starter/`
+- no `two-shard-hard-boundary-starter/`
+- current decision keeps portal/shard authoring on the active executable roots and keeps `future/` blueprints non-executable
+
 Guide:
 
 - `docs/hands_on/operational_package_authoring_01.md`
   bounded starter-selection, rename, and `author -> check -> run-local -> session -> export-devtools -> view --check` order
+- `docs/hands_on/operational_portal_shard_starter_boundary_01.md`
+  current portal/shard authoring boundary and the reason the starter catalog stops at `SugorokuWorld`

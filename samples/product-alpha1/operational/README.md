@@ -9,7 +9,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 - Representative `.mir` files are explanatory only. Current executable input is versioned `package.mir.json`.
 - `portal-worldlink/` is the active bounded portal runtime root.
 - `two-shard-hard-boundary/` is the active bounded shard runtime root.
-- `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`, `templates/membership-chat-starter/`, and `templates/sugoroku-world-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots.
+- `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`, `templates/membership-chat-starter/`, and `templates/sugoroku-world-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots. The catalog intentionally stops before portal/shard starters.
 - `future/gradient-observation.profile.json` is a docs-first observer-only widening profile, not an executable runtime root.
 - backend feasibility is docs-first: `native host launch bundle` is the only actualized backend-adjacent path; WASM/LLVM remain inventory-only
 - Portal / shard files under `future/` are blueprint evidence only.
@@ -30,6 +30,7 @@ Current runnable floor:
 - `templates/membership-chat-starter/`: validated starter for bounded `membership_chat` authoring; retarget its `../world-core-starter` dependency after copying it
 - `templates/sugoroku-world-starter/`: validated starter for bounded `sugoroku_world` authoring; retarget its `../membership-chat-starter` dependency after copying it
 - `docs/hands_on/operational_package_authoring_01.md`: starter selection / rename / dependency-retarget guide for the template catalog
+- `docs/hands_on/operational_portal_shard_starter_boundary_01.md`: why portal/shard authoring currently starts from the active roots rather than from starter duplicates
 - `docs/hands_on/operational_backend_inventory_01.md`: current host launch bundle / WASM / LLVM comparison inventory for this suite
 - `docs/hands_on/operational_gradient_observation_profile_01.md`: docs-first guide for the observer-only gradient future profile
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family

@@ -54,6 +54,8 @@
   host launch bundle / WASM / LLVM backend boundary comparison inventory の summary
 - `operational_gradient_observation_profile_01.md`
   gradient observation profile と replication non-default reading の summary
+- `operational_portal_shard_starter_boundary_01.md`
+  portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

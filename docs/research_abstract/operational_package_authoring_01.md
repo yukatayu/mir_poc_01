@@ -15,6 +15,7 @@
 - a validated starter catalog for `world_core`, `membership_chat`, and `sugoroku_world`
 - explicit dependency-retarget guidance for the starters that import upstream operational roots
 - a concrete list of fields that must be renamed before treating the template as your own package
+- a current stop line that keeps portal/shard authoring on active executable roots instead of adding starter duplicates now
 - the practical order `check -> run-local -> session -> export-devtools -> view --check`
 - common diagnostics for unsupported package kinds, unsupported recovery policies, missing dependency roots, and direct `.mir` front-door misuse
 

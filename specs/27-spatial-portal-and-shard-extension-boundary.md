@@ -48,6 +48,14 @@ portal / world-link / shard / replication profile の future boundary を固定�
 - freshness は `membership_epoch`, `member_incarnation`, `config_epoch`, `owner_epoch`, `sequence` を使い、vector clock default を導入しない
 - gradient observation profile は `planned_only` JSON inventory として repo に置いてよいが、runtime actualization と混同してはならない
 
+## authoring boundary
+
+`L2`:
+
+- portal/shard future blueprint inventory does not imply corresponding starter templates
+- current line may keep portal/shard authoring on active executable roots while `future/` portal/shard files remain non-executable inventory
+- if a later portal/shard starter appears, it must be sourced from the active executable root rather than from the future blueprint/profile inventory
+
 ## replication profile
 
 `L1`:
