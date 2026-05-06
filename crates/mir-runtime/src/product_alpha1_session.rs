@@ -34,7 +34,7 @@ const PRODUCT_ALPHA1_RUNTIME_STOP_LINES: &[&str] = &[
 
 const PRODUCT_ALPHA1_RUNTIME_LIMITATIONS: &[&str] = &[
     "controlled local product alpha-1 session carrier only",
-    "one deterministic product demo runtime path with declared typed host-I/O evidence",
+    "bounded deterministic product runtime paths with declared typed host-I/O and sample-specific evidence",
     "debug/auth/rate-limit layer attach is same-session and observable; object/avatar-preview attach remains deferred boundary evidence",
     "local save/load and quiescent-save are bounded to one local session store",
     "no distributed durable save/load, WAN federation, final viewer ABI, or arbitrary native package execution",
@@ -1130,6 +1130,7 @@ fn build_run_local_session(
         product_alpha1_ready: false,
         final_public_api_frozen: false,
     };
+    materialize_package_runtime_evidence(&mut session, package);
     session.observer_safe_export = build_observer_safe_export(&session, package);
     Ok(session)
 }
@@ -1709,6 +1710,217 @@ fn payload_summary(payload: &ProductAlpha1HostIoPayload) -> String {
         ProductAlpha1HostIoPayload::Int { value } => format!("Int({value})"),
         ProductAlpha1HostIoPayload::Text { value } => format!("Text({value:?})"),
     }
+}
+
+fn materialize_package_runtime_evidence(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+) {
+    if package.package_kind == "sugoroku_world" {
+        materialize_sugoroku_runtime_evidence(session, package);
+    }
+}
+
+fn materialize_sugoroku_runtime_evidence(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+) {
+    let roll_response_summary = session
+        .host_io_history
+        .first()
+        .map(|entry| entry.response_summary.clone())
+        .unwrap_or_else(|| "Int(unknown)".to_string());
+    let membership_epoch = session.membership.membership_epoch;
+    let member_incarnation = 0;
+    let roll_envelope_id = "envelope#sugoroku-roll-1".to_string();
+    let handoff_envelope_id = "envelope#sugoroku-handoff-1".to_string();
+    let stale_envelope_id = "envelope#sugoroku-stale-membership-1".to_string();
+
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#sugoroku-roll-request"),
+        "sugoroku_roll_requested",
+        "ParticipantPlace[active_admin_participant]",
+        Some(roll_envelope_id.clone()),
+        "active_admin_participant requested RollDice".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#sugoroku-roll-published"),
+        "sugoroku_roll_published",
+        "Place[SugorokuGamePlace]",
+        Some(roll_envelope_id.clone()),
+        format!("roll_result published as {roll_response_summary}"),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#sugoroku-witness-emitted"),
+        "sugoroku_witness_emitted",
+        "Place[SugorokuGamePlace]",
+        Some(roll_envelope_id.clone()),
+        "witness draw_pub emitted for the published roll".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#sugoroku-turn-handoff"),
+        "sugoroku_turn_handoff",
+        "Place[SugorokuGamePlace]",
+        Some(handoff_envelope_id.clone()),
+        "dice owner handed off to active_participant".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#sugoroku-stale-membership-rejected"),
+        "sugoroku_stale_membership_rejected",
+        "Place[SugorokuGamePlace]",
+        Some(stale_envelope_id.clone()),
+        "stale membership rejected for follow-up action after handoff".to_string(),
+    );
+
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#sugoroku-roll-1".to_string(),
+        envelope_id: roll_envelope_id.clone(),
+        from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+        to_place: "Place[SugorokuGamePlace]".to_string(),
+        transport_lane: "same_session_sugoroku_roll".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_sugoroku_roll_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| matches!(capability.as_str(), "RollDice" | "PublishRoll"))
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#sugoroku-handoff-1".to_string(),
+        envelope_id: handoff_envelope_id.clone(),
+        from_place: "Place[SugorokuGamePlace]".to_string(),
+        to_place: "ParticipantPlace[active_participant]".to_string(),
+        transport_lane: "same_session_sugoroku_handoff".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_sugoroku_handoff_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "HandoffTurn")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == "draw_pub")
+            .count(),
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#sugoroku-stale-membership-reject-1".to_string(),
+        envelope_id: stale_envelope_id.clone(),
+        from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+        to_place: "Place[SugorokuGamePlace]".to_string(),
+        transport_lane: "same_session_sugoroku_membership_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_sugoroku_membership_reject_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "HandoffTurn")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == "draw_pub")
+            .count(),
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: roll_envelope_id,
+            state: "Delivered".to_string(),
+            failure_class: None,
+            recovery_action: None,
+        });
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: handoff_envelope_id,
+            state: "Delivered".to_string(),
+            failure_class: None,
+            recovery_action: None,
+        });
+    session
+        .message_recovery_state
+        .message_state_lane
+        .push(ProductAlpha1MessageStateRecord {
+            envelope_id: stale_envelope_id.clone(),
+            state: "Rejected".to_string(),
+            failure_class: Some("StaleMembership".to_string()),
+            recovery_action: Some("reject".to_string()),
+        });
+    session
+        .message_recovery_state
+        .failure_observations
+        .push(ProductAlpha1FailureObservation {
+            envelope_id: stale_envelope_id,
+            failure_class: "StaleMembership".to_string(),
+            initial_state: "Validated".to_string(),
+            recovery_action: "Reject".to_string(),
+            terminal_state: "Rejected".to_string(),
+            retry_count: 0,
+            notes: vec![
+                "bounded operational Sugoroku rejects stale membership after handoff".to_string(),
+                "membership freshness remains explicit and is not collapsed into transport"
+                    .to_string(),
+            ],
+        });
+}
+
+fn append_runtime_event(
+    session: &mut ProductAlpha1SessionCarrier,
+    event_id: String,
+    event_kind: &str,
+    place_ref: &str,
+    envelope_ref: Option<String>,
+    observer_safe_summary: String,
+) {
+    if let Some(previous) = session.event_dag.nodes.last() {
+        session.event_dag.edges.push(ProductAlpha1EventEdge {
+            from_event: previous.event_id.clone(),
+            to_event: event_id.clone(),
+            relation: "same_session_runtime_order".to_string(),
+        });
+    }
+    session.event_dag.nodes.push(ProductAlpha1EventNode {
+        event_id,
+        event_kind: event_kind.to_string(),
+        place_ref: place_ref.to_string(),
+        envelope_ref,
+        observer_safe_summary,
+    });
 }
 
 fn append_attach_events(

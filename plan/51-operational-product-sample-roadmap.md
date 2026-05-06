@@ -26,6 +26,12 @@
 - `run-local` / `session` / `export-devtools` 上で observer-safe host-I/O evidence を再現
 - `scripts/operational_product_samples.py` の semantic check に direct text lane を追加
 
+## P-OPS-04 current scope
+
+- `SugorokuWorld` に bounded same-session roll / publish / witness / handoff / stale membership reject scenario を actualize
+- `run-local` / `session` / `export-devtools` / `release-check` 上で同じ Sugoroku runtime evidence を再現
+- `scripts/operational_product_samples.py` の semantic check に Sugoroku runtime event/route/failure evidence を追加
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -39,23 +45,22 @@
 
 ## next packages
 
-1. `P-OPS-04`
-   Sugoroku behavior widening in the product alpha session/runtime path
-2. `P-OPS-05`
+1. `P-OPS-05`
    projection manifest / packet / FFI schema formalization
-3. `P-OPS-06`
+2. `P-OPS-06`
    portal / world-link first cut
-4. `P-OPS-09`
+3. `P-OPS-09`
    external developer package authoring guide
 
 ## current recommendation
 
 - `P-OPS-03` で direct text host boundary は `MembershipChat` に narrow `EchoText` lane として actualize 済み
-- 次は `P-OPS-04` として、`SugorokuWorld` の roll / publish / witness / handoff / stale action rows を current product alpha session carrier に寄せる
-- product alpha current line の bounded runtime semantics を壊さず、projection schema と portal first cut はその後段に置く
+- `P-OPS-04` で `SugorokuWorld` の bounded scenario は current product alpha session carrier に寄せて actualize 済み
+- 次は `P-OPS-05` として、projection schema と packet / FFI boundary inventory を manifest-only から schema-backed inventory に進める
+- product alpha current line の bounded runtime semantics を壊さず、portal first cut は projection schema の後段に置く
 
 ## open questions
 
-- Sugoroku behavior を current product alpha session carrier にどこまで直接 actualize するか
+- Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - projection profile を runtime-plan adjacent field に入れるか、manifest-only に保つか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか

@@ -108,6 +108,97 @@ class OperationalProductSamplesTests(unittest.TestCase):
             )
         )
 
+    def test_sugoroku_run_check_requires_bounded_runtime_evidence(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:sugoroku",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "sugoroku_roll_requested"},
+                            {"event_kind": "sugoroku_roll_published"},
+                            {"event_kind": "sugoroku_witness_emitted"},
+                            {"event_kind": "sugoroku_turn_handoff"},
+                            {"event_kind": "sugoroku_stale_membership_rejected"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_sugoroku_roll"},
+                            {"transport_lane": "same_session_sugoroku_handoff"},
+                            {
+                                "transport_lane": "same_session_sugoroku_membership_reject"
+                            },
+                        ]
+                    },
+                    "message_recovery_state": {
+                        "message_state_lane": [
+                            {
+                                "state": "Rejected",
+                                "failure_class": "StaleMembership",
+                            }
+                        ]
+                    },
+                }
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.sugoroku_runtime_evidence_observed(result)
+        )
+
+    def test_sugoroku_devtools_check_requires_event_dag_panel_and_runtime_evidence(
+        self,
+    ) -> None:
+        result = operational_product_samples.CommandResult(
+            name="export-devtools:sugoroku",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "panel_ids": ["event_dag", "message_route_graph"],
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "sugoroku_roll_requested"},
+                            {"event_kind": "sugoroku_roll_published"},
+                            {"event_kind": "sugoroku_witness_emitted"},
+                            {"event_kind": "sugoroku_turn_handoff"},
+                            {"event_kind": "sugoroku_stale_membership_rejected"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_sugoroku_roll"},
+                            {"transport_lane": "same_session_sugoroku_handoff"},
+                            {
+                                "transport_lane": "same_session_sugoroku_membership_reject"
+                            },
+                        ]
+                    },
+                    "message_recovery_state": {
+                        "message_state_lane": [
+                            {
+                                "state": "Rejected",
+                                "failure_class": "StaleMembership",
+                            }
+                        ]
+                    },
+                },
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.sugoroku_devtools_runtime_evidence_observed(
+                result
+            )
+        )
+
     def test_main_accepts_format_after_subcommand(self) -> None:
         stdout = io.StringIO()
         with redirect_stdout(stdout):

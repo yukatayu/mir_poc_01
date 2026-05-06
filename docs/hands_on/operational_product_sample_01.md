@@ -1,6 +1,6 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` widening を再現するための入口です。
 
 これは final public product ではありません。portal / shard は planned-only inventory を含みますが、runtime 実装 claim ではありません。
 
@@ -66,6 +66,8 @@ If Docker / Docker Compose are unavailable, record the Docker leg as an environm
 
 Current boundedness:
 
+- `run-local` Sugoroku root は bounded same-session roll / publish / witness / handoff / stale membership reject scenario を 1 本だけ materialize する。final interactive game runtime ではない
+- `export-devtools` / `view --check` では `sugoroku_roll_requested` / `sugoroku_roll_published` / `sugoroku_witness_emitted` / `sugoroku_turn_handoff` / `sugoroku_stale_membership_rejected` と corresponding route lanes を observer-safe に確認できる
 - attach acceptance uses the current same-session product alpha carrier and explicit package declarations; it is not a final external issuer / membership attestation pipeline
 - `quiescent-save` is current bounded `R2` evidence on the same session carrier; it is not durable/distributed proof completion
 
@@ -74,6 +76,7 @@ Current boundedness:
 ```bash
 python3 scripts/operational_product_samples.py list --format json
 python3 scripts/operational_product_samples.py run-membership-chat --format json
+python3 scripts/operational_product_samples.py run-sugoroku --format json
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/operational_product_samples.py release-check --format json
 ```

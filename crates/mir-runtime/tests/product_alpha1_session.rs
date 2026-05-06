@@ -169,6 +169,61 @@ fn product_alpha1_run_local_accepts_operational_sugoroku_root() {
             .any(|dependency| dependency == "../membership-chat")
     );
     assert!(report.typed_host_io_claimed);
+    assert!(
+        report
+            .session
+            .witness_state
+            .witness_refs
+            .iter()
+            .any(|witness| witness == "draw_pub")
+    );
+    let event_kinds = report
+        .session
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_kind.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "sugoroku_roll_requested",
+        "sugoroku_roll_published",
+        "sugoroku_witness_emitted",
+        "sugoroku_turn_handoff",
+        "sugoroku_stale_membership_rejected",
+    ] {
+        assert!(
+            event_kinds.contains(required),
+            "missing sugoroku event kind {required}"
+        );
+    }
+    let route_lanes = report
+        .session
+        .route_graph
+        .routes
+        .iter()
+        .map(|route| route.transport_lane.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "same_session_sugoroku_roll",
+        "same_session_sugoroku_handoff",
+        "same_session_sugoroku_membership_reject",
+    ] {
+        assert!(
+            route_lanes.contains(required),
+            "missing sugoroku route lane {required}"
+        );
+    }
+    assert!(
+        report
+            .session
+            .message_recovery_state
+            .message_state_lane
+            .iter()
+            .any(|record| {
+                record.failure_class.as_deref() == Some("StaleMembership")
+                    && record.state == "Rejected"
+            })
+    );
     assert!(!report.product_alpha1_ready);
 }
 

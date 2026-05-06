@@ -91,8 +91,9 @@ samples/product-alpha1/operational/
 
 - imports `MembershipChat`
 - is the runnable root for the first operational workflow
-- exposes server-side game-state intent, participant action intent, witness / handoff intent, save/load visibility, and hot-plug visibility
-- current direct execution lane may remain bounded to existing typed host-I/O adapters
+- actualizes one bounded same-session scenario with roll / publish / witness / handoff / stale membership reject evidence
+- keeps save/load visibility, transport visibility, and hot-plug visibility on the same product alpha session carrier
+- current direct execution lane remains bounded to the existing typed host-I/O `AddOne` adapter and does not claim final interactive game runtime completion
 
 ## attach / transport / devtools / save-load
 

@@ -238,8 +238,8 @@ Open `P-OPS-04 Sugoroku behavior widening` and move roll / publish / witness / h
 
 ## Commit / push status
 
-- Commit: pending at report creation time
-- Push: pending at report creation time
+- Commit: `c038fc0fd3e95f61ebe8d504f8a44fe5fe22a2f2` (`mirrorea: add operational chat direct text host boundary`)
+- Push: `origin/feature/operational-product-sample-001` へ反映済み
 
 ## Sub-agent session close status
 

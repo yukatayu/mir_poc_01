@@ -5,6 +5,7 @@
 - current executable input: `package.mir.json`
 - representative source: `sugoroku-world.mir`
 - current direct host-I/O lane: typed `AddOne` adapter evidence only
+- current bounded runtime evidence: same-session roll / publish / witness / handoff / stale membership reject scenario over the product alpha session carrier
 - save/load, transport, devtools export, and native host launch bundle are exercised from this root
 
 Validation anchor:

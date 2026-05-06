@@ -20,6 +20,18 @@ MEMBERSHIP_CHAT = OPS_ROOT / "membership-chat"
 SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
 LAYERS_ROOT = OPS_ROOT / "packages"
 EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'EchoText:Text("Taro")->Text("Hello, Taro!")'
+EXPECTED_SUGOROKU_EVENT_KINDS = {
+    "sugoroku_roll_requested",
+    "sugoroku_roll_published",
+    "sugoroku_witness_emitted",
+    "sugoroku_turn_handoff",
+    "sugoroku_stale_membership_rejected",
+}
+EXPECTED_SUGOROKU_ROUTE_LANES = {
+    "same_session_sugoroku_roll",
+    "same_session_sugoroku_handoff",
+    "same_session_sugoroku_membership_reject",
+}
 
 
 @dataclass(frozen=True)
@@ -146,6 +158,49 @@ def membership_chat_devtools_echo_text_observed(result: CommandResult) -> bool:
     )
 
 
+def sugoroku_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    session = payload.get("session") or {}
+    panels = payload.get("panels") or {}
+    event_nodes = (
+        (session.get("event_dag") or {}).get("nodes")
+        or (panels.get("event_dag") or {}).get("nodes")
+        or []
+    )
+    route_entries = (
+        (session.get("route_graph") or {}).get("routes")
+        or (panels.get("message_route_graph") or {}).get("routes")
+        or []
+    )
+    message_state_lane = (
+        (session.get("message_recovery_state") or {}).get("message_state_lane")
+        or (panels.get("message_failure_recovery") or {}).get("message_state_lane")
+        or []
+    )
+    event_kinds = {node.get("event_kind") for node in event_nodes}
+    route_lanes = {route.get("transport_lane") for route in route_entries}
+    stale_membership_rejected = any(
+        record.get("failure_class") == "StaleMembership"
+        and record.get("state") == "Rejected"
+        for record in message_state_lane
+    )
+    return (
+        EXPECTED_SUGOROKU_EVENT_KINDS.issubset(event_kinds)
+        and EXPECTED_SUGOROKU_ROUTE_LANES.issubset(route_lanes)
+        and stale_membership_rejected
+    )
+
+
+def sugoroku_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    panel_ids = payload.get("panel_ids") or []
+    return (
+        "event_dag" in panel_ids
+        and "message_route_graph" in panel_ids
+        and sugoroku_runtime_evidence_observed(result)
+    )
+
+
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
@@ -154,6 +209,10 @@ def run_world_package(root: Path) -> dict[str, Any]:
     semantic_checks: dict[str, bool] = {}
     if root == MEMBERSHIP_CHAT:
         semantic_checks["echo_text_observed"] = membership_chat_echo_text_observed(result)
+    elif root == SUGOROKU_WORLD:
+        semantic_checks["runtime_evidence_observed"] = (
+            sugoroku_runtime_evidence_observed(result)
+        )
     return {
         "surface_kind": "operational_product_sample_run_report",
         "root": str(root.relative_to(REPO_ROOT)),
@@ -273,16 +332,23 @@ def export_devtools() -> dict[str, Any]:
         "view",
         cargo_alpha_args("view", viewer_dir, "--check"),
     )
+    semantic_checks = {
+        "runtime_evidence_observed": sugoroku_devtools_runtime_evidence_observed(
+            export_result
+        )
+    }
     return {
         "surface_kind": "operational_product_sample_devtools_report",
         "session_dir": session_dir,
         "viewer_dir": viewer_dir,
         "status": "accepted"
         if all(item.returncode == 0 for item in [*bootstrap, export_result, view_result])
+        and all(semantic_checks.values())
         else "error",
         "bootstrap": [command_payload(item) for item in bootstrap],
         "export_devtools": command_payload(export_result),
         "view": command_payload(view_result),
+        "semantic_checks": semantic_checks,
         "final_public_api_frozen": False,
     }
 
@@ -327,6 +393,16 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "view:membership-chat",
         cargo_alpha_args("view", chat_viewer_dir, "--check"),
     )
+    sugoroku_run = run_command(
+        "run-local:sugoroku",
+        cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
+        env=env,
+    )
+    sugoroku_session = run_command(
+        "session:sugoroku",
+        cargo_alpha_args("session", "session#operational-sugoroku"),
+        env=env,
+    )
     commands = [
         run_command("check:world-core", cargo_alpha_args("check", str(WORLD_CORE))),
         run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
@@ -334,8 +410,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         membership_chat_run,
         membership_chat_export,
         membership_chat_view,
-        run_command("run-local:sugoroku", cargo_alpha_args("run-local", str(SUGOROKU_WORLD)), env=env),
-        run_command("session:sugoroku", cargo_alpha_args("session", "session#operational-sugoroku"), env=env),
+        sugoroku_run,
+        sugoroku_session,
         run_command("save:r0", cargo_alpha_args("save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r0"), env=env),
         run_command("quiescent-save:r2", cargo_alpha_args("quiescent-save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r2"), env=env),
         run_command("transport:local", cargo_alpha_args("transport", "session#operational-sugoroku", "--mode", "local"), env=env),
@@ -357,13 +433,19 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
                 env=env,
             )
         )
-    commands.extend(
-        [
-            run_command("export-devtools", cargo_alpha_args("export-devtools", "session#operational-sugoroku", "--out", viewer_dir), env=env),
-            run_command("view", cargo_alpha_args("view", viewer_dir, "--check")),
-            run_command("build-native-bundle", cargo_alpha_args("build-native-bundle", str(SUGOROKU_WORLD), "--out", bundle_dir)),
-        ]
+    sugoroku_export = run_command(
+        "export-devtools",
+        cargo_alpha_args(
+            "export-devtools", "session#operational-sugoroku", "--out", viewer_dir
+        ),
+        env=env,
     )
+    sugoroku_view = run_command("view", cargo_alpha_args("view", viewer_dir, "--check"))
+    sugoroku_bundle = run_command(
+        "build-native-bundle",
+        cargo_alpha_args("build-native-bundle", str(SUGOROKU_WORLD), "--out", bundle_dir),
+    )
+    commands.extend([sugoroku_export, sugoroku_view, sugoroku_bundle])
     failed = [result.name for result in commands if result.returncode != 0]
     attach_matrix_ok = attach_matrix_complete(attach_results)
     if not attach_matrix_ok:
@@ -372,10 +454,16 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     membership_chat_devtools_ok = membership_chat_devtools_echo_text_observed(
         membership_chat_export
     )
+    sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
+    sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
     if not membership_chat_echo_text_ok:
         failed.append("membership-chat-echo-text")
     if not membership_chat_devtools_ok:
         failed.append("membership-chat-devtools")
+    if not sugoroku_runtime_ok:
+        failed.append("sugoroku-runtime-evidence")
+    if not sugoroku_devtools_ok:
+        failed.append("sugoroku-devtools")
     status = "accepted" if not failed and not skip_docker else "partial" if not failed else "error"
     return {
         "surface_kind": "operational_product_sample_release_check_report",
@@ -390,6 +478,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "attach_matrix_complete": attach_matrix_ok,
         "membership_chat_echo_text_ok": membership_chat_echo_text_ok,
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
+        "sugoroku_runtime_ok": sugoroku_runtime_ok,
+        "sugoroku_devtools_ok": sugoroku_devtools_ok,
         "commands": [command_payload(result) for result in commands],
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
