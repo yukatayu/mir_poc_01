@@ -240,8 +240,8 @@ Open `P-OPS-07 two-shard hard-boundary model-check sample` and add finite two-sh
 
 ## Commit / push status
 
-- Commit: pending final validation at report-writing time
-- Push: pending final validation at report-writing time
+- Commit: `a267019`
+- Push: `origin/feature/operational-product-sample-001` へ push 済み
 
 ## Sub-agent session close status
 
