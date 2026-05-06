@@ -151,6 +151,28 @@ fn product_alpha1_run_local_builds_same_session_carrier_with_required_lanes() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_sugoroku_root() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/sugoroku-world"),
+    )
+    .expect("operational sugoroku root should run locally");
+
+    assert_eq!(report.package_id, "operational-sugoroku");
+    assert_eq!(report.session.session_id, "session#operational-sugoroku");
+    assert_eq!(report.runtime_plan.package_kind, "sugoroku_world");
+    assert_eq!(report.runtime_plan.entry_place, "Place[SugorokuGamePlace]");
+    assert!(
+        report
+            .runtime_plan
+            .declared_dependencies
+            .iter()
+            .any(|dependency| dependency == "../membership-chat")
+    );
+    assert!(report.typed_host_io_claimed);
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
 fn product_alpha1_run_local_executes_declared_host_io_payload() {
     let package_json =
         fs::read_to_string(repo_root().join("samples/product-alpha1/demo/package.mir.json"))
@@ -198,7 +220,7 @@ fn product_alpha1_run_local_rejects_non_world_package() {
     assert!(
         error
             .detail
-            .contains("run-local requires a product alpha-1 world package")
+            .contains("run-local requires a product alpha-1 world-like package")
     );
 }
 

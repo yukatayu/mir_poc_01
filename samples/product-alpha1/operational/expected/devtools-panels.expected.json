@@ -1,0 +1,26 @@
+{
+  "panel_ids": [
+    "product_overview",
+    "source_import_graph",
+    "package_dependency_graph",
+    "projection_target_graph",
+    "place_graph",
+    "server_client_process_graph",
+    "event_dag",
+    "message_route_graph",
+    "membership_frontier_timeline",
+    "witness_relation_timeline",
+    "hotplug_lifecycle",
+    "save_load_quiescent_timeline",
+    "contract_effect_failure_summary",
+    "message_failure_recovery",
+    "fallback_degradation",
+    "auth_capability_decision",
+    "redaction_toggle",
+    "retention_trace",
+    "portal_graph_future",
+    "shard_map_future"
+  ],
+  "viewer_rendering_required_now": false,
+  "success_condition_now": "observer-safe bundle JSON plus static viewer check"
+}

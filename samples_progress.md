@@ -1,7 +1,7 @@
 # samples_progress
 
-Last updated: 2026-05-05 17:48 JST
-Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, and the product alpha-1 release-candidate workflow. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; `samples/product-alpha1/` now has product alpha schema/check, local same-session run/session/attach, local R0/R2 save evidence, local/Docker transport, non-final devtools/viewer evidence, native host launch bundle evidence, CLI `demo`, and release check evidence. Docker skip paths are partial local probes, not release-candidate evidence.
+Last updated: 2026-05-06 21:12 JST
+Current repo-local focus: current-L2 base source corpus, clean near-end runnable floor, Lean foundations / generated theorem stubs, practical alpha-1 first-floor toolchain, bounded operational α-0.5 / α-0.8 / α-0.9 runtime lines, the bounded practical α-1 integrated workflow carrier, the product alpha-1 release-candidate workflow, and the canonical operational product sample suite. `samples/alpha/` remains the alpha-0 evidence root; `samples/practical-alpha1/` remains the practical first-floor fixture root; `samples/product-alpha1/` now has product alpha schema/check, local same-session run/session/attach, local R0/R2 save evidence, local/Docker transport, non-final devtools/viewer evidence, native host launch bundle evidence, CLI `demo`, release check evidence, and the `operational/` suite for `WorldCore -> MembershipChat -> SugorokuWorld`. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -29,6 +29,7 @@ Notes:
 | α-0.9 session-bound devtools | workflow-ready: session-bound devtools workflow | `python3 scripts/practical_alpha09_devtools.py check-all --format json` | `OA09-01..09`, `crates/mir-runtime::practical_alpha09_devtools`, example `export-devtools`, `scripts/practical_alpha09_devtools.py`, `specs/22/24`, `plan/47` | final public viewer/telemetry ABI, durable audit |
 | practical α-1 integrated workflow | bounded workflow-ready, not product/public-ready | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | `PA1W-01..08`, exact `VIS-A1-01` / `PE2E-01/02/07` evidence, `OA05/OA08/OA09` carriers | product/public-ready α-1, final public viewer/telemetry ABI, distributed durable save/load |
 | product alpha-1 release candidate | product-release-candidate, not final product | `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release` | `crates/mirrorea-cli`, `crates/mir-ast::product_alpha1`, `crates/mir-runtime::product_alpha1_session`, `crates/mir-runtime::product_alpha1_transport`, `crates/mir-runtime::product_alpha1_devtools`, `samples/product-alpha1/demo`, `samples/product-alpha1/docker`, source-backed debug/auth/rate-limit attach, deferred object/avatar-preview boundary, local admin session store, observer-safe session artifact, bounded recovery rows, R0/R2 save, local loopback TCP, Docker Compose TCP, concrete non-final viewer bundle, native host launch bundle, CLI `demo`, release check script with validation floor / payload semantics | final public grammar / ABI / WAN / distributed durable save-load |
+| operational product sample suite | workflow-ready canonical suite, not final product | `python3 scripts/operational_product_samples.py check-all --format json` | `samples/product-alpha1/operational/world-core`, `membership-chat`, `sugoroku-world`, shared debug/auth/rate-limit/object/avatar packages, local/Docker deployment profiles, projection profile, future portal/shard inventory, `scripts/operational_product_samples.py`, `docs/hands_on/operational_product_sample_01.md`, `docs/research_abstract/operational_product_sample_01.md`, observer-safe devtools bundle with source/dependency/projection/portal/shard panels | direct text host-I/O lane, richer Sugoroku runtime behavior, projection packet/FFI schema, portal runtime actualization, two-shard hard-boundary model-check |
 
 ## Practical alpha-1 first-floor map
 
@@ -69,6 +70,7 @@ Notes:
 ## Validation anchors for this package
 
 - `python3 -m unittest scripts.tests.test_validate_docs`
+- `python3 -m unittest scripts.tests.test_operational_product_samples`
 - `python3 scripts/check_source_hierarchy.py`
 - `python3 scripts/validate_docs.py`
 - `cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture`
@@ -87,6 +89,22 @@ Notes:
 - `cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-bundle --format json`
 - `cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-demo --format json`
 - `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release`
+- `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json`
+- `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json`
+- `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=$(mktemp -d) cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/sugoroku-world --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/debug-layer --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/auth-layer --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/rate-limit-layer --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- save 'session#operational-sugoroku' --savepoint 'savepoint#ops-r0' --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- quiescent-save 'session#operational-sugoroku' --savepoint 'savepoint#ops-r2' --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#operational-sugoroku' --mode local --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- transport 'session#operational-sugoroku' --mode docker --format json`
+- `MIRROREA_ALPHA_SESSION_DIR=<same-dir> cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-sugoroku' --out /tmp/mirrorea-ops-viewer --format json`
+- `cargo run -q -p mirrorea-cli -- view /tmp/mirrorea-ops-viewer --check --format json`
+- `cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/operational/sugoroku-world --out /tmp/mirrorea-ops-bundle --format json`
+- `python3 scripts/operational_product_samples.py list --format json`
+- `python3 scripts/operational_product_samples.py check-all --format json`
 - `cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_host_io -- --nocapture`
 - `cargo test -p mir-runtime --test practical_alpha05_session -- --nocapture`
@@ -104,6 +122,7 @@ Notes:
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-06 21:12 JST | `P-OPS-01` canonical operational suite closeout hardening | pass | operational Docker compose selection、bundle attach package preservation、deferred object/avatar attach rows、helper `check-all`、route/config panel boundedness wordingを補修後、suite `accepted` を再確認。portal/shard runtime は planned-only |
 | 2026-05-05 17:48 JST | `P-A1-31` review hardening | pass | Docker skip now reports partial/non-release, demo verifies attach matrix and same-session reopen, viewer renders concrete observer-safe panel JSON, release check runs validation floor and payload semantics |
 | 2026-05-05 17:14 JST | `P-A1-31` product alpha release candidate | pass | `mirrorea-alpha demo`、`product_alpha1_release_check.py check-all`、debug/auth/rate-limit/object/avatar-preview package breadth、hands-on / research docs を追加。final public product ではない |
 | 2026-05-05 16:35 JST | `P-A1-30` product alpha native launch bundle | pass | `mirrorea-alpha build-native-bundle`、bundle `run.sh check/view`、manifest `NativeExecutionPolicy = Disabled`、provenance-only signature metadata、observer-safe generated reports を追加。CLI `demo` / release validation は `P-A1-31` scope |

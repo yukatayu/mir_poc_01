@@ -10,6 +10,7 @@ Current status:
 - `demo/` and `docker/` have the `P-A1-29` local/Docker transport and non-final viewer first cut through `mirrorea-alpha transport`, `export-devtools`, and `view`.
 - `demo/` has the `P-A1-30` native host launch bundle first cut through `mirrorea-alpha build-native-bundle`.
 - `demo/` has the `P-A1-31` release-candidate workflow through `mirrorea-alpha demo` and `scripts/product_alpha1_release_check.py check-all`.
+- `operational/` has the `P-OPS-01` canonical operational product sample suite through `WorldCore -> MembershipChat -> SugorokuWorld`, `scripts/operational_product_samples.py`, and future portal/shard inventory.
 - The root is product alpha release-candidate workflow-ready, not final public product-ready.
 - Full release-candidate evidence requires Docker Compose TCP. `--skip-docker` is a local probe and reports non-readiness.
 - Product demo source explicitly declares the admin membership/capability authority needed by debug/auth/rate-limit attach; object/avatar-preview attach remains deferred boundary evidence.
@@ -44,6 +45,8 @@ demo_dir=$(mktemp -d /tmp/mirrorea-alpha1-demo-XXXXXX)
 cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out "$demo_dir" --format json
 release_dir=$(mktemp -d /tmp/mirrorea-alpha1-release-XXXXXX)
 python3 scripts/product_alpha1_release_check.py --format json check-all --out "$release_dir"
+python3 scripts/operational_product_samples.py list --format json
+python3 scripts/operational_product_samples.py check-all --format json
 cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_session -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture
@@ -58,4 +61,5 @@ Stop lines:
 
 - This root does not define final textual `.mir` grammar.
 - This root claims product alpha release-candidate workflow readiness through local/Docker controlled validation, not final public product readiness.
+- `operational/` may expose broader package / deployment / future-boundary inventory than `demo/`, but it remains bounded alpha workflow evidence, not final public product.
 - This root does not claim WAN/federation, distributed durable save/load R3/R4, final public viewer / telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native package execution.

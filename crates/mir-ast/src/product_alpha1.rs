@@ -376,7 +376,8 @@ fn validate_package_shape(
     }
 
     match package.package_kind.as_str() {
-        "world" | "layer" | "object" | "avatar_preview" | "adapter" => {}
+        "world" | "world_core" | "membership_chat" | "sugoroku_world" | "layer" | "object"
+        | "avatar_preview" | "adapter" => {}
         other => {
             return Err(schema_error(
                 path,
@@ -510,7 +511,7 @@ fn validate_package_shape(
         }
     }
 
-    if package.package_kind == "world"
+    if package_kind_supports_runtime_input(&package.package_kind)
         && package
             .effects
             .iter()
@@ -556,19 +557,30 @@ fn validate_package_shape(
     Ok(())
 }
 
+fn package_kind_supports_runtime_input(package_kind: &str) -> bool {
+    matches!(
+        package_kind,
+        "world" | "world_core" | "membership_chat" | "sugoroku_world"
+    )
+}
+
 fn validate_dependency_packages(
     package: &ProductAlpha1Package,
     resolved_path: &Path,
 ) -> Result<(), ProductAlpha1Error> {
     let package_root = resolved_path.parent().unwrap_or_else(|| Path::new("."));
+    let allowed_root =
+        fs::canonicalize(package_root.parent().unwrap_or(package_root)).map_err(|error| {
+            ProductAlpha1Error {
+                kind: ProductAlpha1ErrorKind::Io,
+                path: package_root.to_path_buf(),
+                detail: error.to_string(),
+            }
+        })?;
 
     for dependency in &package.dependencies {
         let dependency_path = Path::new(dependency);
-        if dependency_path.is_absolute()
-            || dependency_path
-                .components()
-                .any(|component| matches!(component, std::path::Component::ParentDir))
-        {
+        if dependency_path.is_absolute() {
             return Err(schema_error(
                 resolved_path,
                 format!("declared dependency `{dependency}` must be a relative package path"),
@@ -576,11 +588,12 @@ fn validate_dependency_packages(
         }
 
         let candidate = package_root.join(dependency_path);
-        let dependency_file = if candidate.is_dir() {
-            candidate.join(PRODUCT_ALPHA1_PACKAGE_FILE_NAME)
-        } else {
-            candidate
-        };
+        let dependency_file =
+            resolve_dependency_file(&candidate).ok_or_else(|| ProductAlpha1Error {
+                kind: ProductAlpha1ErrorKind::MissingPackageFile,
+                path: candidate.join(PRODUCT_ALPHA1_PACKAGE_FILE_NAME),
+                detail: format!("declared dependency `{dependency}` is missing"),
+            })?;
 
         if !dependency_file.exists() {
             return Err(ProductAlpha1Error {
@@ -588,6 +601,22 @@ fn validate_dependency_packages(
                 path: dependency_file,
                 detail: format!("declared dependency `{dependency}` is missing"),
             });
+        }
+
+        let canonical_dependency =
+            fs::canonicalize(&dependency_file).map_err(|error| ProductAlpha1Error {
+                kind: ProductAlpha1ErrorKind::Io,
+                path: dependency_file.clone(),
+                detail: error.to_string(),
+            })?;
+        if !canonical_dependency.starts_with(&allowed_root) {
+            return Err(schema_error(
+                resolved_path,
+                format!(
+                    "declared dependency `{dependency}` escapes the package sibling tree rooted at `{}`",
+                    allowed_root.display()
+                ),
+            ));
         }
 
         let text = fs::read_to_string(&dependency_file).map_err(|error| ProductAlpha1Error {
@@ -599,6 +628,17 @@ fn validate_dependency_packages(
     }
 
     Ok(())
+}
+
+fn resolve_dependency_file(candidate: &Path) -> Option<PathBuf> {
+    if candidate.is_dir() {
+        return Some(candidate.join(PRODUCT_ALPHA1_PACKAGE_FILE_NAME));
+    }
+    if candidate.is_file() {
+        return Some(candidate.to_path_buf());
+    }
+    let nested = candidate.join(PRODUCT_ALPHA1_PACKAGE_FILE_NAME);
+    nested.exists().then_some(nested)
 }
 
 fn accepted_obligations(package: &ProductAlpha1Package) -> Vec<ProductAlpha1AcceptedObligation> {

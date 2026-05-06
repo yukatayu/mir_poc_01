@@ -414,13 +414,23 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
 
     let expected_paths = [
         "bin/mirrorea-alpha",
-        "packages/product-alpha1-demo/package.mir.json",
+        "packages/root/product-alpha1-demo/package.mir.json",
+        "packages/root/product-alpha1-demo/packages/debug-layer/package.mir.json",
+        "packages/root/product-alpha1-demo/packages/auth-layer/package.mir.json",
+        "packages/root/product-alpha1-demo/packages/rate-limit-layer/package.mir.json",
+        "packages/root/product-alpha1-demo/packages/placeholder-object/package.mir.json",
+        "packages/root/product-alpha1-demo/packages/custom-avatar-preview/package.mir.json",
         "devtools/bundle.json",
         "devtools/index.html",
         "reports/check.json",
         "reports/run-local.json",
+        "reports/attach-auth-layer.json",
+        "reports/attach-custom-avatar-preview.json",
         "reports/save.json",
+        "reports/attach-debug-layer.json",
+        "reports/attach-placeholder-object.json",
         "reports/quiescent-save.json",
+        "reports/attach-rate-limit-layer.json",
         "reports/transport-local.json",
         "reports/export-devtools.json",
         "reports/verification-report.json",
@@ -513,8 +523,12 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
         false
     );
     for relative in [
+        "reports/attach-auth-layer.json",
+        "reports/attach-custom-avatar-preview.json",
         "reports/run-local.json",
         "reports/attach-debug-layer.json",
+        "reports/attach-placeholder-object.json",
+        "reports/attach-rate-limit-layer.json",
         "reports/save.json",
         "reports/quiescent-save.json",
         "reports/transport-local.json",
@@ -559,6 +573,61 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
         !demo_local.status.success(),
         "run.sh must not expose a demo-local release walkthrough before P-A1-31"
     );
+}
+
+#[test]
+fn build_native_bundle_preserves_operational_dependency_tree() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
+    let sugoroku = repo_root.join("samples/product-alpha1/operational/sugoroku-world");
+    let out_dir = unique_temp_dir("mirrorea-alpha-operational-native-bundle-out");
+
+    let output = run_cli(&[
+        "build-native-bundle",
+        sugoroku.to_str().expect("sugoroku path should be utf-8"),
+        "--out",
+        out_dir.to_str().expect("out dir should be utf-8"),
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(
+        output.status.success(),
+        "operational native bundle should build: stdout={} stderr={}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert_eq!(value["status"], "accepted");
+    for relative in [
+        "packages/root/operational-sugoroku/package.mir.json",
+        "packages/root/operational-sugoroku/packages/auth-layer/package.mir.json",
+        "packages/root/operational-sugoroku/packages/custom-avatar-preview/package.mir.json",
+        "packages/root/operational-sugoroku/packages/debug-layer/package.mir.json",
+        "packages/root/operational-sugoroku/packages/placeholder-object/package.mir.json",
+        "packages/root/operational-sugoroku/packages/rate-limit-layer/package.mir.json",
+        "packages/root/membership-chat/package.mir.json",
+        "packages/root/world-core/package.mir.json",
+    ] {
+        assert!(
+            out_dir.join(relative).exists(),
+            "operational bundle should contain {relative}"
+        );
+    }
+    for relative in [
+        "reports/attach-auth-layer.json",
+        "reports/attach-custom-avatar-preview.json",
+        "reports/attach-debug-layer.json",
+        "reports/attach-placeholder-object.json",
+        "reports/attach-rate-limit-layer.json",
+    ] {
+        assert!(
+            out_dir.join(relative).exists(),
+            "operational bundle should contain {relative}"
+        );
+    }
 }
 
 #[test]

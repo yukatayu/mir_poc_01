@@ -1,0 +1,26 @@
+{
+  "deployment_profile_version": "ops-local-v0",
+  "non_final": true,
+  "package": "operational-sugoroku",
+  "host_kind": "local_native_process",
+  "session_id": "session#operational-sugoroku",
+  "places": [
+    "WorldServerPlace",
+    "ChatPlace",
+    "SugorokuGamePlace",
+    "ParticipantPlace[active_admin_participant]",
+    "ParticipantPlace[active_participant]",
+    "HostAdapterPlace"
+  ],
+  "transport": {
+    "mode": "local_loopback_tcp",
+    "wan_federation_claimed": false
+  },
+  "save_load": {
+    "supported": [
+      "R0_Local",
+      "R2_Quiescent"
+    ],
+    "distributed_durable_claimed": false
+  }
+}

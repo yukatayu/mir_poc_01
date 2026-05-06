@@ -83,6 +83,7 @@
   - `demo` runs the release-candidate workflow and writes reports, concrete non-final devtools assets, an observer-safe session artifact, an admin/debug session store, and native-bundle artifacts under the chosen output directory
   - `demo --skip-docker` is a partial local probe and does not claim release-candidate readiness
   - `product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script probes, and JSON payload semantics for clean-clone validation
+  - `operational_product_samples.py` is the orchestration helper for `samples/product-alpha1/operational/`; it keeps `mirrorea-alpha` as the canonical entrypoint and bundles `list`, `check-all`, `run-world-core`, `run-membership-chat`, `run-sugoroku`, `attach-layers`, `transport-local`, `transport-docker`, `export-devtools`, `build-native-bundle`, and `release-check`
   - it does not claim final product, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native execution
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`

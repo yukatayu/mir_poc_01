@@ -91,18 +91,25 @@ fn product_alpha1_devtools_bundle_has_required_panels_and_redaction() {
 
     let expected_panels = [
         "product_overview",
+        "source_import_graph",
+        "package_dependency_graph",
+        "projection_target_graph",
         "place_graph",
+        "server_client_process_graph",
         "event_dag",
         "message_route_graph",
         "membership_frontier_timeline",
         "witness_relation_timeline",
         "hotplug_lifecycle",
         "save_load_quiescent_timeline",
+        "contract_effect_failure_summary",
         "message_failure_recovery",
         "fallback_degradation",
         "auth_capability_decision",
         "redaction_toggle",
         "retention_trace",
+        "portal_graph_future",
+        "shard_map_future",
     ];
     for panel in expected_panels {
         assert!(
@@ -132,4 +139,20 @@ fn product_alpha1_devtools_bundle_has_required_panels_and_redaction() {
     );
     assert_eq!(bundle.admin_debug_view_status, "kept_later");
     assert!(!bundle.final_public_viewer_frozen);
+    assert_eq!(
+        bundle.panels.membership_frontier_timeline[0].config_epoch,
+        0
+    );
+    assert_eq!(
+        bundle.panels.membership_frontier_timeline[0].config_epoch_status,
+        "kept_later_manifest_only"
+    );
+    assert_eq!(
+        bundle.panels.message_route_graph.routes[0].dispatch_outcome,
+        "accepted"
+    );
+    assert_eq!(
+        bundle.panels.message_route_graph.routes[0].capability_requirement_count,
+        transported.runtime_plan.capability_requirements.len()
+    );
 }

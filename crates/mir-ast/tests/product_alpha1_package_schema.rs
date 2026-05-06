@@ -119,6 +119,28 @@ fn product_alpha1_package_schema_loads_product_demo_root_fixture() {
 }
 
 #[test]
+fn product_alpha1_package_schema_accepts_operational_sample_suite_roots() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mir-ast");
+
+    for relative in [
+        "samples/product-alpha1/operational/world-core",
+        "samples/product-alpha1/operational/membership-chat",
+        "samples/product-alpha1/operational/sugoroku-world",
+    ] {
+        let package = load_product_alpha1_package_path(repo_root.join(relative))
+            .unwrap_or_else(|_| panic!("operational fixture should load: {relative}"));
+        let report = check_product_alpha1_package(&package)
+            .unwrap_or_else(|_| panic!("operational fixture should check: {relative}"));
+
+        assert_eq!(report.verdict, "accepted");
+        assert!(!report.product_alpha1_ready);
+    }
+}
+
+#[test]
 fn product_alpha1_package_schema_rejects_missing_dependency_package() {
     let dir = unique_temp_dir("product-alpha1-missing-dependency-test");
     fs::create_dir_all(&dir).expect("temp package dir should be created");

@@ -203,6 +203,17 @@ pub fn run_product_alpha1_transport_for_session(
         from_place: next.runtime_plan.entry_place.clone(),
         to_place: next.runtime_plan.entry_place.clone(),
         transport_lane: transport_seam.to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: if mode == "docker" {
+            "docker_compose_tcp_roundtrip".to_string()
+        } else {
+            "local_loopback_tcp_roundtrip".to_string()
+        },
+        membership_epoch: next.membership.membership_epoch,
+        member_incarnation: 0,
+        capability_requirement_count: next.runtime_plan.capability_requirements.len(),
+        witness_ref_count: next.runtime_plan.witness_requirements.len(),
+        dispatch_outcome: "accepted".to_string(),
         auth_lane_preserved: true,
         membership_lane_preserved: true,
         witness_lane_preserved: true,

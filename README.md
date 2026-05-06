@@ -11,8 +11,8 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer** と、Mirrorea Spaces の **product alpha release-candidate workflow** です。
-これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
+repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、そしてその次段の **canonical operational product sample suite** です。
+これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、operational suite helper、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 
 ## 現在の到達点
 
@@ -66,6 +66,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
   `P-A1-29` は `mirrorea-alpha transport --mode local|docker`、`export-devtools`、`view` を同じ product session carrier に接続しました。local mode は loopback TCP round trip、Docker mode は controlled Docker Compose TCP world/participant round trip を実行し、transport / auth / membership / capability / witness lane を分けて報告します。viewer は non-final static HTML / JSON bundle で、observer-safe redaction、admin/debug `kept_later`、retention trace を明示します。この package close 時点では native launch bundle、release validation、final public viewer / telemetry ABI は後段でした。
   `P-A1-30` は `mirrorea-alpha build-native-bundle` を実装し、compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、launch metadata、run script、verification/provenance reports を含む native host launch bundle を生成します。`NativeExecutionPolicy = Disabled`、package-native execution 非 claim、signature-is-safety 非 claim、direct Mir-to-machine-code 非 goal を manifest / verification report に明示します。この package close 時点では `demo` command と clean-clone release validation は `P-A1-31` の後段でした。
   `P-A1-31` は `mirrorea-alpha demo` と `scripts/product_alpha1_release_check.py check-all` を追加し、source-backed debug/auth/rate-limit layer attach、deferred object/avatar-preview attach、local/Docker transport、concrete non-final devtools/view、local save/load、bounded quiescent-save、native host launch bundle を documented release-candidate workflow として再現可能にしました。Docker を skip した場合は partial local probe であり release-candidate readiness ではありません。これは product alpha release-candidate readiness であり、final public product / grammar / ABI / WAN / distributed durable save/load / arbitrary native execution ではありません。
+  `P-OPS-01` は `samples/product-alpha1/operational/`、`specs/26`、`plan/51`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` の package/import chain、shared attach packages、save/load / transport / devtools / native host bundle の bounded operational replay、projection intent、portal/shard future inventory を 1 つの canonical suite としてまとめました。portal/shard は planned-only inventory であり、runtime completion claim ではありません。
   この line は final textual `.mir` grammar、final public ABI、WAN/federation、distributed durable save/load、arbitrary native execution、signature-is-safety、final viewer / telemetry service を claim しません。native output は host launch bundle であり、native package execution ではありません。
 
 現行の Stage A..F は current-scope evidence、practical alpha-1 first-floor row は first-floor evidence として読みます。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence です。`100%` は、外部開発者がその layer を実際に再現・使用できる operational workflow または product/public layer だけに使います。live queue authority と next reopen point は `progress.md` / `tasks.md` を参照してください。
@@ -101,6 +102,9 @@ current line で reader が押さえるべき点は次です。
   `plan/45-operational-alpha05-roadmap.md`、`plan/46-operational-alpha08-roadmap.md`、`plan/47-operational-alpha09-devtools-roadmap.md`、`plan/48-theory-freeze-proof-obligations.md`、`plan/49-host-io-and-session-runtime-roadmap.md`
 - product/public alpha-1 boundary:
   `specs/25-product-alpha1-public-boundary.md`、`plan/50-product-alpha1-public-boundary-roadmap.md`
+- operational product sample suite:
+  `specs/26-operational-product-sample-suite.md`、`specs/27-spatial-portal-and-shard-extension-boundary.md`
+  `plan/51-operational-product-sample-roadmap.md`、`plan/52-portal-spatial-world-roadmap.md`
 - future-axis repository memory:
   `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..50`
 
@@ -246,6 +250,7 @@ python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json
 10. practical alpha-1 を扱う task なら `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
 11. operational readiness / theory freeze を扱う task なら `specs/19..24` と `plan/45..49`
 12. product/public-ready alpha-1 を扱う task なら `specs/25` と `plan/50`
+13. operational product sample suite を扱う task なら `specs/26..27` と `plan/51..52`
 
 task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
 ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。

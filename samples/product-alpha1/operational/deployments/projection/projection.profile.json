@@ -1,0 +1,73 @@
+{
+  "projection_profile_version": "ops-product-projection-v0",
+  "non_final": true,
+  "source_package": "operational-sugoroku",
+  "targets": [
+    {
+      "target_id": "server",
+      "target_kind": "server_host",
+      "places": [
+        "WorldServerPlace",
+        "ChatPlace",
+        "SugorokuGamePlace"
+      ],
+      "outputs": {
+        "native_binary_emitted": false,
+        "host_launch_bundle_part": true
+      }
+    },
+    {
+      "target_id": "participant-client",
+      "target_kind": "client_host",
+      "places": [
+        "ParticipantPlace[*]",
+        "ClientViewPlace"
+      ],
+      "outputs": {
+        "native_binary_emitted": false,
+        "host_launch_bundle_part": true
+      }
+    }
+  ],
+  "packet_boundaries": [
+    {
+      "name": "roll_request_packet",
+      "fields": [
+        "message_id",
+        "payload",
+        "membership_epoch",
+        "member_incarnation",
+        "capability_requirements",
+        "witness_refs"
+      ]
+    },
+    {
+      "name": "chat_message_packet",
+      "fields": [
+        "message_id",
+        "payload",
+        "membership_epoch",
+        "redaction_policy"
+      ]
+    }
+  ],
+  "ffi_boundaries": [
+    {
+      "name": "host_io_adapter",
+      "input_schema": "typed_payload",
+      "output_schema": "typed_payload",
+      "effect_row": [
+        "HostIO"
+      ],
+      "failure_row": [
+        "HostAdapterUnavailable",
+        "Timeout"
+      ]
+    }
+  ],
+  "backend": {
+    "llvm_codegen_claimed": false,
+    "direct_mir_to_machine_code_claimed": false,
+    "future_backend_requirements_documented": true
+  }
+}

@@ -1,0 +1,41 @@
+// representative source only; current executable input is package.mir.json
+import MembershipChat version "^0.1"
+
+module SugorokuWorld version "0.1.0"
+
+place SugorokuGamePlace
+
+capability RollDice
+capability PublishRoll
+capability HandoffTurn
+capability ResetGame
+
+witness draw_pub
+
+state dice_owner : Principal
+state game_epoch : Nat
+state board : BoardState
+
+perform roll_dice(player : Principal)
+  require membership.active(player)
+  require player == dice_owner
+  require capability(RollDice)
+  output draw : Nat
+  publish roll_result(player, draw)
+  produces witness draw_pub
+
+perform handoff_turn(from : Principal, to : Principal)
+  require witness(draw_pub)
+  require membership.active(to)
+  require capability(HandoffTurn)
+  ensure dice_owner = to
+  publish handoff(from, to)
+
+perform reset_game(admin : Principal)
+  require capability(ResetGame)
+  atomic_cut reset_frontier
+  ensure game_epoch = game_epoch + 1
+  publish game_reset(game_epoch)
+
+observe board via sugoroku_board_panel
+observe roll_result via sugoroku_event_panel

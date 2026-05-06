@@ -1,0 +1,69 @@
+# Operational Product Sample 01
+
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` を再現するための入口です。
+
+これは final public product ではありません。portal / shard は planned-only inventory を含みますが、runtime 実装 claim ではありません。
+
+## Validate The Repository
+
+```bash
+python3 -m unittest scripts.tests.test_validate_docs
+python3 -m unittest scripts.tests.test_operational_product_samples
+python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
+cargo fmt --check
+git diff --check
+```
+
+## Check The Three Roots
+
+```bash
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
+```
+
+## Run The First Operational Workflow
+
+```bash
+session_dir=$(mktemp -d /tmp/mirrorea-ops-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/sugoroku-world --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- session 'session#operational-sugoroku' --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/debug-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/auth-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/rate-limit-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/placeholder-object --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- attach 'session#operational-sugoroku' samples/product-alpha1/operational/packages/custom-avatar-preview --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- save 'session#operational-sugoroku' --savepoint 'savepoint#ops-r0' --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#operational-sugoroku' --savepoint 'savepoint#ops-r2' --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- transport 'session#operational-sugoroku' --mode local --format json
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- transport 'session#operational-sugoroku' --mode docker --format json
+viewer_dir=$(mktemp -d /tmp/mirrorea-ops-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-sugoroku' --out "$viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$viewer_dir" --check --format json
+bundle_dir=$(mktemp -d /tmp/mirrorea-ops-bundle-XXXXXX)
+cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/operational/sugoroku-world --out "$bundle_dir" --format json
+```
+
+If Docker / Docker Compose are unavailable, record the Docker leg as an environment-gated skip. Do not rewrite that skip as passed release evidence.
+
+Current boundedness:
+
+- attach acceptance uses the current same-session product alpha carrier and explicit package declarations; it is not a final external issuer / membership attestation pipeline
+- `quiescent-save` is current bounded `R2` evidence on the same session carrier; it is not durable/distributed proof completion
+
+## Use The Orchestration Helper
+
+```bash
+python3 scripts/operational_product_samples.py list --format json
+python3 scripts/operational_product_samples.py check-all --format json
+python3 scripts/operational_product_samples.py release-check --format json
+```
+
+## Read The Future Boundary Inventory
+
+- `samples/product-alpha1/operational/future/portal-worldlink/`
+- `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
+- `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
+
+これらは current runtime completion ではなく、next package inventory です。

@@ -46,6 +46,7 @@
 - `network_transport_plan_01.md`
 - `compiler_backend_llvm_preparation_01.md`
 - `product_alpha1_01.md`
+- `operational_product_sample_01.md`
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

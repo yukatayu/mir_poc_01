@@ -1,0 +1,17 @@
+{
+  "package_name": "P-OPS-01 operational product sample suite scaffold and first workflow",
+  "root_packages": [
+    "operational-world-core",
+    "operational-membership-chat",
+    "operational-sugoroku"
+  ],
+  "runnable_roots": [
+    "world-core",
+    "membership-chat",
+    "sugoroku-world"
+  ],
+  "planned_only_roots": [
+    "future/portal-worldlink",
+    "future/two-shard-hard-boundary"
+  ]
+}

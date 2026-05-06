@@ -1,0 +1,78 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "operational-auth-layer",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "layer",
+  "dependencies": [],
+  "effects": [
+    "auth.contract_update"
+  ],
+  "failures": [],
+  "capabilities": [
+    "ObserveDebugSummary"
+  ],
+  "witness_requirements": [],
+  "membership_requirements": [
+    "active_admin_participant"
+  ],
+  "auth_policy": {
+    "policy_id": "operational-auth-layer-auth-policy",
+    "required_bindings": [
+      "admin_membership"
+    ]
+  },
+  "auth_stack": [
+    "membership_auth",
+    "capability_auth"
+  ],
+  "contracts": [
+    {
+      "contract_id": "operational-auth-layer-contract",
+      "variance": "observe_only",
+      "effect_row": [
+        "auth.contract_update"
+      ],
+      "failure_row": []
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": [
+      "operational_auth_decision_redacted"
+    ]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": [
+      "raw_witness_payload",
+      "raw_auth_evidence",
+      "capability_secret"
+    ]
+  },
+  "retention_policy": {
+    "scope": "operational_sugoroku_session",
+    "retained_artifacts": [
+      "auth_decision_summary"
+    ]
+  },
+  "message_recovery_policy": {
+    "handled_failures": [
+      "reject"
+    ],
+    "recovery": "reject"
+  },
+  "savepoint_policy": {
+    "classes": [
+      "R0"
+    ],
+    "quiescent_required": false
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}

@@ -27,10 +27,12 @@
   `specs/19..24` / `plan/45..49` で定義した α-0.5 / α-0.8 / α-0.9 の same-session operational 条件
 - **product/public-ready Mirrorea Spaces alpha-1**
   `specs/25` / `plan/50` で定義した alpha-stable CLI、versioned package format、same-session product demo、quiescent save、viewer、native launch bundle、clean-clone validation の product alpha line。final textual `.mir` grammar、WAN/federation、distributed durable save/load、arbitrary native execution、final viewer / telemetry service は non-goal
+- **operational product sample suite**
+  `specs/26` / `plan/51` で定義した `WorldCore -> MembershipChat -> SugorokuWorld` suite、shared attach packages、deployment/projection intent、future portal/shard inventory。portal/shard は current line では planned-only
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
-現在 repo は repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidence に加えて、bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。`P-A1-25` で product/public-ready alpha-1 の境界と alpha defaults は固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut を追加しました。`P-A1-27` では `mirrorea-alpha run-local` / `session` / `attach` と product same-session carrier first cut を追加し、`P-A1-28` では bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` を同じ session file に接続しました。`P-A1-29` では同じ session carrier に local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools` JSON/HTML bundle、`view --check` を接続しました。`P-A1-30` では `build-native-bundle` が compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、run script、verification/provenance reports を持つ native host launch bundle を生成します。`P-A1-31` では `mirrorea-alpha demo`、`scripts/product_alpha1_release_check.py check-all`、clean-clone hands-on guide / research summary を追加し、product alpha release-candidate workflow を再現可能にしました。ただし final public product、final public grammar / ABI、final public viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution は引き続き別 gate / non-goal です。
+現在 repo は repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidence に加えて、bounded operational α-0.5 / α-0.8 / α-0.9 と bounded practical α-1 integrated workflow carrier まで actualize 済みです。`P-A1-25` で product/public-ready alpha-1 の境界と alpha defaults は固定し、`P-A1-26` で `mirrorea-alpha check` と versioned product package schema first cut を追加しました。`P-A1-27` では `mirrorea-alpha run-local` / `session` / `attach` と product same-session carrier first cut を追加し、`P-A1-28` では bounded message recovery rows、R0 local `save` / `load`、R2 local `quiescent-save` を同じ session file に接続しました。`P-A1-29` では同じ session carrier に local loopback TCP / Docker Compose TCP `transport`、non-final `export-devtools` JSON/HTML bundle、`view --check` を接続しました。`P-A1-30` では `build-native-bundle` が compiled Rust CLI、versioned package bundle、observer-safe devtools assets、manifest、run script、verification/provenance reports を持つ native host launch bundle を生成します。`P-A1-31` では `mirrorea-alpha demo`、`scripts/product_alpha1_release_check.py check-all`、clean-clone hands-on guide / research summary を追加し、product alpha release-candidate workflow を再現可能にしました。`P-OPS-01` では `samples/product-alpha1/operational/`、`specs/26`、`plan/51`、`scripts/operational_product_samples.py` を追加し、`WorldCore -> MembershipChat -> SugorokuWorld` の canonical operational suite と projection/portal/shard future inventory を固定しました。ただし final public product、final public grammar / ABI、final public viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution は引き続き別 gate / non-goal です。
 
 ## current active floor
 
@@ -120,8 +122,14 @@ OS/network substrate
 - product/public alpha-1 boundary:
   `specs/25-product-alpha1-public-boundary.md`
   `plan/50-product-alpha1-public-boundary-roadmap.md`
+- operational product sample suite:
+  `specs/26-operational-product-sample-suite.md`
+  `specs/27-spatial-portal-and-shard-extension-boundary.md`
+  `plan/51-operational-product-sample-roadmap.md`
+  `plan/52-portal-spatial-world-roadmap.md`
 - hands-on product alpha commands:
   `docs/hands_on/product_alpha1_01.md`
+  `docs/hands_on/operational_product_sample_01.md`
 - legacy hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 

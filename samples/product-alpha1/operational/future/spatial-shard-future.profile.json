@@ -1,0 +1,47 @@
+{
+  "spatial_profile_version": "ops-spatial-shard-v0",
+  "current_status": "planned_only",
+  "space": {
+    "kind": "integer_chunk_grid",
+    "dimensions": 2
+  },
+  "shards": [
+    {
+      "shard_id": "ShardA",
+      "authority_region": "x < 0",
+      "observation_region": "x < 16",
+      "config_epoch": 0
+    },
+    {
+      "shard_id": "ShardB",
+      "authority_region": "x >= 0",
+      "observation_region": "x >= -16",
+      "config_epoch": 0
+    }
+  ],
+  "ownership": {
+    "default_profile": "SingleOwnerSequence",
+    "object_stamp": [
+      "owner_shard",
+      "owner_epoch",
+      "sequence"
+    ]
+  },
+  "replication_profiles": {
+    "current": [
+      "SingleOwnerSequence",
+      "OwnerEpochSequence"
+    ],
+    "future_optional": [
+      "CRDTJoinSemilattice",
+      "DottedVersionVector",
+      "IntervalTreeClock"
+    ]
+  },
+  "non_claims": [
+    "no global participant vector clock default",
+    "no continuous infinite federation implementation",
+    "no WAN federation",
+    "no distributed durable save/load"
+  ]
+}

@@ -136,6 +136,10 @@ class ValidateDocsTests(unittest.TestCase):
         product_alpha1_required = {
             "specs/25-product-alpha1-public-boundary.md",
             "plan/50-product-alpha1-public-boundary-roadmap.md",
+            "specs/26-operational-product-sample-suite.md",
+            "specs/27-spatial-portal-and-shard-extension-boundary.md",
+            "plan/51-operational-product-sample-roadmap.md",
+            "plan/52-portal-spatial-world-roadmap.md",
         }
 
         for path in product_alpha1_required:
@@ -153,6 +157,13 @@ class ValidateDocsTests(unittest.TestCase):
             "samples/product-alpha1/README.md",
             "samples/product-alpha1/demo/README.md",
             "samples/product-alpha1/demo/package.mir.json",
+            "samples/product-alpha1/operational/README.md",
+            "samples/product-alpha1/operational/world-core/README.md",
+            "samples/product-alpha1/operational/world-core/package.mir.json",
+            "samples/product-alpha1/operational/membership-chat/README.md",
+            "samples/product-alpha1/operational/membership-chat/package.mir.json",
+            "samples/product-alpha1/operational/sugoroku-world/README.md",
+            "samples/product-alpha1/operational/sugoroku-world/package.mir.json",
         }
 
         for path in product_alpha1_sample_docs:

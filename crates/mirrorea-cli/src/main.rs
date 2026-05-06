@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeSet,
     env,
     fs::{self, File, OpenOptions},
     io::{self, Write},
@@ -655,7 +656,7 @@ fn run_docker_compose_product_transport(
     session_path: &Path,
 ) -> Result<DockerComposeProductTransportEvidence, ProductAlpha1SessionError> {
     check_docker_compose_available()?;
-    let compose_file = product_alpha1_docker_compose_file();
+    let compose_file = product_alpha1_docker_compose_file_for_session(session);
     if !compose_file.is_file() {
         return Err(transport_cli_error(
             &compose_file,
@@ -872,6 +873,29 @@ fn transport_cli_error(
 
 fn product_alpha1_docker_compose_file() -> PathBuf {
     repo_root().join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml")
+}
+
+fn operational_product_alpha1_docker_compose_file() -> PathBuf {
+    repo_root().join(
+        "samples/product-alpha1/operational/deployments/docker/docker-compose.operational.yml",
+    )
+}
+
+fn product_alpha1_docker_compose_file_for_session(
+    session: &ProductAlpha1SessionCarrier,
+) -> PathBuf {
+    if is_operational_product_alpha_package_kind(&session.runtime_plan.package_kind) {
+        operational_product_alpha1_docker_compose_file()
+    } else {
+        product_alpha1_docker_compose_file()
+    }
+}
+
+fn is_operational_product_alpha_package_kind(package_kind: &str) -> bool {
+    matches!(
+        package_kind,
+        "world_core" | "membership_chat" | "sugoroku_world"
+    )
 }
 
 fn repo_root() -> PathBuf {
@@ -1351,7 +1375,8 @@ fn build_product_alpha1_native_bundle(
 
     let bin_dir = absolute_out_dir.join("bin");
     let packages_dir = absolute_out_dir.join("packages");
-    let package_bundle_dir = packages_dir.join(sanitize_session_id(&package.package_id));
+    let package_tree_root = packages_dir.join("root");
+    let package_bundle_dir = package_tree_root.join(sanitize_session_id(&package.package_id));
     let devtools_dir = absolute_out_dir.join("devtools");
     let reports_dir = absolute_out_dir.join("reports");
     fs::create_dir_all(&bin_dir).map_err(|error| {
@@ -1398,6 +1423,15 @@ fn build_product_alpha1_native_bundle(
             2,
         )
     })?;
+    let attach_sources = discover_attach_package_sources(&package_root).map_err(|error| {
+        (
+            io_error_payload(
+                "build-native-bundle",
+                io_error_with_path(&package_root, error),
+            ),
+            2,
+        )
+    })?;
     let package_bundle_summary =
         copy_declared_package_bundle(&package_root, &package, &package_bundle_dir).map_err(
             |error| {
@@ -1414,16 +1448,19 @@ fn build_product_alpha1_native_bundle(
     let run_report = run_product_alpha1_local_session_path(package_path)
         .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
     let mut session = run_report.session.clone();
-    let debug_layer_path = package_root.join("packages/debug-layer");
-    let attach_report = if debug_layer_path.join("package.mir.json").is_file() {
+    let mut attach_reports = Vec::new();
+    for source in &attach_sources {
+        let bundled_attach_path = package_bundle_dir.join("packages").join(&source.dir_name);
         let (next_session, report) =
-            attach_product_alpha1_package_to_session_path(&session, &debug_layer_path)
+            attach_product_alpha1_package_to_session_path(&session, &bundled_attach_path)
                 .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
         session = next_session;
-        Some((report, session.clone()))
-    } else {
-        None
-    };
+        attach_reports.push((
+            format!("attach-{}.json", source.dir_name),
+            report,
+            session.clone(),
+        ));
+    }
     let (next_session, save_report) = save_product_alpha1_session(&session, "savepoint#r0-bundle")
         .map_err(|error| (runtime_error_payload("build-native-bundle", error), 2))?;
     session = next_session;
@@ -1466,9 +1503,9 @@ fn build_product_alpha1_native_bundle(
             2,
         )
     })?;
-    if let Some((attach_report, attach_session)) = &attach_report {
+    for (report_name, attach_report, attach_session) in &attach_reports {
         write_json_artifact(
-            &reports_dir.join("attach-debug-layer.json"),
+            &reports_dir.join(report_name),
             &attach_bundle_report_payload(attach_report, attach_session),
         )
         .map_err(|error| {
@@ -1556,7 +1593,11 @@ fn build_product_alpha1_native_bundle(
     )?;
 
     let run_script_path = out_dir.join("run.sh");
-    fs::write(&run_script_path, native_bundle_run_script()).map_err(|error| {
+    fs::write(
+        &run_script_path,
+        native_bundle_run_script(&package.package_id),
+    )
+    .map_err(|error| {
         (
             io_error_payload(
                 "build-native-bundle",
@@ -1593,7 +1634,11 @@ fn build_product_alpha1_native_bundle(
         },
     )?;
 
-    let report_paths = native_bundle_report_paths(attach_report.is_some());
+    let attach_report_paths = attach_reports
+        .iter()
+        .map(|(report_name, _, _)| format!("reports/{report_name}"))
+        .collect::<Vec<_>>();
+    let report_paths = native_bundle_report_paths(&attach_report_paths);
     let manifest = native_bundle_manifest_payload(
         &package,
         &check_report,
@@ -2534,6 +2579,13 @@ struct NativeBundlePackageSummary {
     all_native_policies_disabled: bool,
 }
 
+#[derive(Debug, Clone)]
+struct BundleAttachPackageSource {
+    dir_name: String,
+    source_dir: PathBuf,
+    package: ProductAlpha1Package,
+}
+
 fn prepare_native_bundle_output_dir(
     package_root: &Path,
     out_dir: &Path,
@@ -2828,52 +2880,156 @@ fn copy_declared_package_bundle(
     destination: &Path,
 ) -> Result<NativeBundlePackageSummary, io::Error> {
     fs::create_dir_all(destination)?;
+    let bundle_tree_root = destination
+        .parent()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "destination has no parent"))?;
+    let source_tree_root = fs::canonicalize(package_root.parent().unwrap_or(package_root))?;
     let mut copied = Vec::new();
-    copy_package_file(
-        &package_root.join("package.mir.json"),
-        &destination.join("package.mir.json"),
-        "package.mir.json",
+    let mut visited = BTreeSet::new();
+    copy_declared_package_bundle_recursive(
+        package_root,
+        package,
+        destination,
+        bundle_tree_root,
+        &source_tree_root,
+        &mut visited,
         &mut copied,
     )?;
-    for dependency in &package.dependencies {
-        let dependency_relative = safe_package_dependency_path(dependency)?;
-        let dependency_package_path = package_root.join(&dependency_relative);
-        let dependency = load_product_alpha1_package_path(&dependency_package_path)
-            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error.to_string()))?;
-        if dependency.native_policy.execution_policy != "disabled" {
-            return Err(io::Error::new(
-                io::ErrorKind::InvalidData,
-                format!(
-                    "dependency `{}` has unsupported native execution policy `{}`",
-                    dependency.package_id, dependency.native_policy.execution_policy
-                ),
-            ));
-        }
-        let dependency_is_dir = dependency_package_path.is_dir();
-        let source_package_file = if dependency_is_dir {
-            dependency_package_path.join("package.mir.json")
-        } else {
-            dependency_package_path
-        };
-        let dest_relative = if dependency_is_dir {
-            dependency_relative.join("package.mir.json")
-        } else {
-            dependency_relative
-        };
-        let destination_package_file = destination.join(&dest_relative);
-        copy_package_file(
-            &source_package_file,
-            &destination_package_file,
-            &dest_relative.display().to_string(),
-            &mut copied,
-        )?;
-    }
+    copy_attach_package_bundle(package_root, destination, bundle_tree_root, &mut copied)?;
     copied.sort();
     copied.dedup();
     Ok(NativeBundlePackageSummary {
         copied_relative_paths: copied,
         all_native_policies_disabled: true,
     })
+}
+
+fn copy_declared_package_bundle_recursive(
+    package_root: &Path,
+    package: &ProductAlpha1Package,
+    destination: &Path,
+    bundle_tree_root: &Path,
+    source_tree_root: &Path,
+    visited: &mut BTreeSet<PathBuf>,
+    copied: &mut Vec<String>,
+) -> Result<(), io::Error> {
+    let canonical_root = fs::canonicalize(package_root)?;
+    if !visited.insert(canonical_root.clone()) {
+        return Ok(());
+    }
+
+    copy_package_file(
+        &canonical_root.join("package.mir.json"),
+        &destination.join("package.mir.json"),
+        &bundle_relative_path(bundle_tree_root, &destination.join("package.mir.json"))?,
+        copied,
+    )?;
+
+    for dependency in &package.dependencies {
+        let (dependency_root, dependency_package) =
+            resolve_source_dependency_package(&canonical_root, source_tree_root, dependency)?;
+        if dependency_package.native_policy.execution_policy != "disabled" {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!(
+                    "dependency `{}` has unsupported native execution policy `{}`",
+                    dependency_package.package_id,
+                    dependency_package.native_policy.execution_policy
+                ),
+            ));
+        }
+        let dependency_destination =
+            bundle_dependency_destination(destination, bundle_tree_root, dependency)?;
+        copy_declared_package_bundle_recursive(
+            &dependency_root,
+            &dependency_package,
+            &dependency_destination,
+            bundle_tree_root,
+            source_tree_root,
+            visited,
+            copied,
+        )?;
+    }
+
+    Ok(())
+}
+
+fn copy_attach_package_bundle(
+    package_root: &Path,
+    destination: &Path,
+    bundle_tree_root: &Path,
+    copied: &mut Vec<String>,
+) -> Result<(), io::Error> {
+    for source in discover_attach_package_sources(package_root)? {
+        if source.package.native_policy.execution_policy != "disabled" {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!(
+                    "attach package `{}` has unsupported native execution policy `{}`",
+                    source.package.package_id, source.package.native_policy.execution_policy
+                ),
+            ));
+        }
+        let attach_destination = destination
+            .join("packages")
+            .join(&source.dir_name)
+            .join("package.mir.json");
+        copy_package_file(
+            &source.source_dir.join("package.mir.json"),
+            &attach_destination,
+            &bundle_relative_path(bundle_tree_root, &attach_destination)?,
+            copied,
+        )?;
+    }
+    Ok(())
+}
+
+fn discover_attach_package_sources(
+    package_root: &Path,
+) -> Result<Vec<BundleAttachPackageSource>, io::Error> {
+    let local_packages = package_root.join("packages");
+    let sibling_packages = package_root
+        .parent()
+        .map(|parent| parent.join("packages"))
+        .unwrap_or_else(|| package_root.join("packages"));
+    let candidate_root = if local_packages.is_dir() {
+        local_packages
+    } else {
+        sibling_packages
+    };
+    if !candidate_root.is_dir() {
+        return Ok(Vec::new());
+    }
+
+    let mut sources = Vec::new();
+    for entry in fs::read_dir(&candidate_root)? {
+        let source_dir = entry?.path();
+        if !source_dir.is_dir() || !source_dir.join("package.mir.json").is_file() {
+            continue;
+        }
+        let dir_name = source_dir
+            .file_name()
+            .and_then(|name| name.to_str())
+            .ok_or_else(|| {
+                io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    format!(
+                        "attach package directory has non-utf8 name: {}",
+                        source_dir.display()
+                    ),
+                )
+            })?
+            .to_string();
+        let package = load_product_alpha1_package_path(&source_dir)
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error.to_string()))?;
+        sources.push(BundleAttachPackageSource {
+            dir_name,
+            source_dir,
+            package,
+        });
+    }
+    sources.sort_by(|left, right| left.dir_name.cmp(&right.dir_name));
+    Ok(sources)
 }
 
 fn safe_package_dependency_path(dependency: &str) -> Result<PathBuf, io::Error> {
@@ -2905,6 +3061,104 @@ fn copy_package_file(
     Ok(())
 }
 
+fn resolve_source_dependency_package(
+    package_root: &Path,
+    source_tree_root: &Path,
+    dependency: &str,
+) -> Result<(PathBuf, ProductAlpha1Package), io::Error> {
+    let candidate = resolve_relative_path_lexically(package_root, Path::new(dependency))?;
+    let package = load_product_alpha1_package_path(&candidate)
+        .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error.to_string()))?;
+    let dependency_root = product_alpha1_package_root(&candidate)?;
+    if !dependency_root.starts_with(source_tree_root) {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!(
+                "dependency `{dependency}` escapes the source package tree rooted at `{}`",
+                source_tree_root.display()
+            ),
+        ));
+    }
+    Ok((dependency_root, package))
+}
+
+fn bundle_dependency_destination(
+    package_destination_root: &Path,
+    bundle_tree_root: &Path,
+    dependency: &str,
+) -> Result<PathBuf, io::Error> {
+    let candidate =
+        resolve_relative_path_lexically(package_destination_root, Path::new(dependency))?;
+    let dependency_root = if candidate.file_name().and_then(|name| name.to_str())
+        == Some("package.mir.json")
+    {
+        candidate.parent().map(Path::to_path_buf).ok_or_else(|| {
+            io::Error::new(
+                io::ErrorKind::InvalidInput,
+                format!("dependency `{dependency}` resolves to a package file without a parent"),
+            )
+        })?
+    } else {
+        candidate
+    };
+    if !dependency_root.starts_with(bundle_tree_root) {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!(
+                "dependency `{dependency}` escapes the bundle package tree rooted at `{}`",
+                bundle_tree_root.display()
+            ),
+        ));
+    }
+    Ok(dependency_root)
+}
+
+fn bundle_relative_path(bundle_tree_root: &Path, path: &Path) -> Result<String, io::Error> {
+    let relative = path.strip_prefix(bundle_tree_root).map_err(|_| {
+        io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!(
+                "path `{}` is outside bundle tree `{}`",
+                path.display(),
+                bundle_tree_root.display()
+            ),
+        )
+    })?;
+    Ok(relative.display().to_string())
+}
+
+fn resolve_relative_path_lexically(base: &Path, relative: &Path) -> Result<PathBuf, io::Error> {
+    if relative.is_absolute() {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            format!("unsafe dependency path `{}`", relative.display()),
+        ));
+    }
+
+    let mut resolved = base.to_path_buf();
+    for component in relative.components() {
+        match component {
+            std::path::Component::CurDir => {}
+            std::path::Component::Normal(segment) => resolved.push(segment),
+            std::path::Component::ParentDir => {
+                if !resolved.pop() {
+                    return Err(io::Error::new(
+                        io::ErrorKind::InvalidInput,
+                        format!("unsafe dependency path `{}`", relative.display()),
+                    ));
+                }
+            }
+            std::path::Component::RootDir | std::path::Component::Prefix(_) => {
+                return Err(io::Error::new(
+                    io::ErrorKind::InvalidInput,
+                    format!("unsafe dependency path `{}`", relative.display()),
+                ));
+            }
+        }
+    }
+    Ok(resolved)
+}
+
 fn make_executable(path: &Path) -> Result<(), io::Error> {
     #[cfg(unix)]
     {
@@ -2925,7 +3179,7 @@ fn io_error_with_path(path: &Path, error: io::Error) -> io::Error {
     io::Error::new(error.kind(), format!("{}: {}", path.display(), error))
 }
 
-fn native_bundle_report_paths(attach_included: bool) -> Vec<String> {
+fn native_bundle_report_paths(attach_report_paths: &[String]) -> Vec<String> {
     let mut paths = vec![
         "reports/check.json".to_string(),
         "reports/run-local.json".to_string(),
@@ -2937,8 +3191,9 @@ fn native_bundle_report_paths(attach_included: bool) -> Vec<String> {
         "reports/run-script-view.json".to_string(),
         "reports/verification-report.json".to_string(),
     ];
-    if attach_included {
-        paths.insert(2, "reports/attach-debug-layer.json".to_string());
+    let insert_index = 2;
+    for (offset, attach_report_path) in attach_report_paths.iter().enumerate() {
+        paths.insert(insert_index + offset, attach_report_path.clone());
     }
     paths
 }
@@ -3115,19 +3370,21 @@ fn product_alpha1_release_non_claims() -> Vec<&'static str> {
     ]
 }
 
-fn native_bundle_run_script() -> &'static str {
-    r#"#!/usr/bin/env sh
+fn native_bundle_run_script(package_id: &str) -> String {
+    let package_dir = format!("$ROOT/packages/root/{}", sanitize_session_id(package_id));
+    format!(
+        r#"#!/usr/bin/env sh
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 BIN="$ROOT/bin/mirrorea-alpha"
 REPORTS="$ROOT/reports"
-PACKAGE_DIR=$(find "$ROOT/packages" -mindepth 1 -maxdepth 1 -type d | sort | sed -n '1p')
-if [ -z "$PACKAGE_DIR" ]; then
+PACKAGE_DIR="{package_dir}"
+if [ ! -d "$PACKAGE_DIR" ]; then
   echo "no bundled product alpha package found" >&2
   exit 2
 fi
 mkdir -p "$REPORTS"
-COMMAND=${1:-check}
+COMMAND=${{1:-check}}
 case "$COMMAND" in
   check)
     "$BIN" check "$PACKAGE_DIR" --format json > "$REPORTS/run-script-check.json"
@@ -3143,6 +3400,7 @@ case "$COMMAND" in
     ;;
 esac
 "#
+    )
 }
 
 fn native_bundle_readme(package_id: &str, package_version: &str) -> String {
@@ -3255,18 +3513,25 @@ fn observer_safe_bundle_text_contains_forbidden_keys(text: &str) -> bool {
 fn required_product_alpha1_viewer_panels() -> &'static [&'static str] {
     &[
         "product_overview",
+        "source_import_graph",
+        "package_dependency_graph",
+        "projection_target_graph",
         "place_graph",
+        "server_client_process_graph",
         "event_dag",
         "message_route_graph",
         "membership_frontier_timeline",
         "witness_relation_timeline",
         "hotplug_lifecycle",
         "save_load_quiescent_timeline",
+        "contract_effect_failure_summary",
         "message_failure_recovery",
         "fallback_degradation",
         "auth_capability_decision",
         "redaction_toggle",
         "retention_trace",
+        "portal_graph_future",
+        "shard_map_future",
     ]
 }
 

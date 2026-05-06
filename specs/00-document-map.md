@@ -34,6 +34,7 @@
   - `public_api_parser_gate_plan_01.md` は、`P18` repo-side freeze checklist / public-boundary inventory / true user-spec hold line split を reader-facing に短く読むための summary である。
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の current queue narrowing と stop line を reader-facing に短く読むための summary である。
   - `product_alpha1_01.md` は、product alpha release-candidate workflow、non-final viewer、release-check boundary、final-public non-claims を reader-facing に短く読むための summary である。
+  - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld` suite、shared attach packages、projection / portal / shard inventory、runtime / docs non-claims を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -47,6 +48,7 @@
   - `avatar_fairy_follow_representative_slice_01.md` は、phase 8 active representative slice を最短コマンドで追うための landing page である。
   - `typed_external_boundary_canaries_01.md` は、phase 9 synthetic preview helper subset を最短コマンドで追うための landing page である。
   - `product_alpha1_01.md` は、Product/Public-ready Mirrorea Spaces alpha-1 release-candidate workflow を clean clone から再現するための landing page である。
+  - `operational_product_sample_01.md` は、canonical operational product sample suite を clean clone から再現するための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
@@ -176,6 +178,16 @@
 - `plan/50-product-alpha1-public-boundary-roadmap.md`
   - product alpha-1 の repository-memory roadmap を置く。
   - `P-A1-25..31` package sequence、alpha `U1` defaults、sample root / native bundle target、validation direction、blocker split を整理する。
+- `specs/26-operational-product-sample-suite.md`
+  - product alpha release-candidate workflow の次に置く canonical operational product sample suite の規範境界を置く。
+  - `samples/product-alpha1/operational/`、`WorldCore -> MembershipChat -> SugorokuWorld`、shared attach packages、deployment/projection intent、future portal/shard inventory、completion condition、non-claims を固定する。
+- `plan/51-operational-product-sample-roadmap.md`
+  - operational product sample suite の repository-memory roadmap を置く。
+  - `P-OPS-01..` package line、current scope、next widenings、open questions を整理する。
+- `specs/27-spatial-portal-and-shard-extension-boundary.md`
+  - portal/world-link、two-shard hard boundary、replication profile optionality の future boundary を置く。
+- `plan/52-portal-spatial-world-roadmap.md`
+  - portal/shard future line の repository-memory roadmap を置く。
 
 ## 規範的な読書順
 
@@ -196,6 +208,8 @@
 10. practical alpha-1 line を扱う場合は `18-practical-alpha1-scope.md` も読む
 11. operational readiness / theory freeze を扱う場合は `19-verification-stratification.md`、`20-cut-save-load-semantics.md`、`21-auth-layer-algebra.md`、`22-observability-devtools-semantics.md`、`23-typed-external-host-boundary.md`、`24-operational-alpha05-alpha08-readiness.md` も読む
 12. product/public-ready alpha-1 line を扱う場合は `25-product-alpha1-public-boundary.md` も読む
+13. operational product sample suite を扱う場合は `26-operational-product-sample-suite.md` も読む
+14. portal / shard future boundary を扱う場合は `27-spatial-portal-and-shard-extension-boundary.md` も読む
 
 ## 例示文書
 

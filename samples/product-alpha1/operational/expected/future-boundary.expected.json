@@ -1,0 +1,11 @@
+{
+  "portal_worldlink_status": "planned_manifest_only",
+  "spatial_shard_status": "planned_only",
+  "non_claims": [
+    "no WAN federation",
+    "no continuous infinite shard federation",
+    "no distributed durable save/load",
+    "no final server/client binary split",
+    "no direct LLVM backend"
+  ]
+}

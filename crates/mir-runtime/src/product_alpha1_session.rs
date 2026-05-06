@@ -104,6 +104,10 @@ pub struct ProductAlpha1RuntimePlan {
     pub entry_place: String,
     pub session_store_scope: String,
     pub place_graph: ProductAlpha1PlaceGraph,
+    #[serde(default)]
+    pub declared_dependencies: Vec<String>,
+    #[serde(default)]
+    pub declared_contract_ids: Vec<String>,
     pub bootstrap_membership: Vec<String>,
     pub witness_requirements: Vec<String>,
     pub capability_requirements: Vec<String>,
@@ -220,6 +224,13 @@ pub struct ProductAlpha1RouteEntry {
     pub from_place: String,
     pub to_place: String,
     pub transport_lane: String,
+    pub message_state_summary: String,
+    pub transport_contract_summary: String,
+    pub membership_epoch: u64,
+    pub member_incarnation: u64,
+    pub capability_requirement_count: usize,
+    pub witness_ref_count: usize,
+    pub dispatch_outcome: String,
     pub auth_lane_preserved: bool,
     pub membership_lane_preserved: bool,
     pub witness_lane_preserved: bool,
@@ -499,12 +510,12 @@ pub fn run_product_alpha1_local_session_path(
         .map_err(|error| map_product_error(ProductAlpha1SessionErrorKind::Checker, error))?;
     let package = load_product_alpha1_package_path(&path)
         .map_err(|error| map_product_error(ProductAlpha1SessionErrorKind::FrontDoor, error))?;
-    if package.package_kind != "world" {
+    if !is_world_like_product_alpha1_package_kind(&package.package_kind) {
         return Err(ProductAlpha1SessionError {
             kind: ProductAlpha1SessionErrorKind::UnsupportedPackage,
             path,
             detail: format!(
-                "run-local requires a product alpha-1 world package, found `{}`",
+                "run-local requires a product alpha-1 world-like package, found `{}`",
                 package.package_kind
             ),
         });
@@ -591,7 +602,7 @@ pub fn attach_product_alpha1_package_to_session_path(
         &terminal_outcome,
         activation_cut_ref.as_deref(),
     );
-    append_attach_route(&mut next, &package);
+    append_attach_route(&mut next, &package, &terminal_outcome);
     append_attach_message_state(&mut next, &package, &terminal_outcome);
     next.hotplug_lifecycle
         .push(ProductAlpha1HotPlugLifecycleEntry {
@@ -617,7 +628,7 @@ pub fn attach_product_alpha1_package_to_session_path(
 
     let hotplug_request = HotPlugRequest {
         request_id: request_event_id.clone(),
-        attachpoint_ref: "AttachPoint[ProductDemoRoom::Layers]".to_string(),
+        attachpoint_ref: attachpoint_ref_for_entry_place(&session.runtime_plan.entry_place),
         patch_ref: package.package_id.clone(),
         operation_kind: "attach".to_string(),
         requesting_principal: "active_admin_participant".to_string(),
@@ -952,34 +963,25 @@ pub fn quiescent_save_product_alpha1_session(
 }
 
 fn build_runtime_plan(package: &ProductAlpha1Package) -> ProductAlpha1RuntimePlan {
+    let entry_place = package
+        .runtime_input
+        .entry_place
+        .clone()
+        .unwrap_or_else(|| default_entry_place_for_package_kind(&package.package_kind));
     ProductAlpha1RuntimePlan {
         runtime_plan_scope: runtime_plan_scope(),
         package_id: package.package_id.clone(),
         package_version: package.package_version.clone(),
         package_kind: package.package_kind.clone(),
-        entry_place: package
-            .runtime_input
-            .entry_place
-            .clone()
-            .unwrap_or_else(|| "Place[ProductDemoRoom]".to_string()),
+        entry_place: entry_place.clone(),
         session_store_scope: "local_process_session_store".to_string(),
-        place_graph: ProductAlpha1PlaceGraph {
-            nodes: vec![
-                ProductAlpha1PlaceNode {
-                    place_id: "Place[ProductDemoRoom]".to_string(),
-                    place_kind: "shared_virtual_space".to_string(),
-                },
-                ProductAlpha1PlaceNode {
-                    place_id: "Place[HostAdapter]".to_string(),
-                    place_kind: "typed_external_host_boundary".to_string(),
-                },
-            ],
-            edges: vec![ProductAlpha1PlaceEdge {
-                from_place: "Place[ProductDemoRoom]".to_string(),
-                to_place: "Place[HostAdapter]".to_string(),
-                relation: "typed_host_io_adapter_route".to_string(),
-            }],
-        },
+        place_graph: representative_place_graph(&package.package_kind, &entry_place),
+        declared_dependencies: package.dependencies.clone(),
+        declared_contract_ids: package
+            .contracts
+            .iter()
+            .map(|contract| contract.contract_id.clone())
+            .collect(),
         bootstrap_membership: bootstrap_membership(package),
         witness_requirements: package.witness_requirements.clone(),
         capability_requirements: package.capabilities.clone(),
@@ -998,14 +1000,26 @@ fn build_run_local_session(
     let (runtime_snapshot, envelope) = build_core_runtime_snapshot(package, &runtime_plan)?;
     let host_io_history = build_host_io_history(package)?;
     let failure_observations = build_failure_observations(package);
-    let event_dag =
-        build_initial_event_dag(package, &envelope, &host_io_history, &failure_observations);
+    let event_dag = build_initial_event_dag(
+        package,
+        &runtime_plan.entry_place,
+        &envelope,
+        &host_io_history,
+        &failure_observations,
+    );
     let mut routes = vec![ProductAlpha1RouteEntry {
         route_id: "route#product-demo-local-1".to_string(),
         envelope_id: envelope.envelope_id.clone(),
         from_place: envelope.from_place.clone(),
         to_place: envelope.to_place.clone(),
         transport_lane: envelope.transport_seam.clone(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "same_session_local_process".to_string(),
+        membership_epoch: envelope.membership_epoch,
+        member_incarnation: envelope.member_incarnation,
+        capability_requirement_count: envelope.capability_requirements.len(),
+        witness_ref_count: envelope.witness_refs.len(),
+        dispatch_outcome: envelope.dispatch_outcome.clone(),
         auth_lane_preserved: true,
         membership_lane_preserved: true,
         witness_lane_preserved: true,
@@ -1280,7 +1294,7 @@ fn append_save_load_event(
     session.event_dag.nodes.push(ProductAlpha1EventNode {
         event_id,
         event_kind: event_kind.to_string(),
-        place_ref: "Place[ProductDemoRoom]".to_string(),
+        place_ref: session.runtime_plan.entry_place.clone(),
         envelope_ref,
         observer_safe_summary,
     });
@@ -1429,6 +1443,7 @@ fn refresh_observer_safe_export(session: &mut ProductAlpha1SessionCarrier) {
 
 fn build_initial_event_dag(
     package: &ProductAlpha1Package,
+    entry_place: &str,
     envelope: &MessageEnvelope,
     host_io_history: &[ProductAlpha1HostIoEntry],
     failure_observations: &[ProductAlpha1FailureObservation],
@@ -1437,7 +1452,7 @@ fn build_initial_event_dag(
         ProductAlpha1EventNode {
             event_id: "event#session-started".to_string(),
             event_kind: "session_started".to_string(),
-            place_ref: "Place[ProductDemoRoom]".to_string(),
+            place_ref: entry_place.to_string(),
             envelope_ref: None,
             observer_safe_summary: format!("started {}", package.package_id),
         },
@@ -1552,6 +1567,13 @@ fn build_failure_routes(
             from_place: envelope.from_place.clone(),
             to_place: envelope.to_place.clone(),
             transport_lane: format!("{}#bounded_failure", envelope.transport_seam),
+            message_state_summary: "ObservedFailure".to_string(),
+            transport_contract_summary: "bounded_failure_observation".to_string(),
+            membership_epoch: envelope.membership_epoch,
+            member_incarnation: envelope.member_incarnation,
+            capability_requirement_count: envelope.capability_requirements.len(),
+            witness_ref_count: envelope.witness_refs.len(),
+            dispatch_outcome: failure.terminal_state.clone(),
             auth_lane_preserved: true,
             membership_lane_preserved: true,
             witness_lane_preserved: true,
@@ -1698,14 +1720,14 @@ fn append_attach_events(
     session.event_dag.nodes.push(ProductAlpha1EventNode {
         event_id: request_event_id.to_string(),
         event_kind: "hotplug_request".to_string(),
-        place_ref: "Place[ProductDemoRoom]".to_string(),
+        place_ref: session.runtime_plan.entry_place.clone(),
         envelope_ref: Some(format!("envelope#attach#{}", package.package_id)),
         observer_safe_summary: format!("attach request for {}", package.package_id),
     });
     session.event_dag.nodes.push(ProductAlpha1EventNode {
         event_id: verdict_event_id.to_string(),
         event_kind: "hotplug_verdict".to_string(),
-        place_ref: "Place[ProductDemoRoom]".to_string(),
+        place_ref: session.runtime_plan.entry_place.clone(),
         envelope_ref: Some(format!("envelope#attach#{}", package.package_id)),
         observer_safe_summary: format!("attach verdict {terminal_outcome}"),
     });
@@ -1719,7 +1741,7 @@ fn append_attach_events(
         session.event_dag.nodes.push(ProductAlpha1EventNode {
             event_id: activation_cut_ref.to_string(),
             event_kind: "activation_cut".to_string(),
-            place_ref: "Place[ProductDemoRoom]".to_string(),
+            place_ref: session.runtime_plan.entry_place.clone(),
             envelope_ref: Some(format!("envelope#attach#{}", package.package_id)),
             observer_safe_summary: format!("activation cut admitted for {}", package.package_id),
         });
@@ -1731,13 +1753,30 @@ fn append_attach_events(
     }
 }
 
-fn append_attach_route(session: &mut ProductAlpha1SessionCarrier, package: &ProductAlpha1Package) {
+fn append_attach_route(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+    terminal_outcome: &str,
+) {
     session.route_graph.routes.push(ProductAlpha1RouteEntry {
         route_id: format!("route#attach#{}", package.package_id),
         envelope_id: format!("envelope#attach#{}", package.package_id),
-        from_place: "Place[ProductDemoRoom]".to_string(),
-        to_place: "AttachPoint[ProductDemoRoom::Layers]".to_string(),
+        from_place: session.runtime_plan.entry_place.clone(),
+        to_place: attachpoint_ref_for_entry_place(&session.runtime_plan.entry_place),
         transport_lane: "same_session_attach_envelope".to_string(),
+        message_state_summary: if terminal_outcome == "accepted" {
+            "Delivered".to_string()
+        } else if terminal_outcome == "deferred" {
+            "DeferredBoundary".to_string()
+        } else {
+            "Rejected".to_string()
+        },
+        transport_contract_summary: "same_session_attach_contract".to_string(),
+        membership_epoch: session.membership.membership_epoch,
+        member_incarnation: 0,
+        capability_requirement_count: package.capabilities.len(),
+        witness_ref_count: package.witness_requirements.len(),
+        dispatch_outcome: terminal_outcome.to_string(),
         auth_lane_preserved: true,
         membership_lane_preserved: true,
         witness_lane_preserved: true,
@@ -2105,6 +2144,154 @@ fn host_io_error(detail: String) -> ProductAlpha1SessionError {
 fn bootstrap_membership(package: &ProductAlpha1Package) -> Vec<String> {
     let values: BTreeSet<String> = package.membership_requirements.iter().cloned().collect();
     values.into_iter().collect()
+}
+
+fn is_world_like_product_alpha1_package_kind(package_kind: &str) -> bool {
+    matches!(
+        package_kind,
+        "world" | "world_core" | "membership_chat" | "sugoroku_world"
+    )
+}
+
+fn default_entry_place_for_package_kind(package_kind: &str) -> String {
+    match package_kind {
+        "world_core" => "Place[WorldServerPlace]".to_string(),
+        "membership_chat" => "Place[ChatPlace]".to_string(),
+        "sugoroku_world" => "Place[SugorokuGamePlace]".to_string(),
+        _ => "Place[ProductDemoRoom]".to_string(),
+    }
+}
+
+fn representative_place_graph(package_kind: &str, entry_place: &str) -> ProductAlpha1PlaceGraph {
+    match package_kind {
+        "world_core" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[WorldServerPlace]".to_string(),
+                    place_kind: "shared_virtual_space".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[HostAdapter]".to_string(),
+                    place_kind: "typed_external_host_boundary".to_string(),
+                },
+            ],
+            edges: vec![ProductAlpha1PlaceEdge {
+                from_place: "Place[WorldServerPlace]".to_string(),
+                to_place: "Place[HostAdapter]".to_string(),
+                relation: "typed_host_io_adapter_route".to_string(),
+            }],
+        },
+        "membership_chat" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[WorldServerPlace]".to_string(),
+                    place_kind: "shared_virtual_space".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ChatPlace]".to_string(),
+                    place_kind: "chat_lane".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[HostAdapter]".to_string(),
+                    place_kind: "typed_external_host_boundary".to_string(),
+                },
+            ],
+            edges: vec![
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[WorldServerPlace]".to_string(),
+                    to_place: "Place[ChatPlace]".to_string(),
+                    relation: "membership_room_message_lane".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ChatPlace]".to_string(),
+                    to_place: "Place[HostAdapter]".to_string(),
+                    relation: "typed_host_io_adapter_route".to_string(),
+                },
+            ],
+        },
+        "sugoroku_world" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[WorldServerPlace]".to_string(),
+                    place_kind: "shared_virtual_space".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ChatPlace]".to_string(),
+                    place_kind: "chat_lane".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[SugorokuGamePlace]".to_string(),
+                    place_kind: "game_authority".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[active_admin_participant]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[active_participant]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[HostAdapter]".to_string(),
+                    place_kind: "typed_external_host_boundary".to_string(),
+                },
+            ],
+            edges: vec![
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[WorldServerPlace]".to_string(),
+                    to_place: "Place[ChatPlace]".to_string(),
+                    relation: "membership_room_message_lane".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ChatPlace]".to_string(),
+                    to_place: "Place[SugorokuGamePlace]".to_string(),
+                    relation: "game_authority_lane".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[SugorokuGamePlace]".to_string(),
+                    to_place: "ParticipantPlace[active_admin_participant]".to_string(),
+                    relation: "observer_safe_state_projection".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[SugorokuGamePlace]".to_string(),
+                    to_place: "ParticipantPlace[active_participant]".to_string(),
+                    relation: "observer_safe_state_projection".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[SugorokuGamePlace]".to_string(),
+                    to_place: "Place[HostAdapter]".to_string(),
+                    relation: "typed_host_io_adapter_route".to_string(),
+                },
+            ],
+        },
+        _ => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: entry_place.to_string(),
+                    place_kind: "shared_virtual_space".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[HostAdapter]".to_string(),
+                    place_kind: "typed_external_host_boundary".to_string(),
+                },
+            ],
+            edges: vec![ProductAlpha1PlaceEdge {
+                from_place: entry_place.to_string(),
+                to_place: "Place[HostAdapter]".to_string(),
+                relation: "typed_host_io_adapter_route".to_string(),
+            }],
+        },
+    }
+}
+
+fn attachpoint_ref_for_entry_place(entry_place: &str) -> String {
+    let Some(place_name) = entry_place
+        .strip_prefix("Place[")
+        .and_then(|value| value.strip_suffix(']'))
+    else {
+        return "AttachPoint[ProductDemoRoom::Layers]".to_string();
+    };
+    format!("AttachPoint[{place_name}::Layers]")
 }
 
 fn non_empty_witness_refs(package: &ProductAlpha1Package) -> Vec<String> {

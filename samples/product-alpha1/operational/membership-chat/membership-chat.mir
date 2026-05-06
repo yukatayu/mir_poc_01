@@ -1,0 +1,25 @@
+// representative source only; current executable input is package.mir.json
+import WorldCore version "^0.1"
+
+module MembershipChat version "0.1.0"
+
+capability SendRoomMessage
+capability ModerateRoomMessage
+
+perform join(principal : Principal)
+  require capability(JoinWorld)
+  ensure membership.active(principal)
+  publish participant_joined(principal)
+
+perform leave(principal : Principal)
+  require membership.active(principal)
+  ensure membership.epoch_advanced
+  publish participant_left(principal)
+
+perform send_room_message(sender : Principal, body : Text)
+  require membership.active(sender)
+  require capability(SendRoomMessage)
+  may_fail RateLimited
+  publish chat_message(sender, body) redacted observer_safe
+
+observe chat_message via room_chat_panel

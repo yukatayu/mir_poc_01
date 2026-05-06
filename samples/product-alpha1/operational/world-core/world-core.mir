@@ -1,0 +1,29 @@
+// representative source only; current executable input is package.mir.json
+module WorldCore version "0.1.0"
+
+place WorldServerPlace
+
+policy observation {
+  default_view = observer_safe
+  redaction = redact_raw_auth_and_witness
+  retention = report_local
+}
+
+capability WorldAdmin
+capability JoinWorld
+capability ObserveWorld
+
+state membership : MembershipRegistry
+state event_log : EventDag
+
+perform admit_participant(principal : Principal)
+  require capability(JoinWorld)
+  ensure membership.active(principal)
+  publish participant_joined(principal)
+
+perform leave_participant(principal : Principal)
+  require membership.active(principal)
+  ensure membership.epoch_advanced
+  publish participant_left(principal)
+
+observe event_log via observer_safe_view

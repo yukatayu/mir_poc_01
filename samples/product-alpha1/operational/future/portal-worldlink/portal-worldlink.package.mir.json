@@ -1,0 +1,33 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "operational-portal-worldlink",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "portal_worldlink",
+  "current_status": "planned_manifest_only",
+  "provided_surfaces": [
+    "portal.resolve",
+    "portal.handoff",
+    "portal.admit"
+  ],
+  "effects": [
+    "PortalResolve",
+    "PortalHandoff",
+    "PortalAdmit"
+  ],
+  "failures": [
+    "DestinationUnavailable",
+    "PortalAdmissionRejected",
+    "MissingCapability",
+    "MissingWitness",
+    "RouteUnavailable"
+  ],
+  "capabilities": [
+    "UsePortal",
+    "AdmitPortalTraveler"
+  ],
+  "non_claims": [
+    "no WAN federation",
+    "no continuous spatial sync",
+    "no final portal ABI"
+  ]
+}

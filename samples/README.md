@@ -21,8 +21,10 @@
 - `product-alpha1/`
   product/public alpha-1 sample root
   - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, P-A1-28 local save/quiescent-save fixture root, P-A1-29 transport/viewer fixture root, P-A1-30 native host launch bundle fixture root, and P-A1-31 release-candidate demo root
+  - `operational/` is the `P-OPS-01` canonical operational product sample suite root with `WorldCore -> MembershipChat -> SugorokuWorld`, shared attach packages, deployment/projection intent, and portal/shard future inventory
   - `docker/` holds the controlled Product Alpha-1 Docker Compose TCP fixture used by `mirrorea-alpha transport --mode docker`
   - `cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json` and `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release` are the release-candidate validation anchors
+  - `python3 scripts/operational_product_samples.py check-all --format json` is the operational suite validation anchor
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - `not_implemented/`
   residual planned skeleton family
@@ -123,6 +125,8 @@ bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
 cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
 cargo run -q -p mirrorea-cli -- demo samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-demo --format json
 python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release
+python3 scripts/operational_product_samples.py list --format json
+python3 scripts/operational_product_samples.py check-all --format json
 ```
 
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する
