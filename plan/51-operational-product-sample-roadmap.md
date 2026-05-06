@@ -10,7 +10,7 @@
 - `demo/` は release-candidate workflow root として残し、operational suite と混ぜない
 - current executable input は `package.mir.json`
 - representative `.mir` は explanatory source
-- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`、`PortalWorldLink`
+- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`、`PortalWorldLink`、`TwoShardHardBoundary`
 - `future/portal-worldlink/` と shard inventory は同 root に置いてよいが、active portal root と混同せず blueprint / planned-only を維持する
 
 ## P-OPS-01 current scope
@@ -46,6 +46,13 @@
 - bounded same-session discrete handoff evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
 - `future/portal-worldlink/` blueprint root を残し、active runtime root と明示的に分ける
 
+## P-OPS-07 current scope
+
+- `samples/product-alpha1/operational/two-shard-hard-boundary/` を active executable root として追加する
+- `two_shard_hard_boundary` package kind を current product alpha executable line に追加する
+- bounded same-session two-shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
+- `future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` を retained blueprint inventory として残し、active runtime root と明示的に分ける
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -59,9 +66,7 @@
 
 ## next packages
 
-1. `P-OPS-07`
-   two-shard hard-boundary model-check sample
-2. `P-OPS-09`
+1. `P-OPS-09`
    external developer package authoring guide
 
 ## current recommendation
@@ -70,7 +75,8 @@
 - `P-OPS-04` で `SugorokuWorld` の bounded scenario は current product alpha session carrier に寄せて actualize 済み
 - `P-OPS-05` で projection schema と packet / FFI boundary inventory は schema-backed inventory として actualize 済み
 - `P-OPS-06` で `PortalWorldLink` bounded same-session discrete handoff root は actualize 済み
-- 次は `P-OPS-07` として、portal first cut の bounded runtime semantics を壊さず、two-shard hard-boundary model-check sample を置く
+- `P-OPS-07` で `TwoShardHardBoundary` bounded same-session hard-authority root は actualize 済み
+- 次は `P-OPS-09` として、current operational root chain を外部開発者が author / check / run / release-check できる package authoring guide を置く
 
 ## open questions
 

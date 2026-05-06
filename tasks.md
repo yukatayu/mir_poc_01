@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-06 23:32 JST
+最終更新: 2026-05-07 00:00 JST
 
 ## この文書について
 
@@ -50,6 +50,8 @@
   `samples/product-alpha1/operational/deployments/projection/projection.profile.json`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、schema-backed projection target / packet / FFI inventory を `check` / runtime plan / observer-safe devtools projection panel / helper `release-check` から再現できます。これは final server/client binary split、placement optimizer、direct LLVM backend completion ではありません。
 - `P-OPS-06` により portal / world-link first cut は actualize 済みです:
   `samples/product-alpha1/operational/portal-worldlink/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、bounded same-session resolve / handoff offer / witness emit / destination admit evidence を `check` / `run-local` / observer-safe devtools export / helper `release-check` から再現できます。`future/portal-worldlink/` blueprint は保持し、continuous spatial sync / WAN federation / final portal ABI は主張しません。
+- `P-OPS-07` により two-shard hard-boundary first cut は actualize 済みです:
+  `samples/product-alpha1/operational/two-shard-hard-boundary/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidence を `check` / `run-local` / observer-safe devtools export / helper `release-check` から再現できます。`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は保持し、gradient observation / continuous infinite federation / general model-check completion は主張しません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -59,17 +61,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-OPS-07` two-shard hard-boundary model-check sample | `Macro 6`, `S0/S1` | finite two-shard ownership/handoff line を no-double-owner property つきで置く | shard future line が planned-only から model-check evidence へ進む | heavy |
-| 2 | `P-OPS-09` developer package authoring guide | `Macro 7/8`, `S2` | 外部開発者が operational package を自力で author できる guide と schema example を揃える | clean clone から author/check/run/release-check までの package authoring guide が docs と helper に揃う | medium |
+| 1 | `P-OPS-09` developer package authoring guide | `Macro 7/8`, `S2` | 外部開発者が operational package を自力で author できる guide と schema example を揃える | clean clone から author/check/run/release-check までの package authoring guide が docs と helper に揃う | medium |
+| 2 | `P-OPS-08` backend feasibility inventory | `Macro 7`, `S0/S1` | LLVM/native backend vs WASM vs host bundle boundary を docs-first に棚卸しする | current host bundle line を壊さず backend non-claims / requirements inventory を固定する | medium |
 | 3 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
 | 4 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-OPS-07` two-shard hard-boundary model-check sample
+  `P-OPS-09` developer package authoring guide
 - recommendation reason:
-  `P-OPS-06` で portal/world-link discrete handoff は bounded runtime evidence に進んだため、次の最小 widening は two-shard hard-boundary model-check sample を置いて portal/shard line の authority boundary を具体化することである
+  `P-OPS-07` で portal/shard line の bounded authority boundary は actualize 済みになったため、次の最小 widening は外部開発者が同 suite の package を author / check / run / release-check できる guide を置いて practical reuse を進めることである
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -87,7 +89,7 @@
 | operational room-chat widening | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current `EchoText` lane 維持 / room-chat-oriented `ChatText` lane へ widen / transport-coupled chat lane を先に入れる | current recommendation は `EchoText` lane を direct text host boundary evidence として維持し、room-oriented widening は `P-OPS-04` 以後に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-portal shard actualization order | `specs/27` と future suite line に影響 | two-shard model-check first / package authoring guide first / both deferred | portal first cut は actualize 済みなので、next は two-shard hard-boundary model-check sample を先に置く |
+| post-two-shard widening order | `specs/27` と future suite line に影響 | package authoring guide first / backend feasibility inventory first / gradient observation profile first | current recommendation は external package authoring guide を先に置き、gradient observation runtime や broader backend discussion はその後段に分ける |
 
 ## user decision items
 

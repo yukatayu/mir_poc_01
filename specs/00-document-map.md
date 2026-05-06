@@ -34,7 +34,7 @@
   - `public_api_parser_gate_plan_01.md` は、`P18` repo-side freeze checklist / public-boundary inventory / true user-spec hold line split を reader-facing に短く読むための summary である。
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の current queue narrowing と stop line を reader-facing に短く読むための summary である。
   - `product_alpha1_01.md` は、product alpha release-candidate workflow、non-final viewer、release-check boundary、final-public non-claims を reader-facing に短く読むための summary である。
-  - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink` suite、shared attach packages、projection inventory、retained portal blueprint / shard inventory、runtime / docs non-claims を reader-facing に短く読むための summary である。
+  - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` suite、shared attach packages、projection inventory、retained portal/shard blueprints、runtime / docs non-claims を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -180,7 +180,7 @@
   - `P-A1-25..31` package sequence、alpha `U1` defaults、sample root / native bundle target、validation direction、blocker split を整理する。
   - `specs/26-operational-product-sample-suite.md`
   - product alpha release-candidate workflow の次に置く canonical operational product sample suite の規範境界を置く。
-  - `samples/product-alpha1/operational/`、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink`、shared attach packages、deployment/projection intent、retained portal blueprint / future shard inventory、completion condition、non-claims を固定する。
+  - `samples/product-alpha1/operational/`、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary`、shared attach packages、deployment/projection intent、retained portal/shard blueprints、completion condition、non-claims を固定する。
 - `plan/51-operational-product-sample-roadmap.md`
   - operational product sample suite の repository-memory roadmap を置く。
   - `P-OPS-01..` package line、current scope、next widenings、open questions を整理する。

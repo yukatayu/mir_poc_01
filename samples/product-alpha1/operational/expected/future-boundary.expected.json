@@ -1,7 +1,9 @@
 {
   "portal_worldlink_status": "bounded_discrete_handoff_runtime",
   "portal_worldlink_blueprint_status": "planned_manifest_only",
-  "spatial_shard_status": "planned_only",
+  "two_shard_hard_boundary_status": "bounded_two_shard_runtime",
+  "two_shard_hard_boundary_blueprint_status": "planned_only",
+  "gradient_observation_status": "planned_only",
   "non_claims": [
     "no WAN federation",
     "no continuous infinite shard federation",

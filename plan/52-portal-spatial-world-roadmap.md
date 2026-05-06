@@ -8,6 +8,7 @@
 
 - portal は discrete world-link handoff から始める
 - `P-OPS-06` で active `portal-worldlink/` root は bounded same-session discrete handoff として actualize 済み
+- `P-OPS-07` で active `two-shard-hard-boundary/` root は bounded same-session two-shard hard-authority cut として actualize 済み
 - continuous spatial sync は別 family
 - two-shard hard boundary を first promoted model にする
 - vector clock default は採らない
@@ -15,11 +16,9 @@
 
 ## package order
 
-1. `P-OPS-07`
-   two-shard hard-boundary model-check sample
-2. post-OPS widening
+1. post-OPS widening
    gradient observation profile
-3. much later
+2. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -36,6 +35,13 @@
 - explicit handoff witness
 - config epoch reject
 - observer-only gradient view without write authority
+
+## current shard cut
+
+- active executable root は `samples/product-alpha1/operational/two-shard-hard-boundary/`
+- `future/two-shard-hard-boundary/` は blueprint root として維持する
+- current runtime evidence は offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject の same-session hard-authority cut に限る
+- current stop line は gradient observation runtime、general model-check completion、WAN federation、continuous infinite federation
 
 ## avoid
 

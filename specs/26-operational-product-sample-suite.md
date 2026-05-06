@@ -20,7 +20,7 @@
 - `L1`
   portal / world-link と shard / federation は future boundary を先に固定し、未実装部分を runnable claim に混ぜない
 - `L2`
-  `WorldCore -> MembershipChat -> SugorokuWorld` import / package chain を first canonical suite とする
+  `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` import / package chain を first canonical suite とする
 
 ## sample root
 
@@ -37,6 +37,7 @@ samples/product-alpha1/operational/
   - `membership-chat/`
   - `sugoroku-world/`
   - `portal-worldlink/`
+  - `two-shard-hard-boundary/`
 - shared attach package roots
   - `packages/debug-layer/`
   - `packages/auth-layer/`
@@ -60,7 +61,7 @@ samples/product-alpha1/operational/
 - `.mir` files are representative source only
 - current executable input is `package.mir.json`
 - `deployments/projection/projection.profile.json` may carry schema-backed target / packet / FFI inventory for the runnable root, but it is supplementary inventory rather than executable input
-- `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` are product alpha package kinds for this line
+- `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` / `two_shard_hard_boundary` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
 
@@ -106,6 +107,15 @@ samples/product-alpha1/operational/
 - actualizes one bounded same-session discrete portal handoff cut with resolve / handoff offer / witness emit / destination admit evidence
 - keeps `future/portal-worldlink/` as a planned blueprint root rather than silently promoting it into the executable root
 - does not claim WAN federation, continuous spatial sync, or final portal ABI
+
+### TwoShardHardBoundary
+
+`L1`:
+
+- imports `PortalWorldLink`
+- actualizes one bounded same-session two-shard hard-authority cut with offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidence
+- keeps `future/two-shard-hard-boundary/` and `spatial-shard-future.profile.json` as retained blueprint inventory rather than silently promoting them into the executable root
+- does not claim gradient observation runtime, continuous infinite federation, WAN federation, or general model-check completion
 
 ## attach / transport / devtools / save-load
 

@@ -1,0 +1,31 @@
+// representative source only; current executable input is package.mir.json
+import PortalWorldLink version "^0.1"
+
+module TwoShardHardBoundary version "0.1.0"
+
+place ShardAuthorityBoundaryPlace
+place ShardAPlace
+place ShardBPlace
+
+capability OfferShardHandoff
+capability CommitShardHandoff
+capability ObserveShardBoundary
+
+witness handoff_commit_pub
+
+perform offer_hard_boundary_handoff(actor : Principal, object : ObjectRef)
+  require membership.active(actor)
+  require capability(OfferShardHandoff)
+  publish shard_handoff_offer(object)
+
+perform commit_hard_boundary_handoff(actor : Principal, object : ObjectRef)
+  require capability(CommitShardHandoff)
+  require witness(handoff_commit_pub)
+  publish shard_handoff_commit(object)
+
+perform reject_old_owner_write(actor : Principal, object : ObjectRef)
+  require membership.active(actor)
+  require capability(ObserveShardBoundary)
+  publish shard_old_owner_reject(object)
+
+observe shard_handoff_commit via shard_map_panel

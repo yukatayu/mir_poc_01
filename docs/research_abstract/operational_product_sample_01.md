@@ -10,7 +10,7 @@
 - `mirrorea-alpha` の current product alpha command familyで再現できる bounded operational workflow を docs と helper script にまとめた
 - `projection.profile.json` を schema-backed target / packet / FFI inventory として `check` / runtime plan / devtools に接続した
 - `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
-- shard を同 suite 内の future boundary inventory として固定した
+- `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
 
 ## What Is Runnable Now
 
@@ -20,6 +20,7 @@
 - `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export
+- `two-shard-hard-boundary` の bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
 - `scripts/operational_product_samples.py check-all`
 
@@ -27,8 +28,9 @@
 
 - representative textual `.mir`
 - richer server/client binary split realization beyond the current projection inventory summary
-- two-shard hard-boundary future profile
 - `future/portal-worldlink/` blueprint manifest
+- `future/two-shard-hard-boundary/` blueprint manifest
+- gradient observation / broader replication profile runtime
 - broader room-chat-oriented `ChatText` lane
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 
@@ -44,7 +46,7 @@
 - direct LLVM backend
 - WAN / federation
 - distributed durable save/load
-- final portal ABI / continuous spatial sync / shard runtime implementation
+- final portal ABI / continuous spatial sync / continuous infinite shard federation / general model-check completion
 
 ## Entry Points
 

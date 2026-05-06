@@ -1726,6 +1726,8 @@ fn materialize_package_runtime_evidence(
         materialize_sugoroku_runtime_evidence(session, package);
     } else if package.package_kind == "portal_worldlink" {
         materialize_portal_runtime_evidence(session, package);
+    } else if package.package_kind == "two_shard_hard_boundary" {
+        materialize_two_shard_runtime_evidence(session, package);
     }
 }
 
@@ -2067,6 +2069,251 @@ fn materialize_portal_runtime_evidence(
             failure_class: None,
             recovery_action: None,
         });
+}
+
+fn materialize_two_shard_runtime_evidence(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+) {
+    let membership_epoch = session.membership.membership_epoch;
+    let member_incarnation = 0;
+    let offer_envelope_id = "envelope#shard-handoff-offer-1".to_string();
+    let commit_envelope_id = "envelope#shard-handoff-commit-1".to_string();
+    let old_owner_reject_envelope_id = "envelope#shard-old-owner-reject-1".to_string();
+    let missing_witness_envelope_id = "envelope#shard-missing-witness-reject-1".to_string();
+    let stale_config_envelope_id = "envelope#shard-stale-config-reject-1".to_string();
+    let witness_ref = package
+        .witness_requirements
+        .first()
+        .cloned()
+        .unwrap_or_else(|| "handoff_commit_pub".to_string());
+
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-handoff-offer-published"),
+        "shard_handoff_offer_published",
+        "Place[ShardAuthorityBoundaryPlace]",
+        Some(offer_envelope_id.clone()),
+        "hard-boundary handoff offer published from shard A toward shard B".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-handoff-prepare-accepted"),
+        "shard_handoff_prepare_accepted",
+        "Place[ShardBPlace]",
+        Some(commit_envelope_id.clone()),
+        "destination shard prepared the handoff under current config epoch".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-handoff-commit-applied"),
+        "shard_handoff_commit_applied",
+        "Place[ShardBPlace]",
+        Some(commit_envelope_id.clone()),
+        format!("ownership committed to shard B with witness {witness_ref}"),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-old-owner-write-rejected"),
+        "shard_old_owner_write_rejected",
+        "Place[ShardAPlace]",
+        Some(old_owner_reject_envelope_id.clone()),
+        "post-commit write from the old owner shard was rejected".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-missing-handoff-witness-rejected"),
+        "shard_missing_handoff_witness_rejected",
+        "Place[ShardAuthorityBoundaryPlace]",
+        Some(missing_witness_envelope_id.clone()),
+        "handoff request without witness was rejected at the hard boundary".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#shard-stale-config-rejected"),
+        "shard_stale_config_rejected",
+        "Place[ShardAuthorityBoundaryPlace]",
+        Some(stale_config_envelope_id.clone()),
+        "stale config epoch was rejected during the bounded handoff flow".to_string(),
+    );
+
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#shard-handoff-offer-1".to_string(),
+        envelope_id: offer_envelope_id.clone(),
+        from_place: "Place[ShardAPlace]".to_string(),
+        to_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        transport_lane: "same_session_shard_handoff_offer".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_shard_handoff_offer_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "OfferShardHandoff")
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#shard-handoff-commit-1".to_string(),
+        envelope_id: commit_envelope_id.clone(),
+        from_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        to_place: "Place[ShardBPlace]".to_string(),
+        transport_lane: "same_session_shard_handoff_commit".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_shard_handoff_commit_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "CommitShardHandoff")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#shard-old-owner-reject-1".to_string(),
+        envelope_id: old_owner_reject_envelope_id.clone(),
+        from_place: "Place[ShardAPlace]".to_string(),
+        to_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        transport_lane: "same_session_shard_old_owner_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_shard_old_owner_reject_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "ObserveShardBoundary")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#shard-missing-witness-reject-1".to_string(),
+        envelope_id: missing_witness_envelope_id.clone(),
+        from_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        to_place: "Place[ShardBPlace]".to_string(),
+        transport_lane: "same_session_shard_missing_witness_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_shard_missing_witness_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "CommitShardHandoff")
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#shard-stale-config-reject-1".to_string(),
+        envelope_id: stale_config_envelope_id.clone(),
+        from_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        to_place: "Place[ShardBPlace]".to_string(),
+        transport_lane: "same_session_shard_stale_config_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_shard_stale_config_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "CommitShardHandoff")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+
+    for envelope_id in [offer_envelope_id.clone(), commit_envelope_id.clone()] {
+        session
+            .message_recovery_state
+            .message_state_lane
+            .push(ProductAlpha1MessageStateRecord {
+                envelope_id,
+                state: "Delivered".to_string(),
+                failure_class: None,
+                recovery_action: None,
+            });
+    }
+    for (envelope_id, failure_class) in [
+        (
+            old_owner_reject_envelope_id.clone(),
+            "OldOwnerWriteRejected".to_string(),
+        ),
+        (
+            missing_witness_envelope_id.clone(),
+            "MissingHandoffWitness".to_string(),
+        ),
+        (
+            stale_config_envelope_id.clone(),
+            "StaleShardConfig".to_string(),
+        ),
+    ] {
+        session
+            .message_recovery_state
+            .message_state_lane
+            .push(ProductAlpha1MessageStateRecord {
+                envelope_id: envelope_id.clone(),
+                state: "Rejected".to_string(),
+                failure_class: Some(failure_class.clone()),
+                recovery_action: Some("reject".to_string()),
+            });
+        session
+            .message_recovery_state
+            .failure_observations
+            .push(ProductAlpha1FailureObservation {
+                envelope_id,
+                failure_class,
+                initial_state: "Validated".to_string(),
+                recovery_action: "Reject".to_string(),
+                terminal_state: "Rejected".to_string(),
+                retry_count: 0,
+                notes: vec![
+                    "bounded two-shard hard-boundary runtime keeps authority single-owner"
+                        .to_string(),
+                    "membership freshness and config freshness remain explicit lanes".to_string(),
+                ],
+            });
+    }
 }
 
 fn append_runtime_event(
@@ -2540,7 +2787,12 @@ fn bootstrap_membership(package: &ProductAlpha1Package) -> Vec<String> {
 fn is_world_like_product_alpha1_package_kind(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world" | "world_core" | "membership_chat" | "sugoroku_world" | "portal_worldlink"
+        "world"
+            | "world_core"
+            | "membership_chat"
+            | "sugoroku_world"
+            | "portal_worldlink"
+            | "two_shard_hard_boundary"
     )
 }
 
@@ -2550,6 +2802,7 @@ fn default_entry_place_for_package_kind(package_kind: &str) -> String {
         "membership_chat" => "Place[ChatPlace]".to_string(),
         "sugoroku_world" => "Place[SugorokuGamePlace]".to_string(),
         "portal_worldlink" => "Place[PortalBoundaryPlace]".to_string(),
+        "two_shard_hard_boundary" => "Place[ShardAuthorityBoundaryPlace]".to_string(),
         _ => "Place[ProductDemoRoom]".to_string(),
     }
 }
@@ -2699,6 +2952,61 @@ fn representative_place_graph(package_kind: &str, entry_place: &str) -> ProductA
                     from_place: "Place[DestinationWorldPlace]".to_string(),
                     to_place: "ParticipantPlace[portal_traveler]".to_string(),
                     relation: "portal_admission".to_string(),
+                },
+            ],
+        },
+        "two_shard_hard_boundary" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ShardAPlace]".to_string(),
+                    place_kind: "authority_shard".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+                    place_kind: "shard_boundary".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ShardBPlace]".to_string(),
+                    place_kind: "authority_shard".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[active_admin_participant]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[shard_object_owner]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[boundary_observer]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+            ],
+            edges: vec![
+                ProductAlpha1PlaceEdge {
+                    from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+                    to_place: "Place[ShardAPlace]".to_string(),
+                    relation: "shard_admin_membership".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "ParticipantPlace[shard_object_owner]".to_string(),
+                    to_place: "Place[ShardAPlace]".to_string(),
+                    relation: "object_authority".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ShardAPlace]".to_string(),
+                    to_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+                    relation: "hard_boundary_handoff_offer".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ShardAuthorityBoundaryPlace]".to_string(),
+                    to_place: "Place[ShardBPlace]".to_string(),
+                    relation: "hard_boundary_handoff_commit".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ShardBPlace]".to_string(),
+                    to_place: "ParticipantPlace[boundary_observer]".to_string(),
+                    relation: "observer_safe_boundary_projection".to_string(),
                 },
             ],
         },

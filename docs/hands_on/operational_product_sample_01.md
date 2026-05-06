@@ -1,8 +1,8 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` widening を再現するための入口です。
 
-これは final public product ではありません。portal は bounded same-session first cut まで actualize 済みですが、WAN federation / continuous spatial sync / final portal ABI ではありません。shard は planned-only inventory です。
+これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut まで actualize 済みですが、general model-check completion、gradient observation、WAN federation / continuous spatial sync / continuous infinite shard federation / final portal ABI ではありません。
 
 ## Validate The Repository
 
@@ -15,13 +15,14 @@ cargo fmt --check
 git diff --check
 ```
 
-## Check The Four Roots
+## Check The Five Roots
 
 ```bash
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/membership-chat --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/portal-worldlink --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/two-shard-hard-boundary --format json
 ```
 
 Expected bounded evidence:
@@ -65,6 +66,25 @@ Expected bounded evidence:
 - devtools `portal_graph_future.current_status = bounded_discrete_handoff_runtime`
 - これは discrete handoff first cut であり、continuous spatial sync や WAN federation completion は主張しない
 
+## Run The Two-Shard Hard Boundary Cut
+
+```bash
+shard_session_dir=$(mktemp -d /tmp/mirrorea-ops-shard-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$shard_session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/two-shard-hard-boundary --format json
+shard_viewer_dir=$(mktemp -d /tmp/mirrorea-ops-shard-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$shard_session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-two-shard-hard-boundary' --out "$shard_viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$shard_viewer_dir" --check --format json
+```
+
+Expected bounded evidence:
+
+- `typed_host_io_claimed = false`
+- `run-local` / `export-devtools` payload には `shard_handoff_offer_published`, `shard_handoff_prepare_accepted`, `shard_handoff_commit_applied`, `shard_old_owner_write_rejected`, `shard_missing_handoff_witness_rejected`, `shard_stale_config_rejected` が入る
+- route lanes は `same_session_shard_handoff_offer`, `same_session_shard_handoff_commit`, `same_session_shard_old_owner_reject`, `same_session_shard_missing_witness_reject`, `same_session_shard_stale_config_reject` を observer-safe に保持する
+- rejected message rows は `OldOwnerWriteRejected`, `MissingHandoffWitness`, `StaleShardConfig` を明示する
+- devtools `shard_map_future.current_status = bounded_two_shard_runtime`
+- これは bounded same-session hard-authority cut であり、general model-check completion、gradient observation、WAN federation は主張しない
+
 ## Run The First Operational Workflow
 
 ```bash
@@ -104,6 +124,7 @@ python3 scripts/operational_product_samples.py list --format json
 python3 scripts/operational_product_samples.py run-membership-chat --format json
 python3 scripts/operational_product_samples.py run-sugoroku --format json
 python3 scripts/operational_product_samples.py run-portal-worldlink --format json
+python3 scripts/operational_product_samples.py run-two-shard-hard-boundary --format json
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/operational_product_samples.py release-check --format json
 ```
@@ -112,7 +133,8 @@ python3 scripts/operational_product_samples.py release-check --format json
 
 - `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
 - `samples/product-alpha1/operational/portal-worldlink/`
+- `samples/product-alpha1/operational/two-shard-hard-boundary/`
 - `samples/product-alpha1/operational/future/portal-worldlink/`
 - `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
 
-`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` は current bounded runtime root、`future/portal-worldlink/` は retained blueprint root、`future/two-shard-hard-boundary/` は next package inventory です。
+`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` と `two-shard-hard-boundary/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots です。

@@ -460,8 +460,16 @@ fn validate_package_shape(
     }
 
     match package.package_kind.as_str() {
-        "world" | "world_core" | "membership_chat" | "sugoroku_world" | "portal_worldlink"
-        | "layer" | "object" | "avatar_preview" | "adapter" => {}
+        "world"
+        | "world_core"
+        | "membership_chat"
+        | "sugoroku_world"
+        | "portal_worldlink"
+        | "two_shard_hard_boundary"
+        | "layer"
+        | "object"
+        | "avatar_preview"
+        | "adapter" => {}
         other => {
             return Err(schema_error(
                 path,

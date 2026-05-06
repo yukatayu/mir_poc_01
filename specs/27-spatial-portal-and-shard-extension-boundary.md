@@ -37,6 +37,7 @@ portal / world-link / shard / replication profile の future boundary を固定�
 - cross-shard authority transfer は explicit handoff と witness を必要とする
 - stale config epoch / stale owner epoch write は reject path を持つ
 - observer ghost / observation-only copy は write capability を持たない
+- current line may actualize one bounded same-session two-shard hard-boundary root so long as it does not claim gradient observation runtime or general model-check completion
 
 ## replication profile
 
@@ -57,7 +58,7 @@ portal / world-link / shard / replication profile の future boundary を固定�
 
 `L2`:
 
-future sample / model-check package は少なくとも次を確認する。
+current bounded two-shard root and future sample / model-check package は少なくとも次を確認する。
 
 - no double owner after handoff
 - old owner write rejected after commit

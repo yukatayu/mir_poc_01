@@ -97,6 +97,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "samples/product-alpha1/operational/sugoroku-world/package.mir.json",
         "samples/product-alpha1/operational/portal-worldlink/README.md",
         "samples/product-alpha1/operational/portal-worldlink/package.mir.json",
+        "samples/product-alpha1/operational/two-shard-hard-boundary/README.md",
+        "samples/product-alpha1/operational/two-shard-hard-boundary/package.mir.json",
         "samples/product-alpha1/operational/packages/debug-layer/package.mir.json",
         "samples/product-alpha1/operational/packages/auth-layer/package.mir.json",
         "samples/product-alpha1/operational/packages/rate-limit-layer/package.mir.json",

@@ -532,7 +532,7 @@ fn panel_summary(panel_id: &str) -> &'static str {
             "Portal/world-link remains a near-term future boundary, not a current WAN or continuous sync claim."
         }
         "shard_map_future" => {
-            "Spatial shard replication remains a future hard-boundary profile, not current infinite federation."
+            "Spatial shard remains a bounded hard-boundary cut, not current infinite federation or gradient sync completion."
         }
         _ => "Panel is derived from the same product alpha-1 session carrier.",
     }
@@ -906,8 +906,11 @@ fn portal_graph_future_panel(
 fn shard_map_future_panel(
     session: &ProductAlpha1SessionCarrier,
 ) -> ProductAlpha1FutureBoundaryPanel {
+    let shard_runtime = session.runtime_plan.package_kind == "two_shard_hard_boundary";
     ProductAlpha1FutureBoundaryPanel {
-        current_status: if is_operational_product_package(&session.runtime_plan.package_kind) {
+        current_status: if shard_runtime {
+            "bounded_two_shard_runtime".to_string()
+        } else if is_operational_product_package(&session.runtime_plan.package_kind) {
             "planned_only".to_string()
         } else {
             "kept_later".to_string()
@@ -916,12 +919,20 @@ fn shard_map_future_panel(
             ProductAlpha1NamedGraphNode {
                 node_id: "shard#A".to_string(),
                 node_kind: "authority_shard".to_string(),
-                current_status: "future_inventory".to_string(),
+                current_status: if shard_runtime {
+                    "same_session_runtime_evidence".to_string()
+                } else {
+                    "future_inventory".to_string()
+                },
             },
             ProductAlpha1NamedGraphNode {
                 node_id: "shard#B".to_string(),
                 node_kind: "authority_shard".to_string(),
-                current_status: "future_inventory".to_string(),
+                current_status: if shard_runtime {
+                    "same_session_runtime_evidence".to_string()
+                } else {
+                    "future_inventory".to_string()
+                },
             },
             ProductAlpha1NamedGraphNode {
                 node_id: "observer#gradient-view".to_string(),
@@ -1059,6 +1070,57 @@ fn canonical_operational_chain(
                 },
             ],
         ),
+        "two_shard_hard_boundary" => (
+            vec![
+                ProductAlpha1NamedGraphNode {
+                    node_id: "WorldCore".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "MembershipChat".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "SugorokuWorld".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "PortalWorldLink".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "TwoShardHardBoundary".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: "implemented".to_string(),
+                },
+            ],
+            vec![
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "WorldCore".to_string(),
+                    to_node: "MembershipChat".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "MembershipChat".to_string(),
+                    to_node: "SugorokuWorld".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "SugorokuWorld".to_string(),
+                    to_node: "PortalWorldLink".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "PortalWorldLink".to_string(),
+                    to_node: "TwoShardHardBoundary".to_string(),
+                    relation: relation.to_string(),
+                },
+            ],
+        ),
         _ => (
             vec![ProductAlpha1NamedGraphNode {
                 node_id: package_id.to_string(),
@@ -1081,7 +1143,11 @@ fn dependency_node_id(dependency: &str) -> String {
 fn is_operational_product_package(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world_core" | "membership_chat" | "sugoroku_world" | "portal_worldlink"
+        "world_core"
+            | "membership_chat"
+            | "sugoroku_world"
+            | "portal_worldlink"
+            | "two_shard_hard_boundary"
     )
 }
 

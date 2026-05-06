@@ -19,6 +19,7 @@ WORLD_CORE = OPS_ROOT / "world-core"
 MEMBERSHIP_CHAT = OPS_ROOT / "membership-chat"
 SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
 PORTAL_WORLDLINK = OPS_ROOT / "portal-worldlink"
+TWO_SHARD_HARD_BOUNDARY = OPS_ROOT / "two-shard-hard-boundary"
 LAYERS_ROOT = OPS_ROOT / "packages"
 EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'EchoText:Text("Taro")->Text("Hello, Taro!")'
 EXPECTED_SUGOROKU_EVENT_KINDS = {
@@ -49,6 +50,26 @@ EXPECTED_PORTAL_ROUTE_LANES = {
     "same_session_portal_resolve",
     "same_session_portal_handoff",
     "same_session_portal_admit",
+}
+EXPECTED_TWO_SHARD_EVENT_KINDS = {
+    "shard_handoff_offer_published",
+    "shard_handoff_prepare_accepted",
+    "shard_handoff_commit_applied",
+    "shard_old_owner_write_rejected",
+    "shard_missing_handoff_witness_rejected",
+    "shard_stale_config_rejected",
+}
+EXPECTED_TWO_SHARD_ROUTE_LANES = {
+    "same_session_shard_handoff_offer",
+    "same_session_shard_handoff_commit",
+    "same_session_shard_old_owner_reject",
+    "same_session_shard_missing_witness_reject",
+    "same_session_shard_stale_config_reject",
+}
+EXPECTED_TWO_SHARD_FAILURE_CLASSES = {
+    "OldOwnerWriteRejected",
+    "MissingHandoffWitness",
+    "StaleShardConfig",
 }
 
 
@@ -134,6 +155,13 @@ def sample_rows() -> list[dict[str, Any]]:
             "root": str(PORTAL_WORLDLINK.relative_to(REPO_ROOT)),
             "package_id": "operational-portal-worldlink",
             "package_kind": "portal_worldlink",
+            "runnable": True,
+        },
+        {
+            "sample_id": "OPS-07",
+            "root": str(TWO_SHARD_HARD_BOUNDARY.relative_to(REPO_ROOT)),
+            "package_id": "operational-two-shard-hard-boundary",
+            "package_kind": "two_shard_hard_boundary",
             "runnable": True,
         },
     ]
@@ -269,6 +297,51 @@ def portal_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
     )
 
 
+def two_shard_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    session = payload.get("session") or {}
+    panels = payload.get("panels") or {}
+    event_nodes = (
+        (session.get("event_dag") or {}).get("nodes")
+        or (panels.get("event_dag") or {}).get("nodes")
+        or []
+    )
+    route_entries = (
+        (session.get("route_graph") or {}).get("routes")
+        or (panels.get("message_route_graph") or {}).get("routes")
+        or []
+    )
+    message_state_lane = (
+        (session.get("message_recovery_state") or {}).get("message_state_lane")
+        or (panels.get("message_failure_recovery") or {}).get("message_state_lane")
+        or []
+    )
+    event_kinds = {node.get("event_kind") for node in event_nodes}
+    route_lanes = {route.get("transport_lane") for route in route_entries}
+    failure_classes = {
+        record.get("failure_class")
+        for record in message_state_lane
+        if record.get("state") == "Rejected"
+    }
+    return (
+        EXPECTED_TWO_SHARD_EVENT_KINDS.issubset(event_kinds)
+        and EXPECTED_TWO_SHARD_ROUTE_LANES.issubset(route_lanes)
+        and EXPECTED_TWO_SHARD_FAILURE_CLASSES.issubset(failure_classes)
+    )
+
+
+def two_shard_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    panel_ids = payload.get("panel_ids") or []
+    shard_panel = (payload.get("panels") or {}).get("shard_map_future") or {}
+    return (
+        "shard_map_future" in panel_ids
+        and "message_route_graph" in panel_ids
+        and shard_panel.get("current_status") == "bounded_two_shard_runtime"
+        and two_shard_runtime_evidence_observed(result)
+    )
+
+
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
@@ -284,6 +357,10 @@ def run_world_package(root: Path) -> dict[str, Any]:
     elif root == PORTAL_WORLDLINK:
         semantic_checks["runtime_evidence_observed"] = (
             portal_runtime_evidence_observed(result)
+        )
+    elif root == TWO_SHARD_HARD_BOUNDARY:
+        semantic_checks["runtime_evidence_observed"] = (
+            two_shard_runtime_evidence_observed(result)
         )
     return {
         "surface_kind": "operational_product_sample_run_report",
@@ -444,9 +521,11 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     session_dir, env = sugoroku_session_env()
     chat_session_dir, chat_env = sugoroku_session_env()
     portal_session_dir, portal_env = sugoroku_session_env()
+    shard_session_dir, shard_env = sugoroku_session_env()
     viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-viewer-")
     chat_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-chat-viewer-")
     portal_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-portal-viewer-")
+    shard_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-shard-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
     sugoroku_check = run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD)))
     membership_chat_run = run_command(
@@ -488,6 +567,29 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "view:portal-worldlink",
         cargo_alpha_args("view", portal_viewer_dir, "--check"),
     )
+    shard_check = run_command(
+        "check:two-shard-hard-boundary",
+        cargo_alpha_args("check", str(TWO_SHARD_HARD_BOUNDARY)),
+    )
+    shard_run = run_command(
+        "run-local:two-shard-hard-boundary",
+        cargo_alpha_args("run-local", str(TWO_SHARD_HARD_BOUNDARY)),
+        env=shard_env,
+    )
+    shard_export = run_command(
+        "export-devtools:two-shard-hard-boundary",
+        cargo_alpha_args(
+            "export-devtools",
+            "session#operational-two-shard-hard-boundary",
+            "--out",
+            shard_viewer_dir,
+        ),
+        env=shard_env,
+    )
+    shard_view = run_command(
+        "view:two-shard-hard-boundary",
+        cargo_alpha_args("view", shard_viewer_dir, "--check"),
+    )
     sugoroku_run = run_command(
         "run-local:sugoroku",
         cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
@@ -503,12 +605,16 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
         sugoroku_check,
         portal_check,
+        shard_check,
         membership_chat_run,
         membership_chat_export,
         membership_chat_view,
         portal_run,
         portal_export,
         portal_view,
+        shard_run,
+        shard_export,
+        shard_view,
         sugoroku_run,
         sugoroku_session,
         run_command("save:r0", cargo_alpha_args("save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r0"), env=env),
@@ -555,6 +661,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     )
     portal_runtime_ok = portal_runtime_evidence_observed(portal_run)
     portal_devtools_ok = portal_devtools_runtime_evidence_observed(portal_export)
+    shard_runtime_ok = two_shard_runtime_evidence_observed(shard_run)
+    shard_devtools_ok = two_shard_devtools_runtime_evidence_observed(shard_export)
     projection_inventory_ok = sugoroku_projection_inventory_observed(sugoroku_check)
     sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
     sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
@@ -566,6 +674,10 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         failed.append("portal-runtime-evidence")
     if not portal_devtools_ok:
         failed.append("portal-devtools")
+    if not shard_runtime_ok:
+        failed.append("two-shard-runtime-evidence")
+    if not shard_devtools_ok:
+        failed.append("two-shard-devtools")
     if not projection_inventory_ok:
         failed.append("projection-inventory")
     if not sugoroku_runtime_ok:
@@ -580,9 +692,11 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "session_dir": session_dir,
         "chat_session_dir": chat_session_dir,
         "portal_session_dir": portal_session_dir,
+        "shard_session_dir": shard_session_dir,
         "viewer_dir": viewer_dir,
         "chat_viewer_dir": chat_viewer_dir,
         "portal_viewer_dir": portal_viewer_dir,
+        "shard_viewer_dir": shard_viewer_dir,
         "bundle_dir": bundle_dir,
         "failed_commands": failed,
         "attach_matrix_complete": attach_matrix_ok,
@@ -590,6 +704,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
         "portal_runtime_ok": portal_runtime_ok,
         "portal_devtools_ok": portal_devtools_ok,
+        "shard_runtime_ok": shard_runtime_ok,
+        "shard_devtools_ok": shard_devtools_ok,
         "projection_inventory_ok": projection_inventory_ok,
         "sugoroku_runtime_ok": sugoroku_runtime_ok,
         "sugoroku_devtools_ok": sugoroku_devtools_ok,
@@ -688,6 +804,8 @@ def main(argv: list[str] | None = None) -> int:
     add_subcommand_format(run_sugoroku_parser)
     run_portal_worldlink_parser = subparsers.add_parser("run-portal-worldlink")
     add_subcommand_format(run_portal_worldlink_parser)
+    run_two_shard_parser = subparsers.add_parser("run-two-shard-hard-boundary")
+    add_subcommand_format(run_two_shard_parser)
     attach_layers_parser = subparsers.add_parser("attach-layers")
     add_subcommand_format(attach_layers_parser)
     transport_local_parser = subparsers.add_parser("transport-local")
@@ -725,6 +843,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = run_world_package(SUGOROKU_WORLD)
     elif args.command == "run-portal-worldlink":
         payload = run_world_package(PORTAL_WORLDLINK)
+    elif args.command == "run-two-shard-hard-boundary":
+        payload = run_world_package(TWO_SHARD_HARD_BOUNDARY)
     elif args.command == "attach-layers":
         payload = attach_layers()
     elif args.command == "transport-local":

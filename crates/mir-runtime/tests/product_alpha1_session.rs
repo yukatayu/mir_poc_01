@@ -308,6 +308,88 @@ fn product_alpha1_run_local_accepts_operational_portal_worldlink_root() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_two_shard_hard_boundary_root() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/two-shard-hard-boundary"),
+    )
+    .expect("operational two-shard hard-boundary root should run locally");
+
+    assert_eq!(report.package_id, "operational-two-shard-hard-boundary");
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-two-shard-hard-boundary"
+    );
+    assert_eq!(report.runtime_plan.package_kind, "two_shard_hard_boundary");
+    assert_eq!(
+        report.runtime_plan.entry_place,
+        "Place[ShardAuthorityBoundaryPlace]"
+    );
+    assert!(
+        report
+            .runtime_plan
+            .declared_dependencies
+            .iter()
+            .any(|dependency| dependency == "../portal-worldlink")
+    );
+    assert!(!report.typed_host_io_claimed);
+    let event_kinds = report
+        .session
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_kind.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "shard_handoff_offer_published",
+        "shard_handoff_prepare_accepted",
+        "shard_handoff_commit_applied",
+        "shard_old_owner_write_rejected",
+        "shard_missing_handoff_witness_rejected",
+        "shard_stale_config_rejected",
+    ] {
+        assert!(
+            event_kinds.contains(required),
+            "missing shard event kind {required}"
+        );
+    }
+    let route_lanes = report
+        .session
+        .route_graph
+        .routes
+        .iter()
+        .map(|route| route.transport_lane.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "same_session_shard_handoff_offer",
+        "same_session_shard_handoff_commit",
+        "same_session_shard_old_owner_reject",
+        "same_session_shard_missing_witness_reject",
+        "same_session_shard_stale_config_reject",
+    ] {
+        assert!(
+            route_lanes.contains(required),
+            "missing shard route lane {required}"
+        );
+    }
+    for required in [
+        "OldOwnerWriteRejected",
+        "MissingHandoffWitness",
+        "StaleShardConfig",
+    ] {
+        assert!(
+            report
+                .session
+                .message_recovery_state
+                .message_state_lane
+                .iter()
+                .any(|record| record.failure_class.as_deref() == Some(required)
+                    && record.state == "Rejected"),
+            "missing shard rejection {required}"
+        );
+    }
+}
+
+#[test]
 fn product_alpha1_run_local_accepts_operational_membership_chat_root() {
     let report = run_product_alpha1_local_session_path(
         repo_root().join("samples/product-alpha1/operational/membership-chat"),

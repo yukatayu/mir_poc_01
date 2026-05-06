@@ -1,6 +1,9 @@
 {
   "spatial_profile_version": "ops-spatial-shard-v0",
   "current_status": "planned_only",
+  "active_runtime_root": "../two-shard-hard-boundary",
+  "bounded_runtime_status": "same_session_two_shard_first_cut",
+  "gradient_observation_status": "planned_only",
   "space": {
     "kind": "integer_chunk_grid",
     "dimensions": 2

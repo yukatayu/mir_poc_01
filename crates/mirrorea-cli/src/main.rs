@@ -894,7 +894,11 @@ fn product_alpha1_docker_compose_file_for_session(
 fn is_operational_product_alpha_package_kind(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world_core" | "membership_chat" | "sugoroku_world"
+        "world_core"
+            | "membership_chat"
+            | "sugoroku_world"
+            | "portal_worldlink"
+            | "two_shard_hard_boundary"
     )
 }
 

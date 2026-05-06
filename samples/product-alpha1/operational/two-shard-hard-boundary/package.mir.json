@@ -1,0 +1,124 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "operational-two-shard-hard-boundary",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "two_shard_hard_boundary",
+  "dependencies": [
+    "../portal-worldlink"
+  ],
+  "effects": [
+    "HandoffShardObject",
+    "CommitShardHandoff",
+    "ObserveShardBoundary"
+  ],
+  "failures": [
+    "OldOwnerWriteRejected",
+    "MissingHandoffWitness",
+    "StaleShardConfig",
+    "RouteUnavailable"
+  ],
+  "capabilities": [
+    "OfferShardHandoff",
+    "CommitShardHandoff",
+    "ObserveShardBoundary"
+  ],
+  "witness_requirements": [
+    "handoff_commit_pub"
+  ],
+  "membership_requirements": [
+    "active_admin_participant",
+    "shard_object_owner",
+    "boundary_observer"
+  ],
+  "auth_policy": {
+    "policy_id": "operational-two-shard-hard-boundary-auth-policy",
+    "required_bindings": [
+      "participant_membership",
+      "owner_membership",
+      "boundary_observer_membership"
+    ]
+  },
+  "auth_stack": [
+    "membership_auth",
+    "capability_auth",
+    "witness_auth"
+  ],
+  "contracts": [
+    {
+      "contract_id": "operational-shard-handoff-offer-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "HandoffShardObject"
+      ],
+      "failure_row": [
+        "RouteUnavailable"
+      ]
+    },
+    {
+      "contract_id": "operational-shard-handoff-commit-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "CommitShardHandoff"
+      ],
+      "failure_row": [
+        "MissingHandoffWitness",
+        "StaleShardConfig"
+      ]
+    },
+    {
+      "contract_id": "operational-shard-boundary-observation-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "ObserveShardBoundary"
+      ],
+      "failure_row": [
+        "OldOwnerWriteRejected"
+      ]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": [
+      "observer_safe_shard_summary"
+    ]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": [
+      "raw_boundary_trace",
+      "raw_auth_evidence"
+    ]
+  },
+  "retention_policy": {
+    "scope": "operational_two_shard_session",
+    "retained_artifacts": [
+      "checker_report",
+      "runtime_plan",
+      "shard_map_summary"
+    ]
+  },
+  "message_recovery_policy": {
+    "handled_failures": [
+      "reject"
+    ],
+    "recovery": "reject"
+  },
+  "savepoint_policy": {
+    "classes": [
+      "R0",
+      "R2"
+    ],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[ShardAuthorityBoundaryPlace]"
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}
