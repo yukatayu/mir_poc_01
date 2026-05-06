@@ -12,7 +12,7 @@
 
 ## What It Gives You
 
-- a validated starter catalog for `world_core`, `membership_chat`, and `sugoroku_world`
+- a validated starter catalog for `world_core`, `membership_chat`, and `sugoroku_world`, with the current `membership_chat` starter already aligned to the bounded `ChatText` room-chat lane
 - explicit dependency-retarget guidance for the starters that import upstream operational roots
 - a concrete list of fields that must be renamed before treating the template as your own package
 - a current stop line that keeps portal/shard authoring on active executable roots instead of adding starter duplicates now

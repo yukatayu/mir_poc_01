@@ -22,9 +22,16 @@
 
 ## P-OPS-03 current scope
 
-- `MembershipChat` に one-lane `EchoText("Taro") -> "Hello, Taro!"` direct host boundary を actualize
+- `MembershipChat` に one-lane direct text host boundary を actualize
 - `run-local` / `session` / `export-devtools` 上で observer-safe host-I/O evidence を再現
 - `scripts/operational_product_samples.py` の semantic check に direct text lane を追加
+
+## P-OPS-13 current scope
+
+- `MembershipChat` の current lane を bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` に widen する
+- generic `EchoText` support は product alpha host family に残しつつ、operational `membership-chat` root と starter catalog を `typed_host_io.chat_text` / `ChatText` に切り替える
+- `run-local` / `session` / `export-devtools` / helper `run-membership-chat` / `check-all` 上で observer-safe room-oriented host-I/O evidence を再現する
+- docs / dashboard / authoring guide を current `ChatText` lane に同期する
 
 ## P-OPS-04 current scope
 
@@ -100,14 +107,15 @@
 
 ## next packages
 
-1. broader room-chat lane widening
-   decide whether `MembershipChat` should remain on `EchoText` or grow toward room-oriented chat
-2. maintenance / dashboard freshness
-   keep queue wording, indexes, and validation anchors synchronized after the starter-boundary decision
+1. maintenance / dashboard freshness
+   keep queue wording, indexes, and validation anchors synchronized after the room-chat widening decision
+2. gradient observation runtime widening
+   decide whether the current `planned_only` profile should remain inventory-only or gain a bounded runtime evidence package
 
 ## current recommendation
 
-- `P-OPS-03` で direct text host boundary は `MembershipChat` に narrow `EchoText` lane として actualize 済み
+- `P-OPS-03` で direct text host boundary は `MembershipChat` に narrow lane として actualize 済み
+- `P-OPS-13` で current `MembershipChat` lane は bounded room-oriented `ChatText` に widen 済み
 - `P-OPS-04` で `SugorokuWorld` の bounded scenario は current product alpha session carrier に寄せて actualize 済み
 - `P-OPS-05` で projection schema と packet / FFI boundary inventory は schema-backed inventory として actualize 済み
 - `P-OPS-06` で `PortalWorldLink` bounded same-session discrete handoff root は actualize 済み
@@ -117,11 +125,11 @@
 - `P-OPS-10` で `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を追加し、starter catalog を mainstream chain まで widen 済み
 - `P-OPS-11` で `future/gradient-observation.profile.json` と guide を追加し、observer-only widening を `planned_only` inventory として actualize 済み
 - `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
-- 次は broader room-chat lane widening とし、maintenance / dashboard freshness はその後段に置く
+- 次は maintenance / dashboard freshness とし、gradient observation runtime widening はその次段に置く
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
-- `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか
+- `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか

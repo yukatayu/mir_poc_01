@@ -4,7 +4,7 @@
 
 - current executable input: `package.mir.json`
 - representative source: `membership-chat.mir`
-- current execution note: `run-local` executes one bounded `EchoText("Taro") -> "Hello, Taro!"` host boundary lane and records observer-safe host-I/O evidence; this is not a final text chat service or stdio builtin
+- current execution note: `run-local` executes one bounded `ChatText("hello room") -> "room#lobby message accepted: hello room"` room-oriented host boundary lane and records observer-safe host-I/O evidence; this is not a final chat service, multi-message transport, or stdio builtin
 
 Validation anchor:
 

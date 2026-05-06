@@ -19,7 +19,7 @@ Starter selection:
 - `world-core-starter/`
   use for bounded `world_core` authoring with no declared dependencies
 - `membership-chat-starter/`
-  use for bounded `membership_chat` authoring when you want the current `EchoText` lane and are willing to retarget a `world_core` dependency before treating the copy as your own package
+  use for bounded `membership_chat` authoring when you want the current room-oriented `ChatText` lane and are willing to retarget a `world_core` dependency before treating the copy as your own package
 - `sugoroku-world-starter/`
   use for bounded `sugoroku_world` authoring when you want the current `AddOne` lane, witness row, and handoff row and are willing to retarget a `membership_chat` dependency before treating the copy as your own package
 

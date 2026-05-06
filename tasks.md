@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 01:32 JST
+最終更新: 2026-05-07 01:45 JST
 
 ## この文書について
 
@@ -42,8 +42,8 @@
   `mirrorea-alpha demo` と `scripts/product_alpha1_release_check.py check-all` により product package front-door、checker、same-session runtime、typed host-I/O、source-backed debug/auth/rate-limit layer attach、deferred object/avatar-preview attach boundary、local/Docker transport、concrete non-final viewer、local save/load、bounded quiescent-save、native host launch bundleを束ねます。`--skip-docker` は partial local probe であり release-candidate ready ではありません。final public product / grammar / ABI / WAN / distributed durable save-load ではありません。
 - `P-OPS-01` により canonical operational product sample suite first cut は actualize 済みです:
   `samples/product-alpha1/operational/`、`specs/26..27`、`plan/51..52`、`scripts/operational_product_samples.py` により、`WorldCore -> MembershipChat -> SugorokuWorld` package/import chain、explicit debug/auth/rate-limit attach packages、local/Docker transport、observer-safe devtools/view、R0/R2 save/load、native host launch bundle、projection target inventory、portal/shard future inventory を 1 つの suite として再現できます。`future/portal-worldlink/` と shard inventory は planned blueprint であり、final public grammar / ABI / WAN / distributed durable save-load / direct LLVM backend / final server-client split ではありません。
-- `P-OPS-03` により operational direct text host boundary は actualize 済みです:
-  `samples/product-alpha1/operational/membership-chat/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`scripts/operational_product_samples.py` により、bounded `EchoText("Taro") -> "Hello, Taro!"` lane を `run-local` / `session` / `export-devtools` から observer-safe に再現できます。これは final room-chat service、multi-message chat transport、stdio builtin ではありません。
+- `P-OPS-03` / `P-OPS-13` により operational room-chat host boundary は actualize 済みです:
+  `samples/product-alpha1/operational/membership-chat/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`scripts/operational_product_samples.py` により、bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` lane を `run-local` / `session` / `export-devtools` から observer-safe に再現できます。これは final room-chat service、multi-message chat transport、stdio builtin ではありません。
 - `P-OPS-04` により operational Sugoroku behavior widening は actualize 済みです:
   `samples/product-alpha1/operational/sugoroku-world/`、`crates/mir-runtime::product_alpha1_session`、`scripts/operational_product_samples.py` により、bounded same-session roll / publish / witness / handoff / stale membership reject scenario を `run-local` / `session` / `export-devtools` / `release-check` から observer-safe に再現できます。これは final interactive game runtime、production networked gameplay、broader negative-row completion ではありません。
 - `P-OPS-05` により operational projection manifest / packet / FFI schema は actualize 済みです:
@@ -71,17 +71,16 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | broader room-chat lane widening | `Macro 8`, `S2/S3` | `MembershipChat` の next widening を direct text laneから room-oriented laneへ進めるかを切り分ける | `EchoText` 維持か、bounded `ChatText` へ進むかの close condition を置く | medium |
-| 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
-| 3 | gradient observation runtime widening | `Macro 8`, `S2/S3` | observer-only profile inventory から bounded runtime widening を reopen するかを切り分ける | profile-only のまま保つか、new bounded runtime evidence package を開くかの close condition を置く | medium |
-| 4 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
+| 1 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を room-chat widening 後の current queue に合わせる | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
+| 2 | gradient observation runtime widening | `Macro 8`, `S2/S3` | observer-only profile inventory から bounded runtime widening を reopen するかを切り分ける | profile-only のまま保つか、new bounded runtime evidence package を開くかの close condition を置く | medium |
+| 3 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  broader room-chat lane widening
+  maintenance / dashboard freshness
 - recommendation reason:
-  `P-OPS-12` で starter boundary が fixed され、portal/shard line は active roots と `future/` inventory の split を保ったまま維持できるため、次は `MembershipChat` の next semantic widening を詰めるのが自然である
+  `P-OPS-13` で current `MembershipChat` lane は bounded room-oriented `ChatText` まで widen されたため、次は docs / dashboard / validator wording を current queue に揃え、その次に gradient observation runtime widening を切り分けるのが自然である
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -96,10 +95,10 @@
 | product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
 | product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装し、`P-A1-31` release check で再確認済み |
 | admin/debug product viewer breadth | final public viewer / telemetry ABI に影響 | observer-safe + kept-later marker / bounded admin debug panel | product alpha release candidate では concrete observer-safe static viewer と admin/debug `kept_later` marker に留める。full admin/debug view は final-public gate |
-| operational room-chat widening | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current `EchoText` lane 維持 / room-chat-oriented `ChatText` lane へ widen / transport-coupled chat lane を先に入れる | current recommendation は `EchoText` lane を direct text host boundary evidence として維持し、room-oriented widening は `P-OPS-04` 以後に分ける |
+| operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-two-shard widening order | `specs/27` と future suite line に影響 | broader room-chat widening first / gradient observation runtime first / portal-shard starter revisit later | current recommendation は broader room-chat widening を先に置き、gradient observation runtime widening を次、portal/shard starter revisit はその後段または不要のまま保つ |
+| post-two-shard widening order | `specs/27` と future suite line に影響 | maintenance/dashboard freshness first / gradient observation runtime first / portal-shard starter revisit later | current recommendation は maintenance/dashboard freshness を先に閉じ、その次に gradient observation runtime widening を置き、portal/shard starter revisit はその後段または不要のまま保つ |
 
 ## user decision items
 

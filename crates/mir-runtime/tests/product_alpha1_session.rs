@@ -412,18 +412,18 @@ fn product_alpha1_run_local_accepts_operational_membership_chat_root() {
     );
     assert!(report.typed_host_io_claimed);
     assert_eq!(report.session.host_io_history.len(), 1);
-    assert_eq!(report.session.host_io_history[0].adapter_kind, "EchoText");
+    assert_eq!(report.session.host_io_history[0].adapter_kind, "ChatText");
     assert_eq!(
         report.session.host_io_history[0].request_summary,
-        "Text(\"Taro\")"
+        "Text(\"hello room\")"
     );
     assert_eq!(
         report.session.host_io_history[0].response_summary,
-        "Text(\"Hello, Taro!\")"
+        "Text(\"room#lobby message accepted: hello room\")"
     );
     assert_eq!(
         report.session.observer_safe_export.visible_host_io_events,
-        vec!["EchoText:Text(\"Taro\")->Text(\"Hello, Taro!\")"]
+        vec!["ChatText:Text(\"hello room\")->Text(\"room#lobby message accepted: hello room\")"]
     );
     assert!(!report.product_alpha1_ready);
 }
@@ -466,6 +466,7 @@ fn product_alpha1_run_local_accepts_operational_membership_chat_starter_template
         vec!["../world-core-starter".to_owned()]
     );
     assert!(report.typed_host_io_claimed);
+    assert_eq!(report.session.host_io_history[0].adapter_kind, "ChatText");
     assert!(!report.product_alpha1_ready);
 }
 
@@ -601,6 +602,85 @@ fn product_alpha1_run_local_executes_declared_echo_text_payload() {
     assert_eq!(
         report.session.host_io_history[0].response_summary,
         "Text(\"Hello, Mika!\")"
+    );
+}
+
+#[test]
+fn product_alpha1_run_local_executes_declared_chat_text_payload() {
+    let package_json = r#"{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "product-alpha1-chat-text-runtime",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "membership_chat",
+  "dependencies": [],
+  "effects": ["typed_host_io.chat_text", "SendRoomMessage"],
+  "failures": ["AdapterUnavailable", "RateLimited"],
+  "capabilities": ["JoinWorld", "ObserveWorld", "SendRoomMessage"],
+  "witness_requirements": [],
+  "membership_requirements": ["active_participant"],
+  "auth_policy": {
+    "policy_id": "chat-text-auth-policy",
+    "required_bindings": ["participant_membership"]
+  },
+  "auth_stack": ["membership_auth", "capability_auth"],
+  "contracts": [
+    {
+      "contract_id": "chat-text-chat-contract",
+      "variance": "invariant",
+      "effect_row": ["SendRoomMessage"],
+      "failure_row": ["RateLimited"]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": ["observer_safe_chat_summary"]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": ["raw_witness_payload", "raw_auth_evidence"]
+  },
+  "retention_policy": {
+    "scope": "chat_text_session",
+    "retained_artifacts": ["checker_report", "runtime_plan", "observer_safe_chat_lane"]
+  },
+  "message_recovery_policy": {
+    "handled_failures": ["timeout", "reject"],
+    "recovery": "retry_then_reject"
+  },
+  "savepoint_policy": {
+    "classes": ["R0", "R2"],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[ChatPlace]",
+    "host_io": {
+      "adapter_kind": "ChatText",
+      "effect_ref": "typed_host_io.chat_text",
+      "request_payload": {"kind": "text", "value": "ready to play"},
+      "expected_response": {"kind": "text", "value": "room#lobby message accepted: ready to play"}
+    }
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}"#;
+    let package_dir = write_package("product-alpha1-chat-text-runtime-test", package_json);
+
+    let report = run_product_alpha1_local_session_path(&package_dir)
+        .expect("ChatText runtime input package should run locally");
+
+    assert_eq!(
+        report.session.host_io_history[0].request_summary,
+        "Text(\"ready to play\")"
+    );
+    assert_eq!(
+        report.session.host_io_history[0].response_summary,
+        "Text(\"room#lobby message accepted: ready to play\")"
     );
 }
 

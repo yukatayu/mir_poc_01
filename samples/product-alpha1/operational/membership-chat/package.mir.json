@@ -10,7 +10,7 @@
     "JoinWorld",
     "LeaveWorld",
     "SendRoomMessage",
-    "typed_host_io.echo_text"
+    "typed_host_io.chat_text"
   ],
   "failures": [
     "StaleMembership",
@@ -54,7 +54,7 @@
       "contract_id": "operational-membership-chat-host-io-contract",
       "variance": "observe_only",
       "effect_row": [
-        "typed_host_io.echo_text"
+        "typed_host_io.chat_text"
       ],
       "failure_row": []
     }
@@ -97,15 +97,15 @@
   "runtime_input": {
     "entry_place": "Place[ChatPlace]",
     "host_io": {
-      "adapter_kind": "EchoText",
-      "effect_ref": "typed_host_io.echo_text",
+      "adapter_kind": "ChatText",
+      "effect_ref": "typed_host_io.chat_text",
       "request_payload": {
         "kind": "text",
-        "value": "Taro"
+        "value": "hello room"
       },
       "expected_response": {
         "kind": "text",
-        "value": "Hello, Taro!"
+        "value": "room#lobby message accepted: hello room"
       }
     }
   },

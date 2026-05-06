@@ -21,7 +21,7 @@ SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
 PORTAL_WORLDLINK = OPS_ROOT / "portal-worldlink"
 TWO_SHARD_HARD_BOUNDARY = OPS_ROOT / "two-shard-hard-boundary"
 LAYERS_ROOT = OPS_ROOT / "packages"
-EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'EchoText:Text("Taro")->Text("Hello, Taro!")'
+EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'ChatText:Text("hello room")->Text("room#lobby message accepted: hello room")'
 EXPECTED_SUGOROKU_EVENT_KINDS = {
     "sugoroku_roll_requested",
     "sugoroku_roll_published",
@@ -179,20 +179,20 @@ def list_samples() -> dict[str, Any]:
     }
 
 
-def membership_chat_echo_text_observed(result: CommandResult) -> bool:
+def membership_chat_chat_text_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     if not payload.get("typed_host_io_claimed"):
         return False
     session = payload.get("session") or {}
     host_io_history = session.get("host_io_history") or []
-    if not host_io_history or host_io_history[0].get("adapter_kind") != "EchoText":
+    if not host_io_history or host_io_history[0].get("adapter_kind") != "ChatText":
         return False
     observer_safe_export = session.get("observer_safe_export") or {}
     visible_events = observer_safe_export.get("visible_host_io_events") or []
     return EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT in visible_events
 
 
-def membership_chat_devtools_echo_text_observed(result: CommandResult) -> bool:
+def membership_chat_devtools_chat_text_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     panel_ids = payload.get("panel_ids") or []
     session = payload.get("session") or {}
@@ -349,7 +349,7 @@ def run_world_package(root: Path) -> dict[str, Any]:
     )
     semantic_checks: dict[str, bool] = {}
     if root == MEMBERSHIP_CHAT:
-        semantic_checks["echo_text_observed"] = membership_chat_echo_text_observed(result)
+        semantic_checks["chat_text_observed"] = membership_chat_chat_text_observed(result)
     elif root == SUGOROKU_WORLD:
         semantic_checks["runtime_evidence_observed"] = (
             sugoroku_runtime_evidence_observed(result)
@@ -655,8 +655,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     attach_matrix_ok = attach_matrix_complete(attach_results)
     if not attach_matrix_ok:
         failed.append("attach-matrix")
-    membership_chat_echo_text_ok = membership_chat_echo_text_observed(membership_chat_run)
-    membership_chat_devtools_ok = membership_chat_devtools_echo_text_observed(
+    membership_chat_chat_text_ok = membership_chat_chat_text_observed(membership_chat_run)
+    membership_chat_devtools_ok = membership_chat_devtools_chat_text_observed(
         membership_chat_export
     )
     portal_runtime_ok = portal_runtime_evidence_observed(portal_run)
@@ -666,8 +666,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     projection_inventory_ok = sugoroku_projection_inventory_observed(sugoroku_check)
     sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
     sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
-    if not membership_chat_echo_text_ok:
-        failed.append("membership-chat-echo-text")
+    if not membership_chat_chat_text_ok:
+        failed.append("membership-chat-chat-text")
     if not membership_chat_devtools_ok:
         failed.append("membership-chat-devtools")
     if not portal_runtime_ok:
@@ -700,7 +700,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "bundle_dir": bundle_dir,
         "failed_commands": failed,
         "attach_matrix_complete": attach_matrix_ok,
-        "membership_chat_echo_text_ok": membership_chat_echo_text_ok,
+        "membership_chat_chat_text_ok": membership_chat_chat_text_ok,
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
         "portal_runtime_ok": portal_runtime_ok,
         "portal_devtools_ok": portal_devtools_ok,

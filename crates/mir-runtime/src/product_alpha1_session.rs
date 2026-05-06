@@ -1697,12 +1697,21 @@ fn execute_product_host_io(
                 value: format!("Hello, {value}!"),
             })
         }
+        ("ChatText", ProductAlpha1HostIoPayload::Text { value }) => {
+            Ok(ProductAlpha1HostIoPayload::Text {
+                value: format!("room#lobby message accepted: {value}"),
+            })
+        }
         ("AddOne", other) => Err(host_io_error(format!(
             "AddOne adapter only accepts integer payloads, found {}",
             payload_summary(other)
         ))),
         ("EchoText", other) => Err(host_io_error(format!(
             "EchoText adapter only accepts text payloads, found {}",
+            payload_summary(other)
+        ))),
+        ("ChatText", other) => Err(host_io_error(format!(
+            "ChatText adapter only accepts text payloads, found {}",
             payload_summary(other)
         ))),
         (adapter, _) => Err(host_io_error(format!(

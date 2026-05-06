@@ -1,6 +1,6 @@
 # MembershipChat Starter
 
-`MembershipChat Starter` is a validated authoring starter for external developers who need a bounded operational `membership_chat` package with the current `EchoText` direct host-boundary lane already declared.
+`MembershipChat Starter` is a validated authoring starter for external developers who need a bounded operational `membership_chat` package with the current `ChatText` room-oriented host-boundary lane already declared.
 
 - current status: `template_only`
 - executable input: `package.mir.json`

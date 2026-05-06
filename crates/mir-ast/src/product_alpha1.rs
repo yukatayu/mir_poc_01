@@ -607,7 +607,7 @@ fn validate_package_shape(
         let declares_supported_host_io = package.effects.iter().any(|effect| {
             matches!(
                 effect.as_str(),
-                "typed_host_io.add_one" | "typed_host_io.echo_text"
+                "typed_host_io.add_one" | "typed_host_io.echo_text" | "typed_host_io.chat_text"
             )
         });
         if declares_supported_host_io {
@@ -663,9 +663,22 @@ fn validate_host_io_input(
                 value: expected_value,
             },
         ) if *expected_value == format!("Hello, {value}!") => Ok(()),
+        (
+            "ChatText",
+            "typed_host_io.chat_text",
+            ProductAlpha1HostIoPayload::Text { value },
+            ProductAlpha1HostIoPayload::Text {
+                value: expected_value,
+            },
+        ) if *expected_value == format!("room#lobby message accepted: {value}") => Ok(()),
         ("EchoText", "typed_host_io.echo_text", _, _) => Err(schema_error(
             path,
             "runtime_input.host_io expected_response must equal EchoText(request_payload)"
+                .to_string(),
+        )),
+        ("ChatText", "typed_host_io.chat_text", _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io expected_response must equal ChatText(request_payload)"
                 .to_string(),
         )),
         ("AddOne", _, _, _) => Err(schema_error(
@@ -675,6 +688,10 @@ fn validate_host_io_input(
         ("EchoText", _, _, _) => Err(schema_error(
             path,
             "runtime_input.host_io.effect_ref must match `typed_host_io.echo_text`".to_string(),
+        )),
+        ("ChatText", _, _, _) => Err(schema_error(
+            path,
+            "runtime_input.host_io.effect_ref must match `typed_host_io.chat_text`".to_string(),
         )),
         (adapter_kind, effect_ref, _, _) => Err(schema_error(
             path,

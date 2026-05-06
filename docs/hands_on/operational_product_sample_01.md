@@ -1,6 +1,6 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` widening を再現するための入口です。
 
 これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut まで actualize 済みです。gradient observation は `planned_only` profile inventory まで actualize 済みですが、general model-check completion、gradient observation runtime、WAN federation / continuous spatial sync / continuous infinite shard federation / final portal ABI ではありません。validated starter catalog は intentionally `SugorokuWorld` で止まり、portal/shard authoring は active roots を study/copy boundary に留めます。
 
@@ -32,7 +32,7 @@ Expected bounded evidence:
 - packet / FFI inventory は schema-backed だが、final server/client binary split や direct LLVM backend claim ではない
 - current backend comparison inventory is documented separately in `operational_backend_inventory_01.md`; current actualized native path remains the host launch bundle
 
-## Run The MembershipChat Text Boundary
+## Run The MembershipChat Room-Chat Boundary
 
 ```bash
 chat_session_dir=$(mktemp -d /tmp/mirrorea-ops-chat-session-XXXXXX)
@@ -46,8 +46,8 @@ cargo run -q -p mirrorea-cli -- view "$chat_viewer_dir" --check --format json
 Expected bounded evidence:
 
 - `typed_host_io_claimed = true`
-- observer-safe host-I/O lane includes `EchoText:Text("Taro")->Text("Hello, Taro!")`
-- event DAG / devtools export show the same request/response without introducing stdio as a Mir core primitive
+- observer-safe host-I/O lane includes `ChatText:Text("hello room")->Text("room#lobby message accepted: hello room")`
+- event DAG / devtools export show the same bounded room-oriented request/response without introducing stdio as a Mir core primitive
 
 ## Run The Portal First Cut
 

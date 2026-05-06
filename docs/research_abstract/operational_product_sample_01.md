@@ -19,7 +19,7 @@
 
 - `world-core` / `membership-chat` / `sugoroku-world` の `check`
 - `world-core` / `membership-chat` / `sugoroku-world` の `run-local`
-- `membership-chat` の bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary と observer-safe devtools export
+- `membership-chat` の bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary と observer-safe devtools export
 - `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export
@@ -34,7 +34,7 @@
 - `future/portal-worldlink/` blueprint manifest
 - `future/two-shard-hard-boundary/` blueprint manifest
 - gradient observation runtime / broader replication profile runtime
-- broader room-chat-oriented `ChatText` lane
+- broader multi-message room-chat surface beyond the current bounded `ChatText` lane
 - portal/shard starter revisit after a future dedicated widening package
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 

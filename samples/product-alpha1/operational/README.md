@@ -1,6 +1,6 @@
 # samples/product-alpha1/operational
 
-This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, and `P-OPS-07`.
+This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, `P-OPS-07`, and `P-OPS-13`.
 
 It stays separate from `samples/product-alpha1/demo/`.
 
@@ -17,7 +17,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 Current runnable floor:
 
 - `world-core/`: `check`, `run-local`
-- `membership-chat/`: `check`, `run-local`, bounded `EchoText("Taro") -> "Hello, Taro!"` direct host boundary, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
+- `membership-chat/`: `check`, `run-local`, bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
 - `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
   deferred `placeholder-object` / `custom-avatar-preview` attach rows are part of the visible workflow, not hidden inventory
 - `portal-worldlink/`: `check`, `run-local`, observer-safe `export-devtools`, and bounded same-session portal resolve / handoff offer / witness emit / destination admit evidence
