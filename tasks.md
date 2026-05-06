@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 01:45 JST
+最終更新: 2026-05-07 08:28 JST
 
 ## この文書について
 
@@ -71,16 +71,15 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を room-chat widening 後の current queue に合わせる | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
-| 2 | gradient observation runtime widening | `Macro 8`, `S2/S3` | observer-only profile inventory から bounded runtime widening を reopen するかを切り分ける | profile-only のまま保つか、new bounded runtime evidence package を開くかの close condition を置く | medium |
-| 3 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
+| 1 | gradient observation runtime first cut | `Macro 8`, `S2/S3` | existing hard-boundary root と planned-only profile inventory を保ったまま、bounded observer-only runtime evidence package を切り分ける | current profile-only lineを維持するか、separate runnable root / helper / devtools evidence を追加するかを evidence-backed に閉じる | medium |
+| 2 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  maintenance / dashboard freshness
+  gradient observation runtime first cut
 - recommendation reason:
-  `P-OPS-13` で current `MembershipChat` lane は bounded room-oriented `ChatText` まで widen されたため、次は docs / dashboard / validator wording を current queue に揃え、その次に gradient observation runtime widening を切り分けるのが自然である
+  `P-OPS-14` で queue / dashboard / validator freshness は current state に揃ったため、次は existing hard-boundary root と planned-only profile inventory を崩さずに gradient observation を separate bounded runtime evidence にできるかを切り分けるのが自然である
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -98,7 +97,7 @@
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-two-shard widening order | `specs/27` と future suite line に影響 | maintenance/dashboard freshness first / gradient observation runtime first / portal-shard starter revisit later | current recommendation は maintenance/dashboard freshness を先に閉じ、その次に gradient observation runtime widening を置き、portal/shard starter revisit はその後段または不要のまま保つ |
+| post-two-shard widening order | `specs/27` と future suite line に影響 | gradient observation runtime first / broader room-chat revisit / portal-shard starter revisit later | current recommendation は gradient observation runtime first cut を先に閉じ、その後に portal/shard starter revisit の必要性自体を再評価する |
 
 ## user decision items
 

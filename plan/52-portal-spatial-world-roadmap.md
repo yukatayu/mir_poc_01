@@ -19,9 +19,13 @@
 1. completed docs-first widenings
    gradient observation profile
    portal/shard starter boundary
-2. next semantic/runtime widenings
+2. completed semantic/runtime widenings
    broader room-chat lane
-3. much later
+3. maintenance closeout
+   dashboard freshness
+4. next semantic/runtime widenings
+   bounded observer-only gradient runtime
+5. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -59,6 +63,12 @@
 - portal/shard authoring は active executable roots を study/copy boundary として扱い、`future/` inventory は non-executable のまま保つ
 - later starter reopen condition を active-root sourced / future-blueprint distinct / focused validation required に固定する
 
+## P-OPS-14 current scope
+
+- queue / roadmap / dashboard wording を room-chat widening 後の current state に揃える
+- next reopen point を gradient observation runtime first cut に進める
+- existing hard-boundary root と `planned_only` profile inventory の boundary は維持する
+
 ## avoid
 
 - portal を transport alias に潰すこと
@@ -71,4 +81,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
-- portal/shard starter を later に reopen するなら、room-chat widening か gradient/model-check widening のどちらの後で扱うべきか
+- portal/shard starter を later に reopen するなら、gradient runtime widening の後でも依然として必要か

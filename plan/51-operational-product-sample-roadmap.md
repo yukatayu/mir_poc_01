@@ -94,6 +94,12 @@
 - portal/shard authoring は active executable roots を study/copy boundary として扱い、`future/` inventory は non-executable のまま保つ
 - authoring guide / summary / roadmap / dashboard に portal/shard starter non-addition の理由と reopen condition を明記する
 
+## P-OPS-14 current scope
+
+- room-chat widening closeout後の queue / validator / roadmap / dashboard wording を current state に揃える
+- `scripts/README.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` の stale reopen-point drift を解消する
+- behavior change や new runtime claim を混ぜず、next reopen point を gradient observation runtime first cut に進める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -107,10 +113,10 @@
 
 ## next packages
 
-1. maintenance / dashboard freshness
-   keep queue wording, indexes, and validation anchors synchronized after the room-chat widening decision
-2. gradient observation runtime widening
-   decide whether the current `planned_only` profile should remain inventory-only or gain a bounded runtime evidence package
+1. gradient observation runtime first cut
+   keep the existing hard-boundary root and planned-only profile inventory, and decide whether to add a separate bounded observer-only runtime root
+2. final-public gate scoping
+   choose whether the next promoted line after operational shard widening is broader room-chat, final-public grammar/ABI scoping, or another explicit user-selected gate
 
 ## current recommendation
 
@@ -125,7 +131,8 @@
 - `P-OPS-10` で `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を追加し、starter catalog を mainstream chain まで widen 済み
 - `P-OPS-11` で `future/gradient-observation.profile.json` と guide を追加し、observer-only widening を `planned_only` inventory として actualize 済み
 - `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
-- 次は maintenance / dashboard freshness とし、gradient observation runtime widening はその次段に置く
+- `P-OPS-14` で maintenance / dashboard freshness を閉じ、queue / validator / roadmap / dashboard wording を current state に同期済み
+- 次は gradient observation runtime first cut とし、existing hard-boundary root / planned-only profile inventory を維持したまま bounded observer-only runtime evidence を切り分ける
 
 ## open questions
 
@@ -133,3 +140,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
+- gradient observation runtime を active `two_shard_hard_boundary` root の内側へ widen するか、separate runnable root として切り分けるか
