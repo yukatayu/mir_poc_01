@@ -28,6 +28,10 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - final viewer / telemetry service
 - production packaging / hosted-service adoption target
 
+Operational follow-on note:
+
+- `P-OPS-08` may inventory backend options around the operational suite, but it must not weaken the product alpha default that current actualized native output is the host launch bundle rather than direct Mir-to-machine-code.
+
 ## alpha defaults from `P-A1-25`
 
 The alpha `U1` defaults for this line are:

@@ -62,6 +62,8 @@ Keep these invariants:
 - `message_recovery_policy.recovery` must use the current accepted values
 - direct textual `.mir` is not the executable front door
 
+For the current backend boundary around the package you are authoring, see `operational_backend_inventory_01.md`.
+
 ## Check Your Edited Package
 
 ```bash

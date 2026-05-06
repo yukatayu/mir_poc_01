@@ -77,3 +77,8 @@ public-freeze mixed-gate 側では、この guardrail を
 `toolchain adjacency inventory` としてだけ参照し、
 actual LLVM build、backend choice、installed-binary packaging は
 post-`P18` kept-later / true user-spec hold line に残す。
+
+`P-OPS-08` operational backend feasibility inventory は、この guardrail を
+operational suite 側へ読み替えた docs-first comparison である。
+current executable path は引き続き `native host launch bundle` のみであり、
+WASM client host と LLVM/native projection backend は inventory-only のまま保つ。

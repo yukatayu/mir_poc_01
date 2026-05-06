@@ -54,4 +54,5 @@ CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-ru
 
 - `../../plan/23-compiler-backend-llvm-guardrail-roadmap.md`
 - `../research_abstract/compiler_backend_llvm_preparation_01.md`
+- `operational_backend_inventory_01.md`
 - `current_phase_closeout_01.md`

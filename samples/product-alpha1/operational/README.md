@@ -10,6 +10,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 - `portal-worldlink/` is the active bounded portal runtime root.
 - `two-shard-hard-boundary/` is the active bounded shard runtime root.
 - `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots.
+- backend feasibility is docs-first: `native host launch bundle` is the only actualized backend-adjacent path; WASM/LLVM remain inventory-only
 - Portal / shard files under `future/` are blueprint evidence only.
 
 Current runnable floor:
@@ -24,6 +25,7 @@ Current runnable floor:
 - `future/portal-worldlink/`: retained blueprint root for future portal manifest wording; it is not the executable root
 - `future/two-shard-hard-boundary/`: retained blueprint root for future shard manifest wording; it is not the executable root
 - `templates/world-core-starter/`: validated starter for external developer authoring; use `docs/hands_on/operational_package_authoring_01.md` before copying it into a new package
+- `docs/hands_on/operational_backend_inventory_01.md`: current host launch bundle / WASM / LLVM comparison inventory for this suite
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family
 
 Current non-claims:

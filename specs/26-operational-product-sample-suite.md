@@ -65,6 +65,7 @@ samples/product-alpha1/operational/
 - `deployments/projection/projection.profile.json` may carry schema-backed target / packet / FFI inventory for the runnable root, but it is supplementary inventory rather than executable input
 - `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` / `two_shard_hard_boundary` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
+- current backend-adjacent actualization is `native host launch bundle` only; docs may inventory WASM host or LLVM/native projection options as future boundary comparisons, but must not claim them executable
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
 - `templates/` roots may be schema-valid and runnable through bounded `check` / `run-local`, but they remain `template_only` authoring starters rather than promoted operational sample roots
 

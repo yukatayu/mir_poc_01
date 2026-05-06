@@ -9,6 +9,7 @@
 - `WorldCore -> MembershipChat -> SugorokuWorld` の source / package chain を固定した
 - `mirrorea-alpha` の current product alpha command familyで再現できる bounded operational workflow を docs と helper script にまとめた
 - `projection.profile.json` を schema-backed target / packet / FFI inventory として `check` / runtime plan / devtools に接続した
+- current backend comparison inventory keeps `native host launch bundle` as the only actualized path and leaves WASM/LLVM docs-first only
 - `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
 - `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
 

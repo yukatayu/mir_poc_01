@@ -60,6 +60,13 @@
 - `docs/hands_on/operational_package_authoring_01.md` と `docs/research_abstract/operational_package_authoring_01.md` で external developer 向け `author -> check -> run-local -> session -> export-devtools -> view --check` の bounded order を固定する
 - template roots を active operational sample roots や generic release helper と混同しない
 
+## P-OPS-08 current scope
+
+- `native host launch bundle` を current actualized backend-adjacent path として明示する
+- WASM client host と LLVM/native projection backend を docs-first comparison inventory としてだけ棚卸しする
+- packet / FFI / projection boundary と auth/membership/capability/witness lane preservation requirement を backend reopen prerequisite として書き出す
+- generic backend build helper や direct codegen claim は追加しない
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -73,8 +80,8 @@
 
 ## next packages
 
-1. `P-OPS-08`
-   backend feasibility inventory
+1. broader operational template catalog
+   next template-only starter widening order
 
 ## current recommendation
 
@@ -84,7 +91,8 @@
 - `P-OPS-06` で `PortalWorldLink` bounded same-session discrete handoff root は actualize 済み
 - `P-OPS-07` で `TwoShardHardBoundary` bounded same-session hard-authority root は actualize 済み
 - `P-OPS-09` で `templates/world-core-starter/` と bounded package authoring guide は actualize 済み
-- 次は `P-OPS-08` として、current host launch bundle line を保ったまま backend feasibility inventory を docs-first に棚卸しする
+- `P-OPS-08` で current host launch bundle line を保ったまま backend feasibility inventory は docs-first に actualize 済み
+- 次は broader operational template catalog として、`world_core` 以外の template-only starter widening 順を整理する
 
 ## open questions
 
@@ -92,3 +100,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか
 - `templates/` を `world_core` 以外の package kinds へどの順で widen するか
+- WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか

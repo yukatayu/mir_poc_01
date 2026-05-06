@@ -30,6 +30,7 @@ Expected bounded evidence:
 - `sugoroku-world` の `check` payload は `projection_inventory` summary を返し、`source_package = operational-sugoroku`
 - same summary には `target_count = 2`、`packet_boundary_count = 2`、`ffi_boundary_count = 1` が含まれる
 - packet / FFI inventory は schema-backed だが、final server/client binary split や direct LLVM backend claim ではない
+- current backend comparison inventory is documented separately in `operational_backend_inventory_01.md`; current actualized native path remains the host launch bundle
 
 ## Run The MembershipChat Text Boundary
 

@@ -38,3 +38,4 @@ docs-first guardrail です。
 
 - `plan/23-compiler-backend-llvm-guardrail-roadmap.md`
 - `docs/reports/0927-compiler-backend-llvm-preparation.md`
+- `operational_backend_inventory_01.md`
