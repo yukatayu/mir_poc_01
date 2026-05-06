@@ -53,6 +53,13 @@
 - bounded same-session two-shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
 - `future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` を retained blueprint inventory として残し、active runtime root と明示的に分ける
 
+## P-OPS-09 current scope
+
+- `samples/product-alpha1/operational/templates/` を template-only authoring starter root として追加する
+- `templates/world-core-starter/` を current validated `world_core` starter として `check` / `run-local` で再現可能にする
+- `docs/hands_on/operational_package_authoring_01.md` と `docs/research_abstract/operational_package_authoring_01.md` で external developer 向け `author -> check -> run-local -> session -> export-devtools -> view --check` の bounded order を固定する
+- template roots を active operational sample roots や generic release helper と混同しない
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -66,8 +73,8 @@
 
 ## next packages
 
-1. `P-OPS-09`
-   external developer package authoring guide
+1. `P-OPS-08`
+   backend feasibility inventory
 
 ## current recommendation
 
@@ -76,10 +83,12 @@
 - `P-OPS-05` で projection schema と packet / FFI boundary inventory は schema-backed inventory として actualize 済み
 - `P-OPS-06` で `PortalWorldLink` bounded same-session discrete handoff root は actualize 済み
 - `P-OPS-07` で `TwoShardHardBoundary` bounded same-session hard-authority root は actualize 済み
-- 次は `P-OPS-09` として、current operational root chain を外部開発者が author / check / run / release-check できる package authoring guide を置く
+- `P-OPS-09` で `templates/world-core-starter/` と bounded package authoring guide は actualize 済み
+- 次は `P-OPS-08` として、current host launch bundle line を保ったまま backend feasibility inventory を docs-first に棚卸しする
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を room-oriented `ChatText` multi-message lane にするか、`EchoText` のまま最小維持するか
+- `templates/` を `world_core` 以外の package kinds へどの順で widen するか

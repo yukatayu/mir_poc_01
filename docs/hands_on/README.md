@@ -29,6 +29,7 @@
 | `practical_alpha1_product_preview_01.md` | first practical product-preview floor を full product prototype と分けて読む入口 |
 | `product_alpha1_01.md` | Product/Public-ready alpha-1 release-candidate workflow を clean clone から再現する入口 |
 | `operational_product_sample_01.md` | `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` operational product sample suite を clean clone から再現する入口 |
+| `operational_package_authoring_01.md` | `templates/world-core-starter/` から external developer が bounded operational package を author / check / run-local する入口 |
 
 ## 既存の長い入門文書
 

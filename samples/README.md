@@ -21,10 +21,11 @@
 - `product-alpha1/`
   product/public alpha-1 sample root
   - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, P-A1-28 local save/quiescent-save fixture root, P-A1-29 transport/viewer fixture root, P-A1-30 native host launch bundle fixture root, and P-A1-31 release-candidate demo root
-  - `operational/` is the `P-OPS-01` canonical operational product sample suite root with `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary`, the bounded `portal-worldlink/` and `two-shard-hard-boundary/` roots, shared attach packages, deployment/projection intent, and retained portal/shard blueprint inventory
+  - `operational/` is the `P-OPS-01` canonical operational product sample suite root with `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary`, the bounded `portal-worldlink/` and `two-shard-hard-boundary/` roots, shared attach packages, deployment/projection intent, retained portal/shard blueprint inventory, and `P-OPS-09` template-only authoring starters under `operational/templates/`
   - `docker/` holds the controlled Product Alpha-1 Docker Compose TCP fixture used by `mirrorea-alpha transport --mode docker`
   - `cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json` and `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release` are the release-candidate validation anchors
   - `python3 scripts/operational_product_samples.py check-all --format json` is the operational suite validation anchor
+  - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/templates/world-core-starter --format json` and `run-local` on the same root validate the current authoring starter, but the template is not counted as an active operational sample root
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - `not_implemented/`
   residual planned skeleton family

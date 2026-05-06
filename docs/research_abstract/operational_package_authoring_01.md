@@ -1,0 +1,32 @@
+# Operational Package Authoring 01 Summary
+
+`P-OPS-09` は、external developer が operational product package を author するための **validated starter + bounded guide** です。
+
+## What Is Added
+
+- `samples/product-alpha1/operational/templates/`
+- `samples/product-alpha1/operational/templates/world-core-starter/`
+- `docs/hands_on/operational_package_authoring_01.md`
+
+## What It Gives You
+
+- a validated `world_core` starter root that already passes `check` and `run-local`
+- a concrete list of fields that must be renamed before treating the template as your own package
+- the practical order `check -> run-local -> session -> export-devtools -> view --check`
+- common diagnostics for unsupported package kinds, unsupported recovery policies, missing dependency roots, and direct `.mir` front-door misuse
+
+## What It Does Not Claim
+
+- final textual grammar
+- final public ABI / SDK
+- generic scaffold CLI
+- automatic release helper generation for arbitrary new packages
+- final server/client split
+- direct LLVM backend
+
+## Entry Points
+
+- hands-on: `../hands_on/operational_package_authoring_01.md`
+- operational suite guide: `../hands_on/operational_product_sample_01.md`
+- normative boundary: `../../specs/26-operational-product-sample-suite.md`
+- roadmap memory: `../../plan/51-operational-product-sample-roadmap.md`

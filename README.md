@@ -13,6 +13,7 @@
 
 repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、そしてその次段の **canonical operational product sample suite** です。
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、operational suite helper、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
+operational suite には、active runnable roots とは別に `templates/world-core-starter/` と external developer 向け authoring guide も追加されており、template-only starter を使った `author -> check -> run-local` の入口を bounded に再現できます。
 
 ## 現在の到達点
 

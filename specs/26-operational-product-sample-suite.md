@@ -48,6 +48,8 @@ samples/product-alpha1/operational/
   - `deployments/local/`
   - `deployments/docker/`
   - `deployments/projection/`
+- template-only authoring starters
+  - `templates/world-core-starter/`
 - future boundary inventory
   - `future/portal-worldlink/`
   - `future/two-shard-hard-boundary/`
@@ -64,6 +66,7 @@ samples/product-alpha1/operational/
 - `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` / `two_shard_hard_boundary` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
+- `templates/` roots may be schema-valid and runnable through bounded `check` / `run-local`, but they remain `template_only` authoring starters rather than promoted operational sample roots
 
 ## package roles
 

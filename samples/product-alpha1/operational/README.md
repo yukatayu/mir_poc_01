@@ -9,6 +9,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 - Representative `.mir` files are explanatory only. Current executable input is versioned `package.mir.json`.
 - `portal-worldlink/` is the active bounded portal runtime root.
 - `two-shard-hard-boundary/` is the active bounded shard runtime root.
+- `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots.
 - Portal / shard files under `future/` are blueprint evidence only.
 
 Current runnable floor:
@@ -22,6 +23,7 @@ Current runnable floor:
 - `deployments/projection/projection.profile.json`: schema-backed non-final projection inventory reflected by `check`, runtime plan, and the observer-safe devtools projection panel for `sugoroku-world`
 - `future/portal-worldlink/`: retained blueprint root for future portal manifest wording; it is not the executable root
 - `future/two-shard-hard-boundary/`: retained blueprint root for future shard manifest wording; it is not the executable root
+- `templates/world-core-starter/`: validated starter for external developer authoring; use `docs/hands_on/operational_package_authoring_01.md` before copying it into a new package
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family
 
 Current non-claims:

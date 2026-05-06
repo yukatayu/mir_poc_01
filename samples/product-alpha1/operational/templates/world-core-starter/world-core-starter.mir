@@ -1,0 +1,6 @@
+// representative source only; current executable input is package.mir.json
+world WorldCoreStarter
+place WorldServerPlace
+membership MembershipRegistry
+observe event_dag as observer_safe
+policy retention report_local

@@ -429,6 +429,25 @@ fn product_alpha1_run_local_accepts_operational_membership_chat_root() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_world_core_starter_template() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/templates/world-core-starter"),
+    )
+    .expect("operational world-core starter template should run locally");
+
+    assert_eq!(report.package_id, "operational-world-core-starter");
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-world-core-starter"
+    );
+    assert_eq!(report.runtime_plan.package_kind, "world_core");
+    assert_eq!(report.runtime_plan.entry_place, "Place[WorldServerPlace]");
+    assert!(report.runtime_plan.declared_dependencies.is_empty());
+    assert!(!report.typed_host_io_claimed);
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
 fn product_alpha1_run_local_executes_declared_host_io_payload() {
     let package_json =
         fs::read_to_string(repo_root().join("samples/product-alpha1/demo/package.mir.json"))
