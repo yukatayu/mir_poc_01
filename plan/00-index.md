@@ -53,7 +53,7 @@
 - **backend guardrail and operational backend inventory**:
   `plan/23-compiler-backend-llvm-guardrail-roadmap.md` は small VPS / detachable workdir 前提の backend guardrail を置き、`P-OPS-08` current line では `native host launch bundle` / WASM / LLVM comparison inventory を docs-first boundary としてだけ参照する
 - **portal / spatial world future line**:
-  `specs/27-spatial-portal-and-shard-extension-boundary.md` と `plan/52-portal-spatial-world-roadmap.md` は、portal/world-link、two-shard hard boundary、replication profile optionality の future boundary を置く
+  `specs/27-spatial-portal-and-shard-extension-boundary.md` と `plan/52-portal-spatial-world-roadmap.md` は、portal/world-link、two-shard hard boundary、observer-only gradient observation profile、replication profile optionality の future boundary を置く
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 

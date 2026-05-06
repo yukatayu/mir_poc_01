@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 00:56 JST
+最終更新: 2026-05-07 01:10 JST
 
 ## この文書について
 
@@ -58,6 +58,8 @@
   `docs/hands_on/operational_backend_inventory_01.md`、`docs/research_abstract/operational_backend_inventory_01.md`、`plan/23`、`plan/50`、`plan/51`、`specs/26` により、current actualized backend-adjacent path が `native host launch bundle` だけであること、WASM client host と LLVM/native projection backend が docs-first inventory に留まること、packet/FFI/projection と auth/membership/capability/witness lane preservation が future reopen prerequisite であることを明示できます。generic backend build helper や direct codegen claim は追加しません。
 - `P-OPS-10` により broader operational template catalog first cut は actualize 済みです:
   `samples/product-alpha1/operational/templates/membership-chat-starter/`、`samples/product-alpha1/operational/templates/sugoroku-world-starter/`、`docs/hands_on/operational_package_authoring_01.md`、`docs/research_abstract/operational_package_authoring_01.md`、focused product-alpha tests、source hierarchy sync により、validated starter catalog を `world_core` から `membership_chat` / `sugoroku_world` まで広げ、dependency-retarget obligation を明示した bounded authoring path を再現できます。portal/shard starter や generic scaffold CLI は主張しません。
+- `P-OPS-11` により gradient observation profile inventory は actualize 済みです:
+  `samples/product-alpha1/operational/future/gradient-observation.profile.json`、`samples/product-alpha1/operational/future/spatial-shard-future.profile.json`、`docs/hands_on/operational_gradient_observation_profile_01.md`、`docs/research_abstract/operational_gradient_observation_profile_01.md`、source hierarchy sync により、observer-only shard overlap reading、freshness fields、replication non-default reading、fallback behavior を `planned_only` inventory として固定できます。gradient observation runtime、portal/shard starter、general model-check completion は主張しません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -67,17 +69,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | gradient observation profile | `Macro 8`, `S2` | portal/shard の次に置く observer-side widening を bounded に formalize する | gradient observation を runtime claim にせず manifest/profile/guide として整理する | medium |
+| 1 | portal/shard starter decision | `Macro 7/8`, `S3` | future-boundary roots に validated template-only starter を与えるかを切り分ける | starter catalog を mainstream chain で止めるか、portal/shard まで広げるかの repository-memory decision を置く | small |
 | 2 | maintenance / dashboard freshness | `Macro 0`, `S6` | docs / dashboard / validator freshness を維持する | source hierarchy / docs scaffold / diff / report が current queue と一致する | small |
-| 3 | portal/shard starter decision | `Macro 7/8`, `S3` | future-boundary roots に validated template-only starter を与えるかを切り分ける | starter catalog を mainstream chain で止めるか、portal/shard まで広げるかの repository-memory decision を置く | small |
+| 3 | broader room-chat lane widening | `Macro 8`, `S2/S3` | `MembershipChat` の next widening を direct text laneから room-oriented laneへ進めるかを切り分ける | `EchoText` 維持か、bounded `ChatText` へ進むかの close condition を置く | medium |
 | 4 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
 
 ## current recommendation
 
 - recommended reopen point:
-  gradient observation profile
+  portal/shard starter decision
 - recommendation reason:
-  `P-OPS-10` で validated starter catalog が `membership_chat` / `sugoroku_world` まで到達したため、next widening は portal/shard の future boundary に戻って gradient observation profile を docs-first に formalize するのが自然である
+  `P-OPS-11` で gradient observation profile が docs-first に actualize 済みになったため、future-boundary sample family をどこまで authoring catalogへ含めるかを先に切り分けるのが自然である
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -95,7 +97,7 @@
 | operational room-chat widening | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current `EchoText` lane 維持 / room-chat-oriented `ChatText` lane へ widen / transport-coupled chat lane を先に入れる | current recommendation は `EchoText` lane を direct text host boundary evidence として維持し、room-oriented widening は `P-OPS-04` 以後に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-two-shard widening order | `specs/27` と future suite line に影響 | gradient observation profile first / portal-shard starter decision first / room-chat widening first | current recommendation は gradient observation profile を先に置き、portal/shard starter は reserve decision、broader room-chat widening はその後段に分ける |
+| post-two-shard widening order | `specs/27` と future suite line に影響 | portal-shard starter decision first / broader room-chat widening first / gradient observation runtime first | current recommendation は portal/shard starter decision を先に置き、broader room-chat widening を次、その後に gradient observation runtime widening を置く |
 
 ## user decision items
 

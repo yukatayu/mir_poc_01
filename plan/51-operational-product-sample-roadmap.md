@@ -74,6 +74,13 @@
 - external developer 向け docs で rename obligation に加えて dependency-retarget obligation を明示する
 - `portal_worldlink` / `two_shard_hard_boundary` starter は later とし、template catalog widening を mainstream world/chat/game chain で一度止める
 
+## P-OPS-11 current scope
+
+- `future/gradient-observation.profile.json` を observer-only widening inventory として追加する
+- `spatial-shard-future.profile.json` に gradient observation profile ref を追加する
+- hands-on / summary / roadmap / dashboard に gradient observation profile が runtime actualizationではなく `planned_only` inventory であることを明記する
+- current active runtime root は `two-shard-hard-boundary/` のまま保持する
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -87,10 +94,10 @@
 
 ## next packages
 
-1. gradient observation profile
-   next operational widening after the first template catalog cut
-2. portal/shard starter decision
+1. portal/shard starter decision
    decide whether future-boundary roots should ever gain validated template-only starters
+2. broader room-chat lane widening
+   decide whether `MembershipChat` should remain on `EchoText` or grow toward room-oriented chat
 
 ## current recommendation
 
@@ -102,7 +109,8 @@
 - `P-OPS-09` で `templates/world-core-starter/` と bounded package authoring guide は actualize 済み
 - `P-OPS-08` で current host launch bundle line を保ったまま backend feasibility inventory は docs-first に actualize 済み
 - `P-OPS-10` で `templates/membership-chat-starter/` と `templates/sugoroku-world-starter/` を追加し、starter catalog を mainstream chain まで widen 済み
-- 次は gradient observation profile とし、portal/shard starter の是非は reserve decision として残す
+- `P-OPS-11` で `future/gradient-observation.profile.json` と guide を追加し、observer-only widening を `planned_only` inventory として actualize 済み
+- 次は portal/shard starter decision とし、broader room-chat lane widening はその後段に置く
 
 ## open questions
 

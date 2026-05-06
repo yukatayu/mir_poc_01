@@ -10,6 +10,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 - `portal-worldlink/` is the active bounded portal runtime root.
 - `two-shard-hard-boundary/` is the active bounded shard runtime root.
 - `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`, `templates/membership-chat-starter/`, and `templates/sugoroku-world-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots.
+- `future/gradient-observation.profile.json` is a docs-first observer-only widening profile, not an executable runtime root.
 - backend feasibility is docs-first: `native host launch bundle` is the only actualized backend-adjacent path; WASM/LLVM remain inventory-only
 - Portal / shard files under `future/` are blueprint evidence only.
 
@@ -24,11 +25,13 @@ Current runnable floor:
 - `deployments/projection/projection.profile.json`: schema-backed non-final projection inventory reflected by `check`, runtime plan, and the observer-safe devtools projection panel for `sugoroku-world`
 - `future/portal-worldlink/`: retained blueprint root for future portal manifest wording; it is not the executable root
 - `future/two-shard-hard-boundary/`: retained blueprint root for future shard manifest wording; it is not the executable root
+- `future/gradient-observation.profile.json`: retained observer-only profile for planned shard overlap reading; it is not an executable root
 - `templates/world-core-starter/`: validated starter for bounded `world_core` authoring
-- `templates/membership-chat-starter/`: validated starter for bounded `membership_chat` authoring; retarget its `../../world-core` dependency after copying it
-- `templates/sugoroku-world-starter/`: validated starter for bounded `sugoroku_world` authoring; retarget its `../../membership-chat` dependency after copying it
+- `templates/membership-chat-starter/`: validated starter for bounded `membership_chat` authoring; retarget its `../world-core-starter` dependency after copying it
+- `templates/sugoroku-world-starter/`: validated starter for bounded `sugoroku_world` authoring; retarget its `../membership-chat-starter` dependency after copying it
 - `docs/hands_on/operational_package_authoring_01.md`: starter selection / rename / dependency-retarget guide for the template catalog
 - `docs/hands_on/operational_backend_inventory_01.md`: current host launch bundle / WASM / LLVM comparison inventory for this suite
+- `docs/hands_on/operational_gradient_observation_profile_01.md`: docs-first guide for the observer-only gradient future profile
 - `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family
 
 Current non-claims:

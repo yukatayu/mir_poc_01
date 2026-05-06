@@ -52,6 +52,8 @@
   `templates/world-core-starter/` / `membership-chat-starter/` / `sugoroku-world-starter/` と bounded authoring / diagnostics flow の summary
 - `operational_backend_inventory_01.md`
   host launch bundle / WASM / LLVM backend boundary comparison inventory の summary
+- `operational_gradient_observation_profile_01.md`
+  gradient observation profile と replication non-default reading の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

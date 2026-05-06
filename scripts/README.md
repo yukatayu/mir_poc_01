@@ -87,6 +87,7 @@
   - `run-membership-chat`, `run-sugoroku`, `run-portal-worldlink`, `run-two-shard-hard-boundary`, `export-devtools`, `release-check`, and `check-all` now include bounded operational semantic checks for direct text host-I/O, Sugoroku runtime evidence, portal discrete handoff evidence, two-shard hard-boundary evidence, and schema-backed projection inventory rather than only command exit status
   - external developer authoring is intentionally not hidden behind a generic scaffold command; use `docs/hands_on/operational_package_authoring_01.md` with direct `mirrorea-cli check/run-local/session/export-devtools/view` over the validated starter catalog under `samples/product-alpha1/operational/templates/`
   - backend feasibility inventory is also docs-first; no generic WASM/LLVM build helper is added beyond the existing `build-native-bundle` host-launch path
+  - gradient observation widening is also docs-first/profile-first; no runtime/helper command is added beyond reading `samples/product-alpha1/operational/future/gradient-observation.profile.json`
   - it does not claim final product, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native execution
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`

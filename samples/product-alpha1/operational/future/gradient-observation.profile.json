@@ -1,0 +1,78 @@
+{
+  "gradient_profile_version": "ops-gradient-observation-v0",
+  "current_status": "planned_only",
+  "active_runtime_root": "../two-shard-hard-boundary",
+  "paired_spatial_profile": "./spatial-shard-future.profile.json",
+  "observation_mode": "observer_only_no_write_authority",
+  "gradient_zones": [
+    {
+      "from_shard": "ShardA",
+      "to_shard": "ShardB",
+      "observe_region": "-16 <= x && x < 16",
+      "authority_owner": "ShardA",
+      "write_capability": false,
+      "ghost_representation": "observer_safe_presence_only",
+      "staleness_bound": "config_epoch_and_owner_epoch_checked"
+    },
+    {
+      "from_shard": "ShardB",
+      "to_shard": "ShardA",
+      "observe_region": "-16 <= x && x < 16",
+      "authority_owner": "ShardB",
+      "write_capability": false,
+      "ghost_representation": "observer_safe_presence_only",
+      "staleness_bound": "config_epoch_and_owner_epoch_checked"
+    }
+  ],
+  "observer_views": [
+    {
+      "view_id": "boundary_presence",
+      "labels": [
+        "observer_safe_position",
+        "observer_safe_motion_hint"
+      ],
+      "admin_debug_equivalent": "kept_later",
+      "write_capability": false
+    },
+    {
+      "view_id": "handoff_candidate",
+      "labels": [
+        "observer_safe_owner_shard",
+        "observer_safe_boundary_hint"
+      ],
+      "admin_debug_equivalent": "kept_later",
+      "write_capability": false
+    }
+  ],
+  "freshness_requirements": {
+    "required_fields": [
+      "membership_epoch",
+      "member_incarnation",
+      "config_epoch",
+      "owner_epoch",
+      "sequence"
+    ],
+    "vector_clock_default": false
+  },
+  "replication_profile_requirement": {
+    "default_profile": "SingleOwnerSequence",
+    "gradient_requires_replication_profile": false,
+    "future_optional_profiles": [
+      "OwnerEpochSequence",
+      "CRDTJoinSemilattice",
+      "DottedVersionVector",
+      "IntervalTreeClock"
+    ]
+  },
+  "fallback_behavior": {
+    "stale_gradient_view": "drop_observer_copy",
+    "missing_freshness_field": "reject_gradient_projection"
+  },
+  "non_claims": [
+    "no write authority in gradient observation zones",
+    "no continuous spatial synchronization runtime",
+    "no WAN federation",
+    "no distributed durable save/load",
+    "no default CRDT/vector-clock replication"
+  ]
+}

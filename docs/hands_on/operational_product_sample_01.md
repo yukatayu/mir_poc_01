@@ -2,7 +2,7 @@
 
 この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` widening を再現するための入口です。
 
-これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut まで actualize 済みですが、general model-check completion、gradient observation、WAN federation / continuous spatial sync / continuous infinite shard federation / final portal ABI ではありません。
+これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut まで actualize 済みです。gradient observation は `planned_only` profile inventory まで actualize 済みですが、general model-check completion、gradient observation runtime、WAN federation / continuous spatial sync / continuous infinite shard federation / final portal ABI ではありません。
 
 ## Validate The Repository
 
@@ -137,5 +137,6 @@ python3 scripts/operational_product_samples.py release-check --format json
 - `samples/product-alpha1/operational/two-shard-hard-boundary/`
 - `samples/product-alpha1/operational/future/portal-worldlink/`
 - `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
+- `samples/product-alpha1/operational/future/gradient-observation.profile.json`
 
-`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` と `two-shard-hard-boundary/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots です。
+`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` と `two-shard-hard-boundary/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots、`gradient-observation.profile.json` は observer-only widening を `planned_only` で固定した future profile です。

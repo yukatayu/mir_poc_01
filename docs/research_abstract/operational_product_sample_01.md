@@ -12,6 +12,7 @@
 - current backend comparison inventory keeps `native host launch bundle` as the only actualized path and leaves WASM/LLVM docs-first only
 - `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
 - `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
+- `gradient-observation.profile.json` を追加し、observer-only gradient widening を `planned_only` profile として固定した
 
 ## What Is Runnable Now
 
@@ -31,7 +32,7 @@
 - richer server/client binary split realization beyond the current projection inventory summary
 - `future/portal-worldlink/` blueprint manifest
 - `future/two-shard-hard-boundary/` blueprint manifest
-- gradient observation / broader replication profile runtime
+- gradient observation runtime / broader replication profile runtime
 - broader room-chat-oriented `ChatText` lane
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 

@@ -39,6 +39,15 @@ portal / world-link / shard / replication profile の future boundary を固定�
 - observer ghost / observation-only copy は write capability を持たない
 - current line may actualize one bounded same-session two-shard hard-boundary root so long as it does not claim gradient observation runtime or general model-check completion
 
+## gradient observation profile
+
+`L1`:
+
+- gradient observation は observer-only widening profile としてまず記述する
+- overlap zone は ghost / presence / hint view を許してよいが、write authority は与えない
+- freshness は `membership_epoch`, `member_incarnation`, `config_epoch`, `owner_epoch`, `sequence` を使い、vector clock default を導入しない
+- gradient observation profile は `planned_only` JSON inventory として repo に置いてよいが、runtime actualization と混同してはならない
+
 ## replication profile
 
 `L1`:

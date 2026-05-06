@@ -3,7 +3,8 @@
   "current_status": "planned_only",
   "active_runtime_root": "../two-shard-hard-boundary",
   "bounded_runtime_status": "same_session_two_shard_first_cut",
-  "gradient_observation_status": "planned_only",
+  "gradient_observation_status": "planned_profile_present",
+  "gradient_observation_profile_ref": "./gradient-observation.profile.json",
   "space": {
     "kind": "integer_chunk_grid",
     "dimensions": 2

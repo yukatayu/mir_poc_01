@@ -43,6 +43,13 @@
 - current runtime evidence は offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject の same-session hard-authority cut に限る
 - current stop line は gradient observation runtime、general model-check completion、WAN federation、continuous infinite federation
 
+## P-OPS-11 current scope
+
+- `samples/product-alpha1/operational/future/gradient-observation.profile.json` を docs-first / profile-first inventory として追加する
+- `spatial-shard-future.profile.json` から gradient observation profile ref を張る
+- observer-only overlap zone、freshness fields、replication non-default reading、fallback behavior を reader-facing docs に明記する
+- runtime actualization、model-check completion、portal/shard starter wideningは含めない
+
 ## avoid
 
 - portal を transport alias に潰すこと

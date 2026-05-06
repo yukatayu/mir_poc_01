@@ -55,6 +55,7 @@ samples/product-alpha1/operational/
 - future boundary inventory
   - `future/portal-worldlink/`
   - `future/two-shard-hard-boundary/`
+  - `future/gradient-observation.profile.json`
 - expected observer / docs anchor
   - `expected/*.expected.json`
 
