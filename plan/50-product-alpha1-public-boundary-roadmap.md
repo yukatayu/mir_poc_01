@@ -30,13 +30,17 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - final public packaging / installed distribution hardening
 - hosted-service adoption target
 
-Current recommendation after `P-OPS-18`:
+Current recommendation after `P-OPS-19`:
 
 - the current first public-ish adoption candidate remains:
   installed binary + native host launch bundle over the current controlled local/Docker host model
 - grammar / ABI scoping is now narrowed around:
   versioned `package.mir.json`, documented `mirrorea-alpha` command family, and native host launch bundle replay
-- the next promoted final-public-side package should therefore be **shipped-surface hardening**
+- shipped-surface hardening is now narrowed to the alpha replay bundle surface:
+  built-binary `check` / `build-native-bundle` / `demo`,
+  bundle `run.sh check` / `run.sh view`,
+  and the bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md` plus observer-safe supporting artifacts
+- the next promoted final-public-side package should therefore be **broader public distribution narrowing**
 - WAN / federation and distributed durable save/load remain later gates
 
 Operational follow-on note:
@@ -389,6 +393,51 @@ Non-claim:
 - no hosted-service / WAN ABI
 - no final public packaging freeze
 
+### `P-OPS-19` — shipped-surface hardening
+
+Status:
+
+- closed by `P-OPS-19`
+- current shipped surface narrowed and machine-readable
+- still alpha, not final public packaging or ABI
+
+Target:
+
+- define how much of the current built-binary + host-bundle unit counts as the current user-facing shipped surface
+- keep that shipped surface inside the already-narrowed front-door hardening target
+- distinguish shipped artifacts from evidence-only reports and admin/debug local artifacts
+
+Delivered:
+
+- `crates/mirrorea-cli` now emits a machine-readable `shipped_surface` block in:
+  - `build-native-bundle` stdout report
+  - native bundle `manifest.json`
+  - native bundle `reports/verification-report.json`
+- `scripts/product_alpha1_installed_binary_check.py` now reports the same `shipped_surface` block alongside `compatibility_scope`.
+- The current shipped surface is narrowed to:
+  built-binary `check` / `build-native-bundle` / `demo`,
+  bundle replay `run.sh check` / `run.sh view`,
+  bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md`,
+  and observer-safe supporting artifacts `devtools/bundle.json`, `devtools/index.html`, `reports/verification-report.json`.
+- Other bundled reports and admin/debug session-store artifacts are now explicitly kept outside the current compatibility promise.
+- Product guides / summaries / roadmap / dashboard wording now reflect that narrower shipped-surface reading.
+
+Validation:
+
+- `python3 -m unittest scripts.tests.test_product_alpha1_installed_binary_check`
+- `python3 -m unittest scripts.tests.test_product_alpha1_release_check`
+- `cargo test -p mirrorea-cli --test alpha_cli build_native_bundle_emits_host_launch_bundle_without_native_package_execution -- --nocapture`
+- installed-binary helper rerun
+
+Non-claim:
+
+- no final public packaging / installer format
+- no final textual `.mir` grammar
+- no final Rust library ABI
+- no final viewer/devtools bundle ABI
+- no native replay beyond `check` / `view`
+- no hosted service / WAN / distributed durable save/load
+
 ## desired product sample root
 
 Preferred layout:
@@ -473,8 +522,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- shipped-surface hardening
-- broader public distribution narrowing only after shipped-surface hardening clarifies how much of the current built-binary + host-bundle unit should be treated as user-facing
+- broader public distribution narrowing
+- broader public distribution narrowing must keep the current shipped surface on installed binary + native host launch bundle rather than silently reopening hosted service or arbitrary native execution
 
 ### research-discovery items
 
@@ -495,8 +544,9 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- shipped-surface hardening
+- broader public distribution narrowing
   - keep the hardening target on versioned `package.mir.json`, documented `mirrorea-alpha`, and native host launch bundle replay
-  - decide how much of the current built-binary + host-bundle unit should be treated as the user-facing shipped surface without reopening hosted service / WAN / distributed durability
+  - keep the current shipped surface on the alpha replay bundle unit already narrowed by `P-OPS-19`
+  - decide whether any broader installed distribution shape should exist beyond the current built-binary + host-bundle unit without reopening hosted service / WAN / distributed durability
 
 Queue authority remains `progress.md` / `tasks.md`.

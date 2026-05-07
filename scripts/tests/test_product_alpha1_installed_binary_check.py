@@ -73,6 +73,26 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             payload["compatibility_scope"]["cli_surface"],
             "mirrorea_alpha_documented_command_family",
         )
+        self.assertEqual(
+            payload["shipped_surface"]["delivery_model"],
+            "installed_binary_plus_native_host_launch_bundle",
+        )
+        self.assertEqual(
+            payload["shipped_surface"]["supported_replay_commands"],
+            ["check", "view"],
+        )
+        self.assertEqual(
+            payload["shipped_surface"]["observer_safe_supporting_artifacts"],
+            [
+                "devtools/bundle.json",
+                "devtools/index.html",
+                "reports/verification-report.json",
+            ],
+        )
+        self.assertIn(
+            "reports/run-script-check.json",
+            payload["shipped_surface"]["evidence_only_reports"],
+        )
         self.assertFalse(payload["compatibility_scope"]["final_textual_mir_grammar_frozen"])
         self.assertFalse(payload["compatibility_scope"]["final_rust_library_abi_frozen"])
         self.assertNotIn("binary-demo", payload["failed_commands"])
@@ -145,6 +165,10 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
                 payload["compatibility_scope"]["bundle_surface"],
                 "native_host_launch_bundle_run_sh",
             )
+            self.assertEqual(
+                payload["shipped_surface"]["delivery_model"],
+                "installed_binary_plus_native_host_launch_bundle",
+            )
         finally:
             marker.unlink(missing_ok=True)
             out_dir.rmdir()
@@ -163,6 +187,10 @@ def payload_for(name: str) -> dict:
             "host_launch_bundle_claimed": True,
             "package_native_execution_claimed": False,
             "signature_is_safety_claimed": False,
+            "shipped_surface": {
+                "delivery_model": "installed_binary_plus_native_host_launch_bundle",
+                "supported_replay_commands": ["check", "view"],
+            },
         },
         "bundle-run-check": {"verdict": "accepted"},
         "bundle-run-view": {"status": "accepted"},

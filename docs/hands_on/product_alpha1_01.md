@@ -36,6 +36,16 @@ Current hardening scope is narrower than final public product scope:
 
 Final textual `.mir` grammar, final Rust library ABI, and final viewer/devtools bundle ABI remain non-final.
 
+Current shipped surface is narrower than the full documented alpha CLI family:
+
+- built-binary `check`
+- built-binary `build-native-bundle`
+- built-binary `demo`
+- bundle replay `run.sh check`
+- bundle replay `run.sh view`
+
+The current alpha replay bundle surface is the bundled CLI, bundled versioned package root, `manifest.json`, `launch.json`, `run.sh`, `README.md`, and observer-safe supporting artifacts `devtools/bundle.json`, `devtools/index.html`, and `reports/verification-report.json`. Other bundled reports and the local admin/debug `session-store/` remain evidence, not compatibility promises.
+
 ```bash
 cargo build -q -p mirrorea-cli --bin mirrorea-alpha
 alpha_bin="$(pwd)/target/debug/mirrorea-alpha"
@@ -156,7 +166,7 @@ installed_dir=$(mktemp -d /tmp/mirrorea-alpha1-installed-binary-XXXXXX)
 python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out "$installed_dir"
 ```
 
-This helper builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check`, `build-native-bundle`, and `demo`, then re-runs `run.sh check` and `run.sh view` from the generated bundle. It is the current public-ish adoption probe for `installed binary + native host launch bundle`; it does not freeze final CLI/API/ABI or final packaging.
+This helper builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check`, `build-native-bundle`, and `demo`, then re-runs `run.sh check` and `run.sh view` from the generated bundle. It is the current public-ish adoption probe for `installed binary + native host launch bundle`; it reports both the current compatibility scope and the narrower `shipped_surface` unit without freezing final CLI/API/ABI or final packaging.
 
 ## Release Check
 

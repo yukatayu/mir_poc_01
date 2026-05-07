@@ -10,6 +10,7 @@ It is still alpha. It is not the final public product, final grammar, final ABI,
 - The developer-facing entrypoint is the Rust `mirrorea-alpha` CLI.
 - The current first public-ish adoption candidate is the built `mirrorea-alpha` binary together with the generated native host launch bundle.
 - The current hardening target is limited to versioned `package.mir.json`, the documented `mirrorea-alpha` command family, and the native host launch bundle replay surface.
+- The current shipped surface is narrower than the full alpha CLI family: built-binary `check` / `build-native-bundle` / `demo`, bundle replay `run.sh check` / `run.sh view`, plus the bundled CLI, versioned package root, `manifest.json`, `launch.json`, `run.sh`, `README.md`, and observer-safe supporting artifacts.
 - The demo package lives under `samples/product-alpha1/demo/`, separate from `samples/alpha/` and `samples/practical-alpha1/`.
 - Auth, membership, capability, witness, transport, observability, and native policy remain separate lanes.
 - Native output means a host launch bundle containing the compiled CLI, package files, devtools assets, reports, manifest, launch metadata, and provenance metadata.
@@ -33,7 +34,7 @@ package/source front-door
   -> reproducible demo / release check
 ```
 
-`mirrorea-alpha demo` now runs this workflow and writes inspectable reports under its output directory. Full release-candidate readiness requires the Docker Compose TCP leg; `--skip-docker` is only a partial local probe. `scripts/product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script checks, and JSON payload semantics for clean-clone validation. `scripts/product_alpha1_installed_binary_check.py check-all` is the current installed-binary adoption probe: it builds `target/debug/mirrorea-alpha`, runs the built binary directly, and replays bundle `run.sh` checks without claiming final public CLI/API/ABI or final packaging.
+`mirrorea-alpha demo` now runs this workflow and writes inspectable reports under its output directory. Full release-candidate readiness requires the Docker Compose TCP leg; `--skip-docker` is only a partial local probe. `scripts/product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script checks, and JSON payload semantics for clean-clone validation. `scripts/product_alpha1_installed_binary_check.py check-all` is the current installed-binary adoption probe: it builds `target/debug/mirrorea-alpha`, runs the built binary directly, and replays bundle `run.sh` checks while exporting machine-readable `compatibility_scope` and `shipped_surface` boundaries without claiming final public CLI/API/ABI or final packaging.
 
 ## Evidence Boundaries
 
@@ -41,7 +42,7 @@ Standalone `mirrorea-alpha check` still reports package/schema acceptance and re
 
 The viewer remains a non-final static HTML/JSON viewer. It renders concrete observer-safe bundle records for the product demo panels and checks bounded forbidden raw witness/auth/capability keys, but it does not claim a complete redaction proof or final public viewer API.
 
-The installed-binary probe does not freeze final textual `.mir` grammar, final Rust library ABI, or final viewer/devtools bundle ABI. It narrows only the current alpha-stable front door that later public hardening work should reference.
+The installed-binary probe does not freeze final textual `.mir` grammar, final Rust library ABI, or final viewer/devtools bundle ABI. It narrows only the current alpha-stable front door that later public hardening work should reference, and it keeps other bundled reports plus admin/debug session-store artifacts outside the current shipped-surface promise.
 
 The Docker path is a controlled Docker Compose TCP fixture. It is not WAN or federation.
 

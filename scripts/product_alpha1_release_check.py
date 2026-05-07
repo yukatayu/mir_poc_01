@@ -271,6 +271,15 @@ def command_semantic_errors(command: PlannedCommand, result: CommandResult, incl
         expect(payload.get("host_launch_bundle_claimed") is True, "host launch bundle missing")
         expect(payload.get("package_native_execution_claimed") is False, "native package execution overclaimed")
         expect(payload.get("signature_is_safety_claimed") is False, "signature safety overclaimed")
+        expect(
+            payload.get("shipped_surface", {}).get("delivery_model")
+            == "installed_binary_plus_native_host_launch_bundle",
+            "native bundle shipped surface delivery model mismatch",
+        )
+        expect(
+            payload.get("shipped_surface", {}).get("supported_replay_commands") == ["check", "view"],
+            "native bundle shipped surface replay commands mismatch",
+        )
     elif command.name in {"native-run-check", "native-run-view"}:
         expect(payload.get("status") == "accepted" or payload.get("verdict") == "accepted", f"{command.name} not accepted")
     elif command.name == "demo":

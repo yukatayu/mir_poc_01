@@ -1713,6 +1713,7 @@ fn build_product_alpha1_native_bundle(
             2,
         )
     })?;
+    let shipped_surface = native_bundle_shipped_surface_payload(&package, &report_paths);
 
     Ok(json!({
         "surface_kind": "product_alpha1_native_bundle_report",
@@ -1742,6 +1743,7 @@ fn build_product_alpha1_native_bundle(
         "cli_demo_command_claimed": false,
         "copied_package_paths": package_bundle_summary.copied_relative_paths,
         "copied_package_native_policies_disabled": package_bundle_summary.all_native_policies_disabled,
+        "shipped_surface": shipped_surface,
         "report_paths": report_paths,
         "non_claims": native_bundle_non_claims(),
         "product_alpha1_ready": false,
@@ -3203,6 +3205,40 @@ fn native_bundle_report_paths(attach_report_paths: &[String]) -> Vec<String> {
     paths
 }
 
+fn native_bundle_shipped_surface_payload(
+    package: &ProductAlpha1Package,
+    report_paths: &[String],
+) -> Value {
+    let package_root_path = format!("packages/root/{}", sanitize_session_id(&package.package_id));
+    let package_entrypoint_path = format!("{package_root_path}/package.mir.json");
+    let evidence_only_reports = report_paths
+        .iter()
+        .filter(|path| path.as_str() != "reports/verification-report.json")
+        .cloned()
+        .collect::<Vec<_>>();
+    json!({
+        "surface_kind": "product_alpha1_alpha_replay_bundle_surface",
+        "delivery_model": "installed_binary_plus_native_host_launch_bundle",
+        "runtime_binary_path": "bin/mirrorea-alpha",
+        "package_root_path": package_root_path,
+        "package_entrypoint_path": package_entrypoint_path,
+        "manifest_path": "manifest.json",
+        "launch_metadata_path": "launch.json",
+        "run_script_path": "run.sh",
+        "bundle_readme_path": "README.md",
+        "supported_replay_commands": ["check", "view"],
+        "observer_safe_supporting_artifacts": [
+            "devtools/bundle.json",
+            "devtools/index.html",
+            "reports/verification-report.json"
+        ],
+        "evidence_only_reports": evidence_only_reports,
+        "final_textual_mir_grammar_frozen": false,
+        "final_rust_library_abi_frozen": false,
+        "final_viewer_bundle_api_frozen": false
+    })
+}
+
 fn native_bundle_manifest_payload(
     package: &ProductAlpha1Package,
     check_report: &ProductAlpha1CheckReport,
@@ -3213,6 +3249,7 @@ fn native_bundle_manifest_payload(
     bundle_id: &str,
     package_summary: &NativeBundlePackageSummary,
 ) -> Value {
+    let shipped_surface = native_bundle_shipped_surface_payload(package, report_paths);
     json!({
         "surface_kind": "product_alpha1_native_launch_bundle_manifest",
         "bundle_schema": "mirrorea-product-alpha1-native-launch-bundle-v0",
@@ -3270,6 +3307,7 @@ fn native_bundle_manifest_payload(
             "signature_is_safety_claimed": false,
             "semantic_safety_source": "checker/runtime validation evidence, not signature metadata"
         },
+        "shipped_surface": shipped_surface,
         "non_claims": native_bundle_non_claims(),
         "product_alpha1_ready": false,
         "final_public_api_frozen": false
@@ -3323,6 +3361,7 @@ fn native_bundle_verification_payload(
     report_paths: &[String],
     package_summary: &NativeBundlePackageSummary,
 ) -> Value {
+    let shipped_surface = native_bundle_shipped_surface_payload(package, report_paths);
     json!({
         "surface_kind": "product_alpha1_native_bundle_verification_report",
         "status": "accepted",
@@ -3344,6 +3383,7 @@ fn native_bundle_verification_payload(
         "bundle_admits_only_disabled_native_policies": package_summary.all_native_policies_disabled,
         "arbitrary_native_execution_negative_probe_included": false,
         "native_policy_admission_source": "checked copied package set and build-time disabled-policy rejection",
+        "shipped_surface": shipped_surface,
         "report_paths": report_paths,
         "non_claims": native_bundle_non_claims(),
         "product_alpha1_ready": false,
@@ -3410,7 +3450,7 @@ esac
 
 fn native_bundle_readme(package_id: &str, package_version: &str) -> String {
     format!(
-        "# Mirrorea Product Alpha-1 Native Host Launch Bundle\n\nPackage: `{package_id}` `{package_version}`.\n\nThis bundle contains the compiled Rust `mirrorea-alpha` CLI, the versioned product package files, observer-safe devtools viewer assets, validation reports, launch metadata, and provenance metadata.\n\nRun `./run.sh check` to validate the bundled package or `./run.sh view` to validate the bundled viewer. Inspect `devtools/index.html` locally for the static viewer and `devtools/bundle.json` for the observer-safe data bundle.\n\nNativeExecutionPolicy is `Disabled`. This is not direct Mir-to-machine-code, not arbitrary native package execution, not a signature-is-safety claim, and not the P-A1-31 CLI `demo` release walkthrough.\n"
+        "# Mirrorea Product Alpha-1 Native Host Launch Bundle\n\nPackage: `{package_id}` `{package_version}`.\n\nThis bundle contains the compiled Rust `mirrorea-alpha` CLI, the versioned product package files, observer-safe devtools viewer assets, validation reports, launch metadata, and provenance metadata.\n\nCurrent shipped surface for the alpha replay bundle is the bundled CLI, the versioned package root, `manifest.json`, `launch.json`, `run.sh`, `README.md`, and the observer-safe supporting artifacts `devtools/bundle.json`, `devtools/index.html`, and `reports/verification-report.json`. Other bundled reports remain replay evidence, not a final public ABI promise.\n\nRun `./run.sh check` to validate the bundled package or `./run.sh view` to validate the bundled viewer. Inspect `devtools/index.html` locally for the static viewer and `devtools/bundle.json` for the observer-safe data bundle.\n\nNativeExecutionPolicy is `Disabled`. This is not direct Mir-to-machine-code, not arbitrary native package execution, not a signature-is-safety claim, and not the P-A1-31 CLI `demo` release walkthrough.\n"
     )
 }
 

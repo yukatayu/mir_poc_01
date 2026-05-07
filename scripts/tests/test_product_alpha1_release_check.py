@@ -82,6 +82,10 @@ class ProductAlpha1ReleaseCheckTests(unittest.TestCase):
         self.assertFalse(payload["final_product_claimed"])
         self.assertIn("transport-docker", payload["passed_commands"])
         self.assertFalse(any(result["semantic_errors"] for result in payload["command_results"]))
+        build_bundle = next(
+            result for result in payload["command_results"] if result["name"] == "build-native-bundle"
+        )
+        self.assertEqual(build_bundle["semantic_errors"], [])
 
     def test_check_all_skip_docker_is_partial_non_release_probe(self) -> None:
         def fake_run(command, env=None):
@@ -229,6 +233,10 @@ def payload_for(name: str) -> dict:
             "host_launch_bundle_claimed": True,
             "package_native_execution_claimed": False,
             "signature_is_safety_claimed": False,
+            "shipped_surface": {
+                "delivery_model": "installed_binary_plus_native_host_launch_bundle",
+                "supported_replay_commands": ["check", "view"],
+            },
         },
         "native-run-check": {"verdict": "accepted"},
         "native-run-view": {"status": "accepted"},

@@ -411,6 +411,30 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
     assert_eq!(value["signature_is_safety_claimed"], false);
     assert_eq!(value["provenance_only"], true);
     assert_eq!(value["product_alpha1_ready"], false);
+    assert_eq!(
+        value["shipped_surface"]["delivery_model"],
+        "installed_binary_plus_native_host_launch_bundle"
+    );
+    assert_eq!(
+        value["shipped_surface"]["supported_replay_commands"],
+        serde_json::json!(["check", "view"])
+    );
+    assert_eq!(
+        value["shipped_surface"]["observer_safe_supporting_artifacts"],
+        serde_json::json!([
+            "devtools/bundle.json",
+            "devtools/index.html",
+            "reports/verification-report.json"
+        ])
+    );
+    assert_eq!(
+        value["shipped_surface"]["final_textual_mir_grammar_frozen"],
+        false
+    );
+    assert_eq!(
+        value["shipped_surface"]["final_rust_library_abi_frozen"],
+        false
+    );
 
     let expected_paths = [
         "bin/mirrorea-alpha",
@@ -494,6 +518,35 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
         manifest["launch"]["supported_script_commands"],
         serde_json::json!(["check", "view"])
     );
+    assert_eq!(
+        manifest["shipped_surface"]["delivery_model"],
+        "installed_binary_plus_native_host_launch_bundle"
+    );
+    assert_eq!(
+        manifest["shipped_surface"]["runtime_binary_path"],
+        "bin/mirrorea-alpha"
+    );
+    assert_eq!(
+        manifest["shipped_surface"]["manifest_path"],
+        "manifest.json"
+    );
+    assert_eq!(
+        manifest["shipped_surface"]["launch_metadata_path"],
+        "launch.json"
+    );
+    assert_eq!(manifest["shipped_surface"]["run_script_path"], "run.sh");
+    assert_eq!(
+        manifest["shipped_surface"]["bundle_readme_path"],
+        "README.md"
+    );
+    assert_eq!(
+        manifest["shipped_surface"]["supported_replay_commands"],
+        serde_json::json!(["check", "view"])
+    );
+    assert_eq!(
+        manifest["shipped_surface"]["final_viewer_bundle_api_frozen"],
+        false
+    );
     assert_eq!(out_dir.join("reports/run-script-demo.json").exists(), false);
     assert!(
         manifest["reports"]
@@ -514,6 +567,32 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
     assert_eq!(verification["cli_demo_command_claimed"], false);
     assert_eq!(verification["release_demo_command_deferred"], true);
     assert_eq!(verification["run_script_demo_path_included"], false);
+    assert_eq!(
+        verification["shipped_surface"]["delivery_model"],
+        "installed_binary_plus_native_host_launch_bundle"
+    );
+    assert_eq!(
+        verification["shipped_surface"]["supported_replay_commands"],
+        serde_json::json!(["check", "view"])
+    );
+    assert_eq!(
+        verification["shipped_surface"]["evidence_only_reports"],
+        serde_json::json!([
+            "reports/check.json",
+            "reports/run-local.json",
+            "reports/attach-auth-layer.json",
+            "reports/attach-custom-avatar-preview.json",
+            "reports/attach-debug-layer.json",
+            "reports/attach-placeholder-object.json",
+            "reports/attach-rate-limit-layer.json",
+            "reports/save.json",
+            "reports/quiescent-save.json",
+            "reports/transport-local.json",
+            "reports/export-devtools.json",
+            "reports/run-script-check.json",
+            "reports/run-script-view.json"
+        ])
+    );
     assert_eq!(
         verification["bundle_admits_only_disabled_native_policies"],
         true

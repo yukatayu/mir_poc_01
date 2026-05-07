@@ -195,6 +195,45 @@ Breaking changes inside the hardening target must not be silent:
 - documented CLI surface changes require synchronized docs and validation updates
 - bundle replay changes require synchronized bundle manifest / `run.sh` validation updates
 
+## current shipped surface
+
+Within the narrowed hardening target, the current user-facing shipped surface is
+the **alpha replay bundle** around the built `mirrorea-alpha` binary.
+
+Current built-binary adoption evidence hardens only this bounded command subset:
+
+- built-binary `check`
+- built-binary `build-native-bundle`
+- built-binary `demo`
+- bundle replay `run.sh check`
+- bundle replay `run.sh view`
+
+The current shipped bundle unit may therefore be treated as:
+
+- bundled CLI `bin/mirrorea-alpha`
+- versioned bundled package root headed by `package.mir.json`
+- `manifest.json`
+- `launch.json`
+- `run.sh`
+- `README.md`
+- observer-safe supporting artifacts:
+  `devtools/bundle.json`, `devtools/index.html`, `reports/verification-report.json`
+
+The following remain evidence-only or explicitly outside the current
+compatibility promise:
+
+- other bundled report JSON files
+- local admin/debug session-store artifacts
+- demo output directory layout beyond the shipped-bundle unit above
+- operational suite roots and starter templates
+- final viewer/devtools bundle ABI
+
+This does not widen native replay:
+
+- current bundle replay remains `check` and `view` only
+- native `demo`, `session`, `transport`, or package-native execution are not part of the shipped surface
+- the documented alpha CLI family remains wider than the built-binary adoption probe, but that wider family is still alpha and not final public ABI
+
 ## checker requirements
 
 The checker must produce explicit accepted evidence, not only absence of negative diagnostics.

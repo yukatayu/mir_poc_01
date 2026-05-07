@@ -148,6 +148,15 @@ def command_semantic_errors(command: PlannedCommand, result: CommandResult, incl
         expect(payload.get("host_launch_bundle_claimed") is True, "host launch bundle missing")
         expect(payload.get("package_native_execution_claimed") is False, "native package execution overclaimed")
         expect(payload.get("signature_is_safety_claimed") is False, "signature safety overclaimed")
+        expect(
+            payload.get("shipped_surface", {}).get("delivery_model")
+            == "installed_binary_plus_native_host_launch_bundle",
+            "native bundle shipped surface delivery model mismatch",
+        )
+        expect(
+            payload.get("shipped_surface", {}).get("supported_replay_commands") == ["check", "view"],
+            "native bundle shipped surface replay commands mismatch",
+        )
     elif command.name in {"bundle-run-check", "bundle-run-view"}:
         expect(payload.get("status") == "accepted" or payload.get("verdict") == "accepted", f"{command.name} not accepted")
     elif command.name == "binary-demo":
@@ -181,6 +190,36 @@ def installed_binary_non_claims(include_docker: bool) -> list[str]:
     if not include_docker:
         claims.append("Docker Compose TCP transport skipped; this is a local probe, not release-candidate evidence")
     return claims
+
+
+def shipped_surface() -> dict[str, Any]:
+    return {
+        "delivery_model": "installed_binary_plus_native_host_launch_bundle",
+        "supported_replay_commands": ["check", "view"],
+        "observer_safe_supporting_artifacts": [
+            "devtools/bundle.json",
+            "devtools/index.html",
+            "reports/verification-report.json",
+        ],
+        "evidence_only_reports": [
+            "reports/check.json",
+            "reports/run-local.json",
+            "reports/attach-auth-layer.json",
+            "reports/attach-custom-avatar-preview.json",
+            "reports/attach-debug-layer.json",
+            "reports/attach-placeholder-object.json",
+            "reports/attach-rate-limit-layer.json",
+            "reports/save.json",
+            "reports/quiescent-save.json",
+            "reports/transport-local.json",
+            "reports/export-devtools.json",
+            "reports/run-script-check.json",
+            "reports/run-script-view.json",
+        ],
+        "final_textual_mir_grammar_frozen": False,
+        "final_rust_library_abi_frozen": False,
+        "final_viewer_bundle_api_frozen": False,
+    }
 
 
 def compatibility_scope() -> dict[str, Any]:
@@ -218,6 +257,7 @@ def check_all(
             "public_packaging_candidate": "installed_binary_plus_native_host_launch_bundle",
             "final_public_api_frozen": False,
             "compatibility_scope": compatibility_scope(),
+            "shipped_surface": shipped_surface(),
             "non_claims": installed_binary_non_claims(include_docker),
         }
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -280,6 +320,7 @@ def check_all(
         "public_packaging_candidate": "installed_binary_plus_native_host_launch_bundle",
         "final_public_api_frozen": False,
         "compatibility_scope": compatibility_scope(),
+        "shipped_surface": shipped_surface(),
         "non_claims": installed_binary_non_claims(include_docker),
     }
 

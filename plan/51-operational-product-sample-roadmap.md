@@ -119,6 +119,13 @@
 - `scripts/product_alpha1_installed_binary_check.py` の JSON output に machine-readable compatibility scope を追加する
 - `README.md`、`Documentation.md`、product alpha guide / summary、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` を `shipped-surface hardening` 次段へ進める
 
+## P-OPS-19 current scope
+
+- current built-binary + host-bundle unit のうち、どこまでを current shipped surface として扱うかを narrow に固定する
+- `crates/mirrorea-cli` の bundle stdout / `manifest.json` / `verification-report.json` と `scripts/product_alpha1_installed_binary_check.py` に machine-readable `shipped_surface` block を追加する
+- bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md` / observer-safe supporting artifacts を current shipped surface とし、other bundled reports と admin/debug local artifacts を evidence-only として明記する
+- docs / roadmap / dashboard を `broader public distribution narrowing` 次段へ進める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -132,10 +139,10 @@
 
 ## next packages
 
-1. shipped-surface hardening
-   keep the current hardening target on versioned `package.mir.json`, documented `mirrorea-alpha`, and native host launch bundle replay, then decide how much of that built-binary + host-bundle unit should be treated as the user-facing shipped surface
+1. broader public distribution narrowing
+   keep the current hardening target and the narrowed alpha replay bundle surface fixed, then decide whether any broader installed distribution shape should exist beyond the current built-binary + host-bundle unit
 2. broader room-chat revisit
-   reopen only after the current public-side shipped-surface hardening queue is narrowed; keep current bounded `ChatText` lane unless a new prompt explicitly widens it
+   reopen only after the current public-side distribution queue is narrowed; keep current bounded `ChatText` lane unless a new prompt explicitly widens it
 
 ## current recommendation
 
@@ -154,7 +161,8 @@
 - `P-OPS-15` で separate `TwoShardGradientObservation` runnable root を actualize し、existing hard-boundary root と planned-only profile inventory を保ったまま bounded observer-only runtime evidence を切り分け済み
 - `P-OPS-17` で `scripts/product_alpha1_installed_binary_check.py`、built `target/debug/mirrorea-alpha` probe、bundle `run.sh check/view` probe、product alpha guide / summary sync を追加し、current first public-ish adoption candidate を installed binary + native host launch bundle として actualize 済み
 - `P-OPS-18` で `specs/25` と installed-binary helper output を使い、current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に絞り込んだ
-- 次は shipped-surface hardening とし、この narrowed front door を前提に built-binary + host-bundle unit のどこまでを user-facing shipped surface として harden するかを整理する
+- `P-OPS-19` で helper / bundle stdout / manifest / verification report に machine-readable `shipped_surface` block を追加し、current alpha replay bundle surface と evidence-only reports/local artifacts を分けた
+- 次は broader public distribution narrowing とし、この narrowed front door と shipped surface を前提に、それ以上の installed distribution shape を本当に開くべきかだけを整理する
 
 ## open questions
 
@@ -162,4 +170,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader room-chat revisit を shipped-surface hardening より先に reopen する必要が本当にあるか
+- broader room-chat revisit を broader public distribution narrowing より先に reopen する必要が本当にあるか
