@@ -222,6 +222,17 @@ def shipped_surface() -> dict[str, Any]:
     }
 
 
+def distribution_scope() -> dict[str, Any]:
+    return {
+        "current_delivery_unit": "developer_built_binary_plus_generated_host_launch_bundle",
+        "archive_distribution_defined": False,
+        "installer_distribution_defined": False,
+        "system_package_distribution_defined": False,
+        "auto_update_channel_defined": False,
+        "hosted_service_distribution_defined": False,
+    }
+
+
 def compatibility_scope() -> dict[str, Any]:
     return {
         "package_format": "versioned_package_mir_json",
@@ -258,6 +269,7 @@ def check_all(
             "final_public_api_frozen": False,
             "compatibility_scope": compatibility_scope(),
             "shipped_surface": shipped_surface(),
+            "distribution_scope": distribution_scope(),
             "non_claims": installed_binary_non_claims(include_docker),
         }
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -321,6 +333,7 @@ def check_all(
         "final_public_api_frozen": False,
         "compatibility_scope": compatibility_scope(),
         "shipped_surface": shipped_surface(),
+        "distribution_scope": distribution_scope(),
         "non_claims": installed_binary_non_claims(include_docker),
     }
 

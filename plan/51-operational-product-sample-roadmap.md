@@ -139,10 +139,10 @@
 
 ## next packages
 
-1. broader public distribution narrowing
-   keep the current hardening target and the narrowed alpha replay bundle surface fixed, then decide whether any broader installed distribution shape should exist beyond the current built-binary + host-bundle unit
-2. broader room-chat revisit
-   reopen only after the current public-side distribution queue is narrowed; keep current bounded `ChatText` lane unless a new prompt explicitly widens it
+1. broader room-chat revisit
+   product-side distribution queue is now narrowed; decide whether current bounded `ChatText` lane should stay as-is or whether any broader multi-message / transport-coupled widening is justified as a separate package
+2. portal/shard starter revisit
+   reopen only after room-chat queue shaping if active-root-first authoring still appears too narrow
 
 ## current recommendation
 
@@ -162,7 +162,8 @@
 - `P-OPS-17` で `scripts/product_alpha1_installed_binary_check.py`、built `target/debug/mirrorea-alpha` probe、bundle `run.sh check/view` probe、product alpha guide / summary sync を追加し、current first public-ish adoption candidate を installed binary + native host launch bundle として actualize 済み
 - `P-OPS-18` で `specs/25` と installed-binary helper output を使い、current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に絞り込んだ
 - `P-OPS-19` で helper / bundle stdout / manifest / verification report に machine-readable `shipped_surface` block を追加し、current alpha replay bundle surface と evidence-only reports/local artifacts を分けた
-- 次は broader public distribution narrowing とし、この narrowed front door と shipped surface を前提に、それ以上の installed distribution shape を本当に開くべきかだけを整理する
+- `P-OPS-20` で helper に machine-readable `distribution_scope` を追加し、broader public distribution は current line では未定義、すなわち developer-built binary + generated host launch bundle 以外の archive / installer / system-package / auto-update / hosted-service shape をまだ持たないと固定した
+- 次は broader room-chat revisit とし、product-side distribution queue は narrowed state のまま維持する
 
 ## open questions
 
@@ -170,4 +171,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader room-chat revisit を broader public distribution narrowing より先に reopen する必要が本当にあるか
+- broader room-chat revisit を portal/shard starter revisit より先に reopen する必要が本当にあるか

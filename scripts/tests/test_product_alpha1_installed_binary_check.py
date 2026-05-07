@@ -89,6 +89,13 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
                 "reports/verification-report.json",
             ],
         )
+        self.assertEqual(
+            payload["distribution_scope"]["current_delivery_unit"],
+            "developer_built_binary_plus_generated_host_launch_bundle",
+        )
+        self.assertFalse(payload["distribution_scope"]["archive_distribution_defined"])
+        self.assertFalse(payload["distribution_scope"]["installer_distribution_defined"])
+        self.assertFalse(payload["distribution_scope"]["hosted_service_distribution_defined"])
         self.assertIn(
             "reports/run-script-check.json",
             payload["shipped_surface"]["evidence_only_reports"],
@@ -169,6 +176,7 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
                 payload["shipped_surface"]["delivery_model"],
                 "installed_binary_plus_native_host_launch_bundle",
             )
+            self.assertFalse(payload["distribution_scope"]["archive_distribution_defined"])
         finally:
             marker.unlink(missing_ok=True)
             out_dir.rmdir()

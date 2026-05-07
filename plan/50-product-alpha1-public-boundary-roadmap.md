@@ -30,7 +30,7 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - final public packaging / installed distribution hardening
 - hosted-service adoption target
 
-Current recommendation after `P-OPS-19`:
+Current recommendation after `P-OPS-20`:
 
 - the current first public-ish adoption candidate remains:
   installed binary + native host launch bundle over the current controlled local/Docker host model
@@ -40,7 +40,9 @@ Current recommendation after `P-OPS-19`:
   built-binary `check` / `build-native-bundle` / `demo`,
   bundle `run.sh check` / `run.sh view`,
   and the bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md` plus observer-safe supporting artifacts
-- the next promoted final-public-side package should therefore be **broader public distribution narrowing**
+- broader public distribution is now also narrowed:
+  no archive / installer / system-package / auto-update / hosted-service shape is defined beyond the current developer-built binary + generated host launch bundle
+- the current product-side distribution queue is therefore narrowed, and any broader installed/public distribution shape is a later user/final decision rather than the next self-driven package in this roadmap
 - WAN / federation and distributed durable save/load remain later gates
 
 Operational follow-on note:
@@ -438,6 +440,48 @@ Non-claim:
 - no native replay beyond `check` / `view`
 - no hosted service / WAN / distributed durable save/load
 
+### `P-OPS-20` — broader public distribution narrowing
+
+Status:
+
+- closed by `P-OPS-20`
+- broader public distribution stance narrowed
+- still alpha, not final public packaging or hosted product
+
+Target:
+
+- decide whether the current built-binary + generated-host-bundle unit widens into any broader installed/public distribution shape
+- keep the already narrowed front door and shipped surface fixed while making the broader distribution stance explicit
+- avoid silently reopening archive / installer / hosted-service claims
+
+Delivered:
+
+- `scripts/product_alpha1_installed_binary_check.py` now reports machine-readable `distribution_scope`.
+- Current distribution scope is:
+  developer-built `mirrorea-alpha` binary plus locally generated native host launch bundle only.
+- Current product alpha-1 still does not define:
+  release archive format,
+  installer format,
+  system package format,
+  auto-update channel,
+  hosted-service delivery unit.
+- `specs/25`, product guides, `README.md`, `Documentation.md`, `samples/product-alpha1/README.md`, and dashboard memory now synchronize that narrower reading.
+
+Validation:
+
+- `python3 -m unittest scripts.tests.test_product_alpha1_installed_binary_check`
+- installed-binary helper rerun
+- docs / hierarchy / formatting checks
+
+Non-claim:
+
+- no final public packaging / installer format
+- no hosted-service product shape
+- no final textual `.mir` grammar
+- no final Rust library ABI
+- no final viewer/devtools bundle ABI
+- no WAN / federation / distributed durable save/load
+
 ## desired product sample root
 
 Preferred layout:
@@ -522,8 +566,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- broader public distribution narrowing
-- broader public distribution narrowing must keep the current shipped surface on installed binary + native host launch bundle rather than silently reopening hosted service or arbitrary native execution
+- no further self-driven product-side distribution widening is promoted in this roadmap after `P-OPS-20`
+- current recommendation is to keep the delivery unit on developer-built binary + generated host launch bundle and leave broader archive / installer / hosted-service questions to later user/final decision work
 
 ### research-discovery items
 
@@ -544,9 +588,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- broader public distribution narrowing
-  - keep the hardening target on versioned `package.mir.json`, documented `mirrorea-alpha`, and native host launch bundle replay
-  - keep the current shipped surface on the alpha replay bundle unit already narrowed by `P-OPS-19`
-  - decide whether any broader installed distribution shape should exist beyond the current built-binary + host-bundle unit without reopening hosted service / WAN / distributed durability
+- broader room-chat revisit
+  - product-side recommendation is already narrowed: keep versioned `package.mir.json`, documented `mirrorea-alpha`, native host launch bundle replay, current shipped surface, and current delivery unit fixed
+  - any broader installed/public distribution beyond the current developer-built binary + generated host-bundle unit is now a later user/final decision rather than an active self-driven package in this roadmap
 
 Queue authority remains `progress.md` / `tasks.md`.

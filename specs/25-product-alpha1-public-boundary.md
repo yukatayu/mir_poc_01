@@ -234,6 +234,27 @@ This does not widen native replay:
 - native `demo`, `session`, `transport`, or package-native execution are not part of the shipped surface
 - the documented alpha CLI family remains wider than the built-binary adoption probe, but that wider family is still alpha and not final public ABI
 
+## current broader distribution stance
+
+Current product alpha-1 does **not** define any broader installed distribution
+shape beyond the current developer-built binary plus generated host launch bundle.
+
+Therefore current product alpha-1 does not define:
+
+- release archive format
+- installer format
+- system package format
+- auto-update channel
+- hosted-service delivery unit
+
+Current broader distribution stance is:
+
+- developer builds `mirrorea-alpha` locally
+- developer generates a native host launch bundle locally
+- that built binary plus generated bundle is the only current delivery unit
+
+This is a queue-narrowing decision, not final-public packaging completion.
+
 ## checker requirements
 
 The checker must produce explicit accepted evidence, not only absence of negative diagnostics.
@@ -511,3 +532,7 @@ The current post-`P-A1-31` reading is:
 The current post-`P-OPS-18` reading may additionally say:
 
 > Product alpha-1 currently hardens versioned `package.mir.json`, the documented `mirrorea-alpha` command family, and the native host launch bundle replay surface as its alpha-stable front door; final textual `.mir` grammar, final Rust library ABI, final viewer/devtools bundle ABI, WAN, and distributed durable save/load remain non-goals.
+
+The current post-`P-OPS-20` reading may additionally say:
+
+> Product alpha-1 currently defines no broader installed distribution beyond a developer-built `mirrorea-alpha` binary plus a locally generated native host launch bundle; archive, installer, system-package, auto-update, and hosted-service shapes remain undefined.

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 10:09 JST
+最終更新: 2026-05-07 10:22 JST
 
 ## この文書について
 
@@ -72,6 +72,8 @@
   `specs/25-product-alpha1-public-boundary.md`、`scripts/product_alpha1_installed_binary_check.py`、`README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/research_abstract/product_alpha1_01.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に絞り込みました。これは alpha-stable front-door scoping であり、final textual grammar / Rust library ABI / viewer bundle ABI freeze ではありません。
 - `P-OPS-19` により shipped-surface hardening は actualize 済みです:
   `crates/mirrorea-cli`、`scripts/product_alpha1_installed_binary_check.py`、`scripts/product_alpha1_release_check.py`、`specs/25-product-alpha1-public-boundary.md`、product alpha guide / summary、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、current alpha replay bundle surface を machine-readable `shipped_surface` block として actualize し、bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md` / observer-safe supporting artifacts と evidence-only reports / local admin-debug artifacts を分けました。これは final public packaging / installer ABI ではありません。
+- `P-OPS-20` により broader public distribution narrowing は actualize 済みです:
+  `scripts/product_alpha1_installed_binary_check.py`、`specs/25-product-alpha1-public-boundary.md`、product alpha guide / summary、`README.md`、`Documentation.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `distribution_scope` と corresponding wording を追加し、current delivery unit を developer-built `mirrorea-alpha` binary + locally generated native host launch bundle に限定しました。archive / installer / system-package / auto-update / hosted-service shape は current line では未定義です。これは final public packaging / hosted product completion ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -81,15 +83,15 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | broader public distribution narrowing | `Macro 8+`, `S0/S1` | current narrowed front door と alpha replay bundle surface を保ったまま、それより広い installed distribution shape を本当に開くべきかを整理する | built-binary + host-bundle current surface を越える distribution widening の必要性が 1 つの prompt に圧縮される | small |
-| 2 | broader room-chat revisit | `Macro 8+`, `S1` | current bounded `ChatText` lane を維持するのか、multi-message / transport-coupled widening を separate package として開くのかを再評価する | room-chat widening が current bounded lane 維持 / broadened lane reopen のどちらかに圧縮され、portal/shard line と混線しない | small |
+| 1 | broader room-chat revisit | `Macro 8+`, `S1` | current bounded `ChatText` lane を維持するのか、multi-message / transport-coupled widening を separate package として開くのかを再評価する | room-chat widening が current bounded lane 維持 / broadened lane reopen のどちらかに圧縮され、portal/shard line と混線しない | small |
+| 2 | portal/shard starter revisit | `Macro 8+`, `S1/S2` | active-root-first portal/shard authoring boundary を維持するのか、starter duplicate reopen が本当に要るのかを再評価する | room-chat queue shaping 後も starter gap が残るかどうかが 1 つの prompt に圧縮される | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  broader public distribution narrowing
+  broader room-chat revisit
 - recommendation reason:
-  `P-OPS-19` で current shipped surface は alpha replay bundle unit に narrowed された。次はそれ以上の installed distribution shape を本当に開く必要があるかだけを整理した方が、room-chat widening や portal/shard line と混線しにくい
+  `P-OPS-20` で product-side distribution queue は narrowed され、current delivery unit も developer-built binary + generated host bundle only に固定された。次は bounded `ChatText` lane を維持するかどうかを room-chat queue shaping として切り出した方が、portal/shard line と混線しにくい
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -107,13 +109,13 @@
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-gradient widening order | `specs/27` と future suite line に影響 | broader public distribution narrowing / broader room-chat revisit / portal-shard starter revisit | current recommendation は `P-OPS-19` で shipped-surface hardening を閉じたので、broader public distribution narrowing を先に promoted line にし、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | broader room-chat revisit / portal-shard starter revisit / later user-final distribution decision | current recommendation は `P-OPS-20` で distribution queue を閉じたので、broader room-chat revisit を先に promoted line にし、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
 
 ## user decision items
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / installed binary / hosted service / other | product alpha-1 の defaults は `specs/25` で固定済み。current recommendation は installed binary + native host launch bundle probe を current candidate として維持し、hosted service は later に残す |
+| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / installed binary / hosted service / other | product alpha-1 の defaults は `specs/25` で固定済み。current recommendation は developer-built binary + generated native host launch bundle only を current delivery unit として維持し、archive / installer / hosted service は later に残す |
 | final shared-space operational catalog breadth | product/public scope | product alpha narrow showcase / broader final product line | product alpha-1 では narrow showcase を採る。broader final catalog は product alpha release candidate 後の user/final decision として残す |
 | final public grammar / ABI | final public product line | alpha `package.mir.json` を進化させる / textual grammar を固定する | product alpha-1 では固定しない。alpha package format は migration可能と明記する |
 | hosted service / production WAN | final public product line | local/Docker alpha / hosted service / WAN federation | product alpha-1 では local/Docker に限定する |

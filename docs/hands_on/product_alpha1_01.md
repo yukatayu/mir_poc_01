@@ -46,6 +46,15 @@ Current shipped surface is narrower than the full documented alpha CLI family:
 
 The current alpha replay bundle surface is the bundled CLI, bundled versioned package root, `manifest.json`, `launch.json`, `run.sh`, `README.md`, and observer-safe supporting artifacts `devtools/bundle.json`, `devtools/index.html`, and `reports/verification-report.json`. Other bundled reports and the local admin/debug `session-store/` remain evidence, not compatibility promises.
 
+Current broader public distribution stance is narrower again:
+
+- current delivery unit is only developer-built `mirrorea-alpha` plus a locally generated native host launch bundle
+- no release archive format is defined
+- no installer format is defined
+- no system package format is defined
+- no auto-update channel is defined
+- no hosted-service delivery unit is defined
+
 ```bash
 cargo build -q -p mirrorea-cli --bin mirrorea-alpha
 alpha_bin="$(pwd)/target/debug/mirrorea-alpha"
@@ -167,6 +176,8 @@ python3 scripts/product_alpha1_installed_binary_check.py --format json check-all
 ```
 
 This helper builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check`, `build-native-bundle`, and `demo`, then re-runs `run.sh check` and `run.sh view` from the generated bundle. It is the current public-ish adoption probe for `installed binary + native host launch bundle`; it reports both the current compatibility scope and the narrower `shipped_surface` unit without freezing final CLI/API/ABI or final packaging.
+
+It also reports machine-readable `distribution_scope` showing that broader archive / installer / system-package / auto-update / hosted-service shapes remain undefined in the current alpha line.
 
 ## Release Check
 
