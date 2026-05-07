@@ -42,8 +42,8 @@
    later room-chat reopening
 12. completed queue-shaping package
    broader Sugoroku reopening
-13. next queue-shaping package
-   later user-final distribution decision
+13. completed user-gate scoping package
+   later user-final distribution decision scoping
 14. much later
    continuous infinite federation / WAN line
 
@@ -114,11 +114,17 @@
 - current next promoted comparison を `later_user_final_distribution_decision` に進める
 - shard line の immediate reopen は引き続き推奨しない
 
+## P-OPS-26 current scope
+
+- helper-reported `user_final_decision_scope` を追加し、later user-final distribution decision が user-spec-required gate であることを machine-readable に固定する
+- current delivery unit と current bounded product alpha-1 narrow showcase を前提に、portal/shard line の immediate self-driven reopen が無いことを roadmap wording に同期する
+- shard line の immediate reopen は引き続き推奨しない
+
 ## next reopen point
 
-- `P-OPS-25` closeout 後の current recommendation は `later user-final distribution decision`
+- `P-OPS-26` closeout 後の current recommendation は `later user-final distribution decision` だが、これは active self-driven package ではなく user-spec-required gate である
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、broader Sugoroku reopening も non-promoted queue に戻したので、次は later user-final distribution decision を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、broader Sugoroku reopening も non-promoted queue に戻し、さらに `user_final_decision_scope` で current catalog scope / delivery unit / user-spec-required gate を固定したので、次の actual reopen は user input の後にだけ再評価すること
 
 ## avoid
 

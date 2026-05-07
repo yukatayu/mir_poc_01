@@ -157,6 +157,17 @@ samples/product-alpha1/operational/
 - suite helper `check-all` may export machine-readable `widening_queue_scope`
 - current queue state keeps room-chat reopening, portal/shard starter reopening, and broader Sugoroku reopening non-promoted
 - current queue state keeps later user-final distribution decision as the next promoted comparison
+- current queue state may mark that next promoted comparison as `user-spec-required`
+
+## helper user-final decision boundary
+
+`L2`:
+
+- suite helper `check-all` may export machine-readable `user_final_decision_scope`
+- current delivery unit remains developer-built `mirrorea-alpha` binary plus generated host launch bundle
+- current catalog scope remains bounded product alpha-1 narrow showcase
+- broader final shared-space catalog breadth remains undefined in the current line
+- later user-final distribution decision is a user-spec-required gate, not an active self-driven runtime-widening package
 
 ## attach / transport / devtools / save-load
 

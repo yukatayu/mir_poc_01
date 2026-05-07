@@ -16,7 +16,8 @@
 - `gradient-observation.profile.json` は paired non-executable profile として保持した
 - validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定し、helper-reported `portal_shard_starter_scope` で current boundary を machine-readable にした
 - current `sugoroku-world` carrier を helper-reported `sugoroku_scope` で machine-readable に固定し、interactive turn choice / broader negative rows / networked multi-participant control は current line では未定義のままとした
-- helper-reported `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は non-promoted、`later_user_final_distribution_decision` が next promoted comparison であると machine-readable にした
+- helper-reported `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は non-promoted、`later_user_final_distribution_decision` が next promoted comparison であり、その comparison は `next_promoted_reopen_requires_user_decision = true` を伴うと machine-readable にした
+- helper-reported `user_final_decision_scope` を追加し、current delivery unit は developer-built binary + generated host launch bundle、current catalog scope は bounded product alpha-1 narrow showcase、broader final distribution / final shared-space catalog breadth は user-spec-required gate であると machine-readable にした
 
 ## What Is Runnable Now
 
@@ -29,7 +30,7 @@
 - `two-shard-hard-boundary` の bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject runtime evidence と observer-safe devtools export
 - `two-shard-gradient-observation` の bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
-- `scripts/operational_product_samples.py check-all` と helper-reported `room_chat_scope` / `portal_shard_starter_scope` / `sugoroku_scope` / `widening_queue_scope`
+- `scripts/operational_product_samples.py check-all` と helper-reported `room_chat_scope` / `portal_shard_starter_scope` / `sugoroku_scope` / `widening_queue_scope` / `user_final_decision_scope`
 
 ## What Is Still Declared Or Planned
 

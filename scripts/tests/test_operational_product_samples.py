@@ -405,6 +405,7 @@ class OperationalProductSamplesTests(unittest.TestCase):
         self.assertFalse(scope["room_chat_reopen_recommended"])
         self.assertFalse(scope["portal_shard_starter_reopen_recommended"])
         self.assertFalse(scope["sugoroku_reopen_recommended"])
+        self.assertTrue(scope["next_promoted_reopen_requires_user_decision"])
         self.assertEqual(
             scope["next_promoted_reopen_point"],
             "later_user_final_distribution_decision",
@@ -443,9 +444,89 @@ class OperationalProductSamplesTests(unittest.TestCase):
             ]
         )
         self.assertFalse(payload["widening_queue_scope"]["sugoroku_reopen_recommended"])
+        self.assertTrue(
+            payload["widening_queue_scope"][
+                "next_promoted_reopen_requires_user_decision"
+            ]
+        )
         self.assertEqual(
             payload["widening_queue_scope"]["next_promoted_reopen_point"],
             "later_user_final_distribution_decision",
+        )
+
+    def test_user_final_decision_scope_marks_remaining_gate_as_user_required(
+        self,
+    ) -> None:
+        scope = operational_product_samples.user_final_decision_scope()
+
+        self.assertEqual(
+            scope["current_delivery_unit"],
+            "developer_built_binary_plus_generated_host_launch_bundle",
+        )
+        self.assertFalse(scope["archive_distribution_defined"])
+        self.assertFalse(scope["installer_distribution_defined"])
+        self.assertFalse(scope["system_package_distribution_defined"])
+        self.assertFalse(scope["auto_update_channel_defined"])
+        self.assertFalse(scope["hosted_service_distribution_defined"])
+        self.assertEqual(
+            scope["current_catalog_scope"],
+            "bounded_product_alpha1_narrow_showcase",
+        )
+        self.assertFalse(scope["broader_final_shared_space_catalog_defined"])
+        self.assertTrue(scope["self_driven_operational_reopenings_exhausted"])
+        self.assertTrue(scope["next_reopen_requires_user_decision"])
+        self.assertEqual(
+            scope["next_user_decision_items"],
+            [
+                "U1_beyond_alpha_packaging_host_target_shipped_surface",
+                "final_shared_space_operational_catalog_breadth",
+            ],
+        )
+
+    def test_check_all_reports_user_final_decision_scope(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="validation:placeholder",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload=None,
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            with mock.patch.object(
+                operational_product_samples,
+                "release_check",
+                return_value={
+                    "status": "accepted",
+                    "failed_commands": [],
+                },
+            ):
+                payload = operational_product_samples.check_all(skip_docker=False)
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertEqual(
+            payload["user_final_decision_scope"]["current_delivery_unit"],
+            "developer_built_binary_plus_generated_host_launch_bundle",
+        )
+        self.assertFalse(
+            payload["user_final_decision_scope"][
+                "broader_final_shared_space_catalog_defined"
+            ]
+        )
+        self.assertTrue(
+            payload["user_final_decision_scope"][
+                "self_driven_operational_reopenings_exhausted"
+            ]
+        )
+        self.assertTrue(
+            payload["user_final_decision_scope"][
+                "next_reopen_requires_user_decision"
+            ]
         )
 
     def test_sugoroku_devtools_check_requires_event_dag_panel_and_runtime_evidence(

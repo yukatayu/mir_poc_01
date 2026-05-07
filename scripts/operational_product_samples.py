@@ -280,7 +280,24 @@ def widening_queue_scope() -> dict[str, Any]:
         "room_chat_reopen_recommended": False,
         "portal_shard_starter_reopen_recommended": False,
         "sugoroku_reopen_recommended": False,
+        "next_promoted_reopen_requires_user_decision": True,
         "next_promoted_reopen_point": "later_user_final_distribution_decision",
+    }
+
+
+def user_final_decision_scope() -> dict[str, Any]:
+    from product_alpha1_installed_binary_check import distribution_scope
+
+    return {
+        **distribution_scope(),
+        "current_catalog_scope": "bounded_product_alpha1_narrow_showcase",
+        "broader_final_shared_space_catalog_defined": False,
+        "self_driven_operational_reopenings_exhausted": True,
+        "next_reopen_requires_user_decision": True,
+        "next_user_decision_items": [
+            "U1_beyond_alpha_packaging_host_target_shipped_surface",
+            "final_shared_space_operational_catalog_breadth",
+        ],
     }
 
 
@@ -944,6 +961,7 @@ def check_all(skip_docker: bool) -> dict[str, Any]:
         "portal_shard_starter_scope": portal_shard_starter_scope(),
         "sugoroku_scope": sugoroku_scope(),
         "widening_queue_scope": widening_queue_scope(),
+        "user_final_decision_scope": user_final_decision_scope(),
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
     }
