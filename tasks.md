@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 09:03 JST
+最終更新: 2026-05-07 09:12 JST
 
 ## この文書について
 
@@ -64,6 +64,8 @@
   `docs/hands_on/operational_portal_shard_starter_boundary_01.md`、`docs/research_abstract/operational_portal_shard_starter_boundary_01.md`、`specs/26..27`、`plan/51..52`、authoring/dashboard sync により、validated starter catalog は intentional に `SugorokuWorld` で止め、portal/shard authoring は active executable roots を使い、`future/` inventory は non-executable のまま保つ current decision を reader-facing に固定できます。later `P-OPS-15` により active shard roots は `two-shard-hard-boundary/` と `two-shard-gradient-observation/` の 2 本になりましたが、portal/shard starter templates は引き続き主張しません。
 - `P-OPS-15` により gradient observation runtime first cut は actualize 済みです:
   `samples/product-alpha1/operational/two-shard-gradient-observation/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を `check` / `run-local` / observer-safe devtools export / helper `release-check` から再現できます。`future/gradient-observation.profile.json` は paired inventory のまま残し、continuous sync、write authority、WAN federation、general model-check completion は主張しません。
+- `P-OPS-16` により final-public gate scoping は actualize 済みです:
+  `plan/50-product-alpha1-public-boundary-roadmap.md`、`plan/51-operational-product-sample-roadmap.md`、`plan/52-portal-spatial-world-roadmap.md`、`progress.md`、`tasks.md`、`samples_progress.md` により、next promoted line を public packaging adoption target scoping に絞り、current actualized `mirrorea-alpha` CLI / native host launch bundle / controlled local-Docker host path を first public-ish candidate として扱い、final grammar / ABI / WAN / distributed durability を後段 gate に戻しました。runtime/sample behavior change は主張しません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -73,14 +75,15 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を docs / roadmap / dashboard 上で明示的に選ぶ | next promoted line と non-promoted lines が evidence-backed に同期され、subsequent reopen prompt が 1 本に絞られる | small |
+| 1 | public packaging adoption target scoping | `Macro 8+`, `S0/S1` | current actualized `mirrorea-alpha` CLI / native host launch bundle / local-Docker host path を前提に、first public-ish adoption surface を docs / roadmap / dashboard 上で明示的に絞る | next promoted line が installed-binary/native-bundle centered かどうかまで同期され、hosted service / WAN / durability が non-promoted lines に戻る | small |
+| 2 | final grammar / ABI scoping | `Macro 8+`, `S0/S1` | packaging/adoption target を踏まえて、どの front door を alpha schema から harden 対象にするかを切り分ける | textual grammar、`package.mir.json` evolution、CLI/API compatibility の stop line が 1 つの prompt に圧縮される | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  final-public gate scoping
+  public packaging adoption target scoping
 - recommendation reason:
-  `P-OPS-15` で separate runnable `two-shard-gradient-observation/` root、freshness-carrying route evidence、observer-only devtools export まで閉じたため、次は broader room-chat revisit / portal-shard authoring revisit / final public gate のうちどれを promoted line にするかを先に絞る方が手戻りが少ない
+  `P-OPS-16` で queue comparisonを詰めた結果、current actualized public-ish front door は `mirrorea-alpha` CLI、native host launch bundle、controlled local/Docker host に集中している。grammar / ABI hardening や hosted service / WAN / durability discussion は、この adoption target を先に narrow した方が手戻りが少ない
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -98,13 +101,13 @@
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-gradient widening order | `specs/27` と future suite line に影響 | broader room-chat revisit / portal-shard starter revisit / final-public gate scoping | current recommendation は `P-OPS-15` closeout 後に final-public gate scoping を先に閉じ、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | public packaging adoption target scoping / broader room-chat revisit / portal-shard starter revisit | current recommendation は `P-OPS-16` で packaging-adoption scoping を先に promoted line にし、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
 
 ## user decision items
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / installed binary / hosted service / other | product alpha-1 の defaults は `specs/25` で固定済み。final public surface はまだ固定しない |
+| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / installed binary / hosted service / other | product alpha-1 の defaults は `specs/25` で固定済み。current recommendation は installed binary + native host launch bundle を first public-ish scoping candidate とし、hosted service は later に残す |
 | final shared-space operational catalog breadth | product/public scope | product alpha narrow showcase / broader final product line | product alpha-1 では narrow showcase を採る。broader final catalog は product alpha release candidate 後の user/final decision として残す |
 | final public grammar / ABI | final public product line | alpha `package.mir.json` を進化させる / textual grammar を固定する | product alpha-1 では固定しない。alpha package format は migration可能と明記する |
 | hosted service / production WAN | final public product line | local/Docker alpha / hosted service / WAN federation | product alpha-1 では local/Docker に限定する |

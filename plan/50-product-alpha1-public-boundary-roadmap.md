@@ -28,6 +28,14 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - final viewer / telemetry service
 - production packaging / hosted-service adoption target
 
+Current recommendation after `P-OPS-16`:
+
+- the next promoted final-public-side package should be **public packaging adoption target scoping**
+- recommended first candidate is:
+  installed binary + native host launch bundle over the current controlled local/Docker host model
+- grammar / ABI hardening should follow that packaging target rather than precede it
+- WAN / federation and distributed durable save/load remain later gates
+
 Operational follow-on note:
 
 - `P-OPS-08` may inventory backend options around the operational suite, but it must not weaken the product alpha default that current actualized native output is the host launch bundle rather than direct Mir-to-machine-code.
@@ -385,8 +393,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- maintenance / dashboard freshness
-- post-alpha packaging policy only after a new explicit scope is opened
+- public packaging adoption target scoping
+- final grammar / ABI scoping only after the packaging target is narrowed
 
 ### research-discovery items
 
@@ -407,6 +415,9 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- post-P-A1-31 maintenance or a new user-selected final-public gate
+- public packaging adoption target scoping
+  - narrow the first public-ish adoption surface around the already-actualized `mirrorea-alpha` CLI and native host launch bundle
+  - keep hosted service / WAN / distributed durability out of the next package
+  - use that result to constrain later grammar / ABI discussion
 
 Queue authority remains `progress.md` / `tasks.md`.

@@ -25,7 +25,7 @@
 3. maintenance closeout
    dashboard freshness
 4. next queue-shaping package
-   final-public gate scoping
+   public packaging adoption target scoping
 5. much later
    continuous infinite federation / WAN line
 
@@ -80,9 +80,9 @@
 
 ## next reopen point
 
-- `P-OPS-15` closeout 後の current recommendation は `final-public gate scoping`
-- 比較対象は broader room-chat revisit、portal/shard starter revisit、final grammar / ABI / WAN / durability gate のどれを promoted line にするか
-- current recommendation は、portal/shard bounded runtime line を維持したまま final-public 側の queue shaping を先に閉じること
+- `P-OPS-16` closeout 後の current recommendation は `public packaging adoption target scoping`
+- shard line の immediate reopen は推奨しない。比較対象は broader room-chat revisit ではなく、current actualized `mirrorea-alpha` / native host launch bundle path を public-ish adoption target としてどう narrow するかである
+- current recommendation は、portal/shard bounded runtime line を維持したまま packaging-adoption scoping を先に閉じ、その結果を見てから grammar / ABI や later shard widening の順序を再評価すること
 
 ## avoid
 

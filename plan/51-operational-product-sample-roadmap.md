@@ -120,8 +120,10 @@
 
 ## next packages
 
-1. final-public gate scoping
-   choose whether the next promoted line after operational shard widening is broader room-chat, final-public grammar/ABI scoping, or another explicit user-selected gate
+1. public packaging adoption target scoping
+   narrow the next promoted final-public-side line around the already-actualized `mirrorea-alpha` CLI + native host launch bundle path, while keeping hosted service / WAN / distributed durability out of scope
+2. final grammar / ABI scoping
+   reopen only after the packaging/adoption target constrains which front door should be hardened
 
 ## current recommendation
 
@@ -138,7 +140,7 @@
 - `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
 - `P-OPS-14` で maintenance / dashboard freshness を閉じ、queue / validator / roadmap / dashboard wording を current state に同期済み
 - `P-OPS-15` で separate `TwoShardGradientObservation` runnable root を actualize し、existing hard-boundary root と planned-only profile inventory を保ったまま bounded observer-only runtime evidence を切り分け済み
-- 次は final-public gate scoping とし、broader room-chat revisit を reopen するか、final-public grammar / ABI / WAN / durability gate を先に詰めるかを整理する
+- 次は public packaging adoption target scoping とし、current actualized front door が `mirrorea-alpha` / native host launch bundle / controlled local-Docker host にあることを前提に、hosted service / WAN / durability を後段へ落としたまま first public-ish adoption surface を絞る
 
 ## open questions
 
@@ -146,4 +148,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader room-chat revisit と final-public gate scoping のどちらを next promoted line にするか
+- broader room-chat revisit を packaging-adoption scoping より先に reopen する必要が本当にあるか
