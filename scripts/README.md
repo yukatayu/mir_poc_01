@@ -74,6 +74,7 @@
   - `cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-bundle --format json`
   - `cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo --format json`
   - `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release`
+  - `python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out /tmp/mirrorea-alpha1-installed-binary-check`
   - this exercises `samples/product-alpha1/demo/package.mir.json` through `crates/mir-ast::product_alpha1`
   - `check` is implemented for schema acceptance / explicit residual obligations
   - `run-local`、`session`、`attach`、`save`、`load`、`quiescent-save` are implemented for a local file-backed product session carrier through `crates/mir-runtime::product_alpha1_session`
@@ -83,6 +84,7 @@
   - `demo` runs the release-candidate workflow and writes reports, concrete non-final devtools assets, an observer-safe session artifact, an admin/debug session store, and native-bundle artifacts under the chosen output directory
   - `demo --skip-docker` is a partial local probe and does not claim release-candidate readiness
   - `product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script probes, and JSON payload semantics for clean-clone validation
+  - `product_alpha1_installed_binary_check.py check-all` builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check` / `build-native-bundle` / `demo`, replays bundle `run.sh check` / `run.sh view`, and reports the current `installed_binary_plus_native_host_launch_bundle` adoption candidate without claiming final public CLI/API/ABI or final packaging
   - `operational_product_samples.py` is the orchestration helper for `samples/product-alpha1/operational/`; it keeps `mirrorea-alpha` as the canonical entrypoint and bundles `list`, `check-all`, `run-world-core`, `run-membership-chat`, `run-sugoroku`, `run-portal-worldlink`, `run-two-shard-hard-boundary`, `run-two-shard-gradient-observation`, `attach-layers`, `transport-local`, `transport-docker`, `export-devtools`, `build-native-bundle`, and `release-check`
   - `run-membership-chat`, `run-sugoroku`, `run-portal-worldlink`, `run-two-shard-hard-boundary`, `run-two-shard-gradient-observation`, `export-devtools`, `release-check`, and `check-all` now include bounded operational semantic checks for room-oriented host-I/O, Sugoroku runtime evidence, portal discrete handoff evidence, two-shard hard-boundary evidence, bounded observer-only gradient runtime evidence, and schema-backed projection inventory rather than only command exit status
   - external developer authoring is intentionally not hidden behind a generic scaffold command; use `docs/hands_on/operational_package_authoring_01.md` with direct `mirrorea-cli check/run-local/session/export-devtools/view` over the validated starter catalog under `samples/product-alpha1/operational/templates/`

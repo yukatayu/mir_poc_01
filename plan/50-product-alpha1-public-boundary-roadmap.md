@@ -18,6 +18,7 @@ Current repo already has:
 - bounded operational alpha-0.9 session-bound devtools workflow
 - bounded practical alpha-1 integrated workflow carrier
 - product alpha release-candidate workflow through `mirrorea-alpha demo`, local/Docker transport, concrete non-final viewer, local R0/R2 save/load, native host launch bundle, clean-clone hands-on docs, and `scripts/product_alpha1_release_check.py check-all`
+- installed-binary adoption probe through `scripts/product_alpha1_installed_binary_check.py check-all`, built `target/debug/mirrorea-alpha`, and bundle `run.sh check` / `run.sh view`
 
 Current repo still lacks final-public hardening beyond product alpha-1:
 
@@ -26,14 +27,15 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - distributed durable save/load R3/R4
 - arbitrary native package execution
 - final viewer / telemetry service
-- production packaging / hosted-service adoption target
+- final public packaging / installed distribution hardening
+- hosted-service adoption target
 
-Current recommendation after `P-OPS-16`:
+Current recommendation after `P-OPS-17`:
 
-- the next promoted final-public-side package should be **public packaging adoption target scoping**
-- recommended first candidate is:
+- the current first public-ish adoption candidate is already actualized as:
   installed binary + native host launch bundle over the current controlled local/Docker host model
-- grammar / ABI hardening should follow that packaging target rather than precede it
+- the next promoted final-public-side package should therefore be **final grammar / ABI scoping**
+- grammar / ABI hardening should use the installed-binary / bundle probe as its current concrete target rather than reopening packaging-target ambiguity
 - WAN / federation and distributed durable save/load remain later gates
 
 Operational follow-on note:
@@ -309,6 +311,44 @@ Non-claim:
 - still alpha, not final product
 - final grammar / ABI / WAN / distributed durable save/load remain non-goals
 
+### `P-OPS-17` — installed binary adoption probe first cut
+
+Status:
+
+- closed by `P-OPS-17`
+- installed-binary/public-ish adoption probe actualized
+- still alpha, not final public packaging
+
+Target:
+
+- build `target/debug/mirrorea-alpha`
+- run the built binary directly for the product alpha demo surface
+- validate generated native host launch bundle `run.sh` against the same built-binary line
+- sync hands-on / research / roadmap / snapshot docs to the installed-binary-first public-ish reading
+
+Delivered:
+
+- `scripts/product_alpha1_installed_binary_check.py check-all` builds `target/debug/mirrorea-alpha`, runs built-binary `check`, `build-native-bundle`, and `demo`, then replays bundle `run.sh check` and `run.sh view`.
+- `docs/hands_on/product_alpha1_01.md` now presents the built `mirrorea-alpha` binary as the main walkthrough path and keeps `cargo run -q -p mirrorea-cli -- ...` as repo-local convenience.
+- `docs/research_abstract/product_alpha1_01.md`, `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, and `samples_progress.md` now distinguish between:
+  installed-binary + host-bundle public-ish evidence
+  and still-unfixed final public grammar / ABI / packaging.
+
+Validation:
+
+- `python3 -m unittest scripts.tests.test_product_alpha1_installed_binary_check`
+- `python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out /tmp/mirrorea-alpha1-installed-binary-check`
+- docs / hierarchy / formatting checks
+
+Non-claim:
+
+- no final public CLI/API/ABI
+- no final textual `.mir` grammar
+- no final public packaging freeze
+- no hosted service
+- no WAN / federation
+- no arbitrary native package execution
+
 ## desired product sample root
 
 Preferred layout:
@@ -393,8 +433,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- public packaging adoption target scoping
-- final grammar / ABI scoping only after the packaging target is narrowed
+- final grammar / ABI scoping
+- shipped-surface hardening or user-facing distribution narrowing only after grammar / ABI scoping clarifies which front door is being stabilized
 
 ### research-discovery items
 
@@ -415,8 +455,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- public packaging adoption target scoping
-  - narrow the first public-ish adoption surface around the already-actualized `mirrorea-alpha` CLI and native host launch bundle
+- final grammar / ABI scoping
+  - use the already-actualized installed-binary + native host launch bundle probe as the concrete front door
   - keep hosted service / WAN / distributed durability out of the next package
   - use that result to constrain later grammar / ABI discussion
 

@@ -24,9 +24,11 @@
    bounded observer-only gradient runtime
 3. maintenance closeout
    dashboard freshness
-4. next queue-shaping package
-   public packaging adoption target scoping
-5. much later
+4. completed public-ish adoption probe
+   installed binary + native host launch bundle
+5. next queue-shaping package
+   final grammar / ABI scoping
+6. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -80,9 +82,9 @@
 
 ## next reopen point
 
-- `P-OPS-16` closeout 後の current recommendation は `public packaging adoption target scoping`
-- shard line の immediate reopen は推奨しない。比較対象は broader room-chat revisit ではなく、current actualized `mirrorea-alpha` / native host launch bundle path を public-ish adoption target としてどう narrow するかである
-- current recommendation は、portal/shard bounded runtime line を維持したまま packaging-adoption scoping を先に閉じ、その結果を見てから grammar / ABI や later shard widening の順序を再評価すること
+- `P-OPS-17` closeout 後の current recommendation は `final grammar / ABI scoping`
+- shard line の immediate reopen は推奨しない。current actualized installed-binary + native host launch bundle probe が入ったので、次 comparison は broader room-chat revisit ではなく、この concrete front door に対する grammar / ABI hardening の順序である
+- current recommendation は、portal/shard bounded runtime line を維持したまま grammar / ABI scoping を先に閉じ、その結果を見てから later shard widening の順序を再評価すること
 
 ## avoid
 

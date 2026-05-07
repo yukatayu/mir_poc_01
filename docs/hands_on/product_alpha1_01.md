@@ -24,13 +24,24 @@ cargo test -p mirrorea-core -- --nocapture
 cargo test -p mirrorea-cli -- --nocapture
 ```
 
+## Build The Installed Binary
+
+The current first public-ish adoption candidate is the built `mirrorea-alpha` binary together with the generated native host launch bundle. This is still alpha evidence, not final public packaging or final public ABI.
+
+```bash
+cargo build -q -p mirrorea-cli --bin mirrorea-alpha
+alpha_bin="$(pwd)/target/debug/mirrorea-alpha"
+```
+
+`cargo run -q -p mirrorea-cli -- ...` remains a repo-local convenience path, but the main walkthrough below uses the built binary directly.
+
 ## Run The Product Demo
 
 The shortest release-candidate command is:
 
 ```bash
 demo_dir=$(mktemp -d /tmp/mirrorea-alpha1-demo-XXXXXX)
-cargo run -q -p mirrorea-cli -- demo --out "$demo_dir" --format json
+"$alpha_bin" demo samples/product-alpha1/demo --out "$demo_dir" --format json
 ```
 
 The demo writes:
@@ -58,7 +69,7 @@ The demo writes:
 If Docker is unavailable, use the local-only probe and record the Docker path as an environment-gated non-claim. The JSON status is `partial`, and `product_alpha1_release_candidate_ready` remains `false`:
 
 ```bash
-cargo run -q -p mirrorea-cli -- demo --out /tmp/mirrorea-alpha1-demo-local --skip-docker --format json
+"$alpha_bin" demo samples/product-alpha1/demo --out /tmp/mirrorea-alpha1-demo-local --skip-docker --format json
 ```
 
 ## Inspect The Viewer
@@ -74,25 +85,25 @@ The viewer is non-final. It renders concrete JSON records from the exported sess
 ## Run The Command Family Manually
 
 ```bash
-cargo run -q -p mirrorea-cli -- check samples/product-alpha1/demo --format json
+"$alpha_bin" check samples/product-alpha1/demo --format json
 tmpdir=$(mktemp -d /tmp/mirrorea-alpha1-session-XXXXXX)
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- session 'session#product-alpha1-demo' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/auth-layer --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/rate-limit-layer --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/placeholder-object --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/custom-avatar-preview --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- save 'session#product-alpha1-demo' --savepoint 'savepoint#r0-release' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- load 'savepoint#r0-release' --session 'session#product-alpha1-demo' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2-release' --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode local --format json
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- transport 'session#product-alpha1-demo' --mode docker --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" run-local samples/product-alpha1/demo --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" session 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/debug-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/auth-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/rate-limit-layer --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/placeholder-object --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" attach 'session#product-alpha1-demo' samples/product-alpha1/demo/packages/custom-avatar-preview --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" save 'session#product-alpha1-demo' --savepoint 'savepoint#r0-release' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" load 'savepoint#r0-release' --session 'session#product-alpha1-demo' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" quiescent-save 'session#product-alpha1-demo' --savepoint 'savepoint#r2-release' --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" transport 'session#product-alpha1-demo' --mode local --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" transport 'session#product-alpha1-demo' --mode docker --format json
 viewer_dir=$(mktemp -d /tmp/mirrorea-alpha1-viewer-XXXXXX)
-MIRROREA_ALPHA_SESSION_DIR="$tmpdir" cargo run -q -p mirrorea-cli -- export-devtools 'session#product-alpha1-demo' --out "$viewer_dir" --format json
-cargo run -q -p mirrorea-cli -- view "$viewer_dir" --check --format json
+MIRROREA_ALPHA_SESSION_DIR="$tmpdir" "$alpha_bin" export-devtools 'session#product-alpha1-demo' --out "$viewer_dir" --format json
+"$alpha_bin" view "$viewer_dir" --check --format json
 bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
-cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
+"$alpha_bin" build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
 sh "$bundle_dir/run.sh" check
 sh "$bundle_dir/run.sh" view
 ```
@@ -112,9 +123,9 @@ payload["runtime_input"]["host_io"]["request_payload"]["value"] = 7
 payload["runtime_input"]["host_io"]["expected_response"]["value"] = 8
 path.write_text(json.dumps(payload, indent=2) + "\n")
 PY
-cargo run -q -p mirrorea-cli -- check "$variant" --format json
 variant_demo=$(mktemp -d /tmp/mirrorea-alpha1-variant-demo-XXXXXX)
-cargo run -q -p mirrorea-cli -- demo "$variant" --out "$variant_demo" --skip-docker --format json
+"$alpha_bin" check "$variant" --format json
+"$alpha_bin" demo "$variant" --out "$variant_demo" --skip-docker --format json
 ```
 
 The variant command above is a local probe unless Docker is included and the required product attach matrix is preserved.
@@ -123,12 +134,21 @@ The variant command above is a local probe unless Docker is included and the req
 
 ```bash
 bundle_dir=$(mktemp -d /tmp/mirrorea-alpha1-bundle-XXXXXX)
-cargo run -q -p mirrorea-cli -- build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
+"$alpha_bin" build-native-bundle samples/product-alpha1/demo --out "$bundle_dir" --format json
 sh "$bundle_dir/run.sh" check
 sh "$bundle_dir/run.sh" view
 ```
 
 The bundle is a host launch bundle around the compiled Rust CLI and versioned package files. It is not package-native execution and does not convert Mir source to machine code.
+
+## Installed-Binary Probe
+
+```bash
+installed_dir=$(mktemp -d /tmp/mirrorea-alpha1-installed-binary-XXXXXX)
+python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out "$installed_dir"
+```
+
+This helper builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check`, `build-native-bundle`, and `demo`, then re-runs `run.sh check` and `run.sh view` from the generated bundle. It is the current public-ish adoption probe for `installed binary + native host launch bundle`; it does not freeze final CLI/API/ABI or final packaging.
 
 ## Release Check
 

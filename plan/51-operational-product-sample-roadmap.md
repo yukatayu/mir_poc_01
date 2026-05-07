@@ -107,6 +107,12 @@
 - bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
 - `future/gradient-observation.profile.json` は non-executable inventory のまま保持しつつ、paired active runtime root ref を更新する
 
+## P-OPS-17 current scope
+
+- `scripts/product_alpha1_installed_binary_check.py` を追加し、built `target/debug/mirrorea-alpha` と generated native host launch bundle を current public-ish adoption probe として固定する
+- `docs/hands_on/product_alpha1_01.md` と `docs/research_abstract/product_alpha1_01.md` を built-binary first reading に同期する
+- `README.md`、`Documentation.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` を packaging-target ambiguity から `final grammar / ABI scoping` 次段へ進める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -120,10 +126,10 @@
 
 ## next packages
 
-1. public packaging adoption target scoping
-   narrow the next promoted final-public-side line around the already-actualized `mirrorea-alpha` CLI + native host launch bundle path, while keeping hosted service / WAN / distributed durability out of scope
-2. final grammar / ABI scoping
-   reopen only after the packaging/adoption target constrains which front door should be hardened
+1. final grammar / ABI scoping
+   reopen against the already-actualized installed-binary + native host launch bundle probe so that `package.mir.json` evolution, direct textual `.mir` non-goal wording, and CLI/API compatibility stop lines can be narrowed around one concrete front door
+2. broader room-chat revisit
+   reopen only after the public-side grammar / ABI queue is narrowed; keep current bounded `ChatText` lane unless a new prompt explicitly widens it
 
 ## current recommendation
 
@@ -140,7 +146,8 @@
 - `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
 - `P-OPS-14` で maintenance / dashboard freshness を閉じ、queue / validator / roadmap / dashboard wording を current state に同期済み
 - `P-OPS-15` で separate `TwoShardGradientObservation` runnable root を actualize し、existing hard-boundary root と planned-only profile inventory を保ったまま bounded observer-only runtime evidence を切り分け済み
-- 次は public packaging adoption target scoping とし、current actualized front door が `mirrorea-alpha` / native host launch bundle / controlled local-Docker host にあることを前提に、hosted service / WAN / durability を後段へ落としたまま first public-ish adoption surface を絞る
+- `P-OPS-17` で `scripts/product_alpha1_installed_binary_check.py`、built `target/debug/mirrorea-alpha` probe、bundle `run.sh check/view` probe、product alpha guide / summary sync を追加し、current first public-ish adoption candidate を installed binary + native host launch bundle として actualize 済み
+- 次は final grammar / ABI scoping とし、packaging-target ambiguity を reopen せず、already-actualized installed-binary + host-bundle line を前提に `package.mir.json` evolution / direct textual `.mir` non-goal / CLI compatibility stop line を整理する
 
 ## open questions
 
@@ -148,4 +155,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader room-chat revisit を packaging-adoption scoping より先に reopen する必要が本当にあるか
+- broader room-chat revisit を grammar / ABI scoping より先に reopen する必要が本当にあるか

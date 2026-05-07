@@ -8,6 +8,7 @@ It is still alpha. It is not the final public product, final grammar, final ABI,
 
 - The product front-door is versioned `package.mir.json`, not textual `.mir` final grammar.
 - The developer-facing entrypoint is the Rust `mirrorea-alpha` CLI.
+- The current first public-ish adoption candidate is the built `mirrorea-alpha` binary together with the generated native host launch bundle.
 - The demo package lives under `samples/product-alpha1/demo/`, separate from `samples/alpha/` and `samples/practical-alpha1/`.
 - Auth, membership, capability, witness, transport, observability, and native policy remain separate lanes.
 - Native output means a host launch bundle containing the compiled CLI, package files, devtools assets, reports, manifest, launch metadata, and provenance metadata.
@@ -31,7 +32,7 @@ package/source front-door
   -> reproducible demo / release check
 ```
 
-`mirrorea-alpha demo` now runs this workflow and writes inspectable reports under its output directory. Full release-candidate readiness requires the Docker Compose TCP leg; `--skip-docker` is only a partial local probe. `scripts/product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script checks, and JSON payload semantics for clean-clone validation.
+`mirrorea-alpha demo` now runs this workflow and writes inspectable reports under its output directory. Full release-candidate readiness requires the Docker Compose TCP leg; `--skip-docker` is only a partial local probe. `scripts/product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script checks, and JSON payload semantics for clean-clone validation. `scripts/product_alpha1_installed_binary_check.py check-all` is the current installed-binary adoption probe: it builds `target/debug/mirrorea-alpha`, runs the built binary directly, and replays bundle `run.sh` checks without claiming final public CLI/API/ABI or final packaging.
 
 ## Evidence Boundaries
 
@@ -57,5 +58,6 @@ The Docker path is a controlled Docker Compose TCP fixture. It is not WAN or fed
 - hands-on guide: `../hands_on/product_alpha1_01.md`
 - product sample: `../../samples/product-alpha1/demo/`
 - release check: `../../scripts/product_alpha1_release_check.py`
+- installed-binary probe: `../../scripts/product_alpha1_installed_binary_check.py`
 - roadmap memory: `../../plan/50-product-alpha1-public-boundary-roadmap.md`
 - normative boundary: `../../specs/25-product-alpha1-public-boundary.md`
