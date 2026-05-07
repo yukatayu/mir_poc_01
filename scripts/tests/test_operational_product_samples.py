@@ -397,6 +397,57 @@ class OperationalProductSamplesTests(unittest.TestCase):
             payload["sugoroku_scope"]["interactive_turn_choice_surface_defined"]
         )
 
+    def test_widening_queue_scope_advances_next_reopen_to_broader_sugoroku(
+        self,
+    ) -> None:
+        scope = operational_product_samples.widening_queue_scope()
+
+        self.assertFalse(scope["room_chat_reopen_recommended"])
+        self.assertFalse(scope["portal_shard_starter_reopen_recommended"])
+        self.assertTrue(scope["sugoroku_reopen_recommended"])
+        self.assertEqual(
+            scope["next_promoted_reopen_point"],
+            "broader_sugoroku_reopening",
+        )
+
+    def test_check_all_reports_widening_queue_scope(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="validation:placeholder",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload=None,
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            with mock.patch.object(
+                operational_product_samples,
+                "release_check",
+                return_value={
+                    "status": "accepted",
+                    "failed_commands": [],
+                },
+            ):
+                payload = operational_product_samples.check_all(skip_docker=False)
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertFalse(payload["widening_queue_scope"]["room_chat_reopen_recommended"])
+        self.assertFalse(
+            payload["widening_queue_scope"][
+                "portal_shard_starter_reopen_recommended"
+            ]
+        )
+        self.assertTrue(payload["widening_queue_scope"]["sugoroku_reopen_recommended"])
+        self.assertEqual(
+            payload["widening_queue_scope"]["next_promoted_reopen_point"],
+            "broader_sugoroku_reopening",
+        )
+
     def test_sugoroku_devtools_check_requires_event_dag_panel_and_runtime_evidence(
         self,
     ) -> None:

@@ -275,6 +275,15 @@ def sugoroku_scope() -> dict[str, Any]:
     }
 
 
+def widening_queue_scope() -> dict[str, Any]:
+    return {
+        "room_chat_reopen_recommended": False,
+        "portal_shard_starter_reopen_recommended": False,
+        "sugoroku_reopen_recommended": True,
+        "next_promoted_reopen_point": "broader_sugoroku_reopening",
+    }
+
+
 def sugoroku_runtime_evidence_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     session = payload.get("session") or {}
@@ -934,6 +943,7 @@ def check_all(skip_docker: bool) -> dict[str, Any]:
         "room_chat_scope": room_chat_scope(),
         "portal_shard_starter_scope": portal_shard_starter_scope(),
         "sugoroku_scope": sugoroku_scope(),
+        "widening_queue_scope": widening_queue_scope(),
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
     }

@@ -1,6 +1,6 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` / `P-OPS-15` / `P-OPS-21` / `P-OPS-22` / `P-OPS-23` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` / `P-OPS-15` / `P-OPS-21` / `P-OPS-22` / `P-OPS-23` / `P-OPS-24` queue-state hardening を再現するための入口です。
 
 これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut、gradient observation は separate `two-shard-gradient-observation/` root による bounded observer-only runtime first cut まで actualize 済みです。`future/gradient-observation.profile.json` は引き続き non-executable profile inventory であり、general model-check completion、continuous spatial sync、WAN federation / continuous infinite shard federation / final portal ABI ではありません。validated starter catalog は intentionally `SugorokuWorld` で止まり、portal/shard authoring は active roots を study/copy boundary に留めます。
 
@@ -172,3 +172,4 @@ python3 scripts/operational_product_samples.py release-check --format json
 
 portal/shard authoring boundary を確認したい場合は `operational_portal_shard_starter_boundary_01.md` を参照してください。helper `check-all` の `portal_shard_starter_scope` も同じ current decision を machine-readable に返します。
 Sugoroku boundedness を helper surface で確認したい場合は `python3 scripts/operational_product_samples.py run-sugoroku --format json` または `check-all --format json` を使ってください。`sugoroku_scope` が current bounded deterministic carrier を machine-readable に返します。
+queue-state を helper surface で確認したい場合は `check-all --format json` の `widening_queue_scope` を見てください。current line では `room_chat_reopen_recommended = false`, `portal_shard_starter_reopen_recommended = false`, `sugoroku_reopen_recommended = true`, `next_promoted_reopen_point = broader_sugoroku_reopening` です。

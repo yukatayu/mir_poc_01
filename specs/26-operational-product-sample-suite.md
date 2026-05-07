@@ -150,6 +150,14 @@ samples/product-alpha1/operational/
 - suite helper `check-all` may export machine-readable `portal_shard_starter_scope` so the active-root-first authoring boundary stays explicit and reproducible
 - if a later portal/shard starter is added, it must derive from the active executable root and must keep `future/` blueprint/profile inventory explicit and non-executable
 
+## helper queue-state boundary
+
+`L2`:
+
+- suite helper `check-all` may export machine-readable `widening_queue_scope`
+- current queue state keeps room-chat reopening and portal/shard starter reopening non-promoted
+- current queue state keeps broader Sugoroku reopening as the next promoted comparison
+
 ## attach / transport / devtools / save-load
 
 `L1`:

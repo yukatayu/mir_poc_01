@@ -16,6 +16,7 @@
 - `gradient-observation.profile.json` は paired non-executable profile として保持した
 - validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定し、helper-reported `portal_shard_starter_scope` で current boundary を machine-readable にした
 - current `sugoroku-world` carrier を helper-reported `sugoroku_scope` で machine-readable に固定し、interactive turn choice / broader negative rows / networked multi-participant control は current line では未定義のままとした
+- helper-reported `widening_queue_scope` を追加し、current room-chat reopening と portal/shard starter reopening は non-promoted、`broader_sugoroku_reopening` が next promoted comparison であると machine-readable にした
 
 ## What Is Runnable Now
 
@@ -28,7 +29,7 @@
 - `two-shard-hard-boundary` の bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject runtime evidence と observer-safe devtools export
 - `two-shard-gradient-observation` の bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
-- `scripts/operational_product_samples.py check-all`
+- `scripts/operational_product_samples.py check-all` と helper-reported `room_chat_scope` / `portal_shard_starter_scope` / `sugoroku_scope` / `widening_queue_scope`
 
 ## What Is Still Declared Or Planned
 
@@ -37,7 +38,7 @@
 - `future/portal-worldlink/` blueprint manifest
 - `future/two-shard-hard-boundary/` blueprint manifest
 - broader replication profile runtime beyond the bounded observer-only gradient cut
-- broader multi-message room-chat surface beyond the current bounded `ChatText` lane
+- broader multi-message room-chat surface beyond the helper-reported current non-promoted line
 - broader portal/shard starter catalog beyond the current active-root-first boundary
 - broader interactive Sugoroku controls and additional negative rows beyond the helper-reported current bounded deterministic carrier
 

@@ -38,9 +38,11 @@
    portal/shard starter revisit
 10. completed queue-shaping package
    broader Sugoroku revisit
-11. next queue-shaping package
+11. completed queue-shaping package
    later room-chat reopening
-12. much later
+12. next queue-shaping package
+   broader Sugoroku reopening
+13. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -98,11 +100,17 @@
 - current line では validated starter catalog を `templates/sugoroku-world-starter` で止め、portal/shard authoring は active executable roots を study/copy boundary に使う
 - `future/` portal/shard inventory は non-executable のまま保持し、starter duplicate actualization は行わない
 
+## P-OPS-24 current scope
+
+- suite `check-all` に helper-reported `widening_queue_scope` を追加し、room-chat reopening と portal/shard starter reopening を non-promoted queue として固定する
+- current next promoted comparison を `broader_sugoroku_reopening` に進める
+- shard line の immediate reopen は引き続き推奨しない
+
 ## next reopen point
 
-- `P-OPS-23` closeout 後の current recommendation は `later room-chat reopening`
+- `P-OPS-24` closeout 後の current recommendation は `broader Sugoroku reopening`
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、room-chat / portal-shard starter / Sugoroku queue-shaping package をいったん narrow に揃えたので、次は later room-chat reopening を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、room-chat reopening も non-promoted queue に戻したので、次は broader Sugoroku reopening を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
 
 ## avoid
 
@@ -116,4 +124,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
-- portal/shard starter を later に reopen するなら、later room-chat reopening の後でも依然として必要か
+- portal/shard starter を later に reopen するなら、broader Sugoroku reopening の後でも依然として必要か

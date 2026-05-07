@@ -1,6 +1,6 @@
 # samples/product-alpha1/operational
 
-This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, `P-OPS-07`, `P-OPS-13`, `P-OPS-15`, `P-OPS-21`, `P-OPS-22`, and `P-OPS-23`.
+This root holds the operational product sample suite introduced by `P-OPS-01`, widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, `P-OPS-07`, `P-OPS-13`, `P-OPS-15`, `P-OPS-21`, `P-OPS-22`, `P-OPS-23`, and queue-shaped by `P-OPS-24`.
 
 It stays separate from `samples/product-alpha1/demo/`.
 
@@ -10,7 +10,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 - `portal-worldlink/` is the active bounded portal runtime root.
 - `two-shard-hard-boundary/` is the active bounded shard runtime root.
 - `two-shard-gradient-observation/` is the active bounded observer-only gradient runtime root.
-- `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`, `templates/membership-chat-starter/`, and `templates/sugoroku-world-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots. The catalog intentionally stops before portal/shard starters, and helper `check-all` reports the current `portal_shard_starter_scope`.
+- `templates/` holds validated `template_only` authoring starters such as `templates/world-core-starter/`, `templates/membership-chat-starter/`, and `templates/sugoroku-world-starter/`; these roots are allowed to pass `check` and `run-local` but are not counted as active operational sample roots. The catalog intentionally stops before portal/shard starters, and helper `check-all` reports the current `portal_shard_starter_scope` and `widening_queue_scope`.
 - `future/gradient-observation.profile.json` remains a non-executable observer-only widening profile even though the bounded gradient runtime root now exists.
 - backend feasibility is docs-first: `native host launch bundle` is the only actualized backend-adjacent path; WASM/LLVM remain inventory-only
 - Portal / shard files under `future/` are blueprint evidence only.
@@ -35,7 +35,7 @@ Current runnable floor:
 - `docs/hands_on/operational_portal_shard_starter_boundary_01.md`: why portal/shard authoring currently starts from the active roots rather than from starter duplicates
 - `docs/hands_on/operational_backend_inventory_01.md`: current host launch bundle / WASM / LLVM comparison inventory for this suite
 - `docs/hands_on/operational_gradient_observation_profile_01.md`: docs-first guide for the observer-only gradient future profile
-- `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family; `run-sugoroku` and `check-all` export machine-readable `sugoroku_scope`, and `check-all` also exports `room_chat_scope` and `portal_shard_starter_scope`
+- `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family; `run-sugoroku` and `check-all` export machine-readable `sugoroku_scope`, and `check-all` also exports `room_chat_scope`, `portal_shard_starter_scope`, and `widening_queue_scope`
 
 Current non-claims:
 
