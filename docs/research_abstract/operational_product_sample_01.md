@@ -15,13 +15,14 @@
 - separate `two-shard-gradient-observation/` root を actualize し、observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を same-session runtime / devtools / helper closeout に接続した
 - `gradient-observation.profile.json` は paired non-executable profile として保持した
 - validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定し、helper-reported `portal_shard_starter_scope` で current boundary を machine-readable にした
+- current `sugoroku-world` carrier を helper-reported `sugoroku_scope` で machine-readable に固定し、interactive turn choice / broader negative rows / networked multi-participant control は current line では未定義のままとした
 
 ## What Is Runnable Now
 
 - `world-core` / `membership-chat` / `sugoroku-world` の `check`
 - `world-core` / `membership-chat` / `sugoroku-world` の `run-local`
 - `membership-chat` の bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary、helper-reported `room_chat_scope`、および observer-safe devtools export
-- `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
+- `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence、helper-reported `sugoroku_scope`、および observer-safe devtools export
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export
 - `two-shard-hard-boundary` の bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject runtime evidence と observer-safe devtools export
@@ -38,7 +39,7 @@
 - broader replication profile runtime beyond the bounded observer-only gradient cut
 - broader multi-message room-chat surface beyond the current bounded `ChatText` lane
 - broader portal/shard starter catalog beyond the current active-root-first boundary
-- broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
+- broader interactive Sugoroku controls and additional negative rows beyond the helper-reported current bounded deterministic carrier
 
 ## Why This Matters
 

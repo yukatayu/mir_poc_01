@@ -291,6 +291,112 @@ class OperationalProductSamplesTests(unittest.TestCase):
             operational_product_samples.sugoroku_runtime_evidence_observed(result)
         )
 
+    def test_sugoroku_scope_marks_current_carrier_as_bounded_deterministic(
+        self,
+    ) -> None:
+        scope = operational_product_samples.sugoroku_scope()
+
+        self.assertEqual(
+            scope["scenario_kind"],
+            "bounded_deterministic_same_session_sugoroku",
+        )
+        self.assertTrue(scope["roll_publish_witness_handoff_defined"])
+        self.assertTrue(scope["stale_membership_reject_defined"])
+        self.assertFalse(scope["interactive_turn_choice_surface_defined"])
+        self.assertFalse(scope["broader_negative_row_catalog_defined"])
+        self.assertFalse(scope["networked_multi_participant_control_defined"])
+
+    def test_run_world_package_for_sugoroku_reports_sugoroku_scope(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:sugoroku",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "sugoroku_roll_requested"},
+                            {"event_kind": "sugoroku_roll_published"},
+                            {"event_kind": "sugoroku_witness_emitted"},
+                            {"event_kind": "sugoroku_turn_handoff"},
+                            {"event_kind": "sugoroku_stale_membership_rejected"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_sugoroku_roll"},
+                            {"transport_lane": "same_session_sugoroku_handoff"},
+                            {
+                                "transport_lane": "same_session_sugoroku_membership_reject"
+                            },
+                        ]
+                    },
+                    "message_recovery_state": {
+                        "message_state_lane": [
+                            {
+                                "state": "Rejected",
+                                "failure_class": "StaleMembership",
+                            }
+                        ]
+                    },
+                }
+            },
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            payload = operational_product_samples.run_world_package(
+                operational_product_samples.SUGOROKU_WORLD
+            )
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertEqual(
+            payload["sugoroku_scope"]["scenario_kind"],
+            "bounded_deterministic_same_session_sugoroku",
+        )
+        self.assertFalse(
+            payload["sugoroku_scope"]["interactive_turn_choice_surface_defined"]
+        )
+
+    def test_check_all_reports_sugoroku_scope(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="validation:placeholder",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload=None,
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            with mock.patch.object(
+                operational_product_samples,
+                "release_check",
+                return_value={
+                    "status": "accepted",
+                    "failed_commands": [],
+                },
+            ):
+                payload = operational_product_samples.check_all(skip_docker=False)
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertEqual(
+            payload["sugoroku_scope"]["scenario_kind"],
+            "bounded_deterministic_same_session_sugoroku",
+        )
+        self.assertFalse(
+            payload["sugoroku_scope"]["interactive_turn_choice_surface_defined"]
+        )
+
     def test_sugoroku_devtools_check_requires_event_dag_panel_and_runtime_evidence(
         self,
     ) -> None:

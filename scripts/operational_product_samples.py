@@ -264,6 +264,17 @@ def portal_shard_starter_scope() -> dict[str, Any]:
     }
 
 
+def sugoroku_scope() -> dict[str, Any]:
+    return {
+        "scenario_kind": "bounded_deterministic_same_session_sugoroku",
+        "roll_publish_witness_handoff_defined": True,
+        "stale_membership_reject_defined": True,
+        "interactive_turn_choice_surface_defined": False,
+        "broader_negative_row_catalog_defined": False,
+        "networked_multi_participant_control_defined": False,
+    }
+
+
 def sugoroku_runtime_evidence_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     session = payload.get("session") or {}
@@ -483,6 +494,7 @@ def run_world_package(root: Path) -> dict[str, Any]:
         "command": command_payload(result),
         "semantic_checks": semantic_checks,
         "room_chat_scope": room_chat_scope() if root == MEMBERSHIP_CHAT else None,
+        "sugoroku_scope": sugoroku_scope() if root == SUGOROKU_WORLD else None,
         "final_public_api_frozen": False,
     }
 
@@ -921,6 +933,7 @@ def check_all(skip_docker: bool) -> dict[str, Any]:
         "release_check": release,
         "room_chat_scope": room_chat_scope(),
         "portal_shard_starter_scope": portal_shard_starter_scope(),
+        "sugoroku_scope": sugoroku_scope(),
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
     }

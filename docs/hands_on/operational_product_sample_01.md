@@ -1,6 +1,6 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` / `P-OPS-15` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` / `P-OPS-15` / `P-OPS-21` / `P-OPS-22` / `P-OPS-23` widening を再現するための入口です。
 
 これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut、gradient observation は separate `two-shard-gradient-observation/` root による bounded observer-only runtime first cut まで actualize 済みです。`future/gradient-observation.profile.json` は引き続き non-executable profile inventory であり、general model-check completion、continuous spatial sync、WAN federation / continuous infinite shard federation / final portal ABI ではありません。validated starter catalog は intentionally `SugorokuWorld` で止まり、portal/shard authoring は active roots を study/copy boundary に留めます。
 
@@ -136,6 +136,10 @@ If Docker / Docker Compose are unavailable, record the Docker leg as an environm
 Current boundedness:
 
 - `run-local` Sugoroku root は bounded same-session roll / publish / witness / handoff / stale membership reject scenario を 1 本だけ materialize する。final interactive game runtime ではない
+- helper-facing `sugoroku_scope.scenario_kind = bounded_deterministic_same_session_sugoroku`
+- `sugoroku_scope.interactive_turn_choice_surface_defined = false`
+- `sugoroku_scope.broader_negative_row_catalog_defined = false`
+- `sugoroku_scope.networked_multi_participant_control_defined = false`
 - `run-local` / `session` / `export-devtools` payload には同じ `projection_inventory` summary が入り、observer-safe projection panel から `roll_request_packet` / `chat_message_packet` / `host_io_adapter` を確認できる
 - `export-devtools` / `view --check` では `sugoroku_roll_requested` / `sugoroku_roll_published` / `sugoroku_witness_emitted` / `sugoroku_turn_handoff` / `sugoroku_stale_membership_rejected` と corresponding route lanes を observer-safe に確認できる
 - attach acceptance uses the current same-session product alpha carrier and explicit package declarations; it is not a final external issuer / membership attestation pipeline
@@ -167,3 +171,4 @@ python3 scripts/operational_product_samples.py release-check --format json
 `projection.profile.json` は current schema-backed inventory です。`portal-worldlink/`、`two-shard-hard-boundary/`、`two-shard-gradient-observation/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots、`gradient-observation.profile.json` は separate runtime root と paired の non-executable future profile です。
 
 portal/shard authoring boundary を確認したい場合は `operational_portal_shard_starter_boundary_01.md` を参照してください。helper `check-all` の `portal_shard_starter_scope` も同じ current decision を machine-readable に返します。
+Sugoroku boundedness を helper surface で確認したい場合は `python3 scripts/operational_product_samples.py run-sugoroku --format json` または `check-all --format json` を使ってください。`sugoroku_scope` が current bounded deterministic carrier を machine-readable に返します。

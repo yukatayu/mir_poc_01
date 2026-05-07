@@ -34,9 +34,13 @@
    broader public distribution narrowing
 8. completed queue-shaping package
    broader room-chat revisit
-9. next queue-shaping package
+9. completed queue-shaping package
    portal/shard starter revisit
-10. much later
+10. completed queue-shaping package
+   broader Sugoroku revisit
+11. next queue-shaping package
+   later room-chat reopening
+12. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -96,9 +100,9 @@
 
 ## next reopen point
 
-- `P-OPS-22` closeout 後の current recommendation は `broader Sugoroku revisit`
+- `P-OPS-23` closeout 後の current recommendation は `later room-chat reopening`
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line を維持したまま starter reopen queue も閉じたので、次は broader Sugoroku controls が本当に必要かを comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、room-chat / portal-shard starter / Sugoroku queue-shaping package をいったん narrow に揃えたので、次は later room-chat reopening を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
 
 ## avoid
 
@@ -112,4 +116,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
-- portal/shard starter を later に reopen するなら、broader Sugoroku revisit の後でも依然として必要か
+- portal/shard starter を later に reopen するなら、later room-chat reopening の後でも依然として必要か

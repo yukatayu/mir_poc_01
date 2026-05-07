@@ -139,6 +139,13 @@
 - `future/` portal/shard inventory は non-executable のままとし、starter duplicate actualization は行わない
 - docs / roadmap / dashboard の next queue を broader Sugoroku revisit へ進める
 
+## P-OPS-23 current scope
+
+- current `SugorokuWorld` carrier を helper-reported `sugoroku_scope` として machine-readable に固定する
+- current carrier は bounded deterministic same-session roll / publish / witness / handoff / stale-membership reject scenario に留める
+- interactive turn choice surface、broader negative-row catalog、networked multi-participant control は current line では未定義のままとする
+- docs / roadmap / dashboard の next queue を later room-chat reopening へ進める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -152,8 +159,8 @@
 
 ## next packages
 
-1. broader Sugoroku revisit
-   portal/shard starter queue is now narrowed; decide whether the current bounded deterministic gameplay carrier is still too narrow and needs broader controls or negative rows
+1. later room-chat reopening
+   room-chat / portal-shard starter / Sugoroku queue shaping is now aligned; decide later whether bounded single-message room-chat should stay closed or needs a broader reopen
 
 ## current recommendation
 
@@ -176,12 +183,13 @@
 - `P-OPS-20` で helper に machine-readable `distribution_scope` を追加し、broader public distribution は current line では未定義、すなわち developer-built binary + generated host launch bundle 以外の archive / installer / system-package / auto-update / hosted-service shape をまだ持たないと固定した
 - `P-OPS-21` で helper に machine-readable `room_chat_scope` を追加し、current `MembershipChat` lane は bounded single-message room-oriented `ChatText` に留まり、multi-message / transport-coupled / room-history / stdio shapes は未定義と固定した
 - `P-OPS-22` で helper に machine-readable `portal_shard_starter_scope` を追加し、validated starter catalog が `templates/sugoroku-world-starter` で止まり、portal/shard authoring は active executable roots を study/copy boundary に使う current line を machine-readable に固定した
-- 次は broader Sugoroku revisit とし、room-chat queue と portal/shard starter queue は narrowed state のまま維持する
+- `P-OPS-23` で helper に machine-readable `sugoroku_scope` を追加し、current `SugorokuWorld` carrier は bounded deterministic same-session scenario に留まり、interactive turn choice / broader negative rows / networked multi-participant control は未定義と固定した
+- 次は later room-chat reopening とし、room-chat / portal-shard starter / Sugoroku queue-shaping package は narrowed state のまま維持する
 
 ## open questions
 
-- Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
+- current bounded deterministic `SugorokuWorld` carrier を later に reopen する必要が本当にあるか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の current bounded `ChatText` lane を保ったまま、later multi-message room-chat widening を本当に reopen する必要があるか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader Sugoroku revisit を閉じた後でも、portal/shard starter reopening を改めて promoted queue に戻す必要が本当にあるか
+- later room-chat reopening を閉じた後でも、portal/shard starter reopening や broader Sugoroku reopening を改めて promoted queue に戻す必要が本当にあるか

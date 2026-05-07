@@ -1,6 +1,6 @@
 # samples/product-alpha1/operational
 
-This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, `P-OPS-07`, `P-OPS-13`, and `P-OPS-15`.
+This root holds the operational product sample suite introduced by `P-OPS-01` and widened by `P-OPS-03`, `P-OPS-04`, `P-OPS-05`, `P-OPS-06`, `P-OPS-07`, `P-OPS-13`, `P-OPS-15`, `P-OPS-21`, `P-OPS-22`, and `P-OPS-23`.
 
 It stays separate from `samples/product-alpha1/demo/`.
 
@@ -19,7 +19,7 @@ Current runnable floor:
 
 - `world-core/`: `check`, `run-local`
 - `membership-chat/`: `check`, `run-local`, bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary, machine-readable `room_chat_scope`, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
-- `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
+- `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, machine-readable `sugoroku_scope`, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
   deferred `placeholder-object` / `custom-avatar-preview` attach rows are part of the visible workflow, not hidden inventory
 - `portal-worldlink/`: `check`, `run-local`, observer-safe `export-devtools`, and bounded same-session portal resolve / handoff offer / witness emit / destination admit evidence
 - `two-shard-hard-boundary/`: `check`, `run-local`, observer-safe `export-devtools`, and bounded same-session shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidence
@@ -35,7 +35,7 @@ Current runnable floor:
 - `docs/hands_on/operational_portal_shard_starter_boundary_01.md`: why portal/shard authoring currently starts from the active roots rather than from starter duplicates
 - `docs/hands_on/operational_backend_inventory_01.md`: current host launch bundle / WASM / LLVM comparison inventory for this suite
 - `docs/hands_on/operational_gradient_observation_profile_01.md`: docs-first guide for the observer-only gradient future profile
-- `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family; `check-all` exports both `room_chat_scope` and `portal_shard_starter_scope`
+- `scripts/operational_product_samples.py`: orchestration helper around the `mirrorea-alpha` command family; `run-sugoroku` and `check-all` export machine-readable `sugoroku_scope`, and `check-all` also exports `room_chat_scope` and `portal_shard_starter_scope`
 
 Current non-claims:
 

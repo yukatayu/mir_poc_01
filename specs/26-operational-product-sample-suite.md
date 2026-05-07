@@ -108,6 +108,8 @@ samples/product-alpha1/operational/
 - imports `MembershipChat`
 - is the runnable root for the first operational workflow
 - actualizes one bounded same-session scenario with roll / publish / witness / handoff / stale membership reject evidence
+- suite helper `run-sugoroku` and `check-all` may export machine-readable `sugoroku_scope` so the current bounded deterministic carrier remains explicit and reproducible
+- current bounded carrier leaves interactive turn choice surface, broader negative-row catalog, and networked multi-participant control undefined
 - accepts one schema-backed projection inventory summary from `deployments/projection/projection.profile.json`, surfaced through `check`, runtime plan, and observer-safe devtools projection panels
 - keeps save/load visibility, transport visibility, and hot-plug visibility on the same product alpha session carrier
 - current direct execution lane remains bounded to the existing typed host-I/O `AddOne` adapter and does not claim final interactive game runtime completion
