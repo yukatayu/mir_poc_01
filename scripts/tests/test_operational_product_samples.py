@@ -397,17 +397,17 @@ class OperationalProductSamplesTests(unittest.TestCase):
             payload["sugoroku_scope"]["interactive_turn_choice_surface_defined"]
         )
 
-    def test_widening_queue_scope_advances_next_reopen_to_broader_sugoroku(
+    def test_widening_queue_scope_advances_next_reopen_to_user_final_distribution(
         self,
     ) -> None:
         scope = operational_product_samples.widening_queue_scope()
 
         self.assertFalse(scope["room_chat_reopen_recommended"])
         self.assertFalse(scope["portal_shard_starter_reopen_recommended"])
-        self.assertTrue(scope["sugoroku_reopen_recommended"])
+        self.assertFalse(scope["sugoroku_reopen_recommended"])
         self.assertEqual(
             scope["next_promoted_reopen_point"],
-            "broader_sugoroku_reopening",
+            "later_user_final_distribution_decision",
         )
 
     def test_check_all_reports_widening_queue_scope(self) -> None:
@@ -442,10 +442,10 @@ class OperationalProductSamplesTests(unittest.TestCase):
                 "portal_shard_starter_reopen_recommended"
             ]
         )
-        self.assertTrue(payload["widening_queue_scope"]["sugoroku_reopen_recommended"])
+        self.assertFalse(payload["widening_queue_scope"]["sugoroku_reopen_recommended"])
         self.assertEqual(
             payload["widening_queue_scope"]["next_promoted_reopen_point"],
-            "broader_sugoroku_reopening",
+            "later_user_final_distribution_decision",
         )
 
     def test_sugoroku_devtools_check_requires_event_dag_panel_and_runtime_evidence(

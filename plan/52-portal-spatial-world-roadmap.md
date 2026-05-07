@@ -40,9 +40,11 @@
    broader Sugoroku revisit
 11. completed queue-shaping package
    later room-chat reopening
-12. next queue-shaping package
+12. completed queue-shaping package
    broader Sugoroku reopening
-13. much later
+13. next queue-shaping package
+   later user-final distribution decision
+14. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -106,11 +108,17 @@
 - current next promoted comparison を `broader_sugoroku_reopening` に進める
 - shard line の immediate reopen は引き続き推奨しない
 
+## P-OPS-25 current scope
+
+- helper-reported `widening_queue_scope` を更新し、broader Sugoroku reopening も non-promoted queue として固定する
+- current next promoted comparison を `later_user_final_distribution_decision` に進める
+- shard line の immediate reopen は引き続き推奨しない
+
 ## next reopen point
 
-- `P-OPS-24` closeout 後の current recommendation は `broader Sugoroku reopening`
+- `P-OPS-25` closeout 後の current recommendation は `later user-final distribution decision`
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、room-chat reopening も non-promoted queue に戻したので、次は broader Sugoroku reopening を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、broader Sugoroku reopening も non-promoted queue に戻したので、次は later user-final distribution decision を comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
 
 ## avoid
 
@@ -124,4 +132,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
-- portal/shard starter を later に reopen するなら、broader Sugoroku reopening の後でも依然として必要か
+- portal/shard starter を later に reopen するなら、later user-final distribution decision の後でも依然として必要か

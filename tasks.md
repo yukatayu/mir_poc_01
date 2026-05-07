@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 11:37 JST
+最終更新: 2026-05-07 12:03 JST
 
 ## この文書について
 
@@ -82,6 +82,8 @@
   `scripts/operational_product_samples.py`、`scripts/tests/test_operational_product_samples.py`、`specs/26-operational-product-sample-suite.md`、operational suite guide / summary、`README.md`、`Documentation.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `sugoroku_scope` と corresponding wording を追加し、current `sugoroku-world` carrier を bounded deterministic same-session roll / publish / witness / handoff / stale-membership reject scenario に固定しました。interactive turn choice / broader negative rows / networked multi-participant control は current line では未定義です。これは interactive multiplayer game completion ではありません。
 - `P-OPS-24` により later room-chat reopening queue-state hardening は actualize 済みです:
   `scripts/operational_product_samples.py`、`scripts/tests/test_operational_product_samples.py`、`specs/26-operational-product-sample-suite.md`、operational suite guide / summary、`README.md`、`Documentation.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `widening_queue_scope` と corresponding wording を追加し、later room-chat reopening と portal/shard starter reopening を non-promoted のまま保ち、next promoted comparison を broader Sugoroku reopening に戻しました。runtime behavior widening は行っていません。
+- `P-OPS-25` により broader Sugoroku reopening queue-state hardening は actualize 済みです:
+  `scripts/operational_product_samples.py`、`scripts/tests/test_operational_product_samples.py`、`specs/26-operational-product-sample-suite.md`、operational suite guide / summary、`README.md`、`Documentation.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening はすべて non-promoted、`later_user_final_distribution_decision` が next promoted comparison であることを固定しました。runtime behavior widening は行っていません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -91,14 +93,14 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | broader Sugoroku reopening | `Macro 8+`, `S1/S2` | current bounded deterministic same-session Sugoroku carrier を later に reopen する必要があるかを再評価する | broader Sugoroku widening を reopen しない current recommendation を維持するか、interactive turn choice / broader negative rows / networked multi-participant control を改めて promoted queue に戻すかが圧縮され、room-chat / portal-shard non-promoted line と混線しない | small |
+| 1 | later user-final distribution decision scoping | `Macro 7/8`, `S1/S2` | current alpha replay bundle / installed-binary / host-bundle line のままで十分か、より broad な final distribution / final catalog decision をいつ reopen するかを圧縮する | developer-built binary + generated host-bundle only delivery unit を維持するか、archive / installer / hosted-service / broader final product line comparison を明示して operational queue の外側に残すかが整理され、all current operational reopenings non-promoted の読みと混線しない | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  broader Sugoroku reopening
+  later user-final distribution decision
 - recommendation reason:
-  `P-OPS-24` で helper-reported `widening_queue_scope` を追加し、later room-chat reopening と portal/shard starter reopening は non-promoted line に戻した。current `sugoroku-world` carrier は helper-reported `sugoroku_scope` を持つ bounded deterministic same-session scenario のままなので、次は broader Sugoroku reopening を comparison とした方が queue-state と actual runnable floor を整合させやすい
+  `P-OPS-25` で helper-reported `widening_queue_scope` を更新し、room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は current line ではすべて non-promoted に戻した。current runnable floor はその narrowed operational queue と整合しているため、次は runtime widening ではなく later user-final distribution decision を comparison とした方が front-door / shipped-surface / broader-distribution reading と operational suite queue を同時に圧縮しやすい
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -113,10 +115,10 @@
 | product checker finite fragment breadth | `specs/25` と `P-A1-26/27/28` に影響 | existing practical rows only / product demo finite fragmentを少し拡張 | product demoに必要な package schema、effect/failure、capability/witness、message recovery、savepoint policy だけを bounded に足す |
 | product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装し、`P-A1-31` release check で再確認済み |
 | admin/debug product viewer breadth | final public viewer / telemetry ABI に影響 | observer-safe + kept-later marker / bounded admin debug panel | product alpha release candidate では concrete observer-safe static viewer と admin/debug `kept_later` marker に留める。full admin/debug view は final-public gate |
-| operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | `P-OPS-24` で helper-reported `widening_queue_scope` を追加し、room-chat reopening は non-promoted comparison に戻した。current recommendation は bounded room-oriented `ChatText` lane 維持であり、broader Sugoroku reopening の後に再評価する |
-| operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | `P-OPS-24` で queue-state を更新し、broader Sugoroku reopening を next promoted comparison に戻した。current recommendation は helper-reported `sugoroku_scope` を伴う bounded deterministic same-session carrier 維持から再評価を始める |
+| operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | `P-OPS-25` で helper-reported `widening_queue_scope` を更新し、room-chat reopening は non-promoted comparison のまま維持した。current recommendation は bounded room-oriented `ChatText` lane 維持であり、later user-final distribution decision の後に再評価する |
+| operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | `P-OPS-25` で queue-state を更新し、broader Sugoroku reopening も non-promoted comparison に戻した。current recommendation は helper-reported `sugoroku_scope` を伴う bounded deterministic same-session carrier 維持であり、later user-final distribution decision の後に必要なら再評価する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-gradient widening order | `specs/27` と future suite line に影響 | broader Sugoroku reopening / later room-chat reopening / later user-final distribution decision | current recommendation は `P-OPS-24` で `widening_queue_scope` を追加したので、next promoted line は broader Sugoroku reopening とし、room-chat / starter reopening は non-promoted comparison として後置する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | broader Sugoroku reopening / later room-chat reopening / later user-final distribution decision | current recommendation は `P-OPS-25` で `widening_queue_scope` を更新したので、all current operational reopenings は non-promoted のまま保ち、next promoted line は later user-final distribution decision とする |
 
 ## user decision items
 

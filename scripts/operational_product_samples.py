@@ -279,8 +279,8 @@ def widening_queue_scope() -> dict[str, Any]:
     return {
         "room_chat_reopen_recommended": False,
         "portal_shard_starter_reopen_recommended": False,
-        "sugoroku_reopen_recommended": True,
-        "next_promoted_reopen_point": "broader_sugoroku_reopening",
+        "sugoroku_reopen_recommended": False,
+        "next_promoted_reopen_point": "later_user_final_distribution_decision",
     }
 
 

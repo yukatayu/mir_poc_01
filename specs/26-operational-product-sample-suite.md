@@ -155,8 +155,8 @@ samples/product-alpha1/operational/
 `L2`:
 
 - suite helper `check-all` may export machine-readable `widening_queue_scope`
-- current queue state keeps room-chat reopening and portal/shard starter reopening non-promoted
-- current queue state keeps broader Sugoroku reopening as the next promoted comparison
+- current queue state keeps room-chat reopening, portal/shard starter reopening, and broader Sugoroku reopening non-promoted
+- current queue state keeps later user-final distribution decision as the next promoted comparison
 
 ## attach / transport / devtools / save-load
 

@@ -16,7 +16,7 @@
 - `gradient-observation.profile.json` は paired non-executable profile として保持した
 - validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定し、helper-reported `portal_shard_starter_scope` で current boundary を machine-readable にした
 - current `sugoroku-world` carrier を helper-reported `sugoroku_scope` で machine-readable に固定し、interactive turn choice / broader negative rows / networked multi-participant control は current line では未定義のままとした
-- helper-reported `widening_queue_scope` を追加し、current room-chat reopening と portal/shard starter reopening は non-promoted、`broader_sugoroku_reopening` が next promoted comparison であると machine-readable にした
+- helper-reported `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は non-promoted、`later_user_final_distribution_decision` が next promoted comparison であると machine-readable にした
 
 ## What Is Runnable Now
 
