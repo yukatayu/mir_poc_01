@@ -166,4 +166,4 @@ python3 scripts/operational_product_samples.py release-check --format json
 
 `projection.profile.json` は current schema-backed inventory です。`portal-worldlink/`、`two-shard-hard-boundary/`、`two-shard-gradient-observation/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots、`gradient-observation.profile.json` は separate runtime root と paired の non-executable future profile です。
 
-portal/shard authoring boundary を確認したい場合は `operational_portal_shard_starter_boundary_01.md` を参照してください。
+portal/shard authoring boundary を確認したい場合は `operational_portal_shard_starter_boundary_01.md` を参照してください。helper `check-all` の `portal_shard_starter_scope` も同じ current decision を machine-readable に返します。

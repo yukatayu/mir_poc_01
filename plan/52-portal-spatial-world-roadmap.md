@@ -88,11 +88,17 @@
 - observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を same-session runtime / devtools / helper closeout に actualize する
 - continuous sync、write authority、WAN federation は主張しない
 
+## P-OPS-22 current scope
+
+- portal/shard starter reopen decision を helper-reported `portal_shard_starter_scope` として machine-readable に固定する
+- current line では validated starter catalog を `templates/sugoroku-world-starter` で止め、portal/shard authoring は active executable roots を study/copy boundary に使う
+- `future/` portal/shard inventory は non-executable のまま保持し、starter duplicate actualization は行わない
+
 ## next reopen point
 
-- `P-OPS-21` closeout 後の current recommendation は `portal/shard starter revisit`
+- `P-OPS-22` closeout 後の current recommendation は `broader Sugoroku revisit`
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line を維持したまま room-chat queue shaping を閉じたので、starter reopen が本当に必要かを次 comparison とし、その結果を見てから later shard widening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line を維持したまま starter reopen queue も閉じたので、次は broader Sugoroku controls が本当に必要かを comparison とし、その結果を見てから later shard widening や starter reopening の順序を再評価すること
 
 ## avoid
 
@@ -106,4 +112,4 @@
 - portal admission を membership authority と capability authority のどこで分けるか
 - shard config epoch と membership epoch をどの payload seam で併置するか
 - future replication profile catalog を `specs/27` からどの時点で分離するか
-- portal/shard starter を later に reopen するなら、gradient runtime widening の後でも依然として必要か
+- portal/shard starter を later に reopen するなら、broader Sugoroku revisit の後でも依然として必要か

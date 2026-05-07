@@ -194,6 +194,60 @@ class OperationalProductSamplesTests(unittest.TestCase):
             payload["room_chat_scope"]["multi_message_room_surface_defined"]
         )
 
+    def test_portal_shard_starter_scope_marks_active_root_first_boundary(
+        self,
+    ) -> None:
+        scope = operational_product_samples.portal_shard_starter_scope()
+
+        self.assertEqual(
+            scope["authoring_source_boundary"],
+            "active_executable_roots_study_copy",
+        )
+        self.assertEqual(
+            scope["template_catalog_terminal_root"],
+            "templates/sugoroku-world-starter",
+        )
+        self.assertFalse(scope["portal_worldlink_starter_defined"])
+        self.assertFalse(scope["two_shard_hard_boundary_starter_defined"])
+        self.assertFalse(scope["two_shard_gradient_observation_starter_defined"])
+        self.assertFalse(scope["future_inventory_executable"])
+
+    def test_check_all_reports_portal_shard_starter_scope(self) -> None:
+        result = operational_product_samples.CommandResult(
+            name="validation:placeholder",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload=None,
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            with mock.patch.object(
+                operational_product_samples,
+                "release_check",
+                return_value={
+                    "status": "accepted",
+                    "failed_commands": [],
+                },
+            ):
+                payload = operational_product_samples.check_all(skip_docker=False)
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertEqual(
+            payload["portal_shard_starter_scope"]["authoring_source_boundary"],
+            "active_executable_roots_study_copy",
+        )
+        self.assertFalse(
+            payload["portal_shard_starter_scope"][
+                "portal_worldlink_starter_defined"
+            ]
+        )
+
     def test_sugoroku_run_check_requires_bounded_runtime_evidence(self) -> None:
         result = operational_product_samples.CommandResult(
             name="run-local:sugoroku",

@@ -7,6 +7,7 @@
 - validated `template_only` starter catalog は `world-core-starter/`、`membership-chat-starter/`、`sugoroku-world-starter/` に留める
 - `portal-worldlink/`、`two-shard-hard-boundary/`、`two-shard-gradient-observation/` は active executable roots のまま扱う
 - `future/portal-worldlink/`、`future/two-shard-hard-boundary/`、`gradient-observation.profile.json` は non-executable inventory のまま扱う
+- helper `check-all` は machine-readable `portal_shard_starter_scope` を返し、active-root-first authoring boundary を current suite output に残す
 
 ## Why
 

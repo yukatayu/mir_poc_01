@@ -145,6 +145,7 @@ samples/product-alpha1/operational/
 
 - current validated starter catalog is limited to `world_core`, `membership_chat`, and `sugoroku_world`
 - current portal/shard authoring may use active executable roots as study/copy references, but does not add `portal_worldlink` or `two_shard_hard_boundary` starter duplicates
+- suite helper `check-all` may export machine-readable `portal_shard_starter_scope` so the active-root-first authoring boundary stays explicit and reproducible
 - if a later portal/shard starter is added, it must derive from the active executable root and must keep `future/` blueprint/profile inventory explicit and non-executable
 
 ## attach / transport / devtools / save-load

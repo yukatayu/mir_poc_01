@@ -126,6 +126,19 @@
 - bundled CLI / package root / `manifest.json` / `launch.json` / `run.sh` / `README.md` / observer-safe supporting artifacts を current shipped surface とし、other bundled reports と admin/debug local artifacts を evidence-only として明記する
 - docs / roadmap / dashboard を `broader public distribution narrowing` 次段へ進める
 
+## P-OPS-21 current scope
+
+- `MembershipChat` の current bounded lane を helper-reported `room_chat_scope` として machine-readable に固定する
+- current lane は bounded single-message room-oriented `ChatText` に留め、multi-message / transport-coupled / room-history / stdio shapes は未定義のままとする
+- docs / roadmap / dashboard の next queue を portal/shard starter revisit へ進める
+
+## P-OPS-22 current scope
+
+- current portal/shard authoring boundary を helper-reported `portal_shard_starter_scope` として machine-readable に固定する
+- validated starter catalog は `templates/sugoroku-world-starter` で止め、portal/shard authoring は active executable roots を study/copy boundary に使う current line を維持する
+- `future/` portal/shard inventory は non-executable のままとし、starter duplicate actualization は行わない
+- docs / roadmap / dashboard の next queue を broader Sugoroku revisit へ進める
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -139,10 +152,8 @@
 
 ## next packages
 
-1. portal/shard starter revisit
-   room-chat queue is now narrowed; decide whether active-root-first portal/shard authoring should stay as-is or whether starter duplicates are really needed
-2. broader Sugoroku revisit
-   reopen only after portal/shard starter queue shaping if bounded deterministic gameplay still appears too narrow
+1. broader Sugoroku revisit
+   portal/shard starter queue is now narrowed; decide whether the current bounded deterministic gameplay carrier is still too narrow and needs broader controls or negative rows
 
 ## current recommendation
 
@@ -164,7 +175,8 @@
 - `P-OPS-19` で helper / bundle stdout / manifest / verification report に machine-readable `shipped_surface` block を追加し、current alpha replay bundle surface と evidence-only reports/local artifacts を分けた
 - `P-OPS-20` で helper に machine-readable `distribution_scope` を追加し、broader public distribution は current line では未定義、すなわち developer-built binary + generated host launch bundle 以外の archive / installer / system-package / auto-update / hosted-service shape をまだ持たないと固定した
 - `P-OPS-21` で helper に machine-readable `room_chat_scope` を追加し、current `MembershipChat` lane は bounded single-message room-oriented `ChatText` に留まり、multi-message / transport-coupled / room-history / stdio shapes は未定義と固定した
-- 次は portal/shard starter revisit とし、room-chat queue は narrowed state のまま維持する
+- `P-OPS-22` で helper に machine-readable `portal_shard_starter_scope` を追加し、validated starter catalog が `templates/sugoroku-world-starter` で止まり、portal/shard authoring は active executable roots を study/copy boundary に使う current line を machine-readable に固定した
+- 次は broader Sugoroku revisit とし、room-chat queue と portal/shard starter queue は narrowed state のまま維持する
 
 ## open questions
 
@@ -172,4 +184,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の current bounded `ChatText` lane を保ったまま、later multi-message room-chat widening を本当に reopen する必要があるか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- portal/shard starter revisit を broader Sugoroku revisit より先に reopen する必要が本当にあるか
+- broader Sugoroku revisit を閉じた後でも、portal/shard starter reopening を改めて promoted queue に戻す必要が本当にあるか

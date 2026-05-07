@@ -26,6 +26,15 @@ samples/product-alpha1/operational/future/two-shard-hard-boundary/
 samples/product-alpha1/operational/future/gradient-observation.profile.json
 ```
 
+Expected helper-facing scope from `python3 scripts/operational_product_samples.py check-all --format json`:
+
+- `portal_shard_starter_scope.authoring_source_boundary = active_executable_roots_study_copy`
+- `portal_shard_starter_scope.template_catalog_terminal_root = templates/sugoroku-world-starter`
+- `portal_shard_starter_scope.portal_worldlink_starter_defined = false`
+- `portal_shard_starter_scope.two_shard_hard_boundary_starter_defined = false`
+- `portal_shard_starter_scope.two_shard_gradient_observation_starter_defined = false`
+- `portal_shard_starter_scope.future_inventory_executable = false`
+
 ## Why The Starter Catalog Stops Here
 
 - `WorldCore -> MembershipChat -> SugorokuWorld` は mainstream world/chat/game chain として bounded authoring starter に向いている
@@ -85,6 +94,7 @@ Expected bounded evidence:
 - `two-shard-hard-boundary` remains the hard-authority same-session shard root
 - `two-shard-gradient-observation` remains the observer-only same-session gradient root
 - neither root is a starter duplicate of a `future/` blueprint
+- helper `check-all` keeps the same decision machine-readable through `portal_shard_starter_scope`
 
 If you need observer-safe inspection after copying, reuse the same `session -> export-devtools -> view --check` order documented in `operational_package_authoring_01.md`.
 

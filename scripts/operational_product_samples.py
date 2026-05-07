@@ -243,6 +243,27 @@ def room_chat_scope() -> dict[str, Any]:
     }
 
 
+def portal_shard_starter_scope() -> dict[str, Any]:
+    return {
+        "authoring_source_boundary": "active_executable_roots_study_copy",
+        "template_catalog_terminal_root": "templates/sugoroku-world-starter",
+        "portal_worldlink_starter_defined": False,
+        "two_shard_hard_boundary_starter_defined": False,
+        "two_shard_gradient_observation_starter_defined": False,
+        "future_inventory_executable": False,
+        "active_authoring_roots": [
+            str(PORTAL_WORLDLINK.relative_to(REPO_ROOT)),
+            str(TWO_SHARD_HARD_BOUNDARY.relative_to(REPO_ROOT)),
+            str(TWO_SHARD_GRADIENT_OBSERVATION.relative_to(REPO_ROOT)),
+        ],
+        "future_inventory_roots": [
+            "samples/product-alpha1/operational/future/portal-worldlink",
+            "samples/product-alpha1/operational/future/two-shard-hard-boundary",
+            "samples/product-alpha1/operational/future/gradient-observation.profile.json",
+        ],
+    }
+
+
 def sugoroku_runtime_evidence_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     session = payload.get("session") or {}
@@ -899,6 +920,7 @@ def check_all(skip_docker: bool) -> dict[str, Any]:
         "validation": [command_payload(result) for result in validation],
         "release_check": release,
         "room_chat_scope": room_chat_scope(),
+        "portal_shard_starter_scope": portal_shard_starter_scope(),
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
     }

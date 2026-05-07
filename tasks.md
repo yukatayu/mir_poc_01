@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 10:42 JST
+最終更新: 2026-05-07 11:03 JST
 
 ## この文書について
 
@@ -76,6 +76,8 @@
   `scripts/product_alpha1_installed_binary_check.py`、`specs/25-product-alpha1-public-boundary.md`、product alpha guide / summary、`README.md`、`Documentation.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `distribution_scope` と corresponding wording を追加し、current delivery unit を developer-built `mirrorea-alpha` binary + locally generated native host launch bundle に限定しました。archive / installer / system-package / auto-update / hosted-service shape は current line では未定義です。これは final public packaging / hosted product completion ではありません。
 - `P-OPS-21` により broader room-chat revisit は actualize 済みです:
   `scripts/operational_product_samples.py`、`scripts/tests/test_operational_product_samples.py`、`specs/26-operational-product-sample-suite.md`、operational suite guide / summary、`README.md`、`Documentation.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `room_chat_scope` と corresponding wording を追加し、current `membership-chat` lane を bounded single-message room-oriented `ChatText` に固定しました。multi-message room surface / transport-coupled chat lane / room-history service / stdio builtin は current line では未定義です。これは final room-chat service completion ではありません。
+- `P-OPS-22` により portal/shard starter revisit は actualize 済みです:
+  `scripts/operational_product_samples.py`、`scripts/tests/test_operational_product_samples.py`、`specs/26-operational-product-sample-suite.md`、portal/shard starter boundary guide / summary、`README.md`、`Documentation.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、machine-readable `portal_shard_starter_scope` と corresponding wording を追加し、validated starter catalog が `templates/sugoroku-world-starter` で止まり、portal/shard authoring は active executable roots を study/copy boundary に使う current line を固定しました。portal/shard starter duplicates と executable `future/` roots は current line では未定義です。これは starter actualization completion ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -85,15 +87,14 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | portal/shard starter revisit | `Macro 8+`, `S1/S2` | active-root-first portal/shard authoring boundary を維持するのか、starter duplicate reopen が本当に要るのかを再評価する | portal / shard authoring gap が active roots 維持 / starter duplicate reopen のどちらかに圧縮され、future suite line と混線しない | small |
-| 2 | broader Sugoroku revisit | `Macro 8+`, `S1/S2` | current bounded Sugoroku scenario を維持するのか、broader interactive controls / negative rows を reopen するのかを再評価する | portal/shard queue shaping 後も Sugoroku widening が本当に必要かどうかが 1 つの prompt に圧縮される | small |
+| 1 | broader Sugoroku revisit | `Macro 8+`, `S1/S2` | current bounded Sugoroku scenario を維持するのか、broader interactive controls / negative rows を reopen するのかを再評価する | bounded deterministic gameplay が current floor 維持 / broader controls reopen のどちらかに圧縮され、room-chat や portal/shard closed queue と混線しない | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  portal/shard starter revisit
+  broader Sugoroku revisit
 - recommendation reason:
-  `P-OPS-21` で room-chat queue shaping は閉じ、current `membership-chat` lane も bounded single-message room-oriented `ChatText` として固定された。次は portal/shard authoring boundary を active-root-first のまま維持するのか、starter duplicate reopen が本当に要るのかを切り出した方が、later Sugoroku widening や final-public line と混線しにくい
+  `P-OPS-22` で portal/shard starter queue shaping も閉じ、validated starter catalog は `templates/sugoroku-world-starter` で止まり、portal/shard authoring は active executable roots を study/copy boundary に使う current line に固定された。次は current bounded Sugoroku scenario がまだ狭すぎるかどうかを切り出した方が、closed room-chat / portal-shard queue と final-public line を混線させにくい
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -109,9 +110,9 @@
 | product transport command breadth | release validation に影響 | local-only first / local + Docker Compose TCP | `P-A1-29` で local + Docker Compose TCP first cut を実装し、`P-A1-31` release check で再確認済み |
 | admin/debug product viewer breadth | final public viewer / telemetry ABI に影響 | observer-safe + kept-later marker / bounded admin debug panel | product alpha release candidate では concrete observer-safe static viewer と admin/debug `kept_later` marker に留める。full admin/debug view は final-public gate |
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | `P-OPS-21` で current recommendation は bounded room-oriented `ChatText` lane 維持に固定した。broader room-chat widening は non-promoted later package としてのみ再評価する |
-| operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、portal/shard authoring boundary を先に整理してから broader controls を reopen する |
+| operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持していたが、`P-OPS-22` で portal/shard authoring boundary も整理したので、next promoted line は broader Sugoroku revisit になった |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-gradient widening order | `specs/27` と future suite line に影響 | portal-shard starter revisit / broader Sugoroku revisit / later user-final distribution decision | current recommendation は `P-OPS-21` で room-chat queue を閉じたので、portal/shard starter revisit を先に promoted line にし、その結果として broader Sugoroku widening を再開する必要が本当にあるかを再評価する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | broader Sugoroku revisit / later room-chat reopening / later user-final distribution decision | current recommendation は `P-OPS-22` で portal/shard starter queue も閉じたので、broader Sugoroku revisit を次の promoted line にし、その結果として later room-chat reopening や starter reopening を再開する必要が本当にあるかを再評価する |
 
 ## user decision items
 

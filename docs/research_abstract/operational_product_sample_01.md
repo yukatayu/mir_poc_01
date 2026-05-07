@@ -14,7 +14,7 @@
 - `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
 - separate `two-shard-gradient-observation/` root を actualize し、observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を same-session runtime / devtools / helper closeout に接続した
 - `gradient-observation.profile.json` は paired non-executable profile として保持した
-- validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定した
+- validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定し、helper-reported `portal_shard_starter_scope` で current boundary を machine-readable にした
 
 ## What Is Runnable Now
 
@@ -37,7 +37,7 @@
 - `future/two-shard-hard-boundary/` blueprint manifest
 - broader replication profile runtime beyond the bounded observer-only gradient cut
 - broader multi-message room-chat surface beyond the current bounded `ChatText` lane
-- portal/shard starter revisit after a future dedicated widening package
+- broader portal/shard starter catalog beyond the current active-root-first boundary
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
 
 ## Why This Matters
