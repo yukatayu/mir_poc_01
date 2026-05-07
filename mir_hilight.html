@@ -442,6 +442,36 @@
     "source": "module CleanNearEnd.IndexTheories\n\nindex theory SecurityLabel {\n  element Public\n  element UserSecret\n  element KeyMaterial\n\n  order Public <= UserSecret\n  order UserSecret <= KeyMaterial\n\n  join\n  meet\n  law finite_lattice\n}\n\nindex theory FingerprintAuthority {\n  element Observer\n  element Holder\n  element Releaser\n  element Admin\n\n  order Observer <= Holder\n  order Holder <= Releaser\n  order Releaser <= Admin\n\n  law finite_preorder\n}\n\nindex theory CaptureScope {\n  element RoomHistory\n  element EphemeralToken\n  element SecretKeyStore\n\n  law finite_powerset\n}\n\nindex theory Region {\n  element Step\n  element Turn\n  element Session\n\n  order Step <= Turn\n  order Turn <= Session\n\n  law finite_preorder\n}\n\nindex theory CostBudget {\n  counter cpu_steps\n  counter remote_calls\n  counter writes\n\n  law pointwise_natural_bound\n}\n\npolicy FingerprintReleasePolicy {\n  permit declassify SecurityLabel.KeyMaterial -> SecurityLabel.Public\n    requires authority >= FingerprintAuthority.Releaser\n}\n"
   },
   {
+    "path": "samples/clean-near-end/avatar-follow/01_follow_remote_head_with_local_fallback.mir",
+    "name": "01_follow_remote_head_with_local_fallback",
+    "family": "avatar-follow",
+    "source": "# FAIRY-01 active current canary.\n# Goal: follow a visible remote head anchor while keeping explicit local fallback lineage.\n\nmodule CurrentMirrorea.AvatarFairyFollowRemoteHead\n\nplace SharedWorld {\n  place RemoteAvatarPlace#A {\n    publish head_pose(remote_head_anchor, pose_remote)\n      to RemoteAvatarPlace#A.visible_stream\n      produces witness remote_head_seen\n  }\n\n  place FairyPlace#1 {\n    transition follow_remote_head by FairyController at FairyPlace#1 {\n      requires visible_anchor(remote_head_anchor)\n\n      stage acquire_remote:\n        observe remote_head_anchor\n          from RemoteAvatarPlace#A.visible_stream\n          requires witness(remote_head_seen)\n\n      stage establish_lineage:\n        lineage follow_anchor -> remote_head_anchor\n        fallback remote_head_anchor -> local_head_anchor\n\n      stage commit_follow:\n        ensure attached_anchor(FairyPlace#1) = remote_head_anchor\n        ensure fallback_anchor(FairyPlace#1) = local_head_anchor\n    }\n  }\n}\n"
+  },
+  {
+    "path": "samples/clean-near-end/avatar-follow/02_remote_head_not_visible_falls_back_to_local.mir",
+    "name": "02_remote_head_not_visible_falls_back_to_local",
+    "family": "avatar-follow",
+    "source": "# FAIRY-02 active helper-local canary.\n\nmodule CleanNearEnd.AvatarFairyFallbackOnVisibilityLoss\n\nplace SharedWorld {\n  place FairyPlace#1 {\n    transition fallback_to_local_head by FairyController at FairyPlace#1 {\n      requires not visible_anchor(remote_head_anchor)\n      requires local_anchor_available(local_head_anchor)\n\n      stage explain_fallback:\n        publish fallback_reason(remote_head_anchor, VisibilityLost)\n          to FairyPlace#1.debug_history\n          produces witness visibility_fallback\n\n      stage switch_anchor:\n        fallback remote_head_anchor -> local_head_anchor\n          requires witness(visibility_fallback)\n\n      stage commit_follow:\n        ensure attached_anchor(FairyPlace#1) = local_head_anchor\n        ensure transport_recovery_claimed(FairyPlace#1) = false\n    }\n  }\n}\n"
+  },
+  {
+    "path": "samples/clean-near-end/avatar-follow/03_remote_avatar_leaves_falls_back_to_local.mir",
+    "name": "03_remote_avatar_leaves_falls_back_to_local",
+    "family": "avatar-follow",
+    "source": "# FAIRY-03 active current canary.\n# Goal: leave invalidates a remote anchor, rejects stale follow, and falls back to local.\n\nmodule CurrentMirrorea.AvatarFairyFallbackAfterLeave\n\nplace SharedWorld {\n  transition remote_avatar_leave by WorldAdmin at WorldServerPlace#1 {\n    ensure membership_epoch(AvatarRoom) = next_epoch\n    ensure inactive_member(AvatarRoom, RemoteAvatar)\n  }\n\n  place FairyPlace#1 {\n    transition reject_stale_remote_anchor by FairyController at FairyPlace#1 {\n      requires inactive_member(AvatarRoom, RemoteAvatar)\n      requires stale_anchor(remote_head_anchor, next_epoch)\n\n      stage reject_remote:\n        ensure rejected_anchor(remote_head_anchor) = StaleMembershipEpoch\n\n      stage fallback_local:\n        fallback remote_head_anchor -> local_head_anchor\n        ensure attached_anchor(FairyPlace#1) = local_head_anchor\n    }\n  }\n}\n"
+  },
+  {
+    "path": "samples/clean-near-end/avatar-follow/04_invalid_cross_anchor_chain_rejected.mir",
+    "name": "04_invalid_cross_anchor_chain_rejected",
+    "family": "avatar-follow",
+    "source": "# FAIRY-04 active current canary.\n# Goal: reject an invalid cross-anchor chain without hidden repair.\n\nmodule CurrentMirrorea.AvatarFairyInvalidCrossAnchorRejected\n\nplace SharedWorld {\n  place FairyPlace#1 {\n    transition reject_invalid_anchor_chain by FairyController at FairyPlace#1 {\n      requires declared_lineage(remote_hand_anchor -> local_head_anchor)\n      requires not compatible_anchor_kind(remote_hand_anchor, local_head_anchor)\n\n      stage reject_chain:\n        ensure rejection_reason = InvalidCrossAnchorLineage\n        ensure no_hidden_repair = true\n    }\n  }\n}\n"
+  },
+  {
+    "path": "samples/clean-near-end/avatar-follow/06_model_check_no_detached_anchor_observed.mir",
+    "name": "06_model_check_no_detached_anchor_observed",
+    "family": "avatar-follow",
+    "source": "# FAIRY-06 active current canary.\n# Goal: detached anchors must not remain observable after fallback / leave transitions.\n\nmodule CurrentMirrorea.AvatarFairyDetachedAnchorSafety\n\nplace SharedWorld {\n  model avatar_anchor_visibility {\n    transition detach_remote_anchor\n    transition fallback_to_local_anchor\n    transition observe_current_anchor\n\n    property no_detached_anchor_observed:\n      always not (\n        detached_anchor(remote_head_anchor) and\n        observed_anchor(remote_head_anchor)\n      )\n  }\n}\n"
+  },
+  {
     "path": "samples/clean-near-end/modal/01_stage_stable_later_minimal.mir",
     "name": "01_stage_stable_later_minimal",
     "family": "modal",

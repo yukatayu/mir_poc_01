@@ -168,6 +168,13 @@
 - later user-final distribution decision を active self-driven widening package ではなく user-spec-required gate として machine-readable に固定する
 - docs / roadmap / dashboard の current recommendation を `self-driven queue exhausted until user decision` reading に同期する
 
+## P-OPS-27 current scope
+
+- alpha-1 までのやり残しが runnable evidence 上に残っていないかを再監査する
+- product release check、installed-binary adoption probe、operational suite check-all を current tree で rerun する
+- `README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`samples/product-alpha1/README.md` を snapshot 文書として読みやすい粒度へ圧縮する
+- runtime behavior / normative spec を widen せず、既存の user-spec-required broader distribution / final catalog gate を維持する
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -208,6 +215,7 @@
 - `P-OPS-23` で helper に machine-readable `sugoroku_scope` を追加し、current `SugorokuWorld` carrier は bounded deterministic same-session scenario に留まり、interactive turn choice / broader negative rows / networked multi-participant control は未定義と固定した
 - `P-OPS-25` で helper に machine-readable `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は non-promoted、`later_user_final_distribution_decision` が next promoted comparison であることを固定した
 - `P-OPS-26` で helper に machine-readable `user_final_decision_scope` を追加し、current delivery unit は developer-built binary + generated host launch bundle、current catalog scope は bounded product alpha-1 narrow showcase、broader final distribution / final shared-space catalog breadth は user-spec-required gate、current self-driven operational reopenings は exhausted であることを固定した
+- `P-OPS-27` で current runnable floor を再検証し、snapshot docs を current usability / next gate / validation anchors 中心へ圧縮した
 - current self-driven queue はここでいったん尽きており、次は later user-final distribution decision そのものではなく、その user-spec-required gate に対する user input を待つ
 
 ## open questions
