@@ -9,6 +9,7 @@ It is still alpha. It is not the final public product, final grammar, final ABI,
 - The product front-door is versioned `package.mir.json`, not textual `.mir` final grammar.
 - The developer-facing entrypoint is the Rust `mirrorea-alpha` CLI.
 - The current first public-ish adoption candidate is the built `mirrorea-alpha` binary together with the generated native host launch bundle.
+- The current hardening target is limited to versioned `package.mir.json`, the documented `mirrorea-alpha` command family, and the native host launch bundle replay surface.
 - The demo package lives under `samples/product-alpha1/demo/`, separate from `samples/alpha/` and `samples/practical-alpha1/`.
 - Auth, membership, capability, witness, transport, observability, and native policy remain separate lanes.
 - Native output means a host launch bundle containing the compiled CLI, package files, devtools assets, reports, manifest, launch metadata, and provenance metadata.
@@ -39,6 +40,8 @@ package/source front-door
 Standalone `mirrorea-alpha check` still reports package/schema acceptance and residual obligations. It does not by itself claim product alpha release readiness. Product alpha readiness is the combined release-candidate workflow evidence from `demo`, release check, focused tests, and docs.
 
 The viewer remains a non-final static HTML/JSON viewer. It renders concrete observer-safe bundle records for the product demo panels and checks bounded forbidden raw witness/auth/capability keys, but it does not claim a complete redaction proof or final public viewer API.
+
+The installed-binary probe does not freeze final textual `.mir` grammar, final Rust library ABI, or final viewer/devtools bundle ABI. It narrows only the current alpha-stable front door that later public hardening work should reference.
 
 The Docker path is a controlled Docker Compose TCP fixture. It is not WAN or federation.
 

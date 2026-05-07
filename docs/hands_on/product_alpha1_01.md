@@ -28,6 +28,14 @@ cargo test -p mirrorea-cli -- --nocapture
 
 The current first public-ish adoption candidate is the built `mirrorea-alpha` binary together with the generated native host launch bundle. This is still alpha evidence, not final public packaging or final public ABI.
 
+Current hardening scope is narrower than final public product scope:
+
+- versioned `package.mir.json`
+- documented `mirrorea-alpha` command family
+- native host launch bundle replay surface
+
+Final textual `.mir` grammar, final Rust library ABI, and final viewer/devtools bundle ABI remain non-final.
+
 ```bash
 cargo build -q -p mirrorea-cli --bin mirrorea-alpha
 alpha_bin="$(pwd)/target/debug/mirrorea-alpha"

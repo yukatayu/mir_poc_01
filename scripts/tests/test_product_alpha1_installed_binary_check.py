@@ -65,6 +65,16 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             "installed_binary_plus_native_host_launch_bundle",
         )
         self.assertFalse(payload["final_public_api_frozen"])
+        self.assertEqual(
+            payload["compatibility_scope"]["package_format"],
+            "versioned_package_mir_json",
+        )
+        self.assertEqual(
+            payload["compatibility_scope"]["cli_surface"],
+            "mirrorea_alpha_documented_command_family",
+        )
+        self.assertFalse(payload["compatibility_scope"]["final_textual_mir_grammar_frozen"])
+        self.assertFalse(payload["compatibility_scope"]["final_rust_library_abi_frozen"])
         self.assertNotIn("binary-demo", payload["failed_commands"])
 
     def test_check_all_skip_docker_is_partial_non_release_probe(self) -> None:
@@ -131,6 +141,10 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             self.assertEqual(payload["status"], "error")
             self.assertEqual(payload["diagnostic_code"], "output_dir_not_empty")
             self.assertFalse(payload["installed_binary_candidate_ready"])
+            self.assertEqual(
+                payload["compatibility_scope"]["bundle_surface"],
+                "native_host_launch_bundle_run_sh",
+            )
         finally:
             marker.unlink(missing_ok=True)
             out_dir.rmdir()

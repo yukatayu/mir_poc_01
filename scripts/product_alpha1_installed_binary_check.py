@@ -183,6 +183,17 @@ def installed_binary_non_claims(include_docker: bool) -> list[str]:
     return claims
 
 
+def compatibility_scope() -> dict[str, Any]:
+    return {
+        "package_format": "versioned_package_mir_json",
+        "cli_surface": "mirrorea_alpha_documented_command_family",
+        "bundle_surface": "native_host_launch_bundle_run_sh",
+        "final_textual_mir_grammar_frozen": False,
+        "final_rust_library_abi_frozen": False,
+        "final_viewer_bundle_api_frozen": False,
+    }
+
+
 def check_all(
     out_dir: Path | None = None,
     include_docker: bool = True,
@@ -206,6 +217,7 @@ def check_all(
             "installed_binary_candidate_ready": False,
             "public_packaging_candidate": "installed_binary_plus_native_host_launch_bundle",
             "final_public_api_frozen": False,
+            "compatibility_scope": compatibility_scope(),
             "non_claims": installed_binary_non_claims(include_docker),
         }
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -267,6 +279,7 @@ def check_all(
         "installed_binary_candidate_ready": candidate_ready,
         "public_packaging_candidate": "installed_binary_plus_native_host_launch_bundle",
         "final_public_api_frozen": False,
+        "compatibility_scope": compatibility_scope(),
         "non_claims": installed_binary_non_claims(include_docker),
     }
 

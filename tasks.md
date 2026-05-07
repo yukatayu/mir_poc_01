@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 09:28 JST
+最終更新: 2026-05-07 09:57 JST
 
 ## この文書について
 
@@ -68,6 +68,8 @@
   `plan/50-product-alpha1-public-boundary-roadmap.md`、`plan/51-operational-product-sample-roadmap.md`、`plan/52-portal-spatial-world-roadmap.md`、`progress.md`、`tasks.md`、`samples_progress.md` により、next promoted line を public packaging adoption target scoping に絞り、current actualized `mirrorea-alpha` CLI / native host launch bundle / controlled local-Docker host path を first public-ish candidate として扱い、final grammar / ABI / WAN / distributed durability を後段 gate に戻しました。runtime/sample behavior change は主張しません。
 - `P-OPS-17` により installed-binary adoption probe first cut は actualize 済みです:
   `scripts/product_alpha1_installed_binary_check.py`、`docs/hands_on/product_alpha1_01.md`、`docs/research_abstract/product_alpha1_01.md`、`README.md`、`Documentation.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、built `target/debug/mirrorea-alpha` binary、generated native host launch bundle、bundle `run.sh check/view` を current first public-ish adoption candidate として再現できるようにしました。これは installed-binary / host-bundle probe evidence であり、final public CLI/API/ABI や final packaging freeze ではありません。
+- `P-OPS-18` により final grammar / ABI scoping は actualize 済みです:
+  `specs/25-product-alpha1-public-boundary.md`、`scripts/product_alpha1_installed_binary_check.py`、`README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/research_abstract/product_alpha1_01.md`、`plan/50..52`、`progress.md`、`tasks.md`、`samples_progress.md` により、current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に絞り込みました。これは alpha-stable front-door scoping であり、final textual grammar / Rust library ABI / viewer bundle ABI freeze ではありません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -77,15 +79,15 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | final grammar / ABI scoping | `Macro 8+`, `S0/S1` | already-actualized installed-binary + native host launch bundle probe を前提に、どの front door を alpha schema から harden 対象にするかを切り分ける | textual grammar、`package.mir.json` evolution、CLI/API compatibility の stop line が 1 つの prompt に圧縮される | small |
+| 1 | shipped-surface hardening | `Macro 8+`, `S0/S1` | current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay に絞った上で、その built-binary + host-bundle unit のどこまでを user-facing shipped surface として harden するかを整理する | shipped surface が built binary / host bundle / docs/validation obligations のどこまでを含むか 1 つの prompt に圧縮される | small |
 | 2 | broader room-chat revisit | `Macro 8+`, `S1` | current bounded `ChatText` lane を維持するのか、multi-message / transport-coupled widening を separate package として開くのかを再評価する | room-chat widening が current bounded lane 維持 / broadened lane reopen のどちらかに圧縮され、portal/shard line と混線しない | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  final grammar / ABI scoping
+  shipped-surface hardening
 - recommendation reason:
-  `P-OPS-17` で installed-binary + native host launch bundle probe が actualize されたため、packaging-target ambiguity は current queue から外れた。次はこの concrete front door を前提に、`package.mir.json` evolution、direct textual `.mir` non-goal wording、CLI/API compatibility stop line を grammar / ABI package として整理した方が手戻りが少ない
+  `P-OPS-18` で grammar / ABI scoping が終わり、current hardening target は versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に narrowed された。次はこの unit をどこまで user-facing shipped surface として harden するかを整理した方が手戻りが少ない
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -103,7 +105,7 @@
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-gradient widening order | `specs/27` と future suite line に影響 | final grammar / ABI scoping / broader room-chat revisit / portal-shard starter revisit | current recommendation は `P-OPS-17` で installed-binary adoption probe を入れたので、grammar / ABI scoping を先に promoted line にし、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | shipped-surface hardening / broader room-chat revisit / portal-shard starter revisit | current recommendation は `P-OPS-18` で grammar / ABI scoping を閉じたので、shipped-surface hardening を先に promoted line にし、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
 
 ## user decision items
 

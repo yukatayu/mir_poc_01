@@ -30,12 +30,13 @@ Current repo still lacks final-public hardening beyond product alpha-1:
 - final public packaging / installed distribution hardening
 - hosted-service adoption target
 
-Current recommendation after `P-OPS-17`:
+Current recommendation after `P-OPS-18`:
 
-- the current first public-ish adoption candidate is already actualized as:
+- the current first public-ish adoption candidate remains:
   installed binary + native host launch bundle over the current controlled local/Docker host model
-- the next promoted final-public-side package should therefore be **final grammar / ABI scoping**
-- grammar / ABI hardening should use the installed-binary / bundle probe as its current concrete target rather than reopening packaging-target ambiguity
+- grammar / ABI scoping is now narrowed around:
+  versioned `package.mir.json`, documented `mirrorea-alpha` command family, and native host launch bundle replay
+- the next promoted final-public-side package should therefore be **shipped-surface hardening**
 - WAN / federation and distributed durable save/load remain later gates
 
 Operational follow-on note:
@@ -349,6 +350,45 @@ Non-claim:
 - no WAN / federation
 - no arbitrary native package execution
 
+### `P-OPS-18` — final grammar / ABI scoping
+
+Status:
+
+- closed by `P-OPS-18`
+- grammar / ABI hardening target narrowed
+- still alpha, not final public grammar or ABI
+
+Target:
+
+- define which product alpha front door is currently being hardened
+- distinguish the hardening target from still-non-final grammar / ABI surfaces
+- synchronize spec / roadmap / snapshot wording around that narrowed target
+
+Delivered:
+
+- `specs/25-product-alpha1-public-boundary.md` now states that the current alpha-stable hardening target is:
+  versioned `package.mir.json`
+  documented `mirrorea-alpha` command family
+  native host launch bundle replay surface
+- `scripts/product_alpha1_installed_binary_check.py` now reports that compatibility scope in machine-readable form.
+- `plan/50`, `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, and `samples_progress.md` now distinguish:
+  current hardening target
+  from still-non-final textual grammar, Rust library ABI, viewer/devtools bundle ABI, and hosted-service/WAN surfaces.
+
+Validation:
+
+- `python3 -m unittest scripts.tests.test_product_alpha1_installed_binary_check`
+- `python3 -m unittest scripts.tests.test_validate_docs`
+- docs / hierarchy / formatting checks
+
+Non-claim:
+
+- no final textual `.mir` grammar
+- no final Rust library ABI
+- no final viewer/devtools bundle ABI
+- no hosted-service / WAN ABI
+- no final public packaging freeze
+
 ## desired product sample root
 
 Preferred layout:
@@ -433,8 +473,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 ### self-driven implementation packages
 
-- final grammar / ABI scoping
-- shipped-surface hardening or user-facing distribution narrowing only after grammar / ABI scoping clarifies which front door is being stabilized
+- shipped-surface hardening
+- broader public distribution narrowing only after shipped-surface hardening clarifies how much of the current built-binary + host-bundle unit should be treated as user-facing
 
 ### research-discovery items
 
@@ -455,9 +495,8 @@ Actual command names may differ only if docs and validation scripts are updated 
 
 Next promoted package:
 
-- final grammar / ABI scoping
-  - use the already-actualized installed-binary + native host launch bundle probe as the concrete front door
-  - keep hosted service / WAN / distributed durability out of the next package
-  - use that result to constrain later grammar / ABI discussion
+- shipped-surface hardening
+  - keep the hardening target on versioned `package.mir.json`, documented `mirrorea-alpha`, and native host launch bundle replay
+  - decide how much of the current built-binary + host-bundle unit should be treated as the user-facing shipped surface without reopening hosted service / WAN / distributed durability
 
 Queue authority remains `progress.md` / `tasks.md`.

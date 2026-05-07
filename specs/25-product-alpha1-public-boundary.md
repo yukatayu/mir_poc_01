@@ -165,6 +165,36 @@ Textual `.mir` final grammar is a non-goal for product alpha-1.
 If a textual `.mir` input is provided directly before that surface exists,
 the product CLI must return an explicit unsupported / non-goal diagnostic.
 
+## alpha grammar / ABI hardening scope
+
+After the installed-binary adoption probe line is actualized, the current
+alpha-stable hardening target for product alpha-1 is the following front-door
+triple:
+
+- versioned `package.mir.json` package format
+- documented `mirrorea-alpha` command family shape
+- native host launch bundle surface required for `run.sh`-based replay
+
+Therefore grammar / ABI hardening for this line must prioritize:
+
+- package-schema versioning and compatibility envelope
+- documented CLI command / argument / option compatibility needed by the hands-on guide and release-check
+- bundle manifest / `run.sh` reproducibility required by the built-binary + host-bundle adoption probe
+
+The following remain explicitly outside product alpha-1 grammar / ABI hardening:
+
+- final textual `.mir` grammar
+- final Rust library embedding ABI
+- final viewer / devtools JSON bundle ABI
+- final engine / host-adapter ABI
+- hosted service / WAN / federation ABI
+
+Breaking changes inside the hardening target must not be silent:
+
+- package-format changes require versioning or explicit incompatibility diagnostics
+- documented CLI surface changes require synchronized docs and validation updates
+- bundle replay changes require synchronized bundle manifest / `run.sh` validation updates
+
 ## checker requirements
 
 The checker must produce explicit accepted evidence, not only absence of negative diagnostics.
@@ -438,3 +468,7 @@ After `P-A1-31` validates the full product line, the repo may say:
 The current post-`P-A1-31` reading is:
 
 > Product alpha-1 release-candidate workflow is externally reproducible in the documented local/Docker alpha scope; final public grammar / ABI / WAN / distributed durable save/load / arbitrary native execution remain non-goals.
+
+The current post-`P-OPS-18` reading may additionally say:
+
+> Product alpha-1 currently hardens versioned `package.mir.json`, the documented `mirrorea-alpha` command family, and the native host launch bundle replay surface as its alpha-stable front door; final textual `.mir` grammar, final Rust library ABI, final viewer/devtools bundle ABI, WAN, and distributed durable save/load remain non-goals.

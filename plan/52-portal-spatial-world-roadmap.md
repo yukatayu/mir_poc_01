@@ -26,9 +26,11 @@
    dashboard freshness
 4. completed public-ish adoption probe
    installed binary + native host launch bundle
-5. next queue-shaping package
+5. completed front-door hardening scope
    final grammar / ABI scoping
-6. much later
+6. next queue-shaping package
+   shipped-surface hardening
+7. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -82,9 +84,9 @@
 
 ## next reopen point
 
-- `P-OPS-17` closeout 後の current recommendation は `final grammar / ABI scoping`
-- shard line の immediate reopen は推奨しない。current actualized installed-binary + native host launch bundle probe が入ったので、次 comparison は broader room-chat revisit ではなく、この concrete front door に対する grammar / ABI hardening の順序である
-- current recommendation は、portal/shard bounded runtime line を維持したまま grammar / ABI scoping を先に閉じ、その結果を見てから later shard widening の順序を再評価すること
+- `P-OPS-18` closeout 後の current recommendation は `shipped-surface hardening`
+- shard line の immediate reopen は推奨しない。current front door は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay に narrowed 済みなので、次 comparison は broader room-chat revisit ではなく、この built-binary + host-bundle unit をどこまで shipped surface として harden するかである
+- current recommendation は、portal/shard bounded runtime line を維持したまま shipped-surface hardening を先に閉じ、その結果を見てから later shard widening の順序を再評価すること
 
 ## avoid
 
