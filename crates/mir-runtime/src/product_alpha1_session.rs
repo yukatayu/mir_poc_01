@@ -230,6 +230,12 @@ pub struct ProductAlpha1RouteEntry {
     pub transport_contract_summary: String,
     pub membership_epoch: u64,
     pub member_incarnation: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub config_epoch: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub owner_epoch: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub sequence: Option<u64>,
     pub capability_requirement_count: usize,
     pub witness_ref_count: usize,
     pub dispatch_outcome: String,
@@ -1023,6 +1029,9 @@ fn build_run_local_session(
         transport_contract_summary: "same_session_local_process".to_string(),
         membership_epoch: envelope.membership_epoch,
         member_incarnation: envelope.member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: envelope.capability_requirements.len(),
         witness_ref_count: envelope.witness_refs.len(),
         dispatch_outcome: envelope.dispatch_outcome.clone(),
@@ -1578,6 +1587,9 @@ fn build_failure_routes(
             transport_contract_summary: "bounded_failure_observation".to_string(),
             membership_epoch: envelope.membership_epoch,
             member_incarnation: envelope.member_incarnation,
+            config_epoch: None,
+            owner_epoch: None,
+            sequence: None,
             capability_requirement_count: envelope.capability_requirements.len(),
             witness_ref_count: envelope.witness_refs.len(),
             dispatch_outcome: failure.terminal_state.clone(),
@@ -1737,6 +1749,8 @@ fn materialize_package_runtime_evidence(
         materialize_portal_runtime_evidence(session, package);
     } else if package.package_kind == "two_shard_hard_boundary" {
         materialize_two_shard_runtime_evidence(session, package);
+    } else if package.package_kind == "two_shard_gradient_observation" {
+        materialize_two_shard_gradient_runtime_evidence(session, package);
     }
 }
 
@@ -1806,6 +1820,9 @@ fn materialize_sugoroku_runtime_evidence(
         transport_contract_summary: "bounded_sugoroku_roll_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -1828,6 +1845,9 @@ fn materialize_sugoroku_runtime_evidence(
         transport_contract_summary: "bounded_sugoroku_handoff_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -1855,6 +1875,9 @@ fn materialize_sugoroku_runtime_evidence(
         transport_contract_summary: "bounded_sugoroku_membership_reject_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -1984,6 +2007,9 @@ fn materialize_portal_runtime_evidence(
         transport_contract_summary: "bounded_portal_resolve_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2006,6 +2032,9 @@ fn materialize_portal_runtime_evidence(
         transport_contract_summary: "bounded_portal_handoff_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2033,6 +2062,9 @@ fn materialize_portal_runtime_evidence(
         transport_contract_summary: "bounded_portal_admission_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2156,6 +2188,9 @@ fn materialize_two_shard_runtime_evidence(
         transport_contract_summary: "bounded_shard_handoff_offer_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(0),
+        sequence: Some(1),
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2178,6 +2213,9 @@ fn materialize_two_shard_runtime_evidence(
         transport_contract_summary: "bounded_shard_handoff_commit_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(1),
+        sequence: Some(2),
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2205,6 +2243,9 @@ fn materialize_two_shard_runtime_evidence(
         transport_contract_summary: "bounded_shard_old_owner_reject_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(1),
+        sequence: Some(3),
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2232,6 +2273,9 @@ fn materialize_two_shard_runtime_evidence(
         transport_contract_summary: "bounded_shard_missing_witness_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(0),
+        sequence: Some(4),
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2254,6 +2298,9 @@ fn materialize_two_shard_runtime_evidence(
         transport_contract_summary: "bounded_shard_stale_config_contract".to_string(),
         membership_epoch,
         member_incarnation,
+        config_epoch: Some(0),
+        owner_epoch: Some(0),
+        sequence: Some(5),
         capability_requirement_count: package
             .capabilities
             .iter()
@@ -2320,6 +2367,253 @@ fn materialize_two_shard_runtime_evidence(
                     "bounded two-shard hard-boundary runtime keeps authority single-owner"
                         .to_string(),
                     "membership freshness and config freshness remain explicit lanes".to_string(),
+                ],
+            });
+    }
+}
+
+fn materialize_two_shard_gradient_runtime_evidence(
+    session: &mut ProductAlpha1SessionCarrier,
+    package: &ProductAlpha1Package,
+) {
+    let membership_epoch = session.membership.membership_epoch;
+    let member_incarnation = 0;
+    let observe_envelope_id = "envelope#gradient-observe-1".to_string();
+    let projection_envelope_id = "envelope#gradient-projection-1".to_string();
+    let write_reject_envelope_id = "envelope#gradient-write-reject-1".to_string();
+    let stale_drop_envelope_id = "envelope#gradient-stale-drop-1".to_string();
+    let missing_freshness_envelope_id = "envelope#gradient-missing-freshness-reject-1".to_string();
+    let witness_ref = package
+        .witness_requirements
+        .first()
+        .cloned()
+        .unwrap_or_else(|| "gradient_handoff_hint_pub".to_string());
+
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#gradient-observer-view-emitted"),
+        "gradient_observer_view_emitted",
+        "Place[GradientObservationBoundaryPlace]",
+        Some(observe_envelope_id.clone()),
+        "observer-safe gradient view emitted at the shard overlap boundary".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#gradient-handoff-hint-projected"),
+        "gradient_handoff_hint_projected",
+        "Place[GradientObservationBoundaryPlace]",
+        Some(projection_envelope_id.clone()),
+        format!("observer-only handoff hint projected with witness {witness_ref}"),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#gradient-write-capability-rejected"),
+        "gradient_write_capability_rejected",
+        "Place[GradientObservationBoundaryPlace]",
+        Some(write_reject_envelope_id.clone()),
+        "gradient observer write was rejected because overlap view carries no write authority"
+            .to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#gradient-stale-view-dropped"),
+        "gradient_stale_view_dropped",
+        "Place[GradientObservationBoundaryPlace]",
+        Some(stale_drop_envelope_id.clone()),
+        "stale observer-only gradient view was dropped at the boundary".to_string(),
+    );
+    append_runtime_event(
+        session,
+        unique_event_id(session, "event#gradient-missing-freshness-rejected"),
+        "gradient_missing_freshness_rejected",
+        "Place[GradientObservationBoundaryPlace]",
+        Some(missing_freshness_envelope_id.clone()),
+        "gradient projection without required freshness fields was rejected".to_string(),
+    );
+
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#gradient-observe-1".to_string(),
+        envelope_id: observe_envelope_id.clone(),
+        from_place: "Place[ShardAPlace]".to_string(),
+        to_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+        transport_lane: "same_session_gradient_observe".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_gradient_observe_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(1),
+        sequence: Some(20),
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "ObserveGradientBoundary")
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#gradient-projection-1".to_string(),
+        envelope_id: projection_envelope_id.clone(),
+        from_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+        to_place: "ParticipantPlace[boundary_observer]".to_string(),
+        transport_lane: "same_session_gradient_projection".to_string(),
+        message_state_summary: "Delivered".to_string(),
+        transport_contract_summary: "bounded_gradient_projection_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(1),
+        sequence: Some(21),
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "ProjectGradientView")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "accepted".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#gradient-write-reject-1".to_string(),
+        envelope_id: write_reject_envelope_id.clone(),
+        from_place: "ParticipantPlace[boundary_observer]".to_string(),
+        to_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+        transport_lane: "same_session_gradient_write_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_gradient_write_reject_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        config_epoch: Some(1),
+        owner_epoch: Some(1),
+        sequence: Some(22),
+        capability_requirement_count: 0,
+        witness_ref_count: 0,
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#gradient-stale-drop-1".to_string(),
+        envelope_id: stale_drop_envelope_id.clone(),
+        from_place: "Place[ShardBPlace]".to_string(),
+        to_place: "ParticipantPlace[boundary_observer]".to_string(),
+        transport_lane: "same_session_gradient_stale_drop".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_gradient_stale_drop_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        config_epoch: Some(0),
+        owner_epoch: Some(1),
+        sequence: Some(23),
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "ProjectGradientView")
+            .count(),
+        witness_ref_count: session
+            .witness_state
+            .witness_refs
+            .iter()
+            .filter(|witness| witness.as_str() == witness_ref)
+            .count(),
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+    session.route_graph.routes.push(ProductAlpha1RouteEntry {
+        route_id: "route#gradient-missing-freshness-reject-1".to_string(),
+        envelope_id: missing_freshness_envelope_id.clone(),
+        from_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+        to_place: "ParticipantPlace[boundary_observer]".to_string(),
+        transport_lane: "same_session_gradient_missing_freshness_reject".to_string(),
+        message_state_summary: "Rejected".to_string(),
+        transport_contract_summary: "bounded_gradient_missing_freshness_contract".to_string(),
+        membership_epoch,
+        member_incarnation,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
+        capability_requirement_count: package
+            .capabilities
+            .iter()
+            .filter(|capability| capability.as_str() == "ProjectGradientView")
+            .count(),
+        witness_ref_count: 0,
+        dispatch_outcome: "rejected".to_string(),
+        auth_lane_preserved: true,
+        membership_lane_preserved: true,
+        witness_lane_preserved: true,
+        capability_lane_preserved: true,
+    });
+
+    for envelope_id in [observe_envelope_id.clone(), projection_envelope_id.clone()] {
+        session
+            .message_recovery_state
+            .message_state_lane
+            .push(ProductAlpha1MessageStateRecord {
+                envelope_id,
+                state: "Delivered".to_string(),
+                failure_class: None,
+                recovery_action: None,
+            });
+    }
+    for (envelope_id, failure_class, note) in [
+        (
+            write_reject_envelope_id.clone(),
+            "GradientWriteRejected".to_string(),
+            "observer-only overlap view never acquires write authority".to_string(),
+        ),
+        (
+            stale_drop_envelope_id.clone(),
+            "StaleGradientViewDropped".to_string(),
+            "stale gradient projection is dropped instead of silently replayed".to_string(),
+        ),
+        (
+            missing_freshness_envelope_id.clone(),
+            "MissingFreshnessFieldRejected".to_string(),
+            "gradient projection must carry membership/config/owner freshness fields".to_string(),
+        ),
+    ] {
+        session
+            .message_recovery_state
+            .message_state_lane
+            .push(ProductAlpha1MessageStateRecord {
+                envelope_id: envelope_id.clone(),
+                state: "Rejected".to_string(),
+                failure_class: Some(failure_class.clone()),
+                recovery_action: Some("reject".to_string()),
+            });
+        session
+            .message_recovery_state
+            .failure_observations
+            .push(ProductAlpha1FailureObservation {
+                envelope_id,
+                failure_class,
+                initial_state: "Validated".to_string(),
+                recovery_action: "Reject".to_string(),
+                terminal_state: "Rejected".to_string(),
+                retry_count: 0,
+                notes: vec![
+                    "bounded gradient observation remains observer-only and same-session"
+                        .to_string(),
+                    note,
                 ],
             });
     }
@@ -2421,6 +2715,9 @@ fn append_attach_route(
         transport_contract_summary: "same_session_attach_contract".to_string(),
         membership_epoch: session.membership.membership_epoch,
         member_incarnation: 0,
+        config_epoch: None,
+        owner_epoch: None,
+        sequence: None,
         capability_requirement_count: package.capabilities.len(),
         witness_ref_count: package.witness_requirements.len(),
         dispatch_outcome: terminal_outcome.to_string(),
@@ -2802,6 +3099,7 @@ fn is_world_like_product_alpha1_package_kind(package_kind: &str) -> bool {
             | "sugoroku_world"
             | "portal_worldlink"
             | "two_shard_hard_boundary"
+            | "two_shard_gradient_observation"
     )
 }
 
@@ -2812,6 +3110,7 @@ fn default_entry_place_for_package_kind(package_kind: &str) -> String {
         "sugoroku_world" => "Place[SugorokuGamePlace]".to_string(),
         "portal_worldlink" => "Place[PortalBoundaryPlace]".to_string(),
         "two_shard_hard_boundary" => "Place[ShardAuthorityBoundaryPlace]".to_string(),
+        "two_shard_gradient_observation" => "Place[GradientObservationBoundaryPlace]".to_string(),
         _ => "Place[ProductDemoRoom]".to_string(),
     }
 }
@@ -3016,6 +3315,52 @@ fn representative_place_graph(package_kind: &str, entry_place: &str) -> ProductA
                     from_place: "Place[ShardBPlace]".to_string(),
                     to_place: "ParticipantPlace[boundary_observer]".to_string(),
                     relation: "observer_safe_boundary_projection".to_string(),
+                },
+            ],
+        },
+        "two_shard_gradient_observation" => ProductAlpha1PlaceGraph {
+            nodes: vec![
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ShardAPlace]".to_string(),
+                    place_kind: "authority_shard".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[GradientObservationBoundaryPlace]".to_string(),
+                    place_kind: "gradient_boundary".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "Place[ShardBPlace]".to_string(),
+                    place_kind: "authority_shard".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[active_admin_participant]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+                ProductAlpha1PlaceNode {
+                    place_id: "ParticipantPlace[boundary_observer]".to_string(),
+                    place_kind: "ParticipantPlace".to_string(),
+                },
+            ],
+            edges: vec![
+                ProductAlpha1PlaceEdge {
+                    from_place: "ParticipantPlace[active_admin_participant]".to_string(),
+                    to_place: "Place[ShardAPlace]".to_string(),
+                    relation: "shard_admin_membership".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ShardAPlace]".to_string(),
+                    to_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+                    relation: "gradient_overlap_source".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[ShardBPlace]".to_string(),
+                    to_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+                    relation: "gradient_overlap_source".to_string(),
+                },
+                ProductAlpha1PlaceEdge {
+                    from_place: "Place[GradientObservationBoundaryPlace]".to_string(),
+                    to_place: "ParticipantPlace[boundary_observer]".to_string(),
+                    relation: "observer_only_gradient_projection".to_string(),
                 },
             ],
         },

@@ -5,7 +5,7 @@
 ## What Is Fixed
 
 - validated `template_only` starter catalog は `world-core-starter/`、`membership-chat-starter/`、`sugoroku-world-starter/` に留める
-- `portal-worldlink/` と `two-shard-hard-boundary/` は active executable roots のまま扱う
+- `portal-worldlink/`、`two-shard-hard-boundary/`、`two-shard-gradient-observation/` は active executable roots のまま扱う
 - `future/portal-worldlink/`、`future/two-shard-hard-boundary/`、`gradient-observation.profile.json` は non-executable inventory のまま扱う
 
 ## Why
@@ -20,6 +20,8 @@
   `samples/product-alpha1/operational/portal-worldlink/`
 - shard authoring study root:
   `samples/product-alpha1/operational/two-shard-hard-boundary/`
+- gradient authoring study root:
+  `samples/product-alpha1/operational/two-shard-gradient-observation/`
 - starter-boundary guide:
   `../hands_on/operational_portal_shard_starter_boundary_01.md`
 
@@ -27,5 +29,5 @@
 
 - current portal/shard starter templates
 - executable `future/` roots
-- gradient observation runtime
+- current gradient starter templates
 - final public scaffold CLI or final public authoring policy

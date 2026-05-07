@@ -5,14 +5,16 @@
     "operational-membership-chat",
     "operational-sugoroku",
     "operational-portal-worldlink",
-    "operational-two-shard-hard-boundary"
+    "operational-two-shard-hard-boundary",
+    "operational-two-shard-gradient-observation"
   ],
   "runnable_roots": [
     "world-core",
     "membership-chat",
     "sugoroku-world",
     "portal-worldlink",
-    "two-shard-hard-boundary"
+    "two-shard-hard-boundary",
+    "two-shard-gradient-observation"
   ],
   "planned_only_roots": [
     "future/two-shard-hard-boundary"

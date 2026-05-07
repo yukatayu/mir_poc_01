@@ -20,7 +20,7 @@
 - `L1`
   portal / world-link と shard / federation は future boundary を先に固定し、未実装部分を runnable claim に混ぜない
 - `L2`
-  `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` import / package chain を first canonical suite とする
+  `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` import / package chain を first canonical suite とする
 
 ## sample root
 
@@ -38,6 +38,7 @@ samples/product-alpha1/operational/
   - `sugoroku-world/`
   - `portal-worldlink/`
   - `two-shard-hard-boundary/`
+  - `two-shard-gradient-observation/`
 - shared attach package roots
   - `packages/debug-layer/`
   - `packages/auth-layer/`
@@ -66,7 +67,7 @@ samples/product-alpha1/operational/
 - `.mir` files are representative source only
 - current executable input is `package.mir.json`
 - `deployments/projection/projection.profile.json` may carry schema-backed target / packet / FFI inventory for the runnable root, but it is supplementary inventory rather than executable input
-- `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` / `two_shard_hard_boundary` are product alpha package kinds for this line
+- `world_core` / `membership_chat` / `sugoroku_world` / `portal_worldlink` / `two_shard_hard_boundary` / `two_shard_gradient_observation` are product alpha package kinds for this line
 - dependency chain may be expressed as sibling package paths
 - current backend-adjacent actualization is `native host launch bundle` only; docs may inventory WASM host or LLVM/native projection options as future boundary comparisons, but must not claim them executable
 - future portal / shard manifests may use richer fields than the current executable schema, but must be marked planned-only and must not be claimed runnable
@@ -125,7 +126,16 @@ samples/product-alpha1/operational/
 - imports `PortalWorldLink`
 - actualizes one bounded same-session two-shard hard-authority cut with offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject evidence
 - keeps `future/two-shard-hard-boundary/` and `spatial-shard-future.profile.json` as retained blueprint inventory rather than silently promoting them into the executable root
-- does not claim gradient observation runtime, continuous infinite federation, WAN federation, or general model-check completion
+- does not claim continuous infinite federation, WAN federation, or general model-check completion, and does not by itself grant observer-overlap write authority
+
+### TwoShardGradientObservation
+
+`L1`:
+
+- imports `TwoShardHardBoundary`
+- actualizes one bounded same-session observer-only gradient cut with overlap observe / observer projection / write reject / stale-view drop / missing-freshness reject evidence
+- keeps `future/gradient-observation.profile.json` as non-executable profile inventory rather than silently promoting the profile file into the executable root
+- does not claim write authority in overlap zones, continuous spatial synchronization runtime, WAN federation, or general model-check completion
 
 ## authoring starter boundary
 

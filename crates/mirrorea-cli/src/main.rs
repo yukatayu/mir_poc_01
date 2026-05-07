@@ -899,6 +899,7 @@ fn is_operational_product_alpha_package_kind(package_kind: &str) -> bool {
             | "sugoroku_world"
             | "portal_worldlink"
             | "two_shard_hard_boundary"
+            | "two_shard_gradient_observation"
     )
 }
 

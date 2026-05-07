@@ -21,10 +21,11 @@
    portal/shard starter boundary
 2. completed semantic/runtime widenings
    broader room-chat lane
+   bounded observer-only gradient runtime
 3. maintenance closeout
    dashboard freshness
-4. next semantic/runtime widenings
-   bounded observer-only gradient runtime
+4. next queue-shaping package
+   final-public gate scoping
 5. much later
    continuous infinite federation / WAN line
 
@@ -45,10 +46,11 @@
 
 ## current shard cut
 
-- active executable root は `samples/product-alpha1/operational/two-shard-hard-boundary/`
+- active executable roots は `samples/product-alpha1/operational/two-shard-hard-boundary/` と `samples/product-alpha1/operational/two-shard-gradient-observation/`
 - `future/two-shard-hard-boundary/` は blueprint root として維持する
-- current runtime evidence は offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject の same-session hard-authority cut に限る
-- current stop line は gradient observation runtime、general model-check completion、WAN federation、continuous infinite federation
+- `future/gradient-observation.profile.json` は paired non-executable profile inventory として維持する
+- current runtime evidence は hard-boundary root の offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject と、gradient root の observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject に限る
+- current stop line は continuous sync、write-authority gradient runtime、general model-check completion、WAN federation、continuous infinite federation
 
 ## P-OPS-11 current scope
 
@@ -68,6 +70,19 @@
 - queue / roadmap / dashboard wording を room-chat widening 後の current state に揃える
 - next reopen point を gradient observation runtime first cut に進める
 - existing hard-boundary root と `planned_only` profile inventory の boundary は維持する
+
+## P-OPS-15 current scope
+
+- `samples/product-alpha1/operational/two-shard-gradient-observation/` を active executable root として追加する
+- `future/gradient-observation.profile.json` は non-executable inventory のまま保持しつつ、paired active runtime root ref を更新する
+- observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を same-session runtime / devtools / helper closeout に actualize する
+- continuous sync、write authority、WAN federation は主張しない
+
+## next reopen point
+
+- `P-OPS-15` closeout 後の current recommendation は `final-public gate scoping`
+- 比較対象は broader room-chat revisit、portal/shard starter revisit、final grammar / ABI / WAN / durability gate のどれを promoted line にするか
+- current recommendation は、portal/shard bounded runtime line を維持したまま final-public 側の queue shaping を先に閉じること
 
 ## avoid
 

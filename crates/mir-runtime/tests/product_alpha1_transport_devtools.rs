@@ -267,3 +267,32 @@ fn product_alpha1_operational_two_shard_hard_boundary_devtools_bundle_surfaces_b
             .any(|edge| edge.relation == "hard_boundary_handoff")
     );
 }
+
+#[test]
+fn product_alpha1_operational_two_shard_gradient_observation_devtools_bundle_surfaces_observer_only_gradient_runtime()
+ {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/two-shard-gradient-observation"),
+    )
+    .expect("operational two-shard gradient observation root should run locally");
+
+    let bundle = export_product_alpha1_devtools(&report.session)
+        .expect("operational gradient observation devtools should export");
+
+    assert_eq!(
+        bundle.panels.shard_map_future.current_status,
+        "bounded_gradient_observation_runtime"
+    );
+    assert!(bundle.panels.shard_map_future.nodes.iter().any(|node| {
+        node.node_id == "observer#gradient-view"
+            && node.current_status == "same_session_observer_only_runtime_evidence"
+    }));
+    assert!(
+        bundle
+            .panels
+            .shard_map_future
+            .edges
+            .iter()
+            .any(|edge| edge.relation == "observer_only_gradient_projection")
+    );
+}

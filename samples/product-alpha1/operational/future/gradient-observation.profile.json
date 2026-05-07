@@ -1,7 +1,9 @@
 {
   "gradient_profile_version": "ops-gradient-observation-v0",
   "current_status": "planned_only",
-  "active_runtime_root": "../two-shard-hard-boundary",
+  "active_runtime_root": "../two-shard-gradient-observation",
+  "paired_hard_boundary_root": "../two-shard-hard-boundary",
+  "bounded_runtime_status": "same_session_observer_only_runtime_evidence",
   "paired_spatial_profile": "./spatial-shard-future.profile.json",
   "observation_mode": "observer_only_no_write_authority",
   "gradient_zones": [

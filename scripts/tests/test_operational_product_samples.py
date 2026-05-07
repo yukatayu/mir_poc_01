@@ -47,6 +47,19 @@ class OperationalProductSamplesTests(unittest.TestCase):
             "samples/product-alpha1/operational/two-shard-hard-boundary",
         )
 
+    def test_sample_rows_marks_two_shard_gradient_observation_as_runnable(
+        self,
+    ) -> None:
+        rows = operational_product_samples.sample_rows()
+        shard = next(row for row in rows if row["sample_id"] == "OPS-07G")
+
+        self.assertTrue(shard["runnable"])
+        self.assertEqual(shard["package_kind"], "two_shard_gradient_observation")
+        self.assertEqual(
+            shard["root"],
+            "samples/product-alpha1/operational/two-shard-gradient-observation",
+        )
+
     def test_operational_attach_specs_include_deferred_boundaries(self) -> None:
         specs = operational_product_samples.operational_attach_specs()
 
@@ -404,6 +417,126 @@ class OperationalProductSamplesTests(unittest.TestCase):
 
         self.assertTrue(
             operational_product_samples.two_shard_devtools_runtime_evidence_observed(
+                result
+            )
+        )
+
+    def test_two_shard_gradient_run_check_requires_observer_only_runtime_evidence(
+        self,
+    ) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:two-shard-gradient-observation",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "gradient_observer_view_emitted"},
+                            {"event_kind": "gradient_handoff_hint_projected"},
+                            {"event_kind": "gradient_write_capability_rejected"},
+                            {"event_kind": "gradient_stale_view_dropped"},
+                            {"event_kind": "gradient_missing_freshness_rejected"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_gradient_observe"},
+                            {"transport_lane": "same_session_gradient_projection"},
+                            {"transport_lane": "same_session_gradient_write_reject"},
+                            {"transport_lane": "same_session_gradient_stale_drop"},
+                            {
+                                "transport_lane": "same_session_gradient_missing_freshness_reject"
+                            },
+                        ]
+                    },
+                    "message_recovery_state": {
+                        "message_state_lane": [
+                            {
+                                "state": "Rejected",
+                                "failure_class": "GradientWriteRejected",
+                            },
+                            {
+                                "state": "Rejected",
+                                "failure_class": "StaleGradientViewDropped",
+                            },
+                            {
+                                "state": "Rejected",
+                                "failure_class": "MissingFreshnessFieldRejected",
+                            },
+                        ]
+                    },
+                }
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.two_shard_gradient_runtime_evidence_observed(
+                result
+            )
+        )
+
+    def test_two_shard_gradient_devtools_check_requires_gradient_runtime_panel(
+        self,
+    ) -> None:
+        result = operational_product_samples.CommandResult(
+            name="export-devtools:two-shard-gradient-observation",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "panel_ids": ["shard_map_future", "message_route_graph"],
+                "panels": {
+                    "shard_map_future": {
+                        "current_status": "bounded_gradient_observation_runtime"
+                    }
+                },
+                "session": {
+                    "event_dag": {
+                        "nodes": [
+                            {"event_kind": "gradient_observer_view_emitted"},
+                            {"event_kind": "gradient_handoff_hint_projected"},
+                            {"event_kind": "gradient_write_capability_rejected"},
+                            {"event_kind": "gradient_stale_view_dropped"},
+                            {"event_kind": "gradient_missing_freshness_rejected"},
+                        ]
+                    },
+                    "route_graph": {
+                        "routes": [
+                            {"transport_lane": "same_session_gradient_observe"},
+                            {"transport_lane": "same_session_gradient_projection"},
+                            {"transport_lane": "same_session_gradient_write_reject"},
+                            {"transport_lane": "same_session_gradient_stale_drop"},
+                            {
+                                "transport_lane": "same_session_gradient_missing_freshness_reject"
+                            },
+                        ]
+                    },
+                    "message_recovery_state": {
+                        "message_state_lane": [
+                            {
+                                "state": "Rejected",
+                                "failure_class": "GradientWriteRejected",
+                            },
+                            {
+                                "state": "Rejected",
+                                "failure_class": "StaleGradientViewDropped",
+                            },
+                            {
+                                "state": "Rejected",
+                                "failure_class": "MissingFreshnessFieldRejected",
+                            },
+                        ]
+                    },
+                },
+            },
+        )
+
+        self.assertTrue(
+            operational_product_samples.two_shard_gradient_devtools_runtime_evidence_observed(
                 result
             )
         )

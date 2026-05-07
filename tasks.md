@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 08:28 JST
+最終更新: 2026-05-07 09:03 JST
 
 ## この文書について
 
@@ -59,9 +59,11 @@
 - `P-OPS-10` により broader operational template catalog first cut は actualize 済みです:
   `samples/product-alpha1/operational/templates/membership-chat-starter/`、`samples/product-alpha1/operational/templates/sugoroku-world-starter/`、`docs/hands_on/operational_package_authoring_01.md`、`docs/research_abstract/operational_package_authoring_01.md`、focused product-alpha tests、source hierarchy sync により、validated starter catalog を `world_core` から `membership_chat` / `sugoroku_world` まで広げ、dependency-retarget obligation を明示した bounded authoring path を再現できます。portal/shard starter や generic scaffold CLI は主張しません。
 - `P-OPS-11` により gradient observation profile inventory は actualize 済みです:
-  `samples/product-alpha1/operational/future/gradient-observation.profile.json`、`samples/product-alpha1/operational/future/spatial-shard-future.profile.json`、`docs/hands_on/operational_gradient_observation_profile_01.md`、`docs/research_abstract/operational_gradient_observation_profile_01.md`、source hierarchy sync により、observer-only shard overlap reading、freshness fields、replication non-default reading、fallback behavior を `planned_only` inventory として固定できます。gradient observation runtime、portal/shard starter、general model-check completion は主張しません。
+  `samples/product-alpha1/operational/future/gradient-observation.profile.json`、`samples/product-alpha1/operational/future/spatial-shard-future.profile.json`、`docs/hands_on/operational_gradient_observation_profile_01.md`、`docs/research_abstract/operational_gradient_observation_profile_01.md`、source hierarchy sync により、observer-only shard overlap reading、freshness fields、replication non-default reading、fallback behavior を profile-first inventory として固定できます。profile file 自体は引き続き non-executable であり、later `P-OPS-15` の separate bounded runtime root と混同しません。
 - `P-OPS-12` により portal/shard starter boundary は actualize 済みです:
-  `docs/hands_on/operational_portal_shard_starter_boundary_01.md`、`docs/research_abstract/operational_portal_shard_starter_boundary_01.md`、`specs/26..27`、`plan/51..52`、authoring/dashboard sync により、validated starter catalog は intentional に `SugorokuWorld` で止め、portal/shard authoring は active executable roots を使い、`future/` inventory は non-executable のまま保つ current decision を reader-facing に固定できます。portal/shard starter templates、gradient observation runtime は主張しません。
+  `docs/hands_on/operational_portal_shard_starter_boundary_01.md`、`docs/research_abstract/operational_portal_shard_starter_boundary_01.md`、`specs/26..27`、`plan/51..52`、authoring/dashboard sync により、validated starter catalog は intentional に `SugorokuWorld` で止め、portal/shard authoring は active executable roots を使い、`future/` inventory は non-executable のまま保つ current decision を reader-facing に固定できます。later `P-OPS-15` により active shard roots は `two-shard-hard-boundary/` と `two-shard-gradient-observation/` の 2 本になりましたが、portal/shard starter templates は引き続き主張しません。
+- `P-OPS-15` により gradient observation runtime first cut は actualize 済みです:
+  `samples/product-alpha1/operational/two-shard-gradient-observation/`、`crates/mir-ast::product_alpha1`、`crates/mir-runtime::product_alpha1_session`、`crates/mir-runtime::product_alpha1_devtools`、`scripts/operational_product_samples.py` により、bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を `check` / `run-local` / observer-safe devtools export / helper `release-check` から再現できます。`future/gradient-observation.profile.json` は paired inventory のまま残し、continuous sync、write authority、WAN federation、general model-check completion は主張しません。
 - practical alpha-1 line は引き続き promoted implementation memory ですが、現在の closeout 群は **first-floor toolchain** です:
   `RUN-01..04`、`HP-A1-01..07`、`TR-A1-01..07`、`VIS-A1-01..07`、`SL-A1-01..03`、`AV-A1-01..03`、`PE2E-01..09` は first-floor evidence として読むべきであり、same-session operational α-0.5 / α-0.8 / α-0.9 ではありません。
 - alpha-0 line は引き続き closed evidence reference です:
@@ -71,15 +73,14 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | gradient observation runtime first cut | `Macro 8`, `S2/S3` | existing hard-boundary root と planned-only profile inventory を保ったまま、bounded observer-only runtime evidence package を切り分ける | current profile-only lineを維持するか、separate runnable root / helper / devtools evidence を追加するかを evidence-backed に閉じる | medium |
-| 2 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を選ぶ | user または explicit research prompt が next promoted line を選ぶ | user decision |
+| 1 | final-public gate scoping | `Macro 8+`, `S0/S1` | final grammar / ABI / WAN / distributed save-load / packaging adoption target のうち次に開く gate を docs / roadmap / dashboard 上で明示的に選ぶ | next promoted line と non-promoted lines が evidence-backed に同期され、subsequent reopen prompt が 1 本に絞られる | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  gradient observation runtime first cut
+  final-public gate scoping
 - recommendation reason:
-  `P-OPS-14` で queue / dashboard / validator freshness は current state に揃ったため、次は existing hard-boundary root と planned-only profile inventory を崩さずに gradient observation を separate bounded runtime evidence にできるかを切り分けるのが自然である
+  `P-OPS-15` で separate runnable `two-shard-gradient-observation/` root、freshness-carrying route evidence、observer-only devtools export まで閉じたため、次は broader room-chat revisit / portal-shard authoring revisit / final public gate のうちどれを promoted line にするかを先に絞る方が手戻りが少ない
 - stop line:
   final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、arbitrary native execution、final product claim へ踏み込まない
 
@@ -97,7 +98,7 @@
 | operational room-chat beyond bounded `ChatText` | `MembershipChat` と `P-OPS-04+` の room-level behavior に影響 | current bounded `ChatText` lane を維持 / multi-message room-chat surface へ widen / transport-coupled chat lane を先に入れる | current recommendation は bounded room-oriented `ChatText` lane を維持し、transport-coupled chat や broader multi-message surface は later package に分ける |
 | operational Sugoroku widening beyond bounded carrier | `P-OPS-07+` の domain realization に影響 | current deterministic scenario 維持 / broader interactive controls を追加 / negative rows を増やす | current recommendation は `P-OPS-04` の bounded scenario を維持し、shard line を先に進めてから broader controls を reopen する |
 | projection inventory widening beyond current summary | future backend inventory と eventual split planning に影響 | current summary のまま保つ / richer projection IR を導入 / placement planner adjacent IR を別置きする | current recommendation は `P-OPS-05` の schema-backed summary を維持し、actual server/client split work が始まるまで richer IR は開かない |
-| post-two-shard widening order | `specs/27` と future suite line に影響 | gradient observation runtime first / broader room-chat revisit / portal-shard starter revisit later | current recommendation は gradient observation runtime first cut を先に閉じ、その後に portal/shard starter revisit の必要性自体を再評価する |
+| post-gradient widening order | `specs/27` と future suite line に影響 | broader room-chat revisit / portal-shard starter revisit / final-public gate scoping | current recommendation は `P-OPS-15` closeout 後に final-public gate scoping を先に閉じ、その結果として portal/shard widening を再開する必要が本当にあるかを再評価する |
 
 ## user decision items
 

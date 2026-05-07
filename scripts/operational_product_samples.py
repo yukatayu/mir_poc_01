@@ -20,6 +20,7 @@ MEMBERSHIP_CHAT = OPS_ROOT / "membership-chat"
 SUGOROKU_WORLD = OPS_ROOT / "sugoroku-world"
 PORTAL_WORLDLINK = OPS_ROOT / "portal-worldlink"
 TWO_SHARD_HARD_BOUNDARY = OPS_ROOT / "two-shard-hard-boundary"
+TWO_SHARD_GRADIENT_OBSERVATION = OPS_ROOT / "two-shard-gradient-observation"
 LAYERS_ROOT = OPS_ROOT / "packages"
 EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT = 'ChatText:Text("hello room")->Text("room#lobby message accepted: hello room")'
 EXPECTED_SUGOROKU_EVENT_KINDS = {
@@ -70,6 +71,25 @@ EXPECTED_TWO_SHARD_FAILURE_CLASSES = {
     "OldOwnerWriteRejected",
     "MissingHandoffWitness",
     "StaleShardConfig",
+}
+EXPECTED_TWO_SHARD_GRADIENT_EVENT_KINDS = {
+    "gradient_observer_view_emitted",
+    "gradient_handoff_hint_projected",
+    "gradient_write_capability_rejected",
+    "gradient_stale_view_dropped",
+    "gradient_missing_freshness_rejected",
+}
+EXPECTED_TWO_SHARD_GRADIENT_ROUTE_LANES = {
+    "same_session_gradient_observe",
+    "same_session_gradient_projection",
+    "same_session_gradient_write_reject",
+    "same_session_gradient_stale_drop",
+    "same_session_gradient_missing_freshness_reject",
+}
+EXPECTED_TWO_SHARD_GRADIENT_FAILURE_CLASSES = {
+    "GradientWriteRejected",
+    "StaleGradientViewDropped",
+    "MissingFreshnessFieldRejected",
 }
 
 
@@ -162,6 +182,13 @@ def sample_rows() -> list[dict[str, Any]]:
             "root": str(TWO_SHARD_HARD_BOUNDARY.relative_to(REPO_ROOT)),
             "package_id": "operational-two-shard-hard-boundary",
             "package_kind": "two_shard_hard_boundary",
+            "runnable": True,
+        },
+        {
+            "sample_id": "OPS-07G",
+            "root": str(TWO_SHARD_GRADIENT_OBSERVATION.relative_to(REPO_ROOT)),
+            "package_id": "operational-two-shard-gradient-observation",
+            "package_kind": "two_shard_gradient_observation",
             "runnable": True,
         },
     ]
@@ -342,6 +369,54 @@ def two_shard_devtools_runtime_evidence_observed(result: CommandResult) -> bool:
     )
 
 
+def two_shard_gradient_runtime_evidence_observed(result: CommandResult) -> bool:
+    payload = result.payload or {}
+    session = payload.get("session") or {}
+    panels = payload.get("panels") or {}
+    event_nodes = (
+        (session.get("event_dag") or {}).get("nodes")
+        or (panels.get("event_dag") or {}).get("nodes")
+        or []
+    )
+    route_entries = (
+        (session.get("route_graph") or {}).get("routes")
+        or (panels.get("message_route_graph") or {}).get("routes")
+        or []
+    )
+    message_state_lane = (
+        (session.get("message_recovery_state") or {}).get("message_state_lane")
+        or (panels.get("message_failure_recovery") or {}).get("message_state_lane")
+        or []
+    )
+    event_kinds = {node.get("event_kind") for node in event_nodes}
+    route_lanes = {route.get("transport_lane") for route in route_entries}
+    failure_classes = {
+        record.get("failure_class")
+        for record in message_state_lane
+        if record.get("state") == "Rejected"
+    }
+    return (
+        EXPECTED_TWO_SHARD_GRADIENT_EVENT_KINDS.issubset(event_kinds)
+        and EXPECTED_TWO_SHARD_GRADIENT_ROUTE_LANES.issubset(route_lanes)
+        and EXPECTED_TWO_SHARD_GRADIENT_FAILURE_CLASSES.issubset(failure_classes)
+    )
+
+
+def two_shard_gradient_devtools_runtime_evidence_observed(
+    result: CommandResult,
+) -> bool:
+    payload = result.payload or {}
+    panel_ids = payload.get("panel_ids") or []
+    shard_panel = (payload.get("panels") or {}).get("shard_map_future") or {}
+    return (
+        "shard_map_future" in panel_ids
+        and "message_route_graph" in panel_ids
+        and shard_panel.get("current_status")
+        == "bounded_gradient_observation_runtime"
+        and two_shard_gradient_runtime_evidence_observed(result)
+    )
+
+
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
@@ -361,6 +436,10 @@ def run_world_package(root: Path) -> dict[str, Any]:
     elif root == TWO_SHARD_HARD_BOUNDARY:
         semantic_checks["runtime_evidence_observed"] = (
             two_shard_runtime_evidence_observed(result)
+        )
+    elif root == TWO_SHARD_GRADIENT_OBSERVATION:
+        semantic_checks["runtime_evidence_observed"] = (
+            two_shard_gradient_runtime_evidence_observed(result)
         )
     return {
         "surface_kind": "operational_product_sample_run_report",
@@ -522,10 +601,12 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     chat_session_dir, chat_env = sugoroku_session_env()
     portal_session_dir, portal_env = sugoroku_session_env()
     shard_session_dir, shard_env = sugoroku_session_env()
+    gradient_session_dir, gradient_env = sugoroku_session_env()
     viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-viewer-")
     chat_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-chat-viewer-")
     portal_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-portal-viewer-")
     shard_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-shard-viewer-")
+    gradient_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-gradient-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
     sugoroku_check = run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD)))
     membership_chat_run = run_command(
@@ -590,6 +671,29 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "view:two-shard-hard-boundary",
         cargo_alpha_args("view", shard_viewer_dir, "--check"),
     )
+    gradient_check = run_command(
+        "check:two-shard-gradient-observation",
+        cargo_alpha_args("check", str(TWO_SHARD_GRADIENT_OBSERVATION)),
+    )
+    gradient_run = run_command(
+        "run-local:two-shard-gradient-observation",
+        cargo_alpha_args("run-local", str(TWO_SHARD_GRADIENT_OBSERVATION)),
+        env=gradient_env,
+    )
+    gradient_export = run_command(
+        "export-devtools:two-shard-gradient-observation",
+        cargo_alpha_args(
+            "export-devtools",
+            "session#operational-two-shard-gradient-observation",
+            "--out",
+            gradient_viewer_dir,
+        ),
+        env=gradient_env,
+    )
+    gradient_view = run_command(
+        "view:two-shard-gradient-observation",
+        cargo_alpha_args("view", gradient_viewer_dir, "--check"),
+    )
     sugoroku_run = run_command(
         "run-local:sugoroku",
         cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
@@ -615,6 +719,10 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         shard_run,
         shard_export,
         shard_view,
+        gradient_check,
+        gradient_run,
+        gradient_export,
+        gradient_view,
         sugoroku_run,
         sugoroku_session,
         run_command("save:r0", cargo_alpha_args("save", "session#operational-sugoroku", "--savepoint", "savepoint#ops-r0"), env=env),
@@ -663,6 +771,10 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     portal_devtools_ok = portal_devtools_runtime_evidence_observed(portal_export)
     shard_runtime_ok = two_shard_runtime_evidence_observed(shard_run)
     shard_devtools_ok = two_shard_devtools_runtime_evidence_observed(shard_export)
+    gradient_runtime_ok = two_shard_gradient_runtime_evidence_observed(gradient_run)
+    gradient_devtools_ok = two_shard_gradient_devtools_runtime_evidence_observed(
+        gradient_export
+    )
     projection_inventory_ok = sugoroku_projection_inventory_observed(sugoroku_check)
     sugoroku_runtime_ok = sugoroku_runtime_evidence_observed(sugoroku_run)
     sugoroku_devtools_ok = sugoroku_devtools_runtime_evidence_observed(sugoroku_export)
@@ -678,6 +790,10 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         failed.append("two-shard-runtime-evidence")
     if not shard_devtools_ok:
         failed.append("two-shard-devtools")
+    if not gradient_runtime_ok:
+        failed.append("two-shard-gradient-runtime-evidence")
+    if not gradient_devtools_ok:
+        failed.append("two-shard-gradient-devtools")
     if not projection_inventory_ok:
         failed.append("projection-inventory")
     if not sugoroku_runtime_ok:
@@ -693,10 +809,12 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "chat_session_dir": chat_session_dir,
         "portal_session_dir": portal_session_dir,
         "shard_session_dir": shard_session_dir,
+        "gradient_session_dir": gradient_session_dir,
         "viewer_dir": viewer_dir,
         "chat_viewer_dir": chat_viewer_dir,
         "portal_viewer_dir": portal_viewer_dir,
         "shard_viewer_dir": shard_viewer_dir,
+        "gradient_viewer_dir": gradient_viewer_dir,
         "bundle_dir": bundle_dir,
         "failed_commands": failed,
         "attach_matrix_complete": attach_matrix_ok,
@@ -706,6 +824,8 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "portal_devtools_ok": portal_devtools_ok,
         "shard_runtime_ok": shard_runtime_ok,
         "shard_devtools_ok": shard_devtools_ok,
+        "gradient_runtime_ok": gradient_runtime_ok,
+        "gradient_devtools_ok": gradient_devtools_ok,
         "projection_inventory_ok": projection_inventory_ok,
         "sugoroku_runtime_ok": sugoroku_runtime_ok,
         "sugoroku_devtools_ok": sugoroku_devtools_ok,
@@ -806,6 +926,10 @@ def main(argv: list[str] | None = None) -> int:
     add_subcommand_format(run_portal_worldlink_parser)
     run_two_shard_parser = subparsers.add_parser("run-two-shard-hard-boundary")
     add_subcommand_format(run_two_shard_parser)
+    run_two_shard_gradient_parser = subparsers.add_parser(
+        "run-two-shard-gradient-observation"
+    )
+    add_subcommand_format(run_two_shard_gradient_parser)
     attach_layers_parser = subparsers.add_parser("attach-layers")
     add_subcommand_format(attach_layers_parser)
     transport_local_parser = subparsers.add_parser("transport-local")
@@ -845,6 +969,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = run_world_package(PORTAL_WORLDLINK)
     elif args.command == "run-two-shard-hard-boundary":
         payload = run_world_package(TWO_SHARD_HARD_BOUNDARY)
+    elif args.command == "run-two-shard-gradient-observation":
+        payload = run_world_package(TWO_SHARD_GRADIENT_OBSERVATION)
     elif args.command == "attach-layers":
         payload = attach_layers()
     elif args.command == "transport-local":

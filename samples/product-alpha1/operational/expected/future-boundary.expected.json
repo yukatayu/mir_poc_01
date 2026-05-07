@@ -3,7 +3,8 @@
   "portal_worldlink_blueprint_status": "planned_manifest_only",
   "two_shard_hard_boundary_status": "bounded_two_shard_runtime",
   "two_shard_hard_boundary_blueprint_status": "planned_only",
-  "gradient_observation_status": "planned_only",
+  "gradient_observation_status": "bounded_gradient_observation_runtime",
+  "gradient_observation_profile_status": "planned_only",
   "non_claims": [
     "no WAN federation",
     "no continuous infinite shard federation",

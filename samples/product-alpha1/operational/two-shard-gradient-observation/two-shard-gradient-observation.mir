@@ -1,0 +1,28 @@
+// representative source only; current executable input is package.mir.json
+import TwoShardHardBoundary version "^0.1"
+
+module TwoShardGradientObservation version "0.1.0"
+
+place GradientObservationBoundaryPlace
+place ShardAPlace
+place ShardBPlace
+
+capability ObserveGradientBoundary
+capability ProjectGradientView
+
+witness gradient_handoff_hint_pub
+
+perform emit_gradient_observer_view(actor : Principal, object : ObjectRef)
+  require membership.active(actor)
+  require capability(ObserveGradientBoundary)
+  publish gradient_view_emitted(object)
+
+perform project_gradient_handoff_hint(actor : Principal, object : ObjectRef)
+  require capability(ProjectGradientView)
+  produces witness gradient_handoff_hint_pub
+  publish gradient_handoff_hint(object)
+
+perform reject_gradient_write(actor : Principal, object : ObjectRef)
+  publish gradient_write_rejected(object)
+
+observe gradient_view_emitted via shard_map_panel

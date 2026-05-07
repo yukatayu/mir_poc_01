@@ -1,9 +1,10 @@
 {
   "spatial_profile_version": "ops-spatial-shard-v0",
   "current_status": "planned_only",
-  "active_runtime_root": "../two-shard-hard-boundary",
-  "bounded_runtime_status": "same_session_two_shard_first_cut",
-  "gradient_observation_status": "planned_profile_present",
+  "active_runtime_root": "../two-shard-gradient-observation",
+  "hard_boundary_runtime_root": "../two-shard-hard-boundary",
+  "bounded_runtime_status": "same_session_gradient_observation_first_cut",
+  "gradient_observation_status": "bounded_runtime_root_plus_profile_present",
   "gradient_observation_profile_ref": "./gradient-observation.profile.json",
   "space": {
     "kind": "integer_chunk_grid",

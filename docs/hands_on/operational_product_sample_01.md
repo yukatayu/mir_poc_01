@@ -1,8 +1,8 @@
 # Operational Product Sample 01
 
-この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` widening を再現するための入口です。
+この guide は、clean clone から `P-OPS-01 operational product sample suite scaffold and first workflow` とその `P-OPS-03` / `P-OPS-04` / `P-OPS-05` / `P-OPS-06` / `P-OPS-07` / `P-OPS-13` / `P-OPS-15` widening を再現するための入口です。
 
-これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut まで actualize 済みです。gradient observation は `planned_only` profile inventory まで actualize 済みですが、general model-check completion、gradient observation runtime、WAN federation / continuous spatial sync / continuous infinite shard federation / final portal ABI ではありません。validated starter catalog は intentionally `SugorokuWorld` で止まり、portal/shard authoring は active roots を study/copy boundary に留めます。
+これは final public product ではありません。portal は bounded same-session first cut、shard は bounded same-session two-shard hard-authority first cut、gradient observation は separate `two-shard-gradient-observation/` root による bounded observer-only runtime first cut まで actualize 済みです。`future/gradient-observation.profile.json` は引き続き non-executable profile inventory であり、general model-check completion、continuous spatial sync、WAN federation / continuous infinite shard federation / final portal ABI ではありません。validated starter catalog は intentionally `SugorokuWorld` で止まり、portal/shard authoring は active roots を study/copy boundary に留めます。
 
 ## Validate The Repository
 
@@ -15,7 +15,7 @@ cargo fmt --check
 git diff --check
 ```
 
-## Check The Five Roots
+## Check The Six Roots
 
 ```bash
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/world-core --format json
@@ -23,6 +23,7 @@ cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/members
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/sugoroku-world --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/portal-worldlink --format json
 cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/two-shard-hard-boundary --format json
+cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/two-shard-gradient-observation --format json
 ```
 
 Expected bounded evidence:
@@ -86,6 +87,25 @@ Expected bounded evidence:
 - devtools `shard_map_future.current_status = bounded_two_shard_runtime`
 - これは bounded same-session hard-authority cut であり、general model-check completion、gradient observation、WAN federation は主張しない
 
+## Run The Gradient Observation Runtime
+
+```bash
+gradient_session_dir=$(mktemp -d /tmp/mirrorea-ops-gradient-session-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$gradient_session_dir" cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/operational/two-shard-gradient-observation --format json
+gradient_viewer_dir=$(mktemp -d /tmp/mirrorea-ops-gradient-viewer-XXXXXX)
+MIRROREA_ALPHA_SESSION_DIR="$gradient_session_dir" cargo run -q -p mirrorea-cli -- export-devtools 'session#operational-two-shard-gradient-observation' --out "$gradient_viewer_dir" --format json
+cargo run -q -p mirrorea-cli -- view "$gradient_viewer_dir" --check --format json
+```
+
+Expected bounded evidence:
+
+- `typed_host_io_claimed = false`
+- `run-local` / `export-devtools` payload には `gradient_view_observed`, `gradient_handoff_hint_published`, `gradient_write_rejected`, `gradient_stale_view_dropped`, `gradient_missing_freshness_rejected` が入る
+- route lanes は `same_session_gradient_view`, `same_session_gradient_handoff_hint`, `same_session_gradient_write_reject`, `same_session_gradient_stale_view_drop`, `same_session_gradient_missing_freshness_reject` を observer-safe に保持する
+- `gradient_write_rejected` は observer copy に write authority を与えず、freshness tuple が欠けた row は reject lane に落ちる
+- devtools `shard_map_future.current_status = bounded_gradient_observation_runtime`
+- これは bounded same-session observer-only cut であり、continuous sync、write authority、WAN federation は主張しない
+
 ## Run The First Operational Workflow
 
 ```bash
@@ -126,6 +146,7 @@ python3 scripts/operational_product_samples.py run-membership-chat --format json
 python3 scripts/operational_product_samples.py run-sugoroku --format json
 python3 scripts/operational_product_samples.py run-portal-worldlink --format json
 python3 scripts/operational_product_samples.py run-two-shard-hard-boundary --format json
+python3 scripts/operational_product_samples.py run-two-shard-gradient-observation --format json
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/operational_product_samples.py release-check --format json
 ```
@@ -135,10 +156,11 @@ python3 scripts/operational_product_samples.py release-check --format json
 - `samples/product-alpha1/operational/deployments/projection/projection.profile.json`
 - `samples/product-alpha1/operational/portal-worldlink/`
 - `samples/product-alpha1/operational/two-shard-hard-boundary/`
+- `samples/product-alpha1/operational/two-shard-gradient-observation/`
 - `samples/product-alpha1/operational/future/portal-worldlink/`
 - `samples/product-alpha1/operational/future/two-shard-hard-boundary/`
 - `samples/product-alpha1/operational/future/gradient-observation.profile.json`
 
-`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/` と `two-shard-hard-boundary/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots、`gradient-observation.profile.json` は observer-only widening を `planned_only` で固定した future profile です。
+`projection.profile.json` は current schema-backed inventory です。`portal-worldlink/`、`two-shard-hard-boundary/`、`two-shard-gradient-observation/` は current bounded runtime roots、`future/portal-worldlink/` と `future/two-shard-hard-boundary/` は retained blueprint roots、`gradient-observation.profile.json` は separate runtime root と paired の non-executable future profile です。
 
 portal/shard authoring boundary を確認したい場合は `operational_portal_shard_starter_boundary_01.md` を参照してください。

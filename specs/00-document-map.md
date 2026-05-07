@@ -34,7 +34,7 @@
   - `public_api_parser_gate_plan_01.md` は、`P18` repo-side freeze checklist / public-boundary inventory / true user-spec hold line split を reader-facing に短く読むための summary である。
   - `runtime_crate_hotplug_carrier_admission_cut_01.md` は、`R6` runtime-crate hot-plug carrier admission cut の current queue narrowing と stop line を reader-facing に短く読むための summary である。
   - `product_alpha1_01.md` は、product alpha release-candidate workflow、non-final viewer、release-check boundary、final-public non-claims を reader-facing に短く読むための summary である。
-  - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary` suite、shared attach packages、projection inventory、retained portal/shard blueprints、runtime / docs non-claims を reader-facing に短く読むための summary である。
+  - `operational_product_sample_01.md` は、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` suite、shared attach packages、projection inventory、retained portal/shard blueprints、runtime / docs non-claims を reader-facing に短く読むための summary である。
   - `operational_package_authoring_01.md` は、validated starter catalog、rename / dependency-retarget obligations、bounded authoring flow、current diagnostics を reader-facing に短く読むための summary である。
   - `operational_backend_inventory_01.md` は、host launch bundle / WASM / LLVM comparison inventory と current non-claims を reader-facing に短く読むための summary である。
   - `operational_gradient_observation_profile_01.md` は、portal/shard future line における observer-only gradient observation profile を reader-facing に短く読むための summary である。
@@ -188,7 +188,7 @@
   - `P-A1-25..31` package sequence、alpha `U1` defaults、sample root / native bundle target、validation direction、blocker split を整理する。
 - `specs/26-operational-product-sample-suite.md`
   - product alpha release-candidate workflow の次に置く canonical operational product sample suite の規範境界を置く。
-  - `samples/product-alpha1/operational/`、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary`、shared attach packages、deployment/projection intent、template-only authoring starters、retained portal/shard blueprints、completion condition、non-claims を固定する。
+  - `samples/product-alpha1/operational/`、`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation`、shared attach packages、deployment/projection intent、template-only authoring starters、retained portal/shard blueprints、completion condition、non-claims を固定する。
 - `plan/51-operational-product-sample-roadmap.md`
   - operational product sample suite の repository-memory roadmap を置く。
   - `P-OPS-01..` package line、current scope、next widenings、open questions を整理する。

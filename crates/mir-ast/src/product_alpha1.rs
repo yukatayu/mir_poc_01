@@ -466,6 +466,7 @@ fn validate_package_shape(
         | "sugoroku_world"
         | "portal_worldlink"
         | "two_shard_hard_boundary"
+        | "two_shard_gradient_observation"
         | "layer"
         | "object"
         | "avatar_preview"
@@ -628,7 +629,11 @@ fn validate_package_shape(
 fn package_kind_supports_runtime_input(package_kind: &str) -> bool {
     matches!(
         package_kind,
-        "world" | "world_core" | "membership_chat" | "sugoroku_world"
+        "world"
+            | "world_core"
+            | "membership_chat"
+            | "sugoroku_world"
+            | "two_shard_gradient_observation"
     )
 }
 

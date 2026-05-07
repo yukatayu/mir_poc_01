@@ -262,8 +262,8 @@ pub fn export_product_alpha1_devtools(
         membership_frontier_timeline: vec![ProductAlpha1MembershipFrontierEntry {
             frontier_id: session.membership.frontier_id.clone(),
             membership_epoch: session.membership.membership_epoch,
-            config_epoch: 0,
-            config_epoch_status: "kept_later_manifest_only".to_string(),
+            config_epoch: current_config_epoch(session),
+            config_epoch_status: current_config_epoch_status(session),
             active_member_count: session.membership.active_members.len(),
             required_membership_count: session.membership.required_membership_refs.len(),
         }],
@@ -497,6 +497,32 @@ fn required_panel_ids() -> Vec<String> {
     .iter()
     .map(|value| (*value).to_string())
     .collect()
+}
+
+fn current_config_epoch(session: &ProductAlpha1SessionCarrier) -> u64 {
+    session
+        .route_graph
+        .routes
+        .iter()
+        .filter_map(|route| route.config_epoch)
+        .max()
+        .unwrap_or(0)
+}
+
+fn current_config_epoch_status(session: &ProductAlpha1SessionCarrier) -> String {
+    if matches!(
+        session.runtime_plan.package_kind.as_str(),
+        "two_shard_hard_boundary" | "two_shard_gradient_observation"
+    ) && session
+        .route_graph
+        .routes
+        .iter()
+        .any(|route| route.config_epoch.is_some())
+    {
+        "runtime_evidence_observed".to_string()
+    } else {
+        "kept_later_manifest_only".to_string()
+    }
 }
 
 fn panel_summary(panel_id: &str) -> &'static str {
@@ -907,8 +933,11 @@ fn shard_map_future_panel(
     session: &ProductAlpha1SessionCarrier,
 ) -> ProductAlpha1FutureBoundaryPanel {
     let shard_runtime = session.runtime_plan.package_kind == "two_shard_hard_boundary";
+    let gradient_runtime = session.runtime_plan.package_kind == "two_shard_gradient_observation";
     ProductAlpha1FutureBoundaryPanel {
-        current_status: if shard_runtime {
+        current_status: if gradient_runtime {
+            "bounded_gradient_observation_runtime".to_string()
+        } else if shard_runtime {
             "bounded_two_shard_runtime".to_string()
         } else if is_operational_product_package(&session.runtime_plan.package_kind) {
             "planned_only".to_string()
@@ -919,7 +948,7 @@ fn shard_map_future_panel(
             ProductAlpha1NamedGraphNode {
                 node_id: "shard#A".to_string(),
                 node_kind: "authority_shard".to_string(),
-                current_status: if shard_runtime {
+                current_status: if shard_runtime || gradient_runtime {
                     "same_session_runtime_evidence".to_string()
                 } else {
                     "future_inventory".to_string()
@@ -928,7 +957,7 @@ fn shard_map_future_panel(
             ProductAlpha1NamedGraphNode {
                 node_id: "shard#B".to_string(),
                 node_kind: "authority_shard".to_string(),
-                current_status: if shard_runtime {
+                current_status: if shard_runtime || gradient_runtime {
                     "same_session_runtime_evidence".to_string()
                 } else {
                     "future_inventory".to_string()
@@ -937,7 +966,11 @@ fn shard_map_future_panel(
             ProductAlpha1NamedGraphNode {
                 node_id: "observer#gradient-view".to_string(),
                 node_kind: "observation_profile".to_string(),
-                current_status: "later_than_two_shard_cut".to_string(),
+                current_status: if gradient_runtime {
+                    "same_session_observer_only_runtime_evidence".to_string()
+                } else {
+                    "later_than_two_shard_cut".to_string()
+                },
             },
         ],
         edges: vec![
@@ -949,10 +982,24 @@ fn shard_map_future_panel(
             ProductAlpha1NamedGraphEdge {
                 from_node: "shard#A".to_string(),
                 to_node: "observer#gradient-view".to_string(),
-                relation: "future_gradient_observation".to_string(),
+                relation: if gradient_runtime {
+                    "observer_only_gradient_projection".to_string()
+                } else {
+                    "future_gradient_observation".to_string()
+                },
+            },
+            ProductAlpha1NamedGraphEdge {
+                from_node: "shard#B".to_string(),
+                to_node: "observer#gradient-view".to_string(),
+                relation: if gradient_runtime {
+                    "observer_only_gradient_projection".to_string()
+                } else {
+                    "future_gradient_observation".to_string()
+                },
             },
         ],
         non_claims: vec![
+            "no write authority in gradient observation zones".to_string(),
             "no global participant vector clock default".to_string(),
             "no continuous infinite federation implementation".to_string(),
             "no distributed durable save/load".to_string(),
@@ -1121,6 +1168,67 @@ fn canonical_operational_chain(
                 },
             ],
         ),
+        "two_shard_gradient_observation" => (
+            vec![
+                ProductAlpha1NamedGraphNode {
+                    node_id: "WorldCore".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "MembershipChat".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "SugorokuWorld".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "PortalWorldLink".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "TwoShardHardBoundary".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: dependency_status.to_string(),
+                },
+                ProductAlpha1NamedGraphNode {
+                    node_id: "TwoShardGradientObservation".to_string(),
+                    node_kind: node_kind.to_string(),
+                    current_status: "implemented".to_string(),
+                },
+            ],
+            vec![
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "WorldCore".to_string(),
+                    to_node: "MembershipChat".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "MembershipChat".to_string(),
+                    to_node: "SugorokuWorld".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "SugorokuWorld".to_string(),
+                    to_node: "PortalWorldLink".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "PortalWorldLink".to_string(),
+                    to_node: "TwoShardHardBoundary".to_string(),
+                    relation: relation.to_string(),
+                },
+                ProductAlpha1NamedGraphEdge {
+                    from_node: "TwoShardHardBoundary".to_string(),
+                    to_node: "TwoShardGradientObservation".to_string(),
+                    relation: relation.to_string(),
+                },
+            ],
+        ),
         _ => (
             vec![ProductAlpha1NamedGraphNode {
                 node_id: package_id.to_string(),
@@ -1148,6 +1256,7 @@ fn is_operational_product_package(package_kind: &str) -> bool {
             | "sugoroku_world"
             | "portal_worldlink"
             | "two_shard_hard_boundary"
+            | "two_shard_gradient_observation"
     )
 }
 

@@ -429,6 +429,95 @@ fn product_alpha1_run_local_accepts_operational_membership_chat_root() {
 }
 
 #[test]
+fn product_alpha1_run_local_accepts_operational_two_shard_gradient_observation_root() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/operational/two-shard-gradient-observation"),
+    )
+    .expect("operational two-shard gradient observation root should run locally");
+
+    assert_eq!(
+        report.package_id,
+        "operational-two-shard-gradient-observation"
+    );
+    assert_eq!(
+        report.session.session_id,
+        "session#operational-two-shard-gradient-observation"
+    );
+    assert_eq!(
+        report.runtime_plan.package_kind,
+        "two_shard_gradient_observation"
+    );
+    assert_eq!(
+        report.runtime_plan.entry_place,
+        "Place[GradientObservationBoundaryPlace]"
+    );
+    assert!(
+        report
+            .runtime_plan
+            .declared_dependencies
+            .iter()
+            .any(|dependency| dependency == "../two-shard-hard-boundary")
+    );
+    assert!(!report.typed_host_io_claimed);
+    let event_kinds = report
+        .session
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_kind.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "gradient_observer_view_emitted",
+        "gradient_handoff_hint_projected",
+        "gradient_write_capability_rejected",
+        "gradient_stale_view_dropped",
+        "gradient_missing_freshness_rejected",
+    ] {
+        assert!(
+            event_kinds.contains(required),
+            "missing gradient event kind {required}"
+        );
+    }
+    let route_lanes = report
+        .session
+        .route_graph
+        .routes
+        .iter()
+        .map(|route| route.transport_lane.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "same_session_gradient_observe",
+        "same_session_gradient_projection",
+        "same_session_gradient_write_reject",
+        "same_session_gradient_stale_drop",
+        "same_session_gradient_missing_freshness_reject",
+    ] {
+        assert!(
+            route_lanes.contains(required),
+            "missing gradient route lane {required}"
+        );
+    }
+    for failure_class in [
+        "GradientWriteRejected",
+        "StaleGradientViewDropped",
+        "MissingFreshnessFieldRejected",
+    ] {
+        assert!(
+            report
+                .session
+                .message_recovery_state
+                .message_state_lane
+                .iter()
+                .any(|record| {
+                    record.failure_class.as_deref() == Some(failure_class)
+                        && record.state == "Rejected"
+                }),
+            "missing gradient rejection row {failure_class}"
+        );
+    }
+}
+
+#[test]
 fn product_alpha1_run_local_accepts_operational_world_core_starter_template() {
     let report = run_product_alpha1_local_session_path(
         repo_root().join("samples/product-alpha1/operational/templates/world-core-starter"),

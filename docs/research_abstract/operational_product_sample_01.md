@@ -12,7 +12,8 @@
 - current backend comparison inventory keeps `native host launch bundle` as the only actualized path and leaves WASM/LLVM docs-first only
 - `portal-worldlink/` bounded same-session discrete handoff root を actualize し、`future/portal-worldlink/` blueprint は保持した
 - `two-shard-hard-boundary/` bounded same-session hard-authority handoff root を actualize し、`future/two-shard-hard-boundary/` と `spatial-shard-future.profile.json` は retained blueprint inventory として保持した
-- `gradient-observation.profile.json` を追加し、observer-only gradient widening を `planned_only` profile として固定した
+- separate `two-shard-gradient-observation/` root を actualize し、observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidence を same-session runtime / devtools / helper closeout に接続した
+- `gradient-observation.profile.json` は paired non-executable profile として保持した
 - validated starter catalog を `SugorokuWorld` で止め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に固定した
 
 ## What Is Runnable Now
@@ -24,6 +25,7 @@
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export
 - `two-shard-hard-boundary` の bounded same-session offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject runtime evidence と observer-safe devtools export
+- `two-shard-gradient-observation` の bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
 - `scripts/operational_product_samples.py check-all`
 
@@ -33,7 +35,7 @@
 - richer server/client binary split realization beyond the current projection inventory summary
 - `future/portal-worldlink/` blueprint manifest
 - `future/two-shard-hard-boundary/` blueprint manifest
-- gradient observation runtime / broader replication profile runtime
+- broader replication profile runtime beyond the bounded observer-only gradient cut
 - broader multi-message room-chat surface beyond the current bounded `ChatText` lane
 - portal/shard starter revisit after a future dedicated widening package
 - broader interactive Sugoroku controls and additional negative rows beyond the current bounded carrier
@@ -50,7 +52,7 @@
 - direct LLVM backend
 - WAN / federation
 - distributed durable save/load
-- final portal ABI / continuous spatial sync / continuous infinite shard federation / general model-check completion
+- final portal ABI / continuous spatial sync / continuous infinite shard federation / write-authority gradient runtime / general model-check completion
 
 ## Entry Points
 

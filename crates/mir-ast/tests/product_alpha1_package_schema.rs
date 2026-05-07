@@ -362,6 +362,7 @@ fn product_alpha1_package_schema_accepts_operational_sample_suite_roots() {
         "samples/product-alpha1/operational/sugoroku-world",
         "samples/product-alpha1/operational/portal-worldlink",
         "samples/product-alpha1/operational/two-shard-hard-boundary",
+        "samples/product-alpha1/operational/two-shard-gradient-observation",
     ] {
         let package = load_product_alpha1_package_path(repo_root.join(relative))
             .unwrap_or_else(|_| panic!("operational fixture should load: {relative}"));

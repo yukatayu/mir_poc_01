@@ -10,7 +10,7 @@
 - `demo/` は release-candidate workflow root として残し、operational suite と混ぜない
 - current executable input は `package.mir.json`
 - representative `.mir` は explanatory source
-- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`、`PortalWorldLink`、`TwoShardHardBoundary`
+- runnable root は `WorldCore`、`MembershipChat`、`SugorokuWorld`、`PortalWorldLink`、`TwoShardHardBoundary`、`TwoShardGradientObservation`
 - `future/portal-worldlink/` と shard inventory は同 root に置いてよいが、active portal root と混同せず blueprint / planned-only を維持する
 
 ## P-OPS-01 current scope
@@ -100,6 +100,13 @@
 - `scripts/README.md`、`plan/51..52`、`progress.md`、`tasks.md`、`samples_progress.md` の stale reopen-point drift を解消する
 - behavior change や new runtime claim を混ぜず、next reopen point を gradient observation runtime first cut に進める
 
+## P-OPS-15 current scope
+
+- `samples/product-alpha1/operational/two-shard-gradient-observation/` を separate runnable root として追加する
+- `two_shard_gradient_observation` package kind を current product alpha executable line に追加する
+- bounded same-session observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject evidenceを `run-local` / observer-safe devtools / helper `release-check` / `check-all` から再現する
+- `future/gradient-observation.profile.json` は non-executable inventory のまま保持しつつ、paired active runtime root ref を更新する
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -113,9 +120,7 @@
 
 ## next packages
 
-1. gradient observation runtime first cut
-   keep the existing hard-boundary root and planned-only profile inventory, and decide whether to add a separate bounded observer-only runtime root
-2. final-public gate scoping
+1. final-public gate scoping
    choose whether the next promoted line after operational shard widening is broader room-chat, final-public grammar/ABI scoping, or another explicit user-selected gate
 
 ## current recommendation
@@ -132,7 +137,8 @@
 - `P-OPS-11` で `future/gradient-observation.profile.json` と guide を追加し、observer-only widening を `planned_only` inventory として actualize 済み
 - `P-OPS-12` で starter catalog を `SugorokuWorld` までに留め、portal/shard authoring は active roots と `future/` inventory を分けて読む decision を docs-first に actualize 済み
 - `P-OPS-14` で maintenance / dashboard freshness を閉じ、queue / validator / roadmap / dashboard wording を current state に同期済み
-- 次は gradient observation runtime first cut とし、existing hard-boundary root / planned-only profile inventory を維持したまま bounded observer-only runtime evidence を切り分ける
+- `P-OPS-15` で separate `TwoShardGradientObservation` runnable root を actualize し、existing hard-boundary root と planned-only profile inventory を保ったまま bounded observer-only runtime evidence を切り分け済み
+- 次は final-public gate scoping とし、broader room-chat revisit を reopen するか、final-public grammar / ABI / WAN / durability gate を先に詰めるかを整理する
 
 ## open questions
 
@@ -140,4 +146,4 @@
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
 - `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- gradient observation runtime を active `two_shard_hard_boundary` root の内側へ widen するか、separate runnable root として切り分けるか
+- broader room-chat revisit と final-public gate scoping のどちらを next promoted line にするか

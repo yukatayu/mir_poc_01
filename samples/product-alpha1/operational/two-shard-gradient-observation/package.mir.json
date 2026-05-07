@@ -1,0 +1,121 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "operational-two-shard-gradient-observation",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "two_shard_gradient_observation",
+  "dependencies": [
+    "../two-shard-hard-boundary"
+  ],
+  "effects": [
+    "ObserveGradientBoundary",
+    "ProjectGradientView",
+    "RejectGradientWrite"
+  ],
+  "failures": [
+    "GradientWriteRejected",
+    "StaleGradientViewDropped",
+    "MissingFreshnessFieldRejected",
+    "RouteUnavailable"
+  ],
+  "capabilities": [
+    "ObserveGradientBoundary",
+    "ProjectGradientView"
+  ],
+  "witness_requirements": [
+    "gradient_handoff_hint_pub"
+  ],
+  "membership_requirements": [
+    "active_admin_participant",
+    "boundary_observer"
+  ],
+  "auth_policy": {
+    "policy_id": "operational-two-shard-gradient-auth-policy",
+    "required_bindings": [
+      "participant_membership",
+      "boundary_observer_membership"
+    ]
+  },
+  "auth_stack": [
+    "membership_auth",
+    "capability_auth",
+    "witness_auth"
+  ],
+  "contracts": [
+    {
+      "contract_id": "operational-gradient-observe-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "ObserveGradientBoundary"
+      ],
+      "failure_row": [
+        "RouteUnavailable"
+      ]
+    },
+    {
+      "contract_id": "operational-gradient-project-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "ProjectGradientView"
+      ],
+      "failure_row": [
+        "StaleGradientViewDropped",
+        "MissingFreshnessFieldRejected"
+      ]
+    },
+    {
+      "contract_id": "operational-gradient-write-reject-contract",
+      "variance": "invariant",
+      "effect_row": [
+        "RejectGradientWrite"
+      ],
+      "failure_row": [
+        "GradientWriteRejected"
+      ]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": [
+      "observer_safe_gradient_summary"
+    ]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": [
+      "raw_boundary_trace",
+      "raw_auth_evidence"
+    ]
+  },
+  "retention_policy": {
+    "scope": "operational_gradient_observation_session",
+    "retained_artifacts": [
+      "checker_report",
+      "runtime_plan",
+      "gradient_boundary_summary"
+    ]
+  },
+  "message_recovery_policy": {
+    "handled_failures": [
+      "reject"
+    ],
+    "recovery": "reject"
+  },
+  "savepoint_policy": {
+    "classes": [
+      "R0",
+      "R2"
+    ],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[GradientObservationBoundaryPlace]"
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}
