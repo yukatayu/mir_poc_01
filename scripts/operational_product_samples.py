@@ -231,6 +231,18 @@ def membership_chat_devtools_chat_text_observed(result: CommandResult) -> bool:
     )
 
 
+def room_chat_scope() -> dict[str, Any]:
+    return {
+        "lane_kind": "bounded_single_message_room_oriented_chat_text",
+        "request_shape": 'ChatText("hello room")',
+        "response_shape": 'Text("room#lobby message accepted: hello room")',
+        "multi_message_room_surface_defined": False,
+        "transport_coupled_chat_lane_defined": False,
+        "room_history_service_defined": False,
+        "stdio_builtin_defined": False,
+    }
+
+
 def sugoroku_runtime_evidence_observed(result: CommandResult) -> bool:
     payload = result.payload or {}
     session = payload.get("session") or {}
@@ -449,6 +461,7 @@ def run_world_package(root: Path) -> dict[str, Any]:
         else "error",
         "command": command_payload(result),
         "semantic_checks": semantic_checks,
+        "room_chat_scope": room_chat_scope() if root == MEMBERSHIP_CHAT else None,
         "final_public_api_frozen": False,
     }
 
@@ -820,6 +833,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "attach_matrix_complete": attach_matrix_ok,
         "membership_chat_chat_text_ok": membership_chat_chat_text_ok,
         "membership_chat_devtools_ok": membership_chat_devtools_ok,
+        "room_chat_scope": room_chat_scope(),
         "portal_runtime_ok": portal_runtime_ok,
         "portal_devtools_ok": portal_devtools_ok,
         "shard_runtime_ok": shard_runtime_ok,
@@ -884,6 +898,7 @@ def check_all(skip_docker: bool) -> dict[str, Any]:
         "failed_commands": failed,
         "validation": [command_payload(result) for result in validation],
         "release_check": release,
+        "room_chat_scope": room_chat_scope(),
         "product_alpha1_ready": False,
         "final_public_api_frozen": False,
     }

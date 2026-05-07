@@ -139,10 +139,10 @@
 
 ## next packages
 
-1. broader room-chat revisit
-   product-side distribution queue is now narrowed; decide whether current bounded `ChatText` lane should stay as-is or whether any broader multi-message / transport-coupled widening is justified as a separate package
-2. portal/shard starter revisit
-   reopen only after room-chat queue shaping if active-root-first authoring still appears too narrow
+1. portal/shard starter revisit
+   room-chat queue is now narrowed; decide whether active-root-first portal/shard authoring should stay as-is or whether starter duplicates are really needed
+2. broader Sugoroku revisit
+   reopen only after portal/shard starter queue shaping if bounded deterministic gameplay still appears too narrow
 
 ## current recommendation
 
@@ -163,12 +163,13 @@
 - `P-OPS-18` で `specs/25` と installed-binary helper output を使い、current hardening target を versioned `package.mir.json`、documented `mirrorea-alpha` command family、native host launch bundle replay surface に絞り込んだ
 - `P-OPS-19` で helper / bundle stdout / manifest / verification report に machine-readable `shipped_surface` block を追加し、current alpha replay bundle surface と evidence-only reports/local artifacts を分けた
 - `P-OPS-20` で helper に machine-readable `distribution_scope` を追加し、broader public distribution は current line では未定義、すなわち developer-built binary + generated host launch bundle 以外の archive / installer / system-package / auto-update / hosted-service shape をまだ持たないと固定した
-- 次は broader room-chat revisit とし、product-side distribution queue は narrowed state のまま維持する
+- `P-OPS-21` で helper に machine-readable `room_chat_scope` を追加し、current `MembershipChat` lane は bounded single-message room-oriented `ChatText` に留まり、multi-message / transport-coupled / room-history / stdio shapes は未定義と固定した
+- 次は portal/shard starter revisit とし、room-chat queue は narrowed state のまま維持する
 
 ## open questions
 
 - Sugoroku behavior を current bounded scenario からどこまで interactive / negative-row widening するか
 - current projection inventory summary を richer projection IR / placement planner boundary にいつ widen するか
-- `MembershipChat` の next widening を current bounded `ChatText` lane から multi-message room-chat surfaceへ進めるか、この bounded lane を維持するか
+- `MembershipChat` の current bounded `ChatText` lane を保ったまま、later multi-message room-chat widening を本当に reopen する必要があるか
 - WASM client host comparison を projection inventory の内側へ寄せるか、独立 docs inventory として維持するか
-- broader room-chat revisit を portal/shard starter revisit より先に reopen する必要が本当にあるか
+- portal/shard starter revisit を broader Sugoroku revisit より先に reopen する必要が本当にあるか

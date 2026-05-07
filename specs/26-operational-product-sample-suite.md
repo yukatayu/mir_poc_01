@@ -96,6 +96,8 @@ samples/product-alpha1/operational/
 - imports `WorldCore`
 - adds join / leave / room-message contract surface
 - actualizes one bounded `ChatText("hello room") -> "room#lobby message accepted: hello room"` request/response lane as current room-oriented host-boundary evidence
+- current room-chat scope is bounded single-message room-oriented `ChatText` only
+- multi-message room surface, transport-coupled chat lane, and room-history service remain undefined in the current executable line
 - keeps host I/O at typed external boundary
 - does not introduce stdio as Mir core primitive
 

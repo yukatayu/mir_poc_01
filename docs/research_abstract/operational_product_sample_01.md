@@ -20,7 +20,7 @@
 
 - `world-core` / `membership-chat` / `sugoroku-world` の `check`
 - `world-core` / `membership-chat` / `sugoroku-world` の `run-local`
-- `membership-chat` の bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary と observer-safe devtools export
+- `membership-chat` の bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary、helper-reported `room_chat_scope`、および observer-safe devtools export
 - `sugoroku-world` の bounded same-session roll / publish / witness / handoff / stale membership reject runtime evidence と observer-safe devtools export
 - `sugoroku-world` の `check` / runtime plan / devtools projection panel から、schema-backed projection target / packet / FFI inventory summary
 - `portal-worldlink` の bounded same-session resolve / handoff offer / witness emit / destination admit runtime evidence と observer-safe devtools export

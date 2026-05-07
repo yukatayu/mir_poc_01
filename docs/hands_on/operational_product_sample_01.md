@@ -48,6 +48,9 @@ Expected bounded evidence:
 
 - `typed_host_io_claimed = true`
 - observer-safe host-I/O lane includes `ChatText:Text("hello room")->Text("room#lobby message accepted: hello room")`
+- helper-facing `room_chat_scope.lane_kind = bounded_single_message_room_oriented_chat_text`
+- `room_chat_scope.multi_message_room_surface_defined = false`
+- `room_chat_scope.transport_coupled_chat_lane_defined = false`
 - event DAG / devtools export show the same bounded room-oriented request/response without introducing stdio as a Mir core primitive
 
 ## Run The Portal First Cut

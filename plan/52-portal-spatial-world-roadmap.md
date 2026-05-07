@@ -32,9 +32,11 @@
    shipped-surface hardening
 7. completed queue-shaping package
    broader public distribution narrowing
-8. next queue-shaping package
+8. completed queue-shaping package
    broader room-chat revisit
-9. much later
+9. next queue-shaping package
+   portal/shard starter revisit
+10. much later
    continuous infinite federation / WAN line
 
 ## current portal cut
@@ -88,9 +90,9 @@
 
 ## next reopen point
 
-- `P-OPS-20` closeout 後の current recommendation は `broader room-chat revisit`
+- `P-OPS-21` closeout 後の current recommendation は `portal/shard starter revisit`
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line を維持したまま room-chat queue shaping を先に閉じ、その結果を見てから later shard widening の順序を再評価すること
+- current recommendation は、portal/shard bounded runtime line を維持したまま room-chat queue shaping を閉じたので、starter reopen が本当に必要かを次 comparison とし、その結果を見てから later shard widening の順序を再評価すること
 
 ## avoid
 

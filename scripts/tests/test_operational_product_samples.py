@@ -6,6 +6,7 @@ import sys
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -134,6 +135,63 @@ class OperationalProductSamplesTests(unittest.TestCase):
             operational_product_samples.membership_chat_devtools_chat_text_observed(
                 result
             )
+        )
+
+    def test_room_chat_scope_marks_current_lane_as_bounded_single_message(self) -> None:
+        scope = operational_product_samples.room_chat_scope()
+
+        self.assertEqual(
+            scope["lane_kind"],
+            "bounded_single_message_room_oriented_chat_text",
+        )
+        self.assertEqual(scope["request_shape"], 'ChatText("hello room")')
+        self.assertEqual(
+            scope["response_shape"],
+            'Text("room#lobby message accepted: hello room")',
+        )
+        self.assertFalse(scope["multi_message_room_surface_defined"])
+        self.assertFalse(scope["transport_coupled_chat_lane_defined"])
+        self.assertFalse(scope["room_history_service_defined"])
+        self.assertFalse(scope["stdio_builtin_defined"])
+
+    def test_run_world_package_for_membership_chat_reports_room_chat_scope(
+        self,
+    ) -> None:
+        result = operational_product_samples.CommandResult(
+            name="run-local:membership-chat",
+            argv=[],
+            returncode=0,
+            stdout="",
+            stderr="",
+            payload={
+                "typed_host_io_claimed": True,
+                "session": {
+                    "host_io_history": [{"adapter_kind": "ChatText"}],
+                    "observer_safe_export": {
+                        "visible_host_io_events": [
+                            operational_product_samples.EXPECTED_MEMBERSHIP_CHAT_HOST_IO_EVENT
+                        ]
+                    },
+                },
+            },
+        )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            return_value=result,
+        ):
+            payload = operational_product_samples.run_world_package(
+                operational_product_samples.MEMBERSHIP_CHAT
+            )
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertEqual(
+            payload["room_chat_scope"]["lane_kind"],
+            "bounded_single_message_room_oriented_chat_text",
+        )
+        self.assertFalse(
+            payload["room_chat_scope"]["multi_message_room_surface_defined"]
         )
 
     def test_sugoroku_run_check_requires_bounded_runtime_evidence(self) -> None:

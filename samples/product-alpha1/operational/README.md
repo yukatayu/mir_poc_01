@@ -18,7 +18,7 @@ It stays separate from `samples/product-alpha1/demo/`.
 Current runnable floor:
 
 - `world-core/`: `check`, `run-local`
-- `membership-chat/`: `check`, `run-local`, bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
+- `membership-chat/`: `check`, `run-local`, bounded room-oriented `ChatText("hello room") -> "room#lobby message accepted: hello room"` host boundary, machine-readable `room_chat_scope`, and session-bound `export-devtools` / `view --check` via `session#operational-membership-chat`
 - `sugoroku-world/`: `check`, `run-local`, bounded same-session roll / publish / witness / handoff / stale membership reject evidence, `session`, `attach`, `save`, `quiescent-save`, `transport`, `export-devtools`, `view`, `build-native-bundle`
   deferred `placeholder-object` / `custom-avatar-preview` attach rows are part of the visible workflow, not hidden inventory
 - `portal-worldlink/`: `check`, `run-local`, observer-safe `export-devtools`, and bounded same-session portal resolve / handoff offer / witness emit / destination admit evidence
