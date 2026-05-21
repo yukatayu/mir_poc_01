@@ -7,7 +7,7 @@ This root is reserved for the Product/Public-ready Mirrorea Spaces alpha-1 line.
 - `demo/` is the product alpha-1 release-candidate root. It exercises `mirrorea-alpha check`, `run-local`, `session`, `attach`, `save`, `load`, `quiescent-save`, local/Docker `transport`, `export-devtools`, `view`, `build-native-bundle`, and `demo`.
 - `docker/` contains the controlled Docker Compose TCP transport fixture used by the product release check.
 - `computational/` now contains one direct executable Mir-owned `add-one-pure-mir/` root, ten helper-executable `P-COMP-03` rows under positive/negative subdirectories, and four executable `P-COMP-04` host-I/O boundary rows: one accepted `run-local` row plus three expected `check` rejections. `package.mir.json` is the current executable input; adjacent `.mir` files remain explanatory only.
-- `posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold. It contains representative `.mir` sketches, `matrix.json`, and helper-validated planned rows, but no executable runtime row yet.
+- `posegraph/` is the `P-POSE-02` bounded Transform / PoseGraph helper line. It contains representative `.mir` sketches, `matrix.json`, helper-only `package.mir.json` inputs for `pose-04` and `pose-05`, one accepted same-snapshot row, one `violation_export` mismatch row, and seven remaining planned rows.
 - `projection/` is the `P-PROJ-01` planned-only projection boundary inventory scaffold. It contains target-manifest / packet / FFI / compatibility JSON artifacts plus helper-validated planned rows, but no code generation or server/client binary split.
 - `engine-adapter/` is the `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold. It contains provider contract JSON artifacts plus helper-validated planned rows, but no admitted provider execution.
 - `operational/` is the canonical operational product sample suite. It contains the six runnable roots `world-core`, `membership-chat`, `sugoroku-world`, `portal-worldlink`, `two-shard-hard-boundary`, and `two-shard-gradient-observation`.
@@ -49,7 +49,7 @@ The Docker transport command requires local Docker and Docker Compose. If those 
 - This root does not define final textual `.mir` grammar.
 - This root claims product alpha release-candidate workflow readiness through local/Docker controlled validation, not final public product readiness.
 - `computational/` now proves one bounded direct Mir-owned runtime row, helper-executable first-floor widening rows, and a bounded direct host read/write boundary package with effect / failure / capability rejection evidence. It is not final grammar, not broad publish/observe/witness/handoff effect semantics, and it does not reinterpret legacy adapter-owned `typed_host_io.add_one`.
-- `posegraph/` is a machine-readable planned-only scaffold, not same-snapshot runtime proof.
+- `posegraph/` is a machine-readable helper evidence line, not full PoseGraph runtime completion, save/load admissibility, or devtools-panel completion.
 - `projection/` is a machine-readable planned-only scaffold, not server/client code generation or backend realization.
 - `engine-adapter/` is a machine-readable planned-only scaffold, not provider admission or final FFI ABI.
 - `operational/` may expose broader package / deployment / future-boundary inventory than `demo/`, but it remains bounded alpha workflow evidence.

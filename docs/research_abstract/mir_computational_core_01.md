@@ -14,13 +14,13 @@ The drift is that this floor can be misread as proof that Mir already owns gener
 
 The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, execute positive/negative `comp-03` rows, execute `run comp-04-host-io-internal-transform-positive`, execute three expected `check` rejections for missing declarations, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime rows. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
 
-`P-POSE-01` now does the same for PoseGraph:
+`P-POSE-01` and `P-POSE-02` now do the same for PoseGraph:
 
 - `samples/product-alpha1/posegraph/`
 - `samples/product-alpha1/posegraph/matrix.json`
 - `scripts/posegraph_samples.py`
 
-That helper keeps `no-split-frame` as a docs/spec boundary and rejects `run pose-04-no-split-frame-positive` / `run pose-05-split-frame-negative` as `planned_only` until `P-POSE-02`.
+That helper keeps `no-split-frame` as same-client same-observation-snapshot coherence, executes `run pose-04-no-split-frame-positive` as helper-backed accepted evidence, executes `run pose-05-split-frame-negative` as helper-backed `violation_export`, and keeps the remaining PoseGraph rows planned-only.
 
 `P-PROJ-01` and `P-ENG-01` complete the same front-half pattern for projection/backend and engine/provider inventory:
 
@@ -111,4 +111,4 @@ No-split-frame is same-client same-observation-snapshot coherence, not global si
 
 ## non-claims
 
-This rebaseline does not claim final textual grammar, final ABI/SDK, direct LLVM/native backend, final server/client binary split, arbitrary native/WASM execution, Unity/VRM compatibility, WAN/federation, or active PoseGraph runtime samples.
+This rebaseline does not claim final textual grammar, final ABI/SDK, direct LLVM/native backend, final server/client binary split, arbitrary native/WASM execution, Unity/VRM compatibility, WAN/federation, or workflow-ready/full-runtime PoseGraph completion.

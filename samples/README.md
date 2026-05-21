@@ -34,9 +34,10 @@
     - `run comp-02-pure-add-one` executes the bounded `ReadInt -> add_one -> WriteInt` path
     - `run comp-03-control-flow-positive` and `run comp-03-variables-scope-negative` execute helper-package first-floor evidence rather than the direct product-alpha CLI surface
     - `run comp-04-host-io-internal-transform-positive` and `run comp-04-host-io-internal-transform-negative-undeclared-effect` prove the bounded host read/write boundary line without claiming broader effectful semantics
-  - `samples/product-alpha1/posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold under `specs/29` / `plan/54`
-    - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
-    - `run pose-04-no-split-frame-positive` and `run pose-05-split-frame-negative` must reject as `planned_only` until `P-POSE-02`
+  - `samples/product-alpha1/posegraph/` is the `P-POSE-02` bounded Transform / PoseGraph helper evidence line under `specs/29` / `plan/54`
+    - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix, keeps 7 rows `planned_only`, and confirms 1 accepted row plus 1 violation-export row
+    - `run pose-04-no-split-frame-positive` returns helper-backed accepted same-snapshot evidence and `run pose-05-split-frame-negative` returns helper-backed `violation_export`
+    - this is not full PoseGraph runtime completion, save/load admissibility, or devtools panel completion
   - `samples/product-alpha1/projection/` is the `P-PROJ-01` planned-only projection boundary inventory scaffold under `specs/30` / `plan/55`
     - `python3 scripts/projection_boundary_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
     - `run proj-01-server-client-target-manifest` must reject as `planned_only` until a later projection-realization package exists

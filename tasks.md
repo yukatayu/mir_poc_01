@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 21:27 JST
+最終更新: 2026-05-21 21:57 JST
 
 ## この文書について
 
@@ -35,6 +35,8 @@
   `samples/product-alpha1/computational/host-io-internal-transform/` now has one direct accepted host read/write boundary row and three expected `check` rejections, while product-alpha schema/runtime tests cover `required_capabilities` and `failure_tag` as declared admission-boundary evidence without claiming broad effectful runtime semantics.
 - `P-POSE-01` is closed:
   `samples/product-alpha1/posegraph/`, `matrix.json`, `scripts/posegraph_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime proof.
+- `P-POSE-02` is closed:
+  `samples/product-alpha1/posegraph/` now has helper-only `package.mir.json` inputs for `pose-04` and `pose-05`, one accepted same-snapshot row, one `violation_export` mismatch row, and seven residual planned rows. This is bounded helper evidence, not full PoseGraph runtime completion.
 - `P-PROJ-01` is closed:
   `samples/product-alpha1/projection/`, `matrix.json`, `scripts/projection_boundary_samples.py`, and compatibility-row inventory are now actualized. This is scaffold closeout, not code generation or binary split.
 - `P-ENG-01` is closed:
@@ -48,17 +50,16 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
-| 2 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
+| 1 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-POSE-02` no-split-frame runtime evidence
+  autonomous all-up closeout audit
 - recommendation reason:
-  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, and one bounded host read/write boundary closeout without overloading the legacy adapter-owned `AddOne` path. The least risky next self-driven step is to move to PoseGraph runtime evidence, because the computational line is now ratcheted to its current intended boundary and broader effectful widening can wait.
+  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The least risky next self-driven step is to run the all-up audit, because the current implementation-half targets are ratcheted to their intended boundaries and what remains is synchronization/validation rather than another widening.
 - stop line:
-  do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / no-split-frame as implementation completion.
+  do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / helper-backed no-split-frame evidence as implementation completion.
 
 ## research-discovery items
 

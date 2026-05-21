@@ -27,10 +27,14 @@ Current repo defines the docs/spec carriers for:
 Current repo does not yet actualize these as runnable evidence:
 
 - anchor graph carrier
-- no-split-frame positive / negative evidence
 - pose-aware save/load admissibility
 - PoseGraph devtools panel family
 - anchor switch / stale-anchor reacquire negative rows
+
+Current repo now actualizes bounded helper evidence for:
+
+- no-split-frame positive same-snapshot acceptance
+- no-split-frame negative mismatch `violation_export`
 
 ## package order
 
@@ -41,7 +45,7 @@ Current repo does not yet actualize these as runnable evidence:
 
 ## current sample matrix
 
-`P-POSE-01` actualizes the planned-only scaffold. The roots now exist, but they are not runnable PoseGraph proofs yet:
+`P-POSE-01` actualizes the scaffold family. `P-POSE-02` then promotes two rows to bounded helper evidence while keeping the rest planned:
 
 - `samples/product-alpha1/posegraph/avatar-head-transform/`
 - `samples/product-alpha1/posegraph/anchored-object/`
@@ -53,11 +57,11 @@ Current repo does not yet actualize these as runnable evidence:
 - `samples/product-alpha1/posegraph/anchor-switch-frontier-negative/`
 - `samples/product-alpha1/posegraph/stale-anchor-reacquire-required/`
 
-Current helper actualized in `P-POSE-01`:
+Current helper actualized in `P-POSE-02`:
 
 - `scripts/posegraph_samples.py`
 
-Current planned-only validation anchors:
+Current validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_posegraph_samples
@@ -67,7 +71,7 @@ python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --forma
 python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
 ```
 
-These commands validate matrix classification and planned-only rejection behavior. They do not prove PoseGraph runtime evidence.
+These commands validate matrix classification, accepted same-snapshot evidence, and negative `violation_export` behavior. They do not prove full PoseGraph runtime evidence.
 
 ## sample success criteria
 
@@ -123,7 +127,19 @@ Future PoseGraph packages should update:
 
 Future runtime work must make `PoseSnapshotFrontier`, `AnchorSwitch`, reacquire, membership-epoch advance, and concurrent switch ordering observable in helper output before claiming PoseGraph runtime completion.
 
-`P-POSE-01` only records these as future hooks. Runtime evidence starts at `P-POSE-02`.
+`P-POSE-01` records the scaffold and future hooks. `P-POSE-02` actualizes the minimal helper-backed no-split-frame evidence, while save/load and devtools hooks stay later.
+
+## observed closeout
+
+`P-POSE-02` closed on 2026-05-21 with:
+
+- `samples/product-alpha1/posegraph/no-split-frame-positive/package.mir.json`
+- `samples/product-alpha1/posegraph/split-frame-negative/package.mir.json`
+- `samples/product-alpha1/posegraph/matrix.json` updated to `mixed`
+- `scripts/posegraph_samples.py` returning `accepted` for `pose-04` and `violation_export` for `pose-05`
+- `scripts/tests/test_posegraph_samples.py` locking the accepted / violation / planned split
+
+This closeout is intentionally bounded. It does not claim workflow-ready PoseGraph runtime, save/load admissibility, or devtools panel completion.
 
 ## operational suite promotion
 

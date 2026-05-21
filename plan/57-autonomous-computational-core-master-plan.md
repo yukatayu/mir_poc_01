@@ -294,6 +294,11 @@ git diff --check
 
 ## P-POSE-02 plan
 
+Current status:
+
+- closed on 2026-05-21 with bounded helper-backed no-split-frame evidence
+- current remaining package in this line is the all-up closeout audit
+
 Purpose:
 
 - add one positive and one negative no-split-frame evidence path.
@@ -320,6 +325,13 @@ Close condition:
 
 - positive row proves same snapshot version.
 - negative row cannot be mistaken for accepted stable state.
+
+Observed closeout:
+
+- `scripts/posegraph_samples.py check-all --format json` now reports 1 accepted row, 1 `violation_export` row, and 7 planned rows
+- `samples/product-alpha1/posegraph/no-split-frame-positive/package.mir.json` and `split-frame-negative/package.mir.json` provide helper-only executable input
+- current no-split-frame reading remains `same_client_same_observation_snapshot`
+- save/load, devtools panel family, anchor-switch, and stale-anchor reacquire remain later
 
 ## P-PROJ-01 plan
 

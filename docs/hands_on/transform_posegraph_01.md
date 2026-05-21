@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、`P-POSE-01` で actualize された Transform / PoseGraph scaffold を読むための landing page です。
+この文書は、`P-POSE-02` で actualize された Transform / PoseGraph bounded helper evidence を読むための landing page です。
 
-現時点では runtime implementation guide ではありません。`samples/product-alpha1/posegraph/` と `scripts/posegraph_samples.py` は存在しますが、役割は planned-only matrix / root validation と rejected-run evidence です。
+現時点では full runtime implementation guide ではありません。`samples/product-alpha1/posegraph/` と `scripts/posegraph_samples.py` は、accepted same-snapshot row、negative `violation_export` row、残り planned rows の machine-readable split を与える helper line です。
 
 ## current reading
 
@@ -22,7 +22,7 @@ target pose version == anchored object pose version
 
 ## current verification
 
-For the current scaffold actualization, use the dedicated planned-only commands first:
+For the current bounded helper evidence, use the dedicated commands first:
 
 ```bash
 python3 -m unittest scripts.tests.test_posegraph_samples
@@ -32,7 +32,7 @@ python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --forma
 python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
 ```
 
-These commands prove that the PoseGraph root exists, rows are machine-readable, and attempted execution is rejected as `planned_only`.
+These commands prove that the PoseGraph root exists, rows are machine-readable, `pose-04` is accepted only when target and anchored object share one observation snapshot plus one `pose_version`, and `pose-05` is exported as a machine-readable `no_split_frame` violation instead of being mistaken for stable state.
 
 Use repository validation alongside them:
 
@@ -44,7 +44,7 @@ cargo fmt --check
 git diff --check
 ```
 
-These commands still do not prove PoseGraph runtime behavior. They only prove that the scaffold, docs, and source hierarchy are synchronized.
+These commands still do not prove full PoseGraph runtime behavior. They only prove that the bounded helper line, docs, and source hierarchy are synchronized.
 
 ## future success criteria
 
@@ -56,4 +56,4 @@ These commands still do not prove PoseGraph runtime behavior. They only prove th
 
 ## stop lines
 
-Do not read this guide as Unity / Unreal integration, VRM / VRChat compatibility, renderer-owned world semantics, continuous spatial sync, or active PoseGraph runtime completion.
+Do not read this guide as Unity / Unreal integration, VRM / VRChat compatibility, renderer-owned world semantics, continuous spatial sync, pose-aware save/load completion, devtools panel completion, or active full PoseGraph runtime completion.

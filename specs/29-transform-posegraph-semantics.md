@@ -188,4 +188,4 @@ This document does not claim:
 - continuous spatial sync
 - WAN/federation
 - distributed durable pose save/load
-- active PoseGraph runtime samples in the current tree
+- workflow-ready or operational-suite PoseGraph runtime samples in the current tree

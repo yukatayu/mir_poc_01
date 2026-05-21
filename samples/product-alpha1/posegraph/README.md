@@ -1,12 +1,13 @@
 # samples/product-alpha1/posegraph
 
-This root is the planned-only Transform / PoseGraph sample line for `P-POSE-01`.
+This root is the bounded Transform / PoseGraph helper evidence line for `P-POSE-02`.
 
 ## Current Status
 
-- The root exists as scaffold actualization only.
-- All rows are `planned_only`.
-- No PoseGraph row is executable yet.
+- The root keeps the scaffold actualization from `P-POSE-01`.
+- `pose-04-no-split-frame-positive` is helper-executable and must return `accepted`.
+- `pose-05-split-frame-negative` is helper-executable and must return `violation_export`.
+- The remaining 7 rows stay `planned_only`.
 - The current no-split-frame reading stays explicit: same client session, same observation snapshot, same pose version.
 - Renderer / engine state is not treated as semantic owner.
 
@@ -22,7 +23,7 @@ python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --forma
 python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
 ```
 
-Both `run` commands must reject as `planned_only` until `P-POSE-02`.
+These commands must show one accepted row, one violation row, and seven planned rows. They do not claim full PoseGraph runtime completion.
 
 ## Rows
 
@@ -36,4 +37,4 @@ Both `run` commands must reject as `planned_only` until `P-POSE-02`.
 - `pose-08-anchor-switch-frontier-negative`
 - `pose-09-stale-anchor-reacquire-required`
 
-Representative `.mir` files are explanatory sketches only. They are not final grammar and are not current executable input.
+Representative `.mir` files are explanatory sketches only. `package.mir.json` for `pose-04` and `pose-05` is helper-only executable input, not final grammar and not direct product-alpha CLI input.

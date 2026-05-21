@@ -57,7 +57,7 @@
 - **Mir computational core rebaseline**:
   `specs/28-mir-computational-core.md` と `plan/53-mir-computational-core-roadmap.md` は、current typed external `AddOne` を host-boundary evidence に限定し、Mir-owned computation の first floor、pure/effect split、explicit failure row、`P-COMP-01` scaffold、`P-COMP-02` first direct executable row、`P-COMP-03` helper-executable first-floor widening、`P-COMP-04` direct host read/write boundary closeout を置く
 - **Transform / PoseGraph line**:
-  `specs/29-transform-posegraph-semantics.md` と `plan/54-transform-posegraph-roadmap.md` は、avatar/object transform、pose snapshot、anchor graph、fallback admissibility、no-split-frame の docs/spec boundaryと `P-POSE-01` planned-only scaffold を置く
+  `specs/29-transform-posegraph-semantics.md` と `plan/54-transform-posegraph-roadmap.md` は、avatar/object transform、pose snapshot、anchor graph、fallback admissibility、no-split-frame の docs/spec boundaryと `P-POSE-01` scaffold、`P-POSE-02` bounded helper evidence を置く
 - **projection/backend boundary line**:
   `specs/30-projection-and-backend-boundary.md` と `plan/55-projection-backend-roadmap.md` は、target manifest / packet schema / FFI schema inventory と `P-PROJ-01` planned-only scaffold を置き、server/client binary split や backend codegen completion を claim しない
 - **engine/WASM/FFI adapter line**:

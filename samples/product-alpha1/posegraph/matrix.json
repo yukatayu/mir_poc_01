@@ -1,7 +1,7 @@
 {
   "schema_version": "posegraph-sample-matrix-v0",
   "family": "posegraph",
-  "current_status": "planned_only",
+  "current_status": "mixed",
   "current_posegraph_reading": "same_client_same_observation_snapshot",
   "rows": [
     {
@@ -29,15 +29,28 @@
       "sample_id": "pose-04-no-split-frame-positive",
       "root_name": "no-split-frame-positive",
       "stage": "P-POSE-02",
-      "current_status": "planned_only",
-      "representative_source": "no-split-frame-positive/no-split-frame-positive.mir"
+      "current_status": "executable",
+      "representative_source": "no-split-frame-positive/no-split-frame-positive.mir",
+      "package_input": "no-split-frame-positive/package.mir.json",
+      "execution_surface": "helper_posegraph_runtime",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "pose_summary": "snapshot#avatar-017@17"
+      }
     },
     {
       "sample_id": "pose-05-split-frame-negative",
       "root_name": "split-frame-negative",
       "stage": "P-POSE-02",
-      "current_status": "planned_only",
-      "representative_source": "split-frame-negative/split-frame-negative.mir"
+      "current_status": "executable",
+      "representative_source": "split-frame-negative/split-frame-negative.mir",
+      "package_input": "split-frame-negative/package.mir.json",
+      "execution_surface": "helper_posegraph_runtime",
+      "expected_outcome": {
+        "terminal_outcome": "violation_export",
+        "violation_kind": "no_split_frame",
+        "violation_contains": "snapshot mismatch"
+      }
     },
     {
       "sample_id": "pose-06-save-load-roundtrip",

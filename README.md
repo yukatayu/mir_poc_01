@@ -43,11 +43,11 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - broader public distribution beyond the current developer-built binary + generated host launch bundle
 - FFI / engine adapter / host integration target
 - final shared-space operational catalog breadth
-- broader Mir-owned computational publish/observe/witness/handoff widening and PoseGraph runtime evidence beyond the current host read/write boundary rows
+- broader Mir-owned computational publish/observe/witness/handoff widening and PoseGraph runtime evidence beyond the current host read/write boundary rows and bounded helper no-split-frame evidence
 
 ## Mir Computational Core rebaseline
 
-2026-05-21 時点の current docs/spec line は、front-half scaffold actualization を維持したまま `P-COMP-04` まで閉じた段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の direct product-alpha row、variables / arrays / records / control-flow / imports の positive / negative first-floor rows、そして `host input -> Mir transform -> host output` を declared effect / failure / capability boundary と合わせて扱う accepted/check-rejection rows が actualize されました。ここで `required_capabilities` / `failure_tag` は checker-admission boundary declaration の evidence であり、broad effectful runtime semantics completion を意味しません。PoseGraph / projection / engine-adapter は引き続き planned-only matrix / helper / inventory として machine-readable に保たれています。
+2026-05-21 時点の current docs/spec line は、front-half scaffold actualization を維持したまま `P-POSE-02` まで閉じた段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の direct product-alpha row、variables / arrays / records / control-flow / imports の positive / negative first-floor rows、そして `host input -> Mir transform -> host output` を declared effect / failure / capability boundary と合わせて扱う accepted/check-rejection rows が actualize されました。ここで `required_capabilities` / `failure_tag` は checker-admission boundary declaration の evidence であり、broad effectful runtime semantics completion を意味しません。PoseGraph では `pose-04` accepted row と `pose-05` violation-export row が helper-backed no-split-frame evidence として actualize され、projection / engine-adapter は引き続き planned-only inventory に保たれています。
 
 新しい正本 / repository memory は次です。
 
@@ -62,7 +62,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - `specs/32-autonomous-execution-and-completion-contract.md`
 - `plan/57-autonomous-computational-core-master-plan.md`
 
-`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、そのうえで `P-COMP-02` が `samples/product-alpha1/computational/add-one-pure-mir/` を executable に昇格させ、`P-COMP-03` が variables / arrays / records / control-flow / imports の 10 row を helper-executable positive / runtime-rejection evidence に広げ、`P-COMP-04` が direct product-alpha accepted 1 row と `check`-time rejection 3 row で host read/write boundary を explicit にしました。`scripts/mir_computational_samples.py check-all --format json` は accepted 7 row、expected runtime rejection 5 row、expected check rejection 3 rowを確認できます。次の implementation half は `P-POSE-02` で、current stop line は引き続き final grammar / projection code generation / provider admission / public ABI です。
+`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、そのうえで `P-COMP-02` が `samples/product-alpha1/computational/add-one-pure-mir/` を executable に昇格させ、`P-COMP-03` が variables / arrays / records / control-flow / imports の 10 row を helper-executable positive / runtime-rejection evidence に広げ、`P-COMP-04` が direct product-alpha accepted 1 row と `check`-time rejection 3 row で host read/write boundary を explicit にし、`P-POSE-02` が `samples/product-alpha1/posegraph/` に accepted 1 row と violation-export 1 row を加えました。`scripts/mir_computational_samples.py check-all --format json` は accepted 7 row、expected runtime rejection 5 row、expected check rejection 3 rowを確認でき、`scripts/posegraph_samples.py check-all --format json` は accepted 1 row、violation 1 row、planned 7 rowを確認できます。current next line は all-up closeout audit で、stop line は引き続き final grammar / projection code generation / provider admission / public ABI です。
 
 Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
 

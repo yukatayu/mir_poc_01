@@ -118,7 +118,7 @@ standing recommendation:
   - `samples/product-alpha1/computational/`
     `P-COMP-01` planned-only Mir-owned computation scaffold; helper-validated matrix exists, but runtime execution is still deferred to `P-COMP-02`
   - `samples/product-alpha1/posegraph/`
-    `P-POSE-01` planned-only Transform / PoseGraph scaffold; helper-validated matrix exists, but runtime evidence is still deferred to `P-POSE-02`
+    `P-POSE-01` scaffold plus `P-POSE-02` bounded helper no-split-frame evidence; helper-validated matrix exists with 1 accepted row, 1 `violation_export` row, and 7 planned rows, but workflow-ready/full-runtime evidence remains deferred
   - `samples/product-alpha1/projection/`
     `P-PROJ-01` planned-only projection boundary inventory scaffold; helper-validated matrix exists, but code generation / binary split remains deferred
   - `samples/product-alpha1/engine-adapter/`
@@ -158,16 +158,16 @@ standing recommendation:
   base current-L2 helper、detached loop、diff/export assist、Lean sync、checker support
 - `scripts/new_report.py`
   report utility
-- computational / PoseGraph / projection / engine adapter helper family
+  - computational / PoseGraph / projection / engine adapter helper family
   - `scripts/mir_computational_samples.py`
     `P-COMP-01` planned-only computational matrix helper; it validates `samples/product-alpha1/computational/` and rejects `run` as `planned_only`
   - `scripts/posegraph_samples.py`
-    `P-POSE-01` planned-only PoseGraph matrix helper; it validates `samples/product-alpha1/posegraph/` and rejects `run` as `planned_only`
+    `P-POSE-02` bounded PoseGraph helper; it validates `samples/product-alpha1/posegraph/`, executes `pose-04` as accepted, executes `pose-05` as `violation_export`, and keeps the residual rows planned-only
   - `scripts/projection_boundary_samples.py`
     `P-PROJ-01` planned-only projection boundary helper; it validates `samples/product-alpha1/projection/`, preserves accepted/rejected compatibility rows, and rejects `run` as `planned_only`
   - `scripts/engine_adapter_boundary_samples.py`
     `P-ENG-01` planned-only engine adapter helper; it validates `samples/product-alpha1/engine-adapter/`, preserves default execution gating, and rejects `run` as `planned_only`
-  - computational, PoseGraph, projection, and engine helpers now exist as planned-only validation surfaces; only runtime-capable roots should be marked workflow-ready
+  - computational, PoseGraph, projection, and engine helpers now exist as machine-readable validation surfaces; only workflow-capable roots should be marked workflow-ready
 
 ### current storage / env
 

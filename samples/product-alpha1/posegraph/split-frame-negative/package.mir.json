@@ -1,0 +1,23 @@
+{
+  "schema_version": "posegraph-helper-package-v0",
+  "package_id": "package#pose-05-split-frame-negative",
+  "package_kind": "posegraph_helper",
+  "module_id": "PoseGraph.SplitFrameNegative",
+  "transition_id": "split_frame_violation",
+  "current_status": "helper_posegraph_runtime_only",
+  "runtime_input": {
+    "posegraph": {
+      "invariant_id": "no_split_frame",
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      },
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "pose_version": 18,
+        "pose_snapshot_ref": "snapshot#avatar-018"
+      }
+    }
+  }
+}
