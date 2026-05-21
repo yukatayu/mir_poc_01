@@ -100,6 +100,9 @@ python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
 git diff --stat -- samples/product-alpha1/posegraph scripts/posegraph_samples.py scripts/tests/test_posegraph_samples.py docs/hands_on/transform_posegraph_01.md plan/54-transform-posegraph-roadmap.md
+git add docs/hands_on/transform_posegraph_01.md plan/54-transform-posegraph-roadmap.md scripts/posegraph_samples.py scripts/tests/test_posegraph_samples.py docs/reports/2075-p-pose-01-posegraph-scaffold-actualization.md samples/product-alpha1/posegraph
+git commit --no-gpg-sign -m "docs: actualize P-POSE-01 posegraph scaffold"
+git push origin main
 date '+%Y-%m-%d %H:%M %Z'
 ```
 
@@ -198,7 +201,7 @@ the task explicitly excluded global dashboard updates, so `samples_progress.md` 
 
 ## Commit / push status
 
-Pending at report write.
+Committed with `git commit --no-gpg-sign` and pushed to `origin/main` during package closeout.
 
 ## Sub-agent session close status
 
