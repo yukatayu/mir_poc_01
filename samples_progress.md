@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-21 17:35 JST
+Last updated: 2026-05-21 18:56 JST
 
 Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, and docs/spec rebaseline for Mir Computational Core / PoseGraph / projection/backend / engine-adapter boundary. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
 
@@ -35,6 +35,7 @@ Notes:
 | Transform / PoseGraph | boundary-fixed, planned samples only | docs validation only | `specs/29` / `plan/54` define planned `samples/product-alpha1/posegraph/*`, no-split-frame, save/devtools hooks | no sample root or helper exists yet; no PoseGraph runtime evidence |
 | projection/backend boundary | boundary-fixed, inventory-only | docs validation only | `specs/30` / `plan/55` define future target manifest / packet / FFI inventory line | no projection codegen, server/client binary split, or projection helper exists yet |
 | engine/WASM/FFI adapter boundary | boundary-fixed, inventory-only | docs validation only | `specs/31` / `plan/56` define provider contract inventory | no engine integration, final FFI ABI, arbitrary native/WASM execution, or helper exists yet |
+| autonomous execution contract | boundary-fixed, no sample claim | docs validation only | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol | no new runnable sample; scaffold actualization starts at `P-COMP-01` |
 
 ## Product Alpha Root Status
 
@@ -78,8 +79,8 @@ Notes:
 | α-0.9 devtools panels | `OA09-*`, `VIS-A1-*` | final viewer/telemetry ABI later |
 | product alpha release candidate | `product_alpha1_release_check.py check-all` | broader distribution decision later |
 | operational suite | `operational_product_samples.py check-all` | final catalog decision later |
-| Mir-owned computation | no current runnable anchor | planned `P-COMP-01..04`; current `AddOne` is host-boundary evidence only |
-| Transform / PoseGraph | no current runnable anchor | planned `P-POSE-01..02`; no-split-frame is docs/spec boundary only |
+| Mir-owned computation | no current runnable anchor | planned `P-COMP-01` scaffold and `P-COMP-02..04` implementation half; current `AddOne` is host-boundary evidence only |
+| Transform / PoseGraph | no current runnable anchor | planned `P-POSE-01` scaffold and `P-POSE-02` implementation half; no-split-frame is docs/spec boundary only |
 | projection / engine adapter boundary | no current runnable anchor beyond existing projection inventory | planned `P-PROJ-01` / `P-ENG-01`; no codegen or engine execution |
 
 ## Validation Anchors For Current Audit
@@ -100,6 +101,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
 | 2026-05-21 17:35 JST | `P-COMP-00` Mir computational core rebaseline | docs/spec planned | added boundary-fixed rows for computational core, PoseGraph, projection/backend, and engine adapter; no new runnable sample roots or helpers |
+| 2026-05-21 18:56 JST | `P-COMP-00B` autonomous execution contract | docs/spec planned | integrated reviewer findings: front-half closeout before implementation, `mir-semantics` computational module target, projection/provider compatibility, provider rollback/replay/cut policy; no new runnable sample roots or helpers |
 | 2026-05-07 13:08 JST | `P-OPS-27` alpha-1 usability and snapshot-doc audit | pass | product release check, installed-binary probe, and operational suite check-all were rerun with Docker included; overview docs were compacted; `mir_hilight.html` active sample inventory was resynced |
 | 2026-05-07 12:25 JST | `P-OPS-26` later user-final distribution decision scoping | pass | `user_final_decision_scope` fixed current delivery unit, current catalog scope, and user-spec-required next gate |
 | 2026-05-07 10:22-12:03 JST | `P-OPS-20..25` queue and scope hardening | pass | distribution, room-chat, portal/shard starter, Sugoroku, and widening-queue scope blocks were added or narrowed |

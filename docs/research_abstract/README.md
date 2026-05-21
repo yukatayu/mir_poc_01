@@ -58,6 +58,8 @@
   portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split の summary
 - `mir_computational_core_01.md`
   Product Alpha-1 operational floor を保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line へ rebaseline する summary
+- `autonomous_execution_01.md`
+  `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` front-half、implementation half、user-spec-required gate isolation、validation / report / commit cadence の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

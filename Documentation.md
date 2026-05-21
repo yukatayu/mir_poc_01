@@ -15,7 +15,7 @@
 
 この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。主眼は Mir current-L2 と、その上に積む Mirrorea shared-space / hot-plug / observability / host-boundary line にあります。
 
-読み分けで重要なのは、次の 6 つを混同しないことです。
+読み分けで重要なのは、次の層を混同しないことです。
 
 - **repo-local alpha-ready current layer**
   `samples/clean-near-end/`、helper、Lean foundation、report まで含めて動かせる current-L2 の実行足場
@@ -31,6 +31,8 @@
   `specs/26` / `plan/51` で定義した `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` suite、shared attach packages、deployment/projection inventory、retained portal/shard blueprint inventory。current line では `MembershipChat` の bounded room-oriented `ChatText` host boundary、`SugorokuWorld` の bounded roll / publish / witness / handoff / stale membership reject scenario、`projection.profile.json` の schema-backed target / packet / FFI inventory、`PortalWorldLink` の bounded same-session discrete handoff cut、`TwoShardHardBoundary` の bounded same-session two-shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject cut、そして `TwoShardGradientObservation` の bounded observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject cut が `check`、runtime plan、observer-safe devtools / helper closeout に actualize 済み。`future/portal-worldlink/` と `future/two-shard-hard-boundary/` blueprint は残す
 - **Mir Computational Core rebaseline**
   `specs/28..31` / `plan/53..56` で定義し直した docs/spec line。Product Alpha-1 の operational floor は保持するが、current typed external `AddOne` を Mir-owned computation の証拠とは読まない。次の自走 line は computation ownership、PoseGraph、projection/backend boundary、engine/FFI adapter boundary を段階的に明確化する。
+- **autonomous execution contract**
+  `specs/32` / `plan/57` で定義した package-by-package 自律実行 line。`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の front-half を閉じてから implementation half に入り、user に途中質問せず、final distribution / catalog / ABI / backend admission のような user-spec-required gate は隔離し、lower-layer implementation を止めない。
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
@@ -158,6 +160,9 @@ Correction:
   `plan/54-transform-posegraph-roadmap.md`
   `plan/55-projection-backend-roadmap.md`
   `plan/56-engine-adapter-roadmap.md`
+- autonomous execution contract:
+  `specs/32-autonomous-execution-and-completion-contract.md`
+  `plan/57-autonomous-computational-core-master-plan.md`
 - hands-on product alpha commands:
   `docs/hands_on/product_alpha1_01.md`
   `docs/hands_on/operational_product_sample_01.md`
@@ -167,7 +172,9 @@ Correction:
 - docs-first computational / PoseGraph guides:
   `docs/hands_on/mir_computational_core_01.md`
   `docs/hands_on/transform_posegraph_01.md`
+  `docs/hands_on/autonomous_execution_01.md`
   `docs/research_abstract/mir_computational_core_01.md`
+  `docs/research_abstract/autonomous_execution_01.md`
 - legacy hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 

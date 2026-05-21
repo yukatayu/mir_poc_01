@@ -13,7 +13,7 @@ Current avatar preview / fallback rows are useful evidence, but they do not yet 
   - Unity / Unreal Engine / renderer / WASM / native library are providers or backends, not semantics owners.
   - no-split-frame is same-client same-observation-snapshot coherence, not global simultaneous coordinates.
 - `L2`
-  - `Transform`, `PoseSnapshot`, `AnchorBinding`, `AnchorSwitch`, and pose devtools panels are proposed next-line carriers.
+  - `Transform`, `PoseSnapshot`, `Anchor`, `AnchorBinding`, `AnchorSwitch`, and pose devtools panels are proposed next-line carriers.
   - PoseGraph samples are planned as a separate semantics line before any promotion into the current product operational suite.
 
 ## core vocabulary
@@ -44,12 +44,16 @@ AnchorBinding = {
 
 Additional rows:
 
+- `Anchor`
+- `AnchorBinding`
 - `PoseSnapshot`
 - `PoseVersion`
 - `AnchorSwitch`
 - `FallbackReason`
 - `AnchorFreshness`
 - `PoseSnapshotFrontier`
+
+`Anchor` is the stable identity of an attachable pose target. `AnchorBinding` is the current binding from an anchored object to an `Anchor` plus lineage, fallback, authority, and freshness.
 
 ## no-split-frame invariant
 
@@ -83,6 +87,37 @@ is admissible only when it carries:
 - reacquire gate when the original target returns
 
 Hidden repair, stale anchor resurrection, and implicit reacquire are not allowed.
+
+## anchor switch and frontier ordering
+
+`AnchorSwitch` is authority-gated and frontier-ordered.
+
+Minimum fields:
+
+```text
+AnchorSwitch = {
+  object,
+  from_anchor,
+  to_anchor,
+  reason,
+  actor,
+  required_capability,
+  membership_epoch,
+  pose_snapshot_frontier,
+  owner_epoch,
+  sequence
+}
+```
+
+Rules:
+
+- only an actor with the declared anchor-switch capability may switch anchors.
+- `pose_version` advances monotonically within the same anchor component.
+- fallback does not change ownership; it only changes guarded access path availability.
+- reacquire after fallback must be an explicit event with fresh witness or fresh epoch.
+- membership epoch advance invalidates stale anchor-switch evidence.
+- concurrent switches on the same object require owner epoch / sequence ordering or must be rejected.
+- save/load must restore a coherent `pose_snapshot_frontier` or force explicit reacquire.
 
 ## save/load interaction
 
@@ -136,6 +171,8 @@ Planned samples include:
 - `split-frame-negative`
 - `save-load-roundtrip`
 - `stale-anchor-after-membership-advance`
+- `anchor-switch-frontier-negative`
+- `stale-anchor-reacquire-required`
 
 ## operational suite boundary
 
@@ -152,4 +189,3 @@ This document does not claim:
 - WAN/federation
 - distributed durable pose save/load
 - active PoseGraph runtime samples in the current tree
-

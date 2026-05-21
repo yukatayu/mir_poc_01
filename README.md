@@ -59,8 +59,12 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - `plan/54-transform-posegraph-roadmap.md`
 - `plan/55-projection-backend-roadmap.md`
 - `plan/56-engine-adapter-roadmap.md`
+- `specs/32-autonomous-execution-and-completion-contract.md`
+- `plan/57-autonomous-computational-core-master-plan.md`
 
-`P-COMP-01..04`、`P-POSE-01..02`、`P-PROJ-01`、`P-ENG-01` は planned package line です。現時点では implementation / runnable sample completion ではなく、completion gate と stop line を明確にした docs/spec roadmap として読む必要があります。
+`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は docs/scaffold front-half、`P-COMP-02..04` と `P-POSE-02` は implementation half です。現時点では implementation / runnable sample completion ではなく、completion gate と stop line を明確にした docs/spec roadmap として読む必要があります。
+
+Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
 
 ## Mirrorea の次軸
 
@@ -122,8 +126,10 @@ current line で reader が押さえるべき点は次です。
 - Mir computational core / PoseGraph / projection-backend boundary:
   `specs/28-mir-computational-core.md`、`specs/29-transform-posegraph-semantics.md`、`specs/30-projection-and-backend-boundary.md`、`specs/31-engine-wasm-ffi-adapter-boundary.md`
   `plan/53-mir-computational-core-roadmap.md`、`plan/54-transform-posegraph-roadmap.md`、`plan/55-projection-backend-roadmap.md`、`plan/56-engine-adapter-roadmap.md`
+- autonomous execution contract:
+  `specs/32-autonomous-execution-and-completion-contract.md`、`plan/57-autonomous-computational-core-master-plan.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..56`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..57`
 
 ## 何が built-in で、何が user-defined か
 

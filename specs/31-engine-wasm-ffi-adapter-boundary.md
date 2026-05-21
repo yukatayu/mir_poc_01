@@ -37,7 +37,8 @@ ProviderAdapter = {
   ffi_boundary,
   resource_policy,
   sandbox_policy,
-  native_execution_policy
+  native_execution_policy,
+  rollback_replay_cut_policy
 }
 ```
 
@@ -65,6 +66,27 @@ Mir / Mirrorea own:
 - package and projection obligations
 
 Providers may render, input, transform, query, or execute admitted adapter behavior only under declared contracts.
+
+## rollback / replay / cut policy
+
+Every provider must declare how it interacts with rollback, replay, and cut/save boundaries:
+
+```text
+RollbackReplayCutPolicy =
+  Replayable
+  | CompensatingActionRequired
+  | IrreversibleCutBarrier
+  | InventoryOnly
+  | Disabled
+```
+
+Minimum rules:
+
+- renderer, viewer, and diagnostic export providers should be `Replayable` or `InventoryOnly` unless later evidence proves otherwise.
+- input, asset, physics, WASM, and native providers must not be assumed replayable.
+- irreversible host/provider effects must be represented as `IrreversibleCutBarrier` or rejected before a quiescent-save claim.
+- native signature, sandbox presence, or provider brand does not imply semantic safety or replayability.
+- a provider with missing rollback/replay/cut policy is not admissible for runtime completion claims.
 
 ## packet and FFI seams
 
@@ -95,6 +117,7 @@ A later package may admit a bounded provider only with explicit schema, effect r
 - packet and FFI seams are explicit.
 - world semantics stay in Mir / Mirrorea.
 - native / WASM execution remains gated and non-default.
+- rollback / replay / cut policy is present for each provider class.
 - final engine adapter ABI remains deferred.
 
 ## non-claims
@@ -108,4 +131,3 @@ This document does not claim:
 - final FFI ABI
 - final engine adapter SDK
 - renderer-owned world semantics
-

@@ -51,6 +51,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "specs/29-transform-posegraph-semantics.md",
         "specs/30-projection-and-backend-boundary.md",
         "specs/31-engine-wasm-ffi-adapter-boundary.md",
+        "specs/32-autonomous-execution-and-completion-contract.md",
     ],
     "policies": [
         ".docs/progress-task-axes.md",
@@ -81,6 +82,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/54-transform-posegraph-roadmap.md",
         "plan/55-projection-backend-roadmap.md",
         "plan/56-engine-adapter-roadmap.md",
+        "plan/57-autonomous-computational-core-master-plan.md",
     ],
     "scripts": [
         "scripts",
@@ -162,6 +164,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "docs/hands_on/operational_portal_shard_starter_boundary_01.md",
         "docs/hands_on/mir_computational_core_01.md",
         "docs/hands_on/transform_posegraph_01.md",
+        "docs/hands_on/autonomous_execution_01.md",
         "docs/research_abstract/README.md",
         "docs/research_abstract",
         "docs/research_abstract/product_alpha1_01.md",
@@ -171,6 +174,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "docs/research_abstract/operational_gradient_observation_profile_01.md",
         "docs/research_abstract/operational_portal_shard_starter_boundary_01.md",
         "docs/research_abstract/mir_computational_core_01.md",
+        "docs/research_abstract/autonomous_execution_01.md",
         "samples/alpha",
         "samples/product-alpha1",
         "samples/product-alpha1/demo",

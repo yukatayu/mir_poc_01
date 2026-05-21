@@ -40,6 +40,7 @@
   - `operational_gradient_observation_profile_01.md` は、portal/shard future line における observer-only gradient observation profile を reader-facing に短く読むための summary である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split を reader-facing に短く読むための summary である。
   - `mir_computational_core_01.md` は、Product Alpha-1 operational floor を保ちながら current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を reader-facing に短く読むための summary である。
+  - `autonomous_execution_01.md` は、`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の docs/scaffold front-half、implementation half、user-spec-required gate の隔離、validation / report / commit cadence を読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -60,6 +61,7 @@
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard authoring が current line では active roots から始まり `future/` blueprint を starter 化しないことを確認する landing page である。
   - `mir_computational_core_01.md` は、Mir-owned computational core line が docs/spec rebaseline 段階であり、future sample/helper commands を planned-only と読むための landing page である。
   - `transform_posegraph_01.md` は、Transform / PoseGraph line が docs/spec rebaseline 段階であり、no-split-frame / anchor / pose snapshot を planned-only と読むための landing page である。
+  - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
@@ -226,6 +228,12 @@
 - `plan/56-engine-adapter-roadmap.md`
   - engine / WASM / FFI adapter boundary の repository-memory roadmap を置く。
   - provider classes、adapter contract fields、future validation anchors、non-default native/WASM execution policy を整理する。
+- `specs/32-autonomous-execution-and-completion-contract.md`
+  - autonomous execution と completion の規範境界を置く。
+  - no-question execution rule、user-spec-required gate isolation、package close protocol、sub-agent review、validation floor、master completion condition を固定する。
+- `plan/57-autonomous-computational-core-master-plan.md`
+  - computational-core / PoseGraph / projection / engine-adapter line の autonomous master plan を置く。
+  - front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、closeout audit の deliverable / validation / non-claim / reviewer cadence を整理する。
 
 ## 規範的な読書順
 
@@ -249,6 +257,7 @@
 13. operational product sample suite を扱う場合は `26-operational-product-sample-suite.md` も読む
 14. portal / shard future boundary を扱う場合は `27-spatial-portal-and-shard-extension-boundary.md` も読む
 15. Mir-owned computation / PoseGraph / projection-backend / engine-adapter boundary を扱う場合は `28-mir-computational-core.md`、`29-transform-posegraph-semantics.md`、`30-projection-and-backend-boundary.md`、`31-engine-wasm-ffi-adapter-boundary.md` も読む
+16. autonomous execution / completion cadence を扱う場合は `32-autonomous-execution-and-completion-contract.md` も読む
 
 ## 例示文書
 

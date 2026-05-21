@@ -35,6 +35,7 @@
 | `operational_portal_shard_starter_boundary_01.md` | portal/shard line を current starter catalog に広げず、active roots と `future/` inventory を分けて読む入口 |
 | `mir_computational_core_01.md` | current `AddOne` を host-boundary evidence に限定し、Mir-owned computation line を planned-only として読む入口 |
 | `transform_posegraph_01.md` | Transform / PoseGraph / no-split-frame line を planned-only として読む入口 |
+| `autonomous_execution_01.md` | `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` front-half と implementation half を途中質問で止まらず進める execution contract を読む入口 |
 
 ## 既存の長い入門文書
 

@@ -66,6 +66,34 @@ Minimum inventory fields:
 - save/load carrier obligations
 - native / sandbox policy refs
 
+## manifest / provider compatibility relation
+
+Projection inventory must include a compatibility relation between source contracts and target/provider inventory:
+
+```text
+ManifestProviderCompatibility = {
+  source_contract_ref,
+  target_manifest_ref,
+  packet_schema_ref,
+  ffi_schema_ref,
+  provider_adapter_contract_ref,
+  checked_effect_rows,
+  checked_failure_rows,
+  checked_capability_rows,
+  checked_observation_rows,
+  compatibility_status
+}
+```
+
+Required reading:
+
+- every target manifest row must trace to a source contract row or be explicitly marked `inventory_only`.
+- every packet schema row must preserve message / effect / failure boundaries rather than hide them in transport metadata.
+- every FFI schema row must match a provider adapter contract from `specs/31`.
+- provider policy must not weaken source authority, membership, witness, redaction, save/load, rollback, or sandbox obligations.
+
+`P-PROJ-01` must include at least one accepted compatibility row and one rejected compatibility row when it claims helper/devtools inventory behavior. A rejected row may be schema mismatch, missing capability row, undeclared packet message, missing FFI provider contract, or provider rollback policy that conflicts with source cut/save obligations.
+
 ## current backend boundary
 
 `build-native-bundle` emits a native host launch bundle. It does not emit direct Mir-to-machine-code, LLVM IR, arbitrary native executable semantics, or final product installer.
@@ -79,6 +107,7 @@ WASM and LLVM/native projection remain inventory-only in this line.
 - source-to-projection pipeline is explicit.
 - server / client / adapter target manifests are represented as inventory.
 - packet and FFI schema inventory is explicit.
+- manifest / provider compatibility rows are represented with positive and negative inventory evidence.
 - helper or devtools report surfaces the inventory.
 - the inventory is marked non-executable unless backed by actual generated / checked / run artifacts.
 
@@ -102,4 +131,3 @@ This document does not claim:
 - placement optimizer
 - arbitrary native or WASM execution
 - portal/shard federation completion
-

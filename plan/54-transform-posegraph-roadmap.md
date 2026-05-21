@@ -15,14 +15,22 @@ Current repo evidence covers:
 - FAIRY-style same-lineage fallback and stale-membership reject concepts
 - non-final observer-safe devtools export
 
-Current repo does not yet define:
+Current repo defines the docs/spec carriers for:
 
 - `PoseSnapshot`
 - `pose_version`
+- `Anchor`
+- `AnchorBinding`
+- `AnchorSwitch`
+- no-split-frame invariant
+
+Current repo does not yet actualize these as runnable evidence:
+
 - anchor graph carrier
 - no-split-frame positive / negative evidence
 - pose-aware save/load admissibility
 - PoseGraph devtools panel family
+- anchor switch / stale-anchor reacquire negative rows
 
 ## package order
 
@@ -42,6 +50,8 @@ Planned roots, not yet present or runnable in `P-COMP-00`:
 - `samples/product-alpha1/posegraph/split-frame-negative/`
 - `samples/product-alpha1/posegraph/save-load-roundtrip/`
 - `samples/product-alpha1/posegraph/stale-anchor-after-membership-advance/`
+- `samples/product-alpha1/posegraph/anchor-switch-frontier-negative/`
+- `samples/product-alpha1/posegraph/stale-anchor-reacquire-required/`
 
 Planned helper, not yet present:
 
@@ -93,6 +103,16 @@ These are future anchors, not current runnable validation.
 
 - stale membership is rejected and fallback is visible.
 
+`POSE-08 anchor-switch-frontier-negative`:
+
+- concurrent or stale anchor switch is ordered by owner epoch / sequence or rejected.
+- `PoseSnapshotFrontier` and `membership_epoch` are visible.
+
+`POSE-09 stale-anchor-reacquire-required`:
+
+- fallback visibility does not extend ownership.
+- reacquire requires explicit witness / epoch advance before the anchored object becomes stable again.
+
 ## save/load and devtools dependencies
 
 Future PoseGraph packages should update:
@@ -100,6 +120,8 @@ Future PoseGraph packages should update:
 - `specs/20-cut-save-load-semantics.md` for pose carrier and load admissibility.
 - `specs/22-observability-devtools-semantics.md` for pose panels.
 - `plan/47-operational-alpha09-devtools-roadmap.md` for roadmap-level panel inventory.
+
+Future runtime work must make `PoseSnapshotFrontier`, `AnchorSwitch`, reacquire, membership-epoch advance, and concurrent switch ordering observable in helper output before claiming PoseGraph runtime completion.
 
 `P-COMP-00` only records these as future hooks.
 
@@ -118,4 +140,3 @@ PoseGraph starts as a separate semantics line. Promotion into `samples/product-a
 - Do not claim Unity / VRM / VRChat compatibility.
 - Do not treat renderer state as semantic owner.
 - Do not promote planned PoseGraph roots into workflow-ready dashboard rows.
-

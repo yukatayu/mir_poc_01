@@ -144,10 +144,12 @@ class ValidateDocsTests(unittest.TestCase):
             "specs/29-transform-posegraph-semantics.md",
             "specs/30-projection-and-backend-boundary.md",
             "specs/31-engine-wasm-ffi-adapter-boundary.md",
+            "specs/32-autonomous-execution-and-completion-contract.md",
             "plan/53-mir-computational-core-roadmap.md",
             "plan/54-transform-posegraph-roadmap.md",
             "plan/55-projection-backend-roadmap.md",
             "plan/56-engine-adapter-roadmap.md",
+            "plan/57-autonomous-computational-core-master-plan.md",
         }
 
         for path in product_alpha1_required:

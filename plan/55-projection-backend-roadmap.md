@@ -41,6 +41,7 @@ Planned roots, not yet present or runnable in `P-COMP-00`:
 - `samples/product-alpha1/projection/server-client-target-manifest/`
 - `samples/product-alpha1/projection/packet-boundary-schema/`
 - `samples/product-alpha1/projection/ffi-boundary-schema/`
+- `samples/product-alpha1/projection/manifest-provider-compatibility/`
 
 Planned helper, not yet present:
 
@@ -60,6 +61,8 @@ These commands are future anchors, not current runnable validation.
 `P-PROJ-01` completion must show:
 
 - source, typed IR, projection IR, target manifests, packet schema, and FFI schema as a pipeline.
+- source contract rows are checked against target manifest / packet schema / FFI schema / provider adapter contract rows through `ManifestProviderCompatibility`.
+- at least one accepted and one rejected compatibility row exist when helper inventory behavior is claimed.
 - `projection.profile.json`-style artifacts are supplementary inventory.
 - current executable/native truth remains native host launch bundle only.
 - no LLVM/backend execution claim appears.
@@ -77,4 +80,3 @@ Direct LLVM/native backend work remains under `plan/23-compiler-backend-llvm-gua
 - no placement optimizer completion
 - no projection equivalence checker completion
 - no arbitrary native or WASM execution
-

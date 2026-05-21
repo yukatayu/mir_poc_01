@@ -22,6 +22,7 @@ Current repo lacks:
 - arbitrary WASM execution
 - arbitrary native package execution
 - final FFI SDK
+- rollback / replay / cut-admissibility provider evidence
 
 ## package order
 
@@ -59,6 +60,7 @@ Required contract fields:
 - resource policy
 - sandbox policy
 - native execution policy
+- rollback / replay / cut-admissibility policy
 
 ## planned helper
 
@@ -83,7 +85,19 @@ These commands are future anchors, not current runnable validation.
 - world state, authority, witness, fallback, observation, and save/load remain in Mir / Mirrorea.
 - packet seam and FFI seam are separate from transport.
 - native / WASM execution remains disabled or inventory-only by default.
+- rollback / replay / cut policy is present and rejects missing-policy runtime claims.
 - final ABI is deferred.
+
+## user-spec-required gates
+
+These remain isolated and must not block provider inventory:
+
+- backend realization beyond inventory
+- bounded native provider admission
+- bounded WASM provider admission
+- final engine adapter ABI / SDK
+
+The safe default is `InventoryOnly` / `Disabled` with no arbitrary execution.
 
 ## stop lines
 
@@ -93,4 +107,3 @@ These commands are future anchors, not current runnable validation.
 - no arbitrary WASM execution
 - no final engine SDK
 - no renderer-owned world semantics
-

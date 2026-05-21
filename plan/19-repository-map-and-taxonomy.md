@@ -37,6 +37,8 @@
     viewer prototype boundary の reader-facing summary
   - `public_api_parser_gate_plan_01.md`
     `P18` public-boundary inventory / hold-line split の reader-facing summary
+  - `product_alpha1_01.md` / `operational_product_sample_01.md` / `mir_computational_core_01.md` / `autonomous_execution_01.md`
+    product alpha workflow、operational suite、computational-core rebaseline、autonomous package cadence の reader-facing summary
 
 ### code lanes
 
@@ -91,6 +93,10 @@ standing recommendation:
   base current-L2 source corpus
 - `samples/lean/`
   mechanization evidence
+- `samples/product-alpha1/demo/`
+  product alpha release-candidate demo root
+- `samples/product-alpha1/operational/`
+  canonical operational product sample suite root
 
 ### current non-active roots
 
@@ -108,6 +114,13 @@ standing recommendation:
   archive
 - `samples/generated/`
   non-Lean generated sample artifact reserve + committed generated bridge evidence
+- planned future product-alpha roots
+  - `samples/product-alpha1/computational/`
+    Mir-owned computation sample line; not created/runnable until `P-COMP-01`
+  - `samples/product-alpha1/posegraph/`
+    Transform / PoseGraph sample line; not created/runnable until `P-POSE-01`
+  - `samples/product-alpha1/projection/`
+    projection inventory sample line; not created/runnable until `P-PROJ-01`
 
 ### important boundary
 
@@ -133,6 +146,9 @@ standing recommendation:
 - `scripts/network_transport_samples.py`
 - `scripts/projection_codegen_samples.py`
 - `scripts/visual_debugger_viewer_samples.py`
+- `scripts/product_alpha1_release_check.py`
+- `scripts/product_alpha1_installed_binary_check.py`
+- `scripts/operational_product_samples.py`
 
 ### current repo-local helper / detached loop / support
 
@@ -140,8 +156,12 @@ standing recommendation:
   base current-L2 helper、detached loop、diff/export assist、Lean sync、checker support
 - `scripts/new_report.py`
   report utility
-- alpha-specific runner family は planned だが current `scripts/` には未実装である
-  - current validation floor は structural checks と docs/report discipline に留める
+- planned computational / PoseGraph / projection / engine adapter helper family is not yet implemented
+  - `scripts/mir_computational_samples.py`
+  - `scripts/posegraph_samples.py`
+  - `scripts/projection_boundary_samples.py`
+  - `scripts/engine_adapter_boundary_samples.py`
+  - do not include these in current validation floors until their packages create real files/tests
 
 ### current storage / env
 
@@ -168,6 +188,8 @@ standing recommendation:
     `P16` typed public prototype inventory landing page
   - `public_api_parser_gate_01.md`
     `P18` repo-side freeze checklist / hold-line split landing page
+  - `product_alpha1_01.md` / `operational_product_sample_01.md` / `mir_computational_core_01.md` / `autonomous_execution_01.md`
+    current product alpha workflow、operational suite、planned computational-core line、自律実行 contract の landing page
 - `docs/diagrams/`
   Mermaid source
 - `docs/reports/`

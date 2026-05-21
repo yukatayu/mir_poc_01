@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-21 17:35 JST
+最終更新: 2026-05-21 18:56 JST
 
 ## この文書について
 
@@ -24,7 +24,7 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-COMP-00` Mir computational core recognition rebaseline
+  `P-COMP-00B` autonomous execution contract / master plan
 - current promoted reopen point:
   `P-COMP-01` Mir computational core spec and sample scaffold
 - current reading:
@@ -32,7 +32,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は `P-COMP-01..04`、`P-POSE-01..02`、`P-PROJ-01`、`P-ENG-01` へ移った。実装はまだ開始していない。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01 -> front-half closeout`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` へ整理した。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。実装はまだ開始していない。
 
 ## workflow-readiness axes
 
@@ -57,6 +57,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | Transform / PoseGraph | docs/spec rebaseline | boundary-fixed, planned samples only | `specs/29` / `plan/54` define pose snapshot, anchor, no-split-frame, save/load/devtools hooks | PoseGraph scaffold and positive/negative no-split-frame evidence |
 | projection/backend boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/30` / `plan/55` keep projection as target / packet / FFI inventory, not codegen | server/client/adapter manifest inventory and report surface |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/31` / `plan/56` keep engines/providers under typed adapter contracts | provider contract inventory, no arbitrary execution |
+| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | begin `P-COMP-01` scaffold actualization |
 
 ## subsystem status
 
@@ -90,7 +91,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | `atomic_cut` and higher-level ordering | semantics fixed, evidence-backed | `atomic_cut` remains place-local rollback frontier; durable/distributed commit is not implied | 着手可能 |
 | executable sample corpus | workflow-ready where scoped | clean near-end, practical alpha workflows, product alpha release candidate, installed-binary probe, and operational suite have runnable anchors | 着手可能 |
 | Mir-owned computation | boundary-fixed, planned-only samples | current alpha host `AddOne` is external adapter evidence only; pure AddOne in Mir is next proof point | 着手可能 |
-| PoseGraph / no-split-frame | boundary-fixed, planned-only samples | same-client same-observation-snapshot invariant is defined; no runtime sample yet | 着手可能 |
+| PoseGraph / no-split-frame | boundary-fixed, planned-only samples | same-client same-observation-snapshot invariant, `Anchor`, `AnchorBinding`, `AnchorSwitch`, and stale-anchor reacquire gates are defined; no runtime sample yet | 着手可能 |
 
 ## current blockers
 
@@ -100,6 +101,7 @@ Place をまたいで実行・通信・検証・可視化できる
 - PoseGraph save/load / devtools carrier is not yet implemented.
 - projection/backend boundary is inventory-only; no server/client split or codegen exists.
 - engine/WASM/FFI adapter boundary is inventory-only; no arbitrary execution is admitted.
+- backend realization, bounded native/WASM provider admission, and final engine adapter ABI remain user-spec-required / kept-later gates.
 - final public grammar / ABI / SDK, final viewer / telemetry ABI, hosted service, WAN/federation, and distributed durable save-load remain later gates.
 - current user-required decision:
   `U1_beyond_alpha_packaging_host_target_shipped_surface` and `final_shared_space_operational_catalog_breadth` remain for final distribution, but they no longer block the docs/spec computational-core line.
@@ -123,6 +125,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 18:56 JST
+  `P-COMP-00B` で autonomous execution contract を reviewer findings と同期。front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01 -> closeout` と implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` を分け、`mir-semantics` computational module、manifest/provider compatibility、provider rollback/replay/cut policy、user-spec-required backend/native/WASM gates を明記した。
 - 2026-05-21 17:35 JST
   `P-COMP-00` で computational-core drift を rebaseline。Product Alpha-1 workflow は保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、`specs/28..31` / `plan/53..56` で Mir-owned computation、PoseGraph、projection/backend、engine-adapter boundary を docs/spec line として追加した。runtime implementation は未着手。
 - 2026-05-07 13:08 JST
