@@ -51,6 +51,17 @@ commit and push after each package
 | 9 | `P-POSE-02` | implementation | no-split-frame positive and negative evidence | same snapshot accepted, split snapshot rejected or exported as violation |
 | 10 | all-up closeout | audit | all-up docs / samples / validation report | all current rows synced, remaining non-claims explicit |
 
+## current chain status
+
+- all packages in this chain closed on 2026-05-21
+- front-half scaffold closeout:
+  `P-COMP-01`, `P-POSE-01`, `P-PROJ-01`, `P-ENG-01`
+- implementation half closeout:
+  `P-COMP-02`, `P-COMP-03`, `P-COMP-04`, `P-POSE-02`
+- all-up closeout audit:
+  focused helper suites, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks passed
+- no promoted self-driven package remains in the current chain; later reopenings must be promoted explicitly from kept-later or user-spec-required lines
+
 ## P-COMP-01 plan
 
 Current status:

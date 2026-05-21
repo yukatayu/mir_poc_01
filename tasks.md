@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 21:57 JST
+最終更新: 2026-05-21 22:11 JST
 
 ## この文書について
 
@@ -43,21 +43,21 @@
   `samples/product-alpha1/engine-adapter/`, `matrix.json`, `scripts/engine_adapter_boundary_samples.py`, and provider contract inventory are now actualized. This is scaffold closeout, not provider admission.
 - front-half docs/scaffold closeout is complete:
   the computational / PoseGraph / projection / engine-adapter roots, helpers, tests, validators, reports, and snapshot docs are synchronized, so the promoted queue now moves to the implementation half.
+- all-up closeout audit is closed:
+  focused helpers, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks have been rerun after `P-POSE-02`, so the current self-driven package chain is closed through its planned audit package.
 - autonomous execution default is reviewer-integrated and fixed:
   `specs/32` and `plan/57` define a docs/scaffold front half, an implementation half, safe defaults, sub-agent review cadence, validation floor, report / commit / push policy, and user-spec-required gate isolation. `plan/57` is repository memory; live queue authority remains this document plus `progress.md`.
 
 ## ordered self-driven packages
 
-| Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
-|---:|---|---|---|---|---|
-| 1 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
+No promoted self-driven package remains in the current chain. The line defined in `plan/57` is closed through all-up closeout.
 
 ## current recommendation
 
 - recommended reopen point:
-  autonomous all-up closeout audit
+  none in the current self-driven chain
 - recommendation reason:
-  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The least risky next self-driven step is to run the all-up audit, because the current implementation-half targets are ratcheted to their intended boundaries and what remains is synchronization/validation rather than another widening.
+  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The planned all-up audit has also passed, so the current chain is ratcheted and closed. Future reopenings should be chosen explicitly from the research-discovery or user-decision items below rather than pretending another package is already promoted.
 - stop line:
   do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / helper-backed no-split-frame evidence as implementation completion.
 

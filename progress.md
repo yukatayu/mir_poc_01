@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-21 21:57 JST
+最終更新: 2026-05-21 22:11 JST
 
 ## この文書について
 
@@ -24,15 +24,15 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-POSE-02` no-split-frame runtime evidence
+  all-up closeout audit
 - current promoted reopen point:
-  autonomous all-up closeout audit
+  no promoted package in the current self-driven chain
 - current reading:
   repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。その上で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow completion ではない。
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げ、`P-COMP-04` により direct host read/write boundary の accepted/check-rejection rows を actualize し、`P-POSE-02` により accepted same-snapshot row と negative `violation_export` row を helper-backed no-split-frame evidence として actualize した。current next package は all-up closeout audit であり、`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げ、`P-COMP-04` により direct host read/write boundary の accepted/check-rejection rows を actualize し、`P-POSE-02` により accepted same-snapshot row と negative `violation_export` row を helper-backed no-split-frame evidence として actualize した。all-up closeout audit では focused helper suites、Cargo regressions、product alpha release check、installed-binary adoption probe、operational suite、docs validators を再実行し、current self-driven chain を close 済みにした。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
 
 ## workflow-readiness axes
 
@@ -53,11 +53,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | product alpha-1 release candidate | product alpha workflow | release-candidate ready, not final product | `scripts/product_alpha1_release_check.py --format json check-all --out <dir>` が Docker 込みで accepted なら release-candidate evidence | broader public distribution / final catalog decision |
 | installed-binary adoption probe | public-ish alpha adoption probe | bounded adoption candidate | `scripts/product_alpha1_installed_binary_check.py --format json check-all --out <dir>` が built binary + generated host bundle replay を確認 | archive / installer / hosted-service shape |
 | operational product sample suite | canonical operational suite | workflow-ready canonical suite, not final product | `scripts/operational_product_samples.py check-all --format json` が six roots, attach packages, transport, devtools, native bundle, portal/shard/gradient cuts を確認 | user-spec-required broader distribution / final catalog decision |
-| Mir computational core | bounded first-floor plus host-boundary evidence | direct runtime rows, helper-executable first-floor rows, and direct check-rejection rows | `specs/28` / `plan/53`, `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`, `samples/product-alpha1/computational/host-io-internal-transform/`, `crates/mir-semantics::computational_core`, runtime/schema/session tests, and `scripts/mir_computational_samples.py` now prove `ReadInt -> add_one -> WriteInt`, variables / arrays / records / control-flow / imports positive and negative rows, and explicit host read/write boundary declarations with effect / failure / capability rejection evidence while preserving legacy adapter-owned `typed_host_io.add_one` | `P-POSE-02`; broader computational publish / observe / witness / handoff widening remains later |
+| Mir computational core | bounded first-floor plus host-boundary evidence | direct runtime rows, helper-executable first-floor rows, and direct check-rejection rows | `specs/28` / `plan/53`, `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`, `samples/product-alpha1/computational/host-io-internal-transform/`, `crates/mir-semantics::computational_core`, runtime/schema/session tests, and `scripts/mir_computational_samples.py` now prove `ReadInt -> add_one -> WriteInt`, variables / arrays / records / control-flow / imports positive and negative rows, and explicit host read/write boundary declarations with effect / failure / capability rejection evidence while preserving legacy adapter-owned `typed_host_io.add_one` | broader computational publish / observe / witness / handoff widening remains later |
 | Transform / PoseGraph | bounded helper no-split-frame evidence | accepted same-snapshot row plus negative violation export | `specs/29` / `plan/54`, `samples/product-alpha1/posegraph/`, and `scripts/posegraph_samples.py` now expose one accepted helper row, one `violation_export` row, and seven planned rows without claiming workflow-ready runtime completion | pose-aware save/load, devtools panel family, anchor-switch/reacquire rows |
 | projection/backend boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/30` / `plan/55`, `samples/product-alpha1/projection/`, and `scripts/projection_boundary_samples.py` classify planned rows, preserve accepted/rejected compatibility IDs, and reject `run` as `planned_only` | later projection realization package, if any, after explicit design choice |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, and `scripts/engine_adapter_boundary_samples.py` classify planned provider rows, preserve default execution gating, and reject `run` as `planned_only` | bounded provider admission package, if any, after explicit policy choice |
-| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue all-up closeout queue |
+| autonomous execution contract | docs/spec execution policy | boundary-fixed and closeout-audited | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
 
 ## subsystem status
 
@@ -75,11 +75,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | Macro | 主眼 | 現在位置 | 重さ | 自走可否 |
 |---|---|---|---|---|
 | `Macro 0` | repository memory / docs / traceability | snapshot docs を current gate に圧縮中 | light | 着手可能 |
-| `Macro 1` | semantic kernel / invariant / boundary stabilization | computational core / effect split / PoseGraph boundary rebaseline is fixed; implementation half is next | medium | 着手可能 |
+| `Macro 1` | semantic kernel / invariant / boundary stabilization | computational core / effect split / PoseGraph boundary rebaseline is fixed; current queue is all-up closeout | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary fixed; broad discharge later | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | same-session + local/Docker alpha workflow; production distributed line later | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface / public operational interface | product alpha release-candidate and installed-binary adoption probe are reproducible; projection/backend and engine/provider inventory are machine-readable | heavy | 着手可能 for implementation half, 要仕様確認 for shipped surface |
-| `Macro 8` | domain / application realization | operational suite six-root chain is runnable; PoseGraph runtime proof and final catalog breadth remain open | heavy | 着手可能 for PoseGraph implementation, 要仕様確認 for final catalog |
+| `Macro 8` | domain / application realization | operational suite six-root chain is runnable; bounded PoseGraph helper evidence is in place, but full runtime/save-load/devtools widening and final catalog breadth remain open | heavy | 着手可能 for later widening, 要仕様確認 for final catalog |
 
 ## feature maturity rows
 
@@ -139,6 +139,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 22:11 JST
+  all-up closeout audit で focused helper suite、Cargo regression、product alpha release check、installed-binary probe、operational suite、docs validator を再実行し、current self-driven chain を close 済みに更新した。
 - 2026-05-21 21:57 JST
   `P-POSE-02` で `samples/product-alpha1/posegraph/` の `pose-04` / `pose-05` を helper-executable accepted/violation rows に actualize し、`matrix.json`、helper、unit test、snapshot docs を同期した。next reopen point は all-up closeout audit。
 - 2026-05-21 21:27 JST
