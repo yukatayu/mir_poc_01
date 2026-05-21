@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "renderer",
+  "provider_kind": "renderer",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "renderer_frame_packet",
+  "ffi_boundary": "renderer_host_call",
+  "required_capability": [
+    "render_frame"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "Replayable",
+  "note": "Inventory-only adapter contract; renderer does not own world semantics."
+}

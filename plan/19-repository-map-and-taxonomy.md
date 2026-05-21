@@ -118,9 +118,11 @@ standing recommendation:
   - `samples/product-alpha1/computational/`
     `P-COMP-01` planned-only Mir-owned computation scaffold; helper-validated matrix exists, but runtime execution is still deferred to `P-COMP-02`
   - `samples/product-alpha1/posegraph/`
-    Transform / PoseGraph sample line; not created/runnable until `P-POSE-01`
+    `P-POSE-01` planned-only Transform / PoseGraph scaffold; helper-validated matrix exists, but runtime evidence is still deferred to `P-POSE-02`
   - `samples/product-alpha1/projection/`
-    projection inventory sample line; not created/runnable until `P-PROJ-01`
+    `P-PROJ-01` planned-only projection boundary inventory scaffold; helper-validated matrix exists, but code generation / binary split remains deferred
+  - `samples/product-alpha1/engine-adapter/`
+    `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold; helper-validated matrix exists, but provider admission remains deferred
 
 ### important boundary
 
@@ -160,9 +162,12 @@ standing recommendation:
   - `scripts/mir_computational_samples.py`
     `P-COMP-01` planned-only computational matrix helper; it validates `samples/product-alpha1/computational/` and rejects `run` as `planned_only`
   - `scripts/posegraph_samples.py`
+    `P-POSE-01` planned-only PoseGraph matrix helper; it validates `samples/product-alpha1/posegraph/` and rejects `run` as `planned_only`
   - `scripts/projection_boundary_samples.py`
+    `P-PROJ-01` planned-only projection boundary helper; it validates `samples/product-alpha1/projection/`, preserves accepted/rejected compatibility rows, and rejects `run` as `planned_only`
   - `scripts/engine_adapter_boundary_samples.py`
-  - only the computational helper exists today; do not include the other planned commands in current validation floors until their packages create real files/tests
+    `P-ENG-01` planned-only engine adapter helper; it validates `samples/product-alpha1/engine-adapter/`, preserves default execution gating, and rejects `run` as `planned_only`
+  - computational, PoseGraph, projection, and engine helpers now exist as planned-only validation surfaces; only runtime-capable roots should be marked workflow-ready
 
 ### current storage / env
 

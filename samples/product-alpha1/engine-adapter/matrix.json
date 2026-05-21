@@ -1,0 +1,429 @@
+{
+  "schema_version": "engine-adapter-provider-matrix-v0",
+  "family": "engine_adapter_boundary",
+  "current_status": "planned_only",
+  "inventory_status": "actualized_contract_rows",
+  "world_semantics_owner": "mir_mirrorea",
+  "packet_ffi_transport_split": "explicit",
+  "default_native_execution_policy": "Disabled",
+  "default_wasm_execution_policy": "InventoryOnly",
+  "rows": [
+    {
+      "provider_id": "renderer",
+      "provider_kind": "renderer",
+      "root_name": "renderer",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "renderer/renderer.contract.json",
+      "input_schema": "render_frame_request",
+      "output_schema": "render_frame_observation",
+      "effect_row": [
+        "RenderFrame"
+      ],
+      "failure_row": [
+        "RendererUnavailable",
+        "PresentationDropped"
+      ],
+      "required_capability": [
+        "render_frame"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "renderer_frame_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "renderer_host_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "Replayable"
+    },
+    {
+      "provider_id": "input-device",
+      "provider_kind": "input-device",
+      "root_name": "input-device",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "input-device/input-device.contract.json",
+      "input_schema": "input_device_packet",
+      "output_schema": "typed_input_observation",
+      "effect_row": [
+        "ReadInputDevice"
+      ],
+      "failure_row": [
+        "InputDeviceUnavailable",
+        "StaleInputEpoch"
+      ],
+      "required_capability": [
+        "read_input_device"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "input_device_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "input_device_host_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "CompensatingActionRequired"
+    },
+    {
+      "provider_id": "asset-loader",
+      "provider_kind": "asset-loader",
+      "root_name": "asset-loader",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "asset-loader/asset-loader.contract.json",
+      "input_schema": "asset_reference_request",
+      "output_schema": "asset_payload_or_handle",
+      "effect_row": [
+        "LoadAssetMetadata",
+        "ResolveAssetHandle"
+      ],
+      "failure_row": [
+        "AssetSourceUnavailable",
+        "AssetVersionMismatch"
+      ],
+      "required_capability": [
+        "load_asset_reference"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "asset_load_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "asset_loader_host_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "InventoryOnly"
+    },
+    {
+      "provider_id": "physics-spatial-query",
+      "provider_kind": "physics-spatial-query",
+      "root_name": "physics-spatial-query",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "physics-spatial-query/physics-spatial-query.contract.json",
+      "input_schema": "spatial_query_request",
+      "output_schema": "spatial_query_result",
+      "effect_row": [
+        "SpatialQuery"
+      ],
+      "failure_row": [
+        "PhysicsBackendUnavailable",
+        "StaleWorldSnapshot"
+      ],
+      "required_capability": [
+        "query_spatial_state"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "spatial_query_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "physics_query_host_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "InventoryOnly"
+    },
+    {
+      "provider_id": "host-runtime-bridge",
+      "provider_kind": "host-runtime-bridge",
+      "root_name": "host-runtime-bridge",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "host-runtime-bridge/host-runtime-bridge.contract.json",
+      "input_schema": "typed_host_runtime_request",
+      "output_schema": "typed_host_runtime_response",
+      "effect_row": [
+        "HostRuntimeBridge"
+      ],
+      "failure_row": [
+        "RuntimeBridgeUnavailable",
+        "HostCallbackRejected"
+      ],
+      "required_capability": [
+        "call_host_runtime_bridge"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "host_runtime_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "host_runtime_bridge_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "IrreversibleCutBarrier"
+    },
+    {
+      "provider_id": "wasm-sandbox",
+      "provider_kind": "wasm-sandbox",
+      "root_name": "wasm-sandbox",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "wasm-sandbox/wasm-sandbox.contract.json",
+      "input_schema": "typed_wasm_request",
+      "output_schema": "typed_wasm_result",
+      "effect_row": [
+        "ExecuteAdmittedWasm"
+      ],
+      "failure_row": [
+        "WasmTrap",
+        "SandboxUnavailable"
+      ],
+      "required_capability": [
+        "execute_wasm_adapter"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "wasm_adapter_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "wasm_sandbox_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": true,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "InventoryOnly"
+    },
+    {
+      "provider_id": "native-library-bridge",
+      "provider_kind": "native-library-bridge",
+      "root_name": "native-library-bridge",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "native-library-bridge/native-library-bridge.contract.json",
+      "input_schema": "typed_native_call_request",
+      "output_schema": "typed_native_call_result",
+      "effect_row": [
+        "InvokeNativeLibrary"
+      ],
+      "failure_row": [
+        "NativeLibraryUnavailable",
+        "FfiSignatureMismatch"
+      ],
+      "required_capability": [
+        "invoke_native_bridge"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "native_bridge_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "native_library_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "IrreversibleCutBarrier"
+    },
+    {
+      "provider_id": "viewer-diagnostic-exporter",
+      "provider_kind": "viewer-diagnostic-exporter",
+      "root_name": "viewer-diagnostic-exporter",
+      "stage": "P-ENG-01",
+      "current_status": "planned_only",
+      "representative_source": "viewer-diagnostic-exporter/viewer-diagnostic-exporter.contract.json",
+      "input_schema": "redacted_diagnostic_view",
+      "output_schema": "diagnostic_export_record",
+      "effect_row": [
+        "ExportDiagnosticView"
+      ],
+      "failure_row": [
+        "DiagnosticSinkUnavailable",
+        "RetentionDenied"
+      ],
+      "required_capability": [
+        "export_redacted_diagnostics"
+      ],
+      "authority_policy": {
+        "semantic_authority_owner": "mir_mirrorea",
+        "provider_may_grant_authority": false,
+        "provider_may_mutate_world_state": false
+      },
+      "observation_policy": {
+        "provider_receives_redacted_observation_only": true,
+        "retention_owner": "mir_mirrorea"
+      },
+      "redaction_policy": {
+        "provider_may_emit_unredacted_debug": false,
+        "redaction_label_required": true
+      },
+      "packet_boundary": {
+        "boundary_name": "diagnostic_export_packet",
+        "transport_collapsed": false
+      },
+      "ffi_boundary": {
+        "boundary_name": "diagnostic_export_call",
+        "transport_collapsed": false
+      },
+      "resource_policy": {
+        "semantic_state_owner": "mir_mirrorea",
+        "provider_handles_are_nonsemantic": true
+      },
+      "sandbox_policy": {
+        "sandbox_required": false,
+        "current_status": "inventory_only"
+      },
+      "native_execution_policy": "Disabled",
+      "wasm_execution_policy": "InventoryOnly",
+      "rollback_replay_cut_policy": "InventoryOnly"
+    }
+  ]
+}

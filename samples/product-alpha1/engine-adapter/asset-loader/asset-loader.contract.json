@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "asset-loader",
+  "provider_kind": "asset-loader",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "asset_load_packet",
+  "ffi_boundary": "asset_loader_host_call",
+  "required_capability": [
+    "load_asset_reference"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "InventoryOnly",
+  "note": "Inventory-only adapter contract; asset-provider admission is deferred."
+}

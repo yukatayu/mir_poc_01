@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "native-library-bridge",
+  "provider_kind": "native-library-bridge",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "native_bridge_packet",
+  "ffi_boundary": "native_library_call",
+  "required_capability": [
+    "invoke_native_bridge"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "IrreversibleCutBarrier",
+  "note": "Inventory-only adapter contract; native signatures do not imply semantic safety."
+}

@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "host-runtime-bridge",
+  "provider_kind": "host-runtime-bridge",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "host_runtime_packet",
+  "ffi_boundary": "host_runtime_bridge_call",
+  "required_capability": [
+    "call_host_runtime_bridge"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "IrreversibleCutBarrier",
+  "note": "Inventory-only adapter contract; host runtime effects remain outside semantic ownership."
+}

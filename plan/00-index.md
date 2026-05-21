@@ -57,13 +57,13 @@
 - **Mir computational core rebaseline**:
   `specs/28-mir-computational-core.md` と `plan/53-mir-computational-core-roadmap.md` は、current typed external `AddOne` を host-boundary evidence に限定し、Mir-owned computation の first floor、pure/effect split、explicit failure row、`P-COMP-01` planned-only sample scaffold を置く
 - **Transform / PoseGraph line**:
-  `specs/29-transform-posegraph-semantics.md` と `plan/54-transform-posegraph-roadmap.md` は、avatar/object transform、pose snapshot、anchor graph、fallback admissibility、no-split-frame の docs/spec boundary を置く
+  `specs/29-transform-posegraph-semantics.md` と `plan/54-transform-posegraph-roadmap.md` は、avatar/object transform、pose snapshot、anchor graph、fallback admissibility、no-split-frame の docs/spec boundaryと `P-POSE-01` planned-only scaffold を置く
 - **projection/backend boundary line**:
-  `specs/30-projection-and-backend-boundary.md` と `plan/55-projection-backend-roadmap.md` は、target manifest / packet schema / FFI schema inventory を置き、server/client binary split や backend codegen completion を claim しない
+  `specs/30-projection-and-backend-boundary.md` と `plan/55-projection-backend-roadmap.md` は、target manifest / packet schema / FFI schema inventory と `P-PROJ-01` planned-only scaffold を置き、server/client binary split や backend codegen completion を claim しない
 - **engine/WASM/FFI adapter line**:
-  `specs/31-engine-wasm-ffi-adapter-boundary.md` と `plan/56-engine-adapter-roadmap.md` は、Unity / Unreal / renderer / WASM / native library を typed provider として扱い、world semantics を Mir / Mirrorea に残す boundary を置く
+  `specs/31-engine-wasm-ffi-adapter-boundary.md` と `plan/56-engine-adapter-roadmap.md` は、Unity / Unreal / renderer / WASM / native library を typed provider として扱い、world semantics を Mir / Mirrorea に残す boundary と `P-ENG-01` planned-only scaffold を置く
 - **autonomous computational-core execution line**:
-  `specs/32-autonomous-execution-and-completion-contract.md` と `plan/57-autonomous-computational-core-master-plan.md` は、front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、user-spec-required gate isolation、validation / report / commit cadence を置く
+  `specs/32-autonomous-execution-and-completion-contract.md` と `plan/57-autonomous-computational-core-master-plan.md` は、front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` closeout と、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、user-spec-required gate isolation、validation / report / commit cadence を置く
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 

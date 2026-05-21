@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "physics-spatial-query",
+  "provider_kind": "physics-spatial-query",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "spatial_query_packet",
+  "ffi_boundary": "physics_query_host_call",
+  "required_capability": [
+    "query_spatial_state"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "InventoryOnly",
+  "note": "Inventory-only adapter contract; spatial-query determinism remains a later proof gate."
+}

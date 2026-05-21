@@ -32,8 +32,15 @@
   - `samples/product-alpha1/computational/` is the `P-COMP-01` planned-only Mir-owned computation scaffold under `specs/28` / `plan/53`
     - `python3 scripts/mir_computational_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
     - `run comp-02-pure-add-one` must reject as `planned_only` until `P-COMP-02`
-  - `samples/product-alpha1/posegraph/` is planned for Transform / PoseGraph samples under `specs/29` / `plan/54`; it is not present or runnable yet
-  - `samples/product-alpha1/projection/` is planned for projection boundary samples under `specs/30` / `plan/55`; it is not present or runnable yet
+  - `samples/product-alpha1/posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold under `specs/29` / `plan/54`
+    - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
+    - `run pose-04-no-split-frame-positive` and `run pose-05-split-frame-negative` must reject as `planned_only` until `P-POSE-02`
+  - `samples/product-alpha1/projection/` is the `P-PROJ-01` planned-only projection boundary inventory scaffold under `specs/30` / `plan/55`
+    - `python3 scripts/projection_boundary_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
+    - `run proj-01-server-client-target-manifest` must reject as `planned_only` until a later projection-realization package exists
+  - `samples/product-alpha1/engine-adapter/` is the `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold under `specs/31` / `plan/56`
+    - `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` validates the matrix and keeps every provider row `planned_only`
+    - `run wasm-sandbox` must reject as `planned_only` until a later provider-admission package exists
   - do not mark these roots workflow-ready until real check / run / observe / negative evidence exists
 - `not_implemented/`
   residual planned skeleton family
@@ -110,6 +117,10 @@ python3 scripts/typed_external_boundary_samples.py check-all --format json
 python3 scripts/network_transport_samples.py check-all --format json
 python3 scripts/projection_codegen_samples.py check-all --format json
 python3 scripts/visual_debugger_viewer_samples.py check-all --format json
+python3 scripts/mir_computational_samples.py check-all --format json
+python3 scripts/posegraph_samples.py check-all --format json
+python3 scripts/projection_boundary_samples.py check-all --format json
+python3 scripts/engine_adapter_boundary_samples.py check-all --format json
 cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
 python3 scripts/practical_alpha1_check.py check-all --format json
 python3 scripts/practical_alpha1_run_local.py check-all --format json

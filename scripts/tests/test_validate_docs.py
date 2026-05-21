@@ -169,6 +169,16 @@ class ValidateDocsTests(unittest.TestCase):
             "samples/product-alpha1/computational/matrix.json",
             "samples/product-alpha1/computational/add-one-pure-mir/README.md",
             "samples/product-alpha1/computational/add-one-pure-mir/add-one-pure-mir.mir",
+            "samples/product-alpha1/posegraph/README.md",
+            "samples/product-alpha1/posegraph/matrix.json",
+            "samples/product-alpha1/posegraph/avatar-head-transform/README.md",
+            "samples/product-alpha1/posegraph/avatar-head-transform/avatar-head-transform.mir",
+            "samples/product-alpha1/projection/README.md",
+            "samples/product-alpha1/projection/matrix.json",
+            "samples/product-alpha1/projection/server-client-target-manifest/server-client-target-manifest.json",
+            "samples/product-alpha1/engine-adapter/README.md",
+            "samples/product-alpha1/engine-adapter/matrix.json",
+            "samples/product-alpha1/engine-adapter/renderer/renderer.contract.json",
             "samples/product-alpha1/demo/README.md",
             "samples/product-alpha1/demo/package.mir.json",
             "samples/product-alpha1/operational/README.md",
@@ -194,6 +204,12 @@ class ValidateDocsTests(unittest.TestCase):
         computational_helper_docs = {
             "scripts/mir_computational_samples.py",
             "scripts/tests/test_mir_computational_samples.py",
+            "scripts/posegraph_samples.py",
+            "scripts/tests/test_posegraph_samples.py",
+            "scripts/projection_boundary_samples.py",
+            "scripts/tests/test_projection_boundary_samples.py",
+            "scripts/engine_adapter_boundary_samples.py",
+            "scripts/tests/test_engine_adapter_boundary_samples.py",
         }
 
         for path in computational_helper_docs:

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 19:22 JST
+最終更新: 2026-05-21 19:56 JST
 
 ## この文書について
 
@@ -23,10 +23,18 @@
   `samples/product-alpha1/operational/` covers `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation`, shared attach packages, projection inventory, local/Docker transport, observer-safe devtools, R0/R2 save evidence, native host bundle, and helper-reported scope blocks.
 - Product Alpha-1 operational runtime widening queue is exhausted:
   `widening_queue_scope` keeps room-chat, portal/shard starter, and broader Sugoroku reopenings non-promoted; `user_final_decision_scope` marks broader distribution / final catalog breadth as a user-spec-required gate.
-- current docs/spec self-driven line is reopened:
-  `P-COMP-00` rebaselined the target from distribution-only to Mir-owned computation, while preserving the existing alpha runtime/product floor.
+- current docs/spec self-driven line is in the implementation-half queue:
+  `P-COMP-00` rebaselined the target from distribution-only to Mir-owned computation, while preserving the existing alpha runtime/product floor, and the front-half scaffolds are now closed.
 - `P-COMP-01` is closed:
   `samples/product-alpha1/computational/`, `matrix.json`, `scripts/mir_computational_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime completion.
+- `P-POSE-01` is closed:
+  `samples/product-alpha1/posegraph/`, `matrix.json`, `scripts/posegraph_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime proof.
+- `P-PROJ-01` is closed:
+  `samples/product-alpha1/projection/`, `matrix.json`, `scripts/projection_boundary_samples.py`, and compatibility-row inventory are now actualized. This is scaffold closeout, not code generation or binary split.
+- `P-ENG-01` is closed:
+  `samples/product-alpha1/engine-adapter/`, `matrix.json`, `scripts/engine_adapter_boundary_samples.py`, and provider contract inventory are now actualized. This is scaffold closeout, not provider admission.
+- front-half docs/scaffold closeout is complete:
+  the computational / PoseGraph / projection / engine-adapter roots, helpers, tests, validators, reports, and snapshot docs are synchronized, so the promoted queue now moves to the implementation half.
 - autonomous execution default is reviewer-integrated and fixed:
   `specs/32` and `plan/57` define a docs/scaffold front half, an implementation half, safe defaults, sub-agent review cadence, validation floor, report / commit / push policy, and user-spec-required gate isolation. `plan/57` is repository memory; live queue authority remains this document plus `progress.md`.
 
@@ -34,24 +42,20 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-POSE-01` Transform / PoseGraph scaffold | `Macro 8`, docs/scaffold front half | define and scaffold `Transform`, `PoseSnapshot`, `Anchor`, `AnchorBinding`, `AnchorSwitch`, fallback admissibility, and no-split-frame rows | planned sample matrix and non-claims are indexed; no runtime PoseGraph evidence is claimed | small |
-| 2 | `P-PROJ-01` projection target / packet / FFI inventory | `Macro 7`, docs/scaffold front half | represent server/client/adapter target manifests, packet/FFI schemas, and manifest-provider compatibility as inventory | inventory surface has accepted/rejected compatibility rows and is explicitly non-codegen | small-medium |
-| 3 | `P-ENG-01` engine/WASM/FFI adapter boundary | `Macro 7/8`, docs/scaffold front half | fix provider contract fields, rollback/replay/cut policy, and native/WASM gated defaults while keeping semantics in Mir/Mirrorea | provider classes and stop lines are indexed; native/WASM admission remains disabled or user-spec-required | small |
-| 4 | front-half closeout audit | `Macro 0/1/7/8`, closeout | confirm docs/scaffold rows, validators, reports, and non-claims are synchronized before runtime claims begin | all four front-half helpers/tests pass once created; `P-COMP-02` is named as next implementation package | small-medium |
-| 5 | `P-COMP-02` pure AddOne in Mir | `Macro 1/7`, implementation half | introduce narrow `mir-semantics` computational AST/evaluator and make `x + 1` Mir-owned while host input/output remain typed external adapters | host input / Mir compute / host output are separate observable events; adapter-owned AddOne path rejects as `not_mir_owned` | medium |
-| 6 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation half | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
-| 7 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
-| 8 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
-| 9 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
+| 1 | `P-COMP-02` pure AddOne in Mir | `Macro 1/7`, implementation half | introduce narrow `mir-semantics` computational AST/evaluator and make `x + 1` Mir-owned while host input/output remain typed external adapters | host input / Mir compute / host output are separate observable events; adapter-owned AddOne path rejects as `not_mir_owned` | medium |
+| 2 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation half | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
+| 3 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
+| 4 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
+| 5 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-POSE-01` Transform / PoseGraph scaffold
+  `P-COMP-02` pure AddOne in Mir
 - recommendation reason:
-  `P-COMP-01` already actualized the computational sample scaffold and machine-readable non-claim. The least risky next self-driven step is to close the remaining docs/scaffold front-half packages before starting runtime claims in `P-COMP-02`.
+  front-half scaffolds for computational / PoseGraph / projection / engine-adapter are now actualized and synchronized. The least risky next self-driven step is to move into `P-COMP-02`, where host input / Mir compute / host output become separately observable without overloading the existing adapter-owned `AddOne` lane.
 - stop line:
-  do not claim runtime completion in `P-COMP-01`, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne as Mir computational-core completion.
+  do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / no-split-frame as implementation completion.
 
 ## research-discovery items
 

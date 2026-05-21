@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "wasm-sandbox",
+  "provider_kind": "wasm-sandbox",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "wasm_adapter_packet",
+  "ffi_boundary": "wasm_sandbox_call",
+  "required_capability": [
+    "execute_wasm_adapter"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "InventoryOnly",
+  "note": "Inventory-only adapter contract; sandbox presence does not imply replayability or semantic safety."
+}

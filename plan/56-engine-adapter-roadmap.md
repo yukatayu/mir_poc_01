@@ -10,6 +10,9 @@ It inventories backend/provider families while preserving the rule that Mir / Mi
 
 Current repo has:
 
+- normalized planned-only inventory root `samples/product-alpha1/engine-adapter/`
+- `matrix.json` with machine-readable provider contract rows for renderer/input/asset/physics/host/WASM/native/viewer families
+- `scripts/engine_adapter_boundary_samples.py` and focused unit tests for list/matrix/check-all/run/closeout inventory behavior
 - typed external host boundary model
 - native host launch bundle as the only actualized backend-adjacent path
 - WASM / LLVM comparison inventory
@@ -23,12 +26,13 @@ Current repo lacks:
 - arbitrary native package execution
 - final FFI SDK
 - rollback / replay / cut-admissibility provider evidence
+- admitted runtime provider execution beyond inventory-only rows
 
 ## package order
 
 | Package | Role | Completion gate |
 |---|---|---|
-| `P-ENG-01` | engine/backend adapter boundary spec | provider classes and contract fields are fixed as inventory; execution remains gated |
+| `P-ENG-01` | engine/backend adapter boundary inventory scaffold | provider classes and contract fields are machine-readable in the normalized root; execution remains gated |
 | later | renderer/input/asset provider rows | one provider family gets schema/effect/failure/capability/observation rows |
 | later | sandboxed WASM candidate | explicit sandbox policy, no arbitrary execution |
 | later | bounded native provider candidate | explicit native policy, no signature-is-safety claim |
@@ -62,20 +66,25 @@ Required contract fields:
 - native execution policy
 - rollback / replay / cut-admissibility policy
 
-## planned helper
+## actualized scaffold
 
-Future helper, not present in `P-COMP-00`:
+Current scaffold files:
 
+- `samples/product-alpha1/engine-adapter/README.md`
+- `samples/product-alpha1/engine-adapter/matrix.json`
 - `scripts/engine_adapter_boundary_samples.py`
+- `scripts/tests/test_engine_adapter_boundary_samples.py`
 
-Future validation anchors may include:
+Focused validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_engine_adapter_boundary_samples
+python3 scripts/engine_adapter_boundary_samples.py matrix --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
+python3 scripts/engine_adapter_boundary_samples.py run wasm-sandbox --format json
 ```
 
-These commands are future anchors, not current runnable validation.
+These commands are current runnable validation for the planned-only inventory scaffold. They do not claim runtime provider admission.
 
 ## completion rule
 

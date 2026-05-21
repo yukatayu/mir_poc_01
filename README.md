@@ -47,7 +47,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 
 ## Mir Computational Core rebaseline
 
-2026-05-21 時点の current docs/spec line は `P-COMP-00` recognition rebaseline を踏まえた `P-COMP-01` scaffold actualization です。これは Product Alpha-1 の runnable workflow を捨てるものではなく、そこを execution / observation floor として保ったまま、Mir 自身が computation を所有する first floor を再設計し、planned-only sample root / helper / matrix を machine-readable にするものです。
+2026-05-21 時点の current docs/spec line は `P-COMP-00` recognition rebaseline を踏まえた front-half scaffold actualization です。これは Product Alpha-1 の runnable workflow を捨てるものではなく、そこを execution / observation floor として保ったまま、Mir 自身が computation を所有する first floor、PoseGraph / no-split-frame の semantics line、projection boundary inventory、engine / WASM / FFI adapter inventory を planned-only root / helper / matrix として machine-readable にするものです。
 
 新しい正本 / repository memory は次です。
 
@@ -62,7 +62,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - `specs/32-autonomous-execution-and-completion-contract.md`
 - `plan/57-autonomous-computational-core-master-plan.md`
 
-`P-COMP-01` は closed で、`samples/product-alpha1/computational/` と `scripts/mir_computational_samples.py` が current planned-only scaffold として actualize 済みです。`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は残る docs/scaffold front-half、`P-COMP-02..04` と `P-POSE-02` は implementation half です。現時点では computational runtime completion ではなく、completion gate と stop line を明確にした staged roadmap として読む必要があります。
+`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、`samples/product-alpha1/computational/` / `scripts/mir_computational_samples.py`、`samples/product-alpha1/posegraph/` / `scripts/posegraph_samples.py`、`samples/product-alpha1/projection/` / `scripts/projection_boundary_samples.py`、`samples/product-alpha1/engine-adapter/` / `scripts/engine_adapter_boundary_samples.py` が current planned-only scaffold として actualize 済みです。次は implementation half の `P-COMP-02..04` と `P-POSE-02` です。現時点では computational / PoseGraph runtime completion、projection code generation、provider admission ではなく、completion gate と stop line を明確にした staged roadmap として読む必要があります。
 
 Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
 

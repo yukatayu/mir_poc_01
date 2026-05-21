@@ -104,15 +104,32 @@
   - backend feasibility inventory is also docs-first; no generic WASM/LLVM build helper is added beyond the existing `build-native-bundle` host-launch path
   - `future/gradient-observation.profile.json` remains docs-first/profile-first and non-executable, but the bounded `two-shard-gradient-observation/` runtime root and helper command now actualize one observer-only same-session cut without claiming continuous sync or write authority
   - it does not claim final product, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native execution
-- Mir Computational Core / PoseGraph / projection-boundary / engine-adapter future helper family is split
+- Mir Computational Core / PoseGraph / projection-boundary / engine-adapter planned-only helper family is split
   - `python3 scripts/mir_computational_samples.py matrix --format json`
   - `python3 scripts/mir_computational_samples.py check-all --format json`
   - `python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json`
   - this helper actualizes the `P-COMP-01` planned-only computational scaffold under `samples/product-alpha1/computational/`
   - it validates matrix/root consistency, keeps all rows `planned_only`, and rejects attempted execution as `planned_only`
   - it does not claim Mir-owned runtime execution, final textual grammar, or `P-COMP-02` completion
-  - `scripts/posegraph_samples.py`, `scripts/projection_boundary_samples.py`, and `scripts/engine_adapter_boundary_samples.py` do not exist yet
-  - do not include those later planned commands in current validation floors until real files, tests, and sample rows exist
+  - `python3 scripts/posegraph_samples.py matrix --format json`
+  - `python3 scripts/posegraph_samples.py check-all --format json`
+  - `python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --format json`
+  - `python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json`
+  - this helper actualizes the `P-POSE-01` planned-only PoseGraph scaffold under `samples/product-alpha1/posegraph/`
+  - it validates matrix/root consistency, keeps all rows `planned_only`, and rejects attempted execution as `planned_only`
+  - it does not claim PoseGraph runtime completion, global simultaneity, or renderer-owned semantics
+  - `python3 scripts/projection_boundary_samples.py matrix --format json`
+  - `python3 scripts/projection_boundary_samples.py check-all --format json`
+  - `python3 scripts/projection_boundary_samples.py run proj-01-server-client-target-manifest --format json`
+  - this helper actualizes the `P-PROJ-01` planned-only projection boundary inventory scaffold under `samples/product-alpha1/projection/`
+  - it validates matrix/root consistency, exposes accepted/rejected compatibility rows, keeps all rows `planned_only`, and rejects attempted execution as `planned_only`
+  - it does not claim server/client code generation, LLVM/backend execution, or final server/client binary split
+  - `python3 scripts/engine_adapter_boundary_samples.py matrix --format json`
+  - `python3 scripts/engine_adapter_boundary_samples.py check-all --format json`
+  - `python3 scripts/engine_adapter_boundary_samples.py run wasm-sandbox --format json`
+  - this helper actualizes the `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold under `samples/product-alpha1/engine-adapter/`
+  - it validates matrix/root consistency, keeps all provider rows `planned_only`, preserves `NativeExecutionPolicy = Disabled` and `WasmExecutionPolicy = InventoryOnly`, and rejects attempted execution as `planned_only`
+  - it does not claim provider admission, arbitrary native/WASM execution, or final engine adapter ABI
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

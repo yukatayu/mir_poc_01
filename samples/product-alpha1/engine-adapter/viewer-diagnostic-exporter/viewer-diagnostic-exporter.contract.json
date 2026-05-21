@@ -1,0 +1,17 @@
+{
+  "provider_contract_version": "eng-provider-contract-v0",
+  "provider_id": "viewer-diagnostic-exporter",
+  "provider_kind": "viewer-diagnostic-exporter",
+  "current_status": "planned_only",
+  "stage": "P-ENG-01",
+  "semantic_owner": "mir_mirrorea",
+  "packet_boundary": "diagnostic_export_packet",
+  "ffi_boundary": "diagnostic_export_call",
+  "required_capability": [
+    "export_redacted_diagnostics"
+  ],
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "InventoryOnly",
+  "note": "Inventory-only adapter contract; exported diagnostics stay redacted and non-semantic."
+}

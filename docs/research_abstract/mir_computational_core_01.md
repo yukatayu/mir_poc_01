@@ -14,6 +14,23 @@ The drift is that this floor can be misread as proof that Mir already owns gener
 
 The helper can list rows, validate the matrix, and reject `run comp-02-pure-add-one` as `planned_only`. This is useful because the non-claim is now machine-readable rather than only prose.
 
+`P-POSE-01` now does the same for PoseGraph:
+
+- `samples/product-alpha1/posegraph/`
+- `samples/product-alpha1/posegraph/matrix.json`
+- `scripts/posegraph_samples.py`
+
+That helper keeps `no-split-frame` as a docs/spec boundary and rejects `run pose-04-no-split-frame-positive` / `run pose-05-split-frame-negative` as `planned_only` until `P-POSE-02`.
+
+`P-PROJ-01` and `P-ENG-01` complete the same front-half pattern for projection/backend and engine/provider inventory:
+
+- `samples/product-alpha1/projection/`
+- `scripts/projection_boundary_samples.py`
+- `samples/product-alpha1/engine-adapter/`
+- `scripts/engine_adapter_boundary_samples.py`
+
+These helpers keep projection code generation, server/client binary split, provider admission, native execution, and WASM execution as explicit non-claims while making the current boundary inventory machine-readable.
+
 ## new promoted docs/spec line
 
 The next docs/spec line is:
@@ -21,13 +38,13 @@ The next docs/spec line is:
 ```text
 P-COMP-00 recognition rebaseline
 P-COMP-01 Mir computational core spec and sample scaffold
+P-POSE-01 Transform / PoseGraph spec and sample scaffold
+P-PROJ-01 projection boundary and packet/FFI schema inventory
+P-ENG-01 engine/backend adapter boundary spec
 P-COMP-02 pure AddOne in Mir
 P-COMP-03 variables / arrays / records / control-flow first floor
 P-COMP-04 effect boundary around internal computation
-P-POSE-01 Transform / PoseGraph spec and sample scaffold
 P-POSE-02 avatar head + anchored object no-split-frame sample
-P-PROJ-01 projection boundary and packet/FFI schema inventory
-P-ENG-01 engine/backend adapter boundary spec
 ```
 
 This is additive. It does not roll back the Product Alpha-1 operational floor.

@@ -7,6 +7,9 @@ This root is reserved for the Product/Public-ready Mirrorea Spaces alpha-1 line.
 - `demo/` is the product alpha-1 release-candidate root. It exercises `mirrorea-alpha check`, `run-local`, `session`, `attach`, `save`, `load`, `quiescent-save`, local/Docker `transport`, `export-devtools`, `view`, `build-native-bundle`, and `demo`.
 - `docker/` contains the controlled Docker Compose TCP transport fixture used by the product release check.
 - `computational/` is the `P-COMP-01` planned-only Mir-owned computation scaffold. It contains representative `.mir` sketches, `matrix.json`, and helper-validated planned rows, but no executable `package.mir.json` yet.
+- `posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold. It contains representative `.mir` sketches, `matrix.json`, and helper-validated planned rows, but no executable runtime row yet.
+- `projection/` is the `P-PROJ-01` planned-only projection boundary inventory scaffold. It contains target-manifest / packet / FFI / compatibility JSON artifacts plus helper-validated planned rows, but no code generation or server/client binary split.
+- `engine-adapter/` is the `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold. It contains provider contract JSON artifacts plus helper-validated planned rows, but no admitted provider execution.
 - `operational/` is the canonical operational product sample suite. It contains the six runnable roots `world-core`, `membership-chat`, `sugoroku-world`, `portal-worldlink`, `two-shard-hard-boundary`, and `two-shard-gradient-observation`.
 - `operational/templates/` contains `template_only` authoring starters for `world-core`, `membership-chat`, and `sugoroku-world`. Portal/shard starter duplicates remain undefined in the current line.
 - `operational/future/` contains retained blueprint/profile inventory. The future files are not executable roots unless a separate active root says so.
@@ -30,6 +33,9 @@ python3 scripts/product_alpha1_release_check.py --format json check-all --out /t
 python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out /tmp/mirrorea-alpha1-installed-binary-check
 python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py check-all --format json
+python3 scripts/posegraph_samples.py check-all --format json
+python3 scripts/projection_boundary_samples.py check-all --format json
+python3 scripts/engine_adapter_boundary_samples.py check-all --format json
 cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_session -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture
@@ -43,5 +49,8 @@ The Docker transport command requires local Docker and Docker Compose. If those 
 - This root does not define final textual `.mir` grammar.
 - This root claims product alpha release-candidate workflow readiness through local/Docker controlled validation, not final public product readiness.
 - `computational/` is a machine-readable planned-only scaffold, not Mir-owned runtime execution.
+- `posegraph/` is a machine-readable planned-only scaffold, not same-snapshot runtime proof.
+- `projection/` is a machine-readable planned-only scaffold, not server/client code generation or backend realization.
+- `engine-adapter/` is a machine-readable planned-only scaffold, not provider admission or final FFI ABI.
 - `operational/` may expose broader package / deployment / future-boundary inventory than `demo/`, but it remains bounded alpha workflow evidence.
 - This root does not claim WAN/federation, distributed durable save/load R3/R4, final public viewer / telemetry ABI, direct Mir-to-machine-code, signature-is-safety, arbitrary native package execution, or final shared-space catalog breadth.

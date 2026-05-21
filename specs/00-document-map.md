@@ -60,7 +60,7 @@
   - `operational_gradient_observation_profile_01.md` は、gradient observation profile と replication non-default reading を docs-first に確認するための landing page である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard authoring が current line では active roots から始まり `future/` blueprint を starter 化しないことを確認する landing page である。
   - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-01` planned-only scaffold actualization、helper matrix、rejected-run surfaceを読むための landing page である。
-  - `transform_posegraph_01.md` は、Transform / PoseGraph line が docs/spec rebaseline 段階であり、no-split-frame / anchor / pose snapshot を planned-only と読むための landing page である。
+  - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-01` planned-only scaffold actualization、helper matrix、rejected-run surfaceを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
@@ -218,7 +218,7 @@
   - planned samples、positive / negative no-split-frame evidence、save/load / devtools hooks を整理する。
 - `specs/30-projection-and-backend-boundary.md`
   - projection / backend boundary の規範境界を置く。
-  - source -> typed IR -> projection IR -> target manifest -> packet schema -> FFI schema の pipeline を inventory として固定し、current executable truth が native host launch bundle に留まることを明記する。
+  - source -> typed IR -> projection IR -> target manifest -> packet schema -> FFI schema の pipeline を inventory として固定し、`P-PROJ-01` planned-only scaffold が current executable truth を native host launch bundle に留めたまま machine-readable inventory を与えることを明記する。
 - `plan/55-projection-backend-roadmap.md`
   - projection / backend boundary の repository-memory roadmap を置く。
   - `P-PROJ-01` target / packet / FFI inventory と backend non-claims を整理する。
@@ -227,13 +227,13 @@
   - Unity / Unreal / renderer / WASM / native library を typed provider として扱い、world semantics が Mir / Mirrorea に残ることを固定する。
 - `plan/56-engine-adapter-roadmap.md`
   - engine / WASM / FFI adapter boundary の repository-memory roadmap を置く。
-  - provider classes、adapter contract fields、future validation anchors、non-default native/WASM execution policy を整理する。
+  - provider classes、adapter contract fields、`P-ENG-01` planned-only scaffold、future validation anchors、non-default native/WASM execution policy を整理する。
 - `specs/32-autonomous-execution-and-completion-contract.md`
   - autonomous execution と completion の規範境界を置く。
   - no-question execution rule、user-spec-required gate isolation、package close protocol、sub-agent review、validation floor、master completion condition を固定する。
 - `plan/57-autonomous-computational-core-master-plan.md`
   - computational-core / PoseGraph / projection / engine-adapter line の autonomous master plan を置く。
-  - front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、closeout audit の deliverable / validation / non-claim / reviewer cadence を整理する。
+  - front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` closeout、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、closeout audit の deliverable / validation / non-claim / reviewer cadence を整理する。
 
 ## 規範的な読書順
 
