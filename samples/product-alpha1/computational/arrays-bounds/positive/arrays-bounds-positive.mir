@@ -1,0 +1,6 @@
+module Computational.Arrays.Positive
+
+fn second(x: Int64) -> Int64 {
+  let xs: Vec[Int64] = [x - 1, x, x + 1]
+  return xs[1]
+}

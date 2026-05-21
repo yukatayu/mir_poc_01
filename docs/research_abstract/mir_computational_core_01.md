@@ -6,13 +6,13 @@ Product Alpha-1 is valuable as a runtime/product workflow floor: `mirrorea-alpha
 
 The drift is that this floor can be misread as proof that Mir already owns general computation. It does not. The current `AddOne` lane proves a typed external host-boundary path, not Mir-owned arithmetic / variable / array / record / control-flow semantics.
 
-`P-COMP-01` actualized the scaffold for that correction, and `P-COMP-02` now promotes the first executable row:
+`P-COMP-01` actualized the scaffold for that correction, `P-COMP-02` promoted the first direct executable row, and `P-COMP-03` widened the first floor:
 
 - `samples/product-alpha1/computational/`
 - `samples/product-alpha1/computational/matrix.json`
 - `scripts/mir_computational_samples.py`
 
-The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted`. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
+The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, execute positive/negative `comp-03` rows, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime row. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
 
 `P-POSE-01` now does the same for PoseGraph:
 
@@ -87,9 +87,11 @@ Current computational validation commands:
 python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+python3 scripts/mir_computational_samples.py run comp-03-control-flow-positive --format json
+python3 scripts/mir_computational_samples.py run comp-03-variables-scope-negative --format json
 ```
 
-These commands now prove `P-COMP-02`. They still do not prove `P-COMP-03`, `P-COMP-04`, final grammar, or backend realization.
+These commands now prove `P-COMP-02` and `P-COMP-03`. They still do not prove `P-COMP-04`, final grammar, or backend realization.
 
 ## PoseGraph target
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 20:27 JST
+最終更新: 2026-05-21 20:53 JST
 
 ## この文書について
 
@@ -29,6 +29,8 @@
   `samples/product-alpha1/computational/`, `matrix.json`, `scripts/mir_computational_samples.py`, and the planned-only rejection surface are now actualized as scaffold baseline.
 - `P-COMP-02` is closed:
   `samples/product-alpha1/computational/add-one-pure-mir/`, `package.mir.json`, `crates/mir-semantics::computational_core`, product-alpha schema/runtime/session/savepoint support, and helper/runtime tests now prove one bounded Mir-owned row. Legacy adapter-owned `typed_host_io.add_one` remains unchanged.
+- `P-COMP-03` is closed:
+  `crates/mir-semantics::computational_core` now covers variables / arrays / records / control-flow / imports, product-alpha schema/runtime tests cover the widened module registry, and `samples/product-alpha1/computational/` now has 5 accepted helper rows, 5 expected runtime rejection rows, and 1 planned-only `P-COMP-04` row.
 - `P-POSE-01` is closed:
   `samples/product-alpha1/posegraph/`, `matrix.json`, `scripts/posegraph_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime proof.
 - `P-PROJ-01` is closed:
@@ -44,17 +46,16 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation half | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
-| 2 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
-| 3 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
-| 4 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
+| 1 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
+| 2 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
+| 3 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-COMP-03` variables / arrays / records / control-flow first floor
+  `P-COMP-04` effect boundary around internal computation
 - recommendation reason:
-  the narrow Mir-owned `add_one` lane is now executable without overloading the legacy adapter-owned `AddOne` path. The least risky next self-driven step is to widen the same computational core to variables / arrays / records / control-flow while keeping the current host boundary and package format stable.
+  the pure computational core is now widened through variables / arrays / records / control-flow / imports without overloading the legacy adapter-owned `AddOne` path. The least risky next self-driven step is to prove the pure/effect split explicitly, keeping undeclared effect / failure / capability rows rejectable before PoseGraph runtime work.
 - stop line:
   do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / no-split-frame as implementation completion.
 

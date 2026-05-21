@@ -13,13 +13,34 @@ import mir_computational_samples
 
 EXPECTED_SAMPLE_IDS = [
     "comp-02-pure-add-one",
-    "comp-03-variables-scope",
-    "comp-03-arrays-bounds",
-    "comp-03-records-vec3",
-    "comp-03-control-flow",
-    "comp-03-imports-functions",
+    "comp-03-variables-scope-positive",
+    "comp-03-variables-scope-negative",
+    "comp-03-arrays-bounds-positive",
+    "comp-03-arrays-bounds-negative",
+    "comp-03-records-vec3-positive",
+    "comp-03-records-vec3-negative",
+    "comp-03-control-flow-positive",
+    "comp-03-control-flow-negative",
+    "comp-03-imports-functions-positive",
+    "comp-03-imports-functions-negative",
     "comp-04-host-io-internal-transform",
 ]
+ACCEPTED_EXECUTABLE_SAMPLE_IDS = [
+    "comp-02-pure-add-one",
+    "comp-03-variables-scope-positive",
+    "comp-03-arrays-bounds-positive",
+    "comp-03-records-vec3-positive",
+    "comp-03-control-flow-positive",
+    "comp-03-imports-functions-positive",
+]
+EXPECTED_RUNTIME_REJECTION_SAMPLE_IDS = [
+    "comp-03-variables-scope-negative",
+    "comp-03-arrays-bounds-negative",
+    "comp-03-records-vec3-negative",
+    "comp-03-control-flow-negative",
+    "comp-03-imports-functions-negative",
+]
+PLANNED_ONLY_SAMPLE_IDS = ["comp-04-host-io-internal-transform"]
 
 
 class MirComputationalSamplesTests(unittest.TestCase):
@@ -61,21 +82,51 @@ class MirComputationalSamplesTests(unittest.TestCase):
             },
         }
 
-    def test_list_contains_all_planned_rows(self) -> None:
+    def test_list_contains_all_rows_with_machine_readable_expectations(self) -> None:
         rows = mir_computational_samples.list_samples()
+        by_id = {row["sample_id"]: row for row in rows}
 
         self.assertEqual([row["sample_id"] for row in rows], EXPECTED_SAMPLE_IDS)
         self.assertEqual(rows[0]["current_status"], "executable")
         self.assertTrue(
-            all(row["current_status"] == "planned_only" for row in rows[1:])
+            all(by_id[sample_id]["current_status"] == "executable" for sample_id in EXPECTED_SAMPLE_IDS[:-1])
+        )
+        self.assertEqual(
+            by_id["comp-03-variables-scope-positive"]["expected_outcome"],
+            {
+                "terminal_outcome": "accepted",
+                "output_summary": "Int(0)",
+            },
+        )
+        self.assertEqual(
+            by_id["comp-03-variables-scope-negative"]["expected_outcome"],
+            {
+                "terminal_outcome": "runtime_rejection",
+                "rejection_contains": "unbound variable",
+            },
+        )
+        self.assertEqual(
+            by_id["comp-03-imports-functions-positive"]["package_input"],
+            "samples/product-alpha1/computational/imports-functions/positive/package.mir.json",
+        )
+        self.assertEqual(
+            by_id["comp-04-host-io-internal-transform"]["current_status"],
+            "planned_only",
         )
 
-    def test_matrix_reports_planned_only_family(self) -> None:
+    def test_matrix_reports_executable_and_expected_rejection_rows(self) -> None:
         result = mir_computational_samples.matrix()
 
-        self.assertEqual(result["sample_count"], 7)
-        self.assertEqual(result["planned_count"], 6)
-        self.assertEqual(result["executable_count"], 1)
+        self.assertEqual(result["sample_count"], 12)
+        self.assertEqual(result["planned_count"], 1)
+        self.assertEqual(result["executable_count"], 11)
+        self.assertEqual(result["accepted_count"], 6)
+        self.assertEqual(result["expected_runtime_rejection_count"], 5)
+        self.assertEqual(result["planned_only_rows"], PLANNED_ONLY_SAMPLE_IDS)
+        self.assertEqual(
+            result["expected_runtime_rejection_rows"],
+            EXPECTED_RUNTIME_REJECTION_SAMPLE_IDS,
+        )
         self.assertEqual(result["matrix_status"], "mixed")
         self.assertFalse(result["workflow_ready"])
 
@@ -100,8 +151,38 @@ class MirComputationalSamplesTests(unittest.TestCase):
                 "host_output_emitted",
             ],
         )
+        self.assertTrue(result["outcome_matches_expected"])
 
-    def test_check_all_passes_when_planned_roots_exist(self) -> None:
+    def test_run_comp_03_positive_row_is_accepted(self) -> None:
+        result = mir_computational_samples.run_sample(
+            "comp-03-control-flow-positive"
+        )
+
+        self.assertEqual(result["current_status"], "executable")
+        self.assertEqual(result["execution_surface"], "helper_package_runtime")
+        self.assertEqual(result["terminal_outcome"], "accepted")
+        self.assertEqual(result["actual_output_summary"], "Int(15)")
+        self.assertEqual(
+            result["expected_outcome"],
+            {
+                "terminal_outcome": "accepted",
+                "output_summary": "Int(15)",
+            },
+        )
+        self.assertTrue(result["outcome_matches_expected"])
+
+    def test_run_comp_03_negative_row_is_runtime_rejection(self) -> None:
+        result = mir_computational_samples.run_sample(
+            "comp-03-variables-scope-negative"
+        )
+
+        self.assertEqual(result["current_status"], "executable")
+        self.assertEqual(result["execution_surface"], "helper_package_runtime")
+        self.assertEqual(result["terminal_outcome"], "runtime_rejection")
+        self.assertIn("unbound variable", result["actual_rejection_detail"])
+        self.assertTrue(result["outcome_matches_expected"])
+
+    def test_check_all_passes_when_executable_rows_match_contract(self) -> None:
         with mock.patch.object(
             mir_computational_samples,
             "_run_product_alpha1_local_session",
@@ -110,9 +191,17 @@ class MirComputationalSamplesTests(unittest.TestCase):
             result = mir_computational_samples.check_all()
 
         self.assertEqual(result["failed"], [])
-        self.assertEqual(result["passed"], ["comp-02-pure-add-one"])
-        self.assertEqual(result["planned"], EXPECTED_SAMPLE_IDS[1:])
-        self.assertEqual(result["sample_count"], 7)
+        self.assertEqual(result["accepted"], ACCEPTED_EXECUTABLE_SAMPLE_IDS)
+        self.assertEqual(
+            result["expected_runtime_rejections"],
+            EXPECTED_RUNTIME_REJECTION_SAMPLE_IDS,
+        )
+        self.assertEqual(
+            result["passed"],
+            ACCEPTED_EXECUTABLE_SAMPLE_IDS + EXPECTED_RUNTIME_REJECTION_SAMPLE_IDS,
+        )
+        self.assertEqual(result["planned"], PLANNED_ONLY_SAMPLE_IDS)
+        self.assertEqual(result["sample_count"], 12)
         self.assertFalse(result["workflow_ready"])
 
     def test_closeout_records_stop_lines_and_non_claims(self) -> None:
@@ -139,16 +228,17 @@ class MirComputationalSamplesTests(unittest.TestCase):
                 {
                     "sample_id": "comp-missing",
                     "root_name": "missing-root",
-                    "current_status": "planned_only",
+                    "current_status": "executable",
                     "representative_source": "missing-root/missing-root.mir",
                 }
             ]
 
             errors = mir_computational_samples.validate_rows(sample_root, rows)
 
-        self.assertEqual(len(errors), 2)
+        self.assertEqual(len(errors), 3)
         self.assertEqual(errors[0]["kind"], "missing_root")
         self.assertEqual(errors[1]["kind"], "missing_representative_source")
+        self.assertEqual(errors[2]["kind"], "missing_package_input")
 
     def test_pretty_formats_check_all_summary(self) -> None:
         with mock.patch.object(
@@ -161,7 +251,8 @@ class MirComputationalSamplesTests(unittest.TestCase):
             )
 
         self.assertIn("CHECK-ALL SUMMARY", pretty)
-        self.assertIn("planned-only: 6", pretty)
+        self.assertIn("planned-only: 1", pretty)
+        self.assertIn("expected runtime rejections: 5", pretty)
 
     def test_normalize_argv_hoists_root_format_before_known_subcommand(self) -> None:
         args = mir_computational_samples.normalize_argv(["check-all", "--format", "json"])

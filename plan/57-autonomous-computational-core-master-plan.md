@@ -154,7 +154,7 @@ Observed closeout:
 - `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` is executable
 - `scripts/mir_computational_samples.py run comp-02-pure-add-one --format json` returns accepted
 - runtime/session/savepoint surfaces now preserve `mir_compute_history`
-- next promoted package is `P-COMP-03`
+- `P-COMP-03` later widened the same core to first-floor positive / negative rows
 
 Required negative rows:
 
@@ -163,6 +163,10 @@ Required negative rows:
 - adapter-owned `AddOne` evidence rejected as `not_mir_owned`.
 
 ## P-COMP-03 plan
+
+Current status:
+
+- closed on 2026-05-21 with helper-executable first-floor widening and runtime/schema test coverage
 
 Purpose:
 
@@ -203,6 +207,13 @@ git diff --check
 Close condition:
 
 - each feature family has at least one accepted and one rejected machine-readable row.
+
+Observed closeout:
+
+- `scripts/mir_computational_samples.py check-all --format json` now reports 6 accepted rows, 5 expected runtime rejection rows, and 1 planned-only row
+- `crates/mir-semantics::computational_core` now covers variables / arrays / records / control-flow / imports
+- product-alpha schema/runtime tests accept the widened computational registry and reject the negative rows with stable reasons
+- next promoted package is `P-COMP-04`
 
 ## P-COMP-04 plan
 

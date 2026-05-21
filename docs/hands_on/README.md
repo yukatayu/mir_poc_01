@@ -33,7 +33,7 @@
 | `operational_backend_inventory_01.md` | operational suite の host launch bundle / WASM / LLVM backend boundary を docs-first inventory として読む入口 |
 | `operational_gradient_observation_profile_01.md` | portal/shard future line の observer-only gradient observation profile を docs-first に読む入口 |
 | `operational_portal_shard_starter_boundary_01.md` | portal/shard line を current starter catalog に広げず、active roots と `future/` inventory を分けて読む入口 |
-| `mir_computational_core_01.md` | current legacy `AddOne` を host-boundary evidence に限定しつつ、`P-COMP-02` の one executable Mir-owned row と残り planned rows を読む入口 |
+| `mir_computational_core_01.md` | current legacy `AddOne` を host-boundary evidence に限定しつつ、`P-COMP-02` の direct runtime row と `P-COMP-03` の helper-executable first-floor rows を読む入口 |
 | `transform_posegraph_01.md` | `P-POSE-01` planned-only PoseGraph scaffold の helper / matrix / rejected-run surfaceを読む入口 |
 | `autonomous_execution_01.md` | `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` front-half と implementation half を途中質問で止まらず進める execution contract を読む入口 |
 

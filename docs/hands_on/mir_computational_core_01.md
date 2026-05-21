@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、`P-COMP-02` で最初の executable row まで進んだ Mir Computational Core line を読むための landing page です。
+この文書は、`P-COMP-03` で first-floor widening まで進んだ Mir Computational Core line を読むための landing page です。
 
-現時点でも broad runtime implementation guide ではありませんが、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` と `scripts/mir_computational_samples.py` は one bounded executable row を持ちます。残りの rows は still planned-only です。
+現時点でも broad runtime implementation guide ではありませんが、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` と `scripts/mir_computational_samples.py` は one bounded direct runtime row と ten helper-executable first-floor rows を持ちます。`comp-04-host-io-internal-transform` だけは still planned-only です。
 
 ## current reading
 
@@ -31,6 +31,8 @@ python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 scripts/mir_computational_samples.py matrix --format json
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+python3 scripts/mir_computational_samples.py run comp-03-control-flow-positive --format json
+python3 scripts/mir_computational_samples.py run comp-03-variables-scope-negative --format json
 cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
 ```
 
@@ -40,7 +42,7 @@ These commands now prove one bounded Mir-owned runtime row:
 ReadInt(41) -> add_one -> WriteInt(42)
 ```
 
-They do not prove `P-COMP-03` / `P-COMP-04`, final textual grammar, or broad first-floor completion.
+They now prove `P-COMP-02` and `P-COMP-03` first-floor evidence. They do not prove `P-COMP-04`, final textual grammar, or broad backend realization.
 
 Use repository validation alongside them:
 
@@ -61,7 +63,7 @@ These repository validations prove that the docs/source hierarchy is synchronize
 - `P-COMP-02`:
   pure AddOne owned by Mir, with host input / Mir compute / host output as distinct observable events.
 - `P-COMP-03`:
-  variables, arrays, records, and control-flow positive and negative rows.
+  variables, arrays, records, control-flow, and imports positive and negative rows.
 - `P-COMP-04`:
   pure/effect split with effect / failure / capability rejection evidence.
 

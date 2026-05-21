@@ -110,6 +110,92 @@ fn json_array(values: &[&str]) -> String {
     format!("[{items}]")
 }
 
+fn computational_package_json(
+    package_id: &str,
+    module_id: &str,
+    function_id: &str,
+    request_value: i64,
+    expected_output: i64,
+) -> String {
+    format!(
+        r#"{{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "{package_id}",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "world",
+  "dependencies": [],
+  "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
+  "failures": ["AdapterUnavailable", "TypeMismatch"],
+  "capabilities": ["RunComputationalRow"],
+  "witness_requirements": [],
+  "membership_requirements": ["active_participant"],
+  "auth_policy": {{
+    "policy_id": "{package_id}-auth-policy",
+    "required_bindings": ["participant_membership"]
+  }},
+  "auth_stack": ["membership_auth", "capability_auth"],
+  "contracts": [
+    {{
+      "contract_id": "{package_id}-contract",
+      "variance": "invariant",
+      "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
+      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+    }}
+  ],
+  "observation_policy": {{
+    "view_role": "observer_safe",
+    "labels": ["observer_safe_compute_summary"]
+  }},
+  "redaction_policy": {{
+    "level": "observer_safe",
+    "redacted_fields": ["raw_auth_evidence"]
+  }},
+  "retention_policy": {{
+    "scope": "computational_session",
+    "retained_artifacts": ["checker_report", "runtime_plan", "compute_trace"]
+  }},
+  "message_recovery_policy": {{
+    "handled_failures": ["reject"],
+    "recovery": "reject"
+  }},
+  "savepoint_policy": {{
+    "classes": ["R0", "R2"],
+    "quiescent_required": true
+  }},
+  "runtime_input": {{
+    "entry_place": "Place[ComputationalHostPlace]",
+    "host_input": {{
+      "adapter_kind": "ReadInt",
+      "effect_ref": "typed_host_io.read_int",
+      "request_payload": {{"kind": "int", "value": {request_value}}},
+      "expected_response": {{"kind": "int", "value": {request_value}}}
+    }},
+    "mir_compute": {{
+      "module_id": "{module_id}",
+      "function_id": "{function_id}",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "expected_output": {{"kind": "int", "value": {expected_output}}}
+    }},
+    "host_output": {{
+      "adapter_kind": "WriteInt",
+      "effect_ref": "typed_host_io.write_int",
+      "request_payload": {{"kind": "int", "value": {expected_output}}},
+      "expected_response": {{"kind": "int", "value": {expected_output}}}
+    }}
+  }},
+  "native_policy": {{
+    "execution_policy": "disabled",
+    "provenance_required": true
+  }},
+  "compatibility": {{
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }}
+}}"#
+    )
+}
+
 fn assert_event_ids_unique(
     session: &mir_runtime::product_alpha1_session::ProductAlpha1SessionCarrier,
 ) {
@@ -657,15 +743,159 @@ fn product_alpha1_run_local_executes_mir_owned_add_one_path() {
         .nodes
         .iter()
         .map(|node| node.event_kind.as_str())
-        .collect::<std::collections::BTreeSet<_>>();
-    for required in [
-        "host_input_received",
-        "mir_compute_step",
-        "host_output_emitted",
-    ] {
+        .collect::<Vec<_>>();
+    let input_index = event_kinds
+        .iter()
+        .position(|kind| *kind == "host_input_received")
+        .expect("computational row should emit host_input_received");
+    let compute_index = event_kinds
+        .iter()
+        .position(|kind| *kind == "mir_compute_step")
+        .expect("computational row should emit mir_compute_step");
+    let output_index = event_kinds
+        .iter()
+        .position(|kind| *kind == "host_output_emitted")
+        .expect("computational row should emit host_output_emitted");
+    assert!(input_index < compute_index);
+    assert!(compute_index < output_index);
+}
+
+#[test]
+fn product_alpha1_run_local_executes_comp03_positive_modules() {
+    let cases = [
+        (
+            "computational-scope-positive",
+            "Computational.Scope.Positive",
+            "clamp_zero",
+            -5,
+            0,
+        ),
+        (
+            "computational-arrays-positive",
+            "Computational.Arrays.Positive",
+            "second",
+            5,
+            5,
+        ),
+        (
+            "computational-vec3-positive",
+            "Computational.Vec3.Positive",
+            "length_squared",
+            5,
+            110,
+        ),
+        (
+            "computational-control-flow-positive",
+            "Computational.ControlFlow.Positive",
+            "sum_to",
+            5,
+            15,
+        ),
+        (
+            "computational-compose-positive",
+            "Computational.Compose.Positive",
+            "add_two",
+            40,
+            42,
+        ),
+    ];
+
+    for (package_id, module_id, function_id, request_value, expected_output) in cases {
+        let package_dir = write_package(
+            "computational-positive-runtime",
+            &computational_package_json(
+                package_id,
+                module_id,
+                function_id,
+                request_value,
+                expected_output,
+            ),
+        );
+        let report = run_product_alpha1_local_session_path(&package_dir)
+            .expect("positive computational package should run locally");
+        assert!(report.mir_computation_claimed, "package {package_id}");
+        assert_eq!(
+            report.session.mir_compute_history.len(),
+            1,
+            "package {package_id}"
+        );
+        assert_eq!(
+            report.session.mir_compute_history[0].function_id, function_id,
+            "package {package_id}"
+        );
+        assert_eq!(
+            report.session.mir_compute_history[0].output_summary,
+            format!("Int({expected_output})"),
+            "package {package_id}"
+        );
+    }
+}
+
+#[test]
+fn product_alpha1_run_local_rejects_comp03_negative_modules() {
+    let cases = [
+        (
+            "computational-scope-negative",
+            "Computational.Scope.NegativeUseBeforeDeclare",
+            "clamp_zero",
+            3,
+            0,
+            "unbound variable",
+        ),
+        (
+            "computational-arrays-negative",
+            "Computational.Arrays.NegativeOutOfBounds",
+            "second",
+            5,
+            0,
+            "out of bounds",
+        ),
+        (
+            "computational-vec3-negative",
+            "Computational.Vec3.NegativeField",
+            "length_squared",
+            5,
+            0,
+            "unknown field",
+        ),
+        (
+            "computational-control-flow-negative",
+            "Computational.ControlFlow.NegativeCondition",
+            "sum_to",
+            5,
+            0,
+            "condition must be Bool",
+        ),
+        (
+            "computational-compose-negative",
+            "Computational.Compose.NegativeMissingImport",
+            "add_two",
+            40,
+            0,
+            "add_one",
+        ),
+    ];
+
+    for (package_id, module_id, function_id, request_value, expected_output, expected_detail) in
+        cases
+    {
+        let package_dir = write_package(
+            "computational-negative-runtime",
+            &computational_package_json(
+                package_id,
+                module_id,
+                function_id,
+                request_value,
+                expected_output,
+            ),
+        );
+        let error = run_product_alpha1_local_session_path(&package_dir)
+            .expect_err("negative computational package should reject");
+        assert_eq!(error.kind, ProductAlpha1SessionErrorKind::MirCompute);
         assert!(
-            event_kinds.contains(required),
-            "missing computational event kind {required}"
+            error.detail.contains(expected_detail),
+            "package {package_id} detail was {}",
+            error.detail
         );
     }
 }

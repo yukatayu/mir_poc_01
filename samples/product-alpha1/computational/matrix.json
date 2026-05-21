@@ -9,42 +9,143 @@
       "root_name": "add-one-pure-mir",
       "stage": "P-COMP-02",
       "current_status": "executable",
-      "representative_source": "add-one-pure-mir/add-one-pure-mir.mir"
+      "execution_surface": "product_alpha1_run_local",
+      "representative_source": "add-one-pure-mir/add-one-pure-mir.mir",
+      "package_input": "add-one-pure-mir/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(42)"
+      }
     },
     {
-      "sample_id": "comp-03-variables-scope",
-      "root_name": "variables-scope",
+      "sample_id": "comp-03-variables-scope-positive",
+      "root_name": "variables-scope/positive",
       "stage": "P-COMP-03",
-      "current_status": "planned_only",
-      "representative_source": "variables-scope/variables-scope.mir"
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "variables-scope/positive/variables-scope-positive.mir",
+      "package_input": "variables-scope/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(0)"
+      }
     },
     {
-      "sample_id": "comp-03-arrays-bounds",
-      "root_name": "arrays-bounds",
+      "sample_id": "comp-03-variables-scope-negative",
+      "root_name": "variables-scope/negative",
       "stage": "P-COMP-03",
-      "current_status": "planned_only",
-      "representative_source": "arrays-bounds/arrays-bounds.mir"
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "variables-scope/negative/variables-scope-negative.mir",
+      "package_input": "variables-scope/negative/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "runtime_rejection",
+        "rejection_contains": "unbound variable"
+      }
     },
     {
-      "sample_id": "comp-03-records-vec3",
-      "root_name": "records-vec3",
+      "sample_id": "comp-03-arrays-bounds-positive",
+      "root_name": "arrays-bounds/positive",
       "stage": "P-COMP-03",
-      "current_status": "planned_only",
-      "representative_source": "records-vec3/records-vec3.mir"
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "arrays-bounds/positive/arrays-bounds-positive.mir",
+      "package_input": "arrays-bounds/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(5)"
+      }
     },
     {
-      "sample_id": "comp-03-control-flow",
-      "root_name": "control-flow",
+      "sample_id": "comp-03-arrays-bounds-negative",
+      "root_name": "arrays-bounds/negative",
       "stage": "P-COMP-03",
-      "current_status": "planned_only",
-      "representative_source": "control-flow/control-flow.mir"
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "arrays-bounds/negative/arrays-bounds-negative.mir",
+      "package_input": "arrays-bounds/negative/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "runtime_rejection",
+        "rejection_contains": "out of bounds"
+      }
     },
     {
-      "sample_id": "comp-03-imports-functions",
-      "root_name": "imports-functions",
+      "sample_id": "comp-03-records-vec3-positive",
+      "root_name": "records-vec3/positive",
       "stage": "P-COMP-03",
-      "current_status": "planned_only",
-      "representative_source": "imports-functions/imports-functions.mir"
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "records-vec3/positive/records-vec3-positive.mir",
+      "package_input": "records-vec3/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(110)"
+      }
+    },
+    {
+      "sample_id": "comp-03-records-vec3-negative",
+      "root_name": "records-vec3/negative",
+      "stage": "P-COMP-03",
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "records-vec3/negative/records-vec3-negative.mir",
+      "package_input": "records-vec3/negative/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "runtime_rejection",
+        "rejection_contains": "unknown field"
+      }
+    },
+    {
+      "sample_id": "comp-03-control-flow-positive",
+      "root_name": "control-flow/positive",
+      "stage": "P-COMP-03",
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "control-flow/positive/control-flow-positive.mir",
+      "package_input": "control-flow/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(15)"
+      }
+    },
+    {
+      "sample_id": "comp-03-control-flow-negative",
+      "root_name": "control-flow/negative",
+      "stage": "P-COMP-03",
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "control-flow/negative/control-flow-negative.mir",
+      "package_input": "control-flow/negative/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "runtime_rejection",
+        "rejection_contains": "condition must be Bool"
+      }
+    },
+    {
+      "sample_id": "comp-03-imports-functions-positive",
+      "root_name": "imports-functions/positive",
+      "stage": "P-COMP-03",
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "imports-functions/positive/imports-functions-positive.mir",
+      "package_input": "imports-functions/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(42)"
+      }
+    },
+    {
+      "sample_id": "comp-03-imports-functions-negative",
+      "root_name": "imports-functions/negative",
+      "stage": "P-COMP-03",
+      "current_status": "executable",
+      "execution_surface": "helper_package_runtime",
+      "representative_source": "imports-functions/negative/imports-functions-negative.mir",
+      "package_input": "imports-functions/negative/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "runtime_rejection",
+        "rejection_contains": "add_one"
+      }
     },
     {
       "sample_id": "comp-04-host-io-internal-transform",

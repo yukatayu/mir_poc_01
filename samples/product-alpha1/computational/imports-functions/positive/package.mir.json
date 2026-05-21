@@ -1,0 +1,29 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "computational-imports-positive",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "computational_helper_row",
+  "dependencies": [
+    "computational-add-one-pure-mir"
+  ],
+  "effects": [],
+  "failures": [],
+  "capabilities": [
+    "RunMirComputationalSample"
+  ],
+  "runtime_input": {
+    "mir_compute": {
+      "module_id": "Computational.Compose.Positive",
+      "function_id": "add_two",
+      "input_type": "Int64",
+      "request_payload": {
+        "kind": "int",
+        "value": 40
+      }
+    }
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "execution_surface": "helper_package_runtime"
+  }
+}

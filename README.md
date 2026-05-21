@@ -43,11 +43,11 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - broader public distribution beyond the current developer-built binary + generated host launch bundle
 - FFI / engine adapter / host integration target
 - final shared-space operational catalog breadth
-- Mir-owned computational core first floor beyond current host-boundary `AddOne`
+- Mir-owned computational effect-boundary package and PoseGraph runtime evidence beyond the current first-floor rows
 
 ## Mir Computational Core rebaseline
 
-2026-05-21 時点の current docs/spec line は、front-half scaffold actualization を維持したまま `P-COMP-02` で最初の Mir-owned computational row を実行可能にした段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の一行だけが executable になり、PoseGraph / projection / engine-adapter は引き続き planned-only matrix / helper / inventory として machine-readable に保たれています。
+2026-05-21 時点の current docs/spec line は、front-half scaffold actualization を維持したまま `P-COMP-03` まで閉じた段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の direct product-alpha row に加えて、variables / arrays / records / control-flow / imports の positive / negative first-floor rows が helper-executable に actualize されました。PoseGraph / projection / engine-adapter は引き続き planned-only matrix / helper / inventory として machine-readable に保たれています。
 
 新しい正本 / repository memory は次です。
 
@@ -62,7 +62,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - `specs/32-autonomous-execution-and-completion-contract.md`
 - `plan/57-autonomous-computational-core-master-plan.md`
 
-`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、そのうえで `P-COMP-02` が `samples/product-alpha1/computational/add-one-pure-mir/` を executable に昇格させました。`scripts/mir_computational_samples.py run comp-02-pure-add-one --format json` は `ReadInt(41) -> add_one -> WriteInt(42)` を確認できます。次の implementation half は `P-COMP-03`、`P-COMP-04`、`P-POSE-02` で、current stop line は引き続き final grammar / projection code generation / provider admission / public ABI です。
+`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、そのうえで `P-COMP-02` が `samples/product-alpha1/computational/add-one-pure-mir/` を executable に昇格させ、`P-COMP-03` が variables / arrays / records / control-flow / imports の 10 row を helper-executable positive / runtime-rejection evidence に広げました。`scripts/mir_computational_samples.py check-all --format json` は `comp-02` accepted 1 row、`comp-03` accepted 5 row、expected runtime rejection 5 row、`comp-04` planned-only 1 rowを確認できます。次の implementation half は `P-COMP-04` と `P-POSE-02` で、current stop line は引き続き final grammar / projection code generation / provider admission / public ABI です。
 
 Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
 

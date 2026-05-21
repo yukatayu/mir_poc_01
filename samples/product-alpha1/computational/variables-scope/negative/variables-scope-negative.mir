@@ -1,0 +1,9 @@
+module Computational.Scope.NegativeUseBeforeDeclare
+
+fn clamp_zero(x: Int64) -> Int64 {
+  if x > 0 {
+    y = x
+  }
+  let y: Int64 = 0
+  return y
+}

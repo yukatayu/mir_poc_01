@@ -274,6 +274,92 @@ const MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE: &str = r#"{
   }
 }"#;
 
+fn computational_product_package(
+    package_id: &str,
+    module_id: &str,
+    function_id: &str,
+    request_value: i64,
+    expected_output: i64,
+) -> String {
+    format!(
+        r#"{{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "{package_id}",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "world",
+  "dependencies": [],
+  "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
+  "failures": ["AdapterUnavailable", "TypeMismatch"],
+  "capabilities": ["RunComputationalRow"],
+  "witness_requirements": [],
+  "membership_requirements": ["active_participant"],
+  "auth_policy": {{
+    "policy_id": "{package_id}-auth-policy",
+    "required_bindings": ["participant_membership"]
+  }},
+  "auth_stack": ["membership_auth", "capability_auth"],
+  "contracts": [
+    {{
+      "contract_id": "{package_id}-contract",
+      "variance": "invariant",
+      "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
+      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+    }}
+  ],
+  "observation_policy": {{
+    "view_role": "observer_safe",
+    "labels": ["observer_safe_compute_summary"]
+  }},
+  "redaction_policy": {{
+    "level": "observer_safe",
+    "redacted_fields": ["raw_auth_evidence"]
+  }},
+  "retention_policy": {{
+    "scope": "computational_session",
+    "retained_artifacts": ["checker_report", "runtime_plan", "compute_trace"]
+  }},
+  "message_recovery_policy": {{
+    "handled_failures": ["reject"],
+    "recovery": "reject"
+  }},
+  "savepoint_policy": {{
+    "classes": ["R0", "R2"],
+    "quiescent_required": true
+  }},
+  "runtime_input": {{
+    "entry_place": "Place[ComputationalHostPlace]",
+    "host_input": {{
+      "adapter_kind": "ReadInt",
+      "effect_ref": "typed_host_io.read_int",
+      "request_payload": {{"kind": "int", "value": {request_value}}},
+      "expected_response": {{"kind": "int", "value": {request_value}}}
+    }},
+    "mir_compute": {{
+      "module_id": "{module_id}",
+      "function_id": "{function_id}",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "expected_output": {{"kind": "int", "value": {expected_output}}}
+    }},
+    "host_output": {{
+      "adapter_kind": "WriteInt",
+      "effect_ref": "typed_host_io.write_int",
+      "request_payload": {{"kind": "int", "value": {expected_output}}},
+      "expected_response": {{"kind": "int", "value": {expected_output}}}
+    }}
+  }},
+  "native_policy": {{
+    "execution_policy": "disabled",
+    "provenance_required": true
+  }},
+  "compatibility": {{
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }}
+}}"#
+    )
+}
+
 const MINIMAL_PROJECTION_PROFILE: &str = r#"{
   "projection_profile_version": "ops-product-projection-v0",
   "non_final": true,
@@ -442,6 +528,110 @@ fn product_alpha1_package_schema_rejects_computational_add_one_missing_mir_compu
 
     assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
     assert!(error.detail.contains("runtime_input.mir_compute"));
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_comp03_registry_module_shapes() {
+    let package = parse_product_alpha1_package_text(&computational_product_package(
+        "computational-arrays-positive",
+        "Computational.Arrays.Positive",
+        "second",
+        5,
+        5,
+    ))
+    .expect("comp03 arrays positive package should parse");
+    let report =
+        check_product_alpha1_package(&package).expect("comp03 arrays positive should check");
+
+    assert_eq!(report.package_id, "computational-arrays-positive");
+    assert!(report.accepted_obligations.iter().any(|row| {
+        row.kind == "runtime_input_mir_compute"
+            && row.evidence == "Mir-owned computational runtime input declaration accepted"
+    }));
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_runtime_reject_rows_for_known_modules() {
+    let package = parse_product_alpha1_package_text(&computational_product_package(
+        "computational-compose-negative",
+        "Computational.Compose.NegativeMissingImport",
+        "add_two",
+        40,
+        42,
+    ))
+    .expect("known negative computational package should parse");
+    let report = check_product_alpha1_package(&package)
+        .expect("known negative computational package should check");
+
+    assert_eq!(report.package_id, "computational-compose-negative");
+    assert_eq!(report.verdict, "accepted");
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_unknown_computational_module() {
+    let error = parse_product_alpha1_package_text(&computational_product_package(
+        "computational-unknown-module",
+        "Computational.Unknown.Module",
+        "mystery",
+        1,
+        1,
+    ))
+    .expect_err("unknown computational module should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(
+        error
+            .detail
+            .contains("current computational sample registry")
+    );
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_mixed_legacy_and_computational_runtime_inputs() {
+    let mixed = MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE.replace(
+        r#""host_input": {
+      "adapter_kind": "ReadInt",
+      "effect_ref": "typed_host_io.read_int",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 41}
+    },"#,
+        r#""host_io": {
+      "adapter_kind": "AddOne",
+      "effect_ref": "typed_host_io.add_one",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 42}
+    },
+    "host_input": {
+      "adapter_kind": "ReadInt",
+      "effect_ref": "typed_host_io.read_int",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 41}
+    },"#,
+    )
+    .replace(
+        r#""effects": ["typed_host_io.read_int", "typed_host_io.write_int"]"#,
+        r#""effects": ["typed_host_io.add_one", "typed_host_io.read_int", "typed_host_io.write_int"]"#,
+    );
+    let error = parse_product_alpha1_package_text(&mixed)
+        .expect_err("mixed runtime input shape should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("cannot be mixed"));
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_wrong_declared_function_for_known_module() {
+    let error = parse_product_alpha1_package_text(&computational_product_package(
+        "computational-arrays-wrong-function",
+        "Computational.Arrays.Positive",
+        "add_one",
+        5,
+        5,
+    ))
+    .expect_err("known module with wrong function should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("must equal `second`"));
 }
 
 #[test]

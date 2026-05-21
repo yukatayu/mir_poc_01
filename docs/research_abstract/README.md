@@ -57,9 +57,9 @@
 - `operational_portal_shard_starter_boundary_01.md`
   portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split の summary
 - `mir_computational_core_01.md`
-  Product Alpha-1 operational floor を保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line へ rebaseline する summary
+  Product Alpha-1 operational floor を保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、`P-COMP-02` direct runtime row と `P-COMP-03` helper-executable first-floor rowsを含む Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を要約する summary
 - `autonomous_execution_01.md`
-  `P-COMP-01 -> P-COMP-02` actual row closeout と、残る implementation half / user-spec-required gate isolation / validation cadence の summary
+  `P-COMP-01 -> P-COMP-03` actual row closeout と、残る implementation half / user-spec-required gate isolation / validation cadence の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

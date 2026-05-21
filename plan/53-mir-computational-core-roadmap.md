@@ -12,9 +12,6 @@ Current alpha evidence includes a typed external host-I/O lane. That is useful a
 
 It does not yet show:
 
-- Mir-owned arithmetic expression typing and execution.
-- variables and lexical scope in Mir-owned source / typed IR.
-- arrays, records, and control-flow with positive and negative rows.
 - separation between pure computation and effectful host boundary calls in checker / runtime evidence.
 - compiler/backend readiness.
 
@@ -30,7 +27,7 @@ It does not yet show:
 
 ## current sample matrix
 
-`P-COMP-01` actualized the scaffold, and `P-COMP-02` promoted the first executable row. The current roots are:
+`P-COMP-01` actualized the scaffold, `P-COMP-02` promoted the first direct executable row, and `P-COMP-03` widened the first floor. The current roots are:
 
 - `samples/product-alpha1/computational/add-one-pure-mir/`
 - `samples/product-alpha1/computational/variables-scope/`
@@ -56,7 +53,7 @@ python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format j
 cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
 ```
 
-These commands validate matrix classification and prove one bounded Mir-owned runtime execution. They do not yet prove variables / arrays / records / control-flow or the effect-boundary packages.
+These commands validate matrix classification, prove one bounded Mir-owned runtime execution, and prove helper-executable positive / runtime-rejection first-floor rows. They do not yet prove the effect-boundary package.
 
 ## typing and failure-row roadmap
 
@@ -115,4 +112,4 @@ Later, after first-floor evidence:
 
 ## current recommendation
 
-`P-COMP-01` and `P-COMP-02` are now closed. The next computational implementation package is `P-COMP-03`, while broader distribution / final shared-space catalog decisions remain user-spec-required gates and do not block the current implementation queue.
+`P-COMP-01`、`P-COMP-02`、`P-COMP-03` are now closed. The next computational implementation package is `P-COMP-04`, while broader distribution / final shared-space catalog decisions remain user-spec-required gates and do not block the current implementation queue.

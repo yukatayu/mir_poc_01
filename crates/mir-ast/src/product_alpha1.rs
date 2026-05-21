@@ -858,29 +858,42 @@ fn validate_computational_runtime_input(
         path,
     )?;
 
-    if mir_compute.module_id != "Computational.AddOne" {
+    let Some((expected_function_id, expected_input_type, expected_output_type)) =
+        declared_computational_signature(&mir_compute.module_id)
+    else {
         return Err(schema_error(
             path,
-            "runtime_input.mir_compute.module_id must equal `Computational.AddOne` in P-COMP-02"
-                .to_string(),
+            format!(
+                "runtime_input.mir_compute.module_id `{}` is not in the current computational sample registry",
+                mir_compute.module_id
+            ),
+        ));
+    };
+    if mir_compute.function_id != expected_function_id {
+        return Err(schema_error(
+            path,
+            format!(
+                "runtime_input.mir_compute.function_id must equal `{expected_function_id}` for `{}`",
+                mir_compute.module_id
+            ),
         ));
     }
-    if mir_compute.function_id != "add_one" {
+    if mir_compute.input_type != expected_input_type {
         return Err(schema_error(
             path,
-            "runtime_input.mir_compute.function_id must equal `add_one` in P-COMP-02".to_string(),
+            format!(
+                "runtime_input.mir_compute.input_type must equal `{expected_input_type}` for `{}`",
+                mir_compute.module_id
+            ),
         ));
     }
-    if mir_compute.input_type != "Int64" {
+    if mir_compute.output_type != expected_output_type {
         return Err(schema_error(
             path,
-            "runtime_input.mir_compute.input_type must equal `Int64` in P-COMP-02".to_string(),
-        ));
-    }
-    if mir_compute.output_type != "Int64" {
-        return Err(schema_error(
-            path,
-            "runtime_input.mir_compute.output_type must equal `Int64` in P-COMP-02".to_string(),
+            format!(
+                "runtime_input.mir_compute.output_type must equal `{expected_output_type}` for `{}`",
+                mir_compute.module_id
+            ),
         ));
     }
 
@@ -912,7 +925,8 @@ fn validate_computational_runtime_input(
         ));
     };
 
-    if *mir_output_value != *host_input_value + 1 {
+    if mir_compute.module_id == "Computational.AddOne" && *mir_output_value != *host_input_value + 1
+    {
         return Err(schema_error(
             path,
             "runtime_input.mir_compute.expected_output must equal add_one(runtime_input.host_input.expected_response)"
@@ -941,6 +955,25 @@ fn validate_computational_runtime_input(
     }
 
     Ok(())
+}
+
+fn declared_computational_signature(
+    module_id: &str,
+) -> Option<(&'static str, &'static str, &'static str)> {
+    match module_id {
+        "Computational.AddOne" => Some(("add_one", "Int64", "Int64")),
+        "Computational.Scope.Positive" => Some(("clamp_zero", "Int64", "Int64")),
+        "Computational.Scope.NegativeUseBeforeDeclare" => Some(("clamp_zero", "Int64", "Int64")),
+        "Computational.Arrays.Positive" => Some(("second", "Int64", "Int64")),
+        "Computational.Arrays.NegativeOutOfBounds" => Some(("second", "Int64", "Int64")),
+        "Computational.Vec3.Positive" => Some(("length_squared", "Int64", "Int64")),
+        "Computational.Vec3.NegativeField" => Some(("length_squared", "Int64", "Int64")),
+        "Computational.ControlFlow.Positive" => Some(("sum_to", "Int64", "Int64")),
+        "Computational.ControlFlow.NegativeCondition" => Some(("sum_to", "Int64", "Int64")),
+        "Computational.Compose.Positive" => Some(("add_two", "Int64", "Int64")),
+        "Computational.Compose.NegativeMissingImport" => Some(("add_two", "Int64", "Int64")),
+        _ => None,
+    }
 }
 
 fn validate_dependency_packages(

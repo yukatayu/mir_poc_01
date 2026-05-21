@@ -55,7 +55,7 @@
 - **portal / spatial world future line**:
   `specs/27-spatial-portal-and-shard-extension-boundary.md` と `plan/52-portal-spatial-world-roadmap.md` は、portal/world-link、two-shard hard boundary、observer-only gradient observation profile、replication profile optionality の future boundary を置く
 - **Mir computational core rebaseline**:
-  `specs/28-mir-computational-core.md` と `plan/53-mir-computational-core-roadmap.md` は、current typed external `AddOne` を host-boundary evidence に限定し、Mir-owned computation の first floor、pure/effect split、explicit failure row、`P-COMP-01` scaffold と `P-COMP-02` first executable row を置く
+  `specs/28-mir-computational-core.md` と `plan/53-mir-computational-core-roadmap.md` は、current typed external `AddOne` を host-boundary evidence に限定し、Mir-owned computation の first floor、pure/effect split、explicit failure row、`P-COMP-01` scaffold、`P-COMP-02` first direct executable row、`P-COMP-03` helper-executable first-floor widening を置く
 - **Transform / PoseGraph line**:
   `specs/29-transform-posegraph-semantics.md` と `plan/54-transform-posegraph-roadmap.md` は、avatar/object transform、pose snapshot、anchor graph、fallback admissibility、no-split-frame の docs/spec boundaryと `P-POSE-01` planned-only scaffold を置く
 - **projection/backend boundary line**:

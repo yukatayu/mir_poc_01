@@ -1,0 +1,27 @@
+{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "computational-control-flow-positive",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "computational_helper_row",
+  "dependencies": [],
+  "effects": [],
+  "failures": [],
+  "capabilities": [
+    "RunMirComputationalSample"
+  ],
+  "runtime_input": {
+    "mir_compute": {
+      "module_id": "Computational.ControlFlow.Positive",
+      "function_id": "sum_to",
+      "input_type": "Int64",
+      "request_payload": {
+        "kind": "int",
+        "value": 5
+      }
+    }
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "execution_surface": "helper_package_runtime"
+  }
+}

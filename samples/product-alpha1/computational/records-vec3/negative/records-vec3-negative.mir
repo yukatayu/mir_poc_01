@@ -1,0 +1,16 @@
+module Computational.Vec3.NegativeField
+
+struct Vec3 {
+  x: Int64,
+  y: Int64,
+  z: Int64
+}
+
+fn length_squared(seed: Int64) -> Int64 {
+  let v: Vec3 = Vec3 {
+    x: seed,
+    y: seed + 1,
+    z: seed + 2
+  }
+  return v.w * v.w
+}

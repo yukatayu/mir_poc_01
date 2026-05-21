@@ -30,8 +30,9 @@
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - planned future product-alpha1 semantic roots
   - `samples/product-alpha1/computational/` is the Mir-owned computation line under `specs/28` / `plan/53`
-    - `python3 scripts/mir_computational_samples.py check-all --format json` validates one executable row plus planned rows
-    - `run comp-02-pure-add-one` now executes the bounded `ReadInt -> add_one -> WriteInt` path
+    - `python3 scripts/mir_computational_samples.py check-all --format json` validates one direct runtime row, five accepted helper rows, five expected runtime rejection rows, and one planned-only row
+    - `run comp-02-pure-add-one` executes the bounded `ReadInt -> add_one -> WriteInt` path
+    - `run comp-03-control-flow-positive` and `run comp-03-variables-scope-negative` execute helper-package first-floor evidence rather than the direct product-alpha CLI surface
   - `samples/product-alpha1/posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold under `specs/29` / `plan/54`
     - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
     - `run pose-04-no-split-frame-positive` and `run pose-05-split-frame-negative` must reject as `planned_only` until `P-POSE-02`

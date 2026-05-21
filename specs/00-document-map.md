@@ -59,7 +59,7 @@
   - `operational_backend_inventory_01.md` は、operational suite の current host launch bundle line と WASM/LLVM future boundary inventory を読むための landing page である。
   - `operational_gradient_observation_profile_01.md` は、gradient observation profile と replication non-default reading を docs-first に確認するための landing page である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard authoring が current line では active roots から始まり `future/` blueprint を starter 化しないことを確認する landing page である。
-  - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-02` first executable row、helper matrix、legacy AddOne non-reinterpretation を読むための landing page である。
+  - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-02` first direct executable row、`P-COMP-03` helper-executable first-floor rows、helper matrix、legacy AddOne non-reinterpretation を読むための landing page である。
   - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-01` planned-only scaffold actualization、helper matrix、rejected-run surfaceを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
@@ -209,6 +209,7 @@
   - current typed external `AddOne` を host-boundary evidence に限定し、pure/effect split、explicit failure row、C-like first floor、future Rust-like widening、completion gates、non-claims を固定する。
 - `plan/53-mir-computational-core-roadmap.md`
   - Mir computational core の repository-memory roadmap を置く。
+  - `P-COMP-01` scaffold、`P-COMP-02` direct executable row、`P-COMP-03` helper-executable first-floor widening、`P-COMP-04` effect-boundary queue を整理する。
   - `P-COMP-00..04`、planned sample matrix、future helper anchors、stop lines を整理する。
 - `specs/29-transform-posegraph-semantics.md`
   - Transform / PoseGraph の規範境界を置く。

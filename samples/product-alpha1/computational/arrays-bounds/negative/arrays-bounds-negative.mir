@@ -1,0 +1,6 @@
+module Computational.Arrays.NegativeOutOfBounds
+
+fn second(x: Int64) -> Int64 {
+  let xs: Vec[Int64] = [x]
+  return xs[1]
+}

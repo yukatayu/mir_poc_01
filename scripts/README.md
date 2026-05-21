@@ -108,8 +108,10 @@
   - `python3 scripts/mir_computational_samples.py matrix --format json`
   - `python3 scripts/mir_computational_samples.py check-all --format json`
   - `python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json`
-  - this helper now executes the `P-COMP-02` bounded computational row under `samples/product-alpha1/computational/add-one-pure-mir/` and keeps the remaining rows planned-only
-  - it validates matrix/root consistency and checks `host_input_received -> mir_compute_step -> host_output_emitted`
+  - `python3 scripts/mir_computational_samples.py run comp-03-control-flow-positive --format json`
+  - `python3 scripts/mir_computational_samples.py run comp-03-variables-scope-negative --format json`
+  - this helper now executes the `P-COMP-02` bounded computational row under `samples/product-alpha1/computational/add-one-pure-mir/`, executes the `P-COMP-03` first-floor rows through helper package contracts, and keeps only `comp-04-host-io-internal-transform` planned-only
+  - it validates matrix/root consistency, checks `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime row, and classifies helper rows as `accepted` or `runtime_rejection`
   - it does not claim final textual grammar, broad first-floor completion, or backend realization
   - `python3 scripts/posegraph_samples.py matrix --format json`
   - `python3 scripts/posegraph_samples.py check-all --format json`

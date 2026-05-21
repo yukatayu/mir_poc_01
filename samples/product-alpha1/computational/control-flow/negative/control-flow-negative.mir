@@ -1,0 +1,11 @@
+module Computational.ControlFlow.NegativeCondition
+
+fn sum_to(n: Int64) -> Int64 {
+  let mut i: Int64 = 0
+  let mut acc: Int64 = 0
+  while n {
+    acc = acc + i
+    i = i + 1
+  }
+  return acc
+}
