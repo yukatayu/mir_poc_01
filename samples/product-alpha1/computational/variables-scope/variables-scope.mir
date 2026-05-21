@@ -1,0 +1,9 @@
+module Computational.Scope
+
+fn clamp_zero(x: Int64) -> Int64 {
+  let mut y: Int64 = x
+  if y < 0 {
+    y = 0
+  }
+  return y
+}

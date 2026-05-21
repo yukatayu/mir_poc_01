@@ -104,12 +104,15 @@
   - backend feasibility inventory is also docs-first; no generic WASM/LLVM build helper is added beyond the existing `build-native-bundle` host-launch path
   - `future/gradient-observation.profile.json` remains docs-first/profile-first and non-executable, but the bounded `two-shard-gradient-observation/` runtime root and helper command now actualize one observer-only same-session cut without claiming continuous sync or write authority
   - it does not claim final product, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native execution
-- Mir Computational Core / PoseGraph / projection-boundary future helpers are planned only
-  - `scripts/mir_computational_samples.py` does not exist yet
-  - `scripts/posegraph_samples.py` does not exist yet
-  - `scripts/projection_boundary_samples.py` does not exist yet
-  - `scripts/engine_adapter_boundary_samples.py` does not exist yet
-  - do not include these planned commands in current validation floors until real files, tests, and sample rows exist
+- Mir Computational Core / PoseGraph / projection-boundary / engine-adapter future helper family is split
+  - `python3 scripts/mir_computational_samples.py matrix --format json`
+  - `python3 scripts/mir_computational_samples.py check-all --format json`
+  - `python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json`
+  - this helper actualizes the `P-COMP-01` planned-only computational scaffold under `samples/product-alpha1/computational/`
+  - it validates matrix/root consistency, keeps all rows `planned_only`, and rejects attempted execution as `planned_only`
+  - it does not claim Mir-owned runtime execution, final textual grammar, or `P-COMP-02` completion
+  - `scripts/posegraph_samples.py`, `scripts/projection_boundary_samples.py`, and `scripts/engine_adapter_boundary_samples.py` do not exist yet
+  - do not include those later planned commands in current validation floors until real files, tests, and sample rows exist
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

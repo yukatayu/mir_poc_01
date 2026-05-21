@@ -1,0 +1,57 @@
+{
+  "schema_version": "mir-computational-sample-matrix-v0",
+  "family": "mir_computational",
+  "current_status": "planned_only",
+  "current_add_one_reading": "host_boundary_only",
+  "rows": [
+    {
+      "sample_id": "comp-02-pure-add-one",
+      "root_name": "add-one-pure-mir",
+      "stage": "P-COMP-02",
+      "current_status": "planned_only",
+      "representative_source": "add-one-pure-mir/add-one-pure-mir.mir"
+    },
+    {
+      "sample_id": "comp-03-variables-scope",
+      "root_name": "variables-scope",
+      "stage": "P-COMP-03",
+      "current_status": "planned_only",
+      "representative_source": "variables-scope/variables-scope.mir"
+    },
+    {
+      "sample_id": "comp-03-arrays-bounds",
+      "root_name": "arrays-bounds",
+      "stage": "P-COMP-03",
+      "current_status": "planned_only",
+      "representative_source": "arrays-bounds/arrays-bounds.mir"
+    },
+    {
+      "sample_id": "comp-03-records-vec3",
+      "root_name": "records-vec3",
+      "stage": "P-COMP-03",
+      "current_status": "planned_only",
+      "representative_source": "records-vec3/records-vec3.mir"
+    },
+    {
+      "sample_id": "comp-03-control-flow",
+      "root_name": "control-flow",
+      "stage": "P-COMP-03",
+      "current_status": "planned_only",
+      "representative_source": "control-flow/control-flow.mir"
+    },
+    {
+      "sample_id": "comp-03-imports-functions",
+      "root_name": "imports-functions",
+      "stage": "P-COMP-03",
+      "current_status": "planned_only",
+      "representative_source": "imports-functions/imports-functions.mir"
+    },
+    {
+      "sample_id": "comp-04-host-io-internal-transform",
+      "root_name": "host-io-internal-transform",
+      "stage": "P-COMP-04",
+      "current_status": "planned_only",
+      "representative_source": "host-io-internal-transform/host-io-internal-transform.mir"
+    }
+  ]
+}

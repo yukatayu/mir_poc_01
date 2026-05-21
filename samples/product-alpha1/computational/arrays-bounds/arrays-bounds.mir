@@ -1,0 +1,5 @@
+module Computational.Arrays
+
+fn second(xs: Vec[Int64]) -> Int64 {
+  return xs[1]
+}

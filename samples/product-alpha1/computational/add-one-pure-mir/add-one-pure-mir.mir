@@ -1,0 +1,12 @@
+module Computational.AddOne
+
+fn add_one(x: Int64) -> Int64 {
+  let y: Int64 = x + 1
+  return y
+}
+
+transition main at Place[HostPlace] {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+}

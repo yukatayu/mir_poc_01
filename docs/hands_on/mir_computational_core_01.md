@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、`P-COMP-00` 後の Mir Computational Core line を読むための docs-first landing page です。
+この文書は、`P-COMP-01` で actualize された Mir Computational Core scaffold を読むための landing page です。
 
-現時点では implementation guide ではありません。`samples/product-alpha1/computational/` や `scripts/mir_computational_samples.py` はまだ存在せず、runnable workflow として扱いません。
+現時点では runtime implementation guide ではありません。`samples/product-alpha1/computational/` と `scripts/mir_computational_samples.py` は存在しますが、役割は planned-only matrix / root validation と rejected-run evidence です。
 
 ## current reading
 
@@ -24,7 +24,18 @@ The arithmetic `x + 1` must be represented, typed, executed, and later compiled 
 
 ## current verification
 
-For the current docs/spec rebaseline, use repository validation only:
+For the current scaffold actualization, use the dedicated planned-only commands first:
+
+```bash
+python3 -m unittest scripts.tests.test_mir_computational_samples
+python3 scripts/mir_computational_samples.py matrix --format json
+python3 scripts/mir_computational_samples.py check-all --format json
+python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+```
+
+These commands prove that the computational root exists, rows are machine-readable, and attempted execution is rejected as `planned_only`.
+
+Use repository validation alongside them:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -34,24 +45,12 @@ cargo fmt --check
 git diff --check
 ```
 
-These commands do not prove computational-core execution. They only prove that the rebaseline docs and source hierarchy are synchronized.
-
-## future command shape
-
-Future packages may add:
-
-```bash
-python3 scripts/mir_computational_samples.py matrix --format json
-python3 scripts/mir_computational_samples.py check-all --format json
-python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
-```
-
-Until those files exist and are validated, they are planned anchors only.
+These commands still do not prove Mir-owned runtime execution. They only prove that the scaffold, docs, and source hierarchy are synchronized.
 
 ## completion gates
 
 - `P-COMP-01`:
-  spec, roadmap, sample matrix, planned/executable classification, and AddOne non-claim.
+  spec, roadmap, sample matrix, planned/executable classification, rejected run, and AddOne non-claim.
 - `P-COMP-02`:
   pure AddOne owned by Mir, with host input / Mir compute / host output as distinct observable events.
 - `P-COMP-03`:
@@ -62,4 +61,3 @@ Until those files exist and are validated, they are planned anchors only.
 ## stop lines
 
 Do not read this guide as final textual grammar, final public API, Rust-level completion, LLVM/backend implementation, or proof that the current typed external `AddOne` already proves Mir-owned computation.
-

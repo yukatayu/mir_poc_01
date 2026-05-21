@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-21 18:56 JST
+Last updated: 2026-05-21 19:22 JST
 
-Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, and docs/spec rebaseline for Mir Computational Core / PoseGraph / projection/backend / engine-adapter boundary. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
+Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, the `P-COMP-01` computational scaffold actualization, and the remaining docs/spec front-half for PoseGraph / projection/backend / engine-adapter boundary. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -31,11 +31,11 @@ Notes:
 | product alpha-1 release candidate | product-release-candidate, not final product | `python3 scripts/product_alpha1_release_check.py --format json check-all --out /tmp/mirrorea-alpha1-release` | `mirrorea-alpha` command family, `samples/product-alpha1/demo`, local/Docker transport, non-final viewer, R0/R2 save, native host bundle, CLI `demo`, release check | user/final broader distribution decision |
 | installed-binary adoption probe | bounded public-ish adoption probe | `python3 scripts/product_alpha1_installed_binary_check.py --format json check-all --out /tmp/mirrorea-alpha1-installed-binary-check` | built `target/debug/mirrorea-alpha`, generated host bundle, bundle `run.sh check/view`, `compatibility_scope`, `shipped_surface`, `distribution_scope` | archive / installer / system package / auto-update / hosted service |
 | operational product sample suite | workflow-ready canonical suite, not final product | `python3 scripts/operational_product_samples.py check-all --format json` | six operational roots, shared attach packages, projection inventory, retained blueprints, authoring starters, portal/shard/gradient runtime cuts, helper scope blocks | user-spec-required broader distribution / final catalog decision |
-| Mir computational core | boundary-fixed, planned samples only | docs validation only | `specs/28` / `plan/53` define planned `samples/product-alpha1/computational/*` and current AddOne non-claim | no sample root or helper exists yet; pure AddOne in Mir is not implemented |
+| Mir computational core | boundary-fixed, planned scaffold actualized | `python3 scripts/mir_computational_samples.py check-all --format json` | `specs/28` / `plan/53`, `samples/product-alpha1/computational/`, `matrix.json`, and helper/unit test now classify planned rows and reject `run` as `planned_only` | no Mir-owned runtime execution yet; `P-COMP-02..04` remain |
 | Transform / PoseGraph | boundary-fixed, planned samples only | docs validation only | `specs/29` / `plan/54` define planned `samples/product-alpha1/posegraph/*`, no-split-frame, save/devtools hooks | no sample root or helper exists yet; no PoseGraph runtime evidence |
 | projection/backend boundary | boundary-fixed, inventory-only | docs validation only | `specs/30` / `plan/55` define future target manifest / packet / FFI inventory line | no projection codegen, server/client binary split, or projection helper exists yet |
 | engine/WASM/FFI adapter boundary | boundary-fixed, inventory-only | docs validation only | `specs/31` / `plan/56` define provider contract inventory | no engine integration, final FFI ABI, arbitrary native/WASM execution, or helper exists yet |
-| autonomous execution contract | boundary-fixed, no sample claim | docs validation only | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol | no new runnable sample; scaffold actualization starts at `P-COMP-01` |
+| autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol | continue `P-POSE-01` / `P-PROJ-01` / `P-ENG-01` front-half packages |
 
 ## Product Alpha Root Status
 
@@ -45,7 +45,7 @@ Notes:
 | `samples/product-alpha1/operational/` | canonical operational sample suite | `python3 scripts/operational_product_samples.py check-all --format json` | workflow-ready operational suite; not final product |
 | `samples/product-alpha1/operational/templates/` | template-only authoring starters | `cargo run -q -p mirrorea-cli -- check <template> --format json` | `world-core`, `membership-chat`, `sugoroku-world` starters only |
 | `samples/product-alpha1/operational/future/` | future boundary inventory | JSON validation / docs references | retained blueprint/profile inventory; non-executable unless paired with active roots |
-| `samples/product-alpha1/computational/` | planned Mir-owned computation roots | none yet | planned-only; root not created in `P-COMP-00` |
+| `samples/product-alpha1/computational/` | planned Mir-owned computation roots | `python3 scripts/mir_computational_samples.py check-all --format json` | planned-only scaffold actualized; representative `.mir` files and `matrix.json` exist, but no executable runtime row yet |
 | `samples/product-alpha1/posegraph/` | planned Transform / PoseGraph roots | none yet | planned-only; root not created in `P-COMP-00` |
 | `samples/product-alpha1/projection/` | planned projection boundary roots | none yet | planned-only; root not created in `P-COMP-00` |
 
@@ -79,13 +79,15 @@ Notes:
 | α-0.9 devtools panels | `OA09-*`, `VIS-A1-*` | final viewer/telemetry ABI later |
 | product alpha release candidate | `product_alpha1_release_check.py check-all` | broader distribution decision later |
 | operational suite | `operational_product_samples.py check-all` | final catalog decision later |
-| Mir-owned computation | no current runnable anchor | planned `P-COMP-01` scaffold and `P-COMP-02..04` implementation half; current `AddOne` is host-boundary evidence only |
+| Mir-owned computation | no current runnable anchor | `P-COMP-01` scaffold is actualized; `P-COMP-02..04` implementation half remains; current `AddOne` is host-boundary evidence only |
 | Transform / PoseGraph | no current runnable anchor | planned `P-POSE-01` scaffold and `P-POSE-02` implementation half; no-split-frame is docs/spec boundary only |
 | projection / engine adapter boundary | no current runnable anchor beyond existing projection inventory | planned `P-PROJ-01` / `P-ENG-01`; no codegen or engine execution |
 
 ## Validation Anchors For Current Audit
 
 ```bash
+python3 -m unittest scripts.tests.test_mir_computational_samples
+python3 scripts/mir_computational_samples.py check-all --format json
 python3 -m unittest scripts.tests.test_validate_docs scripts.tests.test_product_alpha1_installed_binary_check scripts.tests.test_product_alpha1_release_check scripts.tests.test_operational_product_samples
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
@@ -100,8 +102,9 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
-| 2026-05-21 17:35 JST | `P-COMP-00` Mir computational core rebaseline | docs/spec planned | added boundary-fixed rows for computational core, PoseGraph, projection/backend, and engine adapter; no new runnable sample roots or helpers |
+| 2026-05-21 19:22 JST | `P-COMP-01` computational scaffold actualization | pass | `samples/product-alpha1/computational/`, `matrix.json`, helper, unit test, validator registration, and snapshot docs were synchronized; `run comp-02-pure-add-one` rejects as `planned_only` |
 | 2026-05-21 18:56 JST | `P-COMP-00B` autonomous execution contract | docs/spec planned | integrated reviewer findings: front-half closeout before implementation, `mir-semantics` computational module target, projection/provider compatibility, provider rollback/replay/cut policy; no new runnable sample roots or helpers |
+| 2026-05-21 17:35 JST | `P-COMP-00` Mir computational core rebaseline | docs/spec planned | added boundary-fixed rows for computational core, PoseGraph, projection/backend, and engine adapter; no new runnable sample roots or helpers |
 | 2026-05-07 13:08 JST | `P-OPS-27` alpha-1 usability and snapshot-doc audit | pass | product release check, installed-binary probe, and operational suite check-all were rerun with Docker included; overview docs were compacted; `mir_hilight.html` active sample inventory was resynced |
 | 2026-05-07 12:25 JST | `P-OPS-26` later user-final distribution decision scoping | pass | `user_final_decision_scope` fixed current delivery unit, current catalog scope, and user-spec-required next gate |
 | 2026-05-07 10:22-12:03 JST | `P-OPS-20..25` queue and scope hardening | pass | distribution, room-chat, portal/shard starter, Sugoroku, and widening-queue scope blocks were added or narrowed |

@@ -165,6 +165,10 @@ class ValidateDocsTests(unittest.TestCase):
         }
         product_alpha1_sample_docs = {
             "samples/product-alpha1/README.md",
+            "samples/product-alpha1/computational/README.md",
+            "samples/product-alpha1/computational/matrix.json",
+            "samples/product-alpha1/computational/add-one-pure-mir/README.md",
+            "samples/product-alpha1/computational/add-one-pure-mir/add-one-pure-mir.mir",
             "samples/product-alpha1/demo/README.md",
             "samples/product-alpha1/demo/package.mir.json",
             "samples/product-alpha1/operational/README.md",
@@ -177,6 +181,22 @@ class ValidateDocsTests(unittest.TestCase):
         }
 
         for path in product_alpha1_sample_docs:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
+
+    def test_required_scaffold_includes_computational_helper_surface(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        computational_helper_docs = {
+            "scripts/mir_computational_samples.py",
+            "scripts/tests/test_mir_computational_samples.py",
+        }
+
+        for path in computational_helper_docs:
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
 

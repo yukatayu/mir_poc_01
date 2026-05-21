@@ -28,9 +28,9 @@ It does not yet show:
 | `P-COMP-03` | variables / arrays / records / control-flow first floor | each feature has positive and negative machine-readable rows |
 | `P-COMP-04` | effect boundary around internal computation | pure/effect split and declared effect / failure / capability rejection are checked |
 
-## planned sample matrix
+## current sample matrix
 
-Planned roots, not yet present or runnable in `P-COMP-00`:
+`P-COMP-01` actualizes the planned-only scaffold. The roots now exist, but they are not runnable computational proofs yet:
 
 - `samples/product-alpha1/computational/add-one-pure-mir/`
 - `samples/product-alpha1/computational/variables-scope/`
@@ -40,11 +40,11 @@ Planned roots, not yet present or runnable in `P-COMP-00`:
 - `samples/product-alpha1/computational/imports-functions/`
 - `samples/product-alpha1/computational/host-io-internal-transform/`
 
-Planned helper, not yet present in `P-COMP-00`:
+Current helper actualized in `P-COMP-01`:
 
 - `scripts/mir_computational_samples.py`
 
-Future validation anchors may include:
+Current planned-only validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_mir_computational_samples
@@ -53,7 +53,7 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
 ```
 
-These commands are future anchors, not current runnable validation.
+These commands validate matrix classification and planned-only rejection behavior. They do not prove Mir-owned runtime execution.
 
 ## typing and failure-row roadmap
 
@@ -112,5 +112,4 @@ Later, after first-floor evidence:
 
 ## current recommendation
 
-The next self-driven docs/spec package is `P-COMP-01` after this rebaseline. Broader distribution / final shared-space catalog decisions remain user-spec-required gates, but they are no longer the only next repo-wide reopen point.
-
+`P-COMP-01` is now the closed computational scaffold package. The next computational implementation package is `P-COMP-02`, but the repo-wide next promoted front-half package remains `P-POSE-01` under `plan/57`. Broader distribution / final shared-space catalog decisions remain user-spec-required gates, but they do not block the current autonomous front-half queue.

@@ -1,0 +1,7 @@
+import Computational.AddOne
+
+module Computational.Compose
+
+fn add_two(x: Int64) -> Int64 {
+  return add_one(add_one(x))
+}

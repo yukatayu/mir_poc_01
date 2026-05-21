@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-21 18:56 JST
+最終更新: 2026-05-21 19:22 JST
 
 ## この文書について
 
@@ -24,15 +24,15 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-COMP-00B` autonomous execution contract / master plan
+  `P-COMP-01` Mir computational sample scaffold actualization
 - current promoted reopen point:
-  `P-COMP-01` Mir computational core spec and sample scaffold
+  `P-POSE-01` Transform / PoseGraph scaffold
 - current reading:
   repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。その上で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow completion ではない。
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01 -> front-half closeout`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` へ整理した。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。実装はまだ開始していない。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01 -> front-half closeout`、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` へ整理した。`P-COMP-01` は planned-only computational root / matrix / helper / tests まで actualize 済みで、current next package は `P-POSE-01` である。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
 
 ## workflow-readiness axes
 
@@ -53,11 +53,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | product alpha-1 release candidate | product alpha workflow | release-candidate ready, not final product | `scripts/product_alpha1_release_check.py --format json check-all --out <dir>` が Docker 込みで accepted なら release-candidate evidence | broader public distribution / final catalog decision |
 | installed-binary adoption probe | public-ish alpha adoption probe | bounded adoption candidate | `scripts/product_alpha1_installed_binary_check.py --format json check-all --out <dir>` が built binary + generated host bundle replay を確認 | archive / installer / hosted-service shape |
 | operational product sample suite | canonical operational suite | workflow-ready canonical suite, not final product | `scripts/operational_product_samples.py check-all --format json` が six roots, attach packages, transport, devtools, native bundle, portal/shard/gradient cuts を確認 | user-spec-required broader distribution / final catalog decision |
-| Mir computational core | docs/spec rebaseline | boundary-fixed, planned samples only | `specs/28` / `plan/53` define first floor and package gates; current AddOne non-claim fixed | `P-COMP-01` sample scaffold, then pure AddOne in Mir |
+| Mir computational core | docs/spec rebaseline | planned-only scaffold actualized | `specs/28` / `plan/53` define first floor and package gates; `samples/product-alpha1/computational/` and `scripts/mir_computational_samples.py` now classify planned rows and reject `run` as `planned_only` | `P-COMP-02` pure AddOne in Mir after front-half closeout |
 | Transform / PoseGraph | docs/spec rebaseline | boundary-fixed, planned samples only | `specs/29` / `plan/54` define pose snapshot, anchor, no-split-frame, save/load/devtools hooks | PoseGraph scaffold and positive/negative no-split-frame evidence |
 | projection/backend boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/30` / `plan/55` keep projection as target / packet / FFI inventory, not codegen | server/client/adapter manifest inventory and report surface |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/31` / `plan/56` keep engines/providers under typed adapter contracts | provider contract inventory, no arbitrary execution |
-| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | begin `P-COMP-01` scaffold actualization |
+| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue `P-POSE-01` / `P-PROJ-01` / `P-ENG-01` front-half queue |
 
 ## subsystem status
 
@@ -97,7 +97,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 - broader installed/public distribution is undefined beyond developer-built `mirrorea-alpha` plus locally generated native host launch bundle.
 - final shared-space operational catalog breadth is undefined beyond the bounded product alpha-1 narrow showcase.
-- Mir-owned computational core sample/runtime evidence is not yet implemented.
+- Mir-owned computational core runtime evidence is not yet implemented. `P-COMP-01` added only the planned-only scaffold root / helper / matrix.
 - PoseGraph save/load / devtools carrier is not yet implemented.
 - projection/backend boundary is inventory-only; no server/client split or codegen exists.
 - engine/WASM/FFI adapter boundary is inventory-only; no arbitrary execution is admitted.
@@ -111,6 +111,8 @@ Place をまたいで実行・通信・検証・可視化できる
 Use the focused all-up anchors first:
 
 ```bash
+python3 -m unittest scripts.tests.test_mir_computational_samples
+python3 scripts/mir_computational_samples.py check-all --format json
 python3 -m unittest scripts.tests.test_validate_docs scripts.tests.test_product_alpha1_installed_binary_check scripts.tests.test_product_alpha1_release_check scripts.tests.test_operational_product_samples
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
@@ -125,6 +127,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 19:22 JST
+  `P-COMP-01` で `samples/product-alpha1/computational/`、`matrix.json`、`scripts/mir_computational_samples.py`、unit test、validator registration、snapshot docs を actualize し、`run comp-02-pure-add-one` が `planned_only` で拒否される current non-claim を machine-readable に固定した。next reopen point は `P-POSE-01`。
 - 2026-05-21 18:56 JST
   `P-COMP-00B` で autonomous execution contract を reviewer findings と同期。front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01 -> closeout` と implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` を分け、`mir-semantics` computational module、manifest/provider compatibility、provider rollback/replay/cut policy、user-spec-required backend/native/WASM gates を明記した。
 - 2026-05-21 17:35 JST

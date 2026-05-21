@@ -6,6 +6,14 @@ Product Alpha-1 is valuable as a runtime/product workflow floor: `mirrorea-alpha
 
 The drift is that this floor can be misread as proof that Mir already owns general computation. It does not. The current `AddOne` lane proves a typed external host-boundary path, not Mir-owned arithmetic / variable / array / record / control-flow semantics.
 
+`P-COMP-01` now actualizes the planned-only scaffold for that correction:
+
+- `samples/product-alpha1/computational/`
+- `samples/product-alpha1/computational/matrix.json`
+- `scripts/mir_computational_samples.py`
+
+The helper can list rows, validate the matrix, and reject `run comp-02-pure-add-one` as `planned_only`. This is useful because the non-claim is now machine-readable rather than only prose.
+
 ## new promoted docs/spec line
 
 The next docs/spec line is:
@@ -56,6 +64,16 @@ host input
 
 After that, variables, arrays, records, control-flow, imports, and host-boundary wrapping can be widened.
 
+Current scaffold validation commands:
+
+```bash
+python3 -m unittest scripts.tests.test_mir_computational_samples
+python3 scripts/mir_computational_samples.py check-all --format json
+python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+```
+
+These commands validate classification and rejection behavior only. They do not prove `P-COMP-02`.
+
 ## PoseGraph target
 
 Virtual-space state must be Mir / Mirrorea-owned:
@@ -73,4 +91,3 @@ No-split-frame is same-client same-observation-snapshot coherence, not global si
 ## non-claims
 
 This rebaseline does not claim final textual grammar, final ABI/SDK, direct LLVM/native backend, final server/client binary split, arbitrary native/WASM execution, Unity/VRM compatibility, WAN/federation, or active PoseGraph runtime samples.
-

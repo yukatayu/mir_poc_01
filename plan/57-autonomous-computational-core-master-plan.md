@@ -53,6 +53,11 @@ commit and push after each package
 
 ## P-COMP-01 plan
 
+Current status:
+
+- closed on 2026-05-21 as the planned-only computational scaffold actualization package
+- the current next promoted package in the front-half queue is `P-POSE-01`
+
 Purpose:
 
 - actualize the computational sample scaffold that `specs/28` / `plan/53` already define.
@@ -116,7 +121,7 @@ Expected files:
 - add `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`
 - add expected JSON showing event sequence:
   `host_input_received`, `mir_compute_step`, `host_output_emitted`
-- extend `scripts/mir_computational_samples.py run add-one-pure-mir`
+- extend `scripts/mir_computational_samples.py run comp-02-pure-add-one`
 - add Rust tests under `mir-semantics` for the pure computational module and focused runtime tests only for the event wrapper
 - update docs and report
 
@@ -124,7 +129,7 @@ Validation:
 
 ```bash
 python3 -m unittest scripts.tests.test_mir_computational_samples
-python3 scripts/mir_computational_samples.py run add-one-pure-mir --format json
+python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
 cargo test -p mir-semantics mir_computational -- --nocapture
 cargo test -p mir-runtime mir_computational -- --nocapture
 python3 scripts/check_source_hierarchy.py

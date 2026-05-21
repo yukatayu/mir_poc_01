@@ -116,7 +116,7 @@ standing recommendation:
   non-Lean generated sample artifact reserve + committed generated bridge evidence
 - planned future product-alpha roots
   - `samples/product-alpha1/computational/`
-    Mir-owned computation sample line; not created/runnable until `P-COMP-01`
+    `P-COMP-01` planned-only Mir-owned computation scaffold; helper-validated matrix exists, but runtime execution is still deferred to `P-COMP-02`
   - `samples/product-alpha1/posegraph/`
     Transform / PoseGraph sample line; not created/runnable until `P-POSE-01`
   - `samples/product-alpha1/projection/`
@@ -156,12 +156,13 @@ standing recommendation:
   base current-L2 helper、detached loop、diff/export assist、Lean sync、checker support
 - `scripts/new_report.py`
   report utility
-- planned computational / PoseGraph / projection / engine adapter helper family is not yet implemented
+- computational / PoseGraph / projection / engine adapter helper family
   - `scripts/mir_computational_samples.py`
+    `P-COMP-01` planned-only computational matrix helper; it validates `samples/product-alpha1/computational/` and rejects `run` as `planned_only`
   - `scripts/posegraph_samples.py`
   - `scripts/projection_boundary_samples.py`
   - `scripts/engine_adapter_boundary_samples.py`
-  - do not include these in current validation floors until their packages create real files/tests
+  - only the computational helper exists today; do not include the other planned commands in current validation floors until their packages create real files/tests
 
 ### current storage / env
 
