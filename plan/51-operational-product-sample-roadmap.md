@@ -175,6 +175,12 @@
 - `README.md`、`Documentation.md`、`progress.md`、`tasks.md`、`samples_progress.md`、`samples/product-alpha1/README.md` を snapshot 文書として読みやすい粒度へ圧縮する
 - runtime behavior / normative spec を widen せず、既存の user-spec-required broader distribution / final catalog gate を維持する
 
+## P-COMP-00 recognition rebaseline interaction
+
+`P-OPS-*` の operational suite は保持する。`WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` は current product alpha operational workflow-ready suite である。
+
+ただし、current suite の typed host-boundary rows は Mir-owned computational-core completion ではない。特に `AddOne` / `ChatText` は adapter / host-boundary evidence として読み、Mir-owned arithmetic / variables / arrays / records / control-flow evidence は `specs/28` / `plan/53` の `P-COMP` line で別途扱う。
+
 ## P-OPS-01 non-goals
 
 - final textual grammar
@@ -188,8 +194,10 @@
 
 ## next packages
 
-1. no active self-driven package
-   current operational reopenings are already closed as non-promoted; remaining broader distribution / final catalog comparison is now an explicit user-spec-required gate
+1. no active operational runtime widening package
+   current operational reopenings are already closed as non-promoted; remaining broader distribution / final catalog comparison remains an explicit user-spec-required gate
+2. active docs/spec package outside P-OPS
+   `P-COMP-01` Mir computational core spec and sample scaffold is the current self-driven docs/spec reopen point
 
 ## current recommendation
 
@@ -216,7 +224,8 @@
 - `P-OPS-25` で helper に machine-readable `widening_queue_scope` を更新し、current room-chat reopening、portal/shard starter reopening、broader Sugoroku reopening は non-promoted、`later_user_final_distribution_decision` が next promoted comparison であることを固定した
 - `P-OPS-26` で helper に machine-readable `user_final_decision_scope` を追加し、current delivery unit は developer-built binary + generated host launch bundle、current catalog scope は bounded product alpha-1 narrow showcase、broader final distribution / final shared-space catalog breadth は user-spec-required gate、current self-driven operational reopenings は exhausted であることを固定した
 - `P-OPS-27` で current runnable floor を再検証し、snapshot docs を current usability / next gate / validation anchors 中心へ圧縮した
-- current self-driven queue はここでいったん尽きており、次は later user-final distribution decision そのものではなく、その user-spec-required gate に対する user input を待つ
+- current P-OPS operational runtime queue はここでいったん尽きている。broader distribution / final catalog は user-spec-required gate のまま。
+- repo-wide docs/spec queue は `P-COMP-00` で再開し、次は `P-COMP-01` computational core scaffold に進む。
 
 ## open questions
 

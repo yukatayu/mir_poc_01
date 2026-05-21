@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-07 13:25 JST
+最終更新: 2026-05-21 17:35 JST
 
 ## この文書について
 
@@ -24,23 +24,23 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-OPS-27` alpha-1 usability and snapshot-doc audit
+  `P-COMP-00` Mir computational core recognition rebaseline
 - current promoted reopen point:
-  later user-final distribution decision (`user-spec-required` gate)
+  `P-COMP-01` Mir computational core spec and sample scaffold
 - current reading:
-  repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。
+  repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。その上で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow completion ではない。
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  current self-driven operational reopen queue は exhausted。次は runtime widening ではなく、`user_final_decision_scope` が示す broader distribution / final shared-space operational catalog breadth の user decision を待つ。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は `P-COMP-01..04`、`P-POSE-01..02`、`P-PROJ-01`、`P-ENG-01` へ移った。実装はまだ開始していない。
 
 ## workflow-readiness axes
 
 | 軸 | Workflow reading | Current status |
 |---|---|---|
-| 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..27` が practical / operational / product alpha / operational sample / portal-shard boundary を分ける。final public grammar / ABI は未固定 |
+| 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..31` が practical / operational / product alpha / operational sample / portal-shard / computational core / PoseGraph / projection-backend / engine-adapter boundary を分ける。final public grammar / ABI は未固定 |
 | ユーザ向け仕様 | reproducible workflow guidance exists | `README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/hands_on/operational_product_sample_01.md`、authoring / backend / portal-shard guides が current command path と non-claims を説明する |
-| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe |
+| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe. Computational / PoseGraph samples are planned-only |
 
 ## line snapshot
 
@@ -53,15 +53,19 @@ Place をまたいで実行・通信・検証・可視化できる
 | product alpha-1 release candidate | product alpha workflow | release-candidate ready, not final product | `scripts/product_alpha1_release_check.py --format json check-all --out <dir>` が Docker 込みで accepted なら release-candidate evidence | broader public distribution / final catalog decision |
 | installed-binary adoption probe | public-ish alpha adoption probe | bounded adoption candidate | `scripts/product_alpha1_installed_binary_check.py --format json check-all --out <dir>` が built binary + generated host bundle replay を確認 | archive / installer / hosted-service shape |
 | operational product sample suite | canonical operational suite | workflow-ready canonical suite, not final product | `scripts/operational_product_samples.py check-all --format json` が six roots, attach packages, transport, devtools, native bundle, portal/shard/gradient cuts を確認 | user-spec-required broader distribution / final catalog decision |
+| Mir computational core | docs/spec rebaseline | boundary-fixed, planned samples only | `specs/28` / `plan/53` define first floor and package gates; current AddOne non-claim fixed | `P-COMP-01` sample scaffold, then pure AddOne in Mir |
+| Transform / PoseGraph | docs/spec rebaseline | boundary-fixed, planned samples only | `specs/29` / `plan/54` define pose snapshot, anchor, no-split-frame, save/load/devtools hooks | PoseGraph scaffold and positive/negative no-split-frame evidence |
+| projection/backend boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/30` / `plan/55` keep projection as target / packet / FFI inventory, not codegen | server/client/adapter manifest inventory and report surface |
+| engine/WASM/FFI adapter boundary | docs/spec rebaseline | boundary-fixed, inventory-only | `specs/31` / `plan/56` keep engines/providers under typed adapter contracts | provider contract inventory, no arbitrary execution |
 
 ## subsystem status
 
 - **Mir**
-  current-L2 の semantics / invariant / parser-free evidence floor は維持。final textual grammar と final public checker/runtime/verifier API は未固定。
+  current-L2 の semantics / invariant / parser-free evidence floor は維持。Mir-owned computational core first floor は docs/spec rebaseline 済みだが、runtime/sample implementation は未着手。final textual grammar と final public checker/runtime/verifier API は未固定。
 - **Mirrorea**
   same-session carrier、hot-plug、local/Docker transport、observer-safe devtools、local R0/R2 save-load、native host launch bundle の alpha workflow は再現可能。WAN/federation、distributed durable save-load、final viewer/telemetry ABI は後段。
 - **Typed-Effect Wiring Platform**
-  `AddOne` と bounded `ChatText` は typed external host boundary evidence。stdio builtin は導入しない。
+  `AddOne` と bounded `ChatText` は typed external host boundary evidence。`AddOne` は Mir-owned computation completion ではない。stdio builtin は導入しない。
 - **PrismCascade / Reversed Library**
   separable kept-later line。current alpha-1 operational workflow の実装対象ではない。
 
@@ -70,11 +74,11 @@ Place をまたいで実行・通信・検証・可視化できる
 | Macro | 主眼 | 現在位置 | 重さ | 自走可否 |
 |---|---|---|---|---|
 | `Macro 0` | repository memory / docs / traceability | snapshot docs を current gate に圧縮中 | light | 着手可能 |
-| `Macro 1` | semantic kernel / invariant / boundary stabilization | core invariants and operational alpha boundary fixed | medium | 着手可能 |
+| `Macro 1` | semantic kernel / invariant / boundary stabilization | computational core / effect split / PoseGraph boundary rebaseline in progress | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary fixed; broad discharge later | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | same-session + local/Docker alpha workflow; production distributed line later | heavy | 後段依存 |
-| `Macro 7` | toolchain / backend / developer surface / public operational interface | product alpha release-candidate and installed-binary adoption probe are reproducible | heavy | 要仕様確認 |
-| `Macro 8` | domain / application realization | operational suite six-root chain is runnable; final catalog breadth open | heavy | 要仕様確認 |
+| `Macro 7` | toolchain / backend / developer surface / public operational interface | product alpha release-candidate and installed-binary adoption probe are reproducible; projection/backend remains inventory | heavy | 着手可能 for docs/spec, 要仕様確認 for shipped surface |
+| `Macro 8` | domain / application realization | operational suite six-root chain is runnable; PoseGraph and final catalog breadth open | heavy | 着手可能 for PoseGraph docs/spec, 要仕様確認 for final catalog |
 
 ## feature maturity rows
 
@@ -85,14 +89,20 @@ Place をまたいで実行・通信・検証・可視化できる
 | dynamic attach / detach / DAG-safe evolution | bounded same-session attach workflow | debug/auth/rate-limit/object/avatar attach behavior is visible; accepted detach and distributed ordering remain later | 着手可能 |
 | `atomic_cut` and higher-level ordering | semantics fixed, evidence-backed | `atomic_cut` remains place-local rollback frontier; durable/distributed commit is not implied | 着手可能 |
 | executable sample corpus | workflow-ready where scoped | clean near-end, practical alpha workflows, product alpha release candidate, installed-binary probe, and operational suite have runnable anchors | 着手可能 |
+| Mir-owned computation | boundary-fixed, planned-only samples | current alpha host `AddOne` is external adapter evidence only; pure AddOne in Mir is next proof point | 着手可能 |
+| PoseGraph / no-split-frame | boundary-fixed, planned-only samples | same-client same-observation-snapshot invariant is defined; no runtime sample yet | 着手可能 |
 
 ## current blockers
 
 - broader installed/public distribution is undefined beyond developer-built `mirrorea-alpha` plus locally generated native host launch bundle.
 - final shared-space operational catalog breadth is undefined beyond the bounded product alpha-1 narrow showcase.
+- Mir-owned computational core sample/runtime evidence is not yet implemented.
+- PoseGraph save/load / devtools carrier is not yet implemented.
+- projection/backend boundary is inventory-only; no server/client split or codegen exists.
+- engine/WASM/FFI adapter boundary is inventory-only; no arbitrary execution is admitted.
 - final public grammar / ABI / SDK, final viewer / telemetry ABI, hosted service, WAN/federation, and distributed durable save-load remain later gates.
 - current user-required decision:
-  `U1_beyond_alpha_packaging_host_target_shipped_surface` and `final_shared_space_operational_catalog_breadth`.
+  `U1_beyond_alpha_packaging_host_target_shipped_surface` and `final_shared_space_operational_catalog_breadth` remain for final distribution, but they no longer block the docs/spec computational-core line.
 
 ## validation floor
 
@@ -113,6 +123,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 17:35 JST
+  `P-COMP-00` で computational-core drift を rebaseline。Product Alpha-1 workflow は保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、`specs/28..31` / `plan/53..56` で Mir-owned computation、PoseGraph、projection/backend、engine-adapter boundary を docs/spec line として追加した。runtime implementation は未着手。
 - 2026-05-07 13:08 JST
   `P-OPS-27` で alpha-1 usability / docs snapshot audit を実施。product release check、installed-binary probe、operational suite check-all を Docker 込みで再確認し、overview docs を current status / next gate / validation anchors 中心へ圧縮した。全面 Python test で見つかった `mir_hilight.html` の active sample inventory drift も同期した。
 - 2026-05-07 12:25 JST

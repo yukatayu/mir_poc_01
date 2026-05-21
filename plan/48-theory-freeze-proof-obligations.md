@@ -65,7 +65,8 @@ still residual / not fully discharged:
 - full no-stale-witness / no-stale-lease proofs on saved carrier
 - auth-stack composition proof beyond first-floor explicit rows
 - session-bound observability derivation proof
-- typed external direct execution lane proof obligations
+- typed external host-I/O adapter lane proof obligations
+- Mir-owned computational-core proof obligations under `specs/28` / `plan/53`
 
 ## export targets
 

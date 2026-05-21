@@ -47,6 +47,10 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "specs/25-product-alpha1-public-boundary.md",
         "specs/26-operational-product-sample-suite.md",
         "specs/27-spatial-portal-and-shard-extension-boundary.md",
+        "specs/28-mir-computational-core.md",
+        "specs/29-transform-posegraph-semantics.md",
+        "specs/30-projection-and-backend-boundary.md",
+        "specs/31-engine-wasm-ffi-adapter-boundary.md",
     ],
     "policies": [
         ".docs/progress-task-axes.md",
@@ -73,6 +77,10 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/50-product-alpha1-public-boundary-roadmap.md",
         "plan/51-operational-product-sample-roadmap.md",
         "plan/52-portal-spatial-world-roadmap.md",
+        "plan/53-mir-computational-core-roadmap.md",
+        "plan/54-transform-posegraph-roadmap.md",
+        "plan/55-projection-backend-roadmap.md",
+        "plan/56-engine-adapter-roadmap.md",
     ],
     "scripts": [
         "scripts",
@@ -152,6 +160,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "docs/hands_on/operational_backend_inventory_01.md",
         "docs/hands_on/operational_gradient_observation_profile_01.md",
         "docs/hands_on/operational_portal_shard_starter_boundary_01.md",
+        "docs/hands_on/mir_computational_core_01.md",
+        "docs/hands_on/transform_posegraph_01.md",
         "docs/research_abstract/README.md",
         "docs/research_abstract",
         "docs/research_abstract/product_alpha1_01.md",
@@ -160,6 +170,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "docs/research_abstract/operational_backend_inventory_01.md",
         "docs/research_abstract/operational_gradient_observation_profile_01.md",
         "docs/research_abstract/operational_portal_shard_starter_boundary_01.md",
+        "docs/research_abstract/mir_computational_core_01.md",
         "samples/alpha",
         "samples/product-alpha1",
         "samples/product-alpha1/demo",
@@ -178,6 +189,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "sub-agent-pro/alpha-1",
         "sub-agent-pro/product-alpha1-001",
         "sub-agent-pro/operational-product-sample-001",
+        "sub-agent-pro/mirrorea_mir_computational_core_handoff.md",
     ],
 }
 

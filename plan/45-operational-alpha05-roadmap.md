@@ -21,7 +21,7 @@ current repo already has:
 - first devtools export floor
 - product-preview floor
 - bounded session runtime carrier (`practical_alpha05_session`)
-- minimal typed host-I/O direct execution lane (`practical_alpha05_host_io`, `OA05-07`)
+- minimal typed host-I/O adapter lane (`practical_alpha05_host_io`, `OA05-07`)
 
 current repo still lacks:
 
@@ -33,6 +33,7 @@ current repo still lacks:
 - package input -> checker -> runtime plan -> local runtime session -> observe -> save/load is the required path
 - observer-safe export is part of completion
 - typed host-I/O minimal demo is required
+- typed host-I/O minimal demo is not Mir-owned computational-core evidence
 - local save/load remains distinct from distributed durable save/load
 
 ## current evidence mapping
@@ -85,7 +86,7 @@ current command family:
 - `check-all`
 - `closeout`
 
-### 2. `P-A1-20` — typed external host-I/O direct execution lane
+### 2. `P-A1-20` — typed external host-I/O adapter lane
 
 actualized:
 
@@ -102,6 +103,12 @@ delivered:
 - authority gate
 - observer-safe host receipt summary
 - event DAG request/response nodes on the same session carrier
+
+non-claim:
+
+- this is an adapter-owned host-boundary lane
+- it does not prove pure `add_one` in Mir
+- Mir-owned computation is tracked by `specs/28` / `plan/53`
 
 ## required rows
 

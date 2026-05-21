@@ -15,10 +15,11 @@
   - standard I/O is not Mir core primitive
   - host interaction is through typed external adapter boundary
   - synthetic preview and active semantic execution are distinct
+  - typed external adapter computation is not Mir-owned computational-core evidence
 - `L2`
   - external adapter carrier
   - minimal `EchoText` / `AddOne` sample family
-  - current missing execution lane inventory
+  - current minimal execution lane inventory
 
 ## adapter model
 
@@ -102,6 +103,7 @@ behavior: input + 1
 
 These are typed adapter examples.
 They are not stdio builtins.
+They are not proof that Mir owns arithmetic / variable / array / record / control-flow semantics.
 
 ## required evidence
 
@@ -115,21 +117,23 @@ They are not stdio builtins.
 
 ## current repo reading
 
-current repo has useful partial evidence:
+current repo has useful bounded evidence:
 
 - typed external preview lane
 - named request / receipt / local-queue preview
 - observer-safe viewer inventory
 - active runtime samples with internal publish/output behavior
+- same-session typed external `AddOne` host-I/O lane in the α-0.5 carrier
+- bounded room-oriented `ChatText` lane in the operational product suite
 
 current repo still lacks:
 
-- typed external direct semantic execution lane
-- generic host input ingestion -> transform -> host output runtime path
-- minimal reusable `EchoText` / `AddOne` runnable family
-- session-bound host-I/O observation path
+- Mir-owned pure computation for `AddOne`
+- generic host input ingestion -> Mir compute -> host output runtime path
+- broader reusable host adapter family
+- final public host adapter ABI
 
-therefore current typed external floor is not yet operational α-0.5 host-I/O completion.
+therefore current typed external floor is operational only within its bounded alpha lanes. It is not Mir computational-core completion.
 
 ## relationship to transport
 
@@ -161,5 +165,6 @@ repository-memory sequencing is kept in `plan/49`.
 
 - stdio builtin を Mir core に入れない
 - synthetic typed external preview を active semantic execution と書かない
+- typed external `AddOne` を Mir-owned computational-core completion と書かない
 - host boundary を transport layer と混同しない
-- host-I/O demo 不在で α-0.5 operational-ready と書かない
+- bounded host-I/O demo を final public adapter ABI と書かない

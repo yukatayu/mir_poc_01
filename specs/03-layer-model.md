@@ -12,6 +12,7 @@
 責務:
 
 - 因果と directed-acyclic-graph execution model
+- Mir-owned computational core
 - effects と contracts
 - cut / boundary / rollback constraint
 - ownership / lifetime / monotone degradation
@@ -74,3 +75,20 @@
 - L2 の routing / overlay boundary
 - L4 の domain-kernel boundary
 - L5 の user experience boundary
+
+## Mir Computational Core realization strata
+
+`specs/28..31` で使う strata は、この global layer numbering を置き換えない。
+
+```text
+S0 External substrate
+S1 Mir Computational Core
+S2 Mir Effect / Contract Core
+S3 Verification Layer
+S4 Mirrorea Runtime / Fabric
+S5 Projection / Deployment / Compiler Boundary
+S6 Host / Client / Backend
+S7 Application / Spatial World
+```
+
+これは `L1 — Mir Core` の内部を computation / effect / verification に分け、`L2 — Mirrorea Fabric` と projection / backend / application boundary へ接続する realization view である。`S1` を足したからといって既存 `L1` / `L2` の意味は renumber しない。

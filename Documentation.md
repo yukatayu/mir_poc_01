@@ -29,6 +29,8 @@
   `specs/25` / `plan/50` で定義した alpha-stable CLI、versioned package format、same-session product demo、quiescent save、viewer、native launch bundle、clean-clone validation の product alpha line。final textual `.mir` grammar、WAN/federation、distributed durable save/load、arbitrary native execution、final viewer / telemetry service は non-goal
 - **operational product sample suite**
   `specs/26` / `plan/51` で定義した `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` suite、shared attach packages、deployment/projection inventory、retained portal/shard blueprint inventory。current line では `MembershipChat` の bounded room-oriented `ChatText` host boundary、`SugorokuWorld` の bounded roll / publish / witness / handoff / stale membership reject scenario、`projection.profile.json` の schema-backed target / packet / FFI inventory、`PortalWorldLink` の bounded same-session discrete handoff cut、`TwoShardHardBoundary` の bounded same-session two-shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject cut、そして `TwoShardGradientObservation` の bounded observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject cut が `check`、runtime plan、observer-safe devtools / helper closeout に actualize 済み。`future/portal-worldlink/` と `future/two-shard-hard-boundary/` blueprint は残す
+- **Mir Computational Core rebaseline**
+  `specs/28..31` / `plan/53..56` で定義し直した docs/spec line。Product Alpha-1 の operational floor は保持するが、current typed external `AddOne` を Mir-owned computation の証拠とは読まない。次の自走 line は computation ownership、PoseGraph、projection/backend boundary、engine/FFI adapter boundary を段階的に明確化する。
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
@@ -42,7 +44,7 @@
 
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。次の reopen は broader distribution / final shared-space catalog breadth に関する user-spec-required decision です。
+まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision ですが、current promoted docs/spec reopen は Mir Computational Core rebaseline です。
 
 ## current active floor
 
@@ -92,10 +94,16 @@ OS/network substrate
 - event DAG export、observer-safe route trace、membership timeline export、fallback degradation export、redacted observer view、report-local retention query trace
 - local-only save/load roundtrip と stale-membership non-resurrection first-floor rows
 - attach-time auth / rate-limit / object preview / deferred detach の first-floor rows
-- bounded α-0.5 session carrier 上の minimal typed external `AddOne` direct execution lane
+- bounded α-0.5 session carrier 上の minimal typed external `AddOne` host-I/O adapter lane
 - bounded α-0.8 same-session hot-plug runtime over the same session carrier
 - bounded α-0.9 session-bound devtools export over the same carrier
 - bounded practical α-1 integrated workflow carrier over the existing first-floor and operational evidence
+
+Correction:
+
+- `AddOne` in current alpha evidence is a typed external host-I/O adapter lane.
+- It is not evidence that Mir already owns general arithmetic, variables, arrays, records, or control-flow computation.
+- The first future proof point is pure `add_one` represented and executed by Mir, with host input/output kept at typed external boundaries.
 
 まだ無いもの:
 
@@ -141,12 +149,25 @@ OS/network substrate
   `specs/27-spatial-portal-and-shard-extension-boundary.md`
   `plan/51-operational-product-sample-roadmap.md`
   `plan/52-portal-spatial-world-roadmap.md`
+- Mir computational core / PoseGraph / projection-backend boundary:
+  `specs/28-mir-computational-core.md`
+  `specs/29-transform-posegraph-semantics.md`
+  `specs/30-projection-and-backend-boundary.md`
+  `specs/31-engine-wasm-ffi-adapter-boundary.md`
+  `plan/53-mir-computational-core-roadmap.md`
+  `plan/54-transform-posegraph-roadmap.md`
+  `plan/55-projection-backend-roadmap.md`
+  `plan/56-engine-adapter-roadmap.md`
 - hands-on product alpha commands:
   `docs/hands_on/product_alpha1_01.md`
   `docs/hands_on/operational_product_sample_01.md`
   `docs/hands_on/operational_package_authoring_01.md`
   `docs/hands_on/operational_backend_inventory_01.md`
   `docs/hands_on/operational_portal_shard_starter_boundary_01.md`
+- docs-first computational / PoseGraph guides:
+  `docs/hands_on/mir_computational_core_01.md`
+  `docs/hands_on/transform_posegraph_01.md`
+  `docs/research_abstract/mir_computational_core_01.md`
 - legacy hands-on closeout commands:
   `docs/hands_on/current_phase_closeout_01.md`
 

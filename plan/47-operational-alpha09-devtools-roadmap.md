@@ -38,6 +38,7 @@ current repo still lacks:
 - final public viewer / telemetry ABI
 - durable audit backend
 - remote retained-artifact retrieval / expiry lifecycle
+- PoseGraph pose snapshot / anchor graph panel implementation
 
 ## decisions mirrored from specs/22 / 24
 
@@ -59,6 +60,9 @@ current repo still lacks:
 | retention/on-demand | `VIS-A1-07`, `OA09-09` | durable audit / remote retrieval is later |
 | witness relation | `OA09-04` | raw witness payload export is not allowed |
 | save/load timeline | `OA09-07` | distributed durable save/load is later |
+| pose snapshot timeline | planned via `specs/29` / `plan/54` | no current runtime panel |
+| anchor graph / anchor switch | planned via `specs/29` / `plan/54` | no current runtime panel |
+| split-frame violation row | planned via `specs/29` / `plan/54` | no current positive/negative PoseGraph sample |
 
 ## sequencing
 
@@ -81,6 +85,14 @@ minimum operational panel family:
 - fallback degradation
 - save/load timeline
 - observer-safe redacted view
+
+future panel candidates:
+
+- Mir compute step / expression trace
+- pose snapshot timeline
+- anchor graph
+- anchor switch
+- split-frame violation row
 
 ## validation direction
 

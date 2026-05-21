@@ -17,6 +17,7 @@
   - helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として分類する
   - evidence と first-floor evidence は operational completion と混同しない
   - α-0.5 / α-0.8 / α-0.9 operational readiness は session-bound workflow を要する
+  - typed host-I/O adapter evidence is not Mir-owned computational-core evidence
 - `L2`
   - current readiness reading
   - rough percentage reading
@@ -100,6 +101,8 @@ minimum conditions:
 - at least one typed host-I/O minimal demo exists
 - README / hands-on procedure reproduces the workflow
 
+The typed host-I/O demo may be adapter-owned. It does not prove Mir-owned arithmetic or general computation.
+
 ## α-0.8 operational readiness
 
 α-0.8 は same-session hot-plug runtime である。
@@ -154,7 +157,7 @@ current repo has:
 - alpha-0 evidence closeout for Stage B / D / E
 - practical first-floor package/checker/runtime/hot-plug/transport/save-load/devtools/product-preview carriers
 - bounded α-0.5 same-session runtime carrier
-- minimal typed external host-I/O direct semantic execution lane
+- minimal typed external host-I/O adapter lane
 - bounded α-0.8 same-session hot-plug runtime over the same carrier
 - bounded α-0.9 session-bound devtools export over the same carrier
 - bounded practical α-1 integrated workflow carrier over exact first-floor evidence and bounded operational carriers

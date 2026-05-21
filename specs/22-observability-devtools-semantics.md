@@ -137,6 +137,17 @@ but they do not by themselves satisfy session-bound observability.
 - save/load timeline
 - observer-safe redacted view
 
+Future computational / PoseGraph panel candidates:
+
+- Mir compute step / expression trace
+- effect and failure row summary around pure computation
+- pose snapshot timeline
+- anchor graph
+- anchor switch
+- split-frame violation row
+
+These candidates are not part of current α-0.9 completion unless a later package provides session-bound export evidence.
+
 ## completion-condition boundary
 
 observation is part of readiness, not afterthought.
@@ -196,6 +207,7 @@ current operational anchors:
 - session-bound witness relation panel
 - session-bound save/load timeline
 - explicit admin/debug full view or explicit kept-later marker
+- future PoseGraph panels must expose only redacted observer-safe transform summaries unless stronger authority is present
 
 ## deferred
 
@@ -203,6 +215,7 @@ current operational anchors:
 - final telemetry service
 - durable audit backend
 - detached runtime trace-stop proof
+- PoseGraph panel runtime implementation
 
 ## stop line
 

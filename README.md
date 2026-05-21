@@ -11,9 +11,9 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、そしてその次段の **canonical operational product sample suite** です。
+repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、その次段の **canonical operational product sample suite**、そして現在 rebaseline している **Mir Computational Core docs/spec line** です。
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、operational suite helper、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
-current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、versioned `package.mir.json`、local/Docker controlled runtime、observer-safe devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational suite helperです。operational suite は six runnable roots、shared attach packages、projection inventory、template-only starter catalog、retained portal/shard future inventory を持ちます。backend については `native host launch bundle` だけが actualized で、WASM / LLVM は docs-first inventory に留めます。broader distribution と final shared-space catalog breadth は user-spec-required gate です。
+current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、versioned `package.mir.json`、local/Docker controlled runtime、observer-safe devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational suite helperです。operational suite は six runnable roots、shared attach packages、projection inventory、template-only starter catalog、retained portal/shard future inventory を持ちます。backend については `native host launch bundle` だけが actualized で、WASM / LLVM は docs-first inventory に留めます。broader distribution と final shared-space catalog breadth は user-spec-required gate です。一方で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow の completion 証拠ではありません。
 
 ## 現在の到達点
 
@@ -43,6 +43,24 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - broader public distribution beyond the current developer-built binary + generated host launch bundle
 - FFI / engine adapter / host integration target
 - final shared-space operational catalog breadth
+- Mir-owned computational core first floor beyond current host-boundary `AddOne`
+
+## Mir Computational Core rebaseline
+
+2026-05-21 時点の promoted docs/spec line は `P-COMP-00` recognition rebaseline です。これは Product Alpha-1 の runnable workflow を捨てるものではなく、そこを execution / observation floor として保ったまま、Mir 自身が computation を所有する first floor を再設計するものです。
+
+新しい正本 / repository memory は次です。
+
+- `specs/28-mir-computational-core.md`
+- `specs/29-transform-posegraph-semantics.md`
+- `specs/30-projection-and-backend-boundary.md`
+- `specs/31-engine-wasm-ffi-adapter-boundary.md`
+- `plan/53-mir-computational-core-roadmap.md`
+- `plan/54-transform-posegraph-roadmap.md`
+- `plan/55-projection-backend-roadmap.md`
+- `plan/56-engine-adapter-roadmap.md`
+
+`P-COMP-01..04`、`P-POSE-01..02`、`P-PROJ-01`、`P-ENG-01` は planned package line です。現時点では implementation / runnable sample completion ではなく、completion gate と stop line を明確にした docs/spec roadmap として読む必要があります。
 
 ## Mirrorea の次軸
 
@@ -58,7 +76,7 @@ Mirrorea future-axis は current promoted line ではなく、docs-first / repo-
 
 - **Operational alpha theory-freeze / session-runtime line**
   規範判断は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を固定します。
-  `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` direct execution lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、final-public product hardening は引き続き未完です。
+  `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` host-I/O adapter lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`AddOne` は host-boundary evidence であり、Mir-owned computational-core completion ではありません。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、final-public product hardening は引き続き未完です。
 
 - **Product/Public-ready Mirrorea Spaces alpha-1 line**
   規範判断は `specs/25..27`、repository memory は `plan/50..52` に置きます。current line は `mirrorea-alpha`、versioned `package.mir.json`、local/Docker controlled runtime、non-final devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational product sample suiteを持ちます。
@@ -101,8 +119,11 @@ current line で reader が押さえるべき点は次です。
 - operational product sample suite:
   `specs/26-operational-product-sample-suite.md`、`specs/27-spatial-portal-and-shard-extension-boundary.md`
   `plan/51-operational-product-sample-roadmap.md`、`plan/52-portal-spatial-world-roadmap.md`
+- Mir computational core / PoseGraph / projection-backend boundary:
+  `specs/28-mir-computational-core.md`、`specs/29-transform-posegraph-semantics.md`、`specs/30-projection-and-backend-boundary.md`、`specs/31-engine-wasm-ffi-adapter-boundary.md`
+  `plan/53-mir-computational-core-roadmap.md`、`plan/54-transform-posegraph-roadmap.md`、`plan/55-projection-backend-roadmap.md`、`plan/56-engine-adapter-roadmap.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..50`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..56`
 
 ## 何が built-in で、何が user-defined か
 

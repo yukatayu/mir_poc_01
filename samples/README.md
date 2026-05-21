@@ -28,6 +28,11 @@
   - `python3 scripts/operational_product_samples.py check-all --format json` is the operational suite validation anchor
   - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/templates/world-core-starter --format json`, the same command for `membership-chat-starter` and `sugoroku-world-starter`, and `run-local` on those roots validate the current authoring starter catalog, but the templates are not counted as active operational sample roots
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
+- planned future product-alpha1 semantic roots
+  - `samples/product-alpha1/computational/` is planned for Mir-owned computation samples under `specs/28` / `plan/53`; it is not present or runnable in `P-COMP-00`
+  - `samples/product-alpha1/posegraph/` is planned for Transform / PoseGraph samples under `specs/29` / `plan/54`; it is not present or runnable in `P-COMP-00`
+  - `samples/product-alpha1/projection/` is planned for projection boundary samples under `specs/30` / `plan/55`; it is not present or runnable in `P-COMP-00`
+  - do not mark these roots workflow-ready until real check / run / observe / negative evidence exists
 - `not_implemented/`
   residual planned skeleton family
 - `prototype/`
@@ -82,7 +87,7 @@
   - `alpha/` は evidence closeout root
   - `practical-alpha1/` は current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、`RUN-01..04` local-runtime fixtures、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` hot-plug fixtures、`TR-A1-01..07` transport fixtures、`SL-A1-01/02/03` local save/load fixtures を持つ
   - `practical-alpha1/` もまだ active canonical runnable root ではなく、`previews/` root に `PE2E-01..09` の first practical product-preview floor を持ち、別 lane で `AV-A1-01/02/03` の first practical avatar preview floor を持つが、native avatar execution、same-session product runtime、final object package attach、detach runtime lifecycle、WAN/federation、distributed durable save/load、full product surfaces は later packages に残る
-  - `scripts/practical_alpha05_session.py` はこの root を first bounded α-0.5 same-session carrier として consume し、`OA05-07` で one minimal typed external `AddOne` direct execution lane を same-session observer surface へ接続する。
+  - `scripts/practical_alpha05_session.py` はこの root を first bounded α-0.5 same-session carrier として consume し、`OA05-07` で one minimal typed external `AddOne` host-I/O adapter lane を same-session observer surface へ接続する。これは Mir-owned computational-core evidence ではない。
   - `scripts/practical_alpha08_session_hotplug.py` は同じ root を bounded α-0.8 same-session hot-plug carrier として再利用し、`OA08-01..10` で debug / auth / rate-limit / object preview / deferred detach の accepted/rejected/deferred lifecycle を same-session observer surface へ接続する。rejected attach は active runtime state を mutate しないが、session-carried observation として残る。
   - `scripts/practical_alpha09_devtools.py` は同じ root を bounded α-0.9 session-bound devtools carrier として再利用し、`OA09-01..09` で event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を同じ session export へ接続する。final public viewer / telemetry ABI、durable audit、product-ready alpha-1 は later
   - `scripts/practical_alpha1_integrated_workflow.py` は first-floor exact evidence と bounded operational carriers を 1 つの bounded practical α-1 developer workflow として束ね、`PA1W-01..08` で source front-door、checker、same-session runtime、typed host-I/O、hot-plug、save/load、session devtools、product-preview evidence、negative guard、non-final stop lines を確認する。product/public-ready alpha-1、final public viewer/telemetry ABI、distributed durable save/load は later

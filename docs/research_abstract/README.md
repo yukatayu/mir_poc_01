@@ -56,6 +56,8 @@
   gradient observation profile と replication non-default reading の summary
 - `operational_portal_shard_starter_boundary_01.md`
   portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split の summary
+- `mir_computational_core_01.md`
+  Product Alpha-1 operational floor を保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line へ rebaseline する summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`
@@ -143,6 +145,8 @@
 - first shipped public surface scope
 - final shared-space operational catalog breadth
 - final public auth / visualization / projection / hot-plug API
+- Mir-owned computational core sample/runtime evidence
+- Transform / PoseGraph runtime evidence
 
 ## historical material
 

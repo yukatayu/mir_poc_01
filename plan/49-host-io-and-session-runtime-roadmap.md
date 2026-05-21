@@ -4,7 +4,7 @@
 
 この文書は、
 operational α-0.5 / α-0.8 / α-0.9 へ進むための
-**session runtime carrier**、**typed host-I/O direct execution lane**、**session-bound devtools export**
+**session runtime carrier**、**typed host-I/O adapter lane**、**session-bound devtools export**
 の sequencing を repository memory として固定する。
 
 ## current repo state
@@ -41,6 +41,7 @@ with only the minimal host-I/O lane:
 
 - developer workflow now has one external request/receipt demo
 - broader host families, final public viewer ABI, and durable audit remain later
+- Mir-owned computation is not proven; `AddOne` here is adapter-owned transform evidence
 
 ## recommended order
 
@@ -57,7 +58,7 @@ delivered:
 - observe/save/load against the same carrier
 - event DAG visibility against the same carrier
 
-### 2. `P-A1-20` — typed external host-I/O direct execution lane
+### 2. `P-A1-20` — typed external host-I/O adapter lane
 
 status:
 
@@ -72,6 +73,11 @@ delivered:
 - authority gate
 - observer-safe export
 - same-session event DAG request/response nodes
+
+non-claim:
+
+- this does not prove Mir-owned arithmetic or computational-core completion
+- pure `add_one` in Mir is tracked separately under `specs/28` and `plan/53`
 
 ### 3. `P-A1-21` — same-session hot-plug runtime
 
@@ -111,6 +117,7 @@ delivered:
 - do not treat preview bundle as session runtime
 - do not treat exact report recomposition as same-session observation
 - do not treat session-local devtools export as final public viewer / telemetry ABI
+- do not treat adapter-owned `AddOne` as Mir-owned computation
 
 ## validation direction
 
@@ -121,5 +128,5 @@ P-A1-18 only freezes the roadmap and category boundary.
 
 current recommendation:
 
-- reopen with a practical α-1 integrated workflow carrier
-- do not jump directly to final public viewer/telemetry ABI or product-ready α-1
+- current host-I/O / session runtime line is actualized where scoped
+- next computational correction is tracked by `P-COMP-01..04`, not by widening this adapter lane

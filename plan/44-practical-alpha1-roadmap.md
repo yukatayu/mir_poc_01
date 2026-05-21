@@ -354,7 +354,7 @@ recommended current promoted line:
 18. `P-A1-17` practical save-load preview carrier alignment
 19. `P-A1-18` operational α theory freeze
 20. `P-A1-19` operational α-0.5 session runtime carrier
-21. `P-A1-20` typed external host-I/O direct execution lane
+21. `P-A1-20` typed external host-I/O adapter lane
 22. `P-A1-21` operational α-0.8 same-session hot-plug runtime
 23. `P-A1-22` operational α-0.9 session-bound devtools export
 24. `P-A1-23` practical α-1 integrated workflow carrier
@@ -366,6 +366,7 @@ current reading after `P-A1-23`:
 - `P-A1-18`、`P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` are closed as the bounded operational α-0.5 / α-0.8 / α-0.9 sequence
 - `P-A1-23` is closed as a bounded practical α-1 integrated workflow carrier, not as product/public-ready alpha-1
 - `P-A1-24` recuts the repository status metric around externally reproducible operational workflows, and classifies helper / sidecar / report / expected JSON / first-floor runner rows as evidence rather than completion
+- `P-A1-20` is host-boundary evidence only; Mir-owned computation is tracked later by `specs/28` / `plan/53`
 - `P-A1-03` fixed the distinct carrier split:
   `checked package -> runtime plan -> local runtime report`
 - `P-A1-04a` fixed a second distinct carrier split:

@@ -7,9 +7,9 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..27`、`plan/39..52`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..31`、`plan/39..56`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..52`、`specs/13..27` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..56`、`specs/13..31` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
@@ -38,7 +38,8 @@
   - `python3 scripts/practical_alpha05_session.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/run-*/` and `packages/oa05-07-add-one-host-io/` through `crates/mir-runtime::practical_alpha05_session`, `crates/mir-runtime::practical_alpha05_host_io`, and exact `SL-A1-02` / `VIS-A1-05` source evidence
   - current actualized rows are `OA05-01..07`
-  - it actualizes same-session `start` / `observe` / `save` / `load` over the bounded local runtime carrier plus session-bound event DAG / observer-safe export and one minimal typed external `AddOne` direct execution lane
+  - it actualizes same-session `start` / `observe` / `save` / `load` over the bounded local runtime carrier plus session-bound event DAG / observer-safe export and one minimal typed external `AddOne` host-I/O adapter lane
+  - this lane is not Mir-owned computational-core evidence; pure `add_one` in Mir is tracked under `specs/28` / `plan/53`
   - it does not claim same-session hot-plug runtime, distributed durable save/load, or final public runtime/devtools API
 - practical alpha-0.8 same-session hot-plug lane now has an alpha-local script surface
   - `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`
@@ -103,6 +104,12 @@
   - backend feasibility inventory is also docs-first; no generic WASM/LLVM build helper is added beyond the existing `build-native-bundle` host-launch path
   - `future/gradient-observation.profile.json` remains docs-first/profile-first and non-executable, but the bounded `two-shard-gradient-observation/` runtime root and helper command now actualize one observer-only same-session cut without claiming continuous sync or write authority
   - it does not claim final product, final public CLI/API, direct `.mir` grammar, WAN/federation, distributed durable save/load R3/R4, final public viewer/telemetry ABI, direct Mir-to-machine-code, signature-is-safety, or arbitrary native execution
+- Mir Computational Core / PoseGraph / projection-boundary future helpers are planned only
+  - `scripts/mir_computational_samples.py` does not exist yet
+  - `scripts/posegraph_samples.py` does not exist yet
+  - `scripts/projection_boundary_samples.py` does not exist yet
+  - `scripts/engine_adapter_boundary_samples.py` does not exist yet
+  - do not include these planned commands in current validation floors until real files, tests, and sample rows exist
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

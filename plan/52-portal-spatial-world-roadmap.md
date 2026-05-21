@@ -46,6 +46,8 @@
    later user-final distribution decision scoping
 14. much later
    continuous infinite federation / WAN line
+15. separate semantics line
+   Transform / PoseGraph and no-split-frame are tracked by `specs/29` / `plan/54` before any promotion into portal/shard operational roots
 
 ## current portal cut
 
@@ -124,7 +126,8 @@
 
 - `P-OPS-26` closeout 後の current recommendation は `later user-final distribution decision` だが、これは active self-driven package ではなく user-spec-required gate である
 - shard line の immediate reopen は引き続き推奨しない。current front door、current shipped surface、current broader distribution stance は versioned `package.mir.json`、documented `mirrorea-alpha`、native host launch bundle replay、narrowed alpha replay bundle unit、そして developer-built binary + generated host-bundle only delivery unit に固定された
-- current recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、broader Sugoroku reopening も non-promoted queue に戻し、さらに `user_final_decision_scope` で current catalog scope / delivery unit / user-spec-required gate を固定したので、次の actual reopen は user input の後にだけ再評価すること
+- current P-OPS recommendation は、portal/shard bounded runtime line と starter reopen queue を維持したまま、broader Sugoroku reopening も non-promoted queue に戻し、さらに `user_final_decision_scope` で current catalog scope / delivery unit / user-spec-required gate を固定したので、next P-OPS runtime reopen は user input の後にだけ再評価すること
+- repo-wide docs/spec recommendation は `P-COMP-01` へ進む。PoseGraph は `P-POSE-01..02` の separate semantics line として扱い、current portal/shard active roots に直接混ぜない。
 
 ## avoid
 
@@ -132,6 +135,7 @@
 - shard を continuous sync completion と書くこと
 - object replication profile を default 必須扱いすること
 - vector clock default を membership freshness に持ち込むこと
+- PoseGraph planned samples を current portal/shard workflow-ready evidence と書くこと
 
 ## open questions
 

@@ -129,6 +129,19 @@ SaveObject = {
 local-only α-0.5 floor は subset 実装でよいが、
 full shape は spec 上で visible に保つ。
 
+Future computational / PoseGraph widening may add:
+
+```text
+computational_state,
+array_record_state,
+anchor_graph,
+pose_snapshot_frontier,
+pose_versions,
+anchor_switch_state
+```
+
+These are carrier candidates, not current implementation claims. If admitted, they remain inside `SaveObject` and under `Consistent(cut)`; they must not become side state outside cut semantics.
+
 ## load admissibility
 
 load may succeed only if:
@@ -145,6 +158,8 @@ External irreversible effects are compensated or isolated
 ```
 
 current local-only floor が証明してよいのは subset に限る。
+
+Future PoseGraph load admissibility must also reject stale anchor witness, stale fallback position, and incoherent anchor component snapshot. If the saved anchor cannot be safely resumed, load must require new witness / new epoch / explicit reacquire rather than hidden repair.
 
 ## no stale membership / witness / lease resurrection
 

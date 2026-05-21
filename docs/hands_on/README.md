@@ -33,6 +33,8 @@
 | `operational_backend_inventory_01.md` | operational suite の host launch bundle / WASM / LLVM backend boundary を docs-first inventory として読む入口 |
 | `operational_gradient_observation_profile_01.md` | portal/shard future line の observer-only gradient observation profile を docs-first に読む入口 |
 | `operational_portal_shard_starter_boundary_01.md` | portal/shard line を current starter catalog に広げず、active roots と `future/` inventory を分けて読む入口 |
+| `mir_computational_core_01.md` | current `AddOne` を host-boundary evidence に限定し、Mir-owned computation line を planned-only として読む入口 |
+| `transform_posegraph_01.md` | Transform / PoseGraph / no-split-frame line を planned-only として読む入口 |
 
 ## 既存の長い入門文書
 

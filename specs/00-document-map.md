@@ -39,6 +39,7 @@
   - `operational_backend_inventory_01.md` は、host launch bundle / WASM / LLVM comparison inventory と current non-claims を reader-facing に短く読むための summary である。
   - `operational_gradient_observation_profile_01.md` は、portal/shard future line における observer-only gradient observation profile を reader-facing に短く読むための summary である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split を reader-facing に短く読むための summary である。
+  - `mir_computational_core_01.md` は、Product Alpha-1 operational floor を保ちながら current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -57,6 +58,8 @@
   - `operational_backend_inventory_01.md` は、operational suite の current host launch bundle line と WASM/LLVM future boundary inventory を読むための landing page である。
   - `operational_gradient_observation_profile_01.md` は、gradient observation profile と replication non-default reading を docs-first に確認するための landing page である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard authoring が current line では active roots から始まり `future/` blueprint を starter 化しないことを確認する landing page である。
+  - `mir_computational_core_01.md` は、Mir-owned computational core line が docs/spec rebaseline 段階であり、future sample/helper commands を planned-only と読むための landing page である。
+  - `transform_posegraph_01.md` は、Transform / PoseGraph line が docs/spec rebaseline 段階であり、no-split-frame / anchor / pose snapshot を planned-only と読むための landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
@@ -122,6 +125,9 @@
 - `sub-agent-pro/*.md`
   - task が specific handoff を名指しした場合は、その handoff を user 指示順で先に読む。
   - ただし handoff 自体は規範正本ではない。必要な内容は `specs/`、`plan/`、`docs/`、`docs/reports/` へ mirror する。
+- `sub-agent-pro/mirrorea_mir_computational_core_handoff.md`
+  - 2026-05-21 時点の computational-core drift correction handoff であり、Product Alpha-1 operational floor を保持しつつ、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line へ rebaseline するための working directive である。
+  - 規範判断の正本ではない。mirror 先は `specs/28..31`、repository memory は `plan/53..56`、reader-facing docs は `docs/hands_on/mir_computational_core_01.md`、`docs/hands_on/transform_posegraph_01.md`、`docs/research_abstract/mir_computational_core_01.md` である。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
@@ -196,6 +202,30 @@
   - portal/world-link、two-shard hard boundary、replication profile optionality の future boundary を置く。
 - `plan/52-portal-spatial-world-roadmap.md`
   - portal/shard future line の repository-memory roadmap を置く。
+- `specs/28-mir-computational-core.md`
+  - Mir-owned computation の規範境界を置く。
+  - current typed external `AddOne` を host-boundary evidence に限定し、pure/effect split、explicit failure row、C-like first floor、future Rust-like widening、completion gates、non-claims を固定する。
+- `plan/53-mir-computational-core-roadmap.md`
+  - Mir computational core の repository-memory roadmap を置く。
+  - `P-COMP-00..04`、planned sample matrix、future helper anchors、stop lines を整理する。
+- `specs/29-transform-posegraph-semantics.md`
+  - Transform / PoseGraph の規範境界を置く。
+  - `Transform`、`PoseSnapshot`、`pose_version`、anchor graph、fallback admissibility、same-client same-observation-snapshot no-split-frame を固定する。
+- `plan/54-transform-posegraph-roadmap.md`
+  - PoseGraph line の repository-memory roadmap を置く。
+  - planned samples、positive / negative no-split-frame evidence、save/load / devtools hooks を整理する。
+- `specs/30-projection-and-backend-boundary.md`
+  - projection / backend boundary の規範境界を置く。
+  - source -> typed IR -> projection IR -> target manifest -> packet schema -> FFI schema の pipeline を inventory として固定し、current executable truth が native host launch bundle に留まることを明記する。
+- `plan/55-projection-backend-roadmap.md`
+  - projection / backend boundary の repository-memory roadmap を置く。
+  - `P-PROJ-01` target / packet / FFI inventory と backend non-claims を整理する。
+- `specs/31-engine-wasm-ffi-adapter-boundary.md`
+  - engine / WASM / FFI adapter boundary の規範境界を置く。
+  - Unity / Unreal / renderer / WASM / native library を typed provider として扱い、world semantics が Mir / Mirrorea に残ることを固定する。
+- `plan/56-engine-adapter-roadmap.md`
+  - engine / WASM / FFI adapter boundary の repository-memory roadmap を置く。
+  - provider classes、adapter contract fields、future validation anchors、non-default native/WASM execution policy を整理する。
 
 ## 規範的な読書順
 
@@ -218,6 +248,7 @@
 12. product/public-ready alpha-1 line を扱う場合は `25-product-alpha1-public-boundary.md` も読む
 13. operational product sample suite を扱う場合は `26-operational-product-sample-suite.md` も読む
 14. portal / shard future boundary を扱う場合は `27-spatial-portal-and-shard-extension-boundary.md` も読む
+15. Mir-owned computation / PoseGraph / projection-backend / engine-adapter boundary を扱う場合は `28-mir-computational-core.md`、`29-transform-posegraph-semantics.md`、`30-projection-and-backend-boundary.md`、`31-engine-wasm-ffi-adapter-boundary.md` も読む
 
 ## 例示文書
 

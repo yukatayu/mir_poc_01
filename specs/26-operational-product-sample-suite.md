@@ -112,7 +112,7 @@ samples/product-alpha1/operational/
 - current bounded carrier leaves interactive turn choice surface, broader negative-row catalog, and networked multi-participant control undefined
 - accepts one schema-backed projection inventory summary from `deployments/projection/projection.profile.json`, surfaced through `check`, runtime plan, and observer-safe devtools projection panels
 - keeps save/load visibility, transport visibility, and hot-plug visibility on the same product alpha session carrier
-- current direct execution lane remains bounded to the existing typed host-I/O `AddOne` adapter and does not claim final interactive game runtime completion
+- current host-I/O lane remains bounded to the existing typed external `AddOne` adapter and does not claim Mir-owned computational-core completion or final interactive game runtime completion
 
 ### PortalWorldLink
 

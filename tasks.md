@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-07 13:25 JST
+最終更新: 2026-05-21 17:35 JST
 
 ## この文書について
 
@@ -21,23 +21,32 @@
   `scripts/product_alpha1_installed_binary_check.py check-all` builds `target/debug/mirrorea-alpha`, generates a native host launch bundle, and verifies bundle `run.sh check` / `run.sh view`.
 - canonical operational product sample suite is reproducible:
   `samples/product-alpha1/operational/` covers `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation`, shared attach packages, projection inventory, local/Docker transport, observer-safe devtools, R0/R2 save evidence, native host bundle, and helper-reported scope blocks.
-- current self-driven queue is exhausted:
+- Product Alpha-1 operational runtime widening queue is exhausted:
   `widening_queue_scope` keeps room-chat, portal/shard starter, and broader Sugoroku reopenings non-promoted; `user_final_decision_scope` marks broader distribution / final catalog breadth as a user-spec-required gate.
+- current docs/spec self-driven line is reopened:
+  `P-COMP-00` rebaselined the target from distribution-only to Mir-owned computation, while preserving the existing alpha runtime/product floor.
 
 ## ordered self-driven packages
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | no active self-driven package | `Macro 7/8`, `U-spec gate` | keep current bounded alpha-1 line stable while waiting for broader distribution / final catalog breadth decision | user chooses the next shipped-surface / catalog direction, then a concrete reopen package can be scoped | hold |
+| 1 | `P-COMP-01` Mir computational core spec and sample scaffold | `Macro 1`, docs/spec front half | define planned computational sample matrix and completion gates without implementation overclaim | `specs/28` / `plan/53` remain indexed, sample rows are classified, current AddOne non-claim is visible | small |
+| 2 | `P-COMP-02` pure AddOne in Mir | `Macro 1/7`, implementation later | make `x + 1` Mir-owned while host input/output remain typed external adapters | host input / Mir compute / host output are separate observable events | medium |
+| 3 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation later | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
+| 4 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation later | separate pure computation from effectful host / publish / observe / witness / handoff calls | undeclared effect / failure / capability rows are rejectable | medium |
+| 5 | `P-POSE-01` Transform / PoseGraph scaffold | `Macro 8`, docs/spec front half | define `Transform`, `PoseSnapshot`, anchor graph, fallback admissibility, and no-split-frame | planned sample matrix and non-claims are indexed | small |
+| 6 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation later | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
+| 7 | `P-PROJ-01` projection target / packet / FFI inventory | `Macro 7`, docs/spec front half | represent server/client/adapter target manifests and packet/FFI schemas as inventory | report/devtools surface exists and is explicitly non-codegen | small-medium |
+| 8 | `P-ENG-01` engine/WASM/FFI adapter boundary | `Macro 7/8`, docs/spec front half | fix provider contract fields while keeping semantics in Mir/Mirrorea | provider classes and stop lines are indexed | small |
 
 ## current recommendation
 
 - recommended reopen point:
-  user-spec-required later user-final distribution decision
+  `P-COMP-01` Mir computational core spec and sample scaffold
 - recommendation reason:
-  current runnable floors and helper-reported queue state agree that no further operational runtime widening is promoted without user input. The least risky next step is to decide whether alpha-1 remains a developer-built binary + generated host launch bundle with a bounded narrow showcase, or broadens toward archive / installer / hosted-service / wider final catalog.
+  current runnable floors remain valid, but the handoff identified a more basic architecture drift: host-boundary `AddOne` must not stand in for Mir-owned computation. The least risky next self-driven step is docs/spec scaffold and sample matrix, not runtime widening or distribution hardening.
 - stop line:
-  do not claim final public parser / viewer / telemetry ABI, distributed durable save-load, WAN/federation, arbitrary native execution, or final product completion.
+  do not claim final public parser / viewer / telemetry ABI, distributed durable save-load, WAN/federation, arbitrary native execution, final product completion, or current AddOne as Mir computational-core completion.
 
 ## research-discovery items
 
@@ -49,6 +58,8 @@
 | product checker finite fragment breadth | `specs/25` and product CLI | existing rows / broader product fragment | keep the bounded package schema, effect/failure, capability/witness, message recovery, and savepoint policy rows |
 | projection inventory breadth | future backend / server-client split | current summary / richer projection IR / planner-adjacent IR | keep current schema-backed summary until actual split/planner work is chosen |
 | post-gradient operational widening | `specs/26..27` | room-chat / Sugoroku / portal-shard starters / user-final gate | keep current runtime widenings non-promoted until the user-final gate is decided |
+| computational-core proof shape | `specs/28` / `plan/53` | pure fragment first / combined effectful judgment first | start with pure fragment, add explicit effect and failure rows at effectful layer |
+| PoseGraph carrier shape | `specs/29` / `plan/54` | renderer frame / observation snapshot / save carrier | use same-client observation snapshot and later save/devtools carrier hooks |
 
 ## user decision items
 
@@ -67,6 +78,7 @@
 | runnable dashboard refresh | keep sample status, validation command, and blocker columns evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | conceptual-only rows must not be marked workflow-ready |
 | operational suite guide refresh | keep `samples/product-alpha1/operational/`, hands-on guide, research summary, and helper CLI surface synchronized | `python3 -m unittest scripts.tests.test_operational_product_samples`, `python3 scripts/operational_product_samples.py check-all --format json` | report if touched | do not promote future inventory into runnable claim |
 | regression repair | repair docs / tests / formatting failures without unrelated feature work | affected tests, `cargo fmt --check`, `git diff --check` | report if non-trivial | do not mix feature widening into maintenance |
+| computational docs freshness | keep `specs/28..31`, `plan/53..56`, snapshot docs, and planned sample rows aligned | docs validation and source hierarchy checks | new report | planned samples/scripts must not be marked runnable |
 
 ## non-promoted references
 
