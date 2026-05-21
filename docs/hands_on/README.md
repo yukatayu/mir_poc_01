@@ -37,6 +37,7 @@
 | `transform_posegraph_01.md` | `P-POSE-02` bounded PoseGraph helper evidence lineの accepted / violation / planned splitを読む入口 |
 | `minimal_alpha1_patterns_01.md` | alpha-1 の最小実用 pattern set と strict row / rejection / inventory verifier を読む入口 |
 | `autonomous_execution_01.md` | `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` front-half と implementation half を途中質問で止まらず進める execution contract を読む入口 |
+| `full_system_v1_roadmap_01.md` | source-first Full System V1 roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む入口 |
 
 ## 既存の長い入門文書
 

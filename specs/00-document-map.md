@@ -41,6 +41,7 @@
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split を reader-facing に短く読むための summary である。
   - `mir_computational_core_01.md` は、Product Alpha-1 operational floor を保ちながら current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を reader-facing に短く読むための summary である。
   - `autonomous_execution_01.md` は、`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の docs/scaffold front-half、implementation half、user-spec-required gate の隔離、validation / report / commit cadence を読むための summary である。
+  - `full_system_v1_roadmap_01.md` は、`P-FS-00` Full System V1 roadmap rebaseline、source-first target、`FS-00..FS-11`、次 package `P-MIR-01`、non-claims を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -62,6 +63,7 @@
   - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-02` first direct executable row、`P-COMP-03` helper-executable first-floor rows、helper matrix、legacy AddOne non-reinterpretation を読むための landing page である。
   - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-02` bounded helper evidence、helper matrix、accepted/violation/planned splitを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
+  - `full_system_v1_roadmap_01.md` は、Full System V1 source-first roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
@@ -130,6 +132,9 @@
 - `sub-agent-pro/mirrorea_mir_computational_core_handoff.md`
   - 2026-05-21 時点の computational-core drift correction handoff であり、Product Alpha-1 operational floor を保持しつつ、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line へ rebaseline するための working directive である。
   - 規範判断の正本ではない。mirror 先は `specs/28..31`、repository memory は `plan/53..56`、reader-facing docs は `docs/hands_on/mir_computational_core_01.md`、`docs/hands_on/transform_posegraph_01.md`、`docs/research_abstract/mir_computational_core_01.md` である。
+- `sub-agent-pro/full-system-completion-001/*.md`
+  - 2026-05-22 時点の Full System V1 completion handoff package であり、Product Alpha-1 / operational suite / computational first-floor evidence を final product と混同せず、textual Mir / typed IR / interpreter / PoseGraph runtime / projection IR / provider admission へ進む roadmap rebaseline の working directive である。
+  - 規範判断の正本ではない。mirror 先は `specs/33..38`、repository memory は `plan/58..63`、reader-facing docs は `docs/hands_on/full_system_v1_roadmap_01.md` と `docs/research_abstract/full_system_v1_roadmap_01.md` である。
 - `sub-agent-pro/codex_theory_handoff_2026-04-18.md`
   - 2026-04-18 時点の detailed theory handoff であり、multimodal dependent core を principal theory spine に置く current recommendation、layered typing/proof architecture、Lean-first proof roadmap を補強する。
   - 規範判断の正本ではないが、`specs/examples/475` 以後の theory-spine / proof-roadmap package を読むときの explanation source として使ってよい。
@@ -235,6 +240,37 @@
 - `plan/57-autonomous-computational-core-master-plan.md`
   - computational-core / PoseGraph / projection / engine-adapter line の autonomous master plan を置く。
   - front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` closeout、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02`、closeout audit の deliverable / validation / non-claim / reviewer cadence を整理する。
+- `specs/33-full-system-v1-scope.md`
+  - Full System V1 の docs-first scope を置く。
+  - Mir source files を semantic source of truth とし、`package.mir.json` を alpha compatibility / package artifact に限定し、`FS-00..FS-11` と non-claims を固定する。
+- `specs/34-textual-mir-alpha-grammar.md`
+  - textual Mir alpha grammar の初期境界を置く。
+  - parser / AST / spans / diagnostics、minimum C-like surface、effect boundary syntax、negative grammar rows、final grammar non-claim を整理する。
+- `specs/35-mir-typed-ir-and-interpreter.md`
+  - textual Mir lowering、typed IR、checker、safe C-like interpreter の境界を置く。
+  - pure/effectful split、effect row、failure row、static/runtime rejection split、compute trace、save/load carrier relation を整理する。
+- `specs/36-projection-ir-and-boundary-preservation.md`
+  - projection IR、deployment plan、target manifest、packet / FFI schema、boundary preservation report の境界を置く。
+  - server/client/adapter split が source semantics を silently change しないことを固定する。
+- `specs/37-posegraph-runtime-semantics.md`
+  - Transform / PoseGraph の runtime-visible target を置く。
+  - no-split-frame runtime check、anchor/fallback/reacquire、save/load relation、devtools panels、renderer non-owner rule を整理する。
+- `specs/38-engine-provider-admission.md`
+  - engine / WASM / FFI / native provider admission の境界を置く。
+  - provider manifest、schema/effect/failure/capability/resource/sandbox/rollback checks、native disabled default、WASM inventory/admission split を整理する。
+- `plan/58-full-system-v1-roadmap.md`
+  - Full System V1 の repository-memory roadmap を置く。
+  - `P-FS-00` から `P-FSV1-99` までの package order、planned sample root、validation direction、stop lines を整理する。
+- `plan/59-textual-mir-roadmap.md`
+  - textual Mir grammar / parser / source sample line の repository-memory roadmap を置く。
+- `plan/60-computational-runtime-roadmap.md`
+  - typed IR / checker / interpreter / effectful integration の repository-memory roadmap を置く。
+- `plan/61-posegraph-runtime-roadmap.md`
+  - PoseGraph runtime / save-load / devtools widening の repository-memory roadmap を置く。
+- `plan/62-projection-backend-roadmap.md`
+  - projection IR / packet and FFI schemas / local server-client split の repository-memory roadmap を置く。
+- `plan/63-engine-provider-roadmap.md`
+  - provider admission / renderer pose backend demo / later sandboxed WASM/native candidate の repository-memory roadmap を置く。
 
 ## 規範的な読書順
 
@@ -259,6 +295,7 @@
 14. portal / shard future boundary を扱う場合は `27-spatial-portal-and-shard-extension-boundary.md` も読む
 15. Mir-owned computation / PoseGraph / projection-backend / engine-adapter boundary を扱う場合は `28-mir-computational-core.md`、`29-transform-posegraph-semantics.md`、`30-projection-and-backend-boundary.md`、`31-engine-wasm-ffi-adapter-boundary.md` も読む
 16. autonomous execution / completion cadence を扱う場合は `32-autonomous-execution-and-completion-contract.md` も読む
+17. Full System V1 / textual Mir / typed IR / projection IR / provider admission を扱う場合は `33-full-system-v1-scope.md`、`34-textual-mir-alpha-grammar.md`、`35-mir-typed-ir-and-interpreter.md`、`36-projection-ir-and-boundary-preservation.md`、`37-posegraph-runtime-semantics.md`、`38-engine-provider-admission.md` も読む
 
 ## 例示文書
 

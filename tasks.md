@@ -1,108 +1,108 @@
 # tasks
 
-最終更新: 2026-05-21 23:37 JST
+最終更新: 2026-05-22 03:21 JST
 
-## この文書について
+## document role
 
-- この文書は repo 全体の **current task map** です。
-- 規範判断の正本は `specs/`、長期比較と source trace は `plan/`、runnable sample 状態は `samples_progress.md`、実行証跡は `docs/reports/` に置きます。
-- append-only 履歴ではありません。current checkpoint、次に詰める gate、blocker を読める snapshot として保ちます。
-- 進捗率は primary metric ではありません。helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として書きます。
+This document is the repo-wide **current task map**. It is not normative source and is not append-only history.
 
-## current task-level status
+- Normative source: `specs/`
+- Repository memory: `plan/`
+- Status snapshot: `progress.md`
+- Runnable dashboard: `samples_progress.md`
+- Execution evidence: `docs/reports/`
 
-- active executable floor is maintained:
-  `samples/clean-near-end/`, `samples/current-l2/`, and `samples/lean/` remain the current-L2 runnable / source / mechanization roots.
-- operational alpha readiness is separated and actualized where scoped:
-  α-0.5 local observable runtime, α-0.8 same-session hot-plug runtime, and α-0.9 session-bound devtools have bounded workflow anchors under `specs/19..24` and `plan/45..49`.
-- product alpha-1 release candidate is reproducible:
-  `samples/product-alpha1/demo`, `mirrorea-alpha`, and `scripts/product_alpha1_release_check.py check-all` cover check / run-local / session / attach / save / load / quiescent-save / local-Docker transport / export-devtools / view / build-native-bundle / demo.
-- installed-binary adoption probe is reproducible:
-  `scripts/product_alpha1_installed_binary_check.py check-all` builds `target/debug/mirrorea-alpha`, generates a native host launch bundle, and verifies bundle `run.sh check` / `run.sh view`.
-- canonical operational product sample suite is reproducible:
-  `samples/product-alpha1/operational/` covers `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation`, shared attach packages, projection inventory, local/Docker transport, observer-safe devtools, R0/R2 save evidence, native host bundle, and helper-reported scope blocks.
-- Product Alpha-1 operational runtime widening queue is exhausted:
-  `widening_queue_scope` keeps room-chat, portal/shard starter, and broader Sugoroku reopenings non-promoted; `user_final_decision_scope` marks broader distribution / final catalog breadth as a user-spec-required gate.
-- current docs/spec self-driven line is in the implementation-half queue:
-  `P-COMP-00` rebaselined the target from distribution-only to Mir-owned computation, while preserving the existing alpha runtime/product floor, and the front-half scaffolds are now closed.
-- `P-COMP-01` is closed:
-  `samples/product-alpha1/computational/`, `matrix.json`, `scripts/mir_computational_samples.py`, and the planned-only rejection surface are now actualized as scaffold baseline.
-- `P-COMP-02` is closed:
-  `samples/product-alpha1/computational/add-one-pure-mir/`, `package.mir.json`, `crates/mir-semantics::computational_core`, product-alpha schema/runtime/session/savepoint support, and helper/runtime tests now prove one bounded Mir-owned row. Legacy adapter-owned `typed_host_io.add_one` remains unchanged.
-- `P-COMP-03` is closed:
-  `crates/mir-semantics::computational_core` now covers variables / arrays / records / control-flow / imports, product-alpha schema/runtime tests cover the widened module registry, and `samples/product-alpha1/computational/` now has 5 accepted helper rows and 5 expected runtime rejection rows.
-- `P-COMP-04` is closed:
-  `samples/product-alpha1/computational/host-io-internal-transform/` now has one direct accepted host read/write boundary row and three expected `check` rejections, while product-alpha schema/runtime tests cover `required_capabilities` and `failure_tag` as declared admission-boundary evidence without claiming broad effectful runtime semantics.
-- `P-POSE-01` is closed:
-  `samples/product-alpha1/posegraph/`, `matrix.json`, `scripts/posegraph_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime proof.
-- `P-POSE-02` is closed:
-  `samples/product-alpha1/posegraph/` now has helper-only `package.mir.json` inputs for `pose-04` and `pose-05`, one accepted same-snapshot row, one `violation_export` mismatch row, and seven residual planned rows. This is bounded helper evidence, not full PoseGraph runtime completion.
-- `P-PROJ-01` is closed:
-  `samples/product-alpha1/projection/`, `matrix.json`, `scripts/projection_boundary_samples.py`, and compatibility-row inventory are now actualized. This is scaffold closeout, not code generation or binary split.
-- `P-ENG-01` is closed:
-  `samples/product-alpha1/engine-adapter/`, `matrix.json`, `scripts/engine_adapter_boundary_samples.py`, and provider contract inventory are now actualized. This is scaffold closeout, not provider admission.
-- front-half docs/scaffold closeout is complete:
-  the computational / PoseGraph / projection / engine-adapter roots, helpers, tests, validators, reports, and snapshot docs are synchronized, so the promoted queue now moves to the implementation half.
-- all-up closeout audit is closed:
-  focused helpers, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks have been rerun after `P-POSE-02`, so the current self-driven package chain is closed through its planned audit package.
-- `P-PAT-01` minimal alpha-1 pattern verification is closed:
-  `scripts/minimal_alpha1_patterns.py` and `docs/hands_on/minimal_alpha1_patterns_01.md` now provide a compact strict verifier over existing computational / PoseGraph / projection / engine-adapter rows, while keeping product release-candidate and operational Sugoroku as workflow anchors rather than new final-product claims.
-- autonomous execution default is reviewer-integrated and fixed:
-  `specs/32` and `plan/57` define a docs/scaffold front half, an implementation half, safe defaults, sub-agent review cadence, validation floor, report / commit / push policy, and user-spec-required gate isolation. `plan/57` is repository memory; live queue authority remains this document plus `progress.md`.
+## current promoted package
+
+Current closeout package:
+
+```text
+P-FS-00 full-system-v1-roadmap-rebaseline
+```
+
+Next promoted package after this closeout:
+
+```text
+P-MIR-01 textual Mir alpha grammar
+```
+
+Purpose:
+
+- begin `FS-01`.
+- create a real alpha textual Mir source entrypoint.
+- keep `package.mir.json` as alpha compatibility/package artifact, not final source authority.
 
 ## ordered self-driven packages
 
-No promoted self-driven package remains in the current chain. The line defined in `plan/57` is closed through all-up closeout.
+| Order | Package | Macro / stage | Goal | Close condition | Rough estimate |
+|---:|---|---|---|---|---|
+| 1 | `P-MIR-01 textual Mir alpha grammar` | `Macro 3`, `S3 -> S4` | parse source-first computational/effect samples | AST + spans + diagnostics + positive/negative source samples | medium |
+| 2 | `P-MIR-02 typed IR and checker` | `Macro 3`, `S4 -> S5` | lower AST to typed IR and checker | type/scope/import/effect/failure/capability rows accepted/rejected | heavy |
+| 3 | `P-MIR-03 computational interpreter` | `Macro 3`, `S4 -> S5` | execute safe C-like typed IR | AddOne, variables, arrays, records, control-flow, imports execute with negative rows | heavy |
+| 4 | `P-MIR-04 effectful integration` | `Macro 1/3`, `S4 -> S5` | connect computation to Mir effects | perform / publish / observe / witness / handoff / fallback / cut rows visible, including required cut/save negative rows where executable | heavy |
+| 5 | `P-POSE-03 runtime PoseGraph` | `Macro 8`, `S3 -> S5` | make Transform / Anchor / PoseVersion runtime state | no-split-frame, AnchorSwitch fields, fallback/reacquire accepted/rejected in session runtime | heavy |
+| 6 | `P-POSE-04 pose save/devtools` | `Macro 8/7`, `S4 -> S5` | add pose save/load and panels | pose frontier save/load positive/negative admissibility rows and observer-safe PoseGraph panels | medium |
+| 7 | `P-PROJ-02 projection IR realization` | `Macro 7`, `S3 -> S4` | source/typed IR to projection IR | target manifest generated from source-derived IR | heavy |
+| 8 | `P-PROJ-03 boundary schemas` | `Macro 7`, `S4 -> S5` | packet/FFI schema preservation | positive/negative report covers effect/failure/capability/authority/provider-policy/rollback boundaries | medium |
+| 9 | `P-PROJ-04 server/client local split` | `Macro 6/7`, `S4 -> S5` | local/Docker server/client roles | roles run from projection manifest plus write-escalation or undeclared-authority rejection row | heavy |
+| 10 | `P-ENG-02 provider admission` | `Macro 7`, `S3 -> S5` | runtime provider manifest admission | accepted bounded provider, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only or sandbox-accepted evidence | medium |
+| 11 | `P-ENG-03 renderer pose backend demo` | `Macro 7/8`, `S4 -> S5` | renderer receives pose snapshot | renderer stays non-semantic-owner | medium |
+| 12 | `P-FSV1-01 source operational suite` | `Macro 8`, `S4 -> S5` | source-first WorldCore/MembershipChat/Sugoroku | check/run/devtools over source-first roots | heavy |
+| 13 | `P-FSV1-02 portal/shard source samples` | `Macro 8`, `S4 -> S5` | source-first portal/shard/gradient | positive/negative portal/shard evidence | heavy |
+| 14 | `P-FSV1-03 full V1 release check` | `Macro 0/7/8`, `S5 -> S6` | clean clone Full V1 workflow | release check, viewer, bundle, reports | heavy |
+| 15 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
 
-## current recommendation
+## self-driven macro phase reading
 
-- recommended reopen point:
-  none in the current self-driven chain
-- recommendation reason:
-  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The planned all-up audit has also passed, and `P-PAT-01` adds a compact verifier for the minimal alpha-1 pattern set. Future reopenings should be chosen explicitly from the research-discovery or user-decision items below rather than pretending another package is already promoted.
-- stop line:
-  do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / helper-backed no-split-frame evidence as implementation completion.
+| Macro | Reading | Closeout path |
+|---|---|---|
+| `Macro 0` | docs / reports / validator discipline | self-driven through every package close |
+| `Macro 1` | semantics and invariant boundary | self-driven for source/typed IR/cut/PoseGraph wording; user gates only for final public commitments |
+| `Macro 3` | compile-ready minimal actualization | current main implementation path through `P-MIR-01..04` |
+| `Macro 6` | distributed fabric / runtime evolution | local/Docker split can be self-driven; WAN/federation remains user decision |
+| `Macro 7` | projection/backend/provider/developer surface | self-driven for bounded alpha evidence; final ABI/SDK/distribution remains user decision |
+| `Macro 8` | domain/application realization | source-first operational samples can be self-driven after language/runtime base |
 
-## research-discovery items
+## user decision gates
+
+| Gate | Affects | Main options | Current recommendation |
+|---|---|---|---|
+| final public grammar | final language/API | freeze alpha grammar / revise before public / keep package compatibility longer | do not freeze in Full V1; keep alpha grammar explicit |
+| final ABI / SDK | external developers | Rust library ABI / CLI-only / hosted API / engine SDK | defer until source/typed IR/projection evidence exists |
+| broader distribution | product delivery | developer-built bundle / release archive / installer / hosted service | keep current developer-built binary + generated host bundle until user choice |
+| final shared-space catalog breadth | product scope | bounded showcase / broader room catalog / Reversed Library path | keep bounded showcase; decide final catalog separately |
+| production WAN/federation | runtime/network | local/Docker only / WAN federation / hosted fabric | keep out of Full V1 unless explicitly promoted |
+| distributed durable save/load R3/R4 | persistence | R0/R2 only / R3 durable / R4 distributed replay | keep R3/R4 later |
+| native/WASM execution | provider boundary | disabled/inventory / sandboxed WASM / bounded native | default disabled/inventory until provider admission package proves safety |
+| final engine adapter ABI | engine/provider line | internal provider manifest / public SDK / engine-specific ABI | defer; no Unity/Unreal/VRM compatibility claim |
+
+## research discovery items
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| proof side discharge granularity | `plan/48` and external prover bridge | coarse obligation family / static-row granularity | keep current residual obligation carrier and refine when proof target work reopens |
-| distributed durable save/load line | `specs/20` later family | keep local/Docker R0/R2 / reopen R3/R4 | keep out of current alpha-1 gate; reopen only after explicit durability decision |
-| auth policy catalog breadth | `specs/21` and attach package line | minimal initial set / broader policy catalog | keep minimal current attach evidence; widen policy breadth only with concrete runtime evidence |
-| product checker finite fragment breadth | `specs/25` and product CLI | existing rows / broader product fragment | keep the bounded package schema, effect/failure, capability/witness, message recovery, and savepoint policy rows |
-| projection inventory breadth | future backend / server-client split | current summary / richer projection IR / planner-adjacent IR | keep current schema-backed summary until actual split/planner work is chosen |
-| post-gradient operational widening | `specs/26..27` | room-chat / Sugoroku / portal-shard starters / user-final gate | keep current runtime widenings non-promoted until the user-final gate is decided |
-| computational-core proof shape | `specs/28` / `plan/53` | pure fragment first / combined effectful judgment first | start with pure fragment, add explicit effect and failure rows at effectful layer |
-| PoseGraph carrier shape | `specs/29` / `plan/54` | renderer frame / observation snapshot / save carrier | use same-client observation snapshot, explicit `Anchor` / `AnchorSwitch`, and later save/devtools carrier hooks |
-| computational implementation home | `specs/28` / `plan/57` | extend adapter lane / add `mir-semantics` computational module | add narrow `mir-semantics` AST/evaluator; do not repurpose adapter-owned AddOne as Mir compute |
+| alpha grammar shape | `P-MIR-01` | minimal C-like syntax / reuse current companion notation / package-derived migration syntax | choose minimal source syntax with spans and diagnostics |
+| typed IR representation | `P-MIR-02` | crate-local IR / new `mir-ir` crate / reuse existing product schema structs | start crate-local and split only if coupling becomes too high |
+| interpreter rejection model | `P-MIR-03` | static reject / runtime reject / residual obligation | keep explicit static vs runtime split and failure row `ρ` |
+| effectful source integration | `P-MIR-04` | host read/write first / publish-observe first / witness-handoff first | host read/write plus one publish/observe/witness/handoff chain, no broad claim |
+| PoseGraph runtime carrier | `P-POSE-03` | runtime session state / devtools-only rows / model-check carrier first | runtime session state with devtools rows; model-check later where needed |
+| projection IR granularity | `P-PROJ-02` | summary manifest / typed projection IR / deployment planner | start typed projection IR, keep planner later |
+| provider admission policy | `P-ENG-02` | inventory-only / accepted renderer row / sandboxed WASM first | accepted renderer/diagnostic row plus negative provider rows; native disabled |
 
-## user decision items
+## maintenance tasks
 
-| Item | Impact | Main options | Current recommendation |
+| Task | Objective | Validation | Stop line |
 |---|---|---|---|
-| `U1` beyond alpha packaging / host target / shipped surface | final public product line | repo-local alpha / archive or installer / hosted service / other | current alpha keeps developer-built binary + generated host launch bundle only; wait for explicit user choice before widening |
-| final shared-space operational catalog breadth | product/public scope | bounded product alpha-1 narrow showcase / broader final product line | keep narrow showcase as current alpha; decide broader catalog separately |
-| final public grammar / ABI | final public product line | evolve `package.mir.json` / freeze textual grammar | do not freeze in product alpha-1 |
-| hosted service / production WAN | final public product line | local/Docker alpha / hosted service / WAN federation | keep out of current alpha-1 completion claim |
-| backend realization beyond inventory | projection/backend line | inventory-only / server-client split / direct backend | keep inventory-only until explicit implementation package |
-| bounded native / WASM provider admission | engine adapter line | disabled / inventory-only / bounded admitted provider | keep disabled or inventory-only until a package proves schema/effect/failure/capability/observation/sandbox/rollback policy |
-| final engine adapter ABI | final product engine line | internal inventory / public SDK / engine-specific ABI | keep deferred; no Unity/Unreal/VRM compatibility claim |
-
-## self-driven maintenance tasks
-
-| Task | Objective | Validation | Report requirement | Stop line |
-|---|---|---|---|---|
-| docs freshness audit | keep `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, `samples_progress.md`, and index docs aligned with current queue | `python3 scripts/check_source_hierarchy.py`, `python3 scripts/validate_docs.py`, `git diff --check` | new report | snapshot docs must not create new normative decisions |
-| runnable dashboard refresh | keep sample status, validation command, and blocker columns evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | conceptual-only rows must not be marked workflow-ready |
-| operational suite guide refresh | keep `samples/product-alpha1/operational/`, hands-on guide, research summary, and helper CLI surface synchronized | `python3 -m unittest scripts.tests.test_operational_product_samples`, `python3 scripts/operational_product_samples.py check-all --format json` | report if touched | do not promote future inventory into runnable claim |
-| regression repair | repair docs / tests / formatting failures without unrelated feature work | affected tests, `cargo fmt --check`, `git diff --check` | report if non-trivial | do not mix feature widening into maintenance |
-| computational docs freshness | keep `specs/28..31`, `plan/53..56`, snapshot docs, and executable/planned sample rows aligned | docs validation and source hierarchy checks | new report | only evidence-backed rows may be marked runnable |
-| minimal alpha-1 pattern verifier refresh | keep `scripts/minimal_alpha1_patterns.py`, its unit test, and hands-on/research summary aligned with the exact current sample rows | `python3 -m unittest scripts.tests.test_minimal_alpha1_patterns`, `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | new report if touched | verifier drift must not create a new runtime claim |
-| autonomous plan freshness | keep `specs/32`, `plan/57`, snapshot docs, and package cadence aligned with actual execution | docs validation and source hierarchy checks | new report | autonomy policy must not erase user-spec-required final-product gates |
+| docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
+| alpha/product regression audit | preserve Product Alpha and operational suite while Full V1 advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
+| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | planned `samples/full-system-v1/` must not be workflow-ready before evidence |
+| validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence, not semantic correctness |
+| report discipline | write a new report for every non-trivial package | `python3 scripts/validate_docs.py` | never overwrite previous report |
 
 ## non-promoted references
 
-- `P-A0-*` Stage B/D/E/F rows remain current-scope evidence, not operational α-0.5 / α-0.8 / α-0.9 completion.
-- practical alpha-1 first-floor rows remain evidence, not product/public-ready alpha-1 completion.
-- operational helper scope blocks are evidence-backed queue state, not final public product decisions.
+- Product Alpha line remains bounded alpha workflow, not final product.
+- Operational suite remains bounded local/Docker workflow, not production shared-space catalog completion.
+- Existing `samples/product-alpha1/computational/` rows remain first-floor evidence, not Rust-level language completion.
+- Existing `samples/product-alpha1/posegraph/` rows remain helper evidence, not runtime-integrated PoseGraph completion.
+- Projection/backend and engine/provider roots remain inventory-only until later implementation packages.
+- Direct LLVM/native backend remains later than typed IR, projection IR, and preservation tests.

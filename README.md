@@ -11,9 +11,11 @@
 - **Typed-Effect Wiring Platform**
   inspectable / routable な effect integration 層
 
-repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、その次段の **canonical operational product sample suite**、そして現在 rebaseline 済みの **Mir Computational Core docs/spec line** です。
+repo が主として維持しているのは、Mir current-L2 の **repo-local alpha-ready current layer**、Mirrorea Spaces の **product alpha release-candidate workflow**、その次段の **canonical operational product sample suite**、現在 rebaseline 済みの **Mir Computational Core docs/spec line**、そして次段の **Full System V1 source-first roadmap** です。
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、operational suite helper、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、versioned `package.mir.json`、local/Docker controlled runtime、observer-safe devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational suite helperです。operational suite は six runnable roots、shared attach packages、projection inventory、template-only starter catalog、retained portal/shard future inventory を持ちます。backend については `native host launch bundle` だけが actualized で、WASM / LLVM は docs-first inventory に留めます。broader distribution と final shared-space catalog breadth は user-spec-required gate です。一方で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow の completion 証拠ではありません。最小実用パターンを横断検証する入口として `scripts/minimal_alpha1_patterns.py check-all --format json` と `docs/hands_on/minimal_alpha1_patterns_01.md` を追加しています。
+
+Full System V1 は、この alpha floor を final product と誤読せず、Mir source files を semantic source of truth に戻すための次段 roadmap です。`package.mir.json` は alpha compatibility / package artifact として残し、textual Mir alpha grammar、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission、devtools / release check を staged に進めます。
 
 ## 現在の到達点
 
@@ -44,6 +46,9 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - FFI / engine adapter / host integration target
 - final shared-space operational catalog breadth
 - broader Mir-owned computational publish/observe/witness/handoff widening and PoseGraph runtime evidence beyond the current host read/write boundary rows and bounded helper no-split-frame evidence
+- Full System V1 textual Mir parser / typed IR / interpreter / projection IR / provider admission implementation
+- LLVM/native codegen and server/client split compiler completion
+- arbitrary WASM execution
 
 ## Mir Computational Core rebaseline
 
@@ -67,6 +72,34 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 `P-PAT-01` はこの closed chain の上に置く薄い sample verification package です。`scripts/minimal_alpha1_patterns.py` は computational / PoseGraph / projection / engine-adapter の期待行数、expected rejection、inventory-only 境界を exact に確認します。product release-candidate と operational Sugoroku workflow は workflow anchor として同じ matrix に出しますが、default check では heavy workflow を毎回走らせません。必要な場合は `check-all --include-workflows --out <dir>` で含めます。
 
 Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
+
+## Full System V1 rebaseline
+
+`P-FS-00` は実装開始前の roadmap rebaseline です。current truth は次のように読む。
+
+- Product Alpha-1 release-candidate workflow は useful alpha floor であり、final product ではない。
+- `typed_host_io.add_one` は host-boundary evidence であり、Mir-owned computation の証明ではない。
+- 現行 computational rows は first-floor evidence であり、Rust-level language completion ではない。
+- Unity / Unreal / WASM / native / FFI は semantic owner ではなく typed backend/provider boundary である。
+- Direct LLVM/native codegen は重要だが、typed IR / projection / boundary schema が先である。
+- Debug / devtools は optional polish ではなく、開発・検証基盤である。
+
+新しい正本 / repository memory は次です。
+
+- `specs/33-full-system-v1-scope.md`
+- `specs/34-textual-mir-alpha-grammar.md`
+- `specs/35-mir-typed-ir-and-interpreter.md`
+- `specs/36-projection-ir-and-boundary-preservation.md`
+- `specs/37-posegraph-runtime-semantics.md`
+- `specs/38-engine-provider-admission.md`
+- `plan/58-full-system-v1-roadmap.md`
+- `plan/59-textual-mir-roadmap.md`
+- `plan/60-computational-runtime-roadmap.md`
+- `plan/61-posegraph-runtime-roadmap.md`
+- `plan/62-projection-backend-roadmap.md`
+- `plan/63-engine-provider-roadmap.md`
+
+reader-facing summary は `docs/hands_on/full_system_v1_roadmap_01.md` と `docs/research_abstract/full_system_v1_roadmap_01.md` です。次の promoted package は `P-MIR-01 textual Mir alpha grammar` です。
 
 ## Mirrorea の次軸
 
@@ -130,8 +163,11 @@ current line で reader が押さえるべき点は次です。
   `plan/53-mir-computational-core-roadmap.md`、`plan/54-transform-posegraph-roadmap.md`、`plan/55-projection-backend-roadmap.md`、`plan/56-engine-adapter-roadmap.md`
 - autonomous execution contract:
   `specs/32-autonomous-execution-and-completion-contract.md`、`plan/57-autonomous-computational-core-master-plan.md`
+- Full System V1 source-first roadmap:
+  `specs/33-full-system-v1-scope.md`、`specs/34-textual-mir-alpha-grammar.md`、`specs/35-mir-typed-ir-and-interpreter.md`、`specs/36-projection-ir-and-boundary-preservation.md`、`specs/37-posegraph-runtime-semantics.md`、`specs/38-engine-provider-admission.md`
+  `plan/58-full-system-v1-roadmap.md`、`plan/59-textual-mir-roadmap.md`、`plan/60-computational-runtime-roadmap.md`、`plan/61-posegraph-runtime-roadmap.md`、`plan/62-projection-backend-roadmap.md`、`plan/63-engine-provider-roadmap.md`
 - future-axis repository memory:
-  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..57`
+  `plan/28-post-p18-true-user-spec-hold-option-matrix.md` と `plan/29..63`
 
 ## 何が built-in で、何が user-defined か
 

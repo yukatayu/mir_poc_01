@@ -90,11 +90,13 @@ REQUIRED = [
     "docs/hands_on/mir_computational_core_01.md",
     "docs/hands_on/transform_posegraph_01.md",
     "docs/hands_on/autonomous_execution_01.md",
+    "docs/hands_on/full_system_v1_roadmap_01.md",
     "docs/research_abstract/README.md",
     "docs/research_abstract/product_alpha1_01.md",
     "docs/research_abstract/operational_product_sample_01.md",
     "docs/research_abstract/mir_computational_core_01.md",
     "docs/research_abstract/autonomous_execution_01.md",
+    "docs/research_abstract/full_system_v1_roadmap_01.md",
     "scripts/mir_computational_samples.py",
     "scripts/posegraph_samples.py",
     "scripts/projection_boundary_samples.py",
@@ -147,6 +149,12 @@ REQUIRED = [
     "plan/55-projection-backend-roadmap.md",
     "plan/56-engine-adapter-roadmap.md",
     "plan/57-autonomous-computational-core-master-plan.md",
+    "plan/58-full-system-v1-roadmap.md",
+    "plan/59-textual-mir-roadmap.md",
+    "plan/60-computational-runtime-roadmap.md",
+    "plan/61-posegraph-runtime-roadmap.md",
+    "plan/62-projection-backend-roadmap.md",
+    "plan/63-engine-provider-roadmap.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -180,10 +188,17 @@ REQUIRED = [
     "specs/30-projection-and-backend-boundary.md",
     "specs/31-engine-wasm-ffi-adapter-boundary.md",
     "specs/32-autonomous-execution-and-completion-contract.md",
+    "specs/33-full-system-v1-scope.md",
+    "specs/34-textual-mir-alpha-grammar.md",
+    "specs/35-mir-typed-ir-and-interpreter.md",
+    "specs/36-projection-ir-and-boundary-preservation.md",
+    "specs/37-posegraph-runtime-semantics.md",
+    "specs/38-engine-provider-admission.md",
     ".docs/progress-task-axes.md",
     ".docs/continuous-task-policy.md",
     ".docs/current-l2-source-sample-authoring-policy.md",
     "sub-agent-pro/mirrorea_mir_computational_core_handoff.md",
+    "sub-agent-pro/full-system-completion-001/20-progress-tasks-replacement-model.md",
     "docs/reports/TEMPLATE.md",
 ]
 
@@ -210,6 +225,38 @@ REQUIRED_TEMPLATE_HEADINGS = [
     "## Sub-agent session close status",
 ]
 
+PROGRESS_REQUIRED_HEADINGS = [
+    "## document role",
+    "## project axis",
+    "## final ideal",
+    "## current milestone position",
+    "## milestone map",
+    "## line snapshots",
+    "### Product Alpha line",
+    "### Operational Suite line",
+    "### Mir Language line",
+    "### PoseGraph line",
+    "### Projection/Backend line",
+    "### Engine/Provider line",
+    "## validation floor",
+    "## non-claims",
+    "## user decision items vs research-discovery items",
+    "## macro phase map",
+    "## feature maturity rows",
+    "## recent log",
+]
+
+TASKS_REQUIRED_HEADINGS = [
+    "## document role",
+    "## current promoted package",
+    "## ordered self-driven packages",
+    "## self-driven macro phase reading",
+    "## user decision gates",
+    "## research discovery items",
+    "## maintenance tasks",
+    "## non-promoted references",
+]
+
 UNRESOLVED_TEMPLATE_PLACEHOLDERS = [
     "更新不要 / 更新済み:",
 ]
@@ -222,6 +269,15 @@ def _heading_match(text: str, heading: str) -> re.Match[str] | None:
 def _heading_positions(text: str) -> dict[str, int]:
     positions = {}
     for heading in REQUIRED_TEMPLATE_HEADINGS:
+        match = _heading_match(text, heading)
+        if match is not None:
+            positions[heading] = match.start()
+    return positions
+
+
+def _heading_positions_for(text: str, headings: list[str]) -> dict[str, int]:
+    positions = {}
+    for heading in headings:
         match = _heading_match(text, heading)
         if match is not None:
             positions[heading] = match.start()
@@ -241,6 +297,21 @@ def out_of_order_template_headings(template_text: str) -> list[str]:
     if ordered_positions == sorted(ordered_positions):
         return []
     return REQUIRED_TEMPLATE_HEADINGS
+
+
+def missing_headings(text: str, headings: list[str]) -> list[str]:
+    positions = _heading_positions_for(text, headings)
+    return [heading for heading in headings if heading not in positions]
+
+
+def out_of_order_headings(text: str, headings: list[str]) -> list[str]:
+    positions = _heading_positions_for(text, headings)
+    if len(positions) != len(headings):
+        return []
+    ordered_positions = [positions[heading] for heading in headings]
+    if ordered_positions == sorted(ordered_positions):
+        return []
+    return headings
 
 
 def required_section_bodies(report_text: str) -> dict[str, str]:
@@ -336,6 +407,40 @@ def main() -> int:
             f"Latest report has unresolved template placeholders: {latest_report.name}"
         )
         for heading in unresolved_latest_report_sections:
+            print(" -", heading)
+        return 1
+
+    progress_text = (ROOT / "progress.md").read_text(encoding="utf-8")
+    missing_progress_sections = missing_headings(
+        progress_text, PROGRESS_REQUIRED_HEADINGS
+    )
+    if missing_progress_sections:
+        print("progress.md is missing required snapshot sections:")
+        for heading in missing_progress_sections:
+            print(" -", heading)
+        return 1
+    out_of_order_progress_sections = out_of_order_headings(
+        progress_text, PROGRESS_REQUIRED_HEADINGS
+    )
+    if out_of_order_progress_sections:
+        print("progress.md has required snapshot sections out of order:")
+        for heading in out_of_order_progress_sections:
+            print(" -", heading)
+        return 1
+
+    tasks_text = (ROOT / "tasks.md").read_text(encoding="utf-8")
+    missing_tasks_sections = missing_headings(tasks_text, TASKS_REQUIRED_HEADINGS)
+    if missing_tasks_sections:
+        print("tasks.md is missing required task-map sections:")
+        for heading in missing_tasks_sections:
+            print(" -", heading)
+        return 1
+    out_of_order_tasks_sections = out_of_order_headings(
+        tasks_text, TASKS_REQUIRED_HEADINGS
+    )
+    if out_of_order_tasks_sections:
+        print("tasks.md has required task-map sections out of order:")
+        for heading in out_of_order_tasks_sections:
             print(" -", heading)
         return 1
 

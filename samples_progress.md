@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-21 23:37 JST
+Last updated: 2026-05-22 03:21 JST
 
-Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, the closed all-up package chain after `P-POSE-02`, and `P-PAT-01` minimal alpha-1 pattern verification. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
+Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, and the `P-FS-00` Full System V1 source-first roadmap rebaseline. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Planned `samples/full-system-v1/` roots are not active and not workflow-ready until later packages create executable samples. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -37,6 +37,7 @@ Notes:
 | engine/WASM/FFI adapter boundary | boundary-fixed, planned scaffold actualized | `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, `matrix.json`, and helper/unit test now classify planned provider rows and reject `run` as `planned_only` | no engine integration, final FFI ABI, or admitted native/WASM execution yet |
 | minimal alpha-1 pattern verifier | evidence-closed maintenance helper | `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | compact strict verifier over exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory execution policies | not a new runtime semantics layer; heavy workflow anchors optional |
 | autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
+| Full System V1 roadmap | boundary-fixed, no sample claim | docs validation plus existing alpha anchors | `specs/33..38`, `plan/58..63`, `docs/hands_on/full_system_v1_roadmap_01.md`, and replaced `progress.md` / `tasks.md` define the source-first roadmap | textual Mir parser, typed IR, interpreter, PoseGraph runtime, projection IR, provider admission, and release check remain planned |
 
 ## Product Alpha Root Status
 
@@ -50,6 +51,19 @@ Notes:
 | `samples/product-alpha1/posegraph/` | bounded Transform / PoseGraph helper evidence | `python3 scripts/posegraph_samples.py check-all --format json` | helper-only `package.mir.json` plus representative `.mir` files and `matrix.json` exist; `pose-04` is accepted, `pose-05` is `violation_export`, and 7 rows remain planned |
 | `samples/product-alpha1/projection/` | planned projection boundary roots | `python3 scripts/projection_boundary_samples.py check-all --format json` | planned-only scaffold actualized; representative inventory JSON files and `matrix.json` exist, but no codegen/runtime row yet |
 | `samples/product-alpha1/engine-adapter/` | planned engine/provider boundary roots | `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` | planned-only scaffold actualized; representative contract JSON files and `matrix.json` exist, but no admitted provider row yet |
+
+## Full System V1 Planned Sample Line
+
+| Planned root | Intended role | Current reading |
+|---|---|---|
+| `samples/full-system-v1/computational/` | textual Mir computational source samples | planned only; first actual package is `P-MIR-01` |
+| `samples/full-system-v1/world-core/` | source-first WorldCore operational root | planned only; current executable root remains `samples/product-alpha1/operational/world-core/` |
+| `samples/full-system-v1/membership-chat/` | source-first MembershipChat operational root | planned only; current executable root remains `samples/product-alpha1/operational/membership-chat/` |
+| `samples/full-system-v1/sugoroku-world/` | source-first SugorokuWorld operational root | planned only; current executable root remains `samples/product-alpha1/operational/sugoroku-world/` |
+| `samples/full-system-v1/posegraph/` | runtime PoseGraph source sample family | planned only; current evidence remains helper-backed `samples/product-alpha1/posegraph/` |
+| `samples/full-system-v1/projection/` | `FS-06` projection IR evidence | planned only; current evidence remains inventory-only `samples/product-alpha1/projection/` |
+| `samples/full-system-v1/server-client/` | `FS-07` local server/client role-run evidence | planned only; must have separate role-run and authority/write-rejection evidence before workflow claims |
+| `samples/full-system-v1/provider-adapter/` | provider admission evidence | planned only; current evidence remains inventory-only `samples/product-alpha1/engine-adapter/` |
 
 ## Practical Alpha-1 First-Floor Map
 
@@ -112,6 +126,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-22 03:21 JST | `P-FS-00` Full System V1 roadmap rebaseline | docs/spec planned | source-first Full System V1 roadmap added; `samples/full-system-v1/` remains planned only and the next implementation package is `P-MIR-01` |
 | 2026-05-21 23:37 JST | `P-PAT-01` minimal alpha-1 pattern verifier | pass | `scripts/minimal_alpha1_patterns.py`, unit test, hands-on / research summary, and snapshot docs were added; strict default check covers computational, PoseGraph, projection, and engine-adapter rows |
 | 2026-05-21 22:11 JST | all-up closeout audit | pass | focused helper suites, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks were rerun; the current self-driven chain is now closed through its planned audit package |
 | 2026-05-21 21:57 JST | `P-POSE-02` no-split-frame helper evidence | pass | `samples/product-alpha1/posegraph/`, helper-only `package.mir.json` inputs, matrix, unit test, and snapshot docs were synchronized; `check-all` now reports 1 accepted row, 1 violation row, and 7 planned rows; next reopen point is the all-up closeout audit |

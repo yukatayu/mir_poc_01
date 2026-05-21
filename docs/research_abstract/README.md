@@ -62,6 +62,8 @@
   alpha-1 の最小実用 pattern set と exact row / rejection / inventory drift verifier の summary
 - `autonomous_execution_01.md`
   `P-COMP-01 -> P-COMP-03` actual row closeout と、残る implementation half / user-spec-required gate isolation / validation cadence の summary
+- `full_system_v1_roadmap_01.md`
+  `P-FS-00` source-first roadmap rebaseline、`FS-00..FS-11`、次 package `P-MIR-01`、final-public non-claims の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`
@@ -151,6 +153,7 @@
 - final public auth / visualization / projection / hot-plug API
 - broader Mir-owned computational publish / observe / witness / handoff evidence beyond current bounded rows
 - Transform / PoseGraph runtime evidence beyond current helper-backed no-split-frame rows
+- Full System V1 textual Mir / typed IR / interpreter / projection IR / provider admission implementation
 
 ## historical material
 

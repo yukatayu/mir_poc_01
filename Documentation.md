@@ -35,6 +35,8 @@
   `scripts/minimal_alpha1_patterns.py` と `docs/hands_on/minimal_alpha1_patterns_01.md` は、closed chain の上に置く reader-facing verifier。computational / PoseGraph / projection / engine-adapter の exact row count、expected rejection、inventory-only boundary を確認し、product release-candidate と operational Sugoroku は workflow anchor として同じ matrix で読む。これは新しい runtime claim ではなく、最小実用パターンの drift 検出である。
 - **autonomous execution contract**
   `specs/32` / `plan/57` で定義した package-by-package 自律実行 line。`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の front-half を閉じてから implementation half に入り、user に途中質問せず、final distribution / catalog / ABI / backend admission のような user-spec-required gate は隔離し、lower-layer implementation を止めない。
+- **Full System V1 source-first roadmap**
+  `specs/33..38` / `plan/58..63` で定義した次段 roadmap。Product Alpha-1 と operational suite を alpha floor として保持しつつ、semantic source of truth を Mir source files へ戻し、textual Mir alpha grammar、typed IR、interpreter、effectful runtime integration、PoseGraph runtime、projection IR、provider admission、devtools / release check へ段階的に進む。`package.mir.json` は alpha compatibility / package artifact であり、final source authority ではない。
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
@@ -49,7 +51,7 @@
 
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。current promoted self-driven reopen は無く、`P-PAT-01` は closed chain の上に置いた verifier / guide package です。
+まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。`P-FS-00` は implementation 前の roadmap rebaseline であり、次の promoted package は `P-MIR-01 textual Mir alpha grammar` です。
 
 ## current active floor
 
@@ -90,6 +92,8 @@ OS/network substrate
   `specs/25`、`plan/50`、`samples/product-alpha1/demo/`、`scripts/product_alpha1_release_check.py` が product alpha release-candidate workflow を担います。Docker 込みの release check が accepted のとき、controlled alpha product workflow として実用確認済みと読めます。
 - **operational product sample suite**
   `specs/26..27`、`plan/51..52`、`samples/product-alpha1/operational/`、`scripts/operational_product_samples.py` が canonical operational suite を担います。six roots、shared attach packages、projection inventory、portal/shard/gradient cuts、template-only starter catalog、backend inventory、scope helper blocks を保持します。
+- **Full System V1 source-first line**
+  `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を担います。current package は `P-FS-00` docs rebaseline、次の package は `P-MIR-01 textual Mir alpha grammar` です。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission へ順に進めます。
 
 ## いま何があり、何がまだ無いか
 
@@ -166,6 +170,21 @@ Correction:
 - autonomous execution contract:
   `specs/32-autonomous-execution-and-completion-contract.md`
   `plan/57-autonomous-computational-core-master-plan.md`
+- Full System V1 source-first roadmap:
+  `specs/33-full-system-v1-scope.md`
+  `specs/34-textual-mir-alpha-grammar.md`
+  `specs/35-mir-typed-ir-and-interpreter.md`
+  `specs/36-projection-ir-and-boundary-preservation.md`
+  `specs/37-posegraph-runtime-semantics.md`
+  `specs/38-engine-provider-admission.md`
+  `plan/58-full-system-v1-roadmap.md`
+  `plan/59-textual-mir-roadmap.md`
+  `plan/60-computational-runtime-roadmap.md`
+  `plan/61-posegraph-runtime-roadmap.md`
+  `plan/62-projection-backend-roadmap.md`
+  `plan/63-engine-provider-roadmap.md`
+  `docs/hands_on/full_system_v1_roadmap_01.md`
+  `docs/research_abstract/full_system_v1_roadmap_01.md`
 - hands-on product alpha commands:
   `docs/hands_on/product_alpha1_01.md`
   `docs/hands_on/operational_product_sample_01.md`

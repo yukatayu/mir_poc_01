@@ -37,6 +37,16 @@ class ValidateDocsTests(unittest.TestCase):
             path.parent.mkdir(parents=True, exist_ok=True)
             if relative == "docs/reports/TEMPLATE.md":
                 path.write_text(template_text, encoding="utf-8")
+            elif relative == "progress.md":
+                path.write_text(
+                    "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
+                    encoding="utf-8",
+                )
+            elif relative == "tasks.md":
+                path.write_text(
+                    "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
+                    encoding="utf-8",
+                )
             else:
                 path.write_text(f"# {relative}\n", encoding="utf-8")
         (root / "docs" / "reports" / "0001-smoke.md").write_text(
@@ -155,6 +165,100 @@ class ValidateDocsTests(unittest.TestCase):
         for path in product_alpha1_required:
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
+
+    def test_required_scaffold_includes_full_system_v1_docs(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        full_system_required = {
+            "specs/33-full-system-v1-scope.md",
+            "specs/34-textual-mir-alpha-grammar.md",
+            "specs/35-mir-typed-ir-and-interpreter.md",
+            "specs/36-projection-ir-and-boundary-preservation.md",
+            "specs/37-posegraph-runtime-semantics.md",
+            "specs/38-engine-provider-admission.md",
+            "plan/58-full-system-v1-roadmap.md",
+            "plan/59-textual-mir-roadmap.md",
+            "plan/60-computational-runtime-roadmap.md",
+            "plan/61-posegraph-runtime-roadmap.md",
+            "plan/62-projection-backend-roadmap.md",
+            "plan/63-engine-provider-roadmap.md",
+            "docs/hands_on/full_system_v1_roadmap_01.md",
+            "docs/research_abstract/full_system_v1_roadmap_01.md",
+        }
+
+        for path in full_system_required:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
+
+        self.assertIn(
+            "sub-agent-pro/full-system-completion-001/20-progress-tasks-replacement-model.md",
+            required_docs,
+        )
+        self.assertIn("sub-agent-pro/full-system-completion-001", required_hierarchy)
+
+    def test_snapshot_heading_contracts_include_full_system_rebaseline_shape(self) -> None:
+        progress_headings = validate_docs.PROGRESS_REQUIRED_HEADINGS
+        tasks_headings = validate_docs.TASKS_REQUIRED_HEADINGS
+
+        for heading in [
+            "## current milestone position",
+            "## milestone map",
+            "### Product Alpha line",
+            "### Operational Suite line",
+            "### Mir Language line",
+            "### PoseGraph line",
+            "### Projection/Backend line",
+            "### Engine/Provider line",
+            "## validation floor",
+            "## non-claims",
+            "## user decision items vs research-discovery items",
+        ]:
+            self.assertIn(heading, progress_headings)
+
+        for heading in [
+            "## current promoted package",
+            "## ordered self-driven packages",
+            "## self-driven macro phase reading",
+            "## user decision gates",
+            "## research discovery items",
+            "## maintenance tasks",
+            "## non-promoted references",
+        ]:
+            self.assertIn(heading, tasks_headings)
+
+    def test_current_snapshot_docs_have_required_heading_order(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        progress_text = (root / "progress.md").read_text(encoding="utf-8")
+        tasks_text = (root / "tasks.md").read_text(encoding="utf-8")
+
+        self.assertEqual(
+            [],
+            validate_docs.missing_headings(
+                progress_text, validate_docs.PROGRESS_REQUIRED_HEADINGS
+            ),
+        )
+        self.assertEqual(
+            [],
+            validate_docs.out_of_order_headings(
+                progress_text, validate_docs.PROGRESS_REQUIRED_HEADINGS
+            ),
+        )
+        self.assertEqual(
+            [],
+            validate_docs.missing_headings(
+                tasks_text, validate_docs.TASKS_REQUIRED_HEADINGS
+            ),
+        )
+        self.assertEqual(
+            [],
+            validate_docs.out_of_order_headings(
+                tasks_text, validate_docs.TASKS_REQUIRED_HEADINGS
+            ),
+        )
 
     def test_required_scaffold_includes_product_alpha1_sample_docs(self) -> None:
         required_docs = set(validate_docs.REQUIRED)

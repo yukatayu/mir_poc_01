@@ -7,9 +7,9 @@
 ### front-door checks and active runners
 
 - `check_source_hierarchy.py`
-  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..32`、`plan/39..57`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
+  required root docs / specs / plan / support directory が存在するかを見る structural check。current line では `specs/13..38`、`plan/39..63`、`samples/alpha/`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/`、`sub-agent-pro/full-system-completion-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_docs.py`
-  required documentation scaffold、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..57`、`specs/13..32` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
+  required documentation scaffold、`progress.md` / `tasks.md` required snapshot heading order、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する scaffold check。current line では snapshot docs、`samples/README.md` / `scripts/README.md`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、`plan/39..63`、`specs/13..38` も required scaffold に入る。historical report 全体の semantic validation、active/current wording lint、sample execution、Cargo validation は別 command の責務。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
@@ -145,6 +145,10 @@
   - default `check-all` fixes exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory-only execution policies
   - `check-all --include-workflows --out <dir>` also reruns the heavier product release-candidate and operational suite workflow anchors
   - it does not claim final product, final grammar/API, direct LLVM/native backend, server/client codegen, provider admission, WAN/federation, or distributed durable save-load
+- Full System V1 helper family is planned, not current
+  - planned commands are `textual_mir_samples.py`, `full_system_v1_samples.py`, `posegraph_runtime_samples.py`, `projection_v1_samples.py`, `provider_admission_samples.py`, and `full_system_v1_release_check.py`
+  - these scripts do not exist in `P-FS-00`; do not add them to mandatory validation until implementation packages create them
+  - current validation remains docs/scaffold checks plus the existing Product Alpha, operational suite, and minimal alpha-1 pattern anchors
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`
