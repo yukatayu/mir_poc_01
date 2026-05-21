@@ -58,6 +58,8 @@
   portal/shard starter catalog を current line で広げない decision と active-root / future-blueprint split の summary
 - `mir_computational_core_01.md`
   Product Alpha-1 operational floor を保持しつつ、current `AddOne` を typed external host-boundary evidence に限定し、`P-COMP-02` direct runtime row と `P-COMP-03` helper-executable first-floor rowsを含む Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を要約する summary
+- `minimal_alpha1_patterns_01.md`
+  alpha-1 の最小実用 pattern set と exact row / rejection / inventory drift verifier の summary
 - `autonomous_execution_01.md`
   `P-COMP-01 -> P-COMP-03` actual row closeout と、残る implementation half / user-spec-required gate isolation / validation cadence の summary
 - `repository_layer_structure_01.md`
@@ -147,8 +149,8 @@
 - first shipped public surface scope
 - final shared-space operational catalog breadth
 - final public auth / visualization / projection / hot-plug API
-- Mir-owned computational core sample/runtime evidence
-- Transform / PoseGraph runtime evidence
+- broader Mir-owned computational publish / observe / witness / handoff evidence beyond current bounded rows
+- Transform / PoseGraph runtime evidence beyond current helper-backed no-split-frame rows
 
 ## historical material
 

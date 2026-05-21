@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 22:11 JST
+最終更新: 2026-05-21 23:37 JST
 
 ## この文書について
 
@@ -45,6 +45,8 @@
   the computational / PoseGraph / projection / engine-adapter roots, helpers, tests, validators, reports, and snapshot docs are synchronized, so the promoted queue now moves to the implementation half.
 - all-up closeout audit is closed:
   focused helpers, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks have been rerun after `P-POSE-02`, so the current self-driven package chain is closed through its planned audit package.
+- `P-PAT-01` minimal alpha-1 pattern verification is closed:
+  `scripts/minimal_alpha1_patterns.py` and `docs/hands_on/minimal_alpha1_patterns_01.md` now provide a compact strict verifier over existing computational / PoseGraph / projection / engine-adapter rows, while keeping product release-candidate and operational Sugoroku as workflow anchors rather than new final-product claims.
 - autonomous execution default is reviewer-integrated and fixed:
   `specs/32` and `plan/57` define a docs/scaffold front half, an implementation half, safe defaults, sub-agent review cadence, validation floor, report / commit / push policy, and user-spec-required gate isolation. `plan/57` is repository memory; live queue authority remains this document plus `progress.md`.
 
@@ -57,7 +59,7 @@ No promoted self-driven package remains in the current chain. The line defined i
 - recommended reopen point:
   none in the current self-driven chain
 - recommendation reason:
-  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The planned all-up audit has also passed, so the current chain is ratcheted and closed. Future reopenings should be chosen explicitly from the research-discovery or user-decision items below rather than pretending another package is already promoted.
+  the pure computational core now has one direct `add_one` row, widened first-floor helper rows, one bounded host read/write boundary closeout, and PoseGraph now has bounded accepted/violation helper evidence without overloading renderer/global-simultaneity claims. The planned all-up audit has also passed, and `P-PAT-01` adds a compact verifier for the minimal alpha-1 pattern set. Future reopenings should be chosen explicitly from the research-discovery or user-decision items below rather than pretending another package is already promoted.
 - stop line:
   do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / helper-backed no-split-frame evidence as implementation completion.
 
@@ -96,6 +98,7 @@ No promoted self-driven package remains in the current chain. The line defined i
 | operational suite guide refresh | keep `samples/product-alpha1/operational/`, hands-on guide, research summary, and helper CLI surface synchronized | `python3 -m unittest scripts.tests.test_operational_product_samples`, `python3 scripts/operational_product_samples.py check-all --format json` | report if touched | do not promote future inventory into runnable claim |
 | regression repair | repair docs / tests / formatting failures without unrelated feature work | affected tests, `cargo fmt --check`, `git diff --check` | report if non-trivial | do not mix feature widening into maintenance |
 | computational docs freshness | keep `specs/28..31`, `plan/53..56`, snapshot docs, and executable/planned sample rows aligned | docs validation and source hierarchy checks | new report | only evidence-backed rows may be marked runnable |
+| minimal alpha-1 pattern verifier refresh | keep `scripts/minimal_alpha1_patterns.py`, its unit test, and hands-on/research summary aligned with the exact current sample rows | `python3 -m unittest scripts.tests.test_minimal_alpha1_patterns`, `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | new report if touched | verifier drift must not create a new runtime claim |
 | autonomous plan freshness | keep `specs/32`, `plan/57`, snapshot docs, and package cadence aligned with actual execution | docs validation and source hierarchy checks | new report | autonomy policy must not erase user-spec-required final-product gates |
 
 ## non-promoted references

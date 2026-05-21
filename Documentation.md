@@ -31,6 +31,8 @@
   `specs/26` / `plan/51` で定義した `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` suite、shared attach packages、deployment/projection inventory、retained portal/shard blueprint inventory。current line では `MembershipChat` の bounded room-oriented `ChatText` host boundary、`SugorokuWorld` の bounded roll / publish / witness / handoff / stale membership reject scenario、`projection.profile.json` の schema-backed target / packet / FFI inventory、`PortalWorldLink` の bounded same-session discrete handoff cut、`TwoShardHardBoundary` の bounded same-session two-shard offer / prepare / commit / old-owner reject / missing-witness reject / stale-config reject cut、そして `TwoShardGradientObservation` の bounded observer-only gradient view / handoff hint / write reject / stale-view drop / missing-freshness reject cut が `check`、runtime plan、observer-safe devtools / helper closeout に actualize 済み。`future/portal-worldlink/` と `future/two-shard-hard-boundary/` blueprint は残す
 - **Mir Computational Core rebaseline**
   `specs/28..31` / `plan/53..56` で定義し直した docs/spec line。Product Alpha-1 の operational floor は保持するが、current typed external `AddOne` を Mir-owned computation の証拠とは読まない。front-half scaffold は維持しつつ、`P-COMP-02` により `samples/product-alpha1/computational/add-one-pure-mir/` と `scripts/mir_computational_samples.py` が one direct executable Mir-owned row を持つようになり、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative rows が helper-executable に actualize され、`P-COMP-04` により direct product-alpha accepted/check-rejection rows で host read/write boundary が explicit になった。ここで `required_capabilities` / `failure_tag` は checker-admission boundary declaration の evidence であり、broad effectful runtime semantics completion を意味しない。PoseGraph は `P-POSE-02` により same-client same-observation-snapshot no-split-frame の accepted/violation helper evidence を持つようになり、projection / engine-adapter は引き続き planned-only scaffold / inventory である。all-up closeout audit まで実行済みで、current self-driven chain は閉じた。
+- **minimal alpha-1 pattern verification**
+  `scripts/minimal_alpha1_patterns.py` と `docs/hands_on/minimal_alpha1_patterns_01.md` は、closed chain の上に置く reader-facing verifier。computational / PoseGraph / projection / engine-adapter の exact row count、expected rejection、inventory-only boundary を確認し、product release-candidate と operational Sugoroku は workflow anchor として同じ matrix で読む。これは新しい runtime claim ではなく、最小実用パターンの drift 検出である。
 - **autonomous execution contract**
   `specs/32` / `plan/57` で定義した package-by-package 自律実行 line。`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の front-half を閉じてから implementation half に入り、user に途中質問せず、final distribution / catalog / ABI / backend admission のような user-spec-required gate は隔離し、lower-layer implementation を止めない。
 - **final public product**
@@ -43,10 +45,11 @@
 - product alpha-1 release-candidate workflow
 - installed-binary + generated native host launch bundle adoption probe
 - `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` の canonical operational product sample suite
+- minimal alpha-1 pattern verifier for strict row / rejection / inventory drift checks
 
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision ですが、current promoted docs/spec reopen は Mir Computational Core rebaseline です。
+まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。current promoted self-driven reopen は無く、`P-PAT-01` は closed chain の上に置いた verifier / guide package です。
 
 ## current active floor
 
@@ -170,9 +173,11 @@ Correction:
   `docs/hands_on/operational_backend_inventory_01.md`
   `docs/hands_on/operational_portal_shard_starter_boundary_01.md`
 - docs-first computational / PoseGraph guides:
+  `docs/hands_on/minimal_alpha1_patterns_01.md`
   `docs/hands_on/mir_computational_core_01.md`
   `docs/hands_on/transform_posegraph_01.md`
   `docs/hands_on/autonomous_execution_01.md`
+  `docs/research_abstract/minimal_alpha1_patterns_01.md`
   `docs/research_abstract/mir_computational_core_01.md`
   `docs/research_abstract/autonomous_execution_01.md`
 - legacy hands-on closeout commands:

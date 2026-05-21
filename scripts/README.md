@@ -134,6 +134,17 @@
   - this helper actualizes the `P-ENG-01` planned-only engine / WASM / FFI adapter inventory scaffold under `samples/product-alpha1/engine-adapter/`
   - it validates matrix/root consistency, keeps all provider rows `planned_only`, preserves `NativeExecutionPolicy = Disabled` and `WasmExecutionPolicy = InventoryOnly`, and rejects attempted execution as `planned_only`
   - it does not claim provider admission, arbitrary native/WASM execution, or final engine adapter ABI
+- minimal alpha-1 pattern verifier is a compact strict overlay over existing helpers
+  - `python3 scripts/minimal_alpha1_patterns.py list --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py matrix --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py check-all --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py run mir-compute-host-io-transform --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py run mir-compute-missing-effect-reject --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py run posegraph-no-split-frame --format json`
+  - `python3 scripts/minimal_alpha1_patterns.py run posegraph-split-frame-violation --format json`
+  - default `check-all` fixes exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory-only execution policies
+  - `check-all --include-workflows --out <dir>` also reruns the heavier product release-candidate and operational suite workflow anchors
+  - it does not claim final product, final grammar/API, direct LLVM/native backend, server/client codegen, provider admission, WAN/federation, or distributed durable save-load
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`

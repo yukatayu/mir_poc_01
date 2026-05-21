@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-21 22:11 JST
+最終更新: 2026-05-21 23:37 JST
 
 ## この文書について
 
@@ -24,7 +24,7 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  all-up closeout audit
+  `P-PAT-01` minimal alpha-1 pattern guide and strict sample verifier
 - current promoted reopen point:
   no promoted package in the current self-driven chain
 - current reading:
@@ -32,15 +32,15 @@ Place をまたいで実行・通信・検証・可視化できる
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げ、`P-COMP-04` により direct host read/write boundary の accepted/check-rejection rows を actualize し、`P-POSE-02` により accepted same-snapshot row と negative `violation_export` row を helper-backed no-split-frame evidence として actualize した。all-up closeout audit では focused helper suites、Cargo regressions、product alpha release check、installed-binary adoption probe、operational suite、docs validators を再実行し、current self-driven chain を close 済みにした。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げ、`P-COMP-04` により direct host read/write boundary の accepted/check-rejection rows を actualize し、`P-POSE-02` により accepted same-snapshot row と negative `violation_export` row を helper-backed no-split-frame evidence として actualize した。all-up closeout audit では focused helper suites、Cargo regressions、product alpha release check、installed-binary adoption probe、operational suite、docs validators を再実行し、current self-driven chain を close 済みにした。`P-PAT-01` はその上の maintenance / reader-facing verifier として、最小 alpha-1 pattern set の exact row / expected rejection / inventory drift を確認する。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
 
 ## workflow-readiness axes
 
 | 軸 | Workflow reading | Current status |
 |---|---|---|
 | 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..31` が practical / operational / product alpha / operational sample / portal-shard / computational core / PoseGraph / projection-backend / engine-adapter boundary を分ける。final public grammar / ABI は未固定 |
-| ユーザ向け仕様 | reproducible workflow guidance exists | `README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/hands_on/operational_product_sample_01.md`、authoring / backend / portal-shard guides が current command path と non-claims を説明する |
-| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe. Computational now has one direct executable Mir-owned row plus helper-executable first-floor rows; PoseGraph now has bounded helper-backed no-split-frame evidence; projection / engine-adapter remain scaffold or inventory lines |
+| ユーザ向け仕様 | reproducible workflow guidance exists | `README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/hands_on/operational_product_sample_01.md`、`docs/hands_on/minimal_alpha1_patterns_01.md`、authoring / backend / portal-shard guides が current command path と non-claims を説明する |
+| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe. Computational now has one direct executable Mir-owned row plus helper-executable first-floor rows; PoseGraph now has bounded helper-backed no-split-frame evidence; projection / engine-adapter remain scaffold or inventory lines. `scripts/minimal_alpha1_patterns.py check-all` verifies the compact strict pattern set without adding runtime claims |
 
 ## line snapshot
 
@@ -57,6 +57,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | Transform / PoseGraph | bounded helper no-split-frame evidence | accepted same-snapshot row plus negative violation export | `specs/29` / `plan/54`, `samples/product-alpha1/posegraph/`, and `scripts/posegraph_samples.py` now expose one accepted helper row, one `violation_export` row, and seven planned rows without claiming workflow-ready runtime completion | pose-aware save/load, devtools panel family, anchor-switch/reacquire rows |
 | projection/backend boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/30` / `plan/55`, `samples/product-alpha1/projection/`, and `scripts/projection_boundary_samples.py` classify planned rows, preserve accepted/rejected compatibility IDs, and reject `run` as `planned_only` | later projection realization package, if any, after explicit design choice |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, and `scripts/engine_adapter_boundary_samples.py` classify planned provider rows, preserve default execution gating, and reject `run` as `planned_only` | bounded provider admission package, if any, after explicit policy choice |
+| minimal alpha-1 pattern verifier | maintenance / reader-facing verifier | strict drift check over existing rows | `scripts/minimal_alpha1_patterns.py check-all --format json` fixes exact computational / PoseGraph / projection / engine-adapter row counts, expected rejection IDs, compatibility rows, and inventory-only policies; product release and operational Sugoroku are workflow anchors | no new runtime semantics; heavy workflow anchors are optional via `--include-workflows` |
 | autonomous execution contract | docs/spec execution policy | boundary-fixed and closeout-audited | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
 
 ## subsystem status
@@ -75,7 +76,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | Macro | 主眼 | 現在位置 | 重さ | 自走可否 |
 |---|---|---|---|---|
 | `Macro 0` | repository memory / docs / traceability | snapshot docs を current gate に圧縮中 | light | 着手可能 |
-| `Macro 1` | semantic kernel / invariant / boundary stabilization | computational core / effect split / PoseGraph boundary rebaseline is fixed; current queue is all-up closeout | medium | 着手可能 |
+| `Macro 1` | semantic kernel / invariant / boundary stabilization | computational core / effect split / PoseGraph boundary rebaseline is fixed; `P-PAT-01` adds compact drift verification over the closed rows | medium | 着手可能 |
 | `Macro 5` | theorem / model-check / external verifier bridge | obligation export boundary fixed; broad discharge later | medium | 着手可能 |
 | `Macro 6` | distributed fabric / shared-space / runtime evolution boundary | same-session + local/Docker alpha workflow; production distributed line later | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface / public operational interface | product alpha release-candidate and installed-binary adoption probe are reproducible; projection/backend and engine/provider inventory are machine-readable | heavy | 着手可能 for implementation half, 要仕様確認 for shipped surface |
@@ -90,6 +91,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | dynamic attach / detach / DAG-safe evolution | bounded same-session attach workflow | debug/auth/rate-limit/object/avatar attach behavior is visible; accepted detach and distributed ordering remain later | 着手可能 |
 | `atomic_cut` and higher-level ordering | semantics fixed, evidence-backed | `atomic_cut` remains place-local rollback frontier; durable/distributed commit is not implied | 着手可能 |
 | executable sample corpus | workflow-ready where scoped | clean near-end, practical alpha workflows, product alpha release candidate, installed-binary probe, and operational suite have runnable anchors | 着手可能 |
+| minimal sample verifier | evidence-backed maintenance helper | compact strict verifier detects drift across minimal alpha-1 computational, PoseGraph, projection, and engine-adapter pattern rows | 着手可能 |
 | Mir-owned computation | bounded first-floor evidence | current alpha host `AddOne` is still external adapter evidence only, and the product-alpha computational root now has one direct `add_one` row plus helper-executable first-floor positive / negative rows | 着手可能 |
 | PoseGraph / no-split-frame | bounded helper evidence actualized | same-client same-observation-snapshot invariant, `Anchor`, `AnchorBinding`, `AnchorSwitch`, and stale-anchor reacquire gates are defined; helper-backed accepted/violation rows now exist, but full runtime/save-load/devtools completion is still absent | 着手可能 |
 | projection/backend inventory | planned-only scaffold actualized | target manifest / packet / FFI / compatibility inventory is machine-readable; no codegen or binary split exists | 着手可能 |
@@ -117,6 +119,7 @@ python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 -m unittest scripts.tests.test_posegraph_samples
 python3 -m unittest scripts.tests.test_projection_boundary_samples
 python3 -m unittest scripts.tests.test_engine_adapter_boundary_samples
+python3 -m unittest scripts.tests.test_minimal_alpha1_patterns
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json
 python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json
@@ -125,6 +128,7 @@ python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --forma
 python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
+python3 scripts/minimal_alpha1_patterns.py check-all --format json
 python3 -m unittest scripts.tests.test_validate_docs scripts.tests.test_product_alpha1_installed_binary_check scripts.tests.test_product_alpha1_release_check scripts.tests.test_operational_product_samples
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
@@ -139,6 +143,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 23:37 JST
+  `P-PAT-01` で `scripts/minimal_alpha1_patterns.py`、unit test、hands-on / research summary、snapshot docs を追加し、minimal alpha-1 pattern set の exact row / rejection / inventory drift check を current verifier として追加した。
 - 2026-05-21 22:11 JST
   all-up closeout audit で focused helper suite、Cargo regression、product alpha release check、installed-binary probe、operational suite、docs validator を再実行し、current self-driven chain を close 済みに更新した。
 - 2026-05-21 21:57 JST

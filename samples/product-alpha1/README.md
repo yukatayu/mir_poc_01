@@ -36,6 +36,7 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/posegraph_samples.py check-all --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
+python3 scripts/minimal_alpha1_patterns.py check-all --format json
 cargo test -p mir-ast --test product_alpha1_package_schema -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_session -- --nocapture
 cargo test -p mir-runtime --test product_alpha1_transport_devtools -- --nocapture

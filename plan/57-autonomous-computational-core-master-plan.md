@@ -60,7 +60,49 @@ commit and push after each package
   `P-COMP-02`, `P-COMP-03`, `P-COMP-04`, `P-POSE-02`
 - all-up closeout audit:
   focused helper suites, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks passed
+- post-closeout maintenance verifier:
+  `P-PAT-01` adds a compact strict sample verifier over existing computational / PoseGraph / projection / engine-adapter rows without reopening runtime semantics
 - no promoted self-driven package remains in the current chain; later reopenings must be promoted explicitly from kept-later or user-spec-required lines
+
+## P-PAT-01 post-closeout verifier
+
+Purpose:
+
+- give external readers one compact command for the minimal practical alpha-1 pattern set.
+- catch drift in exact sample row counts, expected rejection IDs, compatibility rows, and inventory-only execution policies.
+- keep product release-candidate and operational Sugoroku workflow anchors visible without treating them as final product completion.
+
+Current status:
+
+- closed on 2026-05-21 as a maintenance / reader-facing verifier package.
+- does not add a new runtime semantics layer.
+
+Expected files:
+
+- `scripts/minimal_alpha1_patterns.py`
+- `scripts/tests/test_minimal_alpha1_patterns.py`
+- `docs/hands_on/minimal_alpha1_patterns_01.md`
+- `docs/research_abstract/minimal_alpha1_patterns_01.md`
+- snapshot docs and dashboard updates
+
+Validation:
+
+```bash
+python3 -m unittest scripts.tests.test_minimal_alpha1_patterns
+python3 scripts/minimal_alpha1_patterns.py matrix --format json
+python3 scripts/minimal_alpha1_patterns.py check-all --format json
+python3 scripts/minimal_alpha1_patterns.py run mir-compute-host-io-transform --format json
+python3 scripts/minimal_alpha1_patterns.py run mir-compute-missing-effect-reject --format json
+python3 scripts/minimal_alpha1_patterns.py run posegraph-no-split-frame --format json
+python3 scripts/minimal_alpha1_patterns.py run posegraph-split-frame-violation --format json
+```
+
+Close condition:
+
+- verifier rejects drift in computational / PoseGraph / projection / engine-adapter rows.
+- workflow anchors remain optional heavy checks via `--include-workflows`.
+- non-claims remain explicit:
+  no final grammar/API, no direct LLVM/native backend, no server/client split, no provider admission, no WAN/federation, no distributed durable save-load.
 
 ## P-COMP-01 plan
 
@@ -263,7 +305,7 @@ Observed closeout:
 - `scripts/mir_computational_samples.py check-all --format json` now reports 7 accepted rows, 5 expected runtime rejections, and 3 expected check rejections
 - `samples/product-alpha1/computational/host-io-internal-transform/` now contains `positive/`, `negative-undeclared-effect/`, `negative-undeclared-failure/`, and `negative-missing-capability/`
 - product-alpha schema/runtime tests now cover `required_capabilities` and `failure_tag` as declared admission-boundary evidence without claiming broad effectful runtime semantics
-- next promoted package is `P-POSE-02`
+- the next package at that time was `P-POSE-02`; the current chain is now closed through all-up audit and the post-closeout `P-PAT-01` verifier
 
 ## P-POSE-01 plan
 
@@ -308,7 +350,7 @@ git diff --check
 Current status:
 
 - closed on 2026-05-21 with bounded helper-backed no-split-frame evidence
-- current remaining package in this line is the all-up closeout audit
+- this line is now closed through all-up audit and the post-closeout `P-PAT-01` verifier
 
 Purpose:
 

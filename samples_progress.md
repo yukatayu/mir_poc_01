@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-21 22:11 JST
+Last updated: 2026-05-21 23:37 JST
 
-Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, and the closed all-up package chain after `P-POSE-02`. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
+Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, the closed all-up package chain after `P-POSE-02`, and `P-PAT-01` minimal alpha-1 pattern verification. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -35,6 +35,7 @@ Notes:
 | Transform / PoseGraph | evidence-closed helper no-split-frame line | `python3 scripts/posegraph_samples.py check-all --format json` | `specs/29` / `plan/54`, `samples/product-alpha1/posegraph/`, `matrix.json`, helper-only `package.mir.json`, and unit test now classify 7 planned rows, 1 accepted row, and 1 `violation_export` row while keeping same-client same-observation-snapshot explicit | pose-aware save/load, devtools panel family, and anchor-switch/reacquire rows remain later |
 | projection/backend boundary | boundary-fixed, planned scaffold actualized | `python3 scripts/projection_boundary_samples.py check-all --format json` | `specs/30` / `plan/55`, `samples/product-alpha1/projection/`, `matrix.json`, and helper/unit test now classify planned rows and reject `run` as `planned_only` | no projection codegen, server/client binary split, or backend execution yet |
 | engine/WASM/FFI adapter boundary | boundary-fixed, planned scaffold actualized | `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, `matrix.json`, and helper/unit test now classify planned provider rows and reject `run` as `planned_only` | no engine integration, final FFI ABI, or admitted native/WASM execution yet |
+| minimal alpha-1 pattern verifier | evidence-closed maintenance helper | `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | compact strict verifier over exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory execution policies | not a new runtime semantics layer; heavy workflow anchors optional |
 | autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
 
 ## Product Alpha Root Status
@@ -91,10 +92,12 @@ python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 -m unittest scripts.tests.test_posegraph_samples
 python3 -m unittest scripts.tests.test_projection_boundary_samples
 python3 -m unittest scripts.tests.test_engine_adapter_boundary_samples
+python3 -m unittest scripts.tests.test_minimal_alpha1_patterns
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/posegraph_samples.py check-all --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
+python3 scripts/minimal_alpha1_patterns.py check-all --format json
 python3 -m unittest scripts.tests.test_validate_docs scripts.tests.test_product_alpha1_installed_binary_check scripts.tests.test_product_alpha1_release_check scripts.tests.test_operational_product_samples
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
@@ -109,6 +112,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-21 23:37 JST | `P-PAT-01` minimal alpha-1 pattern verifier | pass | `scripts/minimal_alpha1_patterns.py`, unit test, hands-on / research summary, and snapshot docs were added; strict default check covers computational, PoseGraph, projection, and engine-adapter rows |
 | 2026-05-21 22:11 JST | all-up closeout audit | pass | focused helper suites, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks were rerun; the current self-driven chain is now closed through its planned audit package |
 | 2026-05-21 21:57 JST | `P-POSE-02` no-split-frame helper evidence | pass | `samples/product-alpha1/posegraph/`, helper-only `package.mir.json` inputs, matrix, unit test, and snapshot docs were synchronized; `check-all` now reports 1 accepted row, 1 violation row, and 7 planned rows; next reopen point is the all-up closeout audit |
 | 2026-05-21 21:27 JST | `P-COMP-04` computational effect boundary | pass | `host-io-internal-transform/` direct accepted/check-rejection rows, helper matrix, product-alpha schema/runtime tests, and snapshot docs were synchronized; `check-all` now reports 7 accepted rows, 5 expected runtime rejections, and 3 expected check rejections; next reopen point is `P-POSE-02` |

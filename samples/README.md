@@ -34,6 +34,10 @@
     - `run comp-02-pure-add-one` executes the bounded `ReadInt -> add_one -> WriteInt` path
     - `run comp-03-control-flow-positive` and `run comp-03-variables-scope-negative` execute helper-package first-floor evidence rather than the direct product-alpha CLI surface
     - `run comp-04-host-io-internal-transform-positive` and `run comp-04-host-io-internal-transform-negative-undeclared-effect` prove the bounded host read/write boundary line without claiming broader effectful semantics
+  - `scripts/minimal_alpha1_patterns.py check-all --format json` is the compact strict verifier for the current minimal alpha-1 pattern set:
+    - it checks exact computational / PoseGraph / projection / engine-adapter row counts and expected rejection IDs
+    - it lists product release-candidate and operational Sugoroku as workflow anchors without silently turning those anchors into final product claims
+    - use `--include-workflows --out <dir>` only when the heavier product / operational workflow anchors should be rerun in the same helper
   - `samples/product-alpha1/posegraph/` is the `P-POSE-02` bounded Transform / PoseGraph helper evidence line under `specs/29` / `plan/54`
     - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix, keeps 7 rows `planned_only`, and confirms 1 accepted row plus 1 violation-export row
     - `run pose-04-no-split-frame-positive` returns helper-backed accepted same-snapshot evidence and `run pose-05-split-frame-negative` returns helper-backed `violation_export`
@@ -124,6 +128,7 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/posegraph_samples.py check-all --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
+python3 scripts/minimal_alpha1_patterns.py check-all --format json
 cargo test -p mir-ast practical_alpha1_front_door -- --nocapture
 python3 scripts/practical_alpha1_check.py check-all --format json
 python3 scripts/practical_alpha1_run_local.py check-all --format json
