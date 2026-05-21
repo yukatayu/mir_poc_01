@@ -6,8 +6,12 @@ use std::{
 
 use mir_ast::product_alpha1::{
     ProductAlpha1CheckReport, ProductAlpha1Error, ProductAlpha1HostIoPayload,
-    ProductAlpha1HostIoRuntimeInput, ProductAlpha1Package, ProductAlpha1ProjectionInventorySummary,
-    check_product_alpha1_package_path, load_product_alpha1_package_path,
+    ProductAlpha1HostIoRuntimeInput, ProductAlpha1MirComputeRuntimeInput, ProductAlpha1Package,
+    ProductAlpha1ProjectionInventorySummary, check_product_alpha1_package_path,
+    load_product_alpha1_package_path,
+};
+use mir_semantics::computational_core::{
+    Value as ComputationalValue, declared_module, eval_function, typecheck_module,
 };
 use mirrorea_core::{
     AuthEvidence, HotPlugRequest, HotPlugVerdict, LogicalPlaceRuntimeShell,
@@ -46,6 +50,7 @@ pub enum ProductAlpha1SessionErrorKind {
     Checker,
     Core,
     HostIo,
+    MirCompute,
     LoadAdmissibility,
     MissingSavepoint,
     Serialize,
@@ -86,6 +91,7 @@ pub struct ProductAlpha1RunLocalReport {
     pub local_transport_claimed: bool,
     pub local_session_store_claimed: bool,
     pub typed_host_io_claimed: bool,
+    pub mir_computation_claimed: bool,
     pub product_alpha1_ready: bool,
     pub final_public_api_frozen: bool,
     #[serde(default = "stop_lines_default")]
@@ -160,6 +166,8 @@ pub struct ProductAlpha1SessionCarrier {
     pub active_layers: Vec<String>,
     pub hotplug_lifecycle: Vec<ProductAlpha1HotPlugLifecycleEntry>,
     pub host_io_history: Vec<ProductAlpha1HostIoEntry>,
+    #[serde(default)]
+    pub mir_compute_history: Vec<ProductAlpha1MirComputeEntry>,
     pub auth_state: ProductAlpha1AuthState,
     pub capability_state: ProductAlpha1CapabilityState,
     pub auth_decisions: Vec<ProductAlpha1AuthDecision>,
@@ -271,6 +279,15 @@ pub struct ProductAlpha1HostIoEntry {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProductAlpha1MirComputeEntry {
+    pub module_id: String,
+    pub function_id: String,
+    pub input_summary: String,
+    pub output_summary: String,
+    pub event_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProductAlpha1SaveLoadState {
     pub ordinary_save_ready: bool,
     pub quiescent_save_ready: bool,
@@ -298,6 +315,8 @@ pub struct ProductAlpha1SessionSavepoint {
     pub saved_active_layers: Vec<String>,
     pub saved_hotplug_lifecycle: Vec<ProductAlpha1HotPlugLifecycleEntry>,
     pub saved_host_io_history: Vec<ProductAlpha1HostIoEntry>,
+    #[serde(default)]
+    pub saved_mir_compute_history: Vec<ProductAlpha1MirComputeEntry>,
     pub saved_auth_state: ProductAlpha1AuthState,
     pub saved_capability_state: ProductAlpha1CapabilityState,
     pub saved_auth_decisions: Vec<ProductAlpha1AuthDecision>,
@@ -531,6 +550,7 @@ pub fn run_product_alpha1_local_session_path(
     let runtime_plan = build_runtime_plan(&package, check_report.projection_inventory.clone());
     let session = build_run_local_session(&package, runtime_plan.clone())?;
     let typed_host_io_claimed = !session.host_io_history.is_empty();
+    let mir_computation_claimed = !session.mir_compute_history.is_empty();
 
     Ok(ProductAlpha1RunLocalReport {
         surface_kind: run_local_surface_kind(),
@@ -542,6 +562,7 @@ pub fn run_product_alpha1_local_session_path(
         local_transport_claimed: false,
         local_session_store_claimed: true,
         typed_host_io_claimed,
+        mir_computation_claimed,
         product_alpha1_ready: false,
         final_public_api_frozen: false,
         stop_lines: stop_lines_default(),
@@ -777,6 +798,7 @@ pub fn load_product_alpha1_session(
     next.active_layers = savepoint.saved_active_layers.clone();
     next.hotplug_lifecycle = savepoint.saved_hotplug_lifecycle.clone();
     next.host_io_history = savepoint.saved_host_io_history.clone();
+    next.mir_compute_history = savepoint.saved_mir_compute_history.clone();
     next.auth_state = savepoint.saved_auth_state.clone();
     next.capability_state = savepoint.saved_capability_state.clone();
     next.auth_decisions = savepoint.saved_auth_decisions.clone();
@@ -1010,13 +1032,14 @@ fn build_run_local_session(
     runtime_plan: ProductAlpha1RuntimePlan,
 ) -> Result<ProductAlpha1SessionCarrier, ProductAlpha1SessionError> {
     let (runtime_snapshot, envelope) = build_core_runtime_snapshot(package, &runtime_plan)?;
-    let host_io_history = build_host_io_history(package)?;
+    let (host_io_history, mir_compute_history) = build_runtime_histories(package)?;
     let failure_observations = build_failure_observations(package);
     let event_dag = build_initial_event_dag(
         package,
         &runtime_plan.entry_place,
         &envelope,
         &host_io_history,
+        &mir_compute_history,
         &failure_observations,
     );
     let mut routes = vec![ProductAlpha1RouteEntry {
@@ -1122,6 +1145,7 @@ fn build_run_local_session(
         active_layers: Vec::new(),
         hotplug_lifecycle: Vec::new(),
         host_io_history,
+        mir_compute_history,
         auth_state: build_auth_state(package),
         capability_state: build_capability_state(package),
         auth_decisions: vec![initial_auth_decision(package)],
@@ -1172,6 +1196,7 @@ fn build_session_savepoint(
         saved_active_layers: session.active_layers.clone(),
         saved_hotplug_lifecycle: session.hotplug_lifecycle.clone(),
         saved_host_io_history: session.host_io_history.clone(),
+        saved_mir_compute_history: session.mir_compute_history.clone(),
         saved_auth_state: session.auth_state.clone(),
         saved_capability_state: session.capability_state.clone(),
         saved_auth_decisions: session.auth_decisions.clone(),
@@ -1462,6 +1487,7 @@ fn build_initial_event_dag(
     entry_place: &str,
     envelope: &MessageEnvelope,
     host_io_history: &[ProductAlpha1HostIoEntry],
+    mir_compute_history: &[ProductAlpha1MirComputeEntry],
     failure_observations: &[ProductAlpha1FailureObservation],
 ) -> ProductAlpha1EventDag {
     let mut nodes = vec![
@@ -1500,37 +1526,110 @@ fn build_initial_event_dag(
         },
     ];
 
-    if let Some(host_io) = host_io_history.first() {
-        nodes.push(ProductAlpha1EventNode {
-            event_id: host_io.request_event_id.clone(),
-            event_kind: "host_io_request".to_string(),
-            place_ref: "Place[HostAdapter]".to_string(),
-            envelope_ref: None,
-            observer_safe_summary: host_io.request_summary.clone(),
-        });
-        nodes.push(ProductAlpha1EventNode {
-            event_id: host_io.response_event_id.clone(),
-            event_kind: "host_io_response".to_string(),
-            place_ref: "Place[HostAdapter]".to_string(),
-            envelope_ref: None,
-            observer_safe_summary: host_io.response_summary.clone(),
-        });
-        edges.push(ProductAlpha1EventEdge {
-            from_event: "event#message-delivered".to_string(),
-            to_event: host_io.request_event_id.clone(),
-            relation: "host_io_after_delivery".to_string(),
-        });
-        edges.push(ProductAlpha1EventEdge {
-            from_event: host_io.request_event_id.clone(),
-            to_event: host_io.response_event_id.clone(),
-            relation: "typed_request_response_order".to_string(),
-        });
+    let mut previous_event_id = "event#message-delivered".to_string();
+    if mir_compute_history.is_empty() {
+        if let Some(host_io) = host_io_history.first() {
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_io.request_event_id.clone(),
+                event_kind: "host_io_request".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_io.request_summary.clone(),
+            });
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_io.response_event_id.clone(),
+                event_kind: "host_io_response".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_io.response_summary.clone(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: previous_event_id.clone(),
+                to_event: host_io.request_event_id.clone(),
+                relation: "host_io_after_delivery".to_string(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: host_io.request_event_id.clone(),
+                to_event: host_io.response_event_id.clone(),
+                relation: "typed_request_response_order".to_string(),
+            });
+            previous_event_id = host_io.response_event_id.clone();
+        }
+    } else {
+        if let Some(host_input) = host_io_history.first() {
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_input.request_event_id.clone(),
+                event_kind: "host_input_requested".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_input.request_summary.clone(),
+            });
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_input.response_event_id.clone(),
+                event_kind: "host_input_received".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_input.response_summary.clone(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: previous_event_id.clone(),
+                to_event: host_input.request_event_id.clone(),
+                relation: "host_input_after_delivery".to_string(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: host_input.request_event_id.clone(),
+                to_event: host_input.response_event_id.clone(),
+                relation: "typed_request_response_order".to_string(),
+            });
+            previous_event_id = host_input.response_event_id.clone();
+        }
+        if let Some(compute) = mir_compute_history.first() {
+            nodes.push(ProductAlpha1EventNode {
+                event_id: compute.event_id.clone(),
+                event_kind: "mir_compute_step".to_string(),
+                place_ref: entry_place.to_string(),
+                envelope_ref: None,
+                observer_safe_summary: format!(
+                    "{} {} -> {}",
+                    compute.function_id, compute.input_summary, compute.output_summary
+                ),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: previous_event_id.clone(),
+                to_event: compute.event_id.clone(),
+                relation: "mir_compute_after_host_input".to_string(),
+            });
+            previous_event_id = compute.event_id.clone();
+        }
+        if let Some(host_output) = host_io_history.get(1) {
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_output.request_event_id.clone(),
+                event_kind: "host_output_requested".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_output.request_summary.clone(),
+            });
+            nodes.push(ProductAlpha1EventNode {
+                event_id: host_output.response_event_id.clone(),
+                event_kind: "host_output_emitted".to_string(),
+                place_ref: "Place[HostAdapter]".to_string(),
+                envelope_ref: None,
+                observer_safe_summary: host_output.response_summary.clone(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: previous_event_id.clone(),
+                to_event: host_output.request_event_id.clone(),
+                relation: "host_output_after_mir_compute".to_string(),
+            });
+            edges.push(ProductAlpha1EventEdge {
+                from_event: host_output.request_event_id.clone(),
+                to_event: host_output.response_event_id.clone(),
+                relation: "typed_request_response_order".to_string(),
+            });
+            previous_event_id = host_output.response_event_id.clone();
+        }
     }
 
-    let mut previous_event_id = nodes
-        .last()
-        .map(|node| node.event_id.clone())
-        .unwrap_or_else(|| "event#session-started".to_string());
     for failure in failure_observations {
         let observed_event_id = format!("event#message-failure-observed#{}", failure.failure_class);
         let recovered_event_id = format!("event#message-recovery#{}", failure.failure_class);
@@ -1663,7 +1762,26 @@ fn build_core_runtime_snapshot(
     Ok((snapshot, envelope))
 }
 
-fn build_host_io_history(
+fn build_runtime_histories(
+    package: &ProductAlpha1Package,
+) -> Result<
+    (
+        Vec<ProductAlpha1HostIoEntry>,
+        Vec<ProductAlpha1MirComputeEntry>,
+    ),
+    ProductAlpha1SessionError,
+> {
+    if package.runtime_input.mir_compute.is_some()
+        || package.runtime_input.host_input.is_some()
+        || package.runtime_input.host_output.is_some()
+    {
+        return build_computational_runtime_histories(package);
+    }
+
+    Ok((build_legacy_host_io_history(package)?, Vec::new()))
+}
+
+fn build_legacy_host_io_history(
     package: &ProductAlpha1Package,
 ) -> Result<Vec<ProductAlpha1HostIoEntry>, ProductAlpha1SessionError> {
     let Some(host_io) = &package.runtime_input.host_io else {
@@ -1697,10 +1815,139 @@ fn build_host_io_history(
     }])
 }
 
+fn build_computational_runtime_histories(
+    package: &ProductAlpha1Package,
+) -> Result<
+    (
+        Vec<ProductAlpha1HostIoEntry>,
+        Vec<ProductAlpha1MirComputeEntry>,
+    ),
+    ProductAlpha1SessionError,
+> {
+    let host_input = package
+        .runtime_input
+        .host_input
+        .as_ref()
+        .ok_or_else(|| host_io_error("missing runtime_input.host_input".to_string()))?;
+    let mir_compute = package
+        .runtime_input
+        .mir_compute
+        .as_ref()
+        .ok_or_else(|| mir_compute_error("missing runtime_input.mir_compute".to_string()))?;
+    let host_output = package
+        .runtime_input
+        .host_output
+        .as_ref()
+        .ok_or_else(|| host_io_error("missing runtime_input.host_output".to_string()))?;
+
+    let (host_input_entry, host_input_response) = execute_declared_host_io(
+        package,
+        host_input,
+        "runtime_input.host_input",
+        "event#host-input-request-1",
+        "event#host-input-response-1",
+    )?;
+    let (mir_compute_entry, mir_compute_output) =
+        execute_declared_mir_compute(mir_compute, &host_input_response)?;
+    if mir_compute_output != host_output.request_payload {
+        return Err(mir_compute_error(
+            "runtime_input.host_output.request_payload does not match Mir compute output"
+                .to_string(),
+        ));
+    }
+    let (host_output_entry, _) = execute_declared_host_io(
+        package,
+        host_output,
+        "runtime_input.host_output",
+        "event#host-output-request-1",
+        "event#host-output-response-1",
+    )?;
+
+    Ok((
+        vec![host_input_entry, host_output_entry],
+        vec![mir_compute_entry],
+    ))
+}
+
+fn execute_declared_host_io(
+    package: &ProductAlpha1Package,
+    host_io: &ProductAlpha1HostIoRuntimeInput,
+    field_name: &str,
+    request_event_id: &str,
+    response_event_id: &str,
+) -> Result<(ProductAlpha1HostIoEntry, ProductAlpha1HostIoPayload), ProductAlpha1SessionError> {
+    if !package.effects.contains(&host_io.effect_ref) {
+        return Err(host_io_error(format!(
+            "{field_name}.effect_ref `{}` is not declared in package effects",
+            host_io.effect_ref
+        )));
+    }
+
+    let response = execute_product_host_io(host_io)?;
+    if response != host_io.expected_response {
+        return Err(host_io_error(format!(
+            "{field_name} adapter `{}` returned {}, expected {}",
+            host_io.adapter_kind,
+            payload_summary(&response),
+            payload_summary(&host_io.expected_response)
+        )));
+    }
+
+    Ok((
+        ProductAlpha1HostIoEntry {
+            adapter_kind: host_io.adapter_kind.clone(),
+            effect_ref: host_io.effect_ref.clone(),
+            request_summary: payload_summary(&host_io.request_payload),
+            response_summary: payload_summary(&response),
+            request_event_id: request_event_id.to_string(),
+            response_event_id: response_event_id.to_string(),
+        },
+        response,
+    ))
+}
+
+fn execute_declared_mir_compute(
+    mir_compute: &ProductAlpha1MirComputeRuntimeInput,
+    input_payload: &ProductAlpha1HostIoPayload,
+) -> Result<(ProductAlpha1MirComputeEntry, ProductAlpha1HostIoPayload), ProductAlpha1SessionError> {
+    let module = declared_module(&mir_compute.module_id)
+        .map_err(|error| mir_compute_error(error.to_string()))?;
+    typecheck_module(&module).map_err(|error| mir_compute_error(error.to_string()))?;
+    let input_value = computational_value_from_payload(input_payload, &mir_compute.input_type)?;
+    let output_value = eval_function(&module, &mir_compute.function_id, vec![input_value.clone()])
+        .map_err(|error| mir_compute_error(error.to_string()))?;
+    let output_payload = payload_from_computational_value(&output_value, &mir_compute.output_type)?;
+    if output_payload != mir_compute.expected_output {
+        return Err(mir_compute_error(format!(
+            "Mir compute `{}` returned {}, expected {}",
+            mir_compute.function_id,
+            payload_summary(&output_payload),
+            payload_summary(&mir_compute.expected_output)
+        )));
+    }
+
+    Ok((
+        ProductAlpha1MirComputeEntry {
+            module_id: mir_compute.module_id.clone(),
+            function_id: mir_compute.function_id.clone(),
+            input_summary: payload_summary(input_payload),
+            output_summary: payload_summary(&output_payload),
+            event_id: "event#mir-compute-step-1".to_string(),
+        },
+        output_payload,
+    ))
+}
+
 fn execute_product_host_io(
     host_io: &ProductAlpha1HostIoRuntimeInput,
 ) -> Result<ProductAlpha1HostIoPayload, ProductAlpha1SessionError> {
     match (host_io.adapter_kind.as_str(), &host_io.request_payload) {
+        ("ReadInt", ProductAlpha1HostIoPayload::Int { value }) => {
+            Ok(ProductAlpha1HostIoPayload::Int { value: *value })
+        }
+        ("WriteInt", ProductAlpha1HostIoPayload::Int { value }) => {
+            Ok(ProductAlpha1HostIoPayload::Int { value: *value })
+        }
         ("AddOne", ProductAlpha1HostIoPayload::Int { value }) => {
             Ok(ProductAlpha1HostIoPayload::Int { value: value + 1 })
         }
@@ -1714,6 +1961,14 @@ fn execute_product_host_io(
                 value: format!("room#lobby message accepted: {value}"),
             })
         }
+        ("ReadInt", other) => Err(host_io_error(format!(
+            "ReadInt adapter only accepts integer payloads, found {}",
+            payload_summary(other)
+        ))),
+        ("WriteInt", other) => Err(host_io_error(format!(
+            "WriteInt adapter only accepts integer payloads, found {}",
+            payload_summary(other)
+        ))),
         ("AddOne", other) => Err(host_io_error(format!(
             "AddOne adapter only accepts integer payloads, found {}",
             payload_summary(other)
@@ -1736,6 +1991,42 @@ fn payload_summary(payload: &ProductAlpha1HostIoPayload) -> String {
     match payload {
         ProductAlpha1HostIoPayload::Int { value } => format!("Int({value})"),
         ProductAlpha1HostIoPayload::Text { value } => format!("Text({value:?})"),
+    }
+}
+
+fn computational_value_from_payload(
+    payload: &ProductAlpha1HostIoPayload,
+    expected_type: &str,
+) -> Result<ComputationalValue, ProductAlpha1SessionError> {
+    match (expected_type, payload) {
+        ("Int64", ProductAlpha1HostIoPayload::Int { value }) => {
+            Ok(ComputationalValue::Int64(*value))
+        }
+        ("Text", ProductAlpha1HostIoPayload::Text { value }) => {
+            Ok(ComputationalValue::Text(value.clone()))
+        }
+        _ => Err(mir_compute_error(format!(
+            "runtime_input.mir_compute expected {expected_type}, found {}",
+            payload_summary(payload)
+        ))),
+    }
+}
+
+fn payload_from_computational_value(
+    value: &ComputationalValue,
+    expected_type: &str,
+) -> Result<ProductAlpha1HostIoPayload, ProductAlpha1SessionError> {
+    match (expected_type, value) {
+        ("Int64", ComputationalValue::Int64(value)) => {
+            Ok(ProductAlpha1HostIoPayload::Int { value: *value })
+        }
+        ("Text", ComputationalValue::Text(value)) => Ok(ProductAlpha1HostIoPayload::Text {
+            value: value.clone(),
+        }),
+        _ => Err(mir_compute_error(format!(
+            "runtime_input.mir_compute produced incompatible value {} for declared output type {expected_type}",
+            value.summary()
+        ))),
     }
 }
 
@@ -3081,6 +3372,14 @@ fn host_io_error(detail: String) -> ProductAlpha1SessionError {
     ProductAlpha1SessionError {
         kind: ProductAlpha1SessionErrorKind::HostIo,
         path: PathBuf::from("<runtime_input.host_io>"),
+        detail,
+    }
+}
+
+fn mir_compute_error(detail: String) -> ProductAlpha1SessionError {
+    ProductAlpha1SessionError {
+        kind: ProductAlpha1SessionErrorKind::MirCompute,
+        path: PathBuf::from("<runtime_input.mir_compute>"),
         detail,
     }
 }

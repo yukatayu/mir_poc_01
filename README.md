@@ -47,7 +47,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 
 ## Mir Computational Core rebaseline
 
-2026-05-21 時点の current docs/spec line は `P-COMP-00` recognition rebaseline を踏まえた front-half scaffold actualization です。これは Product Alpha-1 の runnable workflow を捨てるものではなく、そこを execution / observation floor として保ったまま、Mir 自身が computation を所有する first floor、PoseGraph / no-split-frame の semantics line、projection boundary inventory、engine / WASM / FFI adapter inventory を planned-only root / helper / matrix として machine-readable にするものです。
+2026-05-21 時点の current docs/spec line は、front-half scaffold actualization を維持したまま `P-COMP-02` で最初の Mir-owned computational row を実行可能にした段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の一行だけが executable になり、PoseGraph / projection / engine-adapter は引き続き planned-only matrix / helper / inventory として machine-readable に保たれています。
 
 新しい正本 / repository memory は次です。
 
@@ -62,7 +62,7 @@ current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、v
 - `specs/32-autonomous-execution-and-completion-contract.md`
 - `plan/57-autonomous-computational-core-master-plan.md`
 
-`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、`samples/product-alpha1/computational/` / `scripts/mir_computational_samples.py`、`samples/product-alpha1/posegraph/` / `scripts/posegraph_samples.py`、`samples/product-alpha1/projection/` / `scripts/projection_boundary_samples.py`、`samples/product-alpha1/engine-adapter/` / `scripts/engine_adapter_boundary_samples.py` が current planned-only scaffold として actualize 済みです。次は implementation half の `P-COMP-02..04` と `P-POSE-02` です。現時点では computational / PoseGraph runtime completion、projection code generation、provider admission ではなく、completion gate と stop line を明確にした staged roadmap として読む必要があります。
+`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は front-half close 済みで、そのうえで `P-COMP-02` が `samples/product-alpha1/computational/add-one-pure-mir/` を executable に昇格させました。`scripts/mir_computational_samples.py run comp-02-pure-add-one --format json` は `ReadInt(41) -> add_one -> WriteInt(42)` を確認できます。次の implementation half は `P-COMP-03`、`P-COMP-04`、`P-POSE-02` で、current stop line は引き続き final grammar / projection code generation / provider admission / public ABI です。
 
 Autonomous execution の default は `specs/32` / `plan/57` に置きます。一度実行を依頼された後は package-by-package で進み、final distribution / final catalog / final ABI のような user-spec-required gate は lower-layer implementation を止めずに隔離します。
 

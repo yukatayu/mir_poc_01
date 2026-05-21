@@ -30,7 +30,7 @@ It does not yet show:
 
 ## current sample matrix
 
-`P-COMP-01` actualizes the planned-only scaffold. The roots now exist, but they are not runnable computational proofs yet:
+`P-COMP-01` actualized the scaffold, and `P-COMP-02` promoted the first executable row. The current roots are:
 
 - `samples/product-alpha1/computational/add-one-pure-mir/`
 - `samples/product-alpha1/computational/variables-scope/`
@@ -40,20 +40,23 @@ It does not yet show:
 - `samples/product-alpha1/computational/imports-functions/`
 - `samples/product-alpha1/computational/host-io-internal-transform/`
 
-Current helper actualized in `P-COMP-01`:
+Current helper/runtime anchors:
 
 - `scripts/mir_computational_samples.py`
+- `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`
+- `samples/product-alpha1/computational/expected/add-one-pure-mir.expected.json`
 
-Current planned-only validation anchors:
+Current validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 scripts/mir_computational_samples.py matrix --format json
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
 ```
 
-These commands validate matrix classification and planned-only rejection behavior. They do not prove Mir-owned runtime execution.
+These commands validate matrix classification and prove one bounded Mir-owned runtime execution. They do not yet prove variables / arrays / records / control-flow or the effect-boundary packages.
 
 ## typing and failure-row roadmap
 
@@ -112,4 +115,4 @@ Later, after first-floor evidence:
 
 ## current recommendation
 
-`P-COMP-01` is now the closed computational scaffold package. The next computational implementation package is `P-COMP-02`, but the repo-wide next promoted front-half package remains `P-POSE-01` under `plan/57`. Broader distribution / final shared-space catalog decisions remain user-spec-required gates, but they do not block the current autonomous front-half queue.
+`P-COMP-01` and `P-COMP-02` are now closed. The next computational implementation package is `P-COMP-03`, while broader distribution / final shared-space catalog decisions remain user-spec-required gates and do not block the current implementation queue.

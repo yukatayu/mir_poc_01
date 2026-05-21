@@ -8,6 +8,7 @@ for representative fixtures. It is intentionally narrow and does not try to beco
 the full Mir runtime.
 "#]
 
+pub mod computational_core;
 mod harness;
 
 use std::{

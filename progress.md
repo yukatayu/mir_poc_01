@@ -24,15 +24,15 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-ENG-01` engine / WASM / FFI adapter inventory scaffold actualization
-- current promoted reopen point:
   `P-COMP-02` pure AddOne in Mir
+- current promoted reopen point:
+  `P-COMP-03` variables / arrays / records / control-flow first floor
 - current reading:
   repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。その上で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow completion ではない。
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize し、implementation half `P-COMP-02 -> P-COMP-03 -> P-COMP-04 -> P-POSE-02` へ進む段階に入った。`P-COMP-01`、`P-POSE-01`、`P-PROJ-01`、`P-ENG-01` は planned-only computational / PoseGraph / projection / engine-adapter root・matrix・helper・tests まで actualize 済みで、current next package は `P-COMP-02` である。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one executable Mir-owned computational row を追加した。current next package は `P-COMP-03` であり、implementation half は `P-COMP-03 -> P-COMP-04 -> P-POSE-02` へ進む。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
 
 ## workflow-readiness axes
 
@@ -40,7 +40,7 @@ Place をまたいで実行・通信・検証・可視化できる
 |---|---|---|
 | 論理仕様 | boundary-fixed, not workflow completion by itself | `specs/18..31` が practical / operational / product alpha / operational sample / portal-shard / computational core / PoseGraph / projection-backend / engine-adapter boundary を分ける。final public grammar / ABI は未固定 |
 | ユーザ向け仕様 | reproducible workflow guidance exists | `README.md`、`Documentation.md`、`docs/hands_on/product_alpha1_01.md`、`docs/hands_on/operational_product_sample_01.md`、authoring / backend / portal-shard guides が current command path と non-claims を説明する |
-| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe. Computational / PoseGraph / projection / engine-adapter scaffolds are actualized as planned-only roots |
+| 実装 / 運用 | product alpha release-candidate plus canonical operational suite | product demo and operational suite are runnable through local/Docker controlled validation; installed-binary + generated host launch bundle is the current adoption probe. Computational now has one executable Mir-owned row; PoseGraph / projection / engine-adapter remain scaffold or inventory lines |
 
 ## line snapshot
 
@@ -53,16 +53,16 @@ Place をまたいで実行・通信・検証・可視化できる
 | product alpha-1 release candidate | product alpha workflow | release-candidate ready, not final product | `scripts/product_alpha1_release_check.py --format json check-all --out <dir>` が Docker 込みで accepted なら release-candidate evidence | broader public distribution / final catalog decision |
 | installed-binary adoption probe | public-ish alpha adoption probe | bounded adoption candidate | `scripts/product_alpha1_installed_binary_check.py --format json check-all --out <dir>` が built binary + generated host bundle replay を確認 | archive / installer / hosted-service shape |
 | operational product sample suite | canonical operational suite | workflow-ready canonical suite, not final product | `scripts/operational_product_samples.py check-all --format json` が six roots, attach packages, transport, devtools, native bundle, portal/shard/gradient cuts を確認 | user-spec-required broader distribution / final catalog decision |
-| Mir computational core | docs/spec rebaseline | planned-only scaffold actualized | `specs/28` / `plan/53` define first floor and package gates; `samples/product-alpha1/computational/` and `scripts/mir_computational_samples.py` classify planned rows and reject `run` as `planned_only` | `P-COMP-02` pure AddOne in Mir |
+| Mir computational core | first executable row plus planned widening queue | one bounded row executable | `specs/28` / `plan/53`, `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`, `crates/mir-semantics::computational_core`, and `scripts/mir_computational_samples.py` now prove `ReadInt -> add_one -> WriteInt` while preserving legacy adapter-owned `typed_host_io.add_one` | `P-COMP-03` variables / arrays / records / control-flow |
 | Transform / PoseGraph | docs/spec rebaseline | planned-only scaffold actualized | `specs/29` / `plan/54`, `samples/product-alpha1/posegraph/`, and `scripts/posegraph_samples.py` classify planned rows and reject `run` as `planned_only` | `P-POSE-02` positive/negative no-split-frame evidence |
 | projection/backend boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/30` / `plan/55`, `samples/product-alpha1/projection/`, and `scripts/projection_boundary_samples.py` classify planned rows, preserve accepted/rejected compatibility IDs, and reject `run` as `planned_only` | later projection realization package, if any, after explicit design choice |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, and `scripts/engine_adapter_boundary_samples.py` classify planned provider rows, preserve default execution gating, and reject `run` as `planned_only` | bounded provider admission package, if any, after explicit policy choice |
-| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue `P-COMP-02..04` / `P-POSE-02` implementation queue |
+| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue `P-COMP-03..04` / `P-POSE-02` implementation queue |
 
 ## subsystem status
 
 - **Mir**
-  current-L2 の semantics / invariant / parser-free evidence floor は維持。Mir-owned computational core first floor は docs/spec rebaseline 済みだが、runtime/sample implementation は未着手。final textual grammar と final public checker/runtime/verifier API は未固定。
+  current-L2 の semantics / invariant / parser-free evidence floor は維持。Mir-owned computational core first floor は `P-COMP-02` で pure `add_one` まで executable になったが、variables / arrays / records / control-flow / explicit effect boundary はまだ後続 package。final textual grammar と final public checker/runtime/verifier API は未固定。
 - **Mirrorea**
   same-session carrier、hot-plug、local/Docker transport、observer-safe devtools、local R0/R2 save-load、native host launch bundle の alpha workflow は再現可能。WAN/federation、distributed durable save-load、final viewer/telemetry ABI は後段。
 - **Typed-Effect Wiring Platform**
@@ -90,7 +90,7 @@ Place をまたいで実行・通信・検証・可視化できる
 | dynamic attach / detach / DAG-safe evolution | bounded same-session attach workflow | debug/auth/rate-limit/object/avatar attach behavior is visible; accepted detach and distributed ordering remain later | 着手可能 |
 | `atomic_cut` and higher-level ordering | semantics fixed, evidence-backed | `atomic_cut` remains place-local rollback frontier; durable/distributed commit is not implied | 着手可能 |
 | executable sample corpus | workflow-ready where scoped | clean near-end, practical alpha workflows, product alpha release candidate, installed-binary probe, and operational suite have runnable anchors | 着手可能 |
-| Mir-owned computation | boundary-fixed, planned-only samples | current alpha host `AddOne` is external adapter evidence only; pure AddOne in Mir is next proof point | 着手可能 |
+| Mir-owned computation | first executable row | current alpha host `AddOne` is still external adapter evidence only, and a separate Mir-owned `add_one` row now exists under product-alpha computational root | 着手可能 |
 | PoseGraph / no-split-frame | planned-only scaffold actualized | same-client same-observation-snapshot invariant, `Anchor`, `AnchorBinding`, `AnchorSwitch`, and stale-anchor reacquire gates are defined; helper-backed planned roots now exist, but no runtime sample yet | 着手可能 |
 | projection/backend inventory | planned-only scaffold actualized | target manifest / packet / FFI / compatibility inventory is machine-readable; no codegen or binary split exists | 着手可能 |
 | engine/provider inventory | planned-only scaffold actualized | provider contract rows and default execution gating are machine-readable; no provider admission exists | 着手可能 |
@@ -99,7 +99,7 @@ Place をまたいで実行・通信・検証・可視化できる
 
 - broader installed/public distribution is undefined beyond developer-built `mirrorea-alpha` plus locally generated native host launch bundle.
 - final shared-space operational catalog breadth is undefined beyond the bounded product alpha-1 narrow showcase.
-- Mir-owned computational core runtime evidence is not yet implemented. `P-COMP-01` added only the planned-only scaffold root / helper / matrix.
+- Mir-owned computational core first-floor widening is not yet implemented beyond the single `add_one` row. Variables / arrays / records / control-flow / effect-boundary evidence remain open.
 - PoseGraph runtime evidence is not yet implemented. `P-POSE-01` added only the planned-only scaffold root / helper / matrix.
 - projection/backend boundary is scaffolded but still inventory-only; no server/client split or codegen exists.
 - engine/WASM/FFI adapter boundary is scaffolded but still inventory-only; no arbitrary execution is admitted.
@@ -135,6 +135,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 20:27 JST
+  `P-COMP-02` で `crates/mir-semantics::computational_core`、product-alpha schema/runtime/session/savepoint widening、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`、helper/test/doc sync を実装し、`run comp-02-pure-add-one` が bounded Mir-owned `ReadInt -> add_one -> WriteInt` row を accepted で返すようにした。next reopen point は `P-COMP-03`。
 - 2026-05-21 19:56 JST
   `P-PROJ-01` と `P-ENG-01` の planned-only projection / engine-adapter scaffold、helper、unit test、plan 更新を validator/snapshot docs に同期し、front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` closeout を current repo snapshot に反映した。next reopen point は `P-COMP-02`。
 - 2026-05-21 19:41 JST

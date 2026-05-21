@@ -198,6 +198,82 @@ const MINIMAL_CHAT_TEXT_PRODUCT_PACKAGE: &str = r#"{
   }
 }"#;
 
+const MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE: &str = r#"{
+  "schema_version": "mirrorea-product-alpha1-v0",
+  "package_id": "computational-add-one-pure-mir",
+  "package_version": "0.1.0-alpha.1",
+  "package_kind": "world",
+  "dependencies": [],
+  "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
+  "failures": ["AdapterUnavailable", "TypeMismatch"],
+  "capabilities": ["RunComputationalAddOne"],
+  "witness_requirements": [],
+  "membership_requirements": ["active_participant"],
+  "auth_policy": {
+    "policy_id": "computational-add-one-auth-policy",
+    "required_bindings": ["participant_membership"]
+  },
+  "auth_stack": ["membership_auth", "capability_auth"],
+  "contracts": [
+    {
+      "contract_id": "computational-add-one-contract",
+      "variance": "invariant",
+      "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
+      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+    }
+  ],
+  "observation_policy": {
+    "view_role": "observer_safe",
+    "labels": ["observer_safe_compute_summary"]
+  },
+  "redaction_policy": {
+    "level": "observer_safe",
+    "redacted_fields": ["raw_auth_evidence"]
+  },
+  "retention_policy": {
+    "scope": "computational_session",
+    "retained_artifacts": ["checker_report", "runtime_plan", "compute_trace"]
+  },
+  "message_recovery_policy": {
+    "handled_failures": ["reject"],
+    "recovery": "reject"
+  },
+  "savepoint_policy": {
+    "classes": ["R0", "R2"],
+    "quiescent_required": true
+  },
+  "runtime_input": {
+    "entry_place": "Place[ComputationalHostPlace]",
+    "host_input": {
+      "adapter_kind": "ReadInt",
+      "effect_ref": "typed_host_io.read_int",
+      "request_payload": {"kind": "int", "value": 41},
+      "expected_response": {"kind": "int", "value": 41}
+    },
+    "mir_compute": {
+      "module_id": "Computational.AddOne",
+      "function_id": "add_one",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "expected_output": {"kind": "int", "value": 42}
+    },
+    "host_output": {
+      "adapter_kind": "WriteInt",
+      "effect_ref": "typed_host_io.write_int",
+      "request_payload": {"kind": "int", "value": 42},
+      "expected_response": {"kind": "int", "value": 42}
+    }
+  },
+  "native_policy": {
+    "execution_policy": "disabled",
+    "provenance_required": true
+  },
+  "compatibility": {
+    "min_cli_schema_version": "mirrorea-product-alpha1-v0",
+    "migration_policy": "alpha_schema_migration_required"
+  }
+}"#;
+
 const MINIMAL_PROJECTION_PROFILE: &str = r#"{
   "projection_profile_version": "ops-product-projection-v0",
   "non_final": true,
@@ -331,6 +407,41 @@ fn product_alpha1_package_schema_rejects_invalid_chat_text_expected_response() {
 
     assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
     assert!(error.detail.contains("ChatText"));
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_computational_add_one_package() {
+    let package = parse_product_alpha1_package_text(MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE)
+        .expect("computational add-one package should parse");
+    let report =
+        check_product_alpha1_package(&package).expect("computational add-one package should check");
+
+    assert_eq!(report.package_id, "computational-add-one-pure-mir");
+    assert!(report.accepted_obligations.iter().any(|row| {
+        row.kind == "runtime_input_mir_compute"
+            && row.evidence == "Mir-owned computational runtime input declaration accepted"
+    }));
+    assert_eq!(report.verdict, "accepted");
+    assert!(!report.product_alpha1_ready);
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_computational_add_one_missing_mir_compute() {
+    let error = parse_product_alpha1_package_text(&MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE.replace(
+        r#",
+    "mir_compute": {
+      "module_id": "Computational.AddOne",
+      "function_id": "add_one",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "expected_output": {"kind": "int", "value": 42}
+    }"#,
+        "",
+    ))
+    .expect_err("computational add-one package without mir_compute should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("runtime_input.mir_compute"));
 }
 
 #[test]

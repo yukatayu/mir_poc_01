@@ -6,13 +6,13 @@ Product Alpha-1 is valuable as a runtime/product workflow floor: `mirrorea-alpha
 
 The drift is that this floor can be misread as proof that Mir already owns general computation. It does not. The current `AddOne` lane proves a typed external host-boundary path, not Mir-owned arithmetic / variable / array / record / control-flow semantics.
 
-`P-COMP-01` now actualizes the planned-only scaffold for that correction:
+`P-COMP-01` actualized the scaffold for that correction, and `P-COMP-02` now promotes the first executable row:
 
 - `samples/product-alpha1/computational/`
 - `samples/product-alpha1/computational/matrix.json`
 - `scripts/mir_computational_samples.py`
 
-The helper can list rows, validate the matrix, and reject `run comp-02-pure-add-one` as `planned_only`. This is useful because the non-claim is now machine-readable rather than only prose.
+The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted`. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
 
 `P-POSE-01` now does the same for PoseGraph:
 
@@ -81,7 +81,7 @@ host input
 
 After that, variables, arrays, records, control-flow, imports, and host-boundary wrapping can be widened.
 
-Current scaffold validation commands:
+Current computational validation commands:
 
 ```bash
 python3 -m unittest scripts.tests.test_mir_computational_samples
@@ -89,7 +89,7 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
 ```
 
-These commands validate classification and rejection behavior only. They do not prove `P-COMP-02`.
+These commands now prove `P-COMP-02`. They still do not prove `P-COMP-03`, `P-COMP-04`, final grammar, or backend realization.
 
 ## PoseGraph target
 

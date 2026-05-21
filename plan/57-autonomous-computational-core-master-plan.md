@@ -56,7 +56,7 @@ commit and push after each package
 Current status:
 
 - closed on 2026-05-21 as the planned-only computational scaffold actualization package
-- the current next promoted package in the front-half queue is `P-POSE-01`
+- the front-half queue is closed; later promoted reopen points are tracked in the implementation-half sections below
 
 Purpose:
 
@@ -108,6 +108,11 @@ Purpose:
 - make one AddOne path demonstrably Mir-owned.
 - host input and output remain typed external adapter boundaries.
 
+Current status:
+
+- closed on 2026-05-21 with one executable product-alpha computational row
+- legacy adapter-owned `typed_host_io.add_one` remains unchanged for demo / operational samples
+
 Default implementation strategy:
 
 - add a narrow computational-core module under `crates/mir-semantics` for pure expressions and functions.
@@ -143,6 +148,13 @@ Close condition:
 - JSON evidence separates host input, Mir compute, and host output.
 - adapter does not own `x + 1`.
 - adapter-owned transform paths are rejected as `not_mir_owned`.
+
+Observed closeout:
+
+- `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` is executable
+- `scripts/mir_computational_samples.py run comp-02-pure-add-one --format json` returns accepted
+- runtime/session/savepoint surfaces now preserve `mir_compute_history`
+- next promoted package is `P-COMP-03`
 
 Required negative rows:
 

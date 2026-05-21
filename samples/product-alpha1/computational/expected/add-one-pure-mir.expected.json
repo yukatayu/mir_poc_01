@@ -1,0 +1,32 @@
+{
+  "sample_id": "comp-02-pure-add-one",
+  "surface_kind": "product_alpha1_run_local_report",
+  "current_add_one_reading": "one_mir_owned_path_plus_host_boundary_legacy",
+  "typed_host_io_claimed": true,
+  "mir_computation_claimed": true,
+  "host_io_history": [
+    {
+      "adapter_kind": "ReadInt",
+      "request_summary": "Int(41)",
+      "response_summary": "Int(41)"
+    },
+    {
+      "adapter_kind": "WriteInt",
+      "request_summary": "Int(42)",
+      "response_summary": "Int(42)"
+    }
+  ],
+  "mir_compute_history": [
+    {
+      "module_id": "Computational.AddOne",
+      "function_id": "add_one",
+      "input_summary": "Int(41)",
+      "output_summary": "Int(42)"
+    }
+  ],
+  "required_event_kinds_in_order": [
+    "host_input_received",
+    "mir_compute_step",
+    "host_output_emitted"
+  ]
+}

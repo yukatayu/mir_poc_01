@@ -29,9 +29,9 @@
   - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/templates/world-core-starter --format json`, the same command for `membership-chat-starter` and `sugoroku-world-starter`, and `run-local` on those roots validate the current authoring starter catalog, but the templates are not counted as active operational sample roots
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - planned future product-alpha1 semantic roots
-  - `samples/product-alpha1/computational/` is the `P-COMP-01` planned-only Mir-owned computation scaffold under `specs/28` / `plan/53`
-    - `python3 scripts/mir_computational_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
-    - `run comp-02-pure-add-one` must reject as `planned_only` until `P-COMP-02`
+  - `samples/product-alpha1/computational/` is the Mir-owned computation line under `specs/28` / `plan/53`
+    - `python3 scripts/mir_computational_samples.py check-all --format json` validates one executable row plus planned rows
+    - `run comp-02-pure-add-one` now executes the bounded `ReadInt -> add_one -> WriteInt` path
   - `samples/product-alpha1/posegraph/` is the `P-POSE-01` planned-only Transform / PoseGraph scaffold under `specs/29` / `plan/54`
     - `python3 scripts/posegraph_samples.py check-all --format json` validates the matrix and keeps every row `planned_only`
     - `run pose-04-no-split-frame-positive` and `run pose-05-split-frame-negative` must reject as `planned_only` until `P-POSE-02`

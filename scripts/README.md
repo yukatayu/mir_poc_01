@@ -108,9 +108,9 @@
   - `python3 scripts/mir_computational_samples.py matrix --format json`
   - `python3 scripts/mir_computational_samples.py check-all --format json`
   - `python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json`
-  - this helper actualizes the `P-COMP-01` planned-only computational scaffold under `samples/product-alpha1/computational/`
-  - it validates matrix/root consistency, keeps all rows `planned_only`, and rejects attempted execution as `planned_only`
-  - it does not claim Mir-owned runtime execution, final textual grammar, or `P-COMP-02` completion
+  - this helper now executes the `P-COMP-02` bounded computational row under `samples/product-alpha1/computational/add-one-pure-mir/` and keeps the remaining rows planned-only
+  - it validates matrix/root consistency and checks `host_input_received -> mir_compute_step -> host_output_emitted`
+  - it does not claim final textual grammar, broad first-floor completion, or backend realization
   - `python3 scripts/posegraph_samples.py matrix --format json`
   - `python3 scripts/posegraph_samples.py check-all --format json`
   - `python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --format json`

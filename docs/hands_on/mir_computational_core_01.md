@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、`P-COMP-01` で actualize された Mir Computational Core scaffold を読むための landing page です。
+この文書は、`P-COMP-02` で最初の executable row まで進んだ Mir Computational Core line を読むための landing page です。
 
-現時点では runtime implementation guide ではありません。`samples/product-alpha1/computational/` と `scripts/mir_computational_samples.py` は存在しますが、役割は planned-only matrix / root validation と rejected-run evidence です。
+現時点でも broad runtime implementation guide ではありませんが、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` と `scripts/mir_computational_samples.py` は one bounded executable row を持ちます。残りの rows は still planned-only です。
 
 ## current reading
 
@@ -24,16 +24,23 @@ The arithmetic `x + 1` must be represented, typed, executed, and later compiled 
 
 ## current verification
 
-For the current scaffold actualization, use the dedicated planned-only commands first:
+Current executable verification commands:
 
 ```bash
 python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 scripts/mir_computational_samples.py matrix --format json
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
 ```
 
-These commands prove that the computational root exists, rows are machine-readable, and attempted execution is rejected as `planned_only`.
+These commands now prove one bounded Mir-owned runtime row:
+
+```text
+ReadInt(41) -> add_one -> WriteInt(42)
+```
+
+They do not prove `P-COMP-03` / `P-COMP-04`, final textual grammar, or broad first-floor completion.
 
 Use repository validation alongside them:
 
@@ -45,7 +52,7 @@ cargo fmt --check
 git diff --check
 ```
 
-These commands still do not prove Mir-owned runtime execution. They only prove that the scaffold, docs, and source hierarchy are synchronized.
+These repository validations prove that the docs/source hierarchy is synchronized around the executable row.
 
 ## completion gates
 

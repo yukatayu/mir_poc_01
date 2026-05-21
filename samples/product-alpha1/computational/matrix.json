@@ -1,14 +1,14 @@
 {
   "schema_version": "mir-computational-sample-matrix-v0",
   "family": "mir_computational",
-  "current_status": "planned_only",
-  "current_add_one_reading": "host_boundary_only",
+  "current_status": "mixed",
+  "current_add_one_reading": "one_mir_owned_path_plus_host_boundary_legacy",
   "rows": [
     {
       "sample_id": "comp-02-pure-add-one",
       "root_name": "add-one-pure-mir",
       "stage": "P-COMP-02",
-      "current_status": "planned_only",
+      "current_status": "executable",
       "representative_source": "add-one-pure-mir/add-one-pure-mir.mir"
     },
     {

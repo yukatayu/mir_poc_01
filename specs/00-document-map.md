@@ -59,7 +59,7 @@
   - `operational_backend_inventory_01.md` は、operational suite の current host launch bundle line と WASM/LLVM future boundary inventory を読むための landing page である。
   - `operational_gradient_observation_profile_01.md` は、gradient observation profile と replication non-default reading を docs-first に確認するための landing page である。
   - `operational_portal_shard_starter_boundary_01.md` は、portal/shard authoring が current line では active roots から始まり `future/` blueprint を starter 化しないことを確認する landing page である。
-  - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-01` planned-only scaffold actualization、helper matrix、rejected-run surfaceを読むための landing page である。
+  - `mir_computational_core_01.md` は、Mir-owned computational core line の `P-COMP-02` first executable row、helper matrix、legacy AddOne non-reinterpretation を読むための landing page である。
   - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-01` planned-only scaffold actualization、helper matrix、rejected-run surfaceを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。

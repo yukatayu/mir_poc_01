@@ -165,6 +165,12 @@ pub struct ProductAlpha1RuntimeInput {
     pub entry_place: Option<String>,
     #[serde(default)]
     pub host_io: Option<ProductAlpha1HostIoRuntimeInput>,
+    #[serde(default)]
+    pub host_input: Option<ProductAlpha1HostIoRuntimeInput>,
+    #[serde(default)]
+    pub mir_compute: Option<ProductAlpha1MirComputeRuntimeInput>,
+    #[serde(default)]
+    pub host_output: Option<ProductAlpha1HostIoRuntimeInput>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -174,6 +180,16 @@ pub struct ProductAlpha1HostIoRuntimeInput {
     pub effect_ref: String,
     pub request_payload: ProductAlpha1HostIoPayload,
     pub expected_response: ProductAlpha1HostIoPayload,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ProductAlpha1MirComputeRuntimeInput {
+    pub module_id: String,
+    pub function_id: String,
+    pub input_type: String,
+    pub output_type: String,
+    pub expected_output: ProductAlpha1HostIoPayload,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -605,13 +621,13 @@ fn validate_package_shape(
     }
 
     if package_kind_supports_runtime_input(&package.package_kind) {
-        let declares_supported_host_io = package.effects.iter().any(|effect| {
+        let declares_legacy_host_io = package.effects.iter().any(|effect| {
             matches!(
                 effect.as_str(),
                 "typed_host_io.add_one" | "typed_host_io.echo_text" | "typed_host_io.chat_text"
             )
         });
-        if declares_supported_host_io {
+        if declares_legacy_host_io {
             let Some(host_io) = &package.runtime_input.host_io else {
                 return Err(schema_error(
                     path,
@@ -620,6 +636,52 @@ fn validate_package_shape(
                 ));
             };
             validate_host_io_input(host_io, path)?;
+        }
+
+        let declares_computational_lane = package.effects.iter().any(|effect| {
+            matches!(
+                effect.as_str(),
+                "typed_host_io.read_int" | "typed_host_io.write_int"
+            )
+        }) || package.runtime_input.host_input.is_some()
+            || package.runtime_input.mir_compute.is_some()
+            || package.runtime_input.host_output.is_some();
+        if declares_computational_lane {
+            if package.runtime_input.host_io.is_some() {
+                return Err(schema_error(
+                    path,
+                    "runtime_input.host_io cannot be mixed with runtime_input.host_input/runtime_input.mir_compute/runtime_input.host_output"
+                        .to_string(),
+                ));
+            }
+            let Some(host_input) = &package.runtime_input.host_input else {
+                return Err(schema_error(
+                    path,
+                    "world packages declaring typed_host_io.read_int/typed_host_io.write_int effects must declare runtime_input.host_input"
+                        .to_string(),
+                ));
+            };
+            let Some(mir_compute) = &package.runtime_input.mir_compute else {
+                return Err(schema_error(
+                    path,
+                    "world packages declaring typed_host_io.read_int/typed_host_io.write_int effects must declare runtime_input.mir_compute"
+                        .to_string(),
+                ));
+            };
+            let Some(host_output) = &package.runtime_input.host_output else {
+                return Err(schema_error(
+                    path,
+                    "world packages declaring typed_host_io.read_int/typed_host_io.write_int effects must declare runtime_input.host_output"
+                        .to_string(),
+                ));
+            };
+            validate_computational_runtime_input(
+                package,
+                host_input,
+                mir_compute,
+                host_output,
+                path,
+            )?;
         }
     }
 
@@ -705,6 +767,180 @@ fn validate_host_io_input(
             ),
         )),
     }
+}
+
+fn validate_identity_host_io_input(
+    host_io: &ProductAlpha1HostIoRuntimeInput,
+    field_name: &str,
+    expected_adapter_kind: &str,
+    expected_effect_ref: &str,
+    path: &Path,
+) -> Result<(), ProductAlpha1Error> {
+    match (
+        host_io.adapter_kind.as_str(),
+        host_io.effect_ref.as_str(),
+        &host_io.request_payload,
+        &host_io.expected_response,
+    ) {
+        (
+            adapter_kind,
+            effect_ref,
+            ProductAlpha1HostIoPayload::Int { value },
+            ProductAlpha1HostIoPayload::Int {
+                value: expected_value,
+            },
+        ) if adapter_kind == expected_adapter_kind
+            && effect_ref == expected_effect_ref
+            && value == expected_value =>
+        {
+            Ok(())
+        }
+        (adapter_kind, effect_ref, _, _)
+            if adapter_kind == expected_adapter_kind && effect_ref == expected_effect_ref =>
+        {
+            Err(schema_error(
+                path,
+                format!("{field_name} expected_response must equal request_payload"),
+            ))
+        }
+        (adapter_kind, _, _, _) if adapter_kind == expected_adapter_kind => Err(schema_error(
+            path,
+            format!("{field_name}.effect_ref must match `{expected_effect_ref}`"),
+        )),
+        _ => Err(schema_error(
+            path,
+            format!(
+                "unsupported {field_name} adapter/effect pair `{}` / `{}`",
+                host_io.adapter_kind, host_io.effect_ref
+            ),
+        )),
+    }
+}
+
+fn validate_computational_runtime_input(
+    package: &ProductAlpha1Package,
+    host_input: &ProductAlpha1HostIoRuntimeInput,
+    mir_compute: &ProductAlpha1MirComputeRuntimeInput,
+    host_output: &ProductAlpha1HostIoRuntimeInput,
+    path: &Path,
+) -> Result<(), ProductAlpha1Error> {
+    if !package.effects.contains(&host_input.effect_ref) {
+        return Err(schema_error(
+            path,
+            format!(
+                "runtime_input.host_input.effect_ref `{}` is not declared in package effects",
+                host_input.effect_ref
+            ),
+        ));
+    }
+    if !package.effects.contains(&host_output.effect_ref) {
+        return Err(schema_error(
+            path,
+            format!(
+                "runtime_input.host_output.effect_ref `{}` is not declared in package effects",
+                host_output.effect_ref
+            ),
+        ));
+    }
+
+    validate_identity_host_io_input(
+        host_input,
+        "runtime_input.host_input",
+        "ReadInt",
+        "typed_host_io.read_int",
+        path,
+    )?;
+    validate_identity_host_io_input(
+        host_output,
+        "runtime_input.host_output",
+        "WriteInt",
+        "typed_host_io.write_int",
+        path,
+    )?;
+
+    if mir_compute.module_id != "Computational.AddOne" {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.module_id must equal `Computational.AddOne` in P-COMP-02"
+                .to_string(),
+        ));
+    }
+    if mir_compute.function_id != "add_one" {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.function_id must equal `add_one` in P-COMP-02".to_string(),
+        ));
+    }
+    if mir_compute.input_type != "Int64" {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.input_type must equal `Int64` in P-COMP-02".to_string(),
+        ));
+    }
+    if mir_compute.output_type != "Int64" {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.output_type must equal `Int64` in P-COMP-02".to_string(),
+        ));
+    }
+
+    let ProductAlpha1HostIoPayload::Int {
+        value: host_input_value,
+    } = &host_input.expected_response
+    else {
+        return Err(schema_error(
+            path,
+            "runtime_input.host_input expected_response must be Int for P-COMP-02".to_string(),
+        ));
+    };
+    let ProductAlpha1HostIoPayload::Int {
+        value: mir_output_value,
+    } = &mir_compute.expected_output
+    else {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.expected_output must be Int for P-COMP-02".to_string(),
+        ));
+    };
+    let ProductAlpha1HostIoPayload::Int {
+        value: host_output_request_value,
+    } = &host_output.request_payload
+    else {
+        return Err(schema_error(
+            path,
+            "runtime_input.host_output.request_payload must be Int for P-COMP-02".to_string(),
+        ));
+    };
+
+    if *mir_output_value != *host_input_value + 1 {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.expected_output must equal add_one(runtime_input.host_input.expected_response)"
+                .to_string(),
+        ));
+    }
+    if host_output.request_payload != mir_compute.expected_output {
+        return Err(schema_error(
+            path,
+            "runtime_input.host_output.request_payload must equal runtime_input.mir_compute.expected_output"
+                .to_string(),
+        ));
+    }
+    if host_output.expected_response != host_output.request_payload {
+        return Err(schema_error(
+            path,
+            "runtime_input.host_output expected_response must equal request_payload".to_string(),
+        ));
+    }
+    if host_output_request_value != mir_output_value {
+        return Err(schema_error(
+            path,
+            "runtime_input.host_output.request_payload must keep the Mir-owned output value"
+                .to_string(),
+        ));
+    }
+
+    Ok(())
 }
 
 fn validate_dependency_packages(
@@ -1089,6 +1325,13 @@ fn accepted_obligations(package: &ProductAlpha1Package) -> Vec<ProductAlpha1Acce
             "static_checker",
             "runtime_input_host_io",
             "typed host-I/O runtime input declaration accepted",
+        ));
+    }
+    if package.runtime_input.mir_compute.is_some() {
+        rows.push(accepted(
+            "static_checker",
+            "runtime_input_mir_compute",
+            "Mir-owned computational runtime input declaration accepted",
         ));
     }
 

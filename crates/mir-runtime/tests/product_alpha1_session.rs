@@ -135,8 +135,10 @@ fn product_alpha1_run_local_builds_same_session_carrier_with_required_lanes() {
     assert!(report.runtime_plan_emitted);
     assert!(!report.local_transport_claimed);
     assert!(report.typed_host_io_claimed);
+    assert!(!report.mir_computation_claimed);
     assert!(!report.product_alpha1_ready);
     assert!(!report.final_public_api_frozen);
+    assert!(report.session.mir_compute_history.is_empty());
     assert!(!report.session.event_dag.nodes.is_empty());
     assert!(!report.session.route_graph.routes.is_empty());
     assert!(!report.session.membership.active_members.is_empty());
@@ -186,6 +188,8 @@ fn product_alpha1_run_local_accepts_operational_sugoroku_root() {
         2
     );
     assert!(report.typed_host_io_claimed);
+    assert!(!report.mir_computation_claimed);
+    assert!(report.session.mir_compute_history.is_empty());
     assert!(
         report
             .session
@@ -616,6 +620,57 @@ fn product_alpha1_run_local_executes_declared_host_io_payload() {
 }
 
 #[test]
+fn product_alpha1_run_local_executes_mir_owned_add_one_path() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/computational/add-one-pure-mir"),
+    )
+    .expect("computational add-one root should run locally");
+
+    assert!(report.typed_host_io_claimed);
+    assert!(report.mir_computation_claimed);
+    assert_eq!(report.session.host_io_history.len(), 2);
+    assert_eq!(report.session.host_io_history[0].adapter_kind, "ReadInt");
+    assert_eq!(report.session.host_io_history[0].request_summary, "Int(41)");
+    assert_eq!(
+        report.session.host_io_history[0].response_summary,
+        "Int(41)"
+    );
+    assert_eq!(report.session.host_io_history[1].adapter_kind, "WriteInt");
+    assert_eq!(report.session.host_io_history[1].request_summary, "Int(42)");
+    assert_eq!(
+        report.session.host_io_history[1].response_summary,
+        "Int(42)"
+    );
+    assert_eq!(report.session.mir_compute_history.len(), 1);
+    assert_eq!(report.session.mir_compute_history[0].function_id, "add_one");
+    assert_eq!(
+        report.session.mir_compute_history[0].input_summary,
+        "Int(41)"
+    );
+    assert_eq!(
+        report.session.mir_compute_history[0].output_summary,
+        "Int(42)"
+    );
+    let event_kinds = report
+        .session
+        .event_dag
+        .nodes
+        .iter()
+        .map(|node| node.event_kind.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    for required in [
+        "host_input_received",
+        "mir_compute_step",
+        "host_output_emitted",
+    ] {
+        assert!(
+            event_kinds.contains(required),
+            "missing computational event kind {required}"
+        );
+    }
+}
+
+#[test]
 fn product_alpha1_run_local_executes_declared_echo_text_payload() {
     let package_json = r#"{
   "schema_version": "mirrorea-product-alpha1-v0",
@@ -1005,6 +1060,29 @@ fn product_alpha1_save_and_load_restore_same_session_frontier() {
         loaded.save_load_state.local_savepoint_refs,
         vec!["savepoint#r0"]
     );
+    assert_event_ids_unique(&loaded);
+}
+
+#[test]
+fn product_alpha1_save_and_load_preserve_mir_compute_history() {
+    let report = run_product_alpha1_local_session_path(
+        repo_root().join("samples/product-alpha1/computational/add-one-pure-mir"),
+    )
+    .expect("computational add-one root should run locally");
+    let (saved, save_report) = save_product_alpha1_session(&report.session, "savepoint#comp-r0")
+        .expect("computational R0 local save should work");
+    let (loaded, load_report) = load_product_alpha1_session(&saved, "savepoint#comp-r0")
+        .expect("computational R0 local load should work");
+
+    assert_eq!(save_report.savepoint_class, "R0_Local");
+    assert_eq!(load_report.terminal_outcome, "loaded");
+    assert_eq!(saved.savepoints.len(), 1);
+    assert_eq!(saved.savepoints[0].saved_mir_compute_history.len(), 1);
+    assert_eq!(
+        loaded.mir_compute_history,
+        report.session.mir_compute_history
+    );
+    assert_eq!(loaded.host_io_history, report.session.host_io_history);
     assert_event_ids_unique(&loaded);
 }
 

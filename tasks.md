@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-21 19:56 JST
+最終更新: 2026-05-21 20:27 JST
 
 ## この文書について
 
@@ -26,7 +26,9 @@
 - current docs/spec self-driven line is in the implementation-half queue:
   `P-COMP-00` rebaselined the target from distribution-only to Mir-owned computation, while preserving the existing alpha runtime/product floor, and the front-half scaffolds are now closed.
 - `P-COMP-01` is closed:
-  `samples/product-alpha1/computational/`, `matrix.json`, `scripts/mir_computational_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime completion.
+  `samples/product-alpha1/computational/`, `matrix.json`, `scripts/mir_computational_samples.py`, and the planned-only rejection surface are now actualized as scaffold baseline.
+- `P-COMP-02` is closed:
+  `samples/product-alpha1/computational/add-one-pure-mir/`, `package.mir.json`, `crates/mir-semantics::computational_core`, product-alpha schema/runtime/session/savepoint support, and helper/runtime tests now prove one bounded Mir-owned row. Legacy adapter-owned `typed_host_io.add_one` remains unchanged.
 - `P-POSE-01` is closed:
   `samples/product-alpha1/posegraph/`, `matrix.json`, `scripts/posegraph_samples.py`, and the planned-only rejection surface are now actualized. This is scaffold closeout, not runtime proof.
 - `P-PROJ-01` is closed:
@@ -42,18 +44,17 @@
 
 | Order | Package | Macro / stage | Objective | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-COMP-02` pure AddOne in Mir | `Macro 1/7`, implementation half | introduce narrow `mir-semantics` computational AST/evaluator and make `x + 1` Mir-owned while host input/output remain typed external adapters | host input / Mir compute / host output are separate observable events; adapter-owned AddOne path rejects as `not_mir_owned` | medium |
-| 2 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation half | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
-| 3 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
-| 4 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
-| 5 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
+| 1 | `P-COMP-03` variables / arrays / records / control-flow first floor | `Macro 1`, implementation half | add positive and negative rows for first C-like computation floor | each family has machine-readable accept/reject evidence | medium |
+| 2 | `P-COMP-04` effect boundary around internal computation | `Macro 1/5`, implementation half | separate pure computation from declared host read/write effect wrappers and explicit failure/capability rows | undeclared effect / failure / capability rows are rejectable; broader publish/observe/witness/handoff remains later if needed | medium |
+| 3 | `P-POSE-02` no-split-frame runtime evidence | `Macro 8`, implementation half | prove same-client same-observation-snapshot pose coherence and a negative mismatch row | positive and negative machine-readable evidence exists | medium |
+| 4 | autonomous all-up closeout audit | `Macro 0/1/7/8`, closeout | confirm all package lines, docs, samples, reports, validators, and non-claims are synchronized | all focused helpers and common validation floor pass; final report lists remaining non-claims | medium |
 
 ## current recommendation
 
 - recommended reopen point:
-  `P-COMP-02` pure AddOne in Mir
+  `P-COMP-03` variables / arrays / records / control-flow first floor
 - recommendation reason:
-  front-half scaffolds for computational / PoseGraph / projection / engine-adapter are now actualized and synchronized. The least risky next self-driven step is to move into `P-COMP-02`, where host input / Mir compute / host output become separately observable without overloading the existing adapter-owned `AddOne` lane.
+  the narrow Mir-owned `add_one` lane is now executable without overloading the legacy adapter-owned `AddOne` path. The least risky next self-driven step is to widen the same computational core to variables / arrays / records / control-flow while keeping the current host boundary and package format stable.
 - stop line:
   do not claim runtime completion in the front-half scaffolds, final grammar, final public parser / viewer / telemetry ABI, backend realization, server/client binary split, distributed durable save-load, WAN/federation, arbitrary native/WASM execution, final product completion, or current AddOne / no-split-frame as implementation completion.
 
@@ -91,7 +92,7 @@
 | runnable dashboard refresh | keep sample status, validation command, and blocker columns evidence-backed | relevant helper closeout commands | report + `samples_progress.md` | conceptual-only rows must not be marked workflow-ready |
 | operational suite guide refresh | keep `samples/product-alpha1/operational/`, hands-on guide, research summary, and helper CLI surface synchronized | `python3 -m unittest scripts.tests.test_operational_product_samples`, `python3 scripts/operational_product_samples.py check-all --format json` | report if touched | do not promote future inventory into runnable claim |
 | regression repair | repair docs / tests / formatting failures without unrelated feature work | affected tests, `cargo fmt --check`, `git diff --check` | report if non-trivial | do not mix feature widening into maintenance |
-| computational docs freshness | keep `specs/28..31`, `plan/53..56`, snapshot docs, and planned sample rows aligned | docs validation and source hierarchy checks | new report | planned samples/scripts must not be marked runnable |
+| computational docs freshness | keep `specs/28..31`, `plan/53..56`, snapshot docs, and executable/planned sample rows aligned | docs validation and source hierarchy checks | new report | only evidence-backed rows may be marked runnable |
 | autonomous plan freshness | keep `specs/32`, `plan/57`, snapshot docs, and package cadence aligned with actual execution | docs validation and source hierarchy checks | new report | autonomy policy must not erase user-spec-required final-product gates |
 
 ## non-promoted references
