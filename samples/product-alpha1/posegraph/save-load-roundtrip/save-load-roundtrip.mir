@@ -1,0 +1,7 @@
+module PoseGraph.SaveLoadRoundtrip
+
+transition restore_frontier at Place[AvatarSpace] {
+  saved <- observe pose_snapshot_frontier via save_object
+  require saved.membership_epoch == current_membership_epoch
+  require saved.snapshot_ref == current_snapshot_ref
+}

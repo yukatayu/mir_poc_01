@@ -1,0 +1,8 @@
+module PoseGraph.SparkleFallbackAnchor
+
+transition fallback_anchor at Place[AvatarSpace] {
+  binding <- observe sparkle_binding via posegraph
+  ensure binding.fallback_chain == [head, shoulder, world_origin]
+  ensure binding.fallback_reason == visibility_lost
+  ensure binding.freshness == current_membership_epoch
+}

@@ -1,0 +1,9 @@
+module PoseGraph.AnchoredObject
+
+transition attach_object at Place[AvatarSpace] {
+  target <- observe avatar_head via posegraph
+  anchored <- observe sparkle_prop via posegraph
+  ensure anchored.snapshot_ref == target.snapshot_ref
+  ensure anchored.pose_version == target.pose_version
+  witness no_split_frame via posegraph_devtools
+}

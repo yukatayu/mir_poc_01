@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、future Transform / PoseGraph line を読むための docs-first landing page です。
+この文書は、`P-POSE-01` で actualize された Transform / PoseGraph scaffold を読むための landing page です。
 
-現時点では `samples/product-alpha1/posegraph/` や `scripts/posegraph_samples.py` は存在せず、runnable workflow として扱いません。
+現時点では runtime implementation guide ではありません。`samples/product-alpha1/posegraph/` と `scripts/posegraph_samples.py` は存在しますが、役割は planned-only matrix / root validation と rejected-run evidence です。
 
 ## current reading
 
@@ -22,7 +22,19 @@ target pose version == anchored object pose version
 
 ## current verification
 
-For the current docs/spec rebaseline, use repository validation only:
+For the current scaffold actualization, use the dedicated planned-only commands first:
+
+```bash
+python3 -m unittest scripts.tests.test_posegraph_samples
+python3 scripts/posegraph_samples.py matrix --format json
+python3 scripts/posegraph_samples.py check-all --format json
+python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --format json
+python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
+```
+
+These commands prove that the PoseGraph root exists, rows are machine-readable, and attempted execution is rejected as `planned_only`.
+
+Use repository validation alongside them:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -32,20 +44,7 @@ cargo fmt --check
 git diff --check
 ```
 
-These commands do not prove PoseGraph runtime behavior. They only prove that the planned boundary is documented and discoverable.
-
-## future command shape
-
-Future packages may add:
-
-```bash
-python3 scripts/posegraph_samples.py matrix --format json
-python3 scripts/posegraph_samples.py check-all --format json
-python3 scripts/posegraph_samples.py run pose-02-no-split-frame-positive --format json
-python3 scripts/posegraph_samples.py run pose-03-split-frame-negative --format json
-```
-
-Until those files exist and are validated, they are planned anchors only.
+These commands still do not prove PoseGraph runtime behavior. They only prove that the scaffold, docs, and source hierarchy are synchronized.
 
 ## future success criteria
 
@@ -58,4 +57,3 @@ Until those files exist and are validated, they are planned anchors only.
 ## stop lines
 
 Do not read this guide as Unity / Unreal integration, VRM / VRChat compatibility, renderer-owned world semantics, continuous spatial sync, or active PoseGraph runtime completion.
-

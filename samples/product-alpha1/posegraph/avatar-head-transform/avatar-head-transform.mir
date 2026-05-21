@@ -1,0 +1,16 @@
+module PoseGraph.AvatarHeadTransform
+
+record Vec3 { x: Float64, y: Float64, z: Float64 }
+record Quat { x: Float64, y: Float64, z: Float64, w: Float64 }
+record Transform {
+  position: Vec3,
+  rotation: Quat,
+  scale: Vec3,
+  pose_version: UInt64,
+  snapshot_ref: Text,
+}
+
+transition publish_avatar_head at Place[AvatarSpace] {
+  head <- observe avatar_head via pose_provider
+  publish head as PoseSnapshot
+}

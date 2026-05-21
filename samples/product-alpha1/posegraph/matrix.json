@@ -1,0 +1,71 @@
+{
+  "schema_version": "posegraph-sample-matrix-v0",
+  "family": "posegraph",
+  "current_status": "planned_only",
+  "current_posegraph_reading": "same_client_same_observation_snapshot",
+  "rows": [
+    {
+      "sample_id": "pose-01-avatar-head-transform",
+      "root_name": "avatar-head-transform",
+      "stage": "P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "avatar-head-transform/avatar-head-transform.mir"
+    },
+    {
+      "sample_id": "pose-02-anchored-object",
+      "root_name": "anchored-object",
+      "stage": "P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "anchored-object/anchored-object.mir"
+    },
+    {
+      "sample_id": "pose-03-sparkle-fallback-anchor",
+      "root_name": "sparkle-fallback-anchor",
+      "stage": "post-P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "sparkle-fallback-anchor/sparkle-fallback-anchor.mir"
+    },
+    {
+      "sample_id": "pose-04-no-split-frame-positive",
+      "root_name": "no-split-frame-positive",
+      "stage": "P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "no-split-frame-positive/no-split-frame-positive.mir"
+    },
+    {
+      "sample_id": "pose-05-split-frame-negative",
+      "root_name": "split-frame-negative",
+      "stage": "P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "split-frame-negative/split-frame-negative.mir"
+    },
+    {
+      "sample_id": "pose-06-save-load-roundtrip",
+      "root_name": "save-load-roundtrip",
+      "stage": "post-P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "save-load-roundtrip/save-load-roundtrip.mir"
+    },
+    {
+      "sample_id": "pose-07-stale-anchor-after-membership-advance",
+      "root_name": "stale-anchor-after-membership-advance",
+      "stage": "post-P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "stale-anchor-after-membership-advance/stale-anchor-after-membership-advance.mir"
+    },
+    {
+      "sample_id": "pose-08-anchor-switch-frontier-negative",
+      "root_name": "anchor-switch-frontier-negative",
+      "stage": "post-P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "anchor-switch-frontier-negative/anchor-switch-frontier-negative.mir"
+    },
+    {
+      "sample_id": "pose-09-stale-anchor-reacquire-required",
+      "root_name": "stale-anchor-reacquire-required",
+      "stage": "post-P-POSE-02",
+      "current_status": "planned_only",
+      "representative_source": "stale-anchor-reacquire-required/stale-anchor-reacquire-required.mir"
+    }
+  ]
+}

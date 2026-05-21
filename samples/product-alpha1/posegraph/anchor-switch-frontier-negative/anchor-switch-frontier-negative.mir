@@ -1,0 +1,7 @@
+module PoseGraph.AnchorSwitchFrontierNegative
+
+transition reject_anchor_switch at Place[AvatarSpace] {
+  switch <- observe anchor_switch via posegraph
+  require switch.owner_epoch == current_owner_epoch
+  require switch.sequence > last_anchor_switch_sequence
+}

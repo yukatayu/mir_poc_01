@@ -1,0 +1,7 @@
+module PoseGraph.StaleAnchorReacquireRequired
+
+transition explicit_reacquire at Place[AvatarSpace] {
+  binding <- observe anchored_object via posegraph
+  ensure binding.state == fallback_only
+  require fresh_anchor_witness == current_anchor_witness
+}

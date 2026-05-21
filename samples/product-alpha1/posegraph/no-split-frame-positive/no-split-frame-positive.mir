@@ -1,0 +1,8 @@
+module PoseGraph.NoSplitFramePositive
+
+transition stable_frame at Place[AvatarSpace] {
+  target <- observe avatar_head via posegraph
+  anchored <- observe hat_attachment via posegraph
+  ensure anchored.snapshot_ref == target.snapshot_ref
+  ensure anchored.pose_version == target.pose_version
+}

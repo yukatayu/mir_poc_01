@@ -39,9 +39,9 @@ Current repo does not yet actualize these as runnable evidence:
 | `P-POSE-01` | Transform / PoseGraph theory and scaffold | `specs/29`, `plan/54`, planned sample matrix, no-split-frame non-claims |
 | `P-POSE-02` | avatar head + anchored object no-split-frame sample | positive same-snapshot evidence and negative mismatch evidence |
 
-## planned sample matrix
+## current sample matrix
 
-Planned roots, not yet present or runnable in `P-COMP-00`:
+`P-POSE-01` actualizes the planned-only scaffold. The roots now exist, but they are not runnable PoseGraph proofs yet:
 
 - `samples/product-alpha1/posegraph/avatar-head-transform/`
 - `samples/product-alpha1/posegraph/anchored-object/`
@@ -53,21 +53,21 @@ Planned roots, not yet present or runnable in `P-COMP-00`:
 - `samples/product-alpha1/posegraph/anchor-switch-frontier-negative/`
 - `samples/product-alpha1/posegraph/stale-anchor-reacquire-required/`
 
-Planned helper, not yet present:
+Current helper actualized in `P-POSE-01`:
 
 - `scripts/posegraph_samples.py`
 
-Future validation anchors may include:
+Current planned-only validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_posegraph_samples
 python3 scripts/posegraph_samples.py matrix --format json
 python3 scripts/posegraph_samples.py check-all --format json
-python3 scripts/posegraph_samples.py run pose-02-no-split-frame-positive --format json
-python3 scripts/posegraph_samples.py run pose-03-split-frame-negative --format json
+python3 scripts/posegraph_samples.py run pose-04-no-split-frame-positive --format json
+python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format json
 ```
 
-These are future anchors, not current runnable validation.
+These commands validate matrix classification and planned-only rejection behavior. They do not prove PoseGraph runtime evidence.
 
 ## sample success criteria
 
@@ -123,7 +123,7 @@ Future PoseGraph packages should update:
 
 Future runtime work must make `PoseSnapshotFrontier`, `AnchorSwitch`, reacquire, membership-epoch advance, and concurrent switch ordering observable in helper output before claiming PoseGraph runtime completion.
 
-`P-COMP-00` only records these as future hooks.
+`P-POSE-01` only records these as future hooks. Runtime evidence starts at `P-POSE-02`.
 
 ## operational suite promotion
 
