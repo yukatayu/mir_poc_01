@@ -1,0 +1,59 @@
+{
+  "schema_version": "projection-boundary-sample-matrix-v0",
+  "family": "projection_boundary",
+  "current_status": "planned_only",
+  "projection_scope": "target_packet_ffi_inventory_only",
+  "current_native_truth": "host_launch_bundle_only",
+  "pipeline": [
+    "Mir / Mirrorea source",
+    "typed IR",
+    "projection IR",
+    "target manifests",
+    "packet schemas",
+    "FFI schemas",
+    "host launch bundle / future compiler backend"
+  ],
+  "compatibility_inventory": {
+    "relation_name": "ManifestProviderCompatibility",
+    "accepted_rows": [
+      "compat-accepted-renderer-view"
+    ],
+    "rejected_rows": [
+      "compat-rejected-missing-capability"
+    ]
+  },
+  "rows": [
+    {
+      "sample_id": "proj-01-server-client-target-manifest",
+      "root_name": "server-client-target-manifest",
+      "inventory_kind": "target_manifest",
+      "stage": "P-PROJ-01",
+      "current_status": "planned_only",
+      "representative_artifact": "server-client-target-manifest/server-client-target-manifest.json"
+    },
+    {
+      "sample_id": "proj-01-packet-boundary-schema",
+      "root_name": "packet-boundary-schema",
+      "inventory_kind": "packet_schema",
+      "stage": "P-PROJ-01",
+      "current_status": "planned_only",
+      "representative_artifact": "packet-boundary-schema/packet-boundary-schema.json"
+    },
+    {
+      "sample_id": "proj-01-ffi-boundary-schema",
+      "root_name": "ffi-boundary-schema",
+      "inventory_kind": "ffi_schema",
+      "stage": "P-PROJ-01",
+      "current_status": "planned_only",
+      "representative_artifact": "ffi-boundary-schema/ffi-boundary-schema.json"
+    },
+    {
+      "sample_id": "proj-01-manifest-provider-compatibility",
+      "root_name": "manifest-provider-compatibility",
+      "inventory_kind": "manifest_provider_compatibility",
+      "stage": "P-PROJ-01",
+      "current_status": "planned_only",
+      "representative_artifact": "manifest-provider-compatibility/manifest-provider-compatibility.json"
+    }
+  ]
+}

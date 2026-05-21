@@ -1,0 +1,65 @@
+{
+  "schema_version": "manifest-provider-compatibility-v0",
+  "relation_name": "ManifestProviderCompatibility",
+  "workflow_ready": false,
+  "inventory_status": "planned_only",
+  "accepted_rows": [
+    "compat-accepted-renderer-view"
+  ],
+  "rejected_rows": [
+    "compat-rejected-missing-capability"
+  ],
+  "rows": [
+    {
+      "compatibility_row_id": "compat-accepted-renderer-view",
+      "source_contract_ref": "contracts/observer-projection-summary-v0",
+      "target_manifest_ref": "../server-client-target-manifest/server-client-target-manifest.json#targets/participant-client-viewer",
+      "packet_schema_ref": "../packet-boundary-schema/packet-boundary-schema.json#packet_schemas/observer_projection_packet",
+      "ffi_schema_ref": "../ffi-boundary-schema/ffi-boundary-schema.json#ffi_schemas/viewer_diagnostic_export",
+      "provider_adapter_contract_ref": "specs/31-engine-wasm-ffi-adapter-boundary.md#provider-contract",
+      "checked_effect_rows": [
+        "ObserveProjection",
+        "ExportDiagnosticView"
+      ],
+      "checked_failure_rows": [
+        "ProviderUnavailable",
+        "RedactionPolicyMissing"
+      ],
+      "checked_capability_rows": [
+        "caps/observer-projection"
+      ],
+      "checked_observation_rows": [
+        "obs/observer-redacted-summary",
+        "redaction/observer-safe"
+      ],
+      "compatibility_status": "accepted",
+      "reason": "inventory row preserves observer-safe capability and explicit redaction without collapsing auth or witness into transport metadata",
+      "workflow_ready": false
+    },
+    {
+      "compatibility_row_id": "compat-rejected-missing-capability",
+      "source_contract_ref": "contracts/observer-projection-summary-v0",
+      "target_manifest_ref": "../server-client-target-manifest/server-client-target-manifest.json#targets/participant-client-viewer",
+      "packet_schema_ref": "../packet-boundary-schema/packet-boundary-schema.json#packet_schemas/observer_projection_packet",
+      "ffi_schema_ref": "../ffi-boundary-schema/ffi-boundary-schema.json#ffi_schemas/viewer_diagnostic_export",
+      "provider_adapter_contract_ref": "specs/31-engine-wasm-ffi-adapter-boundary.md#provider-contract",
+      "checked_effect_rows": [
+        "ObserveProjection",
+        "ExportDiagnosticView"
+      ],
+      "checked_failure_rows": [
+        "ProviderUnavailable",
+        "RedactionPolicyMissing"
+      ],
+      "checked_capability_rows": [],
+      "checked_observation_rows": [
+        "obs/observer-redacted-summary",
+        "redaction/observer-safe"
+      ],
+      "compatibility_status": "rejected",
+      "rejection_kind": "missing_capability_row",
+      "reason": "provider inventory omits the observer projection capability, so the target manifest cannot claim compatibility",
+      "workflow_ready": false
+    }
+  ]
+}

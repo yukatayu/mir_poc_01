@@ -1,0 +1,54 @@
+{
+  "schema_version": "projection-packet-schema-v0",
+  "workflow_ready": false,
+  "inventory_status": "planned_only",
+  "pipeline_stage": "packet_schemas",
+  "packet_schemas": [
+    {
+      "packet_schema_id": "roll_request_packet",
+      "message_contract_ref": "contracts/sugoroku-roll-request-v0",
+      "current_status": "planned_only",
+      "fields": [
+        "message_id",
+        "payload",
+        "membership_epoch",
+        "member_incarnation",
+        "capability_requirements",
+        "witness_refs"
+      ],
+      "preserves_boundaries": {
+        "auth": true,
+        "membership": true,
+        "capability": true,
+        "witness": true,
+        "failure": true
+      },
+      "forbidden_transport_collapse": [
+        "auth_as_transport_header_only",
+        "membership_hidden_in_socket_session"
+      ]
+    },
+    {
+      "packet_schema_id": "observer_projection_packet",
+      "message_contract_ref": "contracts/observer-projection-summary-v0",
+      "current_status": "planned_only",
+      "fields": [
+        "message_id",
+        "projection_ref",
+        "capability_requirements",
+        "redaction_policy",
+        "witness_refs"
+      ],
+      "preserves_boundaries": {
+        "auth": true,
+        "membership": true,
+        "capability": true,
+        "witness": true,
+        "failure": true
+      },
+      "forbidden_transport_collapse": [
+        "projection_authz_collapsed_into_channel_name"
+      ]
+    }
+  ]
+}

@@ -20,9 +20,14 @@ Current projection truth:
 
 - schema-backed `projection.profile.json` inventory
 - checker/runtime/devtools summary obligations
+- `samples/product-alpha1/projection/` planned-only inventory scaffold
+- `scripts/projection_boundary_samples.py` helper-backed planned-only classification
+- accepted and rejected `ManifestProviderCompatibility` rows are machine-readable planned evidence
 - no executable projection IR
 - no server/client binary split
 - no LLVM/backend execution
+
+`P-PROJ-01` is closed as a scaffold/inventory package. The root/helper make target manifest, packet schema, FFI schema, and provider-compatibility rows explicit, while keeping `workflow_ready = false` and preserving the non-codegen boundary.
 
 ## package order
 
@@ -36,25 +41,26 @@ Current projection truth:
 
 ## planned sample matrix
 
-Planned roots, not yet present or runnable in `P-COMP-00`:
+Current planned-only roots actualized in `P-PROJ-01`:
 
 - `samples/product-alpha1/projection/server-client-target-manifest/`
 - `samples/product-alpha1/projection/packet-boundary-schema/`
 - `samples/product-alpha1/projection/ffi-boundary-schema/`
 - `samples/product-alpha1/projection/manifest-provider-compatibility/`
 
-Planned helper, not yet present:
+Current helper:
 
 - `scripts/projection_boundary_samples.py`
 
-Future validation anchors may include:
+Current validation anchors:
 
 ```bash
 python3 -m unittest scripts.tests.test_projection_boundary_samples
+python3 scripts/projection_boundary_samples.py matrix --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
+python3 scripts/projection_boundary_samples.py run proj-01-server-client-target-manifest --format json
+python3 scripts/projection_boundary_samples.py closeout --format json
 ```
-
-These commands are future anchors, not current runnable validation.
 
 ## completion rule
 

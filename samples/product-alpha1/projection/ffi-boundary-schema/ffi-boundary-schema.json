@@ -1,0 +1,49 @@
+{
+  "schema_version": "projection-ffi-schema-v0",
+  "workflow_ready": false,
+  "inventory_status": "planned_only",
+  "pipeline_stage": "ffi_schemas",
+  "ffi_schemas": [
+    {
+      "ffi_schema_id": "host_runtime_bridge",
+      "provider_kind": "host runtime bridge",
+      "current_status": "planned_only",
+      "input_schema": "typed_projection_request",
+      "output_schema": "typed_projection_result",
+      "effect_row": [
+        "ObserveProjection"
+      ],
+      "failure_row": [
+        "ProviderUnavailable",
+        "MembershipEpochMismatch"
+      ],
+      "required_capability": "caps/server-authority",
+      "authority_policy": "auth/place_authority_non_collapse",
+      "observation_policy": "obs/admin-projection",
+      "redaction_policy": "redaction/runtime-admin",
+      "rollback_replay_cut_policy": "InventoryOnly",
+      "native_execution_policy": "Disabled"
+    },
+    {
+      "ffi_schema_id": "viewer_diagnostic_export",
+      "provider_kind": "viewer / diagnostic exporter",
+      "current_status": "planned_only",
+      "input_schema": "typed_projection_summary",
+      "output_schema": "typed_viewer_render_ack",
+      "effect_row": [
+        "ObserveProjection",
+        "ExportDiagnosticView"
+      ],
+      "failure_row": [
+        "ProviderUnavailable",
+        "RedactionPolicyMissing"
+      ],
+      "required_capability": "caps/observer-projection",
+      "authority_policy": "auth/observer_non_authority",
+      "observation_policy": "obs/observer-redacted-summary",
+      "redaction_policy": "redaction/observer-safe",
+      "rollback_replay_cut_policy": "Replayable",
+      "native_execution_policy": "Disabled"
+    }
+  ]
+}
