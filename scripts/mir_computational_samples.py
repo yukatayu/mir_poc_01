@@ -18,6 +18,7 @@ SAMPLE_ROOT = REPO_ROOT / "samples" / "product-alpha1" / "computational"
 MATRIX_PATH = SAMPLE_ROOT / "matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 PRODUCT_ALPHA_EXECUTION_SURFACE = "product_alpha1_run_local"
+PRODUCT_ALPHA_CHECK_SURFACE = "product_alpha1_check"
 HELPER_EXECUTION_SURFACE = "helper_package_runtime"
 STOP_LINES = [
     "no final textual grammar",
@@ -25,7 +26,7 @@ STOP_LINES = [
     "do not treat current AddOne as Mir-owned computation everywhere",
 ]
 NON_CLAIMS = [
-    "only one Mir-owned runtime row exists today",
+    "only bounded direct runtime rows exist today",
     "no final textual `.mir` grammar",
     "no direct LLVM/native backend",
 ]
@@ -34,6 +35,8 @@ VALIDATION_FLOOR = [
     "python3 scripts/mir_computational_samples.py matrix --format json",
     "python3 scripts/mir_computational_samples.py check-all --format json",
     "python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json",
+    "python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json",
+    "python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json",
 ]
 
 
@@ -139,7 +142,13 @@ def _materialize_row(row: dict[str, Any]) -> dict[str, Any]:
                 realized["module_id"] = mir_compute["module_id"]
             if mir_compute.get("function_id"):
                 realized["function_id"] = mir_compute["function_id"]
-            if mir_compute.get("request_payload"):
+            runtime_input = package_data.get("runtime_input") or {}
+            host_input = runtime_input.get("host_input") or {}
+            if host_input.get("request_payload"):
+                realized["request_summary"] = _payload_summary(
+                    host_input["request_payload"]
+                )
+            elif mir_compute.get("request_payload"):
                 realized["request_summary"] = _payload_summary(
                     mir_compute["request_payload"]
                 )
@@ -174,6 +183,13 @@ def matrix() -> dict[str, Any]:
         and (row.get("expected_outcome") or {}).get("terminal_outcome")
         == "runtime_rejection"
     ]
+    expected_check_rejection_rows = [
+        row["sample_id"]
+        for row in data["rows"]
+        if row["current_status"] == "executable"
+        and (row.get("expected_outcome") or {}).get("terminal_outcome")
+        == "check_rejection"
+    ]
     return {
         "command": "matrix",
         "family": data["family"],
@@ -185,10 +201,12 @@ def matrix() -> dict[str, Any]:
         "executable_count": len(executable_rows),
         "accepted_count": len(accepted_rows),
         "expected_runtime_rejection_count": len(expected_runtime_rejection_rows),
+        "expected_check_rejection_count": len(expected_check_rejection_rows),
         "planned_only_rows": planned_only_rows,
         "executable_rows": executable_rows,
         "accepted_rows": accepted_rows,
         "expected_runtime_rejection_rows": expected_runtime_rejection_rows,
+        "expected_check_rejection_rows": expected_check_rejection_rows,
         "matrix_status": data["current_status"],
         "workflow_ready": False,
         "rows": rows,
@@ -222,6 +240,29 @@ def _run_json_command(argv: list[str], env: dict[str, str]) -> dict[str, Any]:
         ) from error
 
 
+def _run_json_command_allow_error(argv: list[str], env: dict[str, str]) -> dict[str, Any]:
+    completed = subprocess.run(
+        argv,
+        cwd=REPO_ROOT,
+        env=env,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"command did not return JSON: {' '.join(argv)}"
+        ) from error
+    return {
+        "returncode": completed.returncode,
+        "payload": payload,
+        "stderr": completed.stderr.strip(),
+    }
+
+
 def _run_product_alpha1_local_session(sample_root: Path) -> dict[str, Any]:
     env = os.environ.copy()
     with tempfile.TemporaryDirectory(prefix="mirrorea-comp-02-session-") as session_dir:
@@ -229,25 +270,52 @@ def _run_product_alpha1_local_session(sample_root: Path) -> dict[str, Any]:
         return _run_json_command(_cargo_alpha_args("run-local", str(sample_root)), env)
 
 
+def _run_product_alpha1_check(sample_root: Path) -> dict[str, Any]:
+    env = os.environ.copy()
+    return _run_json_command_allow_error(_cargo_alpha_args("check", str(sample_root)), env)
+
+
 def _require(condition: bool, detail: str) -> None:
     if not condition:
         raise RuntimeError(detail)
 
 
-def _validate_comp02_runtime_payload(payload: dict[str, Any]) -> dict[str, Any]:
+def _load_direct_runtime_contract(row: dict[str, Any]) -> dict[str, Any]:
+    package_path = _row_package_path(row)
+    if package_path is None:
+        raise RuntimeError(f"sample `{row['sample_id']}` must define package_input")
+    payload = _load_package_json(package_path)
+    runtime_input = payload.get("runtime_input") or {}
+    mir_compute = runtime_input.get("mir_compute") or {}
+    host_input = runtime_input.get("host_input") or {}
+    host_output = runtime_input.get("host_output") or {}
+    return {
+        "package_id": payload.get("package_id"),
+        "package_path": str(package_path.relative_to(REPO_ROOT)),
+        "module_id": mir_compute.get("module_id"),
+        "function_id": mir_compute.get("function_id"),
+        "request_summary": _payload_summary(host_input.get("expected_response") or {}),
+        "expected_output_summary": _payload_summary(host_output.get("expected_response") or {}),
+    }
+
+
+def _validate_direct_runtime_payload(
+    row: dict[str, Any], payload: dict[str, Any]
+) -> dict[str, Any]:
     _require(
         payload.get("surface_kind") == "product_alpha1_run_local_report",
-        "comp-02 must return product_alpha1_run_local_report",
+        f"{row['sample_id']} must return product_alpha1_run_local_report",
     )
     _require(
         payload.get("typed_host_io_claimed") is True,
-        "comp-02 must keep typed_host_io_claimed",
+        f"{row['sample_id']} must keep typed_host_io_claimed",
     )
     _require(
         payload.get("mir_computation_claimed") is True,
-        "comp-02 must set mir_computation_claimed",
+        f"{row['sample_id']} must set mir_computation_claimed",
     )
 
+    contract = _load_direct_runtime_contract(row)
     session = payload.get("session") or {}
     host_io_history = session.get("host_io_history") or []
     mir_compute_history = session.get("mir_compute_history") or []
@@ -258,7 +326,10 @@ def _validate_comp02_runtime_payload(payload: dict[str, Any]) -> dict[str, Any]:
         if isinstance(node, dict) and node.get("event_kind")
     ]
 
-    _require(len(host_io_history) == 2, "comp-02 must emit two host I/O history rows")
+    _require(
+        len(host_io_history) == 2,
+        f"{row['sample_id']} must emit two host I/O history rows",
+    )
     _require(
         host_io_history[0].get("adapter_kind") == "ReadInt",
         "first host I/O row must be ReadInt",
@@ -268,28 +339,30 @@ def _validate_comp02_runtime_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "second host I/O row must be WriteInt",
     )
     _require(
-        host_io_history[0].get("response_summary") == "Int(41)",
-        "ReadInt must preserve Int(41)",
+        host_io_history[0].get("response_summary") == contract["request_summary"],
+        f"ReadInt must preserve {contract['request_summary']}",
     )
     _require(
-        host_io_history[1].get("response_summary") == "Int(42)",
-        "WriteInt must preserve Int(42)",
+        host_io_history[1].get("response_summary")
+        == contract["expected_output_summary"],
+        f"WriteInt must preserve {contract['expected_output_summary']}",
     )
     _require(
         len(mir_compute_history) == 1,
-        "comp-02 must emit one mir_compute_history row",
+        f"{row['sample_id']} must emit one mir_compute_history row",
     )
     _require(
-        mir_compute_history[0].get("function_id") == "add_one",
-        "comp-02 must evaluate add_one",
+        mir_compute_history[0].get("function_id") == contract["function_id"],
+        f"{row['sample_id']} must evaluate {contract['function_id']}",
     )
     _require(
-        mir_compute_history[0].get("input_summary") == "Int(41)",
-        "comp-02 compute input must be Int(41)",
+        mir_compute_history[0].get("input_summary") == contract["request_summary"],
+        f"{row['sample_id']} compute input must be {contract['request_summary']}",
     )
     _require(
-        mir_compute_history[0].get("output_summary") == "Int(42)",
-        "comp-02 compute output must be Int(42)",
+        mir_compute_history[0].get("output_summary")
+        == contract["expected_output_summary"],
+        f"{row['sample_id']} compute output must be {contract['expected_output_summary']}",
     )
 
     required_sequence = [
@@ -300,7 +373,7 @@ def _validate_comp02_runtime_payload(payload: dict[str, Any]) -> dict[str, Any]:
     indices = [event_kinds.index(kind) for kind in required_sequence]
     _require(
         indices == sorted(indices),
-        "comp-02 event order must preserve input -> compute -> output",
+        f"{row['sample_id']} event order must preserve input -> compute -> output",
     )
 
     return {
@@ -309,6 +382,25 @@ def _validate_comp02_runtime_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "mir_compute_history": mir_compute_history,
         "event_kinds": event_kinds,
         "output_summary": mir_compute_history[0].get("output_summary"),
+    }
+
+
+def _validate_product_alpha_check_rejection(row: dict[str, Any]) -> dict[str, Any]:
+    payload = _run_product_alpha1_check(_row_root_path(row))
+    if "returncode" in payload:
+        _require(
+            payload.get("returncode", 0) != 0,
+            f"{row['sample_id']} must exit non-zero on check rejection",
+        )
+    body = payload.get("payload") if "payload" in payload else payload
+    _require(
+        body.get("status") == "error",
+        f"{row['sample_id']} must return a check-time JSON error payload",
+    )
+    return {
+        "terminal_outcome": "check_rejection",
+        "actual_diagnostic_code": body.get("diagnostic_code"),
+        "actual_rejection_detail": body.get("message"),
     }
 
 
@@ -412,6 +504,11 @@ def _expected_outcome_matches(
             expected_outcome.get("output_summary")
             == actual_outcome.get("actual_output_summary")
         )
+    if actual_outcome.get("terminal_outcome") == "check_rejection":
+        expected_code = expected_outcome.get("diagnostic_code")
+        actual_code = actual_outcome.get("actual_diagnostic_code")
+        if isinstance(expected_code, str) and expected_code != actual_code:
+            return False
     expected_detail = expected_outcome.get("rejection_contains")
     actual_detail = actual_outcome.get("actual_rejection_detail") or ""
     if not isinstance(expected_detail, str):
@@ -454,7 +551,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             "current_status": row["current_status"],
             "terminal_outcome": "planned_only",
             "rejection_reason": (
-                f"{row['stage']} is not implemented yet; this root is scaffold-only in P-COMP-01"
+                f"{row['stage']} is not implemented yet; this root is still planned-only in the current computational line"
             ),
             "current_add_one_reading": data["current_add_one_reading"],
             "stop_lines": list(STOP_LINES),
@@ -464,7 +561,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     expected_outcome = dict(row["expected_outcome"])
     if row.get("execution_surface") == PRODUCT_ALPHA_EXECUTION_SURFACE:
         payload = _run_product_alpha1_local_session(_row_root_path(row))
-        runtime = _validate_comp02_runtime_payload(payload)
+        runtime = _validate_direct_runtime_payload(row, payload)
         actual_outcome = {
             "terminal_outcome": "accepted",
             "actual_output_summary": runtime["output_summary"],
@@ -487,6 +584,30 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             "actual_output_summary": runtime["output_summary"],
             "event_kinds_after": runtime["event_kinds"],
             "session_id": runtime["session_id"],
+            "row": realized,
+        }
+    if row.get("execution_surface") == PRODUCT_ALPHA_CHECK_SURFACE:
+        contract = _load_direct_runtime_contract(row)
+        rejection = _validate_product_alpha_check_rejection(row)
+        outcome_matches_expected = _expected_outcome_matches(
+            expected_outcome, rejection
+        )
+        return {
+            "command": "run",
+            "family": data["family"],
+            "sample_id": sample_id,
+            "current_status": row["current_status"],
+            "execution_surface": PRODUCT_ALPHA_CHECK_SURFACE,
+            "terminal_outcome": "check_rejection",
+            "expected_outcome": expected_outcome,
+            "outcome_matches_expected": outcome_matches_expected,
+            "package_id": contract["package_id"],
+            "package_input": contract["package_path"],
+            "module_id": contract["module_id"],
+            "function_id": contract["function_id"],
+            "request_summary": contract["request_summary"],
+            "actual_diagnostic_code": rejection["actual_diagnostic_code"],
+            "actual_rejection_detail": rejection["actual_rejection_detail"],
             "row": realized,
         }
 
@@ -525,6 +646,7 @@ def check_all() -> dict[str, Any]:
     failed: list[str] = []
     accepted: list[str] = []
     expected_runtime_rejections: list[str] = []
+    expected_check_rejections: list[str] = []
     runtime_failures: list[dict[str, str]] = []
 
     for error in status["validation_errors"]:
@@ -548,6 +670,8 @@ def check_all() -> dict[str, Any]:
                 accepted.append(row["sample_id"])
             elif result["terminal_outcome"] == "runtime_rejection":
                 expected_runtime_rejections.append(row["sample_id"])
+            elif result["terminal_outcome"] == "check_rejection":
+                expected_check_rejections.append(row["sample_id"])
             else:
                 _append_unique(failed, row["sample_id"])
                 runtime_failures.append(
@@ -573,7 +697,8 @@ def check_all() -> dict[str, Any]:
         "planned": list(status["planned_only_rows"]),
         "accepted": accepted,
         "expected_runtime_rejections": expected_runtime_rejections,
-        "passed": accepted + expected_runtime_rejections,
+        "expected_check_rejections": expected_check_rejections,
+        "passed": accepted + expected_runtime_rejections + expected_check_rejections,
         "failed": failed,
         "matrix_status": status["matrix_status"],
         "current_add_one_reading": status["current_add_one_reading"],
@@ -627,6 +752,8 @@ def format_pretty(payload: Any) -> str:
                 f"accepted rows: {payload['accepted_count']}",
                 "expected runtime rejections: "
                 + str(payload["expected_runtime_rejection_count"]),
+                "expected check rejections: "
+                + str(payload["expected_check_rejection_count"]),
             ]
         )
     if command == "run":
@@ -654,6 +781,10 @@ def format_pretty(payload: Any) -> str:
                 )
         elif payload["terminal_outcome"] == "runtime_rejection":
             lines.append(f"detail: {payload['actual_rejection_detail']}")
+        elif payload["terminal_outcome"] == "check_rejection":
+            if "actual_diagnostic_code" in payload:
+                lines.append(f"diagnostic: {payload['actual_diagnostic_code']}")
+            lines.append(f"detail: {payload['actual_rejection_detail']}")
         else:
             lines.append(f"reason: {payload['rejection_reason']}")
         return "\n".join(lines)
@@ -667,6 +798,8 @@ def format_pretty(payload: Any) -> str:
                 f"accepted rows: {len(payload['accepted'])}",
                 "expected runtime rejections: "
                 + str(len(payload["expected_runtime_rejections"])),
+                "expected check rejections: "
+                + str(len(payload["expected_check_rejections"])),
                 f"passed rows: {len(payload['passed'])}",
                 f"failed rows: {len(payload['failed'])}",
             ]

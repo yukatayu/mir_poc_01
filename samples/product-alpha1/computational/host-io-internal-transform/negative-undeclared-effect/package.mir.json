@@ -1,12 +1,11 @@
 {
   "schema_version": "mirrorea-product-alpha1-v0",
-  "package_id": "computational-add-one-pure-mir",
+  "package_id": "computational-host-io-internal-transform-negative-undeclared-effect",
   "package_version": "0.1.0-alpha.1",
   "package_kind": "world",
   "dependencies": [],
   "effects": [
-    "typed_host_io.read_int",
-    "typed_host_io.write_int"
+    "typed_host_io.read_int"
   ],
   "failures": [
     "AdapterUnavailable",
@@ -14,14 +13,14 @@
     "MirComputeRejected"
   ],
   "capabilities": [
-    "RunComputationalAddOne"
+    "RunComputationalTransform"
   ],
   "witness_requirements": [],
   "membership_requirements": [
     "active_participant"
   ],
   "auth_policy": {
-    "policy_id": "computational-add-one-auth-policy",
+    "policy_id": "computational-host-io-internal-transform-negative-undeclared-effect-auth-policy",
     "required_bindings": [
       "participant_membership"
     ]
@@ -32,11 +31,10 @@
   ],
   "contracts": [
     {
-      "contract_id": "computational-add-one-contract",
+      "contract_id": "computational-host-io-internal-transform-negative-undeclared-effect-contract",
       "variance": "invariant",
       "effect_row": [
-        "typed_host_io.read_int",
-        "typed_host_io.write_int"
+        "typed_host_io.read_int"
       ],
       "failure_row": [
         "AdapterUnavailable",
@@ -85,20 +83,20 @@
       "effect_ref": "typed_host_io.read_int",
       "request_payload": {
         "kind": "int",
-        "value": 41
+        "value": 40
       },
       "expected_response": {
         "kind": "int",
-        "value": 41
+        "value": 40
       }
     },
     "mir_compute": {
-      "module_id": "Computational.AddOne",
-      "function_id": "add_one",
+      "module_id": "Computational.Compose.Positive",
+      "function_id": "add_two",
       "input_type": "Int64",
       "output_type": "Int64",
       "required_capabilities": [
-        "RunComputationalAddOne"
+        "RunComputationalTransform"
       ],
       "failure_tag": "MirComputeRejected",
       "expected_output": {

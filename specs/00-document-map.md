@@ -209,7 +209,7 @@
   - current typed external `AddOne` を host-boundary evidence に限定し、pure/effect split、explicit failure row、C-like first floor、future Rust-like widening、completion gates、non-claims を固定する。
 - `plan/53-mir-computational-core-roadmap.md`
   - Mir computational core の repository-memory roadmap を置く。
-  - `P-COMP-01` scaffold、`P-COMP-02` direct executable row、`P-COMP-03` helper-executable first-floor widening、`P-COMP-04` effect-boundary queue を整理する。
+  - `P-COMP-01` scaffold、`P-COMP-02` direct executable row、`P-COMP-03` helper-executable first-floor widening、`P-COMP-04` direct host read/write boundary closeout を整理する。
   - `P-COMP-00..04`、planned sample matrix、future helper anchors、stop lines を整理する。
 - `specs/29-transform-posegraph-semantics.md`
   - Transform / PoseGraph の規範境界を置く。

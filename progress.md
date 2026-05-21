@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-21 20:53 JST
+最終更新: 2026-05-21 21:27 JST
 
 ## この文書について
 
@@ -24,15 +24,15 @@ Place をまたいで実行・通信・検証・可視化できる
 ## current position
 
 - latest closeout package:
-  `P-COMP-03` variables / arrays / records / control-flow first floor
-- current promoted reopen point:
   `P-COMP-04` effect boundary around internal computation
+- current promoted reopen point:
+  `P-POSE-02` no-split-frame runtime evidence
 - current reading:
   repo は bounded operational α-0.5 / α-0.8 / α-0.9、bounded practical α-1 integrated workflow、product alpha release-candidate workflow、installed-binary adoption probe、canonical operational product sample suite まで reproducible な workflow evidence を持つ。その上で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow completion ではない。
 - practical usability:
   external developer が clean clone から documented commands で `mirrorea-alpha` product demo と operational suite を check / run / attach / save / quiescent-save / transport / export-devtools / view / build-native-bundle まで再現する段階には達している。これは **controlled alpha use** として実用可能という意味であり、final public product / final SDK / hosted service ではない。
 - self-driven status:
-  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げた。current next package は `P-COMP-04` であり、implementation half は `P-COMP-04 -> P-POSE-02` へ進む。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
+  operational runtime widening queue は exhausted のまま。broader distribution / final shared-space operational catalog breadth は user-spec-required gate として残す。一方、docs/spec の current self-driven line は front-half `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` を actualize したうえで、`P-COMP-02` により one direct executable Mir-owned computational row を追加し、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative first-floor evidence を helper/runtime tests まで広げ、`P-COMP-04` により direct host read/write boundary の accepted/check-rejection rows を actualize した。current next package は `P-POSE-02` であり、implementation half は `P-POSE-02 -> all-up closeout` へ進む。`specs/32` / `plan/57` により、一度実行を依頼された後は package-by-package で止まらず進む autonomous execution contract も固定した。
 
 ## workflow-readiness axes
 
@@ -53,16 +53,16 @@ Place をまたいで実行・通信・検証・可視化できる
 | product alpha-1 release candidate | product alpha workflow | release-candidate ready, not final product | `scripts/product_alpha1_release_check.py --format json check-all --out <dir>` が Docker 込みで accepted なら release-candidate evidence | broader public distribution / final catalog decision |
 | installed-binary adoption probe | public-ish alpha adoption probe | bounded adoption candidate | `scripts/product_alpha1_installed_binary_check.py --format json check-all --out <dir>` が built binary + generated host bundle replay を確認 | archive / installer / hosted-service shape |
 | operational product sample suite | canonical operational suite | workflow-ready canonical suite, not final product | `scripts/operational_product_samples.py check-all --format json` が six roots, attach packages, transport, devtools, native bundle, portal/shard/gradient cuts を確認 | user-spec-required broader distribution / final catalog decision |
-| Mir computational core | bounded first-floor evidence plus remaining effect-boundary package | one direct runtime row plus helper-executable first-floor rows | `specs/28` / `plan/53`, `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`, `crates/mir-semantics::computational_core`, runtime/schema/session tests, and `scripts/mir_computational_samples.py` now prove `ReadInt -> add_one -> WriteInt` plus variables / arrays / records / control-flow / imports positive and negative rows while preserving legacy adapter-owned `typed_host_io.add_one` | `P-COMP-04` effect / failure / capability boundary |
+| Mir computational core | bounded first-floor plus host-boundary evidence | direct runtime rows, helper-executable first-floor rows, and direct check-rejection rows | `specs/28` / `plan/53`, `samples/product-alpha1/computational/add-one-pure-mir/package.mir.json`, `samples/product-alpha1/computational/host-io-internal-transform/`, `crates/mir-semantics::computational_core`, runtime/schema/session tests, and `scripts/mir_computational_samples.py` now prove `ReadInt -> add_one -> WriteInt`, variables / arrays / records / control-flow / imports positive and negative rows, and explicit host read/write boundary declarations with effect / failure / capability rejection evidence while preserving legacy adapter-owned `typed_host_io.add_one` | `P-POSE-02`; broader computational publish / observe / witness / handoff widening remains later |
 | Transform / PoseGraph | docs/spec rebaseline | planned-only scaffold actualized | `specs/29` / `plan/54`, `samples/product-alpha1/posegraph/`, and `scripts/posegraph_samples.py` classify planned rows and reject `run` as `planned_only` | `P-POSE-02` positive/negative no-split-frame evidence |
 | projection/backend boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/30` / `plan/55`, `samples/product-alpha1/projection/`, and `scripts/projection_boundary_samples.py` classify planned rows, preserve accepted/rejected compatibility IDs, and reject `run` as `planned_only` | later projection realization package, if any, after explicit design choice |
 | engine/WASM/FFI adapter boundary | docs/spec rebaseline | planned-only scaffold actualized | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, and `scripts/engine_adapter_boundary_samples.py` classify planned provider rows, preserve default execution gating, and reject `run` as `planned_only` | bounded provider admission package, if any, after explicit policy choice |
-| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue `P-COMP-04` / `P-POSE-02` implementation queue |
+| autonomous execution contract | docs/spec execution policy | boundary-fixed | `specs/32` / `plan/57` define no-question execution, front-half closeout, package close protocol, sub-agent review, and validation cadence | continue `P-POSE-02` / all-up closeout queue |
 
 ## subsystem status
 
 - **Mir**
-  current-L2 の semantics / invariant / parser-free evidence floor は維持。Mir-owned computational core first floor は `P-COMP-03` で pure `add_one` に加えて variables / arrays / records / control-flow / imports の positive / negative rows まで actualize したが、explicit effect boundary と final textual grammar / final public checker/runtime/verifier API はまだ後続 package。
+  current-L2 の semantics / invariant / parser-free evidence floor は維持。Mir-owned computational core first floor は `P-COMP-03` で pure `add_one` に加えて variables / arrays / records / control-flow / imports の positive / negative rows まで actualize され、`P-COMP-04` で explicit host read/write boundary の accepted/check-rejection rows まで actualize された。ただし broad publish/observe/witness/handoff semantics と final textual grammar / final public checker/runtime/verifier API はまだ後続 package。
 - **Mirrorea**
   same-session carrier、hot-plug、local/Docker transport、observer-safe devtools、local R0/R2 save-load、native host launch bundle の alpha workflow は再現可能。WAN/federation、distributed durable save-load、final viewer/telemetry ABI は後段。
 - **Typed-Effect Wiring Platform**
@@ -99,8 +99,8 @@ Place をまたいで実行・通信・検証・可視化できる
 
 - broader installed/public distribution is undefined beyond developer-built `mirrorea-alpha` plus locally generated native host launch bundle.
 - final shared-space operational catalog breadth is undefined beyond the bounded product alpha-1 narrow showcase.
-- Mir-owned computational core effect-boundary package is not yet implemented. Undeclared effect / failure / capability rejection evidence remains open.
 - PoseGraph runtime evidence is not yet implemented. `P-POSE-01` added only the planned-only scaffold root / helper / matrix.
+- broader computational effectful widening beyond the bounded host read/write boundary is not yet implemented. publish / observe / witness / handoff remains later.
 - projection/backend boundary is scaffolded but still inventory-only; no server/client split or codegen exists.
 - engine/WASM/FFI adapter boundary is scaffolded but still inventory-only; no arbitrary execution is admitted.
 - backend realization, bounded native/WASM provider admission, and final engine adapter ABI remain user-spec-required / kept-later gates.
@@ -118,6 +118,8 @@ python3 -m unittest scripts.tests.test_posegraph_samples
 python3 -m unittest scripts.tests.test_projection_boundary_samples
 python3 -m unittest scripts.tests.test_engine_adapter_boundary_samples
 python3 scripts/mir_computational_samples.py check-all --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json
 python3 scripts/posegraph_samples.py check-all --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/engine_adapter_boundary_samples.py check-all --format json
@@ -135,6 +137,8 @@ Use narrower command families from `samples_progress.md` or the hands-on guides 
 
 ## recent log
 
+- 2026-05-21 21:27 JST
+  `P-COMP-04` で `samples/product-alpha1/computational/host-io-internal-transform/` の accepted/check-rejection rows、helper matrix、product-alpha schema/runtime tests、snapshot docs を同期し、direct host read/write boundary の declared effect / failure / capability evidence を actualize した。next reopen point は `P-POSE-02`。
 - 2026-05-21 20:53 JST
   `P-COMP-03` で `mir-semantics` computational core を variables / arrays / records / control-flow / imports まで widen し、product-alpha schema/runtime tests と `scripts/mir_computational_samples.py` を同期して 5 accepted rows、5 expected runtime rejection rows、1 planned-only row を machine-readable に actualize した。next reopen point は `P-COMP-04`。
 - 2026-05-21 20:27 JST

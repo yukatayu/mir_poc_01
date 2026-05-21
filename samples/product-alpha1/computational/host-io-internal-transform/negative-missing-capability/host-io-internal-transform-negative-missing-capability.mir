@@ -1,0 +1,9 @@
+module Computational.HostBoundary.NegativeMissingCapability
+
+import Computational.Compose.Positive
+
+transition main at Place[ComputationalHostPlace] {
+  input <- perform read_int via host_input
+  output <- add_two(input)
+  perform write_int(output) via host_output
+}

@@ -189,6 +189,9 @@ pub struct ProductAlpha1MirComputeRuntimeInput {
     pub function_id: String,
     pub input_type: String,
     pub output_type: String,
+    #[serde(default)]
+    pub required_capabilities: Vec<String>,
+    pub failure_tag: String,
     pub expected_output: ProductAlpha1HostIoPayload,
 }
 
@@ -842,6 +845,64 @@ fn validate_computational_runtime_input(
             ),
         ));
     }
+    let computational_contracts: Vec<_> = package
+        .contracts
+        .iter()
+        .filter(|contract| {
+            contract.effect_row.contains(&host_input.effect_ref)
+                && contract.effect_row.contains(&host_output.effect_ref)
+        })
+        .collect();
+    if computational_contracts.is_empty() {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute requires one contract that contains both runtime_input.host_input.effect_ref and runtime_input.host_output.effect_ref"
+                .to_string(),
+        ));
+    }
+    if computational_contracts.len() > 1 {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute must be governed by exactly one contract covering runtime_input.host_input.effect_ref and runtime_input.host_output.effect_ref"
+                .to_string(),
+        ));
+    }
+    let computational_contract = computational_contracts[0];
+    if mir_compute.required_capabilities.is_empty() {
+        return Err(schema_error(
+            path,
+            "runtime_input.mir_compute.required_capabilities must not be empty for current computational product rows"
+                .to_string(),
+        ));
+    }
+    for capability in &mir_compute.required_capabilities {
+        if !package.capabilities.contains(capability) {
+            return Err(schema_error(
+                path,
+                format!(
+                    "runtime_input.mir_compute.required_capabilities includes `{capability}` which is not declared in package capabilities"
+                ),
+            ));
+        }
+    }
+    let failure_tag = &mir_compute.failure_tag;
+    if !package.failures.contains(failure_tag) {
+        return Err(schema_error(
+            path,
+            format!(
+                "runtime_input.mir_compute.failure_tag `{failure_tag}` is not declared in package failures"
+            ),
+        ));
+    }
+    if !computational_contract.failure_row.contains(failure_tag) {
+        return Err(schema_error(
+            path,
+            format!(
+                "runtime_input.mir_compute.failure_tag `{failure_tag}` is not declared in computational contract `{}` failure_row",
+                computational_contract.contract_id
+            ),
+        ));
+    }
 
     validate_identity_host_io_input(
         host_input,
@@ -903,7 +964,8 @@ fn validate_computational_runtime_input(
     else {
         return Err(schema_error(
             path,
-            "runtime_input.host_input expected_response must be Int for P-COMP-02".to_string(),
+            "runtime_input.host_input expected_response must be Int for current computational product rows"
+                .to_string(),
         ));
     };
     let ProductAlpha1HostIoPayload::Int {
@@ -912,7 +974,8 @@ fn validate_computational_runtime_input(
     else {
         return Err(schema_error(
             path,
-            "runtime_input.mir_compute.expected_output must be Int for P-COMP-02".to_string(),
+            "runtime_input.mir_compute.expected_output must be Int for current computational product rows"
+                .to_string(),
         ));
     };
     let ProductAlpha1HostIoPayload::Int {
@@ -921,7 +984,8 @@ fn validate_computational_runtime_input(
     else {
         return Err(schema_error(
             path,
-            "runtime_input.host_output.request_payload must be Int for P-COMP-02".to_string(),
+            "runtime_input.host_output.request_payload must be Int for current computational product rows"
+                .to_string(),
         ));
     };
 

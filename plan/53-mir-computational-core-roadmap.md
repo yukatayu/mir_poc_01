@@ -10,9 +10,11 @@ It preserves the Product Alpha-1 runtime / package / devtools / save-load / nati
 
 Current alpha evidence includes a typed external host-I/O lane. That is useful and must be preserved.
 
+It now shows bounded separation between pure computation and effectful host boundary calls through one accepted direct host read/write row and three expected `check` rejections.
+
 It does not yet show:
 
-- separation between pure computation and effectful host boundary calls in checker / runtime evidence.
+- broad publish / observe / witness / handoff effectful semantics.
 - compiler/backend readiness.
 
 ## package order
@@ -50,10 +52,13 @@ python3 -m unittest scripts.tests.test_mir_computational_samples
 python3 scripts/mir_computational_samples.py matrix --format json
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json
 cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
+cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/host-io-internal-transform/positive --format json
 ```
 
-These commands validate matrix classification, prove one bounded Mir-owned runtime execution, and prove helper-executable positive / runtime-rejection first-floor rows. They do not yet prove the effect-boundary package.
+These commands validate matrix classification, prove one bounded Mir-owned `add_one` runtime execution, prove helper-executable positive / runtime-rejection first-floor rows, and prove the bounded host read/write boundary package with accepted/check-rejection rows. They do not yet prove broad effectful semantics beyond that boundary.
 
 ## typing and failure-row roadmap
 
@@ -112,4 +117,4 @@ Later, after first-floor evidence:
 
 ## current recommendation
 
-`P-COMP-01`、`P-COMP-02`、`P-COMP-03` are now closed. The next computational implementation package is `P-COMP-04`, while broader distribution / final shared-space catalog decisions remain user-spec-required gates and do not block the current implementation queue.
+`P-COMP-01`、`P-COMP-02`、`P-COMP-03`、`P-COMP-04` are now closed. The next promoted implementation package is `P-POSE-02`, while broader distribution / final shared-space catalog decisions and broader computational effectful widening remain user-spec-required or later gates that do not block the current implementation queue.

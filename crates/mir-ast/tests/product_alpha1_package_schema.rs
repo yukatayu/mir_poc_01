@@ -205,7 +205,7 @@ const MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE: &str = r#"{
   "package_kind": "world",
   "dependencies": [],
   "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
-  "failures": ["AdapterUnavailable", "TypeMismatch"],
+  "failures": ["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
   "capabilities": ["RunComputationalAddOne"],
   "witness_requirements": [],
   "membership_requirements": ["active_participant"],
@@ -219,7 +219,7 @@ const MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE: &str = r#"{
       "contract_id": "computational-add-one-contract",
       "variance": "invariant",
       "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
-      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+      "failure_row": ["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"]
     }
   ],
   "observation_policy": {
@@ -255,6 +255,8 @@ const MINIMAL_COMPUTATIONAL_ADD_ONE_PACKAGE: &str = r#"{
       "function_id": "add_one",
       "input_type": "Int64",
       "output_type": "Int64",
+      "required_capabilities": ["RunComputationalAddOne"],
+      "failure_tag": "MirComputeRejected",
       "expected_output": {"kind": "int", "value": 42}
     },
     "host_output": {
@@ -281,6 +283,43 @@ fn computational_product_package(
     request_value: i64,
     expected_output: i64,
 ) -> String {
+    computational_product_package_with_boundary(
+        package_id,
+        module_id,
+        function_id,
+        request_value,
+        expected_output,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalRow"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalRow\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    )
+}
+
+fn json_array(values: &[&str]) -> String {
+    let items = values
+        .iter()
+        .map(|value| format!("\"{value}\""))
+        .collect::<Vec<_>>()
+        .join(", ");
+    format!("[{items}]")
+}
+
+fn computational_product_package_with_boundary(
+    package_id: &str,
+    module_id: &str,
+    function_id: &str,
+    request_value: i64,
+    expected_output: i64,
+    effects: &[&str],
+    failures: &[&str],
+    capabilities: &[&str],
+    contract_failures: &[&str],
+    handled_failures: &[&str],
+    mir_compute_extra_fields: &str,
+) -> String {
     format!(
         r#"{{
   "schema_version": "mirrorea-product-alpha1-v0",
@@ -288,9 +327,9 @@ fn computational_product_package(
   "package_version": "0.1.0-alpha.1",
   "package_kind": "world",
   "dependencies": [],
-  "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
-  "failures": ["AdapterUnavailable", "TypeMismatch"],
-  "capabilities": ["RunComputationalRow"],
+  "effects": {effects},
+  "failures": {failures},
+  "capabilities": {capabilities},
   "witness_requirements": [],
   "membership_requirements": ["active_participant"],
   "auth_policy": {{
@@ -303,7 +342,7 @@ fn computational_product_package(
       "contract_id": "{package_id}-contract",
       "variance": "invariant",
       "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
-      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+      "failure_row": {contract_failures}
     }}
   ],
   "observation_policy": {{
@@ -319,7 +358,7 @@ fn computational_product_package(
     "retained_artifacts": ["checker_report", "runtime_plan", "compute_trace"]
   }},
   "message_recovery_policy": {{
-    "handled_failures": ["reject"],
+    "handled_failures": {handled_failures},
     "recovery": "reject"
   }},
   "savepoint_policy": {{
@@ -339,6 +378,7 @@ fn computational_product_package(
       "function_id": "{function_id}",
       "input_type": "Int64",
       "output_type": "Int64",
+      {mir_compute_extra_fields}
       "expected_output": {{"kind": "int", "value": {expected_output}}}
     }},
     "host_output": {{
@@ -356,7 +396,12 @@ fn computational_product_package(
     "min_cli_schema_version": "mirrorea-product-alpha1-v0",
     "migration_policy": "alpha_schema_migration_required"
   }}
-}}"#
+}}"#,
+        effects = json_array(effects),
+        failures = json_array(failures),
+        capabilities = json_array(capabilities),
+        contract_failures = json_array(contract_failures),
+        handled_failures = json_array(handled_failures),
     )
 }
 
@@ -520,6 +565,8 @@ fn product_alpha1_package_schema_rejects_computational_add_one_missing_mir_compu
       "function_id": "add_one",
       "input_type": "Int64",
       "output_type": "Int64",
+      "required_capabilities": ["RunComputationalAddOne"],
+      "failure_tag": "MirComputeRejected",
       "expected_output": {"kind": "int", "value": 42}
     }"#,
         "",
@@ -565,6 +612,164 @@ fn product_alpha1_package_schema_accepts_runtime_reject_rows_for_known_modules()
 
     assert_eq!(report.package_id, "computational-compose-negative");
     assert_eq!(report.verdict, "accepted");
+}
+
+#[test]
+fn product_alpha1_package_schema_accepts_comp04_boundary_contract_positive() {
+    let package = parse_product_alpha1_package_text(&computational_product_package_with_boundary(
+        "computational-boundary-positive",
+        "Computational.Compose.Positive",
+        "add_two",
+        40,
+        42,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalTransform"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    ))
+    .expect("comp04 boundary-positive package should parse");
+    let report =
+        check_product_alpha1_package(&package).expect("comp04 boundary-positive should check");
+
+    assert_eq!(report.package_id, "computational-boundary-positive");
+    assert_eq!(report.verdict, "accepted");
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_comp04_undeclared_host_effect() {
+    let error = parse_product_alpha1_package_text(&computational_product_package_with_boundary(
+        "computational-boundary-undeclared-effect",
+        "Computational.Compose.Positive",
+        "add_two",
+        40,
+        42,
+        &["typed_host_io.read_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalTransform"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    ))
+    .expect_err("undeclared host effect should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("typed_host_io.write_int"));
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_comp04_undeclared_failure_row() {
+    let error = parse_product_alpha1_package_text(&computational_product_package_with_boundary(
+        "computational-boundary-undeclared-failure",
+        "Computational.Arrays.NegativeOutOfBounds",
+        "second",
+        5,
+        0,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalTransform"],
+        &["AdapterUnavailable", "TypeMismatch"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    ))
+    .expect_err("undeclared computational failure row should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("MirComputeRejected"));
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_comp04_missing_required_capability() {
+    let error = parse_product_alpha1_package_text(&computational_product_package_with_boundary(
+        "computational-boundary-missing-capability",
+        "Computational.Compose.Positive",
+        "add_two",
+        40,
+        42,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalRow"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    ))
+    .expect_err("missing required capability should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("RunComputationalTransform"));
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_missing_computational_boundary_fields() {
+    let error = parse_product_alpha1_package_text(&computational_product_package_with_boundary(
+        "computational-boundary-missing-fields",
+        "Computational.Compose.Positive",
+        "add_two",
+        40,
+        42,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalTransform"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "",
+    ))
+    .expect_err("missing computational boundary fields should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(
+        error.detail.contains("missing field `failure_tag`")
+            || error
+                .detail
+                .contains("runtime_input.mir_compute.required_capabilities")
+    );
+}
+
+#[test]
+fn product_alpha1_package_schema_rejects_failure_tag_on_unrelated_contract() {
+    let base = computational_product_package_with_boundary(
+        "computational-boundary-unrelated-contract",
+        "Computational.Arrays.NegativeOutOfBounds",
+        "second",
+        5,
+        0,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalTransform"],
+        &["AdapterUnavailable", "TypeMismatch"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    );
+    let patched = base.replace(
+        r#""contracts": [
+    {
+      "contract_id": "computational-boundary-unrelated-contract-contract",
+      "variance": "invariant",
+      "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
+      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+    }
+  ],"#,
+        r#""contracts": [
+    {
+      "contract_id": "computational-boundary-unrelated-contract-contract",
+      "variance": "invariant",
+      "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
+      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+    },
+    {
+      "contract_id": "dummy-unrelated-contract",
+      "variance": "observe_only",
+      "effect_row": [],
+      "failure_row": ["MirComputeRejected"]
+    }
+  ],"#,
+    );
+    let error = parse_product_alpha1_package_text(&patched)
+        .expect_err("failure tag on unrelated contract should reject");
+
+    assert_eq!(error.kind, ProductAlpha1ErrorKind::SchemaDecode);
+    assert!(error.detail.contains("computational contract"));
 }
 
 #[test]

@@ -6,13 +6,13 @@ Product Alpha-1 is valuable as a runtime/product workflow floor: `mirrorea-alpha
 
 The drift is that this floor can be misread as proof that Mir already owns general computation. It does not. The current `AddOne` lane proves a typed external host-boundary path, not Mir-owned arithmetic / variable / array / record / control-flow semantics.
 
-`P-COMP-01` actualized the scaffold for that correction, `P-COMP-02` promoted the first direct executable row, and `P-COMP-03` widened the first floor:
+`P-COMP-01` actualized the scaffold for that correction, `P-COMP-02` promoted the first direct executable row, `P-COMP-03` widened the first floor, and `P-COMP-04` actualized the bounded host read/write effect-boundary row:
 
 - `samples/product-alpha1/computational/`
 - `samples/product-alpha1/computational/matrix.json`
 - `scripts/mir_computational_samples.py`
 
-The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, execute positive/negative `comp-03` rows, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime row. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
+The helper can now list rows, validate the matrix, execute `run comp-02-pure-add-one`, execute positive/negative `comp-03` rows, execute `run comp-04-host-io-internal-transform-positive`, execute three expected `check` rejections for missing declarations, and prove the bounded event order `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime rows. This is useful because the proof point is machine-readable without rewriting the old adapter-owned `typed_host_io.add_one` lane.
 
 `P-POSE-01` now does the same for PoseGraph:
 
@@ -89,9 +89,11 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
 python3 scripts/mir_computational_samples.py run comp-03-control-flow-positive --format json
 python3 scripts/mir_computational_samples.py run comp-03-variables-scope-negative --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json
 ```
 
-These commands now prove `P-COMP-02` and `P-COMP-03`. They still do not prove `P-COMP-04`, final grammar, or backend realization.
+These commands now prove `P-COMP-02`, `P-COMP-03`, and `P-COMP-04`. The `P-COMP-04` positive row proves declared boundary carriage through checker/runtime-plan/session evidence; it does not mean `required_capabilities` / `failure_tag` are already a broad effectful runtime semantics. Final grammar and backend realization remain open.
 
 ## PoseGraph target
 

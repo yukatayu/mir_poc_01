@@ -2,9 +2,9 @@
 
 ## purpose
 
-この文書は、`P-COMP-03` で first-floor widening まで進んだ Mir Computational Core line を読むための landing page です。
+この文書は、`P-COMP-04` で host read/write boundary まで進んだ Mir Computational Core line を読むための landing page です。
 
-現時点でも broad runtime implementation guide ではありませんが、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` と `scripts/mir_computational_samples.py` は one bounded direct runtime row と ten helper-executable first-floor rows を持ちます。`comp-04-host-io-internal-transform` だけは still planned-only です。
+現時点でも broad runtime implementation guide ではありませんが、`samples/product-alpha1/computational/add-one-pure-mir/package.mir.json` と `scripts/mir_computational_samples.py` は one bounded direct runtime row、ten helper-executable first-floor rows、one direct accepted host read/write boundary row、and three expected `check` rejections を持ちます。
 
 ## current reading
 
@@ -33,7 +33,10 @@ python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py run comp-02-pure-add-one --format json
 python3 scripts/mir_computational_samples.py run comp-03-control-flow-positive --format json
 python3 scripts/mir_computational_samples.py run comp-03-variables-scope-negative --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json
+python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json
 cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/add-one-pure-mir --format json
+cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/host-io-internal-transform/positive --format json
 ```
 
 These commands now prove one bounded Mir-owned runtime row:
@@ -42,7 +45,7 @@ These commands now prove one bounded Mir-owned runtime row:
 ReadInt(41) -> add_one -> WriteInt(42)
 ```
 
-They now prove `P-COMP-02` and `P-COMP-03` first-floor evidence. They do not prove `P-COMP-04`, final textual grammar, or broad backend realization.
+They now prove `P-COMP-02`, `P-COMP-03`, and `P-COMP-04` first-floor/boundary evidence. `P-COMP-04` should be read narrowly: the accepted row proves that declared host input, Mir transform, and host output survive checker/runtime-plan/session evidence together, and the negative rows prove check-time rejection when effect / failure / capability declarations are missing. They do not prove final textual grammar, broad publish/observe/witness/handoff semantics, or backend realization.
 
 Use repository validation alongside them:
 
@@ -65,7 +68,7 @@ These repository validations prove that the docs/source hierarchy is synchronize
 - `P-COMP-03`:
   variables, arrays, records, control-flow, and imports positive and negative rows.
 - `P-COMP-04`:
-  pure/effect split with effect / failure / capability rejection evidence.
+  pure/effect split with accepted host read/write wrapping and effect / failure / capability rejection evidence.
 
 ## stop lines
 

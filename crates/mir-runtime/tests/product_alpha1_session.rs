@@ -117,6 +117,34 @@ fn computational_package_json(
     request_value: i64,
     expected_output: i64,
 ) -> String {
+    computational_package_json_with_boundary(
+        package_id,
+        module_id,
+        function_id,
+        request_value,
+        expected_output,
+        &["typed_host_io.read_int", "typed_host_io.write_int"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["RunComputationalRow"],
+        &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+        &["reject"],
+        "\"required_capabilities\": [\"RunComputationalRow\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+    )
+}
+
+fn computational_package_json_with_boundary(
+    package_id: &str,
+    module_id: &str,
+    function_id: &str,
+    request_value: i64,
+    expected_output: i64,
+    effects: &[&str],
+    failures: &[&str],
+    capabilities: &[&str],
+    contract_failures: &[&str],
+    handled_failures: &[&str],
+    mir_compute_extra_fields: &str,
+) -> String {
     format!(
         r#"{{
   "schema_version": "mirrorea-product-alpha1-v0",
@@ -124,9 +152,9 @@ fn computational_package_json(
   "package_version": "0.1.0-alpha.1",
   "package_kind": "world",
   "dependencies": [],
-  "effects": ["typed_host_io.read_int", "typed_host_io.write_int"],
-  "failures": ["AdapterUnavailable", "TypeMismatch"],
-  "capabilities": ["RunComputationalRow"],
+  "effects": {effects},
+  "failures": {failures},
+  "capabilities": {capabilities},
   "witness_requirements": [],
   "membership_requirements": ["active_participant"],
   "auth_policy": {{
@@ -139,7 +167,7 @@ fn computational_package_json(
       "contract_id": "{package_id}-contract",
       "variance": "invariant",
       "effect_row": ["typed_host_io.read_int", "typed_host_io.write_int"],
-      "failure_row": ["AdapterUnavailable", "TypeMismatch"]
+      "failure_row": {contract_failures}
     }}
   ],
   "observation_policy": {{
@@ -155,7 +183,7 @@ fn computational_package_json(
     "retained_artifacts": ["checker_report", "runtime_plan", "compute_trace"]
   }},
   "message_recovery_policy": {{
-    "handled_failures": ["reject"],
+    "handled_failures": {handled_failures},
     "recovery": "reject"
   }},
   "savepoint_policy": {{
@@ -175,6 +203,7 @@ fn computational_package_json(
       "function_id": "{function_id}",
       "input_type": "Int64",
       "output_type": "Int64",
+      {mir_compute_extra_fields}
       "expected_output": {{"kind": "int", "value": {expected_output}}}
     }},
     "host_output": {{
@@ -192,7 +221,12 @@ fn computational_package_json(
     "min_cli_schema_version": "mirrorea-product-alpha1-v0",
     "migration_policy": "alpha_schema_migration_required"
   }}
-}}"#
+}}"#,
+        effects = json_array(effects),
+        failures = json_array(failures),
+        capabilities = json_array(capabilities),
+        contract_failures = json_array(contract_failures),
+        handled_failures = json_array(handled_failures),
     )
 }
 
@@ -898,6 +932,36 @@ fn product_alpha1_run_local_rejects_comp03_negative_modules() {
             error.detail
         );
     }
+}
+
+#[test]
+fn product_alpha1_run_local_executes_comp04_boundary_positive_package() {
+    let package_dir = write_package(
+        "computational-boundary-positive-runtime",
+        &computational_package_json_with_boundary(
+            "computational-boundary-positive",
+            "Computational.Compose.Positive",
+            "add_two",
+            40,
+            42,
+            &["typed_host_io.read_int", "typed_host_io.write_int"],
+            &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+            &["RunComputationalTransform"],
+            &["AdapterUnavailable", "TypeMismatch", "MirComputeRejected"],
+            &["reject"],
+            "\"required_capabilities\": [\"RunComputationalTransform\"],\n      \"failure_tag\": \"MirComputeRejected\",\n      ",
+        ),
+    );
+    let report = run_product_alpha1_local_session_path(&package_dir)
+        .expect("comp04 boundary-positive package should run locally");
+
+    assert!(report.mir_computation_claimed);
+    assert_eq!(report.session.mir_compute_history.len(), 1);
+    assert_eq!(report.session.mir_compute_history[0].function_id, "add_two");
+    assert_eq!(
+        report.session.mir_compute_history[0].output_summary,
+        "Int(42)"
+    );
 }
 
 #[test]

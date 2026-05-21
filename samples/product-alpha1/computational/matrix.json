@@ -148,11 +148,59 @@
       }
     },
     {
-      "sample_id": "comp-04-host-io-internal-transform",
-      "root_name": "host-io-internal-transform",
+      "sample_id": "comp-04-host-io-internal-transform-positive",
+      "root_name": "host-io-internal-transform/positive",
       "stage": "P-COMP-04",
-      "current_status": "planned_only",
-      "representative_source": "host-io-internal-transform/host-io-internal-transform.mir"
+      "current_status": "executable",
+      "execution_surface": "product_alpha1_run_local",
+      "representative_source": "host-io-internal-transform/positive/host-io-internal-transform-positive.mir",
+      "package_input": "host-io-internal-transform/positive/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "accepted",
+        "output_summary": "Int(42)"
+      }
+    },
+    {
+      "sample_id": "comp-04-host-io-internal-transform-negative-undeclared-effect",
+      "root_name": "host-io-internal-transform/negative-undeclared-effect",
+      "stage": "P-COMP-04",
+      "current_status": "executable",
+      "execution_surface": "product_alpha1_check",
+      "representative_source": "host-io-internal-transform/negative-undeclared-effect/host-io-internal-transform-negative-undeclared-effect.mir",
+      "package_input": "host-io-internal-transform/negative-undeclared-effect/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "check_rejection",
+        "diagnostic_code": "SchemaDecode",
+        "rejection_contains": "host_output.effect_ref"
+      }
+    },
+    {
+      "sample_id": "comp-04-host-io-internal-transform-negative-undeclared-failure",
+      "root_name": "host-io-internal-transform/negative-undeclared-failure",
+      "stage": "P-COMP-04",
+      "current_status": "executable",
+      "execution_surface": "product_alpha1_check",
+      "representative_source": "host-io-internal-transform/negative-undeclared-failure/host-io-internal-transform-negative-undeclared-failure.mir",
+      "package_input": "host-io-internal-transform/negative-undeclared-failure/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "check_rejection",
+        "diagnostic_code": "SchemaDecode",
+        "rejection_contains": "MirComputeRejected"
+      }
+    },
+    {
+      "sample_id": "comp-04-host-io-internal-transform-negative-missing-capability",
+      "root_name": "host-io-internal-transform/negative-missing-capability",
+      "stage": "P-COMP-04",
+      "current_status": "executable",
+      "execution_surface": "product_alpha1_check",
+      "representative_source": "host-io-internal-transform/negative-missing-capability/host-io-internal-transform-negative-missing-capability.mir",
+      "package_input": "host-io-internal-transform/negative-missing-capability/package.mir.json",
+      "expected_outcome": {
+        "terminal_outcome": "check_rejection",
+        "diagnostic_code": "SchemaDecode",
+        "rejection_contains": "RunComputationalTransform"
+      }
     }
   ]
 }

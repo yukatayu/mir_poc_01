@@ -246,6 +246,14 @@ Close condition:
 - effect row, failure row, and capability rejects are visible.
 - pure fragment does not contain `perform`, `publish`, `observe`, `witness`, `handoff`, or `atomic_cut`.
 
+Observed closeout:
+
+- closed on 2026-05-21 with one direct accepted host read/write row and three expected `check` rejections
+- `scripts/mir_computational_samples.py check-all --format json` now reports 7 accepted rows, 5 expected runtime rejections, and 3 expected check rejections
+- `samples/product-alpha1/computational/host-io-internal-transform/` now contains `positive/`, `negative-undeclared-effect/`, `negative-undeclared-failure/`, and `negative-missing-capability/`
+- product-alpha schema/runtime tests now cover `required_capabilities` and `failure_tag` as declared admission-boundary evidence without claiming broad effectful runtime semantics
+- next promoted package is `P-POSE-02`
+
 ## P-POSE-01 plan
 
 Purpose:

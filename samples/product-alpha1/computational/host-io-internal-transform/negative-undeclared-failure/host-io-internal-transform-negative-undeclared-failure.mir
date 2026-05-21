@@ -1,0 +1,9 @@
+module Computational.HostBoundary.NegativeUndeclaredFailure
+
+import Computational.Arrays.NegativeOutOfBounds
+
+transition main at Place[ComputationalHostPlace] {
+  input <- perform read_int via host_input
+  output <- second(input)
+  perform write_int(output) via host_output
+}
