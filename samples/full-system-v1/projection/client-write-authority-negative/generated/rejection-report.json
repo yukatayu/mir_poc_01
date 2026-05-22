@@ -1,0 +1,8 @@
+{
+  "diagnostic_codes": [
+    "client_write_authority_escalation"
+  ],
+  "rejected_rows": [
+    "client_output:client_write_authority_escalation"
+  ]
+}

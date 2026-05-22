@@ -14,6 +14,7 @@ use mir_ast::product_alpha1::{
     check_product_alpha1_package_path, load_product_alpha1_package_path,
 };
 use mir_runtime::{
+    full_system_v1_projection::project_full_system_v1_path,
     product_alpha1_devtools::{
         ProductAlpha1DevtoolsBundle, export_product_alpha1_devtools_for_session,
         render_product_alpha1_viewer_html, validate_product_alpha1_viewer_dir,
@@ -69,6 +70,7 @@ fn run(args: Vec<String>) -> i32 {
         "view" => handle_view(rest),
         "build-native-bundle" => handle_build_native_bundle(rest),
         "demo" => handle_demo(rest),
+        "project-full-v1" => handle_project_full_v1(rest),
         "__product-transport-world-server" => handle_product_transport_world_server(rest),
         "__product-transport-participant-client" => {
             handle_product_transport_participant_client(rest)
@@ -558,6 +560,17 @@ fn handle_demo(args: &[String]) -> (Value, i32) {
         Ok(payload) => (payload, 0),
         Err(payload) => payload,
     }
+}
+
+fn handle_project_full_v1(args: &[String]) -> (Value, i32) {
+    let (source_path, request_path) = match parse_project_full_v1_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let report = project_full_system_v1_path(&source_path, &request_path);
+    let payload = serde_json::to_value(report.clone())
+        .expect("full system v1 projection report should serialize");
+    (payload, if report.accepted { 0 } else { 2 })
 }
 
 fn handle_product_transport_world_server(args: &[String]) -> (Value, i32) {
@@ -2100,6 +2113,59 @@ fn parse_build_native_bundle_args(args: &[String]) -> Result<(PathBuf, PathBuf),
     Ok((PathBuf::from(package_path), out_dir))
 }
 
+fn parse_project_full_v1_args(args: &[String]) -> Result<(PathBuf, PathBuf), (Value, i32)> {
+    let Some(source_path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "project-full-v1",
+                "diagnostic_code": "missing_source_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    let mut request_path = None;
+    let mut index = 1;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--request" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("project-full-v1", &args[index..]),
+                        2,
+                    ));
+                };
+                request_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            _ => {
+                return Err((
+                    unexpected_arguments_payload("project-full-v1", &args[index..]),
+                    2,
+                ));
+            }
+        }
+    }
+    let Some(request_path) = request_path else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "project-full-v1",
+                "diagnostic_code": "missing_request_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    Ok((PathBuf::from(source_path), request_path))
+}
+
 struct DemoArgs {
     package_path: PathBuf,
     out_dir: PathBuf,
@@ -2355,7 +2421,8 @@ fn usage_payload() -> Value {
             "export-devtools",
             "view",
             "build-native-bundle",
-            "demo"
+            "demo",
+            "project-full-v1"
         ],
         "product_alpha1_ready": false,
         "final_public_api_frozen": false

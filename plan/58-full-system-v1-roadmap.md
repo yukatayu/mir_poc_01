@@ -8,19 +8,20 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-POSE-04`:
+Current repo state after `P-PROJ-02`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
 - Mir computational core has `first-floor-evidence`.
-- PoseGraph has helper-backed `first-floor-evidence`.
-- Projection/backend and engine/provider roots are `boundary-fixed` / inventory-only.
+- PoseGraph has bounded source-first runtime/save-load/devtools `first-floor-evidence`, while `samples/product-alpha1/posegraph/` remains helper-backed comparison evidence.
+- Projection/backend now has bounded source-first `first-floor-evidence`, while engine/provider remains inventory-only.
 - Full System V1 source-first parser floor is `actualized` with 2 positive rows, 8 negative rows, path-aware unresolved import diagnostics, and span-bearing expression AST output.
 - Full System V1 source-first typed checker floor is `actualized` with crate-local typed IR lowering, explicit accepted/residual obligations, imported-module semantic closure, ambiguous import rejection, and a 3-positive / 9-negative sample matrix through `scripts/full_system_v1_samples.py`.
 - Full System V1 pure interpreter floor is `actualized` through the same source-first runtime lane.
 - Full System V1 bounded effectful runtime floor is `actualized` with host read/write, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows through `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, and `samples/full-system-v1/computational/runtime-matrix.json`.
 - Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 5 accepted rows, 1 violation-export row, 3 runtime-rejection rows, bounded save/load admissibility evidence, and observer-safe PoseGraph/devtools export.
-- Projection and provider packages remain later.
+- Full System V1 bounded projection IR floor is `actualized` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, and `scripts/projection_v1_samples.py` with 1 accepted row, 1 rejection row, source-derived target manifests, source-owned capability/failure preservation, unassigned-place rejection, save/load ownership rejection, and `mirrorea-alpha project-full-v1`.
+- Packet/FFI payload schema semantics, executable server/client split, and provider packages remain later.
 
 ## package order
 
@@ -74,7 +75,9 @@ samples/full-system-v1/
 
 `P-POSE-04` widened that same PoseGraph lane with `pose-06-save-load-roundtrip`, save/load carriers on the negative rows, bounded load-admissibility export, and observer-safe PoseGraph/devtools panels while preserving the non-claims around distributed durable save/load and final viewer/devtools ABI.
 
-The wider root remains non-workflow-ready until later packages add typed IR, runtime, projection, and provider evidence.
+`P-PROJ-02` added `samples/full-system-v1/projection/`, `matrix.json`, `expected/run.json`, generated target-manifest / rejection artifacts, `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, the `mir_full_system_v1_projection` example, `mirrorea-alpha project-full-v1`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/projection_v1_samples.py` so source-first target manifests and preservation reports now execute with one positive Sugoroku-like row, source-owned capability/failure rows, explicit client-write rejection, unassigned-place rejection, and save/load ownership rejection while preserving the non-claims around packet/FFI payload semantics, executable server/client role split, and provider admission.
+
+The wider root remains non-workflow-ready until later packages add packet/FFI schemas, executable role-run evidence, provider admission, and the remaining source-first sample families.
 
 ## validation direction
 
@@ -92,12 +95,12 @@ Current source-first anchors:
 python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
+python3 scripts/projection_v1_samples.py check-all --format json
 ```
 
 Planned future anchors:
 
 ```bash
-python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 ```

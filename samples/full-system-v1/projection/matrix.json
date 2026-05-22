@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_projection",
+  "current_status": "projection_ir_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "proj-02-effectful-sugoroku-positive",
+      "root_name": "effectful-sugoroku-positive",
+      "stage": "P-PROJ-02",
+      "current_status": "executable",
+      "source": "effectful-sugoroku-positive/main/src/effectful-sugoroku-positive.mir",
+      "request": "effectful-sugoroku-positive/projection.request.json",
+      "expected": "effectful-sugoroku-positive/expected/run.json",
+      "generated_artifact": "effectful-sugoroku-positive/generated/target-manifest.json",
+      "generated_kind": "target_manifests"
+    },
+    {
+      "sample_id": "proj-02-client-write-authority-negative",
+      "root_name": "client-write-authority-negative",
+      "stage": "P-PROJ-02",
+      "current_status": "executable",
+      "source": "client-write-authority-negative/src/client-write-authority-negative.mir",
+      "request": "client-write-authority-negative/projection.request.json",
+      "expected": "client-write-authority-negative/expected/run.json",
+      "generated_artifact": "client-write-authority-negative/generated/rejection-report.json",
+      "generated_kind": "rejection_report"
+    }
+  ]
+}

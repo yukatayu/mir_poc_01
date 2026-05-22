@@ -145,18 +145,20 @@
   - default `check-all` fixes exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory-only execution policies
   - `check-all --include-workflows --out <dir>` also reruns the heavier product release-candidate and operational suite workflow anchors
   - it does not claim final product, final grammar/API, direct LLVM/native backend, server/client codegen, provider admission, WAN/federation, or distributed durable save-load
-- Full System V1 helper family now has parser-floor, typed-checker-floor, and bounded runtime commands plus later planned commands
+- Full System V1 helper family now has parser-floor, typed-checker-floor, bounded runtime commands, and bounded projection IR commands plus later planned commands
   - `python3 scripts/textual_mir_samples.py check-all --format json`
   - `python3 scripts/full_system_v1_samples.py check-all --format json`
   - `python3 scripts/posegraph_runtime_samples.py check-all --format json`
+  - `python3 scripts/projection_v1_samples.py check-all --format json`
   - this exercises `samples/full-system-v1/computational/` through `crates/mir-ast::textual_alpha` and the `textual_mir_alpha_parse` example
   - `python3 scripts/full_system_v1_samples.py runtime-matrix --format json` and `run-runtime <sample-id> --format json`
   - the typed-checker helper exercises the same root through `crates/mir-semantics::full_system_v1` and the `full_system_v1_check` example
   - the runtime helper exercises source-derived pure and effectful rows through `crates/mir-runtime::full_system_v1_session` and the `mir_full_system_v1_session` example
   - the PoseGraph helper exercises `samples/full-system-v1/avatar-pose/` through `crates/mir-runtime::posegraph_runtime` and the `posegraph_runtime_session` example
-  - together they validate parser acceptance/rejection, path-aware unresolved import rejection, expression/statement spans, typed IR lowering, type/scope/import/effect/failure/capability rows, source-derived safe C-like execution, transition/effect rows, compute trace shape, effect-session summary shape, static/runtime rejection split, same-client same-observation-snapshot no-split-frame, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded pose-aware save/load admissibility, observer-safe PoseGraph/devtools export, and sample/expected matrix consistency without changing the Product Alpha `package.mir.json` front door
-  - they do not claim final public grammar, final typed IR API, final effect ABI, distributed cut/save execution, final devtools family completion, or package artifact generation
-  - later planned commands remain `projection_v1_samples.py`, `provider_admission_samples.py`, and `full_system_v1_release_check.py`
+  - the projection helper exercises `samples/full-system-v1/projection/` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, the `mir_full_system_v1_projection` example, and the `mirrorea-alpha project-full-v1` CLI surface
+  - together they validate parser acceptance/rejection, path-aware unresolved import rejection, expression/statement spans, typed IR lowering, type/scope/import/effect/failure/capability rows, source-derived safe C-like execution, transition/effect rows, compute trace shape, effect-session summary shape, static/runtime rejection split, same-client same-observation-snapshot no-split-frame, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded pose-aware save/load admissibility, observer-safe PoseGraph/devtools export, source-derived target manifests, preservation reports, client-write authority rejection, and sample/expected matrix consistency without changing the Product Alpha `package.mir.json` front door
+  - they do not claim final public grammar, final typed IR API, final effect ABI, packet/FFI payload schema completion, executable server/client split, distributed cut/save execution, final devtools family completion, or package artifact generation
+  - later planned commands remain `provider_admission_samples.py` and `full_system_v1_release_check.py`
   - do not add the later planned commands to mandatory validation until implementation packages create them
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`

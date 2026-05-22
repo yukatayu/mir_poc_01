@@ -1,0 +1,86 @@
+{
+  "accepted": true,
+  "projection_id": "effectful-sugoroku-projection",
+  "target_ids": [
+    "host-adapter",
+    "world-client",
+    "world-server"
+  ],
+  "target_roles": [
+    "adapter",
+    "client",
+    "server"
+  ],
+  "packet_schema_refs": [
+    "packet.roll.observe",
+    "packet.roll.publish",
+    "packet.session.admin",
+    "packet.session.cut",
+    "packet.turn.handoff",
+    "packet.turn.witness"
+  ],
+  "ffi_schema_refs": [
+    "ffi.host_input.read_int",
+    "ffi.host_output.write_int"
+  ],
+  "checked_effect_rows": [
+    "atomic_cut",
+    "handoff_turn",
+    "issue_turn_witness",
+    "observe_roll",
+    "publish_roll",
+    "quiesce_messages",
+    "read_int",
+    "seal_places",
+    "write_int"
+  ],
+  "checked_failure_rows": [
+    "AdapterUnavailable",
+    "CutRejected",
+    "HandoffRejected",
+    "ObserveRejected",
+    "PublishRejected",
+    "WitnessRejected"
+  ],
+  "checked_capability_rows": [
+    "CutAuthority",
+    "HandoffAuthority",
+    "HostRead",
+    "HostWrite",
+    "Observer",
+    "Publisher",
+    "WitnessAuthority"
+  ],
+  "checked_authority_rows": [
+    "handoff_port:witness_handoff",
+    "host_input:adapter_read_only",
+    "host_output:adapter_write_side_effect",
+    "observe_bus:observer_safe_view",
+    "publish_bus:server_publish",
+    "session_admin:save_load_admin",
+    "session_cut:save_load_admin",
+    "witness_store:witness_issue"
+  ],
+  "checked_provider_policy_rows": [
+    "host-adapter:native_disabled",
+    "world-client:no_provider_calls",
+    "world-server:no_provider_calls"
+  ],
+  "checked_rollback_replay_cut_rows": [
+    "handoff_port:true:true:witness_reacquire_on_load",
+    "host_input:true:true:no_state_transfer",
+    "host_output:true:true:no_state_transfer",
+    "observe_bus:true:true:observer_projection_only",
+    "publish_bus:true:true:publish_replay_visible",
+    "session_admin:true:true:quiescent_required",
+    "session_cut:true:true:cut_frontier_required",
+    "witness_store:true:true:savepoint_anchor_required"
+  ],
+  "rejected_rows": [],
+  "residual_obligation_codes": [
+    "packet_ffi_schema_semantics_deferred",
+    "provider_admission_deferred",
+    "server_client_runtime_split_deferred"
+  ],
+  "diagnostic_codes": []
+}

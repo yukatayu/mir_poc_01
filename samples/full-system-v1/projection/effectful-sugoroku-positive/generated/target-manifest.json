@@ -1,0 +1,135 @@
+[
+  {
+    "target_id": "world-server",
+    "role": "server",
+    "place_refs": [
+      "SugorokuPlace"
+    ],
+    "entry_transitions": [
+      "main"
+    ],
+    "boundary_refs": [
+      "host_input",
+      "host_output",
+      "publish_bus",
+      "observe_bus",
+      "witness_store",
+      "handoff_port",
+      "session_admin",
+      "session_cut"
+    ],
+    "effect_names": [
+      "atomic_cut",
+      "handoff_turn",
+      "issue_turn_witness",
+      "observe_roll",
+      "publish_roll",
+      "quiesce_messages",
+      "read_int",
+      "seal_places",
+      "write_int"
+    ],
+    "failure_row": [
+      "AdapterUnavailable",
+      "CutRejected",
+      "HandoffRejected",
+      "ObserveRejected",
+      "PublishRejected",
+      "WitnessRejected"
+    ],
+    "capability_row": [
+      "CutAuthority",
+      "HandoffAuthority",
+      "HostRead",
+      "HostWrite",
+      "Observer",
+      "Publisher",
+      "WitnessAuthority"
+    ],
+    "witness_requirements": [
+      "turn_ticket"
+    ],
+    "packet_schema_refs": [
+      "packet.roll.observe",
+      "packet.roll.publish",
+      "packet.session.admin",
+      "packet.session.cut",
+      "packet.turn.handoff",
+      "packet.turn.witness"
+    ],
+    "ffi_schema_refs": [
+      "ffi.host_input.read_int",
+      "ffi.host_output.write_int"
+    ],
+    "observation_policy": "authoritative_world_state",
+    "redaction_policy": "world_private",
+    "retention_policy": "session_authority_log",
+    "provider_policy": "no_provider_calls",
+    "save_load_authority": true,
+    "prediction_allowed": false
+  },
+  {
+    "target_id": "world-client",
+    "role": "client",
+    "place_refs": [],
+    "entry_transitions": [],
+    "boundary_refs": [
+      "publish_bus",
+      "observe_bus",
+      "witness_store",
+      "handoff_port"
+    ],
+    "effect_names": [
+      "handoff_turn",
+      "issue_turn_witness",
+      "observe_roll",
+      "publish_roll"
+    ],
+    "failure_row": [],
+    "capability_row": [],
+    "witness_requirements": [
+      "turn_ticket"
+    ],
+    "packet_schema_refs": [
+      "packet.roll.observe",
+      "packet.roll.publish",
+      "packet.turn.handoff",
+      "packet.turn.witness"
+    ],
+    "ffi_schema_refs": [],
+    "observation_policy": "observer_safe_projection",
+    "redaction_policy": "observer_safe",
+    "retention_policy": "client_ephemeral",
+    "provider_policy": "no_provider_calls",
+    "save_load_authority": false,
+    "prediction_allowed": true
+  },
+  {
+    "target_id": "host-adapter",
+    "role": "adapter",
+    "place_refs": [],
+    "entry_transitions": [],
+    "boundary_refs": [
+      "host_input",
+      "host_output"
+    ],
+    "effect_names": [
+      "read_int",
+      "write_int"
+    ],
+    "failure_row": [],
+    "capability_row": [],
+    "witness_requirements": [],
+    "packet_schema_refs": [],
+    "ffi_schema_refs": [
+      "ffi.host_input.read_int",
+      "ffi.host_output.write_int"
+    ],
+    "observation_policy": "adapter_request_reply",
+    "redaction_policy": "adapter_local",
+    "retention_policy": "adapter_local_debug",
+    "provider_policy": "native_disabled",
+    "save_load_authority": false,
+    "prediction_allowed": false
+  }
+]

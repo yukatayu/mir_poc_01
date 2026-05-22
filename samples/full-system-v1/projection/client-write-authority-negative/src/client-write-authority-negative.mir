@@ -1,0 +1,12 @@
+module FullSystemV1.ClientWriteAuthorityNegative
+
+capability HostWrite
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition update at ClientView requires HostWrite {
+  perform write_int(1) via client_output
+}

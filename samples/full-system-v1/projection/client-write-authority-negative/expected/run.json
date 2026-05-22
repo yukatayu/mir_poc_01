@@ -1,0 +1,40 @@
+{
+  "accepted": false,
+  "projection_id": "client-write-authority-negative",
+  "target_ids": [],
+  "target_roles": [],
+  "packet_schema_refs": [],
+  "ffi_schema_refs": [
+    "ffi.client.write_int"
+  ],
+  "checked_effect_rows": [
+    "write_int"
+  ],
+  "checked_failure_rows": [
+    "AdapterUnavailable"
+  ],
+  "checked_capability_rows": [
+    "HostWrite"
+  ],
+  "checked_authority_rows": [
+    "client_output:client_world_write"
+  ],
+  "checked_provider_policy_rows": [
+    "host-adapter:native_disabled",
+    "world-client:no_provider_calls"
+  ],
+  "checked_rollback_replay_cut_rows": [
+    "client_output:true:true:no_state_transfer"
+  ],
+  "rejected_rows": [
+    "client_output:client_write_authority_escalation"
+  ],
+  "residual_obligation_codes": [
+    "packet_ffi_schema_semantics_deferred",
+    "provider_admission_deferred",
+    "server_client_runtime_split_deferred"
+  ],
+  "diagnostic_codes": [
+    "client_write_authority_escalation"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "full-system-v1-projection-request-v0",
+  "projection_id": "client-write-authority-negative",
+  "targets": [
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "place_refs": ["ClientView"],
+      "entry_transitions": ["update"],
+      "observation_policy": "observer_safe_projection",
+      "redaction_policy": "observer_safe",
+      "retention_policy": "client_ephemeral",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": false,
+      "prediction_allowed": true
+    },
+    {
+      "target_id": "host-adapter",
+      "role": "adapter",
+      "place_refs": [],
+      "entry_transitions": [],
+      "observation_policy": "adapter_request_reply",
+      "redaction_policy": "adapter_local",
+      "retention_policy": "adapter_local_debug",
+      "provider_policy": "native_disabled",
+      "save_load_authority": false,
+      "prediction_allowed": false
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_ref": "client_output",
+      "boundary_kind": "ffi",
+      "effect_names": ["write_int"],
+      "from_target": "world-client",
+      "to_target": "host-adapter",
+      "authority": "client_world_write",
+      "required_witnesses": [],
+      "packet_schema_ref": null,
+      "ffi_schema_ref": "ffi.client.write_int",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "no_state_transfer"
+    }
+  ]
+}
