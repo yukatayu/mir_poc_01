@@ -1,0 +1,11 @@
+module Computational.RecordPositive
+
+record Pair {
+  left: Int64,
+  right: Int64,
+}
+
+fn first(x: Int64) -> Int64 {
+  let pair: Pair = Pair { left: x, right: x + 1 }
+  return pair.left
+}

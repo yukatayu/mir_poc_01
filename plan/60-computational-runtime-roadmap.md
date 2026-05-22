@@ -12,8 +12,16 @@ Current computational evidence includes:
 - helper-executable variables / arrays / records / control-flow / imports rows.
 - one direct host read/write transform row.
 - effect / failure / capability check rejections.
+- source-first textual parser and typed checker rows under `samples/full-system-v1/computational/`.
 
 This is first-floor evidence. It is not Rust-level language completion.
+
+`P-MIR-02` actualized crate-local typed IR lowering and checker rows for types, lexical scope, imports, imported-module semantic closure, ambiguous import rejection, fixed arrays, effect declarations, failure rows, and capability declarations through:
+
+- `crates/mir-semantics::full_system_v1`
+- `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`
+- `python3 scripts/full_system_v1_samples.py check-all --format json`
+- `samples/full-system-v1/computational/typed-ir-matrix.json`
 
 ## package sequence
 

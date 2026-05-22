@@ -1,0 +1,45 @@
+{
+  "accepted": true,
+  "module_path": "Computational.HostIoAddOne",
+  "import_paths": ["Computational.AddOne"],
+  "resolved_paths": ["samples/full-system-v1/computational/add-one-positive/src/add-one.mir"],
+  "capability_names": ["HostRead", "HostWrite"],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "read_int",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": ["HostRead"],
+      "failure_row": ["AdapterUnavailable"]
+    },
+    {
+      "effect_name": "write_int",
+      "parameter_types": ["Int64"],
+      "output_type": null,
+      "required_capabilities": ["HostWrite"],
+      "failure_row": ["AdapterUnavailable"]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "main",
+      "required_capabilities": ["HostRead", "HostWrite"],
+      "statement_kinds": ["Bind", "Bind", "Perform"],
+      "binding_types": ["Int64", "Int64"],
+      "perform_effects": ["read_int", "write_int"],
+      "contract_clause_kinds": ["Ensure"]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": []
+}

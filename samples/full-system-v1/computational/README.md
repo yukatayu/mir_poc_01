@@ -1,26 +1,32 @@
 # Full System V1 Computational Samples
 
-This root carries the first source-first `P-MIR-01` textual Mir alpha grammar rows.
+This root carries the first source-first Full System V1 computational rows.
 
-- `src/*.mir` is the semantic source input for the parser lane.
-- `expected/*.json` stores the expected parse verdict subset consumed by `scripts/textual_mir_samples.py`.
-- `package.mir.json` is not required for `P-MIR-01`; runtime/package artifact generation remains later work.
+- `src/*.mir` is the semantic source input.
+- `expected/parse.json` stores the parser-lane subset consumed by `scripts/textual_mir_samples.py`.
+- `expected/check.json` stores the typed-checker subset consumed by `scripts/full_system_v1_samples.py`.
+- `package.mir.json` is not required at `P-MIR-01` / `P-MIR-02`; runtime/package artifact generation remains later work.
 
 Current scope:
 
-- positive parse acceptance for pure computation and host-boundary syntax
-- negative parse rejection for:
-  - unresolved import
-  - malformed function signature
-  - missing type annotation
-  - malformed record field
-  - malformed `perform ... via ...` boundary
-  - malformed `transition ... at ...` entrypoint
-  - malformed capability requirement
-  - contract clause outside allowed position
+- `P-MIR-01`
+  - positive parse acceptance for pure computation and host-boundary syntax
+  - negative parse rejection for malformed grammar rows
+- `P-MIR-02`
+  - positive typed-check acceptance for pure computation, record rows, and host-boundary evidence
+  - negative typed-check rejection for:
+    - unresolved import
+    - ambiguous import resolution
+    - semantically broken imported module closure
+    - return type mismatch
+    - unbound variable
+    - statically provable array bounds failure
+    - undeclared effect
+    - missing effect failure row
+    - undeclared capability requirement
 
 Non-claims:
 
 - no final public grammar
-- no typed IR or runtime execution yet
+- no final typed IR or runtime execution yet
 - no generated package artifact yet

@@ -2,7 +2,27 @@ use mir_ast::textual_alpha::{
     AstExprKind, AstStmt, AstTopLevel, TextualMirDiagnostic, parse_textual_mir_module,
     parse_textual_mir_module_path,
 };
-use std::path::PathBuf;
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    time::{SystemTime, UNIX_EPOCH},
+};
+
+fn unique_temp_dir(prefix: &str) -> PathBuf {
+    let nonce = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("clock should be after unix epoch")
+        .as_nanos();
+    std::env::temp_dir().join(format!("{prefix}-{}-{nonce}", std::process::id()))
+}
+
+fn write_module(root: &Path, relative_path: &str, source: &str) -> PathBuf {
+    let path = root.join(relative_path);
+    fs::create_dir_all(path.parent().expect("module path should have parent"))
+        .expect("parent directory should be created");
+    fs::write(&path, source).expect("module source should be written");
+    path
+}
 
 fn diagnostic_codes(diagnostics: &[TextualMirDiagnostic]) -> Vec<&str> {
     diagnostics
@@ -145,4 +165,51 @@ fn unresolved_import_is_rejected_in_path_aware_parse() {
 
     assert_eq!(diagnostic_codes(&diagnostics), vec!["unresolved_import"]);
     assert_eq!(diagnostics[0].span.line, 3);
+}
+
+#[test]
+fn ambiguous_import_resolution_is_rejected_in_path_aware_parse() {
+    let root = unique_temp_dir("mir-textual-alpha-ambiguous-import");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/main.mir",
+        r#"module Main.Test
+
+import Shared.Dup
+
+fn use_dup(x: Int64) -> Int64 {
+  return dup(x)
+}
+"#,
+    );
+    write_module(
+        &root,
+        "dup-a/src/dup-a.mir",
+        r#"module Shared.Dup
+
+fn dup(x: Int64) -> Int64 {
+  return x
+}
+"#,
+    );
+    write_module(
+        &root,
+        "dup-b/src/dup-b.mir",
+        r#"module Shared.Dup
+
+fn dup(x: Int64) -> Int64 {
+  return x + 1
+}
+"#,
+    );
+
+    let diagnostics = parse_textual_mir_module_path(source)
+        .expect_err("ambiguous import should reject path-aware parsing");
+
+    assert_eq!(
+        diagnostic_codes(&diagnostics),
+        vec!["ambiguous_import_resolution"]
+    );
 }

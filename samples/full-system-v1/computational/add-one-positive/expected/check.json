@@ -1,0 +1,28 @@
+{
+  "accepted": true,
+  "module_path": "Computational.AddOne",
+  "import_paths": [],
+  "resolved_paths": [],
+  "capability_names": [],
+  "record_summaries": [],
+  "effect_summaries": [],
+  "function_summaries": [
+    {
+      "function_name": "add_one",
+      "parameter_type": "Int64",
+      "output_type": "Int64",
+      "statement_kinds": ["Let", "Return"]
+    }
+  ],
+  "transition_summaries": [],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": []
+}

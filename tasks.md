@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-22 10:01 JST
+最終更新: 2026-05-22 10:59 JST
 
 ## document role
 
@@ -17,39 +17,38 @@ This document is the repo-wide **current task map**. It is not normative source 
 Current closeout package:
 
 ```text
-P-MIR-01 textual Mir alpha grammar
+P-MIR-02 typed IR and checker
 ```
 
 Next promoted package after this closeout:
 
 ```text
-P-MIR-02 typed IR and checker
+P-MIR-03 computational interpreter
 ```
 
 Purpose:
 
-- keep `FS-01` closed with source-first parser evidence, alpha negative matrix coverage, and path-aware import diagnostics.
-- move to `FS-02` typed IR lowering and checker rows.
+- keep `FS-02` closed with source-first parser+checker evidence, explicit obligations, imported-module semantic closure, ambiguous import rejection, and 3-positive/9-negative checker matrix coverage.
+- move to `FS-03` source-derived interpreter rows.
 - keep `package.mir.json` as alpha compatibility/package artifact while source authority shifts to `.mir`.
 
 ## ordered self-driven packages
 
 | Order | Package | Macro / stage | Goal | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-MIR-02 typed IR and checker` | `Macro 3`, `S4 -> S5` | lower parser AST to typed IR and checker | type/scope/import/effect/failure/capability rows accepted/rejected | heavy |
-| 2 | `P-MIR-03 computational interpreter` | `Macro 3`, `S4 -> S5` | execute safe C-like typed IR | AddOne, variables, arrays, records, control-flow, imports execute with negative rows | heavy |
-| 3 | `P-MIR-04 effectful integration` | `Macro 1/3`, `S4 -> S5` | connect computation to Mir effects | perform / publish / observe / witness / handoff / fallback / cut rows visible, including required cut/save negative rows where executable | heavy |
-| 4 | `P-POSE-03 runtime PoseGraph` | `Macro 8`, `S3 -> S5` | make Transform / Anchor / PoseVersion runtime state | no-split-frame, AnchorSwitch fields, fallback/reacquire accepted/rejected in session runtime | heavy |
-| 5 | `P-POSE-04 pose save/devtools` | `Macro 8/7`, `S4 -> S5` | add pose save/load and panels | pose frontier save/load positive/negative admissibility rows and observer-safe PoseGraph panels | medium |
-| 6 | `P-PROJ-02 projection IR realization` | `Macro 7`, `S3 -> S4` | source/typed IR to projection IR | target manifest generated from source-derived IR | heavy |
-| 7 | `P-PROJ-03 boundary schemas` | `Macro 7`, `S4 -> S5` | packet/FFI schema preservation | positive/negative report covers effect/failure/capability/authority/provider-policy/rollback boundaries | medium |
-| 8 | `P-PROJ-04 server/client local split` | `Macro 6/7`, `S4 -> S5` | local/Docker server/client roles | roles run from projection manifest plus write-escalation or undeclared-authority rejection row | heavy |
-| 9 | `P-ENG-02 provider admission` | `Macro 7`, `S3 -> S5` | runtime provider manifest admission | accepted bounded provider, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only or sandbox-accepted evidence | medium |
-| 10 | `P-ENG-03 renderer pose backend demo` | `Macro 7/8`, `S4 -> S5` | renderer receives pose snapshot | renderer stays non-semantic-owner | medium |
-| 11 | `P-FSV1-01 source operational suite` | `Macro 8`, `S4 -> S5` | source-first WorldCore/MembershipChat/Sugoroku | check/run/devtools over source-first roots | heavy |
-| 12 | `P-FSV1-02 portal/shard source samples` | `Macro 8`, `S4 -> S5` | source-first portal/shard/gradient | positive/negative portal/shard evidence | heavy |
-| 13 | `P-FSV1-03 full V1 release check` | `Macro 0/7/8`, `S5 -> S6` | clean clone Full V1 workflow | release check, viewer, bundle, reports | heavy |
-| 14 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
+| 1 | `P-MIR-03 computational interpreter` | `Macro 3`, `S4 -> S5` | execute safe C-like typed IR | AddOne, variables, arrays, records, control-flow, imports execute with negative rows | heavy |
+| 2 | `P-MIR-04 effectful integration` | `Macro 1/3`, `S4 -> S5` | connect computation to Mir effects | perform / publish / observe / witness / handoff / fallback / cut rows visible, including required cut/save negative rows where executable | heavy |
+| 3 | `P-POSE-03 runtime PoseGraph` | `Macro 8`, `S3 -> S5` | make Transform / Anchor / PoseVersion runtime state | no-split-frame, AnchorSwitch fields, fallback/reacquire accepted/rejected in session runtime | heavy |
+| 4 | `P-POSE-04 pose save/devtools` | `Macro 8/7`, `S4 -> S5` | add pose save/load and panels | pose frontier save/load positive/negative admissibility rows and observer-safe PoseGraph panels | medium |
+| 5 | `P-PROJ-02 projection IR realization` | `Macro 7`, `S3 -> S4` | source/typed IR to projection IR | target manifest generated from source-derived IR | heavy |
+| 6 | `P-PROJ-03 boundary schemas` | `Macro 7`, `S4 -> S5` | packet/FFI schema preservation | positive/negative report covers effect/failure/capability/authority/provider-policy/rollback boundaries | medium |
+| 7 | `P-PROJ-04 server/client local split` | `Macro 6/7`, `S4 -> S5` | local/Docker server/client roles | roles run from projection manifest plus write-escalation or undeclared-authority rejection row | heavy |
+| 8 | `P-ENG-02 provider admission` | `Macro 7`, `S3 -> S5` | runtime provider manifest admission | accepted bounded provider, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only or sandbox-accepted evidence | medium |
+| 9 | `P-ENG-03 renderer pose backend demo` | `Macro 7/8`, `S4 -> S5` | renderer receives pose snapshot | renderer stays non-semantic-owner | medium |
+| 10 | `P-FSV1-01 source operational suite` | `Macro 8`, `S4 -> S5` | source-first WorldCore/MembershipChat/Sugoroku | check/run/devtools over source-first roots | heavy |
+| 11 | `P-FSV1-02 portal/shard source samples` | `Macro 8`, `S4 -> S5` | source-first portal/shard/gradient | positive/negative portal/shard evidence | heavy |
+| 12 | `P-FSV1-03 full V1 release check` | `Macro 0/7/8`, `S5 -> S6` | clean clone Full V1 workflow | release check, viewer, bundle, reports | heavy |
+| 13 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
 
 ## self-driven macro phase reading
 
@@ -93,7 +92,7 @@ Purpose:
 |---|---|---|---|
 | docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
 | alpha/product regression audit | preserve Product Alpha and operational suite while Full V1 advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
-| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | only `samples/full-system-v1/computational/` is parser-floor actualized; wider Full System V1 roots must not be workflow-ready before evidence |
+| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | only `samples/full-system-v1/computational/` is parser+checker-floor actualized; wider Full System V1 roots must not be workflow-ready before evidence |
 | validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence, not semantic correctness |
 | report discipline | write a new report for every non-trivial package | `python3 scripts/validate_docs.py` | never overwrite previous report |
 

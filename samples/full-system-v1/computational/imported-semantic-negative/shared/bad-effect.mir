@@ -1,0 +1,7 @@
+module Shared.BadEffect
+
+capability HostWrite
+
+effect write_shared(y: Int64) {
+  requires HostWrite
+}

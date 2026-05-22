@@ -1,0 +1,14 @@
+module Computational.ImportedSemanticNegative
+
+import Shared.BadFunction
+import Shared.BadEffect
+
+capability HostWrite
+
+fn use_imported(x: Int64) -> Int64 {
+  return imported_bad(x)
+}
+
+transition main at HostPlace requires HostWrite {
+  perform write_shared(1) via host_output
+}

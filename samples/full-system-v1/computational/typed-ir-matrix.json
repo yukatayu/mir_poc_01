@@ -1,0 +1,102 @@
+{
+  "family": "full_system_v1_typed_ir",
+  "current_status": "checker_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "mir-02-add-one-positive",
+      "root_name": "add-one-positive",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "add-one-positive/src/add-one.mir",
+      "expected": "add-one-positive/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-boundary-positive",
+      "root_name": "host-boundary-positive",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-boundary-positive/src/host-boundary-add-one.mir",
+      "expected": "host-boundary-positive/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-record-field-positive",
+      "root_name": "record-field-positive",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "record-field-positive/src/record-field.mir",
+      "expected": "record-field-positive/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-unresolved-import-negative",
+      "root_name": "unresolved-import-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "unresolved-import-negative/src/unresolved-import.mir",
+      "expected": "unresolved-import-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-imported-semantic-negative",
+      "root_name": "imported-semantic-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "imported-semantic-negative/src/imported-semantic-negative.mir",
+      "expected": "imported-semantic-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-duplicate-module-path-negative",
+      "root_name": "duplicate-module-path-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "duplicate-module-path-negative/src/duplicate-module-path.mir",
+      "expected": "duplicate-module-path-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-type-mismatch-negative",
+      "root_name": "type-mismatch-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "type-mismatch-negative/src/type-mismatch.mir",
+      "expected": "type-mismatch-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-scope-unbound-negative",
+      "root_name": "scope-unbound-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "scope-unbound-negative/src/scope-unbound.mir",
+      "expected": "scope-unbound-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-static-array-bounds-negative",
+      "root_name": "static-array-bounds-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "static-array-bounds-negative/src/static-array-bounds.mir",
+      "expected": "static-array-bounds-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-undeclared-effect-negative",
+      "root_name": "undeclared-effect-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "undeclared-effect-negative/src/undeclared-effect.mir",
+      "expected": "undeclared-effect-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-effect-failure-missing-negative",
+      "root_name": "effect-failure-missing-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "effect-failure-missing-negative/src/effect-failure-missing.mir",
+      "expected": "effect-failure-missing-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-undeclared-capability-negative",
+      "root_name": "undeclared-capability-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "undeclared-capability-negative/src/undeclared-capability.mir",
+      "expected": "undeclared-capability-negative/expected/check.json"
+    }
+  ]
+}

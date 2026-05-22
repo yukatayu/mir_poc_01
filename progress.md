@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 10:01 JST
+最終更新: 2026-05-22 10:59 JST
 
 ## document role
 
@@ -44,20 +44,20 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-MIR-01 textual Mir alpha grammar`
-- Current status after this snapshot: `FS-01` has a parser-floor evidence set actualized
-- Next promoted package: `P-MIR-02 typed IR and checker`
+- Current package: `P-MIR-02 typed IR and checker`
+- Current status after this snapshot: `FS-02` has a parser+checker first-floor evidence set actualized
+- Next promoted package: `P-MIR-03 computational interpreter`
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. PoseGraph has helper evidence, not runtime completion. Projection/backend and engine/provider are inventory/scaffold. Full V1 now has a real textual Mir parser lane with path-aware unresolved import rejection, span-bearing expression AST output, and a 2-positive/8-negative source sample matrix, but typed IR, interpreter, effectful integration, projection, PoseGraph runtime, provider admission, and full release check remain later.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. PoseGraph has helper evidence, not runtime completion. Projection/backend and engine/provider are inventory/scaffold. Full V1 now has a real textual Mir parser lane plus a crate-local typed checker lane: path-aware unresolved import rejection, ambiguous import rejection, imported-module semantic closure, span-bearing AST output, explicit accepted/residual obligations, and a 3-positive/9-negative source sample matrix are runnable, but interpreter, effectful integration, projection, PoseGraph runtime, provider admission, and full release check remain later.
 
 ## milestone map
 
 | Milestone | Status | Evidence | Next gap |
 |---|---|---|---|
 | `FS-00` documentation rebaseline | `boundary-fixed` | `specs/33..38`, `plan/58..63`, replaced `progress.md` / `tasks.md` | keep snapshot/docs synchronized while implementation advances |
-| `FS-01` textual Mir grammar MVP | `first-floor-evidence` | `crates/mir-ast::textual_alpha`, path-aware unresolved import diagnostic, expression/statement spans, `cargo test -p mir-ast --test textual_mir_alpha -- --nocapture`, `python3 scripts/textual_mir_samples.py check-all --format json`, `samples/full-system-v1/computational/` 2-positive/8-negative matrix | typed IR lowering and richer source/runtime bridges |
-| `FS-02` typed IR and checker | `planned` | boundary in `specs/35` / `plan/60` | AST lowering, typed IR, checker rows for types/effects/failures/capabilities |
-| `FS-03` Mir-owned computational interpreter | `planned` | current product-alpha computational rows are first-floor evidence | execute source-derived typed IR for safe C-like subset |
+| `FS-01` textual Mir grammar MVP | `first-floor-evidence` | `crates/mir-ast::textual_alpha`, path-aware unresolved import diagnostic, expression/statement spans, `cargo test -p mir-ast --test textual_mir_alpha -- --nocapture`, `python3 scripts/textual_mir_samples.py check-all --format json`, `samples/full-system-v1/computational/` 2-positive/8-negative parser matrix | keep parser floor synchronized while interpreter and runtime rows widen |
+| `FS-02` typed IR and checker | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`, `python3 scripts/full_system_v1_samples.py check-all --format json`, `samples/full-system-v1/computational/typed-ir-matrix.json` 3-positive/9-negative checker matrix with imported-module semantic closure and ambiguous import rejection | execute accepted typed IR in the source-first interpreter lane |
+| `FS-03` Mir-owned computational interpreter | `planned` | current product-alpha computational rows plus `FS-02` typed checker floor | execute source-derived typed IR for safe C-like subset |
 | `FS-04` effectful Mir integration | `planned` | Product Alpha host boundary and operational suite are available anchors | connect perform / publish / observe / witness / handoff / fallback / cut |
 | `FS-05` PoseGraph runtime | `planned` | `P-POSE-02` helper evidence | runtime PoseGraph state, AnchorSwitch fields, fallback/reacquire, no-split-frame rows |
 | `FS-06` projection IR | `planned` | projection inventory scaffold | projection IR, target manifests, packet/FFI schemas, preservation report |
@@ -106,7 +106,7 @@ Next gap:
 
 ### Mir Language line
 
-Status: `first-floor-evidence` for computation and parser, `planned` for typed IR/runtime.
+Status: `first-floor-evidence` for computation, parser, and typed checker; `planned` for interpreter/runtime.
 
 Current evidence:
 
@@ -114,14 +114,15 @@ Current evidence:
 - `scripts/mir_computational_samples.py check-all --format json`
 - `samples/full-system-v1/computational/`
 - `scripts/textual_mir_samples.py check-all --format json`
+- `scripts/full_system_v1_samples.py check-all --format json`
 - direct `ReadInt -> add_one -> WriteInt` row.
 - variables / arrays / records / control-flow / imports first-floor rows.
 - host read/write boundary rejection rows.
-- textual parser AST, expression/statement spans, path-aware unresolved import diagnostics, and host-boundary syntax rows.
+- textual parser AST, expression/statement spans, path-aware unresolved import diagnostics, host-boundary syntax rows, and crate-local typed IR/checker reports with explicit accepted/residual obligations.
 
 Next gap:
 
-- `P-MIR-02` typed IR and checker, then interpreter.
+- `P-MIR-03` computational interpreter, then effectful integration.
 
 ### PoseGraph line
 
@@ -180,11 +181,16 @@ Next gap:
 
 ## validation floor
 
-Required for `P-MIR-01`:
+Required for `P-MIR-02`:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
 python3 -m unittest scripts.tests.test_textual_mir_samples
+python3 -m unittest scripts.tests.test_full_system_v1_samples
+cargo test -p mir-ast --test textual_mir_alpha -- --nocapture
+cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+python3 scripts/textual_mir_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
@@ -202,7 +208,6 @@ python3 scripts/operational_product_samples.py check-all --format json
 Future planned anchors:
 
 ```bash
-python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
@@ -247,10 +252,10 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser-floor snapshots | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser actualized; typed IR / interpreter next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | textual parser and typed checker actualized; interpreter next | heavy | 着手可能 |
 | `Macro 4` | executable sample expansion | planned source-first full-system suite | heavy | 後段依存 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
@@ -262,7 +267,7 @@ Research-discovery items:
 | Feature | Status | Reading | Actionability |
 |---|---|---|---|
 | textual Mir source | `first-floor-evidence` | parser, AST, spans, diagnostics, and positive/negative sample helper exist | 着手可能 |
-| typed IR / checker | `planned` | explicit effect/failure rows required | 後段依存 on `P-MIR-01` |
+| typed IR / checker | `first-floor-evidence` | explicit type/scope/import/effect/failure/capability rows plus imported-module semantic closure and ambiguous import rejection now execute over source-first samples | 着手可能 |
 | Mir-owned computation | `first-floor-evidence` | bounded product-alpha rows exist | 着手可能 |
 | effectful Mir | `planned` | publish/observe/witness/handoff not broad runtime-complete | 後段依存 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
@@ -273,6 +278,8 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-05-22 10:59 JST
+  `P-MIR-02` で `crates/mir-semantics::full_system_v1`、typed IR/checker tests、`scripts/full_system_v1_samples.py`、`samples/full-system-v1/computational/typed-ir-matrix.json` 3-positive/9-negative rows、imported-module semantic closure、ambiguous import rejection を actualize し、validator/report heading も整合させて次 package を `P-MIR-03` に進めた。
 - 2026-05-22 10:01 JST
   `P-MIR-01` で `crates/mir-ast::textual_alpha`、path-aware unresolved import diagnostics、expression spans、parser tests、`scripts/textual_mir_samples.py`、`samples/full-system-v1/computational/` 2-positive/8-negative rows を actualize し、次 package を `P-MIR-02` に進めた。
 - 2026-05-22 03:21 JST

@@ -1,5 +1,4 @@
 use std::{
-    collections::BTreeSet,
     fs,
     path::{Path, PathBuf},
 };
@@ -27,6 +26,13 @@ pub struct TextualMirParseReport {
     pub module: Option<AstModule>,
     pub diagnostics: Vec<TextualMirDiagnostic>,
     pub final_public_grammar_frozen: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum TextualMirModuleResolution {
+    Missing,
+    Unique(PathBuf),
+    Ambiguous(Vec<PathBuf>),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -344,6 +350,34 @@ pub fn parse_textual_mir_report_path(path: impl AsRef<Path>) -> TextualMirParseR
             }],
             final_public_grammar_frozen: false,
         },
+    }
+}
+
+pub fn resolve_textual_mir_module_reference(
+    current_path: impl AsRef<Path>,
+    module_path: &str,
+) -> TextualMirModuleResolution {
+    let current_path = current_path.as_ref();
+    let Some(search_root) = find_import_search_root(current_path) else {
+        return TextualMirModuleResolution::Missing;
+    };
+    let mut matches = find_declared_module_paths(&search_root, module_path);
+    matches.sort();
+    matches.dedup();
+    match matches.len() {
+        0 => TextualMirModuleResolution::Missing,
+        1 => TextualMirModuleResolution::Unique(matches.remove(0)),
+        _ => TextualMirModuleResolution::Ambiguous(matches),
+    }
+}
+
+pub fn resolve_textual_mir_module_path(
+    current_path: impl AsRef<Path>,
+    module_path: &str,
+) -> Option<PathBuf> {
+    match resolve_textual_mir_module_reference(current_path, module_path) {
+        TextualMirModuleResolution::Unique(path) => Some(path),
+        TextualMirModuleResolution::Missing | TextualMirModuleResolution::Ambiguous(_) => None,
     }
 }
 
@@ -1826,22 +1860,35 @@ fn top_level_span_end(item: &AstTopLevel) -> usize {
 }
 
 fn validate_imports(module: &AstModule, current_path: &Path) -> Vec<TextualMirDiagnostic> {
-    let Some(search_root) = find_import_search_root(current_path) else {
-        return Vec::new();
-    };
-    let available_modules = collect_declared_modules(&search_root, current_path);
     module
         .imports
         .iter()
-        .filter(|import| !available_modules.contains(import.module_path.as_str()))
-        .map(|import| TextualMirDiagnostic {
-            code: "unresolved_import".to_string(),
-            message: format!(
-                "could not resolve import `{}` from `{}`",
-                import.module_path,
-                current_path.display()
-            ),
-            span: import.span.clone(),
+        .filter_map(|import| {
+            match resolve_textual_mir_module_reference(current_path, &import.module_path) {
+                TextualMirModuleResolution::Missing => Some(TextualMirDiagnostic {
+                    code: "unresolved_import".to_string(),
+                    message: format!(
+                        "could not resolve import `{}` from `{}`",
+                        import.module_path,
+                        current_path.display()
+                    ),
+                    span: import.span.clone(),
+                }),
+                TextualMirModuleResolution::Ambiguous(paths) => Some(TextualMirDiagnostic {
+                    code: "ambiguous_import_resolution".to_string(),
+                    message: format!(
+                        "import `{}` resolves to multiple declared textual Mir modules: {}",
+                        import.module_path,
+                        paths
+                            .iter()
+                            .map(|path| path.display().to_string())
+                            .collect::<Vec<_>>()
+                            .join(", ")
+                    ),
+                    span: import.span.clone(),
+                }),
+                TextualMirModuleResolution::Unique(_) => None,
+            }
         })
         .collect()
 }
@@ -1862,23 +1909,25 @@ fn find_import_search_root(path: &Path) -> Option<PathBuf> {
     Some(parent.to_path_buf())
 }
 
-fn collect_declared_modules(root: &Path, current_path: &Path) -> BTreeSet<String> {
+fn find_declared_module_paths(root: &Path, module_path: &str) -> Vec<PathBuf> {
     let mut files = Vec::new();
     collect_mir_files(root, &mut files);
-    let mut modules = BTreeSet::new();
+    let mut matches = Vec::new();
     for file in files {
-        if file == current_path {
-            continue;
-        }
         let Ok(source) = fs::read_to_string(&file) else {
             continue;
         };
         let report = parse_textual_mir_report(&source);
-        if let Some(module) = report.module {
-            modules.insert(module.module_path);
+        if report
+            .module
+            .as_ref()
+            .map(|module| module.module_path == module_path)
+            .unwrap_or(false)
+        {
+            matches.push(file);
         }
     }
-    modules
+    matches
 }
 
 fn collect_mir_files(root: &Path, out: &mut Vec<PathBuf>) {

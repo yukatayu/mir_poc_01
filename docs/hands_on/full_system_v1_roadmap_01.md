@@ -1,8 +1,8 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00 full-system-v1-roadmap-rebaseline` package.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first two implementation packages.
 
-It explains what to inspect now before implementation begins. It does not introduce executable Full System V1 samples.
+It explains what is now executable at the source-first parser/checker floor and what still remains later.
 
 ## Read first
 
@@ -27,7 +27,7 @@ The current repo has:
 The next promoted package is:
 
 ```text
-P-MIR-01 textual Mir alpha grammar
+P-MIR-03 computational interpreter
 ```
 
 ## What to verify now
@@ -45,15 +45,21 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the current runnable floor. They do not prove textual Mir, typed IR, interpreter, projection IR, server/client split, or provider admission.
+The Product Alpha and operational commands preserve the current runnable floor. They do not prove interpreter execution, projection IR, server/client split, or provider admission.
 
 ## Planned Full System V1 commands
 
-These are future commands and must not be treated as current validation:
+Current Full System V1 parser/checker commands:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
+cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+```
+
+These are still future commands and must not be treated as current validation:
+
+```bash
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json

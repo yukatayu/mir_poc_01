@@ -1,0 +1,34 @@
+{
+  "accepted": true,
+  "module_path": "Computational.RecordPositive",
+  "import_paths": [],
+  "resolved_paths": [],
+  "capability_names": [],
+  "record_summaries": [
+    {
+      "record_name": "Pair",
+      "field_names": ["left", "right"],
+      "field_types": ["Int64", "Int64"]
+    }
+  ],
+  "effect_summaries": [],
+  "function_summaries": [
+    {
+      "function_name": "first",
+      "parameter_type": "Int64",
+      "output_type": "Int64",
+      "statement_kinds": ["Let", "Return"]
+    }
+  ],
+  "transition_summaries": [],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": []
+}

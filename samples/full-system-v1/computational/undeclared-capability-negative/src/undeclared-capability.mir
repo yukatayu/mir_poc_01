@@ -1,0 +1,10 @@
+module Computational.CapabilityNegative
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace {
+  perform write_int(1) via host_output
+}

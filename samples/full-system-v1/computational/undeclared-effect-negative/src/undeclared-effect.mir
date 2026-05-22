@@ -1,0 +1,5 @@
+module Computational.EffectNegative
+
+transition main at HostPlace {
+  perform read_int via host_input
+}

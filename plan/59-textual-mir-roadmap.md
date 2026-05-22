@@ -15,7 +15,7 @@ Current `.mir` files under `samples/product-alpha1/` remain explanatory sketches
 - `scripts/textual_mir_samples.py check-all --format json`
 - `samples/full-system-v1/computational/`
 
-This is parser-floor evidence only. It includes path-aware unresolved import rejection, statement/expression spans, and a 10-row sample matrix, but it does not yet claim typed IR, interpreter, or package artifact generation.
+`P-MIR-02` now consumes that parser output into crate-local typed IR lowering and checker rows through `crates/mir-semantics::full_system_v1`, but the textual line itself remains alpha grammar evidence rather than final grammar freeze.
 
 ## package sequence
 
@@ -41,7 +41,19 @@ Current parser-floor source samples:
 - `samples/full-system-v1/computational/malformed-capability-negative/src/malformed-capability.mir`
 - `samples/full-system-v1/computational/contract-clause-position-negative/src/contract-clause-position.mir`
 
-Planned later widening:
+Current widened source rows after `P-MIR-02`:
+
+- `samples/full-system-v1/computational/record-field-positive/src/record-field.mir`
+- `samples/full-system-v1/computational/imported-semantic-negative/src/imported-semantic-negative.mir`
+- `samples/full-system-v1/computational/duplicate-module-path-negative/src/duplicate-module-path.mir`
+- `samples/full-system-v1/computational/type-mismatch-negative/src/type-mismatch.mir`
+- `samples/full-system-v1/computational/scope-unbound-negative/src/scope-unbound.mir`
+- `samples/full-system-v1/computational/static-array-bounds-negative/src/static-array-bounds.mir`
+- `samples/full-system-v1/computational/undeclared-effect-negative/src/undeclared-effect.mir`
+- `samples/full-system-v1/computational/effect-failure-missing-negative/src/effect-failure-missing.mir`
+- `samples/full-system-v1/computational/undeclared-capability-negative/src/undeclared-capability.mir`
+
+Later widening:
 
 - variables / scope
 - arrays / bounds
@@ -58,11 +70,6 @@ Current validation:
 ```bash
 cargo test -p mir-ast --test textual_mir_alpha -- --nocapture
 python3 scripts/textual_mir_samples.py check-all --format json
-```
-
-Later validation widening:
-
-```bash
 cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
 python3 scripts/full_system_v1_samples.py check-all --format json
 ```

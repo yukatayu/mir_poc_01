@@ -8,14 +8,16 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-MIR-01`:
+Current repo state after `P-MIR-02`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
 - Mir computational core has `first-floor-evidence`.
 - PoseGraph has helper-backed `first-floor-evidence`.
 - Projection/backend and engine/provider roots are `boundary-fixed` / inventory-only.
-- Full System V1 source-first parser floor is `actualized` with 2 positive rows, 8 negative rows, path-aware unresolved import diagnostics, and span-bearing expression AST output, while typed IR / runtime / projection / provider packages remain planned.
+- Full System V1 source-first parser floor is `actualized` with 2 positive rows, 8 negative rows, path-aware unresolved import diagnostics, and span-bearing expression AST output.
+- Full System V1 source-first typed checker floor is `actualized` with crate-local typed IR lowering, explicit accepted/residual obligations, imported-module semantic closure, ambiguous import rejection, and a 3-positive / 9-negative sample matrix through `scripts/full_system_v1_samples.py`.
+- Interpreter / runtime / projection / provider packages remain later.
 
 ## package order
 
@@ -59,6 +61,8 @@ samples/full-system-v1/
 
 `P-MIR-01` actualized `samples/full-system-v1/computational/` as a parser-floor evidence root with 2 positive rows, 8 negative rows, structural/span expected JSON, and `scripts/textual_mir_samples.py`.
 
+`P-MIR-02` added `typed-ir-matrix.json`, `expected/check.json`, `crates/mir-semantics::full_system_v1`, `typed_ir_interpreter` tests, and `scripts/full_system_v1_samples.py` for the first source-first typed checker floor, then widened that floor to reject ambiguous import resolution and imported-module semantic failures before package close.
+
 The wider root remains non-workflow-ready until later packages add typed IR, runtime, projection, and provider evidence.
 
 ## validation direction
@@ -71,16 +75,16 @@ python3 scripts/product_alpha1_release_check.py --format json check-all --out /t
 python3 scripts/operational_product_samples.py check-all --format json
 ```
 
-Current first source-first anchor:
+Current source-first anchors:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py check-all --format json
 ```
 
 Planned future anchors:
 
 ```bash
-python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json

@@ -30,8 +30,9 @@
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
 - `full-system-v1/`
   source-first Full System V1 sample root under `specs/33..38` / `plan/58..63`
-  - `P-MIR-01` actualizes `samples/full-system-v1/computational/` as the first textual Mir alpha grammar lane with 2 positive rows, 8 negative rows, `matrix.json`, `expected/*.json`, and `python3 scripts/textual_mir_samples.py check-all --format json`
-  - current executable scope is parser-only and evidence-oriented; it does not claim typed IR, interpreter, runtime execution, or generated package artifact completion
+  - `P-MIR-01` actualizes `samples/full-system-v1/computational/` as the first textual Mir alpha grammar lane with 2 positive rows, 8 negative rows, `matrix.json`, `expected/parse.json`, and `python3 scripts/textual_mir_samples.py check-all --format json`
+  - `P-MIR-02` adds the first typed checker lane with 3 positive rows, 9 negative rows, `typed-ir-matrix.json`, `expected/check.json`, `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`, and `python3 scripts/full_system_v1_samples.py check-all --format json`
+  - current executable scope is parser plus typed checker evidence only; it does not claim interpreter, runtime execution, or generated package artifact completion
   - planned families still include world-core, membership-chat, sugoroku-world, posegraph, projection, server-client, and provider-adapter
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `FS-07` local server/client role-run evidence needs a separate `samples/full-system-v1/server-client/` family or equivalent explicit role-run root
   - do not mark the whole root workflow-ready until later packages add typed IR, runtime bridges, and broader positive/negative evidence

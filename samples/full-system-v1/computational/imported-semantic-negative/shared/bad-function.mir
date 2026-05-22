@@ -1,0 +1,5 @@
+module Shared.BadFunction
+
+fn imported_bad(x: Int64) -> Int64 {
+  return true
+}

@@ -1,0 +1,14 @@
+{
+  "accepted": false,
+  "module_path": null,
+  "import_paths": [],
+  "resolved_paths": [],
+  "capability_names": [],
+  "record_summaries": [],
+  "effect_summaries": [],
+  "function_summaries": [],
+  "transition_summaries": [],
+  "accepted_obligation_codes": [],
+  "residual_obligation_codes": [],
+  "diagnostic_codes": ["static_index_out_of_bounds"]
+}

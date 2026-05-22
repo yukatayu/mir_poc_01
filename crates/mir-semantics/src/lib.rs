@@ -9,6 +9,7 @@ the full Mir runtime.
 "#]
 
 pub mod computational_core;
+pub mod full_system_v1;
 mod harness;
 
 use std::{

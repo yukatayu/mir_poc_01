@@ -1,0 +1,11 @@
+module Computational.FailureNegative
+
+capability HostWrite
+
+effect write_int(y: Int64) {
+  requires HostWrite
+}
+
+transition main at HostPlace requires HostWrite {
+  perform write_int(1) via host_output
+}

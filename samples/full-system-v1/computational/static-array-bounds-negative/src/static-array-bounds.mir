@@ -1,0 +1,6 @@
+module Computational.ArrayBoundsNegative
+
+fn second(x: Int64) -> Int64 {
+  let xs: [Int64; 1] = [x]
+  return xs[1]
+}

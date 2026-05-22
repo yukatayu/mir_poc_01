@@ -1,0 +1,7 @@
+module Main.Test
+
+import Shared.Dup
+
+fn use_dup(x: Int64) -> Int64 {
+  return dup(x)
+}

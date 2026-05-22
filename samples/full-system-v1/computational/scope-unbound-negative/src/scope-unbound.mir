@@ -1,0 +1,6 @@
+module Computational.ScopeNegative
+
+fn bad(x: Int64) -> Int64 {
+  let y: Int64 = z
+  return y
+}
