@@ -176,7 +176,9 @@ Continue with `P-MIR-02 typed IR and checker`, lowering the textual AST into a t
 
 ## Commit / push status
 
-- Pending at report authoring time. Commit hash and push result will be added after `git commit --no-gpg-sign` and `git push`.
+- Committed with `git commit --no-gpg-sign -m "P-MIR-01: textual Mir alpha grammar"`.
+- Commit: `174871f0`.
+- Pushed to `origin/main` successfully.
 
 ## Sub-agent session close status
 
