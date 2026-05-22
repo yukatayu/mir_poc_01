@@ -1,0 +1,432 @@
+{
+  "target_manifests": [
+    {
+      "target_id": "world-server",
+      "role": "server",
+      "place_refs": [
+        "SugorokuPlace"
+      ],
+      "entry_transitions": [
+        "main"
+      ],
+      "boundary_refs": [
+        "host_input",
+        "host_output",
+        "publish_bus",
+        "observe_bus",
+        "witness_store",
+        "handoff_port",
+        "session_admin",
+        "session_cut"
+      ],
+      "effect_names": [
+        "atomic_cut",
+        "handoff_turn",
+        "issue_turn_witness",
+        "observe_roll",
+        "publish_roll",
+        "quiesce_messages",
+        "read_int",
+        "seal_places",
+        "write_int"
+      ],
+      "failure_row": [
+        "AdapterUnavailable",
+        "CutRejected",
+        "HandoffRejected",
+        "ObserveRejected",
+        "PublishRejected",
+        "WitnessRejected"
+      ],
+      "capability_row": [
+        "CutAuthority",
+        "HandoffAuthority",
+        "HostRead",
+        "HostWrite",
+        "Observer",
+        "Publisher",
+        "WitnessAuthority"
+      ],
+      "witness_requirements": [
+        "turn_ticket"
+      ],
+      "packet_schema_refs": [
+        "packet.roll.observe",
+        "packet.roll.publish",
+        "packet.session.admin",
+        "packet.session.cut",
+        "packet.turn.handoff",
+        "packet.turn.witness"
+      ],
+      "ffi_schema_refs": [
+        "ffi.host_input.read_int",
+        "ffi.host_output.write_int"
+      ],
+      "observation_policy": "authoritative_world_state",
+      "redaction_policy": "world_private",
+      "retention_policy": "session_authority_log",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": true,
+      "prediction_allowed": false
+    },
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "place_refs": [],
+      "entry_transitions": [],
+      "boundary_refs": [
+        "publish_bus",
+        "observe_bus",
+        "witness_store",
+        "handoff_port"
+      ],
+      "effect_names": [
+        "handoff_turn",
+        "issue_turn_witness",
+        "observe_roll",
+        "publish_roll"
+      ],
+      "failure_row": [],
+      "capability_row": [],
+      "witness_requirements": [
+        "turn_ticket"
+      ],
+      "packet_schema_refs": [
+        "packet.roll.observe",
+        "packet.roll.publish",
+        "packet.turn.handoff",
+        "packet.turn.witness"
+      ],
+      "ffi_schema_refs": [],
+      "observation_policy": "observer_safe_projection",
+      "redaction_policy": "observer_safe",
+      "retention_policy": "client_ephemeral",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": false,
+      "prediction_allowed": true
+    },
+    {
+      "target_id": "host-adapter",
+      "role": "adapter",
+      "place_refs": [],
+      "entry_transitions": [],
+      "boundary_refs": [
+        "host_input",
+        "host_output"
+      ],
+      "effect_names": [
+        "read_int",
+        "write_int"
+      ],
+      "failure_row": [],
+      "capability_row": [],
+      "witness_requirements": [],
+      "packet_schema_refs": [],
+      "ffi_schema_refs": [
+        "ffi.host_input.read_int",
+        "ffi.host_output.write_int"
+      ],
+      "observation_policy": "adapter_request_reply",
+      "redaction_policy": "adapter_local",
+      "retention_policy": "adapter_local_debug",
+      "provider_policy": "native_disabled",
+      "save_load_authority": false,
+      "prediction_allowed": false
+    }
+  ],
+  "packet_schemas": [
+    {
+      "schema_ref": "packet.roll.publish",
+      "schema_kind": "packet",
+      "boundary_ref": "publish_bus",
+      "from_target": "world-server",
+      "to_target": "world-client",
+      "effect_names": [
+        "publish_roll"
+      ],
+      "request_fields": [
+        {
+          "name": "value",
+          "ty": "Int64"
+        }
+      ],
+      "response_fields": [],
+      "failure_row": [
+        "PublishRejected"
+      ],
+      "capability_row": [
+        "Publisher"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "server_publish",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "observer_safe_projection",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "observer_safe",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "client_ephemeral",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "publish_replay_visible"
+    },
+    {
+      "schema_ref": "packet.roll.observe",
+      "schema_kind": "packet",
+      "boundary_ref": "observe_bus",
+      "from_target": "world-server",
+      "to_target": "world-client",
+      "effect_names": [
+        "observe_roll"
+      ],
+      "request_fields": [],
+      "response_fields": [
+        {
+          "name": "seen",
+          "ty": "Int64"
+        }
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ],
+      "capability_row": [
+        "Observer"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "observer_safe_view",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "observer_safe_projection",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "observer_safe",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "client_ephemeral",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "observer_projection_only"
+    },
+    {
+      "schema_ref": "packet.turn.witness",
+      "schema_kind": "packet",
+      "boundary_ref": "witness_store",
+      "from_target": "world-server",
+      "to_target": "world-client",
+      "effect_names": [
+        "issue_turn_witness"
+      ],
+      "request_fields": [
+        {
+          "name": "turn",
+          "ty": "Int64"
+        }
+      ],
+      "response_fields": [
+        {
+          "name": "ticket",
+          "ty": "Text"
+        }
+      ],
+      "failure_row": [
+        "WitnessRejected"
+      ],
+      "capability_row": [
+        "WitnessAuthority"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "witness_issue",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "observer_safe_projection",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "observer_safe",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "client_ephemeral",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "savepoint_anchor_required"
+    },
+    {
+      "schema_ref": "packet.turn.handoff",
+      "schema_kind": "packet",
+      "boundary_ref": "handoff_port",
+      "from_target": "world-client",
+      "to_target": "world-server",
+      "effect_names": [
+        "handoff_turn"
+      ],
+      "request_fields": [
+        {
+          "name": "ticket",
+          "ty": "Text"
+        }
+      ],
+      "response_fields": [],
+      "failure_row": [
+        "HandoffRejected"
+      ],
+      "capability_row": [
+        "HandoffAuthority"
+      ],
+      "required_witnesses": [
+        "turn_ticket"
+      ],
+      "authority_policy": "witness_handoff",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "observer_safe_projection",
+      "to_observation_policy": "authoritative_world_state",
+      "from_redaction_policy": "observer_safe",
+      "to_redaction_policy": "world_private",
+      "from_retention_policy": "client_ephemeral",
+      "to_retention_policy": "session_authority_log",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "witness_reacquire_on_load"
+    },
+    {
+      "schema_ref": "packet.session.admin",
+      "schema_kind": "packet",
+      "boundary_ref": "session_admin",
+      "from_target": "world-server",
+      "to_target": "world-server",
+      "effect_names": [
+        "quiesce_messages",
+        "seal_places"
+      ],
+      "request_fields": [],
+      "response_fields": [],
+      "failure_row": [
+        "CutRejected"
+      ],
+      "capability_row": [
+        "CutAuthority"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "save_load_admin",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "authoritative_world_state",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "world_private",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "session_authority_log",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "quiescent_required"
+    },
+    {
+      "schema_ref": "packet.session.cut",
+      "schema_kind": "packet",
+      "boundary_ref": "session_cut",
+      "from_target": "world-server",
+      "to_target": "world-server",
+      "effect_names": [
+        "atomic_cut"
+      ],
+      "request_fields": [
+        {
+          "name": "label",
+          "ty": "Text"
+        }
+      ],
+      "response_fields": [],
+      "failure_row": [
+        "CutRejected"
+      ],
+      "capability_row": [
+        "CutAuthority"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "save_load_admin",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "authoritative_world_state",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "world_private",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "session_authority_log",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "cut_frontier_required"
+    }
+  ],
+  "ffi_schemas": [
+    {
+      "schema_ref": "ffi.host_input.read_int",
+      "schema_kind": "ffi",
+      "boundary_ref": "host_input",
+      "from_target": "host-adapter",
+      "to_target": "world-server",
+      "effect_names": [
+        "read_int"
+      ],
+      "request_fields": [],
+      "response_fields": [
+        {
+          "name": "x",
+          "ty": "Int64"
+        }
+      ],
+      "failure_row": [
+        "AdapterUnavailable"
+      ],
+      "capability_row": [
+        "HostRead"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "adapter_read_only",
+      "from_provider_policy": "native_disabled",
+      "to_provider_policy": "no_provider_calls",
+      "from_observation_policy": "adapter_request_reply",
+      "to_observation_policy": "authoritative_world_state",
+      "from_redaction_policy": "adapter_local",
+      "to_redaction_policy": "world_private",
+      "from_retention_policy": "adapter_local_debug",
+      "to_retention_policy": "session_authority_log",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "no_state_transfer"
+    },
+    {
+      "schema_ref": "ffi.host_output.write_int",
+      "schema_kind": "ffi",
+      "boundary_ref": "host_output",
+      "from_target": "world-server",
+      "to_target": "host-adapter",
+      "effect_names": [
+        "write_int"
+      ],
+      "request_fields": [
+        {
+          "name": "y",
+          "ty": "Int64"
+        }
+      ],
+      "response_fields": [],
+      "failure_row": [
+        "AdapterUnavailable"
+      ],
+      "capability_row": [
+        "HostWrite"
+      ],
+      "required_witnesses": [],
+      "authority_policy": "adapter_write_side_effect",
+      "from_provider_policy": "no_provider_calls",
+      "to_provider_policy": "native_disabled",
+      "from_observation_policy": "authoritative_world_state",
+      "to_observation_policy": "adapter_request_reply",
+      "from_redaction_policy": "world_private",
+      "to_redaction_policy": "adapter_local",
+      "from_retention_policy": "session_authority_log",
+      "to_retention_policy": "adapter_local_debug",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "no_state_transfer"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 14:10 JST
+最終更新: 2026-05-22 14:46 JST
 
 ## document role
 
@@ -44,11 +44,11 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-PROJ-03 boundary schemas`
-- Current status after this snapshot: `FS-06` now has a bounded projection IR floor with source-derived target manifests, source-owned capability/failure preservation, explicit unassigned-place/save-load ownership rejection, and `FS-07` is promoted as the next execution-line dependency after boundary schemas close
-- Next promoted package after the current closeout: `P-PROJ-04 server/client local split`
+- Current package: `P-PROJ-04 server/client local split`
+- Current status after this snapshot: `FS-06` now has a bounded projection IR plus boundary-schema floor with source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure preservation, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection; `FS-07` local role split is the current execution-line dependency
+- Next promoted package after the current closeout: `P-ENG-02 provider admission`
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, and a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, unassigned-place rejection, and save/load ownership rejection. This is still bounded local evidence, not final effect grammar, not packet/FFI payload schema completion, not executable server/client split, not final public devtools family, and not provider completion.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, and a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection. This is still bounded local evidence, not final effect grammar, not final packet/FFI transport semantics, not executable server/client split, not final public devtools family, and not provider completion.
 
 ## completed milestones
 
@@ -60,6 +60,7 @@ The final direction for this roadmap is source-first:
 - `P-POSE-03` runtime PoseGraph
 - `P-POSE-04` pose save/devtools
 - `P-PROJ-02` projection IR realization
+- `P-PROJ-03` boundary schemas
 
 ## runnable commands
 
@@ -83,7 +84,7 @@ The final direction for this roadmap is source-first:
 | `FS-03` Mir-owned computational interpreter | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`, `python3 scripts/full_system_v1_samples.py check-all --format json`, `samples/full-system-v1/computational/runtime-matrix.json` pure function rows plus compute trace and static/runtime rejection split | keep pure function floor synchronized while transition/effect/runtime layers widen |
 | `FS-04` effectful Mir integration | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `samples/full-system-v1/computational/runtime-matrix.json` 8-positive/9-negative runtime matrix with host boundary, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows | runtime PoseGraph state and save/devtools integration |
 | `FS-05` PoseGraph runtime | `first-floor-evidence` | `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, `python3 scripts/posegraph_runtime_samples.py check-all --format json`, `samples/full-system-v1/avatar-pose/` 5-accepted / 1-violation / 3-runtime-rejection runtime matrix with no-split-frame, anchor-switch frontier, stale-anchor, fallback/reacquire, bounded save/load admissibility, and observer-safe devtools export | projection preservation and renderer/provider wiring remain later |
-| `FS-06` projection IR | `first-floor-evidence` | `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, `python3 scripts/projection_v1_samples.py check-all --format json`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, and `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture` now prove 1 accepted row and 1 rejection row with source-derived target manifests, source-owned capability/failure rows, preservation reports, generated manifest/rejection artifacts, unassigned-place rejection, save/load ownership rejection, and the `mirrorea-alpha project-full-v1` CLI surface | packet/FFI payload schemas first, then executable local server/client role split |
+| `FS-06` projection IR and boundary schemas | `first-floor-evidence` | `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, `python3 scripts/projection_v1_samples.py check-all --format json`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, and `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture` now prove 1 accepted row and 3 rejection rows with source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, generated projection-artifact/rejection-report bundles, client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, save/load ownership rejection, and the `mirrorea-alpha project-full-v1` CLI surface | executable local server/client role split next, then provider admission |
 | `FS-07` server/client runtime split MVP | `planned` | Product Alpha local/Docker runtime floor | run server/client roles from projection manifest |
 | `FS-08` engine/provider admission MVP | `planned` | engine/provider inventory scaffold | accepted/rejected provider admission rows |
 | `FS-09` devtools full alpha panels | `first-floor-evidence` | Product Alpha viewer and session devtools remain anchors; `crates/mir-runtime::posegraph_runtime` now exports observer-safe PoseGraph/devtools panels plus save/load summaries | widen beyond PoseGraph runtime into source/IR/projection/provider panels |
@@ -186,11 +187,11 @@ Current evidence:
 - `scripts/projection_v1_samples.py check-all --format json`
 - `cargo test -p mir-runtime --test projection_ir -- --nocapture`
 - `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`
-- source-derived projection IR, target manifests, preservation reports, generated manifest/rejection artifacts, and explicit client-write authority rejection.
+- source-derived projection IR, target manifests, packet/FFI schemas, preservation reports, generated projection-artifact/rejection-report bundles, explicit client-write authority rejection, payload-shape mismatch rejection, and same-shape heterogeneous effect-contract rejection.
 
 Next gap:
 
-- packet/FFI payload schema preservation, then executable local server/client role split. No server/client split compiler exists yet.
+- executable local server/client role split, then provider admission. No server/client split compiler exists yet.
 
 ### Engine/Provider line
 
@@ -220,7 +221,7 @@ Next gap:
 
 ## validation floor
 
-Required for `P-PROJ-02`:
+Required for `P-PROJ-03`:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -228,7 +229,6 @@ python3 -m unittest scripts.tests.test_projection_v1_samples
 cargo test -p mir-runtime --test projection_ir -- --nocapture
 cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 python3 scripts/projection_v1_samples.py check-all --format json
-python3 scripts/projection_boundary_samples.py check-all --format json
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
@@ -291,11 +291,11 @@ Research-discovery items:
 | `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, PoseGraph runtime, bounded pose save/devtools, and bounded projection IR are actualized; packet/FFI schemas next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, PoseGraph runtime, bounded pose save/devtools, and bounded projection IR plus boundary schemas are actualized; local role split next | heavy | 着手可能 |
 | `Macro 4` | executable sample expansion | planned source-first full-system suite | heavy | 後段依存 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
-| `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR is actualized and packet/FFI schemas are next | heavy | 着手可能 |
+| `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR plus boundary schemas are actualized and local role split is next | heavy | 着手可能 |
 | `Macro 8` | application realization | operational suite exists; source-first computational and avatar-pose roots are actualized while wider suite remains planned | heavy | 着手可能 |
 
 ## feature maturity rows
@@ -309,11 +309,13 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite | maintenance / source-first variants later |
 | PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime/save-load/devtools avatar-pose root exist; projection preservation and renderer/provider wiring remain later | 着手可能 |
-| projection/backend | `first-floor-evidence` | bounded projection IR, target manifests, preservation reports, and explicit client-write authority rejection now execute; payload schemas and role-run remain later | 着手可能 |
+| projection/backend | `first-floor-evidence` | bounded projection IR, target manifests, packet/FFI schemas, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, and same-shape heterogeneous effect-contract rejection now execute; role-run and provider admission remain later | 着手可能 |
 | engine/provider | `boundary-fixed` | inventory-only | 着手可能 after projection/provider policy |
 
 ## recent log
 
+- 2026-05-22 14:46 JST
+  `P-PROJ-03` closeout で `crates/mir-semantics::full_system_v1::projection`、`crates/mir-runtime::full_system_v1_projection`、`samples/full-system-v1/projection/`、`scripts/projection_v1_samples.py`、`cargo test -p mir-runtime --test projection_ir -- --nocapture`、`cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture` を widen し、source-derived packet/FFI schema bundles、payload-shape mismatch rejection、same-shape heterogeneous effect-contract rejection、projection-artifacts/rejection-report generated outputs、snapshot docs を同期したうえで current package を `P-PROJ-04`、次 closeout 後の promoted package を `P-ENG-02` に更新した。
 - 2026-05-22 14:10 JST
   `P-PROJ-02` closeout で `crates/mir-semantics::full_system_v1::projection`、`crates/mir-runtime::full_system_v1_projection`、`samples/full-system-v1/projection/`、`scripts/projection_v1_samples.py`、`cargo test -p mir-runtime --test projection_ir -- --nocapture`、`cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture` を actualize し、source-derived target manifests、source-owned capability/failure rows、preservation reports、generated manifest/rejection artifacts、client-write authority rejection row、unassigned-place rejection、save/load ownership rejectionを同期したうえで current package を `P-PROJ-03`、次 closeout 後の promoted package を `P-PROJ-04` に更新した。
 - 2026-05-22 13:13 JST

@@ -345,12 +345,44 @@ transition main at SugorokuPlace requires HostRead, HostWrite, Publisher, Observ
             .checked_provider_policy_rows
             .contains(&"host-adapter:native_disabled".to_string())
     );
+    assert_eq!(report.packet_schemas.len(), 6);
+    assert_eq!(report.ffi_schemas.len(), 2);
+    let publish_packet_schema = report
+        .packet_schemas
+        .iter()
+        .find(|row| row.boundary_ref == "publish_bus")
+        .expect("publish packet schema should exist");
+    assert_eq!(publish_packet_schema.schema_ref, "packet.roll.publish");
+    assert_eq!(
+        publish_packet_schema
+            .request_fields
+            .iter()
+            .map(|row| (row.name.as_str(), row.ty.as_str()))
+            .collect::<Vec<_>>(),
+        vec![("value", "Int64")]
+    );
+    let host_input_schema = report
+        .ffi_schemas
+        .iter()
+        .find(|row| row.boundary_ref == "host_input")
+        .expect("host input ffi schema should exist");
+    assert_eq!(host_input_schema.schema_ref, "ffi.host_input.read_int");
+    assert_eq!(
+        host_input_schema
+            .response_fields
+            .iter()
+            .map(|row| (row.name.as_str(), row.ty.as_str()))
+            .collect::<Vec<_>>(),
+        vec![("x", "Int64")]
+    );
+    assert_eq!(host_input_schema.to_provider_policy, "no_provider_calls");
+    assert_eq!(host_input_schema.from_provider_policy, "native_disabled");
     assert!(
         report
             .preservation_report
             .residual_obligations
             .iter()
-            .any(|row| row.code == "packet_ffi_schema_semantics_deferred")
+            .any(|row| row.code == "packet_ffi_transport_semantics_deferred")
     );
 }
 
@@ -715,5 +747,202 @@ transition observe at ClientView requires Observer {
             .map(|row| row.code.as_str())
             .collect::<Vec<_>>(),
         vec!["save_load_authority_requires_server_target"]
+    );
+}
+
+#[test]
+fn projection_runtime_rejects_boundary_payload_shape_mismatch() {
+    let root = unique_temp_dir("mir-full-system-v1-projection-shape-mismatch");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_file(
+        &root,
+        "main/src/payload-shape-mismatch-negative.mir",
+        r#"module FullSystemV1.PayloadShapeMismatchNegative
+
+capability Publisher
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect publish_note(note: Text) {
+  requires Publisher
+  failure PublishRejected
+}
+
+transition main at SugorokuPlace requires Publisher {
+  perform publish_roll(1) via publish_bus
+  perform publish_note("hi") via publish_bus
+}
+"#,
+    );
+    let request = write_file(
+        &root,
+        "main/projection.request.json",
+        r#"{
+  "schema_version": "full-system-v1-projection-request-v0",
+  "projection_id": "payload-shape-mismatch-negative",
+  "targets": [
+    {
+      "target_id": "world-server",
+      "role": "server",
+      "place_refs": ["SugorokuPlace"],
+      "entry_transitions": ["main"],
+      "observation_policy": "authoritative_world_state",
+      "redaction_policy": "world_private",
+      "retention_policy": "session_authority_log",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": true,
+      "prediction_allowed": false
+    },
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "place_refs": [],
+      "entry_transitions": [],
+      "observation_policy": "observer_safe_projection",
+      "redaction_policy": "observer_safe",
+      "retention_policy": "client_ephemeral",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": false,
+      "prediction_allowed": true
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_ref": "publish_bus",
+      "boundary_kind": "packet",
+      "effect_names": ["publish_note", "publish_roll"],
+      "from_target": "world-server",
+      "to_target": "world-client",
+      "authority": "server_publish",
+      "required_witnesses": [],
+      "packet_schema_ref": "packet.shared.publish",
+      "ffi_schema_ref": null,
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "publish_replay_visible"
+    }
+  ]
+}"#,
+    );
+
+    let report = project_full_system_v1_path(&source, &request);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(
+        report
+            .diagnostics
+            .iter()
+            .map(|row| row.code.as_str())
+            .collect::<Vec<_>>(),
+        vec!["boundary_payload_shape_mismatch"]
+    );
+    assert!(
+        report
+            .preservation_report
+            .rejected_rows
+            .contains(&"publish_bus:boundary_payload_shape_mismatch".to_string())
+    );
+}
+
+#[test]
+fn projection_runtime_rejects_boundary_effect_contract_mismatch() {
+    let root = unique_temp_dir("mir-full-system-v1-projection-contract-mismatch");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_file(
+        &root,
+        "main/src/effect-contract-mismatch-negative.mir",
+        r#"module FullSystemV1.EffectContractMismatchNegative
+
+capability Observer
+capability Publisher
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll(value: Int64) {
+  requires Observer
+  failure ObserveRejected
+}
+
+transition main at SugorokuPlace requires Observer, Publisher {
+  perform publish_roll(1) via shared_bus
+  perform observe_roll(1) via shared_bus
+}
+"#,
+    );
+    let request = write_file(
+        &root,
+        "main/projection.request.json",
+        r#"{
+  "schema_version": "full-system-v1-projection-request-v0",
+  "projection_id": "effect-contract-mismatch-negative",
+  "targets": [
+    {
+      "target_id": "world-server",
+      "role": "server",
+      "place_refs": ["SugorokuPlace"],
+      "entry_transitions": ["main"],
+      "observation_policy": "authoritative_world_state",
+      "redaction_policy": "world_private",
+      "retention_policy": "session_authority_log",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": true,
+      "prediction_allowed": false
+    },
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "place_refs": [],
+      "entry_transitions": [],
+      "observation_policy": "observer_safe_projection",
+      "redaction_policy": "observer_safe",
+      "retention_policy": "client_ephemeral",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": false,
+      "prediction_allowed": true
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_ref": "shared_bus",
+      "boundary_kind": "packet",
+      "effect_names": ["observe_roll", "publish_roll"],
+      "from_target": "world-server",
+      "to_target": "world-client",
+      "authority": "server_publish",
+      "required_witnesses": [],
+      "packet_schema_ref": "packet.shared.roll",
+      "ffi_schema_ref": null,
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "publish_replay_visible"
+    }
+  ]
+}"#,
+    );
+
+    let report = project_full_system_v1_path(&source, &request);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(
+        report
+            .diagnostics
+            .iter()
+            .map(|row| row.code.as_str())
+            .collect::<Vec<_>>(),
+        vec!["boundary_effect_contract_mismatch"]
+    );
+    assert!(
+        report
+            .preservation_report
+            .rejected_rows
+            .contains(&"shared_bus:boundary_effect_contract_mismatch".to_string())
     );
 }

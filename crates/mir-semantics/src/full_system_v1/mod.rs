@@ -11,9 +11,9 @@ pub use interpreter::{
     run_textual_mir_function_path,
 };
 pub use projection::{
-    FullSystemV1ProjectionReport, ProjectionBoundaryIr, ProjectionDiagnostic, ProjectionIr,
-    ProjectionPreservationReport, ProjectionTargetIr, ProjectionTargetManifest,
-    project_textual_mir_module_path,
+    FullSystemV1ProjectionReport, ProjectionBoundaryIr, ProjectionBoundarySchema,
+    ProjectionDiagnostic, ProjectionIr, ProjectionPreservationReport, ProjectionSchemaField,
+    ProjectionTargetIr, ProjectionTargetManifest, project_textual_mir_module_path,
 };
 pub use typed_ir::{
     FullSystemV1CheckReport, FullSystemV1Obligation, TypedBinaryOp, TypedCapabilityDecl,

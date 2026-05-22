@@ -1,0 +1,8 @@
+{
+  "diagnostic_codes": [
+    "boundary_effect_contract_mismatch"
+  ],
+  "rejected_rows": [
+    "shared_bus:boundary_effect_contract_mismatch"
+  ]
+}

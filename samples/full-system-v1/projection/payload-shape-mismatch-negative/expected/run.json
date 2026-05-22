@@ -1,35 +1,36 @@
 {
   "accepted": false,
-  "projection_id": "client-write-authority-negative",
+  "projection_id": "payload-shape-mismatch-negative",
   "target_ids": [],
   "target_roles": [],
-  "packet_schema_refs": [],
-  "ffi_schema_refs": [
-    "ffi.client.write_int"
+  "packet_schema_refs": [
+    "packet.shared.publish"
   ],
+  "ffi_schema_refs": [],
   "packet_schema_count": 0,
   "ffi_schema_count": 0,
   "checked_effect_rows": [
-    "write_int"
+    "publish_note",
+    "publish_roll"
   ],
   "checked_failure_rows": [
-    "AdapterUnavailable"
+    "PublishRejected"
   ],
   "checked_capability_rows": [
-    "HostWrite"
+    "Publisher"
   ],
   "checked_authority_rows": [
-    "client_output:client_world_write"
+    "publish_bus:server_publish"
   ],
   "checked_provider_policy_rows": [
-    "host-adapter:native_disabled",
-    "world-client:no_provider_calls"
+    "world-client:no_provider_calls",
+    "world-server:no_provider_calls"
   ],
   "checked_rollback_replay_cut_rows": [
-    "client_output:true:true:no_state_transfer"
+    "publish_bus:true:true:publish_replay_visible"
   ],
   "rejected_rows": [
-    "client_output:client_write_authority_escalation"
+    "publish_bus:boundary_payload_shape_mismatch"
   ],
   "residual_obligation_codes": [
     "packet_ffi_transport_semantics_deferred",
@@ -37,6 +38,6 @@
     "server_client_runtime_split_deferred"
   ],
   "diagnostic_codes": [
-    "client_write_authority_escalation"
+    "boundary_payload_shape_mismatch"
   ]
 }

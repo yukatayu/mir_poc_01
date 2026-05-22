@@ -153,6 +153,23 @@ transition main at HostPlace requires HostRead, HostWrite {
     assert_eq!(value["accepted"], true);
     assert_eq!(value["projection_id"], "host-boundary-positive");
     assert_eq!(value["final_public_api_frozen"], false);
+    assert_eq!(value["packet_schemas"], serde_json::json!([]));
+    assert_eq!(value["ffi_schemas"].as_array().map(Vec::len), Some(2));
+    assert_eq!(
+        value["ffi_schemas"][0]["request_fields"],
+        serde_json::json!([])
+    );
+    assert_eq!(
+        value["ffi_schemas"][0]["response_fields"],
+        serde_json::json!([{ "name": "x", "ty": "Int64" }])
+    );
+    assert!(
+        value["residual_obligations"]
+            .as_array()
+            .expect("residual obligations should be an array")
+            .iter()
+            .any(|row| row["code"] == "packet_ffi_transport_semantics_deferred")
+    );
 }
 
 #[test]

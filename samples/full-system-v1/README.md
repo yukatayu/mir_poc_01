@@ -6,7 +6,7 @@ Current state:
 
 - `computational/` is actualized for `P-MIR-01..04` as parser, typed checker, bounded effectful runtime, and runtime report evidence.
 - `avatar-pose/` is actualized for `P-POSE-03` / `P-POSE-04` as bounded runtime PoseGraph evidence with 9 executable rows, save/load admissibility evidence, and observer-safe devtools export summaries.
-- `projection/` is actualized for `P-PROJ-02` as bounded projection IR evidence with 2 executable rows, source-derived target manifests, preservation reports, and one explicit client-write authority rejection row.
+- `projection/` is actualized for `P-PROJ-03` as bounded projection IR + boundary-schema evidence with 4 executable rows, source-derived target manifests, packet schemas, FFI schemas, preservation reports, and explicit client-write authority / payload-shape mismatch / effect-contract mismatch rejection rows.
 - world-core, membership-chat, sugoroku-world, server/client, and provider-adapter families remain planned.
 
 Commands available now:
@@ -30,7 +30,7 @@ Stop lines:
 
 - no final public grammar
 - no final typed IR / interpreter / runtime API completion here
-- no packet or FFI payload schema semantics completion here
+- no final packet or FFI transport semantics completion here
 - no executable server/client role split here
 - no distributed durable pose save/load or final devtools family completion here
 - no package artifact generation here

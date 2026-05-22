@@ -1,6 +1,6 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first seven implementation packages.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first eight implementation packages.
 
 It explains what is now executable at the source-first parser/checker/bounded-effectful-runtime floor and what still remains later.
 
@@ -21,13 +21,13 @@ The current repo has:
 - canonical operational product suite.
 - first-floor Mir computational evidence.
 - helper-backed PoseGraph comparison evidence plus bounded source-first PoseGraph runtime evidence.
-- bounded source-first projection IR evidence plus product-alpha projection inventory.
+- bounded source-first projection IR + boundary-schema evidence plus product-alpha projection inventory.
 - engine/provider inventory.
 
 The current promoted package is:
 
 ```text
-P-PROJ-03 boundary schemas
+P-PROJ-04 server/client local split
 ```
 
 ## What to verify now
@@ -54,7 +54,7 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, and bounded projection IR. They still do not prove packet/FFI payload schemas, executable server/client split, or provider admission.
+The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, and bounded projection IR plus packet/FFI boundary-schema preservation. They still do not prove executable server/client split or provider admission.
 
 ## Planned Full System V1 commands
 

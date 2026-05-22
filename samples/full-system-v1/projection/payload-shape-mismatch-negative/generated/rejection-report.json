@@ -1,0 +1,8 @@
+{
+  "diagnostic_codes": [
+    "boundary_payload_shape_mismatch"
+  ],
+  "rejected_rows": [
+    "publish_bus:boundary_payload_shape_mismatch"
+  ]
+}

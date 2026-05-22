@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     checker::analyze_textual_mir_program_path,
-    typed_ir::{FullSystemV1Obligation, TypedBindValue, TypedMirModule, TypedStmt},
+    typed_ir::{FullSystemV1Obligation, TypedBindValue, TypedMirModule, TypedStmt, TypedType},
 };
 
 const PROJECTION_REQUEST_SCHEMA_VERSION: &str = "full-system-v1-projection-request-v0";
@@ -47,6 +47,39 @@ pub struct ProjectionBoundaryIr {
     pub authority: String,
     pub packet_schema_ref: Option<String>,
     pub ffi_schema_ref: Option<String>,
+    pub rollback_cut_compatible: bool,
+    pub replay_compatible: bool,
+    pub save_load_obligation: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProjectionSchemaField {
+    pub name: String,
+    pub ty: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ProjectionBoundarySchema {
+    pub schema_ref: String,
+    pub schema_kind: String,
+    pub boundary_ref: String,
+    pub from_target: String,
+    pub to_target: String,
+    pub effect_names: Vec<String>,
+    pub request_fields: Vec<ProjectionSchemaField>,
+    pub response_fields: Vec<ProjectionSchemaField>,
+    pub failure_row: Vec<String>,
+    pub capability_row: Vec<String>,
+    pub required_witnesses: Vec<String>,
+    pub authority_policy: String,
+    pub from_provider_policy: String,
+    pub to_provider_policy: String,
+    pub from_observation_policy: String,
+    pub to_observation_policy: String,
+    pub from_redaction_policy: String,
+    pub to_redaction_policy: String,
+    pub from_retention_policy: String,
+    pub to_retention_policy: String,
     pub rollback_cut_compatible: bool,
     pub replay_compatible: bool,
     pub save_load_obligation: String,
@@ -108,6 +141,8 @@ pub struct FullSystemV1ProjectionReport {
     pub request_path: String,
     pub projection_ir: ProjectionIr,
     pub target_manifests: Vec<ProjectionTargetManifest>,
+    pub packet_schemas: Vec<ProjectionBoundarySchema>,
+    pub ffi_schemas: Vec<ProjectionBoundarySchema>,
     pub preservation_report: ProjectionPreservationReport,
     pub diagnostics: Vec<ProjectionDiagnostic>,
     pub residual_obligations: Vec<FullSystemV1Obligation>,
@@ -165,11 +200,40 @@ struct SourceBoundarySummary {
     required_capabilities: BTreeSet<String>,
     transition_names: BTreeSet<String>,
     place_refs: BTreeSet<String>,
+    effect_summaries: BTreeMap<String, SourceEffectSummary>,
 }
 
 #[derive(Debug, Clone)]
 struct SourceTransitionSummary {
     place_ref: String,
+}
+
+#[derive(Debug, Clone)]
+struct SourceEffectSummary {
+    failure_row: BTreeSet<String>,
+    required_capabilities: BTreeSet<String>,
+    request_fields: Vec<ProjectionSchemaField>,
+    response_fields: Vec<ProjectionSchemaField>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct BoundaryPayloadShape {
+    request_fields: Vec<ProjectionSchemaField>,
+    response_fields: Vec<ProjectionSchemaField>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum BoundarySchemaMismatch {
+    PayloadShape,
+    EffectContract,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct BoundarySchemaContract {
+    request_fields: Vec<ProjectionSchemaField>,
+    response_fields: Vec<ProjectionSchemaField>,
+    failure_row: Vec<String>,
+    capability_row: Vec<String>,
 }
 
 pub fn project_textual_mir_module_path(
@@ -190,6 +254,8 @@ pub fn project_textual_mir_module_path(
                 request_projection_id(request_path).to_string(),
                 vec![diagnostic],
                 Vec::new(),
+                Vec::new(),
+                Vec::new(),
                 empty_projection_ir(request_projection_id(request_path)),
                 empty_preservation_report(),
             );
@@ -209,6 +275,8 @@ pub fn project_textual_mir_module_path(
             request_path_text,
             projection_id.clone(),
             diagnostics,
+            Vec::new(),
+            Vec::new(),
             Vec::new(),
             empty_projection_ir(&projection_id),
             projection_preservation_report(
@@ -245,6 +313,11 @@ pub fn project_textual_mir_module_path(
         .iter()
         .map(|target| target.target_id.clone())
         .collect::<BTreeSet<_>>();
+    let target_index = request
+        .targets
+        .iter()
+        .map(|target| (target.target_id.clone(), target))
+        .collect::<BTreeMap<_, _>>();
 
     for boundary in &request.boundaries {
         validate_boundary(
@@ -272,6 +345,18 @@ pub fn project_textual_mir_module_path(
             rejected_rows.push(format!("{boundary_ref}:missing_boundary_projection"));
         }
     }
+
+    let (packet_schemas, ffi_schemas) = if diagnostics.is_empty() {
+        build_boundary_schemas(
+            &request,
+            &source_boundaries,
+            &target_index,
+            &mut diagnostics,
+            &mut rejected_rows,
+        )
+    } else {
+        (Vec::new(), Vec::new())
+    };
 
     let projection_ir = if diagnostics.is_empty() {
         build_projection_ir(
@@ -304,6 +389,8 @@ pub fn project_textual_mir_module_path(
             request_path: request_path_text,
             projection_ir,
             target_manifests,
+            packet_schemas,
+            ffi_schemas,
             preservation_report: preservation_report.clone(),
             diagnostics,
             residual_obligations: preservation_report.residual_obligations.clone(),
@@ -315,6 +402,8 @@ pub fn project_textual_mir_module_path(
             request_path_text,
             projection_id,
             diagnostics,
+            Vec::new(),
+            Vec::new(),
             Vec::new(),
             projection_ir,
             preservation_report,
@@ -682,14 +771,24 @@ fn collect_source_boundaries(
         .map(|effect| {
             (
                 effect.effect_name.clone(),
-                (
-                    effect.failure_row.iter().cloned().collect::<BTreeSet<_>>(),
-                    effect
+                SourceEffectSummary {
+                    failure_row: effect.failure_row.iter().cloned().collect::<BTreeSet<_>>(),
+                    required_capabilities: effect
                         .required_capabilities
                         .iter()
                         .cloned()
                         .collect::<BTreeSet<_>>(),
-                ),
+                    request_fields: effect
+                        .parameters
+                        .iter()
+                        .map(|param| projection_schema_field(&param.name, &param.param_type))
+                        .collect(),
+                    response_fields: effect
+                        .output
+                        .iter()
+                        .map(|output| projection_schema_field(&output.name, &output.output_type))
+                        .collect(),
+                },
             )
         })
         .collect::<BTreeMap<_, _>>();
@@ -713,7 +812,7 @@ fn collect_stmts_into_boundaries(
     transition_name: &str,
     place_ref: &str,
     body: &[TypedStmt],
-    effect_index: &BTreeMap<String, (BTreeSet<String>, BTreeSet<String>)>,
+    effect_index: &BTreeMap<String, SourceEffectSummary>,
     boundaries: &mut BTreeMap<String, SourceBoundarySummary>,
 ) {
     for stmt in body {
@@ -764,7 +863,7 @@ fn collect_call(
     transition_name: &str,
     place_ref: &str,
     call: &super::typed_ir::TypedPerformCall,
-    effect_index: &BTreeMap<String, (BTreeSet<String>, BTreeSet<String>)>,
+    effect_index: &BTreeMap<String, SourceEffectSummary>,
     boundaries: &mut BTreeMap<String, SourceBoundarySummary>,
 ) {
     let summary = boundaries
@@ -775,22 +874,179 @@ fn collect_call(
             required_capabilities: BTreeSet::new(),
             transition_names: BTreeSet::new(),
             place_refs: BTreeSet::new(),
+            effect_summaries: BTreeMap::new(),
         });
     summary.effect_names.insert(call.effect_name.clone());
     summary.transition_names.insert(transition_name.to_string());
     summary.place_refs.insert(place_ref.to_string());
 
-    let (failure_row, required_capabilities) = effect_index
+    let effect_summary = effect_index
         .get(&call.effect_name)
         .cloned()
-        .unwrap_or_else(|| {
+        .unwrap_or_else(|| SourceEffectSummary {
+            failure_row: call.failure_row.iter().cloned().collect(),
+            required_capabilities: call.required_capabilities.iter().cloned().collect(),
+            request_fields: call
+                .arguments
+                .iter()
+                .enumerate()
+                .map(|(index, argument)| {
+                    projection_schema_field(&format!("arg{index}"), &argument.ty)
+                })
+                .collect(),
+            response_fields: call
+                .output_type
+                .as_ref()
+                .map(|output_type| vec![projection_schema_field("result", output_type)])
+                .unwrap_or_default(),
+        });
+    summary
+        .failure_row
+        .extend(effect_summary.failure_row.iter().cloned());
+    summary
+        .required_capabilities
+        .extend(effect_summary.required_capabilities.iter().cloned());
+    summary
+        .effect_summaries
+        .entry(call.effect_name.clone())
+        .or_insert(effect_summary);
+}
+
+fn projection_schema_field(name: &str, ty: &TypedType) -> ProjectionSchemaField {
+    ProjectionSchemaField {
+        name: name.to_string(),
+        ty: ty.display_name(),
+    }
+}
+
+fn build_boundary_schemas(
+    request: &ProjectionRequest,
+    source_boundaries: &BTreeMap<String, SourceBoundarySummary>,
+    target_index: &BTreeMap<String, &ProjectionTargetRequest>,
+    diagnostics: &mut Vec<ProjectionDiagnostic>,
+    rejected_rows: &mut Vec<String>,
+) -> (Vec<ProjectionBoundarySchema>, Vec<ProjectionBoundarySchema>) {
+    let mut packet_schemas = Vec::new();
+    let mut ffi_schemas = Vec::new();
+    for boundary in &request.boundaries {
+        let Some(source) = source_boundaries.get(&boundary.boundary_ref) else {
+            continue;
+        };
+        let contract = match boundary_schema_contract(boundary, source) {
+            Ok(contract) => contract,
+            Err(BoundarySchemaMismatch::PayloadShape) => {
+                diagnostics.push(ProjectionDiagnostic {
+                    code: "boundary_payload_shape_mismatch".to_string(),
+                    message: format!(
+                        "boundary `{}` mixes incompatible request/response payload shapes across its effect row",
+                        boundary.boundary_ref
+                    ),
+                });
+                rejected_rows.push(format!(
+                    "{}:boundary_payload_shape_mismatch",
+                    boundary.boundary_ref
+                ));
+                continue;
+            }
+            Err(BoundarySchemaMismatch::EffectContract) => {
+                diagnostics.push(ProjectionDiagnostic {
+                    code: "boundary_effect_contract_mismatch".to_string(),
+                    message: format!(
+                        "boundary `{}` mixes same-shape effects with incompatible failure/capability contracts",
+                        boundary.boundary_ref
+                    ),
+                });
+                rejected_rows.push(format!(
+                    "{}:boundary_effect_contract_mismatch",
+                    boundary.boundary_ref
+                ));
+                continue;
+            }
+        };
+        let from_target = target_index
+            .get(&boundary.from_target)
+            .expect("validated from_target should exist");
+        let to_target = target_index
+            .get(&boundary.to_target)
+            .expect("validated to_target should exist");
+        let schema = ProjectionBoundarySchema {
+            schema_ref: boundary
+                .packet_schema_ref
+                .clone()
+                .or_else(|| boundary.ffi_schema_ref.clone())
+                .expect("validated boundary should have schema ref"),
+            schema_kind: boundary.boundary_kind.clone(),
+            boundary_ref: boundary.boundary_ref.clone(),
+            from_target: boundary.from_target.clone(),
+            to_target: boundary.to_target.clone(),
+            effect_names: sorted_vec(source.effect_names.iter().cloned()),
+            request_fields: contract.request_fields,
+            response_fields: contract.response_fields,
+            failure_row: contract.failure_row,
+            capability_row: contract.capability_row,
+            required_witnesses: boundary.required_witnesses.clone(),
+            authority_policy: boundary.authority.clone(),
+            from_provider_policy: from_target.provider_policy.clone(),
+            to_provider_policy: to_target.provider_policy.clone(),
+            from_observation_policy: from_target.observation_policy.clone(),
+            to_observation_policy: to_target.observation_policy.clone(),
+            from_redaction_policy: from_target.redaction_policy.clone(),
+            to_redaction_policy: to_target.redaction_policy.clone(),
+            from_retention_policy: from_target.retention_policy.clone(),
+            to_retention_policy: to_target.retention_policy.clone(),
+            rollback_cut_compatible: boundary.rollback_cut_compatible,
+            replay_compatible: boundary.replay_compatible,
+            save_load_obligation: boundary.save_load_obligation.clone(),
+        };
+        match boundary.boundary_kind.as_str() {
+            "packet" => packet_schemas.push(schema),
+            "ffi" => ffi_schemas.push(schema),
+            _ => {}
+        }
+    }
+    (packet_schemas, ffi_schemas)
+}
+
+fn boundary_schema_contract(
+    boundary: &ProjectionBoundaryRequest,
+    source: &SourceBoundarySummary,
+) -> Result<BoundarySchemaContract, BoundarySchemaMismatch> {
+    let mut summaries = boundary
+        .effect_names
+        .iter()
+        .filter_map(|effect_name| source.effect_summaries.get(effect_name))
+        .map(|summary| {
             (
-                call.failure_row.iter().cloned().collect(),
-                call.required_capabilities.iter().cloned().collect(),
+                BoundaryPayloadShape {
+                    request_fields: summary.request_fields.clone(),
+                    response_fields: summary.response_fields.clone(),
+                },
+                summary.failure_row.clone(),
+                summary.required_capabilities.clone(),
             )
         });
-    summary.failure_row.extend(failure_row);
-    summary.required_capabilities.extend(required_capabilities);
+    let Some((first_shape, first_failure_row, first_capability_row)) = summaries.next() else {
+        return Ok(BoundarySchemaContract {
+            request_fields: Vec::new(),
+            response_fields: Vec::new(),
+            failure_row: Vec::new(),
+            capability_row: Vec::new(),
+        });
+    };
+    for (shape, failure_row, capability_row) in summaries {
+        if shape != first_shape {
+            return Err(BoundarySchemaMismatch::PayloadShape);
+        }
+        if failure_row != first_failure_row || capability_row != first_capability_row {
+            return Err(BoundarySchemaMismatch::EffectContract);
+        }
+    }
+    Ok(BoundarySchemaContract {
+        request_fields: first_shape.request_fields,
+        response_fields: first_shape.response_fields,
+        failure_row: sorted_vec(first_failure_row.into_iter()),
+        capability_row: sorted_vec(first_capability_row.into_iter()),
+    })
 }
 
 fn build_projection_ir(
@@ -1007,8 +1263,8 @@ fn projection_preservation_report(
         .collect::<BTreeSet<_>>();
     let residual_obligations = vec![
         FullSystemV1Obligation {
-            code: "packet_ffi_schema_semantics_deferred".to_string(),
-            message: "schema refs are preserved, but packet/FFI payload semantics are deferred to P-PROJ-03".to_string(),
+            code: "packet_ffi_transport_semantics_deferred".to_string(),
+            message: "packet and FFI schemas are emitted, but executable transport/runtime semantics remain later work".to_string(),
         },
         FullSystemV1Obligation {
             code: "server_client_runtime_split_deferred".to_string(),
@@ -1044,6 +1300,8 @@ fn rejected_report(
     projection_id: String,
     diagnostics: Vec<ProjectionDiagnostic>,
     target_manifests: Vec<ProjectionTargetManifest>,
+    packet_schemas: Vec<ProjectionBoundarySchema>,
+    ffi_schemas: Vec<ProjectionBoundarySchema>,
     projection_ir: ProjectionIr,
     preservation_report: ProjectionPreservationReport,
 ) -> FullSystemV1ProjectionReport {
@@ -1054,6 +1312,8 @@ fn rejected_report(
         request_path,
         projection_ir,
         target_manifests,
+        packet_schemas,
+        ffi_schemas,
         residual_obligations: preservation_report.residual_obligations.clone(),
         preservation_report,
         diagnostics,

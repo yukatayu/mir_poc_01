@@ -1,8 +1,8 @@
 use std::path::Path;
 
 use mir_semantics::full_system_v1::{
-    FullSystemV1Obligation, ProjectionDiagnostic, ProjectionIr, ProjectionPreservationReport,
-    ProjectionTargetManifest, project_textual_mir_module_path,
+    FullSystemV1Obligation, ProjectionBoundarySchema, ProjectionDiagnostic, ProjectionIr,
+    ProjectionPreservationReport, ProjectionTargetManifest, project_textual_mir_module_path,
 };
 use serde::{Deserialize, Serialize};
 
@@ -21,6 +21,8 @@ pub struct FullSystemV1ProjectionRuntimeReport {
     pub request_path: String,
     pub projection_ir: ProjectionIr,
     pub target_manifests: Vec<ProjectionTargetManifest>,
+    pub packet_schemas: Vec<ProjectionBoundarySchema>,
+    pub ffi_schemas: Vec<ProjectionBoundarySchema>,
     pub preservation_report: ProjectionPreservationReport,
     pub diagnostics: Vec<ProjectionDiagnostic>,
     pub residual_obligations: Vec<FullSystemV1Obligation>,
@@ -41,6 +43,8 @@ pub fn project_full_system_v1_path(
         request_path: report.request_path,
         projection_ir: report.projection_ir,
         target_manifests: report.target_manifests,
+        packet_schemas: report.packet_schemas,
+        ffi_schemas: report.ffi_schemas,
         preservation_report: report.preservation_report,
         diagnostics: report.diagnostics,
         residual_obligations: report.residual_obligations,

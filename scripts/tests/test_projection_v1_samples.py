@@ -17,8 +17,10 @@ except ModuleNotFoundError:
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 EXPECTED_SAMPLE_IDS = [
-    "proj-02-effectful-sugoroku-positive",
-    "proj-02-client-write-authority-negative",
+    "proj-03-effectful-sugoroku-positive",
+    "proj-03-client-write-authority-negative",
+    "proj-03-effect-contract-mismatch-negative",
+    "proj-03-payload-shape-mismatch-negative",
 ]
 
 
@@ -42,7 +44,7 @@ class ProjectionV1SamplesTests(unittest.TestCase):
     def test_helper_module_exists(self) -> None:
         self.assertIsNotNone(
             projection_v1_samples,
-            "scripts/projection_v1_samples.py must exist for P-PROJ-02",
+            "scripts/projection_v1_samples.py must exist for P-PROJ-03",
         )
 
     def test_projection_root_and_matrix_exist(self) -> None:
@@ -69,12 +71,12 @@ class ProjectionV1SamplesTests(unittest.TestCase):
     def test_matrix_reports_executable_rows(self) -> None:
         payload = _run_helper("matrix")
 
-        self.assertEqual(payload["sample_count"], 2)
-        self.assertEqual(payload["executable_count"], 2)
+        self.assertEqual(payload["sample_count"], 4)
+        self.assertEqual(payload["executable_count"], 4)
         self.assertEqual(payload["validation_errors"], [])
 
     def test_positive_projection_keeps_target_manifest_summary(self) -> None:
-        payload = _run_helper("run", "proj-02-effectful-sugoroku-positive")
+        payload = _run_helper("run", "proj-03-effectful-sugoroku-positive")
 
         self.assertTrue(payload["accepted"])
         self.assertEqual(
@@ -85,20 +87,30 @@ class ProjectionV1SamplesTests(unittest.TestCase):
             "ffi.host_output.write_int",
             payload["actual"]["ffi_schema_refs"],
         )
+        self.assertEqual(payload["actual"]["packet_schema_count"], 6)
+        self.assertEqual(payload["actual"]["ffi_schema_count"], 2)
         self.assertIn(
             "publish_roll",
             payload["actual"]["checked_effect_rows"],
         )
         target_manifests = {
-            row["target_id"]: row for row in payload["generated_actual"]
+            row["target_id"]: row
+            for row in payload["generated_actual"]["target_manifests"]
         }
         self.assertIn("HostWrite", target_manifests["world-server"]["capability_row"])
         self.assertIn("Publisher", target_manifests["world-server"]["capability_row"])
         self.assertEqual(target_manifests["world-client"]["capability_row"], [])
         self.assertEqual(target_manifests["host-adapter"]["capability_row"], [])
+        packet_schemas = {
+            row["boundary_ref"]: row
+            for row in payload["generated_actual"]["packet_schemas"]
+        }
+        self.assertEqual(packet_schemas["publish_bus"]["request_fields"], [
+            {"name": "value", "ty": "Int64"}
+        ])
 
     def test_negative_projection_reports_authority_rejection(self) -> None:
-        payload = _run_helper("run", "proj-02-client-write-authority-negative")
+        payload = _run_helper("run", "proj-03-client-write-authority-negative")
 
         self.assertFalse(payload["accepted"])
         self.assertEqual(
@@ -107,6 +119,32 @@ class ProjectionV1SamplesTests(unittest.TestCase):
         )
         self.assertIn(
             "client_output:client_write_authority_escalation",
+            payload["actual"]["rejected_rows"],
+        )
+
+    def test_negative_projection_reports_payload_shape_rejection(self) -> None:
+        payload = _run_helper("run", "proj-03-payload-shape-mismatch-negative")
+
+        self.assertFalse(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["boundary_payload_shape_mismatch"],
+        )
+        self.assertIn(
+            "publish_bus:boundary_payload_shape_mismatch",
+            payload["actual"]["rejected_rows"],
+        )
+
+    def test_negative_projection_reports_effect_contract_rejection(self) -> None:
+        payload = _run_helper("run", "proj-03-effect-contract-mismatch-negative")
+
+        self.assertFalse(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["boundary_effect_contract_mismatch"],
+        )
+        self.assertIn(
+            "shared_bus:boundary_effect_contract_mismatch",
             payload["actual"]["rejected_rows"],
         )
 

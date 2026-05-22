@@ -1,0 +1,19 @@
+module FullSystemV1.EffectContractMismatchNegative
+
+capability Observer
+capability Publisher
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll(value: Int64) {
+  requires Observer
+  failure ObserveRejected
+}
+
+transition main at SugorokuPlace requires Observer, Publisher {
+  perform publish_roll(1) via shared_bus
+  perform observe_roll(1) via shared_bus
+}

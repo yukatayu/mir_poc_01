@@ -23,6 +23,8 @@
     "ffi.host_input.read_int",
     "ffi.host_output.write_int"
   ],
+  "packet_schema_count": 6,
+  "ffi_schema_count": 2,
   "checked_effect_rows": [
     "atomic_cut",
     "handoff_turn",
@@ -78,7 +80,7 @@
   ],
   "rejected_rows": [],
   "residual_obligation_codes": [
-    "packet_ffi_schema_semantics_deferred",
+    "packet_ffi_transport_semantics_deferred",
     "provider_admission_deferred",
     "server_client_runtime_split_deferred"
   ],

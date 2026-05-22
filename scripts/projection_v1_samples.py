@@ -22,8 +22,7 @@ STOP_LINES = [
     "no provider admission completion",
 ]
 NON_CLAIMS = [
-    "projection IR plus target manifest floor only",
-    "packet and FFI schema payload semantics remain later work",
+    "projection IR plus generated target manifest / packet schema / FFI schema floor only",
     "projection does not yet execute split roles",
 ]
 VALIDATION_FLOOR = [
@@ -31,6 +30,9 @@ VALIDATION_FLOOR = [
     "cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture",
     "python3 -m unittest scripts.tests.test_projection_v1_samples",
     "python3 scripts/projection_v1_samples.py check-all --format json",
+]
+LEGACY_PROJECTION_ARTIFACTS = [
+    "generated/target-manifest.json",
 ]
 
 
@@ -79,7 +81,10 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
                         "detail": f"missing required path `{path}`",
                     }
                 )
-        if row["generated_kind"] not in {"target_manifests", "rejection_report"}:
+        if row["generated_kind"] not in {
+            "projection_artifacts",
+            "rejection_report",
+        }:
             errors.append(
                 {
                     "sample_id": row["sample_id"],
@@ -87,6 +92,16 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
                     "detail": f"unsupported generated_kind `{row['generated_kind']}`",
                 }
             )
+        for legacy_path in LEGACY_PROJECTION_ARTIFACTS:
+            stale_path = root_path / legacy_path
+            if stale_path.exists():
+                errors.append(
+                    {
+                        "sample_id": row["sample_id"],
+                        "kind": "stale_generated_artifact",
+                        "detail": f"unexpected legacy artifact `{stale_path}` is still present",
+                    }
+                )
     return errors
 
 
@@ -173,6 +188,8 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
         "target_roles": sorted(row["role"] for row in target_manifests),
         "packet_schema_refs": sorted(preservation.get("packet_schema_refs") or []),
         "ffi_schema_refs": sorted(preservation.get("ffi_schema_refs") or []),
+        "packet_schema_count": len(payload.get("packet_schemas") or []),
+        "ffi_schema_count": len(payload.get("ffi_schemas") or []),
         "checked_effect_rows": sorted(preservation.get("checked_effect_rows") or []),
         "checked_failure_rows": sorted(preservation.get("checked_failure_rows") or []),
         "checked_capability_rows": sorted(
@@ -196,8 +213,12 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _generated_projection(payload: dict[str, Any], generated_kind: str) -> Any:
-    if generated_kind == "target_manifests":
-        return payload.get("target_manifests") or []
+    if generated_kind == "projection_artifacts":
+        return {
+            "target_manifests": payload.get("target_manifests") or [],
+            "packet_schemas": payload.get("packet_schemas") or [],
+            "ffi_schemas": payload.get("ffi_schemas") or [],
+        }
     if generated_kind == "rejection_report":
         preservation = payload.get("preservation_report") or {}
         return {
