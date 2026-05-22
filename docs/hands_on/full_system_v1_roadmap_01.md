@@ -26,11 +26,13 @@ The current repo has:
 - bounded source-first WorldCore / MembershipChat / Sugoroku / Portal / TwoShard / Gradient operational evidence.
 - bounded Full V1 release-check/report/viewer bundle evidence.
 
-The current promoted package is:
+There is no current promoted package:
 
 ```text
-P-FSV1-99 final audit
+none
 ```
+
+The current autonomous chain is closed through `P-FSV1-99 final audit`.
 
 ## What to verify now
 

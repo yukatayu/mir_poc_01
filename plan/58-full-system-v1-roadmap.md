@@ -8,7 +8,7 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-FSV1-03`:
+Current repo state after `P-FSV1-99`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
@@ -26,7 +26,7 @@ Current repo state after `P-FSV1-03`:
 - Full System V1 bounded provider-admission floor is `actualized` through `crates/mir-runtime::full_system_v1_provider_admission`, `samples/full-system-v1/provider-adapter/`, `scripts/provider_admission_samples.py`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha admit-provider-v1` with 2 accepted rows, 3 rejection rows, matched packet/FFI schema preservation, capability/authority/redaction/retention checks, rollback policy rejection, disabled-native preservation, and explicit WASM inventory-only admission.
 - Full System V1 bounded renderer pose backend demo is `actualized` through `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `samples/full-system-v1/provider-adapter/renderer-pose-matrix.json`, `scripts/renderer_pose_backend_samples.py`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha render-pose-backend-v1` with 1 accepted structural binding-context + snapshot-frontier row and 2 blocked rows while preserving Mir/Mirrorea as semantic owner and leaving attested PoseGraph package provenance later.
 - Full System V1 bounded release-check closure is actualized through `scripts/full_system_v1_release_check.py`, per-command JSON reports, static `bundle.json` / `index.html` viewer outputs, Product Alpha compatibility replay, and representative `mirrorea-alpha project-full-v1` / `run-full-v1-split` / `admit-provider-v1` / `render-pose-backend-v1` surfaces.
-- Final audit and claim/non-claim cleanup remain later.
+- `P-FSV1-99` has closed the current autonomous chain with final validation, docs/report cleanup, and claim/non-claim audit.
 
 ## package order
 
@@ -51,7 +51,7 @@ Current repo state after `P-FSV1-03`:
 
 ## Full System V1 sample target
 
-Planned source-first root:
+Current source-first root set:
 
 ```text
 samples/full-system-v1/
@@ -98,7 +98,7 @@ The planned Full System V1 root name `gradient-observation/` is intentionally di
 
 `P-FSV1-03` actualized `scripts/full_system_v1_release_check.py`, `scripts/tests/test_full_system_v1_release_check.py`, per-command JSON report emission, static `bundle.json` / `index.html` viewer outputs, compatibility-floor replay, representative `mirrorea-alpha project-full-v1` / `run-full-v1-split` / `admit-provider-v1` / `render-pose-backend-v1` CLI surfaces, and snapshot/report closeout wording so the wider Full System V1 line now has a bounded release-check workflow without widening claims past local evidence, final public viewer/devtools family, or final product workflow closure.
 
-The individual roots remain evidence-closed rather than workflow-ready, while the line-level bounded release-check workflow is now actualized and the final audit closure remains later.
+The individual roots remain evidence-closed rather than workflow-ready, while the line-level bounded release-check workflow is actualized and the current autonomous chain is closed through `P-FSV1-99`.
 
 ## validation direction
 

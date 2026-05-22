@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-22 18:53 JST
+最終更新: 2026-05-22 19:28 JST
 
 ## document role
 
@@ -17,19 +17,19 @@ This document is the repo-wide **current task map**. It is not normative source 
 Current promoted package:
 
 ```text
-P-FSV1-99 final audit
+none
 ```
 
 Next promoted package after this closeout:
 
 ```text
-none
+none; Full System V1 chain is closed through P-FSV1-99
 ```
 
 Purpose:
 
-- lock the accepted `scripts/full_system_v1_release_check.py` lane into the repo snapshot with final claim/non-claim cleanup, report closure, and final validation recording.
-- preserve `P-FSV1-03` closed with bounded release-check outputs: static `bundle.json` / `index.html`, per-command JSON reports, compatibility-floor replay, and representative Full V1 CLI surfaces.
+- keep the closed Full System V1 snapshot truthful after `P-FSV1-99 final audit`.
+- preserve `P-FSV1-03` release-check outputs and `P-FSV1-99` final validation/report cleanup as closed evidence.
 - preserve the already-closed 12 executable source-first operational rows across `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` without widening claims past bounded local evidence.
 - keep `package.mir.json` as alpha compatibility/package artifact while source authority stays on `.mir`.
 
@@ -37,7 +37,7 @@ Purpose:
 
 | Order | Package | Macro / stage | Goal | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
+| 1 | none | closed snapshot | later reopen only | explicit promotion required before reopening the chain | n/a |
 
 ## self-driven macro phase reading
 
@@ -45,7 +45,7 @@ Purpose:
 |---|---|---|
 | `Macro 0` | docs / reports / validator discipline | self-driven through every package close |
 | `Macro 1` | semantics and invariant boundary | self-driven for source/typed IR/cut/PoseGraph wording; user gates only for final public commitments |
-| `Macro 3` | compile-ready minimal actualization | `P-MIR-01..04`、`P-POSE-03..04`、`P-PROJ-02..04`、`P-ENG-02..03`、`P-FSV1-01..03` closed; current work is final audit closure |
+| `Macro 3` | compile-ready minimal actualization | `P-MIR-01..04`、`P-POSE-03..04`、`P-PROJ-02..04`、`P-ENG-02..03`、`P-FSV1-01..03`、`P-FSV1-99` closed; no current promoted package |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker split can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | projection/backend/provider/developer surface | self-driven for bounded alpha evidence; final ABI/SDK/distribution remains user decision |
 | `Macro 8` | domain/application realization | source-first operational samples can be self-driven after language/runtime base |

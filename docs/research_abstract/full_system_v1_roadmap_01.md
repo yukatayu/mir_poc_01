@@ -27,7 +27,7 @@ Full System V1 は次の流れを source-first に揃える roadmap である。
 
 ## Package order
 
-`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor、`P-POSE-03` は bounded runtime PoseGraph floor、`P-POSE-04` は bounded pose save/devtools floor、`P-PROJ-02` は bounded projection IR floor、`P-PROJ-03` は bounded boundary-schema floor、`P-PROJ-04` は bounded same-binary local role-split floor、`P-ENG-02` は bounded provider-admission floor、`P-ENG-03` は bounded renderer pose backend floor、`P-FSV1-01` と `P-FSV1-02` は bounded source-first operational suite floor を 12-row まで actualize し、`P-FSV1-03` は bounded Full V1 release-check/report/viewer bundle lane を actualize した。現在の promoted package は `P-FSV1-99 final audit` である。
+`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor、`P-POSE-03` は bounded runtime PoseGraph floor、`P-POSE-04` は bounded pose save/devtools floor、`P-PROJ-02` は bounded projection IR floor、`P-PROJ-03` は bounded boundary-schema floor、`P-PROJ-04` は bounded same-binary local role-split floor、`P-ENG-02` は bounded provider-admission floor、`P-ENG-03` は bounded renderer pose backend floor、`P-FSV1-01` と `P-FSV1-02` は bounded source-first operational suite floor を 12-row まで actualize し、`P-FSV1-03` は bounded Full V1 release-check/report/viewer bundle lane を actualize した。`P-FSV1-99` は final validation / docs-report cleanup / claim-non-claim audit でその chain を close した。現在の promoted package はない。
 
 大きな順序は次の通り。
 
