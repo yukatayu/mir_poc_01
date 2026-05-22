@@ -125,6 +125,9 @@ python3 scripts/validate_docs.py
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 python3 scripts/product_alpha1_release_check.py --format json check-all --out "$(mktemp -d /tmp/mirrorea-alpha1-release-XXXXXX)"
 python3 scripts/operational_product_samples.py check-all --format json
+git add <package files>
+git commit --no-gpg-sign -m "P-POSE-04: pose save/devtools"
+git push
 ```
 
 ## Evidence / outputs / test results
@@ -219,8 +222,9 @@ Updated to mark `samples/full-system-v1/avatar-pose/` as evidence-closed bounded
 
 ## Commit / push status
 
-- Pending until package-close commit and push are executed.
+- Committed as `db0f0920` with message `P-POSE-04: pose save/devtools`.
+- Pushed to `main`.
 
 ## Sub-agent session close status
 
-- Reviewer `Pauli` (`019e4de3-1da7-75e2-91ce-a762b1f8aeaf`) completed and remains available until explicit close after commit/push.
+- Reviewer `Pauli` (`019e4de3-1da7-75e2-91ce-a762b1f8aeaf`) completed, final recheck reported no remaining findings, and the session was explicitly closed after push.
