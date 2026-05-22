@@ -1,0 +1,13 @@
+module FullSystemV1.WasmInventoryPositive
+
+capability ExecuteWasmAdapter
+
+effect run_wasm_adapter(value: Int64) {
+  requires ExecuteWasmAdapter
+  output receipt: Text
+  failure WasmAdapterUnavailable
+}
+
+transition run_preview at ClientView requires ExecuteWasmAdapter {
+  receipt <- perform run_wasm_adapter(5) via wasm_adapter
+}

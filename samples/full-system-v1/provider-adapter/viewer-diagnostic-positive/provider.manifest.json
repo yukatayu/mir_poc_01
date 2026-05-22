@@ -1,0 +1,40 @@
+{
+  "schema_version": "full-system-v1-provider-manifest-v0",
+  "provider_id": "viewer-diagnostic-exporter",
+  "provider_kind": "viewer-diagnostic-exporter",
+  "target_id": "diagnostic-adapter",
+  "input_schema": "diagnostic_export_request",
+  "output_schema": "diagnostic_export_receipt",
+  "effect_row": ["export_preview"],
+  "failure_row": ["DiagnosticExporterUnavailable"],
+  "required_capabilities": ["ExportRedactedDiagnostics"],
+  "authority_policy": {
+    "semantic_authority_owner": "mir_mirrorea",
+    "provider_may_grant_authority": false,
+    "provider_may_mutate_world_state": false
+  },
+  "resource_limits": {
+    "max_memory_mb": 32,
+    "max_cpu_ms": 10,
+    "semantic_state_owner": "mir_mirrorea",
+    "provider_handles_are_nonsemantic": true
+  },
+  "sandbox_policy": {
+    "sandbox_required": false,
+    "current_status": "inventory_only"
+  },
+  "observation_policy": {
+    "provider_receives_redacted_observation_only": true,
+    "retention_owner": "mir_mirrorea"
+  },
+  "redaction_policy": {
+    "provider_may_emit_unredacted_debug": false,
+    "redaction_label_required": true
+  },
+  "retention_policy": "adapter_local_debug",
+  "packet_boundary": null,
+  "ffi_boundary": "ffi.diagnostic.export_preview",
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "Replayable"
+}

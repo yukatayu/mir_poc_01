@@ -1,0 +1,13 @@
+module FullSystemV1.NativeDisabledNegative
+
+capability InvokeNativeBridge
+
+effect call_native_bridge(value: Int64) {
+  requires InvokeNativeBridge
+  output receipt: Text
+  failure NativeBridgeUnavailable
+}
+
+transition bridge_preview at ClientView requires InvokeNativeBridge {
+  receipt <- perform call_native_bridge(7) via native_bridge
+}

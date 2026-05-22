@@ -1154,6 +1154,32 @@ impl Interpreter {
                 self.record_event(trace_index, "handoff", format!("handoff via {witness_ref}"));
                 Ok(None)
             }
+            _ if matches!(
+                boundary_ref,
+                "diagnostic_export" | "native_bridge" | "wasm_adapter"
+            ) =>
+            {
+                self.record_event(
+                    trace_index,
+                    "provider_boundary",
+                    format!("{effect_name} via {boundary_ref}"),
+                );
+                match call.output_type.as_ref() {
+                    None => Ok(None),
+                    Some(TypedType::Text) => {
+                        Ok(Some(RuntimeValue::Text(format!("{boundary_ref}#receipt"))))
+                    }
+                    Some(other) => Err(RuntimeError {
+                        code: "unsupported_provider_boundary_output".to_string(),
+                        message: format!(
+                            "provider boundary `{boundary_ref}` currently admits only Text outputs, found `{}`",
+                            other.display_name()
+                        ),
+                        module_path: module_path.to_string(),
+                        function_id: function_name.to_string(),
+                    }),
+                }
+            }
             _ => Err(RuntimeError {
                 code: "unsupported_effect_runtime".to_string(),
                 message: format!(

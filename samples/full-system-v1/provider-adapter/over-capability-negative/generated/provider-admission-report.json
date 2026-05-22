@@ -1,0 +1,31 @@
+{
+  "surface_kind": "full_system_v1_provider_admission_report",
+  "projection_id": "over-capability-negative",
+  "provider_id": "viewer-diagnostic-exporter-overreach",
+  "provider_kind": "viewer-diagnostic-exporter",
+  "target_id": "diagnostic-adapter",
+  "target_provider_policy": "provider_inventory_only",
+  "terminal_outcome": "rejected",
+  "execution_admitted": false,
+  "matched_packet_schema_refs": [],
+  "matched_ffi_schema_refs": [],
+  "diagnostic_codes": [
+    "provider_over_capability"
+  ],
+  "rejected_rows": [
+    "viewer-diagnostic-exporter-overreach:provider_over_capability"
+  ],
+  "residual_obligation_codes": [
+    "packet_ffi_transport_semantics_deferred",
+    "docker_process_carrier_deferred"
+  ],
+  "local_split": {
+    "accepted": true,
+    "launch_mode": "same_binary_local_role_wrapper",
+    "target_execution_kinds": {
+      "world-server": "passive_endpoint",
+      "world-client": "authoritative_runtime",
+      "diagnostic-adapter": "passive_endpoint"
+    }
+  }
+}

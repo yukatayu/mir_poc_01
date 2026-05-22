@@ -33,6 +33,13 @@ fn server_client_sample_path(relative_path: &str) -> PathBuf {
         .join(relative_path)
 }
 
+fn provider_sample_path(root: &str, relative_path: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/full-system-v1/provider-adapter")
+        .join(root)
+        .join(relative_path)
+}
+
 fn run_cli(args: &[&str]) -> Output {
     Command::new(cli_bin())
         .args(args)
@@ -367,4 +374,101 @@ fn run_full_v1_split_rejects_non_admitted_entry_override() {
         value["rejected_rows"],
         serde_json::json!(["world-client:entry_transition_not_admitted"])
     );
+}
+
+#[test]
+fn admit_provider_v1_reports_inventory_admission() {
+    let source = provider_sample_path(
+        "viewer-diagnostic-positive",
+        "main/src/viewer-diagnostic-positive.mir",
+    );
+    let request = provider_sample_path("viewer-diagnostic-positive", "projection.request.json");
+    let provider = provider_sample_path("viewer-diagnostic-positive", "provider.manifest.json");
+
+    let output = run_cli(&[
+        "admit-provider-v1",
+        source.to_str().expect("source should be utf-8"),
+        "--request",
+        request.to_str().expect("request should be utf-8"),
+        "--provider",
+        provider.to_str().expect("provider should be utf-8"),
+        "--input",
+        "0",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(output.status.success(), "{value:?}");
+    assert_eq!(
+        value["surface_kind"],
+        "full_system_v1_provider_admission_report"
+    );
+    assert_eq!(value["accepted"], true);
+    assert_eq!(value["provider_id"], "viewer-diagnostic-exporter");
+    assert_eq!(value["terminal_outcome"], "inventory_admitted");
+    assert_eq!(value["execution_admitted"], false);
+    assert_eq!(value["target_id"], "diagnostic-adapter");
+    assert_eq!(value["target_provider_policy"], "provider_inventory_only");
+}
+
+#[test]
+fn admit_provider_v1_reports_native_disabled_policy() {
+    let source = provider_sample_path(
+        "native-disabled-negative",
+        "main/src/native-disabled-negative.mir",
+    );
+    let request = provider_sample_path("native-disabled-negative", "projection.request.json");
+    let provider = provider_sample_path("native-disabled-negative", "provider.manifest.json");
+
+    let output = run_cli(&[
+        "admit-provider-v1",
+        source.to_str().expect("source should be utf-8"),
+        "--request",
+        request.to_str().expect("request should be utf-8"),
+        "--provider",
+        provider.to_str().expect("provider should be utf-8"),
+        "--input",
+        "0",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(!output.status.success());
+    assert_eq!(value["accepted"], false);
+    assert_eq!(value["terminal_outcome"], "native_execution_disabled");
+    assert_eq!(
+        value["diagnostics"][0]["code"],
+        "native_execution_disabled_by_default"
+    );
+}
+
+#[test]
+fn admit_provider_v1_rejects_over_capability_manifest() {
+    let source = provider_sample_path(
+        "over-capability-negative",
+        "main/src/over-capability-negative.mir",
+    );
+    let request = provider_sample_path("over-capability-negative", "projection.request.json");
+    let provider = provider_sample_path("over-capability-negative", "provider.manifest.json");
+
+    let output = run_cli(&[
+        "admit-provider-v1",
+        source.to_str().expect("source should be utf-8"),
+        "--request",
+        request.to_str().expect("request should be utf-8"),
+        "--provider",
+        provider.to_str().expect("provider should be utf-8"),
+        "--input",
+        "0",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(!output.status.success());
+    assert_eq!(value["accepted"], false);
+    assert_eq!(value["terminal_outcome"], "rejected");
+    assert_eq!(value["diagnostics"][0]["code"], "provider_over_capability");
 }

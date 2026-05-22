@@ -1,0 +1,31 @@
+{
+  "surface_kind": "full_system_v1_provider_admission_report",
+  "projection_id": "native-disabled-negative",
+  "provider_id": "native-library-bridge",
+  "provider_kind": "native-library-bridge",
+  "target_id": "native-adapter",
+  "target_provider_policy": "native_disabled",
+  "terminal_outcome": "native_execution_disabled",
+  "execution_admitted": false,
+  "matched_packet_schema_refs": [],
+  "matched_ffi_schema_refs": [],
+  "diagnostic_codes": [
+    "native_execution_disabled_by_default"
+  ],
+  "rejected_rows": [
+    "native-library-bridge:native_execution_disabled_by_default"
+  ],
+  "residual_obligation_codes": [
+    "packet_ffi_transport_semantics_deferred",
+    "docker_process_carrier_deferred"
+  ],
+  "local_split": {
+    "accepted": true,
+    "launch_mode": "same_binary_local_role_wrapper",
+    "target_execution_kinds": {
+      "world-server": "passive_endpoint",
+      "world-client": "authoritative_runtime",
+      "native-adapter": "passive_endpoint"
+    }
+  }
+}

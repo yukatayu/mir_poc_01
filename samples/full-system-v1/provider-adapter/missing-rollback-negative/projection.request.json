@@ -1,0 +1,58 @@
+{
+  "schema_version": "full-system-v1-projection-request-v0",
+  "projection_id": "missing-rollback-negative",
+  "targets": [
+    {
+      "target_id": "world-server",
+      "role": "server",
+      "place_refs": [],
+      "entry_transitions": [],
+      "observation_policy": "authoritative_world_state",
+      "redaction_policy": "world_private",
+      "retention_policy": "session_authority_log",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": true,
+      "prediction_allowed": false
+    },
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "place_refs": ["ClientView"],
+      "entry_transitions": ["render_preview"],
+      "observation_policy": "observer_safe_projection",
+      "redaction_policy": "observer_safe",
+      "retention_policy": "client_ephemeral",
+      "provider_policy": "no_provider_calls",
+      "save_load_authority": false,
+      "prediction_allowed": true
+    },
+    {
+      "target_id": "diagnostic-adapter",
+      "role": "adapter",
+      "place_refs": [],
+      "entry_transitions": [],
+      "observation_policy": "adapter_request_reply",
+      "redaction_policy": "adapter_local",
+      "retention_policy": "adapter_local_debug",
+      "provider_policy": "provider_inventory_only",
+      "save_load_authority": false,
+      "prediction_allowed": false
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_ref": "diagnostic_export",
+      "boundary_kind": "ffi",
+      "effect_names": ["export_preview"],
+      "from_target": "world-client",
+      "to_target": "diagnostic-adapter",
+      "authority": "observer_safe_export",
+      "required_witnesses": [],
+      "packet_schema_ref": null,
+      "ffi_schema_ref": "ffi.diagnostic.export_preview",
+      "rollback_cut_compatible": true,
+      "replay_compatible": true,
+      "save_load_obligation": "observer_projection_only"
+    }
+  ]
+}

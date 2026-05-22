@@ -1,0 +1,13 @@
+module FullSystemV1.ViewerDiagnosticPositive
+
+capability ExportRedactedDiagnostics
+
+effect export_preview(value: Int64) {
+  requires ExportRedactedDiagnostics
+  output receipt: Text
+  failure DiagnosticExporterUnavailable
+}
+
+transition render_preview at ClientView requires ExportRedactedDiagnostics {
+  receipt <- perform export_preview(41) via diagnostic_export
+}

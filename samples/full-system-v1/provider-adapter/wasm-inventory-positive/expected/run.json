@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "provider_id": "wasm-sandbox",
+  "provider_kind": "wasm-sandbox",
+  "target_id": "wasm-adapter",
+  "target_provider_policy": "wasm_inventory_only",
+  "terminal_outcome": "wasm_inventory_only",
+  "execution_admitted": false,
+  "diagnostic_codes": ["wasm_inventory_only"],
+  "rejected_rows": [],
+  "matched_packet_schema_refs": [],
+  "matched_ffi_schema_refs": ["ffi.wasm.run_adapter"],
+  "local_split_launched_targets": ["world-client"],
+  "local_split_passive_targets": ["wasm-adapter", "world-server"],
+  "residual_obligation_codes": [
+    "docker_process_carrier_deferred",
+    "packet_ffi_transport_semantics_deferred",
+    "sandboxed_wasm_execution_deferred"
+  ]
+}

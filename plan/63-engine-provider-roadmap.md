@@ -6,20 +6,24 @@ This document is repository memory for `specs/38-engine-provider-admission.md`.
 
 ## current state
 
-Current engine/provider state is inventory-only:
+Current engine/provider state is split by role:
 
-- provider contract JSON rows.
-- native execution disabled by default.
-- WASM inventory-only.
-- rollback/replay/cut policy inventory.
-
-No provider admission runtime is implemented.
+- `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence with provider contract JSON rows, native execution disabled by default, WASM inventory-only, and rollback/replay/cut policy inventory.
+- `samples/full-system-v1/provider-adapter/` now actualizes bounded provider admission through `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `scripts/provider_admission_samples.py`, and `mirrorea-alpha admit-provider-v1`.
+- Current bounded accepted rows are:
+  - viewer-diagnostic inventory admission
+  - WASM inventory-only admission
+- Current bounded rejection rows are:
+  - provider capability overreach
+  - missing rollback/replay/cut policy
+  - native execution requested while default-disabled
+- Arbitrary native/WASM execution is still not admitted.
 
 ## package sequence
 
 | Package | Goal | Close condition |
 |---|---|---|
-| `P-ENG-02` | provider admission MVP | accepted bounded provider row, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only or sandbox-accepted evidence execute through runtime admission |
+| `P-ENG-02` | provider admission MVP | closed: accepted bounded provider rows, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only evidence now execute through runtime admission |
 | `P-ENG-03` | renderer pose backend demo | renderer receives PoseGraph snapshot without owning world state |
 | later | sandboxed WASM candidate | explicit sandbox, effect/failure/capability/observation checks |
 | later | bounded native provider candidate | explicit native policy, resource limits, audit, revocation |
@@ -27,11 +31,13 @@ No provider admission runtime is implemented.
 
 ## validation target
 
-Planned validation:
+Current validation:
 
 ```bash
 cargo test -p mir-runtime --test provider_admission -- --nocapture
+python3 -m unittest scripts.tests.test_provider_admission_samples
 python3 scripts/provider_admission_samples.py check-all --format json
+cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 ```
 
 Existing inventory anchor:

@@ -1,0 +1,19 @@
+{
+  "accepted": false,
+  "provider_id": "viewer-diagnostic-exporter-missing-rollback",
+  "provider_kind": "viewer-diagnostic-exporter",
+  "target_id": "diagnostic-adapter",
+  "target_provider_policy": "provider_inventory_only",
+  "terminal_outcome": "rejected",
+  "execution_admitted": false,
+  "diagnostic_codes": ["missing_rollback_replay_cut_policy"],
+  "rejected_rows": ["viewer-diagnostic-exporter-missing-rollback:missing_rollback_replay_cut_policy"],
+  "matched_packet_schema_refs": [],
+  "matched_ffi_schema_refs": [],
+  "local_split_launched_targets": ["world-client"],
+  "local_split_passive_targets": ["diagnostic-adapter", "world-server"],
+  "residual_obligation_codes": [
+    "docker_process_carrier_deferred",
+    "packet_ffi_transport_semantics_deferred"
+  ]
+}

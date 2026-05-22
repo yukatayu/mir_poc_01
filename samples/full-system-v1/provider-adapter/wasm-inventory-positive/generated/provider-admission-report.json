@@ -1,0 +1,32 @@
+{
+  "surface_kind": "full_system_v1_provider_admission_report",
+  "projection_id": "wasm-inventory-positive",
+  "provider_id": "wasm-sandbox",
+  "provider_kind": "wasm-sandbox",
+  "target_id": "wasm-adapter",
+  "target_provider_policy": "wasm_inventory_only",
+  "terminal_outcome": "wasm_inventory_only",
+  "execution_admitted": false,
+  "matched_packet_schema_refs": [],
+  "matched_ffi_schema_refs": [
+    "ffi.wasm.run_adapter"
+  ],
+  "diagnostic_codes": [
+    "wasm_inventory_only"
+  ],
+  "rejected_rows": [],
+  "residual_obligation_codes": [
+    "packet_ffi_transport_semantics_deferred",
+    "docker_process_carrier_deferred",
+    "sandboxed_wasm_execution_deferred"
+  ],
+  "local_split": {
+    "accepted": true,
+    "launch_mode": "same_binary_local_role_wrapper",
+    "target_execution_kinds": {
+      "world-server": "passive_endpoint",
+      "world-client": "authoritative_runtime",
+      "wasm-adapter": "passive_endpoint"
+    }
+  }
+}

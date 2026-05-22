@@ -8,13 +8,13 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-PROJ-04`:
+Current repo state after `P-ENG-02`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
 - Mir computational core has `first-floor-evidence`.
 - PoseGraph has bounded source-first runtime/save-load/devtools `first-floor-evidence`, while `samples/product-alpha1/posegraph/` remains helper-backed comparison evidence.
-- Projection/backend now has bounded source-first `first-floor-evidence`, while engine/provider remains inventory-only.
+- Projection/backend now has bounded source-first `first-floor-evidence`, and engine/provider now has bounded provider-admission `first-floor-evidence` while `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence.
 - Full System V1 source-first parser floor is `actualized` with 2 positive rows, 8 negative rows, path-aware unresolved import diagnostics, and span-bearing expression AST output.
 - Full System V1 source-first typed checker floor is `actualized` with crate-local typed IR lowering, explicit accepted/residual obligations, imported-module semantic closure, ambiguous import rejection, and a 3-positive / 9-negative sample matrix through `scripts/full_system_v1_samples.py`.
 - Full System V1 pure interpreter floor is `actualized` through the same source-first runtime lane.
@@ -22,7 +22,8 @@ Current repo state after `P-PROJ-04`:
 - Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 5 accepted rows, 1 violation-export row, 3 runtime-rejection rows, bounded save/load admissibility evidence, and observer-safe PoseGraph/devtools export.
 - Full System V1 bounded projection IR plus boundary-schema floor is `actualized` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, and `scripts/projection_v1_samples.py` with 1 accepted row, 3 rejection rows, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure preservation, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, client-write authority rejection, unassigned-place rejection, save/load ownership rejection, and `mirrorea-alpha project-full-v1`.
 - Full System V1 bounded same-binary local role-split floor is `actualized` through `crates/mir-runtime::full_system_v1_local_split`, `samples/full-system-v1/server-client/`, `scripts/projection_v1_samples.py`, and `mirrorea-alpha run-full-v1-split` with 1 accepted row, 1 undeclared-entry rejection row, and generated local-split inventory reports.
-- Provider packages remain later.
+- Full System V1 bounded provider-admission floor is `actualized` through `crates/mir-runtime::full_system_v1_provider_admission`, `samples/full-system-v1/provider-adapter/`, `scripts/provider_admission_samples.py`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha admit-provider-v1` with 2 accepted rows, 3 rejection rows, matched packet/FFI schema preservation, capability/authority/redaction/retention checks, rollback policy rejection, disabled-native preservation, and explicit WASM inventory-only admission.
+- Renderer pose backend and broader source-first operational families remain later.
 
 ## package order
 
@@ -82,7 +83,9 @@ samples/full-system-v1/
 
 `P-PROJ-04` added `samples/full-system-v1/server-client/`, `matrix.json`, generated `local-split-report.json`, `crates/mir-runtime::full_system_v1_local_split`, the `mir_full_system_v1_local_split` example, `mirrorea-alpha run-full-v1-split`, and widened `scripts/projection_v1_samples.py` so the same helper family now validates 1 accepted same-binary role-run row and 1 undeclared-entry rejection row while preserving the non-claims around final packet/FFI transport semantics, final server/client binaries, Docker/deployment planner completion, and provider admission.
 
-The wider root remains non-workflow-ready until later packages add executable role-run evidence, provider admission, and the remaining source-first sample families.
+`P-ENG-02` added `samples/full-system-v1/provider-adapter/`, `matrix.json`, generated `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `mirrorea-alpha admit-provider-v1`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/provider_admission_samples.py` so the same source-first line now validates one viewer-diagnostic inventory admission row, one WASM inventory-only admission row, one over-capability rejection row, one missing rollback-policy rejection row, and one native-disabled rejection row while preserving the non-claims around arbitrary native/WASM execution, final provider ABI, and renderer-owned world semantics.
+
+The wider root remains non-workflow-ready until later packages add renderer pose backend evidence, the remaining source-first operational families, and the Full System V1 release check.
 
 ## validation direction
 
@@ -101,12 +104,12 @@ python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
+python3 scripts/provider_admission_samples.py check-all --format json
 ```
 
 Planned future anchors:
 
 ```bash
-python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 ```
 
@@ -117,5 +120,5 @@ Do not add these planned commands to mandatory validation floors until their scr
 - Product Alpha-1 remains alpha, not final product.
 - Mir computational current rows remain first-floor evidence, not Rust-level language completion.
 - `samples/product-alpha1/projection/` remains inventory-only comparison evidence while `samples/full-system-v1/projection/` remains bounded source-first projection IR plus boundary-schema evidence.
-- Engine/provider inventory remains inventory until provider admission rows execute.
+- `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence while `samples/full-system-v1/provider-adapter/` now carries bounded provider-admission evidence.
 - LLVM/native codegen is later than typed IR, projection IR, and boundary preservation.

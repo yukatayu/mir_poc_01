@@ -1,0 +1,67 @@
+{
+  "schema_version": "full-system-v1-provider-admission-matrix-v0",
+  "family": "full_system_v1_provider_admission",
+  "current_status": "executable",
+  "rows": [
+    {
+      "sample_id": "eng-02-viewer-diagnostic-positive",
+      "root_name": "viewer-diagnostic-positive",
+      "stage": "P-ENG-02",
+      "current_status": "executable",
+      "source": "viewer-diagnostic-positive/main/src/viewer-diagnostic-positive.mir",
+      "request": "viewer-diagnostic-positive/projection.request.json",
+      "provider_manifest": "viewer-diagnostic-positive/provider.manifest.json",
+      "expected": "viewer-diagnostic-positive/expected/run.json",
+      "generated": "viewer-diagnostic-positive/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-02-over-capability-negative",
+      "root_name": "over-capability-negative",
+      "stage": "P-ENG-02",
+      "current_status": "executable",
+      "source": "over-capability-negative/main/src/over-capability-negative.mir",
+      "request": "over-capability-negative/projection.request.json",
+      "provider_manifest": "over-capability-negative/provider.manifest.json",
+      "expected": "over-capability-negative/expected/run.json",
+      "generated": "over-capability-negative/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-02-missing-rollback-negative",
+      "root_name": "missing-rollback-negative",
+      "stage": "P-ENG-02",
+      "current_status": "executable",
+      "source": "missing-rollback-negative/main/src/missing-rollback-negative.mir",
+      "request": "missing-rollback-negative/projection.request.json",
+      "provider_manifest": "missing-rollback-negative/provider.manifest.json",
+      "expected": "missing-rollback-negative/expected/run.json",
+      "generated": "missing-rollback-negative/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-02-native-disabled-negative",
+      "root_name": "native-disabled-negative",
+      "stage": "P-ENG-02",
+      "current_status": "executable",
+      "source": "native-disabled-negative/main/src/native-disabled-negative.mir",
+      "request": "native-disabled-negative/projection.request.json",
+      "provider_manifest": "native-disabled-negative/provider.manifest.json",
+      "expected": "native-disabled-negative/expected/run.json",
+      "generated": "native-disabled-negative/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-02-wasm-inventory-positive",
+      "root_name": "wasm-inventory-positive",
+      "stage": "P-ENG-02",
+      "current_status": "executable",
+      "source": "wasm-inventory-positive/main/src/wasm-inventory-positive.mir",
+      "request": "wasm-inventory-positive/projection.request.json",
+      "provider_manifest": "wasm-inventory-positive/provider.manifest.json",
+      "expected": "wasm-inventory-positive/expected/run.json",
+      "generated": "wasm-inventory-positive/generated/provider-admission-report.json",
+      "input": 0
+    }
+  ]
+}

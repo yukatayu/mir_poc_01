@@ -21,6 +21,7 @@ pub mod current_l2;
 pub mod current_l2_cli;
 pub mod full_system_v1_local_split;
 pub mod full_system_v1_projection;
+pub mod full_system_v1_provider_admission;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;
 pub mod posegraph_runtime;
