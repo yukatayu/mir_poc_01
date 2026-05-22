@@ -1,0 +1,23 @@
+{
+  "accepted": true,
+  "terminal_outcome": "Accepted",
+  "package_id": "package#pose-01-avatar-head-transform",
+  "module_id": "AvatarPose.AvatarHeadTransformPositive",
+  "transition_id": "avatar_head",
+  "violation_kind": null,
+  "rejection_code": null,
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "node_entities": [
+    "avatar#017/head"
+  ],
+  "node_pose_versions": {
+    "avatar#017/head": 17
+  },
+  "anchor_bindings": [],
+  "anchor_switch_sequences": [],
+  "anchor_switch_required_capabilities": [],
+  "fallback_active_anchors": [],
+  "fallback_chain_lengths": [],
+  "reacquire_required": [],
+  "observer_safe_summary": "accepted posegraph runtime AvatarPose.AvatarHeadTransformPositive.avatar_head"
+}

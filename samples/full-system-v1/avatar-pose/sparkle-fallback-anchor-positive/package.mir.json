@@ -1,0 +1,33 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#pose-03-sparkle-fallback-anchor",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.SparkleFallbackAnchorPositive",
+  "transition_id": "sparkle_anchor",
+  "runtime_input": {
+    "posegraph": {
+      "anchored_pose": {
+        "entity_ref": "effect#sparkle-017",
+        "anchor_ref": "anchor#avatar-017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "stable"
+      },
+      "fallback_chain": [
+        {
+          "anchor_ref": "anchor#avatar-017/shoulder",
+          "reason": "sparkle_occlusion_fallback"
+        },
+        {
+          "anchor_ref": "anchor#world/origin",
+          "reason": "world_origin_last_resort"
+        }
+      ],
+      "current_membership_epoch": 3,
+      "fresh_anchor_witness": "anchor_witness#sparkle-fresh",
+      "current_anchor_witness": "anchor_witness#sparkle-fresh"
+    }
+  }
+}

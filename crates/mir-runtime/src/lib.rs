@@ -21,6 +21,7 @@ pub mod current_l2;
 pub mod current_l2_cli;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;
+pub mod posegraph_runtime;
 pub mod practical_alpha05_host_io;
 pub mod practical_alpha05_session;
 pub mod practical_alpha08_hotplug_session;

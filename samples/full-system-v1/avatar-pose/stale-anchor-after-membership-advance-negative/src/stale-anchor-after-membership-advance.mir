@@ -1,0 +1,6 @@
+module AvatarPose.StaleAnchorAfterMembershipAdvance
+
+transition reject_stale_anchor at Place[AvatarSpace] {
+  binding <- observe anchored_object via posegraph
+  require binding.membership_epoch == current_membership_epoch
+}

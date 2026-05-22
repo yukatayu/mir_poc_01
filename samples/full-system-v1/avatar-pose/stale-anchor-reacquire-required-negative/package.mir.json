@@ -1,0 +1,26 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#pose-09-stale-anchor-reacquire-required",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.StaleAnchorReacquireRequired",
+  "transition_id": "explicit_reacquire",
+  "runtime_input": {
+    "posegraph": {
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/shoulder",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "fallback_only"
+      },
+      "fallback_chain": [
+        {
+          "anchor_ref": "anchor#avatar-017/shoulder",
+          "reason": "head_lost_tracking"
+        }
+      ]
+    }
+  }
+}

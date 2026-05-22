@@ -1,0 +1,37 @@
+{
+  "accepted": false,
+  "terminal_outcome": "RuntimeRejection",
+  "package_id": "package#pose-09-stale-anchor-reacquire-required",
+  "module_id": "AvatarPose.StaleAnchorReacquireRequired",
+  "transition_id": "explicit_reacquire",
+  "violation_kind": null,
+  "rejection_code": "reacquire_required",
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "node_entities": [
+    "object#hat-017"
+  ],
+  "node_pose_versions": {
+    "object#hat-017": 17
+  },
+  "anchor_bindings": [
+    {
+      "entity_ref": "object#hat-017",
+      "anchor_ref": "anchor#avatar-017/shoulder",
+      "state": "fallback_only",
+      "membership_epoch": 3,
+      "owner_epoch": 9
+    }
+  ],
+  "anchor_switch_sequences": [],
+  "anchor_switch_required_capabilities": [],
+  "fallback_active_anchors": [
+    "anchor#avatar-017/shoulder"
+  ],
+  "fallback_chain_lengths": [
+    1
+  ],
+  "reacquire_required": [
+    "object#hat-017"
+  ],
+  "observer_safe_summary": "posegraph runtime rejection: reacquire_required"
+}

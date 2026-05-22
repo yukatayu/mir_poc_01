@@ -1,0 +1,7 @@
+module AvatarPose.AnchoredObjectPositive
+
+transition anchored_object at Place[AvatarSpace] {
+  target <- observe avatar_head via posegraph
+  hat <- observe hat_attachment via posegraph
+  ensure hat.snapshot_ref == target.snapshot_ref
+}

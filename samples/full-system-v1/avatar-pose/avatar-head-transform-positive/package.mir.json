@@ -1,0 +1,17 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#pose-01-avatar-head-transform",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.AvatarHeadTransformPositive",
+  "transition_id": "avatar_head",
+  "runtime_input": {
+    "posegraph": {
+      "pose_snapshot_frontier": "snapshot#avatar-017",
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      }
+    }
+  }
+}

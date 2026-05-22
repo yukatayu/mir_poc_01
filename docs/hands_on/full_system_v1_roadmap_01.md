@@ -1,6 +1,6 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first four implementation packages.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first five implementation packages.
 
 It explains what is now executable at the source-first parser/checker/bounded-effectful-runtime floor and what still remains later.
 
@@ -13,21 +13,21 @@ It explains what is now executable at the source-first parser/checker/bounded-ef
 
 ## Current claim
 
-Full System V1 is now a roadmap boundary, not an implemented workflow.
+Full System V1 is now a roadmap boundary plus bounded first-floor source-first evidence. It is not yet a product workflow.
 
 The current repo has:
 
 - Product Alpha-1 bounded release-candidate workflow.
 - canonical operational product suite.
 - first-floor Mir computational evidence.
-- helper-backed PoseGraph evidence.
+- helper-backed PoseGraph comparison evidence plus bounded source-first PoseGraph runtime evidence.
 - projection/backend inventory.
 - engine/provider inventory.
 
 The next promoted package is:
 
 ```text
-P-POSE-03 runtime PoseGraph
+P-POSE-04 pose save/devtools
 ```
 
 ## What to verify now
@@ -45,7 +45,7 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the current runnable floor. They do not prove PoseGraph runtime, projection IR, server/client split, or provider admission.
+The Product Alpha and operational commands preserve the current runnable floor. They do not prove pose-aware save/load, projection IR, server/client split, or provider admission.
 
 ## Planned Full System V1 commands
 
@@ -56,12 +56,13 @@ python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
 cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
 cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
+cargo test -p mir-runtime --test posegraph_runtime -- --nocapture
+python3 scripts/posegraph_runtime_samples.py check-all --format json
 ```
 
 These are still future commands and must not be treated as current validation:
 
 ```bash
-python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release

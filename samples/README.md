@@ -34,8 +34,9 @@
   - `P-MIR-02` adds the first typed checker lane with 3 positive rows, 9 negative rows, `typed-ir-matrix.json`, `expected/check.json`, and explicit accepted/residual obligations
   - `P-MIR-03` adds the first pure interpreter lane with `runtime-matrix.json`, `expected/run.json`, `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`, `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`, and `python3 scripts/full_system_v1_samples.py check-all --format json`
   - `P-MIR-04` widens the same root to bounded transition/effect rows for host read/write, publish/observe, witness/handoff, and local atomic-cut negatives
-  - current executable scope is parser plus typed checker plus bounded effectful runtime evidence; it does not claim final effect grammar, distributed cut/save execution, or generated package artifact completion
-  - planned families still include world-core, membership-chat, sugoroku-world, posegraph, projection, server-client, and provider-adapter
+  - `P-POSE-03` actualizes `samples/full-system-v1/avatar-pose/` as the first bounded runtime PoseGraph lane with 8 executable rows, 1 planned save/load row, `matrix.json`, `expected/run.json`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `python3 scripts/posegraph_runtime_samples.py check-all --format json`
+  - current executable scope is parser plus typed checker plus bounded effectful runtime plus bounded PoseGraph runtime evidence; it does not claim final effect grammar, distributed cut/save execution, pose-aware save/load completion, or generated package artifact completion
+  - planned families still include world-core, membership-chat, sugoroku-world, projection, server-client, and provider-adapter
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `FS-07` local server/client role-run evidence needs a separate `samples/full-system-v1/server-client/` family or equivalent explicit role-run root
   - do not mark the whole root workflow-ready until later packages add typed IR, runtime bridges, and broader positive/negative evidence
 - planned future product-alpha1 semantic roots
@@ -172,17 +173,17 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 ## Full System V1 commands
 
-Current parser-floor command:
+Current Full System V1 commands:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py check-all --format json
+python3 scripts/posegraph_runtime_samples.py check-all --format json
 ```
 
 Remaining commands are roadmap targets only. They are not current validation commands until corresponding scripts and samples exist.
 
 ```bash
-python3 scripts/full_system_v1_samples.py check-all --format json
-python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release

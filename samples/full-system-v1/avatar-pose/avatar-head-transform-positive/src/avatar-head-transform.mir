@@ -1,0 +1,6 @@
+module AvatarPose.AvatarHeadTransformPositive
+
+transition avatar_head at Place[AvatarSpace] {
+  head <- observe avatar_head via posegraph
+  ensure head.pose_version == 17
+}

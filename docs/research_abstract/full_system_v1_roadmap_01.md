@@ -27,7 +27,7 @@ Full System V1 は次の流れを source-first に揃える roadmap である。
 
 ## Package order
 
-`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor を actualize した。次に進む package は `P-POSE-03 runtime PoseGraph` である。
+`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor、`P-POSE-03` は bounded runtime PoseGraph floor を actualize した。次に進む package は `P-POSE-04 pose save/devtools` である。
 
 大きな順序は次の通り。
 

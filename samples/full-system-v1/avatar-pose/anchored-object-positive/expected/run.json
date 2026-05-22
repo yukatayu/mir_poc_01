@@ -1,0 +1,33 @@
+{
+  "accepted": true,
+  "terminal_outcome": "Accepted",
+  "package_id": "package#pose-02-anchored-object",
+  "module_id": "AvatarPose.AnchoredObjectPositive",
+  "transition_id": "anchored_object",
+  "violation_kind": null,
+  "rejection_code": null,
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "node_entities": [
+    "avatar#017/head",
+    "object#hat-017"
+  ],
+  "node_pose_versions": {
+    "avatar#017/head": 17,
+    "object#hat-017": 17
+  },
+  "anchor_bindings": [
+    {
+      "entity_ref": "object#hat-017",
+      "anchor_ref": "anchor#avatar-017/head",
+      "state": "stable",
+      "membership_epoch": 3,
+      "owner_epoch": 9
+    }
+  ],
+  "anchor_switch_sequences": [],
+  "anchor_switch_required_capabilities": [],
+  "fallback_active_anchors": [],
+  "fallback_chain_lengths": [],
+  "reacquire_required": [],
+  "observer_safe_summary": "accepted posegraph runtime AvatarPose.AnchoredObjectPositive.anchored_object"
+}

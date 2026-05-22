@@ -1,0 +1,6 @@
+module AvatarPose.SparkleFallbackAnchorPositive
+
+transition sparkle_anchor at Place[AvatarSpace] {
+  sparkle <- observe sparkle_anchor via posegraph
+  ensure sparkle.state == stable
+}

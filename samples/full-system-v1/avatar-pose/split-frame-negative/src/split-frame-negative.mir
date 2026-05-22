@@ -1,0 +1,8 @@
+module AvatarPose.SplitFrameNegative
+
+transition split_frame_violation at Place[AvatarSpace] {
+  target <- observe avatar_head via posegraph
+  anchored <- observe hat_attachment via posegraph
+  require anchored.snapshot_ref == target.snapshot_ref
+  require anchored.pose_version == target.pose_version
+}

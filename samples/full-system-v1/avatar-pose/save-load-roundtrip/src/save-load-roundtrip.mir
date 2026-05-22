@@ -1,0 +1,6 @@
+module AvatarPose.SaveLoadRoundtrip
+
+transition pose_roundtrip at Place[AvatarSpace] {
+  save pose_snapshot_frontier
+  load pose_snapshot_frontier
+}

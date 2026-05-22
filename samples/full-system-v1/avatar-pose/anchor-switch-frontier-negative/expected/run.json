@@ -1,0 +1,25 @@
+{
+  "accepted": false,
+  "terminal_outcome": "RuntimeRejection",
+  "package_id": "package#pose-08-anchor-switch-frontier-negative",
+  "module_id": "AvatarPose.AnchorSwitchFrontierNegative",
+  "transition_id": "reject_anchor_switch",
+  "violation_kind": null,
+  "rejection_code": "anchor_switch_frontier_regression",
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "node_entities": [],
+  "node_pose_versions": {},
+  "anchor_bindings": [],
+  "anchor_switch_sequences": [
+    12,
+    11
+  ],
+  "anchor_switch_required_capabilities": [
+    "ObservePose",
+    "ObservePose"
+  ],
+  "fallback_active_anchors": [],
+  "fallback_chain_lengths": [],
+  "reacquire_required": [],
+  "observer_safe_summary": "posegraph runtime rejection: anchor_switch_frontier_regression"
+}

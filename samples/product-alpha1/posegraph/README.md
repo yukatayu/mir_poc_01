@@ -5,6 +5,7 @@ This root is the bounded Transform / PoseGraph helper evidence line for `P-POSE-
 ## Current Status
 
 - The root keeps the scaffold actualization from `P-POSE-01`.
+- `P-POSE-03` now actualizes the source-first runtime lane separately at `samples/full-system-v1/avatar-pose/`; this root remains the helper-backed alpha comparison floor.
 - `pose-04-no-split-frame-positive` is helper-executable and must return `accepted`.
 - `pose-05-split-frame-negative` is helper-executable and must return `violation_export`.
 - The remaining 7 rows stay `planned_only`.
@@ -25,6 +26,12 @@ python3 scripts/posegraph_samples.py run pose-05-split-frame-negative --format j
 
 These commands must show one accepted row, one violation row, and seven planned rows. They do not claim full PoseGraph runtime completion.
 
+For the source-first runtime PoseGraph lane, use:
+
+```bash
+python3 scripts/posegraph_runtime_samples.py check-all --format json
+```
+
 ## Rows
 
 - `pose-01-avatar-head-transform`
@@ -37,4 +44,4 @@ These commands must show one accepted row, one violation row, and seven planned 
 - `pose-08-anchor-switch-frontier-negative`
 - `pose-09-stale-anchor-reacquire-required`
 
-Representative `.mir` files are explanatory sketches only. `package.mir.json` for `pose-04` and `pose-05` is helper-only executable input, not final grammar and not direct product-alpha CLI input.
+Representative `.mir` files are explanatory sketches only. `package.mir.json` for `pose-04` and `pose-05` is helper-only executable input, not final grammar and not direct product-alpha CLI input. Source-first runtime PoseGraph execution lives under `samples/full-system-v1/avatar-pose/`.

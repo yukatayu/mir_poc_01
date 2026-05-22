@@ -1,0 +1,27 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#pose-02-anchored-object",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.AnchoredObjectPositive",
+  "transition_id": "anchored_object",
+  "runtime_input": {
+    "posegraph": {
+      "pose_snapshot_frontier": "snapshot#avatar-017",
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      },
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "stable"
+      },
+      "current_membership_epoch": 3
+    }
+  }
+}

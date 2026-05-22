@@ -1,0 +1,41 @@
+{
+  "accepted": true,
+  "terminal_outcome": "Accepted",
+  "package_id": "package#pose-04-no-split-frame-positive",
+  "module_id": "AvatarPose.NoSplitFramePositive",
+  "transition_id": "stable_frame",
+  "violation_kind": null,
+  "rejection_code": null,
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "node_entities": [
+    "avatar#017/head",
+    "object#hat-017"
+  ],
+  "node_pose_versions": {
+    "avatar#017/head": 17,
+    "object#hat-017": 17
+  },
+  "anchor_bindings": [
+    {
+      "entity_ref": "object#hat-017",
+      "anchor_ref": "anchor#avatar-017/head",
+      "state": "stable",
+      "membership_epoch": 3,
+      "owner_epoch": 9
+    }
+  ],
+  "anchor_switch_sequences": [
+    41
+  ],
+  "anchor_switch_required_capabilities": [
+    "ObservePose"
+  ],
+  "fallback_active_anchors": [
+    "anchor#avatar-017/head"
+  ],
+  "fallback_chain_lengths": [
+    2
+  ],
+  "reacquire_required": [],
+  "observer_safe_summary": "accepted posegraph runtime AvatarPose.NoSplitFramePositive.stable_frame"
+}

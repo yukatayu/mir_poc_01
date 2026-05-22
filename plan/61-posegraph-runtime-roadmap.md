@@ -6,13 +6,13 @@ This document is repository memory for `specs/37-posegraph-runtime-semantics.md`
 
 ## current state
 
-Current PoseGraph evidence is helper-backed:
+Current PoseGraph evidence is now split across two layers:
 
-- one same-client same-observation-snapshot accepted row.
-- one split-frame `violation_export` row.
-- seven planned rows.
+- `samples/product-alpha1/posegraph/` remains the helper-backed comparison floor with one same-client same-observation-snapshot accepted row, one split-frame `violation_export` row, and seven planned rows.
+- `samples/full-system-v1/avatar-pose/` is now the bounded source-first runtime floor with 8 executable rows and 1 planned save/load row.
+- `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `scripts/posegraph_runtime_samples.py check-all --format json` now prove Transform / PoseVersion / AnchorBinding / AnchorSwitch / fallback state / reacquire requirement runtime behavior.
 
-This is useful first-floor evidence. It is not runtime-integrated PoseGraph completion.
+This is useful first-floor evidence. It is not pose-aware save/load completion, devtools panel completion, or renderer integration.
 
 ## package sequence
 
@@ -38,10 +38,11 @@ Runtime rows should cover:
 
 ## validation target
 
-Planned validation:
+Current validation:
 
 ```bash
 cargo test -p mir-runtime --test posegraph_runtime -- --nocapture
+python3 -m unittest scripts.tests.test_posegraph_runtime_samples
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 ```
 
