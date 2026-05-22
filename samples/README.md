@@ -40,8 +40,8 @@
   - `P-ENG-02` actualizes `samples/full-system-v1/provider-adapter/` as the bounded provider-admission lane with 2 accepted rows, 3 rejection rows, generated `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `mirrorea-alpha admit-provider-v1`, and `python3 scripts/provider_admission_samples.py check-all --format json`
   - `P-ENG-03` widens that same root with `renderer-pose-matrix.json`, generated `renderer-pose-backend-report.json`, `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `mirrorea-alpha render-pose-backend-v1`, and `python3 scripts/renderer_pose_backend_samples.py check-all --format json` so one accepted row and two blocked rows prove renderer receipt of a matching binding-context plus snapshot-frontier delivery without widening semantic ownership or claiming attested package provenance
   - `P-FSV1-01` and `P-FSV1-02` actualize `samples/full-system-v1/world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` as bounded source-first operational roots with 12 executable rows, generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` / `missing_live_witness` negatives, bounded WorldCore observer-safe bootstrap evidence, bounded MembershipChat Mir-owned room-message transform evidence, bounded Sugoroku roll/publish/witness/handoff/local-cut evidence, bounded PortalWorldLink resolve/admit/fallback evidence, bounded TwoShardHardBoundary offer/prepare/commit evidence plus observer-visible old-owner/stale-config reject-event narration around the enforced `missing_live_witness` negative, and bounded observer-only GradientObservation view/hint evidence plus observer-visible write-reject/stale-view-drop narration around the enforced freshness `contract_require_failed` negative
-  - current executable scope is parser plus typed checker plus bounded effectful runtime plus bounded PoseGraph runtime/save-load/devtools evidence plus bounded projection IR/boundary-schema evidence plus bounded local role-split evidence plus bounded provider admission plus bounded source-first WorldCore/MembershipChat/Sugoroku evidence; it does not claim final effect grammar, final packet/FFI transport semantics, final server/client binary split, final provider ABI, final devtools family completion, or generated package artifact completion
-  - these six roots remain evidence-closed rather than workflow-ready; `P-FSV1-03` release-check closure remains later
+  - current executable scope is parser plus typed checker plus bounded effectful runtime plus bounded PoseGraph runtime/save-load/devtools evidence plus bounded projection IR/boundary-schema evidence plus bounded local role-split evidence plus bounded provider admission plus bounded source-first WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient evidence plus the bounded line-level release-check/report/viewer bundle lane; it does not claim final effect grammar, final packet/FFI transport semantics, final server/client binary split, final provider ABI, final public viewer/devtools family completion, or generated package artifact completion
+  - these roots remain evidence-closed rather than individually workflow-ready; `P-FSV1-03` now adds a line-level bounded release-check workflow via `scripts/full_system_v1_release_check.py`, and final audit remains later
   - planned `gradient-observation/` is the Full System V1 source-first counterpart to the Product Alpha operational runtime root `two-shard-gradient-observation/`
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `samples/full-system-v1/server-client/` is the separate `FS-07` local server/client role-run root
   - `samples/full-system-v1/provider-adapter/` is the separate `FS-08` bounded provider-admission plus renderer-pose-backend root
@@ -185,19 +185,23 @@ Current Full System V1 commands:
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py operational-matrix --format json
+python3 scripts/full_system_v1_samples.py check-operational-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/renderer_pose_backend_samples.py check-all --format json
+python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
+cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
+cargo test -p mir-runtime --test posegraph_runtime -- --nocapture
+cargo test -p mir-runtime --test projection_ir -- --nocapture
 cargo test -p mir-runtime --test provider_admission -- --nocapture
 cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture
+cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 ```
 
-Remaining commands are roadmap targets only. They are not current validation commands until corresponding scripts and samples exist.
-
-```bash
-python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
-```
+`scripts/full_system_v1_release_check.py` is the bounded line-level closeout command. It reruns the validation floor, focused Cargo tests, source-first helpers, Product Alpha compatibility anchors, representative Full V1 CLI surfaces, and writes per-command JSON reports plus static `bundle.json` / `index.html` viewer outputs.
 
 ## move policy
 

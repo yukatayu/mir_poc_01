@@ -13,7 +13,7 @@ It explains what is now executable at the source-first parser/checker/bounded-ef
 
 ## Current claim
 
-Full System V1 is now a roadmap boundary plus bounded first-floor source-first evidence. It is not yet a product workflow.
+Full System V1 is now a roadmap boundary plus bounded source-first evidence and a bounded release-check workflow. It is not yet a final product workflow.
 
 The current repo has:
 
@@ -24,11 +24,12 @@ The current repo has:
 - bounded source-first projection IR + boundary-schema evidence, bounded same-binary local role-split evidence, plus product-alpha projection inventory.
 - bounded source-first provider-admission plus renderer pose backend evidence, plus product-alpha engine/provider inventory.
 - bounded source-first WorldCore / MembershipChat / Sugoroku / Portal / TwoShard / Gradient operational evidence.
+- bounded Full V1 release-check/report/viewer bundle evidence.
 
 The current promoted package is:
 
 ```text
-P-FSV1-03 full V1 release check
+P-FSV1-99 final audit
 ```
 
 ## What to verify now
@@ -37,6 +38,7 @@ Run the current documentation, alpha anchors, and current Full System V1 project
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
+python3 -m unittest scripts.tests.test_full_system_v1_release_check
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
@@ -50,6 +52,7 @@ python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/renderer_pose_backend_samples.py check-all --format json
+python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
 cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
 cargo test -p mir-runtime --test posegraph_runtime -- --nocapture
@@ -61,11 +64,11 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, bounded projection IR plus packet/FFI boundary-schema preservation, bounded same-binary local role split, bounded provider admission, and a bounded renderer pose backend demo. They still do not prove final packet/FFI transport semantics, a final server/client binary split, arbitrary native/WASM execution, or a final provider ABI.
+The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, bounded projection IR plus packet/FFI boundary-schema preservation, bounded same-binary local role split, bounded provider admission, a bounded renderer pose backend demo, and a bounded line-level release-check workflow with per-command JSON reports plus static `bundle.json` / `index.html` viewer outputs. They still do not prove final packet/FFI transport semantics, a final server/client binary split, arbitrary native/WASM execution, a final provider ABI, or a final public devtools family.
 
 `P-FSV1-01` and `P-FSV1-02` add bounded source-first WorldCore / MembershipChat / Sugoroku / Portal / TwoShard / Gradient operational roots. The two operational helper commands in the block above validate 12 executable rows with generated package-manifest expectations plus runtime report expectations.
 
-## Planned Full System V1 commands
+## Current Full System V1 commands
 
 Current Full System V1 parser/checker/runtime commands:
 
@@ -79,16 +82,11 @@ python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
 python3 scripts/renderer_pose_backend_samples.py check-all --format json
+python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 cargo test -p mir-runtime --test projection_ir -- --nocapture
 cargo test -p mir-runtime --test provider_admission -- --nocapture
 cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture
 cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
-```
-
-This is still a future command and must not be treated as current validation:
-
-```bash
-python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 ```
 
 ## Stop lines

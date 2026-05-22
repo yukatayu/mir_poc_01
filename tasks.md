@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-22 18:39 JST
+最終更新: 2026-05-22 18:53 JST
 
 ## document role
 
@@ -17,28 +17,27 @@ This document is the repo-wide **current task map**. It is not normative source 
 Current promoted package:
 
 ```text
-P-FSV1-03 full V1 release check
+P-FSV1-99 final audit
 ```
 
 Next promoted package after this closeout:
 
 ```text
-P-FSV1-99 final audit
+none
 ```
 
 Purpose:
 
-- actualize `scripts/full_system_v1_release_check.py`, release-check hands-on/report surface, and clean-clone/full-V1 closeout anchors above the now-closed 12-row source-first operational floor.
-- preserve `P-FSV1-01` and `P-FSV1-02` closed with 12 executable source-first operational rows across `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/`, generated package-manifest expectations, runtime report expectations, and explicit `missing_publication` / `contract_require_failed` / `missing_live_witness` negatives.
-- keep the planned Full System V1 root name `gradient-observation/` explicit as the source-first counterpart to Product Alpha `two-shard-gradient-observation/`.
-- keep `package.mir.json` as alpha compatibility/package artifact while source authority shifts to `.mir`.
+- lock the accepted `scripts/full_system_v1_release_check.py` lane into the repo snapshot with final claim/non-claim cleanup, report closure, and final validation recording.
+- preserve `P-FSV1-03` closed with bounded release-check outputs: static `bundle.json` / `index.html`, per-command JSON reports, compatibility-floor replay, and representative Full V1 CLI surfaces.
+- preserve the already-closed 12 executable source-first operational rows across `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` without widening claims past bounded local evidence.
+- keep `package.mir.json` as alpha compatibility/package artifact while source authority stays on `.mir`.
 
 ## ordered self-driven packages
 
 | Order | Package | Macro / stage | Goal | Close condition | Rough estimate |
 |---:|---|---|---|---|---|
-| 1 | `P-FSV1-03 full V1 release check` | `Macro 0/7/8`, `S5 -> S6` | clean clone Full V1 workflow | release check, viewer, bundle, reports | heavy |
-| 2 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
+| 1 | `P-FSV1-99 final audit` | `Macro 0`, `S6` | claim/non-claim and docs cleanup | all validation recorded, report/commit/push done | medium |
 
 ## self-driven macro phase reading
 
@@ -46,7 +45,7 @@ Purpose:
 |---|---|---|
 | `Macro 0` | docs / reports / validator discipline | self-driven through every package close |
 | `Macro 1` | semantics and invariant boundary | self-driven for source/typed IR/cut/PoseGraph wording; user gates only for final public commitments |
-| `Macro 3` | compile-ready minimal actualization | `P-MIR-01..04`、`P-POSE-03..04`、`P-PROJ-02..04`、`P-ENG-02..03`、`P-FSV1-01..02` closed; next main implementation path is release-check closure |
+| `Macro 3` | compile-ready minimal actualization | `P-MIR-01..04`、`P-POSE-03..04`、`P-PROJ-02..04`、`P-ENG-02..03`、`P-FSV1-01..03` closed; current work is final audit closure |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker split can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | projection/backend/provider/developer surface | self-driven for bounded alpha evidence; final ABI/SDK/distribution remains user decision |
 | `Macro 8` | domain/application realization | source-first operational samples can be self-driven after language/runtime base |
@@ -68,14 +67,14 @@ Purpose:
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| alpha grammar shape | `P-FSV1-03` and later | minimal C-like syntax / reuse current companion notation / package-derived migration syntax | keep the current minimal parser surface and widen only when release-check closure proves it necessary |
+| alpha grammar shape | later reopen only | minimal C-like syntax / reuse current companion notation / package-derived migration syntax | keep the current minimal parser surface and widen only when a later non-audit package proves it necessary |
 | typed IR representation | `P-MIR-02` | crate-local IR / new `mir-ir` crate / reuse existing product schema structs | start crate-local and split only if coupling becomes too high |
 | interpreter rejection model | `P-MIR-03` | static reject / runtime reject / residual obligation | keep explicit static vs runtime split and failure row `ρ` |
-| projection IR granularity | `P-FSV1-03` and later | summary manifest / typed projection IR / deployment planner | typed projection IR is actualized; preserve that floor and keep planner later |
-| packet/FFI payload schema granularity | `P-FSV1-03` and later | payload-shape-only / effect-tag-rich schema / full transport protocol | keep the current payload-shape plus effect/failure/capability/authority preservation floor and defer transport semantics |
-| local role-split carrier shape | `P-FSV1-03` and later | same-binary local roles / paired local processes / Docker-pinned manifest roles | same-binary manifest-driven local roles are actualized; keep release-check closure above that floor |
-| renderer/provider pose snapshot seam | `P-FSV1-03` and later | preserve typed pose snapshot surface / add later planner normalization | bounded renderer pose delivery is actualized; preserve non-semantic-owner discipline while release-check closure consumes the same seam |
-| PoseGraph/projection preservation seam | `P-FSV1-03..FSV1-99` | project raw runtime state / preserve typed boundary manifests / add later planner normalization | preserve typed manifests and boundary evidence first, then close release-check and audit without widening semantic ownership |
+| projection IR granularity | later reopen only | summary manifest / typed projection IR / deployment planner | typed projection IR is actualized; preserve that floor and keep planner later |
+| packet/FFI payload schema granularity | later reopen only | payload-shape-only / effect-tag-rich schema / full transport protocol | keep the current payload-shape plus effect/failure/capability/authority preservation floor and defer transport semantics |
+| local role-split carrier shape | later reopen only | same-binary local roles / paired local processes / Docker-pinned manifest roles | same-binary manifest-driven local roles are actualized; keep the accepted release-check above that floor |
+| renderer/provider pose snapshot seam | later reopen only | preserve typed pose snapshot surface / add later planner normalization | bounded renderer pose delivery is actualized; preserve non-semantic-owner discipline while audit consumes the same seam |
+| PoseGraph/projection preservation seam | later reopen only | project raw runtime state / preserve typed boundary manifests / add later planner normalization | preserve typed manifests and boundary evidence first, then close the audit without widening semantic ownership |
 
 ## maintenance tasks
 
@@ -83,7 +82,7 @@ Purpose:
 |---|---|---|---|
 | docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
 | alpha/product regression audit | preserve Product Alpha and operational suite while Full V1 advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
-| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | `samples/full-system-v1/computational/`、`world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`avatar-pose/`、`projection/`、`server-client/`、`provider-adapter/` are evidence-closed; whole-root workflow-ready still waits for release-check closure |
+| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | `samples/full-system-v1/computational/`、`world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`avatar-pose/`、`projection/`、`server-client/`、`provider-adapter/` remain evidence-closed as roots, while `scripts/full_system_v1_release_check.py` now provides the line-level bounded release-check workflow |
 | validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence, not semantic correctness |
 | report discipline | write a new report for every non-trivial package | `python3 scripts/validate_docs.py` | never overwrite previous report |
 
@@ -94,4 +93,5 @@ Purpose:
 - Existing `samples/product-alpha1/computational/` rows remain first-floor evidence, not Rust-level language completion.
 - Existing `samples/product-alpha1/posegraph/` rows remain helper evidence, while `samples/full-system-v1/avatar-pose/` now carries bounded source-first runtime PoseGraph plus pose save/devtools evidence; distributed durable pose save/load and final devtools family remain later.
 - `samples/product-alpha1/projection/` and `samples/product-alpha1/engine-adapter/` remain inventory-only comparison evidence, while `samples/full-system-v1/projection/` carries bounded source-first projection IR plus boundary-schema evidence, `samples/full-system-v1/server-client/` carries bounded same-binary local role-run evidence, and `samples/full-system-v1/provider-adapter/` now carries bounded provider-admission plus renderer-pose-backend evidence.
+- `P-FSV1-03` release-check closure is bounded local evidence with static bundle/viewer/report outputs; it is not a final public viewer/devtools family, final installer/archive, or final public product workflow.
 - Direct LLVM/native backend remains later than typed IR, projection IR, and preservation tests.

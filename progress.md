@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 18:39 JST
+最終更新: 2026-05-22 18:53 JST
 
 ## document role
 
@@ -44,11 +44,11 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-FSV1-03 full V1 release check`
-- Current status after this snapshot: `FS-08` bounded provider admission plus renderer pose backend remains actualized, and `P-FSV1-02` now widens the bounded source-first operational suite to `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` with 12 executable rows, generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` / `missing_live_witness` negatives, and bounded local portal/shard/gradient evidence with reject-event narration kept distinct from enforced failure reasons
-- Next promoted package after the current closeout: `P-FSV1-99 final audit`
+- Current package: `P-FSV1-99 final audit`
+- Current status after this snapshot: `P-FSV1-03` has actualized `scripts/full_system_v1_release_check.py` as an accepted bounded release-check workflow over the already-actualized parser/checker/runtime/PoseGraph/projection/provider/renderer/12-row operational lane, with per-command JSON reports, static `bundle.json` / `index.html` viewer outputs, preserved Product Alpha compatibility anchors, and representative `mirrorea-alpha project-full-v1` / `run-full-v1-split` / `admit-provider-v1` / `render-pose-backend-v1` surfaces
+- Next promoted package after the current closeout: none; final audit is the current package
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded source-first operational lane that actualizes WorldCore bootstrap, MembershipChat room-message transform, Sugoroku roll/publish/witness/handoff/local-cut, PortalWorldLink resolve/admit/fallback, TwoShardHardBoundary offer/prepare/commit rows plus observer-visible old-owner/stale-config reject-event narration around the enforced `missing_live_witness` negative, and observer-only GradientObservation view/hint rows plus observer-visible write-reject/stale-view-drop narration around the enforced freshness `contract_require_failed` negative from `.mir` sources, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, and a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded source-first operational lane that actualizes WorldCore bootstrap, MembershipChat room-message transform, Sugoroku roll/publish/witness/handoff/local-cut, PortalWorldLink resolve/admit/fallback, TwoShardHardBoundary offer/prepare/commit rows plus observer-visible old-owner/stale-config reject-event narration around the enforced `missing_live_witness` negative, and observer-only GradientObservation view/hint rows plus observer-visible write-reject/stale-view-drop narration around the enforced freshness `contract_require_failed` negative from `.mir` sources, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim, and a bounded release-check lane that reruns the validation floor, focused tests, helper matrices, compatibility anchors, representative CLI surfaces, and static report/viewer bundle generation. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
 
 ## completed milestones
 
@@ -66,6 +66,7 @@ The final direction for this roadmap is source-first:
 - `P-ENG-03` renderer pose backend demo
 - `P-FSV1-01` source operational suite
 - `P-FSV1-02` portal/shard source samples
+- `P-FSV1-03` full V1 release check
 
 ## runnable commands
 
@@ -77,6 +78,7 @@ The final direction for this roadmap is source-first:
 - `python3 scripts/projection_v1_samples.py check-all --format json`
 - `python3 scripts/provider_admission_samples.py check-all --format json`
 - `python3 scripts/renderer_pose_backend_samples.py check-all --format json`
+- `python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release`
 - `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`
 - `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`
 - `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`
@@ -99,8 +101,8 @@ The final direction for this roadmap is source-first:
 | `FS-07` server/client runtime split MVP | `first-floor-evidence` | `crates/mir-runtime::full_system_v1_local_split`, the `mir_full_system_v1_local_split` example, `samples/full-system-v1/server-client/`, `python3 scripts/projection_v1_samples.py check-all --format json`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha run-full-v1-split` now prove 1 accepted local role-run row and 1 undeclared-entry rejection row while preserving source-owned target manifests and boundary inventory | Docker/deployment-planner widening and final split artifacts remain later |
 | `FS-08` engine/provider admission MVP | `first-floor-evidence` | `crates/mir-runtime::full_system_v1_provider_admission`, `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_provider_admission` / `mir_full_system_v1_renderer_pose_backend` examples, `samples/full-system-v1/provider-adapter/`, `python3 scripts/provider_admission_samples.py check-all --format json`, `python3 scripts/renderer_pose_backend_samples.py check-all --format json`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha admit-provider-v1` / `render-pose-backend-v1` now prove 2 accepted provider rows, 3 provider rejection rows, 1 accepted renderer binding-context + snapshot-frontier row, and 2 blocked renderer rows while preserving matched packet/FFI schema refs, capability/authority/redaction/retention checks, rollback policy rejection, disabled-native default, non-ownership of world semantics, and `posegraph_binding_attestation_deferred` | broader source-first operational families, arbitrary native/WASM execution, and final provider ABI remain later |
 | `FS-09` devtools full alpha panels | `first-floor-evidence` | Product Alpha viewer and session devtools remain anchors; `crates/mir-runtime::posegraph_runtime` now exports observer-safe PoseGraph/devtools panels plus save/load summaries | widen beyond PoseGraph runtime into source/IR/projection/provider panels |
-| `FS-10` native host bundle plus optional backend gate | `planned` | native host launch bundle exists for Product Alpha | full V1 bundle with sources, IR/projection artifacts, reports |
-| `FS-11` release check and clean clone guide | `planned` | product release check and operational suite check exist | `full_system_v1_release_check.py`, hands-on, installed-binary replay |
+| `FS-10` native host bundle plus optional backend gate | `first-floor-evidence` | `scripts/full_system_v1_release_check.py` now emits bounded Full V1 `bundle.json`, per-command report files, and static `index.html` viewer while Product Alpha native host bundle remains the stronger product-facing anchor | final public bundle/installer/distribution hardening remains later |
+| `FS-11` release check and clean clone guide | `workflow-ready` | `python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release` is accepted and reruns docs floor, focused tests, helper matrices, compatibility anchors, and representative CLI surfaces | `P-FSV1-99` final audit and claim/non-claim cleanup |
 
 ## line snapshots
 
@@ -145,7 +147,7 @@ Current evidence:
 
 Next gap:
 
-- `P-FSV1-03` full V1 release check over the now-actualized 12-row source-first operational lane.
+- `P-FSV1-99` final audit over the accepted Full V1 release-check lane.
 
 ### Mir Language line
 
@@ -173,7 +175,7 @@ Current evidence:
 
 Next gap:
 
-- `P-FSV1-03` full V1 release check, then `P-FSV1-99` final audit.
+- `P-FSV1-99` final audit and post-close snapshot cleanup.
 
 ### PoseGraph line
 
@@ -211,7 +213,7 @@ Current evidence:
 
 Next gap:
 
-- broader source-first operational families. No final server/client split compiler exists yet.
+- final audit and later broader source-first operational families. No final server/client split compiler exists yet.
 
 ### Engine/Provider line
 
@@ -234,7 +236,7 @@ Current evidence:
 
 Next gap:
 
-- source-first operational suites over the bounded renderer/provider floor. No arbitrary native/WASM execution is admitted.
+- final audit over the bounded renderer/provider floor. No arbitrary native/WASM execution is admitted.
 
 ### Final public line
 
@@ -250,20 +252,16 @@ Next gap:
 
 ## validation floor
 
-Required for `P-FSV1-01` closeout and retained for the current operational-source lane:
+Required for the current Full V1 release-check/final-audit lane:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
-python3 -m unittest scripts.tests.test_full_system_v1_samples
-cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
-cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
-python3 scripts/full_system_v1_samples.py operational-matrix --format json
-python3 scripts/full_system_v1_samples.py check-operational-all --format json
-python3 scripts/full_system_v1_samples.py check-all --format json
+python3 -m unittest scripts.tests.test_full_system_v1_release_check
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
+python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
 ```
 
 Current major anchors when environment permits:
@@ -274,13 +272,7 @@ python3 scripts/product_alpha1_release_check.py --format json check-all --out /t
 python3 scripts/operational_product_samples.py check-all --format json
 ```
 
-Future planned anchors:
-
-```bash
-python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release
-```
-
-Do not treat planned commands as required until their scripts exist.
+The Full V1 release-check command above already includes the bounded source-first helper suite, focused Cargo tests, Product Alpha release-check compatibility replay, operational product suite replay, and minimal alpha verifier.
 
 ## non-claims
 
@@ -318,15 +310,15 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus accepted release-check snapshot; final audit is current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, six source-first operational roots, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, and bounded renderer pose backend are actualized; release check is next | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | broad source-first full-system suite is actualized through six operational roots; release check remains later | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, six source-first operational roots, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, bounded renderer pose backend, and bounded release-check are actualized; final audit is current | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | broad source-first full-system suite is actualized through six operational roots and a line-level release-check workflow; later widening beyond the bounded suite remains later | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
-| `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR plus schemas, local role split, provider admission, and renderer pose backend are actualized; source-first operational suites are next | heavy | 着手可能 |
-| `Macro 8` | application realization | operational suite exists; source-first computational, world-core, membership-chat, sugoroku-world, portal-worldlink, two-shard-hard-boundary, gradient-observation, and avatar-pose roots are actualized while release-check remains later | heavy | 着手可能 |
+| `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR plus schemas, local role split, provider admission, renderer pose backend, and bounded release-check are actualized | heavy | 着手可能 |
+| `Macro 8` | application realization | operational suite exists; source-first computational, world-core, membership-chat, sugoroku-world, portal-worldlink, two-shard-hard-boundary, gradient-observation, and avatar-pose roots are actualized, and the line-level release-check now closes them together | heavy | 着手可能 |
 
 ## feature maturity rows
 
@@ -337,12 +329,15 @@ Research-discovery items:
 | Mir-owned computation | `first-floor-evidence` | bounded product-alpha rows plus source-derived pure/effectful runtime rows exist | 着手可能 |
 | effectful Mir | `first-floor-evidence` | bounded local session semantics for host boundary, publish/observe, witness/handoff, and local atomic-cut now execute; broader distributed/runtime-complete semantics remain later | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
-| operational suite | `workflow-ready` | bounded local/Docker suite plus bounded six-family source-first operational roots | maintenance / release-check next |
+| operational suite | `workflow-ready` | bounded local/Docker suite plus bounded six-family source-first operational roots plus a line-level Full V1 release-check workflow | maintenance / final-audit next |
 | PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime/save-load/devtools avatar-pose root exist; bounded renderer/provider wiring is actualized and wider source-first suites remain later | 着手可能 |
 | projection/backend | `first-floor-evidence` | bounded projection IR, target manifests, packet/FFI schemas, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, same-binary local role-run plus undeclared-entry rejection, bounded provider admission, and bounded renderer pose backend now execute | 着手可能 |
 | engine/provider | `first-floor-evidence` | product-alpha inventory remains comparison evidence while Full System V1 now admits bounded viewer-diagnostic/WASM inventory rows, rejects over-capability/missing rollback/native-disabled rows, and proves bounded renderer pose delivery without widening semantic ownership | 着手可能 |
 
 ## recent log
+
+- 2026-05-22 18:53 JST
+  `P-FSV1-03` closeout で `scripts/full_system_v1_release_check.py`、その unit test、validator inventories、snapshot docs、hands-on/research summaries、`plan/58`、report bundle/viewer wording を同期し、accepted Full V1 release-check workflow、per-command reports、static `bundle.json` / `index.html` viewer、compatibility-floor replay を固定したうえで current package を `P-FSV1-99` に更新した。
 
 - 2026-05-22 18:39 JST
   `P-FSV1-02` closeout で `samples/full-system-v1/portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、generated package-manifest/runtime expectations、`scripts/full_system_v1_samples.py` の 12-row operational matrix、`scripts/tests/test_full_system_v1_samples.py`、`cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`、validator snapshots を同期し、portal `contract_require_failed` / shard `missing_live_witness` / gradient freshness `contract_require_failed` negatives と reject-event narration の非同一性を固定したうえで current package を `P-FSV1-03`、次 closeout 後の promoted package を `P-FSV1-99` に更新した。
