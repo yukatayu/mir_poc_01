@@ -17,6 +17,7 @@ use mir_runtime::{
     full_system_v1_local_split::run_full_system_v1_local_split_path,
     full_system_v1_projection::project_full_system_v1_path,
     full_system_v1_provider_admission::run_full_system_v1_provider_admission_path,
+    full_system_v1_renderer_pose_backend::run_full_system_v1_renderer_pose_backend_path,
     product_alpha1_devtools::{
         ProductAlpha1DevtoolsBundle, export_product_alpha1_devtools_for_session,
         render_product_alpha1_viewer_html, validate_product_alpha1_viewer_dir,
@@ -75,6 +76,7 @@ fn run(args: Vec<String>) -> i32 {
         "project-full-v1" => handle_project_full_v1(rest),
         "run-full-v1-split" => handle_run_full_v1_split(rest),
         "admit-provider-v1" => handle_admit_provider_v1(rest),
+        "render-pose-backend-v1" => handle_render_pose_backend_v1(rest),
         "__product-transport-world-server" => handle_product_transport_world_server(rest),
         "__product-transport-participant-client" => {
             handle_product_transport_participant_client(rest)
@@ -607,6 +609,23 @@ fn handle_admit_provider_v1(args: &[String]) -> (Value, i32) {
     );
     let payload = serde_json::to_value(report.clone())
         .expect("full system v1 provider admission report should serialize");
+    (payload, if report.accepted { 0 } else { 2 })
+}
+
+fn handle_render_pose_backend_v1(args: &[String]) -> (Value, i32) {
+    let parsed = match parse_render_pose_backend_v1_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let report = run_full_system_v1_renderer_pose_backend_path(
+        &parsed.source_path,
+        &parsed.request_path,
+        &parsed.provider_manifest_path,
+        &parsed.posegraph_package_path,
+        parsed.input,
+    );
+    let payload = serde_json::to_value(report.clone())
+        .expect("full system v1 renderer pose backend report should serialize");
     (payload, if report.accepted { 0 } else { 2 })
 }
 
@@ -2218,6 +2237,14 @@ struct AdmitProviderV1Args {
     input: i64,
 }
 
+struct RenderPoseBackendV1Args {
+    source_path: PathBuf,
+    request_path: PathBuf,
+    provider_manifest_path: PathBuf,
+    posegraph_package_path: PathBuf,
+    input: i64,
+}
+
 fn parse_run_full_v1_split_args(args: &[String]) -> Result<RunFullV1SplitArgs, (Value, i32)> {
     let Some(source_path) = args.first() else {
         return Err((
@@ -2431,6 +2458,142 @@ fn parse_admit_provider_v1_args(args: &[String]) -> Result<AdmitProviderV1Args, 
         source_path: PathBuf::from(source_path),
         request_path,
         provider_manifest_path,
+        input,
+    })
+}
+
+fn parse_render_pose_backend_v1_args(
+    args: &[String],
+) -> Result<RenderPoseBackendV1Args, (Value, i32)> {
+    let Some(source_path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "render-pose-backend-v1",
+                "diagnostic_code": "missing_source_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    let mut request_path = None;
+    let mut provider_manifest_path = None;
+    let mut posegraph_package_path = None;
+    let mut input = 0i64;
+    let mut index = 1usize;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--request" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("render-pose-backend-v1", &args[index..]),
+                        2,
+                    ));
+                };
+                request_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--provider" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("render-pose-backend-v1", &args[index..]),
+                        2,
+                    ));
+                };
+                provider_manifest_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--posegraph-package" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("render-pose-backend-v1", &args[index..]),
+                        2,
+                    ));
+                };
+                posegraph_package_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--input" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("render-pose-backend-v1", &args[index..]),
+                        2,
+                    ));
+                };
+                let parsed = value.parse::<i64>().map_err(|_| {
+                    (
+                        json!({
+                            "status": "error",
+                            "command": "render-pose-backend-v1",
+                            "diagnostic_code": "invalid_input",
+                            "input": value,
+                            "implemented": true,
+                            "full_system_v1_ready": false,
+                            "final_public_api_frozen": false
+                        }),
+                        2,
+                    )
+                })?;
+                input = parsed;
+                index += 2;
+            }
+            _ => {
+                return Err((
+                    unexpected_arguments_payload("render-pose-backend-v1", &args[index..]),
+                    2,
+                ));
+            }
+        }
+    }
+
+    let Some(request_path) = request_path else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "render-pose-backend-v1",
+                "diagnostic_code": "missing_request_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    let Some(provider_manifest_path) = provider_manifest_path else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "render-pose-backend-v1",
+                "diagnostic_code": "missing_provider_manifest_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+    let Some(posegraph_package_path) = posegraph_package_path else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "render-pose-backend-v1",
+                "diagnostic_code": "missing_posegraph_package_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    Ok(RenderPoseBackendV1Args {
+        source_path: PathBuf::from(source_path),
+        request_path,
+        provider_manifest_path,
+        posegraph_package_path,
         input,
     })
 }
@@ -2693,7 +2856,8 @@ fn usage_payload() -> Value {
             "demo",
             "project-full-v1",
             "run-full-v1-split",
-            "admit-provider-v1"
+            "admit-provider-v1",
+            "render-pose-backend-v1"
         ],
         "product_alpha1_ready": false,
         "final_public_api_frozen": false

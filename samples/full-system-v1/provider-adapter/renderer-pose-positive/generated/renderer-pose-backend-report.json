@@ -1,0 +1,63 @@
+{
+  "surface_kind": "full_system_v1_renderer_pose_backend_report",
+  "projection_id": "renderer-pose-positive",
+  "provider_id": "renderer-pose-backend",
+  "provider_kind": "renderer",
+  "target_id": "renderer-adapter",
+  "target_provider_policy": "provider_inventory_only",
+  "semantic_owner": "mir_mirrorea",
+  "accepted": true,
+  "delivery_admitted": true,
+  "terminal_outcome": "delivery_admitted",
+  "blocked_reason": null,
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "delivered_pose_snapshot_ref": "snapshot#avatar-017",
+  "expected_binding_context": {
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "from_target_id": "world-client",
+    "projection_id": "renderer-pose-positive",
+    "provider_id": "renderer-pose-backend",
+    "source_module_refs": [
+      "FullSystemV1.RendererPosePositive"
+    ],
+    "to_target_id": "renderer-adapter"
+  },
+  "posegraph_binding_context": {
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "from_target_id": "world-client",
+    "projection_id": "renderer-pose-positive",
+    "provider_id": "renderer-pose-backend",
+    "source_module_refs": [
+      "FullSystemV1.RendererPosePositive"
+    ],
+    "to_target_id": "renderer-adapter"
+  },
+  "delivered_nodes": [
+    {
+      "entity_ref": "avatar#017/head",
+      "pose_snapshot_ref": "snapshot#avatar-017",
+      "pose_version": 17
+    },
+    {
+      "entity_ref": "object#hat-017",
+      "pose_snapshot_ref": "snapshot#avatar-017",
+      "pose_version": 17
+    }
+  ],
+  "matched_packet_schema_refs": [
+    "packet.renderer.pose_snapshot"
+  ],
+  "matched_ffi_schema_refs": [],
+  "diagnostic_codes": [],
+  "residual_obligation_codes": [
+    "packet_ffi_transport_semantics_deferred",
+    "docker_process_carrier_deferred",
+    "provider_execution_runtime_deferred",
+    "renderer_vendor_execution_deferred",
+    "posegraph_binding_attestation_deferred"
+  ],
+  "provider_terminal_outcome": "inventory_admitted",
+  "posegraph_terminal_outcome": "Accepted"
+}

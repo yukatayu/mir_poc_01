@@ -38,11 +38,12 @@
   - `P-PROJ-03` actualizes `samples/full-system-v1/projection/` as the bounded projection IR + boundary-schema lane with 1 positive row, 3 negative rows, `matrix.json`, `expected/run.json`, generated `projection-artifacts.json` / `rejection-report.json`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `python3 scripts/projection_v1_samples.py check-all --format json`
   - `P-PROJ-04` actualizes `samples/full-system-v1/server-client/` as the bounded same-binary local role-split lane with 1 accepted row, 1 undeclared-entry rejection row, generated `local-split-report.json`, `crates/mir-runtime::full_system_v1_local_split`, and `mirrorea-alpha run-full-v1-split`
   - `P-ENG-02` actualizes `samples/full-system-v1/provider-adapter/` as the bounded provider-admission lane with 2 accepted rows, 3 rejection rows, generated `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `mirrorea-alpha admit-provider-v1`, and `python3 scripts/provider_admission_samples.py check-all --format json`
+  - `P-ENG-03` widens that same root with `renderer-pose-matrix.json`, generated `renderer-pose-backend-report.json`, `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `mirrorea-alpha render-pose-backend-v1`, and `python3 scripts/renderer_pose_backend_samples.py check-all --format json` so one accepted row and two blocked rows prove renderer receipt of a matching binding-context plus snapshot-frontier delivery without widening semantic ownership or claiming attested package provenance
   - current executable scope is parser plus typed checker plus bounded effectful runtime plus bounded PoseGraph runtime/save-load/devtools evidence plus bounded projection IR/boundary-schema evidence plus bounded local role-split evidence plus bounded provider admission; it does not claim final effect grammar, final packet/FFI transport semantics, final server/client binary split, final provider ABI, final devtools family completion, or generated package artifact completion
   - planned families still include world-core, membership-chat, and sugoroku-world
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `samples/full-system-v1/server-client/` is the separate `FS-07` local server/client role-run root
-  - `samples/full-system-v1/provider-adapter/` is the separate `FS-08` bounded provider-admission root
-  - do not mark the whole root workflow-ready until later packages add renderer pose backend, broader source-first operational families, and release-check closure
+  - `samples/full-system-v1/provider-adapter/` is the separate `FS-08` bounded provider-admission plus renderer-pose-backend root
+  - do not mark the whole root workflow-ready until later packages add broader source-first operational families and release-check closure
 - planned future product-alpha1 semantic roots
   - `samples/product-alpha1/computational/` is the Mir-owned computation line under `specs/28` / `plan/53`
     - `python3 scripts/mir_computational_samples.py check-all --format json` validates one direct `add_one` runtime row, five accepted helper rows, five expected runtime rejection rows, one direct host-I/O boundary accepted row, and three expected `check` rejections
@@ -185,7 +186,9 @@ python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
+python3 scripts/renderer_pose_backend_samples.py check-all --format json
 cargo test -p mir-runtime --test provider_admission -- --nocapture
+cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture
 ```
 
 Remaining commands are roadmap targets only. They are not current validation commands until corresponding scripts and samples exist.

@@ -255,3 +255,44 @@ transition main at SugorokuPlace requires HandoffAuthority {
     );
     assert!(report.observer_safe_summary.contains("runtime rejection"));
 }
+
+#[test]
+fn runtime_session_rejects_renderer_boundary_without_admission_context() {
+    let root = unique_temp_dir("mir-full-system-v1-session-renderer-boundary");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/renderer-boundary.mir",
+        r#"module FullSystemV1.RendererBoundaryDirect
+
+capability RenderFrame
+
+effect render_pose_frame(snapshot_ref: Text) {
+  requires RenderFrame
+  output receipt: Text
+  failure RendererUnavailable
+}
+
+transition render_pose at ClientView requires RenderFrame {
+  receipt <- perform render_pose_frame("snapshot#avatar-017") via renderer_frame_packet
+}
+"#,
+    );
+
+    let report = run_full_system_v1_session_path(&source, "render_pose", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("unsupported_effect_runtime")
+    );
+}

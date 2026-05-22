@@ -1,0 +1,49 @@
+{
+  "schema_version": "full-system-v1-renderer-pose-matrix-v0",
+  "family": "full_system_v1_renderer_pose_backend",
+  "current_status": "executable",
+  "rows": [
+    {
+      "sample_id": "eng-03-renderer-pose-positive",
+      "root_name": "renderer-pose-positive",
+      "stage": "P-ENG-03",
+      "current_status": "executable",
+      "source": "renderer-pose-positive/main/src/renderer-pose-positive.mir",
+      "request": "renderer-pose-positive/projection.request.json",
+      "provider_manifest": "renderer-pose-positive/provider.manifest.json",
+      "posegraph_package": "renderer-pose-positive/package.mir.json",
+      "expected": "renderer-pose-positive/expected/run.json",
+      "generated": "renderer-pose-positive/generated/renderer-pose-backend-report.json",
+      "generated_provider_admission": "renderer-pose-positive/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-03-renderer-pose-split-frame-negative",
+      "root_name": "renderer-pose-split-frame-negative",
+      "stage": "P-ENG-03",
+      "current_status": "executable",
+      "source": "renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+      "request": "renderer-pose-split-frame-negative/projection.request.json",
+      "provider_manifest": "renderer-pose-split-frame-negative/provider.manifest.json",
+      "posegraph_package": "renderer-pose-split-frame-negative/package.mir.json",
+      "expected": "renderer-pose-split-frame-negative/expected/run.json",
+      "generated": "renderer-pose-split-frame-negative/generated/renderer-pose-backend-report.json",
+      "generated_provider_admission": "renderer-pose-split-frame-negative/generated/provider-admission-report.json",
+      "input": 0
+    },
+    {
+      "sample_id": "eng-03-renderer-pose-reacquire-negative",
+      "root_name": "renderer-pose-reacquire-negative",
+      "stage": "P-ENG-03",
+      "current_status": "executable",
+      "source": "renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+      "request": "renderer-pose-reacquire-negative/projection.request.json",
+      "provider_manifest": "renderer-pose-reacquire-negative/provider.manifest.json",
+      "posegraph_package": "renderer-pose-reacquire-negative/package.mir.json",
+      "expected": "renderer-pose-reacquire-negative/expected/run.json",
+      "generated": "renderer-pose-reacquire-negative/generated/renderer-pose-backend-report.json",
+      "generated_provider_admission": "renderer-pose-reacquire-negative/generated/provider-admission-report.json",
+      "input": 0
+    }
+  ]
+}

@@ -1,6 +1,9 @@
 use std::path::Path;
 
-use mir_semantics::full_system_v1::{FullSystemV1RunReport, run_textual_mir_function_path};
+use mir_semantics::full_system_v1::{
+    FullSystemV1RunReport, run_textual_mir_function_path,
+    run_textual_mir_function_with_boundaries_path,
+};
 use serde::{Deserialize, Serialize};
 
 pub const FULL_SYSTEM_V1_SESSION_SURFACE_KIND: &str = "full_system_v1_session_report";
@@ -25,8 +28,26 @@ pub fn run_full_system_v1_session_path(
     entry_function: &str,
     input: i64,
 ) -> FullSystemV1SessionReport {
+    run_full_system_v1_session_with_provider_boundaries_path(path, entry_function, input, &[])
+}
+
+pub fn run_full_system_v1_session_with_provider_boundaries_path(
+    path: impl AsRef<Path>,
+    entry_function: &str,
+    input: i64,
+    admitted_provider_boundaries: &[String],
+) -> FullSystemV1SessionReport {
     let source_path = path.as_ref().display().to_string();
-    let runtime = run_textual_mir_function_path(path, entry_function, input);
+    let runtime = if admitted_provider_boundaries.is_empty() {
+        run_textual_mir_function_path(path, entry_function, input)
+    } else {
+        run_textual_mir_function_with_boundaries_path(
+            path,
+            entry_function,
+            input,
+            admitted_provider_boundaries,
+        )
+    };
     FullSystemV1SessionReport {
         surface_kind: session_surface_kind(),
         session_scope: session_scope(),

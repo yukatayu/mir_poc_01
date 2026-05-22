@@ -8,7 +8,7 @@ pub use interpreter::{
     FullSystemV1BindingSnapshot, FullSystemV1ComputeEvent, FullSystemV1ComputeTrace,
     FullSystemV1EffectSessionState, FullSystemV1EntryKind, FullSystemV1ExecutionOutcome,
     FullSystemV1RunReport, FullSystemV1RuntimeRejection, FullSystemV1ValueSnapshot,
-    run_textual_mir_function_path,
+    run_textual_mir_function_path, run_textual_mir_function_with_boundaries_path,
 };
 pub use projection::{
     FullSystemV1ProjectionReport, ProjectionBoundaryIr, ProjectionBoundarySchema,

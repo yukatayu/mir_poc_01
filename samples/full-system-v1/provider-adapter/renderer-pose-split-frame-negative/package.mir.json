@@ -1,0 +1,34 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#eng-03-renderer-pose-split-frame-negative",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.RendererPoseSplitFrameNegative",
+  "transition_id": "split_frame_violation",
+  "binding_context": {
+    "projection_id": "renderer-pose-split-frame-negative",
+    "source_module_refs": ["FullSystemV1.RendererPoseSplitFrameNegative"],
+    "from_target_id": "world-client",
+    "to_target_id": "renderer-adapter",
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "provider_id": "renderer-pose-backend"
+  },
+  "runtime_input": {
+    "posegraph": {
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      },
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/head",
+        "pose_version": 18,
+        "pose_snapshot_ref": "snapshot#avatar-018",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "stable"
+      }
+    }
+  }
+}

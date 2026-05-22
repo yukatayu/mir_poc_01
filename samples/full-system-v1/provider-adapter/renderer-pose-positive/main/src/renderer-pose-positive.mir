@@ -1,0 +1,15 @@
+module FullSystemV1.RendererPosePositive
+
+capability RenderFrame
+
+effect render_pose_frame(snapshot_ref: Text) {
+  requires RenderFrame
+  output receipt: Text
+  failure RendererUnavailable
+  failure PresentationDropped
+}
+
+transition render_pose at ClientView requires RenderFrame {
+  let pose_snapshot_ref: Text = "snapshot#avatar-017"
+  receipt <- perform render_pose_frame(pose_snapshot_ref) via renderer_frame_packet
+}

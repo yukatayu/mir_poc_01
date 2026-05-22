@@ -1,0 +1,459 @@
+{
+  "accepted": true,
+  "admission_scope": "full-system-v1-provider-admission-v0",
+  "diagnostics": [],
+  "effect_row": [
+    "render_pose_frame"
+  ],
+  "execution_admitted": false,
+  "failure_row": [
+    "PresentationDropped"
+  ],
+  "final_public_api_frozen": false,
+  "input_schema": "render_frame_request",
+  "local_split_report": {
+    "accepted": true,
+    "diagnostics": [],
+    "entry_override": null,
+    "final_public_api_frozen": false,
+    "launch_mode": "same_binary_local_role_wrapper",
+    "projection_id": "renderer-pose-reacquire-negative",
+    "rejected_rows": [],
+    "request_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/projection.request.json",
+    "residual_obligations": [
+      {
+        "code": "packet_ffi_transport_semantics_deferred",
+        "message": "packet and FFI schemas are emitted, but executable transport/runtime semantics remain later work"
+      },
+      {
+        "code": "provider_admission_deferred",
+        "message": "provider policy is preserved in manifests, but provider admission enforcement remains later work"
+      },
+      {
+        "code": "docker_process_carrier_deferred",
+        "message": "same-binary local role split is actualized, but Docker/container role carrier remains later work"
+      }
+    ],
+    "selected_target_id": null,
+    "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+    "split_scope": "full-system-v1-local-role-split-v0",
+    "surface_kind": "full_system_v1_local_split_report",
+    "target_reports": [
+      {
+        "accepted": true,
+        "admitted_entry_transitions": [],
+        "diagnostics": [],
+        "execution_kind": "passive_endpoint",
+        "inbound_boundary_refs": [],
+        "inbound_ffi_schema_refs": [],
+        "inbound_packet_schema_refs": [],
+        "launched_entry_transitions": [],
+        "observer_safe_summary": "accepted passive server endpoint with 0 inbound boundary refs and 0 outbound boundary refs",
+        "outbound_boundary_refs": [],
+        "outbound_ffi_schema_refs": [],
+        "outbound_packet_schema_refs": [],
+        "place_refs": [],
+        "prediction_allowed": false,
+        "role": "server",
+        "runtime_sessions": [],
+        "save_load_authority": true,
+        "target_id": "world-server"
+      },
+      {
+        "accepted": true,
+        "admitted_entry_transitions": [
+          "render_pose"
+        ],
+        "diagnostics": [],
+        "execution_kind": "authoritative_runtime",
+        "inbound_boundary_refs": [],
+        "inbound_ffi_schema_refs": [],
+        "inbound_packet_schema_refs": [],
+        "launched_entry_transitions": [
+          "render_pose"
+        ],
+        "observer_safe_summary": "accepted render_pose from FullSystemV1.RendererPoseReacquireNegative -> Unit",
+        "outbound_boundary_refs": [
+          "renderer_frame_packet"
+        ],
+        "outbound_ffi_schema_refs": [],
+        "outbound_packet_schema_refs": [
+          "packet.renderer.pose_snapshot"
+        ],
+        "place_refs": [
+          "ClientView"
+        ],
+        "prediction_allowed": true,
+        "role": "client",
+        "runtime_sessions": [
+          {
+            "entry_function": "render_pose",
+            "final_public_api_frozen": false,
+            "observer_safe_summary": "accepted render_pose from FullSystemV1.RendererPoseReacquireNegative -> Unit",
+            "runtime": {
+              "accepted": true,
+              "accepted_obligations": [
+                {
+                  "code": "imports_resolved",
+                  "message": "all direct textual Mir imports resolved to declared source modules"
+                },
+                {
+                  "code": "effect_failure_rows_explicit",
+                  "message": "every declared effect in the checked module carries an explicit failure row"
+                },
+                {
+                  "code": "typed_scope_closed",
+                  "message": "lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor"
+                }
+              ],
+              "check_report": {
+                "accepted": true,
+                "accepted_obligations": [
+                  {
+                    "code": "imports_resolved",
+                    "message": "all direct textual Mir imports resolved to declared source modules"
+                  },
+                  {
+                    "code": "effect_failure_rows_explicit",
+                    "message": "every declared effect in the checked module carries an explicit failure row"
+                  },
+                  {
+                    "code": "typed_scope_closed",
+                    "message": "lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor"
+                  }
+                ],
+                "diagnostics": [],
+                "final_public_api_frozen": false,
+                "module": {
+                  "capabilities": [
+                    {
+                      "capability_name": "RenderFrame",
+                      "span": {
+                        "column": 1,
+                        "end": 73,
+                        "line": 3,
+                        "start": 51
+                      }
+                    }
+                  ],
+                  "effects": [
+                    {
+                      "effect_name": "render_pose_frame",
+                      "failure_row": [
+                        "PresentationDropped"
+                      ],
+                      "output": {
+                        "name": "receipt",
+                        "output_type": "Text",
+                        "span": {
+                          "column": 3,
+                          "end": 167,
+                          "line": 7,
+                          "start": 147
+                        }
+                      },
+                      "parameters": [
+                        {
+                          "name": "snapshot_ref",
+                          "param_type": "Text",
+                          "span": {
+                            "column": 26,
+                            "end": 118,
+                            "line": 5,
+                            "start": 100
+                          }
+                        }
+                      ],
+                      "required_capabilities": [
+                        "RenderFrame"
+                      ],
+                      "span": {
+                        "column": 1,
+                        "end": 229,
+                        "line": 5,
+                        "start": 75
+                      }
+                    }
+                  ],
+                  "functions": [],
+                  "imports": [],
+                  "module_path": "FullSystemV1.RendererPoseReacquireNegative",
+                  "records": [],
+                  "span": {
+                    "column": 1,
+                    "end": 430,
+                    "line": 1,
+                    "start": 0
+                  },
+                  "transitions": [
+                    {
+                      "body": [
+                        {
+                          "Let": {
+                            "mutable": false,
+                            "name": "pose_snapshot_ref",
+                            "span": {
+                              "column": 3,
+                              "end": 344,
+                              "line": 13,
+                              "start": 293
+                            },
+                            "ty": "Text",
+                            "value": {
+                              "kind": {
+                                "TextLiteral": "snapshot#avatar-017"
+                              },
+                              "span": {
+                                "column": 33,
+                                "end": 344,
+                                "line": 13,
+                                "start": 323
+                              },
+                              "ty": "Text"
+                            }
+                          }
+                        },
+                        {
+                          "Bind": {
+                            "binding_type": "Text",
+                            "contract_clauses": [],
+                            "name": "receipt",
+                            "span": {
+                              "column": 3,
+                              "end": 428,
+                              "line": 14,
+                              "start": 347
+                            },
+                            "value": {
+                              "Perform": {
+                                "arguments": [
+                                  {
+                                    "kind": {
+                                      "Variable": "pose_snapshot_ref"
+                                    },
+                                    "span": {
+                                      "column": 40,
+                                      "end": 401,
+                                      "line": 14,
+                                      "start": 384
+                                    },
+                                    "ty": "Text"
+                                  }
+                                ],
+                                "boundary_ref": "renderer_frame_packet",
+                                "effect_name": "render_pose_frame",
+                                "failure_row": [
+                                  "PresentationDropped"
+                                ],
+                                "output_type": "Text",
+                                "required_capabilities": [
+                                  "RenderFrame"
+                                ],
+                                "span": {
+                                  "column": 14,
+                                  "end": 428,
+                                  "line": 14,
+                                  "start": 358
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "place_ref": "ClientView",
+                      "required_capabilities": [
+                        "RenderFrame"
+                      ],
+                      "span": {
+                        "column": 1,
+                        "end": 430,
+                        "line": 12,
+                        "start": 231
+                      },
+                      "transition_name": "render_pose"
+                    }
+                  ]
+                },
+                "residual_obligations": [
+                  {
+                    "code": "ambient_effect_row_containment_not_modeled",
+                    "message": "ambient effect row containment remains a residual obligation at the alpha checker floor"
+                  },
+                  {
+                    "code": "ambient_failure_row_containment_not_modeled",
+                    "message": "ambient failure row containment remains a residual obligation at the alpha checker floor"
+                  }
+                ]
+              },
+              "compute_trace": [
+                {
+                  "branch_taken": [],
+                  "events": [
+                    {
+                      "detail": "enter transition FullSystemV1.RendererPoseReacquireNegative.render_pose at ClientView",
+                      "kind": "enter_transition",
+                      "step_id": 1
+                    },
+                    {
+                      "detail": "ambient capabilities: RenderFrame",
+                      "kind": "transition_capabilities",
+                      "step_id": 2
+                    },
+                    {
+                      "detail": "let pose_snapshot_ref = Text(\"snapshot#avatar-017\")",
+                      "kind": "let",
+                      "step_id": 3
+                    },
+                    {
+                      "detail": "render_pose_frame via renderer_frame_packet",
+                      "kind": "provider_boundary",
+                      "step_id": 4
+                    },
+                    {
+                      "detail": "receipt <- Text(\"renderer_frame_packet#receipt\")",
+                      "kind": "bind",
+                      "step_id": 5
+                    }
+                  ],
+                  "function_id": "render_pose",
+                  "inputs": [
+                    {
+                      "summary": "Unit",
+                      "type_name": "Unit"
+                    }
+                  ],
+                  "local_bindings_summary": [
+                    {
+                      "mutable": false,
+                      "name": "pose_snapshot_ref",
+                      "summary": "Text(\"snapshot#avatar-017\")",
+                      "type_name": "Text"
+                    },
+                    {
+                      "mutable": false,
+                      "name": "receipt",
+                      "summary": "Text(\"renderer_frame_packet#receipt\")",
+                      "type_name": "Text"
+                    }
+                  ],
+                  "module_path": "FullSystemV1.RendererPoseReacquireNegative",
+                  "outputs": {
+                    "summary": "Unit",
+                    "type_name": "Unit"
+                  },
+                  "rejected_reason": null,
+                  "trace_id": 1
+                }
+              ],
+              "diagnostics": [],
+              "effect_session": {
+                "accepted_cuts": [],
+                "all_places_sealed": false,
+                "handoff_refs": [],
+                "host_input_remaining": 0,
+                "host_output": [],
+                "no_in_flight": true,
+                "no_post_cut_send": true,
+                "observed_channels": [],
+                "published_channels": [],
+                "witness_refs": []
+              },
+              "entry_function": "render_pose",
+              "entry_kind": "Transition",
+              "final_public_api_frozen": false,
+              "input": {
+                "summary": "Int64(0)",
+                "type_name": "Int64"
+              },
+              "observer_safe_summary": "accepted render_pose from FullSystemV1.RendererPoseReacquireNegative -> Unit",
+              "outcome": "Accepted",
+              "output": {
+                "summary": "Unit",
+                "type_name": "Unit"
+              },
+              "program_module_paths": [
+                "FullSystemV1.RendererPoseReacquireNegative"
+              ],
+              "residual_obligations": [
+                {
+                  "code": "ambient_effect_row_containment_not_modeled",
+                  "message": "ambient effect row containment remains a residual obligation at the alpha checker floor"
+                },
+                {
+                  "code": "ambient_failure_row_containment_not_modeled",
+                  "message": "ambient failure row containment remains a residual obligation at the alpha checker floor"
+                }
+              ],
+              "runtime_rejection": null,
+              "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+              "surface_kind": "full_system_v1_run_report"
+            },
+            "session_id": "full-system-v1::render_pose::0",
+            "session_scope": "full-system-v1-same-process-runtime-v0",
+            "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+            "surface_kind": "full_system_v1_session_report"
+          }
+        ],
+        "save_load_authority": false,
+        "target_id": "world-client"
+      },
+      {
+        "accepted": true,
+        "admitted_entry_transitions": [],
+        "diagnostics": [],
+        "execution_kind": "passive_endpoint",
+        "inbound_boundary_refs": [
+          "renderer_frame_packet"
+        ],
+        "inbound_ffi_schema_refs": [],
+        "inbound_packet_schema_refs": [
+          "packet.renderer.pose_snapshot"
+        ],
+        "launched_entry_transitions": [],
+        "observer_safe_summary": "accepted passive adapter endpoint with 1 inbound boundary refs and 0 outbound boundary refs",
+        "outbound_boundary_refs": [],
+        "outbound_ffi_schema_refs": [],
+        "outbound_packet_schema_refs": [],
+        "place_refs": [],
+        "prediction_allowed": false,
+        "role": "adapter",
+        "runtime_sessions": [],
+        "save_load_authority": false,
+        "target_id": "renderer-adapter"
+      }
+    ]
+  },
+  "matched_ffi_schema_refs": [],
+  "matched_packet_schema_refs": [
+    "packet.renderer.pose_snapshot"
+  ],
+  "output_schema": "render_frame_observation",
+  "projection_id": "renderer-pose-reacquire-negative",
+  "provider_id": "renderer-pose-backend",
+  "provider_kind": "renderer",
+  "provider_manifest_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/provider.manifest.json",
+  "rejected_rows": [],
+  "request_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/projection.request.json",
+  "required_capabilities": [
+    "RenderFrame"
+  ],
+  "residual_obligations": [
+    {
+      "code": "packet_ffi_transport_semantics_deferred",
+      "message": "packet and FFI schemas are emitted, but executable transport/runtime semantics remain later work"
+    },
+    {
+      "code": "docker_process_carrier_deferred",
+      "message": "same-binary local role split is actualized, but Docker/container role carrier remains later work"
+    },
+    {
+      "code": "provider_execution_runtime_deferred",
+      "message": "provider contract admission is actualized, but executable provider runtime remains later work"
+    }
+  ],
+  "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-reacquire-negative/main/src/renderer-pose-reacquire-negative.mir",
+  "surface_kind": "full_system_v1_provider_admission_report",
+  "target_id": "renderer-adapter",
+  "target_provider_policy": "provider_inventory_only",
+  "terminal_outcome": "inventory_admitted"
+}

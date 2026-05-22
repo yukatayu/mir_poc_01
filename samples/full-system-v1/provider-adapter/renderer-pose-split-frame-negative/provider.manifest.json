@@ -1,0 +1,40 @@
+{
+  "schema_version": "full-system-v1-provider-manifest-v0",
+  "provider_id": "renderer-pose-backend",
+  "provider_kind": "renderer",
+  "target_id": "renderer-adapter",
+  "input_schema": "render_frame_request",
+  "output_schema": "render_frame_observation",
+  "effect_row": ["render_pose_frame"],
+  "failure_row": ["PresentationDropped"],
+  "required_capabilities": ["RenderFrame"],
+  "authority_policy": {
+    "semantic_authority_owner": "mir_mirrorea",
+    "provider_may_grant_authority": false,
+    "provider_may_mutate_world_state": false
+  },
+  "resource_limits": {
+    "max_memory_mb": 64,
+    "max_cpu_ms": 16,
+    "semantic_state_owner": "mir_mirrorea",
+    "provider_handles_are_nonsemantic": true
+  },
+  "sandbox_policy": {
+    "sandbox_required": false,
+    "current_status": "inventory_only"
+  },
+  "observation_policy": {
+    "provider_receives_redacted_observation_only": true,
+    "retention_owner": "mir_mirrorea"
+  },
+  "redaction_policy": {
+    "provider_may_emit_unredacted_debug": false,
+    "redaction_label_required": true
+  },
+  "retention_policy": "adapter_local_debug",
+  "packet_boundary": "packet.renderer.pose_snapshot",
+  "ffi_boundary": null,
+  "native_execution_policy": "Disabled",
+  "wasm_execution_policy": "InventoryOnly",
+  "rollback_replay_cut_policy": "Replayable"
+}

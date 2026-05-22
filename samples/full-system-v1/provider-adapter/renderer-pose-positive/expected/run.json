@@ -1,0 +1,49 @@
+{
+  "accepted": true,
+  "delivery_admitted": true,
+  "terminal_outcome": "delivery_admitted",
+  "blocked_reason": null,
+  "provider_id": "renderer-pose-backend",
+  "provider_kind": "renderer",
+  "target_id": "renderer-adapter",
+  "target_provider_policy": "provider_inventory_only",
+  "pose_snapshot_frontier": "snapshot#avatar-017",
+  "delivered_pose_snapshot_ref": "snapshot#avatar-017",
+  "expected_binding_context": {
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "from_target_id": "world-client",
+    "projection_id": "renderer-pose-positive",
+    "provider_id": "renderer-pose-backend",
+    "source_module_refs": ["FullSystemV1.RendererPosePositive"],
+    "to_target_id": "renderer-adapter"
+  },
+  "posegraph_binding_context": {
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "from_target_id": "world-client",
+    "projection_id": "renderer-pose-positive",
+    "provider_id": "renderer-pose-backend",
+    "source_module_refs": ["FullSystemV1.RendererPosePositive"],
+    "to_target_id": "renderer-adapter"
+  },
+  "delivered_node_entities": ["avatar#017/head", "object#hat-017"],
+  "delivered_node_pose_versions": {
+    "avatar#017/head": 17,
+    "object#hat-017": 17
+  },
+  "matched_packet_schema_refs": ["packet.renderer.pose_snapshot"],
+  "matched_ffi_schema_refs": [],
+  "diagnostic_codes": [],
+  "provider_terminal_outcome": "inventory_admitted",
+  "posegraph_terminal_outcome": "Accepted",
+  "posegraph_violation_kind": null,
+  "posegraph_rejection_code": null,
+  "residual_obligation_codes": [
+    "docker_process_carrier_deferred",
+    "packet_ffi_transport_semantics_deferred",
+    "posegraph_binding_attestation_deferred",
+    "provider_execution_runtime_deferred",
+    "renderer_vendor_execution_deferred"
+  ]
+}

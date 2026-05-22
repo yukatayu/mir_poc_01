@@ -1,0 +1,62 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#eng-03-renderer-pose-positive",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.RendererPosePositive",
+  "transition_id": "stable_frame",
+  "binding_context": {
+    "projection_id": "renderer-pose-positive",
+    "source_module_refs": ["FullSystemV1.RendererPosePositive"],
+    "from_target_id": "world-client",
+    "to_target_id": "renderer-adapter",
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "provider_id": "renderer-pose-backend"
+  },
+  "runtime_input": {
+    "posegraph": {
+      "pose_snapshot_frontier": "snapshot#avatar-017",
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      },
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "stable"
+      },
+      "fallback_chain": [
+        {
+          "anchor_ref": "anchor#avatar-017/shoulder",
+          "reason": "occlusion_fallback"
+        },
+        {
+          "anchor_ref": "anchor#world/origin",
+          "reason": "world_origin_last_resort"
+        }
+      ],
+      "anchor_switch_log": [
+        {
+          "from_anchor": "anchor#avatar-017/shoulder",
+          "to_anchor": "anchor#avatar-017/head",
+          "reason": "fresh_head_visible",
+          "required_capability": "ObservePose",
+          "membership_epoch": 3,
+          "owner_epoch": 9,
+          "sequence": 41,
+          "pose_snapshot_frontier": "snapshot#avatar-017"
+        }
+      ],
+      "current_membership_epoch": 3,
+      "current_owner_epoch": 9,
+      "last_anchor_switch_sequence": 40,
+      "fresh_anchor_witness": "anchor_witness#fresh",
+      "current_anchor_witness": "anchor_witness#fresh"
+    }
+  }
+}

@@ -12,7 +12,7 @@ Current PoseGraph evidence is now split across two layers:
 - `samples/full-system-v1/avatar-pose/` is now the bounded source-first runtime floor with 9 executable rows.
 - `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `scripts/posegraph_runtime_samples.py check-all --format json` now prove Transform / PoseVersion / AnchorBinding / AnchorSwitch / fallback state / reacquire requirement runtime behavior, bounded save/load admissibility, and observer-safe devtools export.
 
-This is useful first-floor evidence. It is not distributed durable pose save/load completion, final devtools panel completion, or renderer integration.
+This is useful first-floor evidence. It is not distributed durable pose save/load completion or final devtools panel completion. `P-ENG-03` now layers a bounded renderer pose backend demo above this floor without transferring semantic ownership; that lane currently proves matching binding_context plus snapshot-frontier delivery, not attested package provenance.
 
 ## package sequence
 
@@ -20,7 +20,7 @@ This is useful first-floor evidence. It is not distributed durable pose save/loa
 |---|---|---|
 | `P-POSE-03` | runtime PoseGraph | session state includes Transform, PoseVersion, Anchor, AnchorBinding, full AnchorSwitch fields, fallback/reacquire state, and positive/negative no-split-frame checks |
 | `P-POSE-04` | pose save/devtools | PoseGraph state enters save/load carrier with positive and negative admissibility rows, and observer-safe panels expose runtime evidence |
-| `P-ENG-03` | renderer pose backend demo | renderer receives a pose snapshot but does not own semantics |
+| `P-ENG-03` | renderer pose backend demo | closed: renderer receives an observer-safe pose row with matching binding_context plus snapshot frontier while PoseGraph remains semantic owner |
 
 ## planned rows
 

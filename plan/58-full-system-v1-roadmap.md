@@ -8,7 +8,7 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-ENG-02`:
+Current repo state after `P-ENG-03`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
@@ -23,7 +23,8 @@ Current repo state after `P-ENG-02`:
 - Full System V1 bounded projection IR plus boundary-schema floor is `actualized` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, and `scripts/projection_v1_samples.py` with 1 accepted row, 3 rejection rows, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure preservation, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, client-write authority rejection, unassigned-place rejection, save/load ownership rejection, and `mirrorea-alpha project-full-v1`.
 - Full System V1 bounded same-binary local role-split floor is `actualized` through `crates/mir-runtime::full_system_v1_local_split`, `samples/full-system-v1/server-client/`, `scripts/projection_v1_samples.py`, and `mirrorea-alpha run-full-v1-split` with 1 accepted row, 1 undeclared-entry rejection row, and generated local-split inventory reports.
 - Full System V1 bounded provider-admission floor is `actualized` through `crates/mir-runtime::full_system_v1_provider_admission`, `samples/full-system-v1/provider-adapter/`, `scripts/provider_admission_samples.py`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha admit-provider-v1` with 2 accepted rows, 3 rejection rows, matched packet/FFI schema preservation, capability/authority/redaction/retention checks, rollback policy rejection, disabled-native preservation, and explicit WASM inventory-only admission.
-- Renderer pose backend and broader source-first operational families remain later.
+- Full System V1 bounded renderer pose backend demo is `actualized` through `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `samples/full-system-v1/provider-adapter/renderer-pose-matrix.json`, `scripts/renderer_pose_backend_samples.py`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha render-pose-backend-v1` with 1 accepted structural binding-context + snapshot-frontier row and 2 blocked rows while preserving Mir/Mirrorea as semantic owner and leaving attested PoseGraph package provenance later.
+- Broader source-first operational families remain later.
 
 ## package order
 
@@ -85,7 +86,9 @@ samples/full-system-v1/
 
 `P-ENG-02` added `samples/full-system-v1/provider-adapter/`, `matrix.json`, generated `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `mirrorea-alpha admit-provider-v1`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/provider_admission_samples.py` so the same source-first line now validates one viewer-diagnostic inventory admission row, one WASM inventory-only admission row, one over-capability rejection row, one missing rollback-policy rejection row, and one native-disabled rejection row while preserving the non-claims around arbitrary native/WASM execution, final provider ABI, and renderer-owned world semantics.
 
-The wider root remains non-workflow-ready until later packages add renderer pose backend evidence, the remaining source-first operational families, and the Full System V1 release check.
+`P-ENG-03` widened that same root with `renderer-pose-matrix.json`, three renderer-pose sample rows, generated `renderer-pose-backend-report.json`, generated nested `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `mirrorea-alpha render-pose-backend-v1`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/renderer_pose_backend_samples.py` so the same source-first line now validates one accepted renderer pose row with matching binding_context plus snapshot frontier and two blocked rows for `no_split_frame` and `reacquire_required` while preserving the non-claims around renderer-owned world semantics, attested PoseGraph package provenance, arbitrary native/WASM execution, and final provider ABI.
+
+The wider root remains non-workflow-ready until later packages add the remaining source-first operational families and the Full System V1 release check.
 
 ## validation direction
 
@@ -105,6 +108,7 @@ python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json
 python3 scripts/provider_admission_samples.py check-all --format json
+python3 scripts/renderer_pose_backend_samples.py check-all --format json
 ```
 
 Planned future anchors:
@@ -120,5 +124,5 @@ Do not add these planned commands to mandatory validation floors until their scr
 - Product Alpha-1 remains alpha, not final product.
 - Mir computational current rows remain first-floor evidence, not Rust-level language completion.
 - `samples/product-alpha1/projection/` remains inventory-only comparison evidence while `samples/full-system-v1/projection/` remains bounded source-first projection IR plus boundary-schema evidence.
-- `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence while `samples/full-system-v1/provider-adapter/` now carries bounded provider-admission evidence.
+- `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence while `samples/full-system-v1/provider-adapter/` now carries bounded provider-admission plus renderer-pose evidence.
 - LLVM/native codegen is later than typed IR, projection IR, and boundary preservation.

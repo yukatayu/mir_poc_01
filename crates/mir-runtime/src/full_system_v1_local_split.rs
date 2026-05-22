@@ -5,7 +5,9 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     full_system_v1_projection::project_full_system_v1_path,
-    full_system_v1_session::{FullSystemV1SessionReport, run_full_system_v1_session_path},
+    full_system_v1_session::{
+        FullSystemV1SessionReport, run_full_system_v1_session_with_provider_boundaries_path,
+    },
 };
 
 pub const FULL_SYSTEM_V1_LOCAL_SPLIT_SURFACE_KIND: &str = "full_system_v1_local_split_report";
@@ -231,9 +233,20 @@ fn build_target_report(
     }
 
     let mut runtime_sessions = Vec::new();
+    let admitted_provider_boundaries = outbound_boundaries
+        .iter()
+        .map(|boundary| boundary.boundary_ref.clone())
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect::<Vec<_>>();
     if diagnostics.is_empty() {
         for entry in &launched_entry_transitions {
-            runtime_sessions.push(run_full_system_v1_session_path(&source_path, entry, input));
+            runtime_sessions.push(run_full_system_v1_session_with_provider_boundaries_path(
+                &source_path,
+                entry,
+                input,
+                &admitted_provider_boundaries,
+            ));
         }
     }
 

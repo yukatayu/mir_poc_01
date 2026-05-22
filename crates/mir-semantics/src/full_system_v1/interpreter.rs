@@ -164,12 +164,22 @@ struct Interpreter {
     next_trace_id: usize,
     next_step_id: usize,
     effect_session: EffectSessionState,
+    admitted_provider_boundaries: BTreeSet<String>,
 }
 
 pub fn run_textual_mir_function_path(
     path: impl AsRef<Path>,
     entry_function: &str,
     input: i64,
+) -> FullSystemV1RunReport {
+    run_textual_mir_function_with_boundaries_path(path, entry_function, input, &[])
+}
+
+pub fn run_textual_mir_function_with_boundaries_path(
+    path: impl AsRef<Path>,
+    entry_function: &str,
+    input: i64,
+    admitted_provider_boundaries: &[String],
 ) -> FullSystemV1RunReport {
     let source_path = path.as_ref().to_path_buf();
     let source_path_text = source_path.display().to_string();
@@ -268,7 +278,11 @@ pub fn run_textual_mir_function_path(
             .map(|_| vec![input])
             .unwrap_or_default(),
     };
-    let mut interpreter = Interpreter::new(program, host_inputs);
+    let mut interpreter = Interpreter::new(
+        program,
+        host_inputs,
+        admitted_provider_boundaries.iter().cloned().collect(),
+    );
     let outcome = match entry_kind {
         FullSystemV1EntryKind::Function => interpreter.eval_function(
             &root_module.module_path,
@@ -374,13 +388,18 @@ impl ProgramIndex {
 }
 
 impl Interpreter {
-    fn new(program: ProgramIndex, host_inputs: Vec<i64>) -> Self {
+    fn new(
+        program: ProgramIndex,
+        host_inputs: Vec<i64>,
+        admitted_provider_boundaries: BTreeSet<String>,
+    ) -> Self {
         Self {
             program,
             traces: Vec::new(),
             next_trace_id: 1,
             next_step_id: 1,
             effect_session: EffectSessionState::new(host_inputs),
+            admitted_provider_boundaries,
         }
     }
 
@@ -1157,7 +1176,7 @@ impl Interpreter {
             _ if matches!(
                 boundary_ref,
                 "diagnostic_export" | "native_bridge" | "wasm_adapter"
-            ) =>
+            ) || self.admitted_provider_boundaries.contains(boundary_ref) =>
             {
                 self.record_event(
                     trace_index,

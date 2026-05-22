@@ -1,0 +1,44 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#eng-03-renderer-pose-reacquire-negative",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.RendererPoseReacquireNegative",
+  "transition_id": "explicit_reacquire",
+  "binding_context": {
+    "projection_id": "renderer-pose-reacquire-negative",
+    "source_module_refs": ["FullSystemV1.RendererPoseReacquireNegative"],
+    "from_target_id": "world-client",
+    "to_target_id": "renderer-adapter",
+    "boundary_ref": "renderer_frame_packet",
+    "entry_transition": "render_pose",
+    "provider_id": "renderer-pose-backend"
+  },
+  "runtime_input": {
+    "posegraph": {
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/shoulder",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "fallback_only"
+      },
+      "fallback_chain": [
+        {
+          "anchor_ref": "anchor#avatar-017/shoulder",
+          "reason": "head_lost_tracking"
+        }
+      ],
+      "save_load": {
+        "savepoint_ref": "savepoint#pose-09-avatar-017",
+        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+        "saved_membership_epoch": 3,
+        "saved_owner_epoch": 9,
+        "saved_anchor_switch_sequence": 41,
+        "saved_anchor_witness": "anchor_witness#fresh",
+        "saved_active_anchor": "anchor#avatar-017/head"
+      }
+    }
+  }
+}

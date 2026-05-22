@@ -10,6 +10,7 @@ Current engine/provider state is split by role:
 
 - `samples/product-alpha1/engine-adapter/` remains inventory-only comparison evidence with provider contract JSON rows, native execution disabled by default, WASM inventory-only, and rollback/replay/cut policy inventory.
 - `samples/full-system-v1/provider-adapter/` now actualizes bounded provider admission through `crates/mir-runtime::full_system_v1_provider_admission`, the `mir_full_system_v1_provider_admission` example, `scripts/provider_admission_samples.py`, and `mirrorea-alpha admit-provider-v1`.
+- `samples/full-system-v1/provider-adapter/renderer-pose-matrix.json` now actualizes the bounded renderer pose backend demo through `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `scripts/renderer_pose_backend_samples.py`, and `mirrorea-alpha render-pose-backend-v1`.
 - Current bounded accepted rows are:
   - viewer-diagnostic inventory admission
   - WASM inventory-only admission
@@ -24,7 +25,7 @@ Current engine/provider state is split by role:
 | Package | Goal | Close condition |
 |---|---|---|
 | `P-ENG-02` | provider admission MVP | closed: accepted bounded provider rows, over-capability rejection, missing rollback/replay/cut rejection, disabled-native evidence, and explicit WASM inventory-only evidence now execute through runtime admission |
-| `P-ENG-03` | renderer pose backend demo | renderer receives PoseGraph snapshot without owning world state |
+| `P-ENG-03` | renderer pose backend demo | closed: 1 accepted row and 2 blocked rows prove renderer receives a matching binding-context plus snapshot-frontier delivery without owning world state |
 | later | sandboxed WASM candidate | explicit sandbox, effect/failure/capability/observation checks |
 | later | bounded native provider candidate | explicit native policy, resource limits, audit, revocation |
 | much later | final engine adapter ABI | user/final decision and compatibility policy |
@@ -35,8 +36,11 @@ Current validation:
 
 ```bash
 cargo test -p mir-runtime --test provider_admission -- --nocapture
+cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture
 python3 -m unittest scripts.tests.test_provider_admission_samples
 python3 scripts/provider_admission_samples.py check-all --format json
+python3 -m unittest scripts.tests.test_renderer_pose_backend_samples
+python3 scripts/renderer_pose_backend_samples.py check-all --format json
 cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 ```
 

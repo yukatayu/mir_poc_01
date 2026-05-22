@@ -653,6 +653,13 @@ fn provider_kind_spec(provider_kind: &str) -> Option<ProviderKindSpec> {
             admitted_target_policies: &["wasm_inventory_only"],
             accepted_terminal_outcome: "wasm_inventory_only",
         }),
+        "renderer" => Some(ProviderKindSpec {
+            provider_kind: "renderer",
+            expected_input_schema: "render_frame_request",
+            expected_output_schema: "render_frame_observation",
+            admitted_target_policies: &["provider_inventory_only"],
+            accepted_terminal_outcome: "inventory_admitted",
+        }),
         _ => None,
     }
 }
