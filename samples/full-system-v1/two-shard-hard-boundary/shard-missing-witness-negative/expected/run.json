@@ -1,0 +1,83 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_kind": "Transition",
+  "entry_function": "shard_turn",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "missing_live_witness",
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.PortalWorldLinkBase",
+    "Shared.ShardBoundaryBase",
+    "Shared.SugorokuBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.TwoShardHardBoundaryNegative"
+  ],
+  "trace_functions": [
+    "FullSystemV1.TwoShardHardBoundaryNegative.shard_turn",
+    "Shared.MembershipChatBase.membership_active",
+    "Shared.ShardBoundaryBase.shard_object",
+    "Shared.ShardBoundaryBase.shard_prepare_label"
+  ],
+  "trace_branch_taken": [
+    "else",
+    "else"
+  ],
+  "trace_output_summaries": [
+    null,
+    "Bool(true)",
+    "Text(\"object#stale-crate\")",
+    "Text(\"prepare#stale-config\")"
+  ],
+  "trace_rejection_codes": [
+    "missing_live_witness",
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "bind",
+    "call",
+    "bind",
+    "publish",
+    "publish",
+    "call",
+    "bind",
+    "publish",
+    "enter",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "if",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [
+      "membership_epoch",
+      "shard_handoff_offer",
+      "shard_old_owner_reject",
+      "shard_stale_config_reject"
+    ],
+    "observed_channels": [
+      "membership_epoch"
+    ],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "runtime rejection in shard_turn: missing_live_witness"
+}

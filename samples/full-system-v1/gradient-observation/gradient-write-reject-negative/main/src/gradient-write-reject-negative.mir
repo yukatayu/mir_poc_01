@@ -1,0 +1,51 @@
+module FullSystemV1.GradientWriteRejectNegative
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+import Shared.PortalWorldLinkBase
+import Shared.ShardBoundaryBase
+import Shared.GradientObservationBase
+
+capability Publisher
+capability Observer
+capability ObserveGradientBoundary
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_gradient_write_rejected(zone: Text) {
+  requires Publisher, ObserveGradientBoundary
+  failure PublishRejected
+}
+
+effect publish_gradient_stale_view_dropped(summary: Text) {
+  requires Publisher, ObserveGradientBoundary
+  failure PublishRejected
+}
+
+effect export_gradient_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition gradient_turn at GradientObservationBoundaryPlace requires Publisher, Observer, ObserveGradientBoundary {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  zone <- gradient_zone(1)
+  perform publish_gradient_write_rejected(zone) via publish_bus
+  stale_note <- gradient_observer_note(1)
+  perform publish_gradient_stale_view_dropped(stale_note) via publish_bus
+  perform export_gradient_summary(stale_note) via diagnostic_export
+  freshness_ok <- gradient_fresh(1)
+    require freshness_ok
+}

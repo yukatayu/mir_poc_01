@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 17:38 JST
+最終更新: 2026-05-22 18:39 JST
 
 ## document role
 
@@ -44,11 +44,11 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-FSV1-02 portal/shard source samples`
-- Current status after this snapshot: `FS-08` bounded provider admission plus renderer pose backend remains actualized, and `P-FSV1-01` now adds bounded source-first WorldCore / MembershipChat / Sugoroku operational roots with 6 executable rows, generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` negatives, and bounded local roll/publish/witness/handoff/local-cut evidence
-- Next promoted package after the current closeout: `P-FSV1-03 full V1 release check`
+- Current package: `P-FSV1-03 full V1 release check`
+- Current status after this snapshot: `FS-08` bounded provider admission plus renderer pose backend remains actualized, and `P-FSV1-02` now widens the bounded source-first operational suite to `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` with 12 executable rows, generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` / `missing_live_witness` negatives, and bounded local portal/shard/gradient evidence with reject-event narration kept distinct from enforced failure reasons
+- Next promoted package after the current closeout: `P-FSV1-99 final audit`
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded source-first operational lane that actualizes WorldCore bootstrap, MembershipChat room-message transform, and Sugoroku roll/publish/witness/handoff/local-cut rows from `.mir` sources, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, and a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded source-first operational lane that actualizes WorldCore bootstrap, MembershipChat room-message transform, Sugoroku roll/publish/witness/handoff/local-cut, PortalWorldLink resolve/admit/fallback, TwoShardHardBoundary offer/prepare/commit rows plus observer-visible old-owner/stale-config reject-event narration around the enforced `missing_live_witness` negative, and observer-only GradientObservation view/hint rows plus observer-visible write-reject/stale-view-drop narration around the enforced freshness `contract_require_failed` negative from `.mir` sources, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, and a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
 
 ## completed milestones
 
@@ -65,6 +65,7 @@ The final direction for this roadmap is source-first:
 - `P-ENG-02` provider admission
 - `P-ENG-03` renderer pose backend demo
 - `P-FSV1-01` source operational suite
+- `P-FSV1-02` portal/shard source samples
 
 ## runnable commands
 
@@ -136,12 +137,15 @@ Current evidence:
 - `samples/full-system-v1/world-core/`
 - `samples/full-system-v1/membership-chat/`
 - `samples/full-system-v1/sugoroku-world/`
+- `samples/full-system-v1/portal-worldlink/`
+- `samples/full-system-v1/two-shard-hard-boundary/`
+- `samples/full-system-v1/gradient-observation/`
 - `python3 scripts/full_system_v1_samples.py check-operational-all --format json`
-- 6 executable source-first operational rows with generated package-manifest and runtime expectations.
+- 12 executable source-first operational rows with generated package-manifest and runtime expectations.
 
 Next gap:
 
-- `P-FSV1-02` source-first portal / shard / gradient roots beyond the newly actualized WorldCore / MembershipChat / Sugoroku lane.
+- `P-FSV1-03` full V1 release check over the now-actualized 12-row source-first operational lane.
 
 ### Mir Language line
 
@@ -169,7 +173,7 @@ Current evidence:
 
 Next gap:
 
-- `P-FSV1-02` portal/shard source samples, then `P-FSV1-03` full V1 release check.
+- `P-FSV1-03` full V1 release check, then `P-FSV1-99` final audit.
 
 ### PoseGraph line
 
@@ -317,12 +321,12 @@ Research-discovery items:
 | `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, source-first WorldCore/MembershipChat/Sugoroku operational roots, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, and bounded renderer pose backend are actualized; portal/shard source suites are next | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | partial source-first full-system suite actualized; portal/shard/gradient and release check remain later | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, six source-first operational roots, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, and bounded renderer pose backend are actualized; release check is next | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | broad source-first full-system suite is actualized through six operational roots; release check remains later | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR plus schemas, local role split, provider admission, and renderer pose backend are actualized; source-first operational suites are next | heavy | 着手可能 |
-| `Macro 8` | application realization | operational suite exists; source-first computational, world-core, membership-chat, sugoroku-world, and avatar-pose roots are actualized while portal/shard/gradient remain later | heavy | 着手可能 |
+| `Macro 8` | application realization | operational suite exists; source-first computational, world-core, membership-chat, sugoroku-world, portal-worldlink, two-shard-hard-boundary, gradient-observation, and avatar-pose roots are actualized while release-check remains later | heavy | 着手可能 |
 
 ## feature maturity rows
 
@@ -333,12 +337,15 @@ Research-discovery items:
 | Mir-owned computation | `first-floor-evidence` | bounded product-alpha rows plus source-derived pure/effectful runtime rows exist | 着手可能 |
 | effectful Mir | `first-floor-evidence` | bounded local session semantics for host boundary, publish/observe, witness/handoff, and local atomic-cut now execute; broader distributed/runtime-complete semantics remain later | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
-| operational suite | `workflow-ready` | bounded local/Docker suite plus bounded source-first WorldCore/MembershipChat/Sugoroku roots | maintenance / portal-shard source variants next |
+| operational suite | `workflow-ready` | bounded local/Docker suite plus bounded six-family source-first operational roots | maintenance / release-check next |
 | PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime/save-load/devtools avatar-pose root exist; bounded renderer/provider wiring is actualized and wider source-first suites remain later | 着手可能 |
 | projection/backend | `first-floor-evidence` | bounded projection IR, target manifests, packet/FFI schemas, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, same-binary local role-run plus undeclared-entry rejection, bounded provider admission, and bounded renderer pose backend now execute | 着手可能 |
 | engine/provider | `first-floor-evidence` | product-alpha inventory remains comparison evidence while Full System V1 now admits bounded viewer-diagnostic/WASM inventory rows, rejects over-capability/missing rollback/native-disabled rows, and proves bounded renderer pose delivery without widening semantic ownership | 着手可能 |
 
 ## recent log
+
+- 2026-05-22 18:39 JST
+  `P-FSV1-02` closeout で `samples/full-system-v1/portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、generated package-manifest/runtime expectations、`scripts/full_system_v1_samples.py` の 12-row operational matrix、`scripts/tests/test_full_system_v1_samples.py`、`cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`、validator snapshots を同期し、portal `contract_require_failed` / shard `missing_live_witness` / gradient freshness `contract_require_failed` negatives と reject-event narration の非同一性を固定したうえで current package を `P-FSV1-03`、次 closeout 後の promoted package を `P-FSV1-99` に更新した。
 
 - 2026-05-22 17:38 JST
   `P-FSV1-01` closeout で `samples/full-system-v1/world-core/`、`membership-chat/`、`sugoroku-world/`、`scripts/full_system_v1_samples.py operational-matrix/run-operational/check-operational-all`、`scripts/tests/test_full_system_v1_samples.py`、`cargo test -p mir-runtime --test full_system_v1_session -- --nocapture` を同期し、generated package-manifest expectations、runtime report expectations、WorldCore accepted/missing-publication rows、MembershipChat accepted/stale-membership rows、Sugoroku accepted/stale-membership rowsを固定したうえで current package を `P-FSV1-02`、次 closeout 後の promoted package を `P-FSV1-03` に更新した。

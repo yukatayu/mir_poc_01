@@ -1,0 +1,52 @@
+module FullSystemV1.PortalAdmissionDeniedNegative
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+import Shared.PortalWorldLinkBase
+
+capability Publisher
+capability Observer
+capability UsePortal
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_portal_resolved(destination: Text) {
+  requires Publisher, UsePortal
+  failure PublishRejected
+}
+
+effect observe_portal_resolved {
+  requires Observer
+  output destination: Text
+  failure ObserveRejected
+}
+
+effect export_portal_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition portal_turn at PortalBoundaryPlace requires Publisher, Observer, UsePortal {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  let portal_seed: Int64 = 1
+  resolved <- portal_destination(portal_seed)
+  perform publish_portal_resolved(resolved) via publish_bus
+  seen_destination <- perform observe_portal_resolved via observe_bus
+    ensure seen_destination = resolved
+  let fallback: Text = portal_fallback_label(portal_seed)
+  perform export_portal_summary(fallback) via diagnostic_export
+  admit_open <- portal_available(portal_seed)
+    require admit_open
+}

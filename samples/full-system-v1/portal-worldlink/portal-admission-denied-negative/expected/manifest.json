@@ -1,0 +1,141 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-portal-worldlink-negative",
+  "package_kind": "portal_worldlink",
+  "semantic_source_of_truth": "samples/full-system-v1/portal-worldlink/portal-admission-denied-negative/main/src/portal-admission-denied-negative.mir",
+  "module_path": "FullSystemV1.PortalAdmissionDeniedNegative",
+  "import_paths": [
+    "Shared.WorldCoreBase",
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase",
+    "Shared.PortalWorldLinkBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/portal-worldlink/shared/src/world-core-base.mir",
+    "samples/full-system-v1/portal-worldlink/shared/src/membership-chat-base.mir",
+    "samples/full-system-v1/portal-worldlink/shared/src/sugoroku-base.mir",
+    "samples/full-system-v1/portal-worldlink/shared/src/portal-worldlink-base.mir"
+  ],
+  "capability_names": [
+    "Publisher",
+    "Observer",
+    "UsePortal"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "publish_membership_epoch",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_portal_resolved",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "UsePortal"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_portal_resolved",
+      "parameter_types": [],
+      "output_type": "Text",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "export_portal_summary",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [],
+      "failure_row": [
+        "ExportRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "portal_turn",
+      "place_ref": "PortalBoundaryPlace",
+      "required_capabilities": [
+        "Publisher",
+        "Observer",
+        "UsePortal"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Perform",
+        "Bind",
+        "Let",
+        "Bind",
+        "Perform",
+        "Bind",
+        "Let",
+        "Perform",
+        "Bind"
+      ],
+      "binding_types": [
+        "Int64",
+        "Text",
+        "Text",
+        "Bool"
+      ],
+      "perform_effects": [
+        "publish_membership_epoch",
+        "observe_membership_epoch",
+        "publish_portal_resolved",
+        "observe_portal_resolved",
+        "export_portal_summary"
+      ],
+      "contract_clause_kinds": [
+        "Require",
+        "Ensure",
+        "Require"
+      ]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

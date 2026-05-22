@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_two_shard_hard_boundary",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-two-shard-hard-boundary-positive",
+      "root_name": "shard-handoff-positive",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "shard-handoff-positive/main/src/shard-handoff-positive.mir",
+      "expected_manifest": "shard-handoff-positive/expected/manifest.json",
+      "expected_run": "shard-handoff-positive/expected/run.json",
+      "entry_function": "shard_turn",
+      "input": 0
+    },
+    {
+      "sample_id": "fsv1-ops-two-shard-hard-boundary-negative",
+      "root_name": "shard-missing-witness-negative",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "shard-missing-witness-negative/main/src/shard-missing-witness-negative.mir",
+      "expected_manifest": "shard-missing-witness-negative/expected/manifest.json",
+      "expected_run": "shard-missing-witness-negative/expected/run.json",
+      "entry_function": "shard_turn",
+      "input": 0
+    }
+  ]
+}

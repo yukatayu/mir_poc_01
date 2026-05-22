@@ -38,6 +38,27 @@ OPERATIONAL_FAMILIES = [
         "root": FULL_SYSTEM_V1_ROOT / "sugoroku-world",
         "matrix_path": FULL_SYSTEM_V1_ROOT / "sugoroku-world" / "matrix.json",
     },
+    {
+        "family_id": "portal-worldlink",
+        "family_name": "full_system_v1_portal_worldlink",
+        "package_kind": "portal_worldlink",
+        "root": FULL_SYSTEM_V1_ROOT / "portal-worldlink",
+        "matrix_path": FULL_SYSTEM_V1_ROOT / "portal-worldlink" / "matrix.json",
+    },
+    {
+        "family_id": "two-shard-hard-boundary",
+        "family_name": "full_system_v1_two_shard_hard_boundary",
+        "package_kind": "two_shard_hard_boundary",
+        "root": FULL_SYSTEM_V1_ROOT / "two-shard-hard-boundary",
+        "matrix_path": FULL_SYSTEM_V1_ROOT / "two-shard-hard-boundary" / "matrix.json",
+    },
+    {
+        "family_id": "gradient-observation",
+        "family_name": "full_system_v1_gradient_observation",
+        "package_kind": "gradient_observation",
+        "root": FULL_SYSTEM_V1_ROOT / "gradient-observation",
+        "matrix_path": FULL_SYSTEM_V1_ROOT / "gradient-observation" / "matrix.json",
+    },
 ]
 KNOWN_COMMANDS = {
     "list",

@@ -1,0 +1,211 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-two-shard-hard-boundary-positive",
+  "package_kind": "two_shard_hard_boundary",
+  "semantic_source_of_truth": "samples/full-system-v1/two-shard-hard-boundary/shard-handoff-positive/main/src/shard-handoff-positive.mir",
+  "module_path": "FullSystemV1.TwoShardHardBoundaryPositive",
+  "import_paths": [
+    "Shared.WorldCoreBase",
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase",
+    "Shared.PortalWorldLinkBase",
+    "Shared.ShardBoundaryBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/two-shard-hard-boundary/shared/src/world-core-base.mir",
+    "samples/full-system-v1/two-shard-hard-boundary/shared/src/membership-chat-base.mir",
+    "samples/full-system-v1/two-shard-hard-boundary/shared/src/sugoroku-base.mir",
+    "samples/full-system-v1/two-shard-hard-boundary/shared/src/portal-worldlink-base.mir",
+    "samples/full-system-v1/two-shard-hard-boundary/shared/src/shard-boundary-base.mir"
+  ],
+  "capability_names": [
+    "Publisher",
+    "Observer",
+    "WitnessAuthority",
+    "HandoffAuthority",
+    "OfferShardHandoff",
+    "CommitShardHandoff",
+    "ObserveShardBoundary"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "publish_membership_epoch",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_shard_handoff_offer",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "OfferShardHandoff"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_shard_handoff_prepare",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "OfferShardHandoff"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "issue_shard_commit_witness",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": "Text",
+      "required_capabilities": [
+        "WitnessAuthority"
+      ],
+      "failure_row": [
+        "WitnessRejected"
+      ]
+    },
+    {
+      "effect_name": "handoff_shard_commit",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "HandoffAuthority"
+      ],
+      "failure_row": [
+        "HandoffRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_shard_handoff_commit",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "CommitShardHandoff"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_shard_handoff_commit",
+      "parameter_types": [],
+      "output_type": "Text",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "export_shard_summary",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [],
+      "failure_row": [
+        "ExportRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "shard_turn",
+      "place_ref": "ShardAuthorityBoundaryPlace",
+      "required_capabilities": [
+        "Publisher",
+        "Observer",
+        "WitnessAuthority",
+        "HandoffAuthority",
+        "OfferShardHandoff",
+        "CommitShardHandoff",
+        "ObserveShardBoundary"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Perform",
+        "Bind",
+        "Bind",
+        "Let",
+        "Let",
+        "Perform",
+        "Perform",
+        "Bind",
+        "Perform",
+        "Perform",
+        "Bind",
+        "Perform"
+      ],
+      "binding_types": [
+        "Int64",
+        "Text",
+        "Text",
+        "Text"
+      ],
+      "perform_effects": [
+        "publish_membership_epoch",
+        "observe_membership_epoch",
+        "publish_shard_handoff_offer",
+        "publish_shard_handoff_prepare",
+        "issue_shard_commit_witness",
+        "handoff_shard_commit",
+        "publish_shard_handoff_commit",
+        "observe_shard_handoff_commit",
+        "export_shard_summary"
+      ],
+      "contract_clause_kinds": [
+        "Require",
+        "Ensure"
+      ]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

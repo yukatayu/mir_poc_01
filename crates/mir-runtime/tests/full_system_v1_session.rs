@@ -450,3 +450,186 @@ fn runtime_session_executes_sugoroku_source_operational_sample() {
         vec!["witness#1".to_string()]
     );
 }
+
+#[test]
+fn runtime_session_executes_portal_worldlink_positive_sample() {
+    let source = repo_sample_path(
+        "portal-worldlink/portal-handoff-positive/main/src/portal-handoff-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "portal_turn", 0);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "membership_epoch".to_string(),
+            "portal_admitted".to_string(),
+            "portal_resolved".to_string(),
+        ]
+    );
+    assert_eq!(
+        report.runtime.effect_session.witness_refs,
+        vec!["witness#1".to_string()]
+    );
+    assert_eq!(
+        report.runtime.effect_session.handoff_refs,
+        vec!["handoff#witness#1".to_string()]
+    );
+}
+
+#[test]
+fn runtime_session_rejects_portal_worldlink_admission_denied_sample() {
+    let source = repo_sample_path(
+        "portal-worldlink/portal-admission-denied-negative/main/src/portal-admission-denied-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "portal_turn", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("contract_require_failed")
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "membership_epoch".to_string(),
+            "portal_resolved".to_string(),
+        ]
+    );
+}
+
+#[test]
+fn runtime_session_executes_two_shard_hard_boundary_positive_sample() {
+    let source = repo_sample_path(
+        "two-shard-hard-boundary/shard-handoff-positive/main/src/shard-handoff-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "shard_turn", 0);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "membership_epoch".to_string(),
+            "shard_handoff_commit".to_string(),
+            "shard_handoff_offer".to_string(),
+            "shard_handoff_prepare".to_string(),
+        ]
+    );
+    assert_eq!(
+        report.runtime.effect_session.witness_refs,
+        vec!["witness#1".to_string()]
+    );
+    assert_eq!(
+        report.runtime.effect_session.handoff_refs,
+        vec!["handoff#witness#1".to_string()]
+    );
+}
+
+#[test]
+fn runtime_session_rejects_two_shard_hard_boundary_missing_witness_sample() {
+    let source = repo_sample_path(
+        "two-shard-hard-boundary/shard-missing-witness-negative/main/src/shard-missing-witness-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "shard_turn", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("missing_live_witness")
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "membership_epoch".to_string(),
+            "shard_handoff_offer".to_string(),
+            "shard_old_owner_reject".to_string(),
+            "shard_stale_config_reject".to_string(),
+        ]
+    );
+}
+
+#[test]
+fn runtime_session_executes_gradient_observation_positive_sample() {
+    let source = repo_sample_path(
+        "gradient-observation/gradient-observe-positive/main/src/gradient-observe-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "gradient_turn", 0);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "gradient_handoff_hint".to_string(),
+            "gradient_view".to_string(),
+            "membership_epoch".to_string(),
+        ]
+    );
+    assert_eq!(
+        report.runtime.effect_session.observed_channels,
+        vec!["membership_epoch".to_string(), "gradient_view".to_string()]
+    );
+}
+
+#[test]
+fn runtime_session_rejects_gradient_observation_write_sample() {
+    let source = repo_sample_path(
+        "gradient-observation/gradient-write-reject-negative/main/src/gradient-write-reject-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "gradient_turn", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("contract_require_failed")
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec![
+            "gradient_stale_view_dropped".to_string(),
+            "gradient_write_rejected".to_string(),
+            "membership_epoch".to_string(),
+        ]
+    );
+}

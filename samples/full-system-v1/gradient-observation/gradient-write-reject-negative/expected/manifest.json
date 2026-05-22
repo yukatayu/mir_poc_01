@@ -1,0 +1,146 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-gradient-observation-negative",
+  "package_kind": "gradient_observation",
+  "semantic_source_of_truth": "samples/full-system-v1/gradient-observation/gradient-write-reject-negative/main/src/gradient-write-reject-negative.mir",
+  "module_path": "FullSystemV1.GradientWriteRejectNegative",
+  "import_paths": [
+    "Shared.WorldCoreBase",
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase",
+    "Shared.PortalWorldLinkBase",
+    "Shared.ShardBoundaryBase",
+    "Shared.GradientObservationBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/gradient-observation/shared/src/world-core-base.mir",
+    "samples/full-system-v1/gradient-observation/shared/src/membership-chat-base.mir",
+    "samples/full-system-v1/gradient-observation/shared/src/sugoroku-base.mir",
+    "samples/full-system-v1/gradient-observation/shared/src/portal-worldlink-base.mir",
+    "samples/full-system-v1/gradient-observation/shared/src/shard-boundary-base.mir",
+    "samples/full-system-v1/gradient-observation/shared/src/gradient-observation-base.mir"
+  ],
+  "capability_names": [
+    "Publisher",
+    "Observer",
+    "ObserveGradientBoundary"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "publish_membership_epoch",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_gradient_write_rejected",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "ObserveGradientBoundary"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_gradient_stale_view_dropped",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "ObserveGradientBoundary"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "export_gradient_summary",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [],
+      "failure_row": [
+        "ExportRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "gradient_turn",
+      "place_ref": "GradientObservationBoundaryPlace",
+      "required_capabilities": [
+        "Publisher",
+        "Observer",
+        "ObserveGradientBoundary"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Perform",
+        "Bind",
+        "Bind",
+        "Perform",
+        "Bind",
+        "Perform",
+        "Perform",
+        "Bind"
+      ],
+      "binding_types": [
+        "Int64",
+        "Text",
+        "Text",
+        "Bool"
+      ],
+      "perform_effects": [
+        "publish_membership_epoch",
+        "observe_membership_epoch",
+        "publish_gradient_write_rejected",
+        "publish_gradient_stale_view_dropped",
+        "export_gradient_summary"
+      ],
+      "contract_clause_kinds": [
+        "Require",
+        "Require"
+      ]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

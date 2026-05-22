@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_portal_worldlink",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-portal-worldlink-positive",
+      "root_name": "portal-handoff-positive",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "portal-handoff-positive/main/src/portal-handoff-positive.mir",
+      "expected_manifest": "portal-handoff-positive/expected/manifest.json",
+      "expected_run": "portal-handoff-positive/expected/run.json",
+      "entry_function": "portal_turn",
+      "input": 0
+    },
+    {
+      "sample_id": "fsv1-ops-portal-worldlink-negative",
+      "root_name": "portal-admission-denied-negative",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "portal-admission-denied-negative/main/src/portal-admission-denied-negative.mir",
+      "expected_manifest": "portal-admission-denied-negative/expected/manifest.json",
+      "expected_run": "portal-admission-denied-negative/expected/run.json",
+      "entry_function": "portal_turn",
+      "input": 0
+    }
+  ]
+}

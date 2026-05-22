@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_gradient_observation",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-gradient-observation-positive",
+      "root_name": "gradient-observe-positive",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "gradient-observe-positive/main/src/gradient-observe-positive.mir",
+      "expected_manifest": "gradient-observe-positive/expected/manifest.json",
+      "expected_run": "gradient-observe-positive/expected/run.json",
+      "entry_function": "gradient_turn",
+      "input": 0
+    },
+    {
+      "sample_id": "fsv1-ops-gradient-observation-negative",
+      "root_name": "gradient-write-reject-negative",
+      "stage": "P-FSV1-02",
+      "current_status": "executable",
+      "source": "gradient-write-reject-negative/main/src/gradient-write-reject-negative.mir",
+      "expected_manifest": "gradient-write-reject-negative/expected/manifest.json",
+      "expected_run": "gradient-write-reject-negative/expected/run.json",
+      "entry_function": "gradient_turn",
+      "input": 0
+    }
+  ]
+}

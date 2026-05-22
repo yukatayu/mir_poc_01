@@ -1,0 +1,34 @@
+module Shared.GradientObservationBase
+
+record GradientView {
+  zone: Text,
+  observer_note: Text,
+}
+
+fn gradient_zone(seed: Int64) -> Text {
+  if seed = 0 {
+    return "gradient#overlap-a-b"
+  } else {
+    return "gradient#stale-overlap"
+  }
+}
+
+fn gradient_hint(seed: Int64) -> Text {
+  if seed = 0 {
+    return "hint#handoff-a-to-b"
+  } else {
+    return "hint#observer-only-fallback"
+  }
+}
+
+fn gradient_fresh(seed: Int64) -> Bool {
+  return seed = 0
+}
+
+fn gradient_observer_note(seed: Int64) -> Text {
+  if seed = 0 {
+    return "observer_only_overlap_view"
+  } else {
+    return "observer_only_stale_view_dropped"
+  }
+}

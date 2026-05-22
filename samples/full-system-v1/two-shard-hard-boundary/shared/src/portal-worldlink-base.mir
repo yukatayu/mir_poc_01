@@ -1,0 +1,34 @@
+module Shared.PortalWorldLinkBase
+
+record PortalOffer {
+  destination: Text,
+  traveler: Text,
+}
+
+fn portal_destination(seed: Int64) -> Text {
+  if seed = 0 {
+    return "world#east-gate"
+  } else {
+    return "world#fallback-hall"
+  }
+}
+
+fn portal_fallback_label(seed: Int64) -> Text {
+  if seed = 0 {
+    return "portal_direct_admission"
+  } else {
+    return "portal_fallback_local_spawn"
+  }
+}
+
+fn portal_available(seed: Int64) -> Bool {
+  return seed = 0
+}
+
+fn portal_traveler(epoch: Int64) -> Text {
+  if epoch = 2 {
+    return "traveler#epoch-2"
+  } else {
+    return "traveler#stale"
+  }
+}

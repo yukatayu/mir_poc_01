@@ -1,0 +1,61 @@
+module FullSystemV1.TwoShardHardBoundaryNegative
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+import Shared.PortalWorldLinkBase
+import Shared.ShardBoundaryBase
+
+capability Publisher
+capability Observer
+capability HandoffAuthority
+capability OfferShardHandoff
+capability ObserveShardBoundary
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_shard_handoff_offer(object_ref: Text) {
+  requires Publisher, OfferShardHandoff
+  failure PublishRejected
+}
+
+effect publish_shard_old_owner_reject(object_ref: Text) {
+  requires Publisher, ObserveShardBoundary
+  failure PublishRejected
+}
+
+effect publish_shard_stale_config_reject(label: Text) {
+  requires Publisher, ObserveShardBoundary
+  failure PublishRejected
+}
+
+effect handoff_shard_commit(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect export_shard_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition shard_turn at ShardAuthorityBoundaryPlace requires Publisher, Observer, HandoffAuthority, OfferShardHandoff, ObserveShardBoundary {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  object_ref <- shard_object(1)
+  perform publish_shard_handoff_offer(object_ref) via publish_bus
+  perform publish_shard_old_owner_reject(object_ref) via publish_bus
+  stale_label <- shard_prepare_label(1)
+  perform publish_shard_stale_config_reject(stale_label) via publish_bus
+  perform handoff_shard_commit("witness#missing") via handoff_port
+}

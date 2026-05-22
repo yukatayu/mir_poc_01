@@ -1,0 +1,84 @@
+module FullSystemV1.TwoShardHardBoundaryPositive
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+import Shared.PortalWorldLinkBase
+import Shared.ShardBoundaryBase
+
+capability Publisher
+capability Observer
+capability WitnessAuthority
+capability HandoffAuthority
+capability OfferShardHandoff
+capability CommitShardHandoff
+capability ObserveShardBoundary
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_shard_handoff_offer(object_ref: Text) {
+  requires Publisher, OfferShardHandoff
+  failure PublishRejected
+}
+
+effect publish_shard_handoff_prepare(label: Text) {
+  requires Publisher, OfferShardHandoff
+  failure PublishRejected
+}
+
+effect issue_shard_commit_witness(object_ref: Text) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_shard_commit(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect publish_shard_handoff_commit(object_ref: Text) {
+  requires Publisher, CommitShardHandoff
+  failure PublishRejected
+}
+
+effect observe_shard_handoff_commit {
+  requires Observer
+  output object_ref: Text
+  failure ObserveRejected
+}
+
+effect export_shard_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition shard_turn at ShardAuthorityBoundaryPlace requires Publisher, Observer, WitnessAuthority, HandoffAuthority, OfferShardHandoff, CommitShardHandoff, ObserveShardBoundary {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  object_ref <- shard_object(0)
+  let prepare: Text = shard_prepare_label(0)
+  let transfer: ShardTransfer = ShardTransfer {
+    object_ref: object_ref,
+    source_shard: "shard#a",
+    destination_shard: "shard#b"
+  }
+  perform publish_shard_handoff_offer(transfer.object_ref) via publish_bus
+  perform publish_shard_handoff_prepare(prepare) via publish_bus
+  ticket <- perform issue_shard_commit_witness(transfer.object_ref) via witness_store
+  perform handoff_shard_commit(ticket) via handoff_port
+  perform publish_shard_handoff_commit(transfer.object_ref) via publish_bus
+  committed_object <- perform observe_shard_handoff_commit via observe_bus
+    ensure committed_object = transfer.object_ref
+  perform export_shard_summary(transfer.destination_shard) via diagnostic_export
+}

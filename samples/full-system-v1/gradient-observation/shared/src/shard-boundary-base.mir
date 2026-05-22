@@ -1,0 +1,31 @@
+module Shared.ShardBoundaryBase
+
+record ShardTransfer {
+  object_ref: Text,
+  source_shard: Text,
+  destination_shard: Text,
+}
+
+fn shard_object(seed: Int64) -> Text {
+  if seed = 0 {
+    return "object#portal-chest"
+  } else {
+    return "object#stale-crate"
+  }
+}
+
+fn shard_prepare_label(seed: Int64) -> Text {
+  if seed = 0 {
+    return "prepare#shard-b"
+  } else {
+    return "prepare#stale-config"
+  }
+}
+
+fn shard_config_fresh(seed: Int64) -> Bool {
+  return seed = 0
+}
+
+fn old_owner_can_write(seed: Int64) -> Bool {
+  return seed = 0
+}

@@ -1,0 +1,17 @@
+module Shared.SugorokuBase
+
+fn normalize_roll(raw: Int64) -> Int64 {
+  if raw < 1 {
+    return 1
+  } else {
+    if raw > 6 {
+      return 6
+    } else {
+      return raw
+    }
+  }
+}
+
+fn roll_in_window(roll: Int64) -> Bool {
+  return roll <= 6
+}

@@ -46,13 +46,20 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         payload = _run_helper("operational-matrix")
 
         self.assertEqual(payload["family"], "full_system_v1_source_operational_suite")
-        self.assertEqual(payload["sample_count"], 6)
-        self.assertEqual(payload["executable_count"], 6)
+        self.assertEqual(payload["sample_count"], 12)
+        self.assertEqual(payload["executable_count"], 12)
         self.assertFalse(payload["workflow_ready"])
         self.assertEqual(payload["validation_errors"], [])
         self.assertEqual(
             [row["family_id"] for row in payload["family_counts"]],
-            ["world-core", "membership-chat", "sugoroku-world"],
+            [
+                "world-core",
+                "membership-chat",
+                "sugoroku-world",
+                "portal-worldlink",
+                "two-shard-hard-boundary",
+                "gradient-observation",
+            ],
         )
 
     def test_record_positive_sample_keeps_record_summary(self) -> None:
@@ -144,6 +151,65 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         )
         self.assertIn("handoff", payload["runtime_actual"]["trace_event_kinds"])
 
+    def test_operational_portal_positive_keeps_portal_witness_and_handoff(self) -> None:
+        payload = _run_helper("run-operational", "fsv1-ops-portal-worldlink-positive")
+
+        self.assertTrue(payload["passed"])
+        self.assertEqual(payload["package_kind"], "portal_worldlink")
+        self.assertTrue(payload["manifest_returncode_passed"])
+        self.assertTrue(payload["runtime_returncode_passed"])
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["published_channels"],
+            ["membership_epoch", "portal_admitted", "portal_resolved"],
+        )
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["witness_refs"],
+            ["witness#1"],
+        )
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["handoff_refs"],
+            ["handoff#witness#1"],
+        )
+
+    def test_operational_shard_negative_reports_missing_live_witness(self) -> None:
+        payload = _run_helper("run-operational", "fsv1-ops-two-shard-hard-boundary-negative")
+
+        self.assertTrue(payload["manifest_passed"])
+        self.assertTrue(payload["runtime_passed"])
+        self.assertTrue(payload["manifest_returncode_passed"])
+        self.assertTrue(payload["runtime_returncode_passed"])
+        self.assertEqual(payload["runtime_returncode_expected"], 2)
+        self.assertFalse(payload["runtime_actual"]["accepted"])
+        self.assertEqual(
+            payload["runtime_actual"]["runtime_rejection_code"],
+            "missing_live_witness",
+        )
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["published_channels"],
+            [
+                "membership_epoch",
+                "shard_handoff_offer",
+                "shard_old_owner_reject",
+                "shard_stale_config_reject",
+            ],
+        )
+
+    def test_operational_gradient_positive_keeps_observer_only_publish_surface(self) -> None:
+        payload = _run_helper("run-operational", "fsv1-ops-gradient-observation-positive")
+
+        self.assertTrue(payload["passed"])
+        self.assertEqual(payload["package_kind"], "gradient_observation")
+        self.assertTrue(payload["manifest_returncode_passed"])
+        self.assertTrue(payload["runtime_returncode_passed"])
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["published_channels"],
+            ["gradient_handoff_hint", "gradient_view", "membership_epoch"],
+        )
+        self.assertEqual(
+            payload["runtime_actual"]["effect_session"]["observed_channels"],
+            ["membership_epoch", "gradient_view"],
+        )
+
     def test_pure_runtime_sample_keeps_empty_effect_session(self) -> None:
         payload = _run_helper("run-runtime", "mir-03-add-one-positive")
 
@@ -188,5 +254,5 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertEqual(payload["validation_errors"], [])
         self.assertEqual(len(payload["checker"]["passed"]), 12)
         self.assertEqual(len(payload["runtime"]["passed"]), 17)
-        self.assertEqual(len(payload["operational"]["passed"]), 6)
-        self.assertEqual(len(payload["passed"]), 35)
+        self.assertEqual(len(payload["operational"]["passed"]), 12)
+        self.assertEqual(len(payload["passed"]), 41)

@@ -1,0 +1,95 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "shard_turn",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.PortalWorldLinkBase",
+    "Shared.ShardBoundaryBase",
+    "Shared.SugorokuBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.TwoShardHardBoundaryPositive"
+  ],
+  "trace_functions": [
+    "FullSystemV1.TwoShardHardBoundaryPositive.shard_turn",
+    "Shared.MembershipChatBase.membership_active",
+    "Shared.ShardBoundaryBase.shard_object",
+    "Shared.ShardBoundaryBase.shard_prepare_label"
+  ],
+  "trace_branch_taken": [
+    "then",
+    "then"
+  ],
+  "trace_output_summaries": [
+    "Unit",
+    "Bool(true)",
+    "Text(\"object#portal-chest\")",
+    "Text(\"prepare#shard-b\")"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "bind",
+    "call",
+    "bind",
+    "call",
+    "let",
+    "let",
+    "publish",
+    "publish",
+    "witness_create",
+    "bind",
+    "handoff",
+    "publish",
+    "observe",
+    "bind",
+    "provider_boundary",
+    "enter",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "if",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [
+      "membership_epoch",
+      "shard_handoff_commit",
+      "shard_handoff_offer",
+      "shard_handoff_prepare"
+    ],
+    "observed_channels": [
+      "membership_epoch",
+      "shard_handoff_commit"
+    ],
+    "witness_refs": [
+      "witness#1"
+    ],
+    "handoff_refs": [
+      "handoff#witness#1"
+    ],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted shard_turn from FullSystemV1.TwoShardHardBoundaryPositive -> Unit"
+}

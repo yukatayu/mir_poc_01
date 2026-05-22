@@ -1,0 +1,89 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_kind": "Transition",
+  "entry_function": "portal_turn",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "contract_require_failed",
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.PortalWorldLinkBase",
+    "Shared.SugorokuBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.PortalAdmissionDeniedNegative"
+  ],
+  "trace_functions": [
+    "FullSystemV1.PortalAdmissionDeniedNegative.portal_turn",
+    "Shared.MembershipChatBase.membership_active",
+    "Shared.PortalWorldLinkBase.portal_destination",
+    "Shared.PortalWorldLinkBase.portal_fallback_label",
+    "Shared.PortalWorldLinkBase.portal_available"
+  ],
+  "trace_branch_taken": [
+    "else",
+    "else"
+  ],
+  "trace_output_summaries": [
+    null,
+    "Bool(true)",
+    "Text(\"world#fallback-hall\")",
+    "Text(\"portal_fallback_local_spawn\")",
+    "Bool(false)"
+  ],
+  "trace_rejection_codes": [
+    "contract_require_failed",
+    null,
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "bind",
+    "let",
+    "call",
+    "bind",
+    "publish",
+    "observe",
+    "bind",
+    "call",
+    "let",
+    "provider_boundary",
+    "call",
+    "enter",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [
+      "membership_epoch",
+      "portal_resolved"
+    ],
+    "observed_channels": [
+      "membership_epoch",
+      "portal_resolved"
+    ],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "runtime rejection in portal_turn: contract_require_failed"
+}

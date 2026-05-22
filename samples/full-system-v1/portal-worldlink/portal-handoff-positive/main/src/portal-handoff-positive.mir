@@ -1,0 +1,76 @@
+module FullSystemV1.PortalWorldLinkPositive
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+import Shared.PortalWorldLinkBase
+
+capability Publisher
+capability Observer
+capability WitnessAuthority
+capability HandoffAuthority
+capability UsePortal
+capability AdmitPortalTraveler
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_portal_resolved(destination: Text) {
+  requires Publisher, UsePortal
+  failure PublishRejected
+}
+
+effect observe_portal_resolved {
+  requires Observer
+  output destination: Text
+  failure ObserveRejected
+}
+
+effect issue_portal_admit_witness(destination: Text) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_portal_traveler(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect publish_portal_admitted(traveler: Text) {
+  requires Publisher, AdmitPortalTraveler
+  failure PublishRejected
+}
+
+effect export_portal_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition portal_turn at PortalBoundaryPlace requires Publisher, Observer, WitnessAuthority, HandoffAuthority, UsePortal, AdmitPortalTraveler {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  let portal_seed: Int64 = 0
+  let traveler: Text = portal_traveler(seen_epoch)
+  resolved <- portal_destination(portal_seed)
+  perform publish_portal_resolved(resolved) via publish_bus
+  seen_destination <- perform observe_portal_resolved via observe_bus
+    ensure seen_destination = resolved
+  arrival_roll_ok <- roll_in_window(4)
+    require arrival_roll_ok
+  let offer: PortalOffer = PortalOffer { destination: seen_destination, traveler: traveler }
+  ticket <- perform issue_portal_admit_witness(offer.destination) via witness_store
+  perform handoff_portal_traveler(ticket) via handoff_port
+  perform publish_portal_admitted(offer.traveler) via publish_bus
+  let summary: Text = observer_label(seen_epoch)
+  perform export_portal_summary(summary) via diagnostic_export
+}
