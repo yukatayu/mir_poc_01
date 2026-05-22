@@ -1,0 +1,13 @@
+module Shared.MembershipChatBase
+
+fn membership_active(epoch: Int64) -> Bool {
+  return epoch = 2
+}
+
+fn render_room_message(seed: Int64) -> Text {
+  if seed = 0 {
+    return "room#lobby message accepted: hello room"
+  } else {
+    return "room#overflow message accepted: hello room"
+  }
+}

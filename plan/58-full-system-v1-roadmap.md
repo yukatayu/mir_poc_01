@@ -8,7 +8,7 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-ENG-03`:
+Current repo state after `P-FSV1-01`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
@@ -19,12 +19,13 @@ Current repo state after `P-ENG-03`:
 - Full System V1 source-first typed checker floor is `actualized` with crate-local typed IR lowering, explicit accepted/residual obligations, imported-module semantic closure, ambiguous import rejection, and a 3-positive / 9-negative sample matrix through `scripts/full_system_v1_samples.py`.
 - Full System V1 pure interpreter floor is `actualized` through the same source-first runtime lane.
 - Full System V1 bounded effectful runtime floor is `actualized` with host read/write, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows through `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, and `samples/full-system-v1/computational/runtime-matrix.json`.
+- Full System V1 bounded source-first operational suite floor is `actualized` through `samples/full-system-v1/world-core/`, `samples/full-system-v1/membership-chat/`, `samples/full-system-v1/sugoroku-world/`, `scripts/full_system_v1_samples.py operational-matrix/check-operational-all`, and `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture` with 6 executable rows, generated package-manifest expectations, generated runtime report expectations, explicit `missing_publication` / `contract_require_failed` negatives, bounded WorldCore observer-safe bootstrap evidence, bounded MembershipChat Mir-owned room-message transform evidence, and bounded Sugoroku roll/publish/witness/handoff/local-cut evidence.
 - Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 5 accepted rows, 1 violation-export row, 3 runtime-rejection rows, bounded save/load admissibility evidence, and observer-safe PoseGraph/devtools export.
 - Full System V1 bounded projection IR plus boundary-schema floor is `actualized` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, and `scripts/projection_v1_samples.py` with 1 accepted row, 3 rejection rows, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure preservation, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, client-write authority rejection, unassigned-place rejection, save/load ownership rejection, and `mirrorea-alpha project-full-v1`.
 - Full System V1 bounded same-binary local role-split floor is `actualized` through `crates/mir-runtime::full_system_v1_local_split`, `samples/full-system-v1/server-client/`, `scripts/projection_v1_samples.py`, and `mirrorea-alpha run-full-v1-split` with 1 accepted row, 1 undeclared-entry rejection row, and generated local-split inventory reports.
 - Full System V1 bounded provider-admission floor is `actualized` through `crates/mir-runtime::full_system_v1_provider_admission`, `samples/full-system-v1/provider-adapter/`, `scripts/provider_admission_samples.py`, `cargo test -p mir-runtime --test provider_admission -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha admit-provider-v1` with 2 accepted rows, 3 rejection rows, matched packet/FFI schema preservation, capability/authority/redaction/retention checks, rollback policy rejection, disabled-native preservation, and explicit WASM inventory-only admission.
 - Full System V1 bounded renderer pose backend demo is `actualized` through `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `samples/full-system-v1/provider-adapter/renderer-pose-matrix.json`, `scripts/renderer_pose_backend_samples.py`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `mirrorea-alpha render-pose-backend-v1` with 1 accepted structural binding-context + snapshot-frontier row and 2 blocked rows while preserving Mir/Mirrorea as semantic owner and leaving attested PoseGraph package provenance later.
-- Broader source-first operational families remain later.
+- Broader source-first portal/shard/gradient operational families remain later.
 
 ## package order
 
@@ -42,7 +43,7 @@ Current repo state after `P-ENG-03`:
 | 9 | `P-PROJ-04` | `FS-07` | local server/client runtime split |
 | 10 | `P-ENG-02` | `FS-08` | provider admission MVP |
 | 11 | `P-ENG-03` | `FS-08` / `FS-05` | renderer pose backend demo |
-| 12 | `P-FSV1-01` | `FS-04` / `FS-11` | source-first WorldCore / MembershipChat / Sugoroku |
+| 12 | `P-FSV1-01` | `FS-04` | source-first WorldCore / MembershipChat / Sugoroku |
 | 13 | `P-FSV1-02` | `FS-05` / `FS-07` | source-first portal / shard / gradient samples |
 | 14 | `P-FSV1-03` | `FS-10` / `FS-11` | Full System V1 release check |
 | 15 | `P-FSV1-99` | `FS-11` | final audit and claim/non-claim cleanup |
@@ -66,6 +67,8 @@ samples/full-system-v1/
   provider-adapter/
 ```
 
+The planned Full System V1 root name `gradient-observation/` is intentionally distinct from the Product Alpha operational runtime root `two-shard-gradient-observation/`; the Full System V1 lane keeps the source-first family name shorter while preserving the same bounded observer-only semantic scope.
+
 `P-MIR-01` actualized `samples/full-system-v1/computational/` as a parser-floor evidence root with 2 positive rows, 8 negative rows, structural/span expected JSON, and `scripts/textual_mir_samples.py`.
 
 `P-MIR-02` added `typed-ir-matrix.json`, `expected/check.json`, `crates/mir-semantics::full_system_v1`, `typed_ir_interpreter` tests, and `scripts/full_system_v1_samples.py` for the first source-first typed checker floor, then widened that floor to reject ambiguous import resolution and imported-module semantic failures before package close.
@@ -88,6 +91,8 @@ samples/full-system-v1/
 
 `P-ENG-03` widened that same root with `renderer-pose-matrix.json`, three renderer-pose sample rows, generated `renderer-pose-backend-report.json`, generated nested `provider-admission-report.json`, `crates/mir-runtime::full_system_v1_renderer_pose_backend`, the `mir_full_system_v1_renderer_pose_backend` example, `mirrorea-alpha render-pose-backend-v1`, `cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/renderer_pose_backend_samples.py` so the same source-first line now validates one accepted renderer pose row with matching binding_context plus snapshot frontier and two blocked rows for `no_split_frame` and `reacquire_required` while preserving the non-claims around renderer-owned world semantics, attested PoseGraph package provenance, arbitrary native/WASM execution, and final provider ABI.
 
+`P-FSV1-01` actualized `samples/full-system-v1/world-core/`, `samples/full-system-v1/membership-chat/`, and `samples/full-system-v1/sugoroku-world/`, widened `scripts/full_system_v1_samples.py` with `operational-matrix`, `run-operational`, and `check-operational-all`, and added runtime tests so the same source-first line now validates 6 executable operational rows with generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` negative rows, bounded WorldCore observer-safe bootstrap evidence, bounded MembershipChat Mir-owned room-message transform evidence, and bounded Sugoroku roll/publish/witness/handoff/local-cut evidence while preserving the non-claims around final world/catalog grammar, portal/shard semantics, distributed save/load, and final product workflow closure.
+
 The wider root remains non-workflow-ready until later packages add the remaining source-first operational families and the Full System V1 release check.
 
 ## validation direction
@@ -104,6 +109,8 @@ Current source-first anchors:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py operational-matrix --format json
+python3 scripts/full_system_v1_samples.py check-operational-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json

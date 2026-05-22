@@ -15,6 +15,12 @@ fn unique_temp_dir(prefix: &str) -> PathBuf {
     std::env::temp_dir().join(format!("{prefix}-{}-{nonce}", std::process::id()))
 }
 
+fn repo_sample_path(relative_path: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/full-system-v1")
+        .join(relative_path)
+}
+
 fn write_module(root: &Path, relative_path: &str, source: &str) -> PathBuf {
     let path = root.join(relative_path);
     fs::create_dir_all(path.parent().expect("module path should have parent"))
@@ -294,5 +300,153 @@ transition render_pose at ClientView requires RenderFrame {
             .as_ref()
             .map(|row| row.code.as_str()),
         Some("unsupported_effect_runtime")
+    );
+}
+
+#[test]
+fn runtime_session_executes_world_core_source_operational_sample() {
+    let source = repo_sample_path(
+        "world-core/world-bootstrap-positive/main/src/world-bootstrap-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "bootstrap_world", 0);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec!["membership_epoch".to_string()]
+    );
+    assert!(
+        report
+            .runtime
+            .compute_trace
+            .iter()
+            .flat_map(|trace| trace.events.iter())
+            .any(|event| event.kind == "provider_boundary")
+    );
+}
+
+#[test]
+fn runtime_session_rejects_world_core_missing_publication_sample() {
+    let source = repo_sample_path(
+        "world-core/world-observe-before-bootstrap-negative/main/src/world-observe-before-bootstrap-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "bootstrap_world", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("missing_publication")
+    );
+}
+
+#[test]
+fn runtime_session_executes_membership_chat_positive_sample() {
+    let source = repo_sample_path(
+        "membership-chat/chat-room-message-positive/main/src/chat-room-message-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "chat_turn", 0);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    let mut published_channels = report.runtime.effect_session.published_channels.clone();
+    published_channels.sort();
+    assert_eq!(
+        published_channels,
+        vec!["chat_message".to_string(), "membership_epoch".to_string()]
+    );
+}
+
+#[test]
+fn runtime_session_rejects_membership_chat_stale_membership_sample() {
+    let source = repo_sample_path(
+        "membership-chat/chat-stale-membership-negative/main/src/chat-stale-membership-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "chat_turn", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("contract_require_failed")
+    );
+}
+
+#[test]
+fn runtime_session_rejects_sugoroku_stale_membership_sample() {
+    let source = repo_sample_path(
+        "sugoroku-world/sugoroku-stale-membership-negative/main/src/sugoroku-stale-membership-negative.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "main", 5);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("contract_require_failed")
+    );
+    assert_eq!(
+        report.runtime.effect_session.published_channels,
+        vec!["membership_epoch".to_string()]
+    );
+}
+
+#[test]
+fn runtime_session_executes_sugoroku_source_operational_sample() {
+    let source = repo_sample_path(
+        "sugoroku-world/sugoroku-turn-positive/main/src/sugoroku-turn-positive.mir",
+    );
+
+    let report = run_full_system_v1_session_path(&source, "main", 5);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert_eq!(
+        report.runtime.effect_session.host_output[0].summary,
+        "Int64(5)"
+    );
+    assert_eq!(
+        report.runtime.effect_session.accepted_cuts,
+        vec!["sugoroku-turn-finished".to_string()]
+    );
+    assert_eq!(
+        report.runtime.effect_session.witness_refs,
+        vec!["witness#1".to_string()]
     );
 }

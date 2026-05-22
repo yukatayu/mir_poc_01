@@ -1,0 +1,46 @@
+module FullSystemV1.SugorokuStaleMembershipNegative
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+
+capability HostRead
+capability HostWrite
+capability Publisher
+capability Observer
+capability SendRoomMessage
+capability WitnessAuthority
+capability HandoffAuthority
+capability CutAuthority
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+transition main at SugorokuPlace requires HostRead, Publisher, Observer {
+  let epoch: Int64 = 3
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  roll_seed <- perform read_int via host_input
+  roll <- normalize_roll(roll_seed)
+  perform publish_roll(roll) via publish_bus
+}

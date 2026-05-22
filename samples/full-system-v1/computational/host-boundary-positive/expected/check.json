@@ -25,6 +25,7 @@
   "transition_summaries": [
     {
       "transition_name": "main",
+      "place_ref": "ComputationalHostPlace",
       "required_capabilities": ["HostRead", "HostWrite"],
       "statement_kinds": ["Bind", "Bind", "Perform"],
       "binding_types": ["Int64", "Int64"],

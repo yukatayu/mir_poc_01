@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_membership_chat",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-membership-chat-positive",
+      "root_name": "chat-room-message-positive",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "chat-room-message-positive/main/src/chat-room-message-positive.mir",
+      "expected_manifest": "chat-room-message-positive/expected/manifest.json",
+      "expected_run": "chat-room-message-positive/expected/run.json",
+      "entry_function": "chat_turn",
+      "input": 0
+    },
+    {
+      "sample_id": "fsv1-ops-membership-chat-negative",
+      "root_name": "chat-stale-membership-negative",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "chat-stale-membership-negative/main/src/chat-stale-membership-negative.mir",
+      "expected_manifest": "chat-stale-membership-negative/expected/manifest.json",
+      "expected_run": "chat-stale-membership-negative/expected/run.json",
+      "entry_function": "chat_turn",
+      "input": 0
+    }
+  ]
+}

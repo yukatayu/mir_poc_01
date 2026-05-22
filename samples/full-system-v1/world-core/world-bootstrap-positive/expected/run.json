@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "bootstrap_world",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Shared.WorldCoreBase",
+    "FullSystemV1.WorldBootstrapPositive"
+  ],
+  "trace_functions": [
+    "FullSystemV1.WorldBootstrapPositive.bootstrap_world",
+    "Shared.WorldCoreBase.observer_label"
+  ],
+  "trace_branch_taken": [
+    "then"
+  ],
+  "trace_output_summaries": [
+    "Unit",
+    "Text(\"observer_safe_world_ready\")"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "bind",
+    "call",
+    "let",
+    "let",
+    "provider_boundary",
+    "enter",
+    "if",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [
+      "membership_epoch"
+    ],
+    "observed_channels": [
+      "membership_epoch"
+    ],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted bootstrap_world from FullSystemV1.WorldBootstrapPositive -> Unit"
+}

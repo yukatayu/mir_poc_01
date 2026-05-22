@@ -1,0 +1,107 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "main",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.SugorokuTurnPositive"
+  ],
+  "trace_functions": [
+    "FullSystemV1.SugorokuTurnPositive.main",
+    "Shared.MembershipChatBase.membership_active",
+    "Shared.SugorokuBase.normalize_roll",
+    "Shared.MembershipChatBase.render_room_message",
+    "Shared.SugorokuBase.roll_in_window"
+  ],
+  "trace_branch_taken": [
+    "else",
+    "else",
+    "then"
+  ],
+  "trace_output_summaries": [
+    "Unit",
+    "Bool(true)",
+    "Int64(5)",
+    "Text(\"room#lobby message accepted: hello room\")",
+    "Bool(true)"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "bind",
+    "host_read",
+    "bind",
+    "call",
+    "bind",
+    "host_write",
+    "call",
+    "let",
+    "publish",
+    "publish",
+    "observe",
+    "bind",
+    "call",
+    "witness_create",
+    "bind",
+    "handoff",
+    "seal_places",
+    "quiesce_messages",
+    "atomic_cut",
+    "enter",
+    "return",
+    "enter",
+    "if",
+    "if",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [
+      "Int64(5)"
+    ],
+    "published_channels": [
+      "chat_message",
+      "membership_epoch",
+      "roll"
+    ],
+    "observed_channels": [
+      "membership_epoch",
+      "roll"
+    ],
+    "witness_refs": [
+      "witness#1"
+    ],
+    "handoff_refs": [
+      "handoff#witness#1"
+    ],
+    "accepted_cuts": [
+      "sugoroku-turn-finished"
+    ],
+    "all_places_sealed": true,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted main from FullSystemV1.SugorokuTurnPositive -> Unit"
+}

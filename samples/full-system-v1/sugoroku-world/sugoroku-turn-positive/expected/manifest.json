@@ -1,0 +1,249 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-sugoroku-world-positive",
+  "package_kind": "sugoroku_world",
+  "semantic_source_of_truth": "samples/full-system-v1/sugoroku-world/sugoroku-turn-positive/main/src/sugoroku-turn-positive.mir",
+  "module_path": "FullSystemV1.SugorokuTurnPositive",
+  "import_paths": [
+    "Shared.WorldCoreBase",
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/sugoroku-world/shared/src/world-core-base.mir",
+    "samples/full-system-v1/sugoroku-world/shared/src/membership-chat-base.mir",
+    "samples/full-system-v1/sugoroku-world/shared/src/sugoroku-base.mir"
+  ],
+  "capability_names": [
+    "HostRead",
+    "HostWrite",
+    "Publisher",
+    "Observer",
+    "SendRoomMessage",
+    "WitnessAuthority",
+    "HandoffAuthority",
+    "CutAuthority"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "read_int",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "HostRead"
+      ],
+      "failure_row": [
+        "AdapterUnavailable"
+      ]
+    },
+    {
+      "effect_name": "write_int",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "HostWrite"
+      ],
+      "failure_row": [
+        "AdapterUnavailable"
+      ]
+    },
+    {
+      "effect_name": "publish_membership_epoch",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_chat_message",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher",
+        "SendRoomMessage"
+      ],
+      "failure_row": [
+        "PublishRejected",
+        "RateLimited"
+      ]
+    },
+    {
+      "effect_name": "publish_roll",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_roll",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "issue_turn_witness",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": "Text",
+      "required_capabilities": [
+        "WitnessAuthority"
+      ],
+      "failure_row": [
+        "WitnessRejected"
+      ]
+    },
+    {
+      "effect_name": "handoff_turn",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "HandoffAuthority"
+      ],
+      "failure_row": [
+        "HandoffRejected"
+      ]
+    },
+    {
+      "effect_name": "seal_places",
+      "parameter_types": [],
+      "output_type": null,
+      "required_capabilities": [
+        "CutAuthority"
+      ],
+      "failure_row": [
+        "CutRejected"
+      ]
+    },
+    {
+      "effect_name": "quiesce_messages",
+      "parameter_types": [],
+      "output_type": null,
+      "required_capabilities": [
+        "CutAuthority"
+      ],
+      "failure_row": [
+        "CutRejected"
+      ]
+    },
+    {
+      "effect_name": "atomic_cut",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "CutAuthority"
+      ],
+      "failure_row": [
+        "CutRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "main",
+      "place_ref": "SugorokuPlace",
+      "required_capabilities": [
+        "HostRead",
+        "HostWrite",
+        "Publisher",
+        "Observer",
+        "SendRoomMessage",
+        "WitnessAuthority",
+        "HandoffAuthority",
+        "CutAuthority"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Perform",
+        "Bind",
+        "Bind",
+        "Bind",
+        "Perform",
+        "Let",
+        "Perform",
+        "Perform",
+        "Bind",
+        "Bind",
+        "Perform",
+        "Perform",
+        "Perform",
+        "Perform"
+      ],
+      "binding_types": [
+        "Int64",
+        "Int64",
+        "Int64",
+        "Int64",
+        "Text"
+      ],
+      "perform_effects": [
+        "publish_membership_epoch",
+        "observe_membership_epoch",
+        "read_int",
+        "write_int",
+        "publish_chat_message",
+        "publish_roll",
+        "observe_roll",
+        "issue_turn_witness",
+        "handoff_turn",
+        "seal_places",
+        "quiesce_messages",
+        "atomic_cut"
+      ],
+      "contract_clause_kinds": [
+        "Require",
+        "Ensure"
+      ]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

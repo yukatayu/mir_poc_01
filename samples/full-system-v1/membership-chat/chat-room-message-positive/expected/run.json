@@ -1,0 +1,80 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "chat_turn",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.ChatRoomMessagePositive"
+  ],
+  "trace_functions": [
+    "FullSystemV1.ChatRoomMessagePositive.chat_turn",
+    "Shared.MembershipChatBase.membership_active",
+    "Shared.MembershipChatBase.render_room_message",
+    "Shared.WorldCoreBase.observer_label"
+  ],
+  "trace_branch_taken": [
+    "then",
+    "then"
+  ],
+  "trace_output_summaries": [
+    "Unit",
+    "Bool(true)",
+    "Text(\"room#lobby message accepted: hello room\")",
+    "Text(\"observer_safe_room_ready\")"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "bind",
+    "call",
+    "let",
+    "let",
+    "publish",
+    "observe",
+    "bind",
+    "call",
+    "provider_boundary",
+    "enter",
+    "return",
+    "enter",
+    "if",
+    "return",
+    "enter",
+    "if",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [
+      "chat_message",
+      "membership_epoch"
+    ],
+    "observed_channels": [
+      "membership_epoch",
+      "chat_message"
+    ],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted chat_turn from FullSystemV1.ChatRoomMessagePositive -> Unit"
+}

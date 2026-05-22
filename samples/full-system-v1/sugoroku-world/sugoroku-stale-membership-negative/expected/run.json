@@ -1,0 +1,55 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_kind": "Transition",
+  "entry_function": "main",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "contract_require_failed",
+  "program_module_paths": [
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase",
+    "Shared.WorldCoreBase",
+    "FullSystemV1.SugorokuStaleMembershipNegative"
+  ],
+  "trace_functions": [
+    "FullSystemV1.SugorokuStaleMembershipNegative.main",
+    "Shared.MembershipChatBase.membership_active"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    null,
+    "Bool(false)"
+  ],
+  "trace_rejection_codes": [
+    "contract_require_failed",
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "let",
+    "publish",
+    "observe",
+    "call",
+    "enter",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 1,
+    "host_output_summaries": [],
+    "published_channels": [
+      "membership_epoch"
+    ],
+    "observed_channels": [
+      "membership_epoch"
+    ],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": false,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "runtime rejection in main: contract_require_failed"
+}

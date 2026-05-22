@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 16:40 JST
+最終更新: 2026-05-22 17:38 JST
 
 ## document role
 
@@ -44,11 +44,11 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-FSV1-01 source operational suite`
-- Current status after this snapshot: `FS-08` bounded provider admission plus renderer pose backend is now actualized over the source-derived projection/local role-split/PoseGraph floor with viewer-diagnostic inventory admission, WASM inventory-only admission, over-capability rejection, missing rollback policy rejection, native-disabled rejection, one accepted renderer binding-context + snapshot-frontier row, and two blocked renderer rows
-- Next promoted package after the current closeout: `P-FSV1-02 portal/shard source samples`
+- Current package: `P-FSV1-02 portal/shard source samples`
+- Current status after this snapshot: `FS-08` bounded provider admission plus renderer pose backend remains actualized, and `P-FSV1-01` now adds bounded source-first WorldCore / MembershipChat / Sugoroku operational roots with 6 executable rows, generated package-manifest expectations, runtime report expectations, explicit `missing_publication` / `contract_require_failed` negatives, and bounded local roll/publish/witness/handoff/local-cut evidence
+- Next promoted package after the current closeout: `P-FSV1-03 full V1 release check`
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, and a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, a bounded source-first operational lane that actualizes WorldCore bootstrap, MembershipChat room-message transform, and Sugoroku roll/publish/witness/handoff/local-cut rows from `.mir` sources, a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export, a bounded projection IR lane that lowers accepted source plus `projection.request.json` into projection IR, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure rows, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, unassigned-place rejection, and save/load ownership rejection, a bounded same-binary local role-split lane that launches admitted server/client targets from one accepted projection manifest while rejecting undeclared entry overrides, a bounded provider-admission lane that checks matched packet/FFI schema refs, capability/authority/redaction/retention rows, rollback/replay/cut policy, native-disabled default, and explicit WASM inventory-only admission without widening world semantics ownership, and a bounded renderer pose backend lane that admits one observer-safe binding-context + snapshot-frontier delivery row while blocking split-frame and reacquire-invalid posegraph rows before any renderer ownership claim. This is still bounded local evidence, not attested PoseGraph package provenance, not final effect grammar, not final packet/FFI transport semantics, not a final server/client binary split, not arbitrary native/WASM execution, and not final public devtools family.
 
 ## completed milestones
 
@@ -64,10 +64,13 @@ The final direction for this roadmap is source-first:
 - `P-PROJ-04` server/client local split
 - `P-ENG-02` provider admission
 - `P-ENG-03` renderer pose backend demo
+- `P-FSV1-01` source operational suite
 
 ## runnable commands
 
 - `python3 scripts/textual_mir_samples.py check-all --format json`
+- `python3 scripts/full_system_v1_samples.py operational-matrix --format json`
+- `python3 scripts/full_system_v1_samples.py check-operational-all --format json`
 - `python3 scripts/full_system_v1_samples.py check-all --format json`
 - `python3 scripts/posegraph_runtime_samples.py check-all --format json`
 - `python3 scripts/projection_v1_samples.py check-all --format json`
@@ -130,10 +133,15 @@ Current evidence:
 - shared attach packages.
 - projection inventory.
 - bounded portal/shard/gradient runtime cuts.
+- `samples/full-system-v1/world-core/`
+- `samples/full-system-v1/membership-chat/`
+- `samples/full-system-v1/sugoroku-world/`
+- `python3 scripts/full_system_v1_samples.py check-operational-all --format json`
+- 6 executable source-first operational rows with generated package-manifest and runtime expectations.
 
 Next gap:
 
-- Source-first operational roots beyond computational and avatar-pose under `samples/full-system-v1/`.
+- `P-FSV1-02` source-first portal / shard / gradient roots beyond the newly actualized WorldCore / MembershipChat / Sugoroku lane.
 
 ### Mir Language line
 
@@ -161,7 +169,7 @@ Current evidence:
 
 Next gap:
 
-- `P-FSV1-01` source operational suite, then `P-FSV1-02` portal/shard source samples.
+- `P-FSV1-02` portal/shard source samples, then `P-FSV1-03` full V1 release check.
 
 ### PoseGraph line
 
@@ -238,17 +246,16 @@ Next gap:
 
 ## validation floor
 
-Required for `P-ENG-03` closeout and retained for the provider/backend lane:
+Required for `P-FSV1-01` closeout and retained for the current operational-source lane:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
-python3 -m unittest scripts.tests.test_provider_admission_samples
-python3 -m unittest scripts.tests.test_renderer_pose_backend_samples
-cargo test -p mir-runtime --test provider_admission -- --nocapture
-cargo test -p mir-runtime --test renderer_pose_backend -- --nocapture
+python3 -m unittest scripts.tests.test_full_system_v1_samples
+cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
 cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
-python3 scripts/provider_admission_samples.py check-all --format json
-python3 scripts/renderer_pose_backend_samples.py check-all --format json
+python3 scripts/full_system_v1_samples.py operational-matrix --format json
+python3 scripts/full_system_v1_samples.py check-operational-all --format json
+python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
@@ -310,12 +317,12 @@ Research-discovery items:
 | `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, and bounded renderer pose backend are actualized; source-first operational suites are next | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | planned source-first full-system suite | heavy | 後段依存 |
+| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, source-first WorldCore/MembershipChat/Sugoroku operational roots, PoseGraph runtime, bounded pose save/devtools, bounded projection IR plus boundary schemas, bounded local role split, bounded provider admission, and bounded renderer pose backend are actualized; portal/shard source suites are next | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | partial source-first full-system suite actualized; portal/shard/gradient and release check remain later | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | product alpha floor exists; bounded projection IR plus schemas, local role split, provider admission, and renderer pose backend are actualized; source-first operational suites are next | heavy | 着手可能 |
-| `Macro 8` | application realization | operational suite exists; source-first computational and avatar-pose roots are actualized while wider suite remains planned | heavy | 着手可能 |
+| `Macro 8` | application realization | operational suite exists; source-first computational, world-core, membership-chat, sugoroku-world, and avatar-pose roots are actualized while portal/shard/gradient remain later | heavy | 着手可能 |
 
 ## feature maturity rows
 
@@ -326,12 +333,15 @@ Research-discovery items:
 | Mir-owned computation | `first-floor-evidence` | bounded product-alpha rows plus source-derived pure/effectful runtime rows exist | 着手可能 |
 | effectful Mir | `first-floor-evidence` | bounded local session semantics for host boundary, publish/observe, witness/handoff, and local atomic-cut now execute; broader distributed/runtime-complete semantics remain later | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
-| operational suite | `workflow-ready` | bounded local/Docker suite | maintenance / source-first variants later |
+| operational suite | `workflow-ready` | bounded local/Docker suite plus bounded source-first WorldCore/MembershipChat/Sugoroku roots | maintenance / portal-shard source variants next |
 | PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime/save-load/devtools avatar-pose root exist; bounded renderer/provider wiring is actualized and wider source-first suites remain later | 着手可能 |
 | projection/backend | `first-floor-evidence` | bounded projection IR, target manifests, packet/FFI schemas, preservation reports, explicit client-write authority rejection, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, same-binary local role-run plus undeclared-entry rejection, bounded provider admission, and bounded renderer pose backend now execute | 着手可能 |
 | engine/provider | `first-floor-evidence` | product-alpha inventory remains comparison evidence while Full System V1 now admits bounded viewer-diagnostic/WASM inventory rows, rejects over-capability/missing rollback/native-disabled rows, and proves bounded renderer pose delivery without widening semantic ownership | 着手可能 |
 
 ## recent log
+
+- 2026-05-22 17:38 JST
+  `P-FSV1-01` closeout で `samples/full-system-v1/world-core/`、`membership-chat/`、`sugoroku-world/`、`scripts/full_system_v1_samples.py operational-matrix/run-operational/check-operational-all`、`scripts/tests/test_full_system_v1_samples.py`、`cargo test -p mir-runtime --test full_system_v1_session -- --nocapture` を同期し、generated package-manifest expectations、runtime report expectations、WorldCore accepted/missing-publication rows、MembershipChat accepted/stale-membership rows、Sugoroku accepted/stale-membership rowsを固定したうえで current package を `P-FSV1-02`、次 closeout 後の promoted package を `P-FSV1-03` に更新した。
 
 - 2026-05-22 17:13 JST
   `P-ENG-03` closeout を reviewer 指摘に合わせて recut し、renderer lane を generic session から切り離した admitted-boundary 実行、PoseGraph package の binding_context 照合、CLI helper 実行、accepted renderer binding-context + frontier row 1 件、split-frame block 1 件、reacquire block 1 件、generated renderer/provider reports、snapshot docs を同期したうえで current package を `P-FSV1-01`、次 closeout 後の promoted package を `P-FSV1-02` に更新した。

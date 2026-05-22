@@ -1,0 +1,76 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-world-core-negative",
+  "package_kind": "world_core",
+  "semantic_source_of_truth": "samples/full-system-v1/world-core/world-observe-before-bootstrap-negative/main/src/world-observe-before-bootstrap-negative.mir",
+  "module_path": "FullSystemV1.WorldObserveBeforeBootstrapNegative",
+  "import_paths": [
+    "Shared.WorldCoreBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/world-core/shared/src/world-core-base.mir"
+  ],
+  "capability_names": [
+    "Observer"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "export_world_summary",
+      "parameter_types": [
+        "Text"
+      ],
+      "output_type": null,
+      "required_capabilities": [],
+      "failure_row": [
+        "ExportRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "bootstrap_world",
+      "place_ref": "WorldServerPlace",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Bind",
+        "Perform"
+      ],
+      "binding_types": [
+        "Int64"
+      ],
+      "perform_effects": [
+        "observe_membership_epoch",
+        "export_world_summary"
+      ],
+      "contract_clause_kinds": []
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

@@ -1,0 +1,47 @@
+module FullSystemV1.ChatRoomMessagePositive
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+
+capability Publisher
+capability Observer
+capability SendRoomMessage
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_chat_message(message: Text) {
+  requires Publisher, SendRoomMessage
+  failure PublishRejected, RateLimited
+}
+
+effect observe_chat_message {
+  requires Observer
+  output seen: Text
+  failure ObserveRejected
+}
+
+effect export_room_message(message: Text) {
+  failure ExportRejected
+}
+
+transition chat_turn at LobbyPlace requires Publisher, Observer, SendRoomMessage {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  let rendered: Text = render_room_message(0)
+  let envelope: ChatEnvelope = ChatEnvelope { room: "room#lobby", body: rendered }
+  perform publish_chat_message(envelope.body) via publish_bus
+  echoed <- perform observe_chat_message via observe_bus
+    ensure echoed = rendered
+  perform export_room_message(observer_label(seen_epoch)) via diagnostic_export
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": "full-system-v1-generated-package-manifest-v0",
+  "sample_id": "fsv1-ops-sugoroku-world-negative",
+  "package_kind": "sugoroku_world",
+  "semantic_source_of_truth": "samples/full-system-v1/sugoroku-world/sugoroku-stale-membership-negative/main/src/sugoroku-stale-membership-negative.mir",
+  "module_path": "FullSystemV1.SugorokuStaleMembershipNegative",
+  "import_paths": [
+    "Shared.WorldCoreBase",
+    "Shared.MembershipChatBase",
+    "Shared.SugorokuBase"
+  ],
+  "resolved_paths": [
+    "samples/full-system-v1/sugoroku-world/shared/src/world-core-base.mir",
+    "samples/full-system-v1/sugoroku-world/shared/src/membership-chat-base.mir",
+    "samples/full-system-v1/sugoroku-world/shared/src/sugoroku-base.mir"
+  ],
+  "capability_names": [
+    "HostRead",
+    "HostWrite",
+    "Publisher",
+    "Observer",
+    "SendRoomMessage",
+    "WitnessAuthority",
+    "HandoffAuthority",
+    "CutAuthority"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "read_int",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "HostRead"
+      ],
+      "failure_row": [
+        "AdapterUnavailable"
+      ]
+    },
+    {
+      "effect_name": "publish_membership_epoch",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    },
+    {
+      "effect_name": "observe_membership_epoch",
+      "parameter_types": [],
+      "output_type": "Int64",
+      "required_capabilities": [
+        "Observer"
+      ],
+      "failure_row": [
+        "ObserveRejected"
+      ]
+    },
+    {
+      "effect_name": "publish_roll",
+      "parameter_types": [
+        "Int64"
+      ],
+      "output_type": null,
+      "required_capabilities": [
+        "Publisher"
+      ],
+      "failure_row": [
+        "PublishRejected"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "main",
+      "place_ref": "SugorokuPlace",
+      "required_capabilities": [
+        "HostRead",
+        "Publisher",
+        "Observer"
+      ],
+      "statement_kinds": [
+        "Let",
+        "Perform",
+        "Bind",
+        "Bind",
+        "Bind",
+        "Perform"
+      ],
+      "binding_types": [
+        "Int64",
+        "Int64",
+        "Int64"
+      ],
+      "perform_effects": [
+        "publish_membership_epoch",
+        "observe_membership_epoch",
+        "read_int",
+        "publish_roll"
+      ],
+      "contract_clause_kinds": [
+        "Require"
+      ]
+    }
+  ],
+  "accepted_obligation_codes": [
+    "imports_resolved",
+    "effect_failure_rows_explicit",
+    "typed_scope_closed"
+  ],
+  "residual_obligation_codes": [
+    "ambient_effect_row_containment_not_modeled",
+    "ambient_failure_row_containment_not_modeled"
+  ],
+  "diagnostic_codes": [],
+  "compatibility_artifact_only": true,
+  "final_public_api_frozen": false
+}

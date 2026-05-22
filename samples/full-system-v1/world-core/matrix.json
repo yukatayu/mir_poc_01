@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_world_core",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-world-core-positive",
+      "root_name": "world-bootstrap-positive",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "world-bootstrap-positive/main/src/world-bootstrap-positive.mir",
+      "expected_manifest": "world-bootstrap-positive/expected/manifest.json",
+      "expected_run": "world-bootstrap-positive/expected/run.json",
+      "entry_function": "bootstrap_world",
+      "input": 0
+    },
+    {
+      "sample_id": "fsv1-ops-world-core-negative",
+      "root_name": "world-observe-before-bootstrap-negative",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "world-observe-before-bootstrap-negative/main/src/world-observe-before-bootstrap-negative.mir",
+      "expected_manifest": "world-observe-before-bootstrap-negative/expected/manifest.json",
+      "expected_run": "world-observe-before-bootstrap-negative/expected/run.json",
+      "entry_function": "bootstrap_world",
+      "input": 0
+    }
+  ]
+}

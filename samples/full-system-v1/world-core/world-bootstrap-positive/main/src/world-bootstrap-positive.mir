@@ -1,0 +1,32 @@
+module FullSystemV1.WorldBootstrapPositive
+
+import Shared.WorldCoreBase
+
+capability WorldAdmin
+capability Publisher
+capability Observer
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect export_world_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition bootstrap_world at WorldServerPlace requires WorldAdmin, Publisher, Observer {
+  let epoch: Int64 = 1
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    ensure seen_epoch = epoch
+  let label: Text = observer_label(seen_epoch)
+  let snapshot: WorldSnapshot = WorldSnapshot { epoch: seen_epoch, observer_label: label }
+  perform export_world_summary(snapshot.observer_label) via diagnostic_export
+}

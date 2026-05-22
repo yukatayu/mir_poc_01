@@ -1,0 +1,33 @@
+module FullSystemV1.ChatStaleMembershipNegative
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+
+capability Publisher
+capability Observer
+capability SendRoomMessage
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_chat_message(message: Text) {
+  requires Publisher, SendRoomMessage
+  failure PublishRejected, RateLimited
+}
+
+transition chat_turn at LobbyPlace requires Publisher, Observer, SendRoomMessage {
+  let epoch: Int64 = 3
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  let rendered: Text = render_room_message(0)
+  perform publish_chat_message(rendered) via publish_bus
+}

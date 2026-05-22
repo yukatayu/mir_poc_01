@@ -1,0 +1,21 @@
+module FullSystemV1.WorldObserveBeforeBootstrapNegative
+
+import Shared.WorldCoreBase
+
+capability Observer
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect export_world_summary(summary: Text) {
+  failure ExportRejected
+}
+
+transition bootstrap_world at WorldServerPlace requires Observer {
+  let pending_label: Text = observer_label(0)
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+  perform export_world_summary(pending_label) via diagnostic_export
+}

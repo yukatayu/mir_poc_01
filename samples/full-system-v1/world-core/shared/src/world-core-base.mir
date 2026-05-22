@@ -1,0 +1,14 @@
+module Shared.WorldCoreBase
+
+record WorldSnapshot {
+  epoch: Int64,
+  observer_label: Text,
+}
+
+fn observer_label(epoch: Int64) -> Text {
+  if epoch = 1 {
+    return "observer_safe_world_ready"
+  } else {
+    return "observer_safe_world_pending"
+  }
+}

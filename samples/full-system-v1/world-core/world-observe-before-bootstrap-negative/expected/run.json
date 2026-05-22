@@ -1,0 +1,50 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_kind": "Transition",
+  "entry_function": "bootstrap_world",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "missing_publication",
+  "program_module_paths": [
+    "Shared.WorldCoreBase",
+    "FullSystemV1.WorldObserveBeforeBootstrapNegative"
+  ],
+  "trace_functions": [
+    "FullSystemV1.WorldObserveBeforeBootstrapNegative.bootstrap_world",
+    "Shared.WorldCoreBase.observer_label"
+  ],
+  "trace_branch_taken": [
+    "else"
+  ],
+  "trace_output_summaries": [
+    null,
+    "Text(\"observer_safe_world_pending\")"
+  ],
+  "trace_rejection_codes": [
+    "missing_publication",
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "call",
+    "let",
+    "enter",
+    "if",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "runtime rejection in bootstrap_world: missing_publication"
+}

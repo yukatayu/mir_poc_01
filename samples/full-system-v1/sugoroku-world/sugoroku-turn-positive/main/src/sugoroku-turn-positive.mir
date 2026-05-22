@@ -1,0 +1,98 @@
+module FullSystemV1.SugorokuTurnPositive
+
+import Shared.WorldCoreBase
+import Shared.MembershipChatBase
+import Shared.SugorokuBase
+
+capability HostRead
+capability HostWrite
+capability Publisher
+capability Observer
+capability SendRoomMessage
+capability WitnessAuthority
+capability HandoffAuthority
+capability CutAuthority
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+effect publish_membership_epoch(epoch: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_membership_epoch {
+  requires Observer
+  output epoch: Int64
+  failure ObserveRejected
+}
+
+effect publish_chat_message(message: Text) {
+  requires Publisher, SendRoomMessage
+  failure PublishRejected, RateLimited
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll {
+  requires Observer
+  output seen: Int64
+  failure ObserveRejected
+}
+
+effect issue_turn_witness(turn: Int64) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect seal_places {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect quiesce_messages {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires HostRead, HostWrite, Publisher, Observer, SendRoomMessage, WitnessAuthority, HandoffAuthority, CutAuthority {
+  let epoch: Int64 = 2
+  perform publish_membership_epoch(epoch) via publish_bus
+  seen_epoch <- perform observe_membership_epoch via observe_bus
+    require membership_active(seen_epoch)
+  roll_seed <- perform read_int via host_input
+  roll <- normalize_roll(roll_seed)
+  perform write_int(roll) via host_output
+  let room_message: Text = render_room_message(0)
+  perform publish_chat_message(room_message) via publish_bus
+  perform publish_roll(roll) via publish_bus
+  seen_roll <- perform observe_roll via observe_bus
+    ensure roll_in_window(seen_roll)
+  ticket <- perform issue_turn_witness(seen_roll) via witness_store
+  perform handoff_turn(ticket) via handoff_port
+  perform seal_places via session_admin
+  perform quiesce_messages via session_admin
+  perform atomic_cut("sugoroku-turn-finished") via session_cut
+}

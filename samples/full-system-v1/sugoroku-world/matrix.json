@@ -1,0 +1,28 @@
+{
+  "family": "full_system_v1_sugoroku_world",
+  "current_status": "source_operational_suite_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "fsv1-ops-sugoroku-world-positive",
+      "root_name": "sugoroku-turn-positive",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "sugoroku-turn-positive/main/src/sugoroku-turn-positive.mir",
+      "expected_manifest": "sugoroku-turn-positive/expected/manifest.json",
+      "expected_run": "sugoroku-turn-positive/expected/run.json",
+      "entry_function": "main",
+      "input": 5
+    },
+    {
+      "sample_id": "fsv1-ops-sugoroku-world-negative",
+      "root_name": "sugoroku-stale-membership-negative",
+      "stage": "P-FSV1-01",
+      "current_status": "executable",
+      "source": "sugoroku-stale-membership-negative/main/src/sugoroku-stale-membership-negative.mir",
+      "expected_manifest": "sugoroku-stale-membership-negative/expected/manifest.json",
+      "expected_run": "sugoroku-stale-membership-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 5
+    }
+  ]
+}
