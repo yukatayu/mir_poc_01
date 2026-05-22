@@ -1,6 +1,7 @@
 {
   "accepted": false,
   "outcome": "StaticRejection",
+  "entry_kind": "Function",
   "entry_function": "use_imported",
   "output_summary": null,
   "diagnostic_codes": [
@@ -18,5 +19,17 @@
   "trace_output_summaries": [],
   "trace_rejection_codes": [],
   "trace_event_kinds": [],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
   "observer_safe_summary": "static rejection before executing use_imported: return_type_mismatch, effect_failure_row_missing"
 }

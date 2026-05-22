@@ -1,0 +1,44 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_kind": "Transition",
+  "entry_function": "main",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "stale_state_non_resurrection",
+  "program_module_paths": [
+    "FullSystemV1.AtomicCutStaleLoadNegative"
+  ],
+  "trace_functions": [
+    "FullSystemV1.AtomicCutStaleLoadNegative.main"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    null
+  ],
+  "trace_rejection_codes": [
+    "stale_state_non_resurrection"
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "seal_places",
+    "quiesce_messages",
+    "atomic_cut"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [
+      "turn-finished"
+    ],
+    "all_places_sealed": true,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "runtime rejection in main: stale_state_non_resurrection"
+}

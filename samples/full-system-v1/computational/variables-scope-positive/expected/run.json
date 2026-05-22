@@ -1,6 +1,7 @@
 {
   "accepted": true,
   "outcome": "Accepted",
+  "entry_kind": "Function",
   "entry_function": "clamp_zero",
   "output_summary": "Int64(0)",
   "diagnostic_codes": [],
@@ -27,5 +28,17 @@
     "assign",
     "return"
   ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
   "observer_safe_summary": "accepted clamp_zero from Computational.Scope.Positive -> Int64(0)"
 }

@@ -93,3 +93,165 @@ fn select(x: Int64) -> Int64 {
     );
     assert!(!report.runtime.compute_trace.is_empty());
 }
+
+#[test]
+fn runtime_session_executes_effectful_transition_with_observer_safe_summary() {
+    let root = unique_temp_dir("mir-full-system-v1-session-effectful");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+
+    write_module(
+        &root,
+        "shared/src/add-one.mir",
+        r#"module Shared.AddOne
+
+fn add_one(x: Int64) -> Int64 {
+  return x + 1
+}
+"#,
+    );
+    let source = write_module(
+        &root,
+        "main/src/effectful-positive.mir",
+        r#"module FullSystemV1.EffectfulPositive
+
+import Shared.AddOne
+
+capability HostRead
+capability HostWrite
+capability Publisher
+capability Observer
+capability WitnessAuthority
+capability HandoffAuthority
+capability CutAuthority
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll {
+  requires Observer
+  output seen: Int64
+  failure ObserveRejected
+}
+
+effect issue_turn_witness(turn: Int64) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect seal_places {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect quiesce_messages {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires HostRead, HostWrite, Publisher, Observer, WitnessAuthority, HandoffAuthority, CutAuthority {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+  perform publish_roll(y) via publish_bus
+  seen <- perform observe_roll via observe_bus
+    ensure seen = y
+  ticket <- perform issue_turn_witness(seen) via witness_store
+  perform handoff_turn(ticket) via handoff_port
+  perform seal_places via session_admin
+  perform quiesce_messages via session_admin
+  perform atomic_cut("turn-finished") via session_cut
+}
+"#,
+    );
+
+    let report = run_full_system_v1_session_path(&source, "main", 41);
+
+    assert!(report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::Accepted
+    );
+    assert!(report.observer_safe_summary.contains("accepted"));
+    assert!(
+        report
+            .runtime
+            .compute_trace
+            .iter()
+            .flat_map(|trace| trace.events.iter())
+            .any(|event| event.kind == "publish")
+    );
+    assert!(
+        report
+            .runtime
+            .compute_trace
+            .iter()
+            .flat_map(|trace| trace.events.iter())
+            .any(|event| event.kind == "handoff")
+    );
+}
+
+#[test]
+fn runtime_session_rejects_effectful_missing_witness_transition() {
+    let root = unique_temp_dir("mir-full-system-v1-session-effectful-negative");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/missing-witness.mir",
+        r#"module FullSystemV1.MissingWitness
+
+capability HandoffAuthority
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+transition main at SugorokuPlace requires HandoffAuthority {
+  perform handoff_turn("ticket#missing") via handoff_port
+}
+"#,
+    );
+
+    let report = run_full_system_v1_session_path(&source, "main", 0);
+
+    assert!(!report.runtime.accepted, "{report:?}");
+    assert_eq!(
+        report.runtime.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report
+            .runtime
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("missing_live_witness")
+    );
+    assert!(report.observer_safe_summary.contains("runtime rejection"));
+}

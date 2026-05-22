@@ -1,0 +1,12 @@
+module FullSystemV1.HandoffMissingWitnessNegative
+
+capability HandoffAuthority
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+transition main at SugorokuPlace requires HandoffAuthority {
+  perform handoff_turn("ticket#missing") via handoff_port
+}

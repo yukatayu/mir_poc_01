@@ -1,0 +1,71 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "main",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "EffectfulSupport.AddOne",
+    "FullSystemV1.EffectfulSugorokuPositive"
+  ],
+  "trace_functions": [
+    "FullSystemV1.EffectfulSugorokuPositive.main",
+    "EffectfulSupport.AddOne.add_one"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Unit",
+    "Int64(42)"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "host_read",
+    "bind",
+    "call",
+    "bind",
+    "host_write",
+    "publish",
+    "observe",
+    "bind",
+    "witness_create",
+    "bind",
+    "handoff",
+    "seal_places",
+    "quiesce_messages",
+    "atomic_cut",
+    "enter",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [
+      "Int64(42)"
+    ],
+    "published_channels": [
+      "roll"
+    ],
+    "observed_channels": [
+      "roll"
+    ],
+    "witness_refs": [
+      "witness#1"
+    ],
+    "handoff_refs": [
+      "handoff#witness#1"
+    ],
+    "accepted_cuts": [
+      "turn-finished"
+    ],
+    "all_places_sealed": true,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted main from FullSystemV1.EffectfulSugorokuPositive -> Unit"
+}

@@ -1,6 +1,7 @@
 {
   "accepted": true,
   "outcome": "Accepted",
+  "entry_kind": "Function",
   "entry_function": "center",
   "output_summary": "Int64(7)",
   "diagnostic_codes": [],
@@ -23,5 +24,17 @@
     "let",
     "return"
   ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
   "observer_safe_summary": "accepted center from Computational.Arrays.Positive -> Int64(7)"
 }

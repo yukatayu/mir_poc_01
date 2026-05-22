@@ -1,0 +1,12 @@
+module FullSystemV1.AtomicCutR2PreconditionNegative
+
+capability CutAuthority
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires CutAuthority {
+  perform atomic_cut("not-quiescent") via session_cut
+}

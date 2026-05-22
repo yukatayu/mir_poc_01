@@ -846,19 +846,19 @@ fn lower_statement(
                     (TypedBindValue::Perform(typed_call), binding_type)
                 }
             };
-            let typed_clauses = lower_contract_clauses(
-                contract_clauses,
-                modules,
-                function_signatures,
-                env,
-                diagnostics,
-            );
             env.insert(
                 name.clone(),
                 TypeBinding {
                     ty: binding_type.clone(),
                     mutable: false,
                 },
+            );
+            let typed_clauses = lower_contract_clauses(
+                contract_clauses,
+                modules,
+                function_signatures,
+                env,
+                diagnostics,
             );
             TypedStmt::Bind {
                 name: name.clone(),

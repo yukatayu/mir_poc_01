@@ -1,0 +1,30 @@
+module FullSystemV1.AtomicCutStaleLoadNegative
+
+capability CutAuthority
+
+effect seal_places {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect quiesce_messages {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect load_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires CutAuthority {
+  perform seal_places via session_admin
+  perform quiesce_messages via session_admin
+  perform atomic_cut("turn-finished") via session_cut
+  perform load_cut("turn-finished") via session_cut
+}

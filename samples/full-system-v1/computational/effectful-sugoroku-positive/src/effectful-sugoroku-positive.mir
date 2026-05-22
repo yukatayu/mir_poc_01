@@ -1,0 +1,73 @@
+module FullSystemV1.EffectfulSugorokuPositive
+
+import EffectfulSupport.AddOne
+
+capability HostRead
+capability HostWrite
+capability Publisher
+capability Observer
+capability WitnessAuthority
+capability HandoffAuthority
+capability CutAuthority
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll {
+  requires Observer
+  output seen: Int64
+  failure ObserveRejected
+}
+
+effect issue_turn_witness(turn: Int64) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect seal_places {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect quiesce_messages {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires HostRead, HostWrite, Publisher, Observer, WitnessAuthority, HandoffAuthority, CutAuthority {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+  perform publish_roll(y) via publish_bus
+  seen <- perform observe_roll via observe_bus
+    ensure seen = y
+  ticket <- perform issue_turn_witness(seen) via witness_store
+  perform handoff_turn(ticket) via handoff_port
+  perform seal_places via session_admin
+  perform quiesce_messages via session_admin
+  perform atomic_cut("turn-finished") via session_cut
+}

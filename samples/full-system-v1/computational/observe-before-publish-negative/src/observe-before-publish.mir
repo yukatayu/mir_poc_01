@@ -1,0 +1,13 @@
+module FullSystemV1.ObserveBeforePublishNegative
+
+capability Observer
+
+effect observe_roll {
+  requires Observer
+  output seen: Int64
+  failure ObserveRejected
+}
+
+transition main at SugorokuPlace requires Observer {
+  seen <- perform observe_roll via observe_bus
+}

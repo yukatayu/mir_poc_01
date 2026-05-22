@@ -145,15 +145,15 @@
   - default `check-all` fixes exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory-only execution policies
   - `check-all --include-workflows --out <dir>` also reruns the heavier product release-candidate and operational suite workflow anchors
   - it does not claim final product, final grammar/API, direct LLVM/native backend, server/client codegen, provider admission, WAN/federation, or distributed durable save-load
-- Full System V1 helper family now has parser-floor, typed-checker-floor, and pure interpreter commands plus later planned commands
+- Full System V1 helper family now has parser-floor, typed-checker-floor, and bounded runtime commands plus later planned commands
   - `python3 scripts/textual_mir_samples.py check-all --format json`
   - `python3 scripts/full_system_v1_samples.py check-all --format json`
   - this exercises `samples/full-system-v1/computational/` through `crates/mir-ast::textual_alpha` and the `textual_mir_alpha_parse` example
   - `python3 scripts/full_system_v1_samples.py runtime-matrix --format json` and `run-runtime <sample-id> --format json`
   - the typed-checker helper exercises the same root through `crates/mir-semantics::full_system_v1` and the `full_system_v1_check` example
-  - the runtime helper exercises source-derived pure interpreter rows through `crates/mir-runtime::full_system_v1_session` and the `mir_full_system_v1_session` example
-  - together they validate parser acceptance/rejection, path-aware unresolved import rejection, expression/statement spans, typed IR lowering, type/scope/import/effect/failure/capability rows, source-derived safe C-like execution, compute trace shape, static/runtime rejection split, and sample/expected matrix consistency without changing the Product Alpha `package.mir.json` front door
-  - they do not claim final public grammar, final typed IR API, effectful runtime execution, or package artifact generation
+  - the runtime helper exercises source-derived pure and effectful rows through `crates/mir-runtime::full_system_v1_session` and the `mir_full_system_v1_session` example
+  - together they validate parser acceptance/rejection, path-aware unresolved import rejection, expression/statement spans, typed IR lowering, type/scope/import/effect/failure/capability rows, source-derived safe C-like execution, transition/effect rows, compute trace shape, effect-session summary shape, static/runtime rejection split, and sample/expected matrix consistency without changing the Product Alpha `package.mir.json` front door
+  - they do not claim final public grammar, final typed IR API, final effect ABI, distributed cut/save execution, or package artifact generation
   - later planned commands remain `posegraph_runtime_samples.py`, `projection_v1_samples.py`, `provider_admission_samples.py`, and `full_system_v1_release_check.py`
   - do not add the later planned commands to mandatory validation until implementation packages create them
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface

@@ -38,8 +38,8 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         payload = _run_helper("runtime-matrix")
 
         self.assertEqual(payload["family"], "full_system_v1_runtime")
-        self.assertEqual(payload["sample_count"], 10)
-        self.assertEqual(payload["executable_count"], 10)
+        self.assertEqual(payload["sample_count"], 17)
+        self.assertEqual(payload["executable_count"], 17)
         self.assertEqual(payload["validation_errors"], [])
 
     def test_record_positive_sample_keeps_record_summary(self) -> None:
@@ -54,9 +54,46 @@ class FullSystemV1SamplesTests(unittest.TestCase):
 
         self.assertTrue(payload["accepted"])
         self.assertEqual(payload["actual"]["outcome"], "Accepted")
+        self.assertEqual(payload["actual"]["entry_kind"], "Function")
         self.assertEqual(payload["actual"]["output_summary"], "Int64(10)")
         self.assertIn("while", payload["actual"]["trace_event_kinds"])
         self.assertEqual(payload["actual"]["trace_branch_taken"][-1], "while-break@5")
+
+    def test_effectful_positive_sample_keeps_session_summary(self) -> None:
+        payload = _run_helper("run-runtime", "mir-04-effectful-sugoroku-positive")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(payload["actual"]["entry_kind"], "Transition")
+        self.assertEqual(payload["actual"]["output_summary"], "Unit")
+        self.assertIn("publish", payload["actual"]["trace_event_kinds"])
+        self.assertIn("atomic_cut", payload["actual"]["trace_event_kinds"])
+        self.assertEqual(
+            payload["actual"]["effect_session"]["host_output_summaries"], ["Int64(42)"]
+        )
+        self.assertEqual(
+            payload["actual"]["effect_session"]["published_channels"], ["roll"]
+        )
+        self.assertEqual(
+            payload["actual"]["effect_session"]["accepted_cuts"], ["turn-finished"]
+        )
+
+    def test_pure_runtime_sample_keeps_empty_effect_session(self) -> None:
+        payload = _run_helper("run-runtime", "mir-03-add-one-positive")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(payload["actual"]["entry_kind"], "Function")
+        self.assertEqual(payload["actual"]["effect_session"]["host_input_remaining"], 0)
+        self.assertEqual(payload["actual"]["effect_session"]["host_output_summaries"], [])
+        self.assertTrue(payload["actual"]["effect_session"]["no_in_flight"])
+
+    def test_host_output_does_not_flip_quiescence_bits(self) -> None:
+        payload = _run_helper("run-runtime", "mir-04-host-boundary-positive")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["effect_session"]["host_output_summaries"], ["Int64(42)"]
+        )
+        self.assertTrue(payload["actual"]["effect_session"]["no_in_flight"])
 
     def test_runtime_negative_sample_reports_runtime_split(self) -> None:
         payload = _run_helper("run-runtime", "mir-03-dynamic-array-runtime-negative")
@@ -83,5 +120,5 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertEqual(payload["failed"], [])
         self.assertEqual(payload["validation_errors"], [])
         self.assertEqual(len(payload["checker"]["passed"]), 12)
-        self.assertEqual(len(payload["runtime"]["passed"]), 10)
-        self.assertEqual(len(payload["passed"]), 22)
+        self.assertEqual(len(payload["runtime"]["passed"]), 17)
+        self.assertEqual(len(payload["passed"]), 29)

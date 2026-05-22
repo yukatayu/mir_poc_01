@@ -30,13 +30,13 @@ KNOWN_COMMANDS = {
 STOP_LINES = [
     "no final public grammar",
     "no final typed IR or public runtime API",
-    "no effectful runtime execution yet",
+    "no final effect grammar or public effect ABI",
     "no package artifact generation yet",
 ]
 NON_CLAIMS = [
-    "alpha checker plus pure runtime only",
+    "alpha checker plus bounded source-first runtime only",
     "ambient effect/failure containment remains residual",
-    "host boundary and save/load execution remain P-MIR-04 or later",
+    "runtime cut/save semantics remain bounded local evidence only",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture",
@@ -375,9 +375,11 @@ def _payload_checker_projection(payload: dict[str, Any]) -> dict[str, Any]:
 def _payload_runtime_projection(payload: dict[str, Any]) -> dict[str, Any]:
     runtime = payload.get("runtime") or {}
     traces = runtime.get("compute_trace") or []
+    effect_session = runtime.get("effect_session") or {}
     return {
         "accepted": runtime.get("accepted"),
         "outcome": runtime.get("outcome"),
+        "entry_kind": runtime.get("entry_kind"),
         "entry_function": payload.get("entry_function"),
         "output_summary": (runtime.get("output") or {}).get("summary"),
         "diagnostic_codes": [row["code"] for row in runtime.get("diagnostics") or []],
@@ -402,6 +404,20 @@ def _payload_runtime_projection(payload: dict[str, Any]) -> dict[str, Any]:
             for row in traces
             for event in row.get("events") or []
         ],
+        "effect_session": {
+            "host_input_remaining": effect_session.get("host_input_remaining"),
+            "host_output_summaries": [
+                row["summary"] for row in effect_session.get("host_output") or []
+            ],
+            "published_channels": effect_session.get("published_channels") or [],
+            "observed_channels": effect_session.get("observed_channels") or [],
+            "witness_refs": effect_session.get("witness_refs") or [],
+            "handoff_refs": effect_session.get("handoff_refs") or [],
+            "accepted_cuts": effect_session.get("accepted_cuts") or [],
+            "all_places_sealed": effect_session.get("all_places_sealed"),
+            "no_in_flight": effect_session.get("no_in_flight"),
+            "no_post_cut_send": effect_session.get("no_post_cut_send"),
+        },
         "observer_safe_summary": payload.get("observer_safe_summary"),
     }
 

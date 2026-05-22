@@ -1,7 +1,17 @@
 {
   "family": "full_system_v1_runtime",
-  "current_status": "runtime_alpha_actualized",
+  "current_status": "effectful_runtime_alpha_actualized",
   "rows": [
+    {
+      "sample_id": "mir-04-host-boundary-positive",
+      "root_name": "host-boundary-positive",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "host-boundary-positive/src/host-boundary-add-one.mir",
+      "expected": "host-boundary-positive/expected/run.json",
+      "entry_function": "main",
+      "input": 41
+    },
     {
       "sample_id": "mir-03-add-one-positive",
       "root_name": "add-one-positive",
@@ -63,6 +73,16 @@
       "input": 40
     },
     {
+      "sample_id": "mir-04-effectful-sugoroku-positive",
+      "root_name": "effectful-sugoroku-positive",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "effectful-sugoroku-positive/src/effectful-sugoroku-positive.mir",
+      "expected": "effectful-sugoroku-positive/expected/run.json",
+      "entry_function": "main",
+      "input": 41
+    },
+    {
       "sample_id": "mir-03-scope-static-negative",
       "root_name": "scope-unbound-negative",
       "stage": "P-MIR-03",
@@ -101,6 +121,56 @@
       "expected": "dynamic-array-bounds-negative/expected/run.json",
       "entry_function": "select",
       "input": 2
+    },
+    {
+      "sample_id": "mir-04-observe-before-publish-negative",
+      "root_name": "observe-before-publish-negative",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "observe-before-publish-negative/src/observe-before-publish.mir",
+      "expected": "observe-before-publish-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 0
+    },
+    {
+      "sample_id": "mir-04-handoff-missing-witness-negative",
+      "root_name": "handoff-missing-witness-negative",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "handoff-missing-witness-negative/src/handoff-missing-witness.mir",
+      "expected": "handoff-missing-witness-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 0
+    },
+    {
+      "sample_id": "mir-04-atomic-cut-r2-precondition-negative",
+      "root_name": "atomic-cut-r2-precondition-negative",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "atomic-cut-r2-precondition-negative/src/atomic-cut-r2-precondition.mir",
+      "expected": "atomic-cut-r2-precondition-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 0
+    },
+    {
+      "sample_id": "mir-04-atomic-cut-rollback-negative",
+      "root_name": "atomic-cut-rollback-negative",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "atomic-cut-rollback-negative/src/atomic-cut-rollback-negative.mir",
+      "expected": "atomic-cut-rollback-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 0
+    },
+    {
+      "sample_id": "mir-04-atomic-cut-stale-load-negative",
+      "root_name": "atomic-cut-stale-load-negative",
+      "stage": "P-MIR-04",
+      "current_status": "executable",
+      "source": "atomic-cut-stale-load-negative/src/atomic-cut-stale-load-negative.mir",
+      "expected": "atomic-cut-stale-load-negative/expected/run.json",
+      "entry_function": "main",
+      "input": 0
     }
   ]
 }

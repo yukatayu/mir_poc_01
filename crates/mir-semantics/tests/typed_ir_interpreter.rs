@@ -510,3 +510,285 @@ fn select(x: Int64) -> Int64 {
             .is_some()
     );
 }
+
+#[test]
+fn typed_ir_interpreter_executes_effectful_transition_lane() {
+    let root = unique_temp_dir("mir-full-system-v1-effectful-transition");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+
+    write_module(
+        &root,
+        "shared/src/add-one.mir",
+        r#"module Shared.AddOne
+
+fn add_one(x: Int64) -> Int64 {
+  return x + 1
+}
+"#,
+    );
+    let source = write_module(
+        &root,
+        "main/src/effectful-positive.mir",
+        r#"module FullSystemV1.EffectfulPositive
+
+import Shared.AddOne
+
+capability HostRead
+capability HostWrite
+capability Publisher
+capability Observer
+capability WitnessAuthority
+capability HandoffAuthority
+capability CutAuthority
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+effect observe_roll {
+  requires Observer
+  output seen: Int64
+  failure ObserveRejected
+}
+
+effect issue_turn_witness(turn: Int64) {
+  requires WitnessAuthority
+  output ticket: Text
+  failure WitnessRejected
+}
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+effect seal_places {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect quiesce_messages {
+  requires CutAuthority
+  failure CutRejected
+}
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires HostRead, HostWrite, Publisher, Observer, WitnessAuthority, HandoffAuthority, CutAuthority {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+  perform publish_roll(y) via publish_bus
+  seen <- perform observe_roll via observe_bus
+    ensure seen = y
+  ticket <- perform issue_turn_witness(seen) via witness_store
+  perform handoff_turn(ticket) via handoff_port
+  perform seal_places via session_admin
+  perform quiesce_messages via session_admin
+  perform atomic_cut("turn-finished") via session_cut
+}
+"#,
+    );
+
+    let report = run_textual_mir_function_path(&source, "main", 41);
+
+    assert!(report.accepted, "{report:?}");
+    assert_eq!(report.outcome, FullSystemV1ExecutionOutcome::Accepted);
+    assert_eq!(
+        report.output.as_ref().map(|row| row.summary.as_str()),
+        Some("Unit")
+    );
+    assert!(
+        report
+            .compute_trace
+            .iter()
+            .flat_map(|trace| trace.events.iter())
+            .any(|event| event.kind == "host_read")
+    );
+    assert!(
+        report
+            .compute_trace
+            .iter()
+            .flat_map(|trace| trace.events.iter())
+            .any(|event| event.kind == "atomic_cut")
+    );
+}
+
+#[test]
+fn typed_ir_interpreter_allows_bind_contracts_in_post_bind_scope() {
+    let root = unique_temp_dir("mir-full-system-v1-bind-contract-scope");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+
+    let source = write_module(
+        &root,
+        "main/src/bind-contract-positive.mir",
+        r#"module FullSystemV1.BindContractPositive
+
+capability HostRead
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead {
+  y <- perform read_int via host_input
+    require y > 0
+    ensure y > 0
+}
+"#,
+    );
+
+    let report = run_textual_mir_function_path(&source, "main", 5);
+
+    assert!(report.accepted, "{report:?}");
+    assert_eq!(report.outcome, FullSystemV1ExecutionOutcome::Accepted);
+    assert_eq!(report.effect_session.host_input_remaining, 0);
+}
+
+#[test]
+fn typed_ir_interpreter_keeps_host_output_outside_quiescence_bits() {
+    let root = unique_temp_dir("mir-full-system-v1-host-output-quiescence");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+
+    write_module(
+        &root,
+        "shared/src/add-one.mir",
+        r#"module Shared.AddOne
+
+fn add_one(x: Int64) -> Int64 {
+  return x + 1
+}
+"#,
+    );
+    let source = write_module(
+        &root,
+        "main/src/host-boundary-positive.mir",
+        r#"module FullSystemV1.HostBoundaryPositive
+
+import Shared.AddOne
+
+capability HostRead
+capability HostWrite
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead, HostWrite {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+}
+"#,
+    );
+
+    let report = run_textual_mir_function_path(&source, "main", 41);
+
+    assert!(report.accepted, "{report:?}");
+    assert_eq!(report.outcome, FullSystemV1ExecutionOutcome::Accepted);
+    assert_eq!(
+        report.effect_session.host_output[0].summary.as_str(),
+        "Int64(42)"
+    );
+    assert!(report.effect_session.no_in_flight);
+}
+
+#[test]
+fn typed_ir_interpreter_rejects_missing_witness_and_cut_preconditions() {
+    let root = unique_temp_dir("mir-full-system-v1-effectful-negative");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+
+    let missing_witness = write_module(
+        &root,
+        "missing-witness/src/missing-witness.mir",
+        r#"module FullSystemV1.MissingWitness
+
+capability HandoffAuthority
+
+effect handoff_turn(ticket: Text) {
+  requires HandoffAuthority
+  failure HandoffRejected
+}
+
+transition main at SugorokuPlace requires HandoffAuthority {
+  perform handoff_turn("ticket#missing") via handoff_port
+}
+"#,
+    );
+    let cut_precondition = write_module(
+        &root,
+        "cut-negative/src/cut-negative.mir",
+        r#"module FullSystemV1.CutNegative
+
+capability CutAuthority
+
+effect atomic_cut(label: Text) {
+  requires CutAuthority
+  failure CutRejected
+}
+
+transition main at SugorokuPlace requires CutAuthority {
+  perform atomic_cut("not-quiescent") via session_cut
+}
+"#,
+    );
+
+    let missing_witness_report = run_textual_mir_function_path(&missing_witness, "main", 0);
+    assert!(
+        !missing_witness_report.accepted,
+        "{missing_witness_report:?}"
+    );
+    assert_eq!(
+        missing_witness_report.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        missing_witness_report
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("missing_live_witness")
+    );
+
+    let cut_report = run_textual_mir_function_path(&cut_precondition, "main", 0);
+    assert!(!cut_report.accepted, "{cut_report:?}");
+    assert_eq!(
+        cut_report.outcome,
+        FullSystemV1ExecutionOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        cut_report
+            .runtime_rejection
+            .as_ref()
+            .map(|row| row.code.as_str()),
+        Some("r2_precondition_failed")
+    );
+}

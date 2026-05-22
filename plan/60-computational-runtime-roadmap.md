@@ -12,7 +12,7 @@ Current computational evidence includes:
 - helper-executable variables / arrays / records / control-flow / imports rows.
 - one direct host read/write transform row.
 - effect / failure / capability check rejections.
-- source-first textual parser, typed checker, and pure interpreter rows under `samples/full-system-v1/computational/`.
+- source-first textual parser, typed checker, and bounded runtime rows under `samples/full-system-v1/computational/`.
 
 This is first-floor evidence. It is not Rust-level language completion.
 
@@ -28,6 +28,15 @@ This is first-floor evidence. It is not Rust-level language completion.
 - `crates/mir-semantics::full_system_v1`
 - `crates/mir-runtime::full_system_v1_session`
 - `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`
+- `samples/full-system-v1/computational/runtime-matrix.json`
+- `expected/run.json`
+- `python3 scripts/full_system_v1_samples.py runtime-matrix --format json`
+- `python3 scripts/full_system_v1_samples.py check-all --format json`
+
+`P-MIR-04` actualized bounded source-first effectful runtime rows for host read/write, publish/observe, witness/handoff, and local atomic-cut rejection evidence through:
+
+- `crates/mir-semantics::full_system_v1`
+- `crates/mir-runtime::full_system_v1_session`
 - `samples/full-system-v1/computational/runtime-matrix.json`
 - `expected/run.json`
 - `python3 scripts/full_system_v1_samples.py runtime-matrix --format json`
@@ -71,7 +80,7 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 
 ## stop lines
 
-- Do not claim broad effectful semantics before `P-MIR-04`.
+- Do not claim broad or distributed effectful semantics beyond the bounded local `P-MIR-04` lane.
 - Do not claim Rust-level expressiveness from the safe C-like subset.
 - Do not introduce stdio as Mir core primitive.
 - Do not start LLVM/native codegen before typed IR and projection boundaries are stable.

@@ -1,3 +1,3 @@
-# `mir-01-host-boundary-positive`
+# `mir-01` / `mir-04` `host-boundary-positive`
 
-Positive parser row for capabilities, effects, transition, and `perform ... via ...`.
+Positive parser/check/runtime row for capabilities, effects, transition, and bounded `perform ... via ...` host read/write execution.

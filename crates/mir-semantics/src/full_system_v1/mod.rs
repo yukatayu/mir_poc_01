@@ -5,8 +5,9 @@ mod typed_ir;
 pub use checker::check_textual_mir_module_path;
 pub use interpreter::{
     FullSystemV1BindingSnapshot, FullSystemV1ComputeEvent, FullSystemV1ComputeTrace,
-    FullSystemV1ExecutionOutcome, FullSystemV1RunReport, FullSystemV1RuntimeRejection,
-    FullSystemV1ValueSnapshot, run_textual_mir_function_path,
+    FullSystemV1EffectSessionState, FullSystemV1EntryKind, FullSystemV1ExecutionOutcome,
+    FullSystemV1RunReport, FullSystemV1RuntimeRejection, FullSystemV1ValueSnapshot,
+    run_textual_mir_function_path,
 };
 pub use typed_ir::{
     FullSystemV1CheckReport, FullSystemV1Obligation, TypedBinaryOp, TypedCapabilityDecl,

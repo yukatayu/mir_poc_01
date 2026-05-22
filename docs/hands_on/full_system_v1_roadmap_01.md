@@ -1,8 +1,8 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first three implementation packages.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first four implementation packages.
 
-It explains what is now executable at the source-first parser/checker/pure-runtime floor and what still remains later.
+It explains what is now executable at the source-first parser/checker/bounded-effectful-runtime floor and what still remains later.
 
 ## Read first
 
@@ -27,7 +27,7 @@ The current repo has:
 The next promoted package is:
 
 ```text
-P-MIR-04 effectful integration
+P-POSE-03 runtime PoseGraph
 ```
 
 ## What to verify now
@@ -45,7 +45,7 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the current runnable floor. They do not prove interpreter execution, projection IR, server/client split, or provider admission.
+The Product Alpha and operational commands preserve the current runnable floor. They do not prove PoseGraph runtime, projection IR, server/client split, or provider admission.
 
 ## Planned Full System V1 commands
 

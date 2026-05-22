@@ -1,0 +1,53 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_kind": "Transition",
+  "entry_function": "main",
+  "output_summary": "Unit",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.AddOne",
+    "Computational.HostIoAddOne"
+  ],
+  "trace_functions": [
+    "Computational.HostIoAddOne.main",
+    "Computational.AddOne.add_one"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Unit",
+    "Int64(42)"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter_transition",
+    "transition_capabilities",
+    "host_read",
+    "bind",
+    "call",
+    "bind",
+    "host_write",
+    "enter",
+    "let",
+    "return"
+  ],
+  "effect_session": {
+    "host_input_remaining": 0,
+    "host_output_summaries": [
+      "Int64(42)"
+    ],
+    "published_channels": [],
+    "observed_channels": [],
+    "witness_refs": [],
+    "handoff_refs": [],
+    "accepted_cuts": [],
+    "all_places_sealed": false,
+    "no_in_flight": true,
+    "no_post_cut_send": true
+  },
+  "observer_safe_summary": "accepted main from Computational.HostIoAddOne -> Unit"
+}
