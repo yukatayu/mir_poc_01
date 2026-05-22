@@ -28,12 +28,13 @@
   - `python3 scripts/operational_product_samples.py check-all --format json` is the operational suite validation anchor
   - `cargo run -q -p mirrorea-cli -- check samples/product-alpha1/operational/templates/world-core-starter --format json`, the same command for `membership-chat-starter` and `sugoroku-world-starter`, and `run-local` on those roots validate the current authoring starter catalog, but the templates are not counted as active operational sample roots
   - this is not final public product readiness, WAN/federation, distributed durable save/load R3/R4, arbitrary native package execution, or final public API
-- planned `full-system-v1/`
-  source-first Full System V1 sample root reserved by `specs/33..38` / `plan/58..63`
-  - this root is not created as an active runnable sample by `P-FS-00`
-  - planned families include computational, world-core, membership-chat, sugoroku-world, posegraph, projection, server-client, and provider-adapter
+- `full-system-v1/`
+  source-first Full System V1 sample root under `specs/33..38` / `plan/58..63`
+  - `P-MIR-01` actualizes `samples/full-system-v1/computational/` as the first textual Mir alpha grammar lane with 2 positive rows, 8 negative rows, `matrix.json`, `expected/*.json`, and `python3 scripts/textual_mir_samples.py check-all --format json`
+  - current executable scope is parser-only and evidence-oriented; it does not claim typed IR, interpreter, runtime execution, or generated package artifact completion
+  - planned families still include world-core, membership-chat, sugoroku-world, posegraph, projection, server-client, and provider-adapter
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `FS-07` local server/client role-run evidence needs a separate `samples/full-system-v1/server-client/` family or equivalent explicit role-run root
-  - do not mark it workflow-ready until later packages add real textual Mir source samples, validation helpers, positive rows, and negative rows
+  - do not mark the whole root workflow-ready until later packages add typed IR, runtime bridges, and broader positive/negative evidence
 - planned future product-alpha1 semantic roots
   - `samples/product-alpha1/computational/` is the Mir-owned computation line under `specs/28` / `plan/53`
     - `python3 scripts/mir_computational_samples.py check-all --format json` validates one direct `add_one` runtime row, five accepted helper rows, five expected runtime rejection rows, one direct host-I/O boundary accepted row, and three expected `check` rejections
@@ -166,12 +167,17 @@ python3 scripts/operational_product_samples.py check-all --format json
 - `current_l2_guided_samples.py` は active current-L2 front-door compatibility wrapper であり、`list` / `smoke-all` / `closeout` を `clean_near_end_samples.py` へ forward する
 - docs checks、storage guardrail、Cargo regression を含む broader validation floor は `samples_progress.md`、`progress.md`、`tasks.md` を参照する
 
-## planned Full System V1 commands
+## Full System V1 commands
 
-These commands are roadmap targets only. They are not current validation commands until corresponding scripts and samples exist.
+Current parser-floor command:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
+```
+
+Remaining commands are roadmap targets only. They are not current validation commands until corresponding scripts and samples exist.
+
+```bash
 python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json

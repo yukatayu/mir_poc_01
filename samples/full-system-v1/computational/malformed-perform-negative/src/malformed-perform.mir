@@ -1,0 +1,10 @@
+module Broken.Perform
+
+effect read_int {
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace {
+  x <- perform read_int host_input
+}

@@ -1,0 +1,40 @@
+{
+  "accepted": false,
+  "module_path": "Broken.Import",
+  "module_span": "1:1[0..89]",
+  "import_paths": [
+    "Missing.Module"
+  ],
+  "import_span_markers": [
+    "3:1[22..43]"
+  ],
+  "capability_names": [],
+  "record_summaries": [],
+  "effect_summaries": [],
+  "function_summaries": [
+    {
+      "function_name": "add_one",
+      "parameter_name": "x",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "statement_kinds": [
+        "Return"
+      ]
+    }
+  ],
+  "transition_summaries": [],
+  "stmt_span_markers": [
+    "6:3[79..87]"
+  ],
+  "contract_span_markers": [],
+  "expr_span_markers": [
+    "6:10[86..87]"
+  ],
+  "diagnostics": [
+    {
+      "code": "unresolved_import",
+      "line": 3,
+      "column": 1
+    }
+  ]
+}

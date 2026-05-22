@@ -1,0 +1,5 @@
+module Broken.ContractClause
+
+transition main at HostPlace {
+  ensure true
+}

@@ -1,0 +1,87 @@
+{
+  "accepted": true,
+  "module_path": "Computational.HostIoAddOne",
+  "module_span": "1:1[0..467]",
+  "import_paths": [
+    "Computational.AddOne"
+  ],
+  "import_span_markers": [
+    "3:1[35..62]"
+  ],
+  "capability_names": [
+    "HostRead",
+    "HostWrite"
+  ],
+  "record_summaries": [],
+  "effect_summaries": [
+    {
+      "effect_name": "read_int",
+      "parameter_names": [],
+      "parameter_types": [],
+      "required_capabilities": [
+        "HostRead"
+      ],
+      "output_name": "x",
+      "output_type": "Int64",
+      "failure_row": [
+        "AdapterUnavailable"
+      ]
+    },
+    {
+      "effect_name": "write_int",
+      "parameter_names": [
+        "y"
+      ],
+      "parameter_types": [
+        "Int64"
+      ],
+      "required_capabilities": [
+        "HostWrite"
+      ],
+      "output_name": null,
+      "output_type": null,
+      "failure_row": [
+        "AdapterUnavailable"
+      ]
+    }
+  ],
+  "function_summaries": [],
+  "transition_summaries": [
+    {
+      "transition_name": "main",
+      "place_ref": "ComputationalHostPlace",
+      "required_capabilities": [
+        "HostRead",
+        "HostWrite"
+      ],
+      "statement_kinds": [
+        "Bind",
+        "Bind",
+        "Perform"
+      ],
+      "contract_clause_kinds": [
+        "Ensure"
+      ]
+    }
+  ],
+  "stmt_span_markers": [
+    "20:3[351..387]",
+    "21:3[390..405]",
+    "22:3[408..465]"
+  ],
+  "contract_span_markers": [
+    "23:5[449..465]"
+  ],
+  "expr_span_markers": [
+    "21:8[395..405]",
+    "21:8[395..402]",
+    "21:16[403..404]",
+    "22:21[426..427]",
+    "23:12[456..465]",
+    "23:12[456..457]",
+    "23:16[460..465]",
+    "23:16[460..461]",
+    "23:20[464..465]"
+  ],
+  "diagnostics": []
+}

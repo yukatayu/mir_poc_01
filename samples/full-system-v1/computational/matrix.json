@@ -1,0 +1,86 @@
+{
+  "family": "textual_mir_alpha",
+  "current_status": "parser_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "mir-01-add-one-positive",
+      "root_name": "add-one-positive",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "add-one-positive/src/add-one.mir",
+      "expected": "add-one-positive/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-host-boundary-positive",
+      "root_name": "host-boundary-positive",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "host-boundary-positive/src/host-boundary-add-one.mir",
+      "expected": "host-boundary-positive/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-malformed-function-negative",
+      "root_name": "malformed-function-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "malformed-function-negative/src/malformed-function.mir",
+      "expected": "malformed-function-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-malformed-perform-negative",
+      "root_name": "malformed-perform-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "malformed-perform-negative/src/malformed-perform.mir",
+      "expected": "malformed-perform-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-unresolved-import-negative",
+      "root_name": "unresolved-import-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "unresolved-import-negative/src/unresolved-import.mir",
+      "expected": "unresolved-import-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-missing-type-annotation-negative",
+      "root_name": "missing-type-annotation-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "missing-type-annotation-negative/src/missing-type-annotation.mir",
+      "expected": "missing-type-annotation-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-malformed-record-negative",
+      "root_name": "malformed-record-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "malformed-record-negative/src/malformed-record.mir",
+      "expected": "malformed-record-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-malformed-transition-negative",
+      "root_name": "malformed-transition-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "malformed-transition-negative/src/malformed-transition.mir",
+      "expected": "malformed-transition-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-malformed-capability-negative",
+      "root_name": "malformed-capability-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "malformed-capability-negative/src/malformed-capability.mir",
+      "expected": "malformed-capability-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "mir-01-contract-clause-position-negative",
+      "root_name": "contract-clause-position-negative",
+      "stage": "P-MIR-01",
+      "current_status": "executable",
+      "source": "contract-clause-position-negative/src/contract-clause-position.mir",
+      "expected": "contract-clause-position-negative/expected/parse.json"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+module Computational.HostIoAddOne
+
+import Computational.AddOne
+
+capability HostRead
+capability HostWrite
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at ComputationalHostPlace requires HostRead, HostWrite {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+    ensure y = x + 1
+}

@@ -15,7 +15,7 @@ repo が主として維持しているのは、Mir current-L2 の **repo-local a
 これは final public product ではありませんが、docs-only の構想メモでもありません。active sample、helper CLI、Lean foundations、product alpha CLI、operational suite helper、release-check、report 群を通して、現時点でどこまで実装と検証が進んでいるかを repo 内で再確認できます。
 current alpha-1 usable surface は、developer-built `mirrorea-alpha` binary、versioned `package.mir.json`、local/Docker controlled runtime、observer-safe devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational suite helperです。operational suite は six runnable roots、shared attach packages、projection inventory、template-only starter catalog、retained portal/shard future inventory を持ちます。backend については `native host launch bundle` だけが actualized で、WASM / LLVM は docs-first inventory に留めます。broader distribution と final shared-space catalog breadth は user-spec-required gate です。一方で、current typed external `AddOne` は host-boundary evidence であり、Mir-owned arithmetic / variables / arrays / records / control-flow の completion 証拠ではありません。最小実用パターンを横断検証する入口として `scripts/minimal_alpha1_patterns.py check-all --format json` と `docs/hands_on/minimal_alpha1_patterns_01.md` を追加しています。
 
-Full System V1 は、この alpha floor を final product と誤読せず、Mir source files を semantic source of truth に戻すための次段 roadmap です。`package.mir.json` は alpha compatibility / package artifact として残し、textual Mir alpha grammar、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission、devtools / release check を staged に進めます。
+Full System V1 は、この alpha floor を final product と誤読せず、Mir source files を semantic source of truth に戻すための次段 roadmap です。`package.mir.json` は alpha compatibility / package artifact として残し、textual Mir alpha grammar、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission、devtools / release check を staged に進めます。`P-MIR-01` により `crates/mir-ast::textual_alpha`、`scripts/textual_mir_samples.py`、`samples/full-system-v1/computational/` の parser-floor lane が actualize されましたが、typed IR / runtime / artifact generation はまだ later packages です。
 
 ## 現在の到達点
 
@@ -99,7 +99,7 @@ Autonomous execution の default は `specs/32` / `plan/57` に置きます。�
 - `plan/62-projection-backend-roadmap.md`
 - `plan/63-engine-provider-roadmap.md`
 
-reader-facing summary は `docs/hands_on/full_system_v1_roadmap_01.md` と `docs/research_abstract/full_system_v1_roadmap_01.md` です。次の promoted package は `P-MIR-01 textual Mir alpha grammar` です。
+reader-facing summary は `docs/hands_on/full_system_v1_roadmap_01.md` と `docs/research_abstract/full_system_v1_roadmap_01.md` です。current parser-floor command は `python3 scripts/textual_mir_samples.py check-all --format json` で、次の promoted package は `P-MIR-02 typed IR and checker` です。
 
 ## Mirrorea の次軸
 

@@ -51,7 +51,7 @@
 
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。`P-FS-00` は implementation 前の roadmap rebaseline であり、次の promoted package は `P-MIR-01 textual Mir alpha grammar` です。
+まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。`P-FS-00` は implementation 前の roadmap rebaseline で、`P-MIR-01` は `crates/mir-ast::textual_alpha`、path-aware unresolved import diagnostic、expression spans、`scripts/textual_mir_samples.py`、そして `samples/full-system-v1/computational/` の full alpha negative matrix による parser-floor actualization です。次の promoted package は `P-MIR-02 typed IR and checker` です。
 
 ## current active floor
 
@@ -93,7 +93,7 @@ OS/network substrate
 - **operational product sample suite**
   `specs/26..27`、`plan/51..52`、`samples/product-alpha1/operational/`、`scripts/operational_product_samples.py` が canonical operational suite を担います。six roots、shared attach packages、projection inventory、portal/shard/gradient cuts、template-only starter catalog、backend inventory、scope helper blocks を保持します。
 - **Full System V1 source-first line**
-  `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を担います。current package は `P-FS-00` docs rebaseline、次の package は `P-MIR-01 textual Mir alpha grammar` です。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission へ順に進めます。
+  `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を担います。current closeout package は `P-MIR-01 textual Mir alpha grammar`、次の promoted package は `P-MIR-02 typed IR and checker` です。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission へ順に進めます。
 
 ## いま何があり、何がまだ無いか
 

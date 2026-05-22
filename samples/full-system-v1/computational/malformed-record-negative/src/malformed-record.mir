@@ -1,0 +1,6 @@
+module Broken.Record
+
+record Vec3 {
+  x Float64,
+  y: Float64,
+}

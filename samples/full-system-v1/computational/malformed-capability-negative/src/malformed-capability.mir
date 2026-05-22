@@ -1,0 +1,6 @@
+module Broken.Capability
+
+effect read_int {
+  requires HostRead,
+  output x: Int64
+}

@@ -1,0 +1,22 @@
+{
+  "accepted": false,
+  "module_path": null,
+  "module_span": null,
+  "import_paths": [],
+  "import_span_markers": [],
+  "capability_names": [],
+  "record_summaries": [],
+  "effect_summaries": [],
+  "function_summaries": [],
+  "transition_summaries": [],
+  "stmt_span_markers": [],
+  "contract_span_markers": [],
+  "expr_span_markers": [],
+  "diagnostics": [
+    {
+      "code": "contract_clause_outside_allowed_position",
+      "line": 4,
+      "column": 3
+    }
+  ]
+}

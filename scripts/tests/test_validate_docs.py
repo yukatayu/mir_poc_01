@@ -188,6 +188,17 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/63-engine-provider-roadmap.md",
             "docs/hands_on/full_system_v1_roadmap_01.md",
             "docs/research_abstract/full_system_v1_roadmap_01.md",
+            "samples/full-system-v1/README.md",
+            "samples/full-system-v1/computational/README.md",
+            "samples/full-system-v1/computational/matrix.json",
+            "samples/full-system-v1/computational/unresolved-import-negative/src/unresolved-import.mir",
+            "samples/full-system-v1/computational/missing-type-annotation-negative/src/missing-type-annotation.mir",
+            "samples/full-system-v1/computational/malformed-record-negative/src/malformed-record.mir",
+            "samples/full-system-v1/computational/malformed-transition-negative/src/malformed-transition.mir",
+            "samples/full-system-v1/computational/malformed-capability-negative/src/malformed-capability.mir",
+            "samples/full-system-v1/computational/contract-clause-position-negative/src/contract-clause-position.mir",
+            "scripts/textual_mir_samples.py",
+            "scripts/tests/test_textual_mir_samples.py",
         }
 
         for path in full_system_required:

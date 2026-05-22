@@ -1,0 +1,5 @@
+module Broken.Transition
+
+transition main HostPlace {
+  perform ping via host_output
+}

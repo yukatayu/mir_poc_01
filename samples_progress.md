@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-22 03:21 JST
+Last updated: 2026-05-22 10:01 JST
 
-Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, and the `P-FS-00` Full System V1 source-first roadmap rebaseline. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Planned `samples/full-system-v1/` roots are not active and not workflow-ready until later packages create executable samples. Docker skip paths are partial local probes, not release-candidate evidence.
+Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, and the first `P-MIR-01` Full System V1 textual Mir parser lane. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. `samples/full-system-v1/computational/` is now an evidence-closed parser floor, while the wider Full System V1 roots remain non-workflow-ready until later packages add typed IR and runtime evidence. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -37,7 +37,7 @@ Notes:
 | engine/WASM/FFI adapter boundary | boundary-fixed, planned scaffold actualized | `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, `matrix.json`, and helper/unit test now classify planned provider rows and reject `run` as `planned_only` | no engine integration, final FFI ABI, or admitted native/WASM execution yet |
 | minimal alpha-1 pattern verifier | evidence-closed maintenance helper | `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | compact strict verifier over exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory execution policies | not a new runtime semantics layer; heavy workflow anchors optional |
 | autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
-| Full System V1 roadmap | boundary-fixed, no sample claim | docs validation plus existing alpha anchors | `specs/33..38`, `plan/58..63`, `docs/hands_on/full_system_v1_roadmap_01.md`, and replaced `progress.md` / `tasks.md` define the source-first roadmap | textual Mir parser, typed IR, interpreter, PoseGraph runtime, projection IR, provider admission, and release check remain planned |
+| Full System V1 roadmap | evidence-closed parser floor, wider line planned | `python3 scripts/textual_mir_samples.py check-all --format json` | `specs/33..38`, `plan/58..63`, `samples/full-system-v1/computational/`, `scripts/textual_mir_samples.py`, and `crates/mir-ast::textual_alpha` now actualize the first source-first parser lane with 2 positive rows, 8 negative rows, path-aware unresolved import rejection, and span-bearing AST output | typed IR, interpreter, runtime PoseGraph, projection IR, provider admission, and release check remain later |
 
 ## Product Alpha Root Status
 
@@ -56,7 +56,7 @@ Notes:
 
 | Planned root | Intended role | Current reading |
 |---|---|---|
-| `samples/full-system-v1/computational/` | textual Mir computational source samples | planned only; first actual package is `P-MIR-01` |
+| `samples/full-system-v1/computational/` | textual Mir computational source samples | evidence-closed parser floor; `python3 scripts/textual_mir_samples.py check-all --format json` validates 2 positive rows, 8 negative rows, structural summaries, and span markers |
 | `samples/full-system-v1/world-core/` | source-first WorldCore operational root | planned only; current executable root remains `samples/product-alpha1/operational/world-core/` |
 | `samples/full-system-v1/membership-chat/` | source-first MembershipChat operational root | planned only; current executable root remains `samples/product-alpha1/operational/membership-chat/` |
 | `samples/full-system-v1/sugoroku-world/` | source-first SugorokuWorld operational root | planned only; current executable root remains `samples/product-alpha1/operational/sugoroku-world/` |
@@ -107,6 +107,10 @@ python3 -m unittest scripts.tests.test_posegraph_samples
 python3 -m unittest scripts.tests.test_projection_boundary_samples
 python3 -m unittest scripts.tests.test_engine_adapter_boundary_samples
 python3 -m unittest scripts.tests.test_minimal_alpha1_patterns
+python3 -m unittest scripts.tests.test_textual_mir_samples
+cargo test -p mir-ast --test textual_mir_alpha -- --nocapture
+python3 scripts/textual_mir_samples.py matrix --format json
+python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/mir_computational_samples.py check-all --format json
 python3 scripts/posegraph_samples.py check-all --format json
 python3 scripts/projection_boundary_samples.py check-all --format json
@@ -126,6 +130,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-22 10:01 JST | `P-MIR-01` textual Mir alpha grammar | pass | `crates/mir-ast::textual_alpha`, path-aware unresolved import diagnostics, expression spans, `scripts/textual_mir_samples.py`, and `samples/full-system-v1/computational/` 2-positive/8-negative rows were synchronized; next promoted package is `P-MIR-02` |
 | 2026-05-22 03:21 JST | `P-FS-00` Full System V1 roadmap rebaseline | docs/spec planned | source-first Full System V1 roadmap added; `samples/full-system-v1/` remains planned only and the next implementation package is `P-MIR-01` |
 | 2026-05-21 23:37 JST | `P-PAT-01` minimal alpha-1 pattern verifier | pass | `scripts/minimal_alpha1_patterns.py`, unit test, hands-on / research summary, and snapshot docs were added; strict default check covers computational, PoseGraph, projection, and engine-adapter rows |
 | 2026-05-21 22:11 JST | all-up closeout audit | pass | focused helper suites, Cargo regressions, product alpha release check, installed-binary probe, operational suite, docs validator, and source hierarchy checks were rerun; the current self-driven chain is now closed through its planned audit package |

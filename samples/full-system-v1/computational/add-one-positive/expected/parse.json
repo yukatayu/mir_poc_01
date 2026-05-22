@@ -1,0 +1,35 @@
+{
+  "accepted": true,
+  "module_path": "Computational.AddOne",
+  "module_span": "1:1[0..96]",
+  "import_paths": [],
+  "import_span_markers": [],
+  "capability_names": [],
+  "record_summaries": [],
+  "effect_summaries": [],
+  "function_summaries": [
+    {
+      "function_name": "add_one",
+      "parameter_name": "x",
+      "input_type": "Int64",
+      "output_type": "Int64",
+      "statement_kinds": [
+        "Let",
+        "Return"
+      ]
+    }
+  ],
+  "transition_summaries": [],
+  "stmt_span_markers": [
+    "4:3[63..83]",
+    "5:3[86..94]"
+  ],
+  "contract_span_markers": [],
+  "expr_span_markers": [
+    "4:18[78..83]",
+    "4:18[78..79]",
+    "4:22[82..83]",
+    "5:10[93..94]"
+  ],
+  "diagnostics": []
+}

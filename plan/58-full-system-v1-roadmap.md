@@ -8,14 +8,14 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state before implementation packages:
+Current repo state after `P-MIR-01`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
 - Mir computational core has `first-floor-evidence`.
 - PoseGraph has helper-backed `first-floor-evidence`.
 - Projection/backend and engine/provider roots are `boundary-fixed` / inventory-only.
-- Full System V1 source-first implementation is still `planned`.
+- Full System V1 source-first parser floor is `actualized` with 2 positive rows, 8 negative rows, path-aware unresolved import diagnostics, and span-bearing expression AST output, while typed IR / runtime / projection / provider packages remain planned.
 
 ## package order
 
@@ -57,7 +57,9 @@ samples/full-system-v1/
   provider-adapter/
 ```
 
-This root is planned until a later package creates executable samples. Do not mark it workflow-ready in `samples_progress.md` before validation exists.
+`P-MIR-01` actualized `samples/full-system-v1/computational/` as a parser-floor evidence root with 2 positive rows, 8 negative rows, structural/span expected JSON, and `scripts/textual_mir_samples.py`.
+
+The wider root remains non-workflow-ready until later packages add typed IR, runtime, projection, and provider evidence.
 
 ## validation direction
 
@@ -69,10 +71,15 @@ python3 scripts/product_alpha1_release_check.py --format json check-all --out /t
 python3 scripts/operational_product_samples.py check-all --format json
 ```
 
-Planned future anchors:
+Current first source-first anchor:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
+```
+
+Planned future anchors:
+
+```bash
 python3 scripts/full_system_v1_samples.py check-all --format json
 python3 scripts/posegraph_runtime_samples.py check-all --format json
 python3 scripts/projection_v1_samples.py check-all --format json

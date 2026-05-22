@@ -145,10 +145,13 @@
   - default `check-all` fixes exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory-only execution policies
   - `check-all --include-workflows --out <dir>` also reruns the heavier product release-candidate and operational suite workflow anchors
   - it does not claim final product, final grammar/API, direct LLVM/native backend, server/client codegen, provider admission, WAN/federation, or distributed durable save-load
-- Full System V1 helper family is planned, not current
-  - planned commands are `textual_mir_samples.py`, `full_system_v1_samples.py`, `posegraph_runtime_samples.py`, `projection_v1_samples.py`, `provider_admission_samples.py`, and `full_system_v1_release_check.py`
-  - these scripts do not exist in `P-FS-00`; do not add them to mandatory validation until implementation packages create them
-  - current validation remains docs/scaffold checks plus the existing Product Alpha, operational suite, and minimal alpha-1 pattern anchors
+- Full System V1 helper family has a first parser-floor command plus later planned commands
+  - `python3 scripts/textual_mir_samples.py check-all --format json`
+  - this exercises `samples/full-system-v1/computational/` through `crates/mir-ast::textual_alpha` and the `textual_mir_alpha_parse` example
+  - it validates 2 positive rows and 8 negative rows, path-aware unresolved import rejection, expression/statement span markers, structural effect/transition summaries, and sample/expected matrix consistency without changing the Product Alpha `package.mir.json` front door
+  - it does not claim final public grammar, typed IR, interpreter, runtime execution, or package artifact generation
+  - later planned commands remain `full_system_v1_samples.py`, `posegraph_runtime_samples.py`, `projection_v1_samples.py`, `provider_admission_samples.py`, and `full_system_v1_release_check.py`
+  - do not add the later planned commands to mandatory validation until implementation packages create them
 - practical alpha-1 first hot-plug floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_attach.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`
