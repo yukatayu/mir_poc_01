@@ -1,8 +1,8 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first two implementation packages.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first three implementation packages.
 
-It explains what is now executable at the source-first parser/checker floor and what still remains later.
+It explains what is now executable at the source-first parser/checker/pure-runtime floor and what still remains later.
 
 ## Read first
 
@@ -27,7 +27,7 @@ The current repo has:
 The next promoted package is:
 
 ```text
-P-MIR-03 computational interpreter
+P-MIR-04 effectful integration
 ```
 
 ## What to verify now
@@ -49,12 +49,13 @@ The Product Alpha and operational commands preserve the current runnable floor. 
 
 ## Planned Full System V1 commands
 
-Current Full System V1 parser/checker commands:
+Current Full System V1 parser/checker/runtime commands:
 
 ```bash
 python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py check-all --format json
 cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
 ```
 
 These are still future commands and must not be treated as current validation:

@@ -1,0 +1,19 @@
+{
+  "accepted": false,
+  "outcome": "StaticRejection",
+  "entry_function": "second",
+  "output_summary": null,
+  "diagnostic_codes": [
+    "static_index_out_of_bounds"
+  ],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.ArrayBoundsNegative"
+  ],
+  "trace_functions": [],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [],
+  "trace_rejection_codes": [],
+  "trace_event_kinds": [],
+  "observer_safe_summary": "static rejection before executing second: static_index_out_of_bounds"
+}

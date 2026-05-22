@@ -1,0 +1,5 @@
+module Shared.AddOne
+
+fn add_one(x: Int64) -> Int64 {
+  return x + 1
+}

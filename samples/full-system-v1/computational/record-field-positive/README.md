@@ -1,3 +1,6 @@
-# `mir-02-record-field-positive`
+# `record-field-positive`
 
-Positive typed-check row for local record declaration, construction, and field access.
+Positive source-first row reused across:
+
+- `P-MIR-02` typed-check acceptance
+- `P-MIR-03` pure interpreter acceptance

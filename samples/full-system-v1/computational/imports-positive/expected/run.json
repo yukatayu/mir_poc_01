@@ -1,0 +1,39 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "add_two",
+  "output_summary": "Int64(42)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Shared.AddOne",
+    "Computational.Compose.Positive"
+  ],
+  "trace_functions": [
+    "Computational.Compose.Positive.add_two",
+    "Shared.AddOne.add_one",
+    "Shared.AddOne.add_one"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Int64(42)",
+    "Int64(41)",
+    "Int64(42)"
+  ],
+  "trace_rejection_codes": [
+    null,
+    null,
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "call",
+    "call",
+    "return",
+    "enter",
+    "return",
+    "enter",
+    "return"
+  ],
+  "observer_safe_summary": "accepted add_two from Computational.Compose.Positive -> Int64(42)"
+}

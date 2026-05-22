@@ -1,0 +1,26 @@
+{
+  "accepted": false,
+  "outcome": "RuntimeRejection",
+  "entry_function": "select",
+  "output_summary": null,
+  "diagnostic_codes": [],
+  "runtime_rejection_code": "runtime_out_of_bounds",
+  "program_module_paths": [
+    "Computational.DynamicArrayBoundsNegative"
+  ],
+  "trace_functions": [
+    "Computational.DynamicArrayBoundsNegative.select"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    null
+  ],
+  "trace_rejection_codes": [
+    "runtime_out_of_bounds"
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let"
+  ],
+  "observer_safe_summary": "runtime rejection in select: runtime_out_of_bounds"
+}

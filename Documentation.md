@@ -36,7 +36,7 @@
 - **autonomous execution contract**
   `specs/32` / `plan/57` で定義した package-by-package 自律実行 line。`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の front-half を閉じてから implementation half に入り、user に途中質問せず、final distribution / catalog / ABI / backend admission のような user-spec-required gate は隔離し、lower-layer implementation を止めない。
 - **Full System V1 source-first roadmap**
-  `specs/33..38` / `plan/58..63` で定義した次段 roadmap。Product Alpha-1 と operational suite を alpha floor として保持しつつ、semantic source of truth を Mir source files へ戻し、textual Mir alpha grammar、typed IR、interpreter、effectful runtime integration、PoseGraph runtime、projection IR、provider admission、devtools / release check へ段階的に進む。`package.mir.json` は alpha compatibility / package artifact であり、final source authority ではない。
+  `specs/33..38` / `plan/58..63` で定義した次段 roadmap。Product Alpha-1 と operational suite を alpha floor として保持しつつ、semantic source of truth を Mir source files へ戻し、textual Mir alpha grammar、typed IR、pure interpreter、effectful runtime integration、PoseGraph runtime、projection IR、provider admission、devtools / release check へ段階的に進む。`package.mir.json` は alpha compatibility / package artifact であり、final source authority ではない。
 - **final public product**
   final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
 
@@ -51,7 +51,7 @@
 
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。`P-FS-00` は implementation 前の roadmap rebaseline、`P-MIR-01` は parser-floor actualization、`P-MIR-02` は `crates/mir-semantics::full_system_v1`、`cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`、`scripts/full_system_v1_samples.py`、そして `samples/full-system-v1/computational/typed-ir-matrix.json` による typed checker floor actualizationです。ここでは imported-module semantic closure と ambiguous import rejection まで actualize しつつ、final grammar / interpreter / runtime completion は主張しません。次の promoted package は `P-MIR-03 computational interpreter` です。
+まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。`P-FS-00` は implementation 前の roadmap rebaseline、`P-MIR-01` は parser-floor actualization、`P-MIR-02` は typed checker floor、`P-MIR-03` は `crates/mir-semantics::full_system_v1`、`crates/mir-runtime::full_system_v1_session`、`cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`、`cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`、`scripts/full_system_v1_samples.py`、そして `samples/full-system-v1/computational/runtime-matrix.json` による pure interpreter floor actualizationです。ここでは source-derived safe C-like execution、compute trace、static/runtime rejection split まで actualize しつつ、effectful runtime / final grammar / final runtime completion は主張しません。次の promoted package は `P-MIR-04 effectful integration` です。
 
 ## current active floor
 
@@ -93,7 +93,7 @@ OS/network substrate
 - **operational product sample suite**
   `specs/26..27`、`plan/51..52`、`samples/product-alpha1/operational/`、`scripts/operational_product_samples.py` が canonical operational suite を担います。six roots、shared attach packages、projection inventory、portal/shard/gradient cuts、template-only starter catalog、backend inventory、scope helper blocks を保持します。
 - **Full System V1 source-first line**
-  `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を担います。current closeout package は `P-MIR-02 typed IR and checker`、次の promoted package は `P-MIR-03 computational interpreter` です。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、interpreter、PoseGraph runtime、projection IR、provider admission へ順に進めます。
+  `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を担います。current closeout package は `P-MIR-03 computational interpreter`、次の promoted package は `P-MIR-04 effectful integration` です。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、pure interpreter、effectful runtime、PoseGraph runtime、projection IR、provider admission へ順に進めます。
 
 ## いま何があり、何がまだ無いか
 

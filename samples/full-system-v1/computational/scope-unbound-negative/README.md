@@ -1,3 +1,6 @@
-# `mir-02-scope-unbound-negative`
+# `scope-unbound-negative`
 
-Negative typed-check row for lexical scope closure failure.
+Static rejection row reused across:
+
+- `P-MIR-02` typed-check scope failure
+- `P-MIR-03` source-derived runtime static rejection classification

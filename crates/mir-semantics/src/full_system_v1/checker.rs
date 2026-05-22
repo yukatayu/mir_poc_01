@@ -57,7 +57,42 @@ struct ModuleAnalysis {
     diagnostics: Vec<TextualMirDiagnostic>,
 }
 
+pub(crate) struct ProgramAnalysis {
+    pub accepted: bool,
+    pub root_module: Option<TypedMirModule>,
+    pub modules: Vec<TypedMirModule>,
+    pub diagnostics: Vec<TextualMirDiagnostic>,
+}
+
 pub fn check_textual_mir_module_path(path: impl AsRef<Path>) -> FullSystemV1CheckReport {
+    let analysis = analyze_textual_mir_program_path(path);
+    build_check_report(&analysis)
+}
+
+pub(crate) fn build_check_report(analysis: &ProgramAnalysis) -> FullSystemV1CheckReport {
+    FullSystemV1CheckReport {
+        accepted: analysis.accepted,
+        module: if analysis.accepted {
+            analysis.root_module.clone()
+        } else {
+            None
+        },
+        accepted_obligations: if analysis.accepted {
+            accepted_obligations()
+        } else {
+            Vec::new()
+        },
+        residual_obligations: if analysis.accepted {
+            residual_obligations()
+        } else {
+            Vec::new()
+        },
+        diagnostics: analysis.diagnostics.clone(),
+        final_public_api_frozen: false,
+    }
+}
+
+pub(crate) fn analyze_textual_mir_program_path(path: impl AsRef<Path>) -> ProgramAnalysis {
     let path = normalize_path(path.as_ref());
     let mut loaded = BTreeMap::new();
     let mut visiting = BTreeSet::new();
@@ -65,13 +100,11 @@ pub fn check_textual_mir_module_path(path: impl AsRef<Path>) -> FullSystemV1Chec
 
     if !load_module_graph(&path, &mut loaded, &mut visiting, &mut diagnostics) {
         diagnostics.sort_by_key(|row| (row.span.line, row.span.column, row.code.clone()));
-        return FullSystemV1CheckReport {
+        return ProgramAnalysis {
             accepted: false,
-            module: None,
-            accepted_obligations: Vec::new(),
-            residual_obligations: Vec::new(),
+            root_module: None,
+            modules: Vec::new(),
             diagnostics,
-            final_public_api_frozen: false,
         };
     }
 
@@ -81,67 +114,35 @@ pub fn check_textual_mir_module_path(path: impl AsRef<Path>) -> FullSystemV1Chec
             format!("checker could not load `{}`", path.display()),
             zero_span(),
         ));
-        return FullSystemV1CheckReport {
+        return ProgramAnalysis {
             accepted: false,
-            module: None,
-            accepted_obligations: Vec::new(),
-            residual_obligations: Vec::new(),
+            root_module: None,
+            modules: Vec::new(),
             diagnostics,
-            final_public_api_frozen: false,
         };
     };
 
     let mut visited = BTreeSet::new();
     let mut closure_diagnostics = Vec::new();
     let mut root_module = None;
+    let mut modules = Vec::new();
     collect_module_closure(
         &path,
         current,
         &loaded,
         &mut visited,
         &mut closure_diagnostics,
+        &mut modules,
         &mut root_module,
     );
     closure_diagnostics.sort_by_key(|row| (row.span.line, row.span.column, row.code.clone()));
     let accepted = closure_diagnostics.is_empty();
 
-    FullSystemV1CheckReport {
+    ProgramAnalysis {
         accepted,
-        module: if accepted { root_module } else { None },
-        accepted_obligations: if accepted {
-            vec![
-                obligation(
-                    "imports_resolved",
-                    "all direct textual Mir imports resolved to declared source modules",
-                ),
-                obligation(
-                    "effect_failure_rows_explicit",
-                    "every declared effect in the checked module carries an explicit failure row",
-                ),
-                obligation(
-                    "typed_scope_closed",
-                    "lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor",
-                ),
-            ]
-        } else {
-            Vec::new()
-        },
-        residual_obligations: if accepted {
-            vec![
-                obligation(
-                    "ambient_effect_row_containment_not_modeled",
-                    "ambient effect row containment remains a residual obligation at the alpha checker floor",
-                ),
-                obligation(
-                    "ambient_failure_row_containment_not_modeled",
-                    "ambient failure row containment remains a residual obligation at the alpha checker floor",
-                ),
-            ]
-        } else {
-            Vec::new()
-        },
+        root_module,
+        modules,
         diagnostics: closure_diagnostics,
-        final_public_api_frozen: false,
     }
 }
 
@@ -151,6 +152,7 @@ fn collect_module_closure(
     loaded: &BTreeMap<PathBuf, LoadedModule>,
     visited: &mut BTreeSet<PathBuf>,
     diagnostics: &mut Vec<TextualMirDiagnostic>,
+    modules: &mut Vec<TypedMirModule>,
     root_module: &mut Option<TypedMirModule>,
 ) {
     if !visited.insert(current.path.clone()) {
@@ -164,11 +166,13 @@ fn collect_module_closure(
                 loaded,
                 visited,
                 diagnostics,
+                modules,
                 root_module,
             );
         }
     }
     let analysis = analyze_loaded_module(current, loaded);
+    modules.push(analysis.module.clone());
     if current.path == root_path {
         *root_module = Some(analysis.module);
         diagnostics.extend(analysis.diagnostics);
@@ -1910,6 +1914,36 @@ fn matches_symbol(query: &str, module_path: &str, declaration_name: &str) -> boo
 
 fn canonical_record_name(module: &LoadedModule, record: &AstRecord) -> String {
     format!("{}.{}", module.module.module_path, record.record_name)
+}
+
+fn accepted_obligations() -> Vec<FullSystemV1Obligation> {
+    vec![
+        obligation(
+            "imports_resolved",
+            "all direct textual Mir imports resolved to declared source modules",
+        ),
+        obligation(
+            "effect_failure_rows_explicit",
+            "every declared effect in the checked module carries an explicit failure row",
+        ),
+        obligation(
+            "typed_scope_closed",
+            "lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor",
+        ),
+    ]
+}
+
+fn residual_obligations() -> Vec<FullSystemV1Obligation> {
+    vec![
+        obligation(
+            "ambient_effect_row_containment_not_modeled",
+            "ambient effect row containment remains a residual obligation at the alpha checker floor",
+        ),
+        obligation(
+            "ambient_failure_row_containment_not_modeled",
+            "ambient failure row containment remains a residual obligation at the alpha checker floor",
+        ),
+    ]
 }
 
 fn obligation(code: &str, message: &str) -> FullSystemV1Obligation {

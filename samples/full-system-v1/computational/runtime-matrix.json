@@ -1,0 +1,106 @@
+{
+  "family": "full_system_v1_runtime",
+  "current_status": "runtime_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "mir-03-add-one-positive",
+      "root_name": "add-one-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "add-one-positive/src/add-one.mir",
+      "expected": "add-one-positive/expected/run.json",
+      "entry_function": "add_one",
+      "input": 41
+    },
+    {
+      "sample_id": "mir-03-variables-scope-positive",
+      "root_name": "variables-scope-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "variables-scope-positive/src/variables-scope-positive.mir",
+      "expected": "variables-scope-positive/expected/run.json",
+      "entry_function": "clamp_zero",
+      "input": -5
+    },
+    {
+      "sample_id": "mir-03-arrays-positive",
+      "root_name": "arrays-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "arrays-positive/src/arrays-positive.mir",
+      "expected": "arrays-positive/expected/run.json",
+      "entry_function": "center",
+      "input": 7
+    },
+    {
+      "sample_id": "mir-03-record-field-positive",
+      "root_name": "record-field-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "record-field-positive/src/record-field.mir",
+      "expected": "record-field-positive/expected/run.json",
+      "entry_function": "first",
+      "input": 9
+    },
+    {
+      "sample_id": "mir-03-control-flow-positive",
+      "root_name": "control-flow-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "control-flow-positive/src/control-flow-positive.mir",
+      "expected": "control-flow-positive/expected/run.json",
+      "entry_function": "sum_to",
+      "input": 4
+    },
+    {
+      "sample_id": "mir-03-imports-positive",
+      "root_name": "imports-positive",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "imports-positive/src/imports-positive.mir",
+      "expected": "imports-positive/expected/run.json",
+      "entry_function": "add_two",
+      "input": 40
+    },
+    {
+      "sample_id": "mir-03-scope-static-negative",
+      "root_name": "scope-unbound-negative",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "scope-unbound-negative/src/scope-unbound.mir",
+      "expected": "scope-unbound-negative/expected/run.json",
+      "entry_function": "bad",
+      "input": 1
+    },
+    {
+      "sample_id": "mir-03-array-static-negative",
+      "root_name": "static-array-bounds-negative",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "static-array-bounds-negative/src/static-array-bounds.mir",
+      "expected": "static-array-bounds-negative/expected/run.json",
+      "entry_function": "second",
+      "input": 1
+    },
+    {
+      "sample_id": "mir-03-import-static-negative",
+      "root_name": "imported-semantic-negative",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "imported-semantic-negative/src/imported-semantic-negative.mir",
+      "expected": "imported-semantic-negative/expected/run.json",
+      "entry_function": "use_imported",
+      "input": 1
+    },
+    {
+      "sample_id": "mir-03-dynamic-array-runtime-negative",
+      "root_name": "dynamic-array-bounds-negative",
+      "stage": "P-MIR-03",
+      "current_status": "executable",
+      "source": "dynamic-array-bounds-negative/src/dynamic-array-bounds.mir",
+      "expected": "dynamic-array-bounds-negative/expected/run.json",
+      "entry_function": "select",
+      "input": 2
+    }
+  ]
+}

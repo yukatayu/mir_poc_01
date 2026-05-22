@@ -12,7 +12,7 @@ Current computational evidence includes:
 - helper-executable variables / arrays / records / control-flow / imports rows.
 - one direct host read/write transform row.
 - effect / failure / capability check rejections.
-- source-first textual parser and typed checker rows under `samples/full-system-v1/computational/`.
+- source-first textual parser, typed checker, and pure interpreter rows under `samples/full-system-v1/computational/`.
 
 This is first-floor evidence. It is not Rust-level language completion.
 
@@ -22,6 +22,16 @@ This is first-floor evidence. It is not Rust-level language completion.
 - `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`
 - `python3 scripts/full_system_v1_samples.py check-all --format json`
 - `samples/full-system-v1/computational/typed-ir-matrix.json`
+
+`P-MIR-03` actualized source-derived pure interpreter rows for AddOne, lexical scope, arrays, records, control-flow, imports, static rejection, and dynamic runtime rejection through:
+
+- `crates/mir-semantics::full_system_v1`
+- `crates/mir-runtime::full_system_v1_session`
+- `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`
+- `samples/full-system-v1/computational/runtime-matrix.json`
+- `expected/run.json`
+- `python3 scripts/full_system_v1_samples.py runtime-matrix --format json`
+- `python3 scripts/full_system_v1_samples.py check-all --format json`
 
 ## package sequence
 

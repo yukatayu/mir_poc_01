@@ -1,0 +1,27 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "first",
+  "output_summary": "Int64(9)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.RecordPositive"
+  ],
+  "trace_functions": [
+    "Computational.RecordPositive.first"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Int64(9)"
+  ],
+  "trace_rejection_codes": [
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let",
+    "return"
+  ],
+  "observer_safe_summary": "accepted first from Computational.RecordPositive -> Int64(9)"
+}

@@ -1,0 +1,27 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "add_one",
+  "output_summary": "Int64(42)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.AddOne"
+  ],
+  "trace_functions": [
+    "Computational.AddOne.add_one"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Int64(42)"
+  ],
+  "trace_rejection_codes": [
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let",
+    "return"
+  ],
+  "observer_safe_summary": "accepted add_one from Computational.AddOne -> Int64(42)"
+}

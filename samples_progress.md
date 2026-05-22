@@ -1,8 +1,8 @@
 # samples_progress
 
-Last updated: 2026-05-22 10:59 JST
+Last updated: 2026-05-22 11:37 JST
 
-Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, and the first `P-MIR-01` / `P-MIR-02` Full System V1 parser+checker lane. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. `samples/full-system-v1/computational/` is now an evidence-closed parser+checker floor, while the wider Full System V1 roots remain non-workflow-ready until later packages add interpreter and runtime evidence. Docker skip paths are partial local probes, not release-candidate evidence.
+Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, and the first `P-MIR-01..03` Full System V1 parser+checker+pure-runtime lane with `P-MIR-04` promoted. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. `samples/full-system-v1/computational/` is now an evidence-closed parser+checker+pure-runtime floor, while the wider Full System V1 roots remain non-workflow-ready until later packages add effectful integration and runtime PoseGraph evidence. Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
@@ -37,7 +37,7 @@ Notes:
 | engine/WASM/FFI adapter boundary | boundary-fixed, planned scaffold actualized | `python3 scripts/engine_adapter_boundary_samples.py check-all --format json` | `specs/31` / `plan/56`, `samples/product-alpha1/engine-adapter/`, `matrix.json`, and helper/unit test now classify planned provider rows and reject `run` as `planned_only` | no engine integration, final FFI ABI, or admitted native/WASM execution yet |
 | minimal alpha-1 pattern verifier | evidence-closed maintenance helper | `python3 scripts/minimal_alpha1_patterns.py check-all --format json` | compact strict verifier over exact computational / PoseGraph / projection / engine-adapter counts, expected rejection IDs, compatibility rows, and inventory execution policies | not a new runtime semantics layer; heavy workflow anchors optional |
 | autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
-| Full System V1 roadmap | evidence-closed parser+checker floor, wider line planned | `python3 scripts/textual_mir_samples.py check-all --format json` and `python3 scripts/full_system_v1_samples.py check-all --format json` | `specs/33..38`, `plan/58..63`, `samples/full-system-v1/computational/`, `scripts/textual_mir_samples.py`, `scripts/full_system_v1_samples.py`, `crates/mir-ast::textual_alpha`, and `crates/mir-semantics::full_system_v1` now actualize the first source-first parser lane plus typed checker lane with 2-positive/8-negative parse rows and 3-positive/9-negative checker rows, including imported-module semantic closure and ambiguous import rejection | interpreter, runtime PoseGraph, projection IR, provider admission, and release check remain later |
+| Full System V1 roadmap | evidence-closed parser+checker+pure-runtime floor, wider line planned | `python3 scripts/textual_mir_samples.py check-all --format json`, `python3 scripts/full_system_v1_samples.py check-all --format json`, and `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture` | `specs/33..38`, `plan/58..63`, `samples/full-system-v1/computational/`, `scripts/textual_mir_samples.py`, `scripts/full_system_v1_samples.py`, `crates/mir-ast::textual_alpha`, `crates/mir-semantics::full_system_v1`, and `crates/mir-runtime::full_system_v1_session` now actualize the first source-first parser lane, typed checker lane, and pure interpreter lane with 2-positive/8-negative parse rows, 3-positive/9-negative checker rows, 6-positive/4-negative runtime rows, imported-module semantic closure, ambiguous import rejection, compute traces, and static/runtime rejection split | effectful integration, runtime PoseGraph, projection IR, provider admission, and release check remain later |
 
 ## Product Alpha Root Status
 
@@ -56,7 +56,7 @@ Notes:
 
 | Planned root | Intended role | Current reading |
 |---|---|---|
-| `samples/full-system-v1/computational/` | textual Mir computational source samples | evidence-closed parser+checker floor; parser helper validates 2 positive rows and 8 negative rows, typed checker helper validates 3 positive rows and 9 negative rows with explicit obligations, imported-module semantic closure, and ambiguous import rejection |
+| `samples/full-system-v1/computational/` | textual Mir computational source samples | evidence-closed parser+checker+pure-runtime floor; parser helper validates 2 positive rows and 8 negative rows, typed checker helper validates 3 positive rows and 9 negative rows with explicit obligations, imported-module semantic closure, and ambiguous import rejection, and runtime helper validates 6 positive rows and 4 negative rows with compute traces and static/runtime rejection split |
 | `samples/full-system-v1/world-core/` | source-first WorldCore operational root | planned only; current executable root remains `samples/product-alpha1/operational/world-core/` |
 | `samples/full-system-v1/membership-chat/` | source-first MembershipChat operational root | planned only; current executable root remains `samples/product-alpha1/operational/membership-chat/` |
 | `samples/full-system-v1/sugoroku-world/` | source-first SugorokuWorld operational root | planned only; current executable root remains `samples/product-alpha1/operational/sugoroku-world/` |
@@ -111,6 +111,7 @@ python3 -m unittest scripts.tests.test_textual_mir_samples
 python3 -m unittest scripts.tests.test_full_system_v1_samples
 cargo test -p mir-ast --test textual_mir_alpha -- --nocapture
 cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+cargo test -p mir-runtime --test full_system_v1_session -- --nocapture
 python3 scripts/textual_mir_samples.py matrix --format json
 python3 scripts/textual_mir_samples.py check-all --format json
 python3 scripts/full_system_v1_samples.py matrix --format json
@@ -134,6 +135,8 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-05-22 11:37 JST | `P-MIR-03` computational interpreter closeout | pass | docs snapshot, report, and major anchors were synchronized; `samples/full-system-v1/computational/` remains evidence-closed and the current promoted package is `P-MIR-04` |
+| 2026-05-22 11:30 JST | `P-MIR-03` computational interpreter | pass | `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `scripts/full_system_v1_samples.py`, and `samples/full-system-v1/computational/runtime-matrix.json` 6-positive/4-negative source-derived runtime rows with compute trace, observer-safe summary, and static/runtime rejection split were synchronized; next promoted package is `P-MIR-04` |
 | 2026-05-22 10:59 JST | `P-MIR-02` typed IR and checker | pass | `crates/mir-semantics::full_system_v1`, `typed_ir_interpreter` tests, `scripts/full_system_v1_samples.py`, and `samples/full-system-v1/computational/typed-ir-matrix.json` 3-positive/9-negative rows plus imported-module semantic closure and ambiguous import rejection were synchronized; validator/report heading drift was also closed and the next promoted package is `P-MIR-03` |
 | 2026-05-22 10:01 JST | `P-MIR-01` textual Mir alpha grammar | pass | `crates/mir-ast::textual_alpha`, path-aware unresolved import diagnostics, expression spans, `scripts/textual_mir_samples.py`, and `samples/full-system-v1/computational/` 2-positive/8-negative rows were synchronized; next promoted package is `P-MIR-02` |
 | 2026-05-22 03:21 JST | `P-FS-00` Full System V1 roadmap rebaseline | docs/spec planned | source-first Full System V1 roadmap added; `samples/full-system-v1/` remains planned only and the next implementation package is `P-MIR-01` |

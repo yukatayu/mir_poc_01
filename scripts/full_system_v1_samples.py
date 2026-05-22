@@ -13,29 +13,49 @@ from typing import Any
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 SAMPLE_ROOT = REPO_ROOT / "samples" / "full-system-v1" / "computational"
-MATRIX_PATH = SAMPLE_ROOT / "typed-ir-matrix.json"
-KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
+CHECKER_MATRIX_PATH = SAMPLE_ROOT / "typed-ir-matrix.json"
+RUNTIME_MATRIX_PATH = SAMPLE_ROOT / "runtime-matrix.json"
+KNOWN_COMMANDS = {
+    "list",
+    "matrix",
+    "run",
+    "checker-check-all",
+    "runtime-list",
+    "runtime-matrix",
+    "run-runtime",
+    "check-runtime-all",
+    "check-all",
+    "closeout",
+}
 STOP_LINES = [
     "no final public grammar",
-    "no final typed IR or public checker API",
-    "no interpreter execution yet",
+    "no final typed IR or public runtime API",
+    "no effectful runtime execution yet",
     "no package artifact generation yet",
 ]
 NON_CLAIMS = [
-    "alpha checker only",
+    "alpha checker plus pure runtime only",
     "ambient effect/failure containment remains residual",
-    "product alpha-1 package workflow remains separate",
+    "host boundary and save/load execution remain P-MIR-04 or later",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture",
+    "cargo test -p mir-runtime --test full_system_v1_session -- --nocapture",
     "python3 -m unittest scripts.tests.test_full_system_v1_samples",
-    "python3 scripts/full_system_v1_samples.py matrix --format json",
     "python3 scripts/full_system_v1_samples.py check-all --format json",
 ]
 
 
-def _load_matrix() -> dict[str, Any]:
-    return json.loads(MATRIX_PATH.read_text(encoding="utf-8"))
+def _load_matrix(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _checker_matrix() -> dict[str, Any]:
+    return _load_matrix(CHECKER_MATRIX_PATH)
+
+
+def _runtime_matrix() -> dict[str, Any]:
+    return _load_matrix(RUNTIME_MATRIX_PATH)
 
 
 def _row_source_path(row: dict[str, Any]) -> Path:
@@ -85,11 +105,27 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
                     "detail": f"missing expected file `{expected_path}`",
                 }
             )
+        if "entry_function" in row and not isinstance(row["entry_function"], str):
+            errors.append(
+                {
+                    "sample_id": row["sample_id"],
+                    "kind": "invalid_entry_function",
+                    "detail": "runtime row must declare a string `entry_function`",
+                }
+            )
+        if "input" in row and not isinstance(row["input"], int):
+            errors.append(
+                {
+                    "sample_id": row["sample_id"],
+                    "kind": "invalid_input",
+                    "detail": "runtime row must declare an integer `input`",
+                }
+            )
     return errors
 
 
 def _materialize_row(row: dict[str, Any]) -> dict[str, Any]:
-    return {
+    payload = {
         "sample_id": row["sample_id"],
         "root_name": row["root_name"],
         "stage": row["stage"],
@@ -97,15 +133,25 @@ def _materialize_row(row: dict[str, Any]) -> dict[str, Any]:
         "source": str(_row_source_path(row).relative_to(REPO_ROOT)),
         "expected": str(_row_expected_path(row).relative_to(REPO_ROOT)),
     }
+    if "entry_function" in row:
+        payload["entry_function"] = row["entry_function"]
+    if "input" in row:
+        payload["input"] = row["input"]
+    return payload
 
 
-def list_samples() -> list[dict[str, Any]]:
-    data = _load_matrix()
+def list_checker_samples() -> list[dict[str, Any]]:
+    data = _checker_matrix()
+    return [_materialize_row(row) for row in data["rows"]]
+
+
+def list_runtime_samples() -> list[dict[str, Any]]:
+    data = _runtime_matrix()
     return [_materialize_row(row) for row in data["rows"]]
 
 
 def matrix() -> dict[str, Any]:
-    data = _load_matrix()
+    data = _checker_matrix()
     rows = [_materialize_row(row) for row in data["rows"]]
     validation_errors = validate_rows(data["rows"])
     executable_rows = [row["sample_id"] for row in data["rows"] if row["current_status"] == "executable"]
@@ -113,12 +159,32 @@ def matrix() -> dict[str, Any]:
         "command": "matrix",
         "family": data["family"],
         "sample_root": str(SAMPLE_ROOT.relative_to(REPO_ROOT)),
-        "matrix_path": str(MATRIX_PATH.relative_to(REPO_ROOT)),
+        "matrix_path": str(CHECKER_MATRIX_PATH.relative_to(REPO_ROOT)),
         "sample_count": len(rows),
         "executable_count": len(executable_rows),
         "executable_rows": executable_rows,
         "matrix_status": data["current_status"],
         "workflow_ready": False,
+        "rows": rows,
+        "validation_errors": validation_errors,
+    }
+
+
+def runtime_matrix() -> dict[str, Any]:
+    data = _runtime_matrix()
+    rows = [_materialize_row(row) for row in data["rows"]]
+    validation_errors = validate_rows(data["rows"])
+    executable_rows = [row["sample_id"] for row in data["rows"] if row["current_status"] == "executable"]
+    return {
+        "command": "runtime-matrix",
+        "family": data["family"],
+        "sample_root": str(SAMPLE_ROOT.relative_to(REPO_ROOT)),
+        "matrix_path": str(RUNTIME_MATRIX_PATH.relative_to(REPO_ROOT)),
+        "sample_count": len(rows),
+        "executable_count": len(executable_rows),
+        "executable_rows": executable_rows,
+        "matrix_status": data["current_status"],
+        "workflow_ready": True,
         "rows": rows,
         "validation_errors": validation_errors,
     }
@@ -150,6 +216,41 @@ def _check_source(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:
         raise RuntimeError(
             f"full_system_v1_check example did not return JSON for `{path}`: {completed.stderr}"
+        ) from error
+    payload["returncode"] = completed.returncode
+    return payload
+
+
+def _run_runtime_source(path: Path, entry_function: str, input_value: int) -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mir-runtime",
+            "--example",
+            "mir_full_system_v1_session",
+            "--",
+            str(path),
+            "--entry",
+            entry_function,
+            "--input",
+            str(input_value),
+            "--format",
+            "json",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"mir_full_system_v1_session example did not return JSON for `{path}`: {completed.stderr}"
         ) from error
     payload["returncode"] = completed.returncode
     return payload
@@ -197,7 +298,15 @@ def _stmt_summary(stmt: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
+def _repo_relative_path(path_text: str) -> str:
+    path = Path(path_text)
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return path_text
+
+
+def _payload_checker_projection(payload: dict[str, Any]) -> dict[str, Any]:
     module = payload.get("module") or {}
     transition_summaries = []
     for transition in module.get("transitions") or []:
@@ -263,19 +372,45 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _repo_relative_path(path_text: str) -> str:
-    path = Path(path_text)
-    try:
-        return str(path.relative_to(REPO_ROOT))
-    except ValueError:
-        return path_text
+def _payload_runtime_projection(payload: dict[str, Any]) -> dict[str, Any]:
+    runtime = payload.get("runtime") or {}
+    traces = runtime.get("compute_trace") or []
+    return {
+        "accepted": runtime.get("accepted"),
+        "outcome": runtime.get("outcome"),
+        "entry_function": payload.get("entry_function"),
+        "output_summary": (runtime.get("output") or {}).get("summary"),
+        "diagnostic_codes": [row["code"] for row in runtime.get("diagnostics") or []],
+        "runtime_rejection_code": (runtime.get("runtime_rejection") or {}).get("code"),
+        "program_module_paths": runtime.get("program_module_paths") or [],
+        "trace_functions": [
+            f"{row['module_path']}.{row['function_id']}" for row in traces
+        ],
+        "trace_branch_taken": [
+            branch for row in traces for branch in row.get("branch_taken") or []
+        ],
+        "trace_output_summaries": [
+            (row.get("outputs") or {}).get("summary") if row.get("outputs") else None
+            for row in traces
+        ],
+        "trace_rejection_codes": [
+            (row.get("rejected_reason") or {}).get("code") if row.get("rejected_reason") else None
+            for row in traces
+        ],
+        "trace_event_kinds": [
+            event["kind"]
+            for row in traces
+            for event in row.get("events") or []
+        ],
+        "observer_safe_summary": payload.get("observer_safe_summary"),
+    }
 
 
-def _run_row(row: dict[str, Any]) -> dict[str, Any]:
+def _run_checker_row(row: dict[str, Any]) -> dict[str, Any]:
     source_path = _row_source_path(row)
     expected_path = _row_expected_path(row)
     actual_payload = _check_source(source_path)
-    actual = _payload_projection(actual_payload)
+    actual = _payload_checker_projection(actual_payload)
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
     passed = actual == expected
     return {
@@ -290,20 +425,49 @@ def _run_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _run_runtime_row(row: dict[str, Any]) -> dict[str, Any]:
+    source_path = _row_source_path(row)
+    expected_path = _row_expected_path(row)
+    actual_payload = _run_runtime_source(source_path, row["entry_function"], row["input"])
+    actual = _payload_runtime_projection(actual_payload)
+    expected = json.loads(expected_path.read_text(encoding="utf-8"))
+    passed = actual == expected
+    return {
+        "sample_id": row["sample_id"],
+        "source": str(source_path.relative_to(REPO_ROOT)),
+        "entry_function": row["entry_function"],
+        "input": row["input"],
+        "expected_path": str(expected_path.relative_to(REPO_ROOT)),
+        "accepted": bool(actual.get("accepted")),
+        "returncode": actual_payload["returncode"],
+        "passed": passed,
+        "actual": actual,
+        "expected": expected,
+    }
+
+
 def run_sample(sample_id: str) -> dict[str, Any]:
-    data = _load_matrix()
+    data = _checker_matrix()
     row = next((row for row in data["rows"] if row["sample_id"] == sample_id), None)
     if row is None:
         raise KeyError(sample_id)
-    return _run_row(row)
+    return _run_checker_row(row)
 
 
-def check_all() -> dict[str, Any]:
-    data = _load_matrix()
+def run_runtime_sample(sample_id: str) -> dict[str, Any]:
+    data = _runtime_matrix()
+    row = next((row for row in data["rows"] if row["sample_id"] == sample_id), None)
+    if row is None:
+        raise KeyError(sample_id)
+    return _run_runtime_row(row)
+
+
+def checker_check_all() -> dict[str, Any]:
+    data = _checker_matrix()
     validation_errors = validate_rows(data["rows"])
     if validation_errors:
         return {
-            "command": "check-all",
+            "command": "checker-check-all",
             "family": data["family"],
             "failed": [],
             "passed": [],
@@ -313,13 +477,14 @@ def check_all() -> dict[str, Any]:
     passed = []
     failed = []
     for row in data["rows"]:
-        result = _run_row(row)
+        result = _run_checker_row(row)
         if result["passed"]:
             passed.append(result["sample_id"])
         else:
             failed.append(result)
+
     return {
-        "command": "check-all",
+        "command": "checker-check-all",
         "family": data["family"],
         "passed": passed,
         "failed": failed,
@@ -327,14 +492,58 @@ def check_all() -> dict[str, Any]:
     }
 
 
+def runtime_check_all() -> dict[str, Any]:
+    data = _runtime_matrix()
+    validation_errors = validate_rows(data["rows"])
+    if validation_errors:
+        return {
+            "command": "check-runtime-all",
+            "family": data["family"],
+            "failed": [],
+            "passed": [],
+            "validation_errors": validation_errors,
+        }
+
+    passed = []
+    failed = []
+    for row in data["rows"]:
+        result = _run_runtime_row(row)
+        if result["passed"]:
+            passed.append(result["sample_id"])
+        else:
+            failed.append(result)
+
+    return {
+        "command": "check-runtime-all",
+        "family": data["family"],
+        "passed": passed,
+        "failed": failed,
+        "validation_errors": validation_errors,
+    }
+
+
+def check_all() -> dict[str, Any]:
+    checker_summary = checker_check_all()
+    runtime_summary = runtime_check_all()
+    return {
+        "command": "check-all",
+        "passed": checker_summary["passed"] + runtime_summary["passed"],
+        "failed": checker_summary["failed"] + runtime_summary["failed"],
+        "validation_errors": checker_summary["validation_errors"] + runtime_summary["validation_errors"],
+        "checker": checker_summary,
+        "runtime": runtime_summary,
+    }
+
+
 def closeout() -> dict[str, Any]:
     summary = check_all()
     return {
         "command": "closeout",
-        "family": summary["family"],
         "passed": summary["passed"],
         "failed": summary["failed"],
         "validation_errors": summary["validation_errors"],
+        "checker": summary["checker"],
+        "runtime": summary["runtime"],
         "validation_floor": VALIDATION_FLOOR,
         "stop_lines": STOP_LINES,
         "non_claims": NON_CLAIMS,
@@ -349,7 +558,7 @@ def _emit(payload: dict[str, Any], output_format: str) -> None:
 
 
 def main(argv: list[str]) -> int:
-    parser = argparse.ArgumentParser(description="Run Full System V1 typed checker samples.")
+    parser = argparse.ArgumentParser(description="Run Full System V1 checker and runtime samples.")
     parser.add_argument("command", choices=sorted(KNOWN_COMMANDS))
     parser.add_argument("sample_id", nargs="?")
     parser.add_argument("--format", choices=["json", "pretty"], default="pretty")
@@ -357,11 +566,19 @@ def main(argv: list[str]) -> int:
 
     try:
         if args.command == "list":
-            payload = {"command": "list", "rows": list_samples()}
+            payload = {"command": "list", "rows": list_checker_samples()}
+            _emit(payload, args.format)
+            return 0
+        if args.command == "runtime-list":
+            payload = {"command": "runtime-list", "rows": list_runtime_samples()}
             _emit(payload, args.format)
             return 0
         if args.command == "matrix":
             payload = matrix()
+            _emit(payload, args.format)
+            return 0 if not payload["validation_errors"] else 2
+        if args.command == "runtime-matrix":
+            payload = runtime_matrix()
             _emit(payload, args.format)
             return 0 if not payload["validation_errors"] else 2
         if args.command == "run":
@@ -370,6 +587,20 @@ def main(argv: list[str]) -> int:
             payload = run_sample(args.sample_id)
             _emit(payload, args.format)
             return 0 if payload["passed"] else 2
+        if args.command == "run-runtime":
+            if args.sample_id is None:
+                raise SystemExit("sample_id is required for run-runtime")
+            payload = run_runtime_sample(args.sample_id)
+            _emit(payload, args.format)
+            return 0 if payload["passed"] else 2
+        if args.command == "checker-check-all":
+            payload = checker_check_all()
+            _emit(payload, args.format)
+            return 0 if not payload["failed"] and not payload["validation_errors"] else 2
+        if args.command == "check-runtime-all":
+            payload = runtime_check_all()
+            _emit(payload, args.format)
+            return 0 if not payload["failed"] and not payload["validation_errors"] else 2
         if args.command == "check-all":
             payload = check_all()
             _emit(payload, args.format)

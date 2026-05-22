@@ -27,7 +27,7 @@ Full System V1 は次の流れを source-first に揃える roadmap である。
 
 ## Package order
 
-`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor を actualize した。次に進む package は `P-MIR-03 computational interpreter` である。
+`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor を actualize した。次に進む package は `P-MIR-04 effectful integration` である。
 
 大きな順序は次の通り。
 

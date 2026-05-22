@@ -1,3 +1,6 @@
-# `mir-02-static-array-bounds-negative`
+# `static-array-bounds-negative`
 
-Negative typed-check row for statically provable array bounds rejection.
+Static array-bounds rejection row reused across:
+
+- `P-MIR-02` typed-check static proof
+- `P-MIR-03` source-derived runtime static rejection classification

@@ -1,0 +1,6 @@
+module Computational.DynamicArrayBoundsNegative
+
+fn select(x: Int64) -> Int64 {
+  let xs: [Int64; 2] = [10, 20]
+  return xs[x]
+}

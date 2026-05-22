@@ -1,0 +1,27 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "center",
+  "output_summary": "Int64(7)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.Arrays.Positive"
+  ],
+  "trace_functions": [
+    "Computational.Arrays.Positive.center"
+  ],
+  "trace_branch_taken": [],
+  "trace_output_summaries": [
+    "Int64(7)"
+  ],
+  "trace_rejection_codes": [
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let",
+    "return"
+  ],
+  "observer_safe_summary": "accepted center from Computational.Arrays.Positive -> Int64(7)"
+}

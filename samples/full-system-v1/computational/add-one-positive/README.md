@@ -1,3 +1,7 @@
-# `mir-01-add-one-positive`
+# `add-one-positive`
 
-Positive parser row for the pure `add_one` computational surface.
+Positive source-first row reused across:
+
+- `P-MIR-01` parser acceptance
+- `P-MIR-02` typed-check acceptance
+- `P-MIR-03` pure interpreter acceptance

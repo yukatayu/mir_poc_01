@@ -1,0 +1,31 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "clamp_zero",
+  "output_summary": "Int64(0)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.Scope.Positive"
+  ],
+  "trace_functions": [
+    "Computational.Scope.Positive.clamp_zero"
+  ],
+  "trace_branch_taken": [
+    "then"
+  ],
+  "trace_output_summaries": [
+    "Int64(0)"
+  ],
+  "trace_rejection_codes": [
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let",
+    "if",
+    "assign",
+    "return"
+  ],
+  "observer_safe_summary": "accepted clamp_zero from Computational.Scope.Positive -> Int64(0)"
+}

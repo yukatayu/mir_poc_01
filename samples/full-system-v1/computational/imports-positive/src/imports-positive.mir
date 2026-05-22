@@ -1,0 +1,7 @@
+module Computational.Compose.Positive
+
+import Shared.AddOne
+
+fn add_two(x: Int64) -> Int64 {
+  return add_one(add_one(x))
+}

@@ -1,0 +1,51 @@
+{
+  "accepted": true,
+  "outcome": "Accepted",
+  "entry_function": "sum_to",
+  "output_summary": "Int64(10)",
+  "diagnostic_codes": [],
+  "runtime_rejection_code": null,
+  "program_module_paths": [
+    "Computational.ControlFlow.Positive"
+  ],
+  "trace_functions": [
+    "Computational.ControlFlow.Positive.sum_to"
+  ],
+  "trace_branch_taken": [
+    "while-continue@0",
+    "while-continue@1",
+    "while-continue@2",
+    "while-continue@3",
+    "while-continue@4",
+    "while-break@5"
+  ],
+  "trace_output_summaries": [
+    "Int64(10)"
+  ],
+  "trace_rejection_codes": [
+    null
+  ],
+  "trace_event_kinds": [
+    "enter",
+    "let",
+    "let",
+    "while",
+    "assign",
+    "assign",
+    "while",
+    "assign",
+    "assign",
+    "while",
+    "assign",
+    "assign",
+    "while",
+    "assign",
+    "assign",
+    "while",
+    "assign",
+    "assign",
+    "while",
+    "return"
+  ],
+  "observer_safe_summary": "accepted sum_to from Computational.ControlFlow.Positive -> Int64(10)"
+}
