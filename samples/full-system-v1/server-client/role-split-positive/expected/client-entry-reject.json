@@ -1,0 +1,39 @@
+{
+  "accepted": false,
+  "projection_id": "role-split-positive",
+  "selected_target_id": "world-client",
+  "entry_override": "main",
+  "launch_mode": "same_binary_local_role_wrapper",
+  "target_ids": [
+    "world-client"
+  ],
+  "target_summaries": {
+    "world-client": {
+      "accepted": false,
+      "role": "client",
+      "execution_kind": "authoritative_runtime",
+      "admitted_entry_transitions": [
+        "render_preview"
+      ],
+      "launched_entry_transitions": [
+        "main"
+      ],
+      "runtime_session_count": 0,
+      "runtime_acceptance": [],
+      "host_output_summaries": [],
+      "published_channels": [],
+      "observer_safe_summary": "accepted client endpoint launched 1 entry transition(s)"
+    }
+  },
+  "rejected_rows": [
+    "world-client:entry_transition_not_admitted"
+  ],
+  "diagnostic_codes": [
+    "entry_transition_not_admitted"
+  ],
+  "residual_obligation_codes": [
+    "docker_process_carrier_deferred",
+    "packet_ffi_transport_semantics_deferred",
+    "provider_admission_deferred"
+  ]
+}

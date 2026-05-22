@@ -1,0 +1,73 @@
+{
+  "accepted": true,
+  "projection_id": "role-split-positive",
+  "selected_target_id": null,
+  "entry_override": null,
+  "launch_mode": "same_binary_local_role_wrapper",
+  "target_ids": [
+    "host-adapter",
+    "world-client",
+    "world-server"
+  ],
+  "target_summaries": {
+    "world-server": {
+      "accepted": true,
+      "role": "server",
+      "execution_kind": "authoritative_runtime",
+      "admitted_entry_transitions": [
+        "main"
+      ],
+      "launched_entry_transitions": [
+        "main"
+      ],
+      "runtime_session_count": 1,
+      "runtime_acceptance": [
+        true
+      ],
+      "host_output_summaries": [
+        "Int64(41)"
+      ],
+      "published_channels": [
+        "roll"
+      ],
+      "observer_safe_summary": "accepted main from FullSystemV1.RoleSplitPositive -> Unit"
+    },
+    "world-client": {
+      "accepted": true,
+      "role": "client",
+      "execution_kind": "authoritative_runtime",
+      "admitted_entry_transitions": [
+        "render_preview"
+      ],
+      "launched_entry_transitions": [
+        "render_preview"
+      ],
+      "runtime_session_count": 1,
+      "runtime_acceptance": [
+        true
+      ],
+      "host_output_summaries": [],
+      "published_channels": [],
+      "observer_safe_summary": "accepted render_preview from FullSystemV1.RoleSplitPositive -> Unit"
+    },
+    "host-adapter": {
+      "accepted": true,
+      "role": "adapter",
+      "execution_kind": "passive_endpoint",
+      "admitted_entry_transitions": [],
+      "launched_entry_transitions": [],
+      "runtime_session_count": 0,
+      "runtime_acceptance": [],
+      "host_output_summaries": [],
+      "published_channels": [],
+      "observer_safe_summary": "accepted passive adapter endpoint with 1 inbound boundary refs and 1 outbound boundary refs"
+    }
+  },
+  "rejected_rows": [],
+  "diagnostic_codes": [],
+  "residual_obligation_codes": [
+    "docker_process_carrier_deferred",
+    "packet_ffi_transport_semantics_deferred",
+    "provider_admission_deferred"
+  ]
+}

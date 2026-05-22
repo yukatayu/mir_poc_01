@@ -1,0 +1,39 @@
+module FullSystemV1.RoleSplitPositive
+
+import Shared.AddOne
+
+capability HostRead
+capability HostWrite
+capability Publisher
+
+effect read_int {
+  requires HostRead
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+effect publish_roll(value: Int64) {
+  requires Publisher
+  failure PublishRejected
+}
+
+transition main at SugorokuPlace requires HostRead, HostWrite, Publisher {
+  x <- perform read_int via host_input
+  y <- add_one(x)
+  perform write_int(y) via host_output
+  perform publish_roll(y) via publish_bus
+}
+
+transition render_preview at ClientView {
+  let preview: Int64 = add_one(2)
+  if preview < 4 {
+    let stable_preview: Int64 = preview
+  } else {
+    let stable_preview: Int64 = 0
+  }
+}

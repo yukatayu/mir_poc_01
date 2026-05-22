@@ -1,0 +1,78 @@
+{
+  "launch_mode": "same_binary_local_role_wrapper",
+  "target_reports": [
+    {
+      "target_id": "host-adapter",
+      "role": "adapter",
+      "execution_kind": "passive_endpoint",
+      "launched_entry_transitions": [],
+      "inbound_boundary_refs": [
+        "host_output"
+      ],
+      "outbound_boundary_refs": [
+        "host_input"
+      ],
+      "inbound_packet_schema_refs": [],
+      "outbound_packet_schema_refs": [],
+      "inbound_ffi_schema_refs": [
+        "ffi.host_output.write_int"
+      ],
+      "outbound_ffi_schema_refs": [
+        "ffi.host_input.read_int"
+      ],
+      "runtime_session_ids": [],
+      "observer_safe_summary": "accepted passive adapter endpoint with 1 inbound boundary refs and 1 outbound boundary refs"
+    },
+    {
+      "target_id": "world-client",
+      "role": "client",
+      "execution_kind": "authoritative_runtime",
+      "launched_entry_transitions": [
+        "render_preview"
+      ],
+      "inbound_boundary_refs": [
+        "publish_bus"
+      ],
+      "outbound_boundary_refs": [],
+      "inbound_packet_schema_refs": [
+        "packet.roll.publish"
+      ],
+      "outbound_packet_schema_refs": [],
+      "inbound_ffi_schema_refs": [],
+      "outbound_ffi_schema_refs": [],
+      "runtime_session_ids": [
+        "full-system-v1::render_preview::40"
+      ],
+      "observer_safe_summary": "accepted render_preview from FullSystemV1.RoleSplitPositive -> Unit"
+    },
+    {
+      "target_id": "world-server",
+      "role": "server",
+      "execution_kind": "authoritative_runtime",
+      "launched_entry_transitions": [
+        "main"
+      ],
+      "inbound_boundary_refs": [
+        "host_input"
+      ],
+      "outbound_boundary_refs": [
+        "host_output",
+        "publish_bus"
+      ],
+      "inbound_packet_schema_refs": [],
+      "outbound_packet_schema_refs": [
+        "packet.roll.publish"
+      ],
+      "inbound_ffi_schema_refs": [
+        "ffi.host_input.read_int"
+      ],
+      "outbound_ffi_schema_refs": [
+        "ffi.host_output.write_int"
+      ],
+      "runtime_session_ids": [
+        "full-system-v1::main::40"
+      ],
+      "observer_safe_summary": "accepted main from FullSystemV1.RoleSplitPositive -> Unit"
+    }
+  ]
+}

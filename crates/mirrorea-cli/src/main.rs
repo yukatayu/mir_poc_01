@@ -14,6 +14,7 @@ use mir_ast::product_alpha1::{
     check_product_alpha1_package_path, load_product_alpha1_package_path,
 };
 use mir_runtime::{
+    full_system_v1_local_split::run_full_system_v1_local_split_path,
     full_system_v1_projection::project_full_system_v1_path,
     product_alpha1_devtools::{
         ProductAlpha1DevtoolsBundle, export_product_alpha1_devtools_for_session,
@@ -71,6 +72,7 @@ fn run(args: Vec<String>) -> i32 {
         "build-native-bundle" => handle_build_native_bundle(rest),
         "demo" => handle_demo(rest),
         "project-full-v1" => handle_project_full_v1(rest),
+        "run-full-v1-split" => handle_run_full_v1_split(rest),
         "__product-transport-world-server" => handle_product_transport_world_server(rest),
         "__product-transport-participant-client" => {
             handle_product_transport_participant_client(rest)
@@ -570,6 +572,23 @@ fn handle_project_full_v1(args: &[String]) -> (Value, i32) {
     let report = project_full_system_v1_path(&source_path, &request_path);
     let payload = serde_json::to_value(report.clone())
         .expect("full system v1 projection report should serialize");
+    (payload, if report.accepted { 0 } else { 2 })
+}
+
+fn handle_run_full_v1_split(args: &[String]) -> (Value, i32) {
+    let parsed = match parse_run_full_v1_split_args(args) {
+        Ok(parsed) => parsed,
+        Err(payload) => return payload,
+    };
+    let report = run_full_system_v1_local_split_path(
+        &parsed.source_path,
+        &parsed.request_path,
+        parsed.input,
+        parsed.target_id.as_deref(),
+        parsed.entry_override.as_deref(),
+    );
+    let payload =
+        serde_json::to_value(report.clone()).expect("full system v1 local split should serialize");
     (payload, if report.accepted { 0 } else { 2 })
 }
 
@@ -2166,6 +2185,122 @@ fn parse_project_full_v1_args(args: &[String]) -> Result<(PathBuf, PathBuf), (Va
     Ok((PathBuf::from(source_path), request_path))
 }
 
+struct RunFullV1SplitArgs {
+    source_path: PathBuf,
+    request_path: PathBuf,
+    input: i64,
+    target_id: Option<String>,
+    entry_override: Option<String>,
+}
+
+fn parse_run_full_v1_split_args(args: &[String]) -> Result<RunFullV1SplitArgs, (Value, i32)> {
+    let Some(source_path) = args.first() else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "run-full-v1-split",
+                "diagnostic_code": "missing_source_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    let mut request_path = None;
+    let mut input = 0i64;
+    let mut target_id = None;
+    let mut entry_override = None;
+    let mut index = 1usize;
+    while index < args.len() {
+        match args[index].as_str() {
+            "--request" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("run-full-v1-split", &args[index..]),
+                        2,
+                    ));
+                };
+                request_path = Some(PathBuf::from(value));
+                index += 2;
+            }
+            "--input" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("run-full-v1-split", &args[index..]),
+                        2,
+                    ));
+                };
+                let parsed = value.parse::<i64>().map_err(|_| {
+                    (
+                        json!({
+                            "status": "error",
+                            "command": "run-full-v1-split",
+                            "diagnostic_code": "invalid_input",
+                            "input": value,
+                            "implemented": true,
+                            "full_system_v1_ready": false,
+                            "final_public_api_frozen": false
+                        }),
+                        2,
+                    )
+                })?;
+                input = parsed;
+                index += 2;
+            }
+            "--target" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("run-full-v1-split", &args[index..]),
+                        2,
+                    ));
+                };
+                target_id = Some(value.clone());
+                index += 2;
+            }
+            "--entry" => {
+                let Some(value) = args.get(index + 1) else {
+                    return Err((
+                        unexpected_arguments_payload("run-full-v1-split", &args[index..]),
+                        2,
+                    ));
+                };
+                entry_override = Some(value.clone());
+                index += 2;
+            }
+            _ => {
+                return Err((
+                    unexpected_arguments_payload("run-full-v1-split", &args[index..]),
+                    2,
+                ));
+            }
+        }
+    }
+
+    let Some(request_path) = request_path else {
+        return Err((
+            json!({
+                "status": "error",
+                "command": "run-full-v1-split",
+                "diagnostic_code": "missing_request_path",
+                "implemented": true,
+                "full_system_v1_ready": false,
+                "final_public_api_frozen": false
+            }),
+            2,
+        ));
+    };
+
+    Ok(RunFullV1SplitArgs {
+        source_path: PathBuf::from(source_path),
+        request_path,
+        input,
+        target_id,
+        entry_override,
+    })
+}
+
 struct DemoArgs {
     package_path: PathBuf,
     out_dir: PathBuf,
@@ -2422,7 +2557,8 @@ fn usage_payload() -> Value {
             "view",
             "build-native-bundle",
             "demo",
-            "project-full-v1"
+            "project-full-v1",
+            "run-full-v1-split"
         ],
         "product_alpha1_ready": false,
         "final_public_api_frozen": false

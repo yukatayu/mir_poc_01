@@ -21,13 +21,13 @@ The current repo has:
 - canonical operational product suite.
 - first-floor Mir computational evidence.
 - helper-backed PoseGraph comparison evidence plus bounded source-first PoseGraph runtime evidence.
-- bounded source-first projection IR + boundary-schema evidence plus product-alpha projection inventory.
+- bounded source-first projection IR + boundary-schema evidence, bounded same-binary local role-split evidence, plus product-alpha projection inventory.
 - engine/provider inventory.
 
 The current promoted package is:
 
 ```text
-P-PROJ-04 server/client local split
+P-ENG-02 provider admission
 ```
 
 ## What to verify now
@@ -54,7 +54,7 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, and bounded projection IR plus packet/FFI boundary-schema preservation. They still do not prove executable server/client split or provider admission.
+The Product Alpha and operational commands preserve the bounded alpha floor. The Full System V1 commands above now prove parser, typed checker, bounded effectful runtime, PoseGraph runtime/save-load/devtools, bounded projection IR plus packet/FFI boundary-schema preservation, and bounded same-binary local role split. They still do not prove provider admission, final packet/FFI transport semantics, or a final server/client binary split.
 
 ## Planned Full System V1 commands
 

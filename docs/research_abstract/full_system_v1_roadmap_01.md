@@ -6,7 +6,7 @@
 
 ## 現在地
 
-repo は bounded Product Alpha-1 workflow、canonical operational product sample suite、Mir-owned computation first-floor evidence、bounded source-first PoseGraph runtime/save-load/devtools evidence、bounded projection IR + boundary-schema first-floor evidence、product-alpha projection inventory、engine/provider inventory を持つ。
+repo は bounded Product Alpha-1 workflow、canonical operational product sample suite、Mir-owned computation first-floor evidence、bounded source-first PoseGraph runtime/save-load/devtools evidence、bounded projection IR + boundary-schema first-floor evidence、bounded same-binary local role-split first-floor evidence、product-alpha projection inventory、engine/provider inventory を持つ。
 
 ただしこれは final product ではない。`package.mir.json` は alpha compatibility / package artifact であり、本来の semantic source は Mir source files へ移す。
 
@@ -27,7 +27,7 @@ Full System V1 は次の流れを source-first に揃える roadmap である。
 
 ## Package order
 
-`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor、`P-POSE-03` は bounded runtime PoseGraph floor、`P-POSE-04` は bounded pose save/devtools floor、`P-PROJ-02` は bounded projection IR floor、`P-PROJ-03` は bounded boundary-schema floor を actualize した。次に進む package は `P-PROJ-04 server/client local split` である。
+`P-FS-00` は docs rebaseline、`P-MIR-01` は parser floor、`P-MIR-02` は typed checker floor、`P-MIR-03` は pure interpreter floor、`P-MIR-04` は bounded effectful runtime floor、`P-POSE-03` は bounded runtime PoseGraph floor、`P-POSE-04` は bounded pose save/devtools floor、`P-PROJ-02` は bounded projection IR floor、`P-PROJ-03` は bounded boundary-schema floor、`P-PROJ-04` は bounded same-binary local role-split floor を actualize した。次に進む package は `P-ENG-02 provider admission` である。
 
 大きな順序は次の通り。
 

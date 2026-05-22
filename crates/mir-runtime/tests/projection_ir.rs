@@ -4,7 +4,12 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-use mir_runtime::full_system_v1_projection::project_full_system_v1_path;
+use mir_runtime::{
+    full_system_v1_local_split::{
+        FullSystemV1LocalRoleExecutionKind, run_full_system_v1_local_split_path,
+    },
+    full_system_v1_projection::project_full_system_v1_path,
+};
 
 fn unique_temp_dir(prefix: &str) -> PathBuf {
     let nonce = SystemTime::now()
@@ -20,6 +25,12 @@ fn write_file(root: &Path, relative_path: &str, content: &str) -> PathBuf {
         .expect("parent should be created");
     fs::write(&path, content).expect("file should be written");
     path
+}
+
+fn server_client_sample_path(relative_path: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/full-system-v1/server-client/role-split-positive")
+        .join(relative_path)
 }
 
 #[test]
@@ -945,4 +956,120 @@ transition main at SugorokuPlace requires Observer, Publisher {
             .rejected_rows
             .contains(&"shared_bus:boundary_effect_contract_mismatch".to_string())
     );
+}
+
+#[test]
+fn projection_runtime_executes_local_role_split_from_manifest() {
+    let source = server_client_sample_path("main/src/role-split-positive.mir");
+    let request = server_client_sample_path("projection.request.json");
+
+    let report = run_full_system_v1_local_split_path(&source, &request, 40, None, None);
+
+    assert!(report.accepted, "{report:?}");
+    assert_eq!(report.launch_mode, "same_binary_local_role_wrapper");
+    assert_eq!(report.target_reports.len(), 3);
+    assert!(
+        report
+            .residual_obligations
+            .iter()
+            .any(|row| row.code == "docker_process_carrier_deferred")
+    );
+    assert!(
+        !report
+            .residual_obligations
+            .iter()
+            .any(|row| row.code == "server_client_runtime_split_deferred")
+    );
+
+    let server = report
+        .target_reports
+        .iter()
+        .find(|row| row.target_id == "world-server")
+        .expect("server report should exist");
+    assert!(server.accepted);
+    assert_eq!(
+        server.execution_kind,
+        FullSystemV1LocalRoleExecutionKind::AuthoritativeRuntime
+    );
+    assert_eq!(server.launched_entry_transitions, vec!["main"]);
+    assert_eq!(server.runtime_sessions.len(), 1);
+    assert!(server.runtime_sessions[0].runtime.accepted);
+    assert_eq!(
+        server.runtime_sessions[0]
+            .runtime
+            .effect_session
+            .published_channels,
+        vec!["roll"]
+    );
+    assert_eq!(
+        server.runtime_sessions[0]
+            .runtime
+            .effect_session
+            .host_output[0]
+            .summary,
+        "Int64(41)"
+    );
+
+    let client = report
+        .target_reports
+        .iter()
+        .find(|row| row.target_id == "world-client")
+        .expect("client report should exist");
+    assert!(client.accepted);
+    assert_eq!(
+        client.execution_kind,
+        FullSystemV1LocalRoleExecutionKind::AuthoritativeRuntime
+    );
+    assert_eq!(client.launched_entry_transitions, vec!["render_preview"]);
+    assert_eq!(client.runtime_sessions.len(), 1);
+    assert!(client.runtime_sessions[0].runtime.accepted);
+    assert_eq!(
+        client.runtime_sessions[0].entry_function,
+        "render_preview".to_string()
+    );
+
+    let adapter = report
+        .target_reports
+        .iter()
+        .find(|row| row.target_id == "host-adapter")
+        .expect("adapter report should exist");
+    assert!(adapter.accepted);
+    assert_eq!(
+        adapter.execution_kind,
+        FullSystemV1LocalRoleExecutionKind::PassiveEndpoint
+    );
+    assert!(adapter.launched_entry_transitions.is_empty());
+    assert!(adapter.runtime_sessions.is_empty());
+}
+
+#[test]
+fn projection_runtime_rejects_non_admitted_local_split_entry_override() {
+    let source = server_client_sample_path("main/src/role-split-positive.mir");
+    let request = server_client_sample_path("projection.request.json");
+
+    let report = run_full_system_v1_local_split_path(
+        &source,
+        &request,
+        40,
+        Some("world-client"),
+        Some("main"),
+    );
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(report.selected_target_id.as_deref(), Some("world-client"));
+    assert_eq!(report.entry_override.as_deref(), Some("main"));
+    assert_eq!(
+        report
+            .diagnostics
+            .iter()
+            .map(|row| row.code.as_str())
+            .collect::<Vec<_>>(),
+        vec!["entry_transition_not_admitted"]
+    );
+    assert_eq!(
+        report.rejected_rows,
+        vec!["world-client:entry_transition_not_admitted".to_string()]
+    );
+    assert_eq!(report.target_reports.len(), 1);
+    assert!(report.target_reports[0].runtime_sessions.is_empty());
 }

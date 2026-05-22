@@ -19,6 +19,7 @@ pub mod alpha_network_runtime;
 pub mod clean_near_end;
 pub mod current_l2;
 pub mod current_l2_cli;
+pub mod full_system_v1_local_split;
 pub mod full_system_v1_projection;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;

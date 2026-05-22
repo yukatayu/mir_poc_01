@@ -1,0 +1,34 @@
+{
+  "family": "full_system_v1_server_client",
+  "current_status": "local_role_split_alpha_actualized",
+  "rows": [
+    {
+      "sample_id": "proj-04-local-role-split-positive",
+      "root_name": "role-split-positive",
+      "stage": "P-PROJ-04",
+      "current_status": "executable",
+      "runner_kind": "local_split",
+      "source": "role-split-positive/main/src/role-split-positive.mir",
+      "request": "role-split-positive/projection.request.json",
+      "expected": "role-split-positive/expected/local-split.json",
+      "generated_artifact": "role-split-positive/generated/local-split-report.json",
+      "generated_kind": "local_split_report",
+      "input": 40
+    },
+    {
+      "sample_id": "proj-04-client-entry-override-negative",
+      "root_name": "role-split-positive",
+      "stage": "P-PROJ-04",
+      "current_status": "executable",
+      "runner_kind": "local_split",
+      "source": "role-split-positive/main/src/role-split-positive.mir",
+      "request": "role-split-positive/projection.request.json",
+      "expected": "role-split-positive/expected/client-entry-reject.json",
+      "generated_artifact": "role-split-positive/generated/client-entry-reject.json",
+      "generated_kind": "local_split_rejection",
+      "input": 40,
+      "target_id": "world-client",
+      "entry_override": "main"
+    }
+  ]
+}

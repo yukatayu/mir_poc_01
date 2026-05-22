@@ -27,6 +27,12 @@ fn write_file(root: &Path, relative_path: &str, content: &str) -> PathBuf {
     path
 }
 
+fn server_client_sample_path(relative_path: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../samples/full-system-v1/server-client/role-split-positive")
+        .join(relative_path)
+}
+
 fn run_cli(args: &[&str]) -> Output {
     Command::new(cli_bin())
         .args(args)
@@ -259,5 +265,106 @@ transition update at ClientView requires HostWrite {
     assert_eq!(
         value["diagnostics"][0]["code"],
         "client_write_authority_escalation"
+    );
+}
+
+#[test]
+fn run_full_v1_split_executes_local_role_reports() {
+    let source = server_client_sample_path("main/src/role-split-positive.mir");
+    let request = server_client_sample_path("projection.request.json");
+
+    let output = run_cli(&[
+        "run-full-v1-split",
+        source.to_str().expect("source should be utf-8"),
+        "--request",
+        request.to_str().expect("request should be utf-8"),
+        "--input",
+        "40",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(output.status.success(), "{value:?}");
+    assert_eq!(value["surface_kind"], "full_system_v1_local_split_report");
+    assert_eq!(value["accepted"], true);
+    assert_eq!(value["projection_id"], "role-split-positive");
+    assert_eq!(value["launch_mode"], "same_binary_local_role_wrapper");
+    assert!(
+        value["residual_obligations"]
+            .as_array()
+            .expect("residual obligations should be an array")
+            .iter()
+            .any(|row| row["code"] == "docker_process_carrier_deferred")
+    );
+    assert!(
+        !value["residual_obligations"]
+            .as_array()
+            .expect("residual obligations should be an array")
+            .iter()
+            .any(|row| row["code"] == "server_client_runtime_split_deferred")
+    );
+    assert_eq!(value["target_reports"].as_array().map(Vec::len), Some(3));
+    let target_reports = value["target_reports"]
+        .as_array()
+        .expect("target reports should be an array");
+    let server = target_reports
+        .iter()
+        .find(|row| row["target_id"] == "world-server")
+        .expect("server report should exist");
+    let client = target_reports
+        .iter()
+        .find(|row| row["target_id"] == "world-client")
+        .expect("client report should exist");
+    let adapter = target_reports
+        .iter()
+        .find(|row| row["target_id"] == "host-adapter")
+        .expect("adapter report should exist");
+    assert_eq!(
+        server["execution_kind"],
+        serde_json::json!("authoritative_runtime")
+    );
+    assert_eq!(
+        client["execution_kind"],
+        serde_json::json!("authoritative_runtime")
+    );
+    assert_eq!(
+        adapter["execution_kind"],
+        serde_json::json!("passive_endpoint")
+    );
+}
+
+#[test]
+fn run_full_v1_split_rejects_non_admitted_entry_override() {
+    let source = server_client_sample_path("main/src/role-split-positive.mir");
+    let request = server_client_sample_path("projection.request.json");
+
+    let output = run_cli(&[
+        "run-full-v1-split",
+        source.to_str().expect("source should be utf-8"),
+        "--request",
+        request.to_str().expect("request should be utf-8"),
+        "--input",
+        "40",
+        "--target",
+        "world-client",
+        "--entry",
+        "main",
+        "--format",
+        "json",
+    ]);
+    let value = json_stdout(&output);
+
+    assert!(!output.status.success());
+    assert_eq!(value["accepted"], false);
+    assert_eq!(value["selected_target_id"], "world-client");
+    assert_eq!(value["entry_override"], "main");
+    assert_eq!(
+        value["diagnostics"][0]["code"],
+        "entry_transition_not_admitted"
+    );
+    assert_eq!(
+        value["rejected_rows"],
+        serde_json::json!(["world-client:entry_transition_not_admitted"])
     );
 }

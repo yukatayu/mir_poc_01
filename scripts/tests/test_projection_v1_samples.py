@@ -21,6 +21,8 @@ EXPECTED_SAMPLE_IDS = [
     "proj-03-client-write-authority-negative",
     "proj-03-effect-contract-mismatch-negative",
     "proj-03-payload-shape-mismatch-negative",
+    "proj-04-local-role-split-positive",
+    "proj-04-client-entry-override-negative",
 ]
 
 
@@ -44,25 +46,31 @@ class ProjectionV1SamplesTests(unittest.TestCase):
     def test_helper_module_exists(self) -> None:
         self.assertIsNotNone(
             projection_v1_samples,
-            "scripts/projection_v1_samples.py must exist for P-PROJ-03",
+            "scripts/projection_v1_samples.py must exist for P-PROJ-03/P-PROJ-04",
         )
 
     def test_projection_root_and_matrix_exist(self) -> None:
-        sample_root = (
-            REPO_ROOT / "samples" / "full-system-v1" / "projection"
-        )
-        matrix_path = sample_root / "matrix.json"
+        projection_root = REPO_ROOT / "samples" / "full-system-v1" / "projection"
+        server_client_root = REPO_ROOT / "samples" / "full-system-v1" / "server-client"
 
-        self.assertTrue(sample_root.exists(), "projection sample root is missing")
-        self.assertTrue(matrix_path.exists(), "projection matrix.json is missing")
+        self.assertTrue(projection_root.exists(), "projection sample root is missing")
+        self.assertTrue(
+            (projection_root / "matrix.json").exists(),
+            "projection matrix.json is missing",
+        )
+        self.assertTrue(server_client_root.exists(), "server-client sample root is missing")
+        self.assertTrue(
+            (server_client_root / "matrix.json").exists(),
+            "server-client matrix.json is missing",
+        )
 
     def test_matrix_declares_projection_rows(self) -> None:
         if projection_v1_samples is None:
             self.fail("projection helper missing")
 
-        matrix = json.loads(projection_v1_samples.MATRIX_PATH.read_text())
+        matrix = projection_v1_samples.matrix()
 
-        self.assertEqual(matrix["family"], "full_system_v1_projection")
+        self.assertEqual(matrix["family"], "full_system_v1_projection_backend")
         self.assertEqual(
             [row["sample_id"] for row in matrix["rows"]],
             EXPECTED_SAMPLE_IDS,
@@ -71,8 +79,8 @@ class ProjectionV1SamplesTests(unittest.TestCase):
     def test_matrix_reports_executable_rows(self) -> None:
         payload = _run_helper("matrix")
 
-        self.assertEqual(payload["sample_count"], 4)
-        self.assertEqual(payload["executable_count"], 4)
+        self.assertEqual(payload["sample_count"], 6)
+        self.assertEqual(payload["executable_count"], 6)
         self.assertEqual(payload["validation_errors"], [])
 
     def test_positive_projection_keeps_target_manifest_summary(self) -> None:
@@ -146,6 +154,38 @@ class ProjectionV1SamplesTests(unittest.TestCase):
         self.assertIn(
             "shared_bus:boundary_effect_contract_mismatch",
             payload["actual"]["rejected_rows"],
+        )
+
+    def test_positive_local_split_reports_server_and_client_execution(self) -> None:
+        payload = _run_helper("run", "proj-04-local-role-split-positive")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["target_ids"],
+            ["host-adapter", "world-client", "world-server"],
+        )
+        server = payload["actual"]["target_summaries"]["world-server"]
+        client = payload["actual"]["target_summaries"]["world-client"]
+        adapter = payload["actual"]["target_summaries"]["host-adapter"]
+        self.assertEqual(server["execution_kind"], "authoritative_runtime")
+        self.assertEqual(client["execution_kind"], "authoritative_runtime")
+        self.assertEqual(adapter["execution_kind"], "passive_endpoint")
+        self.assertEqual(server["host_output_summaries"], ["Int64(41)"])
+        self.assertEqual(server["published_channels"], ["roll"])
+        self.assertEqual(client["launched_entry_transitions"], ["render_preview"])
+        self.assertEqual(adapter["runtime_session_count"], 0)
+
+    def test_negative_local_split_reports_entry_override_rejection(self) -> None:
+        payload = _run_helper("run", "proj-04-client-entry-override-negative")
+
+        self.assertFalse(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["entry_transition_not_admitted"],
+        )
+        self.assertEqual(
+            payload["actual"]["rejected_rows"],
+            ["world-client:entry_transition_not_admitted"],
         )
 
     def test_check_all_passes_every_row(self) -> None:

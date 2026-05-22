@@ -8,7 +8,7 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-PROJ-03`:
+Current repo state after `P-PROJ-04`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
@@ -21,7 +21,8 @@ Current repo state after `P-PROJ-03`:
 - Full System V1 bounded effectful runtime floor is `actualized` with host read/write, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows through `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, and `samples/full-system-v1/computational/runtime-matrix.json`.
 - Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 5 accepted rows, 1 violation-export row, 3 runtime-rejection rows, bounded save/load admissibility evidence, and observer-safe PoseGraph/devtools export.
 - Full System V1 bounded projection IR plus boundary-schema floor is `actualized` through `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, `samples/full-system-v1/projection/`, and `scripts/projection_v1_samples.py` with 1 accepted row, 3 rejection rows, source-derived target manifests, packet schemas, FFI schemas, source-owned capability/failure preservation, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, client-write authority rejection, unassigned-place rejection, save/load ownership rejection, and `mirrorea-alpha project-full-v1`.
-- Executable server/client split and provider packages remain later.
+- Full System V1 bounded same-binary local role-split floor is `actualized` through `crates/mir-runtime::full_system_v1_local_split`, `samples/full-system-v1/server-client/`, `scripts/projection_v1_samples.py`, and `mirrorea-alpha run-full-v1-split` with 1 accepted row, 1 undeclared-entry rejection row, and generated local-split inventory reports.
+- Provider packages remain later.
 
 ## package order
 
@@ -78,6 +79,8 @@ samples/full-system-v1/
 `P-PROJ-02` added `samples/full-system-v1/projection/`, `matrix.json`, `expected/run.json`, generated target-manifest / rejection artifacts, `crates/mir-semantics::full_system_v1::projection`, `crates/mir-runtime::full_system_v1_projection`, the `mir_full_system_v1_projection` example, `mirrorea-alpha project-full-v1`, `cargo test -p mir-runtime --test projection_ir -- --nocapture`, `cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture`, and `scripts/projection_v1_samples.py` so source-first target manifests and preservation reports now execute with one positive Sugoroku-like row, source-owned capability/failure rows, explicit client-write rejection, unassigned-place rejection, and save/load ownership rejection while preserving the non-claims around packet/FFI payload semantics, executable server/client role split, and provider admission.
 
 `P-PROJ-03` widened that same root with generated `projection-artifacts.json`, generated rejection reports, packet/FFI boundary schemas, payload-shape mismatch rejection, same-shape heterogeneous effect-contract rejection, and explicit schema-count/sample-count assertions while preserving the non-claims around final packet/FFI transport semantics, executable server/client role split, and provider admission.
+
+`P-PROJ-04` added `samples/full-system-v1/server-client/`, `matrix.json`, generated `local-split-report.json`, `crates/mir-runtime::full_system_v1_local_split`, the `mir_full_system_v1_local_split` example, `mirrorea-alpha run-full-v1-split`, and widened `scripts/projection_v1_samples.py` so the same helper family now validates 1 accepted same-binary role-run row and 1 undeclared-entry rejection row while preserving the non-claims around final packet/FFI transport semantics, final server/client binaries, Docker/deployment planner completion, and provider admission.
 
 The wider root remains non-workflow-ready until later packages add executable role-run evidence, provider admission, and the remaining source-first sample families.
 

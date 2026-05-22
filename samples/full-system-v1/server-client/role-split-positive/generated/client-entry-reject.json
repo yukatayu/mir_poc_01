@@ -1,0 +1,8 @@
+{
+  "diagnostic_codes": [
+    "entry_transition_not_admitted"
+  ],
+  "rejected_rows": [
+    "world-client:entry_transition_not_admitted"
+  ]
+}
