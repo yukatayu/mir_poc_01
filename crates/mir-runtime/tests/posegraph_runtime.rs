@@ -113,6 +113,107 @@ fn posegraph_runtime_accepts_no_split_frame_and_preserves_anchor_state() {
 }
 
 #[test]
+fn posegraph_runtime_accepts_save_load_roundtrip_and_exports_devtools_panels() {
+    let root = unique_temp_dir("posegraph-runtime-save-load-roundtrip");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    let package = write_package(
+        &root,
+        "save-load-roundtrip/package.mir.json",
+        json!({
+            "schema_version": "posegraph-runtime-package-v0",
+            "package_id": "package#pose-save-load-roundtrip",
+            "package_kind": "posegraph_runtime",
+            "module_id": "PoseGraph.SaveLoadRoundtrip",
+            "transition_id": "pose_roundtrip",
+            "runtime_input": {
+                "posegraph": {
+                    "pose_snapshot_frontier": "snapshot#avatar-017",
+                    "target_pose": {
+                        "entity_ref": "avatar#017/head",
+                        "pose_version": 17,
+                        "pose_snapshot_ref": "snapshot#avatar-017"
+                    },
+                    "anchored_pose": {
+                        "entity_ref": "object#hat-017",
+                        "anchor_ref": "anchor#avatar-017/head",
+                        "pose_version": 17,
+                        "pose_snapshot_ref": "snapshot#avatar-017",
+                        "membership_epoch": 3,
+                        "owner_epoch": 9,
+                        "state": "stable"
+                    },
+                    "anchor_switch_log": [
+                        {
+                            "from_anchor": "anchor#avatar-017/shoulder",
+                            "to_anchor": "anchor#avatar-017/head",
+                            "reason": "fresh_head_visible",
+                            "required_capability": "ObservePose",
+                            "membership_epoch": 3,
+                            "owner_epoch": 9,
+                            "sequence": 41,
+                            "pose_snapshot_frontier": "snapshot#avatar-017"
+                        }
+                    ],
+                    "current_membership_epoch": 3,
+                    "current_owner_epoch": 9,
+                    "last_anchor_switch_sequence": 40,
+                    "fresh_anchor_witness": "anchor_witness#fresh",
+                    "current_anchor_witness": "anchor_witness#fresh",
+                    "save_load": {
+                        "savepoint_ref": "savepoint#pose-06-avatar-017",
+                        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+                        "saved_membership_epoch": 3,
+                        "saved_owner_epoch": 9,
+                        "saved_anchor_switch_sequence": 41,
+                        "saved_anchor_witness": "anchor_witness#fresh",
+                        "saved_active_anchor": "anchor#avatar-017/head"
+                    }
+                }
+            }
+        }),
+    );
+
+    let report = run_posegraph_runtime_package_path(&package);
+
+    assert!(report.accepted, "{report:?}");
+    assert!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .load_admissible
+    );
+    assert!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .state_roundtrip_equal
+    );
+    assert_eq!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .savepoint_ref
+            .as_str(),
+        "savepoint#pose-06-avatar-017"
+    );
+    assert!(
+        report
+            .devtools_export
+            .panel_ids
+            .contains(&"posegraph_node_list".to_string())
+    );
+    assert!(
+        report
+            .devtools_export
+            .panel_ids
+            .contains(&"pose_snapshot_timeline".to_string())
+    );
+}
+
+#[test]
 fn posegraph_runtime_exports_split_frame_violation() {
     let root = unique_temp_dir("posegraph-runtime-violation");
     fs::create_dir_all(&root).expect("temp root should be created");
@@ -140,6 +241,29 @@ fn posegraph_runtime_exports_split_frame_violation() {
                         "membership_epoch": 3,
                         "owner_epoch": 9,
                         "state": "stable"
+                    },
+                    "anchor_switch_log": [
+                        {
+                            "from_anchor": "anchor#avatar-017/shoulder",
+                            "to_anchor": "anchor#avatar-017/head",
+                            "reason": "fresh_head_visible",
+                            "required_capability": "ObservePose",
+                            "membership_epoch": 3,
+                            "owner_epoch": 9,
+                            "sequence": 41,
+                            "pose_snapshot_frontier": "snapshot#avatar-017"
+                        }
+                    ],
+                    "current_membership_epoch": 3,
+                    "current_owner_epoch": 9,
+                    "last_anchor_switch_sequence": 40,
+                    "save_load": {
+                        "savepoint_ref": "savepoint#pose-05-avatar-017",
+                        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+                        "saved_membership_epoch": 3,
+                        "saved_owner_epoch": 9,
+                        "saved_anchor_switch_sequence": 41,
+                        "saved_active_anchor": "anchor#avatar-017/head"
                     }
                 }
             }
@@ -167,6 +291,20 @@ fn posegraph_runtime_exports_split_frame_violation() {
             .expect("violation should exist")
             .detail
             .contains("snapshot mismatch")
+    );
+    assert!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .load_admissible
+    );
+    assert!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .state_roundtrip_equal
     );
 }
 
@@ -364,6 +502,178 @@ fn posegraph_runtime_rejects_stale_anchor_switch_membership_epoch() {
     assert_eq!(
         report.rejection.as_ref().map(|row| row.code.as_str()),
         Some("stale_anchor_membership_epoch")
+    );
+}
+
+#[test]
+fn posegraph_runtime_rejects_save_load_membership_epoch_mismatch() {
+    let root = unique_temp_dir("posegraph-runtime-save-load-membership-stale");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    let package = write_package(
+        &root,
+        "save-load-membership-stale/package.mir.json",
+        json!({
+            "schema_version": "posegraph-runtime-package-v0",
+            "package_id": "package#pose-save-load-membership-stale",
+            "package_kind": "posegraph_runtime",
+            "module_id": "PoseGraph.SaveLoadMembershipStale",
+            "transition_id": "load_membership_stale",
+            "runtime_input": {
+                "posegraph": {
+                    "anchor_switch_log": [
+                        {
+                            "from_anchor": "anchor#avatar-017/shoulder",
+                            "to_anchor": "anchor#avatar-017/head",
+                            "reason": "fresh_head_visible",
+                            "required_capability": "ObservePose",
+                            "membership_epoch": 3,
+                            "owner_epoch": 9,
+                            "sequence": 41,
+                            "pose_snapshot_frontier": "snapshot#avatar-017"
+                        }
+                    ],
+                    "current_membership_epoch": 3,
+                    "current_owner_epoch": 9,
+                    "last_anchor_switch_sequence": 40,
+                    "current_anchor_witness": "anchor_witness#fresh",
+                    "save_load": {
+                        "savepoint_ref": "savepoint#pose-07-avatar-017",
+                        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+                        "saved_membership_epoch": 4,
+                        "saved_owner_epoch": 9,
+                        "saved_anchor_switch_sequence": 41,
+                        "saved_anchor_witness": "anchor_witness#fresh"
+                    }
+                }
+            }
+        }),
+    );
+
+    let report = run_posegraph_runtime_package_path(&package);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(
+        report.terminal_outcome,
+        PoseGraphRuntimeOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report.rejection.as_ref().map(|row| row.code.as_str()),
+        Some("save_load_inadmissible")
+    );
+    assert_eq!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .load_admissible,
+        false
+    );
+    assert_eq!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .savepoint_ref
+            .as_str(),
+        "savepoint#pose-07-avatar-017"
+    );
+    assert!(
+        report
+            .rejection
+            .as_ref()
+            .expect("rejection should exist")
+            .message
+            .contains("saved_membership_epoch")
+    );
+}
+
+#[test]
+fn posegraph_runtime_rejects_save_load_stale_anchor_witness() {
+    let root = unique_temp_dir("posegraph-runtime-save-load-stale-anchor-witness");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    let package = write_package(
+        &root,
+        "save-load-stale-anchor-witness/package.mir.json",
+        json!({
+            "schema_version": "posegraph-runtime-package-v0",
+            "package_id": "package#pose-save-load-stale-anchor-witness",
+            "package_kind": "posegraph_runtime",
+            "module_id": "PoseGraph.SaveLoadStaleAnchorWitness",
+            "transition_id": "load_anchor_witness_stale",
+            "runtime_input": {
+                "posegraph": {
+                    "pose_snapshot_frontier": "snapshot#avatar-017",
+                    "target_pose": {
+                        "entity_ref": "avatar#017/head",
+                        "pose_version": 17,
+                        "pose_snapshot_ref": "snapshot#avatar-017"
+                    },
+                    "anchored_pose": {
+                        "entity_ref": "object#hat-017",
+                        "anchor_ref": "anchor#avatar-017/head",
+                        "pose_version": 17,
+                        "pose_snapshot_ref": "snapshot#avatar-017",
+                        "membership_epoch": 3,
+                        "owner_epoch": 9,
+                        "state": "stable"
+                    },
+                    "anchor_switch_log": [
+                        {
+                            "from_anchor": "anchor#avatar-017/shoulder",
+                            "to_anchor": "anchor#avatar-017/head",
+                            "reason": "fresh_head_visible",
+                            "required_capability": "ObservePose",
+                            "membership_epoch": 3,
+                            "owner_epoch": 9,
+                            "sequence": 41,
+                            "pose_snapshot_frontier": "snapshot#avatar-017"
+                        }
+                    ],
+                    "current_membership_epoch": 3,
+                    "current_owner_epoch": 9,
+                    "last_anchor_switch_sequence": 40,
+                    "fresh_anchor_witness": "anchor_witness#fresh",
+                    "current_anchor_witness": "anchor_witness#fresh",
+                    "save_load": {
+                        "savepoint_ref": "savepoint#pose-10-avatar-017",
+                        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+                        "saved_membership_epoch": 3,
+                        "saved_owner_epoch": 9,
+                        "saved_anchor_switch_sequence": 41,
+                        "saved_anchor_witness": "anchor_witness#stale",
+                        "saved_active_anchor": "anchor#avatar-017/head"
+                    }
+                }
+            }
+        }),
+    );
+
+    let report = run_posegraph_runtime_package_path(&package);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(
+        report.terminal_outcome,
+        PoseGraphRuntimeOutcome::RuntimeRejection
+    );
+    assert_eq!(
+        report.rejection.as_ref().map(|row| row.code.as_str()),
+        Some("save_load_inadmissible")
+    );
+    assert_eq!(
+        report
+            .save_load_state
+            .as_ref()
+            .expect("save/load state should exist")
+            .load_admissible,
+        false
+    );
+    assert!(
+        report
+            .rejection
+            .as_ref()
+            .expect("rejection should exist")
+            .message
+            .contains("saved_anchor_witness")
     );
 }
 

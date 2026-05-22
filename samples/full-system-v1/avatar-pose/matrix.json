@@ -1,7 +1,7 @@
 {
   "schema_version": "full-system-v1-posegraph-runtime-matrix-v0",
   "family": "full_system_v1_posegraph_runtime",
-  "current_status": "posegraph_runtime_alpha_actualized",
+  "current_status": "posegraph_save_load_devtools_alpha_actualized",
   "current_posegraph_reading": "same_client_same_observation_snapshot",
   "rows": [
     {
@@ -58,13 +58,16 @@
       "sample_id": "pose-06-save-load-roundtrip",
       "root_name": "save-load-roundtrip",
       "stage": "P-POSE-04",
-      "current_status": "planned_only",
-      "representative_source": "save-load-roundtrip/src/save-load-roundtrip.mir"
+      "current_status": "executable",
+      "representative_source": "save-load-roundtrip/src/save-load-roundtrip.mir",
+      "package_input": "save-load-roundtrip/package.mir.json",
+      "expected": "save-load-roundtrip/expected/run.json",
+      "expected_terminal_outcome": "Accepted"
     },
     {
       "sample_id": "pose-07-stale-anchor-after-membership-advance",
       "root_name": "stale-anchor-after-membership-advance-negative",
-      "stage": "P-POSE-03",
+      "stage": "P-POSE-04",
       "current_status": "executable",
       "representative_source": "stale-anchor-after-membership-advance-negative/src/stale-anchor-after-membership-advance.mir",
       "package_input": "stale-anchor-after-membership-advance-negative/package.mir.json",
@@ -74,7 +77,7 @@
     {
       "sample_id": "pose-08-anchor-switch-frontier-negative",
       "root_name": "anchor-switch-frontier-negative",
-      "stage": "P-POSE-03",
+      "stage": "P-POSE-04",
       "current_status": "executable",
       "representative_source": "anchor-switch-frontier-negative/src/anchor-switch-frontier-negative.mir",
       "package_input": "anchor-switch-frontier-negative/package.mir.json",
@@ -84,7 +87,7 @@
     {
       "sample_id": "pose-09-stale-anchor-reacquire-required",
       "root_name": "stale-anchor-reacquire-required-negative",
-      "stage": "P-POSE-03",
+      "stage": "P-POSE-04",
       "current_status": "executable",
       "representative_source": "stale-anchor-reacquire-required-negative/src/stale-anchor-reacquire-required.mir",
       "package_input": "stale-anchor-reacquire-required-negative/package.mir.json",

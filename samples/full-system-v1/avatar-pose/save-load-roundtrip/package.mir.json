@@ -1,0 +1,52 @@
+{
+  "schema_version": "posegraph-runtime-package-v0",
+  "package_id": "package#pose-06-save-load-roundtrip",
+  "package_kind": "posegraph_runtime",
+  "module_id": "AvatarPose.SaveLoadRoundtrip",
+  "transition_id": "pose_roundtrip",
+  "runtime_input": {
+    "posegraph": {
+      "pose_snapshot_frontier": "snapshot#avatar-017",
+      "target_pose": {
+        "entity_ref": "avatar#017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017"
+      },
+      "anchored_pose": {
+        "entity_ref": "object#hat-017",
+        "anchor_ref": "anchor#avatar-017/head",
+        "pose_version": 17,
+        "pose_snapshot_ref": "snapshot#avatar-017",
+        "membership_epoch": 3,
+        "owner_epoch": 9,
+        "state": "stable"
+      },
+      "anchor_switch_log": [
+        {
+          "from_anchor": "anchor#avatar-017/shoulder",
+          "to_anchor": "anchor#avatar-017/head",
+          "reason": "fresh_head_visible",
+          "required_capability": "ObservePose",
+          "membership_epoch": 3,
+          "owner_epoch": 9,
+          "sequence": 41,
+          "pose_snapshot_frontier": "snapshot#avatar-017"
+        }
+      ],
+      "current_membership_epoch": 3,
+      "current_owner_epoch": 9,
+      "last_anchor_switch_sequence": 40,
+      "fresh_anchor_witness": "anchor_witness#fresh",
+      "current_anchor_witness": "anchor_witness#fresh",
+      "save_load": {
+        "savepoint_ref": "savepoint#pose-06-avatar-017",
+        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+        "saved_membership_epoch": 3,
+        "saved_owner_epoch": 9,
+        "saved_anchor_switch_sequence": 41,
+        "saved_anchor_witness": "anchor_witness#fresh",
+        "saved_active_anchor": "anchor#avatar-017/head"
+      }
+    }
+  }
+}

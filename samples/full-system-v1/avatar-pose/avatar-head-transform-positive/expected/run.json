@@ -19,5 +19,25 @@
   "fallback_active_anchors": [],
   "fallback_chain_lengths": [],
   "reacquire_required": [],
+  "savepoint_ref": null,
+  "save_load_load_admissible": null,
+  "save_load_state_roundtrip_equal": null,
+  "save_load_saved_pose_snapshot_frontier": null,
+  "save_load_restored_pose_snapshot_frontier": null,
+  "devtools_panel_ids": [
+    "posegraph_node_list",
+    "anchor_edges",
+    "pose_snapshot_timeline",
+    "pose_version_view",
+    "no_split_frame_rows",
+    "fallback_degradation",
+    "stale_reacquire_events",
+    "redacted_transform_summary"
+  ],
+  "devtools_pose_snapshot_entries": [
+    "snapshot#avatar-017"
+  ],
+  "devtools_stale_reacquire_entities": [],
+  "devtools_no_split_frame_status": "accepted",
   "observer_safe_summary": "accepted posegraph runtime AvatarPose.AvatarHeadTransformPositive.avatar_head"
 }

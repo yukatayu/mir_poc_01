@@ -8,7 +8,7 @@ Normative source remains `specs/33..38`. This plan records package order, eviden
 
 ## current baseline
 
-Current repo state after `P-POSE-03`:
+Current repo state after `P-POSE-04`:
 
 - Product Alpha-1 release-candidate workflow is `product-alpha-ready` in bounded local/Docker scope.
 - Canonical operational product sample suite is `workflow-ready` in bounded local/Docker alpha scope.
@@ -19,8 +19,8 @@ Current repo state after `P-POSE-03`:
 - Full System V1 source-first typed checker floor is `actualized` with crate-local typed IR lowering, explicit accepted/residual obligations, imported-module semantic closure, ambiguous import rejection, and a 3-positive / 9-negative sample matrix through `scripts/full_system_v1_samples.py`.
 - Full System V1 pure interpreter floor is `actualized` through the same source-first runtime lane.
 - Full System V1 bounded effectful runtime floor is `actualized` with host read/write, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows through `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, and `samples/full-system-v1/computational/runtime-matrix.json`.
-- Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 4 accepted rows, 1 violation-export row, and 3 runtime-rejection rows.
-- PoseGraph save/devtools, projection, and provider packages remain later.
+- Full System V1 bounded PoseGraph runtime floor is `actualized` through `crates/mir-runtime::posegraph_runtime`, `samples/full-system-v1/avatar-pose/`, and `scripts/posegraph_runtime_samples.py` with 5 accepted rows, 1 violation-export row, 3 runtime-rejection rows, bounded save/load admissibility evidence, and observer-safe PoseGraph/devtools export.
+- Projection and provider packages remain later.
 
 ## package order
 
@@ -71,6 +71,8 @@ samples/full-system-v1/
 `P-MIR-04` widened that same runtime lane to execute transitions and bounded effect rows for host read/write, publish/observe, witness/handoff, and local atomic-cut precondition/rollback/stale-load negatives while preserving static/runtime rejection split and observer-safe effect-session summaries.
 
 `P-POSE-03` added `samples/full-system-v1/avatar-pose/`, `matrix.json`, runtime expected JSON, `crates/mir-runtime::posegraph_runtime`, the `posegraph_runtime_session` example, and `scripts/posegraph_runtime_samples.py` so Transform / PoseVersion / AnchorBinding / AnchorSwitch / fallback state now execute as bounded source-first runtime evidence with same-client same-observation-snapshot no-split-frame acceptance, split-frame violation export, stale-anchor membership rejection, anchor-switch frontier rejection, and fallback-only reacquire requirement.
+
+`P-POSE-04` widened that same PoseGraph lane with `pose-06-save-load-roundtrip`, save/load carriers on the negative rows, bounded load-admissibility export, and observer-safe PoseGraph/devtools panels while preserving the non-claims around distributed durable save/load and final viewer/devtools ABI.
 
 The wider root remains non-workflow-ready until later packages add typed IR, runtime, projection, and provider evidence.
 

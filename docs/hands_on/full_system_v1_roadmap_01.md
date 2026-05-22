@@ -1,6 +1,6 @@
 # Full System V1 roadmap hands-on
 
-This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first five implementation packages.
+This is a reader-facing entrypoint for the `P-FS-00` roadmap rebaseline and the first six implementation packages.
 
 It explains what is now executable at the source-first parser/checker/bounded-effectful-runtime floor and what still remains later.
 
@@ -24,10 +24,10 @@ The current repo has:
 - projection/backend inventory.
 - engine/provider inventory.
 
-The next promoted package is:
+The current promoted package is:
 
 ```text
-P-POSE-04 pose save/devtools
+P-PROJ-02 projection IR realization
 ```
 
 ## What to verify now
@@ -45,7 +45,7 @@ cargo fmt --check
 git diff --check
 ```
 
-The Product Alpha and operational commands preserve the current runnable floor. They do not prove pose-aware save/load, projection IR, server/client split, or provider admission.
+The Product Alpha and operational commands preserve the current runnable floor. They do not prove projection IR, server/client split, or provider admission.
 
 ## Planned Full System V1 commands
 

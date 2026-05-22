@@ -203,6 +203,9 @@ def _run_posegraph_package(path: Path) -> dict[str, Any]:
 
 def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
     runtime_state = payload.get("runtime_state") or {}
+    save_load_state = payload.get("save_load_state") or {}
+    devtools_export = payload.get("devtools_export") or {}
+    devtools_sections = devtools_export.get("sections") or {}
     return {
         "accepted": payload.get("accepted"),
         "terminal_outcome": payload.get("terminal_outcome"),
@@ -240,6 +243,25 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
             len(row["fallback_chain"]) for row in runtime_state.get("fallback_state") or []
         ],
         "reacquire_required": runtime_state.get("reacquire_required") or [],
+        "savepoint_ref": save_load_state.get("savepoint_ref"),
+        "save_load_load_admissible": save_load_state.get("load_admissible"),
+        "save_load_state_roundtrip_equal": save_load_state.get("state_roundtrip_equal"),
+        "save_load_saved_pose_snapshot_frontier": save_load_state.get(
+            "saved_pose_snapshot_frontier"
+        ),
+        "save_load_restored_pose_snapshot_frontier": save_load_state.get(
+            "restored_pose_snapshot_frontier"
+        ),
+        "devtools_panel_ids": devtools_export.get("panel_ids") or [],
+        "devtools_pose_snapshot_entries": [
+            row["snapshot_ref"] for row in devtools_sections.get("pose_snapshot_timeline") or []
+        ],
+        "devtools_stale_reacquire_entities": [
+            row["entity_ref"] for row in devtools_sections.get("stale_reacquire_events") or []
+        ],
+        "devtools_no_split_frame_status": (
+            (devtools_sections.get("no_split_frame_rows") or [{}])[0].get("outcome")
+        ),
         "observer_safe_summary": payload.get("observer_safe_summary"),
     }
 

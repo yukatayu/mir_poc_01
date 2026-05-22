@@ -9,10 +9,10 @@ This document is repository memory for `specs/37-posegraph-runtime-semantics.md`
 Current PoseGraph evidence is now split across two layers:
 
 - `samples/product-alpha1/posegraph/` remains the helper-backed comparison floor with one same-client same-observation-snapshot accepted row, one split-frame `violation_export` row, and seven planned rows.
-- `samples/full-system-v1/avatar-pose/` is now the bounded source-first runtime floor with 8 executable rows and 1 planned save/load row.
-- `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `scripts/posegraph_runtime_samples.py check-all --format json` now prove Transform / PoseVersion / AnchorBinding / AnchorSwitch / fallback state / reacquire requirement runtime behavior.
+- `samples/full-system-v1/avatar-pose/` is now the bounded source-first runtime floor with 9 executable rows.
+- `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `scripts/posegraph_runtime_samples.py check-all --format json` now prove Transform / PoseVersion / AnchorBinding / AnchorSwitch / fallback state / reacquire requirement runtime behavior, bounded save/load admissibility, and observer-safe devtools export.
 
-This is useful first-floor evidence. It is not pose-aware save/load completion, devtools panel completion, or renderer integration.
+This is useful first-floor evidence. It is not distributed durable pose save/load completion, final devtools panel completion, or renderer integration.
 
 ## package sequence
 

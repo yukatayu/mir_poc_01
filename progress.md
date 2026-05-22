@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-22 12:56 JST
+最終更新: 2026-05-22 13:13 JST
 
 ## document role
 
@@ -44,11 +44,30 @@ The final direction for this roadmap is source-first:
 
 ## current milestone position
 
-- Current package: `P-POSE-04 pose save/devtools`
-- Current status after this snapshot: `FS-05` is closed as a parser+checker+bounded-effectful-runtime+runtime-PoseGraph first-floor evidence set and PoseGraph save/devtools is promoted
-- Next promoted package after the current closeout: `P-PROJ-02 projection IR realization`
+- Current package: `P-PROJ-02 projection IR realization`
+- Current status after this snapshot: `FS-05` is closed through bounded PoseGraph runtime plus bounded pose save/devtools evidence, and `FS-06` is promoted as the next implementation line
+- Next promoted package after the current closeout: `P-PROJ-03 boundary schemas`
 - Current truthful summary:
-  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Projection/backend and engine/provider are still inventory/scaffold. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, and a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, and fallback-only reacquire requirement. This is still bounded local evidence, not final effect grammar, not distributed cut/save semantics, not pose-aware save/load/devtools completion, and not provider completion.
+  Product Alpha and operational suite are workflow-ready in bounded local/Docker alpha scope. Mir computational core is first-floor evidence, not Rust-like complete. Projection/backend and engine/provider are still inventory/scaffold. Full V1 now has a real textual Mir parser lane, a crate-local typed checker lane, a bounded source-derived runtime lane that executes pure functions plus transition/effect rows, and a bounded PoseGraph runtime lane that enforces same-client same-observation-snapshot no-split-frame coherence, anchor-switch frontier monotonicity, stale-anchor membership rejection, fallback-only reacquire requirement, bounded save/load admissibility, and observer-safe PoseGraph/devtools export. This is still bounded local evidence, not final effect grammar, not distributed cut/save semantics, not final public devtools family, and not provider completion.
+
+## completed milestones
+
+- `P-FS-00` full-system-v1-roadmap-rebaseline
+- `P-MIR-01` textual Mir alpha grammar
+- `P-MIR-02` typed IR and checker
+- `P-MIR-03` computational interpreter
+- `P-MIR-04` effectful Mir integration
+- `P-POSE-03` runtime PoseGraph
+- `P-POSE-04` pose save/devtools
+
+## runnable commands
+
+- `python3 scripts/textual_mir_samples.py check-all --format json`
+- `python3 scripts/full_system_v1_samples.py check-all --format json`
+- `python3 scripts/posegraph_runtime_samples.py check-all --format json`
+- `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`
+- `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`
+- `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`
 
 ## milestone map
 
@@ -59,11 +78,11 @@ The final direction for this roadmap is source-first:
 | `FS-02` typed IR and checker | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`, `python3 scripts/full_system_v1_samples.py check-all --format json`, `samples/full-system-v1/computational/typed-ir-matrix.json` 3-positive/9-negative checker matrix with imported-module semantic closure and ambiguous import rejection | keep checker floor synchronized while effectful/runtime widening proceeds |
 | `FS-03` Mir-owned computational interpreter | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`, `python3 scripts/full_system_v1_samples.py check-all --format json`, `samples/full-system-v1/computational/runtime-matrix.json` pure function rows plus compute trace and static/runtime rejection split | keep pure function floor synchronized while transition/effect/runtime layers widen |
 | `FS-04` effectful Mir integration | `first-floor-evidence` | `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `samples/full-system-v1/computational/runtime-matrix.json` 8-positive/9-negative runtime matrix with host boundary, publish/observe, witness/handoff, and bounded local atomic-cut rejection rows | runtime PoseGraph state and save/devtools integration |
-| `FS-05` PoseGraph runtime | `first-floor-evidence` | `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, `python3 scripts/posegraph_runtime_samples.py check-all --format json`, `samples/full-system-v1/avatar-pose/` 4-accepted / 1-violation / 3-runtime-rejection runtime matrix with no-split-frame, anchor-switch frontier, stale-anchor, and fallback/reacquire rows | pose-aware save/load admissibility and observer-safe PoseGraph panels |
+| `FS-05` PoseGraph runtime | `first-floor-evidence` | `crates/mir-runtime::posegraph_runtime`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, `python3 scripts/posegraph_runtime_samples.py check-all --format json`, `samples/full-system-v1/avatar-pose/` 5-accepted / 1-violation / 3-runtime-rejection runtime matrix with no-split-frame, anchor-switch frontier, stale-anchor, fallback/reacquire, bounded save/load admissibility, and observer-safe devtools export | projection preservation and renderer/provider wiring remain later |
 | `FS-06` projection IR | `planned` | projection inventory scaffold | projection IR, target manifests, packet/FFI schemas, preservation report |
 | `FS-07` server/client runtime split MVP | `planned` | Product Alpha local/Docker runtime floor | run server/client roles from projection manifest |
 | `FS-08` engine/provider admission MVP | `planned` | engine/provider inventory scaffold | accepted/rejected provider admission rows |
-| `FS-09` devtools full alpha panels | `planned` | Product Alpha viewer and session devtools are anchors | source/IR/projection/PoseGraph/provider panels |
+| `FS-09` devtools full alpha panels | `first-floor-evidence` | Product Alpha viewer and session devtools remain anchors; `crates/mir-runtime::posegraph_runtime` now exports observer-safe PoseGraph/devtools panels plus save/load summaries | widen beyond PoseGraph runtime into source/IR/projection/provider panels |
 | `FS-10` native host bundle plus optional backend gate | `planned` | native host launch bundle exists for Product Alpha | full V1 bundle with sources, IR/projection artifacts, reports |
 | `FS-11` release check and clean clone guide | `planned` | product release check and operational suite check exist | `full_system_v1_release_check.py`, hands-on, installed-binary replay |
 
@@ -122,12 +141,12 @@ Current evidence:
 - variables / arrays / records / control-flow / imports first-floor rows.
 - bounded source-first transition rows for host read/write, publish/observe, witness/handoff, and local atomic-cut.
 - runtime negatives for missing publication, missing live witness, violated `R2` precondition, rollback-across-cut rejection, and stale-state non-resurrection.
-- `samples/full-system-v1/avatar-pose/` runtime rows for avatar head transform, anchored object, fallback anchor, no-split-frame acceptance, split-frame violation export, stale-anchor membership rejection, anchor-switch frontier rejection, and fallback-only reacquire requirement.
+- `samples/full-system-v1/avatar-pose/` runtime rows for avatar head transform, anchored object, fallback anchor, no-split-frame acceptance, split-frame violation export, save/load roundtrip acceptance, stale-anchor membership rejection, anchor-switch frontier rejection, fallback-only reacquire requirement, bounded load inadmissibility export, and observer-safe devtools panel summaries.
 - textual parser AST, expression/statement spans, path-aware unresolved import diagnostics, host-boundary syntax rows, crate-local typed IR/checker reports with explicit accepted/residual obligations, and source-derived runtime reports with compute traces, effect-session summaries, and static/runtime rejection split.
 
 Next gap:
 
-- `P-POSE-04` pose save/devtools, then `P-PROJ-02` projection IR realization.
+- `P-PROJ-02` projection IR realization, then `P-PROJ-03` boundary schemas.
 
 ### PoseGraph line
 
@@ -141,11 +160,11 @@ Current evidence:
 - `samples/full-system-v1/avatar-pose/`
 - `scripts/posegraph_runtime_samples.py check-all --format json`
 - `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`
-- runtime rows for Transform, PoseVersion, AnchorBinding, AnchorSwitch sequence monotonicity, fallback state, and reacquire requirement.
+- runtime rows for Transform, PoseVersion, AnchorBinding, AnchorSwitch sequence monotonicity, fallback state, reacquire requirement, bounded save/load admissibility, and observer-safe devtools export.
 
 Next gap:
 
-- pose-aware save/load relation and observer-safe devtools panels.
+- projection preservation of PoseGraph/runtime state, then renderer/provider boundary wiring.
 
 ### Projection/Backend line
 
@@ -189,7 +208,7 @@ Next gap:
 
 ## validation floor
 
-Required for `P-POSE-03`:
+Required for `P-POSE-04`:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -249,7 +268,7 @@ Research-discovery items:
 - alpha grammar shape and migration path from `package.mir.json`.
 - typed IR representation and checker row granularity.
 - effectful runtime widening beyond the bounded local lane.
-- PoseGraph save/load admissibility rows and observer-safe panel surface.
+- PoseGraph save/load/devtools widening beyond the bounded runtime lane and projection preservation surface.
 - projection preservation report shape and server/client negative rows.
 - provider admission policy for authority, sandbox, WASM/native, and rollback/replay/cut.
 
@@ -260,7 +279,7 @@ Research-discovery items:
 | `Macro 0` | repository memory / docs / traceability | Full System V1 roadmap plus parser/checker snapshots | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | source-first / typed IR boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, and PoseGraph runtime actualized; pose save/devtools next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | textual parser, typed checker, bounded effectful runtime, PoseGraph runtime, and bounded pose save/devtools are actualized; projection IR next | heavy | 着手可能 |
 | `Macro 4` | executable sample expansion | planned source-first full-system suite | heavy | 後段依存 |
 | `Macro 5` | theorem / model-check / verifier bridge | residual obligation model preserved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | bounded local/Docker alpha only | heavy | 後段依存 |
@@ -277,12 +296,14 @@ Research-discovery items:
 | effectful Mir | `first-floor-evidence` | bounded local session semantics for host boundary, publish/observe, witness/handoff, and local atomic-cut now execute; broader distributed/runtime-complete semantics remain later | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite | maintenance / source-first variants later |
-| PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime avatar-pose root exist; save/load/devtools remain later | 着手可能 |
+| PoseGraph | `first-floor-evidence` | helper evidence plus bounded source-first runtime/save-load/devtools avatar-pose root exist; projection preservation and renderer/provider wiring remain later | 着手可能 |
 | projection/backend | `boundary-fixed` | inventory-only | 着手可能 after typed IR |
 | engine/provider | `boundary-fixed` | inventory-only | 着手可能 after projection/provider policy |
 
 ## recent log
 
+- 2026-05-22 13:13 JST
+  `P-POSE-04` closeout で `crates/mir-runtime::posegraph_runtime` に bounded save/load admissibility と observer-safe devtools export を追加し、`samples/full-system-v1/avatar-pose/` の 9 executable rows、helper projection、expected JSON、runtime/helper tests、major anchors、snapshot docs を再同期したうえで current package を `P-PROJ-02`、次 closeout 後の promoted package を `P-PROJ-03` に更新した。
 - 2026-05-22 12:56 JST
   `P-POSE-03` closeout で `crates/mir-runtime::posegraph_runtime`、`samples/full-system-v1/avatar-pose/`、`scripts/posegraph_runtime_samples.py`、runtime tests、closeout helper を actualize し、reviewer 指摘の anchor-switch log ordering/frontier coherence、switch membership stale reject、fallback-only missing-witness reacquire reject、closeout planned-row drift を修正したうえで current package を `P-POSE-04`、次 closeout 後の promoted package を `P-PROJ-02` に更新した。
 - 2026-05-22 12:19 JST

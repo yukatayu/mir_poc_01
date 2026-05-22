@@ -33,5 +33,27 @@
   "reacquire_required": [
     "object#hat-017"
   ],
+  "savepoint_ref": "savepoint#pose-09-avatar-017",
+  "save_load_load_admissible": false,
+  "save_load_state_roundtrip_equal": false,
+  "save_load_saved_pose_snapshot_frontier": "snapshot#avatar-017",
+  "save_load_restored_pose_snapshot_frontier": "snapshot#avatar-017",
+  "devtools_panel_ids": [
+    "posegraph_node_list",
+    "anchor_edges",
+    "pose_snapshot_timeline",
+    "pose_version_view",
+    "no_split_frame_rows",
+    "fallback_degradation",
+    "stale_reacquire_events",
+    "redacted_transform_summary"
+  ],
+  "devtools_pose_snapshot_entries": [
+    "snapshot#avatar-017"
+  ],
+  "devtools_stale_reacquire_entities": [
+    "object#hat-017"
+  ],
+  "devtools_no_split_frame_status": "runtime_rejection",
   "observer_safe_summary": "posegraph runtime rejection: reacquire_required"
 }

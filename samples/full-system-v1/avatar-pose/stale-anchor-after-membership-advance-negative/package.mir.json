@@ -20,7 +20,16 @@
       ],
       "current_membership_epoch": 4,
       "current_owner_epoch": 9,
-      "last_anchor_switch_sequence": 40
+      "last_anchor_switch_sequence": 40,
+      "current_anchor_witness": "anchor_witness#fresh",
+      "save_load": {
+        "savepoint_ref": "savepoint#pose-07-avatar-017",
+        "saved_pose_snapshot_frontier": "snapshot#avatar-017",
+        "saved_membership_epoch": 3,
+        "saved_owner_epoch": 9,
+        "saved_anchor_switch_sequence": 41,
+        "saved_anchor_witness": "anchor_witness#fresh"
+      }
     }
   }
 }

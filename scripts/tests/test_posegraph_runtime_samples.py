@@ -31,12 +31,23 @@ class PosegraphRuntimeSamplesTests(unittest.TestCase):
 
         self.assertEqual(payload["family"], "full_system_v1_posegraph_runtime")
         self.assertEqual(payload["sample_count"], 9)
-        self.assertEqual(payload["executable_count"], 8)
-        self.assertEqual(payload["planned_count"], 1)
-        self.assertEqual(payload["accepted_count"], 4)
+        self.assertEqual(payload["executable_count"], 9)
+        self.assertEqual(payload["planned_count"], 0)
+        self.assertEqual(payload["accepted_count"], 5)
         self.assertEqual(payload["violation_count"], 1)
         self.assertEqual(payload["runtime_rejection_count"], 3)
         self.assertEqual(payload["validation_errors"], [])
+
+    def test_save_load_roundtrip_positive_exports_pose_save_and_devtools_summary(self) -> None:
+        payload = _run_helper("run", "pose-06-save-load-roundtrip")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(payload["actual"]["terminal_outcome"], "Accepted")
+        self.assertEqual(payload["actual"]["savepoint_ref"], "savepoint#pose-06-avatar-017")
+        self.assertTrue(payload["actual"]["save_load_load_admissible"])
+        self.assertTrue(payload["actual"]["save_load_state_roundtrip_equal"])
+        self.assertIn("posegraph_node_list", payload["actual"]["devtools_panel_ids"])
+        self.assertIn("pose_snapshot_timeline", payload["actual"]["devtools_panel_ids"])
 
     def test_no_split_frame_positive_preserves_switch_and_fallback_state(self) -> None:
         payload = _run_helper("run", "pose-04-no-split-frame-positive")
@@ -62,6 +73,8 @@ class PosegraphRuntimeSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["actual"]["rejection_code"], "stale_anchor_membership_epoch"
         )
+        self.assertEqual(payload["actual"]["savepoint_ref"], "savepoint#pose-07-avatar-017")
+        self.assertFalse(payload["actual"]["save_load_load_admissible"])
 
     def test_reacquire_negative_exports_runtime_rejection(self) -> None:
         payload = _run_helper("run", "pose-09-stale-anchor-reacquire-required")
@@ -76,14 +89,14 @@ class PosegraphRuntimeSamplesTests(unittest.TestCase):
 
         self.assertEqual(payload["failed"], [])
         self.assertEqual(payload["validation_errors"], [])
-        self.assertEqual(len(payload["passed"]), 8)
-        self.assertEqual(payload["planned"], ["pose-06-save-load-roundtrip"])
+        self.assertEqual(len(payload["passed"]), 9)
+        self.assertEqual(payload["planned"], [])
 
     def test_closeout_reports_only_planned_rows(self) -> None:
         payload = _run_helper("closeout")
 
-        self.assertEqual(payload["planned_sample_ids"], ["pose-06-save-load-roundtrip"])
-        self.assertEqual(len(payload["executable_sample_ids"]), 8)
+        self.assertEqual(payload["planned_sample_ids"], [])
+        self.assertEqual(len(payload["executable_sample_ids"]), 9)
 
 
 if __name__ == "__main__":

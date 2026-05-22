@@ -5,7 +5,7 @@ This root is the source-first Full System V1 line.
 Current state:
 
 - `computational/` is actualized for `P-MIR-01..04` as parser, typed checker, bounded effectful runtime, and runtime report evidence.
-- `avatar-pose/` is actualized for `P-POSE-03` as bounded runtime PoseGraph evidence with 8 executable rows and 1 planned save/load row.
+- `avatar-pose/` is actualized for `P-POSE-03` / `P-POSE-04` as bounded runtime PoseGraph evidence with 9 executable rows, save/load admissibility evidence, and observer-safe devtools export summaries.
 - world-core, membership-chat, sugoroku-world, projection, server/client, and provider-adapter families remain planned.
 
 Commands available now:
@@ -25,5 +25,5 @@ Stop lines:
 
 - no final public grammar
 - no final typed IR / interpreter / runtime API completion here
-- no pose-aware save/load or final devtools completion here
+- no distributed durable pose save/load or final devtools family completion here
 - no package artifact generation here
