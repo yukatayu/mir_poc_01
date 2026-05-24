@@ -41,7 +41,7 @@ Current evidence:
 |---|---|---|
 | `P-SURF-00B` | docs/spec rebaseline | patch semantics and roadmap exist |
 | `P-SURF-06` | source patch pipeline | closed: `check-source`, `parse-source`, `elaborate-source`, `patch-source`, and `export-core-ir` have accepted/rejected rows |
-| `P-SURF-08` | devtools | source span, Core IR diff, verdict, activation cut, and state migration summary visible |
+| `P-SURF-08` | devtools | closed: source span, Core IR diff counts, verdict, activation-cut presence, and diagnostic panel rows visible through redacted static summaries |
 | `P-SURF-99` | audit | compatibility anchors rerun and non-claims preserved |
 
 ## actualized rows

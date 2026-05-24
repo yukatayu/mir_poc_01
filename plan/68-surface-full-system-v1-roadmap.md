@@ -50,6 +50,8 @@ The repo now has:
 - source-first operational evidence roots for WorldCore, MembershipChat,
   SugorokuWorld, PortalWorldlink, TwoShardHardBoundary, and
   GradientObservation with `E2E-SURF-01..12`.
+- static devtools diagnostics evidence in `samples/full-system-v1-surface/devtools/`
+  with `DEV-01..02`, semantic indexed-state backing, and redacted patch summaries.
 - `scripts/surface_mir_samples.py`, `scripts/surface_mir_authoring_check.py`,
   and `scripts/surface_mir_release_check.py` plan/check surfaces.
 
@@ -65,7 +67,7 @@ The repo now has:
 | 6 | `P-SURF-05` | role admission | closed: role claim / grant / missing-grant / stale / hash metadata rows |
 | 7 | `P-SURF-06` | source patch | closed: source commands, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
 | 8 | `P-SURF-07` | source operational suite | closed: six source roots plus `E2E-SURF-01..12` positive/negative rows |
-| 9 | `P-SURF-08` | devtools | source/Core/generated-edge/patch/admission panels |
+| 9 | `P-SURF-08` | devtools | closed: source/Core/generated-edge/semantic-indexed-state/redacted-patch/admission/source-span panels |
 | 10 | `P-SURF-99` | final audit | full validation and compatibility anchors |
 
 ## planned root family
@@ -118,9 +120,16 @@ samples/full-system-v1-surface/
   operational-matrix.json
 ```
 
-These roots are not final workflow-ready runtime/transport evidence. Future
-implementation packages should add devtools diagnostics and runtime dispatch
-only after the relevant surfaces are explicit.
+Created by P-SURF-08 as static devtools diagnostics evidence:
+
+```text
+samples/full-system-v1-surface/
+  devtools/
+```
+
+These roots are not final workflow-ready runtime/transport evidence or final
+viewer/telemetry ABI. Future implementation packages should add runtime
+dispatch only after the relevant surfaces are explicit.
 
 ## compatibility anchors
 

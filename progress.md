@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 19:58 JST
+最終更新: 2026-05-24 20:13 JST
 
 ## document role
 
@@ -48,16 +48,13 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-08 devtools and diagnostics`.
-- Current status after this snapshot: `P-SURF-07` closed a source-first
-  operational evidence lane under `samples/full-system-v1-surface/` for
-  WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary,
-  and GradientObservation. `E2E-SURF-01..12` now cover positive and negative
-  source rows through parse / indexed-state / role-admission / elaboration
-  checks without promoting `package.mir.json` to semantic authority.
-- Next gap: add Surface devtools / diagnostics panels for source, generated Core
-  IR, indexed state, communication, role/admission, patch lifecycle, and source
-  spans.
+- Current package: `P-SURF-99 final surface alpha audit`.
+- Current status after this snapshot: `P-SURF-08` closed a static observer-safe
+  devtools diagnostics lane under `samples/full-system-v1-surface/devtools/`.
+  `DEV-01..02` cover Surface source, generated Core IR, indexed-state map,
+  generated communication, role/admission, patch lifecycle, and source spans
+  without promoting the bundle to final viewer / telemetry ABI.
+- Next gap: run the final Surface alpha claim / non-claim audit in `P-SURF-99`.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -71,10 +68,12 @@ semantic source authority.
   does not claim runtime execution or role admission. `P-SURF-03` is
   elaboration evidence and `P-SURF-04` is generated communication elaboration
   evidence, `P-SURF-05` is role-admission evidence, `P-SURF-06` is source
-  patch pipeline evidence, and `P-SURF-07` is source operational evidence; none
+  patch pipeline evidence, `P-SURF-07` is source operational evidence, and
+  `P-SURF-08` is static devtools diagnostics evidence; none
   claims runtime MessageEnvelope dispatch, production identity, hardware
   attestation, WAN admission, final source patch ABI, distributed durable
-  migration, final operational runtime/transport, or final devtools completion.
+  migration, final operational runtime/transport, or final devtools viewer /
+  telemetry ABI completion.
 
 ## milestone map
 
@@ -91,7 +90,7 @@ semantic source authority.
 | `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
 | `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
 | `P-SURF-07` | Surface source operational suite | `evidence-closed source operational lane` | `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`, `E2E-SURF-01..12` | final operational runtime/transport remain later |
-| `P-SURF-08` | Surface devtools / diagnostics | `planned` | `specs/39..43`, `plan/64..68` | show Surface source, Core IR, communication, indexed state, admission, patch lifecycle |
+| `P-SURF-08` | Surface devtools / diagnostics | `evidence-closed static diagnostics lane` | `samples/full-system-v1-surface/devtools/`, `DEV-01..02` | final viewer/telemetry ABI and runtime devtools remain later |
 | `P-SURF-99` | Surface Mir alpha audit | `planned` | future full validation | close bounded Surface alpha chain |
 
 ## line snapshots
@@ -165,11 +164,14 @@ Current evidence:
 - `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`
   and `operational-matrix.json` provide P-SURF-07 source-first operational
   evidence with `.mir` authority and 12 representative positive/negative rows.
+- `samples/full-system-v1-surface/devtools/` provides P-SURF-08 static
+  observer-safe diagnostics evidence for source, Core IR, indexed state map,
+  communication, admission, patch lifecycle, and source spans.
 
 Next gap:
 
-- `P-SURF-08` devtools and diagnostics: expose source / Core IR / indexed-state
-  / communication / role-admission / patch lifecycle diagnostics.
+- `P-SURF-99` final Surface alpha audit: rerun validation and claim/non-claim
+  checks across the bounded Surface line.
 
 ### PoseGraph line
 
@@ -237,11 +239,12 @@ Current evidence:
 - `samples/full-system-v1-surface/elaboration/matrix.json`
 - `samples/full-system-v1-surface/role-admission/matrix.json`
 - `samples/full-system-v1-surface/source-patch/matrix.json`
+- `samples/full-system-v1-surface/devtools/matrix.json`
 - `scripts/surface_mir_samples.py`
 
 Next gap:
 
-- add observer-safe devtools / diagnostics surfaces in `P-SURF-08`.
+- run P-SURF-99 final audit over Surface alpha evidence and stop lines.
 
 ## validation floor
 
@@ -319,11 +322,11 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | source operational docs/report sync closing; P-SURF-08 handoff current | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | devtools diagnostics docs/report sync closing; P-SURF-99 handoff current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, and source operational floors closed | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | Surface operational roots exist as alpha source evidence; devtools diagnostics are next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, and static devtools diagnostics floors closed | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit is next | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
@@ -342,25 +345,28 @@ Research-discovery items:
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
 | source patch hot-plug | `source-patch-hotplug-evidence` | parse/typecheck/elaborate/compatibility/admission report, HotPlugRequest/HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval and rejection-without-mutation evidence exist; final ABI/migration planner later | 着手可能 |
 | Surface source operational suite | `source-operational-evidence` | `E2E-SURF-01..12` cover WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation positive/negative source rows through required alpha checks | 着手可能 |
+| Surface devtools diagnostics | `static-devtools-evidence` | `DEV-01..02` expose required Surface source/Core IR/semantic-checker-backed indexed-state/communication/admission/redacted patch/source-span panels without final viewer/telemetry ABI claims | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 
 ## recent log
 
+- 2026-05-24 20:13 JST
+  `P-SURF-08` で static devtools diagnostics evidence floor を actualize し、`samples/full-system-v1-surface/devtools/`、`DEV-01..02`、`scripts/surface_mir_samples.py check-all` を同期した。panel は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans を持つが、final viewer / telemetry ABI や runtime devtools dispatch ではない。current promoted package は `P-SURF-99 final surface alpha audit`。
 - 2026-05-24 19:58 JST
-  `P-SURF-07` で source operational suite evidence floor を actualize し、`samples/full-system-v1-surface/world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`operational-matrix.json`、`E2E-SURF-01..12`、`scripts/surface_mir_samples.py check-all` を同期した。review 後に MembershipChat row も role admission と elaboration / generated communication を同時に通し、operational projection の `source_authority` / `final_public_api_frozen` は下位 semantic payload 由来にした。各 root は `.mir` source authority の positive / negative rows を持つが、final operational runtime / transport ではない。current promoted package は `P-SURF-08 devtools and diagnostics`。
+  `P-SURF-07` で source operational suite evidence floor を actualize し、`samples/full-system-v1-surface/world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`operational-matrix.json`、`E2E-SURF-01..12`、`scripts/surface_mir_samples.py check-all` を同期した。review 後に MembershipChat row も role admission と elaboration / generated communication を同時に通し、operational projection の `source_authority` / `final_public_api_frozen` は下位 semantic payload 由来にした。各 root は `.mir` source authority の positive / negative rows を持つが、final operational runtime / transport ではない。then-promoted package は `P-SURF-08 devtools and diagnostics`。
 - 2026-05-24 19:27 JST
-  `P-SURF-06` で source patch hot-plug evidence floor を actualize し、`surface_source_patch_hotplug`、`mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`、`PATCH-01..04`、`cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture`、`cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。source patch は direct eval ではなく、accepted `patch-source` は HotPlugRequest / HotPlugVerdict / activation_cut を出し、`check-source` / `elaborate-source` は inspection-only、rejected patch は mutation しない。current promoted package は `P-SURF-07 source operational suite`。
+  `P-SURF-06` で source patch hot-plug evidence floor を actualize し、`surface_source_patch_hotplug`、`mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`、`PATCH-01..04`、`cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture`、`cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。source patch は direct eval ではなく、accepted `patch-source` は HotPlugRequest / HotPlugVerdict / activation_cut を出し、`check-source` / `elaborate-source` は inspection-only、rejected patch は mutation しない。then-promoted package は `P-SURF-07 source operational suite`。
 - 2026-05-24 18:21 JST
-  `P-SURF-05` で role admission / capability grant evidence floor を actualize し、`surface_role_admission_check`、`ROLE-01..04`、`cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。role claim は authority ではなく、authority は admission grant から来る。current promoted package は `P-SURF-06 source patch hot-plug`。
+  `P-SURF-05` で role admission / capability grant evidence floor を actualize し、`surface_role_admission_check`、`ROLE-01..04`、`cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。role claim は authority ではなく、authority は admission grant から来る。then-promoted package は `P-SURF-06 source patch hot-plug`。
 - 2026-05-24 17:48 JST
-  `P-SURF-04` で generated communication evidence floor を actualize し、Core IR に `MessageEnvelope` / publish / observe / observer-safe redaction-retention rows を追加し、`ELAB-03/09/10` と widened `ELAB-01/05/08` で private/non-visible field rejection、visible write publish/observe、`VisibilityDenied` failure-row containment、`cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。current promoted package は `P-SURF-05 role admission capability grant`。
+  `P-SURF-04` で generated communication evidence floor を actualize し、Core IR に `MessageEnvelope` / publish / observe / observer-safe redaction-retention rows を追加し、`ELAB-03/09/10` と widened `ELAB-01/05/08` で private/non-visible field rejection、visible write publish/observe、`VisibilityDenied` failure-row containment、`cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。then-promoted package は `P-SURF-05 role admission capability grant`。
 - 2026-05-24 16:48 JST
-  `P-SURF-03` で Surface-to-Core elaboration evidence floor を actualize し、`ELAB-01/02/04/05/06/07/08` の cross-locus read/write remote request、generated edge、source span、obligation、read/write underdeclared generated failure-row rejection、nested read placement、unsupported-statement rejection、`cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。current promoted package は `P-SURF-04 auto communication publish/observe`。
+  `P-SURF-03` で Surface-to-Core elaboration evidence floor を actualize し、`ELAB-01/02/04/05/06/07/08` の cross-locus read/write remote request、generated edge、source span、obligation、read/write underdeclared generated failure-row rejection、nested read placement、unsupported-statement rejection、`cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。then-promoted package は `P-SURF-04 auto communication publish/observe`。
 - 2026-05-24 16:14 JST
-  `P-SURF-02` で Surface Mir indexed-state semantic checker floor を actualize し、`IDX-01..05` の owner/keyspace/value metadata、key-not-authority rejection、stale-key rejection、retained-savepoint compaction rejection、nested-place ambient-authority rejection、`cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。current promoted package は `P-SURF-03 Surface-to-Core elaboration`。
+  `P-SURF-02` で Surface Mir indexed-state semantic checker floor を actualize し、`IDX-01..05` の owner/keyspace/value metadata、key-not-authority rejection、stale-key rejection、retained-savepoint compaction rejection、nested-place ambient-authority rejection、`cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。then-promoted package は `P-SURF-03 Surface-to-Core elaboration`。
 - 2026-05-24 15:38 JST
-  `P-SURF-01` で Surface Mir alpha parser / sample helper floor を actualize し、`SURF-01..09` の positive/negative rows、`surface_mir_alpha_parse` example、authoring check、release-check check-all を同期した。current promoted package は `P-SURF-02 indexed-state semantics`。
+  `P-SURF-01` で Surface Mir alpha parser / sample helper floor を actualize し、`SURF-01..09` の positive/negative rows、`surface_mir_alpha_parse` example、authoring check、release-check check-all を同期した。then-promoted package は `P-SURF-02 indexed-state semantics`。
 - 2026-05-24 14:00 JST
   `P-SURF-00B` で Surface Mir place-scope syntax を canonical `S { ... }` に rebaseline し、`S[ ... ]` を sugar としても採用しない方針、`.mir` source authority、indexed state owner/keyspace split、role admission/capability grant split、source patch hot-plug pipeline、Surface package sequenceを docs/spec/plan snapshot に固定した。検証結果と commit/push status は report を正本にする。

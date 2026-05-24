@@ -67,7 +67,7 @@ This is near product-style alpha flow, not final production.
 | `P-SURF-05` | role admission | closed: role claim, admission request/verdict, capability grant, witness, stale rejection, hash metadata evidence |
 | `P-SURF-06` | source patch hot-plug | closed: parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
 | `P-SURF-07` | source operational suite | closed: source-first WorldCore / MembershipChat / Sugoroku / PortalWorldlink / TwoShardHardBoundary / GradientObservation roots with positive/negative rows |
-| `P-SURF-08` | devtools and diagnostics | Surface source, Core IR, generated communication, indexed state, role admission, patch lifecycle visible |
+| `P-SURF-08` | devtools and diagnostics | closed: Surface source, Core IR, generated communication, semantic-checker-backed indexed-state map, role admission, redacted patch lifecycle, and source spans visible in static diagnostics |
 | `P-SURF-99` | final audit | full validation and compatibility anchors rerun |
 
 ## planned sample root family
@@ -87,6 +87,7 @@ samples/full-system-v1-surface/
   gradient-observation/
   role-admission/
   source-patch/
+  devtools/
   posegraph/
   projection/
   provider/
@@ -101,11 +102,13 @@ completion. `source-patch/` is P-SURF-06 source patch pipeline evidence only,
 not a final hot-plug ABI, distributed durable migration planner, production
 patch registry, or arbitrary native/WASM execution route. The six operational
 roots are P-SURF-07 source-first evidence only, not final runtime/transport or
-final shared-space catalog completion. Other families remain planned until
+final shared-space catalog completion. `devtools/` is P-SURF-08 static
+diagnostics evidence only, not final viewer/telemetry ABI or runtime devtools
+completion. Other families remain planned until
 later P-SURF implementation packages actualize them, and the root family must
 not be marked workflow-ready runtime evidence from parser, checker,
 elaboration, generated communication, role-admission, source-patch, or
-source-operational rows alone.
+source-operational/static-devtools rows alone.
 
 ## required sample matrix
 

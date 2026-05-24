@@ -143,6 +143,98 @@ def command_plan_payload(plan: CommandPlan) -> dict[str, Any]:
     }
 
 
+SENSITIVE_DEVTOOLS_KEYS = {
+    "activation_cut",
+    "auth_evidence_ref",
+    "capability_frontier_ref",
+    "capability_refs",
+    "hotplug_request",
+    "membership_frontier_ref",
+    "required_capability_witness_refs",
+    "required_membership_witness_refs",
+    "witness_refs",
+}
+SENSITIVE_DEVTOOLS_STRING_MARKERS = {
+    "admission-witness-",
+    "auth-evidence-",
+    "capability-frontier-",
+    "membership-frontier-",
+    "private_token",
+    "witness-",
+}
+REQUIRED_DEVTOOLS_PANELS = {
+    "surface_source",
+    "generated_core_ir",
+    "indexed_state_map",
+    "generated_communication",
+    "role_admission",
+    "patch_lifecycle",
+    "source_spans",
+}
+
+
+def contains_sensitive_devtools_material(value: Any) -> bool:
+    if isinstance(value, dict):
+        return any(
+            key in SENSITIVE_DEVTOOLS_KEYS
+            or contains_sensitive_devtools_material(nested)
+            for key, nested in value.items()
+        )
+    if isinstance(value, list):
+        return any(contains_sensitive_devtools_material(nested) for nested in value)
+    if isinstance(value, str):
+        return any(marker in value for marker in SENSITIVE_DEVTOOLS_STRING_MARKERS)
+    return False
+
+
+def devtools_semantic_errors(payload: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    results = {
+        row.get("sample_id"): row
+        for row in payload.get("results") or []
+        if row.get("sample_id") in {"DEV-01", "DEV-02"}
+    }
+    if set(results) != {"DEV-01", "DEV-02"}:
+        errors.append("P-SURF-08 DEV-01/DEV-02 rows missing from surface samples")
+        return errors
+    for sample_id, result in results.items():
+        if "raw_parse_report" in result:
+            errors.append(f"{sample_id} exposes raw_parse_report")
+        actual = result.get("actual") or {}
+        verification_report = result.get("verification_report") or {}
+        if not REQUIRED_DEVTOOLS_PANELS.issubset(set(actual.get("panel_ids") or [])):
+            errors.append(f"{sample_id} missing required devtools panels")
+        if actual.get("all_required_panels_present") is not True:
+            errors.append(f"{sample_id} did not confirm required devtools panels")
+        if actual.get("observer_safe") is not True:
+            errors.append(f"{sample_id} did not remain observer-safe")
+        if actual.get("raw_private_payload_exposed") is not False:
+            errors.append(f"{sample_id} exposed raw private payload")
+        if actual.get("source_authority") != ".mir":
+            errors.append(f"{sample_id} did not preserve .mir source authority")
+        if actual.get("final_public_viewer_frozen") is not False:
+            errors.append(f"{sample_id} claimed final viewer ABI")
+        if actual.get("indexed_state_semantic_backing") is not True:
+            errors.append(f"{sample_id} indexed_state_map is not semantics-backed")
+        if verification_report.get("redacted") is not True:
+            errors.append(f"{sample_id} verification report is not marked redacted")
+        if verification_report.get("contains_sensitive_devtools_material") is not False:
+            errors.append(f"{sample_id} verification report detected sensitive material")
+        if contains_sensitive_devtools_material(verification_report):
+            errors.append(f"{sample_id} verification report contains sensitive material")
+    dev01_actual = results["DEV-01"].get("actual") or {}
+    dev02_actual = results["DEV-02"].get("actual") or {}
+    if results["DEV-01"].get("accepted") is not True or dev01_actual.get("accepted") is not True:
+        errors.append("DEV-01 positive devtools row did not pass")
+    if results["DEV-02"].get("accepted") is not True or dev02_actual.get("accepted") is not False:
+        errors.append("DEV-02 private-field negative row did not fail as expected")
+    if "private_field_auto_publish_rejected" not in (
+        dev02_actual.get("diagnostic_codes") or []
+    ):
+        errors.append("DEV-02 missing private-field rejection diagnostic")
+    return errors
+
+
 def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] | None) -> list[str]:
     if payload is None:
         return []
@@ -150,10 +242,11 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 44:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-07")
+        if payload.get("sample_count") != 46:
+            errors.append("surface samples helper sample_count mismatch for P-SURF-08")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-07 helper must not claim workflow_ready")
+            errors.append("P-SURF-08 helper must not claim workflow_ready")
+        errors.extend(devtools_semantic_errors(payload))
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
     return errors
@@ -189,14 +282,74 @@ def run_command(command: PlannedCommand) -> CommandResult:
     )
 
 
+def surface_samples_payload_summary(payload: dict[str, Any]) -> dict[str, Any]:
+    devtools_results = []
+    result_summaries = []
+    for row in payload.get("results") or []:
+        summary = {
+            "sample_id": row.get("sample_id"),
+            "family": row.get("family"),
+            "runner": row.get("runner"),
+            "accepted": row.get("accepted"),
+            "mismatches": row.get("mismatches") or [],
+        }
+        result_summaries.append(summary)
+        if row.get("sample_id") in {"DEV-01", "DEV-02"}:
+            devtools_results.append(
+                {
+                    **summary,
+                    "actual": row.get("actual") or {},
+                    "verification_report": row.get("verification_report") or {},
+                }
+            )
+    return {
+        "command": payload.get("command"),
+        "family": payload.get("family"),
+        "sample_root": payload.get("sample_root"),
+        "sample_count": payload.get("sample_count"),
+        "passed": payload.get("passed") or [],
+        "failed": payload.get("failed") or [],
+        "workflow_ready": payload.get("workflow_ready"),
+        "results": result_summaries,
+        "devtools_results": devtools_results,
+        "validation_errors": payload.get("validation_errors") or [],
+        "stop_lines": payload.get("stop_lines") or [],
+        "non_claims": payload.get("non_claims") or [],
+        "redacted": True,
+    }
+
+
+def payload_summary_for_result(result: CommandResult) -> dict[str, Any] | None:
+    if result.payload is None:
+        return None
+    if result.name == "helper:surface-samples":
+        return surface_samples_payload_summary(result.payload)
+    if result.name == "helper:surface-authoring":
+        return {
+            "command": result.payload.get("command"),
+            "accepted": result.payload.get("accepted"),
+            "source_count": result.payload.get("source_count"),
+            "source_authority": result.payload.get("source_authority"),
+            "final_public_api_frozen": result.payload.get("final_public_api_frozen"),
+            "redacted": True,
+        }
+    return result.payload
+
+
+def stdout_summary_for_result(result: CommandResult) -> str:
+    if result.name.startswith("helper:surface-"):
+        return "<json stdout redacted; see payload summary>"
+    return result.stdout
+
+
 def result_payload(result: CommandResult) -> dict[str, Any]:
     return {
         "name": result.name,
         "argv": result.argv,
         "returncode": result.returncode,
-        "stdout": result.stdout,
+        "stdout": stdout_summary_for_result(result),
         "stderr": result.stderr,
-        "payload": result.payload,
+        "payload": payload_summary_for_result(result),
         "semantic_errors": result.semantic_errors,
         "accepted": not result.semantic_errors,
     }
@@ -246,7 +399,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_07_source_operational_suite",
+        "scope": "p_surf_08_devtools_diagnostics",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),
@@ -257,6 +410,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
         "non_claims": [
             "no final public grammar / ABI / SDK",
             "no final source patch hot-plug ABI completion",
+            "no final Surface devtools viewer or telemetry ABI completion",
             "no final Surface operational runtime or transport completion",
             "no runtime MessageEnvelope dispatch completion",
             "no production identity provider or hardware attestation",

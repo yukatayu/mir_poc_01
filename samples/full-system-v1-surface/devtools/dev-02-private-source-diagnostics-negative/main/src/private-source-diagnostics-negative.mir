@@ -1,0 +1,20 @@
+module Surface.Devtools.PrivateDiagnosticsNegative
+
+role Observer
+place World
+
+record DebugCell {
+  text: Text,
+  private_token: Text,
+}
+
+World {
+  state debug_cell[p: Participant]: DebugCell
+    visible observer_safe fields { text }
+}
+
+Observer[self] {
+  when inspect fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    observed = debug_cell[self].private_token
+  }
+}

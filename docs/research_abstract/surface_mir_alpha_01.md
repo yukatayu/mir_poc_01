@@ -9,6 +9,7 @@ adds the Surface-to-Core elaboration evidence floor, `P-SURF-04` adds the
 generated communication evidence floor, and `P-SURF-05` adds report-level role
 admission / capability grant evidence. `P-SURF-06` adds source patch hot-plug
 pipeline evidence. `P-SURF-07` adds source-first operational evidence roots.
+`P-SURF-08` adds static observer-safe devtools diagnostics evidence.
 
 The central syntax decision is:
 
@@ -68,6 +69,7 @@ heads, and indexed state access.
 - `samples/full-system-v1-surface/elaboration/`
 - `samples/full-system-v1-surface/role-admission/`
 - `samples/full-system-v1-surface/source-patch/`
+- `samples/full-system-v1-surface/devtools/`
 - `samples/full-system-v1-surface/world-core/`
 - `samples/full-system-v1-surface/membership-chat/`
 - `samples/full-system-v1-surface/sugoroku-world/`
@@ -107,6 +109,11 @@ Actualized rows:
 - `PATCH-02`: undeclared generated failure row is rejected without mutation.
 - `PATCH-03`: self-grant of ServerAuthority is rejected without mutation.
 - `PATCH-04`: patch lifecycle/devtools positive row is accepted.
+- `DEV-01..02`: required Surface source, generated Core IR,
+  semantic-checker-backed indexed-state map, generated communication,
+  role/admission, redacted patch lifecycle, and source-span panels are visible
+  in static diagnostics; private-field diagnostics do not expose raw private
+  payloads.
 - `E2E-SURF-01..12`: WorldCore, MembershipChat, Sugoroku, PortalWorldlink,
   TwoShardHardBoundary, and GradientObservation positive/negative source rows
   pass their required alpha checks.
@@ -114,27 +121,28 @@ Actualized rows:
 ## next package
 
 ```text
-P-SURF-08 devtools and diagnostics
+P-SURF-99 final surface alpha audit
 ```
 
 Close condition:
 
-- Surface source, generated Core IR, indexed-state map, generated
-  communication, role/admission, patch lifecycle, and source spans are visible
-  in observer-safe diagnostics.
+- rerun validation and compatibility anchors across P-SURF-01..08.
+- audit Surface alpha claim / non-claim wording.
 - `.mir` files remain semantic source authority and generated reports remain
   evidence only.
 - parser, indexed-state checker, elaboration, generated communication,
-  role-admission, source-patch, and source operational floors remain compatible
+  role-admission, source-patch, source operational, and static devtools floors remain compatible
   with `SURF-01..09`, `IDX-01..05`, `ELAB-01..10`, `ROLE-01..04`,
-  `PATCH-01..04`, and `E2E-SURF-01..12`.
+  `PATCH-01..04`, `DEV-01..02`, and `E2E-SURF-01..12`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
 - Surface runtime/helper implementation beyond the parser, indexed-state
-  checker, elaboration, generated communication, role-admission, and
-  source-patch evidence floors is not present yet.
+  checker, elaboration, generated communication, role-admission, source-patch,
+  source operational, and static devtools diagnostics evidence floors is not
+  present yet.
+- P-SURF-08 is not final viewer/telemetry ABI or runtime devtools completion.
 - `samples/full-system-v1-surface/syntax/` is parser evidence, not
   workflow-ready runtime evidence.
 - `samples/full-system-v1-surface/indexed-state/` is semantic checker evidence,

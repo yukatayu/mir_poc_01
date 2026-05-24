@@ -1,0 +1,46 @@
+{
+  "family": "surface_mir_devtools_diagnostics",
+  "current_status": "p_surf_08_devtools_diagnostics_evidence",
+  "rows": [
+    {
+      "sample_id": "DEV-01",
+      "root_name": "dev-01-source-core-panels-positive",
+      "stage": "P-SURF-08",
+      "current_status": "executable",
+      "runner": "devtools_bundle",
+      "required_checks": ["parse", "indexed_state", "role_admission", "elaboration", "source_patch"],
+      "required_panels": [
+        "surface_source",
+        "generated_core_ir",
+        "indexed_state_map",
+        "generated_communication",
+        "role_admission",
+        "patch_lifecycle",
+        "source_spans"
+      ],
+      "source": "dev-01-source-core-panels-positive/main/src/devtools-panels-positive.mir",
+      "patch_source": "dev-01-source-core-panels-positive/patch/src/devtools-patch-positive.mir",
+      "expected": "dev-01-source-core-panels-positive/expected/devtools.json"
+    },
+    {
+      "sample_id": "DEV-02",
+      "root_name": "dev-02-private-source-diagnostics-negative",
+      "stage": "P-SURF-08",
+      "current_status": "executable",
+      "runner": "devtools_bundle",
+      "required_checks": ["parse", "indexed_state", "elaboration", "source_patch"],
+      "required_panels": [
+        "surface_source",
+        "generated_core_ir",
+        "indexed_state_map",
+        "generated_communication",
+        "role_admission",
+        "patch_lifecycle",
+        "source_spans"
+      ],
+      "source": "dev-02-private-source-diagnostics-negative/main/src/private-source-diagnostics-negative.mir",
+      "patch_source": "dev-01-source-core-panels-positive/patch/src/devtools-patch-positive.mir",
+      "expected": "dev-02-private-source-diagnostics-negative/expected/devtools.json"
+    }
+  ]
+}

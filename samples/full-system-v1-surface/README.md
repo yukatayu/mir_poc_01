@@ -27,6 +27,10 @@ Current state:
   hot-plug evidence lane for parse/typecheck/elaborate/compatibility/admission,
   HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval,
   and rejection-without-mutation rows.
+- `devtools/` is actualized for `P-SURF-08` as static observer-safe devtools
+  diagnostics evidence for Surface source, generated Core IR, indexed-state map,
+  generated communication, role/admission, patch lifecycle, and source-span
+  panels.
 - `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`,
   `two-shard-hard-boundary/`, and `gradient-observation/` are actualized for
   `P-SURF-07` as source-first operational evidence roots for

@@ -22,6 +22,8 @@ ROLE_ADMISSION_ROOT = SURFACE_ROOT / "role-admission"
 ROLE_ADMISSION_MATRIX_PATH = ROLE_ADMISSION_ROOT / "matrix.json"
 SOURCE_PATCH_ROOT = SURFACE_ROOT / "source-patch"
 SOURCE_PATCH_MATRIX_PATH = SOURCE_PATCH_ROOT / "matrix.json"
+DEVTOOLS_ROOT = SURFACE_ROOT / "devtools"
+DEVTOOLS_MATRIX_PATH = DEVTOOLS_ROOT / "matrix.json"
 OPERATIONAL_ROOT = SURFACE_ROOT
 OPERATIONAL_MATRIX_PATH = SURFACE_ROOT / "operational-matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
@@ -32,8 +34,9 @@ STOP_LINES = [
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-07 source operational suite is source-first alpha evidence only",
+    "P-SURF-08 devtools diagnostics are static source/Core evidence only",
     "no runtime MessageEnvelope dispatch completion",
+    "no final Surface devtools viewer or telemetry ABI completion",
     "no production identity provider or hardware attestation",
     "no distributed durable source patch migration",
     "no final Surface operational runtime or transport completion",
@@ -94,6 +97,13 @@ def _matrix_specs() -> list[dict[str, Any]]:
             "data": _load_matrix(SOURCE_PATCH_MATRIX_PATH),
         },
         {
+            "family_key": "devtools",
+            "root": DEVTOOLS_ROOT,
+            "matrix_path": DEVTOOLS_MATRIX_PATH,
+            "runner": "devtools_bundle",
+            "data": _load_matrix(DEVTOOLS_MATRIX_PATH),
+        },
+        {
             "family_key": "operational",
             "root": OPERATIONAL_ROOT,
             "matrix_path": OPERATIONAL_MATRIX_PATH,
@@ -109,6 +119,13 @@ def _row_source_path(root: Path, row: dict[str, Any]) -> Path:
 
 def _row_expected_path(root: Path, row: dict[str, Any]) -> Path:
     return root / row["expected"]
+
+
+def _row_patch_source_path(root: Path, row: dict[str, Any]) -> Path | None:
+    patch_source = row.get("patch_source")
+    if not patch_source:
+        return None
+    return root / patch_source
 
 
 def validate_rows(spec: dict[str, Any]) -> list[dict[str, str]]:
@@ -155,11 +172,21 @@ def validate_rows(spec: dict[str, Any]) -> list[dict[str, str]]:
                     "detail": f"missing expected projection `{expected_path}`",
                 }
             )
+        patch_source_path = _row_patch_source_path(root, row)
+        if patch_source_path is not None and not patch_source_path.exists():
+            errors.append(
+                {
+                    "sample_id": row["sample_id"],
+                    "family": spec["family_key"],
+                    "kind": "missing_patch_source",
+                    "detail": f"missing patch source `{patch_source_path}`",
+                }
+            )
     return errors
 
 
 def _materialize_row(spec: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
-    return {
+    materialized = {
         "sample_id": row["sample_id"],
         "family": spec["data"]["family"],
         "root_name": row["root_name"],
@@ -169,6 +196,10 @@ def _materialize_row(spec: dict[str, Any], row: dict[str, Any]) -> dict[str, Any
         "source": str(_row_source_path(spec["root"], row).relative_to(REPO_ROOT)),
         "expected": str(_row_expected_path(spec["root"], row).relative_to(REPO_ROOT)),
     }
+    patch_source_path = _row_patch_source_path(spec["root"], row)
+    if patch_source_path is not None:
+        materialized["patch_source"] = str(patch_source_path.relative_to(REPO_ROOT))
+    return materialized
 
 
 def list_samples() -> list[dict[str, Any]]:
@@ -201,6 +232,7 @@ def matrix() -> dict[str, Any]:
         "elaboration_root": str(ELABORATION_ROOT.relative_to(REPO_ROOT)),
         "role_admission_root": str(ROLE_ADMISSION_ROOT.relative_to(REPO_ROOT)),
         "source_patch_root": str(SOURCE_PATCH_ROOT.relative_to(REPO_ROOT)),
+        "devtools_root": str(DEVTOOLS_ROOT.relative_to(REPO_ROOT)),
         "operational_root": str(OPERATIONAL_ROOT.relative_to(REPO_ROOT)),
         "matrix_paths": [
             str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
@@ -376,6 +408,8 @@ def _patch_source(path: Path) -> dict[str, Any]:
 
 
 def _diagnostic_codes(payload: dict[str, Any]) -> list[str]:
+    if payload.get("diagnostic_codes") is not None:
+        return list(payload.get("diagnostic_codes") or [])
     return [row["code"] for row in payload.get("diagnostics") or []]
 
 
@@ -403,6 +437,33 @@ def _check_operational_source(path: Path, required_checks: list[str]) -> dict[st
         "returncode": 0
         if all(
             payloads[check].get("returncode") in {0, 2}
+            for check in required_checks
+        )
+        else 2,
+    }
+
+
+def _check_devtools_bundle(
+    path: Path,
+    patch_path: Path | None,
+    required_checks: list[str],
+) -> dict[str, Any]:
+    payloads: dict[str, dict[str, Any]] = {"parse": _parse_source(path)}
+    if "indexed_state" in required_checks:
+        payloads["indexed_state"] = _check_indexed_state_source(path)
+    if "role_admission" in required_checks:
+        payloads["role_admission"] = _check_role_admission_source(path)
+    if "elaboration" in required_checks:
+        payloads["elaboration"] = _elaborate_source(path)
+    if "source_patch" in required_checks and patch_path is not None:
+        payloads["source_patch"] = _patch_source(patch_path)
+    return {
+        "surface_kind": "surface_devtools_bundle_report",
+        "required_checks": required_checks,
+        "payloads": payloads,
+        "returncode": 0
+        if all(
+            payloads.get(check, {}).get("returncode") in {0, 2}
             for check in required_checks
         )
         else 2,
@@ -727,6 +788,85 @@ def _source_patch_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _single_payload_verification_report(payload: dict[str, Any]) -> dict[str, Any]:
+    module = payload.get("module") or {}
+    core_ir = payload.get("core_ir") or {}
+    compatibility = payload.get("compatibility") or {}
+    verdict = payload.get("hotplug_verdict") or {}
+    activation_cut = payload.get("activation_cut")
+    report: dict[str, Any] = {
+        "surface_kind": payload.get("surface_kind"),
+        "returncode": payload.get("returncode"),
+        "accepted": payload.get("accepted"),
+        "module_path": payload.get("module_path") or module.get("module_path"),
+        "diagnostic_codes": _diagnostic_codes(payload),
+        "source_authority": payload.get("source_authority"),
+        "final_public_api_frozen": payload.get("final_public_api_frozen"),
+        "canonical_place_scope_syntax": payload.get("canonical_place_scope_syntax"),
+        "redacted": True,
+    }
+    if payload.get("indexed_states") is not None:
+        report["indexed_state_count"] = len(payload.get("indexed_states") or [])
+        report["indexed_state_names"] = [
+            row["state_name"] for row in payload.get("indexed_states") or []
+        ]
+    if core_ir:
+        report["core_ir_counts"] = {
+            "transitions": len(core_ir.get("transitions") or []),
+            "remote_requests": len(core_ir.get("remote_requests") or []),
+            "message_envelopes": len(core_ir.get("message_envelopes") or []),
+            "publications": len(core_ir.get("publications") or []),
+            "observations": len(core_ir.get("observations") or []),
+            "generated_edges": len(core_ir.get("generated_edges") or []),
+            "source_spans": len(core_ir.get("source_spans") or []),
+            "obligations": len(core_ir.get("obligations") or []),
+        }
+    if payload.get("role_claims") is not None:
+        report["role_admission_counts"] = {
+            "role_claims": len(payload.get("role_claims") or []),
+            "admission_requests": len(payload.get("admission_requests") or []),
+            "admission_verdicts": len(payload.get("admission_verdicts") or []),
+            "capability_grants": len(payload.get("capability_grants") or []),
+            "authority_checks": len(payload.get("authority_checks") or []),
+            "stale_rejections": len(payload.get("stale_rejections") or []),
+        }
+    if payload.get("stage_summaries") is not None:
+        report["source_patch_summary"] = {
+            "stage_names": [
+                row["stage"] for row in payload.get("stage_summaries") or []
+            ],
+            "hotplug_request_present": payload.get("hotplug_request") is not None,
+            "hotplug_verdict_kind": verdict.get("verdict_kind"),
+            "activation_cut_present": activation_cut is not None,
+            "direct_eval_performed": payload.get("direct_eval_performed"),
+            "core_ir_diff": compatibility.get("core_ir_diff") or {},
+        }
+    report["contains_sensitive_devtools_material"] = (
+        _contains_sensitive_devtools_material(report)
+    )
+    return report
+
+
+def _verification_report(payload: dict[str, Any]) -> dict[str, Any]:
+    if "payloads" not in payload:
+        return _single_payload_verification_report(payload)
+    stage_reports = {
+        check: _single_payload_verification_report(check_payload)
+        for check, check_payload in (payload.get("payloads") or {}).items()
+    }
+    report = {
+        "surface_kind": payload.get("surface_kind"),
+        "returncode": payload.get("returncode"),
+        "required_checks": payload.get("required_checks") or [],
+        "stage_reports": stage_reports,
+        "redacted": True,
+    }
+    report["contains_sensitive_devtools_material"] = (
+        _contains_sensitive_devtools_material(report)
+    )
+    return report
+
+
 def _operational_source_projection(
     payload: dict[str, Any],
     row: dict[str, Any],
@@ -790,6 +930,223 @@ def _operational_source_projection(
     }
 
 
+DEVTOOLS_PANEL_IDS = [
+    "surface_source",
+    "generated_core_ir",
+    "indexed_state_map",
+    "generated_communication",
+    "role_admission",
+    "patch_lifecycle",
+    "source_spans",
+]
+
+DEVTOOLS_SENSITIVE_KEYS = {
+    "activation_cut",
+    "auth_evidence_ref",
+    "capability_frontier_ref",
+    "capability_refs",
+    "hotplug_request",
+    "membership_frontier_ref",
+    "required_capability_witness_refs",
+    "required_membership_witness_refs",
+    "witness_refs",
+}
+DEVTOOLS_SENSITIVE_STRING_MARKERS = {
+    "admission-witness-",
+    "auth-evidence-",
+    "capability-frontier-",
+    "membership-frontier-",
+    "private_token",
+    "witness-",
+}
+
+
+def _contains_sensitive_devtools_material(value: Any) -> bool:
+    if isinstance(value, dict):
+        return any(
+            key in DEVTOOLS_SENSITIVE_KEYS
+            or _contains_sensitive_devtools_material(nested)
+            for key, nested in value.items()
+        )
+    if isinstance(value, list):
+        return any(_contains_sensitive_devtools_material(nested) for nested in value)
+    if isinstance(value, str):
+        return any(marker in value for marker in DEVTOOLS_SENSITIVE_STRING_MARKERS)
+    return False
+
+
+def _source_authority_fields(payloads: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    source_authorities = [
+        check_payload.get("source_authority")
+        for check_payload in payloads.values()
+        if check_payload.get("source_authority") is not None
+    ]
+    final_public_api_values = [
+        check_payload.get("final_public_api_frozen")
+        for check_payload in payloads.values()
+        if "final_public_api_frozen" in check_payload
+    ]
+    return {
+        "source_authority": _consistent_value(source_authorities),
+        "final_public_api_frozen": _consistent_value(final_public_api_values),
+    }
+
+
+def _devtools_bundle_projection(
+    payload: dict[str, Any],
+    row: dict[str, Any],
+) -> dict[str, Any]:
+    required_checks = row.get("required_checks") or ["parse"]
+    payloads = payload.get("payloads") or {}
+    parse_payload = payloads.get("parse") or {}
+    parse_projection = _payload_projection(parse_payload)
+    indexed_payload = payloads.get("indexed_state") or {}
+    role_payload = payloads.get("role_admission") or {}
+    elaboration_payload = payloads.get("elaboration") or {}
+    source_patch_payload = payloads.get("source_patch") or {}
+    core_ir = elaboration_payload.get("core_ir") or {}
+    source_patch_projection = (
+        _source_patch_projection(source_patch_payload)
+        if source_patch_payload
+        else {}
+    )
+    stage_acceptance = {
+        check: payloads.get(check, {}).get("accepted") for check in required_checks
+    }
+    diagnostic_codes: list[str] = []
+    for check in required_checks:
+        diagnostic_codes.extend(_diagnostic_codes(payloads.get(check) or {}))
+    source_fields = _source_authority_fields(payloads)
+    source_span_entity_kinds = sorted(
+        {
+            row["entity_kind"]
+            for row in core_ir.get("source_spans") or []
+            if row.get("entity_kind")
+        }
+    )
+    required_panel_ids = row.get("required_panels") or DEVTOOLS_PANEL_IDS
+    indexed_state_names = [
+        row["state_name"] for row in indexed_payload.get("indexed_states") or []
+    ]
+    indexed_state_owner_loci = [
+        row["owner_locus"] for row in indexed_payload.get("indexed_states") or []
+    ]
+    panel_summaries = {
+        "surface_source": {
+            "module_path": parse_projection.get("module_path"),
+            "place_block_refs": parse_projection.get("place_block_refs") or [],
+        },
+        "generated_core_ir": {
+            "transition_kinds": [row["kind"] for row in core_ir.get("transitions") or []],
+            "remote_request_count": len(core_ir.get("remote_requests") or []),
+            "source_span_count": len(core_ir.get("source_spans") or []),
+        },
+        "indexed_state_map": {
+            "state_names": indexed_state_names,
+            "owner_loci": indexed_state_owner_loci,
+            "semantic_backing": "indexed_state" in payloads
+            and bool(indexed_payload.get("indexed_states") or []),
+            "diagnostic_codes": _diagnostic_codes(indexed_payload),
+        },
+        "generated_communication": {
+            "message_envelope_count": len(core_ir.get("message_envelopes") or []),
+            "publication_count": len(core_ir.get("publications") or []),
+            "observation_count": len(core_ir.get("observations") or []),
+            "generated_edge_kinds": [
+                row["edge_kind"] for row in core_ir.get("generated_edges") or []
+            ],
+        },
+        "role_admission": {
+            "role_claim_count": len(role_payload.get("role_claims") or []),
+            "admission_verdict_count": len(role_payload.get("admission_verdicts") or []),
+            "accepted_authority_check_count": len(
+                [
+                    check
+                    for check in role_payload.get("authority_checks") or []
+                    if check.get("accepted") is True
+                ]
+            ),
+        },
+        "patch_lifecycle": {
+            "stage_names": [
+                stage["stage"]
+                for stage in source_patch_projection.get("stage_summaries") or []
+            ],
+            "hotplug_verdict_kind": source_patch_projection.get("hotplug_verdict_kind"),
+            "activation_cut_present": source_patch_projection.get(
+                "activation_cut_present"
+            ),
+            "direct_eval_performed": source_patch_projection.get(
+                "direct_eval_performed"
+            ),
+        },
+        "source_spans": {
+            "source_span_count": len(core_ir.get("source_spans") or []),
+            "entity_kinds": source_span_entity_kinds,
+        },
+    }
+    panel_ids = [panel_id for panel_id in DEVTOOLS_PANEL_IDS if panel_id in panel_summaries]
+    raw_private_payload_exposed = _contains_sensitive_devtools_material(panel_summaries)
+    return {
+        "accepted": all(stage_acceptance.values()),
+        "required_checks": required_checks,
+        "stage_acceptance": stage_acceptance,
+        "panel_ids": panel_ids,
+        "panel_count": len(panel_ids),
+        "all_required_panels_present": set(required_panel_ids).issubset(set(panel_ids)),
+        "observer_safe": not raw_private_payload_exposed,
+        "final_public_viewer_frozen": False,
+        "module_path": parse_projection.get("module_path"),
+        "diagnostic_codes": diagnostic_codes,
+        "surface_source_module": parse_projection.get("module_path"),
+        "place_block_refs": parse_projection.get("place_block_refs") or [],
+        "indexed_state_names": indexed_state_names,
+        "indexed_state_owner_loci": indexed_state_owner_loci,
+        "indexed_state_semantic_backing": panel_summaries["indexed_state_map"][
+            "semantic_backing"
+        ],
+        "indexed_state_diagnostic_codes": panel_summaries["indexed_state_map"][
+            "diagnostic_codes"
+        ],
+        "role_claim_count": len(role_payload.get("role_claims") or []),
+        "admission_verdict_count": len(role_payload.get("admission_verdicts") or []),
+        "accepted_authority_check_count": len(
+            [
+                check
+                for check in role_payload.get("authority_checks") or []
+                if check.get("accepted") is True
+            ]
+        ),
+        "transition_kinds": [
+            row["kind"] for row in core_ir.get("transitions") or []
+        ],
+        "remote_request_count": len(core_ir.get("remote_requests") or []),
+        "message_envelope_count": len(core_ir.get("message_envelopes") or []),
+        "publication_count": len(core_ir.get("publications") or []),
+        "observation_count": len(core_ir.get("observations") or []),
+        "generated_edge_kinds": [
+            row["edge_kind"] for row in core_ir.get("generated_edges") or []
+        ],
+        "source_span_count": len(core_ir.get("source_spans") or []),
+        "source_span_entity_kinds": source_span_entity_kinds,
+        "patch_stage_names": [
+            stage["stage"]
+            for stage in source_patch_projection.get("stage_summaries") or []
+        ],
+        "patch_hotplug_verdict_kind": source_patch_projection.get(
+            "hotplug_verdict_kind"
+        ),
+        "patch_activation_cut_present": source_patch_projection.get(
+            "activation_cut_present"
+        ),
+        "patch_direct_eval_performed": source_patch_projection.get(
+            "direct_eval_performed"
+        ),
+        "raw_private_payload_exposed": raw_private_payload_exposed,
+        **source_fields,
+    }
+
+
 def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     for spec in _matrix_specs():
         row = next(
@@ -823,6 +1180,13 @@ def run_sample(sample_id: str) -> dict[str, Any]:
             row.get("required_checks") or ["parse"],
         )
         actual = _operational_source_projection(payload, row)
+    elif runner == "devtools_bundle":
+        payload = _check_devtools_bundle(
+            source_path,
+            _row_patch_source_path(spec["root"], row),
+            row.get("required_checks") or ["parse"],
+        )
+        actual = _devtools_bundle_projection(payload, row)
     else:
         payload = _parse_source(source_path)
         actual = _payload_projection(payload)
@@ -842,7 +1206,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
         "actual": actual,
         "accepted": not mismatches,
         "mismatches": mismatches,
-        "raw_parse_report": payload,
+        "verification_report": _verification_report(payload),
     }
 
 
@@ -852,7 +1216,8 @@ def check_all() -> dict[str, Any]:
     failed = [
         result["sample_id"]
         for result in results
-        if result["mismatches"] or result["raw_parse_report"]["returncode"] not in {0, 2}
+        if result["mismatches"]
+        or result["verification_report"]["returncode"] not in {0, 2}
     ]
     if status["validation_errors"]:
         failed.extend(

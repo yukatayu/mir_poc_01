@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-24 19:58 JST
+最終更新: 2026-05-24 20:13 JST
 
 ## document role
 
@@ -15,21 +15,18 @@ and is not append-only history.
 
 ## current promoted package
 
-Current promoted package after `P-SURF-07` closeout:
+Current promoted package after `P-SURF-08` closeout:
 
 ```text
-P-SURF-08 devtools and diagnostics
+P-SURF-99 final surface alpha audit
 ```
 
 Purpose:
 
-- expose Surface source, generated Core IR, indexed-state maps, generated
-  communication rows, role/admission rows, source patch lifecycle, and source
-  spans in observer-safe diagnostics.
-- reuse P-SURF-01..07 evidence without claiming final viewer / telemetry ABI,
-  final runtime dispatch, federation, or SDK completion.
-- keep the six source operational roots as `.mir` authority evidence, not
-  generated package artifact authority.
+- rerun full Surface validation and compatibility anchors.
+- audit claim / non-claim wording after P-SURF-01..08.
+- keep P-SURF-08 devtools diagnostics as static source/Core evidence, not final
+  viewer / telemetry ABI or runtime devtools completion.
 
 ## ordered self-driven packages
 
@@ -42,7 +39,7 @@ Purpose:
 | 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | closed with `ROLE-01..04`, role claim / join admission / grant-backed accepted write / witness rows, missing-grant write rejection, stale membership rejection, and hash metadata non-safety-proof |
 | 6 | `P-SURF-06 source patch hot-plug` | implement parse/typecheck/elaborate/admit/activation-cut patch pipeline | closed with CLI `check-source` / `parse-source` / `elaborate-source` / `patch-source` / `export-core-ir`, `PATCH-01..04`, HotPlugRequest / HotPlugVerdict / activation_cut rows, no-direct-eval evidence, and rejection-without-mutation rows |
 | 7 | `P-SURF-07 source operational suite` | create Surface source WorldCore / MembershipChat / Sugoroku / related roots | closed with six source roots, `operational-matrix.json`, and `E2E-SURF-01..12` positive/negative rows |
-| 8 | `P-SURF-08 devtools and diagnostics` | show Surface source, Core IR, generated communication, indexed state, admission, patch lifecycle | observer-safe panels and diagnostics preserve source/Core links |
+| 8 | `P-SURF-08 devtools and diagnostics` | show Surface source, Core IR, generated communication, indexed state, admission, patch lifecycle | closed with `samples/full-system-v1-surface/devtools/`, `DEV-01..02`, required panels, diagnostics, and source-span evidence |
 | 9 | `P-SURF-99 final audit` | rerun validation and compatibility anchors | full validation, docs/report cleanup, non-claim audit |
 
 ## self-driven macro phase reading
@@ -51,8 +48,8 @@ Purpose:
 |---|---|---|
 | `Macro 0` | docs / reports / validator discipline | self-driven through every Surface package close |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
-| `Macro 3` | compile-ready minimal actualization | `P-SURF-01..07` can proceed package-by-package with focused rows |
-| `Macro 4` | executable sample expansion | `P-SURF-07` created roots after parser/elaboration/indexed-state floors; `P-SURF-08` adds diagnostics |
+| `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` closed with focused rows; final audit remains |
+| `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; `P-SURF-99` audits |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | toolchain / backend / developer surface | Surface CLI/devtools can be self-driven within alpha scope |
 | `Macro 8` | domain/application realization | Surface operational suite can be self-driven after language/runtime base |
@@ -82,7 +79,7 @@ Purpose:
 | admission witness metadata | `P-SURF-05` | principal only / role + principal / optional package/runtime hash | closed narrow alpha: role + principal required; package/runtime hash optional report metadata and not safety proof |
 | source patch compatibility | `P-SURF-06` | check-only / check+diff / full migration planner | closed narrow alpha: check+Core diff+HotPlugRequest/HotPlugVerdict+activation_cut; full migration planner later |
 | Surface sample root shape | `P-SURF-07` | reuse `full-system-v1/` / new `full-system-v1-surface/` / product-alpha root | closed with `samples/full-system-v1-surface/` top-level operational roots distinct from Product Alpha roots |
-| Surface diagnostics shape | `P-SURF-08` | static helper bundle / CLI export / runtime devtools integration | use static observer-safe report bundle first; final viewer/telemetry ABI later |
+| Surface diagnostics shape | `P-SURF-08` | static helper bundle / CLI export / runtime devtools integration | closed with static observer-safe report bundle first; final viewer/telemetry ABI later |
 
 ## maintenance tasks
 

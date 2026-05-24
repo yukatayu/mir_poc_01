@@ -1,0 +1,26 @@
+module Surface.Devtools.BundlePositive
+
+role BrowserClient {
+  supports renderer.pose_v1
+  supports devtools.observer_safe
+}
+
+place World
+place WorldAdmission
+
+record DebugLine {
+  text: Text,
+}
+
+World {
+  state debug_line[p: Participant]: DebugLine
+    init DebugLine { text: "" }
+    visible observer_safe fields { text }
+}
+
+BrowserClient[self] {
+  when start fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    join World as BrowserClient via WorldAdmission
+    seen = debug_line[self].text
+  }
+}

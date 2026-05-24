@@ -7,6 +7,25 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+SENSITIVE_DEVTOOLS_KEYS = {
+    "activation_cut",
+    "auth_evidence_ref",
+    "capability_frontier_ref",
+    "capability_refs",
+    "hotplug_request",
+    "membership_frontier_ref",
+    "required_capability_witness_refs",
+    "required_membership_witness_refs",
+    "witness_refs",
+}
+SENSITIVE_DEVTOOLS_STRING_MARKERS = {
+    "admission-witness-",
+    "auth-evidence-",
+    "capability-frontier-",
+    "membership-frontier-",
+    "private_token",
+    "witness-",
+}
 
 
 def _run_helper(*args: str) -> dict:
@@ -25,14 +44,28 @@ def _run_helper(*args: str) -> dict:
     return json.loads(completed.stdout)
 
 
+def _contains_sensitive_devtools_material(value: object) -> bool:
+    if isinstance(value, dict):
+        return any(
+            key in SENSITIVE_DEVTOOLS_KEYS
+            or _contains_sensitive_devtools_material(nested)
+            for key, nested in value.items()
+        )
+    if isinstance(value, list):
+        return any(_contains_sensitive_devtools_material(nested) for nested in value)
+    if isinstance(value, str):
+        return any(marker in value for marker in SENSITIVE_DEVTOOLS_STRING_MARKERS)
+    return False
+
+
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_07_rows(self) -> None:
+    def test_matrix_reports_p_surf_08_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 44)
-        self.assertEqual(payload["executable_count"], 44)
-        self.assertEqual(payload["family_count"], 6)
+        self.assertEqual(payload["sample_count"], 46)
+        self.assertEqual(payload["executable_count"], 46)
+        self.assertEqual(payload["family_count"], 7)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
             "p_surf_04_auto_communication_elaboration_evidence",
@@ -48,6 +81,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["matrix_status"]["surface_mir_operational_source"],
             "p_surf_07_source_operational_suite_evidence",
+        )
+        self.assertEqual(
+            payload["matrix_status"]["surface_mir_devtools_diagnostics"],
+            "p_surf_08_devtools_diagnostics_evidence",
         )
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
@@ -483,11 +520,53 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(payload["actual"]["observation_count"], 1)
         self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
 
+    def test_devtools_positive_has_required_panels(self) -> None:
+        payload = _run_helper("run", "DEV-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertTrue(payload["actual"]["all_required_panels_present"])
+        self.assertEqual(payload["actual"]["panel_count"], 7)
+        self.assertIn("source_spans", payload["actual"]["panel_ids"])
+        self.assertTrue(payload["actual"]["indexed_state_semantic_backing"])
+        self.assertTrue(payload["actual"]["stage_acceptance"]["indexed_state"])
+        self.assertEqual(payload["actual"]["patch_hotplug_verdict_kind"], "accepted")
+        self.assertFalse(payload["actual"]["final_public_viewer_frozen"])
+        self.assertNotIn("raw_parse_report", payload)
+        self.assertTrue(payload["verification_report"]["redacted"])
+        self.assertFalse(
+            payload["verification_report"]["contains_sensitive_devtools_material"]
+        )
+        self.assertFalse(
+            _contains_sensitive_devtools_material(payload["verification_report"])
+        )
+
+    def test_devtools_private_negative_keeps_panels_and_reports_diagnostic(self) -> None:
+        payload = _run_helper("run", "DEV-02")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertIn(
+            "private_field_auto_publish_rejected",
+            payload["actual"]["diagnostic_codes"],
+        )
+        self.assertTrue(payload["actual"]["all_required_panels_present"])
+        self.assertTrue(payload["actual"]["indexed_state_semantic_backing"])
+        self.assertFalse(payload["actual"]["raw_private_payload_exposed"])
+        self.assertNotIn("raw_parse_report", payload)
+        self.assertTrue(payload["verification_report"]["redacted"])
+        self.assertFalse(
+            payload["verification_report"]["contains_sensitive_devtools_material"]
+        )
+        self.assertFalse(
+            _contains_sensitive_devtools_material(payload["verification_report"])
+        )
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 44)
+        self.assertEqual(len(payload["passed"]), 46)
 
 
 if __name__ == "__main__":

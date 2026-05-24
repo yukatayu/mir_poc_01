@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 class SurfaceMirReleaseCheckTests(unittest.TestCase):
-    def test_plan_includes_p_surf_07_operational_floor_commands(self) -> None:
+    def test_plan_includes_p_surf_08_devtools_floor_commands(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             plan = runner.plan_check_all(Path(tmp))
 
@@ -34,18 +34,132 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
         self.assertIn("helper:surface-samples", names)
         self.assertIn("helper:surface-authoring", names)
 
-    def test_helper_semantic_check_keeps_operational_floor_non_workflow_ready(self) -> None:
+    def test_helper_semantic_check_keeps_devtools_floor_non_workflow_ready(self) -> None:
         command = runner.PlannedCommand(
             name="helper:surface-samples",
             argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
         )
         payload = {
-            "sample_count": 44,
+            "sample_count": 46,
             "failed": [],
             "workflow_ready": False,
+            "results": [
+                {
+                    "sample_id": "DEV-01",
+                    "accepted": True,
+                    "actual": {
+                        "accepted": True,
+                        "panel_ids": [
+                            "surface_source",
+                            "generated_core_ir",
+                            "indexed_state_map",
+                            "generated_communication",
+                            "role_admission",
+                            "patch_lifecycle",
+                            "source_spans",
+                        ],
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": [],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                    },
+                },
+                {
+                    "sample_id": "DEV-02",
+                    "accepted": True,
+                    "actual": {
+                        "accepted": False,
+                        "panel_ids": [
+                            "surface_source",
+                            "generated_core_ir",
+                            "indexed_state_map",
+                            "generated_communication",
+                            "role_admission",
+                            "patch_lifecycle",
+                            "source_spans",
+                        ],
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": ["private_field_auto_publish_rejected"],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                    },
+                },
+            ],
         }
 
         self.assertEqual(runner.semantic_errors_for_result(command, payload), [])
+
+    def test_helper_semantic_check_rejects_unredacted_devtools_payload(self) -> None:
+        command = runner.PlannedCommand(
+            name="helper:surface-samples",
+            argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
+        )
+        payload = {
+            "sample_count": 46,
+            "failed": [],
+            "workflow_ready": False,
+            "results": [
+                {
+                    "sample_id": "DEV-01",
+                    "accepted": True,
+                    "raw_parse_report": {},
+                    "actual": {
+                        "accepted": True,
+                        "panel_ids": list(runner.REQUIRED_DEVTOOLS_PANELS),
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": [],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                        "capability_refs": ["capability-frontier-0001"],
+                    },
+                },
+                {
+                    "sample_id": "DEV-02",
+                    "accepted": True,
+                    "actual": {
+                        "accepted": False,
+                        "panel_ids": list(runner.REQUIRED_DEVTOOLS_PANELS),
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": ["private_field_auto_publish_rejected"],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                    },
+                },
+            ],
+        }
+
+        errors = runner.semantic_errors_for_result(command, payload)
+
+        self.assertTrue(any("raw_parse_report" in error for error in errors))
+        self.assertTrue(any("sensitive material" in error for error in errors))
 
     def test_plan_command_accepts_global_format_before_subcommand(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,60 @@
+{
+  "accepted": false,
+  "required_checks": ["parse", "indexed_state", "elaboration", "source_patch"],
+  "stage_acceptance": {
+    "parse": true,
+    "indexed_state": true,
+    "elaboration": false,
+    "source_patch": true
+  },
+  "panel_ids": [
+    "surface_source",
+    "generated_core_ir",
+    "indexed_state_map",
+    "generated_communication",
+    "role_admission",
+    "patch_lifecycle",
+    "source_spans"
+  ],
+  "panel_count": 7,
+  "all_required_panels_present": true,
+  "observer_safe": true,
+  "final_public_viewer_frozen": false,
+  "module_path": "Surface.Devtools.PrivateDiagnosticsNegative",
+  "diagnostic_codes": ["private_field_auto_publish_rejected"],
+  "surface_source_module": "Surface.Devtools.PrivateDiagnosticsNegative",
+  "place_block_refs": ["World"],
+  "indexed_state_names": ["debug_cell"],
+  "indexed_state_owner_loci": ["World"],
+  "indexed_state_semantic_backing": true,
+  "indexed_state_diagnostic_codes": [],
+  "role_claim_count": 0,
+  "admission_verdict_count": 0,
+  "accepted_authority_check_count": 0,
+  "transition_kinds": [
+    "surface_role_when",
+    "generated_remote_read_request"
+  ],
+  "remote_request_count": 1,
+  "message_envelope_count": 1,
+  "publication_count": 0,
+  "observation_count": 0,
+  "generated_edge_kinds": [
+    "message_envelope",
+    "observe_request"
+  ],
+  "source_span_count": 6,
+  "source_span_entity_kinds": [
+    "generated_edge",
+    "message_envelope",
+    "remote_request",
+    "transition"
+  ],
+  "patch_stage_names": ["parse", "typecheck", "elaborate", "compatibility", "admission"],
+  "patch_hotplug_verdict_kind": "accepted",
+  "patch_activation_cut_present": true,
+  "patch_direct_eval_performed": false,
+  "raw_private_payload_exposed": false,
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

@@ -254,6 +254,8 @@ class ValidateDocsTests(unittest.TestCase):
             "samples/full-system-v1-surface/role-admission/matrix.json",
             "samples/full-system-v1-surface/source-patch/README.md",
             "samples/full-system-v1-surface/source-patch/matrix.json",
+            "samples/full-system-v1-surface/devtools/README.md",
+            "samples/full-system-v1-surface/devtools/matrix.json",
             "samples/full-system-v1-surface/operational-matrix.json",
             "samples/full-system-v1-surface/world-core/README.md",
             "samples/full-system-v1-surface/membership-chat/README.md",

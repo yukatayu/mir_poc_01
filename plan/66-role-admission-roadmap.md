@@ -9,9 +9,10 @@ It records the Surface Mir rule that role claim is separate from authority.
 
 Current package status: `P-SURF-05` is closed as a report-level role
 admission / capability grant evidence floor, `P-SURF-06` is closed as a source
-patch hot-plug evidence floor, and `P-SURF-07` is closed as source operational
-evidence. The promoted next package for the Surface line is
-`P-SURF-08 devtools and diagnostics`.
+patch hot-plug evidence floor, `P-SURF-07` is closed as source operational
+evidence, and `P-SURF-08` is closed as static devtools diagnostics evidence.
+The promoted next package for the Surface line is `P-SURF-99 final surface
+alpha audit`.
 
 ## current decision
 
@@ -39,8 +40,8 @@ Not decided:
 | `P-SURF-00B` | docs/spec rebaseline | role/admission boundary and roadmap exist |
 | `P-SURF-05` | role admission implementation | closed: role claim, admission request, grant, witness, stale rejection, and hash metadata rows exist |
 | `P-SURF-06` | source patch hot-plug | closed: patch admission reports preserve admission evidence without claiming runtime identity lifecycle |
-| `P-SURF-07` | operational source rows | next: WorldCore / MembershipChat / role-admission roots exercise admission |
-| `P-SURF-08` | devtools | claimed role, admitted role, grants, stale rejects, and spoof attempts are visible |
+| `P-SURF-07` | operational source rows | closed: WorldCore / MembershipChat / role-admission roots exercise admission |
+| `P-SURF-08` | devtools | closed: claimed role, admitted role, grant counts, and diagnostics are visible in static redacted panels; full stale timeline viewer remains later |
 
 ## planned rows
 

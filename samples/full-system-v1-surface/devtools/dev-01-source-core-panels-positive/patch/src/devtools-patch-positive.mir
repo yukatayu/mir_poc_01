@@ -1,0 +1,13 @@
+module Surface.Devtools.PatchPositive
+
+place World
+
+record DevtoolsPatchState {
+  enabled: Bool,
+}
+
+World {
+  state devtools_patch[p: Participant]: DevtoolsPatchState
+    init DevtoolsPatchState { enabled: true }
+    visible observer_safe fields { enabled }
+}

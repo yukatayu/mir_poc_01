@@ -32,7 +32,7 @@ Not decided:
 | `P-SURF-02` | indexed state AST / checker | closed: owner, keyspace, value type, visible fields, key-not-authority rejection, stale-key rejection, retained-savepoint compaction rejection, owner-scoped state names, and nested-place ambient-authority rejection are represented |
 | `P-SURF-03` | elaboration integration | cross-locus indexed reads/writes generate Core obligations |
 | `P-SURF-07` | source operational rows | WorldCore / MembershipChat / Sugoroku source roots exercise indexed state |
-| `P-SURF-08` | devtools | active/tombstoned keys and access source spans are visible |
+| `P-SURF-08` | devtools | closed: semantic-checker-backed indexed-state map and source-span summary are visible; active/tombstoned key timeline remains later |
 
 ## planned rows
 
