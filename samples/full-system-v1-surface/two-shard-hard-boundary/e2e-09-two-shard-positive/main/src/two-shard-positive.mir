@@ -1,0 +1,22 @@
+module Surface.E2E.TwoShardPositive
+
+place ShardA
+place ShardB
+
+record Transfer {
+  phase: Int64,
+}
+
+ShardB {
+  state transfer[p: Participant]: Transfer
+    init Transfer { phase: 0 }
+    visible observer_safe fields { phase }
+}
+
+ShardA {
+  when prepare(pid: Participant) fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    ShardB {
+      transfer[pid].phase = 1
+    }
+  }
+}

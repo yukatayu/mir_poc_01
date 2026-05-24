@@ -1,0 +1,21 @@
+module Surface.E2E.PortalWorldlinkPositive
+
+role BrowserClient
+place Portal
+
+record PortalLink {
+  target_world: Text,
+  secret_token: Text,
+}
+
+Portal {
+  state link[p: Participant]: PortalLink
+    init PortalLink { target_world: "lobby", secret_token: "hidden" }
+    visible observer_safe fields { target_world }
+}
+
+BrowserClient[self] {
+  when resolve fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    next_world = link[self].target_world
+  }
+}

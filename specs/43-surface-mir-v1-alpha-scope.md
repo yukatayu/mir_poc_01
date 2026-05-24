@@ -66,7 +66,7 @@ This is near product-style alpha flow, not final production.
 | `P-SURF-04` | auto communication | closed: MessageEnvelope / visible publish / observe / `VisibilityDenied` failure-row obligations generated and visible; private/non-visible field auto communication rejected |
 | `P-SURF-05` | role admission | closed: role claim, admission request/verdict, capability grant, witness, stale rejection, hash metadata evidence |
 | `P-SURF-06` | source patch hot-plug | closed: parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
-| `P-SURF-07` | source operational suite | next: source-first WorldCore / MembershipChat / Sugoroku / related roots |
+| `P-SURF-07` | source operational suite | closed: source-first WorldCore / MembershipChat / Sugoroku / PortalWorldlink / TwoShardHardBoundary / GradientObservation roots with positive/negative rows |
 | `P-SURF-08` | devtools and diagnostics | Surface source, Core IR, generated communication, indexed state, role admission, patch lifecycle visible |
 | `P-SURF-99` | final audit | full validation and compatibility anchors rerun |
 
@@ -82,6 +82,9 @@ samples/full-system-v1-surface/
   world-core/
   membership-chat/
   sugoroku-world/
+  portal-worldlink/
+  two-shard-hard-boundary/
+  gradient-observation/
   role-admission/
   source-patch/
   posegraph/
@@ -96,11 +99,13 @@ P-SURF-05 report-level admission/grant evidence only, not production identity,
 hardware attestation, WAN admission, or runtime membership lifecycle
 completion. `source-patch/` is P-SURF-06 source patch pipeline evidence only,
 not a final hot-plug ABI, distributed durable migration planner, production
-patch registry, or arbitrary native/WASM execution route. Other families remain
-planned until later P-SURF implementation packages actualize them, and the root
-family must not be marked workflow-ready runtime evidence from parser, checker,
-elaboration, generated communication, role-admission, or source-patch rows
-alone.
+patch registry, or arbitrary native/WASM execution route. The six operational
+roots are P-SURF-07 source-first evidence only, not final runtime/transport or
+final shared-space catalog completion. Other families remain planned until
+later P-SURF implementation packages actualize them, and the root family must
+not be marked workflow-ready runtime evidence from parser, checker,
+elaboration, generated communication, role-admission, source-patch, or
+source-operational rows alone.
 
 ## required sample matrix
 

@@ -6,6 +6,6 @@ place WorldAdmission
 
 BrowserClient[self] {
   when start {
-    join World as BrowserClient via WorldAdmission
+    publish World.last_message
   }
 }

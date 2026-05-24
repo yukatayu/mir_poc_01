@@ -58,8 +58,9 @@
   - the same helper validates role claim, join admission request, accepted verdict, admission witness, capability grant, missing-grant write rejection, stale membership rejection, and optional package/runtime hash metadata without treating role claim or hash binding as authority
   - `source-patch/` is actualized by `P-SURF-06` as source patch hot-plug pipeline evidence for `PATCH-01..04`
   - the same helper validates parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, accepted mutation, and rejected-without-mutation rows
-  - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world`, `posegraph/`, `projection/`, and `provider/`
-  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add runtime dispatch and operational rows
+  - `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` are actualized by `P-SURF-07` as source operational evidence for `E2E-SURF-01..12`
+  - `operational-matrix.json` keeps those operational rows source-first and distinct from Product Alpha package artifacts
+  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add runtime dispatch and devtools/diagnostics rows
   - canonical place-scope syntax for future source samples is `S { ... }`; `S[ ... ]` is rejected and is not a compatibility sugar
   - `package.mir.json` remains alpha artifact / compatibility output, not semantic source authority
 - planned future product-alpha1 semantic roots
@@ -223,10 +224,11 @@ cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 
 Current `P-SURF-01` adds parser evidence, `P-SURF-02` adds indexed-state
 semantic checker evidence, `P-SURF-03` adds Surface-to-Core elaboration
-evidence, `P-SURF-04` adds generated communication evidence, and `P-SURF-05`
-adds role admission / capability grant evidence, and `P-SURF-06` adds source
-patch hot-plug evidence. The following commands are runnable for `SURF-*`,
-`IDX-*`, `ELAB-*`, `ROLE-*`, and `PATCH-*` rows:
+evidence, `P-SURF-04` adds generated communication evidence, `P-SURF-05`
+adds role admission / capability grant evidence, `P-SURF-06` adds source
+patch hot-plug evidence, and `P-SURF-07` adds source operational evidence.
+The following commands are runnable for `SURF-*`, `IDX-*`, `ELAB-*`, `ROLE-*`,
+`PATCH-*`, and `E2E-SURF-*` rows:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json

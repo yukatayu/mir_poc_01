@@ -1,0 +1,28 @@
+module Surface.E2E.MembershipChatPositive
+
+role BrowserClient {
+  supports renderer.pose_v1
+  supports devtools.observer_safe
+}
+
+place World
+place WorldAdmission
+
+record ChatLine {
+  text: Text,
+}
+
+World {
+  state last_message[p: Participant]: ChatLine
+    init ChatLine { text: "" }
+    visible observer_safe fields { text }
+}
+
+BrowserClient[self] {
+  when start fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    join World as BrowserClient via WorldAdmission
+    World {
+      last_message[self].text = "hello room"
+    }
+  }
+}

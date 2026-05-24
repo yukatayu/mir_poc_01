@@ -8,10 +8,10 @@ This guide is the reader-facing entry for the Surface Mir alpha line.
 checker floor. `P-SURF-03` adds the Surface-to-Core elaboration evidence floor.
 `P-SURF-04` adds the generated communication evidence floor. `P-SURF-05` adds
 the report-level role admission / capability grant evidence floor. `P-SURF-06`
-adds the source patch hot-plug pipeline evidence floor.
-Runtime rows and operational `samples/full-system-v1-surface/` families outside
-the current `syntax/`, `indexed-state/`, `elaboration/`, `role-admission/`, and
-`source-patch/` evidence roots remain planned for later packages.
+adds the source patch hot-plug pipeline evidence floor. `P-SURF-07` adds the
+source-first operational evidence roots for WorldCore, MembershipChat,
+Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation.
+Devtools and diagnostics are the next package.
 
 ## current decision
 
@@ -89,7 +89,7 @@ P-SURF-99 audit
 ## current validation
 
 For the current parser, indexed-state checker, elaboration, generated
-communication, role-admission, and source-patch floors:
+communication, role-admission, source-patch, and source operational floors:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -120,8 +120,9 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 
 These commands are runnable for the P-SURF-01 parser floor, P-SURF-02
 indexed-state semantic checker floor, P-SURF-03 elaboration evidence floor, and
-P-SURF-04 generated communication evidence floor, and P-SURF-05 role admission
-evidence floor, and P-SURF-06 source patch evidence floor:
+P-SURF-04 generated communication evidence floor, P-SURF-05 role admission
+evidence floor, P-SURF-06 source patch evidence floor, and P-SURF-07 source
+operational evidence floor:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -142,7 +143,8 @@ mirrorea-alpha patch-source session#surface-sample samples/full-system-v1-surfac
 - no final public grammar.
 - no Surface runtime/helper implementation beyond the parser, indexed-state
   checker, elaboration, generated communication, role-admission, and
-  source-patch evidence floors yet.
+  source-patch/source-operational evidence floors yet.
+- no final Surface operational runtime / transport or devtools completion yet.
 - no final source patch hot-plug ABI, distributed durable migration planner, or
   production patch registry/signing workflow.
 - no production identity provider, hardware attestation, or WAN admission.

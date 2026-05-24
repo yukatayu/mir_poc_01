@@ -1,0 +1,18 @@
+module Surface.E2E.WorldCoreKeyAuthorityNegative
+
+role BrowserClient
+place World
+
+record ParticipantInfo {
+  active: Bool,
+}
+
+World {
+  state participant[p: Participant]: ParticipantInfo
+}
+
+BrowserClient[self] {
+  when spoof {
+    participant[self].active = true
+  }
+}

@@ -23,8 +23,9 @@ The repo does not yet have:
 - runtime MessageEnvelope dispatch or local queue delivery for generated
   communication rows.
 - indexed-state runtime carrier.
-- role admission / source patch hot-plug from Surface source.
-- Surface Mir source operational suite.
+- runtime identity/admission lifecycle beyond report-level Surface evidence.
+- final source patch hot-plug ABI or distributed migration planner.
+- final Surface operational runtime/transport.
 
 The repo now has:
 
@@ -42,6 +43,13 @@ The repo now has:
   evidence for private/non-visible field rejection, visible field
   MessageEnvelope / publish / observe rows, and `VisibilityDenied` failure-row
   containment.
+- role admission / capability grant report-level evidence in
+  `samples/full-system-v1-surface/role-admission/` with `ROLE-01..04`.
+- source patch hot-plug pipeline evidence in
+  `samples/full-system-v1-surface/source-patch/` with `PATCH-01..04`.
+- source-first operational evidence roots for WorldCore, MembershipChat,
+  SugorokuWorld, PortalWorldlink, TwoShardHardBoundary, and
+  GradientObservation with `E2E-SURF-01..12`.
 - `scripts/surface_mir_samples.py`, `scripts/surface_mir_authoring_check.py`,
   and `scripts/surface_mir_release_check.py` plan/check surfaces.
 
@@ -56,7 +64,7 @@ The repo now has:
 | 5 | `P-SURF-04` | auto communication | closed: MessageEnvelope / publish / observe / failure rows visible |
 | 6 | `P-SURF-05` | role admission | closed: role claim / grant / missing-grant / stale / hash metadata rows |
 | 7 | `P-SURF-06` | source patch | closed: source commands, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
-| 8 | `P-SURF-07` | source operational suite | next: WorldCore / MembershipChat / Sugoroku / related roots |
+| 8 | `P-SURF-07` | source operational suite | closed: six source roots plus `E2E-SURF-01..12` positive/negative rows |
 | 9 | `P-SURF-08` | devtools | source/Core/generated-edge/patch/admission panels |
 | 10 | `P-SURF-99` | final audit | full validation and compatibility anchors |
 
@@ -97,9 +105,22 @@ samples/full-system-v1-surface/
   source-patch/
 ```
 
-These roots are not workflow-ready runtime evidence. Future implementation
-packages should add sibling roots/rows only after the relevant runtime dispatch
-and operational surfaces exist.
+Created by P-SURF-07 as source operational evidence:
+
+```text
+samples/full-system-v1-surface/
+  world-core/
+  membership-chat/
+  sugoroku-world/
+  portal-worldlink/
+  two-shard-hard-boundary/
+  gradient-observation/
+  operational-matrix.json
+```
+
+These roots are not final workflow-ready runtime/transport evidence. Future
+implementation packages should add devtools diagnostics and runtime dispatch
+only after the relevant surfaces are explicit.
 
 ## compatibility anchors
 

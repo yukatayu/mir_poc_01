@@ -22,6 +22,8 @@ ROLE_ADMISSION_ROOT = SURFACE_ROOT / "role-admission"
 ROLE_ADMISSION_MATRIX_PATH = ROLE_ADMISSION_ROOT / "matrix.json"
 SOURCE_PATCH_ROOT = SURFACE_ROOT / "source-patch"
 SOURCE_PATCH_MATRIX_PATH = SOURCE_PATCH_ROOT / "matrix.json"
+OPERATIONAL_ROOT = SURFACE_ROOT
+OPERATIONAL_MATRIX_PATH = SURFACE_ROOT / "operational-matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 STOP_LINES = [
     "no final public grammar / ABI / SDK",
@@ -30,10 +32,11 @@ STOP_LINES = [
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-06 source patch hot-plug is alpha pipeline evidence only",
+    "P-SURF-07 source operational suite is source-first alpha evidence only",
     "no runtime MessageEnvelope dispatch completion",
     "no production identity provider or hardware attestation",
     "no distributed durable source patch migration",
+    "no final Surface operational runtime or transport completion",
     "no general TypeMismatch typechecker discharge in the Surface alpha floor",
 ]
 VALIDATION_FLOOR = [
@@ -89,6 +92,13 @@ def _matrix_specs() -> list[dict[str, Any]]:
             "matrix_path": SOURCE_PATCH_MATRIX_PATH,
             "runner": "source_patch",
             "data": _load_matrix(SOURCE_PATCH_MATRIX_PATH),
+        },
+        {
+            "family_key": "operational",
+            "root": OPERATIONAL_ROOT,
+            "matrix_path": OPERATIONAL_MATRIX_PATH,
+            "runner": "operational_source",
+            "data": _load_matrix(OPERATIONAL_MATRIX_PATH),
         },
     ]
 
@@ -191,6 +201,7 @@ def matrix() -> dict[str, Any]:
         "elaboration_root": str(ELABORATION_ROOT.relative_to(REPO_ROOT)),
         "role_admission_root": str(ROLE_ADMISSION_ROOT.relative_to(REPO_ROOT)),
         "source_patch_root": str(SOURCE_PATCH_ROOT.relative_to(REPO_ROOT)),
+        "operational_root": str(OPERATIONAL_ROOT.relative_to(REPO_ROOT)),
         "matrix_paths": [
             str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
         ],
@@ -364,6 +375,40 @@ def _patch_source(path: Path) -> dict[str, Any]:
     return payload
 
 
+def _diagnostic_codes(payload: dict[str, Any]) -> list[str]:
+    return [row["code"] for row in payload.get("diagnostics") or []]
+
+
+def _consistent_value(values: list[Any]) -> Any:
+    if not values:
+        return None
+    first = values[0]
+    if all(value == first for value in values):
+        return first
+    return {"conflicting_values": values}
+
+
+def _check_operational_source(path: Path, required_checks: list[str]) -> dict[str, Any]:
+    payloads: dict[str, dict[str, Any]] = {"parse": _parse_source(path)}
+    if "indexed_state" in required_checks:
+        payloads["indexed_state"] = _check_indexed_state_source(path)
+    if "role_admission" in required_checks:
+        payloads["role_admission"] = _check_role_admission_source(path)
+    if "elaboration" in required_checks:
+        payloads["elaboration"] = _elaborate_source(path)
+    return {
+        "surface_kind": "surface_operational_source_report",
+        "required_checks": required_checks,
+        "payloads": payloads,
+        "returncode": 0
+        if all(
+            payloads[check].get("returncode") in {0, 2}
+            for check in required_checks
+        )
+        else 2,
+    }
+
+
 def _variant_name(payload: dict[str, Any]) -> str:
     return next(iter(payload.keys()))
 
@@ -433,9 +478,7 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "accepted": payload.get("accepted"),
         "module_path": module.get("module_path"),
-        "diagnostic_codes": [
-            row["code"] for row in payload.get("diagnostics") or []
-        ],
+        "diagnostic_codes": _diagnostic_codes(payload),
         "role_names": [row["role_name"] for row in module.get("roles") or []],
         "place_names": [row["place_name"] for row in module.get("places") or []],
         "record_names": [row["record_name"] for row in module.get("records") or []],
@@ -453,9 +496,7 @@ def _indexed_state_projection(payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "accepted": payload.get("accepted"),
         "module_path": payload.get("module_path"),
-        "diagnostic_codes": [
-            row["code"] for row in payload.get("diagnostics") or []
-        ],
+        "diagnostic_codes": _diagnostic_codes(payload),
         "indexed_state_summaries": [
             {
                 "state_name": row["state_name"],
@@ -491,9 +532,7 @@ def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "accepted": payload.get("accepted"),
         "module_path": payload.get("module_path"),
-        "diagnostic_codes": [
-            row["code"] for row in payload.get("diagnostics") or []
-        ],
+        "diagnostic_codes": _diagnostic_codes(payload),
         "transition_kinds": [
             row["kind"] for row in core_ir.get("transitions") or []
         ],
@@ -566,9 +605,7 @@ def _role_admission_projection(payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "accepted": payload.get("accepted"),
         "module_path": payload.get("module_path"),
-        "diagnostic_codes": [
-            row["code"] for row in payload.get("diagnostics") or []
-        ],
+        "diagnostic_codes": _diagnostic_codes(payload),
         "role_claim_summaries": [
             {
                 "principal": row["principal"],
@@ -690,6 +727,69 @@ def _source_patch_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _operational_source_projection(
+    payload: dict[str, Any],
+    row: dict[str, Any],
+) -> dict[str, Any]:
+    required_checks = row.get("required_checks") or ["parse"]
+    payloads = payload.get("payloads") or {}
+    parse_payload = payloads.get("parse") or {}
+    parse_projection = _payload_projection(parse_payload)
+    indexed_payload = payloads.get("indexed_state") or {}
+    role_payload = payloads.get("role_admission") or {}
+    elaboration_payload = payloads.get("elaboration") or {}
+    core_ir = elaboration_payload.get("core_ir") or {}
+    stage_acceptance = {
+        check: payloads.get(check, {}).get("accepted") for check in required_checks
+    }
+    diagnostic_codes: list[str] = []
+    for check in required_checks:
+        diagnostic_codes.extend(_diagnostic_codes(payloads.get(check) or {}))
+    source_authorities = [
+        check_payload.get("source_authority")
+        for check_payload in payloads.values()
+        if check_payload.get("source_authority") is not None
+    ]
+    final_public_api_values = [
+        check_payload.get("final_public_api_frozen")
+        for check_payload in payloads.values()
+        if "final_public_api_frozen" in check_payload
+    ]
+    return {
+        "accepted": all(stage_acceptance.values()),
+        "operational_root": row.get("operational_root"),
+        "required_checks": required_checks,
+        "stage_acceptance": stage_acceptance,
+        "module_path": parse_projection.get("module_path"),
+        "diagnostic_codes": diagnostic_codes,
+        "place_block_refs": parse_projection.get("place_block_refs") or [],
+        "state_names": [
+            row["state_name"] for row in indexed_payload.get("indexed_states") or []
+        ],
+        "state_owner_loci": [
+            row["owner_locus"] for row in indexed_payload.get("indexed_states") or []
+        ],
+        "role_claim_count": len(role_payload.get("role_claims") or []),
+        "admission_verdict_count": len(role_payload.get("admission_verdicts") or []),
+        "accepted_authority_check_count": len(
+            [
+                check
+                for check in role_payload.get("authority_checks") or []
+                if check.get("accepted") is True
+            ]
+        ),
+        "remote_request_count": len(core_ir.get("remote_requests") or []),
+        "message_envelope_count": len(core_ir.get("message_envelopes") or []),
+        "publication_count": len(core_ir.get("publications") or []),
+        "observation_count": len(core_ir.get("observations") or []),
+        "generated_edge_kinds": [
+            edge["edge_kind"] for edge in core_ir.get("generated_edges") or []
+        ],
+        "source_authority": _consistent_value(source_authorities),
+        "final_public_api_frozen": _consistent_value(final_public_api_values),
+    }
+
+
 def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     for spec in _matrix_specs():
         row = next(
@@ -717,6 +817,12 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     elif runner == "source_patch":
         payload = _patch_source(source_path)
         actual = _source_patch_projection(payload)
+    elif runner == "operational_source":
+        payload = _check_operational_source(
+            source_path,
+            row.get("required_checks") or ["parse"],
+        )
+        actual = _operational_source_projection(payload, row)
     else:
         payload = _parse_source(source_path)
         actual = _payload_projection(payload)

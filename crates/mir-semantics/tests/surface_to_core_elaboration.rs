@@ -442,7 +442,33 @@ BrowserClient[self] {
 #[test]
 fn rejects_unsupported_surface_statements_instead_of_dropping_them() {
     let source = r#"
-module Surface.Elab.UnsupportedJoin
+module Surface.Elab.UnsupportedPublish
+
+role BrowserClient
+place World
+place WorldAdmission
+
+BrowserClient[self] {
+  when start {
+    publish World.last_message
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+
+    assert!(!report.accepted);
+    assert_eq!(
+        surface_elaboration_diagnostic_codes(&report),
+        vec!["unsupported_surface_statement_for_elaboration"]
+    );
+    assert_eq!(report.core_ir.remote_requests.len(), 0);
+}
+
+#[test]
+fn represents_join_as_admission_transition_after_role_admission_floor() {
+    let source = r#"
+module Surface.Elab.JoinTransition
 
 role BrowserClient
 place World
@@ -457,12 +483,15 @@ BrowserClient[self] {
 
     let report = elaborate_surface_to_core_source(source);
 
-    assert!(!report.accepted);
-    assert_eq!(
-        surface_elaboration_diagnostic_codes(&report),
-        vec!["unsupported_surface_statement_for_elaboration"]
+    assert!(report.accepted, "{:?}", report.diagnostics);
+    assert!(report.core_ir.remote_requests.is_empty());
+    assert!(
+        report
+            .core_ir
+            .transitions
+            .iter()
+            .any(|transition| transition.kind == "surface_role_join_admission")
     );
-    assert_eq!(report.core_ir.remote_requests.len(), 0);
 }
 
 #[test]

@@ -26,13 +26,13 @@ def _run_helper(*args: str) -> dict:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_06_rows(self) -> None:
+    def test_matrix_reports_p_surf_07_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 32)
-        self.assertEqual(payload["executable_count"], 32)
-        self.assertEqual(payload["family_count"], 5)
+        self.assertEqual(payload["sample_count"], 44)
+        self.assertEqual(payload["executable_count"], 44)
+        self.assertEqual(payload["family_count"], 6)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
             "p_surf_04_auto_communication_elaboration_evidence",
@@ -44,6 +44,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["matrix_status"]["surface_mir_source_patch"],
             "p_surf_06_source_patch_hotplug_evidence",
+        )
+        self.assertEqual(
+            payload["matrix_status"]["surface_mir_operational_source"],
+            "p_surf_07_source_operational_suite_evidence",
         )
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
@@ -406,11 +410,84 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         )
         self.assertTrue(payload["actual"]["activation_cut_present"])
 
+    def test_operational_world_core_positive_keeps_source_authority(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(payload["actual"]["operational_root"], "world-core")
+        self.assertEqual(payload["actual"]["state_names"], ["participant"])
+        self.assertEqual(payload["actual"]["source_authority"], ".mir")
+
+    def test_operational_membership_chat_positive_runs_admission_and_elaboration(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-03")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["required_checks"],
+            ["parse", "role_admission", "elaboration"],
+        )
+        self.assertEqual(payload["actual"]["accepted_authority_check_count"], 1)
+        self.assertEqual(payload["actual"]["remote_request_count"], 1)
+        self.assertEqual(payload["actual"]["publication_count"], 1)
+        self.assertIn("auto_publish", payload["actual"]["generated_edge_kinds"])
+
+    def test_operational_membership_chat_negative_rejects_missing_grant(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-04")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            [
+                "role_claim_without_capability_grant",
+                "generated_failure_not_declared",
+            ],
+        )
+
+    def test_operational_sugoroku_positive_generates_visible_write_communication(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-05")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(payload["actual"]["remote_request_count"], 1)
+        self.assertEqual(payload["actual"]["publication_count"], 1)
+        self.assertIn("auto_publish", payload["actual"]["generated_edge_kinds"])
+
+    def test_operational_portal_private_negative_rejects_auto_observe(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-08")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["private_field_auto_publish_rejected"],
+        )
+
+    def test_operational_two_shard_negative_requires_failure_row(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-10")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+
+    def test_operational_gradient_positive_generates_observe_rows(self) -> None:
+        payload = _run_helper("run", "E2E-SURF-11")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(payload["actual"]["observation_count"], 1)
+        self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 32)
+        self.assertEqual(len(payload["passed"]), 44)
 
 
 if __name__ == "__main__":

@@ -150,10 +150,10 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 32:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-06")
+        if payload.get("sample_count") != 44:
+            errors.append("surface samples helper sample_count mismatch for P-SURF-07")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-06 helper must not claim workflow_ready")
+            errors.append("P-SURF-07 helper must not claim workflow_ready")
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
     return errors
@@ -246,7 +246,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_06_source_patch_hotplug",
+        "scope": "p_surf_07_source_operational_suite",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),
@@ -257,6 +257,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
         "non_claims": [
             "no final public grammar / ABI / SDK",
             "no final source patch hot-plug ABI completion",
+            "no final Surface operational runtime or transport completion",
             "no runtime MessageEnvelope dispatch completion",
             "no production identity provider or hardware attestation",
             "no distributed durable source patch migration",

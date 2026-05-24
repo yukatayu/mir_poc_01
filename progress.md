@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 19:03 JST
+最終更新: 2026-05-24 19:58 JST
 
 ## document role
 
@@ -48,18 +48,16 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-07 source operational suite`.
-- Current status after this snapshot: `P-SURF-06` closed a narrow source patch
-  hot-plug evidence lane in `crates/mir-runtime::surface_source_patch_hotplug`
-  and `mirrorea-alpha` source commands. `PATCH-01..04` now cover accepted
-  visible-state patch activation, undeclared generated-failure rejection,
-  self-grant rejection, and lifecycle/devtools activation evidence. Rejected
-  patches do not apply runtime mutation, and accepted patches expose
-  HotPlugRequest, HotPlugVerdict, Core IR diff, and activation_cut rows without
-  direct eval.
-- Next gap: create Surface source-first operational roots for WorldCore,
-  MembershipChat, Sugoroku, Portal/Shard/Gradient representative rows without
-  promoting product-alpha package artifacts to semantic source authority.
+- Current package: `P-SURF-08 devtools and diagnostics`.
+- Current status after this snapshot: `P-SURF-07` closed a source-first
+  operational evidence lane under `samples/full-system-v1-surface/` for
+  WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary,
+  and GradientObservation. `E2E-SURF-01..12` now cover positive and negative
+  source rows through parse / indexed-state / role-admission / elaboration
+  checks without promoting `package.mir.json` to semantic authority.
+- Next gap: add Surface devtools / diagnostics panels for source, generated Core
+  IR, indexed state, communication, role/admission, patch lifecycle, and source
+  spans.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -72,10 +70,11 @@ semantic source authority.
   only. `P-SURF-02` is indexed-state semantic checker/sample evidence only; it
   does not claim runtime execution or role admission. `P-SURF-03` is
   elaboration evidence and `P-SURF-04` is generated communication elaboration
-  evidence, `P-SURF-05` is role-admission evidence, and `P-SURF-06` is source
-  patch pipeline evidence; none claims runtime MessageEnvelope dispatch,
-  production identity, hardware attestation, WAN admission, final source patch
-  ABI, distributed durable migration, or final operational suite completion.
+  evidence, `P-SURF-05` is role-admission evidence, `P-SURF-06` is source
+  patch pipeline evidence, and `P-SURF-07` is source operational evidence; none
+  claims runtime MessageEnvelope dispatch, production identity, hardware
+  attestation, WAN admission, final source patch ABI, distributed durable
+  migration, final operational runtime/transport, or final devtools completion.
 
 ## milestone map
 
@@ -91,7 +90,7 @@ semantic source authority.
 | `P-SURF-04` | auto communication / publish / observe | `evidence-closed generated communication lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-03/09/10` plus widened `ELAB-01/05/08` | runtime dispatch and TypeMismatch discharge remain later |
 | `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
 | `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
-| `P-SURF-07` | Surface source operational suite | `next promoted` | `specs/43`, `plan/68` | create source-first Surface roots without promoting before evidence |
+| `P-SURF-07` | Surface source operational suite | `evidence-closed source operational lane` | `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`, `E2E-SURF-01..12` | final operational runtime/transport remain later |
 | `P-SURF-08` | Surface devtools / diagnostics | `planned` | `specs/39..43`, `plan/64..68` | show Surface source, Core IR, communication, indexed state, admission, patch lifecycle |
 | `P-SURF-99` | Surface Mir alpha audit | `planned` | future full validation | close bounded Surface alpha chain |
 
@@ -134,7 +133,8 @@ Next gap:
 Status: `first-floor-evidence` for Full System V1, `parser-floor-evidence` plus
 `indexed-state-checker-evidence` plus `elaboration-evidence` plus
 `generated-communication-evidence` plus `role-admission-evidence` plus
-`source-patch-hotplug-evidence` for Surface Mir alpha.
+`source-patch-hotplug-evidence` plus `source-operational-evidence` for Surface
+Mir alpha.
 
 Current evidence:
 
@@ -162,11 +162,14 @@ Current evidence:
   source commands route patches through parse/typecheck/elaborate/compatibility
   / admission and produce HotPlugRequest, HotPlugVerdict, Core IR diff, and
   activation_cut report rows for P-SURF-06.
+- `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`
+  and `operational-matrix.json` provide P-SURF-07 source-first operational
+  evidence with `.mir` authority and 12 representative positive/negative rows.
 
 Next gap:
 
-- `P-SURF-07` source operational suite: create source-first Surface roots and
-  representative positive/negative rows.
+- `P-SURF-08` devtools and diagnostics: expose source / Core IR / indexed-state
+  / communication / role-admission / patch lifecycle diagnostics.
 
 ### PoseGraph line
 
@@ -238,7 +241,7 @@ Current evidence:
 
 Next gap:
 
-- create source-first operational suite roots in `P-SURF-07`.
+- add observer-safe devtools / diagnostics surfaces in `P-SURF-08`.
 
 ## validation floor
 
@@ -281,7 +284,8 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 - No final source patch hot-plug ABI, distributed durable migration planner,
   production patch registry/signing workflow, or arbitrary native/WASM
   execution through patches.
-- No Surface Mir source operational suite completion yet.
+- No final Surface operational runtime / transport or shared-space catalog
+  completion yet; P-SURF-07 is source operational evidence only.
 - No Rust-level language completion.
 - No LLVM/native codegen completion.
 - No final server/client split compiler completion.
@@ -315,15 +319,15 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | source patch docs/report sync closing; P-SURF-07 handoff current | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | source operational docs/report sync closing; P-SURF-08 handoff current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, and source patch floors closed | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | source patch samples exist; operational roots are next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, and source operational floors closed | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | Surface operational roots exist as alpha source evidence; devtools diagnostics are next | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
-| `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku roots are planned | heavy | 後段依存 |
+| `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
 
 ## feature maturity rows
 
@@ -337,12 +341,15 @@ Research-discovery items:
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
 | source patch hot-plug | `source-patch-hotplug-evidence` | parse/typecheck/elaborate/compatibility/admission report, HotPlugRequest/HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval and rejection-without-mutation evidence exist; final ABI/migration planner later | 着手可能 |
+| Surface source operational suite | `source-operational-evidence` | `E2E-SURF-01..12` cover WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation positive/negative source rows through required alpha checks | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 
 ## recent log
 
+- 2026-05-24 19:58 JST
+  `P-SURF-07` で source operational suite evidence floor を actualize し、`samples/full-system-v1-surface/world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`operational-matrix.json`、`E2E-SURF-01..12`、`scripts/surface_mir_samples.py check-all` を同期した。review 後に MembershipChat row も role admission と elaboration / generated communication を同時に通し、operational projection の `source_authority` / `final_public_api_frozen` は下位 semantic payload 由来にした。各 root は `.mir` source authority の positive / negative rows を持つが、final operational runtime / transport ではない。current promoted package は `P-SURF-08 devtools and diagnostics`。
 - 2026-05-24 19:27 JST
   `P-SURF-06` で source patch hot-plug evidence floor を actualize し、`surface_source_patch_hotplug`、`mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`、`PATCH-01..04`、`cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture`、`cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。source patch は direct eval ではなく、accepted `patch-source` は HotPlugRequest / HotPlugVerdict / activation_cut を出し、`check-source` / `elaborate-source` は inspection-only、rejected patch は mutation しない。current promoted package は `P-SURF-07 source operational suite`。
 - 2026-05-24 18:21 JST

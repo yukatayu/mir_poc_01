@@ -1,0 +1,20 @@
+module Surface.E2E.GradientPrivateNegative
+
+role Observer
+place World
+
+record GradientCell {
+  intensity: Int64,
+  private_seed: Int64,
+}
+
+World {
+  state gradient[p: Participant]: GradientCell
+    visible observer_safe fields { intensity }
+}
+
+Observer[self] {
+  when sample fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    observed = gradient[self].private_seed
+  }
+}

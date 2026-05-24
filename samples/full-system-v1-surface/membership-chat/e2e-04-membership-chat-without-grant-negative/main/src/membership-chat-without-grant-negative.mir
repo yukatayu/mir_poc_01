@@ -1,0 +1,20 @@
+module Surface.E2E.MembershipChatWithoutGrantNegative
+
+role BrowserClient
+place World
+
+record ChatLine {
+  text: Text,
+}
+
+World {
+  state last_message[p: Participant]: ChatLine
+}
+
+BrowserClient[self] {
+  when send_chat {
+    World {
+      last_message[self].text = "not admitted"
+    }
+  }
+}

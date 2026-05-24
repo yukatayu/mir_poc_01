@@ -1,0 +1,24 @@
+{
+  "accepted": true,
+  "operational_root": "portal-worldlink",
+  "required_checks": ["parse", "elaboration"],
+  "stage_acceptance": {
+    "parse": true,
+    "elaboration": true
+  },
+  "module_path": "Surface.E2E.PortalWorldlinkPositive",
+  "diagnostic_codes": [],
+  "place_block_refs": ["Portal"],
+  "state_names": [],
+  "state_owner_loci": [],
+  "role_claim_count": 0,
+  "admission_verdict_count": 0,
+  "accepted_authority_check_count": 0,
+  "remote_request_count": 1,
+  "message_envelope_count": 1,
+  "publication_count": 0,
+  "observation_count": 1,
+  "generated_edge_kinds": ["message_envelope", "auto_observe", "observe_request"],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

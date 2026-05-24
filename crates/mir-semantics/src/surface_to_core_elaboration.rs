@@ -5,9 +5,9 @@ use std::{
 
 use mir_ast::{
     surface_alpha::{
-        SurfaceAssignStmt, SurfaceModule, SurfacePlaceItem, SurfaceRoleInstanceBlock, SurfaceStmt,
-        SurfaceVisibilityDecl, SurfaceWhenBlock, parse_surface_mir_report,
-        parse_surface_mir_report_path,
+        SurfaceAssignStmt, SurfaceJoinStmt, SurfaceModule, SurfacePlaceItem,
+        SurfaceRoleInstanceBlock, SurfaceStmt, SurfaceVisibilityDecl, SurfaceWhenBlock,
+        parse_surface_mir_report, parse_surface_mir_report_path,
     },
     textual_alpha::{SourceSpan, TextualMirDiagnostic},
 };
@@ -336,12 +336,7 @@ fn elaborate_statements(
                     context,
                 );
             }
-            SurfaceStmt::Join(join) => push_unsupported_statement(
-                context,
-                "join",
-                "P-SURF-05 role admission owns join lowering",
-                join.span.clone(),
-            ),
+            SurfaceStmt::Join(join) => push_join_transition(context, access_locus, join),
             SurfaceStmt::Require(raw) => push_unsupported_statement(
                 context,
                 "require",
@@ -448,6 +443,29 @@ fn push_unsupported_statement(
         &format!("unsupported `{statement_kind}` statement in P-SURF-03 elaboration: {detail}"),
         span,
     ));
+}
+
+fn push_join_transition(
+    context: &mut ElaborationContext,
+    access_locus: &str,
+    join: &SurfaceJoinStmt,
+) {
+    let transition_id = context.transition_id();
+    context.core_ir.transitions.push(SurfaceCoreTransition {
+        transition_id: transition_id.clone(),
+        locus: access_locus.to_string(),
+        trigger: format!(
+            "join {} as {} via {}",
+            join.target_place, join.role_ref, join.admission_place
+        ),
+        kind: "surface_role_join_admission".to_string(),
+        source_span: join.span.clone(),
+    });
+    context.core_ir.source_spans.push(SurfaceCoreSourceSpan {
+        entity_id: transition_id,
+        entity_kind: "transition".to_string(),
+        span: join.span.clone(),
+    });
 }
 
 fn push_when_transition(

@@ -8,9 +8,10 @@ This document is repository memory for
 It records the Surface Mir rule that role claim is separate from authority.
 
 Current package status: `P-SURF-05` is closed as a report-level role
-admission / capability grant evidence floor, and `P-SURF-06` is closed as a
-source patch hot-plug evidence floor. The promoted next package for the
-Surface line is `P-SURF-07 source operational suite`.
+admission / capability grant evidence floor, `P-SURF-06` is closed as a source
+patch hot-plug evidence floor, and `P-SURF-07` is closed as source operational
+evidence. The promoted next package for the Surface line is
+`P-SURF-08 devtools and diagnostics`.
 
 ## current decision
 

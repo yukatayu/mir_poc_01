@@ -1,0 +1,22 @@
+module Surface.E2E.SugorokuPositive
+
+role BrowserClient
+place World
+
+record Player {
+  position: Int64,
+}
+
+World {
+  state player[p: Participant]: Player
+    init Player { position: 0 }
+    visible observer_safe fields { position }
+}
+
+BrowserClient[self] {
+  when roll(draw: Int64) fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    World {
+      player[self].position = player[self].position + draw
+    }
+  }
+}

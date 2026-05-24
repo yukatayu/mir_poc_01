@@ -1,0 +1,31 @@
+{
+  "accepted": false,
+  "operational_root": "membership-chat",
+  "required_checks": ["parse", "role_admission", "elaboration"],
+  "stage_acceptance": {
+    "parse": true,
+    "role_admission": false,
+    "elaboration": false
+  },
+  "module_path": "Surface.E2E.MembershipChatWithoutGrantNegative",
+  "diagnostic_codes": [
+    "role_claim_without_capability_grant",
+    "generated_failure_not_declared"
+  ],
+  "place_block_refs": ["World"],
+  "state_names": [],
+  "state_owner_loci": [],
+  "role_claim_count": 1,
+  "admission_verdict_count": 0,
+  "accepted_authority_check_count": 0,
+  "remote_request_count": 1,
+  "message_envelope_count": 1,
+  "publication_count": 0,
+  "observation_count": 0,
+  "generated_edge_kinds": [
+    "message_envelope",
+    "remote_write_request"
+  ],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

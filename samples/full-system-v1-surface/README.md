@@ -27,6 +27,12 @@ Current state:
   hot-plug evidence lane for parse/typecheck/elaborate/compatibility/admission,
   HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval,
   and rejection-without-mutation rows.
+- `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`,
+  `two-shard-hard-boundary/`, and `gradient-observation/` are actualized for
+  `P-SURF-07` as source-first operational evidence roots for
+  `E2E-SURF-01..12`.
+- `operational-matrix.json` records which alpha checks are required per
+  operational row and keeps `.mir` files as source authority.
 
 Commands:
 
@@ -46,5 +52,6 @@ Stop lines:
 - no final public grammar / ABI / SDK.
 - no runtime MessageEnvelope dispatch or final transport completion yet.
 - no final source patch hot-plug ABI or distributed durable migration planner.
+- no final Surface operational runtime / transport completion yet.
 - no production identity provider / hardware attestation / WAN admission.
 - no generated package artifact authority.

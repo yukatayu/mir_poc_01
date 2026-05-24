@@ -1,0 +1,20 @@
+module Surface.E2E.PortalPrivateLinkNegative
+
+role BrowserClient
+place Portal
+
+record PortalLink {
+  target_world: Text,
+  secret_token: Text,
+}
+
+Portal {
+  state link[p: Participant]: PortalLink
+    visible observer_safe fields { target_world }
+}
+
+BrowserClient[self] {
+  when resolve fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    hidden = link[self].secret_token
+  }
+}

@@ -8,7 +8,7 @@ user-facing source layer. `P-SURF-01` adds the first parser floor,
 adds the Surface-to-Core elaboration evidence floor, `P-SURF-04` adds the
 generated communication evidence floor, and `P-SURF-05` adds report-level role
 admission / capability grant evidence. `P-SURF-06` adds source patch hot-plug
-pipeline evidence.
+pipeline evidence. `P-SURF-07` adds source-first operational evidence roots.
 
 The central syntax decision is:
 
@@ -68,6 +68,12 @@ heads, and indexed state access.
 - `samples/full-system-v1-surface/elaboration/`
 - `samples/full-system-v1-surface/role-admission/`
 - `samples/full-system-v1-surface/source-patch/`
+- `samples/full-system-v1-surface/world-core/`
+- `samples/full-system-v1-surface/membership-chat/`
+- `samples/full-system-v1-surface/sugoroku-world/`
+- `samples/full-system-v1-surface/portal-worldlink/`
+- `samples/full-system-v1-surface/two-shard-hard-boundary/`
+- `samples/full-system-v1-surface/gradient-observation/`
 - `scripts/surface_mir_samples.py`
 
 Actualized rows:
@@ -101,21 +107,27 @@ Actualized rows:
 - `PATCH-02`: undeclared generated failure row is rejected without mutation.
 - `PATCH-03`: self-grant of ServerAuthority is rejected without mutation.
 - `PATCH-04`: patch lifecycle/devtools positive row is accepted.
+- `E2E-SURF-01..12`: WorldCore, MembershipChat, Sugoroku, PortalWorldlink,
+  TwoShardHardBoundary, and GradientObservation positive/negative source rows
+  pass their required alpha checks.
 
 ## next package
 
 ```text
-P-SURF-07 source operational suite
+P-SURF-08 devtools and diagnostics
 ```
 
 Close condition:
 
-- source-first Surface roots cover representative WorldCore / MembershipChat /
-  Sugoroku / Portal / Shard / Gradient scenarios.
-- `.mir` files remain semantic source authority.
+- Surface source, generated Core IR, indexed-state map, generated
+  communication, role/admission, patch lifecycle, and source spans are visible
+  in observer-safe diagnostics.
+- `.mir` files remain semantic source authority and generated reports remain
+  evidence only.
 - parser, indexed-state checker, elaboration, generated communication,
-  role-admission, and source-patch floors remain compatible with `SURF-01..09`,
-  `IDX-01..05`, `ELAB-01..10`, `ROLE-01..04`, and `PATCH-01..04`.
+  role-admission, source-patch, and source operational floors remain compatible
+  with `SURF-01..09`, `IDX-01..05`, `ELAB-01..10`, `ROLE-01..04`,
+  `PATCH-01..04`, and `E2E-SURF-01..12`.
 
 ## non-claims
 
@@ -135,5 +147,7 @@ Close condition:
 - `samples/full-system-v1-surface/source-patch/` is source patch pipeline
   evidence, not a final hot-plug ABI, distributed durable migration planner, or
   production patch registry.
+- `samples/full-system-v1-surface/world-core/` and sibling operational roots
+  are source operational evidence, not final runtime/transport or final catalog.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

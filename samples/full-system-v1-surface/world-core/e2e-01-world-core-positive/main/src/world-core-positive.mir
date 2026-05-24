@@ -1,0 +1,20 @@
+module Surface.E2E.WorldCorePositive
+
+role Participant
+role BrowserClient {
+  supports devtools.observer_safe
+}
+
+place World
+place WorldAdmission
+
+record ParticipantInfo {
+  active: Bool,
+  joined_epoch: Int64,
+}
+
+World {
+  state participant[p: Participant]: ParticipantInfo
+    init ParticipantInfo { active: false, joined_epoch: 0 }
+    visible observer_safe fields { active }
+}

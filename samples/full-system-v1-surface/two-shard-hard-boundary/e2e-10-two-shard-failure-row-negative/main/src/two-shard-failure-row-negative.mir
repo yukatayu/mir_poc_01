@@ -1,0 +1,21 @@
+module Surface.E2E.TwoShardFailureRowNegative
+
+place ShardA
+place ShardB
+
+record Transfer {
+  phase: Int64,
+}
+
+ShardB {
+  state transfer[p: Participant]: Transfer
+    visible observer_safe fields { phase }
+}
+
+ShardA {
+  when prepare(pid: Participant) {
+    ShardB {
+      transfer[pid].phase = 1
+    }
+  }
+}
