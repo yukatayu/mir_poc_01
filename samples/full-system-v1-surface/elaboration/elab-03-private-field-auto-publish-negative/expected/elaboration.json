@@ -1,7 +1,9 @@
 {
-  "accepted": true,
-  "module_path": "Surface.Elab.NestedPlaceReadPositive",
-  "diagnostic_codes": [],
+  "accepted": false,
+  "module_path": "Surface.Elab.PrivateFieldAutoPublishNegative",
+  "diagnostic_codes": [
+    "private_field_auto_publish_rejected"
+  ],
   "transition_kinds": [
     "surface_role_when",
     "generated_remote_read_request"
@@ -13,7 +15,7 @@
       "owner_locus": "S",
       "state_name": "player",
       "key_expr": "self",
-      "generated_from": "nested_place_block",
+      "generated_from": "cross_locus_read_expression",
       "failure_row_complete": true
     }
   ],
@@ -24,48 +26,27 @@
       "to_locus": "S",
       "state_name": "player",
       "key_expr": "self",
-      "field_name": "hp",
-      "visibility_channel": "observer_safe",
+      "field_name": "secret_key",
+      "visibility_channel": null,
       "redaction_label": "observer_safe",
       "retention_scope": "report_local"
     }
   ],
   "publication_summaries": [],
-  "observation_summaries": [
-    {
-      "observer_locus": "role:BrowserClient",
-      "owner_locus": "S",
-      "channel": "observer_safe",
-      "state_name": "player",
-      "key_expr": "self",
-      "field_name": "hp",
-      "redaction_label": "observer_safe",
-      "retention_scope": "report_local"
-    }
-  ],
+  "observation_summaries": [],
   "generated_edge_kinds": [
     "message_envelope",
-    "auto_observe",
     "observe_request"
   ],
   "source_span_entity_kinds": [
     "transition",
     "message_envelope",
     "generated_edge",
-    "observation",
-    "generated_edge",
     "remote_request",
     "transition",
     "generated_edge"
   ],
   "obligation_codes": [
-    "surface_core_transitions_explicit",
-    "surface_core_remote_requests_explicit",
-    "surface_core_source_spans_preserved",
-    "surface_core_generated_failure_rows_contained",
-    "surface_core_message_envelopes_explicit",
-    "surface_core_auto_publish_observe_explicit",
-    "surface_core_private_fields_not_auto_published",
     "role_admission_capability_grants_pending_p_surf_05",
     "runtime_hotplug_activation_pending_p_surf_06"
   ],

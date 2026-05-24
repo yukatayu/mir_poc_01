@@ -4,8 +4,9 @@
 
 `P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
 user-facing source layer. `P-SURF-01` adds the first parser floor,
-`P-SURF-02` adds the indexed-state semantic checker floor, and `P-SURF-03`
-adds the Surface-to-Core elaboration evidence floor.
+`P-SURF-02` adds the indexed-state semantic checker floor, `P-SURF-03`
+adds the Surface-to-Core elaboration evidence floor, and `P-SURF-04` adds the
+generated communication evidence floor.
 
 The central syntax decision is:
 
@@ -76,35 +77,41 @@ Actualized rows:
 - `IDX-05`: nested place block rejected as an ambient authority switch.
 - `ELAB-01`: cross-locus indexed read generates a remote read request and observe edge.
 - `ELAB-02`: nested foreign place write generates an owner-directed remote write request.
+- `ELAB-03`: private/non-visible field auto communication is rejected.
 - `ELAB-04`: underdeclared generated failure row is rejected.
 - `ELAB-05`: generated Core IR carries source spans.
 - `ELAB-06`: unsupported statements reject instead of being silently dropped.
 - `ELAB-07`: write-side underdeclared generated failure row is rejected.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
+- `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
+- `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.
 
 ## next package
 
 ```text
-P-SURF-04 auto communication publish/observe
+P-SURF-05 role admission capability grant
 ```
 
 Close condition:
 
-- generated MessageEnvelope / publish / observe rows are explicit.
-- private field auto-publish is rejected.
-- parser, indexed-state checker, and elaboration floors remain compatible with
-  `SURF-01..09`, `IDX-01..05`, and `ELAB-01/02/04/05/06/07/08`.
+- role claim / join / admission request / capability grant rows are explicit.
+- role claim alone does not grant authority.
+- stale membership and spoofed/admission-less grant attempts reject.
+- parser, indexed-state checker, elaboration, and generated communication
+  floors remain compatible with `SURF-01..09`, `IDX-01..05`, and
+  `ELAB-01/02/03/04/05/06/07/08/09/10`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
 - Surface runtime/helper implementation beyond the parser, indexed-state
-  checker, and elaboration evidence floors is not present yet.
+  checker, elaboration, and generated communication evidence floors is not
+  present yet.
 - `samples/full-system-v1-surface/syntax/` is parser evidence, not
   workflow-ready runtime evidence.
 - `samples/full-system-v1-surface/indexed-state/` is semantic checker evidence,
   not workflow-ready runtime or elaboration evidence.
-- `samples/full-system-v1-surface/elaboration/` is elaboration evidence, not
-  workflow-ready communication/runtime evidence.
+- `samples/full-system-v1-surface/elaboration/` is elaboration and generated
+  communication evidence, not workflow-ready runtime or role-admission evidence.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

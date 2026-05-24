@@ -26,13 +26,17 @@ def _run_helper(*args: str) -> dict:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_03_rows(self) -> None:
+    def test_matrix_reports_p_surf_04_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 21)
-        self.assertEqual(payload["executable_count"], 21)
+        self.assertEqual(payload["sample_count"], 24)
+        self.assertEqual(payload["executable_count"], 24)
         self.assertEqual(payload["family_count"], 3)
+        self.assertEqual(
+            payload["matrix_status"]["surface_mir_elaboration"],
+            "p_surf_04_auto_communication_elaboration_evidence",
+        )
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
 
@@ -150,10 +154,20 @@ class SurfaceMirSamplesTests(unittest.TestCase):
 
         self.assertTrue(payload["accepted"])
         self.assertTrue(payload["actual"]["accepted"])
-        self.assertEqual(payload["actual"]["generated_edge_kinds"], ["observe_request"])
+        self.assertIn("message_envelope", payload["actual"]["generated_edge_kinds"])
+        self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
+        self.assertIn("observe_request", payload["actual"]["generated_edge_kinds"])
         self.assertEqual(
             payload["actual"]["remote_request_summaries"][0]["request_kind"],
             "read",
+        )
+        self.assertEqual(
+            payload["actual"]["message_envelope_summaries"][0]["envelope_kind"],
+            "remote_read",
+        )
+        self.assertEqual(
+            payload["actual"]["observation_summaries"][0]["field_name"],
+            "hp",
         )
 
     def test_elaboration_cross_locus_write_generates_remote_write_request(self) -> None:
@@ -161,11 +175,24 @@ class SurfaceMirSamplesTests(unittest.TestCase):
 
         self.assertTrue(payload["accepted"])
         self.assertTrue(payload["actual"]["accepted"])
-        self.assertEqual(payload["actual"]["generated_edge_kinds"], ["remote_write_request"])
+        self.assertIn("message_envelope", payload["actual"]["generated_edge_kinds"])
+        self.assertIn("remote_write_request", payload["actual"]["generated_edge_kinds"])
         self.assertEqual(
             payload["actual"]["remote_request_summaries"][0]["generated_from"],
             "nested_place_block",
         )
+        self.assertEqual(payload["actual"]["publication_summaries"], [])
+
+    def test_elaboration_private_field_auto_publish_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-03")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["private_field_auto_publish_rejected"],
+        )
+        self.assertEqual(payload["actual"]["publication_summaries"], [])
+        self.assertEqual(payload["actual"]["observation_summaries"], [])
 
     def test_elaboration_underdeclared_failure_row_negative_reports_expected_diagnostic(self) -> None:
         payload = _run_helper("run", "ELAB-04")
@@ -228,11 +255,37 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             "nested_place_block",
         )
 
+    def test_elaboration_visible_write_generates_publish_and_observe_rows(self) -> None:
+        payload = _run_helper("run", "ELAB-09")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["message_envelope_summaries"][0]["envelope_kind"],
+            "remote_write",
+        )
+        self.assertEqual(payload["actual"]["publication_summaries"][0]["field_name"], "hp")
+        self.assertEqual(payload["actual"]["observation_summaries"][0]["field_name"], "hp")
+        self.assertIn("auto_publish", payload["actual"]["generated_edge_kinds"])
+        self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
+
+    def test_elaboration_visibility_failure_row_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-10")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+        self.assertFalse(
+            payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
+        )
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 21)
+        self.assertEqual(len(payload["passed"]), 24)
 
 
 if __name__ == "__main__":

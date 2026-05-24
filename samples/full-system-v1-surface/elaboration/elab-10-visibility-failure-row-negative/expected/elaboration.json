@@ -1,7 +1,9 @@
 {
-  "accepted": true,
-  "module_path": "Surface.Elab.NestedPlaceReadPositive",
-  "diagnostic_codes": [],
+  "accepted": false,
+  "module_path": "Surface.Elab.VisibilityFailureRowNegative",
+  "diagnostic_codes": [
+    "generated_failure_not_declared"
+  ],
   "transition_kinds": [
     "surface_role_when",
     "generated_remote_read_request"
@@ -13,8 +15,8 @@
       "owner_locus": "S",
       "state_name": "player",
       "key_expr": "self",
-      "generated_from": "nested_place_block",
-      "failure_row_complete": true
+      "generated_from": "cross_locus_read_expression",
+      "failure_row_complete": false
     }
   ],
   "message_envelope_summaries": [
@@ -59,13 +61,6 @@
     "generated_edge"
   ],
   "obligation_codes": [
-    "surface_core_transitions_explicit",
-    "surface_core_remote_requests_explicit",
-    "surface_core_source_spans_preserved",
-    "surface_core_generated_failure_rows_contained",
-    "surface_core_message_envelopes_explicit",
-    "surface_core_auto_publish_observe_explicit",
-    "surface_core_private_fields_not_auto_published",
     "role_admission_capability_grants_pending_p_surf_05",
     "runtime_hotplug_activation_pending_p_surf_06"
   ],

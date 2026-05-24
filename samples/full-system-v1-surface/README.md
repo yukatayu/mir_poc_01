@@ -12,10 +12,12 @@ Current state:
   evidence lane for S-owned Participant-indexed state, key-not-authority
   rejection, stale-key rejection, retained-savepoint compaction rejection, and
   nested-place ambient-authority rejection.
-- `elaboration/` is actualized for `P-SURF-03` as a narrow Surface-to-Core
-  elaboration evidence lane for cross-locus read/write remote requests,
-  generated edges, source spans, obligations, and underdeclared generated
-  failure-row rejection.
+- `elaboration/` is actualized for `P-SURF-03` / `P-SURF-04` as a narrow
+  Surface-to-Core elaboration and generated communication evidence lane for
+  cross-locus read/write remote requests, MessageEnvelope rows, visible field
+  publish/observe rows, generated edges, source spans, obligations,
+  underdeclared generated failure-row rejection, and private/non-visible field
+  rejection.
 
 Commands:
 
@@ -30,6 +32,7 @@ cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 Stop lines:
 
 - no final public grammar / ABI / SDK.
-- no auto communication publish/observe completion yet.
+- no runtime MessageEnvelope dispatch or final transport completion yet.
 - no runtime execution or source patch hot-plug completion yet.
+- no role-admission capability grant completion yet.
 - no generated package artifact authority.

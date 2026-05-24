@@ -1,0 +1,21 @@
+module Surface.Elab.VisibleWriteAutoCommunicationPositive
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    visible observer_safe fields { hp }
+}
+
+BrowserClient[self] {
+  when heal(target: Participant) fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
+    S {
+      player[target].hp = player[target].hp + 1
+    }
+  }
+}

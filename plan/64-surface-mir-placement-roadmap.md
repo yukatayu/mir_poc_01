@@ -25,6 +25,8 @@ Decided:
 - `P-SURF-03` actualized a narrow Surface-to-Core elaboration floor in
   `crates/mir-semantics::surface_to_core_elaboration` and
   `samples/full-system-v1-surface/elaboration/`.
+- `P-SURF-04` actualized a narrow generated communication floor in the same
+  elaboration module and sample root.
 
 Not decided:
 
@@ -39,7 +41,7 @@ Not decided:
 | `P-SURF-00B` | docs/spec rebaseline | `specs/39`, `specs/43`, plans, snapshot docs, guides, and report are synchronized |
 | `P-SURF-01` | brace parser | closed: `SURF-01..09` pass via `cargo test -p mir-ast --test surface_mir_parser` and `scripts/surface_mir_samples.py check-all` |
 | `P-SURF-03` | Surface-to-Core elaboration | closed: cross-locus read/write lowers to Core IR with remote requests, generated edges, source spans, obligations, and underdeclared failure-row rejection |
-| `P-SURF-04` | generated communication | next: MessageEnvelope / publish / observe / failure-row obligations are generated and visible |
+| `P-SURF-04` | generated communication | closed: MessageEnvelope / publish / observe / `VisibilityDenied` failure-row obligations are generated and visible; private/non-visible fields reject |
 | `P-SURF-08` | diagnostics/devtools | source/Core mapping and generated edges are inspectable |
 
 ## actualized parser rows
@@ -65,9 +67,11 @@ Actualized P-SURF-03 elaboration rows:
 - `ELAB-07`: write-side underdeclared generated failure row is rejected.
 - `ELAB-08`: nested place read keeps owner-directed request evidence.
 
-Remaining generated communication row for `P-SURF-04`:
+Actualized P-SURF-04 generated communication rows:
 
-- `ELAB-03`: private field auto-publish rejected or blocked.
+- `ELAB-03`: private/non-visible field auto communication rejected.
+- `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
+- `ELAB-10`: underdeclared `VisibilityDenied` failure row is rejected.
 
 ## validation anchors
 
@@ -97,3 +101,5 @@ cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 - do not freeze final public grammar from this alpha cut.
 - do not hide generated communication from Core IR / devtools.
 - do not treat `package.mir.json` as semantic source authority.
+- do not claim runtime MessageEnvelope dispatch from the P-SURF-04 elaboration
+  evidence floor.

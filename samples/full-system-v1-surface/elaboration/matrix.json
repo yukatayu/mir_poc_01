@@ -1,6 +1,6 @@
 {
   "family": "surface_mir_elaboration",
-  "current_status": "p_surf_03_surface_to_core_elaboration_evidence",
+  "current_status": "p_surf_04_auto_communication_elaboration_evidence",
   "rows": [
     {
       "sample_id": "ELAB-01",
@@ -18,6 +18,15 @@
       "current_status": "executable",
       "source": "elab-02-cross-place-write-positive/main/src/cross-place-write-positive.mir",
       "expected": "elab-02-cross-place-write-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-03",
+      "root_name": "elab-03-private-field-auto-publish-negative",
+      "stage": "P-SURF-04",
+      "current_status": "executable",
+      "source": "elab-03-private-field-auto-publish-negative/main/src/private-field-auto-publish-negative.mir",
+      "expected": "elab-03-private-field-auto-publish-negative/expected/elaboration.json",
       "runner": "elaboration"
     },
     {
@@ -63,6 +72,24 @@
       "current_status": "executable",
       "source": "elab-08-nested-place-read-positive/main/src/nested-place-read-positive.mir",
       "expected": "elab-08-nested-place-read-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-09",
+      "root_name": "elab-09-visible-write-auto-communication-positive",
+      "stage": "P-SURF-04",
+      "current_status": "executable",
+      "source": "elab-09-visible-write-auto-communication-positive/main/src/visible-write-auto-communication-positive.mir",
+      "expected": "elab-09-visible-write-auto-communication-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-10",
+      "root_name": "elab-10-visibility-failure-row-negative",
+      "stage": "P-SURF-04",
+      "current_status": "executable",
+      "source": "elab-10-visibility-failure-row-negative/main/src/visibility-failure-row-negative.mir",
+      "expected": "elab-10-visibility-failure-row-negative/expected/elaboration.json",
       "runner": "elaboration"
     }
   ]

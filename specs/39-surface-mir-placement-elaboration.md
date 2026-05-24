@@ -220,8 +220,12 @@ S {
 
 Rules:
 
-- only declared visible fields are auto-published.
-- private fields are not auto-published.
+- `visible observer_safe` without `fields { ... }` marks the whole state value as
+  observer-safe for the alpha elaborator; `fields { ... }` narrows the generated
+  communication surface to those fields.
+- private fields are not auto-published. P-SURF-04 uses a narrow alpha
+  private-looking-name guard only when cross-locus auto communication would be
+  generated; it is not a final privacy annotation system.
 - observer-safe output must preserve label / authority / redaction / retention
   policy from `specs/22-observability-devtools-semantics.md`.
 - generated publish / observe rows are not hidden magic; they must appear in
@@ -284,6 +288,10 @@ this docs-only package.
 - `ELAB-06`: unsupported statements rejected rather than silently dropped.
 - `ELAB-07`: generated write request with underdeclared failure row rejected.
 - `ELAB-08`: nested place read generates owner-directed request evidence.
+- `ELAB-09`: visible field write generates MessageEnvelope / publish /
+  observe rows.
+- `ELAB-10`: generated `VisibilityDenied` failure is rejected when
+  underdeclared.
 
 ## non-claims
 

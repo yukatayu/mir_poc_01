@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 class SurfaceMirReleaseCheckTests(unittest.TestCase):
-    def test_plan_includes_p_surf_03_elaboration_floor_commands(self) -> None:
+    def test_plan_includes_p_surf_04_auto_communication_floor_commands(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             plan = runner.plan_check_all(Path(tmp))
 
@@ -31,13 +31,13 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
         self.assertIn("helper:surface-samples", names)
         self.assertIn("helper:surface-authoring", names)
 
-    def test_helper_semantic_check_keeps_elaboration_floor_non_workflow_ready(self) -> None:
+    def test_helper_semantic_check_keeps_auto_communication_floor_non_workflow_ready(self) -> None:
         command = runner.PlannedCommand(
             name="helper:surface-samples",
             argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
         )
         payload = {
-            "sample_count": 21,
+            "sample_count": 24,
             "failed": [],
             "workflow_ready": False,
         }

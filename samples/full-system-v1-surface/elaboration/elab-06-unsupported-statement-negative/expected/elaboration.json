@@ -8,12 +8,14 @@
     "surface_role_when"
   ],
   "remote_request_summaries": [],
+  "message_envelope_summaries": [],
+  "publication_summaries": [],
+  "observation_summaries": [],
   "generated_edge_kinds": [],
   "source_span_entity_kinds": [
     "transition"
   ],
   "obligation_codes": [
-    "auto_publish_observe_expansion_pending_p_surf_04",
     "role_admission_capability_grants_pending_p_surf_05",
     "runtime_hotplug_activation_pending_p_surf_06"
   ],

@@ -9,6 +9,7 @@ record Player {
 
 S {
   state player[p: Participant]: Player
+    visible observer_safe fields { hp }
 }
 
 BrowserClient[self] {

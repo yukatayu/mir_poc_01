@@ -13,7 +13,7 @@ S {
 }
 
 BrowserClient[self] {
-  when render fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+  when render fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied {
     S {
       seen_hp = player[self].hp
     }

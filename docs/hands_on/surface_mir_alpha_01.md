@@ -6,6 +6,7 @@ This guide is the reader-facing entry for the Surface Mir alpha line.
 
 `P-SURF-01` adds the parser floor. `P-SURF-02` adds the indexed-state semantic
 checker floor. `P-SURF-03` adds the Surface-to-Core elaboration evidence floor.
+`P-SURF-04` adds the generated communication evidence floor.
 Runtime rows and operational `samples/full-system-v1-surface/` families beyond
 `syntax/`, `indexed-state/`, and `elaboration/` remain planned for later
 packages.
@@ -85,7 +86,8 @@ P-SURF-99 audit
 
 ## current validation
 
-For the current parser, indexed-state checker, and elaboration floors:
+For the current parser, indexed-state checker, elaboration, and generated
+communication floors:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -112,7 +114,8 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ## source commands
 
 These commands are runnable for the P-SURF-01 parser floor, P-SURF-02
-indexed-state semantic checker floor, and P-SURF-03 elaboration evidence floor:
+indexed-state semantic checker floor, P-SURF-03 elaboration evidence floor, and
+P-SURF-04 generated communication evidence floor:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -127,7 +130,7 @@ cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 
 - no final public grammar.
 - no Surface runtime/helper implementation beyond the parser, indexed-state
-  checker, and elaboration evidence floors yet.
+  checker, elaboration, and generated communication evidence floors yet.
 - no final ABI / SDK.
 - no production WAN/federation.
 - no distributed durable save-load R3/R4.

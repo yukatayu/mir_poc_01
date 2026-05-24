@@ -26,10 +26,11 @@ STOP_LINES = [
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-03 Surface-to-Core elaboration evidence only",
-    "auto communication publish/observe remains P-SURF-04",
+    "P-SURF-04 auto communication elaboration evidence only",
+    "no runtime MessageEnvelope dispatch completion",
     "role admission authority remains P-SURF-05",
     "source patch activation remains P-SURF-06",
+    "no TypeMismatch typechecker discharge in P-SURF-04",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-ast --test surface_mir_parser -- --nocapture",
@@ -423,6 +424,45 @@ def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
             }
             for row in core_ir.get("remote_requests") or []
         ],
+        "message_envelope_summaries": [
+            {
+                "envelope_kind": row["envelope_kind"],
+                "from_locus": row["from_locus"],
+                "to_locus": row["to_locus"],
+                "state_name": row["state_name"],
+                "key_expr": row["key_expr"],
+                "field_name": row.get("field_name"),
+                "visibility_channel": row.get("visibility_channel"),
+                "redaction_label": row["redaction_label"],
+                "retention_scope": row["retention_scope"],
+            }
+            for row in core_ir.get("message_envelopes") or []
+        ],
+        "publication_summaries": [
+            {
+                "publisher_locus": row["publisher_locus"],
+                "channel": row["channel"],
+                "state_name": row["state_name"],
+                "key_expr": row["key_expr"],
+                "field_name": row.get("field_name"),
+                "redaction_label": row["redaction_label"],
+                "retention_scope": row["retention_scope"],
+            }
+            for row in core_ir.get("publications") or []
+        ],
+        "observation_summaries": [
+            {
+                "observer_locus": row["observer_locus"],
+                "owner_locus": row["owner_locus"],
+                "channel": row["channel"],
+                "state_name": row["state_name"],
+                "key_expr": row["key_expr"],
+                "field_name": row.get("field_name"),
+                "redaction_label": row["redaction_label"],
+                "retention_scope": row["retention_scope"],
+            }
+            for row in core_ir.get("observations") or []
+        ],
         "generated_edge_kinds": [
             row["edge_kind"] for row in core_ir.get("generated_edges") or []
         ],
@@ -465,6 +505,8 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     mismatches = [
         key for key, expected_value in expected.items() if actual.get(key) != expected_value
     ]
+    if not expected:
+        mismatches.append("expected_projection_empty")
     return {
         "command": "run",
         "family": spec["data"]["family"],

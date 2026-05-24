@@ -133,10 +133,10 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 21:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-03")
+        if payload.get("sample_count") != 24:
+            errors.append("surface samples helper sample_count mismatch for P-SURF-04")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-03 helper must not claim workflow_ready")
+            errors.append("P-SURF-04 helper must not claim workflow_ready")
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
     return errors
@@ -229,7 +229,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_03_surface_to_core_elaboration",
+        "scope": "p_surf_04_auto_communication_publish_observe",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),
@@ -239,9 +239,10 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
         "results": results,
         "non_claims": [
             "no final public grammar / ABI / SDK",
-            "no auto communication publish/observe completion",
             "no role-admission capability grant completion",
             "no runtime or source patch hot-plug completion",
+            "no runtime MessageEnvelope dispatch completion",
+            "no TypeMismatch typechecker discharge in P-SURF-04",
             "no generated package artifact authority",
         ],
         "final_public_grammar_frozen": False,

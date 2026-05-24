@@ -20,7 +20,8 @@ The repo already has:
 
 The repo does not yet have:
 
-- auto communication publish/observe generation over elaborated request rows.
+- runtime MessageEnvelope dispatch or local queue delivery for generated
+  communication rows.
 - indexed-state runtime carrier.
 - role admission / source patch hot-plug from Surface source.
 - Surface Mir source operational suite.
@@ -37,6 +38,10 @@ The repo now has:
   elaboration evidence for cross-locus read/write requests, source spans,
   read/write generated failure-row rejection, unsupported-statement rejection,
   and nested-place read placement.
+- the same `elaboration/` root with `ELAB-03/09/10` generated communication
+  evidence for private/non-visible field rejection, visible field
+  MessageEnvelope / publish / observe rows, and `VisibilityDenied` failure-row
+  containment.
 - `scripts/surface_mir_samples.py`, `scripts/surface_mir_authoring_check.py`,
   and `scripts/surface_mir_release_check.py` plan/check surfaces.
 
@@ -48,8 +53,8 @@ The repo now has:
 | 2 | `P-SURF-01` | parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks accepted; bare role blocks and `S[ ... ]` rejected |
 | 3 | `P-SURF-02` | indexed state | closed: owner/keyspace/access/stale/compaction/nested-place guard semantics represented |
 | 4 | `P-SURF-03` | elaboration | closed: cross-locus reads/writes generate Core IR remote request rows, generated edges, source spans, obligations, and underdeclared failure-row rejection |
-| 5 | `P-SURF-04` | auto communication | next: MessageEnvelope / publish / observe / failure rows visible |
-| 6 | `P-SURF-05` | role admission | role claim / grant / spoof / stale rows |
+| 5 | `P-SURF-04` | auto communication | closed: MessageEnvelope / publish / observe / failure rows visible |
+| 6 | `P-SURF-05` | role admission | next: role claim / grant / spoof / stale rows |
 | 7 | `P-SURF-06` | source patch | parse/typecheck/elaborate/admit/activation-cut pipeline |
 | 8 | `P-SURF-07` | source operational suite | WorldCore / MembershipChat / Sugoroku / related roots |
 | 9 | `P-SURF-08` | devtools | source/Core/generated-edge/patch/admission panels |
@@ -71,7 +76,7 @@ samples/full-system-v1-surface/
   indexed-state/
 ```
 
-Created by P-SURF-03 as elaboration evidence:
+Created by P-SURF-03/P-SURF-04 as elaboration and generated communication evidence:
 
 ```text
 samples/full-system-v1-surface/
@@ -79,8 +84,8 @@ samples/full-system-v1-surface/
 ```
 
 These roots are not workflow-ready runtime evidence. Future implementation
-packages should add sibling roots/rows only after communication and runtime
-surfaces exist.
+packages should add sibling roots/rows only after role admission, runtime
+dispatch, source patch, and operational surfaces exist.
 
 ## compatibility anchors
 

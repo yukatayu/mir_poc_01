@@ -1,43 +1,53 @@
 {
   "accepted": true,
-  "module_path": "Surface.Elab.NestedPlaceReadPositive",
+  "module_path": "Surface.Elab.VisibleWriteAutoCommunicationPositive",
   "diagnostic_codes": [],
   "transition_kinds": [
     "surface_role_when",
-    "generated_remote_read_request"
+    "generated_remote_write_request"
   ],
   "remote_request_summaries": [
     {
-      "request_kind": "read",
+      "request_kind": "write",
       "requester_locus": "role:BrowserClient",
       "owner_locus": "S",
       "state_name": "player",
-      "key_expr": "self",
+      "key_expr": "target",
       "generated_from": "nested_place_block",
       "failure_row_complete": true
     }
   ],
   "message_envelope_summaries": [
     {
-      "envelope_kind": "remote_read",
+      "envelope_kind": "remote_write",
       "from_locus": "role:BrowserClient",
       "to_locus": "S",
       "state_name": "player",
-      "key_expr": "self",
+      "key_expr": "target",
       "field_name": "hp",
       "visibility_channel": "observer_safe",
       "redaction_label": "observer_safe",
       "retention_scope": "report_local"
     }
   ],
-  "publication_summaries": [],
+  "publication_summaries": [
+    {
+      "publisher_locus": "S",
+      "channel": "observer_safe",
+      "state_name": "player",
+      "key_expr": "target",
+      "field_name": "hp",
+      "redaction_label": "observer_safe",
+      "retention_scope": "report_local"
+    }
+  ],
   "observation_summaries": [
     {
-      "observer_locus": "role:BrowserClient",
+      "observer_locus": "observer_safe:*",
       "owner_locus": "S",
       "channel": "observer_safe",
       "state_name": "player",
-      "key_expr": "self",
+      "key_expr": "target",
       "field_name": "hp",
       "redaction_label": "observer_safe",
       "retention_scope": "report_local"
@@ -45,12 +55,15 @@
   ],
   "generated_edge_kinds": [
     "message_envelope",
+    "auto_publish",
     "auto_observe",
-    "observe_request"
+    "remote_write_request"
   ],
   "source_span_entity_kinds": [
     "transition",
     "message_envelope",
+    "generated_edge",
+    "publication",
     "generated_edge",
     "observation",
     "generated_edge",
