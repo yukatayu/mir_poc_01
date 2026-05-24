@@ -13,8 +13,8 @@ source-first operational evidence roots for WorldCore, MembershipChat,
 Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation.
 `P-SURF-08` adds static observer-safe devtools diagnostics for Surface source,
 generated Core IR, semantic-checker-backed indexed-state map, generated
-communication, role/admission, redacted patch lifecycle, and source spans. The
-next package is the final Surface alpha audit.
+communication, role/admission, redacted patch lifecycle, and source spans.
+`P-SURF-99` closes the bounded final Surface alpha audit.
 
 ## current decision
 
@@ -75,7 +75,7 @@ not semantic source authority.
   not ambient authority switches.
 - source patch hot-plug is not eval.
 
-## planned package sequence
+## package sequence status
 
 ```text
 P-SURF-01 parser
@@ -86,14 +86,14 @@ P-SURF-05 role admission
 P-SURF-06 source patch
 P-SURF-07 source operational suite
 P-SURF-08 devtools
-P-SURF-99 audit
+P-SURF-99 audit (closed)
 ```
 
 ## current validation
 
-For the current parser, indexed-state checker, elaboration, generated
+For the current closed parser, indexed-state checker, elaboration, generated
 communication, role-admission, source-patch, source operational, and static
-devtools diagnostics floors:
+devtools diagnostics floors plus the P-SURF-99 audit:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -148,8 +148,8 @@ mirrorea-alpha patch-source session#surface-sample samples/full-system-v1-surfac
 - no final public grammar.
 - no Surface runtime/helper implementation beyond the parser, indexed-state
   checker, elaboration, generated communication, role-admission,
-  source-patch/source-operational, and static devtools diagnostics evidence
-  floors yet.
+  source-patch/source-operational, and static devtools diagnostics alpha
+  evidence floors.
 - no final Surface operational runtime / transport or final devtools
   viewer/telemetry ABI completion yet.
 - no final source patch hot-plug ABI, distributed durable migration planner, or

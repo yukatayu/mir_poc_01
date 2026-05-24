@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 20:13 JST
+最終更新: 2026-05-24 20:42 JST
 
 ## document role
 
@@ -48,17 +48,18 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-99 final surface alpha audit`.
-- Current status after this snapshot: `P-SURF-08` closed a static observer-safe
-  devtools diagnostics lane under `samples/full-system-v1-surface/devtools/`.
-  `DEV-01..02` cover Surface source, generated Core IR, indexed-state map,
-  generated communication, role/admission, patch lifecycle, and source spans
-  without promoting the bundle to final viewer / telemetry ABI.
-- Next gap: run the final Surface alpha claim / non-claim audit in `P-SURF-99`.
+- Current package: none promoted for the Surface line after `P-SURF-99`.
+- Current status after this snapshot: `P-SURF-99` closed the bounded Surface
+  alpha audit over `P-SURF-01..08`. Surface alpha evidence has 46 helper rows
+  and 47 `.mir` source files, with parser, indexed-state, elaboration,
+  generated communication, role admission, source patch, source operational,
+  and static devtools diagnostics floors revalidated.
+- Next gap: later user-spec-required reopen for final runtime/transport,
+  final source patch ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
-  The new promoted line is Surface Mir alpha: `.mir` source files own semantic
+  The closed Surface Mir alpha line has fixed that `.mir` source files own semantic
   authority, `package.mir.json` is alpha artifact, indexed state is owner-locus
   state keyed by participants or later constrained keyspaces, role claims are
   not authority, source patches go through parse/typecheck/elaborate/admit and
@@ -69,7 +70,8 @@ semantic source authority.
   elaboration evidence and `P-SURF-04` is generated communication elaboration
   evidence, `P-SURF-05` is role-admission evidence, `P-SURF-06` is source
   patch pipeline evidence, `P-SURF-07` is source operational evidence, and
-  `P-SURF-08` is static devtools diagnostics evidence; none
+  `P-SURF-08` is static devtools diagnostics evidence; `P-SURF-99` is final
+  validation / claim-non-claim audit evidence. None
   claims runtime MessageEnvelope dispatch, production identity, hardware
   attestation, WAN admission, final source patch ABI, distributed durable
   migration, final operational runtime/transport, or final devtools viewer /
@@ -91,7 +93,7 @@ semantic source authority.
 | `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
 | `P-SURF-07` | Surface source operational suite | `evidence-closed source operational lane` | `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`, `E2E-SURF-01..12` | final operational runtime/transport remain later |
 | `P-SURF-08` | Surface devtools / diagnostics | `evidence-closed static diagnostics lane` | `samples/full-system-v1-surface/devtools/`, `DEV-01..02` | final viewer/telemetry ABI and runtime devtools remain later |
-| `P-SURF-99` | Surface Mir alpha audit | `planned` | future full validation | close bounded Surface alpha chain |
+| `P-SURF-99` | Surface Mir alpha audit | `audit-closed` | Surface release check, Product Alpha anchor, operational helper, minimal pattern anchor, docs validators | later public/broader reopen only |
 
 ## line snapshots
 
@@ -132,8 +134,8 @@ Next gap:
 Status: `first-floor-evidence` for Full System V1, `parser-floor-evidence` plus
 `indexed-state-checker-evidence` plus `elaboration-evidence` plus
 `generated-communication-evidence` plus `role-admission-evidence` plus
-`source-patch-hotplug-evidence` plus `source-operational-evidence` for Surface
-Mir alpha.
+`source-patch-hotplug-evidence` plus `source-operational-evidence` plus
+`static-devtools-evidence`; Surface audit is closed through P-SURF-99.
 
 Current evidence:
 
@@ -170,8 +172,9 @@ Current evidence:
 
 Next gap:
 
-- `P-SURF-99` final Surface alpha audit: rerun validation and claim/non-claim
-  checks across the bounded Surface line.
+- No current promoted Surface package. Later work should reopen only with an
+  explicit package for final runtime/transport, final devtools viewer/telemetry
+  ABI, final source patch ABI, public grammar/API, or broader distribution.
 
 ### PoseGraph line
 
@@ -244,7 +247,8 @@ Current evidence:
 
 Next gap:
 
-- run P-SURF-99 final audit over Surface alpha evidence and stop lines.
+- no current promoted Surface package; later reopen requires an explicit
+  runtime/transport/public-ABI/devtools-viewer package.
 
 ## validation floor
 
@@ -322,11 +326,11 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | devtools diagnostics docs/report sync closing; P-SURF-99 handoff current | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | Surface alpha audit closed; no current promoted Surface package | light | maintenance only |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, and static devtools diagnostics floors closed | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit is next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
+| `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
@@ -352,8 +356,10 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-05-24 20:42 JST
+  `P-SURF-99` で final Surface alpha audit を close し、Surface release check、Surface helper / authoring check、Product Alpha release anchor、operational product helper、minimal alpha-1 pattern verifier、docs validators、`cargo fmt --check`、`git diff --check` を再実行した。Surface line は 46 helper rows / 47 `.mir` source files の bounded alpha evidence として閉じ、final runtime/transport、final source patch ABI、final devtools viewer/telemetry ABI、public grammar/API は later gate のまま。
 - 2026-05-24 20:13 JST
-  `P-SURF-08` で static devtools diagnostics evidence floor を actualize し、`samples/full-system-v1-surface/devtools/`、`DEV-01..02`、`scripts/surface_mir_samples.py check-all` を同期した。panel は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans を持つが、final viewer / telemetry ABI や runtime devtools dispatch ではない。current promoted package は `P-SURF-99 final surface alpha audit`。
+  `P-SURF-08` で static devtools diagnostics evidence floor を actualize し、`samples/full-system-v1-surface/devtools/`、`DEV-01..02`、`scripts/surface_mir_samples.py check-all` を同期した。panel は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans を持つが、final viewer / telemetry ABI や runtime devtools dispatch ではない。then-promoted package は `P-SURF-99 final surface alpha audit`。
 - 2026-05-24 19:58 JST
   `P-SURF-07` で source operational suite evidence floor を actualize し、`samples/full-system-v1-surface/world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`operational-matrix.json`、`E2E-SURF-01..12`、`scripts/surface_mir_samples.py check-all` を同期した。review 後に MembershipChat row も role admission と elaboration / generated communication を同時に通し、operational projection の `source_authority` / `final_public_api_frozen` は下位 semantic payload 由来にした。各 root は `.mir` source authority の positive / negative rows を持つが、final operational runtime / transport ではない。then-promoted package は `P-SURF-08 devtools and diagnostics`。
 - 2026-05-24 19:27 JST

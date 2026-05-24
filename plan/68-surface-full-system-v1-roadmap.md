@@ -68,7 +68,7 @@ The repo now has:
 | 7 | `P-SURF-06` | source patch | closed: source commands, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
 | 8 | `P-SURF-07` | source operational suite | closed: six source roots plus `E2E-SURF-01..12` positive/negative rows |
 | 9 | `P-SURF-08` | devtools | closed: source/Core/generated-edge/semantic-indexed-state/redacted-patch/admission/source-span panels |
-| 10 | `P-SURF-99` | final audit | full validation and compatibility anchors |
+| 10 | `P-SURF-99` | final audit | closed: full validation, compatibility anchors, and claim/non-claim audit |
 
 ## planned root family
 

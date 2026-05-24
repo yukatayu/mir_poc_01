@@ -11,6 +11,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+RELEASE_CHECK_SCOPE = "p_surf_99_final_surface_alpha_audit"
 
 
 @dataclass(frozen=True)
@@ -49,6 +50,10 @@ def helper_command(name: str, script_name: str, *args: str) -> PlannedCommand:
         name=name,
         argv=["python3", f"scripts/{script_name}", *args, "--format", "json"],
     )
+
+
+def json_command(name: str, argv: list[str]) -> PlannedCommand:
+    return PlannedCommand(name=name, argv=argv, json_required=True)
 
 
 def cargo_test_args(*args: str) -> list[str]:
@@ -119,6 +124,36 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
                 "helper:surface-authoring",
                 "surface_mir_authoring_check.py",
                 "check-all",
+            ),
+            json_command(
+                "anchor:product-alpha1-release",
+                [
+                    "python3",
+                    "scripts/product_alpha1_release_check.py",
+                    "--format",
+                    "json",
+                    "check-all",
+                ],
+            ),
+            json_command(
+                "anchor:operational-product-samples",
+                [
+                    "python3",
+                    "scripts/operational_product_samples.py",
+                    "check-all",
+                    "--format",
+                    "json",
+                ],
+            ),
+            json_command(
+                "anchor:minimal-alpha1-patterns",
+                [
+                    "python3",
+                    "scripts/minimal_alpha1_patterns.py",
+                    "check-all",
+                    "--format",
+                    "json",
+                ],
             ),
         ],
     )
@@ -243,12 +278,29 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
         if payload.get("sample_count") != 46:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-08")
+            errors.append("surface samples helper sample_count mismatch for P-SURF-99")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-08 helper must not claim workflow_ready")
+            errors.append("P-SURF-99 helper must not claim workflow_ready")
         errors.extend(devtools_semantic_errors(payload))
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
+    if command.name == "anchor:product-alpha1-release":
+        if payload.get("failed_commands"):
+            errors.append("Product Alpha release anchor reported failed commands")
+        if payload.get("product_alpha1_release_candidate_ready") is not True:
+            errors.append("Product Alpha release anchor is not release-candidate ready")
+        if payload.get("product_alpha1_ready") is not True:
+            errors.append("Product Alpha release anchor is not product-alpha ready")
+    if command.name == "anchor:operational-product-samples":
+        if payload.get("failed_commands"):
+            errors.append("operational product helper reported failed commands")
+        if payload.get("status") != "accepted":
+            errors.append("operational product helper was not accepted")
+    if command.name == "anchor:minimal-alpha1-patterns":
+        if payload.get("failed"):
+            errors.append("minimal alpha1 pattern verifier reported failed rows")
+        if payload.get("status") != "accepted":
+            errors.append("minimal alpha1 pattern verifier was not accepted")
     return errors
 
 
@@ -333,12 +385,51 @@ def payload_summary_for_result(result: CommandResult) -> dict[str, Any] | None:
             "final_public_api_frozen": result.payload.get("final_public_api_frozen"),
             "redacted": True,
         }
+    if result.name == "anchor:product-alpha1-release":
+        return {
+            "surface_kind": result.payload.get("surface_kind"),
+            "status": result.payload.get("status"),
+            "product_alpha1_release_candidate_ready": result.payload.get(
+                "product_alpha1_release_candidate_ready"
+            ),
+            "product_alpha1_ready": result.payload.get("product_alpha1_ready"),
+            "failed_commands": result.payload.get("failed_commands") or [],
+            "command_result_count": len(result.payload.get("command_results") or []),
+            "final_product_claimed": result.payload.get("final_product_claimed"),
+            "final_public_api_frozen": result.payload.get("final_public_api_frozen"),
+            "redacted": True,
+        }
+    if result.name == "anchor:operational-product-samples":
+        return {
+            "surface_kind": result.payload.get("surface_kind"),
+            "status": result.payload.get("status"),
+            "product_alpha1_ready": result.payload.get("product_alpha1_ready"),
+            "failed_commands": result.payload.get("failed_commands") or [],
+            "final_public_api_frozen": result.payload.get("final_public_api_frozen"),
+            "redacted": True,
+        }
+    if result.name == "anchor:minimal-alpha1-patterns":
+        return {
+            "package_id": result.payload.get("package_id"),
+            "status": result.payload.get("status"),
+            "failed": result.payload.get("failed") or [],
+            "strict_family_count": result.payload.get("strict_family_count"),
+            "workflow_anchors_checked": result.payload.get(
+                "workflow_anchors_checked"
+            ),
+            "final_public_product_claimed": result.payload.get(
+                "final_public_product_claimed"
+            ),
+            "redacted": True,
+        }
     return result.payload
 
 
 def stdout_summary_for_result(result: CommandResult) -> str:
     if result.name.startswith("helper:surface-"):
         return "<json stdout redacted; see payload summary>"
+    if result.name.startswith("anchor:"):
+        return "<json stdout summarized; see payload summary>"
     return result.stdout
 
 
@@ -399,7 +490,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_08_devtools_diagnostics",
+        "scope": RELEASE_CHECK_SCOPE,
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),

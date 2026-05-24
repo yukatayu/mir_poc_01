@@ -3,7 +3,9 @@
 This root is the Surface Mir source-authority line under `specs/39..43` and
 `plan/64..68`.
 
-Current state:
+Current state after `P-SURF-99`: bounded Surface alpha audit closed. These
+roots are runnable evidence, not final Surface runtime/transport or final
+viewer/telemetry ABI.
 
 - `syntax/` is actualized for `P-SURF-01` as a narrow parser evidence lane for
   canonical `S { ... }` place blocks, role-instance blocks, indexed state
@@ -28,9 +30,9 @@ Current state:
   HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval,
   and rejection-without-mutation rows.
 - `devtools/` is actualized for `P-SURF-08` as static observer-safe devtools
-  diagnostics evidence for Surface source, generated Core IR, indexed-state map,
-  generated communication, role/admission, patch lifecycle, and source-span
-  panels.
+  diagnostics evidence for Surface source, generated Core IR,
+  semantic-checker-backed indexed-state map, generated communication,
+  role/admission, redacted patch lifecycle, and source-span panels.
 - `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`,
   `two-shard-hard-boundary/`, and `gradient-observation/` are actualized for
   `P-SURF-07` as source-first operational evidence roots for
@@ -43,6 +45,8 @@ Commands:
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
 python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_authoring_check.py check-all --format json
+python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture

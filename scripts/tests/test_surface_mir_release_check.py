@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 class SurfaceMirReleaseCheckTests(unittest.TestCase):
-    def test_plan_includes_p_surf_08_devtools_floor_commands(self) -> None:
+    def test_plan_includes_p_surf_99_audit_commands(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             plan = runner.plan_check_all(Path(tmp))
 
@@ -33,6 +33,15 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
         self.assertIn("test:surface-release-check", names)
         self.assertIn("helper:surface-samples", names)
         self.assertIn("helper:surface-authoring", names)
+        self.assertIn("anchor:product-alpha1-release", names)
+        self.assertIn("anchor:operational-product-samples", names)
+        self.assertIn("anchor:minimal-alpha1-patterns", names)
+
+    def test_run_check_all_reports_p_surf_99_scope(self) -> None:
+        self.assertEqual(
+            runner.RELEASE_CHECK_SCOPE,
+            "p_surf_99_final_surface_alpha_audit",
+        )
 
     def test_helper_semantic_check_keeps_devtools_floor_non_workflow_ready(self) -> None:
         command = runner.PlannedCommand(
@@ -160,6 +169,55 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
 
         self.assertTrue(any("raw_parse_report" in error for error in errors))
         self.assertTrue(any("sensitive material" in error for error in errors))
+
+    def test_product_alpha_anchor_semantic_check_rejects_failed_anchor(self) -> None:
+        command = runner.PlannedCommand(
+            name="anchor:product-alpha1-release",
+            argv=[],
+        )
+
+        errors = runner.semantic_errors_for_result(
+            command,
+            {
+                "failed_commands": [],
+                "product_alpha1_release_candidate_ready": False,
+                "product_alpha1_ready": True,
+            },
+        )
+
+        self.assertIn(
+            "Product Alpha release anchor is not release-candidate ready",
+            errors,
+        )
+
+    def test_anchor_payload_summaries_are_redacted(self) -> None:
+        result = runner.CommandResult(
+            name="anchor:product-alpha1-release",
+            argv=[],
+            returncode=0,
+            stdout="{large-json}",
+            stderr="",
+            payload={
+                "surface_kind": "product_alpha1_release_check_report",
+                "status": "accepted",
+                "product_alpha1_release_candidate_ready": True,
+                "product_alpha1_ready": True,
+                "failed_commands": [],
+                "command_results": [{}, {}],
+                "final_product_claimed": False,
+                "final_public_api_frozen": False,
+            },
+            semantic_errors=[],
+        )
+
+        payload = runner.result_payload(result)
+
+        self.assertEqual(
+            payload["stdout"],
+            "<json stdout summarized; see payload summary>",
+        )
+        self.assertTrue(payload["payload"]["redacted"])
+        self.assertEqual(payload["payload"]["command_result_count"], 2)
 
     def test_plan_command_accepts_global_format_before_subcommand(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

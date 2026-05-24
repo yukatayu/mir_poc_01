@@ -68,7 +68,7 @@ This is near product-style alpha flow, not final production.
 | `P-SURF-06` | source patch hot-plug | closed: parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
 | `P-SURF-07` | source operational suite | closed: source-first WorldCore / MembershipChat / Sugoroku / PortalWorldlink / TwoShardHardBoundary / GradientObservation roots with positive/negative rows |
 | `P-SURF-08` | devtools and diagnostics | closed: Surface source, Core IR, generated communication, semantic-checker-backed indexed-state map, role admission, redacted patch lifecycle, and source spans visible in static diagnostics |
-| `P-SURF-99` | final audit | full validation and compatibility anchors rerun |
+| `P-SURF-99` | final audit | closed: full validation and compatibility anchors rerun; claim/non-claim audit preserved stop lines |
 
 ## planned sample root family
 

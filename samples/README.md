@@ -229,7 +229,9 @@ semantic checker evidence, `P-SURF-03` adds Surface-to-Core elaboration
 evidence, `P-SURF-04` adds generated communication evidence, `P-SURF-05`
 adds role admission / capability grant evidence, `P-SURF-06` adds source
 patch hot-plug evidence, `P-SURF-07` adds source operational evidence, and
-`P-SURF-08` adds static devtools diagnostics evidence.
+`P-SURF-08` adds static devtools diagnostics evidence. `P-SURF-99` closes the
+bounded Surface alpha audit; no current Surface runtime/transport or final
+viewer/telemetry ABI claim is added.
 The following commands are runnable for `SURF-*`, `IDX-*`, `ELAB-*`, `ROLE-*`,
 `PATCH-*`, `DEV-*`, and `E2E-SURF-*` rows:
 

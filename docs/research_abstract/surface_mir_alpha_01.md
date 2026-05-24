@@ -2,7 +2,7 @@
 
 ## summary
 
-`P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
+`P-SURF-00B` rebaselined Surface Mir as the
 user-facing source layer. `P-SURF-01` adds the first parser floor,
 `P-SURF-02` adds the indexed-state semantic checker floor, `P-SURF-03`
 adds the Surface-to-Core elaboration evidence floor, `P-SURF-04` adds the
@@ -10,6 +10,7 @@ generated communication evidence floor, and `P-SURF-05` adds report-level role
 admission / capability grant evidence. `P-SURF-06` adds source patch hot-plug
 pipeline evidence. `P-SURF-07` adds source-first operational evidence roots.
 `P-SURF-08` adds static observer-safe devtools diagnostics evidence.
+`P-SURF-99` closes the bounded final validation / claim-non-claim audit.
 
 The central syntax decision is:
 
@@ -118,16 +119,16 @@ Actualized rows:
   TwoShardHardBoundary, and GradientObservation positive/negative source rows
   pass their required alpha checks.
 
-## next package
+## current audit state
 
 ```text
-P-SURF-99 final surface alpha audit
+P-SURF-99 final surface alpha audit: closed
 ```
 
-Close condition:
+Closeout evidence:
 
-- rerun validation and compatibility anchors across P-SURF-01..08.
-- audit Surface alpha claim / non-claim wording.
+- validation and compatibility anchors rerun across P-SURF-01..08.
+- Surface alpha claim / non-claim wording audited.
 - `.mir` files remain semantic source authority and generated reports remain
   evidence only.
 - parser, indexed-state checker, elaboration, generated communication,
