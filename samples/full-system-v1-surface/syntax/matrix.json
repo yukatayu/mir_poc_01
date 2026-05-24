@@ -1,0 +1,78 @@
+{
+  "family": "surface_mir_alpha_syntax",
+  "current_status": "p_surf_01_executable_parser_evidence",
+  "rows": [
+    {
+      "sample_id": "SURF-01",
+      "root_name": "surf-01-brace-place-positive",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-01-brace-place-positive/main/src/brace-place-positive.mir",
+      "expected": "surf-01-brace-place-positive/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-02",
+      "root_name": "surf-02-bracket-place-negative",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-02-bracket-place-negative/main/src/bracket-place-negative.mir",
+      "expected": "surf-02-bracket-place-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-03",
+      "root_name": "surf-03-record-literal-positive",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-03-record-literal-positive/main/src/record-literal-positive.mir",
+      "expected": "surf-03-record-literal-positive/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-04",
+      "root_name": "surf-04-ambiguous-brace-negative",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-04-ambiguous-brace-negative/main/src/ambiguous-brace-negative.mir",
+      "expected": "surf-04-ambiguous-brace-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-05",
+      "root_name": "surf-05-role-instance-positive",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-05-role-instance-positive/main/src/role-instance-positive.mir",
+      "expected": "surf-05-role-instance-positive/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-06",
+      "root_name": "surf-06-undeclared-place-negative",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-06-undeclared-place-negative/main/src/undeclared-place-negative.mir",
+      "expected": "surf-06-undeclared-place-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-07",
+      "root_name": "surf-07-undeclared-role-negative",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-07-undeclared-role-negative/main/src/undeclared-role-negative.mir",
+      "expected": "surf-07-undeclared-role-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-08",
+      "root_name": "surf-08-invalid-role-binder-negative",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-08-invalid-role-binder-negative/main/src/invalid-role-binder-negative.mir",
+      "expected": "surf-08-invalid-role-binder-negative/expected/parse.json"
+    },
+    {
+      "sample_id": "SURF-09",
+      "root_name": "surf-09-role-named-s-positive",
+      "stage": "P-SURF-01",
+      "current_status": "executable",
+      "source": "surf-09-role-named-s-positive/main/src/role-named-s-positive.mir",
+      "expected": "surf-09-role-named-s-positive/expected/parse.json"
+    }
+  ]
+}

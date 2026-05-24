@@ -1,0 +1,8 @@
+module Surface.Syntax.InvalidRoleBinderNegative
+
+role BrowserClient
+
+BrowserClient[self + other] {
+  when start {
+  }
+}

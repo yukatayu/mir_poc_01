@@ -54,7 +54,7 @@ S[
 The required diagnostic is:
 
 ```text
-surface_place_scope_bracket_not_supported:
+bracket_place_scope_not_supported:
   use `S { ... }`; `[]` is reserved for indexing.
 ```
 
@@ -265,11 +265,17 @@ this docs-only package.
 
 - `SURF-01`: `S { state player[p: Participant]: Player }` accepted.
 - `SURF-02`: `S[ ... ]` rejected as
-  `surface_place_scope_bracket_not_supported`.
+  `bracket_place_scope_not_supported`.
 - `SURF-03`: record literal `Player { hp: 1 }` accepted.
 - `SURF-04`: ambiguous place/type brace construct rejected.
 - `SURF-05`: `Participant[self] { when start fails MissingCapability { ... } }`
   accepted.
+- `SURF-06`: undeclared `Unknown { ... }` place block head rejected.
+- `SURF-07`: undeclared `Unknown[self] { ... }` role-instance head rejected.
+- `SURF-08`: invalid role-instance binder such as `Role[self + other]`
+  rejected.
+- `SURF-09`: `S[self] { ... }` accepted when `S` resolves to a declared
+  role, not a place scope.
 - `ELAB-01`: cross-place read generates explicit Core edge.
 - `ELAB-02`: cross-place write generates explicit Core edge.
 - `ELAB-03`: private field auto-publish rejected or blocked.

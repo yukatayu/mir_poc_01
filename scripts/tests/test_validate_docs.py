@@ -243,6 +243,14 @@ class ValidateDocsTests(unittest.TestCase):
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
+            "samples/full-system-v1-surface/README.md",
+            "samples/full-system-v1-surface/syntax/README.md",
+            "samples/full-system-v1-surface/syntax/matrix.json",
+            "scripts/surface_mir_samples.py",
+            "scripts/surface_mir_release_check.py",
+            "scripts/surface_mir_authoring_check.py",
+            "scripts/tests/test_surface_mir_samples.py",
+            "scripts/tests/test_surface_mir_release_check.py",
         }
 
         for path in surface_required:

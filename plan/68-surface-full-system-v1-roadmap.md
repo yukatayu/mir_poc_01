@@ -20,19 +20,25 @@ The repo already has:
 
 The repo does not yet have:
 
-- canonical Surface Mir brace parser.
 - Surface-to-Core elaboration over `S { ... }`.
 - indexed-state semantics implemented from Surface source.
 - role admission / source patch hot-plug from Surface source.
 - Surface Mir source operational suite.
+
+The repo now has:
+
+- canonical Surface Mir brace parser floor in `crates/mir-ast::surface_alpha`.
+- `samples/full-system-v1-surface/syntax/` with `SURF-01..09` parser evidence.
+- `scripts/surface_mir_samples.py`, `scripts/surface_mir_authoring_check.py`,
+  and `scripts/surface_mir_release_check.py` plan/check surfaces.
 
 ## package order
 
 | Order | Package | Role | Close condition |
 |---:|---|---|---|
 | 1 | `P-SURF-00B` | docs/spec rebaseline | docs, specs, plans, guides, report, validators |
-| 2 | `P-SURF-01` | parser | `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks accepted; bare role blocks and `S[ ... ]` rejected |
-| 3 | `P-SURF-02` | indexed state | owner/keyspace/access/stale semantics represented |
+| 2 | `P-SURF-01` | parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks accepted; bare role blocks and `S[ ... ]` rejected |
+| 3 | `P-SURF-02` | indexed state | next: owner/keyspace/access/stale semantics represented |
 | 4 | `P-SURF-03` | elaboration | cross-locus reads/writes generate Core IR |
 | 5 | `P-SURF-04` | auto communication | MessageEnvelope / publish / observe / failure rows visible |
 | 6 | `P-SURF-05` | role admission | role claim / grant / spoof / stale rows |
@@ -43,14 +49,16 @@ The repo does not yet have:
 
 ## planned root family
 
-Planned, not created by P-SURF-00B:
+Created by P-SURF-01 as parser evidence:
 
 ```text
 samples/full-system-v1-surface/
+  syntax/
 ```
 
-This root should remain planned until implementation packages create runnable
-rows and helper validation.
+This root is not workflow-ready runtime evidence. Future implementation packages
+should add sibling roots/rows only after indexed-state semantics, elaboration,
+and runtime surfaces exist.
 
 ## compatibility anchors
 

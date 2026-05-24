@@ -1,0 +1,21 @@
+{
+  "accepted": true,
+  "module_path": "Surface.Syntax.RoleNamedSPositive",
+  "diagnostic_codes": [],
+  "role_names": ["S"],
+  "place_names": [],
+  "record_names": [],
+  "place_block_refs": [],
+  "state_summaries": [],
+  "role_instance_summaries": [
+    {
+      "role_ref": "S",
+      "instance_ref": "self",
+      "when_events": ["start"],
+      "failure_rows": [[]],
+      "join_targets": []
+    }
+  ],
+  "canonical_place_scope_syntax": "S { ... }",
+  "final_public_grammar_frozen": false
+}

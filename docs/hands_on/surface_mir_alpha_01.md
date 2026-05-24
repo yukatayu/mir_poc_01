@@ -2,11 +2,11 @@
 
 ## purpose
 
-This guide is the reader-facing entry for `P-SURF-00B`.
+This guide is the reader-facing entry for the Surface Mir alpha line.
 
-It is docs/spec rebaseline only. Surface Mir parser, helper scripts, runtime
-rows, and `samples/full-system-v1-surface/` roots are planned for later
-packages.
+`P-SURF-01` adds the parser floor. Runtime rows and operational
+`samples/full-system-v1-surface/` families beyond `syntax/` remain planned for
+later packages.
 
 ## current decision
 
@@ -83,7 +83,7 @@ P-SURF-99 audit
 
 ## current validation
 
-For this docs/spec rebaseline:
+For the current parser floor:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -91,6 +91,9 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
+cargo test -p mir-ast --test surface_mir_parser -- --nocapture
+python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_authoring_check.py check-all --format json
 ```
 
 Compatibility anchors when environment permits:
@@ -101,20 +104,21 @@ python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ```
 
-## planned commands
+## parser commands
 
-These commands are not runnable until later `P-SURF-*` packages create them:
+These commands are runnable for the P-SURF-01 parser floor:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
 python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 ```
 
 ## non-claims
 
 - no final public grammar.
-- no Surface parser/runtime/helper implementation yet.
+- no Surface runtime/helper implementation beyond the parser floor yet.
 - no final ABI / SDK.
 - no production WAN/federation.
 - no distributed durable save-load R3/R4.

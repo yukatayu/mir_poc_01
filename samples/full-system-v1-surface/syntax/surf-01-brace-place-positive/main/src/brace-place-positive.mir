@@ -1,0 +1,7 @@
+module Surface.Syntax.BracePlacePositive
+
+place S
+
+S {
+  state player[p: Participant]: Player
+}

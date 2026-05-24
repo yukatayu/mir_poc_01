@@ -1,0 +1,15 @@
+module Surface.Syntax.RoleInstancePositive
+
+role BrowserClient {
+  supports renderer.pose_v1
+}
+
+principal self
+place World
+place WorldAdmission
+
+BrowserClient[self] {
+  when start {
+    join World as BrowserClient via WorldAdmission
+  }
+}

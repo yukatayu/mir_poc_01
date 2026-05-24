@@ -1,0 +1,6 @@
+module Surface.Syntax.UndeclaredRoleNegative
+
+Unknown[self] {
+  when start {
+  }
+}

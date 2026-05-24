@@ -1,0 +1,5 @@
+module Surface.Syntax.UndeclaredPlaceNegative
+
+Unknown {
+  state player[p: Participant]: Player
+}

@@ -1,0 +1,12 @@
+module Surface.Syntax.RecordLiteralPositive
+
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    init Player { hp: 1 }
+}

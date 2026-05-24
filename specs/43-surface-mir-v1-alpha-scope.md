@@ -60,7 +60,7 @@ This is near product-style alpha flow, not final production.
 | Package | Role | Close condition |
 |---|---|---|
 | `P-SURF-00B` | brace syntax / source-authority docs rebaseline | specs/plans/snapshot docs/guides/report updated; validators pass |
-| `P-SURF-01` | Surface brace parser | `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks parse; bare role blocks and `S[ ... ]` reject with diagnostic |
+| `P-SURF-01` | Surface brace parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks parse; bare role blocks and `S[ ... ]` reject with diagnostic |
 | `P-SURF-02` | indexed-state semantics | `S { state player[p: Participant]: Player }` lowers/checks as S-owned map |
 | `P-SURF-03` | Surface-to-Core elaboration | cross-locus read/write generate Core IR edges |
 | `P-SURF-04` | auto communication | MessageEnvelope / publish / observe / failure-row obligations generated and visible |
@@ -72,10 +72,11 @@ This is near product-style alpha flow, not final production.
 
 ## planned sample root family
 
-Planned root:
+Parser evidence root:
 
 ```text
 samples/full-system-v1-surface/
+  syntax/
   world-core/
   membership-chat/
   sugoroku-world/
@@ -86,9 +87,9 @@ samples/full-system-v1-surface/
   provider/
 ```
 
-This docs-only package does not create runnable roots. Until P-SURF
-implementation packages actualize them, the root family is planned and must not
-be marked workflow-ready.
+`syntax/` is P-SURF-01 parser evidence only. Other families remain planned until
+later P-SURF implementation packages actualize them, and the root family must
+not be marked workflow-ready runtime evidence from parser rows alone.
 
 ## required sample matrix
 
@@ -99,6 +100,11 @@ Surface syntax:
 - `SURF-03`: record literal accepted.
 - `SURF-04`: ambiguous brace construct rejected.
 - `SURF-05`: role instance block accepted.
+- `SURF-06`: undeclared place block head rejected.
+- `SURF-07`: undeclared role-instance head rejected.
+- `SURF-08`: invalid role-instance binder rejected.
+- `SURF-09`: role named `S` remains a role-instance head under namespace
+  resolution.
 
 Indexed state:
 
@@ -149,11 +155,12 @@ python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ```
 
-Future Surface anchors:
+Current parser-floor Surface anchors:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
 python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 ```
 

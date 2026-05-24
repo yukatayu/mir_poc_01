@@ -1,0 +1,11 @@
+module Surface.Syntax.AmbiguousBraceNegative
+
+place Player
+
+record Player {
+  hp: Int64,
+}
+
+Player {
+  state player[p: Participant]: Player
+}

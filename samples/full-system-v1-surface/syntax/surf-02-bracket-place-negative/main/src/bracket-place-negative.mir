@@ -1,0 +1,5 @@
+module Surface.Syntax.BracketPlaceNegative
+
+S[
+  state player[p: Participant]: Player
+]

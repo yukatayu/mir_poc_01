@@ -1,0 +1,13 @@
+{
+  "accepted": false,
+  "module_path": null,
+  "diagnostic_codes": ["undeclared_role_instance_head"],
+  "role_names": [],
+  "place_names": [],
+  "record_names": [],
+  "place_block_refs": [],
+  "state_summaries": [],
+  "role_instance_summaries": [],
+  "canonical_place_scope_syntax": "S { ... }",
+  "final_public_grammar_frozen": false
+}

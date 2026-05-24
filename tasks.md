@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-24 14:00 JST
+最終更新: 2026-05-24 15:38 JST
 
 ## document role
 
@@ -15,27 +15,27 @@ and is not append-only history.
 
 ## current promoted package
 
-Current promoted package after `P-SURF-00B` closeout:
+Current promoted package after `P-SURF-01` closeout:
 
 ```text
-P-SURF-01 surface brace parser
+P-SURF-02 indexed-state semantics
 ```
 
 Purpose:
 
-- implement canonical Surface Mir place block syntax `S { ... }` and
-  role-instance block syntax `Role[instance] { ... }`.
-- reject `S[ ... ]` with a clear diagnostic; do not add sugar.
-- preserve `[]` for arrays, maps, role-instance heads, and indexed state access.
-- keep `.mir` source files as semantic source authority and `package.mir.json`
-  as alpha artifact.
-- keep generated communication visible in Core IR / devtools rather than hidden.
+- implement semantic checks for `S { state player[p: Participant]: Player }`.
+- record owner = enclosing place block, keyspace = declared key type, and value
+  type = declared state value.
+- keep key lookup separate from authority: a Participant key does not grant
+  write/read capability.
+- add representative positive and negative rows for owner/keyspace/access/stale
+  semantics while preserving the parser floor from `P-SURF-01`.
 
 ## ordered self-driven packages
 
 | Order | Package | Objective | Close condition |
 |---:|---|---|---|
-| 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | positive/negative parser rows and diagnostics pass |
+| 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | closed with `SURF-01..09`, parser test, sample helper, authoring check, and release check |
 | 2 | `P-SURF-02 indexed state` | represent `S { state player[p: Participant]: Player }` as S-owned indexed state | owner/keyspace/access/stale-key rows pass |
 | 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | Core IR source spans and obligations are visible |
 | 4 | `P-SURF-04 auto communication` | generate MessageEnvelope / publish / observe / failure-row obligations | generated edges are explicit and private field auto-publish is blocked |
@@ -98,7 +98,8 @@ Purpose:
 - Product Alpha line remains bounded alpha workflow, not final product.
 - Operational suite remains bounded local/Docker workflow, not production shared-space catalog completion.
 - Full System V1 release-check closure remains bounded local/source-first evidence, not final grammar / final ABI / final server-client compiler.
-- `samples/full-system-v1-surface/` is planned only until a Surface implementation package creates it.
+- `samples/full-system-v1-surface/syntax/` is P-SURF-01 parser evidence only,
+  not a Surface runtime or operational suite.
 - `S[ ... ]` remains rejected and must not be introduced as a compatibility sugar.
 - `package.mir.json` remains alpha compatibility / package artifact, not semantic source authority.
 - Direct LLVM/native backend remains later than Surface parser, elaboration, typed IR, projection IR, and preservation tests.

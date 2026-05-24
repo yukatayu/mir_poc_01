@@ -1,0 +1,8 @@
+module Surface.Syntax.RoleNamedSPositive
+
+role S
+
+S[self] {
+  when start {
+  }
+}

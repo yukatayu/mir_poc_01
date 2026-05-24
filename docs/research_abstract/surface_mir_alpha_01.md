@@ -2,8 +2,8 @@
 
 ## summary
 
-`P-SURF-00B` rebaselines the next promoted line around Surface Mir as the
-user-facing source layer.
+`P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
+user-facing source layer. `P-SURF-01` adds the first parser floor.
 
 The central syntax decision is:
 
@@ -47,25 +47,41 @@ heads, and indexed state access.
 - `plan/67-source-patch-hotplug-roadmap.md`
 - `plan/68-surface-full-system-v1-roadmap.md`
 
+## current parser evidence
+
+- `crates/mir-ast::surface_alpha`
+- `crates/mir-ast/examples/surface_mir_alpha_parse.rs`
+- `samples/full-system-v1-surface/syntax/`
+- `scripts/surface_mir_samples.py`
+
+Actualized rows:
+
+- `SURF-01`: `S { ... }` accepted.
+- `SURF-02`: `S[ ... ]` rejected with `bracket_place_scope_not_supported`.
+- `SURF-03`: record literal accepted.
+- `SURF-04`: ambiguous brace construct rejected.
+- `SURF-05`: role-instance block accepted.
+
 ## next package
 
 ```text
-P-SURF-01 surface brace parser
+P-SURF-02 indexed-state semantics
 ```
 
 Close condition:
 
-- `S { ... }` parses.
-- `S[ ... ]` rejects with a clear diagnostic.
-- record literal and place block ambiguity is resolved through namespace and
-  context.
-- role-instance block syntax is represented without treating arbitrary indexed
-  expressions as place scopes.
+- owner/keyspace/value type semantics for `state player[p: Participant]:
+  Player`.
+- key access does not grant authority.
+- stale/leave access rejection row exists.
+- parser floor remains compatible with `SURF-01..09`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
-- Surface parser/runtime/helper implementation is not present yet.
-- `samples/full-system-v1-surface/` is planned, not workflow-ready.
+- Surface runtime/helper implementation beyond the parser floor is not present
+  yet.
+- `samples/full-system-v1-surface/syntax/` is parser evidence, not
+  workflow-ready runtime evidence.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

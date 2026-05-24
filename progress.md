@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 14:00 JST
+最終更新: 2026-05-24 15:38 JST
 
 ## document role
 
@@ -48,12 +48,13 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-00B surface-mir-brace-source-authority-rebaseline`.
-- Current status after this snapshot: Surface Mir docs/spec/roadmap authority is
-  rebaselined around canonical `S { ... }` place scope. `S[ ... ]` is rejected
-  and is not sugar. Surface Mir is user-facing; Core Mir remains explicit
-  elaboration target.
-- Next promoted package after this closeout: `P-SURF-01 surface brace parser`.
+- Current package: `P-SURF-02 indexed-state semantics`.
+- Current status after this snapshot: `P-SURF-01` closed a narrow alpha parser
+  lane in `crates/mir-ast::surface_alpha`, with canonical `S { ... }` place
+  blocks, `Role[instance] { ... }` role-instance blocks, indexed state
+  declaration parsing, record literal disambiguation, and expected rejection of
+  `S[ ... ]` via `bracket_place_scope_not_supported`.
+- Next gap: implement indexed-state owner/keyspace/access/stale semantics.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -62,8 +63,9 @@ semantic source authority.
   state keyed by participants or later constrained keyspaces, role claims are
   not authority, source patches go through parse/typecheck/elaborate/admit and
   activation cut, and generated communication / publish / observe must be
-  visible in Core IR and devtools. This is docs/spec rebaseline only; no Surface
-  parser/runtime/helper claim is made yet.
+  visible in Core IR and devtools. `P-SURF-01` is parser/helper/sample evidence
+  only; it does not claim indexed-state authority semantics, Surface-to-Core
+  elaboration, runtime execution, role admission, or source patch activation.
 
 ## milestone map
 
@@ -72,9 +74,9 @@ semantic source authority.
 | `P-A1` | Product alpha release candidate | `product-alpha-ready` | `mirrorea-alpha`, `package.mir.json`, product release check | keep as alpha compatibility floor |
 | `P-OPS` | Operational product suite | `workflow-ready` | six bounded Product Alpha operational roots and helper checks | final catalog breadth remains user decision |
 | `P-FSV1` | Full System V1 bounded source-first line | `workflow-ready release-check lane; audit closed` | `specs/33..38`, `plan/58..63`, `scripts/full_system_v1_release_check.py` | later public/broader reopen only |
-| `P-SURF-00B` | Surface Mir brace/source-authority docs rebaseline | `boundary-fixed` | `specs/39..43`, `plan/64..68`, snapshot docs and guides | run validation / commit / push |
-| `P-SURF-01` | Surface brace parser | `next promoted` | planned `SURF-01..05` rows | implement `S { ... }`, reject `S[ ... ]`, preserve record literal disambiguation |
-| `P-SURF-02` | indexed state | `planned` | `specs/40`, `plan/65` | implement owner/keyspace/access/stale semantics |
+| `P-SURF-00B` | Surface Mir brace/source-authority docs rebaseline | `closed` | `specs/39..43`, `plan/64..68`, snapshot docs and guides | implementation line opened |
+| `P-SURF-01` | Surface brace parser | `evidence-closed parser lane` | `crates/mir-ast::surface_alpha`, `surface_mir_alpha_parse`, `samples/full-system-v1-surface/syntax/`, `scripts/surface_mir_samples.py` | keep non-final grammar; feed parser AST into indexed-state semantics |
+| `P-SURF-02` | indexed state | `next promoted` | `specs/40`, `plan/65`, `IDX-01..04` planned rows | implement owner/keyspace/access/stale semantics |
 | `P-SURF-03` | Surface-to-Core elaboration | `planned` | `specs/39`, `plan/64` | generate Core IR for cross-locus read/write |
 | `P-SURF-04` | auto communication / publish / observe | `planned` | `specs/39`, `plan/64` | generate MessageEnvelope / publish / observe and failure rows visibly |
 | `P-SURF-05` | role admission | `planned` | `specs/41`, `plan/66` | implement admission, grant, stale rejection, spoof rejection |
@@ -119,20 +121,23 @@ Next gap:
 
 ### Mir Language line
 
-Status: `first-floor-evidence` for Full System V1, `boundary-fixed` for Surface
-Mir alpha.
+Status: `first-floor-evidence` for Full System V1, `parser-floor-evidence` for
+Surface Mir alpha.
 
 Current evidence:
 
 - Full System V1 parser/checker/runtime/projection/provider/release-check line
   remains closed through final audit.
-- New Surface Mir normative docs are `specs/39..43`.
-- New Surface Mir repository memory is `plan/64..68`.
+- Surface Mir normative docs are `specs/39..43`.
+- Surface Mir repository memory is `plan/64..68`.
+- `crates/mir-ast::surface_alpha` parses canonical `S { ... }`, role-instance
+  blocks, `state`, `when`, `join`, record literals, and expected syntax
+  rejections.
 
 Next gap:
 
-- `P-SURF-01` parser support for `S { ... }`, role-instance blocks, `state`,
-  and `when`, with `S[ ... ]` rejected.
+- `P-SURF-02` indexed-state semantic checks: owner = place block, keyspace =
+  declared key type, key is not authority, stale/leave access is rejected.
 
 ### PoseGraph line
 
@@ -178,7 +183,7 @@ Next gap:
 
 ### Surface Mir line
 
-Status: `boundary-fixed`
+Status: `parser-floor-evidence`
 
 Current evidence:
 
@@ -188,14 +193,17 @@ Current evidence:
 - `specs/42-source-patch-hotplug-semantics.md`
 - `specs/43-surface-mir-v1-alpha-scope.md`
 - `plan/64..68`
+- `crates/mir-ast/src/surface_alpha.rs`
+- `samples/full-system-v1-surface/syntax/matrix.json`
+- `scripts/surface_mir_samples.py`
 
 Next gap:
 
-- implement parser and sample helper rows in `P-SURF-01`.
+- implement indexed-state owner/keyspace/type/access semantics in `P-SURF-02`.
 
 ## validation floor
 
-Required for the current docs rebaseline:
+Required for the current Surface package close:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -203,6 +211,11 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 cargo fmt --check
 git diff --check
+cargo test -p mir-ast --test surface_mir_parser -- --nocapture
+python3 -m unittest scripts.tests.test_surface_mir_samples scripts.tests.test_surface_mir_release_check
+python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_authoring_check.py check-all --format json
+python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 ```
 
 Compatibility anchors when environment permits:
@@ -213,17 +226,12 @@ python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ```
 
-Future Surface anchors:
-
-```bash
-python3 scripts/surface_mir_samples.py check-all --format json
-python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
-```
-
 ## non-claims
 
 - No final public grammar completion.
-- No Surface Mir parser/runtime/helper implementation yet.
+- No Surface-to-Core elaboration implementation yet.
+- No indexed-state runtime/authority semantics implementation yet.
+- No Surface Mir runtime execution or source patch hot-plug implementation yet.
 - No Rust-level language completion.
 - No LLVM/native codegen completion.
 - No final server/client split compiler completion.
@@ -246,8 +254,7 @@ User decision items:
 
 Research-discovery items:
 
-- exact Surface AST / parser shape for `S { ... }` and role-instance blocks.
-- namespace/context disambiguation diagnostics for place block vs record literal.
+- indexed-state owner/keyspace/access/stale runtime carrier.
 - Surface-to-Core obligation carrier shape.
 - generated failure-row completion for auto communication.
 - indexed-state tombstone / compaction runtime carrier.
@@ -258,22 +265,22 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | Surface docs/spec rebaseline in progress | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | Surface parser floor docs/report sync closing; P-SURF-02 handoff current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | next parser work begins at `P-SURF-01` | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | Surface sample root is planned, not created | heavy | 後段依存 |
+| `Macro 3` | compile-ready minimal actualization | parser floor closed; indexed-state semantics next | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | `syntax/` parser evidence exists; operational roots remain later | heavy | 後段依存 |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
-| `Macro 7` | toolchain / backend / developer surface | Surface CLI commands are planned; product alpha CLI remains compatibility floor | heavy | 着手可能 |
+| `Macro 7` | toolchain / backend / developer surface | Surface parser helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku roots are planned | heavy | 後段依存 |
 
 ## feature maturity rows
 
 | Feature | Status | Reading | Actionability |
 |---|---|---|---|
-| Surface Mir brace syntax | `boundary-fixed` | canonical `S { ... }`; no `S[ ... ]` sugar | 着手可能 |
-| textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface syntax extension planned | 着手可能 |
+| Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
+| textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
 | Surface-to-Core elaboration | `planned` | spec target exists, implementation pending | 着手可能 |
 | indexed state | `boundary-fixed` | S-owned partial map; key is not authority | 着手可能 |
@@ -286,5 +293,7 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-05-24 15:38 JST
+  `P-SURF-01` で Surface Mir alpha parser / sample helper floor を actualize し、`SURF-01..09` の positive/negative rows、`surface_mir_alpha_parse` example、authoring check、release-check check-all を同期した。current promoted package は `P-SURF-02 indexed-state semantics`。
 - 2026-05-24 14:00 JST
   `P-SURF-00B` で Surface Mir place-scope syntax を canonical `S { ... }` に rebaseline し、`S[ ... ]` を sugar としても採用しない方針、`.mir` source authority、indexed state owner/keyspace split、role admission/capability grant split、source patch hot-plug pipeline、Surface package sequenceを docs/spec/plan snapshot に固定した。検証結果と commit/push status は report を正本にする。

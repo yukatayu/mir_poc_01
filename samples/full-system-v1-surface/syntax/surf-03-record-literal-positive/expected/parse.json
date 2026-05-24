@@ -1,0 +1,23 @@
+{
+  "accepted": true,
+  "module_path": "Surface.Syntax.RecordLiteralPositive",
+  "diagnostic_codes": [],
+  "role_names": [],
+  "place_names": ["S"],
+  "record_names": ["Player"],
+  "place_block_refs": ["S"],
+  "state_summaries": [
+    {
+      "state_name": "player",
+      "owner_place": "S",
+      "index_name": "p",
+      "key_type": "Participant",
+      "value_type": "Player",
+      "init_kind": "RecordLiteral",
+      "visible_fields": []
+    }
+  ],
+  "role_instance_summaries": [],
+  "canonical_place_scope_syntax": "S { ... }",
+  "final_public_grammar_frozen": false
+}
