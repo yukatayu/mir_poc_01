@@ -1,10 +1,11 @@
 # tasks
 
-最終更新: 2026-05-22 19:28 JST
+最終更新: 2026-05-24 14:00 JST
 
 ## document role
 
-This document is the repo-wide **current task map**. It is not normative source and is not append-only history.
+This document is the repo-wide **current task map**. It is not normative source
+and is not append-only history.
 
 - Normative source: `specs/`
 - Repository memory: `plan/`
@@ -14,84 +15,90 @@ This document is the repo-wide **current task map**. It is not normative source 
 
 ## current promoted package
 
-Current promoted package:
+Current promoted package after `P-SURF-00B` closeout:
 
 ```text
-none
-```
-
-Next promoted package after this closeout:
-
-```text
-none; Full System V1 chain is closed through P-FSV1-99
+P-SURF-01 surface brace parser
 ```
 
 Purpose:
 
-- keep the closed Full System V1 snapshot truthful after `P-FSV1-99 final audit`.
-- preserve `P-FSV1-03` release-check outputs and `P-FSV1-99` final validation/report cleanup as closed evidence.
-- preserve the already-closed 12 executable source-first operational rows across `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` without widening claims past bounded local evidence.
-- keep `package.mir.json` as alpha compatibility/package artifact while source authority stays on `.mir`.
+- implement canonical Surface Mir place block syntax `S { ... }` and
+  role-instance block syntax `Role[instance] { ... }`.
+- reject `S[ ... ]` with a clear diagnostic; do not add sugar.
+- preserve `[]` for arrays, maps, role-instance heads, and indexed state access.
+- keep `.mir` source files as semantic source authority and `package.mir.json`
+  as alpha artifact.
+- keep generated communication visible in Core IR / devtools rather than hidden.
 
 ## ordered self-driven packages
 
-| Order | Package | Macro / stage | Goal | Close condition | Rough estimate |
-|---:|---|---|---|---|---|
-| 1 | none | closed snapshot | later reopen only | explicit promotion required before reopening the chain | n/a |
+| Order | Package | Objective | Close condition |
+|---:|---|---|---|
+| 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | positive/negative parser rows and diagnostics pass |
+| 2 | `P-SURF-02 indexed state` | represent `S { state player[p: Participant]: Player }` as S-owned indexed state | owner/keyspace/access/stale-key rows pass |
+| 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | Core IR source spans and obligations are visible |
+| 4 | `P-SURF-04 auto communication` | generate MessageEnvelope / publish / observe / failure-row obligations | generated edges are explicit and private field auto-publish is blocked |
+| 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | role claim does not grant authority; grants and stale rejects are observable |
+| 6 | `P-SURF-06 source patch hot-plug` | implement parse/typecheck/elaborate/admit/activation-cut patch pipeline | rejected patches do not mutate runtime; accepted patch emits activation cut |
+| 7 | `P-SURF-07 source operational suite` | create Surface source WorldCore / MembershipChat / Sugoroku / related roots | roots have positive/negative evidence and remain distinct from Product Alpha roots |
+| 8 | `P-SURF-08 devtools and diagnostics` | show Surface source, Core IR, generated communication, indexed state, admission, patch lifecycle | observer-safe panels and diagnostics preserve source/Core links |
+| 9 | `P-SURF-99 final audit` | rerun validation and compatibility anchors | full validation, docs/report cleanup, non-claim audit |
 
 ## self-driven macro phase reading
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator discipline | self-driven through every package close |
-| `Macro 1` | semantics and invariant boundary | self-driven for source/typed IR/cut/PoseGraph wording; user gates only for final public commitments |
-| `Macro 3` | compile-ready minimal actualization | `P-MIR-01..04`、`P-POSE-03..04`、`P-PROJ-02..04`、`P-ENG-02..03`、`P-FSV1-01..03`、`P-FSV1-99` closed; no current promoted package |
-| `Macro 6` | distributed fabric / runtime evolution | local/Docker split can be self-driven; WAN/federation remains user decision |
-| `Macro 7` | projection/backend/provider/developer surface | self-driven for bounded alpha evidence; final ABI/SDK/distribution remains user decision |
-| `Macro 8` | domain/application realization | source-first operational samples can be self-driven after language/runtime base |
+| `Macro 0` | docs / reports / validator discipline | self-driven through every Surface package close |
+| `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
+| `Macro 3` | compile-ready minimal actualization | `P-SURF-01..06` can proceed package-by-package with focused rows |
+| `Macro 4` | executable sample expansion | `P-SURF-07` creates roots only after parser/elaboration/indexed-state floors exist |
+| `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha can be self-driven; WAN/federation remains user decision |
+| `Macro 7` | toolchain / backend / developer surface | Surface CLI/devtools can be self-driven within alpha scope |
+| `Macro 8` | domain/application realization | Surface operational suite can be self-driven after language/runtime base |
 
 ## user decision gates
 
 | Gate | Affects | Main options | Current recommendation |
 |---|---|---|---|
-| final public grammar | final language/API | freeze alpha grammar / revise before public / keep package compatibility longer | do not freeze in Full V1; keep alpha grammar explicit |
-| final ABI / SDK | external developers | Rust library ABI / CLI-only / hosted API / engine SDK | defer until source/typed IR/projection evidence exists |
-| broader distribution | product delivery | developer-built bundle / release archive / installer / hosted service | keep current developer-built binary + generated host bundle until user choice |
-| final shared-space catalog breadth | product scope | bounded showcase / broader room catalog / Reversed Library path | keep bounded showcase; decide final catalog separately |
-| production WAN/federation | runtime/network | local/Docker only / WAN federation / hosted fabric | keep out of Full V1 unless explicitly promoted |
+| final public grammar | final language/API | freeze Surface alpha / revise before public / keep package compatibility longer | do not freeze in Surface alpha; keep grammar explicitly alpha |
+| final ABI / SDK | external developers | Rust library ABI / CLI-only / hosted API / engine SDK | defer until Surface parser/elaboration/runtime evidence exists |
+| broader distribution | product delivery | developer-built bundle / release archive / installer / hosted service | keep current developer-built binary + generated host bundle |
+| final shared-space catalog breadth | product scope | bounded showcase / broader room catalog / Reversed Library path | keep bounded showcase; decide separately |
+| production WAN/federation | runtime/network | local/Docker only / WAN federation / hosted fabric | keep out of Surface alpha unless explicitly promoted |
 | distributed durable save/load R3/R4 | persistence | R0/R2 only / R3 durable / R4 distributed replay | keep R3/R4 later |
-| native/WASM execution | provider boundary | disabled/inventory / sandboxed WASM / bounded native | keep default disabled/inventory; current bounded evidence admits viewer-diagnostic and WASM inventory-only rows only |
+| native/WASM execution | provider boundary | disabled/inventory / sandboxed WASM / bounded native | keep default disabled/inventory |
 | final engine adapter ABI | engine/provider line | internal provider manifest / public SDK / engine-specific ABI | defer; no Unity/Unreal/VRM compatibility claim |
 
 ## research discovery items
 
 | Item | Impact | Main options | Current recommendation |
 |---|---|---|---|
-| alpha grammar shape | later reopen only | minimal C-like syntax / reuse current companion notation / package-derived migration syntax | keep the current minimal parser surface and widen only when a later non-audit package proves it necessary |
-| typed IR representation | `P-MIR-02` | crate-local IR / new `mir-ir` crate / reuse existing product schema structs | start crate-local and split only if coupling becomes too high |
-| interpreter rejection model | `P-MIR-03` | static reject / runtime reject / residual obligation | keep explicit static vs runtime split and failure row `ρ` |
-| projection IR granularity | later reopen only | summary manifest / typed projection IR / deployment planner | typed projection IR is actualized; preserve that floor and keep planner later |
-| packet/FFI payload schema granularity | later reopen only | payload-shape-only / effect-tag-rich schema / full transport protocol | keep the current payload-shape plus effect/failure/capability/authority preservation floor and defer transport semantics |
-| local role-split carrier shape | later reopen only | same-binary local roles / paired local processes / Docker-pinned manifest roles | same-binary manifest-driven local roles are actualized; keep the accepted release-check above that floor |
-| renderer/provider pose snapshot seam | later reopen only | preserve typed pose snapshot surface / add later planner normalization | bounded renderer pose delivery is actualized; preserve non-semantic-owner discipline while audit consumes the same seam |
-| PoseGraph/projection preservation seam | later reopen only | project raw runtime state / preserve typed boundary manifests / add later planner normalization | preserve typed manifests and boundary evidence first, then close the audit without widening semantic ownership |
+| brace disambiguation | `P-SURF-01` | namespace-only / context-only / combined namespace + context | use combined namespace + context with ambiguous diagnostic |
+| role-instance block parse | `P-SURF-01` | role path only / arbitrary indexed expression block | alpha accepts declared role path only |
+| indexed-state runtime carrier | `P-SURF-02` | plain map / membership-aware partial map / distributed table | use membership-aware owner-locus partial map first |
+| elaboration IR shape | `P-SURF-03` | direct Core transitions / intermediate elaboration report / both | produce Core IR plus source-linked elaboration report |
+| auto publish policy | `P-SURF-04` | publish all writes / visible-fields-only / explicit-only | visible-fields-only; private field blocked |
+| admission witness metadata | `P-SURF-05` | principal only / role + principal / optional package/runtime hash | role + principal required; package/runtime hash optional report metadata |
+| source patch compatibility | `P-SURF-06` | check-only / check+diff / full migration planner | check+Core diff+activation cut first; migration planner later |
+| Surface sample root shape | `P-SURF-07` | reuse `full-system-v1/` / new `full-system-v1-surface/` / product-alpha root | use planned `samples/full-system-v1-surface/` to avoid mixing roots |
 
 ## maintenance tasks
 
 | Task | Objective | Validation | Stop line |
 |---|---|---|---|
 | docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
-| alpha/product regression audit | preserve Product Alpha and operational suite while Full V1 advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
-| sample taxonomy audit | keep active, planned, generated, archive roots distinct | source hierarchy and relevant helper checks | `samples/full-system-v1/computational/`、`world-core/`、`membership-chat/`、`sugoroku-world/`、`portal-worldlink/`、`two-shard-hard-boundary/`、`gradient-observation/`、`avatar-pose/`、`projection/`、`server-client/`、`provider-adapter/` remain evidence-closed as roots, while `scripts/full_system_v1_release_check.py` now provides the line-level bounded release-check workflow |
-| validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence, not semantic correctness |
+| product compatibility audit | preserve Product Alpha and operational suite while Surface advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
+| sample taxonomy audit | keep Surface planned roots distinct from active roots | source hierarchy and relevant helper checks | do not create or mark `samples/full-system-v1-surface/` workflow-ready until implementation rows exist |
+| validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence and heading shape, not semantic correctness |
 | report discipline | write a new report for every non-trivial package | `python3 scripts/validate_docs.py` | never overwrite previous report |
 
 ## non-promoted references
 
 - Product Alpha line remains bounded alpha workflow, not final product.
 - Operational suite remains bounded local/Docker workflow, not production shared-space catalog completion.
-- Existing `samples/product-alpha1/computational/` rows remain first-floor evidence, not Rust-level language completion.
-- Existing `samples/product-alpha1/posegraph/` rows remain helper evidence, while `samples/full-system-v1/avatar-pose/` now carries bounded source-first runtime PoseGraph plus pose save/devtools evidence; distributed durable pose save/load and final devtools family remain later.
-- `samples/product-alpha1/projection/` and `samples/product-alpha1/engine-adapter/` remain inventory-only comparison evidence, while `samples/full-system-v1/projection/` carries bounded source-first projection IR plus boundary-schema evidence, `samples/full-system-v1/server-client/` carries bounded same-binary local role-run evidence, and `samples/full-system-v1/provider-adapter/` now carries bounded provider-admission plus renderer-pose-backend evidence.
-- `P-FSV1-03` release-check closure is bounded local evidence with static bundle/viewer/report outputs; it is not a final public viewer/devtools family, final installer/archive, or final public product workflow.
-- Direct LLVM/native backend remains later than typed IR, projection IR, and preservation tests.
+- Full System V1 release-check closure remains bounded local/source-first evidence, not final grammar / final ABI / final server-client compiler.
+- `samples/full-system-v1-surface/` is planned only until a Surface implementation package creates it.
+- `S[ ... ]` remains rejected and must not be introduced as a compatibility sugar.
+- `package.mir.json` remains alpha compatibility / package artifact, not semantic source authority.
+- Direct LLVM/native backend remains later than Surface parser, elaboration, typed IR, projection IR, and preservation tests.

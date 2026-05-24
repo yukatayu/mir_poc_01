@@ -42,6 +42,7 @@
   - `mir_computational_core_01.md` は、Product Alpha-1 operational floor を保ちながら current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を reader-facing に短く読むための summary である。
   - `autonomous_execution_01.md` は、`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の docs/scaffold front-half、implementation half、user-spec-required gate の隔離、validation / report / commit cadence を読むための summary である。
   - `full_system_v1_roadmap_01.md` は、`P-FS-00` Full System V1 roadmap rebaseline、source-first target、`FS-00..FS-11`、次 package `P-MIR-01`、non-claims を reader-facing に短く読むための summary である。
+  - `surface_mir_alpha_01.md` は、`P-SURF-00B` Surface Mir brace/source-authority rebaseline、canonical `S { ... }`、no `S[ ... ]` sugar、indexed state、role admission、source patch hot-plug、next package `P-SURF-01` を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -64,6 +65,8 @@
   - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-02` bounded helper evidence、helper matrix、accepted/violation/planned splitを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - `full_system_v1_roadmap_01.md` は、Full System V1 source-first roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む landing page である。
+  - `surface_mir_alpha_01.md` は、Surface Mir alpha source-authority roadmap、canonical `S { ... }` place-scope syntax、planned Surface commands、stop lines、次 package `P-SURF-01` を読む landing page である。
+  - `source_patch_hotplug_01.md` は、Surface source patch hot-plug を direct eval ではなく parse / typecheck / elaborate / admit / activation_cut pipeline として読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`
   - 2026-04-17 時点の current explanation delta であり、theory-lab line を
@@ -271,6 +274,31 @@
   - projection IR / packet and FFI schemas / local server-client split の repository-memory roadmap を置く。
 - `plan/63-engine-provider-roadmap.md`
   - provider admission / renderer pose backend demo / later sandboxed WASM/native candidate の repository-memory roadmap を置く。
+- `specs/39-surface-mir-placement-elaboration.md`
+  - Surface Mir placement / elaboration の規範境界を置く。
+  - canonical place-scope syntax を `S { ... }` に固定し、`S[ ... ]` を sugar としても採用しないこと、Surface-to-Core elaboration、generated communication / publish / observe の Core/devtools transparency を整理する。
+- `specs/40-indexed-state-semantics.md`
+  - `S { state player[p: Participant]: Player }` を owner-locus-owned indexed state として読む規範境界を置く。
+  - key は owner/authority ではなく、join/leave/tombstone/compaction/save-load constraints を整理する。
+- `specs/41-role-admission-and-capability-grant.md`
+  - role claim / admission / membership / capability grant の規範境界を置く。
+  - role claim は authority ではなく、authority は admission locus からの capability grant であることを固定する。
+- `specs/42-source-patch-hotplug-semantics.md`
+  - Surface source patch hot-plug の規範境界を置く。
+  - direct eval を禁止し、parse / typecheck / elaborate / compatibility / admit / activation_cut pipeline を固定する。
+- `specs/43-surface-mir-v1-alpha-scope.md`
+  - Surface Mir V1 alpha の docs-first scope を置く。
+  - `.mir` files を semantic source authority とし、`package.mir.json` を alpha artifact に限定し、`P-SURF-00B..99` と non-claims を固定する。
+- `plan/64-surface-mir-placement-roadmap.md`
+  - Surface placement / elaboration の repository-memory roadmap を置く。
+- `plan/65-indexed-state-roadmap.md`
+  - indexed state の repository-memory roadmap を置く。
+- `plan/66-role-admission-roadmap.md`
+  - role admission / capability grant の repository-memory roadmap を置く。
+- `plan/67-source-patch-hotplug-roadmap.md`
+  - source patch hot-plug の repository-memory roadmap を置く。
+- `plan/68-surface-full-system-v1-roadmap.md`
+  - Surface Mir alpha package order、planned root family、validation anchors、stop lines を整理する。
 
 ## 規範的な読書順
 
@@ -296,6 +324,7 @@
 15. Mir-owned computation / PoseGraph / projection-backend / engine-adapter boundary を扱う場合は `28-mir-computational-core.md`、`29-transform-posegraph-semantics.md`、`30-projection-and-backend-boundary.md`、`31-engine-wasm-ffi-adapter-boundary.md` も読む
 16. autonomous execution / completion cadence を扱う場合は `32-autonomous-execution-and-completion-contract.md` も読む
 17. Full System V1 / textual Mir / typed IR / projection IR / provider admission を扱う場合は `33-full-system-v1-scope.md`、`34-textual-mir-alpha-grammar.md`、`35-mir-typed-ir-and-interpreter.md`、`36-projection-ir-and-boundary-preservation.md`、`37-posegraph-runtime-semantics.md`、`38-engine-provider-admission.md` も読む
+18. Surface Mir / indexed state / role admission / source patch hot-plug を扱う場合は `39-surface-mir-placement-elaboration.md`、`40-indexed-state-semantics.md`、`41-role-admission-and-capability-grant.md`、`42-source-patch-hotplug-semantics.md`、`43-surface-mir-v1-alpha-scope.md` も読む
 
 ## 例示文書
 

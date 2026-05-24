@@ -46,6 +46,13 @@
   - `samples/full-system-v1/projection/` is `FS-06` projection IR evidence only; `samples/full-system-v1/server-client/` is the separate `FS-07` local server/client role-run root
   - `samples/full-system-v1/provider-adapter/` is the separate `FS-08` bounded provider-admission plus renderer-pose-backend root
   - do not mark the whole root workflow-ready until later packages add broader source-first operational families beyond the current bounded release-check closure
+- `full-system-v1-surface/`
+  planned Surface Mir source-authority sample root under `specs/39..43` / `plan/64..68`
+  - this root is not created by `P-SURF-00B`
+  - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world/`, `role-admission/`, `patch-hotplug/`, `posegraph/`, `projection/`, and `provider/`
+  - the root must remain planned-only until `P-SURF-*` implementation packages add runnable rows and helper validation
+  - canonical place-scope syntax for future source samples is `S { ... }`; `S[ ... ]` is rejected and is not a compatibility sugar
+  - `package.mir.json` remains alpha artifact / compatibility output, not semantic source authority
 - planned future product-alpha1 semantic roots
   - `samples/product-alpha1/computational/` is the Mir-owned computation line under `specs/28` / `plan/53`
     - `python3 scripts/mir_computational_samples.py check-all --format json` validates one direct `add_one` runtime row, five accepted helper rows, five expected runtime rejection rows, one direct host-I/O boundary accepted row, and three expected `check` rejections
@@ -202,6 +209,21 @@ cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 ```
 
 `scripts/full_system_v1_release_check.py` is the bounded line-level closeout command. It reruns the validation floor, focused Cargo tests, source-first helpers, Product Alpha compatibility anchors, representative Full V1 CLI surfaces, and writes per-command JSON reports plus static `bundle.json` / `index.html` viewer outputs.
+
+## Surface Mir planned commands
+
+Current `P-SURF-00B` is docs/spec rebaseline only. The following commands are
+planned anchors and must not be reported as runnable until later packages add
+the scripts / CLI tests:
+
+```bash
+python3 scripts/surface_mir_samples.py matrix --format json
+python3 scripts/surface_mir_samples.py check-all --format json
+python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
+cargo test -p mir-ast --test surface_mir_parser -- --nocapture
+cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
+cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
+```
 
 ## move policy
 

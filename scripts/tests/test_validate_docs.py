@@ -222,6 +222,33 @@ class ValidateDocsTests(unittest.TestCase):
         )
         self.assertIn("sub-agent-pro/full-system-completion-001", required_hierarchy)
 
+    def test_required_scaffold_includes_surface_mir_rebaseline_docs(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        surface_required = {
+            "specs/39-surface-mir-placement-elaboration.md",
+            "specs/40-indexed-state-semantics.md",
+            "specs/41-role-admission-and-capability-grant.md",
+            "specs/42-source-patch-hotplug-semantics.md",
+            "specs/43-surface-mir-v1-alpha-scope.md",
+            "plan/64-surface-mir-placement-roadmap.md",
+            "plan/65-indexed-state-roadmap.md",
+            "plan/66-role-admission-roadmap.md",
+            "plan/67-source-patch-hotplug-roadmap.md",
+            "plan/68-surface-full-system-v1-roadmap.md",
+            "docs/hands_on/surface_mir_alpha_01.md",
+            "docs/hands_on/source_patch_hotplug_01.md",
+            "docs/research_abstract/surface_mir_alpha_01.md",
+        }
+
+        for path in surface_required:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
+
     def test_snapshot_heading_contracts_include_full_system_rebaseline_shape(self) -> None:
         progress_headings = validate_docs.PROGRESS_REQUIRED_HEADINGS
         tasks_headings = validate_docs.TASKS_REQUIRED_HEADINGS
