@@ -1,0 +1,42 @@
+{
+  "family": "surface_mir_role_admission",
+  "current_status": "p_surf_05_role_admission_capability_grant_evidence",
+  "rows": [
+    {
+      "sample_id": "ROLE-01",
+      "root_name": "role-01-join-admission-positive",
+      "stage": "P-SURF-05",
+      "current_status": "executable",
+      "source": "role-01-join-admission-positive/main/src/join-admission-positive.mir",
+      "expected": "role-01-join-admission-positive/expected/role_admission.json",
+      "runner": "role_admission"
+    },
+    {
+      "sample_id": "ROLE-02",
+      "root_name": "role-02-role-claim-without-grant-negative",
+      "stage": "P-SURF-05",
+      "current_status": "executable",
+      "source": "role-02-role-claim-without-grant-negative/main/src/role-claim-without-grant-negative.mir",
+      "expected": "role-02-role-claim-without-grant-negative/expected/role_admission.json",
+      "runner": "role_admission"
+    },
+    {
+      "sample_id": "ROLE-03",
+      "root_name": "role-03-stale-membership-negative",
+      "stage": "P-SURF-05",
+      "current_status": "executable",
+      "source": "role-03-stale-membership-negative/main/src/stale-membership-negative.mir",
+      "expected": "role-03-stale-membership-negative/expected/role_admission.json",
+      "runner": "role_admission"
+    },
+    {
+      "sample_id": "ROLE-04",
+      "root_name": "role-04-hash-binding-metadata-positive",
+      "stage": "P-SURF-05",
+      "current_status": "executable",
+      "source": "role-04-hash-binding-metadata-positive/main/src/hash-binding-metadata-positive.mir",
+      "expected": "role-04-hash-binding-metadata-positive/expected/role_admission.json",
+      "runner": "role_admission"
+    }
+  ]
+}

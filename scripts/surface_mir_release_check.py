@@ -90,6 +90,15 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
                 cargo_test_args("-p", "mir-semantics", "--test", "surface_to_core_elaboration"),
             ),
             validation_command(
+                "test:role-admission-capability-grant",
+                cargo_test_args(
+                    "-p",
+                    "mir-semantics",
+                    "--test",
+                    "role_admission_capability_grant",
+                ),
+            ),
+            validation_command(
                 "test:surface-samples",
                 ["python3", "-m", "unittest", "scripts.tests.test_surface_mir_samples"],
             ),
@@ -133,10 +142,10 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 24:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-04")
+        if payload.get("sample_count") != 28:
+            errors.append("surface samples helper sample_count mismatch for P-SURF-05")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-04 helper must not claim workflow_ready")
+            errors.append("P-SURF-05 helper must not claim workflow_ready")
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
     return errors
@@ -229,7 +238,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_04_auto_communication_publish_observe",
+        "scope": "p_surf_05_role_admission_capability_grant",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),
@@ -239,10 +248,10 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
         "results": results,
         "non_claims": [
             "no final public grammar / ABI / SDK",
-            "no role-admission capability grant completion",
             "no runtime or source patch hot-plug completion",
             "no runtime MessageEnvelope dispatch completion",
-            "no TypeMismatch typechecker discharge in P-SURF-04",
+            "no production identity provider or hardware attestation",
+            "no general TypeMismatch typechecker discharge in P-SURF-05",
             "no generated package artifact authority",
         ],
         "final_public_grammar_frozen": False,

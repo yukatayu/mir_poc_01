@@ -1,0 +1,34 @@
+{
+  "accepted": false,
+  "module_path": "Surface.Role.RoleClaimWithoutGrantNegative",
+  "diagnostic_codes": [
+    "role_claim_without_capability_grant"
+  ],
+  "role_claim_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "supported_features": []
+    }
+  ],
+  "admission_request_summaries": [],
+  "admission_verdict_summaries": [],
+  "capability_grant_summaries": [],
+  "authority_check_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "operation": "write_indexed_state",
+      "required_capability": "WriteState(World)",
+      "accepted": false,
+      "authority_source": null,
+      "reason_code": "missing_capability_grant"
+    }
+  ],
+  "stale_rejection_summaries": [],
+  "hash_binding_summaries": [],
+  "obligation_codes": [],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

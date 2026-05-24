@@ -5,8 +5,9 @@
 `P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
 user-facing source layer. `P-SURF-01` adds the first parser floor,
 `P-SURF-02` adds the indexed-state semantic checker floor, `P-SURF-03`
-adds the Surface-to-Core elaboration evidence floor, and `P-SURF-04` adds the
-generated communication evidence floor.
+adds the Surface-to-Core elaboration evidence floor, `P-SURF-04` adds the
+generated communication evidence floor, and `P-SURF-05` adds report-level role
+admission / capability grant evidence.
 
 The central syntax decision is:
 
@@ -58,9 +59,12 @@ heads, and indexed state access.
 - `crates/mir-semantics/examples/surface_indexed_state_check.rs`
 - `crates/mir-semantics::surface_to_core_elaboration`
 - `crates/mir-semantics/examples/surface_to_core_elaborate.rs`
+- `crates/mir-semantics::surface_role_admission`
+- `crates/mir-semantics/examples/surface_role_admission_check.rs`
 - `samples/full-system-v1-surface/syntax/`
 - `samples/full-system-v1-surface/indexed-state/`
 - `samples/full-system-v1-surface/elaboration/`
+- `samples/full-system-v1-surface/role-admission/`
 - `scripts/surface_mir_samples.py`
 
 Actualized rows:
@@ -85,33 +89,42 @@ Actualized rows:
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.
+- `ROLE-01`: BrowserClient join is accepted through admission, and the grant
+  authorizes a World-owned indexed-state write.
+- `ROLE-02`: role claim without grant cannot write server state.
+- `ROLE-03`: stale membership message and post-stale write are rejected.
+- `ROLE-04`: package/runtime hash binding is metadata, not safety proof.
 
 ## next package
 
 ```text
-P-SURF-05 role admission capability grant
+P-SURF-06 source patch hot-plug
 ```
 
 Close condition:
 
-- role claim / join / admission request / capability grant rows are explicit.
-- role claim alone does not grant authority.
-- stale membership and spoofed/admission-less grant attempts reject.
-- parser, indexed-state checker, elaboration, and generated communication
-  floors remain compatible with `SURF-01..09`, `IDX-01..05`, and
-  `ELAB-01/02/03/04/05/06/07/08/09/10`.
+- source patch commands produce parse/typecheck/elaborate/compatibility
+  evidence.
+- accepted patches emit HotPlugRequest / HotPlugVerdict / activation_cut rows.
+- rejected patches do not mutate runtime state.
+- parser, indexed-state checker, elaboration, generated communication, and
+  role-admission floors remain compatible with `SURF-01..09`, `IDX-01..05`,
+  `ELAB-01..10`, and `ROLE-01..04`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
 - Surface runtime/helper implementation beyond the parser, indexed-state
-  checker, elaboration, and generated communication evidence floors is not
-  present yet.
+  checker, elaboration, generated communication, and role-admission evidence
+  floors is not present yet.
 - `samples/full-system-v1-surface/syntax/` is parser evidence, not
   workflow-ready runtime evidence.
 - `samples/full-system-v1-surface/indexed-state/` is semantic checker evidence,
   not workflow-ready runtime or elaboration evidence.
 - `samples/full-system-v1-surface/elaboration/` is elaboration and generated
   communication evidence, not workflow-ready runtime or role-admission evidence.
+- `samples/full-system-v1-surface/role-admission/` is report-level admission
+  evidence, not production identity, hardware attestation, WAN admission, or
+  runtime membership lifecycle evidence.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

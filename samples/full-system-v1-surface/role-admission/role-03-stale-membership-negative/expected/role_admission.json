@@ -1,0 +1,94 @@
+{
+  "accepted": false,
+  "module_path": "Surface.Role.StaleMembershipNegative",
+  "diagnostic_codes": [
+    "stale_membership_message_rejected",
+    "stale_membership_authority_rejected"
+  ],
+  "role_claim_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "supported_features": []
+    }
+  ],
+  "admission_request_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "admission_locus": "WorldAdmission",
+      "requested_capabilities": [
+        "Member(World)",
+        "ObserveState(World)",
+        "WriteState(World)"
+      ]
+    }
+  ],
+  "admission_verdict_summaries": [
+    {
+      "verdict": "accepted",
+      "principal": "self",
+      "admitted_role": "BrowserClient",
+      "target_place": "World",
+      "membership_epoch": "epoch-0001",
+      "member_incarnation": "incarnation-0001",
+      "granted_capabilities": [
+        "Member(World)",
+        "ObserveState(World)",
+        "WriteState(World)"
+      ],
+      "admission_witness_ref": "admission-witness-0001"
+    }
+  ],
+  "capability_grant_summaries": [
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "Member(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    },
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "ObserveState(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    },
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "WriteState(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    }
+  ],
+  "authority_check_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "operation": "write_indexed_state",
+      "required_capability": "WriteState(World)",
+      "accepted": false,
+      "authority_source": null,
+      "reason_code": "stale_membership"
+    }
+  ],
+  "stale_rejection_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "reason_code": "stale_membership"
+    }
+  ],
+  "hash_binding_summaries": [],
+  "obligation_codes": [],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

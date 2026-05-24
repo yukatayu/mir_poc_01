@@ -965,8 +965,8 @@ fn accepted_obligations() -> Vec<SurfaceCoreObligation> {
 fn residual_obligations() -> Vec<SurfaceCoreObligation> {
     vec![
         obligation(
-            "role_admission_capability_grants_pending_p_surf_05",
-            "P-SURF-05 must connect role admission to capability grants before authority claims",
+            "role_admission_runtime_integration_pending_after_p_surf_05",
+            "P-SURF-05 supplies report-level admission evidence; later runtime integration must attach grants to executable requests",
         ),
         obligation(
             "runtime_hotplug_activation_pending_p_surf_06",

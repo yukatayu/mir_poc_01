@@ -1,0 +1,93 @@
+{
+  "accepted": true,
+  "module_path": "Surface.Role.JoinAdmissionPositive",
+  "diagnostic_codes": [],
+  "role_claim_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "supported_features": [
+        "renderer.pose_v1"
+      ]
+    }
+  ],
+  "admission_request_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "admission_locus": "WorldAdmission",
+      "requested_capabilities": [
+        "Member(World)",
+        "ObserveState(World)",
+        "WriteState(World)",
+        "support:renderer.pose_v1"
+      ]
+    }
+  ],
+  "admission_verdict_summaries": [
+    {
+      "verdict": "accepted",
+      "principal": "self",
+      "admitted_role": "BrowserClient",
+      "target_place": "World",
+      "membership_epoch": "epoch-0001",
+      "member_incarnation": "incarnation-0001",
+      "granted_capabilities": [
+        "Member(World)",
+        "ObserveState(World)",
+        "WriteState(World)"
+      ],
+      "admission_witness_ref": "admission-witness-0001"
+    }
+  ],
+  "capability_grant_summaries": [
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "Member(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    },
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "ObserveState(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    },
+    {
+      "principal": "self",
+      "role": "BrowserClient",
+      "target_place": "World",
+      "capability": "WriteState(World)",
+      "authority_source": "admission_grant",
+      "admission_witness_ref": "admission-witness-0001"
+    }
+  ],
+  "authority_check_summaries": [
+    {
+      "principal": "self",
+      "claimed_role": "BrowserClient",
+      "target_place": "World",
+      "operation": "write_indexed_state",
+      "required_capability": "WriteState(World)",
+      "accepted": true,
+      "authority_source": "admission_grant",
+      "reason_code": null
+    }
+  ],
+  "stale_rejection_summaries": [],
+  "hash_binding_summaries": [],
+  "obligation_codes": [
+    "surface_role_claim_not_authority",
+    "surface_admission_requests_explicit",
+    "surface_capability_grants_authority_source",
+    "surface_stale_membership_rejected",
+    "surface_hash_binding_metadata_only"
+  ],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

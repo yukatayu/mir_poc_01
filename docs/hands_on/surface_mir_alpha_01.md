@@ -6,10 +6,11 @@ This guide is the reader-facing entry for the Surface Mir alpha line.
 
 `P-SURF-01` adds the parser floor. `P-SURF-02` adds the indexed-state semantic
 checker floor. `P-SURF-03` adds the Surface-to-Core elaboration evidence floor.
-`P-SURF-04` adds the generated communication evidence floor.
-Runtime rows and operational `samples/full-system-v1-surface/` families beyond
-`syntax/`, `indexed-state/`, and `elaboration/` remain planned for later
-packages.
+`P-SURF-04` adds the generated communication evidence floor. `P-SURF-05` adds
+the report-level role admission / capability grant evidence floor.
+Runtime rows and operational `samples/full-system-v1-surface/` families outside
+the current `syntax/`, `indexed-state/`, `elaboration/`, and `role-admission/`
+evidence roots remain planned for later packages.
 
 ## current decision
 
@@ -86,8 +87,8 @@ P-SURF-99 audit
 
 ## current validation
 
-For the current parser, indexed-state checker, elaboration, and generated
-communication floors:
+For the current parser, indexed-state checker, elaboration, generated
+communication, and role-admission floors:
 
 ```bash
 python3 -m unittest scripts.tests.test_validate_docs
@@ -98,6 +99,7 @@ git diff --check
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
+cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
 python3 scripts/surface_mir_samples.py check-all --format json
 python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
@@ -115,7 +117,8 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 
 These commands are runnable for the P-SURF-01 parser floor, P-SURF-02
 indexed-state semantic checker floor, P-SURF-03 elaboration evidence floor, and
-P-SURF-04 generated communication evidence floor:
+P-SURF-04 generated communication evidence floor, and P-SURF-05 role admission
+evidence floor:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -124,13 +127,16 @@ python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
+cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
 ```
 
 ## non-claims
 
 - no final public grammar.
 - no Surface runtime/helper implementation beyond the parser, indexed-state
-  checker, elaboration, and generated communication evidence floors yet.
+  checker, elaboration, generated communication, and role-admission evidence
+  floors yet.
+- no production identity provider, hardware attestation, or WAN admission.
 - no final ABI / SDK.
 - no production WAN/federation.
 - no distributed durable save-load R3/R4.

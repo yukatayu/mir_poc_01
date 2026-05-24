@@ -186,11 +186,23 @@ Devtools must show:
 
 ## required alpha sample rows
 
-- `ROLE-01`: BrowserClient join accepted through admission.
+- `ROLE-01`: BrowserClient join accepted through admission, with a
+  grant-backed accepted World-owned indexed-state write.
 - `ROLE-02`: role claim without grant cannot write server-owned state.
-- `ROLE-03`: stale membership message rejected.
+- `ROLE-03`: stale membership message rejected, and later authority checks for
+  that stale place/principal are fenced.
 - `ROLE-04`: optional package/runtime hash binding appears as report metadata,
   not semantic safety proof.
+
+## P-SURF-05 evidence status
+
+`P-SURF-05` actualizes these rows as report-level Surface evidence in
+`crates/mir-semantics::surface_role_admission` and
+`samples/full-system-v1-surface/role-admission/`.
+
+This is not runtime identity/admission lifecycle completion. It does not claim
+production identity provider, hardware attestation, WAN/federation admission,
+or transport-owned authority.
 
 ## non-claims
 

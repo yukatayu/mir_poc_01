@@ -12,6 +12,7 @@ pub mod computational_core;
 pub mod full_system_v1;
 mod harness;
 pub mod surface_indexed_state;
+pub mod surface_role_admission;
 pub mod surface_to_core_elaboration;
 
 use std::{

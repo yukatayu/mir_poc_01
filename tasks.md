@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-24 17:48 JST
+最終更新: 2026-05-24 18:21 JST
 
 ## document role
 
@@ -15,22 +15,20 @@ and is not append-only history.
 
 ## current promoted package
 
-Current promoted package after `P-SURF-04` closeout:
+Current promoted package after `P-SURF-05` closeout:
 
 ```text
-P-SURF-05 role admission capability grant
+P-SURF-06 source patch hot-plug
 ```
 
 Purpose:
 
-- implement role claim / join admission / capability grant evidence without
-  treating a role claim as authority.
-- keep admission locus, principal, role, membership freshness, and generated
-  capability rows explicit.
-- preserve P-SURF-04 generated communication as elaboration evidence only; no
-  runtime MessageEnvelope dispatch or final transport claim.
-- keep source patch activation and operational Surface roots as later package
-  work.
+- implement source patch check / parse / elaborate / compatibility evidence
+  without treating source patches as eval.
+- keep HotPlugRequest, HotPlugVerdict, and activation_cut rows explicit.
+- preserve P-SURF-05 role admission as report-level evidence only; no production
+  identity provider, hardware attestation, or WAN admission claim.
+- keep operational Surface roots and devtools panels as later package work.
 
 ## ordered self-driven packages
 
@@ -40,7 +38,7 @@ Purpose:
 | 2 | `P-SURF-02 indexed state` | represent `S { state player[p: Participant]: Player }` as S-owned indexed state | closed with `IDX-01..05`, semantic checker test, sample helper, authoring check, and release check |
 | 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | closed with `ELAB-01/02/04/05/06/07/08`, elaboration test, sample helper, authoring check, and release check |
 | 4 | `P-SURF-04 auto communication` | generate MessageEnvelope / publish / observe / failure-row obligations | closed with generated MessageEnvelope rows, visible field publish/observe rows, `VisibilityDenied` failure-row containment, private/non-visible field rejection, and `ELAB-03/09/10` |
-| 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | role claim does not grant authority; grants and stale rejects are observable |
+| 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | closed with `ROLE-01..04`, role claim / join admission / grant-backed accepted write / witness rows, missing-grant write rejection, stale membership rejection, and hash metadata non-safety-proof |
 | 6 | `P-SURF-06 source patch hot-plug` | implement parse/typecheck/elaborate/admit/activation-cut patch pipeline | rejected patches do not mutate runtime; accepted patch emits activation cut |
 | 7 | `P-SURF-07 source operational suite` | create Surface source WorldCore / MembershipChat / Sugoroku / related roots | roots have positive/negative evidence and remain distinct from Product Alpha roots |
 | 8 | `P-SURF-08 devtools and diagnostics` | show Surface source, Core IR, generated communication, indexed state, admission, patch lifecycle | observer-safe panels and diagnostics preserve source/Core links |
@@ -80,7 +78,7 @@ Purpose:
 | indexed-state runtime carrier | `P-SURF-02` / later runtime packages | plain map / membership-aware partial map / distributed table | `P-SURF-02` fixed checker semantics; use membership-aware owner-locus partial map first when runtime carrier is added |
 | elaboration IR shape | `P-SURF-03` / `P-SURF-04` | direct Core transitions / intermediate elaboration report / both | closed with Core IR plus source-linked elaboration and generated communication rows |
 | auto publish policy | `P-SURF-04` | publish all writes / visible-fields-only / explicit-only | closed narrow alpha: visible-fields-only; private/non-visible fields blocked; TypeMismatch discharge remains later |
-| admission witness metadata | `P-SURF-05` | principal only / role + principal / optional package/runtime hash | role + principal required; package/runtime hash optional report metadata |
+| admission witness metadata | `P-SURF-05` | principal only / role + principal / optional package/runtime hash | closed narrow alpha: role + principal required; package/runtime hash optional report metadata and not safety proof |
 | source patch compatibility | `P-SURF-06` | check-only / check+diff / full migration planner | check+Core diff+activation cut first; migration planner later |
 | Surface sample root shape | `P-SURF-07` | reuse `full-system-v1/` / new `full-system-v1-surface/` / product-alpha root | use planned `samples/full-system-v1-surface/` to avoid mixing roots |
 
@@ -107,6 +105,10 @@ Purpose:
 - `samples/full-system-v1-surface/elaboration/` is P-SURF-03/P-SURF-04
   elaboration and generated communication evidence only, not runtime
   MessageEnvelope dispatch, role admission, source patch activation, or an
+  operational suite.
+- `samples/full-system-v1-surface/role-admission/` is P-SURF-05 report-level
+  admission/grant evidence only, not production identity, hardware attestation,
+  WAN admission, runtime membership lifecycle, source patch activation, or an
   operational suite.
 - `S[ ... ]` remains rejected and must not be introduced as a compatibility sugar.
 - `package.mir.json` remains alpha compatibility / package artifact, not semantic source authority.

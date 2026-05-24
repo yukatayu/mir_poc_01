@@ -64,8 +64,8 @@ This is near product-style alpha flow, not final production.
 | `P-SURF-02` | indexed-state semantics | closed: `S { state player[p: Participant]: Player }` checks as S-owned map; key authority, stale key, retained-savepoint compaction, and nested-place ambient authority negatives reject |
 | `P-SURF-03` | Surface-to-Core elaboration | closed: cross-locus read/write generate Core IR remote request rows, generated edges, source spans, obligations, and underdeclared failure-row rejection |
 | `P-SURF-04` | auto communication | closed: MessageEnvelope / visible publish / observe / `VisibilityDenied` failure-row obligations generated and visible; private/non-visible field auto communication rejected |
-| `P-SURF-05` | role admission | next: role claim, admission request, membership/capability grant, stale rejection |
-| `P-SURF-06` | source patch hot-plug | parse/typecheck/elaborate/admit/activation-cut pipeline |
+| `P-SURF-05` | role admission | closed: role claim, admission request/verdict, capability grant, witness, stale rejection, hash metadata evidence |
+| `P-SURF-06` | source patch hot-plug | next: parse/typecheck/elaborate/admit/activation-cut pipeline |
 | `P-SURF-07` | source operational suite | source-first WorldCore / MembershipChat / Sugoroku / related roots |
 | `P-SURF-08` | devtools and diagnostics | Surface source, Core IR, generated communication, indexed state, role admission, patch lifecycle visible |
 | `P-SURF-99` | final audit | full validation and compatibility anchors rerun |
@@ -91,10 +91,13 @@ samples/full-system-v1-surface/
 
 `syntax/` is P-SURF-01 parser evidence only. `indexed-state/` is P-SURF-02
 semantic checker evidence only. `elaboration/` is P-SURF-03/P-SURF-04
-elaboration and generated communication evidence only. Other families remain
-planned until later P-SURF implementation packages actualize them, and the root
-family must not be marked workflow-ready runtime evidence from parser, checker,
-elaboration, or generated communication rows alone.
+elaboration and generated communication evidence only. `role-admission/` is
+P-SURF-05 report-level admission/grant evidence only, not production identity,
+hardware attestation, WAN admission, or runtime membership lifecycle
+completion. Other families remain planned until later P-SURF implementation
+packages actualize them, and the root family must not be marked workflow-ready
+runtime evidence from parser, checker, elaboration, generated communication, or
+role-admission rows alone.
 
 ## required sample matrix
 

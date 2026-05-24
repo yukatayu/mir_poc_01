@@ -18,24 +18,27 @@ INDEXED_STATE_ROOT = SURFACE_ROOT / "indexed-state"
 INDEXED_STATE_MATRIX_PATH = INDEXED_STATE_ROOT / "matrix.json"
 ELABORATION_ROOT = SURFACE_ROOT / "elaboration"
 ELABORATION_MATRIX_PATH = ELABORATION_ROOT / "matrix.json"
+ROLE_ADMISSION_ROOT = SURFACE_ROOT / "role-admission"
+ROLE_ADMISSION_MATRIX_PATH = ROLE_ADMISSION_ROOT / "matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 STOP_LINES = [
     "no final public grammar / ABI / SDK",
-    "no role-admission capability grant completion yet",
     "no runtime execution or source patch hot-plug completion yet",
+    "no production identity provider / hardware attestation / WAN admission",
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-04 auto communication elaboration evidence only",
+    "P-SURF-05 role admission capability grant is report-level Surface evidence only",
     "no runtime MessageEnvelope dispatch completion",
-    "role admission authority remains P-SURF-05",
+    "no production identity provider or hardware attestation",
     "source patch activation remains P-SURF-06",
-    "no TypeMismatch typechecker discharge in P-SURF-04",
+    "no general TypeMismatch typechecker discharge in P-SURF-05",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-ast --test surface_mir_parser -- --nocapture",
     "cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture",
     "cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture",
+    "cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture",
     "python3 -m unittest scripts.tests.test_surface_mir_samples",
     "python3 scripts/surface_mir_samples.py matrix --format json",
     "python3 scripts/surface_mir_samples.py check-all --format json",
@@ -68,6 +71,13 @@ def _matrix_specs() -> list[dict[str, Any]]:
             "matrix_path": ELABORATION_MATRIX_PATH,
             "runner": "elaboration",
             "data": _load_matrix(ELABORATION_MATRIX_PATH),
+        },
+        {
+            "family_key": "role_admission",
+            "root": ROLE_ADMISSION_ROOT,
+            "matrix_path": ROLE_ADMISSION_MATRIX_PATH,
+            "runner": "role_admission",
+            "data": _load_matrix(ROLE_ADMISSION_MATRIX_PATH),
         },
     ]
 
@@ -168,6 +178,7 @@ def matrix() -> dict[str, Any]:
         "syntax_root": str(SYNTAX_ROOT.relative_to(REPO_ROOT)),
         "indexed_state_root": str(INDEXED_STATE_ROOT.relative_to(REPO_ROOT)),
         "elaboration_root": str(ELABORATION_ROOT.relative_to(REPO_ROOT)),
+        "role_admission_root": str(ROLE_ADMISSION_ROOT.relative_to(REPO_ROOT)),
         "matrix_paths": [
             str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
         ],
@@ -274,6 +285,37 @@ def _elaborate_source(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:
         raise RuntimeError(
             f"surface elaboration example did not return JSON for `{path}`: {completed.stderr}"
+        ) from error
+    payload["returncode"] = completed.returncode
+    return payload
+
+
+def _check_role_admission_source(path: Path) -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mir-semantics",
+            "--example",
+            "surface_role_admission_check",
+            "--",
+            str(path),
+            "--format",
+            "json",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"surface role-admission example did not return JSON for `{path}`: {completed.stderr}"
         ) from error
     payload["returncode"] = completed.returncode
     return payload
@@ -477,6 +519,95 @@ def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _role_admission_projection(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "accepted": payload.get("accepted"),
+        "module_path": payload.get("module_path"),
+        "diagnostic_codes": [
+            row["code"] for row in payload.get("diagnostics") or []
+        ],
+        "role_claim_summaries": [
+            {
+                "principal": row["principal"],
+                "claimed_role": row["claimed_role"],
+                "supported_features": row.get("supported_features") or [],
+            }
+            for row in payload.get("role_claims") or []
+        ],
+        "admission_request_summaries": [
+            {
+                "principal": row["principal"],
+                "claimed_role": row["claimed_role"],
+                "target_place": row["target_place"],
+                "admission_locus": row["admission_locus"],
+                "requested_capabilities": row.get("requested_capabilities") or [],
+            }
+            for row in payload.get("admission_requests") or []
+        ],
+        "admission_verdict_summaries": [
+            {
+                "verdict": row["verdict"],
+                "principal": row["principal"],
+                "admitted_role": row["admitted_role"],
+                "target_place": row["target_place"],
+                "membership_epoch": row["membership_epoch"],
+                "member_incarnation": row["member_incarnation"],
+                "granted_capabilities": row.get("granted_capabilities") or [],
+                "admission_witness_ref": row["admission_witness_ref"],
+            }
+            for row in payload.get("admission_verdicts") or []
+        ],
+        "capability_grant_summaries": [
+            {
+                "principal": row["principal"],
+                "role": row["role"],
+                "target_place": row["target_place"],
+                "capability": row["capability"],
+                "authority_source": row["authority_source"],
+                "admission_witness_ref": row["admission_witness_ref"],
+            }
+            for row in payload.get("capability_grants") or []
+        ],
+        "authority_check_summaries": [
+            {
+                "principal": row["principal"],
+                "claimed_role": row["claimed_role"],
+                "target_place": row["target_place"],
+                "operation": row["operation"],
+                "required_capability": row["required_capability"],
+                "accepted": row["accepted"],
+                "authority_source": row.get("authority_source"),
+                "reason_code": row.get("reason_code"),
+            }
+            for row in payload.get("authority_checks") or []
+        ],
+        "stale_rejection_summaries": [
+            {
+                "principal": row["principal"],
+                "claimed_role": row["claimed_role"],
+                "target_place": row["target_place"],
+                "reason_code": row["reason_code"],
+            }
+            for row in payload.get("stale_rejections") or []
+        ],
+        "hash_binding_summaries": [
+            {
+                "principal": row["principal"],
+                "claimed_role": row["claimed_role"],
+                "package_hash": row["package_hash"],
+                "runtime_hash": row["runtime_hash"],
+                "semantic_safety_proof": row["semantic_safety_proof"],
+            }
+            for row in payload.get("optional_hash_bindings") or []
+        ],
+        "obligation_codes": [
+            row["code"] for row in payload.get("accepted_obligations") or []
+        ],
+        "source_authority": payload.get("source_authority"),
+        "final_public_api_frozen": payload.get("final_public_api_frozen"),
+    }
+
+
 def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     for spec in _matrix_specs():
         row = next(
@@ -498,6 +629,9 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     elif runner == "elaboration":
         payload = _elaborate_source(source_path)
         actual = _elaboration_projection(payload)
+    elif runner == "role_admission":
+        payload = _check_role_admission_source(source_path)
+        actual = _role_admission_projection(payload)
     else:
         payload = _parse_source(source_path)
         actual = _payload_projection(payload)

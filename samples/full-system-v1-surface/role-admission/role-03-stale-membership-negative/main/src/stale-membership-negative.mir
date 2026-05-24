@@ -1,0 +1,26 @@
+module Surface.Role.StaleMembershipNegative
+
+role BrowserClient
+place World
+place WorldAdmission
+
+record Player {
+  hp: Int64,
+}
+
+World {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when start fails MissingCapability {
+    join World as BrowserClient via WorldAdmission
+  }
+
+  when stale_delivery fails StaleMembership {
+    stale_message World epoch_0000 incarnation_0000
+    World {
+      player[self].hp = 1
+    }
+  }
+}

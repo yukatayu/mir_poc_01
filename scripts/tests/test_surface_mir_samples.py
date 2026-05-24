@@ -26,16 +26,20 @@ def _run_helper(*args: str) -> dict:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_04_rows(self) -> None:
+    def test_matrix_reports_p_surf_05_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 24)
-        self.assertEqual(payload["executable_count"], 24)
-        self.assertEqual(payload["family_count"], 3)
+        self.assertEqual(payload["sample_count"], 28)
+        self.assertEqual(payload["executable_count"], 28)
+        self.assertEqual(payload["family_count"], 4)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
             "p_surf_04_auto_communication_elaboration_evidence",
+        )
+        self.assertEqual(
+            payload["matrix_status"]["surface_mir_role_admission"],
+            "p_surf_05_role_admission_capability_grant_evidence",
         )
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
@@ -281,11 +285,80 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
         )
 
+    def test_role_admission_join_generates_grant_and_witness(self) -> None:
+        payload = _run_helper("run", "ROLE-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["admission_verdict_summaries"][0]["verdict"],
+            "accepted",
+        )
+        self.assertIn(
+            "WriteState(World)",
+            [
+                row["capability"]
+                for row in payload["actual"]["capability_grant_summaries"]
+            ],
+        )
+        self.assertEqual(
+            payload["actual"]["capability_grant_summaries"][0]["authority_source"],
+            "admission_grant",
+        )
+
+    def test_role_claim_without_grant_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ROLE-02")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["role_claim_without_capability_grant"],
+        )
+        self.assertFalse(payload["actual"]["authority_check_summaries"][0]["accepted"])
+        self.assertEqual(
+            payload["actual"]["authority_check_summaries"][0]["reason_code"],
+            "missing_capability_grant",
+        )
+
+    def test_stale_membership_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ROLE-03")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            [
+                "stale_membership_message_rejected",
+                "stale_membership_authority_rejected",
+            ],
+        )
+        self.assertEqual(
+            payload["actual"]["stale_rejection_summaries"][0]["reason_code"],
+            "stale_membership",
+        )
+        self.assertFalse(payload["actual"]["authority_check_summaries"][0]["accepted"])
+        self.assertEqual(
+            payload["actual"]["authority_check_summaries"][0]["reason_code"],
+            "stale_membership",
+        )
+
+    def test_hash_binding_metadata_does_not_claim_safety_proof(self) -> None:
+        payload = _run_helper("run", "ROLE-04")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["hash_binding_summaries"][0]["package_hash"],
+            "pkg_hash_v1",
+        )
+        self.assertFalse(
+            payload["actual"]["hash_binding_summaries"][0]["semantic_safety_proof"]
+        )
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 24)
+        self.assertEqual(len(payload["passed"]), 28)
 
 
 if __name__ == "__main__":

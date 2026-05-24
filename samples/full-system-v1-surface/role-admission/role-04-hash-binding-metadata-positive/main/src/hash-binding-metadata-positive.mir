@@ -1,0 +1,12 @@
+module Surface.Role.HashBindingMetadataPositive
+
+role BrowserClient
+place World
+place WorldAdmission
+
+BrowserClient[self] {
+  when start fails MissingCapability {
+    join World as BrowserClient via WorldAdmission
+    bind_hash package pkg_hash_v1 runtime runtime_hash_v1
+  }
+}

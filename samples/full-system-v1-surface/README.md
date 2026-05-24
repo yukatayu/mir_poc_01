@@ -18,6 +18,11 @@ Current state:
   publish/observe rows, generated edges, source spans, obligations,
   underdeclared generated failure-row rejection, and private/non-visible field
   rejection.
+- `role-admission/` is actualized for `P-SURF-05` as a narrow report-level role
+  admission evidence lane for role claims, join admission requests, accepted
+  verdicts, capability grants, admission witnesses, missing-grant write
+  rejection, stale membership rejection, and optional package/runtime hash
+  metadata.
 
 Commands:
 
@@ -27,6 +32,7 @@ python3 scripts/surface_mir_samples.py check-all --format json
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
+cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
 ```
 
 Stop lines:
@@ -34,5 +40,5 @@ Stop lines:
 - no final public grammar / ABI / SDK.
 - no runtime MessageEnvelope dispatch or final transport completion yet.
 - no runtime execution or source patch hot-plug completion yet.
-- no role-admission capability grant completion yet.
+- no production identity provider / hardware attestation / WAN admission.
 - no generated package artifact authority.

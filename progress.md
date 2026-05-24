@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 17:48 JST
+最終更新: 2026-05-24 18:21 JST
 
 ## document role
 
@@ -48,17 +48,17 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-05 role admission capability grant`.
-- Current status after this snapshot: `P-SURF-04` closed a narrow generated
-  communication lane in `crates/mir-semantics::surface_to_core_elaboration`.
-  `ELAB-01/02/03/04/05/06/07/08/09/10` now cover cross-locus indexed
-  read/write elaboration, explicit MessageEnvelope rows, visible field
-  publish/observe rows, source spans, obligations, `VisibilityDenied`
-  failure-row containment, private/non-visible field rejection, nested read
-  placement, and unsupported-statement rejection.
-- Next gap: implement role admission so role claims, `join`, admission locus,
-  membership freshness, and capability grants remain explicit and a role claim
-  alone never grants authority.
+- Current package: `P-SURF-06 source patch hot-plug`.
+- Current status after this snapshot: `P-SURF-05` closed a narrow report-level
+  role admission / capability grant lane in
+  `crates/mir-semantics::surface_role_admission`. `ROLE-01..04` now cover role
+  claim, join admission request, accepted verdict, admission witness,
+  capability grant-backed accepted write, missing-grant write rejection, stale
+  membership rejection with a post-stale write fence, and optional
+  package/runtime hash metadata as non-safety-proof evidence.
+- Next gap: implement source patch hot-plug so source changes go through parse /
+  typecheck / elaborate / compatibility / HotPlugRequest / HotPlugVerdict /
+  activation_cut rather than eval.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -71,8 +71,9 @@ semantic source authority.
   only. `P-SURF-02` is indexed-state semantic checker/sample evidence only; it
   does not claim runtime execution or role admission. `P-SURF-03` is
   elaboration evidence and `P-SURF-04` is generated communication elaboration
-  evidence; neither claims runtime MessageEnvelope dispatch, role admission, or
-  source patch activation.
+  evidence, and `P-SURF-05` is role-admission evidence; none claims runtime
+  MessageEnvelope dispatch, production identity, hardware attestation, WAN
+  admission, or source patch activation.
 
 ## milestone map
 
@@ -86,8 +87,8 @@ semantic source authority.
 | `P-SURF-02` | indexed state | `evidence-closed semantic checker lane` | `crates/mir-semantics::surface_indexed_state`, `surface_indexed_state_check`, `samples/full-system-v1-surface/indexed-state/`, `IDX-01..05` | integrate with Surface-to-Core elaboration and runtime carrier later |
 | `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01/02/04/05/06/07/08` | keep feeding later runtime/admission work |
 | `P-SURF-04` | auto communication / publish / observe | `evidence-closed generated communication lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-03/09/10` plus widened `ELAB-01/05/08` | runtime dispatch and TypeMismatch discharge remain later |
-| `P-SURF-05` | role admission | `next promoted` | `specs/41`, `plan/66` | implement admission, grant, stale rejection, spoof rejection |
-| `P-SURF-06` | source patch hot-plug | `planned` | `specs/42`, `plan/67` | implement parse/typecheck/elaborate/admit/activation-cut pipeline |
+| `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
+| `P-SURF-06` | source patch hot-plug | `next promoted` | `specs/42`, `plan/67` | implement parse/typecheck/elaborate/admit/activation-cut pipeline |
 | `P-SURF-07` | Surface source operational suite | `planned` | `specs/43`, `plan/68` | create source-first Surface roots without promoting before evidence |
 | `P-SURF-08` | Surface devtools / diagnostics | `planned` | `specs/39..43`, `plan/64..68` | show Surface source, Core IR, communication, indexed state, admission, patch lifecycle |
 | `P-SURF-99` | Surface Mir alpha audit | `planned` | future full validation | close bounded Surface alpha chain |
@@ -130,7 +131,8 @@ Next gap:
 
 Status: `first-floor-evidence` for Full System V1, `parser-floor-evidence` plus
 `indexed-state-checker-evidence` plus `elaboration-evidence` plus
-`generated-communication-evidence` for Surface Mir alpha.
+`generated-communication-evidence` plus `role-admission-evidence` for Surface
+Mir alpha.
 
 Current evidence:
 
@@ -151,11 +153,14 @@ Current evidence:
 - `crates/mir-semantics::surface_to_core_elaboration` also generates
   MessageEnvelope, visible publish/observe, and observer-safe redaction /
   retention rows for P-SURF-04.
+- `crates/mir-semantics::surface_role_admission` records role claims,
+  admission requests/verdicts, capability grants, witnesses, stale membership
+  rejections, and optional hash metadata for P-SURF-05.
 
 Next gap:
 
-- `P-SURF-05` role admission: join/admission/capability grants must be explicit,
-  and role claims must not imply authority.
+- `P-SURF-06` source patch hot-plug: parse/typecheck/elaborate/compatibility
+  verdict and activation-cut rows must be explicit.
 
 ### PoseGraph line
 
@@ -202,7 +207,8 @@ Next gap:
 ### Surface Mir line
 
 Status: `parser-floor-evidence` + `indexed-state-checker-evidence` +
-`elaboration-evidence` + `generated-communication-evidence`
+`elaboration-evidence` + `generated-communication-evidence` +
+`role-admission-evidence`
 
 Current evidence:
 
@@ -215,14 +221,16 @@ Current evidence:
 - `crates/mir-ast/src/surface_alpha.rs`
 - `crates/mir-semantics/src/surface_indexed_state.rs`
 - `crates/mir-semantics/src/surface_to_core_elaboration.rs`
+- `crates/mir-semantics/src/surface_role_admission.rs`
 - `samples/full-system-v1-surface/syntax/matrix.json`
 - `samples/full-system-v1-surface/indexed-state/matrix.json`
 - `samples/full-system-v1-surface/elaboration/matrix.json`
+- `samples/full-system-v1-surface/role-admission/matrix.json`
 - `scripts/surface_mir_samples.py`
 
 Next gap:
 
-- implement role admission and capability grant in `P-SURF-05`.
+- implement source patch hot-plug in `P-SURF-06`.
 
 ## validation floor
 
@@ -237,6 +245,7 @@ git diff --check
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
+cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
 python3 -m unittest scripts.tests.test_surface_mir_samples scripts.tests.test_surface_mir_release_check
 python3 scripts/surface_mir_samples.py check-all --format json
 python3 scripts/surface_mir_authoring_check.py check-all --format json
@@ -257,6 +266,7 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 - No runtime MessageEnvelope dispatch, local queue delivery, or final transport
   implementation yet.
 - No TypeMismatch typechecker discharge for generated communication yet.
+- No production identity provider, hardware attestation, or WAN admission.
 - No indexed-state runtime carrier or distributed compaction protocol yet.
 - No Surface Mir runtime execution or source patch hot-plug implementation yet.
 - No Rust-level language completion.
@@ -292,10 +302,10 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | generated communication docs/report sync closing; P-SURF-05 handoff current | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | role admission docs/report sync closing; P-SURF-06 handoff current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, and generated communication floors closed; role admission next | heavy | 着手可能 |
+| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, and role admission floors closed; source patch next | heavy | 着手可能 |
 | `Macro 4` | executable sample expansion | `syntax/` parser evidence exists; operational roots remain later | heavy | 後段依存 |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
@@ -312,14 +322,16 @@ Research-discovery items:
 | Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, generated edges, source spans, and obligations | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
-| role admission / capability grant | `next promoted` | role claim is not authority | 着手可能 |
-| source patch hot-plug | `boundary-fixed` | no direct eval; activation cut required | 着手可能 |
+| role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
+| source patch hot-plug | `next promoted` | no direct eval; activation cut required | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 
 ## recent log
 
+- 2026-05-24 18:21 JST
+  `P-SURF-05` で role admission / capability grant evidence floor を actualize し、`surface_role_admission_check`、`ROLE-01..04`、`cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。role claim は authority ではなく、authority は admission grant から来る。current promoted package は `P-SURF-06 source patch hot-plug`。
 - 2026-05-24 17:48 JST
   `P-SURF-04` で generated communication evidence floor を actualize し、Core IR に `MessageEnvelope` / publish / observe / observer-safe redaction-retention rows を追加し、`ELAB-03/09/10` と widened `ELAB-01/05/08` で private/non-visible field rejection、visible write publish/observe、`VisibilityDenied` failure-row containment、`cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。current promoted package は `P-SURF-05 role admission capability grant`。
 - 2026-05-24 16:48 JST

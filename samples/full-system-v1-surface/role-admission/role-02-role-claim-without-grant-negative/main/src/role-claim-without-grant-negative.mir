@@ -1,0 +1,20 @@
+module Surface.Role.RoleClaimWithoutGrantNegative
+
+role BrowserClient
+place World
+
+record Player {
+  hp: Int64,
+}
+
+World {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    World {
+      player[target].hp = 1
+    }
+  }
+}

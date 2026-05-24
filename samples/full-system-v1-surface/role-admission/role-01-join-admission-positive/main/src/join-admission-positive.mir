@@ -1,0 +1,25 @@
+module Surface.Role.JoinAdmissionPositive
+
+role BrowserClient {
+  supports renderer.pose_v1
+}
+
+place World
+place WorldAdmission
+
+record Player {
+  hp: Int64,
+}
+
+World {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when start fails MissingCapability {
+    join World as BrowserClient via WorldAdmission
+    World {
+      player[self].hp = 1
+    }
+  }
+}
