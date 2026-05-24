@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-05-24 18:21 JST
+最終更新: 2026-05-24 19:03 JST
 
 ## document role
 
@@ -48,17 +48,18 @@ semantic source authority.
 
 ## current milestone position
 
-- Current package: `P-SURF-06 source patch hot-plug`.
-- Current status after this snapshot: `P-SURF-05` closed a narrow report-level
-  role admission / capability grant lane in
-  `crates/mir-semantics::surface_role_admission`. `ROLE-01..04` now cover role
-  claim, join admission request, accepted verdict, admission witness,
-  capability grant-backed accepted write, missing-grant write rejection, stale
-  membership rejection with a post-stale write fence, and optional
-  package/runtime hash metadata as non-safety-proof evidence.
-- Next gap: implement source patch hot-plug so source changes go through parse /
-  typecheck / elaborate / compatibility / HotPlugRequest / HotPlugVerdict /
-  activation_cut rather than eval.
+- Current package: `P-SURF-07 source operational suite`.
+- Current status after this snapshot: `P-SURF-06` closed a narrow source patch
+  hot-plug evidence lane in `crates/mir-runtime::surface_source_patch_hotplug`
+  and `mirrorea-alpha` source commands. `PATCH-01..04` now cover accepted
+  visible-state patch activation, undeclared generated-failure rejection,
+  self-grant rejection, and lifecycle/devtools activation evidence. Rejected
+  patches do not apply runtime mutation, and accepted patches expose
+  HotPlugRequest, HotPlugVerdict, Core IR diff, and activation_cut rows without
+  direct eval.
+- Next gap: create Surface source-first operational roots for WorldCore,
+  MembershipChat, Sugoroku, Portal/Shard/Gradient representative rows without
+  promoting product-alpha package artifacts to semantic source authority.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -71,9 +72,10 @@ semantic source authority.
   only. `P-SURF-02` is indexed-state semantic checker/sample evidence only; it
   does not claim runtime execution or role admission. `P-SURF-03` is
   elaboration evidence and `P-SURF-04` is generated communication elaboration
-  evidence, and `P-SURF-05` is role-admission evidence; none claims runtime
-  MessageEnvelope dispatch, production identity, hardware attestation, WAN
-  admission, or source patch activation.
+  evidence, `P-SURF-05` is role-admission evidence, and `P-SURF-06` is source
+  patch pipeline evidence; none claims runtime MessageEnvelope dispatch,
+  production identity, hardware attestation, WAN admission, final source patch
+  ABI, distributed durable migration, or final operational suite completion.
 
 ## milestone map
 
@@ -88,8 +90,8 @@ semantic source authority.
 | `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01/02/04/05/06/07/08` | keep feeding later runtime/admission work |
 | `P-SURF-04` | auto communication / publish / observe | `evidence-closed generated communication lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-03/09/10` plus widened `ELAB-01/05/08` | runtime dispatch and TypeMismatch discharge remain later |
 | `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
-| `P-SURF-06` | source patch hot-plug | `next promoted` | `specs/42`, `plan/67` | implement parse/typecheck/elaborate/admit/activation-cut pipeline |
-| `P-SURF-07` | Surface source operational suite | `planned` | `specs/43`, `plan/68` | create source-first Surface roots without promoting before evidence |
+| `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
+| `P-SURF-07` | Surface source operational suite | `next promoted` | `specs/43`, `plan/68` | create source-first Surface roots without promoting before evidence |
 | `P-SURF-08` | Surface devtools / diagnostics | `planned` | `specs/39..43`, `plan/64..68` | show Surface source, Core IR, communication, indexed state, admission, patch lifecycle |
 | `P-SURF-99` | Surface Mir alpha audit | `planned` | future full validation | close bounded Surface alpha chain |
 
@@ -131,8 +133,8 @@ Next gap:
 
 Status: `first-floor-evidence` for Full System V1, `parser-floor-evidence` plus
 `indexed-state-checker-evidence` plus `elaboration-evidence` plus
-`generated-communication-evidence` plus `role-admission-evidence` for Surface
-Mir alpha.
+`generated-communication-evidence` plus `role-admission-evidence` plus
+`source-patch-hotplug-evidence` for Surface Mir alpha.
 
 Current evidence:
 
@@ -156,11 +158,15 @@ Current evidence:
 - `crates/mir-semantics::surface_role_admission` records role claims,
   admission requests/verdicts, capability grants, witnesses, stale membership
   rejections, and optional hash metadata for P-SURF-05.
+- `crates/mir-runtime::surface_source_patch_hotplug` and `mirrorea-alpha`
+  source commands route patches through parse/typecheck/elaborate/compatibility
+  / admission and produce HotPlugRequest, HotPlugVerdict, Core IR diff, and
+  activation_cut report rows for P-SURF-06.
 
 Next gap:
 
-- `P-SURF-06` source patch hot-plug: parse/typecheck/elaborate/compatibility
-  verdict and activation-cut rows must be explicit.
+- `P-SURF-07` source operational suite: create source-first Surface roots and
+  representative positive/negative rows.
 
 ### PoseGraph line
 
@@ -208,7 +214,7 @@ Next gap:
 
 Status: `parser-floor-evidence` + `indexed-state-checker-evidence` +
 `elaboration-evidence` + `generated-communication-evidence` +
-`role-admission-evidence`
+`role-admission-evidence` + `source-patch-hotplug-evidence`
 
 Current evidence:
 
@@ -222,15 +228,17 @@ Current evidence:
 - `crates/mir-semantics/src/surface_indexed_state.rs`
 - `crates/mir-semantics/src/surface_to_core_elaboration.rs`
 - `crates/mir-semantics/src/surface_role_admission.rs`
+- `crates/mir-runtime/src/surface_source_patch_hotplug.rs`
 - `samples/full-system-v1-surface/syntax/matrix.json`
 - `samples/full-system-v1-surface/indexed-state/matrix.json`
 - `samples/full-system-v1-surface/elaboration/matrix.json`
 - `samples/full-system-v1-surface/role-admission/matrix.json`
+- `samples/full-system-v1-surface/source-patch/matrix.json`
 - `scripts/surface_mir_samples.py`
 
 Next gap:
 
-- implement source patch hot-plug in `P-SURF-06`.
+- create source-first operational suite roots in `P-SURF-07`.
 
 ## validation floor
 
@@ -246,6 +254,8 @@ cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
+cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
+cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
 python3 -m unittest scripts.tests.test_surface_mir_samples scripts.tests.test_surface_mir_release_check
 python3 scripts/surface_mir_samples.py check-all --format json
 python3 scripts/surface_mir_authoring_check.py check-all --format json
@@ -268,7 +278,10 @@ python3 scripts/minimal_alpha1_patterns.py check-all --format json
 - No TypeMismatch typechecker discharge for generated communication yet.
 - No production identity provider, hardware attestation, or WAN admission.
 - No indexed-state runtime carrier or distributed compaction protocol yet.
-- No Surface Mir runtime execution or source patch hot-plug implementation yet.
+- No final source patch hot-plug ABI, distributed durable migration planner,
+  production patch registry/signing workflow, or arbitrary native/WASM
+  execution through patches.
+- No Surface Mir source operational suite completion yet.
 - No Rust-level language completion.
 - No LLVM/native codegen completion.
 - No final server/client split compiler completion.
@@ -302,11 +315,11 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | role admission docs/report sync closing; P-SURF-06 handoff current | light | 着手可能 |
+| `Macro 0` | repository memory / docs / traceability | source patch docs/report sync closing; P-SURF-07 handoff current | light | 着手可能 |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
-| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, and role admission floors closed; source patch next | heavy | 着手可能 |
-| `Macro 4` | executable sample expansion | `syntax/` parser evidence exists; operational roots remain later | heavy | 後段依存 |
+| `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, and source patch floors closed | heavy | 着手可能 |
+| `Macro 4` | executable sample expansion | source patch samples exist; operational roots are next | heavy | 着手可能 |
 | `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
@@ -323,13 +336,15 @@ Research-discovery items:
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
-| source patch hot-plug | `next promoted` | no direct eval; activation cut required | 着手可能 |
+| source patch hot-plug | `source-patch-hotplug-evidence` | parse/typecheck/elaborate/compatibility/admission report, HotPlugRequest/HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval and rejection-without-mutation evidence exist; final ABI/migration planner later | 着手可能 |
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 
 ## recent log
 
+- 2026-05-24 19:27 JST
+  `P-SURF-06` で source patch hot-plug evidence floor を actualize し、`surface_source_patch_hotplug`、`mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`、`PATCH-01..04`、`cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture`、`cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。source patch は direct eval ではなく、accepted `patch-source` は HotPlugRequest / HotPlugVerdict / activation_cut を出し、`check-source` / `elaborate-source` は inspection-only、rejected patch は mutation しない。current promoted package は `P-SURF-07 source operational suite`。
 - 2026-05-24 18:21 JST
   `P-SURF-05` で role admission / capability grant evidence floor を actualize し、`surface_role_admission_check`、`ROLE-01..04`、`cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture`、`scripts/surface_mir_samples.py check-all` を同期した。role claim は authority ではなく、authority は admission grant から来る。current promoted package は `P-SURF-06 source patch hot-plug`。
 - 2026-05-24 17:48 JST

@@ -1,0 +1,42 @@
+{
+  "family": "surface_mir_source_patch",
+  "current_status": "p_surf_06_source_patch_hotplug_evidence",
+  "rows": [
+    {
+      "sample_id": "PATCH-01",
+      "root_name": "patch-01-visible-state-positive",
+      "stage": "P-SURF-06",
+      "current_status": "executable",
+      "source": "patch-01-visible-state-positive/main/src/visible-state-positive.mir",
+      "expected": "patch-01-visible-state-positive/expected/source_patch.json",
+      "runner": "source_patch"
+    },
+    {
+      "sample_id": "PATCH-02",
+      "root_name": "patch-02-undeclared-failure-negative",
+      "stage": "P-SURF-06",
+      "current_status": "executable",
+      "source": "patch-02-undeclared-failure-negative/main/src/undeclared-failure-negative.mir",
+      "expected": "patch-02-undeclared-failure-negative/expected/source_patch.json",
+      "runner": "source_patch"
+    },
+    {
+      "sample_id": "PATCH-03",
+      "root_name": "patch-03-self-grant-negative",
+      "stage": "P-SURF-06",
+      "current_status": "executable",
+      "source": "patch-03-self-grant-negative/main/src/self-grant-negative.mir",
+      "expected": "patch-03-self-grant-negative/expected/source_patch.json",
+      "runner": "source_patch"
+    },
+    {
+      "sample_id": "PATCH-04",
+      "root_name": "patch-04-lifecycle-devtools-positive",
+      "stage": "P-SURF-06",
+      "current_status": "executable",
+      "source": "patch-04-lifecycle-devtools-positive/main/src/lifecycle-devtools-positive.mir",
+      "expected": "patch-04-lifecycle-devtools-positive/expected/source_patch.json",
+      "runner": "source_patch"
+    }
+  ]
+}

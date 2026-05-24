@@ -61,9 +61,7 @@ must enter through the source pipeline above.
 
 This is required even for development-only patches.
 
-## alpha CLI target
-
-Target command family:
+## alpha CLI
 
 ```bash
 mirrorea-alpha check-source patch.mir
@@ -73,8 +71,8 @@ mirrorea-alpha patch-source session#id patch.mir --format json
 mirrorea-alpha export-core-ir patch.mir --format json
 ```
 
-Until implemented, commands must return explicit unsupported / not-yet-
-implemented diagnostics rather than silent success.
+P-SURF-06 actualizes these commands as alpha report surfaces. They must not be
+read as final hot-plug ABI.
 
 ## compatibility carrier
 

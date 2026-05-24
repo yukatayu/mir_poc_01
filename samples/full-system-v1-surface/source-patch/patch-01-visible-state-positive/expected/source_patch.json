@@ -1,0 +1,60 @@
+{
+  "accepted": true,
+  "module_path": "Patch.DebugLamp",
+  "diagnostic_codes": [],
+  "stage_summaries": [
+    {
+      "stage": "parse",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "typecheck",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "elaborate",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "compatibility",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "admission",
+      "accepted": true,
+      "diagnostic_codes": []
+    }
+  ],
+  "state_addition_summaries": [
+    {
+      "owner_locus": "World",
+      "state_name": "lamp",
+      "keyspace_type": "Participant",
+      "value_type": "DebugLamp",
+      "visible_fields": [
+        "enabled"
+      ],
+      "initializer_present": true
+    }
+  ],
+  "hotplug_request_present": true,
+  "hotplug_verdict_kind": "accepted",
+  "activation_cut_present": true,
+  "activation_cut_kind": "activation_cut",
+  "runtime_mutation_applied": true,
+  "direct_eval_performed": false,
+  "core_ir_diff": {
+    "transition_count": 0,
+    "remote_request_count": 0,
+    "message_envelope_count": 0,
+    "publication_count": 0,
+    "observation_count": 0,
+    "generated_edge_count": 0
+  },
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

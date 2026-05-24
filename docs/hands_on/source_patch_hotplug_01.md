@@ -2,11 +2,13 @@
 
 ## purpose
 
-This guide explains the planned Surface Mir source patch hot-plug boundary from
+This guide explains the Surface Mir source patch hot-plug boundary from
 `specs/42-source-patch-hotplug-semantics.md`.
 
-It is docs/spec rebaseline only. The CLI commands below are target commands for
-later packages.
+`P-SURF-06` actualizes a narrow alpha evidence lane. The commands below produce
+reports for parse/typecheck/elaborate/compatibility/admission, HotPlugRequest,
+HotPlugVerdict, Core IR diff, and activation_cut rows. They do not define a
+final hot-plug ABI.
 
 ## patch pipeline
 
@@ -28,7 +30,7 @@ patch.mir
 
 It is not direct eval.
 
-## planned CLI
+## CLI
 
 ```bash
 mirrorea-alpha check-source patch.mir
@@ -38,8 +40,15 @@ mirrorea-alpha patch-source session#id patch.mir --format json
 mirrorea-alpha export-core-ir patch.mir --format json
 ```
 
-Until implemented, these surfaces should return explicit unsupported /
-not-yet-implemented diagnostics rather than silent success.
+Representative sample commands:
+
+```bash
+python3 scripts/surface_mir_samples.py run PATCH-01 --format json
+python3 scripts/surface_mir_samples.py run PATCH-02 --format json
+python3 scripts/surface_mir_samples.py check-all --format json
+cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
+cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
+```
 
 ## example patch
 
@@ -71,10 +80,10 @@ Expected future runtime meaning:
 
 ## required negative cases
 
-- undeclared failure row.
-- private state write without capability.
+- undeclared generated failure row (`PATCH-02`).
+- self-grant of server authority (`PATCH-03`).
+- private state write without capability remains a later widened row.
 - attempt to alter an already finalized `atomic_cut` prefix.
-- self-grant of server authority.
 - activation against a different membership frontier than the admitted one.
 - redaction / retention weakening.
 

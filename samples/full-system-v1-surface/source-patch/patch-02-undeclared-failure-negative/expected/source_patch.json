@@ -1,0 +1,64 @@
+{
+  "accepted": false,
+  "module_path": "Patch.UndeclaredFailure",
+  "diagnostic_codes": [
+    "generated_failure_not_declared"
+  ],
+  "stage_summaries": [
+    {
+      "stage": "parse",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "typecheck",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "elaborate",
+      "accepted": false,
+      "diagnostic_codes": [
+        "generated_failure_not_declared"
+      ]
+    },
+    {
+      "stage": "compatibility",
+      "accepted": false,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "admission",
+      "accepted": false,
+      "diagnostic_codes": []
+    }
+  ],
+  "state_addition_summaries": [
+    {
+      "owner_locus": "World",
+      "state_name": "player",
+      "keyspace_type": "Participant",
+      "value_type": "Player",
+      "visible_fields": [
+        "hp"
+      ],
+      "initializer_present": false
+    }
+  ],
+  "hotplug_request_present": true,
+  "hotplug_verdict_kind": "rejected",
+  "activation_cut_present": false,
+  "activation_cut_kind": null,
+  "runtime_mutation_applied": false,
+  "direct_eval_performed": false,
+  "core_ir_diff": {
+    "transition_count": 2,
+    "remote_request_count": 1,
+    "message_envelope_count": 1,
+    "publication_count": 1,
+    "observation_count": 1,
+    "generated_edge_count": 4
+  },
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

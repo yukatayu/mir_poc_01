@@ -1,0 +1,9 @@
+module Patch.SelfGrantServerAuthority
+
+place World
+
+World {
+  when start {
+    grant ServerAuthority to self
+  }
+}

@@ -26,13 +26,13 @@ def _run_helper(*args: str) -> dict:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_05_rows(self) -> None:
+    def test_matrix_reports_p_surf_06_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 28)
-        self.assertEqual(payload["executable_count"], 28)
-        self.assertEqual(payload["family_count"], 4)
+        self.assertEqual(payload["sample_count"], 32)
+        self.assertEqual(payload["executable_count"], 32)
+        self.assertEqual(payload["family_count"], 5)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
             "p_surf_04_auto_communication_elaboration_evidence",
@@ -40,6 +40,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["matrix_status"]["surface_mir_role_admission"],
             "p_surf_05_role_admission_capability_grant_evidence",
+        )
+        self.assertEqual(
+            payload["matrix_status"]["surface_mir_source_patch"],
+            "p_surf_06_source_patch_hotplug_evidence",
         )
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
@@ -354,11 +358,59 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             payload["actual"]["hash_binding_summaries"][0]["semantic_safety_proof"]
         )
 
+    def test_source_patch_positive_emits_activation_cut_without_eval(self) -> None:
+        payload = _run_helper("run", "PATCH-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertTrue(payload["actual"]["hotplug_request_present"])
+        self.assertEqual(payload["actual"]["hotplug_verdict_kind"], "accepted")
+        self.assertTrue(payload["actual"]["activation_cut_present"])
+        self.assertTrue(payload["actual"]["runtime_mutation_applied"])
+        self.assertFalse(payload["actual"]["direct_eval_performed"])
+
+    def test_source_patch_undeclared_failure_rejects_without_mutation(self) -> None:
+        payload = _run_helper("run", "PATCH-02")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+        self.assertEqual(payload["actual"]["hotplug_verdict_kind"], "rejected")
+        self.assertFalse(payload["actual"]["activation_cut_present"])
+        self.assertFalse(payload["actual"]["runtime_mutation_applied"])
+
+    def test_source_patch_self_grant_rejects_without_mutation(self) -> None:
+        payload = _run_helper("run", "PATCH-03")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertIn(
+            "patch_self_grant_server_authority_rejected",
+            payload["actual"]["diagnostic_codes"],
+        )
+        self.assertEqual(payload["actual"]["hotplug_verdict_kind"], "rejected")
+        self.assertFalse(payload["actual"]["activation_cut_present"])
+        self.assertFalse(payload["actual"]["runtime_mutation_applied"])
+
+    def test_source_patch_lifecycle_positive_exposes_devtools_row(self) -> None:
+        payload = _run_helper("run", "PATCH-04")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["state_addition_summaries"][0]["state_name"],
+            "patch_lifecycle",
+        )
+        self.assertTrue(payload["actual"]["activation_cut_present"])
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 28)
+        self.assertEqual(len(payload["passed"]), 32)
 
 
 if __name__ == "__main__":

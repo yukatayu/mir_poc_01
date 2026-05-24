@@ -25,16 +25,26 @@ Not decided:
 - durable migration.
 - production patch signing / registry workflow.
 
+Current evidence:
+
+- `crates/mir-runtime::surface_source_patch_hotplug` builds alpha reports for
+  parse/typecheck/elaborate/compatibility/admission.
+- `mirrorea-alpha check-source`, `parse-source`, `elaborate-source`,
+  `patch-source`, and `export-core-ir` expose those reports.
+- accepted patches expose HotPlugRequest, HotPlugVerdict, Core IR diff, and
+  activation_cut rows without direct eval.
+- rejected patches do not apply runtime mutation.
+
 ## package order
 
 | Package | Role | Completion gate |
 |---|---|---|
 | `P-SURF-00B` | docs/spec rebaseline | patch semantics and roadmap exist |
-| `P-SURF-06` | source patch pipeline | `check-source`, `parse-source`, `elaborate-source`, `patch-source`, and `export-core-ir` have accepted/rejected rows |
+| `P-SURF-06` | source patch pipeline | closed: `check-source`, `parse-source`, `elaborate-source`, `patch-source`, and `export-core-ir` have accepted/rejected rows |
 | `P-SURF-08` | devtools | source span, Core IR diff, verdict, activation cut, and state migration summary visible |
 | `P-SURF-99` | audit | compatibility anchors rerun and non-claims preserved |
 
-## planned rows
+## actualized rows
 
 - `PATCH-01` source patch adds visible state.
 - `PATCH-02` undeclared failure rejected.
@@ -43,12 +53,11 @@ Not decided:
 
 ## validation anchors
 
-Future anchors:
-
 ```bash
 python3 scripts/surface_mir_samples.py run PATCH-01 --format json
 python3 scripts/surface_mir_samples.py run PATCH-02 --format json
 python3 scripts/surface_mir_samples.py run PATCH-03 --format json
+python3 scripts/surface_mir_samples.py run PATCH-04 --format json
 cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
 cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
 ```

@@ -23,6 +23,10 @@ Current state:
   verdicts, capability grants, admission witnesses, missing-grant write
   rejection, stale membership rejection, and optional package/runtime hash
   metadata.
+- `source-patch/` is actualized for `P-SURF-06` as a narrow source patch
+  hot-plug evidence lane for parse/typecheck/elaborate/compatibility/admission,
+  HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval,
+  and rejection-without-mutation rows.
 
 Commands:
 
@@ -33,12 +37,14 @@ cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
+cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
+cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
 ```
 
 Stop lines:
 
 - no final public grammar / ABI / SDK.
 - no runtime MessageEnvelope dispatch or final transport completion yet.
-- no runtime execution or source patch hot-plug completion yet.
+- no final source patch hot-plug ABI or distributed durable migration planner.
 - no production identity provider / hardware attestation / WAN admission.
 - no generated package artifact authority.

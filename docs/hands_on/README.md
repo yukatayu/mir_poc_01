@@ -38,8 +38,8 @@
 | `minimal_alpha1_patterns_01.md` | alpha-1 の最小実用 pattern set と strict row / rejection / inventory verifier を読む入口 |
 | `autonomous_execution_01.md` | `P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` front-half と implementation half を途中質問で止まらず進める execution contract を読む入口 |
 | `full_system_v1_roadmap_01.md` | source-first Full System V1 roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む入口 |
-| `surface_mir_alpha_01.md` | Surface Mir alpha の canonical `S { ... }` place-scope syntax、`.mir` source authority、P-SURF package sequence を読む入口 |
-| `source_patch_hotplug_01.md` | Surface source patch hot-plug を direct eval ではなく parse/typecheck/elaborate/admit/activation_cut pipeline として読む入口 |
+| `surface_mir_alpha_01.md` | Surface Mir alpha の canonical `S { ... }` place-scope syntax、`.mir` source authority、P-SURF-06 までの evidence floor、P-SURF package sequence を読む入口 |
+| `source_patch_hotplug_01.md` | Surface source patch hot-plug を direct eval ではなく parse/typecheck/elaborate/admit/activation_cut pipeline として確認する入口 |
 
 ## 既存の長い入門文書
 

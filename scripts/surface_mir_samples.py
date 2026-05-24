@@ -20,25 +20,29 @@ ELABORATION_ROOT = SURFACE_ROOT / "elaboration"
 ELABORATION_MATRIX_PATH = ELABORATION_ROOT / "matrix.json"
 ROLE_ADMISSION_ROOT = SURFACE_ROOT / "role-admission"
 ROLE_ADMISSION_MATRIX_PATH = ROLE_ADMISSION_ROOT / "matrix.json"
+SOURCE_PATCH_ROOT = SURFACE_ROOT / "source-patch"
+SOURCE_PATCH_MATRIX_PATH = SOURCE_PATCH_ROOT / "matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 STOP_LINES = [
     "no final public grammar / ABI / SDK",
-    "no runtime execution or source patch hot-plug completion yet",
+    "no final runtime execution or final source patch hot-plug ABI completion yet",
     "no production identity provider / hardware attestation / WAN admission",
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-05 role admission capability grant is report-level Surface evidence only",
+    "P-SURF-06 source patch hot-plug is alpha pipeline evidence only",
     "no runtime MessageEnvelope dispatch completion",
     "no production identity provider or hardware attestation",
-    "source patch activation remains P-SURF-06",
-    "no general TypeMismatch typechecker discharge in P-SURF-05",
+    "no distributed durable source patch migration",
+    "no general TypeMismatch typechecker discharge in the Surface alpha floor",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-ast --test surface_mir_parser -- --nocapture",
     "cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture",
     "cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture",
     "cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture",
+    "cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture",
+    "cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture",
     "python3 -m unittest scripts.tests.test_surface_mir_samples",
     "python3 scripts/surface_mir_samples.py matrix --format json",
     "python3 scripts/surface_mir_samples.py check-all --format json",
@@ -78,6 +82,13 @@ def _matrix_specs() -> list[dict[str, Any]]:
             "matrix_path": ROLE_ADMISSION_MATRIX_PATH,
             "runner": "role_admission",
             "data": _load_matrix(ROLE_ADMISSION_MATRIX_PATH),
+        },
+        {
+            "family_key": "source_patch",
+            "root": SOURCE_PATCH_ROOT,
+            "matrix_path": SOURCE_PATCH_MATRIX_PATH,
+            "runner": "source_patch",
+            "data": _load_matrix(SOURCE_PATCH_MATRIX_PATH),
         },
     ]
 
@@ -179,6 +190,7 @@ def matrix() -> dict[str, Any]:
         "indexed_state_root": str(INDEXED_STATE_ROOT.relative_to(REPO_ROOT)),
         "elaboration_root": str(ELABORATION_ROOT.relative_to(REPO_ROOT)),
         "role_admission_root": str(ROLE_ADMISSION_ROOT.relative_to(REPO_ROOT)),
+        "source_patch_root": str(SOURCE_PATCH_ROOT.relative_to(REPO_ROOT)),
         "matrix_paths": [
             str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
         ],
@@ -316,6 +328,37 @@ def _check_role_admission_source(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:
         raise RuntimeError(
             f"surface role-admission example did not return JSON for `{path}`: {completed.stderr}"
+        ) from error
+    payload["returncode"] = completed.returncode
+    return payload
+
+
+def _patch_source(path: Path) -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mirrorea-cli",
+            "--",
+            "patch-source",
+            "session#surface-sample",
+            str(path),
+            "--format",
+            "json",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"surface source-patch CLI did not return JSON for `{path}`: {completed.stderr}"
         ) from error
     payload["returncode"] = completed.returncode
     return payload
@@ -608,6 +651,45 @@ def _role_admission_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _source_patch_projection(payload: dict[str, Any]) -> dict[str, Any]:
+    compatibility = payload.get("compatibility") or {}
+    verdict = payload.get("hotplug_verdict") or {}
+    activation_cut = payload.get("activation_cut")
+    return {
+        "accepted": payload.get("accepted"),
+        "module_path": payload.get("module_path"),
+        "diagnostic_codes": payload.get("diagnostic_codes") or [],
+        "stage_summaries": [
+            {
+                "stage": row["stage"],
+                "accepted": row["accepted"],
+                "diagnostic_codes": row.get("diagnostic_codes") or [],
+            }
+            for row in payload.get("stage_summaries") or []
+        ],
+        "state_addition_summaries": [
+            {
+                "owner_locus": row["owner_locus"],
+                "state_name": row["state_name"],
+                "keyspace_type": row.get("keyspace_type"),
+                "value_type": row["value_type"],
+                "visible_fields": row.get("visible_fields") or [],
+                "initializer_present": row["initializer_present"],
+            }
+            for row in compatibility.get("state_additions") or []
+        ],
+        "hotplug_request_present": payload.get("hotplug_request") is not None,
+        "hotplug_verdict_kind": verdict.get("verdict_kind"),
+        "activation_cut_present": activation_cut is not None,
+        "activation_cut_kind": (activation_cut or {}).get("cut_kind"),
+        "runtime_mutation_applied": payload.get("runtime_mutation_applied"),
+        "direct_eval_performed": payload.get("direct_eval_performed"),
+        "core_ir_diff": compatibility.get("core_ir_diff") or {},
+        "source_authority": payload.get("source_authority"),
+        "final_public_api_frozen": payload.get("final_public_api_frozen"),
+    }
+
+
 def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     for spec in _matrix_specs():
         row = next(
@@ -632,6 +714,9 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     elif runner == "role_admission":
         payload = _check_role_admission_source(source_path)
         actual = _role_admission_projection(payload)
+    elif runner == "source_patch":
+        payload = _patch_source(source_path)
+        actual = _source_patch_projection(payload)
     else:
         payload = _parse_source(source_path)
         actual = _payload_projection(payload)

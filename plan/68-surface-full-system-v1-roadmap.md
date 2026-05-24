@@ -55,8 +55,8 @@ The repo now has:
 | 4 | `P-SURF-03` | elaboration | closed: cross-locus reads/writes generate Core IR remote request rows, generated edges, source spans, obligations, and underdeclared failure-row rejection |
 | 5 | `P-SURF-04` | auto communication | closed: MessageEnvelope / publish / observe / failure rows visible |
 | 6 | `P-SURF-05` | role admission | closed: role claim / grant / missing-grant / stale / hash metadata rows |
-| 7 | `P-SURF-06` | source patch | next: parse/typecheck/elaborate/admit/activation-cut pipeline |
-| 8 | `P-SURF-07` | source operational suite | WorldCore / MembershipChat / Sugoroku / related roots |
+| 7 | `P-SURF-06` | source patch | closed: source commands, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, rejection-without-mutation rows |
+| 8 | `P-SURF-07` | source operational suite | next: WorldCore / MembershipChat / Sugoroku / related roots |
 | 9 | `P-SURF-08` | devtools | source/Core/generated-edge/patch/admission panels |
 | 10 | `P-SURF-99` | final audit | full validation and compatibility anchors |
 
@@ -90,9 +90,16 @@ samples/full-system-v1-surface/
   role-admission/
 ```
 
+Created by P-SURF-06 as source patch pipeline evidence:
+
+```text
+samples/full-system-v1-surface/
+  source-patch/
+```
+
 These roots are not workflow-ready runtime evidence. Future implementation
-packages should add sibling roots/rows only after runtime dispatch, source
-patch, and operational surfaces exist.
+packages should add sibling roots/rows only after the relevant runtime dispatch
+and operational surfaces exist.
 
 ## compatibility anchors
 

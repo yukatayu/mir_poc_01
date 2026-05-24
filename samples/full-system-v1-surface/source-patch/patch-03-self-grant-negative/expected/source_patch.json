@@ -1,0 +1,56 @@
+{
+  "accepted": false,
+  "module_path": "Patch.SelfGrantServerAuthority",
+  "diagnostic_codes": [
+    "unsupported_surface_statement_for_elaboration",
+    "patch_self_grant_server_authority_rejected"
+  ],
+  "stage_summaries": [
+    {
+      "stage": "parse",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "typecheck",
+      "accepted": true,
+      "diagnostic_codes": []
+    },
+    {
+      "stage": "elaborate",
+      "accepted": false,
+      "diagnostic_codes": [
+        "unsupported_surface_statement_for_elaboration"
+      ]
+    },
+    {
+      "stage": "compatibility",
+      "accepted": false,
+      "diagnostic_codes": [
+        "patch_self_grant_server_authority_rejected"
+      ]
+    },
+    {
+      "stage": "admission",
+      "accepted": false,
+      "diagnostic_codes": []
+    }
+  ],
+  "state_addition_summaries": [],
+  "hotplug_request_present": true,
+  "hotplug_verdict_kind": "rejected",
+  "activation_cut_present": false,
+  "activation_cut_kind": null,
+  "runtime_mutation_applied": false,
+  "direct_eval_performed": false,
+  "core_ir_diff": {
+    "transition_count": 1,
+    "remote_request_count": 0,
+    "message_envelope_count": 0,
+    "publication_count": 0,
+    "observation_count": 0,
+    "generated_edge_count": 0
+  },
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

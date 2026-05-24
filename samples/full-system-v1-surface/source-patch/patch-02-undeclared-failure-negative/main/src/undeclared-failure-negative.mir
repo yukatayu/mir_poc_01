@@ -1,0 +1,21 @@
+module Patch.UndeclaredFailure
+
+place Client
+place World
+
+record Player {
+  hp: Int64,
+}
+
+World {
+  state player[p: Participant]: Player
+    visible observer_safe fields { hp }
+}
+
+Client {
+  when tick {
+    World {
+      player[self].hp = 1
+    }
+  }
+}

@@ -38,6 +38,7 @@ pub mod practical_alpha1_transport;
 pub mod product_alpha1_devtools;
 pub mod product_alpha1_session;
 pub mod product_alpha1_transport;
+pub mod surface_source_patch_hotplug;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

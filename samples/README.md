@@ -56,8 +56,10 @@
   - the same helper validates cross-locus read/write remote requests, MessageEnvelope rows, visible publish/observe rows, generated edges, source spans, obligations, read/write/visibility underdeclared generated failure-row rejection, private/non-visible field rejection, unsupported-statement rejection, and nested-place read placement
   - `role-admission/` is actualized by `P-SURF-05` as report-level role admission and capability grant evidence for `ROLE-01..04`
   - the same helper validates role claim, join admission request, accepted verdict, admission witness, capability grant, missing-grant write rejection, stale membership rejection, and optional package/runtime hash metadata without treating role claim or hash binding as authority
-  - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world`, `patch-hotplug/`, `posegraph/`, `projection/`, and `provider/`
-  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add runtime dispatch, patch activation, and operational rows
+  - `source-patch/` is actualized by `P-SURF-06` as source patch hot-plug pipeline evidence for `PATCH-01..04`
+  - the same helper validates parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, accepted mutation, and rejected-without-mutation rows
+  - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world`, `posegraph/`, `projection/`, and `provider/`
+  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add runtime dispatch and operational rows
   - canonical place-scope syntax for future source samples is `S { ... }`; `S[ ... ]` is rejected and is not a compatibility sugar
   - `package.mir.json` remains alpha artifact / compatibility output, not semantic source authority
 - planned future product-alpha1 semantic roots
@@ -222,8 +224,9 @@ cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 Current `P-SURF-01` adds parser evidence, `P-SURF-02` adds indexed-state
 semantic checker evidence, `P-SURF-03` adds Surface-to-Core elaboration
 evidence, `P-SURF-04` adds generated communication evidence, and `P-SURF-05`
-adds role admission / capability grant evidence. The following commands are
-runnable for `SURF-*`, `IDX-*`, `ELAB-*`, and `ROLE-*` rows:
+adds role admission / capability grant evidence, and `P-SURF-06` adds source
+patch hot-plug evidence. The following commands are runnable for `SURF-*`,
+`IDX-*`, `ELAB-*`, `ROLE-*`, and `PATCH-*` rows:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -234,12 +237,9 @@ python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
-```
-
-Runtime / CLI commands remain future anchors:
-
-```bash
+cargo test -p mir-semantics --test role_admission_capability_grant -- --nocapture
 cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
+cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
 ```
 
 ## move policy

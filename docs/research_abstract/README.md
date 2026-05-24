@@ -65,7 +65,7 @@
 - `full_system_v1_roadmap_01.md`
   `P-FS-00` source-first roadmap rebaseline、`FS-00..FS-11`、次 package `P-MIR-01`、final-public non-claims の summary
 - `surface_mir_alpha_01.md`
-  `P-SURF-00B` Surface Mir brace/source-authority rebaseline、canonical `S { ... }`、no `S[ ... ]` sugar、indexed state、role admission、source patch hot-plug、next package `P-SURF-01` の summary
+  Surface Mir brace/source-authority line、canonical `S { ... }`、no `S[ ... ]` sugar、indexed state、role admission、source patch hot-plug evidence、next package `P-SURF-07` の summary
 - `repository_layer_structure_01.md`
 - `clean_near_end_typing_01.md`
 - `clean_near_end_order_model_01.md`

@@ -34,6 +34,10 @@ use mir_runtime::{
         run_product_alpha1_transport_for_session, run_product_alpha1_transport_participant_client,
         run_product_alpha1_transport_world_server,
     },
+    surface_source_patch_hotplug::{
+        check_surface_source_patch_path, inspect_surface_source_patch_path,
+        parse_surface_source_patch_path,
+    },
 };
 use serde_json::{Value, json};
 
@@ -73,6 +77,11 @@ fn run(args: Vec<String>) -> i32 {
         "view" => handle_view(rest),
         "build-native-bundle" => handle_build_native_bundle(rest),
         "demo" => handle_demo(rest),
+        "check-source" => handle_check_source(rest),
+        "parse-source" => handle_parse_source(rest),
+        "elaborate-source" => handle_elaborate_source(rest),
+        "patch-source" => handle_patch_source(rest),
+        "export-core-ir" => handle_export_core_ir(rest),
         "project-full-v1" => handle_project_full_v1(rest),
         "run-full-v1-split" => handle_run_full_v1_split(rest),
         "admit-provider-v1" => handle_admit_provider_v1(rest),
@@ -157,6 +166,140 @@ fn handle_check(args: &[String]) -> (Value, i32) {
         ),
         Err(error) => (error_payload("check", error), 2),
     }
+}
+
+fn handle_check_source(args: &[String]) -> (Value, i32) {
+    let Some(path) = args.first() else {
+        return (missing_source_path_payload("check-source"), 2);
+    };
+    if args.len() != 1 {
+        return (unexpected_arguments_payload("check-source", &args[1..]), 2);
+    }
+    match inspect_surface_source_patch_path(path, "session#check-source") {
+        Ok(report) => report_payload("check-source", report),
+        Err(error) => (source_path_io_error_payload("check-source", path, error), 2),
+    }
+}
+
+fn handle_parse_source(args: &[String]) -> (Value, i32) {
+    let Some(path) = args.first() else {
+        return (missing_source_path_payload("parse-source"), 2);
+    };
+    if args.len() != 1 {
+        return (unexpected_arguments_payload("parse-source", &args[1..]), 2);
+    }
+    let report = parse_surface_source_patch_path(path);
+    let accepted = report.accepted;
+    let module_path = report
+        .module
+        .as_ref()
+        .map(|module| module.module_path.clone());
+    let diagnostic_codes = report
+        .diagnostics
+        .iter()
+        .map(|diagnostic| diagnostic.code.clone())
+        .collect::<Vec<_>>();
+    (
+        json!({
+            "surface_kind": "surface_source_patch_parse_report",
+            "command": "parse-source",
+            "source_path": path,
+            "accepted": accepted,
+            "module_path": module_path,
+            "diagnostics": report.diagnostics,
+            "diagnostic_codes": diagnostic_codes,
+            "canonical_place_scope_syntax": report.canonical_place_scope_syntax,
+            "implemented": true,
+            "source_authority": ".mir",
+            "final_public_grammar_frozen": report.final_public_grammar_frozen,
+            "final_public_api_frozen": false
+        }),
+        if accepted { 0 } else { 2 },
+    )
+}
+
+fn handle_elaborate_source(args: &[String]) -> (Value, i32) {
+    let Some(path) = args.first() else {
+        return (missing_source_path_payload("elaborate-source"), 2);
+    };
+    if args.len() != 1 {
+        return (
+            unexpected_arguments_payload("elaborate-source", &args[1..]),
+            2,
+        );
+    }
+    match inspect_surface_source_patch_path(path, "session#elaborate-source") {
+        Ok(report) => report_payload("elaborate-source", report),
+        Err(error) => (
+            source_path_io_error_payload("elaborate-source", path, error),
+            2,
+        ),
+    }
+}
+
+fn handle_patch_source(args: &[String]) -> (Value, i32) {
+    let Some(session_id) = args.first() else {
+        return (
+            json!({
+                "status": "error",
+                "command": "patch-source",
+                "diagnostic_code": "missing_session_id",
+                "implemented": true,
+                "final_public_api_frozen": false
+            }),
+            2,
+        );
+    };
+    let Some(path) = args.get(1) else {
+        return (missing_source_path_payload("patch-source"), 2);
+    };
+    if args.len() != 2 {
+        return (unexpected_arguments_payload("patch-source", &args[2..]), 2);
+    }
+    match check_surface_source_patch_path(path, session_id) {
+        Ok(report) => report_payload("patch-source", report),
+        Err(error) => (source_path_io_error_payload("patch-source", path, error), 2),
+    }
+}
+
+fn handle_export_core_ir(args: &[String]) -> (Value, i32) {
+    let Some(path) = args.first() else {
+        return (missing_source_path_payload("export-core-ir"), 2);
+    };
+    if args.len() != 1 {
+        return (
+            unexpected_arguments_payload("export-core-ir", &args[1..]),
+            2,
+        );
+    }
+    let report = match inspect_surface_source_patch_path(path, "session#export-core-ir") {
+        Ok(report) => report,
+        Err(error) => {
+            return (
+                source_path_io_error_payload("export-core-ir", path, error),
+                2,
+            );
+        }
+    };
+    let code = if report.stage_status("elaborate") == Some(true) {
+        0
+    } else {
+        2
+    };
+    (
+        json!({
+            "surface_kind": "surface_source_patch_core_ir_export",
+            "command": "export-core-ir",
+            "accepted": code == 0,
+            "module_path": report.module_path,
+            "core_ir": report.core_ir,
+            "diagnostics": report.diagnostics,
+            "diagnostic_codes": report.diagnostic_codes,
+            "source_authority": ".mir",
+            "final_public_api_frozen": false
+        }),
+        code,
+    )
 }
 
 fn handle_run_local(args: &[String]) -> (Value, i32) {
@@ -2790,6 +2933,46 @@ fn unexpected_arguments_payload(command: &str, args: &[String]) -> Value {
     })
 }
 
+fn missing_source_path_payload(command: &str) -> Value {
+    json!({
+        "status": "error",
+        "command": command,
+        "diagnostic_code": "missing_source_path",
+        "implemented": true,
+        "source_authority": ".mir",
+        "final_public_api_frozen": false
+    })
+}
+
+fn source_path_io_error_payload(command: &str, path: &str, error: io::Error) -> Value {
+    json!({
+        "status": "error",
+        "command": command,
+        "diagnostic_code": "source_path_io_error",
+        "source_path": path,
+        "message": error.to_string(),
+        "implemented": true,
+        "source_authority": ".mir",
+        "final_public_api_frozen": false
+    })
+}
+
+fn report_payload(
+    command: &str,
+    report: mir_runtime::surface_source_patch_hotplug::SurfaceSourcePatchReport,
+) -> (Value, i32) {
+    let accepted = report.accepted;
+    let mut value =
+        serde_json::to_value(report).expect("surface source patch report should serialize");
+    insert_string(&mut value, "command", command.to_string());
+    insert_string(
+        &mut value,
+        "status",
+        if accepted { "accepted" } else { "rejected" }.to_string(),
+    );
+    (value, if accepted { 0 } else { 2 })
+}
+
 fn unsupported_format_payload(format: &str) -> Value {
     json!({
         "status": "error",
@@ -2854,6 +3037,11 @@ fn usage_payload() -> Value {
             "view",
             "build-native-bundle",
             "demo",
+            "check-source",
+            "parse-source",
+            "elaborate-source",
+            "patch-source",
+            "export-core-ir",
             "project-full-v1",
             "run-full-v1-split",
             "admit-provider-v1",

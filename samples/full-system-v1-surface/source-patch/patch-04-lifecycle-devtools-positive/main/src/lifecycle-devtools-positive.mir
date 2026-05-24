@@ -1,0 +1,13 @@
+module Patch.LifecycleDevtools
+
+place World
+
+record PatchLifecycle {
+  phase: Bool,
+}
+
+World {
+  state patch_lifecycle[p: Participant]: PatchLifecycle
+    init PatchLifecycle { phase: true }
+    visible observer_safe fields { phase }
+}
