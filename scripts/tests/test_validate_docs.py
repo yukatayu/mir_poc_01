@@ -246,6 +246,8 @@ class ValidateDocsTests(unittest.TestCase):
             "samples/full-system-v1-surface/README.md",
             "samples/full-system-v1-surface/syntax/README.md",
             "samples/full-system-v1-surface/syntax/matrix.json",
+            "samples/full-system-v1-surface/indexed-state/README.md",
+            "samples/full-system-v1-surface/indexed-state/matrix.json",
             "scripts/surface_mir_samples.py",
             "scripts/surface_mir_release_check.py",
             "scripts/surface_mir_authoring_check.py",

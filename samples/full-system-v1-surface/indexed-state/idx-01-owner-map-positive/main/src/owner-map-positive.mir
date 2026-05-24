@@ -1,0 +1,17 @@
+module Surface.Indexed.OwnerMapPositive
+
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    init Player { hp: 100 }
+    visible observer_safe fields { hp }
+
+  when tick {
+    player[self].hp = 99
+  }
+}

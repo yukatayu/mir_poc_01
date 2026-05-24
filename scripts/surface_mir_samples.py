@@ -14,6 +14,8 @@ REPO_ROOT = SCRIPT_DIR.parent
 SURFACE_ROOT = REPO_ROOT / "samples" / "full-system-v1-surface"
 SYNTAX_ROOT = SURFACE_ROOT / "syntax"
 SYNTAX_MATRIX_PATH = SYNTAX_ROOT / "matrix.json"
+INDEXED_STATE_ROOT = SURFACE_ROOT / "indexed-state"
+INDEXED_STATE_MATRIX_PATH = INDEXED_STATE_ROOT / "matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 STOP_LINES = [
     "no final public grammar / ABI / SDK",
@@ -22,42 +24,64 @@ STOP_LINES = [
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-01 parser evidence only",
+    "P-SURF-02 indexed-state semantics evidence only",
     "Core IR generation remains P-SURF-03",
     "role admission authority remains P-SURF-05",
     "source patch activation remains P-SURF-06",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-ast --test surface_mir_parser -- --nocapture",
+    "cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture",
     "python3 -m unittest scripts.tests.test_surface_mir_samples",
     "python3 scripts/surface_mir_samples.py matrix --format json",
     "python3 scripts/surface_mir_samples.py check-all --format json",
 ]
 
 
-def _load_matrix() -> dict[str, Any]:
-    return json.loads(SYNTAX_MATRIX_PATH.read_text(encoding="utf-8"))
+def _load_matrix(matrix_path: Path) -> dict[str, Any]:
+    return json.loads(matrix_path.read_text(encoding="utf-8"))
 
 
-def _row_source_path(row: dict[str, Any]) -> Path:
-    return SYNTAX_ROOT / row["source"]
+def _matrix_specs() -> list[dict[str, Any]]:
+    return [
+        {
+            "family_key": "syntax",
+            "root": SYNTAX_ROOT,
+            "matrix_path": SYNTAX_MATRIX_PATH,
+            "runner": "parser",
+            "data": _load_matrix(SYNTAX_MATRIX_PATH),
+        },
+        {
+            "family_key": "indexed_state",
+            "root": INDEXED_STATE_ROOT,
+            "matrix_path": INDEXED_STATE_MATRIX_PATH,
+            "runner": "indexed_state",
+            "data": _load_matrix(INDEXED_STATE_MATRIX_PATH),
+        },
+    ]
 
 
-def _row_expected_path(row: dict[str, Any]) -> Path:
-    return SYNTAX_ROOT / row["expected"]
+def _row_source_path(root: Path, row: dict[str, Any]) -> Path:
+    return root / row["source"]
 
 
-def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
+def _row_expected_path(root: Path, row: dict[str, Any]) -> Path:
+    return root / row["expected"]
+
+
+def validate_rows(spec: dict[str, Any]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
-    for row in rows:
-        root_path = SYNTAX_ROOT / row["root_name"]
+    root = spec["root"]
+    for row in spec["data"]["rows"]:
+        root_path = root / row["root_name"]
         readme_path = root_path / "README.md"
-        source_path = _row_source_path(row)
-        expected_path = _row_expected_path(row)
+        source_path = _row_source_path(root, row)
+        expected_path = _row_expected_path(root, row)
         if not root_path.exists():
             errors.append(
                 {
                     "sample_id": row["sample_id"],
+                    "family": spec["family_key"],
                     "kind": "missing_root",
                     "detail": f"missing sample root `{root_path}`",
                 }
@@ -66,6 +90,7 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
             errors.append(
                 {
                     "sample_id": row["sample_id"],
+                    "family": spec["family_key"],
                     "kind": "missing_readme",
                     "detail": f"missing sample readme `{readme_path}`",
                 }
@@ -74,6 +99,7 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
             errors.append(
                 {
                     "sample_id": row["sample_id"],
+                    "family": spec["family_key"],
                     "kind": "missing_source",
                     "detail": f"missing source `{source_path}`",
                 }
@@ -82,6 +108,7 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
             errors.append(
                 {
                     "sample_id": row["sample_id"],
+                    "family": spec["family_key"],
                     "kind": "missing_expected",
                     "detail": f"missing expected projection `{expected_path}`",
                 }
@@ -89,38 +116,56 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
     return errors
 
 
-def _materialize_row(row: dict[str, Any]) -> dict[str, Any]:
+def _materialize_row(spec: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
     return {
         "sample_id": row["sample_id"],
+        "family": spec["data"]["family"],
         "root_name": row["root_name"],
         "stage": row["stage"],
         "current_status": row["current_status"],
-        "source": str(_row_source_path(row).relative_to(REPO_ROOT)),
-        "expected": str(_row_expected_path(row).relative_to(REPO_ROOT)),
+        "runner": row.get("runner", spec["runner"]),
+        "source": str(_row_source_path(spec["root"], row).relative_to(REPO_ROOT)),
+        "expected": str(_row_expected_path(spec["root"], row).relative_to(REPO_ROOT)),
     }
 
 
 def list_samples() -> list[dict[str, Any]]:
-    return [_materialize_row(row) for row in _load_matrix()["rows"]]
+    return [
+        _materialize_row(spec, row)
+        for spec in _matrix_specs()
+        for row in spec["data"]["rows"]
+    ]
 
 
 def matrix() -> dict[str, Any]:
-    data = _load_matrix()
-    rows = [_materialize_row(row) for row in data["rows"]]
-    validation_errors = validate_rows(data["rows"])
+    specs = _matrix_specs()
+    rows = [
+        _materialize_row(spec, row)
+        for spec in specs
+        for row in spec["data"]["rows"]
+    ]
+    validation_errors = [
+        error for spec in specs for error in validate_rows(spec)
+    ]
     executable_rows = [
-        row["sample_id"] for row in data["rows"] if row["current_status"] == "executable"
+        row["sample_id"] for row in rows if row["current_status"] == "executable"
     ]
     return {
         "command": "matrix",
-        "family": data["family"],
+        "family": "surface_mir_alpha_source",
         "sample_root": str(SURFACE_ROOT.relative_to(REPO_ROOT)),
         "syntax_root": str(SYNTAX_ROOT.relative_to(REPO_ROOT)),
-        "matrix_path": str(SYNTAX_MATRIX_PATH.relative_to(REPO_ROOT)),
+        "indexed_state_root": str(INDEXED_STATE_ROOT.relative_to(REPO_ROOT)),
+        "matrix_paths": [
+            str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
+        ],
+        "family_count": len(specs),
         "sample_count": len(rows),
         "executable_count": len(executable_rows),
         "executable_rows": executable_rows,
-        "matrix_status": data["current_status"],
+        "matrix_status": {
+            spec["data"]["family"]: spec["data"]["current_status"] for spec in specs
+        },
         "workflow_ready": False,
         "rows": rows,
         "validation_errors": validation_errors,
@@ -155,6 +200,37 @@ def _parse_source(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:
         raise RuntimeError(
             f"surface parser example did not return JSON for `{path}`: {completed.stderr}"
+        ) from error
+    payload["returncode"] = completed.returncode
+    return payload
+
+
+def _check_indexed_state_source(path: Path) -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mir-semantics",
+            "--example",
+            "surface_indexed_state_check",
+            "--",
+            str(path),
+            "--format",
+            "json",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"surface indexed-state example did not return JSON for `{path}`: {completed.stderr}"
         ) from error
     payload["returncode"] = completed.returncode
     return payload
@@ -245,22 +321,74 @@ def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _indexed_state_projection(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "accepted": payload.get("accepted"),
+        "module_path": payload.get("module_path"),
+        "diagnostic_codes": [
+            row["code"] for row in payload.get("diagnostics") or []
+        ],
+        "indexed_state_summaries": [
+            {
+                "state_name": row["state_name"],
+                "owner_locus": row["owner_locus"],
+                "key_name": row["key_name"],
+                "keyspace_type": row["keyspace_type"],
+                "value_type": row["value_type"],
+                "visible_fields": row.get("visible_fields") or [],
+                "authority_model": row["authority_model"],
+            }
+            for row in payload.get("indexed_states") or []
+        ],
+        "access_summaries": [
+            {
+                "state_name": row["state_name"],
+                "owner_locus": row["owner_locus"],
+                "access_locus": row["access_locus"],
+                "key_expr": row["key_expr"],
+                "access_kind": row["access_kind"],
+                "accepted": row["accepted"],
+                "reason_code": row.get("reason_code"),
+                "key_authority_granted": row["key_authority_granted"],
+            }
+            for row in payload.get("access_checks") or []
+        ],
+        "source_authority": payload.get("source_authority"),
+        "final_public_api_frozen": payload.get("final_public_api_frozen"),
+    }
+
+
+def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
+    for spec in _matrix_specs():
+        row = next(
+            (row for row in spec["data"]["rows"] if row["sample_id"] == sample_id),
+            None,
+        )
+        if row is not None:
+            return spec, row
+    raise ValueError(f"unknown Surface Mir sample `{sample_id}`")
+
+
 def run_sample(sample_id: str) -> dict[str, Any]:
-    data = _load_matrix()
-    row = next((row for row in data["rows"] if row["sample_id"] == sample_id), None)
-    if row is None:
-        raise ValueError(f"unknown Surface Mir sample `{sample_id}`")
-    payload = _parse_source(_row_source_path(row))
-    expected = json.loads(_row_expected_path(row).read_text(encoding="utf-8"))
-    actual = _payload_projection(payload)
+    spec, row = _find_row(sample_id)
+    runner = row.get("runner", spec["runner"])
+    source_path = _row_source_path(spec["root"], row)
+    if runner == "indexed_state":
+        payload = _check_indexed_state_source(source_path)
+        actual = _indexed_state_projection(payload)
+    else:
+        payload = _parse_source(source_path)
+        actual = _payload_projection(payload)
+    expected = json.loads(_row_expected_path(spec["root"], row).read_text(encoding="utf-8"))
     mismatches = [
         key for key, expected_value in expected.items() if actual.get(key) != expected_value
     ]
     return {
         "command": "run",
-        "family": data["family"],
+        "family": spec["data"]["family"],
         "sample_id": sample_id,
-        "source": str(_row_source_path(row).relative_to(REPO_ROOT)),
+        "runner": runner,
+        "source": str(source_path.relative_to(REPO_ROOT)),
         "expected": expected,
         "actual": actual,
         "accepted": not mismatches,
@@ -271,7 +399,7 @@ def run_sample(sample_id: str) -> dict[str, Any]:
 
 def check_all() -> dict[str, Any]:
     status = matrix()
-    results = [run_sample(row["sample_id"]) for row in _load_matrix()["rows"]]
+    results = [run_sample(row["sample_id"]) for row in status["rows"]]
     failed = [
         result["sample_id"]
         for result in results
@@ -281,8 +409,7 @@ def check_all() -> dict[str, Any]:
         failed.extend(
             sorted(
                 {
-                    row["sample_id"]
-                    for row in _load_matrix()["rows"]
+                    row["sample_id"] for row in status["rows"]
                     if any(
                         error["sample_id"] == row["sample_id"]
                         for error in status["validation_errors"]

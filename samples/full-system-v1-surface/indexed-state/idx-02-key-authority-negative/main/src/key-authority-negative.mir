@@ -1,0 +1,14 @@
+module Surface.Indexed.KeyAuthorityNegative
+
+role BrowserClient
+place S
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when cheat {
+    player[self].hp = 1
+  }
+}

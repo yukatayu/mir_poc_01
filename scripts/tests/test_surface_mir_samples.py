@@ -29,9 +29,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
     def test_matrix_reports_p_surf_01_rows(self) -> None:
         payload = _run_helper("matrix")
 
-        self.assertEqual(payload["family"], "surface_mir_alpha_syntax")
-        self.assertEqual(payload["sample_count"], 9)
-        self.assertEqual(payload["executable_count"], 9)
+        self.assertEqual(payload["family"], "surface_mir_alpha_source")
+        self.assertEqual(payload["sample_count"], 14)
+        self.assertEqual(payload["executable_count"], 14)
+        self.assertEqual(payload["family_count"], 2)
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
 
@@ -91,11 +92,64 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             "S",
         )
 
+    def test_indexed_state_positive_keeps_owner_and_keyspace_split(self) -> None:
+        payload = _run_helper("run", "IDX-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        state = payload["actual"]["indexed_state_summaries"][0]
+        self.assertEqual(state["owner_locus"], "S")
+        self.assertEqual(state["keyspace_type"], "Participant")
+        self.assertEqual(state["authority_model"], "owner_locus_or_explicit_capability")
+
+    def test_indexed_state_key_authority_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "IDX-02")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["indexed_state_key_is_not_authority"],
+        )
+        self.assertFalse(
+            payload["actual"]["access_summaries"][0]["key_authority_granted"]
+        )
+
+    def test_indexed_state_stale_key_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "IDX-03")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["stale_indexed_state_key"],
+        )
+
+    def test_indexed_state_compaction_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "IDX-04")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["indexed_state_compaction_blocked_by_retained_evidence"],
+        )
+
+    def test_indexed_state_nested_place_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "IDX-05")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["indexed_state_nested_place_requires_generated_request"],
+        )
+        self.assertEqual(
+            payload["actual"]["access_summaries"][0]["access_locus"],
+            "role:BrowserClient",
+        )
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 9)
+        self.assertEqual(len(payload["passed"]), 14)
 
 
 if __name__ == "__main__":

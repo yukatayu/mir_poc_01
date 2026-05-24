@@ -1,0 +1,30 @@
+{
+  "accepted": true,
+  "module_path": "Surface.Indexed.OwnerMapPositive",
+  "diagnostic_codes": [],
+  "indexed_state_summaries": [
+    {
+      "state_name": "player",
+      "owner_locus": "S",
+      "key_name": "p",
+      "keyspace_type": "Participant",
+      "value_type": "Player",
+      "visible_fields": ["hp"],
+      "authority_model": "owner_locus_or_explicit_capability"
+    }
+  ],
+  "access_summaries": [
+    {
+      "state_name": "player",
+      "owner_locus": "S",
+      "access_locus": "S",
+      "key_expr": "self",
+      "access_kind": "write",
+      "accepted": true,
+      "reason_code": null,
+      "key_authority_granted": false
+    }
+  ],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

@@ -24,6 +24,7 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
         names = [command.name for command in plan.commands]
 
         self.assertIn("test:surface-parser", names)
+        self.assertIn("test:indexed-state-semantics", names)
         self.assertIn("test:surface-samples", names)
         self.assertIn("test:surface-release-check", names)
         self.assertIn("helper:surface-samples", names)
@@ -35,7 +36,7 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
             argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
         )
         payload = {
-            "sample_count": 9,
+            "sample_count": 14,
             "failed": [],
             "workflow_ready": False,
         }

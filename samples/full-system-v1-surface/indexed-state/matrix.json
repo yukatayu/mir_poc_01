@@ -1,0 +1,51 @@
+{
+  "family": "surface_mir_indexed_state",
+  "current_status": "p_surf_02_indexed_state_semantics_evidence",
+  "rows": [
+    {
+      "sample_id": "IDX-01",
+      "root_name": "idx-01-owner-map-positive",
+      "stage": "P-SURF-02",
+      "current_status": "executable",
+      "source": "idx-01-owner-map-positive/main/src/owner-map-positive.mir",
+      "expected": "idx-01-owner-map-positive/expected/indexed_state.json",
+      "runner": "indexed_state"
+    },
+    {
+      "sample_id": "IDX-02",
+      "root_name": "idx-02-key-authority-negative",
+      "stage": "P-SURF-02",
+      "current_status": "executable",
+      "source": "idx-02-key-authority-negative/main/src/key-authority-negative.mir",
+      "expected": "idx-02-key-authority-negative/expected/indexed_state.json",
+      "runner": "indexed_state"
+    },
+    {
+      "sample_id": "IDX-03",
+      "root_name": "idx-03-stale-key-negative",
+      "stage": "P-SURF-02",
+      "current_status": "executable",
+      "source": "idx-03-stale-key-negative/main/src/stale-key-negative.mir",
+      "expected": "idx-03-stale-key-negative/expected/indexed_state.json",
+      "runner": "indexed_state"
+    },
+    {
+      "sample_id": "IDX-04",
+      "root_name": "idx-04-compaction-retained-negative",
+      "stage": "P-SURF-02",
+      "current_status": "executable",
+      "source": "idx-04-compaction-retained-negative/main/src/compaction-retained-negative.mir",
+      "expected": "idx-04-compaction-retained-negative/expected/indexed_state.json",
+      "runner": "indexed_state"
+    },
+    {
+      "sample_id": "IDX-05",
+      "root_name": "idx-05-nested-place-authority-negative",
+      "stage": "P-SURF-02",
+      "current_status": "executable",
+      "source": "idx-05-nested-place-authority-negative/main/src/nested-place-authority-negative.mir",
+      "expected": "idx-05-nested-place-authority-negative/expected/indexed_state.json",
+      "runner": "indexed_state"
+    }
+  ]
+}

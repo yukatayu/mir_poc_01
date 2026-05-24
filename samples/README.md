@@ -50,8 +50,10 @@
   Surface Mir source-authority sample root under `specs/39..43` / `plan/64..68`
   - `syntax/` is actualized by `P-SURF-01` as parser evidence for `SURF-01..09`
   - `python3 scripts/surface_mir_samples.py check-all --format json` validates canonical `S { ... }`, `S[ ... ]` rejection, record literal disambiguation, ambiguous brace rejection, role-instance block parsing, namespace-head rejection, invalid role binders, and role named `S` disambiguation
+  - `indexed-state/` is actualized by `P-SURF-02` as semantic checker evidence for `IDX-01..05`
+  - the same helper validates S-owned Participant-indexed state, key-not-authority rejection, stale-key rejection, retained-savepoint compaction rejection, and nested-place ambient-authority rejection
   - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world`, `role-admission/`, `patch-hotplug/`, `posegraph/`, `projection/`, and `provider/`
-  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add indexed-state semantics, elaboration, runtime, and operational rows
+  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add elaboration, runtime, and operational rows
   - canonical place-scope syntax for future source samples is `S { ... }`; `S[ ... ]` is rejected and is not a compatibility sugar
   - `package.mir.json` remains alpha artifact / compatibility output, not semantic source authority
 - planned future product-alpha1 semantic roots
@@ -211,10 +213,11 @@ cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 
 `scripts/full_system_v1_release_check.py` is the bounded line-level closeout command. It reruns the validation floor, focused Cargo tests, source-first helpers, Product Alpha compatibility anchors, representative Full V1 CLI surfaces, and writes per-command JSON reports plus static `bundle.json` / `index.html` viewer outputs.
 
-## Surface Mir parser commands
+## Surface Mir commands
 
-Current `P-SURF-01` adds parser evidence. The following commands are runnable
-for syntax rows:
+Current `P-SURF-01` adds parser evidence and `P-SURF-02` adds indexed-state
+semantic checker evidence. The following commands are runnable for `SURF-*` and
+`IDX-*` rows:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -223,6 +226,7 @@ python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json plan --out /tmp/mirrorea-surface-release
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
+cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 ```
 
 Semantics / runtime / CLI commands remain future anchors:

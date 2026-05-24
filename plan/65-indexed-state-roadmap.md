@@ -29,7 +29,7 @@ Not decided:
 | Package | Role | Completion gate |
 |---|---|---|
 | `P-SURF-00B` | docs/spec rebaseline | indexed-state semantics and roadmap exist |
-| `P-SURF-02` | indexed state AST / IR / checker | owner, keyspace, value type, init, visible fields, access rules, and stale-key diagnostics are represented |
+| `P-SURF-02` | indexed state AST / checker | closed: owner, keyspace, value type, visible fields, key-not-authority rejection, stale-key rejection, retained-savepoint compaction rejection, owner-scoped state names, and nested-place ambient-authority rejection are represented |
 | `P-SURF-03` | elaboration integration | cross-locus indexed reads/writes generate Core obligations |
 | `P-SURF-07` | source operational rows | WorldCore / MembershipChat / Sugoroku source roots exercise indexed state |
 | `P-SURF-08` | devtools | active/tombstoned keys and access source spans are visible |
@@ -39,16 +39,19 @@ Not decided:
 - `IDX-01` server-owned participant-indexed state accepted.
 - `IDX-02` key write without capability rejected.
 - `IDX-03` stale key access after leave rejected.
-- `IDX-04` compaction blocked by retained evidence rejected or deferred.
+- `IDX-04` compaction blocked by retained savepoint evidence rejected.
+- `IDX-05` nested place block ambient-authority bypass rejected.
 
 ## validation anchors
 
-Future anchors:
+Current anchors:
 
 ```bash
 python3 scripts/surface_mir_samples.py run IDX-01 --format json
 python3 scripts/surface_mir_samples.py run IDX-02 --format json
 python3 scripts/surface_mir_samples.py run IDX-03 --format json
+python3 scripts/surface_mir_samples.py run IDX-04 --format json
+python3 scripts/surface_mir_samples.py run IDX-05 --format json
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 ```
 

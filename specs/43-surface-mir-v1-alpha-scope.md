@@ -61,7 +61,7 @@ This is near product-style alpha flow, not final production.
 |---|---|---|
 | `P-SURF-00B` | brace syntax / source-authority docs rebaseline | specs/plans/snapshot docs/guides/report updated; validators pass |
 | `P-SURF-01` | Surface brace parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks parse; bare role blocks and `S[ ... ]` reject with diagnostic |
-| `P-SURF-02` | indexed-state semantics | `S { state player[p: Participant]: Player }` lowers/checks as S-owned map |
+| `P-SURF-02` | indexed-state semantics | closed: `S { state player[p: Participant]: Player }` checks as S-owned map; key authority, stale key, retained-savepoint compaction, and nested-place ambient authority negatives reject |
 | `P-SURF-03` | Surface-to-Core elaboration | cross-locus read/write generate Core IR edges |
 | `P-SURF-04` | auto communication | MessageEnvelope / publish / observe / failure-row obligations generated and visible |
 | `P-SURF-05` | role admission | role claim, admission request, membership/capability grant, stale rejection |
@@ -77,6 +77,7 @@ Parser evidence root:
 ```text
 samples/full-system-v1-surface/
   syntax/
+  indexed-state/
   world-core/
   membership-chat/
   sugoroku-world/
@@ -87,9 +88,10 @@ samples/full-system-v1-surface/
   provider/
 ```
 
-`syntax/` is P-SURF-01 parser evidence only. Other families remain planned until
-later P-SURF implementation packages actualize them, and the root family must
-not be marked workflow-ready runtime evidence from parser rows alone.
+`syntax/` is P-SURF-01 parser evidence only. `indexed-state/` is P-SURF-02
+semantic checker evidence only. Other families remain planned until later
+P-SURF implementation packages actualize them, and the root family must not be
+marked workflow-ready runtime evidence from parser or checker rows alone.
 
 ## required sample matrix
 
@@ -111,7 +113,10 @@ Indexed state:
 - `IDX-01`: S-owned Participant-indexed state accepted.
 - `IDX-02`: key write without authority rejected.
 - `IDX-03`: stale key access rejected.
-- `IDX-04`: compaction blocked by savepoint / witness / in-flight reference.
+- `IDX-04`: compaction blocked by retained savepoint evidence; witness /
+  in-flight reference blockers remain lifecycle obligations for later runtime
+  carriers.
+- `IDX-05`: nested place block ambient-authority bypass rejected.
 
 Elaboration / communication:
 
@@ -155,13 +160,14 @@ python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ```
 
-Current parser-floor Surface anchors:
+Current parser / indexed-state checker Surface anchors:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
 python3 scripts/surface_mir_samples.py check-all --format json
 python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
+cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
 ```
 
 ## non-claims

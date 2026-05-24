@@ -21,7 +21,7 @@ The repo already has:
 The repo does not yet have:
 
 - Surface-to-Core elaboration over `S { ... }`.
-- indexed-state semantics implemented from Surface source.
+- indexed-state runtime carrier or generated cross-locus request integration.
 - role admission / source patch hot-plug from Surface source.
 - Surface Mir source operational suite.
 
@@ -29,6 +29,9 @@ The repo now has:
 
 - canonical Surface Mir brace parser floor in `crates/mir-ast::surface_alpha`.
 - `samples/full-system-v1-surface/syntax/` with `SURF-01..09` parser evidence.
+- indexed-state semantic checker floor in `crates/mir-semantics::surface_indexed_state`.
+- `samples/full-system-v1-surface/indexed-state/` with `IDX-01..05` checker
+  evidence.
 - `scripts/surface_mir_samples.py`, `scripts/surface_mir_authoring_check.py`,
   and `scripts/surface_mir_release_check.py` plan/check surfaces.
 
@@ -38,8 +41,8 @@ The repo now has:
 |---:|---|---|---|
 | 1 | `P-SURF-00B` | docs/spec rebaseline | docs, specs, plans, guides, report, validators |
 | 2 | `P-SURF-01` | parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks accepted; bare role blocks and `S[ ... ]` rejected |
-| 3 | `P-SURF-02` | indexed state | next: owner/keyspace/access/stale semantics represented |
-| 4 | `P-SURF-03` | elaboration | cross-locus reads/writes generate Core IR |
+| 3 | `P-SURF-02` | indexed state | closed: owner/keyspace/access/stale/compaction/nested-place guard semantics represented |
+| 4 | `P-SURF-03` | elaboration | next: cross-locus reads/writes generate Core IR |
 | 5 | `P-SURF-04` | auto communication | MessageEnvelope / publish / observe / failure rows visible |
 | 6 | `P-SURF-05` | role admission | role claim / grant / spoof / stale rows |
 | 7 | `P-SURF-06` | source patch | parse/typecheck/elaborate/admit/activation-cut pipeline |
@@ -56,9 +59,16 @@ samples/full-system-v1-surface/
   syntax/
 ```
 
-This root is not workflow-ready runtime evidence. Future implementation packages
-should add sibling roots/rows only after indexed-state semantics, elaboration,
-and runtime surfaces exist.
+Created by P-SURF-02 as semantic checker evidence:
+
+```text
+samples/full-system-v1-surface/
+  indexed-state/
+```
+
+These roots are not workflow-ready runtime evidence. Future implementation
+packages should add sibling roots/rows only after elaboration and runtime
+surfaces exist.
 
 ## compatibility anchors
 

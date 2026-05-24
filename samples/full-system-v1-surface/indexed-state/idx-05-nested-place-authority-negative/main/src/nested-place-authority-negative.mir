@@ -1,0 +1,20 @@
+module Surface.Indexed.NestedPlaceAuthorityNegative
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when cheat {
+    S {
+      player[self].hp = 1
+    }
+  }
+}

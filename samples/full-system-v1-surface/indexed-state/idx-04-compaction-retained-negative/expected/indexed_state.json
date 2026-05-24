@@ -1,0 +1,30 @@
+{
+  "accepted": false,
+  "module_path": "Surface.Indexed.CompactionRetainedNegative",
+  "diagnostic_codes": ["indexed_state_compaction_blocked_by_retained_evidence"],
+  "indexed_state_summaries": [
+    {
+      "state_name": "player",
+      "owner_locus": "S",
+      "key_name": "p",
+      "keyspace_type": "Participant",
+      "value_type": "Player",
+      "visible_fields": [],
+      "authority_model": "owner_locus_or_explicit_capability"
+    }
+  ],
+  "access_summaries": [
+    {
+      "state_name": "player",
+      "owner_locus": "S",
+      "access_locus": "S",
+      "key_expr": "self",
+      "access_kind": "compact",
+      "accepted": false,
+      "reason_code": "indexed_state_compaction_blocked_by_retained_evidence",
+      "key_authority_granted": false
+    }
+  ],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false
+}

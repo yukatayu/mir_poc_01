@@ -3,7 +3,8 @@
 ## summary
 
 `P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
-user-facing source layer. `P-SURF-01` adds the first parser floor.
+user-facing source layer. `P-SURF-01` adds the first parser floor, and
+`P-SURF-02` adds the indexed-state semantic checker floor.
 
 The central syntax decision is:
 
@@ -47,11 +48,14 @@ heads, and indexed state access.
 - `plan/67-source-patch-hotplug-roadmap.md`
 - `plan/68-surface-full-system-v1-roadmap.md`
 
-## current parser evidence
+## current evidence
 
 - `crates/mir-ast::surface_alpha`
 - `crates/mir-ast/examples/surface_mir_alpha_parse.rs`
+- `crates/mir-semantics::surface_indexed_state`
+- `crates/mir-semantics/examples/surface_indexed_state_check.rs`
 - `samples/full-system-v1-surface/syntax/`
+- `samples/full-system-v1-surface/indexed-state/`
 - `scripts/surface_mir_samples.py`
 
 Actualized rows:
@@ -61,27 +65,33 @@ Actualized rows:
 - `SURF-03`: record literal accepted.
 - `SURF-04`: ambiguous brace construct rejected.
 - `SURF-05`: role-instance block accepted.
+- `IDX-01`: S-owned Participant-indexed state accepted.
+- `IDX-02`: key write without authority rejected.
+- `IDX-03`: stale key rejected.
+- `IDX-04`: retained-savepoint compaction rejected.
+- `IDX-05`: nested place block rejected as an ambient authority switch.
 
 ## next package
 
 ```text
-P-SURF-02 indexed-state semantics
+P-SURF-03 Surface-to-Core elaboration
 ```
 
 Close condition:
 
-- owner/keyspace/value type semantics for `state player[p: Participant]:
-  Player`.
-- key access does not grant authority.
-- stale/leave access rejection row exists.
-- parser floor remains compatible with `SURF-01..09`.
+- cross-locus indexed reads/writes elaborate to explicit Core IR.
+- generated Core IR retains source spans and residual obligations.
+- parser and indexed-state checker floors remain compatible with `SURF-01..09`
+  and `IDX-01..05`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
-- Surface runtime/helper implementation beyond the parser floor is not present
-  yet.
+- Surface runtime/helper implementation beyond the parser and indexed-state
+  checker floors is not present yet.
 - `samples/full-system-v1-surface/syntax/` is parser evidence, not
   workflow-ready runtime evidence.
+- `samples/full-system-v1-surface/indexed-state/` is semantic checker evidence,
+  not workflow-ready runtime or elaboration evidence.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

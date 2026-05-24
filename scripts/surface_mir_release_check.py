@@ -82,6 +82,10 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
                 cargo_test_args("-p", "mir-ast", "--test", "surface_mir_parser"),
             ),
             validation_command(
+                "test:indexed-state-semantics",
+                cargo_test_args("-p", "mir-semantics", "--test", "indexed_state_semantics"),
+            ),
+            validation_command(
                 "test:surface-samples",
                 ["python3", "-m", "unittest", "scripts.tests.test_surface_mir_samples"],
             ),
@@ -125,10 +129,10 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 9:
-            errors.append("surface samples helper sample_count mismatch for P-SURF-01")
+        if payload.get("sample_count") != 14:
+            errors.append("surface samples helper sample_count mismatch for P-SURF-02")
         if payload.get("workflow_ready") is not False:
-            errors.append("P-SURF-01 helper must not claim workflow_ready")
+            errors.append("P-SURF-02 helper must not claim workflow_ready")
     if command.name == "helper:surface-authoring" and payload.get("accepted") is not True:
         errors.append("surface authoring check rejected current source root")
     return errors
@@ -221,7 +225,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     failed = [result["name"] for result in results if not result["accepted"]]
     bundle = {
         "surface_kind": "surface_mir_release_check_report",
-        "scope": "p_surf_01_parser_floor",
+        "scope": "p_surf_02_indexed_state_semantics",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
         "bundle_path": str(plan.bundle_path),
@@ -231,6 +235,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
         "results": results,
         "non_claims": [
             "no final public grammar / ABI / SDK",
+            "no Surface-to-Core elaboration completion",
             "no runtime or source patch hot-plug completion",
             "no generated package artifact authority",
         ],

@@ -209,8 +209,12 @@ private capability grants.
 - `IDX-01`: server-owned participant-indexed state accepted.
 - `IDX-02`: key write without owner locus or capability rejected.
 - `IDX-03`: stale key access after leave rejected at runtime.
-- `IDX-04`: compaction blocked by retained savepoint / witness / in-flight
-  reference is rejected or deferred.
+- `IDX-04`: compaction blocked by retained savepoint evidence is rejected in the
+  P-SURF-02 checker floor; witness / in-flight reference blockers remain
+  lifecycle obligations for later runtime carriers.
+- `IDX-05`: nested `S { ... }` from a non-owner locus does not become ambient
+  owner authority; it must elaborate to an owner-directed request before any
+  indexed-state write can be admitted.
 
 ## non-claims
 

@@ -11,6 +11,7 @@ the full Mir runtime.
 pub mod computational_core;
 pub mod full_system_v1;
 mod harness;
+pub mod surface_indexed_state;
 
 use std::{
     collections::{BTreeMap, HashMap},

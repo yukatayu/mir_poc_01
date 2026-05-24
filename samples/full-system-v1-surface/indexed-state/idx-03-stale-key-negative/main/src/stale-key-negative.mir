@@ -1,0 +1,12 @@
+module Surface.Indexed.StaleKeyNegative
+
+place S
+
+S {
+  state player[p: Participant]: Player
+
+  when leave_then_write {
+    leave self
+    player[self].hp = 0
+  }
+}

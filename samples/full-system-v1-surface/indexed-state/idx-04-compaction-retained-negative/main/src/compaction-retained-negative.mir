@@ -1,0 +1,12 @@
+module Surface.Indexed.CompactionRetainedNegative
+
+place S
+
+S {
+  state player[p: Participant]: Player
+
+  when compact_after_save {
+    retain savepoint self
+    compact player[self]
+  }
+}
