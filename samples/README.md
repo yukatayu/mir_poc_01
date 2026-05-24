@@ -52,8 +52,10 @@
   - `python3 scripts/surface_mir_samples.py check-all --format json` validates canonical `S { ... }`, `S[ ... ]` rejection, record literal disambiguation, ambiguous brace rejection, role-instance block parsing, namespace-head rejection, invalid role binders, and role named `S` disambiguation
   - `indexed-state/` is actualized by `P-SURF-02` as semantic checker evidence for `IDX-01..05`
   - the same helper validates S-owned Participant-indexed state, key-not-authority rejection, stale-key rejection, retained-savepoint compaction rejection, and nested-place ambient-authority rejection
+  - `elaboration/` is actualized by `P-SURF-03` as Surface-to-Core elaboration evidence for `ELAB-01/02/04/05/06/07/08`
+  - the same helper validates cross-locus read/write remote requests, generated edges, source spans, obligations, read/write underdeclared generated failure-row rejection, unsupported-statement rejection, and nested-place read placement
   - planned future families are `world-core/`, `membership-chat/`, `sugoroku-world`, `role-admission/`, `patch-hotplug/`, `posegraph/`, `projection/`, and `provider/`
-  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add elaboration, runtime, and operational rows
+  - the root is not workflow-ready runtime evidence until later `P-SURF-*` packages add communication, runtime, and operational rows
   - canonical place-scope syntax for future source samples is `S { ... }`; `S[ ... ]` is rejected and is not a compatibility sugar
   - `package.mir.json` remains alpha artifact / compatibility output, not semantic source authority
 - planned future product-alpha1 semantic roots
@@ -215,9 +217,10 @@ cargo test -p mirrorea-cli --test full_system_v1_cli -- --nocapture
 
 ## Surface Mir commands
 
-Current `P-SURF-01` adds parser evidence and `P-SURF-02` adds indexed-state
-semantic checker evidence. The following commands are runnable for `SURF-*` and
-`IDX-*` rows:
+Current `P-SURF-01` adds parser evidence, `P-SURF-02` adds indexed-state
+semantic checker evidence, and `P-SURF-03` adds Surface-to-Core elaboration
+evidence. The following commands are runnable for `SURF-*`, `IDX-*`, and
+`ELAB-*` rows:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
@@ -227,12 +230,12 @@ python3 scripts/surface_mir_release_check.py --format json plan --out /tmp/mirro
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
+cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 ```
 
-Semantics / runtime / CLI commands remain future anchors:
+Runtime / CLI commands remain future anchors:
 
 ```bash
-cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 cargo test -p mir-runtime --test source_patch_hotplug -- --nocapture
 ```
 

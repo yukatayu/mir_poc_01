@@ -1,0 +1,19 @@
+module Surface.Elab.CrossReadPositive
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    visible observer_safe fields { hp }
+}
+
+BrowserClient[self] {
+  when render fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+    seen_hp = player[self].hp
+  }
+}

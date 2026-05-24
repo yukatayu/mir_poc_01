@@ -16,22 +16,25 @@ SYNTAX_ROOT = SURFACE_ROOT / "syntax"
 SYNTAX_MATRIX_PATH = SYNTAX_ROOT / "matrix.json"
 INDEXED_STATE_ROOT = SURFACE_ROOT / "indexed-state"
 INDEXED_STATE_MATRIX_PATH = INDEXED_STATE_ROOT / "matrix.json"
+ELABORATION_ROOT = SURFACE_ROOT / "elaboration"
+ELABORATION_MATRIX_PATH = ELABORATION_ROOT / "matrix.json"
 KNOWN_COMMANDS = {"list", "matrix", "run", "check-all", "closeout"}
 STOP_LINES = [
     "no final public grammar / ABI / SDK",
-    "no Surface-to-Core elaboration completion yet",
+    "no role-admission capability grant completion yet",
     "no runtime execution or source patch hot-plug completion yet",
     "no generated package artifact authority",
 ]
 NON_CLAIMS = [
-    "P-SURF-02 indexed-state semantics evidence only",
-    "Core IR generation remains P-SURF-03",
+    "P-SURF-03 Surface-to-Core elaboration evidence only",
+    "auto communication publish/observe remains P-SURF-04",
     "role admission authority remains P-SURF-05",
     "source patch activation remains P-SURF-06",
 ]
 VALIDATION_FLOOR = [
     "cargo test -p mir-ast --test surface_mir_parser -- --nocapture",
     "cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture",
+    "cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture",
     "python3 -m unittest scripts.tests.test_surface_mir_samples",
     "python3 scripts/surface_mir_samples.py matrix --format json",
     "python3 scripts/surface_mir_samples.py check-all --format json",
@@ -57,6 +60,13 @@ def _matrix_specs() -> list[dict[str, Any]]:
             "matrix_path": INDEXED_STATE_MATRIX_PATH,
             "runner": "indexed_state",
             "data": _load_matrix(INDEXED_STATE_MATRIX_PATH),
+        },
+        {
+            "family_key": "elaboration",
+            "root": ELABORATION_ROOT,
+            "matrix_path": ELABORATION_MATRIX_PATH,
+            "runner": "elaboration",
+            "data": _load_matrix(ELABORATION_MATRIX_PATH),
         },
     ]
 
@@ -156,6 +166,7 @@ def matrix() -> dict[str, Any]:
         "sample_root": str(SURFACE_ROOT.relative_to(REPO_ROOT)),
         "syntax_root": str(SYNTAX_ROOT.relative_to(REPO_ROOT)),
         "indexed_state_root": str(INDEXED_STATE_ROOT.relative_to(REPO_ROOT)),
+        "elaboration_root": str(ELABORATION_ROOT.relative_to(REPO_ROOT)),
         "matrix_paths": [
             str(spec["matrix_path"].relative_to(REPO_ROOT)) for spec in specs
         ],
@@ -231,6 +242,37 @@ def _check_indexed_state_source(path: Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:
         raise RuntimeError(
             f"surface indexed-state example did not return JSON for `{path}`: {completed.stderr}"
+        ) from error
+    payload["returncode"] = completed.returncode
+    return payload
+
+
+def _elaborate_source(path: Path) -> dict[str, Any]:
+    completed = subprocess.run(
+        [
+            "cargo",
+            "run",
+            "-q",
+            "-p",
+            "mir-semantics",
+            "--example",
+            "surface_to_core_elaborate",
+            "--",
+            str(path),
+            "--format",
+            "json",
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"surface elaboration example did not return JSON for `{path}`: {completed.stderr}"
         ) from error
     payload["returncode"] = completed.returncode
     return payload
@@ -358,6 +400,43 @@ def _indexed_state_projection(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
+    core_ir = payload.get("core_ir") or {}
+    return {
+        "accepted": payload.get("accepted"),
+        "module_path": payload.get("module_path"),
+        "diagnostic_codes": [
+            row["code"] for row in payload.get("diagnostics") or []
+        ],
+        "transition_kinds": [
+            row["kind"] for row in core_ir.get("transitions") or []
+        ],
+        "remote_request_summaries": [
+            {
+                "request_kind": row["request_kind"],
+                "requester_locus": row["requester_locus"],
+                "owner_locus": row["owner_locus"],
+                "state_name": row["state_name"],
+                "key_expr": row["key_expr"],
+                "generated_from": row["generated_from"],
+                "failure_row_complete": row["failure_row_complete"],
+            }
+            for row in core_ir.get("remote_requests") or []
+        ],
+        "generated_edge_kinds": [
+            row["edge_kind"] for row in core_ir.get("generated_edges") or []
+        ],
+        "source_span_entity_kinds": [
+            row["entity_kind"] for row in core_ir.get("source_spans") or []
+        ],
+        "obligation_codes": [
+            row["code"] for row in core_ir.get("obligations") or []
+        ],
+        "source_authority": payload.get("source_authority"),
+        "final_public_api_frozen": payload.get("final_public_api_frozen"),
+    }
+
+
 def _find_row(sample_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
     for spec in _matrix_specs():
         row = next(
@@ -376,6 +455,9 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     if runner == "indexed_state":
         payload = _check_indexed_state_source(source_path)
         actual = _indexed_state_projection(payload)
+    elif runner == "elaboration":
+        payload = _elaborate_source(source_path)
+        actual = _elaboration_projection(payload)
     else:
         payload = _parse_source(source_path)
         actual = _payload_projection(payload)

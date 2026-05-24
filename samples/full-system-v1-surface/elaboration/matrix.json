@@ -1,0 +1,69 @@
+{
+  "family": "surface_mir_elaboration",
+  "current_status": "p_surf_03_surface_to_core_elaboration_evidence",
+  "rows": [
+    {
+      "sample_id": "ELAB-01",
+      "root_name": "elab-01-cross-place-read-positive",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-01-cross-place-read-positive/main/src/cross-place-read-positive.mir",
+      "expected": "elab-01-cross-place-read-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-02",
+      "root_name": "elab-02-cross-place-write-positive",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-02-cross-place-write-positive/main/src/cross-place-write-positive.mir",
+      "expected": "elab-02-cross-place-write-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-04",
+      "root_name": "elab-04-undeclared-generated-failure-negative",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-04-undeclared-generated-failure-negative/main/src/undeclared-generated-failure-negative.mir",
+      "expected": "elab-04-undeclared-generated-failure-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-05",
+      "root_name": "elab-05-source-spans-positive",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-05-source-spans-positive/main/src/source-spans-positive.mir",
+      "expected": "elab-05-source-spans-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-06",
+      "root_name": "elab-06-unsupported-statement-negative",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-06-unsupported-statement-negative/main/src/unsupported-statement-negative.mir",
+      "expected": "elab-06-unsupported-statement-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-07",
+      "root_name": "elab-07-write-failure-row-negative",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-07-write-failure-row-negative/main/src/write-failure-row-negative.mir",
+      "expected": "elab-07-write-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-08",
+      "root_name": "elab-08-nested-place-read-positive",
+      "stage": "P-SURF-03",
+      "current_status": "executable",
+      "source": "elab-08-nested-place-read-positive/main/src/nested-place-read-positive.mir",
+      "expected": "elab-08-nested-place-read-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+module Surface.Elab.UnsupportedStatementNegative
+
+role BrowserClient
+place World
+place WorldAdmission
+
+BrowserClient[self] {
+  when start {
+    join World as BrowserClient via WorldAdmission
+  }
+}

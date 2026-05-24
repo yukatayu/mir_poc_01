@@ -26,13 +26,13 @@ def _run_helper(*args: str) -> dict:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
-    def test_matrix_reports_p_surf_01_rows(self) -> None:
+    def test_matrix_reports_p_surf_03_rows(self) -> None:
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 14)
-        self.assertEqual(payload["executable_count"], 14)
-        self.assertEqual(payload["family_count"], 2)
+        self.assertEqual(payload["sample_count"], 21)
+        self.assertEqual(payload["executable_count"], 21)
+        self.assertEqual(payload["family_count"], 3)
         self.assertEqual(payload["validation_errors"], [])
         self.assertFalse(payload["workflow_ready"])
 
@@ -145,11 +145,94 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             "role:BrowserClient",
         )
 
+    def test_elaboration_cross_locus_read_generates_observe_request(self) -> None:
+        payload = _run_helper("run", "ELAB-01")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(payload["actual"]["generated_edge_kinds"], ["observe_request"])
+        self.assertEqual(
+            payload["actual"]["remote_request_summaries"][0]["request_kind"],
+            "read",
+        )
+
+    def test_elaboration_cross_locus_write_generates_remote_write_request(self) -> None:
+        payload = _run_helper("run", "ELAB-02")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(payload["actual"]["generated_edge_kinds"], ["remote_write_request"])
+        self.assertEqual(
+            payload["actual"]["remote_request_summaries"][0]["generated_from"],
+            "nested_place_block",
+        )
+
+    def test_elaboration_underdeclared_failure_row_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-04")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+        self.assertFalse(
+            payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
+        )
+
+    def test_elaboration_source_span_sample_has_span_evidence(self) -> None:
+        payload = _run_helper("run", "ELAB-05")
+
+        self.assertTrue(payload["accepted"])
+        self.assertIn(
+            "remote_request",
+            payload["actual"]["source_span_entity_kinds"],
+        )
+        self.assertIn(
+            "surface_core_source_spans_preserved",
+            payload["actual"]["obligation_codes"],
+        )
+
+    def test_elaboration_unsupported_statement_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-06")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["unsupported_surface_statement_for_elaboration"],
+        )
+        self.assertEqual(payload["actual"]["remote_request_summaries"], [])
+
+    def test_elaboration_write_underdeclared_failure_row_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-07")
+
+        self.assertTrue(payload["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+        self.assertEqual(
+            payload["actual"]["remote_request_summaries"][0]["request_kind"],
+            "write",
+        )
+        self.assertFalse(
+            payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
+        )
+
+    def test_elaboration_nested_place_read_keeps_owner_directed_shape(self) -> None:
+        payload = _run_helper("run", "ELAB-08")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["remote_request_summaries"][0]["generated_from"],
+            "nested_place_block",
+        )
+
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 14)
+        self.assertEqual(len(payload["passed"]), 21)
 
 
 if __name__ == "__main__":

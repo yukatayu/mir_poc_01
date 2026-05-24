@@ -22,6 +22,9 @@ Decided:
 - `.mir` source files are semantic source authority.
 - `P-SURF-01` actualized the parser floor in `crates/mir-ast::surface_alpha`
   and `samples/full-system-v1-surface/syntax/`.
+- `P-SURF-03` actualized a narrow Surface-to-Core elaboration floor in
+  `crates/mir-semantics::surface_to_core_elaboration` and
+  `samples/full-system-v1-surface/elaboration/`.
 
 Not decided:
 
@@ -35,8 +38,8 @@ Not decided:
 |---|---|---|
 | `P-SURF-00B` | docs/spec rebaseline | `specs/39`, `specs/43`, plans, snapshot docs, guides, and report are synchronized |
 | `P-SURF-01` | brace parser | closed: `SURF-01..09` pass via `cargo test -p mir-ast --test surface_mir_parser` and `scripts/surface_mir_samples.py check-all` |
-| `P-SURF-03` | Surface-to-Core elaboration | cross-locus read/write lowers to Core IR with source spans and obligations |
-| `P-SURF-04` | generated communication | MessageEnvelope / publish / observe / failure-row obligations are generated and visible |
+| `P-SURF-03` | Surface-to-Core elaboration | closed: cross-locus read/write lowers to Core IR with remote requests, generated edges, source spans, obligations, and underdeclared failure-row rejection |
+| `P-SURF-04` | generated communication | next: MessageEnvelope / publish / observe / failure-row obligations are generated and visible |
 | `P-SURF-08` | diagnostics/devtools | source/Core mapping and generated edges are inspectable |
 
 ## actualized parser rows
@@ -52,9 +55,19 @@ Not decided:
 - `SURF-09` accepted `S[self] { ... }` when `S` resolves to a declared role,
   preserving namespace-based disambiguation.
 
-Planned elaboration rows remain future work for `P-SURF-03` / `P-SURF-04`:
+Actualized P-SURF-03 elaboration rows:
 
-- `ELAB-01..05` generated Core IR / communication / failure-row rows.
+- `ELAB-01`: cross-place read generates a remote read request and observe edge.
+- `ELAB-02`: cross-place write generates an owner-directed remote write request.
+- `ELAB-04`: underdeclared generated failure row is rejected.
+- `ELAB-05`: generated Core IR preserves source spans.
+- `ELAB-06`: unsupported statements reject rather than being silently dropped.
+- `ELAB-07`: write-side underdeclared generated failure row is rejected.
+- `ELAB-08`: nested place read keeps owner-directed request evidence.
+
+Remaining generated communication row for `P-SURF-04`:
+
+- `ELAB-03`: private field auto-publish rejected or blocked.
 
 ## validation anchors
 
@@ -68,6 +81,7 @@ cargo fmt --check
 git diff --check
 python3 scripts/surface_mir_samples.py check-all --format json
 cargo test -p mir-ast --test surface_mir_parser -- --nocapture
+cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 ```
 
 Future implementation anchors:

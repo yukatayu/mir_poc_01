@@ -3,8 +3,9 @@
 ## summary
 
 `P-SURF-00B` rebaselined the next promoted line around Surface Mir as the
-user-facing source layer. `P-SURF-01` adds the first parser floor, and
-`P-SURF-02` adds the indexed-state semantic checker floor.
+user-facing source layer. `P-SURF-01` adds the first parser floor,
+`P-SURF-02` adds the indexed-state semantic checker floor, and `P-SURF-03`
+adds the Surface-to-Core elaboration evidence floor.
 
 The central syntax decision is:
 
@@ -54,8 +55,11 @@ heads, and indexed state access.
 - `crates/mir-ast/examples/surface_mir_alpha_parse.rs`
 - `crates/mir-semantics::surface_indexed_state`
 - `crates/mir-semantics/examples/surface_indexed_state_check.rs`
+- `crates/mir-semantics::surface_to_core_elaboration`
+- `crates/mir-semantics/examples/surface_to_core_elaborate.rs`
 - `samples/full-system-v1-surface/syntax/`
 - `samples/full-system-v1-surface/indexed-state/`
+- `samples/full-system-v1-surface/elaboration/`
 - `scripts/surface_mir_samples.py`
 
 Actualized rows:
@@ -70,28 +74,37 @@ Actualized rows:
 - `IDX-03`: stale key rejected.
 - `IDX-04`: retained-savepoint compaction rejected.
 - `IDX-05`: nested place block rejected as an ambient authority switch.
+- `ELAB-01`: cross-locus indexed read generates a remote read request and observe edge.
+- `ELAB-02`: nested foreign place write generates an owner-directed remote write request.
+- `ELAB-04`: underdeclared generated failure row is rejected.
+- `ELAB-05`: generated Core IR carries source spans.
+- `ELAB-06`: unsupported statements reject instead of being silently dropped.
+- `ELAB-07`: write-side underdeclared generated failure row is rejected.
+- `ELAB-08`: nested foreign place read generates an owner-directed read request.
 
 ## next package
 
 ```text
-P-SURF-03 Surface-to-Core elaboration
+P-SURF-04 auto communication publish/observe
 ```
 
 Close condition:
 
-- cross-locus indexed reads/writes elaborate to explicit Core IR.
-- generated Core IR retains source spans and residual obligations.
-- parser and indexed-state checker floors remain compatible with `SURF-01..09`
-  and `IDX-01..05`.
+- generated MessageEnvelope / publish / observe rows are explicit.
+- private field auto-publish is rejected.
+- parser, indexed-state checker, and elaboration floors remain compatible with
+  `SURF-01..09`, `IDX-01..05`, and `ELAB-01/02/04/05/06/07/08`.
 
 ## non-claims
 
 - final public grammar / ABI / SDK is not fixed.
-- Surface runtime/helper implementation beyond the parser and indexed-state
-  checker floors is not present yet.
+- Surface runtime/helper implementation beyond the parser, indexed-state
+  checker, and elaboration evidence floors is not present yet.
 - `samples/full-system-v1-surface/syntax/` is parser evidence, not
   workflow-ready runtime evidence.
 - `samples/full-system-v1-surface/indexed-state/` is semantic checker evidence,
   not workflow-ready runtime or elaboration evidence.
+- `samples/full-system-v1-surface/elaboration/` is elaboration evidence, not
+  workflow-ready communication/runtime evidence.
 - LLVM/native codegen, production WAN/federation, distributed durable save-load,
   and arbitrary native/WASM provider execution remain later.

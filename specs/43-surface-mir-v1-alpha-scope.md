@@ -62,8 +62,8 @@ This is near product-style alpha flow, not final production.
 | `P-SURF-00B` | brace syntax / source-authority docs rebaseline | specs/plans/snapshot docs/guides/report updated; validators pass |
 | `P-SURF-01` | Surface brace parser | closed: `S { ... }` place blocks and `Role[instance] { ... }` role-instance blocks parse; bare role blocks and `S[ ... ]` reject with diagnostic |
 | `P-SURF-02` | indexed-state semantics | closed: `S { state player[p: Participant]: Player }` checks as S-owned map; key authority, stale key, retained-savepoint compaction, and nested-place ambient authority negatives reject |
-| `P-SURF-03` | Surface-to-Core elaboration | cross-locus read/write generate Core IR edges |
-| `P-SURF-04` | auto communication | MessageEnvelope / publish / observe / failure-row obligations generated and visible |
+| `P-SURF-03` | Surface-to-Core elaboration | closed: cross-locus read/write generate Core IR remote request rows, generated edges, source spans, obligations, and underdeclared failure-row rejection |
+| `P-SURF-04` | auto communication | next: MessageEnvelope / publish / observe / failure-row obligations generated and visible |
 | `P-SURF-05` | role admission | role claim, admission request, membership/capability grant, stale rejection |
 | `P-SURF-06` | source patch hot-plug | parse/typecheck/elaborate/admit/activation-cut pipeline |
 | `P-SURF-07` | source operational suite | source-first WorldCore / MembershipChat / Sugoroku / related roots |
@@ -78,6 +78,7 @@ Parser evidence root:
 samples/full-system-v1-surface/
   syntax/
   indexed-state/
+  elaboration/
   world-core/
   membership-chat/
   sugoroku-world/
@@ -89,9 +90,10 @@ samples/full-system-v1-surface/
 ```
 
 `syntax/` is P-SURF-01 parser evidence only. `indexed-state/` is P-SURF-02
-semantic checker evidence only. Other families remain planned until later
-P-SURF implementation packages actualize them, and the root family must not be
-marked workflow-ready runtime evidence from parser or checker rows alone.
+semantic checker evidence only. `elaboration/` is P-SURF-03 elaboration evidence
+only. Other families remain planned until later P-SURF implementation packages
+actualize them, and the root family must not be marked workflow-ready runtime
+evidence from parser, checker, or elaboration rows alone.
 
 ## required sample matrix
 
@@ -125,6 +127,9 @@ Elaboration / communication:
 - `ELAB-03`: private field auto-publish blocked.
 - `ELAB-04`: undeclared generated failure rejected.
 - `ELAB-05`: generated Core IR has source spans.
+- `ELAB-06`: unsupported statements rejected rather than silently dropped.
+- `ELAB-07`: generated write request with underdeclared failure row rejected.
+- `ELAB-08`: nested place read generates owner-directed request evidence.
 
 Role admission:
 
@@ -160,14 +165,16 @@ python3 scripts/operational_product_samples.py check-all --format json
 python3 scripts/minimal_alpha1_patterns.py check-all --format json
 ```
 
-Current parser / indexed-state checker Surface anchors:
+Current parser / indexed-state checker / elaboration Surface anchors:
 
 ```bash
 python3 scripts/surface_mir_samples.py matrix --format json
 python3 scripts/surface_mir_samples.py check-all --format json
 python3 scripts/surface_mir_authoring_check.py check-all --format json
 python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release
+cargo test -p mir-ast --test surface_mir_parser -- --nocapture
 cargo test -p mir-semantics --test indexed_state_semantics -- --nocapture
+cargo test -p mir-semantics --test surface_to_core_elaboration -- --nocapture
 ```
 
 ## non-claims

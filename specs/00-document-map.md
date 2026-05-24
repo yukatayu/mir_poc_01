@@ -42,7 +42,7 @@
   - `mir_computational_core_01.md` は、Product Alpha-1 operational floor を保ちながら current `AddOne` を typed external host-boundary evidence に限定し、Mir-owned computation / PoseGraph / projection-backend / engine-adapter line を reader-facing に短く読むための summary である。
   - `autonomous_execution_01.md` は、`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の docs/scaffold front-half、implementation half、user-spec-required gate の隔離、validation / report / commit cadence を読むための summary である。
   - `full_system_v1_roadmap_01.md` は、`P-FS-00` Full System V1 roadmap rebaseline、source-first target、`FS-00..FS-11`、次 package `P-MIR-01`、non-claims を reader-facing に短く読むための summary である。
-  - `surface_mir_alpha_01.md` は、Surface Mir brace/source-authority rebaseline、P-SURF-01 parser floor、P-SURF-02 indexed-state semantic checker floor、canonical `S { ... }`、no `S[ ... ]` sugar、indexed state、role admission、source patch hot-plug、next package `P-SURF-03` を reader-facing に短く読むための summary である。
+  - `surface_mir_alpha_01.md` は、Surface Mir brace/source-authority rebaseline、P-SURF-01 parser floor、P-SURF-02 indexed-state semantic checker floor、P-SURF-03 Surface-to-Core elaboration evidence floor、canonical `S { ... }`、no `S[ ... ]` sugar、indexed state、role admission、source patch hot-plug、next package `P-SURF-04` を reader-facing に短く読むための summary である。
   - `_detail` は actual sample code 全文、shared prelude、actual output、built-in / user-defined の境界を確認するための evidence 文書である。
   - `hands_on_typing.md`、`hands_on_order_model.md`、`hands_on_model_checking.md`、`hands_on_modal.md`、`hands_on_lean.md` は、初心者が active clean near-end suite を実行しながら読むための入門文書である。
   - `hands_on_sugoroku_00_overview.md` から `hands_on_sugoroku_detail.md` は、Sugoroku world runtime attachment vertical slice を初心者が実行しながら読むための入門文書である。
@@ -65,7 +65,7 @@
   - `transform_posegraph_01.md` は、Transform / PoseGraph line の `P-POSE-02` bounded helper evidence、helper matrix、accepted/violation/planned splitを読むための landing page である。
   - `autonomous_execution_01.md` は、post-`P-COMP-00` line を package-by-package に自走する execution contract を読む landing page である。
   - `full_system_v1_roadmap_01.md` は、Full System V1 source-first roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む landing page である。
-  - `surface_mir_alpha_01.md` は、Surface Mir alpha source-authority roadmap、canonical `S { ... }` place-scope syntax、P-SURF-01 parser commands、P-SURF-02 indexed-state checker commands、stop lines、次 package `P-SURF-03` を読む landing page である。
+  - `surface_mir_alpha_01.md` は、Surface Mir alpha source-authority roadmap、canonical `S { ... }` place-scope syntax、P-SURF-01 parser commands、P-SURF-02 indexed-state checker commands、P-SURF-03 elaboration commands、stop lines、次 package `P-SURF-04` を読む landing page である。
   - `source_patch_hotplug_01.md` は、Surface source patch hot-plug を direct eval ではなく parse / typecheck / elaborate / admit / activation_cut pipeline として読む landing page である。
   - existing long-form hands-on の物理移動はまだ行っていない。詳細本文は引き続き `docs/research_abstract/` を参照する。
 - `faq_006.md`

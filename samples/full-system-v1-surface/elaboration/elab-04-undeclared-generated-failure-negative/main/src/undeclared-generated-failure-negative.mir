@@ -1,0 +1,18 @@
+module Surface.Elab.UnderdeclaredGeneratedFailureNegative
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when render fails MissingCapability {
+    seen_hp = player[self].hp
+  }
+}

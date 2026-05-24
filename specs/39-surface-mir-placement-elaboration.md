@@ -281,6 +281,9 @@ this docs-only package.
 - `ELAB-03`: private field auto-publish rejected or blocked.
 - `ELAB-04`: undeclared generated failure row rejected.
 - `ELAB-05`: generated Core IR preserves source spans.
+- `ELAB-06`: unsupported statements rejected rather than silently dropped.
+- `ELAB-07`: generated write request with underdeclared failure row rejected.
+- `ELAB-08`: nested place read generates owner-directed request evidence.
 
 ## non-claims
 

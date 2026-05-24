@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-24 16:14 JST
+最終更新: 2026-05-24 16:48 JST
 
 ## document role
 
@@ -15,21 +15,22 @@ and is not append-only history.
 
 ## current promoted package
 
-Current promoted package after `P-SURF-02` closeout:
+Current promoted package after `P-SURF-03` closeout:
 
 ```text
-P-SURF-03 Surface-to-Core elaboration
+P-SURF-04 auto communication publish/observe
 ```
 
 Purpose:
 
-- elaborate parsed Surface Mir place and role-instance blocks into explicit Core
-  IR.
-- turn cross-locus indexed reads/writes into owner-directed request / observe
-  records instead of direct remote stores.
-- preserve source spans and residual obligations for generated Core transitions.
-- keep `P-SURF-02` as a semantic checker/sample floor only; runtime carrier and
-  generated communication remain later package work.
+- generate explicit communication rows from Surface visibility and elaborated
+  remote request evidence.
+- introduce MessageEnvelope / publish / observe evidence without making runtime
+  delivery or final transport claims.
+- reject private-field auto-publish and keep generated failure-row completeness
+  visible.
+- keep `P-SURF-03` as elaboration evidence only; role admission, runtime
+  carrier, and source patch activation remain later package work.
 
 ## ordered self-driven packages
 
@@ -37,7 +38,7 @@ Purpose:
 |---:|---|---|---|
 | 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | closed with `SURF-01..09`, parser test, sample helper, authoring check, and release check |
 | 2 | `P-SURF-02 indexed state` | represent `S { state player[p: Participant]: Player }` as S-owned indexed state | closed with `IDX-01..05`, semantic checker test, sample helper, authoring check, and release check |
-| 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | Core IR source spans and obligations are visible |
+| 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | closed with `ELAB-01/02/04/05/06/07/08`, elaboration test, sample helper, authoring check, and release check |
 | 4 | `P-SURF-04 auto communication` | generate MessageEnvelope / publish / observe / failure-row obligations | generated edges are explicit and private field auto-publish is blocked |
 | 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | role claim does not grant authority; grants and stale rejects are observable |
 | 6 | `P-SURF-06 source patch hot-plug` | implement parse/typecheck/elaborate/admit/activation-cut patch pipeline | rejected patches do not mutate runtime; accepted patch emits activation cut |
@@ -77,7 +78,7 @@ Purpose:
 | brace disambiguation | `P-SURF-01` | namespace-only / context-only / combined namespace + context | use combined namespace + context with ambiguous diagnostic |
 | role-instance block parse | `P-SURF-01` | role path only / arbitrary indexed expression block | alpha accepts declared role path only |
 | indexed-state runtime carrier | `P-SURF-02` / later runtime packages | plain map / membership-aware partial map / distributed table | `P-SURF-02` fixed checker semantics; use membership-aware owner-locus partial map first when runtime carrier is added |
-| elaboration IR shape | `P-SURF-03` | direct Core transitions / intermediate elaboration report / both | produce Core IR plus source-linked elaboration report |
+| elaboration IR shape | `P-SURF-03` | direct Core transitions / intermediate elaboration report / both | closed with Core IR plus source-linked elaboration report; feed communication rows next |
 | auto publish policy | `P-SURF-04` | publish all writes / visible-fields-only / explicit-only | visible-fields-only; private field blocked |
 | admission witness metadata | `P-SURF-05` | principal only / role + principal / optional package/runtime hash | role + principal required; package/runtime hash optional report metadata |
 | source patch compatibility | `P-SURF-06` | check-only / check+diff / full migration planner | check+Core diff+activation cut first; migration planner later |
@@ -103,6 +104,9 @@ Purpose:
 - `samples/full-system-v1-surface/indexed-state/` is P-SURF-02 semantic
   checker evidence only, not a Surface runtime, elaboration, or operational
   suite.
+- `samples/full-system-v1-surface/elaboration/` is P-SURF-03 elaboration
+  evidence only, not a communication runtime, role admission, source patch
+  activation, or operational suite.
 - `S[ ... ]` remains rejected and must not be introduced as a compatibility sugar.
 - `package.mir.json` remains alpha compatibility / package artifact, not semantic source authority.
 - Direct LLVM/native backend remains later than Surface parser, elaboration, typed IR, projection IR, and preservation tests.
