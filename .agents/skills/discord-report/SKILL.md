@@ -7,6 +7,8 @@ description: Use this skill for best-effort Discord progress and completion noti
 
 この skill は、Codex の作業中に Discord Webhook へ best-effort で通知を送るためのものです。
 
+この文書の `<PYTHON>` は、その環境で使える Python 起動コマンドです。Linux では通常 `python3`、Windows では通常 `py -3`、それがなければ `python` を使います。
+
 ## 重要な制約
 
 - この skill 自体は「いつ呼ばれるか」を強制できません。
@@ -18,24 +20,25 @@ description: Use this skill for best-effort Discord progress and completion noti
 1. 作業を始める前に `begin` を 1 回実行し、差分基準を記録する。`begin` 自体は通知を送らない。
 2. タスクが短い場合は途中経過を送らない。
 3. タスクが長い場合だけ、意味のある節目で途中経過を送る。
-4. 途中経過は「自然な区切り」があり、かつ前回からおおむね 1 時間以上空いたときに送る。ただし、ユーザーが明示的に高頻度報告を求めた場合はそちらを優先する。
-5. `complete` は、そのユーザー依頼への最終返答を返して止まる直前に 1 回だけ送る。
-6. 途中計画、質問待ち、追加調査、まだ作業が続く中間報告では `complete` を使わない。必要なら `progress` を使うか、何も送らない。
-7. 要約文は簡潔な日本語で送る。
-8. `test` は導入直後または更新直後の疎通確認専用。通常作業では使わない。
+4. 途中経過は「自然な区切り」があり、かつ前回からおおむね 1 時間以上空いたときに送る。目安は平均して約1時間に1回。ただし、ユーザーが明示的に高頻度報告を求めた場合はそちらを優先する。
+5. `complete` は、次のユーザー入力が必要で、そのユーザー依頼への最終返答を返して止まる直前に 1 回だけ送る。
+6. まだ作業を自走して続けられる場合は `complete` を使わない。必要なら `progress` を使うか、何も送らない。
+7. 途中計画、質問待ち、追加調査、まだ作業が続く中間報告では `complete` を使わない。必要なら `progress` を使うか、何も送らない。
+8. 要約文は簡潔な日本語で送る。
+9. `test` は導入直後または更新直後の疎通確認専用。通常作業では使わない。
 
 ## 使用コマンド
 
 作業開始時:
 
 ```bash
-python3 .agents/skills/discord-report/scripts/discord_notify.py begin --cwd .
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py begin --cwd .
 ```
 
 途中経過:
 
 ```bash
-python3 .agents/skills/discord-report/scripts/discord_notify.py progress \
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py progress \
   --summary "<ここまでに終えたこと>" \
   --next-step "<次にやること>" \
   --cwd .
@@ -44,7 +47,7 @@ python3 .agents/skills/discord-report/scripts/discord_notify.py progress \
 完了通知:
 
 ```bash
-python3 .agents/skills/discord-report/scripts/discord_notify.py complete \
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py complete \
   --summary "<最終的に何をしたかを1〜3文で>" \
   --include-diff \
   --cwd .
@@ -53,7 +56,7 @@ python3 .agents/skills/discord-report/scripts/discord_notify.py complete \
 導入直後または更新直後の疎通確認:
 
 ```bash
-python3 .agents/skills/discord-report/scripts/discord_notify.py test \
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py test \
   --installation-check \
   --summary "疎通確認" \
   --cwd .

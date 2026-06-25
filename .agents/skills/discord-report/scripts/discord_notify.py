@@ -256,12 +256,16 @@ def capture_worktree_tree(ctx: ProjectContext) -> Optional[str]:
         env = os.environ.copy()
         env["GIT_INDEX_FILE"] = str(index_path)
 
-        staged = run_git(
-            ["add", "-A", "--", ".", ":(exclude).codex-discord", ":(exclude).codex-discord/**"],
+        staged = run_git(["add", "-A", "--", "."], ctx.project_root, env=env)
+        if staged is None:
+            return None
+
+        unstaged_local_state = run_git(
+            ["rm", "-q", "-r", "--cached", "--ignore-unmatch", ".codex-discord"],
             ctx.project_root,
             env=env,
         )
-        if staged is None:
+        if unstaged_local_state is None:
             return None
 
         tree = run_git(["write-tree"], ctx.project_root, env=env)
