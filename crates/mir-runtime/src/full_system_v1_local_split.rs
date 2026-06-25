@@ -186,7 +186,7 @@ pub fn run_full_system_v1_local_split_path(
         selected_target_id,
         entry_override,
         target_reports,
-        rejected_rows: sorted_vec(rejected_rows.into_iter()),
+        rejected_rows: sorted_vec(rejected_rows),
         diagnostics,
         residual_obligations,
         final_public_api_frozen: false,
@@ -219,17 +219,17 @@ fn build_target_report(
         .unwrap_or_else(|| admitted_entry_transitions.clone());
 
     let mut diagnostics = Vec::new();
-    if let Some(entry) = entry_override {
-        if !admitted_entry_transitions.iter().any(|row| row == entry) {
-            diagnostics.push(FullSystemV1LocalSplitDiagnostic {
-                code: "entry_transition_not_admitted".to_string(),
-                message: format!(
-                    "target `{}` role `{}` cannot launch undeclared entry transition `{entry}`",
-                    target.target_id, target.role
-                ),
-                target_id: Some(target.target_id.clone()),
-            });
-        }
+    if let Some(entry) = entry_override
+        && !admitted_entry_transitions.iter().any(|row| row == entry)
+    {
+        diagnostics.push(FullSystemV1LocalSplitDiagnostic {
+            code: "entry_transition_not_admitted".to_string(),
+            message: format!(
+                "target `{}` role `{}` cannot launch undeclared entry transition `{entry}`",
+                target.target_id, target.role
+            ),
+            target_id: Some(target.target_id.clone()),
+        });
     }
 
     let mut runtime_sessions = Vec::new();

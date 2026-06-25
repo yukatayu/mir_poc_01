@@ -125,13 +125,13 @@ pub fn summarize_stage1_reconnect_clusters(
                 summary.missing_option_structure_floor = true;
             }
 
-            if let (Some(predecessor), Some(successor)) = (predecessor, successor) {
-                if capability_strengthens(
+            if let (Some(predecessor), Some(successor)) = (predecessor, successor)
+                && capability_strengthens(
                     predecessor.capability.as_str(),
                     successor.capability.as_str(),
-                ) {
-                    summary.capability_strengthening_floor = true;
-                }
+                )
+            {
+                summary.capability_strengthening_floor = true;
             }
         }
     }

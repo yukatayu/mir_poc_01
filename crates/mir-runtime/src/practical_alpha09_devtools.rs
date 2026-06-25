@@ -679,6 +679,7 @@ fn build_panels(
     ]
 }
 
+#[allow(clippy::too_many_arguments)]
 fn panel(
     panel_id: &str,
     panel_kind: &str,
@@ -778,6 +779,7 @@ fn build_telemetry_rows(
     rows
 }
 
+#[allow(clippy::too_many_arguments)]
 fn telemetry(
     telemetry_id: &str,
     telemetry_kind: &str,

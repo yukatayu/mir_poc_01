@@ -1149,14 +1149,12 @@ fn host_plan_loader_rejects_unknown_schema_version() {
     let path = unique_temp_json_path("host-plan-schema");
     fs::write(
         &path,
-        format!(
-            r#"{{
+        r#"{
   "schema_version": "wrong-schema",
   "predicate_rules": [],
   "effect_rules": [],
-  "trace_expectation_override": {{}}
-}}"#
-        ),
+  "trace_expectation_override": {}
+}"#,
     )
     .unwrap();
 

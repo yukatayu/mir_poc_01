@@ -75,12 +75,12 @@ fn strip_format(args: Vec<String>) -> (String, Vec<String>) {
     let mut stripped = Vec::new();
     let mut index = 0;
     while index < args.len() {
-        if args[index] == "--format" {
-            if let Some(value) = args.get(index + 1) {
-                format = value.clone();
-                index += 2;
-                continue;
-            }
+        if args[index] == "--format"
+            && let Some(value) = args.get(index + 1)
+        {
+            format = value.clone();
+            index += 2;
+            continue;
         }
         stripped.push(args[index].clone());
         index += 1;

@@ -61,7 +61,7 @@ fn add_one(x: Int64) -> Int64 {
             .map(|row| row.summary.as_str()),
         Some("Int64(42)")
     );
-    assert!(report.runtime.compute_trace.len() >= 1);
+    assert!(!report.runtime.compute_trace.is_empty());
     assert!(report.observer_safe_summary.contains("accepted"));
 }
 

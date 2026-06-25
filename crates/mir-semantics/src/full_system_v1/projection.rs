@@ -565,6 +565,7 @@ fn validate_targets(
     (target_roles, assigned_places)
 }
 
+#[allow(clippy::too_many_arguments)]
 fn validate_boundary(
     boundary: &ProjectionBoundaryRequest,
     target_roles: &BTreeMap<String, String>,
@@ -671,20 +672,21 @@ fn validate_boundary(
         let Some(transition) = source_transitions.get(transition_name) else {
             continue;
         };
-        if let Some(owner_target) = place_to_target.get(&transition.place_ref) {
-            if owner_target != &boundary.from_target && owner_target != &boundary.to_target {
-                diagnostics.push(ProjectionDiagnostic {
-                    code: "transition_owner_detached_from_boundary".to_string(),
-                    message: format!(
-                        "transition `{transition_name}` place `{}` is not connected to boundary `{}` targets",
-                        transition.place_ref, boundary.boundary_ref
-                    ),
-                });
-                rejected_rows.push(format!(
-                    "{}:transition_owner_detached_from_boundary",
-                    boundary.boundary_ref
-                ));
-            }
+        if let Some(owner_target) = place_to_target.get(&transition.place_ref)
+            && owner_target != &boundary.from_target
+            && owner_target != &boundary.to_target
+        {
+            diagnostics.push(ProjectionDiagnostic {
+                code: "transition_owner_detached_from_boundary".to_string(),
+                message: format!(
+                    "transition `{transition_name}` place `{}` is not connected to boundary `{}` targets",
+                    transition.place_ref, boundary.boundary_ref
+                ),
+            });
+            rejected_rows.push(format!(
+                "{}:transition_owner_detached_from_boundary",
+                boundary.boundary_ref
+            ));
         }
     }
 
@@ -1044,8 +1046,8 @@ fn boundary_schema_contract(
     Ok(BoundarySchemaContract {
         request_fields: first_shape.request_fields,
         response_fields: first_shape.response_fields,
-        failure_row: sorted_vec(first_failure_row.into_iter()),
-        capability_row: sorted_vec(first_capability_row.into_iter()),
+        failure_row: sorted_vec(first_failure_row),
+        capability_row: sorted_vec(first_capability_row),
     })
 }
 
@@ -1294,6 +1296,7 @@ fn projection_preservation_report(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn rejected_report(
     source_path: String,
     request_path: String,

@@ -822,7 +822,6 @@ fn extract_declared_name(line: &str, prefix: &str) -> Option<String> {
 fn extract_after_marker(line: &str, marker: &str) -> Option<String> {
     let (_, remainder) = line.split_once(marker)?;
     let token = remainder
-        .trim()
         .split_whitespace()
         .next()?
         .trim_end_matches(',')
@@ -855,6 +854,7 @@ fn push_term_signature(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn layer_signature(
     name: &str,
     requires: &[&str],
@@ -902,6 +902,7 @@ fn principal_claim(
     claim
 }
 
+#[allow(clippy::too_many_arguments)]
 fn message_envelope(
     envelope_id: &str,
     from_place: &str,
@@ -949,6 +950,7 @@ fn message_envelope(
     envelope
 }
 
+#[allow(clippy::too_many_arguments)]
 fn visualization_view(
     view_name: &str,
     view_kind: &str,
@@ -980,6 +982,7 @@ fn visualization_view(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn telemetry_row(
     row_name: &str,
     row_kind: &str,
@@ -1696,6 +1699,7 @@ fn source_ref(sample: &str, location: &str) -> ConstraintSourceRef {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn typing_sample(
     id: &str,
     source_relpath: &str,

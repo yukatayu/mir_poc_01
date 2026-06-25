@@ -105,7 +105,7 @@ pub struct SurfacePlaceBlock {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum SurfacePlaceItem {
-    State(SurfaceStateDecl),
+    State(Box<SurfaceStateDecl>),
     When(SurfaceWhenBlock),
 }
 
@@ -998,9 +998,9 @@ impl Parser {
         while !self.check(&TokenKind::RightBrace) {
             match self.peek_kind() {
                 TokenKind::Keyword(Keyword::State) => {
-                    items.push(SurfacePlaceItem::State(
+                    items.push(SurfacePlaceItem::State(Box::new(
                         self.parse_state_decl(place_ref.clone())?,
-                    ));
+                    )));
                 }
                 TokenKind::Keyword(Keyword::When) => {
                     items.push(SurfacePlaceItem::When(self.parse_when_block()?));

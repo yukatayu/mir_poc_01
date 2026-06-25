@@ -560,13 +560,12 @@ fn posegraph_runtime_rejects_save_load_membership_epoch_mismatch() {
         report.rejection.as_ref().map(|row| row.code.as_str()),
         Some("save_load_inadmissible")
     );
-    assert_eq!(
-        report
+    assert!(
+        !report
             .save_load_state
             .as_ref()
             .expect("save/load state should exist")
-            .load_admissible,
-        false
+            .load_admissible
     );
     assert_eq!(
         report
@@ -659,13 +658,12 @@ fn posegraph_runtime_rejects_save_load_stale_anchor_witness() {
         report.rejection.as_ref().map(|row| row.code.as_str()),
         Some("save_load_inadmissible")
     );
-    assert_eq!(
-        report
+    assert!(
+        !report
             .save_load_state
             .as_ref()
             .expect("save/load state should exist")
-            .load_admissible,
-        false
+            .load_admissible
     );
     assert!(
         report

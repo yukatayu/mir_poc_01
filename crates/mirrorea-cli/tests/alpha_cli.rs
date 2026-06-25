@@ -547,7 +547,7 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
         manifest["shipped_surface"]["final_viewer_bundle_api_frozen"],
         false
     );
-    assert_eq!(out_dir.join("reports/run-script-demo.json").exists(), false);
+    assert!(!out_dir.join("reports/run-script-demo.json").exists());
     assert!(
         manifest["reports"]
             .as_array()
@@ -751,7 +751,7 @@ fn build_native_bundle_rejects_unsafe_output_paths_and_reuse() {
     let nested_value = json_stdout(&nested);
     assert!(!nested.status.success());
     assert_eq!(nested_value["diagnostic_code"], "unsafe_output_path");
-    assert_eq!(nested_out.exists(), false);
+    assert!(!nested_out.exists());
 
     let out_dir = unique_temp_dir("mirrorea-alpha-native-nonempty-out");
     fs::create_dir_all(&out_dir).expect("out dir should be created");
@@ -822,7 +822,7 @@ fn build_native_bundle_rejects_non_disabled_native_policy() {
     assert!(!output.status.success());
     assert_ne!(value["status"], "accepted");
     assert_eq!(value["product_alpha1_ready"], false);
-    assert_eq!(out_dir.exists(), false);
+    assert!(!out_dir.exists());
 }
 
 #[test]

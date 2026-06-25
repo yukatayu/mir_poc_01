@@ -1298,19 +1298,19 @@ fn lower_expr(
                                     expr.span.clone(),
                                 ));
                             }
-                            if let Some(argument) = typed_arguments.first() {
-                                if !types_compatible(&signature.input_type, &argument.ty) {
-                                    diagnostics.push(diagnostic(
-                                        "function_argument_type_mismatch",
-                                        format!(
-                                            "function `{}` expects `{}`, found `{}`",
-                                            signature.function_name,
-                                            signature.input_type.display_name(),
-                                            argument.ty.display_name()
-                                        ),
-                                        argument.span.clone(),
-                                    ));
-                                }
+                            if let Some(argument) = typed_arguments.first()
+                                && !types_compatible(&signature.input_type, &argument.ty)
+                            {
+                                diagnostics.push(diagnostic(
+                                    "function_argument_type_mismatch",
+                                    format!(
+                                        "function `{}` expects `{}`, found `{}`",
+                                        signature.function_name,
+                                        signature.input_type.display_name(),
+                                        argument.ty.display_name()
+                                    ),
+                                    argument.span.clone(),
+                                ));
                             }
                             (
                                 signature.function_name.clone(),
@@ -1346,17 +1346,17 @@ fn lower_expr(
             require_exact_type("array index", &typed_index, &TypedType::Int64, diagnostics);
             let ty = match &typed_base.ty {
                 TypedType::FixedArray { element, length } => {
-                    if let TypedExprKind::IntLiteral(value) = typed_index.kind {
-                        if value < 0 || value as usize >= *length {
-                            diagnostics.push(diagnostic(
-                                "static_index_out_of_bounds",
-                                format!(
-                                    "array index {} is out of bounds for static length {}",
-                                    value, length
-                                ),
-                                index.span.clone(),
-                            ));
-                        }
+                    if let TypedExprKind::IntLiteral(value) = typed_index.kind
+                        && (value < 0 || value as usize >= *length)
+                    {
+                        diagnostics.push(diagnostic(
+                            "static_index_out_of_bounds",
+                            format!(
+                                "array index {} is out of bounds for static length {}",
+                                value, length
+                            ),
+                            index.span.clone(),
+                        ));
                     }
                     (**element).clone()
                 }
@@ -1840,7 +1840,7 @@ where
     }
     match matches.as_slice() {
         [] => Resolution::Missing,
-        [value] => Resolution::Found((*value).clone()),
+        [value] => Resolution::Found(*value),
         _ => Resolution::Ambiguous(
             matches
                 .iter()

@@ -307,6 +307,7 @@ fn json_array(values: &[&str]) -> String {
     format!("[{items}]")
 }
 
+#[allow(clippy::too_many_arguments)]
 fn computational_product_package_with_boundary(
     package_id: &str,
     module_id: &str,

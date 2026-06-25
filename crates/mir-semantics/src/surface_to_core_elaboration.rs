@@ -372,33 +372,32 @@ fn elaborate_assign(
     when: &SurfaceWhenBlock,
     context: &mut ElaborationContext,
 ) {
-    if let Some(target) = parse_indexed_target(&assign.target_text) {
-        if let Some(state) = resolve_indexed_state(
+    if let Some(target) = parse_indexed_target(&assign.target_text)
+        && let Some(state) = resolve_indexed_state(
             context,
             &target,
             owner_hint,
             access_locus,
             assign.span.clone(),
-        ) {
-            if state.owner_locus != access_locus {
-                let generated_from = if owner_hint == Some(state.owner_locus.as_str()) {
-                    "nested_place_block"
-                } else {
-                    "cross_locus_write_target"
-                };
-                push_remote_request(
-                    context,
-                    "write",
-                    generated_from,
-                    access_locus,
-                    state,
-                    target,
-                    when,
-                    assign.span.clone(),
-                );
-                return;
-            }
-        }
+        )
+        && state.owner_locus != access_locus
+    {
+        let generated_from = if owner_hint == Some(state.owner_locus.as_str()) {
+            "nested_place_block"
+        } else {
+            "cross_locus_write_target"
+        };
+        push_remote_request(
+            context,
+            "write",
+            generated_from,
+            access_locus,
+            state,
+            target,
+            when,
+            assign.span.clone(),
+        );
+        return;
     }
 
     for target in indexed_targets_in_text(&assign.value.text) {
@@ -489,6 +488,7 @@ fn push_when_transition(
     });
 }
 
+#[allow(clippy::too_many_arguments)]
 fn push_remote_request(
     context: &mut ElaborationContext,
     request_kind: &str,
@@ -835,13 +835,12 @@ fn resolve_indexed_state(
     access_locus: &str,
     span: SourceSpan,
 ) -> Option<IndexedStateDecl> {
-    if let Some(owner_locus) = owner_hint {
-        if let Some(state) = context
+    if let Some(owner_locus) = owner_hint
+        && let Some(state) = context
             .indexed_states
             .get(&(owner_locus.to_string(), target.state_name.clone()))
-        {
-            return Some(state.clone());
-        }
+    {
+        return Some(state.clone());
     }
     if let Some(state) = context
         .indexed_states

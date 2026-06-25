@@ -952,13 +952,13 @@ pub fn run_bundle(bundle: &FixtureBundle) -> Result<BundleRunReport, Interpreter
             report.static_verdict
         )));
     }
-    if let Some(checked_reasons) = &bundle.fixture.expected_static.checked_reasons {
-        if static_gate.reasons != *checked_reasons {
-            return Err(InterpreterError::InvalidProgram(format!(
-                "bundle static checked_reasons mismatch for {}: expected {:?}, got {:?}",
-                bundle.fixture.fixture_id, checked_reasons, static_gate.reasons
-            )));
-        }
+    if let Some(checked_reasons) = &bundle.fixture.expected_static.checked_reasons
+        && static_gate.reasons != *checked_reasons
+    {
+        return Err(InterpreterError::InvalidProgram(format!(
+            "bundle static checked_reasons mismatch for {}: expected {:?}, got {:?}",
+            bundle.fixture.fixture_id, checked_reasons, static_gate.reasons
+        )));
     }
     if let Some(checked_reason_codes) = &bundle.fixture.expected_static.checked_reason_codes {
         if let Some(unsupported) = checked_reason_codes

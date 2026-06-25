@@ -416,13 +416,12 @@ fn resolve_indexed_state(
     access_locus: &str,
     span: SourceSpan,
 ) -> Option<IndexedStateDecl> {
-    if let Some(owner_locus) = owner_hint {
-        if let Some(state) = context
+    if let Some(owner_locus) = owner_hint
+        && let Some(state) = context
             .indexed_states
             .get(&(owner_locus.to_string(), target.state_name.clone()))
-        {
-            return Some(state.clone());
-        }
+    {
+        return Some(state.clone());
     }
     if let Some(state) = context
         .indexed_states
@@ -451,6 +450,7 @@ fn resolve_indexed_state(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn push_rejected_access(
     context: &mut CheckContext,
     state: IndexedStateDecl,

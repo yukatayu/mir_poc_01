@@ -2,6 +2,7 @@ use std::{fs, path::PathBuf};
 
 use mir_ast::practical_alpha1_checker::PracticalAlpha1CheckReport;
 
+#[allow(dead_code)]
 pub fn load_expected_check_report(name: &str) -> Result<PracticalAlpha1CheckReport, String> {
     let path = practical_expected_root().join(name);
     let text = fs::read_to_string(&path).map_err(|error| {
@@ -30,6 +31,7 @@ fn practical_packages_root() -> PathBuf {
     practical_root().join("packages")
 }
 
+#[allow(dead_code)]
 fn practical_expected_root() -> PathBuf {
     practical_root().join("expected")
 }

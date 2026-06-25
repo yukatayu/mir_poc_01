@@ -112,12 +112,12 @@ fn strip_format(args: Vec<String>) -> (String, Vec<String>) {
     let mut stripped = Vec::new();
     let mut index = 0;
     while index < args.len() {
-        if args[index] == "--format" {
-            if let Some(value) = args.get(index + 1) {
-                format = value.clone();
-                index += 2;
-                continue;
-            }
+        if args[index] == "--format"
+            && let Some(value) = args.get(index + 1)
+        {
+            format = value.clone();
+            index += 2;
+            continue;
         }
         stripped.push(args[index].clone());
         index += 1;
@@ -619,7 +619,7 @@ fn handle_view(args: &[String]) -> (Value, i32) {
 }
 
 fn product_alpha1_view_report(path: &Path, check: bool) -> (Value, i32) {
-    let viewer_openable = validate_product_alpha1_viewer_dir(&path);
+    let viewer_openable = validate_product_alpha1_viewer_dir(path);
     let html_path = path.join("index.html");
     let bundle_path = path.join("bundle.json");
     let bundle_result = read_product_alpha1_viewer_bundle(&bundle_path);
@@ -2807,6 +2807,7 @@ fn parse_demo_args(args: &[String]) -> Result<DemoArgs, (Value, i32)> {
     })
 }
 
+#[allow(clippy::type_complexity)]
 fn parse_transport_endpoint_args(
     command: &str,
     args: &[String],
@@ -3127,10 +3128,10 @@ fn write_session_to_dir_unlocked(
         file.sync_all()?;
     }
     fs::rename(&tmp_path, &path)?;
-    if let Some(parent) = path.parent() {
-        if let Ok(parent_dir) = File::open(parent) {
-            let _ = parent_dir.sync_all();
-        }
+    if let Some(parent) = path.parent()
+        && let Ok(parent_dir) = File::open(parent)
+    {
+        let _ = parent_dir.sync_all();
     }
     Ok(path)
 }
@@ -3471,7 +3472,7 @@ fn validate_product_alpha1_demo_attach_matrix(
                 row["package_id"] == *package_id
                     && row["package_kind"] == *package_kind
                     && row["terminal_outcome"] == *terminal_outcome
-                    && failure.map_or(true, |failure| {
+                    && failure.is_none_or(|failure| {
                         row["declared_failure_rows"]
                             .as_array()
                             .map(|rows| rows.iter().any(|value| value == failure))
@@ -3931,6 +3932,7 @@ fn native_bundle_shipped_surface_payload(
     })
 }
 
+#[allow(clippy::too_many_arguments)]
 fn native_bundle_manifest_payload(
     package: &ProductAlpha1Package,
     check_report: &ProductAlpha1CheckReport,
@@ -4393,16 +4395,9 @@ fn insert_value(payload: &mut Value, key: &str, value: Value) {
         .insert(key.to_string(), value);
 }
 
-fn print_payload(format: &str, payload: Value) {
-    if format == "json" {
-        println!(
-            "{}",
-            serde_json::to_string_pretty(&payload).expect("payload should serialize")
-        );
-    } else {
-        println!(
-            "{}",
-            serde_json::to_string_pretty(&payload).expect("payload should serialize")
-        );
-    }
+fn print_payload(_format: &str, payload: Value) {
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&payload).expect("payload should serialize")
+    );
 }

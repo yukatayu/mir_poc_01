@@ -49,15 +49,12 @@ fn strip_args(args: Vec<String>) -> (String, Vec<String>) {
     let mut positional = Vec::new();
     let mut index = 0usize;
     while index < args.len() {
-        match args[index].as_str() {
-            "--format" => {
-                if let Some(value) = args.get(index + 1) {
-                    format = value.clone();
-                    index += 2;
-                    continue;
-                }
-            }
-            _ => {}
+        if args[index].as_str() == "--format"
+            && let Some(value) = args.get(index + 1)
+        {
+            format = value.clone();
+            index += 2;
+            continue;
         }
         positional.push(args[index].clone());
         index += 1;

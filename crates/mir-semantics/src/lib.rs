@@ -755,10 +755,9 @@ impl DirectStyleEvaluator {
                 if let (Some(frame), Some(place)) = (
                     self.state.rollback_stack.last_mut(),
                     current_place.as_deref(),
-                ) {
-                    if frame.place_anchor == *place {
-                        frame.restore_snapshot = self.state.place_store.clone();
-                    }
+                ) && frame.place_anchor == *place
+                {
+                    frame.restore_snapshot = self.state.place_store.clone();
                 }
                 Ok(StepControl::Continue)
             }
@@ -1109,6 +1108,7 @@ impl DirectStyleEvaluator {
         Ok(self.propagate_failure(FailureKind::Reject))
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn eval_predicate_list<P>(
         &self,
         predicate_oracle: &mut P,
@@ -1139,6 +1139,7 @@ impl DirectStyleEvaluator {
         })
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn eval_single_predicate<P>(
         &self,
         predicate_oracle: &mut P,
@@ -1646,7 +1647,7 @@ mod tests {
 
     #[test]
     fn try_rollback_structural_first_tranche_fixtures_load_with_dedicated_expected_fields() {
-        let missing_fallback_body = load_fixture_from_path(&fixture_path(
+        let missing_fallback_body = load_fixture_from_path(fixture_path(
             "e23-malformed-try-fallback-missing-fallback-body.json",
         ))
         .expect("fixture should load");
@@ -1670,7 +1671,7 @@ mod tests {
             }])
         );
 
-        let atomic_cut_fallback_placement = load_fixture_from_path(&fixture_path(
+        let atomic_cut_fallback_placement = load_fixture_from_path(fixture_path(
             "e24-malformed-atomic-cut-fallback-placement.json",
         ))
         .expect("fixture should load");

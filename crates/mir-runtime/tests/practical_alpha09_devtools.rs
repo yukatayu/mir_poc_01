@@ -104,8 +104,7 @@ fn practical_alpha09_preserves_rejected_hotplug_as_observation_not_state_mutatio
             .export_sections
             .fallback_degradation
             .iter()
-            .any(|entry| entry.source_sample_id == "AV-A1-03"
-                && entry.native_execution_performed == false)
+            .any(|entry| entry.source_sample_id == "AV-A1-03" && !entry.native_execution_performed)
     );
 }
 

@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-05-24 20:42 JST
+Last updated: 2026-06-25 17:12 JST
 
 Current repo-local focus: current-L2 runnable floor, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, the closed Full System V1 lane, and the closed `P-SURF-01..99` Surface Mir parser + indexed-state + elaboration + generated communication + role-admission + source-patch hot-plug + source operational + static devtools diagnostics + final audit evidence floors. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Surface Mir `samples/full-system-v1-surface/syntax/`, `indexed-state/`, `elaboration/`, `role-admission/`, `source-patch/`, `devtools/`, and the six operational roots now exist as alpha evidence; none is a final Surface runtime/transport, final devtools viewer/telemetry ABI, final ABI/SDK, or final shared-space catalog. Docker skip paths are partial local probes, not release-candidate evidence.
 
@@ -174,6 +174,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-06-25 17:12 JST | broad executable audit / clippy hardening | pass; Lean compiler unavailable | Re-ran workspace Cargo fmt/check/build/test/clippy, `python3 -m unittest discover -s scripts/tests`, current-L2 / clean-near-end / practical alpha / Full System V1 / Surface / release-check helpers, direct `mirrorea-alpha` demo/check/view and generated native bundle run script. Lean stub artifact pipeline passed with `/tmp` output; `lean` / `lake` / `elan` were not on PATH, so compiler mechanization was skipped. |
 | 2026-05-24 20:42 JST | `P-SURF-99` final Surface alpha audit | pass | Surface release check, Surface samples / authoring check, Product Alpha release anchor, operational product helper, minimal pattern verifier, docs validators, `cargo fmt --check`, and `git diff --check` reran; Surface alpha remains bounded evidence, not final runtime/transport/viewer ABI |
 | 2026-05-24 20:13 JST | `P-SURF-08` devtools diagnostics | pass | `samples/full-system-v1-surface/devtools/` now carries `DEV-01..02`; `scripts/surface_mir_samples.py check-all --format json` validates 46 Surface rows; panels are static observer-safe source/Core diagnostics with semantic indexed-state backing and redacted patch summaries, not final viewer/telemetry ABI |
 | 2026-05-24 19:58 JST | `P-SURF-07` source operational suite | pass | `samples/full-system-v1-surface/{world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/` and `operational-matrix.json` now carry `E2E-SURF-01..12`; `scripts/surface_mir_samples.py check-all --format json` validates 44 Surface rows, including MembershipChat role admission plus elaboration/generated communication; the root remains source-first alpha evidence rather than final operational runtime/transport |

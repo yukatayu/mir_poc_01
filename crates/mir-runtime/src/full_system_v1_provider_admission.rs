@@ -191,14 +191,13 @@ pub fn run_full_system_v1_provider_admission_path(
         .filter(|row| row.code != "provider_admission_deferred")
         .collect::<Vec<_>>();
 
-    if let Some(split) = &local_split_report {
-        if !split.accepted {
-            diagnostics.push(FullSystemV1ProviderAdmissionDiagnostic {
-                code: "local_split_rejected".to_string(),
-                message: "provider admission requires an accepted local role-split floor"
-                    .to_string(),
-            });
-        }
+    if let Some(split) = &local_split_report
+        && !split.accepted
+    {
+        diagnostics.push(FullSystemV1ProviderAdmissionDiagnostic {
+            code: "local_split_rejected".to_string(),
+            message: "provider admission requires an accepted local role-split floor".to_string(),
+        });
     }
 
     let Some(target_manifest) = projection
@@ -664,6 +663,7 @@ fn provider_kind_spec(provider_kind: &str) -> Option<ProviderKindSpec> {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn rejected_report(
     projection_id: &str,
     source_path: &str,

@@ -132,6 +132,7 @@ fn computational_package_json(
     )
 }
 
+#[allow(clippy::too_many_arguments)]
 fn computational_package_json_with_boundary(
     package_id: &str,
     module_id: &str,
@@ -264,8 +265,8 @@ fn product_alpha1_run_local_builds_same_session_carrier_with_required_lanes() {
     assert!(!report.session.membership.active_members.is_empty());
     assert!(!report.session.witness_state.witness_refs.is_empty());
     assert!(report.session.hotplug_lifecycle.is_empty());
-    assert_eq!(report.session.save_load_state.ordinary_save_ready, false);
-    assert_eq!(report.session.save_load_state.quiescent_save_ready, false);
+    assert!(!report.session.save_load_state.ordinary_save_ready);
+    assert!(!report.session.save_load_state.quiescent_save_ready);
     assert_eq!(
         report.session.message_recovery_state.recovery_policy,
         "retry_then_reject"
@@ -1158,10 +1159,7 @@ fn product_alpha1_attach_mutates_same_session_hotplug_state() {
     assert_eq!(attach_report.session_id, session_before.session_id);
     assert_eq!(attach_report.package_id, "product-alpha1-debug-layer");
     assert_eq!(attach_report.terminal_outcome, "accepted");
-    assert_eq!(
-        attach_report.auth_decision.overlay_transparency_claimed,
-        false
-    );
+    assert!(!attach_report.auth_decision.overlay_transparency_claimed);
     assert!(attach_report.session_mutated);
     assert_eq!(session_after.phase, "attached");
     assert_eq!(
@@ -1192,7 +1190,7 @@ fn product_alpha1_attach_mutates_same_session_hotplug_state() {
             .any(|route| route.envelope_id == "envelope#attach#product-alpha1-debug-layer")
     );
     assert_eq!(session_after.auth_decisions.len(), 2);
-    assert_eq!(session_after.save_load_state.quiescent_save_ready, false);
+    assert!(!session_after.save_load_state.quiescent_save_ready);
     assert!(!session_after.product_alpha1_ready);
 }
 

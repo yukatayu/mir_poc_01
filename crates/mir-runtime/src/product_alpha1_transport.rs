@@ -312,11 +312,8 @@ fn execute_local_tcp_roundtrip(
     session: &ProductAlpha1SessionCarrier,
     envelope_id: &str,
 ) -> Result<ProductAlpha1TransportWireTrace, ProductAlpha1SessionError> {
-    let listener = TcpListener::bind("127.0.0.1:0").map_err(|error| transport_error(error))?;
-    let bind_addr = listener
-        .local_addr()
-        .map_err(|error| transport_error(error))?
-        .to_string();
+    let listener = TcpListener::bind("127.0.0.1:0").map_err(transport_error)?;
+    let bind_addr = listener.local_addr().map_err(transport_error)?.to_string();
     let expected_session = session.clone();
     let server = thread::spawn(move || serve_once(listener, expected_session));
     let request = build_wire_request(session, envelope_id.to_string());
@@ -358,9 +355,9 @@ fn serve_once(
     listener: TcpListener,
     expected_session: ProductAlpha1SessionCarrier,
 ) -> Result<ProductAlpha1TransportWireResponse, ProductAlpha1SessionError> {
-    let (stream, _) = listener.accept().map_err(|error| transport_error(error))?;
+    let (stream, _) = listener.accept().map_err(transport_error)?;
     let mut stream = stream;
-    let request = read_request(stream.try_clone().map_err(|error| transport_error(error))?)?;
+    let request = read_request(stream.try_clone().map_err(transport_error)?)?;
     let response = evaluate_request(&expected_session, &request);
     write_response(&mut stream, &response)?;
     Ok(response)
@@ -371,9 +368,7 @@ fn read_request(
 ) -> Result<ProductAlpha1TransportWireRequest, ProductAlpha1SessionError> {
     let mut reader = BufReader::new(stream);
     let mut buffer = String::new();
-    reader
-        .read_line(&mut buffer)
-        .map_err(|error| transport_error(error))?;
+    reader.read_line(&mut buffer).map_err(transport_error)?;
     serde_json::from_str(&buffer).map_err(|error| ProductAlpha1SessionError {
         kind: ProductAlpha1SessionErrorKind::Transport,
         path: PathBuf::from("<product-alpha1-local-transport>"),
@@ -392,16 +387,12 @@ fn send_request(
     })?;
     stream
         .write_all(encoded.as_bytes())
-        .map_err(|error| transport_error(error))?;
-    stream
-        .write_all(b"\n")
-        .map_err(|error| transport_error(error))?;
-    stream.flush().map_err(|error| transport_error(error))?;
+        .map_err(transport_error)?;
+    stream.write_all(b"\n").map_err(transport_error)?;
+    stream.flush().map_err(transport_error)?;
     let mut reader = BufReader::new(stream);
     let mut buffer = String::new();
-    reader
-        .read_line(&mut buffer)
-        .map_err(|error| transport_error(error))?;
+    reader.read_line(&mut buffer).map_err(transport_error)?;
     serde_json::from_str(&buffer).map_err(|error| ProductAlpha1SessionError {
         kind: ProductAlpha1SessionErrorKind::Transport,
         path: PathBuf::from("<product-alpha1-local-transport>"),
@@ -420,11 +411,9 @@ fn write_response(
     })?;
     stream
         .write_all(encoded.as_bytes())
-        .map_err(|error| transport_error(error))?;
-    stream
-        .write_all(b"\n")
-        .map_err(|error| transport_error(error))?;
-    stream.flush().map_err(|error| transport_error(error))
+        .map_err(transport_error)?;
+    stream.write_all(b"\n").map_err(transport_error)?;
+    stream.flush().map_err(transport_error)
 }
 
 fn evaluate_request(

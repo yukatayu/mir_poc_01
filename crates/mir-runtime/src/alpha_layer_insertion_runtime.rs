@@ -825,6 +825,7 @@ fn evaluate_compatibility(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn push_check(
     checks: &mut Vec<LayerContractCheck>,
     passed_reason_refs: &mut Vec<String>,
@@ -1163,6 +1164,7 @@ pub(crate) fn incompatible_patch_signature() -> LayerSignature {
     )
 }
 
+#[allow(clippy::too_many_arguments)]
 fn layer_signature(
     name: &str,
     requires: &[&str],

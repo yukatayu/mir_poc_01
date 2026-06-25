@@ -259,19 +259,13 @@ pub fn run_full_system_v1_renderer_pose_backend_path(
                                 Some("missing_posegraph_binding_context".to_string()),
                                 "renderer pose delivery blocked because the PoseGraph package did not declare a binding_context".to_string(),
                             )
-                        } else if expected_binding_context.as_ref()
-                            != posegraph_binding_context.as_ref()
+                        } else if let (Some(expected_context), Some(actual_context)) = (
+                            expected_binding_context.as_ref(),
+                            posegraph_binding_context.as_ref(),
+                        ) && expected_context != actual_context
                         {
-                            let expected = binding_context_summary(
-                                expected_binding_context
-                                    .as_ref()
-                                    .expect("checked is_some above"),
-                            );
-                            let actual = binding_context_summary(
-                                posegraph_binding_context
-                                    .as_ref()
-                                    .expect("checked is_some above"),
-                            );
+                            let expected = binding_context_summary(expected_context);
+                            let actual = binding_context_summary(actual_context);
                             diagnostics.push(FullSystemV1RendererPoseBackendDiagnostic {
                                 code: "posegraph_binding_context_mismatch".to_string(),
                                 message: format!(
@@ -357,10 +351,11 @@ fn extract_pose_snapshot_ref(report: &FullSystemV1ProviderAdmissionReport) -> Op
         for session in &target.runtime_sessions {
             for trace in &session.runtime.compute_trace {
                 for binding in &trace.local_bindings_summary {
-                    if binding.name == "pose_snapshot_ref" && binding.type_name == "Text" {
-                        if let Some(text) = parse_text_summary(&binding.summary) {
-                            return Some(text);
-                        }
+                    if binding.name == "pose_snapshot_ref"
+                        && binding.type_name == "Text"
+                        && let Some(text) = parse_text_summary(&binding.summary)
+                    {
+                        return Some(text);
                     }
                 }
             }

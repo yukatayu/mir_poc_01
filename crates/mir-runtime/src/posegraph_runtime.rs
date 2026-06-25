@@ -351,26 +351,24 @@ pub fn run_posegraph_runtime_package_path(path: impl AsRef<Path>) -> PoseGraphRu
     let mut runtime_state = build_runtime_state(&package.runtime_input.posegraph);
     let save_load_state = build_save_load_state(&package.runtime_input.posegraph, &runtime_state);
 
-    if let Some(anchored_pose) = package.runtime_input.posegraph.anchored_pose.as_ref() {
-        if let Some(current_membership_epoch) =
+    if let Some(anchored_pose) = package.runtime_input.posegraph.anchored_pose.as_ref()
+        && let Some(current_membership_epoch) =
             package.runtime_input.posegraph.current_membership_epoch
-        {
-            if anchored_pose.membership_epoch != Some(current_membership_epoch) {
-                return rejection_report(
-                    &package_path_text,
-                    &package.package_id,
-                    &package.module_id,
-                    &package.transition_id,
-                    runtime_state,
-                    save_load_state,
-                    "stale_anchor_membership_epoch",
-                    format!(
-                        "anchor binding membership_epoch {:?} does not match current {}",
-                        anchored_pose.membership_epoch, current_membership_epoch
-                    ),
-                );
-            }
-        }
+        && anchored_pose.membership_epoch != Some(current_membership_epoch)
+    {
+        return rejection_report(
+            &package_path_text,
+            &package.package_id,
+            &package.module_id,
+            &package.transition_id,
+            runtime_state,
+            save_load_state,
+            "stale_anchor_membership_epoch",
+            format!(
+                "anchor binding membership_epoch {:?} does not match current {}",
+                anchored_pose.membership_epoch, current_membership_epoch
+            ),
+        );
     }
 
     if let Some(current_membership_epoch) = package.runtime_input.posegraph.current_membership_epoch
@@ -398,39 +396,39 @@ pub fn run_posegraph_runtime_package_path(path: impl AsRef<Path>) -> PoseGraphRu
     let mut previous_anchor_switch_sequence =
         package.runtime_input.posegraph.last_anchor_switch_sequence;
     for anchor_switch in &package.runtime_input.posegraph.anchor_switch_log {
-        if let Some(current_owner_epoch) = package.runtime_input.posegraph.current_owner_epoch {
-            if anchor_switch.owner_epoch != current_owner_epoch {
-                return rejection_report(
-                    &package_path_text,
-                    &package.package_id,
-                    &package.module_id,
-                    &package.transition_id,
-                    runtime_state,
-                    save_load_state.clone(),
-                    "anchor_switch_owner_epoch_stale",
-                    format!(
-                        "anchor switch owner_epoch {} does not match current {}",
-                        anchor_switch.owner_epoch, current_owner_epoch
-                    ),
-                );
-            }
+        if let Some(current_owner_epoch) = package.runtime_input.posegraph.current_owner_epoch
+            && anchor_switch.owner_epoch != current_owner_epoch
+        {
+            return rejection_report(
+                &package_path_text,
+                &package.package_id,
+                &package.module_id,
+                &package.transition_id,
+                runtime_state,
+                save_load_state.clone(),
+                "anchor_switch_owner_epoch_stale",
+                format!(
+                    "anchor switch owner_epoch {} does not match current {}",
+                    anchor_switch.owner_epoch, current_owner_epoch
+                ),
+            );
         }
-        if let Some(previous_sequence) = previous_anchor_switch_sequence {
-            if anchor_switch.sequence <= previous_sequence {
-                return rejection_report(
-                    &package_path_text,
-                    &package.package_id,
-                    &package.module_id,
-                    &package.transition_id,
-                    runtime_state,
-                    save_load_state.clone(),
-                    "anchor_switch_frontier_regression",
-                    format!(
-                        "anchor switch sequence {} must advance beyond {}",
-                        anchor_switch.sequence, previous_sequence
-                    ),
-                );
-            }
+        if let Some(previous_sequence) = previous_anchor_switch_sequence
+            && anchor_switch.sequence <= previous_sequence
+        {
+            return rejection_report(
+                &package_path_text,
+                &package.package_id,
+                &package.module_id,
+                &package.transition_id,
+                runtime_state,
+                save_load_state.clone(),
+                "anchor_switch_frontier_regression",
+                format!(
+                    "anchor switch sequence {} must advance beyond {}",
+                    anchor_switch.sequence, previous_sequence
+                ),
+            );
         }
         if anchor_switch.pose_snapshot_frontier != runtime_pose_snapshot_frontier {
             return rejection_report(
@@ -450,50 +448,50 @@ pub fn run_posegraph_runtime_package_path(path: impl AsRef<Path>) -> PoseGraphRu
         previous_anchor_switch_sequence = Some(anchor_switch.sequence);
     }
 
-    if let Some(anchored_pose) = package.runtime_input.posegraph.anchored_pose.as_ref() {
-        if anchored_pose.state == "fallback_only" {
-            let fresh_anchor_witness = package
-                .runtime_input
-                .posegraph
-                .fresh_anchor_witness
-                .clone()
-                .unwrap_or_default();
-            let current_anchor_witness = package
-                .runtime_input
-                .posegraph
-                .current_anchor_witness
-                .clone()
-                .unwrap_or_default();
-            runtime_state
-                .reacquire_required
-                .push(anchored_pose.entity_ref.clone());
-            let detail = if fresh_anchor_witness.is_empty() || current_anchor_witness.is_empty() {
-                format!(
-                    "fallback-only anchor for `{}` requires explicit reacquire with fresh witness",
-                    anchored_pose.entity_ref
-                )
-            } else if fresh_anchor_witness != current_anchor_witness {
-                format!(
-                    "fallback-only anchor for `{}` requires explicit reacquire",
-                    anchored_pose.entity_ref
-                )
-            } else {
-                format!(
-                    "fallback-only anchor for `{}` requires an explicit reacquire transition",
-                    anchored_pose.entity_ref
-                )
-            };
-            return rejection_report(
-                &package_path_text,
-                &package.package_id,
-                &package.module_id,
-                &package.transition_id,
-                runtime_state,
-                save_load_state.clone(),
-                "reacquire_required",
-                detail,
-            );
-        }
+    if let Some(anchored_pose) = package.runtime_input.posegraph.anchored_pose.as_ref()
+        && anchored_pose.state == "fallback_only"
+    {
+        let fresh_anchor_witness = package
+            .runtime_input
+            .posegraph
+            .fresh_anchor_witness
+            .clone()
+            .unwrap_or_default();
+        let current_anchor_witness = package
+            .runtime_input
+            .posegraph
+            .current_anchor_witness
+            .clone()
+            .unwrap_or_default();
+        runtime_state
+            .reacquire_required
+            .push(anchored_pose.entity_ref.clone());
+        let detail = if fresh_anchor_witness.is_empty() || current_anchor_witness.is_empty() {
+            format!(
+                "fallback-only anchor for `{}` requires explicit reacquire with fresh witness",
+                anchored_pose.entity_ref
+            )
+        } else if fresh_anchor_witness != current_anchor_witness {
+            format!(
+                "fallback-only anchor for `{}` requires explicit reacquire",
+                anchored_pose.entity_ref
+            )
+        } else {
+            format!(
+                "fallback-only anchor for `{}` requires an explicit reacquire transition",
+                anchored_pose.entity_ref
+            )
+        };
+        return rejection_report(
+            &package_path_text,
+            &package.package_id,
+            &package.module_id,
+            &package.transition_id,
+            runtime_state,
+            save_load_state.clone(),
+            "reacquire_required",
+            detail,
+        );
     }
 
     if let (Some(target_pose), Some(anchored_pose)) = (
@@ -544,19 +542,19 @@ pub fn run_posegraph_runtime_package_path(path: impl AsRef<Path>) -> PoseGraphRu
         }
     }
 
-    if let Some(save_load_state) = save_load_state.as_ref() {
-        if !save_load_state.load_admissible {
-            return rejection_report(
-                &package_path_text,
-                &package.package_id,
-                &package.module_id,
-                &package.transition_id,
-                runtime_state,
-                Some(save_load_state.clone()),
-                "save_load_inadmissible",
-                save_load_inadmissibility_detail(save_load_state),
-            );
-        }
+    if let Some(save_load_state) = save_load_state.as_ref()
+        && !save_load_state.load_admissible
+    {
+        return rejection_report(
+            &package_path_text,
+            &package.package_id,
+            &package.module_id,
+            &package.transition_id,
+            runtime_state,
+            Some(save_load_state.clone()),
+            "save_load_inadmissible",
+            save_load_inadmissibility_detail(save_load_state),
+        );
     }
 
     let observer_safe_summary = format!(
@@ -951,6 +949,7 @@ fn build_devtools_export(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn rejection_report(
     package_path: &str,
     package_id: &str,

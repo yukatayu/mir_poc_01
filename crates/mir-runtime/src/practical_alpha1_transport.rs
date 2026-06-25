@@ -918,7 +918,6 @@ fn auth_lane_reason_refs(envelope: &MessageEnvelope, required_bindings: &[String
     let required_bindings: BTreeSet<_> = required_bindings.iter().cloned().collect();
     required_bindings
         .difference(&actual_bindings)
-        .cloned()
         .map(|binding| format!("missing_auth_binding:{binding}"))
         .collect()
 }

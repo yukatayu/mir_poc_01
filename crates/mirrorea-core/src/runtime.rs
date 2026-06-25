@@ -32,13 +32,13 @@ impl MemberRecord {
                 self.principal
             )));
         }
-        if let Some(left_at_epoch) = self.left_at_epoch {
-            if left_at_epoch < self.joined_at_epoch {
-                return Err(MirroreaCoreError::new(format!(
-                    "MemberRecord `{}` has left_at_epoch {} before joined_at_epoch {}",
-                    self.principal, left_at_epoch, self.joined_at_epoch
-                )));
-            }
+        if let Some(left_at_epoch) = self.left_at_epoch
+            && left_at_epoch < self.joined_at_epoch
+        {
+            return Err(MirroreaCoreError::new(format!(
+                "MemberRecord `{}` has left_at_epoch {} before joined_at_epoch {}",
+                self.principal, left_at_epoch, self.joined_at_epoch
+            )));
         }
         Ok(())
     }
@@ -178,13 +178,13 @@ impl MembershipRegistry {
                     record.joined_at_epoch, snapshot.membership_epoch
                 )));
             }
-            if let Some(left_at_epoch) = record.left_at_epoch {
-                if left_at_epoch > snapshot.membership_epoch {
-                    return Err(MirroreaCoreError::new(format!(
-                        "MembershipSnapshot principal `{principal}` left_at_epoch {} exceeds membership frontier {}",
-                        left_at_epoch, snapshot.membership_epoch
-                    )));
-                }
+            if let Some(left_at_epoch) = record.left_at_epoch
+                && left_at_epoch > snapshot.membership_epoch
+            {
+                return Err(MirroreaCoreError::new(format!(
+                    "MembershipSnapshot principal `{principal}` left_at_epoch {} exceeds membership frontier {}",
+                    left_at_epoch, snapshot.membership_epoch
+                )));
             }
             members.insert(principal.clone(), record);
         }
