@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-06-25 17:49 JST
+最終更新: 2026-06-25 18:10 JST
 
 ## document role
 
@@ -49,6 +49,10 @@ semantic source authority.
 ## current milestone position
 
 - Current package: none promoted for the Surface line after `P-SURF-99`.
+- Current planning note: consultation-derived strategy has been captured as
+  non-normative repository memory in `plan/69`. It does not promote a new
+  package, change `specs/`, or decide whether work should move to a separate
+  theory/design repository.
 - Current status after this snapshot: `P-SURF-99` closed the bounded Surface
   alpha audit over `P-SURF-01..08`. Surface alpha evidence has 46 helper rows
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
@@ -356,6 +360,12 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-06-25 18:10 JST
+  相談会話と repo 基礎文書を照合し、post-`P-SURF-99` の source-first
+  management synthesis を `plan/69` として非規範の repository memory に保存した。
+  新しい promoted package や `specs/` 判断は作らず、ordinary assignment
+  elaboration、Surface/Core/Trace/Projection separation、World/Event 非 core
+  primitive、ledger 管理案を今後の検討候補として切り分けた。
 - 2026-06-25 17:49 JST
   `current_l2_lean_sample_sync.py` の clean-near-end `source_path` 出力を repo-relative に変更し、`samples/lean/clean-near-end/*/*.bundle.json` と各 README の source reference を `samples/...` 相対パスへ再生成した。Lean sync は idempotent に通り、active Lean files、Rust actual Lean probe、`make check`、`git diff --check`、absolute path scan を確認した。
 - 2026-06-25 17:38 JST

@@ -19,7 +19,8 @@
 6. 全体計画なら `plan/10-roadmap-overall.md`
 7. 直近の research split は `plan/11-roadmap-near-term.md`
 8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` historical bridge / post-`P21` rollback-durable-migration boundary family / post-`P21` distributed-activation-ordering boundary family / post-`P21` final-public-hotplug-ABI boundary family / alpha-local type-system freeze / layer compatibility freeze / cut-save-load checkpoint / runtime package avatar policy / Mirrorea Spaces alpha E2E / practical alpha-1 / operational α-0.5 / α-0.8 / α-0.9 / host-I/O and session runtime / product alpha-1 public boundary / operational product sample suite / portal-shard future boundary / Mir computational core / Transform-PoseGraph / projection-backend boundary / engine adapter boundary / autonomous computational-core execution / Full System V1 source-first roadmap / Surface Mir alpha source-authority roadmap の repository-memory roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`、`plan/36`、`plan/37`、`plan/38`、`plan/39`、`plan/40`、`plan/41`、`plan/42`、`plan/43`、`plan/44`、`plan/45`、`plan/46`、`plan/47`、`plan/48`、`plan/49`、`plan/50`、`plan/51`、`plan/52`、`plan/53`、`plan/54`、`plan/55`、`plan/56`、`plan/57`、`plan/58`、`plan/59`、`plan/60`、`plan/61`、`plan/62`、`plan/63`、`plan/64`、`plan/65`、`plan/66`、`plan/67`、`plan/68`
-9. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+9. post-`P-SURF-99` の相談内容 synthesis / source-first management recut memory は `plan/69`
+10. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -132,6 +133,8 @@
   `plan/66-role-admission-roadmap.md`
   `plan/67-source-patch-hotplug-roadmap.md`
   `plan/68-surface-full-system-v1-roadmap.md`
+- consultation-derived management synthesis:
+  `plan/69-consultation-synthesis-and-management-roadmap.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

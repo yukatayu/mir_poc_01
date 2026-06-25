@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-05-24 20:42 JST
+最終更新: 2026-06-25 18:10 JST
 
 ## document role
 
@@ -25,6 +25,21 @@ Current holding state:
   anchors.
 - P-SURF-08 devtools diagnostics remain static source/Core evidence, not final
   viewer / telemetry ABI or runtime devtools completion.
+- Post-`P-SURF-99` consultation synthesis is captured in
+  `plan/69-consultation-synthesis-and-management-roadmap.md` as non-normative
+  repository memory. It does not promote a new package or create a `specs/`
+  decision.
+
+## candidate next strategy packages
+
+These are candidates only. They are not promoted until the user chooses the
+next line.
+
+| Candidate | Macro reading | Objective | Close condition |
+|---|---|---|---|
+| `planning-ledger pilot` | `Macro 0/1` front-half | create a non-normative concept / claim / open-problem / ADR-candidate inventory for axis, semantic strata, ordinary assignment, and non-axis boundaries | ledger remains explicitly non-normative; `specs/` unchanged; report records unresolved promotion questions |
+| `ordinary-assignment target draft` | `Macro 1/5` front-half | draft the target obligation for Surface assignment elaboration preserving authority, failure row, dependency, generated communication, and source span | no theorem discharge claim; target obligation and proof boundary are separated |
+| `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
 
 ## ordered self-driven packages
 
