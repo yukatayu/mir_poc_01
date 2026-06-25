@@ -27,6 +27,25 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertIn("alpha_ready_subject", text)
         self.assertIn("namespace CleanNearEnd", text)
 
+    def test_repo_relative_source_path_normalizes_repo_absolute_path(self) -> None:
+        path = (
+            sync.REPO_ROOT
+            / "crates"
+            / "mir-runtime"
+            / "../../samples/clean-near-end/typing/01_authorized_declassification.mir"
+        )
+
+        self.assertEqual(
+            sync.repo_relative_source_path(str(path)),
+            "samples/clean-near-end/typing/01_authorized_declassification.mir",
+        )
+
+    def test_repo_relative_source_path_preserves_external_path(self) -> None:
+        self.assertEqual(
+            sync.repo_relative_source_path("/tmp/outside-sample.mir"),
+            "/tmp/outside-sample.mir",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

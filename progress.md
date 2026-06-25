@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-06-25 17:38 JST
+最終更新: 2026-06-25 17:49 JST
 
 ## document role
 
@@ -356,6 +356,8 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-06-25 17:49 JST
+  `current_l2_lean_sample_sync.py` の clean-near-end `source_path` 出力を repo-relative に変更し、`samples/lean/clean-near-end/*/*.bundle.json` と各 README の source reference を `samples/...` 相対パスへ再生成した。Lean sync は idempotent に通り、active Lean files、Rust actual Lean probe、`make check`、`git diff --check`、absolute path scan を確認した。
 - 2026-06-25 17:38 JST
   `elan` 経由で repo の `lean-toolchain` に合わせた Lean 4.29.1 / Lake 5.0.0 を導入し、active `samples/lean/foundations` / `samples/lean/clean-near-end` と historical `samples/lean/old` を含む 32 Lean files、Lean sync helper、Lean theorem-stub pipeline、Python Lean unit tests、Rust Lean actual probe を確認した。新規 disk 使用量は filesystem 差分で 2,851,463,168 bytes、約 2.66 GiB、`~/.elan` 実体で 2,819,461,716 bytes、約 2.63 GiB。
 - 2026-06-25 17:12 JST

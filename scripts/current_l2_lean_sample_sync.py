@@ -128,6 +128,15 @@ def render_readme(sample_id: str, source_path: str) -> str:
 """
 
 
+def repo_relative_source_path(source_path: str) -> str:
+    path = Path(source_path)
+    resolved = path.resolve() if path.is_absolute() else (REPO_ROOT / path).resolve()
+    try:
+        return resolved.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return source_path
+
+
 def sync_clean_stubs(sample_rows: list[dict[str, object]]) -> list[dict[str, object]]:
     if CLEAN_ROOT.exists():
         shutil.rmtree(CLEAN_ROOT)
@@ -137,6 +146,7 @@ def sync_clean_stubs(sample_rows: list[dict[str, object]]) -> list[dict[str, obj
     version = lean_version()
     for row in sample_rows:
         sample_id = str(row["sample_id"])
+        source_path = repo_relative_source_path(str(row["source_path"]))
         sample_dir = CLEAN_ROOT / sample_id
         sample_dir.mkdir(parents=True, exist_ok=True)
         lean_path = sample_dir / f"{sample_id}.lean"
@@ -147,7 +157,7 @@ def sync_clean_stubs(sample_rows: list[dict[str, object]]) -> list[dict[str, obj
             json.dumps(
                 {
                     "sample_id": sample_id,
-                    "source_path": row["source_path"],
+                    "source_path": source_path,
                     "theorem_name": theorem_name(sample_id),
                 },
                 indent=2,
@@ -156,7 +166,7 @@ def sync_clean_stubs(sample_rows: list[dict[str, object]]) -> list[dict[str, obj
             encoding="utf-8",
         )
         readme_path.write_text(
-            render_readme(sample_id, str(row["source_path"])),
+            render_readme(sample_id, source_path),
             encoding="utf-8",
         )
         entries.append(
