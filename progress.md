@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-06-25 17:12 JST
+最終更新: 2026-06-25 17:38 JST
 
 ## document role
 
@@ -356,6 +356,8 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-06-25 17:38 JST
+  `elan` 経由で repo の `lean-toolchain` に合わせた Lean 4.29.1 / Lake 5.0.0 を導入し、active `samples/lean/foundations` / `samples/lean/clean-near-end` と historical `samples/lean/old` を含む 32 Lean files、Lean sync helper、Lean theorem-stub pipeline、Python Lean unit tests、Rust Lean actual probe を確認した。新規 disk 使用量は filesystem 差分で 2,851,463,168 bytes、約 2.66 GiB、`~/.elan` 実体で 2,819,461,716 bytes、約 2.63 GiB。
 - 2026-06-25 17:12 JST
   broad build/execution audit と clippy hardening を実施し、`cargo fmt --check`、`cargo check --workspace --all-targets`、`cargo build --workspace --all-targets`、`cargo test --workspace --all-targets --no-fail-fast`、`cargo clippy --workspace --all-targets -- -D warnings`、`python3 -m unittest discover -s scripts/tests`、主要 sample / release check / `mirrorea-alpha` demo 起動確認を通した。Lean stub artifact pipeline は `/tmp` 出力で通ったが、`lean` / `lake` / `elan` は PATH 不在のため compiler mechanization check は未実行。
 - 2026-05-24 20:42 JST
