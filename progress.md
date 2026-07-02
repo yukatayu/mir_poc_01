@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-02 17:52 JST
+最終更新: 2026-07-02 18:03 JST
 
 ## document role
 
@@ -360,6 +360,11 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-02 18:03 JST
+  Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
+  design review では積極的に Oracle consult を投げる方針を明記した。長時間
+  実行は非同期 reviewer として扱い、必要なら sub-agent に起動 / 監視を任せつつ、
+  採否と repo への mirror は main agent が source hierarchy に照らして判断する。
 - 2026-07-02 17:52 JST
   ChatGPT 5.5 Pro Extended Oracle browser consults の repo-local 運用メモを
   `.docs/oracle-chatgpt-pro-operations.md` として追加し、`AGENTS.md`、

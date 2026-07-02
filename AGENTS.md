@@ -18,6 +18,13 @@ minutes and sometimes up to about an hour; wait patiently, check
 `oracle status` / `oracle session` before retrying, and avoid duplicate runs
 without concrete failure evidence.
 
+For theory-heavy tasks, whole-project positioning, difficult roadmap choices,
+or complex design review, prefer using Oracle proactively and asynchronously.
+The main agent may delegate Oracle operation or monitoring to a sub-agent while
+continuing non-overlapping local work, but the main agent remains responsible
+for judging the result against repo evidence before mirroring anything into the
+repo.
+
 Oracle output is advisory. Mirror any useful result into the repo's normal
 source hierarchy; do not treat an external chat as normative state.
 

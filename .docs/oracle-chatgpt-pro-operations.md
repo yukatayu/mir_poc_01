@@ -31,9 +31,12 @@ This repo document records how to use that setup for this project.
 
 ## When to consult
 
-Use Oracle when a second opinion is likely to improve quality, especially for:
+Use Oracle proactively when a second opinion is likely to improve quality,
+especially for:
 
 - difficult architectural or semantic judgments.
+- theory-heavy questions.
+- whole-project positioning or roadmap questions.
 - review of a complex plan before it becomes normative.
 - hidden-failure-mode searches.
 - stuck investigations where local evidence is not enough.
@@ -41,6 +44,11 @@ Use Oracle when a second opinion is likely to improve quality, especially for:
 
 Do not use Oracle as a shortcut around local reading, validation, or repo source
 hierarchy. The local repo remains the primary evidence source.
+
+For theory-heavy or whole-project tasks, prefer sending a focused Oracle consult
+early enough that its answer can run in parallel with local reading, validation,
+or implementation. Treat it as an asynchronous reviewer, not as a blocker for
+all local progress unless the next local step genuinely depends on its answer.
 
 ## Commands
 
@@ -98,6 +106,25 @@ oracle session <session-id>
 Only abandon or retry when there is concrete evidence of failure, such as a
 reported tool error, a browser/login interruption that cannot proceed, or a
 session that has clearly stopped without producing usable output.
+
+## Async and sub-agent coordination
+
+It is acceptable to let a sub-agent operate the Oracle command when that keeps
+the main task moving, especially for long-running theory review or broad-plan
+critique. Use this pattern carefully:
+
+1. The main agent defines the exact question, repo source hierarchy, attached
+   files, and expected output shape.
+2. The sub-agent starts or monitors the Oracle run and reports the session id,
+   status, and distilled result.
+3. The main agent continues non-overlapping local work while the Oracle run is
+   pending.
+4. The main agent reads the Oracle result critically, compares it against repo
+   evidence, and decides what, if anything, to mirror into repo documents.
+
+Do not allow an Oracle-running sub-agent to make normative repo changes from the
+external answer alone. Promotion still requires the ordinary repo edit,
+validation, report, commit, and push discipline.
 
 ## Prompting rules
 
