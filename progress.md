@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-06-25 18:10 JST
+最終更新: 2026-07-02 17:52 JST
 
 ## document role
 
@@ -360,6 +360,12 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-02 17:52 JST
+  ChatGPT 5.5 Pro Extended Oracle browser consults の repo-local 運用メモを
+  `.docs/oracle-chatgpt-pro-operations.md` として追加し、`AGENTS.md`、
+  `Documentation.md`、`plan/00-index.md` から導線を張った。Oracle は advisory
+  review input であり、規範正本ではない。実行は分単位で待ち、遅い場合も
+  重複起動せず `oracle status` / `oracle session` で確認する運用にした。
 - 2026-06-25 18:10 JST
   相談会話と repo 基礎文書を照合し、post-`P-SURF-99` の source-first
   management synthesis を `plan/69` として非規範の repository memory に保存した。

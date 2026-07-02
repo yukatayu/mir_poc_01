@@ -9,6 +9,7 @@
 - workflow / evidence snapshot は `progress.md`
 - current task map は `tasks.md`
 - runnable sample dashboard は `samples_progress.md`
+- agent / operational policy は `.docs/`
 - 実行証跡は `docs/reports/`
 
 ## まず repo をどう読むべきか
@@ -229,3 +230,12 @@ Correction:
 - helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として読む
 - `100%` は外部開発者が実際に再現・使用できる operational workflow または product/public layer だけに使う
 - `PA1W-*` は bounded practical workflow ready として読み、product/public-ready α-1 とは読まない
+
+## agent / review operations
+
+- `.docs/oracle-chatgpt-pro-operations.md` は、ChatGPT 5.5 Pro Extended
+  Oracle browser consults の repo-local 運用メモである。
+- Oracle consult は advisory review input であり、`specs/`、`plan/`、
+  `progress.md`、`tasks.md`、`docs/reports/` の source hierarchy を置き換えない。
+- Oracle 系コマンドは分単位で待つ。遅い場合も重複起動せず、まず
+  `oracle status` / `oracle session` で状態を確認する。

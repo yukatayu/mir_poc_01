@@ -3,6 +3,24 @@
 This repository is intended for repeated work by agents that may start with **no retained context**.
 The repository therefore treats documentation structure as part of the project's correctness.
 
+## ChatGPT Pro Oracle consults
+
+When a difficult judgment, review, or stuck investigation would benefit from a
+second opinion, use the browser-backed ChatGPT 5.5 Pro Extended Oracle wrappers.
+Read `/home/codex/.codex/docs/oracle-chatgpt-pro.md` before first use in a
+session, then follow the repo-local operating notes in
+`.docs/oracle-chatgpt-pro-operations.md`.
+
+Use `ask-chatgpt-pro` for normal new consultations,
+`ask-chatgpt-pro-followup` for real conversation continuation, and
+`ask-chatgpt-pro-temp` only for one-off temporary chats. These commands can take
+minutes and sometimes up to about an hour; wait patiently, check
+`oracle status` / `oracle session` before retrying, and avoid duplicate runs
+without concrete failure evidence.
+
+Oracle output is advisory. Mirror any useful result into the repo's normal
+source hierarchy; do not treat an external chat as normative state.
+
 ## Non-negotiable rules
 
 1. **Read in order**
