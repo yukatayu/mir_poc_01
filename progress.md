@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 21:54 JST
+最終更新: 2026-07-03 22:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -121,6 +121,13 @@ semantic source authority.
   `diagnostic_codes` / source-span sidecar evidence. It does not implement a
   diagnostic ABI, state or prove OBL-024/025, claim explanation
   soundness/completeness, or edit canon.
+- Current OBL-024 statement-shape inventory note:
+  `plan/81-g1-obl024-statement-shape-inventory.md` inventories the abstract
+  vocabulary needed to state explanation soundness: emitted Diagnostic,
+  reported rule instance / failed premise / bindings, and replay failure
+  exactly at that premise. It treats E-ROW as the immediate G1 pressure case,
+  but does not add a Lean file, prove OBL-024, freeze diagnostic ABI, claim
+  conformance, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -131,9 +138,9 @@ semantic source authority.
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
 - Next gap: the safe self-driven theory package is now either an additive LAB
-  diagnostic carrier prototype for E-ROW only, optional OBL-024 statement-shape
+  diagnostic carrier prototype for E-ROW only, OBL-025 statement-shape
   inventory without proof/status movement, or focused refinement of the LAB
-  OBL-001/020/021 statement drafts if review finds a real gap. This remains before any later
+  OBL-001/020/021/024 statement drafts if review finds a real gap. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -520,6 +527,12 @@ Research-discovery items:
   evidence は現状の足場として扱い、diagnostic ABI freeze、OBL-024/025
   statement/proof discharge、explanation soundness/completeness、conformance、
   G1 exit は主張していない。
+- 2026-07-03 22:05 JST
+  `plan/81-g1-obl024-statement-shape-inventory.md` を追加し、OBL-024
+  explanation soundness を emitted Diagnostic / reported rule instance /
+  failed premise / bindings / replay failure の statement-shape inventory として
+  整理した。E-ROW は immediate pressure case として読むが、Lean statement、
+  proof、diagnostic ABI freeze、conformance、G1 exit は主張していない。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間
