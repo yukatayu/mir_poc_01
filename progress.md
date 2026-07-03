@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 23:16 JST
+最終更新: 2026-07-03 23:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -164,6 +164,14 @@ semantic source authority.
   Mixed / multi-missing rows `ELAB-04/07` continue to emit no repair row. This
   does not freeze diagnostic/repair ABI, prove OBL-024/025, claim explanation
   completeness, claim conformance, or claim G1 exit.
+- Current OBL-025 statement-draft note:
+  `plan/87-g1-obl025-lean-statement-draft.md` records a LAB-only
+  repo-local Lean statement-shape draft at
+  `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`.
+  It compiles as an existential repair-coverage `Prop` over abstract
+  Line-1/rejection/declared-fragment/repair/diagnostic predicates and does not
+  move canon OBL status, prove OBL-025, freeze diagnostic/repair ABI, claim
+  explanation completeness, claim conformance, or claim G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -173,11 +181,11 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: `E-ROW-002` / `VisibilityDenied`-only LAB E-ROW repair evidence is
-  now implemented. The next safe self-driven package should either draft
-  OBL-025 around this local repair-carrier boundary or inventory non-visibility
-  singleton and multi-missing edit questions before widening repair output.
-  This remains before any later
+- Next gap: OBL-025 now has a compile-check-only LAB statement shape, but no
+  proof, no canon status movement, and no repair output widening. The next safe
+  self-driven package should inventory non-visibility singleton and
+  multi-missing edit questions before widening repair output. This remains
+  before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -487,10 +495,16 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, and OBL-021 `ElabDeterminismStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
 
 ## recent log
 
+- 2026-07-03 23:28 JST
+  `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
+  と `plan/87` を追加し、OBL-025 を compile-check-only の existential
+  repair-coverage `Prop` として記録した。`statement_drafts` manifest 区分を
+  OBL-025 まで広げたが、OBL-025 proof / completion、diagnostic/repair ABI
+  freeze、repair ranking、multi-edit support、conformance、G1 exit は主張していない。
 - 2026-07-03 23:16 JST
   Oracle advisory review を反映し、LAB-only `suggested_repair[]` を
   `E-ROW-002` / `VisibilityDenied`-only に限定した。repair item は

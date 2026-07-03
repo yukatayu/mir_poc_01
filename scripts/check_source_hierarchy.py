@@ -135,6 +135,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md",
         "plan/85-g1-erow-carrier-precondition-hardening.md",
         "plan/86-g1-erow002-visibility-repair-carrier-prototype.md",
+        "plan/87-g1-obl025-lean-statement-draft.md",
         "plan/90-source-traceability.md",
         "plan/91-maintenance-rules.md",
     ],

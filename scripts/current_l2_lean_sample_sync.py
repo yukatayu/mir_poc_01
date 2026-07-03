@@ -81,6 +81,12 @@ STATEMENT_DRAFTS = [
         filename="ElabDeterminismStatementDraft.lean",
         explanation_path="samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
     ),
+    StatementDraftSpec(
+        draft_id="obl025-repair-completeness-statement-draft",
+        relative_dir="obl025",
+        filename="RepairCompletenessStatementDraft.lean",
+        explanation_path="samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md",
+    ),
 ]
 
 

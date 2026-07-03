@@ -85,6 +85,19 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "samples/lean/lab-statements/obl020/StepWFStatementDraft.md",
         )
 
+    def test_statement_drafts_include_obl025_draft(self) -> None:
+        entries = {spec.draft_id: spec for spec in sync.STATEMENT_DRAFTS}
+        draft = entries["obl025-repair-completeness-statement-draft"]
+
+        self.assertEqual(
+            draft.filename,
+            "RepairCompletenessStatementDraft.lean",
+        )
+        self.assertEqual(
+            draft.explanation_path,
+            "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

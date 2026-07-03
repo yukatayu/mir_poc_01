@@ -62,7 +62,7 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
 
 まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、final Surface operational runtime / transport、final Surface devtools viewer / telemetry ABI、final source patch hot-plug ABI、distributed durable patch migration、production patch registry/signing workflow、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、production identity provider、hardware attestation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。Full System V1 autonomous chain は `P-FSV1-99 final audit` まで close 済みです。
-Surface Mir line は P-SURF-99 final audit の後、G1 dependency-gap evidence、OBL-020/021 dependency inventory、LAB statement drafts、E-ROW diagnostic alignment、diagnostic carrier inventory、OBL-024/025 statement-shape inventory、E-ROW repair payload inventory、E-ROW carrier-only diagnostic detail prototype、E-ROW carrier precondition hardening、E-ROW-002 visibility repair carrier prototype を加え、48 sample rows / 49 `.mir` source files を持ちますが、これは alpha/LAB evidence and repository memory であり final runtime/transport/API、diagnostic/repair ABI freeze、OBL-024/025 discharge、proof discharge、G1 exit ではありません。`suggested_repair[]` evidence は `E-ROW-002` / `VisibilityDenied`-only で、mixed / multi-missing rows には出していません。
+Surface Mir line は P-SURF-99 final audit の後、G1 dependency-gap evidence、OBL-020/021 dependency inventory、LAB statement drafts、E-ROW diagnostic alignment、diagnostic carrier inventory、OBL-024/025 statement-shape inventory、E-ROW repair payload inventory、E-ROW carrier-only diagnostic detail prototype、E-ROW carrier precondition hardening、E-ROW-002 visibility repair carrier prototype、OBL-025 Lean statement draft を加え、48 sample rows / 49 `.mir` source files を持ちますが、これは alpha/LAB evidence and repository memory であり final runtime/transport/API、diagnostic/repair ABI freeze、OBL-024/025 discharge、proof discharge、G1 exit ではありません。`suggested_repair[]` evidence は `E-ROW-002` / `VisibilityDenied`-only で、mixed / multi-missing rows には出していません。
 
 ## current active floor
 
@@ -80,7 +80,7 @@ active LAB clean sample evidence は `samples/clean-near-end/` です。base cur
   empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice
 - `samples/lean/lab-statements/`
   compile-check only の Lean statement-shape draft。current draft は
-  OBL-001 / OBL-020 / OBL-021 で、canon OBL status movement、proof discharge、
+  OBL-001 / OBL-020 / OBL-021 / OBL-025 で、canon OBL status movement、proof discharge、
   final theorem contract ではない。
 
 旧 active sample line は active path から外し、archive に退避しています。
