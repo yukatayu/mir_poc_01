@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 23:44 JST
+最終更新: 2026-07-04 00:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -192,6 +192,13 @@ semantic source authority.
   failure atom when read with `ELAB-13`. It does not widen
   `suggested_repair[]`, prove OBL-025, freeze diagnostic/repair ABI, claim
   conformance, or claim G1 exit.
+- Current E-ROW-001 singleton repair assumption gate note:
+  `plan/93-g1-erow001-singleton-repair-assumption.md` records the LAB-only
+  single-edit assumption and no-placeholder payload constraints for a possible
+  future non-visibility singleton repair prototype. It adds executable guard
+  tests for existing repair payload quality and singleton no-repair gate
+  inputs, but does not widen `suggested_repair[]`, prove OBL-025, freeze
+  diagnostic/repair ABI, claim conformance, or claim G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -201,13 +208,14 @@ semantic source authority.
   and 53 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: OBL-025 now has a compile-check-only LAB statement shape and an
-  E-ROW repair-shape inventory plus a full base-failure non-visibility
-  singleton no-repair fixture set, but no proof, no canon status movement, and
-  no repair output widening beyond `ELAB-10`. The next safe self-driven package
-  should define the non-visibility singleton single-edit assumption and
-  no-placeholder tests before any narrow repair prototype. Mixed and
-  multi-missing rows remain
+- Next gap: OBL-025 now has a compile-check-only LAB statement shape, an
+  E-ROW repair-shape inventory, a full base-failure non-visibility singleton
+  no-repair fixture set, and a LAB single-edit / no-placeholder gate for a
+  possible singleton prototype. It still has no proof, no canon status
+  movement, and no repair output widening beyond `ELAB-10`. The next safe
+  self-driven package may prototype non-visibility singleton repair only by
+  intentionally changing the `ELAB-13..16` expectations under `plan/93`.
+  Mixed and multi-missing rows remain
   no-repair until atomicity/decomposition/ranking is addressed. This remains
   before any later
   user-spec-required reopen for final runtime/transport, final source patch
@@ -318,7 +326,9 @@ Current evidence:
   non-final request / failure-row context. `ELAB-10` also carries LAB-only
   `E-ROW-002` / `VisibilityDenied` repair-carrier evidence; `ELAB-13..16`
   carry one `E-ROW-001` singleton no-repair fixture per base remote-request
-  failure atom.
+  failure atom, and `plan/93` now gates any later non-visibility singleton
+  repair widening on a single-edit assumption plus no-placeholder payload
+  tests.
 - `crates/mir-semantics::surface_to_core_elaboration` also generates
   MessageEnvelope, visible publish/observe, and observer-safe redaction /
   retention rows for P-SURF-04.
@@ -511,7 +521,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence and `E-ROW-001` non-visibility singleton no-repair fixture evidence for all base remote-request failure atoms | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton no-repair fixture evidence for all base remote-request failure atoms, and a LAB-only no-placeholder gate for future singleton repair widening | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -525,6 +535,15 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 00:38 JST
+  `plan/93-g1-erow001-singleton-repair-assumption.md` を追加し、
+  non-visibility singleton `E-ROW-001` repair prototype の LAB-only
+  single-edit assumption と no-placeholder payload gate を固定した。
+  Python / Rust の guard tests は既存 `ELAB-10` repair payload が local
+  witness-compatible で placeholder ではないこと、`ELAB-13..16` が
+  target/request context を持つ no-repair fence のままであることを確認する。
+  repair output widening、diagnostic/repair ABI freeze、OBL-025 proof /
+  completion、conformance、G1 exit は主張していない。
 - 2026-07-04 00:18 JST
   `ELAB-14..16` と `plan/92-g1-erow001-base-singleton-fixture-closure.md` を
   追加し、`MissingCapability` / `RouteUnavailable` / `StaleMembership`

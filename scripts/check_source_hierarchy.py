@@ -141,6 +141,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/90-source-traceability.md",
         "plan/91-maintenance-rules.md",
         "plan/92-g1-erow001-base-singleton-fixture-closure.md",
+        "plan/93-g1-erow001-singleton-repair-assumption.md",
     ],
     "scripts": [
         "scripts",

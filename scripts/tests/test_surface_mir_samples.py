@@ -26,6 +26,15 @@ SENSITIVE_DEVTOOLS_STRING_MARKERS = {
     "private_token",
     "witness-",
 }
+PLACEHOLDER_REPAIR_STRINGS = {
+    "",
+    "fixme",
+    "placeholder",
+    "tbd",
+    "todo",
+    "unknown",
+    "unresolved",
+}
 
 
 def _run_helper(*args: str) -> dict:
@@ -58,7 +67,44 @@ def _contains_sensitive_devtools_material(value: object) -> bool:
     return False
 
 
+def _placeholder_repair_paths(value: object, path: str = "$") -> list[str]:
+    if isinstance(value, dict):
+        paths: list[str] = []
+        for key, nested in value.items():
+            paths.extend(_placeholder_repair_paths(nested, f"{path}.{key}"))
+        return paths
+    if isinstance(value, list):
+        paths = []
+        for index, nested in enumerate(value):
+            paths.extend(_placeholder_repair_paths(nested, f"{path}[{index}]"))
+        return paths
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if (
+            normalized in PLACEHOLDER_REPAIR_STRINGS
+            or "placeholder" in normalized
+            or any(marker in normalized for marker in PLACEHOLDER_REPAIR_STRINGS if marker)
+        ):
+            return [path]
+    return []
+
+
 class SurfaceMirSamplesTests(unittest.TestCase):
+    def test_placeholder_repair_detector_rejects_marker_substrings(self) -> None:
+        paths = _placeholder_repair_paths(
+            {
+                "target_ref": "fixme target_ref",
+                "span": "tbd span",
+                "row": "unknown row",
+                "status": "unresolved target",
+            }
+        )
+
+        self.assertEqual(
+            paths,
+            ["$.target_ref", "$.span", "$.row", "$.status"],
+        )
+
     def test_matrix_reports_p_surf_08_rows(self) -> None:
         payload = _run_helper("matrix")
 
@@ -509,6 +555,76 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                     },
                 )
                 self.assertNotIn("suggested_repair", detail)
+                self.assertTrue(detail["lab_non_final"])
+                self.assertEqual(
+                    detail["request_context"]["request_id"],
+                    "req-0001",
+                )
+                self.assertNotEqual(
+                    detail["failure_row_context"]["target_ref"].strip(),
+                    "",
+                )
+                self.assertNotEqual(missing_failure, "VisibilityDenied")
+                self.assertEqual(
+                    _placeholder_repair_paths(detail["failure_row_context"]),
+                    [],
+                )
+
+    def test_erow_suggested_repair_payloads_are_not_placeholders(self) -> None:
+        payload = _run_helper("run", "ELAB-10")
+
+        self.assertTrue(payload["accepted"])
+        detail = payload["actual"]["lab_diagnostic_details"][0]
+        repairs = detail["suggested_repair"]
+        self.assertEqual(len(repairs), 1)
+
+        repair = repairs[0]
+        self.assertEqual(_placeholder_repair_paths(repair), [])
+        self.assertEqual(repair["diagnostic_family"], detail["canon_id"])
+        self.assertEqual(repair["applies_to"]["legacy_code"], detail["legacy_code"])
+        self.assertEqual(repair["applies_to"]["canon_id"], detail["canon_id"])
+        self.assertEqual(
+            repair["applies_to"]["request_id"],
+            detail["request_context"]["request_id"],
+        )
+        self.assertEqual(repair["target_kind"], detail["failure_row_context"]["target_kind"])
+        self.assertEqual(
+            repair["target_context"]["target_ref"],
+            detail["failure_row_context"]["target_ref"],
+        )
+        self.assertEqual(
+            repair["target_context"]["locus"],
+            detail["failure_row_context"]["target_locus"],
+        )
+        self.assertEqual(
+            repair["target_context"]["event_name"],
+            detail["failure_row_context"]["event_name"],
+        )
+        self.assertEqual(repair["missing_failure"], detail["missing_evidence"][0])
+        self.assertEqual(
+            detail["failure_row_context"]["missing_failures"],
+            [repair["missing_failure"]],
+        )
+        self.assertEqual(
+            repair["required_failures"],
+            detail["failure_row_context"]["required_failures"],
+        )
+        self.assertEqual(
+            repair["declared_failures"],
+            detail["failure_row_context"]["declared_failures"],
+        )
+        self.assertEqual(
+            repair["local_effect"]["declared_failures_after"],
+            [*repair["declared_failures"], repair["missing_failure"]],
+        )
+        self.assertEqual(
+            repair["local_premise"],
+            detail["failure_row_context"]["local_premise"],
+        )
+        self.assertIn("single_row_addition", repair["single_edit_assumption"])
+        self.assertIn("does_not", repair["non_goal"])
+        self.assertTrue(repair["repair_non_final"])
+        self.assertTrue(repair["lab_non_final"])
 
     def test_elaboration_visibility_failure_row_negative_reports_expected_diagnostic(self) -> None:
         payload = _run_helper("run", "ELAB-10")

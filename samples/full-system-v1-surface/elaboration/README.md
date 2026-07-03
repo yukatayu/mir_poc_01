@@ -30,4 +30,6 @@ G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
 context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
 evidence for `ELAB-10`, keeps `ELAB-13..16` as one `E-ROW-001` no-repair
 fixture per base remote-request failure atom, and does not freeze a diagnostic
-/ repair ABI or claim OBL-025.
+/ repair ABI or claim OBL-025. `plan/93` records the current single-edit /
+no-placeholder gate for any later non-visibility singleton repair widening;
+this root still emits no `E-ROW-001` repair rows.

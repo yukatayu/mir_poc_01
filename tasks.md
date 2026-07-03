@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 00:18 JST
+最終更新: 2026-07-04 00:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -147,6 +147,12 @@ Current holding state:
   `StaleMembership`. It does not widen `suggested_repair[]`, prove OBL-025,
   freeze diagnostic/repair ABI, claim conformance, claim G1 exit, or edit
   canon.
+- `plan/93-g1-erow001-singleton-repair-assumption.md` now records the LAB-only
+  single-edit assumption and no-placeholder payload constraints for a possible
+  future non-visibility singleton repair prototype. It adds guard tests for
+  existing repair payload quality and `ELAB-13..16` no-repair gate inputs, but
+  does not widen `suggested_repair[]`, prove OBL-025, freeze
+  diagnostic/repair ABI, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -158,8 +164,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW non-visibility singleton repair assumption` | `G1` reserve | define the LAB-only single-edit assumption and no-placeholder payload constraints for a possible non-visibility singleton repair prototype | no executable repair widening yet; `ELAB-13..16` remain no-repair fences |
-| `E-ROW non-visibility singleton repair prototype` | `G1` reserve | widen `suggested_repair[]` for the singleton class only after no-placeholder tests and the single-edit assumption are explicit | `ELAB-04/07` no-repair fences preserved; no ranking, multi-edit, whole-program success, or OBL-025 proof claim |
+| `E-ROW non-visibility singleton repair prototype` | `G1` reserve | widen `suggested_repair[]` for the singleton class only under the `plan/93` single-edit / no-placeholder gate | `ELAB-04/07` no-repair fences preserved; no ranking, multi-edit, whole-program success, or OBL-025 proof claim |
 | `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

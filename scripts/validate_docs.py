@@ -480,6 +480,7 @@ REQUIRED = [
     "plan/90-source-traceability.md",
     "plan/91-maintenance-rules.md",
     "plan/92-g1-erow001-base-singleton-fixture-closure.md",
+    "plan/93-g1-erow001-singleton-repair-assumption.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

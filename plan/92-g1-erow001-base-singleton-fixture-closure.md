@@ -110,8 +110,9 @@ for a later `CoveredLine1RepairCase` instantiation:
 
 ## Next safe packages
 
-1. Define the non-visibility singleton single-edit assumption and
-   no-placeholder repair payload tests.
+1. Read `plan/93-g1-erow001-singleton-repair-assumption.md`, which now defines
+   the non-visibility singleton single-edit assumption and no-placeholder
+   repair payload tests.
 2. Prototype `suggested_repair[]` for the non-visibility singleton class only
    if all four singleton fixture rows are intentionally changed or fenced.
 3. Keep `ELAB-04` and `ELAB-07` no-repair until multi-missing semantics are

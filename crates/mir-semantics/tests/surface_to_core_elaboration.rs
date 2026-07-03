@@ -5,6 +5,57 @@ use mir_semantics::surface_to_core_elaboration::{
 use serde_json::Value;
 use std::path::PathBuf;
 
+fn assert_no_placeholder_repair_values(value: &Value) {
+    match value {
+        Value::String(text) => {
+            let normalized = text.trim().to_ascii_lowercase();
+            assert!(!normalized.is_empty(), "empty repair payload string");
+            assert!(
+                !matches!(
+                    normalized.as_str(),
+                    "fixme" | "placeholder" | "tbd" | "todo" | "unknown" | "unresolved"
+                ),
+                "placeholder repair payload string: {text}"
+            );
+            assert!(
+                ![
+                    "fixme",
+                    "placeholder",
+                    "tbd",
+                    "todo",
+                    "unknown",
+                    "unresolved"
+                ]
+                .iter()
+                .any(|marker| normalized.contains(marker)),
+                "placeholder repair payload string: {text}"
+            );
+        }
+        Value::Array(items) => {
+            for item in items {
+                assert_no_placeholder_repair_values(item);
+            }
+        }
+        Value::Object(map) => {
+            for nested in map.values() {
+                assert_no_placeholder_repair_values(nested);
+            }
+        }
+        Value::Null | Value::Bool(_) | Value::Number(_) => {}
+    }
+}
+
+#[test]
+#[should_panic(expected = "placeholder repair payload string")]
+fn placeholder_repair_detector_rejects_marker_substrings() {
+    assert_no_placeholder_repair_values(&serde_json::json!({
+        "target_ref": "fixme target_ref",
+        "span": "tbd span",
+        "row": "unknown row",
+        "status": "unresolved target"
+    }));
+}
+
 #[test]
 fn elaborates_cross_locus_read_into_remote_request_with_observe_edge() {
     let source = r#"
@@ -706,7 +757,25 @@ fn sample_fixtures_cover_each_non_visibility_singleton_without_repair() {
             serde_json::json!([missing_failure]),
             "{path}"
         );
+        assert_eq!(
+            details[0]["request_context"]["request_id"],
+            serde_json::json!("req-0001"),
+            "{path}"
+        );
+        assert_eq!(
+            details[0]["failure_row_context"]["target_kind"],
+            serde_json::json!("when_fails_row"),
+            "{path}"
+        );
+        assert!(
+            details[0]["failure_row_context"]["target_ref"]
+                .as_str()
+                .expect("target_ref is a string")
+                .starts_with("when_fails_row|"),
+            "{path}"
+        );
         assert!(details[0].get("suggested_repair").is_none(), "{path}");
+        assert_no_placeholder_repair_values(&details[0]["failure_row_context"]);
     }
 }
 
@@ -842,6 +911,107 @@ BrowserClient[self] {
             }
         ])
     );
+}
+
+#[test]
+fn suggested_repair_payloads_are_non_placeholder_local_witnesses() {
+    let source = r#"
+module Surface.Elab.VisibilityRepairPayload
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    visible observer_safe fields { hp }
+}
+
+BrowserClient[self] {
+  when render fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+    seen_hp = player[self].hp
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    let repair = &details[0]["suggested_repair"][0];
+
+    assert!(!report.accepted);
+    assert_no_placeholder_repair_values(repair);
+    assert_eq!(repair["diagnostic_family"], details[0]["canon_id"]);
+    assert_eq!(
+        repair["applies_to"]["legacy_code"],
+        details[0]["legacy_code"]
+    );
+    assert_eq!(repair["applies_to"]["canon_id"], details[0]["canon_id"]);
+    assert_eq!(
+        repair["applies_to"]["request_id"],
+        details[0]["request_context"]["request_id"]
+    );
+    assert_eq!(
+        repair["target_kind"],
+        details[0]["failure_row_context"]["target_kind"]
+    );
+    assert_eq!(
+        repair["target_context"]["target_ref"],
+        details[0]["failure_row_context"]["target_ref"]
+    );
+    assert_eq!(
+        repair["target_context"]["locus"],
+        details[0]["failure_row_context"]["target_locus"]
+    );
+    assert_eq!(
+        repair["target_context"]["event_name"],
+        details[0]["failure_row_context"]["event_name"]
+    );
+    assert_eq!(repair["missing_failure"], details[0]["missing_evidence"][0]);
+    assert_eq!(
+        details[0]["failure_row_context"]["missing_failures"],
+        serde_json::json!([repair["missing_failure"].clone()])
+    );
+    assert_eq!(
+        repair["required_failures"],
+        details[0]["failure_row_context"]["required_failures"]
+    );
+    assert_eq!(
+        repair["declared_failures"],
+        details[0]["failure_row_context"]["declared_failures"]
+    );
+    let mut declared_failures_after = repair["declared_failures"]
+        .as_array()
+        .expect("declared_failures is an array")
+        .clone();
+    declared_failures_after.push(repair["missing_failure"].clone());
+    assert_eq!(
+        repair["local_effect"]["declared_failures_after"],
+        Value::Array(declared_failures_after)
+    );
+    assert_eq!(
+        repair["local_premise"],
+        details[0]["failure_row_context"]["local_premise"]
+    );
+    assert!(
+        repair["single_edit_assumption"]
+            .as_str()
+            .expect("single_edit_assumption is a string")
+            .contains("single_row_addition")
+    );
+    assert!(
+        repair["non_goal"]
+            .as_str()
+            .expect("non_goal is a string")
+            .contains("does_not")
+    );
+    assert_eq!(repair["repair_non_final"], true);
+    assert_eq!(repair["lab_non_final"], true);
 }
 
 #[test]

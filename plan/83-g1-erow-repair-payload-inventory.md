@@ -123,6 +123,11 @@ A carrier-only prototype without repair rows is now the recommended first
 implementation step. It does not advance OBL-025, but it reduces ABI and proof
 overclaim risk.
 
+`plan/93-g1-erow001-singleton-repair-assumption.md` later turns the
+no-placeholder requirement into a LAB-only gate for a possible
+non-visibility singleton `E-ROW-001` widening. It still does not widen repair
+output.
+
 ## What remains OPEN
 
 - Final Diagnostic ABI and repair payload JSON field names.
@@ -151,8 +156,9 @@ overclaim risk.
 1. Carrier-only E-ROW diagnostic detail prototype without repair rows, adding
    non-final canon ID / severity / rule / premise / missing-evidence detail
    while preserving legacy output.
-2. Repair-bearing E-ROW follow-up only after required/declared/missing failure
-   projections and tests can reject placeholder `suggested_repair[]`.
+2. Repair-bearing E-ROW follow-up only after reading `plan/93`, preserving its
+   no-placeholder `suggested_repair[]` guard, and intentionally changing the
+   affected fixture expectations.
 3. OBL-024/025 Lean statement drafts only after replay, repair, and payload
    vocabularies stabilize enough in LAB.
 

@@ -77,7 +77,7 @@ Important reading:
 | Shape | Candidate repair family | Current status | Widening gate |
 |---|---|---|---|
 | Visibility singleton | add `VisibilityDenied` to the relevant `when ... fails` row | implemented only for `E-ROW-002` / `ELAB-10` | keep as-is unless target/span vocabulary changes |
-| Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | no-repair fixture set exists as `ELAB-13..16`; no repair output | widen only after explicit single-edit assumption and no-placeholder tests |
+| Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | no-repair fixture set exists as `ELAB-13..16`; `plan/93` defines the LAB single-edit / no-placeholder gate; no repair output | widen only in a later package that intentionally changes the singleton fixture expectations |
 | Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one repair per missing family | no-repair evidence today (`ELAB-07`) | decide whether set insertion is one edit or multiple edits; do not infer from OBL-025 |
 | Mixed visibility/non-visibility multi-missing | same local premise but includes both `VisibilityDenied` and other missing failures | no-repair evidence today (`ELAB-04`) | first decide decomposition, ordering, and whether visibility repair competes with add-to-fails-row |
 | Alternative visibility repair | declare visibility / observe authority instead of adding `VisibilityDenied` to `fails` | OPEN; not current prototype | needs separate repair family and authority/visibility preservation wording |
@@ -89,8 +89,11 @@ Important reading:
 ## Singleton definition for future repair-widening tests
 
 The current executable non-visibility singleton fixture set is `ELAB-13..16`,
-and any future repair-bearing non-visibility singleton widening should preserve
-all of the following before `suggested_repair[]` output is widened:
+and `plan/93-g1-erow001-singleton-repair-assumption.md` now records the
+LAB-only single-edit assumption and no-placeholder payload constraints for a
+future widening. Any future repair-bearing non-visibility singleton widening
+should preserve all of the following before `suggested_repair[]` output is
+widened:
 
 1. `canon_id == "E-ROW-001"`.
 2. `failure_row_context.target_kind == "when_fails_row"`.
@@ -187,8 +190,9 @@ standardizes empty repair-list semantics.
 
 ## Next safe packages
 
-1. Widen `suggested_repair[]` to the non-visibility singleton only after the
-   fixture, tests, and single-edit assumption are explicit.
+1. Widen `suggested_repair[]` to the non-visibility singleton only after
+   reading `plan/93` and intentionally changing the `ELAB-13..16` no-repair
+   fixture expectations.
 2. Keep mixed and multi-missing cases no-repair until set-insertion atomicity,
    decomposition, and ranking are separately addressed.
 3. Refine the OBL-025 Lean statement only if this inventory reveals a missing
