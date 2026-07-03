@@ -330,7 +330,11 @@ context.
 
 ## Commit / push status
 
-Pending at report write.
+Content commit pushed:
+
+- `929cc40e` - `Harden ELAB-07 exact locus guard`
+
+Bookkeeping commit for this final report status is pending at this revision.
 
 ## Sub-agent session close status
 
