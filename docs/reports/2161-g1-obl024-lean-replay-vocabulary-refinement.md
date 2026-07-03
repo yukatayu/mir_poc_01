@@ -228,7 +228,12 @@ proof-level replay relation vocabulary.
 
 ## Commit / push status
 
-Pending. Package changes are not committed yet at this report draft stage.
+Committed and pushed:
+
+- `e14bc87d` - `Refine OBL-024 Lean replay vocabulary`
+
+Post-push check confirmed `HEAD` and `origin/main` both pointed to `e14bc87d`
+before this status-only report update.
 
 ## Sub-agent session close status
 
