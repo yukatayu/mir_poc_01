@@ -38,7 +38,7 @@ heads, and indexed state access.
   eval.
 - backend/provider surfaces do not own world semantics.
 
-## new normative docs
+## LAB evidence / repository-memory docs
 
 - `specs/39-surface-mir-placement-elaboration.md`
 - `specs/40-indexed-state-semantics.md`
@@ -97,7 +97,9 @@ Actualized rows:
 - `ELAB-04`: underdeclared generated failure row is rejected.
 - `ELAB-05`: generated Core IR carries source spans.
 - `ELAB-06`: unsupported statements reject instead of being silently dropped.
-- `ELAB-07`: write-side underdeclared generated failure row is rejected.
+- `ELAB-07`: write-side underdeclared generated failure row is rejected; current
+  LAB gate review keeps it no-repair until set-insertion atomicity or bundle
+  semantics are explicit.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

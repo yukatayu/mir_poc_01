@@ -33,6 +33,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   and `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB mixed / multi decomposition inventory:
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
+- LAB `ELAB-07` set-insertion gate review:
+  `plan/97-g1-erow07-set-insertion-gate-review.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `scripts/tests/test_surface_mir_samples.py`,
@@ -285,6 +287,8 @@ Tests must prove:
 Recommended next ordering:
 
 1. Keep `ELAB-04/07` no-repair in executable output.
+   `plan/97` confirms that `ELAB-07` should stay no-repair until set insertion
+   is explicitly accepted as one source edit or bundle semantics are defined.
 2. If proof-side work comes first, refine OBL-025 around:
    - single source edit;
    - set insertion;

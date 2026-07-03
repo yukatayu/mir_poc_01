@@ -31,6 +31,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   and `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB set-insertion / bundle payload vocabulary:
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
+- LAB `ELAB-07` set-insertion gate review:
+  `plan/97-g1-erow07-set-insertion-gate-review.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -172,9 +174,10 @@ emit repair only when missing_failures.len() == 1
 
 This guard is not a final theorem. It is a LAB safety rule that prevents
 placeholder or partial repair payloads from satisfying OBL-025-shaped checks.
-`plan/96` now inventories candidate vocabulary for set insertion, conjunctive
-bundles, and partial guidance, but it does not promote any of those candidates
-into executable output.
+`plan/96` inventories candidate vocabulary for set insertion, conjunctive
+bundles, and partial guidance. `plan/97` reviews the `ELAB-07` gate and keeps
+that row no-repair until set-insertion atomicity or bundle semantics are
+explicit.
 
 The guard should remain until a later package provides:
 

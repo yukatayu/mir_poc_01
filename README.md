@@ -25,7 +25,7 @@ Full System V1 は、この alpha floor を final product と誤読せず、Mir 
 
 Surface Mir alpha は、この closed Full System V1 floor の上に置く user-facing source authority line です。Canonical place-scope syntax は `S { ... }` で、`S[ ... ]` は sugar としても採用しません。`[]` は配列・Map・indexed state・role instance head の value-level indexing に残します。`P-SURF-01` で parser floor、`P-SURF-02` で indexed-state semantic checker floor、`P-SURF-03` で Surface-to-Core elaboration evidence floor、`P-SURF-04` で generated `MessageEnvelope` / visible publish / observe / `VisibilityDenied` evidence floor、`P-SURF-05` で role admission / capability grant report-level evidence floor、`P-SURF-06` で source patch hot-plug evidence floor、`P-SURF-07` で source-first operational evidence floor、`P-SURF-08` で Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans の static devtools diagnostics evidence floor を actualize し、`P-SURF-99` で full validation / claim-non-claim audit を close 済みです。
 Surface Mir は user-facing source、Core Mir は elaboration target であり、通信・publish・observe は Surface から自動生成して Core IR / devtools に明示します。`state player[p: Participant]: Player` は S-owned Participant-indexed map で、key は authority ではありません。role claim は authority ではなく、authority は admission locus からの capability grant です。source patch hot-plug は direct eval ではなく parse / typecheck / elaborate / admit / activation_cut pipeline として扱います。
-post-`P-SURF-99` の G1 LAB work では E-ROW failure-row diagnostics に non-final `lab_diagnostic_details` carrier、request / failure-row context、`E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]` evidence、OBL-025 compile-check-only Lean statement draft、repair widening 前の E-ROW shape inventory を追加しましたが、これは final diagnostic/repair ABI、OBL-024/025 discharge、G1 exit ではありません。新しい正本 / repository memory は `specs/39..43` と `plan/64..68` です。current promoted Surface package はありません。
+post-`P-SURF-99` の G1 LAB work では E-ROW failure-row diagnostics に non-final `lab_diagnostic_details` carrier、request / failure-row context、`E-ROW-002` / `VisibilityDenied` singleton (`ELAB-10`) と `E-ROW-001` non-visibility singleton (`ELAB-13..16`) の LAB-only `suggested_repair[]` evidence、OBL-025 compile-check-only Lean statement draft、repair shape / mixed-multi / set-insertion inventory、`ELAB-07` set-insertion gate review を追加しましたが、これは final diagnostic/repair ABI、OBL-024/025 discharge、set-insertion support、bundle semantics support、G1 exit ではありません。`ELAB-04/07` は引き続き no-repair です。Surface alpha の LAB evidence / repository memory は `specs/39..43` と `plan/64..68`、G1 LAB memory は `plan/79..97` です。current promoted Surface package はありません。
 
 ## 現在の到達点
 
@@ -67,7 +67,7 @@ post-`P-SURF-99` の G1 LAB work では E-ROW failure-row diagnostics に non-fi
 
 2026-05-21 時点の current docs/spec line は、front-half scaffold actualization と implementation half を all-up closeout audit まで閉じた段階です。Product Alpha-1 の runnable workflow はそのまま execution / observation floor として保持しつつ、`samples/product-alpha1/computational/` では `host input -> Mir add_one -> host output` の direct product-alpha row、variables / arrays / records / control-flow / imports の positive / negative first-floor rows、そして `host input -> Mir transform -> host output` を declared effect / failure / capability boundary と合わせて扱う accepted/check-rejection rows が actualize されました。ここで `required_capabilities` / `failure_tag` は checker-admission boundary declaration の evidence であり、broad effectful runtime semantics completion を意味しません。PoseGraph では `pose-04` accepted row と `pose-05` violation-export row が helper-backed no-split-frame evidence として actualize され、projection / engine-adapter は引き続き planned-only inventory に保たれています。
 
-新しい正本 / repository memory は次です。
+LAB evidence / repository memory は次です。
 
 - `specs/28-mir-computational-core.md`
 - `specs/29-transform-posegraph-semantics.md`
@@ -97,7 +97,7 @@ Autonomous execution の default は `specs/32` / `plan/57` に置きます。�
 - Direct LLVM/native codegen は重要だが、typed IR / projection / boundary schema が先である。
 - Debug / devtools は optional polish ではなく、開発・検証基盤である。
 
-新しい正本 / repository memory は次です。
+LAB evidence / repository memory は次です。
 
 - `specs/33-full-system-v1-scope.md`
 - `specs/34-textual-mir-alpha-grammar.md`

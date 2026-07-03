@@ -51,8 +51,9 @@
 33. G1 E-ROW-001 singleton repair prototype は `plan/94`
 34. G1 E-ROW mixed / multi repair decomposition inventory は `plan/95`
 35. G1 E-ROW set-insertion / bundle payload inventory は `plan/96`
-36. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-37. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+36. G1 ELAB-07 set-insertion gate review は `plan/97`
+37. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+38. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -217,6 +218,8 @@
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
 - G1 E-ROW set-insertion / bundle payload inventory:
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
+- G1 ELAB-07 set-insertion gate review:
+  `plan/97-g1-erow07-set-insertion-gate-review.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 
