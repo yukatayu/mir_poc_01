@@ -96,6 +96,7 @@
       },
       "failure_row_context": {
         "target_kind": "when_fails_row",
+        "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
         "target_locus": "role:BrowserClient",
         "event_name": "render",
         "required_failures": [

@@ -42,8 +42,9 @@
 24. G1 E-ROW repair payload inventory は `plan/83`
 25. G1 E-ROW carrier-only diagnostic detail prototype は `plan/84`
 26. G1 E-ROW carrier precondition hardening は `plan/85`
-27. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-28. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+27. G1 E-ROW-002 visibility repair carrier prototype は `plan/86`
+28. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+29. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -190,6 +191,8 @@
   `plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md`
 - G1 E-ROW carrier precondition hardening:
   `plan/85-g1-erow-carrier-precondition-hardening.md`
+- G1 E-ROW-002 visibility repair carrier prototype:
+  `plan/86-g1-erow002-visibility-repair-carrier-prototype.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

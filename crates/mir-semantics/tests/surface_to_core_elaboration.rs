@@ -458,6 +458,7 @@ BrowserClient[self] {
         details[0]["failure_row_context"],
         serde_json::json!({
             "target_kind": "when_fails_row",
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
             "target_locus": "role:BrowserClient",
             "event_name": "render",
             "required_failures": [
@@ -552,6 +553,7 @@ BrowserClient[self] {
         details[0]["failure_row_context"],
         serde_json::json!({
             "target_kind": "when_fails_row",
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
             "target_locus": "role:BrowserClient",
             "event_name": "attack",
             "required_failures": [
@@ -636,6 +638,7 @@ BrowserClient[self] {
         details[0]["failure_row_context"],
         serde_json::json!({
             "target_kind": "when_fails_row",
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
             "target_locus": "role:BrowserClient",
             "event_name": "render",
             "required_failures": [
@@ -657,7 +660,54 @@ BrowserClient[self] {
             "local_premise": "generated_failures_subset_declared_fails"
         })
     );
-    assert!(details[0].get("suggested_repair").is_none());
+    assert_eq!(
+        details[0]["suggested_repair"],
+        serde_json::json!([
+            {
+                "repair_family": "add-to-fails-row",
+                "diagnostic_family": "E-ROW-002",
+                "applies_to": {
+                    "legacy_code": "generated_failure_not_declared",
+                    "canon_id": "E-ROW-002",
+                    "request_id": "req-0001"
+                },
+                "target_kind": "when_fails_row",
+                "target_context": {
+                    "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
+                    "locus": "role:BrowserClient",
+                    "event_name": "render"
+                },
+                "missing_failure": "VisibilityDenied",
+                "required_failures": [
+                    "MissingCapability",
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership",
+                    "VisibilityDenied"
+                ],
+                "declared_failures": [
+                    "MissingCapability",
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership"
+                ],
+                "local_effect": {
+                    "declared_failures_after": [
+                        "MissingCapability",
+                        "MissingWitness",
+                        "RouteUnavailable",
+                        "StaleMembership",
+                        "VisibilityDenied"
+                    ]
+                },
+                "local_premise": "generated_failures_subset_declared_fails",
+                "single_edit_assumption": "erow002_visibility_single_row_addition_only",
+                "non_goal": "does_not_authorize_visibility_or_claim_runtime_success",
+                "repair_non_final": true,
+                "lab_non_final": true
+            }
+        ])
+    );
 }
 
 #[test]

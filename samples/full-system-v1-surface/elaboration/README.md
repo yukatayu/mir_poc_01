@@ -22,5 +22,6 @@ These rows do not claim final public grammar, runtime MessageEnvelope dispatch, 
 G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
 `ELAB-07`, and `ELAB-10` as non-final `lab_diagnostic_details`. It preserves
 legacy `generated_failure_not_declared` output, now includes request /
-failure-row context needed before any repair-bearing prototype, and does not
-emit `suggested_repair[]` or freeze a diagnostic / repair ABI.
+failure-row context, emits `E-ROW-002` / `VisibilityDenied`-only
+`suggested_repair[]` evidence for `ELAB-10`, and does not freeze a diagnostic /
+repair ABI or claim OBL-025.

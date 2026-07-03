@@ -290,6 +290,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                     },
                     "failure_row_context": {
                         "target_kind": "when_fails_row",
+                        "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
                         "target_locus": "role:BrowserClient",
                         "event_name": "render",
                         "required_failures": [
@@ -376,6 +377,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             payload["actual"]["lab_diagnostic_details"][0]["failure_row_context"],
             {
                 "target_kind": "when_fails_row",
+                "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
                 "target_locus": "role:BrowserClient",
                 "event_name": "attack",
                 "required_failures": [
@@ -392,6 +394,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                 ],
                 "local_premise": "generated_failures_subset_declared_fails",
             },
+        )
+        self.assertNotIn(
+            "suggested_repair",
+            payload["actual"]["lab_diagnostic_details"][0],
         )
 
     def test_elaboration_nested_place_read_keeps_owner_directed_shape(self) -> None:
@@ -482,6 +488,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             payload["actual"]["lab_diagnostic_details"][0]["failure_row_context"],
             {
                 "target_kind": "when_fails_row",
+                "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
                 "target_locus": "role:BrowserClient",
                 "event_name": "render",
                 "required_failures": [
@@ -500,6 +507,54 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                 "missing_failures": ["VisibilityDenied"],
                 "local_premise": "generated_failures_subset_declared_fails",
             },
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["suggested_repair"],
+            [
+                {
+                    "repair_family": "add-to-fails-row",
+                    "diagnostic_family": "E-ROW-002",
+                    "applies_to": {
+                        "legacy_code": "generated_failure_not_declared",
+                        "canon_id": "E-ROW-002",
+                        "request_id": "req-0001",
+                    },
+                    "target_kind": "when_fails_row",
+                    "target_context": {
+                        "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
+                        "locus": "role:BrowserClient",
+                        "event_name": "render",
+                    },
+                    "missing_failure": "VisibilityDenied",
+                    "required_failures": [
+                        "MissingCapability",
+                        "MissingWitness",
+                        "RouteUnavailable",
+                        "StaleMembership",
+                        "VisibilityDenied",
+                    ],
+                    "declared_failures": [
+                        "MissingCapability",
+                        "MissingWitness",
+                        "RouteUnavailable",
+                        "StaleMembership",
+                    ],
+                    "local_effect": {
+                        "declared_failures_after": [
+                            "MissingCapability",
+                            "MissingWitness",
+                            "RouteUnavailable",
+                            "StaleMembership",
+                            "VisibilityDenied",
+                        ]
+                    },
+                    "local_premise": "generated_failures_subset_declared_fails",
+                    "single_edit_assumption": "erow002_visibility_single_row_addition_only",
+                    "non_goal": "does_not_authorize_visibility_or_claim_runtime_success",
+                    "repair_non_final": True,
+                    "lab_non_final": True,
+                }
+            ],
         )
 
     def test_role_admission_join_generates_grant_and_witness(self) -> None:

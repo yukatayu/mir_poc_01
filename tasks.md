@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 22:50 JST
+最終更新: 2026-07-03 23:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -117,6 +117,12 @@ Current holding state:
   failures, and local premise for `ELAB-04/07/10`, emits no
   `suggested_repair[]`, and does not freeze diagnostic/repair ABI, prove
   OBL-024/025, claim conformance, claim G1 exit, or edit canon.
+- `plan/86-g1-erow002-visibility-repair-carrier-prototype.md` now records
+  LAB-only `suggested_repair` evidence for the `E-ROW-002` / `VisibilityDenied`
+  row-containment failure shape represented by `ELAB-10`. `ELAB-04/07` remain
+  no-repair mixed / multi-missing evidence. It does not freeze
+  diagnostic/repair ABI, prove OBL-024/025, claim explanation completeness,
+  claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -128,8 +134,8 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW repair-bearing prototype` | `G1` reserve | add `suggested_repair[]` only if tests can reject placeholders and each item identifies target row, missing failure, local premise, and single-edit assumption | no final repair ABI or OBL-025 proof |
-| `OBL-025 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after repair edit vocabulary and single-edit predicate are stable enough | Lean compile-check only; no proof or ledger movement |
+| `E-ROW repair widening inventory` | `G1` reserve | inventory non-visibility singleton, mixed, and multi-missing repair shapes before widening `suggested_repair[]` output beyond `E-ROW-002` / `VisibilityDenied` | no repair widening without tests; no OBL-025 proof |
+| `OBL-025 Lean statement draft` | `G1` front/reserve | draft an abstract compile-checked statement around the `E-ROW-002` / `VisibilityDenied` repair-carrier boundary and explicit widening deferral if vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
