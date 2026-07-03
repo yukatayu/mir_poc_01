@@ -133,16 +133,16 @@ canon vocabulary unless a later canon process promotes equivalent wording.
   reads use before optimization?
 - What is the smallest Lean statement for OBL-001 that preserves THM-001
   without overfitting LAB helper field names?
-- Which SCN-01/SCN-02 rows need line-level LAB trace before OBL-001 can be
-  written confidently?
+- Which SCN-01/SCN-02 rows need line-level LAB consequence mapping before
+  OBL-001 can be written confidently?
 - Should canon receive a short human-approved mental-model clarification for
   "ordinary assignment" before the Lean statement package, or is the current
   canon text sufficient?
 
 ## Next safe packages
 
-1. G1 SCN-01/SCN-02 static trace drilldown.
-2. G1 OBL-001 Lean statement inventory, statement only.
+1. G1 OBL-001 Lean statement inventory, statement only.
+2. SCN exact LAB gap drilldown for assignment-related rows if needed.
 3. LAB claim-family line-level drilldown for assignment-related rows.
-4. Canon mental-model clarification proposal if the drilldown reveals an
+4. Canon mental-model clarification proposal if the consequence drilldown reveals an
    actual wording gap.

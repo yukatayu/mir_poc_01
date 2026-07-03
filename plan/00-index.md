@@ -28,8 +28,9 @@
 10. post-`P-SURF-99` の相談内容 synthesis / source-first management recut memory は `plan/69`
 11. LAB-to-canon claim-family reconciliation は `plan/70`
 12. G1 ordinary assignment target draft は `plan/71`
-13. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-14. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+13. G1 SCN-01/SCN-02 static consequence drilldown は `plan/72`
+14. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+15. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -148,6 +149,8 @@
   `plan/70-lab-to-canon-reconciliation-ledger.md`
 - G1 ordinary assignment target draft:
   `plan/71-g1-ordinary-assignment-target.md`
+- G1 SCN-01/SCN-02 static consequence drilldown:
+  `plan/72-g1-scn01-scn02-static-consequence-drilldown.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

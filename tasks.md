@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 19:55 JST
+最終更新: 2026-07-03 20:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -48,6 +48,9 @@ Current holding state:
   ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
   theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,
   or final public grammar/API freeze.
+- `plan/72-g1-scn01-scn02-static-consequence-drilldown.md` now maps SCN-01/SCN-02 C-static
+  expectations to canon target rows, LAB support, LAB gaps, and runtime/proof
+  boundaries. It does not claim C-static conformance or G1 exit.
 
 ## candidate next strategy packages
 
@@ -56,8 +59,8 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `G1 SCN-01/SCN-02 static trace drilldown` | `G1` front-half | map SCN-01 and SCN-02 expectations to the target cases in `plan/71`, separating canon claim, LAB evidence, and OPEN boundary | no theorem discharge claim; no runtime/conformance completion claim beyond C-static trace targets |
 | `G1 OBL-001 Lean statement inventory` | `G1` front-half | draft the smallest statement inventory for OBL-001 / THM-001 without proof discharge or helper-field overfitting | statement-only; OBL-020/021 dependencies and OPEN-014 are explicit |
+| `SCN exact LAB gap drilldown` | `G1` reserve | decide whether exact LAB rows are needed for SCN-01 missing-VisibilityDenied-on-write and SCN-02 two-read RHS before formal statement work | no implementation unless promoted separately; no conformance claim |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |

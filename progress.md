@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 19:55 JST
+最終更新: 2026-07-03 20:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -67,6 +67,10 @@ semantic source authority.
   targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
   G1 exit, theorem discharge, Lean proof completion, runtime dispatch, or public
   API freeze.
+- Current SCN consequence note: `plan/72-g1-scn01-scn02-static-consequence-drilldown.md` maps
+  SCN-01 and SCN-02 C-static expectations to canon targets, LAB ELAB evidence,
+  LAB gaps, and runtime/proof boundaries. It does not claim C-static
+  conformance.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -76,8 +80,8 @@ semantic source authority.
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   and static devtools diagnostics floors revalidated.
-- Next gap: the safe self-driven theory packages are G1 SCN-01/SCN-02 static
-  trace drilldown and OBL-001 Lean statement inventory, before any later
+- Next gap: the safe self-driven theory package is G1 OBL-001 Lean statement
+  inventory, using the SCN consequence drilldown as input, before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -399,7 +403,12 @@ Research-discovery items:
   の target/proof-boundary split を THM-001、BND-001、SCN-01、SCN-02、
   OBL-001/020/021 に絞って整理した。G1 exit、theorem discharge、
   runtime dispatch、final grammar/API freeze は主張していない。次は
-  SCN-01/02 static trace drilldown または OBL-001 Lean statement inventory。
+  SCN-01/02 static consequence drilldown または OBL-001 Lean statement inventory。
+- 2026-07-03 20:05 JST
+  `plan/72-g1-scn01-scn02-static-consequence-drilldown.md` を追加し、SCN-01/SCN-02 の
+  C-static 期待を canon target、LAB ELAB support、LAB gap、runtime/proof
+  boundary に分解した。C-static conformance、G1 exit、theorem discharge は
+  主張していない。次は OBL-001 Lean statement inventory。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間
