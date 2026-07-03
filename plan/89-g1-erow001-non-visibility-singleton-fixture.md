@@ -2,8 +2,8 @@
 
 ## Purpose
 
-This file records the LAB-only addition of `ELAB-13`, a non-visibility
-singleton E-ROW-001 fixture that remains no-repair evidence.
+This file records the LAB-only addition of `ELAB-13`, the first
+non-visibility singleton E-ROW-001 fixture that remains no-repair evidence.
 
 This is LAB repository memory. It does not edit canon, does not freeze a
 Diagnostic or repair ABI, does not widen executable `suggested_repair[]`, does
@@ -73,8 +73,9 @@ missing_failures = [MissingWitness]
 | target event | `attack` |
 | current repair output | no `suggested_repair` field |
 
-This makes the future widening question concrete without changing repair
-output.
+This made the future widening question concrete without changing repair output.
+`plan/92-g1-erow001-base-singleton-fixture-closure.md` later completes the
+same no-repair fixture set for the other three base remote-request failures.
 
 ## Tests
 
@@ -105,9 +106,6 @@ makes a future OBL-025 covered-case decision safer:
 
 ## What remains open
 
-- Whether `MissingWitness` should be the only non-visibility singleton
-  representative, or whether `MissingCapability`, `RouteUnavailable`, and
-  `StaleMembership` need separate rows before widening.
 - What single-edit assumption should be used for non-visibility singleton
   repairs.
 - Whether a later repair-bearing prototype should use one parametric rule or
@@ -119,8 +117,7 @@ makes a future OBL-025 covered-case decision safer:
 
 ## Next safe packages
 
-1. Keep `ELAB-13` as no-repair evidence and add more singleton rows only if a
-   future widening needs one row per base failure.
+1. Read `ELAB-13` together with the `ELAB-14..16` closure in `plan/92`.
 2. Widen non-visibility singleton `suggested_repair[]` only after a separate
    package defines the single-edit assumption and no-placeholder payload tests.
 3. Keep `ELAB-04` and `ELAB-07` no-repair until set-insertion atomicity,

@@ -118,6 +118,33 @@
       "source": "elab-13-non-visibility-singleton-failure-row-negative/main/src/non-visibility-singleton-failure-row-negative.mir",
       "expected": "elab-13-non-visibility-singleton-failure-row-negative/expected/elaboration.json",
       "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-14",
+      "root_name": "elab-14-missing-capability-singleton-failure-row-negative",
+      "stage": "G1-repair-boundary",
+      "current_status": "executable",
+      "source": "elab-14-missing-capability-singleton-failure-row-negative/main/src/missing-capability-singleton-failure-row-negative.mir",
+      "expected": "elab-14-missing-capability-singleton-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-15",
+      "root_name": "elab-15-route-unavailable-singleton-failure-row-negative",
+      "stage": "G1-repair-boundary",
+      "current_status": "executable",
+      "source": "elab-15-route-unavailable-singleton-failure-row-negative/main/src/route-unavailable-singleton-failure-row-negative.mir",
+      "expected": "elab-15-route-unavailable-singleton-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-16",
+      "root_name": "elab-16-stale-membership-singleton-failure-row-negative",
+      "stage": "G1-repair-boundary",
+      "current_status": "executable",
+      "source": "elab-16-stale-membership-singleton-failure-row-negative/main/src/stale-membership-singleton-failure-row-negative.mir",
+      "expected": "elab-16-stale-membership-singleton-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
     }
   ]
 }

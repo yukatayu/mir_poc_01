@@ -63,8 +63,8 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 49)
-        self.assertEqual(payload["executable_count"], 49)
+        self.assertEqual(payload["sample_count"], 52)
+        self.assertEqual(payload["executable_count"], 52)
         self.assertEqual(payload["family_count"], 7)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
@@ -453,38 +453,62 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(payload["actual"]["observation_summaries"], [])
 
     def test_elaboration_non_visibility_singleton_failure_row_stays_no_repair(self) -> None:
-        payload = _run_helper("run", "ELAB-13")
+        cases = [
+            (
+                "ELAB-13",
+                "MissingWitness",
+                ["MissingCapability", "RouteUnavailable", "StaleMembership"],
+            ),
+            (
+                "ELAB-14",
+                "MissingCapability",
+                ["MissingWitness", "RouteUnavailable", "StaleMembership"],
+            ),
+            (
+                "ELAB-15",
+                "RouteUnavailable",
+                ["MissingCapability", "MissingWitness", "StaleMembership"],
+            ),
+            (
+                "ELAB-16",
+                "StaleMembership",
+                ["MissingCapability", "MissingWitness", "RouteUnavailable"],
+            ),
+        ]
 
-        self.assertTrue(payload["accepted"])
-        self.assertEqual(payload["mismatches"], [])
-        self.assertFalse(payload["actual"]["accepted"])
-        detail = payload["actual"]["lab_diagnostic_details"][0]
-        self.assertEqual(payload["actual"]["diagnostic_codes"], ["generated_failure_not_declared"])
-        self.assertEqual(detail["canon_id"], "E-ROW-001")
-        self.assertEqual(detail["missing_evidence"], ["MissingWitness"])
-        self.assertEqual(
-            detail["failure_row_context"],
-            {
-                "target_kind": "when_fails_row",
-                "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
-                "target_locus": "role:BrowserClient",
-                "event_name": "attack",
-                "required_failures": [
-                    "MissingCapability",
-                    "MissingWitness",
-                    "RouteUnavailable",
-                    "StaleMembership",
-                ],
-                "declared_failures": [
-                    "MissingCapability",
-                    "RouteUnavailable",
-                    "StaleMembership",
-                ],
-                "missing_failures": ["MissingWitness"],
-                "local_premise": "generated_failures_subset_declared_fails",
-            },
-        )
-        self.assertNotIn("suggested_repair", detail)
+        for sample_id, missing_failure, declared_failures in cases:
+            with self.subTest(sample_id=sample_id):
+                payload = _run_helper("run", sample_id)
+
+                self.assertTrue(payload["accepted"])
+                self.assertEqual(payload["mismatches"], [])
+                self.assertFalse(payload["actual"]["accepted"])
+                detail = payload["actual"]["lab_diagnostic_details"][0]
+                self.assertEqual(
+                    payload["actual"]["diagnostic_codes"],
+                    ["generated_failure_not_declared"],
+                )
+                self.assertEqual(detail["canon_id"], "E-ROW-001")
+                self.assertEqual(detail["missing_evidence"], [missing_failure])
+                self.assertEqual(
+                    detail["failure_row_context"],
+                    {
+                        "target_kind": "when_fails_row",
+                        "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+                        "target_locus": "role:BrowserClient",
+                        "event_name": "attack",
+                        "required_failures": [
+                            "MissingCapability",
+                            "MissingWitness",
+                            "RouteUnavailable",
+                            "StaleMembership",
+                        ],
+                        "declared_failures": declared_failures,
+                        "missing_failures": [missing_failure],
+                        "local_premise": "generated_failures_subset_declared_fails",
+                    },
+                )
+                self.assertNotIn("suggested_repair", detail)
 
     def test_elaboration_visibility_failure_row_negative_reports_expected_diagnostic(self) -> None:
         payload = _run_helper("run", "ELAB-10")
@@ -827,7 +851,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 49)
+        self.assertEqual(len(payload["passed"]), 52)
 
 
 if __name__ == "__main__":

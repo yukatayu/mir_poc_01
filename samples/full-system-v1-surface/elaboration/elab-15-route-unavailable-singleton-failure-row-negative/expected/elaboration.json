@@ -1,0 +1,104 @@
+{
+  "accepted": false,
+  "module_path": "Surface.Elab.RouteUnavailableSingletonFailureRowNegative",
+  "diagnostic_codes": [
+    "generated_failure_not_declared"
+  ],
+  "transition_kinds": [
+    "surface_role_when",
+    "generated_remote_write_request"
+  ],
+  "remote_request_summaries": [
+    {
+      "request_kind": "write",
+      "requester_locus": "role:BrowserClient",
+      "owner_locus": "S",
+      "state_name": "player",
+      "key_expr": "target",
+      "generated_from": "nested_place_block",
+      "failure_row_complete": false
+    }
+  ],
+  "message_envelope_summaries": [
+    {
+      "envelope_kind": "remote_write",
+      "from_locus": "role:BrowserClient",
+      "to_locus": "S",
+      "state_name": "player",
+      "key_expr": "target",
+      "field_name": "hp",
+      "visibility_channel": null,
+      "redaction_label": "observer_safe",
+      "retention_scope": "report_local"
+    }
+  ],
+  "publication_summaries": [],
+  "observation_summaries": [],
+  "generated_edge_kinds": [
+    "message_envelope",
+    "remote_write_request"
+  ],
+  "source_span_entity_kinds": [
+    "transition",
+    "message_envelope",
+    "generated_edge",
+    "remote_request",
+    "transition",
+    "generated_edge"
+  ],
+  "obligation_codes": [
+    "role_admission_runtime_integration_pending_after_p_surf_05",
+    "runtime_hotplug_activation_pending_p_surf_06"
+  ],
+  "source_authority": ".mir",
+  "final_public_api_frozen": false,
+  "lab_diagnostic_details": [
+    {
+      "legacy_code": "generated_failure_not_declared",
+      "canon_id": "E-ROW-001",
+      "severity": "error",
+      "rule_instance": "BND-001.row-containment",
+      "failed_premise": "generated_failures_subset_declared_fails",
+      "missing_evidence": [
+        "RouteUnavailable"
+      ],
+      "refs": [
+        "mirrorea_canon/theory/03-elaboration.md#BND-001",
+        "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",
+        "mirrorea_canon/theory/10-diagnostics.md#OBL-024"
+      ],
+      "request_context": {
+        "request_id": "req-0001",
+        "request_kind": "write",
+        "generated_from": "nested_place_block",
+        "requester_locus": "role:BrowserClient",
+        "owner_locus": "S",
+        "state_name": "player",
+        "key_expr": "target",
+        "field_name": "hp"
+      },
+      "failure_row_context": {
+        "target_kind": "when_fails_row",
+        "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+        "target_locus": "role:BrowserClient",
+        "event_name": "attack",
+        "required_failures": [
+          "MissingCapability",
+          "MissingWitness",
+          "RouteUnavailable",
+          "StaleMembership"
+        ],
+        "declared_failures": [
+          "MissingCapability",
+          "MissingWitness",
+          "StaleMembership"
+        ],
+        "missing_failures": [
+          "RouteUnavailable"
+        ],
+        "local_premise": "generated_failures_subset_declared_fails"
+      },
+      "lab_non_final": true
+    }
+  ]
+}

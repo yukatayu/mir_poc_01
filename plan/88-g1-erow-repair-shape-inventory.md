@@ -56,13 +56,17 @@ The current executable repair carrier is deliberately narrower:
 |---|---|---|---|---|---|
 | `ELAB-10` | base failures + `VisibilityDenied` | all base failures | `VisibilityDenied` | `E-ROW-002` | one LAB-only `add-to-fails-row` suggestion |
 | `ELAB-13` | base failures | `MissingCapability`, `RouteUnavailable`, `StaleMembership` | `MissingWitness` | `E-ROW-001` | none |
+| `ELAB-14` | base failures | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | `MissingCapability` | `E-ROW-001` | none |
+| `ELAB-15` | base failures | `MissingCapability`, `MissingWitness`, `StaleMembership` | `RouteUnavailable` | `E-ROW-001` | none |
+| `ELAB-16` | base failures | `MissingCapability`, `MissingWitness`, `RouteUnavailable` | `StaleMembership` | `E-ROW-001` | none |
 | `ELAB-07` | base failures | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | `E-ROW-001` | none |
 | `ELAB-04` | base failures + `VisibilityDenied` | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership`, `VisibilityDenied` | `E-ROW-001` in current LAB split | none |
 
 Important reading:
 
 - `ELAB-10` is visibility-only singleton evidence.
-- `ELAB-13` is non-visibility singleton no-repair evidence.
+- `ELAB-13..16` are the non-visibility singleton no-repair fixture set, one
+  for each base remote-request failure atom.
 - `ELAB-07` is non-visibility multi-missing evidence, not singleton evidence.
 - `ELAB-04` is mixed visibility/non-visibility multi-missing evidence.
 - There is not yet executable repair-bearing evidence for a non-visibility
@@ -73,7 +77,7 @@ Important reading:
 | Shape | Candidate repair family | Current status | Widening gate |
 |---|---|---|---|
 | Visibility singleton | add `VisibilityDenied` to the relevant `when ... fails` row | implemented only for `E-ROW-002` / `ELAB-10` | keep as-is unless target/span vocabulary changes |
-| Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | no-repair fixture exists as `ELAB-13`; no repair output | widen only after explicit single-edit assumption and no-placeholder tests |
+| Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | no-repair fixture set exists as `ELAB-13..16`; no repair output | widen only after explicit single-edit assumption and no-placeholder tests |
 | Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one repair per missing family | no-repair evidence today (`ELAB-07`) | decide whether set insertion is one edit or multiple edits; do not infer from OBL-025 |
 | Mixed visibility/non-visibility multi-missing | same local premise but includes both `VisibilityDenied` and other missing failures | no-repair evidence today (`ELAB-04`) | first decide decomposition, ordering, and whether visibility repair competes with add-to-fails-row |
 | Alternative visibility repair | declare visibility / observe authority instead of adding `VisibilityDenied` to `fails` | OPEN; not current prototype | needs separate repair family and authority/visibility preservation wording |
@@ -84,9 +88,9 @@ Important reading:
 
 ## Singleton definition for future repair-widening tests
 
-The current executable non-visibility singleton row is `ELAB-13`, and any
-future repair-bearing non-visibility singleton widening should preserve all of
-the following before `suggested_repair[]` output is widened:
+The current executable non-visibility singleton fixture set is `ELAB-13..16`,
+and any future repair-bearing non-visibility singleton widening should preserve
+all of the following before `suggested_repair[]` output is widened:
 
 1. `canon_id == "E-ROW-001"`.
 2. `failure_row_context.target_kind == "when_fails_row"`.
@@ -140,8 +144,9 @@ Safe reading:
 
 - current executable repair-coverage evidence is only `E-ROW-002` /
   `VisibilityDenied` singleton;
-- non-visibility singleton now has no-repair fixture evidence in `ELAB-13`;
-  repair-bearing coverage still requires a later explicit widening package;
+- non-visibility singleton now has one no-repair fixture per base
+  remote-request failure atom in `ELAB-13..16`; repair-bearing coverage still
+  requires a later explicit widening package;
 - mixed and multi-missing cases are not covered single-edit repair evidence
   until set-insertion atomicity or decomposition is decided;
 - non-empty `suggested_repair[]` is meaningful only when the item realizes a
@@ -168,11 +173,9 @@ standardizes empty repair-list semantics.
 
 ## Open questions
 
-- Whether `MissingWitness` is enough as the non-visibility singleton
-  representative, or whether `MissingCapability`, `RouteUnavailable`, and
-  `StaleMembership` need separate no-repair fixture rows before widening.
-- Should the later prototype test one representative non-visibility singleton
-  or one row per base failure?
+- Whether the later repair-bearing prototype should flip all four
+  non-visibility singleton rows at once, or stage one row first while keeping
+  the other singleton rows as no-repair fences.
 - Is adding multiple missing failures to one `fails` row one edit, multiple
   edits, or a separate set-insertion repair family?
 - Should mixed visibility/non-visibility omissions eventually decompose into

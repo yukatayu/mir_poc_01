@@ -1,7 +1,9 @@
 use mir_semantics::surface_to_core_elaboration::{
-    elaborate_surface_to_core_source, surface_elaboration_diagnostic_codes,
+    elaborate_surface_to_core_path, elaborate_surface_to_core_source,
+    surface_elaboration_diagnostic_codes,
 };
 use serde_json::Value;
+use std::path::PathBuf;
 
 #[test]
 fn elaborates_cross_locus_read_into_remote_request_with_observe_edge() {
@@ -647,6 +649,65 @@ BrowserClient[self] {
         })
     );
     assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn sample_fixtures_cover_each_non_visibility_singleton_without_repair() {
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let cases = [
+        (
+            "samples/full-system-v1-surface/elaboration/elab-13-non-visibility-singleton-failure-row-negative/main/src/non-visibility-singleton-failure-row-negative.mir",
+            "MissingWitness",
+            serde_json::json!(["MissingCapability", "RouteUnavailable", "StaleMembership"]),
+        ),
+        (
+            "samples/full-system-v1-surface/elaboration/elab-14-missing-capability-singleton-failure-row-negative/main/src/missing-capability-singleton-failure-row-negative.mir",
+            "MissingCapability",
+            serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"]),
+        ),
+        (
+            "samples/full-system-v1-surface/elaboration/elab-15-route-unavailable-singleton-failure-row-negative/main/src/route-unavailable-singleton-failure-row-negative.mir",
+            "RouteUnavailable",
+            serde_json::json!(["MissingCapability", "MissingWitness", "StaleMembership"]),
+        ),
+        (
+            "samples/full-system-v1-surface/elaboration/elab-16-stale-membership-singleton-failure-row-negative/main/src/stale-membership-singleton-failure-row-negative.mir",
+            "StaleMembership",
+            serde_json::json!(["MissingCapability", "MissingWitness", "RouteUnavailable"]),
+        ),
+    ];
+
+    for (path, missing_failure, declared_failures) in cases {
+        let report = elaborate_surface_to_core_path(repo_root.join(path));
+        let report_json = serde_json::to_value(&report).expect("report serializes");
+        let details = report_json["lab_diagnostic_details"]
+            .as_array()
+            .expect("LAB diagnostic details are emitted");
+
+        assert!(!report.accepted, "{path} should be rejected");
+        assert_eq!(
+            surface_elaboration_diagnostic_codes(&report),
+            vec!["generated_failure_not_declared"],
+            "{path}"
+        );
+        assert_eq!(details.len(), 1, "{path}");
+        assert_eq!(details[0]["canon_id"], "E-ROW-001", "{path}");
+        assert_eq!(
+            details[0]["missing_evidence"],
+            serde_json::json!([missing_failure]),
+            "{path}"
+        );
+        assert_eq!(
+            details[0]["failure_row_context"]["declared_failures"], declared_failures,
+            "{path}"
+        );
+        assert_eq!(
+            details[0]["failure_row_context"]["missing_failures"],
+            serde_json::json!([missing_failure]),
+            "{path}"
+        );
+        assert!(details[0].get("suggested_repair").is_none(), "{path}");
+    }
 }
 
 #[test]

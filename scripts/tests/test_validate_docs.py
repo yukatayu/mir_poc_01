@@ -300,6 +300,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/89-g1-erow001-non-visibility-singleton-fixture.md",
             "plan/90-source-traceability.md",
             "plan/91-maintenance-rules.md",
+            "plan/92-g1-erow001-base-singleton-fixture-closure.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
