@@ -9,8 +9,8 @@ This is an operational policy document, not normative project semantics.
 Oracle answers are advisory review input. They do not replace:
 
 - user decisions.
-- `specs/` as normative source.
-- `plan/` as repository memory.
+- `mirrorea_canon/` as normative source.
+- legacy `specs/` and `plan/` as LAB evidence / repository memory.
 - `progress.md` / `tasks.md` as current snapshots.
 - `docs/reports/` as task evidence.
 
@@ -142,8 +142,8 @@ Good prompts usually include:
 
 When using Oracle for this repo, remind it that:
 
-- `specs/` is normative source.
-- `plan/` is non-normative repository memory.
+- `mirrorea_canon/` is the normative source.
+- legacy `specs/` and `plan/` are LAB evidence / repository memory.
 - `progress.md` and `tasks.md` are current snapshots.
 - reports are evidence trail.
 - unresolved items must remain marked as unresolved.
@@ -165,7 +165,7 @@ After an Oracle consult:
 ## Non-goals
 
 - Oracle does not decide user decision gates.
-- Oracle does not create normative `specs/` decisions by itself.
+- Oracle does not create normative canon decisions by itself.
 - Oracle does not replace tests, validators, local reviewers, or sub-agents.
 - Oracle output should not be used to smuggle final public API, grammar,
   transport, runtime, viewer, telemetry, provider, or product claims into the

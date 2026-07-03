@@ -241,7 +241,8 @@ Correction:
 
 - `.docs/oracle-chatgpt-pro-operations.md` は、ChatGPT 5.5 Pro Extended
   Oracle browser consults の repo-local 運用メモである。
-- Oracle consult は advisory review input であり、`specs/`、`plan/`、
-  `progress.md`、`tasks.md`、`docs/reports/` の source hierarchy を置き換えない。
+- Oracle consult は advisory review input であり、`mirrorea_canon/`、
+  legacy `specs/` / `plan/`、`progress.md`、`tasks.md`、
+  `docs/reports/` の source hierarchy を置き換えない。
 - Oracle 系コマンドは分単位で待つ。遅い場合も重複起動せず、まず
   `oracle status` / `oracle session` で状態を確認する。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 18:38 JST
+最終更新: 2026-07-03 19:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,6 +62,11 @@ semantic source authority.
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
   patterns, or OPEN follow-up. This is LAB evidence and does not claim G0 exit.
+- Current G1 planning note: `plan/71-g1-ordinary-assignment-target.md` now
+  drafts the ordinary simple-assignment target/proof-boundary split in LAB memory. It
+  targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
+  G1 exit, theorem discharge, Lean proof completion, runtime dispatch, or public
+  API freeze.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -71,10 +76,10 @@ semantic source authority.
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   and static devtools diagnostics floors revalidated.
-- Next gap: the safe self-driven theory package is G1 ordinary assignment target
-  drafting, before any later user-spec-required reopen for final
-  runtime/transport, final source patch ABI, final viewer/telemetry ABI, or
-  broader public grammar.
+- Next gap: the safe self-driven theory packages are G1 SCN-01/SCN-02 static
+  trace drilldown and OBL-001 Lean statement inventory, before any later
+  user-spec-required reopen for final runtime/transport, final source patch
+  ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -389,6 +394,12 @@ Research-discovery items:
   family を canon anchor / rejected historical pattern / OPEN follow-up に
   照合した。G0 exit は主張せず、次の安全な自走 package を G1 ordinary
   assignment target draft として整理した。
+- 2026-07-03 19:55 JST
+  `plan/71-g1-ordinary-assignment-target.md` を追加し、G1 ordinary simple assignment
+  の target/proof-boundary split を THM-001、BND-001、SCN-01、SCN-02、
+  OBL-001/020/021 に絞って整理した。G1 exit、theorem discharge、
+  runtime dispatch、final grammar/API freeze は主張していない。次は
+  SCN-01/02 static trace drilldown または OBL-001 Lean statement inventory。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

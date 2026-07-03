@@ -440,6 +440,7 @@ REQUIRED = [
     "plan/68-surface-full-system-v1-roadmap.md",
     "plan/69-consultation-synthesis-and-management-roadmap.md",
     "plan/70-lab-to-canon-reconciliation-ledger.md",
+    "plan/71-g1-ordinary-assignment-target.md",
     "plan/90-source-traceability.md",
     "plan/91-maintenance-rules.md",
     "specs/00-document-map.md",

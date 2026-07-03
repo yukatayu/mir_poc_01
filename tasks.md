@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 18:38 JST
+最終更新: 2026-07-03 19:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -43,7 +43,11 @@ Current holding state:
   decision.
 - High-risk legacy LAB claim families are now mapped in `plan/70` to canon
   anchors, rejected historical claim patterns, or OPEN follow-up. The next
-  safe package should target G1 ordinary assignment, not runtime widening.
+  safe package should stay on G1 ordinary assignment, not runtime widening.
+- `plan/71-g1-ordinary-assignment-target.md` now drafts the LAB-only G1
+  ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
+  theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,
+  or final public grammar/API freeze.
 
 ## candidate next strategy packages
 
@@ -52,7 +56,8 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `ordinary-assignment target draft` | `G1` front-half | draft the target obligation for ordinary assignment elaboration preserving authority, failure row, dependency, generated communication, and source span | no theorem discharge claim; target obligation and proof boundary are separated in canon terms |
+| `G1 SCN-01/SCN-02 static trace drilldown` | `G1` front-half | map SCN-01 and SCN-02 expectations to the target cases in `plan/71`, separating canon claim, LAB evidence, and OPEN boundary | no theorem discharge claim; no runtime/conformance completion claim beyond C-static trace targets |
+| `G1 OBL-001 Lean statement inventory` | `G1` front-half | draft the smallest statement inventory for OBL-001 / THM-001 without proof discharge or helper-field overfitting | statement-only; OBL-020/021 dependencies and OPEN-014 are explicit |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
