@@ -104,8 +104,10 @@ Actualized rows:
   LAB gate review keeps it no-repair until set-insertion atomicity or bundle
   semantics are explicit. The executable preflight records the future atomic
   set-insertion / whole-gap coverage tests, and the assumption acceptance
-  package accepts the narrow LAB source-locus edit model for this row only
-  without widening executable output.
+  package accepts the narrow LAB source-locus edit model for this row only.
+  The payload-model design package narrows the future item to one top-level
+  set insertion with a future test matrix, still without widening executable
+  output.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

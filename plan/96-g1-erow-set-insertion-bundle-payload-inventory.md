@@ -41,6 +41,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
 - LAB `ELAB-07` assumption acceptance:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
+- LAB `ELAB-07` payload-model design:
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `scripts/tests/test_surface_mir_samples.py`,
@@ -313,6 +315,9 @@ Recommended next ordering:
    `plan/100` accepts the narrow LAB source-locus edit assumption for this
    route only: one existing row-field edit with `element_insert_count = 3`,
    no executable output widening, and no general set-insertion support claim.
+   `plan/101` then narrows the first future set payload to one top-level
+   `set_insertion` item with candidate roles and a positive / negative test
+   matrix, still without executable output widening.
 4. Leave `ELAB-04` no-repair until visibility alternatives and ranking are
    explicit.
 

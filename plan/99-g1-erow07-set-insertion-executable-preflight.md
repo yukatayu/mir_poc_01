@@ -46,6 +46,8 @@ payload model, coverage relation, and test matrix.
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB `ELAB-07` assumption acceptance:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
+- LAB `ELAB-07` payload-model design:
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -203,6 +205,10 @@ A later executable package needs predicates at least this strong:
 `ELAB-07` output still remains no-repair until a later set payload package is
 implemented and validated.
 
+`plan/101` now designs that first future payload model as one top-level
+non-final `set_insertion` item with candidate roles, eligibility guards, and a
+positive / negative test matrix. It still does not change executable output.
+
 The safe set arithmetic for this case is exact:
 
 ```text
@@ -313,6 +319,7 @@ Use separate statuses for `ELAB-07`:
 | `no_repair_executable` | current diagnostics omit `suggested_repair` | yes |
 | `set_insertion_payload_preflight` | candidate payload and tests are specified before code widening | yes |
 | `single_source_edit_accepted` | set insertion has been accepted as one source edit | yes, but only by `plan/100` for the exact `ELAB-07` source-locus candidate gate |
+| `set_insertion_payload_model_designed` | candidate payload roles and future test matrix are explicit before code widening | yes, but only by `plan/101` and still docs-only |
 | `repair_bearing_evidence` | expected JSON emits a complete set repair item | no |
 | `obl025_coverage_evidence` | row counts as current OBL-025 coverage | no |
 
@@ -322,10 +329,12 @@ Use separate statuses for `ELAB-07`:
    `suggested_repair`.
 2. `plan/100` has now accepted the narrow source-locus edit assumption for
    `ELAB-07` only.
-3. If executable widening is promoted, implement a separate set-insertion
+3. `plan/101` has now designed the separate set-insertion payload roles and
+   future test matrix without output widening.
+4. If executable widening is promoted, implement that separate set-insertion
    payload model and tests.
-4. Keep `ELAB-04` out of the first executable widening package.
-5. Refine OBL-025 only if the set-insertion predicate needs a more precise
+5. Keep `ELAB-04` out of the first executable widening package.
+6. Refine OBL-025 only if the set-insertion predicate needs a more precise
    statement boundary.
 
 ## Non-claims

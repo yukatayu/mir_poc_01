@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 03:24 JST
+最終更新: 2026-07-04 03:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -245,6 +245,15 @@ semantic source authority.
   `element_insert_count = 3`. Current executable `ELAB-07` still omits
   `suggested_repair`; this does not add executable set-insertion support,
   bundle semantics, OBL-025 proof / completion, conformance, or G1 exit.
+- Current ELAB-07 set-insertion payload-model design note:
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md` narrows the
+  first future `ELAB-07` set payload to one top-level non-final
+  `set_insertion` item with candidate roles, no singleton `missing_failure`
+  field reuse for multi-failure coverage, exact whole-gap guards, and a future
+  positive / negative test matrix. Current executable `ELAB-07` still omits
+  `suggested_repair`; this does not add executable set-insertion support,
+  bundle semantics, OBL-025 proof / completion, conformance, final ABI, or G1
+  exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -265,9 +274,10 @@ semantic source authority.
   requires one atomic set insertion, one target row, no extraneous declared
   failures, exact whole rejected-gap coverage, and focused tests before any
   output widening. `plan/100` accepts the narrow LAB source-locus edit
-  assumption for `ELAB-07` only, with `element_insert_count = 3`, while keeping
-  executable `ELAB-07` no-repair until a later payload package. `ELAB-04` now
-  has a separate mixed visibility
+  assumption for `ELAB-07` only, with `element_insert_count = 3`, and
+  `plan/101` designs the first future set payload roles / test matrix while
+  keeping executable `ELAB-07` no-repair until a later implementation package.
+  `ELAB-04` now has a separate mixed visibility
   branch inventory that keeps it no-repair until base remote-request and
   `VisibilityDenied` branch ownership / association / ordering / ranking are
   explicit. It still has no proof, no canon status movement, no final repair
@@ -576,7 +586,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance that still keep executable output no-repair until a set payload is implemented and tested, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design that still keep executable output no-repair until the set payload is implemented and tested, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -590,6 +600,15 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 03:48 JST
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md` を追加し、
+  `ELAB-07` の future set payload を one top-level set item、no singleton
+  `missing_failure` field reuse、exact whole-gap guards、future positive /
+  negative test matrix として docs-only で設計した。current executable
+  `ELAB-07` は no-repair のままで、repair output widening、executable
+  set-insertion support、bundle semantics support、OBL-025 proof /
+  completion、canon ledger movement、final repair ABI、conformance、G1 exit は
+  主張していない。
 - 2026-07-04 03:24 JST
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` を追加し、
   `ELAB-07` だけについて one existing `when_fails_row` source-locus edit /

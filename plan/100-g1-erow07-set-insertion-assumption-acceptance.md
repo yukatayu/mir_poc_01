@@ -48,6 +48,8 @@ OBL-024/025, does not claim conformance, and does not claim G1 exit.
 - LAB `ELAB-07` gate / preflight:
   `plan/97-g1-erow07-set-insertion-gate-review.md`,
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
+- LAB `ELAB-07` payload-model design:
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB `ELAB-04` mixed visibility branch inventory:
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB implementation and evidence:
@@ -273,6 +275,10 @@ lab_non_final = true
 ```
 
 These are candidate roles, not final JSON field names and not current output.
+`plan/101` later narrows the first future payload model to this set-insertion
+shape: one top-level item, no singleton `missing_failure` field reuse for
+multi-failure coverage, no bundle child repairs, no partial-guidance roles, and
+no `ELAB-04` widening.
 
 ## Relation to current executable rows
 
@@ -337,10 +343,12 @@ A later executable package must add positive and negative tests for at least:
 
 1. Keep executable output unchanged and validate that `ELAB-07` still omits
    `suggested_repair`.
-2. If executable widening is promoted, implement a separate set-insertion
-   payload model and tests for `ELAB-07` only.
-3. Keep `ELAB-04` out of the first executable widening package.
-4. Refine OBL-025 only if the later payload package needs more precise
+2. `plan/101` has now designed the separate set-insertion payload roles and
+   future test matrix for `ELAB-07` only, still docs-only.
+3. If executable widening is promoted, implement that payload model and tests
+   for `ELAB-07` only.
+4. Keep `ELAB-04` out of the first executable widening package.
+5. Refine OBL-025 only if the later payload package needs more precise
    statement vocabulary.
 
 ## Non-claims

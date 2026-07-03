@@ -33,6 +33,8 @@ not claim G1 exit.
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
 - LAB `ELAB-07` assumption acceptance:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
+- LAB `ELAB-07` payload-model design:
+  `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB singleton repair prototype:
   `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB OBL-025 statement draft:
@@ -219,8 +221,9 @@ Safe reading:
 2. If code widening is promoted, first write a narrow payload-model design for a
    single set-insertion item and its tests, then implement it in a separate
    package. `plan/99` records that payload-model preflight and `plan/100`
-   accepts the narrow `ELAB-07` source-locus edit assumption, but executable
-   output still remains no-repair.
+   accepts the narrow `ELAB-07` source-locus edit assumption. `plan/101`
+   designs the first non-final set payload roles and test matrix, but
+   executable output still remains no-repair.
 3. Keep `ELAB-04` no-repair until visibility branch alternatives and ranking /
    association are explicit.
 4. Draft OBL-024 only after diagnostic replay / association vocabulary is
