@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 07:48 JST
+最終更新: 2026-07-04 08:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -114,6 +114,12 @@ Current holding state:
   replay semantics, prove OBL-024, move canon ledger status, widen repair
   output, add an `ELAB-04` payload, claim conformance, claim G1 exit, or edit
   canon.
+- `plan/111-g1-obl024-projection-rust-fixture-guards.md` now records test-only
+  Rust fixture guard hardening for the same carrier. Rust tests now guard
+  projection/context consistency and skipped internal association-field
+  non-serialization across `ELAB-04/07/10/13..16`. It does not change
+  production behavior, expected JSON, repair output, final Diagnostic / replay
+  ABI, proof status, conformance, G1 exit, or canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,

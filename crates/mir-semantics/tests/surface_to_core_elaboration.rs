@@ -54,6 +54,16 @@ fn rejected_lab_details_for_source(source: &str) -> Vec<Value> {
         .clone()
 }
 
+fn rejected_lab_details_for_sample(path: &str) -> Vec<Value> {
+    let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let report = elaborate_surface_to_core_path(repo_root.join(path));
+    assert!(!report.accepted, "{path} should be rejected");
+    serde_json::to_value(&report).expect("report serializes")["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted")
+        .clone()
+}
+
 fn assert_no_set_insertion_repair(detail: &Value) {
     if let Some(repairs) = detail.get("suggested_repair").and_then(Value::as_array) {
         assert!(
@@ -118,6 +128,18 @@ fn assert_complete_set_insertion_not_bundle_or_partial(detail: &Value, repair: &
 }
 
 fn assert_obl024_diagnostic_soundness_projection(detail: &Value) {
+    assert!(
+        detail["failure_row_context"]
+            .get("association_key")
+            .is_none(),
+        "internal association_key must not be serialized in LAB JSON"
+    );
+    assert!(
+        detail["failure_row_context"]
+            .get("associated_request_count")
+            .is_none(),
+        "internal associated_request_count must not be serialized in LAB JSON"
+    );
     let projection = detail["diagnostic_soundness_projection"]
         .as_object()
         .expect("LAB OBL-024 diagnostic soundness projection is emitted");
@@ -159,8 +181,56 @@ fn assert_obl024_diagnostic_soundness_projection(detail: &Value) {
         detail["request_context"]["request_id"]
     );
     assert_eq!(
+        projection["reported_bindings"]["request_kind"],
+        detail["request_context"]["request_kind"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["generated_from"],
+        detail["request_context"]["generated_from"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["requester_locus"],
+        detail["request_context"]["requester_locus"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["owner_locus"],
+        detail["request_context"]["owner_locus"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["state_name"],
+        detail["request_context"]["state_name"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["key_expr"],
+        detail["request_context"]["key_expr"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["field_name"],
+        detail["request_context"]["field_name"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["target_kind"],
+        detail["failure_row_context"]["target_kind"]
+    );
+    assert_eq!(
         projection["reported_bindings"]["target_ref"],
         detail["failure_row_context"]["target_ref"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["target_locus"],
+        detail["failure_row_context"]["target_locus"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["event_name"],
+        detail["failure_row_context"]["event_name"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["required_failures"],
+        detail["failure_row_context"]["required_failures"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["declared_failures"],
+        detail["failure_row_context"]["declared_failures"]
     );
     assert_eq!(
         projection["reported_bindings"]["missing_failures"],
@@ -186,6 +256,11 @@ fn assert_obl024_diagnostic_soundness_projection(detail: &Value) {
         projection["trace_local_replay"]["expected_missing_evidence"],
         detail["missing_evidence"]
     );
+    assert_eq!(
+        projection["trace_local_replay"]["failure_reason"],
+        "missing_generated_failures"
+    );
+    assert_eq!(projection["trace_local_replay"]["replay_non_final"], true);
     assert_eq!(projection["projection_non_final"], true);
     assert_eq!(projection["lab_non_final"], true);
 }
@@ -678,6 +753,19 @@ BrowserClient[self] {
             "local_premise": "generated_failures_subset_declared_fails"
         })
     );
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn elab04_sample_fixture_carries_obl024_projection_without_repair() {
+    let details = rejected_lab_details_for_sample(
+        "samples/full-system-v1-surface/elaboration/elab-04-undeclared-generated-failure-negative/main/src/undeclared-generated-failure-negative.mir",
+    );
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["canon_id"], "E-ROW-001");
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
     assert!(details[0].get("suggested_repair").is_none());
 }
 
@@ -850,6 +938,22 @@ BrowserClient[self] {
     assert!(repair["repair_non_final"].as_bool().unwrap_or(false));
     assert!(repair["lab_non_final"].as_bool().unwrap_or(false));
     assert_complete_set_insertion_not_bundle_or_partial(&details[0], repair);
+}
+
+#[test]
+fn elab07_sample_fixture_carries_obl024_projection_with_exact_set_repair() {
+    let details = rejected_lab_details_for_sample(
+        "samples/full-system-v1-surface/elaboration/elab-07-write-failure-row-negative/main/src/write-failure-row-negative.mir",
+    );
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["canon_id"], "E-ROW-001");
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
+    let repairs = details[0]["suggested_repair"]
+        .as_array()
+        .expect("ELAB-07 sample emits one LAB set-insertion repair item");
+    assert_eq!(repairs.len(), 1);
+    assert_eq!(repairs[0]["repair_shape"], "set_insertion");
 }
 
 #[test]
@@ -1456,6 +1560,7 @@ BrowserClient[self] {
     );
     assert_eq!(repair["repair_non_final"], true);
     assert_eq!(repair["lab_non_final"], true);
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
 }
 
 #[test]
@@ -1595,6 +1700,7 @@ fn sample_fixtures_cover_each_non_visibility_singleton_with_repair_payload() {
         );
         assert_eq!(repair["repair_non_final"], true, "{path}");
         assert_eq!(repair["lab_non_final"], true, "{path}");
+        assert_obl024_diagnostic_soundness_projection(&details[0]);
     }
 }
 
@@ -1730,6 +1836,25 @@ BrowserClient[self] {
             }
         ])
     );
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
+}
+
+#[test]
+fn elab10_sample_fixture_carries_obl024_projection_with_visibility_repair() {
+    let details = rejected_lab_details_for_sample(
+        "samples/full-system-v1-surface/elaboration/elab-10-visibility-failure-row-negative/main/src/visibility-failure-row-negative.mir",
+    );
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["canon_id"], "E-ROW-002");
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
+    let repairs = details[0]["suggested_repair"]
+        .as_array()
+        .expect("ELAB-10 sample emits one LAB visibility repair item");
+    assert_eq!(repairs.len(), 1);
+    assert_eq!(repairs[0]["repair_family"], "add-to-fails-row");
+    assert_eq!(repairs[0]["diagnostic_family"], "E-ROW-002");
+    assert_eq!(repairs[0]["missing_failure"], "VisibilityDenied");
 }
 
 #[test]
