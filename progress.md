@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 22:14 JST
+最終更新: 2026-07-03 22:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -135,6 +135,12 @@ semantic source authority.
   suggested repair, and repair/failure matching. It does not add a Lean file,
   generate repairs, prove OBL-025, freeze diagnostic/repair ABI, claim
   conformance, or edit canon.
+- Current E-ROW repair payload inventory note:
+  `plan/83-g1-erow-repair-payload-inventory.md` inventories a non-final
+  repair payload vocabulary for future E-ROW diagnostics if a later prototype
+  includes `suggested_repair[]`. It does not implement repairs, freeze
+  diagnostic/repair ABI, prove OBL-024/025, claim explanation
+  soundness/completeness, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -144,11 +150,12 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the safe self-driven theory package is now either an additive LAB
-  diagnostic carrier prototype for E-ROW only, focused E-ROW repair payload
-  inventory if the prototype should include `suggested_repair[]`, or focused
-  refinement of the LAB OBL-001/020/021/024/025 statement drafts if review
-  finds a real gap. This remains before any later
+- Next gap: the safe self-driven implementation package is now a carrier-only
+  LAB E-ROW diagnostic detail prototype that preserves legacy helper output and
+  adds non-final canon ID / severity / rule / premise / missing-evidence detail
+  without `suggested_repair[]`. Repair-bearing rows should follow only after
+  the carrier-only path exposes required/declared/missing failure evidence and
+  tests can reject placeholders. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -547,6 +554,11 @@ Research-discovery items:
   single-edit repair existence / non-empty suggested repair /
   repair-failure matching の statement-shape inventory として整理した。
   repair generation、repair ABI freeze、proof、conformance、G1 exit は主張していない。
+- 2026-07-03 22:22 JST
+  `plan/83-g1-erow-repair-payload-inventory.md` を追加し、future E-ROW
+  diagnostic prototype が `suggested_repair[]` を含む場合の non-final payload
+  vocabulary を整理した。repair generation、diagnostic/repair ABI freeze、
+  OBL-024/025 proof、explanation completeness、conformance、G1 exit は主張していない。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

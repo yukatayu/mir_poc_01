@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 22:14 JST
+最終更新: 2026-07-03 22:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -100,6 +100,11 @@ Current holding state:
   and repair/failure matching. It does not add a Lean file, generate repairs,
   prove OBL-025, freeze diagnostic/repair ABI, claim conformance, claim G1
   exit, or edit canon.
+- `plan/83-g1-erow-repair-payload-inventory.md` now inventories non-final
+  E-ROW repair payload roles for a later prototype that may include
+  `suggested_repair[]`. It does not implement repair generation, freeze
+  diagnostic/repair ABI, prove OBL-024/025, claim conformance, claim G1 exit,
+  or edit canon.
 
 ## candidate next strategy packages
 
@@ -112,8 +117,8 @@ next line.
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `E-ROW helper ID split` | `G1` reserve | optionally split LAB helper output into canon-shaped E-ROW-001/E-ROW-002 categories with Rust/Python tests | no final diagnostic ABI freeze |
-| `E-ROW additive diagnostic carrier prototype` | `G1` reserve | add non-final LAB carrier fields for E-ROW diagnostics while preserving legacy helper output | no final diagnostic ABI freeze or OBL-024 proof |
-| `E-ROW repair payload inventory` | `G1` reserve | inventory the non-final repair payload shape if the next code prototype should include `suggested_repair[]` | no repair generation proof or final ABI freeze |
+| `E-ROW carrier-only prototype` | `G1` front | add non-final canon-id / severity / rule / premise / missing-evidence detail without `suggested_repair[]`, preserving legacy helper output | no OBL-025 advancement claim |
+| `E-ROW repair-bearing prototype` | `G1` reserve | add `suggested_repair[]` only after carrier-only detail exposes required/declared/missing failure evidence and tests can reject placeholders | no final repair ABI or OBL-025 proof |
 | `OBL-025 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after repair edit vocabulary and single-edit predicate are stable enough | Lean compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
