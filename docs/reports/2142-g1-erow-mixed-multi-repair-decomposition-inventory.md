@@ -279,7 +279,16 @@ No intended validation skips.
 
 ## Commit / push status
 
-Pending at report write.
+Implementation commit:
+
+- `4b05aad4fead4a4212ea5e4cde8649d0052a7d84`
+  (`Add G1 E-ROW mixed multi repair decomposition inventory`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- Verified immediately after push that local `HEAD` and `origin/main` both
+  pointed at `4b05aad4fead4a4212ea5e4cde8649d0052a7d84`.
 
 ## Sub-agent session close status
 
