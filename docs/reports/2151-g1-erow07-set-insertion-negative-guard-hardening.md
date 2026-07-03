@@ -293,7 +293,14 @@ None at this point.
 
 ## Commit / push status
 
-Pending at report write.
+Content commit pushed:
+
+- `f7ae422d6cf322af5f008017316d88220492623c`
+  (`Harden ELAB-07 set guard`)
+
+This report status update is committed and pushed in a follow-up bookkeeping
+commit. The final clean/equal Git state is verified after that push rather than
+recursively updating this section again.
 
 ## Sub-agent session close status
 
