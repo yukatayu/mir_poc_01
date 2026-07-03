@@ -1142,8 +1142,11 @@ fn erow_lab_diagnostic_detail(
     } else {
         E_ROW_001
     };
-    let suggested_repair =
-        erow002_visibility_suggested_repair(canon_id, &request_context, &failure_row_context);
+    let suggested_repair = erow_singleton_row_addition_suggested_repair(
+        canon_id,
+        &request_context,
+        &failure_row_context,
+    );
     SurfaceLabDiagnosticDetail {
         legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
         canon_id: canon_id.to_string(),
@@ -1163,17 +1166,12 @@ fn erow_lab_diagnostic_detail(
     }
 }
 
-fn erow002_visibility_suggested_repair(
+fn erow_singleton_row_addition_suggested_repair(
     canon_id: &str,
     request_context: &SurfaceLabDiagnosticRequestContext,
     failure_row_context: &SurfaceLabDiagnosticFailureRowContext,
 ) -> Option<Vec<SurfaceLabSuggestedRepair>> {
-    if canon_id != E_ROW_002 {
-        return None;
-    }
-    if failure_row_context.missing_failures.len() != 1
-        || failure_row_context.missing_failures[0] != VISIBILITY_FAILURE
-    {
+    if failure_row_context.missing_failures.len() != 1 {
         return None;
     }
     if failure_row_context.target_kind != "when_fails_row"
@@ -1182,7 +1180,22 @@ fn erow002_visibility_suggested_repair(
         return None;
     }
 
-    let missing_failure = VISIBILITY_FAILURE.to_string();
+    let missing_failure = failure_row_context.missing_failures[0].clone();
+    let (single_edit_assumption, non_goal) = if canon_id == E_ROW_002
+        && missing_failure == VISIBILITY_FAILURE
+    {
+        (
+            "erow002_visibility_single_row_addition_only",
+            "does_not_authorize_visibility_or_claim_runtime_success",
+        )
+    } else if canon_id == E_ROW_001 && REMOTE_REQUEST_FAILURES.contains(&missing_failure.as_str()) {
+        (
+            "erow001_non_visibility_singleton_row_addition_only",
+            "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+        )
+    } else {
+        return None;
+    };
     let mut declared_failures_after = failure_row_context.declared_failures.clone();
     declared_failures_after.push(missing_failure.clone());
 
@@ -1207,8 +1220,8 @@ fn erow002_visibility_suggested_repair(
             declared_failures_after,
         },
         local_premise: failure_row_context.local_premise.clone(),
-        single_edit_assumption: "erow002_visibility_single_row_addition_only".to_string(),
-        non_goal: "does_not_authorize_visibility_or_claim_runtime_success".to_string(),
+        single_edit_assumption: single_edit_assumption.to_string(),
+        non_goal: non_goal.to_string(),
         repair_non_final: true,
         lab_non_final: true,
     }])

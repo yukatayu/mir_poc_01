@@ -2,21 +2,23 @@
 
 ## Purpose
 
-This file defines the LAB-only gate for a possible future
-non-visibility singleton `E-ROW-001` repair prototype.
+This file defines the LAB-only gate for the non-visibility singleton
+`E-ROW-001` repair prototype. `plan/94` later implemented this gate for
+`ELAB-13..16`.
 
 It records:
 
 - the single-edit assumption for adding one base remote-request failure to a
   `when ... fails` row;
 - the payload constraints that prevent placeholder `suggested_repair[]` rows;
-- the current executable guard tests that keep `ELAB-13..16` as no-repair
-  fences until a later widening package intentionally changes them.
+- the executable guard tests that originally kept `ELAB-13..16` as no-repair
+  fences until `plan/94` intentionally changed them.
 
 This is LAB repository memory. It does not edit canon, does not freeze a
-Diagnostic or repair ABI, does not widen executable `suggested_repair[]`, does
-not prove OBL-024/025, does not claim explanation soundness or completeness,
-does not claim conformance, and does not claim G1 exit.
+Diagnostic or repair ABI, does not prove OBL-024/025, does not claim
+explanation soundness or completeness, does not claim conformance, and does
+not claim G1 exit. The original gate package did not widen executable
+`suggested_repair[]`; the later `plan/94` prototype does.
 
 ## Source hierarchy
 
@@ -36,6 +38,8 @@ does not claim conformance, and does not claim G1 exit.
 - LAB singleton fixture memory:
   `plan/89-g1-erow001-non-visibility-singleton-fixture.md`
   and `plan/92-g1-erow001-base-singleton-fixture-closure.md`
+- LAB widening implementation:
+  `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -46,25 +50,25 @@ If this LAB gate conflicts with canon, canon wins.
 
 ## Current executable state
 
-Current repair-bearing executable evidence remains exactly:
+Current repair-bearing executable evidence after `plan/94` is:
 
 | Sample | Canon family | Missing failures | Current repair output |
 |---|---|---|---|
 | `ELAB-10` | `E-ROW-002` | `VisibilityDenied` | one LAB-only `add-to-fails-row` item |
-| `ELAB-13` | `E-ROW-001` | `MissingWitness` | no `suggested_repair` field |
-| `ELAB-14` | `E-ROW-001` | `MissingCapability` | no `suggested_repair` field |
-| `ELAB-15` | `E-ROW-001` | `RouteUnavailable` | no `suggested_repair` field |
-| `ELAB-16` | `E-ROW-001` | `StaleMembership` | no `suggested_repair` field |
+| `ELAB-13` | `E-ROW-001` | `MissingWitness` | one LAB-only `add-to-fails-row` item |
+| `ELAB-14` | `E-ROW-001` | `MissingCapability` | one LAB-only `add-to-fails-row` item |
+| `ELAB-15` | `E-ROW-001` | `RouteUnavailable` | one LAB-only `add-to-fails-row` item |
+| `ELAB-16` | `E-ROW-001` | `StaleMembership` | one LAB-only `add-to-fails-row` item |
 | `ELAB-07` | `E-ROW-001` | non-visibility multi-missing | no `suggested_repair` field |
 | `ELAB-04` | current LAB `E-ROW-001` split | mixed visibility / non-visibility multi-missing | no `suggested_repair` field |
 
-`ELAB-13..16` are now gate-ready inputs for a later non-visibility singleton
-repair prototype, not repair-bearing evidence today.
+`ELAB-13..16` are now repair-bearing evidence for the gate admitted here.
+`ELAB-04` and `ELAB-07` remain no-repair fences.
 
 ## LAB single-edit assumption
 
-For a future non-visibility singleton `E-ROW-001` prototype, the only
-single-edit case currently admitted by this gate is:
+For the non-visibility singleton `E-ROW-001` prototype, the only single-edit
+case currently admitted by this gate is:
 
 1. the diagnostic is a row-containment failure with
    `canon_id == "E-ROW-001"`;
@@ -94,9 +98,8 @@ can be emitted for a multi-missing row.
 
 ## No-placeholder payload constraints
 
-Any future `suggested_repair[]` item admitted by this gate must be non-empty
-and must be a local witness-compatible payload. In LAB vocabulary, that means
-at least:
+Any `suggested_repair[]` item admitted by this gate must be non-empty and must
+be a local witness-compatible payload. In LAB vocabulary, that means at least:
 
 | Payload role | Constraint |
 |---|---|
@@ -125,38 +128,39 @@ The payload must not use placeholder string values such as empty strings,
 This does not standardize final JSON semantics. It is a LAB guard against
 satisfying OBL-025-shaped tests with a non-empty but meaningless repair array.
 
-## Executable guards added with this gate
+## Executable guards and later widening
 
-This package adds regression checks, but intentionally does not widen repair
-output:
+This gate package added regression checks and intentionally did not widen
+repair output. `plan/94` later reused the same constraints while changing the
+singleton fixture expectations:
 
 - Python helper test:
   `test_erow_suggested_repair_payloads_are_not_placeholders`
-  verifies that the existing `ELAB-10` repair item is a local
-  witness-compatible payload and contains no placeholder strings.
+  verifies that current repair items are local witness-compatible payloads and
+  contain no placeholder strings.
 - Python helper test:
-  `test_elaboration_non_visibility_singleton_failure_row_stays_no_repair`
-  now also checks that the `ELAB-13..16` singleton gate inputs have non-empty
-  target/request context and remain no-repair.
+  `test_elaboration_non_visibility_singleton_failure_row_reports_repair_payload`
+  checks that the `ELAB-13..16` singleton rows have non-empty target/request
+  context and one `add-to-fails-row` repair payload.
 - Rust regression test:
   `suggested_repair_payloads_are_non_placeholder_local_witnesses`
   verifies the same local-witness alignment on serialized
   Surface-to-Core elaboration output.
 - Rust sample-path regression:
-  `sample_fixtures_cover_each_non_visibility_singleton_without_repair`
-  now also checks non-empty target/request context for `ELAB-13..16`.
+  `sample_fixtures_cover_each_non_visibility_singleton_with_repair_payload`
+  checks non-empty target/request context and repair payload shape for
+  `ELAB-13..16`.
 
-## Future widening rule
+## Widening rule now realized
 
-A later package may widen `suggested_repair[]` for non-visibility singleton
-`E-ROW-001` only if it intentionally changes the executable expectation for
+`plan/94` widened `suggested_repair[]` for non-visibility singleton
+`E-ROW-001` by intentionally changing the executable expectation for
 `ELAB-13..16`.
 
-The recommended class-wide path is to flip all four singleton rows together,
-because the current implementation and helper evidence treat the base
-remote-request failures symmetrically. A staged path is still allowed if the
-report explicitly says which singleton row is now repair-bearing and why the
-remaining singleton rows stay no-repair fences.
+The class-wide path flipped all four singleton rows together, because the
+current implementation and helper evidence treat the base remote-request
+failures symmetrically. Any later widening beyond this class needs a separate
+assumption and tests.
 
 ## Cases still excluded
 
@@ -174,8 +178,6 @@ and tests:
 
 ## What remains open
 
-- Whether the first repair-bearing non-visibility singleton prototype should
-  flip all four singleton rows at once or stage one row first.
 - Whether set insertion is ever a single edit.
 - Whether mixed rows should decompose into several singleton repairs.
 - Whether target spans should replace or supplement the current LAB-local
@@ -188,7 +190,8 @@ and tests:
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No non-visibility repair output widening.
+- No repair output widening beyond the singleton class implemented by
+  `plan/94`.
 - No OBL-024 proof.
 - No OBL-025 proof.
 - No OBL-025 completion.

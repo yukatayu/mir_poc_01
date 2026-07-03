@@ -62,6 +62,48 @@
       "missing_evidence": [
         "RouteUnavailable"
       ],
+      "suggested_repair": [
+        {
+          "repair_family": "add-to-fails-row",
+          "diagnostic_family": "E-ROW-001",
+          "applies_to": {
+            "legacy_code": "generated_failure_not_declared",
+            "canon_id": "E-ROW-001",
+            "request_id": "req-0001"
+          },
+          "target_kind": "when_fails_row",
+          "target_context": {
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+            "locus": "role:BrowserClient",
+            "event_name": "attack"
+          },
+          "missing_failure": "RouteUnavailable",
+          "required_failures": [
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+          ],
+          "declared_failures": [
+            "MissingCapability",
+            "MissingWitness",
+            "StaleMembership"
+          ],
+          "local_effect": {
+            "declared_failures_after": [
+              "MissingCapability",
+              "MissingWitness",
+              "StaleMembership",
+              "RouteUnavailable"
+            ]
+          },
+          "local_premise": "generated_failures_subset_declared_fails",
+          "single_edit_assumption": "erow001_non_visibility_singleton_row_addition_only",
+          "non_goal": "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+          "repair_non_final": true,
+          "lab_non_final": true
+        }
+      ],
       "refs": [
         "mirrorea_canon/theory/03-elaboration.md#BND-001",
         "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",

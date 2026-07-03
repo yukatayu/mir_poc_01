@@ -142,6 +142,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/91-maintenance-rules.md",
         "plan/92-g1-erow001-base-singleton-fixture-closure.md",
         "plan/93-g1-erow001-singleton-repair-assumption.md",
+        "plan/94-g1-erow001-singleton-repair-prototype.md",
     ],
     "scripts": [
         "scripts",

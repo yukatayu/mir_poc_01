@@ -302,6 +302,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/91-maintenance-rules.md",
             "plan/92-g1-erow001-base-singleton-fixture-closure.md",
             "plan/93-g1-erow001-singleton-repair-assumption.md",
+            "plan/94-g1-erow001-singleton-repair-prototype.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

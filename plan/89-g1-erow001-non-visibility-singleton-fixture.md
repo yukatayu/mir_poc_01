@@ -3,12 +3,15 @@
 ## Purpose
 
 This file records the LAB-only addition of `ELAB-13`, the first
-non-visibility singleton E-ROW-001 fixture that remains no-repair evidence.
+non-visibility singleton E-ROW-001 fixture. It was introduced as no-repair
+boundary evidence, and `plan/94` later intentionally widened it into
+repair-bearing singleton evidence.
 
 This is LAB repository memory. It does not edit canon, does not freeze a
-Diagnostic or repair ABI, does not widen executable `suggested_repair[]`, does
-not prove OBL-024/025, does not claim explanation soundness or completeness,
-does not claim conformance, and does not claim G1 exit.
+Diagnostic or repair ABI, does not prove OBL-024/025, does not claim
+explanation soundness or completeness, does not claim conformance, and does
+not claim G1 exit. The original fixture package did not widen executable
+`suggested_repair[]`; the later `plan/94` prototype does.
 
 ## Source hierarchy
 
@@ -25,6 +28,8 @@ does not claim conformance, and does not claim G1 exit.
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - LAB E-ROW repair shape inventory:
   `plan/88-g1-erow-repair-shape-inventory.md`
+- LAB E-ROW singleton repair prototype:
+  `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -71,11 +76,13 @@ missing_failures = [MissingWitness]
 | missing evidence | `MissingWitness` |
 | target kind | `when_fails_row` |
 | target event | `attack` |
-| current repair output | no `suggested_repair` field |
+| current repair output | one LAB-only `add-to-fails-row` item after `plan/94` |
 
-This made the future widening question concrete without changing repair output.
-`plan/92-g1-erow001-base-singleton-fixture-closure.md` later completes the
-same no-repair fixture set for the other three base remote-request failures.
+The original package made the future widening question concrete without
+changing repair output. `plan/92-g1-erow001-base-singleton-fixture-closure.md`
+later completed the same no-repair fixture set for the other three base
+remote-request failures, and `plan/94` then flipped all four singleton rows
+into LAB-only repair-bearing evidence.
 
 ## Tests
 
@@ -90,26 +97,23 @@ The fixture is covered by:
 - full Surface helper:
   `python3 scripts/surface_mir_samples.py check-all --format json`
 
-The tests require `ELAB-13` to stay `E-ROW-001`, to identify
-`MissingWitness` as the only missing evidence, and to omit
-`suggested_repair`.
+The current tests require `ELAB-13` to stay `E-ROW-001`, to identify
+`MissingWitness` as the only missing evidence, to emit one local
+`add-to-fails-row` repair payload, and to satisfy the no-placeholder
+constraints inherited from `plan/93`.
 
 ## Relation to OBL-025
 
-`ELAB-13` is not OBL-025 completion. It is a no-repair boundary fixture that
-makes a future OBL-025 covered-case decision safer:
+`ELAB-13` is not OBL-025 completion. It began as a no-repair boundary fixture
+that made the later `plan/94` covered-case prototype safer:
 
-- if a later package widens `suggested_repair[]` for non-visibility singleton
-  E-ROW-001, it must change this fixture intentionally;
-- until then, non-visibility singleton is executable pressure evidence, not
-  repair-coverage evidence.
+- the later widening intentionally changed this fixture rather than silently
+  changing the meaning of older evidence;
+- even after widening, non-visibility singleton repair is executable LAB
+  evidence, not proof of OBL-025 or whole-program repair success.
 
 ## What remains open
 
-- What single-edit assumption should be used for non-visibility singleton
-  repairs.
-- Whether a later repair-bearing prototype should use one parametric rule or
-  one row per missing base failure.
 - Whether mixed / multi-missing rows decompose into several singleton repairs
   or remain no-repair until ranking / atomicity is settled.
 - Final target-span / declaration-span representation beyond LAB-local
@@ -117,9 +121,10 @@ makes a future OBL-025 covered-case decision safer:
 
 ## Next safe packages
 
-1. Read `ELAB-13` together with the `ELAB-14..16` closure in `plan/92`.
-2. Widen non-visibility singleton `suggested_repair[]` only after a separate
-   package defines the single-edit assumption and no-placeholder payload tests.
+1. Read `ELAB-13` together with the `ELAB-14..16` closure in `plan/92` and
+   the current widening in `plan/94`.
+2. Preserve the `plan/93` no-placeholder payload tests if target/span
+   vocabulary changes.
 3. Keep `ELAB-04` and `ELAB-07` no-repair until set-insertion atomicity,
    decomposition, and ranking are resolved.
 
@@ -128,7 +133,7 @@ makes a future OBL-025 covered-case decision safer:
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No repair generation widening.
+- No repair ranking or multi-edit widening.
 - No OBL-024 proof.
 - No OBL-025 proof.
 - No OBL-025 completion.

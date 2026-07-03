@@ -2,8 +2,10 @@
 
 ## Purpose
 
-This file records the LAB-only closure of the no-repair fixture set for
-non-visibility singleton `E-ROW-001` row-containment omissions.
+This file records the LAB-only closure of the original no-repair fixture set
+for non-visibility singleton `E-ROW-001` row-containment omissions. `plan/94`
+later intentionally widened this closed fixture set into repair-bearing
+singleton evidence.
 
 `ELAB-13` already covered `MissingWitness`. This package adds `ELAB-14..16`
 for the remaining base remote-request failures:
@@ -13,9 +15,10 @@ for the remaining base remote-request failures:
 - `StaleMembership`
 
 This is executable LAB evidence only. It does not edit canon, does not freeze
-a Diagnostic or repair ABI, does not widen `suggested_repair[]`, does not
-prove OBL-024/025, does not claim explanation soundness or completeness, does
-not claim conformance, and does not claim G1 exit.
+a Diagnostic or repair ABI, does not prove OBL-024/025, does not claim
+explanation soundness or completeness, does not claim conformance, and does
+not claim G1 exit. The original closure package did not widen
+`suggested_repair[]`; the later `plan/94` prototype does.
 
 ## Source hierarchy
 
@@ -32,6 +35,8 @@ not claim conformance, and does not claim G1 exit.
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - LAB E-ROW repair shape inventory:
   `plan/88-g1-erow-repair-shape-inventory.md`
+- LAB E-ROW singleton repair prototype:
+  `plan/94-g1-erow001-singleton-repair-prototype.md`
 - First singleton fixture:
   `plan/89-g1-erow001-non-visibility-singleton-fixture.md`
 - Advisory review:
@@ -48,10 +53,10 @@ If this LAB fixture closure conflicts with canon, canon wins.
 
 | Sample | Missing singleton | Declared failures | Current repair output |
 |---|---|---|---|
-| `ELAB-13` | `MissingWitness` | `MissingCapability`, `RouteUnavailable`, `StaleMembership` | no `suggested_repair` field |
-| `ELAB-14` | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | no `suggested_repair` field |
-| `ELAB-15` | `RouteUnavailable` | `MissingCapability`, `MissingWitness`, `StaleMembership` | no `suggested_repair` field |
-| `ELAB-16` | `StaleMembership` | `MissingCapability`, `MissingWitness`, `RouteUnavailable` | no `suggested_repair` field |
+| `ELAB-13` | `MissingWitness` | `MissingCapability`, `RouteUnavailable`, `StaleMembership` | one LAB-only `add-to-fails-row` item after `plan/94` |
+| `ELAB-14` | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | one LAB-only `add-to-fails-row` item after `plan/94` |
+| `ELAB-15` | `RouteUnavailable` | `MissingCapability`, `MissingWitness`, `StaleMembership` | one LAB-only `add-to-fails-row` item after `plan/94` |
+| `ELAB-16` | `StaleMembership` | `MissingCapability`, `MissingWitness`, `RouteUnavailable` | one LAB-only `add-to-fails-row` item after `plan/94` |
 
 All four rows share:
 
@@ -63,6 +68,9 @@ All four rows share:
 - `event_name = attack`
 - `required_failures = [MissingCapability, MissingWitness, RouteUnavailable, StaleMembership]`
 - `lab_non_final = true`
+- after `plan/94`, one `suggested_repair` item with
+  `single_edit_assumption =
+  erow001_non_visibility_singleton_row_addition_only`
 
 ## Why this closure exists
 
@@ -75,13 +83,13 @@ non-visibility singleton E-ROW-001
 ```
 
 For that class-wide statement, the identity of the missing atom is part of the
-observable diagnostic payload: `missing_evidence`, `missing_failures`, and any
-future repair item would all carry it. The no-repair fixture set therefore
-keeps one executable row per base failure before any repair output widening.
+observable diagnostic payload: `missing_evidence`, `missing_failures`, and the
+current repair item all carry it. The original no-repair fixture set therefore
+kept one executable row per base failure before `plan/94` widened the class.
 
 ## Tests
 
-The closure is covered by:
+The current closure and widened singleton repair evidence are covered by:
 
 - Python helper test:
   `scripts/tests/test_surface_mir_samples.py`
@@ -94,27 +102,28 @@ The closure is covered by:
 - full Surface helper:
   `python3 scripts/surface_mir_samples.py check-all --format json`
 
-The RED checks failed before sample creation because `ELAB-14..16` were unknown
-to the helper and missing on disk for the Rust sample-path test.
+The original RED checks failed before sample creation because `ELAB-14..16`
+were unknown to the helper and missing on disk for the Rust sample-path test.
+The later `plan/94` RED checks failed because the closed singleton rows still
+omitted `suggested_repair`.
 
 ## Relation to OBL-025
 
 This package is not OBL-025 completion. It only improves the fixture boundary
 for a later `CoveredLine1RepairCase` instantiation:
 
-- singleton no-repair evidence now covers every base remote-request failure
-  atom;
-- repair-bearing coverage still requires a later explicit widening package;
+- singleton repair-bearing evidence now covers every base remote-request
+  failure atom after `plan/94`;
 - mixed and multi-missing rows remain no-repair until decomposition, set
   insertion atomicity, and ranking are settled.
 
 ## Next safe packages
 
-1. Read `plan/93-g1-erow001-singleton-repair-assumption.md`, which now defines
-   the non-visibility singleton single-edit assumption and no-placeholder
-   repair payload tests.
-2. Prototype `suggested_repair[]` for the non-visibility singleton class only
-   if all four singleton fixture rows are intentionally changed or fenced.
+1. Read `plan/93-g1-erow001-singleton-repair-assumption.md` and
+   `plan/94-g1-erow001-singleton-repair-prototype.md` for the current
+   singleton repair-bearing state.
+2. Preserve `ELAB-13..16` as singleton-only repair evidence when refining
+   OBL-025 wording or target/span vocabulary.
 3. Keep `ELAB-04` and `ELAB-07` no-repair until multi-missing semantics are
    decided.
 
@@ -123,7 +132,7 @@ for a later `CoveredLine1RepairCase` instantiation:
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No repair generation widening.
+- No repair ranking or multi-edit widening.
 - No OBL-024 proof.
 - No OBL-025 proof.
 - No OBL-025 completion.

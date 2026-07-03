@@ -498,7 +498,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         )
         self.assertEqual(payload["actual"]["observation_summaries"], [])
 
-    def test_elaboration_non_visibility_singleton_failure_row_stays_no_repair(self) -> None:
+    def test_elaboration_non_visibility_singleton_failure_row_reports_repair_payload(self) -> None:
         cases = [
             (
                 "ELAB-13",
@@ -554,7 +554,6 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                         "local_premise": "generated_failures_subset_declared_fails",
                     },
                 )
-                self.assertNotIn("suggested_repair", detail)
                 self.assertTrue(detail["lab_non_final"])
                 self.assertEqual(
                     detail["request_context"]["request_id"],
@@ -569,6 +568,58 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                     _placeholder_repair_paths(detail["failure_row_context"]),
                     [],
                 )
+                repairs = detail["suggested_repair"]
+                self.assertEqual(len(repairs), 1)
+                repair = repairs[0]
+                self.assertEqual(_placeholder_repair_paths(repair), [])
+                self.assertEqual(repair["repair_family"], "add-to-fails-row")
+                self.assertEqual(repair["diagnostic_family"], "E-ROW-001")
+                self.assertEqual(
+                    repair["applies_to"],
+                    {
+                        "legacy_code": "generated_failure_not_declared",
+                        "canon_id": "E-ROW-001",
+                        "request_id": "req-0001",
+                    },
+                )
+                self.assertEqual(repair["target_kind"], "when_fails_row")
+                self.assertEqual(
+                    repair["target_context"],
+                    {
+                        "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+                        "locus": "role:BrowserClient",
+                        "event_name": "attack",
+                    },
+                )
+                self.assertEqual(repair["missing_failure"], missing_failure)
+                self.assertEqual(
+                    repair["required_failures"],
+                    [
+                        "MissingCapability",
+                        "MissingWitness",
+                        "RouteUnavailable",
+                        "StaleMembership",
+                    ],
+                )
+                self.assertEqual(repair["declared_failures"], declared_failures)
+                self.assertEqual(
+                    repair["local_effect"]["declared_failures_after"],
+                    [*declared_failures, missing_failure],
+                )
+                self.assertEqual(
+                    repair["local_premise"],
+                    "generated_failures_subset_declared_fails",
+                )
+                self.assertEqual(
+                    repair["single_edit_assumption"],
+                    "erow001_non_visibility_singleton_row_addition_only",
+                )
+                self.assertEqual(
+                    repair["non_goal"],
+                    "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+                )
+                self.assertTrue(repair["repair_non_final"])
+                self.assertTrue(repair["lab_non_final"])
 
     def test_erow_suggested_repair_payloads_are_not_placeholders(self) -> None:
         payload = _run_helper("run", "ELAB-10")

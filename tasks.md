@@ -130,29 +130,35 @@ Current holding state:
   predicates and does not freeze diagnostic/repair ABI, prove OBL-025, claim
   explanation completeness, claim conformance, claim G1 exit, or edit canon.
 - `plan/88-g1-erow-repair-shape-inventory.md` now records the LAB-only
-  taxonomy before repair output widening. It preserves `ELAB-10` as the only
-  current repair-bearing `E-ROW-002` / `VisibilityDenied` singleton evidence,
-  keeps `ELAB-04/07` no-repair, and does not widen `suggested_repair[]`, prove
-  OBL-025, claim repair ranking/multi-edit support, claim conformance, claim
-  G1 exit, or edit canon.
+  taxonomy for repair output widening. Current singleton repair evidence is
+  `ELAB-10` for `E-ROW-002` / `VisibilityDenied` and `ELAB-13..16` for
+  `E-ROW-001` non-visibility base failures. `ELAB-04/07` remain no-repair,
+  and this does not prove OBL-025, claim repair ranking/multi-edit support,
+  claim conformance, claim G1 exit, or edit canon.
 - `plan/89-g1-erow001-non-visibility-singleton-fixture.md` now records a
   LAB-only `ELAB-13` fixture for non-visibility singleton `MissingWitness`
-  omission. It remains `E-ROW-001` no-repair evidence and does not widen
-  `suggested_repair[]`, prove OBL-025, freeze diagnostic/repair ABI, claim
-  conformance, claim G1 exit, or edit canon.
+  omission. It began as no-repair evidence and now carries one LAB-only
+  `E-ROW-001` singleton repair item after `plan/94`. It does not prove
+  OBL-025, freeze diagnostic/repair ABI, claim conformance, claim G1 exit, or
+  edit canon.
 - `plan/92-g1-erow001-base-singleton-fixture-closure.md` now records LAB-only
   `ELAB-14..16` fixtures for the remaining non-visibility singleton base
-  failures. Together with `ELAB-13`, the no-repair fixture set covers
+  failures. Together with `ELAB-13`, the singleton repair-bearing set covers
   `MissingCapability`, `MissingWitness`, `RouteUnavailable`, and
-  `StaleMembership`. It does not widen `suggested_repair[]`, prove OBL-025,
+  `StaleMembership` after `plan/94`. It does not prove OBL-025, freeze
+  diagnostic/repair ABI, claim conformance, claim G1 exit, or edit canon.
+- `plan/93-g1-erow001-singleton-repair-assumption.md` now records the LAB-only
+  single-edit assumption and no-placeholder payload constraints for
+  non-visibility singleton repair. `plan/94` implements that gate for
+  `ELAB-13..16`; `ELAB-04/07` remain no-repair. It does not prove OBL-025,
   freeze diagnostic/repair ABI, claim conformance, claim G1 exit, or edit
   canon.
-- `plan/93-g1-erow001-singleton-repair-assumption.md` now records the LAB-only
-  single-edit assumption and no-placeholder payload constraints for a possible
-  future non-visibility singleton repair prototype. It adds guard tests for
-  existing repair payload quality and `ELAB-13..16` no-repair gate inputs, but
-  does not widen `suggested_repair[]`, prove OBL-025, freeze
-  diagnostic/repair ABI, claim conformance, claim G1 exit, or edit canon.
+- `plan/94-g1-erow001-singleton-repair-prototype.md` now records LAB-only
+  `E-ROW-001` singleton `add-to-fails-row` repair payloads for all four base
+  remote-request failure atoms. It preserves the no-placeholder gate, keeps
+  mixed / multi-missing rows no-repair, and does not prove OBL-025, freeze
+  repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -164,7 +170,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW non-visibility singleton repair prototype` | `G1` reserve | widen `suggested_repair[]` for the singleton class only under the `plan/93` single-edit / no-placeholder gate | `ELAB-04/07` no-repair fences preserved; no ranking, multi-edit, whole-program success, or OBL-025 proof claim |
+| `E-ROW mixed/multi repair decomposition inventory` | `G1` reserve | decide whether `ELAB-04/07` should stay no-repair or decompose into several singleton witnesses / set-insertion repairs | no executable widening unless atomicity, ordering, ranking, and target association are documented first |
 | `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

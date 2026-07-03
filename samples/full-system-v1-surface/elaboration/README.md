@@ -16,10 +16,10 @@ Current executable rows:
 - `ELAB-10`: visible communication rejects an underdeclared `VisibilityDenied` failure row.
 - `ELAB-11`: SCN-01-shaped visible same-field assignment records an RHS dependency row without claiming runtime dispatch.
 - `ELAB-12`: SCN-02-shaped attack assignment records target/self RHS dependency rows without freezing read materialization.
-- `ELAB-13`: non-visibility singleton `MissingWitness` omission remains `E-ROW-001` no-repair evidence.
-- `ELAB-14`: non-visibility singleton `MissingCapability` omission remains `E-ROW-001` no-repair evidence.
-- `ELAB-15`: non-visibility singleton `RouteUnavailable` omission remains `E-ROW-001` no-repair evidence.
-- `ELAB-16`: non-visibility singleton `StaleMembership` omission remains `E-ROW-001` no-repair evidence.
+- `ELAB-13`: non-visibility singleton `MissingWitness` omission carries LAB-only `E-ROW-001` repair evidence.
+- `ELAB-14`: non-visibility singleton `MissingCapability` omission carries LAB-only `E-ROW-001` repair evidence.
+- `ELAB-15`: non-visibility singleton `RouteUnavailable` omission carries LAB-only `E-ROW-001` repair evidence.
+- `ELAB-16`: non-visibility singleton `StaleMembership` omission carries LAB-only `E-ROW-001` repair evidence.
 
 These rows do not claim final public grammar, runtime MessageEnvelope dispatch, role-admission capability grants, source patch activation, or TypeMismatch typechecker discharge.
 
@@ -28,8 +28,7 @@ G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
 `lab_diagnostic_details`. It preserves legacy
 `generated_failure_not_declared` output, now includes request / failure-row
 context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
-evidence for `ELAB-10`, keeps `ELAB-13..16` as one `E-ROW-001` no-repair
-fixture per base remote-request failure atom, and does not freeze a diagnostic
-/ repair ABI or claim OBL-025. `plan/93` records the current single-edit /
-no-placeholder gate for any later non-visibility singleton repair widening;
-this root still emits no `E-ROW-001` repair rows.
+evidence for `ELAB-10`, emits `E-ROW-001` non-visibility singleton
+`suggested_repair[]` evidence for `ELAB-13..16` under the `plan/93` gate, and
+keeps `ELAB-04/07` as mixed / multi-missing no-repair fences. This does not
+freeze a diagnostic / repair ABI or claim OBL-025.

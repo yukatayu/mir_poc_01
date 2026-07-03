@@ -630,7 +630,7 @@ BrowserClient[self] {
 }
 
 #[test]
-fn keeps_non_visibility_singleton_erow001_without_repair() {
+fn emits_non_visibility_singleton_erow001_repair_payload() {
     let source = r#"
 module Surface.Elab.NonVisibilitySingletonFailureRow
 
@@ -699,11 +699,68 @@ BrowserClient[self] {
             "local_premise": "generated_failures_subset_declared_fails"
         })
     );
-    assert!(details[0].get("suggested_repair").is_none());
+    let repair = &details[0]["suggested_repair"][0];
+    assert_no_placeholder_repair_values(repair);
+    assert_eq!(repair["repair_family"], "add-to-fails-row");
+    assert_eq!(repair["diagnostic_family"], "E-ROW-001");
+    assert_eq!(
+        repair["applies_to"],
+        serde_json::json!({
+            "legacy_code": "generated_failure_not_declared",
+            "canon_id": "E-ROW-001",
+            "request_id": "req-0001"
+        })
+    );
+    assert_eq!(repair["target_kind"], "when_fails_row");
+    assert_eq!(
+        repair["target_context"],
+        serde_json::json!({
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+            "locus": "role:BrowserClient",
+            "event_name": "attack"
+        })
+    );
+    assert_eq!(repair["missing_failure"], "MissingWitness");
+    assert_eq!(
+        repair["required_failures"],
+        serde_json::json!([
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+        ])
+    );
+    assert_eq!(
+        repair["declared_failures"],
+        serde_json::json!(["MissingCapability", "RouteUnavailable", "StaleMembership"])
+    );
+    assert_eq!(
+        repair["local_effect"]["declared_failures_after"],
+        serde_json::json!([
+            "MissingCapability",
+            "RouteUnavailable",
+            "StaleMembership",
+            "MissingWitness"
+        ])
+    );
+    assert_eq!(
+        repair["local_premise"],
+        "generated_failures_subset_declared_fails"
+    );
+    assert_eq!(
+        repair["single_edit_assumption"],
+        "erow001_non_visibility_singleton_row_addition_only"
+    );
+    assert_eq!(
+        repair["non_goal"],
+        "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success"
+    );
+    assert_eq!(repair["repair_non_final"], true);
+    assert_eq!(repair["lab_non_final"], true);
 }
 
 #[test]
-fn sample_fixtures_cover_each_non_visibility_singleton_without_repair() {
+fn sample_fixtures_cover_each_non_visibility_singleton_with_repair_payload() {
     let repo_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
     let cases = [
         (
@@ -774,8 +831,71 @@ fn sample_fixtures_cover_each_non_visibility_singleton_without_repair() {
                 .starts_with("when_fails_row|"),
             "{path}"
         );
-        assert!(details[0].get("suggested_repair").is_none(), "{path}");
         assert_no_placeholder_repair_values(&details[0]["failure_row_context"]);
+        let repair = &details[0]["suggested_repair"][0];
+        assert_no_placeholder_repair_values(repair);
+        assert_eq!(repair["repair_family"], "add-to-fails-row", "{path}");
+        assert_eq!(repair["diagnostic_family"], "E-ROW-001", "{path}");
+        assert_eq!(
+            repair["applies_to"],
+            serde_json::json!({
+                "legacy_code": "generated_failure_not_declared",
+                "canon_id": "E-ROW-001",
+                "request_id": "req-0001"
+            }),
+            "{path}"
+        );
+        assert_eq!(repair["target_kind"], "when_fails_row", "{path}");
+        assert_eq!(
+            repair["target_context"],
+            serde_json::json!({
+                "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+                "locus": "role:BrowserClient",
+                "event_name": "attack"
+            }),
+            "{path}"
+        );
+        assert_eq!(
+            repair["missing_failure"],
+            serde_json::json!(missing_failure),
+            "{path}"
+        );
+        assert_eq!(
+            repair["required_failures"],
+            serde_json::json!([
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership"
+            ]),
+            "{path}"
+        );
+        assert_eq!(repair["declared_failures"], declared_failures, "{path}");
+        let mut declared_failures_after = repair["declared_failures"]
+            .as_array()
+            .expect("declared_failures is an array")
+            .clone();
+        declared_failures_after.push(repair["missing_failure"].clone());
+        assert_eq!(
+            repair["local_effect"]["declared_failures_after"],
+            Value::Array(declared_failures_after),
+            "{path}"
+        );
+        assert_eq!(
+            repair["local_premise"], "generated_failures_subset_declared_fails",
+            "{path}"
+        );
+        assert_eq!(
+            repair["single_edit_assumption"], "erow001_non_visibility_singleton_row_addition_only",
+            "{path}"
+        );
+        assert_eq!(
+            repair["non_goal"],
+            "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+            "{path}"
+        );
+        assert_eq!(repair["repair_non_final"], true, "{path}");
+        assert_eq!(repair["lab_non_final"], true, "{path}");
     }
 }
 
