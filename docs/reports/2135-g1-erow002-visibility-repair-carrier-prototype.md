@@ -212,8 +212,11 @@ None.
 
 ## Commit / push status
 
-Pending before commit; full validation has passed and the next step is
-`git commit --no-gpg-sign` followed by push.
+- Implementation package commit `094010c6` (`Add G1 E-ROW visibility repair
+  carrier`) was pushed to `origin/main`.
+- This report status correction is a follow-up documentation-only update made
+  immediately after the implementation push so the report does not retain the
+  draft-time pending status.
 
 ## Sub-agent session close status
 
