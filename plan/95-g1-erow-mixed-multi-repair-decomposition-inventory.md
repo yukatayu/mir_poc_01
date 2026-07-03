@@ -33,6 +33,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB `ELAB-07` set-insertion gate review:
   `plan/97-g1-erow07-set-insertion-gate-review.md`
+- LAB `ELAB-04` mixed visibility branch inventory:
+  `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -214,6 +216,13 @@ docs-only candidate vocabulary for the future choices listed here:
 This does not change the current policy. `ELAB-04` and `ELAB-07` still omit
 `suggested_repair`, and the executable guard still requires exactly one
 missing failure before emitting a repair payload.
+
+`plan/97` separately records that `ELAB-07` should remain no-repair until
+set-insertion atomicity or bundle semantics are explicit. `plan/98` separately
+records that `ELAB-04` remains no-repair because the row is both multi-missing
+and mixed across base remote-request failures plus a `VisibilityDenied`
+branch; future widening needs diagnostic ownership, branch association, and
+ordering / ranking before any payload change.
 
 ## Suggested next packages
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 02:10 JST
+最終更新: 2026-07-04 02:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -253,9 +253,12 @@ semantic source authority.
   inventory plus candidate set-insertion / bundle payload vocabulary and an
   `ELAB-07` gate review that keeps it no-repair until set-insertion atomicity,
   bundle semantics, partial-repair status, diagnostic association, ordering,
-  and ranking are explicit. `ELAB-04` additionally needs visibility split. It
-  still has no proof, no canon status movement, no final repair ABI, no repair
-  ranking, no set-insertion support, and no multi-edit support. This remains
+  and ranking are explicit. `ELAB-04` now has a separate mixed visibility
+  branch inventory that keeps it no-repair until base remote-request and
+  `VisibilityDenied` branch ownership / association / ordering / ranking are
+  explicit. It still has no proof, no canon status movement, no final repair
+  ABI, no repair ranking, no visibility-repair ranking, no set-insertion
+  support, and no multi-edit support. This remains
   before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
@@ -560,7 +563,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, and an `ELAB-07` gate review that keeps executable output no-repair until whole-gap set-insertion or bundle semantics are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review that keeps executable output no-repair until whole-gap set-insertion or bundle semantics are explicit, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -574,6 +577,14 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 02:42 JST
+  `plan/98-g1-erow04-mixed-visibility-branch-inventory.md` を追加し、
+  `ELAB-04` は base remote-request branch と `VisibilityDenied` branch が
+  混在する no-repair row として扱う gate を整理した。executable
+  `suggested_repair[]` は広げず、diagnostic ownership、branch association、
+  ordering / ranking、visibility-repair ranking、set-insertion support、
+  bundle semantics support、OBL-025 proof / completion、canon ledger movement、
+  final repair ABI、G1 exit は主張していない。
 - 2026-07-04 02:10 JST
   `plan/97-g1-erow07-set-insertion-gate-review.md` を追加し、`ELAB-07` は
   現時点では no-repair を維持すると整理した。current payload は singleton-only

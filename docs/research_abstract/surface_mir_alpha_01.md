@@ -94,7 +94,10 @@ Actualized rows:
 - `ELAB-01`: cross-locus indexed read generates a remote read request and observe edge.
 - `ELAB-02`: nested foreign place write generates an owner-directed remote write request.
 - `ELAB-03`: private/non-visible field auto communication is rejected.
-- `ELAB-04`: underdeclared generated failure row is rejected.
+- `ELAB-04`: underdeclared generated failure row is rejected; current LAB
+  branch inventory keeps it no-repair because it mixes base remote-request
+  failures with `VisibilityDenied` and lacks diagnostic ownership / branch
+  association / ranking semantics.
 - `ELAB-05`: generated Core IR carries source spans.
 - `ELAB-06`: unsupported statements reject instead of being silently dropped.
 - `ELAB-07`: write-side underdeclared generated failure row is rejected; current

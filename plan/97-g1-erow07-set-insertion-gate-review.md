@@ -27,6 +27,8 @@ not claim G1 exit.
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
 - LAB set-insertion / bundle payload inventory:
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
+- LAB `ELAB-04` mixed visibility branch inventory:
+  `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB singleton repair prototype:
   `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB OBL-025 statement draft:
@@ -199,7 +201,9 @@ Safe reading:
 - `ELAB-10` and `ELAB-13..16` are current singleton repair-bearing evidence.
 - `ELAB-07` is pressure evidence for set insertion or grouped repair semantics.
 - `ELAB-04` is separate pressure evidence for mixed visibility and
-  non-visibility branch decomposition.
+  non-visibility branch decomposition; `plan/98` keeps it no-repair until
+  diagnostic ownership, branch association, and ordering / ranking are
+  explicit.
 - No current row proves OBL-025 or moves canon ledger status.
 
 ## Suggested next packages

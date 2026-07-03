@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 02:10 JST
+最終更新: 2026-07-04 02:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -183,6 +183,14 @@ Current holding state:
   It does not widen `suggested_repair[]`, add set-insertion support, prove
   OBL-025, freeze repair ABI, claim multi-edit support, claim conformance,
   claim G1 exit, or edit canon.
+- `plan/98-g1-erow04-mixed-visibility-branch-inventory.md` now records the
+  docs-first branch inventory for `ELAB-04`. Current executable repair
+  payloads remain singleton-only, so the mixed base remote-request /
+  `VisibilityDenied` row stays no-repair until diagnostic ownership, branch
+  association, ordering / ranking, and visibility-repair alternatives are
+  explicit. It does not widen `suggested_repair[]`, add set-insertion or
+  bundle support, prove OBL-025, freeze repair ABI, claim repair ranking,
+  claim multi-edit support, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -195,7 +203,7 @@ next line.
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `E-ROW ELAB-07 set-insertion executable preflight` | `G1` reserve | only if promoted, design a non-final set-insertion payload model and tests proving whole rejected-gap coverage before any Rust output widening | no code widening unless set insertion is accepted as one source edit or bundle semantics are explicit |
-| `E-ROW mixed visibility branch inventory` | `G1` reserve | refine `ELAB-04` visibility/base branch separation and alternative visibility repairs before any ranking or mixed payload work | docs-only; keep `ELAB-04` no-repair |
+| `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |

@@ -35,6 +35,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
 - LAB `ELAB-07` set-insertion gate review:
   `plan/97-g1-erow07-set-insertion-gate-review.md`
+- LAB `ELAB-04` mixed visibility branch inventory:
+  `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `scripts/tests/test_surface_mir_samples.py`,
@@ -289,6 +291,9 @@ Recommended next ordering:
 1. Keep `ELAB-04/07` no-repair in executable output.
    `plan/97` confirms that `ELAB-07` should stay no-repair until set insertion
    is explicitly accepted as one source edit or bundle semantics are defined.
+   `plan/98` confirms that `ELAB-04` should stay no-repair until base and
+   visibility branches have explicit diagnostic ownership, association, and
+   ordering / ranking semantics.
 2. If proof-side work comes first, refine OBL-025 around:
    - single source edit;
    - set insertion;
