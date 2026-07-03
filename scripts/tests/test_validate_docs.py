@@ -15,6 +15,13 @@ import check_source_hierarchy
 
 
 class ValidateDocsTests(unittest.TestCase):
+    def _canon_notice_text(self) -> str:
+        return (
+            "# canon notice\n\n"
+            "`mirrorea_canon/` is the normative source. Everything outside "
+            "`mirrorea_canon/` is LAB; if LAB text conflicts, canon wins.\n"
+        )
+
     def _valid_template_text(self) -> str:
         return "\n".join(validate_docs.REQUIRED_TEMPLATE_HEADINGS)
 
@@ -39,14 +46,20 @@ class ValidateDocsTests(unittest.TestCase):
                 path.write_text(template_text, encoding="utf-8")
             elif relative == "progress.md":
                 path.write_text(
-                    "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
+                    self._canon_notice_text()
+                    + "\n\n"
+                    + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
                     encoding="utf-8",
                 )
             elif relative == "tasks.md":
                 path.write_text(
-                    "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
+                    self._canon_notice_text()
+                    + "\n\n"
+                    + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
                     encoding="utf-8",
                 )
+            elif relative in validate_docs.CANON_NOTICE_FILES:
+                path.write_text(self._canon_notice_text(), encoding="utf-8")
             else:
                 path.write_text(f"# {relative}\n", encoding="utf-8")
         (root / "docs" / "reports" / "0001-smoke.md").write_text(
@@ -135,6 +148,30 @@ class ValidateDocsTests(unittest.TestCase):
         }
         for path in alpha0_required:
             self.assertIn(path, required)
+
+    def test_required_scaffold_includes_canon_entry_docs(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        canon_required = {
+            "CANON.md",
+            "mirrorea_canon/README.md",
+            "mirrorea_canon/MAP.md",
+            "mirrorea_canon/INDEX.json",
+            "mirrorea_canon/meta/source-hierarchy.md",
+            "mirrorea_canon/adr/ADR-0012.md",
+            "mirrorea_canon/plan/00-gates.md",
+            "mirrorea_canon/plan/01-phases.md",
+            "mirrorea_canon/spec/06-conformance.md",
+            "mirrorea_canon/theory/11-metatheory-ledger.md",
+        }
+
+        for path in canon_required:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
 
     def test_required_scaffold_includes_product_alpha1_boundary_docs(self) -> None:
         required_docs = set(validate_docs.REQUIRED)
@@ -432,6 +469,23 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn("Latest report is missing required sections", stdout.getvalue())
         self.assertIn("0002-latest.md", stdout.getvalue())
         self.assertIn(heading, stdout.getvalue())
+
+    def test_main_rejects_missing_canon_notice(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "README.md").write_text("# README without notice\n", encoding="utf-8")
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Root entry documents are missing canon notices", stdout.getvalue())
+        self.assertIn("README.md", stdout.getvalue())
 
     def test_main_rejects_latest_report_missing_new_required_section(self) -> None:
         heading = "## Reviewer findings and follow-up"

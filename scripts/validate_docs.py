@@ -7,6 +7,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
+    "CANON.md",
     "README.md",
     "AGENTS.md",
     "Documentation.md",
@@ -486,6 +487,15 @@ REQUIRED = [
     ".docs/current-l2-source-sample-authoring-policy.md",
     "sub-agent-pro/mirrorea_mir_computational_core_handoff.md",
     "sub-agent-pro/full-system-completion-001/20-progress-tasks-replacement-model.md",
+    "mirrorea_canon/README.md",
+    "mirrorea_canon/MAP.md",
+    "mirrorea_canon/INDEX.json",
+    "mirrorea_canon/meta/source-hierarchy.md",
+    "mirrorea_canon/adr/ADR-0012.md",
+    "mirrorea_canon/plan/00-gates.md",
+    "mirrorea_canon/plan/01-phases.md",
+    "mirrorea_canon/spec/06-conformance.md",
+    "mirrorea_canon/theory/11-metatheory-ledger.md",
     "docs/reports/TEMPLATE.md",
 ]
 
@@ -546,6 +556,21 @@ TASKS_REQUIRED_HEADINGS = [
 
 UNRESOLVED_TEMPLATE_PLACEHOLDERS = [
     "更新不要 / 更新済み:",
+]
+
+CANON_NOTICE_FILES = [
+    "README.md",
+    "AGENTS.md",
+    "Documentation.md",
+    "progress.md",
+    "tasks.md",
+]
+
+CANON_NOTICE_PHRASES = [
+    "`mirrorea_canon/`",
+    "Everything outside",
+    "is LAB",
+    "canon wins",
 ]
 
 
@@ -639,12 +664,31 @@ def unresolved_template_placeholder_sections(report_text: str) -> list[str]:
     return unresolved
 
 
+def missing_canon_notices() -> dict[str, list[str]]:
+    missing_by_file: dict[str, list[str]] = {}
+    for relative_path in CANON_NOTICE_FILES:
+        text = (ROOT / relative_path).read_text(encoding="utf-8")
+        missing_phrases = [
+            phrase for phrase in CANON_NOTICE_PHRASES if phrase not in text
+        ]
+        if missing_phrases:
+            missing_by_file[relative_path] = missing_phrases
+    return missing_by_file
+
+
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
         print("Missing required files:")
         for p in missing:
             print(" -", p)
+        return 1
+
+    missing_notices = missing_canon_notices()
+    if missing_notices:
+        print("Root entry documents are missing canon notices:")
+        for path, phrases in missing_notices.items():
+            print(f" - {path}: missing {', '.join(phrases)}")
         return 1
 
     reports = sorted((ROOT / "docs" / "reports").glob("[0-9][0-9][0-9][0-9]-*.md"))

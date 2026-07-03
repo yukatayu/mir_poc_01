@@ -4,7 +4,8 @@
 
 `plan/` は、この repo の **long-lived repository memory** である。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `mirrorea_canon/`
+- この `plan/` tree と legacy `specs/` は LAB evidence / historical repository memory
 - snapshot は `Documentation.md` / `progress.md` / `tasks.md`
 - 詳細経緯は `docs/reports/`
 - `plan/` は、その間をつなぐ長期参照を保つ
@@ -14,17 +15,19 @@
 
 ## 先に読む順序
 
-1. `plan/00-index.md`
-2. `plan/01-status-at-a-glance.md`
-3. `plan/02-system-overview-and-positioning.md`
-4. `plan/03-decision-strengths-and-boundaries.md`
-5. current-L2 実装寄りなら `plan/04 ... plan/09`
-6. 全体計画なら `plan/10-roadmap-overall.md`
-7. 直近の research split は `plan/11-roadmap-near-term.md`
-8. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` historical bridge / post-`P21` rollback-durable-migration boundary family / post-`P21` distributed-activation-ordering boundary family / post-`P21` final-public-hotplug-ABI boundary family / alpha-local type-system freeze / layer compatibility freeze / cut-save-load checkpoint / runtime package avatar policy / Mirrorea Spaces alpha E2E / practical alpha-1 / operational α-0.5 / α-0.8 / α-0.9 / host-I/O and session runtime / product alpha-1 public boundary / operational product sample suite / portal-shard future boundary / Mir computational core / Transform-PoseGraph / projection-backend boundary / engine adapter boundary / autonomous computational-core execution / Full System V1 source-first roadmap / Surface Mir alpha source-authority roadmap の repository-memory roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`、`plan/36`、`plan/37`、`plan/38`、`plan/39`、`plan/40`、`plan/41`、`plan/42`、`plan/43`、`plan/44`、`plan/45`、`plan/46`、`plan/47`、`plan/48`、`plan/49`、`plan/50`、`plan/51`、`plan/52`、`plan/53`、`plan/54`、`plan/55`、`plan/56`、`plan/57`、`plan/58`、`plan/59`、`plan/60`、`plan/61`、`plan/62`、`plan/63`、`plan/64`、`plan/65`、`plan/66`、`plan/67`、`plan/68`
-9. post-`P-SURF-99` の相談内容 synthesis / source-first management recut memory は `plan/69`
-10. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-11. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+1. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
+   task-specific canon files を先に読む
+2. LAB memory として `plan/00-index.md`
+3. `plan/01-status-at-a-glance.md`
+4. `plan/02-system-overview-and-positioning.md`
+5. `plan/03-decision-strengths-and-boundaries.md`
+6. current-L2 実装寄りなら `plan/04 ... plan/09`
+7. 全体計画なら `plan/10-roadmap-overall.md`
+8. 直近の research split は `plan/11-roadmap-near-term.md`
+9. projection / placement と hot-plug / transport / backend guardrail / avatar slice / typed external executable widening / viewer prototype / public-freeze mixed gate / post-`P18` user-spec hold option inventory / `VerificationLayer` widening threshold / `AttachPoint` minimal contract / `FAIRY-05` carrier bundling / hot-plug real migration rollback boundary / runtime-crate hot-plug engine ownership cut / runtime-crate hot-plug carrier admission cut / post-`P20` historical bridge / post-`P21` rollback-durable-migration boundary family / post-`P21` distributed-activation-ordering boundary family / post-`P21` final-public-hotplug-ABI boundary family / alpha-local type-system freeze / layer compatibility freeze / cut-save-load checkpoint / runtime package avatar policy / Mirrorea Spaces alpha E2E / practical alpha-1 / operational α-0.5 / α-0.8 / α-0.9 / host-I/O and session runtime / product alpha-1 public boundary / operational product sample suite / portal-shard future boundary / Mir computational core / Transform-PoseGraph / projection-backend boundary / engine adapter boundary / autonomous computational-core execution / Full System V1 source-first roadmap / Surface Mir alpha source-authority roadmap の repository-memory roadmap は `plan/20`、`plan/21`、`plan/22`、`plan/23`、`plan/24`、`plan/25`、`plan/26`、`plan/27`、`plan/28`、`plan/29`、`plan/30`、`plan/31`、`plan/32`、`plan/33`、`plan/34`、`plan/35`、`plan/36`、`plan/37`、`plan/38`、`plan/39`、`plan/40`、`plan/41`、`plan/42`、`plan/43`、`plan/44`、`plan/45`、`plan/46`、`plan/47`、`plan/48`、`plan/49`、`plan/50`、`plan/51`、`plan/52`、`plan/53`、`plan/54`、`plan/55`、`plan/56`、`plan/57`、`plan/58`、`plan/59`、`plan/60`、`plan/61`、`plan/62`、`plan/63`、`plan/64`、`plan/65`、`plan/66`、`plan/67`、`plan/68`
+10. post-`P-SURF-99` の相談内容 synthesis / source-first management recut memory は `plan/69`
+11. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+12. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

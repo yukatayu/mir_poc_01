@@ -1,12 +1,16 @@
 # 00 — 文書マップ
 
+Canon notice: `mirrorea_canon/` is now the normative source. This legacy
+`specs/` document is LAB evidence / historical repository memory unless a claim
+is mirrored into canon.
+
 この文書は、主要な関心事がそれぞれどこに書かれているかを読者または agent に示す。
 
 ## planning document
 
 - `plan/`
   - `specs/` と `docs/reports/` と code anchor を横断して、現況、roadmap、helper stack、fixture catalog、open problems、maintenance rule を長期参照しやすく整理した人間向け repository memory である。
-  - 規範判断の正本ではない。意味論や decision の正本は `specs/` に残る。
+  - 規範判断の正本ではない。意味論や decision の現行正本は `mirrorea_canon/` に置く。
   - current repo の現在地や PoC 検証基盤の call chain を素早く掴みたい場合は `plan/00-index.md` から読む。
   - `plan/19-repository-map-and-taxonomy.md` は、repo の current layer-aware map、sample/script taxonomy、staged migration plan を repository memory として整理する文書である。
   - `plan/27-public-api-parser-gate-roadmap.md` は、`P18` public API / parser grammar gate の repo-side first-cut closeout を repository memory として整理する文書である。
@@ -16,7 +20,7 @@
 - `tasks.md`
   - current self-driven task package と、方針決定が必要な current blocker / open question を読みやすく整理した current task map である。
   - append で履歴を積まず、現況に合わせて全体を書き直す snapshot として扱う。
-  - 規範判断の正本ではない。根拠は `specs/`、`plan/`、`docs/reports/` を参照する。
+  - 規範判断の正本ではない。現行根拠は `mirrorea_canon/` を優先し、legacy `specs/`、`plan/`、`docs/reports/` は LAB evidence として参照する。
 - `samples_progress.md`
   - phase / layer ごとの runnable sample、unit validation、E2E、debug / visualization、report、build / storage 環境を一覧する dashboard である。
   - 規範判断の正本ではない。sample / helper / tests / reports の current evidence を current status として圧縮した文書である。

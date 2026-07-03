@@ -1,5 +1,11 @@
 # Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform
 
+**Canon notice:** `mirrorea_canon/` is the normative source for project
+direction, theory, ADRs, conformance, and process. Everything outside
+`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
+notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
+`plan/` as `LAB:` evidence unless mirrored into canon.
+
 この repository は、4 系統を分離可能なまま扱う **specification-first research repo** です。
 
 - **Mir**

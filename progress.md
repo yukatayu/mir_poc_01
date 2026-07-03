@@ -1,14 +1,20 @@
 # progress
 
-最終更新: 2026-07-02 18:03 JST
+最終更新: 2026-07-03 17:38 JST
+
+**Canon notice:** `mirrorea_canon/` is the normative source for project
+direction, theory, ADRs, conformance, and process. Everything outside
+`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
+notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
+`plan/` as `LAB:` evidence unless mirrored into canon.
 
 ## document role
 
 This document is the repo-wide **current roadmap snapshot**. It is not normative
 source.
 
-- Normative source: `specs/`
-- Long-term repository memory: `plan/`
+- Normative source: `mirrorea_canon/`
+- LAB repository memory / evidence: `plan/`, legacy `specs/`
 - Runnable dashboard: `samples_progress.md`
 - Current task map: `tasks.md`
 - Execution evidence: `docs/reports/`
@@ -49,6 +55,12 @@ semantic source authority.
 ## current milestone position
 
 - Current package: none promoted for the Surface line after `P-SURF-99`.
+- Current canon position: `mirrorea_canon/plan/01-phases.md` places the project
+  at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
+  not canon implementation-state completion.
+- Current migration note: root LAB entry points now point to `mirrorea_canon/`
+  as canon. The next management gap is a reconciliation ledger from legacy LAB
+  claims to canon IDs / OPEN entries.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -360,6 +372,13 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-03 17:38 JST
+  `mirrorea_canon/` を canon-first source hierarchy として読み込み、local
+  checks、sub-agent review、Oracle consult で整合性を確認した。canon 内部は
+  T0/G0 の大局正本として採用可能だが、既存 LAB 文書が旧 `specs/` 正本表現を
+  持っていたため、root `CANON.md`、entry banner、validator guardrail、
+  clean-near-end / highlighter の旧 `world` 語彙注記を追加した。次は
+  LAB-to-canon reconciliation ledger と G1 ordinary assignment target。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

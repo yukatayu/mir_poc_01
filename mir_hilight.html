@@ -632,6 +632,7 @@
   <script>
     const samples = JSON.parse(document.getElementById('mir-sample-data').textContent);
 
+    // `world` is legacy LAB vocabulary and is not highlighted as current canon core.
     const KEYWORDS = new Set([
       'actor', 'after', 'allow', 'and', 'as', 'at', 'attach', 'authority', 'atomic_cut',
       'by', 'capability', 'capture', 'captures', 'chain', 'config', 'cost', 'critical',
@@ -644,11 +645,11 @@
       'published', 'produces', 'public_closure', 'reason', 'require', 'requires', 'resource',
       'return', 'shared', 'stable', 'stage', 'state', 'status', 'theory', 'to', 'todo',
       'transition', 'true', 'false', 'using', 'use', 'value', 'via', 'wait', 'while', 'witness',
-      'witnessed', 'world'
+      'witnessed'
     ]);
 
     const DECLARATION_PATTERNS = [
-      /\b(?:module|principal|resource|effect|transition|model|actor|process|property|world|place|member|capability|state|stable|config)\s+([A-Za-z_][A-Za-z0-9_#.-]*(?:\[[A-Za-z_][A-Za-z0-9_#.-]*\])?)/g,
+      /\b(?:module|principal|resource|effect|transition|model|actor|process|property|place|member|capability|state|stable|config)\s+([A-Za-z_][A-Za-z0-9_#.-]*(?:\[[A-Za-z_][A-Za-z0-9_#.-]*\])?)/g,
       /\bindex\s+theory\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\bcapture\s+theory\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\bgame\s+package\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,

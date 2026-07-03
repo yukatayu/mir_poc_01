@@ -1,11 +1,17 @@
 # ドキュメント要約
 
+**Canon notice:** `mirrorea_canon/` is the normative source for project
+direction, theory, ADRs, conformance, and process. Everything outside
+`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
+notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
+`plan/` as `LAB:` evidence unless mirrored into canon.
+
 ## この文書の役割
 
 この文書は、repo 全体の **current snapshot を短く正確に読む入口** です。
 
-- 規範判断の正本は `specs/`
-- 長期の repository memory は `plan/`
+- 規範判断の正本は `mirrorea_canon/`
+- 旧 `specs/` と `plan/` は LAB evidence / repository memory
 - workflow / evidence snapshot は `progress.md`
 - current task map は `tasks.md`
 - runnable sample dashboard は `samples_progress.md`

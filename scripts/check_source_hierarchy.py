@@ -11,12 +11,24 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 REQUIRED_PATHS: dict[str, list[str]] = {
     "root_docs": [
+        "CANON.md",
         "AGENTS.md",
         "README.md",
         "Documentation.md",
         "progress.md",
         "tasks.md",
         "samples_progress.md",
+    ],
+    "canon": [
+        "mirrorea_canon/README.md",
+        "mirrorea_canon/MAP.md",
+        "mirrorea_canon/INDEX.json",
+        "mirrorea_canon/meta/source-hierarchy.md",
+        "mirrorea_canon/adr/ADR-0012.md",
+        "mirrorea_canon/plan/00-gates.md",
+        "mirrorea_canon/plan/01-phases.md",
+        "mirrorea_canon/spec/06-conformance.md",
+        "mirrorea_canon/theory/11-metatheory-ledger.md",
     ],
     "specs": [
         "specs/00-document-map.md",

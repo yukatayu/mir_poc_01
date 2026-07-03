@@ -1,14 +1,20 @@
 # tasks
 
-最終更新: 2026-06-25 18:10 JST
+最終更新: 2026-07-03 17:38 JST
+
+**Canon notice:** `mirrorea_canon/` is the normative source for project
+direction, theory, ADRs, conformance, and process. Everything outside
+`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
+notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
+`plan/` as `LAB:` evidence unless mirrored into canon.
 
 ## document role
 
 This document is the repo-wide **current task map**. It is not normative source
 and is not append-only history.
 
-- Normative source: `specs/`
-- Repository memory: `plan/`
+- Normative source: `mirrorea_canon/`
+- LAB repository memory / evidence: `plan/`, legacy `specs/`
 - Status snapshot: `progress.md`
 - Runnable dashboard: `samples_progress.md`
 - Execution evidence: `docs/reports/`
@@ -19,6 +25,11 @@ No current promoted Surface package after `P-SURF-99` closeout.
 
 Current holding state:
 
+- `mirrorea_canon/` is the canon-first source for direction, theory, ADRs,
+  conformance, and process. Existing LAB evidence remains useful, but does not
+  override canon.
+- Canon phase reading is T0/G0 rebaseline. The immediate management gap is
+  reconciliation from legacy LAB claims to canon IDs / OPEN entries.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -37,8 +48,9 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `planning-ledger pilot` | `Macro 0/1` front-half | create a non-normative concept / claim / open-problem / ADR-candidate inventory for axis, semantic strata, ordinary assignment, and non-axis boundaries | ledger remains explicitly non-normative; `specs/` unchanged; report records unresolved promotion questions |
-| `ordinary-assignment target draft` | `Macro 1/5` front-half | draft the target obligation for Surface assignment elaboration preserving authority, failure row, dependency, generated communication, and source span | no theorem discharge claim; target obligation and proof boundary are separated |
+| `LAB-to-canon reconciliation ledger` | `T0/G0` source-hierarchy closeout | map legacy LAB specs / plan / snapshot claims to canon IDs, rejected historical claims, or OPEN entries | ledger remains LAB evidence; no canon L0/L1 change without proposal / human decision / ADR or changelog as required |
+| `ordinary-assignment target draft` | `G1` front-half | draft the target obligation for ordinary assignment elaboration preserving authority, failure row, dependency, generated communication, and source span | no theorem discharge claim; target obligation and proof boundary are separated in canon terms |
+| `planning-ledger pilot` | `Macro 0/1` reserve | create a non-normative concept / claim / open-problem / ADR-candidate inventory for axis, semantic strata, ordinary assignment, and non-axis boundaries | ledger remains explicitly non-normative; canon unchanged; report records unresolved promotion questions |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
 
 ## ordered self-driven packages

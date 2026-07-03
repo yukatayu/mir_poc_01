@@ -1,5 +1,11 @@
 # AGENTS.md
 
+**Canon notice:** `mirrorea_canon/` is the normative source for project
+direction, theory, ADRs, conformance, and process. Everything outside
+`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
+notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
+`plan/` as `LAB:` evidence unless mirrored into canon.
+
 This repository is intended for repeated work by agents that may start with **no retained context**.
 The repository therefore treats documentation structure as part of the project's correctness.
 
@@ -31,12 +37,13 @@ source hierarchy; do not treat an external chat as normative state.
 ## Non-negotiable rules
 
 1. **Read in order**
-   - Start with `README.md`, then `Documentation.md`, then the ordered specs in `specs/00...03`, then `specs/09`, then the subsystem-specific document you need.
-   - If the task asks about **current status / progress / remaining steps / roadmap**, also read `progress.md` after `Documentation.md`.
+   - Start with `mirrorea_canon/README.md`, then `mirrorea_canon/MAP.md`, then the task-specific canon files named from there. Use `CANON.md` as the root-level reminder of the source hierarchy.
+   - Then read LAB entry points as needed: `README.md`, `Documentation.md`, `progress.md`, `tasks.md`, `samples_progress.md`, and the relevant legacy `specs/` / `plan/` files as evidence, not as canon.
+   - If the task asks about **current status / progress / remaining steps / roadmap**, also read `progress.md` and `tasks.md` as LAB snapshots after the canon files.
    - If the task asks about **phase recut / roadmap rewrite / progress/tasks reorganization**, also read `.docs/progress-task-axes.md` after `progress.md`.
    - If the user or task names a specific `sub-agent-pro/*.md` handoff, read that handoff in the user-specified order before continuing the standard repository sequence.
-  - Keep the source hierarchy explicit: `specs/` = 規範正本, `plan/` = repository memory, `docs/reports/` = 作業証跡, `progress.md` / `tasks.md` = current snapshot, `samples_progress.md` = runnable sample dashboard, `.docs/` / `docs/` = reader-facing or policy docs, `sub-agent-pro/` = working directive / handoff であり規範正本ではない。
-   - `progress.md` is a rough status snapshot, not a normative source. Normative judgments remain in `specs/` and long-term repository memory remains in `plan/`.
+   - Keep the source hierarchy explicit: `mirrorea_canon/` = 規範正本, `specs/` / `plan/` = LAB evidence / repository memory, `docs/reports/` = 作業証跡, `progress.md` / `tasks.md` = current LAB snapshot, `samples_progress.md` = runnable sample dashboard, `.docs/` / `docs/` = reader-facing or policy docs, `sub-agent-pro/` = working directive / handoff であり規範正本ではない。
+   - `progress.md` is a rough LAB status snapshot, not a normative source. Normative judgments remain in `mirrorea_canon/`; long-term historical LAB memory remains in `plan/`.
 
 2. **Do not invent requirements**
    - If something is not decided, write **UNRESOLVED** or **OPEN QUESTION**.
@@ -137,7 +144,8 @@ Every report should contain, in this order:
 
 ## Editing policy
 
-- `specs/` are normative documents. Edit carefully.
+- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, human decision, required ADR / changelog / index update.
+- Legacy LAB `specs/` remain historical evidence and implementation memory. Edit carefully, and do not treat them as canonical unless the claim is mirrored into `mirrorea_canon/`.
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.
 - Keep diagrams in Mermaid source (`docs/diagrams/*.mmd`).
@@ -176,7 +184,7 @@ Every report should contain, in this order:
 - 更新が不要な場合でも、report に **`plan/ 更新不要`** と明記すること。
 - `plan/` では、決定・未決・仮説・履歴 / comparison を分けて書くこと。
 - `plan/` は docs mirror と同じく repo の一級成果物として扱うこと。
-- current L2 / parser-free PoC / helper stack / roadmap task では、`Documentation.md` と基礎 specs に加えて、`plan/00-index.md` と relevant な `plan/` ファイルも読むこと。ただし規範判断の正本は常に `specs/` とする。
+- current L2 / parser-free PoC / helper stack / roadmap task では、canon files に加えて `Documentation.md`、relevant legacy specs、`plan/00-index.md` と relevant な `plan/` ファイルを LAB evidence として読むこと。ただし規範判断の正本は常に `mirrorea_canon/` とする。
 
 ## progress.md 維持ルール
 
@@ -200,7 +208,7 @@ Every report should contain, in this order:
   - `着手可能` = 非本質部分を先に進めても手戻りが比較的小さい
   - `要仕様確認` = user 側の目的 / 保証範囲 / 非機能要件が足りず、勝手に詰めると手戻りが大きい
   - `後段依存` = 先行 layer / 先行 decision が固まるまで本格着手しない方がよい
-- `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `specs/`、長期参照整理は `plan/` に置くこと。
+- `progress.md` では、決定済みの規範判断を新たに作らない。規範判断の正本は `mirrorea_canon/`、長期参照整理は LAB `plan/` に置くこと。
 - `progress.md` の末尾には、task close ごとに **日時つきの簡潔な作業ログ** を追記すること。
   - 粒度は「何を検証したか」「何が通って次に進めるようになったか」が分かる 1 行でよい。
   - 形式検証・実装・docs-only task を問わず、repo の current status に影響する non-trivial task では原則として追記すること。
@@ -269,7 +277,7 @@ Every report should contain, in this order:
   - 何に影響するか
   - 主要な選択肢
   - current recommendation / 見解
-- `tasks.md` は規範判断の正本ではない。規範判断は `specs/`、長期比較と repository memory は `plan/` に残すこと。
+- `tasks.md` は規範判断の正本ではない。規範判断は `mirrorea_canon/`、長期比較と historical repository memory は LAB `plan/` に残すこと。
 - `tasks.md` を更新しなかった場合でも、report に **`tasks.md 更新不要`** と明記すること。
 
 ## review と task close の運用

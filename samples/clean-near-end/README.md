@@ -1,10 +1,13 @@
 # samples/clean-near-end
 
+Canon note: this is LAB evidence. It preserves the previous active clean sample
+suite and older vocabulary where needed; it is not the normative canon.
+
 このディレクトリは、repo-local alpha 向けの **active clean sample suite** です。
 
 ## current rule
 
-- active canonical sample はこのディレクトリだけを正本として扱います
+- active LAB clean sample はこのディレクトリを current evidence として扱います
 - old sample は archive に残しても、active path には戻しません
 - domain predicate は built-in ではありません
 - authority / label / capture / region / cost は user-defined finite theory です
