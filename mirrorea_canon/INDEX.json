@@ -1,0 +1,934 @@
+{
+ "canon_version": "0.1.0",
+ "files": 69,
+ "entries": [
+  {
+   "id": "root/changelog",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/style-guide"
+   ],
+   "summary": "canon 自体の版履歴と改定手続きの要約。",
+   "open_items": [],
+   "path": "CHANGELOG.md",
+   "bytes": 883
+  },
+  {
+   "id": "root/glossary",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0001",
+    "adr/ADR-0002"
+   ],
+   "summary": "概念台帳 CON-###。定義 1-2 行、所属層、状態、旧語彙対応。",
+   "open_items": [
+    "OPEN-001"
+   ],
+   "path": "GLOSSARY.md",
+   "bytes": 5543
+  },
+  {
+   "id": "root/map",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "root/readme"
+   ],
+   "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
+   "open_items": [],
+   "path": "MAP.md",
+   "bytes": 2705
+  },
+  {
+   "id": "root/north-star",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "root/glossary"
+   ],
+   "summary": "軸・非軸の 1 枚。プロジェクトの起点、五動詞の軸、地平、世界観の要約。",
+   "open_items": [],
+   "path": "NORTH-STAR.md",
+   "bytes": 3325
+  },
+  {
+   "id": "root/readme",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [],
+   "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
+   "open_items": [],
+   "path": "README.md",
+   "bytes": 2379
+  },
+  {
+   "id": "adr/ADR-0001",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "root/north-star"
+   ],
+   "summary": "World / Room / Avatar / Game はドメイン語彙(S5)であり core primitive でない。",
+   "open_items": [],
+   "path": "adr/ADR-0001.md",
+   "bytes": 1113
+  },
+  {
+   "id": "adr/ADR-0002",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "root/north-star",
+    "adr/ADR-0001"
+   ],
+   "summary": "Event を occurrence / request・publication / domain event の三つに分類し、前二者はソース非出現とする。",
+   "open_items": [
+    "OPEN-002"
+   ],
+   "path": "adr/ADR-0002.md",
+   "bytes": 1580
+  },
+  {
+   "id": "adr/ADR-0003",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0005"
+   ],
+   "summary": "同一状態への並行書き込みは単一権威 + owner-directed request + 明示 handoff で解く。",
+   "open_items": [
+    "OPEN-003"
+   ],
+   "path": "adr/ADR-0003.md",
+   "bytes": 1622
+  },
+  {
+   "id": "adr/ADR-0004",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [],
+   "summary": "fallback は同一 lineage 上の単調劣化。復帰は新 witness / 新 epoch による明示的再取得。",
+   "open_items": [],
+   "path": "adr/ADR-0004.md",
+   "bytes": 1194
+  },
+  {
+   "id": "adr/ADR-0005",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [],
+   "summary": "role claim・indexed key・locus 名・transport・provider・package 名は権限でない。権限は grant の系譜のみ。",
+   "open_items": [],
+   "path": "adr/ADR-0005.md",
+   "bytes": 1177
+  },
+  {
+   "id": "adr/ADR-0006",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0005"
+   ],
+   "summary": "patch は eval でない。parse→check→elaborate→互換→admission→activation cut の pipeline のみが runtime を変異させる。",
+   "open_items": [],
+   "path": "adr/ADR-0006.md",
+   "bytes": 1110
+  },
+  {
+   "id": "adr/ADR-0007",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0002"
+   ],
+   "summary": "順序の source principal は高水準関係族(publication / witness / scoped happens-before)。低レベル memory order は写像先。",
+   "open_items": [
+    "OPEN-004"
+   ],
+   "path": "adr/ADR-0007.md",
+   "bytes": 1110
+  },
+  {
+   "id": "adr/ADR-0008",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0001",
+    "adr/ADR-0002"
+   ],
+   "summary": "Surface 文法 v0 を確定(S{ } / Role[x]{ } 系、== 等価、chain 宣言、// コメント)。Core companion 記法は存置。",
+   "open_items": [
+    "OPEN-005",
+    "OPEN-006"
+   ],
+   "path": "adr/ADR-0008.md",
+   "bytes": 1520
+  },
+  {
+   "id": "adr/ADR-0009",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [],
+   "summary": ".mir ソースが意味の正本。package.mir.json 等は生成物・互換成果物であり正本でない。",
+   "open_items": [],
+   "path": "adr/ADR-0009.md",
+   "bytes": 781
+  },
+  {
+   "id": "adr/ADR-0010",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [],
+   "summary": "検証は三線分離(決定可能 checker / model-check / proof)+ 明示的義務 carrier。Lean-first。Mir は定理証明器にならない。",
+   "open_items": [
+    "OPEN-007"
+   ],
+   "path": "adr/ADR-0010.md",
+   "bytes": 1300
+  },
+  {
+   "id": "adr/ADR-0011",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0005"
+   ],
+   "summary": "stdio を core builtin にしない。外界接続は typed external adapter 境界。transport と host 境界を混同しない。",
+   "open_items": [],
+   "path": "adr/ADR-0011.md",
+   "bytes": 952
+  },
+  {
+   "id": "adr/ADR-0012",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "root/readme"
+   ],
+   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続き。",
+   "open_items": [],
+   "path": "adr/ADR-0012.md",
+   "bytes": 1109
+  },
+  {
+   "id": "adr/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "root/north-star"
+   ],
+   "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
+   "open_items": [],
+   "path": "adr/README.md",
+   "bytes": 1604
+  },
+  {
+   "id": "arch/01-strata",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "arch/readme",
+    "root/glossary"
+   ],
+   "summary": "LAB の L0-L5 と S0-S7 と theory の S0-S5 を一枚に統一した層モデル。",
+   "open_items": [],
+   "path": "architecture/01-strata.md",
+   "bytes": 1602
+  },
+  {
+   "id": "arch/02-boundary-contracts",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "arch/01-strata",
+    "theory/03-elaboration"
+   ],
+   "summary": "層間契約 BND-001..009。各境界の不変条件と、越えてよい情報・越えてはならない情報。",
+   "open_items": [],
+   "path": "architecture/02-boundary-contracts.md",
+   "bytes": 2415
+  },
+  {
+   "id": "arch/03-toolchain",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "arch/02-boundary-contracts",
+    "spec/04-core-ir"
+   ],
+   "summary": "toolchain 各コンポーネントの責務・入出力・してはならないこと。LAB の前身対応。",
+   "open_items": [
+    "OPEN-029"
+   ],
+   "path": "architecture/03-toolchain.md",
+   "bytes": 1735
+  },
+  {
+   "id": "arch/04-runtime-carriers",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/08-patch-hotplug"
+   ],
+   "summary": "runtime carrier のフィールド正本(Envelope / Admission / CapRef / Witness / SaveObject / HotPlug / Observation / Obligation / Diagnostic)。",
+   "open_items": [
+    "OPEN-030"
+   ],
+   "path": "architecture/04-runtime-carriers.md",
+   "bytes": 2132
+  },
+  {
+   "id": "arch/05-satellites",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "arch/01-strata"
+   ],
+   "summary": "PrismCascade と Typed-Effect Wiring Platform の位置づけ。canon v1 の外周、狭い統合点。",
+   "open_items": [
+    "OPEN-031"
+   ],
+   "path": "architecture/05-satellites.md",
+   "bytes": 1491
+  },
+  {
+   "id": "arch/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/00-overview"
+   ],
+   "summary": "階層区分・層間契約・toolchain 責務・carrier 正本・衛星系の読み方。",
+   "open_items": [],
+   "path": "architecture/README.md",
+   "bytes": 619
+  },
+  {
+   "id": "mm/01-programmer-view",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "mm/readme"
+   ],
+   "summary": "プログラマが考えるべき七箇条。何を考えなくてよいかの宣言。",
+   "open_items": [],
+   "path": "mental-model/01-programmer-view.md",
+   "bytes": 2361
+  },
+  {
+   "id": "mm/02-behind-the-scenes",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "mm/01-programmer-view",
+    "scenarios/SCN-02"
+   ],
+   "summary": "SCN-02(attack)一行の裏で起きる全段の時系列。表の一行と裏の各段の対応。",
+   "open_items": [],
+   "path": "mental-model/02-behind-the-scenes.md",
+   "bytes": 2283
+  },
+  {
+   "id": "mm/03-correspondence",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "mm/02-behind-the-scenes",
+    "theory/10-diagnostics",
+    "adr/ADR-0004"
+   ],
+   "summary": "S0↔S1↔S2 対応表、診断の読み方、既知の直感ギャップ三つ。",
+   "open_items": [],
+   "path": "mental-model/03-correspondence.md",
+   "bytes": 2903
+  },
+  {
+   "id": "mm/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/00-overview",
+    "adr/ADR-0002"
+   ],
+   "summary": "表(プログラマ)と裏(システム)の結びつき。直感の正本であり、診断文言の語彙源。",
+   "open_items": [],
+   "path": "mental-model/README.md",
+   "bytes": 906
+  },
+  {
+   "id": "meta/agent-instructions",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012",
+    "plan/02-operating-model"
+   ],
+   "summary": "AI エージェントの読込プロトコルと権限境界。できること・できないこと・衝突時の挙動。",
+   "open_items": [],
+   "path": "meta/agent-instructions.md",
+   "bytes": 2064
+  },
+  {
+   "id": "meta/source-hierarchy",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012"
+   ],
+   "summary": "canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。",
+   "open_items": [],
+   "path": "meta/source-hierarchy.md",
+   "bytes": 1673
+  },
+  {
+   "id": "meta/style-guide",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "root/readme"
+   ],
+   "summary": "執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。",
+   "open_items": [],
+   "path": "meta/style-guide.md",
+   "bytes": 1936
+  },
+  {
+   "id": "plan/00-gates",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/11-metatheory-ledger",
+    "scenarios/readme"
+   ],
+   "summary": "理論凍結ゲート G0-G7。各 exit criteria と「宣言してはならないこと」。",
+   "open_items": [],
+   "path": "plan/00-gates.md",
+   "bytes": 2094
+  },
+  {
+   "id": "plan/01-phases",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "plan/00-gates",
+    "spec/06-conformance"
+   ],
+   "summary": "実装フェーズ T0-T2 / I1-I6。各段階の正確なゴール、何が動き、どの程度実用的か、非宣言。",
+   "open_items": [
+    "OPEN-032"
+   ],
+   "path": "plan/01-phases.md",
+   "bytes": 2518
+  },
+  {
+   "id": "plan/02-operating-model",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012",
+    "meta/agent-instructions"
+   ],
+   "summary": "運用規約。エージェント役割の反転、package 4 種、モラトリアム、KPI、決定の周期、相互レビュー。",
+   "open_items": [],
+   "path": "plan/02-operating-model.md",
+   "bytes": 2117
+  },
+  {
+   "id": "plan/03-risks",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "plan/02-operating-model"
+   ],
+   "summary": "リスク台帳 R-01..R-12。LAB plan/12 の蒸留+相談で特定された構造リスク。",
+   "open_items": [],
+   "path": "plan/03-risks.md",
+   "bytes": 1864
+  },
+  {
+   "id": "plan/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "root/north-star"
+   ],
+   "summary": "計画の読み方。Gate(理論凍結)と Phase(実装)の二軸、運用規約、リスク。",
+   "open_items": [],
+   "path": "plan/README.md",
+   "bytes": 691
+  },
+  {
+   "id": "scenarios/readme",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/06-conformance",
+    "theory/03-elaboration"
+   ],
+   "summary": "10 本の正準シナリオ。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。",
+   "open_items": [],
+   "path": "scenarios/README.md",
+   "bytes": 1493
+  },
+  {
+   "id": "scenarios/SCN-01",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/readme"
+   ],
+   "summary": "双六の roll。非 owner からの普通の代入が owner 宛 request + publish に翻訳される最小例。",
+   "open_items": [],
+   "path": "scenarios/SCN-01-sugoroku-roll.md",
+   "bytes": 1461
+  },
+  {
+   "id": "scenarios/SCN-02",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-01"
+   ],
+   "summary": "attack。ブログ由来の規範例。cross-locus read+write、failure row 包含、THM-001 の主試験。",
+   "open_items": [],
+   "path": "scenarios/SCN-02-attack.md",
+   "bytes": 1537
+  },
+  {
+   "id": "scenarios/SCN-03",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-01"
+   ],
+   "summary": "後から join。admission verdict、epoch 更新、grant 前の書き拒否、可視履歴は過去。",
+   "open_items": [],
+   "path": "scenarios/SCN-03-late-join.md",
+   "bytes": 1594
+  },
+  {
+   "id": "scenarios/SCN-04",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-03"
+   ],
+   "summary": "退出と incarnation 引退。stale key 拒否、tombstone、savepoint による compaction 阻止。",
+   "open_items": [],
+   "path": "scenarios/SCN-04-owner-leave.md",
+   "bytes": 1310
+  },
+  {
+   "id": "scenarios/SCN-05",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-01"
+   ],
+   "summary": "portal。二つの place を跨ぐ移動と可視性。private link は VisibilityDenied。",
+   "open_items": [],
+   "path": "scenarios/SCN-05-portal.md",
+   "bytes": 1298
+  },
+  {
+   "id": "scenarios/SCN-06",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-05"
+   ],
+   "summary": "two-shard。硬い境界。route 不在は宣言された明示的失敗であり、透過の限界を可視化する。",
+   "open_items": [],
+   "path": "scenarios/SCN-06-two-shard.md",
+   "bytes": 1464
+  },
+  {
+   "id": "scenarios/SCN-07",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-01"
+   ],
+   "summary": "gradient 観測。可視性水準の勾配、fields 絞り込み、private 遮断、redaction 単調性。",
+   "open_items": [],
+   "path": "scenarios/SCN-07-gradient-observation.md",
+   "bytes": 1453
+  },
+  {
+   "id": "scenarios/SCN-08",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/readme"
+   ],
+   "summary": "avatar fallback。chain 宣言、lease 失効による単調劣化、write-after-expiry、明示的再取得。",
+   "open_items": [],
+   "path": "scenarios/SCN-08-avatar-fallback.md",
+   "bytes": 1696
+  },
+  {
+   "id": "scenarios/SCN-09",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-03"
+   ],
+   "summary": "patch の受理(DebugLamp)と拒否(self-grant)。拒否は無変異、activation は frontier 束縛。",
+   "open_items": [],
+   "path": "scenarios/SCN-09-patch-accept-reject.md",
+   "bytes": 1494
+  },
+  {
+   "id": "scenarios/SCN-10",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "scenarios/SCN-04"
+   ],
+   "summary": "save/load。consistent cut での保存、stale membership・失効 lease の復活拒否。",
+   "open_items": [],
+   "path": "scenarios/SCN-10-saveload-stale-reject.md",
+   "bytes": 1542
+  },
+  {
+   "id": "spec/01-lexical-and-modules",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0008"
+   ],
+   "summary": "字句(識別子・リテラル・コメント)、予約語、モジュールとインポート。",
+   "open_items": [],
+   "path": "spec/01-lexical-and-modules.md",
+   "bytes": 1380
+  },
+  {
+   "id": "spec/02-surface-grammar",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/01-lexical-and-modules",
+    "adr/ADR-0008",
+    "theory/06-existence-fallback"
+   ],
+   "summary": "Surface Mir v0 の EBNF。place/role ブロック、state、when、join、chain 宣言、式。",
+   "open_items": [
+    "OPEN-005",
+    "OPEN-006"
+   ],
+   "path": "spec/02-surface-grammar.md",
+   "bytes": 3684
+  },
+  {
+   "id": "spec/03-static-semantics",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/02-surface-grammar",
+    "theory/02-types-effects-failures",
+    "theory/03-elaboration"
+   ],
+   "summary": "宣言義務、名前解決、型付け(theory への束縛)、failure row 包含、可視性、keyspace 制限。",
+   "open_items": [],
+   "path": "spec/03-static-semantics.md",
+   "bytes": 2490
+  },
+  {
+   "id": "spec/04-core-ir",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/03-elaboration"
+   ],
+   "summary": "Core IR の交換形(JSON)、生成辺・義務・span の形。Core companion 記法の附録。",
+   "open_items": [
+    "OPEN-026"
+   ],
+   "path": "spec/04-core-ir.md",
+   "bytes": 2487
+  },
+  {
+   "id": "spec/05-runtime-semantics",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority"
+   ],
+   "summary": "参照実装が満たすべき観測可能挙動と、適合試験用の決定的スケジューリング profile。",
+   "open_items": [
+    "OPEN-027"
+   ],
+   "path": "spec/05-runtime-semantics.md",
+   "bytes": 2074
+  },
+  {
+   "id": "spec/06-conformance",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/05-runtime-semantics",
+    "scenarios/readme"
+   ],
+   "summary": "SCN-01..10 を適合性基準として束ねる。適合レベルと合否判定。",
+   "open_items": [],
+   "path": "spec/06-conformance.md",
+   "bytes": 1180
+  },
+  {
+   "id": "spec/07-diagnostics-format",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/10-diagnostics"
+   ],
+   "summary": "診断 ID 体系、必須フィールド、span 形式、文言規則、代表例。",
+   "open_items": [
+    "OPEN-028"
+   ],
+   "path": "spec/07-diagnostics-format.md",
+   "bytes": 2287
+  },
+  {
+   "id": "spec/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/readme",
+    "adr/ADR-0008",
+    "adr/ADR-0009"
+   ],
+   "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
+   "open_items": [],
+   "path": "spec/README.md",
+   "bytes": 848
+  },
+  {
+   "id": "theory/00-overview",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0001",
+    "adr/ADR-0002",
+    "root/glossary"
+   ],
+   "summary": "意味層 S0-S5、4 本のグラフ族、理論全体の分業と依存の見取り図。",
+   "open_items": [],
+   "path": "theory/00-overview.md",
+   "bytes": 3078
+  },
+  {
+   "id": "theory/01-mircore-v0",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/00-overview",
+    "theory/02-types-effects-failures",
+    "adr/ADR-0003",
+    "adr/ADR-0004",
+    "adr/ADR-0005"
+   ],
+   "summary": "MirCore v0 計算体系。抽象構文、実行構成、統合判定、小ステップ操作意味論、定理 statement の所在。",
+   "open_items": [
+    "OPEN-010",
+    "OPEN-011",
+    "OPEN-012"
+   ],
+   "path": "theory/01-mircore-v0.md",
+   "bytes": 9639
+  },
+  {
+   "id": "theory/02-types-effects-failures",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "adr/ADR-0010"
+   ],
+   "summary": "型・mode・effect row・failure row・contract の語彙。有限 index 断片の範囲。",
+   "open_items": [
+    "OPEN-013"
+   ],
+   "path": "theory/02-types-effects-failures.md",
+   "bytes": 3781
+  },
+  {
+   "id": "theory/03-elaboration",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/02-types-effects-failures",
+    "adr/ADR-0002"
+   ],
+   "summary": "Surface→Core elaboration の契約と THM-001(本プロジェクト第一目標定理)。",
+   "open_items": [
+    "OPEN-014"
+   ],
+   "path": "theory/03-elaboration.md",
+   "bytes": 3265
+  },
+  {
+   "id": "theory/04-ordering-and-cuts",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "adr/ADR-0007"
+   ],
+   "summary": "因果関係族、atomic_cut、consistent cut、SaveObject、load 許容性、Z-cycle、durable_cut(all_of)。",
+   "open_items": [
+    "OPEN-015",
+    "OPEN-016"
+   ],
+   "path": "theory/04-ordering-and-cuts.md",
+   "bytes": 4619
+  },
+  {
+   "id": "theory/05-authority",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "adr/ADR-0005"
+   ],
+   "summary": "role claim / admission / capability 系譜 / witness / incarnation の権限代数と THM-004。",
+   "open_items": [
+    "OPEN-017"
+   ],
+   "path": "theory/05-authority.md",
+   "bytes": 2729
+  },
+  {
+   "id": "theory/06-existence-fallback",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "adr/ADR-0004"
+   ],
+   "summary": "存在 DAG、lease、guarded option chain、正規化法則、静的証拠 floor、単調劣化と THM-002。",
+   "open_items": [
+    "OPEN-018",
+    "OPEN-019"
+   ],
+   "path": "theory/06-existence-fallback.md",
+   "bytes": 4197
+  },
+  {
+   "id": "theory/07-observation",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/02-types-effects-failures"
+   ],
+   "summary": "観測=型付き情報効果。label / authority / redaction 単調 / retention と THM-005。",
+   "open_items": [
+    "OPEN-020"
+   ],
+   "path": "theory/07-observation.md",
+   "bytes": 2059
+  },
+  {
+   "id": "theory/08-patch-hotplug",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "adr/ADR-0006"
+   ],
+   "summary": "patch pipeline、互換 carrier、frontier 束縛 activation、否定例、THM-006。",
+   "open_items": [
+    "OPEN-021"
+   ],
+   "path": "theory/08-patch-hotplug.md",
+   "bytes": 2514
+  },
+  {
+   "id": "theory/09-two-layer-time",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/04-ordering-and-cuts",
+    "theory/06-existence-fallback"
+   ],
+   "summary": "離散検証遷移(occurrence DAG)と高頻度ストリーム(pose 等)の二層時間論。frontier 接続、admissibility、保存則。",
+   "open_items": [
+    "OPEN-022",
+    "OPEN-023"
+   ],
+   "path": "theory/09-two-layer-time.md",
+   "bytes": 2617
+  },
+  {
+   "id": "theory/10-diagnostics",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/03-elaboration",
+    "theory/06-existence-fallback"
+   ],
+   "summary": "差し戻しの理論。Diagnostic carrier、blame=失敗した前提、説明健全性・説明完全性。",
+   "open_items": [
+    "OPEN-024"
+   ],
+   "path": "theory/10-diagnostics.md",
+   "bytes": 2225
+  },
+  {
+   "id": "theory/11-metatheory-ledger",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/03-elaboration",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/06-existence-fallback",
+    "theory/07-observation",
+    "theory/08-patch-hotplug"
+   ],
+   "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
+   "open_items": [],
+   "path": "theory/11-metatheory-ledger.md",
+   "bytes": 3320
+  },
+  {
+   "id": "theory/12-literature",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/00-overview",
+    "adr/ADR-0003"
+   ],
+   "summary": "先行研究対比表。何を借り、どこが違うか。新規性の主張の根拠。",
+   "open_items": [
+    "OPEN-025"
+   ],
+   "path": "theory/12-literature.md",
+   "bytes": 4094
+  },
+  {
+   "id": "theory/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/readme",
+    "root/glossary"
+   ],
+   "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
+   "open_items": [],
+   "path": "theory/README.md",
+   "bytes": 1438
+  }
+ ]
+}

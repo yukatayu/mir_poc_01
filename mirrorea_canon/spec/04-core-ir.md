@@ -1,0 +1,59 @@
+---
+id: spec/04-core-ir
+status: L2-working
+maturity: draft
+depends_on: [theory/01-mircore-v0, theory/03-elaboration]
+summary: Core IR の交換形(JSON)、生成辺・義務・span の形。Core companion 記法の附録。
+open_items: [OPEN-026]
+---
+
+# 04 — Core IR exchange form
+
+Purpose: a stable, inspectable JSON form of elaboration output for checker,
+runtime, projector, devtools. Shape (field names L2-working):
+
+```json
+{ "module": "Surface.E2E.SugorokuPositive",
+  "core_items": [
+    { "kind": "transition", "at": "World", "name": "serve_roll", "ops": [
+        { "kind": "write", "state": "player", "key_from": "req.principal",
+          "field": "position", "expr": "...", "span": {"file":"...","range":[l,c,l,c]} } ] },
+    { "kind": "handler_entry", "locus_role": "BrowserClient[self]",
+      "name": "roll", "fails": ["MissingCapability","StaleMembership", "..."] } ],
+  "generated_edges": [
+    { "kind": "request", "from": "BrowserClient[self]", "to": "World",
+      "op": "write(player[self].position)", "caps": ["cap_move"],
+      "witnesses": [], "fails": ["..."], "span": {...} },
+    { "kind": "publish", "at": "World", "state": "player", "field": "position",
+      "visibility": "observer_safe", "span": {...} } ],
+  "obligations": [
+    { "obligation_id": "...", "obligation_kind": "capability|proof|model",
+      "source_refs": ["span..."], "suggested_target": "checker|model_check|proof",
+      "current_status": "undischarged" } ],
+  "source_map": [ {"core_ref": "...", "span": {...}} ] }
+```
+
+Invariants: every generated edge and core op carries a span (BND-001); the
+obligations array is exactly the judgment's O; nothing in the runtime may
+execute Core IR that lacks a checker verdict (BND-004).
+
+## Appendix — Core companion textual notation (non-Surface)
+
+For theory prose, fixtures, and Core-level tests (inherits LAB D-030..D-044):
+
+```text
+perform op on target            direct effect request
+    require pred                statement-local clauses attach to the perform
+    ensure pred
+perform op via chain_ref        request through a canonical chain
+option name on target capability cap lease guard
+    admit pred                  option-local admission metadata
+chain ref = head
+    fallback successor
+        @ lineage(pred -> succ)
+try { ... } fallback { ... }    local rollback + explicit branch
+atomic_cut
+```
+
+These tokens are rejected in Surface v0 (E-PARSE-005). OPEN-026: field-name
+freeze for the JSON form happens at PHASE-I1 exit.
