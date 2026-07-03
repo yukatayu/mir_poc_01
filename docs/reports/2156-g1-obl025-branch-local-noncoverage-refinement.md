@@ -259,7 +259,13 @@ No planned validation was skipped.
 
 ## Commit / push status
 
-Pending.
+Content commit pushed:
+
+- `babd8243f052b4c234633e9323e896952ba8a0b0`
+  `Refine OBL-025 branch-local coverage`
+
+This report status update is committed as the package bookkeeping commit; its
+hash is reported in the package closeout to avoid recursive self-reference.
 
 ## Sub-agent session close status
 
