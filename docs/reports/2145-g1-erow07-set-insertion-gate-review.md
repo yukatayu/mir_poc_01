@@ -367,7 +367,16 @@ Skipped:
 
 ## Commit / push status
 
-Pending at report write.
+- Content commit:
+  `54807b85aa7c144bed3a3f4ee34cc84342206a7a`
+  (`Record ELAB-07 set insertion gate review`).
+- Push status: pushed to `origin/main`.
+- Post-push verification: `git rev-parse HEAD origin/main` returned
+  `54807b85aa7c144bed3a3f4ee34cc84342206a7a` for both refs, and
+  `git status --short --branch` showed `main...origin/main` with no dirty
+  files.
+- This commit / push status update is the follow-up bookkeeping change for the
+  package report.
 
 ## Sub-agent session close status
 
