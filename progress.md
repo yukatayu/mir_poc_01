@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 20:05 JST
+最終更新: 2026-07-03 20:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -71,6 +71,10 @@ semantic source authority.
   SCN-01 and SCN-02 C-static expectations to canon targets, LAB ELAB evidence,
   LAB gaps, and runtime/proof boundaries. It does not claim C-static
   conformance.
+- Current OBL-001 inventory note: `plan/73-g1-obl001-lean-statement-inventory.md`
+  inventories the minimum Lean statement vocabulary, predicate split, SCN row
+  coverage, adjacent-obligation separation, and overfit guards for THM-001. It
+  adds no Lean statement file and does not move OBL status.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -80,8 +84,10 @@ semantic source authority.
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   and static devtools diagnostics floors revalidated.
-- Next gap: the safe self-driven theory package is G1 OBL-001 Lean statement
-  inventory, using the SCN consequence drilldown as input, before any later
+- Next gap: the safe self-driven theory package is either an actual repo-local
+  OBL-001 Lean statement draft, statement only, or a narrow SCN dependency-gap
+  package if the statement would otherwise over-abstract SCN-01 same-field RHS
+  and SCN-02 two-read RHS coverage. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -409,6 +415,12 @@ Research-discovery items:
   C-static 期待を canon target、LAB ELAB support、LAB gap、runtime/proof
   boundary に分解した。C-static conformance、G1 exit、theorem discharge は
   主張していない。次は OBL-001 Lean statement inventory。
+- 2026-07-03 20:21 JST
+  `plan/73-g1-obl001-lean-statement-inventory.md` を追加し、THM-001 / OBL-001 の
+  repo-local Lean statement に必要な最小 datatypes / predicates / theorem shape /
+  SCN row coverage / overfit guard を整理した。Lean statement file、OBL status
+  movement、G1 exit、theorem discharge は主張していない。次は actual OBL-001
+  statement draft または SCN dependency-gap package。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間
