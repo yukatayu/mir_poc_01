@@ -146,12 +146,18 @@ python3 scripts/validate_docs.py
 python3 scripts/check_source_hierarchy.py
 git diff --check
 git ls-files --modified --others --exclude-standard | xargs -r rg -n --pcre2 '<endpoint-form pattern>' || true
+git status --short --branch
+git add Documentation.md README.md docs/research_abstract/surface_mir_alpha_01.md plan/00-index.md plan/90-source-traceability.md plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md plan/96-g1-erow-set-insertion-bundle-payload-inventory.md plan/98-g1-erow04-mixed-visibility-branch-inventory.md progress.md samples/full-system-v1-surface/elaboration/README.md samples_progress.md tasks.md docs/reports/2155-g1-erow04-mixed-visibility-payload-model-preflight.md plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md
+git diff --cached --stat
+git commit --no-gpg-sign -m "Add ELAB-04 mixed preflight"
+git push
+git rev-parse HEAD
 ```
 
 The endpoint-form scan above records the redacted command shape. The local
 command used the real endpoint-form regular expression without writing it into
-this report. Commit, push, and final status commands are still pending at this
-report draft stage.
+this report. Final status commands are run after this bookkeeping update is
+committed and pushed.
 
 ## Evidence / outputs / test results
 
@@ -302,7 +308,12 @@ and docs/source hierarchy checks.
 
 ## Commit / push status
 
-Pending. No package commit has been made yet for this report.
+- Content commit `619a267214431bfa0c5ad61eb4ef2ccf2c2ee83e`
+  (`Add ELAB-04 mixed preflight`) was pushed to `origin/main`.
+- This report-status section is the follow-up bookkeeping update for the
+  package. Final `HEAD == origin/main` verification is performed after this
+  bookkeeping update is committed and pushed, because a commit cannot record
+  its own hash before it exists.
 
 ## Sub-agent session close status
 
