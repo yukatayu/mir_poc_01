@@ -228,7 +228,14 @@ tests focus on projection presence/consistency and basic repair shape.
 
 ## Commit / push status
 
-Pending. Package changes are not committed yet at this report draft stage.
+Implemented, committed, and pushed.
+
+- Package commit:
+  `84dba6951b4744644c702c391d5e0dc140435831`
+  (`Harden OBL-024 projection fixture guards`)
+- Push status: `main` was pushed to `origin/main`, and `HEAD` matched
+  `origin/main` immediately after the package commit.
+- This commit-status note is recorded in the follow-up report-status commit.
 
 ## Sub-agent session close status
 
