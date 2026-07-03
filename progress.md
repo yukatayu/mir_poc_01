@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 21:41 JST
+最終更新: 2026-07-03 21:47 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -108,6 +108,12 @@ semantic source authority.
   clauses behind `WellFormed`, and does not move OBL status, prove OBL-020,
   claim proof skeleton completion, G1/T1/T2 exit, conformance, runtime
   implementation proof, or edit canon.
+- Current E-ROW alignment note:
+  `plan/79-g1-erow-diagnostic-alignment.md` maps canon E-ROW-001/E-ROW-002 to
+  current LAB `generated_failure_not_declared` evidence. It treats ELAB-04 and
+  ELAB-07 as E-ROW-001 evidence and ELAB-10 as E-ROW-002 pressure evidence
+  carried by the same helper-local diagnostic family. It does not freeze a
+  diagnostic ABI, discharge OBL-024/025, claim conformance, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -117,10 +123,10 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the safe self-driven theory package is now either a focused
-  refinement of the LAB OBL-001/020/021 statement drafts if review finds a real
-  gap, or diagnostic alignment for canon
-  E-ROW-001/E-ROW-002 versus LAB `generated_failure_not_declared`. This remains before any later
+- Next gap: the safe self-driven theory package is now either diagnostic
+  carrier inventory for OBL-024/025 prerequisites, optional LAB helper
+  diagnostic ID split for E-ROW-001/E-ROW-002 with tests, or focused refinement
+  of the LAB OBL-001/020/021 statement drafts if review finds a real gap. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -494,6 +500,12 @@ Research-discovery items:
   G1/T1/T2 exit、conformance、runtime implementation proof、canon ledger
   movement は主張していない。次は focused statement refinement または
   E-ROW diagnostic alignment。
+- 2026-07-03 21:47 JST
+  `plan/79-g1-erow-diagnostic-alignment.md` を追加し、canon E-ROW-001 /
+  E-ROW-002 と LAB `generated_failure_not_declared` evidence の対応を整理した。
+  ELAB-04/07 は E-ROW-001 evidence、ELAB-10 は同じ helper-local diagnostic
+  family で表現された E-ROW-002 pressure evidence として読み、diagnostic ABI
+  freeze、OBL-024/025 discharge、C-static conformance、G1 exit は主張していない。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

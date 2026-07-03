@@ -454,6 +454,7 @@ REQUIRED = [
     "plan/76-g1-obl020-021-dependency-inventory.md",
     "plan/77-g1-obl021-lean-statement-draft.md",
     "plan/78-g1-obl020-lean-statement-draft.md",
+    "plan/79-g1-erow-diagnostic-alignment.md",
     "plan/90-source-traceability.md",
     "plan/91-maintenance-rules.md",
     "specs/00-document-map.md",
