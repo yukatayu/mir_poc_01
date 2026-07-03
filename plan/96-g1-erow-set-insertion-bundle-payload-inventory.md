@@ -227,7 +227,10 @@ support beyond the current `ELAB-07` fact pattern.
 
 ## `ELAB-04` future reading
 
-`ELAB-04` should remain no-repair after this package.
+`ELAB-04` should remain no-repair after this package. `plan/107` later adds a
+docs-only preflight that names the mixed wrapper, base remote-request branch,
+visibility branch, association vocabulary, and ordering / ranking deferrals
+that a future executable mixed payload would need.
 
 A future mixed-row payload would need to preserve two branches:
 
@@ -301,10 +304,11 @@ Recommended next ordering:
 
 1. Keep `ELAB-04` no-repair in executable output, and keep the later
    `ELAB-07` set item restricted to the exact `plan/102` fact pattern.
-   `plan/97..102` record the gate, assumption, payload design, and prototype.
-   `plan/98` confirms that `ELAB-04` should stay no-repair until base and
-   visibility branches have explicit diagnostic ownership, association, and
-   ordering / ranking semantics.
+   `plan/97..102` record the gate, assumption, payload design, and prototype;
+   `plan/103..106` record the exactness / row-identity / locus / shape guard
+   chain. `plan/98` confirms that `ELAB-04` should stay no-repair until base
+   and visibility branches have explicit diagnostic ownership, association,
+   and ordering / ranking semantics.
 2. If proof-side work comes first, refine OBL-025 around:
    - single source edit;
    - set insertion;
@@ -324,7 +328,8 @@ Recommended next ordering:
    `plan/102` implements the exact `ELAB-07` positive path only, while keeping
    `ELAB-04` no-repair and preserving singleton rows.
 4. Leave `ELAB-04` no-repair until visibility alternatives and ranking are
-   explicit.
+   explicit. `plan/107` records the preflight vocabulary for that future
+   decision without changing executable output.
 
 ## Open questions
 

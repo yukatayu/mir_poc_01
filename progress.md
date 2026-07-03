@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 06:07 JST
+最終更新: 2026-07-04 06:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -222,18 +222,20 @@ semantic source authority.
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` records why
   `ELAB-07` originally needed set-insertion / bundle / partial-guidance /
   multi-edit decomposition before repair output. `plan/102` now implements the
-  exact set-insertion path for `ELAB-07`; `ELAB-04` still needs
-  visibility-family decomposition and ranking / ordering policy. This does not
-  prove OBL-025, freeze diagnostic/repair ABI, claim repair ranking, claim
-  multi-edit support, claim conformance, or claim G1 exit.
+  exact set-insertion path for `ELAB-07`; `plan/107` now records docs-only
+  `ELAB-04` branch ownership / association / ordering preflight while keeping
+  executable output no-repair. This does not prove OBL-025, freeze
+  diagnostic/repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, or claim G1 exit.
 - Current E-ROW set-insertion / bundle payload inventory note:
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` records
   candidate LAB vocabulary for future set insertion, conjunctive bundles, and
   partial guidance. After `plan/102`, exact `ELAB-07` has one non-final set
-  item, while `ELAB-04` remains no-repair. This does not add general
-  executable set-insertion / bundle support, prove OBL-025, freeze
-  diagnostic/repair ABI, claim repair ranking, claim multi-edit support, claim
-  conformance, or claim G1 exit.
+  item, while `ELAB-04` remains no-repair. `plan/107` names the mixed wrapper /
+  base branch / visibility branch vocabulary and explicitly defers ranking.
+  This does not add general executable set-insertion / bundle support, prove
+  OBL-025, freeze diagnostic/repair ABI, claim repair ranking, claim multi-edit
+  support, claim conformance, or claim G1 exit.
 - Current ELAB-07 set-insertion gate review note:
   `plan/97-g1-erow07-set-insertion-gate-review.md` records that `ELAB-07`
   was kept no-repair until a single-source-edit set-insertion decision or
@@ -302,6 +304,15 @@ semantic source authority.
   not textual-only guidance. This does not add bundle semantics, partial
   guidance output, general set-insertion support, OBL-025 proof / completion,
   conformance, final ABI, or G1 exit.
+- Current ELAB-04 mixed visibility payload-model preflight note:
+  `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md` records a
+  docs-only ownership / association / ordering preflight for future `ELAB-04`
+  mixed payload work. It keeps executable output unchanged and records a
+  conceptual mixed wrapper, base remote-request branch, visibility branch,
+  association vocabulary, and ranking deferrals. This does not add an
+  `ELAB-04` executable payload, set-insertion support, bundle semantics,
+  partial-guidance output, visibility-repair ranking, OBL-025 proof /
+  completion, conformance, final ABI, or G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -322,7 +333,9 @@ semantic source authority.
   multi-request variants, span-based internal association hardening for
   distinct same-event rows, exact-locus hardening for current
   Surface-expressible omitted-row / retargeting proxies, and child / bundle /
-  partial / textual guidance exclusion shape assertions.
+  partial / textual guidance exclusion shape assertions, plus an `ELAB-04`
+  mixed visibility payload-model preflight that names the conceptual mixed
+  wrapper / base branch / visibility branch and keeps ranking deferred.
   `ELAB-07` now emits one `set_insertion` item only for the current exact
   write-side base-failure set gap. `plan/100` accepts the narrow LAB
   source-locus edit assumption for `ELAB-07` only, with
@@ -334,14 +347,15 @@ semantic source authority.
   current `ELAB-07` locus without claiming a final source-locus identity; and
   `plan/106` keeps the emitted repair as one complete top-level set item
   without claiming bundle or partial-guidance semantics.
-  `ELAB-04` now has a separate mixed visibility
-  branch inventory that keeps it no-repair until base remote-request and
-  `VisibilityDenied` branch ownership / association / ordering / ranking are
-  explicit. It still has no proof, no canon status movement, no final repair
-  ABI, no repair ranking, no visibility-repair ranking, no general
-  set-insertion support, and no multi-edit support. This remains before any later
-  user-spec-required reopen for final runtime/transport, final source patch
-  ABI, final viewer/telemetry ABI, or broader public grammar.
+  `ELAB-04` now has a separate mixed visibility branch inventory and
+  payload-model preflight that keep it no-repair while recording conceptual
+  mixed wrapper / base remote-request branch / `VisibilityDenied` branch
+  vocabulary and association / ordering / ranking deferrals. It still has no
+  proof, no canon status movement, no executable `ELAB-04` payload, no final
+  repair ABI, no repair ranking, no visibility-repair ranking, no general
+  set-insertion support, and no multi-edit support. This remains before any
+  later user-spec-required reopen for final runtime/transport, final source
+  patch ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -647,7 +661,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -666,7 +680,16 @@ Entries below are historical snapshots at each task close. Earlier
 snapshot above is the exact `ELAB-07` set payload, `plan/103` Rust-only
 negative guards, `plan/104` span-based internal association hardening,
 `plan/105` exact-locus guard hardening, `plan/106` child / bundle / partial
-exclusion fixtures, and `ELAB-04` no-repair state.
+exclusion fixtures, and `ELAB-04` no-repair payload-model preflight.
+
+- 2026-07-04 06:31 JST
+  `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md` を追加し、
+  `ELAB-04` の mixed wrapper / base remote-request branch /
+  `VisibilityDenied` branch / association vocabulary / ordering-ranking
+  deferral を docs-only で整理した。executable output、expected JSON、sample
+  row count は変えず、`ELAB-04` は no-repair のまま。set-insertion support、
+  bundle semantics、partial guidance output、visibility-repair ranking、
+  OBL-025 proof / completion、final repair ABI、conformance、G1 exit は主張しない。
 
 - 2026-07-04 06:07 JST
   `plan/106-g1-erow07-child-bundle-partial-exclusion-fixtures.md` を追加し、

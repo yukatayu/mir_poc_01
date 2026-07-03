@@ -61,8 +61,9 @@
 43. G1 ELAB-07 set-insertion row-identity guard hardening は `plan/104`
 44. G1 ELAB-07 set-insertion exact-locus guard hardening は `plan/105`
 45. G1 ELAB-07 child / bundle / partial exclusion fixtures は `plan/106`
-46. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-47. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+46. G1 ELAB-04 mixed visibility payload-model preflight は `plan/107`
+47. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+48. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

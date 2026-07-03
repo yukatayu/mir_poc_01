@@ -217,26 +217,30 @@ docs-only candidate vocabulary for the future choices listed here:
 - mixed visibility / non-visibility branch separation.
 
 Later packages changed the `ELAB-07` executable policy only for the exact
-`plan/102` set path. `ELAB-04` still omits `suggested_repair`, and singleton
-repair output still requires exactly one missing failure.
+`plan/102` set path. `plan/107` adds a docs-only `ELAB-04` payload-model
+preflight for branch ownership / association / ordering vocabulary, but
+`ELAB-04` still omits `suggested_repair`, and singleton repair output still
+requires exactly one missing failure.
 
 `plan/97..102` record the `ELAB-07` gate, source-locus edit assumption,
-payload design, and exact executable set path. `plan/98` separately records
-that `ELAB-04` remains no-repair because the row is both multi-missing and
-mixed across base remote-request failures plus a `VisibilityDenied` branch;
-future widening needs diagnostic ownership, branch association, and ordering /
-ranking before any payload change.
+payload design, and exact executable set path; `plan/103..106` record the
+guard chain that keeps that path exact and non-bundle / non-partial. `plan/98`
+separately records that `ELAB-04` remains no-repair because the row is both
+multi-missing and mixed across base remote-request failures plus a
+`VisibilityDenied` branch; `plan/107` records the docs-only branch ownership /
+association / ordering preflight before any payload change.
 
 ## Suggested next packages
 
 1. Keep `ELAB-04` no-repair and validate that it still omits
-   `suggested_repair`; keep `ELAB-07` restricted to the exact `plan/102` set
-   path.
-2. If widening is desired later, promote a narrow assumption from `plan/96`
-   before editing Rust output.
-3. Refine OBL-025 only after deciding whether multi-missing repair witnesses
+   `suggested_repair`; `plan/107` now records the branch ownership /
+   association / ordering preflight without executable widening.
+2. Keep `ELAB-07` restricted to the exact `plan/102` set path.
+3. If widening is desired later, promote a narrow mixed-wrapper or associated
+   diagnostics model from `plan/96` / `plan/107` before editing Rust output.
+4. Refine OBL-025 only after deciding whether multi-missing repair witnesses
    are single-edit, multi-edit, or outside the first coverage fragment.
-4. Draft OBL-024 explanation-soundness only if replay / association vocabulary
+5. Draft OBL-024 explanation-soundness only if replay / association vocabulary
    is stable enough to avoid pulling in repair ranking or edit semantics.
 
 ## Non-claims

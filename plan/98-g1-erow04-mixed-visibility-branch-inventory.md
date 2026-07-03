@@ -11,6 +11,11 @@ add bundle semantics, does not add visibility-repair ranking, does not edit
 canon, does not freeze a Diagnostic or repair ABI, does not prove OBL-024/025,
 does not claim conformance, and does not claim G1 exit.
 
+`plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md` later records
+the docs-only payload-model preflight for branch ownership, association
+vocabulary, and ordering / ranking deferrals. It does not change this
+no-repair executable conclusion.
+
 ## Source hierarchy
 
 - Normative source: `mirrorea_canon/`
@@ -32,6 +37,8 @@ does not claim conformance, and does not claim G1 exit.
   `plan/97-g1-erow07-set-insertion-gate-review.md`
 - LAB `ELAB-07` executable preflight:
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
+- LAB `ELAB-04` mixed visibility payload-model preflight:
+  `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -99,9 +106,10 @@ fact with the shortcut `visible source read means no visibility failure branch`.
 | base remote-request branch | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | no repair | same set-insertion / bundle / partial-guidance questions as `ELAB-07` |
 | visibility branch | `VisibilityDenied` | no repair in mixed row | `E-ROW-002`-like row addition or later visibility / observe-authority repair family |
 
-This split is conceptual repository memory only. The current executable output
-does not emit separate branch diagnostics, child repairs, branch summaries, or
-ranking metadata.
+This split is conceptual repository memory only. `plan/107` names the mixed
+wrapper / base branch / visibility branch ownership model for future work, but
+the current executable output still does not emit separate branch diagnostics,
+child repairs, branch summaries, or ranking metadata.
 
 ## Why `ELAB-04` is not just `ELAB-07` plus one atom
 
@@ -254,11 +262,15 @@ No current row proves OBL-025 or moves canon ledger status.
 1. Keep executable output unchanged and periodically validate that `ELAB-04`
    still omits `suggested_repair`.
 2. Treat `plan/99..102` as the completed exact `ELAB-07` preflight,
-   assumption, payload design, and executable set prototype sequence before
-   mixed-row widening.
-3. Draft a mixed-branch payload model only after diagnostic ownership and
-   ordering / ranking are explicit.
-4. Draft OBL-024 only after diagnostic replay / association vocabulary is
+   assumption, payload design, and executable set prototype sequence, and
+   `plan/103..106` as the guard chain that keeps that path exact and
+   non-bundle / non-partial before mixed-row widening.
+3. Treat `plan/107` as the docs-only mixed-branch payload-model preflight. It
+   records diagnostic ownership, association vocabulary, and ordering /
+   ranking deferrals while keeping executable output unchanged.
+4. Draft a mixed-branch executable payload only after the project chooses a
+   mixed wrapper or separate associated diagnostics model.
+5. Draft OBL-024 only after diagnostic replay / association vocabulary is
    stable enough to discuss mixed rows without importing repair ranking.
 
 ## Non-claims

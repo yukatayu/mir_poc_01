@@ -36,5 +36,7 @@ emits one exact `ELAB-07` `set_insertion` item under `plan/102`, and keeps
 that exact item guarded by `plan/103..106` so it is not emitted for nearby
 negative variants and is not serialized as child singleton alternatives,
 bundle fields, partial guidance, or textual-only guidance. `ELAB-04` remains
-the mixed visibility / base no-repair fence. This does not freeze a diagnostic
-/ repair ABI, prove OBL-025, or claim general set-insertion support.
+the mixed visibility / base no-repair fence; `plan/107` records only the
+docs-only mixed wrapper / base branch / visibility branch / association /
+ordering preflight for future work. This does not freeze a diagnostic / repair
+ABI, prove OBL-025, or claim general set-insertion support.
