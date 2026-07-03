@@ -33,6 +33,8 @@ context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
 evidence for `ELAB-10`, emits `E-ROW-001` non-visibility singleton
 `suggested_repair[]` evidence for `ELAB-13..16` under the `plan/93` gate,
 emits one exact `ELAB-07` `set_insertion` item under `plan/102`, and keeps
-`ELAB-04` as the mixed visibility / base no-repair fence. This does not freeze
-a diagnostic / repair ABI, prove OBL-025, or claim general set-insertion
-support.
+that exact item guarded by `plan/103..106` so it is not emitted for nearby
+negative variants and is not serialized as child singleton alternatives,
+bundle fields, partial guidance, or textual-only guidance. `ELAB-04` remains
+the mixed visibility / base no-repair fence. This does not freeze a diagnostic
+/ repair ABI, prove OBL-025, or claim general set-insertion support.

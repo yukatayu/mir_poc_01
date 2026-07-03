@@ -203,7 +203,8 @@ Remaining gaps include:
 - durable same-event row identity across source-preserving edits;
 - true multi-target-row policy;
 - true row movement / cross-row retargeting policy;
-- partial-guidance / child-repair / bundle exclusion fixtures;
+- explicit future bundle semantics and partial-guidance policy after the
+  current `plan/106` shape guard;
 - broader set-insertion support beyond the exact `ELAB-07` fact pattern.
 
 These gaps remain before treating this as broader set-insertion evidence.

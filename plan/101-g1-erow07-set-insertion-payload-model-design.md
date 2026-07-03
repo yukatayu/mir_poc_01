@@ -285,9 +285,11 @@ fixtures should reject or preserve at least:
 immediate same-event row under-suggestion by using the existing `when` source
 span as an internal association discriminator. `plan/105` closes the current
 Surface-expressible omitted-row / retargeting proxy subset by requiring the
-exact current `ELAB-07` locus. The remaining negative fixture families are
-durable row identity, true multi-target-row policy, true row movement /
-cross-row retargeting, and partial-guidance / bundle exclusion.
+exact current `ELAB-07` locus. `plan/106` closes the current executable
+child/bundle/partial/textual-guidance exclusion fixture as a shape assertion on
+the exact positive payload. The remaining negative fixture families are durable
+row identity, true multi-target-row policy, true row movement / cross-row
+retargeting, explicit future bundle semantics, and partial-guidance policy.
 
 ## Implementation sequencing constraint
 
@@ -338,11 +340,9 @@ current `ELAB-07` executable output OBL-025 completion evidence.
 
 ## Suggested next packages
 
-1. Add partial-guidance / child-repair / bundle exclusion fixtures before
-   broader set guidance is attempted.
-2. Keep `ELAB-04` out of the first mixed-branch widening package until branch
+1. Keep `ELAB-04` out of the first mixed-branch widening package until branch
    ownership / association / ordering / ranking are explicit.
-3. Keep OBL-025 abstract until the executable payload and negative guard
+2. Keep OBL-025 abstract until the executable payload and negative guard
    coverage reveal whether statement vocabulary needs refinement.
 
 ## Non-claims

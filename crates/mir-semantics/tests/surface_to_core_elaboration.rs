@@ -65,6 +65,58 @@ fn assert_no_set_insertion_repair(detail: &Value) {
     }
 }
 
+fn assert_complete_set_insertion_not_bundle_or_partial(detail: &Value, repair: &Value) {
+    assert_eq!(repair["repair_shape"], "set_insertion");
+    assert_eq!(
+        repair["coverage_scope"],
+        "complete_missing_set_for_associated_request"
+    );
+    assert_eq!(
+        repair["local_premise_after_edit"],
+        "discharged_for_associated_request"
+    );
+    assert_eq!(repair["insert_failures"], detail["missing_evidence"]);
+    assert_eq!(
+        repair["declared_failures_before"],
+        detail["failure_row_context"]["declared_failures"]
+    );
+    assert_eq!(
+        repair["local_effect"]["declared_failures_after"],
+        repair["required_failures"]
+    );
+    assert_eq!(
+        repair["element_insert_count"].as_u64(),
+        Some(
+            repair["insert_failures"]
+                .as_array()
+                .expect("set insertion records inserted failures")
+                .len() as u64
+        )
+    );
+    assert_eq!(repair["element_insert_count"], 3);
+    assert!(
+        repair.get("missing_failure").is_none(),
+        "ELAB-07 set repair must not be serialized as singleton child repair"
+    );
+    assert!(
+        repair.get("declared_failures").is_none(),
+        "ELAB-07 set repair must not reuse singleton declared_failures"
+    );
+    for forbidden_key in [
+        "repair_group_id",
+        "bundle_semantics",
+        "child_repairs",
+        "partiality",
+        "guidance_text",
+        "textual_guidance",
+    ] {
+        assert!(
+            repair.get(forbidden_key).is_none(),
+            "ELAB-07 set repair must not carry {forbidden_key}"
+        );
+    }
+}
+
 #[test]
 #[should_panic(expected = "placeholder repair payload string")]
 fn placeholder_repair_detector_rejects_marker_substrings() {
@@ -723,6 +775,46 @@ BrowserClient[self] {
     );
     assert!(repair["repair_non_final"].as_bool().unwrap_or(false));
     assert!(repair["lab_non_final"].as_bool().unwrap_or(false));
+    assert_complete_set_insertion_not_bundle_or_partial(&details[0], repair);
+}
+
+#[test]
+fn elab07_set_insertion_is_not_child_bundle_or_partial_guidance() {
+    let source = r#"
+module Surface.Elab.SetInsertionChildBundlePartialGuard
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    let repairs = details[0]["suggested_repair"]
+        .as_array()
+        .expect("ELAB-07 exact locus emits one complete set repair");
+    assert_eq!(
+        repairs.len(),
+        1,
+        "ELAB-07 must not serialize three child alternatives or partial guidance items"
+    );
+    assert_complete_set_insertion_not_bundle_or_partial(&details[0], &repairs[0]);
 }
 
 #[test]

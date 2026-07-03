@@ -110,9 +110,11 @@ Actualized rows:
   internal span-based association key keeps distinct same-event rows from
   suppressing each other, and exact-locus guards keep omitted-row / event /
   role / owner / state / field retargeting proxies from receiving the set
-  repair. This remains a narrow prototype, not general set-insertion support, a
-  final row identity model, bundle semantics, final repair ABI, OBL-025 proof,
-  or G1 exit.
+  repair. A Rust-only shape guard also keeps the exact `ELAB-07` repair as one
+  complete top-level set item rather than child singleton alternatives, bundle
+  fields, partial guidance, or textual-only guidance. This remains a narrow
+  prototype, not general set-insertion support, a final row identity model,
+  bundle semantics, final repair ABI, OBL-025 proof, or G1 exit.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

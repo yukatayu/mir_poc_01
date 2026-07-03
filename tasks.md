@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 05:43 JST
+最終更新: 2026-07-04 06:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -245,6 +245,13 @@ Current holding state:
   source-locus identity model, final row identity model, general set-insertion
   support, bundle semantics, prove OBL-025, freeze repair ABI, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/106-g1-erow07-child-bundle-partial-exclusion-fixtures.md` now records
+  the LAB-only shape guard after `plan/105`. It keeps exact `ELAB-07` output as
+  one complete top-level `set_insertion` item and verifies it is not child
+  singleton alternatives, a conjunctive bundle, partial guidance, or
+  textual-only guidance. This does not add bundle semantics, partial-guidance
+  output, general set-insertion support, prove OBL-025, freeze repair ABI,
+  claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -256,7 +263,6 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW ELAB-07 child / bundle / partial-guidance exclusion fixtures` | `G1` reserve | add focused Rust-only rejection fixtures showing that three child singleton alternatives, partial child alternatives, and textual-only guidance are not executable complete set repairs | keep exact existing-row `ELAB-07` set payload, preserve current guards and singleton rows, and still avoid final ABI / proof / conformance / G1 exit claims |
 | `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
