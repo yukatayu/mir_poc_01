@@ -190,6 +190,15 @@ jq 'paths(objects | select(has("suggested_repair")))' /tmp/elab10-2149.json
 jq -n --slurpfile elab07 /tmp/elab07-2149.json --slurpfile elab04 /tmp/elab04-2149.json --slurpfile elab10 /tmp/elab10-2149.json --slurpfile elab13 /tmp/elab13-2149.json --slurpfile all /tmp/mirrorea-surface-check-all-2149.json '{elab07:{accepted:$elab07[0].accepted,mismatches:$elab07[0].mismatches,has_suggested_repair:($elab07[0].actual.lab_diagnostic_details[0]|has("suggested_repair"))},elab04:{accepted:$elab04[0].accepted,mismatches:$elab04[0].mismatches,has_suggested_repair:($elab04[0].actual.lab_diagnostic_details[0]|has("suggested_repair"))},elab10:{accepted:$elab10[0].accepted,mismatches:$elab10[0].mismatches,repair_count:(($elab10[0].actual.lab_diagnostic_details[0].suggested_repair // [])|length)},elab13:{accepted:$elab13[0].accepted,mismatches:$elab13[0].mismatches,repair_count:(($elab13[0].actual.lab_diagnostic_details[0].suggested_repair // [])|length)},check_all:{sample_count:$all[0].sample_count,failed_count:($all[0].failed|length),workflow_ready:$all[0].workflow_ready,elab07_repair_count:(($all[0].results[] | select(.sample_id=="ELAB-07") | .actual.lab_diagnostic_details[0].suggested_repair // [])|length),elab04_repair_count:(($all[0].results[] | select(.sample_id=="ELAB-04") | .actual.lab_diagnostic_details[0].suggested_repair // [])|length),elab10_repair_count:(($all[0].results[] | select(.sample_id=="ELAB-10") | .actual.lab_diagnostic_details[0].suggested_repair // [])|length),elab13_repair_count:(($all[0].results[] | select(.sample_id=="ELAB-13") | .actual.lab_diagnostic_details[0].suggested_repair // [])|length)}}'
 rg -n '^## ' docs/reports/2149-g1-erow07-set-insertion-payload-model-design.md
 rg -n -f /tmp/mirrorea-stale-status-patterns-2149 docs/reports/2149-g1-erow07-set-insertion-payload-model-design.md README.md Documentation.md progress.md tasks.md samples_progress.md plan/101-g1-erow07-set-insertion-payload-model-design.md plan/96-g1-erow-set-insertion-bundle-payload-inventory.md plan/97-g1-erow07-set-insertion-gate-review.md plan/99-g1-erow07-set-insertion-executable-preflight.md plan/100-g1-erow07-set-insertion-assumption-acceptance.md
+git add README.md Documentation.md docs/research_abstract/surface_mir_alpha_01.md progress.md tasks.md samples_progress.md plan/00-index.md plan/90-source-traceability.md plan/96-g1-erow-set-insertion-bundle-payload-inventory.md plan/97-g1-erow07-set-insertion-gate-review.md plan/99-g1-erow07-set-insertion-executable-preflight.md plan/100-g1-erow07-set-insertion-assumption-acceptance.md plan/101-g1-erow07-set-insertion-payload-model-design.md docs/reports/2149-g1-erow07-set-insertion-payload-model-design.md
+git status --short --branch
+git diff --cached --stat
+git diff --cached --check
+git commit --no-gpg-sign -m "Record ELAB-07 set payload model design"
+git push
+git status --short --branch
+git rev-parse HEAD origin/main
+git log -1 --oneline
 ```
 
 Tool / external actions:
@@ -239,6 +248,9 @@ Validation results:
 - Stale lifecycle wording scan: no matches after report refresh.
 - Changed-file repo-local secret-pattern scan: no matches.
 - Changed-file notification-target-word scan: no matches.
+- Staged diff check: clean.
+- Staged repo-local secret-pattern scan: no matches.
+- Staged notification-target-word scan: no matches.
 - `ELAB-07` individual run: `accepted = true`, `mismatches = []`,
   `has_suggested_repair = false`.
 - `ELAB-04` individual run: `accepted = true`, `mismatches = []`,
@@ -339,8 +351,20 @@ No validation was intentionally skipped for this docs-only package.
 
 ## Commit / push status
 
-Pending before content commit. This section will be updated with the pushed
-content commit and clean/equal verification in a follow-up bookkeeping commit.
+Content commit:
+`473cebf6d079c14203e67d4f865d1ea42b866a08`
+(`Record ELAB-07 set payload model design`).
+
+Push status:
+
+- `git push`: succeeded.
+- `HEAD`: `473cebf6d079c14203e67d4f865d1ea42b866a08`
+- `origin/main`: `473cebf6d079c14203e67d4f865d1ea42b866a08`
+- Clean/equal check after push: `git status --short --branch` reported
+  `## main...origin/main`.
+
+This report update is intended to be committed and pushed as a follow-up
+bookkeeping commit.
 
 ## Sub-agent session close status
 
