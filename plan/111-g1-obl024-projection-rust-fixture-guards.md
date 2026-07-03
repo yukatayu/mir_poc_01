@@ -28,6 +28,8 @@ statements, or repair semantics.
   `plan/109-g1-obl024-lean-statement-draft.md`
 - OBL-024 executable projection carrier:
   `plan/110-g1-obl024-executable-projection-carrier.md`
+- OBL-024 replay vocabulary preflight:
+  `plan/112-g1-obl024-replay-vocabulary-preflight.md`
 - Rust test evidence:
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`
 
@@ -86,8 +88,9 @@ python3 scripts/surface_mir_samples.py --format json check-all
 
 ## Suggested next packages
 
-1. Keep the projection guard as LAB evidence until final Diagnostic / replay ABI
-   work is intentionally designed.
+1. Keep the projection guard as LAB evidence. `plan/112` now records the
+   report-local replay / proof-level replay vocabulary split without freezing a
+   final replay ABI.
 2. If future OBL-024 work needs proof-level replay, refine the statement and
    proof vocabulary first rather than treating these fixture guards as proof.
 3. If future OBL-025 repair work resumes, keep it separate from this OBL-024

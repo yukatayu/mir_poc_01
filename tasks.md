@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 08:12 JST
+最終更新: 2026-07-04 08:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -120,6 +120,13 @@ Current holding state:
   non-serialization across `ELAB-04/07/10/13..16`. It does not change
   production behavior, expected JSON, repair output, final Diagnostic / replay
   ABI, proof status, conformance, G1 exit, or canon.
+- `plan/112-g1-obl024-replay-vocabulary-preflight.md` now records docs-first
+  replay vocabulary for OBL-024. It separates current report-local
+  `trace_local_replay` anchors from future proof-level replay relations and
+  keeps proof-level replay semantics, exactness, ordering, association keys,
+  branch replay, and final ABI as OPEN. It does not change production behavior,
+  expected JSON, Lean files, repair output, proof status, conformance, G1 exit,
+  or canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,

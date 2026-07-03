@@ -30,6 +30,8 @@ add an `ELAB-04` repair payload, and does not claim conformance or G1 exit.
   `plan/81-g1-obl024-statement-shape-inventory.md`
 - OBL-024 Lean statement draft:
   `plan/109-g1-obl024-lean-statement-draft.md`
+- OBL-024 replay vocabulary preflight:
+  `plan/112-g1-obl024-replay-vocabulary-preflight.md`
 - E-ROW carrier prototype:
   `plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md`
 - E-ROW request / failure-row context:
@@ -135,8 +137,9 @@ report.
 
 ## Suggested next packages
 
-1. Keep the projection as helper-local LAB evidence until replay vocabulary and
-   diagnostic carrier ABI are intentionally designed.
+1. Keep the projection as helper-local LAB evidence. `plan/112` now separates
+   the current report-local replay anchor from future proof-level replay
+   vocabulary.
 2. If a future `ELAB-04` executable payload is desired, first choose a mixed
    wrapper / associated diagnostic model; do not infer it from this projection.
 3. If OBL-024 proof work resumes, use this projection as evidence for the E-ROW

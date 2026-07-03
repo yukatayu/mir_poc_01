@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 08:12 JST
+最終更新: 2026-07-04 08:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -156,6 +156,13 @@ semantic source authority.
   fixture-backed Rust tests cover `ELAB-04/07/10/13..16`. This does not change
   production emission logic, expected JSON, repair output, Diagnostic ABI,
   proof status, conformance, or G1 exit.
+- Current OBL-024 replay vocabulary preflight note:
+  `plan/112-g1-obl024-replay-vocabulary-preflight.md` records a docs-first
+  split between current report-local replay anchors and future proof-level
+  replay relations. It keeps `trace_local_replay` as helper-local consistency
+  evidence, marks proof-level replay vocabulary as OPEN, and does not freeze
+  replay ABI / Diagnostic ABI, prove OBL-024, change repair output, claim
+  conformance, or claim G1 exit.
 - Current OBL-025 statement-shape inventory note:
   `plan/82-g1-obl025-statement-shape-inventory.md` inventories the abstract
   vocabulary needed to state Line-1 explanation completeness: Line-1
@@ -703,7 +710,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..16` and Rust fixture guards for those projection-bearing rows, `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..16`, Rust fixture guards for those projection-bearing rows, and docs-first replay vocabulary separating report-local anchors from future proof-level replay relations, `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -724,8 +731,16 @@ negative guards, `plan/104` span-based internal association hardening,
 `plan/105` exact-locus guard hardening, `plan/106` child / bundle / partial
 exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
 branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
-statement draft, OBL-024 executable projection carrier, and OBL-024 Rust
-fixture guard hardening.
+statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
+guard hardening, and OBL-024 replay vocabulary preflight.
+
+- 2026-07-04 08:29 JST
+  `plan/112-g1-obl024-replay-vocabulary-preflight.md` を追加し、current
+  `trace_local_replay` を report-local consistency anchor として扱い、future
+  proof-level replay relation / exactness / mixed branch replay boundary を
+  OPEN vocabulary として分離した。production code、expected JSON、Lean file、
+  canon、repair output は変更せず、final replay ABI / Diagnostic ABI、
+  OBL-024 proof / completion、conformance、G1 exit は主張しない。
 
 - 2026-07-04 08:12 JST
   `plan/111-g1-obl024-projection-rust-fixture-guards.md` を追加し、

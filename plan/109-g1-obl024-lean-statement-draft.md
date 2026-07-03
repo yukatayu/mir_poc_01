@@ -47,6 +47,8 @@ conformance or G1 exit.
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`
 - LAB executable projection carrier:
   `plan/110-g1-obl024-executable-projection-carrier.md`
+- LAB replay vocabulary preflight:
+  `plan/112-g1-obl024-replay-vocabulary-preflight.md`
 - LAB explanation:
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md`
 - LAB manifest:
@@ -172,7 +174,9 @@ repair witness, no repair ranking, and no whole-gap repair coverage relation.
    projection are stable enough to state a real theorem.
 2. Treat `plan/110` executable projection evidence as helper-local LAB carrier
    hardening; do not promote its JSON names or association key to final ABI.
-3. Revisit OBL-021 diagnostic equivalence only if diagnostic comparison blocks
+3. Use `plan/112` when separating current report-local replay anchors from a
+   future proof-level replay relation.
+4. Revisit OBL-021 diagnostic equivalence only if diagnostic comparison blocks
    future OBL-024 proof shape.
 
 ## Non-claims
