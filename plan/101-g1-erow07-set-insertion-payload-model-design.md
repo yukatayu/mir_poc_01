@@ -268,7 +268,7 @@ fixtures should reject or preserve at least:
 | `N6` | padded insertion with extra failure | covered for one padded declaration by `plan/103`; broader extraneous-failure policy remains future |
 | `N7` | any `VisibilityDenied` component | out of scope for `ELAB-07` set gate |
 | `N8` | `ELAB-04` mixed base / visibility row | remains no-repair |
-| `N9` | multi-request diagnostic | covered for one target reference by `plan/103`; final row identity / association policy remains future |
+| `N9` | multi-request diagnostic | covered for one target reference by `plan/103`; distinct same-event row suppression fixed internally by `plan/104`; durable row identity remains future |
 | `N10` | multi-target-row diagnostic | no set payload until target policy exists |
 | `N11` | missing / inferred target row | no set payload |
 | `N12` | row creation / splitting / movement / retargeting | no set payload |
@@ -281,10 +281,11 @@ fixtures should reject or preserve at least:
 | `R3` | exact `ELAB-07` after implementation | exactly one top-level `set_insertion` item |
 
 `plan/102` adds the exact `ELAB-07` positive and immediate regression tests.
-`plan/103` closes the first guard-hardening subset. The remaining negative
-fixture families are row-identity, same-event row separation, true
-multi-target-row policy, row creation / splitting / movement / retargeting, and
-partial-guidance / bundle exclusion.
+`plan/103` closes the first guard-hardening subset. `plan/104` closes the
+immediate same-event row under-suggestion by using the existing `when` source
+span as an internal association discriminator. The remaining negative fixture
+families are durable row identity, true multi-target-row policy, row creation /
+splitting / movement / retargeting, and partial-guidance / bundle exclusion.
 
 ## Implementation sequencing constraint
 
@@ -335,9 +336,8 @@ current `ELAB-07` executable output OBL-025 completion evidence.
 
 ## Suggested next packages
 
-1. Decide whether row identity should be tracked by source span / AST row
-   rather than only by the LAB target reference before broader set guidance is
-   attempted.
+1. Add row creation / splitting / movement / retargeting rejection fixtures
+   before broader set guidance is attempted.
 2. Keep `ELAB-04` out of the first mixed-branch widening package until branch
    ownership / association / ordering / ranking are explicit.
 3. Keep OBL-025 abstract until the executable payload and negative guard

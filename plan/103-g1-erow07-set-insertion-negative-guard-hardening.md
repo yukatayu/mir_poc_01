@@ -41,6 +41,8 @@ conformance, canon movement, or G1 exit.
   `mirrorea_canon/theory/11-metatheory-ledger.md`
 - LAB positive prototype:
   `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md`
+- LAB row-identity guard follow-up:
+  `plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md`
 - LAB payload model:
   `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB assumption gate:
@@ -137,7 +139,7 @@ removes repair items whose `repair_shape` is `set_insertion`.
 
 Sample row count is unchanged.
 
-## Known limitation
+## Known limitation and follow-up
 
 The current request-count key is the LAB diagnostic target reference
 `when_fails_row|locus=...|event=...`. It is intentionally narrow and
@@ -154,6 +156,11 @@ Consequences:
 
 This limitation can under-suggest a repair in ambiguous same-event cases. It is
 preferable to over-emitting a set repair before row identity is explicit.
+
+`plan/104` narrows this immediate under-suggestion by deriving an internal
+association key from the existing `SurfaceWhenBlock` source span while keeping
+the public `target_ref` stable. That follow-up is still not a final row
+identity model.
 
 ## Relation to OBL-025
 

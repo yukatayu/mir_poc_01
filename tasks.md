@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 04:58 JST
+最終更新: 2026-07-04 05:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -222,10 +222,20 @@ Current holding state:
   Rust-only negative guard evidence for the exact `ELAB-07` set path. Proper
   subset, padded declaration, duplicate declaration, and multi generated-request
   variants do not receive the `set_insertion` repair; the tested rows reject
-  without `suggested_repair`. The current multi-request guard is conservative
-  and keyed by the LAB target reference, not by a final row identity model.
-  This does not add general set-insertion support, bundle semantics, prove
-  OBL-025, freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
+  without `suggested_repair`. At `plan/103` close, the multi-request guard was
+  conservative and keyed by the LAB target reference; `plan/104` subsequently
+  narrowed the internal association key with the existing `when` source span
+  without creating a final row identity model. This does not add general
+  set-insertion support, bundle semantics, prove OBL-025, freeze repair ABI,
+  claim conformance, claim G1 exit, or edit canon.
+- `plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md` now
+  records the LAB-only internal row association fix after `plan/103`. It keeps
+  public `target_ref` unchanged, keys request association by existing `when`
+  source span internally, and prevents distinct same-event `when` rows from
+  suppressing each other's exact `set_insertion` repair. This does not add a
+  final row identity model, general set-insertion support, bundle semantics,
+  prove OBL-025, freeze repair ABI, claim conformance, claim G1 exit, or edit
+  canon.
 
 ## candidate next strategy packages
 
@@ -237,7 +247,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW ELAB-07 row-identity guard hardening` | `G1` reserve | decide whether the internal request-count guard needs source-span / AST-row identity before broader set guidance is attempted, and add same-event row fixtures if promoted | keep exact `ELAB-07` set payload, avoid over-emitting repairs for ambiguous target references, preserve `ELAB-04` no-repair and singleton rows, and still avoid final ABI / proof / conformance / G1 exit claims |
+| `E-ROW ELAB-07 row-creation / retargeting rejection fixtures` | `G1` reserve | add focused Rust-only rejection fixtures for missing / inferred target row, row creation, row splitting, row movement, and row retargeting before any broader set guidance | keep exact existing-row `ELAB-07` set payload, preserve current guards and singleton rows, and still avoid final ABI / proof / conformance / G1 exit claims |
 | `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

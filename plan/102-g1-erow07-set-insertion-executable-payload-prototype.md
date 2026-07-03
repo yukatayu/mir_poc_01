@@ -40,6 +40,8 @@ conformance, canon movement, or G1 exit.
   `plan/101-g1-erow07-set-insertion-payload-model-design.md`
 - LAB negative guard hardening:
   `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md`
+- LAB row-identity guard hardening:
+  `plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md`
 - LAB edit-cardinality gate:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - LAB executable preflight:
@@ -148,10 +150,12 @@ The implementation does not start by changing
 `missing_failures.len() > 1`.
 
 After `plan/103`, the set path also requires one associated generated request
-for the LAB target reference. When a later request for the same target
-reference appears, earlier `set_insertion` repairs for that target reference
-are suppressed. The associated-request count is internal and skipped during
-serialization, so the LAB JSON shape is unchanged.
+for the LAB row association. When a later request for the same association
+appears, earlier `set_insertion` repairs for that association are suppressed.
+After `plan/104`, that association key includes the existing `when` source span
+while the public `target_ref` string remains unchanged. The associated-request
+count and association key are internal and skipped during serialization, so the
+LAB JSON shape is unchanged.
 
 ## Current executable status
 
@@ -195,8 +199,8 @@ This package preserves:
 Remaining gaps include:
 
 - final row identity: the current internal count is keyed by the LAB target
-  reference `locus + event`, not by a source-span or AST-row identity;
-- same-event distinct `when` rows under one locus;
+  reference plus existing `when` source span, not by a final AST-row identity;
+- durable same-event row identity across source-preserving edits;
 - true multi-target-row policy;
 - row creation / row splitting / row movement / retargeting rejection fixtures;
 - broader set-insertion support beyond the exact `ELAB-07` fact pattern.

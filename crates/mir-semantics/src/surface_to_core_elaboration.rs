@@ -132,6 +132,8 @@ pub struct SurfaceLabDiagnosticFailureRowContext {
     pub local_premise: String,
     #[serde(skip)]
     pub associated_request_count: usize,
+    #[serde(skip)]
+    pub association_key: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -688,16 +690,17 @@ fn push_remote_request(
         "when_fails_row|locus={requester_locus}|event={}",
         when.event_name
     );
+    let association_key = format!("{target_ref}|span={}..{}", when.span.start, when.span.end);
     let associated_request_count = {
         let count = context
             .failure_row_request_counts
-            .entry(target_ref.clone())
+            .entry(association_key.clone())
             .or_insert(0);
         *count += 1;
         *count
     };
     if associated_request_count > 1 {
-        suppress_set_insertion_repairs_for_target_ref(context, &target_ref);
+        suppress_set_insertion_repairs_for_association_key(context, &association_key);
     }
     context
         .core_ir
@@ -795,6 +798,7 @@ fn push_remote_request(
                     missing_failures,
                     local_premise: "generated_failures_subset_declared_fails".to_string(),
                     associated_request_count,
+                    association_key,
                 },
             ));
         context.diagnostics.push(diagnostic(
@@ -806,12 +810,12 @@ fn push_remote_request(
     request_id
 }
 
-fn suppress_set_insertion_repairs_for_target_ref(
+fn suppress_set_insertion_repairs_for_association_key(
     context: &mut ElaborationContext,
-    target_ref: &str,
+    association_key: &str,
 ) {
     for detail in &mut context.lab_diagnostic_details {
-        if detail.failure_row_context.target_ref != target_ref {
+        if detail.failure_row_context.association_key != association_key {
             continue;
         }
         let should_clear = if let Some(repairs) = detail.suggested_repair.as_mut() {

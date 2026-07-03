@@ -884,6 +884,58 @@ BrowserClient[self] {
 }
 
 #[test]
+fn elab07_set_insertion_is_not_suppressed_across_distinct_same_event_rows() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardDistinctSameEventRows
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(first: Participant) fails MissingCapability {
+    S {
+      player[first].hp = 1
+    }
+  }
+
+  when attack(second: Participant) fails MissingCapability {
+    S {
+      player[second].hp = 2
+    }
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+
+    assert!(!report.accepted);
+    assert_eq!(report.core_ir.remote_requests.len(), 2);
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 2);
+    for detail in details {
+        assert_eq!(
+            detail["failure_row_context"]["target_ref"],
+            "when_fails_row|locus=role:BrowserClient|event=attack"
+        );
+        assert_eq!(
+            detail["suggested_repair"][0]["repair_shape"],
+            "set_insertion"
+        );
+    }
+}
+
+#[test]
 fn emits_non_visibility_singleton_erow001_repair_payload() {
     let source = r#"
 module Surface.Elab.NonVisibilitySingletonFailureRow
