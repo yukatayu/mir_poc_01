@@ -318,7 +318,16 @@ No intended validation skips.
 
 ## Commit / push status
 
-Pending at report write.
+Implementation commit:
+
+- `28cb13f2769ebb59a08536b8c7f59183a8b2c779`
+  (`Add G1 E-ROW singleton repair prototype`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- Verified immediately after push that local `HEAD` and `origin/main` both
+  pointed at `28cb13f2769ebb59a08536b8c7f59183a8b2c779`.
 
 ## Sub-agent session close status
 
