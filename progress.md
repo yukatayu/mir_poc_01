@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 23:28 JST
+最終更新: 2026-07-03 23:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -172,6 +172,14 @@ semantic source authority.
   Line-1/rejection/declared-fragment/repair/diagnostic predicates and does not
   move canon OBL status, prove OBL-025, freeze diagnostic/repair ABI, claim
   explanation completeness, claim conformance, or claim G1 exit.
+- Current E-ROW repair shape inventory note:
+  `plan/88-g1-erow-repair-shape-inventory.md` records the LAB-only taxonomy
+  for repair output widening. It keeps `ELAB-10` as the only current
+  repair-bearing `E-ROW-002` / `VisibilityDenied` singleton evidence,
+  classifies `ELAB-07` as non-visibility multi-missing no-repair evidence,
+  classifies `ELAB-04` as mixed visibility/non-visibility multi-missing
+  no-repair evidence, and does not widen repair output, prove OBL-025, freeze
+  ABI, claim ranking/multi-edit support, or claim G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -181,10 +189,12 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: OBL-025 now has a compile-check-only LAB statement shape, but no
-  proof, no canon status movement, and no repair output widening. The next safe
-  self-driven package should inventory non-visibility singleton and
-  multi-missing edit questions before widening repair output. This remains
+- Next gap: OBL-025 now has a compile-check-only LAB statement shape and an
+  E-ROW repair-shape inventory, but no proof, no canon status movement, and no
+  repair output widening beyond `ELAB-10`. The next safe self-driven package
+  should add a non-visibility singleton fixture or a no-repair boundary test
+  before any repair output widening. Mixed and multi-missing rows remain
+  no-repair until atomicity/decomposition/ranking is addressed. This remains
   before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
@@ -499,6 +509,14 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-03 23:44 JST
+  `plan/88-g1-erow-repair-shape-inventory.md` を追加し、repair widening 前の
+  E-ROW taxonomy を整理した。現行 repair-bearing evidence は `ELAB-10`
+  `E-ROW-002` / `VisibilityDenied` singleton のみで、`ELAB-07` は
+  non-visibility multi-missing no-repair、`ELAB-04` は mixed
+  visibility/non-visibility multi-missing no-repair として保持した。repair
+  output widening、OBL-025 proof / completion、diagnostic/repair ABI freeze、
+  repair ranking、multi-edit support、conformance、G1 exit は主張していない。
 - 2026-07-03 23:28 JST
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
   と `plan/87` を追加し、OBL-025 を compile-check-only の existential

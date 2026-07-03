@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 23:28 JST
+最終更新: 2026-07-03 23:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -129,6 +129,12 @@ Current holding state:
   It compiles as an existential repair-coverage `Prop` over abstract
   predicates and does not freeze diagnostic/repair ABI, prove OBL-025, claim
   explanation completeness, claim conformance, claim G1 exit, or edit canon.
+- `plan/88-g1-erow-repair-shape-inventory.md` now records the LAB-only
+  taxonomy before repair output widening. It preserves `ELAB-10` as the only
+  current repair-bearing `E-ROW-002` / `VisibilityDenied` singleton evidence,
+  keeps `ELAB-04/07` no-repair, and does not widen `suggested_repair[]`, prove
+  OBL-025, claim repair ranking/multi-edit support, claim conformance, claim
+  G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -140,7 +146,8 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW repair widening inventory` | `G1` reserve | inventory non-visibility singleton, mixed, and multi-missing repair shapes before widening `suggested_repair[]` output beyond `E-ROW-002` / `VisibilityDenied` | no repair widening without tests; no OBL-025 proof |
+| `E-ROW non-visibility singleton fixture` | `G1` reserve | add a focused non-visibility singleton E-ROW row, preferably no-repair first, to create executable pressure before output widening | fixture passes helper checks; no repair widening or OBL-025 proof |
+| `E-ROW repair widening prototype` | `G1` reserve | widen `suggested_repair[]` only after singleton fixture, no-placeholder tests, and single-edit assumption are explicit | `ELAB-04/07` no-repair fences preserved; no ranking, multi-edit, or OBL-025 proof claim |
 | `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
