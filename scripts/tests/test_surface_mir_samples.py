@@ -63,8 +63,8 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 46)
-        self.assertEqual(payload["executable_count"], 46)
+        self.assertEqual(payload["sample_count"], 48)
+        self.assertEqual(payload["executable_count"], 48)
         self.assertEqual(payload["family_count"], 7)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
@@ -230,6 +230,10 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             payload["actual"]["remote_request_summaries"][0]["generated_from"],
             "nested_place_block",
         )
+        self.assertEqual(
+            payload["actual"]["dependency_summaries"][0]["dependency_kind"],
+            "rhs_indexed_read",
+        )
         self.assertEqual(payload["actual"]["publication_summaries"], [])
 
     def test_elaboration_private_field_auto_publish_negative_reports_expected_diagnostic(self) -> None:
@@ -317,6 +321,34 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(payload["actual"]["observation_summaries"][0]["field_name"], "hp")
         self.assertIn("auto_publish", payload["actual"]["generated_edge_kinds"])
         self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
+
+    def test_elaboration_scn01_same_field_assignment_records_rhs_dependency(self) -> None:
+        payload = _run_helper("run", "ELAB-11")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(len(payload["actual"]["remote_request_summaries"]), 1)
+        self.assertEqual(len(payload["actual"]["dependency_summaries"]), 1)
+        dependency = payload["actual"]["dependency_summaries"][0]
+        self.assertEqual(dependency["key_expr"], "self")
+        self.assertEqual(dependency["field_name"], "position")
+        self.assertEqual(dependency["generated_from"], "nested_place_block_rhs")
+
+    def test_elaboration_scn02_attack_assignment_records_two_rhs_dependencies(self) -> None:
+        payload = _run_helper("run", "ELAB-12")
+
+        self.assertTrue(payload["accepted"])
+        self.assertTrue(payload["actual"]["accepted"])
+        self.assertEqual(len(payload["actual"]["remote_request_summaries"]), 1)
+        self.assertEqual(len(payload["actual"]["dependency_summaries"]), 2)
+        self.assertEqual(
+            [
+                (row["key_expr"], row["field_name"])
+                for row in payload["actual"]["dependency_summaries"]
+            ],
+            [("target", "hp"), ("self", "atk")],
+        )
+        self.assertEqual(payload["actual"]["observation_summaries"], [])
 
     def test_elaboration_visibility_failure_row_negative_reports_expected_diagnostic(self) -> None:
         payload = _run_helper("run", "ELAB-10")
@@ -566,7 +598,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 46)
+        self.assertEqual(len(payload["passed"]), 48)
 
 
 if __name__ == "__main__":

@@ -44,7 +44,7 @@ SCN-01 source shape: `BrowserClient[self]` handles `roll(draw)` and contains
 |---|---|---|---|---|
 | `SCN01-SIMPLE-SCOPE` | simple assignment scope | The source is a simple assignment, not compound assignment. | `LAB:plan/71` scopes the first target to simple assignment. | No Lean statement yet. |
 | `SCN01-CROSS-WRITE-REQUEST` | owner-directed write request | Non-owner ordinary assignment to `World` state yields a request edge from `BrowserClient[self]` to `World` for `write player[self].position`. | `LAB:ELAB-02` shows a nested foreign place write lowering to `request_kind = write`, requester `role:BrowserClient`, owner `S`, generated from `nested_place_block`; `LAB:ELAB-09` shows the same with visible communication. | LAB uses `S`, `hp`, and `target`, not exact `World`, `position`, and `self`; it is structural support, not SCN pass evidence. |
-| `SCN01-RHS-READ-DEPENDENCY` | read dependency | The RHS read of `player[self].position` produces a dependency row for the same field. | `LAB:ELAB-01` and `LAB:ELAB-08` show standalone explicit cross-locus read/observe request evidence with spans. | `LAB:ELAB-02` and `LAB:ELAB-09` support the write-request shape only; they do not show RHS dependency capture for an assignment expression. Current LAB expected JSON does not expose a direct same-field dependency-row object for this SCN-01 shape. Treat this as a canon target row, not discharged LAB evidence. |
+| `SCN01-RHS-READ-DEPENDENCY` | read dependency | The RHS read of `player[self].position` produces a dependency row for the same field. | `LAB:ELAB-11` records exact `World/player/self/position` RHS dependency evidence; `LAB:ELAB-02` and `LAB:ELAB-09` also now expose RHS dependency summaries for their write rows. | This is LAB evidence only, not a C-static conformance pass or proof discharge. |
 | `SCN01-VISIBLE-PUBLISH` | visible publish / observe | Because `position` is visible, the write generates an observer-safe publish row and related observe consequence. | `LAB:ELAB-09` has `auto_publish`, `auto_observe`, `publication_summaries`, and `observation_summaries` for a visible write. | LAB `MessageEnvelope` is helper evidence only; canon target vocabulary is publish/observe/request. |
 | `SCN01-FAILURE-CONTAINMENT` | static failure containment | Generated failures, including visibility-related failure, must be contained in the declared `fails` row. | `LAB:ELAB-09` has `failure_row_complete = true`; `LAB:ELAB-10` demonstrates underdeclared visibility failure rejection for a visible read/observe path. | Canon names the missing-visibility case as E-ROW-002, while LAB uses `generated_failure_not_declared`. There is no exact SCN-01 write-publish negative row for missing `VisibilityDenied`; use as partial support only. |
 | `SCN01-CAP-OBLIGATION` | authority obligation | Obligations include write capability for `player`. | `LAB:ELAB-02` and `LAB:ELAB-09` carry remote write request evidence. | LAB elaboration rows do not prove the full canon capability theorem; G3 authority work remains separate. |
@@ -60,8 +60,8 @@ contains `S { player[target].hp = player[target].hp - player[self].atk }`.
 |---|---|---|---|---|
 | `SCN02-SIMPLE-SCOPE` | simple assignment scope | The assignment to `player[target].hp` is the simple write target. | `LAB:plan/71` scopes the target to simple assignment. | The RHS is nontrivial and has two reads; do not collapse read obligations into the write row. |
 | `SCN02-CROSS-WRITE-REQUEST` | owner-directed write request | The write to `S` state yields an owner-directed request to `S`, authorized from the actor locus. | `LAB:ELAB-02` shows positive nested write request; `LAB:ELAB-07` shows generated write request rejected when the failure row is underdeclared. | LAB field/key names differ and do not prove SCN pass. |
-| `SCN02-RHS-TARGET-READ` | read dependency | The RHS read of `player[target].hp` is a dependency row. | `LAB:ELAB-01` and `LAB:ELAB-08` show standalone read/observe request evidence for one indexed field. | `LAB:ELAB-02` write evidence returns after the cross-locus write target and does not expose RHS dependency capture. Current LAB expected JSON does not expose an exact `target.hp` dependency row. |
-| `SCN02-RHS-SELF-READ` | read dependency | The RHS read of `player[self].atk` is a dependency row. | No exact LAB row for the `atk` field in SCN-02. | Keep as canon static-consequence target. It should be covered by SCN drilldown or OBL-001 statement work before G1 exit. |
+| `SCN02-RHS-TARGET-READ` | read dependency | The RHS read of `player[target].hp` is a dependency row. | `LAB:ELAB-12` records exact `target.hp` RHS dependency evidence. | This is LAB evidence only, not a C-static conformance pass or read-materialization policy. |
+| `SCN02-RHS-SELF-READ` | read dependency | The RHS read of `player[self].atk` is a dependency row. | `LAB:ELAB-12` records exact `self.atk` RHS dependency evidence. | This is LAB evidence only, not a runtime read/freshness/observe policy. |
 | `SCN02-FAILURE-CONTAINMENT` | static failure containment | Generated failure set is contained in declared `fails`; dropping `MissingCapability` yields E-ROW-001. | `LAB:ELAB-02` has `failure_row_complete = true`; `LAB:ELAB-07` has `failure_row_complete = false` and `generated_failure_not_declared`. | LAB diagnostic naming is alpha helper evidence, not canon diagnostic freeze. Record `generated_failure_not_declared` as a LAB alias/gap, not as the canon diagnostic id. |
 | `SCN02-NESTED-LOCUS-NON-AUTHORITY` | nested locus block | Nested foreign locus block does not convert the actor into owner; generated request remains owner-directed and authorized from the actor locus. | `LAB:ELAB-02` and `LAB:ELAB-08` record `generated_from = nested_place_block` with requester `role:BrowserClient` and owner `S`. | This does not prove the authority theorem family; THM-004/G3 remains separate. |
 | `SCN02-DIRECT-LOCAL-WRITE-REJECT` | static drift guard | An implementation that treats the nested `S` block as a local write fails C-static. | `LAB:ELAB-02` positive request shape supports the required edge shape. | No separate LAB negative row exists for a direct-local-write implementation. |
@@ -70,10 +70,10 @@ contains `S { player[target].hp = player[target].hp - player[self].atk }`.
 
 ## Main LAB gaps before OBL-001
 
-1. SCN-01 same-field RHS dependency is canon-required but not directly exposed
-   by current LAB expected JSON.
+1. SCN-01 same-field RHS dependency is canon-required and now has LAB evidence
+   in `ELAB-11` / `plan/75`.
 2. SCN-02 two-read RHS dependency set (`target.hp` and `self.atk`) is
-   canon-required but not directly exposed by current LAB expected JSON.
+   canon-required and now has LAB evidence in `ELAB-12` / `plan/75`.
 3. Canon diagnostic ids E-ROW-001 and E-ROW-002 are not the same as the current
    LAB helper diagnostic `generated_failure_not_declared`.
 4. OPEN-014 leaves the final materialization policy for cross-locus reads open;
@@ -92,6 +92,8 @@ contains `S { player[target].hp = player[target].hp - player[self].atk }`.
 | `ELAB-08` | Nested place read as owner-directed read/observe request. | Exact SCN-02 target/self read pair. |
 | `ELAB-09` | Visible write generates explicit publish/observe plus remote write request. | Runtime MessageEnvelope dispatch or final telemetry/viewer ABI. |
 | `ELAB-10` | Visibility-related underdeclared failure rejection for visible read/observe. | Exact SCN-01 missing-VisibilityDenied write-publish negative. |
+| `ELAB-11` | SCN-01-shaped same-field RHS dependency, visible write publish/observe, and owner-directed write request. | C-static conformance, runtime request serving, or proof discharge. |
+| `ELAB-12` | SCN-02-shaped target/self RHS dependency pair and owner-directed write request without publish/observe materialization. | OPEN-014 read materialization, runtime MissingCapability behavior, or authority theorem. |
 
 ## Non-claims
 
@@ -111,16 +113,14 @@ contains `S { player[target].hp = player[target].hp - player[self].atk }`.
 
 ## Open questions
 
-- How should OBL-001 state read dependency rows so SCN-01 same-field read and
-  SCN-02 two-read RHS are covered without overfitting LAB JSON?
+- Should `THM001StatementDraft.lean` later mention the concrete LAB
+  `rhs_indexed_read` carrier as evidence, or remain fully abstract until canon
+  statement work?
 - Does OPEN-014 require the SCN-02 read dependencies to be represented as
   observe/read requests, dependency-only rows, or both in the initial statement?
 - Should an exact LAB evidence row be added later for SCN-01 missing
   `VisibilityDenied` on visible write publish, or is canon scenario text enough
   until the formal statement?
-- Should an exact LAB evidence row be added later for SCN-02 two-read RHS
-  (`target.hp` and `self.atk`), or should this wait for the OBL-001 statement
-  inventory?
 
 ## Close condition
 
@@ -131,6 +131,6 @@ semantic change is claimed.
 
 ## Next safe package
 
-The next theory package should be `G1 OBL-001 Lean statement inventory`, using
-this consequence drilldown to list the minimum statement ingredients and explicit
-gaps. It should still be statement-only and should not claim proof discharge.
+The immediate RHS dependency gaps now have LAB evidence in `plan/75`. The next
+theory package should keep OBL-020/021 separate or refine the OBL-001 statement
+draft without claiming proof discharge.

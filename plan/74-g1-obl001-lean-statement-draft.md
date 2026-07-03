@@ -114,11 +114,12 @@ RHS dependency.
 
 ## Next safe packages
 
-1. SCN exact LAB dependency-gap package for SCN-01 same-field RHS and SCN-02
-   target/self RHS evidence, still without conformance claim.
-2. OBL-020/021 dependency inventory and possible Lean statement-shape drafts,
+The first item below was actualized as LAB evidence in
+`plan/75-g1-scn-rhs-dependency-gap-evidence.md`.
+
+1. OBL-020/021 dependency inventory and possible Lean statement-shape drafts,
    kept separate from OBL-001 proof work.
-3. Narrow refinement of `THM001StatementDraft.lean` if review finds a
+2. Narrow refinement of `THM001StatementDraft.lean` if review finds a
    statement-shape overfit or missing predicate, still without canon status
    movement.
 

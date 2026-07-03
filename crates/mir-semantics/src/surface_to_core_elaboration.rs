@@ -37,6 +37,7 @@ pub struct SurfaceToCoreElaborationReport {
 pub struct SurfaceCoreIr {
     pub transitions: Vec<SurfaceCoreTransition>,
     pub remote_requests: Vec<SurfaceCoreRemoteRequest>,
+    pub dependencies: Vec<SurfaceCoreDependency>,
     pub message_envelopes: Vec<SurfaceCoreMessageEnvelope>,
     pub publications: Vec<SurfaceCorePublication>,
     pub observations: Vec<SurfaceCoreObservation>,
@@ -67,6 +68,21 @@ pub struct SurfaceCoreRemoteRequest {
     pub required_failures: Vec<String>,
     pub declared_failures: Vec<String>,
     pub failure_row_complete: bool,
+    pub source_span: SourceSpan,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceCoreDependency {
+    pub dependency_id: String,
+    pub dependency_kind: String,
+    pub write_request_id: Option<String>,
+    pub requester_locus: String,
+    pub owner_locus: String,
+    pub state_name: String,
+    pub key_expr: String,
+    pub field_name: Option<String>,
+    pub access_text: String,
+    pub generated_from: String,
     pub source_span: SourceSpan,
 }
 
@@ -171,6 +187,7 @@ struct ElaborationContext {
     core_ir: SurfaceCoreIr,
     next_transition: usize,
     next_request: usize,
+    next_dependency: usize,
     next_envelope: usize,
     next_publish: usize,
     next_observe: usize,
@@ -372,6 +389,7 @@ fn elaborate_assign(
     when: &SurfaceWhenBlock,
     context: &mut ElaborationContext,
 ) {
+    let mut generated_write_request_id = None;
     if let Some(target) = parse_indexed_target(&assign.target_text)
         && let Some(state) = resolve_indexed_state(
             context,
@@ -387,7 +405,7 @@ fn elaborate_assign(
         } else {
             "cross_locus_write_target"
         };
-        push_remote_request(
+        let request_id = push_remote_request(
             context,
             "write",
             generated_from,
@@ -397,7 +415,7 @@ fn elaborate_assign(
             when,
             assign.span.clone(),
         );
-        return;
+        generated_write_request_id = Some(request_id);
     }
 
     for target in indexed_targets_in_text(&assign.value.text) {
@@ -413,22 +431,69 @@ fn elaborate_assign(
         if state.owner_locus == access_locus {
             continue;
         }
-        let generated_from = if owner_hint == Some(state.owner_locus.as_str()) {
-            "nested_place_block"
+        if let Some(write_request_id) = &generated_write_request_id {
+            let generated_from = if owner_hint == Some(state.owner_locus.as_str()) {
+                "nested_place_block_rhs"
+            } else {
+                "cross_locus_rhs_expression"
+            };
+            push_rhs_read_dependency(
+                context,
+                generated_from,
+                write_request_id,
+                access_locus,
+                state,
+                target,
+                assign.value.span.clone(),
+            );
         } else {
-            "cross_locus_read_expression"
-        };
-        push_remote_request(
-            context,
-            "read",
-            generated_from,
-            access_locus,
-            state,
-            target,
-            when,
-            assign.value.span.clone(),
-        );
+            let generated_from = if owner_hint == Some(state.owner_locus.as_str()) {
+                "nested_place_block"
+            } else {
+                "cross_locus_read_expression"
+            };
+            push_remote_request(
+                context,
+                "read",
+                generated_from,
+                access_locus,
+                state,
+                target,
+                when,
+                assign.value.span.clone(),
+            );
+        }
     }
+}
+
+fn push_rhs_read_dependency(
+    context: &mut ElaborationContext,
+    generated_from: &str,
+    write_request_id: &str,
+    requester_locus: &str,
+    state: IndexedStateDecl,
+    target: IndexedTarget,
+    span: SourceSpan,
+) {
+    let dependency_id = context.dependency_id();
+    context.core_ir.dependencies.push(SurfaceCoreDependency {
+        dependency_id: dependency_id.clone(),
+        dependency_kind: "rhs_indexed_read".to_string(),
+        write_request_id: Some(write_request_id.to_string()),
+        requester_locus: requester_locus.to_string(),
+        owner_locus: state.owner_locus,
+        state_name: state.state_name,
+        key_expr: target.key_expr,
+        field_name: target.field_name,
+        access_text: target.access_text,
+        generated_from: generated_from.to_string(),
+        source_span: span.clone(),
+    });
+    context.core_ir.source_spans.push(SurfaceCoreSourceSpan {
+        entity_id: dependency_id,
+        entity_kind: "dependency".to_string(),
+        span,
+    });
 }
 
 fn push_unsupported_statement(
@@ -498,7 +563,7 @@ fn push_remote_request(
     target: IndexedTarget,
     when: &SurfaceWhenBlock,
     span: SourceSpan,
-) {
+) -> String {
     let request_id = context.request_id();
     let communication =
         communication_decision(context, request_kind, &state, &target, span.clone());
@@ -574,7 +639,7 @@ fn push_remote_request(
             },
             from_locus: requester_locus.to_string(),
             to_locus: state.owner_locus,
-            request_id,
+            request_id: request_id.clone(),
             source_span: span.clone(),
         });
     context.core_ir.source_spans.push(SurfaceCoreSourceSpan {
@@ -590,6 +655,7 @@ fn push_remote_request(
             span,
         ));
     }
+    request_id
 }
 
 fn communication_decision(
@@ -1017,6 +1083,11 @@ impl ElaborationContext {
     fn request_id(&mut self) -> String {
         self.next_request += 1;
         format!("req-{:04}", self.next_request)
+    }
+
+    fn dependency_id(&mut self) -> String {
+        self.next_dependency += 1;
+        format!("dep-{:04}", self.next_dependency)
     }
 
     fn envelope_id(&mut self) -> String {

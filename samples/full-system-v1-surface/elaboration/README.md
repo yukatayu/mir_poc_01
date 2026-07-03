@@ -14,5 +14,7 @@ Current executable rows:
 - `ELAB-08`: nested place read blocks generate owner-directed read request evidence.
 - `ELAB-09`: visible field write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: visible communication rejects an underdeclared `VisibilityDenied` failure row.
+- `ELAB-11`: SCN-01-shaped visible same-field assignment records an RHS dependency row without claiming runtime dispatch.
+- `ELAB-12`: SCN-02-shaped attack assignment records target/self RHS dependency rows without freezing read materialization.
 
 These rows do not claim final public grammar, runtime MessageEnvelope dispatch, role-admission capability grants, source patch activation, or TypeMismatch typechecker discharge.

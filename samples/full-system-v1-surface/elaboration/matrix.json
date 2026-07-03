@@ -91,6 +91,24 @@
       "source": "elab-10-visibility-failure-row-negative/main/src/visibility-failure-row-negative.mir",
       "expected": "elab-10-visibility-failure-row-negative/expected/elaboration.json",
       "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-11",
+      "root_name": "elab-11-scn01-rhs-dependency-positive",
+      "stage": "G1-static-gap",
+      "current_status": "executable",
+      "source": "elab-11-scn01-rhs-dependency-positive/main/src/scn01-rhs-dependency-positive.mir",
+      "expected": "elab-11-scn01-rhs-dependency-positive/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-12",
+      "root_name": "elab-12-scn02-two-read-dependency-positive",
+      "stage": "G1-static-gap",
+      "current_status": "executable",
+      "source": "elab-12-scn02-two-read-dependency-positive/main/src/scn02-two-read-dependency-positive.mir",
+      "expected": "elab-12-scn02-two-read-dependency-positive/expected/elaboration.json",
+      "runner": "elaboration"
     }
   ]
 }

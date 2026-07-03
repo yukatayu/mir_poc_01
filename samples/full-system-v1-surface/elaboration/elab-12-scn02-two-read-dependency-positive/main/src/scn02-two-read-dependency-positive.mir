@@ -1,0 +1,21 @@
+module Surface.Elab.Scn02TwoReadDependencyPositive
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+  atk: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+    S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}

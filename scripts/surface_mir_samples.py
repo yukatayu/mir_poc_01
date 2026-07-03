@@ -609,6 +609,19 @@ def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
             }
             for row in core_ir.get("remote_requests") or []
         ],
+        "dependency_summaries": [
+            {
+                "dependency_kind": row["dependency_kind"],
+                "write_request_id": row.get("write_request_id"),
+                "requester_locus": row["requester_locus"],
+                "owner_locus": row["owner_locus"],
+                "state_name": row["state_name"],
+                "key_expr": row["key_expr"],
+                "field_name": row.get("field_name"),
+                "generated_from": row["generated_from"],
+            }
+            for row in core_ir.get("dependencies") or []
+        ],
         "message_envelope_summaries": [
             {
                 "envelope_kind": row["envelope_kind"],

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 20:41 JST
+最終更新: 2026-07-03 21:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -81,19 +81,25 @@ semantic source authority.
   `samples/lean/lab-statements/obl001/THM001StatementDraft.lean`. It compiles
   as a `Prop` definition under a LAB namespace and does not move OBL status,
   prove THM-001, claim G1 exit, or edit canon.
+- Current SCN dependency-gap evidence note:
+  `plan/75-g1-scn-rhs-dependency-gap-evidence.md` records LAB-only evidence
+  rows `ELAB-11` and `ELAB-12` for SCN-01 same-field RHS dependency and SCN-02
+  target/self RHS dependencies. These rows close the immediate LAB evidence gap
+  without claiming C-static conformance, proof discharge, G1 exit, runtime read
+  materialization, or final Core IR JSON/API.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
   theory/design repository.
 - Current status after this snapshot: `P-SURF-99` closed the bounded Surface
-  alpha audit over `P-SURF-01..08`. Surface alpha evidence has 46 helper rows
-  and 47 `.mir` source files, with parser, indexed-state, elaboration,
+  alpha audit over `P-SURF-01..08`. Surface alpha/LAB evidence now has 48 helper rows
+  and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
-  and static devtools diagnostics floors revalidated.
-- Next gap: the safe self-driven theory package is either a narrow SCN
-  dependency-gap package for SCN-01 same-field RHS / SCN-02 two-read RHS
-  evidence, an OBL-020/021 dependency inventory, or a focused refinement of the
-  LAB statement draft if review finds overfit. This remains before any later
+  static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
+- Next gap: the safe self-driven theory package is OBL-020/021 dependency
+  inventory, a focused refinement of the LAB OBL-001 statement draft, or
+  diagnostic alignment for canon E-ROW-001/E-ROW-002 versus LAB
+  `generated_failure_not_declared`. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -127,7 +133,7 @@ semantic source authority.
 | `P-SURF-00B` | Surface Mir brace/source-authority docs rebaseline | `closed` | `specs/39..43`, `plan/64..68`, snapshot docs and guides | implementation line opened |
 | `P-SURF-01` | Surface brace parser | `evidence-closed parser lane` | `crates/mir-ast::surface_alpha`, `surface_mir_alpha_parse`, `samples/full-system-v1-surface/syntax/`, `scripts/surface_mir_samples.py` | keep non-final grammar; feed parser AST into later Surface packages |
 | `P-SURF-02` | indexed state | `evidence-closed semantic checker lane` | `crates/mir-semantics::surface_indexed_state`, `surface_indexed_state_check`, `samples/full-system-v1-surface/indexed-state/`, `IDX-01..05` | integrate with Surface-to-Core elaboration and runtime carrier later |
-| `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01/02/04/05/06/07/08` | keep feeding later runtime/admission work |
+| `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane plus G1 dependency-gap rows` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01..12` | keep feeding later runtime/admission/proof work; no conformance claim |
 | `P-SURF-04` | auto communication / publish / observe | `evidence-closed generated communication lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-03/09/10` plus widened `ELAB-01/05/08` | runtime dispatch and TypeMismatch discharge remain later |
 | `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
 | `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
@@ -385,7 +391,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, generated edges, source spans, and obligations | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, and obligations | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -435,6 +441,15 @@ Research-discovery items:
   追加したが、OBL status movement、proof discharge、G1 exit、conformance は
   主張していない。次は SCN dependency-gap、OBL-020/021 inventory、または
   focused statement refinement。
+- 2026-07-03 21:10 JST
+  `SurfaceCoreIr.dependencies` と `rhs_indexed_read` LAB dependency rows を追加し、
+  `ELAB-11` で SCN-01 same-field RHS、`ELAB-12` で SCN-02 target/self RHS
+  dependency evidence を固定した。Surface helper は 48 rows / 49 `.mir`
+  sources に増え、Rust elaboration test、Surface helper unit tests、
+  source hierarchy / docs validators、`surface_mir_samples.py check-all` 48/48
+  を確認したが、C-static conformance、OPEN-014 materialization、proof
+  discharge、G1 exit は主張していない。次は OBL-020/021 dependency inventory
+  または diagnostic alignment。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

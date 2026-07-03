@@ -1,6 +1,6 @@
 {
   "accepted": true,
-  "module_path": "Surface.Elab.CrossWritePositive",
+  "module_path": "Surface.Elab.Scn02TwoReadDependencyPositive",
   "diagnostic_codes": [],
   "transition_kinds": [
     "surface_role_when",
@@ -26,6 +26,16 @@
       "state_name": "player",
       "key_expr": "target",
       "field_name": "hp",
+      "generated_from": "nested_place_block_rhs"
+    },
+    {
+      "dependency_kind": "rhs_indexed_read",
+      "write_request_id": "req-0001",
+      "requester_locus": "role:BrowserClient",
+      "owner_locus": "S",
+      "state_name": "player",
+      "key_expr": "self",
+      "field_name": "atk",
       "generated_from": "nested_place_block_rhs"
     }
   ],
@@ -55,6 +65,7 @@
     "remote_request",
     "transition",
     "generated_edge",
+    "dependency",
     "dependency"
   ],
   "obligation_codes": [

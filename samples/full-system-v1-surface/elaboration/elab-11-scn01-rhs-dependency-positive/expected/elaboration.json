@@ -1,6 +1,6 @@
 {
   "accepted": true,
-  "module_path": "Surface.Elab.CrossWritePositive",
+  "module_path": "Surface.Elab.Scn01RhsDependencyPositive",
   "diagnostic_codes": [],
   "transition_kinds": [
     "surface_role_when",
@@ -10,9 +10,9 @@
     {
       "request_kind": "write",
       "requester_locus": "role:BrowserClient",
-      "owner_locus": "S",
+      "owner_locus": "World",
       "state_name": "player",
-      "key_expr": "target",
+      "key_expr": "self",
       "generated_from": "nested_place_block",
       "failure_row_complete": true
     }
@@ -22,10 +22,10 @@
       "dependency_kind": "rhs_indexed_read",
       "write_request_id": "req-0001",
       "requester_locus": "role:BrowserClient",
-      "owner_locus": "S",
+      "owner_locus": "World",
       "state_name": "player",
-      "key_expr": "target",
-      "field_name": "hp",
+      "key_expr": "self",
+      "field_name": "position",
       "generated_from": "nested_place_block_rhs"
     }
   ],
@@ -33,24 +33,51 @@
     {
       "envelope_kind": "remote_write",
       "from_locus": "role:BrowserClient",
-      "to_locus": "S",
+      "to_locus": "World",
       "state_name": "player",
-      "key_expr": "target",
-      "field_name": "hp",
-      "visibility_channel": null,
+      "key_expr": "self",
+      "field_name": "position",
+      "visibility_channel": "observer_safe",
       "redaction_label": "observer_safe",
       "retention_scope": "report_local"
     }
   ],
-  "publication_summaries": [],
-  "observation_summaries": [],
+  "publication_summaries": [
+    {
+      "publisher_locus": "World",
+      "channel": "observer_safe",
+      "state_name": "player",
+      "key_expr": "self",
+      "field_name": "position",
+      "redaction_label": "observer_safe",
+      "retention_scope": "report_local"
+    }
+  ],
+  "observation_summaries": [
+    {
+      "observer_locus": "observer_safe:*",
+      "owner_locus": "World",
+      "channel": "observer_safe",
+      "state_name": "player",
+      "key_expr": "self",
+      "field_name": "position",
+      "redaction_label": "observer_safe",
+      "retention_scope": "report_local"
+    }
+  ],
   "generated_edge_kinds": [
     "message_envelope",
+    "auto_publish",
+    "auto_observe",
     "remote_write_request"
   ],
   "source_span_entity_kinds": [
     "transition",
     "message_envelope",
+    "generated_edge",
+    "publication",
+    "generated_edge",
+    "observation",
     "generated_edge",
     "remote_request",
     "transition",

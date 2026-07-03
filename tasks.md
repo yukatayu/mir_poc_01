@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 20:41 JST
+最終更新: 2026-07-03 21:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,6 +60,10 @@ Current holding state:
   `samples/lean/lab-statements/obl001/THM001StatementDraft.lean`. It compiles
   as a `Prop` definition and does not move canon OBL status, prove THM-001,
   claim G1 exit, or edit canon.
+- `plan/75-g1-scn-rhs-dependency-gap-evidence.md` now records LAB-only
+  `ELAB-11/12` dependency evidence for SCN-01 same-field RHS and SCN-02
+  target/self RHS reads. It does not claim C-static conformance, runtime read
+  materialization, proof discharge, G1 exit, or canon movement.
 
 ## candidate next strategy packages
 
@@ -68,9 +72,9 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `SCN exact LAB dependency-gap drilldown` | `G1` front-half | decide whether exact LAB rows are needed for SCN-01 same-field RHS and SCN-02 target/self RHS before tightening statement/proof work | no conformance claim; no runtime dispatch claim |
 | `OBL-020/021 dependency inventory` | `G1` reserve | inventory WF preservation and elaboration determinism dependencies separately from OBL-001 | statement inventory only; no proof or G1 exit claim |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
+| `E-ROW diagnostic alignment` | `G1` reserve | align canon E-ROW-001/E-ROW-002 vocabulary with current LAB `generated_failure_not_declared` evidence | no final diagnostic ABI freeze |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
@@ -81,7 +85,7 @@ next line.
 |---:|---|---|---|
 | 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | closed with `SURF-01..09`, parser test, sample helper, authoring check, and release check |
 | 2 | `P-SURF-02 indexed state` | represent `S { state player[p: Participant]: Player }` as S-owned indexed state | closed with `IDX-01..05`, semantic checker test, sample helper, authoring check, and release check |
-| 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | closed with `ELAB-01/02/04/05/06/07/08`, elaboration test, sample helper, authoring check, and release check |
+| 3 | `P-SURF-03 Surface-to-Core elaboration` | lower cross-locus read/write to explicit Core IR | closed with `ELAB-01/02/04/05/06/07/08`; later G1 dependency-gap evidence added `ELAB-11/12` without conformance claim |
 | 4 | `P-SURF-04 auto communication` | generate MessageEnvelope / publish / observe / failure-row obligations | closed with generated MessageEnvelope rows, visible field publish/observe rows, `VisibilityDenied` failure-row containment, private/non-visible field rejection, and `ELAB-03/09/10` |
 | 5 | `P-SURF-05 role admission` | implement role claim, admission request, capability grant, spoof/stale rejection | closed with `ROLE-01..04`, role claim / join admission / grant-backed accepted write / witness rows, missing-grant write rejection, stale membership rejection, and hash metadata non-safety-proof |
 | 6 | `P-SURF-06 source patch hot-plug` | implement parse/typecheck/elaborate/admit/activation-cut patch pipeline | closed with CLI `check-source` / `parse-source` / `elaborate-source` / `patch-source` / `export-core-ir`, `PATCH-01..04`, HotPlugRequest / HotPlugVerdict / activation_cut rows, no-direct-eval evidence, and rejection-without-mutation rows |

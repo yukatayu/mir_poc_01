@@ -332,6 +332,66 @@ BrowserClient[self] {
 }
 
 #[test]
+fn records_assignment_rhs_reads_as_dependencies_without_remote_read_materialization() {
+    let source = r#"
+module Surface.Elab.AttackDependency
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+  atk: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+    S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+    let core_ir = serde_json::to_value(&report.core_ir).expect("core IR serializes");
+    let dependencies = core_ir["dependencies"]
+        .as_array()
+        .expect("core IR exposes dependency rows");
+
+    assert!(report.accepted, "{:?}", report.diagnostics);
+    assert_eq!(report.core_ir.remote_requests.len(), 1);
+    assert_eq!(report.core_ir.remote_requests[0].request_kind, "write");
+    assert_eq!(core_ir["message_envelopes"].as_array().unwrap().len(), 1);
+    assert_eq!(core_ir["observations"].as_array().unwrap().len(), 0);
+    assert_eq!(dependencies.len(), 2);
+    assert_eq!(
+        dependencies[0]["dependency_kind"],
+        Value::String("rhs_indexed_read".to_string())
+    );
+    assert_eq!(
+        dependencies[0]["key_expr"],
+        Value::String("target".to_string())
+    );
+    assert_eq!(
+        dependencies[0]["field_name"],
+        Value::String("hp".to_string())
+    );
+    assert_eq!(
+        dependencies[1]["key_expr"],
+        Value::String("self".to_string())
+    );
+    assert_eq!(
+        dependencies[1]["field_name"],
+        Value::String("atk".to_string())
+    );
+}
+
+#[test]
 fn rejects_generated_remote_request_when_failure_row_is_underdeclared() {
     let source = r#"
 module Surface.Elab.UnderdeclaredFailureRow
