@@ -202,7 +202,8 @@ Remaining gaps include:
   reference plus existing `when` source span, not by a final AST-row identity;
 - durable same-event row identity across source-preserving edits;
 - true multi-target-row policy;
-- row creation / row splitting / row movement / retargeting rejection fixtures;
+- true row movement / cross-row retargeting policy;
+- partial-guidance / child-repair / bundle exclusion fixtures;
 - broader set-insertion support beyond the exact `ELAB-07` fact pattern.
 
 These gaps remain before treating this as broader set-insertion evidence.

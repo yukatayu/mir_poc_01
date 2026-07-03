@@ -106,11 +106,13 @@ Actualized rows:
   `element_insert_count = 3`, no singleton `missing_failure` field reuse, and
   exact whole-gap coverage for `MissingWitness`, `RouteUnavailable`, and
   `StaleMembership`. Focused Rust-only guards keep subset, padded, duplicate,
-  and multi-request variants from receiving the `set_insertion` repair, and an
+  and multi-request variants from receiving the `set_insertion` repair, an
   internal span-based association key keeps distinct same-event rows from
-  suppressing each other. This remains a narrow prototype, not general
-  set-insertion support, a final row identity model, bundle semantics, final
-  repair ABI, OBL-025 proof, or G1 exit.
+  suppressing each other, and exact-locus guards keep omitted-row / event /
+  role / owner / state / field retargeting proxies from receiving the set
+  repair. This remains a narrow prototype, not general set-insertion support, a
+  final row identity model, bundle semantics, final repair ABI, OBL-025 proof,
+  or G1 exit.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

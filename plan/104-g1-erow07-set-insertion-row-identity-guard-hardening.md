@@ -130,11 +130,15 @@ This is still not a final row identity model:
 - source-preserving edits can move spans, so span identity is not a durable
   cross-version row identity;
 - true multi-target-row policy remains unresolved;
-- row creation / splitting / movement / retargeting policy remains unresolved;
+- true row movement / cross-row retargeting policy remains unresolved;
 - broader set-insertion support remains out of scope.
 
 The current package only fixes the immediate same-event under-suggestion caused
 by counting with public `target_ref`.
+
+`plan/105` later adds current Surface-expressible omitted-row and retargeting
+proxy guards by requiring the exact current `ELAB-07` locus. That follow-up is
+also LAB-only and does not define a final source-locus identity model.
 
 ## Relation to OBL-025
 

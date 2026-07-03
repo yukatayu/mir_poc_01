@@ -23,6 +23,11 @@ const VISIBILITY_FAILURE: &str = "VisibilityDenied";
 const GENERATED_FAILURE_NOT_DECLARED: &str = "generated_failure_not_declared";
 const E_ROW_001: &str = "E-ROW-001";
 const E_ROW_002: &str = "E-ROW-002";
+const ELAB07_SET_INSERTION_TARGET_REF: &str =
+    "when_fails_row|locus=role:BrowserClient|event=attack";
+const ELAB07_SET_INSERTION_OWNER_LOCUS: &str = "S";
+const ELAB07_SET_INSERTION_STATE_NAME: &str = "player";
+const ELAB07_SET_INSERTION_FIELD_NAME: &str = "hp";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SurfaceToCoreElaborationReport {
@@ -1245,7 +1250,10 @@ fn erow_set_insertion_suggested_repair(
         || request_context.request_kind != "write"
         || request_context.generated_from != "nested_place_block"
         || failure_row_context.target_kind != "when_fails_row"
-        || failure_row_context.target_ref.is_empty()
+        || failure_row_context.target_ref != ELAB07_SET_INSERTION_TARGET_REF
+        || request_context.owner_locus != ELAB07_SET_INSERTION_OWNER_LOCUS
+        || request_context.state_name != ELAB07_SET_INSERTION_STATE_NAME
+        || request_context.field_name.as_deref() != Some(ELAB07_SET_INSERTION_FIELD_NAME)
         || failure_row_context.associated_request_count != 1
     {
         return None;

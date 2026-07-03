@@ -283,9 +283,11 @@ fixtures should reject or preserve at least:
 `plan/102` adds the exact `ELAB-07` positive and immediate regression tests.
 `plan/103` closes the first guard-hardening subset. `plan/104` closes the
 immediate same-event row under-suggestion by using the existing `when` source
-span as an internal association discriminator. The remaining negative fixture
-families are durable row identity, true multi-target-row policy, row creation /
-splitting / movement / retargeting, and partial-guidance / bundle exclusion.
+span as an internal association discriminator. `plan/105` closes the current
+Surface-expressible omitted-row / retargeting proxy subset by requiring the
+exact current `ELAB-07` locus. The remaining negative fixture families are
+durable row identity, true multi-target-row policy, true row movement /
+cross-row retargeting, and partial-guidance / bundle exclusion.
 
 ## Implementation sequencing constraint
 
@@ -336,8 +338,8 @@ current `ELAB-07` executable output OBL-025 completion evidence.
 
 ## Suggested next packages
 
-1. Add row creation / splitting / movement / retargeting rejection fixtures
-   before broader set guidance is attempted.
+1. Add partial-guidance / child-repair / bundle exclusion fixtures before
+   broader set guidance is attempted.
 2. Keep `ELAB-04` out of the first mixed-branch widening package until branch
    ownership / association / ordering / ranking are explicit.
 3. Keep OBL-025 abstract until the executable payload and negative guard

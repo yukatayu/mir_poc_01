@@ -59,8 +59,9 @@
 41. G1 ELAB-07 set-insertion executable payload prototype は `plan/102`
 42. G1 ELAB-07 set-insertion negative-guard hardening は `plan/103`
 43. G1 ELAB-07 set-insertion row-identity guard hardening は `plan/104`
-44. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-45. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+44. G1 ELAB-07 set-insertion exact-locus guard hardening は `plan/105`
+45. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+46. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -241,6 +242,8 @@
   `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md`
 - G1 ELAB-07 set-insertion row-identity guard hardening:
   `plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md`
+- G1 ELAB-07 set-insertion exact-locus guard hardening:
+  `plan/105-g1-erow07-set-insertion-exact-locus-guard-hardening.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

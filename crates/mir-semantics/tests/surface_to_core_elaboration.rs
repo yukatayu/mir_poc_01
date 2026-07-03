@@ -54,6 +54,17 @@ fn rejected_lab_details_for_source(source: &str) -> Vec<Value> {
         .clone()
 }
 
+fn assert_no_set_insertion_repair(detail: &Value) {
+    if let Some(repairs) = detail.get("suggested_repair").and_then(Value::as_array) {
+        assert!(
+            repairs
+                .iter()
+                .all(|repair| repair["repair_shape"] != "set_insertion"),
+            "unexpected set_insertion repair: {repairs:?}"
+        );
+    }
+}
+
 #[test]
 #[should_panic(expected = "placeholder repair payload string")]
 fn placeholder_repair_detector_rejects_marker_substrings() {
@@ -933,6 +944,222 @@ BrowserClient[self] {
             "set_insertion"
         );
     }
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_when_failure_row_would_need_creation() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardRowCreation
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["failure_row_context"]["declared_failures"],
+        serde_json::json!([])
+    );
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!([
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+        ])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_event_retargeting() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardEventRetargeting
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when heal(target: Participant) fails MissingCapability {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["failure_row_context"]["target_ref"],
+        "when_fails_row|locus=role:BrowserClient|event=heal"
+    );
+    assert_no_set_insertion_repair(&details[0]);
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_role_retargeting() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardRoleRetargeting
+
+role AdminClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+AdminClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["failure_row_context"]["target_ref"],
+        "when_fails_row|locus=role:AdminClient|event=attack"
+    );
+    assert_no_set_insertion_repair(&details[0]);
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_state_field_retargeting() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardStateFieldRetargeting
+
+role BrowserClient
+place S
+
+record Player {
+  score: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    S {
+      player[target].score = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["request_context"]["state_name"], "player");
+    assert_eq!(details[0]["request_context"]["field_name"], "score");
+    assert_no_set_insertion_repair(&details[0]);
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_owner_locus_retargeting() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardOwnerLocusRetargeting
+
+role BrowserClient
+place S
+place T
+
+record Player {
+  hp: Int64,
+}
+
+T {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    T {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["request_context"]["owner_locus"], "T");
+    assert_eq!(details[0]["request_context"]["state_name"], "player");
+    assert_eq!(details[0]["request_context"]["field_name"], "hp");
+    assert_no_set_insertion_repair(&details[0]);
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_state_name_retargeting() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardStateNameRetargeting
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state enemy[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability {
+    S {
+      enemy[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["request_context"]["owner_locus"], "S");
+    assert_eq!(details[0]["request_context"]["state_name"], "enemy");
+    assert_eq!(details[0]["request_context"]["field_name"], "hp");
+    assert_no_set_insertion_repair(&details[0]);
 }
 
 #[test]
