@@ -231,7 +231,9 @@ skipped.
 
 ## Commit / push status
 
-Pending at report draft time.
+Primary inventory commit `d66e23f6a8dc197adaeea3d09992a612c29cdf69`
+was created and pushed to `origin/main`. This status-only report correction is
+being committed and pushed immediately after the primary inventory commit.
 
 ## Sub-agent session close status
 
