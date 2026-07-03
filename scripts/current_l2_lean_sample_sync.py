@@ -70,6 +70,12 @@ STATEMENT_DRAFTS = [
         explanation_path="samples/lean/lab-statements/obl001/THM001StatementDraft.md",
     ),
     StatementDraftSpec(
+        draft_id="obl020-step-wf-statement-draft",
+        relative_dir="obl020",
+        filename="StepWFStatementDraft.lean",
+        explanation_path="samples/lean/lab-statements/obl020/StepWFStatementDraft.md",
+    ),
+    StatementDraftSpec(
         draft_id="obl021-elab-determinism-statement-draft",
         relative_dir="obl021",
         filename="ElabDeterminismStatementDraft.lean",

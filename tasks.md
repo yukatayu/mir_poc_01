@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 21:30 JST
+最終更新: 2026-07-03 21:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -74,6 +74,12 @@ Current holding state:
   `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean`.
   It compiles as a `Prop` definition and does not move canon OBL status, prove
   elaboration determinism, claim G1/T1/T2 exit, or edit canon.
+- `plan/78-g1-obl020-lean-statement-draft.md` now records a LAB-only
+  repo-local OBL-020 Lean statement-shape draft at
+  `samples/lean/lab-statements/obl020/StepWFStatementDraft.lean`. It compiles
+  as an aggregate `Prop` over abstract `WellFormed` / `Step` and does not move
+  canon OBL status, prove WF preservation, claim proof skeleton completion,
+  G1/T1/T2 exit, conformance, runtime implementation proof, or edit canon.
 
 ## candidate next strategy packages
 
@@ -82,7 +88,7 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `OBL-020 statement-shape draft` | `G1` reserve | create a LAB-only Lean `Prop` draft for WF preservation shape if useful | no proof skeleton, no OBL-020 completion, no canon ledger movement |
+| `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `E-ROW diagnostic alignment` | `G1` reserve | align canon E-ROW-001/E-ROW-002 vocabulary with current LAB `generated_failure_not_declared` evidence | no final diagnostic ABI freeze |

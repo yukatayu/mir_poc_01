@@ -71,6 +71,20 @@
     },
     {
       "kind": "statement-draft",
+      "draft_id": "obl020-step-wf-statement-draft",
+      "lean_path": "samples/lean/lab-statements/obl020/StepWFStatementDraft.lean",
+      "explanation_path": "samples/lean/lab-statements/obl020/StepWFStatementDraft.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      },
+      "status": "lab-compile-check-only"
+    },
+    {
+      "kind": "statement-draft",
       "draft_id": "obl021-elab-determinism-statement-draft",
       "lean_path": "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean",
       "explanation_path": "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",

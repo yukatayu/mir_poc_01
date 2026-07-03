@@ -72,6 +72,19 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
         )
 
+    def test_statement_drafts_include_obl020_draft(self) -> None:
+        entries = {spec.draft_id: spec for spec in sync.STATEMENT_DRAFTS}
+        draft = entries["obl020-step-wf-statement-draft"]
+
+        self.assertEqual(
+            draft.filename,
+            "StepWFStatementDraft.lean",
+        )
+        self.assertEqual(
+            draft.explanation_path,
+            "samples/lean/lab-statements/obl020/StepWFStatementDraft.md",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

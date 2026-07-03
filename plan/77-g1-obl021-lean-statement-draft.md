@@ -97,7 +97,7 @@ definitional equality, alpha-equivalence, or a canon-specific relation.
 |---|---|
 | OBL-001 | Assignment soundness statement draft remains in `obl001`; this OBL-021 draft does not refine THM-001 directly. |
 | OBL-002 | THM-001 proof work remains later and is not advanced by this draft. |
-| OBL-020 | Step-rule well-formedness preservation remains separate and has no Lean draft in this package. |
+| OBL-020 | Step-rule well-formedness preservation remains separate; a later package actualized its own LAB draft under `obl020`. |
 | OBL-021 | This is compile-check-only statement-shape evidence; it is not completion. |
 
 ## Open questions
@@ -113,10 +113,10 @@ definitional equality, alpha-equivalence, or a canon-specific relation.
 
 ## Next safe packages
 
-1. OBL-020 LAB Lean statement-shape draft, kept separate from OBL-021 and
-   OBL-001.
-2. OBL-001 statement refinement only if review finds a real missing predicate or
+1. OBL-001 statement refinement only if review finds a real missing predicate or
    overfit.
+2. OBL-020 / OBL-021 statement refinement only if review finds a real
+   abstraction gap or overfit.
 3. E-ROW diagnostic alignment package for canon E-ROW-001 / E-ROW-002 versus
    LAB `generated_failure_not_declared`, still without diagnostic ABI freeze.
 

@@ -189,16 +189,18 @@ SCN-01 and SCN-02 are pressure cases for the inventory, not conformance passes.
 
 ## Future Lean statement-shape implications
 
-No Lean file was added in this inventory package. A later package actualized
-the OBL-021 statement-shape draft under `samples/lean/lab-statements/obl021/`.
-Future LAB-only statement drafts should remain separated by obligation family
-unless a file is explicitly about shared vocabulary.
+No Lean file was added in this inventory package. Later packages actualized
+the OBL-021 statement-shape draft under `samples/lean/lab-statements/obl021/`
+and the OBL-020 statement-shape draft under
+`samples/lean/lab-statements/obl020/`. Future LAB-only statement drafts should
+remain separated by obligation family unless a file is explicitly about shared
+vocabulary.
 
 Possible future shapes, with names and file paths intentionally undecided:
 
 | Possible shape | Safe content | Non-claim |
 |---|---|---|
-| OBL-020 statement-shape draft | abstract `WF`, `Step`, and `PreservesWF` proposition shape | no step-rule proof, no theorem name decision |
+| OBL-020 statement-shape draft | actualized later as abstract `WellFormed`, `Step`, and `PreservesWF` aggregate proposition shape | no step-rule proof, no theorem name or proof-interface decision |
 | OBL-021 statement-shape draft | actualized later as abstract `Elaborates` / `Rejects` relation and deterministic result/diagnostic proposition | no parser/checker implementation proof, no equality relation or diagnostic ABI decision |
 | shared vocabulary draft | opaque carriers for env/locus/result/diagnostic/span | no final MirCore datatype freeze |
 
@@ -250,10 +252,10 @@ OBL status movement, no conformance claim, no runtime implementation claim.
 
 ## Next safe packages
 
-1. OBL-020 LAB Lean statement-shape draft, only if a statement skeleton is
-   useful before proof work.
-2. OBL-001 statement refinement, if review finds it should reference OBL-020
+1. OBL-001 statement refinement, if review finds it should reference OBL-020
    / OBL-021 only as explicit assumptions or adjacent obligations.
+2. OBL-020 statement refinement, only if review finds a concrete abstraction
+   gap or premature proof-interface wording.
 3. OBL-021 statement refinement, only if review finds a concrete gap such as
    projection-totality wording or diagnostic-equivalence granularity.
 4. E-ROW diagnostic alignment package for canon E-ROW-001 / E-ROW-002 versus
