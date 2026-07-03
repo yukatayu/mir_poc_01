@@ -288,6 +288,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/77-g1-obl021-lean-statement-draft.md",
             "plan/78-g1-obl020-lean-statement-draft.md",
             "plan/79-g1-erow-diagnostic-alignment.md",
+            "plan/80-g1-diagnostic-carrier-inventory.md",
             "plan/90-source-traceability.md",
             "plan/91-maintenance-rules.md",
             "docs/hands_on/surface_mir_alpha_01.md",

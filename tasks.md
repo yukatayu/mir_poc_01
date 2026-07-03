@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 21:47 JST
+最終更新: 2026-07-03 21:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -84,6 +84,11 @@ Current holding state:
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/80-g1-diagnostic-carrier-inventory.md` now inventories canon
+  Diagnostic carrier fields against current LAB `code/message/span`,
+  helper `diagnostic_codes`, remote request summaries, and source-span sidecar
+  evidence. It does not implement diagnostic ABI, state/prove OBL-024/025,
+  claim explanation soundness/completeness, claim conformance, or edit canon.
 
 ## candidate next strategy packages
 
@@ -95,8 +100,8 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `diagnostic carrier inventory` | `G1` reserve | inventory OBL-024/025 prerequisites and minimum Diagnostic carrier fields for future E-ROW work | no OBL-024/025 discharge |
 | `E-ROW helper ID split` | `G1` reserve | optionally split LAB helper output into canon-shaped E-ROW-001/E-ROW-002 categories with Rust/Python tests | no final diagnostic ABI freeze |
+| `OBL-024 statement-shape inventory` | `G1` reserve | inventory explanation soundness statement prerequisites without a Lean file | no proof discharge or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |

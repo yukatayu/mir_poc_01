@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 21:47 JST
+最終更新: 2026-07-03 21:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -110,10 +110,17 @@ semantic source authority.
   implementation proof, or edit canon.
 - Current E-ROW alignment note:
   `plan/79-g1-erow-diagnostic-alignment.md` maps canon E-ROW-001/E-ROW-002 to
-  current LAB `generated_failure_not_declared` evidence. It treats ELAB-04 and
-  ELAB-07 as E-ROW-001 evidence and ELAB-10 as E-ROW-002 pressure evidence
-  carried by the same helper-local diagnostic family. It does not freeze a
-  diagnostic ABI, discharge OBL-024/025, claim conformance, or edit canon.
+  current LAB `generated_failure_not_declared` evidence. It treats ELAB-07 as
+  clean E-ROW-001-shaped evidence, ELAB-10 as clean E-ROW-002-shaped pressure
+  evidence still carried by the same helper-local diagnostic family, and
+  ELAB-04 as mixed E-ROW-shaped evidence. It does not freeze a diagnostic ABI,
+  discharge OBL-024/025, claim conformance, or edit canon.
+- Current diagnostic carrier inventory note:
+  `plan/80-g1-diagnostic-carrier-inventory.md` inventories the gap between
+  canon Diagnostic fields and current LAB `code/message/span` plus helper
+  `diagnostic_codes` / source-span sidecar evidence. It does not implement a
+  diagnostic ABI, state or prove OBL-024/025, claim explanation
+  soundness/completeness, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -123,10 +130,10 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the safe self-driven theory package is now either diagnostic
-  carrier inventory for OBL-024/025 prerequisites, optional LAB helper
-  diagnostic ID split for E-ROW-001/E-ROW-002 with tests, or focused refinement
-  of the LAB OBL-001/020/021 statement drafts if review finds a real gap. This remains before any later
+- Next gap: the safe self-driven theory package is now either an additive LAB
+  diagnostic carrier prototype for E-ROW only, optional OBL-024 statement-shape
+  inventory without proof/status movement, or focused refinement of the LAB
+  OBL-001/020/021 statement drafts if review finds a real gap. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -506,6 +513,13 @@ Research-discovery items:
   ELAB-04/07 は E-ROW-001 evidence、ELAB-10 は同じ helper-local diagnostic
   family で表現された E-ROW-002 pressure evidence として読み、diagnostic ABI
   freeze、OBL-024/025 discharge、C-static conformance、G1 exit は主張していない。
+- 2026-07-03 21:54 JST
+  `plan/80-g1-diagnostic-carrier-inventory.md` を追加し、canon Diagnostic carrier
+  fields と current LAB `TextualMirDiagnostic` / Surface helper projection /
+  expected JSON の差分を整理した。`code/message/span` と `diagnostic_codes`
+  evidence は現状の足場として扱い、diagnostic ABI freeze、OBL-024/025
+  statement/proof discharge、explanation soundness/completeness、conformance、
+  G1 exit は主張していない。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間
