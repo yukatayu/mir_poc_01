@@ -114,14 +114,16 @@ RHS dependency.
 
 ## Next safe packages
 
-The first item below was actualized as LAB evidence in
-`plan/75-g1-scn-rhs-dependency-gap-evidence.md`.
+The first two items below were actualized as LAB evidence/memory in
+`plan/75-g1-scn-rhs-dependency-gap-evidence.md` and
+`plan/76-g1-obl020-021-dependency-inventory.md`.
 
 1. OBL-020/021 dependency inventory and possible Lean statement-shape drafts,
    kept separate from OBL-001 proof work.
 2. Narrow refinement of `THM001StatementDraft.lean` if review finds a
    statement-shape overfit or missing predicate, still without canon status
    movement.
+3. Separate OBL-020 / OBL-021 LAB Lean statement-shape drafts, only if useful.
 
 ## Non-claims
 

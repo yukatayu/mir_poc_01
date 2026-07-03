@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 21:10 JST
+最終更新: 2026-07-03 21:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -87,6 +87,12 @@ semantic source authority.
   target/self RHS dependencies. These rows close the immediate LAB evidence gap
   without claiming C-static conformance, proof discharge, G1 exit, runtime read
   materialization, or final Core IR JSON/API.
+- Current OBL-020/021 inventory note:
+  `plan/76-g1-obl020-021-dependency-inventory.md` separates the
+  well-formedness-preservation and elaboration-determinism dependency
+  inventories from OBL-001/002. It does not claim either obligation complete,
+  create Lean statement files, move canon ledger status, prove a skeleton,
+  claim G1/T1/T2 exit, or claim conformance.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -96,10 +102,10 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the safe self-driven theory package is OBL-020/021 dependency
-  inventory, a focused refinement of the LAB OBL-001 statement draft, or
-  diagnostic alignment for canon E-ROW-001/E-ROW-002 versus LAB
-  `generated_failure_not_declared`. This remains before any later
+- Next gap: the safe self-driven theory package is now either separate
+  OBL-020 / OBL-021 LAB Lean statement-shape drafts, a focused refinement of
+  the LAB OBL-001 statement draft, or diagnostic alignment for canon
+  E-ROW-001/E-ROW-002 versus LAB `generated_failure_not_declared`. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -450,6 +456,13 @@ Research-discovery items:
   を確認したが、C-static conformance、OPEN-014 materialization、proof
   discharge、G1 exit は主張していない。次は OBL-020/021 dependency inventory
   または diagnostic alignment。
+- 2026-07-03 21:19 JST
+  `plan/76-g1-obl020-021-dependency-inventory.md` を追加し、OBL-020
+  well-formedness preservation と OBL-021 elaboration determinism の依存関係を
+  OBL-001/002 から分離して整理した。これは inventory-only で、OBL 完了、
+  Lean statement、proof skeleton、G1/T1/T2 exit、conformance は主張していない。
+  次は separate LAB Lean statement-shape draft、OBL-001 refinement、または
+  E-ROW diagnostic alignment。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

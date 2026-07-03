@@ -98,11 +98,15 @@ remote write request + forced runtime/observe read materialization
 
 ## Next safe packages
 
+The first item below was actualized in
+`plan/76-g1-obl020-021-dependency-inventory.md`.
+
 1. OBL-020/021 dependency inventory, kept separate from OBL-001 proof work.
 2. OBL-001 statement refinement only if `THM001StatementDraft.lean` should
    mention the concrete LAB `rhs_indexed_read` carrier as evidence, without
    importing it into canon.
-3. Negative diagnostic alignment package for canon E-ROW-001 / E-ROW-002 versus
+3. Separate OBL-020 / OBL-021 LAB Lean statement-shape drafts, only if useful.
+4. Negative diagnostic alignment package for canon E-ROW-001 / E-ROW-002 versus
    LAB `generated_failure_not_declared`, still without diagnostic ABI freeze.
 
 ## Non-claims

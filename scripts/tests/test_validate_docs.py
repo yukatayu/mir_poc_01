@@ -284,6 +284,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/73-g1-obl001-lean-statement-inventory.md",
             "plan/74-g1-obl001-lean-statement-draft.md",
             "plan/75-g1-scn-rhs-dependency-gap-evidence.md",
+            "plan/76-g1-obl020-021-dependency-inventory.md",
             "plan/90-source-traceability.md",
             "plan/91-maintenance-rules.md",
             "docs/hands_on/surface_mir_alpha_01.md",
