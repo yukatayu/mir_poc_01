@@ -310,7 +310,16 @@ No intended validation skips.
 
 ## Commit / push status
 
-Pending at report write.
+Implementation commit:
+
+- `1b41c71e41e14e954a7ce685cc69a52ea6127c8a`
+  (`Add G1 E-ROW set insertion bundle inventory`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- Verified immediately after push that local `HEAD` and `origin/main` both
+  pointed at `1b41c71e41e14e954a7ce685cc69a52ea6127c8a`.
 
 ## Sub-agent session close status
 
