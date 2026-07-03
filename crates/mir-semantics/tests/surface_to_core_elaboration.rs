@@ -577,6 +577,79 @@ BrowserClient[self] {
 }
 
 #[test]
+fn keeps_non_visibility_singleton_erow001_without_repair() {
+    let source = r#"
+module Surface.Elab.NonVisibilitySingletonFailureRow
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, RouteUnavailable, StaleMembership {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+
+    assert!(!report.accepted);
+    assert_eq!(
+        surface_elaboration_diagnostic_codes(&report),
+        vec!["generated_failure_not_declared"]
+    );
+    assert_eq!(report.core_ir.remote_requests.len(), 1);
+    assert!(!report.core_ir.remote_requests[0].failure_row_complete);
+
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["legacy_code"], "generated_failure_not_declared");
+    assert_eq!(details[0]["canon_id"], "E-ROW-001");
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["MissingWitness"])
+    );
+    assert_eq!(
+        details[0]["failure_row_context"],
+        serde_json::json!({
+            "target_kind": "when_fails_row",
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+            "target_locus": "role:BrowserClient",
+            "event_name": "attack",
+            "required_failures": [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership"
+            ],
+            "declared_failures": [
+                "MissingCapability",
+                "RouteUnavailable",
+                "StaleMembership"
+            ],
+            "missing_failures": [
+                "MissingWitness"
+            ],
+            "local_premise": "generated_failures_subset_declared_fails"
+        })
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
 fn rejects_visibility_only_failure_row_underdeclaration_with_erow_002_detail() {
     let source = r#"
 module Surface.Elab.VisibilityOnlyFailureRow

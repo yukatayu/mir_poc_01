@@ -1,0 +1,20 @@
+module Surface.Elab.NonVisibilitySingletonFailureRowNegative
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, RouteUnavailable, StaleMembership {
+    S {
+      player[target].hp = 1
+    }
+  }
+}

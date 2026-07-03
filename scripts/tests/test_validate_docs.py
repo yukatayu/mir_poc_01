@@ -297,6 +297,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/86-g1-erow002-visibility-repair-carrier-prototype.md",
             "plan/87-g1-obl025-lean-statement-draft.md",
             "plan/88-g1-erow-repair-shape-inventory.md",
+            "plan/89-g1-erow001-non-visibility-singleton-fixture.md",
             "plan/90-source-traceability.md",
             "plan/91-maintenance-rules.md",
             "docs/hands_on/surface_mir_alpha_01.md",

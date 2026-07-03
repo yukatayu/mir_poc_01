@@ -16,12 +16,15 @@ Current executable rows:
 - `ELAB-10`: visible communication rejects an underdeclared `VisibilityDenied` failure row.
 - `ELAB-11`: SCN-01-shaped visible same-field assignment records an RHS dependency row without claiming runtime dispatch.
 - `ELAB-12`: SCN-02-shaped attack assignment records target/self RHS dependency rows without freezing read materialization.
+- `ELAB-13`: non-visibility singleton `MissingWitness` omission remains `E-ROW-001` no-repair evidence.
 
 These rows do not claim final public grammar, runtime MessageEnvelope dispatch, role-admission capability grants, source patch activation, or TypeMismatch typechecker discharge.
 
 G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
-`ELAB-07`, and `ELAB-10` as non-final `lab_diagnostic_details`. It preserves
-legacy `generated_failure_not_declared` output, now includes request /
-failure-row context, emits `E-ROW-002` / `VisibilityDenied`-only
-`suggested_repair[]` evidence for `ELAB-10`, and does not freeze a diagnostic /
-repair ABI or claim OBL-025.
+`ELAB-07`, `ELAB-10`, and `ELAB-13` as non-final
+`lab_diagnostic_details`. It preserves legacy
+`generated_failure_not_declared` output, now includes request / failure-row
+context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
+evidence for `ELAB-10`, keeps `ELAB-13` as `E-ROW-001` /
+`MissingWitness` singleton no-repair evidence, and does not freeze a diagnostic
+/ repair ABI or claim OBL-025.

@@ -109,6 +109,15 @@
       "source": "elab-12-scn02-two-read-dependency-positive/main/src/scn02-two-read-dependency-positive.mir",
       "expected": "elab-12-scn02-two-read-dependency-positive/expected/elaboration.json",
       "runner": "elaboration"
+    },
+    {
+      "sample_id": "ELAB-13",
+      "root_name": "elab-13-non-visibility-singleton-failure-row-negative",
+      "stage": "G1-repair-boundary",
+      "current_status": "executable",
+      "source": "elab-13-non-visibility-singleton-failure-row-negative/main/src/non-visibility-singleton-failure-row-negative.mir",
+      "expected": "elab-13-non-visibility-singleton-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
     }
   ]
 }
