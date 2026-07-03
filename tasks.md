@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 17:38 JST
+最終更新: 2026-07-03 18:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -28,8 +28,9 @@ Current holding state:
 - `mirrorea_canon/` is the canon-first source for direction, theory, ADRs,
   conformance, and process. Existing LAB evidence remains useful, but does not
   override canon.
-- Canon phase reading is T0/G0 rebaseline. The immediate management gap is
-  reconciliation from legacy LAB claims to canon IDs / OPEN entries.
+- Canon phase reading is T0/G0 rebaseline. The immediate LAB-to-canon claim
+  family ledger now exists at `plan/70-lab-to-canon-reconciliation-ledger.md`;
+  it is LAB evidence, not G0 exit.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -40,6 +41,9 @@ Current holding state:
   `plan/69-consultation-synthesis-and-management-roadmap.md` as non-normative
   repository memory. It does not promote a new package or create a `specs/`
   decision.
+- High-risk legacy LAB claim families are now mapped in `plan/70` to canon
+  anchors, rejected historical claim patterns, or OPEN follow-up. The next
+  safe package should target G1 ordinary assignment, not runtime widening.
 
 ## candidate next strategy packages
 
@@ -48,9 +52,9 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `LAB-to-canon reconciliation ledger` | `T0/G0` source-hierarchy closeout | map legacy LAB specs / plan / snapshot claims to canon IDs, rejected historical claims, or OPEN entries | ledger remains LAB evidence; no canon L0/L1 change without proposal / human decision / ADR or changelog as required |
 | `ordinary-assignment target draft` | `G1` front-half | draft the target obligation for ordinary assignment elaboration preserving authority, failure row, dependency, generated communication, and source span | no theorem discharge claim; target obligation and proof boundary are separated in canon terms |
-| `planning-ledger pilot` | `Macro 0/1` reserve | create a non-normative concept / claim / open-problem / ADR-candidate inventory for axis, semantic strata, ordinary assignment, and non-axis boundaries | ledger remains explicitly non-normative; canon unchanged; report records unresolved promotion questions |
+| `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
+| `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
 
 ## ordered self-driven packages
@@ -111,6 +115,7 @@ next line.
 | Task | Objective | Validation | Stop line |
 |---|---|---|---|
 | docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
+| canon/LAB wording audit | keep touched LAB docs from re-promoting legacy `specs/` or helper closeouts to canon status | source-hierarchy grep plus validators | do not rewrite historical LAB evidence wholesale |
 | product compatibility audit | preserve Product Alpha and operational suite while Surface advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
 | sample taxonomy audit | keep Surface planned roots distinct from active roots | source hierarchy and relevant helper checks | do not create or mark `samples/full-system-v1-surface/` workflow-ready until implementation rows exist |
 | validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence and heading shape, not semantic correctness |

@@ -65,7 +65,7 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 ## current active floor
 
-active canonical sample は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence は `samples/lean/` に置きます。
+active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence は `samples/lean/` に置きます。
 
 - `typing/`
   finite-index first strong typing layer

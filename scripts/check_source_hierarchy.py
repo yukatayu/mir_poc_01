@@ -117,6 +117,10 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/66-role-admission-roadmap.md",
         "plan/67-source-patch-hotplug-roadmap.md",
         "plan/68-surface-full-system-v1-roadmap.md",
+        "plan/69-consultation-synthesis-and-management-roadmap.md",
+        "plan/70-lab-to-canon-reconciliation-ledger.md",
+        "plan/90-source-traceability.md",
+        "plan/91-maintenance-rules.md",
     ],
     "scripts": [
         "scripts",

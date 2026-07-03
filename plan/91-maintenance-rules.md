@@ -35,10 +35,12 @@
   - 仮説 / 一時的 working assumption
   - 履歴 / comparison / rejected option
 
-## `plan/` と他文書の関係
+## source hierarchy と他文書の関係
 
-- `specs/`:
-  - 規範文書
+- `mirrorea_canon/`:
+  - 規範正本
+- legacy `specs/`:
+  - LAB evidence / historical specification memory
 - `docs/reports/`:
   - 時系列の作業証跡
 - `plan/`:
@@ -52,20 +54,23 @@ current L2 / parser-free PoC / helper stack / roadmap task では、少なくと
 
 1. `README.md`
 2. `Documentation.md`
-3. current status / progress / remaining steps / roadmap task なら `progress.md`
-4. phase recut / roadmap rewrite / progress/tasks reorganization task なら `.docs/progress-task-axes.md`
-5. task が named `sub-agent-pro/*.md` handoff を指定した場合は、その handoff を user 指示順で先に読む
-6. `specs/00-document-map.md`
-7. `specs/01-charter-and-decision-levels.md`
-8. `specs/02-system-overview.md`
-9. `specs/03-layer-model.md`
-10. `specs/09-invariants-and-constraints.md`
-11. `plan/00-index.md`
-12. 関連する `plan/` 本文
-13. 必要な `specs/examples/`、report chain、code anchor
+3. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
+   task-specific canon files
+4. current status / progress / remaining steps / roadmap task なら `progress.md`
+5. phase recut / roadmap rewrite / progress/tasks reorganization task なら `.docs/progress-task-axes.md`
+6. task が named `sub-agent-pro/*.md` handoff を指定した場合は、その handoff を user 指示順で先に読む
+7. LAB history として `specs/00-document-map.md`
+8. `specs/01-charter-and-decision-levels.md`
+9. `specs/02-system-overview.md`
+10. `specs/03-layer-model.md`
+11. `specs/09-invariants-and-constraints.md`
+12. `plan/00-index.md`
+13. 関連する `plan/` 本文
+14. 必要な `specs/examples/`、report chain、code anchor
 
-ただし、**規範判断の正本は常に `specs/`** である。
-`plan/` はその現況整理と導線であり、規範文書を置き換えない。
+ただし、**規範判断の正本は常に `mirrorea_canon/`** である。
+`plan/` と legacy `specs/` はその現況整理、履歴、証拠、導線であり、
+規範文書を置き換えない。
 
 ## mirror 扱いの文書
 
@@ -90,7 +95,7 @@ current task で変更が入ったら、次の mirror 群の更新要否を確�
 ## `progress.md` の扱い
 
 - `progress.md` は repo 全体の簡潔な進捗スナップショットである。
-- 規範判断の正本にはしない。規範判断は `specs/`、長期参照整理は `plan/` に残す。
+- 規範判断の正本にはしない。規範判断は `mirrorea_canon/`、長期参照整理は `plan/` に残す。
 - current status / roadmap / remaining steps / major bottleneck / validation loop の到達見込みが変わった task では、同じ task の中で `progress.md` の更新要否を確認する。
 - `progress.md` の進捗率は、可能な限り
   - 論理仕様
@@ -141,7 +146,7 @@ current task で変更が入ったら、次の mirror 群の更新要否を確�
   - 主要な選択肢
   - current recommendation
   を書く。
-- `tasks.md` は規範判断の正本ではない。規範判断は `specs/`、長期比較は `plan/` に残す。
+- `tasks.md` は規範判断の正本ではない。規範判断は `mirrorea_canon/`、長期比較は `plan/` に残す。
 - 更新しなかった場合でも、report に **`tasks.md 更新不要`** と明記する。
 
 ## review 運用

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 17:38 JST
+最終更新: 2026-07-03 18:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,8 +59,9 @@ semantic source authority.
   at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
   not canon implementation-state completion.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
-  as canon. The next management gap is a reconciliation ledger from legacy LAB
-  claims to canon IDs / OPEN entries.
+  as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
+  high-risk legacy LAB claim families to canon IDs, rejected historical claim
+  patterns, or OPEN follow-up. This is LAB evidence and does not claim G0 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -70,8 +71,10 @@ semantic source authority.
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   and static devtools diagnostics floors revalidated.
-- Next gap: later user-spec-required reopen for final runtime/transport,
-  final source patch ABI, final viewer/telemetry ABI, or broader public grammar.
+- Next gap: the safe self-driven theory package is G1 ordinary assignment target
+  drafting, before any later user-spec-required reopen for final
+  runtime/transport, final source patch ABI, final viewer/telemetry ABI, or
+  broader public grammar.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -157,7 +160,9 @@ Current evidence:
 
 - Full System V1 parser/checker/runtime/projection/provider/release-check line
   remains closed through final audit.
-- Surface Mir normative docs are `specs/39..43`.
+- Legacy LAB Surface Mir evidence docs are `specs/39..43`; canon targets for
+  source language, elaboration, conformance, and proof obligations live under
+  `mirrorea_canon/spec/` and `mirrorea_canon/theory/`.
 - Surface Mir repository memory is `plan/64..68`.
 - `crates/mir-ast::surface_alpha` parses canonical `S { ... }`, role-instance
   blocks, `state`, `when`, `join`, record literals, and expected syntax
@@ -379,6 +384,11 @@ Research-discovery items:
   持っていたため、root `CANON.md`、entry banner、validator guardrail、
   clean-near-end / highlighter の旧 `world` 語彙注記を追加した。次は
   LAB-to-canon reconciliation ledger と G1 ordinary assignment target。
+- 2026-07-03 18:38 JST
+  `plan/70-lab-to-canon-reconciliation-ledger.md` を追加し、legacy LAB claim
+  family を canon anchor / rejected historical pattern / OPEN follow-up に
+  照合した。G0 exit は主張せず、次の安全な自走 package を G1 ordinary
+  assignment target draft として整理した。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

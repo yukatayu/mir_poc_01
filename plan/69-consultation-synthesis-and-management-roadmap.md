@@ -9,23 +9,24 @@ the current repo snapshot. It does not create a new `specs/` decision, does not
 promote a package, and does not decide whether work should move to a separate
 theory/design repository.
 
-Normative truth remains in `specs/`. Current status remains in `progress.md` and
-`tasks.md`. Reports remain the evidence trail.
+Normative truth remains in `mirrorea_canon/`. Current status remains in
+`progress.md` and `tasks.md`. Reports remain the evidence trail.
 
 ## source-hierarchy reading
 
 The consultation is useful as strategy input, but it must be reconciled with the
 repo's existing source hierarchy:
 
-- `specs/` is normative source.
-- `plan/` is long-lived repository memory.
+- `mirrorea_canon/` is the normative source.
+- legacy `specs/` and `plan/` are LAB evidence / long-lived repository memory.
 - `progress.md` and `tasks.md` are current snapshots.
 - `docs/reports/` records work evidence and reasoning history.
 - sample dashboards and helper outputs are evidence, not completion.
 
 Therefore, consultation-derived ideas enter this repo first as `plan/` memory
-and report evidence. They become normative only through an explicit `specs/`
-edit and report.
+and report evidence. They become normative only through the canon process:
+proposal, human decision where required, canon file / ADR / changelog update,
+and index regeneration.
 
 ## current status after readthrough
 
@@ -221,8 +222,11 @@ Safe introduction path:
 2. If useful, create plan-scoped or generated non-normative inventories:
    concept ledger, claim ledger, open-problem ledger, ADR candidate list,
    diagram list, minimal-slice outline.
-3. Promote any actual normative change through `specs/` plus report.
+3. Promote any actual normative change through `mirrorea_canon/` according to
+   ADR-0012 and the canon operating model.
 4. Mirror current state only in `progress.md` and `tasks.md`.
+5. Use `plan/70-lab-to-canon-reconciliation-ledger.md` to map legacy LAB claim
+   families to canon anchors, rejected historical claims, or OPEN follow-up.
 
 Candidate ledger records:
 

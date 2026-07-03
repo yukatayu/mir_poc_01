@@ -5,7 +5,7 @@
 ## current taxonomy
 
 - `clean-near-end/`
-  active canonical executable suite
+  active LAB clean executable suite
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
@@ -17,7 +17,7 @@
 - `practical-alpha1/`
   practical alpha-1 front-door sample root
   - current cuts は limited `package.mir.json` front-door fixture family、first checker-floor fixture family、`RUN-01..04` を含む first local-runtime fixture family、attach-time freshness/witness negatives、narrow object preview seam、explicit deferred detach minimal contract を含む practical hot-plug fixture family、exact hot-plug reports を source とする `AV-A1-01/02/03` practical avatar preview fixture family、distinct transport-plan/report carrier を通る `TR-A1-01..07` practical transport fixture family、exact practical reports を source とする `VIS-A1-01/02/03/04/05/06/07` practical devtools export bundle family、runtime-backed `SL-A1-01/02` と checker-backed preflight `SL-A1-03` を含む practical local save/load fixture family、preview manifest から exact practical reports / exact practical devtools bundles / exact avatar preview reports を束ね、`PE2E-06` では exact `SL-A1-03` preflight reject report を consume する `PE2E-01..09` practical product-preview family、そして `PA1W-01..08` bounded practical integrated workflow carrier
-  - active canonical runnable root や full toolchain root ではまだない
+  - active LAB runnable root や full toolchain root ではまだない
 - `product-alpha1/`
   product/public alpha-1 sample root
   - `demo/` is the P-A1-26 versioned schema / CLI fixture root, P-A1-27 local same-session runtime fixture root, P-A1-28 local save/quiescent-save fixture root, P-A1-29 transport/viewer fixture root, P-A1-30 native host launch bundle fixture root, and P-A1-31 release-candidate demo root
@@ -139,7 +139,7 @@
 - `alpha/` と `practical-alpha1/` を混同しない
   - `alpha/` は evidence closeout root
   - `practical-alpha1/` は current repo state では `package.mir.json` loader fixtures、first checker-floor fixtures、`RUN-01..04` local-runtime fixtures、`HP-A1-01..05` / `HP-A1-04B1` / `HP-A1-04B2` / `HP-A1-06` / `HP-A1-07` hot-plug fixtures、`TR-A1-01..07` transport fixtures、`SL-A1-01/02/03` local save/load fixtures を持つ
-  - `practical-alpha1/` もまだ active canonical runnable root ではなく、`previews/` root に `PE2E-01..09` の first practical product-preview floor を持ち、別 lane で `AV-A1-01/02/03` の first practical avatar preview floor を持つが、native avatar execution、same-session product runtime、final object package attach、detach runtime lifecycle、WAN/federation、distributed durable save/load、full product surfaces は later packages に残る
+  - `practical-alpha1/` もまだ active LAB runnable root ではなく、`previews/` root に `PE2E-01..09` の first practical product-preview floor を持ち、別 lane で `AV-A1-01/02/03` の first practical avatar preview floor を持つが、native avatar execution、same-session product runtime、final object package attach、detach runtime lifecycle、WAN/federation、distributed durable save/load、full product surfaces は later packages に残る
   - `scripts/practical_alpha05_session.py` はこの root を first bounded α-0.5 same-session carrier として consume し、`OA05-07` で one minimal typed external `AddOne` host-I/O adapter lane を same-session observer surface へ接続する。これは Mir-owned computational-core evidence ではない。
   - `scripts/practical_alpha08_session_hotplug.py` は同じ root を bounded α-0.8 same-session hot-plug carrier として再利用し、`OA08-01..10` で debug / auth / rate-limit / object preview / deferred detach の accepted/rejected/deferred lifecycle を same-session observer surface へ接続する。rejected attach は active runtime state を mutate しないが、session-carried observation として残る。
   - `scripts/practical_alpha09_devtools.py` は同じ root を bounded α-0.9 session-bound devtools carrier として再利用し、`OA09-01..09` で event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace を同じ session export へ接続する。final public viewer / telemetry ABI、durable audit、product-ready alpha-1 は later
