@@ -156,6 +156,11 @@ python3 scripts/check_source_hierarchy.py
 python3 -m unittest scripts.tests.test_validate_docs
 python3 scripts/validate_docs.py
 git diff --check
+git commit --no-gpg-sign -m "Add G1 E-ROW base singleton fixture closure"
+git push
+git rev-parse HEAD origin/main
+git status --short --branch
+date '+%Y-%m-%d %H:%M %Z'
 ```
 
 ## Evidence / outputs / test results
@@ -294,7 +299,13 @@ ELAB-14..16; follow-up added the README and source `.mir` paths.
 
 ## Commit / push status
 
-Pending at initial report write.
+- Primary commit: `33be72235de1d0cd7aa45ef397c8b200998e1f79`
+  (`Add G1 E-ROW base singleton fixture closure`).
+- Push confirmed at 2026-07-04 00:32 JST.
+- `HEAD == origin/main == 33be72235de1d0cd7aa45ef397c8b200998e1f79`
+  after the primary push.
+- This report status update is expected to be recorded in a follow-up
+  bookkeeping commit.
 
 ## Sub-agent session close status
 
