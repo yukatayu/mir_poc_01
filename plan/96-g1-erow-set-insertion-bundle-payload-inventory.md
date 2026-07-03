@@ -269,7 +269,10 @@ is explicitly a single source edit and the item discharges the local premise.
 
 Future conjunctive bundles are not single-edit evidence unless OBL-025 is
 refined to admit grouped multi-edit witnesses, or unless a separate relation
-covers bundle completeness. Partial guidance is not OBL-025 coverage.
+covers bundle completeness. Partial guidance is not OBL-025 coverage. After
+`plan/108`, branch-local guidance for mixed rows is also explicit
+non-coverage unless a whole-gap relation covers every missing failure for the
+associated request.
 
 This package does not change the LAB Lean statement draft and does not move
 canon proof status.

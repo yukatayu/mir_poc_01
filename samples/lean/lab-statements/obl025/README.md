@@ -7,7 +7,8 @@ Current draft:
 
 - `RepairCompletenessStatementDraft.lean`: compile-check-only OBL-025 shape
   with abstract whole-rejected-gap, set-insertion, grouped multi-edit,
-  complete-local-repair, and partial-guidance predicates.
+  complete-local-repair, partial-guidance, and branch-local non-coverage
+  predicates.
 
 Boundary:
 
@@ -17,4 +18,4 @@ Boundary:
 - no proof discharge;
 - no G1/T1/T2 exit or conformance claim;
 - no final Diagnostic / repair ABI, repair ranking, multi-edit repair support,
-  or whole-program success claim.
+  branch ID semantics, or whole-program success claim.

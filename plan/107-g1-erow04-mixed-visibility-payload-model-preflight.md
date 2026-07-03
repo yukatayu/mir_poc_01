@@ -266,7 +266,9 @@ This package adds no sample row and changes no expected JSON.
    diagnostics.
 3. If proof-side work comes first, refine OBL-025 around whole-gap coverage,
    branch-local guidance non-coverage, and grouped multi-edit relation without
-   importing final ranking.
+   importing final ranking. `plan/108` later adds branch-local non-coverage
+   helper predicates to the LAB Lean statement draft while preserving
+   no-repair executable output.
 4. Draft OBL-024 only after diagnostic replay / association vocabulary can
    distinguish one mixed request from two independent diagnostics.
 

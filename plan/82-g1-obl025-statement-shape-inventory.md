@@ -75,6 +75,7 @@ below are inventory names, not final Lean names.
 | `RepairMatchesFailure` | suggested repair corresponds to the missing evidence / failed family | OPEN |
 | `RepairDischargesLocalPremise` | applying the repair discharges the local reported premise, without claiming whole-program acceptance | OPEN |
 | `RepairBlameTarget` | repair target points at the declaration/evidence site, not only the use site | OPEN multi-span policy |
+| `RepairBranch` / `BranchLocalNonCoverage` | abstract vocabulary for branch-local witnesses / guidance that do not cover the whole rejected gap | added in LAB Lean refinement `plan/108`; not final branch IDs |
 | `CompletenessCoverage` | if a single-edit repair exists, some diagnostic for the rejection has non-empty repair suggestions | not stated/proved |
 
 ## Candidate statement skeleton
@@ -148,6 +149,9 @@ Evidence classification:
   changing visibility / observe declarations.
 - Repair ranking and multi-edit repairs, which canon explicitly leaves
   post-GATE-1.
+- Branch-local guidance for mixed rows such as `ELAB-04`: current LAB Lean
+  refinement can name non-coverage, but does not decide final branch IDs,
+  payload shape, or executable guidance fields.
 - Whether the first OBL-025 statement covers all Line-1 rejection families or
   an E-ROW fragment with a later-generalization boundary.
 - Repair validity / preservation after applying the edit; this inventory only
@@ -176,6 +180,9 @@ Evidence classification:
   execution safe or successful; it only declares an explicit failure surface.
 - Do not freeze final repair payload JSON or message wording.
 - Do not treat `ELAB-04` as a clean single-repair witness.
+- Do not treat an `ELAB-04` base branch or visibility branch as complete
+  OBL-025 coverage unless a later whole-gap relation covers every missing
+  failure for the associated request.
 - Do not let E-ROW become the whole diagnostic theorem.
 - Do not edit canon or move `theory/11` proof status from this LAB inventory.
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 06:31 JST
+最終更新: 2026-07-04 07:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -174,10 +174,12 @@ semantic source authority.
   It compiles as an existential repair-coverage `Prop` over abstract
   Line-1/rejection/declared-fragment/repair/diagnostic predicates. The current
   refinement adds whole-rejected-gap, set-insertion, grouped multi-edit,
-  complete local repair, and partial-guidance non-coverage predicates so set
-  insertion can enter only through the existing single-edit relation, while
-  grouped multi-edit / partial guidance remain outside current OBL-025
-  coverage. It does not move canon OBL status, prove OBL-025, freeze
+  complete local repair, partial-guidance non-coverage, and branch-local
+  non-coverage predicates so set insertion can enter only through the existing
+  single-edit relation, while grouped multi-edit / partial guidance and
+  `ELAB-04` branch-local guidance remain outside current OBL-025 coverage
+  unless a later whole-gap relation covers every missing failure. It does not
+  move canon OBL status, prove OBL-025, freeze
   diagnostic/repair ABI, claim explanation completeness, claim conformance, or
   claim G1 exit.
 - Current E-ROW repair shape inventory note:
@@ -313,6 +315,16 @@ semantic source authority.
   `ELAB-04` executable payload, set-insertion support, bundle semantics,
   partial-guidance output, visibility-repair ranking, OBL-025 proof /
   completion, conformance, final ABI, or G1 exit.
+- Current OBL-025 branch-local non-coverage note:
+  `plan/108-g1-obl025-branch-local-noncoverage-refinement.md` records a
+  LAB-only Lean refinement after the `ELAB-04` mixed payload preflight. It adds
+  abstract `RepairBranch` / branch-local witness and suggestion predicates plus
+  helper relations that explicitly keep branch-local guidance from counting as
+  whole rejected-gap OBL-025 coverage. `RepairBranch` is statement-shape
+  vocabulary only, not a final branch ID, JSON field, diagnostic ABI, or repair
+  ABI. This does not add proof, canon ledger movement, executable repair
+  widening, `ELAB-04` payload output, branch ranking, conformance, final ABI,
+  or G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -335,7 +347,9 @@ semantic source authority.
   Surface-expressible omitted-row / retargeting proxies, and child / bundle /
   partial / textual guidance exclusion shape assertions, plus an `ELAB-04`
   mixed visibility payload-model preflight that names the conceptual mixed
-  wrapper / base branch / visibility branch and keeps ranking deferred.
+  wrapper / base branch / visibility branch and keeps ranking deferred, and an
+  OBL-025 branch-local non-coverage refinement that keeps branch-local guidance
+  outside whole-gap repair coverage.
   `ELAB-07` now emits one `set_insertion` item only for the current exact
   write-side base-failure set gap. `plan/100` accepts the narrow LAB
   source-locus edit assumption for `ELAB-07` only, with
@@ -671,7 +685,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-025 now has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage predicates without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-025 now has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -680,7 +694,17 @@ Entries below are historical snapshots at each task close. Earlier
 snapshot above is the exact `ELAB-07` set payload, `plan/103` Rust-only
 negative guards, `plan/104` span-based internal association hardening,
 `plan/105` exact-locus guard hardening, `plan/106` child / bundle / partial
-exclusion fixtures, and `ELAB-04` no-repair payload-model preflight.
+exclusion fixtures, `ELAB-04` no-repair payload-model preflight, and OBL-025
+branch-local non-coverage refinement.
+
+- 2026-07-04 07:00 JST
+  `plan/108-g1-obl025-branch-local-noncoverage-refinement.md` を追加し、
+  OBL-025 Lean statement draft に abstract `RepairBranch` / branch-local
+  witness / branch-local suggestion vocabulary と non-coverage helper を足した。
+  `ELAB-04` の base branch / visibility branch は classification / guidance
+  pressure として扱えるが、whole rejected-gap coverage ではない。proof、
+  canon ledger movement、executable repair widening、`ELAB-04` payload output、
+  final branch ID / JSON / repair ABI、conformance、G1 exit は主張しない。
 
 - 2026-07-04 06:31 JST
   `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md` を追加し、

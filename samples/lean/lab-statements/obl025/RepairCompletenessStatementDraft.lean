@@ -20,6 +20,7 @@ structure Vocab where
   Diagnostic : Type u
   StatementFragment : Type u
   RepairWitness : Type u
+  RepairBranch : Type u
   SuggestedRepair : Type u
   DiagnosticFamily : Type u
   MissingEvidenceKind : Type u
@@ -45,6 +46,8 @@ structure Pred (V : Vocab.{u}) where
     V.Line1Rejection -> V.FailedPremise -> Prop
   BlameTargetOf :
     V.Line1Rejection -> V.BlameTarget -> Prop
+  BranchOfRejectedGap :
+    V.Line1Rejection -> V.RepairBranch -> Prop
   AssociatedEmittedDiagnostic :
     V.Line1Input -> V.Line1Rejection -> V.Diagnostic -> Prop
   SingleEditRepairWitness :
@@ -53,6 +56,8 @@ structure Pred (V : Vocab.{u}) where
     V.StatementFragment -> V.Line1Rejection -> V.RepairWitness -> Prop
   GroupedMultiEditRepairWitness :
     V.StatementFragment -> V.Line1Rejection -> V.RepairWitness -> Prop
+  BranchLocalRepairWitness :
+    V.StatementFragment -> V.Line1Rejection -> V.RepairBranch -> V.RepairWitness -> Prop
   RepairWitnessInDeclaredFragment :
     V.StatementFragment -> V.RepairWitness -> Prop
   RepairWitnessCoversRejectedGap :
@@ -75,6 +80,8 @@ structure Pred (V : Vocab.{u}) where
     V.Line1Rejection -> V.SuggestedRepair -> Prop
   SuggestedRepairPartialGuidance :
     V.Line1Rejection -> V.SuggestedRepair -> Prop
+  SuggestedRepairBranchLocalGuidance :
+    V.Line1Rejection -> V.RepairBranch -> V.SuggestedRepair -> Prop
   SuggestedRepairMatchesDiagnosticFamily :
     V.SuggestedRepair -> V.DiagnosticFamily -> Prop
   SuggestedRepairMatchesMissingEvidence :
@@ -153,6 +160,18 @@ def CompleteGroupedMultiEditRepair
     P.RepairWitnessDischargesLocalPremise witness premise /\
     P.RepairWitnessTargetsBlame witness target
 
+def BranchLocalRepairNonCoverage
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (fragment : V.StatementFragment)
+    (rejection : V.Line1Rejection)
+    (branch : V.RepairBranch)
+    (witness : V.RepairWitness) : Prop :=
+  P.BranchOfRejectedGap rejection branch /\
+    P.BranchLocalRepairWitness fragment rejection branch witness /\
+    ¬ P.RepairWitnessCoversRejectedGap rejection witness /\
+    ¬ EligibleSingleEditRepair P fragment rejection witness
+
 def PartialGuidanceNonCoverage
     {V : Vocab.{u}}
     (P : Pred V)
@@ -160,6 +179,18 @@ def PartialGuidanceNonCoverage
     (suggestion : V.SuggestedRepair) : Prop :=
   P.SuggestedRepairPartialGuidance rejection suggestion /\
     ¬ P.SuggestedRepairCompleteLocalRepair rejection suggestion /\
+    forall witness,
+      ¬ SuggestionCoversWitness P rejection suggestion witness
+
+def BranchLocalSuggestionNonCoverage
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (rejection : V.Line1Rejection)
+    (branch : V.RepairBranch)
+    (suggestion : V.SuggestedRepair) : Prop :=
+  P.BranchOfRejectedGap rejection branch /\
+    P.SuggestedRepairBranchLocalGuidance rejection branch suggestion /\
+    ¬ P.SuggestedRepairCoversRejectedGap rejection suggestion /\
     forall witness,
       ¬ SuggestionCoversWitness P rejection suggestion witness
 

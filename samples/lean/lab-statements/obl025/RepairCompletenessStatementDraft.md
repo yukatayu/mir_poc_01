@@ -20,6 +20,10 @@
 - This file checks that the completeness relation can be expressed without
   choosing final Diagnostic JSON fields, edit scripts, repair ranking,
   multi-span target format, or repair-application semantics.
+- `plan/107` records that `ELAB-04` has mixed base / visibility branch
+  pressure but still emits no executable repair. This refinement adds abstract
+  branch-local non-coverage vocabulary so that branch-local guidance cannot be
+  mistaken for whole-row OBL-025 coverage.
 
 ## Shape
 
@@ -54,16 +58,26 @@ The whole-gap predicates, `RepairWitnessCoversRejectedGap` and
 missing-failure atom from being read as coverage for a multi-missing
 row-containment rejection.
 
+The branch-local predicates, `BranchLocalRepairNonCoverage` and
+`BranchLocalSuggestionNonCoverage`, make the same guard explicit for mixed
+rows such as `ELAB-04`: a base branch or visibility branch can be named for
+classification / guidance, but it is not a complete whole-gap witness unless a
+separate whole-gap relation covers every missing failure for the associated
+request. `RepairBranch` is an abstract statement-shape carrier, not a final
+branch ID, JSON key, or diagnostic ABI.
+
 ## Boundary
 
 - This is LAB evidence outside `mirrorea_canon/`.
 - This does not edit `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - This does not claim OBL-025 completion, proof discharge, G1/T1/T2 exit,
   conformance, final diagnostic ABI, final repair payload ABI, repair ranking,
-  multi-edit repair support, or whole-program success after repair.
+  branch ID semantics, multi-edit repair support, or whole-program success
+  after repair.
 - `CoveredLine1RepairCase` is abstract. Current executable LAB evidence only
   supports singleton repair-carrier shapes in `ELAB-10` and `ELAB-13..16`;
-  mixed and multi-missing rows remain no-repair evidence.
+  exact `ELAB-07` set insertion remains narrow LAB evidence, and mixed
+  `ELAB-04` remains no-repair evidence.
 
 ## Validation anchor
 
