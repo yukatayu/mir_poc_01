@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 00:38 JST
+最終更新: 2026-07-04 01:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -166,6 +166,12 @@ Current holding state:
   ordering / ranking. It does not widen `suggested_repair[]`, prove OBL-025,
   freeze repair ABI, claim repair ranking, claim multi-edit support, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` now records
+  candidate payload vocabulary for set insertion, conjunctive bundles, and
+  partial guidance. It keeps `ELAB-04/07` no-repair, adds no executable
+  set-insertion / bundle support, and does not prove OBL-025, freeze repair
+  ABI, claim repair ranking, claim multi-edit support, claim conformance,
+  claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -177,8 +183,9 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW set-insertion / bundle payload inventory` | `G1` reserve | define a LAB vocabulary for set insertion, conjunctive repair bundles, and partial-repair guidance before any `ELAB-04/07` widening | docs-only unless the payload can prove local-premise discharge without ranking or ABI overclaim |
 | `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
+| `E-ROW ELAB-07 set-insertion gate review` | `G1` reserve | decide, docs-first, whether the `plan/96` set-insertion shape can be treated as one source edit for `ELAB-07`; otherwise keep no-repair | no code widening unless local-premise discharge and single-edit status are explicit |
+| `E-ROW mixed visibility branch inventory` | `G1` reserve | refine `ELAB-04` visibility/base branch separation and alternative visibility repairs before any ranking or mixed payload work | docs-only; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |

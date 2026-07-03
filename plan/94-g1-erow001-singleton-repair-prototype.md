@@ -35,6 +35,8 @@ claim repair ranking or multi-edit support, and does not claim G1 exit.
   `plan/88-g1-erow-repair-shape-inventory.md`
 - LAB mixed / multi decomposition inventory:
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
+- LAB set-insertion / bundle payload vocabulary:
+  `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB singleton fixture memory:
   `plan/89-g1-erow001-non-visibility-singleton-fixture.md`
   and `plan/92-g1-erow001-base-singleton-fixture-closure.md`
@@ -139,7 +141,8 @@ The evidence remains narrower than OBL-025:
 ## What remains open
 
 - Whether set insertion can be one edit for multi-missing rows; `plan/95`
-  keeps this open and no-repair.
+  keeps this open and no-repair, and `plan/96` inventories candidate
+  set-insertion / bundle vocabulary without executable widening.
 - Whether mixed visibility / non-visibility rows decompose into several
   singleton repairs; `plan/95` keeps this open and no-repair.
 - Whether target spans should replace or supplement current LAB-local

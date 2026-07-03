@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 00:38 JST
+最終更新: 2026-07-04 01:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -217,6 +217,13 @@ semantic source authority.
   `suggested_repair[]`, prove OBL-025, freeze diagnostic/repair ABI, claim
   repair ranking, claim multi-edit support, claim conformance, or claim G1
   exit.
+- Current E-ROW set-insertion / bundle payload inventory note:
+  `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` records
+  candidate LAB vocabulary for future set insertion, conjunctive bundles, and
+  partial guidance. It keeps `ELAB-04/07` no-repair and does not add
+  executable set-insertion / bundle support, prove OBL-025, freeze
+  diagnostic/repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, or claim G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -230,7 +237,8 @@ semantic source authority.
   E-ROW repair-shape inventory, a full base-failure non-visibility singleton
   repair-bearing fixture set, and a LAB single-edit / no-placeholder gate
   implemented for `ELAB-13..16`. `ELAB-04/07` now have a LAB decomposition
-  inventory that keeps them no-repair until set-insertion / bundle semantics,
+  inventory plus candidate set-insertion / bundle payload vocabulary that keeps
+  them no-repair until set-insertion atomicity, bundle semantics,
   partial-repair status, visibility split, diagnostic association, ordering,
   and ranking are explicit. It still has no proof, no canon status movement,
   no final repair ABI, no repair ranking, and no multi-edit support. This remains
@@ -538,7 +546,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, and explicit no-repair decomposition inventory for mixed / multi-missing rows | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, and docs-only set-insertion / bundle payload vocabulary for a later widening gate | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -552,6 +560,13 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 01:27 JST
+  `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` を追加し、
+  set-insertion / conjunctive bundle / partial guidance の候補 payload
+  vocabulary を docs-only で整理した。`ELAB-04/07` は no-repair のまま。
+  set-insertion support、bundle semantics support、repair output widening、
+  diagnostic/repair ABI freeze、OBL-025 proof / completion、repair ranking、
+  multi-edit support、conformance、G1 exit は主張していない。
 - 2026-07-04 01:14 JST
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` を追加し、
   `ELAB-07` は set-insertion / conjunctive bundle / partial-repair /

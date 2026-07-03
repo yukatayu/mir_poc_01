@@ -29,6 +29,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
 - LAB singleton repair gate and prototype:
   `plan/93-g1-erow001-singleton-repair-assumption.md`
   and `plan/94-g1-erow001-singleton-repair-prototype.md`
+- LAB set-insertion / bundle payload vocabulary:
+  `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -170,6 +172,9 @@ emit repair only when missing_failures.len() == 1
 
 This guard is not a final theorem. It is a LAB safety rule that prevents
 placeholder or partial repair payloads from satisfying OBL-025-shaped checks.
+`plan/96` now inventories candidate vocabulary for set insertion, conjunctive
+bundles, and partial guidance, but it does not promote any of those candidates
+into executable output.
 
 The guard should remain until a later package provides:
 
@@ -193,12 +198,26 @@ Safe reading:
   repair alternatives.
 - Neither `ELAB-04` nor `ELAB-07` is evidence of OBL-025 completion.
 
+## Relation to `plan/96`
+
+`plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` provides a
+docs-only candidate vocabulary for the future choices listed here:
+
+- set insertion as one grouped row edit;
+- conjunctive repair bundles with `all_required` semantics;
+- partial guidance that does not discharge the local premise;
+- mixed visibility / non-visibility branch separation.
+
+This does not change the current policy. `ELAB-04` and `ELAB-07` still omit
+`suggested_repair`, and the executable guard still requires exactly one
+missing failure before emitting a repair payload.
+
 ## Suggested next packages
 
 1. Keep this package docs-only and validate that `ELAB-04/07` still omit
    `suggested_repair`.
-2. If widening is desired later, create a set-insertion / bundle payload
-   inventory before editing Rust output.
+2. If widening is desired later, promote a narrow assumption from `plan/96`
+   before editing Rust output.
 3. Refine OBL-025 only after deciding whether multi-missing repair witnesses
    are single-edit, multi-edit, or outside the first coverage fragment.
 4. Draft OBL-024 explanation-soundness only if replay / association vocabulary

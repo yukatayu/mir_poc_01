@@ -2,8 +2,11 @@
 
 ## Purpose
 
-This file inventories a non-final repair payload shape for future E-ROW
-diagnostics, before any code prototype emits `suggested_repair[]`.
+This file originally inventoried a non-final repair payload shape before any
+code prototype emitted `suggested_repair[]`. Later LAB packages implemented
+the singleton subset only: `ELAB-10` for `E-ROW-002` / `VisibilityDenied` and
+`ELAB-13..16` for `E-ROW-001` non-visibility singleton omissions. The
+multi-missing / mixed rows `ELAB-04/07` remain no-repair.
 
 This is LAB repository memory. It does not implement repairs, does not freeze a
 Diagnostic or repair ABI, does not state or prove OBL-024/025, does not claim
@@ -101,14 +104,22 @@ Current Surface elaboration records useful inputs on generated remote requests:
 - `generated_from`
 - `source_span`
 
-Current helper projections and expected JSON expose only `diagnostic_codes`,
-remote request summaries, source-span entity kinds, obligation codes, and
-`final_public_api_frozen: false`. They do not expose repair payloads.
+Later carrier packages also expose non-final `lab_diagnostic_details` with
+request / failure-row context for `ELAB-04/07/10/13..16`.
+
+Current repair payload evidence is deliberately narrower:
+
+- `ELAB-10` exposes one LAB-only `E-ROW-002` / `VisibilityDenied`
+  `suggested_repair[]` item.
+- `ELAB-13..16` expose one LAB-only `E-ROW-001` non-visibility singleton
+  `suggested_repair[]` item per base remote-request failure atom.
+- `ELAB-04/07` still omit `suggested_repair` because set-insertion, bundle,
+  partial-guidance, visibility split, and ranking semantics are not executable
+  assumptions.
 
 ## Implementation guidance for later package
 
-If the next package implements code, the safest path is additive and
-carrier-only first:
+The original implementation guidance was additive and carrier-only first:
 
 1. preserve legacy `diagnostic_codes`;
 2. add non-final LAB-only diagnostic detail alongside the legacy projection;
@@ -119,14 +130,21 @@ carrier-only first:
 5. mark every new detail as LAB/non-final in docs and expected JSON;
 6. keep OBL-024/025 proof status unchanged.
 
-A carrier-only prototype without repair rows is now the recommended first
-implementation step. It does not advance OBL-025, but it reduces ABI and proof
-overclaim risk.
+A carrier-only prototype without repair rows was the recommended first
+implementation step and has already happened in later LAB packages. Subsequent
+singleton repair-bearing packages intentionally widened only the local
+witness-compatible singleton classes and did not advance OBL-025 to proof or
+completion.
 
 `plan/93-g1-erow001-singleton-repair-assumption.md` later turns the
 no-placeholder requirement into a LAB-only gate for a possible
-non-visibility singleton `E-ROW-001` widening. It still does not widen repair
-output.
+non-visibility singleton `E-ROW-001` widening. `plan/94` implements that gate
+for `ELAB-13..16`.
+
+`plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` later inventories
+candidate vocabulary for set insertion, conjunctive bundles, and partial
+guidance. It does not change this file's non-final ABI status and does not
+make `ELAB-04/07` repair-bearing rows.
 
 ## What remains OPEN
 
@@ -134,7 +152,8 @@ output.
 - Whether helper output exposes both `legacy_code` and `canon_id`.
 - Exact rule-instance and premise identifiers.
 - Declaration-site / use-site multi-span policy.
-- Whether adding a set of missing failures is one edit or multiple edits.
+- Whether adding a set of missing failures is one edit or multiple edits; see
+  `plan/96` for candidate vocabulary, not a decision.
 - E-ROW-002 alternatives beyond add `VisibilityDenied` to `fails`.
 - Repair ranking, multi-edit repairs, and localization.
 - Repair application semantics.
@@ -144,7 +163,8 @@ output.
 ## Overclaim guards
 
 - Do not treat this as final JSON or public ABI.
-- Do not claim current LAB already emits repair payloads.
+- Do not claim current LAB emits repair payloads beyond the singleton classes
+  recorded in `plan/86` and `plan/94`.
 - Do not claim non-empty repair rows prove OBL-025.
 - Do not claim add-to-fails-row makes runtime execution safe or successful.
 - Do not claim all single-edit repairs are covered.
@@ -153,14 +173,12 @@ output.
 
 ## Suggested next packages
 
-1. Carrier-only E-ROW diagnostic detail prototype without repair rows, adding
-   non-final canon ID / severity / rule / premise / missing-evidence detail
-   while preserving legacy output.
-2. Repair-bearing E-ROW follow-up only after reading `plan/93`, preserving its
-   no-placeholder `suggested_repair[]` guard, and intentionally changing the
-   affected fixture expectations.
-3. OBL-024/025 Lean statement drafts only after replay, repair, and payload
-   vocabularies stabilize enough in LAB.
+1. Preserve the singleton repair payload quality gates when refining target /
+   span vocabulary or final ABI wording.
+2. Keep `ELAB-04/07` no-repair until `plan/95` / `plan/96` assumptions are
+   promoted into an explicit executable gate.
+3. OBL-024/025 Lean statement refinements only after replay, repair, and
+   payload vocabularies stabilize enough in LAB.
 
 ## Non-claims
 

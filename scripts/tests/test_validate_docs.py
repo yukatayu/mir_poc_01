@@ -304,6 +304,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/93-g1-erow001-singleton-repair-assumption.md",
             "plan/94-g1-erow001-singleton-repair-prototype.md",
             "plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md",
+            "plan/96-g1-erow-set-insertion-bundle-payload-inventory.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

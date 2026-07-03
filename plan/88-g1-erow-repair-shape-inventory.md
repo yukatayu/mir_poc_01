@@ -34,6 +34,8 @@ not claim G1 exit. The original `plan/88` package was inventory-only; later
   `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB mixed / multi decomposition inventory:
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
+- LAB set-insertion / bundle payload vocabulary:
+  `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -82,8 +84,8 @@ Important reading:
 |---|---|---|---|
 | Visibility singleton | add `VisibilityDenied` to the relevant `when ... fails` row | implemented only for `E-ROW-002` / `ELAB-10` | keep as-is unless target/span vocabulary changes |
 | Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | implemented for `ELAB-13..16` under `plan/93` / `plan/94` as LAB-only repair evidence | keep as-is unless target/span vocabulary or single-edit wording changes |
-| Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one repair per missing family | no-repair evidence today (`ELAB-07`); decision axes inventoried in `plan/95` | decide whether set insertion, conjunctive bundle, partial repair, or multi-edit deferral applies; do not infer from OBL-025 |
-| Mixed visibility/non-visibility multi-missing | same local premise but includes both `VisibilityDenied` and other missing failures | no-repair evidence today (`ELAB-04`); decision axes inventoried in `plan/95` | first decide decomposition, visibility split, ordering, and whether visibility repair competes with add-to-fails-row |
+| Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one grouped repair | no-repair evidence today (`ELAB-07`); decision axes inventoried in `plan/95`; candidate set / bundle vocabulary inventoried in `plan/96` | decide whether set insertion is one source edit or whether conjunctive bundle semantics applies; do not emit independent singleton alternatives |
+| Mixed visibility/non-visibility multi-missing | same local premise but includes both `VisibilityDenied` and other missing failures | no-repair evidence today (`ELAB-04`); decision axes inventoried in `plan/95`; candidate mixed branch vocabulary inventoried in `plan/96` | first decide visibility split, alternative visibility repairs, ordering / ranking, and whether mixed rows can expose one grouped repair |
 | Alternative visibility repair | declare visibility / observe authority instead of adding `VisibilityDenied` to `fails` | OPEN; not current prototype | needs separate repair family and authority/visibility preservation wording |
 | Multi-request row failures | one source item emits multiple failing request diagnostics, even if each request is singleton-shaped | no-repair by default | needs diagnostic association, ordering, and per-request target policy |
 | Ambiguous target row | target row cannot be uniquely identified as the nearest relevant `when ... fails` row | no-repair by default | carrier may classify the failure, but repair target is not safe |
@@ -154,8 +156,8 @@ Safe reading:
 - non-visibility singleton now has one repair-bearing fixture per base
   remote-request failure atom in `ELAB-13..16`;
 - mixed and multi-missing cases are not covered single-edit repair evidence
-  until the `plan/95` set-insertion / bundle / partial-repair / visibility
-  split axes are decided;
+  until the `plan/95` axes and `plan/96` candidate set-insertion / bundle
+  vocabulary are promoted into an explicit executable assumption;
 - non-empty `suggested_repair[]` is meaningful only when the item realizes a
   local witness and targets the reported premise.
 
@@ -194,8 +196,8 @@ standardizes empty repair-list semantics.
 
 1. Preserve the `ELAB-13..16` singleton repair payload quality gates when
    refining target/span vocabulary or final ABI wording.
-2. Keep mixed and multi-missing cases no-repair under `plan/95` until
-   set-insertion atomicity, bundle semantics, partial-repair status,
+2. Keep mixed and multi-missing cases no-repair under `plan/95` / `plan/96`
+   until set-insertion atomicity, bundle semantics, partial-repair status,
    visibility split, and ranking are separately addressed.
 3. Refine the OBL-025 Lean statement only if this inventory reveals a missing
    abstract predicate.
