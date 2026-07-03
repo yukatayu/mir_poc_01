@@ -45,6 +45,8 @@ conformance or G1 exit.
   `plan/108-g1-obl025-branch-local-noncoverage-refinement.md`
 - LAB statement artifact:
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`
+- LAB executable projection carrier:
+  `plan/110-g1-obl024-executable-projection-carrier.md`
 - LAB explanation:
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md`
 - LAB manifest:
@@ -123,6 +125,10 @@ Current executable LAB evidence remains E-ROW-shaped:
   `rule_instance`, `failed_premise`, and `missing_evidence`.
 - `plan/85` adds non-final `request_context` and `failure_row_context`,
   enough to name the row-containment precondition for current evidence.
+- `plan/110` adds non-final executable `diagnostic_soundness_projection`
+  evidence inside current `lab_diagnostic_details`, tying the diagnostic detail
+  to helper-local diagnostic id, association key, reported bindings, and
+  report-local trace replay anchor.
 - `ELAB-04`, `ELAB-07`, and `ELAB-10` remain the main current E-ROW carrier
   rows; later singleton and set-insertion packages add repair evidence for
   OBL-025, not OBL-024.
@@ -164,8 +170,8 @@ repair witness, no repair ranking, and no whole-gap repair coverage relation.
 
 1. Keep OBL-024 as compile-check-only until replay vocabulary and diagnostic
    projection are stable enough to state a real theorem.
-2. If executable evidence is desired, harden E-ROW carrier projection /
-   association without freezing final JSON field names.
+2. Treat `plan/110` executable projection evidence as helper-local LAB carrier
+   hardening; do not promote its JSON names or association key to final ABI.
 3. Revisit OBL-021 diagnostic equivalence only if diagnostic comparison blocks
    future OBL-024 proof shape.
 

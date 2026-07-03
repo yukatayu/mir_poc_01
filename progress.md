@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 07:22 JST
+最終更新: 2026-07-04 07:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -139,6 +139,15 @@ semantic source authority.
   does not move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
   request ID / branch ID / association-key ABI / replay semantics, claim
   root-cause uniqueness, claim conformance, or claim G1 exit.
+- Current OBL-024 executable projection carrier note:
+  `plan/110-g1-obl024-executable-projection-carrier.md` records LAB-only
+  executable E-ROW projection evidence inside current `lab_diagnostic_details`.
+  `ELAB-04/07/10/13..16` now carry non-final
+  `diagnostic_soundness_projection` with helper-local diagnostic id,
+  association key, reported bindings, and report-local trace replay anchor.
+  This does not move canon OBL status, prove OBL-024, freeze Diagnostic JSON /
+  request ID / association-key ABI / replay semantics, widen repair output, add
+  an `ELAB-04` payload, claim conformance, or claim G1 exit.
 - Current OBL-025 statement-shape inventory note:
   `plan/82-g1-obl025-statement-shape-inventory.md` inventories the abstract
   vocabulary needed to state Line-1 explanation completeness: Line-1
@@ -686,7 +695,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..16`, `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -706,8 +715,18 @@ snapshot above is the exact `ELAB-07` set payload, `plan/103` Rust-only
 negative guards, `plan/104` span-based internal association hardening,
 `plan/105` exact-locus guard hardening, `plan/106` child / bundle / partial
 exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
-branch-local non-coverage refinement, and OBL-024 diagnostic-soundness Lean
-statement draft.
+branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
+statement draft, and OBL-024 executable projection carrier.
+
+- 2026-07-04 07:48 JST
+  `plan/110-g1-obl024-executable-projection-carrier.md` を追加し、
+  `ELAB-04/07/10/13..16` の `lab_diagnostic_details` に LAB-only
+  `diagnostic_soundness_projection` を追加した。projection は helper-local
+  diagnostic id / association key / reported bindings / report-local
+  trace-local replay anchor を固定するが、OBL-024 proof / completion、canon
+  ledger movement、final Diagnostic JSON / request ID / association-key ABI /
+  replay semantics、repair output widening、`ELAB-04` payload output、
+  conformance、G1 exit は主張しない。
 
 - 2026-07-04 07:22 JST
   `plan/109-g1-obl024-lean-statement-draft.md` と

@@ -19,6 +19,7 @@
       "failure_row_complete": false
     }
   ],
+  "dependency_summaries": [],
   "message_envelope_summaries": [
     {
       "envelope_kind": "remote_write",
@@ -54,11 +55,80 @@
   "final_public_api_frozen": false,
   "lab_diagnostic_details": [
     {
-      "legacy_code": "generated_failure_not_declared",
       "canon_id": "E-ROW-001",
-      "severity": "error",
-      "rule_instance": "BND-001.row-containment",
+      "diagnostic_soundness_projection": {
+        "diagnostic_id": "generated_failure_not_declared:E-ROW-001:req-0001",
+        "lab_association_key": "when_fails_row|locus=role:BrowserClient|event=attack|request=req-0001",
+        "lab_non_final": true,
+        "projection_non_final": true,
+        "reported_bindings": {
+          "declared_failures": [
+            "MissingCapability"
+          ],
+          "event_name": "attack",
+          "field_name": "hp",
+          "generated_from": "nested_place_block",
+          "key_expr": "target",
+          "missing_failures": [
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+          ],
+          "owner_locus": "S",
+          "request_id": "req-0001",
+          "request_kind": "write",
+          "requester_locus": "role:BrowserClient",
+          "required_failures": [
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+          ],
+          "state_name": "player",
+          "target_kind": "when_fails_row",
+          "target_locus": "role:BrowserClient",
+          "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack"
+        },
+        "reported_failed_premise": "generated_failures_subset_declared_fails",
+        "reported_rule_instance": "BND-001.row-containment",
+        "trace_local_replay": {
+          "expected_missing_evidence": [
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+          ],
+          "fails_exactly_at": "generated_failures_subset_declared_fails",
+          "failure_reason": "missing_generated_failures",
+          "replay_non_final": true,
+          "replay_scope": "surface_to_core_elaboration.report_local",
+          "replayed_request_id": "req-0001",
+          "replayed_target_ref": "when_fails_row|locus=role:BrowserClient|event=attack"
+        }
+      },
       "failed_premise": "generated_failures_subset_declared_fails",
+      "failure_row_context": {
+        "declared_failures": [
+          "MissingCapability"
+        ],
+        "event_name": "attack",
+        "local_premise": "generated_failures_subset_declared_fails",
+        "missing_failures": [
+          "MissingWitness",
+          "RouteUnavailable",
+          "StaleMembership"
+        ],
+        "required_failures": [
+          "MissingCapability",
+          "MissingWitness",
+          "RouteUnavailable",
+          "StaleMembership"
+        ],
+        "target_kind": "when_fails_row",
+        "target_locus": "role:BrowserClient",
+        "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack"
+      },
+      "lab_non_final": true,
+      "legacy_code": "generated_failure_not_declared",
       "missing_evidence": [
         "MissingWitness",
         "RouteUnavailable",
@@ -70,70 +140,37 @@
         "mirrorea_canon/theory/10-diagnostics.md#OBL-024"
       ],
       "request_context": {
+        "field_name": "hp",
+        "generated_from": "nested_place_block",
+        "key_expr": "target",
+        "owner_locus": "S",
         "request_id": "req-0001",
         "request_kind": "write",
-        "generated_from": "nested_place_block",
         "requester_locus": "role:BrowserClient",
-        "owner_locus": "S",
-        "state_name": "player",
-        "key_expr": "target",
-        "field_name": "hp"
+        "state_name": "player"
       },
-      "failure_row_context": {
-        "target_kind": "when_fails_row",
-        "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
-        "target_locus": "role:BrowserClient",
-        "event_name": "attack",
-        "required_failures": [
-          "MissingCapability",
-          "MissingWitness",
-          "RouteUnavailable",
-          "StaleMembership"
-        ],
-        "declared_failures": [
-          "MissingCapability"
-        ],
-        "missing_failures": [
-          "MissingWitness",
-          "RouteUnavailable",
-          "StaleMembership"
-        ],
-        "local_premise": "generated_failures_subset_declared_fails"
-      },
-      "lab_non_final": true,
+      "rule_instance": "BND-001.row-containment",
+      "severity": "error",
       "suggested_repair": [
         {
-          "repair_shape": "set_insertion",
-          "repair_family": "add-to-fails-row",
-          "diagnostic_family": "E-ROW-001",
-          "edit_atom": "complete_missing_base_failure_set_into_one_existing_when_fails_row",
-          "source_locus_edit_count": 1,
-          "element_insert_count": 3,
           "applies_to": {
-            "legacy_code": "generated_failure_not_declared",
             "canon_id": "E-ROW-001",
+            "legacy_code": "generated_failure_not_declared",
             "request_id": "req-0001"
           },
-          "target_kind": "when_fails_row",
-          "target_context": {
-            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
-            "locus": "role:BrowserClient",
-            "event_name": "attack"
-          },
+          "coverage_scope": "complete_missing_set_for_associated_request",
+          "declared_failures_before": [
+            "MissingCapability"
+          ],
+          "diagnostic_family": "E-ROW-001",
+          "edit_atom": "complete_missing_base_failure_set_into_one_existing_when_fails_row",
+          "element_insert_count": 3,
           "insert_failures": [
             "MissingWitness",
             "RouteUnavailable",
             "StaleMembership"
           ],
-          "required_failures": [
-            "MissingCapability",
-            "MissingWitness",
-            "RouteUnavailable",
-            "StaleMembership"
-          ],
-          "declared_failures_before": [
-            "MissingCapability"
-          ],
+          "lab_non_final": true,
           "local_effect": {
             "declared_failures_after": [
               "MissingCapability",
@@ -142,13 +179,26 @@
               "StaleMembership"
             ]
           },
-          "coverage_scope": "complete_missing_set_for_associated_request",
           "local_premise": "generated_failures_subset_declared_fails",
           "local_premise_after_edit": "discharged_for_associated_request",
-          "single_edit_assumption": "erow001_elab07_complete_base_failure_set_source_locus_edit",
           "non_goal": "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+          "repair_family": "add-to-fails-row",
           "repair_non_final": true,
-          "lab_non_final": true
+          "repair_shape": "set_insertion",
+          "required_failures": [
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+          ],
+          "single_edit_assumption": "erow001_elab07_complete_base_failure_set_source_locus_edit",
+          "source_locus_edit_count": 1,
+          "target_context": {
+            "event_name": "attack",
+            "locus": "role:BrowserClient",
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack"
+          },
+          "target_kind": "when_fails_row"
         }
       ]
     }

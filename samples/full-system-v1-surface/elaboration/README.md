@@ -29,14 +29,16 @@ G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
 `ELAB-07`, `ELAB-10`, and `ELAB-13..16` as non-final
 `lab_diagnostic_details`. It preserves legacy
 `generated_failure_not_declared` output, now includes request / failure-row
-context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
-evidence for `ELAB-10`, emits `E-ROW-001` non-visibility singleton
-`suggested_repair[]` evidence for `ELAB-13..16` under the `plan/93` gate,
-emits one exact `ELAB-07` `set_insertion` item under `plan/102`, and keeps
-that exact item guarded by `plan/103..106` so it is not emitted for nearby
-negative variants and is not serialized as child singleton alternatives,
-bundle fields, partial guidance, or textual-only guidance. `ELAB-04` remains
-the mixed visibility / base no-repair fence; `plan/107` records only the
-docs-only mixed wrapper / base branch / visibility branch / association /
-ordering preflight for future work. This does not freeze a diagnostic / repair
-ABI, prove OBL-025, or claim general set-insertion support.
+context plus a LAB-only `diagnostic_soundness_projection` for OBL-024
+association / reported bindings / trace-local replay evidence, emits
+`E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]` evidence for
+`ELAB-10`, emits `E-ROW-001` non-visibility singleton `suggested_repair[]`
+evidence for `ELAB-13..16` under the `plan/93` gate, emits one exact
+`ELAB-07` `set_insertion` item under `plan/102`, and keeps that exact item
+guarded by `plan/103..106` so it is not emitted for nearby negative variants
+and is not serialized as child singleton alternatives, bundle fields, partial
+guidance, or textual-only guidance. `ELAB-04` remains the mixed visibility /
+base no-repair fence; `plan/107` records only the docs-only mixed wrapper /
+base branch / visibility branch / association / ordering preflight for future
+work. This does not freeze a diagnostic / repair ABI, prove OBL-024 or OBL-025,
+or claim general set-insertion support.

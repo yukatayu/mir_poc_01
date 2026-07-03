@@ -11,6 +11,10 @@ Current draft:
   compatibility, missing evidence matching, span-blame predicates, and
   non-repair mixed diagnostic branch boundary predicates for every branch of a
   mixed diagnostic gap.
+- Current executable Surface elaboration evidence also emits a non-final
+  `diagnostic_soundness_projection` carrier in `lab_diagnostic_details` for
+  `ELAB-04/07/10/13..16`; that carrier is implementation-side LAB evidence, not
+  the final Diagnostic / replay ABI and not an OBL-024 proof.
 
 Boundary:
 

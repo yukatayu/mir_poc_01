@@ -50,12 +50,55 @@ pub struct SurfaceLabDiagnosticDetail {
     pub rule_instance: String,
     pub failed_premise: String,
     pub missing_evidence: Vec<String>,
+    pub diagnostic_soundness_projection: SurfaceLabDiagnosticSoundnessProjection,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub suggested_repair: Option<Vec<SurfaceLabSuggestedRepair>>,
     pub refs: Vec<String>,
     pub request_context: SurfaceLabDiagnosticRequestContext,
     pub failure_row_context: SurfaceLabDiagnosticFailureRowContext,
     pub lab_non_final: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticSoundnessProjection {
+    pub diagnostic_id: String,
+    pub lab_association_key: String,
+    pub reported_rule_instance: String,
+    pub reported_failed_premise: String,
+    pub reported_bindings: SurfaceLabDiagnosticReportedBindings,
+    pub trace_local_replay: SurfaceLabDiagnosticTraceLocalReplay,
+    pub projection_non_final: bool,
+    pub lab_non_final: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticReportedBindings {
+    pub request_id: String,
+    pub request_kind: String,
+    pub generated_from: String,
+    pub requester_locus: String,
+    pub owner_locus: String,
+    pub state_name: String,
+    pub key_expr: String,
+    pub field_name: Option<String>,
+    pub target_kind: String,
+    pub target_ref: String,
+    pub target_locus: String,
+    pub event_name: String,
+    pub required_failures: Vec<String>,
+    pub declared_failures: Vec<String>,
+    pub missing_failures: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticTraceLocalReplay {
+    pub replay_scope: String,
+    pub replayed_request_id: String,
+    pub replayed_target_ref: String,
+    pub fails_exactly_at: String,
+    pub failure_reason: String,
+    pub expected_missing_evidence: Vec<String>,
+    pub replay_non_final: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -136,9 +179,9 @@ pub struct SurfaceLabDiagnosticFailureRowContext {
     pub missing_failures: Vec<String>,
     pub local_premise: String,
     #[serde(skip)]
-    pub associated_request_count: usize,
+    associated_request_count: usize,
     #[serde(skip)]
-    pub association_key: String,
+    association_key: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -1206,6 +1249,8 @@ fn erow_lab_diagnostic_detail(
     };
     let suggested_repair =
         erow_row_addition_suggested_repair(canon_id, &request_context, &failure_row_context);
+    let diagnostic_soundness_projection =
+        erow_diagnostic_soundness_projection(canon_id, &request_context, &failure_row_context);
     SurfaceLabDiagnosticDetail {
         legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
         canon_id: canon_id.to_string(),
@@ -1213,6 +1258,7 @@ fn erow_lab_diagnostic_detail(
         rule_instance: "BND-001.row-containment".to_string(),
         failed_premise: "generated_failures_subset_declared_fails".to_string(),
         missing_evidence,
+        diagnostic_soundness_projection,
         suggested_repair,
         refs: vec![
             "mirrorea_canon/theory/03-elaboration.md#BND-001".to_string(),
@@ -1221,6 +1267,55 @@ fn erow_lab_diagnostic_detail(
         ],
         request_context,
         failure_row_context,
+        lab_non_final: true,
+    }
+}
+
+fn erow_diagnostic_soundness_projection(
+    canon_id: &str,
+    request_context: &SurfaceLabDiagnosticRequestContext,
+    failure_row_context: &SurfaceLabDiagnosticFailureRowContext,
+) -> SurfaceLabDiagnosticSoundnessProjection {
+    let diagnostic_id = format!(
+        "{GENERATED_FAILURE_NOT_DECLARED}:{canon_id}:{}",
+        request_context.request_id
+    );
+    let lab_association_key = format!(
+        "{}|request={}",
+        failure_row_context.target_ref, request_context.request_id
+    );
+    SurfaceLabDiagnosticSoundnessProjection {
+        diagnostic_id,
+        lab_association_key,
+        reported_rule_instance: "BND-001.row-containment".to_string(),
+        reported_failed_premise: failure_row_context.local_premise.clone(),
+        reported_bindings: SurfaceLabDiagnosticReportedBindings {
+            request_id: request_context.request_id.clone(),
+            request_kind: request_context.request_kind.clone(),
+            generated_from: request_context.generated_from.clone(),
+            requester_locus: request_context.requester_locus.clone(),
+            owner_locus: request_context.owner_locus.clone(),
+            state_name: request_context.state_name.clone(),
+            key_expr: request_context.key_expr.clone(),
+            field_name: request_context.field_name.clone(),
+            target_kind: failure_row_context.target_kind.clone(),
+            target_ref: failure_row_context.target_ref.clone(),
+            target_locus: failure_row_context.target_locus.clone(),
+            event_name: failure_row_context.event_name.clone(),
+            required_failures: failure_row_context.required_failures.clone(),
+            declared_failures: failure_row_context.declared_failures.clone(),
+            missing_failures: failure_row_context.missing_failures.clone(),
+        },
+        trace_local_replay: SurfaceLabDiagnosticTraceLocalReplay {
+            replay_scope: "surface_to_core_elaboration.report_local".to_string(),
+            replayed_request_id: request_context.request_id.clone(),
+            replayed_target_ref: failure_row_context.target_ref.clone(),
+            fails_exactly_at: failure_row_context.local_premise.clone(),
+            failure_reason: "missing_generated_failures".to_string(),
+            expected_missing_evidence: failure_row_context.missing_failures.clone(),
+            replay_non_final: true,
+        },
+        projection_non_final: true,
         lab_non_final: true,
     }
 }

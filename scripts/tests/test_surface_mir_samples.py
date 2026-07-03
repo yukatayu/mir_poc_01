@@ -89,6 +89,49 @@ def _placeholder_repair_paths(value: object, path: str = "$") -> list[str]:
     return []
 
 
+def _assert_obl024_projection_matches_detail(detail: dict) -> None:
+    projection = detail["diagnostic_soundness_projection"]
+    request_context = detail["request_context"]
+    failure_row_context = detail["failure_row_context"]
+    expected_diagnostic_id = (
+        f"{detail['legacy_code']}:{detail['canon_id']}:{request_context['request_id']}"
+    )
+    expected_association_key = (
+        f"{failure_row_context['target_ref']}|request={request_context['request_id']}"
+    )
+
+    testcase = unittest.TestCase()
+    testcase.assertEqual(projection["diagnostic_id"], expected_diagnostic_id)
+    testcase.assertEqual(projection["lab_association_key"], expected_association_key)
+    testcase.assertEqual(projection["reported_rule_instance"], detail["rule_instance"])
+    testcase.assertEqual(projection["reported_failed_premise"], detail["failed_premise"])
+    testcase.assertEqual(
+        projection["reported_bindings"]["request_id"],
+        request_context["request_id"],
+    )
+    testcase.assertEqual(
+        projection["reported_bindings"]["target_ref"],
+        failure_row_context["target_ref"],
+    )
+    testcase.assertEqual(
+        projection["reported_bindings"]["missing_failures"],
+        failure_row_context["missing_failures"],
+    )
+    replay = projection["trace_local_replay"]
+    testcase.assertEqual(
+        replay["replay_scope"],
+        "surface_to_core_elaboration.report_local",
+    )
+    testcase.assertEqual(replay["replayed_request_id"], request_context["request_id"])
+    testcase.assertEqual(replay["replayed_target_ref"], failure_row_context["target_ref"])
+    testcase.assertEqual(replay["fails_exactly_at"], failure_row_context["local_premise"])
+    testcase.assertEqual(replay["expected_missing_evidence"], detail["missing_evidence"])
+    testcase.assertEqual(replay["failure_reason"], "missing_generated_failures")
+    testcase.assertTrue(replay["replay_non_final"])
+    testcase.assertTrue(projection["projection_non_final"])
+    testcase.assertTrue(projection["lab_non_final"])
+
+
 class SurfaceMirSamplesTests(unittest.TestCase):
     def test_placeholder_repair_detector_rejects_marker_substrings(self) -> None:
         paths = _placeholder_repair_paths(
@@ -319,6 +362,56 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                         "StaleMembership",
                         "VisibilityDenied",
                     ],
+                    "diagnostic_soundness_projection": {
+                        "diagnostic_id": "generated_failure_not_declared:E-ROW-001:req-0001",
+                        "lab_association_key": "when_fails_row|locus=role:BrowserClient|event=render|request=req-0001",
+                        "lab_non_final": True,
+                        "projection_non_final": True,
+                        "reported_bindings": {
+                            "declared_failures": ["MissingCapability"],
+                            "event_name": "render",
+                            "field_name": "hp",
+                            "generated_from": "cross_locus_read_expression",
+                            "key_expr": "self",
+                            "missing_failures": [
+                                "MissingWitness",
+                                "RouteUnavailable",
+                                "StaleMembership",
+                                "VisibilityDenied",
+                            ],
+                            "owner_locus": "S",
+                            "request_id": "req-0001",
+                            "request_kind": "read",
+                            "requester_locus": "role:BrowserClient",
+                            "required_failures": [
+                                "MissingCapability",
+                                "MissingWitness",
+                                "RouteUnavailable",
+                                "StaleMembership",
+                                "VisibilityDenied",
+                            ],
+                            "state_name": "player",
+                            "target_kind": "when_fails_row",
+                            "target_locus": "role:BrowserClient",
+                            "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
+                        },
+                        "reported_failed_premise": "generated_failures_subset_declared_fails",
+                        "reported_rule_instance": "BND-001.row-containment",
+                        "trace_local_replay": {
+                            "expected_missing_evidence": [
+                                "MissingWitness",
+                                "RouteUnavailable",
+                                "StaleMembership",
+                                "VisibilityDenied",
+                            ],
+                            "fails_exactly_at": "generated_failures_subset_declared_fails",
+                            "failure_reason": "missing_generated_failures",
+                            "replay_non_final": True,
+                            "replay_scope": "surface_to_core_elaboration.report_local",
+                            "replayed_request_id": "req-0001",
+                            "replayed_target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
+                        },
+                    },
                     "refs": [
                         "mirrorea_canon/theory/03-elaboration.md#BND-001",
                         "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",
@@ -358,6 +451,9 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                     "lab_non_final": True,
                 }
             ],
+        )
+        _assert_obl024_projection_matches_detail(
+            payload["actual"]["lab_diagnostic_details"][0]
         )
 
     def test_elaboration_source_span_sample_has_span_evidence(self) -> None:
@@ -440,6 +536,9 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                 ],
                 "local_premise": "generated_failures_subset_declared_fails",
             },
+        )
+        _assert_obl024_projection_matches_detail(
+            payload["actual"]["lab_diagnostic_details"][0]
         )
         repairs = payload["actual"]["lab_diagnostic_details"][0]["suggested_repair"]
         self.assertEqual(len(repairs), 1)
@@ -625,6 +724,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                     },
                 )
                 self.assertTrue(detail["lab_non_final"])
+                _assert_obl024_projection_matches_detail(detail)
                 self.assertEqual(
                     detail["request_context"]["request_id"],
                     "req-0001",
@@ -696,6 +796,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
 
         self.assertTrue(payload["accepted"])
         detail = payload["actual"]["lab_diagnostic_details"][0]
+        _assert_obl024_projection_matches_detail(detail)
         repairs = detail["suggested_repair"]
         self.assertEqual(len(repairs), 1)
 
@@ -802,6 +903,9 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                 "missing_failures": ["VisibilityDenied"],
                 "local_premise": "generated_failures_subset_declared_fails",
             },
+        )
+        _assert_obl024_projection_matches_detail(
+            payload["actual"]["lab_diagnostic_details"][0]
         )
         self.assertEqual(
             payload["actual"]["lab_diagnostic_details"][0]["suggested_repair"],

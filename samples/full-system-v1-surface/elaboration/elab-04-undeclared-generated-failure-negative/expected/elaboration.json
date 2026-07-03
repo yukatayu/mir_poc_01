@@ -19,6 +19,7 @@
       "failure_row_complete": false
     }
   ],
+  "dependency_summaries": [],
   "message_envelope_summaries": [
     {
       "envelope_kind": "remote_read",
@@ -68,11 +69,85 @@
   "final_public_api_frozen": false,
   "lab_diagnostic_details": [
     {
-      "legacy_code": "generated_failure_not_declared",
       "canon_id": "E-ROW-001",
-      "severity": "error",
-      "rule_instance": "BND-001.row-containment",
+      "diagnostic_soundness_projection": {
+        "diagnostic_id": "generated_failure_not_declared:E-ROW-001:req-0001",
+        "lab_association_key": "when_fails_row|locus=role:BrowserClient|event=render|request=req-0001",
+        "lab_non_final": true,
+        "projection_non_final": true,
+        "reported_bindings": {
+          "declared_failures": [
+            "MissingCapability"
+          ],
+          "event_name": "render",
+          "field_name": "hp",
+          "generated_from": "cross_locus_read_expression",
+          "key_expr": "self",
+          "missing_failures": [
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership",
+            "VisibilityDenied"
+          ],
+          "owner_locus": "S",
+          "request_id": "req-0001",
+          "request_kind": "read",
+          "requester_locus": "role:BrowserClient",
+          "required_failures": [
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership",
+            "VisibilityDenied"
+          ],
+          "state_name": "player",
+          "target_kind": "when_fails_row",
+          "target_locus": "role:BrowserClient",
+          "target_ref": "when_fails_row|locus=role:BrowserClient|event=render"
+        },
+        "reported_failed_premise": "generated_failures_subset_declared_fails",
+        "reported_rule_instance": "BND-001.row-containment",
+        "trace_local_replay": {
+          "expected_missing_evidence": [
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership",
+            "VisibilityDenied"
+          ],
+          "fails_exactly_at": "generated_failures_subset_declared_fails",
+          "failure_reason": "missing_generated_failures",
+          "replay_non_final": true,
+          "replay_scope": "surface_to_core_elaboration.report_local",
+          "replayed_request_id": "req-0001",
+          "replayed_target_ref": "when_fails_row|locus=role:BrowserClient|event=render"
+        }
+      },
       "failed_premise": "generated_failures_subset_declared_fails",
+      "failure_row_context": {
+        "declared_failures": [
+          "MissingCapability"
+        ],
+        "event_name": "render",
+        "local_premise": "generated_failures_subset_declared_fails",
+        "missing_failures": [
+          "MissingWitness",
+          "RouteUnavailable",
+          "StaleMembership",
+          "VisibilityDenied"
+        ],
+        "required_failures": [
+          "MissingCapability",
+          "MissingWitness",
+          "RouteUnavailable",
+          "StaleMembership",
+          "VisibilityDenied"
+        ],
+        "target_kind": "when_fails_row",
+        "target_locus": "role:BrowserClient",
+        "target_ref": "when_fails_row|locus=role:BrowserClient|event=render"
+      },
+      "lab_non_final": true,
+      "legacy_code": "generated_failure_not_declared",
       "missing_evidence": [
         "MissingWitness",
         "RouteUnavailable",
@@ -85,39 +160,17 @@
         "mirrorea_canon/theory/10-diagnostics.md#OBL-024"
       ],
       "request_context": {
+        "field_name": "hp",
+        "generated_from": "cross_locus_read_expression",
+        "key_expr": "self",
+        "owner_locus": "S",
         "request_id": "req-0001",
         "request_kind": "read",
-        "generated_from": "cross_locus_read_expression",
         "requester_locus": "role:BrowserClient",
-        "owner_locus": "S",
-        "state_name": "player",
-        "key_expr": "self",
-        "field_name": "hp"
+        "state_name": "player"
       },
-      "failure_row_context": {
-        "target_kind": "when_fails_row",
-        "target_ref": "when_fails_row|locus=role:BrowserClient|event=render",
-        "target_locus": "role:BrowserClient",
-        "event_name": "render",
-        "required_failures": [
-          "MissingCapability",
-          "MissingWitness",
-          "RouteUnavailable",
-          "StaleMembership",
-          "VisibilityDenied"
-        ],
-        "declared_failures": [
-          "MissingCapability"
-        ],
-        "missing_failures": [
-          "MissingWitness",
-          "RouteUnavailable",
-          "StaleMembership",
-          "VisibilityDenied"
-        ],
-        "local_premise": "generated_failures_subset_declared_fails"
-      },
-      "lab_non_final": true
+      "rule_instance": "BND-001.row-containment",
+      "severity": "error"
     }
   ]
 }

@@ -13,8 +13,10 @@
   report an actual rule instance, an actual failed premise, enough bindings to
   reconstruct the local judgment slice, and replay must fail exactly there.
 - `plan/84` and `plan/85` added LAB-only E-ROW diagnostic detail and
-  precondition context, making an abstract compile-check-only draft useful
-  without freezing the helper JSON shape.
+  precondition context, and `plan/110` adds a non-final executable
+  `diagnostic_soundness_projection` carrier inside current
+  `lab_diagnostic_details`. The Lean draft remains abstract and does not freeze
+  that helper JSON shape.
 - OBL-024 is separate from OBL-025. This draft does not mention repairs,
   repair witnesses, suggested repairs, or repair ranking.
 
@@ -65,8 +67,9 @@ For current E-ROW evidence, the intended instantiation is:
 - replay witness: recomputation of the generated request failures and the
   surrounding `when ... fails` row.
 
-This is a LAB reading of current evidence only. `generated_failure_not_declared`
-and `lab_diagnostic_details` remain helper-local / non-final carrier evidence.
+This is a LAB reading of current evidence only. `generated_failure_not_declared`,
+`lab_diagnostic_details`, and the current `diagnostic_soundness_projection`
+field remain helper-local / non-final carrier evidence.
 For mixed rows such as `ELAB-04`, the top-level diagnostic owns the failed
 premise while every branch of the diagnostic gap remains classification /
 partition evidence for base / visibility pressure without turning into an
@@ -84,6 +87,9 @@ independent premise.
 - This does not specialize OBL-024 to E-ROW as the whole theorem.
 - This does not alter OBL-025 repair completeness or any executable repair
   payload.
+- The current executable `diagnostic_soundness_projection` carrier is an
+  implementation-side witness surface for this LAB pressure case, not a proof of
+  this statement and not a final Diagnostic / replay ABI.
 
 ## Validation anchor
 

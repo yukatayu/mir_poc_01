@@ -4,7 +4,8 @@
 
 This file inventories the statement shape needed for OBL-024 explanation
 soundness before writing a Lean statement or changing diagnostic code. The
-later LAB-only Lean statement draft is now recorded in `plan/109`; this file
+later LAB-only Lean statement draft is now recorded in `plan/109`, and the
+later executable LAB projection carrier is recorded in `plan/110`; this file
 remains the pre-draft relation inventory.
 
 This is LAB repository memory. It does not state OBL-024 formally, does not
@@ -191,6 +192,8 @@ Evidence classification:
    completeness from soundness.
 3. OBL-024 Lean statement draft was added later as `plan/109` using abstract
    diagnostic projection and replay vocabulary. It remains compile-check-only.
+4. OBL-024 executable projection carrier evidence was added later as `plan/110`
+   inside current E-ROW `lab_diagnostic_details`.
 
 ## Non-claims
 

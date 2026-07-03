@@ -99,8 +99,8 @@ association_key =
   target_ref + "|span=" + when.span.start + ".." + when.span.end
 ```
 
-`association_key` is stored only in the serialization-skipped LAB
-`SurfaceLabDiagnosticFailureRowContext` field. It is used for:
+`association_key` is stored only in the serialization-skipped, module-private
+LAB `SurfaceLabDiagnosticFailureRowContext` field. It is used for:
 
 - `failure_row_request_counts`;
 - retrospective suppression of already-emitted `set_insertion` repairs.

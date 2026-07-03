@@ -117,6 +117,79 @@ fn assert_complete_set_insertion_not_bundle_or_partial(detail: &Value, repair: &
     }
 }
 
+fn assert_obl024_diagnostic_soundness_projection(detail: &Value) {
+    let projection = detail["diagnostic_soundness_projection"]
+        .as_object()
+        .expect("LAB OBL-024 diagnostic soundness projection is emitted");
+    assert_eq!(
+        projection["diagnostic_id"],
+        serde_json::json!(format!(
+            "{}:{}:{}",
+            detail["legacy_code"]
+                .as_str()
+                .expect("legacy_code is a string"),
+            detail["canon_id"].as_str().expect("canon_id is a string"),
+            detail["request_context"]["request_id"]
+                .as_str()
+                .expect("request id is a string")
+        ))
+    );
+    assert_eq!(
+        projection["lab_association_key"],
+        serde_json::json!(format!(
+            "{}|request={}",
+            detail["failure_row_context"]["target_ref"]
+                .as_str()
+                .expect("target_ref is a string"),
+            detail["request_context"]["request_id"]
+                .as_str()
+                .expect("request id is a string")
+        ))
+    );
+    assert_eq!(
+        projection["reported_rule_instance"],
+        detail["rule_instance"]
+    );
+    assert_eq!(
+        projection["reported_failed_premise"],
+        detail["failed_premise"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["request_id"],
+        detail["request_context"]["request_id"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["target_ref"],
+        detail["failure_row_context"]["target_ref"]
+    );
+    assert_eq!(
+        projection["reported_bindings"]["missing_failures"],
+        detail["failure_row_context"]["missing_failures"]
+    );
+    assert_eq!(
+        projection["trace_local_replay"]["replay_scope"],
+        "surface_to_core_elaboration.report_local"
+    );
+    assert_eq!(
+        projection["trace_local_replay"]["replayed_request_id"],
+        detail["request_context"]["request_id"]
+    );
+    assert_eq!(
+        projection["trace_local_replay"]["replayed_target_ref"],
+        detail["failure_row_context"]["target_ref"]
+    );
+    assert_eq!(
+        projection["trace_local_replay"]["fails_exactly_at"],
+        detail["failure_row_context"]["local_premise"]
+    );
+    assert_eq!(
+        projection["trace_local_replay"]["expected_missing_evidence"],
+        detail["missing_evidence"]
+    );
+    assert_eq!(projection["projection_non_final"], true);
+    assert_eq!(projection["lab_non_final"], true);
+}
+
 #[test]
 #[should_panic(expected = "placeholder repair payload string")]
 fn placeholder_repair_detector_rejects_marker_substrings() {
@@ -761,6 +834,7 @@ BrowserClient[self] {
         repair["local_premise"],
         details[0]["failure_row_context"]["local_premise"]
     );
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
     assert_eq!(
         repair["local_premise_after_edit"],
         "discharged_for_associated_request"

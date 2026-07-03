@@ -64,8 +64,9 @@
 46. G1 ELAB-04 mixed visibility payload-model preflight は `plan/107`
 47. G1 OBL-025 branch-local non-coverage refinement は `plan/108`
 48. G1 OBL-024 repo-local Lean statement draft は `plan/109`
-49. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-50. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+49. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
+50. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+51. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -206,6 +207,8 @@
   `plan/81-g1-obl024-statement-shape-inventory.md`
 - G1 OBL-024 repo-local Lean statement draft:
   `plan/109-g1-obl024-lean-statement-draft.md`
+- G1 OBL-024 executable diagnostic-soundness projection carrier:
+  `plan/110-g1-obl024-executable-projection-carrier.md`
 - G1 OBL-025 statement-shape inventory:
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - G1 E-ROW repair payload inventory:

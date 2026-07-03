@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 07:22 JST
+最終更新: 2026-07-04 07:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -105,6 +105,15 @@ Current holding state:
   request IDs, branch IDs, association-key ABI, replay semantics, prove
   OBL-024, move canon ledger status, claim root-cause uniqueness, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/110-g1-obl024-executable-projection-carrier.md` now records LAB-only
+  executable E-ROW projection evidence for OBL-024 inside current
+  `lab_diagnostic_details`. `ELAB-04/07/10/13..16` now carry non-final
+  `diagnostic_soundness_projection` with helper-local diagnostic id,
+  association key, reported bindings, and report-local trace replay anchor. It
+  does not define final Diagnostic JSON / request ID / association-key ABI /
+  replay semantics, prove OBL-024, move canon ledger status, widen repair
+  output, add an `ELAB-04` payload, claim conformance, claim G1 exit, or edit
+  canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,
