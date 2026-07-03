@@ -271,8 +271,11 @@ Lean/docs/report files and no Rust source.
 
 ## Commit / push status
 
-Pending before first commit. This report will be updated with pushed commit
-identifiers in the follow-up bookkeeping commit.
+- Content commit: `63b40625d67d224b23cd267d68d9f1914181c571`
+  (`Refine OBL-025 repair coverage statement`).
+- Push status: pushed to `origin/main` and verified `HEAD == origin/main` at
+  `63b40625d67d224b23cd267d68d9f1914181c571`.
+- This report status update is recorded in the follow-up bookkeeping commit.
 
 ## Sub-agent session close status
 
