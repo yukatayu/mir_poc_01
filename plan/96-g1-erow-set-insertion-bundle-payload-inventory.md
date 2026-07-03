@@ -37,6 +37,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   `plan/97-g1-erow07-set-insertion-gate-review.md`
 - LAB `ELAB-04` mixed visibility branch inventory:
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
+- LAB `ELAB-07` executable preflight:
+  `plan/99-g1-erow07-set-insertion-executable-preflight.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `scripts/tests/test_surface_mir_samples.py`,
@@ -301,6 +303,9 @@ Recommended next ordering:
    - partial guidance non-coverage.
 3. If code widening comes first, start with `ELAB-07` only and only as a single
    grouped / set item, not independent singleton alternatives.
+   `plan/99` now records the docs-only executable preflight for that route:
+   one atomic set insertion, one target, whole-gap coverage, exact
+   declared-after set, and no current output widening.
 4. Leave `ELAB-04` no-repair until visibility alternatives and ranking are
    explicit.
 

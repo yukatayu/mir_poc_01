@@ -30,6 +30,8 @@ does not claim conformance, and does not claim G1 exit.
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB `ELAB-07` gate review:
   `plan/97-g1-erow07-set-insertion-gate-review.md`
+- LAB `ELAB-07` executable preflight:
+  `plan/99-g1-erow07-set-insertion-executable-preflight.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -253,7 +255,8 @@ No current row proves OBL-025 or moves canon ledger status.
    still omits `suggested_repair`.
 2. If executable repair widening is promoted, do `ELAB-07` set-insertion
    preflight before mixed-row widening, because it removes the visibility
-   branch from the first set/group decision.
+   branch from the first set/group decision. `plan/99` records that preflight
+   as docs-only and still keeps `ELAB-07` no-repair.
 3. Draft a mixed-branch payload model only after diagnostic ownership and
    ordering / ranking are explicit.
 4. Draft OBL-024 only after diagnostic replay / association vocabulary is

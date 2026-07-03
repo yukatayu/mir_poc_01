@@ -29,6 +29,8 @@ not claim G1 exit.
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md`
 - LAB `ELAB-04` mixed visibility branch inventory:
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
+- LAB `ELAB-07` executable preflight:
+  `plan/99-g1-erow07-set-insertion-executable-preflight.md`
 - LAB singleton repair prototype:
   `plan/94-g1-erow001-singleton-repair-prototype.md`
 - LAB OBL-025 statement draft:
@@ -212,7 +214,8 @@ Safe reading:
    still omits `suggested_repair`.
 2. If code widening is promoted, first write a narrow payload-model design for a
    single set-insertion item and its tests, then implement it in a separate
-   package.
+   package. `plan/99` records that payload-model preflight but still keeps
+   executable output no-repair.
 3. Keep `ELAB-04` no-repair until visibility branch alternatives and ranking /
    association are explicit.
 4. Draft OBL-024 only after diagnostic replay / association vocabulary is
