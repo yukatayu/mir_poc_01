@@ -9,7 +9,10 @@
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
-  mechanization evidence
+  mechanization evidence and LAB statement-shape drafts
+  - `foundations/` は small actual proof fragments
+  - `lab-statements/` は compile-check only の statement-shape drafts であり、canon OBL status movement ではない
+  - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars
   - current-scope evidence root であり、practical alpha-1 front-door root ではない
@@ -99,6 +102,8 @@
 
 - active executable sample として読むのは、まず `clean-near-end/`
 - `current-l2/` は active clean suite を支える base source corpus
+- `lean/lab-statements/` は LAB-only statement-shape draft であり、proof
+  discharge や canon OBL status として読まない
 - `lean/clean-near-end/` は generated theorem stub だが、proof bridge evidence として committed されている
 - `alpha/` は current alpha-local theory-freeze / checker/runtime roadmap 用の scaffold であり、expected-verdict sidecar を伴う
   - current task では mixed alpha-local scaffold root として扱い、active runnable sample root に silently promote しない

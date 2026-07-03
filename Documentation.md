@@ -65,7 +65,7 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 ## current active floor
 
-active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence は `samples/lean/` に置きます。
+active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
 
 - `typing/`
   finite-index first strong typing layer
@@ -77,6 +77,9 @@ active LAB clean sample evidence は `samples/clean-near-end/` です。base cur
   `stable` / `later` / `published(room)` / `witnessed(...)` の current mode line
 - `sugoroku-world/`
   empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice
+- `samples/lean/lab-statements/`
+  compile-check only の Lean statement-shape draft。canon OBL status movement、
+  proof discharge、final theorem contract ではない。
 
 旧 active sample line は active path から外し、archive に退避しています。
 

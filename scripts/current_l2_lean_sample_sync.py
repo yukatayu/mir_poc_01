@@ -13,6 +13,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 SAMPLES_ROOT = REPO_ROOT / "samples" / "lean"
 FOUNDATIONS_ROOT = SAMPLES_ROOT / "foundations"
+STATEMENT_DRAFTS_ROOT = SAMPLES_ROOT / "lab-statements"
 CLEAN_ROOT = SAMPLES_ROOT / "clean-near-end"
 MANIFEST_PATH = SAMPLES_ROOT / "manifest.json"
 RUNTIME_PREFIX = [
@@ -33,6 +34,14 @@ class FoundationSpec:
     explanation_path: str
 
 
+@dataclass(frozen=True)
+class StatementDraftSpec:
+    draft_id: str
+    relative_dir: str
+    filename: str
+    explanation_path: str
+
+
 FOUNDATIONS = [
     FoundationSpec(
         filename="CurrentL2LabelModel.lean",
@@ -49,6 +58,16 @@ FOUNDATIONS = [
     FoundationSpec(
         filename="CurrentL2ProofSkeleton.lean",
         explanation_path="samples/lean/foundations/CurrentL2ProofSkeleton.md",
+    ),
+]
+
+
+STATEMENT_DRAFTS = [
+    StatementDraftSpec(
+        draft_id="obl001-thm001-statement-draft",
+        relative_dir="obl001",
+        filename="THM001StatementDraft.lean",
+        explanation_path="samples/lean/lab-statements/obl001/THM001StatementDraft.md",
     ),
 ]
 
@@ -201,12 +220,31 @@ def foundation_entries(version: str) -> list[dict[str, object]]:
     return entries
 
 
+def statement_draft_entries(version: str) -> list[dict[str, object]]:
+    entries = []
+    for spec in STATEMENT_DRAFTS:
+        lean_path = STATEMENT_DRAFTS_ROOT / spec.relative_dir / spec.filename
+        entries.append(
+            {
+                "kind": "statement-draft",
+                "draft_id": spec.draft_id,
+                "lean_path": str(lean_path.relative_to(REPO_ROOT)),
+                "explanation_path": spec.explanation_path,
+                "lean_version": version,
+                "verification": verify_lean(lean_path),
+                "status": "lab-compile-check-only",
+            }
+        )
+    return entries
+
+
 def main() -> int:
     sample_rows = runtime_json("list")
     version = lean_version()
     manifest = {
         "lean_version": version,
         "foundations": foundation_entries(version),
+        "statement_drafts": statement_draft_entries(version),
         "clean_near_end": sync_clean_stubs(sample_rows),
     }
     MANIFEST_PATH.write_text(

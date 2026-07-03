@@ -5,19 +5,23 @@
 ## layout
 
 - `foundations/`
-  - small actual proof fragment
+  - small actual proof fragments
   - finite-index first layer、IFC example、proof skeleton の最小 mechanization を置く
+- `lab-statements/`
+  - LAB-only Lean statement-shape drafts
+  - compile-check only; no canon OBL status movement
 - `clean-near-end/`
   - active clean sample suite から生成した theorem stub
   - Lean は通るが、full domain discharge を意味しない
 - `manifest.json`
-  - foundations と generated stub corpus の verification result
+  - foundations、LAB statement drafts、generated stub corpus の verification result
 - `old/2026-04-22-pre-clean-near-end/`
   - pre-clean-near-end corpus の archive
 
 ## current reading
 
 - foundations は actual proof fragment
+- lab-statements は compile-check only の statement-shape draft
 - generated stub は proof bridge の足場
 - old corpus は historical appendix
 

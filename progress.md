@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 20:21 JST
+最終更新: 2026-07-03 20:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -75,6 +75,12 @@ semantic source authority.
   inventories the minimum Lean statement vocabulary, predicate split, SCN row
   coverage, adjacent-obligation separation, and overfit guards for THM-001. It
   adds no Lean statement file and does not move OBL status.
+- Current OBL-001 statement-draft note:
+  `plan/74-g1-obl001-lean-statement-draft.md` records the first repo-local
+  LAB Lean statement-shape draft at
+  `samples/lean/lab-statements/obl001/THM001StatementDraft.lean`. It compiles
+  as a `Prop` definition under a LAB namespace and does not move OBL status,
+  prove THM-001, claim G1 exit, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -84,10 +90,10 @@ semantic source authority.
   and 47 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   and static devtools diagnostics floors revalidated.
-- Next gap: the safe self-driven theory package is either an actual repo-local
-  OBL-001 Lean statement draft, statement only, or a narrow SCN dependency-gap
-  package if the statement would otherwise over-abstract SCN-01 same-field RHS
-  and SCN-02 two-read RHS coverage. This remains before any later
+- Next gap: the safe self-driven theory package is either a narrow SCN
+  dependency-gap package for SCN-01 same-field RHS / SCN-02 two-read RHS
+  evidence, an OBL-020/021 dependency inventory, or a focused refinement of the
+  LAB statement draft if review finds overfit. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -367,7 +373,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | Surface elaboration soundness is target obligation, not discharged | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001 statement-shape draft now compiles, but Surface elaboration soundness is not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -389,6 +395,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
+| OBL-001 Lean statement draft | `lab-compile-check-only` | `THM001StatementDraft.lean` compiles as a LAB `Prop` shape under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -421,6 +428,13 @@ Research-discovery items:
   SCN row coverage / overfit guard を整理した。Lean statement file、OBL status
   movement、G1 exit、theorem discharge は主張していない。次は actual OBL-001
   statement draft または SCN dependency-gap package。
+- 2026-07-03 20:41 JST
+  `samples/lean/lab-statements/obl001/THM001StatementDraft.lean` と `plan/74` を
+  追加し、THM-001 / OBL-001 の LAB-only statement-shape draft を Lean
+  compile-check 可能な `Prop` として記録した。`statement_drafts` manifest 区分を
+  追加したが、OBL status movement、proof discharge、G1 exit、conformance は
+  主張していない。次は SCN dependency-gap、OBL-020/021 inventory、または
+  focused statement refinement。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

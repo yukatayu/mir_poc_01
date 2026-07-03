@@ -237,9 +237,11 @@ semantic change.
 
 ## Next safe packages
 
-1. Actual OBL-001 repo-local Lean statement draft, statement only, with
-   `theory/11` unchanged unless a later human-approved canon process says
-   otherwise.
-2. SCN exact LAB dependency-gap package for SCN-01 same-field RHS and SCN-02
+The first item below was actualized as LAB-only compile-check evidence in
+`plan/74-g1-obl001-lean-statement-draft.md`. It did not move `theory/11`.
+
+1. SCN exact LAB dependency-gap package for SCN-01 same-field RHS and SCN-02
    two-read RHS if the Lean statement would otherwise become too abstract.
-3. OBL-020/021 dependency inventory, kept separate from OBL-001 proof work.
+2. OBL-020/021 dependency inventory, kept separate from OBL-001 proof work.
+3. Focused refinement of the LAB statement draft if review identifies overfit
+   or a missing predicate.

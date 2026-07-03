@@ -54,6 +54,22 @@
       }
     }
   ],
+  "statement_drafts": [
+    {
+      "kind": "statement-draft",
+      "draft_id": "obl001-thm001-statement-draft",
+      "lean_path": "samples/lean/lab-statements/obl001/THM001StatementDraft.lean",
+      "explanation_path": "samples/lean/lab-statements/obl001/THM001StatementDraft.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "",
+        "stderr": "",
+        "returncode": 0
+      },
+      "status": "lab-compile-check-only"
+    }
+  ],
   "clean_near_end": [
     {
       "kind": "clean-near-end",

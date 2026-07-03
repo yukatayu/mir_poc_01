@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 20:21 JST
+最終更新: 2026-07-03 20:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,6 +55,11 @@ Current holding state:
   datatypes, predicates, theorem-shape split, SCN coverage rows, and overfit
   guards needed before writing an actual repo-local OBL-001 Lean statement. It
   adds no Lean statement file and does not move canon OBL status.
+- `plan/74-g1-obl001-lean-statement-draft.md` now records a LAB-only
+  repo-local Lean statement-shape draft at
+  `samples/lean/lab-statements/obl001/THM001StatementDraft.lean`. It compiles
+  as a `Prop` definition and does not move canon OBL status, prove THM-001,
+  claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -63,9 +68,9 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `OBL-001 Lean statement draft` | `G1` front-half | write the first repo-local Lean statement draft for THM-001 using `plan/73`, without proof discharge or canon status movement | Lean file compiles; theory/11 status remains unchanged unless separately approved; OBL-020/021 remain separate |
-| `SCN exact LAB gap drilldown` | `G1` reserve | decide whether exact LAB rows are needed for SCN-01 missing-VisibilityDenied-on-write and SCN-02 two-read RHS before formal statement work | no implementation unless promoted separately; no conformance claim |
+| `SCN exact LAB dependency-gap drilldown` | `G1` front-half | decide whether exact LAB rows are needed for SCN-01 same-field RHS and SCN-02 target/self RHS before tightening statement/proof work | no conformance claim; no runtime dispatch claim |
 | `OBL-020/021 dependency inventory` | `G1` reserve | inventory WF preservation and elaboration determinism dependencies separately from OBL-001 | statement inventory only; no proof or G1 exit claim |
+| `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |

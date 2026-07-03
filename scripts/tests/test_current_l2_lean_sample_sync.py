@@ -46,6 +46,19 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "/tmp/outside-sample.mir",
         )
 
+    def test_statement_drafts_include_obl001_draft(self) -> None:
+        entries = {spec.draft_id: spec for spec in sync.STATEMENT_DRAFTS}
+        draft = entries["obl001-thm001-statement-draft"]
+
+        self.assertEqual(
+            draft.filename,
+            "THM001StatementDraft.lean",
+        )
+        self.assertEqual(
+            draft.explanation_path,
+            "samples/lean/lab-statements/obl001/THM001StatementDraft.md",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
