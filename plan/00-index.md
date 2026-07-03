@@ -67,8 +67,9 @@
 49. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
 50. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
 51. G1 OBL-024 replay vocabulary preflight は `plan/112`
-52. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-53. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+52. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
+53. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+54. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -215,6 +216,8 @@
   `plan/111-g1-obl024-projection-rust-fixture-guards.md`
 - G1 OBL-024 replay vocabulary preflight:
   `plan/112-g1-obl024-replay-vocabulary-preflight.md`
+- G1 OBL-024 Lean replay vocabulary refinement:
+  `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md`
 - G1 OBL-025 statement-shape inventory:
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - G1 E-ROW repair payload inventory:

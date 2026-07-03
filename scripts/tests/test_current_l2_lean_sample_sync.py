@@ -111,6 +111,31 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md",
         )
 
+    def test_obl024_draft_names_replay_vocabulary_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertIn("ReportLocalReplayAnchor : Type u", lean_text)
+        self.assertIn("ProofLevelReplayWitness : Type u", lean_text)
+        self.assertIn("DiagnosticReportsReplayAnchor", lean_text)
+        self.assertIn("ProofLevelReplayRelation", lean_text)
+        self.assertIn("ReportLocalReplayAnchorCompatible", lean_text)
+        self.assertNotRegex(lean_text, r"(?m)^\s*ReplayWitness\s*:\s*Type u\b")
+        self.assertNotIn("TraceLocalReplayFailsExactlyAt", lean_text)
+        self.assertIn("V.ReportLocalReplayAnchor ->\n      V.ProofLevelReplayWitness ->", lean_text)
+        self.assertIn("env ctx locus input rejection rule bindings anchor replay", lean_text)
+        self.assertIn("report-local replay anchor", explanation_text)
+        self.assertIn("proof-level replay relation", explanation_text)
+
 
 if __name__ == "__main__":
     unittest.main()

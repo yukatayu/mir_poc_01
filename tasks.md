@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 08:29 JST
+最終更新: 2026-07-04 08:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -100,8 +100,9 @@ Current holding state:
   repo-local OBL-024 Lean statement-shape draft at
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
   It compiles as a diagnostic projection / association-key / reported failed
-  premise / trace-local replay `Prop` with non-repair mixed diagnostic branch
-  boundary predicates. It does not define final Diagnostic ABI, JSON keys,
+  premise / report-local replay anchor / future proof-level replay relation
+  `Prop` with non-repair mixed diagnostic branch boundary predicates. It does
+  not define final Diagnostic ABI, JSON keys,
   request IDs, branch IDs, association-key ABI, replay semantics, prove
   OBL-024, move canon ledger status, claim root-cause uniqueness, claim
   conformance, claim G1 exit, or edit canon.
@@ -127,6 +128,14 @@ Current holding state:
   branch replay, and final ABI as OPEN. It does not change production behavior,
   expected JSON, Lean files, repair output, proof status, conformance, G1 exit,
   or canon.
+- `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md` now records the
+  LAB-only Lean refinement that mirrors `plan/112` in
+  `DiagnosticSoundnessStatementDraft.lean`. The draft now separates
+  `ReportLocalReplayAnchor` from `ProofLevelReplayWitness` /
+  `ProofLevelReplayRelation` and guards that vocabulary in the Lean sync unit
+  tests. It does not prove OBL-024, move canon ledger status, freeze final
+  Diagnostic / replay ABI, change runtime JSON, change repair output, claim
+  conformance, claim G1 exit, or edit canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,

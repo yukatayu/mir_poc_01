@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 08:29 JST
+最終更新: 2026-07-04 08:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -135,8 +135,12 @@ semantic source authority.
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
   It compiles as a diagnostic-soundness `Prop` over abstract diagnostic
   projection, association-key, reported rule / premise / bindings,
-  trace-local replay, and non-repair mixed diagnostic branch predicates. It
-  does not move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
+  report-local replay anchor, future proof-level replay relation, and
+  non-repair mixed diagnostic branch predicates. `plan/113` now refines the
+  draft so current `trace_local_replay` evidence is represented by
+  `ReportLocalReplayAnchor`, while `ProofLevelReplayWitness` /
+  `ProofLevelReplayRelation` remain future proof-level vocabulary. It does not
+  move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
   request ID / branch ID / association-key ABI / replay semantics, claim
   root-cause uniqueness, claim conformance, or claim G1 exit.
 - Current OBL-024 executable projection carrier note:
@@ -720,7 +724,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / association-key / trace-local replay / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / association-key / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -732,7 +736,17 @@ negative guards, `plan/104` span-based internal association hardening,
 exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
 branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
 statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
-guard hardening, and OBL-024 replay vocabulary preflight.
+guard hardening, OBL-024 replay vocabulary preflight, and OBL-024 Lean replay
+vocabulary refinement.
+
+- 2026-07-04 08:44 JST
+  `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md` を追加し、
+  `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`
+  の replay vocabulary を `ReportLocalReplayAnchor` と
+  `ProofLevelReplayWitness` / `ProofLevelReplayRelation` に分けた。Lean
+  compile、sync unit test、`current_l2_lean_sample_sync.py` で確認したが、
+  OBL-024 proof / completion、canon ledger movement、final Diagnostic /
+  replay ABI、runtime JSON、repair output、conformance、G1 exit は主張しない。
 
 - 2026-07-04 08:29 JST
   `plan/112-g1-obl024-replay-vocabulary-preflight.md` を追加し、current

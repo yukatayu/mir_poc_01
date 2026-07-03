@@ -4,7 +4,8 @@ LAB-only OBL-024 diagnostic-soundness statement-shape draft.
 This file checks that diagnostic explanation soundness can be expressed as Lean
 propositions without importing final MirCore diagnostic datatypes, final JSON
 fields, replay engines, conformance evidence, repair payloads, or
-proof-obligation status changes.
+proof-obligation status changes. The report-local replay anchor is kept
+separate from the future proof-level replay witness/relation.
 -/
 
 namespace MirCore.Lab.OBL024.StatementDraft
@@ -27,7 +28,8 @@ structure Vocab where
   Span : Type u
   AssociationKey : Type u
   DiagnosticBranch : Type u
-  ReplayWitness : Type u
+  ReportLocalReplayAnchor : Type u
+  ProofLevelReplayWitness : Type u
 
 structure Pred (V : Vocab.{u}) where
   WellScopedInput :
@@ -58,6 +60,8 @@ structure Pred (V : Vocab.{u}) where
     V.Diagnostic -> V.MissingEvidenceKind -> Prop
   DiagnosticPrimarySpan :
     V.Diagnostic -> V.Span -> Prop
+  DiagnosticReportsReplayAnchor :
+    V.Diagnostic -> V.ReportLocalReplayAnchor -> Prop
   ActualRuleInstance :
     V.Env ->
       V.Ctx ->
@@ -79,7 +83,17 @@ structure Pred (V : Vocab.{u}) where
       V.FailedPremise ->
       V.Bindings ->
       Prop
-  ReplayWitnessFor :
+  ReportLocalReplayAnchorFor :
+    V.JudgmentInput ->
+      V.Rejection ->
+      V.RuleInstance ->
+      V.FailedPremise ->
+      V.Bindings ->
+      V.ReportLocalReplayAnchor ->
+      Prop
+  ReportLocalReplayAnchorNonFinal :
+    V.ReportLocalReplayAnchor -> Prop
+  ProofLevelReplayWitnessFor :
     V.Env ->
       V.Ctx ->
       V.Locus ->
@@ -87,10 +101,11 @@ structure Pred (V : Vocab.{u}) where
       V.Rejection ->
       V.RuleInstance ->
       V.Bindings ->
-      V.ReplayWitness ->
+      V.ReportLocalReplayAnchor ->
+      V.ProofLevelReplayWitness ->
       Prop
-  TraceLocalReplayFailsExactlyAt :
-    V.ReplayWitness -> V.FailedPremise -> Prop
+  ProofLevelReplayRelation :
+    V.ProofLevelReplayWitness -> V.FailedPremise -> Prop
   DiagnosticIdMatchesPremise :
     V.DiagnosticId -> V.FailedPremise -> Prop
   DiagnosticFamilyMatchesPremise :
@@ -133,14 +148,16 @@ def ReportedDiagnosticShape
     (bindings : V.Bindings)
     (family : V.DiagnosticFamily)
     (missing : V.MissingEvidenceKind)
-    (span : V.Span) : Prop :=
+    (span : V.Span)
+    (anchor : V.ReportLocalReplayAnchor) : Prop :=
   P.DiagnosticReportsId diagnostic diagnosticId /\
     P.DiagnosticReportsRuleInstance diagnostic rule /\
     P.DiagnosticReportsFailedPremise diagnostic premise /\
     P.DiagnosticReportsBindings diagnostic bindings /\
     P.DiagnosticFamilyOf diagnostic family /\
     P.DiagnosticMissingEvidence diagnostic missing /\
-    P.DiagnosticPrimarySpan diagnostic span
+    P.DiagnosticPrimarySpan diagnostic span /\
+    P.DiagnosticReportsReplayAnchor diagnostic anchor
 
 def MixedDiagnosticBranchBoundary
     {V : Vocab.{u}}
@@ -156,6 +173,18 @@ def MixedDiagnosticBranchBoundary
             P.BranchPartitionExact diagnostic branch /\
               P.BranchesAreNotIndependentPremises diagnostic branch premise
 
+def ReportLocalReplayAnchorCompatible
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (input : V.JudgmentInput)
+    (rejection : V.Rejection)
+    (rule : V.RuleInstance)
+    (premise : V.FailedPremise)
+    (bindings : V.Bindings)
+    (anchor : V.ReportLocalReplayAnchor) : Prop :=
+  P.ReportLocalReplayAnchorFor input rejection rule premise bindings anchor /\
+    P.ReportLocalReplayAnchorNonFinal anchor
+
 def ReplaySoundAtReportedPremise
     {V : Vocab.{u}}
     (P : Pred V)
@@ -167,13 +196,17 @@ def ReplaySoundAtReportedPremise
     (rule : V.RuleInstance)
     (premise : V.FailedPremise)
     (bindings : V.Bindings)
-    (replay : V.ReplayWitness) : Prop :=
+    (anchor : V.ReportLocalReplayAnchor)
+    (replay : V.ProofLevelReplayWitness) : Prop :=
   P.ActualRuleInstance env ctx locus input rejection rule bindings /\
     P.PremiseOfRuleInstance rule premise bindings /\
     P.BindingsReconstructFailedPremise
       env ctx locus input rejection rule premise bindings /\
-    P.ReplayWitnessFor env ctx locus input rejection rule bindings replay /\
-    P.TraceLocalReplayFailsExactlyAt replay premise
+    ReportLocalReplayAnchorCompatible
+      P input rejection rule premise bindings anchor /\
+    P.ProofLevelReplayWitnessFor
+      env ctx locus input rejection rule bindings anchor replay /\
+    P.ProofLevelReplayRelation replay premise
 
 def DiagnosticSoundForRejection
     {V : Vocab.{u}}
@@ -184,12 +217,12 @@ def DiagnosticSoundForRejection
     (input : V.JudgmentInput)
     (rejection : V.Rejection)
     (diagnostic : V.Diagnostic) : Prop :=
-  exists key diagnosticId rule premise bindings family missing span replay,
+  exists key diagnosticId rule premise bindings family missing span anchor replay,
     DiagnosticAssociatedToRejection P input rejection diagnostic key /\
       ReportedDiagnosticShape
-        P diagnostic diagnosticId rule premise bindings family missing span /\
+        P diagnostic diagnosticId rule premise bindings family missing span anchor /\
       ReplaySoundAtReportedPremise
-        P env ctx locus input rejection rule premise bindings replay /\
+        P env ctx locus input rejection rule premise bindings anchor replay /\
       P.DiagnosticIdMatchesPremise diagnosticId premise /\
       P.DiagnosticFamilyMatchesPremise family premise /\
       P.MissingEvidenceMatchesPremise missing premise /\
