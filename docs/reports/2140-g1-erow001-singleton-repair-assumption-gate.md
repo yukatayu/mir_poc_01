@@ -154,6 +154,11 @@ python3 scripts/check_source_hierarchy.py
 python3 -m unittest scripts.tests.test_validate_docs
 python3 scripts/validate_docs.py
 git diff --check
+git commit --no-gpg-sign -m "Add G1 E-ROW singleton repair assumption gate"
+git push
+git rev-parse HEAD origin/main
+git status --short --branch
+date '+%Y-%m-%d %H:%M %Z'
 ```
 
 ## Evidence / outputs / test results
@@ -290,7 +295,13 @@ lists.
 
 ## Commit / push status
 
-Pending at report write.
+- Primary commit: `86279add6e474134ebb3bb08c3d5d8c4deb6c8e4`
+  (`Add G1 E-ROW singleton repair assumption gate`).
+- Push confirmed at 2026-07-04 00:50 JST.
+- `HEAD == origin/main == 86279add6e474134ebb3bb08c3d5d8c4deb6c8e4`
+  after the primary push.
+- This report status update is expected to be recorded in a follow-up
+  bookkeeping commit.
 
 ## Sub-agent session close status
 
