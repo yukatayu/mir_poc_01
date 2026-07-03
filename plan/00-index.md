@@ -56,8 +56,9 @@
 38. G1 ELAB-07 set-insertion executable preflight は `plan/99`
 39. G1 ELAB-07 set-insertion assumption acceptance は `plan/100`
 40. G1 ELAB-07 set-insertion payload-model design は `plan/101`
-41. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-42. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+41. G1 ELAB-07 set-insertion executable payload prototype は `plan/102`
+42. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+43. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -232,6 +233,8 @@
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - G1 ELAB-07 set-insertion payload-model design:
   `plan/101-g1-erow07-set-insertion-payload-model-design.md`
+- G1 ELAB-07 set-insertion executable payload prototype:
+  `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

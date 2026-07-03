@@ -125,8 +125,8 @@ that made the later `plan/94` covered-case prototype safer:
    the current widening in `plan/94`.
 2. Preserve the `plan/93` no-placeholder payload tests if target/span
    vocabulary changes.
-3. Keep `ELAB-04` and `ELAB-07` no-repair until set-insertion atomicity,
-   decomposition, and ranking are resolved.
+3. Keep `ELAB-04` no-repair; keep `ELAB-07` on the later exact set path rather
+   than treating it as three singleton alternatives.
 
 ## Non-claims
 

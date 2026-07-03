@@ -65,7 +65,7 @@ The current executable repair carrier is deliberately narrower:
 | `ELAB-14` | base failures | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | `MissingCapability` | `E-ROW-001` | one LAB-only `add-to-fails-row` suggestion |
 | `ELAB-15` | base failures | `MissingCapability`, `MissingWitness`, `StaleMembership` | `RouteUnavailable` | `E-ROW-001` | one LAB-only `add-to-fails-row` suggestion |
 | `ELAB-16` | base failures | `MissingCapability`, `MissingWitness`, `RouteUnavailable` | `StaleMembership` | `E-ROW-001` | one LAB-only `add-to-fails-row` suggestion |
-| `ELAB-07` | base failures | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | `E-ROW-001` | none |
+| `ELAB-07` | base failures | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | `E-ROW-001` | one exact non-final `set_insertion` suggestion under `plan/102` |
 | `ELAB-04` | base failures + `VisibilityDenied` | `MissingCapability` | `MissingWitness`, `RouteUnavailable`, `StaleMembership`, `VisibilityDenied` | `E-ROW-001` in current LAB split | none |
 
 Important reading:
@@ -73,10 +73,12 @@ Important reading:
 - `ELAB-10` is visibility-only singleton evidence.
 - `ELAB-13..16` are the non-visibility singleton repair-bearing fixture set,
   one for each base remote-request failure atom, after `plan/94`.
-- `ELAB-07` is non-visibility multi-missing evidence, not singleton evidence.
-- `ELAB-04` is mixed visibility/non-visibility multi-missing evidence.
-- There is not yet executable repair-bearing evidence for multi-missing,
-  mixed, ambiguous-target, or multi-request `E-ROW` rows.
+- `ELAB-07` is exact non-visibility set-insertion evidence after `plan/102`,
+  not singleton evidence and not general set-insertion support.
+- `ELAB-04` is mixed visibility/non-visibility multi-missing no-repair
+  evidence.
+- There is not yet executable repair-bearing evidence for mixed,
+  ambiguous-target, multi-request, or generalized multi-missing `E-ROW` rows.
 
 ## Repair shape taxonomy
 
@@ -84,7 +86,7 @@ Important reading:
 |---|---|---|---|
 | Visibility singleton | add `VisibilityDenied` to the relevant `when ... fails` row | implemented only for `E-ROW-002` / `ELAB-10` | keep as-is unless target/span vocabulary changes |
 | Non-visibility singleton | add the one missing generated failure family to the relevant `when ... fails` row | implemented for `ELAB-13..16` under `plan/93` / `plan/94` as LAB-only repair evidence | keep as-is unless target/span vocabulary or single-edit wording changes |
-| Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one grouped repair | no-repair evidence today (`ELAB-07`); decision axes inventoried in `plan/95`; candidate set / bundle vocabulary inventoried in `plan/96` | decide whether set insertion is one source edit or whether conjunctive bundle semantics applies; do not emit independent singleton alternatives |
+| Non-visibility multi-missing | add multiple missing generated failure families to one `fails` row, or emit one grouped repair | exact `ELAB-07` has one non-final `set_insertion` item under `plan/102`; decision axes inventoried in `plan/95`; candidate set / bundle vocabulary inventoried in `plan/96` | harden guards before widening beyond exact `ELAB-07`; do not emit independent singleton alternatives |
 | Mixed visibility/non-visibility multi-missing | same local premise but includes both `VisibilityDenied` and other missing failures | no-repair evidence today (`ELAB-04`); decision axes inventoried in `plan/95`; candidate mixed branch vocabulary inventoried in `plan/96` | first decide visibility split, alternative visibility repairs, ordering / ranking, and whether mixed rows can expose one grouped repair |
 | Alternative visibility repair | declare visibility / observe authority instead of adding `VisibilityDenied` to `fails` | OPEN; not current prototype | needs separate repair family and authority/visibility preservation wording |
 | Multi-request row failures | one source item emits multiple failing request diagnostics, even if each request is singleton-shaped | no-repair by default | needs diagnostic association, ordering, and per-request target policy |
@@ -126,7 +128,8 @@ This singleton definition is a LAB test gate, not final ABI.
 The following cases should continue to omit `suggested_repair[]` until a later
 package explicitly changes their status with tests and repository memory:
 
-- more than one missing generated failure;
+- more than one missing generated failure outside the exact `ELAB-07`
+  `plan/102` set path;
 - any mixed missing set that includes `VisibilityDenied` plus other failures;
 - any source item with multiple failing generated requests until per-request
   diagnostic association and ordering are explicit;
@@ -138,8 +141,9 @@ package explicitly changes their status with tests and repository memory:
 - any case where the suggested item would be a placeholder rather than a
   witness-compatible local repair.
 
-For current no-repair rows such as `ELAB-04` and `ELAB-07`, the safer JSON
-shape is to omit `suggested_repair` rather than emit an empty array.
+For current no-repair rows such as `ELAB-04` and any future ineligible
+multi-missing row, the safer JSON shape is to omit `suggested_repair` rather
+than emit an empty array.
 Empty-array semantics are not standardized in this LAB carrier.
 
 ## Relation to OBL-025
@@ -151,13 +155,15 @@ future instantiations of `CoveredLine1RepairCase`.
 Safe reading:
 
 - current executable repair-coverage evidence includes `E-ROW-002` /
-  `VisibilityDenied` singleton (`ELAB-10`) and `E-ROW-001` non-visibility
-  singleton rows (`ELAB-13..16`);
+  `VisibilityDenied` singleton (`ELAB-10`), `E-ROW-001` non-visibility
+  singleton rows (`ELAB-13..16`), and the exact non-final `ELAB-07`
+  `set_insertion` item under `plan/102`;
 - non-visibility singleton now has one repair-bearing fixture per base
   remote-request failure atom in `ELAB-13..16`;
-- mixed and multi-missing cases are not covered single-edit repair evidence
-  until the `plan/95` axes and `plan/96` candidate set-insertion / bundle
-  vocabulary are promoted into an explicit executable assumption;
+- mixed cases and generalized / non-exact multi-missing cases are not covered
+  single-edit repair evidence until the `plan/95` axes and `plan/96`
+  candidate set-insertion / bundle vocabulary are promoted into an explicit
+  executable assumption;
 - non-empty `suggested_repair[]` is meaningful only when the item realizes a
   local witness and targets the reported premise.
 
@@ -207,7 +213,8 @@ standardizes empty repair-list semantics.
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No repair generation widening beyond the current singleton evidence.
+- No repair generation widening beyond current singleton evidence plus the
+  exact `ELAB-07` `plan/102` set prototype.
 - No OBL-024 proof.
 - No OBL-025 proof.
 - No OBL-025 completion.

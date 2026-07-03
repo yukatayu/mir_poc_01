@@ -52,22 +52,22 @@ If this LAB inventory conflicts with canon, canon wins.
 
 ## Current executable policy
 
-Current repair-bearing executable classes remain singleton-only:
+Current repair-bearing executable classes are:
 
 | Sample | Shape | Repair output |
 |---|---|---|
 | `ELAB-10` | `E-ROW-002` / `VisibilityDenied` singleton | one LAB-only `add-to-fails-row` item |
 | `ELAB-13..16` | `E-ROW-001` non-visibility singleton | one LAB-only `add-to-fails-row` item per row |
+| `ELAB-07` | exact non-visibility multi-missing `E-ROW-001` | one non-final `set_insertion` item under `plan/102` |
 
-Current mixed / multi-missing fences remain no-repair:
+Current mixed / unresolved multi-missing fences remain no-repair:
 
 | Sample | Shape | Missing failures | Repair output |
 |---|---|---|---|
-| `ELAB-07` | non-visibility multi-missing `E-ROW-001` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | no `suggested_repair` field |
 | `ELAB-04` | mixed visibility / non-visibility multi-missing | `MissingWitness`, `RouteUnavailable`, `StaleMembership`, `VisibilityDenied` | no `suggested_repair` field |
 
-This package keeps that policy. It only defines candidate vocabulary for a
-later package.
+This package originally kept the older no-repair policy. `plan/102` later
+uses this vocabulary only for the exact `ELAB-07` set path.
 
 ## Why singleton vocabulary is insufficient
 
@@ -206,7 +206,9 @@ local_premise_after_edit = still_not_discharged
 Partial guidance should not be emitted under the same semantics as complete
 repair suggestions. A later package must decide whether partial guidance
 belongs in `suggested_repair[]` with an explicit marker, or in a separate
-field. Until then, `ELAB-04/07` should keep omitting `suggested_repair`.
+field. Until then, `ELAB-04` and future partial-only rows should keep omitting
+`suggested_repair`; exact `ELAB-07` instead uses the later complete
+`plan/102` set-insertion item, not partial guidance.
 
 ## `ELAB-07` future reading
 
@@ -219,8 +221,9 @@ The safest future widening for `ELAB-07`, if any, is a single grouped item:
 Do not emit one ordinary singleton item per missing failure as if those items
 were alternatives or complete local repair witnesses.
 
-Until that accepted assumption is represented by a separate executable set
-payload and tests, `ELAB-07` should remain no-repair.
+`plan/102` later represents that accepted assumption as a separate exact
+executable set payload with tests. This does not generalize set-insertion
+support beyond the current `ELAB-07` fact pattern.
 
 ## `ELAB-04` future reading
 
@@ -296,9 +299,9 @@ Tests must prove:
 
 Recommended next ordering:
 
-1. Keep `ELAB-04/07` no-repair in executable output.
-   `plan/97` confirms that `ELAB-07` should stay no-repair until set insertion
-   is explicitly accepted as one source edit or bundle semantics are defined.
+1. Keep `ELAB-04` no-repair in executable output, and keep the later
+   `ELAB-07` set item restricted to the exact `plan/102` fact pattern.
+   `plan/97..102` record the gate, assumption, payload design, and prototype.
    `plan/98` confirms that `ELAB-04` should stay no-repair until base and
    visibility branches have explicit diagnostic ownership, association, and
    ordering / ranking semantics.
@@ -311,13 +314,15 @@ Recommended next ordering:
    grouped / set item, not independent singleton alternatives.
    `plan/99` now records the docs-only executable preflight for that route:
    one atomic set insertion, one target, whole-gap coverage, exact
-   declared-after set, and no current output widening.
+   declared-after set, and no output widening before explicit tests.
    `plan/100` accepts the narrow LAB source-locus edit assumption for this
    route only: one existing row-field edit with `element_insert_count = 3`,
-   no executable output widening, and no general set-insertion support claim.
-   `plan/101` then narrows the first future set payload to one top-level
+   no general set-insertion support claim.
+   `plan/101` then narrows the first set payload to one top-level
    `set_insertion` item with candidate roles and a positive / negative test
-   matrix, still without executable output widening.
+   matrix.
+   `plan/102` implements the exact `ELAB-07` positive path only, while keeping
+   `ELAB-04` no-repair and preserving singleton rows.
 4. Leave `ELAB-04` no-repair until visibility alternatives and ranking are
    explicit.
 
@@ -326,7 +331,7 @@ Recommended next ordering:
 - Is adding several failures to one `fails` row one source edit in the declared
   fragment? `plan/100` answers yes only for the exact `ELAB-07` candidate gate:
   one existing concrete row, base failures only, whole-gap insertion, exact
-  `declared_after == required`, and no executable output widening.
+  `declared_after == required`, and no general set-insertion support.
 - If a bundle has multiple child edits, is the bundle itself a repair witness
   or only a repair plan?
 - Should partial guidance live in `suggested_repair[]` or a separate guidance

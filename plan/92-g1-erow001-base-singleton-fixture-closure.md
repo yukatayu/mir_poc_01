@@ -124,8 +124,8 @@ for a later `CoveredLine1RepairCase` instantiation:
    singleton repair-bearing state.
 2. Preserve `ELAB-13..16` as singleton-only repair evidence when refining
    OBL-025 wording or target/span vocabulary.
-3. Keep `ELAB-04` and `ELAB-07` no-repair until multi-missing semantics are
-   decided.
+3. Keep `ELAB-04` no-repair; keep `ELAB-07` on the later exact set path rather
+   than treating it as three singleton alternatives.
 
 ## Non-claims
 

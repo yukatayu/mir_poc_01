@@ -5,11 +5,16 @@
 This file records the LAB-only executable-preflight design for a possible
 future `ELAB-07` set-insertion repair.
 
-Conclusion: `ELAB-07` remains no-repair in executable output. This package does
-not widen `suggested_repair[]`, does not adopt set insertion as one source
-edit, does not add set-insertion support, does not add bundle semantics, does
-not edit canon, does not freeze a Diagnostic or repair ABI, does not prove
-OBL-024/025, does not claim conformance, and does not claim G1 exit.
+Original conclusion: this package kept `ELAB-07` no-repair in executable
+output. It did not widen `suggested_repair[]`, adopt set insertion as one
+source edit, add set-insertion support, add bundle semantics, edit canon,
+freeze a Diagnostic or repair ABI, prove OBL-024/025, claim conformance, or
+claim G1 exit.
+
+Current note after `plan/102`: the exact `ELAB-07` fact pattern now has one
+non-final LAB `set_insertion` repair item. This file remains the preflight
+record for the predicates that made that later package safe; it is not the
+current executable-output source of truth by itself.
 
 The preflight exists so a later implementation package cannot accidentally
 turn singleton repair evidence into multi-missing coverage without an explicit
@@ -88,10 +93,12 @@ Current expected diagnostic detail:
 | `declared_failures` | `MissingCapability` |
 | `missing_failures` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` |
 | `local_premise` | `generated_failures_subset_declared_fails` |
-| current repair output | no `suggested_repair` field |
+| repair output before `plan/102` | no `suggested_repair` field |
+| repair output after `plan/102` | one exact non-final `set_insertion` item |
 
-The current Rust and Python tests assert the same facts and assert that
-`suggested_repair` is absent.
+The current Rust and Python tests now assert the same diagnostic facts and the
+exact `plan/102` set payload. They still assert that mixed `ELAB-04` omits
+`suggested_repair`.
 
 ## Why `ELAB-07` is the first preflight target
 
@@ -110,9 +117,9 @@ duplicate-free set of missing failures to one failure row can be treated as one
 source edit. `ELAB-04` should not be first because it adds mixed visibility
 branch ownership, association, and ordering / ranking questions.
 
-## Current executable guard to preserve
+## Singleton executable guard to preserve
 
-Current code emits repair output only when:
+Before `plan/102`, code emitted repair output only when:
 
 ```text
 missing_failures.len() == 1
@@ -120,16 +127,16 @@ target_kind == "when_fails_row"
 target_ref is non-empty
 ```
 
-The current payload also has a singleton field:
+The singleton payload has a singleton field:
 
 ```text
 missing_failure: String
 ```
 
-Therefore `ELAB-07` cannot be represented by the current payload without
+Therefore `ELAB-07` was not representable by the singleton payload without
 either losing coverage information or making three child edits look like
-alternatives. The current no-repair output is correct until the set payload is
-explicit.
+alternatives. `plan/102` added a separate exact set payload path instead of
+widening the singleton path.
 
 ## Candidate future payload contract
 
@@ -201,13 +208,15 @@ A later executable package needs predicates at least this strong:
 
 `plan/100` now accepts `single_source_edit_accepted` only for the exact
 `ELAB-07` candidate gate under a source-locus edit model:
-`source_locus_edit_count = 1` and `element_insert_count = 3`. Executable
-`ELAB-07` output still remains no-repair until a later set payload package is
-implemented and validated.
+`source_locus_edit_count = 1` and `element_insert_count = 3`.
 
 `plan/101` now designs that first future payload model as one top-level
 non-final `set_insertion` item with candidate roles, eligibility guards, and a
-positive / negative test matrix. It still does not change executable output.
+positive / negative test matrix.
+
+`plan/102` implements the exact `ELAB-07` set payload prototype and validates
+that `ELAB-04` remains no-repair while `ELAB-10` / `ELAB-13..16` remain
+singleton repair evidence.
 
 The safe set arithmetic for this case is exact:
 
@@ -224,12 +233,14 @@ If the declared row already contains an extraneous non-required failure symbol,
 this repair path is not applicable; insertion alone cannot make the declaration
 exact.
 
-## Minimum tests before widening
+## Minimum tests before generalizing beyond `ELAB-07`
 
-A future implementation package must add or update tests proving:
+`plan/102` added the first exact positive path and direct singleton/no-repair
+regression fences. Further widening beyond that exact fact pattern must add or
+update tests proving:
 
-- `ELAB-07` emits exactly one set-insertion item if and only if the set
-  insertion assumption is adopted;
+- `ELAB-07` emits exactly one set-insertion item only for the accepted exact
+  fact pattern;
 - the item covers exactly `MissingWitness`, `RouteUnavailable`, and
   `StaleMembership`;
 - `declared_failures_after` is the stable duplicate-free union of declared and
@@ -249,14 +260,18 @@ A future implementation package must add or update tests proving:
 - OBL-025-related tests do not count partial guidance or any-overlap coverage
   as complete coverage.
 
-The future package should keep Rust tests, Python helper tests, expected JSON,
-sample README / matrix wording, `plan/` memory, snapshot docs, and report in
-the same commit series.
+Future guard-hardening packages should keep Rust tests, Python helper tests,
+expected JSON, sample README / matrix wording, `plan/` memory, snapshot docs,
+and report in the same commit series.
 
 ## Implementation sequencing constraint
 
 Do not start by changing `erow_singleton_row_addition_suggested_repair` to
 accept `missing_failures.len() > 1`.
+
+`plan/102` followed this constraint by adding a separate exact
+`erow_set_insertion_suggested_repair` path before falling back to the singleton
+path.
 
 The safer implementation order for a later executable package is:
 
@@ -302,10 +317,10 @@ OBL-025 remains Line-1 explanation completeness for single-edit repairs. The
 current Lean draft can name set insertion only when it also satisfies the
 single-edit witness relation and covers the whole rejected gap.
 
-`ELAB-07` is not current OBL-025 coverage evidence. It becomes candidate
-coverage evidence only if a later package explicitly accepts the set insertion
-as one source edit, emits a complete local repair suggestion, and validates
-whole rejected-gap coverage.
+`ELAB-07` is candidate local repair evidence after `plan/102`, but still not
+OBL-025 proof or completion. It became candidate evidence only after
+`plan/100` accepted the exact set insertion as one source edit and `plan/102`
+emitted and validated the complete local repair suggestion.
 
 Conjunctive bundles and partial guidance remain outside current OBL-025
 coverage unless a later obligation or relation admits them explicitly.
@@ -316,23 +331,21 @@ Use separate statuses for `ELAB-07`:
 
 | Status | Meaning | Current reading |
 |---|---|---|
-| `no_repair_executable` | current diagnostics omit `suggested_repair` | yes |
-| `set_insertion_payload_preflight` | candidate payload and tests are specified before code widening | yes |
+| `no_repair_executable` | diagnostics omit `suggested_repair` | historical before `plan/102`; no longer current for exact `ELAB-07` |
+| `set_insertion_payload_preflight` | candidate payload and tests are specified before code widening | yes, historical precondition recorded by this file |
 | `single_source_edit_accepted` | set insertion has been accepted as one source edit | yes, but only by `plan/100` for the exact `ELAB-07` source-locus candidate gate |
-| `set_insertion_payload_model_designed` | candidate payload roles and future test matrix are explicit before code widening | yes, but only by `plan/101` and still docs-only |
-| `repair_bearing_evidence` | expected JSON emits a complete set repair item | no |
+| `set_insertion_payload_model_designed` | candidate payload roles and future test matrix are explicit before code widening | yes, by `plan/101` |
+| `repair_bearing_evidence` | expected JSON emits a complete set repair item | yes, but only after `plan/102` and only for exact `ELAB-07` |
 | `obl025_coverage_evidence` | row counts as current OBL-025 coverage | no |
 
 ## Suggested next packages
 
-1. Keep executable output unchanged and validate that `ELAB-07` still omits
-   `suggested_repair`.
+1. `plan/102` has implemented the exact `ELAB-07` set payload.
 2. `plan/100` has now accepted the narrow source-locus edit assumption for
    `ELAB-07` only.
 3. `plan/101` has now designed the separate set-insertion payload roles and
    future test matrix without output widening.
-4. If executable widening is promoted, implement that separate set-insertion
-   payload model and tests.
+4. Add future negative guard hardening before widening beyond exact `ELAB-07`.
 5. Keep `ELAB-04` out of the first executable widening package.
 6. Refine OBL-025 only if the set-insertion predicate needs a more precise
    statement boundary.

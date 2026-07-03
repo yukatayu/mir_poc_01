@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 03:48 JST
+最終更新: 2026-07-04 04:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -154,16 +154,19 @@ semantic source authority.
   `plan/85-g1-erow-carrier-precondition-hardening.md` records the LAB-only
   addition of non-final `request_context` and `failure_row_context` inside
   `lab_diagnostic_details`. It exposes generated-request identity and the local
-  row-containment precondition for `ELAB-04/07/10`, emits no
-  `suggested_repair[]`, and does not freeze diagnostic/repair ABI, prove
-  OBL-024/025, claim conformance, or claim G1 exit.
+  row-containment precondition for `ELAB-04/07/10`. At its package close it
+  emitted no `suggested_repair[]`; later packages add `ELAB-10` singleton,
+  `ELAB-13..16` singleton, and exact `ELAB-07` set repair evidence. This does
+  not freeze diagnostic/repair ABI, prove OBL-024/025, claim conformance, or
+  claim G1 exit.
 - Current E-ROW-002 visibility repair carrier prototype note:
   `plan/86-g1-erow002-visibility-repair-carrier-prototype.md` records the
   LAB-only `suggested_repair` item emitted only for the `E-ROW-002` /
   `VisibilityDenied` row-containment failure shape represented by `ELAB-10`.
-  Mixed / multi-missing rows `ELAB-04/07` continue to emit no repair row. This
-  does not freeze diagnostic/repair ABI, prove OBL-024/025, claim explanation
-  completeness, claim conformance, or claim G1 exit.
+  `ELAB-04` continues to emit no repair row; `ELAB-07` uses the later exact
+  `E-ROW-001` set path under `plan/102`, outside this visibility-carrier
+  package. This does not freeze diagnostic/repair ABI, prove OBL-024/025,
+  claim explanation completeness, claim conformance, or claim G1 exit.
 - Current OBL-025 statement-draft note:
   `plan/87-g1-obl025-lean-statement-draft.md` records a LAB-only
   repo-local Lean statement-shape draft at
@@ -181,8 +184,8 @@ semantic source authority.
   `plan/88-g1-erow-repair-shape-inventory.md` records the LAB-only taxonomy
   for repair output widening. Current repair-bearing singleton evidence is
   `ELAB-10` for `E-ROW-002` / `VisibilityDenied` and `ELAB-13..16` for
-  `E-ROW-001` non-visibility base failures. `ELAB-07` remains
-  non-visibility multi-missing no-repair evidence, and `ELAB-04` remains
+  `E-ROW-001` non-visibility base failures. Exact `ELAB-07` now carries one
+  non-final `set_insertion` item under `plan/102`, while `ELAB-04` remains
   mixed visibility/non-visibility multi-missing no-repair evidence. This does
   not prove OBL-025, freeze ABI, claim ranking/multi-edit support, or claim G1
   exit.
@@ -203,57 +206,66 @@ semantic source authority.
   `plan/93-g1-erow001-singleton-repair-assumption.md` records the LAB-only
   single-edit assumption and no-placeholder payload constraints for
   non-visibility singleton repair. `plan/94` implements that gate for
-  `ELAB-13..16`; `ELAB-04/07` remain no-repair. This does not prove OBL-025,
+  `ELAB-13..16`; `ELAB-04` remains no-repair and `ELAB-07` uses the later
+  exact set path in `plan/102`. This does not prove OBL-025,
   freeze diagnostic/repair ABI, claim conformance, or claim G1 exit.
 - Current E-ROW-001 singleton repair prototype note:
   `plan/94-g1-erow001-singleton-repair-prototype.md` records the LAB-only
   `E-ROW-001` singleton `add-to-fails-row` repair payload for
   `MissingCapability`, `MissingWitness`, `RouteUnavailable`, and
   `StaleMembership` singleton omissions. It preserves the `plan/93`
-  no-placeholder / local-witness gate and keeps `ELAB-04/07` no-repair. It
-  does not prove OBL-025, freeze diagnostic/repair ABI, claim repair ranking,
-  claim multi-edit support, claim conformance, or claim G1 exit.
+  no-placeholder / local-witness gate, keeps `ELAB-04` no-repair, and is
+  separate from the later `ELAB-07` set path. It does not prove OBL-025, freeze
+  diagnostic/repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, or claim G1 exit.
 - Current E-ROW mixed / multi repair decomposition inventory note:
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` records why
-  `ELAB-07` and `ELAB-04` remain no-repair today. `ELAB-07` needs a decision
-  between set-insertion, conjunctive bundle, partial-repair guidance, or
-  multi-edit deferral. `ELAB-04` additionally needs visibility-family
-  decomposition and ranking / ordering policy. It does not widen
-  `suggested_repair[]`, prove OBL-025, freeze diagnostic/repair ABI, claim
-  repair ranking, claim multi-edit support, claim conformance, or claim G1
-  exit.
+  `ELAB-07` originally needed set-insertion / bundle / partial-guidance /
+  multi-edit decomposition before repair output. `plan/102` now implements the
+  exact set-insertion path for `ELAB-07`; `ELAB-04` still needs
+  visibility-family decomposition and ranking / ordering policy. This does not
+  prove OBL-025, freeze diagnostic/repair ABI, claim repair ranking, claim
+  multi-edit support, claim conformance, or claim G1 exit.
 - Current E-ROW set-insertion / bundle payload inventory note:
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` records
   candidate LAB vocabulary for future set insertion, conjunctive bundles, and
-  partial guidance. It keeps `ELAB-04/07` no-repair and does not add
+  partial guidance. After `plan/102`, exact `ELAB-07` has one non-final set
+  item, while `ELAB-04` remains no-repair. This does not add general
   executable set-insertion / bundle support, prove OBL-025, freeze
   diagnostic/repair ABI, claim repair ranking, claim multi-edit support, claim
   conformance, or claim G1 exit.
 - Current ELAB-07 set-insertion gate review note:
   `plan/97-g1-erow07-set-insertion-gate-review.md` records that `ELAB-07`
-  still stays no-repair. The row misses `MissingWitness`, `RouteUnavailable`,
-  and `StaleMembership`, while current executable repair payloads are
-  singleton-only. Future widening needs an explicit single-source-edit
-  set-insertion decision or bundle semantics with whole rejected-gap coverage.
-  This does not widen `suggested_repair[]`, add set-insertion support, prove
-  OBL-025, freeze repair ABI, claim multi-edit support, or claim G1 exit.
+  was kept no-repair until a single-source-edit set-insertion decision or
+  bundle semantics with whole rejected-gap coverage was explicit. Later
+  `plan/100..102` accepted the narrow source-locus edit assumption, designed
+  the payload, and implemented the exact `ELAB-07` set item. This still does
+  not prove OBL-025, freeze repair ABI, claim multi-edit support, or claim G1
+  exit.
 - Current ELAB-07 set-insertion assumption acceptance note:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` accepts, only
   for the exact `ELAB-07` candidate gate, that duplicate-free insertion of the
   complete missing base-failure set into the one existing concrete
   `when_fails_row` counts as one LAB source-locus edit with
-  `element_insert_count = 3`. Current executable `ELAB-07` still omits
-  `suggested_repair`; this does not add executable set-insertion support,
-  bundle semantics, OBL-025 proof / completion, conformance, or G1 exit.
+  `element_insert_count = 3`. `plan/102` now uses this assumption for the
+  exact `ELAB-07` executable payload only; this does not add general
+  set-insertion support, bundle semantics, OBL-025 proof / completion,
+  conformance, or G1 exit.
 - Current ELAB-07 set-insertion payload-model design note:
   `plan/101-g1-erow07-set-insertion-payload-model-design.md` narrows the
-  first future `ELAB-07` set payload to one top-level non-final
-  `set_insertion` item with candidate roles, no singleton `missing_failure`
-  field reuse for multi-failure coverage, exact whole-gap guards, and a future
-  positive / negative test matrix. Current executable `ELAB-07` still omits
-  `suggested_repair`; this does not add executable set-insertion support,
-  bundle semantics, OBL-025 proof / completion, conformance, final ABI, or G1
-  exit.
+  `ELAB-07` set payload to one top-level non-final `set_insertion` item with
+  candidate roles, no singleton `missing_failure` field reuse for multi-failure
+  coverage, exact whole-gap guards, and a positive / negative test matrix.
+  `plan/102` implements the exact positive path only; this does not add
+  general set-insertion support, bundle semantics, OBL-025 proof / completion,
+  conformance, final ABI, or G1 exit.
+- Current ELAB-07 set-insertion executable payload prototype note:
+  `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md`
+  implements one LAB-only non-final `set_insertion` `suggested_repair[]` item
+  for the exact current `ELAB-07` fact pattern. `ELAB-04` remains no-repair,
+  `ELAB-10` and `ELAB-13..16` keep singleton output, sample row count remains
+  52, and this does not add general set-insertion support, bundle semantics,
+  OBL-025 proof / completion, conformance, final ABI, or G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -268,21 +280,19 @@ semantic source authority.
   repair-bearing fixture set, and a LAB single-edit / no-placeholder gate
   implemented for `ELAB-13..16`. `ELAB-04/07` now have a LAB decomposition
   inventory plus candidate set-insertion / bundle payload vocabulary and an
-  `ELAB-07` gate review that keeps it no-repair until set-insertion atomicity,
-  bundle semantics, partial-repair status, diagnostic association, ordering,
-  and ranking are explicit. `ELAB-07` now also has an executable preflight that
-  requires one atomic set insertion, one target row, no extraneous declared
-  failures, exact whole rejected-gap coverage, and focused tests before any
-  output widening. `plan/100` accepts the narrow LAB source-locus edit
-  assumption for `ELAB-07` only, with `element_insert_count = 3`, and
-  `plan/101` designs the first future set payload roles / test matrix while
-  keeping executable `ELAB-07` no-repair until a later implementation package.
+  `ELAB-07` gate review / executable preflight / assumption acceptance /
+  payload design / exact executable prototype for one non-final set item.
+  `ELAB-07` now emits one `set_insertion` item only for the current exact
+  write-side base-failure set gap. `plan/100` accepts the narrow LAB
+  source-locus edit assumption for `ELAB-07` only, with
+  `element_insert_count = 3`; `plan/101` designs the payload roles / test
+  matrix; and `plan/102` implements the exact positive path.
   `ELAB-04` now has a separate mixed visibility
   branch inventory that keeps it no-repair until base remote-request and
   `VisibilityDenied` branch ownership / association / ordering / ranking are
   explicit. It still has no proof, no canon status movement, no final repair
-  ABI, no repair ranking, no visibility-repair ranking, no set-insertion
-  support, and no multi-edit support. This remains before any later
+  ABI, no repair ranking, no visibility-repair ranking, no general
+  set-insertion support, and no multi-edit support. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -392,8 +402,9 @@ Current evidence:
   `E-ROW-002` / `VisibilityDenied` repair-carrier evidence; `ELAB-13..16`
   carry one `E-ROW-001` singleton `add-to-fails-row` repair payload per base
   remote-request failure atom under the `plan/93` single-edit /
-  no-placeholder gate. `ELAB-04/07` remain mixed / multi-missing no-repair
-  fences.
+  no-placeholder gate. Exact `ELAB-07` now carries one non-final
+  `set_insertion` item under `plan/102`; `ELAB-04` remains the mixed base /
+  `VisibilityDenied` no-repair fence.
 - `crates/mir-semantics::surface_to_core_elaboration` also generates
   MessageEnvelope, visible publish/observe, and observer-safe redaction /
   retention rows for P-SURF-04.
@@ -586,7 +597,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design that still keep executable output no-repair until the set payload is implemented and tested, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -600,21 +611,33 @@ Research-discovery items:
 
 ## recent log
 
+Entries below are historical snapshots at each task close. Earlier
+`ELAB-07` no-repair lines record the state before `plan/102`; the current
+snapshot above is the exact `ELAB-07` set payload plus `ELAB-04` no-repair
+state.
+
+- 2026-07-04 04:14 JST
+  `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md` を追加し、
+  exact `ELAB-07` に one top-level non-final `set_insertion`
+  `suggested_repair[]` を実装した。`ELAB-04` は no-repair、
+  `ELAB-10` / `ELAB-13..16` は singleton repair のまま、sample row count は
+  52 のまま。general set-insertion support、bundle semantics support、
+  OBL-025 proof / completion、canon ledger movement、final repair ABI、
+  conformance、G1 exit は主張していない。
 - 2026-07-04 03:48 JST
   `plan/101-g1-erow07-set-insertion-payload-model-design.md` を追加し、
   `ELAB-07` の future set payload を one top-level set item、no singleton
   `missing_failure` field reuse、exact whole-gap guards、future positive /
-  negative test matrix として docs-only で設計した。current executable
-  `ELAB-07` は no-repair のままで、repair output widening、executable
-  set-insertion support、bundle semantics support、OBL-025 proof /
-  completion、canon ledger movement、final repair ABI、conformance、G1 exit は
-  主張していない。
+  negative test matrix として docs-only で設計した。この時点では executable
+  output をまだ広げず、repair output widening、executable set-insertion
+  support、bundle semantics support、OBL-025 proof / completion、canon ledger
+  movement、final repair ABI、conformance、G1 exit は主張していない。
 - 2026-07-04 03:24 JST
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` を追加し、
   `ELAB-07` だけについて one existing `when_fails_row` source-locus edit /
   `element_insert_count = 3` として exact missing base-failure set insertion
-  を LAB gate で受け入れた。current executable `ELAB-07` は no-repair のまま
-  で、repair output widening、set-insertion support、bundle semantics support、
+  を LAB gate で受け入れた。この時点では executable output をまだ広げず、
+  repair output widening、set-insertion support、bundle semantics support、
   OBL-025 proof / completion、canon ledger movement、final repair ABI、
   conformance、G1 exit は主張していない。
 - 2026-07-04 03:00 JST
@@ -634,13 +657,13 @@ Research-discovery items:
   bundle semantics support、OBL-025 proof / completion、canon ledger movement、
   final repair ABI、G1 exit は主張していない。
 - 2026-07-04 02:10 JST
-  `plan/97-g1-erow07-set-insertion-gate-review.md` を追加し、`ELAB-07` は
-  現時点では no-repair を維持すると整理した。current payload は singleton-only
-  で、`ELAB-07` の multi-missing row は set-insertion atomicity または bundle
-  semantics と whole rejected-gap coverage が決まるまで executable
-  `suggested_repair[]` に広げない。repair output widening、set-insertion
-  support、bundle semantics support、OBL-025 proof / completion、canon ledger
-  movement、final repair ABI、G1 exit は主張していない。
+  `plan/97-g1-erow07-set-insertion-gate-review.md` を追加し、この時点では
+  `ELAB-07` の repair output widening を保留すると整理した。当時は singleton
+  repair だけを持ち、`ELAB-07` の multi-missing row は set-insertion atomicity
+  または bundle semantics と whole rejected-gap coverage が決まるまで
+  executable `suggested_repair[]` に広げない。repair output widening、
+  set-insertion support、bundle semantics support、OBL-025 proof / completion、
+  canon ledger movement、final repair ABI、G1 exit は主張していない。
 - 2026-07-04 01:54 JST
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
   を compile-check-only のまま refinement し、whole rejected gap、
@@ -653,10 +676,11 @@ Research-discovery items:
 - 2026-07-04 01:27 JST
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` を追加し、
   set-insertion / conjunctive bundle / partial guidance の候補 payload
-  vocabulary を docs-only で整理した。`ELAB-04/07` は no-repair のまま。
-  set-insertion support、bundle semantics support、repair output widening、
-  diagnostic/repair ABI freeze、OBL-025 proof / completion、repair ranking、
-  multi-edit support、conformance、G1 exit は主張していない。
+  vocabulary を docs-only で整理した。この時点では `ELAB-04/07` の
+  executable output を広げていない。set-insertion support、bundle semantics
+  support、repair output widening、diagnostic/repair ABI freeze、OBL-025 proof
+  / completion、repair ranking、multi-edit support、conformance、G1 exit は
+  主張していない。
 - 2026-07-04 01:14 JST
   `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` を追加し、
   `ELAB-07` は set-insertion / conjunctive bundle / partial-repair /

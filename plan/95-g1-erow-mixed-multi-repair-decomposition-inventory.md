@@ -5,11 +5,12 @@
 This file records the LAB-only decomposition inventory for mixed and
 multi-missing E-ROW failure-row containment cases.
 
-It keeps `ELAB-04` and `ELAB-07` as no-repair evidence. The package does not
-widen executable `suggested_repair[]`, does not edit canon, does not freeze a
-Diagnostic or repair ABI, does not prove OBL-024/025, does not claim
-explanation soundness or completeness, does not claim repair ranking or
-multi-edit support, does not claim conformance, and does not claim G1 exit.
+At the time, it kept `ELAB-04` and `ELAB-07` as no-repair evidence. `plan/102`
+later implemented one exact non-final `ELAB-07` set payload. `ELAB-04` remains
+no-repair. This inventory still does not edit canon, freeze a Diagnostic or
+repair ABI, prove OBL-024/025, claim explanation soundness or completeness,
+claim repair ranking or multi-edit support, claim conformance, or claim G1
+exit.
 
 ## Source hierarchy
 
@@ -47,31 +48,32 @@ If this LAB inventory conflicts with canon, canon wins.
 
 ## Current executable state
 
-The current repair-bearing executable classes are singleton-only:
+The current repair-bearing executable classes are:
 
 | Sample | Shape | Repair output |
 |---|---|---|
 | `ELAB-10` | `E-ROW-002` / `VisibilityDenied` singleton | one LAB-only `add-to-fails-row` item |
 | `ELAB-13..16` | `E-ROW-001` non-visibility singleton | one LAB-only `add-to-fails-row` item per row |
+| `ELAB-07` | exact non-visibility multi-missing `E-ROW-001` | one non-final LAB-only `set_insertion` item under `plan/102` |
 
-The current mixed / multi-missing fences remain:
+The current mixed / unresolved multi-missing fence remains:
 
 | Sample | Shape | Missing failures | Repair output |
 |---|---|---|---|
-| `ELAB-07` | non-visibility multi-missing `E-ROW-001` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | no `suggested_repair` field |
 | `ELAB-04` | mixed visibility / non-visibility multi-missing | `MissingWitness`, `RouteUnavailable`, `StaleMembership`, `VisibilityDenied` | no `suggested_repair` field |
 
-The implementation enforces this by requiring
-`failure_row_context.missing_failures.len() == 1` before emitting a repair
-payload.
+The implementation preserves the singleton guard for singleton repair output
+and adds a separate exact `ELAB-07` set path. It does not make mixed rows or
+arbitrary multi-missing rows repair-bearing.
 
-For `ELAB-04` and `ELAB-07`, the carrier should continue to omit
-`suggested_repair`. This package does not standardize empty
-`suggested_repair: []` semantics.
+For `ELAB-04`, the carrier should continue to omit `suggested_repair`. This
+package does not standardize empty `suggested_repair: []` semantics.
 
 ## Policy for `ELAB-07`
 
-`ELAB-07` should remain no-repair today.
+This package originally kept `ELAB-07` no-repair. After `plan/100..102`, the
+current policy is exact-only set insertion for the one known `ELAB-07` fact
+pattern, not general multi-missing support.
 
 Reason: each missing base failure is individually singleton-shaped, but adding
 only one of the missing failures does not discharge the reported local premise:
@@ -85,7 +87,7 @@ unless the payload language can say that they are a conjunctive repair bundle
 or unless the system separately defines each item as a partial repair. Neither
 semantics exists today.
 
-Future widening for `ELAB-07` needs an explicit decision between:
+Before `plan/102`, widening for `ELAB-07` needed an explicit decision between:
 
 1. one set-insertion repair item that adds all missing base failures and is
    treated as one source edit;
@@ -96,8 +98,9 @@ Future widening for `ELAB-07` needs an explicit decision between:
 4. staying no-repair until multi-edit support exists.
 
 Only options 1 or 2 could plausibly serve as a local premise-discharging repair
-for OBL-025-shaped coverage. Option 3 is useful guidance but not a complete
-repair witness for the row-containment premise.
+for OBL-025-shaped coverage. `plan/102` took option 1 for the exact current
+row only. Option 3 is useful guidance but not a complete repair witness for the
+row-containment premise.
 
 ## Policy for `ELAB-04`
 
@@ -213,21 +216,22 @@ docs-only candidate vocabulary for the future choices listed here:
 - partial guidance that does not discharge the local premise;
 - mixed visibility / non-visibility branch separation.
 
-This does not change the current policy. `ELAB-04` and `ELAB-07` still omit
-`suggested_repair`, and the executable guard still requires exactly one
-missing failure before emitting a repair payload.
+Later packages changed the `ELAB-07` executable policy only for the exact
+`plan/102` set path. `ELAB-04` still omits `suggested_repair`, and singleton
+repair output still requires exactly one missing failure.
 
-`plan/97` separately records that `ELAB-07` should remain no-repair until
-set-insertion atomicity or bundle semantics are explicit. `plan/98` separately
-records that `ELAB-04` remains no-repair because the row is both multi-missing
-and mixed across base remote-request failures plus a `VisibilityDenied`
-branch; future widening needs diagnostic ownership, branch association, and
-ordering / ranking before any payload change.
+`plan/97..102` record the `ELAB-07` gate, source-locus edit assumption,
+payload design, and exact executable set path. `plan/98` separately records
+that `ELAB-04` remains no-repair because the row is both multi-missing and
+mixed across base remote-request failures plus a `VisibilityDenied` branch;
+future widening needs diagnostic ownership, branch association, and ordering /
+ranking before any payload change.
 
 ## Suggested next packages
 
-1. Keep this package docs-only and validate that `ELAB-04/07` still omit
-   `suggested_repair`.
+1. Keep `ELAB-04` no-repair and validate that it still omits
+   `suggested_repair`; keep `ELAB-07` restricted to the exact `plan/102` set
+   path.
 2. If widening is desired later, promote a narrow assumption from `plan/96`
    before editing Rust output.
 3. Refine OBL-025 only after deciding whether multi-missing repair witnesses

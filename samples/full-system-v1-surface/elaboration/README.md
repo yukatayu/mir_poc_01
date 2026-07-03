@@ -10,7 +10,9 @@ Current executable rows:
 - `ELAB-04`: generated remote request is rejected when the surrounding `when` failure row is underdeclared.
 - `ELAB-05`: generated Core IR carries source spans for transitions, requests, and generated edges.
 - `ELAB-06`: unsupported Surface statements are rejected instead of silently dropped.
-- `ELAB-07`: generated write requests reject underdeclared failure rows.
+- `ELAB-07`: generated write requests reject underdeclared failure rows and
+  carry one LAB-only non-final `E-ROW-001` `set_insertion` repair payload for
+  the exact base-failure set gap.
 - `ELAB-08`: nested place read blocks generate owner-directed read request evidence.
 - `ELAB-09`: visible field write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: visible communication rejects an underdeclared `VisibilityDenied` failure row.
@@ -29,6 +31,8 @@ G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
 `generated_failure_not_declared` output, now includes request / failure-row
 context, emits `E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]`
 evidence for `ELAB-10`, emits `E-ROW-001` non-visibility singleton
-`suggested_repair[]` evidence for `ELAB-13..16` under the `plan/93` gate, and
-keeps `ELAB-04/07` as mixed / multi-missing no-repair fences. This does not
-freeze a diagnostic / repair ABI or claim OBL-025.
+`suggested_repair[]` evidence for `ELAB-13..16` under the `plan/93` gate,
+emits one exact `ELAB-07` `set_insertion` item under `plan/102`, and keeps
+`ELAB-04` as the mixed visibility / base no-repair fence. This does not freeze
+a diagnostic / repair ABI, prove OBL-025, or claim general set-insertion
+support.

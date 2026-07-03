@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 03:48 JST
+最終更新: 2026-07-04 04:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -119,10 +119,11 @@ Current holding state:
   OBL-024/025, claim conformance, claim G1 exit, or edit canon.
 - `plan/86-g1-erow002-visibility-repair-carrier-prototype.md` now records
   LAB-only `suggested_repair` evidence for the `E-ROW-002` / `VisibilityDenied`
-  row-containment failure shape represented by `ELAB-10`. `ELAB-04/07` remain
-  no-repair mixed / multi-missing evidence. It does not freeze
-  diagnostic/repair ABI, prove OBL-024/025, claim explanation completeness,
-  claim conformance, claim G1 exit, or edit canon.
+  row-containment failure shape represented by `ELAB-10`. `ELAB-04` remains
+  no-repair mixed evidence; `ELAB-07` later uses the exact `plan/102`
+  `E-ROW-001` set path and is outside this visibility-carrier package. It does
+  not freeze diagnostic/repair ABI, prove OBL-024/025, claim explanation
+  completeness, claim conformance, claim G1 exit, or edit canon.
 - `plan/87-g1-obl025-lean-statement-draft.md` now records a LAB-only
   repo-local OBL-025 Lean statement-shape draft at
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`.
@@ -136,9 +137,10 @@ Current holding state:
 - `plan/88-g1-erow-repair-shape-inventory.md` now records the LAB-only
   taxonomy for repair output widening. Current singleton repair evidence is
   `ELAB-10` for `E-ROW-002` / `VisibilityDenied` and `ELAB-13..16` for
-  `E-ROW-001` non-visibility base failures. `ELAB-04/07` remain no-repair,
-  and this does not prove OBL-025, claim repair ranking/multi-edit support,
-  claim conformance, claim G1 exit, or edit canon.
+  `E-ROW-001` non-visibility base failures. Exact `ELAB-07` has one non-final
+  `set_insertion` item under `plan/102`; `ELAB-04` remains no-repair. This
+  does not prove OBL-025, claim repair ranking/multi-edit support, claim
+  conformance, claim G1 exit, or edit canon.
 - `plan/89-g1-erow001-non-visibility-singleton-fixture.md` now records a
   LAB-only `ELAB-13` fixture for non-visibility singleton `MissingWitness`
   omission. It began as no-repair evidence and now carries one LAB-only
@@ -154,66 +156,68 @@ Current holding state:
 - `plan/93-g1-erow001-singleton-repair-assumption.md` now records the LAB-only
   single-edit assumption and no-placeholder payload constraints for
   non-visibility singleton repair. `plan/94` implements that gate for
-  `ELAB-13..16`; `ELAB-04/07` remain no-repair. It does not prove OBL-025,
+  `ELAB-13..16`; `ELAB-04` remains no-repair and `ELAB-07` uses the later
+  exact set path instead of this singleton gate. It does not prove OBL-025,
   freeze diagnostic/repair ABI, claim conformance, claim G1 exit, or edit
   canon.
 - `plan/94-g1-erow001-singleton-repair-prototype.md` now records LAB-only
   `E-ROW-001` singleton `add-to-fails-row` repair payloads for all four base
   remote-request failure atoms. It preserves the no-placeholder gate, keeps
-  mixed / multi-missing rows no-repair, and does not prove OBL-025, freeze
-  repair ABI, claim repair ranking, claim multi-edit support, claim
-  conformance, claim G1 exit, or edit canon.
+  `ELAB-04` no-repair, leaves `ELAB-07` to the later exact set path, and does
+  not prove OBL-025, freeze repair ABI, claim repair ranking, claim multi-edit
+  support, claim conformance, claim G1 exit, or edit canon.
 - `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` now records
-  the no-repair policy for `ELAB-04/07`. `ELAB-07` is blocked on
-  set-insertion versus bundle versus partial-repair versus multi-edit deferral;
-  `ELAB-04` is additionally blocked on visibility-family decomposition and
-  ordering / ranking. It does not widen `suggested_repair[]`, prove OBL-025,
-  freeze repair ABI, claim repair ranking, claim multi-edit support, claim
-  conformance, claim G1 exit, or edit canon.
+  the pre-`plan/102` no-repair policy for `ELAB-04/07`. `ELAB-07` has since
+  taken the exact set-insertion path; `ELAB-04` remains blocked on
+  visibility-family decomposition and ordering / ranking. This does not prove
+  OBL-025, freeze repair ABI, claim repair ranking, claim multi-edit support,
+  claim conformance, claim G1 exit, or edit canon.
 - `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` now records
   candidate payload vocabulary for set insertion, conjunctive bundles, and
-  partial guidance. It keeps `ELAB-04/07` no-repair, adds no executable
-  set-insertion / bundle support, and does not prove OBL-025, freeze repair
-  ABI, claim repair ranking, claim multi-edit support, claim conformance,
-  claim G1 exit, or edit canon.
-- `plan/97-g1-erow07-set-insertion-gate-review.md` now records the docs-first
-  gate review for `ELAB-07`. Current executable repair payloads remain
-  singleton-only, so the multi-missing row stays no-repair until set insertion
-  is explicitly accepted as one source edit or bundle semantics are defined.
-  It does not widen `suggested_repair[]`, add set-insertion support, prove
-  OBL-025, freeze repair ABI, claim multi-edit support, claim conformance,
-  claim G1 exit, or edit canon.
+  partial guidance. `ELAB-07` uses only the exact `plan/102` set path; `ELAB-04`
+  remains no-repair. This does not add general set-insertion / bundle support,
+  prove OBL-025, freeze repair ABI, claim repair ranking, claim multi-edit
+  support, claim conformance, claim G1 exit, or edit canon.
+- `plan/97-g1-erow07-set-insertion-gate-review.md` records the docs-first
+  gate review for `ELAB-07`. Later `plan/100..102` accepted the narrow
+  source-locus edit assumption, designed the payload, and implemented one exact
+  non-final set item. This does not prove OBL-025, freeze repair ABI, claim
+  multi-edit support, claim conformance, claim G1 exit, or edit canon.
 - `plan/98-g1-erow04-mixed-visibility-branch-inventory.md` now records the
-  docs-first branch inventory for `ELAB-04`. Current executable repair
-  payloads remain singleton-only, so the mixed base remote-request /
+  docs-first branch inventory for `ELAB-04`. The mixed base remote-request /
   `VisibilityDenied` row stays no-repair until diagnostic ownership, branch
   association, ordering / ranking, and visibility-repair alternatives are
-  explicit. It does not widen `suggested_repair[]`, add set-insertion or
-  bundle support, prove OBL-025, freeze repair ABI, claim repair ranking,
-  claim multi-edit support, claim conformance, claim G1 exit, or edit canon.
-- `plan/99-g1-erow07-set-insertion-executable-preflight.md` now records the
-  docs-first executable preflight for `ELAB-07`. Current executable repair
-  payloads remain singleton-only, so `ELAB-07` still stays no-repair; future
-  widening must first accept atomic set insertion as one source edit and test
-  exact whole-gap coverage, no extraneous declared failures, one target row,
-  and no `ELAB-04` / `E-ROW-002` broadening. It does not widen
-  `suggested_repair[]`, add set-insertion or bundle support, prove OBL-025,
-  freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
-- `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` now accepts the
+  explicit. It does not widen `ELAB-04`, add bundle support, prove OBL-025,
+  freeze repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, claim G1 exit, or edit canon.
+- `plan/99-g1-erow07-set-insertion-executable-preflight.md` records the
+  docs-first executable preflight for `ELAB-07`: atomic set insertion as one
+  source edit, exact whole-gap coverage, no extraneous declared failures, one
+  target row, and no `ELAB-04` / `E-ROW-002` broadening. `plan/102` implements
+  only the exact positive path. This does not add general set-insertion or
+  bundle support, prove OBL-025, freeze repair ABI, claim conformance, claim G1
+  exit, or edit canon.
+- `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` accepts the
   narrow LAB source-locus edit assumption for `ELAB-07` only: completing one
   existing concrete `when_fails_row` by duplicate-free insertion of the exact
   missing base-failure set is one row-field edit with `element_insert_count =
-  3`. Current executable `ELAB-07` still omits `suggested_repair`; this does
-  not add executable set-insertion support, bundle semantics, prove OBL-025,
+  3`. `plan/102` now uses that assumption for exact `ELAB-07` only; this does
+  not add general set-insertion support, bundle semantics, prove OBL-025,
   freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
-- `plan/101-g1-erow07-set-insertion-payload-model-design.md` now designs the
-  first future `ELAB-07` set payload as one top-level non-final
-  `set_insertion` item with candidate roles, no singleton `missing_failure`
-  field reuse for multi-failure coverage, exact whole-gap guards, and a future
-  positive / negative test matrix. Current executable `ELAB-07` still omits
-  `suggested_repair`; this does not add executable set-insertion support,
-  bundle semantics, prove OBL-025, freeze repair ABI, claim conformance, claim
-  G1 exit, or edit canon.
+- `plan/101-g1-erow07-set-insertion-payload-model-design.md` designs the
+  `ELAB-07` set payload as one top-level non-final `set_insertion` item with
+  candidate roles, no singleton `missing_failure` field reuse for multi-failure
+  coverage, exact whole-gap guards, and a positive / negative test matrix.
+  `plan/102` implements the exact positive path only; this does not add general
+  set-insertion support, bundle semantics, prove OBL-025, freeze repair ABI,
+  claim conformance, claim G1 exit, or edit canon.
+- `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md` now
+  records the LAB-only executable prototype for exact `ELAB-07`: one
+  top-level non-final `set_insertion` item with `element_insert_count = 3`.
+  `ELAB-04` remains no-repair, `ELAB-10` and `ELAB-13..16` remain singleton
+  repair evidence, and this does not add general set-insertion support, bundle
+  semantics, prove OBL-025, freeze repair ABI, claim conformance, claim G1
+  exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -225,7 +229,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW ELAB-07 set-insertion executable payload prototype` | `G1` reserve | if promoted, implement the non-final `ELAB-07` set payload using `plan/101` roles and tests | first executable widening must be `ELAB-07` only, keep `ELAB-04` no-repair, preserve `ELAB-10` / `ELAB-13..16` singleton evidence, and still avoid final ABI / proof / conformance / G1 exit claims |
+| `E-ROW ELAB-07 set-insertion negative-guard hardening` | `G1` reserve | add focused guard fixtures/tests for proper subsets, padded declarations, duplicate insertion, and multi-request / multi-target exclusions around the `plan/102` prototype | keep exact `ELAB-07` set payload, keep `ELAB-04` no-repair, preserve `ELAB-10` / `ELAB-13..16` singleton evidence, and still avoid final ABI / proof / conformance / G1 exit claims |
 | `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

@@ -102,10 +102,12 @@ for repair emission.
 - Expected JSON evidence:
   `samples/full-system-v1-surface/elaboration/elab-10-visibility-failure-row-negative/expected/elaboration.json`
 
-`ELAB-04` and `ELAB-07` remain explicit no-repair evidence for mixed /
-multi-missing cases. The current code also gates the repair on
-`canon_id == E-ROW-002`, `missing_failures == ["VisibilityDenied"]`,
-`target_kind == "when_fails_row"`, and a non-empty `target_ref`.
+`ELAB-04` remains explicit no-repair evidence for mixed visibility /
+non-visibility cases. `ELAB-07` later gained a separate exact `E-ROW-001`
+set path under `plan/102`; it is not part of this `E-ROW-002` visibility
+carrier. The current visibility code also gates the repair on `canon_id ==
+E-ROW-002`, `missing_failures == ["VisibilityDenied"]`, `target_kind ==
+"when_fails_row"`, and a non-empty `target_ref`.
 
 ## What this changes
 

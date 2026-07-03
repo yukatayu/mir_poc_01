@@ -626,7 +626,83 @@ BrowserClient[self] {
             "local_premise": "generated_failures_subset_declared_fails"
         })
     );
-    assert!(details[0].get("suggested_repair").is_none());
+    let repairs = details[0]["suggested_repair"]
+        .as_array()
+        .expect("ELAB-07 emits one LAB set-insertion repair item");
+    assert_eq!(repairs.len(), 1);
+    let repair = &repairs[0];
+    assert_no_placeholder_repair_values(repair);
+    assert_eq!(repair["repair_shape"], "set_insertion");
+    assert_eq!(repair["repair_family"], "add-to-fails-row");
+    assert_eq!(repair["diagnostic_family"], "E-ROW-001");
+    assert_eq!(
+        repair["edit_atom"],
+        "complete_missing_base_failure_set_into_one_existing_when_fails_row"
+    );
+    assert_eq!(repair["source_locus_edit_count"], 1);
+    assert_eq!(repair["element_insert_count"], 3);
+    assert!(repair.get("missing_failure").is_none());
+    assert!(repair.get("declared_failures").is_none());
+    assert_eq!(
+        repair["applies_to"],
+        serde_json::json!({
+            "legacy_code": "generated_failure_not_declared",
+            "canon_id": "E-ROW-001",
+            "request_id": "req-0001"
+        })
+    );
+    assert_eq!(repair["target_kind"], "when_fails_row");
+    assert_eq!(
+        repair["target_context"],
+        serde_json::json!({
+            "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+            "locus": "role:BrowserClient",
+            "event_name": "attack"
+        })
+    );
+    assert_eq!(
+        repair["declared_failures_before"],
+        serde_json::json!(["MissingCapability"])
+    );
+    assert_eq!(
+        repair["insert_failures"],
+        serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
+    );
+    assert_eq!(
+        repair["required_failures"],
+        serde_json::json!([
+            "MissingCapability",
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership"
+        ])
+    );
+    assert_eq!(
+        repair["local_effect"]["declared_failures_after"],
+        repair["required_failures"]
+    );
+    assert_eq!(
+        repair["coverage_scope"],
+        "complete_missing_set_for_associated_request"
+    );
+    assert_eq!(
+        repair["local_premise"],
+        details[0]["failure_row_context"]["local_premise"]
+    );
+    assert_eq!(
+        repair["local_premise_after_edit"],
+        "discharged_for_associated_request"
+    );
+    assert_eq!(
+        repair["single_edit_assumption"],
+        "erow001_elab07_complete_base_failure_set_source_locus_edit"
+    );
+    assert_eq!(
+        repair["non_goal"],
+        "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success"
+    );
+    assert!(repair["repair_non_final"].as_bool().unwrap_or(false));
+    assert!(repair["lab_non_final"].as_bool().unwrap_or(false));
 }
 
 #[test]

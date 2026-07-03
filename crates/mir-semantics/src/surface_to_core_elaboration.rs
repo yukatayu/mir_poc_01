@@ -55,16 +55,34 @@ pub struct SurfaceLabDiagnosticDetail {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SurfaceLabSuggestedRepair {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub repair_shape: Option<String>,
     pub repair_family: String,
     pub diagnostic_family: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub edit_atom: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source_locus_edit_count: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub element_insert_count: Option<u32>,
     pub applies_to: SurfaceLabRepairAppliesTo,
     pub target_kind: String,
     pub target_context: SurfaceLabRepairTargetContext,
-    pub missing_failure: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub missing_failure: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub insert_failures: Option<Vec<String>>,
     pub required_failures: Vec<String>,
-    pub declared_failures: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub declared_failures: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub declared_failures_before: Option<Vec<String>>,
     pub local_effect: SurfaceLabRepairLocalEffect,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub coverage_scope: Option<String>,
     pub local_premise: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub local_premise_after_edit: Option<String>,
     pub single_edit_assumption: String,
     pub non_goal: String,
     pub repair_non_final: bool,
@@ -1142,11 +1160,8 @@ fn erow_lab_diagnostic_detail(
     } else {
         E_ROW_001
     };
-    let suggested_repair = erow_singleton_row_addition_suggested_repair(
-        canon_id,
-        &request_context,
-        &failure_row_context,
-    );
+    let suggested_repair =
+        erow_row_addition_suggested_repair(canon_id, &request_context, &failure_row_context);
     SurfaceLabDiagnosticDetail {
         legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
         canon_id: canon_id.to_string(),
@@ -1164,6 +1179,112 @@ fn erow_lab_diagnostic_detail(
         failure_row_context,
         lab_non_final: true,
     }
+}
+
+fn erow_row_addition_suggested_repair(
+    canon_id: &str,
+    request_context: &SurfaceLabDiagnosticRequestContext,
+    failure_row_context: &SurfaceLabDiagnosticFailureRowContext,
+) -> Option<Vec<SurfaceLabSuggestedRepair>> {
+    erow_set_insertion_suggested_repair(canon_id, request_context, failure_row_context).or_else(
+        || {
+            erow_singleton_row_addition_suggested_repair(
+                canon_id,
+                request_context,
+                failure_row_context,
+            )
+        },
+    )
+}
+
+fn erow_set_insertion_suggested_repair(
+    canon_id: &str,
+    request_context: &SurfaceLabDiagnosticRequestContext,
+    failure_row_context: &SurfaceLabDiagnosticFailureRowContext,
+) -> Option<Vec<SurfaceLabSuggestedRepair>> {
+    if canon_id != E_ROW_001
+        || request_context.request_kind != "write"
+        || request_context.generated_from != "nested_place_block"
+        || failure_row_context.target_kind != "when_fails_row"
+        || failure_row_context.target_ref.is_empty()
+    {
+        return None;
+    }
+
+    let required_failures = REMOTE_REQUEST_FAILURES
+        .iter()
+        .map(|failure| (*failure).to_string())
+        .collect::<Vec<_>>();
+    let declared_failures_before = vec!["MissingCapability".to_string()];
+    let insert_failures = vec![
+        "MissingWitness".to_string(),
+        "RouteUnavailable".to_string(),
+        "StaleMembership".to_string(),
+    ];
+
+    if failure_row_context.required_failures != required_failures
+        || failure_row_context.declared_failures != declared_failures_before
+        || failure_row_context.missing_failures != insert_failures
+        || failure_row_context
+            .required_failures
+            .iter()
+            .any(|failure| failure == VISIBILITY_FAILURE)
+        || failure_row_context
+            .declared_failures
+            .iter()
+            .any(|failure| failure == VISIBILITY_FAILURE)
+    {
+        return None;
+    }
+
+    let mut declared_failures_after = failure_row_context.declared_failures.clone();
+    for failure in &insert_failures {
+        if !declared_failures_after.contains(failure) {
+            declared_failures_after.push(failure.clone());
+        }
+    }
+    if declared_failures_after != required_failures {
+        return None;
+    }
+
+    Some(vec![SurfaceLabSuggestedRepair {
+        repair_shape: Some("set_insertion".to_string()),
+        repair_family: "add-to-fails-row".to_string(),
+        diagnostic_family: canon_id.to_string(),
+        edit_atom: Some(
+            "complete_missing_base_failure_set_into_one_existing_when_fails_row".to_string(),
+        ),
+        source_locus_edit_count: Some(1),
+        element_insert_count: Some(insert_failures.len() as u32),
+        applies_to: SurfaceLabRepairAppliesTo {
+            legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
+            canon_id: canon_id.to_string(),
+            request_id: request_context.request_id.clone(),
+        },
+        target_kind: failure_row_context.target_kind.clone(),
+        target_context: SurfaceLabRepairTargetContext {
+            target_ref: failure_row_context.target_ref.clone(),
+            locus: failure_row_context.target_locus.clone(),
+            event_name: failure_row_context.event_name.clone(),
+        },
+        missing_failure: None,
+        insert_failures: Some(insert_failures),
+        required_failures,
+        declared_failures: None,
+        declared_failures_before: Some(declared_failures_before),
+        local_effect: SurfaceLabRepairLocalEffect {
+            declared_failures_after,
+        },
+        coverage_scope: Some("complete_missing_set_for_associated_request".to_string()),
+        local_premise: failure_row_context.local_premise.clone(),
+        local_premise_after_edit: Some("discharged_for_associated_request".to_string()),
+        single_edit_assumption: "erow001_elab07_complete_base_failure_set_source_locus_edit"
+            .to_string(),
+        non_goal: "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success"
+            .to_string(),
+        repair_non_final: true,
+        lab_non_final: true,
+    }])
 }
 
 fn erow_singleton_row_addition_suggested_repair(
@@ -1200,8 +1321,12 @@ fn erow_singleton_row_addition_suggested_repair(
     declared_failures_after.push(missing_failure.clone());
 
     Some(vec![SurfaceLabSuggestedRepair {
+        repair_shape: None,
         repair_family: "add-to-fails-row".to_string(),
         diagnostic_family: canon_id.to_string(),
+        edit_atom: None,
+        source_locus_edit_count: None,
+        element_insert_count: None,
         applies_to: SurfaceLabRepairAppliesTo {
             legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
             canon_id: canon_id.to_string(),
@@ -1213,13 +1338,17 @@ fn erow_singleton_row_addition_suggested_repair(
             locus: failure_row_context.target_locus.clone(),
             event_name: failure_row_context.event_name.clone(),
         },
-        missing_failure,
+        missing_failure: Some(missing_failure),
+        insert_failures: None,
         required_failures: failure_row_context.required_failures.clone(),
-        declared_failures: failure_row_context.declared_failures.clone(),
+        declared_failures: Some(failure_row_context.declared_failures.clone()),
+        declared_failures_before: None,
         local_effect: SurfaceLabRepairLocalEffect {
             declared_failures_after,
         },
+        coverage_scope: None,
         local_premise: failure_row_context.local_premise.clone(),
+        local_premise_after_edit: None,
         single_edit_assumption: single_edit_assumption.to_string(),
         non_goal: non_goal.to_string(),
         repair_non_final: true,

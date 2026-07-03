@@ -253,10 +253,9 @@ No current row proves OBL-025 or moves canon ledger status.
 
 1. Keep executable output unchanged and periodically validate that `ELAB-04`
    still omits `suggested_repair`.
-2. If executable repair widening is promoted, do `ELAB-07` set-insertion
-   preflight before mixed-row widening, because it removes the visibility
-   branch from the first set/group decision. `plan/99` records that preflight
-   as docs-only and still keeps `ELAB-07` no-repair.
+2. Treat `plan/99..102` as the completed exact `ELAB-07` preflight,
+   assumption, payload design, and executable set prototype sequence before
+   mixed-row widening.
 3. Draft a mixed-branch payload model only after diagnostic ownership and
    ordering / ranking are explicit.
 4. Draft OBL-024 only after diagnostic replay / association vocabulary is

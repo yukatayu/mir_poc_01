@@ -16,11 +16,13 @@ has element_insert_count = 3 and yields declared_after exactly
 {MissingCapability, MissingWitness, RouteUnavailable, StaleMembership}.
 ```
 
-This acceptance is docs-only. The current `ELAB-07` executable artifact still
-emits no `suggested_repair`. This package does not widen executable repair
-output, does not add set-insertion support, does not add bundle semantics, does
-not edit canon, does not freeze a Diagnostic or repair ABI, does not prove
-OBL-024/025, does not claim conformance, and does not claim G1 exit.
+This acceptance was docs-only in its original package. `plan/102` later used
+the accepted edit-cardinality model to implement one exact non-final
+`ELAB-07` set payload. The original package did not widen executable repair
+output, add set-insertion support, add bundle semantics, edit canon, freeze a
+Diagnostic or repair ABI, prove OBL-024/025, claim conformance, or claim G1
+exit. The later executable prototype still does not make any of those broader
+claims.
 
 ## Source hierarchy
 
@@ -101,10 +103,11 @@ Current expected diagnostic detail:
 | `declared_failures` | `MissingCapability` |
 | `missing_failures` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` |
 | `local_premise` | `generated_failures_subset_declared_fails` |
-| current executable repair output | no `suggested_repair` field |
+| executable repair output before `plan/102` | no `suggested_repair` field |
+| executable repair output after `plan/102` | one exact non-final `set_insertion` item |
 
-The current Rust and Python tests assert that `suggested_repair` is absent.
-This file does not change that executable fact.
+The current Rust and Python tests now assert the exact `plan/102` set payload
+for `ELAB-07`, while preserving the no-repair fence for mixed `ELAB-04`.
 
 ## Accepted edit-cardinality model
 
@@ -197,8 +200,8 @@ set-insertion repair for `ELAB-07`:
 | `source_locus_edit_count_one` | one existing declared-failure set is mutated |
 | `element_insert_count_three` | the element delta remains three identifiers |
 | `local_premise_after_edit` | BND-001 row containment is discharged for the associated request after the hypothetical edit |
-| `current_output_no_repair` | current executable artifact still omits `suggested_repair` |
-| `later_payload_required` | executable support needs a later separate payload implementation package |
+| `pre_plan102_output_no_repair` | the original executable artifact omitted `suggested_repair` before the later payload package |
+| `separate_payload_required` | executable support requires a separate set payload path rather than singleton-field reuse |
 
 ## Disallowed near misses
 
@@ -274,17 +277,17 @@ repair_non_final = true
 lab_non_final = true
 ```
 
-These are candidate roles, not final JSON field names and not current output.
-`plan/101` later narrows the first future payload model to this set-insertion
-shape: one top-level item, no singleton `missing_failure` field reuse for
-multi-failure coverage, no bundle child repairs, no partial-guidance roles, and
-no `ELAB-04` widening.
+These are LAB roles, not final JSON field names. `plan/101` later narrowed the
+first payload model to this set-insertion shape: one top-level item, no
+singleton `missing_failure` field reuse for multi-failure coverage, no bundle
+child repairs, no partial-guidance roles, and no `ELAB-04` widening. `plan/102`
+then implemented that exact payload as a non-final prototype.
 
 ## Relation to current executable rows
 
 | Row | Current status after this package |
 |---|---|
-| `ELAB-07` | current executable output still no-repair; candidate assumption accepted for a later set payload |
+| `ELAB-07` | exact non-final `set_insertion` payload implemented later in `plan/102`; no general set-insertion support |
 | `ELAB-04` | remains mixed base / `VisibilityDenied` no-repair; this assumption does not apply |
 | `ELAB-10` | remains singleton `E-ROW-002` / `VisibilityDenied` repair evidence |
 | `ELAB-13..16` | remain singleton `E-ROW-001` base-failure repair evidence |
@@ -293,21 +296,20 @@ no `ELAB-04` widening.
 
 OBL-025 remains Line-1 explanation completeness for single-edit repairs.
 
-This package accepts only the LAB edit-cardinality premise that would let a
-future `ELAB-07` set-insertion payload instantiate the abstract
+This package accepts only the LAB edit-cardinality premise that lets the later
+exact `ELAB-07` set-insertion payload instantiate the abstract
 `SingleEditRepairWitness` / `SetInsertionRepairWitness` shape already present
 in the LAB OBL-025 statement draft.
 
 It does not prove OBL-025, does not move canon proof status, and does not make
-current `ELAB-07` executable output OBL-025 coverage evidence. `ELAB-07` can
-become candidate coverage evidence only after a later package emits and tests
-a complete local repair suggestion.
+the later executable payload a complete OBL-025 discharge by itself.
 
-## Required future tests before executable widening
+## Required guard tests after `plan/102`
 
-A later executable package must add positive and negative tests for at least:
+`plan/102` added the exact positive path and direct regression fences. Guard
+hardening before any widening beyond that exact fact pattern should add
+positive and negative tests for at least:
 
-- positive `ELAB-07` classification under this exact fact pattern;
 - partial-insertion rejection for every proper non-empty subset of the missing
   set;
 - duplicate failure rejection;
@@ -341,14 +343,14 @@ A later executable package must add positive and negative tests for at least:
 
 ## Suggested next packages
 
-1. Keep executable output unchanged and validate that `ELAB-07` still omits
-   `suggested_repair`.
-2. `plan/101` has now designed the separate set-insertion payload roles and
-   future test matrix for `ELAB-07` only, still docs-only.
-3. If executable widening is promoted, implement that payload model and tests
-   for `ELAB-07` only.
-4. Keep `ELAB-04` out of the first executable widening package.
-5. Refine OBL-025 only if the later payload package needs more precise
+1. `plan/101` designed the separate set-insertion payload roles and test
+   matrix for `ELAB-07` only.
+2. `plan/102` implemented the exact non-final `ELAB-07` set payload.
+3. Add negative guard hardening before widening beyond the exact `ELAB-07`
+   fact pattern.
+4. Keep `ELAB-04` out of set-payload widening until mixed visibility branch
+   ownership / association / ordering are explicit.
+5. Refine OBL-025 only if the exact payload needs more precise
    statement vocabulary.
 
 ## Non-claims
@@ -356,8 +358,9 @@ A later executable package must add positive and negative tests for at least:
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No repair generation widening.
-- No current executable `ELAB-07` `suggested_repair` output.
+- No general repair generation widening beyond the later exact `ELAB-07`
+  prototype.
+- No proof that the exact executable `ELAB-07` payload completes OBL-025.
 - No general set-insertion support.
 - No bundle semantics support.
 - No partial-guidance output support.

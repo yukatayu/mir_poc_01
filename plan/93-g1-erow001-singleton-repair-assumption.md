@@ -59,11 +59,12 @@ Current repair-bearing executable evidence after `plan/94` is:
 | `ELAB-14` | `E-ROW-001` | `MissingCapability` | one LAB-only `add-to-fails-row` item |
 | `ELAB-15` | `E-ROW-001` | `RouteUnavailable` | one LAB-only `add-to-fails-row` item |
 | `ELAB-16` | `E-ROW-001` | `StaleMembership` | one LAB-only `add-to-fails-row` item |
-| `ELAB-07` | `E-ROW-001` | non-visibility multi-missing | no `suggested_repair` field |
+| `ELAB-07` | `E-ROW-001` | exact non-visibility multi-missing | one later non-final `set_insertion` item under `plan/102` |
 | `ELAB-04` | current LAB `E-ROW-001` split | mixed visibility / non-visibility multi-missing | no `suggested_repair` field |
 
-`ELAB-13..16` are now repair-bearing evidence for the gate admitted here.
-`ELAB-04` and `ELAB-07` remain no-repair fences.
+`ELAB-13..16` are now repair-bearing evidence for the singleton gate admitted
+here. `ELAB-04` remains a no-repair fence. `ELAB-07` uses the later exact set
+path rather than this singleton gate.
 
 ## LAB single-edit assumption
 

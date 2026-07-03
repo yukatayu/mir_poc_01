@@ -61,18 +61,18 @@ The current repair-bearing executable evidence is now:
 | `ELAB-14` | `E-ROW-001` | `MissingCapability` | one LAB-only `add-to-fails-row` item |
 | `ELAB-15` | `E-ROW-001` | `RouteUnavailable` | one LAB-only `add-to-fails-row` item |
 | `ELAB-16` | `E-ROW-001` | `StaleMembership` | one LAB-only `add-to-fails-row` item |
+| `ELAB-07` | `E-ROW-001` | exact non-visibility multi-missing | one later non-final `set_insertion` item under `plan/102` |
 
-The current no-repair fences remain:
+The current no-repair fence remains:
 
 | Sample | Reading | Current repair output |
 |---|---|---|
-| `ELAB-07` | non-visibility multi-missing | no `suggested_repair` field |
 | `ELAB-04` | mixed visibility / non-visibility multi-missing | no `suggested_repair` field |
 
 ## Prototype gate
 
-The implementation emits an `E-ROW-001` repair only when all of the following
-hold:
+The singleton implementation emits an `E-ROW-001` singleton repair only when
+all of the following hold:
 
 1. `canon_id == "E-ROW-001"`;
 2. `failure_row_context.target_kind == "when_fails_row"`;

@@ -441,10 +441,80 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                 "local_premise": "generated_failures_subset_declared_fails",
             },
         )
-        self.assertNotIn(
-            "suggested_repair",
-            payload["actual"]["lab_diagnostic_details"][0],
+        repairs = payload["actual"]["lab_diagnostic_details"][0]["suggested_repair"]
+        self.assertEqual(len(repairs), 1)
+        repair = repairs[0]
+        self.assertEqual(_placeholder_repair_paths(repair), [])
+        self.assertEqual(repair["repair_shape"], "set_insertion")
+        self.assertEqual(repair["repair_family"], "add-to-fails-row")
+        self.assertEqual(repair["diagnostic_family"], "E-ROW-001")
+        self.assertEqual(
+            repair["edit_atom"],
+            "complete_missing_base_failure_set_into_one_existing_when_fails_row",
         )
+        self.assertEqual(repair["source_locus_edit_count"], 1)
+        self.assertEqual(repair["element_insert_count"], 3)
+        self.assertNotIn("missing_failure", repair)
+        self.assertNotIn("declared_failures", repair)
+        self.assertEqual(
+            repair["applies_to"],
+            {
+                "legacy_code": "generated_failure_not_declared",
+                "canon_id": "E-ROW-001",
+                "request_id": "req-0001",
+            },
+        )
+        self.assertEqual(repair["target_kind"], "when_fails_row")
+        self.assertEqual(
+            repair["target_context"],
+            {
+                "target_ref": "when_fails_row|locus=role:BrowserClient|event=attack",
+                "locus": "role:BrowserClient",
+                "event_name": "attack",
+            },
+        )
+        self.assertEqual(repair["declared_failures_before"], ["MissingCapability"])
+        self.assertEqual(
+            repair["insert_failures"],
+            ["MissingWitness", "RouteUnavailable", "StaleMembership"],
+        )
+        self.assertEqual(
+            repair["required_failures"],
+            [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership",
+            ],
+        )
+        self.assertEqual(
+            repair["local_effect"]["declared_failures_after"],
+            repair["required_failures"],
+        )
+        self.assertEqual(
+            repair["coverage_scope"],
+            "complete_missing_set_for_associated_request",
+        )
+        self.assertEqual(
+            repair["local_premise"],
+            payload["actual"]["lab_diagnostic_details"][0]["failure_row_context"][
+                "local_premise"
+            ],
+        )
+        self.assertEqual(
+            repair["local_premise_after_edit"],
+            "discharged_for_associated_request",
+        )
+        self.assertEqual(
+            repair["single_edit_assumption"],
+            "erow001_elab07_complete_base_failure_set_source_locus_edit",
+        )
+        self.assertEqual(
+            repair["non_goal"],
+            "does_not_authorize_capability_witness_route_membership_or_claim_runtime_success",
+        )
+        self.assertTrue(repair["repair_non_final"])
+        self.assertTrue(repair["lab_non_final"])
 
     def test_elaboration_nested_place_read_keeps_owner_directed_shape(self) -> None:
         payload = _run_helper("run", "ELAB-08")

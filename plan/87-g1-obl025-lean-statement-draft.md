@@ -123,9 +123,9 @@ draft:
   family `E-ROW-002` and missing evidence `VisibilityDenied`.
 - `ELAB-13..16` carry one LAB-only `E-ROW-001` non-visibility singleton
   `suggested_repair[]` item per base remote-request failure atom.
-- `ELAB-04` and `ELAB-07` remain no-repair evidence for mixed and
-  multi-missing shapes. `plan/96` only inventories set-insertion / bundle /
-  partial-guidance vocabulary for a later gate.
+- `ELAB-04` remains no-repair evidence for the mixed visibility /
+  non-visibility shape. `ELAB-07` later gained an exact non-final set payload
+  under `plan/102`; this is still not OBL-025 proof or completion.
 - The Lean draft's `CoveredLine1RepairCase` predicate is the guard that keeps
   this from being read as all Line-1 families or all singleton repairs.
 

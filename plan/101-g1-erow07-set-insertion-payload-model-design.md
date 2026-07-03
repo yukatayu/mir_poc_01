@@ -2,21 +2,22 @@
 
 ## Purpose
 
-This file records the LAB-only payload-model design for a possible future
-`ELAB-07` set-insertion repair item.
+This file records the LAB-only payload-model design for the `ELAB-07`
+set-insertion repair item that was later implemented by `plan/102`.
 
-This is design-only repository memory. Current executable `ELAB-07` still
-emits no `suggested_repair`. This package does not edit Rust, expected JSON,
-sample matrices, Lean statements, or canon.
+This remains the design gate. `plan/102` is the implementation memory. The
+`plan/101` package itself did not edit Rust, expected JSON, sample matrices,
+Lean statements, or canon.
 
-The design exists so a later implementation package cannot widen the singleton
-repair path by relaxing `missing_failures.len() == 1`. A future executable
-package must introduce a separate set payload shape and tests.
+The design exists so implementation cannot widen the singleton repair path by
+relaxing `missing_failures.len() == 1`. `plan/102` followed that constraint by
+introducing a separate set payload shape and tests for the exact `ELAB-07`
+fact pattern.
 
 Non-claims:
 
-- no current repair output widening;
-- no executable set-insertion support;
+- no general repair output widening;
+- no general executable set-insertion support;
 - no bundle semantics support;
 - no partial-guidance coverage;
 - no repair ranking or visibility ranking;
@@ -55,6 +56,8 @@ Non-claims:
   `plan/97-g1-erow07-set-insertion-gate-review.md`,
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`,
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
+- LAB `ELAB-07` executable prototype:
+  `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md`
 - LAB `ELAB-04` mixed visibility branch inventory:
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB implementation and evidence:
@@ -79,12 +82,13 @@ candidate gate. This file does not add canon semantics; it designs the
 candidate payload roles needed before a later executable package may use that
 premise.
 
-## Current executable baseline
+## Current executable baseline after `plan/102`
 
-Current repair-bearing executable rows are singleton-only:
+Current repair-bearing executable rows are:
 
 | Row | Family | Missing failures | Current repair output |
 |---|---|---|---|
+| `ELAB-07` | `E-ROW-001` | `MissingWitness`, `RouteUnavailable`, `StaleMembership` | one LAB-only non-final `set_insertion` item |
 | `ELAB-10` | `E-ROW-002` | `VisibilityDenied` | one LAB-only singleton `add-to-fails-row` item |
 | `ELAB-13` | `E-ROW-001` | `MissingWitness` | one LAB-only singleton `add-to-fails-row` item |
 | `ELAB-14` | `E-ROW-001` | `MissingCapability` | one LAB-only singleton `add-to-fails-row` item |
@@ -95,10 +99,9 @@ Current no-repair fences remain:
 
 | Row | Shape | Current repair output |
 |---|---|---|
-| `ELAB-07` | non-visibility multi-missing `E-ROW-001` | no `suggested_repair` field |
 | `ELAB-04` | mixed base / `VisibilityDenied` multi-missing row | no `suggested_repair` field |
 
-Current Rust payload baseline:
+Singleton Rust payload baseline:
 
 ```text
 SurfaceLabSuggestedRepair {
@@ -122,10 +125,10 @@ SurfaceLabSuggestedRepair {
 `missing_failure` is singular. A set payload must not reuse this field for
 multiple inserted failures.
 
-## Designed payload boundary
+## Designed payload boundary implemented by `plan/102`
 
-The future `ELAB-07` set item should be exactly one top-level item, not three
-serialized singleton child repairs.
+The `ELAB-07` set item is exactly one top-level item, not three serialized
+singleton child repairs.
 
 The names below are candidate roles, not final Rust field names, JSON keys, or
 public ABI.
@@ -168,8 +171,7 @@ mixed-branch design, not to this first `ELAB-07` set item.
 
 ## Eligibility guards
 
-A later executable package may emit the future set item only when all guards
-below hold:
+The executable set item may be emitted only when all guards below hold:
 
 | Guard | Required reading |
 |---|---|
@@ -191,7 +193,7 @@ below hold:
 | `element_insert_count_three` | three inserted failure identifiers |
 | `local_premise_discharged` | BND-001 row containment is true for the associated request after the edit |
 | `non_goal_preserved` | payload does not claim authority, evidence, runtime success, or whole-program success |
-| `current_output_no_repair_until_implementation` | current executable `ELAB-07` still omits `suggested_repair` |
+| `implemented_by_plan102_only` | executable output exists only for the exact `plan/102` `ELAB-07` fact pattern |
 
 This guard set is stronger than BND-001 subset containment because it requires
 exact `declared_after == required`. That exactness prevents padded
@@ -225,10 +227,10 @@ create a row, delete a row, split a row, move a row, retarget a request, change
 generated-failure computation, or supply capability / witness / route /
 membership evidence.
 
-## Future positive tests
+## Positive tests implemented or required
 
-The future implementation package must specify and then implement tests for at
-least:
+`plan/102` implemented the core positive assertions below for the exact
+`ELAB-07` fact pattern:
 
 | ID | Case | Required future result |
 |---|---|---|
@@ -244,7 +246,9 @@ least:
 
 ## Future negative and regression tests
 
-The future implementation package must reject or preserve at least:
+The implementation preserves `ELAB-04`, `ELAB-10`, and `ELAB-13..16`
+regression fences. Additional future guard fixtures should reject or preserve
+at least:
 
 | ID | Case | Required future result |
 |---|---|---|
@@ -266,22 +270,23 @@ The future implementation package must reject or preserve at least:
 | `N16` | no-repair row gains `suggested_repair: []` | reject unless empty-list semantics are separately standardized |
 | `R1` | `ELAB-10` | remains singleton `E-ROW-002` repair evidence |
 | `R2` | `ELAB-13..16` | remain singleton `E-ROW-001` repair evidence |
-| `R3` | current `ELAB-07` before implementation | still no `suggested_repair` |
+| `R3` | exact `ELAB-07` after implementation | exactly one top-level `set_insertion` item |
 
-This package records the matrix only. It does not add these tests yet.
+`plan/102` adds the exact `ELAB-07` positive and immediate regression tests.
+The other negative fixture families remain future hardening work.
 
 ## Implementation sequencing constraint
 
-A later executable package should use this order:
+`plan/102` followed this order:
 
 1. Introduce a separate set payload model.
 2. Add focused Rust tests for positive / negative predicate gates.
-3. Add focused Python helper tests for the same gates.
+3. Add focused Python helper tests for the same gate.
 4. Update `ELAB-07` expected JSON only after tests distinguish whole-gap set
    coverage from singleton alternatives.
 5. Preserve the singleton path unchanged for `ELAB-10` and `ELAB-13..16`.
 6. Preserve no-repair output for `ELAB-04`.
-7. Wire emission only for base-only multi-missing rows that satisfy all
+7. Wire emission only for base-only multi-missing rows that satisfy the exact
    `ELAB-07` guards.
 
 Do not start by modifying `erow_singleton_row_addition_suggested_repair` to
@@ -291,12 +296,13 @@ accept `missing_failures.len() > 1`.
 
 OBL-025 remains Line-1 explanation completeness for single-edit repairs.
 
-This design only prepares a future payload that could instantiate the abstract
+This design prepared the payload implemented by `plan/102`, which could
+eventually instantiate the abstract
 `EligibleSetInsertionRepair` shape already present in the LAB OBL-025
-statement draft, after executable emission and tests exist.
+statement draft after further negative guard coverage exists.
 
 It does not prove OBL-025, does not move canon proof status, and does not make
-current `ELAB-07` executable output OBL-025 coverage evidence.
+current `ELAB-07` executable output OBL-025 completion evidence.
 
 ## Hidden failure modes
 
@@ -309,7 +315,7 @@ current `ELAB-07` executable output OBL-025 coverage evidence.
   `declared_after == required`.
 - `VisibilityDenied` leaks this gate into `ELAB-04` or `E-ROW-002`.
 - A non-concrete or inferred target row makes source-locus identity unstable.
-- Wording contradicts current no-repair executable output.
+- Wording contradicts the post-`plan/102` executable set payload output.
 - List ordering makes payload evidence nondeterministic.
 - Empty-list repair output standardizes an accidental ABI.
 - A row repair is overread as capability, witness, route, membership,
@@ -318,22 +324,20 @@ current `ELAB-07` executable output OBL-025 coverage evidence.
 
 ## Suggested next packages
 
-1. Keep executable output unchanged and validate that `ELAB-07` still omits
-   `suggested_repair`.
-2. If implementation is promoted, build the exact `ELAB-07` set-insertion
-   payload prototype using this design and test matrix.
-3. Keep `ELAB-04` out of the first executable widening package.
-4. Keep OBL-025 abstract until the executable payload exists and reveals
-   whether the statement vocabulary needs refinement.
+1. Add negative guard fixtures for proper subsets, padded declarations,
+   duplicate insertions, and multi-target / multi-request exclusions.
+2. Keep `ELAB-04` out of the first mixed-branch widening package until branch
+   ownership / association / ordering / ranking are explicit.
+3. Keep OBL-025 abstract until the executable payload and negative guard
+   coverage reveal whether statement vocabulary needs refinement.
 
 ## Non-claims
 
 - No canon edit.
 - No final Diagnostic ABI.
 - No final repair payload ABI.
-- No repair generation widening.
-- No current executable `ELAB-07` `suggested_repair` output.
-- No executable set-insertion support.
+- No general repair generation widening.
+- No general executable set-insertion support.
 - No general set-insertion support.
 - No bundle semantics support.
 - No partial-guidance output or coverage support.
