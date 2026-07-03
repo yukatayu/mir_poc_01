@@ -159,6 +159,13 @@ Current holding state:
   mixed / multi-missing rows no-repair, and does not prove OBL-025, freeze
   repair ABI, claim repair ranking, claim multi-edit support, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` now records
+  the no-repair policy for `ELAB-04/07`. `ELAB-07` is blocked on
+  set-insertion versus bundle versus partial-repair versus multi-edit deferral;
+  `ELAB-04` is additionally blocked on visibility-family decomposition and
+  ordering / ranking. It does not widen `suggested_repair[]`, prove OBL-025,
+  freeze repair ABI, claim repair ranking, claim multi-edit support, claim
+  conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -170,7 +177,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW mixed/multi repair decomposition inventory` | `G1` reserve | decide whether `ELAB-04/07` should stay no-repair or decompose into several singleton witnesses / set-insertion repairs | no executable widening unless atomicity, ordering, ranking, and target association are documented first |
+| `E-ROW set-insertion / bundle payload inventory` | `G1` reserve | define a LAB vocabulary for set insertion, conjunctive repair bundles, and partial-repair guidance before any `ELAB-04/07` widening | docs-only unless the payload can prove local-premise discharge without ranking or ABI overclaim |
 | `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

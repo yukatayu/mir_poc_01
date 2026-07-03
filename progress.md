@@ -208,6 +208,15 @@ semantic source authority.
   no-placeholder / local-witness gate and keeps `ELAB-04/07` no-repair. It
   does not prove OBL-025, freeze diagnostic/repair ABI, claim repair ranking,
   claim multi-edit support, claim conformance, or claim G1 exit.
+- Current E-ROW mixed / multi repair decomposition inventory note:
+  `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` records why
+  `ELAB-07` and `ELAB-04` remain no-repair today. `ELAB-07` needs a decision
+  between set-insertion, conjunctive bundle, partial-repair guidance, or
+  multi-edit deferral. `ELAB-04` additionally needs visibility-family
+  decomposition and ranking / ordering policy. It does not widen
+  `suggested_repair[]`, prove OBL-025, freeze diagnostic/repair ABI, claim
+  repair ranking, claim multi-edit support, claim conformance, or claim G1
+  exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -220,10 +229,11 @@ semantic source authority.
 - Next gap: OBL-025 now has a compile-check-only LAB statement shape, an
   E-ROW repair-shape inventory, a full base-failure non-visibility singleton
   repair-bearing fixture set, and a LAB single-edit / no-placeholder gate
-  implemented for `ELAB-13..16`. It still has no proof, no canon status
-  movement, no final repair ABI, no repair ranking, and no multi-edit support.
-  Mixed and multi-missing rows remain
-  no-repair until atomicity/decomposition/ranking is addressed. This remains
+  implemented for `ELAB-13..16`. `ELAB-04/07` now have a LAB decomposition
+  inventory that keeps them no-repair until set-insertion / bundle semantics,
+  partial-repair status, visibility split, diagnostic association, ordering,
+  and ranking are explicit. It still has no proof, no canon status movement,
+  no final repair ABI, no repair ranking, and no multi-edit support. This remains
   before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
@@ -528,7 +538,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, and no-repair fences for mixed / multi-missing rows | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, and explicit no-repair decomposition inventory for mixed / multi-missing rows | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -542,6 +552,13 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 01:14 JST
+  `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md` を追加し、
+  `ELAB-07` は set-insertion / conjunctive bundle / partial-repair /
+  multi-edit deferral の未決、`ELAB-04` はそれに加えて visibility split と
+  ranking / ordering の未決として no-repair policy を整理した。repair output
+  widening、diagnostic/repair ABI freeze、OBL-025 proof / completion、
+  repair ranking、multi-edit support、conformance、G1 exit は主張していない。
 - 2026-07-04 00:58 JST
   `plan/94-g1-erow001-singleton-repair-prototype.md` を追加し、
   `ELAB-13..16` を LAB-only `E-ROW-001` singleton `add-to-fails-row`

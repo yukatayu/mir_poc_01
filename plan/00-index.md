@@ -49,8 +49,9 @@
 31. G1 E-ROW-001 base singleton fixture closure は `plan/92`
 32. G1 E-ROW-001 singleton repair assumption gate は `plan/93`
 33. G1 E-ROW-001 singleton repair prototype は `plan/94`
-34. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-35. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+34. G1 E-ROW mixed / multi repair decomposition inventory は `plan/95`
+35. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+36. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -211,6 +212,8 @@
   `plan/93-g1-erow001-singleton-repair-assumption.md`
 - G1 E-ROW-001 singleton repair prototype:
   `plan/94-g1-erow001-singleton-repair-prototype.md`
+- G1 E-ROW mixed / multi repair decomposition inventory:
+  `plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 
