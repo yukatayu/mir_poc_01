@@ -78,8 +78,9 @@ active LAB clean sample evidence は `samples/clean-near-end/` です。base cur
 - `sugoroku-world/`
   empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice
 - `samples/lean/lab-statements/`
-  compile-check only の Lean statement-shape draft。canon OBL status movement、
-  proof discharge、final theorem contract ではない。
+  compile-check only の Lean statement-shape draft。current draft は
+  OBL-001 / OBL-021 で、canon OBL status movement、proof discharge、
+  final theorem contract ではない。
 
 旧 active sample line は active path から外し、archive に退避しています。
 

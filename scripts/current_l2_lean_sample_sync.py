@@ -69,6 +69,12 @@ STATEMENT_DRAFTS = [
         filename="THM001StatementDraft.lean",
         explanation_path="samples/lean/lab-statements/obl001/THM001StatementDraft.md",
     ),
+    StatementDraftSpec(
+        draft_id="obl021-elab-determinism-statement-draft",
+        relative_dir="obl021",
+        filename="ElabDeterminismStatementDraft.lean",
+        explanation_path="samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
+    ),
 ]
 
 

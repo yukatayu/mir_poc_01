@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 21:19 JST
+最終更新: 2026-07-03 21:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -93,6 +93,13 @@ semantic source authority.
   inventories from OBL-001/002. It does not claim either obligation complete,
   create Lean statement files, move canon ledger status, prove a skeleton,
   claim G1/T1/T2 exit, or claim conformance.
+- Current OBL-021 statement-draft note:
+  `plan/77-g1-obl021-lean-statement-draft.md` records a LAB-only
+  repo-local Lean statement-shape draft at
+  `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean`.
+  It compiles as a `Prop` definition for success/result equivalence,
+  diagnostic equivalence, and success/reject mutual exclusion. It does not
+  move OBL status, prove OBL-021, claim G1/T1/T2 exit, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -102,9 +109,9 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the safe self-driven theory package is now either separate
-  OBL-020 / OBL-021 LAB Lean statement-shape drafts, a focused refinement of
-  the LAB OBL-001 statement draft, or diagnostic alignment for canon
+- Next gap: the safe self-driven theory package is now either an OBL-020 LAB
+  Lean statement-shape draft, a focused refinement of the LAB OBL-001 or
+  OBL-021 statement drafts if review finds a real gap, or diagnostic alignment for canon
   E-ROW-001/E-ROW-002 versus LAB `generated_failure_not_declared`. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
@@ -385,7 +392,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001 statement-shape draft now compiles, but Surface elaboration soundness is not proved or ledger-moved | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001 and OBL-021 statement-shape drafts now compile, but Surface elaboration soundness / elaboration determinism are not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -407,7 +414,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| OBL-001 Lean statement draft | `lab-compile-check-only` | `THM001StatementDraft.lean` compiles as a LAB `Prop` shape under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean` and OBL-021 `ElabDeterminismStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -463,6 +470,14 @@ Research-discovery items:
   Lean statement、proof skeleton、G1/T1/T2 exit、conformance は主張していない。
   次は separate LAB Lean statement-shape draft、OBL-001 refinement、または
   E-ROW diagnostic alignment。
+- 2026-07-03 21:30 JST
+  `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean` と
+  `plan/77` を追加し、OBL-021 elaboration determinism の LAB-only
+  statement-shape draft を Lean compile-check 可能な `Prop` として記録した。
+  `SameElabResult` / `SameDiagnostic` により equality relation と diagnostic
+  ABI は抽象のままにし、OBL status movement、proof discharge、G1/T1/T2 exit、
+  conformance は主張していない。次は OBL-020 statement-shape draft、
+  focused statement refinement、または E-ROW diagnostic alignment。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

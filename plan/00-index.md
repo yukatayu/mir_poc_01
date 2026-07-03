@@ -33,8 +33,9 @@
 15. G1 OBL-001 repo-local Lean statement draft は `plan/74`
 16. G1 SCN RHS dependency-gap LAB evidence は `plan/75`
 17. G1 OBL-020/021 dependency inventory は `plan/76`
-18. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-19. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+18. G1 OBL-021 repo-local Lean statement draft は `plan/77`
+19. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+20. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -163,6 +164,8 @@
   `plan/75-g1-scn-rhs-dependency-gap-evidence.md`
 - G1 OBL-020/021 dependency inventory:
   `plan/76-g1-obl020-021-dependency-inventory.md`
+- G1 OBL-021 repo-local Lean statement draft:
+  `plan/77-g1-obl021-lean-statement-draft.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

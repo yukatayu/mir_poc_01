@@ -59,6 +59,19 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "samples/lean/lab-statements/obl001/THM001StatementDraft.md",
         )
 
+    def test_statement_drafts_include_obl021_draft(self) -> None:
+        entries = {spec.draft_id: spec for spec in sync.STATEMENT_DRAFTS}
+        draft = entries["obl021-elab-determinism-statement-draft"]
+
+        self.assertEqual(
+            draft.filename,
+            "ElabDeterminismStatementDraft.lean",
+        )
+        self.assertEqual(
+            draft.explanation_path,
+            "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

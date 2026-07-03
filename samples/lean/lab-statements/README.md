@@ -5,3 +5,8 @@ Lean but do not move canon proof-obligation status.
 
 These files are not `mirrorea_canon/` content, not proof discharge, and not
 final public theorem contracts.
+
+Current draft families:
+
+- `obl001/`: THM-001 / OBL-001 assignment elaboration soundness shape.
+- `obl021/`: OBL-021 elaboration determinism shape.

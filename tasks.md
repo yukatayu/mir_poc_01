@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 21:19 JST
+最終更新: 2026-07-03 21:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -69,6 +69,11 @@ Current holding state:
   dependencies from OBL-001/002. It is inventory-only and does not claim either
   obligation complete, Lean statement status, proof skeleton completion, G1
   exit, T1/T2 transition, conformance, or canon movement.
+- `plan/77-g1-obl021-lean-statement-draft.md` now records a LAB-only
+  repo-local OBL-021 Lean statement-shape draft at
+  `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean`.
+  It compiles as a `Prop` definition and does not move canon OBL status, prove
+  elaboration determinism, claim G1/T1/T2 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -78,7 +83,7 @@ next line.
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
 | `OBL-020 statement-shape draft` | `G1` reserve | create a LAB-only Lean `Prop` draft for WF preservation shape if useful | no proof skeleton, no OBL-020 completion, no canon ledger movement |
-| `OBL-021 statement-shape draft` | `G1` reserve | create a LAB-only Lean `Prop` draft for elaboration determinism shape if useful | no proof skeleton, no OBL-021 completion, no canon ledger movement |
+| `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `E-ROW diagnostic alignment` | `G1` reserve | align canon E-ROW-001/E-ROW-002 vocabulary with current LAB `generated_failure_not_declared` evidence | no final diagnostic ABI freeze |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
