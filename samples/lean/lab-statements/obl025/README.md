@@ -5,7 +5,9 @@ explanation completeness / repair coverage.
 
 Current draft:
 
-- `RepairCompletenessStatementDraft.lean`
+- `RepairCompletenessStatementDraft.lean`: compile-check-only OBL-025 shape
+  with abstract whole-rejected-gap, set-insertion, grouped multi-edit,
+  complete-local-repair, and partial-guidance predicates.
 
 Boundary:
 

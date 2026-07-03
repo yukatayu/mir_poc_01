@@ -49,8 +49,14 @@ structure Pred (V : Vocab.{u}) where
     V.Line1Input -> V.Line1Rejection -> V.Diagnostic -> Prop
   SingleEditRepairWitness :
     V.StatementFragment -> V.Line1Rejection -> V.RepairWitness -> Prop
+  SetInsertionRepairWitness :
+    V.StatementFragment -> V.Line1Rejection -> V.RepairWitness -> Prop
+  GroupedMultiEditRepairWitness :
+    V.StatementFragment -> V.Line1Rejection -> V.RepairWitness -> Prop
   RepairWitnessInDeclaredFragment :
     V.StatementFragment -> V.RepairWitness -> Prop
+  RepairWitnessCoversRejectedGap :
+    V.Line1Rejection -> V.RepairWitness -> Prop
   RepairWitnessMatchesDiagnosticFamily :
     V.RepairWitness -> V.DiagnosticFamily -> Prop
   RepairWitnessMatchesMissingEvidence :
@@ -63,6 +69,12 @@ structure Pred (V : Vocab.{u}) where
     V.Diagnostic -> V.SuggestedRepair -> Prop
   SuggestedRepairRealizesCompatibleWitness :
     V.SuggestedRepair -> V.RepairWitness -> Prop
+  SuggestedRepairCoversRejectedGap :
+    V.Line1Rejection -> V.SuggestedRepair -> Prop
+  SuggestedRepairCompleteLocalRepair :
+    V.Line1Rejection -> V.SuggestedRepair -> Prop
+  SuggestedRepairPartialGuidance :
+    V.Line1Rejection -> V.SuggestedRepair -> Prop
   SuggestedRepairMatchesDiagnosticFamily :
     V.SuggestedRepair -> V.DiagnosticFamily -> Prop
   SuggestedRepairMatchesMissingEvidence :
@@ -84,7 +96,9 @@ def EligibleSingleEditRepair
     P.RejectionFailedPremise rejection premise /\
     P.BlameTargetOf rejection target /\
     P.SingleEditRepairWitness fragment rejection witness /\
+    ¬ P.GroupedMultiEditRepairWitness fragment rejection witness /\
     P.RepairWitnessInDeclaredFragment fragment witness /\
+    P.RepairWitnessCoversRejectedGap rejection witness /\
     P.RepairWitnessMatchesDiagnosticFamily witness family /\
     P.RepairWitnessMatchesMissingEvidence witness missing /\
     P.RepairWitnessDischargesLocalPremise witness premise /\
@@ -102,10 +116,52 @@ def SuggestionCoversWitness
     P.RejectionFailedPremise rejection premise /\
     P.BlameTargetOf rejection target /\
     P.SuggestedRepairRealizesCompatibleWitness suggestion witness /\
+    P.SuggestedRepairCompleteLocalRepair rejection suggestion /\
+    ¬ P.SuggestedRepairPartialGuidance rejection suggestion /\
+    P.SuggestedRepairCoversRejectedGap rejection suggestion /\
     P.SuggestedRepairMatchesDiagnosticFamily suggestion family /\
     P.SuggestedRepairMatchesMissingEvidence suggestion missing /\
     P.SuggestedRepairDischargesLocalPremise suggestion premise /\
     P.SuggestedRepairTargetsBlame suggestion target
+
+def EligibleSetInsertionRepair
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (fragment : V.StatementFragment)
+    (rejection : V.Line1Rejection)
+    (witness : V.RepairWitness) : Prop :=
+  EligibleSingleEditRepair P fragment rejection witness /\
+    P.SetInsertionRepairWitness fragment rejection witness
+
+def CompleteGroupedMultiEditRepair
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (fragment : V.StatementFragment)
+    (rejection : V.Line1Rejection)
+    (witness : V.RepairWitness) : Prop :=
+  exists family missing premise target,
+    P.RejectionDiagnosticFamily rejection family /\
+    P.RejectionMissingEvidence rejection missing /\
+    P.RejectionFailedPremise rejection premise /\
+    P.BlameTargetOf rejection target /\
+    P.GroupedMultiEditRepairWitness fragment rejection witness /\
+    ¬ P.SingleEditRepairWitness fragment rejection witness /\
+    P.RepairWitnessInDeclaredFragment fragment witness /\
+    P.RepairWitnessCoversRejectedGap rejection witness /\
+    P.RepairWitnessMatchesDiagnosticFamily witness family /\
+    P.RepairWitnessMatchesMissingEvidence witness missing /\
+    P.RepairWitnessDischargesLocalPremise witness premise /\
+    P.RepairWitnessTargetsBlame witness target
+
+def PartialGuidanceNonCoverage
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (rejection : V.Line1Rejection)
+    (suggestion : V.SuggestedRepair) : Prop :=
+  P.SuggestedRepairPartialGuidance rejection suggestion /\
+    ¬ P.SuggestedRepairCompleteLocalRepair rejection suggestion /\
+    forall witness,
+      ¬ SuggestionCoversWitness P rejection suggestion witness
 
 def RepairCompletenessForRejection
     {V : Vocab.{u}}

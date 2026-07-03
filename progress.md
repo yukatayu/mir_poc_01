@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 01:27 JST
+最終更新: 2026-07-04 01:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -169,9 +169,14 @@ semantic source authority.
   repo-local Lean statement-shape draft at
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`.
   It compiles as an existential repair-coverage `Prop` over abstract
-  Line-1/rejection/declared-fragment/repair/diagnostic predicates and does not
-  move canon OBL status, prove OBL-025, freeze diagnostic/repair ABI, claim
-  explanation completeness, claim conformance, or claim G1 exit.
+  Line-1/rejection/declared-fragment/repair/diagnostic predicates. The current
+  refinement adds whole-rejected-gap, set-insertion, grouped multi-edit,
+  complete local repair, and partial-guidance non-coverage predicates so set
+  insertion can enter only through the existing single-edit relation, while
+  grouped multi-edit / partial guidance remain outside current OBL-025
+  coverage. It does not move canon OBL status, prove OBL-025, freeze
+  diagnostic/repair ABI, claim explanation completeness, claim conformance, or
+  claim G1 exit.
 - Current E-ROW repair shape inventory note:
   `plan/88-g1-erow-repair-shape-inventory.md` records the LAB-only taxonomy
   for repair output widening. Current repair-bearing singleton evidence is
@@ -556,10 +561,19 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; no proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-025 now has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage predicates without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
+- 2026-07-04 01:54 JST
+  `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
+  を compile-check-only のまま refinement し、whole rejected gap、
+  set-insertion、grouped multi-edit、complete local repair、
+  partial-guidance non-coverage の抽象 predicate / helper relation を追加した。
+  set-insertion は current single-edit relation を満たす場合だけ OBL-025
+  coverage に入り、grouped multi-edit / partial guidance は current coverage
+  外として保持した。OBL-025 proof / completion、canon ledger movement、final
+  repair ABI、repair ranking、multi-edit support、G1 exit は主張していない。
 - 2026-07-04 01:27 JST
   `plan/96-g1-erow-set-insertion-bundle-payload-inventory.md` を追加し、
   set-insertion / conjunctive bundle / partial guidance の候補 payload

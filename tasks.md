@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 01:27 JST
+最終更新: 2026-07-04 01:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -127,8 +127,12 @@ Current holding state:
   repo-local OBL-025 Lean statement-shape draft at
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`.
   It compiles as an existential repair-coverage `Prop` over abstract
-  predicates and does not freeze diagnostic/repair ABI, prove OBL-025, claim
-  explanation completeness, claim conformance, claim G1 exit, or edit canon.
+  predicates. The current refinement adds whole-rejected-gap, set-insertion,
+  grouped multi-edit, complete local repair, and partial-guidance non-coverage
+  predicates / helper relations to keep set-insertion, bundles, and partial
+  guidance from being overread as current coverage. It does not freeze
+  diagnostic/repair ABI, prove OBL-025, claim explanation completeness, claim
+  conformance, claim G1 exit, or edit canon.
 - `plan/88-g1-erow-repair-shape-inventory.md` now records the LAB-only
   taxonomy for repair output widening. Current singleton repair evidence is
   `ELAB-10` for `E-ROW-002` / `VisibilityDenied` and `ELAB-13..16` for
@@ -183,7 +187,6 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `OBL-025 statement refinement` | `G1` reserve | refine the LAB `RepairCompletenessStatementDraft.lean` only if review finds a real missing predicate or overfit | Lean still compile-check only; no proof or ledger movement |
 | `E-ROW ELAB-07 set-insertion gate review` | `G1` reserve | decide, docs-first, whether the `plan/96` set-insertion shape can be treated as one source edit for `ELAB-07`; otherwise keep no-repair | no code widening unless local-premise discharge and single-edit status are explicit |
 | `E-ROW mixed visibility branch inventory` | `G1` reserve | refine `ELAB-04` visibility/base branch separation and alternative visibility repairs before any ranking or mixed payload work | docs-only; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
