@@ -40,8 +40,9 @@
 22. G1 OBL-024 statement-shape inventory は `plan/81`
 23. G1 OBL-025 statement-shape inventory は `plan/82`
 24. G1 E-ROW repair payload inventory は `plan/83`
-25. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-26. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+25. G1 E-ROW carrier-only diagnostic detail prototype は `plan/84`
+26. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+27. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -184,6 +185,8 @@
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - G1 E-ROW repair payload inventory:
   `plan/83-g1-erow-repair-payload-inventory.md`
+- G1 E-ROW carrier-only diagnostic detail prototype:
+  `plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

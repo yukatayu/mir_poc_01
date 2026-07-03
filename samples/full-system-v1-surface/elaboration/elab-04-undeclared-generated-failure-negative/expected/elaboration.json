@@ -65,5 +65,26 @@
     "runtime_hotplug_activation_pending_p_surf_06"
   ],
   "source_authority": ".mir",
-  "final_public_api_frozen": false
+  "final_public_api_frozen": false,
+  "lab_diagnostic_details": [
+    {
+      "legacy_code": "generated_failure_not_declared",
+      "canon_id": "E-ROW-001",
+      "severity": "error",
+      "rule_instance": "BND-001.row-containment",
+      "failed_premise": "generated_failures_subset_declared_fails",
+      "missing_evidence": [
+        "MissingWitness",
+        "RouteUnavailable",
+        "StaleMembership",
+        "VisibilityDenied"
+      ],
+      "refs": [
+        "mirrorea_canon/theory/03-elaboration.md#BND-001",
+        "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",
+        "mirrorea_canon/theory/10-diagnostics.md#OBL-024"
+      ],
+      "lab_non_final": true
+    }
+  ]
 }

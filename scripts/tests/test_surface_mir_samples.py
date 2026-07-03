@@ -258,6 +258,30 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertFalse(
             payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
         )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"],
+            [
+                {
+                    "legacy_code": "generated_failure_not_declared",
+                    "canon_id": "E-ROW-001",
+                    "severity": "error",
+                    "rule_instance": "BND-001.row-containment",
+                    "failed_premise": "generated_failures_subset_declared_fails",
+                    "missing_evidence": [
+                        "MissingWitness",
+                        "RouteUnavailable",
+                        "StaleMembership",
+                        "VisibilityDenied",
+                    ],
+                    "refs": [
+                        "mirrorea_canon/theory/03-elaboration.md#BND-001",
+                        "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",
+                        "mirrorea_canon/theory/10-diagnostics.md#OBL-024",
+                    ],
+                    "lab_non_final": True,
+                }
+            ],
+        )
 
     def test_elaboration_source_span_sample_has_span_evidence(self) -> None:
         payload = _run_helper("run", "ELAB-05")
@@ -296,6 +320,14 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         )
         self.assertFalse(
             payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["canon_id"],
+            "E-ROW-001",
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["missing_evidence"],
+            ["MissingWitness", "RouteUnavailable", "StaleMembership"],
         )
 
     def test_elaboration_nested_place_read_keeps_owner_directed_shape(self) -> None:
@@ -360,6 +392,14 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         )
         self.assertFalse(
             payload["actual"]["remote_request_summaries"][0]["failure_row_complete"]
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["canon_id"],
+            "E-ROW-002",
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["missing_evidence"],
+            ["VisibilityDenied"],
         )
 
     def test_role_admission_join_generates_grant_and_witness(self) -> None:

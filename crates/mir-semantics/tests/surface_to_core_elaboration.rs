@@ -424,6 +424,24 @@ BrowserClient[self] {
     );
     assert_eq!(report.core_ir.remote_requests.len(), 1);
     assert!(!report.core_ir.remote_requests[0].failure_row_complete);
+
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["legacy_code"], "generated_failure_not_declared");
+    assert_eq!(details[0]["canon_id"], "E-ROW-001");
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!([
+            "MissingWitness",
+            "RouteUnavailable",
+            "StaleMembership",
+            "VisibilityDenied"
+        ])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
 }
 
 #[test]
@@ -461,6 +479,73 @@ BrowserClient[self] {
     assert_eq!(report.core_ir.remote_requests.len(), 1);
     assert_eq!(report.core_ir.remote_requests[0].request_kind, "write");
     assert!(!report.core_ir.remote_requests[0].failure_row_complete);
+
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["legacy_code"], "generated_failure_not_declared");
+    assert_eq!(details[0]["canon_id"], "E-ROW-001");
+    assert_eq!(details[0]["severity"], "error");
+    assert_eq!(details[0]["rule_instance"], "BND-001.row-containment");
+    assert_eq!(
+        details[0]["failed_premise"],
+        "generated_failures_subset_declared_fails"
+    );
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn rejects_visibility_only_failure_row_underdeclaration_with_erow_002_detail() {
+    let source = r#"
+module Surface.Elab.VisibilityOnlyFailureRow
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+    visible observer_safe fields { hp }
+}
+
+BrowserClient[self] {
+  when render fails MissingCapability, MissingWitness, RouteUnavailable, StaleMembership {
+    seen_hp = player[self].hp
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+
+    assert!(!report.accepted);
+    assert_eq!(
+        surface_elaboration_diagnostic_codes(&report),
+        vec!["generated_failure_not_declared"]
+    );
+    assert_eq!(report.core_ir.remote_requests.len(), 1);
+    assert!(!report.core_ir.remote_requests[0].failure_row_complete);
+
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["legacy_code"], "generated_failure_not_declared");
+    assert_eq!(details[0]["canon_id"], "E-ROW-002");
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["VisibilityDenied"])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
 }
 
 #[test]

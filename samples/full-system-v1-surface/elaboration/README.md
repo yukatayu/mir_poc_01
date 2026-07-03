@@ -18,3 +18,8 @@ Current executable rows:
 - `ELAB-12`: SCN-02-shaped attack assignment records target/self RHS dependency rows without freezing read materialization.
 
 These rows do not claim final public grammar, runtime MessageEnvelope dispatch, role-admission capability grants, source patch activation, or TypeMismatch typechecker discharge.
+
+G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
+`ELAB-07`, and `ELAB-10` as non-final `lab_diagnostic_details`. It preserves
+legacy `generated_failure_not_declared` output and does not emit
+`suggested_repair[]` or freeze a diagnostic / repair ABI.

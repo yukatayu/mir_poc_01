@@ -459,6 +459,7 @@ REQUIRED = [
     "plan/81-g1-obl024-statement-shape-inventory.md",
     "plan/82-g1-obl025-statement-shape-inventory.md",
     "plan/83-g1-erow-repair-payload-inventory.md",
+    "plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md",
     "plan/90-source-traceability.md",
     "plan/91-maintenance-rules.md",
     "specs/00-document-map.md",

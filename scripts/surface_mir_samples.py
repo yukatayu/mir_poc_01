@@ -590,7 +590,7 @@ def _indexed_state_projection(payload: dict[str, Any]) -> dict[str, Any]:
 
 def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
     core_ir = payload.get("core_ir") or {}
-    return {
+    projection = {
         "accepted": payload.get("accepted"),
         "module_path": payload.get("module_path"),
         "diagnostic_codes": _diagnostic_codes(payload),
@@ -673,6 +673,10 @@ def _elaboration_projection(payload: dict[str, Any]) -> dict[str, Any]:
         "source_authority": payload.get("source_authority"),
         "final_public_api_frozen": payload.get("final_public_api_frozen"),
     }
+    lab_diagnostic_details = payload.get("lab_diagnostic_details") or []
+    if lab_diagnostic_details:
+        projection["lab_diagnostic_details"] = lab_diagnostic_details
+    return projection
 
 
 def _role_admission_projection(payload: dict[str, Any]) -> dict[str, Any]:

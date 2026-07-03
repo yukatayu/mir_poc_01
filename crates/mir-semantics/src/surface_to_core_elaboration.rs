@@ -20,6 +20,9 @@ const REMOTE_REQUEST_FAILURES: &[&str] = &[
     "StaleMembership",
 ];
 const VISIBILITY_FAILURE: &str = "VisibilityDenied";
+const GENERATED_FAILURE_NOT_DECLARED: &str = "generated_failure_not_declared";
+const E_ROW_001: &str = "E-ROW-001";
+const E_ROW_002: &str = "E-ROW-002";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SurfaceToCoreElaborationReport {
@@ -27,10 +30,23 @@ pub struct SurfaceToCoreElaborationReport {
     pub module_path: Option<String>,
     pub core_ir: SurfaceCoreIr,
     pub diagnostics: Vec<TextualMirDiagnostic>,
+    pub lab_diagnostic_details: Vec<SurfaceLabDiagnosticDetail>,
     pub accepted_obligations: Vec<SurfaceCoreObligation>,
     pub residual_obligations: Vec<SurfaceCoreObligation>,
     pub source_authority: String,
     pub final_public_api_frozen: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticDetail {
+    pub legacy_code: String,
+    pub canon_id: String,
+    pub severity: String,
+    pub rule_instance: String,
+    pub failed_premise: String,
+    pub missing_evidence: Vec<String>,
+    pub refs: Vec<String>,
+    pub lab_non_final: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -184,6 +200,7 @@ struct CommunicationDecision {
 struct ElaborationContext {
     indexed_states: BTreeMap<(String, String), IndexedStateDecl>,
     diagnostics: Vec<TextualMirDiagnostic>,
+    lab_diagnostic_details: Vec<SurfaceLabDiagnosticDetail>,
     core_ir: SurfaceCoreIr,
     next_transition: usize,
     next_request: usize,
@@ -237,6 +254,7 @@ pub fn elaborate_surface_to_core_module(module: SurfaceModule) -> SurfaceToCoreE
         module_path: Some(module_path),
         core_ir: context.core_ir,
         diagnostics: context.diagnostics,
+        lab_diagnostic_details: context.lab_diagnostic_details,
         accepted_obligations,
         residual_obligations,
         source_authority: ".mir".to_string(),
@@ -263,6 +281,7 @@ fn rejected_parse_report(diagnostics: Vec<TextualMirDiagnostic>) -> SurfaceToCor
             ..SurfaceCoreIr::default()
         },
         diagnostics,
+        lab_diagnostic_details: Vec::new(),
         accepted_obligations: Vec::new(),
         residual_obligations: residual_obligations(),
         source_authority: ".mir".to_string(),
@@ -569,6 +588,7 @@ fn push_remote_request(
         communication_decision(context, request_kind, &state, &target, span.clone());
     let required_failures = required_failures(communication.visibility_failure_required);
     let declared_failures = when.failure_row.clone();
+    let missing_failures = missing_failures(&required_failures, &declared_failures);
     let failure_row_complete = required_failure_set(communication.visibility_failure_required)
         .is_subset(&declared_failures.iter().cloned().collect::<BTreeSet<_>>());
     let owner_locus = state.owner_locus.clone();
@@ -649,8 +669,11 @@ fn push_remote_request(
     });
 
     if !failure_row_complete {
+        context
+            .lab_diagnostic_details
+            .push(erow_lab_diagnostic_detail(missing_failures));
         context.diagnostics.push(diagnostic(
-            "generated_failure_not_declared",
+            GENERATED_FAILURE_NOT_DECLARED,
             "generated remote requests must be contained in a when failure row before admission",
             span,
         ));
@@ -1003,6 +1026,40 @@ fn required_failures(include_visibility: bool) -> Vec<String> {
         failures.push(VISIBILITY_FAILURE.to_string());
     }
     failures
+}
+
+fn missing_failures(required_failures: &[String], declared_failures: &[String]) -> Vec<String> {
+    let declared_set = declared_failures
+        .iter()
+        .cloned()
+        .collect::<BTreeSet<String>>();
+    required_failures
+        .iter()
+        .filter(|failure| !declared_set.contains(*failure))
+        .cloned()
+        .collect()
+}
+
+fn erow_lab_diagnostic_detail(missing_evidence: Vec<String>) -> SurfaceLabDiagnosticDetail {
+    let canon_id = if missing_evidence.len() == 1 && missing_evidence[0] == VISIBILITY_FAILURE {
+        E_ROW_002
+    } else {
+        E_ROW_001
+    };
+    SurfaceLabDiagnosticDetail {
+        legacy_code: GENERATED_FAILURE_NOT_DECLARED.to_string(),
+        canon_id: canon_id.to_string(),
+        severity: "error".to_string(),
+        rule_instance: "BND-001.row-containment".to_string(),
+        failed_premise: "generated_failures_subset_declared_fails".to_string(),
+        missing_evidence,
+        refs: vec![
+            "mirrorea_canon/theory/03-elaboration.md#BND-001".to_string(),
+            format!("mirrorea_canon/spec/07-diagnostics-format.md#{canon_id}"),
+            "mirrorea_canon/theory/10-diagnostics.md#OBL-024".to_string(),
+        ],
+        lab_non_final: true,
+    }
 }
 
 fn required_failure_set(include_visibility: bool) -> BTreeSet<String> {

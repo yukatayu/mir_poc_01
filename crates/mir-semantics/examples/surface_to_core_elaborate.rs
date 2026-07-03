@@ -59,6 +59,7 @@ fn run(args: Vec<String>) -> i32 {
         "module_path": report.module_path,
         "core_ir": report.core_ir,
         "diagnostics": report.diagnostics,
+        "lab_diagnostic_details": report.lab_diagnostic_details,
         "accepted_obligations": report.accepted_obligations,
         "residual_obligations": report.residual_obligations,
         "source_authority": report.source_authority,
