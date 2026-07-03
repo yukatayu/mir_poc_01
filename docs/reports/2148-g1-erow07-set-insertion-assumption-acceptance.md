@@ -195,6 +195,15 @@ rg -n '^## ' docs/reports/2148-g1-erow07-set-insertion-assumption-acceptance.md
 rg -n 'pending|Pending|Validation results are pending|Final reviewer pass is pending' docs/reports/2148-g1-erow07-set-insertion-assumption-acceptance.md
 nl -ba plan/96-g1-erow-set-insertion-bundle-payload-inventory.md | sed -n '140,230p'
 nl -ba plan/97-g1-erow07-set-insertion-gate-review.md | sed -n '110,130p'
+git add README.md Documentation.md docs/research_abstract/surface_mir_alpha_01.md progress.md tasks.md samples_progress.md plan/00-index.md plan/90-source-traceability.md plan/96-g1-erow-set-insertion-bundle-payload-inventory.md plan/97-g1-erow07-set-insertion-gate-review.md plan/99-g1-erow07-set-insertion-executable-preflight.md plan/100-g1-erow07-set-insertion-assumption-acceptance.md docs/reports/2148-g1-erow07-set-insertion-assumption-acceptance.md
+git diff --cached --stat
+git diff --cached --check
+staged repo-local secret-pattern scan
+staged notification-target-word scan
+git commit --no-gpg-sign -m "Record ELAB-07 set-insertion assumption acceptance"
+git push
+git status --short --branch
+git rev-parse HEAD origin/main
 ```
 
 ## Evidence / outputs / test results
@@ -315,11 +324,21 @@ Final reviewer pass:
 
 None. All intended validations for this docs-only package were run.
 
+- Changed-file repo-local secret-pattern scan: no matches.
+- Staged repo-local secret-pattern scan: no matches.
+
 ## Commit / push status
 
-Pending for the content commit. This section will be updated in the follow-up
-bookkeeping commit after the content commit is pushed and `HEAD` is verified
-against `origin/main`.
+Content commit:
+
+- `36eff86cd2765a6dc2853635f98306e4bdd9c552`
+- Pushed to `origin/main`.
+- Post-push check showed `HEAD` and `origin/main` equal at this commit.
+
+This status section is the bookkeeping update that follows the content commit.
+The bookkeeping commit hash cannot be embedded in itself without another
+self-referential commit; post-push verification is performed immediately after
+the bookkeeping commit.
 
 ## Sub-agent session close status
 
