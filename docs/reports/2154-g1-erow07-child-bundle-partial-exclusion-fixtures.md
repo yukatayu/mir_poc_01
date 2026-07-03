@@ -249,7 +249,12 @@ the sub-agent mapper covered the representability / over-spec risk.
 
 ## Commit / push status
 
-Pending at report write.
+- Content commit `bf08f3f81c19f42bbde845d852c59c5f0153d56c`
+  (`Add ELAB-07 child bundle guard`) was pushed to `origin/main`.
+- This report-status section is the follow-up bookkeeping update for the
+  package. Final `HEAD == origin/main` verification is performed after this
+  bookkeeping update is committed and pushed, because a commit cannot record
+  its own hash before it exists.
 
 ## Sub-agent session close status
 
