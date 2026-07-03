@@ -39,6 +39,8 @@ multi-edit support, does not claim conformance, and does not claim G1 exit.
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - LAB `ELAB-07` executable preflight:
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
+- LAB `ELAB-07` assumption acceptance:
+  `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `scripts/tests/test_surface_mir_samples.py`,
@@ -150,8 +152,9 @@ need at least:
    request;
 8. the payload still denies runtime success and authority availability.
 
-Until condition 6 is decided, this package does not classify `ELAB-07` as a
-single-edit OBL-025 coverage case.
+`plan/100` later accepts condition 6 only for the exact `ELAB-07`
+source-locus candidate gate. This package still does not classify `ELAB-07` as
+a current executable single-edit OBL-025 coverage case.
 
 ## Candidate shape: conjunctive bundle
 
@@ -207,14 +210,15 @@ field. Until then, `ELAB-04/07` should keep omitting `suggested_repair`.
 
 The safest future widening for `ELAB-07`, if any, is a single grouped item:
 
-- either a set-insertion item, if set insertion is accepted as one source edit;
+- either a set-insertion item, now that `plan/100` accepts the exact
+  `ELAB-07` source-locus edit assumption;
 - or a conjunctive bundle item with `all_required` semantics.
 
 Do not emit one ordinary singleton item per missing failure as if those items
 were alternatives or complete local repair witnesses.
 
-If the project cannot decide whether set insertion is one edit, `ELAB-07`
-should remain no-repair.
+Until that accepted assumption is represented by a separate executable set
+payload and tests, `ELAB-07` should remain no-repair.
 
 ## `ELAB-04` future reading
 
@@ -306,13 +310,18 @@ Recommended next ordering:
    `plan/99` now records the docs-only executable preflight for that route:
    one atomic set insertion, one target, whole-gap coverage, exact
    declared-after set, and no current output widening.
+   `plan/100` accepts the narrow LAB source-locus edit assumption for this
+   route only: one existing row-field edit with `element_insert_count = 3`,
+   no executable output widening, and no general set-insertion support claim.
 4. Leave `ELAB-04` no-repair until visibility alternatives and ranking are
    explicit.
 
 ## Open questions
 
 - Is adding several failures to one `fails` row one source edit in the declared
-  fragment?
+  fragment? `plan/100` answers yes only for the exact `ELAB-07` candidate gate:
+  one existing concrete row, base failures only, whole-gap insertion, exact
+  `declared_after == required`, and no executable output widening.
 - If a bundle has multiple child edits, is the bundle itself a repair witness
   or only a repair plan?
 - Should partial guidance live in `suggested_repair[]` or a separate guidance

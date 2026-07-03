@@ -102,8 +102,10 @@ Actualized rows:
 - `ELAB-06`: unsupported statements reject instead of being silently dropped.
 - `ELAB-07`: write-side underdeclared generated failure row is rejected; current
   LAB gate review keeps it no-repair until set-insertion atomicity or bundle
-  semantics are explicit, and the executable preflight records the future
-  atomic set-insertion / whole-gap coverage tests without widening output.
+  semantics are explicit. The executable preflight records the future atomic
+  set-insertion / whole-gap coverage tests, and the assumption acceptance
+  package accepts the narrow LAB source-locus edit model for this row only
+  without widening executable output.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

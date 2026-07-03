@@ -54,8 +54,9 @@
 36. G1 ELAB-07 set-insertion gate review は `plan/97`
 37. G1 ELAB-04 mixed visibility branch inventory は `plan/98`
 38. G1 ELAB-07 set-insertion executable preflight は `plan/99`
-39. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-40. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+39. G1 ELAB-07 set-insertion assumption acceptance は `plan/100`
+40. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+41. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -226,6 +227,8 @@
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
 - G1 ELAB-07 set-insertion executable preflight:
   `plan/99-g1-erow07-set-insertion-executable-preflight.md`
+- G1 ELAB-07 set-insertion assumption acceptance:
+  `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

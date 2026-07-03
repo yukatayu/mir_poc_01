@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 03:00 JST
+最終更新: 2026-07-04 03:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -199,6 +199,13 @@ Current holding state:
   and no `ELAB-04` / `E-ROW-002` broadening. It does not widen
   `suggested_repair[]`, add set-insertion or bundle support, prove OBL-025,
   freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
+- `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` now accepts the
+  narrow LAB source-locus edit assumption for `ELAB-07` only: completing one
+  existing concrete `when_fails_row` by duplicate-free insertion of the exact
+  missing base-failure set is one row-field edit with `element_insert_count =
+  3`. Current executable `ELAB-07` still omits `suggested_repair`; this does
+  not add executable set-insertion support, bundle semantics, prove OBL-025,
+  freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -210,7 +217,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW ELAB-07 set-insertion assumption acceptance` | `G1` reserve | decide docs-first whether duplicate-free insertion of all missing base failures into one concrete `when_fails_row` is one source edit for the LAB gate | no Rust output widening; if accepted, the later package can implement the separate set-insertion payload model |
+| `E-ROW ELAB-07 set-insertion payload-model design` | `G1` reserve | design the non-final set payload fields and test matrix for the already accepted narrow LAB source-locus edit assumption | docs-only unless explicitly promoted to Rust; keep executable `ELAB-07` no-repair until the implementation package |
 | `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

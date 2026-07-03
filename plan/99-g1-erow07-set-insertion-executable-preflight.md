@@ -44,6 +44,8 @@ payload model, coverage relation, and test matrix.
   `plan/97-g1-erow07-set-insertion-gate-review.md`
 - LAB `ELAB-04` mixed visibility branch inventory:
   `plan/98-g1-erow04-mixed-visibility-branch-inventory.md`
+- LAB `ELAB-07` assumption acceptance:
+  `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - LAB implementation and evidence:
   `crates/mir-semantics/src/surface_to_core_elaboration.rs`,
   `crates/mir-semantics/tests/surface_to_core_elaboration.rs`,
@@ -195,7 +197,11 @@ A later executable package needs predicates at least this strong:
 | `single_source_edit_accepted` | set insertion has been explicitly accepted as one source edit for this gate |
 | `partial_guidance_excluded` | partial guidance does not satisfy OBL-025-shaped coverage |
 
-Until `single_source_edit_accepted` is true, `ELAB-07` remains no-repair.
+`plan/100` now accepts `single_source_edit_accepted` only for the exact
+`ELAB-07` candidate gate under a source-locus edit model:
+`source_locus_edit_count = 1` and `element_insert_count = 3`. Executable
+`ELAB-07` output still remains no-repair until a later set payload package is
+implemented and validated.
 
 The safe set arithmetic for this case is exact:
 
@@ -306,7 +312,7 @@ Use separate statuses for `ELAB-07`:
 |---|---|---|
 | `no_repair_executable` | current diagnostics omit `suggested_repair` | yes |
 | `set_insertion_payload_preflight` | candidate payload and tests are specified before code widening | yes |
-| `single_source_edit_accepted` | set insertion has been accepted as one source edit | no |
+| `single_source_edit_accepted` | set insertion has been accepted as one source edit | yes, but only by `plan/100` for the exact `ELAB-07` source-locus candidate gate |
 | `repair_bearing_evidence` | expected JSON emits a complete set repair item | no |
 | `obl025_coverage_evidence` | row counts as current OBL-025 coverage | no |
 
@@ -314,10 +320,10 @@ Use separate statuses for `ELAB-07`:
 
 1. Keep executable output unchanged and validate that `ELAB-07` still omits
    `suggested_repair`.
-2. If executable widening is promoted, first do a narrow assumption-acceptance
-   package that states whether this set insertion is one source edit for the
-   LAB gate.
-3. Only after that, implement a separate set-insertion payload model and tests.
+2. `plan/100` has now accepted the narrow source-locus edit assumption for
+   `ELAB-07` only.
+3. If executable widening is promoted, implement a separate set-insertion
+   payload model and tests.
 4. Keep `ELAB-04` out of the first executable widening package.
 5. Refine OBL-025 only if the set-insertion predicate needs a more precise
    statement boundary.

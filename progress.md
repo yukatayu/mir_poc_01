@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 03:00 JST
+最終更新: 2026-07-04 03:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -237,6 +237,14 @@ semantic source authority.
   set-insertion decision or bundle semantics with whole rejected-gap coverage.
   This does not widen `suggested_repair[]`, add set-insertion support, prove
   OBL-025, freeze repair ABI, claim multi-edit support, or claim G1 exit.
+- Current ELAB-07 set-insertion assumption acceptance note:
+  `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` accepts, only
+  for the exact `ELAB-07` candidate gate, that duplicate-free insertion of the
+  complete missing base-failure set into the one existing concrete
+  `when_fails_row` counts as one LAB source-locus edit with
+  `element_insert_count = 3`. Current executable `ELAB-07` still omits
+  `suggested_repair`; this does not add executable set-insertion support,
+  bundle semantics, OBL-025 proof / completion, conformance, or G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -256,13 +264,15 @@ semantic source authority.
   and ranking are explicit. `ELAB-07` now also has an executable preflight that
   requires one atomic set insertion, one target row, no extraneous declared
   failures, exact whole rejected-gap coverage, and focused tests before any
-  output widening. `ELAB-04` now has a separate mixed visibility
+  output widening. `plan/100` accepts the narrow LAB source-locus edit
+  assumption for `ELAB-07` only, with `element_insert_count = 3`, while keeping
+  executable `ELAB-07` no-repair until a later payload package. `ELAB-04` now
+  has a separate mixed visibility
   branch inventory that keeps it no-repair until base remote-request and
   `VisibilityDenied` branch ownership / association / ordering / ranking are
   explicit. It still has no proof, no canon status movement, no final repair
   ABI, no repair ranking, no visibility-repair ranking, no set-insertion
-  support, and no multi-edit support. This remains
-  before any later
+  support, and no multi-edit support. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -566,7 +576,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review and executable preflight that keep output no-repair until exact whole-gap atomic set-insertion semantics and tests are explicit, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance that still keep executable output no-repair until a set payload is implemented and tested, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -580,6 +590,14 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-04 03:24 JST
+  `plan/100-g1-erow07-set-insertion-assumption-acceptance.md` を追加し、
+  `ELAB-07` だけについて one existing `when_fails_row` source-locus edit /
+  `element_insert_count = 3` として exact missing base-failure set insertion
+  を LAB gate で受け入れた。current executable `ELAB-07` は no-repair のまま
+  で、repair output widening、set-insertion support、bundle semantics support、
+  OBL-025 proof / completion、canon ledger movement、final repair ABI、
+  conformance、G1 exit は主張していない。
 - 2026-07-04 03:00 JST
   `plan/99-g1-erow07-set-insertion-executable-preflight.md` を追加し、
   `ELAB-07` の future widening に必要な atomic set-insertion / one target /
