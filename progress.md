@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 22:05 JST
+最終更新: 2026-07-03 22:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -128,6 +128,13 @@ semantic source authority.
   exactly at that premise. It treats E-ROW as the immediate G1 pressure case,
   but does not add a Lean file, prove OBL-024, freeze diagnostic ABI, claim
   conformance, or edit canon.
+- Current OBL-025 statement-shape inventory note:
+  `plan/82-g1-obl025-statement-shape-inventory.md` inventories the abstract
+  vocabulary needed to state Line-1 explanation completeness: Line-1
+  rejection, declared fragment, single-edit repair existence, non-empty
+  suggested repair, and repair/failure matching. It does not add a Lean file,
+  generate repairs, prove OBL-025, freeze diagnostic/repair ABI, claim
+  conformance, or edit canon.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -138,9 +145,10 @@ semantic source authority.
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
 - Next gap: the safe self-driven theory package is now either an additive LAB
-  diagnostic carrier prototype for E-ROW only, OBL-025 statement-shape
-  inventory without proof/status movement, or focused refinement of the LAB
-  OBL-001/020/021/024 statement drafts if review finds a real gap. This remains before any later
+  diagnostic carrier prototype for E-ROW only, focused E-ROW repair payload
+  inventory if the prototype should include `suggested_repair[]`, or focused
+  refinement of the LAB OBL-001/020/021/024/025 statement drafts if review
+  finds a real gap. This remains before any later
   user-spec-required reopen for final runtime/transport, final source patch
   ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
@@ -533,6 +541,12 @@ Research-discovery items:
   failed premise / bindings / replay failure の statement-shape inventory として
   整理した。E-ROW は immediate pressure case として読むが、Lean statement、
   proof、diagnostic ABI freeze、conformance、G1 exit は主張していない。
+- 2026-07-03 22:14 JST
+  `plan/82-g1-obl025-statement-shape-inventory.md` を追加し、OBL-025
+  explanation completeness を Line-1 rejection / declared fragment /
+  single-edit repair existence / non-empty suggested repair /
+  repair-failure matching の statement-shape inventory として整理した。
+  repair generation、repair ABI freeze、proof、conformance、G1 exit は主張していない。
 - 2026-07-02 18:03 JST
   Oracle 運用メモを更新し、理論的に難しい判断、全体像、roadmap、複雑な
   design review では積極的に Oracle consult を投げる方針を明記した。長時間

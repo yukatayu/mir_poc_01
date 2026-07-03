@@ -130,6 +130,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/79-g1-erow-diagnostic-alignment.md",
         "plan/80-g1-diagnostic-carrier-inventory.md",
         "plan/81-g1-obl024-statement-shape-inventory.md",
+        "plan/82-g1-obl025-statement-shape-inventory.md",
         "plan/90-source-traceability.md",
         "plan/91-maintenance-rules.md",
     ],
