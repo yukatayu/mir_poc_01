@@ -45,6 +45,15 @@ fn assert_no_placeholder_repair_values(value: &Value) {
     }
 }
 
+fn rejected_lab_details_for_source(source: &str) -> Vec<Value> {
+    let report = elaborate_surface_to_core_source(source);
+    assert!(!report.accepted);
+    serde_json::to_value(&report).expect("report serializes")["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted")
+        .clone()
+}
+
 #[test]
 #[should_panic(expected = "placeholder repair payload string")]
 fn placeholder_repair_detector_rejects_marker_substrings() {
@@ -703,6 +712,175 @@ BrowserClient[self] {
     );
     assert!(repair["repair_non_final"].as_bool().unwrap_or(false));
     assert!(repair["lab_non_final"].as_bool().unwrap_or(false));
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_two_missing_proper_subset() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardTwoMissingSubset
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, MissingWitness {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["RouteUnavailable", "StaleMembership"])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_padded_declared_failure_row() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardPaddedFailureRow
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, ExtraFailure {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["failure_row_context"]["declared_failures"],
+        serde_json::json!(["MissingCapability", "ExtraFailure"])
+    );
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_duplicate_declared_failure_row() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardDuplicateFailureRow
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant) fails MissingCapability, MissingCapability {
+    S {
+      player[target].hp = 1
+    }
+  }
+}
+"#;
+
+    let details = rejected_lab_details_for_source(source);
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(
+        details[0]["failure_row_context"]["declared_failures"],
+        serde_json::json!(["MissingCapability", "MissingCapability"])
+    );
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
+    );
+    assert!(details[0].get("suggested_repair").is_none());
+}
+
+#[test]
+fn elab07_set_insertion_is_not_emitted_for_multiple_generated_requests_in_one_row() {
+    let source = r#"
+module Surface.Elab.SetInsertionGuardMultipleRequests
+
+role BrowserClient
+place S
+
+record Player {
+  hp: Int64,
+}
+
+S {
+  state player[p: Participant]: Player
+}
+
+BrowserClient[self] {
+  when attack(target: Participant, other: Participant) fails MissingCapability {
+    S {
+      player[target].hp = 1
+      player[other].hp = 2
+    }
+  }
+}
+"#;
+
+    let report = elaborate_surface_to_core_source(source);
+
+    assert!(!report.accepted);
+    assert_eq!(report.core_ir.remote_requests.len(), 2);
+    assert_eq!(
+        surface_elaboration_diagnostic_codes(&report),
+        vec![
+            "generated_failure_not_declared",
+            "generated_failure_not_declared"
+        ]
+    );
+    let report_json = serde_json::to_value(&report).expect("report serializes");
+    let details = report_json["lab_diagnostic_details"]
+        .as_array()
+        .expect("LAB diagnostic details are emitted");
+    assert_eq!(details.len(), 2);
+    for detail in details {
+        assert_eq!(detail["canon_id"], "E-ROW-001");
+        assert_eq!(
+            detail["failure_row_context"]["target_ref"],
+            "when_fails_row|locus=role:BrowserClient|event=attack"
+        );
+        assert_eq!(
+            detail["missing_evidence"],
+            serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
+        );
+        assert!(detail.get("suggested_repair").is_none());
+    }
 }
 
 #[test]

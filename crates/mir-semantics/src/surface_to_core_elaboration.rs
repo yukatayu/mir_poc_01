@@ -130,6 +130,8 @@ pub struct SurfaceLabDiagnosticFailureRowContext {
     pub declared_failures: Vec<String>,
     pub missing_failures: Vec<String>,
     pub local_premise: String,
+    #[serde(skip)]
+    pub associated_request_count: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -282,6 +284,7 @@ struct CommunicationDecision {
 #[derive(Debug, Default)]
 struct ElaborationContext {
     indexed_states: BTreeMap<(String, String), IndexedStateDecl>,
+    failure_row_request_counts: BTreeMap<String, usize>,
     diagnostics: Vec<TextualMirDiagnostic>,
     lab_diagnostic_details: Vec<SurfaceLabDiagnosticDetail>,
     core_ir: SurfaceCoreIr,
@@ -681,6 +684,21 @@ fn push_remote_request(
     let key_expr = target.key_expr.clone();
     let field_name = target.field_name.clone();
     let access_text = target.access_text.clone();
+    let target_ref = format!(
+        "when_fails_row|locus={requester_locus}|event={}",
+        when.event_name
+    );
+    let associated_request_count = {
+        let count = context
+            .failure_row_request_counts
+            .entry(target_ref.clone())
+            .or_insert(0);
+        *count += 1;
+        *count
+    };
+    if associated_request_count > 1 {
+        suppress_set_insertion_repairs_for_target_ref(context, &target_ref);
+    }
     context
         .core_ir
         .remote_requests
@@ -754,10 +772,6 @@ fn push_remote_request(
     });
 
     if !failure_row_complete {
-        let target_ref = format!(
-            "when_fails_row|locus={requester_locus}|event={}",
-            when.event_name
-        );
         context
             .lab_diagnostic_details
             .push(erow_lab_diagnostic_detail(
@@ -780,6 +794,7 @@ fn push_remote_request(
                     declared_failures: detail_declared_failures,
                     missing_failures,
                     local_premise: "generated_failures_subset_declared_fails".to_string(),
+                    associated_request_count,
                 },
             ));
         context.diagnostics.push(diagnostic(
@@ -789,6 +804,26 @@ fn push_remote_request(
         ));
     }
     request_id
+}
+
+fn suppress_set_insertion_repairs_for_target_ref(
+    context: &mut ElaborationContext,
+    target_ref: &str,
+) {
+    for detail in &mut context.lab_diagnostic_details {
+        if detail.failure_row_context.target_ref != target_ref {
+            continue;
+        }
+        let should_clear = if let Some(repairs) = detail.suggested_repair.as_mut() {
+            repairs.retain(|repair| repair.repair_shape.as_deref() != Some("set_insertion"));
+            repairs.is_empty()
+        } else {
+            false
+        };
+        if should_clear {
+            detail.suggested_repair = None;
+        }
+    }
 }
 
 fn communication_decision(
@@ -1207,6 +1242,7 @@ fn erow_set_insertion_suggested_repair(
         || request_context.generated_from != "nested_place_block"
         || failure_row_context.target_kind != "when_fails_row"
         || failure_row_context.target_ref.is_empty()
+        || failure_row_context.associated_request_count != 1
     {
         return None;
     }

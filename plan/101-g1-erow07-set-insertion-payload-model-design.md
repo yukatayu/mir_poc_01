@@ -82,7 +82,7 @@ candidate gate. This file does not add canon semantics; it designs the
 candidate payload roles needed before a later executable package may use that
 premise.
 
-## Current executable baseline after `plan/102`
+## Current executable baseline after `plan/103`
 
 Current repair-bearing executable rows are:
 
@@ -100,6 +100,13 @@ Current no-repair fences remain:
 | Row | Shape | Current repair output |
 |---|---|---|
 | `ELAB-04` | mixed base / `VisibilityDenied` multi-missing row | no `suggested_repair` field |
+
+`plan/103` adds Rust-only negative guard evidence around the exact `ELAB-07`
+set path. Proper subset, padded declaration, duplicate declaration, and multi
+generated-request variants do not receive the `set_insertion` repair. The
+tested two-missing / padded / duplicate / multi-request rows reject without
+`suggested_repair`. The sample row count and expected JSON files are unchanged
+by that guard hardening.
 
 Singleton Rust payload baseline:
 
@@ -247,20 +254,21 @@ membership evidence.
 ## Future negative and regression tests
 
 The implementation preserves `ELAB-04`, `ELAB-10`, and `ELAB-13..16`
-regression fences. Additional future guard fixtures should reject or preserve
-at least:
+regression fences. `plan/103` implements the Rust-only subset / padded /
+duplicate / multi-request guard subset of this matrix. Remaining future guard
+fixtures should reject or preserve at least:
 
 | ID | Case | Required future result |
 |---|---|---|
 | `N1` | `{ MissingWitness }` only | no complete set repair |
 | `N2` | `{ RouteUnavailable }` only | no complete set repair |
 | `N3` | `{ StaleMembership }` only | no complete set repair |
-| `N4` | any two-element proper subset | no complete set repair |
-| `N5` | duplicate insertion | reject or normalize before payload, never emit duplicate evidence |
-| `N6` | padded insertion with extra failure | reject this set payload |
+| `N4` | any two-element proper subset | covered for one two-element subset by `plan/103`; broader subset symmetry remains future |
+| `N5` | duplicate insertion | covered for duplicate declared failure by `plan/103`; broader normalization policy remains future |
+| `N6` | padded insertion with extra failure | covered for one padded declaration by `plan/103`; broader extraneous-failure policy remains future |
 | `N7` | any `VisibilityDenied` component | out of scope for `ELAB-07` set gate |
 | `N8` | `ELAB-04` mixed base / visibility row | remains no-repair |
-| `N9` | multi-request diagnostic | no set payload until association policy exists |
+| `N9` | multi-request diagnostic | covered for one target reference by `plan/103`; final row identity / association policy remains future |
 | `N10` | multi-target-row diagnostic | no set payload until target policy exists |
 | `N11` | missing / inferred target row | no set payload |
 | `N12` | row creation / splitting / movement / retargeting | no set payload |
@@ -273,7 +281,10 @@ at least:
 | `R3` | exact `ELAB-07` after implementation | exactly one top-level `set_insertion` item |
 
 `plan/102` adds the exact `ELAB-07` positive and immediate regression tests.
-The other negative fixture families remain future hardening work.
+`plan/103` closes the first guard-hardening subset. The remaining negative
+fixture families are row-identity, same-event row separation, true
+multi-target-row policy, row creation / splitting / movement / retargeting, and
+partial-guidance / bundle exclusion.
 
 ## Implementation sequencing constraint
 
@@ -324,8 +335,9 @@ current `ELAB-07` executable output OBL-025 completion evidence.
 
 ## Suggested next packages
 
-1. Add negative guard fixtures for proper subsets, padded declarations,
-   duplicate insertions, and multi-target / multi-request exclusions.
+1. Decide whether row identity should be tracked by source span / AST row
+   rather than only by the LAB target reference before broader set guidance is
+   attempted.
 2. Keep `ELAB-04` out of the first mixed-branch widening package until branch
    ownership / association / ordering / ranking are explicit.
 3. Keep OBL-025 abstract until the executable payload and negative guard

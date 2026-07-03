@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 04:14 JST
+最終更新: 2026-07-04 04:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -218,6 +218,14 @@ Current holding state:
   repair evidence, and this does not add general set-insertion support, bundle
   semantics, prove OBL-025, freeze repair ABI, claim conformance, claim G1
   exit, or edit canon.
+- `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md` now records
+  Rust-only negative guard evidence for the exact `ELAB-07` set path. Proper
+  subset, padded declaration, duplicate declaration, and multi generated-request
+  variants do not receive the `set_insertion` repair; the tested rows reject
+  without `suggested_repair`. The current multi-request guard is conservative
+  and keyed by the LAB target reference, not by a final row identity model.
+  This does not add general set-insertion support, bundle semantics, prove
+  OBL-025, freeze repair ABI, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -229,7 +237,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW ELAB-07 set-insertion negative-guard hardening` | `G1` reserve | add focused guard fixtures/tests for proper subsets, padded declarations, duplicate insertion, and multi-request / multi-target exclusions around the `plan/102` prototype | keep exact `ELAB-07` set payload, keep `ELAB-04` no-repair, preserve `ELAB-10` / `ELAB-13..16` singleton evidence, and still avoid final ABI / proof / conformance / G1 exit claims |
+| `E-ROW ELAB-07 row-identity guard hardening` | `G1` reserve | decide whether the internal request-count guard needs source-span / AST-row identity before broader set guidance is attempted, and add same-event row fixtures if promoted | keep exact `ELAB-07` set payload, avoid over-emitting repairs for ambiguous target references, preserve `ELAB-04` no-repair and singleton rows, and still avoid final ABI / proof / conformance / G1 exit claims |
 | `E-ROW mixed visibility branch payload-model preflight` | `G1` reserve | only if promoted, design non-final branch ownership / association / ranking vocabulary for `ELAB-04` before any executable mixed payload work | docs-only unless a later package explicitly accepts a payload model; keep `ELAB-04` no-repair |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

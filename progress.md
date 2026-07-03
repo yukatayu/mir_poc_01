@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 04:14 JST
+最終更新: 2026-07-04 04:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -266,6 +266,16 @@ semantic source authority.
   `ELAB-10` and `ELAB-13..16` keep singleton output, sample row count remains
   52, and this does not add general set-insertion support, bundle semantics,
   OBL-025 proof / completion, conformance, final ABI, or G1 exit.
+- Current ELAB-07 set-insertion negative-guard hardening note:
+  `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md` adds
+  Rust-only guard evidence around the exact `ELAB-07` set path. Proper subset,
+  padded declaration, duplicate declaration, and multi generated-request
+  variants now do not receive the `set_insertion` repair; the tested rows
+  reject without `suggested_repair`. The multi-request guard is conservative
+  and keyed by the LAB target reference, not by a final row identity model.
+  Sample row count remains 52, and this does not add general set-insertion
+  support, bundle semantics, OBL-025 proof / completion, conformance, final
+  ABI, or G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -281,12 +291,15 @@ semantic source authority.
   implemented for `ELAB-13..16`. `ELAB-04/07` now have a LAB decomposition
   inventory plus candidate set-insertion / bundle payload vocabulary and an
   `ELAB-07` gate review / executable preflight / assumption acceptance /
-  payload design / exact executable prototype for one non-final set item.
+  payload design / exact executable prototype for one non-final set item plus
+  Rust-only negative guard hardening for subset / padded / duplicate /
+  multi-request variants.
   `ELAB-07` now emits one `set_insertion` item only for the current exact
   write-side base-failure set gap. `plan/100` accepts the narrow LAB
   source-locus edit assumption for `ELAB-07` only, with
   `element_insert_count = 3`; `plan/101` designs the payload roles / test
-  matrix; and `plan/102` implements the exact positive path.
+  matrix; `plan/102` implements the exact positive path; and `plan/103`
+  suppresses nearby negative variants without changing sample rows.
   `ELAB-04` now has a separate mixed visibility
   branch inventory that keeps it no-repair until base remote-request and
   `VisibilityDenied` branch ownership / association / ordering / ranking are
@@ -403,8 +416,10 @@ Current evidence:
   carry one `E-ROW-001` singleton `add-to-fails-row` repair payload per base
   remote-request failure atom under the `plan/93` single-edit /
   no-placeholder gate. Exact `ELAB-07` now carries one non-final
-  `set_insertion` item under `plan/102`; `ELAB-04` remains the mixed base /
-  `VisibilityDenied` no-repair fence.
+  `set_insertion` item under `plan/102`, while Rust-only `plan/103` guard
+  tests keep subset / padded / duplicate / multi-request variants from
+  receiving the `set_insertion` repair;
+  `ELAB-04` remains the mixed base / `VisibilityDenied` no-repair fence.
 - `crates/mir-semantics::surface_to_core_elaboration` also generates
   MessageEnvelope, visible publish/observe, and observer-safe redaction /
   retention rows for P-SURF-04.
@@ -597,7 +612,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard hardening, and an `ELAB-04` mixed visibility branch inventory that keeps executable output no-repair until branch ownership / association / ordering / ranking are explicit | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -613,9 +628,18 @@ Research-discovery items:
 
 Entries below are historical snapshots at each task close. Earlier
 `ELAB-07` no-repair lines record the state before `plan/102`; the current
-snapshot above is the exact `ELAB-07` set payload plus `ELAB-04` no-repair
-state.
+snapshot above is the exact `ELAB-07` set payload, `plan/103` Rust-only
+negative guards, and `ELAB-04` no-repair state.
 
+- 2026-07-04 04:58 JST
+  `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md` を追加し、
+  exact `ELAB-07` の set path を保ったまま、proper subset / padded /
+  duplicate / multi generated-request variants では `set_insertion` repair を
+  出さない Rust-only guard tests と内部 associated-request count guard を追加
+  した。tested rows は `suggested_repair` を持たない。
+  sample row count は 52 のまま。general set-insertion support、bundle
+  semantics support、OBL-025 proof / completion、canon ledger movement、
+  final repair ABI、conformance、G1 exit は主張していない。
 - 2026-07-04 04:14 JST
   `plan/102-g1-erow07-set-insertion-executable-payload-prototype.md` を追加し、
   exact `ELAB-07` に one top-level non-final `set_insertion`

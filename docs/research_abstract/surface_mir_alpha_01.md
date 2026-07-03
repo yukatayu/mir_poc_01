@@ -105,9 +105,10 @@ Actualized rows:
   the exact current fact pattern. The payload is one top-level item with
   `element_insert_count = 3`, no singleton `missing_failure` field reuse, and
   exact whole-gap coverage for `MissingWitness`, `RouteUnavailable`, and
-  `StaleMembership`. This remains a narrow prototype, not general
-  set-insertion support, bundle semantics, final repair ABI, OBL-025 proof, or
-  G1 exit.
+  `StaleMembership`. Focused Rust-only guards keep subset, padded, duplicate,
+  and multi-request variants from receiving the `set_insertion` repair. This
+  remains a narrow prototype, not general set-insertion support, bundle
+  semantics, final repair ABI, OBL-025 proof, or G1 exit.
 - `ELAB-08`: nested foreign place read generates an owner-directed read request.
 - `ELAB-09`: visible write generates MessageEnvelope, publish, and observe rows.
 - `ELAB-10`: underdeclared `VisibilityDenied` failure is rejected.

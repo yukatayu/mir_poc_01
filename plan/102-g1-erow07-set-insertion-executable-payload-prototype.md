@@ -38,6 +38,8 @@ conformance, canon movement, or G1 exit.
   `mirrorea_canon/theory/11-metatheory-ledger.md`
 - LAB design gate:
   `plan/101-g1-erow07-set-insertion-payload-model-design.md`
+- LAB negative guard hardening:
+  `plan/103-g1-erow07-set-insertion-negative-guard-hardening.md`
 - LAB edit-cardinality gate:
   `plan/100-g1-erow07-set-insertion-assumption-acceptance.md`
 - LAB executable preflight:
@@ -145,6 +147,12 @@ The implementation does not start by changing
 `erow_singleton_row_addition_suggested_repair` to accept
 `missing_failures.len() > 1`.
 
+After `plan/103`, the set path also requires one associated generated request
+for the LAB target reference. When a later request for the same target
+reference appears, earlier `set_insertion` repairs for that target reference
+are suppressed. The associated-request count is internal and skipped during
+serialization, so the LAB JSON shape is unchanged.
+
 ## Current executable status
 
 | Row | Current executable repair output |
@@ -156,6 +164,10 @@ The implementation does not start by changing
 | `ELAB-14` | one singleton `E-ROW-001` item |
 | `ELAB-15` | one singleton `E-ROW-001` item |
 | `ELAB-16` | one singleton `E-ROW-001` item |
+
+Focused Rust-only negative fixtures from `plan/103` also keep the set path from
+appearing for proper subset, padded declaration, duplicate declaration, and
+multi generated-request variants of the current `ELAB-07` shape.
 
 Sample row count is unchanged.
 
@@ -173,17 +185,23 @@ This package preserves:
 
 ## Remaining gaps
 
-The executable prototype does not yet add separate negative fixtures for every
-guard in `plan/101`, especially:
+`plan/103` adds Rust-only negative fixtures for:
 
-- proper one- or two-element subset rejection;
+- proper two-missing subset rejection;
 - padded declaration rejection;
-- duplicate insertion normalization / rejection;
-- multi-request and multi-target-row policy;
-- row creation / row splitting / row movement / retargeting rejection fixtures.
+- duplicate declaration rejection;
+- multi generated-request suppression for one target reference.
 
-Those are next hardening tasks before treating this as broader set-insertion
-evidence.
+Remaining gaps include:
+
+- final row identity: the current internal count is keyed by the LAB target
+  reference `locus + event`, not by a source-span or AST-row identity;
+- same-event distinct `when` rows under one locus;
+- true multi-target-row policy;
+- row creation / row splitting / row movement / retargeting rejection fixtures;
+- broader set-insertion support beyond the exact `ELAB-07` fact pattern.
+
+These gaps remain before treating this as broader set-insertion evidence.
 
 ## Relation to OBL-025
 
