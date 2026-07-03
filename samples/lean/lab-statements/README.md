@@ -11,4 +11,5 @@ Current draft families:
 - `obl001/`: THM-001 / OBL-001 assignment elaboration soundness shape.
 - `obl020/`: OBL-020 step well-formedness preservation shape.
 - `obl021/`: OBL-021 elaboration determinism shape.
+- `obl024/`: OBL-024 explanation soundness / diagnostic replay shape.
 - `obl025/`: OBL-025 explanation completeness / repair coverage shape.

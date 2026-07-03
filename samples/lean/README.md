@@ -10,6 +10,8 @@
 - `lab-statements/`
   - LAB-only Lean statement-shape drafts
   - compile-check only; no canon OBL status movement
+  - current OBL-024 draft includes abstract diagnostic projection and
+    trace-local replay vocabulary; this is not a final Diagnostic ABI
   - current OBL-025 draft includes abstract branch-local non-coverage
     vocabulary; this is not a final branch ID / JSON / repair ABI
 - `clean-near-end/`

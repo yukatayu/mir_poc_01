@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 07:00 JST
+最終更新: 2026-07-04 07:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -92,8 +92,19 @@ Current holding state:
 - `plan/81-g1-obl024-statement-shape-inventory.md` now inventories the
   statement shape for OBL-024 explanation soundness: emitted Diagnostic,
   reported rule instance / failed premise / bindings, and replay failure
-  exactly at that premise. It does not add a Lean file, prove OBL-024, freeze
-  diagnostic ABI, claim conformance, claim G1 exit, or edit canon.
+  exactly at that premise. `plan/109` now adds the LAB-only compile-check
+  statement draft; this inventory remains the pre-draft relation map. It does
+  not prove OBL-024, freeze diagnostic ABI, claim conformance, claim G1 exit,
+  or edit canon.
+- `plan/109-g1-obl024-lean-statement-draft.md` now records a LAB-only
+  repo-local OBL-024 Lean statement-shape draft at
+  `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
+  It compiles as a diagnostic projection / association-key / reported failed
+  premise / trace-local replay `Prop` with non-repair mixed diagnostic branch
+  boundary predicates. It does not define final Diagnostic ABI, JSON keys,
+  request IDs, branch IDs, association-key ABI, replay semantics, prove
+  OBL-024, move canon ledger status, claim root-cause uniqueness, claim
+  conformance, claim G1 exit, or edit canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,
@@ -284,7 +295,6 @@ next line.
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
 | `ELAB-04 mixed executable payload model` | `G1` reserve | only after a later package accepts a mixed wrapper or separate associated-diagnostics model for `ELAB-04` | keep no-repair until that model is explicit; no ranking or executable widening by default |
-| `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |

@@ -82,6 +82,12 @@ STATEMENT_DRAFTS = [
         explanation_path="samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
     ),
     StatementDraftSpec(
+        draft_id="obl024-diagnostic-soundness-statement-draft",
+        relative_dir="obl024",
+        filename="DiagnosticSoundnessStatementDraft.lean",
+        explanation_path="samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md",
+    ),
+    StatementDraftSpec(
         draft_id="obl025-repair-completeness-statement-draft",
         relative_dir="obl025",
         filename="RepairCompletenessStatementDraft.lean",

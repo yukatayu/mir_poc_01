@@ -3,7 +3,9 @@
 ## Purpose
 
 This file inventories the statement shape needed for OBL-024 explanation
-soundness before writing a Lean statement or changing diagnostic code.
+soundness before writing a Lean statement or changing diagnostic code. The
+later LAB-only Lean statement draft is now recorded in `plan/109`; this file
+remains the pre-draft relation inventory.
 
 This is LAB repository memory. It does not state OBL-024 formally, does not
 prove OBL-024, does not implement a final Diagnostic ABI, does not claim
@@ -92,9 +94,10 @@ named derivation path and the reported premise is the failing premise on that
 path. This inventory does not add global root-cause uniqueness, ranking, or
 minimality.
 
-This is not yet a Lean statement because the project still needs shared
+`plan/109` adds a compile-check-only Lean statement draft using abstract
 carriers for `JudgmentInput`, `Diagnostic`, `RuleInstance`, `Premise`,
-`Bindings`, and `Replay`.
+`Bindings`, and `Replay`. That draft is LAB evidence only and does not prove
+OBL-024 or settle final carriers.
 
 ## E-ROW instantiation target
 
@@ -186,8 +189,8 @@ Evidence classification:
    if executable carrier evidence is desired next.
 2. OBL-025 statement-shape inventory, still docs-only, to separate repair
    completeness from soundness.
-3. OBL-024 Lean statement draft only after a minimally stable abstract
-   vocabulary for diagnostic projection and replay has been agreed in LAB.
+3. OBL-024 Lean statement draft was added later as `plan/109` using abstract
+   diagnostic projection and replay vocabulary. It remains compile-check-only.
 
 ## Non-claims
 

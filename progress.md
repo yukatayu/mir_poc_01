@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 07:00 JST
+最終更新: 2026-07-04 07:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -125,9 +125,20 @@ semantic source authority.
   `plan/81-g1-obl024-statement-shape-inventory.md` inventories the abstract
   vocabulary needed to state explanation soundness: emitted Diagnostic,
   reported rule instance / failed premise / bindings, and replay failure
-  exactly at that premise. It treats E-ROW as the immediate G1 pressure case,
-  but does not add a Lean file, prove OBL-024, freeze diagnostic ABI, claim
-  conformance, or edit canon.
+  exactly at that premise. It treats E-ROW as the immediate G1 pressure case
+  and remains the pre-draft relation inventory; `plan/109` now adds the
+  compile-check-only Lean statement draft. This does not prove OBL-024, freeze
+  diagnostic ABI, claim conformance, or edit canon.
+- Current OBL-024 statement-draft note:
+  `plan/109-g1-obl024-lean-statement-draft.md` records a LAB-only
+  repo-local Lean statement-shape draft at
+  `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
+  It compiles as a diagnostic-soundness `Prop` over abstract diagnostic
+  projection, association-key, reported rule / premise / bindings,
+  trace-local replay, and non-repair mixed diagnostic branch predicates. It
+  does not move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
+  request ID / branch ID / association-key ABI / replay semantics, claim
+  root-cause uniqueness, claim conformance, or claim G1 exit.
 - Current OBL-025 statement-shape inventory note:
   `plan/82-g1-obl025-statement-shape-inventory.md` inventories the abstract
   vocabulary needed to state Line-1 explanation completeness: Line-1
@@ -663,7 +674,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, and OBL-021 statement-shape drafts now compile, but Surface elaboration soundness / WF preservation / elaboration determinism are not proved or ledger-moved | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile, but Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -685,7 +696,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-025 now has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / association-key / trace-local replay / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -694,8 +705,19 @@ Entries below are historical snapshots at each task close. Earlier
 snapshot above is the exact `ELAB-07` set payload, `plan/103` Rust-only
 negative guards, `plan/104` span-based internal association hardening,
 `plan/105` exact-locus guard hardening, `plan/106` child / bundle / partial
-exclusion fixtures, `ELAB-04` no-repair payload-model preflight, and OBL-025
-branch-local non-coverage refinement.
+exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
+branch-local non-coverage refinement, and OBL-024 diagnostic-soundness Lean
+statement draft.
+
+- 2026-07-04 07:22 JST
+  `plan/109-g1-obl024-lean-statement-draft.md` と
+  `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`
+  を追加し、diagnostic projection / reported rule / failed premise / bindings /
+  association key / trace-local replay / non-repair mixed diagnostic branch
+  boundary を compile-check-only `Prop` として置いた。OBL-024 proof /
+  completion、canon ledger movement、final Diagnostic ABI、request ID /
+  branch ID / association-key ABI、root-cause uniqueness、repair output
+  widening、conformance、G1 exit は主張しない。
 
 - 2026-07-04 07:00 JST
   `plan/108-g1-obl025-branch-local-noncoverage-refinement.md` を追加し、
