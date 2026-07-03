@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-03 22:37 JST
+最終更新: 2026-07-03 22:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -111,6 +111,12 @@ Current holding state:
   `lab_diagnostic_details` for E-ROW-001/E-ROW-002 classification and missing
   evidence, emits no `suggested_repair[]`, and does not freeze diagnostic ABI,
   prove OBL-024/025, claim conformance, claim G1 exit, or edit canon.
+- `plan/85-g1-erow-carrier-precondition-hardening.md` now records LAB-only
+  request and failure-row context inside `lab_diagnostic_details`. It exposes
+  generated request identity, target row kind, required/declared/missing
+  failures, and local premise for `ELAB-04/07/10`, emits no
+  `suggested_repair[]`, and does not freeze diagnostic/repair ABI, prove
+  OBL-024/025, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 
@@ -122,8 +128,7 @@ next line.
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
-| `E-ROW carrier precondition hardening` | `G1` front | optionally add non-final request/target/required/declared context needed before repair rows, while still omitting `suggested_repair[]` | no final diagnostic ABI freeze; no OBL-025 advancement claim |
-| `E-ROW repair-bearing prototype` | `G1` reserve | add `suggested_repair[]` only after carrier details expose target row, missing failure, local premise, and single-edit evidence, with tests rejecting placeholders | no final repair ABI or OBL-025 proof |
+| `E-ROW repair-bearing prototype` | `G1` reserve | add `suggested_repair[]` only if tests can reject placeholders and each item identifies target row, missing failure, local premise, and single-edit assumption | no final repair ABI or OBL-025 proof |
 | `OBL-025 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after repair edit vocabulary and single-edit predicate are stable enough | Lean compile-check only; no proof or ledger movement |
 | `OBL-024 Lean statement draft` | `G1` reserve | draft an abstract compile-checked statement only after replay/projection vocabulary is stable enough | Lean compile-check only; no proof or ledger movement |
 | `LAB claim-family drilldown` | `T0/G0` reserve | split selected `plan/70` rows into line-level `LAB:` citations when needed for a future G0 close decision | no canon L0/L1 change; no historical rewrite beyond focused wording cleanup |

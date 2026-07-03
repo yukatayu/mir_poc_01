@@ -46,7 +46,32 @@ pub struct SurfaceLabDiagnosticDetail {
     pub failed_premise: String,
     pub missing_evidence: Vec<String>,
     pub refs: Vec<String>,
+    pub request_context: SurfaceLabDiagnosticRequestContext,
+    pub failure_row_context: SurfaceLabDiagnosticFailureRowContext,
     pub lab_non_final: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticRequestContext {
+    pub request_id: String,
+    pub request_kind: String,
+    pub generated_from: String,
+    pub requester_locus: String,
+    pub owner_locus: String,
+    pub state_name: String,
+    pub key_expr: String,
+    pub field_name: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct SurfaceLabDiagnosticFailureRowContext {
+    pub target_kind: String,
+    pub target_locus: String,
+    pub event_name: String,
+    pub required_failures: Vec<String>,
+    pub declared_failures: Vec<String>,
+    pub missing_failures: Vec<String>,
+    pub local_premise: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -589,6 +614,8 @@ fn push_remote_request(
     let required_failures = required_failures(communication.visibility_failure_required);
     let declared_failures = when.failure_row.clone();
     let missing_failures = missing_failures(&required_failures, &declared_failures);
+    let detail_required_failures = required_failures.clone();
+    let detail_declared_failures = declared_failures.clone();
     let failure_row_complete = required_failure_set(communication.visibility_failure_required)
         .is_subset(&declared_failures.iter().cloned().collect::<BTreeSet<_>>());
     let owner_locus = state.owner_locus.clone();
@@ -671,7 +698,27 @@ fn push_remote_request(
     if !failure_row_complete {
         context
             .lab_diagnostic_details
-            .push(erow_lab_diagnostic_detail(missing_failures));
+            .push(erow_lab_diagnostic_detail(
+                SurfaceLabDiagnosticRequestContext {
+                    request_id: request_id.clone(),
+                    request_kind: request_kind.to_string(),
+                    generated_from: generated_from.to_string(),
+                    requester_locus: requester_locus.to_string(),
+                    owner_locus: owner_locus.clone(),
+                    state_name: state_name.clone(),
+                    key_expr: key_expr.clone(),
+                    field_name,
+                },
+                SurfaceLabDiagnosticFailureRowContext {
+                    target_kind: "when_fails_row".to_string(),
+                    target_locus: requester_locus.to_string(),
+                    event_name: when.event_name.clone(),
+                    required_failures: detail_required_failures,
+                    declared_failures: detail_declared_failures,
+                    missing_failures,
+                    local_premise: "generated_failures_subset_declared_fails".to_string(),
+                },
+            ));
         context.diagnostics.push(diagnostic(
             GENERATED_FAILURE_NOT_DECLARED,
             "generated remote requests must be contained in a when failure row before admission",
@@ -1040,7 +1087,11 @@ fn missing_failures(required_failures: &[String], declared_failures: &[String]) 
         .collect()
 }
 
-fn erow_lab_diagnostic_detail(missing_evidence: Vec<String>) -> SurfaceLabDiagnosticDetail {
+fn erow_lab_diagnostic_detail(
+    request_context: SurfaceLabDiagnosticRequestContext,
+    failure_row_context: SurfaceLabDiagnosticFailureRowContext,
+) -> SurfaceLabDiagnosticDetail {
+    let missing_evidence = failure_row_context.missing_failures.clone();
     let canon_id = if missing_evidence.len() == 1 && missing_evidence[0] == VISIBILITY_FAILURE {
         E_ROW_002
     } else {
@@ -1058,6 +1109,8 @@ fn erow_lab_diagnostic_detail(missing_evidence: Vec<String>) -> SurfaceLabDiagno
             format!("mirrorea_canon/spec/07-diagnostics-format.md#{canon_id}"),
             "mirrorea_canon/theory/10-diagnostics.md#OBL-024".to_string(),
         ],
+        request_context,
+        failure_row_context,
         lab_non_final: true,
     }
 }

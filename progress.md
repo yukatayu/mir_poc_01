@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-03 22:37 JST
+最終更新: 2026-07-03 22:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -150,6 +150,13 @@ semantic source authority.
   severity / rule / premise / missing-evidence refs, emits no
   `suggested_repair[]`, and does not freeze diagnostic ABI, prove OBL-024/025,
   claim conformance, or claim G1 exit.
+- Current E-ROW carrier precondition hardening note:
+  `plan/85-g1-erow-carrier-precondition-hardening.md` records the LAB-only
+  addition of non-final `request_context` and `failure_row_context` inside
+  `lab_diagnostic_details`. It exposes generated-request identity and the local
+  row-containment precondition for `ELAB-04/07/10`, emits no
+  `suggested_repair[]`, and does not freeze diagnostic/repair ABI, prove
+  OBL-024/025, claim conformance, or claim G1 exit.
 - Current planning note: consultation-derived strategy has been captured as
   non-normative repository memory in `plan/69`. It does not promote a new
   package, change `specs/`, or decide whether work should move to a separate
@@ -159,13 +166,14 @@ semantic source authority.
   and 49 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
-- Next gap: the carrier-only LAB E-ROW diagnostic detail prototype is now
-  implemented. The next safe self-driven package should either harden repair
-  preconditions without emitting repair rows, or add repair-bearing rows only
-  after target-row / missing-failure / local-premise / single-edit evidence can
-  reject placeholders. This remains before any later user-spec-required reopen
-  for final runtime/transport, final source patch ABI, final viewer/telemetry
-  ABI, or broader public grammar.
+- Next gap: the carrier-only LAB E-ROW diagnostic detail prototype and its
+  precondition context are now implemented. The next safe self-driven package
+  should add repair-bearing rows only if tests can reject placeholder
+  `suggested_repair[]` items and every repair item identifies target row,
+  missing failure, local premise, and single-edit assumption; otherwise stay on
+  OBL-024/025 statement-shape refinement. This remains before any later
+  user-spec-required reopen for final runtime/transport, final source patch
+  ABI, final viewer/telemetry ABI, or broader public grammar.
 - Current truthful summary:
   Product Alpha-1 and the operational product suite remain bounded alpha floors.
   Full System V1 remains closed through bounded release-check / final audit.
@@ -268,7 +276,8 @@ Current evidence:
 - `crates/mir-semantics::surface_to_core_elaboration` now also emits LAB-only
   `lab_diagnostic_details` for underdeclared generated failure rows, preserving
   legacy `generated_failure_not_declared` diagnostics while exposing
-  E-ROW-001/E-ROW-002 candidate canon IDs and missing generated failures.
+  E-ROW-001/E-ROW-002 candidate canon IDs, missing generated failures, and
+  non-final request / failure-row context.
 - `crates/mir-semantics::surface_to_core_elaboration` also generates
   MessageEnvelope, visible publish/observe, and observer-safe redaction /
   retention rows for P-SURF-04.
@@ -461,7 +470,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -475,6 +484,13 @@ Research-discovery items:
 
 ## recent log
 
+- 2026-07-03 22:50 JST
+  `lab_diagnostic_details` に LAB-only `request_context` と
+  `failure_row_context` を追加し、`ELAB-04` / `ELAB-07` / `ELAB-10` の
+  expected JSON と Rust/Python tests に同期した。これは repair-bearing 前の
+  row-containment precondition carrier hardening であり、`suggested_repair[]`、
+  diagnostic/repair ABI freeze、OBL-024/025 discharge、conformance、G1 exit は
+  主張していない。
 - 2026-07-03 22:37 JST
   `lab_diagnostic_details` を Surface-to-Core elaboration report / example
   JSON / Surface helper projection に追加し、`ELAB-04` mixed E-ROW omission と

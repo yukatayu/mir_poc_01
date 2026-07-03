@@ -278,6 +278,36 @@ class SurfaceMirSamplesTests(unittest.TestCase):
                         "mirrorea_canon/spec/07-diagnostics-format.md#E-ROW-001",
                         "mirrorea_canon/theory/10-diagnostics.md#OBL-024",
                     ],
+                    "request_context": {
+                        "request_id": "req-0001",
+                        "request_kind": "read",
+                        "generated_from": "cross_locus_read_expression",
+                        "requester_locus": "role:BrowserClient",
+                        "owner_locus": "S",
+                        "state_name": "player",
+                        "key_expr": "self",
+                        "field_name": "hp",
+                    },
+                    "failure_row_context": {
+                        "target_kind": "when_fails_row",
+                        "target_locus": "role:BrowserClient",
+                        "event_name": "render",
+                        "required_failures": [
+                            "MissingCapability",
+                            "MissingWitness",
+                            "RouteUnavailable",
+                            "StaleMembership",
+                            "VisibilityDenied",
+                        ],
+                        "declared_failures": ["MissingCapability"],
+                        "missing_failures": [
+                            "MissingWitness",
+                            "RouteUnavailable",
+                            "StaleMembership",
+                            "VisibilityDenied",
+                        ],
+                        "local_premise": "generated_failures_subset_declared_fails",
+                    },
                     "lab_non_final": True,
                 }
             ],
@@ -328,6 +358,40 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["actual"]["lab_diagnostic_details"][0]["missing_evidence"],
             ["MissingWitness", "RouteUnavailable", "StaleMembership"],
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["request_context"],
+            {
+                "request_id": "req-0001",
+                "request_kind": "write",
+                "generated_from": "nested_place_block",
+                "requester_locus": "role:BrowserClient",
+                "owner_locus": "S",
+                "state_name": "player",
+                "key_expr": "target",
+                "field_name": "hp",
+            },
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["failure_row_context"],
+            {
+                "target_kind": "when_fails_row",
+                "target_locus": "role:BrowserClient",
+                "event_name": "attack",
+                "required_failures": [
+                    "MissingCapability",
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership",
+                ],
+                "declared_failures": ["MissingCapability"],
+                "missing_failures": [
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership",
+                ],
+                "local_premise": "generated_failures_subset_declared_fails",
+            },
         )
 
     def test_elaboration_nested_place_read_keeps_owner_directed_shape(self) -> None:
@@ -400,6 +464,42 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["actual"]["lab_diagnostic_details"][0]["missing_evidence"],
             ["VisibilityDenied"],
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["request_context"],
+            {
+                "request_id": "req-0001",
+                "request_kind": "read",
+                "generated_from": "cross_locus_read_expression",
+                "requester_locus": "role:BrowserClient",
+                "owner_locus": "S",
+                "state_name": "player",
+                "key_expr": "self",
+                "field_name": "hp",
+            },
+        )
+        self.assertEqual(
+            payload["actual"]["lab_diagnostic_details"][0]["failure_row_context"],
+            {
+                "target_kind": "when_fails_row",
+                "target_locus": "role:BrowserClient",
+                "event_name": "render",
+                "required_failures": [
+                    "MissingCapability",
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership",
+                    "VisibilityDenied",
+                ],
+                "declared_failures": [
+                    "MissingCapability",
+                    "MissingWitness",
+                    "RouteUnavailable",
+                    "StaleMembership",
+                ],
+                "missing_failures": ["VisibilityDenied"],
+                "local_premise": "generated_failures_subset_declared_fails",
+            },
         )
 
     def test_role_admission_join_generates_grant_and_witness(self) -> None:

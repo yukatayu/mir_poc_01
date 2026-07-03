@@ -441,6 +441,44 @@ BrowserClient[self] {
             "VisibilityDenied"
         ])
     );
+    assert_eq!(
+        details[0]["request_context"],
+        serde_json::json!({
+            "request_id": "req-0001",
+            "request_kind": "read",
+            "generated_from": "cross_locus_read_expression",
+            "requester_locus": "role:BrowserClient",
+            "owner_locus": "S",
+            "state_name": "player",
+            "key_expr": "self",
+            "field_name": "hp"
+        })
+    );
+    assert_eq!(
+        details[0]["failure_row_context"],
+        serde_json::json!({
+            "target_kind": "when_fails_row",
+            "target_locus": "role:BrowserClient",
+            "event_name": "render",
+            "required_failures": [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership",
+                "VisibilityDenied"
+            ],
+            "declared_failures": [
+                "MissingCapability"
+            ],
+            "missing_failures": [
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership",
+                "VisibilityDenied"
+            ],
+            "local_premise": "generated_failures_subset_declared_fails"
+        })
+    );
     assert!(details[0].get("suggested_repair").is_none());
 }
 
@@ -497,6 +535,42 @@ BrowserClient[self] {
         details[0]["missing_evidence"],
         serde_json::json!(["MissingWitness", "RouteUnavailable", "StaleMembership"])
     );
+    assert_eq!(
+        details[0]["request_context"],
+        serde_json::json!({
+            "request_id": "req-0001",
+            "request_kind": "write",
+            "generated_from": "nested_place_block",
+            "requester_locus": "role:BrowserClient",
+            "owner_locus": "S",
+            "state_name": "player",
+            "key_expr": "target",
+            "field_name": "hp"
+        })
+    );
+    assert_eq!(
+        details[0]["failure_row_context"],
+        serde_json::json!({
+            "target_kind": "when_fails_row",
+            "target_locus": "role:BrowserClient",
+            "event_name": "attack",
+            "required_failures": [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership"
+            ],
+            "declared_failures": [
+                "MissingCapability"
+            ],
+            "missing_failures": [
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership"
+            ],
+            "local_premise": "generated_failures_subset_declared_fails"
+        })
+    );
     assert!(details[0].get("suggested_repair").is_none());
 }
 
@@ -544,6 +618,44 @@ BrowserClient[self] {
     assert_eq!(
         details[0]["missing_evidence"],
         serde_json::json!(["VisibilityDenied"])
+    );
+    assert_eq!(
+        details[0]["request_context"],
+        serde_json::json!({
+            "request_id": "req-0001",
+            "request_kind": "read",
+            "generated_from": "cross_locus_read_expression",
+            "requester_locus": "role:BrowserClient",
+            "owner_locus": "S",
+            "state_name": "player",
+            "key_expr": "self",
+            "field_name": "hp"
+        })
+    );
+    assert_eq!(
+        details[0]["failure_row_context"],
+        serde_json::json!({
+            "target_kind": "when_fails_row",
+            "target_locus": "role:BrowserClient",
+            "event_name": "render",
+            "required_failures": [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership",
+                "VisibilityDenied"
+            ],
+            "declared_failures": [
+                "MissingCapability",
+                "MissingWitness",
+                "RouteUnavailable",
+                "StaleMembership"
+            ],
+            "missing_failures": [
+                "VisibilityDenied"
+            ],
+            "local_premise": "generated_failures_subset_declared_fails"
+        })
     );
     assert!(details[0].get("suggested_repair").is_none());
 }
