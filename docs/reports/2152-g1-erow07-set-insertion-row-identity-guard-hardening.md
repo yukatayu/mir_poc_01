@@ -280,7 +280,12 @@ diff check, and changed-file secret-pattern scans.
 
 ## Commit / push status
 
-Pending at report write.
+Content commit pushed:
+
+- `491f2f53` — `Harden ELAB-07 row association`
+
+Bookkeeping commit for this final status section is pending at this report
+revision.
 
 ## Sub-agent session close status
 
