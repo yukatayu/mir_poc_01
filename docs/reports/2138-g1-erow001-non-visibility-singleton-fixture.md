@@ -123,6 +123,11 @@ python3 scripts/check_source_hierarchy.py
 python3 -m unittest scripts.tests.test_validate_docs
 git diff --check
 rg -n 'future executable non-visibility singleton|Which non-visibility base failure should be the first singleton fixture|proves that|Result pending|still running' plan/88-g1-erow-repair-shape-inventory.md docs/reports/2138-g1-erow001-non-visibility-singleton-fixture.md plan/90-source-traceability.md
+git diff --cached --check
+git commit --no-gpg-sign -m "Add G1 E-ROW non-visibility singleton fixture"
+git push
+git rev-parse HEAD origin/main
+git log -1 --oneline
 ```
 
 ## Evidence / outputs / test results
@@ -242,7 +247,15 @@ Follow-up applied:
 
 ## Commit / push status
 
-Pending at initial report write.
+Primary implementation/report commit:
+
+- `663a72d63cf93fbc360821b0bb1c2658e4d076bb`
+  (`Add G1 E-ROW non-visibility singleton fixture`)
+- Pushed to `origin/main`.
+- `git rev-parse HEAD origin/main` returned the same SHA after push.
+
+This status section update is being committed and pushed separately as a
+status-only follow-up commit.
 
 ## Sub-agent session close status
 
