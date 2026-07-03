@@ -187,6 +187,13 @@ python3 scripts/validate_docs.py
 python3 -m unittest scripts.tests.test_validate_docs
 git diff --check
 cargo fmt --check
+git diff --cached --stat
+git diff --cached --check
+git status --short --branch
+git commit --no-gpg-sign -m "Record ELAB-07 set-insertion executable preflight"
+git push
+git status --short --branch
+git rev-parse HEAD origin/main
 ```
 
 `python3 scripts/validate_docs.py` initially failed because this report used
@@ -325,7 +332,16 @@ No intended validation skipped so far.
 
 ## Commit / push status
 
-Pending.
+Content commit:
+
+- `118165a59f78847d579d4d760fe9d5fd89e55918`
+- Pushed to `origin/main`.
+- Post-push check showed `HEAD` and `origin/main` equal at this commit.
+
+This status section is the bookkeeping update that follows the content commit.
+The bookkeeping commit hash cannot be embedded in itself without another
+self-referential commit; post-push verification is performed immediately after
+the bookkeeping commit.
 
 ## Sub-agent session close status
 
