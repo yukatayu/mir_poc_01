@@ -113,6 +113,24 @@ python3 -m unittest scripts.tests.test_validate_docs
 python3 scripts/check_source_hierarchy.py
 git diff --check
 bash -lc 'ENDPOINT_SEGMENT=webhooks; ENDPOINT_PATTERN="discord[.]com/api|api/${ENDPOINT_SEGMENT}"; mapfile -t files < <(git ls-files --modified --others --exclude-standard); if ((${#files[@]} == 0)); then printf "no changed files\n"; exit 0; fi; if rg -n --pcre2 "$ENDPOINT_PATTERN" "${files[@]}"; then exit 2; else rc=$?; if [ "$rc" -eq 1 ]; then printf "no endpoint matches in changed files\n"; exit 0; fi; exit "$rc"; fi'
+git add README.md Documentation.md progress.md tasks.md plan/00-index.md plan/90-source-traceability.md plan/109-g1-obl024-lean-statement-draft.md plan/110-g1-obl024-executable-projection-carrier.md plan/111-g1-obl024-projection-rust-fixture-guards.md plan/112-g1-obl024-replay-vocabulary-preflight.md docs/reports/2160-g1-obl024-replay-vocabulary-preflight.md
+git diff --cached --stat
+git commit --no-gpg-sign -m "Add OBL-024 replay vocabulary preflight"
+git push
+git rev-parse --short HEAD
+git rev-parse --short origin/main
+git status --short
+python3 scripts/validate_docs.py
+git diff --check
+bash -lc 'ENDPOINT_SEGMENT=webhooks; ENDPOINT_PATTERN="discord[.]com/api|api/${ENDPOINT_SEGMENT}"; mapfile -t files < <(git ls-files --modified --others --exclude-standard); if ((${#files[@]} == 0)); then printf "no changed files\n"; exit 0; fi; if rg -n --pcre2 "$ENDPOINT_PATTERN" "${files[@]}"; then exit 2; else rc=$?; if [ "$rc" -eq 1 ]; then printf "no endpoint matches in changed files\n"; exit 0; fi; exit "$rc"; fi'
+git status --short
+git add docs/reports/2160-g1-obl024-replay-vocabulary-preflight.md
+git diff --cached --stat
+git commit --no-gpg-sign -m "Record OBL-024 replay vocabulary status"
+git push
+git rev-parse --short HEAD
+git rev-parse --short origin/main
+git status --short
 ```
 
 Final docs/source/leak validation passed.
@@ -213,7 +231,9 @@ this report. Reviewer found no prohibited overclaims; `samples_progress.md
 
 ## Commit / push status
 
-Pending. Package changes are not committed yet at this report draft stage.
+Package body committed and pushed as
+`e134c5b5` (`Add OBL-024 replay vocabulary preflight`). This report status
+edit is the follow-up status commit scope for Package 22.
 
 ## Sub-agent session close status
 
