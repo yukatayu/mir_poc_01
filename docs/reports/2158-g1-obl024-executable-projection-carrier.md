@@ -267,7 +267,14 @@ from the skipped span-based implementation key.
 
 ## Commit / push status
 
-Pending. Package changes are not committed yet at this report draft stage.
+Implemented, committed, and pushed.
+
+- Package commit:
+  `80816365e5f4e5a70035cf75ae167bd9b486e5fc`
+  (`Add OBL-024 executable projection carrier`)
+- Push status: `main` was pushed to `origin/main`, and `HEAD` matched
+  `origin/main` immediately after the package commit.
+- This commit-status note is recorded in the follow-up report-status commit.
 
 ## Sub-agent session close status
 
