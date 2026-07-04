@@ -210,8 +210,16 @@ this docs-only planning package.
 
 ## Commit / push status
 
-Pending at report closeout update; final commit hash and push status will be
-recorded after commit.
+Primary package commit pushed:
+
+- `b02820d1284e9da119703930e06fc82a9a804c52`
+  (`Add G1 minimal vertical slice map`)
+
+After push, `HEAD` and `origin/main` both resolved to
+`b02820d1284e9da119703930e06fc82a9a804c52`.
+
+This report-status update will be committed and pushed separately as a
+closeout-only follow-up.
 
 ## Sub-agent session close status
 
