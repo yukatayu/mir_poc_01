@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import surface_mir_samples as runner  # noqa: E402
+
 SENSITIVE_DEVTOOLS_KEYS = {
     "activation_cut",
     "auth_evidence_ref",
@@ -133,6 +138,26 @@ def _assert_obl024_projection_matches_detail(detail: dict) -> None:
 
 
 class SurfaceMirSamplesTests(unittest.TestCase):
+    def test_repo_cli_arg_uses_repo_relative_paths_for_sample_files(self) -> None:
+        source = (
+            runner.SYNTAX_ROOT
+            / "surf-01-brace-place-positive"
+            / "main"
+            / "src"
+            / "brace-place-positive.mir"
+        )
+
+        self.assertEqual(
+            runner.repo_cli_arg(source),
+            "samples/full-system-v1-surface/syntax/surf-01-brace-place-positive/main/src/brace-place-positive.mir",
+        )
+
+    def test_repo_cli_arg_keeps_external_paths_absolute(self) -> None:
+        self.assertEqual(
+            runner.repo_cli_arg(Path("/tmp/mirrorea-external-surface-input.mir")),
+            "/tmp/mirrorea-external-surface-input.mir",
+        )
+
     def test_placeholder_repair_detector_rejects_marker_substrings(self) -> None:
         paths = _placeholder_repair_paths(
             {

@@ -12,6 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RELEASE_CHECK_SCOPE = "p_surf_99_final_surface_alpha_audit"
+SURFACE_SAMPLE_COUNT_FOR_P_SURF_99 = 52
 
 
 @dataclass(frozen=True)
@@ -277,7 +278,7 @@ def semantic_errors_for_result(command: PlannedCommand, payload: dict[str, Any] 
     if command.name == "helper:surface-samples":
         if payload.get("failed"):
             errors.append("surface samples helper reported failed rows")
-        if payload.get("sample_count") != 46:
+        if payload.get("sample_count") != SURFACE_SAMPLE_COUNT_FOR_P_SURF_99:
             errors.append("surface samples helper sample_count mismatch for P-SURF-99")
         if payload.get("workflow_ready") is not False:
             errors.append("P-SURF-99 helper must not claim workflow_ready")

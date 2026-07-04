@@ -174,6 +174,9 @@
 - Surface Mir helper family has a P-SURF-01 parser floor, P-SURF-02 indexed-state semantic checker floor, P-SURF-03 elaboration evidence floor, P-SURF-04 generated communication evidence floor, P-SURF-05 role admission evidence floor, P-SURF-06 source patch hot-plug evidence floor, P-SURF-07 source operational evidence floor, P-SURF-08 static devtools diagnostics evidence floor, and P-SURF-99 final audit closeout
   - `python3 scripts/surface_mir_samples.py matrix --format json`
   - `python3 scripts/surface_mir_samples.py check-all --format json`
+  - repo-owned Surface source inputs are passed to nested Cargo examples and
+    `mirrorea-alpha patch-source` as repo-relative `samples/...` argv so
+    transient helper runs do not depend on the host checkout path
   - `python3 scripts/surface_mir_authoring_check.py check-all --format json`
   - `python3 scripts/surface_mir_release_check.py --format json plan --out /tmp/mirrorea-surface-release`
   - `python3 scripts/surface_mir_release_check.py --format json check-all --out /tmp/mirrorea-surface-release`

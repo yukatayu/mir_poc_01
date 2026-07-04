@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:06 JST
+最終更新: 2026-07-04 14:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -802,7 +802,18 @@ hardening, current-L2 closeout `lean_roots` path portability hardening,
 `samples_progress.md` top timestamp freshness guard extension, and operational
 product helper path portability hardening, plus installed-binary helper path
 portability hardening, plus textual Mir helper raw payload path portability,
-and Full System V1 helper output path audit.
+Full System V1 helper output path audit, and Surface helper subprocess argv path
+portability hardening.
+
+- 2026-07-04 14:17 JST
+  `scripts/surface_mir_samples.py` の nested Cargo examples /
+  `mirrorea-alpha patch-source` input argv を repo-owned source について
+  repo-relative `samples/...` に変更した。Regression tests cover repo-owned
+  sample paths and external absolute fallback. `surface_mir_samples.py`
+  check-all は 52/52 passed / repo-root absolute match 0、Surface release
+  check は 18 commands / failed 0 / ready true で通過した。P-SURF-99
+  release-check の sample_count gate は current matrix に合わせて 52 へ更新。
+  sample status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 14:06 JST
   `scripts/full_system_v1_samples.py check-all --format json` を
@@ -1395,7 +1406,9 @@ and Full System V1 helper output path audit.
 - 2026-06-25 17:12 JST
   broad build/execution audit と clippy hardening を実施し、`cargo fmt --check`、`cargo check --workspace --all-targets`、`cargo build --workspace --all-targets`、`cargo test --workspace --all-targets --no-fail-fast`、`cargo clippy --workspace --all-targets -- -D warnings`、`python3 -m unittest discover -s scripts/tests`、主要 sample / release check / `mirrorea-alpha` demo 起動確認を通した。Lean stub artifact pipeline は `/tmp` 出力で通ったが、`lean` / `lake` / `elan` は PATH 不在のため compiler mechanization check は未実行。
 - 2026-05-24 20:42 JST
-  `P-SURF-99` で final Surface alpha audit を close し、Surface release check、Surface helper / authoring check、Product Alpha release anchor、operational product helper、minimal alpha-1 pattern verifier、docs validators、`cargo fmt --check`、`git diff --check` を再実行した。Surface line は 46 helper rows / 47 `.mir` source files の bounded alpha evidence として閉じ、final runtime/transport、final source patch ABI、final devtools viewer/telemetry ABI、public grammar/API は later gate のまま。
+  `P-SURF-99` で final Surface alpha audit を close し、Surface release check、Surface helper / authoring check、Product Alpha release anchor、operational product helper、minimal alpha-1 pattern verifier、docs validators、`cargo fmt --check`、`git diff --check` を再実行した。Surface line は then-current 46 helper rows / 47 `.mir` source files の bounded alpha evidence として閉じ、final runtime/transport、final source patch ABI、final devtools viewer/telemetry ABI、public grammar/API は later gate のまま。
+  その後の G1 addenda により current helper count は 52 rows / 53 `.mir`
+  source files へ進んでおり、current snapshot ではこちらを用いる。
 - 2026-05-24 20:13 JST
   `P-SURF-08` で static devtools diagnostics evidence floor を actualize し、`samples/full-system-v1-surface/devtools/`、`DEV-01..02`、`scripts/surface_mir_samples.py check-all` を同期した。panel は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans を持つが、final viewer / telemetry ABI や runtime devtools dispatch ではない。then-promoted package は `P-SURF-99 final surface alpha audit`。
 - 2026-05-24 19:58 JST

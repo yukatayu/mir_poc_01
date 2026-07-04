@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 14:06 JST
+最終更新: 2026-07-04 14:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -107,8 +107,14 @@ Current holding state:
   `scripts/full_system_v1_samples.py check-all --format json`; it passed 41
   rows with repo-root absolute match 0, so no code fix is needed there for this
   path-portability line.
-- Remaining high-priority source-first helper portability candidate:
-  `scripts/surface_mir_samples.py` Surface raw payload path fields.
+- Surface helper subprocess argv now preserves portability for repo-owned
+  source inputs: nested Cargo examples and `mirrorea-alpha patch-source` receive
+  repo-relative `samples/...` paths. Public helper JSON was already repo-root
+  clean; the P-SURF-99 release-check sample_count gate was updated to the
+  current 52-row matrix.
+- Remaining lower-priority helper portability candidates are audit-only unless
+  a concrete repo-root leak is reproduced: practical alpha helper families and
+  older computational helper surfaces.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate

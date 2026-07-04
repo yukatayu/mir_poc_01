@@ -55,6 +55,13 @@ VALIDATION_FLOOR = [
 ]
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _load_matrix(matrix_path: Path) -> dict[str, Any]:
     return json.loads(matrix_path.read_text(encoding="utf-8"))
 
@@ -263,7 +270,7 @@ def _parse_source(path: Path) -> dict[str, Any]:
             "--example",
             "surface_mir_alpha_parse",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],
@@ -294,7 +301,7 @@ def _check_indexed_state_source(path: Path) -> dict[str, Any]:
             "--example",
             "surface_indexed_state_check",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],
@@ -325,7 +332,7 @@ def _elaborate_source(path: Path) -> dict[str, Any]:
             "--example",
             "surface_to_core_elaborate",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],
@@ -356,7 +363,7 @@ def _check_role_admission_source(path: Path) -> dict[str, Any]:
             "--example",
             "surface_role_admission_check",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],
@@ -387,7 +394,7 @@ def _patch_source(path: Path) -> dict[str, Any]:
             "--",
             "patch-source",
             "session#surface-sample",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],

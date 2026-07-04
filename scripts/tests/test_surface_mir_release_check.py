@@ -11,6 +11,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import surface_mir_release_check as runner  # noqa: E402
+import surface_mir_samples  # noqa: E402
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -43,13 +44,19 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
             "p_surf_99_final_surface_alpha_audit",
         )
 
+    def test_p_surf_99_sample_count_gate_matches_current_matrix(self) -> None:
+        self.assertEqual(
+            runner.SURFACE_SAMPLE_COUNT_FOR_P_SURF_99,
+            surface_mir_samples.matrix()["sample_count"],
+        )
+
     def test_helper_semantic_check_keeps_devtools_floor_non_workflow_ready(self) -> None:
         command = runner.PlannedCommand(
             name="helper:surface-samples",
             argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
         )
         payload = {
-            "sample_count": 46,
+            "sample_count": runner.SURFACE_SAMPLE_COUNT_FOR_P_SURF_99,
             "failed": [],
             "workflow_ready": False,
             "results": [
@@ -118,7 +125,7 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
             argv=["python3", "scripts/surface_mir_samples.py", "check-all", "--format", "json"],
         )
         payload = {
-            "sample_count": 46,
+            "sample_count": runner.SURFACE_SAMPLE_COUNT_FOR_P_SURF_99,
             "failed": [],
             "workflow_ready": False,
             "results": [
