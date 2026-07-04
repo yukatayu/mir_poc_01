@@ -53,6 +53,82 @@ PLANNED_ONLY_SAMPLE_IDS: list[str] = []
 
 
 class MirComputationalSamplesTests(unittest.TestCase):
+    def test_repo_cli_arg_uses_repo_relative_paths_for_sample_roots(self) -> None:
+        sample_root = (
+            mir_computational_samples.SAMPLE_ROOT
+            / "host-io-internal-transform"
+            / "positive"
+        )
+
+        self.assertEqual(
+            mir_computational_samples.repo_cli_arg(sample_root),
+            "samples/product-alpha1/computational/host-io-internal-transform/positive",
+        )
+
+    def test_repo_cli_arg_keeps_external_paths_absolute(self) -> None:
+        self.assertEqual(
+            mir_computational_samples.repo_cli_arg(
+                Path("/tmp/mirrorea-computational-external")
+            ),
+            "/tmp/mirrorea-computational-external",
+        )
+
+    def test_product_alpha_invocations_use_repo_relative_sample_roots(self) -> None:
+        sample_root = mir_computational_samples.SAMPLE_ROOT / "add-one-pure-mir"
+        captured: list[list[str]] = []
+
+        def fake_run(argv: list[str], env: dict[str, str]) -> dict[str, object]:
+            captured.append(argv)
+            return self._fake_run_local_payload("add_one", 41, 42)
+
+        with mock.patch.object(
+            mir_computational_samples,
+            "_run_json_command",
+            side_effect=fake_run,
+        ):
+            mir_computational_samples._run_product_alpha1_local_session(sample_root)
+
+        self.assertIn(
+            "samples/product-alpha1/computational/add-one-pure-mir",
+            captured[0],
+        )
+        self.assertFalse(
+            any(
+                arg.startswith(f"{mir_computational_samples.REPO_ROOT}/")
+                for arg in captured[0]
+            )
+        )
+
+    def test_product_alpha_check_uses_repo_relative_sample_roots(self) -> None:
+        sample_root = (
+            mir_computational_samples.SAMPLE_ROOT
+            / "host-io-internal-transform"
+            / "negative-undeclared-effect"
+        )
+        captured: list[list[str]] = []
+
+        def fake_check(argv: list[str], env: dict[str, str]) -> dict[str, object]:
+            captured.append(argv)
+            return self._fake_check_rejection_payload("host_output.effect_ref")
+
+        with mock.patch.object(
+            mir_computational_samples,
+            "_run_json_command_allow_error",
+            side_effect=fake_check,
+        ):
+            mir_computational_samples._run_product_alpha1_check(sample_root)
+
+        self.assertIn(
+            "samples/product-alpha1/computational/host-io-internal-transform/negative-undeclared-effect",
+            captured[0],
+        )
+        self.assertFalse(
+            any(
+                arg.startswith(f"{mir_computational_samples.REPO_ROOT}/")
+                for arg in captured[0]
+            )
+        )
+
     def _fake_run_local_payload(
         self, function_id: str, input_value: int, output_value: int
     ) -> dict[str, object]:

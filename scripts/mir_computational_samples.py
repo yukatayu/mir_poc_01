@@ -40,6 +40,13 @@ VALIDATION_FLOOR = [
 ]
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _load_matrix_file() -> dict[str, Any]:
     return json.loads(MATRIX_PATH.read_text(encoding="utf-8"))
 
@@ -267,12 +274,16 @@ def _run_product_alpha1_local_session(sample_root: Path) -> dict[str, Any]:
     env = os.environ.copy()
     with tempfile.TemporaryDirectory(prefix="mirrorea-comp-02-session-") as session_dir:
         env["MIRROREA_ALPHA_SESSION_DIR"] = session_dir
-        return _run_json_command(_cargo_alpha_args("run-local", str(sample_root)), env)
+        return _run_json_command(
+            _cargo_alpha_args("run-local", repo_cli_arg(sample_root)), env
+        )
 
 
 def _run_product_alpha1_check(sample_root: Path) -> dict[str, Any]:
     env = os.environ.copy()
-    return _run_json_command_allow_error(_cargo_alpha_args("check", str(sample_root)), env)
+    return _run_json_command_allow_error(
+        _cargo_alpha_args("check", repo_cli_arg(sample_root)), env
+    )
 
 
 def _require(condition: bool, detail: str) -> None:

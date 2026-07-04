@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:17 JST
+最終更新: 2026-07-04 14:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -803,7 +803,18 @@ hardening, current-L2 closeout `lean_roots` path portability hardening,
 product helper path portability hardening, plus installed-binary helper path
 portability hardening, plus textual Mir helper raw payload path portability,
 Full System V1 helper output path audit, and Surface helper subprocess argv path
+portability hardening, plus Mir computational helper subprocess argv path
 portability hardening.
+
+- 2026-07-04 14:26 JST
+  `scripts/mir_computational_samples.py` の nested
+  `mirrorea-alpha run-local` / `check` sample-root argv を repo-owned
+  computational roots について repo-relative `samples/...` に変更した。
+  Regression tests cover repo-owned sample roots, external absolute fallback,
+  and both product-alpha subprocess invocation paths. Unit 17 tests and real
+  `mir_computational_samples.py check-all` passed with 15/15 rows and
+  repo-root absolute match 0。sample status、workflow status、semantics、ABI、
+  canon claim は変更していない。
 
 - 2026-07-04 14:17 JST
   `scripts/surface_mir_samples.py` の nested Cargo examples /

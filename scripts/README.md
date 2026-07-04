@@ -116,6 +116,10 @@
   - `python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-positive --format json`
   - `python3 scripts/mir_computational_samples.py run comp-04-host-io-internal-transform-negative-undeclared-effect --format json`
   - this helper now executes the `P-COMP-02` bounded computational row under `samples/product-alpha1/computational/add-one-pure-mir/`, executes the `P-COMP-03` first-floor rows through helper package contracts, and executes the `P-COMP-04` direct host read/write boundary row plus three expected `check` rejections
+  - repo-owned computational sample roots are passed to nested
+    `mirrorea-alpha run-local` / `check` commands as repo-relative
+    `samples/...` argv so transient helper runs do not depend on the host
+    checkout path
   - it validates matrix/root consistency, checks `host_input_received -> mir_compute_step -> host_output_emitted` for the direct runtime rows, classifies helper rows as `accepted` or `runtime_rejection`, and matches `check_rejection` rows by diagnostic code and detail
   - it does not claim final textual grammar, broad first-floor completion, or backend realization
   - `python3 scripts/posegraph_samples.py matrix --format json`
