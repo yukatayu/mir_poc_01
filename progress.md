@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:00 JST
+最終更新: 2026-07-04 14:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -801,7 +801,17 @@ hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` source-hierarchy structural-check responsibility refresh,
 `samples_progress.md` top timestamp freshness guard extension, and operational
 product helper path portability hardening, plus installed-binary helper path
-portability hardening, plus textual Mir helper raw payload path portability.
+portability hardening, plus textual Mir helper raw payload path portability,
+and Full System V1 helper output path audit.
+
+- 2026-07-04 14:06 JST
+  `scripts/full_system_v1_samples.py check-all --format json` を
+  path portability audit として再実行し、41 rows passed / failed 0 /
+  repo-root absolute match 0 を確認した。unit 17 tests、docs validator unit
+  36 tests、docs validator、source hierarchy、diff check も通過。code fix
+  不要の validation-only package であり、sample status、workflow status、
+  semantics、ABI、canon claim は変更していない。残る高優先候補は
+  Surface helper raw payload path audit。
 
 - 2026-07-04 14:00 JST
   `scripts/textual_mir_samples.py` の raw `textual_mir_alpha_parse` payload に

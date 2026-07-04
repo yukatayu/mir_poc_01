@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 14:00 JST
+Last updated: 2026-07-04 14:06 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 14:06 JST | Full System V1 helper path audit | pass | `scripts/full_system_v1_samples.py check-all --format json` passed with 41 rows, failed 0, and repo-root absolute match 0, so no code fix was needed for the typed/runtime/operational helper output in this path-portability pass. Unit coverage passed 17 tests, docs validator unit coverage passed 36 tests, and docs/source checks passed. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:00 JST | textual Mir helper raw payload path portability | pass | `scripts/textual_mir_samples.py` now normalizes raw parser payload `source_path` and diagnostic message paths for repo-owned sources to repo-relative `samples/...` strings. Regression tests cover positive raw source path and negative unresolved-import diagnostic path. `textual_mir_samples.py check-all` passed with 10/10 rows and repo-root absolute match 0; Full System V1 release-check passed with status accepted, 29/29 commands, and repo-root absolute match 0. No parser semantics, sample status, final grammar/API, or workflow-status claim changed. |
 | 2026-07-04 13:49 JST | installed-binary helper path portability | pass | `scripts/product_alpha1_installed_binary_check.py` now records default repo-owned binary/package inputs as repo-relative `target/debug/mirrorea-alpha` and `samples/product-alpha1/demo` in nested command argv and top `binary_path`. Regression tests cover plan and `check-all` payloads. Real installed-binary probe passed with status accepted, 11 passed commands, 0 failed commands, `installed_binary_candidate_ready: true`, and repo-root absolute match 0. No sample status, workflow status, final CLI/API/ABI, packaging, or broader distribution claim changed. |
 | 2026-07-04 13:42 JST | operational product helper path portability and compatibility audit | pass | `scripts/operational_product_samples.py` now passes repo-owned operational roots and layer packages to nested `mirrorea-alpha` commands as repo-relative `samples/...` argv, with a regression test covering release-check command payloads. Final validation passed Product Alpha release-check 29/29, installed-binary probe 11/11, operational `check-all` with Docker accepted / release commands 32 / repo-root absolute match 0, and minimal alpha-1 pattern verifier accepted with strict family count 4. No sample status, workflow status, final product, final API, or broader distribution claim changed. |
