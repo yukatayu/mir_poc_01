@@ -354,6 +354,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/143-g1-obl021-equality-diagnostic-abstraction-decision-packet.md",
             "plan/144-g1-obl020-scope-decision-reuse-audit.md",
             "plan/145-g1-obl001-artifact-decision-reuse-audit.md",
+            "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

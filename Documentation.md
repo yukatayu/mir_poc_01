@@ -158,6 +158,14 @@ OPEN-014 / simple-assignment scope の current LAB decision surface であるこ
 ledger movement、OBL-001 completion、OBL-002 proof / conformance claim、
 wrapper creation、OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
 
+`plan/146` は G1 OBL-001 explanation-boundary sync guard hardening です。
+`THM001StatementDraft.md` が LAB/canon hierarchy、canon
+`MirCore.Elab.Soundness (stmt)` target との非同一性、artifact identity /
+wrapper acceptance 未採択、OPEN-014 open を落とさないことを sync test で固定します。
+requested status selection、proposal submission、canon edit、ledger movement、
+OBL-001 completion、OBL-002 proof / conformance claim、wrapper creation、
+OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

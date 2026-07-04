@@ -299,6 +299,16 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         )
         self.assertIn("not a proof skeleton", explanation_text)
         self.assertIn("not runtime dispatch", explanation_text)
+        for required_boundary in (
+            "LAB evidence outside `mirrorea_canon/`",
+            "not the canon `MirCore.Elab.Soundness (stmt)` artifact",
+            "OPEN-014 remains open",
+        ):
+            self.assertIn(required_boundary, explanation_text)
+        self.assertRegex(
+            explanation_text,
+            r"does not\s+settle artifact identity or wrapper acceptance",
+        )
 
     def test_obl020_draft_body_keeps_wf_preservation_boundary(self) -> None:
         lean_path = (

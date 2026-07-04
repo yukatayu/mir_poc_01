@@ -25,6 +25,8 @@
 ## Boundary
 
 - This is LAB evidence outside `mirrorea_canon/`.
+- This is not the canon `MirCore.Elab.Soundness (stmt)` artifact and does not
+  settle artifact identity or wrapper acceptance.
 - This does not edit `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - This does not claim OBL-001 completion, OBL-002 proof discharge, OBL-020
   well-formedness preservation, OBL-021 determinism, G1 exit, conformance, or
@@ -38,4 +40,5 @@
 ```bash
 lean samples/lean/lab-statements/obl001/THM001StatementDraft.lean
 python3 scripts/current_l2_lean_sample_sync.py
+python3 -m unittest scripts.tests.test_current_l2_lean_sample_sync.CurrentL2LeanSampleSyncTests.test_obl001_draft_body_keeps_assignment_soundness_boundary
 ```

@@ -228,6 +228,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/143-g1-obl021-equality-diagnostic-abstraction-decision-packet.md",
         "plan/144-g1-obl020-scope-decision-reuse-audit.md",
         "plan/145-g1-obl001-artifact-decision-reuse-audit.md",
+        "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
     ],
     "scripts": [
         "scripts",
