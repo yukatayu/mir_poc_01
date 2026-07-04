@@ -243,7 +243,12 @@ Sub-agent review:
 
 ## Commit / push status
 
-Pending at initial report creation.
+Committed and pushed:
+
+- `015f9d3f Use relative installed binary helper inputs`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
