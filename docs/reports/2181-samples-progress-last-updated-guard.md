@@ -175,7 +175,12 @@ No sub-agent reviewer was spawned for this narrow validator package.
 
 ## Commit / push status
 
-Pending at initial report creation.
+Committed and pushed:
+
+- `4a554e1b Guard samples progress timestamp freshness`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
