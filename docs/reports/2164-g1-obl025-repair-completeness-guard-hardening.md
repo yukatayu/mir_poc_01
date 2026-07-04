@@ -238,7 +238,10 @@ hardening in the current focus and recent validation log.
 
 ## Commit / push status
 
-Pending at first report write.
+- Body commit `e8e83ec1` (`Harden OBL-025 repair completeness guards`) was
+  pushed to `origin/main`.
+- This report status update is committed separately so the pushed body commit
+  can be named accurately.
 
 ## Sub-agent session close status
 
