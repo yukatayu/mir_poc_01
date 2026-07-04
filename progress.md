@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 16:19 JST
+最終更新: 2026-07-04 16:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -819,7 +819,17 @@ release-check output path serialization hardening, plus Product Alpha
 installed-binary generated path serialization hardening, plus Full System V1
 helper nested source argv path portability hardening, plus alpha network Docker
 success/failure path serialization hardening, plus current-L2 pipeline and
-detached-loop helper path portability hardening.
+detached-loop helper path portability hardening, plus source-hierarchy status
+root-display path portability hardening.
+
+- 2026-07-04 16:37 JST
+  `scripts/check_source_hierarchy.py` の status payload / pretty output の
+  `repo_root` display を `.` に変更し、internal existence checks は absolute
+  `REPO_ROOT` のまま保持した。`--format json` と pretty output は repo-root
+  absolute match 0、`scripts.tests.test_validate_docs` 37 tests、release-check
+  wrapper unit 39 tests、Surface release-check representative 18/18 commands /
+  generated output scan repo-root absolute match 0 が通過。source hierarchy
+  inventory、sample status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 16:19 JST
   `scripts/current_l2_detached_loop.py`、theorem Lean-stub pipeline、

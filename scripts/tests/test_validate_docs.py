@@ -497,6 +497,14 @@ class ValidateDocsTests(unittest.TestCase):
 
         self.assertSetEqual(required_plan_docs, source_hierarchy_plan_docs)
 
+    def test_source_hierarchy_status_uses_portable_repo_root_display(self) -> None:
+        status = check_source_hierarchy.build_status()
+        pretty = check_source_hierarchy.format_pretty(status)
+
+        self.assertEqual(status["repo_root"], ".")
+        self.assertNotIn(str(check_source_hierarchy.REPO_ROOT), pretty)
+        self.assertNotIn(str(check_source_hierarchy.REPO_ROOT), str(status))
+
     def test_all_repo_numbered_plan_files_are_registered(self) -> None:
         repo_plan_docs = {
             path.relative_to(validate_docs.ROOT).as_posix()

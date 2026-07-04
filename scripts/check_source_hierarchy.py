@@ -698,7 +698,7 @@ def build_status() -> dict[str, object]:
             else:
                 missing.append(rel_path)
     return {
-        "repo_root": str(REPO_ROOT),
+        "repo_root": ".",
         "required_count": len(present) + len(missing),
         "present_count": len(present),
         "missing_count": len(missing),
