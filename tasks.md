@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 13:11 JST
+最終更新: 2026-07-04 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -83,6 +83,12 @@ Current holding state:
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`
   and `plan/118..119`. This is documentation taxonomy maintenance only.
+- `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
+  in the repository but are not registered in its explicit `REQUIRED` scaffold
+  list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
+  cover current numbered `plan/00..119`. This keeps future plan-file additions
+  from silently bypassing the docs scaffold guard while preserving deletion
+  detection through the explicit list.
 - Full System V1 provider / renderer helper inputs and release-check
   representative CLI commands now preserve portability by passing in-repo CLI
   paths as repo-relative `samples/...` argv. Renderer-pose generated nested

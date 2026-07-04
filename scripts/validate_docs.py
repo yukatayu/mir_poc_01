@@ -424,8 +424,43 @@ REQUIRED = [
     "scripts/README.md",
     "plan/00-index.md",
     "plan/01-status-at-a-glance.md",
+    "plan/02-system-overview-and-positioning.md",
+    "plan/03-decision-strengths-and-boundaries.md",
+    "plan/04-core-semantics-current-l2.md",
+    "plan/05-fallback-lease-and-chain-semantics.md",
+    "plan/06-surface-notation-status.md",
+    "plan/07-parser-free-poc-stack.md",
+    "plan/08-representative-programs-and-fixtures.md",
+    "plan/09-helper-stack-and-responsibility-map.md",
+    "plan/10-roadmap-overall.md",
     "plan/11-roadmap-near-term.md",
+    "plan/12-open-problems-and-risks.md",
+    "plan/13-heavy-future-workstreams.md",
+    "plan/14-glossary-and-boundary-rules.md",
+    "plan/15-current-l2-fixture-authoring-template.md",
+    "plan/16-shared-space-membership-and-example-boundary.md",
+    "plan/17-research-phases-and-autonomy-gates.md",
+    "plan/18-type-proof-modelcheck-and-ordering-research-program.md",
     "plan/19-repository-map-and-taxonomy.md",
+    "plan/20-projection-and-placement-roadmap.md",
+    "plan/21-hotplug-attachpoint-roadmap.md",
+    "plan/22-network-transport-roadmap.md",
+    "plan/23-compiler-backend-llvm-guardrail-roadmap.md",
+    "plan/24-avatar-follow-representative-slice-roadmap.md",
+    "plan/25-typed-external-boundary-executable-roadmap.md",
+    "plan/26-visual-debugger-viewer-roadmap.md",
+    "plan/27-public-api-parser-gate-roadmap.md",
+    "plan/28-post-p18-true-user-spec-hold-option-matrix.md",
+    "plan/29-verification-layer-widening-threshold.md",
+    "plan/30-attachpoint-detach-minimal-contract.md",
+    "plan/31-fairy05-visibility-return-carrier-bundling.md",
+    "plan/32-hotplug-real-migration-rollback-boundary.md",
+    "plan/33-runtime-crate-hotplug-engine-ownership-cut.md",
+    "plan/34-runtime-crate-hotplug-carrier-admission-cut.md",
+    "plan/35-post-p20-hotplug-next-package-inventory.md",
+    "plan/36-post-p21-rollback-durable-migration-family.md",
+    "plan/37-post-p21-distributed-activation-ordering-family.md",
+    "plan/38-post-p21-final-public-hotplug-abi-family.md",
     "plan/39-type-system-freeze-roadmap.md",
     "plan/40-layer-compatibility-freeze-roadmap.md",
     "plan/41-save-load-checkpoint-roadmap.md",
@@ -745,6 +780,7 @@ LAST_UPDATED_PATTERN = re.compile(
     r"^最終更新:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST)\s*$",
     re.MULTILINE,
 )
+NUMBERED_PLAN_FILE_PATTERN = re.compile(r"^\d+-.*\.md$")
 
 
 def _heading_match(text: str, heading: str) -> re.Match[str] | None:
@@ -974,11 +1010,41 @@ def stale_snapshot_last_updated_headers() -> dict[str, tuple[str, str]]:
     return stale
 
 
+def unregistered_numbered_plan_files() -> list[str]:
+    plan_root = ROOT / "plan"
+    if not plan_root.exists():
+        return []
+
+    registered = set(REQUIRED)
+
+    def sort_key(path: Path) -> tuple[int, str]:
+        return (int(path.name.split("-", 1)[0]), path.name)
+
+    numbered_paths = [
+        path
+        for path in plan_root.iterdir()
+        if path.is_file() and NUMBERED_PLAN_FILE_PATTERN.fullmatch(path.name)
+    ]
+    unregistered = []
+    for path in sorted(numbered_paths, key=sort_key):
+        relative = path.relative_to(ROOT).as_posix()
+        if relative not in registered:
+            unregistered.append(relative)
+    return unregistered
+
+
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
         print("Missing required files:")
         for p in missing:
+            print(" -", p)
+        return 1
+
+    unregistered_plans = unregistered_numbered_plan_files()
+    if unregistered_plans:
+        print("Numbered plan files are not registered in REQUIRED:")
+        for p in unregistered_plans:
             print(" -", p)
         return 1
 

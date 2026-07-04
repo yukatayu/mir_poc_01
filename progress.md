@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:11 JST
+最終更新: 2026-07-04 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -799,6 +799,15 @@ current-L2 README path portability hardening, snapshot timestamp guard
 hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
 `scripts/README.md` source-hierarchy structural-check responsibility refresh.
+
+- 2026-07-04 13:17 JST
+  `scripts/validate_docs.py` に numbered `plan/*.md` registration guard を追加し、
+  既存の plan file が `REQUIRED` scaffold list に未登録のまま増えた場合に
+  docs validation が失敗するようにした。あわせて `validate_docs.py` と
+  `check_source_hierarchy.py` の explicit plan scaffold を current numbered
+  `plan/00..119` に揃え、`scripts/README.md` の validator / hierarchy
+  responsibility も更新した。docs / guard maintenance only であり、sample
+  status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 13:11 JST
   `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` の required

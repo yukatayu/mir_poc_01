@@ -482,6 +482,24 @@ class ValidateDocsTests(unittest.TestCase):
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
 
+    def test_main_rejects_unregistered_numbered_plan_file(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            unregistered_plan = root / "plan" / "120-unregistered-plan.md"
+            unregistered_plan.write_text("# unregistered plan\n", encoding="utf-8")
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Numbered plan files are not registered", stdout.getvalue())
+        self.assertIn("plan/120-unregistered-plan.md", stdout.getvalue())
+
     def test_main_rejects_template_missing_commands_run_section(self) -> None:
         heading = "## Commands run"
         template_text = "\n".join(h for h in validate_docs.REQUIRED_TEMPLATE_HEADINGS if h != heading)
