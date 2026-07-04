@@ -305,7 +305,19 @@ Reason:
 
 ## Commit / push status
 
-Not yet committed at initial report creation.
+Substantive commit:
+
+- `c73411e77245b7787b6280220b68aa534c692ca1`
+  (`Add G1 OBL020 scope clarification packet`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- `HEAD == origin/main` confirmed after push.
+
+This report was then updated to record the substantive commit and push status.
+The follow-up report-status commit is intentionally not recursively recorded in
+this report.
 
 ## Sub-agent session close status
 
