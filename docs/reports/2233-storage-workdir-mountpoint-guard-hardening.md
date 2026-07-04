@@ -277,7 +277,11 @@ Skipped destructive / state-changing storage actions by design:
 
 ## Commit / push status
 
-Pending final commit / push.
+Primary package commit pushed:
+
+- `e30bd969` — `Harden storage workdir mountpoint guard`
+
+This report-status line is recorded by a follow-up status-only commit.
 
 ## Sub-agent session close status
 
