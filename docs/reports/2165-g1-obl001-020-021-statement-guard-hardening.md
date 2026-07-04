@@ -258,7 +258,10 @@ log.
 
 ## Commit / push status
 
-Pending at first report write.
+- Body commit `5ca34eea` (`Harden OBL-001 020 021 statement guards`) was
+  pushed to `origin/main`.
+- This report status update is committed separately so the pushed body commit
+  can be named accurately.
 
 ## Sub-agent session close status
 
