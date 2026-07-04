@@ -176,6 +176,7 @@ Every report should contain, in this order:
 - `begin` があるときは task-scoped の差分を使い、`begin` がなくても Git 差分が取れるなら `変更量(参考)` を出し、どちらも取れないときだけ差分欄を出さないこと。
 - 通知失敗は主作業の失敗にしない。Webhook は repo 直下の `.codex-discord/config.local.json` に保存し、commit しないこと。
 - 通知文は簡潔な日本語にすること。導入直後または更新直後の疎通確認以外では `test` を使わないこと。
+- 通知文に backtick、quote、newline、長い commit list など shell が解釈し得る文字が入る場合は、inline `--summary` / `--next-step` ではなく、`--summary-file` / `--next-step-file` に UTF-8 text file を渡すこと。
 
 ## plan/ 維持ルール
 

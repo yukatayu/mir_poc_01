@@ -582,6 +582,7 @@ REQUIRED = [
     "plan/149-current-phase-position-reading.md",
     "plan/150-phase-position-validator-guard.md",
     "plan/151-discord-webhook-secret-validator-guard.md",
+    "plan/152-discord-notification-file-inputs.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

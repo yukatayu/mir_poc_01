@@ -35,6 +35,11 @@ description: Use this skill for best-effort Discord progress and completion noti
 <PYTHON> .agents/skills/discord-report/scripts/discord_notify.py begin --cwd .
 ```
 
+通知文に backtick、引用符、改行、長い hash 一覧など shell が解釈し得る文字を
+含める場合は、inline の `--summary "..."` / `--next-step "..."` ではなく
+一時テキストファイルを作り、`--summary-file` / `--next-step-file` で渡す。
+これは shell command substitution による通知文欠落を避けるための運用ルール。
+
 途中経過:
 
 ```bash
@@ -44,11 +49,29 @@ description: Use this skill for best-effort Discord progress and completion noti
   --cwd .
 ```
 
+shell quoting を避ける途中経過:
+
+```bash
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py progress \
+  --summary-file /tmp/codex-discord-summary.txt \
+  --next-step-file /tmp/codex-discord-next-step.txt \
+  --cwd .
+```
+
 完了通知:
 
 ```bash
 <PYTHON> .agents/skills/discord-report/scripts/discord_notify.py complete \
   --summary "<最終的に何をしたかを1〜3文で>" \
+  --include-diff \
+  --cwd .
+```
+
+shell quoting を避ける完了通知:
+
+```bash
+<PYTHON> .agents/skills/discord-report/scripts/discord_notify.py complete \
+  --summary-file /tmp/codex-discord-summary.txt \
   --include-diff \
   --cwd .
 ```

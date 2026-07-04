@@ -85,6 +85,11 @@ def parse_args() -> argparse.Namespace:
     common_parent = argparse.ArgumentParser(add_help=False)
     common_parent.add_argument("--summary", default="", help="Short human-readable summary")
     common_parent.add_argument(
+        "--summary-file",
+        default=None,
+        help="Read the human-readable summary from a UTF-8 text file.",
+    )
+    common_parent.add_argument(
         "--cwd",
         default=None,
         help="Working directory to inspect. Defaults to current process directory.",
@@ -104,6 +109,11 @@ def parse_args() -> argparse.Namespace:
 
     progress = subparsers.add_parser("progress", parents=[common_parent], help="Send a progress update")
     progress.add_argument("--next-step", default="", help="Next meaningful milestone")
+    progress.add_argument(
+        "--next-step-file",
+        default=None,
+        help="Read the next meaningful milestone from a UTF-8 text file.",
+    )
     progress.add_argument(
         "--min-interval-seconds",
         type=int,
@@ -485,6 +495,15 @@ def command_check(config: Dict[str, Any]) -> int:
     return 0
 
 
+def resolve_message_text(value: str, file_arg: Optional[str], label: str) -> str:
+    if not file_arg:
+        return value
+    try:
+        return Path(file_arg).read_text(encoding="utf-8")
+    except OSError as exc:
+        raise NotificationError(f"Could not read {label} file {file_arg}: {exc}") from exc
+
+
 def main() -> int:
     args = parse_args()
     ctx = detect_project_context(args.cwd)
@@ -503,7 +522,14 @@ def main() -> int:
         eprint("Webhook is not configured; skipping Discord send (best effort).")
         return 0
 
+    summary = resolve_message_text(args.summary, getattr(args, "summary_file", None), "summary")
+
     if args.command == "progress":
+        next_step = resolve_message_text(
+            args.next_step,
+            getattr(args, "next_step_file", None),
+            "next-step",
+        )
         configured_min = config.get("progress_min_interval_seconds")
         min_interval = args.min_interval_seconds
         if min_interval is None:
@@ -516,10 +542,10 @@ def main() -> int:
             return 0
         embed = build_embed(
             command="progress",
-            summary=args.summary,
+            summary=summary,
             ctx=ctx,
             config=config,
-            next_step=args.next_step,
+            next_step=next_step,
         )
         payload = build_payload(embed)
         if args.print_payload:
@@ -532,7 +558,7 @@ def main() -> int:
     if args.command == "complete":
         embed = build_embed(
             command="complete",
-            summary=args.summary,
+            summary=summary,
             ctx=ctx,
             config=config,
             include_diff=args.include_diff,
@@ -552,7 +578,7 @@ def main() -> int:
             return 1
         embed = build_embed(
             command="test",
-            summary=args.summary,
+            summary=summary,
             ctx=ctx,
             config=config,
         )

@@ -234,6 +234,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/149-current-phase-position-reading.md",
         "plan/150-phase-position-validator-guard.md",
         "plan/151-discord-webhook-secret-validator-guard.md",
+        "plan/152-discord-notification-file-inputs.md",
     ],
     "scripts": [
         "scripts",

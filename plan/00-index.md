@@ -106,8 +106,9 @@
 88. current phase position reading は `plan/149`
 89. phase-position validator guard は `plan/150`
 90. Discord webhook secret validator guard は `plan/151`
-91. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-92. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+91. Discord notification file inputs は `plan/152`
+92. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+93. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -396,6 +397,13 @@
   `scripts/validate_docs.py` が URL 本体を出さず path / line だけで失敗する
   guard hardening memory である。credential 保存、通知挙動変更、security
   completeness claim は主張しない
+- **Discord notification file inputs**:
+  `plan/152-discord-notification-file-inputs.md` は、Discord 通知文に
+  backtick / quote / newline / long commit list が含まれる場合に
+  `--summary-file` / `--next-step-file` を使い、shell command substitution
+  で通知文が欠落する事故を避けるための repo-local notification operation
+  hardening memory である。Webhook storage、delivery guarantee、phase /
+  gate movement は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -534,6 +542,8 @@
   `plan/150-phase-position-validator-guard.md`
 - Discord webhook secret validator guard:
   `plan/151-discord-webhook-secret-validator-guard.md`
+- Discord notification file inputs:
+  `plan/152-discord-notification-file-inputs.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 03:23 JST
+最終更新: 2026-07-05 03:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -76,6 +76,13 @@ semantic source authority.
   secret-safe docs validator guard for concrete Discord webhook URL shape. It
   reports path / line only and does not print the URL. This does not change
   notification semantics or claim security completeness.
+- Current Discord notification file-input note:
+  `plan/152-discord-notification-file-inputs.md` records the P105 notifier
+  hardening that adds `--summary-file` and `--next-step-file` so summaries with
+  backticks, quotes, newlines, or long commit lists can bypass shell
+  command-substitution hazards. This does not change webhook storage,
+  delivery guarantees, phase/gate status, proof/conformance, runtime, sample,
+  or workflow readiness.
 - Current fresh validation sweep note:
   P99 reran the current docs / Cargo / Lean / current-L2 and product/sample
   front doors after `plan/151`. This is fresh evidence only; it does not
@@ -431,6 +438,12 @@ semantic source authority.
   source are reported by path and line without printing the URL body. This does
   not store credentials, change notification behavior, or claim security
   completeness.
+- Current Discord notification file-input note:
+  `plan/152-discord-notification-file-inputs.md` records that
+  `.agents/skills/discord-report/scripts/discord_notify.py` now accepts
+  `--summary-file` and `--next-step-file`, and the repo-local skill directs
+  agents to use file inputs when notification text contains shell-sensitive
+  characters. This is operational hardening only.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -1101,7 +1114,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; no default next Macro 0 package remains unless a fresh concrete drift trigger is identified; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording including `late pre-exit` through `plan/150` / P104, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | user choice / fresh trigger needed |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; no default next Macro 0 package remains unless a fresh concrete drift trigger is identified; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording including `late pre-exit` through `plan/150` / P104, concrete Discord webhook URLs are guarded without printing the URL through `plan/151`, and Discord notification summaries can use file inputs through `plan/152` / P105 to avoid shell quoting hazards | light | user choice / fresh trigger needed |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1246,8 +1259,15 @@ Discord webhook secret validator guard hardening, plus P99 fresh runnable
 validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard, plus
 P101 storage helper scaffold guard registration, plus P102 no-default-next-line
 Oracle follow-up, plus P103 Macro 5 self-drive wording drift cleanup, plus
-P104 phase-position `late pre-exit` guard hardening.
+P104 phase-position `late pre-exit` guard hardening, plus P105 Discord
+notification file-input hardening.
 
+- 2026-07-05 03:39 JST
+  P105 で repo-scoped `discord_notify.py` に `--summary-file` /
+  `--next-step-file` を追加し、通知文に backtick / quote / newline / long
+  commit list が含まれる場合に shell command substitution を避けられるように
+  した。Webhook storage、delivery guarantee、phase / gate movement、runtime /
+  sample / workflow status change は主張していない。
 - 2026-07-05 03:23 JST
   P104 で `scripts/validate_docs.py` の phase-position snapshot guard を
   `late pre-exit` まで広げ、`progress.md` / `tasks.md` が T0 内の late

@@ -199,6 +199,12 @@ source に concrete Discord webhook URL shape が入った場合に
 webhook credential の保存、出力、通知挙動変更、security completeness claim は
 主張しません。
 
+`plan/152` は Discord notification file inputs です。通知文に backtick、
+quote、newline、長い commit list など shell が解釈し得る文字が含まれる場合に
+`discord_notify.py` の `--summary-file` / `--next-step-file` を使えるようにし、
+shell command substitution による通知文欠落を避けます。Webhook storage、
+delivery guarantee、phase / gate movement は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
