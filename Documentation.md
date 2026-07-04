@@ -166,6 +166,14 @@ requested status selection、proposal submission、canon edit、ledger movement�
 OBL-001 completion、OBL-002 proof / conformance claim、wrapper creation、
 OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
 
+`plan/147` は G1 next-line promotion-boundary audit です。広い自走依頼は
+OBL-020 / OBL-001 review-facing extraction candidate の promotion ではなく、
+次 line は user が明示的に OBL-020 または OBL-001 extraction を選んだときだけ
+昇格する、と記録します。requested status selection、review request
+extraction、proposal submission、canon edit、ledger movement、wrapper
+creation、OPEN-014 resolution、proof / conformance claim、runtime readiness、
+G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

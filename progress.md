@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 00:40 JST
+最終更新: 2026-07-05 01:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -341,6 +341,17 @@ semantic source authority.
   does not choose requested status, submit a proposal, edit canon, move the
   ledger, complete OBL-001, discharge OBL-002 proof, create a wrapper, resolve
   OPEN-014, change runtime readiness, or exit G1.
+- Current next-line promotion-boundary note:
+  `plan/147-g1-next-line-promotion-boundary-audit.md` records that broad
+  autonomous delegation is not a specific promotion of the OBL-020 or OBL-001
+  review-facing extraction candidates. Those candidates remain unpromoted until
+  the user explicitly chooses one of them. P94 also reran a broad validation
+  sweep across docs/source hierarchy, Cargo, Python helper tests, active Lean,
+  clean-near-end, Surface, Product Alpha, Full System V1, practical alpha, and
+  alpha E2E front doors without changing sample status or filling `plan/141`
+  slots. It does not extract a review request, choose requested status, submit
+  a proposal, edit canon, move the ledger, create a wrapper, resolve OPEN-014,
+  claim proof / conformance, change runtime readiness, or exit G1.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -1016,7 +1027,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile; OBL-001/020/021 and OBL-024/025 have focused sync guards against body/vocabulary drift, `plan/126` hardens OBL-001/020/021 body-link checks against comment-only satisfaction plus bare `:= True` vacuity, `plan/127` separates G1 bridge support from G1 exit non-readiness, `plan/128` routes remaining blockers to human/canon acceptance, future statement/proof packages, canon-open deferral, static LAB support-only, later runtime/conformance/product, or reserve triggers, `plan/129` preflights the canon files / LAB evidence / OBL statement-status blockers / OPEN-014 deferral / runtime-conformance exclusions for a future human/canon G1 acceptance packet, `plan/130` inventories criteria for proposing OBL-001/020/021 status movement without moving the ledger, `plan/131` outlines the future proposal packet structure without choosing requested status or applying ledger movement, `plan/132` dry-runs the OBL-001/020/021 compile-check / sync-guard / admitted-stub evidence checks a later packet would cite, `plan/133` compares `stated` / `lean-stated` requested-status candidates while keeping the result advisory, `plan/134` defers full-row OBL-020 status movement to a G1-supporting statement-scope clarification, `plan/135` keeps direct LAB artifact citation as evidence-only pending artifact identity review, `plan/136` defines the non-applied OBL-020 artifact annex template for a later packet, `plan/137` keeps OBL-001 direct LAB citation evidence-only pending artifact identity / wrapper acceptance, `plan/138` defines the non-applied OBL-001 artifact annex template for a later packet, `plan/139` applies artifact identity / wrapper preflight to OBL-021 while keeping it conditional on abstraction-boundary acceptance, `plan/140` defines the non-applied OBL-021 artifact annex template with abstraction-boundary decision slots, `plan/141` connects the OBL-001/020/021 annex templates into a non-applied status packet shell while leaving requested status, ledger delta, artifact identity, wrapper, OPEN-014, scope, abstraction, proof, conformance, runtime, and G1 exit unresolved, `plan/142` refreshes the shell validation evidence without choosing status or moving the ledger, `plan/143` extracts the OBL-021 result equality / diagnostic equivalence / projection-totality / fixed-input identity decision axes before any status draft, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface instead of duplicating it, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface instead of duplicating it, and `plan/146` hardens the OBL-001 explanation sync guard against canon-target / artifact-acceptance drift; Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are still not proved or ledger-moved | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile; OBL-001/020/021 and OBL-024/025 have focused sync guards against body/vocabulary drift, `plan/126` hardens OBL-001/020/021 body-link checks against comment-only satisfaction plus bare `:= True` vacuity, `plan/127` separates G1 bridge support from G1 exit non-readiness, `plan/128` routes remaining blockers to human/canon acceptance, future statement/proof packages, canon-open deferral, static LAB support-only, later runtime/conformance/product, or reserve triggers, `plan/129` preflights the canon files / LAB evidence / OBL statement-status blockers / OPEN-014 deferral / runtime-conformance exclusions for a future human/canon G1 acceptance packet, `plan/130` inventories criteria for proposing OBL-001/020/021 status movement without moving the ledger, `plan/131` outlines the future proposal packet structure without choosing requested status or applying ledger movement, `plan/132` dry-runs the OBL-001/020/021 compile-check / sync-guard / admitted-stub evidence checks a later packet would cite, `plan/133` compares `stated` / `lean-stated` requested-status candidates while keeping the result advisory, `plan/134` defers full-row OBL-020 status movement to a G1-supporting statement-scope clarification, `plan/135` keeps direct LAB artifact citation as evidence-only pending artifact identity review, `plan/136` defines the non-applied OBL-020 artifact annex template for a later packet, `plan/137` keeps OBL-001 direct LAB citation evidence-only pending artifact identity / wrapper acceptance, `plan/138` defines the non-applied OBL-001 artifact annex template for a later packet, `plan/139` applies artifact identity / wrapper preflight to OBL-021 while keeping it conditional on abstraction-boundary acceptance, `plan/140` defines the non-applied OBL-021 artifact annex template with abstraction-boundary decision slots, `plan/141` connects the OBL-001/020/021 annex templates into a non-applied status packet shell while leaving requested status, ledger delta, artifact identity, wrapper, OPEN-014, scope, abstraction, proof, conformance, runtime, and G1 exit unresolved, `plan/142` refreshes the shell validation evidence without choosing status or moving the ledger, `plan/143` extracts the OBL-021 result equality / diagnostic equivalence / projection-totality / fixed-input identity decision axes before any status draft, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface instead of duplicating it, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface instead of duplicating it, `plan/146` hardens the OBL-001 explanation sync guard against canon-target / artifact-acceptance drift, and `plan/147` clarifies that broad autonomous delegation is not promotion of either OBL-020 or OBL-001 review-facing extraction candidate; Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are still not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -1066,6 +1077,10 @@ promoted.
 `THM001StatementDraft.md` cannot silently drop the LAB/canon hierarchy, the
 distinction between the LAB artifact and the canon `MirCore.Elab.Soundness
 (stmt)` target, artifact / wrapper non-acceptance, or OPEN-014 non-resolution.
+`plan/147` then clarifies the next-line promotion boundary: broad autonomous
+delegation is not a specific promotion of either review-facing extraction
+candidate, so OBL-020 / OBL-001 extraction remains unpromoted until the user
+explicitly chooses that next line.
 
 ## feature maturity rows
 
@@ -1149,6 +1164,17 @@ OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening.
 
+- 2026-07-05 01:08 JST
+  `plan/147-g1-next-line-promotion-boundary-audit.md` を追加し、広い自走依頼は
+  OBL-020 / OBL-001 review-facing extraction candidate の promotion ではない
+  と明記した。P94 validation sweep では `make check`,
+  `python3 -m unittest discover -s scripts/tests`, `cargo test --workspace --all-targets`,
+  active Lean 25 files, clean-near-end smoke/closeout, Surface release check,
+  Product Alpha release / installed-binary / operational checks, Full System V1
+  release check, minimal alpha pattern, practical alpha, and alpha E2E
+  front-door checks が通った。No review request extraction, requested status
+  choice, canon edit, ledger movement, wrapper, OPEN-014 resolution, proof /
+  conformance claim, runtime readiness, G1 exit, or sample status relabel.
 - 2026-07-05 00:40 JST
   `plan/146-g1-obl001-explanation-boundary-guard-hardening.md` を追加し、
   `THM001StatementDraft.md` が LAB/canon hierarchy、canon

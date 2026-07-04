@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 00:40 JST
+最終更新: 2026-07-05 01:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -286,6 +286,15 @@ Current holding state:
   complete OBL-001, discharge OBL-002 proof, claim conformance, create a
   wrapper, resolve OPEN-014, claim G1 exit, change runtime readiness, or
   relabel sample status.
+- `plan/147-g1-next-line-promotion-boundary-audit.md` now clarifies the current
+  queue boundary: broad autonomous delegation is not specific promotion of the
+  OBL-020 or OBL-001 review-facing extraction candidates. Those candidates
+  remain unpromoted until the user explicitly chooses one of them. P94 also
+  records a broad validation sweep, but that sweep does not fill `plan/141`
+  unresolved slots, extract a review request, choose requested status, submit a
+  proposal, edit canon, move the ledger, create a wrapper, resolve OPEN-014,
+  claim proof / conformance, change runtime readiness, or relabel sample
+  status.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -308,17 +317,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..146`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..147`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
   slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..146`. This is documentation taxonomy maintenance only.
+  `plan/118..147`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..146`. This keeps future plan-file additions
+  cover current numbered `plan/00..147`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -639,6 +648,11 @@ Current holding state:
   non-acceptance, and OPEN-014 non-resolution wording under
   `scripts.tests.test_current_l2_lean_sample_sync` without changing Lean
   predicates or claiming proof / conformance, runtime readiness, or G1 exit.
+- `plan/147-g1-next-line-promotion-boundary-audit.md` now records that broad
+  autonomous work permission does not select the OBL-020 or OBL-001
+  review-facing extraction package. The next-line candidates remain candidates
+  only until the user explicitly chooses one of them; validation and queue
+  clarity can continue, but `plan/141` status-shell slots stay unresolved.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
@@ -902,6 +916,10 @@ Current holding state:
 These are candidates only. They are not promoted until the user chooses the
 next line.
 
+`plan/147` clarifies that broad autonomous delegation is not enough to choose
+one of these rows. To start either review-facing extraction, the user must name
+or unmistakably select the OBL-020 or OBL-001 extraction line.
+
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
 | `OBL-020 review-facing decision request extraction` | `G1` docs/advisory-only, only if promoted | extract a human/canon-facing OBL-020 scope question from `plan/134` without rewriting the scope matrix or filling `plan/141` status slots | review-request-only; no status proposal, no canon edit, no ledger movement, no full OBL-020 completion claim |
@@ -938,7 +956,7 @@ next line.
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |
-| `Macro 5` | theorem / model-check / verifier bridge | current self-driven line is G1 OBL statement/status preparation; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` refreshes shell evidence without moving status, `plan/143` separates the OBL-021 equality / diagnostic / fixed-input abstraction decision from status drafting, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface, and `plan/146` closes the current OBL-001 explanation-boundary sync drift risk |
+| `Macro 5` | theorem / model-check / verifier bridge | current self-driven line is G1 OBL statement/status preparation; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` refreshes shell evidence without moving status, `plan/143` separates the OBL-021 equality / diagnostic / fixed-input abstraction decision from status drafting, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface, `plan/146` closes the current OBL-001 explanation-boundary sync drift risk, and `plan/147` clarifies that broad autonomous delegation does not promote either review-facing extraction candidate |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | toolchain / backend / developer surface | Surface CLI/devtools can be self-driven within alpha scope |
 | `Macro 8` | domain/application realization | Surface operational suite can be self-driven after language/runtime base |
