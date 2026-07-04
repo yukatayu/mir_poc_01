@@ -249,8 +249,13 @@ after report creation and passed.
 
 ## Commit / push status
 
-Not yet committed at initial report creation. This section will be updated
-after validation, commit, and push.
+Primary commit:
+
+- `4f1ca22d Add tmp Mirrorea artifact helper`
+- Pushed to `origin/main`.
+
+Status-report follow-up commit pending at the time this section was first
+updated.
 
 ## Sub-agent session close status
 
