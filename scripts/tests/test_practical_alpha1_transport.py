@@ -111,6 +111,36 @@ class PracticalAlpha1TransportTests(unittest.TestCase):
             any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in captured[0])
         )
 
+    def test_missing_transport_surface_error_uses_repo_relative_package_path(self) -> None:
+        package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[0]["package_dir"]
+        with mock.patch.object(runner, "_load_package", return_value={}):
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted",
+            ) as caught:
+                runner._transport_surface(package_dir)
+        self.assertNotIn(str(runner.REPO_ROOT), str(caught.exception))
+
+    def test_local_transport_json_decode_error_redacts_repo_owned_paths(self) -> None:
+        package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[0]["package_dir"]
+        leaked_stdout = (
+            f"stdout mentions {runner.REPO_ROOT}/"
+            "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted"
+        )
+
+        def fake_subprocess_run(argv, **kwargs):
+            return subprocess.CompletedProcess(argv, 0, stdout=leaked_stdout, stderr="")
+
+        with mock.patch.object(runner.subprocess, "run", side_effect=fake_subprocess_run):
+            with self.assertRaisesRegex(RuntimeError, "did not return JSON") as caught:
+                runner._build_local_report(package_dir)
+        message = str(caught.exception)
+        self.assertIn(
+            "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted",
+            message,
+        )
+        self.assertNotIn(str(runner.REPO_ROOT), message)
+
     def test_docker_transport_invocation_uses_repo_relative_compose_file(self) -> None:
         package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[1]["package_dir"]
         captured: list[tuple[list[str], dict[str, str] | None]] = []
@@ -154,6 +184,33 @@ class PracticalAlpha1TransportTests(unittest.TestCase):
             )
         )
 
+    def test_docker_transport_failure_redacts_repo_owned_paths(self) -> None:
+        package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[1]["package_dir"]
+        leaked_stderr = (
+            f"binary={runner.BINARY_PATH} "
+            f"package={runner.REPO_ROOT}/"
+            "samples/practical-alpha1/packages/tr-a1-02-docker-two-node-accepted"
+        )
+        error = subprocess.CalledProcessError(
+            1,
+            ["docker", "compose", "up"],
+            stderr=leaked_stderr,
+            output="",
+        )
+
+        with mock.patch.object(runner, "_check_docker_available"), mock.patch.object(
+            runner, "_ensure_binary_available"
+        ), mock.patch.object(runner.subprocess, "run", side_effect=[error, mock.Mock()]):
+            with self.assertRaisesRegex(RuntimeError, "Docker Compose run") as caught:
+                runner._build_docker_report(package_dir)
+        message = str(caught.exception)
+        self.assertIn("target/debug/examples/mir_practical_alpha1_transport", message)
+        self.assertIn(
+            "samples/practical-alpha1/packages/tr-a1-02-docker-two-node-accepted",
+            message,
+        )
+        self.assertNotIn(str(runner.REPO_ROOT), message)
+
     def test_run_sample_accepts_exact_expected_report(self) -> None:
         row = runner.IMPLEMENTED_ROWS[0]
         expected = json.loads(self.sidecar_path(row["expected_report"]).read_text())
@@ -182,6 +239,21 @@ class PracticalAlpha1TransportTests(unittest.TestCase):
             payload = runner.check_all()
         self.assertTrue(payload["transport_first_floor_complete"])
         self.assertFalse(payload["transport_plan_boundary_present"])
+
+    def test_check_all_failure_error_redacts_repo_owned_paths(self) -> None:
+        leaked = (
+            f"leak {runner.REPO_ROOT}/"
+            "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted"
+        )
+        with mock.patch.object(runner, "run_sample", side_effect=RuntimeError(leaked)):
+            payload = runner.check_all()
+        self.assertEqual(len(payload["failed"]), len(runner.IMPLEMENTED_ROWS))
+        error = payload["failed"][0]["error"]
+        self.assertIn(
+            "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted",
+            error,
+        )
+        self.assertNotIn(str(runner.REPO_ROOT), error)
 
     def test_normalize_argv_promotes_direct_package_path_to_check(self) -> None:
         args = runner.normalize_argv(

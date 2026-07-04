@@ -14,6 +14,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
+from practical_alpha_error_display import failure_error_text, repo_display_text  # noqa: E402
 import practical_alpha1_check  # noqa: E402
 
 
@@ -110,7 +111,7 @@ def _build_runtime_save_load_report(package_path: str | Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:  # pragma: no cover
         raise RuntimeError(
             "save-load command did not return JSON for "
-            f"{repo_cli_arg(package_path)}: {completed.stdout}"
+            f"{repo_cli_arg(package_path)}: {repo_display_text(completed.stdout)}"
         ) from error
 
 
@@ -223,7 +224,7 @@ def check_all() -> dict[str, Any]:
         invalid_distributed_cut_guard_present = True
     except Exception as error:  # pragma: no cover
         invalid_distributed_cut_guard_present = False
-        guard_error = str(error)
+        guard_error = failure_error_text(error)
     for row in IMPLEMENTED_ROWS:
         sample_id = row["sample_id"]
         try:
@@ -231,7 +232,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             reports.append(report)
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
     save_load_plan_boundary_present = (
         not failed
         and bool(reports)

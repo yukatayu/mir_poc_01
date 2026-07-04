@@ -229,6 +229,18 @@ class PracticalAlpha1ExportDevtoolsTests(unittest.TestCase):
         self.assertEqual(payload["deferred_observables"], [])
         self.assertTrue(payload["stage_pa1_6_complete"])
 
+    def test_check_all_failure_error_redacts_repo_owned_paths(self) -> None:
+        leaked = (
+            f"leak {runner.REPO_ROOT}/"
+            "samples/practical-alpha1/packages/run-01-local-sugoroku"
+        )
+        with mock.patch.object(runner, "run_sample", side_effect=RuntimeError(leaked)):
+            payload = runner.check_all()
+        self.assertEqual(len(payload["failed"]), len(runner.IMPLEMENTED_ROWS))
+        error = payload["failed"][0]["error"]
+        self.assertIn("samples/practical-alpha1/packages/run-01-local-sugoroku", error)
+        self.assertNotIn(str(runner.REPO_ROOT), error)
+
 
 if __name__ == "__main__":
     unittest.main()

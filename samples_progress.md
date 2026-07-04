@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 16:37 JST
+Last updated: 2026-07-04 17:12 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -109,15 +109,15 @@ Notes:
 | Family | Classification | Validation anchor | Current reading |
 |---|---|---|---|
 | `SRC-01..05` | first-floor evidence | `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture` | limited `package.mir.json` front-door; final grammar ではない |
-| `CHK-*` | first-floor evidence | `python3 scripts/practical_alpha1_check.py check-all --format json` | checker obligations and rejected rows; repo-owned package input argv is repo-relative |
-| `RUN-*` | first-floor evidence | `python3 scripts/practical_alpha1_run_local.py check-all --format json` | first local-runtime floor; repo-owned package input argv is repo-relative |
-| `HP-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_attach.py check-all --format json` | attach accept/reject/deferred rows; repo-owned package input argv is repo-relative |
-| `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence; repo-owned package inputs / compose file argv and closeout path fields are repo-relative |
-| `VIS-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_export_devtools.py check-all --format json` | observer-safe export panels |
-| `SL-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only save/load evidence; repo-owned runtime-backed package input argv is repo-relative |
-| `AV-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder/custom preview and fallback boundary; repo-owned package input argv is repo-relative |
-| `PE2E-*` | first-floor evidence | `python3 scripts/practical_alpha1_product_preview.py check-all --format json` | exact-evidence preview bundles; not same-session runtime |
-| `PA1W-*` | bounded workflow evidence | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | bounded developer workflow; not product/public-ready α-1 |
+| `CHK-*` | first-floor evidence | `python3 scripts/practical_alpha1_check.py check-all --format json` | checker obligations and rejected rows; repo-owned package input argv and failure display are repo-relative |
+| `RUN-*` | first-floor evidence | `python3 scripts/practical_alpha1_run_local.py check-all --format json` | first local-runtime floor; repo-owned package input argv and failure display are repo-relative |
+| `HP-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_attach.py check-all --format json` | attach accept/reject/deferred rows; repo-owned package input argv and failure display are repo-relative |
+| `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence; repo-owned package inputs / compose file argv, closeout path fields, and failure display are repo-relative |
+| `VIS-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_export_devtools.py check-all --format json` | observer-safe export panels; repo-owned failure display is repo-relative |
+| `SL-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only save/load evidence; repo-owned runtime-backed package input argv and failure display are repo-relative |
+| `AV-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder/custom preview and fallback boundary; repo-owned package input argv and failure display are repo-relative |
+| `PE2E-*` | first-floor evidence | `python3 scripts/practical_alpha1_product_preview.py check-all --format json` | exact-evidence preview bundles with repo-relative failure display; not same-session runtime |
+| `PA1W-*` | bounded workflow evidence | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | bounded developer workflow with repo-relative failure display; not product/public-ready α-1 |
 
 ## Alpha-0 Evidence Reference
 
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 17:12 JST | shared practical failure-surface path redaction | pass | Added shared `scripts/practical_alpha_error_display.py` so practical helper `failed[].error`, direct non-JSON stdout failures, save/load guard errors, product-preview viewer HTML errors, and transport JSON/Docker failure text redact repo-owned absolute path prefixes while preserving external/temp absolute paths. Focused unit coverage passed 122 tests, 12 practical helper `check-all` outputs passed 86 rows / failed 0 with repo-root absolute match 0, docs/source validators passed, and no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 16:37 JST | source-hierarchy status root-display portability | pass | `scripts/check_source_hierarchy.py` now reports `repo_root: .` in pretty and JSON output while keeping absolute `REPO_ROOT` internal to existence checks. Direct pretty/JSON output had repo-root absolute match 0; `scripts.tests.test_validate_docs` passed 37 tests; release-check wrapper unit coverage passed 39 tests; representative Surface release-check passed 18/18 commands and generated output scan had repo-root absolute match 0. No source hierarchy inventory, sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 16:19 JST | current-L2 pipeline / detached-loop path portability | pass | `scripts/current_l2_detached_loop.py`, theorem Lean-stub pipeline, model-check carrier pipeline, source-sample regression planner, and Lean sample sync now use repo-relative paths for repo-owned helper argv, artifact displays, plan/result JSON, source-regression command plans, scan-readiness output, and Lean verification argv while preserving external artifact roots. Focused unit coverage passed 82 tests; source regression passed 23/23 commands; theorem/model plan JSON, scan-readiness output, and generated artifact scans had repo-root absolute match 0; `/tmp` same-lineage checker invocation printed repo-relative fixture/artifact paths. No sample status, workflow status, semantics, proof status, ABI, or canon claim changed. |
 | 2026-07-04 16:01 JST | alpha network Docker success/failure path serialization | pass | `scripts/alpha_network_docker_e2e.py` now serializes `list`, `closeout`, `_run_compose` success payloads, Docker stdout, and failure reasons with repo-relative or compose-output-relative path text while preserving host absolute paths only for Compose bind mount env. Unit coverage passed 16 tests; Cargo `alpha_network_runtime` passed 7 tests; Docker `run NET-02`, `check-all` 6/6, `stage-c-closeout`, and `/tmp` closeout invocation all passed with returned payload host path matches 0. No sample status, workflow status, transport semantics, WAN/federation, ABI, or canon claim changed. |

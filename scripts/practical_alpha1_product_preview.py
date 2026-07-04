@@ -16,6 +16,7 @@ SCRIPT_DIR = SCRIPT_PATH.parent
 REPO_ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
+from practical_alpha_error_display import failure_error_text  # noqa: E402
 import practical_alpha1_attach  # noqa: E402
 import practical_alpha1_avatar  # noqa: E402
 import practical_alpha1_check  # noqa: E402
@@ -861,13 +862,13 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             bundles.append(bundle)
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
     try:
         render_html("PE2E-07")
         viewer_html_available = True
     except Exception as error:  # pragma: no cover
         viewer_html_available = False
-        html_error = str(error)
+        html_error = failure_error_text(error)
     return {
         "sample_count": len(IMPLEMENTED_ROWS),
         "passed": passed,

@@ -13,6 +13,9 @@
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
+- `practical_alpha_error_display.py`
+  shared practical helper display utility that redacts repo-owned absolute path
+  prefixes from failure surfaces while preserving external/temp absolute paths
 - `sugoroku_world_samples.py`
 - `avatar_follow_samples.py`
 - `typed_external_boundary_samples.py`

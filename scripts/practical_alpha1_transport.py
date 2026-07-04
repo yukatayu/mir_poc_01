@@ -14,6 +14,9 @@ from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
+sys.path.insert(0, str(SCRIPT_DIR))
+
+from practical_alpha_error_display import failure_error_text, repo_display_text  # noqa: E402
 COMPOSE_FILE = REPO_ROOT / "samples" / "practical-alpha1" / "docker" / "docker-compose.practical-alpha1.yml"
 BINARY_PATH = REPO_ROOT / "target" / "debug" / "examples" / "mir_practical_alpha1_transport"
 
@@ -123,7 +126,10 @@ def _transport_surface(package_path: str | Path) -> str:
     transport = package.get("alpha_local_transport_input") or {}
     surface = transport.get("transport_surface")
     if not isinstance(surface, str) or not surface:
-        raise RuntimeError(f"missing alpha_local_transport_input.transport_surface in {package_path}")
+        raise RuntimeError(
+            "missing alpha_local_transport_input.transport_surface in "
+            f"{repo_cli_arg(package_path)}"
+        )
     return surface
 
 
@@ -150,7 +156,8 @@ def _build_local_report(package_path: str | Path) -> dict[str, Any]:
         return json.loads(completed.stdout)
     except json.JSONDecodeError as error:  # pragma: no cover
         raise RuntimeError(
-            f"practical transport command did not return JSON for {package_path}: {completed.stdout}"
+            "practical transport command did not return JSON for "
+            f"{repo_cli_arg(package_path)}: {repo_display_text(completed.stdout)}"
         ) from error
 
 
@@ -174,7 +181,8 @@ def _check_docker_available() -> None:
         raise RuntimeError("docker is not installed or not on PATH; practical transport Docker validation cannot run") from error
     except subprocess.CalledProcessError as error:
         raise RuntimeError(
-            f"docker compose is unavailable: {error.stderr.strip() or error.stdout.strip()}"
+            "docker compose is unavailable: "
+            f"{repo_display_text(error.stderr.strip() or error.stdout.strip())}"
         ) from error
 
 
@@ -255,7 +263,7 @@ def _build_docker_report(package_path: str | Path) -> dict[str, Any]:
                 text=True,
             )
         except subprocess.CalledProcessError as error:
-            stderr = error.stderr.strip() or error.stdout.strip()
+            stderr = repo_display_text(error.stderr.strip() or error.stdout.strip())
             raise RuntimeError(
                 f"Docker Compose run for {repo_cli_arg(package_dir)} failed: {stderr}"
             ) from error
@@ -313,7 +321,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             reports.append(report)
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
     by_id = {report.get("sample_id"): report for report in reports}
     transport_plan_boundary_present = not failed and bool(reports) and all(
         report.get("transport_plan_scope") == "practical-alpha1-transport-plan-floor"

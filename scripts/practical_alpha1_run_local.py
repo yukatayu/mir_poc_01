@@ -12,6 +12,9 @@ from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
+sys.path.insert(0, str(SCRIPT_DIR))
+
+from practical_alpha_error_display import failure_error_text, repo_display_text  # noqa: E402
 
 IMPLEMENTED_ROWS: list[dict[str, str]] = [
     {
@@ -108,7 +111,7 @@ def _build_runtime_report(package_path: str | Path) -> dict[str, Any]:
     except json.JSONDecodeError as error:  # pragma: no cover
         raise RuntimeError(
             "local-runtime command did not return JSON for "
-            f"{repo_cli_arg(package_path)}: {completed.stdout}"
+            f"{repo_cli_arg(package_path)}: {repo_display_text(completed.stdout)}"
         ) from error
 
 
@@ -140,7 +143,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             reports.append(report)
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
     runtime_plan_boundary_present = not failed and bool(reports) and all(
         report.get("runtime_plan_scope") == "practical-alpha1-runtime-plan-floor"
         and report.get("runtime_plan_emitted") is False

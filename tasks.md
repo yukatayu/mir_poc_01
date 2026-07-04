@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 16:37 JST
+最終更新: 2026-07-04 17:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -169,8 +169,8 @@ Current holding state:
   `practical_alpha1_save_load.py`; the broader scan also found and closed
   `practical_alpha05_session.py`, Full System V1 nested source argv, and alpha
   network Docker success/failure path serialization.
-  Remaining broader path-portability candidate is now shared practical
-  failure-path redaction.
+  Shared practical failure-path redaction is now also closed, so the known
+  high-confidence broader path-portability candidate set is closed for now.
 - Alpha network Docker helper output now preserves portability for repo-owned
   sample root / compose file / binary path displays, nested `docker compose -f`
   argv, Docker stdout, missing repo binary errors, Docker failure stderr, and
@@ -545,7 +545,7 @@ next line.
 | `remaining LAB claim-family drilldowns` | `T0/G0` reserve | split non-ordinary-assignment `plan/70` rows only when a future G0 close decision or touched-doc stale wording audit needs exact citations; the read/write/dependency row may also be narrowed only if a concrete G1 ordinary-assignment support gap remains | `plan/119` says no remaining row is an immediate default target; no canon L0/L1 change; no historical rewrite beyond focused wording cleanup; no G4 observation or runtime graph widening |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
-| `path-portability broader sweep` | `Macro 0` maintenance | close the remaining high-confidence host-path leak / nested absolute argv candidates from the broader audit without changing semantics or status claims | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
+| `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
 
 ## ordered self-driven packages
 

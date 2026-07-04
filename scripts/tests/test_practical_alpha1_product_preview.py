@@ -180,6 +180,34 @@ class PracticalAlpha1ProductPreviewTests(unittest.TestCase):
         self.assertFalse(payload["stage_pa1_8_complete"])
         self.assertEqual(payload["deferred_avatar_semantics"], [])
 
+    def test_check_all_failure_error_redacts_repo_owned_paths(self) -> None:
+        leaked = (
+            f"leak {runner.REPO_ROOT}/"
+            "samples/practical-alpha1/previews/pe2e-a1-01-local-full-toolchain-preview"
+        )
+        with mock.patch.object(runner, "run_sample", side_effect=RuntimeError(leaked)):
+            with mock.patch.object(
+                runner,
+                "render_html",
+                side_effect=RuntimeError(leaked),
+            ):
+                payload = runner.check_all()
+        self.assertEqual(len(payload["failed"]), len(runner.IMPLEMENTED_ROWS))
+        error = payload["failed"][0]["error"]
+        html_error = payload["viewer_html_error"]
+        self.assertIsNotNone(html_error)
+        assert html_error is not None
+        self.assertIn(
+            "samples/practical-alpha1/previews/pe2e-a1-01-local-full-toolchain-preview",
+            error,
+        )
+        self.assertIn(
+            "samples/practical-alpha1/previews/pe2e-a1-01-local-full-toolchain-preview",
+            html_error,
+        )
+        self.assertNotIn(str(runner.REPO_ROOT), error)
+        self.assertNotIn(str(runner.REPO_ROOT), html_error)
+
 
 if __name__ == "__main__":
     unittest.main()

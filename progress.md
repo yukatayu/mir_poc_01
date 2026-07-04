@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 16:37 JST
+最終更新: 2026-07-04 17:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -820,7 +820,18 @@ installed-binary generated path serialization hardening, plus Full System V1
 helper nested source argv path portability hardening, plus alpha network Docker
 success/failure path serialization hardening, plus current-L2 pipeline and
 detached-loop helper path portability hardening, plus source-hierarchy status
-root-display path portability hardening.
+root-display path portability hardening, plus shared practical helper
+failure-surface path redaction.
+
+- 2026-07-04 17:12 JST
+  Added shared practical helper failure-surface path redaction via
+  `scripts/practical_alpha_error_display.py` and routed practical alpha
+  `check_all()` failure errors plus transport JSON/Docker failure text through
+  it. Focused unit coverage passed 122 tests, practical helper `check-all`
+  outputs passed 86 rows / failed 0 across 12 helpers with repo-root absolute
+  match 0, docs/source validators passed, and the known high-confidence
+  broader path-portability candidate set is closed for now. No sample status,
+  workflow status, semantics, ABI, or canon claim changed.
 
 - 2026-07-04 16:37 JST
   `scripts/check_source_hierarchy.py` の status payload / pretty output の

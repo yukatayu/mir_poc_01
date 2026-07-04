@@ -11,16 +11,18 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-import practical_alpha1_attach
-import practical_alpha1_avatar
-import practical_alpha1_run_local
-import practical_alpha1_save_load
-import practical_alpha1_transport
-
 
 SCRIPT_PATH = Path(__file__).resolve()
 SCRIPT_DIR = SCRIPT_PATH.parent
 REPO_ROOT = SCRIPT_DIR.parent
+sys.path.insert(0, str(SCRIPT_DIR))
+
+from practical_alpha_error_display import failure_error_text  # noqa: E402
+import practical_alpha1_attach  # noqa: E402
+import practical_alpha1_avatar  # noqa: E402
+import practical_alpha1_run_local  # noqa: E402
+import practical_alpha1_save_load  # noqa: E402
+import practical_alpha1_transport  # noqa: E402
 
 DEVTOOLS_SCOPE = "practical-alpha1-devtools-export-floor"
 VIEWER_SCOPE = "practical-alpha1-devtools-viewer-floor"
@@ -1381,7 +1383,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             actualized_observables.append(bundle["actualized_observable"])
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
     return {
         "sample_count": len(IMPLEMENTED_ROWS),
         "passed": passed,

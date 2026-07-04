@@ -15,6 +15,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
+from practical_alpha_error_display import failure_error_text  # noqa: E402
 import practical_alpha1_export_devtools  # noqa: E402
 import practical_alpha1_save_load  # noqa: E402
 
@@ -286,7 +287,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             rows[sample_id] = payload
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
 
     return {
         "sample_count": len(IMPLEMENTED_ROWS),

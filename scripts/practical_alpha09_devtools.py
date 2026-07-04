@@ -15,6 +15,9 @@ from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
+sys.path.insert(0, str(SCRIPT_DIR))
+
+from practical_alpha_error_display import failure_error_text  # noqa: E402
 
 BASE_SESSION_PACKAGE = "samples/practical-alpha1/packages/run-01-local-sugoroku"
 HOST_IO_PACKAGE = "samples/practical-alpha1/packages/oa05-07-add-one-host-io"
@@ -275,7 +278,7 @@ def check_all() -> dict[str, Any]:
             passed.append(sample_id)
             rows[sample_id] = payload
         except Exception as error:  # pragma: no cover
-            failed.append({"sample_id": sample_id, "error": str(error)})
+            failed.append({"sample_id": sample_id, "error": failure_error_text(error)})
 
     return {
         "sample_count": len(IMPLEMENTED_ROWS),
