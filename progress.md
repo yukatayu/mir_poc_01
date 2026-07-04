@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 03:39 JST
+最終更新: 2026-07-05 03:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -1260,8 +1260,16 @@ validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard, plus
 P101 storage helper scaffold guard registration, plus P102 no-default-next-line
 Oracle follow-up, plus P103 Macro 5 self-drive wording drift cleanup, plus
 P104 phase-position `late pre-exit` guard hardening, plus P105 Discord
-notification file-input hardening.
+notification file-input hardening, plus P106 post-P105 no-trigger checkpoint
+validation.
 
+- 2026-07-05 03:50 JST
+  P106 no-trigger checkpoint で post-P105 の roadmap/task boundary と focused
+  validation front doors を再確認した。promoted next package はなく、fresh
+  concrete Macro 0 drift trigger も見つからず、次の G1 review-facing extraction
+  は引き続き user による OBL-020 / OBL-001 明示選択が必要である。phase / gate
+  movement、OBL status movement、runtime / sample / workflow status change は
+  主張していない。
 - 2026-07-05 03:39 JST
   P105 で repo-scoped `discord_notify.py` に `--summary-file` /
   `--next-step-file` を追加し、通知文に backtick / quote / newline / long
