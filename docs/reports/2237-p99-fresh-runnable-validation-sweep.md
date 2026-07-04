@@ -241,7 +241,9 @@ not committed.
 
 ## Commit / push status
 
-Pending at report write.
+Primary package commit / push completed:
+`ef4c49277240a9357abe3f034a9b2f930b50208e` (`Record P99 runnable validation
+sweep`). Report-status commit is pending.
 
 ## Sub-agent session close status
 
