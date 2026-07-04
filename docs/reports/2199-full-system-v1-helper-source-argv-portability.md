@@ -74,6 +74,10 @@ python3 scripts/full_system_v1_release_check.py --format json check-all --out /t
 python3 scripts/full_system_v1_samples.py run mir-02-record-field-positive --format json
 python3 scripts/full_system_v1_samples.py run-runtime mir-03-add-one-positive --format json
 python3 scripts/full_system_v1_samples.py run-operational fsv1-ops-world-core-positive --format json
+python3 -m unittest scripts.tests.test_validate_docs
+python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
+git diff --check
 ```
 
 ## Evidence / outputs / test results
@@ -106,6 +110,14 @@ python3 scripts/full_system_v1_samples.py run-operational fsv1-ops-world-core-po
     output summary `Int64(42)`, repo absolute matches `0`
   - `run-operational fsv1-ops-world-core-positive`: passed `True`, manifest
     passed `True`, runtime passed `True`, repo absolute matches `0`
+- Docs/source validation:
+  - `python3 -m unittest scripts.tests.test_validate_docs`: 36 tests passed
+  - `python3 scripts/check_source_hierarchy.py`: required `659`, present `659`,
+    missing `0`
+  - `python3 scripts/validate_docs.py`: documentation scaffold complete, 1351
+    numbered reports
+  - `git diff --check`: passed
+  - changed/staged endpoint scans: no webhook endpoint matches
 
 ## What changed in understanding
 
@@ -173,7 +185,10 @@ runtime / operational sample commands that were run above.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / initial report commit:
+  `bd292517 Use relative full-system source argv`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
