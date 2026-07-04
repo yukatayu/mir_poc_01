@@ -243,8 +243,11 @@ docs-only manifest package.
 
 ## Commit / push status
 
-Pending at report write. This package must be committed with
-`git commit --no-gpg-sign` and pushed after final validation.
+- Primary package commit:
+  `1b9e1a84ab76fcc71f6758ec495b96e825b5d130`
+  (`Add G1 SCN static slice manifest`).
+- Primary package push: pushed to `origin/main`.
+- This status section is updated by a follow-up bookkeeping commit.
 
 ## Sub-agent session close status
 
