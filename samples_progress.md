@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 14:47 JST
+Last updated: 2026-07-04 14:52 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -111,7 +111,7 @@ Notes:
 | `SRC-01..05` | first-floor evidence | `cargo test -p mir-ast practical_alpha1_front_door -- --nocapture` | limited `package.mir.json` front-door; final grammar ではない |
 | `CHK-*` | first-floor evidence | `python3 scripts/practical_alpha1_check.py check-all --format json` | checker obligations and rejected rows; repo-owned package input argv is repo-relative |
 | `RUN-*` | first-floor evidence | `python3 scripts/practical_alpha1_run_local.py check-all --format json` | first local-runtime floor; repo-owned package input argv is repo-relative |
-| `HP-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_attach.py check-all --format json` | attach accept/reject/deferred rows |
+| `HP-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_attach.py check-all --format json` | attach accept/reject/deferred rows; repo-owned package input argv is repo-relative |
 | `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence; repo-owned package inputs / compose file argv and closeout path fields are repo-relative |
 | `VIS-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_export_devtools.py check-all --format json` | observer-safe export panels |
 | `SL-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only save/load evidence |
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 14:52 JST | practical alpha-1 attach helper path portability | pass | `scripts/practical_alpha1_attach.py` now passes repo-owned practical package roots to the nested hotplug Cargo example as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and hotplug subprocess invocation. Unit coverage passed 11 tests, `check-all` passed 9/9 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, Cargo `practical_alpha1_front_door` passed 11 tests, `practical_alpha1_hotplug_plan` passed 10 tests, `hotplug_runtime_skeleton` passed 8 tests, `practical_alpha1_hotplug` passed 17 tests, and `alpha_layer_insertion_runtime` passed 6 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:47 JST | practical alpha-1 run-local helper path portability | pass | `scripts/practical_alpha1_run_local.py` now passes repo-owned practical package roots to the nested local-runtime Cargo example as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and local-runtime subprocess invocation. Unit coverage passed 12 tests, `check-all` passed 4/4 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, Cargo `practical_alpha1_runtime_plan` passed 5 tests, `practical_alpha1_local_runtime` passed 6 tests, and `alpha_local_runtime` passed 3 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:39 JST | practical alpha-1 checker helper path portability | pass | `scripts/practical_alpha1_check.py` now passes repo-owned practical package roots to the nested checker Cargo example as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and checker subprocess invocation. Unit coverage passed 10 tests, `check-all` passed 10/10 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, and Cargo `practical_alpha1_checker` passed 3 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:34 JST | practical alpha-1 transport helper path portability | pass | `scripts/practical_alpha1_transport.py` now passes repo-owned local package inputs and Docker Compose `-f` paths as repo-relative `samples/...` argv and reports closeout `compose_file` / `binary_path` as repo-relative values. Docker bind mount env remains host-path internal only. Unit coverage passed 10 tests; `check-all` passed 7/7 and `closeout` both had repo-root absolute match 0. No sample status, workflow status, semantics, ABI, or canon claim changed. |

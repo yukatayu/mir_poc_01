@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:47 JST
+最終更新: 2026-07-04 14:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -807,7 +807,19 @@ portability hardening, plus Mir computational helper subprocess argv path
 portability hardening, plus practical alpha-1 transport helper path portability
 hardening, plus practical alpha-1 checker helper subprocess argv path
 portability hardening, plus practical alpha-1 run-local helper subprocess argv
+path portability hardening, plus practical alpha-1 attach helper subprocess argv
 path portability hardening.
+
+- 2026-07-04 14:52 JST
+  `scripts/practical_alpha1_attach.py` の nested hotplug Cargo example
+  package argv を repo-owned practical package roots について repo-relative
+  `samples/...` に変更した。Regression tests cover repo-owned package dirs,
+  external absolute fallback, and hotplug subprocess invocation. Unit 11
+  tests、`check-all` 9/9、`closeout` repo-root absolute match 0、Cargo
+  `practical_alpha1_front_door` 11 tests、`practical_alpha1_hotplug_plan` 10
+  tests、`hotplug_runtime_skeleton` 8 tests、`practical_alpha1_hotplug` 17
+  tests、`alpha_layer_insertion_runtime` 6 tests が通過。sample status、
+  workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 14:47 JST
   `scripts/practical_alpha1_run_local.py` の nested local-runtime Cargo

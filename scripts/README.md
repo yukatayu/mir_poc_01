@@ -217,6 +217,9 @@
   - this exercises `samples/practical-alpha1/packages/hp-a1-*/` through `crates/mir-ast::practical_alpha1_hotplug_plan` and `crates/mir-runtime::practical_alpha1_hotplug`
   - it consumes checked practical package input through a distinct hotplug-plan boundary
   - current actualized rows are `HP-A1-01..05`、`HP-A1-04B1`、`HP-A1-04B2`、`HP-A1-06`、`HP-A1-07`
+  - repo-owned package inputs are passed to the nested hotplug Cargo example
+    as repo-relative `samples/...` argv so transient helper runs do not
+    depend on the host checkout path
   - `HP-A1-07` is an explicit deferred detach minimal contract boundary with `operation_kind = detach` and `detach_boundary_ref`
   - it is a non-final hot-plug command and does not claim final object package attach, detach runtime lifecycle, Docker transport, save/load, or final public package/hot-plug API
 - practical alpha-1 first transport floor now has an alpha-local script surface
