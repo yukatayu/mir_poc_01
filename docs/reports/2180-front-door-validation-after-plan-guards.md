@@ -157,7 +157,11 @@ release audit.
 
 ## Commit / push status
 
-Commit and push pending at this report update step.
+Committed and pushed:
+
+- `98cd5a9b Record front door validation after plan guards`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
