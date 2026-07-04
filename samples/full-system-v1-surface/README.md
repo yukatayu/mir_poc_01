@@ -20,8 +20,9 @@ viewer/telemetry ABI.
   publish/observe rows, generated edges, RHS indexed-read dependency rows,
   source spans, obligations, underdeclared generated failure-row rejection, and
   private/non-visible field rejection. `ELAB-11/12` are later G1 LAB
-  dependency-gap rows and do not claim C-static conformance or runtime read
-  materialization.
+  dependency-gap rows, and `ELAB-17` is a later G1 LAB exact SCN-01
+  `VisibilityDenied` negative row. These rows do not claim C-static
+  conformance, runtime request serving, or runtime read materialization.
 - `role-admission/` is actualized for `P-SURF-05` as a narrow report-level role
   admission evidence lane for role claims, join admission requests, accepted
   verdicts, capability grants, admission witnesses, missing-grant write

@@ -111,6 +111,15 @@
       "runner": "elaboration"
     },
     {
+      "sample_id": "ELAB-17",
+      "root_name": "elab-17-scn01-visibility-failure-row-negative",
+      "stage": "G1-static-gap",
+      "current_status": "executable",
+      "source": "elab-17-scn01-visibility-failure-row-negative/main/src/scn01-visibility-failure-row-negative.mir",
+      "expected": "elab-17-scn01-visibility-failure-row-negative/expected/elaboration.json",
+      "runner": "elaboration"
+    },
+    {
       "sample_id": "ELAB-13",
       "root_name": "elab-13-non-visibility-singleton-failure-row-negative",
       "stage": "G1-repair-prototype",

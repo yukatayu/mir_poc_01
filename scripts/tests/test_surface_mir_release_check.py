@@ -69,7 +69,7 @@ def payload_for(command_name: str) -> dict | None:
         return {
             "command": "check-all",
             "accepted": True,
-            "source_count": 53,
+            "source_count": 54,
             "source_authority": ".mir",
             "final_public_api_frozen": False,
         }

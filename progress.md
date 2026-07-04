@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 18:08 JST
+最終更新: 2026-07-04 18:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -107,6 +107,18 @@ semantic source authority.
   scope. This is LAB manifest memory only: no canon edit, G1 exit, proof
   discharge, conformance, runtime/product/API freeze, or runnable sample status
   relabel.
+- Current SCN-01 visibility negative actualization note:
+  `plan/123-g1-scn01-visibility-negative-actualization.md` and `ELAB-17`
+  actualize the exact SCN-01 visible-write `VisibilityDenied` negative row
+  that `plan/122` had kept as structural support only. The row is rejected with
+  `E-ROW-002` / `VisibilityDenied`, while preserving the write request,
+  same-field RHS dependency, publish / observe consequences, report-local
+  OBL-024 projection carrier, and LAB-only singleton add-to-fails repair
+  evidence. This is still LAB static evidence only: no canon edit, G1 exit,
+  proof discharge, conformance, runtime dispatch, final diagnostic/repair ABI,
+  or sample-status relabel. Oracle advisory review preferred an OBL-001
+  boundary audit before further SCN fixture expansion, so the next safe package
+  should audit the statement boundary before adding another static gap row.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -220,7 +232,7 @@ semantic source authority.
 - Current OBL-024 executable projection carrier note:
   `plan/110-g1-obl024-executable-projection-carrier.md` records LAB-only
   executable E-ROW projection evidence inside current `lab_diagnostic_details`.
-  `ELAB-04/07/10/13..16` now carry non-final
+  `ELAB-04/07/10/13..17` now carry non-final
   `diagnostic_soundness_projection` with helper-local diagnostic id,
   report-local association key, reported bindings, and report-local trace
   replay anchor.
@@ -232,7 +244,7 @@ semantic source authority.
   Rust guard hardening for the current projection-bearing fixtures. The Rust
   helper now checks projection / request-context / failure-row-context
   consistency and non-serialization of skipped internal association fields, and
-  fixture-backed Rust tests cover `ELAB-04/07/10/13..16`. This does not change
+  fixture-backed Rust tests cover `ELAB-04/07/10/13..17`. This does not change
   production emission logic, expected JSON, repair output, Diagnostic ABI,
   proof status, conformance, or G1 exit.
 - Current OBL-024 replay vocabulary preflight note:
@@ -448,8 +460,8 @@ semantic source authority.
   package, change `specs/`, or decide whether work should move to a separate
   theory/design repository.
 - Current status after this snapshot: `P-SURF-99` closed the bounded Surface
-  alpha audit over `P-SURF-01..08`. Surface alpha/LAB evidence now has 52 helper rows
-  and 53 `.mir` source files, with parser, indexed-state, elaboration,
+  alpha audit over `P-SURF-01..08`. Surface alpha/LAB evidence now has 53 helper rows
+  and 54 `.mir` source files, with parser, indexed-state, elaboration,
   generated communication, role admission, source patch, source operational,
   static devtools diagnostics floors, and G1 RHS dependency-gap rows revalidated.
 - Next gap: OBL-025 now has a compile-check-only LAB statement shape, an
@@ -520,7 +532,7 @@ semantic source authority.
 | `P-SURF-00B` | Surface Mir brace/source-authority docs rebaseline | `closed` | `specs/39..43`, `plan/64..68`, snapshot docs and guides | implementation line opened |
 | `P-SURF-01` | Surface brace parser | `evidence-closed parser lane` | `crates/mir-ast::surface_alpha`, `surface_mir_alpha_parse`, `samples/full-system-v1-surface/syntax/`, `scripts/surface_mir_samples.py` | keep non-final grammar; feed parser AST into later Surface packages |
 | `P-SURF-02` | indexed state | `evidence-closed semantic checker lane` | `crates/mir-semantics::surface_indexed_state`, `surface_indexed_state_check`, `samples/full-system-v1-surface/indexed-state/`, `IDX-01..05` | integrate with Surface-to-Core elaboration and runtime carrier later |
-| `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane plus G1 dependency-gap / E-ROW rows` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01..16` | keep feeding later runtime/admission/proof work; no conformance claim |
+| `P-SURF-03` | Surface-to-Core elaboration | `evidence-closed elaboration lane plus G1 dependency-gap / E-ROW rows` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-01..17` | keep feeding later runtime/admission/proof work; no conformance claim |
 | `P-SURF-04` | auto communication / publish / observe | `evidence-closed generated communication lane` | `crates/mir-semantics::surface_to_core_elaboration`, `surface_to_core_elaborate`, `samples/full-system-v1-surface/elaboration/`, `ELAB-03/09/10` plus widened `ELAB-01/05/08` | runtime dispatch and TypeMismatch discharge remain later |
 | `P-SURF-05` | role admission | `evidence-closed admission/grant lane` | `crates/mir-semantics::surface_role_admission`, `surface_role_admission_check`, `samples/full-system-v1-surface/role-admission/`, `ROLE-01..04` | runtime identity/admission lifecycle remains later |
 | `P-SURF-06` | source patch hot-plug | `evidence-closed source patch lane` | `crates/mir-runtime::surface_source_patch_hotplug`, `mirrorea-alpha check-source/parse-source/elaborate-source/patch-source/export-core-ir`, `samples/full-system-v1-surface/source-patch/`, `PATCH-01..04` | final hot-plug ABI and migration planner remain later |
@@ -794,7 +806,7 @@ Research-discovery items:
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
 | textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately; raw parser helper payload paths are repo-relative for repo-owned sources | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
-| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..16`, Rust fixture guards for those projection-bearing rows, and docs-first replay vocabulary separating report-local anchors from future proof-level replay relations, `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
+| Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..17`, Rust fixture guards for those projection-bearing rows, and docs-first replay vocabulary separating report-local anchors from future proof-level replay relations, `E-ROW-002` / `VisibilityDenied` repair evidence including exact SCN-01 visible-write negative `ELAB-17`, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
 | auto communication / publish / observe | `generated-communication-evidence` | generated MessageEnvelope / visible publish / observe rows and `VisibilityDenied` failure containment exist in Core IR; runtime dispatch remains later | 着手可能 |
 | role admission / capability grant | `role-admission-evidence` | role claim, join admission request, capability grant-backed accepted write, witness, stale rejection with a post-stale write fence, and hash metadata rows exist; runtime identity/admission lifecycle remains later | 着手可能 |
@@ -851,8 +863,16 @@ success/failure path serialization hardening, plus current-L2 pipeline and
 detached-loop helper path portability hardening, plus source-hierarchy status
 root-display path portability hardening, plus shared practical helper
 failure-surface path redaction, plus repo-triage recut matrix classification,
-plus G1 minimal vertical slice candidate mapping and SCN exact static slice
-manifest mapping.
+plus G1 minimal vertical slice candidate mapping, SCN exact static slice
+manifest mapping, and SCN-01 visibility negative actualization.
+
+- 2026-07-04 18:24 JST
+  `plan/123-g1-scn01-visibility-negative-actualization.md` と `ELAB-17` を
+  追加し、SCN-01 visible-write の `VisibilityDenied` 欠落を exact current
+  executable negative evidence として固定した。Surface helper は 53 rows へ
+  拡張され、Rust fixture guard は `ELAB-17` の OBL-024 projection / repair
+  shape も確認する。canon edit、G1 exit、proof discharge、conformance、
+  runtime dispatch、final diagnostic/repair ABI は変更していない。
 
 - 2026-07-04 18:08 JST
   `plan/122-g1-scn-exact-static-slice-manifest.md` を追加し、
@@ -1676,7 +1696,7 @@ manifest mapping.
   broad build/execution audit と clippy hardening を実施し、`cargo fmt --check`、`cargo check --workspace --all-targets`、`cargo build --workspace --all-targets`、`cargo test --workspace --all-targets --no-fail-fast`、`cargo clippy --workspace --all-targets -- -D warnings`、`python3 -m unittest discover -s scripts/tests`、主要 sample / release check / `mirrorea-alpha` demo 起動確認を通した。Lean stub artifact pipeline は `/tmp` 出力で通ったが、`lean` / `lake` / `elan` は PATH 不在のため compiler mechanization check は未実行。
 - 2026-05-24 20:42 JST
   `P-SURF-99` で final Surface alpha audit を close し、Surface release check、Surface helper / authoring check、Product Alpha release anchor、operational product helper、minimal alpha-1 pattern verifier、docs validators、`cargo fmt --check`、`git diff --check` を再実行した。Surface line は then-current 46 helper rows / 47 `.mir` source files の bounded alpha evidence として閉じ、final runtime/transport、final source patch ABI、final devtools viewer/telemetry ABI、public grammar/API は later gate のまま。
-  その後の G1 addenda により current helper count は 52 rows / 53 `.mir`
+  その後の G1 addenda により current helper count は 53 rows / 54 `.mir`
   source files へ進んでおり、current snapshot ではこちらを用いる。
 - 2026-05-24 20:13 JST
   `P-SURF-08` で static devtools diagnostics evidence floor を actualize し、`samples/full-system-v1-surface/devtools/`、`DEV-01..02`、`scripts/surface_mir_samples.py check-all` を同期した。panel は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans を持つが、final viewer / telemetry ABI や runtime devtools dispatch ではない。then-promoted package は `P-SURF-99 final surface alpha audit`。

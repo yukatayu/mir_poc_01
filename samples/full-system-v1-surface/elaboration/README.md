@@ -22,17 +22,19 @@ Current executable rows:
 - `ELAB-14`: non-visibility singleton `MissingCapability` omission carries LAB-only `E-ROW-001` repair evidence.
 - `ELAB-15`: non-visibility singleton `RouteUnavailable` omission carries LAB-only `E-ROW-001` repair evidence.
 - `ELAB-16`: non-visibility singleton `StaleMembership` omission carries LAB-only `E-ROW-001` repair evidence.
+- `ELAB-17`: SCN-01-shaped visible write rejects an underdeclared
+  `VisibilityDenied` failure row with exact LAB static evidence.
 
 These rows do not claim final public grammar, runtime MessageEnvelope dispatch, role-admission capability grants, source patch activation, or TypeMismatch typechecker discharge.
 
 G1 LAB-only E-ROW diagnostic detail evidence is present for `ELAB-04`,
-`ELAB-07`, `ELAB-10`, and `ELAB-13..16` as non-final
+`ELAB-07`, `ELAB-10`, and `ELAB-13..17` as non-final
 `lab_diagnostic_details`. It preserves legacy
 `generated_failure_not_declared` output, now includes request / failure-row
 context plus a LAB-only `diagnostic_soundness_projection` for OBL-024
 association / reported bindings / trace-local replay evidence, emits
-`E-ROW-002` / `VisibilityDenied`-only `suggested_repair[]` evidence for
-`ELAB-10`, emits `E-ROW-001` non-visibility singleton `suggested_repair[]`
+`E-ROW-002` / `VisibilityDenied` `suggested_repair[]` evidence for
+`ELAB-10` and `ELAB-17`, emits `E-ROW-001` non-visibility singleton `suggested_repair[]`
 evidence for `ELAB-13..16` under the `plan/93` gate, emits one exact
 `ELAB-07` `set_insertion` item under `plan/102`, and keeps that exact item
 guarded by `plan/103..106` so it is not emitted for nearby negative variants

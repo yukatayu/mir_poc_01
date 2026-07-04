@@ -1858,6 +1858,32 @@ fn elab10_sample_fixture_carries_obl024_projection_with_visibility_repair() {
 }
 
 #[test]
+fn elab17_scn01_sample_fixture_carries_visibility_write_projection() {
+    let details = rejected_lab_details_for_sample(
+        "samples/full-system-v1-surface/elaboration/elab-17-scn01-visibility-failure-row-negative/main/src/scn01-visibility-failure-row-negative.mir",
+    );
+
+    assert_eq!(details.len(), 1);
+    assert_eq!(details[0]["canon_id"], "E-ROW-002");
+    assert_eq!(
+        details[0]["missing_evidence"],
+        serde_json::json!(["VisibilityDenied"])
+    );
+    assert_eq!(details[0]["request_context"]["request_kind"], "write");
+    assert_eq!(details[0]["request_context"]["owner_locus"], "World");
+    assert_eq!(details[0]["request_context"]["field_name"], "position");
+    assert_eq!(details[0]["failure_row_context"]["event_name"], "roll");
+    assert_obl024_diagnostic_soundness_projection(&details[0]);
+    let repairs = details[0]["suggested_repair"]
+        .as_array()
+        .expect("ELAB-17 sample emits one LAB visibility repair item");
+    assert_eq!(repairs.len(), 1);
+    assert_eq!(repairs[0]["repair_family"], "add-to-fails-row");
+    assert_eq!(repairs[0]["diagnostic_family"], "E-ROW-002");
+    assert_eq!(repairs[0]["missing_failure"], "VisibilityDenied");
+}
+
+#[test]
 fn suggested_repair_payloads_are_non_placeholder_local_witnesses() {
     let source = r#"
 module Surface.Elab.VisibilityRepairPayload

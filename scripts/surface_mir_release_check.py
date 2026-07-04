@@ -12,7 +12,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RELEASE_CHECK_SCOPE = "p_surf_99_final_surface_alpha_audit"
-SURFACE_SAMPLE_COUNT_FOR_P_SURF_99 = 52
+SURFACE_SAMPLE_COUNT_FOR_P_SURF_99 = 53
 
 
 @dataclass(frozen=True)

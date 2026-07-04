@@ -331,6 +331,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/120-repo-triage-recut-matrix.md",
             "plan/121-g1-minimal-vertical-slice-candidate-map.md",
             "plan/122-g1-scn-exact-static-slice-manifest.md",
+            "plan/123-g1-scn01-visibility-negative-actualization.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

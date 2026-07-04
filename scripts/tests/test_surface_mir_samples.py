@@ -177,8 +177,8 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "surface_mir_alpha_source")
-        self.assertEqual(payload["sample_count"], 52)
-        self.assertEqual(payload["executable_count"], 52)
+        self.assertEqual(payload["sample_count"], 53)
+        self.assertEqual(payload["executable_count"], 53)
         self.assertEqual(payload["family_count"], 7)
         self.assertEqual(
             payload["matrix_status"]["surface_mir_elaboration"],
@@ -691,6 +691,44 @@ class SurfaceMirSamplesTests(unittest.TestCase):
             [("target", "hp"), ("self", "atk")],
         )
         self.assertEqual(payload["actual"]["observation_summaries"], [])
+
+    def test_elaboration_scn01_visibility_failure_row_negative_reports_expected_diagnostic(self) -> None:
+        payload = _run_helper("run", "ELAB-17")
+
+        self.assertTrue(payload["accepted"])
+        self.assertFalse(payload["actual"]["accepted"])
+        self.assertEqual(
+            payload["actual"]["diagnostic_codes"],
+            ["generated_failure_not_declared"],
+        )
+        self.assertEqual(
+            payload["actual"]["remote_request_summaries"][0],
+            {
+                "request_kind": "write",
+                "requester_locus": "role:BrowserClient",
+                "owner_locus": "World",
+                "state_name": "player",
+                "key_expr": "self",
+                "generated_from": "nested_place_block",
+                "failure_row_complete": False,
+            },
+        )
+        self.assertEqual(
+            payload["actual"]["dependency_summaries"][0]["field_name"],
+            "position",
+        )
+        self.assertIn("auto_publish", payload["actual"]["generated_edge_kinds"])
+        self.assertIn("auto_observe", payload["actual"]["generated_edge_kinds"])
+        detail = payload["actual"]["lab_diagnostic_details"][0]
+        self.assertEqual(detail["canon_id"], "E-ROW-002")
+        self.assertEqual(detail["missing_evidence"], ["VisibilityDenied"])
+        self.assertEqual(detail["request_context"]["request_kind"], "write")
+        self.assertEqual(detail["request_context"]["field_name"], "position")
+        self.assertEqual(detail["failure_row_context"]["event_name"], "roll")
+        self.assertEqual(
+            detail["suggested_repair"][0]["repair_family"],
+            "add-to-fails-row",
+        )
 
     def test_elaboration_non_visibility_singleton_failure_row_reports_repair_payload(self) -> None:
         cases = [
@@ -1217,7 +1255,7 @@ class SurfaceMirSamplesTests(unittest.TestCase):
         payload = _run_helper("check-all")
 
         self.assertEqual(payload["failed"], [])
-        self.assertEqual(len(payload["passed"]), 52)
+        self.assertEqual(len(payload["passed"]), 53)
 
 
 if __name__ == "__main__":
