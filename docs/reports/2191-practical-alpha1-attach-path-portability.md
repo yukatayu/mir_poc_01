@@ -230,7 +230,12 @@ Sub-agent review:
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `f994bf6a Use relative practical attach helper paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
