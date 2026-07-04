@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 12:38 JST
+最終更新: 2026-07-04 12:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -795,8 +795,17 @@ claim-family drilldown, remaining claim-family priority map, focused
 source-hierarchy stale wording audit, and Full System V1 provider / renderer /
 release-check path portability hardening, plus Product Alpha release-check path
 portability hardening, plus active clean-near-end emitter / research abstract /
-current-L2 README path portability hardening, plus snapshot timestamp guard
-hardening.
+current-L2 README path portability hardening, snapshot timestamp guard
+hardening, and current-L2 closeout `lean_roots` path portability hardening.
+
+- 2026-07-04 12:49 JST
+  README の標準入口 `make check` と `current_l2_guided_samples.py smoke-all`
+  / `closeout` を再実行し、`closeout` の `lean_roots` に残っていた checkout
+  absolute path を `samples/lean/foundations` /
+  `samples/lean/clean-near-end` へ repo-relative 化した。Rust regression test を
+  追加し、`cargo test -p mir-runtime --test clean_near_end_samples` 28 tests、
+  `cargo fmt --check`、`make check`、closeout absolute-path scan を確認した。
+  sample status、workflow status、semantics、ABI、canon status は変えていない。
 
 - 2026-07-04 12:38 JST
   `scripts/validate_docs.py` に `progress.md` / `tasks.md` の top `最終更新`

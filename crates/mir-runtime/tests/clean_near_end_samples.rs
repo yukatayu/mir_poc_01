@@ -150,6 +150,24 @@ fn clean_near_end_matrix_counts_all_families() {
 }
 
 #[test]
+fn clean_near_end_closeout_reports_repo_relative_lean_roots() {
+    let closeout = build_clean_near_end_closeout().unwrap();
+    assert_eq!(
+        closeout.lean_roots,
+        vec![
+            "samples/lean/foundations".to_string(),
+            "samples/lean/clean-near-end".to_string(),
+        ]
+    );
+    assert!(
+        closeout
+            .lean_roots
+            .iter()
+            .all(|path| !path.starts_with("/home/") && !path.starts_with("/Users/"))
+    );
+}
+
+#[test]
 fn clean_sample_delegated_rng_service_emits_term_signatures() {
     let report = run_clean_near_end_sample("05_delegated_rng_service").unwrap();
     assert!(report.term_signatures.iter().any(|signature| {

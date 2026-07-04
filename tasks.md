@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 12:38 JST
+最終更新: 2026-07-04 12:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -91,8 +91,10 @@ Current holding state:
   links for current reader-facing sample paths. `mir-clean-near-end` and
   `scripts/current_l2_lean_sample_sync.py` now emit repo-relative paths for the
   same current sample/manifest surfaces, so `actual output` snippets do not
-  depend on the host checkout path. Historical reports, old research abstract
-  archives, old Lean bundles, `tmp_faq/`, and external
+  depend on the host checkout path. `current_l2_guided_samples.py closeout`
+  now also reports repo-relative `lean_roots`, keeping the current-L2 closeout
+  output portable for active reader/automation use. Historical reports, old
+  research abstract archives, old Lean bundles, `tmp_faq/`, and external
   `/home/codex/.codex/...` operation paths remain classified as out-of-scope
   evidence or environment references. `scripts/validate_docs.py` now guards
   active reader-facing docs/samples against reintroducing host-specific repo

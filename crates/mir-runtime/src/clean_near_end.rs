@@ -2882,14 +2882,13 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
         families,
         proof_samples: proof_obligation_index().keys().cloned().collect(),
         lean_roots: vec![
-            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-                .join("../../samples/lean/foundations")
-                .display()
-                .to_string(),
-            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-                .join("../../samples/lean/clean-near-end")
-                .display()
-                .to_string(),
+            repo_relative_display_path(
+                &PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../samples/lean/foundations"),
+            ),
+            repo_relative_display_path(
+                &PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                    .join("../../samples/lean/clean-near-end"),
+            ),
         ],
         signature_lanes: signature_lanes(),
         signature_scope: "clean_near_end_canonical_inventory".to_string(),
