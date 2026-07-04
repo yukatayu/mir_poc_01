@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 10:18 JST
+最終更新: 2026-07-04 10:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -69,6 +69,15 @@ semantic source authority.
   documents as supporting proof-boundary evidence. It does not edit canon,
   claim G0/G1 exit, move OBL status, claim C-static conformance, or promote
   helper / Lean compile-check evidence to proof status.
+- Current remaining-claim-family priority note:
+  `plan/119-g0-remaining-claim-family-drilldown-priority.md` now classifies
+  the remaining `plan/70` rows as closed-for-now, support-only, later-gate,
+  evidence-only, process-only, or open-on-demand. It says no remaining row
+  should be drilled down immediately by default; only a concrete G1
+  ordinary-assignment read/write/dependency support gap should reopen a narrow
+  support drilldown. It does not claim any canon movement, gate exit, proof
+  status, conformance, implementation completion, or runnable sample status
+  change.
 - Current G1 planning note: `plan/71-g1-ordinary-assignment-target.md` now
   drafts the ordinary simple-assignment target/proof-boundary split in LAB memory. It
   targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
@@ -766,8 +775,16 @@ statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
 guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
 vocabulary refinement, OBL-024 Lean association vocabulary refinement,
 OBL-024 association guard hardening, OBL-025 repair completeness guard
-hardening, OBL-001/020/021 statement guard hardening, and ordinary-assignment
-claim-family drilldown.
+hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
+claim-family drilldown, and remaining claim-family priority map.
+
+- 2026-07-04 10:33 JST
+  `plan/119-g0-remaining-claim-family-drilldown-priority.md` を追加し、
+  `plan/70` の remaining claim-family rows を closed-for-now / support-only /
+  later-gate / evidence-only / process-only / open-on-demand に分類した。
+  ordinary assignment 以外の row は現時点で即 drilldown しない方針を mirror
+  し、canon edit、G0/G1..G7 exit、OBL status movement、proof discharge、
+  conformance、implementation completion、sample status change は主張しない。
 
 - 2026-07-04 10:18 JST
   `plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md` を追加し、

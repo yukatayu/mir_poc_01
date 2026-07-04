@@ -91,11 +91,13 @@ audit. A later drilldown may split any row into individual `LAB:` references.
 1. Use this ledger as the first LAB downgrade map for T0/G0 work.
 2. Do not claim G0 exit from this ledger. G0 exit still requires canon gate
    judgment and any required human decision.
-3. Next self-driven package can draft the G1 ordinary-assignment target:
-   source assignment, transparent read dependency, owner-local vs owner-directed
-   write, generated effect/failure/authority obligations, and source-span
-   diagnostics.
-4. Later drilldowns may split this file into per-claim rows or machine-readable
+3. The ordinary-assignment row now has `plan/118` as its line-level LAB
+   citation drilldown. Do not re-open it as if `plan/71..78` and `plan/117`
+   did not already exist.
+4. `plan/119-g0-remaining-claim-family-drilldown-priority.md` now classifies
+   the remaining rows by gate / evidence priority. Use it before opening
+   another `plan/70` drilldown.
+5. Later drilldowns may split this file into per-claim rows or machine-readable
    ledgers, but should not create a second normative source.
 
 ## Open questions
