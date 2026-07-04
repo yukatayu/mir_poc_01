@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 13:23 JST
+最終更新: 2026-07-04 13:32 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -73,7 +73,8 @@ Current holding state:
   `docs/research_abstract/*.md`, `plan/19`, `plan/50`, and `plan/58`.
   `scripts/README.md` now mirrors the expanded validator responsibility,
   including source-hierarchy wording lint, active host-path lint, and snapshot
-  top `最終更新` freshness guard.
+  top `progress.md` / `tasks.md` `最終更新` plus `samples_progress.md`
+  `Last updated` freshness guard.
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
@@ -496,7 +497,7 @@ next line.
 
 | Task | Objective | Validation | Stop line |
 |---|---|---|---|
-| docs freshness audit | keep README, Documentation, scripts README, progress, tasks, samples dashboard, indexes aligned; keep `progress.md` / `tasks.md` top `最終更新` headers present and not lagging behind timestamped body entries | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
+| docs freshness audit | keep README, Documentation, scripts README, progress, tasks, samples dashboard, indexes aligned; keep `progress.md` / `tasks.md` top `最終更新` and `samples_progress.md` top `Last updated` headers present and not lagging behind timestamped body entries | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
 | canon/LAB wording audit | keep touched LAB docs from re-promoting legacy `specs/` or helper closeouts to canon status | `python3 scripts/validate_docs.py` source-hierarchy wording lint plus `python3 scripts/check_source_hierarchy.py`; latest lint-backed pass also corrected `docs/hands_on/README.md`, selected `docs/research_abstract/*.md`, `plan/19`, `plan/50`, and `plan/58` | do not rewrite historical LAB evidence wholesale or change runnable row status |
 | product compatibility audit | preserve Product Alpha and operational suite while Surface advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
 | sample taxonomy audit | keep Surface planned roots distinct from active roots | source hierarchy and relevant helper checks | do not create or mark `samples/full-system-v1-surface/` workflow-ready until implementation rows exist |

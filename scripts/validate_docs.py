@@ -772,12 +772,13 @@ HOST_SPECIFIC_REPO_PATH_PATTERNS = [
 
 SNAPSHOT_LAST_UPDATED_FILES = [
     "progress.md",
+    "samples_progress.md",
     "tasks.md",
 ]
 
 JST_TIMESTAMP_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST")
 LAST_UPDATED_PATTERN = re.compile(
-    r"^最終更新:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST)\s*$",
+    r"^(?:最終更新|Last updated):\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST)\s*$",
     re.MULTILINE,
 )
 NUMBERED_PLAN_FILE_PATTERN = re.compile(r"^\d+-.*\.md$")

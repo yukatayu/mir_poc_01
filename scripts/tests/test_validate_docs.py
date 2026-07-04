@@ -881,6 +881,47 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn("Snapshot docs have stale last-updated headers", stdout.getvalue())
         self.assertIn("tasks.md", stdout.getvalue())
 
+    def test_main_rejects_stale_samples_progress_last_updated_header(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "samples_progress.md").write_text(
+                "# samples_progress.md\n\n"
+                "Last updated: 2026-07-04 12:13 JST\n\n"
+                "## Current status\n\n"
+                "| sample | status |\n"
+                "| --- | --- |\n"
+                "| samples/clean-near-end | current |\n\n"
+                "## Recent Validation Log\n\n"
+                "- 2026-07-04 12:38 JST: later sample dashboard note\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Snapshot docs have stale last-updated headers", stdout.getvalue())
+        self.assertIn("samples_progress.md", stdout.getvalue())
+        self.assertIn("2026-07-04 12:13 JST", stdout.getvalue())
+        self.assertIn("2026-07-04 12:38 JST", stdout.getvalue())
+
+    def test_snapshot_top_last_updated_timestamp_accepts_english_label(self) -> None:
+        text = "# samples_progress.md\n\nLast updated: 2026-07-04 12:38 JST\n\n"
+
+        self.assertEqual(
+            validate_docs.snapshot_top_last_updated_timestamp(text),
+            "2026-07-04 12:38 JST",
+        )
+
     def test_main_rejects_missing_top_snapshot_last_updated_header(self) -> None:
         template_text = self._valid_template_text()
 

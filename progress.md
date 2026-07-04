@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:26 JST
+最終更新: 2026-07-04 13:32 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -798,7 +798,16 @@ portability hardening, plus active clean-near-end emitter / research abstract /
 current-L2 README path portability hardening, snapshot timestamp guard
 hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
-`scripts/README.md` source-hierarchy structural-check responsibility refresh.
+`scripts/README.md` source-hierarchy structural-check responsibility refresh,
+and `samples_progress.md` top timestamp freshness guard extension.
+
+- 2026-07-04 13:32 JST
+  `scripts/validate_docs.py` の snapshot top timestamp guard を
+  `samples_progress.md` に拡張し、英語 `Last updated:` header も
+  `progress.md` / `tasks.md` の `最終更新:` と同じ freshness check に
+  含めた。validator unit tests now cover the stale `samples_progress.md`
+  case and English-label parser. docs / guard maintenance only であり、
+  sample status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 13:26 JST
   scaffold guard hardening 後の front-door validation audit として `make check`,
