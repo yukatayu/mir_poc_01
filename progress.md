@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:59 JST
+最終更新: 2026-07-04 15:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -809,7 +809,21 @@ hardening, plus practical alpha-1 checker helper subprocess argv path
 portability hardening, plus practical alpha-1 run-local helper subprocess argv
 path portability hardening, plus practical alpha-1 attach helper subprocess argv
 path portability hardening, plus practical alpha-0.9 devtools helper nested
-session package argv path portability hardening.
+session package argv path portability hardening, plus practical alpha-0.8
+same-session hot-plug helper nested session package argv path portability
+hardening.
+
+- 2026-07-04 15:04 JST
+  `scripts/practical_alpha08_session_hotplug.py` の nested
+  `mir_practical_alpha05_session` package argv を repo-owned base session /
+  attach package roots について repo-relative `samples/...` に変更した。
+  Temporary session path は absolute temp path のまま。Regression tests cover
+  repo-owned package dirs, external absolute fallback, session start package
+  argv, and session attach package argv. Unit 7 tests、`check-all` 10/10、
+  `closeout` repo-root absolute match 0、Cargo
+  `practical_alpha08_session_hotplug` 3 tests、`practical_alpha05_session` 3
+  tests、`practical_alpha1_hotplug` 17 tests が通過。sample status、workflow
+  status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 14:59 JST
   `scripts/practical_alpha09_devtools.py` の nested

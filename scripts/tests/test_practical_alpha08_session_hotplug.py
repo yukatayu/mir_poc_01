@@ -1,6 +1,7 @@
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -53,6 +54,54 @@ class PracticalAlpha08SessionHotPlugTests(unittest.TestCase):
         )
         self.assertIn("auth_gate_layer", report["active_layers_after"])
         self.assertIn("auth_contract_update_active", observer["runtime_behavior_markers"])
+
+    def test_repo_cli_arg_relativizes_repo_owned_package_dir(self) -> None:
+        package_dir = REPO_ROOT / runner.BASE_SESSION_PACKAGE
+        self.assertEqual(runner.repo_cli_arg(package_dir), runner.BASE_SESSION_PACKAGE)
+
+    def test_repo_cli_arg_keeps_external_path_absolute(self) -> None:
+        external = Path("/tmp/mirrorea-external-alpha08-package")
+        self.assertEqual(runner.repo_cli_arg(external), str(external))
+
+    def test_run_session_start_uses_repo_relative_package_arg(self) -> None:
+        session_path = Path("/tmp/mirrorea-alpha08-test-session/session.json")
+        package_dir = REPO_ROOT / runner.BASE_SESSION_PACKAGE
+        with mock.patch.object(
+            runner,
+            "_cargo_session",
+            return_value={"command": "start"},
+        ) as mocked_session:
+            payload = runner._run_session_start(package_dir, session_path)
+
+        self.assertEqual(payload, {"command": "start"})
+        self.assertEqual(
+            mocked_session.call_args.args,
+            ("start", runner.BASE_SESSION_PACKAGE, str(session_path)),
+        )
+        self.assertTrue(session_path.is_absolute())
+
+    def test_run_session_attach_uses_repo_relative_package_arg(self) -> None:
+        session_path = Path("/tmp/mirrorea-alpha08-test-session/session.json")
+        package = "samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach"
+        package_dir = REPO_ROOT / package
+        with mock.patch.object(
+            runner,
+            "_cargo_session",
+            return_value={"command": "attach"},
+        ) as mocked_session:
+            payload = runner._run_session_attach(session_path, package_dir)
+
+        self.assertEqual(payload, {"command": "attach"})
+        self.assertEqual(
+            mocked_session.call_args.args,
+            ("attach", str(session_path), package, str(session_path)),
+        )
+        self.assertFalse(
+            any(
+                str(arg).startswith(f"{runner.REPO_ROOT}/")
+                for arg in mocked_session.call_args.args
+            )
+        )
 
 
 if __name__ == "__main__":

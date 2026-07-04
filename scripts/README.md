@@ -51,6 +51,9 @@
   - `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json`
   - this exercises exact `HP-A1-01..07` / `AV-A1-03` package evidence through `crates/mir-runtime::practical_alpha08_hotplug_session` and the live `crates/mir-runtime::practical_alpha05_session` carrier
   - current actualized rows are `OA08-01..10`
+  - repo-owned base session and attach package inputs are passed to nested
+    `mir_practical_alpha05_session` commands as repo-relative `samples/...`
+    argv while the temporary session file remains an absolute temp path
   - it actualizes same-session `attach` / `observe` over the bounded session carrier plus accepted/rejected/deferred / activation cut / object preview / fallback companion visibility summaries
   - rejected attach attempts remain non-mutating for active runtime state but are now preserved as session-carried observation entries for α-0.9 export
   - it does not claim accepted detach execution, distributed durable save/load, or final public runtime/devtools/hot-plug API
