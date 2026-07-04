@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:42 JST
+最終更新: 2026-07-04 13:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -772,7 +772,7 @@ Research-discovery items:
 | source patch hot-plug | `source-patch-hotplug-evidence` | parse/typecheck/elaborate/compatibility/admission report, HotPlugRequest/HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval and rejection-without-mutation evidence exist; final ABI/migration planner later | 着手可能 |
 | Surface source operational suite | `source-operational-evidence` | `E2E-SURF-01..12` cover WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation positive/negative source rows through required alpha checks | 着手可能 |
 | Surface devtools diagnostics | `static-devtools-evidence` | `DEV-01..02` expose required Surface source/Core IR/semantic-checker-backed indexed-state/communication/admission/redacted patch/source-span panels without final viewer/telemetry ABI claims | 着手可能 |
-| Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product; release-check argv / aggregate display and generated demo / native provenance / Docker source evidence now avoid repo-root absolute source paths for repo-owned inputs | maintenance only |
+| Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product; release-check argv / aggregate display, installed-binary binary/package argv, and generated demo / native provenance / Docker source evidence now avoid repo-root absolute source paths for repo-owned inputs | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor; nested helper command argv for repo-owned operational roots/layers now stays repo-relative | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 | LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
@@ -800,7 +800,17 @@ hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
 `scripts/README.md` source-hierarchy structural-check responsibility refresh,
 `samples_progress.md` top timestamp freshness guard extension, and operational
-product helper path portability hardening.
+product helper path portability hardening, plus installed-binary helper path
+portability hardening.
+
+- 2026-07-04 13:49 JST
+  `scripts/product_alpha1_installed_binary_check.py` の default
+  `target/debug/mirrorea-alpha` と `samples/product-alpha1/demo` を nested
+  command argv / top `binary_path` で repo-relative 表示にした。Regression
+  tests now reject repo-root absolute installed-binary argv. 実 probe は
+  accepted / 11 passed / 0 failed / `installed_binary_candidate_ready: true` /
+  repo-root absolute match 0。final CLI/API/ABI、packaging、distribution claim
+  は変更していない。
 
 - 2026-07-04 13:42 JST
   `scripts/operational_product_samples.py` の nested `mirrorea-alpha` command

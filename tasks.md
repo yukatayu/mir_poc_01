@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 13:42 JST
+最終更新: 2026-07-04 13:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -108,6 +108,11 @@ Current holding state:
   repo-root absolute paths. This is maintenance hardening only; Product Alpha
   remains alpha release-candidate evidence, not final product or broader
   distribution.
+- Product Alpha installed-binary helper evidence now also preserves portability
+  for repo-owned binary/package inputs: nested argv and top `binary_path` use
+  repo-relative `target/debug/mirrorea-alpha` and
+  `samples/product-alpha1/demo`. This is adoption-probe hardening only; final
+  CLI/API/ABI, packaging, and broader distribution remain undefined.
 - Operational product helper nested command evidence now preserves portability
   for repo-owned operational roots and layer package inputs: nested
   `mirrorea-alpha` argv use repo-relative `samples/product-alpha1/operational/...`

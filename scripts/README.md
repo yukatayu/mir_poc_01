@@ -86,6 +86,7 @@
   - `demo --skip-docker` is a partial local probe and does not claim release-candidate readiness
   - `product_alpha1_release_check.py check-all` runs the validation floor, focused tests, command family, native bundle run script probes, and JSON payload semantics for clean-clone validation
   - `product_alpha1_installed_binary_check.py check-all` builds `target/debug/mirrorea-alpha`, runs the built binary directly for `check` / `build-native-bundle` / `demo`, replays bundle `run.sh check` / `run.sh view`, and reports the current `installed_binary_plus_native_host_launch_bundle` adoption candidate without claiming final public CLI/API/ABI or final packaging
+  - the installed-binary helper records repo-owned binary and package inputs as repo-relative `target/...` / `samples/...` argv so transient reports do not depend on the host checkout path
   - the same helper now also reports the current hardening target as machine-readable compatibility scope:
     versioned `package.mir.json`, documented `mirrorea-alpha` command family, native host launch bundle replay surface
   - and it reports the current `shipped_surface` unit separately:

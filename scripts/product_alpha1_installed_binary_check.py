@@ -45,7 +45,14 @@ class CommandResult:
 
 
 def binary_alpha_args(binary_path: Path, *args: str) -> list[str]:
-    return [str(binary_path), *args, "--format", "json"]
+    return [repo_cli_arg(binary_path), *args, "--format", "json"]
+
+
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def validation_command(name: str, argv: list[str]) -> PlannedCommand:
@@ -56,7 +63,7 @@ def plan_check_all(out_dir: Path, include_docker: bool = True, binary_path: Path
     session_dir = out_dir / "session-store"
     native_bundle_dir = out_dir / "native-bundle"
     demo_dir = out_dir / "demo"
-    package = str(DEFAULT_PACKAGE)
+    package = repo_cli_arg(DEFAULT_PACKAGE)
     demo_args = ["demo", package, "--out", str(demo_dir)]
     if not include_docker:
         demo_args.append("--skip-docker")
@@ -259,7 +266,7 @@ def check_all(
             "diagnostic_code": "output_dir_not_empty",
             "out_dir": str(out_dir),
             "include_docker": include_docker,
-            "binary_path": str(binary_path),
+            "binary_path": repo_cli_arg(binary_path),
             "planned_commands": [],
             "passed_commands": [],
             "failed_commands": ["preflight:output-dir-empty"],
@@ -311,7 +318,7 @@ def check_all(
         "session_dir": str(plan.session_dir),
         "native_bundle_dir": str(plan.native_bundle_dir),
         "demo_dir": str(plan.demo_dir),
-        "binary_path": str(plan.binary_path),
+        "binary_path": repo_cli_arg(plan.binary_path),
         "include_docker": include_docker,
         "planned_commands": [command.name for command in plan.commands],
         "passed_commands": passed,

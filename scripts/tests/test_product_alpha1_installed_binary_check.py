@@ -40,6 +40,51 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             ],
         )
 
+    def test_plan_commands_record_repo_relative_binary_and_package_args(self) -> None:
+        plan = runner.plan_check_all(
+            out_dir=Path("/tmp/mirrorea-alpha1-installed-binary"),
+            include_docker=True,
+        )
+        argv_values = [arg for command in plan.commands for arg in command.argv]
+
+        self.assertIn("target/debug/mirrorea-alpha", argv_values)
+        self.assertIn("samples/product-alpha1/demo", argv_values)
+        self.assertNotIn(str(runner.REPO_ROOT), argv_values)
+        self.assertFalse(
+            any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in argv_values)
+        )
+
+    def test_check_all_reports_repo_relative_binary_path_and_argv(self) -> None:
+        def fake_run(command, env=None):
+            payload = payload_for(command.name)
+            return runner.CommandResult(
+                name=command.name,
+                argv=command.argv,
+                returncode=0,
+                stdout=json.dumps(payload),
+                stderr="",
+                payload=payload,
+                semantic_errors=[],
+            )
+
+        with mock.patch.object(runner, "run_command", side_effect=fake_run):
+            payload = runner.check_all(
+                out_dir=empty_out_dir(),
+                include_docker=True,
+            )
+
+        argv_values = [
+            arg
+            for command in payload["command_results"]
+            for arg in command["argv"]
+        ]
+
+        self.assertEqual(payload["binary_path"], "target/debug/mirrorea-alpha")
+        self.assertIn("samples/product-alpha1/demo", argv_values)
+        self.assertFalse(
+            any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in argv_values)
+        )
+
     def test_check_all_reports_installed_binary_candidate_without_final_api_claim(self) -> None:
         def fake_run(command, env=None):
             payload = payload_for(command.name)
