@@ -235,8 +235,10 @@ command has repo absolute matches `0`.
 
 ## Commit / push status
 
-- Implementation / snapshot / initial report commit: pending.
-- Push status: pending.
+- Implementation / snapshot / initial report commit:
+  `454de834 Use portable current-l2 pipeline paths`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
