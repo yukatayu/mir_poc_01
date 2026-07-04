@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:03 JST
+最終更新: 2026-07-04 13:11 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -799,6 +799,15 @@ current-L2 README path portability hardening, snapshot timestamp guard
 hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
 `scripts/README.md` source-hierarchy structural-check responsibility refresh.
+
+- 2026-07-04 13:11 JST
+  `scripts/check_source_hierarchy.py` と `scripts/validate_docs.py` の required
+  plan scaffold を `plan/97..119` まで広げ、current G1 / remaining
+  claim-family repository memory が structural presence guard から漏れない
+  ようにした。`scripts/README.md` の `check_source_hierarchy.py` 説明も
+  `plan/39..119` に更新し、`plan/00-index.md` の詳細 list に `plan/106..108`
+  と `plan/118..119` を補った。docs / guard maintenance only であり、
+  sample status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 13:03 JST
   `scripts/README.md` の `check_source_hierarchy.py` 説明を現行実装に合わせ、

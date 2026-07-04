@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 13:03 JST
+Last updated: 2026-07-04 13:11 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 13:11 JST | plan scaffold guard coverage refresh | pass | `scripts/check_source_hierarchy.py` and `scripts/validate_docs.py` now require current plan memory through `plan/119`, with a regression test covering the Surface / G1 plan scaffold. `scripts/README.md` mirrors `plan/39..119`, and `plan/00-index.md` now lists the previously omitted detailed filenames for `plan/106..108` and `plan/118..119`. This is docs/guard maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 13:03 JST | scripts README source-hierarchy structural check refresh | pass | `scripts/README.md` now describes current `check_source_hierarchy.py` structural-presence responsibility, including `plan/39..96`, Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`, and operational product sample handoff roots. This is docs taxonomy maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 12:57 JST | scripts README validator responsibility refresh | pass | `scripts/README.md` now describes current `validate_docs.py` responsibilities, including source-hierarchy wording lint, active reader-facing host-specific repo path lint, and `progress.md` / `tasks.md` top `最終更新` freshness guard. This is docs taxonomy maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 12:49 JST | current-L2 closeout path portability validation | pass | Re-ran README front-door checks: `make check`, `current_l2_guided_samples.py smoke-all`, and `current_l2_guided_samples.py closeout`. The audit found and fixed closeout `lean_roots` host checkout paths; they now emit `samples/lean/foundations` and `samples/lean/clean-near-end`. Rust regression coverage, `cargo fmt --check`, `make check`, and closeout absolute-path scan passed. No sample status, workflow status, semantics, ABI, or canon claim changed. |

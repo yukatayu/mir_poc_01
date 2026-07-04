@@ -196,6 +196,10 @@
   `plan/71-g1-ordinary-assignment-target.md`
 - G1 SCN-01/SCN-02 static consequence drilldown:
   `plan/72-g1-scn01-scn02-static-consequence-drilldown.md`
+- G0/G1 ordinary assignment claim-family drilldown:
+  `plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md`
+- G0 remaining claim-family drilldown priority map:
+  `plan/119-g0-remaining-claim-family-drilldown-priority.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:
@@ -276,6 +280,12 @@
   `plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md`
 - G1 ELAB-07 set-insertion exact-locus guard hardening:
   `plan/105-g1-erow07-set-insertion-exact-locus-guard-hardening.md`
+- G1 ELAB-07 child / bundle / partial exclusion fixtures:
+  `plan/106-g1-erow07-child-bundle-partial-exclusion-fixtures.md`
+- G1 ELAB-04 mixed visibility payload-model preflight:
+  `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md`
+- G1 OBL-025 branch-local non-coverage refinement:
+  `plan/108-g1-obl025-branch-local-noncoverage-refinement.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 
