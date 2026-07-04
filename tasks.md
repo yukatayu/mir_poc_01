@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 12:03 JST
+最終更新: 2026-07-04 12:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -86,6 +86,18 @@ Current holding state:
   repo-root absolute paths. This is maintenance hardening only; Product Alpha
   remains alpha release-candidate evidence, not final product or broader
   distribution.
+- Active clean-near-end research abstract detail docs and
+  `samples/current-l2/README.md` now avoid host-specific `/home/yukatayu/...`
+  links for current reader-facing sample paths. `mir-clean-near-end` and
+  `scripts/current_l2_lean_sample_sync.py` now emit repo-relative paths for the
+  same current sample/manifest surfaces, so `actual output` snippets do not
+  depend on the host checkout path. Historical reports, old research abstract
+  archives, old Lean bundles, `tmp_faq/`, and external
+  `/home/codex/.codex/...` operation paths remain classified as out-of-scope
+  evidence or environment references. `scripts/validate_docs.py` now guards
+  active reader-facing docs/samples against reintroducing host-specific repo
+  paths while preserving those exclusions. This is maintenance hardening only;
+  no sample status, semantics, ABI, workflow, or canon claim changed.
 - `plan/71-g1-ordinary-assignment-target.md` now drafts the LAB-only G1
   ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
   theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,

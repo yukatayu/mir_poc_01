@@ -172,7 +172,7 @@ transition release_fingerprint(actor = Alice) {
 {
   "sample": "01_authorized_declassification",
   "family": "typing",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/01_authorized_declassification.mir",
+  "source_path": "samples/clean-near-end/typing/01_authorized_declassification.mir",
   "static_verdict": "valid",
   "entered_evaluation": true,
   "terminal_outcome": "success",
@@ -267,7 +267,7 @@ transition bad_release(actor = Bob) {
 {
   "sample": "02_unauthorized_declassification_rejected",
   "family": "typing",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/02_unauthorized_declassification_rejected.mir",
+  "source_path": "samples/clean-near-end/typing/02_unauthorized_declassification_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -362,7 +362,7 @@ transition bad_publish_without_declassify(actor = Alice) {
 {
   "sample": "03_label_flow_rejected",
   "family": "typing",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/03_label_flow_rejected.mir",
+  "source_path": "samples/clean-near-end/typing/03_label_flow_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -453,7 +453,7 @@ transition bad_capture_escape {
 {
   "sample": "04_capture_escape_rejected",
   "family": "typing",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/04_capture_escape_rejected.mir",
+  "source_path": "samples/clean-near-end/typing/04_capture_escape_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -541,7 +541,7 @@ fn move_without_remote_budget(player : Player)
 {
   "sample": "05_cost_bound_rejected",
   "family": "typing",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/typing/05_cost_bound_rejected.mir",
+  "source_path": "samples/clean-near-end/typing/05_cost_bound_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,

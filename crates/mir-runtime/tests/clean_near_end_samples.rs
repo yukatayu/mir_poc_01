@@ -7,6 +7,12 @@ use mir_runtime::clean_near_end::{
 #[test]
 fn clean_sample_authorized_declassification_passes() {
     let report = run_clean_near_end_sample("01_authorized_declassification").unwrap();
+    assert_eq!(
+        report.source_path,
+        "samples/clean-near-end/typing/01_authorized_declassification.mir"
+    );
+    assert!(!report.source_path.starts_with("/home/"));
+    assert!(!report.source_path.starts_with("/Users/"));
     assert_eq!(report.static_verdict.as_deref(), Some("valid"));
     assert_eq!(report.terminal_outcome.as_deref(), Some("success"));
     assert!(

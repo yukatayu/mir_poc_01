@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import io
 import re
 import sys
+import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -76,6 +80,28 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             sync.repo_relative_source_path("/tmp/outside-sample.mir"),
             "/tmp/outside-sample.mir",
         )
+
+    def test_main_prints_repo_relative_manifest_path(self) -> None:
+        target_root = sync.REPO_ROOT / "target"
+        target_root.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=target_root) as tmp:
+            manifest_path = Path(tmp) / "manifest.json"
+            expected_path = manifest_path.relative_to(sync.REPO_ROOT).as_posix()
+            stdout = io.StringIO()
+            with (
+                mock.patch.object(sync, "MANIFEST_PATH", manifest_path),
+                mock.patch.object(sync, "runtime_json", return_value=[]),
+                mock.patch.object(sync, "lean_version", return_value="Lean 4.test"),
+                mock.patch.object(sync, "foundation_entries", return_value=[]),
+                mock.patch.object(sync, "statement_draft_entries", return_value=[]),
+                mock.patch.object(sync, "sync_clean_stubs", return_value=[]),
+                redirect_stdout(stdout),
+            ):
+                exit_code = sync.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(stdout.getvalue().strip(), expected_path)
+
 
     def test_statement_drafts_include_obl001_draft(self) -> None:
         entries = {spec.draft_id: spec for spec in sync.STATEMENT_DRAFTS}

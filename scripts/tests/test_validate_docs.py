@@ -648,6 +648,76 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn("plan/19-repository-map-and-taxonomy.md:3", stdout.getvalue())
         self.assertIn("plan/58-full-system-v1-roadmap.md:3", stdout.getvalue())
 
+    def test_main_rejects_active_reader_host_absolute_repo_paths(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "research_abstract" / "clean_near_end_typing_01_detail.md").write_text(
+                "# detail\n\n"
+                '"source_path": "/home/alice/dev/mir_poc_01/samples/clean-near-end/typing/01_authorized_declassification.mir"\n',
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Active reader-facing docs contain host-specific repo paths",
+            stdout.getvalue(),
+        )
+        self.assertIn(
+            "docs/research_abstract/clean_near_end_typing_01_detail.md:3",
+            stdout.getvalue(),
+        )
+
+    def test_main_allows_historical_host_paths_outside_active_reader_lint(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text()
+                + "\n\nHistorical output: /home/yukatayu/dev/mir_poc_01/target/debug\n",
+                encoding="utf-8",
+            )
+            old_detail = (
+                root
+                / "docs"
+                / "research_abstract"
+                / "old"
+                / "2026-04-22-pre-clean-near-end"
+                / "order_01_detail.md"
+            )
+            old_detail.parent.mkdir(parents=True, exist_ok=True)
+            old_detail.write_text(
+                "sample_path: /home/yukatayu/dev/mir_poc_01/samples/prototype/example.txt\n",
+                encoding="utf-8",
+            )
+            old_sample = root / "samples" / "old" / "historical.md"
+            old_sample.parent.mkdir(parents=True, exist_ok=True)
+            old_sample.write_text(
+                "sample_path: /home/alice/dev/mir_poc_01/samples/old/historical.txt\n",
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
+
     def test_main_rejects_latest_report_missing_new_required_section(self) -> None:
         heading = "## Reviewer findings and follow-up"
         template_text = self._valid_template_text()

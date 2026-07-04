@@ -275,7 +275,7 @@ def main() -> int:
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
-    print(MANIFEST_PATH)
+    print(repo_relative_source_path(str(MANIFEST_PATH)))
     return 0
 
 

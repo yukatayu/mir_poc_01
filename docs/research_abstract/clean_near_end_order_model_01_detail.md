@@ -84,7 +84,7 @@ transition handoff_turn(owner = Alice) {
 {
   "sample": "01_authorized_roll_publish_handoff",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/01_authorized_roll_publish_handoff.mir",
+  "source_path": "samples/clean-near-end/order-handoff/01_authorized_roll_publish_handoff.mir",
   "static_verdict": "valid",
   "entered_evaluation": true,
   "terminal_outcome": "success",
@@ -205,7 +205,7 @@ transition bad_handoff_missing_witness(owner = Alice) {
 {
   "sample": "02_missing_witness_rejected",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/02_missing_witness_rejected.mir",
+  "source_path": "samples/clean-near-end/order-handoff/02_missing_witness_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -297,7 +297,7 @@ transition bad_handoff_before_publish(owner = Alice) {
 {
   "sample": "03_handoff_before_publication_rejected",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/03_handoff_before_publication_rejected.mir",
+  "source_path": "samples/clean-near-end/order-handoff/03_handoff_before_publication_rejected.mir",
   "static_verdict": "malformed",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -395,7 +395,7 @@ transition stage_block_handoff(owner = Alice) {
 {
   "sample": "04_stage_block_authorized_handoff",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/04_stage_block_authorized_handoff.mir",
+  "source_path": "samples/clean-near-end/order-handoff/04_stage_block_authorized_handoff.mir",
   "static_verdict": "valid",
   "entered_evaluation": true,
   "terminal_outcome": "success",
@@ -513,7 +513,7 @@ transition delegated_rng_turn(owner = Alice) {
 {
   "sample": "05_delegated_rng_service",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/05_delegated_rng_service.mir",
+  "source_path": "samples/clean-near-end/order-handoff/05_delegated_rng_service.mir",
   "static_verdict": "valid",
   "entered_evaluation": true,
   "terminal_outcome": "success",
@@ -644,7 +644,7 @@ transition audited_handoff(owner = Alice) {
 {
   "sample": "06_auditable_authority_witness",
   "family": "order-handoff",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir",
+  "source_path": "samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir",
   "static_verdict": "valid",
   "entered_evaluation": true,
   "terminal_outcome": "success",
@@ -767,7 +767,7 @@ model PetersonSC {
 {
   "sample": "01_peterson_sc_pass",
   "family": "model-check",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/model-check/01_peterson_sc_pass.mir",
+  "source_path": "samples/clean-near-end/model-check/01_peterson_sc_pass.mir",
   "static_verdict": "valid",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -865,7 +865,7 @@ model PetersonRelaxedNoPublication {
 {
   "sample": "02_peterson_relaxed_counterexample",
   "family": "model-check",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/model-check/02_peterson_relaxed_counterexample.mir",
+  "source_path": "samples/clean-near-end/model-check/02_peterson_relaxed_counterexample.mir",
   "static_verdict": "valid",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -965,7 +965,7 @@ model BrokenMutex {
 {
   "sample": "03_broken_mutex_counterexample",
   "family": "model-check",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/model-check/03_broken_mutex_counterexample.mir",
+  "source_path": "samples/clean-near-end/model-check/03_broken_mutex_counterexample.mir",
   "static_verdict": "valid",
   "entered_evaluation": false,
   "terminal_outcome": null,

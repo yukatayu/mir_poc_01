@@ -16,7 +16,7 @@ python3 scripts/current_l2_lean_sample_sync.py
 ### actual output
 
 ```text
-/home/yukatayu/dev/mir_poc_01/samples/lean/manifest.json
+samples/lean/manifest.json
 ```
 
 ## built-in と user-defined の境界

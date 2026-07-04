@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 12:03 JST
+最終更新: 2026-07-04 12:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -794,7 +794,23 @@ hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
 claim-family drilldown, remaining claim-family priority map, focused
 source-hierarchy stale wording audit, and Full System V1 provider / renderer /
 release-check path portability hardening, plus Product Alpha release-check path
-portability hardening.
+portability hardening, plus active clean-near-end emitter / research abstract /
+current-L2 README path portability hardening.
+
+- 2026-07-04 12:29 JST
+  active `docs/research_abstract/clean_near_end_*_detail.md` の sample
+  `source_path` / Lean manifest output と `samples/current-l2/README.md` の
+  authoring-policy link から host-specific `/home/yukatayu/...` path を除き、
+  repo-relative `samples/...` / `../../.docs/...` 表示にした。
+  `mir-clean-near-end` の `source_path` / closeout roots と
+  `scripts/current_l2_lean_sample_sync.py` の manifest print も repo-relative
+  表示にし、ドキュメントの `actual output` 表示が generator と一致するようにした。
+  `scripts/validate_docs.py` は active reader-facing docs / samples の
+  Linux / macOS host-specific checkout root variants を reject し、
+  historical / old / scratch / external operation paths は除外する lint を持つ。historical
+  reports、old research abstract、old Lean bundles、`tmp_faq/`、および
+  `/home/codex/.codex/...` external Oracle operation path は今回の修正対象外。
+  sample status、workflow status、semantics、ABI、canon status は変えていない。
 
 - 2026-07-04 12:03 JST
   `scripts/product_alpha1_release_check.py` の代表 Product Alpha CLI command が

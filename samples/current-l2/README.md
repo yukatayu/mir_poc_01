@@ -110,7 +110,7 @@ current reached-stage inventory は current authored sixteen `e1` / `e2` / `e3` 
 - `formal hook` reached は current package では source-runner-native artifact ではなく、fixture-aligned detached artifact route を使う。
 - `runtime_try_cut_cluster` と `fixture_static_cluster` は tool-neutral formal hook の current top であり、concrete theorem/model-check tool choice はまだ混ぜない。
 - `not reached (guarded)` は failure ではなく、`e3` runtime bundle が current `runtime_try_cut_cluster` family の外にあるため、formal hook widening を still later に残していることを意味する。
-- current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](/home/yukatayu/dev/mir_poc_01/.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
+- current authoring / bless / regression flow は [.docs/current-l2-source-sample-authoring-policy.md](../../.docs/current-l2-source-sample-authoring-policy.md) と `python3 scripts/current_l2_source_sample_regression.py inventory|regression` を基準にする。
 - theorem-first concrete pilot current cut では、tool-neutral formal hook artifact を入力にする `proof_notebook_review_unit` consumer を non-production helper/example に留める。
 - post-sextet first cluster current cut では、`e21` frontier row と `e22` place-mismatch row を first runtime contrast pair として扱う。
 - stable-static edge-pair first reopen では、existing `e4` row と new `e19` row を source-backed static-stop pair として actualize 済みである。

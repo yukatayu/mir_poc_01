@@ -1509,6 +1509,22 @@ pub fn clean_near_end_archive_root() -> PathBuf {
         .join("../../samples/old/2026-04-22-pre-clean-near-end")
 }
 
+fn repo_root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../..")
+        .canonicalize()
+        .unwrap_or_else(|_| PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../.."))
+}
+
+fn repo_relative_display_path(path: &Path) -> String {
+    let root = repo_root();
+    let normalized = path.canonicalize().unwrap_or_else(|_| path.to_path_buf());
+    match normalized.strip_prefix(&root) {
+        Ok(relative) => relative.to_string_lossy().replace('\\', "/"),
+        Err(_) => path.display().to_string(),
+    }
+}
+
 pub fn built_in_vocabulary() -> Vec<String> {
     [
         "module",
@@ -2676,7 +2692,7 @@ pub fn list_clean_near_end_samples() -> Vec<CleanNearEndSampleSummary> {
         .map(|spec| CleanNearEndSampleSummary {
             sample_id: spec.id,
             family: spec.family,
-            source_path: root.join(spec.source_relpath).display().to_string(),
+            source_path: repo_relative_display_path(&root.join(spec.source_relpath)),
             summary: spec.summary,
         })
         .collect()
@@ -2720,7 +2736,7 @@ pub fn run_clean_near_end_sample(
     let mut report = CleanNearEndSampleReport {
         sample: spec.id.clone(),
         family: spec.family,
-        source_path: source_path.display().to_string(),
+        source_path: repo_relative_display_path(&source_path),
         static_verdict: None,
         entered_evaluation: false,
         terminal_outcome: None,
@@ -2859,8 +2875,8 @@ pub fn build_clean_near_end_closeout() -> Result<CleanNearEndCloseout, CleanNear
     let telemetry_channels = closeout_telemetry_channels(&telemetry_rows);
     let retention_scope_names = retention_scope_names(&visualization_views, &telemetry_rows);
     Ok(CleanNearEndCloseout {
-        active_sample_root: clean_near_end_samples_root().display().to_string(),
-        archive_sample_root: clean_near_end_archive_root().display().to_string(),
+        active_sample_root: repo_relative_display_path(&clean_near_end_samples_root()),
+        archive_sample_root: repo_relative_display_path(&clean_near_end_archive_root()),
         built_in_vocabulary: built_in_vocabulary(),
         user_defined_vocabulary: user_defined_vocabulary(),
         families,

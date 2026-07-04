@@ -50,7 +50,7 @@ transition staged_roll {
 {
   "sample": "01_stage_stable_later_minimal",
   "family": "modal",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/modal/01_stage_stable_later_minimal.mir",
+  "source_path": "samples/clean-near-end/modal/01_stage_stable_later_minimal.mir",
   "static_verdict": "valid",
   "entered_evaluation": false,
   "terminal_outcome": null,
@@ -140,7 +140,7 @@ transition published_to_witnessed_bridge {
 {
   "sample": "02_published_witnessed_mode_bridge",
   "family": "modal",
-  "source_path": "/home/yukatayu/dev/mir_poc_01/crates/mir-runtime/../../samples/clean-near-end/modal/02_published_witnessed_mode_bridge.mir",
+  "source_path": "samples/clean-near-end/modal/02_published_witnessed_mode_bridge.mir",
   "static_verdict": "valid",
   "entered_evaluation": false,
   "terminal_outcome": null,

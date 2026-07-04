@@ -676,6 +676,42 @@ SOURCE_HIERARCHY_LINT_ALLOWED_PATTERNS = [
     ),
 ]
 
+ACTIVE_READER_HOST_PATH_LINT_FILES = [
+    "README.md",
+    "AGENTS.md",
+    "Documentation.md",
+    "progress.md",
+    "tasks.md",
+    "samples_progress.md",
+    "samples/README.md",
+    "samples/current-l2/README.md",
+]
+
+ACTIVE_READER_HOST_PATH_LINT_DIRS = [
+    ".docs",
+    "docs/hands_on",
+    "docs/research_abstract",
+    "samples/alpha",
+    "samples/clean-near-end",
+    "samples/current-l2",
+    "samples/full-system-v1",
+    "samples/full-system-v1-surface",
+    "samples/lean",
+    "samples/practical-alpha1",
+    "samples/product-alpha1",
+]
+
+ACTIVE_READER_HOST_PATH_LINT_EXCLUDED_PREFIXES = [
+    "docs/research_abstract/old/",
+    "samples/lean/old/",
+    "tmp_faq/",
+]
+
+HOST_SPECIFIC_REPO_PATH_PATTERNS = [
+    re.compile(r"/home/[^/\s]+/dev/mir_poc_01"),
+    re.compile(r"/Users/[^\s`\"')]+/dev/mir_poc_01"),
+]
+
 
 def _heading_match(text: str, heading: str) -> re.Match[str] | None:
     return re.search(rf"^{re.escape(heading)}\s*$", text, re.MULTILINE)
@@ -833,6 +869,40 @@ def stale_source_hierarchy_wording() -> dict[str, list[tuple[int, str]]]:
     return hits
 
 
+def _active_reader_host_path_lint_paths() -> list[Path]:
+    paths: set[Path] = set()
+    for relative_path in ACTIVE_READER_HOST_PATH_LINT_FILES:
+        path = ROOT / relative_path
+        if path.exists():
+            paths.add(path)
+
+    for relative_dir in ACTIVE_READER_HOST_PATH_LINT_DIRS:
+        directory = ROOT / relative_dir
+        if not directory.exists():
+            continue
+        for pattern in ("*.md", "*.json"):
+            paths.update(directory.rglob(pattern))
+
+    return sorted(paths)
+
+
+def active_reader_host_absolute_paths() -> dict[str, list[tuple[int, str]]]:
+    hits: dict[str, list[tuple[int, str]]] = {}
+    for path in _active_reader_host_path_lint_paths():
+        relative = path.relative_to(ROOT).as_posix()
+        if any(
+            relative == prefix.rstrip("/") or relative.startswith(prefix)
+            for prefix in ACTIVE_READER_HOST_PATH_LINT_EXCLUDED_PREFIXES
+        ):
+            continue
+
+        lines = path.read_text(encoding="utf-8").splitlines()
+        for line_number, line in enumerate(lines, start=1):
+            if any(pattern.search(line) for pattern in HOST_SPECIFIC_REPO_PATH_PATTERNS):
+                hits.setdefault(relative, []).append((line_number, line.strip()))
+    return hits
+
+
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
@@ -852,6 +922,14 @@ def main() -> int:
     if stale_source_hierarchy_hits:
         print("Reader-facing docs contain stale source-hierarchy wording:")
         for path, hits in stale_source_hierarchy_hits.items():
+            for line_number, line in hits:
+                print(f" - {path}:{line_number}: {line}")
+        return 1
+
+    active_host_path_hits = active_reader_host_absolute_paths()
+    if active_host_path_hits:
+        print("Active reader-facing docs contain host-specific repo paths:")
+        for path, hits in active_host_path_hits.items():
             for line_number, line in hits:
                 print(f" - {path}:{line_number}: {line}")
         return 1
