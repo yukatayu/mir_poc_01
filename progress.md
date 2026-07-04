@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:15 JST
+最終更新: 2026-07-04 15:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -813,7 +813,26 @@ session package argv path portability hardening, plus practical alpha-0.8
 same-session hot-plug helper nested session package argv path portability
 hardening, plus practical alpha-1 avatar helper subprocess argv path
 portability hardening, plus practical alpha-1 save/load helper runtime branch
-subprocess argv path portability hardening.
+subprocess argv path portability hardening, plus practical alpha-0.5 session
+helper nested session package argv path portability hardening.
+
+- 2026-07-04 15:27 JST
+  `scripts/practical_alpha05_session.py` の nested
+  `mir_practical_alpha05_session` package argv を repo-owned practical
+  package roots について repo-relative `samples/...` に変更した。Temporary
+  session path は absolute temp path のまま。Regression tests cover
+  repo-owned package dirs, external absolute fallback, session start package
+  argv, and host-I/O package argv. Unit 7 tests、`check-all` 7/7、
+  `closeout` repo-root absolute match 0、上位 alpha08 / alpha09 /
+  integrated workflow Python checks all had repo-root absolute match 0、
+  Cargo `practical_alpha05_session` 3 tests、
+  `practical_alpha05_host_io` 2 tests、`practical_alpha1_local_runtime` 6
+  tests が通過。Broader path-portability audit は次候補として
+  Surface release-check / installed-binary generated paths / Full System V1
+  nested source argv / alpha network Docker / current-L2 pipeline and detached
+  loop / source-hierarchy status JSON / shared practical failure-path redaction
+  を残した。sample status、workflow status、semantics、ABI、canon claim は
+  変更していない。
 
 - 2026-07-04 15:15 JST
   `scripts/practical_alpha1_save_load.py` の runtime-backed nested save-load

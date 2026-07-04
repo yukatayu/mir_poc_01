@@ -77,6 +77,14 @@ LIMITATIONS = [
 ]
 
 
+def repo_cli_arg(path: str | Path) -> str:
+    value = Path(path)
+    try:
+        return value.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(value)
+
+
 def _implemented_row(sample_id: str) -> dict[str, str]:
     for row in IMPLEMENTED_ROWS:
         if row["sample_id"] == sample_id:
@@ -118,7 +126,7 @@ def _cargo_session(*args: str) -> dict[str, Any]:
 
 
 def _run_session_start(package_path: str | Path, session_path: str | Path) -> dict[str, Any]:
-    return _cargo_session("start", str(package_path), str(session_path))
+    return _cargo_session("start", repo_cli_arg(package_path), str(session_path))
 
 
 def _run_session_save(session_path: str | Path, savepoint_id: str) -> dict[str, Any]:
@@ -134,7 +142,9 @@ def _run_session_observe(session_path: str | Path) -> dict[str, Any]:
 
 
 def _run_session_host_io(session_path: str | Path, package_path: str | Path) -> dict[str, Any]:
-    return _cargo_session("host-io", str(session_path), str(package_path), str(session_path))
+    return _cargo_session(
+        "host-io", str(session_path), repo_cli_arg(package_path), str(session_path)
+    )
 
 
 def _run_session_sample(row: dict[str, str]) -> dict[str, Any]:

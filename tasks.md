@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 15:15 JST
+最終更新: 2026-07-04 15:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -141,6 +141,12 @@ Current holding state:
   `samples/...` paths while the temporary session file remains an absolute temp
   path. Public helper JSON and `closeout` were already repo-root clean on the
   success path.
+- Practical alpha-0.5 session helper now preserves portability for repo-owned
+  session-start and host-I/O package inputs: nested
+  `mir_practical_alpha05_session` command argv uses repo-relative
+  `samples/...` paths while the temporary session file remains an absolute temp
+  path. This closes the lower session carrier used by alpha-0.8 / alpha-0.9
+  workflows on the same path-portability line.
 - Practical alpha-1 avatar helper now preserves portability for repo-owned
   package inputs: nested avatar Cargo example argv uses repo-relative
   `samples/...` paths. Public helper JSON and `closeout` were already
@@ -154,9 +160,13 @@ Current holding state:
 - The read-only code-mapper practical-helper portability candidate list is now
   closed for `practical_alpha09_devtools.py`,
   `practical_alpha08_session_hotplug.py`, `practical_alpha1_avatar.py`, and
-  `practical_alpha1_save_load.py`. A broader audit may still be useful before
-  leaving this maintenance line, but no candidate remains from that focused
-  list.
+  `practical_alpha1_save_load.py`; the broader scan also found and closed
+  `practical_alpha05_session.py`. Remaining broader path-portability candidates
+  are now outside that focused practical list: Surface release-check output
+  path serialization, installed-binary generated path serialization/argv,
+  Full System V1 nested source argv, alpha network Docker success/failure path
+  serialization, current-L2 pipeline / detached-loop repo-owned helper argv,
+  source-hierarchy status JSON, and shared practical failure-path redaction.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate
@@ -507,6 +517,7 @@ next line.
 | `remaining LAB claim-family drilldowns` | `T0/G0` reserve | split non-ordinary-assignment `plan/70` rows only when a future G0 close decision or touched-doc stale wording audit needs exact citations; the read/write/dependency row may also be narrowed only if a concrete G1 ordinary-assignment support gap remains | `plan/119` says no remaining row is an immediate default target; no canon L0/L1 change; no historical rewrite beyond focused wording cleanup; no G4 observation or runtime graph widening |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
+| `path-portability broader sweep` | `Macro 0` maintenance | close the remaining high-confidence host-path leak / nested absolute argv candidates from the broader audit without changing semantics or status claims | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
 
 ## ordered self-driven packages
 
