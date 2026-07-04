@@ -61,6 +61,38 @@ def cargo_test_args(*args: str) -> list[str]:
     return ["cargo", "test", *args, "--", "--nocapture"]
 
 
+def release_relative_path(path: Path, out_dir: Path) -> str:
+    try:
+        return path.relative_to(out_dir).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_display_text(value: str, out_dir: Path) -> str:
+    text = value
+    for root in sorted({str(REPO_ROOT), str(out_dir)}, key=len, reverse=True):
+        text = text.replace(root + "/", "")
+        text = text.replace(root, ".")
+    return text
+
+
+def release_display_value(value: Any, out_dir: Path) -> Any:
+    if isinstance(value, str):
+        display = release_display_text(value, out_dir)
+        path = Path(display)
+        if path.is_absolute():
+            return release_relative_path(path, out_dir)
+        return display
+    if isinstance(value, list):
+        return [release_display_value(item, out_dir) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: release_display_value(item, out_dir)
+            for key, item in value.items()
+        }
+    return value
+
+
 def plan_check_all(out_dir: Path) -> CommandPlan:
     reports_dir = out_dir / "reports"
     return CommandPlan(
@@ -161,7 +193,7 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
 
 
 def command_plan_payload(plan: CommandPlan) -> dict[str, Any]:
-    return {
+    return release_display_value({
         "surface_kind": "surface_mir_release_check_plan",
         "out_dir": str(plan.out_dir),
         "reports_dir": str(plan.reports_dir),
@@ -176,7 +208,7 @@ def command_plan_payload(plan: CommandPlan) -> dict[str, Any]:
             for command in plan.commands
         ],
         "final_public_grammar_frozen": False,
-    }
+    }, plan.out_dir)
 
 
 SENSITIVE_DEVTOOLS_KEYS = {
@@ -447,11 +479,13 @@ def result_payload(result: CommandResult) -> dict[str, Any]:
     }
 
 
-def write_report(plan: CommandPlan, result: CommandResult) -> None:
+def write_report(plan: CommandPlan, result: CommandResult) -> dict[str, Any]:
     plan.reports_dir.mkdir(parents=True, exist_ok=True)
     safe_name = result.name.replace(":", "__").replace("/", "_")
     path = plan.reports_dir / f"{safe_name}.json"
-    path.write_text(json.dumps(result_payload(result), indent=2, ensure_ascii=False), encoding="utf-8")
+    record = release_display_value(result_payload(result), plan.out_dir)
+    path.write_text(json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8")
+    return record
 
 
 def render_html(bundle: dict[str, Any]) -> str:
@@ -486,10 +520,9 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
     results = []
     for command in plan.commands:
         result = run_command(command)
-        write_report(plan, result)
-        results.append(result_payload(result))
+        results.append(write_report(plan, result))
     failed = [result["name"] for result in results if not result["accepted"]]
-    bundle = {
+    bundle = release_display_value({
         "surface_kind": "surface_mir_release_check_report",
         "scope": RELEASE_CHECK_SCOPE,
         "out_dir": str(plan.out_dir),
@@ -510,7 +543,7 @@ def run_check_all(out_dir: Path) -> dict[str, Any]:
             "no generated package artifact authority",
         ],
         "final_public_grammar_frozen": False,
-    }
+    }, plan.out_dir)
     plan.bundle_path.write_text(json.dumps(bundle, indent=2, ensure_ascii=False), encoding="utf-8")
     plan.html_path.write_text(render_html(bundle), encoding="utf-8")
     return bundle

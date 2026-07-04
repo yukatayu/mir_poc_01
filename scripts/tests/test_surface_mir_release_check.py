@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import sys
 
@@ -15,6 +16,92 @@ import surface_mir_samples  # noqa: E402
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
+def payload_for(command_name: str) -> dict | None:
+    if command_name == "helper:surface-samples":
+        return {
+            "sample_count": runner.SURFACE_SAMPLE_COUNT_FOR_P_SURF_99,
+            "failed": [],
+            "workflow_ready": False,
+            "results": [
+                {
+                    "sample_id": "DEV-01",
+                    "accepted": True,
+                    "actual": {
+                        "accepted": True,
+                        "panel_ids": list(runner.REQUIRED_DEVTOOLS_PANELS),
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": [],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                    },
+                },
+                {
+                    "sample_id": "DEV-02",
+                    "accepted": True,
+                    "actual": {
+                        "accepted": False,
+                        "panel_ids": list(runner.REQUIRED_DEVTOOLS_PANELS),
+                        "all_required_panels_present": True,
+                        "observer_safe": True,
+                        "raw_private_payload_exposed": False,
+                        "source_authority": ".mir",
+                        "final_public_viewer_frozen": False,
+                        "indexed_state_semantic_backing": True,
+                        "diagnostic_codes": ["private_field_auto_publish_rejected"],
+                    },
+                    "verification_report": {
+                        "redacted": True,
+                        "contains_sensitive_devtools_material": False,
+                    },
+                },
+            ],
+        }
+    if command_name == "helper:surface-authoring":
+        return {
+            "command": "check-all",
+            "accepted": True,
+            "source_count": 53,
+            "source_authority": ".mir",
+            "final_public_api_frozen": False,
+        }
+    if command_name == "anchor:product-alpha1-release":
+        return {
+            "surface_kind": "product_alpha1_release_check_report",
+            "status": "accepted",
+            "failed_commands": [],
+            "product_alpha1_release_candidate_ready": True,
+            "product_alpha1_ready": True,
+            "command_results": [{}, {}],
+            "final_product_claimed": False,
+            "final_public_api_frozen": False,
+        }
+    if command_name == "anchor:operational-product-samples":
+        return {
+            "surface_kind": "operational_product_sample_report",
+            "status": "accepted",
+            "failed_commands": [],
+            "product_alpha1_ready": True,
+            "final_public_api_frozen": False,
+        }
+    if command_name == "anchor:minimal-alpha1-patterns":
+        return {
+            "package_id": "P-PAT-01",
+            "status": "accepted",
+            "failed": [],
+            "strict_family_count": 4,
+            "workflow_anchors_checked": False,
+            "final_public_product_claimed": False,
+        }
+    return None
 
 
 class SurfaceMirReleaseCheckTests(unittest.TestCase):
@@ -49,6 +136,95 @@ class SurfaceMirReleaseCheckTests(unittest.TestCase):
             runner.SURFACE_SAMPLE_COUNT_FOR_P_SURF_99,
             surface_mir_samples.matrix()["sample_count"],
         )
+
+    def test_plan_payload_serializes_release_owned_paths_without_host_prefixes(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="mirrorea-surface-release-home-") as tmp:
+            out_dir = Path(tmp) / "home" / "someone" / "surface-release"
+            payload = runner.command_plan_payload(runner.plan_check_all(out_dir))
+
+        text = json.dumps(payload, sort_keys=True)
+        self.assertNotIn("/home/", text)
+        self.assertNotIn("/Users/", text)
+        self.assertEqual(payload["out_dir"], ".")
+        self.assertEqual(payload["reports_dir"], "reports")
+        self.assertEqual(payload["bundle_path"], "bundle.json")
+        self.assertEqual(payload["html_path"], "index.html")
+
+    def test_release_display_helpers_preserve_external_paths(self) -> None:
+        external_path = Path("/opt/external/surface-release-output")
+
+        self.assertEqual(
+            runner.release_relative_path(external_path, Path("/tmp/surface-release")),
+            str(external_path),
+        )
+
+    def test_release_display_value_rewrites_only_release_and_repo_owned_paths(self) -> None:
+        out_dir = Path("/tmp/surface-release-output")
+        payload = {
+            "out_dir": str(out_dir),
+            "bundle_path": str(out_dir / "bundle.json"),
+            "repo_sample": f"{REPO_ROOT}/samples/full-system-v1-surface",
+            "external_path": "/opt/external/surface-release-output",
+            "nested": [
+                f"{out_dir}/reports/helper.json",
+                f"trace {REPO_ROOT}/scripts/surface_mir_release_check.py",
+            ],
+        }
+
+        displayed = runner.release_display_value(payload, out_dir)
+
+        self.assertEqual(displayed["out_dir"], ".")
+        self.assertEqual(displayed["bundle_path"], "bundle.json")
+        self.assertEqual(displayed["repo_sample"], "samples/full-system-v1-surface")
+        self.assertEqual(displayed["external_path"], "/opt/external/surface-release-output")
+        self.assertEqual(displayed["nested"][0], "reports/helper.json")
+        self.assertEqual(
+            displayed["nested"][1],
+            "trace scripts/surface_mir_release_check.py",
+        )
+
+    def test_check_all_serializes_release_owned_paths_without_host_prefixes(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="mirrorea-surface-release-home-") as tmp:
+            out_dir = Path(tmp) / "home" / "someone" / "surface-release"
+
+            def fake_run(command: runner.PlannedCommand) -> runner.CommandResult:
+                payload = payload_for(command.name)
+                stdout = (
+                    f"ok at {REPO_ROOT}/samples/full-system-v1-surface "
+                    f"and {out_dir}/reports/{command.name}.json"
+                )
+                return runner.CommandResult(
+                    name=command.name,
+                    argv=command.argv,
+                    returncode=0,
+                    stdout=stdout if payload is None else json.dumps(payload),
+                    stderr=f"trace at {out_dir}/bundle.json",
+                    payload=payload,
+                    semantic_errors=[],
+                )
+
+            with mock.patch.object(runner, "run_command", side_effect=fake_run):
+                payload = runner.run_check_all(out_dir)
+
+            text = json.dumps(payload, sort_keys=True)
+            self.assertNotIn("/home/", text)
+            self.assertNotIn("/Users/", text)
+            self.assertEqual(payload["out_dir"], ".")
+            self.assertEqual(payload["reports_dir"], "reports")
+            self.assertEqual(payload["bundle_path"], "bundle.json")
+            self.assertEqual(payload["html_path"], "index.html")
+
+            paths_to_scan = [
+                out_dir / "bundle.json",
+                out_dir / "index.html",
+                *sorted((out_dir / "reports").glob("*.json")),
+            ]
+            self.assertTrue(paths_to_scan)
+            for path in paths_to_scan:
+                file_text = path.read_text(encoding="utf-8")
+                self.assertNotIn("/home/", file_text, str(path))
+                self.assertNotIn("/Users/", file_text, str(path))
+                self.assertNotIn(str(REPO_ROOT), file_text, str(path))
 
     def test_helper_semantic_check_keeps_devtools_floor_non_workflow_ready(self) -> None:
         command = runner.PlannedCommand(

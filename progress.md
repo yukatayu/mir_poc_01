@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:27 JST
+最終更新: 2026-07-04 15:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -814,7 +814,23 @@ same-session hot-plug helper nested session package argv path portability
 hardening, plus practical alpha-1 avatar helper subprocess argv path
 portability hardening, plus practical alpha-1 save/load helper runtime branch
 subprocess argv path portability hardening, plus practical alpha-0.5 session
-helper nested session package argv path portability hardening.
+helper nested session package argv path portability hardening, plus Surface
+release-check output path serialization hardening.
+
+- 2026-07-04 15:38 JST
+  `scripts/surface_mir_release_check.py` の plan / per-command report /
+  bundle / viewer serialization を release-owned output paths と repo-owned
+  paths について display-relative に変更した。Output files は指定 `--out`
+  directory に従って生成し続けるが、JSON / HTML / report record では
+  `out_dir` が `.`, `reports_dir` が `reports`, `bundle_path` が
+  `bundle.json`, `html_path` が `index.html` として出る。Free-text
+  stdout/stderr 内の repo root / output root も表示用に相対化し、外部
+  absolute path は保持する。Unit 12 tests、focused serialization unit 3
+  tests、real `surface_mir_release_check.py check-all` 18 commands accepted /
+  generated reports 18 / payload and generated file host path matches 0、
+  `surface_mir_samples.py check-all` 52/52、`surface_mir_authoring_check.py`
+  accepted が通過。sample status、workflow status、semantics、ABI、canon
+  claim は変更していない。
 
 - 2026-07-04 15:27 JST
   `scripts/practical_alpha05_session.py` の nested

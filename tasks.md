@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 15:27 JST
+最終更新: 2026-07-04 15:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -112,6 +112,11 @@ Current holding state:
   repo-relative `samples/...` paths. Public helper JSON was already repo-root
   clean; the P-SURF-99 release-check sample_count gate was updated to the
   current 52-row matrix.
+- Surface release-check output serialization now preserves portability for
+  release-owned and repo-owned paths: plan JSON, per-command report JSON,
+  bundle JSON, and generated viewer HTML display output-root paths relatively
+  and strip repo-root prefixes from free-text stdout/stderr. External absolute
+  paths remain unchanged.
 - Mir computational helper subprocess argv now preserves portability for
   repo-owned computational sample roots: nested `mirrorea-alpha run-local` /
   `check` receive repo-relative `samples/...` paths. Public helper JSON was
@@ -162,11 +167,11 @@ Current holding state:
   `practical_alpha08_session_hotplug.py`, `practical_alpha1_avatar.py`, and
   `practical_alpha1_save_load.py`; the broader scan also found and closed
   `practical_alpha05_session.py`. Remaining broader path-portability candidates
-  are now outside that focused practical list: Surface release-check output
-  path serialization, installed-binary generated path serialization/argv,
-  Full System V1 nested source argv, alpha network Docker success/failure path
-  serialization, current-L2 pipeline / detached-loop repo-owned helper argv,
-  source-hierarchy status JSON, and shared practical failure-path redaction.
+  are now outside that focused practical list: installed-binary generated path
+  serialization/argv, Full System V1 nested source argv, alpha network Docker
+  success/failure path serialization, current-L2 pipeline / detached-loop
+  repo-owned helper argv, source-hierarchy status JSON, and shared practical
+  failure-path redaction.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate
