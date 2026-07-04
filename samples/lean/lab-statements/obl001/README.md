@@ -5,7 +5,11 @@ OBL-001 assignment elaboration soundness.
 
 Current draft:
 
-- `THM001StatementDraft.lean`
+- `THM001StatementDraft.lean`: compile-check-only THM-001 / OBL-001 shape
+  whose sync guard keeps request evidence, generated-write coverage, RHS
+  dependency, generated-failure containment, authority obligations,
+  source-span evidence, visible consequences, and nested-locus non-authority
+  linked through the postcondition.
 
 Boundary:
 
@@ -13,4 +17,4 @@ Boundary:
 - no `mirrorea_canon/theory/11-metatheory-ledger.md` status movement;
 - no OBL-001 completion;
 - no proof discharge;
-- no G1 exit or conformance claim.
+- no proof skeleton, runtime dispatch, G1 exit, or conformance claim.

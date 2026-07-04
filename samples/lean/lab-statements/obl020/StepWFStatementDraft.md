@@ -19,6 +19,9 @@
   observe/publish ancestry, active-or-tombstoned keys, and monotone chain
   positions. The Lean draft keeps these behind `WellFormed` rather than turning
   them into a first-draft proof interface.
+- The sync guard keeps `PreservesWF` as
+  `WellFormed(before) -> Step(before, label, after) -> WellFormed(after)`.
+  WF clauses stay behind `WellFormed`.
 
 ## Boundary
 
@@ -27,6 +30,8 @@
 - This does not claim OBL-020 completion, proof discharge, proof skeleton
   completion, G1/T1/T2 exit, C-runtime or C-static conformance, runtime
   implementation proof, final scheduler semantics, or final runtime API.
+- It is not per-step proof decomposition, scheduler semantics, or step-family
+  completion.
 - It does not decide whether future OBL-020 is proved as per-step lemmas plus
   an aggregate theorem or only as an aggregate statement.
 

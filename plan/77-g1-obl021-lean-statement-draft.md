@@ -22,6 +22,8 @@ equality relation.
   `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md`
 - LAB manifest:
   `samples/lean/manifest.json`
+- LAB guard hardening:
+  `plan/117-g1-obl001-020-021-statement-guard-hardening.md`
 
 If this LAB statement conflicts with canon, canon wins.
 
@@ -90,6 +92,10 @@ definitional equality, alpha-equivalence, or a canon-specific relation.
   `statement_drafts`.
 - `scripts/tests/test_current_l2_lean_sample_sync.py` checks that the OBL-021
   LAB draft remains registered with its explanation file.
+- `plan/117` now hardens the sync unit guard so `SameElabResult`,
+  `SameDiagnostic`, `ElabDeterministicPost`, and `OBL021StatementDraft` retain
+  their body-level links. This is still compile-check-only statement evidence,
+  not final equality selection or runtime scheduling determinism.
 
 ## Relation to adjacent obligations
 

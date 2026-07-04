@@ -19,6 +19,8 @@ public API / grammar freeze.
   `samples/lean/lab-statements/obl001/THM001StatementDraft.md`
 - LAB manifest:
   `samples/lean/manifest.json`
+- LAB guard hardening:
+  `plan/117-g1-obl001-020-021-statement-guard-hardening.md`
 - Planning predecessor: `plan/73-g1-obl001-lean-statement-inventory.md`
 
 If this LAB statement conflicts with canon, canon wins.
@@ -101,6 +103,10 @@ RHS dependency.
   `clean_near_end`.
 - `scripts/tests/test_current_l2_lean_sample_sync.py` checks that the OBL-001
   LAB draft remains registered with its explanation file.
+- `plan/117` now hardens the sync unit guard so `RequestEvidenceSound`,
+  `GeneratedWriteSound`, `AssignmentElabSoundnessPost`, and
+  `THM001StatementDraft` retain their body-level links. This is still a
+  compile-check-only statement guard, not a proof skeleton or runtime dispatch.
 
 ## Open questions
 

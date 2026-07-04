@@ -5,7 +5,10 @@ well-formedness preservation of step rules.
 
 Current draft:
 
-- `StepWFStatementDraft.lean`
+- `StepWFStatementDraft.lean`: compile-check-only OBL-020 shape whose sync
+  guard keeps `PreservesWF` as
+  `WellFormed(before) -> Step(before, label, after) -> WellFormed(after)`,
+  while WF clauses stay behind `WellFormed`.
 
 Boundary:
 
@@ -15,4 +18,5 @@ Boundary:
 - no proof discharge;
 - no proof skeleton completion;
 - no G1/T1/T2 exit or conformance claim;
-- no runtime implementation proof or step-rule family completion claim.
+- no runtime implementation proof, per-step proof decomposition, scheduler
+  semantics, or step-rule family completion claim.

@@ -13,3 +13,9 @@ Current draft families:
 - `obl021/`: OBL-021 elaboration determinism shape.
 - `obl024/`: OBL-024 explanation soundness / diagnostic replay shape.
 - `obl025/`: OBL-025 explanation completeness / repair coverage shape.
+
+Current sync guard note:
+
+- `obl001/`, `obl020/`, and `obl021/` have body-level sync guards for the
+  current statement-shape links. These guards are drift checks only; they are
+  not proof skeleton completion or canon ledger movement.

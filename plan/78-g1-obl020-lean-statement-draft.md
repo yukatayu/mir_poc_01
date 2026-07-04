@@ -23,6 +23,8 @@ taxonomy.
   `samples/lean/lab-statements/obl020/StepWFStatementDraft.md`
 - LAB manifest:
   `samples/lean/manifest.json`
+- LAB guard hardening:
+  `plan/117-g1-obl001-020-021-statement-guard-hardening.md`
 
 If this LAB statement conflicts with canon, canon wins.
 
@@ -89,6 +91,10 @@ decision.
   `statement_drafts`.
 - `scripts/tests/test_current_l2_lean_sample_sync.py` checks that the OBL-020
   LAB draft remains registered with its explanation file.
+- `plan/117` now hardens the sync unit guard so `PreservesWF`,
+  `FamilyStepPreservesWF`, and `OBL020StatementDraft` retain their body-level
+  links. This is still compile-check-only statement evidence, not per-step
+  proof decomposition or runtime implementation proof.
 
 ## Relation to adjacent obligations
 

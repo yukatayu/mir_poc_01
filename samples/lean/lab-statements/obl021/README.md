@@ -5,7 +5,10 @@ elaboration determinism.
 
 Current draft:
 
-- `ElabDeterminismStatementDraft.lean`
+- `ElabDeterminismStatementDraft.lean`: compile-check-only OBL-021 shape
+  whose sync guard keeps success-success result equivalence, reject-reject
+  diagnostic equivalence, and success/reject mutual exclusion linked through
+  `ElabDeterministicPost`.
 
 Boundary:
 
@@ -14,4 +17,5 @@ Boundary:
 - no OBL-021 completion;
 - no proof discharge;
 - no G1/T1/T2 exit or conformance claim;
-- no final elaboration equality relation freeze.
+- no final elaboration equality relation freeze, final equality selection, or
+  runtime scheduling determinism claim.

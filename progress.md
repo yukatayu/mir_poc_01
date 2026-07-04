@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 09:41 JST
+最終更新: 2026-07-04 09:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -79,8 +79,11 @@ semantic source authority.
   `plan/74-g1-obl001-lean-statement-draft.md` records the first repo-local
   LAB Lean statement-shape draft at
   `samples/lean/lab-statements/obl001/THM001StatementDraft.lean`. It compiles
-  as a `Prop` definition under a LAB namespace and does not move OBL status,
-  prove THM-001, claim G1 exit, or edit canon.
+  as a `Prop` definition under a LAB namespace. `plan/117` now guards the
+  body-level request evidence, generated-write coverage, postcondition, and
+  statement premises against silent drift. This does not move OBL status, prove
+  THM-001, create a proof skeleton, claim runtime dispatch, claim G1 exit, or
+  edit canon.
 - Current SCN dependency-gap evidence note:
   `plan/75-g1-scn-rhs-dependency-gap-evidence.md` records LAB-only evidence
   rows `ELAB-11` and `ELAB-12` for SCN-01 same-field RHS dependency and SCN-02
@@ -98,16 +101,21 @@ semantic source authority.
   repo-local Lean statement-shape draft at
   `samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean`.
   It compiles as a `Prop` definition for success/result equivalence,
-  diagnostic equivalence, and success/reject mutual exclusion. It does not
-  move OBL status, prove OBL-021, claim G1/T1/T2 exit, or edit canon.
+  diagnostic equivalence, and success/reject mutual exclusion. `plan/117` now
+  guards the body-level result-component equivalence, diagnostic equivalence,
+  success/reject exclusion, and well-scoped-input gate. This does not move OBL
+  status, prove OBL-021, freeze final equality, claim runtime scheduling
+  determinism, claim G1/T1/T2 exit, or edit canon.
 - Current OBL-020 statement-draft note:
   `plan/78-g1-obl020-lean-statement-draft.md` records a LAB-only
   repo-local Lean statement-shape draft at
   `samples/lean/lab-statements/obl020/StepWFStatementDraft.lean`. It compiles
   as an aggregate `Prop` over abstract `WellFormed` and `Step`, keeps WF
-  clauses behind `WellFormed`, and does not move OBL status, prove OBL-020,
-  claim proof skeleton completion, G1/T1/T2 exit, conformance, runtime
-  implementation proof, or edit canon.
+  clauses behind `WellFormed`. `plan/117` now guards the body-level
+  `WellFormed before -> Step before label after -> WellFormed after` shape,
+  family threading, and aggregate statement. This does not move OBL status,
+  prove OBL-020, claim proof skeleton completion, G1/T1/T2 exit, conformance,
+  runtime implementation proof, or edit canon.
 - Current E-ROW alignment note:
   `plan/79-g1-erow-diagnostic-alignment.md` maps canon E-ROW-001/E-ROW-002 to
   current LAB `generated_failure_not_declared` evidence. It treats ELAB-07 as
@@ -714,7 +722,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile, but Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are not proved or ledger-moved | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile; OBL-001/020/021 and OBL-024/025 have focused sync guards against body/vocabulary drift, but Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -736,7 +744,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -750,8 +758,19 @@ branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
 statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
 guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
 vocabulary refinement, OBL-024 Lean association vocabulary refinement,
-OBL-024 association guard hardening, and OBL-025 repair completeness guard
-hardening.
+OBL-024 association guard hardening, OBL-025 repair completeness guard
+hardening, and OBL-001/020/021 statement guard hardening.
+
+- 2026-07-04 09:57 JST
+  `plan/117-g1-obl001-020-021-statement-guard-hardening.md` を追加し、
+  OBL-001 / OBL-020 / OBL-021 Lean sync guard に body-level assertions を
+  足した。OBL-001 は request evidence / generated-write / postcondition /
+  statement premises、OBL-020 は `PreservesWF` / family threading / aggregate
+  statement、OBL-021 は result-component equivalence / diagnostic equivalence /
+  success-reject exclusion / well-scoped input gate を guard する。Lean compile
+  と sync unit test で確認したが、OBL proof / completion、canon ledger
+  movement、proof skeleton、runtime dispatch、final equality、runtime scheduling
+  determinism、conformance、G1 exit は主張しない。
 
 - 2026-07-04 09:41 JST
   `plan/116-g1-obl025-repair-completeness-guard-hardening.md` を追加し、

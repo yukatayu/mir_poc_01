@@ -14,6 +14,10 @@
   OBL-001 work.
 - This file checks that the postcondition can be represented in Lean while all
   semantic carriers remain abstract through `Vocab` and `Pred`.
+- The sync guard keeps request evidence, generated-write coverage, RHS
+  dependency recording, generated-failure containment, authority obligations,
+  source-span evidence, visible consequences, and nested-locus non-authority
+  linked through `AssignmentElabSoundnessPost`.
 - Keeping the file under `lab-statements/` prevents it from being confused with
   current proof fragments under `foundations/` or generated stubs under
   `clean-near-end/`.
@@ -25,6 +29,7 @@
 - This does not claim OBL-001 completion, OBL-002 proof discharge, OBL-020
   well-formedness preservation, OBL-021 determinism, G1 exit, conformance, or
   runtime dispatch.
+- It is not a proof skeleton and not runtime dispatch.
 - OPEN-014 remains open. Dependency recording is stated abstractly and does not
   freeze a cache, reply, observe, projection, or transport policy.
 

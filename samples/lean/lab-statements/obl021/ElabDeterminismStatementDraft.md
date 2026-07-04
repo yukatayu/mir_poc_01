@@ -18,6 +18,9 @@
   `EquivalentCoreTerm`, `EquivalentFailureRow`, and `EquivalentGeneratedEdges`.
 - It keeps diagnostic equivalence abstract through `SameDiagnostic`, currently
   backed by `EquivalentDiagnostic`, without freezing a final diagnostic ABI.
+- The sync guard keeps success-success result equivalence, reject-reject
+  diagnostic equivalence, and success/reject mutual exclusion linked through
+  `ElabDeterministicPost`.
 
 ## Boundary
 
@@ -26,6 +29,7 @@
 - This does not claim OBL-021 completion, proof discharge, G1/T1/T2 exit,
   C-static conformance, runtime scheduling determinism, parser/checker
   implementation proof, or final equality relation.
+- It is not final equality selection and not runtime scheduling determinism.
 - It does not settle whether future OBL-021 uses syntactic equality,
   normalized equality, definitional equality, alpha-equivalence, or a
   canon-specific equivalence.

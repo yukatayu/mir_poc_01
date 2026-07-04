@@ -20,6 +20,26 @@ def lean_def_body(text: str, name: str) -> str:
     return match.group("body")
 
 
+def lean_without_comments(text: str) -> str:
+    without_block_comments = re.sub(r"(?s)/-.*?-/", "", text)
+    return re.sub(r"(?m)--.*$", "", without_block_comments)
+
+
+def assert_no_vacuous_weakening(test: unittest.TestCase, body: str) -> None:
+    stripped = lean_without_comments(body)
+    compact = re.sub(r"\s+", " ", stripped)
+    for pattern in (
+        r"\bTrue\s*\\/",
+        r"\\/\s*True\b",
+        r"\bTrue\s*/\\",
+        r"/\\\s*True\b",
+        r"\bFalse\s*->",
+        r":=\s*by\s+trivial\b",
+        r":=\s*trivial\b",
+    ):
+        test.assertNotRegex(compact, pattern)
+
+
 class CurrentL2LeanSampleSyncTests(unittest.TestCase):
     def test_sanitize_module_name_handles_numeric_prefix(self) -> None:
         self.assertEqual(
@@ -121,6 +141,183 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             draft.explanation_path,
             "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md",
         )
+
+    def test_obl001_draft_body_keeps_assignment_soundness_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl001/THM001StatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl001/THM001StatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertNotRegex(lean_text, r"(?m)^\s*(axiom|constant|theorem)\b")
+        self.assertNotIn("sorry", lean_text)
+        self.assertNotIn("MirCore.Elab.Soundness", lean_text)
+
+        request_body = lean_def_body(lean_text, "RequestEvidenceSound")
+        assert_no_vacuous_weakening(self, request_body)
+        for required in (
+            "P.RequestForWrite result write request",
+            "P.OwnerDirectedRequest env locus assign request",
+            "P.RequestCarriesAuthorityObligations env locus assign request",
+            "P.RequestCarriesFailureContainment assign request",
+            "P.RequestCarriesDependencyEvidence assign request",
+            "P.RequestCarriesSpanEvidence assign request",
+        ):
+            self.assertIn(required, request_body)
+
+        generated_write_body = lean_def_body(lean_text, "GeneratedWriteSound")
+        assert_no_vacuous_weakening(self, generated_write_body)
+        self.assertIn("P.OwnerLocalWriteAt env locus assign write", generated_write_body)
+        self.assertIn("exists request", generated_write_body)
+        self.assertIn(
+            "RequestEvidenceSound P env locus assign result write request",
+            generated_write_body,
+        )
+
+        post_body = lean_def_body(lean_text, "AssignmentElabSoundnessPost")
+        assert_no_vacuous_weakening(self, post_body)
+        for required in (
+            "AllGeneratedWritesSound P env locus assign result",
+            "P.AllRhsReadsRecorded assign result",
+            "P.GeneratedFailuresContained assign result",
+            "P.AuthorityObligationsRepresented env locus assign result",
+            "P.SourceSpansPreserved assign result",
+            "P.VisibleWriteConsequencesExplicit env assign result",
+            "P.NoAmbientAuthorityFromNestedLocus env locus assign result",
+        ):
+            self.assertIn(required, post_body)
+
+        statement_body = lean_def_body(lean_text, "THM001StatementDraft")
+        assert_no_vacuous_weakening(self, statement_body)
+        self.assertRegex(
+            statement_body,
+            r"P\.SurfaceAssignment\s+assign\s*->\s+"
+            r"P\.SimpleAssign\s+assign\s*->\s+"
+            r"P\.ElaboratesAssignment\s+env\s+ctx\s+locus\s+assign\s+result\s*->\s+"
+            r"AssignmentElabSoundnessPost P env locus assign result",
+        )
+        self.assertIn("not a proof skeleton", explanation_text)
+        self.assertIn("not runtime dispatch", explanation_text)
+
+    def test_obl020_draft_body_keeps_wf_preservation_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl020/StepWFStatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl020/StepWFStatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertNotRegex(lean_text, r"(?m)^\s*(axiom|constant|theorem)\b")
+        self.assertNotIn("sorry", lean_text)
+        self.assertNotIn("MirCore.Step.WF", lean_text)
+        for final_claim_name in (
+            "StepRuleComplete",
+            "SchedulerDeterminism",
+            "FinalStepApi",
+        ):
+            self.assertNotIn(final_claim_name, lean_text)
+
+        preserves_body = lean_def_body(lean_text, "PreservesWF")
+        assert_no_vacuous_weakening(self, preserves_body)
+        self.assertRegex(
+            preserves_body,
+            r"P\.WellFormed\s+before\s*->\s+"
+            r"P\.Step\s+before\s+label\s+after\s*->\s+"
+            r"P\.WellFormed\s+after",
+        )
+
+        family_body = lean_def_body(lean_text, "FamilyStepPreservesWF")
+        assert_no_vacuous_weakening(self, family_body)
+        self.assertIn("P.CanonStepFamily family", family_body)
+        self.assertIn("P.StepHasFamily label family", family_body)
+        self.assertIn("PreservesWF P before label after", family_body)
+
+        statement_body = lean_def_body(lean_text, "OBL020StatementDraft")
+        assert_no_vacuous_weakening(self, statement_body)
+        self.assertRegex(
+            statement_body,
+            r"forall\s+\(before : V\.Config\)\s+\(label : V\.StepLabel\)\s+"
+            r"\(after : V\.Config\)",
+        )
+        self.assertIn("PreservesWF P before label after", statement_body)
+        self.assertIn("WF clauses stay behind `WellFormed`", explanation_text)
+        self.assertIn("not per-step proof decomposition", explanation_text)
+
+    def test_obl021_draft_body_keeps_determinism_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertNotRegex(lean_text, r"(?m)^\s*(axiom|constant|theorem)\b")
+        self.assertNotIn("sorry", lean_text)
+        self.assertNotIn("MirCore.Elab.Det", lean_text)
+        for final_claim_name in (
+            "SyntacticEquality",
+            "NormalizedEquality",
+            "DefinitionalEquality",
+            "AlphaEquivalence",
+            "RuntimeSchedulingDeterminism",
+        ):
+            self.assertNotIn(final_claim_name, lean_text)
+
+        result_body = lean_def_body(lean_text, "SameElabResult")
+        assert_no_vacuous_weakening(self, result_body)
+        for required in (
+            "P.EquivalentCoreTerm c₁ c₂",
+            "P.EquivalentTypeOut a₁ a₂",
+            "P.EquivalentModeOut m₁ m₂",
+            "P.EquivalentEffectRow e₁ e₂",
+            "P.EquivalentFailureRow f₁ f₂",
+            "P.EquivalentConstraintSet c₁ c₂",
+            "P.EquivalentObligationSet o₁ o₂",
+            "P.EquivalentGeneratedEdges g₁ g₂",
+            "P.EquivalentSourceSpanMap s₁ s₂",
+        ):
+            self.assertIn(required, result_body)
+
+        diagnostic_body = lean_def_body(lean_text, "SameDiagnostic")
+        assert_no_vacuous_weakening(self, diagnostic_body)
+        self.assertIn("P.EquivalentDiagnostic left right", diagnostic_body)
+
+        post_body = lean_def_body(lean_text, "ElabDeterministicPost")
+        assert_no_vacuous_weakening(self, post_body)
+        self.assertIn("SameElabResult P left right", post_body)
+        self.assertIn("SameDiagnostic P left right", post_body)
+        self.assertRegex(
+            post_body,
+            r"P\.Elaborates\s+env\s+ctx\s+locus\s+item\s+result\s*->\s+"
+            r"P\.Rejects\s+env\s+ctx\s+locus\s+item\s+diagnostic\s*->\s+"
+            r"False",
+        )
+
+        statement_body = lean_def_body(lean_text, "OBL021StatementDraft")
+        assert_no_vacuous_weakening(self, statement_body)
+        self.assertRegex(
+            statement_body,
+            r"P\.WellScopedInput\s+env\s+ctx\s+locus\s+item\s*->\s+"
+            r"ElabDeterministicPost P env ctx locus item",
+        )
+        self.assertIn("not final equality selection", explanation_text)
+        self.assertIn("not runtime scheduling determinism", explanation_text)
 
     def test_obl024_draft_names_replay_vocabulary_boundary(self) -> None:
         lean_path = (

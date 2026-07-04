@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 09:41 JST
+最終更新: 2026-07-04 09:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -80,6 +80,15 @@ Current holding state:
   as an aggregate `Prop` over abstract `WellFormed` / `Step` and does not move
   canon OBL status, prove WF preservation, claim proof skeleton completion,
   G1/T1/T2 exit, conformance, runtime implementation proof, or edit canon.
+- `plan/117-g1-obl001-020-021-statement-guard-hardening.md` now records a
+  LAB-only sync-test guard hardening for the older OBL-001 / OBL-020 /
+  OBL-021 statement drafts. It checks body-level links for assignment request
+  evidence / postcondition, WF preservation / family threading, and
+  elaboration determinism component equivalence / diagnostic equivalence /
+  success-reject exclusion. It does not prove OBL-001/020/021, move canon
+  ledger status, create a proof skeleton, freeze final equality or diagnostic
+  ABI, claim runtime dispatch or runtime scheduling determinism, claim
+  conformance, claim G1 exit, or edit canon.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
