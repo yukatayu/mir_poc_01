@@ -231,6 +231,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
         "plan/147-g1-next-line-promotion-boundary-audit.md",
         "plan/148-storage-workdir-mountpoint-guard-hardening.md",
+        "plan/149-current-phase-position-reading.md",
     ],
     "scripts": [
         "scripts",

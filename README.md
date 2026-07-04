@@ -141,6 +141,12 @@ workdir を exact mountpoint として確認し、root filesystem 上の通常 d
 mount provisioning、cache move、sample / workflow status、canon edit、OBL
 status、proof / conformance、runtime readiness、G1 exit は主張しません。
 
+`plan/149` は current phase position reading です。全体計画の現在地を
+canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目
+と読み、T0 内では late pre-exit だが G0 exit は未達、と整理します。
+LAB evidence が G1/T1 準備へ先行していることと、canon phase movement を
+混同しません。
+
 ## 現在の到達点
 
 - active sample suite は `samples/clean-near-end/`

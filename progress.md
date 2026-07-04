@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 01:28 JST
+最終更新: 2026-07-05 01:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,6 +58,12 @@ semantic source authority.
 - Current canon position: `mirrorea_canon/plan/01-phases.md` places the project
   at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
   not canon implementation-state completion.
+- Current phase-position reading:
+  `plan/149-current-phase-position-reading.md` records the concise answer to
+  "where are we in the whole plan?" Canonically this is still `T0/G0
+  rebaseline`; as a human stage count it is phase 1 of 9. Within T0 it is
+  late pre-exit, but G0 exit, T1 entry, G1 exit, proof / conformance, runtime
+  readiness, and sample / workflow status movement remain unclaimed.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -362,6 +368,12 @@ semantic source authority.
   caches, change sample or workflow status, edit canon, choose an OBL extraction
   line, move the ledger, claim proof / conformance, change runtime readiness,
   or exit G1.
+- Current phase-position reading note:
+  `plan/149-current-phase-position-reading.md` keeps the short status answer
+  aligned with canon: `T0/G0 rebaseline`, human-count phase 1 of 9, late
+  pre-exit within T0, and no G0/G1 exit or T1 entry claim. It also records that
+  LAB evidence for Product Alpha, Full System V1, Surface Mir alpha, and G1
+  ordinary-assignment preparation is substantial but not canon phase movement.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -1032,7 +1044,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection | light | maintenance only |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit | light | maintenance only |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1174,6 +1186,13 @@ OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening.
 
+- 2026-07-05 01:48 JST
+  `plan/149-current-phase-position-reading.md` を追加し、全体計画の現在地を
+  canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目、
+  T0 内では late pre-exit だが G0 exit 未達として整理した。LAB evidence が
+  G1/T1 準備へ先行していることと canon phase movement を分け、G0/G1 exit、
+  T1 entry、proof / conformance、runtime readiness、sample / workflow status
+  movement は主張していない。
 - 2026-07-05 01:28 JST
   `plan/148-storage-workdir-mountpoint-guard-hardening.md` を追加し、storage env
   / cleanup helper の mount 判定を exact mountpoint 判定へ harden した。RED/GREEN

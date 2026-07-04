@@ -103,8 +103,9 @@
 85. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
 86. G1 OBL-024 association guard hardening は `plan/115`
 87. storage workdir mountpoint guard hardening は `plan/148`
-88. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-89. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+88. current phase position reading は `plan/149`
+89. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+90. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -373,6 +374,13 @@
   guard を強化する tooling memory である。cleanup、mount provisioning、
   sample status、workflow status、canon edit、OBL status、proof /
   conformance claim、runtime readiness、G1 exit は主張しない
+- **current phase position reading**:
+  `plan/149-current-phase-position-reading.md` は、全体計画の現在地を
+  canon lifecycle では `T0/G0 rebaseline`、人間向け stage count では
+  9 段階中 1 段階目として読み、T0 内では late pre-exit だが G0 exit は
+  未達と整理する repository memory である。LAB evidence の先行と canon
+  phase movement を混同せず、G0/G1 exit、T1 entry、proof / conformance、
+  runtime readiness、sample / workflow status change は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -505,6 +513,8 @@
   `plan/147-g1-next-line-promotion-boundary-audit.md`
 - Storage workdir mountpoint guard hardening:
   `plan/148-storage-workdir-mountpoint-guard-hardening.md`
+- Current phase position reading:
+  `plan/149-current-phase-position-reading.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

@@ -571,6 +571,7 @@ REQUIRED = [
     "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
     "plan/147-g1-next-line-promotion-boundary-audit.md",
     "plan/148-storage-workdir-mountpoint-guard-hardening.md",
+    "plan/149-current-phase-position-reading.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
