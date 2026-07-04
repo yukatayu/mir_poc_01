@@ -235,7 +235,12 @@ code-mapper recommendation from Package 53.
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `12c1fb39 Use relative alpha08 session hotplug paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
