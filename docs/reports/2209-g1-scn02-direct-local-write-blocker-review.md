@@ -249,12 +249,12 @@ status or command changed.
 
 ## Commit / push status
 
-Pre-commit report state:
+Package commit / push completed:
 
-- This package has not yet been committed or pushed at the time this report is
-  first written.
-- A follow-up commit-status update will record the commit hash and push result
-  after the first package commit exists.
+- `35e0f789177c287a58b9a97d9dfc066b8cfc787f`
+  (`Add SCN-02 direct-local-write blocker review`) was committed with
+  `--no-gpg-sign` and pushed to `origin/main`.
+- This follow-up report-status update records that commit / push result.
 
 ## Sub-agent session close status
 
