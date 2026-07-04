@@ -232,12 +232,16 @@ backed by that evidence.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / report commit:
+  `5641a1bf Redact practical helper failure paths`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is pending at this line before its
+  own commit.
 
 ## Sub-agent session close status
 
 Code-mapper sub-agent `019f2c15-2977-7391-a56c-07cef61cd9ee` completed and was
 closed after its result was mirrored into this report.
 
-Reviewer sub-agent `019f2c27-5910-7520-af3a-86d3a35b354c` completed; follow-up
-fixes were implemented and verified.
+Reviewer sub-agent `019f2c27-5910-7520-af3a-86d3a35b354c` completed and was
+closed; follow-up fixes were implemented and verified.
