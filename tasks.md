@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 19:58 JST
+最終更新: 2026-07-04 20:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -131,6 +131,13 @@ Current holding state:
   product, and reserve triggers. It separates G1 OBL statement/status from T2
   proof discharge and keeps SCN-02 direct-local-write negative (b) as
   reserve-only, non-blocking structural support.
+- `plan/129-g1-acceptance-packet-preflight.md` now prepares a future G1
+  acceptance packet by listing the canon files a human/canon review would
+  inspect, the exact LAB evidence supporting each acceptance point, the
+  OBL-001/020/021 statement/status blockers, the OPEN-014 deferral point, and
+  runtime / conformance / product exclusions. It is a preflight routing
+  checklist, not the acceptance packet itself, and it does not edit canon, move
+  OBL status, claim G1 exit, add executable rows, or refine Lean predicates.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -153,17 +160,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..128`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..129`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
   slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..128`. This is documentation taxonomy maintenance only.
+  `plan/118..129`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..128`. This keeps future plan-file additions
+  cover current numbered `plan/00..129`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -367,6 +374,13 @@ Current holding state:
   handling for OPEN-014, separates G1 OBL statement/status work from later T2
   proof discharge, and keeps reserve-only non-blockers from becoming required
   closeout work.
+- `plan/129-g1-acceptance-packet-preflight.md` now turns that handoff ledger
+  into a preflight routing checklist for a future human/canon G1 acceptance
+  packet. It includes `theory/01` as part of the acceptance surface, keeps
+  OBL-002 proof as later T2 work rather than a G1 exit blocker, classifies
+  `ELAB-17` diagnostic / repair payloads under OBL-024/025 support only, and
+  leaves all canon edit / OBL movement / conformance / runtime claims
+  forbidden.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
@@ -632,7 +646,7 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `G1 acceptance-packet preflight` | `G1` docs-only | after `plan/128`, list the exact canon files a human would need to accept/update, exact LAB evidence files supporting each acceptance point, exact statement/status blockers, later proof-package blockers, and runtime/conformance/product exclusions | preflight only; no canon edit, no executable row, no Lean refinement, no gate movement unless explicitly promoted |
+| `G1 OBL statement/status completion criteria inventory` | `G1` docs-only | after `plan/129`, define what would have to be true before OBL-001 / OBL-020 / OBL-021 status could be proposed for canon ledger movement, while keeping proof discharge and proof skeletons later | criteria inventory only; no canon edit, no ledger movement, no executable row, no Lean refinement, no gate movement unless explicitly promoted |
 | `OBL-001 sync guard hardening` | `G1` reserve | add docs-only or test-only guard hardening only if future review finds that the OBL-001 statement sync tests can drift away from the `plan/124` boundary without failing | Lean remains compile-check only; no predicate refinement by default; no canon ledger movement |
 | `OBL-020 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `StepWFStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `ElabDeterminismStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |

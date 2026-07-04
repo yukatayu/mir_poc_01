@@ -551,6 +551,7 @@ REQUIRED = [
     "plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md",
     "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
     "plan/128-g1-bridge-handoff-blocker-ledger.md",
+    "plan/129-g1-acceptance-packet-preflight.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

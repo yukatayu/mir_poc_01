@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 19:58 JST
+最終更新: 2026-07-04 20:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -165,6 +165,15 @@ semantic source authority.
   runtime / conformance / product, and reserve triggers. It explicitly separates
   G1 statement/status work from T2 proof discharge and keeps SCN-02
   direct-local-write negative (b) reserve-only. This does not claim canon edit,
+  OBL completion, proof discharge, conformance, G1 exit, runtime readiness, or
+  sample-status relabel.
+- Current G1 acceptance-packet preflight note:
+  `plan/129-g1-acceptance-packet-preflight.md` prepares a future G1
+  acceptance packet by listing the canon files a human/canon review would
+  inspect, the LAB evidence supporting each acceptance point, the
+  OBL-001/020/021 statement/status blockers, the OPEN-014 deferral point, and
+  runtime / conformance / product exclusions. It is a preflight routing
+  checklist, not the acceptance packet itself. This does not claim canon edit,
   OBL completion, proof discharge, conformance, G1 exit, runtime readiness, or
   sample-status relabel.
 - Current stale source-hierarchy wording audit note:
@@ -842,7 +851,7 @@ Research-discovery items:
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
 | `Macro 4` | executable sample expansion | Surface operational and devtools roots exist as alpha source evidence; final audit closed | heavy | maintenance only |
-| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile; OBL-001/020/021 and OBL-024/025 have focused sync guards against body/vocabulary drift, `plan/126` hardens OBL-001/020/021 body-link checks against comment-only satisfaction plus bare `:= True` vacuity, `plan/127` separates G1 bridge support from G1 exit non-readiness, and `plan/128` routes remaining blockers to human/canon acceptance, future statement/proof packages, canon-open deferral, static LAB support-only, later runtime/conformance/product, or reserve triggers; Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are still not proved or ledger-moved | medium | 着手可能 |
+| `Macro 5` | theorem / model-check / verifier bridge | LAB OBL-001, OBL-020, OBL-021, OBL-024, and OBL-025 statement-shape drafts now compile; OBL-001/020/021 and OBL-024/025 have focused sync guards against body/vocabulary drift, `plan/126` hardens OBL-001/020/021 body-link checks against comment-only satisfaction plus bare `:= True` vacuity, `plan/127` separates G1 bridge support from G1 exit non-readiness, `plan/128` routes remaining blockers to human/canon acceptance, future statement/proof packages, canon-open deferral, static LAB support-only, later runtime/conformance/product, or reserve triggers, and `plan/129` preflights the canon files / LAB evidence / OBL statement-status blockers / OPEN-014 deferral / runtime-conformance exclusions for a future human/canon G1 acceptance packet; Surface elaboration soundness / WF preservation / elaboration determinism / diagnostic soundness / repair completeness are still not proved or ledger-moved | medium | 着手可能 |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha remains floor | heavy | 後段依存 |
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
@@ -864,7 +873,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product; release-check argv / aggregate display, installed-binary binary/package argv, and generated demo / native provenance / Docker source evidence now avoid repo-root absolute source paths for repo-owned inputs | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor; nested helper command argv for repo-owned operational roots/layers now stays repo-relative | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status, with `plan/126` ensuring those required links are checked outside comments and that bare `:= True` bodies are rejected; `plan/124` audits `ELAB-11/12/17` against OBL-001 and finds no Lean predicate refinement needed at this checkpoint; `plan/125` keeps SCN-02 direct-local-write negative (b) non-blocking for the current G1 bridge without claiming exact executable negative evidence or adding an OBL-001 predicate; `plan/126` also audits OBL-020/021 and finds no Lean predicate refinement needed at this checkpoint; `plan/127` keeps OBL-001/020/021 completion, proof, and ledger movement as explicit G1 non-readiness blockers; `plan/128` further separates G1 statement/status blockers from later T2 proof discharge; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status, with `plan/126` ensuring those required links are checked outside comments and that bare `:= True` bodies are rejected; `plan/124` audits `ELAB-11/12/17` against OBL-001 and finds no Lean predicate refinement needed at this checkpoint; `plan/125` keeps SCN-02 direct-local-write negative (b) non-blocking for the current G1 bridge without claiming exact executable negative evidence or adding an OBL-001 predicate; `plan/126` also audits OBL-020/021 and finds no Lean predicate refinement needed at this checkpoint; `plan/127` keeps OBL-001/020/021 statement/status completion and ledger movement as explicit G1 non-readiness blockers; `plan/128` further separates those G1 statement/status blockers from later T2 proof discharge; `plan/129` keeps a future statement/status completion-criteria inventory as the next docs-only move without moving the canon ledger; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -915,7 +924,15 @@ plus G1 minimal vertical slice candidate mapping, SCN exact static slice
 manifest mapping, SCN-01 visibility negative actualization, OBL-001 boundary
 audit, SCN-02 direct-local-write blocker review, OBL-020/021 boundary audit
 plus OBL-021 guard hardening, G1 bridge readiness / non-readiness mapping, and
-G1 bridge handoff / blocker ledger classification.
+G1 bridge handoff / blocker ledger classification, and G1 acceptance-packet
+preflight routing checklist.
+
+- 2026-07-04 20:18 JST
+  `plan/129-g1-acceptance-packet-preflight.md` を追加し、future G1 acceptance
+  packet に必要な canon files、LAB evidence、OBL-001/020/021 statement/status
+  blockers、OPEN-014 deferral point、runtime/conformance/product exclusions を
+  preflight routing checklist として整理した。canon edit、OBL completion、proof
+  discharge、conformance、G1 exit、runtime readiness、sample status は主張していない。
 
 - 2026-07-04 19:58 JST
   `plan/128-g1-bridge-handoff-blocker-ledger.md` を追加し、`plan/127` の blockers
