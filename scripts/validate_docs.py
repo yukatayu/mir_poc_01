@@ -552,6 +552,7 @@ REQUIRED = [
     "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
     "plan/128-g1-bridge-handoff-blocker-ledger.md",
     "plan/129-g1-acceptance-packet-preflight.md",
+    "plan/130-g1-obl-statement-status-completion-criteria-inventory.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

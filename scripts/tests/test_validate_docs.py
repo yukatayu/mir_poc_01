@@ -338,6 +338,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
             "plan/128-g1-bridge-handoff-blocker-ledger.md",
             "plan/129-g1-acceptance-packet-preflight.md",
+            "plan/130-g1-obl-statement-status-completion-criteria-inventory.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

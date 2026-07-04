@@ -212,6 +212,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
         "plan/128-g1-bridge-handoff-blocker-ledger.md",
         "plan/129-g1-acceptance-packet-preflight.md",
+        "plan/130-g1-obl-statement-status-completion-criteria-inventory.md",
     ],
     "scripts": [
         "scripts",
