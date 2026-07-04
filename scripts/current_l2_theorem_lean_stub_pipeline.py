@@ -54,6 +54,13 @@ def artifact_path(
     return artifact_root / lane / regression.ensure_run_label(run_label) / f"{sample_stem}.{suffix}"
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def sample_inventory_row(sample_stem: str) -> regression.InventoryRow:
     for row in regression.inventory_rows():
         if row.sample_stem == sample_stem:
@@ -114,11 +121,11 @@ def plan_theorem_lean_stub_pipeline(
         name=f"{smoke_mode} formal hook smoke for {sample_stem}",
         argv=(
             python_cmd,
-            str(detached_loop),
+            repo_cli_arg(detached_loop),
             smoke_subcommand,
             sample_stem,
             "--artifact-root",
-            str(artifact_root),
+            repo_cli_arg(artifact_root),
             "--run-label",
             sample_run_label,
             "--overwrite",
@@ -134,9 +141,9 @@ def plan_theorem_lean_stub_pipeline(
             "--example",
             "current_l2_emit_proof_notebook_review_unit",
             "--",
-            str(formal_hook_output),
+            repo_cli_arg(formal_hook_output),
             "--output",
-            str(review_units_output),
+            repo_cli_arg(review_units_output),
         ),
     )
     lean_stub_command = PipelineCommand(
@@ -149,9 +156,9 @@ def plan_theorem_lean_stub_pipeline(
             "--example",
             "current_l2_emit_lean_theorem_stub",
             "--",
-            str(review_units_output),
+            repo_cli_arg(review_units_output),
             "--output",
-            str(lean_stubs_output),
+            repo_cli_arg(lean_stubs_output),
         ),
     )
 
@@ -235,7 +242,12 @@ def read_json_array(path: Path) -> list[dict[str, Any]]:
 
 
 def run_command(command: PipelineCommand) -> None:
-    completed = subprocess.run(command.argv, cwd=REPO_ROOT)
+    completed = subprocess.run(
+        command.argv,
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+    )
     if completed.returncode != 0:
         raise RuntimeError(
             f"{command.name} failed with exit status {completed.returncode}"
@@ -304,9 +316,9 @@ def main() -> int:
                     "formal_hook_command": list(plan.formal_hook_command.argv),
                     "review_unit_command": list(plan.review_unit_command.argv),
                     "lean_stub_command": list(plan.lean_stub_command.argv),
-                    "formal_hook_output": str(plan.formal_hook_output),
-                    "review_units_output": str(plan.review_units_output),
-                    "lean_stubs_output": str(plan.lean_stubs_output),
+                    "formal_hook_output": repo_cli_arg(plan.formal_hook_output),
+                    "review_units_output": repo_cli_arg(plan.review_units_output),
+                    "lean_stubs_output": repo_cli_arg(plan.lean_stubs_output),
                 },
                 indent=2,
             )
@@ -319,9 +331,9 @@ def main() -> int:
             {
                 "sample_stem": plan.sample_stem,
                 "smoke_mode": plan.smoke_mode,
-                "formal_hook_output": str(plan.formal_hook_output),
-                "review_units_output": str(plan.review_units_output),
-                "lean_stubs_output": str(plan.lean_stubs_output),
+                "formal_hook_output": repo_cli_arg(plan.formal_hook_output),
+                "review_units_output": repo_cli_arg(plan.review_units_output),
+                "lean_stubs_output": repo_cli_arg(plan.lean_stubs_output),
                 "review_unit_count": summary.review_unit_count,
                 "lean_stub_count": summary.lean_stub_count,
                 "matched_pairs": summary.matched_pairs,

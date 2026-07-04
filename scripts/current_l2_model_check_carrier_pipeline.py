@@ -52,6 +52,13 @@ def artifact_path(
     return artifact_root / lane / regression.ensure_run_label(run_label) / f"{sample_stem}.{suffix}"
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def sample_inventory_row(sample_stem: str) -> regression.InventoryRow:
     for row in regression.inventory_rows():
         if row.sample_stem == sample_stem:
@@ -105,11 +112,11 @@ def plan_model_check_carrier_pipeline(
         name=f"{smoke_mode} formal hook smoke for {sample_stem}",
         argv=(
             python_cmd,
-            str(detached_loop),
+            repo_cli_arg(detached_loop),
             smoke_subcommand,
             sample_stem,
             "--artifact-root",
-            str(artifact_root),
+            repo_cli_arg(artifact_root),
             "--run-label",
             sample_run_label,
             "--overwrite",
@@ -125,9 +132,9 @@ def plan_model_check_carrier_pipeline(
             "--example",
             "current_l2_emit_model_check_carrier",
             "--",
-            str(formal_hook_output),
+            repo_cli_arg(formal_hook_output),
             "--output",
-            str(model_check_output),
+            repo_cli_arg(model_check_output),
         ),
     )
 
@@ -220,7 +227,12 @@ def read_json_array(path: Path) -> list[dict[str, Any]]:
 
 
 def run_command(command: PipelineCommand) -> None:
-    completed = subprocess.run(command.argv, cwd=REPO_ROOT)
+    completed = subprocess.run(
+        command.argv,
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+    )
     if completed.returncode != 0:
         raise RuntimeError(
             f"{command.name} failed with exit status {completed.returncode}"
@@ -286,8 +298,8 @@ def main() -> int:
                     "smoke_mode": plan.smoke_mode,
                     "formal_hook_command": list(plan.formal_hook_command.argv),
                     "model_check_command": list(plan.model_check_command.argv),
-                    "formal_hook_output": str(plan.formal_hook_output),
-                    "model_check_output": str(plan.model_check_output),
+                    "formal_hook_output": repo_cli_arg(plan.formal_hook_output),
+                    "model_check_output": repo_cli_arg(plan.model_check_output),
                 },
                 indent=2,
             )
@@ -300,8 +312,8 @@ def main() -> int:
             {
                 "sample_stem": plan.sample_stem,
                 "smoke_mode": plan.smoke_mode,
-                "formal_hook_output": str(plan.formal_hook_output),
-                "model_check_output": str(plan.model_check_output),
+                "formal_hook_output": repo_cli_arg(plan.formal_hook_output),
+                "model_check_output": repo_cli_arg(plan.model_check_output),
                 "formal_hook_pair_count": summary.formal_hook_pair_count,
                 "model_check_carrier_count": summary.model_check_carrier_count,
                 "matched_pairs": summary.matched_pairs,

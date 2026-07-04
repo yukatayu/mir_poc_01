@@ -405,6 +405,57 @@ class StaticGateLoopTests(unittest.TestCase):
                 loop.reason_code_readiness.main = original_readiness
 
         self.assertEqual(exit_code, 0)
+        expected_artifact_dir = temp_root / "artifacts" / "static-gates" / "readiness-run"
+        self.assertEqual(
+            assisted,
+            [[str(fixture_dir), str(expected_artifact_dir)]],
+        )
+        self.assertEqual(
+            emitted,
+            [(static_fixture, expected_artifact_dir / "left.static-gate.json", True)],
+        )
+
+    def test_scan_reason_code_readiness_uses_repo_relative_default_paths(self) -> None:
+        captured: list[list[str]] = []
+        emitted: list[tuple[Path, Path, bool]] = []
+
+        original_emit = loop.emit_static_gate
+        original_readiness = loop.reason_code_readiness.main
+
+        def fake_emit(fixture: Path, output: Path, overwrite: bool) -> int:
+            emitted.append((fixture, output, overwrite))
+            return 0
+
+        def fake_readiness(argv: list[str] | None = None) -> int:
+            captured.append(list(argv or []))
+            return 0
+
+        loop.emit_static_gate = fake_emit
+        loop.reason_code_readiness.main = fake_readiness
+        try:
+            exit_code = loop.command_scan_reason_code_readiness(
+                argparse.Namespace(
+                    fixture_directory=str(loop.DEFAULT_FIXTURE_DIRECTORY),
+                    artifact_root=str(loop.DEFAULT_ARTIFACT_ROOT),
+                    run_label="readiness-run",
+                    overwrite=True,
+                )
+            )
+        finally:
+            loop.emit_static_gate = original_emit
+            loop.reason_code_readiness.main = original_readiness
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(emitted)
+        self.assertEqual(
+            captured,
+            [
+                [
+                    "crates/mir-ast/tests/fixtures/current-l2",
+                    "target/current-l2-detached/static-gates/readiness-run",
+                ]
+            ],
+        )
 
     def test_smoke_capability_checker_emits_artifact_then_delegates(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

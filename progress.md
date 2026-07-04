@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 16:01 JST
+最終更新: 2026-07-04 16:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -818,7 +818,19 @@ helper nested session package argv path portability hardening, plus Surface
 release-check output path serialization hardening, plus Product Alpha
 installed-binary generated path serialization hardening, plus Full System V1
 helper nested source argv path portability hardening, plus alpha network Docker
-success/failure path serialization hardening.
+success/failure path serialization hardening, plus current-L2 pipeline and
+detached-loop helper path portability hardening.
+
+- 2026-07-04 16:19 JST
+  `scripts/current_l2_detached_loop.py`、theorem Lean-stub pipeline、
+  model-check carrier pipeline、source-sample regression planner、Lean sample
+  sync の repo-owned helper argv / artifact display / plan-result JSON を
+  repo-relative 表示に変更した。外部 artifact root は absolute のまま保持する。
+  Current-L2 focused unit 82 tests、source-regression 23/23 commands、
+  theorem/model plan JSON repo absolute match 0、generated artifact scan repo
+  absolute match 0、`scan-reason-code-readiness` repo absolute match 0、
+  `/tmp` からの same-lineage checker invocation が通過。sample status、
+  workflow status、semantics、proof status、ABI、canon claim は変更していない。
 
 - 2026-07-04 16:01 JST
   `scripts/alpha_network_docker_e2e.py` の `list` / `closeout` /
@@ -882,8 +894,8 @@ success/failure path serialization hardening.
   `practical_alpha05_host_io` 2 tests、`practical_alpha1_local_runtime` 6
   tests が通過。Broader path-portability audit は次候補として
   Surface release-check / installed-binary generated paths / Full System V1
-  nested source argv / alpha network Docker / current-L2 pipeline and detached
-  loop / source-hierarchy status JSON / shared practical failure-path redaction
+  nested source argv / alpha network Docker / source-hierarchy status JSON /
+  shared practical failure-path redaction
   を残した。sample status、workflow status、semantics、ABI、canon claim は
   変更していない。
 

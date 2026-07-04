@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 16:01 JST
+最終更新: 2026-07-04 16:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -170,8 +170,8 @@ Current holding state:
   `practical_alpha05_session.py`, Full System V1 nested source argv, and alpha
   network Docker success/failure path serialization.
   Remaining broader path-portability candidates are now outside that focused
-  practical list: current-L2 pipeline / detached-loop repo-owned helper argv,
-  source-hierarchy status JSON, and shared practical failure-path redaction.
+  practical list: source-hierarchy status JSON and shared practical failure-path
+  redaction.
 - Alpha network Docker helper output now preserves portability for repo-owned
   sample root / compose file / binary path displays, nested `docker compose -f`
   argv, Docker stdout, missing repo binary errors, Docker failure stderr, and
@@ -179,6 +179,14 @@ Current holding state:
   host absolute where Compose requires them. Real Docker validation passed
   `run NET-02`, `check-all` 6/6, and `stage-c-closeout` with returned payload
   host path matches 0.
+- Current-L2 detached-loop and theorem/model/Lean pipeline helper surfaces now
+  preserve portability for repo-owned helper argv, artifact displays, plan/result
+  JSON, source-regression command plans, and Lean verification argv. External
+  artifact roots remain absolute. Full current-L2 source regression passed 23/23
+  commands, focused Python unit coverage passed 82 tests,
+  `scan-reason-code-readiness` output had repo-root absolute match 0, generated
+  artifact scans found no repo-root absolute paths, and `/tmp` checker
+  invocation printed repo-relative fixture/artifact paths.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate

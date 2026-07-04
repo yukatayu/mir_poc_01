@@ -1,6 +1,7 @@
 import argparse
 import io
 import json
+import os
 import tempfile
 import sys
 import unittest
@@ -15,6 +16,21 @@ import current_l2_detached_loop as loop  # noqa: E402
 
 
 class DetachedLoopPathTests(unittest.TestCase):
+    def test_repo_cli_arg_relativizes_repo_owned_path(self) -> None:
+        fixture_path = (
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json"
+        )
+
+        self.assertEqual(
+            loop.repo_cli_arg(fixture_path),
+            "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json",
+        )
+
+    def test_repo_cli_arg_keeps_external_path_absolute(self) -> None:
+        external = Path("/tmp/current-l2-external-artifact.json")
+        self.assertEqual(loop.repo_cli_arg(external), str(external))
+
     def test_resolve_fixture_argument_accepts_stem_without_extension(self) -> None:
         resolved = loop.resolve_fixture_argument("e3-option-admit-chain")
         self.assertEqual(
@@ -63,6 +79,105 @@ class DetachedLoopPathTests(unittest.TestCase):
         self.assertEqual(exit_code, 2)
         self.assertEqual(captured_cmds, [])
         self.assertIn("fixture does not exist", stderr.getvalue())
+
+    def test_emit_fixture_uses_repo_relative_subprocess_paths(self) -> None:
+        captured_cmds: list[list[str]] = []
+        original_runner = loop.run_subprocess
+        fixture_path = (
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json"
+        )
+        output_path = (
+            REPO_ROOT
+            / "target/current-l2-detached/path-portability/e3.detached.json"
+        )
+
+        def fake_runner(cmd: list[str]) -> int:
+            captured_cmds.append(cmd)
+            return 0
+
+        loop.run_subprocess = fake_runner
+        try:
+            exit_code = loop.emit_fixture(fixture_path, output_path, overwrite=True)
+        finally:
+            loop.run_subprocess = original_runner
+
+        self.assertEqual(exit_code, 0)
+        argv = captured_cmds[0]
+        self.assertIn(
+            "crates/mir-ast/tests/fixtures/current-l2/e3-option-admit-chain.json",
+            argv,
+        )
+        self.assertIn(
+            "target/current-l2-detached/path-portability/e3.detached.json",
+            argv,
+        )
+        self.assertFalse(any(arg.startswith(f"{loop.REPO_ROOT}/") for arg in argv))
+
+    def test_compare_artifacts_uses_repo_relative_helper_and_artifacts(self) -> None:
+        captured_cmds: list[list[str]] = []
+        original_runner = loop.run_subprocess
+        left = REPO_ROOT / "target/current-l2-detached/left.detached.json"
+        right = REPO_ROOT / "target/current-l2-detached/right.detached.json"
+
+        def fake_runner(cmd: list[str]) -> int:
+            captured_cmds.append(cmd)
+            return 0
+
+        loop.run_subprocess = fake_runner
+        try:
+            exit_code = loop.compare_artifacts(left, right)
+        finally:
+            loop.run_subprocess = original_runner
+
+        self.assertEqual(exit_code, 0)
+        argv = captured_cmds[0]
+        self.assertIn("scripts/current_l2_diff_detached_artifacts.py", argv)
+        self.assertIn("target/current-l2-detached/left.detached.json", argv)
+        self.assertIn("target/current-l2-detached/right.detached.json", argv)
+        self.assertFalse(any(arg.startswith(f"{loop.REPO_ROOT}/") for arg in argv))
+
+    def test_family_checker_helper_uses_repo_relative_paths_from_repo_root(self) -> None:
+        captured: list[tuple[Path, list[str]]] = []
+        original_main = loop.same_lineage_checker.main
+        original_cwd = Path.cwd()
+        fixture_path = (
+            REPO_ROOT
+            / "crates/mir-ast/tests/fixtures/current-l2/e5-underdeclared-lineage.json"
+        )
+        artifact_path = (
+            REPO_ROOT
+            / "target/current-l2-detached/path-portability/e5.static-gate.json"
+        )
+
+        def fake_main(argv: list[str] | None = None) -> int:
+            captured.append((Path.cwd(), list(argv or [])))
+            return 0
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cwd_before_call = Path(temp_dir)
+            os.chdir(cwd_before_call)
+            loop.same_lineage_checker.main = fake_main
+            try:
+                exit_code = loop.check_same_lineage_first_checker(
+                    fixture_path,
+                    artifact_path,
+                )
+                cwd_after_call = Path.cwd()
+            finally:
+                loop.same_lineage_checker.main = original_main
+                os.chdir(original_cwd)
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(cwd_after_call, cwd_before_call)
+        self.assertEqual(captured[0][0], loop.REPO_ROOT)
+        self.assertEqual(
+            captured[0][1],
+            [
+                "crates/mir-ast/tests/fixtures/current-l2/e5-underdeclared-lineage.json",
+                "target/current-l2-detached/path-portability/e5.static-gate.json",
+            ],
+        )
 
     def test_aggregate_artifact_path_uses_run_label_and_batch_summary_name(self) -> None:
         path = loop.aggregate_artifact_path(

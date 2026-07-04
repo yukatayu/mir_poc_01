@@ -81,6 +81,29 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "/tmp/outside-sample.mir",
         )
 
+    def test_verify_lean_uses_repo_relative_path_for_repo_owned_file(self) -> None:
+        lean_path = sync.REPO_ROOT / "samples/lean/foundations/CurrentL2LabelModel.lean"
+        completed = mock.Mock(returncode=0, stdout="", stderr="")
+
+        with mock.patch.object(sync.subprocess, "run", return_value=completed) as mocked_run:
+            payload = sync.verify_lean(lean_path)
+
+        self.assertTrue(payload["success"])
+        self.assertEqual(
+            mocked_run.call_args.args[0],
+            ["lean", "samples/lean/foundations/CurrentL2LabelModel.lean"],
+        )
+        self.assertEqual(mocked_run.call_args.kwargs["cwd"], sync.REPO_ROOT)
+
+    def test_verify_lean_preserves_external_absolute_path(self) -> None:
+        lean_path = Path("/tmp/external-current-l2.lean")
+        completed = mock.Mock(returncode=0, stdout="", stderr="")
+
+        with mock.patch.object(sync.subprocess, "run", return_value=completed) as mocked_run:
+            sync.verify_lean(lean_path)
+
+        self.assertEqual(mocked_run.call_args.args[0], ["lean", str(lean_path)])
+
     def test_main_prints_repo_relative_manifest_path(self) -> None:
         target_root = sync.REPO_ROOT / "target"
         target_root.mkdir(exist_ok=True)

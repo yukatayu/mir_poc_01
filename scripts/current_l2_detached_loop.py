@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import shutil
 import subprocess
 import sys
@@ -72,6 +73,13 @@ DEFAULT_TRY_ROLLBACK_FRONTIER_FIXTURE = (
     REPO_ROOT
     / "crates/mir-ast/tests/fixtures/current-l2/e21-try-atomic-cut-frontier.json"
 )
+
+
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def ensure_run_label(label: str) -> str:
@@ -160,6 +168,15 @@ def run_subprocess(cmd: list[str]) -> int:
     return completed.returncode
 
 
+def run_repo_helper(main_fn, argv: list[str]) -> int:
+    original_cwd = Path.cwd()
+    try:
+        os.chdir(REPO_ROOT)
+        return main_fn(argv)
+    finally:
+        os.chdir(original_cwd)
+
+
 def resolve_fixture_argument(argument: str) -> Path:
     candidate = Path(argument)
     if candidate.exists():
@@ -176,7 +193,7 @@ def resolve_fixture_argument(argument: str) -> Path:
 
     raise ValueError(
         "fixture not found: "
-        f"{argument} (searched direct path and {DEFAULT_FIXTURE_DIRECTORY})"
+        f"{argument} (searched direct path and {repo_cli_arg(DEFAULT_FIXTURE_DIRECTORY)})"
     )
 
 
@@ -198,20 +215,20 @@ def emit_fixture(
     overwrite: bool,
 ) -> int:
     if not fixture_path.is_file():
-        print(f"fixture does not exist: {fixture_path}", file=sys.stderr)
+        print(f"fixture does not exist: {repo_cli_arg(fixture_path)}", file=sys.stderr)
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
-            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            f"artifact already exists: {repo_cli_arg(output_path)} (use --overwrite to replace)",
             file=sys.stderr,
         )
         return 2
     cmd = [
         *EMITTER_CMD,
-        str(fixture_path),
+        repo_cli_arg(fixture_path),
         "--output",
-        str(output_path),
+        repo_cli_arg(output_path),
     ]
     return run_subprocess(cmd)
 
@@ -222,20 +239,23 @@ def emit_aggregate(
     overwrite: bool,
 ) -> int:
     if not fixture_directory.is_dir():
-        print(f"fixture directory does not exist: {fixture_directory}", file=sys.stderr)
+        print(
+            f"fixture directory does not exist: {repo_cli_arg(fixture_directory)}",
+            file=sys.stderr,
+        )
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
-            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            f"artifact already exists: {repo_cli_arg(output_path)} (use --overwrite to replace)",
             file=sys.stderr,
         )
         return 2
     cmd = [
         *AGGREGATE_EMITTER_CMD,
-        str(fixture_directory),
+        repo_cli_arg(fixture_directory),
         "--output",
-        str(output_path),
+        repo_cli_arg(output_path),
     ]
     return run_subprocess(cmd)
 
@@ -246,20 +266,20 @@ def emit_static_gate(
     overwrite: bool,
 ) -> int:
     if not fixture_path.is_file():
-        print(f"fixture does not exist: {fixture_path}", file=sys.stderr)
+        print(f"fixture does not exist: {repo_cli_arg(fixture_path)}", file=sys.stderr)
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
-            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            f"artifact already exists: {repo_cli_arg(output_path)} (use --overwrite to replace)",
             file=sys.stderr,
         )
         return 2
     cmd = [
         *STATIC_GATE_EMITTER_CMD,
-        str(fixture_path),
+        repo_cli_arg(fixture_path),
         "--output",
-        str(output_path),
+        repo_cli_arg(output_path),
     ]
     return run_subprocess(cmd)
 
@@ -271,58 +291,86 @@ def emit_formal_hook(
     overwrite: bool,
 ) -> int:
     if not source_artifact.is_file():
-        print(f"source artifact does not exist: {source_artifact}", file=sys.stderr)
+        print(
+            f"source artifact does not exist: {repo_cli_arg(source_artifact)}",
+            file=sys.stderr,
+        )
         return 2
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists() and not overwrite:
         print(
-            f"artifact already exists: {output_path} (use --overwrite to replace)",
+            f"artifact already exists: {repo_cli_arg(output_path)} (use --overwrite to replace)",
             file=sys.stderr,
         )
         return 2
     cmd = [
         *FORMAL_HOOK_EMITTER_CMD,
         source_kind,
-        str(source_artifact),
+        repo_cli_arg(source_artifact),
         "--output",
-        str(output_path),
+        repo_cli_arg(output_path),
     ]
     return run_subprocess(cmd)
 
 
 def compare_artifacts(left: Path, right: Path) -> int:
-    cmd = [sys.executable, str(DIFF_HELPER), str(left), str(right)]
+    cmd = [
+        sys.executable,
+        repo_cli_arg(DIFF_HELPER),
+        repo_cli_arg(left),
+        repo_cli_arg(right),
+    ]
     return run_subprocess(cmd)
 
 
 def compare_aggregates(left: Path, right: Path) -> int:
-    cmd = [sys.executable, str(AGGREGATE_DIFF_HELPER), str(left), str(right)]
+    cmd = [
+        sys.executable,
+        repo_cli_arg(AGGREGATE_DIFF_HELPER),
+        repo_cli_arg(left),
+        repo_cli_arg(right),
+    ]
     return run_subprocess(cmd)
 
 
 def compare_static_gates(left: Path, right: Path) -> int:
-    cmd = [sys.executable, str(STATIC_GATE_DIFF_HELPER), str(left), str(right)]
+    cmd = [
+        sys.executable,
+        repo_cli_arg(STATIC_GATE_DIFF_HELPER),
+        repo_cli_arg(left),
+        repo_cli_arg(right),
+    ]
     return run_subprocess(cmd)
 
 
 def check_same_lineage_first_checker(fixture_path: Path, artifact_path: Path) -> int:
-    return same_lineage_checker.main([str(fixture_path), str(artifact_path)])
+    return run_repo_helper(
+        same_lineage_checker.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(artifact_path)],
+    )
 
 
 def check_missing_option_second_checker(fixture_path: Path, artifact_path: Path) -> int:
-    return missing_option_checker.main([str(fixture_path), str(artifact_path)])
+    return run_repo_helper(
+        missing_option_checker.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(artifact_path)],
+    )
 
 
 def check_capability_third_checker(fixture_path: Path, artifact_path: Path) -> int:
-    return capability_checker.main([str(fixture_path), str(artifact_path)])
+    return run_repo_helper(
+        capability_checker.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(artifact_path)],
+    )
 
 
 def check_try_rollback_structural_checker(
     fixture_path: Path,
     artifact_path: Path,
 ) -> int:
-    return try_rollback_structural_checker.main(
-        [str(fixture_path), str(artifact_path)]
+    return run_repo_helper(
+        try_rollback_structural_checker.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(artifact_path)],
     )
 
 
@@ -345,7 +393,7 @@ def command_emit_fixture(args: argparse.Namespace) -> int:
     )
     exit_code = emit_fixture(fixture_path, output_path, args.overwrite)
     if exit_code == 0:
-        print(output_path)
+        print(repo_cli_arg(output_path))
     return exit_code
 
 
@@ -369,7 +417,7 @@ def command_emit_aggregate(args: argparse.Namespace) -> int:
     )
     exit_code = emit_aggregate(fixture_directory, output_path, args.overwrite)
     if exit_code == 0:
-        print(output_path)
+        print(repo_cli_arg(output_path))
     return exit_code
 
 
@@ -385,7 +433,7 @@ def command_emit_static_gate(args: argparse.Namespace) -> int:
     )
     exit_code = emit_static_gate(fixture_path, output_path, args.overwrite)
     if exit_code == 0:
-        print(output_path)
+        print(repo_cli_arg(output_path))
     return exit_code
 
 
@@ -406,8 +454,8 @@ def command_compare_fixtures(args: argparse.Namespace) -> int:
     if right_exit != 0:
         return right_exit
 
-    print(f"left artifact : {left_artifact}", flush=True)
-    print(f"right artifact: {right_artifact}", flush=True)
+    print(f"left artifact : {repo_cli_arg(left_artifact)}", flush=True)
+    print(f"right artifact: {repo_cli_arg(right_artifact)}", flush=True)
     return compare_artifacts(left_artifact, right_artifact)
 
 
@@ -449,8 +497,8 @@ def command_compare_fixture_aggregates(args: argparse.Namespace) -> int:
     if right_exit != 0:
         return right_exit
 
-    print(f"left aggregate artifact : {left_artifact}", flush=True)
-    print(f"right aggregate artifact: {right_artifact}", flush=True)
+    print(f"left aggregate artifact : {repo_cli_arg(left_artifact)}", flush=True)
+    print(f"right aggregate artifact: {repo_cli_arg(right_artifact)}", flush=True)
     return compare_aggregates(left_artifact, right_artifact)
 
 
@@ -464,7 +512,7 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"fixture artifact: {bundle_artifact}", flush=True)
+    print(f"fixture artifact: {repo_cli_arg(bundle_artifact)}", flush=True)
 
     if args.reference_fixture:
         reference_fixture = resolve_fixture_argument(args.reference_fixture)
@@ -478,7 +526,7 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
         if reference_exit != 0:
             return reference_exit
 
-        print(f"reference artifact: {reference_artifact}", flush=True)
+        print(f"reference artifact: {repo_cli_arg(reference_artifact)}", flush=True)
         compare_exit = compare_artifacts(bundle_artifact, reference_artifact)
         if compare_exit not in {0, 1}:
             return compare_exit
@@ -512,8 +560,8 @@ def command_smoke_fixture(args: argparse.Namespace) -> int:
         if single_exit != 0:
             return single_exit
 
-    print(f"aggregate artifact (full)  : {full_aggregate}", flush=True)
-    print(f"aggregate artifact (single): {single_aggregate}", flush=True)
+    print(f"aggregate artifact (full)  : {repo_cli_arg(full_aggregate)}", flush=True)
+    print(f"aggregate artifact (single): {repo_cli_arg(single_aggregate)}", flush=True)
     compare_exit = compare_aggregates(full_aggregate, single_aggregate)
     if compare_exit not in {0, 1}:
         return compare_exit
@@ -556,7 +604,7 @@ def command_smoke_static_gate(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {left_artifact}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(left_artifact)}", flush=True)
 
     if not args.reference_fixture:
         return 0
@@ -576,7 +624,7 @@ def command_smoke_static_gate(args: argparse.Namespace) -> int:
     if reference_exit != 0:
         return reference_exit
 
-    print(f"reference static gate artifact: {right_artifact}", flush=True)
+    print(f"reference static gate artifact: {repo_cli_arg(right_artifact)}", flush=True)
     compare_exit = compare_static_gates(left_artifact, right_artifact)
     if compare_exit not in {0, 1}:
         return compare_exit
@@ -597,8 +645,11 @@ def command_suggest_checked_reasons(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
-    return checked_reasons_assist.main([str(fixture_path), str(output_path)])
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
+    return run_repo_helper(
+        checked_reasons_assist.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(output_path)],
+    )
 
 
 def command_suggest_reason_codes(args: argparse.Namespace) -> int:
@@ -615,8 +666,11 @@ def command_suggest_reason_codes(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
-    return reason_codes_assist.main([str(fixture_path), str(output_path)])
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
+    return run_repo_helper(
+        reason_codes_assist.main,
+        [repo_cli_arg(fixture_path), repo_cli_arg(output_path)],
+    )
 
 
 def command_scan_reason_code_readiness(args: argparse.Namespace) -> int:
@@ -639,8 +693,9 @@ def command_scan_reason_code_readiness(args: argparse.Namespace) -> int:
         if exit_code != 0:
             return exit_code
 
-    return reason_code_readiness.main(
-        [str(fixture_directory), str(artifact_directory)]
+    return run_repo_helper(
+        reason_code_readiness.main,
+        [repo_cli_arg(fixture_directory), repo_cli_arg(artifact_directory)],
     )
 
 
@@ -658,7 +713,7 @@ def command_smoke_same_lineage_checker(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
     return check_same_lineage_first_checker(fixture_path, output_path)
 
 
@@ -676,7 +731,7 @@ def command_smoke_missing_option_checker(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
     return check_missing_option_second_checker(fixture_path, output_path)
 
 
@@ -694,7 +749,7 @@ def command_smoke_capability_checker(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
     return check_capability_third_checker(fixture_path, output_path)
 
 
@@ -712,7 +767,7 @@ def command_smoke_try_rollback_structural_checker(args: argparse.Namespace) -> i
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {output_path}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(output_path)}", flush=True)
     return check_try_rollback_structural_checker(fixture_path, output_path)
 
 
@@ -727,7 +782,7 @@ def command_smoke_formal_hook_static(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"static gate artifact: {static_gate_artifact}", flush=True)
+    print(f"static gate artifact: {repo_cli_arg(static_gate_artifact)}", flush=True)
     formal_hook_exit = emit_formal_hook(
         "static-gate",
         static_gate_artifact,
@@ -737,7 +792,7 @@ def command_smoke_formal_hook_static(args: argparse.Namespace) -> int:
     if formal_hook_exit != 0:
         return formal_hook_exit
 
-    print(f"formal hook artifact: {formal_hook_artifact}", flush=True)
+    print(f"formal hook artifact: {repo_cli_arg(formal_hook_artifact)}", flush=True)
     return 0
 
 
@@ -752,7 +807,7 @@ def command_smoke_formal_hook_runtime(args: argparse.Namespace) -> int:
     if emit_exit != 0:
         return emit_exit
 
-    print(f"bundle artifact: {bundle_artifact}", flush=True)
+    print(f"bundle artifact: {repo_cli_arg(bundle_artifact)}", flush=True)
     formal_hook_exit = emit_formal_hook(
         "detached-bundle",
         bundle_artifact,
@@ -762,7 +817,7 @@ def command_smoke_formal_hook_runtime(args: argparse.Namespace) -> int:
     if formal_hook_exit != 0:
         return formal_hook_exit
 
-    print(f"formal hook artifact: {formal_hook_artifact}", flush=True)
+    print(f"formal hook artifact: {repo_cli_arg(formal_hook_artifact)}", flush=True)
     return 0
 
 

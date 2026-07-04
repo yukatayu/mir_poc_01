@@ -237,12 +237,24 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
             )
         )
         self.assertEqual(commands[4].argv[0], "/usr/bin/python3")
+        self.assertEqual(commands[4].argv[1], "scripts/current_l2_detached_loop.py")
         self.assertEqual(commands[4].argv[2], "smoke-formal-hook-runtime")
         self.assertIn("--artifact-root", commands[4].argv)
         self.assertIn("--run-label", commands[4].argv)
         self.assertEqual(
+            commands[4].argv[commands[4].argv.index("--artifact-root") + 1],
+            temp_dir,
+        )
+        self.assertEqual(
             commands[4].argv[commands[4].argv.index("--run-label") + 1],
             "phase6-smoke-e1-place-atomic-cut",
+        )
+        self.assertFalse(
+            any(
+                arg.startswith(f"{regression.REPO_ROOT}/")
+                for command in commands
+                for arg in command.argv
+            )
         )
         self.assertEqual(
             commands[5].argv[commands[5].argv.index("--run-label") + 1],
@@ -301,8 +313,9 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
             "phase6-smoke-e23-malformed-try-fallback-missing-fallback-body",
         )
         self.assertEqual(commands[19].argv[0], "/usr/bin/python3")
-        self.assertTrue(
-            commands[19].argv[1].endswith("scripts/current_l2_theorem_lean_stub_pipeline.py")
+        self.assertEqual(
+            commands[19].argv[1],
+            "scripts/current_l2_theorem_lean_stub_pipeline.py",
         )
         self.assertEqual(commands[19].argv[2], "e2-try-fallback")
         self.assertEqual(
@@ -323,6 +336,47 @@ class SourceSampleRegressionPlanningTests(unittest.TestCase):
         self.assertEqual(
             commands[22].argv[commands[22].argv.index("--run-label") + 1],
             "phase6-smoke-model-check",
+        )
+
+    def test_plan_regression_commands_preserves_external_artifact_root(self) -> None:
+        artifact_root = Path("/tmp/current-l2-source-regression-external")
+        commands = regression.plan_regression_commands(
+            artifact_root=artifact_root,
+            run_label="phase6-smoke",
+            python_executable="/usr/bin/python3",
+        )
+
+        self.assertEqual(
+            commands[4].argv[commands[4].argv.index("--artifact-root") + 1],
+            str(artifact_root),
+        )
+
+    def test_plan_regression_commands_uses_repo_relative_default_artifact_root(self) -> None:
+        commands = regression.plan_regression_commands(
+            artifact_root=regression.DEFAULT_ARTIFACT_ROOT,
+            run_label="phase6-smoke",
+            python_executable="/usr/bin/python3",
+        )
+
+        self.assertEqual(
+            commands[4].argv[commands[4].argv.index("--artifact-root") + 1],
+            "target/current-l2-source-sample-regression",
+        )
+        self.assertEqual(commands[4].argv[1], "scripts/current_l2_detached_loop.py")
+        self.assertEqual(
+            commands[19].argv[1],
+            "scripts/current_l2_theorem_lean_stub_pipeline.py",
+        )
+        self.assertEqual(
+            commands[21].argv[1],
+            "scripts/current_l2_model_check_carrier_pipeline.py",
+        )
+        self.assertFalse(
+            any(
+                arg.startswith(f"{regression.REPO_ROOT}/")
+                for command in commands
+                for arg in command.argv
+            )
         )
 
     def test_plan_regression_commands_rejects_invalid_run_label(self) -> None:

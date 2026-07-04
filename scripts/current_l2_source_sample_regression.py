@@ -252,6 +252,13 @@ def smoke_run_label(base_label: str, sample_stem: str) -> str:
     return ensure_run_label(f"{ensure_run_label(base_label)}-{sample_stem}")
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def inventory_mismatches(statuses: Sequence[InventoryStatus]) -> list[str]:
     mismatches: list[str] = []
     for status in statuses:
@@ -279,6 +286,7 @@ def plan_regression_commands(
     detached_loop = SCRIPT_DIR / "current_l2_detached_loop.py"
     theorem_stub_pipeline = SCRIPT_DIR / "current_l2_theorem_lean_stub_pipeline.py"
     model_check_pipeline = SCRIPT_DIR / "current_l2_model_check_carrier_pipeline.py"
+    artifact_root_arg = repo_cli_arg(artifact_root)
 
     commands = [
         RegressionCommand(
@@ -308,11 +316,11 @@ def plan_regression_commands(
             name="runtime formal hook smoke for e1-place-atomic-cut",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-runtime",
                 "e1-place-atomic-cut",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e1-place-atomic-cut"),
                 "--overwrite",
@@ -322,11 +330,11 @@ def plan_regression_commands(
             name="runtime formal hook smoke for e2-try-fallback",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-runtime",
                 "e2-try-fallback",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e2-try-fallback"),
                 "--overwrite",
@@ -336,11 +344,11 @@ def plan_regression_commands(
             name="runtime formal hook smoke for e21-try-atomic-cut-frontier",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-runtime",
                 "e21-try-atomic-cut-frontier",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e21-try-atomic-cut-frontier"),
                 "--overwrite",
@@ -350,11 +358,11 @@ def plan_regression_commands(
             name="runtime formal hook smoke for e22-try-atomic-cut-place-mismatch",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-runtime",
                 "e22-try-atomic-cut-place-mismatch",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e22-try-atomic-cut-place-mismatch"),
                 "--overwrite",
@@ -364,11 +372,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e4-malformed-lineage",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e4-malformed-lineage",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e4-malformed-lineage"),
                 "--overwrite",
@@ -378,11 +386,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e5-underdeclared-lineage",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e5-underdeclared-lineage",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e5-underdeclared-lineage"),
                 "--overwrite",
@@ -392,11 +400,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e12-underdeclared-target-missing",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e12-underdeclared-target-missing",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e12-underdeclared-target-missing"),
                 "--overwrite",
@@ -406,11 +414,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e14-malformed-duplicate-option-declaration",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e14-malformed-duplicate-option-declaration",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e14-malformed-duplicate-option-declaration"
@@ -422,11 +430,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e15-malformed-duplicate-chain-declaration",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e15-malformed-duplicate-chain-declaration",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e15-malformed-duplicate-chain-declaration"
@@ -438,11 +446,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e16-malformed-missing-chain-head-option",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e16-malformed-missing-chain-head-option",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e16-malformed-missing-chain-head-option"
@@ -454,11 +462,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e13-malformed-capability-strengthening",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e13-malformed-capability-strengthening",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e13-malformed-capability-strengthening"
@@ -470,11 +478,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e19-malformed-target-mismatch",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e19-malformed-target-mismatch",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(effective_label, "e19-malformed-target-mismatch"),
                 "--overwrite",
@@ -484,11 +492,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e18-malformed-missing-successor-option",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e18-malformed-missing-successor-option",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e18-malformed-missing-successor-option"
@@ -500,11 +508,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e20-malformed-late-capability-strengthening",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e20-malformed-late-capability-strengthening",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label, "e20-malformed-late-capability-strengthening"
@@ -516,11 +524,11 @@ def plan_regression_commands(
             name="static formal hook smoke for e23-malformed-try-fallback-missing-fallback-body",
             argv=(
                 python_cmd,
-                str(detached_loop),
+                repo_cli_arg(detached_loop),
                 "smoke-formal-hook-static",
                 "e23-malformed-try-fallback-missing-fallback-body",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 smoke_run_label(
                     effective_label,
@@ -533,10 +541,10 @@ def plan_regression_commands(
             name="theorem Lean-stub conformance for e2-try-fallback",
             argv=(
                 python_cmd,
-                str(theorem_stub_pipeline),
+                repo_cli_arg(theorem_stub_pipeline),
                 "e2-try-fallback",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 f"{effective_label}-theorem",
             ),
@@ -545,10 +553,10 @@ def plan_regression_commands(
             name="theorem Lean-stub conformance for e5-underdeclared-lineage",
             argv=(
                 python_cmd,
-                str(theorem_stub_pipeline),
+                repo_cli_arg(theorem_stub_pipeline),
                 "e5-underdeclared-lineage",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 f"{effective_label}-theorem",
             ),
@@ -557,10 +565,10 @@ def plan_regression_commands(
             name="model-check carrier conformance for e2-try-fallback",
             argv=(
                 python_cmd,
-                str(model_check_pipeline),
+                repo_cli_arg(model_check_pipeline),
                 "e2-try-fallback",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 f"{effective_label}-model-check",
             ),
@@ -569,10 +577,10 @@ def plan_regression_commands(
             name="model-check carrier conformance for e5-underdeclared-lineage",
             argv=(
                 python_cmd,
-                str(model_check_pipeline),
+                repo_cli_arg(model_check_pipeline),
                 "e5-underdeclared-lineage",
                 "--artifact-root",
-                str(artifact_root),
+                artifact_root_arg,
                 "--run-label",
                 f"{effective_label}-model-check",
             ),

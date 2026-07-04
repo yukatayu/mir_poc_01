@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 16:01 JST
+Last updated: 2026-07-04 16:19 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 16:19 JST | current-L2 pipeline / detached-loop path portability | pass | `scripts/current_l2_detached_loop.py`, theorem Lean-stub pipeline, model-check carrier pipeline, source-sample regression planner, and Lean sample sync now use repo-relative paths for repo-owned helper argv, artifact displays, plan/result JSON, source-regression command plans, scan-readiness output, and Lean verification argv while preserving external artifact roots. Focused unit coverage passed 82 tests; source regression passed 23/23 commands; theorem/model plan JSON, scan-readiness output, and generated artifact scans had repo-root absolute match 0; `/tmp` same-lineage checker invocation printed repo-relative fixture/artifact paths. No sample status, workflow status, semantics, proof status, ABI, or canon claim changed. |
 | 2026-07-04 16:01 JST | alpha network Docker success/failure path serialization | pass | `scripts/alpha_network_docker_e2e.py` now serializes `list`, `closeout`, `_run_compose` success payloads, Docker stdout, and failure reasons with repo-relative or compose-output-relative path text while preserving host absolute paths only for Compose bind mount env. Unit coverage passed 16 tests; Cargo `alpha_network_runtime` passed 7 tests; Docker `run NET-02`, `check-all` 6/6, `stage-c-closeout`, and `/tmp` closeout invocation all passed with returned payload host path matches 0. No sample status, workflow status, transport semantics, WAN/federation, ABI, or canon claim changed. |
 | 2026-07-04 15:51 JST | Full System V1 nested source argv path portability | pass | `scripts/full_system_v1_samples.py` now passes repo-owned `.mir` source paths to nested checker/runtime Cargo examples as repo-relative `samples/...` argv while preserving external absolute paths. Unit coverage passed 21 tests; direct checker/runtime/operational sample runs passed; `check-all` passed 41 rows with repo-root absolute match 0; real Full System V1 release-check passed 29/29 commands with bundle/viewer ready and payload host path matches 0. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 15:43 JST | installed-binary generated path serialization | pass | `scripts/product_alpha1_installed_binary_check.py` now serializes generated `out_dir`, `session_dir`, `native_bundle_dir`, `demo_dir`, command-result argv, and stderr paths relative to `--out` or the repo root while preserving external absolute paths. Unit coverage passed 9 tests; real installed-binary probe passed 11/11 commands with `installed_binary_candidate_ready: true` and returned payload host path matches 0. No sample status, workflow status, final CLI/API/ABI, packaging, broader distribution, or canon claim changed. |

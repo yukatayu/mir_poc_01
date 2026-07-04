@@ -120,7 +120,7 @@ def lean_version() -> str:
 
 def verify_lean(path: Path) -> dict[str, object]:
     completed = subprocess.run(
-        ["lean", str(path)],
+        ["lean", repo_relative_source_path(str(path))],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
