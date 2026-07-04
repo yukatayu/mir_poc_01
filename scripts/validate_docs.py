@@ -556,6 +556,7 @@ REQUIRED = [
     "plan/131-g1-status-proposal-packet-outline.md",
     "plan/132-g1-status-evidence-readiness-dry-run.md",
     "plan/133-g1-requested-status-options-matrix.md",
+    "plan/134-g1-obl020-scope-clarification-packet.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

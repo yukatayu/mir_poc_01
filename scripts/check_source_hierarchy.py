@@ -216,6 +216,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/131-g1-status-proposal-packet-outline.md",
         "plan/132-g1-status-evidence-readiness-dry-run.md",
         "plan/133-g1-requested-status-options-matrix.md",
+        "plan/134-g1-obl020-scope-clarification-packet.md",
     ],
     "scripts": [
         "scripts",

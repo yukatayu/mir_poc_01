@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 21:18 JST
+最終更新: 2026-07-04 21:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -216,6 +216,15 @@ semantic source authority.
   submit a proposal, edit canon, move the ledger, complete an OBL, discharge
   proof, claim conformance, claim G1 exit, change runtime readiness, or relabel
   sample status.
+- Current G1 OBL-020 scope clarification note:
+  `plan/134-g1-obl020-scope-clarification-packet.md` keeps full-row OBL-020
+  status movement deferred and narrows the next safe posture to a
+  G1-supporting statement-scope candidate for later human/canon review. It
+  records B as the advisory scope-clarification posture, A as deferred, and C
+  as fallback only if scoped statement identity is rejected. This does not
+  accept requested status, submit a proposal, edit canon, move the ledger,
+  complete OBL-020, discharge proof, claim conformance, claim G1 exit, change
+  runtime readiness, or relabel sample status.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -896,6 +905,11 @@ Research-discovery items:
 | `Macro 7` | toolchain / backend / developer surface | Surface parser / indexed-state / elaboration helper commands exist; product alpha CLI remains compatibility floor | heavy | 着手可能 |
 | `Macro 8` | domain / application realization | Surface WorldCore/MembershipChat/Sugoroku/Portal/TwoShard/Gradient roots are alpha source evidence; final runtime/catalog remain later | heavy | 後段依存 |
 
+Macro 5 latest addendum: `plan/134` clarifies that OBL-020 full-row status
+movement remains deferred; the near-term safe posture is a G1-supporting
+statement-scope review candidate, with proof-package deferral only as fallback
+if scoped statement identity is rejected.
+
 ## feature maturity rows
 
 | Feature | Status | Reading | Actionability |
@@ -967,7 +981,18 @@ plus OBL-021 guard hardening, G1 bridge readiness / non-readiness mapping, and
 G1 bridge handoff / blocker ledger classification, G1 acceptance-packet
 preflight routing checklist, G1 OBL statement/status completion criteria
 inventory, G1 status proposal packet outline, G1 status evidence readiness
-dry-run, and G1 requested-status options matrix.
+dry-run, G1 requested-status options matrix, and G1 OBL-020 scope clarification
+packet.
+
+- 2026-07-04 21:31 JST
+  `plan/134-g1-obl020-scope-clarification-packet.md` を追加し、OBL-020 の
+  future proposal posture を full-row status movement defer / G1-supporting
+  statement-scope review candidate / proof-package fallback に分けた。B
+  advisory scope clarification を推奨し、A full-row movement は defer、C は
+  scoped statement identity が rejected の場合の fallback とした。requested
+  status acceptance、proposal submission、canon edit、ledger movement、
+  OBL-020 completion、proof discharge、conformance、G1 exit、runtime readiness、
+  sample status は主張していない。
 
 - 2026-07-04 21:18 JST
   `plan/133-g1-requested-status-options-matrix.md` を追加し、OBL-001/020/021
