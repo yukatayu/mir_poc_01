@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:17 JST
+最終更新: 2026-07-04 13:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -799,6 +799,13 @@ current-L2 README path portability hardening, snapshot timestamp guard
 hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
 `scripts/README.md` source-hierarchy structural-check responsibility refresh.
+
+- 2026-07-04 13:23 JST
+  `scripts/tests/test_validate_docs.py` に cross-list guard を追加し、
+  `validate_docs.REQUIRED`、`check_source_hierarchy.REQUIRED_PATHS["plan"]`、
+  実 repo の numbered `plan/*.md` set が一致することを unit test で固定した。
+  docs / test maintenance only であり、sample status、workflow status、
+  semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 13:17 JST
   `scripts/validate_docs.py` に numbered `plan/*.md` registration guard を追加し、

@@ -482,6 +482,43 @@ class ValidateDocsTests(unittest.TestCase):
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
 
+    def test_numbered_plan_required_scaffold_matches_source_hierarchy(self) -> None:
+        required_plan_docs = {
+            path
+            for path in validate_docs.REQUIRED
+            if path.startswith("plan/")
+            and validate_docs.NUMBERED_PLAN_FILE_PATTERN.fullmatch(Path(path).name)
+        }
+        source_hierarchy_plan_docs = {
+            path
+            for path in check_source_hierarchy.REQUIRED_PATHS["plan"]
+            if validate_docs.NUMBERED_PLAN_FILE_PATTERN.fullmatch(Path(path).name)
+        }
+
+        self.assertSetEqual(required_plan_docs, source_hierarchy_plan_docs)
+
+    def test_all_repo_numbered_plan_files_are_registered(self) -> None:
+        repo_plan_docs = {
+            path.relative_to(validate_docs.ROOT).as_posix()
+            for path in (validate_docs.ROOT / "plan").iterdir()
+            if path.is_file()
+            and validate_docs.NUMBERED_PLAN_FILE_PATTERN.fullmatch(path.name)
+        }
+        required_plan_docs = {
+            path
+            for path in validate_docs.REQUIRED
+            if path.startswith("plan/")
+            and validate_docs.NUMBERED_PLAN_FILE_PATTERN.fullmatch(Path(path).name)
+        }
+        source_hierarchy_plan_docs = {
+            path
+            for path in check_source_hierarchy.REQUIRED_PATHS["plan"]
+            if validate_docs.NUMBERED_PLAN_FILE_PATTERN.fullmatch(Path(path).name)
+        }
+
+        self.assertSetEqual(repo_plan_docs, required_plan_docs)
+        self.assertSetEqual(repo_plan_docs, source_hierarchy_plan_docs)
+
     def test_main_rejects_unregistered_numbered_plan_file(self) -> None:
         template_text = self._valid_template_text()
 

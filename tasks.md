@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 13:17 JST
+最終更新: 2026-07-04 13:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -89,6 +89,9 @@ Current holding state:
   cover current numbered `plan/00..119`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
+- `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
+  files in `validate_docs.REQUIRED`, `check_source_hierarchy.REQUIRED_PATHS`,
+  and the real `plan/` directory stay in sync.
 - Full System V1 provider / renderer helper inputs and release-check
   representative CLI commands now preserve portability by passing in-repo CLI
   paths as repo-relative `samples/...` argv. Renderer-pose generated nested
