@@ -141,7 +141,11 @@ Docs validators and whitespace checks are run before commit.
 
 ## Commit / push status
 
-Pending at report write.
+Committed and pushed:
+
+- `f4af98cb Refresh scripts README validator responsibilities`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
