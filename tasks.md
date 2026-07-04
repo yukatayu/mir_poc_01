@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 02:06 JST
+最終更新: 2026-07-05 02:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,6 +40,9 @@ Current holding state:
   guard that keeps the `plan/149` phase-position phrases present in
   `progress.md` and `tasks.md`. This is drift protection only, not phase / gate
   movement or percentage-as-gate.
+- `plan/151-discord-webhook-secret-validator-guard.md` now records the
+  secret-safe docs validator guard for concrete Discord webhook URL shape. The
+  validator reports path / line only and does not print the URL body.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -322,6 +325,11 @@ Current holding state:
   `plan/149` phase-position guard phrases. This closes the immediate snapshot
   drift path without changing canon, phase, gate, proof, conformance, runtime,
   sample, or workflow readiness.
+- `plan/151-discord-webhook-secret-validator-guard.md` now hardens
+  `scripts/validate_docs.py` so concrete Discord webhook URL shape in tracked
+  docs / source fails validation without printing the URL body. This closes a
+  concrete secret-leak drift path without changing Discord notification
+  semantics or claiming security completeness.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -966,6 +974,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 | `storage workdir guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, or generated-artifact work finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package |
 | `phase-position reading refresh` | `Macro 0` maintenance | reopen only if canon phase, gate status, or LAB/canon source hierarchy changes enough to make `plan/149` stale | no phase exit, gate movement, canon edit, or percentage-as-gate claim without explicit canon process |
 | `phase-position validator guard refresh` | `Macro 0` maintenance | reopen only if the required snapshot phrases or validator responsibility changes | keep this as drift protection; do not turn it into a semantic phase validator or new canon decision |
+| `Discord webhook secret guard refresh` | `Macro 0` maintenance | reopen only if notification storage or validator secret-scan responsibility changes | keep local webhook credentials out of tracked files and out of validator output; do not claim broad secret scanning completeness |
 
 ## ordered self-driven packages
 
@@ -985,7 +994,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection; phase-position reading stays canon T0/G0 unless canon process moves it, and `plan/150` now guards that snapshot wording in `progress.md` / `tasks.md` |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection; phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

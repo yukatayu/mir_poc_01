@@ -105,8 +105,9 @@
 87. storage workdir mountpoint guard hardening は `plan/148`
 88. current phase position reading は `plan/149`
 89. phase-position validator guard は `plan/150`
-90. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-91. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+90. Discord webhook secret validator guard は `plan/151`
+91. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+92. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -388,6 +389,12 @@
   が落ちるようにした docs-validator hardening memory である。canon edit、
   phase / gate movement、percentage-as-gate、runtime / sample / workflow
   status change は主張しない
+- **Discord webhook secret validator guard**:
+  `plan/151-discord-webhook-secret-validator-guard.md` は、tracked docs /
+  source に concrete Discord webhook URL shape が入ったときに
+  `scripts/validate_docs.py` が URL 本体を出さず path / line だけで失敗する
+  guard hardening memory である。credential 保存、通知挙動変更、security
+  completeness claim は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -524,6 +531,8 @@
   `plan/149-current-phase-position-reading.md`
 - Phase-position validator guard:
   `plan/150-phase-position-validator-guard.md`
+- Discord webhook secret validator guard:
+  `plan/151-discord-webhook-secret-validator-guard.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

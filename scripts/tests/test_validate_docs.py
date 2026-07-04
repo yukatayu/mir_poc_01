@@ -46,6 +46,13 @@ class ValidateDocsTests(unittest.TestCase):
             "\nG0 exit"
         )
 
+    def _fake_concrete_discord_webhook_url(self) -> str:
+        return (
+            "https://discord.com/api/"
+            + "webhooks/123456789012345678/"
+            + ("A" * 48)
+        )
+
     def _write_required_scaffold(self, root: Path, template_text: str) -> None:
         for relative in validate_docs.REQUIRED:
             path = root / relative
@@ -369,6 +376,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/148-storage-workdir-mountpoint-guard-hardening.md",
             "plan/149-current-phase-position-reading.md",
             "plan/150-phase-position-validator-guard.md",
+            "plan/151-discord-webhook-secret-validator-guard.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
@@ -865,6 +873,104 @@ class ValidateDocsTests(unittest.TestCase):
             "docs/research_abstract/clean_near_end_typing_01_detail.md:3",
             stdout.getvalue(),
         )
+
+    def test_main_rejects_concrete_discord_webhook_without_printing_secret(self) -> None:
+        template_text = self._valid_template_text()
+        fake_webhook_url = self._fake_concrete_discord_webhook_url()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            leak_path = root / "docs" / "hands_on" / "leaky.md"
+            leak_path.write_text(
+                "# leaky\n\n"
+                f"webhook = {fake_webhook_url}\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        output = stdout.getvalue()
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Tracked files contain concrete Discord webhook URLs",
+            output,
+        )
+        self.assertIn("docs/hands_on/leaky.md:3", output)
+        self.assertNotIn(fake_webhook_url, output)
+
+    def test_main_rejects_webhook_before_line_echoing_lints(self) -> None:
+        template_text = self._valid_template_text()
+        fake_webhook_url = self._fake_concrete_discord_webhook_url()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "hands_on" / "README.md").write_text(
+                "# hands_on\n\n"
+                f"Normative source remains `specs/00..09`; webhook={fake_webhook_url}\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        output = stdout.getvalue()
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Tracked files contain concrete Discord webhook URLs",
+            output,
+        )
+        self.assertIn("docs/hands_on/README.md:3", output)
+        self.assertNotIn("Reader-facing docs contain stale source-hierarchy wording", output)
+        self.assertNotIn(fake_webhook_url, output)
+
+    def test_main_rejects_untracked_report_webhook_when_git_scan_succeeds(self) -> None:
+        template_text = self._valid_template_text()
+        fake_webhook_url = self._fake_concrete_discord_webhook_url()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text()
+                + "\n\nAccidental concrete webhook: "
+                + fake_webhook_url
+                + "\n",
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with mock.patch.object(
+                    validate_docs,
+                    "_tracked_secret_scan_files",
+                    return_value=[],
+                ):
+                    with redirect_stdout(stdout):
+                        exit_code = validate_docs.main()
+
+        output = stdout.getvalue()
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Tracked files contain concrete Discord webhook URLs",
+            output,
+        )
+        self.assertIn("docs/reports/0002-latest.md", output)
+        self.assertNotIn(fake_webhook_url, output)
 
     def test_main_allows_historical_host_paths_outside_active_reader_lint(self) -> None:
         template_text = self._valid_template_text()

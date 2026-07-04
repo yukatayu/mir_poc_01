@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -573,6 +574,7 @@ REQUIRED = [
     "plan/148-storage-workdir-mountpoint-guard-hardening.md",
     "plan/149-current-phase-position-reading.md",
     "plan/150-phase-position-validator-guard.md",
+    "plan/151-discord-webhook-secret-validator-guard.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -816,6 +818,21 @@ HOST_SPECIFIC_REPO_PATH_PATTERNS = [
     re.compile(r"/Users/[^\s`\"')]+/dev/mir_poc_01"),
 ]
 
+CONCRETE_DISCORD_WEBHOOK_URL_PATTERN = re.compile(
+    r"https?://(?:[A-Za-z0-9-]+\.)?discord(?:app)?\.com"
+    r"/api(?:/v\d+)?/webhooks/\d+/[A-Za-z0-9_-]{20,}",
+    re.IGNORECASE,
+)
+
+SECRET_SCAN_EXCLUDED_DIR_NAMES = {
+    ".git",
+    ".codex-discord",
+    ".mypy_cache",
+    ".pytest_cache",
+    "__pycache__",
+    "target",
+}
+
 SNAPSHOT_LAST_UPDATED_FILES = [
     "progress.md",
     "samples_progress.md",
@@ -1020,6 +1037,89 @@ def active_reader_host_absolute_paths() -> dict[str, list[tuple[int, str]]]:
     return hits
 
 
+def _tracked_secret_scan_files() -> list[Path] | None:
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(ROOT),
+                "ls-files",
+                "--cached",
+                "--others",
+                "--exclude-standard",
+                "-z",
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+    files: list[Path] = []
+    for raw_path in result.stdout.split(b"\0"):
+        if not raw_path:
+            continue
+        try:
+            relative = raw_path.decode("utf-8")
+        except UnicodeDecodeError:
+            continue
+        path = ROOT / relative
+        if path.is_file():
+            files.append(path)
+    return sorted(files)
+
+
+def _fallback_secret_scan_files() -> list[Path]:
+    files: list[Path] = []
+    for path in ROOT.rglob("*"):
+        if not path.is_file():
+            continue
+        try:
+            relative = path.relative_to(ROOT)
+        except ValueError:
+            continue
+        if any(part in SECRET_SCAN_EXCLUDED_DIR_NAMES for part in relative.parts):
+            continue
+        files.append(path)
+    return sorted(files)
+
+
+def secret_scan_candidate_files() -> list[Path]:
+    files: set[Path]
+    tracked = _tracked_secret_scan_files()
+    if tracked is not None:
+        files = set(tracked)
+    else:
+        files = set(_fallback_secret_scan_files())
+
+    for relative_path in REQUIRED:
+        path = ROOT / relative_path
+        if path.is_file():
+            files.add(path)
+
+    reports_root = ROOT / "docs" / "reports"
+    if reports_root.exists():
+        files.update(reports_root.glob("[0-9][0-9][0-9][0-9]-*.md"))
+
+    return sorted(files)
+
+
+def concrete_discord_webhook_leaks() -> dict[str, list[int]]:
+    hits: dict[str, list[int]] = {}
+    for path in secret_scan_candidate_files():
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        relative = path.relative_to(ROOT).as_posix()
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if CONCRETE_DISCORD_WEBHOOK_URL_PATTERN.search(line):
+                hits.setdefault(relative, []).append(line_number)
+    return hits
+
+
 def snapshot_top_last_updated_timestamp(text: str) -> str | None:
     non_empty_lines = [line.strip() for line in text.splitlines() if line.strip()]
     if not non_empty_lines:
@@ -1114,6 +1214,14 @@ def main() -> int:
         print("Root entry documents are missing canon notices:")
         for path, phrases in missing_notices.items():
             print(f" - {path}: missing {', '.join(phrases)}")
+        return 1
+
+    concrete_webhook_hits = concrete_discord_webhook_leaks()
+    if concrete_webhook_hits:
+        print("Tracked files contain concrete Discord webhook URLs:")
+        for path, line_numbers in concrete_webhook_hits.items():
+            for line_number in line_numbers:
+                print(f" - {path}:{line_number}: concrete Discord webhook URL")
         return 1
 
     stale_source_hierarchy_hits = stale_source_hierarchy_wording()

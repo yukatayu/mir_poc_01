@@ -192,6 +192,12 @@ LAB evidence が G1/T1 準備へ先行していることと、canon phase moveme
 phase / gate movement、percentage-as-gate、runtime / sample / workflow status
 change は主張しません。
 
+`plan/151` は Discord webhook secret validator guard です。tracked docs /
+source に concrete Discord webhook URL shape が入った場合に
+`scripts/validate_docs.py` が path / line だけを出して失敗するようにします。
+webhook credential の保存、出力、通知挙動変更、security completeness claim は
+主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
