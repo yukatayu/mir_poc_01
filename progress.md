@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 12:57 JST
+最終更新: 2026-07-04 13:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -796,8 +796,17 @@ source-hierarchy stale wording audit, and Full System V1 provider / renderer /
 release-check path portability hardening, plus Product Alpha release-check path
 portability hardening, plus active clean-near-end emitter / research abstract /
 current-L2 README path portability hardening, snapshot timestamp guard
-hardening, current-L2 closeout `lean_roots` path portability hardening, and
-`scripts/README.md` validator responsibility refresh.
+hardening, current-L2 closeout `lean_roots` path portability hardening,
+`scripts/README.md` validator responsibility refresh, and
+`scripts/README.md` source-hierarchy structural-check responsibility refresh.
+
+- 2026-07-04 13:03 JST
+  `scripts/README.md` の `check_source_hierarchy.py` 説明を現行実装に合わせ、
+  structural presence 対象を `plan/39..96`、Product Alpha demo entry、
+  `docs/hands_on/`、`docs/research_abstract/`、および
+  `sub-agent-pro/operational-product-sample-001/` まで含む形に更新した。
+  docs taxonomy maintenance only であり、sample status、workflow status、
+  semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 12:57 JST
   `scripts/README.md` の `validate_docs.py` 説明を現行実装に合わせ、

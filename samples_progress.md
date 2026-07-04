@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 12:13 JST
+Last updated: 2026-07-04 13:03 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 13:03 JST | scripts README source-hierarchy structural check refresh | pass | `scripts/README.md` now describes current `check_source_hierarchy.py` structural-presence responsibility, including `plan/39..96`, Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`, and operational product sample handoff roots. This is docs taxonomy maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 12:57 JST | scripts README validator responsibility refresh | pass | `scripts/README.md` now describes current `validate_docs.py` responsibilities, including source-hierarchy wording lint, active reader-facing host-specific repo path lint, and `progress.md` / `tasks.md` top `最終更新` freshness guard. This is docs taxonomy maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 12:49 JST | current-L2 closeout path portability validation | pass | Re-ran README front-door checks: `make check`, `current_l2_guided_samples.py smoke-all`, and `current_l2_guided_samples.py closeout`. The audit found and fixed closeout `lean_roots` host checkout paths; they now emit `samples/lean/foundations` and `samples/lean/clean-near-end`. Rust regression coverage, `cargo fmt --check`, `make check`, and closeout absolute-path scan passed. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 12:38 JST | snapshot timestamp guard hardening | pass | `scripts/validate_docs.py` now rejects missing or stale top `progress.md` / `tasks.md` `最終更新` headers when a newer `YYYY-MM-DD HH:MM JST` timestamp appears in the same snapshot document. This prevents the header drift found during the previous maintenance package. No sample status, workflow status, semantics, ABI, or canon claim changed. |

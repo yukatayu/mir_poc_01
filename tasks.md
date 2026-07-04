@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 12:57 JST
+最終更新: 2026-07-04 13:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -74,6 +74,12 @@ Current holding state:
   `scripts/README.md` now mirrors the expanded validator responsibility,
   including source-hierarchy wording lint, active host-path lint, and snapshot
   top `最終更新` freshness guard.
+- `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
+  responsibility after the structural source-hierarchy guard widened past the
+  old `plan/39..86` description. It now names `plan/39..96`, Product Alpha demo
+  entry files, `docs/hands_on/`, `docs/research_abstract/`, and the operational
+  product sample sub-agent handoff root as structural-presence targets. This is
+  documentation taxonomy maintenance only.
 - Full System V1 provider / renderer helper inputs and release-check
   representative CLI commands now preserve portability by passing in-repo CLI
   paths as repo-relative `samples/...` argv. Renderer-pose generated nested
