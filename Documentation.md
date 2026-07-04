@@ -101,6 +101,15 @@ proposal submission、requested status acceptance、ledger movement、wrapper
 creation、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
 主張しません。
 
+`plan/139` は現 LAB `OBL021StatementDraft` の direct citation を LAB
+evidence に限定しつつ、OBL-021 が abstraction-boundary acceptance 後の
+conditional later `lean-stated` candidate であること、ただし requested-status
+artifact identity には artifact annex / wrapper decision が必要であることを
+整理する preflight-only memory です。wrapper file creation、requested status
+acceptance、canon edit、ledger movement、OBL-021 completion、proof/conformance
+claim、final equality / Diagnostic ABI selection、runtime scheduling
+determinism、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

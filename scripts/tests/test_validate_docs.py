@@ -347,6 +347,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/136-g1-obl020-artifact-annex-template.md",
             "plan/137-g1-obl001-artifact-identity-wrapper-preflight.md",
             "plan/138-g1-obl001-artifact-annex-template.md",
+            "plan/139-g1-obl021-artifact-identity-wrapper-preflight.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
