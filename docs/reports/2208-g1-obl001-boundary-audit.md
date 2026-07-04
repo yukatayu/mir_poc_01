@@ -265,8 +265,11 @@ coverage did not change.
 
 ## Commit / push status
 
-Primary package commit and push are pending at the time this report file is
-first written. This section will be updated by follow-up commit bookkeeping.
+- Primary package commit:
+  `a4804622be0541368788bffa29273969bae41111`
+  (`Add OBL-001 boundary audit`).
+- Primary package push: pushed to `origin/main`.
+- This status section is updated by a follow-up bookkeeping commit.
 
 ## Sub-agent session close status
 
