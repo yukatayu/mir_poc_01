@@ -338,7 +338,10 @@ found by the broad `/tmp` scan were under
 
 ## Commit / push status
 
-Pending commit and push.
+Main package commit `52bd0e78` (`Use relative paths in provider renderer
+reports`) was created with `git commit --no-gpg-sign` and pushed to
+`origin/main`. A follow-up report-status commit is pending at this report
+update.
 
 ## Sub-agent session close status
 
