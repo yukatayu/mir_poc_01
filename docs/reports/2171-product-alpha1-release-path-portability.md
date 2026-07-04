@@ -215,7 +215,9 @@ None. Docker-backed Product Alpha release-check was run and accepted.
 
 ## Commit / push status
 
-Pending at report write.
+Committed and pushed:
+
+- `00c9cf9a Harden product alpha release path portability`
 
 ## Sub-agent session close status
 
