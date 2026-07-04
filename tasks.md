@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 15:43 JST
+最終更新: 2026-07-04 15:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -103,10 +103,11 @@ Current holding state:
 - Full System V1 textual Mir helper raw parser payloads now preserve
   portability for repo-owned source paths: `source_path` and diagnostic path
   text are repo-relative `samples/...` in helper/release JSON.
-- Full System V1 typed/runtime/operational helper output was audited through
-  `scripts/full_system_v1_samples.py check-all --format json`; it passed 41
-  rows with repo-root absolute match 0, so no code fix is needed there for this
-  path-portability line.
+- Full System V1 typed/runtime/operational helper output and nested source argv
+  now preserve portability: `scripts/full_system_v1_samples.py check-all
+  --format json` passes 41 rows with repo-root absolute match 0, and nested
+  Cargo checker/runtime source argv receive repo-relative `samples/...` paths
+  for repo-owned `.mir` sources while preserving external absolute paths.
 - Surface helper subprocess argv now preserves portability for repo-owned
   source inputs: nested Cargo examples and `mirrorea-alpha patch-source` receive
   repo-relative `samples/...` paths. Public helper JSON was already repo-root
@@ -166,11 +167,11 @@ Current holding state:
   closed for `practical_alpha09_devtools.py`,
   `practical_alpha08_session_hotplug.py`, `practical_alpha1_avatar.py`, and
   `practical_alpha1_save_load.py`; the broader scan also found and closed
-  `practical_alpha05_session.py`. Remaining broader path-portability candidates
-  are now outside that focused practical list: Full System V1 nested source
-  argv, alpha network Docker success/failure path serialization, current-L2
-  pipeline / detached-loop repo-owned helper argv, source-hierarchy status
-  JSON, and shared practical failure-path redaction.
+  `practical_alpha05_session.py` and Full System V1 nested source argv.
+  Remaining broader path-portability candidates are now outside that focused
+  practical list: alpha network Docker success/failure path serialization,
+  current-L2 pipeline / detached-loop repo-owned helper argv, source-hierarchy
+  status JSON, and shared practical failure-path redaction.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate

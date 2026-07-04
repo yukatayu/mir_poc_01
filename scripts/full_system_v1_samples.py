@@ -133,6 +133,13 @@ def _operational_run_expected_path(config: dict[str, Any], row: dict[str, Any]) 
     return config["root"] / row["expected_run"]
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     for row in rows:
@@ -427,7 +434,7 @@ def _check_source(path: Path) -> dict[str, Any]:
             "--example",
             "full_system_v1_check",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--format",
             "json",
         ],
@@ -458,7 +465,7 @@ def _run_runtime_source(path: Path, entry_function: str, input_value: int) -> di
             "--example",
             "mir_full_system_v1_session",
             "--",
-            str(path),
+            repo_cli_arg(path),
             "--entry",
             entry_function,
             "--input",

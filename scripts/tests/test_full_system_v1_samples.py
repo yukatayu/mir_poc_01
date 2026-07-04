@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import full_system_v1_samples as runner  # noqa: E402
 
 
 def _run_helper(*args: str) -> dict:
@@ -210,6 +215,53 @@ class FullSystemV1SamplesTests(unittest.TestCase):
             ["membership_epoch", "gradient_view"],
         )
 
+    def test_repo_cli_arg_relativizes_repo_owned_source_path(self) -> None:
+        source_path = runner.COMPUTATIONAL_ROOT / "add-one-positive/src/add-one.mir"
+        self.assertEqual(
+            runner.repo_cli_arg(source_path),
+            "samples/full-system-v1/computational/add-one-positive/src/add-one.mir",
+        )
+
+    def test_repo_cli_arg_keeps_external_source_path_absolute(self) -> None:
+        source_path = Path("/tmp/mirrorea-external-full-system-v1/source.mir")
+        self.assertEqual(runner.repo_cli_arg(source_path), str(source_path))
+
+    def test_check_source_uses_repo_relative_source_arg(self) -> None:
+        source_path = runner.COMPUTATIONAL_ROOT / "add-one-positive/src/add-one.mir"
+        completed = subprocess_completed(stdout=json.dumps({"accepted": True}))
+
+        with mock.patch.object(
+            runner.subprocess, "run", return_value=completed
+        ) as mocked_run:
+            payload = runner._check_source(source_path)
+
+        argv = mocked_run.call_args.args[0]
+        self.assertEqual(payload["returncode"], 0)
+        self.assertEqual(
+            argv[argv.index("--") + 1],
+            "samples/full-system-v1/computational/add-one-positive/src/add-one.mir",
+        )
+        self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in argv))
+        self.assertEqual(mocked_run.call_args.kwargs["cwd"], runner.REPO_ROOT)
+
+    def test_run_runtime_source_uses_repo_relative_source_arg(self) -> None:
+        source_path = runner.COMPUTATIONAL_ROOT / "add-one-positive/src/add-one.mir"
+        completed = subprocess_completed(stdout=json.dumps({"accepted": True}))
+
+        with mock.patch.object(
+            runner.subprocess, "run", return_value=completed
+        ) as mocked_run:
+            payload = runner._run_runtime_source(source_path, "add_one", 41)
+
+        argv = mocked_run.call_args.args[0]
+        self.assertEqual(payload["returncode"], 0)
+        self.assertEqual(
+            argv[argv.index("--") + 1],
+            "samples/full-system-v1/computational/add-one-positive/src/add-one.mir",
+        )
+        self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in argv))
+        self.assertEqual(mocked_run.call_args.kwargs["cwd"], runner.REPO_ROOT)
+
     def test_pure_runtime_sample_keeps_empty_effect_session(self) -> None:
         payload = _run_helper("run-runtime", "mir-03-add-one-positive")
 
@@ -256,3 +308,7 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertEqual(len(payload["runtime"]["passed"]), 17)
         self.assertEqual(len(payload["operational"]["passed"]), 12)
         self.assertEqual(len(payload["passed"]), 41)
+
+
+def subprocess_completed(stdout: str) -> object:
+    return mock.Mock(stdout=stdout, stderr="", returncode=0)

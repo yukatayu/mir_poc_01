@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:43 JST
+最終更新: 2026-07-04 15:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -816,7 +816,18 @@ portability hardening, plus practical alpha-1 save/load helper runtime branch
 subprocess argv path portability hardening, plus practical alpha-0.5 session
 helper nested session package argv path portability hardening, plus Surface
 release-check output path serialization hardening, plus Product Alpha
-installed-binary generated path serialization hardening.
+installed-binary generated path serialization hardening, plus Full System V1
+helper nested source argv path portability hardening.
+
+- 2026-07-04 15:51 JST
+  `scripts/full_system_v1_samples.py` の `_check_source` /
+  `_run_runtime_source` が nested Cargo example に渡す repo-owned `.mir`
+  source path を repo-relative `samples/...` argv に変更した。外部 absolute
+  source path は保持する。Unit 21 tests、`full_system_v1_samples.py
+  check-all` 41 rows / failed 0 / repo absolute matches 0、real
+  `full_system_v1_release_check.py check-all` 29/29 commands accepted /
+  release bundle and viewer ready / payload host path matches 0 が通過。
+  sample status、workflow status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 15:43 JST
   `scripts/product_alpha1_installed_binary_check.py` の返却 payload を
