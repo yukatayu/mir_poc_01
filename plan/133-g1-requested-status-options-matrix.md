@@ -173,6 +173,14 @@ follow-ups:
 The safest default is OBL-020 scope clarification, because it is the most likely
 to block a coherent three-OBL proposal packet.
 
+Later-state note, 2026-07-05: `plan/134` now supplies the OBL-020 scope
+clarification, `plan/137` / `plan/138` now supply the OBL-001 artifact
+preflight and annex template, `plan/143` now supplies the OBL-021 abstraction
+decision packet, `plan/144` prevents duplicate OBL-020 scope work, and
+`plan/145` prevents duplicate OBL-001 artifact-decision work. Do not rerun the
+three follow-ups above as duplicate autonomous packages. Extract a
+review-facing request only if human/canon review is explicitly promoted.
+
 ## Close condition
 
 This file is closed when `plan/00-index.md`, `plan/90-source-traceability.md`,

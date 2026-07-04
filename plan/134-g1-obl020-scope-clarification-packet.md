@@ -236,6 +236,14 @@ The next autonomous package can choose one of these follow-ups:
 
 The default should not be full OBL-020 ledger movement.
 
+Later-state note, 2026-07-05: `plan/135` / `plan/136` now supply the OBL-020
+artifact preflight and annex template, `plan/137` / `plan/138` now supply the
+OBL-001 artifact preflight and annex template, `plan/143` now supplies the
+OBL-021 abstraction decision packet, `plan/144` keeps this file as the
+controlling OBL-020 scope packet, and `plan/145` keeps `plan/137` / `plan/138`
+as the controlling OBL-001 artifact decision surface. Do not read the list
+above as current permission to duplicate those packets.
+
 ## Close condition
 
 This file is closed when `plan/00-index.md`, `plan/90-source-traceability.md`,

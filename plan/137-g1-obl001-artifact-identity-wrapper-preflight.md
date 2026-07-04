@@ -261,3 +261,10 @@ The next autonomous package can choose one of these follow-ups:
 2. prepare a G1 status packet shell that references OBL-001 / OBL-020 artifact
    annex needs but leaves requested statuses and ledger deltas unresolved;
 3. create a wrapper package only if human/canon review requires one.
+
+Later-state note, 2026-07-05: `plan/138` now supplies the OBL-001 artifact
+annex template, `plan/141` now supplies the G1 status packet shell, and
+`plan/145` keeps this file plus `plan/138` as the controlling OBL-001 artifact
+decision surface. The remaining current route is review-facing extraction only
+if human/canon review is explicitly promoted, or a wrapper package only if that
+review requires one.

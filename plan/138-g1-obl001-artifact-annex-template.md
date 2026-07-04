@@ -275,3 +275,11 @@ Reasonable next packages are:
    wants symmetric treatment for all OBL-001/020/021 status artifacts;
 3. create a wrapper package only if human/canon review says direct LAB artifact
    citation is not acceptable for the scoped requested-status artifact.
+
+Later-state note, 2026-07-05: `plan/141` now supplies the G1 status packet
+shell, `plan/139` / `plan/140` now supply the OBL-021 artifact preflight and
+annex template, `plan/143` now supplies the OBL-021 abstraction decision
+packet, and `plan/145` keeps this annex plus `plan/137` as the controlling
+OBL-001 artifact decision surface. Do not read the list above as current
+permission to duplicate those packets or create a wrapper without explicit
+human/canon promotion.

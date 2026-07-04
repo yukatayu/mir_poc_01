@@ -217,6 +217,12 @@ Reasonable next packages are:
    hardening if a real drift risk is found, or another explicitly promoted
    current `tasks.md` candidate.
 
+Later-state note, 2026-07-05: `plan/145` now handles the OBL-001 artifact
+identity / wrapper acceptance wording as a reuse audit. Future OBL-001
+artifact work should be a review-facing extraction from `plan/137` /
+`plan/138` only if human/canon review is explicitly promoted, not a duplicate
+autonomous preflight or annex package.
+
 ## Close condition
 
 This file is closed when it is registered in the plan/source-hierarchy

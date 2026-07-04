@@ -244,6 +244,14 @@ The next autonomous package can choose one of these follow-ups:
 
 The default should not be wrapper creation until the wrapper need is accepted.
 
+Later-state note, 2026-07-05: `plan/136` now supplies the OBL-020 artifact
+annex template, `plan/137` / `plan/138` now supply the OBL-001 artifact
+preflight and annex template, `plan/143` now supplies the OBL-021 abstraction
+decision packet, `plan/144` prevents duplicate OBL-020 scope work, and
+`plan/145` prevents duplicate OBL-001 artifact-decision work. Do not read the
+list above as current permission to duplicate those packets or create a wrapper
+without explicit human/canon promotion.
+
 ## Close condition
 
 This file is closed when `plan/00-index.md`, `plan/90-source-traceability.md`,

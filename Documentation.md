@@ -150,6 +150,14 @@ candidate next package を整理します。requested status selection、proposa
 submission、canon edit、ledger movement、OBL-020 completion、proof /
 conformance claim、wrapper creation、runtime readiness、G1 exit は主張しません。
 
+`plan/145` は G1 OBL-001 artifact decision reuse / unresolved-slot audit
+です。`plan/137` / `plan/138` が OBL-001 artifact identity / wrapper /
+OPEN-014 / simple-assignment scope の current LAB decision surface であることを
+確認し、同じ preflight / annex を重複して作らないよう candidate next package
+を整理します。requested status selection、proposal submission、canon edit、
+ledger movement、OBL-001 completion、OBL-002 proof / conformance claim、
+wrapper creation、OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
