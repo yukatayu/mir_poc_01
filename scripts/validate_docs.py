@@ -712,6 +712,17 @@ HOST_SPECIFIC_REPO_PATH_PATTERNS = [
     re.compile(r"/Users/[^\s`\"')]+/dev/mir_poc_01"),
 ]
 
+SNAPSHOT_LAST_UPDATED_FILES = [
+    "progress.md",
+    "tasks.md",
+]
+
+JST_TIMESTAMP_PATTERN = re.compile(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST")
+LAST_UPDATED_PATTERN = re.compile(
+    r"^最終更新:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2} JST)\s*$",
+    re.MULTILINE,
+)
+
 
 def _heading_match(text: str, heading: str) -> re.Match[str] | None:
     return re.search(rf"^{re.escape(heading)}\s*$", text, re.MULTILINE)
@@ -903,6 +914,43 @@ def active_reader_host_absolute_paths() -> dict[str, list[tuple[int, str]]]:
     return hits
 
 
+def snapshot_top_last_updated_timestamp(text: str) -> str | None:
+    non_empty_lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not non_empty_lines:
+        return None
+
+    candidate_index = 1 if non_empty_lines[0].startswith("# ") else 0
+    if candidate_index >= len(non_empty_lines):
+        return None
+
+    match = LAST_UPDATED_PATTERN.fullmatch(non_empty_lines[candidate_index])
+    if match is None:
+        return None
+    return match.group(1)
+
+
+def stale_snapshot_last_updated_headers() -> dict[str, tuple[str, str]]:
+    stale: dict[str, tuple[str, str]] = {}
+    for relative_path in SNAPSHOT_LAST_UPDATED_FILES:
+        path = ROOT / relative_path
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        timestamps = [match.group(0) for match in JST_TIMESTAMP_PATTERN.finditer(text)]
+        if not timestamps:
+            continue
+
+        latest = max(timestamps)
+        header_timestamp = snapshot_top_last_updated_timestamp(text)
+        if header_timestamp is None:
+            stale[relative_path] = ("missing", latest)
+            continue
+
+        if header_timestamp < latest:
+            stale[relative_path] = (header_timestamp, latest)
+    return stale
+
+
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
@@ -932,6 +980,16 @@ def main() -> int:
         for path, hits in active_host_path_hits.items():
             for line_number, line in hits:
                 print(f" - {path}:{line_number}: {line}")
+        return 1
+
+    stale_snapshot_headers = stale_snapshot_last_updated_headers()
+    if stale_snapshot_headers:
+        print("Snapshot docs have stale last-updated headers:")
+        for path, (header_timestamp, latest_timestamp) in stale_snapshot_headers.items():
+            print(
+                f" - {path}: header {header_timestamp}; "
+                f"latest timestamp {latest_timestamp}"
+            )
         return 1
 
     reports = sorted((ROOT / "docs" / "reports").glob("[0-9][0-9][0-9][0-9]-*.md"))

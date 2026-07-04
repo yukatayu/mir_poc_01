@@ -718,6 +718,120 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
 
+    def test_main_rejects_stale_snapshot_last_updated_header(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "progress.md").write_text(
+                "最終更新: 2026-07-04 12:13 JST\n\n"
+                + self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                + "\n\n- 2026-07-04 12:29 JST\n  later work log\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Snapshot docs have stale last-updated headers", stdout.getvalue())
+        self.assertIn("progress.md", stdout.getvalue())
+        self.assertIn("2026-07-04 12:13 JST", stdout.getvalue())
+        self.assertIn("2026-07-04 12:29 JST", stdout.getvalue())
+
+    def test_main_allows_current_snapshot_last_updated_header(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "progress.md").write_text(
+                "最終更新: 2026-07-04 12:29 JST\n\n"
+                + self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                + "\n\n- 2026-07-04 12:13 JST\n  earlier work log\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
+
+    def test_main_rejects_stale_tasks_last_updated_header(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "tasks.md").write_text(
+                "最終更新: 2026-07-04 12:13 JST\n\n"
+                + self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS)
+                + "\n\n- 2026-07-04 12:38 JST\n  later task-map note\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Snapshot docs have stale last-updated headers", stdout.getvalue())
+        self.assertIn("tasks.md", stdout.getvalue())
+
+    def test_main_rejects_missing_top_snapshot_last_updated_header(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "progress.md").write_text(
+                "# progress\n\n"
+                + self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                + "\n\n最終更新: 2026-07-04 12:38 JST\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Snapshot docs have stale last-updated headers", stdout.getvalue())
+        self.assertIn("progress.md", stdout.getvalue())
+        self.assertIn("missing", stdout.getvalue())
+
     def test_main_rejects_latest_report_missing_new_required_section(self) -> None:
         heading = "## Reviewer findings and follow-up"
         template_text = self._valid_template_text()

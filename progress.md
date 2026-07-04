@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 12:29 JST
+最終更新: 2026-07-04 12:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -795,7 +795,15 @@ claim-family drilldown, remaining claim-family priority map, focused
 source-hierarchy stale wording audit, and Full System V1 provider / renderer /
 release-check path portability hardening, plus Product Alpha release-check path
 portability hardening, plus active clean-near-end emitter / research abstract /
-current-L2 README path portability hardening.
+current-L2 README path portability hardening, plus snapshot timestamp guard
+hardening.
+
+- 2026-07-04 12:38 JST
+  `scripts/validate_docs.py` に `progress.md` / `tasks.md` の top `最終更新`
+  header が missing、または本文中の最新 `YYYY-MM-DD HH:MM JST` より古い場合に
+  reject する snapshot timestamp guard を追加した。Package 34 で見つかった
+  header drift を再発させない maintenance lint であり、規範判断、sample status、
+  workflow status、semantics、ABI、canon status は変えていない。
 
 - 2026-07-04 12:29 JST
   active `docs/research_abstract/clean_near_end_*_detail.md` の sample
