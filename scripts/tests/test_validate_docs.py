@@ -340,6 +340,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/129-g1-acceptance-packet-preflight.md",
             "plan/130-g1-obl-statement-status-completion-criteria-inventory.md",
             "plan/131-g1-status-proposal-packet-outline.md",
+            "plan/132-g1-status-evidence-readiness-dry-run.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
