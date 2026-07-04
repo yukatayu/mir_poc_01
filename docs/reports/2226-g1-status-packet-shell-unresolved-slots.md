@@ -127,6 +127,8 @@ movement and gate decisions unresolved.
   statement draft files.
 - Tracked Discord webhook full URL / token-prefix scan excluding
   `.codex-discord`.
+- `git add README.md Documentation.md progress.md tasks.md scripts/README.md scripts/check_source_hierarchy.py scripts/tests/test_validate_docs.py scripts/validate_docs.py plan/00-index.md plan/90-source-traceability.md plan/141-g1-status-packet-shell-unresolved-slots.md docs/reports/2226-g1-status-packet-shell-unresolved-slots.md && git status --short --branch && git commit --no-gpg-sign -m "Add G1 status packet shell"`
+- `git push && git rev-parse HEAD && git status --short --branch`
 
 ## Evidence / outputs / test results
 
@@ -209,7 +211,10 @@ None.
 
 ## Commit / push status
 
-Pre-commit validation passed. Commit / push still pending at this report update.
+Substantive commit pushed:
+`cb27345e1119c6bb2db2a81c4e0581c0e21d5b87` (`Add G1 status packet shell`).
+This report-only commit-status update is pending commit / push at the time this
+section is edited.
 
 ## Sub-agent session close status
 
