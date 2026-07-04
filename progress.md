@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:23 JST
+最終更新: 2026-07-04 13:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -799,6 +799,15 @@ current-L2 README path portability hardening, snapshot timestamp guard
 hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` validator responsibility refresh, and
 `scripts/README.md` source-hierarchy structural-check responsibility refresh.
+
+- 2026-07-04 13:26 JST
+  scaffold guard hardening 後の front-door validation audit として `make check`,
+  `python3 -m unittest scripts.tests.test_validate_docs`,
+  `python3 scripts/current_l2_guided_samples.py smoke-all`, and
+  `python3 scripts/current_l2_guided_samples.py closeout` を再実行した。
+  source hierarchy required/present は 659/659、docs validator は 1331 numbered
+  reports、`cargo check`、validator unit 34 tests、current-L2 16 sample matrix
+  と closeout roots が通った。status change ではなく evidence refresh。
 
 - 2026-07-04 13:23 JST
   `scripts/tests/test_validate_docs.py` に cross-list guard を追加し、

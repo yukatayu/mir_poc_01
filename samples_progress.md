@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 13:23 JST
+Last updated: 2026-07-04 13:26 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 13:26 JST | front-door validation after scaffold guards | pass | Re-ran `make check`, `python3 -m unittest scripts.tests.test_validate_docs`, `python3 scripts/current_l2_guided_samples.py smoke-all`, and `python3 scripts/current_l2_guided_samples.py closeout`. Source hierarchy required/present was 659/659, docs validator found 1331 numbered reports, `cargo check` passed, validator unit coverage ran 34 tests, and current-L2 smoke/closeout reported 16 samples across typing/order-handoff/model-check/modal. This refreshes evidence only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 13:23 JST | numbered plan cross-list guard | pass | `scripts/tests/test_validate_docs.py` now asserts that numbered `plan/*.md` files in `validate_docs.REQUIRED`, `check_source_hierarchy.REQUIRED_PATHS["plan"]`, and the real repo `plan/` directory stay synchronized. This is docs/test maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 13:17 JST | numbered plan registration guard | pass | `scripts/validate_docs.py` now rejects existing numbered `plan/*.md` files that are not registered in its explicit `REQUIRED` scaffold list, and both docs validators now cover current numbered `plan/00..119`. Regression coverage verifies an unregistered `plan/120...` fixture fails before report-template checks. This is docs/guard maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 13:11 JST | plan scaffold guard coverage refresh | pass | `scripts/check_source_hierarchy.py` and `scripts/validate_docs.py` now require current plan memory through `plan/119`, with a regression test covering the Surface / G1 plan scaffold. `scripts/README.md` mirrors `plan/39..119`, and `plan/00-index.md` now lists the previously omitted detailed filenames for `plan/106..108` and `plan/118..119`. This is docs/guard maintenance only; no sample status, workflow status, semantics, ABI, or canon claim changed. |
