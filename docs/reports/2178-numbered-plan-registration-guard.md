@@ -182,7 +182,11 @@ whitespace checks are run before commit.
 
 ## Commit / push status
 
-Commit and push pending at this report update step.
+Committed and pushed:
+
+- `a26aa868 Guard numbered plan scaffold registration`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
