@@ -161,15 +161,40 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertNotIn("DiagnosticAssociationKey", lean_text)
         self.assertNotIn("AssociatedEmittedDiagnostic", lean_text)
         self.assertNotIn("RequestId", lean_text)
+        self.assertNotIn("BranchId", lean_text)
         self.assertNotIn("BranchAssociationKey", lean_text)
+        self.assertNotIn("DiagnosticBranchAssociationKey", lean_text)
         self.assertNotIn("FinalAssociationKey", lean_text)
-        self.assertNotIn("DecidableEq V.ReportLocalAssociationKey", lean_text)
-        self.assertNotIn("Function.Injective", lean_text)
-        self.assertNotIn("Function.Surjective", lean_text)
+        self.assertNotIn("AssociationKeyABI", lean_text)
+        for typeclass_name in ("DecidableEq", "BEq", "Hashable", "Ord", "LT", "LE"):
+            self.assertNotRegex(
+                lean_text,
+                rf"{typeclass_name}\s*\(?\s*V\.ReportLocalAssociationKey\b",
+            )
+        for relation_name in ("Function.Injective", "Function.Surjective"):
+            self.assertNotIn(relation_name, lean_text)
+        self.assertNotRegex(
+            lean_text,
+            r"V\.DiagnosticBranch\s*->\s*V\.ReportLocalAssociationKey",
+        )
+        self.assertNotRegex(
+            lean_text,
+            r"V\.ReportLocalAssociationKey\s*->\s*V\.DiagnosticBranch",
+        )
+        self.assertNotRegex(
+            lean_text,
+            r"(?i)(ReportLocalAssociationKey[A-Za-z]*(Unique|Uniqueness|Collision|Stable|Determines)|"
+            r"(Unique|Uniqueness|Collision|Stable|Determines)[A-Za-z]*ReportLocalAssociationKey)",
+        )
+        self.assertIn("CurrentEvidenceBoundary", lean_text)
+        self.assertIn("CoveredDiagnosticSoundnessCase", lean_text)
+        self.assertIn("Rejects", lean_text)
         self.assertIn("env ctx locus input rejection diagnostic key association", lean_text)
         self.assertIn("report-local association key", explanation_text)
         self.assertIn("diagnostic-to-rejection association", explanation_text)
         self.assertIn("proof-level association relation", explanation_text)
+        self.assertIn("not semantic association by key equality", explanation_text)
+        self.assertIn("not a branch-local association key", explanation_text)
 
 
 if __name__ == "__main__":

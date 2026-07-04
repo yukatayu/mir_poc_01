@@ -36,6 +36,8 @@ change runtime JSON, change repair output, or claim conformance / G1 exit.
   `samples/lean/lab-statements/obl024/README.md`
 - LAB Lean sync guard:
   `scripts/tests/test_current_l2_lean_sample_sync.py`
+- Follow-up static guard hardening:
+  `plan/115-g1-obl024-association-guard-hardening.md`
 
 If this LAB refinement conflicts with canon, canon wins.
 
@@ -94,6 +96,10 @@ static guard that the OBL-024 Lean draft and explanation continue to name:
 
 The guard also rejects reintroducing standalone `AssociationKey : Type u` or
 `DiagnosticAssociationKey`, and rejects stale `AssociatedEmittedDiagnostic`.
+`plan/115` further hardens this by guarding against final-looking request /
+branch / ABI names, association-key comparability or uniqueness pressure,
+direct branch-local association-key carrier shapes, and explanation wording
+that omits the non-equality / non-branch-local boundary.
 
 This test is intentionally vocabulary-oriented. It is not a proof test and does
 not validate final Diagnostic ABI, request IDs, branch IDs, association-key ABI,

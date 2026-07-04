@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 09:04 JST
+最終更新: 2026-07-04 09:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -144,6 +144,13 @@ Current holding state:
   OBL-024, move canon ledger status, freeze final Diagnostic /
   association-key / replay ABI, change runtime JSON, change repair output,
   claim conformance, claim G1 exit, or edit canon.
+- `plan/115-g1-obl024-association-guard-hardening.md` now records a LAB-only
+  static guard hardening that keeps the OBL-024 report-local association key
+  from drifting into semantic key equality, branch-local association-key
+  vocabulary, final-looking request / branch / ABI names, or key comparability /
+  uniqueness pressure. It does not prove OBL-024, move canon ledger status,
+  freeze final Diagnostic / association-key / replay ABI, change runtime JSON,
+  change repair output, claim conformance, claim G1 exit, or edit canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,

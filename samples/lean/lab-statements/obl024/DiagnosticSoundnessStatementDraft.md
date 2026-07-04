@@ -79,6 +79,8 @@ deliberately separate from `ProofLevelAssociationWitness` and
 relation vocabulary. The report-local association key can help design the
 future proof relation, but it is not a final request ID, branch ID, JSON key,
 diagnostic field, or association-key ABI.
+It is not semantic association by key equality.
+It is not a branch-local association key.
 This is diagnostic-to-rejection association vocabulary only; it does not define
 final emitted diagnostic identity or ordering.
 

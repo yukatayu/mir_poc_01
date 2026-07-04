@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 09:04 JST
+最終更新: 2026-07-04 09:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -134,8 +134,8 @@ semantic source authority.
   repo-local Lean statement-shape draft at
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
   It compiles as a diagnostic-soundness `Prop` over abstract diagnostic
-  projection, report-local association key, future proof-level diagnostic
-  association, reported rule / premise / bindings, report-local replay anchor,
+  projection, report-local association key, future proof-level association
+  relation, reported rule / premise / bindings, report-local replay anchor,
   future proof-level replay relation, and non-repair mixed diagnostic branch
   predicates. `plan/113` refines the draft so current `trace_local_replay`
   evidence is represented by `ReportLocalReplayAnchor`, while
@@ -143,10 +143,12 @@ semantic source authority.
   proof-level vocabulary. `plan/114` refines the draft so current
   `lab_association_key` evidence is represented by
   `ReportLocalAssociationKey`, while `ProofLevelAssociationWitness` /
-  `ProofLevelAssociationRelation` remain future proof-level vocabulary. It
-  does not move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
-  request ID / branch ID / association-key ABI / replay semantics, claim
-  root-cause uniqueness, claim conformance, or claim G1 exit.
+  `ProofLevelAssociationRelation` remain future proof-level vocabulary.
+  `plan/115` hardens static guards so this report-local key is not semantic
+  association by key equality and not a branch-local association key. It does
+  not move canon OBL status, prove OBL-024, freeze Diagnostic ABI / request ID
+  / branch ID / association-key ABI / replay semantics, claim root-cause
+  uniqueness, claim conformance, or claim G1 exit.
 - Current OBL-024 executable projection carrier note:
   `plan/110-g1-obl024-executable-projection-carrier.md` records LAB-only
   executable E-ROW projection evidence inside current `lab_diagnostic_details`.
@@ -741,8 +743,18 @@ negative guards, `plan/104` span-based internal association hardening,
 exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
 branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
 statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
-guard hardening, OBL-024 replay vocabulary preflight, and OBL-024 Lean replay
-vocabulary refinement, plus OBL-024 Lean association vocabulary refinement.
+guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
+vocabulary refinement, OBL-024 Lean association vocabulary refinement, and
+OBL-024 association guard hardening.
+
+- 2026-07-04 09:26 JST
+  `plan/115-g1-obl024-association-guard-hardening.md` を追加し、
+  OBL-024 Lean sync guard に key-equality semantics、branch-local association
+  key、final-looking request / branch / ABI names、association-key
+  comparability / uniqueness pressure の negative guard を足した。Lean compile
+  と sync unit test で確認したが、OBL-024 proof / completion、canon ledger
+  movement、final Diagnostic / association-key / replay ABI、runtime JSON、
+  repair output、conformance、G1 exit は主張しない。
 
 - 2026-07-04 09:04 JST
   `plan/114-g1-obl024-lean-association-vocabulary-refinement.md` を追加し、

@@ -54,6 +54,8 @@ conformance or G1 exit.
   `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md`
 - LAB Lean association vocabulary refinement:
   `plan/114-g1-obl024-lean-association-vocabulary-refinement.md`
+- LAB association guard hardening:
+  `plan/115-g1-obl024-association-guard-hardening.md`
 - LAB explanation:
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md`
 - LAB manifest:
@@ -143,7 +145,9 @@ while `ProofLevelReplayWitness` / `ProofLevelReplayRelation` remain future
 proof-level vocabulary. `plan/114` refines the draft so the current
 `lab_association_key` evidence is represented by `ReportLocalAssociationKey`,
 while `ProofLevelAssociationWitness` / `ProofLevelAssociationRelation`
-remain future proof-level vocabulary.
+remain future proof-level vocabulary. `plan/115` guards that this report-local
+key is not semantic association by key equality and not a branch-local
+association key.
 
 ## Relation to current E-ROW evidence
 

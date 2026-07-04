@@ -68,8 +68,10 @@
 50. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
 51. G1 OBL-024 replay vocabulary preflight は `plan/112`
 52. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
-53. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-54. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+53. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
+54. G1 OBL-024 association guard hardening は `plan/115`
+55. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+56. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -220,6 +222,8 @@
   `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md`
 - G1 OBL-024 Lean association vocabulary refinement:
   `plan/114-g1-obl024-lean-association-vocabulary-refinement.md`
+- G1 OBL-024 association guard hardening:
+  `plan/115-g1-obl024-association-guard-hardening.md`
 - G1 OBL-025 statement-shape inventory:
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - G1 E-ROW repair payload inventory:
