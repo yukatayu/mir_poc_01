@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 21:31 JST
+最終更新: 2026-07-04 21:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -225,6 +225,16 @@ semantic source authority.
   accept requested status, submit a proposal, edit canon, move the ledger,
   complete OBL-020, discharge proof, claim conformance, claim G1 exit, change
   runtime readiness, or relabel sample status.
+- Current G1 OBL-020 artifact identity / wrapper preflight note:
+  `plan/135-g1-obl020-artifact-identity-wrapper-preflight.md` keeps direct
+  citation of the LAB OBL-020 Lean artifact limited to LAB evidence and says a
+  later requested-status packet needs an artifact-identity annex / wrapper
+  decision before treating it as the requested artifact. It prefers annex-only
+  preflight now and defers actual wrapper creation until human/canon review
+  requires it. This does not accept requested status, submit a proposal, create
+  a wrapper file, edit canon, move the ledger, complete OBL-020, discharge
+  proof, claim conformance, claim G1 exit, change runtime readiness, or relabel
+  sample status.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -908,7 +918,9 @@ Research-discovery items:
 Macro 5 latest addendum: `plan/134` clarifies that OBL-020 full-row status
 movement remains deferred; the near-term safe posture is a G1-supporting
 statement-scope review candidate, with proof-package deferral only as fallback
-if scoped statement identity is rejected.
+if scoped statement identity is rejected. `plan/135` then keeps direct
+citation of the current LAB OBL-020 artifact as LAB evidence only and defers
+actual wrapper creation until a human/canon wrapper requirement exists.
 
 ## feature maturity rows
 
@@ -981,8 +993,19 @@ plus OBL-021 guard hardening, G1 bridge readiness / non-readiness mapping, and
 G1 bridge handoff / blocker ledger classification, G1 acceptance-packet
 preflight routing checklist, G1 OBL statement/status completion criteria
 inventory, G1 status proposal packet outline, G1 status evidence readiness
-dry-run, G1 requested-status options matrix, and G1 OBL-020 scope clarification
-packet.
+dry-run, G1 requested-status options matrix, G1 OBL-020 scope clarification
+packet, and G1 OBL-020 artifact identity / wrapper preflight.
+
+- 2026-07-04 21:46 JST
+  `plan/135-g1-obl020-artifact-identity-wrapper-preflight.md` を追加し、
+  current LAB `OBL020StatementDraft` の direct citation を LAB evidence に
+  限定し、requested-status artifact identity の前に artifact annex /
+  wrapper decision が必要であると整理した。annex-only preflight を現在の
+  default とし、actual wrapper creation は human/canon review が要求した
+  場合の後続 package に defer した。requested status acceptance、proposal
+  submission、wrapper file creation、canon edit、ledger movement、OBL-020
+  completion、proof discharge、conformance、G1 exit、runtime readiness、sample
+  status は主張していない。
 
 - 2026-07-04 21:31 JST
   `plan/134-g1-obl020-scope-clarification-packet.md` を追加し、OBL-020 の

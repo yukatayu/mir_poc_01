@@ -33,6 +33,12 @@ statement-scope candidate を later human/canon review 用に明示する
 scope-clarification-only memory です。canon edit、ledger movement、OBL-020
 completion、proof/conformance claim、G1 exit は主張しません。
 
+`plan/135` は現 LAB `OBL020StatementDraft` の direct citation を LAB evidence
+に限定し、requested-status artifact identity の前に artifact annex /
+wrapper decision が必要であることを整理する preflight-only memory です。
+wrapper file creation、canon edit、ledger movement、OBL-020 completion、
+proof/conformance claim、G1 exit は主張しません。
+
 ## 現在の到達点
 
 - active sample suite は `samples/clean-near-end/`
