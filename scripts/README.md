@@ -35,6 +35,9 @@
   - this exercises `samples/practical-alpha1/packages/run-*/` through `crates/mir-ast::practical_alpha1_runtime_plan` and `crates/mir-runtime::practical_alpha1_local_runtime`
   - it consumes checked practical package input through a distinct runtime-plan boundary
   - current actualized rows are `RUN-01..04`
+  - repo-owned package inputs are passed to the nested local-runtime Cargo
+    example as repo-relative `samples/...` argv so transient helper runs do
+    not depend on the host checkout path
   - it is a non-final first-floor local-runtime command and does not claim same-session operational α-0.5 runtime, Docker transport, package/hot-plug, save/load, or final public runtime/devtools API
   - practical `run-docker` remains later work
 - practical alpha-0.5 session carrier now has an alpha-local script surface
