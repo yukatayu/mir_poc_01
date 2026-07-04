@@ -118,6 +118,14 @@ non-claims をまとめますが、proposal submission、requested status accept
 ledger movement、wrapper creation、OBL-021 completion、proof/conformance claim、
 runtime scheduling determinism、G1 exit は主張しません。
 
+`plan/141` は G1 OBL status packet shell です。`plan/138` / `plan/136` /
+`plan/140` の artifact annex template を参照しつつ、requested status、ledger
+delta、artifact identity acceptance、wrapper need、OPEN-014、OBL-020 scope、
+OBL-021 abstraction boundary、proof/conformance/runtime/G1 exit をすべて
+UNRESOLVED slot として残します。proposal submission、requested status
+acceptance、canon edit、ledger movement、OBL completion、proof/conformance claim、
+runtime readiness、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

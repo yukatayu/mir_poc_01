@@ -563,6 +563,7 @@ REQUIRED = [
     "plan/138-g1-obl001-artifact-annex-template.md",
     "plan/139-g1-obl021-artifact-identity-wrapper-preflight.md",
     "plan/140-g1-obl021-artifact-annex-template.md",
+    "plan/141-g1-status-packet-shell-unresolved-slots.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
