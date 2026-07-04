@@ -117,6 +117,10 @@ the `plan/119` package and report-status update were committed and pushed.
 - `git diff --check`
 - Changed-file endpoint leak scan over `git ls-files --modified --others --exclude-standard`
 - Stale wording scan for legacy `specs/` normative-source patterns
+- `git add README.md Documentation.md progress.md tasks.md samples_progress.md plan/01-status-at-a-glance.md plan/07-parser-free-poc-stack.md plan/09-helper-stack-and-responsibility-map.md plan/19-repository-map-and-taxonomy.md plan/57-autonomous-computational-core-master-plan.md plan/70-lab-to-canon-reconciliation-ledger.md plan/90-source-traceability.md plan/119-g0-remaining-claim-family-drilldown-priority.md docs/reports/2168-g0-source-hierarchy-stale-wording-audit.md`
+- Staged-file endpoint leak scan over `git diff --cached --name-only --diff-filter=ACM`
+- `git commit --no-gpg-sign -m "Audit source hierarchy wording"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -247,11 +251,15 @@ report.
 
 ## Commit / push status
 
-Pending.
+Package commit / push completed:
+
+- Commit: `06aede15` (`Audit source hierarchy wording`)
+- Push: completed to `origin/main`
+
+This report-status update will be committed and pushed immediately after this
+edit.
 
 ## Sub-agent session close status
 
-Sartre returned completed read-only findings and was closed. Final reviewer
-Nietzsche returned final review findings and remains open only until this
-package is committed or another reviewer is needed. No sub-agent edits were
-made.
+Sartre returned completed read-only findings and was closed. Nietzsche returned
+final review findings and was closed. No sub-agent edits were made.
