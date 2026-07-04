@@ -115,6 +115,10 @@ the `plan/118` package and its report-status update were committed and pushed.
 - `python3 -m unittest scripts.tests.test_validate_docs`
 - `git diff --check`
 - Changed-file endpoint leak scan over `git ls-files --modified --others --exclude-standard`
+- `git add README.md Documentation.md progress.md tasks.md plan/00-index.md plan/70-lab-to-canon-reconciliation-ledger.md plan/90-source-traceability.md plan/119-g0-remaining-claim-family-drilldown-priority.md docs/reports/2167-g0-remaining-claim-family-drilldown-priority.md`
+- Staged-file endpoint leak scan over `git diff --cached --name-only --diff-filter=ACM`
+- `git commit --no-gpg-sign -m "Add remaining claim priority map"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -233,7 +237,13 @@ runtime, conformance, or sample success is claimed by this report.
 
 ## Commit / push status
 
-Pending.
+Package commit / push completed:
+
+- Commit: `bedead89` (`Add remaining claim priority map`)
+- Push: completed to `origin/main`
+
+This report-status update will be committed and pushed immediately after this
+edit.
 
 ## Sub-agent session close status
 
