@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 02:18 JST
+最終更新: 2026-07-05 02:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -74,6 +74,11 @@ semantic source authority.
   secret-safe docs validator guard for concrete Discord webhook URL shape. It
   reports path / line only and does not print the URL. This does not change
   notification semantics or claim security completeness.
+- Current fresh validation sweep note:
+  P99 reran the current docs / Cargo / Lean / current-L2 and product/sample
+  front doors after `plan/151`. This is fresh evidence only; it does not
+  promote a package, fill status-shell slots, change phase/gate status, move
+  OBL status, claim proof / conformance, or relabel sample/workflow readiness.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -1206,8 +1211,18 @@ plus G1 OBL-021 equality / diagnostic abstraction decision packet, plus G1
 OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening, plus phase-position validator guard hardening, plus
-Discord webhook secret validator guard hardening.
+Discord webhook secret validator guard hardening, plus P99 fresh runnable
+validation sweep evidence.
 
+- 2026-07-05 02:40 JST
+  P99 fresh runnable validation sweep を実行し、`make check`、Python scripts
+  tests 790、workspace Cargo tests、Lean 37 files direct compile-check
+  `exit 0`、current-L2 smoke / closeout、practical alpha、Product Alpha
+  release / installed-binary / operational、minimal alpha-1 pattern、Full
+  System V1 samples / release、Surface samples / release を再確認した。
+  `/tmp` 生成物は evidence 用で commit していない。canon edit、phase /
+  gate movement、OBL status movement、proof / conformance claim、runtime
+  readiness、sample / workflow status relabel は主張していない。
 - 2026-07-05 02:18 JST
   `plan/151-discord-webhook-secret-validator-guard.md` を追加し、
   `scripts/validate_docs.py` が concrete Discord webhook URL shape を tracked

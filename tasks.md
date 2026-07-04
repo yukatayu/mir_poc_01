@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 02:18 JST
+最終更新: 2026-07-05 02:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -43,6 +43,12 @@ Current holding state:
 - `plan/151-discord-webhook-secret-validator-guard.md` now records the
   secret-safe docs validator guard for concrete Discord webhook URL shape. The
   validator reports path / line only and does not print the URL body.
+- P99 fresh runnable validation sweep has rerun the current docs / Cargo /
+  Lean / current-L2 / product / sample front doors after `plan/151`. This is
+  evidence refresh only: no current promoted package, review-facing
+  extraction, status-shell slot fill, canon edit, phase/gate movement, OBL
+  status movement, proof / conformance claim, runtime readiness, or sample
+  status relabel.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -330,6 +336,11 @@ Current holding state:
   docs / source fails validation without printing the URL body. This closes a
   concrete secret-leak drift path without changing Discord notification
   semantics or claiming security completeness.
+- P99 fresh runnable validation sweep now refreshes evidence across docs /
+  Cargo / Lean / current-L2 / practical alpha / Product Alpha / operational /
+  Full System V1 / Surface front doors after the secret-guard package. This is
+  not a promoted package and does not change any queue, status, proof,
+  conformance, runtime, sample, or workflow readiness.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer

@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-05 01:08 JST
+Last updated: 2026-07-05 02:40 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -12,6 +12,7 @@ Evidence-only focus: active Lean foundations and LAB OBL-001 / OBL-020 /
 OBL-021 / OBL-024 / OBL-025 statement drafts, the OBL-001/020/021 status
 evidence-readiness dry-run, OBL-001 explanation-boundary sync guard hardening,
 G1 next-line promotion-boundary audit and broad validation sweep evidence, the
+P99 fresh runnable validation sweep evidence, the
 closed `P-SURF-01..99`
 Surface Mir parser + indexed-state + elaboration +
 generated communication + role-admission + source-patch hot-plug + source
@@ -202,6 +203,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-05 02:40 JST | P99 fresh runnable validation sweep | pass | Re-ran current docs / source hierarchy / Cargo / Python / Lean / sample front doors after the Discord webhook secret guard. Local checks passed `make check`, Python scripts tests 790, workspace Cargo tests, current-L2 smoke / closeout, Lean sync, and 37 direct Lean compile checks with historical `sorry` warnings only. Sidecar helper sweep passed practical alpha-0.5 / 0.8 / 0.9, practical alpha-1 integrated workflow, Product Alpha release 29/29, installed-binary 11/11, operational suite accepted with failed commands 0, minimal alpha-1 patterns accepted, textual Mir 10/10, Full System V1 samples 41/0 and release 29/29, Surface samples 53/0 and release 18 results / failed commands 0. `/tmp` artifacts were generated for evidence and not committed. No sample status relabel, current promoted package, status-shell slot fill, canon edit, phase / gate movement, OBL status movement, proof / conformance claim, or runtime readiness claim. |
 | 2026-07-05 01:08 JST | G1 next-line promotion-boundary audit and broad validation sweep | pass | Added `plan/147-g1-next-line-promotion-boundary-audit.md`; broad autonomous delegation is not promotion of OBL-020 / OBL-001 review-facing extraction. Validation sweep passed `make check`, Python scripts tests 782, workspace Cargo tests, active Lean 25 files, clean-near-end smoke/closeout, Surface release check, Product Alpha release / installed-binary / operational checks, Full System V1 release check, minimal alpha pattern, practical alpha, and alpha E2E front doors. No sample status relabel, review request extraction, requested status choice, canon edit, ledger movement, wrapper, OPEN-014 resolution, proof / conformance claim, runtime readiness, or G1 exit. |
 | 2026-07-05 00:40 JST | G1 OBL-001 explanation-boundary sync guard hardening | pass | Added `plan/146-g1-obl001-explanation-boundary-guard-hardening.md`; `THM001StatementDraft.md` now preserves LAB/canon hierarchy, non-identity with canon `MirCore.Elab.Soundness (stmt)`, artifact identity / wrapper non-acceptance, and OPEN-014 non-resolution under sync-test coverage. No Lean predicate refinement, requested status selection, proposal submission, canon edit, ledger movement, OBL completion, proof discharge, conformance, runtime readiness, or sample status relabel. |
 | 2026-07-04 21:02 JST | G1 status evidence readiness dry-run | pass | Added `plan/132-g1-status-evidence-readiness-dry-run.md`. Direct Lean compile-checks passed for OBL-001 / OBL-020 / OBL-021 statement drafts, sync guard unit coverage passed 21 tests, and the admitted-stub / placeholder-body scan found no matches. No requested status selection, proposal submission, canon edit, ledger movement, OBL completion, proof discharge, conformance, runtime readiness, or sample status relabel. |
