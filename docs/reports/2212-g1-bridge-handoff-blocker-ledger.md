@@ -217,9 +217,13 @@ generated artifact. Focused docs and validator tests were run instead.
 
 ## Commit / push status
 
-Not committed at initial report creation. The package will be committed and
-pushed after validation, then this report status section will be updated in a
-report-only follow-up commit after the main package push.
+Substantive package committed and pushed:
+
+- `a97de34a` `Add G1 bridge blocker ledger`
+
+This status section was then updated in a report-only follow-up commit after
+the substantive package push. That follow-up commit is visible in Git history
+and is not recursively recorded here.
 
 ## Sub-agent session close status
 
