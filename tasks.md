@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 01:48 JST
+最終更新: 2026-07-05 02:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -36,6 +36,10 @@ Current holding state:
   human stage count this is phase 1 of 9; within T0 it is late pre-exit, but
   G0 exit / T1 entry / G1 exit / proof / conformance / runtime readiness remain
   unclaimed.
+- `plan/150-phase-position-validator-guard.md` now records the docs-validator
+  guard that keeps the `plan/149` phase-position phrases present in
+  `progress.md` and `tasks.md`. This is drift protection only, not phase / gate
+  movement or percentage-as-gate.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -313,6 +317,11 @@ Current holding state:
   pre-exit but not G0 exit) from LAB evidence that has already prepared later
   G1/T1 work. It does not edit canon, claim gate exit, move OBL status, claim
   proof / conformance, or change runtime / sample / workflow readiness.
+- `plan/150-phase-position-validator-guard.md` now hardens
+  `scripts/validate_docs.py` so `progress.md` and `tasks.md` must retain the
+  `plan/149` phase-position guard phrases. This closes the immediate snapshot
+  drift path without changing canon, phase, gate, proof, conformance, runtime,
+  sample, or workflow readiness.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -956,6 +965,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 | `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
 | `storage workdir guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, or generated-artifact work finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package |
 | `phase-position reading refresh` | `Macro 0` maintenance | reopen only if canon phase, gate status, or LAB/canon source hierarchy changes enough to make `plan/149` stale | no phase exit, gate movement, canon edit, or percentage-as-gate claim without explicit canon process |
+| `phase-position validator guard refresh` | `Macro 0` maintenance | reopen only if the required snapshot phrases or validator responsibility changes | keep this as drift protection; do not turn it into a semantic phase validator or new canon decision |
 
 ## ordered self-driven packages
 
@@ -975,7 +985,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection; phase-position reading stays canon T0/G0 unless canon process moves it |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection; phase-position reading stays canon T0/G0 unless canon process moves it, and `plan/150` now guards that snapshot wording in `progress.md` / `tasks.md` |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

@@ -38,6 +38,14 @@ class ValidateDocsTests(unittest.TestCase):
             if heading != omitted_heading
         )
 
+    def _snapshot_phase_position_guard_text(self) -> str:
+        return (
+            "\n\nplan/149-current-phase-position-reading.md"
+            "\nT0/G0 rebaseline"
+            "\nphase 1 of 9"
+            "\nG0 exit"
+        )
+
     def _write_required_scaffold(self, root: Path, template_text: str) -> None:
         for relative in validate_docs.REQUIRED:
             path = root / relative
@@ -48,14 +56,16 @@ class ValidateDocsTests(unittest.TestCase):
                 path.write_text(
                     self._canon_notice_text()
                     + "\n\n"
-                    + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
+                    + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                    + self._snapshot_phase_position_guard_text(),
                     encoding="utf-8",
                 )
             elif relative == "tasks.md":
                 path.write_text(
                     self._canon_notice_text()
                     + "\n\n"
-                    + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
+                    + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS)
+                    + self._snapshot_phase_position_guard_text(),
                     encoding="utf-8",
                 )
             elif relative in validate_docs.CANON_NOTICE_FILES:
@@ -358,6 +368,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/147-g1-next-line-promotion-boundary-audit.md",
             "plan/148-storage-workdir-mountpoint-guard-hardening.md",
             "plan/149-current-phase-position-reading.md",
+            "plan/150-phase-position-validator-guard.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
@@ -451,6 +462,66 @@ class ValidateDocsTests(unittest.TestCase):
                 tasks_text, validate_docs.TASKS_REQUIRED_HEADINGS
             ),
         )
+
+    def test_main_rejects_progress_missing_phase_position_guard(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "progress.md").write_text(
+                self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Snapshot docs are missing phase-position guard phrases",
+            stdout.getvalue(),
+        )
+        self.assertIn("progress.md", stdout.getvalue())
+        self.assertIn("plan/149-current-phase-position-reading.md", stdout.getvalue())
+
+    def test_main_rejects_tasks_missing_phase_position_guard(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "tasks.md").write_text(
+                self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Snapshot docs are missing phase-position guard phrases",
+            stdout.getvalue(),
+        )
+        self.assertIn("tasks.md", stdout.getvalue())
+        self.assertIn("T0/G0 rebaseline", stdout.getvalue())
 
     def test_required_scaffold_includes_product_alpha1_sample_docs(self) -> None:
         required_docs = set(validate_docs.REQUIRED)
@@ -875,6 +946,7 @@ class ValidateDocsTests(unittest.TestCase):
                 + self._canon_notice_text()
                 + "\n\n"
                 + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                + self._snapshot_phase_position_guard_text()
                 + "\n\n- 2026-07-04 12:13 JST\n  earlier work log\n",
                 encoding="utf-8",
             )

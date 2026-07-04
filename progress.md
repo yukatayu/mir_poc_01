@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 01:48 JST
+最終更新: 2026-07-05 02:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,6 +64,11 @@ semantic source authority.
   rebaseline`; as a human stage count it is phase 1 of 9. Within T0 it is
   late pre-exit, but G0 exit, T1 entry, G1 exit, proof / conformance, runtime
   readiness, and sample / workflow status movement remain unclaimed.
+- Current phase-position guard:
+  `plan/150-phase-position-validator-guard.md` records the validator hardening
+  that keeps the `plan/149` phase-position phrases present in `progress.md`
+  and `tasks.md`. This is a docs guard only; it does not change phase, gate,
+  proof, conformance, runtime, sample, or workflow readiness.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -374,6 +379,11 @@ semantic source authority.
   pre-exit within T0, and no G0/G1 exit or T1 entry claim. It also records that
   LAB evidence for Product Alpha, Full System V1, Surface Mir alpha, and G1
   ordinary-assignment preparation is substantial but not canon phase movement.
+- Current phase-position validator guard note:
+  `plan/150-phase-position-validator-guard.md` hardens `scripts/validate_docs.py`
+  so `progress.md` and `tasks.md` must retain the `plan/149` phase-position
+  guard phrases. This is management drift protection only, not a phase movement
+  or percentage-as-gate claim.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -1044,7 +1054,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit | light | maintenance only |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, and `scripts/validate_docs.py` now guards that snapshot wording through `plan/150` | light | maintenance only |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1184,8 +1194,14 @@ shell with unresolved slots, plus G1 status packet shell evidence dry-run,
 plus G1 OBL-021 equality / diagnostic abstraction decision packet, plus G1
 OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
-sync guard hardening.
+sync guard hardening, plus phase-position validator guard hardening.
 
+- 2026-07-05 02:06 JST
+  `plan/150-phase-position-validator-guard.md` を追加し、`scripts/validate_docs.py`
+  が `progress.md` / `tasks.md` から `plan/149` の phase-position guard phrases
+  が消えた場合に失敗するようにした。TDD RED/GREEN は targeted validator tests
+  で確認した。canon edit、phase / gate movement、percentage-as-gate、runtime /
+  sample / workflow status change は主張していない。
 - 2026-07-05 01:48 JST
   `plan/149-current-phase-position-reading.md` を追加し、全体計画の現在地を
   canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目、

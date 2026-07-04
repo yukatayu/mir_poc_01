@@ -104,8 +104,9 @@
 86. G1 OBL-024 association guard hardening は `plan/115`
 87. storage workdir mountpoint guard hardening は `plan/148`
 88. current phase position reading は `plan/149`
-89. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-90. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+89. phase-position validator guard は `plan/150`
+90. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+91. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -381,6 +382,12 @@
   未達と整理する repository memory である。LAB evidence の先行と canon
   phase movement を混同せず、G0/G1 exit、T1 entry、proof / conformance、
   runtime readiness、sample / workflow status change は主張しない
+- **phase-position validator guard**:
+  `plan/150-phase-position-validator-guard.md` は、`plan/149` の短い読みが
+  `progress.md` / `tasks.md` から消えたときに `scripts/validate_docs.py`
+  が落ちるようにした docs-validator hardening memory である。canon edit、
+  phase / gate movement、percentage-as-gate、runtime / sample / workflow
+  status change は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -515,6 +522,8 @@
   `plan/148-storage-workdir-mountpoint-guard-hardening.md`
 - Current phase position reading:
   `plan/149-current-phase-position-reading.md`
+- Phase-position validator guard:
+  `plan/150-phase-position-validator-guard.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

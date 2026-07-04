@@ -147,6 +147,12 @@ canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 
 LAB evidence が G1/T1 準備へ先行していることと、canon phase movement を
 混同しません。
 
+`plan/150` は phase-position validator guard です。`plan/149` の短い読みが
+`progress.md` と `tasks.md` から消えたときに `scripts/validate_docs.py` が
+落ちるようにし、phase-position snapshot の drift を管理します。canon edit、
+phase / gate movement、percentage-as-gate、runtime / sample / workflow status
+change は主張しません。
+
 ## 現在の到達点
 
 - active sample suite は `samples/clean-near-end/`

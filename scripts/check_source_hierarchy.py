@@ -232,6 +232,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/147-g1-next-line-promotion-boundary-audit.md",
         "plan/148-storage-workdir-mountpoint-guard-hardening.md",
         "plan/149-current-phase-position-reading.md",
+        "plan/150-phase-position-validator-guard.md",
     ],
     "scripts": [
         "scripts",

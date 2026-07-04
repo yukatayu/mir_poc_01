@@ -572,6 +572,7 @@ REQUIRED = [
     "plan/147-g1-next-line-promotion-boundary-audit.md",
     "plan/148-storage-workdir-mountpoint-guard-hardening.md",
     "plan/149-current-phase-position-reading.md",
+    "plan/150-phase-position-validator-guard.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -687,6 +688,21 @@ TASKS_REQUIRED_HEADINGS = [
     "## maintenance tasks",
     "## non-promoted references",
 ]
+
+SNAPSHOT_PHASE_POSITION_GUARD_PHRASES = {
+    "progress.md": [
+        "plan/149-current-phase-position-reading.md",
+        "T0/G0 rebaseline",
+        "phase 1 of 9",
+        "G0 exit",
+    ],
+    "tasks.md": [
+        "plan/149-current-phase-position-reading.md",
+        "T0/G0 rebaseline",
+        "phase 1 of 9",
+        "G0 exit",
+    ],
+}
 
 UNRESOLVED_TEMPLATE_PLACEHOLDERS = [
     "更新不要 / 更新済み:",
@@ -1041,6 +1057,20 @@ def stale_snapshot_last_updated_headers() -> dict[str, tuple[str, str]]:
     return stale
 
 
+def missing_phase_position_guard_phrases() -> dict[str, list[str]]:
+    missing: dict[str, list[str]] = {}
+    for relative_path, phrases in SNAPSHOT_PHASE_POSITION_GUARD_PHRASES.items():
+        path = ROOT / relative_path
+        if not path.exists():
+            continue
+
+        text = path.read_text(encoding="utf-8")
+        missing_phrases = [phrase for phrase in phrases if phrase not in text]
+        if missing_phrases:
+            missing[relative_path] = missing_phrases
+    return missing
+
+
 def unregistered_numbered_plan_files() -> list[str]:
     plan_root = ROOT / "plan"
     if not plan_root.exists():
@@ -1194,6 +1224,13 @@ def main() -> int:
         print("tasks.md has required task-map sections out of order:")
         for heading in out_of_order_tasks_sections:
             print(" -", heading)
+        return 1
+
+    missing_phase_position_phrases = missing_phase_position_guard_phrases()
+    if missing_phase_position_phrases:
+        print("Snapshot docs are missing phase-position guard phrases:")
+        for path, phrases in missing_phase_position_phrases.items():
+            print(f" - {path}: missing {', '.join(phrases)}")
         return 1
 
     print("Documentation scaffold looks complete.")
