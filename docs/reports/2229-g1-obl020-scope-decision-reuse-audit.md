@@ -174,6 +174,8 @@ otherwise duplicate the same scope matrix.
 - Repository size after docs edits: `du -sk .` reported `7337648`; this is
   approximately 36 KiB more than the pre-edit `7337612` reading. No heavy
   artifact was created.
+- Substantive commit / push completed:
+  `b5602fe5a20131c966fdb6b5ef0b613d56b162c4`.
 
 ## What changed in understanding
 
@@ -243,10 +245,11 @@ No validation is intentionally skipped.
 
 ## Commit / push status
 
-Commit and push are performed after validation and final review. The first
-package commit will include this report and the substantive files; a follow-up
-report-closeout commit will record the exact pushed commit hash in this
-section.
+Substantive package commit / push completed:
+`b5602fe5a20131c966fdb6b5ef0b613d56b162c4`.
+
+This report-closeout update is committed and pushed separately so the exact
+substantive package hash is recorded in repository memory.
 
 ## Sub-agent session close status
 
