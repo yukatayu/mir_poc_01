@@ -299,8 +299,11 @@ and audited only at the statement-boundary level for this package.
 
 ## Commit / push status
 
-Primary package commit and push are pending at the time this report file is
-first written. This section will be updated by follow-up commit bookkeeping.
+- Primary package commit:
+  `d52b9489efa8649a5bc40284420a1d6e4ca9f376`
+  (`Add SCN-01 visibility negative fixture`).
+- Primary package push: pushed to `origin/main`.
+- This status section is updated by a follow-up bookkeeping commit.
 
 ## Sub-agent session close status
 
