@@ -81,6 +81,8 @@ Start state was clean and synced with `origin/main` before edits:
 - `find samples/lean -path 'samples/lean/old' -prune -o -name '*.lean' -print0 | xargs -0 -n1 lean`
 - `git add Documentation.md plan/00-index.md plan/150-phase-position-validator-guard.md progress.md scripts/README.md scripts/tests/test_validate_docs.py scripts/validate_docs.py tasks.md docs/reports/2242-p104-phase-position-late-pre-exit-guard.md && git commit --no-gpg-sign -m "Guard late phase-position reading"`
 - `git push`
+- `git add docs/reports/2242-p104-phase-position-late-pre-exit-guard.md && git commit --no-gpg-sign -m "Record P104 phase guard commit status"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -171,7 +173,12 @@ Primary commit pushed:
 
 - `dee5117f Guard late phase-position reading`
 
-Report commit-status update pending at this report revision.
+Report commit-status update pushed:
+
+- `09a5f2d9 Record P104 phase guard commit status`
+
+This final paragraph removes the pending marker from the report and does not
+change project behavior.
 
 ## Sub-agent session close status
 
