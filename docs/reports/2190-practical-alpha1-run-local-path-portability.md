@@ -205,7 +205,12 @@ code-mapper recommendation from Package 49.
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `f4b28baf Use relative practical run-local helper paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
