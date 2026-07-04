@@ -143,6 +143,13 @@ proposal submission、canon edit、ledger movement、OBL-021 completion、proof 
 conformance claim、final equality / Diagnostic ABI selection、runtime
 scheduling determinism、G1 exit は主張しません。
 
+`plan/144` は G1 OBL-020 scope decision reuse / unresolved-slot audit です。
+`plan/134` が OBL-020 full-row vs G1-supporting scope question の controlling
+LAB packet であることを確認し、同じ scope matrix を重複して作らないよう
+candidate next package を整理します。requested status selection、proposal
+submission、canon edit、ledger movement、OBL-020 completion、proof /
+conformance claim、wrapper creation、runtime readiness、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
