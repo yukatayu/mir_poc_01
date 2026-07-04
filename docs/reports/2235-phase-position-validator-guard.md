@@ -88,6 +88,9 @@ report.
 - `cargo test --workspace --all-targets --no-fail-fast`
 - Discord webhook secret scan with the local denylist pattern omitted from this
   report.
+- `git add README.md Documentation.md progress.md tasks.md scripts/README.md scripts/check_source_hierarchy.py scripts/tests/test_validate_docs.py scripts/validate_docs.py plan/00-index.md plan/90-source-traceability.md plan/150-phase-position-validator-guard.md docs/reports/2235-phase-position-validator-guard.md`
+- `git commit --no-gpg-sign -m "Guard phase position snapshot wording"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -123,7 +126,13 @@ Focused and full validation:
 - `cargo test --workspace --all-targets --no-fail-fast`: exit 0.
 - Secret scan: no Discord webhook matches in tracked files.
 
-Commit and push are still pending before the primary package commit.
+Primary package commit and push:
+
+```text
+[main 291a76ea] Guard phase position snapshot wording
+To github.com:yukatayu/mir_poc_01.git
+   7e41497f..291a76ea  main -> main
+```
 
 ## What changed in understanding
 
@@ -186,7 +195,9 @@ No relevant local validations were skipped for this docs-validator package.
 
 ## Commit / push status
 
-Pending before the primary package commit.
+Primary package commit `291a76ea9093a03418c72c3bc6eee32fc6b067ab`
+(`Guard phase position snapshot wording`) was pushed to `origin/main`.
+This report status update is being recorded in a follow-up status-only commit.
 
 ## Sub-agent session close status
 
