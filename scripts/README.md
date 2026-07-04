@@ -58,6 +58,9 @@
   - `python3 scripts/practical_alpha09_devtools.py check-all --format json`
   - this exercises one enriched `practical_alpha05_session` carrier through typed host-I/O, same-session hot-plug, local save/load, and `crates/mir-runtime::practical_alpha09_devtools`
   - current actualized rows are `OA09-01..09`
+  - repo-owned base / host-I/O / attach package inputs are passed to nested
+    `mir_practical_alpha05_session` commands as repo-relative `samples/...`
+    argv while the temporary session file remains an absolute temp path
   - it exports event DAG, local route trace, membership timeline, witness relation, hot-plug lifecycle, fallback degradation, save-load timeline, observer-safe redacted view, and retention/on-demand trace from the same session carrier
   - `render-html` emits a non-final static HTML viewer over the same session-bound payload
   - it does not claim final public viewer/telemetry ABI, durable audit, remote retained-artifact retrieval, WAN/federation route trace, distributed durable save/load, or product-ready alpha-1

@@ -1,6 +1,7 @@
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -10,6 +11,12 @@ import practical_alpha09_devtools as runner  # noqa: E402
 
 
 class PracticalAlpha09DevtoolsTests(unittest.TestCase):
+    def setUp(self) -> None:
+        runner.build_session_devtools_payload.cache_clear()
+
+    def tearDown(self) -> None:
+        runner.build_session_devtools_payload.cache_clear()
+
     def test_list_samples_covers_operational_alpha09_matrix(self) -> None:
         rows = runner.list_samples()
         self.assertEqual(
@@ -57,6 +64,50 @@ class PracticalAlpha09DevtoolsTests(unittest.TestCase):
         self.assertEqual(rendered["sample_id"], "OA09-09")
         self.assertIn("event_dag_live_session", rendered["html"])
         self.assertIn("retention_on_demand_trace", rendered["html"])
+
+    def test_repo_cli_arg_relativizes_repo_owned_package_dir(self) -> None:
+        package_dir = REPO_ROOT / runner.BASE_SESSION_PACKAGE
+        self.assertEqual(runner.repo_cli_arg(package_dir), runner.BASE_SESSION_PACKAGE)
+
+    def test_repo_cli_arg_keeps_external_path_absolute(self) -> None:
+        external = Path("/tmp/mirrorea-external-alpha09-package")
+        self.assertEqual(runner.repo_cli_arg(external), str(external))
+
+    def test_build_session_devtools_payload_uses_repo_relative_package_args(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def fake_cargo_session(*args: str) -> dict:
+            calls.append(args)
+            return {"command": args[0]}
+
+        with mock.patch.object(runner, "_cargo_session", side_effect=fake_cargo_session):
+            payload = runner.build_session_devtools_payload()
+
+        self.assertEqual(payload["session_report_started"], {"command": "start"})
+        self.assertEqual(len(calls), 15)
+        self.assertEqual(calls[0][0:2], ("start", runner.BASE_SESSION_PACKAGE))
+        self.assertEqual(calls[1][0], "host-io")
+        self.assertEqual(calls[1][2], runner.HOST_IO_PACKAGE)
+
+        attach_calls = [call for call in calls if call[0] == "attach"]
+        self.assertEqual(len(attach_calls), len(runner.ATTACH_SEQUENCE))
+        self.assertEqual(
+            [call[2] for call in attach_calls],
+            runner.ATTACH_SEQUENCE,
+        )
+
+        for call in calls:
+            for arg in call:
+                self.assertFalse(str(arg).startswith(f"{runner.REPO_ROOT}/"))
+
+        session_args = [
+            arg
+            for call in calls
+            for arg in call
+            if str(arg).endswith("session.json")
+        ]
+        self.assertTrue(session_args)
+        self.assertTrue(all(Path(arg).is_absolute() for arg in session_args))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 14:52 JST
+最終更新: 2026-07-04 14:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -129,13 +129,18 @@ Current holding state:
 - Practical alpha-1 attach helper now preserves portability for repo-owned
   package inputs: nested hotplug Cargo example argv uses repo-relative
   `samples/...` paths. Public helper JSON was already repo-root clean.
+- Practical alpha-0.9 devtools helper now preserves portability for repo-owned
+  base / host-I/O / attach package inputs: nested
+  `mir_practical_alpha05_session` command argv uses repo-relative
+  `samples/...` paths while the temporary session file remains an absolute temp
+  path. Public helper JSON, `closeout`, and `render-html` were already
+  repo-root clean on the success path.
 - Remaining practical alpha helper portability candidates are ranked by the
-  read-only code-mapper audit as `practical_alpha09_devtools.py`,
-  `practical_alpha08_session_hotplug.py`, `practical_alpha1_avatar.py`, then
-  `practical_alpha1_save_load.py`. Their happy-path `check-all` / `closeout`
-  JSON was repo-root clean in the audit; the remaining risk is nested
-  subprocess argv and failure-path `failed[].error` serialization for
-  repo-owned package inputs.
+  read-only code-mapper audit as `practical_alpha08_session_hotplug.py`,
+  `practical_alpha1_avatar.py`, then `practical_alpha1_save_load.py`. Their
+  happy-path `check-all` / `closeout` JSON was repo-root clean in the audit;
+  the remaining risk is nested subprocess argv and failure-path
+  `failed[].error` serialization for repo-owned package inputs.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate

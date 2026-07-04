@@ -92,6 +92,14 @@ LIMITATIONS = [
 ]
 
 
+def repo_cli_arg(path: str | Path) -> str:
+    value = Path(path)
+    try:
+        return value.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(value)
+
+
 def _implemented_row(sample_id: str) -> dict[str, str]:
     for row in IMPLEMENTED_ROWS:
         if row["sample_id"] == sample_id:
@@ -138,19 +146,19 @@ def build_session_devtools_payload() -> dict[str, Any]:
     with tempfile.TemporaryDirectory(prefix="oa09-") as temp_dir:
         session_path = Path(temp_dir) / "session.json"
         started = _cargo_session(
-            "start", str(REPO_ROOT / BASE_SESSION_PACKAGE), str(session_path)
+            "start", repo_cli_arg(REPO_ROOT / BASE_SESSION_PACKAGE), str(session_path)
         )
         host_io_report = _cargo_session(
             "host-io",
             str(session_path),
-            str(REPO_ROOT / HOST_IO_PACKAGE),
+            repo_cli_arg(REPO_ROOT / HOST_IO_PACKAGE),
             str(session_path),
         )
         attach_reports = [
             _cargo_session(
                 "attach",
                 str(session_path),
-                str(REPO_ROOT / package),
+                repo_cli_arg(REPO_ROOT / package),
                 str(session_path),
             )
             for package in ATTACH_SEQUENCE
