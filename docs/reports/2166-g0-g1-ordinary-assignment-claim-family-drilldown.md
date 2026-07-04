@@ -225,7 +225,13 @@ success is claimed by this report.
 
 ## Commit / push status
 
-Pending before commit. This section will be updated after commit and push.
+Package commit / push completed:
+
+- Commit: `ef4bc4bf` (`Add ordinary assignment claim drilldown`)
+- Push: completed to `origin/main`
+
+This report-status update will be committed and pushed immediately after this
+edit.
 
 ## Sub-agent session close status
 
