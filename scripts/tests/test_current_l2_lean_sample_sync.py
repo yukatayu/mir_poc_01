@@ -40,8 +40,25 @@ def assert_no_vacuous_weakening(test: unittest.TestCase, body: str) -> None:
         r"\bFalse\s*->",
         r":=\s*by\s+trivial\b",
         r":=\s*trivial\b",
+        r":=\s*(?:\(\s*)?True(?:\s*\))?\b",
     ):
         test.assertNotRegex(compact, pattern)
+
+
+def assert_in_uncommented_lean_body(
+    test: unittest.TestCase,
+    required: str,
+    body: str,
+) -> None:
+    test.assertIn(required, lean_without_comments(body))
+
+
+def assert_regex_uncommented_lean_body(
+    test: unittest.TestCase,
+    pattern: str,
+    body: str,
+) -> None:
+    test.assertRegex(lean_without_comments(body), pattern)
 
 
 class CurrentL2LeanSampleSyncTests(unittest.TestCase):
@@ -124,6 +141,29 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 0)
         self.assertEqual(stdout.getvalue().strip(), expected_path)
+
+    def test_no_vacuous_weakening_rejects_bare_true_definition(self) -> None:
+        with self.assertRaises(AssertionError):
+            assert_no_vacuous_weakening(self, ":= True")
+
+    def test_required_lean_body_link_helper_ignores_comments(self) -> None:
+        body_with_comment_only_link = """
+        := True
+        -- P.EquivalentCoreTerm c₁ c₂
+        """
+
+        with self.assertRaises(AssertionError):
+            assert_in_uncommented_lean_body(
+                self,
+                "P.EquivalentCoreTerm c₁ c₂",
+                body_with_comment_only_link,
+            )
+
+        assert_in_uncommented_lean_body(
+            self,
+            "P.EquivalentCoreTerm c₁ c₂",
+            "P.EquivalentCoreTerm c₁ c₂",
+        )
 
 
     def test_statement_drafts_include_obl001_draft(self) -> None:
@@ -218,13 +258,18 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "P.RequestCarriesDependencyEvidence assign request",
             "P.RequestCarriesSpanEvidence assign request",
         ):
-            self.assertIn(required, request_body)
+            assert_in_uncommented_lean_body(self, required, request_body)
 
         generated_write_body = lean_def_body(lean_text, "GeneratedWriteSound")
         assert_no_vacuous_weakening(self, generated_write_body)
-        self.assertIn("P.OwnerLocalWriteAt env locus assign write", generated_write_body)
-        self.assertIn("exists request", generated_write_body)
-        self.assertIn(
+        assert_in_uncommented_lean_body(
+            self,
+            "P.OwnerLocalWriteAt env locus assign write",
+            generated_write_body,
+        )
+        assert_in_uncommented_lean_body(self, "exists request", generated_write_body)
+        assert_in_uncommented_lean_body(
+            self,
             "RequestEvidenceSound P env locus assign result write request",
             generated_write_body,
         )
@@ -240,16 +285,17 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "P.VisibleWriteConsequencesExplicit env assign result",
             "P.NoAmbientAuthorityFromNestedLocus env locus assign result",
         ):
-            self.assertIn(required, post_body)
+            assert_in_uncommented_lean_body(self, required, post_body)
 
         statement_body = lean_def_body(lean_text, "THM001StatementDraft")
         assert_no_vacuous_weakening(self, statement_body)
-        self.assertRegex(
-            statement_body,
+        assert_regex_uncommented_lean_body(
+            self,
             r"P\.SurfaceAssignment\s+assign\s*->\s+"
             r"P\.SimpleAssign\s+assign\s*->\s+"
             r"P\.ElaboratesAssignment\s+env\s+ctx\s+locus\s+assign\s+result\s*->\s+"
             r"AssignmentElabSoundnessPost P env locus assign result",
+            statement_body,
         )
         self.assertIn("not a proof skeleton", explanation_text)
         self.assertIn("not runtime dispatch", explanation_text)
@@ -279,27 +325,37 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
 
         preserves_body = lean_def_body(lean_text, "PreservesWF")
         assert_no_vacuous_weakening(self, preserves_body)
-        self.assertRegex(
-            preserves_body,
+        assert_regex_uncommented_lean_body(
+            self,
             r"P\.WellFormed\s+before\s*->\s+"
             r"P\.Step\s+before\s+label\s+after\s*->\s+"
             r"P\.WellFormed\s+after",
+            preserves_body,
         )
 
         family_body = lean_def_body(lean_text, "FamilyStepPreservesWF")
         assert_no_vacuous_weakening(self, family_body)
-        self.assertIn("P.CanonStepFamily family", family_body)
-        self.assertIn("P.StepHasFamily label family", family_body)
-        self.assertIn("PreservesWF P before label after", family_body)
+        assert_in_uncommented_lean_body(self, "P.CanonStepFamily family", family_body)
+        assert_in_uncommented_lean_body(self, "P.StepHasFamily label family", family_body)
+        assert_in_uncommented_lean_body(
+            self,
+            "PreservesWF P before label after",
+            family_body,
+        )
 
         statement_body = lean_def_body(lean_text, "OBL020StatementDraft")
         assert_no_vacuous_weakening(self, statement_body)
-        self.assertRegex(
-            statement_body,
+        assert_regex_uncommented_lean_body(
+            self,
             r"forall\s+\(before : V\.Config\)\s+\(label : V\.StepLabel\)\s+"
             r"\(after : V\.Config\)",
+            statement_body,
         )
-        self.assertIn("PreservesWF P before label after", statement_body)
+        assert_in_uncommented_lean_body(
+            self,
+            "PreservesWF P before label after",
+            statement_body,
+        )
         self.assertIn("WF clauses stay behind `WellFormed`", explanation_text)
         self.assertIn("not per-step proof decomposition", explanation_text)
 
@@ -341,29 +397,35 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
             "P.EquivalentGeneratedEdges g₁ g₂",
             "P.EquivalentSourceSpanMap s₁ s₂",
         ):
-            self.assertIn(required, result_body)
+            assert_in_uncommented_lean_body(self, required, result_body)
 
         diagnostic_body = lean_def_body(lean_text, "SameDiagnostic")
         assert_no_vacuous_weakening(self, diagnostic_body)
-        self.assertIn("P.EquivalentDiagnostic left right", diagnostic_body)
+        assert_in_uncommented_lean_body(
+            self,
+            "P.EquivalentDiagnostic left right",
+            diagnostic_body,
+        )
 
         post_body = lean_def_body(lean_text, "ElabDeterministicPost")
         assert_no_vacuous_weakening(self, post_body)
-        self.assertIn("SameElabResult P left right", post_body)
-        self.assertIn("SameDiagnostic P left right", post_body)
-        self.assertRegex(
-            post_body,
+        assert_in_uncommented_lean_body(self, "SameElabResult P left right", post_body)
+        assert_in_uncommented_lean_body(self, "SameDiagnostic P left right", post_body)
+        assert_regex_uncommented_lean_body(
+            self,
             r"P\.Elaborates\s+env\s+ctx\s+locus\s+item\s+result\s*->\s+"
             r"P\.Rejects\s+env\s+ctx\s+locus\s+item\s+diagnostic\s*->\s+"
             r"False",
+            post_body,
         )
 
         statement_body = lean_def_body(lean_text, "OBL021StatementDraft")
         assert_no_vacuous_weakening(self, statement_body)
-        self.assertRegex(
-            statement_body,
+        assert_regex_uncommented_lean_body(
+            self,
             r"P\.WellScopedInput\s+env\s+ctx\s+locus\s+item\s*->\s+"
             r"ElabDeterministicPost P env ctx locus item",
+            statement_body,
         )
         self.assertIn("not final equality selection", explanation_text)
         self.assertIn("not runtime scheduling determinism", explanation_text)

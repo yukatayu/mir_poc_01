@@ -44,44 +44,45 @@
 26. G1 SCN-01 visibility negative actualization は `plan/123`
 27. G1 OBL-001 boundary audit は `plan/124`
 28. G1 SCN-02 direct-local-write blocker review は `plan/125`
-29. G1 E-ROW diagnostic alignment は `plan/79`
-30. G1 diagnostic carrier inventory は `plan/80`
-31. G1 OBL-024 statement-shape inventory は `plan/81`
-32. G1 OBL-025 statement-shape inventory は `plan/82`
-33. G1 E-ROW repair payload inventory は `plan/83`
-34. G1 E-ROW carrier-only diagnostic detail prototype は `plan/84`
-35. G1 E-ROW carrier precondition hardening は `plan/85`
-36. G1 E-ROW-002 visibility repair carrier prototype は `plan/86`
-37. G1 OBL-025 repo-local Lean statement draft は `plan/87`
-38. G1 E-ROW repair shape inventory は `plan/88`
-39. G1 E-ROW-001 non-visibility singleton fixture は `plan/89`
-40. G1 E-ROW-001 base singleton fixture closure は `plan/92`
-41. G1 E-ROW-001 singleton repair assumption gate は `plan/93`
-42. G1 E-ROW-001 singleton repair prototype は `plan/94`
-43. G1 E-ROW mixed / multi repair decomposition inventory は `plan/95`
-44. G1 E-ROW set-insertion / bundle payload inventory は `plan/96`
-45. G1 ELAB-07 set-insertion gate review は `plan/97`
-46. G1 ELAB-04 mixed visibility branch inventory は `plan/98`
-47. G1 ELAB-07 set-insertion executable preflight は `plan/99`
-48. G1 ELAB-07 set-insertion assumption acceptance は `plan/100`
-49. G1 ELAB-07 set-insertion payload-model design は `plan/101`
-50. G1 ELAB-07 set-insertion executable payload prototype は `plan/102`
-51. G1 ELAB-07 set-insertion negative-guard hardening は `plan/103`
-52. G1 ELAB-07 set-insertion row-identity guard hardening は `plan/104`
-53. G1 ELAB-07 set-insertion exact-locus guard hardening は `plan/105`
-54. G1 ELAB-07 child / bundle / partial exclusion fixtures は `plan/106`
-55. G1 ELAB-04 mixed visibility payload-model preflight は `plan/107`
-56. G1 OBL-025 branch-local non-coverage refinement は `plan/108`
-57. G1 OBL-025 repair completeness guard hardening は `plan/116`
-58. G1 OBL-024 repo-local Lean statement draft は `plan/109`
-59. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
-60. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
-61. G1 OBL-024 replay vocabulary preflight は `plan/112`
-62. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
-63. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
-64. G1 OBL-024 association guard hardening は `plan/115`
-65. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-66. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+29. G1 OBL-020/021 boundary audit and OBL-021 guard hardening は `plan/126`
+30. G1 E-ROW diagnostic alignment は `plan/79`
+31. G1 diagnostic carrier inventory は `plan/80`
+32. G1 OBL-024 statement-shape inventory は `plan/81`
+33. G1 OBL-025 statement-shape inventory は `plan/82`
+34. G1 E-ROW repair payload inventory は `plan/83`
+35. G1 E-ROW carrier-only diagnostic detail prototype は `plan/84`
+36. G1 E-ROW carrier precondition hardening は `plan/85`
+37. G1 E-ROW-002 visibility repair carrier prototype は `plan/86`
+38. G1 OBL-025 repo-local Lean statement draft は `plan/87`
+39. G1 E-ROW repair shape inventory は `plan/88`
+40. G1 E-ROW-001 non-visibility singleton fixture は `plan/89`
+41. G1 E-ROW-001 base singleton fixture closure は `plan/92`
+42. G1 E-ROW-001 singleton repair assumption gate は `plan/93`
+43. G1 E-ROW-001 singleton repair prototype は `plan/94`
+44. G1 E-ROW mixed / multi repair decomposition inventory は `plan/95`
+45. G1 E-ROW set-insertion / bundle payload inventory は `plan/96`
+46. G1 ELAB-07 set-insertion gate review は `plan/97`
+47. G1 ELAB-04 mixed visibility branch inventory は `plan/98`
+48. G1 ELAB-07 set-insertion executable preflight は `plan/99`
+49. G1 ELAB-07 set-insertion assumption acceptance は `plan/100`
+50. G1 ELAB-07 set-insertion payload-model design は `plan/101`
+51. G1 ELAB-07 set-insertion executable payload prototype は `plan/102`
+52. G1 ELAB-07 set-insertion negative-guard hardening は `plan/103`
+53. G1 ELAB-07 set-insertion row-identity guard hardening は `plan/104`
+54. G1 ELAB-07 set-insertion exact-locus guard hardening は `plan/105`
+55. G1 ELAB-07 child / bundle / partial exclusion fixtures は `plan/106`
+56. G1 ELAB-04 mixed visibility payload-model preflight は `plan/107`
+57. G1 OBL-025 branch-local non-coverage refinement は `plan/108`
+58. G1 OBL-025 repair completeness guard hardening は `plan/116`
+59. G1 OBL-024 repo-local Lean statement draft は `plan/109`
+60. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
+61. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
+62. G1 OBL-024 replay vocabulary preflight は `plan/112`
+63. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
+64. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
+65. G1 OBL-024 association guard hardening は `plan/115`
+66. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+67. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -169,6 +170,12 @@
   `ELAB-02` の structural support、`IDX-05` の ambient-authority rejection、
   `plan/124` の OBL-001 boundary audit を根拠にする一方、negative (b) の
   exact executable negative evidence はまだ主張しない
+- **G1 OBL-020/021 boundary audit and OBL-021 guard hardening**:
+  `plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md` は、
+  OBL-020 / OBL-021 の current statement boundary を監査し、現時点では
+  Lean predicate refinement 不要と判断する。あわせて OBL-021 required body
+  links が comment-only で通らないよう sync guard を test-only で強化する。
+  canon edit / OBL completion / proof discharge / conformance / G1 exit は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -255,6 +262,8 @@
   `plan/124-g1-obl001-boundary-audit.md`
 - G1 SCN-02 direct-local-write blocker review:
   `plan/125-g1-scn02-direct-local-write-blocker-review.md`
+- G1 OBL-020/021 boundary audit and OBL-021 guard hardening:
+  `plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

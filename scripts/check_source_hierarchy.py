@@ -208,6 +208,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/123-g1-scn01-visibility-negative-actualization.md",
         "plan/124-g1-obl001-boundary-audit.md",
         "plan/125-g1-scn02-direct-local-write-blocker-review.md",
+        "plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md",
     ],
     "scripts": [
         "scripts",
