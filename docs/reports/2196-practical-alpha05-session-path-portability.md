@@ -192,7 +192,10 @@ candidates. Follow-up should start with one narrow candidate at a time.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / initial report commit:
+  `ee805858 Use relative alpha05 session helper paths`
+- Push status: pushed to `origin/main`.
+- This report commit-status update is pending at the time of this edit.
 
 ## Sub-agent session close status
 
