@@ -218,6 +218,8 @@
   `plan/112-g1-obl024-replay-vocabulary-preflight.md`
 - G1 OBL-024 Lean replay vocabulary refinement:
   `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md`
+- G1 OBL-024 Lean association vocabulary refinement:
+  `plan/114-g1-obl024-lean-association-vocabulary-refinement.md`
 - G1 OBL-025 statement-shape inventory:
   `plan/82-g1-obl025-statement-shape-inventory.md`
 - G1 E-ROW repair payload inventory:

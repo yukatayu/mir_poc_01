@@ -8,9 +8,10 @@ explanation soundness.
 The draft lives at
 `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
 It checks that the OBL-024 relation can be expressed with abstract vocabulary
-for emitted diagnostics, association keys, reported rule instances, failed
-premises, bindings, report-local replay anchors, future proof-level replay
-relations, and non-repair mixed diagnostic branch boundaries.
+for emitted diagnostics, report-local association keys, future proof-level
+diagnostic association, reported rule instances, failed premises, bindings,
+report-local replay anchors, future proof-level replay relations, and
+non-repair mixed diagnostic branch boundaries.
 
 This package does not edit canon, does not move
 `mirrorea_canon/theory/11-metatheory-ledger.md`, does not prove OBL-024, does
@@ -51,6 +52,8 @@ conformance or G1 exit.
   `plan/112-g1-obl024-replay-vocabulary-preflight.md`
 - LAB Lean replay vocabulary refinement:
   `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md`
+- LAB Lean association vocabulary refinement:
+  `plan/114-g1-obl024-lean-association-vocabulary-refinement.md`
 - LAB explanation:
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md`
 - LAB manifest:
@@ -71,17 +74,23 @@ The file defines abstract carriers and predicates:
 
 - `Vocab`: abstract types for environment, context, locus, judgment input,
   rejection, diagnostic, diagnostic id, rule instance, failed premise,
-  bindings, diagnostic family, missing evidence kind, span, association key,
-  diagnostic branch, and replay witness;
+  bindings, diagnostic family, missing evidence kind, span, report-local
+  association key, proof-level association witness, diagnostic branch,
+  report-local replay anchor, and proof-level replay witness;
 - `Pred`: abstract proposition fields for well-scoped inputs, current evidence
   boundary, covered diagnostic-soundness cases, rejecting judgments,
-  diagnostic association, association keys, diagnostic field projection,
-  actual rule instances, premise membership, binding reconstruction, replay
-  anchor compatibility, proof-level replay witness / relation, diagnostic-id /
-  diagnostic-family compatibility, missing-evidence matching, span blame, and
-  non-repair mixed-row diagnostic branch boundary predicates;
-- `DiagnosticAssociatedToRejection`: helper relation requiring the emitted
-  diagnostic and rejected judgment to share an abstract association key;
+  diagnostic-to-rejection association, report-local association keys,
+  proof-level association relation, diagnostic field projection, actual rule instances,
+  premise membership, binding reconstruction, replay anchor compatibility,
+  proof-level replay witness / relation, diagnostic-id / diagnostic-family
+  compatibility, missing-evidence matching, span blame, and non-repair
+  mixed-row diagnostic branch boundary predicates;
+- `ReportLocalAssociationKeyCompatible`: helper relation requiring the
+  diagnostic's non-final report-local association key to be compatible with
+  the scoped rejected judgment and diagnostic;
+- `DiagnosticAssociationCompatible`: helper relation requiring the scoped
+  diagnostic-to-rejection association, report-local key compatibility, and a
+  future proof-level association witness / relation;
 - `ReportedDiagnosticShape`: helper relation requiring a diagnostic to report
   id, rule, premise, bindings, family, missing evidence, and primary span;
 - `ReportLocalReplayAnchorCompatible`: helper relation requiring the
@@ -103,9 +112,12 @@ The file defines abstract carriers and predicates:
 For every well-scoped rejecting judgment input and associated diagnostic inside
 the current LAB evidence boundary, if the diagnostic is in a covered
 soundness case, then there must exist reported rule / premise / bindings /
-family / missing evidence / span / replay witnesses such that:
+family / missing evidence / span / association and replay witnesses such that:
 
-- the diagnostic and rejection share an abstract association key;
+- the diagnostic reports a non-final report-local association key compatible
+  with the scoped rejected judgment and diagnostic;
+- a future proof-level association witness / relation connects the
+  diagnostic to the rejected judgment;
 - the diagnostic reports the diagnostic id, rule instance, failed premise,
   bindings, diagnostic family, missing evidence, and primary span;
 - the reported rule instance is actual for the same judgment input and
@@ -128,7 +140,10 @@ replay implementation, diagnostic equality, diagnostic ordering, or a public
 theorem namespace. `plan/113` refines the draft so the current
 `trace_local_replay` evidence is represented by `ReportLocalReplayAnchor`,
 while `ProofLevelReplayWitness` / `ProofLevelReplayRelation` remain future
-proof-level vocabulary.
+proof-level vocabulary. `plan/114` refines the draft so the current
+`lab_association_key` evidence is represented by `ReportLocalAssociationKey`,
+while `ProofLevelAssociationWitness` / `ProofLevelAssociationRelation`
+remain future proof-level vocabulary.
 
 ## Relation to current E-ROW evidence
 
@@ -140,8 +155,11 @@ Current executable LAB evidence remains E-ROW-shaped:
   enough to name the row-containment precondition for current evidence.
 - `plan/110` adds non-final executable `diagnostic_soundness_projection`
   evidence inside current `lab_diagnostic_details`, tying the diagnostic detail
-  to helper-local diagnostic id, association key, reported bindings, and
-  report-local trace replay anchor.
+  to helper-local diagnostic id, report-local association key, reported
+  bindings, and report-local trace replay anchor.
+- `plan/114` mirrors the association part in Lean as a report-local
+  association key that can be compatible with future proof-level
+  association vocabulary, without identifying the two roles.
 - `plan/113` mirrors this in Lean as a report-local replay anchor that can be
   compatible with future proof-level replay vocabulary, without identifying the
   two roles.
@@ -184,13 +202,16 @@ repair witness, no repair ranking, and no whole-gap repair coverage relation.
 
 ## Suggested next packages
 
-1. Keep OBL-024 as compile-check-only until replay vocabulary and diagnostic
-   projection are stable enough to state a real theorem.
+1. Keep OBL-024 as compile-check-only until association vocabulary, replay
+   vocabulary, and diagnostic projection are stable enough to state a real
+   theorem.
 2. Treat `plan/110` executable projection evidence as helper-local LAB carrier
-   hardening; do not promote its JSON names or association key to final ABI.
+   hardening; do not promote its JSON names or report-local association key to final ABI.
 3. Use `plan/112` and `plan/113` when separating current report-local replay
    anchors from a future proof-level replay relation in docs and Lean.
-4. Revisit OBL-021 diagnostic equivalence only if diagnostic comparison blocks
+4. Use `plan/114` when separating current report-local association keys from
+   future proof-level association relation in docs and Lean.
+5. Revisit OBL-021 diagnostic equivalence only if diagnostic comparison blocks
    future OBL-024 proof shape.
 
 ## Non-claims

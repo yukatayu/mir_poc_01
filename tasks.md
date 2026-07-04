@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 08:44 JST
+最終更新: 2026-07-04 09:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -99,22 +99,23 @@ Current holding state:
 - `plan/109-g1-obl024-lean-statement-draft.md` now records a LAB-only
   repo-local OBL-024 Lean statement-shape draft at
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
-  It compiles as a diagnostic projection / association-key / reported failed
-  premise / report-local replay anchor / future proof-level replay relation
-  `Prop` with non-repair mixed diagnostic branch boundary predicates. It does
-  not define final Diagnostic ABI, JSON keys,
-  request IDs, branch IDs, association-key ABI, replay semantics, prove
-  OBL-024, move canon ledger status, claim root-cause uniqueness, claim
-  conformance, claim G1 exit, or edit canon.
+  It compiles as a diagnostic projection / report-local association key /
+  future proof-level association relation / reported failed premise /
+  report-local replay anchor / future proof-level replay relation `Prop` with
+  non-repair mixed diagnostic branch boundary predicates. It does not define
+  final Diagnostic ABI, JSON keys, request IDs, branch IDs,
+  association-key ABI, replay semantics, prove OBL-024, move canon ledger
+  status, claim root-cause uniqueness, claim conformance, claim G1 exit, or
+  edit canon.
 - `plan/110-g1-obl024-executable-projection-carrier.md` now records LAB-only
   executable E-ROW projection evidence for OBL-024 inside current
   `lab_diagnostic_details`. `ELAB-04/07/10/13..16` now carry non-final
   `diagnostic_soundness_projection` with helper-local diagnostic id,
-  association key, reported bindings, and report-local trace replay anchor. It
-  does not define final Diagnostic JSON / request ID / association-key ABI /
-  replay semantics, prove OBL-024, move canon ledger status, widen repair
-  output, add an `ELAB-04` payload, claim conformance, claim G1 exit, or edit
-  canon.
+  report-local association key, reported bindings, and report-local trace
+  replay anchor. It does not define final Diagnostic JSON / request ID /
+  association-key ABI / replay semantics, prove OBL-024, move canon ledger
+  status, widen repair output, add an `ELAB-04` payload, claim conformance,
+  claim G1 exit, or edit canon.
 - `plan/111-g1-obl024-projection-rust-fixture-guards.md` now records test-only
   Rust fixture guard hardening for the same carrier. Rust tests now guard
   projection/context consistency and skipped internal association-field
@@ -136,6 +137,13 @@ Current holding state:
   tests. It does not prove OBL-024, move canon ledger status, freeze final
   Diagnostic / replay ABI, change runtime JSON, change repair output, claim
   conformance, claim G1 exit, or edit canon.
+- `plan/114-g1-obl024-lean-association-vocabulary-refinement.md` now records
+  the LAB-only Lean refinement that separates `ReportLocalAssociationKey` from
+  `ProofLevelAssociationWitness` / `ProofLevelAssociationRelation` and
+  guards that vocabulary in the Lean sync unit tests. It does not prove
+  OBL-024, move canon ledger status, freeze final Diagnostic /
+  association-key / replay ABI, change runtime JSON, change repair output,
+  claim conformance, claim G1 exit, or edit canon.
 - `plan/82-g1-obl025-statement-shape-inventory.md` now inventories the
   statement shape for OBL-025 explanation completeness: Line-1 rejection,
   declared fragment, single-edit repair existence, non-empty suggested repair,

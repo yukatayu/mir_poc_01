@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 08:44 JST
+最終更新: 2026-07-04 09:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -134,13 +134,17 @@ semantic source authority.
   repo-local Lean statement-shape draft at
   `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`.
   It compiles as a diagnostic-soundness `Prop` over abstract diagnostic
-  projection, association-key, reported rule / premise / bindings,
-  report-local replay anchor, future proof-level replay relation, and
-  non-repair mixed diagnostic branch predicates. `plan/113` now refines the
-  draft so current `trace_local_replay` evidence is represented by
-  `ReportLocalReplayAnchor`, while `ProofLevelReplayWitness` /
-  `ProofLevelReplayRelation` remain future proof-level vocabulary. It does not
-  move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
+  projection, report-local association key, future proof-level diagnostic
+  association, reported rule / premise / bindings, report-local replay anchor,
+  future proof-level replay relation, and non-repair mixed diagnostic branch
+  predicates. `plan/113` refines the draft so current `trace_local_replay`
+  evidence is represented by `ReportLocalReplayAnchor`, while
+  `ProofLevelReplayWitness` / `ProofLevelReplayRelation` remain future
+  proof-level vocabulary. `plan/114` refines the draft so current
+  `lab_association_key` evidence is represented by
+  `ReportLocalAssociationKey`, while `ProofLevelAssociationWitness` /
+  `ProofLevelAssociationRelation` remain future proof-level vocabulary. It
+  does not move canon OBL status, prove OBL-024, freeze Diagnostic ABI /
   request ID / branch ID / association-key ABI / replay semantics, claim
   root-cause uniqueness, claim conformance, or claim G1 exit.
 - Current OBL-024 executable projection carrier note:
@@ -148,7 +152,8 @@ semantic source authority.
   executable E-ROW projection evidence inside current `lab_diagnostic_details`.
   `ELAB-04/07/10/13..16` now carry non-final
   `diagnostic_soundness_projection` with helper-local diagnostic id,
-  association key, reported bindings, and report-local trace replay anchor.
+  report-local association key, reported bindings, and report-local trace
+  replay anchor.
   This does not move canon OBL status, prove OBL-024, freeze Diagnostic JSON /
   request ID / association-key ABI / replay semantics, widen repair output, add
   an `ELAB-04` payload, claim conformance, or claim G1 exit.
@@ -724,7 +729,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / association-key / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -737,7 +742,16 @@ exclusion fixtures, `ELAB-04` no-repair payload-model preflight, OBL-025
 branch-local non-coverage refinement, OBL-024 diagnostic-soundness Lean
 statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
 guard hardening, OBL-024 replay vocabulary preflight, and OBL-024 Lean replay
-vocabulary refinement.
+vocabulary refinement, plus OBL-024 Lean association vocabulary refinement.
+
+- 2026-07-04 09:04 JST
+  `plan/114-g1-obl024-lean-association-vocabulary-refinement.md` を追加し、
+  `samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean`
+  の association vocabulary を `ReportLocalAssociationKey` と
+  `ProofLevelAssociationWitness` / `ProofLevelAssociationRelation` に分けた。
+  Lean compile と sync unit test で確認したが、OBL-024 proof / completion、
+  canon ledger movement、final Diagnostic / association-key / replay ABI、
+  runtime JSON、repair output、conformance、G1 exit は主張しない。
 
 - 2026-07-04 08:44 JST
   `plan/113-g1-obl024-lean-replay-vocabulary-refinement.md` を追加し、

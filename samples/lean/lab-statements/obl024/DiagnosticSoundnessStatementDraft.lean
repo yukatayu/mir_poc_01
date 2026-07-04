@@ -5,7 +5,9 @@ This file checks that diagnostic explanation soundness can be expressed as Lean
 propositions without importing final MirCore diagnostic datatypes, final JSON
 fields, replay engines, conformance evidence, repair payloads, or
 proof-obligation status changes. The report-local replay anchor is kept
-separate from the future proof-level replay witness/relation.
+separate from the future proof-level replay witness/relation, and the
+report-local association key is kept separate from future proof-level
+diagnostic association.
 -/
 
 namespace MirCore.Lab.OBL024.StatementDraft
@@ -26,7 +28,8 @@ structure Vocab where
   DiagnosticFamily : Type u
   MissingEvidenceKind : Type u
   Span : Type u
-  AssociationKey : Type u
+  ReportLocalAssociationKey : Type u
+  ProofLevelAssociationWitness : Type u
   DiagnosticBranch : Type u
   ReportLocalReplayAnchor : Type u
   ProofLevelReplayWitness : Type u
@@ -40,12 +43,32 @@ structure Pred (V : Vocab.{u}) where
     V.JudgmentInput -> V.Rejection -> V.Diagnostic -> Prop
   Rejects :
     V.Env -> V.Ctx -> V.Locus -> V.JudgmentInput -> V.Rejection -> Prop
-  AssociatedEmittedDiagnostic :
-    V.JudgmentInput -> V.Rejection -> V.Diagnostic -> Prop
-  RejectionAssociationKey :
-    V.JudgmentInput -> V.Rejection -> V.AssociationKey -> Prop
-  DiagnosticAssociationKey :
-    V.Diagnostic -> V.AssociationKey -> Prop
+  DiagnosticAssociatedToRejection :
+    V.Env -> V.Ctx -> V.Locus -> V.JudgmentInput -> V.Rejection -> V.Diagnostic -> Prop
+  DiagnosticReportsReportLocalAssociationKey :
+    V.Diagnostic -> V.ReportLocalAssociationKey -> Prop
+  ReportLocalAssociationKeyFor :
+    V.Env ->
+      V.Ctx ->
+      V.Locus ->
+      V.JudgmentInput ->
+      V.Rejection ->
+      V.Diagnostic ->
+      V.ReportLocalAssociationKey ->
+      Prop
+  ReportLocalAssociationKeyNonFinal :
+    V.ReportLocalAssociationKey -> Prop
+  ProofLevelAssociationWitnessFor :
+    V.Env ->
+      V.Ctx ->
+      V.Locus ->
+      V.JudgmentInput ->
+      V.Rejection ->
+      V.Diagnostic ->
+      V.ProofLevelAssociationWitness ->
+      Prop
+  ProofLevelAssociationRelation :
+    V.ProofLevelAssociationWitness -> Prop
   DiagnosticReportsId :
     V.Diagnostic -> V.DiagnosticId -> Prop
   DiagnosticReportsRuleInstance :
@@ -127,16 +150,37 @@ structure Pred (V : Vocab.{u}) where
   BranchesAreNotIndependentPremises :
     V.Diagnostic -> V.DiagnosticBranch -> V.FailedPremise -> Prop
 
-def DiagnosticAssociatedToRejection
+def ReportLocalAssociationKeyCompatible
     {V : Vocab.{u}}
     (P : Pred V)
+    (env : V.Env)
+    (ctx : V.Ctx)
+    (locus : V.Locus)
     (input : V.JudgmentInput)
     (rejection : V.Rejection)
     (diagnostic : V.Diagnostic)
-    (key : V.AssociationKey) : Prop :=
-  P.AssociatedEmittedDiagnostic input rejection diagnostic /\
-    P.RejectionAssociationKey input rejection key /\
-    P.DiagnosticAssociationKey diagnostic key
+    (key : V.ReportLocalAssociationKey) : Prop :=
+  P.DiagnosticReportsReportLocalAssociationKey diagnostic key /\
+    P.ReportLocalAssociationKeyFor env ctx locus input rejection diagnostic key /\
+    P.ReportLocalAssociationKeyNonFinal key
+
+def DiagnosticAssociationCompatible
+    {V : Vocab.{u}}
+    (P : Pred V)
+    (env : V.Env)
+    (ctx : V.Ctx)
+    (locus : V.Locus)
+    (input : V.JudgmentInput)
+    (rejection : V.Rejection)
+    (diagnostic : V.Diagnostic)
+    (key : V.ReportLocalAssociationKey)
+    (association : V.ProofLevelAssociationWitness) : Prop :=
+  P.DiagnosticAssociatedToRejection env ctx locus input rejection diagnostic /\
+    ReportLocalAssociationKeyCompatible
+      P env ctx locus input rejection diagnostic key /\
+    P.ProofLevelAssociationWitnessFor
+      env ctx locus input rejection diagnostic association /\
+    P.ProofLevelAssociationRelation association
 
 def ReportedDiagnosticShape
     {V : Vocab.{u}}
@@ -217,8 +261,11 @@ def DiagnosticSoundForRejection
     (input : V.JudgmentInput)
     (rejection : V.Rejection)
     (diagnostic : V.Diagnostic) : Prop :=
-  exists key diagnosticId rule premise bindings family missing span anchor replay,
-    DiagnosticAssociatedToRejection P input rejection diagnostic key /\
+  exists
+      key association diagnosticId rule premise bindings family missing span
+      anchor replay,
+    DiagnosticAssociationCompatible
+      P env ctx locus input rejection diagnostic key association /\
       ReportedDiagnosticShape
         P diagnostic diagnosticId rule premise bindings family missing span anchor /\
       ReplaySoundAtReportedPremise
@@ -243,7 +290,8 @@ def OBL024StatementDraft
       P.CurrentEvidenceBoundary diagnostic ->
       P.CoveredDiagnosticSoundnessCase input rejection diagnostic ->
       P.Rejects env ctx locus input rejection ->
-      P.AssociatedEmittedDiagnostic input rejection diagnostic ->
+      P.DiagnosticAssociatedToRejection
+        env ctx locus input rejection diagnostic ->
         DiagnosticSoundForRejection
           P env ctx locus input rejection diagnostic
 

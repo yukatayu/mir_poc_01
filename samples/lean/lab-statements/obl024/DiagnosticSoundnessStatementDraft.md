@@ -8,6 +8,8 @@
   Diagnostic ABI, replay engine, conformance statement, or canon ledger update.
 - It separates the current report-local replay anchor from the future
   proof-level replay relation.
+- It separates the current report-local association key from future proof-level
+  diagnostic association.
 
 ## Why this file exists
 
@@ -30,9 +32,13 @@
 `OBL024StatementDraft` states an abstract soundness shape:
 
 - a well-scoped judgment input rejects;
-- a diagnostic is associated with that rejection;
+- a diagnostic-to-rejection association is scoped to the same environment,
+  context, and locus as the rejection;
 - the diagnostic lies inside the current LAB evidence boundary;
-- the diagnostic and rejection share an abstract association key;
+- the diagnostic reports a non-final report-local association key compatible
+  with the scoped rejected judgment;
+- a future proof-level association witness / relation relates the diagnostic to
+  the rejected judgment;
 - the diagnostic reports a diagnostic id, rule instance, failed premise,
   bindings, diagnostic family, missing evidence, primary span, and
   report-local replay anchor;
@@ -65,8 +71,19 @@ proof-level relation, public API, or final Diagnostic ABI.
 draft from claiming all diagnostic families. Current executable evidence is
 E-ROW-shaped, but the Lean vocabulary is not hard-coded to E-ROW.
 
-`AssociationKey` and `DiagnosticBranch` are abstract proof-shape carriers. They
-are not final request IDs, branch IDs, JSON keys, diagnostic fields, or ABI.
+`DiagnosticAssociatedToRejection` names the scoped candidate semantic
+association relation. `ReportLocalAssociationKey` models the current
+helper-local association key inside LAB diagnostic projection evidence. It is
+deliberately separate from `ProofLevelAssociationWitness` and
+`ProofLevelAssociationRelation`, which name future proof-level association
+relation vocabulary. The report-local association key can help design the
+future proof relation, but it is not a final request ID, branch ID, JSON key,
+diagnostic field, or association-key ABI.
+This is diagnostic-to-rejection association vocabulary only; it does not define
+final emitted diagnostic identity or ordering.
+
+`DiagnosticBranch` is an abstract proof-shape carrier. It is not a final branch
+ID, JSON key, diagnostic field, or ABI.
 `DiagnosticBranch` is deliberately non-repair vocabulary and is separate from
 the OBL-025 `RepairBranch` vocabulary.
 
@@ -77,6 +94,8 @@ For current E-ROW evidence, the intended instantiation is:
 - rule instance: row containment for generated remote requests;
 - failed premise: `generated_failures_subset_declared_fails`;
 - bindings: generated request context plus failure-row context;
+- report-local association key: the current helper-local key connecting the
+  diagnostic to the generated request / failure-row context;
 - missing evidence: missing generated failure families;
 - report-local replay anchor: the current helper-local
   `trace_local_replay` record for the generated request and surrounding
@@ -88,8 +107,9 @@ For current E-ROW evidence, the intended instantiation is:
 This is a LAB reading of current evidence only. `generated_failure_not_declared`,
 `lab_diagnostic_details`, and the current `diagnostic_soundness_projection`
 field remain helper-local / non-final carrier evidence. The current
-`trace_local_replay` object is a report-local replay anchor, not final
-proof-level replay semantics.
+  `trace_local_replay` object is a report-local replay anchor, not final
+  proof-level replay semantics. Likewise, the current `lab_association_key` is a
+  report-local association key, not final proof-level association relation.
 For mixed rows such as `ELAB-04`, the top-level diagnostic owns the failed
 premise while every branch of the diagnostic gap remains classification /
 partition evidence for base / visibility pressure without turning into an

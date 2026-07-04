@@ -7,10 +7,11 @@ Current draft:
 
 - `DiagnosticSoundnessStatementDraft.lean`: compile-check-only OBL-024 shape
   with abstract diagnostic projection, reported rule / failed premise /
-  bindings, association key, trace-local replay, diagnostic-family
-  compatibility, missing evidence matching, span-blame predicates, and
-  non-repair mixed diagnostic branch boundary predicates for every branch of a
-  mixed diagnostic gap.
+  bindings, report-local association key, future proof-level diagnostic
+  association, report-local replay anchor, future proof-level replay relation,
+  diagnostic-family compatibility, missing evidence matching, span-blame
+  predicates, and non-repair mixed diagnostic branch boundary predicates for
+  every branch of a mixed diagnostic gap.
 - Current executable Surface elaboration evidence also emits a non-final
   `diagnostic_soundness_projection` carrier in `lab_diagnostic_details` for
   `ELAB-04/07/10/13..16`; that carrier is implementation-side LAB evidence, not

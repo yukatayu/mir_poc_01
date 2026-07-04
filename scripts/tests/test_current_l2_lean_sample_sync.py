@@ -136,6 +136,41 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertIn("report-local replay anchor", explanation_text)
         self.assertIn("proof-level replay relation", explanation_text)
 
+    def test_obl024_draft_names_association_vocabulary_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertIn("ReportLocalAssociationKey : Type u", lean_text)
+        self.assertIn("ProofLevelAssociationWitness : Type u", lean_text)
+        self.assertIn("DiagnosticAssociatedToRejection", lean_text)
+        self.assertIn("DiagnosticReportsReportLocalAssociationKey", lean_text)
+        self.assertIn("ReportLocalAssociationKeyFor", lean_text)
+        self.assertIn("ReportLocalAssociationKeyCompatible", lean_text)
+        self.assertIn("DiagnosticAssociationCompatible", lean_text)
+        self.assertIn("ProofLevelAssociationRelation", lean_text)
+        self.assertNotRegex(lean_text, r"(?m)^\s*AssociationKey\s*:\s*Type u\b")
+        self.assertNotIn("DiagnosticAssociationKey", lean_text)
+        self.assertNotIn("AssociatedEmittedDiagnostic", lean_text)
+        self.assertNotIn("RequestId", lean_text)
+        self.assertNotIn("BranchAssociationKey", lean_text)
+        self.assertNotIn("FinalAssociationKey", lean_text)
+        self.assertNotIn("DecidableEq V.ReportLocalAssociationKey", lean_text)
+        self.assertNotIn("Function.Injective", lean_text)
+        self.assertNotIn("Function.Surjective", lean_text)
+        self.assertIn("env ctx locus input rejection diagnostic key association", lean_text)
+        self.assertIn("report-local association key", explanation_text)
+        self.assertIn("diagnostic-to-rejection association", explanation_text)
+        self.assertIn("proof-level association relation", explanation_text)
+
 
 if __name__ == "__main__":
     unittest.main()
