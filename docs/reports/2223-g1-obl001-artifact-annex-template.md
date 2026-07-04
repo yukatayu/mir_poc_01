@@ -292,7 +292,19 @@ Reason:
 
 ## Commit / push status
 
-Not yet committed at initial report creation.
+Substantive commit:
+
+- `403ef6e11cf9e3ec5c4ff698d2652ebc2da4d63f`
+  (`Add G1 OBL001 artifact annex template`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- `HEAD == origin/main` confirmed after push.
+
+This report was then updated to record the substantive commit and push status.
+The follow-up report-status commit is intentionally not recursively recorded in
+this report.
 
 ## Sub-agent session close status
 
