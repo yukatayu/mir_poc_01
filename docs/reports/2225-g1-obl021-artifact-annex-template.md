@@ -218,7 +218,14 @@ None.
 
 ## Commit / push status
 
-Not yet committed at pre-commit report update.
+Substantive P87 commit:
+
+- `bb55deb4ed1e6d7647a8b2bc19a701738664832d`
+- Commit message: `Add G1 OBL021 artifact annex template`
+- Push status: pushed to `origin/main`
+
+This report status update is pending a report-only follow-up commit at the time
+this section is written.
 
 ## Sub-agent session close status
 
