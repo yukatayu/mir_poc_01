@@ -142,6 +142,9 @@ G1 status packet shell in `plan/141`.
 - Post-edit OBL-001/020/021 admitted-stub / placeholder-body `rg` scan.
 - Post-edit tracked Discord webhook full URL / token-prefix scan excluding
   `.codex-discord`.
+- `git commit --no-gpg-sign -m "Add G1 status packet shell evidence dry-run"`
+- `git push`
+- `git rev-parse HEAD`
 
 ## Evidence / outputs / test results
 
@@ -172,7 +175,8 @@ G1 status packet shell in `plan/141`.
   artifact was created.
 - Read-only reviewer `019f2d84-0c47-7df2-9f3b-e18e279cd7c7`: one medium
   report-closeout finding, fixed in this report update.
-- Commit / push pending at this report update.
+- Substantive commit / push completed:
+  `d1a2ddc8661cca6574c17dd2b3fa1f8ac0688b76`.
 
 ## What changed in understanding
 
@@ -226,8 +230,8 @@ validation command, debug surface, or blocker changed.
 Read-only reviewer `019f2d84-0c47-7df2-9f3b-e18e279cd7c7` found one medium
 report-closeout issue: the report still had initial pending validation,
 reviewer, and commit/push text. This update replaces validation and reviewer
-pending text with concrete results. Commit hash remains pending until the
-substantive commit and push complete.
+pending text with concrete results. The substantive commit hash is now
+recorded; this report-only hash update will be committed separately.
 
 ## Skipped validations and reasons
 
@@ -235,7 +239,9 @@ None.
 
 ## Commit / push status
 
-Pre-commit validation passed. Commit / push still pending at this report update.
+Substantive package committed and pushed as
+`d1a2ddc8661cca6574c17dd2b3fa1f8ac0688b76`. This report-only commit-status
+update remains to be committed and pushed separately.
 
 ## Sub-agent session close status
 
