@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 11:47 JST
+最終更新: 2026-07-04 12:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -78,6 +78,14 @@ Current holding state:
   host absolute paths, and release-check reports / bundle / viewer display
   output-root paths relatively. This is maintenance hardening only; no sample
   status, semantics, ABI, or execution-scope claim changed.
+- Product Alpha release-check and generated evidence now preserve portability
+  for repo-owned source inputs: release-check representative CLI argv use
+  repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate
+  output displays release-owned paths relative to its output root, and
+  generated demo / native provenance / Docker compose source fields avoid
+  repo-root absolute paths. This is maintenance hardening only; Product Alpha
+  remains alpha release-candidate evidence, not final product or broader
+  distribution.
 - `plan/71-g1-ordinary-assignment-target.md` now drafts the LAB-only G1
   ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
   theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,

@@ -52,6 +52,45 @@ def cargo_test_args(*args: str) -> list[str]:
     return ["cargo", "test", *args, "--", "--nocapture"]
 
 
+def repo_relative_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_relative_path(path: Path, out_dir: Path) -> str:
+    try:
+        return path.relative_to(out_dir).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_display_text(value: str, out_dir: Path) -> str:
+    text = value
+    for root in sorted({str(REPO_ROOT), str(out_dir)}, key=len, reverse=True):
+        text = text.replace(root + "/", "")
+        text = text.replace(root, ".")
+    return text
+
+
+def release_display_value(value: Any, out_dir: Path) -> Any:
+    if isinstance(value, str):
+        display = release_display_text(value, out_dir)
+        path = Path(display)
+        if path.is_absolute():
+            return release_relative_path(path, out_dir)
+        return display
+    if isinstance(value, list):
+        return [release_display_value(item, out_dir) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: release_display_value(item, out_dir)
+            for key, item in value.items()
+        }
+    return value
+
+
 def validation_command(name: str, argv: list[str]) -> PlannedCommand:
     return PlannedCommand(name=name, argv=argv, json_required=False)
 
@@ -62,7 +101,7 @@ def plan_check_all(out_dir: Path, include_docker: bool = True) -> CommandPlan:
     native_bundle_dir = out_dir / "native-bundle"
     demo_dir = out_dir / "demo"
     session_id = "session#product-alpha1-demo"
-    package = str(DEFAULT_PACKAGE)
+    package = repo_relative_arg(DEFAULT_PACKAGE)
     commands = [
         validation_command(
             "validation:test-validate-docs",
@@ -316,7 +355,7 @@ def check_all(out_dir: Path | None = None, include_docker: bool = True) -> dict[
     if out_dir is None:
         out_dir = Path(tempfile.mkdtemp(prefix="mirrorea-alpha1-release-"))
     elif out_dir.exists() and any(out_dir.iterdir()):
-        return {
+        return release_display_value({
             "surface_kind": "product_alpha1_release_check_report",
             "status": "error",
             "command": "check-all",
@@ -332,7 +371,7 @@ def check_all(out_dir: Path | None = None, include_docker: bool = True) -> dict[
             "final_product_claimed": False,
             "final_public_api_frozen": False,
             "non_claims": release_non_claims(include_docker),
-        }
+        }, out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     plan = plan_check_all(out_dir=out_dir, include_docker=include_docker)
     plan.session_dir.mkdir(parents=True, exist_ok=True)
@@ -364,7 +403,7 @@ def check_all(out_dir: Path | None = None, include_docker: bool = True) -> dict[
     ]
     status = "accepted" if not failed and include_docker else "partial" if not failed else "error"
     release_ready = not failed and include_docker
-    return {
+    return release_display_value({
         "surface_kind": "product_alpha1_release_check_report",
         "status": status,
         "command": "check-all",
@@ -394,7 +433,7 @@ def check_all(out_dir: Path | None = None, include_docker: bool = True) -> dict[
         "final_product_claimed": False,
         "final_public_api_frozen": False,
         "non_claims": release_non_claims(include_docker),
-    }
+    }, out_dir)
 
 
 def print_payload(payload: dict[str, Any], fmt: str) -> None:

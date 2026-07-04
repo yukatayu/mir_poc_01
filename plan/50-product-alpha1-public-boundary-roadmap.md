@@ -19,6 +19,11 @@ Current repo already has:
 - bounded operational alpha-0.9 session-bound devtools workflow
 - bounded practical alpha-1 integrated workflow carrier
 - product alpha release-candidate workflow through `mirrorea-alpha demo`, local/Docker transport, concrete non-final viewer, local R0/R2 save/load, native host launch bundle, clean-clone hands-on docs, and `scripts/product_alpha1_release_check.py check-all`
+- Product Alpha release-check and generated evidence path-portability hardening:
+  in-repo sample CLI argv now use repo-relative `samples/...` paths, the
+  release-check aggregate display uses output-root-relative paths for
+  release-owned artifacts, and generated demo / native provenance / Docker
+  compose source fields no longer serialize repo-root absolute paths
 - installed-binary adoption probe through `scripts/product_alpha1_installed_binary_check.py check-all`, built `target/debug/mirrorea-alpha`, and bundle `run.sh check` / `run.sh view`
 
 Current repo still lacks final-public hardening beyond product alpha-1:
@@ -304,6 +309,7 @@ Delivered:
 
 - `mirrorea-alpha demo [package] --out <dir>` runs the product release-candidate workflow and writes reports, concrete non-final devtools assets, an observer-safe session artifact, an admin/debug local session store, and a native host launch bundle.
 - `scripts/product_alpha1_release_check.py check-all` runs the required validation floor, focused tests, documented command family, native bundle run script probes, and JSON payload semantics for clean-clone validation.
+- `scripts/product_alpha1_release_check.py check-all` now keeps in-repo sample CLI argv repo-relative and serializes its own release-owned output paths relative to the chosen output root. Generated Product Alpha demo reports, native bundle provenance, and Docker compose source fields store repo-relative `samples/...` paths for repo-owned source inputs.
 - `docs/hands_on/product_alpha1_01.md` and `docs/research_abstract/product_alpha1_01.md` document the reproducible product alpha path and non-claims.
 - `samples/product-alpha1/demo/` now declares source-backed admin membership/capability authority for debug/auth/rate-limit layer packages plus object/avatar-preview packages. Layer attach is accepted when auth/capability evidence is present; object/avatar-preview attach remains deferred boundary evidence.
 - Docker skip paths are partial local probes and do not set release-candidate readiness.
@@ -311,6 +317,7 @@ Delivered:
 Validation:
 
 - full product release validation floor
+- path-portability scan for repo-root absolute source paths in release-check output and generated demo/native/Docker evidence
 - clean worktree
 - commit / push complete
 

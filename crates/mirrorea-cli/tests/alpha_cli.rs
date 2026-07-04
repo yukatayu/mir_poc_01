@@ -224,6 +224,10 @@ fn unimplemented_commands_reject_direct_mir_with_non_goal_diagnostic() {
 
 #[test]
 fn demo_skip_docker_runs_local_probe_without_release_candidate_claim() {
+    let repo_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("crate should live under repo/crates/mirrorea-cli");
     let out_dir = unique_temp_dir("mirrorea-alpha-out");
     let output = run_cli(&[
         "demo",
@@ -244,6 +248,13 @@ fn demo_skip_docker_runs_local_probe_without_release_candidate_claim() {
     assert_eq!(value["surface_kind"], "product_alpha1_demo_report");
     assert_eq!(value["status"], "partial");
     assert_eq!(value["command"], "demo");
+    assert_eq!(value["package_path"], "samples/product-alpha1/demo");
+    assert!(
+        !value["package_path"]
+            .as_str()
+            .unwrap()
+            .starts_with(repo_root.to_str().unwrap())
+    );
     assert_eq!(value["product_alpha1_release_candidate_ready"], false);
     assert_eq!(value["product_alpha1_ready"], false);
     assert_eq!(value["final_public_api_frozen"], false);
@@ -288,6 +299,11 @@ fn demo_skip_docker_runs_local_probe_without_release_candidate_claim() {
             "demo should write {relative}"
         );
     }
+    let demo_json = fs::read_to_string(out_dir.join("reports/demo.json")).unwrap();
+    assert!(
+        !demo_json.contains(repo_root.to_str().unwrap()),
+        "demo report should not serialize repo-root absolute sample paths"
+    );
     let session_path = PathBuf::from(value["session_path"].as_str().unwrap());
     assert!(session_path.exists(), "demo session_path should exist");
     let observer_safe_session = fs::read_to_string(&session_path).unwrap();
@@ -487,6 +503,19 @@ fn build_native_bundle_emits_host_launch_bundle_without_native_package_execution
 
     let manifest: Value =
         serde_json::from_str(&fs::read_to_string(out_dir.join("manifest.json")).unwrap()).unwrap();
+    let provenance: Value =
+        serde_json::from_str(&fs::read_to_string(out_dir.join("provenance.json")).unwrap())
+            .unwrap();
+    assert_eq!(
+        provenance["source_package_root"],
+        "samples/product-alpha1/demo"
+    );
+    assert!(
+        !fs::read_to_string(out_dir.join("provenance.json"))
+            .unwrap()
+            .contains(repo_root.to_str().unwrap()),
+        "native bundle provenance should not serialize repo-root absolute source paths"
+    );
     assert_eq!(
         manifest["surface_kind"],
         "product_alpha1_native_launch_bundle_manifest"
@@ -794,6 +823,13 @@ fn build_native_bundle_copies_only_declared_package_files() {
     assert!(package_bundle.join("package.mir.json").exists());
     assert!(!package_bundle.join(".secret-note").exists());
     assert!(!package_bundle.join("tmp-generated/debug.log").exists());
+    let provenance: Value =
+        serde_json::from_str(&fs::read_to_string(out_dir.join("provenance.json")).unwrap())
+            .unwrap();
+    assert_eq!(
+        provenance["source_package_root"],
+        package_dir.to_str().expect("package dir should be utf-8")
+    );
 }
 
 #[test]

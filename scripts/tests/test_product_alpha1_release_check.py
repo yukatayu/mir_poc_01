@@ -17,6 +17,74 @@ def empty_out_dir() -> Path:
 
 
 class ProductAlpha1ReleaseCheckTests(unittest.TestCase):
+    def test_plan_cli_commands_use_repo_relative_sample_paths(self) -> None:
+        plan = runner.plan_check_all(
+            out_dir=Path("/tmp/mirrorea-alpha1-release"),
+            include_docker=True,
+        )
+        sample_args = [
+            arg
+            for command in plan.commands
+            for arg in command.argv
+            if "product-alpha1/demo" in arg
+        ]
+
+        self.assertTrue(sample_args)
+        self.assertTrue(
+            all(arg.startswith("samples/product-alpha1/demo") for arg in sample_args),
+            sample_args,
+        )
+        self.assertFalse(any(arg.startswith(str(REPO_ROOT)) for arg in sample_args))
+
+    def test_check_all_serializes_release_owned_paths_without_host_prefixes(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="mirrorea-alpha1-release-home-"))
+        out_dir = root / "home" / "someone" / "mirrorea-alpha1-release"
+
+        def fake_run(command, env=None):
+            return runner.CommandResult(
+                name=command.name,
+                argv=command.argv,
+                returncode=0,
+                stdout=json.dumps(payload_for(command.name)),
+                stderr=(
+                    f"warning at {REPO_ROOT}/samples/product-alpha1/demo "
+                    f"and {out_dir}/devtools/bundle.json"
+                )
+                if command.name == "demo"
+                else "",
+                payload=payload_for(command.name),
+                semantic_errors=[],
+            )
+
+        with mock.patch.object(runner, "run_command", side_effect=fake_run):
+            payload = runner.check_all(
+                out_dir=out_dir,
+                include_docker=True,
+            )
+
+        text = json.dumps(payload, sort_keys=True)
+        self.assertNotIn("/home/", text)
+        self.assertNotIn("/Users/", text)
+        self.assertEqual(payload["out_dir"], ".")
+        self.assertEqual(payload["session_dir"], "session-store")
+        self.assertEqual(payload["devtools_dir"], "devtools")
+        self.assertEqual(payload["native_bundle_dir"], "native-bundle")
+        self.assertEqual(payload["demo_dir"], "demo")
+        demo_result = next(
+            result for result in payload["command_results"] if result["name"] == "demo"
+        )
+        self.assertIn("samples/product-alpha1/demo", demo_result["stderr"])
+        self.assertIn("devtools/bundle.json", demo_result["stderr"])
+
+    def test_repo_relative_helpers_preserve_external_paths(self) -> None:
+        external_path = Path("/opt/external/product-alpha1-demo")
+
+        self.assertEqual(runner.repo_relative_arg(external_path), str(external_path))
+        self.assertEqual(
+            runner.release_relative_path(external_path, Path("/tmp/mirrorea-alpha1-release")),
+            str(external_path),
+        )
+
     def test_plan_commands_includes_full_product_flow(self) -> None:
         plan = runner.plan_check_all(
             out_dir=Path("/tmp/mirrorea-alpha1-release"),

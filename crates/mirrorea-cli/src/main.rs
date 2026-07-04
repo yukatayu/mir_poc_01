@@ -1060,7 +1060,7 @@ fn apply_docker_compose_evidence(
     report.wire_roundtrip_executed = true;
     report.wire_bind_addr = "docker-compose://product_alpha1_net/world:41002".to_string();
     report.wire_response_status = evidence.participant_report.terminal_outcome.clone();
-    report.docker_compose_file = evidence.compose_file.display().to_string();
+    report.docker_compose_file = repo_relative_display_path(&evidence.compose_file);
     report.docker_compose_output_dir = evidence.output_dir.display().to_string();
     report.docker_world_report_path = evidence.world_report_path.display().to_string();
     report.docker_participant_report_path = evidence.participant_report_path.display().to_string();
@@ -1121,6 +1121,14 @@ fn repo_root() -> PathBuf {
         .and_then(Path::parent)
         .expect("crate should live under repo/crates/mirrorea-cli")
         .to_path_buf()
+}
+
+fn repo_relative_display_path(path: &Path) -> String {
+    let root = repo_root();
+    match path.strip_prefix(&root) {
+        Ok(relative) => relative.to_string_lossy().replace('\\', "/"),
+        Err(_) => path.display().to_string(),
+    }
 }
 
 fn default_product_alpha1_demo_path() -> PathBuf {
@@ -1500,7 +1508,7 @@ fn build_product_alpha1_demo(
         "surface_kind": "product_alpha1_demo_report",
         "status": demo_status,
         "command": "demo",
-        "package_path": package_path.display().to_string(),
+        "package_path": repo_relative_display_path(package_path),
         "out_dir": absolute_out_dir.display().to_string(),
         "session_id": session.session_id,
         "session_path": observer_safe_session_path.display().to_string(),
@@ -4037,7 +4045,7 @@ fn native_bundle_provenance_payload(
         "signature_is_safety_claimed": false,
         "package_id": package.package_id,
         "package_version": package.package_version,
-        "source_package_root": package_root.display().to_string(),
+        "source_package_root": repo_relative_display_path(package_root),
         "bundled_package_root": package_bundle_dir.display().to_string(),
         "runtime_binary_path": binary_path.display().to_string(),
         "runtime_binary_fnv64": stable_file_hash(binary_path).unwrap_or_else(|_| "unavailable".to_string()),
@@ -4400,4 +4408,103 @@ fn print_payload(_format: &str, payload: Value) {
         "{}",
         serde_json::to_string_pretty(&payload).expect("payload should serialize")
     );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use mir_runtime::product_alpha1_transport::ProductAlpha1LanePreservation;
+
+    fn transport_report_fixture() -> ProductAlpha1TransportReport {
+        ProductAlpha1TransportReport {
+            surface_kind: "product_alpha1_transport_report".to_string(),
+            session_id: "session#product-alpha1-demo".to_string(),
+            mode: "docker".to_string(),
+            transport_medium: "docker_compose_tcp".to_string(),
+            transport_seam: "product_docker_compose_tcp".to_string(),
+            envelope_id: "envelope#test".to_string(),
+            route_id: "route#test".to_string(),
+            terminal_outcome: "accepted".to_string(),
+            wire_roundtrip_executed: false,
+            wire_bind_addr: "not_applicable".to_string(),
+            wire_response_status: "not_applicable".to_string(),
+            lane_preservation: ProductAlpha1LanePreservation {
+                transport_lane: "product_docker_compose_tcp".to_string(),
+                auth_lane_preserved: true,
+                membership_lane_preserved: true,
+                capability_lane_preserved: true,
+                witness_lane_preserved: true,
+            },
+            local_transport_executed: false,
+            docker_compose_tcp_claimed: true,
+            docker_compose_executed: false,
+            docker_compose_execution_status: "not_run".to_string(),
+            docker_compose_file: "not_applicable".to_string(),
+            docker_compose_output_dir: "not_applicable".to_string(),
+            docker_world_report_path: "not_applicable".to_string(),
+            docker_participant_report_path: "not_applicable".to_string(),
+            docker_world_terminal_outcome: "not_applicable".to_string(),
+            docker_participant_terminal_outcome: "not_applicable".to_string(),
+            host_cli_fixture_execution: false,
+            package_native_execution_claimed: false,
+            native_execution_policy: "package_native_execution_disabled".to_string(),
+            wan_federation_claimed: false,
+            non_claims: vec![],
+            product_alpha1_ready: false,
+            final_public_api_frozen: false,
+        }
+    }
+
+    fn endpoint_report_fixture(role: &str) -> ProductAlpha1TransportEndpointReport {
+        ProductAlpha1TransportEndpointReport {
+            surface_kind: "product_alpha1_transport_endpoint_report".to_string(),
+            role: role.to_string(),
+            session_id: "session#product-alpha1-demo".to_string(),
+            package_id: "product-alpha1-demo".to_string(),
+            endpoint: format!("{role}:41002"),
+            transport_medium: "docker_compose_tcp".to_string(),
+            transport_lane: "product_docker_compose_tcp".to_string(),
+            terminal_outcome: "accepted".to_string(),
+            rejection_reason_refs: vec![],
+            auth_lane_preserved: true,
+            membership_lane_preserved: true,
+            capability_lane_preserved: true,
+            witness_lane_preserved: true,
+            auth_decision_ref: "auth#test".to_string(),
+            capability_decision_ref: "capability#test".to_string(),
+            observer_safe_witness_relation_refs: vec!["witness#observer-safe".to_string()],
+            capability_requirement_count: 1,
+            witness_requirement_count: 1,
+            host_cli_fixture_execution: true,
+            package_native_execution_claimed: false,
+            wan_federation_claimed: false,
+            final_public_api_frozen: false,
+        }
+    }
+
+    #[test]
+    fn docker_compose_evidence_reports_repo_relative_compose_file() {
+        let mut report = transport_report_fixture();
+        let evidence = DockerComposeProductTransportEvidence {
+            compose_file: repo_root()
+                .join("samples/product-alpha1/docker/docker-compose.product-alpha1.yml"),
+            output_dir: PathBuf::from("/tmp/mirrorea-alpha1-docker-output"),
+            world_report_path: PathBuf::from("/tmp/mirrorea-alpha1-docker-output/world.json"),
+            participant_report_path: PathBuf::from(
+                "/tmp/mirrorea-alpha1-docker-output/participant.json",
+            ),
+            world_report: endpoint_report_fixture("world"),
+            participant_report: endpoint_report_fixture("participant"),
+        };
+
+        apply_docker_compose_evidence(&mut report, evidence);
+
+        assert_eq!(
+            report.docker_compose_file,
+            "samples/product-alpha1/docker/docker-compose.product-alpha1.yml"
+        );
+        assert_eq!(report.docker_compose_executed, true);
+        assert_eq!(report.docker_world_terminal_outcome, "accepted");
+        assert_eq!(report.docker_participant_terminal_outcome, "accepted");
+    }
 }

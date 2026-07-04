@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 11:47 JST
+最終更新: 2026-07-04 12:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -772,7 +772,7 @@ Research-discovery items:
 | source patch hot-plug | `source-patch-hotplug-evidence` | parse/typecheck/elaborate/compatibility/admission report, HotPlugRequest/HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval and rejection-without-mutation evidence exist; final ABI/migration planner later | 着手可能 |
 | Surface source operational suite | `source-operational-evidence` | `E2E-SURF-01..12` cover WorldCore, MembershipChat, Sugoroku, PortalWorldlink, TwoShardHardBoundary, and GradientObservation positive/negative source rows through required alpha checks | 着手可能 |
 | Surface devtools diagnostics | `static-devtools-evidence` | `DEV-01..02` expose required Surface source/Core IR/semantic-checker-backed indexed-state/communication/admission/redacted patch/source-span panels without final viewer/telemetry ABI claims | 着手可能 |
-| Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product | maintenance only |
+| Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product; release-check argv / aggregate display and generated demo / native provenance / Docker source evidence now avoid repo-root absolute source paths for repo-owned inputs | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
 | LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
@@ -793,7 +793,19 @@ OBL-024 association guard hardening, OBL-025 repair completeness guard
 hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
 claim-family drilldown, remaining claim-family priority map, focused
 source-hierarchy stale wording audit, and Full System V1 provider / renderer /
-release-check path portability hardening.
+release-check path portability hardening, plus Product Alpha release-check path
+portability hardening.
+
+- 2026-07-04 12:03 JST
+  `scripts/product_alpha1_release_check.py` の代表 Product Alpha CLI command が
+  repo 内 package input を `samples/product-alpha1/demo...` の repo-relative argv
+  として渡し、release-check aggregate では output-root 配下の path を相対表示に
+  するようにした。`mirrorea-alpha demo` report、native bundle provenance、
+  Docker compose evidence も repo-owned source input を repo-relative `samples/...`
+  として記録する。Docker 込み Product Alpha release-check は 29/29 command
+  accepted、skip-Docker probe は partial by design、generated output scan では
+  repo-root absolute source path 0 件を確認した。final product、grammar / ABI、
+  broader distribution、status claim は変えていない。
 
 - 2026-07-04 11:47 JST
   `scripts/provider_admission_samples.py`、
