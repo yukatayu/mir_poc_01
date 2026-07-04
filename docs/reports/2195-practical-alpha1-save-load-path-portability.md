@@ -244,7 +244,12 @@ code-mapper recommendation from Package 53.
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `78d24083 Use relative practical save-load helper paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
