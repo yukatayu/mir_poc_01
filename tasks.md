@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 15:38 JST
+最終更新: 2026-07-04 15:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -167,11 +167,10 @@ Current holding state:
   `practical_alpha08_session_hotplug.py`, `practical_alpha1_avatar.py`, and
   `practical_alpha1_save_load.py`; the broader scan also found and closed
   `practical_alpha05_session.py`. Remaining broader path-portability candidates
-  are now outside that focused practical list: installed-binary generated path
-  serialization/argv, Full System V1 nested source argv, alpha network Docker
-  success/failure path serialization, current-L2 pipeline / detached-loop
-  repo-owned helper argv, source-hierarchy status JSON, and shared practical
-  failure-path redaction.
+  are now outside that focused practical list: Full System V1 nested source
+  argv, alpha network Docker success/failure path serialization, current-L2
+  pipeline / detached-loop repo-owned helper argv, source-hierarchy status
+  JSON, and shared practical failure-path redaction.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate
@@ -183,7 +182,10 @@ Current holding state:
 - Product Alpha installed-binary helper evidence now also preserves portability
   for repo-owned binary/package inputs: nested argv and top `binary_path` use
   repo-relative `target/debug/mirrorea-alpha` and
-  `samples/product-alpha1/demo`. This is adoption-probe hardening only; final
+  `samples/product-alpha1/demo`. It also displays generated `out_dir`,
+  `session_dir`, `native_bundle_dir`, `demo_dir`, command-result argv, and
+  stderr paths relative to the output root or repo root while preserving
+  external absolute paths. This is adoption-probe hardening only; final
   CLI/API/ABI, packaging, and broader distribution remain undefined.
 - Operational product helper nested command evidence now preserves portability
   for repo-owned operational roots and layer package inputs: nested

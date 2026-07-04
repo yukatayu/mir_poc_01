@@ -55,6 +55,38 @@ def repo_cli_arg(path: Path) -> str:
         return str(path)
 
 
+def release_relative_path(path: Path, out_dir: Path) -> str:
+    try:
+        return path.relative_to(out_dir).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_display_text(value: str, out_dir: Path) -> str:
+    text = value
+    for root in sorted({str(REPO_ROOT), str(out_dir)}, key=len, reverse=True):
+        text = text.replace(root + "/", "")
+        text = text.replace(root, ".")
+    return text
+
+
+def release_display_value(value: Any, out_dir: Path) -> Any:
+    if isinstance(value, str):
+        display = release_display_text(value, out_dir)
+        path = Path(display)
+        if path.is_absolute():
+            return release_relative_path(path, out_dir)
+        return display
+    if isinstance(value, list):
+        return [release_display_value(item, out_dir) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: release_display_value(item, out_dir)
+            for key, item in value.items()
+        }
+    return value
+
+
 def validation_command(name: str, argv: list[str]) -> PlannedCommand:
     return PlannedCommand(name=name, argv=argv, json_required=False)
 
@@ -259,7 +291,7 @@ def check_all(
     if out_dir is None:
         out_dir = Path(tempfile.mkdtemp(prefix="mirrorea-alpha1-installed-binary-"))
     elif out_dir.exists() and any(out_dir.iterdir()):
-        return {
+        return release_display_value({
             "surface_kind": "product_alpha1_installed_binary_check_report",
             "status": "error",
             "command": "check-all",
@@ -278,7 +310,7 @@ def check_all(
             "shipped_surface": shipped_surface(),
             "distribution_scope": distribution_scope(),
             "non_claims": installed_binary_non_claims(include_docker),
-        }
+        }, out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     plan = plan_check_all(out_dir=out_dir, include_docker=include_docker, binary_path=binary_path)
     plan.session_dir.mkdir(parents=True, exist_ok=True)
@@ -310,7 +342,7 @@ def check_all(
     ]
     status = "accepted" if not failed and include_docker else "partial" if not failed else "error"
     candidate_ready = not failed and include_docker
-    return {
+    return release_display_value({
         "surface_kind": "product_alpha1_installed_binary_check_report",
         "status": status,
         "command": "check-all",
@@ -342,7 +374,7 @@ def check_all(
         "shipped_surface": shipped_surface(),
         "distribution_scope": distribution_scope(),
         "non_claims": installed_binary_non_claims(include_docker),
-    }
+    }, out_dir)
 
 
 def print_payload(payload: dict[str, Any], fmt: str) -> None:

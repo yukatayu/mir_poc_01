@@ -85,6 +85,78 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in argv_values)
         )
 
+    def test_check_all_serializes_generated_paths_without_host_prefixes(self) -> None:
+        root = Path(tempfile.mkdtemp(prefix="mirrorea-installed-binary-home-"))
+        out_dir = root / "home" / "someone" / "installed-binary"
+
+        def fake_run(command, env=None):
+            payload = payload_for(command.name)
+            return runner.CommandResult(
+                name=command.name,
+                argv=command.argv,
+                returncode=0,
+                stdout=json.dumps(payload),
+                stderr=(
+                    f"trace {out_dir}/native-bundle/run.sh "
+                    f"and {runner.REPO_ROOT}/samples/product-alpha1/demo"
+                ),
+                payload=payload,
+                semantic_errors=[],
+            )
+
+        with mock.patch.object(runner, "run_command", side_effect=fake_run):
+            payload = runner.check_all(
+                out_dir=out_dir,
+                include_docker=True,
+            )
+
+        text = json.dumps(payload, sort_keys=True)
+        self.assertNotIn("/home/", text)
+        self.assertNotIn("/Users/", text)
+        self.assertNotIn(str(runner.REPO_ROOT), text)
+        self.assertEqual(payload["out_dir"], ".")
+        self.assertEqual(payload["session_dir"], "session-store")
+        self.assertEqual(payload["native_bundle_dir"], "native-bundle")
+        self.assertEqual(payload["demo_dir"], "demo")
+
+        argv_values = [
+            arg
+            for command in payload["command_results"]
+            for arg in command["argv"]
+        ]
+        self.assertIn("native-bundle/run.sh", argv_values)
+        self.assertIn("demo", argv_values)
+        stderr_values = "\n".join(
+            result["stderr"] for result in payload["command_results"]
+        )
+        self.assertIn("native-bundle/run.sh", stderr_values)
+        self.assertIn("samples/product-alpha1/demo", stderr_values)
+
+    def test_release_display_value_rewrites_only_release_and_repo_owned_paths(self) -> None:
+        out_dir = Path("/tmp/installed-binary-output")
+        payload = {
+            "out_dir": str(out_dir),
+            "bundle_runner": str(out_dir / "native-bundle" / "run.sh"),
+            "repo_package": f"{runner.REPO_ROOT}/samples/product-alpha1/demo",
+            "external_path": "/opt/external/installed-binary-output",
+            "nested": [
+                f"{out_dir}/demo/report.json",
+                f"trace {runner.REPO_ROOT}/target/debug/mirrorea-alpha",
+            ],
+        }
+
+        displayed = runner.release_display_value(payload, out_dir)
+
+        self.assertEqual(displayed["out_dir"], ".")
+        self.assertEqual(displayed["bundle_runner"], "native-bundle/run.sh")
+        self.assertEqual(displayed["repo_package"], "samples/product-alpha1/demo")
+        self.assertEqual(
+            displayed["external_path"],
+            "/opt/external/installed-binary-output",
+        )
+        self.assertEqual(displayed["nested"][0], "demo/report.json")
+        self.assertEqual(displayed["nested"][1], "trace target/debug/mirrorea-alpha")
+
     def test_check_all_reports_installed_binary_candidate_without_final_api_claim(self) -> None:
         def fake_run(command, env=None):
             payload = payload_for(command.name)
@@ -212,6 +284,7 @@ class ProductAlpha1InstalledBinaryCheckTests(unittest.TestCase):
             run_command.assert_not_called()
             self.assertEqual(payload["status"], "error")
             self.assertEqual(payload["diagnostic_code"], "output_dir_not_empty")
+            self.assertEqual(payload["out_dir"], ".")
             self.assertFalse(payload["installed_binary_candidate_ready"])
             self.assertEqual(
                 payload["compatibility_scope"]["bundle_surface"],

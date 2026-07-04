@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:38 JST
+最終更新: 2026-07-04 15:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -815,7 +815,20 @@ hardening, plus practical alpha-1 avatar helper subprocess argv path
 portability hardening, plus practical alpha-1 save/load helper runtime branch
 subprocess argv path portability hardening, plus practical alpha-0.5 session
 helper nested session package argv path portability hardening, plus Surface
-release-check output path serialization hardening.
+release-check output path serialization hardening, plus Product Alpha
+installed-binary generated path serialization hardening.
+
+- 2026-07-04 15:43 JST
+  `scripts/product_alpha1_installed_binary_check.py` の返却 payload を
+  release-owned output paths と repo-owned paths について display-relative
+  に変更した。実行時の `--out` / generated bundle / demo path は外部生成先
+  として絶対パスのまま使うが、JSON の `out_dir` / `session_dir` /
+  `native_bundle_dir` / `demo_dir` / command-result argv / stderr は
+  output-root 相対または repo-relative 表示になる。外部 absolute path は保持する。
+  Unit 9 tests、real installed-binary probe 11/11 accepted /
+  `installed_binary_candidate_ready=True` / returned payload host path matches
+  0 が通過。sample status、workflow status、final CLI/API/ABI、packaging、
+  broader distribution、canon claim は変更していない。
 
 - 2026-07-04 15:38 JST
   `scripts/surface_mir_release_check.py` の plan / per-command report /
