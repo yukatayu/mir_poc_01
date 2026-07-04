@@ -591,6 +591,27 @@ class ValidateDocsTests(unittest.TestCase):
             self.assertIn(path, required_docs)
             self.assertIn(path, required_hierarchy)
 
+    def test_required_scaffold_includes_storage_helper_surface(self) -> None:
+        required_docs = set(validate_docs.REQUIRED)
+        required_hierarchy = {
+            path
+            for paths in check_source_hierarchy.REQUIRED_PATHS.values()
+            for path in paths
+        }
+        storage_helper_docs = {
+            "scripts/env/mirrorea_storage_env.sh",
+            "scripts/storage/setup_mirrorea_workdisk_root.sh",
+            "scripts/storage/detach_prepare.sh",
+            "scripts/storage/cleanup_disposable_artifacts.sh",
+            "scripts/storage/tmp_mirrorea_artifacts.sh",
+            "scripts/tests/test_storage_workdir_guards.py",
+            "scripts/tests/test_tmp_mirrorea_artifacts.py",
+        }
+
+        for path in storage_helper_docs:
+            self.assertIn(path, required_docs)
+            self.assertIn(path, required_hierarchy)
+
     def test_numbered_plan_required_scaffold_matches_source_hierarchy(self) -> None:
         required_plan_docs = {
             path

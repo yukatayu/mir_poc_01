@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 02:50 JST
+最終更新: 2026-07-05 03:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,6 +56,13 @@ Current holding state:
   `--cleanup --confirm` before deletion. No real `/tmp` cleanup, mount
   provisioning, cache move, phase/gate movement, OBL status movement, proof /
   conformance claim, runtime readiness, or sample status relabel is claimed.
+- P101 storage helper scaffold guard now registers the storage/env helper
+  surface in both `scripts/validate_docs.py` and
+  `scripts/check_source_hierarchy.py`, with a focused validator unit test
+  requiring those paths in both required-scaffold surfaces. This is drift
+  protection only and does not change helper behavior, run cleanup, mount
+  storage, move caches, change phase/gate status, move OBL status, claim proof
+  / conformance, or relabel sample status.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -326,7 +333,9 @@ Current holding state:
   ordinary root-filesystem directory cannot satisfy the external-workdir guard.
   P100 extends that maintenance line with `tmp_mirrorea_artifacts.sh`, which
   lists tmp-root `mirrorea-*` artifact directories and only deletes them with
-  explicit `--cleanup --confirm`.
+  explicit `--cleanup --confirm`. P101 registers the storage/env helper surface
+  in both scaffold validators so the helper / test files do not silently fall
+  out of required-path coverage.
   This does not run cleanup, mount storage, move build caches, change sample or
   workflow status, edit canon, choose an OBL extraction line, move the ledger,
   claim proof / conformance, change runtime readiness, or exit G1.
@@ -1015,7 +1024,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

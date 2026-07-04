@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 02:50 JST
+最終更新: 2026-07-05 03:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -88,6 +88,15 @@ semantic source authority.
   is given. P100 did not delete real `/tmp` artifacts, mount storage, move
   caches, promote a package, change phase/gate status, move OBL status, claim
   proof / conformance, or relabel sample/workflow readiness.
+- Current storage scaffold guard note:
+  P101 registered the storage/env helper surface in both
+  `scripts/validate_docs.py` and `scripts/check_source_hierarchy.py`, with a
+  focused validator unit test requiring the env script, storage setup / audit /
+  cleanup helpers, tmp artifact helper, and storage tests to stay in both
+  required-scaffold surfaces. This is drift protection only; it does not change
+  helper behavior, run cleanup, mount storage, move caches, promote a package,
+  change phase/gate status, move OBL status, claim proof / conformance, or
+  relabel sample/workflow readiness.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -1081,7 +1090,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording through `plan/150`, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | maintenance only |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording through `plan/150`, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | maintenance only |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1223,8 +1232,17 @@ OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening, plus phase-position validator guard hardening, plus
 Discord webhook secret validator guard hardening, plus P99 fresh runnable
-validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard.
+validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard, plus
+P101 storage helper scaffold guard registration.
 
+- 2026-07-05 03:00 JST
+  P101 storage helper scaffold guard を追加し、storage/env helper scripts と
+  storage tests が `scripts/validate_docs.py` と
+  `scripts/check_source_hierarchy.py` の required scaffold surface から落ちた
+  ときに validator unit test が検出するようにした。helper behavior、
+  real cleanup、mount provisioning、cache move、phase / gate movement、OBL
+  status movement、proof / conformance claim、runtime readiness、sample /
+  workflow status relabel は変更していない。
 - 2026-07-05 02:50 JST
   P100 tmp Mirrorea artifact helper を追加し、P99 後の `/tmp/mirrorea-*`
   closeout helper run が 3,348 immediate directory cleanup candidates /

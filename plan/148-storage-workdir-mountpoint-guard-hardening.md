@@ -101,6 +101,24 @@ Regression tests use only temporary fixture directories. P100 did not delete
 the real `/tmp/mirrorea-*` entries, did not mount external storage, and did not
 move repo-local `target/`.
 
+## scaffold guard follow-up
+
+P101 registered the storage/env helper surface in both scaffold validators:
+
+- `scripts/env/mirrorea_storage_env.sh`
+- `scripts/storage/setup_mirrorea_workdisk_root.sh`
+- `scripts/storage/detach_prepare.sh`
+- `scripts/storage/cleanup_disposable_artifacts.sh`
+- `scripts/storage/tmp_mirrorea_artifacts.sh`
+- `scripts/tests/test_storage_workdir_guards.py`
+- `scripts/tests/test_tmp_mirrorea_artifacts.py`
+
+`scripts/tests/test_validate_docs.py` now has a focused scaffold-coverage test
+that checks those paths are present in both `scripts/validate_docs.py` and
+`scripts/check_source_hierarchy.py`. This is drift protection only. It does not
+change helper behavior, run cleanup, mount storage, or change any sample /
+workflow / phase / gate status.
+
 ## non-claims
 
 This package does not:
