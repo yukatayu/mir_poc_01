@@ -187,7 +187,11 @@ and whitespace checks are run before commit.
 
 ## Commit / push status
 
-Commit and push pending at this report update step.
+Committed and pushed:
+
+- `97664246 Refresh plan scaffold guard coverage`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
