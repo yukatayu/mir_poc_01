@@ -63,15 +63,16 @@
 45. G1 ELAB-07 child / bundle / partial exclusion fixtures は `plan/106`
 46. G1 ELAB-04 mixed visibility payload-model preflight は `plan/107`
 47. G1 OBL-025 branch-local non-coverage refinement は `plan/108`
-48. G1 OBL-024 repo-local Lean statement draft は `plan/109`
-49. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
-50. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
-51. G1 OBL-024 replay vocabulary preflight は `plan/112`
-52. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
-53. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
-54. G1 OBL-024 association guard hardening は `plan/115`
-55. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-56. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+48. G1 OBL-025 repair completeness guard hardening は `plan/116`
+49. G1 OBL-024 repo-local Lean statement draft は `plan/109`
+50. G1 OBL-024 executable diagnostic-soundness projection carrier は `plan/110`
+51. G1 OBL-024 projection Rust fixture guard hardening は `plan/111`
+52. G1 OBL-024 replay vocabulary preflight は `plan/112`
+53. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
+54. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
+55. G1 OBL-024 association guard hardening は `plan/115`
+56. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+57. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -236,6 +237,8 @@
   `plan/86-g1-erow002-visibility-repair-carrier-prototype.md`
 - G1 OBL-025 repo-local Lean statement draft:
   `plan/87-g1-obl025-lean-statement-draft.md`
+- G1 OBL-025 repair completeness guard hardening:
+  `plan/116-g1-obl025-repair-completeness-guard-hardening.md`
 - G1 E-ROW repair shape inventory:
   `plan/88-g1-erow-repair-shape-inventory.md`
 - G1 E-ROW-001 non-visibility singleton fixture:

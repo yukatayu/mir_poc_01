@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 09:26 JST
+最終更新: 2026-07-04 09:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -329,6 +329,14 @@ Current holding state:
   JSON fields, diagnostic/repair ABI, prove OBL-025, move canon ledger status,
   widen executable repairs, add an `ELAB-04` payload, claim conformance, claim
   G1 exit, or edit canon.
+- `plan/116-g1-obl025-repair-completeness-guard-hardening.md` now records a
+  LAB-only sync-test guard hardening for OBL-025. It checks that
+  `RepairCompletenessForRejection` still goes through an eligible single-edit
+  witness, `SuggestedRepairOf`, and `SuggestionCoversWitness`, and that grouped
+  multi-edit, partial guidance, and branch-local guidance remain explicit
+  non-coverage helpers. It does not prove OBL-025, move canon ledger status,
+  freeze final Diagnostic / repair ABI, change runtime JSON, change repair
+  output, claim conformance, claim G1 exit, or edit canon.
 
 ## candidate next strategy packages
 

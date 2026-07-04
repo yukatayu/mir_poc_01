@@ -45,6 +45,8 @@ claim conformance or G1 exit.
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
 - LAB explanation:
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md`
+- LAB repair completeness guard hardening:
+  `plan/116-g1-obl025-repair-completeness-guard-hardening.md`
 - LAB manifest:
   `samples/lean/manifest.json`
 
@@ -135,6 +137,10 @@ This package adds the analogous mixed-row guard:
 
 These are not final semantics for bundles, partial guidance, branch IDs, or
 repair ranking.
+`plan/116` adds a sync-test guard that keeps this reading from drifting into
+placeholder non-empty repair lists, repair ranking, all-repairs / minimality
+vocabulary, final repair ABI names, or branch-local guidance as whole-gap
+coverage.
 
 ## Current coverage reading
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -7,6 +8,16 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import current_l2_lean_sample_sync as sync
+
+
+def lean_def_body(text: str, name: str) -> str:
+    match = re.search(
+        rf"(?ms)^def\s+{re.escape(name)}\b(?P<body>.*?)(?=^def\s|\Z)",
+        text,
+    )
+    if match is None:
+        raise ValueError(f"Lean definition not found: {name}")
+    return match.group("body")
 
 
 class CurrentL2LeanSampleSyncTests(unittest.TestCase):
@@ -195,6 +206,112 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertIn("proof-level association relation", explanation_text)
         self.assertIn("not semantic association by key equality", explanation_text)
         self.assertIn("not a branch-local association key", explanation_text)
+
+    def test_obl025_draft_names_repair_completeness_boundary(self) -> None:
+        lean_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean"
+        )
+        explanation_path = (
+            sync.REPO_ROOT
+            / "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md"
+        )
+
+        lean_text = lean_path.read_text(encoding="utf-8")
+        explanation_text = explanation_path.read_text(encoding="utf-8")
+
+        self.assertIn("EligibleSingleEditRepair", lean_text)
+        self.assertIn("SuggestionCoversWitness", lean_text)
+        self.assertIn("RepairWitnessCoversRejectedGap", lean_text)
+        self.assertIn("SuggestedRepairCoversRejectedGap", lean_text)
+        self.assertIn("CompleteGroupedMultiEditRepair", lean_text)
+        self.assertIn("PartialGuidanceNonCoverage", lean_text)
+        self.assertIn("BranchLocalRepairNonCoverage", lean_text)
+        self.assertIn("BranchLocalSuggestionNonCoverage", lean_text)
+        self.assertIn("¬ P.GroupedMultiEditRepairWitness", lean_text)
+        self.assertIn("¬ P.SuggestedRepairPartialGuidance", lean_text)
+        self.assertRegex(
+            lean_text,
+            r"forall\s+witness,\s+¬\s+SuggestionCoversWitness",
+        )
+        for misleading_name in (
+            "RepairRanking",
+            "RankedRepair",
+            "AllRepairs",
+            "MinimalRepair",
+            "OptimalRepair",
+            "FinalRepair",
+            "RepairABI",
+            "RepairJson",
+            "PlaceholderRepair",
+            "NonEmptyPlaceholder",
+        ):
+            self.assertNotIn(misleading_name, lean_text)
+        self.assertIn("not a placeholder non-empty repair list", explanation_text)
+        self.assertIn("not repair ranking", explanation_text)
+        self.assertIn("not all possible repairs", explanation_text)
+        self.assertIn("branch-local guidance is not whole-gap coverage", explanation_text)
+
+        repair_completeness_body = lean_def_body(
+            lean_text,
+            "RepairCompletenessForRejection",
+        )
+        self.assertRegex(
+            repair_completeness_body,
+            r"\(exists witness,\s+EligibleSingleEditRepair P fragment rejection witness\)\s*->\s+"
+            r"exists diagnostic suggestion witness",
+        )
+        self.assertIn("P.SuggestedRepairOf diagnostic suggestion", repair_completeness_body)
+        self.assertIn(
+            "SuggestionCoversWitness P rejection suggestion witness",
+            repair_completeness_body,
+        )
+        self.assertIn(
+            "P.AssociatedEmittedDiagnostic input rejection diagnostic",
+            repair_completeness_body,
+        )
+
+        eligible_body = lean_def_body(lean_text, "EligibleSingleEditRepair")
+        self.assertIn("P.SingleEditRepairWitness fragment rejection witness", eligible_body)
+        self.assertIn("P.RepairWitnessInDeclaredFragment fragment witness", eligible_body)
+        self.assertIn("P.RepairWitnessCoversRejectedGap rejection witness", eligible_body)
+        self.assertIn("¬ P.GroupedMultiEditRepairWitness", eligible_body)
+
+        suggestion_body = lean_def_body(lean_text, "SuggestionCoversWitness")
+        self.assertIn(
+            "P.SuggestedRepairRealizesCompatibleWitness suggestion witness",
+            suggestion_body,
+        )
+        self.assertIn(
+            "P.SuggestedRepairCompleteLocalRepair rejection suggestion",
+            suggestion_body,
+        )
+        self.assertIn("¬ P.SuggestedRepairPartialGuidance", suggestion_body)
+        self.assertIn("P.SuggestedRepairCoversRejectedGap rejection suggestion", suggestion_body)
+
+        grouped_body = lean_def_body(lean_text, "CompleteGroupedMultiEditRepair")
+        self.assertIn("¬ P.SingleEditRepairWitness", grouped_body)
+
+        partial_body = lean_def_body(lean_text, "PartialGuidanceNonCoverage")
+        self.assertIn("¬ P.SuggestedRepairCompleteLocalRepair", partial_body)
+        self.assertRegex(
+            partial_body,
+            r"forall\s+witness,\s+¬\s+SuggestionCoversWitness",
+        )
+
+        branch_repair_body = lean_def_body(lean_text, "BranchLocalRepairNonCoverage")
+        self.assertIn("¬ P.RepairWitnessCoversRejectedGap", branch_repair_body)
+        self.assertIn("¬ EligibleSingleEditRepair", branch_repair_body)
+
+        branch_suggestion_body = lean_def_body(
+            lean_text,
+            "BranchLocalSuggestionNonCoverage",
+        )
+        self.assertIn("¬ P.SuggestedRepairCoversRejectedGap", branch_suggestion_body)
+        self.assertRegex(
+            branch_suggestion_body,
+            r"forall\s+witness,\s+¬\s+SuggestionCoversWitness",
+        )
 
 
 if __name__ == "__main__":

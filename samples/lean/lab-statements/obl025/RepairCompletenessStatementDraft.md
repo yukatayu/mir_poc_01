@@ -40,6 +40,9 @@
 
 The existential witness shape is deliberate. The draft does not require all
 possible repairs to be emitted, ranked, or proved minimal.
+It is not a placeholder non-empty repair list.
+It is not repair ranking.
+It is not all possible repairs.
 
 The draft also keeps diagnostic family and missing evidence separate. Current
 LAB evidence uses diagnostic family `E-ROW-002` and missing evidence
@@ -65,6 +68,7 @@ classification / guidance, but it is not a complete whole-gap witness unless a
 separate whole-gap relation covers every missing failure for the associated
 request. `RepairBranch` is an abstract statement-shape carrier, not a final
 branch ID, JSON key, or diagnostic ABI.
+In this draft, branch-local guidance is not whole-gap coverage.
 
 ## Boundary
 

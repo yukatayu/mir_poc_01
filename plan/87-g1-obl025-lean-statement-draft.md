@@ -30,6 +30,8 @@ whole-program success after repair.
   `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md`
 - LAB branch-local non-coverage refinement:
   `plan/108-g1-obl025-branch-local-noncoverage-refinement.md`
+- LAB repair completeness guard hardening:
+  `plan/116-g1-obl025-repair-completeness-guard-hardening.md`
 - LAB statement artifact:
   `samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean`
 - LAB explanation:
@@ -155,7 +157,10 @@ draft:
 - `scripts/current_l2_lean_sample_sync.py` registers the OBL-025 draft under
   `statement_drafts`.
 - `scripts/tests/test_current_l2_lean_sample_sync.py` checks that the OBL-025
-  LAB draft remains registered with its explanation file.
+  LAB draft remains registered with its explanation file and now guards the
+  repair-completeness vocabulary against placeholder repair arrays, repair
+  ranking, all-repairs / minimality names, final repair ABI names, and
+  branch-local guidance as whole-gap coverage (`plan/116`).
 
 ## Relation to adjacent obligations
 
