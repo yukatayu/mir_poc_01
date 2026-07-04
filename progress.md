@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 09:57 JST
+最終更新: 2026-07-04 10:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,6 +62,13 @@ semantic source authority.
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
   patterns, or OPEN follow-up. This is LAB evidence and does not claim G0 exit.
+- Current ordinary-assignment claim-family note:
+  `plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md` now drills
+  down the `plan/70` ordinary Surface assignment row through the
+  `plan/71 -> plan/72` target / SCN consequence chain, with OBL-001/020/021
+  documents as supporting proof-boundary evidence. It does not edit canon,
+  claim G0/G1 exit, move OBL status, claim C-static conformance, or promote
+  helper / Lean compile-check evidence to proof status.
 - Current G1 planning note: `plan/71-g1-ordinary-assignment-target.md` now
   drafts the ordinary simple-assignment target/proof-boundary split in LAB memory. It
   targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
@@ -759,7 +766,17 @@ statement draft, OBL-024 executable projection carrier, OBL-024 Rust fixture
 guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
 vocabulary refinement, OBL-024 Lean association vocabulary refinement,
 OBL-024 association guard hardening, OBL-025 repair completeness guard
-hardening, and OBL-001/020/021 statement guard hardening.
+hardening, OBL-001/020/021 statement guard hardening, and ordinary-assignment
+claim-family drilldown.
+
+- 2026-07-04 10:18 JST
+  `plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md` を追加し、
+  `plan/70` の ordinary Surface assignment claim-family row を
+  `plan/71 -> plan/72` の target / SCN consequence chain を中心に分解した。
+  OBL-001 / OBL-020 / OBL-021 文書は supporting proof-boundary evidence として
+  位置づけ、canon edit、G0/G1 exit、OBL status movement、C-static conformance、
+  Lean compile-check の proof 昇格、final grammar / Core IR / runtime ABI freeze は
+  主張しない。
 
 - 2026-07-04 09:57 JST
   `plan/117-g1-obl001-020-021-statement-guard-hardening.md` を追加し、
