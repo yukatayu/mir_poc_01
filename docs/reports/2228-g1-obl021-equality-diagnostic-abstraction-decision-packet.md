@@ -179,6 +179,8 @@ diagnostic abstraction blocker before any OBL-021 requested-status draft.
 - Repository size after docs edits: `du -sk .` reported `7337292`; this is
   approximately 116 KiB more than the pre-edit `7337176` reading. No heavy
   artifact was created.
+- Substantive commit / push completed:
+  `026c8193f98acab3c04daa54abf21f03a31bfef7`.
 
 ## What changed in understanding
 
@@ -259,10 +261,11 @@ which passed.
 
 ## Commit / push status
 
-Commit and push are performed after validation and final review. The first
-package commit will include this report and the substantive files; a follow-up
-report-closeout commit will record the exact pushed commit hash in this
-section.
+Substantive package commit / push completed:
+`026c8193f98acab3c04daa54abf21f03a31bfef7`.
+
+This report-closeout update is committed and pushed separately so the exact
+substantive package hash is recorded in repository memory.
 
 ## Sub-agent session close status
 
