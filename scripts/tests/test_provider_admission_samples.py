@@ -6,6 +6,7 @@ import subprocess
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -124,6 +125,94 @@ class ProviderAdmissionSamplesTests(unittest.TestCase):
         self.assertIn(
             "sandboxed_wasm_execution_deferred",
             payload["actual"]["residual_obligation_codes"],
+        )
+
+    def test_helper_executes_cli_surface_with_repo_relative_paths(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        source = (
+            REPO_ROOT
+            / "samples"
+            / "full-system-v1"
+            / "provider-adapter"
+            / "viewer-diagnostic-positive"
+            / "main"
+            / "src"
+            / "viewer-diagnostic-positive.mir"
+        )
+        request = (
+            REPO_ROOT
+            / "samples"
+            / "full-system-v1"
+            / "provider-adapter"
+            / "viewer-diagnostic-positive"
+            / "requests"
+            / "viewer-diagnostic.request.json"
+        )
+        provider = (
+            REPO_ROOT
+            / "samples"
+            / "full-system-v1"
+            / "provider-adapter"
+            / "viewer-diagnostic-positive"
+            / "providers"
+            / "viewer-diagnostic.provider.json"
+        )
+        completed = subprocess.CompletedProcess(
+            args=[],
+            returncode=0,
+            stdout=json.dumps(
+                {
+                    "accepted": True,
+                    "local_split_report": {"target_reports": []},
+                    "diagnostics": [],
+                    "residual_obligations": [],
+                }
+            ),
+            stderr="",
+        )
+
+        with patch.object(
+            provider_admission_samples.subprocess,
+            "run",
+            return_value=completed,
+        ) as patched_run:
+            provider_admission_samples._run_provider_admission(
+                source,
+                request,
+                provider,
+                7,
+            )
+
+        command = patched_run.call_args.args[0]
+        self.assertEqual(command[:6], ["cargo", "run", "-q", "-p", "mir-runtime", "--example"])
+        self.assertEqual(
+            command[6:9],
+            [
+                "mir_full_system_v1_provider_admission",
+                "--",
+                "samples/full-system-v1/provider-adapter/viewer-diagnostic-positive/main/src/viewer-diagnostic-positive.mir",
+            ],
+        )
+        self.assertIn(
+            "samples/full-system-v1/provider-adapter/viewer-diagnostic-positive/requests/viewer-diagnostic.request.json",
+            command,
+        )
+        self.assertIn(
+            "samples/full-system-v1/provider-adapter/viewer-diagnostic-positive/providers/viewer-diagnostic.provider.json",
+            command,
+        )
+
+    def test_repo_relative_arg_preserves_external_paths(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        external_path = Path("/var/tmp/mirrorea-external/provider.mir")
+
+        self.assertEqual(
+            provider_admission_samples._repo_relative_arg(external_path),
+            str(external_path),
         )
 
     def test_check_all_passes_every_row(self) -> None:

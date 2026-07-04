@@ -57,6 +57,59 @@ class FullSystemV1ReleaseCheckTests(unittest.TestCase):
             ],
         )
 
+    def test_plan_cli_commands_use_repo_relative_sample_paths(self) -> None:
+        plan = runner.plan_check_all(out_dir=Path("/tmp/mirrorea-full-v1-release"))
+        cli_commands = [
+            command for command in plan.commands if command.name.startswith("cli:")
+        ]
+        sample_args = [
+            arg
+            for command in cli_commands
+            for arg in command.argv
+            if "samples/full-system-v1" in arg
+        ]
+
+        self.assertTrue(sample_args)
+        for arg in sample_args:
+            self.assertFalse(Path(arg).is_absolute(), arg)
+            self.assertFalse(arg.startswith(str(REPO_ROOT)), arg)
+
+    def test_release_outputs_do_not_serialize_home_shaped_output_paths(self) -> None:
+        def fake_run(command: runner.PlannedCommand) -> runner.CommandResult:
+            payload = payload_for(command.name)
+            stdout = "" if payload is None else json.dumps(payload)
+            return runner.CommandResult(
+                name=command.name,
+                argv=command.argv,
+                returncode=0,
+                stdout=stdout,
+                stderr="",
+                payload=payload,
+                semantic_errors=[],
+            )
+
+        with tempfile.TemporaryDirectory(prefix="mirrorea-release-path-test-") as tmpdir:
+            out_dir = Path(tmpdir) / "home" / "codex" / "release"
+            with mock.patch.object(runner, "run_command", side_effect=fake_run):
+                payload = runner.check_all(out_dir=out_dir)
+
+            self.assertEqual(payload["status"], "accepted")
+            paths_to_scan = [
+                out_dir / "bundle.json",
+                out_dir / "index.html",
+                *sorted((out_dir / "reports").glob("*.json")),
+            ]
+            self.assertTrue(paths_to_scan)
+            for path in paths_to_scan:
+                text = path.read_text(encoding="utf-8")
+                self.assertNotIn("/home/", text, str(path))
+                self.assertNotIn("/Users/", text, str(path))
+
+    def test_repo_relative_helpers_preserve_external_paths(self) -> None:
+        external_path = Path("/var/tmp/mirrorea-external/sample.mir")
+
+        self.assertEqual(runner.repo_relative_arg(external_path), str(external_path))
+
     def test_check_all_builds_bundle_and_viewer(self) -> None:
         def fake_run(command: runner.PlannedCommand) -> runner.CommandResult:
             payload = payload_for(command.name)

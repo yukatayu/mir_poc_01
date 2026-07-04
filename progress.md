@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 10:45 JST
+最終更新: 2026-07-04 11:47 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -791,8 +791,22 @@ guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
 vocabulary refinement, OBL-024 Lean association vocabulary refinement,
 OBL-024 association guard hardening, OBL-025 repair completeness guard
 hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
-claim-family drilldown, remaining claim-family priority map, and focused
-source-hierarchy stale wording audit.
+claim-family drilldown, remaining claim-family priority map, focused
+source-hierarchy stale wording audit, and Full System V1 provider / renderer /
+release-check path portability hardening.
+
+- 2026-07-04 11:47 JST
+  `scripts/provider_admission_samples.py`、
+  `scripts/renderer_pose_backend_samples.py`、および
+  `scripts/full_system_v1_release_check.py` の代表 Full System V1 CLI command が
+  repo 内の CLI input path を `samples/...` の repo-relative argv として
+  subprocess に渡すようにした。renderer-pose 3 行の generated nested
+  `provider-admission-report.json` も host absolute path ではなく repo-relative
+  path field を保持し、Full System V1 release-check 本体の reports / bundle /
+  viewer では output-root 配下の path を相対表示にする。provider / renderer
+  helper unit tests、release-check unit coverage、helper `check-all`、Full
+  System V1 release-check は通したが、sample count、status、semantics、ABI、
+  execution scope の claim は変えていない。
 
 - 2026-07-04 11:07 JST
   `scripts/validate_docs.py` に source-hierarchy wording lint を追加し、

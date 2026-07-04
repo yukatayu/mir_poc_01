@@ -42,6 +42,19 @@ def _run_helper(*args: str) -> dict:
     return json.loads(completed.stdout)
 
 
+def _path_fields(payload: object) -> list[str]:
+    fields: list[str] = []
+    if isinstance(payload, dict):
+        for key, value in payload.items():
+            if key.endswith("_path") and isinstance(value, str):
+                fields.append(value)
+            fields.extend(_path_fields(value))
+    elif isinstance(payload, list):
+        for value in payload:
+            fields.extend(_path_fields(value))
+    return fields
+
+
 class RendererPoseBackendSamplesTests(unittest.TestCase):
     def test_helper_module_exists(self) -> None:
         self.assertIsNotNone(
@@ -89,6 +102,35 @@ class RendererPoseBackendSamplesTests(unittest.TestCase):
         self.assertEqual(
             payload["actual"]["matched_packet_schema_refs"],
             ["packet.renderer.pose_snapshot"],
+        )
+
+    def test_positive_row_writes_portable_provider_report_paths(self) -> None:
+        _run_helper("run", "eng-03-renderer-pose-positive")
+        provider_report_path = (
+            REPO_ROOT
+            / "samples"
+            / "full-system-v1"
+            / "provider-adapter"
+            / "renderer-pose-positive"
+            / "generated"
+            / "provider-admission-report.json"
+        )
+        report = json.loads(provider_report_path.read_text(encoding="utf-8"))
+        path_fields = _path_fields(report)
+
+        self.assertTrue(path_fields)
+        for path in path_fields:
+            self.assertFalse(Path(path).is_absolute(), path)
+
+    def test_repo_relative_arg_preserves_external_paths(self) -> None:
+        if renderer_pose_backend_samples is None:
+            self.fail("renderer pose backend helper missing")
+
+        external_path = Path("/var/tmp/mirrorea-external/renderer.mir")
+
+        self.assertEqual(
+            renderer_pose_backend_samples._repo_relative_arg(external_path),
+            str(external_path),
         )
 
     def test_split_frame_negative_row_reports_posegraph_block(self) -> None:
@@ -164,7 +206,14 @@ class RendererPoseBackendSamplesTests(unittest.TestCase):
 
         command = patched_run.call_args.args[0]
         self.assertEqual(command[:5], ["cargo", "run", "-q", "-p", "mirrorea-cli"])
-        self.assertEqual(command[5:8], ["--", "render-pose-backend-v1", str(source)])
+        self.assertEqual(
+            command[5:8],
+            [
+                "--",
+                "render-pose-backend-v1",
+                "samples/full-system-v1/provider-adapter/renderer-pose-positive/main/src/renderer-pose-positive.mir",
+            ],
+        )
 
 
 if __name__ == "__main__":

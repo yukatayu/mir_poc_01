@@ -174,6 +174,36 @@ def cargo_test_args(*args: str) -> list[str]:
     return ["cargo", "test", *args, "--", "--nocapture"]
 
 
+def repo_relative_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_relative_path(path: Path, out_dir: Path) -> str:
+    try:
+        return path.relative_to(out_dir).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def release_display_value(value: Any, out_dir: Path) -> Any:
+    if isinstance(value, str):
+        path = Path(value)
+        if path.is_absolute():
+            return release_relative_path(path, out_dir)
+        return value
+    if isinstance(value, list):
+        return [release_display_value(item, out_dir) for item in value]
+    if isinstance(value, dict):
+        return {
+            key: release_display_value(item, out_dir)
+            for key, item in value.items()
+        }
+    return value
+
+
 def validation_command(name: str, argv: list[str]) -> PlannedCommand:
     return PlannedCommand(name=name, argv=argv, json_required=False)
 
@@ -283,18 +313,18 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
             "cli:project-full-v1",
             cargo_alpha_args(
                 "project-full-v1",
-                str(PROJECTION_SOURCE),
+                repo_relative_arg(PROJECTION_SOURCE),
                 "--request",
-                str(PROJECTION_REQUEST),
+                repo_relative_arg(PROJECTION_REQUEST),
             ),
         ),
         PlannedCommand(
             "cli:run-full-v1-split",
             cargo_alpha_args(
                 "run-full-v1-split",
-                str(SPLIT_SOURCE),
+                repo_relative_arg(SPLIT_SOURCE),
                 "--request",
-                str(SPLIT_REQUEST),
+                repo_relative_arg(SPLIT_REQUEST),
                 "--input",
                 "40",
             ),
@@ -303,24 +333,24 @@ def plan_check_all(out_dir: Path) -> CommandPlan:
             "cli:admit-provider-v1",
             cargo_alpha_args(
                 "admit-provider-v1",
-                str(PROVIDER_SOURCE),
+                repo_relative_arg(PROVIDER_SOURCE),
                 "--request",
-                str(PROVIDER_REQUEST),
+                repo_relative_arg(PROVIDER_REQUEST),
                 "--provider",
-                str(PROVIDER_MANIFEST),
+                repo_relative_arg(PROVIDER_MANIFEST),
             ),
         ),
         PlannedCommand(
             "cli:render-pose-backend-v1",
             cargo_alpha_args(
                 "render-pose-backend-v1",
-                str(RENDERER_SOURCE),
+                repo_relative_arg(RENDERER_SOURCE),
                 "--request",
-                str(RENDERER_REQUEST),
+                repo_relative_arg(RENDERER_REQUEST),
                 "--provider",
-                str(RENDERER_PROVIDER),
+                repo_relative_arg(RENDERER_PROVIDER),
                 "--posegraph-package",
-                str(RENDERER_POSEGRAPH_PACKAGE),
+                repo_relative_arg(RENDERER_POSEGRAPH_PACKAGE),
             ),
         ),
     ]
@@ -650,7 +680,12 @@ def summarize_payload(name: str, payload: dict[str, Any]) -> dict[str, Any]:
     return summary
 
 
-def command_result_record(command: PlannedCommand, result: CommandResult, reports_dir: Path) -> dict[str, Any]:
+def command_result_record(
+    command: PlannedCommand,
+    result: CommandResult,
+    reports_dir: Path,
+    out_dir: Path,
+) -> dict[str, Any]:
     report_path = reports_dir / f"{_sanitize_name(command.name)}.json"
     summary = None if result.payload is None else summarize_payload(command.name, result.payload)
     record = {
@@ -658,9 +693,10 @@ def command_result_record(command: PlannedCommand, result: CommandResult, report
         "argv": result.argv,
         "returncode": result.returncode,
         "semantic_errors": result.semantic_errors,
-        "report_path": str(report_path),
+        "report_path": release_relative_path(report_path, out_dir),
         "summary": summary,
     }
+    record = release_display_value(record, out_dir)
     report_path.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return record
 
@@ -740,27 +776,30 @@ def check_all(out_dir: Path | None = None) -> dict[str, Any]:
     if out_dir is None:
         out_dir = Path(tempfile.mkdtemp(prefix="mirrorea-full-v1-release-"))
     elif out_dir.exists() and any(out_dir.iterdir()):
-        return {
-            "surface_kind": "full_system_v1_release_check_report",
-            "status": "error",
-            "command": "check-all",
-            "diagnostic_code": "output_dir_not_empty",
-            "out_dir": str(out_dir),
-            "planned_commands": [],
-            "passed_commands": [],
-            "failed_commands": ["preflight:output-dir-empty"],
-            "command_results": [],
-            "bundle_path": str(out_dir / "bundle.json"),
-            "html_path": str(out_dir / "index.html"),
-            "viewer_sections": VIEWER_SECTIONS,
-            "release_bundle_built": False,
-            "viewer_ready": False,
-            "compatibility_floor_preserved": False,
-            "full_system_v1_release_check_ready": False,
-            "final_public_api_frozen": False,
-            "final_public_grammar_frozen": False,
-            "non_claims": release_non_claims(),
-        }
+        return release_display_value(
+            {
+                "surface_kind": "full_system_v1_release_check_report",
+                "status": "error",
+                "command": "check-all",
+                "diagnostic_code": "output_dir_not_empty",
+                "out_dir": str(out_dir),
+                "planned_commands": [],
+                "passed_commands": [],
+                "failed_commands": ["preflight:output-dir-empty"],
+                "command_results": [],
+                "bundle_path": str(out_dir / "bundle.json"),
+                "html_path": str(out_dir / "index.html"),
+                "viewer_sections": VIEWER_SECTIONS,
+                "release_bundle_built": False,
+                "viewer_ready": False,
+                "compatibility_floor_preserved": False,
+                "full_system_v1_release_check_ready": False,
+                "final_public_api_frozen": False,
+                "final_public_grammar_frozen": False,
+                "non_claims": release_non_claims(),
+            },
+            out_dir,
+        )
 
     out_dir.mkdir(parents=True, exist_ok=True)
     plan = plan_check_all(out_dir=out_dir)
@@ -791,53 +830,59 @@ def check_all(out_dir: Path | None = None) -> dict[str, Any]:
     ]
     compatibility_floor_preserved = all(command_name in passed for command_name in COMPATIBILITY_FLOOR_COMMANDS)
     command_results = [
-        command_result_record(command, result, plan.reports_dir)
+        command_result_record(command, result, plan.reports_dir, plan.out_dir)
         for command, result in zip(plan.commands, results)
     ]
     status = "accepted" if not failed else "error"
-    bundle = {
-        "surface_kind": "full_system_v1_release_bundle",
-        "status": status,
-        "out_dir": str(plan.out_dir),
-        "compat_product_alpha_dir": str(plan.compat_product_alpha_dir),
-        "bundle_path": str(plan.bundle_path),
-        "html_path": str(plan.html_path),
-        "viewer_sections": VIEWER_SECTIONS,
-        "planned_commands": [command.name for command in plan.commands],
-        "passed_commands": passed,
-        "failed_commands": failed,
-        "command_results": command_results,
-        "compatibility_floor_preserved": compatibility_floor_preserved,
-        "full_system_v1_release_check_ready": not failed,
-        "final_public_api_frozen": False,
-        "final_public_grammar_frozen": False,
-        "viewer_mode": "full_system_v1_nonfinal_static_html_viewer",
-        "non_claims": release_non_claims(),
-    }
+    bundle = release_display_value(
+        {
+            "surface_kind": "full_system_v1_release_bundle",
+            "status": status,
+            "out_dir": str(plan.out_dir),
+            "compat_product_alpha_dir": str(plan.compat_product_alpha_dir),
+            "bundle_path": str(plan.bundle_path),
+            "html_path": str(plan.html_path),
+            "viewer_sections": VIEWER_SECTIONS,
+            "planned_commands": [command.name for command in plan.commands],
+            "passed_commands": passed,
+            "failed_commands": failed,
+            "command_results": command_results,
+            "compatibility_floor_preserved": compatibility_floor_preserved,
+            "full_system_v1_release_check_ready": not failed,
+            "final_public_api_frozen": False,
+            "final_public_grammar_frozen": False,
+            "viewer_mode": "full_system_v1_nonfinal_static_html_viewer",
+            "non_claims": release_non_claims(),
+        },
+        plan.out_dir,
+    )
     write_bundle(bundle, plan.bundle_path, plan.html_path)
 
-    return {
-        "surface_kind": "full_system_v1_release_check_report",
-        "status": status,
-        "command": "check-all",
-        "out_dir": str(plan.out_dir),
-        "reports_dir": str(plan.reports_dir),
-        "compat_product_alpha_dir": str(plan.compat_product_alpha_dir),
-        "bundle_path": str(plan.bundle_path),
-        "html_path": str(plan.html_path),
-        "viewer_sections": VIEWER_SECTIONS,
-        "planned_commands": [command.name for command in plan.commands],
-        "passed_commands": passed,
-        "failed_commands": failed,
-        "command_results": command_results,
-        "release_bundle_built": True,
-        "viewer_ready": True,
-        "compatibility_floor_preserved": compatibility_floor_preserved,
-        "full_system_v1_release_check_ready": not failed,
-        "final_public_api_frozen": False,
-        "final_public_grammar_frozen": False,
-        "non_claims": release_non_claims(),
-    }
+    return release_display_value(
+        {
+            "surface_kind": "full_system_v1_release_check_report",
+            "status": status,
+            "command": "check-all",
+            "out_dir": str(plan.out_dir),
+            "reports_dir": str(plan.reports_dir),
+            "compat_product_alpha_dir": str(plan.compat_product_alpha_dir),
+            "bundle_path": str(plan.bundle_path),
+            "html_path": str(plan.html_path),
+            "viewer_sections": VIEWER_SECTIONS,
+            "planned_commands": [command.name for command in plan.commands],
+            "passed_commands": passed,
+            "failed_commands": failed,
+            "command_results": command_results,
+            "release_bundle_built": True,
+            "viewer_ready": True,
+            "compatibility_floor_preserved": compatibility_floor_preserved,
+            "full_system_v1_release_check_ready": not failed,
+            "final_public_api_frozen": False,
+            "final_public_grammar_frozen": False,
+            "non_claims": release_non_claims(),
+        },
+        plan.out_dir,
+    )
 
 
 def print_payload(payload: dict[str, Any], fmt: str) -> None:

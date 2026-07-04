@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 11:07 JST
+最終更新: 2026-07-04 11:47 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -71,6 +71,13 @@ Current holding state:
   historical reports, legacy specs, and archived research material. The first
   lint pass corrected stale wording in `docs/hands_on/README.md`, selected
   `docs/research_abstract/*.md`, `plan/19`, `plan/50`, and `plan/58`.
+- Full System V1 provider / renderer helper inputs and release-check
+  representative CLI commands now preserve portability by passing in-repo CLI
+  paths as repo-relative `samples/...` argv. Renderer-pose generated nested
+  provider-admission reports now store repo-relative path fields rather than
+  host absolute paths, and release-check reports / bundle / viewer display
+  output-root paths relatively. This is maintenance hardening only; no sample
+  status, semantics, ABI, or execution-scope claim changed.
 - `plan/71-g1-ordinary-assignment-target.md` now drafts the LAB-only G1
   ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
   theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,

@@ -66,6 +66,13 @@ def _row_generated_provider_path(row: dict[str, Any]) -> Path:
     return SAMPLE_ROOT / row["generated_provider_admission"]
 
 
+def _repo_relative_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     for row in rows:
@@ -154,13 +161,13 @@ def _run_renderer_pose_backend(
             "mirrorea-cli",
             "--",
             "render-pose-backend-v1",
-            str(source),
+            _repo_relative_arg(source),
             "--request",
-            str(request),
+            _repo_relative_arg(request),
             "--provider",
-            str(provider),
+            _repo_relative_arg(provider),
             "--posegraph-package",
-            str(posegraph_package),
+            _repo_relative_arg(posegraph_package),
             "--input",
             str(input_value),
             "--format",

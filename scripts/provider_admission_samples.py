@@ -60,6 +60,13 @@ def _row_generated_path(row: dict[str, Any]) -> Path:
     return SAMPLE_ROOT / row["generated"]
 
 
+def _repo_relative_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
     errors: list[dict[str, str]] = []
     for row in rows:
@@ -142,11 +149,11 @@ def _run_provider_admission(path: Path, request: Path, provider: Path, input_val
             "--example",
             "mir_full_system_v1_provider_admission",
             "--",
-            str(path),
+            _repo_relative_arg(path),
             "--request",
-            str(request),
+            _repo_relative_arg(request),
             "--provider",
-            str(provider),
+            _repo_relative_arg(provider),
             "--input",
             str(input_value),
             "--format",

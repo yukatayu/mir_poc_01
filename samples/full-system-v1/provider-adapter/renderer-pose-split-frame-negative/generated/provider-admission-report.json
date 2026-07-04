@@ -19,7 +19,7 @@
     "launch_mode": "same_binary_local_role_wrapper",
     "projection_id": "renderer-pose-split-frame-negative",
     "rejected_rows": [],
-    "request_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/projection.request.json",
+    "request_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/projection.request.json",
     "residual_obligations": [
       {
         "code": "packet_ffi_transport_semantics_deferred",
@@ -35,7 +35,7 @@
       }
     ],
     "selected_target_id": null,
-    "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+    "source_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
     "split_scope": "full-system-v1-local-role-split-v0",
     "surface_kind": "full_system_v1_local_split_report",
     "target_reports": [
@@ -385,12 +385,12 @@
                 }
               ],
               "runtime_rejection": null,
-              "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+              "source_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
               "surface_kind": "full_system_v1_run_report"
             },
             "session_id": "full-system-v1::render_pose::0",
             "session_scope": "full-system-v1-same-process-runtime-v0",
-            "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+            "source_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
             "surface_kind": "full_system_v1_session_report"
           }
         ],
@@ -431,9 +431,9 @@
   "projection_id": "renderer-pose-split-frame-negative",
   "provider_id": "renderer-pose-backend",
   "provider_kind": "renderer",
-  "provider_manifest_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/provider.manifest.json",
+  "provider_manifest_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/provider.manifest.json",
   "rejected_rows": [],
-  "request_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/projection.request.json",
+  "request_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/projection.request.json",
   "required_capabilities": [
     "RenderFrame"
   ],
@@ -451,7 +451,7 @@
       "message": "provider contract admission is actualized, but executable provider runtime remains later work"
     }
   ],
-  "source_path": "/home/yukatayu/dev/mir_poc_01/samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
+  "source_path": "samples/full-system-v1/provider-adapter/renderer-pose-split-frame-negative/main/src/renderer-pose-split-frame-negative.mir",
   "surface_kind": "full_system_v1_provider_admission_report",
   "target_id": "renderer-adapter",
   "target_provider_policy": "provider_inventory_only",
