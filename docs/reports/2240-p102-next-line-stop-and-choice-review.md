@@ -188,8 +188,14 @@ check` reran `cargo check`.
 
 ## Commit / push status
 
-Not yet committed at initial report creation. This section will be updated
-after validation, commit, and push.
+Primary commit:
+
+- `a0da53d0 Record P102 next-line choice boundary`
+- Pushed to `origin/main`.
+
+This status section is maintained by a follow-up report-status commit. The
+follow-up commit hash is reported through `git log` / final handoff rather than
+recursively embedding the containing commit's own hash in this file.
 
 ## Sub-agent session close status
 
