@@ -156,6 +156,11 @@ body guard still passes.
   `.codex-discord`.
 - Re-run `du -sk .`
 - Re-run `git status --short --branch`
+- `git add README.md Documentation.md progress.md tasks.md samples_progress.md scripts/README.md scripts/check_source_hierarchy.py scripts/validate_docs.py scripts/tests/test_validate_docs.py scripts/tests/test_current_l2_lean_sample_sync.py samples/lean/lab-statements/obl001/THM001StatementDraft.md plan/00-index.md plan/90-source-traceability.md plan/146-g1-obl001-explanation-boundary-guard-hardening.md docs/reports/2231-g1-obl001-explanation-boundary-guard-hardening.md`
+- `git commit --no-gpg-sign -m "Harden OBL-001 explanation guard"`
+- `git push`
+- `git rev-parse HEAD`
+- Post-push `git status --short --branch`
 
 ## Evidence / outputs / test results
 
@@ -277,7 +282,11 @@ No validation is intentionally skipped for this package.
 
 ## Commit / push status
 
-Pending commit and push.
+Substantive package commit / push completed:
+`f5c462cbcf48b92bf13095f4436d9ac9b041092a`.
+
+This report-closeout update is committed and pushed separately so the exact
+substantive package hash is recorded in repository memory.
 
 ## Sub-agent session close status
 
