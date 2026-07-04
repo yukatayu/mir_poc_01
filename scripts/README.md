@@ -336,6 +336,13 @@
   non-destructive storage audit。disk / mount / repo usage / external workdir usage / LLVM staging dir ownership / disposable candidates を確認する
 - `storage/cleanup_disposable_artifacts.sh`
   explicit `--confirm` 必須の disposable cleanup helper。known disposable dir だけを対象にし、exact mountpoint でない workdir の cleanup を拒否する。`llvm/src` は意図的に対象外、`llvm` parent が non-writable な場合の build/install cleanup も拒否する
+- `storage/tmp_mirrorea_artifacts.sh`
+  `/tmp` などの tmp root 直下に残る `mirrorea-*` helper artifact directory
+  を list / optional cleanup する safety helper。default は `${TMPDIR:-/tmp}`、
+  test / controlled audit 用に `--tmp-root DIR` を受ける。`--list` は削除せず
+  candidate count / total KiB を出し、cleanup は `--cleanup --confirm` のみ。
+  対象は tmp root 直下の `mirrorea-*` directory に限定し、file や他 tool の
+  directory は対象外
 
 ### tests
 

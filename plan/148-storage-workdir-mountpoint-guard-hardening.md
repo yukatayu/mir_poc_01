@@ -77,6 +77,30 @@ At this checkpoint:
 No cleanup was run. Any deletion still requires explicit `--confirm`, and
 without `--allow-unmounted` cleanup refuses an unmounted workdir.
 
+## tmp artifact follow-up
+
+P100 audited the disposable `/tmp/mirrorea-*` footprint after the P99 validation
+sweep. A closeout helper run reported 3,348 immediate directory cleanup
+candidates totaling 25,079,200 KiB. A broad glob `du` audit in the same window
+reported about 25,090,344 KiB; the helper intentionally counts only immediate
+directories under the tmp root. The P99-specific subset had 5 entries totaling
+378,232 KiB.
+
+`scripts/storage/tmp_mirrorea_artifacts.sh` now provides a small safety helper
+for this separate temporary-artifact class:
+
+- `--list` reports immediate `mirrorea-*` directories under the configured tmp
+  root and prints candidate count / total KiB without deleting anything.
+- `--cleanup --confirm` deletes only immediate `mirrorea-*` directories under
+  that tmp root.
+- `--cleanup` without `--confirm` exits nonzero and preserves candidates.
+- `--tmp-root DIR` exists for tests and controlled audits; the default root is
+  `${TMPDIR:-/tmp}`.
+
+Regression tests use only temporary fixture directories. P100 did not delete
+the real `/tmp/mirrorea-*` entries, did not mount external storage, and did not
+move repo-local `target/`.
+
 ## non-claims
 
 This package does not:
@@ -100,6 +124,9 @@ Before future heavy validation, LLVM, backend, or generated-artifact work:
 3. Use `bash scripts/storage/detach_prepare.sh` for non-destructive audit.
 4. Use `bash scripts/storage/cleanup_disposable_artifacts.sh --list` before any
    explicit cleanup request.
+5. Use `bash scripts/storage/tmp_mirrorea_artifacts.sh --list` to audit
+   disposable `/tmp/mirrorea-*` helper outputs before any explicit temporary
+   artifact cleanup request.
 
 If `/mnt/mirrorea-work` remains unmounted, heavy commands should either keep
 their current repo-local target behavior intentionally documented, use `/tmp`

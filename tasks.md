@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 02:40 JST
+最終更新: 2026-07-05 02:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -49,6 +49,13 @@ Current holding state:
   extraction, status-shell slot fill, canon edit, phase/gate movement, OBL
   status movement, proof / conformance claim, runtime readiness, or sample
   status relabel.
+- P100 tmp artifact audit found 3,348 immediate `/tmp/mirrorea-*` directory
+  cleanup candidates totaling 25,079,200 KiB, with the P99 subset at 5 entries
+  / 378,232 KiB. `scripts/storage/tmp_mirrorea_artifacts.sh` now lists
+  immediate `mirrorea-*` tmp-root directories and requires
+  `--cleanup --confirm` before deletion. No real `/tmp` cleanup, mount
+  provisioning, cache move, phase/gate movement, OBL status movement, proof /
+  conformance claim, runtime readiness, or sample status relabel is claimed.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -317,6 +324,9 @@ Current holding state:
   tooling-only storage guard hardening. The storage env and cleanup helpers now
   treat a workdir as mounted only when it is an exact mountpoint, so an
   ordinary root-filesystem directory cannot satisfy the external-workdir guard.
+  P100 extends that maintenance line with `tmp_mirrorea_artifacts.sh`, which
+  lists tmp-root `mirrorea-*` artifact directories and only deletes them with
+  explicit `--cleanup --confirm`.
   This does not run cleanup, mount storage, move build caches, change sample or
   workflow status, edit canon, choose an OBL extraction line, move the ledger,
   claim proof / conformance, change runtime readiness, or exit G1.
@@ -982,7 +992,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut follow-up` | `Macro 0` maintenance reserve | use `plan/120` if a future package needs line-level citation, actual archive move comparison, or front-door taxonomy rewrite after the initial Product Alpha / Full System V1 / Surface useful-floor / keep-core / archive / postpone matrix | no deletion, archive move, root rename, sample status relabel, or canon edit without explicit follow-up package |
 | `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
-| `storage workdir guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, or generated-artifact work finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package |
+| `storage workdir / tmp artifact guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, generated-artifact work, or tmp-root release helper output finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package; tmp cleanup remains explicit `--cleanup --confirm` only |
 | `phase-position reading refresh` | `Macro 0` maintenance | reopen only if canon phase, gate status, or LAB/canon source hierarchy changes enough to make `plan/149` stale | no phase exit, gate movement, canon edit, or percentage-as-gate claim without explicit canon process |
 | `phase-position validator guard refresh` | `Macro 0` maintenance | reopen only if the required snapshot phrases or validator responsibility changes | keep this as drift protection; do not turn it into a semantic phase validator or new canon decision |
 | `Discord webhook secret guard refresh` | `Macro 0` maintenance | reopen only if notification storage or validator secret-scan responsibility changes | keep local webhook credentials out of tracked files and out of validator output; do not claim broad secret scanning completeness |
@@ -1005,7 +1015,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection; phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |
