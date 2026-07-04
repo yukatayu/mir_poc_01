@@ -333,6 +333,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/122-g1-scn-exact-static-slice-manifest.md",
             "plan/123-g1-scn01-visibility-negative-actualization.md",
             "plan/124-g1-obl001-boundary-audit.md",
+            "plan/125-g1-scn02-direct-local-write-blocker-review.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

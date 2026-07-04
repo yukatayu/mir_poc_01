@@ -547,6 +547,7 @@ REQUIRED = [
     "plan/122-g1-scn-exact-static-slice-manifest.md",
     "plan/123-g1-scn01-visibility-negative-actualization.md",
     "plan/124-g1-obl001-boundary-audit.md",
+    "plan/125-g1-scn02-direct-local-write-blocker-review.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
