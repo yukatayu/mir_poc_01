@@ -229,7 +229,14 @@ None.
 
 ## Commit / push status
 
-Not yet committed at pre-commit report update.
+Substantive P86 commit:
+
+- `e37e9c8711e37dc033f3fe99a206f3b11acf1104`
+- Commit message: `Add G1 OBL021 artifact identity preflight`
+- Push status: pushed to `origin/main`
+
+This report status update is pending a report-only follow-up commit at the time
+this section is written.
 
 ## Sub-agent session close status
 
