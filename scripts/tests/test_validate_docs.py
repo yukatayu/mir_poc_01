@@ -350,6 +350,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/139-g1-obl021-artifact-identity-wrapper-preflight.md",
             "plan/140-g1-obl021-artifact-annex-template.md",
             "plan/141-g1-status-packet-shell-unresolved-slots.md",
+            "plan/142-g1-status-packet-shell-evidence-dry-run.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

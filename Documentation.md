@@ -126,6 +126,14 @@ UNRESOLVED slot として残します。proposal submission、requested status
 acceptance、canon edit、ledger movement、OBL completion、proof/conformance claim、
 runtime readiness、G1 exit は主張しません。
 
+`plan/142` は G1 status packet shell evidence dry-run です。`plan/141` の
+fresh validation slot に対して OBL-001 / OBL-020 / OBL-021 Lean
+compile-check、LAB statement sync guard、admitted-stub / placeholder scan、docs
+/ source hierarchy validation、secret scan の実測結果を LAB evidence として
+記録します。requested status selection、proposal submission、canon edit、
+ledger movement、OBL completion、proof/conformance claim、runtime readiness、
+G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

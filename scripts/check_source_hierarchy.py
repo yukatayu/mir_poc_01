@@ -224,6 +224,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/139-g1-obl021-artifact-identity-wrapper-preflight.md",
         "plan/140-g1-obl021-artifact-annex-template.md",
         "plan/141-g1-status-packet-shell-unresolved-slots.md",
+        "plan/142-g1-status-packet-shell-evidence-dry-run.md",
     ],
     "scripts": [
         "scripts",
