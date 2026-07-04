@@ -88,12 +88,30 @@ def _load_expected_sidecar(row: dict[str, Any]) -> dict[str, Any]:
     return json.loads(sidecar_path.read_text())
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def repo_display_text(text: str) -> str:
+    text = text.replace(f"{REPO_ROOT}/", "")
+    return text.replace(str(REPO_ROOT), ".")
+
+
+def compose_display_text(text: str, output_dir: Path) -> str:
+    text = repo_display_text(text)
+    text = text.replace(f"{output_dir}/", "")
+    return text.replace(str(output_dir), "<compose-output>")
+
+
 def list_samples() -> list[dict[str, str]]:
     return [
         {
             "sample_id": row["sample_id"],
             "family": "alpha-network-docker",
-            "source_root": str(SAMPLE_ROOT),
+            "source_root": repo_cli_arg(SAMPLE_ROOT),
             "summary": row["summary"],
         }
         for row in IMPLEMENTED_ROWS
@@ -122,7 +140,8 @@ def _check_docker_available() -> None:
         ) from error
     except subprocess.CalledProcessError as error:
         raise RuntimeError(
-            f"docker compose is unavailable: {error.stderr.strip() or error.stdout.strip()}"
+            "docker compose is unavailable: "
+            f"{repo_display_text(error.stderr.strip() or error.stdout.strip())}"
         ) from error
 
 
@@ -130,7 +149,7 @@ def _check_binary_available() -> None:
     if not BINARY_PATH.exists():
         raise RuntimeError(
             "missing prebuilt runtime example "
-            f"`{BINARY_PATH}`; run `cargo build -p mir-runtime --example mirrorea_alpha_network_runtime` first"
+            f"`{repo_cli_arg(BINARY_PATH)}`; run `cargo build -p mir-runtime --example mirrorea_alpha_network_runtime` first"
         )
 
 
@@ -154,7 +173,7 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
             "docker",
             "compose",
             "-f",
-            str(COMPOSE_FILE),
+            repo_cli_arg(COMPOSE_FILE),
             "up",
             "--abort-on-container-exit",
             "--exit-code-from",
@@ -164,7 +183,7 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
             "docker",
             "compose",
             "-f",
-            str(COMPOSE_FILE),
+            repo_cli_arg(COMPOSE_FILE),
             "down",
             "--remove-orphans",
             "-v",
@@ -180,7 +199,9 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
                 text=True,
             )
         except subprocess.CalledProcessError as error:
-            stderr = error.stderr.strip() or error.stdout.strip()
+            stderr = compose_display_text(
+                error.stderr.strip() or error.stdout.strip(), output_dir
+            )
             raise RuntimeError(
                 f"Docker Compose run for {sample_id} failed: {stderr}"
             ) from error
@@ -196,8 +217,10 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
 
         world_path = output_dir / "world.json"
         participant_path = output_dir / "participant.json"
-        world = _read_json_file(world_path)
-        participant = _read_json_file(participant_path)
+        world = _read_json_file(world_path, display_path="world.json")
+        participant = _read_json_file(
+            participant_path, display_path="participant.json"
+        )
         _validate_outputs(
             sample_id,
             row,
@@ -212,16 +235,20 @@ def _run_compose(sample_id: str) -> dict[str, Any]:
             "summary": row["summary"],
             "transport_surface": "docker_compose_tcp",
             "transport_medium": TRANSPORT_MEDIUM,
-            "compose_file": str(COMPOSE_FILE),
-            "docker_stdout": completed.stdout.strip().splitlines(),
+            "compose_file": repo_cli_arg(COMPOSE_FILE),
+            "docker_stdout": [
+                compose_display_text(line, output_dir)
+                for line in completed.stdout.strip().splitlines()
+            ],
             "world": world,
             "participant": participant,
         }
 
 
-def _read_json_file(path: Path) -> dict[str, Any]:
+def _read_json_file(path: Path, *, display_path: str | None = None) -> dict[str, Any]:
     if not path.exists():
-        raise RuntimeError(f"expected JSON output missing: {path}")
+        display = display_path or repo_display_text(str(path))
+        raise RuntimeError(f"expected JSON output missing: {display}")
     return json.loads(path.read_text())
 
 
@@ -383,9 +410,9 @@ def check_all() -> dict[str, Any]:
 
 def closeout() -> dict[str, Any]:
     return {
-        "sample_root": str(SAMPLE_ROOT),
-        "compose_file": str(COMPOSE_FILE),
-        "binary_path": str(BINARY_PATH),
+        "sample_root": repo_cli_arg(SAMPLE_ROOT),
+        "compose_file": repo_cli_arg(COMPOSE_FILE),
+        "binary_path": repo_cli_arg(BINARY_PATH),
         "implemented_samples": [row["sample_id"] for row in IMPLEMENTED_ROWS],
         "stage_c_required_rows": list(STAGE_C_REQUIRED_ROWS),
         "planned_only_rows": list(PLANNED_ONLY_ROWS),

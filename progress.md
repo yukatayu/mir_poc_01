@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:51 JST
+最終更新: 2026-07-04 16:01 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -817,7 +817,20 @@ subprocess argv path portability hardening, plus practical alpha-0.5 session
 helper nested session package argv path portability hardening, plus Surface
 release-check output path serialization hardening, plus Product Alpha
 installed-binary generated path serialization hardening, plus Full System V1
-helper nested source argv path portability hardening.
+helper nested source argv path portability hardening, plus alpha network Docker
+success/failure path serialization hardening.
+
+- 2026-07-04 16:01 JST
+  `scripts/alpha_network_docker_e2e.py` の `list` / `closeout` /
+  `_run_compose` success payload / failure reason を repo-relative または
+  compose-output-relative 表示に変更した。Docker bind mount 用 env の
+  `MIRROREA_ALPHA_NETWORK_BINARY` と temporary output dir は実行上必要な
+  host absolute path のまま保持し、`docker compose -f` argv と user-facing
+  JSON は `samples/...` / `target/...` 表示になる。Unit 16 tests、Cargo
+  `alpha_network_runtime` 7 tests、Docker `run NET-02`、`check-all` 6/6、
+  `stage-c-closeout` complete true、`/tmp` からの closeout invocation が通過し、
+  returned payload host path matches 0 を確認した。sample status、workflow
+  status、transport semantics、WAN/federation、ABI、canon claim は変更していない。
 
 - 2026-07-04 15:51 JST
   `scripts/full_system_v1_samples.py` の `_check_source` /

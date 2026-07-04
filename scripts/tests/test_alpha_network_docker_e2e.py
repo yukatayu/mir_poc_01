@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import subprocess
 import unittest
 from pathlib import Path
 import sys
@@ -18,11 +19,29 @@ class AlphaNetworkDockerE2ETests(unittest.TestCase):
             ["NET-02", "NET-03", "NET-04", "NET-05", "NET-07", "NET-09"],
         )
 
+    def test_list_reports_repo_relative_source_roots(self) -> None:
+        rows = runner.list_samples()
+
+        self.assertEqual(
+            {row["source_root"] for row in rows},
+            {"samples/alpha/network-docker"},
+        )
+        self.assertFalse(
+            any(row["source_root"].startswith(f"{runner.REPO_ROOT}/") for row in rows)
+        )
+
     def test_closeout_records_binary_compose_and_planned_rows(self) -> None:
         payload = runner.closeout()
 
-        self.assertIn("docker-compose.alpha-net.yml", payload["compose_file"])
-        self.assertIn("mirrorea_alpha_network_runtime", payload["binary_path"])
+        self.assertEqual(payload["sample_root"], "samples/alpha/network-docker")
+        self.assertEqual(
+            payload["compose_file"],
+            "samples/alpha/network-docker/docker-compose.alpha-net.yml",
+        )
+        self.assertEqual(
+            payload["binary_path"],
+            "target/debug/examples/mirrorea_alpha_network_runtime",
+        )
         self.assertEqual(
             payload["stage_c_required_rows"],
             ["NET-02", "NET-03", "NET-04", "NET-05", "NET-07", "NET-09"],
@@ -197,6 +216,118 @@ class AlphaNetworkDockerE2ETests(unittest.TestCase):
         self.assertFalse(payload["stage_c_complete"])
         self.assertEqual(payload["network_check"]["failed"][0]["sample_id"], "NET-03")
 
+    def test_run_compose_uses_repo_relative_compose_file_arg(self) -> None:
+        runs = []
+
+        def fake_run(argv, **kwargs):
+            runs.append((argv, kwargs))
+            return mock.Mock(stdout="compose ok\n")
+
+        with mock.patch.object(runner, "_check_binary_available"), mock.patch.object(
+            runner, "_check_docker_available"
+        ), mock.patch.object(
+            runner.subprocess, "run", side_effect=fake_run
+        ), mock.patch.object(
+            runner, "_load_expected_sidecar", return_value={}
+        ), mock.patch.object(
+            runner, "_validate_outputs"
+        ), mock.patch.object(
+            runner,
+            "_read_json_file",
+            side_effect=[{"sample_id": "NET-02"}, {"sample_id": "NET-02"}],
+        ):
+            payload = runner._run_compose("NET-02")
+
+        up_argv, up_kwargs = runs[0]
+        down_argv, _down_kwargs = runs[1]
+        self.assertEqual(
+            up_argv[up_argv.index("-f") + 1],
+            "samples/alpha/network-docker/docker-compose.alpha-net.yml",
+        )
+        self.assertEqual(
+            down_argv[down_argv.index("-f") + 1],
+            "samples/alpha/network-docker/docker-compose.alpha-net.yml",
+        )
+        self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in up_argv))
+        self.assertTrue(
+            up_kwargs["env"]["MIRROREA_ALPHA_NETWORK_BINARY"].startswith(
+                f"{runner.REPO_ROOT}/"
+            )
+        )
+        self.assertEqual(
+            payload["compose_file"],
+            "samples/alpha/network-docker/docker-compose.alpha-net.yml",
+        )
+
+    def test_run_compose_sanitizes_docker_stdout_paths(self) -> None:
+        temp_dir = "/tmp/alpha network output"
+
+        def fake_run(argv, **_kwargs):
+            return mock.Mock(
+                stdout=(
+                    f"using {runner.REPO_ROOT}/samples/alpha/network-docker\n"
+                    f"wrote {temp_dir}/world.json\n"
+                )
+            )
+
+        with mock.patch.object(runner, "_check_binary_available"), mock.patch.object(
+            runner, "_check_docker_available"
+        ), mock.patch.object(
+            runner.tempfile, "TemporaryDirectory", return_value=TempDirStub(temp_dir)
+        ), mock.patch.object(
+            runner.subprocess, "run", side_effect=fake_run
+        ), mock.patch.object(
+            runner, "_load_expected_sidecar", return_value={}
+        ), mock.patch.object(
+            runner, "_validate_outputs"
+        ), mock.patch.object(
+            runner,
+            "_read_json_file",
+            side_effect=[{"sample_id": "NET-02"}, {"sample_id": "NET-02"}],
+        ):
+            payload = runner._run_compose("NET-02")
+
+        stdout_text = "\n".join(payload["docker_stdout"])
+        self.assertIn("samples/alpha/network-docker", stdout_text)
+        self.assertIn("world.json", stdout_text)
+        self.assertNotIn(str(runner.REPO_ROOT), stdout_text)
+        self.assertNotIn(temp_dir, stdout_text)
+
+    def test_run_compose_failure_sanitizes_repo_and_temp_paths(self) -> None:
+        temp_dir = "/tmp/alpha network output"
+        failed = subprocess.CalledProcessError(
+            1,
+            ["docker", "compose"],
+            stderr=(
+                f"failed at {runner.REPO_ROOT}/samples/alpha/network-docker "
+                f"and {temp_dir}/participant.json"
+            ),
+        )
+
+        with mock.patch.object(runner, "_check_binary_available"), mock.patch.object(
+            runner, "_check_docker_available"
+        ), mock.patch.object(
+            runner.tempfile, "TemporaryDirectory", return_value=TempDirStub(temp_dir)
+        ), mock.patch.object(
+            runner.subprocess,
+            "run",
+            side_effect=[failed, mock.Mock(stdout="down ok\n")],
+        ):
+            with self.assertRaisesRegex(RuntimeError, "participant[.]json") as error:
+                runner._run_compose("NET-02")
+
+        self.assertNotIn(str(runner.REPO_ROOT), str(error.exception))
+        self.assertNotIn(temp_dir, str(error.exception))
+
+    def test_missing_compose_output_uses_display_path(self) -> None:
+        with self.assertRaisesRegex(RuntimeError, "world[.]json") as error:
+            runner._read_json_file(
+                Path("/tmp/alpha network output/world.json"),
+                display_path="world.json",
+            )
+
+        self.assertNotIn("/tmp/alpha network output", str(error.exception))
+
     def test_missing_binary_is_reported_honestly(self) -> None:
         original_binary = runner.BINARY_PATH
         try:
@@ -205,6 +336,25 @@ class AlphaNetworkDockerE2ETests(unittest.TestCase):
                 runner._check_binary_available()
         finally:
             runner.BINARY_PATH = original_binary
+
+    def test_missing_repo_binary_failure_reason_uses_repo_relative_path(self) -> None:
+        original_binary = runner.BINARY_PATH
+        try:
+            runner.BINARY_PATH = (
+                runner.REPO_ROOT
+                / "target/debug/examples/definitely-missing-alpha-network-runtime"
+            )
+            payload = runner.check_all()
+        finally:
+            runner.BINARY_PATH = original_binary
+
+        self.assertEqual(len(payload["failed"]), 6)
+        for row in payload["failed"]:
+            self.assertIn(
+                "target/debug/examples/definitely-missing-alpha-network-runtime",
+                row["reason"],
+            )
+            self.assertNotIn(str(runner.REPO_ROOT), row["reason"])
 
     def test_format_pretty_for_run_payload(self) -> None:
         pretty = runner.format_pretty(
@@ -215,6 +365,17 @@ class AlphaNetworkDockerE2ETests(unittest.TestCase):
         )
         self.assertIn("NET-03 docker_compose_tcp", pretty)
         self.assertIn("membership_freshness", pretty)
+
+
+class TempDirStub:
+    def __init__(self, path: str) -> None:
+        self.path = path
+
+    def __enter__(self) -> str:
+        return self.path
+
+    def __exit__(self, *_args: object) -> None:
+        return None
 
 
 if __name__ == "__main__":
