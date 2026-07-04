@@ -317,7 +317,19 @@ the fresh OBL-001/020/021 Lean evidence-readiness dry-run that P80 cites.
 
 ## Commit / push status
 
-Pending at initial report creation.
+Substantive commit:
+
+- `1ef2432fae485fe837cb65dd91011ca8d4049166`
+  (`Add G1 requested status options matrix`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- `HEAD == origin/main` confirmed after push.
+
+This report was then updated to record the substantive commit and push status.
+The follow-up report-status commit is intentionally not recursively recorded in
+this report.
 
 ## Sub-agent session close status
 
