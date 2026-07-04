@@ -308,7 +308,19 @@ Reason:
 
 ## Commit / push status
 
-Not yet committed at initial report creation.
+Substantive commit:
+
+- `258e70f49b99a4c03437f3b57719a8e26168dd63`
+  (`Add G1 OBL020 artifact identity preflight`)
+
+Push status:
+
+- Pushed to `origin/main`.
+- `HEAD == origin/main` confirmed after push.
+
+This report was then updated to record the substantive commit and push status.
+The follow-up report-status commit is intentionally not recursively recorded in
+this report.
 
 ## Sub-agent session close status
 
