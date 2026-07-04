@@ -135,6 +135,12 @@ extraction、proposal submission、canon edit、ledger movement、wrapper
 creation、OPEN-014 resolution、proof / conformance claim、runtime readiness、
 G1 exit は主張しません。
 
+`plan/148` は storage workdir mountpoint guard hardening です。external
+workdir を exact mountpoint として確認し、root filesystem 上の通常 directory
+を mounted 扱いしないよう storage env / cleanup helper を強化します。cleanup、
+mount provisioning、cache move、sample / workflow status、canon edit、OBL
+status、proof / conformance、runtime readiness、G1 exit は主張しません。
+
 ## 現在の到達点
 
 - active sample suite は `samples/clean-near-end/`

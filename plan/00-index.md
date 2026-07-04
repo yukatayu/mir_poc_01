@@ -102,8 +102,9 @@
 84. G1 OBL-024 Lean replay vocabulary refinement は `plan/113`
 85. G1 OBL-024 Lean association vocabulary refinement は `plan/114`
 86. G1 OBL-024 association guard hardening は `plan/115`
-87. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-88. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+87. storage workdir mountpoint guard hardening は `plan/148`
+88. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+89. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -365,6 +366,13 @@
   status selection、review request extraction、proposal submission、canon
   edit、ledger movement、wrapper creation、OPEN-014 resolution、proof /
   conformance claim、runtime readiness、G1 exit は主張しない
+- **storage workdir mountpoint guard hardening**:
+  `plan/148-storage-workdir-mountpoint-guard-hardening.md` は、external
+  workdir が exact mountpoint ではない場合に `--ensure-dirs` と confirmed
+  cleanup が root filesystem 上の通常 directory を mounted 扱いしないよう
+  guard を強化する tooling memory である。cleanup、mount provisioning、
+  sample status、workflow status、canon edit、OBL status、proof /
+  conformance claim、runtime readiness、G1 exit は主張しない
 - **not final public**:
   concrete tool brand、final shared contract、public API、exact low-level source surfaceはまだ採っていない
 
@@ -495,6 +503,8 @@
   `plan/146-g1-obl001-explanation-boundary-guard-hardening.md`
 - G1 next-line promotion-boundary audit:
   `plan/147-g1-next-line-promotion-boundary-audit.md`
+- Storage workdir mountpoint guard hardening:
+  `plan/148-storage-workdir-mountpoint-guard-hardening.md`
 - G1 OBL-001 Lean statement inventory:
   `plan/73-g1-obl001-lean-statement-inventory.md`
 - G1 OBL-001 repo-local Lean statement draft:

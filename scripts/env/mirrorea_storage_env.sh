@@ -33,8 +33,13 @@ export MIRROREA_LEAN_CACHE_DIR="${MIRROREA_LEAN_CACHE_DIR:-$MIRROREA_WORKDIR/lea
 export MIRROREA_TEMP_DIR="${MIRROREA_TEMP_DIR:-$MIRROREA_WORKDIR/temp}"
 export MIRROREA_LOG_DIR="${MIRROREA_LOG_DIR:-$MIRROREA_WORKDIR/logs}"
 
+mirrorea_is_mountpoint() {
+  local path="$1"
+  [[ -d "$path" ]] && findmnt --mountpoint "$path" >/dev/null 2>&1
+}
+
 mounted=no
-if [[ -d "$MIRROREA_WORKDIR" ]] && findmnt -T "$MIRROREA_WORKDIR" >/dev/null 2>&1; then
+if mirrorea_is_mountpoint "$MIRROREA_WORKDIR"; then
   mounted=yes
 fi
 

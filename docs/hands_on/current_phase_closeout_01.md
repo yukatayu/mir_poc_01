@@ -15,7 +15,8 @@
 python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 bash scripts/env/mirrorea_storage_env.sh
-bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+# only after MIRROREA_WORKDIR_MOUNTED=yes:
+# bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 free -h
 ls -ld target /mnt/mirrorea-work/cargo-target /mnt/mirrorea-work/cargo-registry-cache /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install
 python3 scripts/current_l2_source_sample_regression.py inventory
@@ -89,7 +90,7 @@ python3 scripts/sugoroku_world_samples.py run 09_detach_todo --debug hotplug --f
 - typed external `EXT-03/04`、network `NET-02..05`、projection/codegen generated manifest bridge、viewer `P16-VIEW-01..05` は final public ABI / service / emitted executable ではなく、typed helper evidence として読めること。projection/codegen current `equivalence` reading は review-category alignment inventory であり、generated place-program synthesis / placement optimizer / deployment planner / cross-place equivalence checker / proof completion ではないこと。
 - `auth none` baseline のまま、transport / authentication / membership / capability / witness / visualization を collapse していないこと。
 - NET-05 observer route trace が fail-closed であり、observer-safe debug output が principal / auth / freshness / authorization / raw witness refs を漏らさないこと。
-- storage/backend guardrail が external workdir、`CARGO_TARGET_DIR` / `CARGO_HOME`、non-destructive cleanup list-mode、`llvm/src` exclusion、parent non-writable guard を current operational floorとして確認できること。
+- storage/backend guardrail が exact mountpoint としての external workdir、`CARGO_TARGET_DIR` / `CARGO_HOME`、non-destructive cleanup list-mode、`llvm/src` exclusion、parent non-writable guard を current operational floorとして確認できること。`--ensure-dirs` は `MIRROREA_WORKDIR_MOUNTED=yes` を確認した後にだけ使う。
 - package-by-package history はこの guide では再列挙せず、`docs/reports/` と relevant `plan/` を正本として読むこと。
 
 ## これではまだ確認できないこと

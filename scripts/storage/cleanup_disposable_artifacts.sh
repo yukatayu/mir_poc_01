@@ -29,10 +29,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+cleanup_allow_unmounted="$allow_unmounted"
 source "$REPO_ROOT/scripts/env/mirrorea_storage_env.sh" >/dev/null
+allow_unmounted="$cleanup_allow_unmounted"
 
 mounted=no
-if [[ -d "$MIRROREA_WORKDIR" ]] && findmnt -T "$MIRROREA_WORKDIR" >/dev/null 2>&1; then
+if mirrorea_is_mountpoint "$MIRROREA_WORKDIR"; then
   mounted=yes
 fi
 

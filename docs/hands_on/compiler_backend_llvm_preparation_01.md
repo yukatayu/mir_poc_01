@@ -14,7 +14,8 @@
 
 ```bash
 bash scripts/env/mirrorea_storage_env.sh
-bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
+# only after MIRROREA_WORKDIR_MOUNTED=yes:
+# bash scripts/env/mirrorea_storage_env.sh --ensure-dirs
 bash scripts/storage/detach_prepare.sh
 bash scripts/storage/cleanup_disposable_artifacts.sh --list
 df -h
@@ -28,16 +29,19 @@ CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-ru
 ## 何を見るか
 
 - `/mnt/mirrorea-work` が `/dev/vdb1` として mounted されていること
+- `MIRROREA_WORKDIR_MOUNTED=yes` が exact mountpoint 判定として出ていること
 - `target/` が `/mnt/mirrorea-work/cargo-target` へ symlink していること
 - `CARGO_HOME` が `/mnt/mirrorea-work/cargo-registry-cache` を向けること
 - `llvm/src` / `llvm/build` / `llvm/install` が staging path として存在すること
 - `/mnt/mirrorea-work/llvm` の owner / writable status が明示されること
 - cleanup helper の list-mode が `llvm/src` を disposable candidate に含めないこと
+- cleanup helper が exact mountpoint ではない workdir の confirmed cleanup を拒否すること
 - helper 実装上は parent non-writable 時の `llvm/build` / `llvm/install` cleanup guard を持つこと
 
 ## これで確認できること
 
 - small VPS 前提で heavy disposable artifact を external workdir へ逃がす current rule
+- `--ensure-dirs` は external workdir の exact mountpoint 確認後にだけ使う current rule
 - cleanup helper が repo source / report を削除しない current safety line
 - LLVM staging path readiness と ownership mismatch が helper 出力で visible になっていること
 - cleanup refusal branch 自体は non-destructive current closeout では実行せず、guard implementation / stop line として文書化していること

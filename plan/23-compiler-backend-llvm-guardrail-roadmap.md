@@ -13,19 +13,21 @@ actual LLVM checkout/build、final backend choice、packaging success criteria �
 
 - mounted workdir
   - `/mnt/mirrorea-work`
-  - `/dev/vdb1` ext4 `mirrorea-work`
-- repo target cutover
-  - `target/ -> /mnt/mirrorea-work/cargo-target`
-  - live usage:
-    `cargo-target ~= 5.9G`
+  - current audit on 2026-07-05: not mounted in this environment
+  - historical first-cut closeout expected an external ext4 workdir, but that
+    is not current live state and must not be assumed
+- repo target
+  - current audit on 2026-07-05: repo-local `target/` is present and about
+    7.0G after broad validation
+  - no current `target -> /mnt/mirrorea-work/cargo-target` symlink is assumed
 - storage env
   - `scripts/env/mirrorea_storage_env.sh`
   - `MIRROREA_WORKDIR`
   - `CARGO_TARGET_DIR`
   - `MIRROREA_CARGO_REGISTRY_CACHE`
   - `CARGO_HOME`
-  - live cache usage:
-    `cargo-registry-cache ~= 9.7M`
+  - `MIRROREA_WORKDIR_MOUNTED` is based on exact mountpoint detection, not on
+    the filesystem containing the path
 - detach / cleanup
   - `scripts/storage/detach_prepare.sh`
   - `scripts/storage/cleanup_disposable_artifacts.sh --list`
@@ -33,8 +35,10 @@ actual LLVM checkout/build、final backend choice、packaging success criteria �
   - `/mnt/mirrorea-work/llvm/src`
   - `/mnt/mirrorea-work/llvm/build`
   - `/mnt/mirrorea-work/llvm/install`
-  - live ownership mismatch:
-    `/mnt/mirrorea-work/llvm` は `root:root`、`build/install/src` は empty staging dir だが、routine helper で ownership repair はしない
+  - current audit on 2026-07-05: staging dirs are missing because the external
+    workdir is not mounted
+  - routine helper still does not repair ownership or create heavy directories
+    under an unmounted default root
 
 ## current rules
 
@@ -43,18 +47,22 @@ actual LLVM checkout/build、final backend choice、packaging success criteria �
 3. `CARGO_TARGET_DIR` と `CARGO_HOME` は external workdir 側へ逃がせるように保つ
 4. cleanup は `--confirm` なしで delete しない
 5. mount / format / ownership repair は routine helper に埋め込まず、明示的 setup path に残す
-6. `llvm/src` は source checkout lifecycle 未決のため disposable cleanup に含めない
-7. `llvm/build` / `llvm/install` cleanup は parent staging dir が non-writable なままでは実行しない
+6. external workdir は exact mountpoint として確認する。root filesystem 上に
+   directory が存在するだけでは mounted 扱いしない
+7. `llvm/src` は source checkout lifecycle 未決のため disposable cleanup に含めない
+8. `llvm/build` / `llvm/install` cleanup は parent staging dir が non-writable なままでは実行しない
 
 ## non-destructive probe floor
 
 - `df -h .`
 - `free -h`
-- `df -h / /mnt/mirrorea-work`
-- `findmnt /mnt/mirrorea-work`
+- `df -h .`
+- `lsblk -f`
+- `findmnt /mnt/mirrorea-work` または `findmnt --mountpoint /mnt/mirrorea-work`
 - `du -sh target /mnt/mirrorea-work/cargo-target`
 - `bash scripts/env/mirrorea_storage_env.sh`
-- `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs`
+- `bash scripts/env/mirrorea_storage_env.sh --ensure-dirs` only after
+  `MIRROREA_WORKDIR_MOUNTED=yes`
 - `bash scripts/storage/detach_prepare.sh`
 - `bash scripts/storage/cleanup_disposable_artifacts.sh --list`
 - `ls -ld /mnt/mirrorea-work/llvm /mnt/mirrorea-work/llvm/src /mnt/mirrorea-work/llvm/build /mnt/mirrorea-work/llvm/install`
@@ -69,10 +77,13 @@ actual LLVM checkout/build、final backend choice、packaging success criteria �
 - final FFI / engine adapter / host deployment contract
 - root-owned llvm parent の ownership repair
 - source checkout retention / cleanup lifecycle
+- cleanup of repo-local `target/` without explicit user approval
 
 ## next relation
 
 backend guardrail の current first-cut closeout は `P17` として current snapshot に固定済みである。
+The current 2026-07-05 audit supersedes any assumption that `/mnt/mirrorea-work`
+is presently mounted or that repo `target/` is currently a symlink into it.
 public-freeze mixed-gate 側では、この guardrail を
 `toolchain adjacency inventory` としてだけ参照し、
 actual LLVM build、backend choice、installed-binary packaging は

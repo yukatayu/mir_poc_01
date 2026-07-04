@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 01:08 JST
+最終更新: 2026-07-05 01:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -295,6 +295,13 @@ Current holding state:
   proposal, edit canon, move the ledger, create a wrapper, resolve OPEN-014,
   claim proof / conformance, change runtime readiness, or relabel sample
   status.
+- `plan/148-storage-workdir-mountpoint-guard-hardening.md` now records a
+  tooling-only storage guard hardening. The storage env and cleanup helpers now
+  treat a workdir as mounted only when it is an exact mountpoint, so an
+  ordinary root-filesystem directory cannot satisfy the external-workdir guard.
+  This does not run cleanup, mount storage, move build caches, change sample or
+  workflow status, edit canon, choose an OBL extraction line, move the ledger,
+  claim proof / conformance, change runtime readiness, or exit G1.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -317,17 +324,19 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..147`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..148`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
-  slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
+  slice / SCN manifest / SCN-01 negative maps, plus the storage workdir
+  mountpoint guard hardening; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
-  now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..147`. This is documentation taxonomy maintenance only.
+  now also lists the previously omitted detailed filenames for `plan/106..108`
+  and `plan/118..147`, plus the storage guard `plan/148`. This is
+  documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..147`. This keeps future plan-file additions
+  cover current numbered `plan/00..148`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -933,6 +942,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
 | `repo-triage recut follow-up` | `Macro 0` maintenance reserve | use `plan/120` if a future package needs line-level citation, actual archive move comparison, or front-door taxonomy rewrite after the initial Product Alpha / Full System V1 / Surface useful-floor / keep-core / archive / postpone matrix | no deletion, archive move, root rename, sample status relabel, or canon edit without explicit follow-up package |
 | `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
+| `storage workdir guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, or generated-artifact work finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package |
 
 ## ordered self-driven packages
 
@@ -952,7 +962,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator discipline | self-driven through every Surface package close |
+| `Macro 0` | docs / reports / validator / storage guard discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

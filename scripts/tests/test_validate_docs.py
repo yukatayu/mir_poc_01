@@ -356,6 +356,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/145-g1-obl001-artifact-decision-reuse-audit.md",
             "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
             "plan/147-g1-next-line-promotion-boundary-audit.md",
+            "plan/148-storage-workdir-mountpoint-guard-hardening.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

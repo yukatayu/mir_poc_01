@@ -570,6 +570,7 @@ REQUIRED = [
     "plan/145-g1-obl001-artifact-decision-reuse-audit.md",
     "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
     "plan/147-g1-next-line-promotion-boundary-audit.md",
+    "plan/148-storage-workdir-mountpoint-guard-hardening.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

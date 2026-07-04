@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 01:08 JST
+最終更新: 2026-07-05 01:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -352,6 +352,16 @@ semantic source authority.
   slots. It does not extract a review request, choose requested status, submit
   a proposal, edit canon, move the ledger, create a wrapper, resolve OPEN-014,
   claim proof / conformance, change runtime readiness, or exit G1.
+- Current storage workdir mountpoint guard note:
+  `plan/148-storage-workdir-mountpoint-guard-hardening.md` records a
+  tooling-only guard hardening after the live audit found `/mnt/mirrorea-work`
+  unmounted and repo-local `target/` at about 7.0G. The env and cleanup helpers
+  now use exact mountpoint detection instead of "filesystem containing path"
+  detection, so an ordinary root-filesystem directory is not treated as a
+  mounted external workdir. This does not run cleanup, mount storage, move build
+  caches, change sample or workflow status, edit canon, choose an OBL extraction
+  line, move the ledger, claim proof / conformance, change runtime readiness,
+  or exit G1.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -1022,7 +1032,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability | Surface alpha audit closed; no current promoted Surface package | light | maintenance only |
+| `Macro 0` | repository memory / docs / traceability / storage guard discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection | light | maintenance only |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1164,6 +1174,14 @@ OBL-020 scope decision reuse / unresolved-slot audit, plus G1 OBL-001 artifact
 decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening.
 
+- 2026-07-05 01:28 JST
+  `plan/148-storage-workdir-mountpoint-guard-hardening.md` を追加し、storage env
+  / cleanup helper の mount 判定を exact mountpoint 判定へ harden した。RED/GREEN
+  regression で、存在するだけの unmounted workdir では `--ensure-dirs` と
+  cleanup `--confirm` が拒否されることを確認した。`/mnt/mirrorea-work` は現在
+  mounted ではなく、repo-local `target/` は約 7.0G。cleanup、mount
+  provisioning、cache move、sample status、workflow status、canon edit、OBL
+  extraction、proof / conformance、runtime readiness、G1 exit は主張していない。
 - 2026-07-05 01:08 JST
   `plan/147-g1-next-line-promotion-boundary-audit.md` を追加し、広い自走依頼は
   OBL-020 / OBL-001 review-facing extraction candidate の promotion ではない

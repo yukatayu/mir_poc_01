@@ -10,7 +10,8 @@ docs-first guardrail です。
 - `/mnt/mirrorea-work`
 - `target/ -> /mnt/mirrorea-work/cargo-target`
 - `scripts/env/mirrorea_storage_env.sh`
-- `scripts/env/mirrorea_storage_env.sh --ensure-dirs`
+- `scripts/env/mirrorea_storage_env.sh --ensure-dirs` after
+  `MIRROREA_WORKDIR_MOUNTED=yes`
 - `scripts/storage/detach_prepare.sh`
 - `scripts/storage/cleanup_disposable_artifacts.sh --list`
 - `CARGO_HOME=/mnt/mirrorea-work/cargo-registry-cache cargo test -p mir-ast --no-run`
@@ -21,6 +22,8 @@ docs-first guardrail です。
 
 - source repo は detachable storage only にしない
 - heavy disposable artifact は external workdir を優先する
+- external workdir は exact mountpoint として確認する。root filesystem 上に
+  directory が存在するだけでは mounted 扱いしない
 - `CARGO_TARGET_DIR` と `CARGO_HOME` は external workdir へ向けられるように保つ
 - cleanup は explicit confirmation なしで delete しない
 - `llvm/build` / `llvm/install` cleanup は parent staging dir が non-writable なままでは実行しない
