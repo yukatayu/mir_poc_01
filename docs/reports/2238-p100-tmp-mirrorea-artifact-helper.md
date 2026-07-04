@@ -254,8 +254,9 @@ Primary commit:
 - `4f1ca22d Add tmp Mirrorea artifact helper`
 - Pushed to `origin/main`.
 
-Status-report follow-up commit pending at the time this section was first
-updated.
+This status section is maintained by a follow-up report-status commit. The
+follow-up commit hash is reported through `git log` / final handoff rather than
+recursively embedding the containing commit's own hash in this file.
 
 ## Sub-agent session close status
 
