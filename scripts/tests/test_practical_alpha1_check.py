@@ -1,4 +1,5 @@
 import json
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -14,6 +15,45 @@ import practical_alpha1_check as runner  # noqa: E402
 class PracticalAlpha1CheckTests(unittest.TestCase):
     def sidecar_path(self, relative: str) -> Path:
         return REPO_ROOT / relative
+
+    def test_repo_cli_arg_uses_repo_relative_paths_for_package_dirs(self) -> None:
+        package_dir = REPO_ROOT / runner.IMPLEMENTED_ROWS[0]["package_dir"]
+
+        self.assertEqual(
+            runner.repo_cli_arg(package_dir),
+            "samples/practical-alpha1/packages/chk-lif-01-raw-dangling",
+        )
+
+    def test_repo_cli_arg_keeps_external_paths_absolute(self) -> None:
+        self.assertEqual(
+            runner.repo_cli_arg(Path("/tmp/mirrorea-practical-check-external")),
+            "/tmp/mirrorea-practical-check-external",
+        )
+
+    def test_build_check_report_uses_repo_relative_package_path(self) -> None:
+        package_dir = REPO_ROOT / runner.IMPLEMENTED_ROWS[1]["package_dir"]
+        captured: list[list[str]] = []
+
+        def fake_subprocess_run(argv, **kwargs):
+            captured.append(argv)
+            return subprocess.CompletedProcess(
+                argv,
+                0,
+                stdout=json.dumps({"sample_id": "CHK-LIF-02"}),
+                stderr="",
+            )
+
+        with mock.patch.object(runner.subprocess, "run", side_effect=fake_subprocess_run):
+            payload = runner._build_check_report(package_dir)
+
+        self.assertEqual(payload["sample_id"], "CHK-LIF-02")
+        self.assertIn(
+            "samples/practical-alpha1/packages/chk-lif-02-fallback-access-valid",
+            captured[0],
+        )
+        self.assertFalse(
+            any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in captured[0])
+        )
 
     def test_list_samples_matches_checker_rows(self) -> None:
         rows = runner.list_samples()

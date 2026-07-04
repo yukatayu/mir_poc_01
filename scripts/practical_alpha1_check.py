@@ -91,6 +91,14 @@ LIMITATIONS = [
 ]
 
 
+def repo_cli_arg(path: str | Path) -> str:
+    value = Path(path)
+    try:
+        return value.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(value)
+
+
 def _implemented_row(sample_id: str) -> dict[str, str]:
     for row in IMPLEMENTED_ROWS:
         if row["sample_id"] == sample_id:
@@ -125,7 +133,7 @@ def _build_check_report(package_path: str | Path) -> dict[str, Any]:
             "--example",
             "mir_practical_alpha1_check",
             "--",
-            str(package_path),
+            repo_cli_arg(package_path),
         ],
         cwd=REPO_ROOT,
         check=True,
@@ -136,7 +144,8 @@ def _build_check_report(package_path: str | Path) -> dict[str, Any]:
         return json.loads(completed.stdout)
     except json.JSONDecodeError as error:  # pragma: no cover
         raise RuntimeError(
-            f"checker command did not return JSON for {package_path}: {completed.stdout}"
+            "checker command did not return JSON for "
+            f"{repo_cli_arg(package_path)}: {completed.stdout}"
         ) from error
 
 

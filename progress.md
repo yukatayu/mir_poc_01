@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:34 JST
+最終更新: 2026-07-04 14:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -805,7 +805,17 @@ portability hardening, plus textual Mir helper raw payload path portability,
 Full System V1 helper output path audit, and Surface helper subprocess argv path
 portability hardening, plus Mir computational helper subprocess argv path
 portability hardening, plus practical alpha-1 transport helper path portability
-hardening.
+hardening, plus practical alpha-1 checker helper subprocess argv path
+portability hardening.
+
+- 2026-07-04 14:39 JST
+  `scripts/practical_alpha1_check.py` の nested checker Cargo example
+  package argv を repo-owned practical package roots について repo-relative
+  `samples/...` に変更した。Regression tests cover repo-owned package dirs,
+  external absolute fallback, and checker subprocess invocation. Unit 10
+  tests、`check-all` 10/10、`closeout` repo-root absolute match 0、Cargo
+  `practical_alpha1_checker` 3 tests が通過。sample status、workflow
+  status、semantics、ABI、canon claim は変更していない。
 
 - 2026-07-04 14:34 JST
   `scripts/practical_alpha1_transport.py` の local transport cargo example

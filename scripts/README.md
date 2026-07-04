@@ -26,6 +26,9 @@
 - practical alpha-1 first checker floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_check.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/chk-*/` through `crates/mir-ast::practical_alpha1_checker`
+  - repo-owned package inputs are passed to the nested checker Cargo example as
+    repo-relative `samples/...` argv so transient helper runs do not depend on
+    the host checkout path
   - it is a non-final checker-only command and does not emit runtime plans
 - practical alpha-1 first local-runtime floor now has an alpha-local script surface
   - `python3 scripts/practical_alpha1_run_local.py check-all --format json`
