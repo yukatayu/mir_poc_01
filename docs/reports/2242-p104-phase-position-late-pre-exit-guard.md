@@ -83,6 +83,8 @@ Start state was clean and synced with `origin/main` before edits:
 - `git push`
 - `git add docs/reports/2242-p104-phase-position-late-pre-exit-guard.md && git commit --no-gpg-sign -m "Record P104 phase guard commit status"`
 - `git push`
+- `git add docs/reports/2242-p104-phase-position-late-pre-exit-guard.md && git commit --no-gpg-sign -m "Finalize P104 phase guard report status"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -169,16 +171,14 @@ hardening with RED/GREEN local evidence and no new theoretical decision.
 
 ## Commit / push status
 
-Primary commit pushed:
+Primary commit:
 
 - `dee5117f Guard late phase-position reading`
+- Pushed to `origin/main`.
 
-Report commit-status update pushed:
-
-- `09a5f2d9 Record P104 phase guard commit status`
-
-This final paragraph removes the pending marker from the report and does not
-change project behavior.
+This status section is maintained by follow-up report-status commits. The
+follow-up commit hashes are reported through `git log` / final handoff rather
+than recursively embedding each containing commit's own hash in this file.
 
 ## Sub-agent session close status
 
