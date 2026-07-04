@@ -259,7 +259,12 @@ Sub-agent verification:
 
 ## Commit / push status
 
-Pending at initial report creation.
+Committed and pushed:
+
+- `6e73d4df Use relative operational helper inputs`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
