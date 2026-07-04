@@ -180,7 +180,10 @@ fixed in this package to keep scope narrow.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / initial report commit:
+  `b194555e Use relative surface release output paths`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
