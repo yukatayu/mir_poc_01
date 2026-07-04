@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 12:49 JST
+最終更新: 2026-07-04 12:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -796,7 +796,15 @@ source-hierarchy stale wording audit, and Full System V1 provider / renderer /
 release-check path portability hardening, plus Product Alpha release-check path
 portability hardening, plus active clean-near-end emitter / research abstract /
 current-L2 README path portability hardening, snapshot timestamp guard
-hardening, and current-L2 closeout `lean_roots` path portability hardening.
+hardening, current-L2 closeout `lean_roots` path portability hardening, and
+`scripts/README.md` validator responsibility refresh.
+
+- 2026-07-04 12:57 JST
+  `scripts/README.md` の `validate_docs.py` 説明を現行実装に合わせ、
+  source-hierarchy wording lint、active reader-facing host-specific repo path
+  lint、`progress.md` / `tasks.md` top `最終更新` freshness guard を docs
+  validation check の責務として明記した。script taxonomy の説明更新のみであり、
+  sample status、workflow status、semantics、ABI、canon status は変えていない。
 
 - 2026-07-04 12:49 JST
   README の標準入口 `make check` と `current_l2_guided_samples.py smoke-all`
