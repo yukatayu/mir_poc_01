@@ -27,6 +27,7 @@ retain the following phrases:
 - `plan/149-current-phase-position-reading.md`
 - `T0/G0 rebaseline`
 - `phase 1 of 9`
+- `late pre-exit`
 - `G0 exit`
 
 The phrases are intentionally small. The guard checks that the snapshot still
@@ -43,6 +44,16 @@ The package added failing tests before production code:
 The RED run showed both tests failing because `validate_docs.main()` still
 returned `0` when the phase-position phrases were missing. The GREEN run passed
 after adding the guard.
+
+P104 added a narrow follow-up RED/GREEN pair for the `late pre-exit` phrase:
+
+- `test_main_rejects_progress_missing_late_pre_exit_guard`
+- `test_main_rejects_tasks_missing_late_pre_exit_guard`
+
+The RED run showed both tests failing because `validate_docs.main()` still
+returned `0` when the rest of the phase-position phrases were present but
+`late pre-exit` was absent. The GREEN run passed after adding `late pre-exit`
+to the required snapshot phrases and updating the valid test scaffold.
 
 ## non-claims
 

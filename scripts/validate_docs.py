@@ -703,12 +703,14 @@ SNAPSHOT_PHASE_POSITION_GUARD_PHRASES = {
         "plan/149-current-phase-position-reading.md",
         "T0/G0 rebaseline",
         "phase 1 of 9",
+        "late pre-exit",
         "G0 exit",
     ],
     "tasks.md": [
         "plan/149-current-phase-position-reading.md",
         "T0/G0 rebaseline",
         "phase 1 of 9",
+        "late pre-exit",
         "G0 exit",
     ],
 }

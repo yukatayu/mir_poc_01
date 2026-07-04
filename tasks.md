@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 03:15 JST
+最終更新: 2026-07-05 03:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,8 +38,9 @@ Current holding state:
   unclaimed.
 - `plan/150-phase-position-validator-guard.md` now records the docs-validator
   guard that keeps the `plan/149` phase-position phrases present in
-  `progress.md` and `tasks.md`. This is drift protection only, not phase / gate
-  movement or percentage-as-gate.
+  `progress.md` and `tasks.md`; P104 extends the guard to include
+  `late pre-exit`. This is drift protection only, not phase / gate movement or
+  percentage-as-gate.
 - `plan/151-discord-webhook-secret-validator-guard.md` now records the
   secret-safe docs validator guard for concrete Discord webhook URL shape. The
   validator reports path / line only and does not print the URL body.
@@ -77,6 +78,12 @@ Current holding state:
   default self-driven line. This does not promote an extraction line, fill
   `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
   conformance, change runtime readiness, or relabel sample status.
+- P104 phase-position guard hardening extends the existing `plan/150`
+  validator guard so `progress.md` and this task map must retain
+  `late pre-exit` as part of the `plan/149` answer. This is drift protection
+  only and does not change phase / gate status, turn percentage into a gate,
+  edit canon, claim proof / conformance, change runtime readiness, or relabel
+  sample status.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -1040,7 +1047,7 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through package close when a concrete drift trigger exists; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, no default next Macro 0 package remains without a fresh concrete trigger, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through package close when a concrete drift trigger exists; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, no default next Macro 0 package remains without a fresh concrete trigger, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` / P104 guards that snapshot wording including `late pre-exit` in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

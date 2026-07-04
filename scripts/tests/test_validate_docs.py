@@ -43,6 +43,7 @@ class ValidateDocsTests(unittest.TestCase):
             "\n\nplan/149-current-phase-position-reading.md"
             "\nT0/G0 rebaseline"
             "\nphase 1 of 9"
+            "\nlate pre-exit"
             "\nG0 exit"
         )
 
@@ -530,6 +531,72 @@ class ValidateDocsTests(unittest.TestCase):
         )
         self.assertIn("tasks.md", stdout.getvalue())
         self.assertIn("T0/G0 rebaseline", stdout.getvalue())
+
+    def test_main_rejects_progress_missing_late_pre_exit_guard(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "progress.md").write_text(
+                self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
+                + self._snapshot_phase_position_guard_text().replace(
+                    "\nlate pre-exit", ""
+                ),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Snapshot docs are missing phase-position guard phrases",
+            stdout.getvalue(),
+        )
+        self.assertIn("progress.md", stdout.getvalue())
+        self.assertIn("late pre-exit", stdout.getvalue())
+
+    def test_main_rejects_tasks_missing_late_pre_exit_guard(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "tasks.md").write_text(
+                self._canon_notice_text()
+                + "\n\n"
+                + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS)
+                + self._snapshot_phase_position_guard_text().replace(
+                    "\nlate pre-exit", ""
+                ),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Snapshot docs are missing phase-position guard phrases",
+            stdout.getvalue(),
+        )
+        self.assertIn("tasks.md", stdout.getvalue())
+        self.assertIn("late pre-exit", stdout.getvalue())
 
     def test_required_scaffold_includes_product_alpha1_sample_docs(self) -> None:
         required_docs = set(validate_docs.REQUIRED)

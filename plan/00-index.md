@@ -386,9 +386,10 @@
 - **phase-position validator guard**:
   `plan/150-phase-position-validator-guard.md` は、`plan/149` の短い読みが
   `progress.md` / `tasks.md` から消えたときに `scripts/validate_docs.py`
-  が落ちるようにした docs-validator hardening memory である。canon edit、
-  phase / gate movement、percentage-as-gate、runtime / sample / workflow
-  status change は主張しない
+  が落ちるようにした docs-validator hardening memory である。現在は
+  `T0/G0 rebaseline`、9 段階中 1 段階目、`late pre-exit`、G0 exit 未達を
+  snapshot guard phrase として守る。canon edit、phase / gate movement、
+  percentage-as-gate、runtime / sample / workflow status change は主張しない
 - **Discord webhook secret validator guard**:
   `plan/151-discord-webhook-secret-validator-guard.md` は、tracked docs /
   source に concrete Discord webhook URL shape が入ったときに

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 03:15 JST
+最終更新: 2026-07-05 03:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -67,8 +67,10 @@ semantic source authority.
 - Current phase-position guard:
   `plan/150-phase-position-validator-guard.md` records the validator hardening
   that keeps the `plan/149` phase-position phrases present in `progress.md`
-  and `tasks.md`. This is a docs guard only; it does not change phase, gate,
-  proof, conformance, runtime, sample, or workflow readiness.
+  and `tasks.md`; P104 extends that guard to include `late pre-exit` so the
+  user-facing T0-position answer cannot silently lose the intra-T0 reading.
+  This is a docs guard only; it does not change phase, gate, proof,
+  conformance, runtime, sample, or workflow readiness.
 - Current Discord webhook secret guard:
   `plan/151-discord-webhook-secret-validator-guard.md` records the
   secret-safe docs validator guard for concrete Discord webhook URL shape. It
@@ -421,8 +423,8 @@ semantic source authority.
 - Current phase-position validator guard note:
   `plan/150-phase-position-validator-guard.md` hardens `scripts/validate_docs.py`
   so `progress.md` and `tasks.md` must retain the `plan/149` phase-position
-  guard phrases. This is management drift protection only, not a phase movement
-  or percentage-as-gate claim.
+  guard phrases, including `late pre-exit` after P104. This is management
+  drift protection only, not a phase movement or percentage-as-gate claim.
 - Current Discord webhook secret validator guard note:
   `plan/151-discord-webhook-secret-validator-guard.md` hardens
   `scripts/validate_docs.py` so concrete Discord webhook URLs in tracked docs /
@@ -1099,7 +1101,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; no default next Macro 0 package remains unless a fresh concrete drift trigger is identified; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording through `plan/150`, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | user choice / fresh trigger needed |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; no default next Macro 0 package remains unless a fresh concrete drift trigger is identified; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording including `late pre-exit` through `plan/150` / P104, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | user choice / fresh trigger needed |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1243,8 +1245,15 @@ sync guard hardening, plus phase-position validator guard hardening, plus
 Discord webhook secret validator guard hardening, plus P99 fresh runnable
 validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard, plus
 P101 storage helper scaffold guard registration, plus P102 no-default-next-line
-Oracle follow-up, plus P103 Macro 5 self-drive wording drift cleanup.
+Oracle follow-up, plus P103 Macro 5 self-drive wording drift cleanup, plus
+P104 phase-position `late pre-exit` guard hardening.
 
+- 2026-07-05 03:23 JST
+  P104 で `scripts/validate_docs.py` の phase-position snapshot guard を
+  `late pre-exit` まで広げ、`progress.md` / `tasks.md` が T0 内の late
+  pre-exit reading を落とした場合に失敗する RED/GREEN validator tests を追加した。
+  canon edit、phase / gate movement、percentage-as-gate、runtime / sample /
+  workflow status change は主張していない。
 - 2026-07-05 03:15 JST
   P103 trigger audit で、P102 後にも `progress.md` Macro 5 row と `tasks.md`
   Macro 5 self-driven reading が G1 work を default 自走可能に見せる wording を

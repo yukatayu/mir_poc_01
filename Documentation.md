@@ -188,9 +188,10 @@ LAB evidence が G1/T1 準備へ先行していることと、canon phase moveme
 
 `plan/150` は phase-position validator guard です。`plan/149` の短い読みが
 `progress.md` と `tasks.md` から消えたときに `scripts/validate_docs.py` が
-落ちるようにし、phase-position snapshot の drift を管理します。canon edit、
-phase / gate movement、percentage-as-gate、runtime / sample / workflow status
-change は主張しません。
+落ちるようにし、`T0/G0 rebaseline`、9 段階中 1 段階目、`late pre-exit`、
+G0 exit 未達の phase-position snapshot drift を管理します。canon edit、phase
+/ gate movement、percentage-as-gate、runtime / sample / workflow status change
+は主張しません。
 
 `plan/151` は Discord webhook secret validator guard です。tracked docs /
 source に concrete Discord webhook URL shape が入った場合に
