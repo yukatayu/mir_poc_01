@@ -1,4 +1,5 @@
 import json
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -14,6 +15,22 @@ import practical_alpha1_transport as runner  # noqa: E402
 class PracticalAlpha1TransportTests(unittest.TestCase):
     def sidecar_path(self, relative: str) -> Path:
         return REPO_ROOT / relative
+
+    def test_repo_cli_arg_uses_repo_relative_paths_for_transport_files(self) -> None:
+        self.assertEqual(
+            runner.repo_cli_arg(runner.COMPOSE_FILE),
+            "samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml",
+        )
+        self.assertEqual(
+            runner.repo_cli_arg(runner.BINARY_PATH),
+            "target/debug/examples/mir_practical_alpha1_transport",
+        )
+
+    def test_repo_cli_arg_keeps_external_paths_absolute(self) -> None:
+        self.assertEqual(
+            runner.repo_cli_arg(Path("/tmp/mirrorea-practical-alpha1-external")),
+            "/tmp/mirrorea-practical-alpha1-external",
+        )
 
     def test_list_samples_matches_transport_rows(self) -> None:
         rows = runner.list_samples()
@@ -55,9 +72,87 @@ class PracticalAlpha1TransportTests(unittest.TestCase):
         ):
             payload = runner.closeout()
         self.assertTrue(payload["stage_pa1_5_complete"])
+        self.assertEqual(
+            payload["compose_file"],
+            "samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml",
+        )
+        self.assertEqual(
+            payload["binary_path"],
+            "target/debug/examples/mir_practical_alpha1_transport",
+        )
+        serialized = json.dumps(payload)
+        self.assertNotIn(f"{runner.REPO_ROOT}/", serialized)
         self.assertFalse(payload["wan_federation_claimed"])
         self.assertFalse(payload["save_load_claimed"])
         self.assertFalse(payload["final_public_transport_abi_claimed"])
+
+    def test_local_transport_invocation_uses_repo_relative_package_path(self) -> None:
+        package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[0]["package_dir"]
+        captured: list[list[str]] = []
+
+        def fake_subprocess_run(argv, **kwargs):
+            captured.append(argv)
+            return subprocess.CompletedProcess(
+                argv,
+                0,
+                stdout=json.dumps({"sample_id": "TR-A1-01"}),
+                stderr="",
+            )
+
+        with mock.patch.object(runner.subprocess, "run", side_effect=fake_subprocess_run):
+            payload = runner._build_local_report(package_dir)
+
+        self.assertEqual(payload["sample_id"], "TR-A1-01")
+        self.assertIn(
+            "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted",
+            captured[0],
+        )
+        self.assertFalse(
+            any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in captured[0])
+        )
+
+    def test_docker_transport_invocation_uses_repo_relative_compose_file(self) -> None:
+        package_dir = runner.REPO_ROOT / runner.IMPLEMENTED_ROWS[1]["package_dir"]
+        captured: list[tuple[list[str], dict[str, str] | None]] = []
+
+        def fake_subprocess_run(argv, **kwargs):
+            env = kwargs.get("env")
+            captured.append((argv, env))
+            if "up" in argv and env is not None:
+                output_dir = Path(env["MIRROREA_PRACTICAL_ALPHA1_OUTPUT_DIR"])
+                payload = {
+                    "sample_id": "TR-A1-02",
+                    "terminal_outcome": "accepted",
+                    "reason_family": "accepted",
+                }
+                (output_dir / "world.json").write_text(json.dumps(payload))
+                (output_dir / "participant.json").write_text(json.dumps(payload))
+            return subprocess.CompletedProcess(argv, 0, stdout="", stderr="")
+
+        with mock.patch.object(runner, "_check_docker_available"), mock.patch.object(
+            runner, "_ensure_binary_available"
+        ), mock.patch.object(runner.subprocess, "run", side_effect=fake_subprocess_run):
+            payload = runner._build_docker_report(package_dir)
+
+        self.assertEqual(payload["sample_id"], "TR-A1-02")
+        up_argv, up_env = captured[0]
+        self.assertIn(
+            "samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml",
+            up_argv,
+        )
+        self.assertFalse(any(arg.startswith(f"{runner.REPO_ROOT}/") for arg in up_argv))
+        self.assertIsNotNone(up_env)
+        assert up_env is not None
+        self.assertTrue(
+            up_env["MIRROREA_PRACTICAL_ALPHA1_BINARY"].startswith(
+                f"{runner.REPO_ROOT}/"
+            )
+        )
+        self.assertTrue(
+            up_env["MIRROREA_PRACTICAL_ALPHA1_PACKAGE_DIR"].startswith(
+                f"{runner.REPO_ROOT}/"
+            )
+        )
 
     def test_run_sample_accepts_exact_expected_report(self) -> None:
         row = runner.IMPLEMENTED_ROWS[0]

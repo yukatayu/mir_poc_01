@@ -76,6 +76,14 @@ LIMITATIONS = [
 ]
 
 
+def repo_cli_arg(path: str | Path) -> str:
+    value = Path(path)
+    try:
+        return value.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(value)
+
+
 def _implemented_row(sample_id: str) -> dict[str, str]:
     for row in IMPLEMENTED_ROWS:
         if row["sample_id"] == sample_id:
@@ -131,7 +139,7 @@ def _build_local_report(package_path: str | Path) -> dict[str, Any]:
             "mir_practical_alpha1_transport",
             "--",
             "run",
-            str(package_path),
+            repo_cli_arg(package_path),
         ],
         cwd=REPO_ROOT,
         check=True,
@@ -189,7 +197,10 @@ def _ensure_binary_available() -> None:
         text=True,
     )
     if not BINARY_PATH.exists():
-        raise RuntimeError(f"expected practical transport example binary missing: {BINARY_PATH}")
+        raise RuntimeError(
+            "expected practical transport example binary missing: "
+            f"{repo_cli_arg(BINARY_PATH)}"
+        )
 
 
 def _build_docker_report(package_path: str | Path) -> dict[str, Any]:
@@ -217,7 +228,7 @@ def _build_docker_report(package_path: str | Path) -> dict[str, Any]:
             "-p",
             project_name,
             "-f",
-            str(COMPOSE_FILE),
+            repo_cli_arg(COMPOSE_FILE),
             "up",
             "--abort-on-container-exit",
             "--exit-code-from",
@@ -229,7 +240,7 @@ def _build_docker_report(package_path: str | Path) -> dict[str, Any]:
             "-p",
             project_name,
             "-f",
-            str(COMPOSE_FILE),
+            repo_cli_arg(COMPOSE_FILE),
             "down",
             "--remove-orphans",
             "-v",
@@ -246,7 +257,7 @@ def _build_docker_report(package_path: str | Path) -> dict[str, Any]:
         except subprocess.CalledProcessError as error:
             stderr = error.stderr.strip() or error.stdout.strip()
             raise RuntimeError(
-                f"Docker Compose run for {package_dir} failed: {stderr}"
+                f"Docker Compose run for {repo_cli_arg(package_dir)} failed: {stderr}"
             ) from error
         finally:
             subprocess.run(
@@ -366,8 +377,8 @@ def closeout() -> dict[str, Any]:
     return {
         "sample_root": "samples/practical-alpha1",
         "implemented_rows": [row["sample_id"] for row in IMPLEMENTED_ROWS],
-        "compose_file": str(COMPOSE_FILE),
-        "binary_path": str(BINARY_PATH),
+        "compose_file": repo_cli_arg(COMPOSE_FILE),
+        "binary_path": repo_cli_arg(BINARY_PATH),
         "validation_floor": [
             "docker --version",
             "docker compose version",

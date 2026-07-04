@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 14:26 JST
+最終更新: 2026-07-04 14:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -804,7 +804,17 @@ product helper path portability hardening, plus installed-binary helper path
 portability hardening, plus textual Mir helper raw payload path portability,
 Full System V1 helper output path audit, and Surface helper subprocess argv path
 portability hardening, plus Mir computational helper subprocess argv path
-portability hardening.
+portability hardening, plus practical alpha-1 transport helper path portability
+hardening.
+
+- 2026-07-04 14:34 JST
+  `scripts/practical_alpha1_transport.py` の local transport cargo example
+  package argv と Docker Compose `-f` argv を repo-relative `samples/...` に
+  変更し、closeout JSON の `compose_file` / `binary_path` も repo-relative
+  表示にした。Docker bind mount 用 env は host path requirement のため内部 env
+  に限定して維持。Unit 10 tests、`check-all` 7/7、`closeout` はいずれも
+  repo-root absolute match 0。sample status、workflow status、semantics、ABI、
+  canon claim は変更していない。
 
 - 2026-07-04 14:26 JST
   `scripts/mir_computational_samples.py` の nested

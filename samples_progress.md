@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 14:26 JST
+Last updated: 2026-07-04 14:34 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -112,7 +112,7 @@ Notes:
 | `CHK-*` | first-floor evidence | `python3 scripts/practical_alpha1_check.py check-all --format json` | checker obligations and rejected rows |
 | `RUN-*` | first-floor evidence | `python3 scripts/practical_alpha1_run_local.py check-all --format json` | first local-runtime floor |
 | `HP-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_attach.py check-all --format json` | attach accept/reject/deferred rows |
-| `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence |
+| `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence; repo-owned package inputs / compose file argv and closeout path fields are repo-relative |
 | `VIS-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_export_devtools.py check-all --format json` | observer-safe export panels |
 | `SL-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only save/load evidence |
 | `AV-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder/custom preview and fallback boundary |
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 14:34 JST | practical alpha-1 transport helper path portability | pass | `scripts/practical_alpha1_transport.py` now passes repo-owned local package inputs and Docker Compose `-f` paths as repo-relative `samples/...` argv and reports closeout `compose_file` / `binary_path` as repo-relative values. Docker bind mount env remains host-path internal only. Unit coverage passed 10 tests; `check-all` passed 7/7 and `closeout` both had repo-root absolute match 0. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:26 JST | Mir computational helper subprocess path portability | pass | `scripts/mir_computational_samples.py` now passes repo-owned computational sample roots to nested `mirrorea-alpha run-local` / `check` commands as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and both product-alpha subprocess invocation paths. Unit coverage passed 17 tests, and real `mir_computational_samples.py check-all` passed 15/15 with repo-root absolute match 0. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:17 JST | Surface helper subprocess path portability | pass | `scripts/surface_mir_samples.py` now passes repo-owned Surface source inputs to nested Cargo examples and `mirrorea-alpha patch-source` as repo-relative `samples/...` argv while preserving external absolute fallback. `surface_mir_samples.py check-all` passed 52/52 with repo-root absolute match 0, and `surface_mir_release_check.py check-all` passed 18 commands with failed 0 / ready true after updating the P-SURF-99 sample_count gate to the current 52-row matrix. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:06 JST | Full System V1 helper path audit | pass | `scripts/full_system_v1_samples.py check-all --format json` passed with 41 rows, failed 0, and repo-root absolute match 0, so no code fix was needed for the typed/runtime/operational helper output in this path-portability pass. Unit coverage passed 17 tests, docs validator unit coverage passed 36 tests, and docs/source checks passed. No sample status, workflow status, semantics, ABI, or canon claim changed. |

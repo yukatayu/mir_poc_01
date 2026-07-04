@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 14:26 JST
+最終更新: 2026-07-04 14:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -116,8 +116,13 @@ Current holding state:
   repo-owned computational sample roots: nested `mirrorea-alpha run-local` /
   `check` receive repo-relative `samples/...` paths. Public helper JSON was
   already repo-root clean.
+- Practical alpha-1 transport helper now preserves portability for repo-owned
+  package inputs and closeout fields: local transport cargo example argv,
+  Docker Compose `-f` argv, closeout `compose_file`, and closeout `binary_path`
+  are repo-relative. Docker bind mount env remains host-path internal only.
 - Remaining lower-priority helper portability candidates are audit-only unless
-  a concrete repo-root leak is reproduced: practical alpha helper families.
+  a concrete repo-root leak is reproduced: remaining practical alpha helper
+  families.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate

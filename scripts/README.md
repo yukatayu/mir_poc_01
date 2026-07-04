@@ -217,6 +217,9 @@
   - `python3 scripts/practical_alpha1_transport.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/tr-a1-*/` through `crates/mir-ast::practical_alpha1_transport_plan` and `crates/mir-runtime::practical_alpha1_transport`
   - it consumes checked practical package input through a distinct transport-plan boundary
+  - repo-owned package inputs and the Docker Compose file are passed to nested
+    local / Docker transport commands as repo-relative `samples/...` argv, and
+    closeout `compose_file` / `binary_path` fields are repo-relative
   - current actualized rows are `TR-A1-01..07`
   - `TR-A1-02` uses `samples/practical-alpha1/docker/docker-compose.practical-alpha1.yml` to run a world server plus participant client over Docker Compose TCP
   - it is a non-final transport command and does not claim WAN/federation, save/load, devtools export, product prototype, or final public transport API
