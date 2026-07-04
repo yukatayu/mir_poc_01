@@ -162,8 +162,14 @@ reran `cargo check`.
 
 ## Commit / push status
 
-Not yet committed at initial report creation. This section will be updated
-after validation, commit, and push.
+Primary commit:
+
+- `2503f0eb Align Macro 5 self-drive wording with P102`
+- Pushed to `origin/main`.
+
+This status section is maintained by a follow-up report-status commit. The
+follow-up commit hash is reported through `git log` / final handoff rather than
+recursively embedding the containing commit's own hash in this file.
 
 ## Sub-agent session close status
 
