@@ -559,6 +559,7 @@ REQUIRED = [
     "plan/134-g1-obl020-scope-clarification-packet.md",
     "plan/135-g1-obl020-artifact-identity-wrapper-preflight.md",
     "plan/136-g1-obl020-artifact-annex-template.md",
+    "plan/137-g1-obl001-artifact-identity-wrapper-preflight.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

@@ -85,6 +85,14 @@ unresolved items、non-claims をまとめますが、proposal submission、requ
 status acceptance、ledger movement、wrapper creation、OBL-020 completion、
 proof/conformance claim、G1 exit は主張しません。
 
+`plan/137` は現 LAB `THM001StatementDraft` の direct citation を LAB
+evidence に限定しつつ、OBL-001 が later `lean-stated` の最有力候補で
+あること、ただし requested-status artifact identity の前に artifact annex
+/ wrapper decision が必要であることを整理する preflight-only memory です。
+wrapper file creation、requested status acceptance、canon edit、ledger
+movement、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
+主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
