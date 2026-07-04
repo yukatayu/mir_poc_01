@@ -80,7 +80,7 @@ python3 scripts/check_source_hierarchy.py
 python3 scripts/validate_docs.py
 python3 -m unittest scripts.tests.test_validate_docs
 git diff --check
-rg -n "Spt52|discord.com/api/webhooks|/home/codex/dev/tmp|5\\.5-pro\\) Mirrorea|config.local.json" .docs/oracle-chatgpt-pro-operations.md AGENTS.md progress.md docs/reports/2117-oracle-proactive-async-use.md
+rg -n "[webhook-token-prefix-redacted]|discord.com/api/webhooks|/home/codex/dev/tmp|5\\.5-pro\\) Mirrorea|config.local.json" .docs/oracle-chatgpt-pro-operations.md AGENTS.md progress.md docs/reports/2117-oracle-proactive-async-use.md
 ```
 
 ## Evidence / outputs / test results
