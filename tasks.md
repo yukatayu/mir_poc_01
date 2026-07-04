@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 20:28 JST
+最終更新: 2026-07-04 20:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -145,6 +145,13 @@ Current holding state:
   compile-check / no-admitted-stub / drift-guard / ledger-target mapping, and
   keeps proof, runtime, conformance, OPEN-014, authority theorem, and final ABI
   claims out of scope.
+- `plan/131-g1-status-proposal-packet-outline.md` now turns the `plan/130`
+  criteria matrix into a future proposal packet outline. It defines required
+  slots for cover sheet, canon-state summary, requested-status matrix, artifact
+  identity, evidence trace, OPEN / deferral handling, non-claims, ledger delta
+  placeholder, and submission checklist, while leaving requested status,
+  draft submission, canon edit, ledger movement, proof, conformance, runtime,
+  and G1 exit unclaimed.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -167,17 +174,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..130`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..131`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
   slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..130`. This is documentation taxonomy maintenance only.
+  `plan/118..131`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..130`. This keeps future plan-file additions
+  cover current numbered `plan/00..131`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -392,6 +399,10 @@ Current holding state:
   turns the `plan/129` statement/status blocker into a criteria matrix. It does
   not say current LAB drafts are enough to move status; it says what a later
   status proposal would need to cite, decide, defer, or keep out of scope.
+- `plan/131-g1-status-proposal-packet-outline.md` now turns that criteria
+  matrix into an outline-only packet shape. It does not choose `stated` vs
+  `lean-stated`, submit a draft proposal, include actual ledger patch text, or
+  move canon status.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
@@ -657,7 +668,7 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `G1 status proposal packet outline` | `G1` docs-only | after `plan/130`, draft the structure of a future OBL-001 / OBL-020 / OBL-021 status proposal packet, including requested status vocabulary, artifact identity, evidence trace, OPEN/deferred items, and non-claim appendix | proposal outline only; no canon edit, no ledger movement, no executable row, no Lean refinement, no gate movement unless explicitly promoted |
+| `G1 status evidence readiness dry-run` | `G1` docs/validation-only | after `plan/131`, run and record the Lean statement draft compile / sync guard commands a future packet would cite, scan OBL-001 / OBL-020 / OBL-021 drafts for admitted stubs / placeholder bodies, and list any evidence gaps against the packet outline | readiness dry-run only; no canon edit, no ledger movement, no requested-status choice, no executable row, no Lean refinement unless a blocker is found and explicitly opened |
 | `OBL-001 sync guard hardening` | `G1` reserve | add docs-only or test-only guard hardening only if future review finds that the OBL-001 statement sync tests can drift away from the `plan/124` boundary without failing | Lean remains compile-check only; no predicate refinement by default; no canon ledger movement |
 | `OBL-020 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `StepWFStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `ElabDeterminismStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
