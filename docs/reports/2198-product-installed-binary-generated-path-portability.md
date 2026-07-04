@@ -154,7 +154,10 @@ release-check.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / initial report commit:
+  `472cc8ec Use relative installed binary generated paths`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
