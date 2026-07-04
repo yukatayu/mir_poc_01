@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 15:09 JST
+最終更新: 2026-07-04 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -812,7 +812,22 @@ path portability hardening, plus practical alpha-0.9 devtools helper nested
 session package argv path portability hardening, plus practical alpha-0.8
 same-session hot-plug helper nested session package argv path portability
 hardening, plus practical alpha-1 avatar helper subprocess argv path
-portability hardening.
+portability hardening, plus practical alpha-1 save/load helper runtime branch
+subprocess argv path portability hardening.
+
+- 2026-07-04 15:15 JST
+  `scripts/practical_alpha1_save_load.py` の runtime-backed nested save-load
+  Cargo example package argv を repo-owned practical package roots について
+  repo-relative `samples/...` に変更した。Checker-backed `SL-A1-03`
+  preflight branch は hardened 済みの `practical_alpha1_check.py` 経由のまま。
+  Regression tests cover repo-owned package dirs, external absolute fallback,
+  runtime save-load subprocess invocation, and checker-preflight branch
+  delegation. Unit 8 tests、`check-all` 3/3、`closeout` repo-root absolute
+  match 0、validation floor runner commands for `CHK-CUT-01` and
+  `SL-A1-01/02/03` all had repo-root absolute match 0、Cargo
+  `practical_alpha1_save_load_plan` 4 tests と `practical_alpha1_save_load` 4
+  tests が通過。sample status、workflow status、semantics、ABI、canon claim は
+  変更していない。
 
 - 2026-07-04 15:09 JST
   `scripts/practical_alpha1_avatar.py` の nested avatar Cargo example package

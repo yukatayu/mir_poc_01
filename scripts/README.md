@@ -254,6 +254,10 @@
   - it keeps 2 branches separate:
     - runtime-backed `SL-A1-01/02` consume checked practical package input, one exact practical local-runtime frontier, and a distinct save-load plan boundary before building a saved local frontier and a non-final save-load report
     - checker-backed `SL-A1-03` lowers an exact rejected checker report into a distinct save-load preflight reject report before any saved local frontier is built
+  - repo-owned runtime-backed package inputs are passed to the nested
+    save-load Cargo example as repo-relative `samples/...` argv; the
+    checker-backed preflight branch still delegates through
+    `practical_alpha1_check.py`
   - current actualized rows are `SL-A1-01/02/03`
   - `CHK-CUT-01` is reused only as an orphan-receive checker guard for the preflight reject branch
   - it is a non-final save/load command and does not claim distributed durable save/load, stale witness/stale lease non-resurrection completion, queue/channel/transport persistence, product prototype, or final public save-load API
