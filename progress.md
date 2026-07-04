@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 17:44 JST
+最終更新: 2026-07-04 18:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -95,6 +95,18 @@ semantic source authority.
   source spans, and OBL-001/020/021 statement-boundary evidence. It is LAB
   candidate memory only: no canon edit, G1 exit, proof discharge, conformance,
   runtime/product/API freeze, or runnable sample status relabel.
+- Current SCN exact static slice manifest note:
+  `plan/122-g1-scn-exact-static-slice-manifest.md` now maps the
+  `G1-MVS-ASSIGNMENT-STATIC` candidate to SCN-01 / SCN-02 static bullets.
+  `ELAB-11` is the exact current executable evidence center for SCN-01
+  request, same-field dependency, visible publish / observe, and spans.
+  `ELAB-12` is the exact current executable evidence center for SCN-02
+  request, target/self RHS dependencies, positive row containment, and
+  nested-locus non-ambient-authority edge shape. `ELAB-02/05/07/09/10` remain
+  structural support only, and runtime bullets remain explicit gaps / out of
+  scope. This is LAB manifest memory only: no canon edit, G1 exit, proof
+  discharge, conformance, runtime/product/API freeze, or runnable sample status
+  relabel.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -839,7 +851,16 @@ success/failure path serialization hardening, plus current-L2 pipeline and
 detached-loop helper path portability hardening, plus source-hierarchy status
 root-display path portability hardening, plus shared practical helper
 failure-surface path redaction, plus repo-triage recut matrix classification,
-plus G1 minimal vertical slice candidate mapping.
+plus G1 minimal vertical slice candidate mapping and SCN exact static slice
+manifest mapping.
+
+- 2026-07-04 18:08 JST
+  `plan/122-g1-scn-exact-static-slice-manifest.md` を追加し、
+  `plan/121` の `G1-MVS-ASSIGNMENT-STATIC` を SCN-01 / SCN-02 static bullets
+  に割り当てた。`ELAB-11` / `ELAB-12` を exact current executable evidence、
+  `ELAB-02/05/07/09/10` を structural support、runtime bullets を explicit
+  gap / out of scope として整理し、canon edit、G1 exit、proof discharge、
+  conformance、runtime/product/API freeze、sample status relabel は変更していない。
 
 - 2026-07-04 17:44 JST
   `plan/121-g1-minimal-vertical-slice-candidate-map.md` を追加し、G1 ordinary

@@ -204,6 +204,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/119-g0-remaining-claim-family-drilldown-priority.md",
         "plan/120-repo-triage-recut-matrix.md",
         "plan/121-g1-minimal-vertical-slice-candidate-map.md",
+        "plan/122-g1-scn-exact-static-slice-manifest.md",
     ],
     "scripts": [
         "scripts",
