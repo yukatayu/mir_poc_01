@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 17:12 JST
+最終更新: 2026-07-04 17:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,6 +56,14 @@ Current holding state:
   immediately by default; canonized rows are stale-wording audit targets only,
   later-gate rows should wait for prerequisite gate context, and evidence-only
   / process-only rows should not be promoted to status.
+- `plan/120-repo-triage-recut-matrix.md` now classifies Product Alpha, Full
+  System V1, and Surface evidence as `keep-core-idea`,
+  `useful-floor`, `archive-exploration`, or
+  `postpone/drop-from-current-recut` for the next theory / management recut.
+  The labels are a LAB management overlay on top of existing
+  workflow/evidence vocabulary. They do not move files, rename roots,
+  archive/delete samples, edit canon, claim gate exit, or relabel runnable
+  sample status.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -78,16 +86,18 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..119`, including the current G1 E-ROW / OBL addenda and remaining
-  claim-family priority map; `scripts/README.md` mirrors that range alongside
+  `plan/39..120`, including the current G1 E-ROW / OBL addenda, remaining
+  claim-family priority map, and repo-triage recut matrix; `scripts/README.md`
+  mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
-  now also lists the previously omitted detailed filenames for `plan/106..108`
-  and `plan/118..119`. This is documentation taxonomy maintenance only.
+  now also lists the previously omitted detailed filenames for `plan/106..108`,
+  `plan/118..119`, and the new `plan/120`. This is documentation taxonomy
+  maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..119`. This keeps future plan-file additions
+  cover current numbered `plan/00..120`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -544,7 +554,7 @@ next line.
 | `ELAB-04 mixed executable payload model` | `G1` reserve | only after a later package accepts a mixed wrapper or separate associated-diagnostics model for `ELAB-04` | keep no-repair until that model is explicit; no ranking or executable widening by default |
 | `remaining LAB claim-family drilldowns` | `T0/G0` reserve | split non-ordinary-assignment `plan/70` rows only when a future G0 close decision or touched-doc stale wording audit needs exact citations; the read/write/dependency row may also be narrowed only if a concrete G1 ordinary-assignment support gap remains | `plan/119` says no remaining row is an immediate default target; no canon L0/L1 change; no historical rewrite beyond focused wording cleanup; no G4 observation or runtime graph widening |
 | `canon mental-model clarification proposal` | `G0/G1` reserve | draft a proposal, not an edit, if ordinary assignment or LAB citation rules need a short canon clarification | proposal remains advisory until human/canon process accepts it |
-| `repo-triage recut` | `Macro 0` maintenance | classify existing Product Alpha / Full System V1 / Surface evidence as keep-core-idea, archive-exploration, or postpone/drop for future theory recut | no deletion or archive move without explicit follow-up package |
+| `repo-triage recut follow-up` | `Macro 0` maintenance reserve | use `plan/120` if a future package needs line-level citation, actual archive move comparison, or front-door taxonomy rewrite after the initial Product Alpha / Full System V1 / Surface useful-floor / keep-core / archive / postpone matrix | no deletion, archive move, root rename, sample status relabel, or canon edit without explicit follow-up package |
 | `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
 
 ## ordered self-driven packages

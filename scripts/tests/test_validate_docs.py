@@ -328,6 +328,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/117-g1-obl001-020-021-statement-guard-hardening.md",
             "plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md",
             "plan/119-g0-remaining-claim-family-drilldown-priority.md",
+            "plan/120-repo-triage-recut-matrix.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

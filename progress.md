@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 17:12 JST
+最終更新: 2026-07-04 17:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -78,6 +78,14 @@ semantic source authority.
   support drilldown. It does not claim any canon movement, gate exit, proof
   status, conformance, implementation completion, or runnable sample status
   change.
+- Current repo-triage recut note:
+  `plan/120-repo-triage-recut-matrix.md` now classifies Product Alpha, Full
+  System V1, and Surface evidence as `keep-core-idea`,
+  `useful-floor`, `archive-exploration`, or
+  `postpone/drop-from-current-recut` for future theory / management recut. The
+  matrix is LAB repository memory only: no file move, archive operation, canon
+  edit, gate exit, proof status movement, implementation-state claim, or
+  runnable sample status relabel.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -821,7 +829,16 @@ helper nested source argv path portability hardening, plus alpha network Docker
 success/failure path serialization hardening, plus current-L2 pipeline and
 detached-loop helper path portability hardening, plus source-hierarchy status
 root-display path portability hardening, plus shared practical helper
-failure-surface path redaction.
+failure-surface path redaction, plus repo-triage recut matrix classification.
+
+- 2026-07-04 17:24 JST
+  `plan/120-repo-triage-recut-matrix.md` を追加し、Product Alpha / Full
+  System V1 / Surface evidence を keep-core-idea / useful-floor /
+  archive-exploration / postpone/drop-from-current-recut の LAB management
+  overlay として分類した。
+  `plan/00-index.md`、docs/source hierarchy guard、`scripts/README.md`、
+  `tasks.md` と同期したが、file move、archive operation、canon edit、gate
+  exit、proof status、implementation-state、sample status は変更していない。
 
 - 2026-07-04 17:12 JST
   Added shared practical helper failure-surface path redaction via
