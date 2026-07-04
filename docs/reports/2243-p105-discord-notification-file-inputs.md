@@ -91,6 +91,9 @@ Start state was clean and synced with `origin/main`:
 - `make check`
 - `cargo test`
 - `find samples/lean -path 'samples/lean/old' -prune -o -name '*.lean' -print0 | xargs -0 -n1 lean`
+- `python3 -m unittest scripts.tests.test_discord_notify_skill scripts.tests.test_validate_docs`
+- `git add .agents/skills/discord-report/SKILL.md .agents/skills/discord-report/scripts/discord_notify.py AGENTS.md Documentation.md plan/00-index.md plan/152-discord-notification-file-inputs.md progress.md scripts/README.md scripts/check_source_hierarchy.py scripts/tests/test_discord_notify_skill.py scripts/tests/test_validate_docs.py scripts/validate_docs.py tasks.md docs/reports/2243-p105-discord-notification-file-inputs.md && git commit --no-gpg-sign -m "Add file inputs for Discord notifications"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -115,6 +118,8 @@ Start state was clean and synced with `origin/main`:
 - `cargo test` passed for Rust unit/integration/doc tests.
 - Active Lean files under `samples/lean/` excluding `samples/lean/old/`
   compiled with `lean` and produced no errors.
+- Final focused pre-commit test run passed:
+  `Ran 47 tests in 3.468s` / `OK`.
 
 ## What changed in understanding
 
@@ -175,7 +180,14 @@ root-cause evidence and RED/GREEN tests.
 
 ## Commit / push status
 
-Pending at report write.
+Primary commit:
+
+- `b9338270 Add file inputs for Discord notifications`
+- Pushed to `origin/main`.
+
+This status section is maintained by a follow-up report-status commit. The
+follow-up commit hash is reported through `git log` / final handoff rather than
+recursively embedding the containing commit's own hash in this file.
 
 ## Sub-agent session close status
 
