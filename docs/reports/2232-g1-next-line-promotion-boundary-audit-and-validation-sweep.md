@@ -231,6 +231,9 @@ sweep without filling status-shell slots or changing sample status.
 - Post-review `git status --short --branch`
 - Post-review `du -sk .`
 - Final post-review `make check`
+- `git add README.md Documentation.md progress.md tasks.md samples_progress.md scripts/README.md scripts/check_source_hierarchy.py scripts/validate_docs.py scripts/tests/test_validate_docs.py plan/00-index.md plan/90-source-traceability.md plan/147-g1-next-line-promotion-boundary-audit.md docs/reports/2232-g1-next-line-promotion-boundary-audit-and-validation-sweep.md && git diff --cached --stat && git status --short --branch`
+- `git commit --no-gpg-sign -m "Clarify G1 next-line promotion boundary"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -393,7 +396,13 @@ docs-validator, docs unittest, whitespace, and secret checks were rerun.
 
 ## Commit / push status
 
-Pending commit and push.
+- Substantive package commit:
+  `a188173f159d8079a32a3020ed66054952ed2ce3` (`Clarify G1 next-line
+  promotion boundary`).
+- Push status: pushed to `origin/main`
+  (`776a5288..a188173f  main -> main`).
+- This commit-status report update is being committed and pushed separately
+  after the substantive package commit.
 
 ## Sub-agent session close status
 
