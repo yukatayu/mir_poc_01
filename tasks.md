@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 03:10 JST
+最終更新: 2026-07-05 03:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -69,6 +69,12 @@ Current holding state:
   selection of `OBL-020 review-facing decision request extraction`,
   `OBL-001 review-facing artifact decision request extraction`, or a specific
   new Macro 0 audit trigger. This does not promote either extraction line, fill
+  `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
+  conformance, change runtime readiness, or relabel sample status.
+- P103 trigger audit cleaned up the remaining Macro 5 self-drive wording drift:
+  `progress.md` and this task map now describe G1 theorem / verifier bridge
+  work as user-choice / fresh-trigger gated for the next package, not as a
+  default self-driven line. This does not promote an extraction line, fill
   `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
   conformance, change runtime readiness, or relabel sample status.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
@@ -1038,7 +1044,7 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |
-| `Macro 5` | theorem / model-check / verifier bridge | current self-driven line is G1 OBL statement/status preparation; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` refreshes shell evidence without moving status, `plan/143` separates the OBL-021 equality / diagnostic / fixed-input abstraction decision from status drafting, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface, `plan/146` closes the current OBL-001 explanation-boundary sync drift risk, and `plan/147` clarifies that broad autonomous delegation does not promote either review-facing extraction candidate |
+| `Macro 5` | theorem / model-check / verifier bridge | G1 OBL statement/status evidence is prepared but not a default current self-driven package; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` refreshes shell evidence without moving status, `plan/143` separates the OBL-021 equality / diagnostic / fixed-input abstraction decision from status drafting, `plan/144` confirms `plan/134` remains the OBL-020 scope decision surface, `plan/145` confirms `plan/137` / `plan/138` remain the OBL-001 artifact decision surface, `plan/146` closes the current OBL-001 explanation-boundary sync drift risk, and `plan/147` / P102 clarify that broad autonomous delegation does not promote either review-facing extraction candidate; next Macro 5 package requires explicit OBL-020 / OBL-001 selection or a fresh concrete drift trigger |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | toolchain / backend / developer surface | Surface CLI/devtools can be self-driven within alpha scope |
 | `Macro 8` | domain/application realization | Surface operational suite can be self-driven after language/runtime base |
