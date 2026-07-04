@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-05 03:00 JST
+最終更新: 2026-07-05 03:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,6 +63,14 @@ Current holding state:
   protection only and does not change helper behavior, run cleanup, mount
   storage, move caches, change phase/gate status, move OBL status, claim proof
   / conformance, or relabel sample status.
+- P102 Oracle follow-up now records that after P147/P100/P101 there is no
+  default next autonomous package unless a fresh concrete Macro 0 drift trigger
+  is already identified. The next actionable line requires explicit user
+  selection of `OBL-020 review-facing decision request extraction`,
+  `OBL-001 review-facing artifact decision request extraction`, or a specific
+  new Macro 0 audit trigger. This does not promote either extraction line, fill
+  `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
+  conformance, change runtime readiness, or relabel sample status.
 - Surface alpha `P-SURF-01..08` evidence rows remain runnable through
   `scripts/surface_mir_samples.py`.
 - `P-SURF-99` reran full Surface validation and Product Alpha compatibility
@@ -985,8 +993,10 @@ These are candidates only. They are not promoted until the user chooses the
 next line.
 
 `plan/147` clarifies that broad autonomous delegation is not enough to choose
-one of these rows. To start either review-facing extraction, the user must name
-or unmistakably select the OBL-020 or OBL-001 extraction line.
+one of these rows. The post-P101 Oracle follow-up records that no default next
+autonomous package should be manufactured without a fresh concrete Macro 0
+drift trigger. To start either review-facing extraction, the user must name or
+unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
@@ -1024,7 +1034,7 @@ or unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through every package close; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through package close when a concrete drift trigger exists; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, no default next Macro 0 package remains without a fresh concrete trigger, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` guards that snapshot wording in `progress.md` / `tasks.md`, and `plan/151` guards concrete Discord webhook URL leaks without printing secrets |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

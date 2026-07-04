@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 03:00 JST
+最終更新: 2026-07-05 03:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -97,6 +97,15 @@ semantic source authority.
   helper behavior, run cleanup, mount storage, move caches, promote a package,
   change phase/gate status, move OBL status, claim proof / conformance, or
   relabel sample/workflow readiness.
+- Current queue stop note:
+  P102 Oracle follow-up reviewed the post-P147/P100/P101 queue and recommends
+  no default next autonomous package unless a fresh concrete Macro 0 drift
+  trigger is already identified. The next actionable line now requires user
+  selection of `OBL-020 review-facing decision request extraction`,
+  `OBL-001 review-facing artifact decision request extraction`, or a specific
+  new Macro 0 audit trigger. This does not promote an extraction line, fill
+  `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
+  conformance, change runtime readiness, or relabel sample/workflow status.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -1090,7 +1099,7 @@ Research-discovery items:
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording through `plan/150`, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | maintenance only |
+| `Macro 0` | repository memory / docs / traceability / storage guard / phase-position discipline | Surface alpha audit closed; no current promoted Surface package; storage workdir guard now requires exact external-workdir mountpoint detection; tmp helper artifacts under `/tmp/mirrorea-*` can now be listed and require explicit `--cleanup --confirm` before deletion; storage/env helpers are registered in required scaffold checks; no default next Macro 0 package remains unless a fresh concrete drift trigger is identified; current phase-position reading is canon `T0/G0 rebaseline`, human-count phase 1 of 9, late pre-exit but not G0 exit, `scripts/validate_docs.py` guards that snapshot wording through `plan/150`, and concrete Discord webhook URLs are now guarded without printing the URL through `plan/151` | light | user choice / fresh trigger needed |
 | `Macro 1` | semantic kernel / invariant / boundary stabilization | Surface authority / placement / indexed state / admission / patch boundaries fixed | medium | 着手可能 |
 | `Macro 2` | parser-free validation substrate | existing alpha/product helpers remain compatibility anchors | medium | 着手可能 |
 | `Macro 3` | compile-ready minimal actualization | parser, indexed-state checker, elaboration, generated communication, role admission, source patch, source operational, static devtools diagnostics, and final audit floors closed | heavy | maintenance only |
@@ -1233,8 +1242,17 @@ decision reuse / unresolved-slot audit, plus G1 OBL-001 explanation-boundary
 sync guard hardening, plus phase-position validator guard hardening, plus
 Discord webhook secret validator guard hardening, plus P99 fresh runnable
 validation sweep evidence, plus P100 tmp Mirrorea artifact helper guard, plus
-P101 storage helper scaffold guard registration.
+P101 storage helper scaffold guard registration, plus P102 no-default-next-line
+Oracle follow-up.
 
+- 2026-07-05 03:10 JST
+  P102 Oracle follow-up で、P147/P100/P101 後に fresh concrete Macro 0 drift
+  trigger が無いなら default P102 package を作らず、user が OBL-020 extraction
+  / OBL-001 extraction / specific Macro 0 trigger のいずれかを明示選択する
+  まで手を止めるのが最小安全行動だと確認した。review-facing extraction
+  promotion、`plan/141` slot fill、canon edit、ledger movement、OBL status
+  movement、proof / conformance claim、runtime readiness、sample / workflow
+  status relabel は主張していない。
 - 2026-07-05 03:00 JST
   P101 storage helper scaffold guard を追加し、storage/env helper scripts と
   storage tests が `scripts/validate_docs.py` と
