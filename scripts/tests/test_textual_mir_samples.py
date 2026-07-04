@@ -43,6 +43,27 @@ class TextualMirSamplesTests(unittest.TestCase):
         self.assertNotEqual(payload["actual"]["expr_span_markers"], [])
         self.assertEqual(payload["actual"]["diagnostics"], [])
 
+    def test_raw_parse_report_source_path_is_repo_relative(self) -> None:
+        payload = _run_helper("run", "mir-01-add-one-positive")
+        serialized = json.dumps(payload, ensure_ascii=False)
+
+        self.assertEqual(
+            payload["raw_parse_report"]["source_path"],
+            "samples/full-system-v1/computational/add-one-positive/src/add-one.mir",
+        )
+        self.assertNotIn(str(REPO_ROOT), serialized)
+
+    def test_negative_raw_parse_report_diagnostics_are_repo_relative(self) -> None:
+        payload = _run_helper("run", "mir-01-unresolved-import-negative")
+        serialized = json.dumps(payload, ensure_ascii=False)
+
+        self.assertTrue(payload["accepted"])
+        self.assertNotIn(str(REPO_ROOT), serialized)
+        self.assertIn(
+            "samples/full-system-v1/computational/unresolved-import-negative/src/unresolved-import.mir",
+            payload["raw_parse_report"]["diagnostics"][0]["message"],
+        )
+
     def test_host_boundary_sample_keeps_effect_and_contract_structure(self) -> None:
         payload = _run_helper("run", "mir-01-host-boundary-positive")
 

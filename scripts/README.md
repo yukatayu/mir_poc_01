@@ -158,6 +158,7 @@
   - `python3 scripts/provider_admission_samples.py check-all --format json`
   - `python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release`
   - this exercises `samples/full-system-v1/computational/` through `crates/mir-ast::textual_alpha` and the `textual_mir_alpha_parse` example
+  - textual Mir helper raw parser payloads normalize repo-owned `source_path` and diagnostic path text to repo-relative `samples/...` strings before embedding them in helper/release JSON
   - `python3 scripts/full_system_v1_samples.py runtime-matrix --format json` and `run-runtime <sample-id> --format json`
   - the typed-checker helper exercises the same root through `crates/mir-semantics::full_system_v1` and the `full_system_v1_check` example
   - the runtime helper exercises source-derived pure and effectful rows through `crates/mir-runtime::full_system_v1_session` and the `mir_full_system_v1_session` example

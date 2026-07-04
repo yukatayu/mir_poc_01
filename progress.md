@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 13:49 JST
+最終更新: 2026-07-04 14:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -763,7 +763,7 @@ Research-discovery items:
 | Feature | Status | Reading | Actionability |
 |---|---|---|---|
 | Surface Mir brace syntax | `parser-floor-evidence` | canonical `S { ... }` parses; `S[ ... ]` rejects with `bracket_place_scope_not_supported`; no sugar | 着手可能 |
-| textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately | 着手可能 |
+| textual Mir source | `first-floor-evidence` | Full System V1 parser exists; Surface parser floor now exists separately; raw parser helper payload paths are repo-relative for repo-owned sources | 着手可能 |
 | typed IR / checker | `first-floor-evidence` | existing Full System V1 checker remains floor | 着手可能 |
 | Surface-to-Core elaboration | `elaboration-evidence` | cross-locus indexed reads/writes lower to explicit Core IR remote requests, RHS indexed reads on remote writes now record dependency rows, generated edges, source spans, obligations, and LAB-only E-ROW diagnostic details with request / failure-row context plus OBL-024 `diagnostic_soundness_projection` carrier evidence for `ELAB-04/07/10/13..16`, Rust fixture guards for those projection-bearing rows, and docs-first replay vocabulary separating report-local anchors from future proof-level replay relations, `E-ROW-002` / `VisibilityDenied` repair evidence, `E-ROW-001` non-visibility singleton repair evidence for all base remote-request failure atoms, one exact `ELAB-07` non-final set-insertion repair payload, Rust-only guards that withhold the `set_insertion` repair for subset / padded / duplicate / multi-request `ELAB-07` variants, span-based internal association hardening for distinct same-event `when` rows, exact-locus hardening for omitted-row / retargeting proxies, child / bundle / partial / textual guidance exclusion shape assertions, explicit no-repair decomposition inventory for mixed / multi-missing rows, docs-only set-insertion / bundle payload vocabulary, an `ELAB-07` gate review / executable preflight / narrow source-locus edit assumption acceptance / payload-model design / executable prototype / negative-guard / row-identity / exact-locus / child-bundle-partial exclusion hardening, and an `ELAB-04` mixed visibility branch inventory plus payload-model preflight that keeps executable output no-repair while recording mixed wrapper / base branch / visibility branch / association / ordering deferrals | 着手可能 |
 | indexed state | `semantic-checker-evidence` | S-owned Participant-indexed map accepted; key-as-authority, stale key, retained-savepoint compaction, and nested-place ambient-authority negatives reject | 着手可能 |
@@ -801,7 +801,16 @@ hardening, current-L2 closeout `lean_roots` path portability hardening,
 `scripts/README.md` source-hierarchy structural-check responsibility refresh,
 `samples_progress.md` top timestamp freshness guard extension, and operational
 product helper path portability hardening, plus installed-binary helper path
-portability hardening.
+portability hardening, plus textual Mir helper raw payload path portability.
+
+- 2026-07-04 14:00 JST
+  `scripts/textual_mir_samples.py` の raw `textual_mir_alpha_parse` payload に
+  含まれる repo-owned `source_path` と diagnostic message path を
+  repo-relative `samples/...` に正規化した。Regression tests cover positive
+  raw source path and negative diagnostic message path. `textual_mir_samples.py`
+  check-all は 10/10 passed / repo-root absolute match 0、Full System V1
+  release-check は accepted / 29 passed / repo-root absolute match 0。parser
+  semantics、sample status、final grammar/API claim は変更していない。
 
 - 2026-07-04 13:49 JST
   `scripts/product_alpha1_installed_binary_check.py` の default

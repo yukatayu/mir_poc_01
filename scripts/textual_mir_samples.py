@@ -151,8 +151,20 @@ def _parse_source(path: Path) -> dict[str, Any]:
         raise RuntimeError(
             f"parser example did not return JSON for `{path}`: {completed.stderr}"
         ) from error
+    payload = _repo_relative_payload(payload)
     payload["returncode"] = completed.returncode
     return payload
+
+
+def _repo_relative_payload(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {key: _repo_relative_payload(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_repo_relative_payload(item) for item in value]
+    if isinstance(value, str):
+        repo_prefix = f"{REPO_ROOT.as_posix()}/"
+        return value.replace(repo_prefix, "")
+    return value
 
 
 def _payload_projection(payload: dict[str, Any]) -> dict[str, Any]:

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 13:49 JST
+最終更新: 2026-07-04 14:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -100,6 +100,12 @@ Current holding state:
   host absolute paths, and release-check reports / bundle / viewer display
   output-root paths relatively. This is maintenance hardening only; no sample
   status, semantics, ABI, or execution-scope claim changed.
+- Full System V1 textual Mir helper raw parser payloads now preserve
+  portability for repo-owned source paths: `source_path` and diagnostic path
+  text are repo-relative `samples/...` in helper/release JSON. Remaining
+  source-first helper portability candidates are the typed/runtime
+  `full_system_v1_samples.py` path fields and the Surface helper raw payload
+  fields.
 - Product Alpha release-check and generated evidence now preserve portability
   for repo-owned source inputs: release-check representative CLI argv use
   repo-relative `samples/product-alpha1/demo...` paths, release-check aggregate
