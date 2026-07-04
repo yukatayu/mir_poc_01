@@ -82,6 +82,23 @@ and `plan/117`. The remaining rows are either:
 | G2 fallback preflight | G1 ordinary-assignment statement boundaries are stable enough to avoid mixing assignment and existence/fallback theory. | No fallback completion or lifetime proof. |
 | Canon proposal | A real canon wording gap is found and human review is expected. | Proposal only; no direct canon edit without decision. |
 
+## Focused stale wording audit follow-up
+
+2026-07-04 audit follow-up: a narrow source-hierarchy wording pass corrected
+legacy LAB memory in `plan/01`, `plan/07`, `plan/09`, `plan/19`, and
+`plan/57`; root reading order in `README.md`; compressed snapshot wording in
+`Documentation.md` and `samples_progress.md`; the read/write/dependency
+follow-up in `plan/70`; and the `plan/119` provenance row in
+`plan/90-source-traceability.md`. The corrected reading is now explicit:
+`mirrorea_canon/` is canon, legacy `specs/` are LAB evidence / historical
+package-line memory, Surface alpha rows are evidence-closed rather than final
+runtime / transport status, and code / helper artifacts are not semantic source
+of truth.
+
+This follow-up does not edit canon, does not rewrite historical LAB evidence
+wholesale, and does not change any gate, proof, conformance, implementation, or
+sample status.
+
 ## Required non-claims
 
 - No canon edit.

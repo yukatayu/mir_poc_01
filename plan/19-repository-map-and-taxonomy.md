@@ -213,8 +213,9 @@ future candidate:
 
 ```text
 repo/
-  specs/                    # normative
-  plan/                     # repository memory
+  mirrorea_canon/           # canon / normative source
+  specs/                    # legacy LAB specs / evidence
+  plan/                     # repository memory / LAB planning
   docs/                     # reader-facing summary + reports
   crates/                   # flat workspace, conceptually separated lanes
   samples/                  # active/base/alpha-scaffold/residual-prototype/archive/generated

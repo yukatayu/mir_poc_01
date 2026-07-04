@@ -6,7 +6,10 @@
 
 Carry the repo from `P-COMP-00` recognition rebaseline through Mir-owned computation, PoseGraph, projection boundary, and engine-adapter boundary without stopping for user questions, while preserving Product Alpha-1 operational evidence and non-claims.
 
-This plan is repository memory. It does not replace `progress.md` / `tasks.md` as the current queue snapshot, and it does not replace `specs/28..32` as normative source.
+This plan is repository memory. It does not replace `progress.md` / `tasks.md`
+as the current queue snapshot, and it does not replace `mirrorea_canon/` as the
+normative source. Legacy `specs/28..32` remain LAB evidence for the historical
+computational-core package line.
 
 ## architecture
 
@@ -19,7 +22,8 @@ The first cut is a docs/scaffold front half. It fixes the sample matrix, PoseGra
 - Rust crates: `mir-semantics`, `mir-ast`, `mir-runtime`, `mirrorea-cli`
 - Python orchestration helpers under `scripts/`
 - sample roots under `samples/product-alpha1/`
-- normative specs under `specs/`
+- canon source under `mirrorea_canon/`
+- legacy LAB specs under `specs/`
 - repository memory under `plan/`
 - reports under `docs/reports/`
 

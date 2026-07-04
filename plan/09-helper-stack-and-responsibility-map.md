@@ -592,7 +592,8 @@ run_directory_named_profile
 
 ## current helper migration guidance
 
-- 規範判断の正本は `specs/` であり、Rust 実装を semantics の source of truth と見なさない。
+- 規範判断の正本は `mirrorea_canon/` であり、legacy `specs/` は LAB evidence
+  として読む。Rust 実装も semantics の source of truth と見なさない。
 - current implementation reading は **Rust-heavy core + mixed helper workflow** である。
 - semantics-bearing / typed carrier / machine-facing transform は、repo-local shell や Python helper より先に Rust 側 support/helper module に置く方が drift を抑えやすい。
 - report scaffolding、docs validation、regression orchestration のような repo-local workflow は、final public contract に silent promotion しない限り Python に残ってよい。
@@ -655,7 +656,7 @@ run_directory_named_profile
 
 ## docs / tests / code の mirror 境界
 
-| 層 | 何を正本とするか |
+| 層 | 何を mirror 基準とするか |
 |---|---|
 | code | hard-coded preset table、helper 実装、call chain |
 | tests | public behavior coverage、literal expectation、thin delegation coverage |

@@ -193,7 +193,7 @@
 ## 2026-05-03 practical alpha-1 rebaseline addendum
 
 - current-scope Stage A..F `100%` は evidence closeout として保持し、practical alpha-1 readiness `100%` とは分けて読む
-- practical alpha-1 の規範判断は `specs/18-practical-alpha1-scope.md` に置く
+- practical alpha-1 の legacy LAB evidence は `specs/18-practical-alpha1-scope.md` に置く
 - practical alpha-1 の repository memory は `plan/44-practical-alpha1-roadmap.md` に置く
 - `P-A1-00` は docs/spec/taxonomy rebaseline package であり、practical line promotion の entry point として closed した
 - `P-A1-01` は closed であり、first practical front-door package として `samples/practical-alpha1/`、`SRC-01..05`、および `crates/mir-ast/src/practical_alpha1.rs` の limited `package.mir.json` loader floor を actualize した

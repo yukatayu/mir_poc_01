@@ -363,7 +363,10 @@ current L2 では、detached trace / audit serialization そのものはまだ p
    - long-form audit
    - why-this-is-good/bad の説明
 
-この docs-only boundary は `specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` を正本とする。
+この docs-only boundary の legacy LAB anchor は
+`specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md` とする。
+規範判断の正本は `mirrorea_canon/` であり、この行は canon source hierarchy
+を置き換えない。
 
 ## detached exporter consolidation の current understanding
 
@@ -560,7 +563,8 @@ detached artifact exporter を narrow に始める comparison では、payload c
   - `BatchRunSummary` export は bundle-level exporter の後段に回す。
 
 この判断は、bundle が `fixture + sidecar` の自然単位であり、payload core と detached non-core context を分けたまま helper boundary を壊しにくいためである。
-正本は `specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
+legacy LAB anchor は
+`specs/examples/17-current-l2-detached-exporter-entry-comparison.md` に置く。
 
 ## bundle-first detached payload/context split
 
@@ -591,7 +595,8 @@ bundle-first exporter をさらに narrow に切る current understanding では
 
 `host_plan_coverage_failure` は current code では batch / per-bundle failure classification であり、`RunReport` payload core でも `FixtureBundle` context でもない。
 そのため bundle-first artifact へは入れず、aggregate-only に残すのが current L2 の最小 judgment である。
-正本は `specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
+legacy LAB anchor は
+`specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md` に置く。
 
 ## `host_plan_coverage_failure` の future typed placement
 
@@ -611,9 +616,14 @@ current detached artifact では `host_plan_coverage_failure` を aggregate-only
 - ただし typed carrier 自体には context reference や short note を抱かせない
 - short coverage note は必要なら detached non-core の後段 task に回す
 
-placement judgment の正本は `specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
-schema refinement の正本は `specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md` に置く。
-aggregate export との connection comparison の正本は `specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md` に置く。
+placement judgment の legacy LAB anchor は
+`specs/examples/19-current-l2-host-plan-coverage-failure-placement.md` に置く。
+schema refinement の legacy LAB anchor は
+`specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md`
+に置く。
+aggregate export との connection comparison の legacy LAB anchor は
+`specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md`
+に置く。
 
 typed bundle failure artifact を aggregate export が吸うとしても、`BatchRunSummary` は coarse summary に留まるべきである。
 そのため current understanding では、aggregate 側に持たせる typed 集約は `failure_kind` ごとの histogram / kind count までを最小とし、bundle failure summary の薄い再掲は採らない。
@@ -627,8 +637,11 @@ typed bundle failure artifact を aggregate export が吸うとしても、`Batc
 docs-only の最小 migration cut は、`host_plan_coverage_failures` list と `BatchBundleOutcome::Failed.host_plan_coverage_failure` bool を compatibility anchor として残したまま、aggregate 側に `bundle_failure_kind_counts` を additive に併存させる形である。
 置換時期と actual exporter API は引き続き OPEN に残す。
 
-field-name / migration-cut refinement の正本は `specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md` に置く。
-storage / aggregate API refinement の正本は `specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に置く。
+field-name / migration-cut refinement の legacy LAB anchor は
+`specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md`
+に置く。
+storage / aggregate API refinement の legacy LAB anchor は
+`specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md` に置く。
 
 ## current L2 settled / OPEN
 

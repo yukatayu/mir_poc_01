@@ -119,19 +119,19 @@ reader-facing summary は `docs/hands_on/full_system_v1_roadmap_01.md` と `docs
 Mirrorea future-axis は current promoted line ではなく、docs-first / repo-local integration の roadmap-memory family です。2026-05-05 時点では、その中に 4 つの line を分けて持ちます。
 
 - **Mirrorea Spaces alpha-0 evidence line**
-  規範判断は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence を蓄積する alpha-local scaffolding です。
+  LAB evidence は `specs/13..17`、repository memory は `plan/39..43`、phase-indexed sample scaffold は `samples/alpha/` に置きます。これは active runnable root の置換ではなく、current-scope evidence を蓄積する alpha-local scaffolding です。
 - **Mirrorea Spaces practical alpha-1 line**
-  規範判断は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。ここは source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product preview を揃える first-floor toolchain line であり、operational α-0.5 / α-0.8 readiness そのものではありません。
+  LAB evidence は `specs/18-practical-alpha1-scope.md`、repository memory は `plan/44-practical-alpha1-roadmap.md` に置きます。ここは source front-door、checker、runtime、package/hot-plug、transport、devtools、local save/load、product preview を揃える first-floor toolchain line であり、operational α-0.5 / α-0.8 readiness そのものではありません。
   ただし、これは promoted work queue であり、active canonical runnable root への昇格を意味しません。2026-05-05 時点の latest package closeout は `P-A1-23` practical α-1 integrated workflow carrier です。
   2026-05-05 時点の practical alpha-1 evidence は `SRC` / `CHK` / `RUN` / `HP-A1` / `TR-A1` / `VIS-A1` / `SL-A1` / `AV-A1` / `PE2E` families に分かれます。詳細な row 一覧と carrier split は `samples/practical-alpha1/README.md`、検証 dashboard は `samples_progress.md`、長期 memory は `plan/44-practical-alpha1-roadmap.md` に集約します。
   root では、`PA1W-01..08` が first-floor evidence と operational α line を bounded practical developer workflow に束ねていることだけを押さえます。これは final public parser / viewer / telemetry ABI、distributed durable save/load、WAN/federation、product/public-ready α-1 を意味しません。
 
 - **Operational alpha theory-freeze / session-runtime line**
-  規範判断は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を固定します。
+  LAB evidence は `specs/19..24`、repository memory は `plan/45..49` に置きます。ここでは runtime を広げずに、verification stratification、`atomic_cut` / consistent cut / save-load semantics、auth / rate-limit / debug の contract-transformer 理論、typed observability、typed external host boundary、そして α-0.5 / α-0.8 / α-0.9 の operational readiness 条件を記録します。
   `P-A1-19`、`P-A1-20`、`P-A1-21`、`P-A1-22` により、same-session α-0.5 session carrier、typed external `AddOne` host-I/O adapter lane、debug / auth / rate-limit / object preview / deferred detach の same-session attach lane、そして event DAG / local route trace / membership timeline / witness relation / hot-plug lifecycle / fallback degradation / save-load timeline / observer-safe redacted view / retention-on-demand trace の session-bound devtools export が actualize され、bounded operational α-0.5 / α-0.8 / α-0.9 line は揃いました。`AddOne` は host-boundary evidence であり、Mir-owned computational-core completion ではありません。`P-A1-23` はその line と practical first floors を bounded practical α-1 workflow として束ねました。final public viewer / telemetry ABI、durable audit、distributed durable save/load、final-public product hardening は引き続き未完です。
 
 - **Product/Public-ready Mirrorea Spaces alpha-1 line**
-  規範判断は `specs/25..27`、repository memory は `plan/50..52` に置きます。current line は `mirrorea-alpha`、versioned `package.mir.json`、local/Docker controlled runtime、non-final devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational product sample suiteを持ちます。
+  LAB evidence は `specs/25..27`、repository memory は `plan/50..52` に置きます。current line は `mirrorea-alpha`、versioned `package.mir.json`、local/Docker controlled runtime、non-final devtools/viewer、R0/R2 save evidence、native host launch bundle、product release check、installed-binary probe、operational product sample suiteを持ちます。
   product demo は `samples/product-alpha1/demo/`、operational suite は `samples/product-alpha1/operational/` です。operational suite は `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` の six runnable roots、shared attach packages、projection inventory、template-only starter catalog、retained future inventoryを持ちます。
   current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundleだけです。current catalog scope は bounded product alpha-1 narrow showcaseです。broader distribution / final shared-space operational catalog breadth は user-spec-required gateであり、final textual `.mir` grammar、final public ABI、WAN/federation、distributed durable save-load、arbitrary native execution、signature-is-safety、final viewer / telemetry serviceは claimしません。
 
@@ -313,24 +313,33 @@ python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json
 
 ## 読み始める順序
 
-この README の次は、原則として次の順で読みます。
+この README の次は、まず canon source を読み、その後に task-specific LAB
+evidence / repository memory を追います。
 
-1. `Documentation.md`
-2. current status / roadmap / remaining steps を扱う task なら `progress.md` と `tasks.md`
-3. phase recut / roadmap rewrite / progress/tasks reorganization を扱う task なら `.docs/progress-task-axes.md`
-4. `specs/00-document-map.md`
-5. `specs/01-charter-and-decision-levels.md`
-6. `specs/02-system-overview.md`
-7. `specs/03-layer-model.md`
-8. `specs/09-invariants-and-constraints.md`
-9. 必要な subsystem spec と `plan/00-index.md`
-10. practical alpha-1 を扱う task なら `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
-11. operational readiness / theory freeze を扱う task なら `specs/19..24` と `plan/45..49`
-12. product/public-ready alpha-1 を扱う task なら `specs/25` と `plan/50`
-13. operational product sample suite を扱う task なら `specs/26..27` と `plan/51..52`
+1. `mirrorea_canon/README.md`
+2. `mirrorea_canon/MAP.md`
+3. task に関係する canon files:
+   `mirrorea_canon/meta/`、`mirrorea_canon/adr/`、
+   `mirrorea_canon/plan/`、`mirrorea_canon/theory/`、
+   `mirrorea_canon/spec/`、`mirrorea_canon/architecture/`、
+   `mirrorea_canon/scenarios/`
+4. `Documentation.md`
+5. current status / roadmap / remaining steps を扱う task なら `progress.md` と `tasks.md`
+6. phase recut / roadmap rewrite / progress/tasks reorganization を扱う task なら `.docs/progress-task-axes.md`
+7. LAB follow-up として `specs/00-document-map.md`
+8. LAB follow-up として `specs/01-charter-and-decision-levels.md`
+9. LAB follow-up として `specs/02-system-overview.md`
+10. LAB follow-up として `specs/03-layer-model.md`
+11. LAB follow-up として `specs/09-invariants-and-constraints.md`
+12. 必要な subsystem legacy spec と `plan/00-index.md`
+13. practical alpha-1 を扱う task なら LAB evidence として `specs/18-practical-alpha1-scope.md` と `plan/44-practical-alpha1-roadmap.md`
+14. operational readiness / theory freeze を扱う task なら LAB evidence として `specs/19..24` と `plan/45..49`
+15. product/public-ready alpha-1 を扱う task なら LAB evidence として `specs/25` と `plan/50`
+16. operational product sample suite を扱う task なら LAB evidence として `specs/26..27` と `plan/51..52`
 
 task が specific `sub-agent-pro/*.md` handoff を名指しした場合は、その handoff を user 指示順で先に読みます。
-ただし handoff は規範正本ではなく、必要な内容は `specs/` / `plan/` / docs / report へ mirror して扱います。
+ただし handoff は規範正本ではなく、必要な内容は `mirrorea_canon/` または
+LAB source hierarchy (`specs/` / `plan/` / docs / report) へ mirror して扱います。
 
 ## いま参照すべき docs
 

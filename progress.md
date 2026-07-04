@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 10:33 JST
+最終更新: 2026-07-04 10:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -78,6 +78,14 @@ semantic source authority.
   support drilldown. It does not claim any canon movement, gate exit, proof
   status, conformance, implementation completion, or runnable sample status
   change.
+- Current stale source-hierarchy wording audit note:
+  a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
+  `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
+  `samples_progress.md`, `plan/70`, and `plan/90` that could blur canon vs LAB
+  source hierarchy or workflow-ready vs evidence-closed status. The corrected
+  reading is `mirrorea_canon/` as canon and legacy `specs/` as LAB evidence /
+  historical package-line memory. This does not change canon, gates, proof
+  status, conformance, implementation status, runnable rows, or sample status.
 - Current G1 planning note: `plan/71-g1-ordinary-assignment-target.md` now
   drafts the ordinary simple-assignment target/proof-boundary split in LAB memory. It
   targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
@@ -776,7 +784,17 @@ guard hardening, OBL-024 replay vocabulary preflight, OBL-024 Lean replay
 vocabulary refinement, OBL-024 Lean association vocabulary refinement,
 OBL-024 association guard hardening, OBL-025 repair completeness guard
 hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
-claim-family drilldown, and remaining claim-family priority map.
+claim-family drilldown, remaining claim-family priority map, and focused
+source-hierarchy stale wording audit.
+
+- 2026-07-04 10:45 JST
+  `plan/119` の stale wording audit follow-up として、`plan/01`、`plan/07`、
+  `plan/09`、`plan/19`、`plan/57`、`README.md`、`Documentation.md`、
+  `samples_progress.md`、`plan/70`、`plan/90` に残っていた source hierarchy /
+  evidence status の stale wording を補正した。`mirrorea_canon/` canon /
+  legacy `specs/` LAB evidence、workflow-ready / evidence-closed の区別を明示し、
+  canon edit、gate exit、proof / OBL status movement、conformance、implementation
+  status、runnable row / sample status change は主張しない。
 
 - 2026-07-04 10:33 JST
   `plan/119-g0-remaining-claim-family-drilldown-priority.md` を追加し、

@@ -1,8 +1,31 @@
 # samples_progress
 
-Last updated: 2026-07-04 09:57 JST
+Last updated: 2026-07-04 10:45 JST
 
-Current repo-local focus: current-L2 runnable floor, active Lean foundations and LAB OBL-001 / OBL-020 / OBL-021 / OBL-024 / OBL-025 statement drafts, practical alpha-1 evidence, bounded operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate, installed-binary adoption probe, canonical operational product sample suite, `P-PAT-01` minimal alpha-1 pattern verification, the closed Full System V1 lane, and the closed `P-SURF-01..99` Surface Mir parser + indexed-state + elaboration + generated communication + role-admission + source-patch hot-plug + source operational + static devtools diagnostics + final audit evidence floors plus G1 LAB E-ROW carrier detail / precondition context / OBL-024 executable diagnostic-soundness projection carrier / OBL-024 projection Rust fixture guards / OBL-024 replay vocabulary preflight / OBL-024 Lean replay vocabulary refinement / OBL-024 Lean association vocabulary refinement / OBL-024 association guard hardening / `E-ROW-002` visibility repair evidence / repair shape inventory / `E-ROW-001` non-visibility singleton fixture set / singleton repair assumption gate / singleton repair prototype / mixed-multi decomposition inventory / set-insertion-bundle payload inventory / OBL-001-020-021 statement guard hardening / OBL-024 diagnostic-soundness statement draft / OBL-025 repair-shape statement refinement / ELAB-07 set-insertion gate review / ELAB-04 mixed visibility branch inventory / ELAB-07 set-insertion executable preflight / ELAB-07 set-insertion assumption acceptance / ELAB-07 set-insertion payload-model design / ELAB-07 set-insertion executable payload prototype / ELAB-07 set-insertion negative-guard hardening / ELAB-07 set-insertion row-identity guard hardening / ELAB-07 set-insertion exact-locus guard hardening / ELAB-07 child-bundle-partial exclusion fixtures / ELAB-04 mixed visibility payload-model preflight / OBL-025 branch-local non-coverage refinement / OBL-025 repair completeness guard hardening. `samples/alpha/` remains alpha-0 evidence; `samples/practical-alpha1/` remains first-floor fixture evidence; `samples/product-alpha1/` is the current product alpha root. Surface Mir `samples/full-system-v1-surface/syntax/`, `indexed-state/`, `elaboration/`, `role-admission/`, `source-patch/`, `devtools/`, and the six operational roots now exist as alpha evidence; none is a final Surface runtime/transport, final devtools viewer/telemetry ABI, final ABI/SDK, or final shared-space catalog. Docker skip paths are partial local probes, not release-candidate evidence.
+Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
+operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
+installed-binary adoption probe, canonical operational product sample suite,
+`P-PAT-01` minimal alpha-1 pattern verification, and the closed Full System V1
+bounded release-check lane.
+
+Evidence-only focus: active Lean foundations and LAB OBL-001 / OBL-020 /
+OBL-021 / OBL-024 / OBL-025 statement drafts, the closed `P-SURF-01..99`
+Surface Mir parser + indexed-state + elaboration +
+generated communication + role-admission + source-patch hot-plug + source
+operational + static devtools diagnostics + final audit evidence floors, and
+G1 LAB E-ROW / OBL addenda including diagnostic carrier context, OBL-024
+projection / replay / association guards, OBL-025 repair-completeness guards,
+visibility and non-visibility singleton repair evidence, ELAB-07 exact
+set-insertion evidence, and ELAB-04 mixed visibility preflight.
+
+Non-claims: `samples/alpha/` remains alpha-0 evidence;
+`samples/practical-alpha1/` remains first-floor fixture evidence;
+`samples/product-alpha1/` is the current product alpha root. Surface Mir
+`samples/full-system-v1-surface/syntax/`, `indexed-state/`, `elaboration/`,
+`role-admission/`, `source-patch/`, `devtools/`, and the six operational roots
+exist as alpha evidence; none is a final Surface runtime/transport, final
+devtools viewer/telemetry ABI, final ABI/SDK, or final shared-space catalog.
+Docker skip paths are partial local probes, not release-candidate evidence.
 
 ## Legend
 
