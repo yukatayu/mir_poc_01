@@ -292,10 +292,11 @@ No validation is intentionally skipped.
 
 ## Commit / push status
 
-Not yet committed at this report-closeout update point. Validation and final
-review are complete; the package will be committed with
-`git commit --no-gpg-sign` and pushed next. A follow-up report-only commit will
-record the exact substantive package hash after that commit exists.
+Substantive package commit / push completed:
+`549b7a4ebeae16641118b4d42fa22441a16af3f9`.
+
+This report-closeout update is committed and pushed separately so the exact
+substantive package hash is recorded in repository memory.
 
 ## Sub-agent session close status
 
