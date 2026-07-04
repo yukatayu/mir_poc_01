@@ -150,8 +150,9 @@ Focused and full validation after reviewer fixes:
 - `cargo fmt --check`: exit 0.
 - `cargo test --workspace --all-targets --no-fail-fast`: exit 0.
 
-Review completed. Commit and push are still pending before the primary package
-commit.
+Review completed. Primary package commit / push completed as
+`d8a26076258886a3a4df2aeb0b065e45dce3f0b3`; this report-status update remains
+to be committed separately.
 
 ## What changed in understanding
 
@@ -220,7 +221,9 @@ No relevant local validations were skipped for this docs-validator package.
 
 ## Commit / push status
 
-Pending before the primary package commit.
+Primary package commit / push completed:
+`d8a26076258886a3a4df2aeb0b065e45dce3f0b3` (`Guard Discord webhook leaks in
+docs validation`). Report-status commit is pending.
 
 ## Sub-agent session close status
 
