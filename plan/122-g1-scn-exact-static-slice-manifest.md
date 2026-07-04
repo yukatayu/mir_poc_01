@@ -81,7 +81,7 @@ BrowserClient[self] {
 | visible write yields publish / observe consequence for `position` | `exact current executable evidence` | `ELAB-11` `generated_edge_kinds` include `auto_publish` and `auto_observe`; `publication_summaries` and `observation_summaries` name `World`, `player`, `self`, `position`, and `observer_safe`. | LAB `message_envelope`, `auto_publish`, and `auto_observe` names are carriers, not runtime dispatch or final telemetry ABI. |
 | spans on generated consequences | `exact current executable evidence` | `ELAB-11` `source_span_entity_kinds` includes transition, message envelope, generated edges, publication, observation, remote request, and dependency. `ELAB-05` remains span-support evidence. | No span proof, no final `source_map`, no final Diagnostic JSON ABI. |
 | obligations include write capability for `player` | `structural support only` | `ELAB-11` and adjacent write rows carry generic obligation codes for explicit transitions, remote requests, source spans, generated failure rows, and pending role/runtime integration. `plan/72` already classifies SCN-01 capability evidence as LAB support. | Current rows do not prove the exact canon capability theorem and do not discharge G3 / THM-004 authority work. |
-| negative: removing `VisibilityDenied` yields E-ROW-002 at assignment span | `structural support only` | `ELAB-10` demonstrates E-ROW-002-shaped `VisibilityDenied` underdeclaration, but for a visible read/observe path. `plan/72` records that no exact SCN-01 visible-write/publish negative row exists. | Do not claim exact SCN-01 negative coverage, Diagnostic ABI freeze, or OBL-024/025 discharge. |
+| negative: removing `VisibilityDenied` yields E-ROW-002 at assignment span | `exact current executable evidence` after `plan/123` | `ELAB-17` demonstrates the exact SCN-01 visible-write/publish underdeclaration with `E-ROW-002` / `VisibilityDenied`. `ELAB-10` remains structural read/observe support only. | Do not claim Diagnostic ABI freeze, repair ABI freeze, OBL-024/025 discharge, OBL-001 proof, C-static conformance, or G1 exit. |
 | runtime `roll(3)` store/order behavior | `explicit gap / out of scope` | none for this manifest. | Admission, store update, request-before-serve-before-publish ordering, runtime dispatch, and distributed transport are outside `G1-MVS-ASSIGNMENT-STATIC`. |
 
 ## SCN-02 exact static manifest
@@ -125,6 +125,19 @@ BrowserClient[self] {
 | `ELAB-10` | E-ROW-002-shaped `VisibilityDenied` underdeclaration support. | Visible read/observe negative only; no exact SCN-01 visible-write negative. |
 | `ELAB-11` | Primary exact SCN-01 static evidence. | No conformance, proof, runtime, or final ABI. |
 | `ELAB-12` | Primary exact SCN-02 static evidence. | No conformance, proof, runtime, or final ABI. |
+| `ELAB-17` | Exact SCN-01 visible-write `VisibilityDenied` negative evidence after `plan/123`. | Rejected-row failure-containment pressure only; diagnostic projection / repair payload details remain OBL-024 / OBL-025 LAB evidence, not OBL-001 content. |
+
+## Post-plan/123 / plan/124 addendum
+
+`plan/123-g1-scn01-visibility-negative-actualization.md` added `ELAB-17`, so
+the SCN-01 `VisibilityDenied` negative is no longer a current exact-evidence
+gap. `plan/124-g1-obl001-boundary-audit.md` then audited this row against the
+existing OBL-001 abstract boundary and found no missing Lean predicate.
+
+This addendum updates the current manifest reading only. It does not change the
+historical fact that this file was first written before `ELAB-17`, and it does
+not claim canon edit, OBL completion, proof discharge, conformance, G1 exit,
+runtime dispatch, final Diagnostic / repair ABI, or sample-status relabel.
 
 ## What this manifest permits next
 
@@ -161,11 +174,10 @@ Use this file to keep the next package narrow:
 
 ## Open questions
 
-- Should a future package add an exact SCN-01 visible-write negative row for
-  missing `VisibilityDenied`, or is structural `ELAB-10` support enough until
-  OBL-001 wording is refined?
 - Does OBL-001 need an abstract predicate for visible publish / observe
   consequence, or can the current THM-001 wording and SCN-01 manifest carry it?
+  This is answered for the current checkpoint by `plan/124`: no new predicate is
+  needed for `ELAB-11` / `ELAB-12` / `ELAB-17`.
 - Should direct-local-write rejection be represented as an explicit negative
   fixture later, or should positive owner-directed request shape remain enough
   for the initial G1 static bridge?

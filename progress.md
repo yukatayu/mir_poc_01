@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 18:24 JST
+最終更新: 2026-07-04 18:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -119,6 +119,18 @@ semantic source authority.
   or sample-status relabel. Oracle advisory review preferred an OBL-001
   boundary audit before further SCN fixture expansion, so the next safe package
   should audit the statement boundary before adding another static gap row.
+- Current OBL-001 boundary audit note:
+  `plan/124-g1-obl001-boundary-audit.md` closes that immediate sequencing guard.
+  The audit finds that the existing LAB OBL-001 abstract predicate boundary can
+  carry `ELAB-11`, `ELAB-12`, and `ELAB-17` without importing helper JSON names,
+  final Diagnostic / repair ABI fields, or sample-specific vocabulary. No Lean
+  predicate refinement is needed at this checkpoint. `ELAB-17` is OBL-001
+  failure-containment pressure only; diagnostic projection and repair payload
+  details remain OBL-024 / OBL-025 LAB evidence. `plan/122` now has a
+  post-`plan/123` / `plan/124` addendum so the old SCN-01 negative gap reading
+  is not stale. This is LAB memory only: no
+  canon edit, OBL completion, proof discharge, conformance, G1 exit, runtime
+  dispatch, final ABI, or sample-status relabel.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -816,7 +828,7 @@ Research-discovery items:
 | Product Alpha | `product-alpha-ready` | bounded alpha workflow, not final product; release-check argv / aggregate display, installed-binary binary/package argv, and generated demo / native provenance / Docker source evidence now avoid repo-root absolute source paths for repo-owned inputs | maintenance only |
 | operational suite | `workflow-ready` | bounded local/Docker suite remains compatibility anchor; nested helper command argv for repo-owned operational roots/layers now stays repo-relative | maintenance only |
 | projection/backend | `first-floor-evidence` | bounded projection/provider evidence remains lower floor | 着手可能 |
-| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
+| LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status; `plan/124` audits `ELAB-11/12/17` against OBL-001 and finds no Lean predicate refinement needed at this checkpoint; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
 
 ## recent log
 
@@ -864,7 +876,17 @@ detached-loop helper path portability hardening, plus source-hierarchy status
 root-display path portability hardening, plus shared practical helper
 failure-surface path redaction, plus repo-triage recut matrix classification,
 plus G1 minimal vertical slice candidate mapping, SCN exact static slice
-manifest mapping, and SCN-01 visibility negative actualization.
+manifest mapping, SCN-01 visibility negative actualization, and OBL-001
+boundary audit.
+
+- 2026-07-04 18:55 JST
+  `plan/124-g1-obl001-boundary-audit.md` を追加し、`ELAB-11` / `ELAB-12` /
+  `ELAB-17` が既存 OBL-001 abstract predicate boundary で運べることを監査した。
+  Lean predicate refinement は不要と判断し、`ELAB-17` は OBL-001
+  failure-containment pressure、diagnostic projection / repair payload は
+  OBL-024 / OBL-025 LAB evidence として分離した。canon edit、OBL completion、
+  proof discharge、conformance、G1 exit、runtime dispatch、final ABI、
+  sample status は変更していない。
 
 - 2026-07-04 18:24 JST
   `plan/123-g1-scn01-visibility-negative-actualization.md` と `ELAB-17` を
