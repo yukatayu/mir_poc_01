@@ -144,6 +144,11 @@ committed and pushed.
 - `sed -n ... plan/58-full-system-v1-roadmap.md`
 - `sed -n ... CANON.md`
 - `sed -n ... samples/README.md`
+- Changed-file endpoint leak scan over `git ls-files --modified --others --exclude-standard`
+- `git add ...`
+- Staged-file endpoint leak scan over `git diff --cached --name-only --diff-filter=ACM`
+- `git commit --no-gpg-sign -m "Add source hierarchy wording lint"`
+- `git push`
 
 ## Evidence / outputs / test results
 
@@ -297,7 +302,11 @@ issues. Follow-up precision findings were implemented:
 
 ## Commit / push status
 
-Pending final commit and push after report closeout update.
+Package commit pushed:
+
+- `6935e80a Add source hierarchy wording lint`
+
+Report-status commit pending at this report update.
 
 ## Sub-agent session close status
 
