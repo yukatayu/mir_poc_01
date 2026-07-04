@@ -233,7 +233,13 @@ generated artifact. Focused docs and validator tests were run instead.
 
 ## Commit / push status
 
-Commit and push are pending until validation passes.
+Substantive package committed and pushed:
+
+- `9046179c` `Add G1 acceptance packet preflight`
+
+This status section was then updated in a report-only follow-up commit after
+the substantive package push. That follow-up commit is visible in Git history
+and is not recursively recorded here.
 
 ## Sub-agent session close status
 
