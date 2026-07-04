@@ -147,7 +147,11 @@ Docs validators and whitespace checks are run before commit.
 
 ## Commit / push status
 
-Commit and push pending at this report update step.
+Committed and pushed:
+
+- `cfa90135 Refresh source hierarchy script taxonomy`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
