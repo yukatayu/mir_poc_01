@@ -90,6 +90,10 @@ python3 scripts/alpha_network_docker_e2e.py run NET-02 --format json
 python3 scripts/alpha_network_docker_e2e.py check-all --format json
 python3 scripts/alpha_network_docker_e2e.py stage-c-closeout --format json
 cd /tmp && python3 /home/codex/dev/mir_poc_01/scripts/alpha_network_docker_e2e.py closeout --format json
+python3 -m unittest scripts.tests.test_validate_docs
+python3 scripts/check_source_hierarchy.py
+python3 scripts/validate_docs.py
+git diff --check
 ```
 
 ## Evidence / outputs / test results
@@ -119,6 +123,14 @@ cd /tmp && python3 /home/codex/dev/mir_poc_01/scripts/alpha_network_docker_e2e.p
     matches `0`, `/home/` matches `0`
   - `stage-c-closeout`: `stage_c_complete=True`, failed `[]`, repo absolute
     matches `0`, `/home/` matches `0`
+- Docs/source validation:
+  - `python3 -m unittest scripts.tests.test_validate_docs`: 36 tests passed
+  - `python3 scripts/check_source_hierarchy.py`: required `659`, present `659`,
+    missing `0`
+  - `python3 scripts/validate_docs.py`: documentation scaffold complete, 1352
+    numbered reports
+  - `git diff --check`: passed
+  - changed/staged endpoint scans: no webhook endpoint matches
 
 ## What changed in understanding
 
@@ -183,7 +195,10 @@ environment variables.
 
 ## Commit / push status
 
-Pending at report write.
+- Implementation / snapshot / initial report commit:
+  `93cd0f94 Use portable alpha network docker paths`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
