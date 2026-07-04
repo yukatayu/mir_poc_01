@@ -259,8 +259,11 @@ full `scripts/tests` discovery are run before commit.
 
 ## Commit / push status
 
-Pending at report update; commit and push will be recorded in a follow-up report
-update after validation.
+Committed and pushed:
+
+- `4718b531 Harden active reader path portability`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
