@@ -217,7 +217,12 @@ code-mapper recommendation from Package 53.
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `b7428df5 Use relative practical avatar helper paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
