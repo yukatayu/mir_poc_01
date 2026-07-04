@@ -237,7 +237,12 @@ code-mapper recommendation from Package 53.
 
 ## Commit / push status
 
-Pending at report creation time.
+Committed and pushed:
+
+- `e16c7e19 Use relative alpha09 devtools helper paths`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
