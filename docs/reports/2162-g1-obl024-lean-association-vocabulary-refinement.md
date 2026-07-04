@@ -225,7 +225,10 @@ Updated the Lean LAB statement row and recent validation log.
 
 ## Commit / push status
 
-Pending.
+- Body commit `d5ef5070` (`Refine OBL-024 Lean association vocabulary`) was
+  pushed to `origin/main`.
+- This report status update is committed separately so the pushed body commit
+  can be named accurately.
 
 ## Sub-agent session close status
 
