@@ -134,6 +134,15 @@ compile-check、LAB statement sync guard、admitted-stub / placeholder scan、do
 ledger movement、OBL completion、proof/conformance claim、runtime readiness、
 G1 exit は主張しません。
 
+`plan/143` は G1 OBL-021 equality / diagnostic abstraction decision packet
+です。`plan/140` の OBL-021 artifact annex template を埋める前に、abstract
+component result equivalence、abstract diagnostic equivalence、
+projection-totality、fixed-input identity、LAB artifact / wrapper boundary について何を
+human/canon review に問うかを整理します。requested status selection、
+proposal submission、canon edit、ledger movement、OBL-021 completion、proof /
+conformance claim、final equality / Diagnostic ABI selection、runtime
+scheduling determinism、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

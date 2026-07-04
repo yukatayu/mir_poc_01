@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 23:18 JST
+最終更新: 2026-07-04 23:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -245,6 +245,19 @@ Current holding state:
   tracked secret scan. It does not choose requested status, submit a proposal,
   edit canon, move the ledger, complete any OBL, claim proof / conformance,
   change runtime readiness, or relabel sample status.
+- `plan/143-g1-obl021-equality-diagnostic-abstraction-decision-packet.md` now
+  separates the OBL-021 equality / diagnostic abstraction blocker from the
+  status shell. It asks what human/canon review should decide about abstract
+  result equivalence, abstract diagnostic equivalence, projection-totality,
+  fixed-input identity, and LAB artifact / wrapper identity before any OBL-021
+  status draft. It also
+  clarifies the later reading of `plan/77`: abstract predicate fields may be
+  accepted for statement-status vocabulary, replaced by concrete relations
+  first, or deferred. It does not choose requested status, submit a proposal,
+  edit canon, move the ledger, complete OBL-021, claim proof / conformance,
+  select final equality / Diagnostic ABI, claim runtime scheduling
+  determinism, claim G1 exit, change runtime readiness, or relabel sample
+  status.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -267,17 +280,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..142`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..143`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
   slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..142`. This is documentation taxonomy maintenance only.
+  `plan/118..143`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..142`. This keeps future plan-file additions
+  cover current numbered `plan/00..143`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -567,6 +580,15 @@ Current holding state:
   / source hierarchy validation, and tracked secret scan pass as LAB evidence.
   It does not create a wrapper, choose requested status, submit a proposal,
   include ledger patch text, move canon status, or claim proof / conformance.
+- `plan/143-g1-obl021-equality-diagnostic-abstraction-decision-packet.md` now
+  provides the decision-packet-only split for OBL-021 equality / diagnostic
+  abstraction before status drafting. It keeps result equality, diagnostic
+  equivalence, projection-totality, fixed-input identity, LAB artifact identity, and wrapper
+  requirement as human/canon decision axes and records the later reading of
+  `plan/77`'s abstract-predicate replacement question. It does not create a
+  wrapper, choose requested status, submit a proposal, include ledger patch
+  text, move canon status, claim proof / conformance, claim G1 exit, or change
+  runtime readiness.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
@@ -832,7 +854,6 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `OBL-021 equality / diagnostic abstraction decision packet` | `G1` docs/advisory-only reserve | prepare a narrower decision packet asking whether abstract result equivalence, diagnostic equivalence, and projection-totality boundaries are acceptable before any OBL-021 status request | decision-packet-only; no status proposal, no canon edit, no ledger movement, no final equality / Diagnostic ABI selected by LAB |
 | `OBL-020 full-row vs G1-supporting scope decision packet` | `G1` docs/advisory-only reserve | prepare a narrower decision packet asking whether current OBL-020 scope should stay G1-supporting, move full row, or defer to proof-package fallback before requested-status drafting | decision-packet-only; no status proposal, no canon edit, no ledger movement, no full OBL-020 completion claim |
 | `OBL-001 sync guard hardening` | `G1` reserve | add docs-only or test-only guard hardening only if future review finds that the OBL-001 statement sync tests can drift away from the `plan/124` boundary without failing | Lean remains compile-check only; no predicate refinement by default; no canon ledger movement |
 | `OBL-020 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `StepWFStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
@@ -866,7 +887,7 @@ next line.
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |
-| `Macro 5` | theorem / model-check / verifier bridge | current self-driven line is G1 OBL statement/status preparation; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved and `plan/142` refreshes shell evidence without moving status |
+| `Macro 5` | theorem / model-check / verifier bridge | current self-driven line is G1 OBL statement/status preparation; `plan/141` leaves status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` refreshes shell evidence without moving status, and `plan/143` separates the OBL-021 equality / diagnostic / fixed-input abstraction decision from status drafting |
 | `Macro 6` | distributed fabric / runtime evolution | local/Docker alpha can be self-driven; WAN/federation remains user decision |
 | `Macro 7` | toolchain / backend / developer surface | Surface CLI/devtools can be self-driven within alpha scope |
 | `Macro 8` | domain/application realization | Surface operational suite can be self-driven after language/runtime base |

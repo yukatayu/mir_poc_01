@@ -117,6 +117,14 @@ definitional equality, alpha-equivalence, or a canon-specific relation.
 - What canon-confirmed equivalence relation should replace the abstract
   predicate fields if/when OBL-021 moves toward real statement status?
 
+Later reading after `plan/126`, `plan/139`, `plan/140`, and `plan/143`: the
+last question above is not a requirement that abstract predicate fields must be
+replaced before any status-prep work. Current LAB memory keeps three possible
+outcomes open: human/canon review may accept the abstract result / diagnostic
+equivalence boundary for statement-status vocabulary, require concrete
+equality / Diagnostic / projection-totality relations first, or defer the
+boundary decision. No final equality relation is selected here.
+
 ## Next safe packages
 
 1. OBL-001 statement refinement only if review finds a real missing predicate or
