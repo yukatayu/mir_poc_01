@@ -335,6 +335,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/124-g1-obl001-boundary-audit.md",
             "plan/125-g1-scn02-direct-local-write-blocker-review.md",
             "plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md",
+            "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
