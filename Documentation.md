@@ -110,6 +110,14 @@ acceptance、canon edit、ledger movement、OBL-021 completion、proof/conforman
 claim、final equality / Diagnostic ABI selection、runtime scheduling
 determinism、G1 exit は主張しません。
 
+`plan/140` は later OBL-021 conditional `lean-stated` packet 用の artifact
+annex template です。canon target、LAB artifact path / namespace / constant、
+abstraction-boundary decision、fresh validation slots、artifact/wrapper decision
+slots、unresolved final equality / Diagnostic ABI / projection-totality items、
+non-claims をまとめますが、proposal submission、requested status acceptance、
+ledger movement、wrapper creation、OBL-021 completion、proof/conformance claim、
+runtime scheduling determinism、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
