@@ -289,7 +289,19 @@ logic.
 
 ## Commit / push status
 
-Pending at initial report creation.
+Substantive commit:
+
+- `76b6c94830737ec774aed1b994be4d642b453db7`
+  (`Add G1 status evidence readiness dry-run`)
+
+Push status:
+
+- pushed to `origin/main`;
+- after push, `HEAD` and `origin/main` both resolved to
+  `76b6c94830737ec774aed1b994be4d642b453db7`.
+
+This section is updated by a follow-up report-status commit; that follow-up
+commit is not recursively recorded in this report.
 
 ## Sub-agent session close status
 
