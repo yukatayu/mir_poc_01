@@ -78,6 +78,13 @@ wrapper decision が必要であることを整理する preflight-only memory �
 wrapper file creation、canon edit、ledger movement、OBL-020 completion、
 proof/conformance claim、G1 exit は主張しません。
 
+`plan/136` は later requested-status packet 用の OBL-020 artifact annex
+template です。canon target、LAB artifact path / namespace / constant、
+scope label、fresh validation slots、artifact/scope decision slots、
+unresolved items、non-claims をまとめますが、proposal submission、requested
+status acceptance、ledger movement、wrapper creation、OBL-020 completion、
+proof/conformance claim、G1 exit は主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
