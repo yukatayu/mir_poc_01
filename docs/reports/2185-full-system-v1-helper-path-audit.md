@@ -165,7 +165,12 @@ code-mapper recommendation from Package 45.
 
 ## Commit / push status
 
-Pending at initial report creation.
+Committed and pushed:
+
+- `f660249a Record Full System V1 helper path audit`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
