@@ -204,7 +204,10 @@ validation command, blocker, or runnable dashboard row changed.
 
 ## Commit / push status
 
-Pending at report write.
+- Initial package commit: `2e92c009 Add repo triage recut matrix`
+- Initial package push: pushed to `origin/main`
+- This report status update is committed and pushed separately after the
+  initial package commit.
 
 ## Sub-agent session close status
 
