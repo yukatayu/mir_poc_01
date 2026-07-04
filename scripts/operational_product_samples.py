@@ -111,6 +111,13 @@ def cargo_test_args(*args: str) -> list[str]:
     return ["cargo", "test", *args, "--", "--nocapture"]
 
 
+def repo_cli_arg(path: Path) -> str:
+    try:
+        return path.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def run_command(name: str, argv: list[str], env: dict[str, str] | None = None) -> CommandResult:
     completed = subprocess.run(
         argv,
@@ -490,7 +497,7 @@ def two_shard_gradient_devtools_runtime_evidence_observed(
 def run_world_package(root: Path) -> dict[str, Any]:
     result = run_command(
         f"run-local:{root.name}",
-        cargo_alpha_args("run-local", str(root)),
+        cargo_alpha_args("run-local", repo_cli_arg(root)),
     )
     semantic_checks: dict[str, bool] = {}
     if root == MEMBERSHIP_CHAT:
@@ -537,7 +544,7 @@ def bootstrap_sugoroku_session() -> tuple[str, dict[str, str], list[CommandResul
     commands = [
         run_command(
             "run-local:sugoroku",
-            cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
+            cargo_alpha_args("run-local", repo_cli_arg(SUGOROKU_WORLD)),
             env=env,
         ),
         run_command(
@@ -575,7 +582,11 @@ def attach_layers() -> dict[str, Any]:
     layer_results = [
         run_command(
             f"attach:{name}",
-            cargo_alpha_args("attach", "session#operational-sugoroku", str(path)),
+            cargo_alpha_args(
+                "attach",
+                "session#operational-sugoroku",
+                repo_cli_arg(path),
+            ),
             env=env,
         )
         for name, path, _ in operational_attach_specs()
@@ -657,7 +668,12 @@ def build_native_bundle() -> dict[str, Any]:
     out_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
     result = run_command(
         "build-native-bundle",
-        cargo_alpha_args("build-native-bundle", str(SUGOROKU_WORLD), "--out", out_dir),
+        cargo_alpha_args(
+            "build-native-bundle",
+            repo_cli_arg(SUGOROKU_WORLD),
+            "--out",
+            out_dir,
+        ),
     )
     return {
         "surface_kind": "operational_product_sample_native_bundle_report",
@@ -680,10 +696,13 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     shard_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-shard-viewer-")
     gradient_viewer_dir = tempfile.mkdtemp(prefix="mirrorea-ops-gradient-viewer-")
     bundle_dir = tempfile.mkdtemp(prefix="mirrorea-ops-bundle-")
-    sugoroku_check = run_command("check:sugoroku-world", cargo_alpha_args("check", str(SUGOROKU_WORLD)))
+    sugoroku_check = run_command(
+        "check:sugoroku-world",
+        cargo_alpha_args("check", repo_cli_arg(SUGOROKU_WORLD)),
+    )
     membership_chat_run = run_command(
         "run-local:membership-chat",
-        cargo_alpha_args("run-local", str(MEMBERSHIP_CHAT)),
+        cargo_alpha_args("run-local", repo_cli_arg(MEMBERSHIP_CHAT)),
         env=chat_env,
     )
     membership_chat_export = run_command(
@@ -700,10 +719,13 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         "view:membership-chat",
         cargo_alpha_args("view", chat_viewer_dir, "--check"),
     )
-    portal_check = run_command("check:portal-worldlink", cargo_alpha_args("check", str(PORTAL_WORLDLINK)))
+    portal_check = run_command(
+        "check:portal-worldlink",
+        cargo_alpha_args("check", repo_cli_arg(PORTAL_WORLDLINK)),
+    )
     portal_run = run_command(
         "run-local:portal-worldlink",
-        cargo_alpha_args("run-local", str(PORTAL_WORLDLINK)),
+        cargo_alpha_args("run-local", repo_cli_arg(PORTAL_WORLDLINK)),
         env=portal_env,
     )
     portal_export = run_command(
@@ -722,11 +744,11 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     )
     shard_check = run_command(
         "check:two-shard-hard-boundary",
-        cargo_alpha_args("check", str(TWO_SHARD_HARD_BOUNDARY)),
+        cargo_alpha_args("check", repo_cli_arg(TWO_SHARD_HARD_BOUNDARY)),
     )
     shard_run = run_command(
         "run-local:two-shard-hard-boundary",
-        cargo_alpha_args("run-local", str(TWO_SHARD_HARD_BOUNDARY)),
+        cargo_alpha_args("run-local", repo_cli_arg(TWO_SHARD_HARD_BOUNDARY)),
         env=shard_env,
     )
     shard_export = run_command(
@@ -745,11 +767,11 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     )
     gradient_check = run_command(
         "check:two-shard-gradient-observation",
-        cargo_alpha_args("check", str(TWO_SHARD_GRADIENT_OBSERVATION)),
+        cargo_alpha_args("check", repo_cli_arg(TWO_SHARD_GRADIENT_OBSERVATION)),
     )
     gradient_run = run_command(
         "run-local:two-shard-gradient-observation",
-        cargo_alpha_args("run-local", str(TWO_SHARD_GRADIENT_OBSERVATION)),
+        cargo_alpha_args("run-local", repo_cli_arg(TWO_SHARD_GRADIENT_OBSERVATION)),
         env=gradient_env,
     )
     gradient_export = run_command(
@@ -768,7 +790,7 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     )
     sugoroku_run = run_command(
         "run-local:sugoroku",
-        cargo_alpha_args("run-local", str(SUGOROKU_WORLD)),
+        cargo_alpha_args("run-local", repo_cli_arg(SUGOROKU_WORLD)),
         env=env,
     )
     sugoroku_session = run_command(
@@ -777,8 +799,14 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
         env=env,
     )
     commands = [
-        run_command("check:world-core", cargo_alpha_args("check", str(WORLD_CORE))),
-        run_command("check:membership-chat", cargo_alpha_args("check", str(MEMBERSHIP_CHAT))),
+        run_command(
+            "check:world-core",
+            cargo_alpha_args("check", repo_cli_arg(WORLD_CORE)),
+        ),
+        run_command(
+            "check:membership-chat",
+            cargo_alpha_args("check", repo_cli_arg(MEMBERSHIP_CHAT)),
+        ),
         sugoroku_check,
         portal_check,
         shard_check,
@@ -804,7 +832,11 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     attach_results = [
         run_command(
             f"attach:{name}",
-            cargo_alpha_args("attach", "session#operational-sugoroku", str(path)),
+            cargo_alpha_args(
+                "attach",
+                "session#operational-sugoroku",
+                repo_cli_arg(path),
+            ),
             env=env,
         )
         for name, path, _ in operational_attach_specs()
@@ -828,7 +860,12 @@ def release_check(skip_docker: bool) -> dict[str, Any]:
     sugoroku_view = run_command("view", cargo_alpha_args("view", viewer_dir, "--check"))
     sugoroku_bundle = run_command(
         "build-native-bundle",
-        cargo_alpha_args("build-native-bundle", str(SUGOROKU_WORLD), "--out", bundle_dir),
+        cargo_alpha_args(
+            "build-native-bundle",
+            repo_cli_arg(SUGOROKU_WORLD),
+            "--out",
+            bundle_dir,
+        ),
     )
     commands.extend([sugoroku_export, sugoroku_view, sugoroku_bundle])
     failed = [result.name for result in commands if result.returncode != 0]

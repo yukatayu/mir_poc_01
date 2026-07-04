@@ -483,6 +483,77 @@ class OperationalProductSamplesTests(unittest.TestCase):
             ],
         )
 
+    def test_release_check_records_repo_relative_operational_argv(self) -> None:
+        def fake_run_command(name, argv, env=None):
+            return operational_product_samples.CommandResult(
+                name=name,
+                argv=argv,
+                returncode=0,
+                stdout="",
+                stderr="",
+                payload={},
+            )
+
+        with mock.patch.object(
+            operational_product_samples,
+            "run_command",
+            side_effect=fake_run_command,
+        ):
+            with mock.patch.object(
+                operational_product_samples,
+                "attach_matrix_complete",
+                return_value=True,
+            ):
+                semantic_checks = [
+                    "membership_chat_chat_text_observed",
+                    "membership_chat_devtools_chat_text_observed",
+                    "portal_runtime_evidence_observed",
+                    "portal_devtools_runtime_evidence_observed",
+                    "two_shard_runtime_evidence_observed",
+                    "two_shard_devtools_runtime_evidence_observed",
+                    "two_shard_gradient_runtime_evidence_observed",
+                    "two_shard_gradient_devtools_runtime_evidence_observed",
+                    "sugoroku_projection_inventory_observed",
+                    "sugoroku_runtime_evidence_observed",
+                    "sugoroku_devtools_runtime_evidence_observed",
+                ]
+                patchers = [
+                    mock.patch.object(
+                        operational_product_samples,
+                        name,
+                        return_value=True,
+                    )
+                    for name in semantic_checks
+                ]
+                for patcher in patchers:
+                    patcher.start()
+                try:
+                    payload = operational_product_samples.release_check(
+                        skip_docker=False
+                    )
+                finally:
+                    for patcher in reversed(patchers):
+                        patcher.stop()
+
+        argv_values = [
+            arg
+            for command in payload["commands"]
+            for arg in command["argv"]
+        ]
+
+        self.assertEqual(payload["status"], "accepted")
+        self.assertIn(
+            "samples/product-alpha1/operational/sugoroku-world",
+            argv_values,
+        )
+        self.assertNotIn(str(operational_product_samples.REPO_ROOT), argv_values)
+        self.assertFalse(
+            any(
+                arg.startswith(f"{operational_product_samples.REPO_ROOT}/")
+                for arg in argv_values
+            )
+        )
+
     def test_check_all_reports_user_final_decision_scope(self) -> None:
         result = operational_product_samples.CommandResult(
             name="validation:placeholder",
