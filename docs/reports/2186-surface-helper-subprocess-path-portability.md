@@ -249,9 +249,12 @@ Focused self-review:
 
 ## Commit / push status
 
-Not yet committed at report draft time.
+Committed and pushed:
 
-This section will be updated after commit and push.
+- `9777ebf9 Use relative Surface helper inputs`
+
+This report section was updated after the first push and will be captured by a
+report-only follow-up commit.
 
 ## Sub-agent session close status
 
