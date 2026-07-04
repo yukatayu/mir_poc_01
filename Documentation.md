@@ -93,6 +93,14 @@ wrapper file creation、requested status acceptance、canon edit、ledger
 movement、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
 主張しません。
 
+`plan/138` は later OBL-001 `lean-stated` packet 用の artifact annex
+template です。canon target、LAB artifact path / namespace / constant、
+OPEN-014 deferral、simple assignment scope、fresh validation slots、
+artifact/scope decision slots、unresolved items、non-claims をまとめますが、
+proposal submission、requested status acceptance、ledger movement、wrapper
+creation、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
+主張しません。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

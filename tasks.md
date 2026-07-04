@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 22:09 JST
+最終更新: 2026-07-04 22:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -201,6 +201,15 @@ Current holding state:
   canon, move the ledger, complete OBL-001, discharge OBL-002 proof, claim
   conformance, claim G1 exit, change runtime readiness, or relabel sample
   status.
+- `plan/138-g1-obl001-artifact-annex-template.md` now defines the non-applied
+  OBL-001 artifact annex template for a later `lean-stated` packet. It maps
+  the canon OBL-001 target to the LAB artifact path / namespace / constant and
+  records OPEN-014 deferral, simple-assignment scope, fresh validation slots,
+  artifact / scope decision slots, unresolved proof / conformance items, and
+  non-claims. It does not accept requested status, submit a proposal, create a
+  wrapper file, edit canon, move the ledger, complete OBL-001, discharge
+  OBL-002 proof, claim conformance, claim G1 exit, change runtime readiness, or
+  relabel sample status.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -223,17 +232,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..137`, including the current G1 E-ROW / OBL addenda, remaining
+  `plan/39..138`, including the current G1 E-ROW / OBL addenda, remaining
   claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
   slice / SCN manifest / SCN-01 negative maps; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..137`. This is documentation taxonomy maintenance only.
+  `plan/118..138`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..137`. This keeps future plan-file additions
+  cover current numbered `plan/00..138`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -488,6 +497,12 @@ Current holding state:
   OBL-002 proof, conformance, and G1 exit outside this preflight. It does not
   create a wrapper, submit a proposal, include ledger patch text, move canon
   status, or claim proof / conformance.
+- `plan/138-g1-obl001-artifact-annex-template.md` now provides the fillable
+  non-applied annex template for a later OBL-001 `lean-stated` packet. It keeps
+  requested status, artifact identity acceptance, wrapper need, OPEN-014
+  handling, simple-assignment scope, proof, conformance, and G1 exit as
+  explicit unresolved slots. It does not create a wrapper, submit a proposal,
+  include ledger patch text, move canon status, or claim proof / conformance.
 - `plan/79-g1-erow-diagnostic-alignment.md` now records LAB-only alignment for
   canon E-ROW-001/E-ROW-002 versus current `generated_failure_not_declared`
   evidence. It does not freeze diagnostic ABI, discharge OBL-024/025, claim
@@ -753,8 +768,8 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `OBL-001 artifact annex template` | `G1` docs/advisory-only | prepare a non-applied annex template for a later OBL-001 `lean-stated` packet, mapping canon OBL-001 target, LAB artifact path / namespace / constant, OPEN-014 deferral, validation evidence, and non-claims, using `plan/137` | annex-template-only; no wrapper file, no canon edit, no ledger movement, no proposal submission, no status choice treated as accepted, no executable row, no Lean refinement |
-| `G1 status packet shell with unresolved slots` | `G1` docs/advisory-only | prepare a draft packet shell that references the OBL-020 annex template but leaves requested status, ledger delta, artifact identity acceptance, and scope decisions unresolved | draft-shell-only; no proposal submission, no canon edit, no ledger movement, no status choice treated as accepted, no executable row, no Lean refinement |
+| `G1 status packet shell with unresolved slots` | `G1` docs/advisory-only | prepare a draft packet shell that references the OBL-001 and OBL-020 annex templates but leaves requested status, ledger delta, artifact identity acceptance, OPEN-014 handling, and scope decisions unresolved | draft-shell-only; no proposal submission, no canon edit, no ledger movement, no status choice treated as accepted, no executable row, no Lean refinement |
+| `OBL-021 artifact identity / wrapper preflight` | `G1` docs/advisory-only | decide whether the OBL-021 LAB artifact can be cited directly or needs a wrapper / artifact identity annex before any conditional `lean-stated` request | advisory wrapper-preflight only; no wrapper file by default; no canon edit or ledger movement |
 | `OBL-001 sync guard hardening` | `G1` reserve | add docs-only or test-only guard hardening only if future review finds that the OBL-001 statement sync tests can drift away from the `plan/124` boundary without failing | Lean remains compile-check only; no predicate refinement by default; no canon ledger movement |
 | `OBL-020 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `StepWFStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `ElabDeterminismStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
