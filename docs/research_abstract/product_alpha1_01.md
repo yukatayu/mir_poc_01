@@ -65,4 +65,4 @@ The Docker path is a controlled Docker Compose TCP fixture. It is not WAN or fed
 - release check: `../../scripts/product_alpha1_release_check.py`
 - installed-binary probe: `../../scripts/product_alpha1_installed_binary_check.py`
 - roadmap memory: `../../plan/50-product-alpha1-public-boundary-roadmap.md`
-- normative boundary: `../../specs/25-product-alpha1-public-boundary.md`
+- LAB boundary evidence: `../../specs/25-product-alpha1-public-boundary.md`

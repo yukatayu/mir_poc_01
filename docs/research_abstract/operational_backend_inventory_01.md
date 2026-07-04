@@ -33,5 +33,5 @@ The current repo already has an executable alpha path for packaging and runtime 
 
 - hands-on: `../hands_on/operational_backend_inventory_01.md`
 - storage/backend guardrail: `compiler_backend_llvm_preparation_01.md`
-- normative boundary: `../../specs/26-operational-product-sample-suite.md`
+- LAB boundary evidence: `../../specs/26-operational-product-sample-suite.md`
 - roadmap memory: `../../plan/23-compiler-backend-llvm-guardrail-roadmap.md`, `../../plan/51-operational-product-sample-roadmap.md`

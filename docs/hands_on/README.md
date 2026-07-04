@@ -2,7 +2,8 @@
 
 このディレクトリは、**current runnable floor を実際に追う reader-facing landing page** です。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/`
 - 実行証跡は `docs/reports/`
 - ここは hands-on の入口だけを置き、既存の長い入門文書は当面 `docs/research_abstract/` に残します

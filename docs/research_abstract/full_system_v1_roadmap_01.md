@@ -2,7 +2,11 @@
 
 この文書は `P-FS-00 full-system-v1-roadmap-rebaseline` の短い summary である。
 
-規範判断の正本は `../../specs/33-full-system-v1-scope.md` から `../../specs/38-engine-provider-admission.md`、repository memory は `../../plan/58-full-system-v1-roadmap.md` から `../../plan/63-engine-provider-roadmap.md` に置く。
+規範判断の正本は `../../mirrorea_canon/` に置く。legacy LAB boundary evidence は
+`../../specs/33-full-system-v1-scope.md` から
+`../../specs/38-engine-provider-admission.md`、repository memory は
+`../../plan/58-full-system-v1-roadmap.md` から
+`../../plan/63-engine-provider-roadmap.md` に置く。
 
 ## 現在地
 

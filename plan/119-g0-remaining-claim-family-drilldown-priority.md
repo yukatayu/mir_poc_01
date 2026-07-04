@@ -99,6 +99,19 @@ This follow-up does not edit canon, does not rewrite historical LAB evidence
 wholesale, and does not change any gate, proof, conformance, implementation, or
 sample status.
 
+2026-07-04 validator follow-up: `scripts/validate_docs.py` now includes a
+source-hierarchy wording lint that checks `CANON.md`, root/snapshot docs,
+`samples/README.md`, `.docs/`, `docs/hands_on/`, `docs/research_abstract/`,
+and `plan/` for stale `specs/`-as-normative wording. It intentionally excludes
+historical reports, legacy `specs/`, and archived research material. The first
+lint-backed pass also corrected reader-facing LAB wording in
+`docs/hands_on/README.md`, selected `docs/research_abstract/*.md`, `plan/19`,
+`plan/50`, and `plan/58`.
+
+This validator follow-up is a guardrail only. It does not edit canon, change
+gate status, move proof obligations, claim conformance, or change runnable
+sample status.
+
 ## Required non-claims
 
 - No canon edit.

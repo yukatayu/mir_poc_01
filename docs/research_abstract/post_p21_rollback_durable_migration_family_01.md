@@ -6,7 +6,8 @@
 **`rollback / durable migration` を historical first boundary family として読む summary**
 です。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/36-post-p21-rollback-durable-migration-family.md`
 - 実行証跡は `docs/reports/` にあります
 

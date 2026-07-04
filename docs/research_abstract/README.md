@@ -2,7 +2,8 @@
 
 このディレクトリは、repo の repository-memory reading を **日本語で短く読み返すための概要集** です。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/`
 - 実行証跡と変更履歴は `docs/reports/`
 - ここは current state を素早くつかむための summary / detail です

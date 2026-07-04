@@ -9,7 +9,8 @@ agent が毎回ゼロから始めても current state を読み違えないよ�
 
 この節は dated repository-memory anchor です。live status / macro phase / next queue authority は `../../progress.md` と `../../tasks.md` を参照してください。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/`
 - current snapshot は `Documentation.md` / `progress.md` / `tasks.md`
 - 詳細な実行証跡は `docs/reports/`

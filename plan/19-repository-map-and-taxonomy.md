@@ -23,10 +23,12 @@
 - `samples_progress.md`
   runnable sample dashboard
 
-### normative / memory / evidence
+### canon / memory / evidence
 
-- `specs/`
+- `mirrorea_canon/`
   規範正本
+- `specs/`
+  legacy LAB evidence / historical boundary
 - `plan/`
   repository memory
 - `docs/reports/`

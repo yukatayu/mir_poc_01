@@ -4,7 +4,8 @@
 
 この文書は、Mirrorea の **docs-first / repo-local integration roadmap-memory family** を日本語で短く読むための summary です。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/`
 - 実行証跡は `docs/reports/`
 - live queue authority は `progress.md` / `tasks.md` に置き、ここは repository-memory reading と closeout-memory gate を reader-facing にまとめる入口です

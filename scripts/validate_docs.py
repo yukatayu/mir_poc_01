@@ -619,6 +619,63 @@ CANON_NOTICE_PHRASES = [
     "canon wins",
 ]
 
+SOURCE_HIERARCHY_LINT_FILES = [
+    "CANON.md",
+    "README.md",
+    "AGENTS.md",
+    "Documentation.md",
+    "progress.md",
+    "tasks.md",
+    "samples_progress.md",
+    "samples/README.md",
+    "scripts/README.md",
+]
+
+SOURCE_HIERARCHY_LINT_DIRS = [
+    ".docs",
+    "docs/hands_on",
+    "docs/research_abstract",
+    "plan",
+]
+
+SOURCE_HIERARCHY_LINT_EXCLUDED_PREFIXES = [
+    "docs/research_abstract/old/",
+]
+
+STALE_SOURCE_HIERARCHY_PATTERNS = [
+    re.compile(r"(?:規範判断の正本|規範正本)は\s*`(?:\.\./)*specs/"),
+    re.compile(r"`(?:\.\./)*specs/`?\s*(?:を|は|が)?\s*規範正本"),
+    re.compile(
+        r"normative source\s+(?:is|remains)\s+`(?:\.\./)*specs/",
+        re.IGNORECASE,
+    ),
+    re.compile(r"normative boundary:\s*`(?:\.\./)*specs/", re.IGNORECASE),
+    re.compile(r"`(?:\.\./)*specs/`?\s+as\s+normative", re.IGNORECASE),
+    re.compile(r"treat\s+`(?:\.\./)*specs/`?\s+as\s+normative", re.IGNORECASE),
+]
+
+STALE_SOURCE_HIERARCHY_SPLIT_START_PATTERNS = [
+    re.compile(r"`(?:\.\./)*specs/`?\s*$"),
+]
+
+STALE_SOURCE_HIERARCHY_SPLIT_FOLLOWUP_PATTERNS = [
+    re.compile(r"^\s*規範正本\s*$"),
+]
+
+SOURCE_HIERARCHY_LINT_ALLOWED_LINES = {
+    (
+        "plan/70-lab-to-canon-reconciliation-ledger.md",
+        "Legacy `specs/` as current normative source",
+    ),
+}
+
+SOURCE_HIERARCHY_LINT_ALLOWED_PATTERNS = [
+    re.compile(
+        r"\b(?:do\s+not|don't|never)\s+treat\s+`(?:\.\./)*specs/`?\s+as\s+normative",
+        re.IGNORECASE,
+    ),
+]
+
 
 def _heading_match(text: str, heading: str) -> re.Match[str] | None:
     return re.search(rf"^{re.escape(heading)}\s*$", text, re.MULTILINE)
@@ -722,6 +779,60 @@ def missing_canon_notices() -> dict[str, list[str]]:
     return missing_by_file
 
 
+def _source_hierarchy_lint_paths() -> list[Path]:
+    paths: set[Path] = set()
+    for relative_path in SOURCE_HIERARCHY_LINT_FILES:
+        path = ROOT / relative_path
+        if path.exists():
+            paths.add(path)
+
+    for relative_dir in SOURCE_HIERARCHY_LINT_DIRS:
+        directory = ROOT / relative_dir
+        if directory.exists():
+            paths.update(directory.rglob("*.md"))
+
+    return sorted(paths)
+
+
+def stale_source_hierarchy_wording() -> dict[str, list[tuple[int, str]]]:
+    hits: dict[str, list[tuple[int, str]]] = {}
+    for path in _source_hierarchy_lint_paths():
+        relative = path.relative_to(ROOT).as_posix()
+        if any(
+            relative == prefix.rstrip("/") or relative.startswith(prefix)
+            for prefix in SOURCE_HIERARCHY_LINT_EXCLUDED_PREFIXES
+        ):
+            continue
+
+        lines = path.read_text(encoding="utf-8").splitlines()
+        for line_number, line in enumerate(lines, start=1):
+            stripped = line.strip()
+            if (relative, stripped) in SOURCE_HIERARCHY_LINT_ALLOWED_LINES:
+                continue
+            if any(
+                pattern.search(line)
+                for pattern in SOURCE_HIERARCHY_LINT_ALLOWED_PATTERNS
+            ):
+                continue
+            if any(pattern.search(line) for pattern in STALE_SOURCE_HIERARCHY_PATTERNS):
+                hits.setdefault(relative, []).append((line_number, stripped))
+                continue
+            if line_number < len(lines) and any(
+                pattern.search(line)
+                for pattern in STALE_SOURCE_HIERARCHY_SPLIT_START_PATTERNS
+            ):
+                next_line = lines[line_number]
+                next_stripped = next_line.strip()
+                if any(
+                    pattern.search(next_line)
+                    for pattern in STALE_SOURCE_HIERARCHY_SPLIT_FOLLOWUP_PATTERNS
+                ):
+                    hits.setdefault(relative, []).append(
+                        (line_number, f"{stripped} / {next_stripped}")
+                    )
+    return hits
+
+
 def main() -> int:
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
@@ -735,6 +846,14 @@ def main() -> int:
         print("Root entry documents are missing canon notices:")
         for path, phrases in missing_notices.items():
             print(f" - {path}: missing {', '.join(phrases)}")
+        return 1
+
+    stale_source_hierarchy_hits = stale_source_hierarchy_wording()
+    if stale_source_hierarchy_hits:
+        print("Reader-facing docs contain stale source-hierarchy wording:")
+        for path, hits in stale_source_hierarchy_hits.items():
+            for line_number, line in hits:
+                print(f" - {path}:{line_number}: {line}")
         return 1
 
     reports = sorted((ROOT / "docs" / "reports").glob("[0-9][0-9][0-9][0-9]-*.md"))

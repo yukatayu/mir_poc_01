@@ -61,6 +61,6 @@
 
 - hands-on: `../hands_on/operational_product_sample_01.md`
 - authoring boundary: `../hands_on/operational_portal_shard_starter_boundary_01.md`
-- normative boundary: `../../specs/26-operational-product-sample-suite.md`
+- LAB boundary evidence: `../../specs/26-operational-product-sample-suite.md`
 - future boundary: `../../specs/27-spatial-portal-and-shard-extension-boundary.md`
 - roadmap memory: `../../plan/51-operational-product-sample-roadmap.md`

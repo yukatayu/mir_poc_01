@@ -515,6 +515,139 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertIn("Root entry documents are missing canon notices", stdout.getvalue())
         self.assertIn("README.md", stdout.getvalue())
 
+    def test_main_rejects_reader_facing_specs_as_normative_wording(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "hands_on" / "README.md").write_text(
+                "# hands_on\n\n- 規範判断の正本は `specs/`\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Reader-facing docs contain stale source-hierarchy wording",
+            stdout.getvalue(),
+        )
+        self.assertIn("docs/hands_on/README.md:3", stdout.getvalue())
+        self.assertIn("規範判断の正本は `specs/`", stdout.getvalue())
+
+    def test_main_rejects_japanese_specs_normative_variants(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "hands_on" / "README.md").write_text(
+                "# hands_on\n\n"
+                "- 規範判断の正本は`specs/`\n"
+                "- 規範正本は `specs/`\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("docs/hands_on/README.md:3", stdout.getvalue())
+        self.assertIn("docs/hands_on/README.md:4", stdout.getvalue())
+
+    def test_main_allows_negated_specs_as_normative_policy_wording(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "hands_on" / "README.md").write_text(
+                "# hands_on\n\nDo not treat `specs/` as normative.\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
+
+    def test_main_rejects_stale_wording_in_canon_and_sample_entry_docs(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "CANON.md").write_text(
+                "# Canon\n\nNormative source remains `specs/00..09`.\n",
+                encoding="utf-8",
+            )
+            (root / "samples" / "README.md").write_text(
+                "# samples\n\n- `specs/`\n  規範正本\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("CANON.md:3", stdout.getvalue())
+        self.assertIn("samples/README.md:3", stdout.getvalue())
+
+    def test_main_rejects_split_line_and_english_specs_normative_wording(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "plan" / "19-repository-map-and-taxonomy.md").write_text(
+                "# plan/19\n\n- `specs/`\n  規範正本\n",
+                encoding="utf-8",
+            )
+            (root / "plan" / "58-full-system-v1-roadmap.md").write_text(
+                "# plan/58\n\nNormative source remains `specs/33..38`.\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(),
+                encoding="utf-8",
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("plan/19-repository-map-and-taxonomy.md:3", stdout.getvalue())
+        self.assertIn("plan/58-full-system-v1-roadmap.md:3", stdout.getvalue())
+
     def test_main_rejects_latest_report_missing_new_required_section(self) -> None:
         heading = "## Reviewer findings and follow-up"
         template_text = self._valid_template_text()

@@ -5,7 +5,8 @@
 この文書は、Mirrorea Spaces **product/public-ready alpha-1** line の
 repository-memory roadmap を置く。
 
-規範判断の正本は `specs/25-product-alpha1-public-boundary.md` である。
+規範判断の正本は `mirrorea_canon/` である。
+`specs/25-product-alpha1-public-boundary.md` は legacy LAB boundary evidence として読む。
 この plan は、package sequence、alpha defaults、validation direction、non-claim inventory を保持する。
 
 ## current repo state

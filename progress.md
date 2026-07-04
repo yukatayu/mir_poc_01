@@ -84,8 +84,15 @@ semantic source authority.
   `samples_progress.md`, `plan/70`, and `plan/90` that could blur canon vs LAB
   source hierarchy or workflow-ready vs evidence-closed status. The corrected
   reading is `mirrorea_canon/` as canon and legacy `specs/` as LAB evidence /
-  historical package-line memory. This does not change canon, gates, proof
-  status, conformance, implementation status, runnable rows, or sample status.
+  historical package-line memory. `scripts/validate_docs.py` now also rejects
+  stale reader-facing `specs/`-as-normative wording in `CANON.md`,
+  root/snapshot docs, `samples/README.md`, `.docs/`, `docs/hands_on/`,
+  `docs/research_abstract/`, and `plan/`, while excluding historical reports,
+  legacy specs, and archived research material. The lint now covers direct
+  Japanese wording, split-line `specs/` / source-of-truth bullets, and the
+  English `Normative source remains specs...` shape. This does not change
+  canon, gates, proof status, conformance, implementation status, runnable
+  rows, or sample status.
 - Current G1 planning note: `plan/71-g1-ordinary-assignment-target.md` now
   drafts the ordinary simple-assignment target/proof-boundary split in LAB memory. It
   targets THM-001 / BND-001 / SCN-01 / SCN-02 alignment only and does not claim
@@ -786,6 +793,17 @@ OBL-024 association guard hardening, OBL-025 repair completeness guard
 hardening, OBL-001/020/021 statement guard hardening, ordinary-assignment
 claim-family drilldown, remaining claim-family priority map, and focused
 source-hierarchy stale wording audit.
+
+- 2026-07-04 11:07 JST
+  `scripts/validate_docs.py` に source-hierarchy wording lint を追加し、
+  root/snapshot docs、`.docs/`、`docs/hands_on/`、`docs/research_abstract/`、
+  `plan/`、`CANON.md`、`samples/README.md` の reader-facing / active memory で
+  legacy `specs/` を canon source として再昇格する wording を reject するようにした。
+  併せて検出された `docs/hands_on/README.md`、`docs/research_abstract/*.md`、
+  `plan/19`、`plan/50`、`plan/58` の stale wording を LAB evidence /
+  historical boundary 表現へ補正した。
+  canon edit、gate exit、proof / OBL status movement、conformance、
+  implementation status、runnable row / sample status change は主張しない。
 
 - 2026-07-04 10:45 JST
   `plan/119` の stale wording audit follow-up として、`plan/01`、`plan/07`、

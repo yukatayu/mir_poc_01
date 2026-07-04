@@ -2,9 +2,12 @@
 
 ## purpose
 
-This document is repository memory for the Full System V1 roadmap defined by `specs/33-full-system-v1-scope.md`.
+This document is repository memory for the Full System V1 roadmap historically
+defined by LAB `specs/33-full-system-v1-scope.md`.
 
-Normative source remains `specs/33..38`. This plan records package order, evidence status, validation anchors, and non-claim boundaries.
+Normative source remains `mirrorea_canon/`. Legacy `specs/33..38` remain LAB
+boundary evidence for package order, evidence status, validation anchors, and
+non-claim boundaries recorded here.
 
 ## current baseline
 

@@ -4,8 +4,10 @@
 
 ## 何を分けて読むか
 
-- `specs/`
+- `../../mirrorea_canon/`
   規範正本
+- `../../specs/`
+  legacy LAB evidence / historical boundary
 - `plan/`
   repository memory
 - `docs/reports/`

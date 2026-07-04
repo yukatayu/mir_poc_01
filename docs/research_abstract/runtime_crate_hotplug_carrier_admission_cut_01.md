@@ -4,7 +4,8 @@
 
 この文書は、`R6` の **docs-first closeout memory** を reader-facing に短く読む summary です。
 
-- 規範判断の正本は `specs/`
+- 規範判断の正本は `../../mirrorea_canon/`
+- legacy `../../specs/` は LAB evidence / historical boundary として読む
 - 長期の repository memory は `plan/34-runtime-crate-hotplug-carrier-admission-cut.md`
 - 実行証跡は `docs/reports/` にあります
 

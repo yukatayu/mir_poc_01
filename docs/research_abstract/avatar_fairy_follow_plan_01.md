@@ -5,7 +5,9 @@ representative slice と residual planned family を reader-facing に説明す�
 
 family-local historical lane label は `Macro 6 reserve` です。live repo 全体の macro phase / queue authority は `progress.md` と `tasks.md` を参照してください。
 
-規範判断の正本は `specs/` であり、ここは repo-local plan と sample 境界の説明だけを行います。
+規範判断の正本は `../../mirrorea_canon/` であり、legacy `../../specs/` は
+LAB evidence / historical boundary として読みます。ここは repo-local plan と
+sample 境界の説明だけを行います。
 
 ## 1. representative slice / planned-family split
 

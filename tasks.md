@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 10:45 JST
+最終更新: 2026-07-04 11:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,6 +63,14 @@ Current holding state:
   workflow-ready runtime status.
   `mirrorea_canon/` remains canon; legacy `specs/` remain LAB evidence /
   historical package-line memory.
+- `scripts/validate_docs.py` now includes a source-hierarchy wording lint for
+  `CANON.md`, root/snapshot docs, `samples/README.md`, `.docs/`,
+  `docs/hands_on/`, `docs/research_abstract/`, and `plan/`. It rejects stale
+  reader-facing `specs/`-as-normative wording, including split-line bullets and
+  the English `Normative source remains specs...` shape, while excluding
+  historical reports, legacy specs, and archived research material. The first
+  lint pass corrected stale wording in `docs/hands_on/README.md`, selected
+  `docs/research_abstract/*.md`, `plan/19`, `plan/50`, and `plan/58`.
 - `plan/71-g1-ordinary-assignment-target.md` now drafts the LAB-only G1
   ordinary simple-assignment target/proof-boundary split. It does not claim G1 exit,
   theorem discharge, Lean proof completion, runtime MessageEnvelope dispatch,
@@ -439,7 +447,7 @@ next line.
 | Task | Objective | Validation | Stop line |
 |---|---|---|---|
 | docs freshness audit | keep README, Documentation, progress, tasks, samples dashboard, indexes aligned | `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`, `git diff --check` | snapshot docs must not create new normative decisions |
-| canon/LAB wording audit | keep touched LAB docs from re-promoting legacy `specs/` or helper closeouts to canon status | source-hierarchy grep plus validators; latest focused pass corrected `plan/01`, `plan/07`, `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`, `samples_progress.md`, `plan/70`, and `plan/90` | do not rewrite historical LAB evidence wholesale or change runnable row status |
+| canon/LAB wording audit | keep touched LAB docs from re-promoting legacy `specs/` or helper closeouts to canon status | `python3 scripts/validate_docs.py` source-hierarchy wording lint plus `python3 scripts/check_source_hierarchy.py`; latest lint-backed pass also corrected `docs/hands_on/README.md`, selected `docs/research_abstract/*.md`, `plan/19`, `plan/50`, and `plan/58` | do not rewrite historical LAB evidence wholesale or change runnable row status |
 | product compatibility audit | preserve Product Alpha and operational suite while Surface advances | product release check, operational suite helper, minimal pattern verifier | do not reinterpret alpha workflow as final product |
 | sample taxonomy audit | keep Surface planned roots distinct from active roots | source hierarchy and relevant helper checks | do not create or mark `samples/full-system-v1-surface/` workflow-ready until implementation rows exist |
 | validator scaffold update | add required docs only when they exist | `python3 -m unittest scripts.tests.test_validate_docs` | validators check presence and heading shape, not semantic correctness |

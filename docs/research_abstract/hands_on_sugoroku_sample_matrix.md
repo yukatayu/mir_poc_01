@@ -3,7 +3,8 @@
 この文書は、`samples/clean-near-end/sugoroku-world/` の 10 sample を
 「どの phase の何を確認しているのか」という観点で読むための短い案内です。
 
-規範判断の正本は `specs/` です。ここでは active runnable family の読み方だけを整理します。
+規範判断の正本は `../../mirrorea_canon/` です。ここでは active runnable family の
+読み方だけを整理し、legacy `../../specs/` は LAB evidence として読みます。
 
 ## 1. まず何が動いているか
 

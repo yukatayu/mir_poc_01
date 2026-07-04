@@ -32,5 +32,5 @@
 
 - hands-on: `../hands_on/operational_package_authoring_01.md`
 - operational suite guide: `../hands_on/operational_product_sample_01.md`
-- normative boundary: `../../specs/26-operational-product-sample-suite.md`
+- LAB boundary evidence: `../../specs/26-operational-product-sample-suite.md`
 - roadmap memory: `../../plan/51-operational-product-sample-roadmap.md`
