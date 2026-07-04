@@ -258,8 +258,8 @@ Committed and pushed:
 - `ad1e91431ac46dfc80bd1ea536ff2ef0c4e2603c`
   `Add OBL-020/021 boundary audit guard hardening`
 
-After push, `HEAD` and `origin/main` both resolved to
-`ad1e91431ac46dfc80bd1ea536ff2ef0c4e2603c`.
+This report status section was then updated in a report-only follow-up commit
+after the main package push.
 
 ## Sub-agent session close status
 
