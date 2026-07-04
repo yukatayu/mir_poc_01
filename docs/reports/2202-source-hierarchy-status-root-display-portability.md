@@ -184,8 +184,10 @@ numbered-report count.
 
 ## Commit / push status
 
-- Implementation / snapshot / initial report commit: pending.
-- Push status: pending.
+- Implementation / snapshot / initial report commit:
+  `3c51296f Use portable source hierarchy status root`
+- Push status: pushed to `origin/main`.
+- Follow-up report-status metadata update is committed and pushed separately.
 
 ## Sub-agent session close status
 
