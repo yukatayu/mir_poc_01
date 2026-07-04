@@ -105,6 +105,34 @@ class PracticalAlpha1AvatarTests(unittest.TestCase):
             ],
         )
 
+    def test_repo_cli_arg_relativizes_repo_owned_package_dir(self) -> None:
+        package_dir = REPO_ROOT / "samples/practical-alpha1/packages/av-a1-01-placeholder-avatar-runtime"
+        self.assertEqual(
+            runner.repo_cli_arg(package_dir),
+            "samples/practical-alpha1/packages/av-a1-01-placeholder-avatar-runtime",
+        )
+
+    def test_repo_cli_arg_keeps_external_path_absolute(self) -> None:
+        external = Path("/tmp/mirrorea-external-avatar-package")
+        self.assertEqual(runner.repo_cli_arg(external), str(external))
+
+    def test_build_avatar_report_uses_repo_relative_package_arg(self) -> None:
+        completed = subprocess_completed(stdout=json.dumps({"status": "ok"}))
+        package_dir = REPO_ROOT / "samples/practical-alpha1/packages/av-a1-01-placeholder-avatar-runtime"
+        with mock.patch.object(runner.subprocess, "run", return_value=completed) as mocked_run:
+            payload = runner._build_avatar_report(package_dir)
+        self.assertEqual(payload, {"status": "ok"})
+        argv = mocked_run.call_args.args[0]
+        self.assertEqual(
+            argv[-1],
+            "samples/practical-alpha1/packages/av-a1-01-placeholder-avatar-runtime",
+        )
+        self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in argv))
+
+
+def subprocess_completed(stdout: str) -> object:
+    return mock.Mock(stdout=stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

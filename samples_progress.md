@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-04 15:04 JST
+Last updated: 2026-07-04 15:09 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -115,7 +115,7 @@ Notes:
 | `TR-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_transport.py check-all --format json` | local TCP / Docker Compose TCP evidence; repo-owned package inputs / compose file argv and closeout path fields are repo-relative |
 | `VIS-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_export_devtools.py check-all --format json` | observer-safe export panels |
 | `SL-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_save_load.py check-all --format json` | local-only save/load evidence |
-| `AV-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder/custom preview and fallback boundary |
+| `AV-A1-*` | first-floor evidence | `python3 scripts/practical_alpha1_avatar.py check-all --format json` | placeholder/custom preview and fallback boundary; repo-owned package input argv is repo-relative |
 | `PE2E-*` | first-floor evidence | `python3 scripts/practical_alpha1_product_preview.py check-all --format json` | exact-evidence preview bundles; not same-session runtime |
 | `PA1W-*` | bounded workflow evidence | `python3 scripts/practical_alpha1_integrated_workflow.py check-all --format json` | bounded developer workflow; not product/public-ready α-1 |
 
@@ -198,6 +198,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-04 15:09 JST | practical alpha-1 avatar helper path portability | pass | `scripts/practical_alpha1_avatar.py` now passes repo-owned practical package roots to the nested avatar Cargo example as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and avatar subprocess invocation. Unit coverage passed 9 tests, `check-all` passed 3/3 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, Cargo `practical_alpha1_hotplug_plan` passed 10 tests, `practical_alpha1_hotplug` passed 17 tests, and `practical_alpha1_avatar` passed 3 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 15:04 JST | practical alpha-0.8 same-session hot-plug helper path portability | pass | `scripts/practical_alpha08_session_hotplug.py` now passes repo-owned base session / attach package roots to nested `mir_practical_alpha05_session` commands as repo-relative `samples/...` argv while keeping temporary session paths as absolute temp paths. Regression tests cover the path helper and session start/attach package argv. Unit coverage passed 7 tests, `check-all` passed 10/10 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, Cargo `practical_alpha08_session_hotplug` passed 3 tests, `practical_alpha05_session` passed 3 tests, and `practical_alpha1_hotplug` passed 17 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:59 JST | practical alpha-0.9 devtools helper path portability | pass | `scripts/practical_alpha09_devtools.py` now passes repo-owned base / host-I/O / attach package roots to nested `mir_practical_alpha05_session` commands as repo-relative `samples/...` argv while keeping temporary session and rendered HTML paths as absolute temp paths. Regression tests cover the path helper and all package argv families. Unit coverage passed 7 tests, `check-all` passed 9/9 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, `render-html` had repo-root absolute match 0, Cargo `practical_alpha09_devtools` passed 3 tests, and `practical_alpha08_session_hotplug` passed 3 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |
 | 2026-07-04 14:52 JST | practical alpha-1 attach helper path portability | pass | `scripts/practical_alpha1_attach.py` now passes repo-owned practical package roots to the nested hotplug Cargo example as repo-relative `samples/...` argv while preserving external absolute fallback. Regression tests cover the path helper and hotplug subprocess invocation. Unit coverage passed 11 tests, `check-all` passed 9/9 with repo-root absolute match 0, `closeout` had repo-root absolute match 0, Cargo `practical_alpha1_front_door` passed 11 tests, `practical_alpha1_hotplug_plan` passed 10 tests, `hotplug_runtime_skeleton` passed 8 tests, `practical_alpha1_hotplug` passed 17 tests, and `alpha_layer_insertion_runtime` passed 6 tests. No sample status, workflow status, semantics, ABI, or canon claim changed. |

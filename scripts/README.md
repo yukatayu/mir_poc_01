@@ -261,6 +261,9 @@
   - `python3 scripts/practical_alpha1_avatar.py check-all --format json`
   - this exercises `samples/practical-alpha1/packages/av-a1-*/` through `crates/mir-runtime::practical_alpha1_avatar`
   - it consumes checked practical package input through a distinct hotplug-plan boundary and exact hot-plug source reports
+  - repo-owned package inputs are passed to the nested avatar Cargo example as
+    repo-relative `samples/...` argv so transient helper runs do not depend on
+    the host checkout path
   - current actualized rows are `AV-A1-01/02/03`
   - `AV-A1-02` is a non-final custom Mir avatar preview with `native_execution_performed = false`
   - `AV-A1-03` keeps the source hot-plug report rejected for missing host capability and lowers only a visible monotone placeholder fallback preview
