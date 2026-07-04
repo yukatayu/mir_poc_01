@@ -128,7 +128,11 @@ report.
 
 ## Commit / push status
 
-Pending at report creation time.
+- Substantive commit: `6a2be724 Redact webhook token prefix in report`.
+- Push: completed to `origin/main`.
+- Follow-up report-only commit records this commit/push status and is expected
+  after the substantive commit; this report does not recursively update itself
+  with that follow-up hash.
 
 ## Sub-agent session close status
 
