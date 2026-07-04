@@ -184,7 +184,11 @@ run.
 
 ## Commit / push status
 
-Pending at report write.
+Committed and pushed:
+
+- `3b189a5b Harden current L2 closeout path portability`
+
+This report section was then updated for commit-record accuracy.
 
 ## Sub-agent session close status
 
