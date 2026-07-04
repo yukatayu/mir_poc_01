@@ -543,6 +543,7 @@ REQUIRED = [
     "plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md",
     "plan/119-g0-remaining-claim-family-drilldown-priority.md",
     "plan/120-repo-triage-recut-matrix.md",
+    "plan/121-g1-minimal-vertical-slice-candidate-map.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

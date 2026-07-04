@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-04 17:24 JST
+最終更新: 2026-07-04 17:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -86,6 +86,15 @@ semantic source authority.
   matrix is LAB repository memory only: no file move, archive operation, canon
   edit, gate exit, proof status movement, implementation-state claim, or
   runnable sample status relabel.
+- Current G1 minimal vertical slice note:
+  `plan/121-g1-minimal-vertical-slice-candidate-map.md` now maps the safest
+  source-first static slice candidate feeding G1 ordinary assignment as
+  `G1-MVS-ASSIGNMENT-STATIC`. The slice includes Surface syntax, indexed-state
+  owner/keyspace pressure, owner-directed write, RHS dependency, visible
+  publish / observe, failure-row containment, authority-obligation carrier,
+  source spans, and OBL-001/020/021 statement-boundary evidence. It is LAB
+  candidate memory only: no canon edit, G1 exit, proof discharge, conformance,
+  runtime/product/API freeze, or runnable sample status relabel.
 - Current stale source-hierarchy wording audit note:
   a focused audit corrected legacy LAB wording in `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
@@ -829,7 +838,16 @@ helper nested source argv path portability hardening, plus alpha network Docker
 success/failure path serialization hardening, plus current-L2 pipeline and
 detached-loop helper path portability hardening, plus source-hierarchy status
 root-display path portability hardening, plus shared practical helper
-failure-surface path redaction, plus repo-triage recut matrix classification.
+failure-surface path redaction, plus repo-triage recut matrix classification,
+plus G1 minimal vertical slice candidate mapping.
+
+- 2026-07-04 17:44 JST
+  `plan/121-g1-minimal-vertical-slice-candidate-map.md` を追加し、G1 ordinary
+  assignment に渡す最小 source-first static slice 候補を
+  `G1-MVS-ASSIGNMENT-STATIC` として整理した。`plan/00-index.md`、
+  docs/source hierarchy guard、`scripts/README.md`、`tasks.md` と同期したが、
+  canon edit、G1 exit、proof discharge、conformance、runtime/product/API
+  freeze、sample status relabel は変更していない。
 
 - 2026-07-04 17:24 JST
   `plan/120-repo-triage-recut-matrix.md` を追加し、Product Alpha / Full

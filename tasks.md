@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-04 17:24 JST
+最終更新: 2026-07-04 17:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,6 +64,16 @@ Current holding state:
   workflow/evidence vocabulary. They do not move files, rename roots,
   archive/delete samples, edit canon, claim gate exit, or relabel runnable
   sample status.
+- `plan/121-g1-minimal-vertical-slice-candidate-map.md` now narrows the next
+  G1 ordinary-assignment source-first candidate to
+  `G1-MVS-ASSIGNMENT-STATIC`: Surface syntax, indexed-state owner/keyspace
+  pressure, owner-directed write, RHS dependency, visible publish / observe,
+  failure-row containment, authority-obligation carrier, source spans, and
+  OBL-001/020/021 statement-boundary evidence. It explicitly keeps role
+  admission, fallback, patch, projection, devtools ABI, runtime, product, and
+  transport scope outside the immediate slice and does not claim canon edit,
+  G1 exit, proof discharge, conformance, runtime/product/API freeze, or sample
+  status relabel.
 - A focused source-hierarchy stale wording audit corrected `plan/01`, `plan/07`,
   `plan/09`, `plan/19`, `plan/57`, `README.md`, `Documentation.md`,
   `samples_progress.md`, `plan/70`, and `plan/90` so LAB memory files no longer
@@ -86,18 +96,17 @@ Current holding state:
 - `scripts/README.md` also mirrors the current `check_source_hierarchy.py`
   responsibility after the structural source-hierarchy guard widened past the
   old `plan/39..86` description. The guard and docs validator now require
-  `plan/39..120`, including the current G1 E-ROW / OBL addenda, remaining
-  claim-family priority map, and repo-triage recut matrix; `scripts/README.md`
-  mirrors that range alongside
+  `plan/39..121`, including the current G1 E-ROW / OBL addenda, remaining
+  claim-family priority map, repo-triage recut matrix, and G1 minimal vertical
+  slice candidate map; `scripts/README.md` mirrors that range alongside
   Product Alpha demo entry files, `docs/hands_on/`, `docs/research_abstract/`,
   and the operational product sample sub-agent handoff root. `plan/00-index.md`
   now also lists the previously omitted detailed filenames for `plan/106..108`,
-  `plan/118..119`, and the new `plan/120`. This is documentation taxonomy
-  maintenance only.
+  `plan/118..121`. This is documentation taxonomy maintenance only.
 - `scripts/validate_docs.py` now rejects numbered `plan/*.md` files that exist
   in the repository but are not registered in its explicit `REQUIRED` scaffold
   list. Its explicit plan scaffold and the source-hierarchy plan scaffold now
-  cover current numbered `plan/00..120`. This keeps future plan-file additions
+  cover current numbered `plan/00..121`. This keeps future plan-file additions
   from silently bypassing the docs scaffold guard while preserving deletion
   detection through the explicit list.
 - `scripts/tests/test_validate_docs.py` now also asserts that numbered plan
@@ -548,6 +557,7 @@ next line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
+| `G1-MVS static slice follow-through` | `Macro 0 / G1 bridge` | use `plan/121` to choose either a narrow SCN exact static slice manifest or OBL-001 predicate refinement before touching implementation | no canon edit, no G1 exit, no proof discharge, no conformance, no runtime/product/API freeze, no sample status relabel |
 | `OBL-020 statement refinement` | `G1` reserve | refine the LAB `StepWFStatementDraft.lean` only if review finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
 | `OBL-021 statement refinement` | `G1` reserve | refine the LAB `ElabDeterminismStatementDraft.lean` only if review finds overfit, missing projection-totality wording, or diagnostic-equivalence gaps | Lean still compile-check only; no canon ledger movement |
 | `OBL-001 statement draft refinement` | `G1` reserve | refine the LAB `THM001StatementDraft.lean` only if review finds overfit or a missing predicate | Lean still compile-check only; no canon ledger movement |
