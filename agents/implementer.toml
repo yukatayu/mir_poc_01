@@ -1,6 +1,6 @@
 name = "implementer"
 description = "Single-writer implementation agent for non-test source changes."
-model = "gpt-5.5"
+model = "gpt-5.6-terra"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "workspace-write"
 
