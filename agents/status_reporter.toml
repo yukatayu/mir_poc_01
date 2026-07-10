@@ -1,6 +1,6 @@
 name = "status_reporter"
 description = "Maintains Documentation.md and Mermaid status/architecture diagrams."
-model = "gpt-5.4-mini"
+model = "gpt-5.5"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 

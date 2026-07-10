@@ -1,6 +1,6 @@
 name = "eval_runner"
 description = "Runs tests, litmus checks, conformance checks, and verification commands; summarizes exact failures and evidence."
-model = "gpt-5.4"
+model = "gpt-5.5"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 

@@ -1,0 +1,31 @@
+[agents.code_mapper]
+description = "Read-only codebase mapper."
+config_file = "../agents/code_mapper.toml"
+
+[agents.docs_researcher]
+description = "Read-only external documentation verifier."
+config_file = "../agents/docs_researcher.toml"
+
+[agents.eval_runner]
+description = "Verification-only command runner."
+config_file = "../agents/eval_runner.toml"
+
+[agents.implementer]
+description = "Production-source implementation writer."
+config_file = "../agents/implementer.toml"
+
+[agents.reviewer]
+description = "Read-only correctness and regression reviewer."
+config_file = "../agents/reviewer.toml"
+
+[agents.status_reporter]
+description = "Documentation and status-maintenance writer."
+config_file = "../agents/status_reporter.toml"
+
+[agents.test_author]
+description = "Test-only author."
+config_file = "../agents/test_author.toml"
+
+[agents.planner]
+description = "Read-only strategic planner for task sequencing and plan maintenance."
+config_file = "../agents/planner.toml"
