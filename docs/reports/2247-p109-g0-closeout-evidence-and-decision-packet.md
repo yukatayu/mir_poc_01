@@ -198,7 +198,9 @@ is explicitly left as an owner decision about demotion-audit scope.
 
 ## Commit / push status
 
-Pending at report write.
+Primary commit `bbc43a38 Add G0 closeout decision packet` was pushed to
+`origin/main`. This final status amendment is committed separately so the
+report does not recursively claim its own final hash.
 
 ## Sub-agent session close status
 
