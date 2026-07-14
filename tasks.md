@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-14 13:18 JST
+最終更新: 2026-07-14 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,18 +17,23 @@ and is not append-only history.
 - LAB repository memory / evidence: `plan/`, legacy `specs/`
 - Status snapshot: `progress.md`
 - Runnable dashboard: `samples_progress.md`
+- Human-facing current-position / stop / decision view: `docs/project-status.md`
 - Execution evidence: `docs/reports/`
 
 ## current promoted package
 
-The explicitly promoted `G0 closeout evidence audit and non-applied exit
-decision packet` is closed to the owner-decision boundary as P109. Its output
-is `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`. It assembles
-and challenges exit evidence, but does not declare G0 exit or T1 entry. No
-autonomous successor package is promoted pending the owner's decisions there.
-The owner directly authorized this bounded audit in the current task; that
-authorization was not inferred from `PROPOSAL-001` and does not authorize a
-Gate/Phase exit or a canon decision.
+The explicitly owner-authorized P110 `project control cockpit` package is
+closed. It created a concise reader view at `docs/project-status.md`, the
+detailed LAB protocol at `plan/154-project-control-cockpit.md`, and a
+structural drift guard. Oracle's final boundary re-review found no blocking
+issue. It is a documentation / management package only: it does not promote a
+technical successor, declare G0 exit or T1 entry, or grant AI authority over a
+Gate, Phase, OBL, conformance, runtime, or product claim.
+
+P109 remains the controlling G0 owner-decision boundary. Its output,
+`plan/153-g0-closeout-evidence-and-exit-decision-packet.md`, assembles and
+challenges exit evidence without applying an exit. No autonomous successor
+package is promoted pending the owner's decisions there.
 
 **Authority boundary:** this current task map does not grant AI roadmap, Gate,
 Phase, or canon-decision authority. Its historical `self-driven` wording
@@ -67,11 +72,11 @@ Current holding state:
   human stage count this is phase 1 of 9; `late pre-exit` is a LAB management
   phrase rather than a canon-defined partial status, and G0 exit / T1 entry /
   G1 exit / proof / conformance / runtime readiness remain unclaimed.
-- `plan/150-phase-position-validator-guard.md` now records the docs-validator
-  guard that keeps the `plan/149` phase-position phrases present in
-  `progress.md` and `tasks.md`; P104 extends the guard to include
-  `late pre-exit`. This is drift protection only, not phase / gate movement or
-  percentage-as-gate.
+- `plan/150-phase-position-validator-guard.md` records the historical static
+  phrase guard. P110 supersedes its current enforcement with a structural
+  source-chain check: each snapshot current-position section cites existing
+  `mirrorea_canon/` and `plan/` files. This is drift protection only, not
+  phase / gate movement or percentage-as-gate.
 - `plan/151-discord-webhook-secret-validator-guard.md` now records the
   secret-safe docs validator guard for concrete Discord webhook URL shape. The
   validator reports path / line only and does not print the URL body.
@@ -113,12 +118,12 @@ Current holding state:
   default self-driven line. This does not promote an extraction line, fill
   `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
   conformance, change runtime readiness, or relabel sample status.
-- P104 phase-position guard hardening extends the existing `plan/150`
-  validator guard so `progress.md` and this task map must retain
-  `late pre-exit` as part of the `plan/149` answer. This is drift protection
-  only and does not change phase / gate status, turn percentage into a gate,
-  edit canon, claim proof / conformance, change runtime readiness, or relabel
-  sample status.
+- P104 phase-position guard hardening is retained as historical LAB evidence.
+  P110 now validates the current-position source chain instead of static T0
+  wording, so a future canon-backed phase reading does not require validator
+  code changes. This remains drift protection only; it does not change phase /
+  gate status, turn percentage into a gate, edit canon, claim proof /
+  conformance, change runtime readiness, or relabel sample status.
 - P105 Discord notification file-input hardening adds file-based summary /
   next-step inputs and updates repo-local notification instructions after a
   real shell backtick command-substitution hazard was observed. This does not
@@ -407,11 +412,11 @@ Current holding state:
   pre-exit but not G0 exit) from LAB evidence that has already prepared later
   G1/T1 work. It does not edit canon, claim gate exit, move OBL status, claim
   proof / conformance, or change runtime / sample / workflow readiness.
-- `plan/150-phase-position-validator-guard.md` now hardens
-  `scripts/validate_docs.py` so `progress.md` and `tasks.md` must retain the
-  `plan/149` phase-position guard phrases. This closes the immediate snapshot
-  drift path without changing canon, phase, gate, proof, conformance, runtime,
-  sample, or workflow readiness.
+- `plan/150-phase-position-validator-guard.md` records the original static
+  phrase guard. The current validator requires an existing canon source and
+  an existing `plan/` source in each snapshot current-position section. This
+  closes the snapshot-source drift path without changing canon, phase, gate,
+  proof, conformance, runtime, sample, or workflow readiness.
 - `plan/151-discord-webhook-secret-validator-guard.md` now hardens
   `scripts/validate_docs.py` so concrete Discord webhook URL shape in tracked
   docs / source fails validation without printing the URL body. This closes a
@@ -1069,7 +1074,7 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 | `path-portability broader sweep` | `Macro 0` maintenance | known high-confidence host-path leak / nested absolute argv candidates from the broader audit are closed for now; reopen only for new evidence or touched-surface drift | each package proves affected helper output has repo-root absolute match 0 or documents a skipped external-path boundary |
 | `storage workdir / tmp artifact guard audit` | `Macro 0` maintenance | reopen only if future heavy validation, LLVM/backend, generated-artifact work, or tmp-root release helper output finds a new mount / cleanup / cache routing drift | no cleanup, mount provisioning, ownership repair, cache move, sample status relabel, or canon edit without explicit follow-up package; tmp cleanup remains explicit `--cleanup --confirm` only |
 | `phase-position reading refresh` | `Macro 0` maintenance | reopen only if canon phase, gate status, or LAB/canon source hierarchy changes enough to make `plan/149` stale | no phase exit, gate movement, canon edit, or percentage-as-gate claim without explicit canon process |
-| `phase-position validator guard refresh` | `Macro 0` maintenance | reopen only if the required snapshot phrases or validator responsibility changes | keep this as drift protection; do not turn it into a semantic phase validator or new canon decision |
+| `phase-position validator guard refresh` | `Macro 0` maintenance | reopen only if current-position source-chain requirements or validator responsibility changes | keep this as drift protection; do not turn it into a semantic phase validator or new canon decision |
 | `Discord webhook secret guard refresh` | `Macro 0` maintenance | reopen only if notification storage or validator secret-scan responsibility changes | keep local webhook credentials out of tracked files and out of validator output; do not claim broad secret scanning completeness |
 
 ## ordered self-driven packages
@@ -1098,7 +1103,7 @@ approval, Phase movement, or canon changes.
 
 | Macro | Reading | Closeout path |
 |---|---|---|
-| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through package close when a concrete drift trigger exists; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, no default next Macro 0 package remains without a fresh concrete trigger, phase-position reading stays canon T0/G0 unless canon process moves it, `plan/150` / P104 guards that snapshot wording including `late pre-exit` in `progress.md` / `tasks.md`, `plan/151` guards concrete Discord webhook URL leaks without printing secrets, and `plan/152` / P105 adds file-based Discord notification text inputs for shell-sensitive summaries |
+| `Macro 0` | docs / reports / validator / storage guard / phase-position discipline | self-driven through package close when a concrete drift trigger exists; current storage guard requires exact external-workdir mountpoint detection, tmp-root `mirrorea-*` helper artifacts have a list surface plus explicit `--cleanup --confirm` only, storage/env helpers are registered in required scaffold checks, no default next Macro 0 package remains without a fresh concrete trigger, phase-position reading stays canon T0/G0 unless canon process moves it, P110 requires each `progress.md` / `tasks.md` current-position section to cite existing canon and `plan/` sources, `plan/151` guards concrete Discord webhook URL leaks without printing secrets, and `plan/152` / P105 adds file-based Discord notification text inputs for shell-sensitive summaries |
 | `Macro 1` | semantics and invariant boundary | self-driven for source authority, place syntax, indexed state, admission, patch pipeline |
 | `Macro 3` | compile-ready minimal actualization | `P-SURF-01..08` and P-SURF-99 audit closed; maintenance only until a new package is promoted |
 | `Macro 4` | executable sample expansion | `P-SURF-07` created operational roots; `P-SURF-08` added static diagnostics; P-SURF-99 audit closed |

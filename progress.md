@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-14 13:18 JST
+最終更新: 2026-07-14 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,6 +17,7 @@ source.
 - LAB repository memory / evidence: `plan/`, legacy `specs/`
 - Runnable dashboard: `samples_progress.md`
 - Current task map: `tasks.md`
+- Human-facing current-position / stop / decision view: `docs/project-status.md`
 - Execution evidence: `docs/reports/`
 
 Use workflow status and evidence class as the primary reading. Do not use
@@ -54,6 +55,11 @@ semantic source authority.
 
 ## current milestone position
 
+- P110 project control cockpit is a closed, explicitly owner-authorized
+  documentation and validator package. It created `docs/project-status.md` as a derived
+  reader view and `plan/154-project-control-cockpit.md` as its detailed LAB
+  protocol; it does not promote a technical successor package or alter canon
+  lifecycle, Gate, Phase, OBL, conformance, runtime, or sample status.
 - Current package: none promoted for the Surface line after `P-SURF-99`.
 - Current OBL-020 review request: the user explicitly promoted the
   docs/advisory-only extraction, and
@@ -88,11 +94,11 @@ semantic source authority.
   Gate status; G0 exit, T1 entry, G1 exit, proof / conformance, runtime
   readiness, and sample / workflow status movement remain unclaimed.
 - Current phase-position guard:
-  `plan/150-phase-position-validator-guard.md` records the validator hardening
-  that keeps the `plan/149` phase-position phrases present in `progress.md`
-  and `tasks.md`; P104 extends that guard to include `late pre-exit` so the
-  user-facing T0-position answer cannot silently lose the intra-T0 reading.
-  This is a docs guard only; it does not change phase, gate, proof,
+  `plan/150-phase-position-validator-guard.md` preserves the original static
+  phrase guard as LAB history. P110 replaces its current enforcement with a
+  structural guard: the current-position section of `progress.md` and
+  `tasks.md` cites existing `mirrorea_canon/` and `plan/` source files. This is
+  docs drift protection only; it does not change phase, gate, proof,
   conformance, runtime, sample, or workflow readiness.
 - Current Discord webhook secret guard:
   `plan/151-discord-webhook-secret-validator-guard.md` records the
@@ -447,10 +453,12 @@ semantic source authority.
   LAB evidence for Product Alpha, Full System V1, Surface Mir alpha, and G1
   ordinary-assignment preparation is substantial but not canon phase movement.
 - Current phase-position validator guard note:
-  `plan/150-phase-position-validator-guard.md` hardens `scripts/validate_docs.py`
-  so `progress.md` and `tasks.md` must retain the `plan/149` phase-position
-  guard phrases, including `late pre-exit` after P104. This is management
-  drift protection only, not a phase movement or percentage-as-gate claim.
+  `plan/150-phase-position-validator-guard.md` records the historical static
+  phrase guard. The current validator instead requires a canon source and a
+  `plan/` source in each snapshot's current-position section, so a future
+  canon-backed lifecycle reading can replace the T0/G0 wording without code
+  changes. This is management drift protection only, not a phase movement or
+  percentage-as-gate claim.
 - Current Discord webhook secret validator guard note:
   `plan/151-discord-webhook-secret-validator-guard.md` hardens
   `scripts/validate_docs.py` so concrete Discord webhook URLs in tracked docs /
@@ -1213,6 +1221,16 @@ explicitly chooses that next line.
 | LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status, with `plan/126` ensuring those required links are checked outside comments and that bare `:= True` bodies are rejected; `plan/146` also guards the OBL-001 explanation boundary so `THM001StatementDraft.md` must preserve the LAB/canon hierarchy, the non-identity with the canon `MirCore.Elab.Soundness (stmt)` artifact, artifact identity / wrapper non-acceptance, and OPEN-014 non-resolution; `plan/124` audits `ELAB-11/12/17` against OBL-001 and finds no Lean predicate refinement needed at this checkpoint; `plan/125` keeps SCN-02 direct-local-write negative (b) non-blocking for the current G1 bridge without claiming exact executable negative evidence or adding an OBL-001 predicate; `plan/126` also audits OBL-020/021 and finds no Lean predicate refinement needed at this checkpoint; `plan/127` keeps OBL-001/020/021 statement/status completion and ledger movement as explicit G1 non-readiness blockers; `plan/128` further separates those G1 statement/status blockers from later T2 proof discharge; `plan/129` keeps a future statement/status completion-criteria inventory as the next docs-only move without moving the canon ledger; `plan/130` further separates criteria that current LAB support partially satisfies from criteria that require a future human/canon status proposal, including no-admitted-stub, ledger target mapping, and acceptance trigger checks; `plan/131` outlines the later proposal packet shape and keeps requested status vocabulary / ledger delta as future slots, not accepted status; `plan/132` records direct Lean compile-check, sync-guard, and admitted-stub / placeholder scan readiness for OBL-001/020/021 only, without status selection or ledger movement; `plan/133` keeps OBL-001 as the strongest `lean-stated` future candidate and keeps OBL-020 full-row status deferred until scope acceptance, and OBL-021 conditional `lean-stated` pending abstraction-boundary acceptance; `plan/134` separates OBL-020 G1-supporting statement scope from full-row movement, `plan/135` requires artifact identity / wrapper decision before OBL-020 status use, `plan/136` provides the non-applied OBL-020 artifact annex template with unresolved decision slots, `plan/137` applies artifact identity / wrapper preflight to the stronger OBL-001 `lean-stated` candidate, `plan/138` provides the non-applied OBL-001 artifact annex template with OPEN-014 and simple-assignment decision slots, `plan/139` applies artifact identity / wrapper preflight to the OBL-021 conditional `lean-stated` candidate while keeping final equality / diagnostic equivalence / projection-totality / Diagnostic ABI outside current status use, `plan/140` provides the non-applied OBL-021 artifact annex template with those abstraction-boundary decision slots explicit, `plan/141` provides a status packet shell that references the three annex templates while leaving fresh validation results and all requested-status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` records a fresh shell-target dry-run where OBL-001/020/021 Lean compile-checks, sync guard, admitted-stub / placeholder scan, docs/source-hierarchy validation, and secret scan pass, `plan/143` separates the OBL-021 equality / diagnostic abstraction decision from artifact annex filling and status proposal drafting, `plan/144` keeps `plan/134` as the controlling OBL-020 scope decision surface rather than duplicating it, and `plan/145` keeps `plan/137` / `plan/138` as the controlling OBL-001 artifact decision surface rather than duplicating it; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
 
 ## recent log
+
+- 2026-07-14 20:14 JST
+  P110 added `docs/project-status.md` as the concise, non-normative derived
+  view of the canon lifecycle, LAB stop line, owner decision routing, and
+  evidence paths. `plan/154` records the detailed update protocol. The final
+  review changed static P109/T0 wording checks to canonical/LAB source-chain
+  checks, rejects unsafe source paths, and requires unambiguous future-report
+  update declarations. Oracle's final boundary re-review found no blocking
+  issue. This is documentation/process hardening only and does not move G0/T0,
+  conformance, proof, runtime, product, or runnable-sample status.
 
 Entries below are historical snapshots at each task close. Earlier
 `ELAB-07` no-repair lines record the state before `plan/102`; the current

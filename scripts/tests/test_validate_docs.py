@@ -27,7 +27,12 @@ class ValidateDocsTests(unittest.TestCase):
 
     def _valid_report_text(self) -> str:
         return "\n\n".join(
-            f"{heading}\n\nRecorded content for {heading}."
+            (
+                f"{heading}\n\n"
+                "更新不要: project-status update trigger did not change."
+                if heading == "## docs/project-status.md update status"
+                else f"{heading}\n\nRecorded content for {heading}."
+            )
             for heading in validate_docs.REQUIRED_TEMPLATE_HEADINGS
         )
 
@@ -38,13 +43,47 @@ class ValidateDocsTests(unittest.TestCase):
             if heading != omitted_heading
         )
 
-    def _snapshot_phase_position_guard_text(self) -> str:
+    def _valid_snapshot_text(
+        self, headings: list[str], position_heading: str
+    ) -> str:
+        return self._canon_notice_text() + "\n\n" + "\n\n".join(
+            (
+                f"{heading}\n\n"
+                "Future lifecycle example with cited sources:\n"
+                "`mirrorea_canon/plan/01-phases.md`\n"
+                "`plan/149-current-phase-position-reading.md`"
+            )
+            if heading == position_heading
+            else heading
+            for heading in headings
+        )
+
+    def _valid_project_status_text(self) -> str:
+        sections = {
+            "## この文書の役割": (
+                "これは LAB 派生ビューであり、`mirrorea_canon/` が唯一の規範正本です。"
+            ),
+            "## 全体の進行チェックリスト": "[ ] G0\n[ ] T0",
+            "## 現在地": "Current lifecycle: T0/G0 rebaseline.\n`mirrorea_canon/plan/01-phases.md`",
+            "## 現在の停止線": "Current stop source: `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`",
+            "## オーナーの確認・判断待ち": (
+                "Owner decision is unresolved.\n"
+                "`plan/153-g0-closeout-evidence-and-exit-decision-packet.md`"
+            ),
+            "## 根拠と詳細": (
+                "`plan/154-project-control-cockpit.md`\n"
+                "`docs/reports/0001-smoke.md`\n"
+                "`progress.md`\n`tasks.md`\n`samples_progress.md`"
+            ),
+            "## 更新規約": "Sources update before this derived view.",
+        }
         return (
-            "\n\nplan/149-current-phase-position-reading.md"
-            "\nT0/G0 rebaseline"
-            "\nphase 1 of 9"
-            "\nlate pre-exit"
-            "\nG0 exit"
+            self._canon_notice_text()
+            + "\n\n# Project status\n\n"
+            + "\n\n".join(
+                f"{heading}\n\n{sections[heading]}"
+                for heading in validate_docs.PROJECT_STATUS_REQUIRED_HEADINGS
+            )
         )
 
     def _fake_concrete_discord_webhook_url(self) -> str:
@@ -62,19 +101,23 @@ class ValidateDocsTests(unittest.TestCase):
                 path.write_text(template_text, encoding="utf-8")
             elif relative == "progress.md":
                 path.write_text(
-                    self._canon_notice_text()
-                    + "\n\n"
-                    + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
-                    + self._snapshot_phase_position_guard_text(),
+                    self._valid_snapshot_text(
+                        validate_docs.PROGRESS_REQUIRED_HEADINGS,
+                        "## current milestone position",
+                    ),
                     encoding="utf-8",
                 )
             elif relative == "tasks.md":
                 path.write_text(
-                    self._canon_notice_text()
-                    + "\n\n"
-                    + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS)
-                    + self._snapshot_phase_position_guard_text(),
+                    self._valid_snapshot_text(
+                        validate_docs.TASKS_REQUIRED_HEADINGS,
+                        "## current promoted package",
+                    ),
                     encoding="utf-8",
+                )
+            elif relative == "docs/project-status.md":
+                path.write_text(
+                    self._valid_project_status_text(), encoding="utf-8"
                 )
             elif relative in validate_docs.CANON_NOTICE_FILES:
                 path.write_text(self._canon_notice_text(), encoding="utf-8")
@@ -107,6 +150,251 @@ class ValidateDocsTests(unittest.TestCase):
 
         self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
         self.assertIn(heading, template_text)
+
+    def test_report_template_requires_project_status_update_section(self) -> None:
+        heading = "## docs/project-status.md update status"
+        template_text = (
+            Path(__file__).resolve().parents[2]
+            / "docs"
+            / "reports"
+            / "TEMPLATE.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+        self.assertIn(heading, template_text)
+
+    def test_project_status_is_registered_in_both_scaffolds(self) -> None:
+        path = "docs/project-status.md"
+        self.assertIn(path, validate_docs.REQUIRED)
+        self.assertIn(path, check_source_hierarchy.REQUIRED_PATHS["root_docs"])
+
+    def test_project_status_update_status_contract(self) -> None:
+        heading = "## docs/project-status.md update status"
+        unchanged = "更新不要: project-status update trigger did not change."
+        updated = "更新済み: docs/project-status.md was updated in this package."
+
+        self.assertEqual(
+            [], validate_docs.project_status_update_status_errors(unchanged, "")
+        )
+        self.assertEqual(
+            [],
+            validate_docs.project_status_update_status_errors(
+                updated, "- `docs/project-status.md`"
+            ),
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors(
+                f"{unchanged}\n{updated}", "- `docs/project-status.md`"
+            )
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors("TBD", "")
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors("更新済み:", "")
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors(
+                unchanged, "- `docs/project-status.md`"
+            )
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors(
+                updated, "No change to docs/project-status.md."
+            )
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors(
+                updated, "- `docs/project-status.md.bak`"
+            )
+        )
+        self.assertTrue(
+            validate_docs.project_status_update_status_errors(
+                updated, "-\n`docs/project-status.md`"
+            )
+        )
+        self.assertIn(heading, validate_docs.REQUIRED_TEMPLATE_HEADINGS)
+
+    def test_project_status_checked_item_requires_one_safe_canon_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            text = self._valid_project_status_text().replace(
+                "[ ] G0\n[ ] T0",
+                "[X] G0 `mirrorea_canon/plan/01-phases.md`\n[ ] T0",
+            )
+
+            with mock.patch.object(validate_docs, "ROOT", root):
+                self.assertEqual(
+                    [], validate_docs.checked_project_status_item_errors(text)
+                )
+                self.assertTrue(
+                    validate_docs.checked_project_status_item_errors(
+                        text.replace(
+                            "mirrorea_canon/plan/01-phases.md",
+                            "mirrorea_canon/../progress.md",
+                        )
+                    )
+                )
+                self.assertTrue(
+                    validate_docs.checked_project_status_item_errors(
+                        text.replace(
+                            "mirrorea_canon/plan/01-phases.md", "mirrorea_canon/plan"
+                        )
+                    )
+                )
+                self.assertTrue(
+                    validate_docs.checked_project_status_item_errors(
+                        text.replace(
+                            "[X] G0 `mirrorea_canon/plan/01-phases.md`",
+                            "[x] G0 `mirrorea_canon/plan/01-phases.md` "
+                            "[X] T0 `mirrorea_canon/plan/01-phases.md`",
+                        )
+                    )
+                )
+
+    def test_project_status_source_paths_reject_escape_and_external_symlink(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            status_text = self._valid_project_status_text()
+            escaped_path = root / "mirrorea_canon" / "escaped.md"
+            escaped_path.symlink_to("/etc/hosts")
+
+            with mock.patch.object(validate_docs, "ROOT", root):
+                traversal_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "mirrorea_canon/plan/01-phases.md",
+                        "mirrorea_canon/../progress.md",
+                    )
+                )
+                mixed_traversal_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "`mirrorea_canon/plan/01-phases.md`",
+                        "`mirrorea_canon/plan/01-phases.md`\n`../progress.md`",
+                        1,
+                    )
+                )
+                absolute_path_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "mirrorea_canon/plan/01-phases.md", "/etc/hosts"
+                    )
+                )
+                whitespace_traversal_errors = (
+                    validate_docs.project_status_source_path_errors(
+                        status_text.replace(
+                            "`mirrorea_canon/plan/01-phases.md`",
+                            "`mirrorea_canon/plan/01-phases.md`\n` ../progress.md `",
+                            1,
+                        )
+                    )
+                )
+                whitespace_absolute_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "`mirrorea_canon/plan/01-phases.md`",
+                        "`mirrorea_canon/plan/01-phases.md`\n` /etc/hosts `",
+                        1,
+                    )
+                )
+                symlink_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "mirrorea_canon/plan/01-phases.md",
+                        "mirrorea_canon/escaped.md",
+                    )
+                )
+                directory_errors = validate_docs.project_status_source_path_errors(
+                    status_text.replace(
+                        "mirrorea_canon/plan/01-phases.md", "mirrorea_canon/plan"
+                    )
+                )
+
+        self.assertIn("mirrorea_canon/../progress.md", traversal_errors)
+        self.assertIn("../progress.md", mixed_traversal_errors)
+        self.assertIn("/etc/hosts", absolute_path_errors)
+        self.assertIn(" ../progress.md ", whitespace_traversal_errors)
+        self.assertIn(" /etc/hosts ", whitespace_absolute_errors)
+        self.assertIn("mirrorea_canon/escaped.md", symlink_errors)
+        self.assertIn("mirrorea_canon/plan", directory_errors)
+
+    def test_main_rejects_duplicate_project_status_update_heading(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            report_text = (
+                self._valid_report_text()
+                + "\n\n## docs/project-status.md update status\n\n"
+                "更新不要: duplicate declaration."
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                report_text, encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn("Latest report has duplicate required sections", stdout.getvalue())
+        self.assertIn("docs/project-status.md update status", stdout.getvalue())
+
+    def test_main_rejects_project_status_missing_stop_source_path(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "project-status.md").write_text(
+                self._valid_project_status_text().replace(
+                    "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+                    "plan/does-not-exist.md",
+                ),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(), encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(
+            "Project status report has missing source paths",
+            stdout.getvalue(),
+        )
+        self.assertIn("plan/does-not-exist.md", stdout.getvalue())
+
+    def test_main_allows_project_status_with_future_state_references(self) -> None:
+        template_text = self._valid_template_text()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, template_text)
+            (root / "docs" / "project-status.md").write_text(
+                self._valid_project_status_text()
+                .replace("T0/G0 rebaseline", "T1/G1 example")
+                .replace(
+                    "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+                    "plan/154-project-control-cockpit.md",
+                ),
+                encoding="utf-8",
+            )
+            (root / "docs" / "reports" / "0002-latest.md").write_text(
+                self._valid_report_text(), encoding="utf-8"
+            )
+
+            stdout = io.StringIO()
+            with mock.patch.object(validate_docs, "ROOT", root):
+                with redirect_stdout(stdout):
+                    exit_code = validate_docs.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
 
     def test_report_template_requires_dirty_state_and_reviewer_sections(self) -> None:
         headings = [
@@ -380,6 +668,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/151-discord-webhook-secret-validator-guard.md",
             "plan/152-discord-notification-file-inputs.md",
             "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+            "plan/154-project-control-cockpit.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",
@@ -474,21 +763,24 @@ class ValidateDocsTests(unittest.TestCase):
             ),
         )
 
-    def test_main_rejects_progress_missing_phase_position_guard(self) -> None:
+    def test_main_rejects_progress_missing_current_position_plan_source(self) -> None:
         template_text = self._valid_template_text()
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self._write_required_scaffold(root, template_text)
             (root / "progress.md").write_text(
-                self._canon_notice_text()
-                + "\n\n"
-                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS),
+                self._valid_snapshot_text(
+                    validate_docs.PROGRESS_REQUIRED_HEADINGS,
+                    "## current milestone position",
+                ).replace(
+                    "plan/149-current-phase-position-reading.md",
+                    "plan/missing-position-reading.md",
+                ),
                 encoding="utf-8",
             )
             (root / "docs" / "reports" / "0002-latest.md").write_text(
-                self._valid_report_text(),
-                encoding="utf-8",
+                self._valid_report_text(), encoding="utf-8"
             )
 
             stdout = io.StringIO()
@@ -498,27 +790,30 @@ class ValidateDocsTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 1)
         self.assertIn(
-            "Snapshot docs are missing phase-position guard phrases",
+            "Snapshot docs are missing current-position source references",
             stdout.getvalue(),
         )
         self.assertIn("progress.md", stdout.getvalue())
-        self.assertIn("plan/149-current-phase-position-reading.md", stdout.getvalue())
+        self.assertIn("plan/ source file", stdout.getvalue())
 
-    def test_main_rejects_tasks_missing_phase_position_guard(self) -> None:
+    def test_main_rejects_tasks_missing_current_position_canon_source(self) -> None:
         template_text = self._valid_template_text()
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self._write_required_scaffold(root, template_text)
             (root / "tasks.md").write_text(
-                self._canon_notice_text()
-                + "\n\n"
-                + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS),
+                self._valid_snapshot_text(
+                    validate_docs.TASKS_REQUIRED_HEADINGS,
+                    "## current promoted package",
+                ).replace(
+                    "mirrorea_canon/plan/01-phases.md",
+                    "mirrorea_canon/plan/missing-phases.md",
+                ),
                 encoding="utf-8",
             )
             (root / "docs" / "reports" / "0002-latest.md").write_text(
-                self._valid_report_text(),
-                encoding="utf-8",
+                self._valid_report_text(), encoding="utf-8"
             )
 
             stdout = io.StringIO()
@@ -528,63 +823,34 @@ class ValidateDocsTests(unittest.TestCase):
 
         self.assertEqual(exit_code, 1)
         self.assertIn(
-            "Snapshot docs are missing phase-position guard phrases",
+            "Snapshot docs are missing current-position source references",
             stdout.getvalue(),
         )
         self.assertIn("tasks.md", stdout.getvalue())
-        self.assertIn("T0/G0 rebaseline", stdout.getvalue())
+        self.assertIn("mirrorea_canon/ source file", stdout.getvalue())
 
-    def test_main_rejects_progress_missing_late_pre_exit_guard(self) -> None:
+    def test_main_allows_snapshot_position_with_future_state_sources(self) -> None:
         template_text = self._valid_template_text()
 
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self._write_required_scaffold(root, template_text)
             (root / "progress.md").write_text(
-                self._canon_notice_text()
-                + "\n\n"
-                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
-                + self._snapshot_phase_position_guard_text().replace(
-                    "\nlate pre-exit", ""
-                ),
+                self._valid_snapshot_text(
+                    validate_docs.PROGRESS_REQUIRED_HEADINGS,
+                    "## current milestone position",
+                ).replace("Future lifecycle example", "T2/G7 completed example"),
                 encoding="utf-8",
             )
-            (root / "docs" / "reports" / "0002-latest.md").write_text(
-                self._valid_report_text(),
-                encoding="utf-8",
-            )
-
-            stdout = io.StringIO()
-            with mock.patch.object(validate_docs, "ROOT", root):
-                with redirect_stdout(stdout):
-                    exit_code = validate_docs.main()
-
-        self.assertEqual(exit_code, 1)
-        self.assertIn(
-            "Snapshot docs are missing phase-position guard phrases",
-            stdout.getvalue(),
-        )
-        self.assertIn("progress.md", stdout.getvalue())
-        self.assertIn("late pre-exit", stdout.getvalue())
-
-    def test_main_rejects_tasks_missing_late_pre_exit_guard(self) -> None:
-        template_text = self._valid_template_text()
-
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            self._write_required_scaffold(root, template_text)
             (root / "tasks.md").write_text(
-                self._canon_notice_text()
-                + "\n\n"
-                + "\n\n".join(validate_docs.TASKS_REQUIRED_HEADINGS)
-                + self._snapshot_phase_position_guard_text().replace(
-                    "\nlate pre-exit", ""
-                ),
+                self._valid_snapshot_text(
+                    validate_docs.TASKS_REQUIRED_HEADINGS,
+                    "## current promoted package",
+                ).replace("Future lifecycle example", "I6 deployment example"),
                 encoding="utf-8",
             )
             (root / "docs" / "reports" / "0002-latest.md").write_text(
-                self._valid_report_text(),
-                encoding="utf-8",
+                self._valid_report_text(), encoding="utf-8"
             )
 
             stdout = io.StringIO()
@@ -592,13 +858,8 @@ class ValidateDocsTests(unittest.TestCase):
                 with redirect_stdout(stdout):
                     exit_code = validate_docs.main()
 
-        self.assertEqual(exit_code, 1)
-        self.assertIn(
-            "Snapshot docs are missing phase-position guard phrases",
-            stdout.getvalue(),
-        )
-        self.assertIn("tasks.md", stdout.getvalue())
-        self.assertIn("late pre-exit", stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
 
     def test_required_scaffold_includes_product_alpha1_sample_docs(self) -> None:
         required_docs = set(validate_docs.REQUIRED)
@@ -1139,10 +1400,10 @@ class ValidateDocsTests(unittest.TestCase):
             self._write_required_scaffold(root, template_text)
             (root / "progress.md").write_text(
                 "最終更新: 2026-07-04 12:29 JST\n\n"
-                + self._canon_notice_text()
-                + "\n\n"
-                + "\n\n".join(validate_docs.PROGRESS_REQUIRED_HEADINGS)
-                + self._snapshot_phase_position_guard_text()
+                + self._valid_snapshot_text(
+                    validate_docs.PROGRESS_REQUIRED_HEADINGS,
+                    "## current milestone position",
+                )
                 + "\n\n- 2026-07-04 12:13 JST\n  earlier work log\n",
                 encoding="utf-8",
             )

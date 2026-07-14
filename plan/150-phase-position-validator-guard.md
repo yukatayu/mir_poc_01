@@ -4,10 +4,11 @@
 
 LAB repository-memory / validator guard hardening.
 
-This note records the package that made the current phase-position reading from
-`plan/149-current-phase-position-reading.md` mechanically visible to
-`scripts/validate_docs.py`. It does not edit canon and does not move any gate,
-phase, OBL, proof, conformance, runtime, sample, or workflow status.
+This note records the original package that made the then-current
+phase-position reading from `plan/149-current-phase-position-reading.md`
+mechanically visible to `scripts/validate_docs.py`. It does not edit canon and
+does not move any gate, phase, OBL, proof, conformance, runtime, sample, or
+workflow status.
 
 ## purpose
 
@@ -15,14 +16,14 @@ phase, OBL, proof, conformance, runtime, sample, or workflow status.
 canonically the project is still `T0/G0 rebaseline`; by human stage count this
 is phase 1 of 9; within T0 it is late pre-exit, but G0 exit is unclaimed.
 
-That answer is important enough that the repo-wide snapshot documents should
-not silently drift away from it. This package therefore adds a docs validator
-guard for `progress.md` and `tasks.md`.
+That answer was important enough that the repo-wide snapshot documents should
+not silently drift away from it. The original package therefore added a docs
+validator guard for `progress.md` and `tasks.md`.
 
 ## guard shape
 
-`scripts/validate_docs.py` now requires both `progress.md` and `tasks.md` to
-retain the following phrases:
+At the time, `scripts/validate_docs.py` required both `progress.md` and
+`tasks.md` to retain the following phrases:
 
 - `plan/149-current-phase-position-reading.md`
 - `T0/G0 rebaseline`
@@ -30,20 +31,24 @@ retain the following phrases:
 - `late pre-exit`
 - `G0 exit`
 
-The phrases are intentionally small. The guard checks that the snapshot still
-carries the key reading; it does not validate a full semantic interpretation of
-the project phase.
+The phrases were intentionally small, but they were still a static snapshot of
+one lifecycle state. P110 supersedes this guard with a structural one: the
+current-position section of each snapshot must cite one existing
+`mirrorea_canon/` file and one existing `plan/` file. That preserves a
+reviewable source chain while allowing a future canon-backed lifecycle state to
+replace the T0/G0 wording without a validator code change. See
+`plan/154-project-control-cockpit.md`.
 
 ## TDD evidence
 
-The package added failing tests before production code:
+The original package added failing tests before production code:
 
 - `test_main_rejects_progress_missing_phase_position_guard`
 - `test_main_rejects_tasks_missing_phase_position_guard`
 
 The RED run showed both tests failing because `validate_docs.main()` still
 returned `0` when the phase-position phrases were missing. The GREEN run passed
-after adding the guard.
+after adding the original guard.
 
 P104 added a narrow follow-up RED/GREEN pair for the `late pre-exit` phrase:
 
@@ -53,7 +58,11 @@ P104 added a narrow follow-up RED/GREEN pair for the `late pre-exit` phrase:
 The RED run showed both tests failing because `validate_docs.main()` still
 returned `0` when the rest of the phase-position phrases were present but
 `late pre-exit` was absent. The GREEN run passed after adding `late pre-exit`
-to the required snapshot phrases and updating the valid test scaffold.
+to the original required snapshot phrases and updating the valid test scaffold.
+
+P110 replaces these state-specific tests with source-reference tests, including
+a future-state fixture. The old test names remain historical evidence only;
+they are not the current validator contract.
 
 ## non-claims
 
@@ -72,6 +81,8 @@ This note does not:
 
 ## next use
 
-Use this note when updating `scripts/validate_docs.py`, `progress.md`, or
-`tasks.md` so the phase-position guard remains a management check rather than a
-new canon decision.
+Use this note as historical repository memory. For current maintenance of
+`scripts/validate_docs.py`, `progress.md`, or `tasks.md`, follow the structural
+source-reference contract in `plan/154-project-control-cockpit.md` so the
+current-position guard remains a management check rather than a new canon
+decision.

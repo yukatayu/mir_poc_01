@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import sys
@@ -12,6 +12,7 @@ REQUIRED = [
     "README.md",
     "AGENTS.md",
     "Documentation.md",
+    "docs/project-status.md",
     "progress.md",
     "tasks.md",
     "samples_progress.md",
@@ -584,6 +585,7 @@ REQUIRED = [
     "plan/151-discord-webhook-secret-validator-guard.md",
     "plan/152-discord-notification-file-inputs.md",
     "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+    "plan/154-project-control-cockpit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -659,6 +661,7 @@ REQUIRED_TEMPLATE_HEADINGS = [
     "## Suggested next prompt",
     "## Plan update status",
     "## Documentation.md update status",
+    "## docs/project-status.md update status",
     "## progress.md update status",
     "## tasks.md update status",
     "## samples_progress.md update status",
@@ -700,21 +703,45 @@ TASKS_REQUIRED_HEADINGS = [
     "## non-promoted references",
 ]
 
-SNAPSHOT_PHASE_POSITION_GUARD_PHRASES = {
-    "progress.md": [
-        "plan/149-current-phase-position-reading.md",
-        "T0/G0 rebaseline",
-        "phase 1 of 9",
-        "late pre-exit",
-        "G0 exit",
-    ],
-    "tasks.md": [
-        "plan/149-current-phase-position-reading.md",
-        "T0/G0 rebaseline",
-        "phase 1 of 9",
-        "late pre-exit",
-        "G0 exit",
-    ],
+PROJECT_STATUS_REQUIRED_HEADINGS = [
+    "## この文書の役割",
+    "## 全体の進行チェックリスト",
+    "## 現在地",
+    "## 現在の停止線",
+    "## オーナーの確認・判断待ち",
+    "## 根拠と詳細",
+    "## 更新規約",
+]
+
+PROJECT_STATUS_GUARD_PHRASES = [
+    "派生ビュー",
+]
+
+PROJECT_STATUS_MAX_LINES = 180
+PROJECT_STATUS_SOURCE_SECTIONS = [
+    "## 現在地",
+    "## 現在の停止線",
+    "## オーナーの確認・判断待ち",
+    "## 根拠と詳細",
+]
+PROJECT_STATUS_SOURCE_PATH_PATTERN = re.compile(r"`([^`\n]+)`")
+PROJECT_STATUS_FILE_PATH_BULLET_PATTERN = re.compile(
+    r"^[ \t]*-[ \t]+`([^`\n]+)`[ \t]*$", re.MULTILINE
+)
+PROJECT_STATUS_CHECKED_ITEM_PATTERN = re.compile(
+    r"\[[xX]\]\s+(?:G[0-7]|T[0-2]|I[1-6])\b"
+)
+PROJECT_STATUS_UPDATE_STATUS_HEADING = "## docs/project-status.md update status"
+PROJECT_STATUS_UPDATE_DECLARATION_PATTERN = re.compile(
+    r"^(更新済み|更新不要):\s*(\S.*)$", re.MULTILINE
+)
+PROJECT_STATUS_UPDATE_PENDING_PATTERN = re.compile(
+    r"\b(?:tbd|pending)\b", re.IGNORECASE
+)
+
+SNAPSHOT_POSITION_SOURCE_SECTIONS = {
+    "progress.md": "## current milestone position",
+    "tasks.md": "## current promoted package",
 }
 
 UNRESOLVED_TEMPLATE_PLACEHOLDERS = [
@@ -725,6 +752,7 @@ CANON_NOTICE_FILES = [
     "README.md",
     "AGENTS.md",
     "Documentation.md",
+    "docs/project-status.md",
     "progress.md",
     "tasks.md",
 ]
@@ -741,6 +769,7 @@ SOURCE_HIERARCHY_LINT_FILES = [
     "README.md",
     "AGENTS.md",
     "Documentation.md",
+    "docs/project-status.md",
     "progress.md",
     "tasks.md",
     "samples_progress.md",
@@ -797,6 +826,7 @@ ACTIVE_READER_HOST_PATH_LINT_FILES = [
     "README.md",
     "AGENTS.md",
     "Documentation.md",
+    "docs/project-status.md",
     "progress.md",
     "tasks.md",
     "samples_progress.md",
@@ -900,6 +930,158 @@ def missing_headings(text: str, headings: list[str]) -> list[str]:
     return [heading for heading in headings if heading not in positions]
 
 
+def section_bodies(text: str, headings: list[str]) -> dict[str, str]:
+    matches: list[tuple[str, re.Match[str]]] = []
+    for heading in headings:
+        match = _heading_match(text, heading)
+        if match is not None:
+            matches.append((heading, match))
+
+    sorted_matches = sorted(matches, key=lambda item: item[1].start())
+    bodies = {}
+    for index, (heading, match) in enumerate(sorted_matches):
+        next_start = (
+            sorted_matches[index + 1][1].start()
+            if index + 1 < len(sorted_matches)
+            else len(text)
+        )
+        bodies[heading] = text[match.end() : next_start].strip()
+    return bodies
+
+
+def safe_repo_relative_file(relative_path: str) -> Path | None:
+    """Resolve one repository-relative source path without accepting escapes."""
+    candidate = PurePosixPath(relative_path)
+    if (
+        not relative_path
+        or relative_path != relative_path.strip()
+        or candidate.is_absolute()
+        or not candidate.parts
+        or any(part in {".", ".."} for part in candidate.parts)
+    ):
+        return None
+
+    try:
+        root = ROOT.resolve()
+        resolved = (ROOT / candidate).resolve(strict=True)
+        resolved.relative_to(root)
+    except (FileNotFoundError, OSError, ValueError):
+        return None
+
+    return resolved if resolved.is_file() else None
+
+
+def is_canonical_source_file(relative_path: str) -> bool:
+    candidate = PurePosixPath(relative_path)
+    return bool(candidate.parts) and candidate.parts[0] == "mirrorea_canon" and bool(
+        safe_repo_relative_file(relative_path)
+    )
+
+
+def is_plan_source_file(relative_path: str) -> bool:
+    candidate = PurePosixPath(relative_path)
+    return bool(candidate.parts) and candidate.parts[0] == "plan" and bool(
+        safe_repo_relative_file(relative_path)
+    )
+
+
+def is_path_like_code_span(value: str) -> bool:
+    """Return true for a code span that is intended to name a filesystem path."""
+    normalized = value.strip()
+    if not normalized:
+        return False
+    if any(character.isspace() for character in normalized):
+        return normalized.startswith(("/", "./", "../", "~/", ".\\", "..\\"))
+    if re.fullmatch(
+        r"(?:G[0-7]|T[0-2]|I[1-6])/(?:G[0-7]|T[0-2]|I[1-6])", normalized
+    ):
+        return False
+    return (
+        normalized.startswith(("/", "./", "../", "~/", ".\\", "..\\"))
+        or "/" in normalized
+        or "\\" in normalized
+        or normalized.endswith((".md", ".json", ".mmd", ".txt"))
+    )
+
+
+def duplicate_required_headings(text: str, headings: list[str]) -> list[str]:
+    return [
+        heading
+        for heading in headings
+        if len(re.findall(rf"^{re.escape(heading)}\s*$", text, re.MULTILINE)) > 1
+    ]
+
+
+def missing_project_status_guard_phrases() -> list[str]:
+    text = (ROOT / "docs" / "project-status.md").read_text(encoding="utf-8")
+    return [phrase for phrase in PROJECT_STATUS_GUARD_PHRASES if phrase not in text]
+
+
+def project_status_source_paths(text: str) -> dict[str, list[str]]:
+    bodies = section_bodies(text, PROJECT_STATUS_REQUIRED_HEADINGS)
+    paths_by_section: dict[str, list[str]] = {}
+    for heading in PROJECT_STATUS_SOURCE_SECTIONS:
+        body = bodies.get(heading, "")
+        paths = [
+            candidate
+            for candidate in PROJECT_STATUS_SOURCE_PATH_PATTERN.findall(body)
+            if is_path_like_code_span(candidate)
+        ]
+        paths_by_section[heading] = paths
+    return paths_by_section
+
+
+def project_status_source_path_errors(text: str) -> list[str]:
+    errors = []
+    for heading, paths in project_status_source_paths(text).items():
+        if not paths:
+            errors.append(f"{heading}: no repo-relative source path")
+            continue
+        for relative_path in paths:
+            if safe_repo_relative_file(relative_path) is None:
+                errors.append(relative_path)
+    return errors
+
+
+def checked_project_status_item_errors(text: str) -> list[str]:
+    errors = []
+    for line in text.splitlines():
+        checked_items = PROJECT_STATUS_CHECKED_ITEM_PATTERN.findall(line)
+        if not checked_items:
+            continue
+        if len(checked_items) != 1:
+            errors.append(f"multiple checked items: {line.strip()}")
+            continue
+        canonical_paths = [
+            path
+            for path in PROJECT_STATUS_SOURCE_PATH_PATTERN.findall(line)
+            if is_canonical_source_file(path)
+        ]
+        if not canonical_paths:
+            errors.append(line.strip())
+    return errors
+
+
+def project_status_update_status_errors(
+    body: str, files_changed_body: str
+) -> list[str]:
+    errors = []
+    if PROJECT_STATUS_UPDATE_PENDING_PATTERN.search(body):
+        errors.append("contains TBD or pending")
+    declarations = PROJECT_STATUS_UPDATE_DECLARATION_PATTERN.findall(body)
+    if len(declarations) != 1:
+        errors.append("requires exactly one 更新済み: or 更新不要: declaration with a reason")
+        return errors
+    declaration, _reason = declarations[0]
+    changed_paths = set(PROJECT_STATUS_FILE_PATH_BULLET_PATTERN.findall(files_changed_body))
+    has_status_file = "docs/project-status.md" in changed_paths
+    if declaration == "更新済み" and not has_status_file:
+        errors.append("更新済み declaration lacks docs/project-status.md in Files changed")
+    if declaration == "更新不要" and has_status_file:
+        errors.append("更新不要 declaration conflicts with docs/project-status.md in Files changed")
+    return errors
+
+
 def out_of_order_headings(text: str, headings: list[str]) -> list[str]:
     positions = _heading_positions_for(text, headings)
     if len(positions) != len(headings):
@@ -911,22 +1093,7 @@ def out_of_order_headings(text: str, headings: list[str]) -> list[str]:
 
 
 def required_section_bodies(report_text: str) -> dict[str, str]:
-    matches: list[tuple[str, re.Match[str]]] = []
-    for heading in REQUIRED_TEMPLATE_HEADINGS:
-        match = _heading_match(report_text, heading)
-        if match is not None:
-            matches.append((heading, match))
-
-    sorted_matches = sorted(matches, key=lambda item: item[1].start())
-    bodies = {}
-    for index, (heading, match) in enumerate(sorted_matches):
-        next_start = (
-            sorted_matches[index + 1][1].start()
-            if index + 1 < len(sorted_matches)
-            else len(report_text)
-        )
-        bodies[heading] = report_text[match.end() : next_start].strip()
-    return bodies
+    return section_bodies(report_text, REQUIRED_TEMPLATE_HEADINGS)
 
 
 def empty_required_sections(report_text: str) -> list[str]:
@@ -1168,18 +1335,29 @@ def stale_snapshot_last_updated_headers() -> dict[str, tuple[str, str]]:
     return stale
 
 
-def missing_phase_position_guard_phrases() -> dict[str, list[str]]:
-    missing: dict[str, list[str]] = {}
-    for relative_path, phrases in SNAPSHOT_PHASE_POSITION_GUARD_PHRASES.items():
+def snapshot_position_source_errors() -> dict[str, list[str]]:
+    errors: dict[str, list[str]] = {}
+    for relative_path, heading in SNAPSHOT_POSITION_SOURCE_SECTIONS.items():
         path = ROOT / relative_path
         if not path.exists():
             continue
 
         text = path.read_text(encoding="utf-8")
-        missing_phrases = [phrase for phrase in phrases if phrase not in text]
-        if missing_phrases:
-            missing[relative_path] = missing_phrases
-    return missing
+        headings = (
+            PROGRESS_REQUIRED_HEADINGS
+            if relative_path == "progress.md"
+            else TASKS_REQUIRED_HEADINGS
+        )
+        body = section_bodies(text, headings).get(heading, "")
+        source_paths = PROJECT_STATUS_SOURCE_PATH_PATTERN.findall(body)
+        missing = []
+        if not any(is_canonical_source_file(path) for path in source_paths):
+            missing.append("an existing mirrorea_canon/ source file")
+        if not any(is_plan_source_file(path) for path in source_paths):
+            missing.append("an existing plan/ source file")
+        if missing:
+            errors[relative_path] = missing
+    return errors
 
 
 def unregistered_numbered_plan_files() -> list[str]:
@@ -1279,6 +1457,14 @@ def main() -> int:
         for heading in out_of_order_template_sections:
             print(" -", heading)
         return 1
+    duplicate_template_sections = duplicate_required_headings(
+        template_text, REQUIRED_TEMPLATE_HEADINGS
+    )
+    if duplicate_template_sections:
+        print("Report template has duplicate required sections:")
+        for heading in duplicate_template_sections:
+            print(" -", heading)
+        return 1
 
     latest_report = reports[-1]
     latest_report_text = latest_report.read_text(encoding="utf-8")
@@ -1292,6 +1478,14 @@ def main() -> int:
     if out_of_order_latest_report_sections:
         print(f"Latest report has required sections out of order: {latest_report.name}")
         for heading in out_of_order_latest_report_sections:
+            print(" -", heading)
+        return 1
+    duplicate_latest_report_sections = duplicate_required_headings(
+        latest_report_text, REQUIRED_TEMPLATE_HEADINGS
+    )
+    if duplicate_latest_report_sections:
+        print(f"Latest report has duplicate required sections: {latest_report.name}")
+        for heading in duplicate_latest_report_sections:
             print(" -", heading)
         return 1
     empty_latest_report_sections = empty_required_sections(latest_report_text)
@@ -1309,6 +1503,16 @@ def main() -> int:
         )
         for heading in unresolved_latest_report_sections:
             print(" -", heading)
+        return 1
+    latest_report_bodies = required_section_bodies(latest_report_text)
+    project_status_update_errors = project_status_update_status_errors(
+        latest_report_bodies[PROJECT_STATUS_UPDATE_STATUS_HEADING],
+        latest_report_bodies["## Files changed"],
+    )
+    if project_status_update_errors:
+        print(f"Latest report has invalid project-status update status: {latest_report.name}")
+        for error in project_status_update_errors:
+            print(" -", error)
         return 1
 
     progress_text = (ROOT / "progress.md").read_text(encoding="utf-8")
@@ -1345,11 +1549,66 @@ def main() -> int:
             print(" -", heading)
         return 1
 
-    missing_phase_position_phrases = missing_phase_position_guard_phrases()
-    if missing_phase_position_phrases:
-        print("Snapshot docs are missing phase-position guard phrases:")
-        for path, phrases in missing_phase_position_phrases.items():
-            print(f" - {path}: missing {', '.join(phrases)}")
+    project_status_text = (ROOT / "docs" / "project-status.md").read_text(
+        encoding="utf-8"
+    )
+    project_status_h2_headings = re.findall(
+        r"^## .+$", project_status_text, re.MULTILINE
+    )
+    if project_status_h2_headings != PROJECT_STATUS_REQUIRED_HEADINGS:
+        print("Project status report must contain exactly the required sections in order:")
+        for heading in project_status_h2_headings:
+            print(" -", heading)
+        return 1
+    missing_project_status_sections = missing_headings(
+        project_status_text, PROJECT_STATUS_REQUIRED_HEADINGS
+    )
+    if missing_project_status_sections:
+        print("Project status report is missing required sections:")
+        for heading in missing_project_status_sections:
+            print(" -", heading)
+        return 1
+    out_of_order_project_status_sections = out_of_order_headings(
+        project_status_text, PROJECT_STATUS_REQUIRED_HEADINGS
+    )
+    if out_of_order_project_status_sections:
+        print("Project status report has required sections out of order:")
+        for heading in out_of_order_project_status_sections:
+            print(" -", heading)
+        return 1
+    missing_project_status_phrases = missing_project_status_guard_phrases()
+    if missing_project_status_phrases:
+        print("Project status report is missing required guard phrases:")
+        for phrase in missing_project_status_phrases:
+            print(" -", phrase)
+        return 1
+    project_status_source_errors = project_status_source_path_errors(project_status_text)
+    if project_status_source_errors:
+        print("Project status report has missing source paths or source sections:")
+        for error in project_status_source_errors:
+            print(" -", error)
+        return 1
+    checked_project_status_errors = checked_project_status_item_errors(
+        project_status_text
+    )
+    if checked_project_status_errors:
+        print("Checked project status items require a same-line canonical record path:")
+        for error in checked_project_status_errors:
+            print(" -", error)
+        return 1
+    project_status_lines = len(project_status_text.splitlines())
+    if project_status_lines > PROJECT_STATUS_MAX_LINES:
+        print(
+            "Project status report exceeds the concise-view line budget: "
+            f"{project_status_lines} > {PROJECT_STATUS_MAX_LINES}"
+        )
+        return 1
+
+    snapshot_source_errors = snapshot_position_source_errors()
+    if snapshot_source_errors:
+        print("Snapshot docs are missing current-position source references:")
+        for path, missing in snapshot_source_errors.items():
+            print(f" - {path}: missing {', '.join(missing)}")
         return 1
 
     print("Documentation scaffold looks complete.")

@@ -15,6 +15,7 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 - workflow / evidence snapshot は `progress.md`
 - current task map は `tasks.md`
 - runnable sample dashboard は `samples_progress.md`
+- 現在地・停止線・判断待ちの人間向け入口は `docs/project-status.md`
 - agent / operational policy は `.docs/`
 - 実行証跡は `docs/reports/`
 

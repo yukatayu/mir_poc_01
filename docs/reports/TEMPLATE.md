@@ -35,6 +35,11 @@
 
 `Documentation.md` 更新不要 / 更新済み:
 
+## docs/project-status.md update status
+
+`更新済み:` または `更新不要:` の一方を、理由とともに記載する。`更新済み:` の
+場合は、`## Files changed` に `docs/project-status.md` を含める。
+
 ## progress.md update status
 
 `progress.md` 更新不要 / 更新済み:
