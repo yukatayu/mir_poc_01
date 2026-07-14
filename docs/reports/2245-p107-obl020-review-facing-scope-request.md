@@ -169,9 +169,9 @@ on the completed Oracle review as the independent advisory input.
 
 ## Commit / push status
 
-Pending at report write. A primary commit and push will follow final validation;
-a report-status follow-up commit will record that primary publication without
-recursively embedding its own hash.
+Primary commit `b79adb52 Add OBL-020 scope review proposal` was pushed to
+`origin/main`. This report-status update is committed separately so the report
+can record the primary publication without recursively embedding its own hash.
 
 ## Sub-agent session close status
 
