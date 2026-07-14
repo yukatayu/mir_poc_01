@@ -161,9 +161,11 @@ changed surfaces.
 
 ## Commit / push status
 
-Primary commit `35e1fe77 Record OBL-020 scope disposition` was pushed to
-`origin/main`. This report-status update is committed separately so the report
-does not recursively claim its own final hash.
+Primary commit `35e1fe77 Record OBL-020 scope disposition`, report-status
+commit `6c0ea225 Record P108 commit status`, and changelog-completion commit
+`5e4d2517 Record P108 changelog disposition` were pushed to `origin/main`.
+This final status amendment is committed separately so the report does not
+recursively claim its own final hash.
 
 ## Sub-agent session close status
 
