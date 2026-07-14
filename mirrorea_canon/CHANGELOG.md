@@ -18,4 +18,8 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-14** `PROPOSAL-001` の owner disposition を記録。abstract
+  OBL-020 Lean statement shape は、full OBL-020 completion を伴わない
+  G1-supporting proposal-preparation scope としてのみ受理された。OBL status、
+  proof、artifact identity / wrapper、Gate / Phase は変更していない。
 - **v0.1.0** (2026-07-02) 初回生成。ADR-0001〜0012 制定。MirCore v0 初稿、Surface 文法 v0、SCN-01〜10 凍結、Gate/Phase 計画制定。全証明は OBL 台帳(未 discharge)。既存 repo mir_poc_01 を LAB に格下げ(手続きは meta/source-hierarchy.md)。

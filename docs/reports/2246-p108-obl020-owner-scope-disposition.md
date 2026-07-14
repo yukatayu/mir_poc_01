@@ -45,6 +45,8 @@ still said that the response was unresolved.
   where it agreed with canon source hierarchy and operating rules.
 - Recorded the owner answer in the existing canon proposal rather than creating
   a second scope matrix, ADR, ledger entry, wrapper, or status packet.
+- Recorded the adopted proposal disposition in the canon changelog. No ADR was
+  added because no L0/L1 semantic claim changed.
 - Updated the controlling LAB scope/reuse memory and current snapshots so they
   no longer state that the P001 answer is pending.
 - Left `plan/136` and `plan/141` decision slots unresolved because the owner
@@ -54,6 +56,7 @@ still said that the response was unresolved.
 ## Files changed
 
 - `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
+- `mirrorea_canon/CHANGELOG.md`
 - `mirrorea_canon/INDEX.json`
 - `plan/134-g1-obl020-scope-clarification-packet.md`
 - `plan/144-g1-obl020-scope-decision-reuse-audit.md`
@@ -80,6 +83,8 @@ still said that the response was unresolved.
 - The owner answer is recorded exactly as: the abstract OBL-020 Lean statement
   shape may be treated as a G1-supporting scope artifact for proposal
   preparation while full OBL-020 completion remains open.
+- The canon changelog now records that narrow disposition with the same
+  non-effects.
 - Oracle independently confirmed that this changes no G0/T0 condition and does
   not select status, ledger, artifact identity, wrapper, proof, or Gate state.
 - Before heavy validation, root storage had 37 GiB available; no external
@@ -141,9 +146,11 @@ surface, or sample blocker changed.
 ## Reviewer findings and follow-up
 
 Oracle advised against a second scope matrix, status movement, or turning the
-answer into a G0 effect. Planner and adversarial reviewer sub-agent results
-are collected for the following G0 audit package, not used to widen this
-mechanical recording package.
+answer into a G0 effect. The planner found that the canon changelog procedure
+also requires a one-line disposition record; this follow-up adds that record
+without an ADR because no L0/L1 semantic claim changed. Adversarial reviewer
+results are collected for the following G0 audit package, not used to widen
+this mechanical recording package.
 
 ## Skipped validations and reasons
 
