@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-05 03:50 JST
+最終更新: 2026-07-14 11:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,6 +55,13 @@ semantic source authority.
 ## current milestone position
 
 - Current package: none promoted for the Surface line after `P-SURF-99`.
+- Current OBL-020 review request: the user explicitly promoted the
+  docs/advisory-only extraction, and
+  `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
+  now files one canon-routed human/canon scope question. The answer remains
+  unresolved. This creates no normative canon decision, status request or
+  movement, ledger change, proof claim, wrapper decision, runtime or
+  conformance claim, `plan/141` slot fill, Gate exit, or Phase movement.
 - Current canon position: `mirrorea_canon/plan/01-phases.md` places the project
   at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
   not canon implementation-state completion.
@@ -106,15 +113,11 @@ semantic source authority.
   helper behavior, run cleanup, mount storage, move caches, promote a package,
   change phase/gate status, move OBL status, claim proof / conformance, or
   relabel sample/workflow readiness.
-- Current queue stop note:
-  P102 Oracle follow-up reviewed the post-P147/P100/P101 queue and recommends
-  no default next autonomous package unless a fresh concrete Macro 0 drift
-  trigger is already identified. The next actionable line now requires user
-  selection of `OBL-020 review-facing decision request extraction`,
-  `OBL-001 review-facing artifact decision request extraction`, or a specific
-  new Macro 0 audit trigger. This does not promote an extraction line, fill
-  `plan/141` slots, edit canon, move the ledger, move OBL status, claim proof /
-  conformance, change runtime readiness, or relabel sample/workflow status.
+- Historical queue-stop note:
+  P102 Oracle follow-up correctly prevented a default package until the user
+  made an explicit selection. The user has now selected the OBL-020
+  review-facing extraction; its resulting review request is pending human/canon
+  response. No additional autonomous package is promoted by that filing.
 - Current migration note: root LAB entry points now point to `mirrorea_canon/`
   as canon, and `plan/70-lab-to-canon-reconciliation-ledger.md` now maps
   high-risk legacy LAB claim families to canon IDs, rejected historical claim
@@ -1270,6 +1273,11 @@ validation.
   は引き続き user による OBL-020 / OBL-001 明示選択が必要である。phase / gate
   movement、OBL status movement、runtime / sample / workflow status change は
   主張していない。
+- 2026-07-14 11:14 JST
+  P107 で user が明示選択した OBL-020 review-facing extraction を完了し、
+  `PROPOSAL-001` を canon-routed の質問のみを含む review surface として起票した。
+  human/canon の回答は未決であり、scope acceptance、requested status、ledger、
+  proof、wrapper、runtime / conformance、Gate / Phase は変わっていない。
 - 2026-07-05 03:39 JST
   P105 で repo-scoped `discord_notify.py` に `--summary-file` /
   `--next-step-file` を追加し、通知文に backtick / quote / newline / long

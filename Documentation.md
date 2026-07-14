@@ -174,6 +174,13 @@ extraction、proposal submission、canon edit、ledger movement、wrapper
 creation、OPEN-014 resolution、proof / conformance claim、runtime readiness、
 G1 exit は主張しません。
 
+user が OBL-020 extraction を明示選択したため、
+`mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
+を canon-routed の decision-request artifact として起票しました。これは
+`plan/134` の scope matrix を複製せず、一つの human/canon review question だけを
+提示します。回答は未決であり、requested status、ledger、proof、wrapper、runtime、
+conformance、Gate / Phase、`plan/141` の slot は変わりません。
+
 `plan/148` は storage workdir mountpoint guard hardening です。external
 workdir を exact mountpoint として確認し、root filesystem 上の通常 directory
 を mounted 扱いしないよう storage env / cleanup helper を強化します。cleanup、
