@@ -154,9 +154,9 @@ changed surfaces.
 
 ## Commit / push status
 
-Pending at report write. This report is included in the P108 primary commit;
-its commit/push status is recorded in a follow-up commit to avoid recursive
-hash claims.
+Primary commit `35e1fe77 Record OBL-020 scope disposition` was pushed to
+`origin/main`. This report-status update is committed separately so the report
+does not recursively claim its own final hash.
 
 ## Sub-agent session close status
 
