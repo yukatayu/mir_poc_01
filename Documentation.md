@@ -178,7 +178,9 @@ user が OBL-020 extraction を明示選択したため、
 `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
 を canon-routed の decision-request artifact として起票しました。これは
 `plan/134` の scope matrix を複製せず、一つの human/canon review question だけを
-提示します。回答は未決であり、requested status、ledger、proof、wrapper、runtime、
+提示しました。project owner は 2026-07-14 に、full OBL-020 completion を残した
+まま abstract Lean statement shape を G1-supporting scope artifact として扱うことを
+受理しました。requested status、ledger、proof、artifact identity / wrapper、runtime、
 conformance、Gate / Phase、`plan/141` の slot は変わりません。
 
 `plan/148` は storage workdir mountpoint guard hardening です。external

@@ -100,10 +100,24 @@ Decision posture:
 - C is a fallback only if canon rejects scoped statement identity and requires
   concrete proof-package binding first.
 
-Conditional `lean-stated` remains blocked until human/canon accepts the
-full-vs-G1-supporting scope choice and decides whether the abstract
-`WellFormed` / `Step` / `PreservesWF` vocabulary is acceptable as statement
-identity.
+Conditional `lean-stated` remains blocked despite the recorded narrow
+G1-supporting scope acceptance. A later human/canon process still must decide
+whether the abstract `WellFormed` / `Step` / `PreservesWF` vocabulary is
+acceptable as statement identity, along with requested status and artifact
+identity / wrapper handling.
+
+## Owner disposition recorded in canon
+
+`mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
+records the project owner's 2026-07-14 answer: `yes` to the narrow
+G1-supporting statement-scope question, while full OBL-020 completion remains
+open.
+
+This converts the advisory scope posture into owner-accepted proposal
+preparation scope only. It does not make the current LAB artifact the canon
+`MirCore.Step.WF` target, select `stated` or `lean-stated`, move the ledger,
+resolve artifact identity or wrapper need, fill `plan/141` slots, or affect
+G0/G1 or T0/T1 state.
 
 ## G1-supporting scope content
 
@@ -192,7 +206,7 @@ Answers and consequences:
 
 | Answer | Consequence |
 |---|---|
-| Yes | A later proposal draft can cite the abstract artifact as accepted scope support, still without applying ledger movement. |
+| Yes | Recorded in `PROPOSAL-001`: a later proposal draft can cite the abstract artifact as accepted G1-supporting scope support, still without applying ledger movement. |
 | Yes, but require wrapper | A later package should prepare a canon-facing wrapper or artifact-identity annex before any requested-status draft. |
 | No, needs concrete definitions | Defer OBL-020 status work until concrete `Config` / `Step` / WF clauses are chosen. |
 | No, needs proof package | Defer OBL-020 status work to T2 proof-skeleton preparation. |

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-14 11:14 JST
+最終更新: 2026-07-14 12:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,10 +58,12 @@ semantic source authority.
 - Current OBL-020 review request: the user explicitly promoted the
   docs/advisory-only extraction, and
   `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
-  now files one canon-routed human/canon scope question. The answer remains
-  unresolved. This creates no normative canon decision, status request or
-  movement, ledger change, proof claim, wrapper decision, runtime or
-  conformance claim, `plan/141` slot fill, Gate exit, or Phase movement.
+  now records the owner's `yes` answer to its narrow scope question. The
+  current abstract Lean statement may be cited as a G1-supporting scope
+  artifact for later proposal preparation, while full OBL-020 completion
+  remains open. This creates no requested status or movement, ledger change,
+  proof claim, artifact-identity or wrapper decision, runtime or conformance
+  claim, `plan/141` slot fill, Gate exit, or Phase movement.
 - Current canon position: `mirrorea_canon/plan/01-phases.md` places the project
   at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
   not canon implementation-state completion.
@@ -1278,6 +1280,11 @@ validation.
   `PROPOSAL-001` を canon-routed の質問のみを含む review surface として起票した。
   human/canon の回答は未決であり、scope acceptance、requested status、ledger、
   proof、wrapper、runtime / conformance、Gate / Phase は変わっていない。
+- 2026-07-14 12:40 JST
+  P108 で `PROPOSAL-001` の owner `yes` を記録し、abstract OBL-020 Lean
+  statement を full OBL-020 completion を伴わない G1-supporting proposal
+  preparation scope として扱えるようにした。requested status、ledger、artifact
+  identity / wrapper、proof、`plan/141` slot、Gate / Phase は変わっていない。
 - 2026-07-05 03:39 JST
   P105 で repo-scoped `discord_notify.py` に `--summary-file` /
   `--next-step-file` を追加し、通知文に backtick / quote / newline / long

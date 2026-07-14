@@ -382,10 +382,10 @@
     "plan/00-gates",
     "theory/11-metatheory-ledger"
    ],
-   "summary": "OBL-020 の scope を人間/canon review に付すための、未決・非自己実行の質問のみを収めた提案。",
+   "summary": "OBL-020 scope review question と記録済み owner disposition。OBL status、proof、Gate は動かさない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md",
-   "bytes": 2908
+   "bytes": 3640
   },
   {
    "id": "meta/source-hierarchy",

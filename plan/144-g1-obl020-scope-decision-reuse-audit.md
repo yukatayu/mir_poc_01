@@ -54,6 +54,10 @@ LAB OBL-020 status-prep memory:
 - `plan/142-g1-status-packet-shell-evidence-dry-run.md`
 - `samples/lean/lab-statements/obl020/StepWFStatementDraft.lean`
 
+Recorded owner disposition:
+
+- `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
+
 Advisory inputs:
 
 - read-only sidecar mapper `019f2da2-5c01-7f53-89e1-20e80d3e33fe`
@@ -70,8 +74,9 @@ It says:
    annex-template work; they do not reopen scope.
 3. `plan/141` and `plan/142` correctly keep OBL-020 requested status, ledger
    delta, artifact identity, wrapper need, and scope unresolved.
-4. A future autonomous package should not repeat the scope matrix unless the
-   user explicitly promotes a human/canon-facing decision request.
+4. The recorded owner disposition accepts only the narrow G1-supporting scope
+   label. A future package should not repeat the scope matrix or treat that
+   answer as a requested-status, artifact-identity, or Gate decision.
 
 ## Controlling OBL-020 scope packet
 
@@ -86,7 +91,7 @@ Its scope options remain the current LAB reading:
 | Option | Current LAB reading |
 |---|---|
 | Full-row OBL-020 status movement | Deferred. The current abstract LAB draft is too weak to imply full step-rule WF coverage, concrete WF clauses, scheduler boundaries, or per-step proof obligations. |
-| G1-supporting statement scope | Advisory recommendation. The current abstract statement shape may be reviewed as G1-supporting statement-scope evidence only. |
+| G1-supporting statement scope | The owner accepted this exact scope for proposal preparation in `PROPOSAL-001`; it remains evidence only and does not move ledger status. |
 | Proof-package fallback | Fallback if human/canon review rejects scoped statement identity or requires concrete proof-package binding first. |
 
 This file does not change those readings.
@@ -112,7 +117,7 @@ These slots remain unresolved and must be carried by any later packet.
 
 | Slot | Current reading |
 |---|---|
-| OBL-020 scope | `plan/134` recommends G1-supporting scope for review, keeps full-row status movement deferred, and keeps proof-package fallback available. Human/canon acceptance remains unresolved. |
+| OBL-020 scope | `PROPOSAL-001` records owner acceptance of G1-supporting proposal-preparation scope. Full-row status movement remains deferred and proof-package fallback remains available. This does not fill any `plan/141` status-packet slot. |
 | Requested status | No `stated`, `lean-stated`, `lean-proved`, `external`, or other requested status is chosen here. |
 | Ledger delta | No ledger delta text exists here; the canon ledger remains unchanged. |
 | Artifact identity | `plan/135` / `plan/136` keep direct LAB artifact citation, wrapper requirement, and deferral as unresolved review choices. |
@@ -128,7 +133,7 @@ Use this routing after `plan/144`:
 
 | Future need | Route |
 |---|---|
-| Human/canon wants to decide OBL-020 scope | Extract a review-facing decision request from `plan/134`; do not rewrite the scope matrix. |
+| A later package needs the accepted OBL-020 scope label | Cite the recorded `PROPOSAL-001` disposition and `plan/134`; do not rewrite the scope matrix or imply a status decision. |
 | Human/canon wants to decide OBL-020 artifact identity | Use `plan/135` / `plan/136`; keep scope label and non-claims from `plan/134`. |
 | A status packet is explicitly promoted | Use `plan/141` shell slots and `plan/136` annex slots; fill requested status / evidence only in that later package. |
 | Concrete proof boundary is needed | Open a proof-package or statement-refinement package, not a docs-only scope duplicate. |
@@ -139,7 +144,8 @@ Use this routing after `plan/144`:
 The current LAB recommendation is:
 
 - Do not create another OBL-020 full-row vs G1-supporting scope packet.
-- Treat `plan/134` as the current scope clarification.
+- Treat `plan/134` as the current scope clarification and `PROPOSAL-001` as
+  the recorded narrow owner disposition.
 - Keep `plan/135` / `plan/136` as artifact-identity / annex-template memory.
 - Keep `plan/141` status-shell slots unresolved.
 - Replace the stale candidate-next-package entry with a narrower review-facing
@@ -207,12 +213,10 @@ This note does not require a broad historical rewrite.
 
 Reasonable next packages are:
 
-1. prepare an OBL-020 review-facing decision-request extraction only if the
-   user or human/canon process explicitly promotes OBL-020 scope review;
-2. prepare a status proposal draft only after requested status, ledger delta,
+1. prepare a status proposal draft only after requested status, ledger delta,
    artifact identity, wrapper need, OPEN-014 handling, OBL-020 scope, OBL-021
    abstraction boundary, and fresh validation slots are deliberately filled;
-3. otherwise move to a different non-duplicate blocker, such as OBL-001
+2. otherwise move to a different non-duplicate blocker, such as OBL-001
    artifact identity / wrapper acceptance review, OBL-001 sync guard
    hardening if a real drift risk is found, or another explicitly promoted
    current `tasks.md` candidate.

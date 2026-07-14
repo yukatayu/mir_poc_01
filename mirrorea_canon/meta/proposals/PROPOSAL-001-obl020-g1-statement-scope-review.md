@@ -3,7 +3,7 @@ id: meta/proposal-001
 status: L3-open
 maturity: draft
 depends_on: [meta/agent-instructions, plan/00-gates, theory/11-metatheory-ledger]
-summary: OBL-020 の scope を人間/canon review に付すための、未決・非自己実行の質問のみを収めた提案。
+summary: OBL-020 scope review question と記録済み owner disposition。OBL status、proof、Gate は動かさない。
 open_items: []
 ---
 
@@ -11,8 +11,9 @@ open_items: []
 
 > Decision-request artifact only.
 >
-> This proposal records no answer, changes no normative canon statement,
-> requests no obligation status, and has no automatic repository effect.
+> At filing, this proposal recorded no answer. The owner disposition is recorded
+> below. It changes no normative canon statement, requests no obligation status,
+> and has no automatic repository effect.
 
 ## Target ID and Authority Boundary
 
@@ -31,7 +32,9 @@ they do not override canon.
 controlling LAB scope packet. This proposal neither restates nor replaces its
 scope matrix, evidence analysis, or advisory recommendation.
 
-No human/canon acceptance of any OBL-020 scope is recorded here.
+The owner disposition below accepts only the question presented here. It does
+not accept an OBL-020 status, artifact identity, wrapper policy, concrete
+proof interface, or Gate outcome.
 
 ## Procedural Proposal
 
@@ -46,11 +49,26 @@ proposes no substantive answer.
 
 ## Requested Reviewer Output
 
-The reviewer may answer `yes`, `no`, or `return for clarification`. No answer
-is selected or recorded by this proposal.
+The reviewer may answer `yes`, `no`, or `return for clarification`. The owner
+answer to this request is recorded below.
 
 Any response is non-self-executing. A separate explicit authorization and the
 ordinary human/canon process remain necessary for every follow-on action.
+
+## Owner Disposition
+
+- Recorded: 2026-07-14
+- Response: `yes`
+
+The current abstract OBL-020 Lean statement shape may be treated as a
+G1-supporting scope artifact for proposal preparation, while full OBL-020
+completion remains open.
+
+This permits a later, separately authorized proposal package to cite the
+abstract statement under that exact scope label. It does not authorize or
+perform requested-status selection, ledger movement, artifact identity or
+wrapper choice, proof work, `plan/141` slot completion, G1 exit, G0 exit, or
+any Gate / Phase transition.
 
 ## Impact Boundary and Non-effects
 

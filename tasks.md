@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-14 11:14 JST
+最終更新: 2026-07-14 12:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -21,14 +21,19 @@ and is not append-only history.
 
 ## current promoted package
 
-No current promoted Surface package after `P-SURF-99` closeout.
+Current explicitly promoted package: `G0 closeout evidence audit and
+non-applied exit decision packet`. The user authorized this T0 package after
+the P001 decision record; it may assemble and challenge exit evidence, but it
+may not declare G0 exit or T1 entry without the owner's final acceptance.
 
 The user-selected `OBL-020 review-facing decision request extraction` is
 closed as an extraction package. Its sole output is
 `mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`.
-The proposal awaits a human/canon response; it is not a requested-status
-packet, a canon decision, a ledger movement, an OBL completion, or a Gate /
-Phase transition. No further autonomous package is promoted by this filing.
+The owner answered `yes` to its narrow question: the current abstract Lean
+statement may be treated as a G1-supporting scope artifact for proposal
+preparation while full OBL-020 completion remains open. This is not a
+requested-status packet, ledger movement, OBL completion, artifact identity or
+wrapper decision, or a Gate / Phase transition.
 
 Current holding state:
 
@@ -79,8 +84,10 @@ Current holding state:
 - P102 Oracle follow-up recorded that no default next autonomous package should
   be manufactured absent an explicit selection or a concrete Macro 0 drift
   trigger. The user subsequently selected OBL-020 extraction, which P107
-  completed as `PROPOSAL-001`; the remaining state is human/canon review, not a
-  new autonomous package.
+  completed as `PROPOSAL-001`. The owner subsequently answered its narrow
+  scope question `yes`; P108 records that answer without changing OBL status,
+  ledger, proof, artifact identity / wrapper, Gate, or Phase state. The
+  current G0 closeout audit is separately and explicitly promoted by the user.
 - P103 trigger audit cleaned up the remaining Macro 5 self-drive wording drift:
   `progress.md` and this task map now describe G1 theorem / verifier bridge
   work as user-choice / fresh-trigger gated for the next package, not as a
@@ -1017,10 +1024,10 @@ Current holding state:
 
 ## candidate next strategy packages
 
-The OBL-020 extraction row below is closed as `PROPOSAL-001` and awaits a
-human/canon response. The other rows remain candidates only and are not
-promoted until the user chooses the next line or a concrete drift trigger is
-found.
+The OBL-020 extraction row below is closed as `PROPOSAL-001`; the recorded
+owner answer accepts only its narrow G1-supporting scope label. The other G1
+rows remain candidates only and are not promoted until the user chooses the
+next line or a concrete drift trigger is found.
 
 `plan/147` clarifies that broad autonomous delegation is not enough to choose
 one of these rows. The post-P101 Oracle follow-up records that no default next
@@ -1030,7 +1037,7 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 
 | Candidate | Macro reading | Objective | Close condition |
 |---|---|---|---|
-| `OBL-020 review-facing decision request extraction` | `G1` docs/advisory-only, extraction closed; response pending | `PROPOSAL-001` extracts one human/canon-facing OBL-020 scope question from `plan/134` without rewriting the scope matrix or filling `plan/141` status slots | extraction complete; human/canon response remains unresolved; no status proposal, normative canon decision, ledger movement, or OBL-020 completion claim |
+| `OBL-020 review-facing decision request extraction` | `G1` docs/advisory-only, closed with recorded narrow owner answer | `PROPOSAL-001` records that the abstract statement may be cited as G1-supporting scope evidence for later proposal preparation without rewriting `plan/134` or filling `plan/141` status slots | scope answer recorded; no status proposal, ledger movement, artifact identity / wrapper decision, OBL-020 completion, or Gate / Phase claim |
 | `OBL-001 review-facing artifact decision request extraction` | `G1` docs/advisory-only, only if promoted | extract a human/canon-facing OBL-001 artifact identity / wrapper / OPEN-014 / simple-assignment question from `plan/137` / `plan/138` without rewriting the preflight or filling `plan/141` status slots | review-request-only; no status proposal, no canon edit, no ledger movement, no OBL-001 completion or wrapper creation claim |
 | `OBL-001 sync guard hardening` | `G1` reserve | reopen docs-only or test-only guard hardening only if future review finds another concrete drift path away from the `plan/124` boundary or the `plan/137` / `plan/138` / `plan/145` artifact boundary that the sync tests do not catch | current explanation-boundary drift risk closed by `plan/146`; Lean remains compile-check only; no predicate refinement by default; no canon ledger movement |
 | `OBL-020 statement refinement` | `G1` reserve | after `plan/126`, refine the LAB `StepWFStatementDraft.lean` only if a future proof package or concrete bridge blocker finds overfit, missing abstraction, or premature proof-interface wording | Lean still compile-check only; no canon ledger movement |
