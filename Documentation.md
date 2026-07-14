@@ -191,7 +191,8 @@ status、proof / conformance、runtime readiness、G1 exit は主張しません
 
 `plan/149` は current phase position reading です。全体計画の現在地を
 canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目
-と読み、T0 内では late pre-exit だが G0 exit は未達、と整理します。
+と読み、`late pre-exit` は canon status ではない LAB management phrase として
+のみ使い、G0 exit は未達、と整理します。
 LAB evidence が G1/T1 準備へ先行していることと、canon phase movement を
 混同しません。
 
@@ -213,6 +214,18 @@ quote、newline、長い commit list など shell が解釈し得る文字が含
 `discord_notify.py` の `--summary-file` / `--next-step-file` を使えるようにし、
 shell command substitution による通知文欠落を避けます。Webhook storage、
 delivery guarantee、phase / gate movement は主張しません。
+
+`plan/153` は T0/G0 closeout の evidence audit と non-applied exit decision
+packet です。G0 の五つの ADR、GLOSSARY、LAB 格下げ手順に対応する一次根拠と
+repository consistency checks を表にした一方、Gate exit の人間決定 + ADR/台帳
+更新、及び T0 用 `mir-conform` JSON profile が canon に未定義である
+G0-EXIT-001 を残します。P109 は ADR-0001 の既決の core/domain separation を
+LAB highlighter へ機械的に反映し、legacy `game` も current core syntax として
+強調しないようにしました。`self-driven` は LAB evidence/feasibility の歴史的表現
+で、AI の roadmap/Gate/Phase/canon decision authority ではないことも task map に
+明記しました。generic validator は semantic LAB demotion の証明ではないため、
+audit は owner decision boundary までであり、G0 exit、T1 entry、conformance、
+proof、OBL status、sample status は主張しません。
 
 ## current active floor
 

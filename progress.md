@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-14 12:40 JST
+最終更新: 2026-07-14 13:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,6 +64,19 @@ semantic source authority.
   remains open. This creates no requested status or movement, ledger change,
   proof claim, artifact-identity or wrapper decision, runtime or conformance
   claim, `plan/141` slot fill, Gate exit, or Phase movement.
+- Current G0 closeout packet: `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`
+  records the five-ADR, GLOSSARY, and LAB-demotion evidence audit without
+  applying an exit. P109 also removes legacy `game` from the LAB highlighter's
+  current-core treatment, following ADR-0001. The G0 substantive evidence is
+  reviewable, but G0 remains unexited because the owner must make the
+  acceptance/effective-record decision and the Phase-wide `mir-conform` JSON
+  condition has no defined T0 profile (G0-EXIT-001). No T1 entry follows from
+  this LAB packet.
+- LAB authority boundary: current `tasks.md` does not grant AI roadmap, Gate,
+  Phase, or canon-decision authority. Historical `self-driven` package and
+  macro wording is evidence/feasibility history only; an explicit owner task
+  authorization can scope bounded work but cannot itself apply a canon Gate or
+  Phase transition.
 - Current canon position: `mirrorea_canon/plan/01-phases.md` places the project
   at T0/G0 rebaseline. LAB implementation and sample rows below are evidence,
   not canon implementation-state completion.
@@ -71,7 +84,8 @@ semantic source authority.
   `plan/149-current-phase-position-reading.md` records the concise answer to
   "where are we in the whole plan?" Canonically this is still `T0/G0
   rebaseline`; as a human stage count it is phase 1 of 9. Within T0 it is
-  late pre-exit, but G0 exit, T1 entry, G1 exit, proof / conformance, runtime
+  `late pre-exit` only as a LAB management phrase, not a canon-defined partial
+  Gate status; G0 exit, T1 entry, G1 exit, proof / conformance, runtime
   readiness, and sample / workflow status movement remain unclaimed.
 - Current phase-position guard:
   `plan/150-phase-position-validator-guard.md` records the validator hardening
@@ -1285,6 +1299,18 @@ validation.
   statement を full OBL-020 completion を伴わない G1-supporting proposal
   preparation scope として扱えるようにした。requested status、ledger、artifact
   identity / wrapper、proof、`plan/141` slot、Gate / Phase は変わっていない。
+- 2026-07-14 13:18 JST
+  P109 で T0/G0 closeout の一次根拠と repository consistency checks を
+  `plan/153` に整理した。独立 review で見つかった legacy `game` の
+  current-core highlighter presentation は ADR-0001 に従い除去した。G0 の三基準
+  は review 可能な証拠を持つが、Gate exit の human acceptance/effective record
+  と T0 用 `mir-conform` JSON profile (G0-EXIT-001) は未決であるため、G0 exit
+  / T1 entry は主張していない。Oracle adversarial review を受け、historical
+  `self-driven` wording の authority boundary と `late pre-exit` の LAB-only
+  status を明記した。semantic LAB-demotion / T0-freeze provenance は owner が
+  scope を決める追加 audit として残す。final diff review で確認した
+  package-name definition highlighting は generic `package` pattern で維持し、
+  `samples_progress.md` の reader/debug-surface row も同期した。
 - 2026-07-05 03:39 JST
   P105 で repo-scoped `discord_notify.py` に `--summary-file` /
   `--next-step-file` を追加し、通知文に backtick / quote / newline / long

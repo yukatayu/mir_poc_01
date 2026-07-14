@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-14 12:40 JST
+最終更新: 2026-07-14 13:18 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -21,10 +21,21 @@ and is not append-only history.
 
 ## current promoted package
 
-Current explicitly promoted package: `G0 closeout evidence audit and
-non-applied exit decision packet`. The user authorized this T0 package after
-the P001 decision record; it may assemble and challenge exit evidence, but it
-may not declare G0 exit or T1 entry without the owner's final acceptance.
+The explicitly promoted `G0 closeout evidence audit and non-applied exit
+decision packet` is closed to the owner-decision boundary as P109. Its output
+is `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`. It assembles
+and challenges exit evidence, but does not declare G0 exit or T1 entry. No
+autonomous successor package is promoted pending the owner's decisions there.
+The owner directly authorized this bounded audit in the current task; that
+authorization was not inferred from `PROPOSAL-001` and does not authorize a
+Gate/Phase exit or a canon decision.
+
+**Authority boundary:** this current task map does not grant AI roadmap, Gate,
+Phase, or canon-decision authority. Its historical `self-driven` wording
+describes bounded execution feasibility or already-closed LAB evidence only.
+Any future package still requires explicit owner authorization or a separate
+canon-compatible trigger; canon `plan/02-operating-model.md` controls on
+conflict.
 
 The user-selected `OBL-020 review-facing decision request extraction` is
 closed as an extraction package. Its sole output is
@@ -43,11 +54,19 @@ Current holding state:
 - Canon phase reading is T0/G0 rebaseline. The immediate LAB-to-canon claim
   family ledger now exists at `plan/70-lab-to-canon-reconciliation-ledger.md`;
   it is LAB evidence, not G0 exit.
+- `plan/153` now provides the G0 closeout evidence audit. The five required
+  ADRs, glossary, and LAB-demotion controls are reviewable, and P109 corrected
+  the active highlighter's legacy `game` core-syntax presentation. The owner
+  has not yet made the required acceptance/effective-record decision.
+  Separately, `plan/01-phases.md` requires `mir-conform` JSON plus human
+  acceptance for every Phase exit while `spec/06-conformance.md` has no T0
+  profile. This G0-EXIT-001 decision is unresolved; the canonical state
+  remains T0.
 - `plan/149-current-phase-position-reading.md` now records the short
   phase-position answer: canon lifecycle is still `T0/G0 rebaseline`; as a
-  human stage count this is phase 1 of 9; within T0 it is late pre-exit, but
-  G0 exit / T1 entry / G1 exit / proof / conformance / runtime readiness remain
-  unclaimed.
+  human stage count this is phase 1 of 9; `late pre-exit` is a LAB management
+  phrase rather than a canon-defined partial status, and G0 exit / T1 entry /
+  G1 exit / proof / conformance / runtime readiness remain unclaimed.
 - `plan/150-phase-position-validator-guard.md` now records the docs-validator
   guard that keeps the `plan/149` phase-position phrases present in
   `progress.md` and `tasks.md`; P104 extends the guard to include
@@ -1055,6 +1074,10 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 
 ## ordered self-driven packages
 
+This is a historical bounded-package index, not an active delegation order.
+It preserves LAB evidence and feasibility history; it cannot promote a new
+roadmap line or override the authority boundary above.
+
 | Order | Package | Objective | Close condition |
 |---:|---|---|---|
 | 1 | `P-SURF-01 surface brace parser` | parse `S { ... }`, role-instance blocks, `state`, and `when`; reject `S[ ... ]` | closed with `SURF-01..09`, parser test, sample helper, authoring check, and release check |
@@ -1068,6 +1091,10 @@ unmistakably select the OBL-020 or OBL-001 extraction line.
 | 9 | `P-SURF-99 final audit` | rerun validation and compatibility anchors | closed with full validation, docs/report cleanup, non-claim audit |
 
 ## self-driven macro phase reading
+
+This table is a LAB evidence/feasibility reading. The word `self-driven` in its
+historical title and rows does not authorize AI roadmap progression, Gate
+approval, Phase movement, or canon changes.
 
 | Macro | Reading | Closeout path |
 |---|---|---|

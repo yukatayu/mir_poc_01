@@ -107,8 +107,9 @@
 89. phase-position validator guard は `plan/150`
 90. Discord webhook secret validator guard は `plan/151`
 91. Discord notification file inputs は `plan/152`
-92. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-93. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+92. G0 closeout evidence and non-applied exit decision packet は `plan/153`
+93. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+94. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

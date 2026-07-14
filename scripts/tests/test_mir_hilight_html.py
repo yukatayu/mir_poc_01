@@ -63,6 +63,27 @@ class MirHilightHtmlTests(unittest.TestCase):
         self.assertIn("文法や active sample path を変更したら", html)
         self.assertIn("syntax token list", html)
 
+    def test_does_not_present_legacy_domain_words_as_core_syntax(self):
+        html = HTML_PATH.read_text(encoding="utf-8")
+        keyword_block = re.search(
+            r"const KEYWORDS = new Set\(\[(?P<keywords>.*?)\]\);",
+            html,
+            re.DOTALL,
+        )
+        declaration_block = re.search(
+            r"const DECLARATION_PATTERNS = \[(?P<patterns>.*?)\];",
+            html,
+            re.DOTALL,
+        )
+
+        self.assertIsNotNone(keyword_block)
+        self.assertIsNotNone(declaration_block)
+        self.assertNotIn("'world'", keyword_block.group("keywords"))
+        self.assertNotIn("'game'", keyword_block.group("keywords"))
+        self.assertNotIn(r"\bgame\s+package", declaration_block.group("patterns"))
+        self.assertIn(r"\bpackage\s+", declaration_block.group("patterns"))
+        self.assertIn("`world` and `game` are legacy LAB vocabulary", html)
+
 
 if __name__ == "__main__":
     unittest.main()

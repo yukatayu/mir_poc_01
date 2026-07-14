@@ -632,13 +632,14 @@
   <script>
     const samples = JSON.parse(document.getElementById('mir-sample-data').textContent);
 
-    // `world` is legacy LAB vocabulary and is not highlighted as current canon core.
+    // `world` and `game` are legacy LAB vocabulary and are not highlighted as
+    // current canon core syntax.
     const KEYWORDS = new Set([
       'actor', 'after', 'allow', 'and', 'as', 'at', 'attach', 'authority', 'atomic_cut',
       'by', 'capability', 'capture', 'captures', 'chain', 'config', 'cost', 'critical',
       'declassify', 'durable', 'effect', 'element', 'else', 'ensure', 'ensures', 'epoch',
       'exists', 'fallback', 'finite_lattice', 'finite_preorder', 'finite_set', 'fn', 'for',
-      'from', 'game', 'handoff', 'if', 'import', 'in', 'index', 'initialize', 'label',
+      'from', 'handoff', 'if', 'import', 'in', 'index', 'initialize', 'label',
       'later', 'law', 'lifetime', 'local', 'meet', 'member', 'membership_registry', 'memory_model',
       'model', 'module', 'never', 'observe', 'observes', 'option', 'order', 'output', 'package',
       'perform', 'permit', 'place', 'policy', 'principal', 'process', 'property', 'publish',
@@ -652,7 +653,7 @@
       /\b(?:module|principal|resource|effect|transition|model|actor|process|property|place|member|capability|state|stable|config)\s+([A-Za-z_][A-Za-z0-9_#.-]*(?:\[[A-Za-z_][A-Za-z0-9_#.-]*\])?)/g,
       /\bindex\s+theory\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\bcapture\s+theory\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
-      /\bgame\s+package\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
+      /\bpackage\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\bpolicy\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\belement\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,
       /\bfn\s+([A-Za-z_][A-Za-z0-9_#.-]*)/g,

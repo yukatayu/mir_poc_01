@@ -379,6 +379,7 @@ class ValidateDocsTests(unittest.TestCase):
             "plan/150-phase-position-validator-guard.md",
             "plan/151-discord-webhook-secret-validator-guard.md",
             "plan/152-discord-notification-file-inputs.md",
+            "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
             "docs/hands_on/surface_mir_alpha_01.md",
             "docs/hands_on/source_patch_hotplug_01.md",
             "docs/research_abstract/surface_mir_alpha_01.md",

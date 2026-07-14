@@ -45,10 +45,15 @@ is made explicitly.
 Percent is not a gate metric in this repository. Gate exit requires the canon
 criteria and human/canon acceptance path, not a percentage.
 
+`late pre-exit` is a LAB management phrase, not a canon-defined partial Gate
+state, evidence class, or prediction of owner acceptance. It must not be used
+to infer that a G0 criterion is satisfied, that an exit is likely, or that a
+percentage has normative force.
+
 If a rough conversational estimate is unavoidable:
 
-- within `T0`, the repo appears to be in a late pre-exit position, roughly
-  around the last third of T0 work;
+- within `T0`, the LAB management reading may say `late pre-exit` only to
+  contrast current evidence with early discovery;
 - this is not G0 exit;
 - this is not T1 entry;
 - across the whole canon lifecycle, the project is still in the first canon
@@ -79,13 +84,13 @@ For user-facing answers:
 
 > Canonically, this is still T0/G0 rebaseline: the first of the nine canon
 > phases, or T0 by label. Within T0 it is late pre-exit rather than early
-> discovery, but G0 exit is unclaimed. LAB evidence for Product Alpha,
+> discovery as a LAB management phrase only, but G0 exit is unclaimed. LAB evidence for Product Alpha,
 > Full System V1, Surface Mir alpha, and G1 ordinary-assignment preparation is
 > substantial and reusable; it should not be read as canon T1/I-phase entry.
 
 If asked "how much of this phase?", say:
 
-> Roughly late T0, around the last third, but percentage is not a project gate.
+> The LAB management reading says late T0, but it has no formal percentage.
 > The real gate is G0 exit by canon acceptance.
 
 ## non-claims
