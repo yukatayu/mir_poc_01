@@ -18,6 +18,10 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-15** ADR-0013 により `phase-governance/t0-g0` version 1 と、
+  pinned evidence cut に対する G0-D1 acceptance / G0-D4 waiver を採択した。
+  one-off LAB-derived JSON は許可したが、G0-D3 は defer のため G0 exit / T1
+  entry / SCN conformance / implementation state は変更していない。
 - **2026-07-14** `PROPOSAL-001` の owner disposition を記録。abstract
   OBL-020 Lean statement shape は、full OBL-020 completion を伴わない
   G1-supporting proposal-preparation scope としてのみ受理された。OBL status、

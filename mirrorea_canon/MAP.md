@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0012) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0013) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 theory/ (MirCore v0)                     mental-model/ (表と裏の対応)

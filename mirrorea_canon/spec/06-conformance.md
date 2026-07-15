@@ -2,7 +2,7 @@
 id: spec/06-conformance
 status: L1-fixed
 maturity: draft
-depends_on: [spec/05-runtime-semantics, scenarios/readme]
+depends_on: [spec/05-runtime-semantics, scenarios/readme, plan/01-phases, adr/ADR-0013]
 summary: SCN-01..10 を適合性基準として束ねる。適合レベルと合否判定。
 open_items: []
 ---
@@ -26,3 +26,7 @@ Levels:
 Pass = 10/10 at the claimed level, no expectation waivers. Partial claims must
 enumerate failing SCN ids. Implementations report as
 `conformance: {level, scn_pass: [...], scn_fail: [...], profile_hash}`.
+
+`phase-governance/t0-g0` is defined by `plan/01-phases` under ADR-0013. Its
+one-off T0 JSON is outside this conformance definition: it has no conformance
+carrier, C-level, or SCN pass/fail claim.

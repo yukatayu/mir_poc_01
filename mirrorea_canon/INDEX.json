@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 71,
+ "files": 72,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 1206
+   "bytes": 1534
   },
   {
    "id": "root/glossary",
@@ -213,6 +213,27 @@
    "bytes": 1109
   },
   {
+   "id": "adr/ADR-0013",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-002",
+    "plan/00-gates",
+    "plan/01-phases",
+    "plan/02-operating-model",
+    "meta/source-hierarchy",
+    "adr/ADR-0001",
+    "adr/ADR-0002",
+    "adr/ADR-0005",
+    "adr/ADR-0009",
+    "adr/ADR-0012"
+   ],
+   "summary": "T0/G0 phase-governance profile と G0 substantive evidence の owner acceptance を記録する。G0 exit と T1 entry は明示 defer。",
+   "open_items": [],
+   "path": "adr/ADR-0013.md",
+   "bytes": 5678
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -222,7 +243,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 1604
+   "bytes": 1708
   },
   {
    "id": "arch/01-strata",
@@ -389,22 +410,20 @@
   },
   {
    "id": "meta/proposal-002",
-   "status": "L3-open",
+   "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
-    "meta/agent-instructions",
+    "adr/ADR-0013",
     "plan/00-gates",
     "plan/01-phases",
     "plan/02-operating-model",
     "spec/06-conformance",
     "arch/03-toolchain"
    ],
-   "summary": "G0-EXIT-001 のための T0/G0 phase-governance profile 提案。SCN 適合性、Gate exit、実装状態は動かさない。",
-   "open_items": [
-    "G0-EXIT-001"
-   ],
+   "summary": "採択済み T0/G0 phase-governance profile の design memo。SCN 適合性、Gate exit、実装状態は動かさない。",
+   "open_items": [],
    "path": "meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md",
-   "bytes": 7621
+   "bytes": 5961
   },
   {
    "id": "meta/source-hierarchy",
@@ -449,14 +468,17 @@
    "maturity": "draft",
    "depends_on": [
     "plan/00-gates",
-    "spec/06-conformance"
+    "plan/02-operating-model",
+    "spec/06-conformance",
+    "meta/source-hierarchy",
+    "adr/ADR-0013"
    ],
    "summary": "実装フェーズ T0-T2 / I1-I6。各段階の正確なゴール、何が動き、どの程度実用的か、非宣言。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 2518
+   "bytes": 13386
   },
   {
    "id": "plan/02-operating-model",
@@ -708,12 +730,14 @@
    "maturity": "draft",
    "depends_on": [
     "spec/05-runtime-semantics",
-    "scenarios/readme"
+    "scenarios/readme",
+    "plan/01-phases",
+    "adr/ADR-0013"
    ],
    "summary": "SCN-01..10 を適合性基準として束ねる。適合レベルと合否判定。",
    "open_items": [],
    "path": "spec/06-conformance.md",
-   "bytes": 1180
+   "bytes": 1407
   },
   {
    "id": "spec/07-diagnostics-format",
