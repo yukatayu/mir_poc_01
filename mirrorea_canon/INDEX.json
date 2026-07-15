@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 70,
+ "files": 71,
  "entries": [
   {
    "id": "root/changelog",
@@ -386,6 +386,25 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md",
    "bytes": 3640
+  },
+  {
+   "id": "meta/proposal-002",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/agent-instructions",
+    "plan/00-gates",
+    "plan/01-phases",
+    "plan/02-operating-model",
+    "spec/06-conformance",
+    "arch/03-toolchain"
+   ],
+   "summary": "G0-EXIT-001 のための T0/G0 phase-governance profile 提案。SCN 適合性、Gate exit、実装状態は動かさない。",
+   "open_items": [
+    "G0-EXIT-001"
+   ],
+   "path": "meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md",
+   "bytes": 7621
   },
   {
    "id": "meta/source-hierarchy",

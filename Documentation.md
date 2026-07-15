@@ -228,6 +228,13 @@ LAB highlighter へ機械的に反映し、legacy `game` も current core syntax
 audit は owner decision boundary までであり、G0 exit、T1 entry、conformance、
 proof、OBL status、sample status は主張しません。
 
+`plan/155` と canon の `PROPOSAL-002` は、owner が選んだ G0-EXIT-001 の
+T0-specific governance JSON profile route を、adoption 前の design-memo として
+記録します。これは SCN conformance level ではなく、G0 substantive evidence と
+audit-scope の canonical owner record を入力にする phase-governance profile の
+提案です。profile implementation、JSON result、G0 exit、T1 entry は未成立で、
+G0-D1 の exact acceptance と G0-D3 は引き続き owner/canon process の判断です。
+
 ## current active floor
 
 active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。

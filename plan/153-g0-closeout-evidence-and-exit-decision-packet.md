@@ -91,36 +91,46 @@ be applied:
 This packet selects none of them. A docs validator, `make check`, a historical
 report, or an AI conclusion must not be relabeled as `mir-conform` output.
 
-## Owner decision form
+## Owner decision form and recorded inputs
 
-The following are deliberately unselected:
+The following owner inputs were recorded on 2026-07-15. They are LAB routing
+evidence until reflected through the canon process; they do not establish G0
+exit or an effective profile.
 
-1. **G0 substantive evidence acceptance:** accept or defer the five ADRs,
-   glossary baseline, and present LAB demotion state as satisfying the three
-   G0 criteria.
-2. **T0 protocol decision:** choose one response to G0-EXIT-001 above, with
-   the required canon proposal/ADR/ledger changes if a rule or profile changes.
-3. **Applied exit record:** after (1) and (2), approve or defer G0 exit and
-   specify the canonical ADR/ledger record that makes it effective. This then
-   controls any T1-entry update in `mirrorea_canon/plan/01-phases.md`.
-4. **Demotion audit scope:** decide whether the documented present controls are
-   sufficient for LAB demotion, or request a separate semantic/historical
-   audit of active LAB guidance and T0 implementation-freeze provenance.
+1. **G0 substantive evidence acceptance:** the owner confirmed the substantive
+   directions represented by ADR-0001/0002/0005/0009: domain vocabulary stays
+   out of core, source handlers remain distinct from occurrence/request/
+   publication machinery, authority is grant-lineage-only, and `.mir` is the
+   source of meaning. This is not yet an explicit collective accept/defer
+   answer for the exact five ADRs, GLOSSARY baseline, and present LAB-demotion
+   evidence. G0-D1 therefore remains open.
+2. **T0 protocol decision:** the owner selected option 1, a T0-specific
+   `mir-conform` governance JSON profile. The resulting design request is
+   `mirrorea_canon/meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md`.
+   It is not an adopted profile, a JSON result, or a T0 exit.
+3. **Applied exit record:** remains unselected. After G0-D1 and profile
+   adoption/evaluation, the owner must approve or defer G0 exit and specify the
+   canonical ADR/ledger record that makes it effective.
+4. **Demotion audit scope:** the owner determined that the documented present
+   controls are sufficient at this checkpoint and does not request a separate
+   semantic/historical LAB-demotion audit. A concrete later drift finding may
+   still justify a separately scoped audit. This scope decision does not by
+   itself accept the substantive G0 evidence.
 
 ## Non-claims and reopen point
 
 This packet is not a proof, C-static/C-runtime/C-distributed claim, runnable
 sample status change, public-product claim, or G1 preparation promotion. It
-does not alter `plan/141` unresolved status slots. The next autonomous work is
-not promoted: the reopen point is the owner's answer to the decision form or a
-new concrete drift finding in the cited evidence.
+does not alter `plan/141` unresolved status slots. P111 is promoted only to
+prepare the profile proposal. The reopen point after that package is the
+owner's response to the proposed profile, an explicit G0-D1 answer, or a new
+concrete drift finding in the cited evidence.
 
 ## Current conclusion
 
-The audit reaches the human-decision boundary, not G0/T0 exit. The existing
-materials make a bounded G0 evidence review possible, but they do not prove
-every semantic aspect of LAB demotion. **G0 exit is not currently
-established**: human acceptance/effective record is still required,
-G0-EXIT-001 leaves the stated T0 `mir-conform` JSON condition without a defined
-profile, and the owner must accept or request the remaining demotion-scope
-audit. The canonical implementation state consequently remains T0.
+The audit and recorded owner inputs reach a proposal boundary, not G0/T0 exit.
+The existing materials make a bounded G0 evidence review possible, but they do
+not prove every semantic aspect of LAB demotion. **G0 exit is not currently
+established**: an explicit G0-D1 acceptance/effective record is still required,
+G0-EXIT-001 has only a proposed rather than defined profile, and G0-D3 remains
+unselected. The canonical implementation state consequently remains T0.

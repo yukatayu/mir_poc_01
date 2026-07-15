@@ -238,6 +238,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/152-discord-notification-file-inputs.md",
         "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
         "plan/154-project-control-cockpit.md",
+        "plan/155-t0-g0-governance-profile-proposal.md",
     ],
     "scripts": [
         "scripts",

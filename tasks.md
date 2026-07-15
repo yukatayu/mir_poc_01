@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-14 20:14 JST
+最終更新: 2026-07-15 17:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -22,18 +22,18 @@ and is not append-only history.
 
 ## current promoted package
 
-The explicitly owner-authorized P110 `project control cockpit` package is
-closed. It created a concise reader view at `docs/project-status.md`, the
-detailed LAB protocol at `plan/154-project-control-cockpit.md`, and a
-structural drift guard. Oracle's final boundary re-review found no blocking
-issue. It is a documentation / management package only: it does not promote a
-technical successor, declare G0 exit or T1 entry, or grant AI authority over a
-Gate, Phase, OBL, conformance, runtime, or product claim.
+The explicitly owner-authorized P111 `T0/G0 governance-profile proposal`
+package is closed as a design memo. It created
+`mirrorea_canon/meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md` and
+the LAB routing note `plan/155-t0-g0-governance-profile-proposal.md`. It does
+not adopt a profile, implement a tool, emit JSON, declare G0 exit or T1 entry,
+or grant AI authority over a Gate, Phase, OBL, conformance, runtime, or product
+claim.
 
-P109 remains the controlling G0 owner-decision boundary. Its output,
-`plan/153-g0-closeout-evidence-and-exit-decision-packet.md`, assembles and
-challenges exit evidence without applying an exit. No autonomous successor
-package is promoted pending the owner's decisions there.
+P109 remains the controlling G0 evidence packet. P111 records that the owner
+selected the profile route and waived a separate historical demotion audit at
+this checkpoint. No autonomous successor is promoted pending the exact G0-D1
+answer, owner/canon adoption or revision of PROPOSAL-002, and later G0-D3.
 
 **Authority boundary:** this current task map does not grant AI roadmap, Gate,
 Phase, or canon-decision authority. Its historical `self-driven` wording
@@ -62,11 +62,12 @@ Current holding state:
 - `plan/153` now provides the G0 closeout evidence audit. The five required
   ADRs, glossary, and LAB-demotion controls are reviewable, and P109 corrected
   the active highlighter's legacy `game` core-syntax presentation. The owner
-  has not yet made the required acceptance/effective-record decision.
-  Separately, `plan/01-phases.md` requires `mir-conform` JSON plus human
-  acceptance for every Phase exit while `spec/06-conformance.md` has no T0
-  profile. This G0-EXIT-001 decision is unresolved; the canonical state
-  remains T0.
+  confirmed the related substantive directions, but G0-D1 still requires an
+  exact collective acceptance/defer record for the named evidence.
+  `PROPOSAL-002` responds to the owner-selected G0-EXIT-001 route with a
+  non-adopted T0 governance profile; it remains distinct from the SCN suite.
+  G0-D4 is waived for this checkpoint, while G0-D3 remains unselected. The
+  canonical state remains T0.
 - `plan/149-current-phase-position-reading.md` now records the short
   phase-position answer: canon lifecycle is still `T0/G0 rebaseline`; as a
   human stage count this is phase 1 of 9; `late pre-exit` is a LAB management

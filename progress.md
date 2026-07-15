@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-14 20:14 JST
+最終更新: 2026-07-15 17:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,6 +60,12 @@ semantic source authority.
   reader view and `plan/154-project-control-cockpit.md` as its detailed LAB
   protocol; it does not promote a technical successor package or alter canon
   lifecycle, Gate, Phase, OBL, conformance, runtime, or sample status.
+- P111 is closed as a bounded design-memo package. It files
+  `mirrorea_canon/meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md` and
+  `plan/155-t0-g0-governance-profile-proposal.md` for the owner-selected T0
+  governance-profile route. The proposal distinguishes phase-governance
+  evidence from C-static/C-runtime/C-distributed conformance and proposes no
+  executable tool, result, effective canon change, G0 exit, or T1 entry.
 - Current package: none promoted for the Surface line after `P-SURF-99`.
 - Current OBL-020 review request: the user explicitly promoted the
   docs/advisory-only extraction, and
@@ -73,11 +79,12 @@ semantic source authority.
 - Current G0 closeout packet: `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`
   records the five-ADR, GLOSSARY, and LAB-demotion evidence audit without
   applying an exit. P109 also removes legacy `game` from the LAB highlighter's
-  current-core treatment, following ADR-0001. The G0 substantive evidence is
-  reviewable, but G0 remains unexited because the owner must make the
-  acceptance/effective-record decision and the Phase-wide `mir-conform` JSON
-  condition has no defined T0 profile (G0-EXIT-001). No T1 entry follows from
-  this LAB packet.
+  current-core treatment, following ADR-0001. The owner has confirmed the
+  substantive directions, selected a T0 profile proposal, and waived a
+  separate historical audit at this checkpoint. G0 remains unexited because
+  G0-D1 still needs an exact collective evidence acceptance/defer record, the
+  proposed profile is not adopted or evaluated, and G0-D3 remains unselected.
+  No T1 entry follows from these LAB/canon proposal records.
 - LAB authority boundary: current `tasks.md` does not grant AI roadmap, Gate,
   Phase, or canon-decision authority. Historical `self-driven` package and
   macro wording is evidence/feasibility history only; an explicit owner task
@@ -1221,6 +1228,13 @@ explicitly chooses that next line.
 | LAB Lean statement drafts | `lab-compile-check-only` | OBL-001 `THM001StatementDraft.lean`, OBL-020 `StepWFStatementDraft.lean`, OBL-021 `ElabDeterminismStatementDraft.lean`, OBL-024 `DiagnosticSoundnessStatementDraft.lean`, and OBL-025 `RepairCompletenessStatementDraft.lean` compile as LAB `Prop` shapes under `samples/lean/lab-statements/`; OBL-001/020/021 now have body-level guard tests for assignment postcondition links, WF preservation shape, and determinism component links without proof or canon ledger status, with `plan/126` ensuring those required links are checked outside comments and that bare `:= True` bodies are rejected; `plan/146` also guards the OBL-001 explanation boundary so `THM001StatementDraft.md` must preserve the LAB/canon hierarchy, the non-identity with the canon `MirCore.Elab.Soundness (stmt)` artifact, artifact identity / wrapper non-acceptance, and OPEN-014 non-resolution; `plan/124` audits `ELAB-11/12/17` against OBL-001 and finds no Lean predicate refinement needed at this checkpoint; `plan/125` keeps SCN-02 direct-local-write negative (b) non-blocking for the current G1 bridge without claiming exact executable negative evidence or adding an OBL-001 predicate; `plan/126` also audits OBL-020/021 and finds no Lean predicate refinement needed at this checkpoint; `plan/127` keeps OBL-001/020/021 statement/status completion and ledger movement as explicit G1 non-readiness blockers; `plan/128` further separates those G1 statement/status blockers from later T2 proof discharge; `plan/129` keeps a future statement/status completion-criteria inventory as the next docs-only move without moving the canon ledger; `plan/130` further separates criteria that current LAB support partially satisfies from criteria that require a future human/canon status proposal, including no-admitted-stub, ledger target mapping, and acceptance trigger checks; `plan/131` outlines the later proposal packet shape and keeps requested status vocabulary / ledger delta as future slots, not accepted status; `plan/132` records direct Lean compile-check, sync-guard, and admitted-stub / placeholder scan readiness for OBL-001/020/021 only, without status selection or ledger movement; `plan/133` keeps OBL-001 as the strongest `lean-stated` future candidate and keeps OBL-020 full-row status deferred until scope acceptance, and OBL-021 conditional `lean-stated` pending abstraction-boundary acceptance; `plan/134` separates OBL-020 G1-supporting statement scope from full-row movement, `plan/135` requires artifact identity / wrapper decision before OBL-020 status use, `plan/136` provides the non-applied OBL-020 artifact annex template with unresolved decision slots, `plan/137` applies artifact identity / wrapper preflight to the stronger OBL-001 `lean-stated` candidate, `plan/138` provides the non-applied OBL-001 artifact annex template with OPEN-014 and simple-assignment decision slots, `plan/139` applies artifact identity / wrapper preflight to the OBL-021 conditional `lean-stated` candidate while keeping final equality / diagnostic equivalence / projection-totality / Diagnostic ABI outside current status use, `plan/140` provides the non-applied OBL-021 artifact annex template with those abstraction-boundary decision slots explicit, `plan/141` provides a status packet shell that references the three annex templates while leaving fresh validation results and all requested-status / ledger / artifact / wrapper / scope / abstraction decisions unresolved, `plan/142` records a fresh shell-target dry-run where OBL-001/020/021 Lean compile-checks, sync guard, admitted-stub / placeholder scan, docs/source-hierarchy validation, and secret scan pass, `plan/143` separates the OBL-021 equality / diagnostic abstraction decision from artifact annex filling and status proposal drafting, `plan/144` keeps `plan/134` as the controlling OBL-020 scope decision surface rather than duplicating it, and `plan/145` keeps `plan/137` / `plan/138` as the controlling OBL-001 artifact decision surface rather than duplicating it; OBL-024 now has abstract diagnostic projection / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation / mixed diagnostic branch predicates without proof or canon ledger status, and OBL-025 has abstract whole-rejected-gap / set-insertion / grouped multi-edit / complete-local-repair / partial-guidance non-coverage / branch-local non-coverage predicates plus guard tests against placeholder / ranking / all-repairs drift without proof or canon ledger status | 着手可能 |
 
 ## recent log
+
+- 2026-07-15 17:02 JST
+  P111 recorded the owner's T0 governance-profile route and audit-scope input
+  in `PROPOSAL-002`, with `plan/155` as LAB routing memory. The proposal keeps
+  governance JSON distinct from SCN conformance and does not implement a tool,
+  emit a result, accept G0-D1, or move G0/T0. Oracle independently confirmed
+  that these inputs support proposal work but not an inferred G0 exit.
 
 - 2026-07-14 20:14 JST
   P110 added `docs/project-status.md` as the concise, non-normative derived
