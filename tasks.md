@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-15 17:02 JST
+最終更新: 2026-07-15 20:11 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -22,18 +22,17 @@ and is not append-only history.
 
 ## current promoted package
 
-The explicitly owner-authorized P111 `T0/G0 governance-profile proposal`
-package is closed as a design memo. It created
-`mirrorea_canon/meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md` and
-the LAB routing note `plan/155-t0-g0-governance-profile-proposal.md`. It does
-not adopt a profile, implement a tool, emit JSON, declare G0 exit or T1 entry,
-or grant AI authority over a Gate, Phase, OBL, conformance, runtime, or product
-claim.
+P112 is closed as an owner-authorized canonical adoption and one-off evaluation
+package. `mirrorea_canon/adr/ADR-0013.md` accepts G0-D1 at a pinned repository
+evidence cut, adopts `phase-governance/t0-g0`, and records G0-D4 waiver.
+`plan/155-t0-g0-governance-profile-evaluation.json` is the single derived
+artifact and has three `pass` checks. It is neither an implementation tool nor
+an SCN conformance output, and it does not declare G0 exit or T1 entry.
 
-P109 remains the controlling G0 evidence packet. P111 records that the owner
-selected the profile route and waived a separate historical demotion audit at
-this checkpoint. No autonomous successor is promoted pending the exact G0-D1
-answer, owner/canon adoption or revision of PROPOSAL-002, and later G0-D3.
+P109 remains the controlling G0 evidence packet. G0-D3 is now explicitly
+deferred, so no autonomous successor is promoted. The only future close path is
+a new owner decision to continue the defer or accept the exact artifact digest
+and record the canonical G0 exit.
 
 **Authority boundary:** this current task map does not grant AI roadmap, Gate,
 Phase, or canon-decision authority. Its historical `self-driven` wording
@@ -59,15 +58,12 @@ Current holding state:
 - Canon phase reading is T0/G0 rebaseline. The immediate LAB-to-canon claim
   family ledger now exists at `plan/70-lab-to-canon-reconciliation-ledger.md`;
   it is LAB evidence, not G0 exit.
-- `plan/153` now provides the G0 closeout evidence audit. The five required
-  ADRs, glossary, and LAB-demotion controls are reviewable, and P109 corrected
-  the active highlighter's legacy `game` core-syntax presentation. The owner
-  confirmed the related substantive directions, but G0-D1 still requires an
-  exact collective acceptance/defer record for the named evidence.
-  `PROPOSAL-002` responds to the owner-selected G0-EXIT-001 route with a
-  non-adopted T0 governance profile; it remains distinct from the SCN suite.
-  G0-D4 is waived for this checkpoint, while G0-D3 remains unselected. The
-  canonical state remains T0.
+- `plan/153` provides the G0 closeout evidence audit. ADR-0013 accepts the five
+  required ADRs, `root/glossary`, and LAB-demotion controls at a pinned cut;
+  P109's `game` highlighter correction is among the byte-pinned controls.
+  `PROPOSAL-002` is adopted, and its T0 governance profile is distinct from the
+  SCN suite. G0-D4 is waived at this checkpoint. G0-D3 is deliberately
+  deferred, so the canonical state remains T0.
 - `plan/149-current-phase-position-reading.md` now records the short
   phase-position answer: canon lifecycle is still `T0/G0 rebaseline`; as a
   human stage count this is phase 1 of 9; `late pre-exit` is a LAB management

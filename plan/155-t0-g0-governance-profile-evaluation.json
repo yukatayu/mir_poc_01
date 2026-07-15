@@ -1,0 +1,211 @@
+{
+  "kind": "phase-governance-evaluation",
+  "profile": {
+    "id": "phase-governance/t0-g0",
+    "version": 1,
+    "source_id": "plan/01-phases",
+    "source_revision": "edc2a36ce5145a897bf0e7a0e8788cf69216b2c3",
+    "source_sha256": "a443aa093bba931f2f8b97487d94b45fba3edd1f11ea3c7e5b64f166f749a58b"
+  },
+  "owner_record": {
+    "id": "adr/ADR-0013",
+    "path": "mirrorea_canon/adr/ADR-0013.md",
+    "sha256": "c73f172d0023c6c4fecf13202b51ea874a1f1d9ffd7766cedb241e00cd4830ef"
+  },
+  "accepted_evidence_cut": {
+    "repository_revision": "6f96ce17e74173ca5d86ed76cee3db75d60dcbfe",
+    "items": [
+      {
+        "id": "adr/ADR-0001",
+        "path": "mirrorea_canon/adr/ADR-0001.md",
+        "sha256": "5161146a7331ed6cb848459f756442bb1eaed409466e83c0c17548c124ff1d83"
+      },
+      {
+        "id": "adr/ADR-0002",
+        "path": "mirrorea_canon/adr/ADR-0002.md",
+        "sha256": "95ed79d55d1ffe5e411b5a1498ad5162fb148da4f82253151bba6ef0c2e46fdd"
+      },
+      {
+        "id": "adr/ADR-0005",
+        "path": "mirrorea_canon/adr/ADR-0005.md",
+        "sha256": "93ae8564a72b1de3297211bfbc7ec2771f2f4758babce64b362e6b8498a4554d"
+      },
+      {
+        "id": "adr/ADR-0009",
+        "path": "mirrorea_canon/adr/ADR-0009.md",
+        "sha256": "8299791c54e7519a87a70f1d4f7def0653cc07bff2e85ac8265aec179f7e61ee"
+      },
+      {
+        "id": "adr/ADR-0012",
+        "path": "mirrorea_canon/adr/ADR-0012.md",
+        "sha256": "9147f795e48c86aa4c0364c33cf31071f71b38f6d471685f4f493fd63458545e"
+      },
+      {
+        "id": "root/glossary",
+        "path": "mirrorea_canon/GLOSSARY.md",
+        "sha256": "4dc814b2eab7e462af06af520755641b089aa825a1065291cc1a400c6b9ad7f8"
+      },
+      {
+        "id": "meta/source-hierarchy",
+        "path": "mirrorea_canon/meta/source-hierarchy.md",
+        "sha256": "4908801f708af9ce28c5c0f3cf281f0544dbd46894b1c8186a699b938a36c4c4"
+      },
+      {
+        "id": "LAB:plan/153",
+        "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+        "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"
+      }
+    ]
+  },
+  "current_controls": {
+    "source_hierarchy": {
+      "id": "meta/source-hierarchy",
+      "path": "mirrorea_canon/meta/source-hierarchy.md",
+      "sha256": "4908801f708af9ce28c5c0f3cf281f0544dbd46894b1c8186a699b938a36c4c4"
+    },
+    "lab_controls": [
+      {
+        "id": "lab-root-canon-notice",
+        "path": "CANON.md",
+        "sha256": "92f4538cc71eceab4e65c7f6d8d11b496ef9b907e4869fea06c2fcc7fdeae209"
+      },
+      {
+        "id": "lab-root-readme-notice",
+        "path": "README.md",
+        "sha256": "008fcbfbcf8d364bb7bd9ce078e446e841795c561650b5bcc8ec3e26570ab10f"
+      },
+      {
+        "id": "lab-agents-notice",
+        "path": "AGENTS.md",
+        "sha256": "84754bf3d9855160e22b865421dbf6c18622a5a135a5ad77d1cc90d14ce2190b"
+      },
+      {
+        "id": "lab-highlighter-legacy-vocabulary",
+        "path": "mir_hilight.html",
+        "sha256": "d1d81ec317b2cccff60234ee728129391902a2f804d60c80f5744bf0b8442aee"
+      },
+      {
+        "id": "lab-clean-suite-classification",
+        "path": "samples/clean-near-end/README.md",
+        "sha256": "fcc6488461860af685a34139d3d953eb6c4f83e77ab23fe281b00b1483b518d9"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "g0-substantive-owner-record",
+      "result": "pass",
+      "evidence": [
+        {
+          "id": "adr/ADR-0013",
+          "path": "mirrorea_canon/adr/ADR-0013.md",
+          "sha256": "c73f172d0023c6c4fecf13202b51ea874a1f1d9ffd7766cedb241e00cd4830ef"
+        },
+        {
+          "id": "adr/ADR-0001",
+          "path": "mirrorea_canon/adr/ADR-0001.md",
+          "sha256": "5161146a7331ed6cb848459f756442bb1eaed409466e83c0c17548c124ff1d83"
+        },
+        {
+          "id": "adr/ADR-0002",
+          "path": "mirrorea_canon/adr/ADR-0002.md",
+          "sha256": "95ed79d55d1ffe5e411b5a1498ad5162fb148da4f82253151bba6ef0c2e46fdd"
+        },
+        {
+          "id": "adr/ADR-0005",
+          "path": "mirrorea_canon/adr/ADR-0005.md",
+          "sha256": "93ae8564a72b1de3297211bfbc7ec2771f2f4758babce64b362e6b8498a4554d"
+        },
+        {
+          "id": "adr/ADR-0009",
+          "path": "mirrorea_canon/adr/ADR-0009.md",
+          "sha256": "8299791c54e7519a87a70f1d4f7def0653cc07bff2e85ac8265aec179f7e61ee"
+        },
+        {
+          "id": "adr/ADR-0012",
+          "path": "mirrorea_canon/adr/ADR-0012.md",
+          "sha256": "9147f795e48c86aa4c0364c33cf31071f71b38f6d471685f4f493fd63458545e"
+        },
+        {
+          "id": "root/glossary",
+          "path": "mirrorea_canon/GLOSSARY.md",
+          "sha256": "4dc814b2eab7e462af06af520755641b089aa825a1065291cc1a400c6b9ad7f8"
+        },
+        {
+          "id": "LAB:plan/153",
+          "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+          "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"
+        }
+      ]
+    },
+    {
+      "id": "g0-source-hierarchy-controls",
+      "result": "pass",
+      "evidence": [
+        {
+          "id": "meta/source-hierarchy",
+          "path": "mirrorea_canon/meta/source-hierarchy.md",
+          "sha256": "4908801f708af9ce28c5c0f3cf281f0544dbd46894b1c8186a699b938a36c4c4"
+        },
+        {
+          "id": "lab-root-canon-notice",
+          "path": "CANON.md",
+          "sha256": "92f4538cc71eceab4e65c7f6d8d11b496ef9b907e4869fea06c2fcc7fdeae209"
+        },
+        {
+          "id": "lab-root-readme-notice",
+          "path": "README.md",
+          "sha256": "008fcbfbcf8d364bb7bd9ce078e446e841795c561650b5bcc8ec3e26570ab10f"
+        },
+        {
+          "id": "lab-agents-notice",
+          "path": "AGENTS.md",
+          "sha256": "84754bf3d9855160e22b865421dbf6c18622a5a135a5ad77d1cc90d14ce2190b"
+        },
+        {
+          "id": "lab-highlighter-legacy-vocabulary",
+          "path": "mir_hilight.html",
+          "sha256": "d1d81ec317b2cccff60234ee728129391902a2f804d60c80f5744bf0b8442aee"
+        },
+        {
+          "id": "lab-clean-suite-classification",
+          "path": "samples/clean-near-end/README.md",
+          "sha256": "fcc6488461860af685a34139d3d953eb6c4f83e77ab23fe281b00b1483b518d9"
+        }
+      ]
+    },
+    {
+      "id": "g0-demotion-audit-scope",
+      "result": "pass",
+      "evidence": [
+        {
+          "id": "adr/ADR-0013",
+          "path": "mirrorea_canon/adr/ADR-0013.md",
+          "sha256": "c73f172d0023c6c4fecf13202b51ea874a1f1d9ffd7766cedb241e00cd4830ef"
+        },
+        {
+          "id": "LAB:plan/153",
+          "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+          "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"
+        }
+      ]
+    }
+  ],
+  "result": "pass",
+  "non_claims": [
+    "SCN conformance",
+    "C-static",
+    "C-runtime",
+    "C-distributed",
+    "proof",
+    "ADR effectivity",
+    "Gate exit",
+    "T1 entry"
+  ],
+  "artifact_digest": {
+    "algorithm": "sha256",
+    "canonicalization": "RFC8785",
+    "scope": "canonical-json-with-artifact_digest-omitted",
+    "value": "b7a7c98cab610bf242b3e868dfe47e52953c19332ba82ee7fc24b9c473436cd4"
+  }
+}
