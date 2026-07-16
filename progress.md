@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-16 19:15 JST
+最終更新: 2026-07-16 19:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -34,7 +34,13 @@ The target carries source semantics through placement, explicit communication, c
 | User-facing specification | source-first direction, companion notation, and example guidance exist as LAB evidence | no final grammar, public API, or final user contract |
 | Implementation / operation | Product Alpha, Full System V1, and Surface roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
-The current LAB work unit is `T-RESEARCH-001`: reproduce the existing G1 anchors and use finite countermodels to establish the proof boundary of the OBL-001/020/021 statement drafts. Its authority, stop triggers, and non-claims are in `plan/156-t0-t2-research-autonomy-envelope.md`; the canonical lifecycle is in `mirrorea_canon/plan/01-phases.md`.
+`T-RESEARCH-001` and its narrow `T-RESEARCH-002` continuation are
+`research-complete`: finite countermodels established the boundary of the
+OBL-001/020/021 statement shapes, then one `[E-WRITE]` store-key clause was
+checked under the value-only/frame reading of the canon update notation. No
+canon theorem, status, or lifecycle changed. The next concrete rule/clause is
+selected only by `plan/156-t0-t2-research-autonomy-envelope.md`; the canonical
+lifecycle remains `mirrorea_canon/plan/01-phases.md`.
 
 ## milestone map
 
@@ -97,7 +103,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
-| Research | smallest concrete premises for OBL-020/021/001 | counterexample-first T-RESEARCH-001 |
+| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002 complete; select the next explicit rule/clause only with a falsification criterion |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
@@ -110,7 +116,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce only as needed |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
-| 5 | theorem / model-check bridge | current T-RESEARCH-001 countermodel audit | medium | eligible work units within `plan/156` |
+| 5 | theorem / model-check bridge | T-RESEARCH-001/002 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
 | 8 | domain/application realization | bounded samples exist; products are later | heavy | later dependency |
@@ -127,5 +133,8 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-16 19:48 JST: Completed bounded countermodel research for the three
+  statement shapes and a single OBL-020 `[E-WRITE]` store-key preservation
+  clause; both are LAB evidence only and leave canon status unchanged.
 - 2026-07-16 19:15 JST: Recut the human control view and LAB snapshots around canon state, runnable evidence, decision queue, and research order; recorded the owner-authorized T0-T2 research envelope without changing canon status.
 - 2026-07-15 20:11 JST: ADR-0013 recorded the T0/G0 profile evidence; G0-D3 remained deferred, so no G0 exit or T1 entry was claimed.

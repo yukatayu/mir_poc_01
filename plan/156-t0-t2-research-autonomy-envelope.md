@@ -88,13 +88,13 @@ independent review result.
 The order is a research priority, not canon roadmap advancement. Current T0
 does not authorize an official T1 entry; it permits bounded research only.
 
-## Initial work unit: T-RESEARCH-001
+## T-RESEARCH-001: statement-shape countermodel audit (research-complete)
 
 **Question:** Do the existing LAB OBL-020, OBL-021, and OBL-001 statement
 drafts express standalone theorems, or only postcondition shapes requiring a
 concrete calculus and rule hypotheses?
 
-**Sources:** `mirrorea_canon/theory/01-calculus.md`,
+**Sources:** `mirrorea_canon/theory/01-mircore-v0.md`,
 `mirrorea_canon/theory/03-elaboration.md`,
 `mirrorea_canon/theory/11-metatheory-ledger.md`,
 `plan/121-g1-minimal-vertical-slice-candidate-map.md`,
@@ -106,11 +106,55 @@ drafts.
 anchor; construct finite countermodels in a disposable scratch location; map
 the precise missing premise for each draft; record only a bounded conclusion.
 
-**Completion condition:** `research-complete` when all three drafts compile,
-each countermodel is reproducible, and the report distinguishes statement
-shape, concrete rule premise, and unclaimed proof status. It becomes
-`decision-ready` instead if a canon semantic choice is required to formulate
-the smallest concrete premise.
+**Evidence and result:** the three source drafts compile with `lean --trust=0`;
+their existing sync suite has 21 passing tests; and the existing Surface static
+anchor has 53 accepted expected rows and no failures. Disposable scratch files
+under `/tmp/mirrorea-t-research-001/` construct finite models that prove the
+negation of each draft when its `Pred` fields are unconstrained.
+
+| Draft | What the countermodel establishes | Concrete semantic force still needed |
+| --- | --- | --- |
+| OBL-020 | `WellFormed before` and `Step before label after` alone do not force `WellFormed after`. | Canonical step rules, per-rule preservation/frame reasoning, and case exhaustiveness. |
+| OBL-021 | One well-scoped input can elaborate to inequivalent results if `Elaborates` is unconstrained. | Successful and rejecting elaboration functionality, success/reject exclusion, result-projection adequacy, and selected equivalence laws. |
+| OBL-001 | A generated write need not be locally justified or request-justified if the predicates are unconstrained. | Rule inversion from successful elaboration to local/cross-write origin and the remaining edge/failure/authority/span invariants. |
+
+This establishes **parametric non-validity** (`exists V, P` for which a draft
+does not hold), not a counterexample to canonical MirCore rules and not a proof
+that the drafts are unusable. Concrete rules can supply the force definitionally
+instead of as new final theorem arguments. It is therefore `research-complete`,
+not `decision-ready`.
+
+An independent Oracle review agreed with this reading, noted that the OBL-021
+projection clauses may otherwise be vacuous without adequacy/totality, and
+confirmed that `plan/126` remains consistent when its word "sufficient" is read
+as current-bridge/compile-boundary sufficiency only. The initial browser run
+lost its connection; the single permitted retry produced the advisory result.
+
+## T-RESEARCH-002: OBL-020 [E-WRITE] store-key clause (research-complete)
+
+**Question:** Does the `[E-WRITE]` description in
+`mirrorea_canon/theory/01-mircore-v0.md` supply a non-circular minimum premise
+bundle for one well-formedness conjunct: every store entry key is Active at its
+recorded epoch or tombstoned?
+
+**Method:** a disposable Lean model uses a `Store` of entries with epochs,
+separate Active/Tombstoned membership predicates, and the value-update reading
+of `S[ell][x][key := value]`: update the target value while retaining its key
+and epoch. It proves that pre-step key well-formedness plus the canonical
+active-key premise preserves this one clause. A second finite theorem changes
+the target epoch and proves that the clause can fail, exposing why the
+value-only/frame reading matters.
+
+**Result:** the narrow case is feasible without a new canon choice. The canon
+store notation and `[E-WRITE]` active-key premise support this bounded reading,
+but the experiment is not an exact runtime-configuration formalization and
+does not cover other well-formedness clauses or step rules. The frame condition
+is necessary evidence for a future proof package, not a newly adopted semantic
+requirement.
+
+**Next selection point:** select a further concrete rule/clause only when it
+has a similarly explicit canon source cut and falsification criterion. Do not
+infer a general OBL-020 theorem from this one case.
 
 ## Current non-claims
 

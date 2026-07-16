@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-16 19:15 JST
+最終更新: 2026-07-16 19:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
-| いまの研究 | G1 ordinary-assignment 静的橋渡しと OBL-001/020/021 statement boundary の反例先行監査を開始する。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| いまの研究 | OBL-001/020/021 statement boundary の反例監査と OBL-020 `[E-WRITE]` の一節を `research-complete` とした。次の具体 rule/clause は選定規則を満たす時だけ選ぶ。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線
 
