@@ -1,6 +1,28 @@
 flowchart LR
-  U[User / Researcher] --> C[Codex]
-  C --> R[New Markdown Report]
-  R --> A[ChatGPT Analysis]
-  A --> N[Next Prompt]
-  N --> C
+  T0[T0: vocabulary and decisions\ncurrent: G0 exit unrecorded]
+  T1[T1: calculus and G1-G3 statements]
+  T2[T2: proof skeletons and G5 statements]
+  I1[I1: reference implementation]
+  I2[I2: multi-locus]
+  I3[I3: real transport\nfirst LAN reality]
+  I4[I4: persistence and patch]
+  I5[I5: projection and View]
+  I6[I6: distributed persistence and federation]
+
+  T0 --> T1 --> T2 --> I1 --> I2 --> I3 --> I4 --> I5 --> I6
+
+  Research[LAB research work unit\nexisting evidence, counterexample, Lean exploration]
+  Decision[decision-ready bundle\nowner / canon act required]
+  Evidence[research-complete\nLAB evidence only]
+
+  T0 -. bounded research .-> Research
+  T1 -. bounded research .-> Research
+  T2 -. bounded research .-> Research
+  Research --> Evidence
+  Research --> Decision
+  Decision -. accepted canon record only .-> T1
+
+  classDef current fill:#fff3cd,stroke:#9c6b00,color:#3b2f00
+  classDef research fill:#e6f4ea,stroke:#286b3d,color:#12351d
+  class T0 current
+  class Research,Evidence,Decision research

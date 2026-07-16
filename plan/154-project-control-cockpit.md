@@ -39,15 +39,16 @@ process. An owner-recorded LAB decision may only change a separate
 
 ### Human-facing control view
 
-`docs/project-status.md` stays at or below 180 lines and has exactly these sections:
+`docs/project-status.md` stays at or below 180 lines. Its fixed validator
+headings present four reader panels rather than a historical task log:
 
-1. document role and canon precedence;
-2. whole-plan checklist (`G0..G7`, `T0..T2`, `I1..I6`);
-3. current position, separated into canon state and LAB reading;
-4. exact stop line and permitted reopen triggers;
-5. active owner confirmations / decisions only;
-6. evidence map with exact files, including the controlling report;
-7. update protocol.
+1. **canonical state**: current lifecycle and the Gate/Phase checklist;
+2. **runnable LAB evidence**: what can actually be reproduced, with its
+   non-claim boundary;
+3. **decision queue**: unresolved owner decisions only, with deferred items
+   marked dormant rather than repeatedly presented as active prompts; and
+4. **roadmap**: the next evidence-first research order, with the exact sources
+   that constrain it.
 
 The checklist is an orientation aid, not a percentage or an exit claim. A box
 is checked only when a cited canonical record establishes the corresponding
@@ -57,14 +58,11 @@ been recorded elsewhere.
 
 ### Current decision routing
 
-The initial report routes, but does not answer, these P109 decisions:
-
-| ID | Owner confirmation / decision | Effect of a recorded answer |
-| --- | --- | --- |
-| G0-D1 | Accept or defer the ADR / glossary / LAB-demotion evidence as satisfying the G0 factual criteria | No Gate movement without the required canonical record |
-| G0-D2 | Choose the canon-compatible handling of G0-EXIT-001, the T0 `mir-conform` JSON requirement | Defines the verification path; does not itself exit T0 |
-| G0-D3 | Approve or defer G0 exit and identify its effective ADR / ledger record | Only a valid canonical record can alter the lifecycle display |
-| G0-D4 | Require or waive a further semantic / historical LAB-demotion audit | Sets the audit scope; it is not an implicit acceptance |
+`plan/155` records G0-D1/D2/D4. G0-D3 is deferred and dormant: it re-enters
+the queue only through an owner reopen, not because an agent needs a next task.
+`plan/156` records a separate LAB research operating envelope. It authorizes
+selection of bounded T0-T2 research work units but does not grant canon package
+close, Gate/Phase movement, ADR effectivity, or OBL-status authority.
 
 ## Update transaction
 

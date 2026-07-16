@@ -3,416 +3,80 @@
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
-notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
-`plan/` as `LAB:` evidence unless mirrored into canon.
+notes. If LAB text conflicts with canon, canon wins.
 
 ## この文書の役割
 
-この文書は、repo 全体の **current snapshot を短く正確に読む入口** です。
+この文書は、リポジトリを読み始めるための短い案内です。現在の状態は
+`docs/project-status.md`、詳細な研究計画は `plan/`、不変の作業証跡は
+`docs/reports/` に置きます。
 
-- 規範判断の正本は `mirrorea_canon/`
-- 旧 `specs/` と `plan/` は LAB evidence / repository memory
-- workflow / evidence snapshot は `progress.md`
-- current task map は `tasks.md`
-- runnable sample dashboard は `samples_progress.md`
-- 現在地・停止線・判断待ちの人間向け入口は `docs/project-status.md`
-- agent / operational policy は `.docs/`
-- 実行証跡は `docs/reports/`
+## 最初に読む順序
 
-## まず repo をどう読むべきか
+1. `mirrorea_canon/README.md`
+2. `mirrorea_canon/MAP.md`
+3. `mirrorea_canon/plan/00-gates.md` と `mirrorea_canon/plan/01-phases.md`
+4. `docs/project-status.md`, `progress.md`, `tasks.md`, `samples_progress.md`
+5. 対象領域の canon と、その根拠としての `plan/` / `specs/`
 
-この repo は、Mir / Mirrorea / PrismCascade / Typed-Effect Wiring Platform を **意図的に separable** に保った研究用 workspace です。主眼は Mir current-L2 と、その上に積む Mirrorea shared-space / hot-plug / observability / host-boundary line にあります。
+canon が方針・理論・ADR・適合性・プロセスの正本です。`plan/` と legacy
+`specs/` は LAB の証拠・履歴・比較であり、規範判断を上書きしません。
 
-読み分けで重要なのは、次の層を混同しないことです。
+## プロジェクトの目的
 
-- **repo-local alpha-ready current layer**
-  `samples/clean-near-end/`、helper、Lean foundation、report まで含めて動かせる current-L2 の実行足場
-- **current-scope evidence**
-  `samples/alpha/` と `specs/13..17` / `plan/39..43` による alpha-0 helper-local / runtime-private closeout 群
-- **practical alpha-1 first-floor evidence**
-  `samples/practical-alpha1/` と `specs/18` / `plan/44` による front-door / checker / runtime / hot-plug / transport / devtools / save-load / preview の first-floor toolchain
-- **operational alpha readiness**
-  LAB package-line memory in `specs/19..24` / `plan/45..49` が記録する α-0.5 / α-0.8 / α-0.9 の same-session operational 条件
-- **product/public-ready Mirrorea Spaces alpha-1**
-  LAB product-alpha line documented in `specs/25` / `plan/50` が記録する alpha-stable CLI、versioned package format、same-session product demo、quiescent save、viewer、native launch bundle、clean-clone validation。final textual `.mir` grammar、WAN/federation、distributed durable save/load、arbitrary native execution、final viewer / telemetry service は non-goal
-- **operational product sample suite**
-  LAB suite memory in `specs/26` / `plan/51` が記録する `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` suite、shared attach packages、deployment/projection inventory、retained portal/shard blueprint inventory。current line では `MembershipChat` の bounded room-oriented `ChatText` host boundary、`SugorokuWorld` の bounded roll / publish / witness / handoff / stale membership reject scenario、`projection.profile.json` の schema-backed target / packet / FFI inventory、`PortalWorldLink` の bounded same-session discrete handoff cut、`TwoShardHardBoundary` の bounded same-session two-shard offer / prepare / commit cutとobserver-visible old-owner / stale-config reject-event narration付き `missing_live_witness` rejection、そして `TwoShardGradientObservation` の bounded observer-only gradient view / handoff hint rowsとobserver-visible write-reject / stale-view-drop narration付き freshness rejection が `check`、runtime plan、observer-safe devtools / helper closeout に actualize 済み。`future/portal-worldlink/` と `future/two-shard-hard-boundary/` blueprint は残す
-- **Mir Computational Core rebaseline**
-  legacy LAB docs/spec memory in `specs/28..31` / `plan/53..56` が記録する computational-core package line。Product Alpha-1 の operational floor は保持するが、current typed external `AddOne` を Mir-owned computation の証拠とは読まない。front-half scaffold は維持しつつ、`P-COMP-02` により `samples/product-alpha1/computational/add-one-pure-mir/` と `scripts/mir_computational_samples.py` が one direct executable Mir-owned row を持つようになり、`P-COMP-03` により variables / arrays / records / control-flow / imports の positive / negative rows が helper-executable に actualize され、`P-COMP-04` により direct product-alpha accepted/check-rejection rows で host read/write boundary が explicit になった。ここで `required_capabilities` / `failure_tag` は checker-admission boundary declaration の evidence であり、broad effectful runtime semantics completion を意味しない。PoseGraph は `P-POSE-02` により same-client same-observation-snapshot no-split-frame の accepted/violation helper evidence を持つようになり、projection / engine-adapter は引き続き planned-only scaffold / inventory である。all-up closeout audit まで実行済みで、current self-driven chain は閉じた。
-- **minimal alpha-1 pattern verification**
-  `scripts/minimal_alpha1_patterns.py` と `docs/hands_on/minimal_alpha1_patterns_01.md` は、closed chain の上に置く reader-facing verifier。computational / PoseGraph / projection / engine-adapter の exact row count、expected rejection、inventory-only boundary を確認し、product release-candidate と operational Sugoroku は workflow anchor として同じ matrix で読む。これは新しい runtime claim ではなく、最小実用パターンの drift 検出である。
-- **autonomous execution contract**
-  LAB execution memory in `specs/32` / `plan/57` が記録する package-by-package 自律実行 line。`P-COMP-01 -> P-POSE-01 -> P-PROJ-01 -> P-ENG-01` の front-half を閉じてから implementation half に入り、user に途中質問せず、final distribution / catalog / ABI / backend admission のような user-spec-required gate は隔離し、lower-layer implementation を止めない。
-- **Full System V1 source-first roadmap**
-  LAB roadmap memory in `specs/33..38` / `plan/58..63` が記録する次段 roadmap。Product Alpha-1 と operational suite を alpha floor として保持しつつ、semantic source of truth を Mir source files へ戻し、textual Mir alpha grammar、typed IR、pure interpreter、effectful runtime integration、PoseGraph runtime、projection IR、provider admission、devtools / release check へ段階的に進む。`package.mir.json` は alpha compatibility / package artifact であり、final source authority ではない。
-- **Surface Mir alpha source-authority line**
-  LAB roadmap memory in `specs/39..43` / `plan/64..68` が記録する closed alpha evidence roadmap。Canonical place-scope syntax は `S { ... }` であり、`S[ ... ]` は sugar としても採用しない。Surface Mir は user-facing source、Core Mir は elaboration target であり、通信・publish・observe は自動生成して Core IR / devtools に明示する。`package.mir.json` は alpha artifact に留まり、semantic source authority は `.mir` files に戻す。`P-SURF-01` は parser/helper/sample floor、`P-SURF-02` は indexed-state semantic checker/sample floor、`P-SURF-03` は Surface-to-Core elaboration evidence floor、`P-SURF-04` は generated MessageEnvelope / publish / observe / private-field rejection evidence floor、`P-SURF-05` は role admission evidence floor、`P-SURF-06` は source patch hot-plug evidence floor、`P-SURF-07` は source-first operational evidence floor、`P-SURF-08` は Surface source / generated Core IR / semantic-checker-backed indexed-state map / generated communication / role admission / redacted patch lifecycle / source spans の static devtools diagnostics evidence floor、`P-SURF-99` は final validation / claim-non-claim audit closeout である。Runtime MessageEnvelope dispatch、production identity provider、hardware attestation、WAN admission、final source patch ABI、distributed durable migration、final operational runtime/transport、final devtools viewer / telemetry ABI はまだ主張しない。
-- **final public product**
-  final parser grammar、public checker/runtime/verifier API、public adapter / viewer / projection / hot-plug / transport surface、packaging、external contract まで含む最終形
-
-現在 repo は、repo-local alpha-ready current layer、current-scope evidence、practical alpha-1 first-floor evidenceに加えて、次の runnable workflow を持っています。
-
-- bounded operational α-0.5 / α-0.8 / α-0.9
-- bounded practical α-1 integrated workflow carrier
-- product alpha-1 release-candidate workflow
-- installed-binary + generated native host launch bundle adoption probe
-- `WorldCore -> MembershipChat -> SugorokuWorld -> PortalWorldLink -> TwoShardHardBoundary -> TwoShardGradientObservation` の canonical operational product sample suite
-- minimal alpha-1 pattern verifier for strict row / rejection / inventory drift checks
-
-Surface Mir alpha は別枠の evidence-closed line です。
-
-- Surface Mir brace parser floor plus indexed-state semantic checker, Surface-to-Core elaboration, generated communication, role-admission, source-patch hot-plug, source operational, static devtools diagnostics evidence floors, and `P-SURF-99` final validation / claim-non-claim audit closeout
-
-実用面では、外部開発者が documented commands で product demo と operational suite を `check`、`run-local`、`session`、`attach`、`save`、`quiescent-save`、`transport`、`export-devtools`、`view`、`build-native-bundle` まで再現できる段階です。current delivery unit は developer-built `mirrorea-alpha` binary + locally generated native host launch bundle だけで、current catalog scope は bounded product alpha-1 narrow showcase です。
-
-まだ主張しないものは明確です。final public product、final textual grammar / ABI / SDK、final Surface operational runtime / transport、final Surface devtools viewer / telemetry ABI、final source patch hot-plug ABI、distributed durable patch migration、production patch registry/signing workflow、archive / installer / hosted service、final viewer / telemetry ABI、R3/R4 durable distributed save/load、WAN/federation、production identity provider、hardware attestation、arbitrary native package execution、arbitrary WASM execution、final server/client binary split、continuous spatial sync、direct LLVM backend は別 gate です。broader distribution / final shared-space catalog breadth は user-spec-required decision です。Full System V1 autonomous chain は `P-FSV1-99 final audit` まで close 済みです。
-Surface Mir line は P-SURF-99 final audit の後、G1 dependency-gap evidence、OBL-020/021 dependency inventory、LAB statement drafts、OBL-001/020/021 statement guard hardening、OBL-001 boundary audit、OBL-020/021 boundary audit and OBL-021 guard hardening、G1 ordinary-assignment bridge readiness/non-readiness map、G1 bridge handoff/blocker ledger、G1 acceptance-packet preflight、G1 OBL statement/status completion criteria inventory、G1 status proposal packet outline、G1 status evidence readiness dry-run、G1 requested-status options matrix、ordinary assignment claim-family drilldown、remaining claim-family priority map、repo-triage recut matrix、G1 minimal vertical slice candidate map、G1 SCN exact static slice manifest、G1 SCN-01 visibility negative actualization、G1 SCN-02 direct-local-write blocker review、E-ROW diagnostic alignment、diagnostic carrier inventory、OBL-024/025 statement-shape inventory、E-ROW repair payload inventory、E-ROW carrier-only diagnostic detail prototype、E-ROW carrier precondition hardening、E-ROW-002 visibility repair carrier prototype、OBL-024 / OBL-025 Lean statement draft、E-ROW repair shape inventory、E-ROW-001 non-visibility singleton fixture、E-ROW-001 base singleton fixture closure、E-ROW-001 singleton repair assumption gate、E-ROW-001 singleton repair prototype、E-ROW mixed / multi repair decomposition inventory、E-ROW set-insertion / bundle payload inventory、ELAB-07 set-insertion gate review、ELAB-04 mixed visibility branch inventory、ELAB-07 set-insertion executable preflight、ELAB-07 set-insertion assumption acceptance、ELAB-07 set-insertion payload-model design、ELAB-07 set-insertion executable payload prototype、ELAB-07 set-insertion negative-guard hardening、ELAB-07 set-insertion row-identity guard hardening、ELAB-07 set-insertion exact-locus guard hardening、ELAB-07 child / bundle / partial exclusion fixtures、ELAB-04 mixed visibility payload-model preflight、OBL-025 branch-local non-coverage refinement、OBL-025 repair completeness guard hardening、OBL-024 executable diagnostic-soundness projection carrier、OBL-024 projection Rust fixture guard hardening、OBL-024 replay vocabulary preflight、OBL-024 Lean replay vocabulary refinement、OBL-024 Lean association vocabulary refinement、OBL-024 association guard hardening を加え、53 sample rows / 54 `.mir` source files を持ちますが、これは alpha/LAB evidence and repository memory であり final runtime/transport/API、diagnostic/repair ABI freeze、OBL-020/021/024/025 discharge、proof discharge、G1 exit ではありません。`plan/118` は `plan/70` の ordinary assignment row を `plan/71 -> plan/72` 中心で分解した traceability-only 文書であり、`plan/119` は remaining `plan/70` rows を今すぐ drilldown しないための priority map であり、`plan/120` は Product Alpha / Full System V1 / Surface evidence の LAB management overlay、`plan/121` は G1 ordinary assignment に渡す `G1-MVS-ASSIGNMENT-STATIC` 候補 map、`plan/122` は SCN-01 / SCN-02 static bullets を exact / structural support / explicit gap に分ける manifest、`plan/123` は SCN-01 visible-write `VisibilityDenied` negative gap を `ELAB-17` で exact current executable evidence にする actualization record、`plan/124` は `ELAB-11/12/17` が既存 OBL-001 abstract predicate boundary で足りるため Lean predicate refinement 不要とする boundary audit、`plan/125` は SCN-02 direct-local-write negative (b) が現 G1 bridge の即時 blocker ではないが exact executable negative evidence でもないと整理する blocker review、`plan/126` は OBL-020/021 statement boundary を監査し、Lean predicate refinement 不要のまま OBL-021 guard weakness を test-only に補強する boundary audit / guard hardening、`plan/127` は post-`plan/126` の G1 bridge current LAB support / remaining blocker / forbidden claim を整理し、G1 exit readiness ではないことを明示する readiness/non-readiness map、`plan/128` は `plan/127` の blockers を human/canon acceptance、future statement/proof-package work、canon-open deferral、static LAB support-only、later runtime/conformance/product、reserve trigger に分類する handoff ledger、`plan/129` は future G1 acceptance packet のための canon files / LAB evidence / statement-status blockers / OPEN-014 deferral / runtime-conformance-product exclusions を routing checklist として整理する preflight、`plan/130` は OBL-001/020/021 status movement を将来 proposal する前の criteria を current LAB support と human/canon decision に分けて整理する inventory、`plan/131` はその criteria を future proposal packet の cover sheet / requested-status matrix / artifact identity / evidence trace / OPEN-deferral / non-claim / ledger delta placeholder / submission checklist へ展開する outline-only memory、`plan/132` は future packet が cite する OBL-001/020/021 Lean draft compile-check / sync guard / admitted-stub scan を dry-run で通した evidence-readiness memory、`plan/133` は future requested-status 候補として OBL-001 は `lean-stated` candidate、OBL-020 は full-row defer / scope acceptance 後の conditional `lean-stated`、OBL-021 は abstraction-boundary acceptance 後の conditional `lean-stated` と advisory-only に整理する matrix です。いずれも canon edit、G0/G1..G7 exit、OBL status movement、requested status acceptance、status proposal acceptance、conformance、proof 昇格、sample status relabel は主張しません。`suggested_repair[]` evidence は `E-ROW-002` / `VisibilityDenied` singleton (`ELAB-10`)、exact SCN-01 visible-write `VisibilityDenied` negative (`ELAB-17`)、`E-ROW-001` non-visibility singleton (`ELAB-13..16`)、および exact `ELAB-07` set-insertion payload prototype に限って出ています。mixed visibility row (`ELAB-04`) には executable output では出していません。OBL-001/020/021 Lean statement drafts は body-level sync guard を持ちますが、proof skeleton / completion / final equality / runtime dispatch ではありません。OBL-024 Lean statement draft は diagnostic projection / reported rule / failed premise / bindings / report-local association key / future proof-level association relation / report-local replay anchor / future proof-level replay relation を抽象 predicate として持つ compile-check-only `Prop` 形であり、proof ではありません。current executable E-ROW carrier は `lab_diagnostic_details` に LAB-only `diagnostic_soundness_projection` を持ち、report-local diagnostic id / report-local association key / reported bindings / trace-local replay anchor を固定しますが、final Diagnostic JSON / association/replay ABI ではありません。`plan/112` はこの `trace_local_replay` を report-local anchor として future proof-level replay relation から分離し、proof-level exactness / replay engine / replay ABI は OPEN のまま残します。`plan/113` はその split を Lean draft に `ReportLocalReplayAnchor` と `ProofLevelReplayWitness` / `ProofLevelReplayRelation` として反映します。`plan/114` は current `lab_association_key` を report-local association key として future proof-level association relation から分離し、association-key ABI は OPEN のまま残します。`plan/115` は report-local association key が semantic association by key equality や branch-local association key に drift しないよう static guard を追加します。OBL-025 Lean statement draft は placeholder repair arrays / repair ranking / all-repairs names / branch-local whole-gap coverage drift を guard し、whole rejected gap / set insertion / grouped multi-edit / complete local repair / partial guidance non-coverage / branch-local non-coverage を抽象 predicate として持つ compile-check-only `Prop` 形であり、proof ではありません。non-visibility singleton repair は `plan/93` の LAB single-edit / no-placeholder gate を `plan/94` で通した current LAB prototype です。`plan/95` は mixed / multi repair 分解、`plan/96` は set-insertion / conjunctive bundle / partial guidance payload vocabulary、`plan/97..101` は `ELAB-07` の gate / assumption / payload design、`plan/98` は `ELAB-04` mixed branch no-repair gate、`plan/102` は exact `ELAB-07` fact pattern だけの non-final executable set payload prototype、`plan/103` は subset / padded / duplicate / multi-request variants に `set_insertion` repair を出さない Rust-only guard evidence、`plan/104` は public `target_ref` を変えない internal association key hardening、`plan/105` は omitted-row / retargeting proxies を exact current `ELAB-07` locus から外す guard、`plan/106` は exact `ELAB-07` payload が one complete top-level set item であり child singleton alternatives / bundle fields / partial guidance / textual-only guidance ではないことを固定する Rust-only shape guard、`plan/107` は `ELAB-04` の mixed wrapper / base branch / visibility branch / association / ordering deferral を docs-only で整理する preflight、`plan/108` は OBL-025 draft に abstract `RepairBranch` / branch-local non-coverage helper vocabulary を足す LAB refinement、`plan/117` は OBL-001/020/021 statement guard hardening、`plan/126` は OBL-020/021 boundary audit and OBL-021 guard hardening、`plan/127` は G1 bridge readiness/non-readiness map、`plan/128` は G1 bridge handoff/blocker ledger、`plan/129` は G1 acceptance-packet preflight、`plan/130` は G1 OBL statement/status completion criteria inventory、`plan/131` は G1 status proposal packet outline、`plan/132` は G1 status evidence readiness dry-run、`plan/133` は G1 requested-status options matrix、`plan/116` は OBL-025 repair completeness guard hardening、`plan/109` は OBL-024 draft に diagnostic projection / trace-local replay vocabulary を足す LAB refinement、`plan/110` は executable E-ROW carrier に OBL-024 projection evidence を足す LAB hardening、`plan/111` はその projection evidence を Rust fixture guard で固定する test-only hardening、`plan/112` は replay vocabulary の docs-first preflight、`plan/113` は Lean replay vocabulary refinement、`plan/114` は Lean association vocabulary refinement、`plan/115` は association guard hardening です。general set-insertion support、repair ranking、multi-edit、bundle semantics support、visibility-repair ranking、whole-program repair success、final repair ABI はまだ主張しません。
-
-`plan/134` は OBL-020 full-row status movement を defer し、G1-supporting
-statement-scope candidate を later human/canon review 用に明示する
-scope-clarification-only memory です。canon edit、ledger movement、OBL-020
-completion、proof/conformance claim、G1 exit は主張しません。
-
-`plan/135` は現 LAB `OBL020StatementDraft` の direct citation を LAB evidence
-に限定し、requested-status artifact identity の前に artifact annex /
-wrapper decision が必要であることを整理する preflight-only memory です。
-wrapper file creation、canon edit、ledger movement、OBL-020 completion、
-proof/conformance claim、G1 exit は主張しません。
-
-`plan/136` は later requested-status packet 用の OBL-020 artifact annex
-template です。canon target、LAB artifact path / namespace / constant、
-scope label、fresh validation slots、artifact/scope decision slots、
-unresolved items、non-claims をまとめますが、proposal submission、requested
-status acceptance、ledger movement、wrapper creation、OBL-020 completion、
-proof/conformance claim、G1 exit は主張しません。
-
-`plan/137` は現 LAB `THM001StatementDraft` の direct citation を LAB
-evidence に限定しつつ、OBL-001 が later `lean-stated` の最有力候補で
-あること、ただし requested-status artifact identity の前に artifact annex
-/ wrapper decision が必要であることを整理する preflight-only memory です。
-wrapper file creation、requested status acceptance、canon edit、ledger
-movement、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
-主張しません。
-
-`plan/138` は later OBL-001 `lean-stated` packet 用の artifact annex
-template です。canon target、LAB artifact path / namespace / constant、
-OPEN-014 deferral、simple assignment scope、fresh validation slots、
-artifact/scope decision slots、unresolved items、non-claims をまとめますが、
-proposal submission、requested status acceptance、ledger movement、wrapper
-creation、OBL-001 completion、OBL-002 proof/conformance claim、G1 exit は
-主張しません。
-
-`plan/139` は現 LAB `OBL021StatementDraft` の direct citation を LAB
-evidence に限定しつつ、OBL-021 が abstraction-boundary acceptance 後の
-conditional later `lean-stated` candidate であること、ただし requested-status
-artifact identity には artifact annex / wrapper decision が必要であることを
-整理する preflight-only memory です。wrapper file creation、requested status
-acceptance、canon edit、ledger movement、OBL-021 completion、proof/conformance
-claim、final equality / Diagnostic ABI selection、runtime scheduling
-determinism、G1 exit は主張しません。
-
-`plan/140` は later OBL-021 conditional `lean-stated` packet 用の artifact
-annex template です。canon target、LAB artifact path / namespace / constant、
-abstraction-boundary decision、fresh validation slots、artifact/wrapper decision
-slots、unresolved final equality / Diagnostic ABI / projection-totality items、
-non-claims をまとめますが、proposal submission、requested status acceptance、
-ledger movement、wrapper creation、OBL-021 completion、proof/conformance claim、
-runtime scheduling determinism、G1 exit は主張しません。
-
-`plan/141` は G1 OBL status packet shell です。`plan/138` / `plan/136` /
-`plan/140` の artifact annex template を参照しつつ、requested status、ledger
-delta、artifact identity acceptance、wrapper need、OPEN-014、OBL-020 scope、
-OBL-021 abstraction boundary、proof/conformance/runtime/G1 exit をすべて
-UNRESOLVED slot として残します。proposal submission、requested status
-acceptance、canon edit、ledger movement、OBL completion、proof/conformance claim、
-runtime readiness、G1 exit は主張しません。
-
-`plan/142` は G1 status packet shell evidence dry-run です。`plan/141` の
-fresh validation slot に対して OBL-001 / OBL-020 / OBL-021 Lean
-compile-check、LAB statement sync guard、admitted-stub / placeholder scan、docs
-/ source hierarchy validation、secret scan の実測結果を LAB evidence として
-記録します。requested status selection、proposal submission、canon edit、
-ledger movement、OBL completion、proof/conformance claim、runtime readiness、
-G1 exit は主張しません。
-
-`plan/143` は G1 OBL-021 equality / diagnostic abstraction decision packet
-です。`plan/140` の OBL-021 artifact annex template を埋める前に、abstract
-component result equivalence、abstract diagnostic equivalence、
-projection-totality、fixed-input identity、LAB artifact / wrapper boundary について何を
-human/canon review に問うかを整理します。requested status selection、
-proposal submission、canon edit、ledger movement、OBL-021 completion、proof /
-conformance claim、final equality / Diagnostic ABI selection、runtime
-scheduling determinism、G1 exit は主張しません。
-
-`plan/144` は G1 OBL-020 scope decision reuse / unresolved-slot audit です。
-`plan/134` が OBL-020 full-row vs G1-supporting scope question の controlling
-LAB packet であることを確認し、同じ scope matrix を重複して作らないよう
-candidate next package を整理します。requested status selection、proposal
-submission、canon edit、ledger movement、OBL-020 completion、proof /
-conformance claim、wrapper creation、runtime readiness、G1 exit は主張しません。
-
-`plan/145` は G1 OBL-001 artifact decision reuse / unresolved-slot audit
-です。`plan/137` / `plan/138` が OBL-001 artifact identity / wrapper /
-OPEN-014 / simple-assignment scope の current LAB decision surface であることを
-確認し、同じ preflight / annex を重複して作らないよう candidate next package
-を整理します。requested status selection、proposal submission、canon edit、
-ledger movement、OBL-001 completion、OBL-002 proof / conformance claim、
-wrapper creation、OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
-
-`plan/146` は G1 OBL-001 explanation-boundary sync guard hardening です。
-`THM001StatementDraft.md` が LAB/canon hierarchy、canon
-`MirCore.Elab.Soundness (stmt)` target との非同一性、artifact identity /
-wrapper acceptance 未採択、OPEN-014 open を落とさないことを sync test で固定します。
-requested status selection、proposal submission、canon edit、ledger movement、
-OBL-001 completion、OBL-002 proof / conformance claim、wrapper creation、
-OPEN-014 resolution、runtime readiness、G1 exit は主張しません。
-
-`plan/147` は G1 next-line promotion-boundary audit です。広い自走依頼は
-OBL-020 / OBL-001 review-facing extraction candidate の promotion ではなく、
-次 line は user が明示的に OBL-020 または OBL-001 extraction を選んだときだけ
-昇格する、と記録します。requested status selection、review request
-extraction、proposal submission、canon edit、ledger movement、wrapper
-creation、OPEN-014 resolution、proof / conformance claim、runtime readiness、
-G1 exit は主張しません。
-
-user が OBL-020 extraction を明示選択したため、
-`mirrorea_canon/meta/proposals/PROPOSAL-001-obl020-g1-statement-scope-review.md`
-を canon-routed の decision-request artifact として起票しました。これは
-`plan/134` の scope matrix を複製せず、一つの human/canon review question だけを
-提示しました。project owner は 2026-07-14 に、full OBL-020 completion を残した
-まま abstract Lean statement shape を G1-supporting scope artifact として扱うことを
-受理しました。requested status、ledger、proof、artifact identity / wrapper、runtime、
-conformance、Gate / Phase、`plan/141` の slot は変わりません。
-
-`plan/148` は storage workdir mountpoint guard hardening です。external
-workdir を exact mountpoint として確認し、root filesystem 上の通常 directory
-を mounted 扱いしないよう storage env / cleanup helper を強化します。cleanup、
-mount provisioning、cache move、sample / workflow status、canon edit、OBL
-status、proof / conformance、runtime readiness、G1 exit は主張しません。
-
-`plan/149` は current phase position reading です。全体計画の現在地を
-canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目
-と読み、`late pre-exit` は canon status ではない LAB management phrase として
-のみ使い、G0 exit は未達、と整理します。
-LAB evidence が G1/T1 準備へ先行していることと、canon phase movement を
-混同しません。
-
-`plan/150` は phase-position validator guard です。`plan/149` の短い読みが
-`progress.md` と `tasks.md` から消えたときに `scripts/validate_docs.py` が
-落ちるようにし、`T0/G0 rebaseline`、9 段階中 1 段階目、`late pre-exit`、
-G0 exit 未達の phase-position snapshot drift を管理します。canon edit、phase
-/ gate movement、percentage-as-gate、runtime / sample / workflow status change
-は主張しません。
-
-`plan/151` は Discord webhook secret validator guard です。tracked docs /
-source に concrete Discord webhook URL shape が入った場合に
-`scripts/validate_docs.py` が path / line だけを出して失敗するようにします。
-webhook credential の保存、出力、通知挙動変更、security completeness claim は
-主張しません。
-
-`plan/152` は Discord notification file inputs です。通知文に backtick、
-quote、newline、長い commit list など shell が解釈し得る文字が含まれる場合に
-`discord_notify.py` の `--summary-file` / `--next-step-file` を使えるようにし、
-shell command substitution による通知文欠落を避けます。Webhook storage、
-delivery guarantee、phase / gate movement は主張しません。
-
-`plan/153` は T0/G0 closeout evidence と decision packet の LAB memory です。
-ADR-0013 は五つの ADR、`root/glossary` baseline、LAB-demotion evidence を pinned
-repository cut で G0-D1 として accept し、G0-D4 を checkpoint-scope で waive
-しました。P109 の `game` highlighter correction を含む五つの source-hierarchy
-control は Git blob hash で pin されています。これは semantic LAB demotion の
-完全証明ではありません。
-
-`plan/155` と canon の `PROPOSAL-002` / ADR-0013 は、T0-specific
-phase-governance JSON profile を採択し、一回限りの derived artifact を
-`pass` として記録します。これは SCN conformance level や tool implementation
-ではありません。G0-D3 は explicit defer のため、G0 exit、T1 entry、proof、
-runtime/product、OBL/sample status は未成立のままです。
-
-## current active floor
-
-active LAB clean sample evidence は `samples/clean-near-end/` です。base current-L2 corpus は `samples/current-l2/`、active Lean mechanization evidence と LAB-only statement-shape drafts は `samples/lean/` に置きます。
-
-- `typing/`
-  finite-index first strong typing layer
-- `order-handoff/`
-  publication / witness / handoff relation family
-- `model-check/`
-  Peterson / broken mutex による second-line verification
-- `modal/`
-  `stable` / `later` / `published(room)` / `witnessed(...)` の current mode line
-- `sugoroku-world/`
-  empty world server へ SugorokuGame を runtime attach する Mir / Mirrorea vertical slice
-- `samples/lean/lab-statements/`
-  compile-check only の Lean statement-shape draft。current draft は
-  OBL-001 / OBL-020 / OBL-021 / OBL-024 / OBL-025 で、canon OBL status movement、proof discharge、
-  final theorem contract ではない。
-
-旧 active sample line は active path から外し、archive に退避しています。
-
-## Mirrorea line の現在地
+Mir の `.mir` を意味の正本とし、そこから配置・明示通信・検証・観測・安全な
+evolution を導ける仮想空間基盤を作ることです。Mir、Mirrorea、PrismCascade、
+Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱います。
 
 ```text
-OS/network substrate
-  -> Mir core
-  -> Typed external boundary
-  -> Mirrorea fabric/runtime
-  -> practical toolchain
-  -> Spaces product
-  -> Reversed Library
+.mir source
+  -> Surface parser / elaboration
+  -> Core Mir / typed IR / proof obligations
+  -> checker / runtime
+  -> projection / provider boundary / devtools evidence
 ```
 
-- **alpha-0 evidence line**
-  LAB memory in `specs/13..17`、`plan/39..43`、`samples/alpha/` が current-scope evidence を記録します。Stage A..F は evidence reference であり、operational α-0.5 / α-0.8 / α-0.9 completion ではありません。
-- **practical alpha-1 first-floor / workflow line**
-  LAB memory in `specs/18`、`plan/44`、`samples/practical-alpha1/` が first-floor toolchain を記録します。`scripts/practical_alpha1_integrated_workflow.py check-all --format json` は bounded developer workflow を再現しますが、product/public-ready α-1 ではありません。
-- **operational alpha theory-freeze line**
-  LAB memory in `specs/19..24`、`plan/45..49` が α-0.5 local observable runtime、α-0.8 same-session hot-plug runtime、α-0.9 session-bound devtools readiness を記録します。対応 helper は bounded same-session workflows を再現します。
-- **product alpha-1 line**
-  LAB memory in `specs/25`、`plan/50`、`samples/product-alpha1/demo/`、`scripts/product_alpha1_release_check.py` が product alpha release-candidate workflow を記録します。Docker 込みの release check が accepted のとき、controlled alpha product workflow として実用確認済みと読めます。
-- **operational product sample suite**
-  LAB memory in `specs/26..27`、`plan/51..52`、`samples/product-alpha1/operational/`、`scripts/operational_product_samples.py` が canonical operational suite を記録します。six roots、shared attach packages、projection inventory、portal/shard/gradient cuts、template-only starter catalog、backend inventory、scope helper blocks を保持します。
-- **Full System V1 source-first line**
-  LAB memory in `specs/33..38`、`plan/58..63`、`progress.md`、`tasks.md` が current roadmap snapshot を記録します。latest closed package は `P-FSV1-99 final audit` で、current promoted package はありません。ここでは Product Alpha-1 を final product に昇格せず、textual Mir、typed IR、bounded effectful runtime、PoseGraph runtime、bounded pose save/devtools、projection IR + boundary schemas + bounded local role split、bounded provider admission、renderer pose backend、source-first operational suites、portal/shard/gradient source suites、bounded release check、最後に claim/non-claim audit まで自走で閉じました。
-- **Surface Mir alpha line**
-  LAB memory in `specs/39..43`、`plan/64..68`、`progress.md`、`tasks.md` が closed Surface alpha roadmap snapshot を記録します。`P-SURF-01` has actualized the parser floor in `crates/mir-ast::surface_alpha`, `samples/full-system-v1-surface/syntax/`, and `scripts/surface_mir_samples.py`; `P-SURF-02` has actualized the indexed-state semantic checker floor; `P-SURF-03` / `P-SURF-04` have actualized elaboration and generated communication evidence; `P-SURF-05` has actualized role admission / capability grant evidence; `P-SURF-06` has actualized source patch hot-plug evidence; `P-SURF-07` has actualized source operational roots for WorldCore / MembershipChat / Sugoroku / Portal / TwoShard / Gradient with `E2E-SURF-01..12`; `P-SURF-08` has actualized static devtools diagnostics rows `DEV-01..02`; `P-SURF-99` reran full validation and compatibility anchors. Current promoted Surface package is none. Canonical place-scope syntax is `S { ... }`; `S[ ... ]` is rejected and is not sugar.
+実装上の層とその関係は `docs/diagrams/layer-stack.mmd`、理論から実装までの
+進行と判断点は `docs/diagrams/workflow.mmd` を読むと確認できます。
 
-## いま何があり、何がまだ無いか
+## 現在の位置
 
-既にあるもの:
+- canon 上は `T0/G0 rebaseline`。G0 exit と T1 entry はまだありません。
+- T0-T2 は、既存 canon に接続した非休眠の LAB research work unit を、
+  `research-complete` または `decision-ready` まで自走する研究段階です。
+  Gate exit、ADR effectivity、L0/L1 決定、`theory/11` の proof status は owner
+  と canon process の責務です。
+- Product Alpha、Full System V1、Surface sample は限定された runnable LAB
+  evidence です。最終言語・最終ABI・実 transport・分散永続・public product を
+  意味しません。
 
-- practical checker / runtime / hot-plug / transport / devtools / save-load / preview の **distinct carrier split**
-- event DAG export、observer-safe route trace、membership timeline export、fallback degradation export、redacted observer view、report-local retention query trace
-- local-only save/load roundtrip と stale-membership non-resurrection first-floor rows
-- attach-time auth / rate-limit / object preview / deferred detach の first-floor rows
-- bounded α-0.5 session carrier 上の minimal typed external `AddOne` host-I/O adapter lane
-- bounded α-0.8 same-session hot-plug runtime over the same session carrier
-- bounded α-0.9 session-bound devtools export over the same carrier
-- bounded practical α-1 integrated workflow carrier over the existing first-floor and operational evidence
+この境界の詳細と停止条件は `plan/156-t0-t2-research-autonomy-envelope.md`、
+実行可能サンプルの正確な分類は `samples_progress.md` にあります。
 
-Correction:
+## Roadmap の読み方
 
-- `AddOne` in current alpha evidence is a typed external host-I/O adapter lane.
-- It is not evidence that Mir already owns general arithmetic, variables, arrays, records, or control-flow computation.
-- The first future proof point is pure `add_one` represented and executed by Mir, with host input/output kept at typed external boundaries.
+| 段階 | 主眼 | 現在の扱い |
+| --- | --- | --- |
+| T0 | 語彙・decision・G0 | current。exit は未承認。 |
+| T1 | 計算体系・G1-G3 statement | 研究は可能、公式 entry / exit は未成立。 |
+| T2 | OBL-020/021/002 proof skeleton・G5 statement | 研究は可能、proof status は `theory/11` が唯一の正本。 |
+| I1 | 単一プロセス reference implementation | T1/T2 の後。全SCNの C-static/C-runtime が必要。 |
+| I2 | process 内 multi-place | I1 後。 |
+| I3 | 実 socket transport | 初めて LAN 上で実際に複数人が動かせる段階。 |
+| I4-I6 | 永続/patch、View、分散永続/federation | 後段。 |
 
-まだ無いもの:
+各段階の gate 条件は `mirrorea_canon/plan/00-gates.md` と
+`mirrorea_canon/plan/01-phases.md` が正本です。
 
-- final public viewer / telemetry ABI
-- durable audit backend / remote retained-artifact retrieval
-- distributed durable save/load
-- final-public product hardening beyond the product alpha release-candidate workflow
-- final Surface Mir devtools viewer / telemetry ABI beyond the P-SURF-08 static diagnostics evidence floor
-- final source patch hot-plug ABI / distributed durable migration planner / production patch registry
+## 作業の管理
 
-## 重要な境界
+- `docs/project-status.md`: 人間向けの現在地、停止線、判断待ち。
+- `progress.md`: 三軸の進捗スナップショットと最近の作業。
+- `tasks.md`: 自走可能な work unit と、owner 判断または研究で扱う未決事項。
+- `plan/`: 詳細な根拠、比較、方針、実行計画。
+- `samples_progress.md`: runnable sample の dashboard。
+- `docs/reports/`: task ごとの不変な証跡。
 
-- `Place` は participant と同一ではなく、state / queue / capability / visibility / observation frontier を持つ execution locus として読む
-- standard I/O は Mir core primitive ではなく、typed external adapter boundary 側に残す
-- auth / authorization / membership / capability / witness は transport に潰さない
-- visualization / telemetry は label / authority / redaction / retention を持つ typed effect として扱う
-- `atomic_cut` は place-local rollback frontier であり、durable/distributed commit ではない
-- local save/load は distributed durable save/load と同一ではない
-
-## どこを次に読むか
-
-- live status / next reopen point:
-  `progress.md`、`tasks.md`
-- runnable sample dashboard:
-  `samples_progress.md`
-- practical alpha-1 first-floor:
-  `specs/18-practical-alpha1-scope.md`、`plan/44-practical-alpha1-roadmap.md`
-- operational alpha theory freeze:
-  `specs/19-verification-stratification.md`
-  `specs/20-cut-save-load-semantics.md`
-  `specs/21-auth-layer-algebra.md`
-  `specs/22-observability-devtools-semantics.md`
-  `specs/23-typed-external-host-boundary.md`
-  `specs/24-operational-alpha05-alpha08-readiness.md`
-  `plan/45-operational-alpha05-roadmap.md`
-  `plan/46-operational-alpha08-roadmap.md`
-  `plan/47-operational-alpha09-devtools-roadmap.md`
-  `plan/48-theory-freeze-proof-obligations.md`
-  `plan/49-host-io-and-session-runtime-roadmap.md`
-- product/public alpha-1 boundary:
-  `specs/25-product-alpha1-public-boundary.md`
-  `plan/50-product-alpha1-public-boundary-roadmap.md`
-- operational product sample suite:
-  `specs/26-operational-product-sample-suite.md`
-  `specs/27-spatial-portal-and-shard-extension-boundary.md`
-  `plan/51-operational-product-sample-roadmap.md`
-  `plan/52-portal-spatial-world-roadmap.md`
-- Mir computational core / PoseGraph / projection-backend boundary:
-  `specs/28-mir-computational-core.md`
-  `specs/29-transform-posegraph-semantics.md`
-  `specs/30-projection-and-backend-boundary.md`
-  `specs/31-engine-wasm-ffi-adapter-boundary.md`
-  `plan/53-mir-computational-core-roadmap.md`
-  `plan/54-transform-posegraph-roadmap.md`
-  `plan/55-projection-backend-roadmap.md`
-  `plan/56-engine-adapter-roadmap.md`
-- autonomous execution contract:
-  `specs/32-autonomous-execution-and-completion-contract.md`
-  `plan/57-autonomous-computational-core-master-plan.md`
-- Full System V1 source-first roadmap:
-  `specs/33-full-system-v1-scope.md`
-  `specs/34-textual-mir-alpha-grammar.md`
-  `specs/35-mir-typed-ir-and-interpreter.md`
-  `specs/36-projection-ir-and-boundary-preservation.md`
-  `specs/37-posegraph-runtime-semantics.md`
-  `specs/38-engine-provider-admission.md`
-  `plan/58-full-system-v1-roadmap.md`
-  `plan/59-textual-mir-roadmap.md`
-  `plan/60-computational-runtime-roadmap.md`
-  `plan/61-posegraph-runtime-roadmap.md`
-  `plan/62-projection-backend-roadmap.md`
-  `plan/63-engine-provider-roadmap.md`
-  `docs/hands_on/full_system_v1_roadmap_01.md`
-  `docs/research_abstract/full_system_v1_roadmap_01.md`
-- Surface Mir alpha source-authority roadmap:
-  `specs/39-surface-mir-placement-elaboration.md`
-  `specs/40-indexed-state-semantics.md`
-  `specs/41-role-admission-and-capability-grant.md`
-  `specs/42-source-patch-hotplug-semantics.md`
-  `specs/43-surface-mir-v1-alpha-scope.md`
-  `plan/64-surface-mir-placement-roadmap.md`
-  `plan/65-indexed-state-roadmap.md`
-  `plan/66-role-admission-roadmap.md`
-  `plan/67-source-patch-hotplug-roadmap.md`
-  `plan/68-surface-full-system-v1-roadmap.md`
-  `docs/hands_on/surface_mir_alpha_01.md`
-  `docs/hands_on/source_patch_hotplug_01.md`
-  `docs/research_abstract/surface_mir_alpha_01.md`
-- hands-on product alpha commands:
-  `docs/hands_on/product_alpha1_01.md`
-  `docs/hands_on/operational_product_sample_01.md`
-  `docs/hands_on/operational_package_authoring_01.md`
-  `docs/hands_on/operational_backend_inventory_01.md`
-  `docs/hands_on/operational_portal_shard_starter_boundary_01.md`
-- docs-first computational / PoseGraph guides:
-  `docs/hands_on/minimal_alpha1_patterns_01.md`
-  `docs/hands_on/mir_computational_core_01.md`
-  `docs/hands_on/transform_posegraph_01.md`
-  `docs/hands_on/autonomous_execution_01.md`
-  `docs/research_abstract/minimal_alpha1_patterns_01.md`
-  `docs/research_abstract/mir_computational_core_01.md`
-  `docs/research_abstract/autonomous_execution_01.md`
-- legacy hands-on closeout commands:
-  `docs/hands_on/current_phase_closeout_01.md`
-
-## snapshot の読み方
-
-- `progress.md` と `samples_progress.md` は進捗率ではなく workflow status / evidence classification を primary metric にする
-- helper / sidecar / report / expected JSON / first-floor runner は completion ではなく evidence として読む
-- `100%` は外部開発者が実際に再現・使用できる operational workflow または product/public layer だけに使う
-- `PA1W-*` は bounded practical workflow ready として読み、product/public-ready α-1 とは読まない
-
-## agent / review operations
-
-- `.docs/oracle-chatgpt-pro-operations.md` は、ChatGPT 5.5 Pro Extended
-  Oracle browser consults の repo-local 運用メモである。
-- Oracle consult は advisory review input であり、`mirrorea_canon/`、
-  legacy `specs/` / `plan/`、`progress.md`、`tasks.md`、
-  `docs/reports/` の source hierarchy を置き換えない。
-- Oracle 系コマンドは分単位で待つ。遅い場合も重複起動せず、まず
-  `oracle status` / `oracle session` で状態を確認する。
+調査で semantic choice、SCN expectation の変更、canon-LAB 衝突、新しい実装レーン、
+proof status 更新、Gate exit が必要になったら、agent は止まり、選択肢・影響・
+反例・Lean/実行証拠・非主張を含む decision bundle を作ります。

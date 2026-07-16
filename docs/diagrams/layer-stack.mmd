@@ -1,10 +1,17 @@
-flowchart TD
-  L0[Existing OS / Network / Device Runtime]
-  L1[Mir Core]
-  L2[Mirrorea Fabric]
-  L3[Shared Space / Shared State]
-  L4[Domain Engines]
-PrismCascade / VR / Collaboration
-  L5[Applications / Communities / Reversed Library]
+flowchart TB
+  Source[Mir source: .mir files] --> Surface[Surface Mir\nsyntax and elaboration]
+  Surface --> Core[Core Mir / typed IR\nexplicit placement and communication]
+  Core --> Verify[Checker / proof obligations\ncontracts and invariants]
+  Core --> Runtime[Mirrorea runtime\nstate, execution, evolution]
+  Runtime --> Projection[Projection / deployment plan]
+  Projection --> Providers[Host, provider, browser, engine adapters]
+  Runtime --> Observe[Typed effects\nobservation, telemetry, redaction]
 
-  L0 --> L1 --> L2 --> L3 --> L4 --> L5
+  Prism[PrismCascade] -. separate performance-sensitive kernel .-> Runtime
+  Wiring[Typed-Effect Wiring Platform] -. typed external boundary .-> Providers
+  Apps[Worlds / games / applications\nuser-defined concepts] --> Source
+
+  classDef canon fill:#dcefe2,stroke:#22543d,color:#102a22
+  classDef lab fill:#edf2f7,stroke:#4a5568,color:#1a202c
+  class Source,Surface,Core,Verify canon
+  class Runtime,Projection,Providers,Observe,Prism,Wiring,Apps lab
