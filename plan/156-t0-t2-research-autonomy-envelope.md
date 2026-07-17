@@ -930,6 +930,37 @@ latency, provider/transport ABI, OBL-023 statement/proof, or status. Stop
 `decision-ready` before selecting any of those interfaces. Exact evidence is
 in Report 2272.
 
+## T-RESEARCH-020: OBL-010 consistent-cut checker kernel (research-complete)
+
+**Selection:** theory/04 directly gives both the generating-family transitive
+closure and the `Consistent(Kc)` prefix-closure definition. This is separate
+from T-RESEARCH-014's load-restoration question and T-RESEARCH-018's
+local-rollback question. The source can therefore pressure the direct closure
+lemma without choosing a load, rollback, or persistence interface.
+
+**Question:** what part of OBL-010 checker soundness follows before a canonical
+finite checker is selected?
+
+**Source reading:** theory/04 identifies causal order as the transitive closure
+of every named direct generating edge and defines a consistent cut by prefix
+closure. Theory/01 supplies the occurrence-DAG role; BND-002 fixes the
+decidable-checker direction; ADR-0007 keeps the relation high-level. None
+defines a finite carrier, enumeration, decider, checker result, or diagnostics.
+
+**Result:** **one direct conditional mathematical kernel** plus **one remaining
+full-checker formalization boundary**. A disposable generic Lean theorem proves
+that closure under each direct predecessor implies closure under the transitive
+closure. A finite two-edge model shows a checker that validates only
+`send -> receive` can accept an observe-only cut while omitted
+`publish -> observe` makes it inconsistent. The negative model is not a canon
+counterexample; it isolates complete-family coverage as required evidence.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical events, history, cuts, generators, finite
+enumeration, checker algorithm/result, diagnostics, SaveObject, Z-cycle,
+persistence ABI, OBL-010 statement/proof, or status. Stop `decision-ready`
+before selecting any of those interfaces. Exact evidence is in Report 2273.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

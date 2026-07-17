@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:57 JST
+最終更新: 2026-07-17 19:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -171,6 +171,14 @@ explicit one-frame assumption; an unstructured-label model shows why labels do
 not provide the missing binding relation. It selects no consumer, stream,
 provider, transport, clock, theorem, status, or lifecycle interface.
 
+`T-RESEARCH-020` is `research-complete` as an OBL-010 consistent-cut checker
+kernel audit. Theory/04 directly fixes the generating-family transitive
+closure and prefix-closure definition; a trusted generic kernel proves direct
+predecessor closure sufficient for transitive prefix closure. A two-edge
+countermodel shows why a partial checker is unsound. The finite checker
+carrier, exhaustive edge coverage, decider, result, and diagnostic interface
+remain unselected, so this is not an OBL statement, proof, or status change.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -276,6 +284,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:04 JST: Completed the OBL-010 consistent-cut checker kernel
+  audit. Direct-edge closure entails prefix closure under the selected generic
+  relation; finite carrier, exhaustive edge coverage, checker, and diagnostic
+  relations remain unselected.
 - 2026-07-17 18:57 JST: Completed the OBL-023 temporal-coherence audit. The
   two-layer-time and no-split-frame policy remain intact; consumer, atomic
   group, frontier, interpretation, coherence, and clock/latency relations
