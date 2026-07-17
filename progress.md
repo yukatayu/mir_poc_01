@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 10:23 JST
+最終更新: 2026-07-17 11:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -38,9 +38,11 @@ The target carries source semantics through placement, explicit communication, c
 countermodels established the OBL-001/020/021 statement boundary, one
 `[E-WRITE]` store-key clause was checked under a value-only/frame reading, and
 one `[E-OBS]` graph kernel was proved under a fresh, prefix-preserving,
-incoming-only extension. The last is conditional LAB evidence, not the canon
-definition of append or a complete `[E-OBS]` rule. No canon theorem, status, or
-lifecycle changed. The canonical lifecycle remains
+incoming-only extension. `T-RESEARCH-005` is also `research-complete`: an
+`[E-DEGRADE]/[E-REACQ]` two-rule scratch kernel preserves only prior defined
+map entries under explicit experiment-local support, framing, and lineage
+assumptions. None is a canon append, lineage, or full-step definition. No canon
+theorem, status, or lifecycle changed. The canonical lifecycle remains
 `mirrorea_canon/plan/01-phases.md`; the LAB work-selection and stop boundary is
 `plan/156-t0-t2-research-autonomy-envelope.md`.
 
@@ -49,12 +51,12 @@ foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
 capability/witness carrier or JSON-to-OBL-001 interpretation. This is an
 evidence-route blocker, not a canon counterexample; it creates a decision-ready
-owner item and leaves the next LAB research unit unselected.
+owner item for the bridge only.
 
-The owner-facing bundle now records the authority cut, alternatives, evidence
-level, non-claims, and reopen trigger for that item. A general instruction to
-continue autonomous work is applied only up to this decision-ready stop: it is
-not recorded as an owner defer or bridge authorization.
+The owner-facing bundle records the authority cut, alternatives, evidence
+level, non-claims, and reopen trigger for that item. The later direct theory
+objective allows unrelated existing-lane research around the dormant bridge,
+but is not recorded as an owner defer or bridge authorization.
 
 ## milestone map
 
@@ -117,8 +119,8 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
-| Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; generic continuation is not a disposition; current LAB recommendation is defer |
-| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003 complete; no successor selected without a fresh canon-grounded criterion |
+| Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
+| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
@@ -131,7 +133,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce only as needed |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
-| 5 | theorem / model-check bridge | T-RESEARCH-001/002/003 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
+| 5 | theorem / model-check bridge | T-RESEARCH-001/002/003/005 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
 | 8 | domain/application realization | bounded samples exist; products are later | heavy | later dependency |
@@ -148,6 +150,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 11:57 JST: Completed the conditional `[E-DEGRADE]/[E-REACQ]`
+  lineage kernel after adversarial review: prior scratch entries remain defined
+  and nondecreasing only under stated experiment-local assumptions; no canon
+  lineage, OBL, Gate, Phase, or proof-status claim changed.
 - 2026-07-17 10:23 JST: Independent re-review passed the corrected OBL-001
   bridge decision bundle; it remains a pending owner disposition with no new
   lane, artifact, or successor research selection.

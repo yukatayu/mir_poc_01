@@ -231,8 +231,9 @@ or that the request is unauthorized.
 
 **Disposition:** `T-RESEARCH-004` is **not selected** and is not
 `research-complete` or `decision-ready`. No fixture, helper, schema, wrapper,
-Lean interpretation, or artifact identity was added. The next autonomous LAB
-research unit remains unselected.
+Lean interpretation, or artifact identity was added. At this preflight close,
+no successor was selected; the later direct-theory resumption reading below
+governs unrelated eligible research units.
 
 **Separate decision-ready blocker:** a bridge-specific owner disposition would
 be needed before any separately scoped concrete-evidence bridge design work,
@@ -243,6 +244,92 @@ waive the pre-T1 moratorium. The current LAB recommendation is to defer the
 bridge until an OBL-001 proof-facing package actually needs it. This is an
 evidence-route decision, not a request to change canon authority semantics,
 Gate/Phase state, or proof status.
+
+## Work-selection resumption reading (2026-07-17)
+
+The owner's later, direct objective to autonomously solidify the theory while
+preserving its purpose and rejecting proof laundering authorizes unrelated
+existing-lane LAB research selection. It does not name the OBL-001 bridge, so
+it is not a bridge-specific owner disposition and must not be recorded as an
+explicit defer.
+
+For work selection only, the bridge remains absent, dormant, and non-blocking:
+do not design it, create an artifact, or treat OBL-001 itself as deferred;
+reopen it only when an OBL-001 proof-facing package shows that a concrete
+interpretation is necessary. This supersedes the former broad queue stop for
+other eligible research units without altering the bridge bundle's provenance
+condition, canon, Gate/Phase state, or proof status.
+
+## T-RESEARCH-005: `[E-DEGRADE]` / `[E-REACQ]` restricted lineage kernel (research-complete)
+
+**Question:** can a smallest, explicitly conditional model make the project
+axis "monotone degradation; explicit fresh recovery" mechanically precise
+without silently choosing the canonical representation of lineage, history,
+or the full MirCore step relation?
+
+**Source cut:** `mirrorea_canon/theory/01-mircore-v0.md` (the `L` carrier,
+the chain-position well-formedness wording, `[E-DEGRADE]`, `[E-REACQ]`, and
+OBL-020), `theory/04-ordering-and-cuts.md` (degrade-to-later-access causal
+family), `theory/06-existence-fallback.md` (THM-002), ADR-0004, and SCN-08.
+The cited canonical THM-002, not a scratch `history maximum` predicate, is the
+source of the nondecrease direction.
+
+**Experiment:** two disposable Lean files under
+`/tmp/mirrorea-t-research-005/` define only an experiment-local `ChainState`:
+lineage keys are `(witness, epoch)` pairs; positions are an `Option Nat` map;
+`seen` is a support list; and `SupportInvariant` means only
+`defined-position -> seen`. The two scratch constructors are a target-only
+nondecreasing update and a reacquisition that inserts an absent pair while
+framing older entries. `Run` is their reflexive-transitive closure only.
+
+**Positive result:** conditional on that representation and its constructor
+premises, every map entry defined at the start of a restricted run remains
+defined and pointwise nondecreasing. A named two-step restricted run degrades
+one old entry and initializes a distinct experiment-local pair at a lower
+index without changing prior entries. This is neither a selected/active
+lineage theorem nor the "only via explicit reacquire occurrence" half of
+THM-002.
+
+**Negative evidence:** a direct `2 -> 1` update falsifies the pointwise
+property; an arbitrary unrelated `4 -> 0` mutation shows that some non-target
+preservation condition is needed for this global property (not that
+target-only framing is necessary); a deliberately weakened reacquire relation
+can reset an existing key and violates the property; pair inequality is shown
+strictly weaker than separate witness and epoch inequality; and two states
+with a state-local `position <= maximum` invariant can still regress. The last
+model is not canon's history maximum; it only rules out substituting separate
+state-local inequalities for a transition monotonicity claim.
+
+**Binding and non-claims:** `SupportInvariant` is not MirCore
+well-formedness; `seen`, `Option Nat`, target-only framing, indefinite old
+entry persistence, lineage-as-pair, pair absence, and the two-rule `Run` are
+all experiment-local sufficient conditions. The monotonicity proof uses pair
+absence and framing; it does not establish the necessity, global freshness, or
+canonical meaning of the constructor's witness/epoch inequalities. No full
+MirCore `Config`, lease/admissibility, chain access, occurrence DAG,
+rollback/cut/load, other-step frame, canonical history-max, THM-002, OBL-007,
+OBL-008, OBL-020, SCN conformance, or proof-status claim follows.
+
+**Reproducibility:** on Lean 4.29.1, both scratch files compiled with
+`lean --trust=0`; a named-source scan found no `sorry`, `admit`, declared
+axiom, `opaque`, `unsafe`, `partial`, or `implemented_by`. `#print axioms`
+reported the sole dependency `propext` for the two audited positive theorems.
+The exact commands, exit results, source hashes, and independent-review
+boundary are recorded in Report 2258. The scratch files remain disposable and
+untracked.
+
+**Review and classification:** the first Oracle review found scope and
+negative-evidence wording defects; the scratch model was corrected and a
+second exact-file review returned PASS. The review is advisory only. The result
+is `research-complete`, not `decision-ready`: no canonical semantic choice is
+needed to preserve this conditional result, but any attempt to adopt its
+representation or constructor equations as canon requires a separate stop and
+decision bundle.
+
+**Next selection point:** choose a further rule x invariant clause x falsifier
+only under this plan's selection rule. Do not generalize this restricted run to
+OBL-020 or use it to pull G2 statement work ahead of the foundational OBL-020
+and OBL-021 boundary.
 
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
@@ -348,9 +435,10 @@ guard, two-disposition limit, identifier cut, non-sufficiency wording, and
 reopen separation were corrected. A final re-review returned PASS with no new
 scope or authority defect.
 
-**Current disposition:** waiting for the owner to record one of the two
-presently admissible dispositions. No autonomous successor research unit is
-selected in the meantime.
+**Current bridge-specific disposition:** waiting for the owner to record one
+of the two presently admissible dispositions. The later direct theory objective
+permits unrelated existing-lane research selection around this dormant item;
+it does not record the bridge as explicitly deferred or authorize its design.
 
 ## Current non-claims
 

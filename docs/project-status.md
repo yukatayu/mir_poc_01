@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 10:16 JST
+最終更新: 2026-07-17 11:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
-| いまの研究 | OBL-001/020/021 の反例監査、`[E-WRITE]` store-key、`[E-OBS]` append kernel を `research-complete` とした。後者は incoming-only graph extension の条件付き結果であり、canon の append 定義ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| いまの研究 | OBL-001/020/021 の反例監査、`[E-WRITE]` store-key、`[E-OBS]` append kernel、`E-DEGRADE / E-REACQ` の二規則限定 lineage kernel を `research-complete` とした。いずれも条件付き LAB evidence であり、canon の rule / append / lineage 定義ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線
@@ -54,8 +54,9 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 - OBL-001 の concrete-evidence bridge には bridge 固有の owner disposition が
   必要である。これは scoped design 比較だけを許し得るもので、committed bridge や
   moratorium 例外を自動的に許可しない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
-- 一般的な「自走を継続する」指示は bridge の defer / authorization を選んだ記録
-  ではない。次の研究単位を選ばず、owner の明示記録まで止まる。 |
+- 一般的な継続指示は bridge の defer / authorization を選んだ記録ではない。
+  ただし今回の直接的な理論自走指示は、bridge を未選択のまま他の既存 lane を
+  選ぶことだけを許す。bridge の設計・defer 記録・artifact は許可しない。 |
   `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## オーナーの確認・判断待ち
