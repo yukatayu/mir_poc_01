@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:41 JST
+最終更新: 2026-07-17 19:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -223,6 +223,15 @@ bridge; OBL-019 repeats the E-PATCH frame gap. Theory/10 OBL-024/025 remains
 the next independent source family, while its existing LAB statement drafts
 remain non-normative and unpromoted.
 
+`T-RESEARCH-026` is `research-complete` as an OBL-024 diagnostic soundness
+audit: `0 direct / 0 delegated / 1 missing` coupled diagnostic-emission
+association / replay formalization boundary. Theory/10 and spec/07 fix the
+target direction and carrier fields, but not the emitted-diagnostic association,
+rule/premise/bindings, replay/exact-at relation, or diagnostic equality. A
+trusted Boolean twin shows that carrier shape alone does not force soundness.
+Existing E-ROW projection and LAB drafts remain evidence only, not a theorem,
+ABI, status, or conformance claim.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -328,6 +337,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:45 JST: Completed the OBL-024 diagnostic-soundness audit.
+  Carrier fields and policy direction remain fixed; emission association,
+  replay/exact-at semantics, and diagnostic equality remain one unselected
+  formalization boundary.
 - 2026-07-17 19:41 JST: Completed the remaining-ledger closure map. Proof
   dependents and known overlaps are separated from independent source work;
   theory/10 diagnostics is the next eligible family without promoting LAB

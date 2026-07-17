@@ -1134,6 +1134,44 @@ interpret a dependent lemma, promote a LAB draft, select a diagnostic or repair
 ABI, reopen OBL-019, or change a Gate/Phase. It is a selection map only. Exact
 evidence is in Report 2278.
 
+## T-RESEARCH-026: OBL-024 diagnostic soundness boundary (research-complete)
+
+**Selection:** theory/10 has a distinct diagnostic soundness target and the
+ledger map identifies it as independent of the parent statement/proof and
+load-state boundaries. Existing OBL-024 LAB drafts and E-ROW projections are
+read as evidence only, not as delegated formalization or a final diagnostic
+interface.
+
+**Question:** does the theory/10 and diagnostics-format source cut determine
+the proof-facing relation from an emitted Diagnostic to the actual rejected
+judgment, reported rule/premise/bindings, and replay failure exactly there?
+
+**Source reading:** theory/10 directly fixes the Diagnostic field vocabulary,
+the named-rule/named-premise blame direction, and OBL-024's target property.
+Spec/07 fixes required JSON-facing fields and spans; theory/03 identifies
+Diagnostic as the rejection arm of the elaboration judgment. The sources do
+not define diagnostic emission/association, canonical rule instances or
+premises, binding reconstruction, replay granularity, exact-at relation,
+multi-span blame relation, or diagnostic equality/ordering. Existing LAB
+drafts explicitly retain these as abstract or report-local vocabulary.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled diagnostic-emission
+association / replay formalization boundary**. A disposable Boolean model has
+an emitted diagnostic with reported rule/premise/bindings in both an aligned
+and divergent instance. The divergent instance lacks actual-rule,
+actual-premise, and replay-at-reported-premise links, so it has the carrier
+shape but fails the candidate soundness relation. It is not a canon
+counterexample; it isolates why carrier fields alone cannot enforce the target
+property.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define final Diagnostic/JSON, a judgment or rejection carrier,
+emission/association, rule/premise IDs, bindings, replay engine or relation,
+exact-at semantics, span blame/equality/ordering, OBL-024 statement/proof, or
+status. It does not promote the current LAB projection or draft. Stop
+`decision-ready` before selecting any of those interfaces. Exact evidence is
+in Report 2279.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
