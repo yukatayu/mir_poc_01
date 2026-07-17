@@ -606,6 +606,55 @@ lineages, histories, events, freshness, `L.position`, `[E-DEGRADE]`,
 `theory/04`, `theory/06`, ADR-0004, SCN-08, the ledger, a Gate, or a Phase.
 Exact evidence is in Report 2264.
 
+## T-RESEARCH-012: THM-004 / OBL-015 mutation-origin boundary audit (research-complete)
+
+**Question:** excluding THM-004 and OBL-015 as premises, does the source cut
+derive a complete proof-facing bridge from every owner-state mutation to either
+an owner-local declared transition or a specific validating capability use?
+
+**Source reading:** `theory/05` and ADR-0005 fix the authority policy: delegated
+or capability-mediated authority is carried only by grant lineage, validated on
+verdict, principal, role, target, epoch, incarnation, required witness, and
+policy version. THM-004 separately permits owner-local mutation under the
+owner's declared transitions. `theory/04` gives the `capability_grant ->
+capability_use` causal generator. `theory/01` says every `use` has a matching
+grant ancestor, sketches `[E-SERVE]` validation followed by an operation, names
+owner-local writes, and lets `[E-ADMIT]` issue grants/witnesses. This audit does
+not weaken any of those policy statements.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled
+mutation-origin/authorization formalization boundary**. The sources do not
+define an occurrence-level association from a mutation to a particular
+validating use/request/capref, a complete owner-local classifier or declared
+transition relation, a complete trace/step construction linking validation,
+use, service, and mutation, or their required frame facts. The single missing
+item is the coupled boundary, not an adopted Boolean premise.
+
+**Adversarial evidence:** a disposable trusted three-event model has
+`grant < use < mutation`. The `use < mutation` edge is an explicit favorable
+experiment-local strengthening, not a canonical causal generator. Grant and
+use match every listed lineage coordinate, the history is acyclic, and the
+mutation is not owner-local; nevertheless an everywhere-false
+`MutationUses(mutation, use)` makes the delegated theorem shape false. Its twin
+changes only that experiment-local relation and satisfies the finite delegated
+shape. The evidence isolates semantic association despite favorable causal
+precedence; neither carrier is MirCore nor a legal canonical trace.
+
+**Classification:** no owner decision is needed to record this bounded audit.
+Before a proof-facing OBL-015 statement selects the trace, occurrence,
+owner-local, validation, or association interface, work must stop
+`decision-ready`. This result neither completes OBL-015/016 nor blocks
+unrelated eligible research.
+
+**Non-claims:** this audit does not cover the owner-local/declared-transition
+branch; define canonical traces, occurrences, state mutation, requests,
+caprefs, lineage equality, validation, causal closure, or `MutationUses`;
+show that the binary bridge is necessary, minimal, unique, or sufficient for a
+canonical statement; refute THM-004; establish anti-spoofing, runtime,
+conformance, lifecycle, revocation, load/rollback correctness; or change
+`theory/05`, ADR-0005, the ledger, a Gate, or a Phase. Exact evidence is in
+Report 2265.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

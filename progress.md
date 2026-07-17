@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 15:36 JST
+最終更新: 2026-07-17 16:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -94,6 +94,15 @@ lineage, origin/reacquire, freshness, and transition/frame relations from which
 a Lean statement could be derived. Two disposable finite models delimit those
 missing bindings; no theorem, status, or lifecycle changed.
 
+`T-RESEARCH-012` is `research-complete` as a THM-004 / OBL-015
+mutation-origin audit: `0 direct / 0 delegated / 1 missing` coupled
+formalization boundary. The canon directly fixes grant-lineage authority for
+delegated capability use and separately permits owner-local mutation. It does
+not yet define the proof-facing association from a particular mutation to a
+validating use/request/capref, the owner-local/declared-transition branch, or
+the complete trace/step link. A favorable-order three-event twin isolates only
+the experiment-local association; no theorem, status, or lifecycle changed.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -170,7 +179,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
-| Research | OBL-005 full source-level unit / OBL-006 confluence boundary / THM-002 statement boundary | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization |
+| Research | G2/G3 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
@@ -206,6 +215,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
   audit. The normative monotonicity and explicit-reacquire policy remains
   fixed; trace, lineage-origin, selection, freshness, and transition bindings
   remain a coupled formalization boundary before a Lean statement.
+- 2026-07-17 16:14 JST: Completed the THM-004 / OBL-015
+  mutation-origin/authorization audit. Delegated grant-lineage policy and the
+  owner-local alternative remain fixed; a favorable-order finite twin isolates
+  the missing association boundary without defining a canonical trace.
 - 2026-07-17 14:41 JST: Completed the bounded OBL-005 structural-flattening
   kernel. One reassociation preserves an experiment-local structural output;
   a hole context is meta-syntax, and reverse order / added-empty mutations
