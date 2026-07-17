@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:20 JST
+最終更新: 2026-07-17 19:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -195,6 +195,16 @@ failure-only checker, showing the full judgment needs complete rule coverage.
 The AST/parser, declarations, rule set, carriers, residual split, checker,
 diagnostic, theorem, and status interfaces remain unselected.
 
+`T-RESEARCH-023` is `research-complete` as an OBL-018 explicit-flow
+observer-safe kernel audit. Theory/07 directly forbids high-label state and
+raw witness/auth payloads in observer-safe views. A trusted finite projection
+to the agreed low position proves equality despite modeled high/raw variation;
+a high-state projection changes under the same variation. The latter is a
+negative control, not an observer-safe export or canon counterexample. The
+configuration/observer/export ABI, lattice and declassification, occurrence
+provenance, and collection equality/order/multiplicity remain unselected, so
+this is not a THM-005/OBL-017/018 statement, proof, or status change.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -300,6 +310,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:27 JST: Completed the OBL-018 explicit-flow audit. A
+  low-position-only redaction projection is invariant under modeled high/raw
+  variation; the configuration/export interface, lattice/declassification,
+  provenance, and collection equivalence remain unselected.
 - 2026-07-17 19:20 JST: Completed the OBL-003 Line-1 decidability audit. The
   finite failure-row subcheck is mechanically sound; complete rule coverage,
   AST/parser, declaration, carrier, residual, and checker/diagnostic relations

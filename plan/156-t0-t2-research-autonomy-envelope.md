@@ -1024,6 +1024,46 @@ checker/diagnostic result, Core ABI, OBL-003 statement/proof, or status. Stop
 `decision-ready` before selecting any of those interfaces. Exact evidence is
 in Report 2275.
 
+## T-RESEARCH-023: OBL-018 explicit-flow observer-safe kernel (research-complete)
+
+**Selection:** theory/07 calls OBL-018 the first explicit-flow proof fragment
+for THM-005. T-RESEARCH-013 audited the complete OBL-017 statement boundary,
+and expressly did not define the explicit-flow theorem. This source cut is
+strictly narrower: it uses the directly fixed observer-safe exclusions to
+test a finite projection without selecting the coupled statement interface
+that T-RESEARCH-013 left open.
+
+**Question:** what observer-safe noninterference fact follows from an explicit
+redaction projection before a canonical configuration, label lattice,
+declassification rule, ObservationEvent/export ABI, or collection equality is
+selected?
+
+**Source reading:** theory/07 directly states that observer-safe exports are
+invariant under high-label and raw witness/auth variation when low-label state
+agrees, and directly forbids high state, raw witness payloads, and raw auth
+evidence from observer-safe views. SCN-07 directly gives the position-only
+observer-safe case, while theory/02 prohibits transparent redaction weakening.
+The same source cut leaves OPEN-020's final lattice, declassification,
+observer context, occurrence/telemetry-to-row relation, and export identity /
+order / multiplicity semantics unselected.
+
+**Result:** **one direct conditional explicit-flow kernel** plus **one
+remaining full-proof formalization boundary**. A disposable Lean model defines
+an input with low position, high health, raw witness, and raw authorization;
+its observer-safe redaction projects only position. Equal low positions then
+yield equal exported rows, independently of all modeled high/raw fields. A
+separate high-state projection changes when only high/raw fields vary. The
+negative control is not observer-safe and is not a canon counterexample; it
+isolates the needed semantic link from redaction to the exported value.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define a MirCore configuration, labels or a lattice, flow order,
+declassification, authority check, retention, occurrence provenance,
+ObservationEvent/export ABI, observer context, event identity, collection
+equality, order, multiplicity, a complete THM-005/OBL-017 statement, an
+OBL-018 proof, or status. Stop `decision-ready` before selecting any of those
+interfaces. Exact evidence is in Report 2276.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
