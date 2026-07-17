@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 19:59 JST
+最終更新: 2026-07-17 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,8 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
-| いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、OBL-018 explicit-flow kernel、THM-003/OBL-009 successful-load restoration boundary、OBL-014 Z-cycle equivalence boundary、remaining-ledger research closure map、OBL-024 diagnostic soundness boundary、OBL-025 diagnostic completeness boundary、OBL-026 transparent-overlay composition boundary、OBL-028 revocation-monotonicity boundary、OBL-022 stream read-side boundary、OBL-027 atomic-cut rollback boundary、OBL-023 temporal-coherence boundary、OBL-010 consistent-cut checker kernel、OBL-004 no-undeclared-communication kernel、OBL-003 Line-1 decidability kernel、T0-T2 formalization decision map を `research-complete` とした。これらは正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、OBL-018 explicit-flow kernel、THM-003/OBL-009 successful-load restoration boundary、OBL-014 Z-cycle equivalence boundary、remaining-ledger research closure map、OBL-024 diagnostic soundness boundary、OBL-025 diagnostic completeness boundary、OBL-026 transparent-overlay composition boundary、OBL-028 revocation-monotonicity boundary、OBL-022 stream read-side boundary、OBL-027 atomic-cut rollback boundary、OBL-023 temporal-coherence boundary、OBL-010 consistent-cut checker kernel、OBL-004 no-undeclared-communication kernel、OBL-003 Line-1 decidability kernel、T0-T2 formalization decision map を `research-complete` とした。T-RESEARCH-029 は正本横断整合監査として、Surface EBNF の閉包と custom keyspace 宣言を一つの小さな canon clarification として `decision-ready` にした。いずれも正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| Surface v0 grammar audit | index・ID registry・Surface/Core 境界は整合した。`atomic_cut` は Core companion notation であって Surface token ではない。一方、spec/02 の未定義非終端と custom keyspace 宣言不在のため、正確な parser/checker grammar はまだ主張できない。 | Report 2282; `mirrorea_canon/spec/01-lexical-and-modules.md`, `mirrorea_canon/spec/02-surface-grammar.md`, `mirrorea_canon/spec/04-core-ir.md` |
 | OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
 | OBL-021 source audit | BND-001 は三つの determinism 結論の目標を明示するが、abstract `Pred` への完全な導出は `0 direct / 0 delegated / 3 missing`。projection coherence、diagnostic equivalence、branch exclusion は将来の proof package が明示する境界。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-005 structural audit | leaf/singleton と fallback/left-to-right append のみから、raw な実験用形状の一回の reassociation が構造的出力を変えないことを確認した。hole context は source-level empty fallback ではない。confluence、validity、評価、source-level unit、OBL status は未解決のままである。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
@@ -80,6 +81,10 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
   ただし今回の直接的な理論自走指示は、bridge を未選択のまま他の既存 lane を
   選ぶことだけを許す。bridge の設計・defer 記録・artifact は許可しない。 |
   `plan/156-t0-t2-research-autonomy-envelope.md` |
+- Surface v0 の exact parser/checker grammar は、未定義非終端と custom
+  keyspace の宣言方式を canon process で閉じるまで主張しない。既存の
+  `atomic_cut` Core companion boundary は変更対象ではない。 |
+  `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## オーナーの確認・判断待ち
 
@@ -90,6 +95,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | T0-T2 research autonomy | recorded LAB operating authorization | `plan/156-t0-t2-research-autonomy-envelope.md` の選定規則と停止条件の範囲で agent が調査を継続する。 |
 | OBL-001 concrete-evidence bridge | owner record pending | proof-facing need まで defer するか、既存 route と許容 persistence を明記した artifact-free design 比較を許可するか。current LAB recommendation は defer。 |
 | OBL-020 formalization organization | owner record pending | PROPOSAL-003 の A/B/C。A は LAB bundle の advisory recommendation に限られ、現時点では proposal 起票のみで採択・ADR・ledger movement はない。 |
+| Surface v0 grammar closure | owner/canon clarification pending | custom keyspace を v0 で宣言可能にするか除外するかを決め、path / parameter / failure / expression の EBNF を閉じる。現時点で keyword や AST を LAB から推定しない。 |
 
 `G0-D3` の defer は canon lifecycle を変えず、LAB 上の選定ガードとしてだけ
 扱います。 | `plan/155-t0-g0-governance-profile-proposal.md`

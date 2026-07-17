@@ -1258,6 +1258,60 @@ promote a LAB draft, alter a Gate/Phase/OBL status, or authorize a new helper,
 schema, implementation, runtime, conformance, or public API. Exact evidence is
 in Report 2281.
 
+## T-RESEARCH-029: cross-canon coherence audit (decision-ready)
+
+**Selection:** the completed ledger source cuts did not test whether the
+separate canon layers can be read together without silently adding syntax or
+changing a settled boundary. This audit is connected to the existing
+spec/02 -> spec/03 -> arch/03 parser/checker route and does not create a new
+evidence lane, helper, implementation, or theorem interface.
+
+**Question:** are the indexed canon documents, ID registries, Surface/Core
+boundary, and Surface v0 grammar mutually coherent enough to serve as an exact
+input to a future parser/checker statement without importing unstated syntax?
+
+**Positive checks:** `INDEX.json` covers exactly 73 Markdown documents; every
+`depends_on` target exists; and the style guide expressly permits mutual
+knowledge dependencies. The defined and mentioned registries agree for all 13
+ADR, 10 SCN, 28 OBL, 6 THM, 40 CON, 9 BND, and 30 OPEN identifiers. The 30
+diagnostic IDs in spec/07 cover every exact diagnostic reference. Five catalog
+entries are not yet referenced (`E-IDX-002`, `E-NAME-002`, `E-PARSE-001`,
+`E-PARSE-003`, `E-TYPE-001`); unused catalog entries alone are not a
+contradiction.
+
+**Surface/Core non-finding:** `atomic_cut` is consistently non-Surface:
+ADR-0008, spec/01, and spec/04 reserve it for Core companion notation, while
+theory/01 elaborates that notation to `cut(L)`. No Surface token or distributed
+fence semantics may be inferred from that rule.
+
+**Material boundary:** spec/02 is labelled "Surface grammar (EBNF)" and
+L1-fixed, but its production graph leaves `ModulePath`, `DottedName`,
+`TypePath`, `PlacePath`, `RolePath`, `Param`, `FailName`, and `Expr` without a
+production. Its precedence paragraph is useful direction but does not close
+the `Expr` grammar. Separately, `Keyspace ::= "Participant" | Ident` and
+spec/03 require every keyspace to be declared or imported, while `Item` has no
+keyspace declaration form. Theory/01 independently describes finite declared
+keyspaces. A future parser, static checker, or proof statement therefore cannot
+choose path aliases, parameter/failure syntax, expression shape, or custom
+keyspace declaration semantics by inference.
+
+**Required canonical clarification:** open one narrow Surface v0 grammar
+closure through the canon process before claiming an exact parser/checker
+grammar. It must decide whether custom keyspaces are Surface v0 declarations
+or excluded from the fragment, then state the corresponding declaration and
+name-resolution rule. It must also close the listed path/parameter/failure and
+expression productions. The current evidence favors retaining finite declared
+custom keyspaces because theory/01 and spec/03 already require them, but it
+does not select a keyword, declaration form, expression AST, precedence
+desugaring, or parser implementation.
+
+**Classification and non-claims:** `decision-ready`. This audit neither
+changes spec/02 nor treats it as invalid; it identifies the smallest
+owner/canon clarification needed before an exact grammar claim. It does not
+change the core vocabulary, make World/Game primitives, add event-driven
+semantics, alter SCN expectations, discharge an OBL, start T1, or authorize a
+parser/checker/runtime implementation. Exact evidence is in Report 2282.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

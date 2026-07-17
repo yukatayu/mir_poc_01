@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 19:59 JST
+最終更新: 2026-07-17 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,11 +12,15 @@ This is the current LAB task map, not an append-only history and not a canon dec
 
 No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel), **T-RESEARCH-005** (one `[E-DEGRADE]/[E-REACQ]` restricted lineage kernel), **T-RESEARCH-006** (13 selected transition x five named WF-clause source-adequacy audit), **T-RESEARCH-008** (OBL-021 postcondition source audit), **T-RESEARCH-009** (OBL-005 structural-flattening kernel), **T-RESEARCH-010** (OBL-006 relation boundary), **T-RESEARCH-011** (THM-002 / OBL-007 trace-formalization boundary), **T-RESEARCH-012** (THM-004 / OBL-015 mutation-origin boundary), **T-RESEARCH-013** (THM-005 / OBL-017 observer-safe export boundary), **T-RESEARCH-014** (THM-003 / OBL-009 successful-load restoration boundary), **T-RESEARCH-015** (OBL-026 transparent-overlay composition boundary), **T-RESEARCH-016** (OBL-028 revocation-monotonicity boundary), **T-RESEARCH-017** (OBL-022 stream read-side boundary), **T-RESEARCH-018** (OBL-027 atomic-cut rollback boundary), **T-RESEARCH-019** (OBL-023 temporal-coherence boundary), **T-RESEARCH-020** (OBL-010 consistent-cut checker kernel), **T-RESEARCH-021** (OBL-004 no-undeclared-communication kernel), **T-RESEARCH-022** (OBL-003 Line-1 decidability kernel), **T-RESEARCH-023** (OBL-018 explicit-flow observer-safe kernel), **T-RESEARCH-024** (OBL-014 Z-cycle equivalence boundary), **T-RESEARCH-025** (remaining-ledger closure map), **T-RESEARCH-026** (OBL-024 diagnostic soundness boundary), and **T-RESEARCH-027** (OBL-025 diagnostic completeness boundary) are `research-complete`. T-RESEARCH-006 found `0 direct / 65 missing`; T-RESEARCH-008 and T-RESEARCH-010 through T-RESEARCH-019 plus T-RESEARCH-024, T-RESEARCH-026, and T-RESEARCH-027 each found a distinct `0 direct / 0 delegated / 1 missing` boundary, while T-RESEARCH-020 through T-RESEARCH-023 prove one direct conditional kernel each and isolate their remaining checker/corollary boundaries. T-RESEARCH-025 separates these from dependent proof work and known overlap. Their results are recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. Independent source cuts are now exhausted; reopening a theorem requires the relevant formalization act, not another inferred interface.
 
-T-RESEARCH-028 adds the formalization decision map. In the previous sentence,
+T-RESEARCH-028 adds the formalization decision map. T-RESEARCH-029 adds the
+cross-canon coherence audit: its registry and Surface/Core checks are complete,
+but the Surface v0 grammar closure is `decision-ready` because undefined EBNF
+nonterminals and named-keyspace declaration semantics cannot be selected from
+LAB evidence. In the previous sentence,
 "exhausted" is limited to the current metatheory ledger and permitted existing
 LAB lanes; it does not mean the project has no remaining research. G0-D3 and
-the existing OBL-020 organization decision locate the next owner-controlled
-resumption point.
+the existing OBL-020 organization decision, plus the narrow Surface grammar
+clarification, locate the next owner-controlled resumption points.
 
 The 2026-07-17 runnable-front-door audit reproduced the existing Surface, Full
 System V1, Product Alpha, installed-binary, operational, and current-L2
@@ -66,6 +70,7 @@ disposition and does not authorize bridge design.
 | 26 | T-RESEARCH-026 (complete) | OBL-024 has `0 direct / 0 delegated / 1 missing` emission-association/replay boundary; a Boolean twin shows that reported carrier fields do not alone force an actual/replayable failed premise. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
 | 27 | T-RESEARCH-027 (complete) | OBL-025 has `0 direct / 0 delegated / 1 missing` Line-1 rejection / declared-fragment / single-edit repair / diagnostic-realization boundary; non-empty repair carrier shape alone does not select a repair semantics. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
 | 28 | T-RESEARCH-028 (complete) | Mapped existing G0-D3 / OBL-020 organization / OBL-001 bridge records separately from Gate-specific formalization boundaries. It recommends one scoped G1 package after the applicable owner records, without selecting shared carriers. | Macro 1/5 closeout; closed as LAB management evidence |
+| 29 | T-RESEARCH-029 (decision-ready) | Cross-checked the canon index, registries, and Surface/Core boundaries. `atomic_cut` is consistently Core-only; exact Surface grammar remains unclosed until custom keyspace declaration and missing EBNF productions are canonically clarified. | Macro 1 early; owner/canon clarification required before parser/checker grammar claim |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -84,6 +89,7 @@ The authority source is `mirrorea_canon/plan/02-operating-model.md`; the current
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
 | OBL-001 concrete-evidence bridge | whether static elaborator output can instantiate authority/capability/witness OBL-001 evidence | explicitly defer until proof-facing need; authorize an artifact-free design comparison with existing route and permitted persistence | defer is recommended; direct theory work leaves the bridge dormant; a committed bridge is a separate escalation |
 | T0-T2 formalization resumption | when and how a proof-facing semantic interface may be selected | record G0-D3 when T1 entry is intended; record `PROPOSAL-003` A/B/C or defer; then select one scoped G1 boundary package | do not decide all theorem interfaces now; gate-specific packages must request only the exact missing semantic relation |
+| Surface v0 grammar closure | whether Surface v0 has named custom keyspaces and a complete exact grammar | retain custom keyspaces with an explicit declaration and close the missing productions; restrict v0 and align the affected theory/spec text; explicitly mark the grammar partial until later | retain the existing declared-keyspace direction, then decide one minimal declaration syntax and close the EBNF in the same canon package; do not infer token or AST choices from LAB |
 | semantic premise not derivable from canon | scope and truth of a proposed theorem | owner/canon decision; explicitly defer; change research target | stop with a decision bundle, not an inferred choice |
 | SCN/canon/ADR/theory ledger action | normative semantics or proof status | apply through canon process; defer | never apply through LAB task close |
 
@@ -112,6 +118,7 @@ G0-D3's current defer is recorded in `plan/155-t0-g0-governance-profile-proposal
 | OBL-010 | a consistent-cut checker boundary | theory/04 directly supplies the direct-edge/transitive-prefix kernel, but not a finite event/cut carrier, complete generator coverage, decider, result, or diagnostic relation; T-RESEARCH-020 found no complete checker statement, so stop before selecting a checker or persistence interface. |
 | OBL-004 | a no-undeclared-communication corollary boundary | theory/03 directly supplies the itemwise containment kernel, but not program/elaboration composition, `G_e` carrier, declared-edge mapping, or runtime communication relation; T-RESEARCH-021 found no complete corollary statement, so stop before selecting a program, runtime, or transport interface. |
 | OBL-003 | a Line-1 decidability boundary | theory/01/02 directly supply finite row-containment direction, but not a complete rule set, AST/parser, declarations, carrier/equality algorithms, residual split, or checker/diagnostic relation; T-RESEARCH-022 found no complete checker statement, so stop before selecting a language or checker interface. |
+| Surface v0 grammar | a closed parser/checker-facing grammar consistent with the existing Surface intent | T-RESEARCH-029 confirmed index/ID and Core companion consistency but found undefined `ModulePath`, `DottedName`, `TypePath`, `PlacePath`, `RolePath`, `Param`, `FailName`, and `Expr` productions. `Keyspace ::= Participant | Ident` has no declaration form although spec/03/theory/01 require declared keyspaces. Use one owner/canon clarification package; do not use a LAB parser to choose the syntax. |
 | OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | source preflight reproduced a narrow pair but falsified the existing concrete authority-carrier lane; the complete owner-facing bundle awaits an explicit disposition |
 | G2 / G3 statements | feasibility of chain and authority statement groups | only after current higher-priority boundary is clear |
 

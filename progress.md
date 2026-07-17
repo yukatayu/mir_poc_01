@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:59 JST
+最終更新: 2026-07-17 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -252,6 +252,14 @@ gate-specific semantic boundaries. It recommends one scoped G1 package only
 after the applicable existing owner records, and does not merge
 step-preservation with elaboration/diagnostic semantics or select any carrier.
 
+`T-RESEARCH-029` is `decision-ready` as a cross-canon coherence audit. The
+73-document index, the audited identifier registries, and the Core-only
+`atomic_cut` boundary are coherent. The audit found one narrow Surface v0
+clarification boundary: spec/02 leaves multiple EBNF nonterminals undefined
+and permits named keyspaces without a declaration form, although spec/03 and
+theory/01 require declared keyspaces. No exact parser/checker grammar, keyword,
+expression AST, or custom-keyspace policy is inferred from LAB evidence.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -357,6 +365,12 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 20:14 JST: Completed the cross-canon coherence audit. The 73-file
+  index and ID registries resolved without a dangling reference, and
+  `atomic_cut` remained consistently Core-only. Surface v0 EBNF closure and
+  custom-keyspace declaration semantics require one small owner/canon
+  clarification before an exact parser/checker grammar can be claimed; no
+  canon, OBL, Gate, or implementation status changed.
 - 2026-07-17 19:59 JST: Completed the T0-T2 formalization decision map. The
   current ledger's independent source cuts are closed as LAB audits; G0-D3 and
   the existing OBL-020 organization decision locate the next owner-controlled
