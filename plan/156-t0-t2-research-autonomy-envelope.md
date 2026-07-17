@@ -993,6 +993,37 @@ relations, runtime, transport ABI, THM-001/OBL-004 statement/proof, or status.
 Stop `decision-ready` before selecting any of those interfaces. Exact evidence
 is in Report 2274.
 
+## T-RESEARCH-022: OBL-003 Line-1 decidability kernel (research-complete)
+
+**Selection:** T-RESEARCH-016 correctly did not select OBL-003 as a full
+derivation-ready judgment. The current source cut is narrower: theory/01 says
+Line-1 is decidable on the declared finite fragment, and theory/02 makes row
+containment finite and a Line-1 check. Spec/02 and spec/03 constrain but do not
+complete the future checker.
+
+**Question:** what decidability fact follows before a complete Line-1 judgment
+and its checker result are selected?
+
+**Source reading:** theory/01 fixes the unified judgment and decidable `C` /
+residual `O` split; theory/02 fixes finite effect/failure rows and containment;
+theory/03, spec/02, spec/03, spec/04, spec/07, and BND-002 constrain the
+source, static duties, exchange form, diagnostics, and no-hidden-success
+boundary. They do not define a full executable rule set or relation.
+
+**Result:** **one direct finite Line-1 subcheck kernel** plus **one remaining
+full-judgment decidability boundary**. A disposable two-bit failure-row checker
+proves accepted generated `StaleMembership`/`MissingCapability` containment. A
+candidate with no failures but an undeclared external-adapter effect passes a
+failure-only checker while violating the broader requirements. The negative
+model is not a canon counterexample; it isolates complete rule coverage.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical AST/parser, declarations, name resolution,
+types, row algebra, capability/index algorithms, residual-obligation split,
+checker/diagnostic result, Core ABI, OBL-003 statement/proof, or status. Stop
+`decision-ready` before selecting any of those interfaces. Exact evidence is
+in Report 2275.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:10 JST
+最終更新: 2026-07-17 19:20 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -187,6 +187,14 @@ countermodel shows why a partial request-only checker is unsound. Program,
 elaboration, generated-edge, declaration, runtime, transport, theorem, and
 status interfaces remain unselected.
 
+`T-RESEARCH-022` is `research-complete` as an OBL-003 Line-1 decidability
+audit. Theory/01 and theory/02 directly fix a finite row-containment direction;
+a trusted two-bit failure-row kernel proves that narrow subcheck. A candidate
+with no failures but an undeclared external-adapter effect passes a
+failure-only checker, showing the full judgment needs complete rule coverage.
+The AST/parser, declarations, rule set, carriers, residual split, checker,
+diagnostic, theorem, and status interfaces remain unselected.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -292,6 +300,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:20 JST: Completed the OBL-003 Line-1 decidability audit. The
+  finite failure-row subcheck is mechanically sound; complete rule coverage,
+  AST/parser, declaration, carrier, residual, and checker/diagnostic relations
+  remain unselected.
 - 2026-07-17 19:10 JST: Completed the OBL-004 no-undeclared-communication
   kernel audit. Itemwise generated-edge containment composes; program,
   elaboration, generated-edge, declaration, and runtime communication
