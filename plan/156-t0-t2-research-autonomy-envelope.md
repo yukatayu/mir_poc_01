@@ -1210,6 +1210,54 @@ suggestion realization, final Diagnostic/repair JSON ABI, repair ranking,
 multi-edit semantics, OBL-025 statement/proof, or status. It does not promote
 E-ROW payloads or the LAB Lean draft. Exact evidence is in Report 2280.
 
+## T-RESEARCH-028: T0-T2 formalization decision map (research-complete)
+
+**Selection:** T-RESEARCH-025 identified theory/10 as the final independent
+source-audit family in the current ledger and existing LAB lanes; T-RESEARCH-
+026/027 completed that family. The next useful LAB action is therefore not a
+new theorem experiment. It is a source-grounded map of what remains
+autonomously investigable and what requires a canonical act before a theorem
+interface can be selected.
+
+**Question:** after the completed source cuts, which formalization choices are
+already governed by an owner/canon record, which have an existing decision
+request, and which must be opened only by a later gate-specific package?
+
+**Authority cut:** canon `plan/02` reserves L0/L1 decisions, Gate exits, and
+ADR effectivity to the owner; `plan/00` requires a human decision plus the
+ordinary records for Gate exit; `plan/01` keeps the project in T0. This map is
+LAB navigation, not a request to accept a carrier, proof interface, or roadmap
+change.
+
+| Formalization domain | Ledger / Gate pressure | Settled direction retained by the audits | Unselected boundary that a later package must name | Current authority / reopen condition |
+| --- | --- | --- | --- | --- |
+| lifecycle and package organization | G0, T0/T1, OBL-020 | G0 profile evidence is distinct from G0 exit; OBL-020 has five audit groups, not a hidden universal frame law | whether to enter T1; whether later OBL-020 packages use a shared review organization | G0-D3 owner record and `PROPOSAL-003` A/B/C are already prepared; neither is satisfied by this map |
+| G1 step preservation | OBL-020 | every selected transition is subject to the named well-formedness direction | transition/result/history, component-frame, state-membership, authority-record, and chain-transition relations | after the existing organization disposition, a scoped owner-reviewed package must name only the relations it needs |
+| G1 elaboration and diagnostics | OBL-001..004, OBL-021, OBL-024/025 | unified-judgment/elaboration, explicit generated communication, named-premise blame, and Line-1 repair direction | source/input and Core/result carriers, `G_e`/declaration bridge, outcome/equality, rejection/emission/replay, repair edit/application/realization | select one bounded package; OBL-001 concrete evidence bridge remains a separate owner disposition only if that interpretation is needed |
+| G2 chains and fallback | OBL-005..008 | ordered flattening direction and no re-promotion without explicit reacquire | source-level unit, term/relation/equality, trace/selection/lineage/reacquire/freshness | later G2 statement package; do not reuse a LAB word carrier as chain syntax |
+| G3 authority and lifecycle | OBL-015/016, OBL-028 | grant-lineage validation, owner-local branch, and revocation direction | occurrence/mutation association, owner-local classifier, authority identity, epoch/evidence and trace transition | later G3 statement package; no transport/authentication ABI is selected here |
+| G4 observation and two-layer time | OBL-017/018, OBL-022/023 | typed observation, redaction/retention, read-side samples, and frontier policy | low-equivalence/export equality, label/declassification, sample/discrete-state/effect/frame, consumer/frontier/coherence | later G4 statement package; no viewer, provider, clock, or telemetry ABI is selected here |
+| G5 cuts and persistence | OBL-009..014, OBL-027 | prefix/causal-cut policy, load preconditions, Z-cycle inadmissibility, local atomic-cut direction | event/cut/config/load relation, restored/live bridge, checker carrier/coverage, checkpoint graph/recognizer, rollback relation | later G5 statement package; no persistence or recovery ABI is selected here |
+| contracts, overlays, and patch | OBL-026, OBL-019 / G7 | transparent-overlay policy and rejection-no-mutation direction | overlay order/composition/equality; patch transition/history frame and rejection relation | later cross-cut / G7 package; existing OBL-019 overlap guard prevents duplicate source audit |
+
+**Resumption order:** this map recommends no all-at-once formalization and no
+new universal carrier. First, the owner records the already-existing G0-D3
+disposition when T1 entry is intended. Second, the owner records the already-
+prepared OBL-020 organizational disposition in `PROPOSAL-003`, or explicitly
+defers it. Only then should one owner-reviewed G1 package open its exact
+semantic boundary and list every assumption not derivable from canon. The
+existing canon Gate order supplies later exit order; it does not require the
+G1 step-preservation and elaboration/diagnostic boundaries to be merged into
+one representation or one package.
+
+**Classification and non-claims:** `research-complete`, not a new
+`decision-ready` request. The map makes the already-existing G0-D3,
+`PROPOSAL-003`, and OBL-001 bridge decisions easier to locate, but records no
+owner answer. It does not prioritize one semantic carrier, define a theorem,
+promote a LAB draft, alter a Gate/Phase/OBL status, or authorize a new helper,
+schema, implementation, runtime, conformance, or public API. Exact evidence is
+in Report 2281.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:53 JST
+最終更新: 2026-07-17 19:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -244,6 +244,14 @@ counterexample and does not impose a canonical whole-gap interpretation.
 Existing E-ROW payloads and the LAB draft remain limited evidence only; no
 OBL-025 statement, proof, ABI, ranking, multi-edit semantics, or status moves.
 
+`T-RESEARCH-028` is `research-complete` as a T0-T2 formalization decision map.
+Within the current ledger and existing LAB lanes, all independent source cuts
+have been audited. The map separates existing owner records (G0-D3,
+`PROPOSAL-003`, and the conditional OBL-001 bridge disposition) from later
+gate-specific semantic boundaries. It recommends one scoped G1 package only
+after the applicable existing owner records, and does not merge
+step-preservation with elaboration/diagnostic semantics or select any carrier.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -349,6 +357,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:59 JST: Completed the T0-T2 formalization decision map. The
+  current ledger's independent source cuts are closed as LAB audits; G0-D3 and
+  the existing OBL-020 organization decision locate the next owner-controlled
+  resumption point.
 - 2026-07-17 19:53 JST: Completed the OBL-025 diagnostic-completeness audit.
   The target direction and taxonomy remain fixed; Line-1/rejection,
   declared-fragment, single-edit repair, association, and realization semantics

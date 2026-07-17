@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 19:53 JST
+最終更新: 2026-07-17 19:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -11,6 +11,12 @@ This is the current LAB task map, not an append-only history and not a canon dec
 ## current promoted package
 
 No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel), **T-RESEARCH-005** (one `[E-DEGRADE]/[E-REACQ]` restricted lineage kernel), **T-RESEARCH-006** (13 selected transition x five named WF-clause source-adequacy audit), **T-RESEARCH-008** (OBL-021 postcondition source audit), **T-RESEARCH-009** (OBL-005 structural-flattening kernel), **T-RESEARCH-010** (OBL-006 relation boundary), **T-RESEARCH-011** (THM-002 / OBL-007 trace-formalization boundary), **T-RESEARCH-012** (THM-004 / OBL-015 mutation-origin boundary), **T-RESEARCH-013** (THM-005 / OBL-017 observer-safe export boundary), **T-RESEARCH-014** (THM-003 / OBL-009 successful-load restoration boundary), **T-RESEARCH-015** (OBL-026 transparent-overlay composition boundary), **T-RESEARCH-016** (OBL-028 revocation-monotonicity boundary), **T-RESEARCH-017** (OBL-022 stream read-side boundary), **T-RESEARCH-018** (OBL-027 atomic-cut rollback boundary), **T-RESEARCH-019** (OBL-023 temporal-coherence boundary), **T-RESEARCH-020** (OBL-010 consistent-cut checker kernel), **T-RESEARCH-021** (OBL-004 no-undeclared-communication kernel), **T-RESEARCH-022** (OBL-003 Line-1 decidability kernel), **T-RESEARCH-023** (OBL-018 explicit-flow observer-safe kernel), **T-RESEARCH-024** (OBL-014 Z-cycle equivalence boundary), **T-RESEARCH-025** (remaining-ledger closure map), **T-RESEARCH-026** (OBL-024 diagnostic soundness boundary), and **T-RESEARCH-027** (OBL-025 diagnostic completeness boundary) are `research-complete`. T-RESEARCH-006 found `0 direct / 65 missing`; T-RESEARCH-008 and T-RESEARCH-010 through T-RESEARCH-019 plus T-RESEARCH-024, T-RESEARCH-026, and T-RESEARCH-027 each found a distinct `0 direct / 0 delegated / 1 missing` boundary, while T-RESEARCH-020 through T-RESEARCH-023 prove one direct conditional kernel each and isolate their remaining checker/corollary boundaries. T-RESEARCH-025 separates these from dependent proof work and known overlap. Their results are recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. Independent source cuts are now exhausted; reopening a theorem requires the relevant formalization act, not another inferred interface.
+
+T-RESEARCH-028 adds the formalization decision map. In the previous sentence,
+"exhausted" is limited to the current metatheory ledger and permitted existing
+LAB lanes; it does not mean the project has no remaining research. G0-D3 and
+the existing OBL-020 organization decision locate the next owner-controlled
+resumption point.
 
 The 2026-07-17 runnable-front-door audit reproduced the existing Surface, Full
 System V1, Product Alpha, installed-binary, operational, and current-L2
@@ -59,6 +65,7 @@ disposition and does not authorize bridge design.
 | 25 | T-RESEARCH-025 (complete) | Mapped remaining ledger work: OBL-002/008/016 are parent-statement dependents, OBL-011..013 share OBL-009's load bridge, OBL-019 overlaps the E-PATCH frame gap, and theory/10 OBL-024/025 is the next independent source family. | Macro 1/5 middle; closed as LAB management evidence |
 | 26 | T-RESEARCH-026 (complete) | OBL-024 has `0 direct / 0 delegated / 1 missing` emission-association/replay boundary; a Boolean twin shows that reported carrier fields do not alone force an actual/replayable failed premise. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
 | 27 | T-RESEARCH-027 (complete) | OBL-025 has `0 direct / 0 delegated / 1 missing` Line-1 rejection / declared-fragment / single-edit repair / diagnostic-realization boundary; non-empty repair carrier shape alone does not select a repair semantics. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
+| 28 | T-RESEARCH-028 (complete) | Mapped existing G0-D3 / OBL-020 organization / OBL-001 bridge records separately from Gate-specific formalization boundaries. It recommends one scoped G1 package after the applicable owner records, without selecting shared carriers. | Macro 1/5 closeout; closed as LAB management evidence |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -76,6 +83,7 @@ The authority source is `mirrorea_canon/plan/02-operating-model.md`; the current
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
 | OBL-001 concrete-evidence bridge | whether static elaborator output can instantiate authority/capability/witness OBL-001 evidence | explicitly defer until proof-facing need; authorize an artifact-free design comparison with existing route and permitted persistence | defer is recommended; direct theory work leaves the bridge dormant; a committed bridge is a separate escalation |
+| T0-T2 formalization resumption | when and how a proof-facing semantic interface may be selected | record G0-D3 when T1 entry is intended; record `PROPOSAL-003` A/B/C or defer; then select one scoped G1 boundary package | do not decide all theorem interfaces now; gate-specific packages must request only the exact missing semantic relation |
 | semantic premise not derivable from canon | scope and truth of a proposed theorem | owner/canon decision; explicitly defer; change research target | stop with a decision bundle, not an inferred choice |
 | SCN/canon/ADR/theory ledger action | normative semantics or proof status | apply through canon process; defer | never apply through LAB task close |
 
