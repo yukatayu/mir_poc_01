@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 11:57 JST
+最終更新: 2026-07-17 13:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -45,6 +45,15 @@ assumptions. None is a canon append, lineage, or full-step definition. No canon
 theorem, status, or lifecycle changed. The canonical lifecycle remains
 `mirrorea_canon/plan/01-phases.md`; the LAB work-selection and stop boundary is
 `plan/156-t0-t2-research-autonomy-envelope.md`.
+
+`T-RESEARCH-006` is `research-complete` as a frozen source-adequacy audit,
+not a proof: all 13 selected transition cases x five named WF clauses are
+`missing` under a derivation-complete criterion (`0 direct / 65 missing`). The
+audit localizes the missing premises to history extension, component frames,
+state/membership coherence, authority records, and chain transitions. It
+rejects using unproved THM-006 as an OBL-020 premise and records a two-state
+Lean challenge showing why `[E-SERVE]/fail` no-store-change alone cannot frame
+the membership epoch. No canon status, definition, or lifecycle changed.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -150,6 +159,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 13:17 JST: Completed the OBL-020 source-adequacy audit: 65/65
+  selected transition x WF cells lack derivation-complete canon premises; the
+  result narrows five missing-premise groups without changing canon, OBL, Gate,
+  Phase, or proof status.
 - 2026-07-17 11:57 JST: Completed the conditional `[E-DEGRADE]/[E-REACQ]`
   lineage kernel after adversarial review: prior scratch entries remain defined
   and nondecreasing only under stated experiment-local assumptions; no canon

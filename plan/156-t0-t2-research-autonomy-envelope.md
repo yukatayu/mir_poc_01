@@ -331,6 +331,84 @@ only under this plan's selection rule. Do not generalize this restricted run to
 OBL-020 or use it to pull G2 statement work ahead of the foundational OBL-020
 and OBL-021 boundary.
 
+## T-RESEARCH-006: OBL-020 selected-transition source-adequacy audit (research-complete)
+
+**Question:** does the frozen canon source cut provide enough formal premises to
+derive any selected `E-*` transition x named well-formedness-clause preservation
+case without importing an unstated update, frame, freshness, graph, or record
+invariant assumption?
+
+**Source cut and method:** the audit fixes the 13 selected operational cases in
+`theory/01` (`E-WRITE`, `E-REQ`, three `E-SERVE` outcomes, `E-PUB`, `E-OBS`,
+`E-ADMIT`, `E-CUT`, `E-DEGRADE`, `E-REACQ`, and two `E-PATCH` outcomes) against
+the five named clauses of `theory/01` well-formedness. It follows one-hop
+normative references through `theory/04` to `theory/08`; the proof ledger is
+read as a status boundary, not as a source of premises. A cell is `direct` only
+when the source text alone gives a derivation-complete preservation argument;
+an unproved theorem statement cannot be used as a premise. The resulting
+disposable CSV is exactly 65 cells and rejects missing cases/cells, duplicate
+cells, and merging `[E-SERVE]/fail` into a pass branch.
+
+**Result:** all **65 / 65** cells are `missing`; none is `direct` or
+`delegated`. This does not mean the high-level direction is wrong. It means the
+current L1-fixed/draft prose has rule sketches and theorem
+statements rather than the complete transition, history-extension, frame,
+freshness, and record equations that an OBL-020 proof would consume.
+
+**Normalized missing-premise groups:** the audit replaces a misleading generic
+"global frame" bucket with five exact groups: `H_EXTENSION` (33 cells: fresh
+event identity, retained old nodes/edges, exact added edges and orientation),
+`COMPONENT_FRAME` (18: unchanged named configuration fields),
+`STATE_MEMBERSHIP_COHERENCE` (4: indexed key/tombstone/recorded-epoch relation
+across `S` and `M`), `AUTHORITY_RECORD_BINDING` (6: request/use/validation/
+grant/witness/frontier lineage records), and `CHAIN_TRANSITION_DEFINITION` (4:
+lease update, history maximum, lineage, and cut interaction). The cells retain
+a specific detail field; this grouping is a LAB audit taxonomy, not new canon
+vocabulary.
+
+**Adversarial evidence:** a disposable two-state Lean model proves that an
+Active-key predicate is preserved only if both its store and membership-epoch
+inputs frame. It contains a state with the same stored epoch but a changed live
+epoch that violates the predicate. Thus `[E-SERVE]/fail`'s prose `no store
+change` is useful partial evidence but cannot by itself establish
+`WF-ACTIVE-KEY`. Existing T-RESEARCH-002/003/005 negative evidence remains
+local support for the store-key, history-extension, and chain rows respectively.
+
+**Important source readings:** `[E-PUB]` and `[E-OBS]` do state the new event
+kind and the new observation's publish-ancestor condition, but do not define
+the required preservation of old history/ancestry; their blocker is therefore
+`H_EXTENSION`, not a missing new-observation condition. Likewise,
+`theory/08` says a deferred patch mutates lifecycle rows only, but THM-006 is
+OBL-019 in the open ledger and cannot be imported as an OBL-020 premise. Its
+five cells remain missing.
+
+**Reproducibility:** under `/tmp/mirrorea-t-research-006/`,
+`python3 validate_matrix.py obl020_source_adequacy.csv` reported 65 cells and
+`0 direct / 0 delegated / 65 missing`; `python3 mutation_validation.py`
+rejected four structural mutations. `lean --trust=0 ServeFailureFrame.lean`
+passed; `#print axioms` reported no axioms for its positive frame lemma. Exact
+commands and hashes are in Report 2259. All scratch files are disposable and
+untracked.
+
+**Review and classification:** the first exact-file Oracle run ended before an
+answer because its browser disconnected. The one permitted retry also ended
+with a browser failure, but its saved transcript contained an independent
+review of the source cut. It confirmed `0 direct / 65 missing`, rejected using
+unproved THM-006 as a premise, required the five-group taxonomy above, and
+approved `research-complete` only as a frozen LAB source-adequacy result. The
+advice is advisory and model-picker selection was not verified.
+
+**Binding and non-claims:** this audit neither defines MirCore history append,
+field frames, Active/tombstone semantics, authority records, chain transition
+semantics, nor a proof interface. It does not complete OBL-020, alter a canon
+rule, alter `theory/11`, change Gate/Phase status, create a new mainline
+evidence lane, or establish conformance/runtime correctness.
+
+**Next selection point:** a later source-grounded OBL-020 statement/premise
+research unit may compare existing LAB statement drafts against these five
+missing-premise groups. It must stop as `decision-ready` before proposing any
+canonical transition equation, frame convention, or carrier definition.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
