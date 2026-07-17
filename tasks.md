@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 13:17 JST
+最終更新: 2026-07-17 14:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -38,7 +38,8 @@ disposition and does not authorize bridge design.
 | 4 | T-RESEARCH-004 preflight (not selected) | Literal-RHS foreign-locus source pair passed request/failure/span checks, but the existing lane cannot evaluate the required authority carrier. | Macro 1 early; bounded falsifier recorded |
 | 5 | T-RESEARCH-005 (complete) | In a two-rule experiment only, proved initial defined-entry persistence/nondecrease and separated local support bookkeeping from canon well-formedness; negative models delimit the assumptions. | Macro 1/5 middle; closed as conditional LAB evidence |
 | 6 | T-RESEARCH-006 (complete) | Audited all 65 selected transition x named-WF cells. None has derivation-complete canon premises; five missing-premise groups replace a generic global-frame label. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
-| 7 | OBL-020 statement/premise source cut (unselected) | Compare the existing abstract statement draft with the five missing-premise groups; stop before proposing any canonical transition/frame/carrier definition. | Macro 1/5 reserve; research-selected |
+| 7 | T-RESEARCH-007 (decision-ready) | Prepared PROPOSAL-003 for the formalization-organization A/B/C decision. Its five headings are LAB review categories, not canon predicates or a fixed Lean interface. | Macro 1 middle; owner record pending, unrelated research may continue |
+| 8 | next independent theory source cut (unselected) | Select a non-OBL-020 existing-lane question under `plan/156`; preserve the pending OBL-020 decision boundary. | Macro 1/5 reserve; research-selected |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -66,6 +67,7 @@ G0-D3's current defer is recorded in `plan/155-t0-g0-governance-profile-proposal
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 | source-adequacy audit found no derivation-complete case across all 13 selected rules x five named clauses; next research must distinguish statement premises from any canonical semantic choice | compare the existing abstract statement draft with the five missing-premise groups; do not treat a LAB taxonomy or experiment-local update as canon-defined |
+| OBL-020 formalization organization | common review organization is not derivable from current canon prose | owner chooses PROPOSAL-003 A/B/C; its LAB headings are non-exhaustive and the proposal does not block unrelated theory research |
 | OBL-021 | deterministic elaboration relation and equality/equivalence premises | OPEN-014 materialization boundary; stop if a canon choice is needed |
 | OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | source preflight reproduced a narrow pair but falsified the existing concrete authority-carrier lane; the complete owner-facing bundle awaits an explicit disposition |
 | G2 / G3 statements | feasibility of chain and authority statement groups | only after current higher-priority boundary is clear |

@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 72,
+ "files": 73,
  "entries": [
   {
    "id": "root/changelog",
@@ -424,6 +424,23 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md",
    "bytes": 5961
+  },
+  {
+   "id": "meta/proposal-003",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "plan/00-gates",
+    "plan/01-phases",
+    "plan/02-operating-model",
+    "theory/01-mircore-v0",
+    "theory/11-metatheory-ledger",
+    "meta/proposal-001"
+   ],
+   "summary": "OBL-020 proof-facing formalization organization の owner decision request。shared five-heading review checklist / no required shared checklist / defer の三択のみを問う。PROPOSAL-001 scope、rule equation、proof status、Gate は動かさない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md",
+   "bytes": 11084
   },
   {
    "id": "meta/source-hierarchy",

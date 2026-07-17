@@ -39,6 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
 | いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel に加え、13 transition x 5 WF clause の source-adequacy 監査を `research-complete` とした。監査は `0 direct / 65 missing` で、完全な rule/frame/history/record premise はまだ正本にないと確認した。いずれも canon の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
 | 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線
@@ -67,6 +68,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | G0-D3 | DEFERRED (dormant) | owner が明示的に reopen するまで研究単位の選定対象にしない。 |
 | T0-T2 research autonomy | recorded LAB operating authorization | `plan/156-t0-t2-research-autonomy-envelope.md` の選定規則と停止条件の範囲で agent が調査を継続する。 |
 | OBL-001 concrete-evidence bridge | owner record pending | proof-facing need まで defer するか、既存 route と許容 persistence を明記した artifact-free design 比較を許可するか。current LAB recommendation は defer。 |
+| OBL-020 formalization organization | owner record pending | PROPOSAL-003 の A/B/C。A は LAB bundle の advisory recommendation に限られ、現時点では proposal 起票のみで採択・ADR・ledger movement はない。 |
 
 `G0-D3` の defer は canon lifecycle を変えず、LAB 上の選定ガードとしてだけ
 扱います。 | `plan/155-t0-g0-governance-profile-proposal.md`

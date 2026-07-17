@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 13:17 JST
+最終更新: 2026-07-17 14:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -54,6 +54,15 @@ state/membership coherence, authority records, and chain transitions. It
 rejects using unproved THM-006 as an OBL-020 premise and records a two-state
 Lean challenge showing why `[E-SERVE]/fail` no-store-change alone cannot frame
 the membership epoch. No canon status, definition, or lifecycle changed.
+
+`T-RESEARCH-007` is `decision-ready` for OBL-020 only. It prepared
+PROPOSAL-003's A/B/C choice for organizing a future proof-facing formalization:
+shared five-heading LAB-derived review checklist (advisory recommendation), no
+required shared checklist with package-local organization, or defer. The
+headings are not canon predicates or fixed Lean premises. The proposal is
+non-self-executing and does not block unrelated existing-lane theory research;
+no concrete transition, frame, or carrier is defined until the owner records a
+disposition.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -159,6 +168,13 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 14:00 JST: Oracle review narrowed PROPOSAL-003 to a symmetric
+  organizational A/B/C choice. The five audit groups are now explicitly LAB
+  candidate review headings, not canon vocabulary or a required Lean interface;
+  no owner disposition or canon status changed.
+- 2026-07-17 13:25 JST: Prepared PROPOSAL-003 for the OBL-020 formalization
+  boundary. It requests an owner A/B/C choice only; no rule equation, proof
+  status, ADR, Gate, Phase, or implementation change was applied.
 - 2026-07-17 13:17 JST: Completed the OBL-020 source-adequacy audit: 65/65
   selected transition x WF cells lack derivation-complete canon premises; the
   result narrows five missing-premise groups without changing canon, OBL, Gate,

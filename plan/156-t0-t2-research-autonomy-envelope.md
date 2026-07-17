@@ -409,6 +409,41 @@ research unit may compare existing LAB statement drafts against these five
 missing-premise groups. It must stop as `decision-ready` before proposing any
 canonical transition equation, frame convention, or carrier definition.
 
+## T-RESEARCH-007: OBL-020 formalization-boundary bundle (decision-ready)
+
+**Question:** after T-RESEARCH-006 established that no selected OBL-020 cell
+has derivation-complete canon premises, what is the smallest owner decision that
+organizes later proof-facing formalization without choosing a hidden runtime
+representation or language feature?
+
+**Finding:** the existing abstract `WellFormed` / `Step` LAB statement should
+not be refined now. `plan/126` already establishes that this abstraction is
+appropriate until concrete carriers and per-step proof obligations exist; the
+five T-RESEARCH-006 groups explain why adding fields now would launder a choice
+of history, frame, authority-record, or chain semantics into LAB.
+
+**Prepared bundle:** `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`
+asks the owner to select one organizational posture only: A, a shared
+five-heading LAB-derived review checklist (advisory recommendation); B, no
+required shared checklist and package-local organization; or C, defer the
+organizational choice. The headings are not canon predicates or fixed Lean
+premises. The proposal explicitly does not choose any concrete `Config`, history
+append, field frame, record schema, rule equation, scheduler, Lean artifact
+identity, OBL status, Gate, or Phase change.
+
+**Authority cut:** this is an L1 organizational choice for the proof-facing
+calculus. `plan/02` assigns L0/L1 decisions to the owner, and
+`meta/agent-instructions` permits only proposal preparation, not adoption.
+The proposal is a non-self-executing L3-open decision request; its index entry
+was regenerated, but no ADR, changelog record, or normative theorem wording was
+added.
+
+**Classification:** `decision-ready` for the OBL-020 formalization boundary.
+It does not block unrelated existing-lane theory research. OBL-021 or other
+bounded counterexample/statement work may continue under the selection rule;
+no OBL-020 proof-facing definition may be adopted until an owner disposition is
+recorded through the canon process.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
