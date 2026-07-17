@@ -867,6 +867,37 @@ adapter effects/ABI, effect declarations, clocks, transition/trace relations,
 frame equality, OBL-022/023 statement/proof, or status. Stop `decision-ready`
 before selecting any of those interfaces. Exact evidence is in Report 2270.
 
+## T-RESEARCH-018: OBL-027 atomic-cut rollback boundary (research-complete)
+
+**Selection:** T-RESEARCH-014 expressly leaves OBL-027 separately open. The
+diagnostic obligations already have detailed LAB statement-shape inventories,
+and OBL-019 substantially overlaps the E-PATCH transition/frame gap in
+T-RESEARCH-006. OBL-027 has direct local-cut policy anchors without selecting
+the load/restoration interface excluded by T-RESEARCH-014.
+
+**Question:** does theory/04's rule that local rollback cannot remove
+occurrences causally before `cut(ell)` itself determine a proof-facing OBL-027
+statement?
+
+**Source reading:** theory/04 fixes a locus-local rollback frontier and the
+causal-before property; theory/01 fixes the `cut(ell)` / `[E-CUT]` reading.
+theory/06 and ADR-0004 say rollback/atomic_cut do not rewind degradation;
+ADR-0007 says it is not a memory fence. They do not define occurrences,
+causality, locus membership, cut projection, or rollback.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled atomic-cut rollback
+formalization boundary**. A disposable Nat-frontier model proves a target at or
+after an explicitly chosen cut retains that cut. An unstructured-label model
+gives a cut both local-rollback and causal-containment labels while targeting a
+pre-cut point. The latter is not a canon counterexample; it isolates the
+missing order/result relation.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical history, occurrence identity, causal order,
+locus relation, cut/frontier projection, rollback semantics, load/persistence
+ABI, OBL-027 statement/proof, or status. Stop `decision-ready` before selecting
+any of those interfaces. Exact evidence is in Report 2271.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

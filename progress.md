@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:44 JST
+最終更新: 2026-07-17 18:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -152,6 +152,16 @@ proves retention only under its explicitly selected sample-only branch; an
 unstructured-label model shows why labels do not provide the missing relation.
 It selects no stream/adapter ABI, theorem, status, or lifecycle.
 
+`T-RESEARCH-018` is `research-complete` as an OBL-027 atomic-cut rollback
+audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
+Theory/04 directly fixes a local rollback frontier and the causal-before-cut
+policy, while theory/01, theory/06, ADR-0004, and ADR-0007 constrain the
+meaning around it. They do not define occurrence/causality/rollback carriers
+or a result relation. A trusted frontier kernel proves retention only under its
+explicit target bound; an unstructured-label model shows why labels do not
+provide the missing relation. It selects no persistence ABI, theorem, status,
+or lifecycle.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -257,6 +267,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:52 JST: Completed the OBL-027 atomic-cut rollback audit. The
+  local-cut and non-fence policy remain intact; occurrence, causality, locus,
+  cut projection, and rollback result relations remain one unselected
+  formalization boundary.
 - 2026-07-17 18:44 JST: Completed the OBL-022 stream read-side audit. The
   sample-outside-history and typed-adapter policy remain intact; stream,
   adapter, discrete-transition, and frame/equality relations remain one
