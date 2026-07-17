@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:27 JST
+最終更新: 2026-07-17 19:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -205,6 +205,16 @@ configuration/observer/export ABI, lattice and declassification, occurrence
 provenance, and collection equality/order/multiplicity remain unselected, so
 this is not a THM-005/OBL-017/018 statement, proof, or status change.
 
+`T-RESEARCH-024` is `research-complete` as an OBL-014 Z-cycle equivalence
+audit: `0 direct / 0 delegated / 1 missing` coupled checkpoint-graph /
+Netzer-Xu characterization boundary. Theory/04 and SCN-10 directly fix only
+the Z-cycle-to-inadmissibility policy. A trusted Boolean twin preserves that
+policy while one instance breaks a stipulated structural-reject/useless-
+checkpoint equivalence. CUT-11 remains synthetic reason-code evidence, not a
+graph algorithm or delegated proof. Checkpoint graph, zigzag, recoverability,
+recognizer, characterization, theorem, and status interfaces remain
+unselected.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -310,6 +320,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:35 JST: Completed the OBL-014 Z-cycle equivalence audit. The
+  Z-cycle inadmissibility policy remains fixed; checkpoint-graph, zigzag,
+  recoverability, checker-recognizer, and Netzer-Xu characterization links
+  remain one unselected formalization boundary.
 - 2026-07-17 19:27 JST: Completed the OBL-018 explicit-flow audit. A
   low-position-only redaction projection is invariant under modeled high/raw
   variation; the configuration/export interface, lattice/declassification,

@@ -1064,6 +1064,44 @@ equality, order, multiplicity, a complete THM-005/OBL-017 statement, an
 OBL-018 proof, or status. Stop `decision-ready` before selecting any of those
 interfaces. Exact evidence is in Report 2276.
 
+## T-RESEARCH-024: OBL-014 Z-cycle equivalence boundary (research-complete)
+
+**Selection:** theory/04 directly fixes Z-cycle inadmissibility and names
+OBL-014 as equivalence with the Netzer-Xu useless-checkpoint
+characterization. This is independent of T-RESEARCH-014's successful-load
+restoration boundary, T-RESEARCH-018's local atomic-cut rollback boundary, and
+T-RESEARCH-020's prefix-closure kernel. OBL-019 was not selected because its
+transition/frame gap substantially overlaps T-RESEARCH-006.
+
+**Question:** does the ordering/cuts source cut itself determine the
+proof-facing equivalence between a structural Z-cycle checker reject and the
+Netzer-Xu useless-checkpoint characterization?
+
+**Source reading:** theory/04 and SCN-10 directly fix the one-way policy that
+a checkpoint on a zigzag cycle is inadmissible for a recoverable global cut;
+the glossary fixes the same conceptual role. theory/12 anchors Netzer-Xu only
+as prior art. The existing CUT-11 sidecar and checker test are explicitly a
+planned-skeleton, synthetic reason-code checker floor, not a checkpoint-graph
+algorithm or proof. No source defines a checkpoint graph, zigzag path,
+recoverable global cut, structural recognizer, Netzer-Xu predicate, or their
+equivalence.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled checkpoint-graph /
+Netzer-Xu equivalence formalization boundary**. A disposable Boolean model
+keeps the direct `ZCycle -> inadmissible` policy true in both an aligned and a
+divergent instance. In the divergent instance, a Netzer-Xu-like useless label
+is true while both structural reject and Z-cycle labels are false, so the
+candidate equivalence fails. This is not a canon counterexample; it isolates
+the absent semantic link from graph/path definitions and checker recognition
+to the cited characterization.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define a checkpoint graph, process/channel state, zigzag paths,
+recoverability, a global cut, the Netzer-Xu characterization, a structural
+checker, reason-code semantics, repair protocol, persistence ABI, OBL-014
+statement/proof, or status. Stop `decision-ready` before selecting any of
+those interfaces. Exact evidence is in Report 2277.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
