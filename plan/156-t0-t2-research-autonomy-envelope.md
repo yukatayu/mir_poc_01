@@ -234,14 +234,123 @@ or that the request is unauthorized.
 Lean interpretation, or artifact identity was added. The next autonomous LAB
 research unit remains unselected.
 
-**Separate decision-ready blocker:** an explicit owner promotion would be
-needed to choose whether to create a concrete OBL-001 evidence bridge, such as
-a read-only JSON-to-`Pred` interpretation, structured elaborator exposure of
-`C`/`O` and capability/witness references, or a reviewed artifact binding. The
-current LAB recommendation is to defer that bridge until an OBL-001
-proof-facing package actually needs it. This is an evidence-route decision, not
-a request to change canon authority semantics, Gate/Phase state, or proof
-status.
+**Separate decision-ready blocker:** a bridge-specific owner disposition would
+be needed before any separately scoped concrete-evidence bridge design work,
+such as comparing a read-only JSON-to-`Pred` interpretation, carrier exposure
+for `C`/`O` and capability/witness references, or a reviewed artifact binding.
+Such a disposition does not by itself authorize a committed bridge artifact or
+waive the pre-T1 moratorium. The current LAB recommendation is to defer the
+bridge until an OBL-001 proof-facing package actually needs it. This is an
+evidence-route decision, not a request to change canon authority semantics,
+Gate/Phase state, or proof status.
+
+## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
+
+This section completes the presentation required by the mandatory stop rule.
+It does not select T-RESEARCH-004, record an owner decision, create a bridge,
+or promote another research unit. A broad instruction to continue autonomous
+work authorizes work up to this stop; it does not by itself choose this bridge's
+disposition.
+
+**Question:** should the owner explicitly defer the concrete bridge until an
+OBL-001 proof-facing package needs it, or authorize a separately scoped
+bridge-design decision package? The question is about a LAB evidence route,
+not whether authority/capability/witness obligations exist in canon.
+
+**Authority cut:** `mirrorea_canon/plan/02-operating-model.md` reserves
+roadmap advancement and L0/L1 decisions to the owner; the canon moratorium and
+`meta/agent-instructions.md` prohibit a new evidence lane or helper family
+before T1 exit. This plan may prepare the decision bundle but cannot treat a
+recommendation, a generic continuation request, or Oracle advice as the owner
+record.
+
+**Directly affected identifiers:**
+
+| Kind | Identifier | Effect of this bundle |
+| --- | --- | --- |
+| Gate / Phase | GATE-1 / G1, T0/T1 | No exit or entry; `GATE-1` is the theory/ledger spelling and `G1` is the gates-table label. |
+| theorem / obligation | THM-001, OBL-001 | No statement status or artifact identity moves. |
+| boundary | BND-001 | No elaboration contract or authority obligation changes. |
+| scenario | SCN-02 | Existing static attack evidence remains evidence only; no scenario expectation changes. |
+
+`OBL-002`, `SCN-01`, and `OPEN-014` are contextual but not directly affected:
+this bundle neither changes the THM-001 proof boundary, selects the roll
+scenario, nor enters the transparent-read materialization question.
+
+**Alternatives and semantic delta:**
+
+| Owner record (two presently admissible dispositions) | Permitted immediate effect | Semantic / lifecycle delta |
+| --- | --- | --- |
+| Explicitly defer (current LAB recommendation) | Keep the bridge absent until a proof-facing OBL-001 package names why it needs a concrete interpretation; later research selection may use another existing lane only if the selection rule is met. | None. No canon change, implementation, wrapper, or ledger movement. |
+| Authorize a bounded bridge-design decision package | The owner record must name the existing route and permitted persistence. Its scope is comparison only: no committed bridge artifact and no new evidence/helper/schema/runner surface. | None by itself. It is not approval of JSON fields, Lean predicates, helper/schema surfaces, a moratorium exception, or a canon status. |
+
+**Out-of-scope future escalation:** a committed bridge artifact is not a third
+current disposition. It would encounter the pre-T1 new-lane/helper moratorium
+and requires an independent canon-compatible owner/canon route; an owner record
+in this bundle cannot waive that restriction.
+
+**Positive evidence:** the disposable literal-RHS source that differs from
+`ELAB-07` only by completing its `fails` row is accepted by the existing Surface
+elaborator. The committed negative is rejected with
+`generated_failure_not_declared`. Both project one `BrowserClient -> S` remote
+write, no dependency/publication/observation rows, and the same six source-span
+entity kinds.
+
+**Negative evidence:** no structured capability/witness carrier appears in the
+current elaborator JSON, and no existing interpretation maps its output to the
+abstract OBL-001 `Pred` hooks or the canonical `C ∪ O` obligation boundary.
+This falsifies the proposed existing-lane investigation, not THM-001 or the
+existence of canon authority obligations.
+
+**Counterexample / Lean evidence:** T-RESEARCH-001 established that the
+unconstrained OBL-001 predicate shape is not a standalone soundness theorem.
+`samples/lean/lab-statements/obl001/THM001StatementDraft.lean` contains the
+abstract `RequestCarriesAuthorityObligations` hook, but not an interpretation
+from the concrete elaborator output. This bundle adds neither a counterexample
+to canon nor a Lean artifact.
+
+**Reproducibility and evidence level:** reproduce the committed negative with
+`python3 scripts/surface_mir_samples.py --format json run ELAB-07`; reproduce
+the positive by making the documented one-line `fails`-row change in disposable
+scratch and running the existing `surface_to_core_elaborate` example. This is
+LAB static source/evidence-projection data, below a theorem interpretation,
+proof, conformance result, or runtime observation.
+
+**Assumptions and non-claims:** the source pair intentionally excludes RHS
+indexed reads, visible fields, publication/observation consequences, transport,
+admission, and runtime serving. It does not resolve OPEN-014, alter BND-001,
+choose artifact identity, complete OBL-001/002, or authorize a bridge.
+
+**Disposition condition:** only an owner record that names the OBL-001 bridge
+and selects one of the two presently admissible dispositions is operative. A
+design authorization must state its existing route and permitted persistence;
+without both, the bridge remains unselected. A generic continuation instruction
+never meets this condition.
+
+**Reopen trigger after explicit defer:** an OBL-001 proof-facing package names
+the concrete interpretation as necessary. That trigger returns the item to
+owner/selection review; it does not authorize a bridge artifact or waive the
+moratorium.
+
+**Requested canonical act:** none at this point. The immediate requested act
+is an owner-recorded LAB disposition. A committed bridge artifact, a canon
+semantic change, a ledger update, or a Gate/Phase change would each require its
+own appropriate canonical process.
+
+**Independent review:** Oracle session
+`t0-bridge-authority-and-next` reviewed this source cut and concluded that a
+broad autonomous-continuation instruction is not an operative defer/authorize
+record. The advice is advisory; its conclusion was checked against the local
+canon and this plan. The wrapper did not independently verify the model picker,
+so no model-selection claim is made. Its exact-file review then found six
+scope-clarity defects; the route/persistence condition, generic-instruction
+guard, two-disposition limit, identifier cut, non-sufficiency wording, and
+reopen separation were corrected. A final re-review returned PASS with no new
+scope or authority defect.
+
+**Current disposition:** waiting for the owner to record one of the two
+presently admissible dispositions. No autonomous successor research unit is
+selected in the meantime.
 
 ## Current non-claims
 

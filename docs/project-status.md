@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 09:51 JST
+最終更新: 2026-07-17 10:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -51,9 +51,12 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
   agent は `decision-ready` で止まる。 | `mirrorea_canon/plan/02-operating-model.md` |
 - 新しい helper / evidence lane / schema / CI / Make target / main merge /
   conformance claim は T1 exit 前の研究範囲外。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
-- OBL-001 の concrete-evidence bridge を作るには owner の明示 promotion が
-  必要であり、agent は JSON field、Lean interpretation、wrapper を自走で追加
-  しない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+- OBL-001 の concrete-evidence bridge には bridge 固有の owner disposition が
+  必要である。これは scoped design 比較だけを許し得るもので、committed bridge や
+  moratorium 例外を自動的に許可しない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+- 一般的な「自走を継続する」指示は bridge の defer / authorization を選んだ記録
+  ではない。次の研究単位を選ばず、owner の明示記録まで止まる。 |
+  `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## オーナーの確認・判断待ち
 
@@ -62,7 +65,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | G0-D1 / D2 / D4 | recorded | ADR-0013 に記録済み。再判断待ちではない。 |
 | G0-D3 | DEFERRED (dormant) | owner が明示的に reopen するまで研究単位の選定対象にしない。 |
 | T0-T2 research autonomy | recorded LAB operating authorization | `plan/156-t0-t2-research-autonomy-envelope.md` の選定規則と停止条件の範囲で agent が調査を継続する。 |
-| OBL-001 concrete-evidence bridge | decision-ready | existing elaborator output と abstract OBL-001 predicate の bridge を将来作るか。current LAB recommendation は proof-facing need まで defer。 |
+| OBL-001 concrete-evidence bridge | owner record pending | proof-facing need まで defer するか、既存 route と許容 persistence を明記した artifact-free design 比較を許可するか。current LAB recommendation は defer。 |
 
 `G0-D3` の defer は canon lifecycle を変えず、LAB 上の選定ガードとしてだけ
 扱います。 | `plan/155-t0-g0-governance-profile-proposal.md`

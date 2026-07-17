@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 09:51 JST
+最終更新: 2026-07-17 10:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -50,6 +50,11 @@ rejection, and source spans, but the current lane has no structured
 capability/witness carrier or JSON-to-OBL-001 interpretation. This is an
 evidence-route blocker, not a canon counterexample; it creates a decision-ready
 owner item and leaves the next LAB research unit unselected.
+
+The owner-facing bundle now records the authority cut, alternatives, evidence
+level, non-claims, and reopen trigger for that item. A general instruction to
+continue autonomous work is applied only up to this decision-ready stop: it is
+not recorded as an owner defer or bridge authorization.
 
 ## milestone map
 
@@ -112,7 +117,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
-| Owner / LAB route | OBL-001 concrete-evidence bridge | explicit promotion must choose defer versus a new read-only bridge / exposed carrier / reviewed binding; current LAB recommendation is defer |
+| Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; generic continuation is not a disposition; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003 complete; no successor selected without a fresh canon-grounded criterion |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
@@ -143,6 +148,15 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 10:23 JST: Independent re-review passed the corrected OBL-001
+  bridge decision bundle; it remains a pending owner disposition with no new
+  lane, artifact, or successor research selection.
+- 2026-07-17 10:16 JST: Applied independent-review corrections to the OBL-001
+  bundle: only defer and fully scoped artifact-free design comparison are
+  current dispositions; a committed bridge remains a separate escalation.
+- 2026-07-17 10:07 JST: Consolidated the OBL-001 concrete-evidence bridge
+  decision bundle from existing evidence and independent review; no owner
+  disposition, new lane, or successor research unit was inferred.
 - 2026-07-17 09:51 JST: Rejected a proposed literal-RHS foreign-locus
   T-RESEARCH-004 after the source pair reproduced but lacked an existing
   authority-carrier interpretation; no new lane was created and the bridge is
