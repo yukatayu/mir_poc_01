@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 09:04 JST
+最終更新: 2026-07-17 09:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -135,6 +135,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 09:15 JST: Reproduced the runnable LAB front doors: workspace
+  tests, Surface, Full System V1, Product Alpha, installed-binary, operational,
+  and current-L2 checks all accepted their bounded evidence; no canon or
+  readiness status changed.
 - 2026-07-17 09:04 JST: Completed a disposable `[E-OBS]` graph-kernel study:
   a weak extension admits a finite cycle, while the stated incoming-only
   extension preserves two selected graph invariants; canon state is unchanged.

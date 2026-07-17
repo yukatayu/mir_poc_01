@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 09:04 JST
+最終更新: 2026-07-17 09:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -11,6 +11,11 @@ This is the current LAB task map, not an append-only history and not a canon dec
 ## current promoted package
 
 No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), and **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel) are `research-complete`. Their result is recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. No next LAB work unit is preselected.
+
+The 2026-07-17 runnable-front-door audit reproduced the existing Surface, Full
+System V1, Product Alpha, installed-binary, operational, and current-L2
+evidence paths without a failure. It does not promote a successor research unit
+or alter any readiness classification.
 
 ## ordered self-driven packages
 
