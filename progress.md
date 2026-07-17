@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 16:54 JST
+最終更新: 2026-07-17 18:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -114,6 +114,16 @@ visible-position equality satisfies the finite shape. It selects no label
 lattice, export ABI, or canonical equality; no theorem, status, or lifecycle
 changed.
 
+`T-RESEARCH-014` is `research-complete` as a THM-003 / OBL-009
+successful-load restoration audit: `0 direct / 0 delegated / 1 missing`
+coupled formalization boundary. Theory/04 directly supplies a SaveObject
+schema anchor and eight necessary successful-load conditions; theory/01
+supplies Config/WellFormed vocabulary. Neither supplies a complete
+successful-load-to-restored-Config/prefix interpretation. A trusted one-save,
+two-result twin holds all selected load conditions but flips only the
+experiment-local result relation; no load API, persistence semantics, theorem,
+status, or lifecycle changed.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -190,7 +200,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
-| Research | G2/G3 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface; THM-005 does not yet fix low-equivalence, export shape, or export equality |
+| Research | G2/G5 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface; THM-005 does not yet fix low-equivalence, export shape, or export equality; THM-003 does not yet fix successful-load restoration |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
@@ -219,6 +229,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:06 JST: Completed the THM-003 / OBL-009 successful-load
+  restoration audit. The saved-object schema and eight necessary conditions
+  remain direct policy anchors; their bridge to a restored Config/prefix and
+  result-side safety remains one unselected formalization boundary.
 - 2026-07-17 16:54 JST: Completed the THM-005 / OBL-017 observer-safe export
   audit. The fixed observation policy remains separate from the coupled
   low-equivalence/export-equality boundary; an explicit finite equality twin

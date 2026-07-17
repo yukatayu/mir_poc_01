@@ -716,6 +716,72 @@ SCN-07, conformance, runtime, or viewer behavior, prove necessity/minimality/
 uniqueness/sufficiency of a future interface, or change canon, ledger, Gate,
 Phase, or proof status. Exact evidence is in Report 2266.
 
+## T-RESEARCH-014: THM-003 / OBL-009 successful-load restoration boundary audit (research-complete)
+
+**Audit row:** the complete proof-facing THM-003 / OBL-009 successful-load
+restoration interpretation, excluding THM-003 and OBL-009 themselves as
+premises.
+
+**Question:** do the theory/04 successful-load conditions plus the theory/01
+runtime vocabulary determine a relation from a SaveObject to the restored
+configuration and restored history prefix on which the THM-003 result-side
+safety properties are evaluated?
+
+**Source reading:** theory/04 directly supplies one grouped SaveObject schema
+anchor and eight individually named necessary conditions for a successful load:
+consistent saved cut; no rollback across atomic cut; no stale membership,
+witness, or lease resurrection; connected capability/auth provenance;
+compatible package versions; and compensated or isolated external irreversible
+effects. It separately states THM-003's target and the explicit-reacquire
+policy. Theory/01 supplies the runtime `Config` and `WellFormed` vocabulary,
+including acyclic history, grant/use lineage, observation ancestry, indexed-key,
+and chain-position categories. That is a chapter-local vocabulary delegation,
+not delegated proof evidence. The ledger keeps OBL-009 through OBL-014 and
+OBL-027 open.
+
+**Source-anchor inventory:** `1` direct grouped SaveObject schema anchor + `8`
+direct successful-load condition anchors + `1` delegated `Config` / `WellFormed`
+vocabulary-family anchor. This accounting is not the source-adequacy result:
+the theorem sentence is the audited target, not a proof premise, and no anchor
+is a complete Lean interpretation.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled successful-load
+restoration formalization boundary**. Excluding THM-003 and OBL-009 as
+premises, neither chapter determines a derivation-complete interpretation of
+successful-load recognition, SaveObject-to-restored-Config association,
+restored-prefix projection, the meanings of result-side liveness predicates,
+or the bridge from necessary no-resurrection/admissibility conditions to
+`WellFormed` and no-live postconditions. The one missing item is this coupled
+boundary, not a request to adopt individual Boolean premises.
+
+**Adversarial evidence:** a disposable trusted model has one SaveObject and
+two Config values. Both candidate `LoadResult` relations respect the same eight
+selected successful-load condition tags. Saved cut and restored prefix use the
+same experiment-local `Consistent` predicate through distinct projections; all
+are empty in the toy model, so the consistency facts are deliberately vacuous.
+Both outputs satisfy five stipulated no-live predicates and four modeled
+well-formedness categories. The good result satisfies the selected THM-003
+shape. Changing only the experiment-local result relation to return the bad
+configuration, whose `StoreKeyWF` tag is false, falsifies that shape. This does
+not construct a legal MirCore load or prove that every THM-003 conjunct is
+independently underdetermined.
+
+**Classification:** recording the boundary is `research-complete`, not
+`decision-ready`. Work must stop `decision-ready` before selecting a canonical
+Load relation/result discipline, SaveObject or restored-Config interface,
+saved-cut/restored-prefix relation, liveness/resurrection/provenance bridge,
+rule that makes the eight necessary conditions sufficient, or a persistent
+theorem/helper/schema/evidence/CI surface.
+
+**Non-claims:** this audit does not counterexample THM-003, define a canonical
+load or serialization algorithm, full Config, causal history, atomic-cut
+behavior, consistency checker, resurrection/liveness/provenance semantics,
+package compatibility, compensation, or local/distributed durable save/load;
+identify no-resurrection with no-live; prove OBL-009 through OBL-014, OBL-020,
+or OBL-027; establish necessity/minimality/uniqueness/sufficiency of a future
+interface; or change theory/01, theory/04, ledger, Gate, Phase, or proof
+status. Exact evidence is in Report 2267.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
