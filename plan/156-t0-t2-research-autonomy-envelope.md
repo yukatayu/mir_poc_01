@@ -655,6 +655,67 @@ conformance, lifecycle, revocation, load/rollback correctness; or change
 `theory/05`, ADR-0005, the ledger, a Gate, or a Phase. Exact evidence is in
 Report 2265.
 
+## T-RESEARCH-013: THM-005 / OBL-017 observer-safe export boundary audit (research-complete)
+
+**Audit row:** the complete proof-facing THM-005 / OBL-017 statement
+interpretation, excluding THM-005 and OBL-017 themselves as premises.
+
+**Question:** does the existing observation source cut determine a complete
+Lean statement for observer-safe noninterference, including configuration
+low-equivalence and observer-safe export equality?
+
+**Source reading:** `theory/07` directly fixes the observer-safe
+noninterference policy, observation-event vocabulary, typed observation effect,
+occurrence/telemetry provenance requirement, retention and redaction
+constraints, and forbidden observer-safe contents. SCN-07 directly supplies a
+position-only observer-safe expectation, session-local retention, occurrence
+provenance, and absence of raw witness/auth material. `theory/02` permits a
+finite label lattice but does not select a final lattice; OPEN-020 remains
+open. Existing `CurrentL2IfcSecretExamples.lean` is adjacent LAB evidence: its
+two-point label lattice and declassification predicates are neither a delegated
+OBL-017 formalization nor imported by this audit.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled THM-005
+formalization boundary**. This count describes the audit row, not absence of
+direct policy facts. Excluding the theorem and obligation themselves as
+premises, the source cut does not determine one proof-facing interpretation
+coupling: canonical configuration low-equivalence and permitted high/raw
+variation; observer context and observer-safe export shape; and output equality
+or equivalence, including treatment of event/reference identity, order, and
+multiplicity. The single missing item is this coupled boundary, not a list of
+adopted Boolean premises.
+
+**Adversarial evidence:** a disposable trusted two-configuration model gives
+both configurations the same modeled low position and different designated
+high-state and aggregate raw-payload projections. Both opaque exports satisfy
+the same selected, stipulated experiment-local side predicates: observer-safe,
+occurrence-derived, session-local, free of the aggregate forbidden payload, and
+equal visible position. Constructor identity makes the finite
+noninterference shape false; equality of the visible-position projection makes
+the same shape true. These are explicit experiment-local relations, not a
+canonical row, export-collection, or observation ABI. The aggregate raw axis
+does not independently model raw witness and raw authority material.
+
+**Classification:** recording this boundary needs no owner decision and is
+`research-complete`, not `decision-ready`. Before a proof-facing OBL-017
+package selects a configuration carrier or low-equivalence; label domain,
+order, declassification, or redaction algebra; observation/event/export ABI;
+identity/renaming/order/multiplicity semantics; or turns stipulated predicates
+into pipeline semantics, work must stop `decision-ready`. It also stops before
+using the adjacent two-point lattice as canonical/delegated evidence or adding
+a persistent helper, evidence lane, schema, CI surface, or formal artifact.
+
+**Non-claims:** this audit does not counterexample THM-005 or deny its
+canonical policy; define the OBL-017 statement, discharge OBL-017/018, define
+the explicit-flow or declassification theorem, select a final lattice/flow/
+redaction relationship, identify the toy `Config` with a MirCore
+configuration, identify toy exports with an `ObservationEvent` or export ABI,
+select any equality/quotient/trace/renaming/order/multiplicity semantics,
+derive observer safety/provenance/redaction/retention from a pipeline, cover
+SCN-07, conformance, runtime, or viewer behavior, prove necessity/minimality/
+uniqueness/sufficiency of a future interface, or change canon, ledger, Gate,
+Phase, or proof status. Exact evidence is in Report 2266.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

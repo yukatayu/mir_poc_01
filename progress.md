@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 16:14 JST
+最終更新: 2026-07-17 16:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -103,6 +103,17 @@ validating use/request/capref, the owner-local/declared-transition branch, or
 the complete trace/step link. A favorable-order three-event twin isolates only
 the experiment-local association; no theorem, status, or lifecycle changed.
 
+`T-RESEARCH-013` is `research-complete` as a THM-005 / OBL-017
+observer-safe export audit: `0 direct / 0 delegated / 1 missing` coupled
+formalization boundary for the complete proof-facing statement interpretation.
+Canon directly fixes the noninterference policy and observation constraints,
+but not the coupled configuration low-equivalence, observer/export shape, and
+output equality relations. A trusted two-configuration twin keeps selected
+stipulated LAB side predicates constant while constructor identity fails and
+visible-position equality satisfies the finite shape. It selects no label
+lattice, export ABI, or canonical equality; no theorem, status, or lifecycle
+changed.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -179,7 +190,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
-| Research | G2/G3 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface |
+| Research | G2/G3 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface; THM-005 does not yet fix low-equivalence, export shape, or export equality |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
@@ -208,6 +219,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 16:54 JST: Completed the THM-005 / OBL-017 observer-safe export
+  audit. The fixed observation policy remains separate from the coupled
+  low-equivalence/export-equality boundary; an explicit finite equality twin
+  selects no lattice, export ABI, or canonical output equivalence.
 - 2026-07-17 15:15 JST: Completed the OBL-006 relation-boundary audit. A
   word-preserving finite fork lacks a join, so no canonical confluence claim
   follows without a separately specified formalization boundary.
