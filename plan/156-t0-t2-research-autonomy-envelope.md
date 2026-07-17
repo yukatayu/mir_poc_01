@@ -898,6 +898,38 @@ locus relation, cut/frontier projection, rollback semantics, load/persistence
 ABI, OBL-027 statement/proof, or status. Stop `decision-ready` before selecting
 any of those interfaces. Exact evidence is in Report 2271.
 
+## T-RESEARCH-019: OBL-023 temporal-coherence boundary (research-complete)
+
+**Selection:** theory/09 expressly leaves OBL-023's formal statement pending
+and its clock/latency model open. T-RESEARCH-017 deliberately separated this
+per-consumer coherence question from OBL-022's read-side boundary. OBL-023
+therefore has a distinct source cut without selecting the stream/adapter
+transition interface excluded by T-RESEARCH-017.
+
+**Question:** do theory/09's frontier-admissibility and no-split-frame policy
+itself determine a proof-facing OBL-023 temporal-coherence statement?
+
+**Source reading:** theory/09 fixes two-layer time, consumer-frontier
+admissibility, epoch match, dropping inadmissible samples, and a no-split-frame
+working law for discrete atomic groups. BND-007 fixes non-owning
+View/Provider placement. Theory/04 and ADR-0007 constrain the high-level
+frontier/order reading. They do not define consumers, atomic grouping,
+interpretation, coherence, or clock/latency semantics.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled per-consumer
+temporal-coherence formalization boundary**. A disposable shared-frontier
+model proves that two epochs admissible at one chosen frame are equal. An
+unstructured-label model gives two labels called admissibility and no-split
+while retaining distinct frontiers. The latter is not a canon counterexample;
+it isolates the missing binding relation.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical consumers, samples, anchors, atomic groups,
+frontiers, interpretation, temporal coherence, equality/observation, clocks,
+latency, provider/transport ABI, OBL-023 statement/proof, or status. Stop
+`decision-ready` before selecting any of those interfaces. Exact evidence is
+in Report 2272.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

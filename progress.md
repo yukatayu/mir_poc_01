@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:52 JST
+最終更新: 2026-07-17 18:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -162,6 +162,15 @@ explicit target bound; an unstructured-label model shows why labels do not
 provide the missing relation. It selects no persistence ABI, theorem, status,
 or lifecycle.
 
+`T-RESEARCH-019` is `research-complete` as an OBL-023 temporal-coherence
+audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
+Theory/09 directly fixes consumer-frontier admissibility, epoch match, and the
+no-split-frame policy, but leaves the formal statement and clock/latency model
+open. A trusted shared-frontier kernel proves equal epochs only under its
+explicit one-frame assumption; an unstructured-label model shows why labels do
+not provide the missing binding relation. It selects no consumer, stream,
+provider, transport, clock, theorem, status, or lifecycle interface.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -267,6 +276,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:57 JST: Completed the OBL-023 temporal-coherence audit. The
+  two-layer-time and no-split-frame policy remain intact; consumer, atomic
+  group, frontier, interpretation, coherence, and clock/latency relations
+  remain one unselected formalization boundary.
 - 2026-07-17 18:52 JST: Completed the OBL-027 atomic-cut rollback audit. The
   local-cut and non-fence policy remain intact; occurrence, causality, locus,
   cut projection, and rollback result relations remain one unselected
