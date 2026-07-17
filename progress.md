@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 20:14 JST
+最終更新: 2026-07-17 20:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -260,6 +260,13 @@ and permits named keyspaces without a declaration form, although spec/03 and
 theory/01 require declared keyspaces. No exact parser/checker grammar, keyword,
 expression AST, or custom-keyspace policy is inferred from LAB evidence.
 
+`T-RESEARCH-030` is `decision-ready` as the bounded pre-decision audit for
+that grammar closure. All six canonical and 47 active LAB indexed-state
+declarations use `Participant`; `LAB:specs/40` records `Object`/`Avatar` as
+later. PROPOSAL-004 therefore recommends a Participant-only Surface v0 closure
+and postpones custom keyspaces. It records no owner disposition or grammar
+change, and it does not constrain the Core's abstract finite-keyspace model.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -365,6 +372,11 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 20:28 JST: Prepared PROPOSAL-004 after the Surface grammar
+  pre-decision audit. Current canonical and active LAB sources require only
+  Participant-indexed state; the proposal recommends closing the existing v0
+  grammar without a custom-keyspace source family. Owner adoption is still
+  required, and no canon syntax, proof, Gate, or implementation state changed.
 - 2026-07-17 20:14 JST: Completed the cross-canon coherence audit. The 73-file
   index and ID registries resolved without a dangling reference, and
   `atomic_cut` remained consistently Core-only. Surface v0 EBNF closure and

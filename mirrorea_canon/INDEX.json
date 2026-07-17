@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 73,
+ "files": 74,
  "entries": [
   {
    "id": "root/changelog",
@@ -441,6 +441,29 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md",
    "bytes": 11084
+  },
+  {
+   "id": "meta/proposal-004",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0001",
+    "adr/ADR-0002",
+    "adr/ADR-0005",
+    "adr/ADR-0008",
+    "adr/ADR-0009",
+    "spec/01-lexical-and-modules",
+    "spec/02-surface-grammar",
+    "spec/03-static-semantics",
+    "theory/01-mircore-v0",
+    "theory/02-types-effects-failures",
+    "scenarios/readme",
+    "plan/02-operating-model"
+   ],
+   "summary": "Surface v0 EBNF 閉包の owner decision request。Participant-only index と既存語彙だけによる最小閉包を推奨し、custom keyspace / 新 builtin は後段へ送る。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md",
+   "bytes": 8116
   },
   {
    "id": "meta/source-hierarchy",

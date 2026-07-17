@@ -1312,6 +1312,34 @@ change the core vocabulary, make World/Game primitives, add event-driven
 semantics, alter SCN expectations, discharge an OBL, start T1, or authorize a
 parser/checker/runtime implementation. Exact evidence is in Report 2282.
 
+## T-RESEARCH-030: Surface v0 grammar scope pre-decision audit (decision-ready)
+
+**Selection:** T-RESEARCH-029 established that the grammar needs a canonical
+clarification. This follow-up tests only which scope is required by existing
+canon and active LAB evidence; it does not choose language syntax from those
+sources.
+
+**Evidence:** all six canonical indexed-state examples and all 47 active LAB
+Full System V1 indexed-state declarations use `Participant`. No examined source
+uses a custom keyspace or signed numeric literal. `LAB:specs/40` classifies
+`Object` and `Avatar` keyspaces as later. The Core theory remains intentionally
+abstract over finite declared keyspaces, so its abstraction is not evidence
+that v0 Surface must expose each one.
+
+**Decision bundle:** PROPOSAL-004 presents three owner options. The advisory
+recommendation is a Participant-only Surface v0 closure: contextual
+`Participant`, no custom-keyspace declaration/builtin, exact completion of the
+existing path/parameter/failure/expression grammar, and unsigned numeric
+tokens with existing unary `-`. This preserves all current canonical/active
+source evidence while avoiding a new source-language family. It supersedes only
+the earlier LAB advisory inclination to retain custom keyspaces; Report 2282's
+finding that the current grammar is unclosed remains unchanged.
+
+**Classification and non-claims:** `decision-ready`. PROPOSAL-004 records no
+owner answer and no grammar is changed. It does not choose a parser/AST/Core
+ABI, call resolution, dynamic locus syntax, custom keyspace syntax, or runtime
+behavior. Exact evidence is in Report 2283.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
