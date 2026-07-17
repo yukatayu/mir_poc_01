@@ -1300,10 +1300,11 @@ closure through the canon process before claiming an exact parser/checker
 grammar. It must decide whether custom keyspaces are Surface v0 declarations
 or excluded from the fragment, then state the corresponding declaration and
 name-resolution rule. It must also close the listed path/parameter/failure and
-expression productions. The current evidence favors retaining finite declared
-custom keyspaces because theory/01 and spec/03 already require them, but it
-does not select a keyword, declaration form, expression AST, precedence
-desugaring, or parser implementation.
+expression productions. At this generic source cut, theory/01 and spec/03
+were evidence for retaining finite declared custom keyspaces; T-RESEARCH-030
+subsequently superseded that LAB advisory inclination with a narrower
+source-usage audit. Neither reading selects a keyword, declaration form,
+expression AST, precedence desugaring, or parser implementation.
 
 **Classification and non-claims:** `decision-ready`. This audit neither
 changes spec/02 nor treats it as invalid; it identifies the smallest
@@ -1339,6 +1340,56 @@ finding that the current grammar is unclosed remains unchanged.
 owner answer and no grammar is changed. It does not choose a parser/AST/Core
 ABI, call resolution, dynamic locus syntax, custom keyspace syntax, or runtime
 behavior. Exact evidence is in Report 2283.
+
+## T-RESEARCH-031: proof-status and Lean-evidence integrity audit (research-complete)
+
+**Selection:** T-RESEARCH-028 records that the current independent source cuts
+are exhausted. The present task therefore selects no new theorem experiment.
+It audits the existing proof-status ledger, the already-active Lean evidence,
+and their LAB wording against the explicit anti-overclaim requirement. This is
+an evidence-integrity check, not a new proof package or a mechanism to advance
+an open obligation by restating it.
+
+**Question:** do the current ledger, the existing active Lean corpus, and the
+current LAB status views make a proof, statement, or discharge claim that the
+actual artifacts do not support; and does every open OBL have a recorded reason
+why it is not independently reopened?
+
+**Evidence:** theory/11 remains the only proof-status authority and says all
+28 ledger entries are `open`. Its obligations partition without overlap into
+15 parent-statement boundaries (OBL-001/005--007/009/014/015/017/020--023/
+026--028), six proof-or-lemma dependents (OBL-002/008/011--013/016), four
+bounded direct fragments (OBL-003/004/010/018), the OBL-019 E-PATCH overlap,
+and the OBL-024/025 diagnostic boundaries. T-RESEARCH-025 already records the
+same dependency reading, including why OBL-011--013 wait for the OBL-009
+Load/restored-state relation.
+
+The active Lean manifest names 25 existing files: four helper-local foundation
+fragments, five LAB statement-shape definitions, and 16 generated clean-suite
+stubs. All compile sequentially under the installed Lean 4.29.1; no active
+Lean source contains `sorry`, `admit`, `axiom`, `unsafe`, or `partial`. The
+five statement drafts contain definitions rather than theorems or axioms. The
+16 generated stubs are intentionally `True := by trivial`, so they are source
+identity skeletons rather than domain proofs. The four foundation fragments
+are actual proofs only for their own finite, user-defined helper models. The
+historical archive intentionally retains 15 `sorry` occurrences across 12
+Lean files and is not active evidence.
+
+**Validation caveat:** an initial direct compile sweep was run concurrently
+with `current_l2_lean_sample_sync.py`, which deletes and recreates
+`samples/lean/clean-near-end/`; transient missing-file errors therefore did
+not identify invalid Lean source. The same 20 foundation/clean files and five
+statement drafts compiled in non-overlapping sequential runs. The canonical
+sync command also completed successfully. This establishes only artifact
+well-formedness and the stated classification, not semantic adequacy of the
+abstract predicates or any OBL proof.
+
+**Classification and non-claims:** `research-complete`. No canon text,
+theory/11 status, formalization interface, helper family, schema, runtime,
+conformance result, Gate/Phase state, or proof claim changes. The audit finds
+no hidden active proof placeholder and no unclassified ledger obligation; it
+does not make an open obligation closer to discharge. Exact evidence is in
+Report 2284.
 
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 

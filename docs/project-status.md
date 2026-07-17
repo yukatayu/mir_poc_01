@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 20:28 JST
+最終更新: 2026-07-17 20:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,6 +40,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
 | いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、OBL-018 explicit-flow kernel、THM-003/OBL-009 successful-load restoration boundary、OBL-014 Z-cycle equivalence boundary、remaining-ledger research closure map、OBL-024 diagnostic soundness boundary、OBL-025 diagnostic completeness boundary、OBL-026 transparent-overlay composition boundary、OBL-028 revocation-monotonicity boundary、OBL-022 stream read-side boundary、OBL-027 atomic-cut rollback boundary、OBL-023 temporal-coherence boundary、OBL-010 consistent-cut checker kernel、OBL-004 no-undeclared-communication kernel、OBL-003 Line-1 decidability kernel、T0-T2 formalization decision map を `research-complete` とした。T-RESEARCH-029/030 は Surface v0 EBNF の閉包を `decision-ready` にし、既存 evidence から Participant-only の最小案を PROPOSAL-004 に起票した。いずれも正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Surface v0 grammar audit | index・ID registry・Surface/Core 境界は整合した。`atomic_cut` は Core companion notation であって Surface token ではない。未閉包 EBNF は PROPOSAL-004 により Participant-only の最小 closure 案として選択肢化したが、owner 採択前に parser/checker grammar は主張しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md` |
+| Proof-status integrity | `mirrorea_canon/theory/11-metatheory-ledger.md` の全 28 entries は open のまま。active Lean は foundation 4、statement draft 5、generated stub 16 の合計 25 件であり、`sorry`/`admit`/`axiom` は active corpus にない。generated stub の `True := by trivial` と helper-local foundation proof は domain OBL proof ではない。 | Report 2284; `mirrorea_canon/theory/11-metatheory-ledger.md`, `samples/lean/README.md` |
 | OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
 | OBL-021 source audit | BND-001 は三つの determinism 結論の目標を明示するが、abstract `Pred` への完全な導出は `0 direct / 0 delegated / 3 missing`。projection coherence、diagnostic equivalence、branch exclusion は将来の proof package が明示する境界。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-005 structural audit | leaf/singleton と fallback/left-to-right append のみから、raw な実験用形状の一回の reassociation が構造的出力を変えないことを確認した。hole context は source-level empty fallback ではない。confluence、validity、評価、source-level unit、OBL status は未解決のままである。 | `plan/156-t0-t2-research-autonomy-envelope.md` |

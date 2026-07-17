@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 20:28 JST
+最終更新: 2026-07-17 20:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -267,6 +267,16 @@ later. PROPOSAL-004 therefore recommends a Participant-only Surface v0 closure
 and postpones custom keyspaces. It records no owner disposition or grammar
 change, and it does not constrain the Core's abstract finite-keyspace model.
 
+`T-RESEARCH-031` is `research-complete` as a proof-status and Lean-evidence
+integrity audit. All 28 ledger OBLs are classified without overlap as parent
+statement boundaries, dependent proof/lemmas, bounded direct fragments, the
+known OBL-019 overlap, or diagnostic boundaries; theory/11 remains the sole
+status authority and records them all open. The active Lean corpus has 25
+sequentially compiling files with no `sorry`, `admit`, or axiom, but its five
+statement drafts are definitions, its 16 generated stubs prove only `True`,
+and its four foundations are helper-local models. It therefore found no hidden
+active placeholder or status drift, not a domain proof or an OBL discharge.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -372,6 +382,12 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 20:42 JST: Completed the proof-status and Lean-evidence integrity
+  audit. All 28 open OBLs have a non-overlapping current classification; the
+  active 25-file Lean corpus compiled sequentially without active placeholders.
+  A transient parallel missing-file result was traced to clean-stub regeneration,
+  not to invalid Lean. No proof status, canon, Gate, or implementation state
+  changed.
 - 2026-07-17 20:28 JST: Prepared PROPOSAL-004 after the Surface grammar
   pre-decision audit. Current canonical and active LAB sources require only
   Participant-indexed state; the proposal recommends closing the existing v0
