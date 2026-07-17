@@ -1102,6 +1102,38 @@ checker, reason-code semantics, repair protocol, persistence ABI, OBL-014
 statement/proof, or status. Stop `decision-ready` before selecting any of
 those interfaces. Exact evidence is in Report 2277.
 
+## T-RESEARCH-025: remaining-ledger research closure map (research-complete)
+
+**Selection:** after the independent OBL-014 source cut, the next choice must
+distinguish genuinely independent research from theorem proofs or lemmas that
+would silently choose a statement interface already found missing. The ledger,
+the completed T-RESEARCH records, and the existing OBL-024/025 LAB drafts are
+all existing repository evidence; this inventory adds no new evidence lane.
+
+**Question:** which open ledger entries can still be investigated
+independently under this autonomy envelope, and which ones are presently
+blocked by a parent formalization boundary, an already-audited source cut, or
+an explicit overlap guard?
+
+**Result:** the current map has four distinct classes. (1) Parent statement
+boundaries: OBL-001/020/021, OBL-005..007, OBL-009, OBL-015, OBL-017, OBL-022,
+OBL-023, OBL-026..028, and OBL-014 each retain their recorded interfaces or
+source boundary. (2) Proof/lemma dependents: OBL-002, OBL-008, and OBL-016
+cannot begin a proof without their parent statements; OBL-011..013 share
+OBL-009's absent Load/restored-state/live-after-load bridge. (3) Bounded
+direct fragments: OBL-003, OBL-004, OBL-010, and OBL-018 have recorded
+conditional kernels but no full checker/corollary/proof interface. (4) OBL-019
+substantially repeats T-RESEARCH-006's E-PATCH transition/frame gap, while
+OBL-024/025 have LAB-only compile-checked statement shapes but no canon
+formalization. The only next independent source family is therefore theory/10
+diagnostic soundness/completeness, examined without promoting its LAB drafts.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not alter any theorem/OBL status, decide a parent statement,
+interpret a dependent lemma, promote a LAB draft, select a diagnostic or repair
+ABI, reopen OBL-019, or change a Gate/Phase. It is a selection map only. Exact
+evidence is in Report 2278.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

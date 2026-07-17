@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:35 JST
+最終更新: 2026-07-17 19:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -215,6 +215,14 @@ graph algorithm or delegated proof. Checkpoint graph, zigzag, recoverability,
 recognizer, characterization, theorem, and status interfaces remain
 unselected.
 
+`T-RESEARCH-025` is `research-complete` as a remaining-ledger closure map.
+It separates parent statement boundaries, dependent proof/lemma obligations,
+bounded direct kernels, and explicit overlap guards. OBL-002/008/016 wait for
+parent statements; OBL-011..013 share OBL-009's missing Load/restored-state
+bridge; OBL-019 repeats the E-PATCH frame gap. Theory/10 OBL-024/025 remains
+the next independent source family, while its existing LAB statement drafts
+remain non-normative and unpromoted.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -320,6 +328,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:41 JST: Completed the remaining-ledger closure map. Proof
+  dependents and known overlaps are separated from independent source work;
+  theory/10 diagnostics is the next eligible family without promoting LAB
+  statement drafts.
 - 2026-07-17 19:35 JST: Completed the OBL-014 Z-cycle equivalence audit. The
   Z-cycle inadmissibility policy remains fixed; checkpoint-graph, zigzag,
   recoverability, checker-recognizer, and Netzer-Xu characterization links
