@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:45 JST
+最終更新: 2026-07-17 19:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -219,9 +219,9 @@ unselected.
 It separates parent statement boundaries, dependent proof/lemma obligations,
 bounded direct kernels, and explicit overlap guards. OBL-002/008/016 wait for
 parent statements; OBL-011..013 share OBL-009's missing Load/restored-state
-bridge; OBL-019 repeats the E-PATCH frame gap. Theory/10 OBL-024/025 remains
-the next independent source family, while its existing LAB statement drafts
-remain non-normative and unpromoted.
+bridge; OBL-019 repeats the E-PATCH frame gap. Theory/10 OBL-024/025 was the
+last independent source family; its existing LAB statement drafts remain
+non-normative and unpromoted.
 
 `T-RESEARCH-026` is `research-complete` as an OBL-024 diagnostic soundness
 audit: `0 direct / 0 delegated / 1 missing` coupled diagnostic-emission
@@ -231,6 +231,18 @@ rule/premise/bindings, replay/exact-at relation, or diagnostic equality. A
 trusted Boolean twin shows that carrier shape alone does not force soundness.
 Existing E-ROW projection and LAB drafts remain evidence only, not a theorem,
 ABI, status, or conformance claim.
+
+`T-RESEARCH-027` is `research-complete` as an OBL-025 diagnostic completeness
+audit: `0 direct / 0 delegated / 1 missing` coupled Line-1 rejection /
+declared-fragment / single-edit repair / diagnostic-realization formalization
+boundary. Theory/10 and spec/07 fix the target direction, repair taxonomy, and
+required repair field, but not the rejection, fragment, edit/application,
+repair-validity, emission-association, or suggestion-realization relations. A
+trusted Boolean twin shows that a non-empty emitted repair carrier need not
+realize a repair or cover the rejected gap. This is not a canon
+counterexample and does not impose a canonical whole-gap interpretation.
+Existing E-ROW payloads and the LAB draft remain limited evidence only; no
+OBL-025 statement, proof, ABI, ranking, multi-edit semantics, or status moves.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -337,6 +349,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:53 JST: Completed the OBL-025 diagnostic-completeness audit.
+  The target direction and taxonomy remain fixed; Line-1/rejection,
+  declared-fragment, single-edit repair, association, and realization semantics
+  remain one unselected formalization boundary.
 - 2026-07-17 19:45 JST: Completed the OBL-024 diagnostic-soundness audit.
   Carrier fields and policy direction remain fixed; emission association,
   replay/exact-at semantics, and diagnostic equality remain one unselected

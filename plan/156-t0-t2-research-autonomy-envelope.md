@@ -1172,6 +1172,44 @@ status. It does not promote the current LAB projection or draft. Stop
 `decision-ready` before selecting any of those interfaces. Exact evidence is
 in Report 2279.
 
+## T-RESEARCH-027: OBL-025 diagnostic completeness boundary (research-complete)
+
+**Selection:** after T-RESEARCH-026, OBL-025 is the remaining independent
+theory/10 source cut. Existing LAB repair payloads and the compile-checked
+statement draft are evidence of bounded shapes only; they cannot be promoted
+to a canonical diagnostic or repair interface by this audit.
+
+**Question:** do theory/10 and spec/07 determine a proof-facing relation that,
+for each repairable Line-1 rejection in the declared fragment, associates an
+emitted non-empty repair suggestion with a valid single edit that addresses the
+rejected gap?
+
+**Source reading:** theory/10 directly fixes the Line-1 target direction,
+initial repair taxonomy, and the deferment of ranking and multi-edit repairs.
+Spec/07 fixes a required `suggested_repair[]` field. Neither source defines a
+Line-1 rejection carrier, a declared-fragment membership relation, edit syntax
+or application, the predicate that a single edit repairs a rejection, a
+diagnostic-to-rejection association, or the relation from a suggestion to an
+applicable repair. The LAB draft names these as abstract predicates and keeps
+whole-gap coverage, grouped multi-edit, and branch-local guards explicit.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled Line-1
+rejection / declared-fragment / single-edit repair / diagnostic realization
+formalization boundary**. A disposable Boolean model has a Line-1 rejection,
+an extant single edit, an emitted Diagnostic, and a non-empty repair carrier in
+both instances. The divergent instance does not realize a repair or cover the
+rejected gap, so non-empty carrier shape does not by itself derive candidate
+repair completeness. This is not a canon counterexample and does not impose
+whole-gap coverage as a canon interpretation; it makes the still-unselected
+semantic link explicit.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define a Line-1/rejection carrier, declared fragment, source-edit
+or edit-application semantics, repair validity, diagnostic association,
+suggestion realization, final Diagnostic/repair JSON ABI, repair ranking,
+multi-edit semantics, OBL-025 statement/proof, or status. It does not promote
+E-ROW payloads or the LAB Lean draft. Exact evidence is in Report 2280.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
