@@ -157,8 +157,10 @@ the canonical sync command regenerates the same clean-stub directory.
 
 ## Commit / push status
 
-At report composition, the package is not yet committed. It will be committed
-with `--no-gpg-sign` and pushed after final validation.
+The package was committed with `--no-gpg-sign` as `53ad3676` (`Audit theory
+proof-status evidence`) and pushed to `origin/main` after the final
+validation. A post-push worktree/upstream check is recorded with this status
+sync.
 
 ## Sub-agent session close status
 
