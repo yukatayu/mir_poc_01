@@ -961,6 +961,38 @@ enumeration, checker algorithm/result, diagnostics, SaveObject, Z-cycle,
 persistence ABI, OBL-010 statement/proof, or status. Stop `decision-ready`
 before selecting any of those interfaces. Exact evidence is in Report 2273.
 
+## T-RESEARCH-021: OBL-004 no-undeclared-communication kernel (research-complete)
+
+**Selection:** theory/03 directly requires every cross-locus consequence to
+appear in `G_e` and prohibits other communication generation. LAB plan/73 and
+plan/76 expressly keep the whole-program OBL-004 corollary outside the OBL-001
+statement inventory, so this source cut is limited to composition algebra and
+does not preempt THM-001, runtime, or transport work.
+
+**Question:** what no-undeclared-communication composition fact follows before
+a program/elaboration/runtime relation is selected?
+
+**Source reading:** theory/03 fixes no hidden edges and names request, publish,
+observe, and witness rows; theory/01 fixes `G_e` in the unified judgment;
+spec/03 fixes cross-locus static duties; BND-001 and BND-004 delimit
+elaboration and verdict-approved execution. They do not define program
+composition, edge equality, declared-edge mapping, or runtime communication.
+
+**Result:** **one direct conditional composition kernel** plus **one remaining
+full-corollary formalization boundary**. A disposable generic Lean theorem
+proves itemwise generated-edge containment composes over an experiment-local
+binary sequence. A finite two-edge model shows a checker that validates only a
+request accepts a sequential program containing an undeclared publish. The
+negative model is not a canon counterexample; it isolates complete category
+coverage as required evidence.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical programs, handlers, branches, `G_e`,
+declarations, generated-edge equality, elaboration, effect/failure/authority
+relations, runtime, transport ABI, THM-001/OBL-004 statement/proof, or status.
+Stop `decision-ready` before selecting any of those interfaces. Exact evidence
+is in Report 2274.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

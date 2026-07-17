@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 19:04 JST
+最終更新: 2026-07-17 19:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -179,6 +179,14 @@ countermodel shows why a partial checker is unsound. The finite checker
 carrier, exhaustive edge coverage, decider, result, and diagnostic interface
 remain unselected, so this is not an OBL statement, proof, or status change.
 
+`T-RESEARCH-021` is `research-complete` as an OBL-004
+no-undeclared-communication composition audit. Theory/03 directly fixes
+item-level `G_e` visibility and forbids other communication generation; a
+trusted generic kernel proves itemwise containment composes. A two-edge
+countermodel shows why a partial request-only checker is unsound. Program,
+elaboration, generated-edge, declaration, runtime, transport, theorem, and
+status interfaces remain unselected.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -284,6 +292,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 19:10 JST: Completed the OBL-004 no-undeclared-communication
+  kernel audit. Itemwise generated-edge containment composes; program,
+  elaboration, generated-edge, declaration, and runtime communication
+  relations remain unselected.
 - 2026-07-17 19:04 JST: Completed the OBL-010 consistent-cut checker kernel
   audit. Direct-edge closure entails prefix closure under the selected generic
   relation; finite carrier, exhaustive edge coverage, checker, and diagnostic
