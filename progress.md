@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 09:15 JST
+最終更新: 2026-07-17 09:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -43,6 +43,13 @@ definition of append or a complete `[E-OBS]` rule. No canon theorem, status, or
 lifecycle changed. The canonical lifecycle remains
 `mirrorea_canon/plan/01-phases.md`; the LAB work-selection and stop boundary is
 `plan/156-t0-t2-research-autonomy-envelope.md`.
+
+`T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
+foreign-locus source pair reproduced request shape, failure-row acceptance /
+rejection, and source spans, but the current lane has no structured
+capability/witness carrier or JSON-to-OBL-001 interpretation. This is an
+evidence-route blocker, not a canon counterexample; it creates a decision-ready
+owner item and leaves the next LAB research unit unselected.
 
 ## milestone map
 
@@ -105,6 +112,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
+| Owner / LAB route | OBL-001 concrete-evidence bridge | explicit promotion must choose defer versus a new read-only bridge / exposed carrier / reviewed binding; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003 complete; no successor selected without a fresh canon-grounded criterion |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
@@ -135,6 +143,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 09:51 JST: Rejected a proposed literal-RHS foreign-locus
+  T-RESEARCH-004 after the source pair reproduced but lacked an existing
+  authority-carrier interpretation; no new lane was created and the bridge is
+  now an owner decision-ready blocker.
 - 2026-07-17 09:15 JST: Reproduced the runnable LAB front doors: workspace
   tests, Surface, Full System V1, Product Alpha, installed-binary, operational,
   and current-L2 checks all accepted their bounded evidence; no canon or

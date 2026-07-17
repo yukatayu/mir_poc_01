@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 09:04 JST
+最終更新: 2026-07-17 09:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,6 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
 | いまの研究 | OBL-001/020/021 の反例監査、`[E-WRITE]` store-key、`[E-OBS]` append kernel を `research-complete` とした。後者は incoming-only graph extension の条件付き結果であり、canon の append 定義ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線
 
@@ -50,6 +51,9 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
   agent は `decision-ready` で止まる。 | `mirrorea_canon/plan/02-operating-model.md` |
 - 新しい helper / evidence lane / schema / CI / Make target / main merge /
   conformance claim は T1 exit 前の研究範囲外。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+- OBL-001 の concrete-evidence bridge を作るには owner の明示 promotion が
+  必要であり、agent は JSON field、Lean interpretation、wrapper を自走で追加
+  しない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## オーナーの確認・判断待ち
 
@@ -58,7 +62,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | G0-D1 / D2 / D4 | recorded | ADR-0013 に記録済み。再判断待ちではない。 |
 | G0-D3 | DEFERRED (dormant) | owner が明示的に reopen するまで研究単位の選定対象にしない。 |
 | T0-T2 research autonomy | recorded LAB operating authorization | `plan/156-t0-t2-research-autonomy-envelope.md` の選定規則と停止条件の範囲で agent が調査を継続する。 |
-| current owner decision | none | decision bundle の停止条件が実際に発火した時だけ、根拠付きで提示する。 |
+| OBL-001 concrete-evidence bridge | decision-ready | existing elaborator output と abstract OBL-001 predicate の bridge を将来作るか。current LAB recommendation は proof-facing need まで defer。 |
 
 `G0-D3` の defer は canon lifecycle を変えず、LAB 上の選定ガードとしてだけ
 扱います。 | `plan/155-t0-g0-governance-profile-proposal.md`

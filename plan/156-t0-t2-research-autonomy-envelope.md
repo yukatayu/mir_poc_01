@@ -205,6 +205,44 @@ or a different rule-local OBL/SCN candidate satisfying the selection rule in
 this plan. Do not reopen merely to search for a mathematically weakest graph
 condition.
 
+## T-RESEARCH-004 candidate preflight: not selected
+
+**Candidate:** a literal-RHS, private-field foreign-locus write inversion audit
+for the `[WRITE-CROSS]` / `[LOCUS-BLOCK]` portion of THM-001 / OBL-001. The
+source cut deliberately excluded RHS indexed reads, visible fields, and
+publication/observation consequences so that it would not select OPEN-014 or
+visibility semantics.
+
+**Bounded preflight evidence:** an untracked `/tmp` source differed from the
+existing `ELAB-07` negative only by completing its `fails` row. The existing
+Surface elaborator accepted that positive source; the committed counterpart was
+rejected with `generated_failure_not_declared`. Both reported one
+`BrowserClient -> S` remote write request, no dependency/publication/observation
+rows, and the same six source-span entity kinds. This is reproducible source
+evidence only, not a tracked fixture or a new runner lane.
+
+**Existing-lane falsifier:** the current elaborator output contains no
+structured capability/witness-obligation carrier, and no existing interpretation
+maps that output into the OBL-001 abstract `Pred` fields or the canonical `C ∪
+O` obligation boundary. The preflight therefore cannot evaluate the candidate's
+required authority-carrier clause. The absence is a limitation of the current
+LAB evidence projection; it is not evidence that canon obligations are absent
+or that the request is unauthorized.
+
+**Disposition:** `T-RESEARCH-004` is **not selected** and is not
+`research-complete` or `decision-ready`. No fixture, helper, schema, wrapper,
+Lean interpretation, or artifact identity was added. The next autonomous LAB
+research unit remains unselected.
+
+**Separate decision-ready blocker:** an explicit owner promotion would be
+needed to choose whether to create a concrete OBL-001 evidence bridge, such as
+a read-only JSON-to-`Pred` interpretation, structured elaborator exposure of
+`C`/`O` and capability/witness references, or a reviewed artifact binding. The
+current LAB recommendation is to defer that bridge until an OBL-001
+proof-facing package actually needs it. This is an evidence-route decision, not
+a request to change canon authority semantics, Gate/Phase state, or proof
+status.
+
 ## Current non-claims
 
 This plan does not assert that G0 exits, that T1 begins, that G1 is ready, that

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 09:15 JST
+最終更新: 2026-07-17 09:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -17,6 +17,12 @@ System V1, Product Alpha, installed-binary, operational, and current-L2
 evidence paths without a failure. It does not promote a successor research unit
 or alter any readiness classification.
 
+The subsequent `T-RESEARCH-004` candidate preflight is **not selected**. Its
+literal-RHS source pair reproduces request/failure/span evidence, but the
+current elaborator does not expose the authority/capability/witness carrier
+needed to evaluate the stated OBL-001 subcase. The next research unit remains
+unselected; a separate owner decision is required before creating a bridge.
+
 ## ordered self-driven packages
 
 | Order | Work unit | Aim and completion signal | Macro / rough estimate |
@@ -24,7 +30,8 @@ or alter any readiness classification.
 | 1 | T-RESEARCH-001 (complete) | Reproduced Surface/Lean anchors and constructed finite countermodels for OBL-020, OBL-021, and OBL-001. | Macro 5 early; closed as LAB evidence |
 | 2 | T-RESEARCH-002 (complete) | Proved one `[E-WRITE]` store-key preservation case under value-only update; showed epoch-changing update breaks that clause. | Macro 1/5 middle; closed as LAB evidence |
 | 3 | T-RESEARCH-003 (complete) | Proved a fresh incoming-only `[E-OBS]` graph kernel for acyclicity and kind-level publication ancestry; a weak outgoing-edge model forms a cycle. | Macro 1/5 middle; closed as conditional LAB evidence |
-| 4 | next eligible concrete rule/clause (unselected) | Select only an existing OBL/SCN rule-clause with an exact canon source cut and falsification criterion; do not create a lane. | Macro 1/5 reserve; one focused session |
+| 4 | T-RESEARCH-004 preflight (not selected) | Literal-RHS foreign-locus source pair passed request/failure/span checks, but the existing lane cannot evaluate the required authority carrier. | Macro 1 early; bounded falsifier recorded |
+| 5 | next eligible concrete rule/clause (unselected) | Select only after the OBL-001 concrete-evidence bridge is explicitly deferred or authorized; do not create a lane by default. | Macro 1/5 reserve; owner-dependent |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -41,6 +48,7 @@ The authority source is `mirrorea_canon/plan/02-operating-model.md`; the current
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
+| OBL-001 concrete-evidence bridge | whether static elaborator output can instantiate authority/capability/witness OBL-001 evidence | defer until proof-facing need; authorize a read-only bridge/exposed carrier/reviewed binding | defer is recommended; no bridge is created autonomously |
 | semantic premise not derivable from canon | scope and truth of a proposed theorem | owner/canon decision; explicitly defer; change research target | stop with a decision bundle, not an inferred choice |
 | SCN/canon/ADR/theory ledger action | normative semantics or proof status | apply through canon process; defer | never apply through LAB task close |
 
@@ -52,7 +60,7 @@ G0-D3's current defer is recorded in `plan/155-t0-g0-governance-profile-proposal
 | --- | --- | --- |
 | OBL-020 | remaining concrete step rules and well-formedness clauses after `[E-WRITE]` and conditional `[E-OBS]` graph evidence | select one explicit case only; do not treat incoming-only as canon-defined append |
 | OBL-021 | deterministic elaboration relation and equality/equivalence premises | OPEN-014 materialization boundary; stop if a canon choice is needed |
-| OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | G1 static bridge evidence; select only with an inversion/falsification target |
+| OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | source preflight reproduced a narrow pair but falsified the existing concrete authority-carrier lane; wait for the owner bridge decision |
 | G2 / G3 statements | feasibility of chain and authority statement groups | only after current higher-priority boundary is clear |
 
 ## maintenance tasks
