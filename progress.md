@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:38 JST
+最終更新: 2026-07-17 18:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -143,6 +143,15 @@ explicitly selected reissue actions; a separate unstructured-label model
 shows why labels do not provide the missing relation. It selects no authority
 ABI, theorem, status, or lifecycle.
 
+`T-RESEARCH-017` is `research-complete` as an OBL-022 stream read-side audit:
+`0 direct / 0 delegated / 1 missing` coupled formalization boundary. Theory/09
+directly fixes samples outside occurrence history and the read-side policy, and
+BND-007 retains typed adapters without semantic ownership. It does not define
+a sample/adapter/discrete-transition carrier or frame. A trusted action kernel
+proves retention only under its explicitly selected sample-only branch; an
+unstructured-label model shows why labels do not provide the missing relation.
+It selects no stream/adapter ABI, theorem, status, or lifecycle.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -248,6 +257,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:44 JST: Completed the OBL-022 stream read-side audit. The
+  sample-outside-history and typed-adapter policy remain intact; stream,
+  adapter, discrete-transition, and frame/equality relations remain one
+  unselected formalization boundary.
 - 2026-07-17 18:38 JST: Completed the OBL-028 revocation-monotonicity audit.
   The fixed lifecycle and no-stale-revival policy remain intact; revocation,
   new epoch/evidence, identity, and trace/transition remain one unselected

@@ -836,6 +836,37 @@ caprefs, state/trace relations, load/rollback behavior, runtime ABI, OBL-028
 statement/proof, or status. Stop `decision-ready` before selecting any of those
 interfaces. Exact evidence is in Report 2269.
 
+## T-RESEARCH-017: OBL-022 stream read-side boundary (research-complete)
+
+**Selection:** OBL-022 has direct two-layer-time and typed-adapter anchors.
+OBL-027 remains closely coupled to the successful-load/cut source family
+already audited in T-RESEARCH-014, while OBL-023 explicitly has a pending
+formal statement and open clock/latency model. The OBL-022 question is
+independent of the earlier theorem-statement boundaries.
+
+**Question:** does theory/09's rule that samples cannot influence discrete
+state except via declared adapter effects itself determine a proof-facing
+read-side OBL-022 statement?
+
+**Source reading:** theory/09 fixes samples as non-occurrences outside `H`,
+not saved per-sample, anchor/frontier admissibility, drop-not-buffer behavior,
+and the read-side policy. BND-007 prevents View/Provider semantic ownership
+and confines their connection to typed adapters. It does not define samples,
+discrete state, adapter effects, or a transition relation.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled stream read-side
+formalization boundary**. A disposable action model proves a sample-only branch
+preserves an experiment-local discrete field while its distinct adapter and
+discrete branches may change it. An unstructured-label model gives a sample
+both no-adapter and discrete-change labels. The latter is not a canon
+counterexample; it isolates the missing frame/transition link.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical streams, samples, anchors, discrete Config,
+adapter effects/ABI, effect declarations, clocks, transition/trace relations,
+frame equality, OBL-022/023 statement/proof, or status. Stop `decision-ready`
+before selecting any of those interfaces. Exact evidence is in Report 2270.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
