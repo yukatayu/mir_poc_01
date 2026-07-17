@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:28 JST
+最終更新: 2026-07-17 18:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -134,6 +134,15 @@ opaque-label model shows why a bare pairwise label cannot supply that
 structure. It selects no canonical variance, ABI, theorem, status, or
 lifecycle.
 
+`T-RESEARCH-016` is `research-complete` as an OBL-028 revocation-monotonicity
+audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
+Theory/05 directly fixes the lifecycle and policy direction, but not a
+revocation/reissue carrier, identity across state changes, or a trace/
+transition relation. A trusted action kernel proves retention only under its
+explicitly selected reissue actions; a separate unstructured-label model
+shows why labels do not provide the missing relation. It selects no authority
+ABI, theorem, status, or lifecycle.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -239,6 +248,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:38 JST: Completed the OBL-028 revocation-monotonicity audit.
+  The fixed lifecycle and no-stale-revival policy remain intact; revocation,
+  new epoch/evidence, identity, and trace/transition remain one unselected
+  formalization boundary.
 - 2026-07-17 18:28 JST: Completed the OBL-026 transparent-overlay composition
   audit. The ten fixed policy directions remain intact; contract-field orders,
   layer-stack composition, and equality/extensionality remain one unselected

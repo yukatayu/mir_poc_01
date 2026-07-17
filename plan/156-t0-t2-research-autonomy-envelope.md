@@ -805,6 +805,37 @@ ContractUpdate, a final ABI, OBL-026 statement/proof, or cost algebra. Stop
 `decision-ready` before selecting any of those interfaces. Exact evidence is
 in Report 2268.
 
+## T-RESEARCH-016: OBL-028 revocation-monotonicity boundary (research-complete)
+
+**Selection:** OBL-003 has finite-fragment direction but no derivation-ready
+Line-1 judgment or grammar interface. OBL-019 would substantially repeat the
+existing E-PATCH transition/frame gap in T-RESEARCH-006. OBL-028 has direct
+authority-lifecycle anchors and is independent of T-RESEARCH-012, whose
+non-claims expressly exclude revocation.
+
+**Question:** does theory/05's statement that revocation is monotone unless a
+new epoch/evidence is issued itself determine a proof-facing OBL-028
+revocation/reissue statement?
+
+**Source reading:** theory/05 fixes epoch/incarnation lifecycle, tombstoning,
+old grant/witness non-revival, and the monotone-revocation policy. theory/01
+names the membership, capability, and witness stores; theory/04 and SCN-03/04
+add causal/load and stale-capref expectations. They do not define revocation,
+reissue, state identity, or trace transitions.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled revocation-
+monotonicity formalization boundary**. A disposable action model proves that a
+revoked snapshot remains revoked when its two explicitly chosen reissue actions
+are absent. An unstructured-label model permits a revoked-to-active label pair
+while labels named no-reissue and transition also hold. The latter is not a
+canon counterexample; it isolates the missing semantic link.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical revocation, epochs, evidence, grants, witnesses,
+caprefs, state/trace relations, load/rollback behavior, runtime ABI, OBL-028
+statement/proof, or status. Stop `decision-ready` before selecting any of those
+interfaces. Exact evidence is in Report 2269.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
