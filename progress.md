@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 14:20 JST
+最終更新: 2026-07-17 14:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -70,6 +70,16 @@ all three abstract determinism postconditions are canonically intended but
 The missing force is result/projection coherence, diagnostic equivalence, and
 shared-outcome exclusion; no equality, datatype, statement, or proof status was
 selected.
+
+`T-RESEARCH-009` is `research-complete` as a bounded OBL-005
+structural-flattening kernel. An opaque-leaf, experiment-local binary shape
+with a free ordered-word output proves only that one reassociation preserves
+structural output, and that a one-hole meta-context is an identity. An
+order-reversed fold still satisfies reassociation but fails a two-leaf
+left-to-right oracle; a separate empty-constructor mutation demonstrates that
+a source-level unit needs a changed signature. This does not define canonical
+applicability, chain validity, source-level unit, confluence, evaluation, or
+OBL-005 status.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -147,6 +157,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
+| Research | OBL-005 full source-level unit / OBL-006 confluence boundary | OBL-005 has only a structural-output kernel; do not infer a source empty term or rewrite relation |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
@@ -175,6 +186,11 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 14:41 JST: Completed the bounded OBL-005 structural-flattening
+  kernel. One reassociation preserves an experiment-local structural output;
+  a hole context is meta-syntax, and reverse order / added-empty mutations
+  delimit the left-to-right and source-signature boundaries without changing
+  canon or proof status.
 - 2026-07-17 14:20 JST: Completed the OBL-021 BND-001 postcondition audit.
   Three trusted finite falsifiers isolate projection coherence, diagnostic
   equivalence, and branch exclusion without changing canon or the Lean draft.

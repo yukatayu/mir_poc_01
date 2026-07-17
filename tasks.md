@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 14:20 JST
+最終更新: 2026-07-17 14:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -10,7 +10,7 @@ This is the current LAB task map, not an append-only history and not a canon dec
 
 ## current promoted package
 
-No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel), **T-RESEARCH-005** (one `[E-DEGRADE]/[E-REACQ]` restricted lineage kernel), and **T-RESEARCH-006** (13 selected transition x five named WF-clause source-adequacy audit) are `research-complete`. T-RESEARCH-006 found `0 direct / 65 missing`: complete operational proof premises remain absent from the canon source cut. Their results are recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. The next work unit needs a fresh source cut and falsifier.
+No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel), **T-RESEARCH-005** (one `[E-DEGRADE]/[E-REACQ]` restricted lineage kernel), **T-RESEARCH-006** (13 selected transition x five named WF-clause source-adequacy audit), **T-RESEARCH-008** (OBL-021 postcondition source audit), and **T-RESEARCH-009** (OBL-005 structural-flattening kernel) are `research-complete`. T-RESEARCH-006 found `0 direct / 65 missing`; T-RESEARCH-008 found `0 direct / 0 delegated / 3 missing`; T-RESEARCH-009 deliberately proves only one structural-output reassociation and a hole-context identity. Their results are recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. The next work unit needs a fresh source cut and falsifier.
 
 The 2026-07-17 runnable-front-door audit reproduced the existing Surface, Full
 System V1, Product Alpha, installed-binary, operational, and current-L2
@@ -40,7 +40,8 @@ disposition and does not authorize bridge design.
 | 6 | T-RESEARCH-006 (complete) | Audited all 65 selected transition x named-WF cells. None has derivation-complete canon premises; five missing-premise groups replace a generic global-frame label. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
 | 7 | T-RESEARCH-007 (decision-ready) | Prepared PROPOSAL-003 for the formalization-organization A/B/C decision. Its five headings are LAB review categories, not canon predicates or a fixed Lean interface. | Macro 1 middle; owner record pending, unrelated research may continue |
 | 8 | T-RESEARCH-008 (complete) | Audited the three OBL-021 determinism conjuncts against BND-001: 0 direct / 0 delegated / 3 missing; finite models isolate the missing contracts. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
-| 9 | next independent theory source cut (unselected) | Select an existing-lane question without choosing the OBL-021 interpretation contracts. | Macro 1/5 reserve; research-selected |
+| 9 | T-RESEARCH-009 (complete) | Proved only experiment-local structural-output reassociation and hole-context identity for OBL-005; reverse order and source-empty mutations delimit what this does not establish. | Macro 1/5 middle; closed as bounded LAB algebraic evidence |
+| 10 | next independent theory source cut (unselected) | Select an existing-lane question without choosing an OBL-021 contract, a source-level OBL-005 unit, or an OBL-006 rewrite relation. | Macro 1/5 reserve; research-selected |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -70,6 +71,7 @@ G0-D3's current defer is recorded in `plan/155-t0-g0-governance-profile-proposal
 | OBL-020 | source-adequacy audit found no derivation-complete case across all 13 selected rules x five named clauses; next research must distinguish statement premises from any canonical semantic choice | compare the existing abstract statement draft with the five missing-premise groups; do not treat a LAB taxonomy or experiment-local update as canon-defined |
 | OBL-020 formalization organization | common review organization is not derivable from current canon prose | owner chooses PROPOSAL-003 A/B/C; its LAB headings are non-exhaustive and the proposal does not block unrelated theory research |
 | OBL-021 | deterministic elaboration relation and equality/equivalence premises | OPEN-014 materialization boundary; stop if a canon choice is needed |
+| OBL-005 / OBL-006 | a source-level unit interpretation and any rewrite/equivalence relation for uniqueness or confluence | T-RESEARCH-009 is output algebra only; do not turn its hole context or list carrier into source syntax |
 | OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | source preflight reproduced a narrow pair but falsified the existing concrete authority-carrier lane; the complete owner-facing bundle awaits an explicit disposition |
 | G2 / G3 statements | feasibility of chain and authority statement groups | only after current higher-priority boundary is clear |
 

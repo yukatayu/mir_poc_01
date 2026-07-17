@@ -468,6 +468,67 @@ equivalence, totality, outcome carrier, proof interface, OBL status, Gate, or
 Phase is selected. The audit is `research-complete`; a concrete proof package
 must stop `decision-ready` before choosing any missing contract.
 
+## T-RESEARCH-009: OBL-005 structural-flattening kernel (research-complete)
+
+**Question:** do the two settled equations in `theory/06` — singleton for a
+lone option and left-to-right append for `fallback` — suffice for a smallest
+algebraic output-equality result under one syntactic reassociation, without
+choosing a MirCore source AST, canonical carrier, validity predicate,
+evaluation, or source-level empty fallback term?
+
+**Method:** a disposable trusted Lean file under
+`/tmp/mirrorea-t-research-009/CanonicalFlatten.lean` uses an opaque leaf
+carrier, an experiment-local finite binary shape, and `List` only as a free
+ordered-word output model. Its `flattenShape` fold is a structural witness for
+the two equations; it is deliberately not named or treated as a total
+canonicalization judgment. It proves output equality for the one root
+reassociation and the identity of the empty one-hole **meta-context**. The
+source shape has only `leaf` and `fallback`; the hole is not a source term.
+
+**Positive result:** the root reassociation theorem follows from append
+associativity. The empty-hole context plugs to its argument by definition. The
+experiment does not prove arbitrary-context reassociation, source-shape
+equality, validity preservation, lineage-annotation preservation,
+admissibility, denotation, evaluation, normalization, confluence, uniqueness,
+or a leftmost-selection theorem.
+
+**Negative evidence:** an order-reversing fold still satisfies the same root
+reassociation equation, so associativity alone does not test the settled
+left-to-right direction. A two-distinct-leaf orientation oracle separates it
+from `flattenShape`. A second disposable mutation begins with no empty source
+constructor (so a source-unit theorem fails to typecheck), then adds one and
+proves left/right source units. That demonstrates that a source-level empty
+chain is a signature change, not a consequence of the settled equations.
+
+**Review and classification:** a completed Oracle review accepted this as a
+bounded LAB algebraic kernel after requiring: structural-output rather than
+canonicalization wording; a one-hole context identity instead of list/source
+unit wording; an explicit no-validity boundary because edge-local lineage
+annotations are not reassociation-neutral; and the order-reversal mutation.
+All requested corrections were applied. This is `research-complete`, not
+`decision-ready`: no canonical choice is needed for the stated result. It does
+not discharge OBL-005 or select what the ledger's shorthand `assoc/unit` would
+mean for any later source-level empty-chain interpretation.
+
+**Reproducibility:** Lean 4.29.1 compiled both disposable files with
+`lean --trust=0`. `#print axioms` reported only Lean's `propext` for the
+append-associativity results and no axioms for the hole-context identity. A
+named scan found no `sorry`, `admit`, declared `axiom`, `opaque`, `unsafe`,
+`partial`, or `implemented_by`. Exact commands, the failed-before-defined
+checks, output, and source hash are recorded in Report 2262. Scratch artifacts
+remain disposable and untracked.
+
+**Binding and non-claims:** opaque leaves do not choose option fields,
+equality, guard, contract, capability, lease, or admission representation.
+`List` is an experiment-local free-word carrier, not the selected canonical
+form. The work does not alter `theory/06`, `theory/11`, a Gate, a Phase, a
+chain notation, a parser, a runtime, or proof status.
+
+**Next selection point:** a later OBL-005 package must make its exact
+source-level `unit` interpretation explicit before claiming a full obligation
+discharge. Any OBL-006 work must first name an existing source-grounded rewrite
+or equivalence relation; do not infer it from this one output-equality lemma.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
