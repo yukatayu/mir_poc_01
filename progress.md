@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 20:42 JST
+最終更新: 2026-07-17 20:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -277,6 +277,17 @@ statement drafts are definitions, its 16 generated stubs prove only `True`,
 and its four foundations are helper-local models. It therefore found no hidden
 active placeholder or status drift, not a domain proof or an OBL discharge.
 
+`T-RESEARCH-032` is `research-complete` as a cross-boundary theory
+claim-integrity audit. All audited theorem, obligation, and boundary references
+resolve to the canonical ledger or registry, and no proof-completion wording
+occurs outside the ledger. The audit preserves rather than fills three visible
+formalization boundaries: existence-DAG acyclicity has no selected
+Config/WellFormed carrier, patch-DAG acyclicity is not OBL-019's no-mutation
+result, and the working stream fallback direction is not an automatic transfer
+of THM-002 while samples remain outside `H`. SCN-04 compaction and BND-006
+remain later operational constraints, not reasons to enlarge the core or make
+a current proof claim.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -382,6 +393,12 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 20:55 JST: Completed the cross-boundary theory claim-integrity
+  audit. The theorem/obligation/boundary registries have no dangling audited
+  reference and no chapter claims a completed proof. Existence DAG, patch DAG,
+  and stream fallback remain explicit later formalization directions; SCN-04
+  compaction and BND-006 stay operational constraints. No canon, OBL, Gate,
+  Phase, core-vocabulary, or implementation state changed.
 - 2026-07-17 20:42 JST: Completed the proof-status and Lean-evidence integrity
   audit. All 28 open OBLs have a non-overlapping current classification; the
   active 25-file Lean corpus compiled sequentially without active placeholders.

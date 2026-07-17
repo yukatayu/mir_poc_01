@@ -1391,6 +1391,65 @@ no hidden active proof placeholder and no unclassified ledger obligation; it
 does not make an open obligation closer to discharge. Exact evidence is in
 Report 2284.
 
+## T-RESEARCH-032: cross-boundary theory claim-integrity audit (research-complete)
+
+**Selection:** T-RESEARCH-031 established that the active Lean corpus does not
+silently discharge a ledger entry. This follow-up checks a different failure
+mode: a theorem-like claim, an invariant, or a frozen scenario expectation may
+appear outside its intended proof or conformance boundary and thereby be read
+as already established. It reuses the current canon, ledger, scenarios, and
+architecture contracts; it creates no calculus experiment, carrier, helper, or
+new evidence lane.
+
+**Question:** do the current theory chapters, architecture boundaries, and
+frozen scenarios contain a contradictory, untracked, or falsely discharged
+proof-like claim; and where is a structural direction intentionally waiting for
+a later formalization or conformance package?
+
+**Positive checks:** every referenced `THM-###`, `OBL-###`, and `BND-###` in
+the audited theory, scenario, architecture, and spec reading resolves to the
+canonical ledger or boundary registry. The chapters do not state a proof
+completion outside theory/11, and theory/11 still records every obligation as
+`open`. The primary target results remain visibly connected to their chapters:
+step well-formedness (OBL-020), elaboration/determinism and hidden-edge
+directions (OBL-001--004/021), chains (OBL-005--008), cut/load (OBL-009--014/
+027), authority (OBL-015/016/028), observation (OBL-017/018), patch rejection
+(OBL-019), two-layer time (OBL-022/023), diagnostics (OBL-024/025), and
+transparent overlays (OBL-026).
+
+**Boundary findings:** no contradiction or hidden proof result was found, but
+four statements must not be read as a discharged theorem today.
+
+1. The occurrence DAG is explicitly part of the current `WellFormed`
+   vocabulary and is in OBL-020's stated preservation direction. The separate
+   existence DAG is a structural G2 direction, but has no selected runtime
+   carrier or explicit membership in the current `Config`/`WellFormed`
+   definition. A later G2 package must state whether it is a static declaration
+   invariant, a runtime relation, or both before it can prove preservation.
+2. Patch dependencies are required to form a DAG, but the present OBL-019
+   target is rejection no-mutation, not patch-DAG acyclicity. A later G7
+   package must choose the dependency carrier and admission/activation relation
+   before making a preservation or scheduling proof claim.
+3. Theory/09 says stream loss follows the anchor fallback chain and that
+   THM-002 governs streams. Samples are deliberately outside `H`, while the
+   current THM-002 statement ranges over chain instances in a well-formed
+   trace. This is a working cross-layer direction, not an automatic proof
+   transfer. T-RESEARCH-017 and -019 already reserve the sample/adapter/frame
+   relations to a later G4 package; that package must make the bridge explicit
+   if it relies on THM-002.
+4. SCN-04's retained-savepoint compaction condition and BND-006's projection
+   preservation list are frozen operational/conformance constraints, not
+   current core theorem statements. They must not cause a new core primitive or
+   a spurious proof obligation before the relevant G5/I1 or G6 package selects
+   a storage or projection relation.
+
+**Classification and non-claims:** `research-complete`. This is a reading and
+claim-boundary audit, not a decision-ready request. It adds no OBL, theorem,
+`WellFormed` clause, scenario expectation, grammar, carrier, runtime behavior,
+proof status, Gate/Phase state, or owner decision. It does not weaken the four
+directions above; it prevents them from being silently treated as already
+formalized. Exact evidence is in Report 2285.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

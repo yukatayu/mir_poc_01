@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 20:42 JST
+最終更新: 2026-07-17 20:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -23,7 +23,11 @@ source family. T-RESEARCH-031 then audited the 28 OBL ledger and active Lean
 corpus: every OBL has a current parent/dependent/kernel/overlap/diagnostic
 classification, and the 25 active Lean files have no hidden active
 `sorry`/`admit`/`axiom` path. This establishes no domain theorem or status
-movement. In the previous sentence,
+movement. T-RESEARCH-032 then cross-checked claim boundaries: all audited
+THM/OBL/BND references resolve, but existence-DAG, patch-DAG, and stream
+fallback statements remain future carrier/relation questions rather than
+discharged results. SCN-04 compaction and BND-006 remain operational
+constraints, not invitations to enlarge Mir core. In the previous sentence,
 "exhausted" is limited to the current metatheory ledger and permitted existing
 LAB lanes; it does not mean the project has no remaining research. G0-D3 and
 the existing OBL-020 organization decision, plus the narrow Surface grammar
@@ -80,6 +84,7 @@ disposition and does not authorize bridge design.
 | 29 | T-RESEARCH-029 (decision-ready) | Cross-checked the canon index, registries, and Surface/Core boundaries. `atomic_cut` is consistently Core-only; exact Surface grammar remains unclosed until custom keyspace declaration and missing EBNF productions are canonically clarified. | Macro 1 early; owner/canon clarification required before parser/checker grammar claim |
 | 30 | T-RESEARCH-030 (decision-ready) | Prepared PROPOSAL-004 from six canonical and 47 active LAB Participant-indexed declarations plus LAB alpha scope. It recommends a Participant-only grammar closure and defers custom keyspaces. | Macro 1 early; owner chooses PROPOSAL-004 A/B/C before normative grammar edit |
 | 31 | T-RESEARCH-031 (complete) | Audited all 28 open OBL classifications and 25 active Lean artifacts. No active placeholder or proof-status drift was found; generated `True` stubs and helper-local proofs remain non-domain evidence. | Macro 0/1 integrity maintenance; no new semantic boundary or owner choice |
+| 32 | T-RESEARCH-032 (complete) | Cross-checked theory/scenario/architecture claim boundaries. No unresolved THM/OBL/BND reference or proof-complete claim was found; existence DAG, patch DAG, and stream fallback remain explicitly unformalized later-package directions. | Macro 0/1 integrity maintenance; no new semantic boundary or owner choice |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
