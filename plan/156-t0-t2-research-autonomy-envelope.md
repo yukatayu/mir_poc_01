@@ -561,6 +561,51 @@ the ledger slash as one theorem, two properties, or alternatives.
 Surface/Core grammar, canonical carrier, rewrite relation, OBL status, Gate,
 or Phase. Exact evidence is in Report 2263.
 
+## T-RESEARCH-011: THM-002 / OBL-007 trace-formalization boundary audit (research-complete)
+
+**Question:** does the existing THM-002 source cut directly determine a
+proof-facing Lean statement for monotone fallback selection and explicit fresh
+reacquisition?
+
+**Source reading:** `theory/06`, ADR-0004, and SCN-08 directly fix the
+normative policy: selection is non-decreasing on one lineage; an earlier option
+may be selected again only through an explicit reacquire that starts a new
+lineage with a fresh witness and epoch. `theory/01` names the lease/chain store,
+well-formedness condition, and `[E-DEGRADE]` / `[E-REACQ]` rule sketches; the
+ordering chapter gives one degrade-to-later-access causal generator. This audit
+does not weaken or question that policy.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **THM-002 formalization
+boundary** for a complete Lean statement. The sources do not define a trace
+carrier or admissibility predicate, a non-circular later/alongs relation, a
+chain-instance identity, the selected-option observation and its bridge to
+`L.position`, lineage continuity/creation, a recognizable reacquire occurrence,
+the interval/causal meaning of "only via", separately bound witness and epoch
+freshness, an `[E-DEGRADE]` transition binding, other-step framing, or the
+history-maximum interpretation. These are a coupled formalization boundary,
+not silently adopted theorem premises.
+
+**Adversarial evidence:** one disposable trusted Lean model admits a `2 -> 1`
+selection because an unconstrained trace schema lacks transition and lineage
+constraints. A second has ordered accesses `a0 < a1 < a2`, keeps `a0/a1` on
+one nondecreasing lineage, gives `a2` a distinct fresh-witness/fresh-epoch
+lineage at index `0`, and declares no reacquire occurrence. Thus same-lineage
+monotonicity plus new-lineage freshness does not establish the "only via
+explicit reacquire" clause without a lineage-origin/reacquire bridge. The
+finite carriers and predicates are experiment-local, not MirCore.
+
+**Classification:** no owner decision is needed to record this bounded audit.
+Before a proof-facing OBL-007 statement selects any member of the boundary, it
+must stop `decision-ready` for the relevant canon/owner formalization act. The
+scope is one complete THM-002 statement boundary; it neither completes OBL-007
+or OBL-008 nor blocks unrelated eligible research.
+
+**Non-claims:** this audit does not define canonical traces, selection,
+lineages, histories, events, freshness, `L.position`, `[E-DEGRADE]`,
+`[E-REACQ]`, the theorem interface, or a proof. It does not change `theory/01`,
+`theory/04`, `theory/06`, ADR-0004, SCN-08, the ledger, a Gate, or a Phase.
+Exact evidence is in Report 2264.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

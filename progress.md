@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 15:15 JST
+最終更新: 2026-07-17 15:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -86,6 +86,14 @@ OBL-005 status.
 output does not determine confluence; the source cut does not select a term
 domain, guarded validity, equality/denotation, relation, or theorem shape.
 
+`T-RESEARCH-011` is `research-complete` as a THM-002 / OBL-007
+trace-formalization audit: `0 direct / 0 delegated / 1 missing` complete
+statement boundary. The canon directly fixes monotone same-lineage selection
+and explicit fresh reacquire policy, but does not yet give the trace, selection,
+lineage, origin/reacquire, freshness, and transition/frame relations from which
+a Lean statement could be derived. Two disposable finite models delimit those
+missing bindings; no theorem, status, or lifecycle changed.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -162,7 +170,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
 | Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
-| Research | OBL-005 full source-level unit / OBL-006 confluence boundary | OBL-005 has only a structural-output kernel; do not infer a source empty term or rewrite relation |
+| Research | OBL-005 full source-level unit / OBL-006 confluence boundary / THM-002 statement boundary | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
@@ -194,6 +202,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 - 2026-07-17 15:15 JST: Completed the OBL-006 relation-boundary audit. A
   word-preserving finite fork lacks a join, so no canonical confluence claim
   follows without a separately specified formalization boundary.
+- 2026-07-17 15:36 JST: Completed the THM-002 / OBL-007 trace-formalization
+  audit. The normative monotonicity and explicit-reacquire policy remains
+  fixed; trace, lineage-origin, selection, freshness, and transition bindings
+  remain a coupled formalization boundary before a Lean statement.
 - 2026-07-17 14:41 JST: Completed the bounded OBL-005 structural-flattening
   kernel. One reassociation preserves an experiment-local structural output;
   a hole context is meta-syntax, and reverse order / added-empty mutations
