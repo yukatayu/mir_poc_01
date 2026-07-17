@@ -146,8 +146,10 @@ recording and existing LAB evidence routes.
 
 ## Commit / push status
 
-The final package commit uses `--no-gpg-sign` and is pushed immediately after
-the index, documentation, regression, and Git checks succeed.
+The proposal package was committed with `--no-gpg-sign` as `0f73e2b6`
+(`Prepare Surface v0 grammar closure proposal`) and pushed to `origin/main`.
+Immediately after that push, `git status --short` was empty and
+`git rev-list --left-right --count HEAD...@{upstream}` returned `0 0`.
 
 ## Sub-agent session close status
 
