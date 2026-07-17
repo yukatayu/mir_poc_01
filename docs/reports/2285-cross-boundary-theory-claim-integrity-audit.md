@@ -173,7 +173,9 @@ the relevant documentation/source-hierarchy checks are run at closeout.
 
 ## Commit / push status
 
-Pending at report write.
+The audit evidence package was committed with `--no-gpg-sign` as `9e38922b`
+(`Audit cross-boundary theory claims`) and pushed to `origin/main` after final
+validation. This record is the final post-push metadata synchronization.
 
 ## Sub-agent session close status
 
