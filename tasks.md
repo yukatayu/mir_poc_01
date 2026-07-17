@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-16 19:48 JST
+最終更新: 2026-07-17 09:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -10,7 +10,7 @@ This is the current LAB task map, not an append-only history and not a canon dec
 
 ## current promoted package
 
-No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels) and **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause) are `research-complete`. Their result is recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; neither result changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. No next LAB work unit is preselected.
+No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-shape countermodels), **T-RESEARCH-002** (one OBL-020 `[E-WRITE]` store-key clause), and **T-RESEARCH-003** (one OBL-020 `[E-OBS]` conditional append kernel) are `research-complete`. Their result is recorded in `plan/156-t0-t2-research-autonomy-envelope.md`; none changes `mirrorea_canon/plan/01-phases.md` or `mirrorea_canon/theory/11-metatheory-ledger.md`. No next LAB work unit is preselected.
 
 ## ordered self-driven packages
 
@@ -18,7 +18,8 @@ No canon package is promoted by this snapshot. **T-RESEARCH-001** (statement-sha
 | --- | --- | --- | --- |
 | 1 | T-RESEARCH-001 (complete) | Reproduced Surface/Lean anchors and constructed finite countermodels for OBL-020, OBL-021, and OBL-001. | Macro 5 early; closed as LAB evidence |
 | 2 | T-RESEARCH-002 (complete) | Proved one `[E-WRITE]` store-key preservation case under value-only update; showed epoch-changing update breaks that clause. | Macro 1/5 middle; closed as LAB evidence |
-| 3 | next eligible concrete rule/clause (unselected) | Select only an existing OBL/SCN rule-clause with an exact canon source cut and falsification criterion; do not create a lane. | Macro 1/5 reserve; one focused session |
+| 3 | T-RESEARCH-003 (complete) | Proved a fresh incoming-only `[E-OBS]` graph kernel for acyclicity and kind-level publication ancestry; a weak outgoing-edge model forms a cycle. | Macro 1/5 middle; closed as conditional LAB evidence |
+| 4 | next eligible concrete rule/clause (unselected) | Select only an existing OBL/SCN rule-clause with an exact canon source cut and falsification criterion; do not create a lane. | Macro 1/5 reserve; one focused session |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 
@@ -44,8 +45,8 @@ G0-D3's current defer is recorded in `plan/155-t0-g0-governance-profile-proposal
 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
-| OBL-020 | remaining concrete step rules and well-formedness clauses after `[E-WRITE]` | select one explicit case only |
-| OBL-021 | deterministic elaboration relation and equality/equivalence premises | current abstraction decision route; stop if a canon choice is needed |
+| OBL-020 | remaining concrete step rules and well-formedness clauses after `[E-WRITE]` and conditional `[E-OBS]` graph evidence | select one explicit case only; do not treat incoming-only as canon-defined append |
+| OBL-021 | deterministic elaboration relation and equality/equivalence premises | OPEN-014 materialization boundary; stop if a canon choice is needed |
 | OBL-001 / OBL-002 | assignment elaboration premises and later proof skeleton | G1 static bridge evidence; select only with an inversion/falsification target |
 | G2 / G3 statements | feasibility of chain and authority statement groups | only after current higher-priority boundary is clear |
 

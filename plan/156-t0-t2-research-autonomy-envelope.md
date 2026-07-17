@@ -156,6 +156,55 @@ requirement.
 has a similarly explicit canon source cut and falsification criterion. Do not
 infer a general OBL-020 theorem from this one case.
 
+## T-RESEARCH-003: OBL-020 [E-OBS] append kernel (research-complete)
+
+**Question:** Can one narrow `[E-OBS]` graph case preserve two named
+well-formedness conjuncts: occurrence-DAG acyclicity and kind-level publication
+ancestry for observes? The exact canon source cut is
+`mirrorea_canon/theory/01-mircore-v0.md` (the `H` well-formedness clauses,
+one-occurrence append, and `[E-OBS]`), together with
+`mirrorea_canon/theory/04-ordering-and-cuts.md` (causal generating-family
+direction `publish -> observe` and transitive closure).
+
+**Method:** disposable Lean files under `/tmp/mirrorea-t-research-003/` use a
+generating relation and `Relation.TransGen`, not a MirCore `Config`. The kernel
+extends an arbitrary old event carrier with `OldEvent + Unit`: old generators
+are retained, the fresh node is an observe, and every new generator has an old
+source and the fresh observe as target. It proves acyclicity preservation and
+kind-level publication-ancestry preservation when the old graph satisfies the
+same two properties and a publication is a direct incoming predecessor. A
+separate finite model keeps an acyclic old graph and direct publication edge,
+then adds a fresh-to-old edge to form a two-edge cycle.
+
+**Result:** the incoming-only construction is a sufficient conditional graph
+kernel. The weak premise package (acyclic old history plus a direct publication
+edge while fresh-to-old edges remain allowed) is insufficient for acyclicity.
+This does not prove that incoming-only is necessary, minimal, unique, or
+canonically required; other acyclicity-preserving designs were not studied.
+
+**Interpretation boundary:** freshness, unchanged old generators, and
+incoming-only extension are an experiment-local reading of "appends one
+occurrence" and the canonical causal direction. Canon does not provide an
+extensional graph-update equation for `H + occurrence`. Therefore this result
+does not identify `PostGen` with canonical `[E-OBS]`, choose a final occurrence
+representation, or define final publication matching. The direct predecessor
+is a stronger local premise than arbitrary transitive publication ancestry and
+does not check resource, field, version, visibility, principal, authority, or
+redaction matching.
+
+**Review and disposition:** an Oracle follow-up independently reviewed the
+actual scratch files and agreed that this is `research-complete`, not
+`decision-ready`. Escalation is required before a later package treats the
+experiment's graph update as the canonical definition of `[E-OBS]`, forbids
+new-to-old edges normatively, or selects publication matching, authority,
+redaction, or complete runtime premises. It also advised against selecting a
+second autonomous calculus experiment from this result alone.
+
+**Reopen trigger:** an explicit owner/canon request to formalize graph append,
+or a different rule-local OBL/SCN candidate satisfying the selection rule in
+this plan. Do not reopen merely to search for a mathematically weakest graph
+condition.
+
 ## Current non-claims
 
 This plan does not assert that G0 exits, that T1 begins, that G1 is ready, that

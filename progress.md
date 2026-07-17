@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-16 19:48 JST
+最終更新: 2026-07-17 09:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -34,13 +34,15 @@ The target carries source semantics through placement, explicit communication, c
 | User-facing specification | source-first direction, companion notation, and example guidance exist as LAB evidence | no final grammar, public API, or final user contract |
 | Implementation / operation | Product Alpha, Full System V1, and Surface roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
-`T-RESEARCH-001` and its narrow `T-RESEARCH-002` continuation are
-`research-complete`: finite countermodels established the boundary of the
-OBL-001/020/021 statement shapes, then one `[E-WRITE]` store-key clause was
-checked under the value-only/frame reading of the canon update notation. No
-canon theorem, status, or lifecycle changed. The next concrete rule/clause is
-selected only by `plan/156-t0-t2-research-autonomy-envelope.md`; the canonical
-lifecycle remains `mirrorea_canon/plan/01-phases.md`.
+`T-RESEARCH-001` through `T-RESEARCH-003` are `research-complete`: finite
+countermodels established the OBL-001/020/021 statement boundary, one
+`[E-WRITE]` store-key clause was checked under a value-only/frame reading, and
+one `[E-OBS]` graph kernel was proved under a fresh, prefix-preserving,
+incoming-only extension. The last is conditional LAB evidence, not the canon
+definition of append or a complete `[E-OBS]` rule. No canon theorem, status, or
+lifecycle changed. The canonical lifecycle remains
+`mirrorea_canon/plan/01-phases.md`; the LAB work-selection and stop boundary is
+`plan/156-t0-t2-research-autonomy-envelope.md`.
 
 ## milestone map
 
@@ -103,7 +105,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
-| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002 complete; select the next explicit rule/clause only with a falsification criterion |
+| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003 complete; no successor selected without a fresh canon-grounded criterion |
 | Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
@@ -116,7 +118,7 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce only as needed |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
-| 5 | theorem / model-check bridge | T-RESEARCH-001/002 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
+| 5 | theorem / model-check bridge | T-RESEARCH-001/002/003 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
 | 8 | domain/application realization | bounded samples exist; products are later | heavy | later dependency |
@@ -133,6 +135,9 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 09:04 JST: Completed a disposable `[E-OBS]` graph-kernel study:
+  a weak extension admits a finite cycle, while the stated incoming-only
+  extension preserves two selected graph invariants; canon state is unchanged.
 - 2026-07-16 19:48 JST: Completed bounded countermodel research for the three
   statement shapes and a single OBL-020 `[E-WRITE]` store-key preservation
   clause; both are LAB evidence only and leave canon status unchanged.
