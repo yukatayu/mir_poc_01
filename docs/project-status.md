@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 18:06 JST
+最終更新: 2026-07-17 18:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
-| いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、THM-003/OBL-009 successful-load restoration boundary を `research-complete` とした。これらは正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、THM-003/OBL-009 successful-load restoration boundary、OBL-026 transparent-overlay composition boundary を `research-complete` とした。これらは正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
 | OBL-021 source audit | BND-001 は三つの determinism 結論の目標を明示するが、abstract `Pred` への完全な導出は `0 direct / 0 delegated / 3 missing`。projection coherence、diagnostic equivalence、branch exclusion は将来の proof package が明示する境界。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-005 structural audit | leaf/singleton と fallback/left-to-right append のみから、raw な実験用形状の一回の reassociation が構造的出力を変えないことを確認した。hole context は source-level empty fallback ではない。confluence、validity、評価、source-level unit、OBL status は未解決のままである。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
@@ -47,6 +47,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | THM-004 / OBL-015 source audit | 正本は delegated capability の grant-lineage 方針と owner-local mutation の別枝を直接固定する。一方、完全な Lean statement は `0 direct / 0 delegated / 1 missing` の coupled mutation-origin/authorization boundary であり、trace/owner-local/declared-transition/mutation-association を選ぶ前に owner/canon の formalization act が要る。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | THM-005 / OBL-017 source audit | 正本は observer-safe noninterference と観測・redaction・retention の方針を直接固定する。一方、完全な Lean statement は `0 direct / 0 delegated / 1 missing` の coupled low-equivalence/export boundary であり、configuration relation、label/declassification、observer-safe export ABI、出力 equality/renaming/order/multiplicity を選ぶ前に owner/canon の formalization act が要る。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | THM-003 / OBL-009 source audit | 正本は SaveObject schema と八つの successful-load 必要条件を直接固定し、theory/01 は Config / WellFormed 語彙を与える。一方、完全な Lean statement は `0 direct / 0 delegated / 1 missing` の coupled successful-load restoration boundary であり、Load result、restored Config/prefix、liveness/resurrection bridge、必要条件から結果側安全性への関係を選ぶ前に owner/canon の formalization act が要る。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| OBL-026 source audit | 正本は transparent overlay の十方向を直接固定するが、完全な Lean statement は `0 direct / 0 delegated / 1 missing` の coupled composition boundary である。contract-field の順序、layer-stack composition、equality/extensionality を選ぶ前に owner/canon の formalization act が要る。実験的な preorder は正本の variance や ABI を選ばない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線

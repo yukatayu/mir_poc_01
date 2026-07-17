@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 18:06 JST
+最終更新: 2026-07-17 18:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -124,6 +124,16 @@ two-result twin holds all selected load conditions but flips only the
 experiment-local result relation; no load API, persistence semantics, theorem,
 status, or lifecycle changed.
 
+`T-RESEARCH-015` is `research-complete` as an OBL-026 transparent-overlay
+composition audit: `0 direct / 0 delegated / 1 missing` coupled
+formalization boundary. Theory/02 directly fixes ten policy directions for a
+transparent layer, but not their proof-facing orders, a layer-stack
+composition operation, or equality/extensionality. A trusted ten-component
+preorder kernel makes transitivity conditional on a chosen order; a separate
+opaque-label model shows why a bare pairwise label cannot supply that
+structure. It selects no canonical variance, ABI, theorem, status, or
+lifecycle.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -229,6 +239,10 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 18:28 JST: Completed the OBL-026 transparent-overlay composition
+  audit. The ten fixed policy directions remain intact; contract-field orders,
+  layer-stack composition, and equality/extensionality remain one unselected
+  formalization boundary.
 - 2026-07-17 18:06 JST: Completed the THM-003 / OBL-009 successful-load
   restoration audit. The saved-object schema and eight necessary conditions
   remain direct policy anchors; their bridge to a restored Config/prefix and

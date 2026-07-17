@@ -782,6 +782,29 @@ or OBL-027; establish necessity/minimality/uniqueness/sufficiency of a future
 interface; or change theory/01, theory/04, ledger, Gate, Phase, or proof
 status. Exact evidence is in Report 2267.
 
+## T-RESEARCH-015: OBL-026 transparent-overlay composition boundary (research-complete)
+
+**Question:** does theory/02's transparent-overlay prose itself determine the
+proof-facing composition statement for a stack of transparent layers?
+
+**Source reading:** theory/02 directly fixes ten directions: input, output,
+precondition, postcondition, combined effect/failure, ordinary-path capability,
+provided surface, observation, redaction, and retention. It does not define
+their orders, a Contract carrier, layer composition, or equality.
+
+**Result:** `0 direct / 0 delegated / 1 missing` **coupled transparent-overlay
+composition formalization boundary**. A disposable ten-component Nat-preorder
+kernel proves pairwise transparency composes when every component has the
+chosen transitive order. A three-contract opaque-label model has two pairwise
+transparent labels but not their composite. The latter is not a canon
+counterexample; it isolates the missing component orders and composition law.
+
+**Classification and non-claims:** `research-complete`, not `decision-ready`.
+This does not define canonical contract directions, `all_of`/`any_of`,
+ContractUpdate, a final ABI, OBL-026 statement/proof, or cost algebra. Stop
+`decision-ready` before selecting any of those interfaces. Exact evidence is
+in Report 2268.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.
