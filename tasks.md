@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 14:41 JST
+最終更新: 2026-07-17 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -41,7 +41,8 @@ disposition and does not authorize bridge design.
 | 7 | T-RESEARCH-007 (decision-ready) | Prepared PROPOSAL-003 for the formalization-organization A/B/C decision. Its five headings are LAB review categories, not canon predicates or a fixed Lean interface. | Macro 1 middle; owner record pending, unrelated research may continue |
 | 8 | T-RESEARCH-008 (complete) | Audited the three OBL-021 determinism conjuncts against BND-001: 0 direct / 0 delegated / 3 missing; finite models isolate the missing contracts. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
 | 9 | T-RESEARCH-009 (complete) | Proved only experiment-local structural-output reassociation and hole-context identity for OBL-005; reverse order and source-empty mutations delimit what this does not establish. | Macro 1/5 middle; closed as bounded LAB algebraic evidence |
-| 10 | next independent theory source cut (unselected) | Select an existing-lane question without choosing an OBL-021 contract, a source-level OBL-005 unit, or an OBL-006 rewrite relation. | Macro 1/5 reserve; research-selected |
+| 10 | T-RESEARCH-010 (complete) | OBL-006 has 0 direct / 0 delegated / 1 missing formalization boundary; a word-preserving local fork proves that output preservation does not determine confluence. | Macro 1/5 middle; closed as LAB source-adequacy evidence |
+| 11 | next independent theory source cut (unselected) | Select an existing-lane question without choosing an OBL-021 contract or an OBL-006 theorem interface. | Macro 1/5 reserve; research-selected |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 

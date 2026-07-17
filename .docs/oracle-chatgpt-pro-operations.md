@@ -52,16 +52,16 @@ all local progress unless the next local step genuinely depends on its answer.
 
 ## Commands
 
-New consultation in the default ChatGPT Project:
+Default one-off consultation:
 
 ```bash
-ask-chatgpt-pro -p "State the goal, constraints, local evidence, and exact question."
+ask-chatgpt-pro-temp -p "State the goal, constraints, local evidence, and exact question."
 ```
 
 Attach local context when the answer depends on it:
 
 ```bash
-ask-chatgpt-pro \
+ask-chatgpt-pro-temp \
   -p "Review this plan for hidden failure modes. Return concrete risks and fixes." \
   --file "plan/some-plan.md" \
   --file "docs/reports/some-report.md"
@@ -77,15 +77,15 @@ ask-chatgpt-pro-followup <session-id> -p "Follow-up question based on the previo
 Use `ask-chatgpt-pro-followup` for normal back-and-forth. Do not use
 `--browser-follow-up` for ordinary conversation continuation.
 
-One-off temporary chat:
+Persistent project consultation:
 
 ```bash
-ask-chatgpt-pro-temp -p "One-off question"
+ask-chatgpt-pro -p "Question that genuinely needs to remain in the configured project conversation."
 ```
 
-Use temporary chat only when a one-off consult is explicitly desired. The
-default should be `ask-chatgpt-pro` so related project consultations stay
-grouped in the configured ChatGPT Project.
+Use `ask-chatgpt-pro-temp` unless project-level continuity is genuinely needed.
+Use `ask-chatgpt-pro-followup` only to continue a real conversation. This keeps
+independent reviews isolated while preserving continuity when it is useful.
 
 ## Waiting policy
 

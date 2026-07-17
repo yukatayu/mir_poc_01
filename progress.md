@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 14:41 JST
+最終更新: 2026-07-17 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -80,6 +80,11 @@ left-to-right oracle; a separate empty-constructor mutation demonstrates that
 a source-level unit needs a changed signature. This does not define canonical
 applicability, chain validity, source-level unit, confluence, evaluation, or
 OBL-005 status.
+
+`T-RESEARCH-010` is `research-complete` as an OBL-006 source-adequacy audit:
+`0 direct / 0 delegated / 1 missing` formalization boundary. Same ordered
+output does not determine confluence; the source cut does not select a term
+domain, guarded validity, equality/denotation, relation, or theorem shape.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -186,6 +191,9 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 15:15 JST: Completed the OBL-006 relation-boundary audit. A
+  word-preserving finite fork lacks a join, so no canonical confluence claim
+  follows without a separately specified formalization boundary.
 - 2026-07-17 14:41 JST: Completed the bounded OBL-005 structural-flattening
   kernel. One reassociation preserves an experiment-local structural output;
   a hole context is meta-syntax, and reverse order / added-empty mutations

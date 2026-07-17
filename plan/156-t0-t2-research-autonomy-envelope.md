@@ -529,6 +529,38 @@ source-level `unit` interpretation explicit before claiming a full obligation
 discharge. Any OBL-006 work must first name an existing source-grounded rewrite
 or equivalence relation; do not infer it from this one output-equality lemma.
 
+## T-RESEARCH-010: OBL-006 relation-boundary source audit (research-complete)
+
+**Question:** do the settled fallback equations and same-order denotation
+sentence define enough of a term domain and relation to derive a canonical
+uniqueness or confluence theorem?
+
+**Result:** `0 direct / 0 delegated / 1 missing`: the source cut motivates
+OBL-006 but does not fix its **formalization boundary**. It leaves open the
+related objects, guarded validity domain, equality/denotation, meaning of
+`uniqueness / confluence`, and any reduction or equivalence relation with its
+orientation, closure, reachability, and joinability target. This is not a list
+of mandatory theorem mechanisms: termination, a normalizer, and equivalence
+closure depend on the eventual theorem architecture.
+
+**Evidence:** a disposable trusted Lean model gives three test shapes with the
+same ordered leaves. Its two proper steps preserve that word but lead to
+distinct irreducible branches with no join. Thus singleton/append equations,
+same ordered output, and per-step output preservation do not determine
+confluence. The test syntax and reachability relation are not Surface/Core
+syntax or a canonical relation.
+
+**Classification:** an Oracle review passed this bounded audit and required
+the missing item to be named an OBL-006 formalization boundary rather than an
+isolated premise. No owner decision is needed to record the audit. A decision
+bundle is required before a proof-facing OBL-006 statement selects a domain,
+guarded validity condition, equality/denotation, and relation, or interprets
+the ledger slash as one theorem, two properties, or alternatives.
+
+**Non-claims:** this audit does not change `theory/06`, the ledger, the
+Surface/Core grammar, canonical carrier, rewrite relation, OBL status, Gate,
+or Phase. Exact evidence is in Report 2263.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

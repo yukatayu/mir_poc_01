@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 14:41 JST
+最終更新: 2026-07-17 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -42,6 +42,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
 | OBL-021 source audit | BND-001 は三つの determinism 結論の目標を明示するが、abstract `Pred` への完全な導出は `0 direct / 0 delegated / 3 missing`。projection coherence、diagnostic equivalence、branch exclusion は将来の proof package が明示する境界。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-005 structural audit | leaf/singleton と fallback/left-to-right append のみから、raw な実験用形状の一回の reassociation が構造的出力を変えないことを確認した。hole context は source-level empty fallback ではない。confluence、validity、評価、source-level unit、OBL status は未解決のままである。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| OBL-006 source audit | `0 direct / 0 delegated / 1 missing`。同順序の出力と各 step の出力保存だけでは confluence は決まらず、正本は term domain・guarded validity・同値/denotation・relation を未指定である。proof-facing statement の前に owner/canon の formalization boundary が要る。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線

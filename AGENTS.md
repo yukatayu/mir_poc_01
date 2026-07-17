@@ -17,10 +17,10 @@ Read `/home/codex/.codex/docs/oracle-chatgpt-pro.md` before first use in a
 session, then follow the repo-local operating notes in
 `.docs/oracle-chatgpt-pro-operations.md`.
 
-Use `ask-chatgpt-pro` for normal new consultations,
+Use `ask-chatgpt-pro-temp` for normal new consultations,
 `ask-chatgpt-pro-followup` for real conversation continuation, and
-`ask-chatgpt-pro-temp` only for one-off temporary chats. These commands can take
-minutes and sometimes up to about an hour; wait patiently, check
+`ask-chatgpt-pro` only when project-level continuity is genuinely needed. These
+commands can take minutes and sometimes up to about an hour; wait patiently, check
 `oracle status` / `oracle session` before retrying, and avoid duplicate runs
 without concrete failure evidence.
 
