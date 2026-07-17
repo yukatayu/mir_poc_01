@@ -444,6 +444,30 @@ bounded counterexample/statement work may continue under the selection rule;
 no OBL-020 proof-facing definition may be adopted until an owner disposition is
 recorded through the canon process.
 
+## T-RESEARCH-008: OBL-021 BND-001 postcondition source-adequacy audit (research-complete)
+
+**Question:** excluding OBL-021 itself as a premise, do existing canon sources
+give a derivation-complete basis for each conjunct of the abstract
+`ElabDeterministicPost` statement?
+
+**Result:** all three rows are canonically motivated but not derivation-complete:
+successful-result equivalence lacks result/projection interpretation and
+coherence; rejection equivalence lacks rejecting-branch interpretation and
+diagnostic equivalence laws; success/reject exclusion lacks shared-outcome
+coherence or an explicit disjointness rule. The frozen audit is `0 direct / 0
+delegated / 3 missing`.
+
+**Falsification:** disposable trusted Lean models preserve success functionality
+while allowing inequivalent projections, preserve rejection functionality while
+using non-reflexive diagnostic comparison, and preserve both branch
+functionalities while allowing overlap. Targeted mutations repair only the
+respective defect. They are not canon countermodels.
+
+**Boundary:** the abstract statement remains unchanged. No equality, diagnostic
+equivalence, totality, outcome carrier, proof interface, OBL status, Gate, or
+Phase is selected. The audit is `research-complete`; a concrete proof package
+must stop `decision-ready` before choosing any missing contract.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

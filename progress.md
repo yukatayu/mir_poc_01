@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 14:00 JST
+最終更新: 2026-07-17 14:20 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -63,6 +63,13 @@ headings are not canon predicates or fixed Lean premises. The proposal is
 non-self-executing and does not block unrelated existing-lane theory research;
 no concrete transition, frame, or carrier is defined until the owner records a
 disposition.
+
+`T-RESEARCH-008` is `research-complete` for the OBL-021 BND-001 source cut:
+all three abstract determinism postconditions are canonically intended but
+`0 direct / 0 delegated / 3 missing` under a derivation-complete criterion.
+The missing force is result/projection coherence, diagnostic equivalence, and
+shared-outcome exclusion; no equality, datatype, statement, or proof status was
+selected.
 
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
@@ -168,6 +175,9 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-17 14:20 JST: Completed the OBL-021 BND-001 postcondition audit.
+  Three trusted finite falsifiers isolate projection coherence, diagnostic
+  equivalence, and branch exclusion without changing canon or the Lean draft.
 - 2026-07-17 14:00 JST: Oracle review narrowed PROPOSAL-003 to a symmetric
   organizational A/B/C choice. The five audit groups are now explicitly LAB
   candidate review headings, not canon vocabulary or a required Lean interface;

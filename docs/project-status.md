@@ -40,6 +40,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
 | いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel に加え、13 transition x 5 WF clause の source-adequacy 監査を `research-complete` とした。監査は `0 direct / 65 missing` で、完全な rule/frame/history/record premise はまだ正本にないと確認した。いずれも canon の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | OBL-020 next decision | formalization organization の A/B/C proposal を起票済み。A は共通の五見出し review checklist、B は必須共通 checklist を置かない package ごとの組織化、C は defer。採択前は canon の concrete transition/WF premise を定義しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md` |
+| OBL-021 source audit | BND-001 は三つの determinism 結論の目標を明示するが、abstract `Pred` への完全な導出は `0 direct / 0 delegated / 3 missing`。projection coherence、diagnostic equivalence、branch exclusion は将来の proof package が明示する境界。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | 最新 preflight | literal-RHS foreign-locus write の source 正負 pair は再現できたが、authority/capability/witness carrier を OBL-001 の抽象 predicate へ結ぶ既存 lane はない。`T-RESEARCH-004` は未選定。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 
 ## 現在の停止線
