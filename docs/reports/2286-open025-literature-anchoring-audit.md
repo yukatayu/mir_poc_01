@@ -185,8 +185,10 @@ validation remains skipped.
 
 ## Commit / push status
 
-Pending at report write. The validated package will be committed with
-`git commit --no-gpg-sign` and pushed before task close.
+Validated package committed with `git commit --no-gpg-sign` as
+`f37a4189` (`Anchor OPEN-025 literature comparisons`) and pushed to
+`origin/main` before task close. This report-status recording change will be
+committed and pushed separately after its documentation validation.
 
 ## Sub-agent session close status
 
