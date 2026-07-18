@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-17 20:55 JST
+最終更新: 2026-07-18 16:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -32,6 +32,12 @@ constraints, not invitations to enlarge Mir core. In the previous sentence,
 LAB lanes; it does not mean the project has no remaining research. G0-D3 and
 the existing OBL-020 organization decision, plus the narrow Surface grammar
 clarification, locate the next owner-controlled resumption points.
+
+T-RESEARCH-033 closes one separate existing-canon lane: `OPEN-025` literature
+anchoring. It adds evidence-backed comparison rows for generated endpoint APIs,
+distributed reactivity, Matrix/Third Room, and Urbit/Arvo. This is neither a
+novelty proof nor a theory/implementation advance; `OPEN-025` remains open,
+and the completed metatheory-ledger source-cut reading remains unchanged.
 
 The 2026-07-17 runnable-front-door audit reproduced the existing Surface, Full
 System V1, Product Alpha, installed-binary, operational, and current-L2
@@ -85,6 +91,7 @@ disposition and does not authorize bridge design.
 | 30 | T-RESEARCH-030 (decision-ready) | Prepared PROPOSAL-004 from six canonical and 47 active LAB Participant-indexed declarations plus LAB alpha scope. It recommends a Participant-only grammar closure and defers custom keyspaces. | Macro 1 early; owner chooses PROPOSAL-004 A/B/C before normative grammar edit |
 | 31 | T-RESEARCH-031 (complete) | Audited all 28 open OBL classifications and 25 active Lean artifacts. No active placeholder or proof-status drift was found; generated `True` stubs and helper-local proofs remain non-domain evidence. | Macro 0/1 integrity maintenance; no new semantic boundary or owner choice |
 | 32 | T-RESEARCH-032 (complete) | Cross-checked theory/scenario/architecture claim boundaries. No unresolved THM/OBL/BND reference or proof-complete claim was found; existence DAG, patch DAG, and stream fallback remain explicitly unformalized later-package directions. | Macro 0/1 integrity maintenance; no new semantic boundary or owner choice |
+| 33 | T-RESEARCH-033 (complete) | Added four OPEN-025 literature comparison rows from primary/first-party sources. They anchor existing contrasts only; no novelty proof, semantic adoption, or OBL/Gate status movement. | Macro 0/1 literature anchoring; OPEN-025 remains open |
 
 The sequence follows `plan/156-t0-t2-research-autonomy-envelope.md`; it is not an official Phase progression. A work unit is skipped rather than invented if the selection rule is not satisfied.
 

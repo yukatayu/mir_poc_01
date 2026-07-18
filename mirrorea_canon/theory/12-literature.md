@@ -20,6 +20,7 @@ Rule: every core mechanism must name its nearest prior art and its delta.
 | Links / Eliom / Hop / Ur/Web | tierless web, generated client-server comm | source-first authority (.mir) | Mir targets N loci, membership, hot-plug; comm is visible, not hidden |
 | ScalaLoci | placement types, multitier reactives | placement as types | Mir: capability-gated writes, single-authority model |
 | Choral / HasChor / Pirouette | choreographies, endpoint projection (verified) | projection viewpoint (S4) | Mir projects from checked state semantics, not choreography scripts |
+| [Scribble / MPST endpoint API generation](https://www.doc.ic.ac.uk/~rhu/scribble/index.html) | multiparty protocols, endpoint projection, protocol-specific typed APIs | generated endpoint shape as a comparison point | Mir starts from checked state semantics rather than a multiparty protocol script; every generated edge keeps authority/failure/witness obligations visible |
 
 ## Authority / information flow
 
@@ -32,14 +33,23 @@ Rule: every core mechanism must name its nearest prior art and its delta.
 | Verse (Epic) | transactional metaverse language | ordinary-assignment ergonomics goal | Mir: explicit requests + failure rows instead of speculation/rollback |
 | CRDTs | convergence under concurrency | (comparison only) | rejected for core: weak intent/authority semantics (OPEN-003) |
 
+## Federated shared-space contrast
+
+| System | Solves | Mir takes | Mir differs |
+|---|---|---|---|
+| [Matrix](https://spec.matrix.org/latest/) / [Third Room](https://thirdroom.io/docs/guides/) | federated room event DAGs and a Matrix-based shared 3D client | concrete shared-space and federation contrast | Mir does not use a federated room-event DAG as its core source semantics; its source-level authority/witness obligations remain a separate comparison axis |
+
 ## Evolution / dynamic update
 
 | Erlang/OTP hot swap; DSU (Kitsune, Ginseng); K42 | live update mechanics & safe-point theory | activation cut ≈ safe point; compat checks | Mir binds activation to membership/witness frontier; patch DAG; no eval |
+
+| [Urbit / Arvo](https://docs.urbit.org/urbit-os/kernel/arvo) | deterministic event-log state, snapshots, and interpreter source-code updates | replay/snapshot and dynamic-update contrast | Mir keeps the no-eval update boundary and binds patch activation to membership/witness frontier plus a patch DAG |
 
 ## Event-driven verification / dataflow
 
 | P language (Microsoft) | event-driven programs + model checking | Line-2 model-check stance | Mir hides events from S0 (ADR-0002) |
 | Timely/differential dataflow | frontiers for progress tracking | observation/snapshot frontier shape | Mir frontiers carry authority/membership, not just progress |
+| [Distributed REScala](https://www.rescala-lang.com/assets/pdf/2014%20Distributed%20REScala.pdf) | distributed reactive propagation with glitch freedom | distributed reactivity as a comparison baseline | Mir keeps occurrence and generated request/publication machinery out of S0 (ADR-0002); generated cross-locus obligations retain authority/failure/witness rows |
 
 ## Ordering / cuts / memory (foundations kept from LAB plan/18)
 

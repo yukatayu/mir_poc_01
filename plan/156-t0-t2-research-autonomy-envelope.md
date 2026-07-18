@@ -1450,6 +1450,50 @@ proof status, Gate/Phase state, or owner decision. It does not weaken the four
 directions above; it prevents them from being silently treated as already
 formalized. Exact evidence is in Report 2285.
 
+## T-RESEARCH-033: OPEN-025 literature anchoring scan (research-complete)
+
+**Selection:** `theory/12-literature.md` explicitly keeps `OPEN-025` open for
+comparison with session types for generated protocols, distributed reactive
+programming, Matrix/Third Room, and Urbit. This is an existing canon OPEN item
+and an existing documentation route. Canon `plan/02` and
+`meta/agent-instructions` expressly permit an agent to conduct literature
+research and update a comparison table. It is therefore outside the completed
+metatheory-ledger source-cut family; it does not reopen a theorem or select a
+proof-facing carrier.
+
+**Question and falsifier:** do authoritative first-party or primary sources
+support one concise comparison row for each named family without weakening an
+already fixed Mir difference? The working reading is falsified if a source
+already supplies the unified Mir combination claimed in theory/12, or if a
+proposed difference needs a source-language, transport, authority, witness,
+or update-semantics claim not already present in canon. In either case the
+agent must report the conflict and stop before changing the row or inferring a
+new core concept.
+
+**Evidence:** Hu and Yoshida's Scribble endpoint-API account starts from a
+multiparty protocol and generates protocol-specific endpoint APIs. Distributed
+REScala gives a distributed reactive propagation algorithm with glitch freedom.
+The Matrix specification defines a federated room event DAG and authorization
+rules; Third Room documents a Matrix-based shared 3D client. Urbit's Arvo
+documentation describes deterministic event-log state, snapshots, and
+interpreter source-code updates. The sources are linked in the comparison
+table and listed in Report 2286.
+
+**Result:** the four rows now anchor existing contrasts only: checked-state
+semantics rather than a multiparty protocol script, occurrence and generated
+request/publication machinery outside S0, source-level authority/witness as a
+separate comparison axis from a federated room-event DAG, and no-eval
+frontier-bound patch activation rather than interpreter source-code updates.
+No source found in this bounded scan establishes theory/12's whole unified
+composition; that is not a novelty proof or an exhaustive literature result.
+
+**Classification and non-claims:** `research-complete`. The canon comparison
+table changed only by evidence-backed rows under the explicit comparison-table
+update authority. `OPEN-025` remains open. This does not change an ADR, L-level,
+Gate/Phase, SCN, OBL, theorem, proof status, formalization carrier, transport
+ABI, runtime implementation, conformance claim, or public API. Exact evidence
+is in Report 2286.
+
 ## OBL-001 concrete-evidence bridge decision bundle (owner action pending)
 
 This section completes the presentation required by the mandatory stop rule.

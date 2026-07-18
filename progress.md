@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-17 20:55 JST
+最終更新: 2026-07-18 16:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -288,6 +288,13 @@ of THM-002 while samples remain outside `H`. SCN-04 compaction and BND-006
 remain later operational constraints, not reasons to enlarge the core or make
 a current proof claim.
 
+`T-RESEARCH-033` is `research-complete` as a bounded `OPEN-025` literature
+anchoring scan. Four first-party/primary-source comparison rows now cover
+Scribble/MPST endpoint API generation, Distributed REScala, Matrix/Third Room,
+and Urbit/Arvo. They make existing contrasts easier to audit; they do not prove
+novelty, change semantics, reopen the metatheory-ledger source cuts, or close
+`OPEN-025`.
+
 `T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
 foreign-locus source pair reproduced request shape, failure-row acceptance /
 rejection, and source spans, but the current lane has no structured
@@ -393,6 +400,12 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 
 ## recent log
 
+- 2026-07-18 16:45 JST: Completed the OPEN-025 literature anchoring scan.
+  Evidence-backed rows now distinguish Mir's existing checked-state,
+  occurrence/request-publication-outside-S0, source-level authority/witness,
+  and no-eval patch directions from four named comparison families. No novelty
+  claim, canon semantic decision, proof status, Gate, Phase, or implementation
+  state changed.
 - 2026-07-17 20:55 JST: Completed the cross-boundary theory claim-integrity
   audit. The theorem/obligation/boundary registries have no dangling audited
   reference and no chapter claims a completed proof. Existence DAG, patch DAG,

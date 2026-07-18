@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-17 20:55 JST
+最終更新: 2026-07-18 16:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -37,6 +37,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | --- | --- | --- |
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
 | T0-T2 research | owner 指示により、既存根拠へ接続した非休眠の LAB research work unit を `research-complete` / `decision-ready` まで自走できる。これは canon package close ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
+| Literature anchoring | `OPEN-025` の四比較群に、generated endpoint API、distributed reactivity、Matrix/Third Room、Urbit/Arvo の根拠付き対比行を追加した。これは既存差分を監査可能にしただけで、網羅的な新規性証明でも意味論の決定でもない。 | `mirrorea_canon/theory/12-literature.md`; Report 2286 |
 | Runnable LAB | alpha / Surface / operational sample は再現可能な限定証拠。ただし canon 実装状態・適合性・proof ではない。 | `samples_progress.md` |
 | いまの研究 | OBL-001/020/021 の反例監査、三つの限定 OBL-020 kernel、13 transition x 5 WF clause の source-adequacy 監査、OBL-021 の三 postcondition source audit、OBL-005 の構造的 flattening kernel、OBL-006 relation boundary、THM-002/OBL-007 trace-formalization boundary、THM-004/OBL-015 mutation-origin boundary、THM-005/OBL-017 observer-safe export boundary、OBL-018 explicit-flow kernel、THM-003/OBL-009 successful-load restoration boundary、OBL-014 Z-cycle equivalence boundary、remaining-ledger research closure map、OBL-024 diagnostic soundness boundary、OBL-025 diagnostic completeness boundary、OBL-026 transparent-overlay composition boundary、OBL-028 revocation-monotonicity boundary、OBL-022 stream read-side boundary、OBL-027 atomic-cut rollback boundary、OBL-023 temporal-coherence boundary、OBL-010 consistent-cut checker kernel、OBL-004 no-undeclared-communication kernel、OBL-003 Line-1 decidability kernel、T0-T2 formalization decision map を `research-complete` とした。T-RESEARCH-029/030 は Surface v0 EBNF の閉包を `decision-ready` にし、既存 evidence から Participant-only の最小案を PROPOSAL-004 に起票した。いずれも正本の証明・定義・status ではない。 | `plan/156-t0-t2-research-autonomy-envelope.md` |
 | Surface v0 grammar audit | index・ID registry・Surface/Core 境界は整合した。`atomic_cut` は Core companion notation であって Surface token ではない。未閉包 EBNF は PROPOSAL-004 により Participant-only の最小 closure 案として選択肢化したが、owner 採択前に parser/checker grammar は主張しない。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md` |
