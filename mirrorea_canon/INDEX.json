@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 83,
+ "files": 84,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 3904
+   "bytes": 4148
   },
   {
    "id": "root/north-star",
@@ -1148,6 +1148,20 @@
    "open_items": [],
    "path": "working/WRK-0004-obl021-outcome-totality.md",
    "bytes": 6386
+  },
+  {
+   "id": "working/WRK-0005",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/03-elaboration",
+    "theory/10-diagnostics"
+   ],
+   "summary": "OBL-021 の LAB statement draft に明示的 outcome-totality を仮定したとき、success/reject をまとめる実験用 SameOutcome relation で全 outcome pair の関係が導けるかを検査する L3 conditional lemma record。最終 equality、relation laws、Canon 帰属、OBL 状態は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0005-obl021-conditional-outcome-relation.md",
+   "bytes": 5273
   }
  ]
 }

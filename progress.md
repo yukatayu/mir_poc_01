@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 20:33 JST
+最終更新: 2026-07-21 20:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 20:36 JST: pre-registered WRK-0005 as an L3 conditional-lemma
+  test of whether explicit outcome totality plus the OBL-021 LAB draft yields
+  an experiment-local relation across every tagged outcome pair. The premise
+  is explicitly experimental; no equality, relation law, Canon placement,
+  theory/11, Gate/Phase, conformance, implementation, or public status changed.
 - 2026-07-21 20:33 JST: manifested WRK-0004's L3 no-outcome countermodel
   evidence. Lean 4.29.1 checks that a well-scoped input can have neither
   success nor Diagnostic while the LAB draft holds. This isolates missing
