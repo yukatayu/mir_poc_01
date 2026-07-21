@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 16:58 JST
+最終更新: 2026-07-21 17:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,12 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:00 JST: committed and pushed the standing bounded-autonomy
+  governance package. Its authoritative WRK validation passed in a clean
+  disposable detached worktree; the ordinary worktree's ignored local
+  configuration was correctly rejected as non-evidence. No Gate, Phase, SCN,
+  OBL discharge, conformance, production implementation, or public status
+  changed.
 - 2026-07-21 12:24 JST: reviewer findings added explicit L3-without-review
   wording, immediate `Reliance status: frozen` reliance stop, WRK structural
   validation, and stale-index rejection. No Gate, Phase, SCN, OBL discharge,
