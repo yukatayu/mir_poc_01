@@ -1147,7 +1147,7 @@
    "summary": "OBL-021 の LAB statement draft が well-scoped input に対する成功 Result または Diagnostic の存在を単独で要求するかを、no-outcome countermodel で検査する L3 research record。totality の最終帰属、Diagnostic ABI、OBL 状態は変更しない。",
    "open_items": [],
    "path": "working/WRK-0004-obl021-outcome-totality.md",
-   "bytes": 5057
+   "bytes": 6386
   }
  ]
 }

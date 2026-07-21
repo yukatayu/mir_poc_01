@@ -40,6 +40,18 @@ existence を欠く countermodel evidence のみを意味する。
 既存 interface 内の outcome-totality 条件発見である。その場合は成功扱いにせず、WRK の
 Reliance status を凍結して失敗を残す。
 
+## 実施結果
+
+evidence commit `0434482a72d8b307f757fb66ec73dedccd1ce19e` は、既存 draft を直接
+import した no-outcome countermodel を Lean 4.29.1 で検査した。unit input は
+well-scoped だが、成功 `Result` と `Diagnostic` のどちらも存在せず、
+`OBL021StatementDraft` は成立した。
+
+したがって、この evidence が支えるのは current LAB draft が outcome existence を
+単独では導かないという L3 の限定結論である。totality の Canon 上の帰属、relation の形、
+final equality、Diagnostic equivalence、OBL-021 の proof/status は未決のまま残る。
+evidence commit の SHA と artifact hash は WRK-0004 を正本とする。
+
 ## 変更境界
 
 変更候補は `samples/lean/lab-statements/obl021/` と `plan/` に限る。Canon working record と

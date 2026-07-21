@@ -36,11 +36,11 @@ Non-claims: This does not assign outcome totality to OBL-021, OBL-003, an elabor
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. It may add a LAB-only countermodel and explanation in the existing OBL-021 statement-draft directory, plus manifest/plan/report metadata. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
+Positive evidence: Lean 4.29.1 checks the imported existing statement draft and the countermodel, including `well_scoped_input_exists`, `no_successful_result_exists`, `no_diagnostic_exists`, `statement_draft_holds`, and their aggregate. In the concrete model, the unit input is well-scoped while neither a successful Result nor a Diagnostic exists.
+Negative evidence: The registered pre-source red check confirmed that the target did not exist before the evidence commit. The registered source audit found the four required theorem names and no `sorry`, `admit`, `axiom`, `unsafe`, `partial`, or `implemented_by` token. The existing Lean synchronization test passed.
+Evidence artifacts: LAB:plan/wrk-0004-outcome-totality-countermodel.md@0434482a72d8b307f757fb66ec73dedccd1ce19e:105b7e362588ec0e4df0fcab4b43e884a4ff59e9dc2a6c4dbf7f7583bef0e5dd, LAB:samples/lean/lab-statements/obl021/ElabDeterminismOutcomeTotalityCountermodel.lean@0434482a72d8b307f757fb66ec73dedccd1ce19e:69f4eced7359d5c99cbace655a7231b8ebb48374cd9e0036aa20670dc6bb5c61, LAB:samples/lean/lab-statements/obl021/ElabDeterminismOutcomeTotalityCountermodel.md@0434482a72d8b307f757fb66ec73dedccd1ce19e:2614c1626ed3c6cb41f79cd3dd6cdc32974f9194bbb2fab83aa018760c9a0db7
+Evidence commits: 0434482a72d8b307f757fb66ec73dedccd1ce19e
+Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. Its retained result is limited to a countermodel of the current LAB statement shape: it shows that the draft alone does not entail outcome existence for a well-scoped input. It does not assign outcome totality to OBL-021, OBL-003, an elaborator definition, or any Canon obligation, and introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
 Independent review: not-required-for-L3
 
 ## Supersession
