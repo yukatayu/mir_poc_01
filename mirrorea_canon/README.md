@@ -15,12 +15,12 @@ open_items: []
 
 1. 本 canon は、憲章と決定(`adr/`)、形式理論(`theory/`)、言語・システム仕様(`spec/`)、適合性シナリオ(`scenarios/`)、メンタルモデル(`mental-model/`)、階層と契約(`architecture/`)、計画と運用(`plan/`)、執筆・運用規約(`meta/`)の正本を含む。
 2. 既存リポジトリ `mir_poc_01`(以下 **LAB**)は、本 canon の導入をもって**実験場・evidence 置き場**に位置づけが変わる。canon と LAB の記述が衝突する場合、常に canon が勝つ。手続きは `meta/source-hierarchy.md` に従う。
-3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → 人間の決定 → ADR / CHANGELOG 追記)のみで行う。AI エージェントは提案はできるが決定はできない(`meta/agent-instructions.md`)。
+3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → 人間の決定 → ADR / CHANGELOG 追記)のみで行う。AI エージェントは L0/L1 を決定できない。ADR-0014 の active exact editable target では、frozen evidence cut / 独立レビュー / rollback 規約を満たす可逆な L2/L3 working theory を維持できる(`meta/agent-instructions.md`)。
 
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(13 本の決定の一覧)
+- 決定: `adr/README.md`(14 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md`
 - 何がいつ動くか: `plan/01-phases.md`
 

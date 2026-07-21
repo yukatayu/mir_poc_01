@@ -18,6 +18,11 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-21** ADR-0014 により、existing LAB lane における可逆な L2/L3
+  working-theory research を委任した。canon update は owner-maintained exact
+  editable-target row、rebased frozen evidence/diff、independent review、reviewed
+  rollback を要する。L0/L1、external contract、SCN/Gate/Phase、全 `theory/11`、
+  implementation/public status は委任していない。初期 editable-target row は空。
 - **2026-07-15** ADR-0013 により `phase-governance/t0-g0` version 1 と、
   pinned evidence cut に対する G0-D1 acceptance / G0-D4 waiver を採択した。
   one-off LAB-derived JSON は許可したが、G0-D3 は defer のため G0 exit / T1

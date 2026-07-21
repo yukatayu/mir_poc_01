@@ -2,7 +2,7 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013]
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014]
 summary: 実装フェーズ T0-T2 / I1-I6。各段階の正確なゴール、何が動き、どの程度実用的か、非宣言。
 open_items: [OPEN-032]
 ---
@@ -11,7 +11,7 @@ open_items: [OPEN-032]
 
 **唯一の実装状態の正本。** 他のどのファイルの存在も実装を意味しない。現在位置: **T0**。
 
-## 理論フェーズ(実装凍結。例外は使い捨て spike のみ、main 不合流)
+## 理論フェーズ(実装凍結。例外は使い捨て spike と ADR-0014 に従う既存 lane の scoped research artifact のみ。production implementation は main 不合流)
 
 | Phase | ゴール(exit) | 動くもの / 実用性 |
 |---|---|---|

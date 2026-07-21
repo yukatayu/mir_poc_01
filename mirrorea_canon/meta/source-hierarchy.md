@@ -2,7 +2,7 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012]
+depends_on: [adr/ADR-0012, adr/ADR-0014]
 summary: canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。
 open_items: []
 ---
@@ -19,10 +19,18 @@ open_items: []
 2. LAB README / AGENTS.md の冒頭に同旨の 3 行を追記(既存本文は改変しない — evidence の凍結保存)。
 3. `mir_hilight.html` の KEYWORDS から `world` を除去、または「歴史的表示」と注記。
 4. clean-near-end 系サンプルに「旧語彙(world 等)を含む歴史的 suite」の注記 1 行。
-5. 以後、LAB への新規追加は spike 産物と evidence のみ(plan/02 の記録の置き場)。
+5. 以後、LAB への新規追加は spike 産物と evidence のみ(plan/02 の記録の置き場)。ADR-0014 の target-ID-scoped research artifact は既存の許可済み lane にのみ残せる。新 lane / helper / schema / CI surface は別途禁止のままである。
 
 ## 移行規則
 
 - canon が LAB の概念を再定義した場合、GLOSSARY の旧語彙対応表に行を足す。
 - LAB の evidence を canon の根拠に使うときは「evidence であって規範でない」ことを本文で明示する。
 - LAB の削除・改変は原則しない(歴史の保存)。容量問題は archive 移動で解く。
+
+## Delegated working-theory route
+
+ADR-0014 の delegated route でも canon > LAB は変わらない。LAB は candidate /
+alternative / countermodel / command evidence / review / supersession history を保持
+する。canon の working theory update は ADR-0014 の exact editable-target row と
+frozen final-delta review がある場合だけである。LAB evidence だけから canon の
+status、proof、Gate、Phase、SCN、conformance を動かしてはならない。

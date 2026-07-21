@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 74,
+ "files": 76,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 1534
+   "bytes": 1972
   },
   {
    "id": "root/glossary",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 2705
+   "bytes": 2726
   },
   {
    "id": "root/north-star",
@@ -61,7 +61,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2379
+   "bytes": 2538
   },
   {
    "id": "adr/ADR-0001",
@@ -207,10 +207,10 @@
    "depends_on": [
     "root/readme"
    ],
-   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続き。",
+   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続きで、ADR-0014 の review-gated L2/L3 working-theory route のみを例外とする。",
    "open_items": [],
    "path": "adr/ADR-0012.md",
-   "bytes": 1109
+   "bytes": 1506
   },
   {
    "id": "adr/ADR-0013",
@@ -234,6 +234,19 @@
    "bytes": 5678
   },
   {
+   "id": "adr/ADR-0014",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012",
+    "meta/proposal-005"
+   ],
+   "summary": "owner-maintained exact allowlist と review を条件に、可逆な L2/L3 working-theory canon update を委任する。L0/L1・全 theory/11・外部契約・SCN/Gate・最終 proof は owner に留保する。",
+   "open_items": [],
+   "path": "adr/ADR-0014.md",
+   "bytes": 6906
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -243,7 +256,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 1708
+   "bytes": 1828
   },
   {
    "id": "arch/01-strata",
@@ -387,12 +400,13 @@
    "maturity": "draft",
    "depends_on": [
     "adr/ADR-0012",
+    "adr/ADR-0014",
     "plan/02-operating-model"
    ],
-   "summary": "AI エージェントの読込プロトコルと権限境界。できること・できないこと・衝突時の挙動。",
+   "summary": "AI エージェントの読込プロトコルと権限境界。review-gated L2/L3 working-theory route、reserved boundary、衝突時の挙動。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 2064
+   "bytes": 3272
   },
   {
    "id": "meta/proposal-001",
@@ -466,28 +480,42 @@
    "bytes": 8116
   },
   {
-   "id": "meta/source-hierarchy",
-   "status": "L0-frozen",
+   "id": "meta/proposal-005",
+   "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
     "adr/ADR-0012"
    ],
+   "summary": "採択済みの delegated L2/L3 theory research route。LAB は候補・反証・実験・履歴を保持し、canon update は ADR-0014 の exact owner allowlist と final-delta review を要する。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-005-l2-l3-theory-research-delegation.md",
+   "bytes": 3237
+  },
+  {
+   "id": "meta/source-hierarchy",
+   "status": "L0-frozen",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012",
+    "adr/ADR-0014"
+   ],
    "summary": "canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 1673
+   "bytes": 2342
   },
   {
    "id": "meta/style-guide",
    "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
-    "root/readme"
+    "root/readme",
+    "adr/ADR-0014"
    ],
    "summary": "執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。",
    "open_items": [],
    "path": "meta/style-guide.md",
-   "bytes": 1936
+   "bytes": 3000
   },
   {
    "id": "plan/00-gates",
@@ -511,14 +539,15 @@
     "plan/02-operating-model",
     "spec/06-conformance",
     "meta/source-hierarchy",
-    "adr/ADR-0013"
+    "adr/ADR-0013",
+    "adr/ADR-0014"
    ],
    "summary": "実装フェーズ T0-T2 / I1-I6。各段階の正確なゴール、何が動き、どの程度実用的か、非宣言。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 13386
+   "bytes": 13493
   },
   {
    "id": "plan/02-operating-model",
@@ -526,12 +555,12 @@
    "maturity": "draft",
    "depends_on": [
     "adr/ADR-0012",
-    "meta/agent-instructions"
+    "adr/ADR-0014"
    ],
-   "summary": "運用規約。エージェント役割の反転、package 4 種、モラトリアム、KPI、決定の周期、相互レビュー。",
+   "summary": "運用規約。owner-reserved boundary、delegated L2/L3 theory research、package 5 種、モラトリアム、KPI、相互レビュー。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 2117
+   "bytes": 5381
   },
   {
    "id": "plan/03-risks",
@@ -540,10 +569,10 @@
    "depends_on": [
     "plan/02-operating-model"
    ],
-   "summary": "リスク台帳 R-01..R-12。LAB plan/12 の蒸留+相談で特定された構造リスク。",
+   "summary": "リスク台帳 R-01..R-13。LAB plan/12 の蒸留+相談で特定された構造リスク。",
    "open_items": [],
    "path": "plan/03-risks.md",
-   "bytes": 1864
+   "bytes": 2150
   },
   {
    "id": "plan/readme",
@@ -555,7 +584,7 @@
    "summary": "計画の読み方。Gate(理論凍結)と Phase(実装)の二軸、運用規約、リスク。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 691
+   "bytes": 718
   },
   {
    "id": "scenarios/readme",
@@ -1012,7 +1041,7 @@
     "OPEN-025"
    ],
    "path": "theory/12-literature.md",
-   "bytes": 4094
+   "bytes": 5609
   },
   {
    "id": "theory/readme",

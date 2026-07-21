@@ -1,28 +1,40 @@
-flowchart LR
-  T0[T0: vocabulary and decisions\ncurrent: G0 exit unrecorded]
-  T1[T1: calculus and G1-G3 statements]
-  T2[T2: proof skeletons and G5 statements]
-  I1[I1: reference implementation]
-  I2[I2: multi-locus]
-  I3[I3: real transport\nfirst LAN reality]
-  I4[I4: persistence and patch]
-  I5[I5: projection and View]
-  I6[I6: distributed persistence and federation]
+flowchart TD
+  Target[LAB target ID + pinned authority cut]
+  Check{Reserved boundary\nor existing-lane eligibility failure?}
+  Listed{ADR-0014 exact owner\neditable target active?}
+  Dormant[Dormant deferred item\nrecorded reopen trigger absent]
+  Escalate[Escalated bundle\nowner / canon action required]
+  Candidate[LAB candidate\ncomparison and falsifier]
+  Evidence[Positive and negative evidence\nreproducible commands]
+  Freeze[Steward rebase/freeze\nbase, blobs, diff, evidence, rollback]
+  Review{Independent review\nof exact frozen cut passes?}
+  L3[Canon L3 working state\nLAB candidate history]
+  L2[Canon L2 working state\nreviewed and reversible]
+  Falsified[Falsified or superseded\nforward-recorded in LAB]
+  Owner[Owner disposition or ADR]
+  Recut[Re-read affected canon / SCN / ledger\nand update derived views]
 
-  T0 --> T1 --> T2 --> I1 --> I2 --> I3 --> I4 --> I5 --> I6
+  Target --> Check
+  Check -- deferred without trigger --> Dormant
+  Check -- reserved or ambiguous --> Escalate
+  Check -- eligible --> Candidate --> Evidence --> Listed
+  Listed -- no --> Candidate
+  Listed -- yes --> Freeze --> Review
+  Review -- scope defect --> Escalate
+  Review -- candidate remains open --> L3
+  Review -- provisional selection --> L2
+  L3 --> Candidate
+  L2 -- falsifier: freeze reliance --> Falsified --> Freeze
+  L2 --> Recut
+  L3 --> Recut
+  Escalate --> Owner
+  Owner -- deferred --> Dormant
+  Owner -- scoped authorization --> Target
+  Owner -- L0/L1 or lifecycle record --> Recut
 
-  Research[LAB research work unit\nexisting evidence, counterexample, Lean exploration]
-  Decision[decision-ready bundle\nowner / canon act required]
-  Evidence[research-complete\nLAB evidence only]
-
-  T0 -. bounded research .-> Research
-  T1 -. bounded research .-> Research
-  T2 -. bounded research .-> Research
-  Research --> Evidence
-  Research --> Decision
-  Decision -. accepted canon record only .-> T1
-
-  classDef current fill:#fff3cd,stroke:#9c6b00,color:#3b2f00
-  classDef research fill:#e6f4ea,stroke:#286b3d,color:#12351d
-  class T0 current
-  class Research,Evidence,Decision research
+  classDef canon fill:#dcefe2,stroke:#22543d,color:#102a22
+  classDef lab fill:#edf2f7,stroke:#4a5568,color:#1a202c
+  classDef stop fill:#fff3cd,stroke:#9c6b00,color:#3b2f00
+  class Target,L3,L2,Owner canon
+  class Candidate,Evidence,Falsified,Recut lab
+  class Check,Listed,Dormant,Escalate,Review stop

@@ -8,6 +8,18 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 この repository は、4 系統を分離可能なまま扱う **specification-first research repo** です。
 
+## Current research governance
+
+`mirrorea_canon/` remains the sole normative source. ADR-0014 permits
+autonomous research in existing LAB lanes; canon L2/L3 working-state updates
+need an active exact owner-listed target plus a rebased final-delta independent
+review. Candidates, countermodels, experiments, and history remain in LAB.
+L0/L1 direction, core and external contracts, SCN/Gate/Phase action, every
+proof-ledger change, final proof / OBL discharge, and public claims remain
+owner-reserved. The concise control view is
+`docs/project-status.md`; the detailed lifecycle is
+`plan/157-delegated-theory-research-governance.md`.
+
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア
 - **Mirrorea**

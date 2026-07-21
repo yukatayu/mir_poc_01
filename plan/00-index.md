@@ -110,9 +110,10 @@
 92. G0 closeout evidence and non-applied exit decision packet は `plan/153`
 93. project control cockpit and reporting protocol は `plan/154`
 94. T0/G0 governance-profile adoption and one-off evaluation は `plan/155`
-95. T0-T2 research autonomy envelope は `plan/156`
-96. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-97. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+95. pre-delegation T0-T2 research autonomy envelope は `plan/156`
+96. delegated L2/L3 theory research governance と current lifecycle は `plan/157`
+97. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+98. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

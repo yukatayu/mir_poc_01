@@ -20,9 +20,10 @@ process. An owner-recorded LAB decision may only change a separate
 - Canonical lifecycle position: `T0/G0 rebaseline`.
 - No G0 exit, T1 entry, OBL completion, proof discharge, conformance result,
   or runtime/product readiness is created by this plan.
-- The current controlling LAB boundary is P109,
-  `plan/153-g0-closeout-evidence-and-exit-decision-packet.md`.
-- No autonomous successor package is promoted at this baseline.
+- The current delegated-research policy is ADR-0014 plus
+  `plan/157-delegated-theory-research-governance.md`; `plan/156` remains the
+  pre-delegation evidence record.
+- No Gate/Phase or implementation package is promoted by this baseline.
 
 ## Design
 
@@ -30,7 +31,7 @@ process. An owner-recorded LAB decision may only change a separate
 
 | Document | Role | May state | Must not do |
 | --- | --- | --- | --- |
-| `docs/project-status.md` | Human-facing derived control view | Whole-plan checklist, current position, exact stop line, active owner decisions, and exact source links | Create a decision, promote a package, move a Gate/Phase, or duplicate detailed evidence |
+| `docs/project-status.md` | Human-facing derived control view | Whole-plan checklist, current position, research lifecycle, active owner decisions, and exact source links | Create a decision, promote a package, move a Gate/Phase, or duplicate detailed evidence |
 | `plan/154-project-control-cockpit.md` | LAB execution and maintenance protocol | Update transaction, source hierarchy, detailed decision routing, validator contract, and non-claims | Override canon or replace `progress.md` / `tasks.md` / `samples_progress.md` |
 | `progress.md` | Concise LAB status snapshot | Workflow readiness, evidence classification, macro phase, and recent log | Serve as a canon decision record |
 | `tasks.md` | Current LAB task map | Promoted package, bounded work, and decision gates | Grant autonomous roadmap authority |
@@ -45,8 +46,9 @@ headings present four reader panels rather than a historical task log:
 1. **canonical state**: current lifecycle and the Gate/Phase checklist;
 2. **runnable LAB evidence**: what can actually be reproduced, with its
    non-claim boundary;
-3. **decision queue**: unresolved owner decisions only, with deferred items
-   marked dormant rather than repeatedly presented as active prompts; and
+3. **research lifecycle and decision queue**: current candidate state plus
+   unresolved owner decisions, with deferred items marked dormant rather than
+   repeatedly presented as active prompts; and
 4. **roadmap**: the next evidence-first research order, with the exact sources
    that constrain it.
 
@@ -60,9 +62,10 @@ been recorded elsewhere.
 
 `plan/155` records G0-D1/D2/D4. G0-D3 is deferred and dormant: it re-enters
 the queue only through an owner reopen, not because an agent needs a next task.
-`plan/156` records a separate LAB research operating envelope. It authorizes
-selection of bounded T0-T2 research work units but does not grant canon package
-close, Gate/Phase movement, ADR effectivity, or OBL-status authority.
+`plan/156` records the pre-delegation research envelope and its bounded evidence.
+ADR-0014 plus `plan/157` now govern autonomous LAB research and the exact-row,
+review-gated route for a canon L2/L3 update. They do not grant Gate/Phase
+movement, ADR effectivity, any proof-ledger status, or OBL discharge authority.
 
 ## Update transaction
 

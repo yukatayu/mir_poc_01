@@ -1,17 +1,25 @@
-# plan/156 - T0-T2 research autonomy envelope
+# plan/156 - Pre-delegation T0-T2 research autonomy envelope
 
 ## Purpose
 
-This LAB operating plan records the owner's instruction to advance the
-research portion of T0-T2 carefully and autonomously. It turns that instruction
-into a bounded work-selection and stop protocol. It does not amend canon,
-promote a canon package, change a Gate/Phase, change an OBL status, or create
-implementation authority.
+This LAB operating plan records the **pre-delegation** instruction and the
+bounded investigations performed under it. ADR-0014 supersedes this file as
+the current research-governance route. It remains immutable repository memory
+for T-RESEARCH-001 through T-RESEARCH-033 and their evidence boundaries.
 
-The controlling authority remains `mirrorea_canon/plan/02-operating-model.md`:
-the owner decides L0/L1, Gate exits, and ADR effectivity; `theory/11` alone
-states proof status. This file is a LAB operational interpretation of the
-owner's current authorization, not a general replacement for that rule.
+The current controlling route is ADR-0014,
+`mirrorea_canon/plan/02-operating-model.md`, and
+`plan/157-delegated-theory-research-governance.md`. This file does not grant
+new authority, promote a canon package, change a Gate/Phase, change an OBL
+status, or create implementation authority.
+
+## Historical status
+
+The selection rule, exclusions, and stop triggers below describe the policy
+under which their recorded work units were selected. Do not apply them to new
+candidate selection without first reconciling them through the ADR-0014 route.
+The investigations starting at T-RESEARCH-001 are retained as evidence and are
+not rewritten into post-delegation claims.
 
 ## Terms
 

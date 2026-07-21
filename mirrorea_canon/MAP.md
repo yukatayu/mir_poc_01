@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0013) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0014) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 theory/ (MirCore v0)                     mental-model/ (表と裏の対応)
@@ -41,7 +41,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..03 → meta/agent-instructions → adr/ADR-0012。
+- **運用筋**(進め方を知る): plan/00..03 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014。
 
 ## ID 体系
 
@@ -54,7 +54,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | SCN-## | 適合性シナリオ | scenarios/ |
 | BND-### | 層間契約 | architecture/02 |
 | GATE-# / PHASE-x | 計画単位 | plan/00, 01 |
-| OPEN-### | 未決 | plan/03 と各ファイル open_items |
+| OPEN-### | 未決 | 各ファイル open_items と INDEX.json |
 | E-XXXX-### | 診断 ID | spec/07 |
 
 相互参照は必ず ID で行う。`INDEX.json` に全 id → path → status → depends_on の索引がある(`meta/build-index.py` で再生成)。

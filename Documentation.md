@@ -11,6 +11,14 @@ notes. If LAB text conflicts with canon, canon wins.
 `docs/project-status.md`、詳細な研究計画は `plan/`、不変の作業証跡は
 `docs/reports/` に置きます。
 
+| 知りたいこと | 読む場所 |
+| --- | --- |
+| 正本の層と依存 | `mirrorea_canon/MAP.md` と `docs/diagrams/layer-stack.mmd` |
+| 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
+| 現在地と owner 判断 | `docs/project-status.md` |
+| 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/157-delegated-theory-research-governance.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` |
+
 ## 最初に読む順序
 
 1. `mirrorea_canon/README.md`
@@ -42,16 +50,18 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 ## 現在の位置
 
 - canon 上は `T0/G0 rebaseline`。G0 exit と T1 entry はまだありません。
-- T0-T2 は、既存 canon に接続した非休眠の LAB research work unit を、
-  `research-complete` または `decision-ready` まで自走する研究段階です。
-  Gate exit、ADR effectivity、L0/L1 決定、`theory/11` の proof status は owner
-  と canon process の責務です。
+- T0-T2 は、既存 LAB lane で理論候補を自走して比較・反証できる研究段階です。
+  ADR-0014 の active exact owner-listed target があるときだけ、rebased final diff の
+  independent review を経て canon L2/L3 working state を更新できます。Gate exit、
+  ADR effectivity、L0/L1、external contract、SCN/Phase、`theory/11`、final proof /
+  OBL discharge は owner と canon process の責務です。
 - Product Alpha、Full System V1、Surface sample は限定された runnable LAB
   evidence です。最終言語・最終ABI・実 transport・分散永続・public product を
   意味しません。
 
-この境界の詳細と停止条件は `plan/156-t0-t2-research-autonomy-envelope.md`、
-実行可能サンプルの正確な分類は `samples_progress.md` にあります。
+この境界の詳細は `plan/157-delegated-theory-research-governance.md`、過去の
+research evidence は `plan/156-t0-t2-research-autonomy-envelope.md`、実行可能
+サンプルの正確な分類は `samples_progress.md` にあります。
 
 ## Roadmap の読み方
 
@@ -77,6 +87,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - `samples_progress.md`: runnable sample の dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
-調査で semantic choice、SCN expectation の変更、canon-LAB 衝突、新しい実装レーン、
-proof status 更新、Gate exit が必要になったら、agent は止まり、選択肢・影響・
-反例・Lean/実行証拠・非主張を含む decision bundle を作ります。
+調査で L0/L1 / core / external contract / SCN / Gate / Phase / final proof に触れる
+choice、canon-LAB 衝突、新しい実装レーン、または authority ambiguity が生じたら、
+agent は止まり、選択肢・影響・反例・Lean/実行証拠・非主張を含む escalation bundle
+を作ります。その他の scoped candidate は evidence と review を満たして LAB working
+state として継続できます。canon working state への更新には、さらに ADR-0014 の
+active exact owner target と rebased frozen diff の independent review が必要です。

@@ -1,12 +1,15 @@
 # progress
 
-最終更新: 2026-07-18 16:45 JST
+最終更新: 2026-07-21 10:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 ## document role
 
-This is the concise LAB snapshot of workflow readiness and evidence. It is not a canon decision record or a historical log. Read `docs/project-status.md` for the human control view, `tasks.md` for the current work map, and `plan/` for detailed repository memory.
+This is the concise LAB snapshot of workflow readiness and evidence. It is not
+a canon decision record or a historical log. `docs/project-status.md` is the
+human control view, `tasks.md` is the current work map, and `plan/` holds
+detailed repository memory.
 
 ## project axis
 
@@ -15,7 +18,9 @@ Correct theory -> safe hot-plug -> execution, communication, verification,
 and visualization across Places in a virtual-space system.
 ```
 
-Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform remain separable. A domain `World` or `Game` is user-defined on Mir; it is not a Mir core primitive.
+Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform remain
+separable. A domain `World` or `Game` is user-defined on Mir; it is not a Mir
+core primitive.
 
 ## final ideal
 
@@ -24,366 +29,117 @@ Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform remain separab
      -> checker/runtime -> projection/deployment -> host/provider/view evidence
 ```
 
-The target carries source semantics through placement, explicit communication, contracts, evolution, and observation without folding authentication or visualization into an untyped transport/debug channel.
+The target carries source semantics through placement, explicit communication,
+contracts, evolution, and observation without folding authentication or
+visualization into an untyped transport/debug channel.
 
 ## current milestone position
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | canon is `T0/G0 rebaseline`; G0 exit and T1 entry are unrecorded | T0-T2 evidence research is permitted; canon status remains controlled by `mirrorea_canon/plan/01-phases.md` and `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| User-facing specification | source-first direction, companion notation, and example guidance exist as LAB evidence | no final grammar, public API, or final user contract |
-| Implementation / operation | Product Alpha, Full System V1, and Surface roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; canon L2/L3 update additionally needs an active exact owner target and final-delta review |
+| User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
+| Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
-`T-RESEARCH-001` through `T-RESEARCH-003` are `research-complete`: finite
-countermodels established the OBL-001/020/021 statement boundary, one
-`[E-WRITE]` store-key clause was checked under a value-only/frame reading, and
-one `[E-OBS]` graph kernel was proved under a fresh, prefix-preserving,
-incoming-only extension. `T-RESEARCH-005` is also `research-complete`: an
-`[E-DEGRADE]/[E-REACQ]` two-rule scratch kernel preserves only prior defined
-map entries under explicit experiment-local support, framing, and lineage
-assumptions. None is a canon append, lineage, or full-step definition. No canon
-theorem, status, or lifecycle changed. The canonical lifecycle remains
-`mirrorea_canon/plan/01-phases.md`; the LAB work-selection and stop boundary is
-`plan/156-t0-t2-research-autonomy-envelope.md`.
-
-`T-RESEARCH-006` is `research-complete` as a frozen source-adequacy audit,
-not a proof: all 13 selected transition cases x five named WF clauses are
-`missing` under a derivation-complete criterion (`0 direct / 65 missing`). The
-audit localizes the missing premises to history extension, component frames,
-state/membership coherence, authority records, and chain transitions. It
-rejects using unproved THM-006 as an OBL-020 premise and records a two-state
-Lean challenge showing why `[E-SERVE]/fail` no-store-change alone cannot frame
-the membership epoch. No canon status, definition, or lifecycle changed.
-
-`T-RESEARCH-007` is `decision-ready` for OBL-020 only. It prepared
-PROPOSAL-003's A/B/C choice for organizing a future proof-facing formalization:
-shared five-heading LAB-derived review checklist (advisory recommendation), no
-required shared checklist with package-local organization, or defer. The
-headings are not canon predicates or fixed Lean premises. The proposal is
-non-self-executing and does not block unrelated existing-lane theory research;
-no concrete transition, frame, or carrier is defined until the owner records a
-disposition.
-
-`T-RESEARCH-008` is `research-complete` for the OBL-021 BND-001 source cut:
-all three abstract determinism postconditions are canonically intended but
-`0 direct / 0 delegated / 3 missing` under a derivation-complete criterion.
-The missing force is result/projection coherence, diagnostic equivalence, and
-shared-outcome exclusion; no equality, datatype, statement, or proof status was
-selected.
-
-`T-RESEARCH-009` is `research-complete` as a bounded OBL-005
-structural-flattening kernel. An opaque-leaf, experiment-local binary shape
-with a free ordered-word output proves only that one reassociation preserves
-structural output, and that a one-hole meta-context is an identity. An
-order-reversed fold still satisfies reassociation but fails a two-leaf
-left-to-right oracle; a separate empty-constructor mutation demonstrates that
-a source-level unit needs a changed signature. This does not define canonical
-applicability, chain validity, source-level unit, confluence, evaluation, or
-OBL-005 status.
-
-`T-RESEARCH-010` is `research-complete` as an OBL-006 source-adequacy audit:
-`0 direct / 0 delegated / 1 missing` formalization boundary. Same ordered
-output does not determine confluence; the source cut does not select a term
-domain, guarded validity, equality/denotation, relation, or theorem shape.
-
-`T-RESEARCH-011` is `research-complete` as a THM-002 / OBL-007
-trace-formalization audit: `0 direct / 0 delegated / 1 missing` complete
-statement boundary. The canon directly fixes monotone same-lineage selection
-and explicit fresh reacquire policy, but does not yet give the trace, selection,
-lineage, origin/reacquire, freshness, and transition/frame relations from which
-a Lean statement could be derived. Two disposable finite models delimit those
-missing bindings; no theorem, status, or lifecycle changed.
-
-`T-RESEARCH-012` is `research-complete` as a THM-004 / OBL-015
-mutation-origin audit: `0 direct / 0 delegated / 1 missing` coupled
-formalization boundary. The canon directly fixes grant-lineage authority for
-delegated capability use and separately permits owner-local mutation. It does
-not yet define the proof-facing association from a particular mutation to a
-validating use/request/capref, the owner-local/declared-transition branch, or
-the complete trace/step link. A favorable-order three-event twin isolates only
-the experiment-local association; no theorem, status, or lifecycle changed.
-
-`T-RESEARCH-013` is `research-complete` as a THM-005 / OBL-017
-observer-safe export audit: `0 direct / 0 delegated / 1 missing` coupled
-formalization boundary for the complete proof-facing statement interpretation.
-Canon directly fixes the noninterference policy and observation constraints,
-but not the coupled configuration low-equivalence, observer/export shape, and
-output equality relations. A trusted two-configuration twin keeps selected
-stipulated LAB side predicates constant while constructor identity fails and
-visible-position equality satisfies the finite shape. It selects no label
-lattice, export ABI, or canonical equality; no theorem, status, or lifecycle
-changed.
-
-`T-RESEARCH-014` is `research-complete` as a THM-003 / OBL-009
-successful-load restoration audit: `0 direct / 0 delegated / 1 missing`
-coupled formalization boundary. Theory/04 directly supplies a SaveObject
-schema anchor and eight necessary successful-load conditions; theory/01
-supplies Config/WellFormed vocabulary. Neither supplies a complete
-successful-load-to-restored-Config/prefix interpretation. A trusted one-save,
-two-result twin holds all selected load conditions but flips only the
-experiment-local result relation; no load API, persistence semantics, theorem,
-status, or lifecycle changed.
-
-`T-RESEARCH-015` is `research-complete` as an OBL-026 transparent-overlay
-composition audit: `0 direct / 0 delegated / 1 missing` coupled
-formalization boundary. Theory/02 directly fixes ten policy directions for a
-transparent layer, but not their proof-facing orders, a layer-stack
-composition operation, or equality/extensionality. A trusted ten-component
-preorder kernel makes transitivity conditional on a chosen order; a separate
-opaque-label model shows why a bare pairwise label cannot supply that
-structure. It selects no canonical variance, ABI, theorem, status, or
-lifecycle.
-
-`T-RESEARCH-016` is `research-complete` as an OBL-028 revocation-monotonicity
-audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
-Theory/05 directly fixes the lifecycle and policy direction, but not a
-revocation/reissue carrier, identity across state changes, or a trace/
-transition relation. A trusted action kernel proves retention only under its
-explicitly selected reissue actions; a separate unstructured-label model
-shows why labels do not provide the missing relation. It selects no authority
-ABI, theorem, status, or lifecycle.
-
-`T-RESEARCH-017` is `research-complete` as an OBL-022 stream read-side audit:
-`0 direct / 0 delegated / 1 missing` coupled formalization boundary. Theory/09
-directly fixes samples outside occurrence history and the read-side policy, and
-BND-007 retains typed adapters without semantic ownership. It does not define
-a sample/adapter/discrete-transition carrier or frame. A trusted action kernel
-proves retention only under its explicitly selected sample-only branch; an
-unstructured-label model shows why labels do not provide the missing relation.
-It selects no stream/adapter ABI, theorem, status, or lifecycle.
-
-`T-RESEARCH-018` is `research-complete` as an OBL-027 atomic-cut rollback
-audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
-Theory/04 directly fixes a local rollback frontier and the causal-before-cut
-policy, while theory/01, theory/06, ADR-0004, and ADR-0007 constrain the
-meaning around it. They do not define occurrence/causality/rollback carriers
-or a result relation. A trusted frontier kernel proves retention only under its
-explicit target bound; an unstructured-label model shows why labels do not
-provide the missing relation. It selects no persistence ABI, theorem, status,
-or lifecycle.
-
-`T-RESEARCH-019` is `research-complete` as an OBL-023 temporal-coherence
-audit: `0 direct / 0 delegated / 1 missing` coupled formalization boundary.
-Theory/09 directly fixes consumer-frontier admissibility, epoch match, and the
-no-split-frame policy, but leaves the formal statement and clock/latency model
-open. A trusted shared-frontier kernel proves equal epochs only under its
-explicit one-frame assumption; an unstructured-label model shows why labels do
-not provide the missing binding relation. It selects no consumer, stream,
-provider, transport, clock, theorem, status, or lifecycle interface.
-
-`T-RESEARCH-020` is `research-complete` as an OBL-010 consistent-cut checker
-kernel audit. Theory/04 directly fixes the generating-family transitive
-closure and prefix-closure definition; a trusted generic kernel proves direct
-predecessor closure sufficient for transitive prefix closure. A two-edge
-countermodel shows why a partial checker is unsound. The finite checker
-carrier, exhaustive edge coverage, decider, result, and diagnostic interface
-remain unselected, so this is not an OBL statement, proof, or status change.
-
-`T-RESEARCH-021` is `research-complete` as an OBL-004
-no-undeclared-communication composition audit. Theory/03 directly fixes
-item-level `G_e` visibility and forbids other communication generation; a
-trusted generic kernel proves itemwise containment composes. A two-edge
-countermodel shows why a partial request-only checker is unsound. Program,
-elaboration, generated-edge, declaration, runtime, transport, theorem, and
-status interfaces remain unselected.
-
-`T-RESEARCH-022` is `research-complete` as an OBL-003 Line-1 decidability
-audit. Theory/01 and theory/02 directly fix a finite row-containment direction;
-a trusted two-bit failure-row kernel proves that narrow subcheck. A candidate
-with no failures but an undeclared external-adapter effect passes a
-failure-only checker, showing the full judgment needs complete rule coverage.
-The AST/parser, declarations, rule set, carriers, residual split, checker,
-diagnostic, theorem, and status interfaces remain unselected.
-
-`T-RESEARCH-023` is `research-complete` as an OBL-018 explicit-flow
-observer-safe kernel audit. Theory/07 directly forbids high-label state and
-raw witness/auth payloads in observer-safe views. A trusted finite projection
-to the agreed low position proves equality despite modeled high/raw variation;
-a high-state projection changes under the same variation. The latter is a
-negative control, not an observer-safe export or canon counterexample. The
-configuration/observer/export ABI, lattice and declassification, occurrence
-provenance, and collection equality/order/multiplicity remain unselected, so
-this is not a THM-005/OBL-017/018 statement, proof, or status change.
-
-`T-RESEARCH-024` is `research-complete` as an OBL-014 Z-cycle equivalence
-audit: `0 direct / 0 delegated / 1 missing` coupled checkpoint-graph /
-Netzer-Xu characterization boundary. Theory/04 and SCN-10 directly fix only
-the Z-cycle-to-inadmissibility policy. A trusted Boolean twin preserves that
-policy while one instance breaks a stipulated structural-reject/useless-
-checkpoint equivalence. CUT-11 remains synthetic reason-code evidence, not a
-graph algorithm or delegated proof. Checkpoint graph, zigzag, recoverability,
-recognizer, characterization, theorem, and status interfaces remain
-unselected.
-
-`T-RESEARCH-025` is `research-complete` as a remaining-ledger closure map.
-It separates parent statement boundaries, dependent proof/lemma obligations,
-bounded direct kernels, and explicit overlap guards. OBL-002/008/016 wait for
-parent statements; OBL-011..013 share OBL-009's missing Load/restored-state
-bridge; OBL-019 repeats the E-PATCH frame gap. Theory/10 OBL-024/025 was the
-last independent source family; its existing LAB statement drafts remain
-non-normative and unpromoted.
-
-`T-RESEARCH-026` is `research-complete` as an OBL-024 diagnostic soundness
-audit: `0 direct / 0 delegated / 1 missing` coupled diagnostic-emission
-association / replay formalization boundary. Theory/10 and spec/07 fix the
-target direction and carrier fields, but not the emitted-diagnostic association,
-rule/premise/bindings, replay/exact-at relation, or diagnostic equality. A
-trusted Boolean twin shows that carrier shape alone does not force soundness.
-Existing E-ROW projection and LAB drafts remain evidence only, not a theorem,
-ABI, status, or conformance claim.
-
-`T-RESEARCH-027` is `research-complete` as an OBL-025 diagnostic completeness
-audit: `0 direct / 0 delegated / 1 missing` coupled Line-1 rejection /
-declared-fragment / single-edit repair / diagnostic-realization formalization
-boundary. Theory/10 and spec/07 fix the target direction, repair taxonomy, and
-required repair field, but not the rejection, fragment, edit/application,
-repair-validity, emission-association, or suggestion-realization relations. A
-trusted Boolean twin shows that a non-empty emitted repair carrier need not
-realize a repair or cover the rejected gap. This is not a canon
-counterexample and does not impose a canonical whole-gap interpretation.
-Existing E-ROW payloads and the LAB draft remain limited evidence only; no
-OBL-025 statement, proof, ABI, ranking, multi-edit semantics, or status moves.
-
-`T-RESEARCH-028` is `research-complete` as a T0-T2 formalization decision map.
-Within the current ledger and existing LAB lanes, all independent source cuts
-have been audited. The map separates existing owner records (G0-D3,
-`PROPOSAL-003`, and the conditional OBL-001 bridge disposition) from later
-gate-specific semantic boundaries. It recommends one scoped G1 package only
-after the applicable existing owner records, and does not merge
-step-preservation with elaboration/diagnostic semantics or select any carrier.
-
-`T-RESEARCH-029` is `decision-ready` as a cross-canon coherence audit. The
-73-document index, the audited identifier registries, and the Core-only
-`atomic_cut` boundary are coherent. The audit found one narrow Surface v0
-clarification boundary: spec/02 leaves multiple EBNF nonterminals undefined
-and permits named keyspaces without a declaration form, although spec/03 and
-theory/01 require declared keyspaces. No exact parser/checker grammar, keyword,
-expression AST, or custom-keyspace policy is inferred from LAB evidence.
-
-`T-RESEARCH-030` is `decision-ready` as the bounded pre-decision audit for
-that grammar closure. All six canonical and 47 active LAB indexed-state
-declarations use `Participant`; `LAB:specs/40` records `Object`/`Avatar` as
-later. PROPOSAL-004 therefore recommends a Participant-only Surface v0 closure
-and postpones custom keyspaces. It records no owner disposition or grammar
-change, and it does not constrain the Core's abstract finite-keyspace model.
-
-`T-RESEARCH-031` is `research-complete` as a proof-status and Lean-evidence
-integrity audit. All 28 ledger OBLs are classified without overlap as parent
-statement boundaries, dependent proof/lemmas, bounded direct fragments, the
-known OBL-019 overlap, or diagnostic boundaries; theory/11 remains the sole
-status authority and records them all open. The active Lean corpus has 25
-sequentially compiling files with no `sorry`, `admit`, or axiom, but its five
-statement drafts are definitions, its 16 generated stubs prove only `True`,
-and its four foundations are helper-local models. It therefore found no hidden
-active placeholder or status drift, not a domain proof or an OBL discharge.
-
-`T-RESEARCH-032` is `research-complete` as a cross-boundary theory
-claim-integrity audit. All audited theorem, obligation, and boundary references
-resolve to the canonical ledger or registry, and no proof-completion wording
-occurs outside the ledger. The audit preserves rather than fills three visible
-formalization boundaries: existence-DAG acyclicity has no selected
-Config/WellFormed carrier, patch-DAG acyclicity is not OBL-019's no-mutation
-result, and the working stream fallback direction is not an automatic transfer
-of THM-002 while samples remain outside `H`. SCN-04 compaction and BND-006
-remain later operational constraints, not reasons to enlarge the core or make
-a current proof claim.
-
-`T-RESEARCH-033` is `research-complete` as a bounded `OPEN-025` literature
-anchoring scan. Four first-party/primary-source comparison rows now cover
-Scribble/MPST endpoint API generation, Distributed REScala, Matrix/Third Room,
-and Urbit/Arvo. They make existing contrasts easier to audit; they do not prove
-novelty, change semantics, reopen the metatheory-ledger source cuts, or close
-`OPEN-025`.
-
-`T-RESEARCH-004` was not selected after its bounded preflight. A literal-RHS
-foreign-locus source pair reproduced request shape, failure-row acceptance /
-rejection, and source spans, but the current lane has no structured
-capability/witness carrier or JSON-to-OBL-001 interpretation. This is an
-evidence-route blocker, not a canon counterexample; it creates a decision-ready
-owner item for the bridge only.
-
-The owner-facing bundle records the authority cut, alternatives, evidence
-level, non-claims, and reopen trigger for that item. The later direct theory
-objective allows unrelated existing-lane research around the dormant bridge,
-but is not recorded as an owner defer or bridge authorization.
+`plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
+T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
+not describe the current authority route. New non-reserved theory work uses the
+LAB candidate lifecycle in `plan/157-delegated-theory-research-governance.md`.
+Its canon-update branch is dormant until the owner adds an exact editable target row.
 
 ## milestone map
 
 | Phase | Primary aim | Current position | Autonomy |
 | --- | --- | --- | --- |
-| T0 | vocabulary and G0 | current; G0-D3 deferred | bounded LAB research only |
-| T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | T1-oriented research only |
-| T2 | proof skeletons and G5 statements | later research target | Lean exploration; proof status stays in `theory/11` |
+| T0 | vocabulary and G0 | current; G0-D3 deferred | LAB research; canon update waits for an exact owner target |
+| T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | statement research; reserved boundaries escalate |
+| T2 | proof skeletons and G5 statements | later research target | conditional Lean work; final proof status stays owner-controlled |
 | I1 | reference implementation | later | blocked on theory exits |
 | I2 | multi-locus | later | blocked on I1 |
 | I3 | real transport | later; first real LAN point | blocked on I2 / transport ADR |
 | I4-I6 | persistence, View, distributed federation | later | blocked on prior phases |
 
-Exact exits are `mirrorea_canon/plan/00-gates.md` and `mirrorea_canon/plan/01-phases.md`, not this table.
+Exact exits are `mirrorea_canon/plan/00-gates.md` and
+`mirrorea_canon/plan/01-phases.md`, not this table.
 
 ## line snapshots
 
 ### Product Alpha line
 
-`samples/product-alpha1/` provides bounded runnable product-alpha evidence, including operational and release-check workflows. It is not a final product, public compatibility promise, or canon implementation status. See `samples_progress.md`.
+`samples/product-alpha1/` provides bounded runnable product-alpha evidence,
+not a final product, public compatibility promise, or canon implementation
+status. See `samples_progress.md`.
 
 ### Operational Suite line
 
-The WorldCore through TwoShard/Gradient sample suite can be checked through its documented LAB commands. It exercises bounded same-session contracts and evidence, not real distributed durability or a final shared-space catalog. See `samples_progress.md`.
+The WorldCore through TwoShard/Gradient suite checks documented same-session
+contracts and evidence. It is not real distributed durability or a final
+shared-space catalog. See `samples_progress.md`.
 
 ### Mir Language line
 
-Surface parser, indexed-state checker, elaboration, role admission, source patch, and static devtools are runnable LAB evidence. The active theory focus is the G1 ordinary-assignment static bridge and its OBL statement boundary, not runtime widening. See `plan/121-g1-minimal-vertical-slice-candidate-map.md` and `plan/156-t0-t2-research-autonomy-envelope.md`.
+Surface parser, indexed-state checker, elaboration, role admission, source
+patch, and static devtools are runnable LAB evidence. Current theory candidate
+selection is governed by ADR-0014 and `plan/157`, not by a runtime widening
+claim.
 
 ### PoseGraph line
 
-PoseGraph has bounded LAB sample evidence. Its performance-sensitive kernel remains separable from Mir runtime semantics and is not a current theory shortcut. See `samples_progress.md`.
+PoseGraph has bounded LAB sample evidence. Its performance-sensitive kernel
+remains separable from Mir runtime semantics. See `samples_progress.md`.
 
 ### Projection/Backend line
 
-Projection, deployment, and backend/provider artifacts remain bounded LAB evidence or planned boundaries. BND-006 and later implementation phases govern their realization. See `mirrorea_canon/plan/00-gates.md`.
+Projection, deployment, and backend/provider artifacts remain bounded LAB
+evidence or planned boundaries. BND-006 and later implementation phases govern
+their realization. See `mirrorea_canon/plan/00-gates.md`.
 
 ### Engine/Provider line
 
-Provider and engine adapters are typed external boundaries. They do not define world semantics, authentication, authorization, or the Mir core. See `samples_progress.md`.
+Provider and engine adapters are typed external boundaries. They do not define
+world semantics, authentication, authorization, or the Mir core. See
+`samples_progress.md`.
 
 ## validation floor
 
 | Evidence | Current command |
 | --- | --- |
 | documentation/source hierarchy | `python3 scripts/validate_docs.py` and `python3 scripts/check_source_hierarchy.py` |
+| canon metadata | `python3 meta/build-index.py --check` from `mirrorea_canon/` |
 | Surface static LAB anchor | `python3 scripts/surface_mir_samples.py check-all --format json` |
 | OBL statement shapes | direct `lake env lean` checks under `samples/lean/lab-statements/` |
 | runnable dashboards | commands recorded in `samples_progress.md` |
 
-Run only the anchor relevant to the changed layer plus the required documentation checks; broad validation is evidence, not a phase transition.
+Run the anchor relevant to the changed layer plus the required documentation
+checks; broad validation is evidence, not a phase transition.
 
 ## non-claims
 
-No Gate/Phase exit, OBL status movement, proof discharge, conformance result, final grammar/API/ABI, real transport, distributed durable save/load, or public product claim is made by this snapshot or by runnable LAB evidence.
+No Gate/Phase exit, OBL discharge, final proof, conformance result, final
+grammar/API/ABI, real transport, distributed durable save/load, or public
+product claim is made by this snapshot, a reviewed working theory, or runnable
+LAB evidence.
 
 ## user decision items vs research-discovery items
 
 | Kind | Item | Current handling |
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
-| Owner / canon | semantic choice, SCN expectation change, ADR/canon action, `theory/11` movement | agent prepares a decision bundle and stops at `decision-ready` |
-| Owner / LAB route | OBL-001 concrete-evidence bridge | owner must explicitly defer it or authorize an artifact-free design comparison with its existing route and permitted persistence; direct theory work does not itself decide the bridge; current LAB recommendation is defer |
-| Research | smallest concrete premises for OBL-020/021/001 | T-RESEARCH-001/002/003/005 complete; select a new source-grounded rule x invariant x falsifier under `plan/156` |
-| Research | G2/G3 statement feasibility after the first boundary is known | select only after the `plan/156` rule is met |
-| Research | G2/G5 statement boundaries | OBL-005 has only a structural-output kernel; OBL-006 does not fix a rewrite relation; THM-002 does not yet fix a complete trace formalization; THM-004 does not yet fix a mutation-origin/authorization interface; THM-005 does not yet fix low-equivalence, export shape, or export equality; THM-003 does not yet fix successful-load restoration |
+| Owner / canon | PROPOSAL-003 and PROPOSAL-004 | L1-reserved organization / grammar choices; owner records A/B/C |
+| Owner / LAB route | OBL-001 concrete-evidence bridge | defer or authorize an artifact-free design comparison only |
+| Research | non-reserved theory target | pin authority cut, compare alternatives, and seek falsifier in LAB. It stays LAB-only unless an active exact owner row exists; then steward rebase/freeze and independent review precede canon L3/L2 integration or escalation |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
-| 0 | repository memory and reporting discipline | cockpit and source hierarchy are in use | light | maintenance on concrete drift |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; concrete proof premises under research | medium | eligible work units |
-| 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce only as needed |
+| 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; LAB candidates can be selected | medium | LAB research; canon update waits for an exact owner target |
+| 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
-| 5 | theorem / model-check bridge | T-RESEARCH-001/002/003/005 are bounded LAB evidence; no active canon package | medium | eligible work units within `plan/156` |
+| 5 | theorem / model-check bridge | historical countermodels and conditional kernels exist | medium | review-gated research without proof laundering |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
 | 8 | domain/application realization | bounded samples exist; products are later | heavy | later dependency |
@@ -391,164 +147,23 @@ No Gate/Phase exit, OBL status movement, proof discharge, conformance result, fi
 ## feature maturity rows
 
 | Feature | Evidence status | Remaining gate | Startability |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts and static evidence | concrete premises, proof skeletons, `theory/11` status | research eligible |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, and static evidence | reviewed working premises, proof skeletons, `theory/11` final status | research eligible |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
-| `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible after current priority |
+| `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible when target is scoped |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-21 10:21 JST: ADR-0014 governance draft was recut after independent
+  review: LAB research is autonomous, while canon L2/L3 update is dormant until
+  an owner adds an exact target row and an independent reviewer approves the
+  final rebased delta. No Gate, Phase, SCN, OBL discharge, conformance,
+  implementation, or public status changed.
 - 2026-07-18 16:45 JST: Completed the OPEN-025 literature anchoring scan.
-  Evidence-backed rows now distinguish Mir's existing checked-state,
-  occurrence/request-publication-outside-S0, source-level authority/witness,
-  and no-eval patch directions from four named comparison families. No novelty
-  claim, canon semantic decision, proof status, Gate, Phase, or implementation
-  state changed.
+  Four evidence-backed comparison rows were added without a novelty claim,
+  semantic decision, proof status, Gate, Phase, or implementation change.
 - 2026-07-17 20:55 JST: Completed the cross-boundary theory claim-integrity
-  audit. The theorem/obligation/boundary registries have no dangling audited
-  reference and no chapter claims a completed proof. Existence DAG, patch DAG,
-  and stream fallback remain explicit later formalization directions; SCN-04
-  compaction and BND-006 stay operational constraints. No canon, OBL, Gate,
-  Phase, core-vocabulary, or implementation state changed.
-- 2026-07-17 20:42 JST: Completed the proof-status and Lean-evidence integrity
-  audit. All 28 open OBLs have a non-overlapping current classification; the
-  active 25-file Lean corpus compiled sequentially without active placeholders.
-  A transient parallel missing-file result was traced to clean-stub regeneration,
-  not to invalid Lean. No proof status, canon, Gate, or implementation state
-  changed.
-- 2026-07-17 20:28 JST: Prepared PROPOSAL-004 after the Surface grammar
-  pre-decision audit. Current canonical and active LAB sources require only
-  Participant-indexed state; the proposal recommends closing the existing v0
-  grammar without a custom-keyspace source family. Owner adoption is still
-  required, and no canon syntax, proof, Gate, or implementation state changed.
-- 2026-07-17 20:14 JST: Completed the cross-canon coherence audit. The 73-file
-  index and ID registries resolved without a dangling reference, and
-  `atomic_cut` remained consistently Core-only. Surface v0 EBNF closure and
-  custom-keyspace declaration semantics require one small owner/canon
-  clarification before an exact parser/checker grammar can be claimed; no
-  canon, OBL, Gate, or implementation status changed.
-- 2026-07-17 19:59 JST: Completed the T0-T2 formalization decision map. The
-  current ledger's independent source cuts are closed as LAB audits; G0-D3 and
-  the existing OBL-020 organization decision locate the next owner-controlled
-  resumption point.
-- 2026-07-17 19:53 JST: Completed the OBL-025 diagnostic-completeness audit.
-  The target direction and taxonomy remain fixed; Line-1/rejection,
-  declared-fragment, single-edit repair, association, and realization semantics
-  remain one unselected formalization boundary.
-- 2026-07-17 19:45 JST: Completed the OBL-024 diagnostic-soundness audit.
-  Carrier fields and policy direction remain fixed; emission association,
-  replay/exact-at semantics, and diagnostic equality remain one unselected
-  formalization boundary.
-- 2026-07-17 19:41 JST: Completed the remaining-ledger closure map. Proof
-  dependents and known overlaps are separated from independent source work;
-  theory/10 diagnostics is the next eligible family without promoting LAB
-  statement drafts.
-- 2026-07-17 19:35 JST: Completed the OBL-014 Z-cycle equivalence audit. The
-  Z-cycle inadmissibility policy remains fixed; checkpoint-graph, zigzag,
-  recoverability, checker-recognizer, and Netzer-Xu characterization links
-  remain one unselected formalization boundary.
-- 2026-07-17 19:27 JST: Completed the OBL-018 explicit-flow audit. A
-  low-position-only redaction projection is invariant under modeled high/raw
-  variation; the configuration/export interface, lattice/declassification,
-  provenance, and collection equivalence remain unselected.
-- 2026-07-17 19:20 JST: Completed the OBL-003 Line-1 decidability audit. The
-  finite failure-row subcheck is mechanically sound; complete rule coverage,
-  AST/parser, declaration, carrier, residual, and checker/diagnostic relations
-  remain unselected.
-- 2026-07-17 19:10 JST: Completed the OBL-004 no-undeclared-communication
-  kernel audit. Itemwise generated-edge containment composes; program,
-  elaboration, generated-edge, declaration, and runtime communication
-  relations remain unselected.
-- 2026-07-17 19:04 JST: Completed the OBL-010 consistent-cut checker kernel
-  audit. Direct-edge closure entails prefix closure under the selected generic
-  relation; finite carrier, exhaustive edge coverage, checker, and diagnostic
-  relations remain unselected.
-- 2026-07-17 18:57 JST: Completed the OBL-023 temporal-coherence audit. The
-  two-layer-time and no-split-frame policy remain intact; consumer, atomic
-  group, frontier, interpretation, coherence, and clock/latency relations
-  remain one unselected formalization boundary.
-- 2026-07-17 18:52 JST: Completed the OBL-027 atomic-cut rollback audit. The
-  local-cut and non-fence policy remain intact; occurrence, causality, locus,
-  cut projection, and rollback result relations remain one unselected
-  formalization boundary.
-- 2026-07-17 18:44 JST: Completed the OBL-022 stream read-side audit. The
-  sample-outside-history and typed-adapter policy remain intact; stream,
-  adapter, discrete-transition, and frame/equality relations remain one
-  unselected formalization boundary.
-- 2026-07-17 18:38 JST: Completed the OBL-028 revocation-monotonicity audit.
-  The fixed lifecycle and no-stale-revival policy remain intact; revocation,
-  new epoch/evidence, identity, and trace/transition remain one unselected
-  formalization boundary.
-- 2026-07-17 18:28 JST: Completed the OBL-026 transparent-overlay composition
-  audit. The ten fixed policy directions remain intact; contract-field orders,
-  layer-stack composition, and equality/extensionality remain one unselected
-  formalization boundary.
-- 2026-07-17 18:06 JST: Completed the THM-003 / OBL-009 successful-load
-  restoration audit. The saved-object schema and eight necessary conditions
-  remain direct policy anchors; their bridge to a restored Config/prefix and
-  result-side safety remains one unselected formalization boundary.
-- 2026-07-17 16:54 JST: Completed the THM-005 / OBL-017 observer-safe export
-  audit. The fixed observation policy remains separate from the coupled
-  low-equivalence/export-equality boundary; an explicit finite equality twin
-  selects no lattice, export ABI, or canonical output equivalence.
-- 2026-07-17 15:15 JST: Completed the OBL-006 relation-boundary audit. A
-  word-preserving finite fork lacks a join, so no canonical confluence claim
-  follows without a separately specified formalization boundary.
-- 2026-07-17 15:36 JST: Completed the THM-002 / OBL-007 trace-formalization
-  audit. The normative monotonicity and explicit-reacquire policy remains
-  fixed; trace, lineage-origin, selection, freshness, and transition bindings
-  remain a coupled formalization boundary before a Lean statement.
-- 2026-07-17 16:14 JST: Completed the THM-004 / OBL-015
-  mutation-origin/authorization audit. Delegated grant-lineage policy and the
-  owner-local alternative remain fixed; a favorable-order finite twin isolates
-  the missing association boundary without defining a canonical trace.
-- 2026-07-17 14:41 JST: Completed the bounded OBL-005 structural-flattening
-  kernel. One reassociation preserves an experiment-local structural output;
-  a hole context is meta-syntax, and reverse order / added-empty mutations
-  delimit the left-to-right and source-signature boundaries without changing
-  canon or proof status.
-- 2026-07-17 14:20 JST: Completed the OBL-021 BND-001 postcondition audit.
-  Three trusted finite falsifiers isolate projection coherence, diagnostic
-  equivalence, and branch exclusion without changing canon or the Lean draft.
-- 2026-07-17 14:00 JST: Oracle review narrowed PROPOSAL-003 to a symmetric
-  organizational A/B/C choice. The five audit groups are now explicitly LAB
-  candidate review headings, not canon vocabulary or a required Lean interface;
-  no owner disposition or canon status changed.
-- 2026-07-17 13:25 JST: Prepared PROPOSAL-003 for the OBL-020 formalization
-  boundary. It requests an owner A/B/C choice only; no rule equation, proof
-  status, ADR, Gate, Phase, or implementation change was applied.
-- 2026-07-17 13:17 JST: Completed the OBL-020 source-adequacy audit: 65/65
-  selected transition x WF cells lack derivation-complete canon premises; the
-  result narrows five missing-premise groups without changing canon, OBL, Gate,
-  Phase, or proof status.
-- 2026-07-17 11:57 JST: Completed the conditional `[E-DEGRADE]/[E-REACQ]`
-  lineage kernel after adversarial review: prior scratch entries remain defined
-  and nondecreasing only under stated experiment-local assumptions; no canon
-  lineage, OBL, Gate, Phase, or proof-status claim changed.
-- 2026-07-17 10:23 JST: Independent re-review passed the corrected OBL-001
-  bridge decision bundle; it remains a pending owner disposition with no new
-  lane, artifact, or successor research selection.
-- 2026-07-17 10:16 JST: Applied independent-review corrections to the OBL-001
-  bundle: only defer and fully scoped artifact-free design comparison are
-  current dispositions; a committed bridge remains a separate escalation.
-- 2026-07-17 10:07 JST: Consolidated the OBL-001 concrete-evidence bridge
-  decision bundle from existing evidence and independent review; no owner
-  disposition, new lane, or successor research unit was inferred.
-- 2026-07-17 09:51 JST: Rejected a proposed literal-RHS foreign-locus
-  T-RESEARCH-004 after the source pair reproduced but lacked an existing
-  authority-carrier interpretation; no new lane was created and the bridge is
-  now an owner decision-ready blocker.
-- 2026-07-17 09:15 JST: Reproduced the runnable LAB front doors: workspace
-  tests, Surface, Full System V1, Product Alpha, installed-binary, operational,
-  and current-L2 checks all accepted their bounded evidence; no canon or
-  readiness status changed.
-- 2026-07-17 09:04 JST: Completed a disposable `[E-OBS]` graph-kernel study:
-  a weak extension admits a finite cycle, while the stated incoming-only
-  extension preserves two selected graph invariants; canon state is unchanged.
-- 2026-07-16 19:48 JST: Completed bounded countermodel research for the three
-  statement shapes and a single OBL-020 `[E-WRITE]` store-key preservation
-  clause; both are LAB evidence only and leave canon status unchanged.
-- 2026-07-16 19:15 JST: Recut the human control view and LAB snapshots around canon state, runnable evidence, decision queue, and research order; recorded the owner-authorized T0-T2 research envelope without changing canon status.
-- 2026-07-15 20:11 JST: ADR-0013 recorded the T0/G0 profile evidence; G0-D3 remained deferred, so no G0 exit or T1 entry was claimed.
+  audit. Existence DAG, patch DAG, and stream fallback remain later
+  formalization directions, not completed proofs.

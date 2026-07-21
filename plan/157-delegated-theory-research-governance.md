@@ -9,8 +9,8 @@ settled language, system, conformance, or proof decision.
 
 The intended result is a two-layer research route:
 
-- the relevant canon theory file holds the concise **current** L3 or L2 working
-  position; and
+- an exact owner-listed canon target may hold the concise **current** L3 or L2
+  working position after final-delta review; and
 - LAB holds candidates, alternatives, experiments, command logs, reviews,
   supersession history, and reproducibility evidence.
 
@@ -45,9 +45,9 @@ The route must preserve the North Star and these non-negotiable boundaries:
 | Role | Authority and duty |
 | --- | --- |
 | Owner | L0/L1, reserved boundaries, ADR effectivity, SCN/Gate/Phase actions, and final proof/public discharge. |
-| Research author | Classify authority, create and compare LAB candidates, run countermodels and permitted experiments, propose or maintain scoped L3/L2 working state, and record rollback evidence. |
-| Independent reviewer | Check authority classification, hidden semantic delta, evidence quality, non-effects, and exact canon wording. The reviewer cannot enlarge author authority. |
-| Canon steward | Serialize integration, rebase the evidence cut, update shared snapshots, validate, commit, and push. The steward may be the author but not the independent reviewer for the same working-state update. |
+| Research author | Classify authority, create and compare LAB candidates, run countermodels and permitted experiments, propose an exact editable target, and record rollback evidence. |
+| Independent reviewer | Check registry membership, frozen authority/evidence cut, hidden semantic delta, evidence quality, non-effects, and exact canon wording. The reviewer cannot enlarge author authority. |
+| Canon steward | Serialize integration, rebase and freeze the final cut before review, update shared snapshots, validate, commit, and push. The steward may be the author but not the independent reviewer for the same working-state update. |
 
 ### Candidate lifecycle
 
@@ -70,12 +70,14 @@ Every candidate begins with an immutable authority cut containing:
 - expected falsifier, rollback condition, and integration owner; and
 - explicit `semantic_delta` classification.
 
-The authority cut invalidates for integration when a cited canon blob changes.
-The author must then re-evaluate the candidate against the new cut.
+For a canon update, the steward freezes the intended integration base, cited and
+affected canon blobs, proposed diff, evidence digests, and rollback diff before
+independent review. Any later rebase, wording change, registry-row change, or
+change to the frozen cut invalidates approval and requires a new review.
 
 ### L3 to L2 provisional selection
 
-A candidate may become a current `L2-working` position only after all of the
+A LAB candidate may become a current `L2-working` position only after all of the
 following are recorded and independently reviewed:
 
 1. the exact target ID and a non-reserved authority classification;
@@ -86,19 +88,22 @@ following are recorded and independently reviewed:
    their expectations;
 5. explicit non-effects for core primitives, external contracts, Gates,
    proof discharge, runtime, and public API;
-6. a concise canon working statement with scope, assumptions, LAB evidence
-   reference, reviewer identity, and concrete rollback trigger; and
+6. for a canon update, an ADR-0014 exact editable-target row and a concise
+   working statement with scope, assumptions, LAB evidence reference, reviewer
+   identity, and concrete rollback trigger; and
 7. an independent review with no unresolved authority or soundness finding.
 
-The canon statement contains only the present hypothesis. Alternatives,
-rejected candidates, command output, and experiment source remain in LAB.
+An unlisted candidate remains LAB-only. A listed canon statement contains only
+the present hypothesis. Alternatives, rejected candidates, command output, and
+experiment source remain in LAB.
 
 ### Rollback and escalation
 
-A reproducible falsifier may immediately demote a current L2 position to L3
-to prevent new dependent work from assuming it. The author then records the
-falsifier and the LAB lifecycle transition; a replacement L2 position still
-needs independent review.
+A reproducible falsifier immediately freezes downstream reliance and new
+integration in LAB. The author records and reproduces it; the steward then
+freezes the exact rollback or L2-to-L3 diff for independent review. A canon
+demotion occurs only after that review, and a replacement L2 position requires
+another review.
 
 Stop and escalate to owner action when a candidate would:
 
@@ -107,9 +112,8 @@ Stop and escalate to owner action when a candidate would:
 - change source, public, wire, serialization, provider, transport, artifact,
   or compatibility contract;
 - change an SCN expectation, conformance classification, Gate/Phase criterion,
-  lifecycle state, or `theory/11` final proof status;
-- assert `lean-proved`, `external`, OBL discharge, or a public completion
-  claim;
+  lifecycle state, or any `theory/11` entry/status/wording/Lean target;
+- assert any proof/OBL status, OBL discharge, or a public completion claim;
 - require a new evidence lane, helper family, schema, CI surface, or Make
   target during the current moratorium; or
 - conflict with canon, leave the authority boundary ambiguous, or break a
@@ -139,16 +143,16 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 **Files:**
 
 - Create: `mirrorea_canon/meta/proposals/PROPOSAL-005-l2-l3-theory-research-delegation.md`
-- Create: `mirrorea_canon/adr/ADR-0014-l2-l3-theory-research-delegation.md`
+- Create: `mirrorea_canon/adr/ADR-0014.md`
 - Modify: `mirrorea_canon/adr/README.md`, `mirrorea_canon/CHANGELOG.md`, and `mirrorea_canon/INDEX.json`
 
-- [ ] State the owner-approved delegation exactly, including the two-layer
+- [x] State the owner-approved delegation exactly, including the two-layer
   placement and every reserved boundary.
-- [ ] Partially supersede ADR-0012 only for independently reviewed, reversible
+- [x] Partially supersede ADR-0012 only for independently reviewed, reversible
   L2/L3 working-theory maintenance.
-- [ ] State that no Gate, Phase, SCN, proof, implementation, or public status
+- [x] State that no Gate, Phase, SCN, proof, implementation, or public status
   changes as an effect of the governance amendment.
-- [ ] Regenerate and validate the canon index.
+- [x] Regenerate and validate the canon index.
 
 ### Task 2: Reconcile canon operating rules
 
@@ -157,15 +161,15 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 - Modify: `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md`
 - Modify: `mirrorea_canon/plan/02-operating-model.md`
 - Modify: `mirrorea_canon/meta/agent-instructions.md`, `mirrorea_canon/meta/style-guide.md`, and `mirrorea_canon/meta/source-hierarchy.md`
-- Modify: `mirrorea_canon/theory/11-metatheory-ledger.md` and `mirrorea_canon/plan/03-risks.md`
+- Modify: `mirrorea_canon/plan/03-risks.md`; keep `mirrorea_canon/theory/11-metatheory-ledger.md` owner-reserved and unchanged.
 
-- [ ] Replace blanket agent prohibitions with the target-ID and operation-based
-  delegated route.
-- [ ] Distinguish conditional Lean evidence from owner-controlled final proof
-  states without changing any existing entry state.
-- [ ] Add the mandatory authority cut, review, integration serialization,
-  rollback, and escalation rules.
-- [ ] Preserve the current moratorium for new lanes, helpers, schemas, CI, and
+- [x] Replace blanket agent prohibitions with the exact owner-listed target and
+  operation-based delegated route.
+- [x] Keep every `theory/11` change owner-controlled; classify conditional Lean
+  evidence as LAB-only without changing an existing entry state.
+- [x] Add the mandatory authority cut, rebase-before-review, integration
+  serialization, reviewed rollback, and escalation rules.
+- [x] Preserve the current moratorium for new lanes, helpers, schemas, CI, and
   production implementation.
 
 ### Task 3: Recut LAB operation and reports
@@ -177,14 +181,14 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 - Modify: `docs/diagrams/workflow.mmd`
 - Create: `docs/reports/2287-delegated-theory-research-governance.md`
 
-- [ ] Mark `plan/156` as historical pre-delegation research evidence; retain
+- [x] Mark `plan/156` as historical pre-delegation research evidence; retain
   its findings and do not rewrite its investigation history.
-- [ ] Make this plan the current lifecycle, candidate-ledger, and next-work
+- [x] Make this plan the current lifecycle, candidate-ledger, and next-work
   reference.
-- [ ] Update the human-facing control view and workflow diagram so that current
+- [x] Update the human-facing control view and workflow diagram so that current
   theory, research evidence, owner decisions, and runnable LAB are visually
   distinct.
-- [ ] Record every status-view update decision in the required new report.
+- [x] Record every status-view update decision in the required new report.
 
 ### Task 4: Verify and integrate
 
@@ -192,13 +196,13 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 
 - Modify only files made necessary by review findings.
 
-- [ ] Search for stale blanket restrictions and distinguish historical text
+- [x] Search for stale blanket restrictions and distinguish historical text
   from active operating rules.
-- [ ] Run `python3 meta/build-index.py` and `python3 meta/build-index.py --check`
+- [x] Run `python3 meta/build-index.py` and `python3 meta/build-index.py --check`
   from `mirrorea_canon/`.
-- [ ] Run `git diff --check`, `python3 scripts/validate_docs.py`, and
+- [x] Run `git diff --check`, `python3 scripts/validate_docs.py`, and
   `make check`.
-- [ ] Obtain one final independent review of the complete diff, address valid
+- [x] Obtain one final independent review of the complete diff, address valid
   findings, and rerun affected checks.
 - [ ] Commit each coherent package with `git commit --no-gpg-sign`, push it,
   and confirm `main...origin/main` is clean.
@@ -208,12 +212,12 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 **Files:**
 
 - Create: a new report under `docs/reports/` for the selected candidate.
-- Modify: only the relevant existing LAB lane and target canon theory file
-  after the authority-cut and independent-review conditions hold.
+- Modify: only the relevant existing LAB lane and exact owner-listed canon
+  target after the authority-cut and independent-review conditions hold.
 
-- [ ] Select one non-reserved target that does not require a new lane or an
-  L1 decision. `PROPOSAL-003` and `PROPOSAL-004` are excluded because they are
-  owner-controlled L1 questions.
+- [ ] Ask the owner to add one exact editable-target row that does not require a
+  new lane or an L1 decision. `PROPOSAL-003` and `PROPOSAL-004` are excluded
+  because they are owner-controlled L1 questions.
 - [ ] Execute the full candidate lifecycle, including a counterexample or
   alternative comparison and explicit rollback trigger.
 - [ ] Treat a failed pilot as evidence for revising the governance process, not
@@ -223,10 +227,12 @@ decision boundary. It remains a derived view and cannot make a normative claim.
 
 The adoption package is accepted only when all of the following hold:
 
-1. Active policy text authorizes reversible L2/L3 working-theory work while
-   retaining the owner-reserved surfaces above.
-2. Every proposed working-state change has a defined evidence cut, result
-   class, independent reviewer, non-effects, and rollback rule.
+1. Active policy text authorizes autonomous LAB research and permits a canon
+   L2/L3 update only through an exact owner-listed target while retaining the
+   owner-reserved surfaces above.
+2. Every proposed working-state change has a defined editable target, frozen
+   evidence cut, result class, independent reviewer, non-effects, and rollback
+   rule.
 3. A conditional Lean theorem cannot be represented as a canon proof merely
    because it compiles.
 4. Two agents cannot independently integrate the same target without a single

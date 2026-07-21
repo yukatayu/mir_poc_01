@@ -3,7 +3,7 @@ id: plan/03-risks
 status: L2-working
 maturity: draft
 depends_on: [plan/02-operating-model]
-summary: リスク台帳 R-01..R-12。LAB plan/12 の蒸留+相談で特定された構造リスク。
+summary: リスク台帳 R-01..R-13。LAB plan/12 の蒸留+相談で特定された構造リスク。
 open_items: []
 ---
 
@@ -23,3 +23,4 @@ open_items: []
 | R-10 | auth の transport 吸収 | envelope に権限が滲む | BND-005、SCN-03 の系譜検査 |
 | R-11 | 二層時間の未成熟(theory/09) | pose 線の場当たり実装 | I5 前に G4/09 の再訪を必須化 |
 | R-12 | 文献接続の停滞 | 新規性主張の宙吊り | theory/12 の row 追加を proof package に随伴 |
+| R-13 | delegated research の semantic / proof laundering | L2 と書いた carrier が core / contract / completed proof として扱われる | ADR-0014 の exact owner target、frozen final-delta review、reviewed rollback、all-ledger reservation、reserved-boundary escalation |

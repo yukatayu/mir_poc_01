@@ -2,7 +2,7 @@
 id: meta/style-guide
 status: L1-fixed
 maturity: draft
-depends_on: [root/readme]
+depends_on: [root/readme, adr/ADR-0014]
 summary: 執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。
 open_items: []
 ---
@@ -37,10 +37,28 @@ MAP.md の表が正本。新 ID は台帳(GLOSSARY / theory/11 / plan/03 / spec/
 - 各規範ファイルは可能な限り「非宣言(してはならない主張)」を持つ。
 - settled / working / OPEN-### の三値で不確かさを常に明示。未決を隠すことが唯一の重大違反である。
 
+### Delegated working state
+
+ADR-0014 の route で L2/L3 working theory を更新するとき、update surface は
+ADR-0014 の exact editable-target row に限る。候補、代替、command output、artifact
+source、history は LAB に置く。file-level L2/L3 status は agent authority の grant
+ではない。
+
+update 前に target ID、pinned authority cut、allowed operation、result class、
+falsifier を記録する。canon steward は intended integration base、affected blob set、
+proposed diff、evidence digest、rollback diff を rebase/freeze し、independent reviewer
+はその exact cut を **update 前に** review する。review 後の change は approval を
+失効させる。L0/L1、external contract、SCN/Gate/Phase、`theory/11`、final proof / OBL
+discharge は通常の owner decision route を使う。
+
 ## サイズ規律
 
 1 ファイル 15KB 上限(超えたら分割)。README は 1 頁。要約は front matter に必ず。履歴・作業ログは canon に置かない(LAB へ)。
 
 ## 改定手続き
 
-CHANGELOG.md 冒頭の 4 手順。L0/L1 に触れる場合は ADR 追記が必須。SCN の期待変更も ADR 必須(scenarios/README)。改定後は `python3 meta/build-index.py --check` を通すこと。
+CHANGELOG.md 冒頭の 4 手順。L0/L1 に触れる場合は ADR 追記が必須。ADR-0014
+の delegated L2/L3 working-state update は、editable-target row、frozen authority /
+evidence cut、update 前の independent review を LAB に残し、current-state wording を
+最小に保つ。SCN の期待変更も ADR 必須(scenarios/README)。改定後は
+`python3 meta/build-index.py --check` を通すこと。

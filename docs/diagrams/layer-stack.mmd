@@ -1,17 +1,34 @@
-flowchart TB
-  Source[Mir source: .mir files] --> Surface[Surface Mir\nsyntax and elaboration]
-  Surface --> Core[Core Mir / typed IR\nexplicit placement and communication]
-  Core --> Verify[Checker / proof obligations\ncontracts and invariants]
-  Core --> Runtime[Mirrorea runtime\nstate, execution, evolution]
-  Runtime --> Projection[Projection / deployment plan]
-  Projection --> Providers[Host, provider, browser, engine adapters]
-  Runtime --> Observe[Typed effects\nobservation, telemetry, redaction]
+flowchart LR
+  Domain[S5 Domain\nuser-defined worlds and applications]
+  Surface[S0 Surface\nMir source]
+  Core[S1 Core\nelaboration, effects, authority, failures]
+  Trace[S2 Trace\nhistory DAG, cuts, save/load]
+  Verify[S3 Verify\nchecker, models, proofs, diagnostics]
+  Fabric[S4 Projection/Fabric\nper-locus artifacts and communication]
+  Boundary[BND-007 Provider/View/FFI\ntyped adapter boundary]
+  Host[S6 Host\nOS, browser, engine, network]
+  Observe[Typed observation / devtools\nlabelled and redacted]
+  Note[Structural map only\nnot an implementation-maturity claim]
+  Prism[PrismCascade\nseparate media kernel]
+  Wiring[Typed-Effect Wiring Platform\nadapter-operation boundary]
 
-  Prism[PrismCascade] -. separate performance-sensitive kernel .-> Runtime
-  Wiring[Typed-Effect Wiring Platform] -. typed external boundary .-> Providers
-  Apps[Worlds / games / applications\nuser-defined concepts] --> Source
+  Domain --> Surface
+  Surface --> Core
+  Core --> Trace
+  Core --> Verify
+  Trace --> Verify
+  Core --> Fabric
+  Trace --> Fabric
+  Fabric --> Boundary --> Host
+  Fabric --> Observe
+  Trace --> Observe
+  Note -. explains .-> Fabric
+  Prism -. provider / trace-link only .-> Boundary
+  Wiring -. adapter-operation boundary .-> Boundary
 
   classDef canon fill:#dcefe2,stroke:#22543d,color:#102a22
-  classDef lab fill:#edf2f7,stroke:#4a5568,color:#1a202c
-  class Source,Surface,Core,Verify canon
-  class Runtime,Projection,Providers,Observe,Prism,Wiring,Apps lab
+  classDef boundary fill:#eaf2f8,stroke:#2b6c8f,color:#102a3b
+  classDef satellite fill:#f6eef8,stroke:#7d3c98,color:#2d113d
+  class Domain,Surface,Core,Trace,Verify,Fabric canon
+  class Boundary,Host,Observe boundary
+  class Prism,Wiring satellite
