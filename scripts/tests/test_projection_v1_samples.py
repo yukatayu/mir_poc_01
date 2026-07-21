@@ -6,6 +6,7 @@ import subprocess
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -130,6 +131,34 @@ class ProjectionV1SamplesTests(unittest.TestCase):
             "client_output:client_write_authority_escalation",
             payload["actual"]["rejected_rows"],
         )
+
+    def test_run_row_rejects_negative_projection_with_success_exit_code(self) -> None:
+        if projection_v1_samples is None:
+            self.fail("projection helper missing")
+
+        rows, _ = projection_v1_samples._load_rows()
+        row = next(
+            row
+            for row in rows
+            if row["sample_id"] == "proj-03-client-write-authority-negative"
+        )
+        actual_payload = dict(
+            projection_v1_samples._run_projection(
+                projection_v1_samples._row_source_path(row),
+                projection_v1_samples._row_request_path(row),
+            )
+        )
+        self.assertFalse(actual_payload["accepted"])
+        actual_payload["returncode"] = 0
+
+        with mock.patch.object(
+            projection_v1_samples, "_run_projection", return_value=actual_payload
+        ):
+            payload = projection_v1_samples._run_row(row)
+
+        self.assertFalse(payload["passed"])
+        self.assertEqual(payload["returncode_expected"], 2)
+        self.assertFalse(payload["returncode_passed"])
 
     def test_negative_projection_reports_payload_shape_rejection(self) -> None:
         payload = _run_helper("run", "proj-03-payload-shape-mismatch-negative")

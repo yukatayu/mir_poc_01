@@ -92,12 +92,13 @@ and renderer-pose CLI flows. It reported a bounded release-check surface, not
 real transport, arbitrary provider execution, final packet/FFI semantics, or
 distributed durable save/load.
 
-The subsequent maintenance audit makes this baseline fail closed: checker and
-runtime rows require accepted/rejected exit-code agreement, provider and
-renderer helpers compare fresh report projections with their committed generated
-evidence without rewriting it, and a provider/renderer failure returns exit
-status 2. The release viewer additionally names C-distributed conformance and
-real transport / multi-process execution as explicit non-claims. This is
+The subsequent maintenance audits make this baseline fail closed: parser,
+checker/runtime, PoseGraph, projection/local-split, provider, and renderer rows
+require accepted/rejected exit-code agreement. Provider and renderer helpers
+also compare fresh report projections with their committed generated evidence
+without rewriting it, and a provider/renderer failure returns exit status 2.
+The release viewer additionally names C-distributed conformance and real
+transport / multi-process execution as explicit non-claims. This is
 evidence-integrity hardening only; it does not change the workflow's bounded
 LAB classification or any Canon claim.
 

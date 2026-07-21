@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 21:48 JST
+最終更新: 2026-07-21 23:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -22,6 +22,14 @@ a separate canon action. This does not promote a Gate, Phase, implementation,
 or proof package. T-RESEARCH-001..033 remain historical pre-delegation evidence
 in `plan/156-t0-t2-research-autonomy-envelope.md`.
 
+The next self-driven item is bounded Full System V1 maintenance, not a new
+theory candidate or a promotion: an independent source review found three
+existing-Canon violations that the current source-first tests do not cover.
+The repair must bind privileged host operation names to their operation-specific
+capability, reject duplicate record fields before evaluation, and reject
+unsupported record/array equality. It stays LAB-only and does not alter the
+current no-candidate research selection.
+
 ## ordered self-driven packages
 
 | Order | Work unit | Aim and completion signal | Macro / rough estimate |
@@ -41,6 +49,7 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 13 | OBL-021 statement-shape checkpoint | Closed: WRK-0002 through WRK-0005 now distinguish projection vacuity, absent joint Result adequacy, absent outcome existence, and positive fiberwise coherence. No fifth local theorem has enough decision value before an actual candidate is selected. | Macro 1/5 reserve; closed |
 | 14 | Post-checkpoint candidate selection | Closed: source audit, read-only candidate mapping, planner challenge, and temporary Oracle review found no standing-eligible L3 proposition with distinct live-branch outcomes. OBL-024 soundness-to-comparison would repeat the known abstract bridge gap; no WRK-0006 was opened. | Macro 1/5 reserve; closed |
 | 15 | Selection reopen condition | Current: retain the OBL-021 checkpoint without manufacturing a theorem. Reopen only when an exact existing-carrier/existing-lane question has plausible positive and falsifying outcomes that route to different already-recorded branches while excluding ADR-0014 reserved surfaces. | Macro 1/5 reserve; dormant research selection |
+| 16 | Full System V1 semantic invariant repair | Current: add adversarial source rows and Rust/Python regression coverage, then reject operation/capability mismatch, duplicate record fields, and unsupported composite equality in the bounded checker before runtime evaluation. | Macro 2/3 maintenance; start now; close only with focused runtime/checker evidence and no widened claim |
 
 ## self-driven macro phase reading
 

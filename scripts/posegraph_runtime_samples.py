@@ -272,13 +272,18 @@ def _run_row(row: dict[str, Any]) -> dict[str, Any]:
     actual_payload = _run_posegraph_package(package_path)
     actual = _payload_projection(actual_payload)
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
-    passed = actual == expected
+    returncode = actual_payload["returncode"]
+    returncode_expected = 0 if actual.get("accepted") else 2
+    returncode_passed = returncode == returncode_expected
+    passed = actual == expected and returncode_passed
     return {
         "sample_id": row["sample_id"],
         "package_input": str(package_path.relative_to(REPO_ROOT)),
         "expected_path": str(expected_path.relative_to(REPO_ROOT)),
         "accepted": bool(actual.get("accepted")),
-        "returncode": actual_payload["returncode"],
+        "returncode": returncode,
+        "returncode_expected": returncode_expected,
+        "returncode_passed": returncode_passed,
         "passed": passed,
         "actual": actual,
         "expected": expected,

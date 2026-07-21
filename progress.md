@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 22:57 JST
+最終更新: 2026-07-21 23:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,11 +158,21 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 23:08 JST: completed the remaining Full System V1 helper
+  exit-code audit. Textual parser, PoseGraph, and projection/local-split rows
+  now fail closed unless their nested command exits 0 for accepted output or 2
+  for expected rejection/violation, while retaining all 10/9/6 current rows.
+  This also corrects the preceding current-snapshot count: the aggregate
+  checker/runtime/operational partition is 12/17/12 = 41, not 42.
+  An independent computational review also identified three untested bounded
+  checker gaps: operation-capability binding, duplicate record fields, and
+  composite equality. They are the next LAB maintenance package; no Canon,
+  conformance, workflow, or public-product status changed.
 - 2026-07-21 22:57 JST: audited machine-readable readiness claims across the
   Full System V1 helper family. The bounded effectful runtime matrix had the
   only mismatch: it was already dashboard-classified as evidence-closed but
   emitted `workflow_ready: true`. The helper now emits `false` and a unit test
-  fixes that contract. All 42 checker/runtime/operational rows still pass. No
+  fixes that contract. All 41 checker/runtime/operational rows still pass. No
   Canon, workflow classification, conformance, or public-product status
   changed.
 - 2026-07-21 22:40 JST: hardened the bounded Full System V1 validation path.

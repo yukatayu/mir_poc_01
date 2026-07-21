@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import posegraph_runtime_samples as runner  # noqa: E402
 
 
 def _run_helper(*args: str) -> dict:
@@ -64,6 +69,27 @@ class PosegraphRuntimeSamplesTests(unittest.TestCase):
         self.assertFalse(payload["accepted"])
         self.assertEqual(payload["actual"]["terminal_outcome"], "ViolationExport")
         self.assertEqual(payload["actual"]["violation_kind"], "no_split_frame")
+
+    def test_run_row_rejects_negative_payload_with_success_exit_code(self) -> None:
+        row = next(
+            row
+            for row in runner._load_matrix()["rows"]
+            if row["sample_id"] == "pose-05-split-frame-negative"
+        )
+        actual_payload = dict(
+            runner._run_posegraph_package(runner._row_package_path(row))
+        )
+        self.assertFalse(actual_payload["accepted"])
+        actual_payload["returncode"] = 0
+
+        with mock.patch.object(
+            runner, "_run_posegraph_package", return_value=actual_payload
+        ):
+            payload = runner._run_row(row)
+
+        self.assertFalse(payload["passed"])
+        self.assertEqual(payload["returncode_expected"], 2)
+        self.assertFalse(payload["returncode_passed"])
 
     def test_stale_anchor_negative_exports_runtime_rejection(self) -> None:
         payload = _run_helper("run", "pose-07-stale-anchor-after-membership-advance")

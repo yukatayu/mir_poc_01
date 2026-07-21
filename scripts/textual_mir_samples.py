@@ -370,6 +370,9 @@ def run_sample(sample_id: str) -> dict[str, Any]:
     payload = _parse_source(_row_source_path(row))
     expected = json.loads(_row_expected_path(row).read_text(encoding="utf-8"))
     actual = _payload_projection(payload)
+    returncode = payload["returncode"]
+    returncode_expected = 0 if actual.get("accepted") else 2
+    returncode_passed = returncode == returncode_expected
     mismatches = [
         key
         for key, expected_value in expected.items()
@@ -382,8 +385,11 @@ def run_sample(sample_id: str) -> dict[str, Any]:
         "source": str(_row_source_path(row).relative_to(REPO_ROOT)),
         "expected": expected,
         "actual": actual,
-        "accepted": not mismatches,
+        "accepted": not mismatches and returncode_passed,
         "mismatches": mismatches,
+        "returncode": returncode,
+        "returncode_expected": returncode_expected,
+        "returncode_passed": returncode_passed,
         "raw_parse_report": payload,
     }
 
@@ -394,7 +400,7 @@ def check_all() -> dict[str, Any]:
     failed = [
         result["sample_id"]
         for result in results
-        if result["mismatches"] or result["raw_parse_report"]["returncode"] not in {0, 2}
+        if not result["accepted"]
     ]
     if status["validation_errors"]:
         failed.extend(

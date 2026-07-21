@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
+
+import textual_mir_samples as runner  # noqa: E402
 
 
 def _run_helper(*args: str) -> dict:
@@ -83,6 +88,23 @@ class TextualMirSamplesTests(unittest.TestCase):
 
         self.assertTrue(payload["accepted"])
         self.assertEqual(payload["actual"]["diagnostics"][0]["code"], "unresolved_import")
+
+    def test_run_rejects_negative_parse_payload_with_success_exit_code(self) -> None:
+        row = next(
+            row
+            for row in runner._load_matrix()["rows"]
+            if row["sample_id"] == "mir-01-unresolved-import-negative"
+        )
+        raw_parse_report = dict(runner._parse_source(runner._row_source_path(row)))
+        self.assertFalse(raw_parse_report["accepted"])
+        raw_parse_report["returncode"] = 0
+
+        with mock.patch.object(runner, "_parse_source", return_value=raw_parse_report):
+            payload = runner.run_sample(row["sample_id"])
+
+        self.assertFalse(payload["accepted"])
+        self.assertEqual(payload["returncode_expected"], 2)
+        self.assertFalse(payload["returncode_passed"])
 
     def test_check_all_passes_every_row(self) -> None:
         payload = _run_helper("check-all")
