@@ -64,7 +64,9 @@ tuple-alignment model as a new Canon-facing L3 branch: Canon does not specify
 the tuple identity and T-RESEARCH-027 already records the broader coupling
 boundary. A reviewer showed that the tuple formula is finite-modelable but
 also classified it as nested LAB-only adequacy evidence. No source evidence
-was created or relied on, and no theorem status changed.
+artifact was created or retained; the no-selection conclusion relies on the
+read-only Canon/LAB source comparison described above. No theorem status
+changed.
 
 ## What changed in understanding
 
@@ -123,7 +125,9 @@ the scope-guard model. Exact LAB source comparison showed the scope guard is
 already deliberate. The final Oracle adjudication found the metadata model is
 not Canon-demanded and is encompassed by T-RESEARCH-027. The adopted outcome is
 therefore no new WRK; the differing reviews are retained here as selection
-evidence, not as a semantic decision.
+evidence, not as a semantic decision. A final committed-diff review found one
+provenance wording ambiguity; this report now distinguishes read-only sources
+used for selection from newly retained source artifacts.
 
 ## Skipped validations and reasons
 
@@ -134,11 +138,12 @@ applicable.
 
 ## Commit / push status
 
-Pending at report write. This selection package will use `--no-gpg-sign` and
-push immediately after validation.
+Selection package `d6d9017b` was committed with `--no-gpg-sign` and pushed.
+This final review wording correction is committed and pushed immediately after
+its focused validation.
 
 ## Sub-agent session close status
 
 Planner and reviewers completed read-only selection/adjudication work. Temporary
 Oracle outputs remain uncommitted advisory input; completed sub-agent sessions
-are closed after the package commit.
+are closed after this reviewer-correction commit.
