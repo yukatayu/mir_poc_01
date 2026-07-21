@@ -134,8 +134,9 @@
 110. WRK-0007 OBL-001 result/write coverage countermodel は `plan/wrk-0007-obl001-result-write-coverage.md`
 111. WRK-0008 OBL-027 formal-hook attribution audit は `plan/wrk-0008-obl027-formal-hook-attribution.md`
 112. WRK-0009 e5 proof-skeleton identity selection は `plan/168-wrk0009-e5-skeleton-identity-selection.md`
-113. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-114. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+113. WRK-0009 e5 proof-skeleton literal identity evidence は `plan/wrk-0009-e5-skeleton-identity.md`
+114. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+115. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
