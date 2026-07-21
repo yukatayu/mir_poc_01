@@ -102,6 +102,33 @@ transport / multi-process execution as explicit non-claims. This is
 evidence-integrity hardening only; it does not change the workflow's bounded
 LAB classification or any Canon claim.
 
+## Post-repair baseline attestation
+
+On 2026-07-22, clean commit
+`4a52dd3ee26488005859fbaab6dd845c5a3ee74d` matched the upstream tracking ref after the
+bounded host-adapter semantic-invariant repair. Existing commands reproduced:
+
+```text
+make check
+cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture
+python3 scripts/full_system_v1_samples.py checker-check-all --format json
+python3 scripts/full_system_v1_samples.py check-all --format json
+python3 scripts/full_system_v1_release_check.py --format json check-all --out <temporary-empty-directory>
+```
+
+`make check` retained the Canon index (84 files), source hierarchy (711/711),
+documentation scaffold, and `cargo check`. The focused typed-IR suite passed
+20 tests. The checker corpus passed 3 positive and 18 expected-negative rows;
+the aggregate executable partition passed 21 checker + 17 runtime + 12
+operational = 50 rows. The isolated release workflow accepted all 29 planned
+commands. The temporary generated bundles are disposable LAB evidence and are
+not repository artifacts.
+
+This attests reproducibility of the current bounded LAB surface only. It does
+not reopen L3 selection, make Full System V1 an admitted `working/` evidence
+lane, alter a Canon claim, select pending semantics, or change workflow,
+conformance, Gate, Phase, OBL, or public-product status.
+
 ## Reopen rule
 
 Keep no active new working record. Reopen autonomous L3 selection only when an

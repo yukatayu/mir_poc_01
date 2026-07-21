@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 00:20 JST
+最終更新: 2026-07-22 00:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -27,8 +27,8 @@ checker now shares its exact host-adapter policy with the bounded runtime,
 rejects adapter signature/capability/context mismatches before evaluation,
 rejects duplicate record construction fields, and admits only the scalar
 equality floor. The 21-row checker corpus, direct static-rejection coverage,
-and accepted 29-command final release check make these guards runnable LAB
-evidence only; they do not promote a theory
+and accepted 29-command final release check at clean `4a52dd3e` matching the
+upstream tracking ref make these guards runnable LAB evidence only; they do not promote a theory
 candidate, trusted runtime authorization, or a public effect ABI. No further
 Full System V1 maintenance item is currently selected, so the current
 no-candidate research selection remains unchanged.
@@ -52,7 +52,7 @@ no-candidate research selection remains unchanged.
 | 13 | OBL-021 statement-shape checkpoint | Closed: WRK-0002 through WRK-0005 now distinguish projection vacuity, absent joint Result adequacy, absent outcome existence, and positive fiberwise coherence. No fifth local theorem has enough decision value before an actual candidate is selected. | Macro 1/5 reserve; closed |
 | 14 | Post-checkpoint candidate selection | Closed: source audit, read-only candidate mapping, planner challenge, and temporary Oracle review found no standing-eligible L3 proposition with distinct live-branch outcomes. OBL-024 soundness-to-comparison would repeat the known abstract bridge gap; no WRK-0006 was opened. | Macro 1/5 reserve; closed |
 | 15 | Selection reopen condition | Current: retain the OBL-021 checkpoint without manufacturing a theorem. Reopen only when an exact existing-carrier/existing-lane question has plausible positive and falsifying outcomes that route to different already-recorded branches while excluding ADR-0014 reserved surfaces. | Macro 1/5 reserve; dormant research selection |
-| 16 | Full System V1 semantic invariant repair | Closed: shared private host-adapter policy now checks exact pair signature, operation-specific declared and ambient capability requirements, and rejects host adapter use without a transition context. The checker also rejects duplicate record fields and record/fixed-array equality before runtime. The active checker corpus is 3 positive / 18 negative rows. | Macro 2/3 maintenance; closed with Rust/Python/source-matrix evidence; no widened claim |
+| 16 | Full System V1 semantic invariant repair | Closed and post-repair attested at clean `4a52dd3e` matching the upstream tracking ref: shared private host-adapter policy checks exact pair signature, operation-specific declared and ambient capability requirements, and rejects host adapter use without a transition context. The checker also rejects duplicate record fields and record/fixed-array equality before runtime. The active checker corpus is 3 positive / 18 negative rows. | Macro 2/3 maintenance; closed with Rust/Python/source-matrix/release evidence; no widened claim |
 
 ## self-driven macro phase reading
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 00:20 JST
+最終更新: 2026-07-22 00:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,15 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-22 00:45 JST: independently attested the post-repair Full System V1
+  baseline at clean `4a52dd3e` matching the upstream tracking ref. `make check`, the 20-test
+  typed-IR suite, the 3-positive/18-negative checker corpus, the 50-row
+  aggregate matrix, and the isolated 29-command release workflow all passed.
+  Planner and temporary Oracle reviews found no standing-eligible next L3 or
+  maintenance package: effect inheritance, trusted authorization, composite
+  equality, Float64 execution, and typed-IR trust posture remain unselected or
+  non-live boundaries. Research selection stays dormant; no Canon, WRK,
+  ledger, Gate/Phase, conformance, or public-product status changed.
 - 2026-07-22 00:20 JST: closed the bounded Full System V1 semantic-invariant
   maintenance package. The checker and runtime now share a private exact-pair
   host-adapter policy; static checking verifies adapter signature, the
