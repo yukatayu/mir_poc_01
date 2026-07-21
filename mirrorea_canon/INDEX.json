@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 86,
+ "files": 87,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 4410
+   "bytes": 4659
   },
   {
    "id": "root/north-star",
@@ -1191,6 +1191,21 @@
    "open_items": [],
    "path": "working/WRK-0006-obl020-familywise-global-boundary.md",
    "bytes": 8335
+  },
+  {
+   "id": "working/WRK-0007",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "OBL-001 LAB statement draft が実験用 Result 内の write を GeneratedWrite で尽くすことを要求するか、Core 表現を選ばず既存 Lean lane で検査する L3 record。OBL status、Core IR、THM-001 は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0007-obl001-result-write-coverage.md",
+   "bytes": 5824
   }
  ]
 }

@@ -72,6 +72,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0004 | L3-open | OBL-021 LAB statement draft が well-scoped input の outcome 存在を要求するかを既存 Lean lane の no-outcome countermodel で検査。`working/WRK-0004-obl021-outcome-totality.md` |
 | WRK-0005 | L3-open | OBL-021 LAB statement draft と明示 outcome-totality 前提が実験用 SameOutcome relation を導くかを既存 Lean lane の conditional lemma で検査。`working/WRK-0005-obl021-conditional-outcome-relation.md` |
 | WRK-0006 | L3-open | OBL-020 LAB statement draft の global preservation と familywise preservation の論理的接続を既存 Lean lane で検査。coverage は experiment-local 条件に留める。`working/WRK-0006-obl020-familywise-global-boundary.md` |
+| WRK-0007 | L3-open | OBL-001 LAB statement draft が実験用 Result 内の write を `GeneratedWrite` で尽くすことを要求するかを検査。Core 表現・OBL status は選ばない。`working/WRK-0007-obl001-result-write-coverage.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 
