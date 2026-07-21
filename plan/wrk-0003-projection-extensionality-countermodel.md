@@ -30,6 +30,7 @@ Result relation である、という限定結論だけを得る。
    - `component_equivalences_are_equality`
    - `statement_draft_holds`
    - `distinct_results_can_elaborate`
+   - 上の四条件を一つに束ねる aggregate theorem
 4. placeholder/escape-token audit と既存 Lean synchronization test を実行する。
 5. source evidence commit と、その SHA を WRK-0003 に append-only manifest する commit を
    分離する。

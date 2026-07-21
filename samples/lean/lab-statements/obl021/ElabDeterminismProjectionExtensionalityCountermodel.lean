@@ -116,16 +116,50 @@ theorem distinct_results_can_elaborate :
   simp [P]
   simp [P]
 
-theorem total_unique_projections_still_allow_distinct_results :
-    (forall result : V.Result, Exists fun core =>
+theorem total_unique_equality_projections_still_allow_distinct_results :
+    ((forall result : V.Result, Exists fun core =>
       P.CoreTermOf result core /\
         forall other, P.CoreTermOf result other -> other = core) /\
+      (forall result : V.Result, Exists fun output =>
+        P.TypeOf result output /\
+          forall other, P.TypeOf result other -> other = output) /\
+      (forall result : V.Result, Exists fun output =>
+        P.ModeOf result output /\
+          forall other, P.ModeOf result other -> other = output) /\
+      (forall result : V.Result, Exists fun output =>
+        P.EffectRowOf result output /\
+          forall other, P.EffectRowOf result other -> other = output) /\
+      (forall result : V.Result, Exists fun output =>
+        P.FailureRowOf result output /\
+          forall other, P.FailureRowOf result other -> other = output) /\
+      (forall result : V.Result, Exists fun constraints =>
+        P.ConstraintsOf result constraints /\
+          forall other, P.ConstraintsOf result other -> other = constraints) /\
+      (forall result : V.Result, Exists fun obligations =>
+        P.ObligationsOf result obligations /\
+          forall other, P.ObligationsOf result other -> other = obligations) /\
+      (forall result : V.Result, Exists fun edges =>
+        P.GeneratedEdgesOf result edges /\
+          forall other, P.GeneratedEdgesOf result other -> other = edges) /\
+      (forall result : V.Result, Exists fun spans =>
+        P.SourceSpansOf result spans /\
+          forall other, P.SourceSpansOf result other -> other = spans)) /\
+      ((forall left right : V.CoreTerm, P.EquivalentCoreTerm left right ↔ left = right) /\
+        (forall left right : V.TypeOut, P.EquivalentTypeOut left right ↔ left = right) /\
+        (forall left right : V.ModeOut, P.EquivalentModeOut left right ↔ left = right) /\
+        (forall left right : V.EffectRow, P.EquivalentEffectRow left right ↔ left = right) /\
+        (forall left right : V.FailureRow, P.EquivalentFailureRow left right ↔ left = right) /\
+        (forall left right : V.ConstraintSet, P.EquivalentConstraintSet left right ↔ left = right) /\
+        (forall left right : V.ObligationSet, P.EquivalentObligationSet left right ↔ left = right) /\
+        (forall left right : V.GeneratedEdgeSet, P.EquivalentGeneratedEdges left right ↔ left = right) /\
+        (forall left right : V.SourceSpanMap, P.EquivalentSourceSpanMap left right ↔ left = right)) /\
       OBL021StatementDraft V P /\
       Exists fun first => Exists fun second =>
         first ≠ second /\
           P.Elaborates () () () () first /\
           P.Elaborates () () () () second := by
-  exact ⟨projection_predicates_are_total_and_unique.1,
-    statement_draft_holds, distinct_results_can_elaborate⟩
+  exact ⟨projection_predicates_are_total_and_unique,
+    component_equivalences_are_equality, statement_draft_holds,
+    distinct_results_can_elaborate⟩
 
 end MirCore.Lab.OBL021.ProjectionExtensionalityCountermodel

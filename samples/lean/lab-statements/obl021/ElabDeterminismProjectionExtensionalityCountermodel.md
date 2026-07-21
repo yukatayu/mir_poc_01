@@ -5,6 +5,10 @@ For every result, each listed projection has exactly one `Unit` witness and
 each component-equivalence predicate is native equality.  Two distinct Result
 constructors still successfully elaborate for the same input.
 
+`total_unique_equality_projections_still_allow_distinct_results` packages all
+nine total/unique projection clauses, all component-equality clauses, the
+statement draft, and the distinct-success fact in one Lean theorem.
+
 The checked conclusion is narrow: per-projection totality/uniqueness and
 component equality alone do not make the current `OBL021StatementDraft`
 functional on Result values.  It does not select the missing joint
