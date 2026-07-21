@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 20:36 JST
+最終更新: 2026-07-21 20:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,13 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 20:48 JST: manifested WRK-0005's L3 conditional relation
+  evidence. Lean 4.29.1 checks that explicit experiment-local outcome totality
+  plus the OBL-021 LAB draft yields an abstract `SameOutcome` relation across
+  every tagged outcome pair. The draft still does not entail the totality
+  premise; this does not choose equality, relation laws, quotient semantics,
+  Canon placement, theory/11, Gate/Phase, conformance, implementation, or
+  public status.
 - 2026-07-21 20:36 JST: pre-registered WRK-0005 as an L3 conditional-lemma
   test of whether explicit outcome totality plus the OBL-021 LAB draft yields
   an experiment-local relation across every tagged outcome pair. The premise

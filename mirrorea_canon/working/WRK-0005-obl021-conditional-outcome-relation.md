@@ -36,11 +36,11 @@ Non-claims: This does not assign outcome totality to OBL-021, OBL-003, or anothe
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. It may add a LAB-only conditional lemma and explanation in the existing OBL-021 statement-draft directory, plus manifest/plan/report metadata. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
+Positive evidence: Lean 4.29.1 checks the imported existing statement draft and `statement_draft_implies_outcomes_related`, which covers success/success, reject/reject, and both mixed tagged-outcome cases. Under the explicit experiment-local `OutcomeTotal` premise, `outcome_totality_and_draft_imply_unique_relation` returns one outcome witness and an all-pairs `SameOutcome` relation.
+Negative evidence: The registered pre-source red check confirmed that the target did not exist before the evidence commit. The registered source audit found the required names and no `sorry`, `admit`, `axiom`, `unsafe`, `partial`, or `implemented_by` token. The existing Lean synchronization test passed. WRK-0004 remains the separate countermodel showing that the draft itself does not entail the explicit totality premise.
+Evidence artifacts: LAB:plan/wrk-0005-conditional-outcome-relation.md@208c5f0ba1013ed513273772ef6b05d30d7d585c:5c9d2c74fc9fe633620169f60698ba12a169afbf25810fb98b41ed81f3d3824b, LAB:samples/lean/lab-statements/obl021/ElabDeterminismConditionalOutcomeRelation.lean@208c5f0ba1013ed513273772ef6b05d30d7d585c:c518f36a45a80d4c6e197fac4c22c828ce2d325409885983e68b0e40b0a40cde, LAB:samples/lean/lab-statements/obl021/ElabDeterminismConditionalOutcomeRelation.md@208c5f0ba1013ed513273772ef6b05d30d7d585c:bd64294ba461d39113e181b241237116511bcab4a43c2b43b5dfab2b32929505
+Evidence commits: 208c5f0ba1013ed513273772ef6b05d30d7d585c
+Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. Its retained result is limited to an experiment-local conditional relation: the existing LAB draft relates every tagged-outcome pair only when an explicit totality premise supplies outcome existence. It does not establish that premise from the draft, select native equality, an equivalence/setoid law, quotient semantics, a final Result relation, or a Canon home for totality. It introduces no primitive, reusable helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
 Independent review: not-required-for-L3
 
 ## Supersession

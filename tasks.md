@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 20:36 JST
+最終更新: 2026-07-21 20:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 9 | OBL-021 outcome-totality pre-registration | Closed: WRK-0004 registers a no-outcome countermodel in the existing Lean lane without assigning totality to OBL-021 or Canon. | Macro 1/5 reserve; closed |
 | 10 | OBL-021 outcome-totality evidence | Closed: WRK-0004 retained a well-scoped/no-outcome countermodel. It demonstrates only that the LAB draft does not itself entail outcome existence; it does not assign a Canon home for totality and remains `not-promoted`. | Macro 1/5 reserve; closed |
 | 11 | OBL-021 conditional outcome relation pre-registration | Closed: WRK-0005 registers an explicit-totality conditional lemma in the existing Lean lane without selecting equality, relation laws, or Canon placement. | Macro 1/5 reserve; closed |
-| 12 | OBL-021 conditional outcome relation evidence | Current next package: run WRK-0005's registered conditional Lean lemma and retain only an L3 result. | Macro 1/5 reserve; 1 research session |
+| 12 | OBL-021 conditional outcome relation evidence | Closed: WRK-0005 retained an L3 conditional lemma. The draft plus explicit experiment-local totality yields a tagged all-pairs abstract relation, but does not establish totality, equality, relation laws, quotient semantics, or Canon placement. | Macro 1/5 reserve; closed |
+| 13 | OBL-021 statement-shape checkpoint | Current: consolidate WRK-0002 through WRK-0005 and challenge whether another bounded candidate is necessary before selecting a new research direction. Do not add a fifth theorem merely to complete a local relation hierarchy. | Macro 1/5 reserve; one review session |
 
 ## self-driven macro phase reading
 

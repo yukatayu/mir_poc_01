@@ -47,3 +47,16 @@ conditional lemma evidence のみを意味する。
 この LAB conditional lemma の experiment-local carrier であり、Mir core primitive、public
 API、Canon relation、runtime helper ではない。Canon working record と current snapshot は
 evidence manifest 時だけ更新する。
+
+## 実施結果
+
+source evidence commit `208c5f0ba1013ed513273772ef6b05d30d7d585c` で、外部一時
+workdir に置いた既存 draft の `.olean` を import して Lean 4.29.1 が通った。
+`statement_draft_implies_outcomes_related` は tagged outcome の四 case を既存 draft の
+三 clause に case split して委譲する。`outcome_totality_and_draft_imply_unique_relation` は
+明示された `OutcomeTotal` から witness を得て、全 pair の `SameOutcome` relation を返す。
+
+したがって retained result は「existence を明示仮定すれば pairwise abstract relation を
+導ける」という条件付きの LAB evidence だけである。WRK-0004 の no-outcome countermodel
+はその premise が draft からは出ないことを引き続き示す。native equality、relation law、
+quotient、Canon での totality 帰属は決めていない。
