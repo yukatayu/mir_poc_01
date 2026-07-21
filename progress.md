@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 01:40 JST
+最終更新: 2026-07-22 01:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; post-WRK-0006 selection found no non-duplicative current L3 target in the existing lanes, and L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; post-WRK-0006 priority selection found no new small theorem-shaped L3 target, while the foundation audit raised PROPOSAL-008 for the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
@@ -128,6 +128,7 @@ LAB evidence.
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | PROPOSAL-003 and PROPOSAL-004 | L1-reserved organization / grammar choices; owner records A/B/C |
+| Owner / canon | PROPOSAL-008 | BND-001 outcome-totality interpretation and its future obligation placement |
 | Owner / LAB route | OBL-001 concrete-evidence bridge | defer or authorize an artifact-free design comparison only |
 | Research | non-reserved theory target | pin standing eligibility, pre-register alternatives/falsifier, and seek evidence in LAB. It may enter WRK L3; steward rebase/freeze and independent review precede L2 integration or escalation |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
@@ -137,7 +138,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 L3 evidence is manifested and no next target is selected | medium | reopen only for a new structural mismatch or a scoped owner-facing package; no Canon binding or L2 promotion |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 L3 evidence is manifested; foundation audit isolates a P008 owner boundary and no new theorem-shaped target is selected | medium | ADR-0014 eligibility remains available for a genuinely new scoped candidate; P008 and any Canon binding/L2 promotion remain owner-reserved |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -151,13 +152,21 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, and manifested WRK-0006 evidence | reviewed working premises, proof skeletons, `theory/11` final status | no current non-duplicative L3 target; WRK-0006 may not choose coverage, a step taxonomy, or Canon binding |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006 evidence, and a fresh import-bearing Lean replay | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | no new small theorem-shaped target selected; ADR-0014 remains independently available, while WRK-0006 may not choose coverage, a step taxonomy, or Canon binding |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible when target is scoped |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 01:57 JST: foundation integrity audit found no need for new Core
+  primitives and no proof-status overclaim. It isolated BND-001 outcome-totality
+  as an owner-reserved source-to-ledger question in PROPOSAL-008, reconfirmed
+  that existence-DAG and patch-DAG preservation are deliberately unassigned,
+  and replayed all five import-bearing OBL-020/021 L3 Lean sources from fresh
+  external `.olean` inputs. No WRK-0007, OBL/Gate/Phase move, or proof claim
+  was made; ADR-0014 eligibility remains distinct from the previous priority
+  pause.
 - 2026-07-22 01:40 JST: post-WRK-0006 local and temporary Oracle selection
   reviews found no new non-duplicative L3 target in the existing lanes. Further
   OBL-020/021/024/025 artifacts would repeat known boundaries or select a
@@ -240,14 +249,14 @@ LAB evidence.
   conformance, implementation, or public status changed.
 - 2026-07-21 20:48 JST: manifested WRK-0005's L3 conditional relation
   evidence. Lean 4.29.1 checks that explicit experiment-local outcome totality
-  plus the OBL-021 LAB draft yields an abstract `SameOutcome` relation across
-  every tagged outcome pair. The draft still does not entail the totality
+  plus the OBL-021 LAB draft yields an abstract `SameOutcome` relation for each
+  pair in one fixed input's actual-outcome fiber. The draft still does not entail the totality
   premise; this does not choose equality, relation laws, quotient semantics,
   Canon placement, theory/11, Gate/Phase, conformance, implementation, or
   public status.
 - 2026-07-21 20:36 JST: pre-registered WRK-0005 as an L3 conditional-lemma
   test of whether explicit outcome totality plus the OBL-021 LAB draft yields
-  an experiment-local relation across every tagged outcome pair. The premise
+  an experiment-local relation for each pair in one fixed input's actual-outcome fiber. The premise
   is explicitly experimental; no equality, relation law, Canon placement,
   theory/11, Gate/Phase, conformance, implementation, or public status changed.
 - 2026-07-21 20:33 JST: manifested WRK-0004's L3 no-outcome countermodel

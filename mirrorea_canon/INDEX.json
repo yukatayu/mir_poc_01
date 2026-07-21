@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 85,
+ "files": 86,
  "entries": [
   {
    "id": "root/changelog",
@@ -515,6 +515,21 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-007-wrk-evidence-commit-integrity.md",
    "bytes": 2992
+  },
+  {
+   "id": "meta/proposal-008",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/03-elaboration",
+    "theory/11-metatheory-ledger",
+    "adr/ADR-0014",
+    "plan/02-operating-model"
+   ],
+   "summary": "BND-001 の outcome totality 読みと OBL-021 の台帳上の責務配置を owner に問う。意味論、OBL、Gate、proof status は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md",
+   "bytes": 4897
   },
   {
    "id": "meta/source-hierarchy",

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 00:45 JST
+最終更新: 2026-07-22 01:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -41,11 +41,11 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001 は theory/02 の lifetime/capture 有限断片と `Nat` budget parameter を existing Lean fragment で L3 として再現し、証跡 manifest・clean-worktree validation・cross-cut review まで完了した。WRK-0002 は OBL-021 LAB statement draft の projection-vacuity countermodel を L3 evidence として manifest した。WRK-0003 は全 projection の total/unique witness と equality comparison を与えても Result identity が導けない countermodel を L3 evidence として manifest し、全 premise を束ねる theorem へ追加 evidence で訂正した。WRK-0004 は well-scoped input に outcome が存在しない no-outcome countermodel を L3 evidence として manifest した。WRK-0005 は fixed well-scoped input の actual-outcome fiber における abstract `SameOutcome` coherence を manifest した。WRK-0006 は既存 OBL-020 draft の global preservation と familywise wrapper の論理的接続を L3 evidence として manifest した。global から wrapper は導けるが、逆向きは experiment-local coverage を明示したときだけ導け、非自明 model は unclassified actual step による分離を示す。coverage は Canon requirement、final theorem interface、step taxonomy、full OBL-020 proof へは進めない。先行 triage の live-branch test はこの candidate の priority を低く見るが、ADR-0014 の standing eligibility 自体を狭める Canon rule ではない。全 record は `not-promoted` のままで、L2 selection は将来の owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `mirrorea_canon/working/WRK-0002-obl021-projection-vacuity.md`; `mirrorea_canon/working/WRK-0003-obl021-projection-extensionality.md`; `mirrorea_canon/working/WRK-0004-obl021-outcome-totality.md`; `mirrorea_canon/working/WRK-0005-obl021-conditional-outcome-relation.md`; `mirrorea_canon/working/WRK-0006-obl020-familywise-global-boundary.md`; `plan/wrk-0001-finite-index-reproduction.md`; `plan/wrk-0001-pilot-checkpoint.md`; `plan/wrk-0002-projection-vacuity-countermodel.md`; `plan/wrk-0003-projection-extensionality-countermodel.md`; `plan/wrk-0004-outcome-totality-countermodel.md`; `plan/wrk-0005-conditional-outcome-relation.md`; `plan/wrk-0006-obl020-familywise-global-boundary.md`; `plan/156-t0-t2-research-autonomy-envelope.md`; `plan/158-standing-bounded-autonomy.md`; `plan/159-wrk-evidence-commit-integrity-recut.md`; `plan/160-obl021-statement-shape-checkpoint.md`; `plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
-現行の candidate selection は
-`plan/162-post-wrk0006-candidate-selection.md` に固定した。WRK-0006 後、既存 lane で
-non-duplicative な L3 question は見つからず、WRK-0007 は開いていない。再開は新しい
-structural mismatch 又は scope のある owner-facing package を待つ。これは T1 entry、OBL
-status、proof、Canon coverage/taxonomy の判断ではない。
+現行の priority selection は `plan/162-post-wrk0006-candidate-selection.md` に固定した。
+WRK-0006 後、既存の小さな theorem-shaped L3 question は選ばれず、WRK-0007 は開いて
+いない。Foundation audit は BND-001 outcome-totality の owner decision surface を
+PROPOSAL-008 として分離した。ADR-0014 の standing eligibility はこの priority pause とは
+別に有効である。これは T1 entry、OBL status、proof、Canon coverage/taxonomy の判断ではない。
 
 ## 現在の停止線
 
@@ -59,8 +59,8 @@ status、proof、Canon coverage/taxonomy の判断ではない。
   将来の rebased final cut review が必要です。現行は owner-authenticated trust anchor
   未構成のため fail-closed です。frozen L2 は successor で forward に扱います。
   `plan/158-standing-bounded-autonomy.md`
-- `PROPOSAL-003` と `PROPOSAL-004` は L1-reserved question なので delegated route
-  では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`
+- `PROPOSAL-003`、`PROPOSAL-004`、`PROPOSAL-008` は L1-reserved question なので delegated route
+  では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`
 - 運用 storage は root filesystem のみで、2026-07-21 21:48 JST 時点の空きは約
   20 GiB です。承認済み cleanup で再生成可能な local build output と Mirrorea 一時成果物を
   除去しました。configured external workdir は依然未マウントなので、次の heavy build / generated
@@ -74,6 +74,7 @@ status、proof、Canon coverage/taxonomy の判断ではない。
 | OBL-001 concrete-evidence bridge | owner record pending | defer、または artifact-free design comparison だけを許可するか。 |
 | PROPOSAL-003 | owner record pending | OBL-020 organization の A / B / C。 |
 | PROPOSAL-004 | owner record pending | Surface v0 grammar closure の A / B / C。LAB recommendation は A。 |
+| PROPOSAL-008 | owner record pending | BND-001 outcome totality の読みと、将来の obligation placement。 |
 
 この表以外の non-reserved candidate は ADR-0014 route により LAB research で選別
 できます。routine target approval は不要です。canon current state は

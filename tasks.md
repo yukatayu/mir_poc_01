@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 01:40 JST
+最終更新: 2026-07-22 01:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -33,6 +33,12 @@ candidate, trusted runtime authorization, or a public effect ABI. No further
 Full System V1 maintenance item is currently selected, so the current
 no-candidate research selection remains unchanged.
 
+The foundation integrity audit is also closed as LAB evidence. It found no need
+for an additional Core primitive or a new theorem-shaped WRK, but it isolated
+the owner-reserved BND-001 outcome-totality source-to-ledger question in
+PROPOSAL-008. The prior no-candidate result remains a priority disposition,
+not an independent restriction on ADR-0014 eligibility.
+
 ## ordered self-driven packages
 
 | Order | Work unit | Aim and completion signal | Macro / rough estimate |
@@ -55,6 +61,7 @@ no-candidate research selection remains unchanged.
 | 16 | OBL-020 familywise/global evidence | Closed: WRK-0006 manifests that global preservation implies the wrapper, while only an explicit experiment-local coverage premise gives the converse; its non-vacuous finite model has an unclassified actual non-preserving step. It remains `not-promoted`, selects no Canon coverage rule or taxonomy, and changes no `theory/11` status. | Macro 1/5 reserve; closed L3 evidence |
 | 17 | Post-WRK-0006 candidate selection | Closed: local source review and temporary Oracle review found no non-duplicative L3 question in the existing lanes. Further OBL-020/021/024/025 experiments would repeat known boundaries or select reserved semantics. No WRK-0007 is opened; `plan/162-post-wrk0006-candidate-selection.md` records exact reopen conditions. | Macro 1/5 reserve; selection closed |
 | 18 | Full System V1 semantic invariant repair | Closed and post-repair attested at clean `4a52dd3e` matching the upstream tracking ref: shared private host-adapter policy checks exact pair signature, operation-specific declared and ambient capability requirements, and rejects host adapter use without a transition context. The checker also rejects duplicate record fields and record/fixed-array equality before runtime. The active checker corpus is 3 positive / 18 negative rows. | Macro 2/3 maintenance; closed with Rust/Python/source-matrix/release evidence; no widened claim |
+| 19 | Foundation integrity and outcome audit | Closed: Core direction and proof-status separation were rechecked; all five import-bearing OBL-020/021 L3 Lean sources replayed from external `.olean` inputs; BND-001 outcome-totality placement is now PROPOSAL-008. No WRK-0007 or theory/ledger movement. | Macro 1/5 audit; owner P008 is the next proof-facing decision surface |
 
 ## self-driven macro phase reading
 
@@ -70,6 +77,7 @@ no-candidate research selection remains unchanged.
 | OBL-001 concrete-evidence bridge | whether static elaborator output can instantiate authority/capability/witness evidence | defer; authorize artifact-free design comparison | defer until a selected proof-facing package needs it |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
+| PROPOSAL-008 | BND-001 outcome-totality interpretation | separate obligation; OBL-021 scope; outcome-classification reading; defer | owner chooses before a proof-facing package assumes totality |
 
 Routine non-reserved target selection is **not** a user decision gate. A target that touches the reserved boundary is escalated with its evidence rather than placed in `working/`.
 
@@ -77,7 +85,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
-| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; `plan/162-post-wrk0006-candidate-selection.md` finds no current non-duplicative target after WRK-0006. Reopen only for a new structural mismatch or scoped owner-facing package; no `theory/11` movement |
+| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; `plan/162` currently selects no small theorem-shaped target after WRK-0006. ADR-0014 eligibility remains independent; P008 now reserves BND-001 totality interpretation. No `theory/11` movement |
 | textual runnable research core | whether the existing Full System V1 source-first lane can be used as L3 retained evidence without changing governance | current WRK validator permits only `plan`, `samples/clean-near-end`, `samples/current-l2`, and `samples/lean`; the Full System V1 lane is outside that boundary, so retain this as an escalation candidate rather than silently widening the permitted roots |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; choose a new candidate with a falsifier |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
@@ -99,6 +107,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - WRK evidence-commit integrity and its limits: `plan/159-wrk-evidence-commit-integrity-recut.md`.
 - Current no-candidate triage and runnable baseline: `plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`.
 - Post-WRK-0006 candidate selection: `plan/162-post-wrk0006-candidate-selection.md`.
+- Foundation integrity and BND-001 outcome audit: `plan/163-foundation-integrity-and-elaboration-outcome-audit.md`.
 - Historical research evidence: `plan/156-t0-t2-research-autonomy-envelope.md` and `plan/157-delegated-theory-research-governance.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - Runnable LAB dashboard: `samples_progress.md`.
