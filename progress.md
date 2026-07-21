@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:22 JST
+最終更新: 2026-07-21 17:32 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,13 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:32 JST: closed the WRK-0001 pilot checkpoint. Clean detached
+  authoritative validation, `make check`, full Python tests, and independent
+  review passed; wording now distinguishes finite lifetime/capture carriers
+  from the unbounded `Nat` budget parameter. The Oracle OBL-021 idea remains a
+  future candidate requiring its own pre-registration. No Gate, Phase, SCN,
+  OBL discharge, conformance, production implementation, or public status
+  changed.
 - 2026-07-21 17:22 JST: manifested evidence commit `887a0f6c` in WRK-0001 with
   its exact plan artifact hash. The Lean reproduction remains L3
   `not-promoted`; clean-worktree validation and the cross-cut checkpoint remain

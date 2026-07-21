@@ -40,7 +40,7 @@ Positive evidence: Lean 4.29.1 checks the existing finite-index helper-local fra
 Negative evidence: The registered source audit finds the four named local rejection lemmas and no registered placeholder or implementation-escape token.
 Evidence artifacts: LAB:plan/wrk-0001-finite-index-reproduction.md@887a0f6cd2de57443f4508c14fbadf4a88f25992:5155ce3de994cc92975a797a2d7ee1b7b79453ff6739a125546c26f000d23972
 Evidence commits: 887a0f6cd2de57443f4508c14fbadf4a88f25992
-Impact / non-effects: The record reads theory/02 and existing LAB artifacts only. It introduces no helper, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
+Impact / non-effects: The record reads theory/02 and existing LAB artifacts only. It introduces no helper, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim. Terminology clarification: the lifetime and capture carriers are finite, while the remote-call parameter uses `Nat`; "finite-index" names this bounded fragment and does not claim finite cardinality for every index.
 Independent review: not-required-for-L3
 
 ## Supersession

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 17:22 JST
+最終更新: 2026-07-21 17:32 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -29,8 +29,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 1 | Governance closeout | Closed: standing route, WRK structure/history/evidence/index checks, canon/LAB mirrors, validation, commit/push, and clean detached-worktree authoritative pass. | Macro 0/1 early; closed |
 | 2 | Pilot triage and pre-registration | Closed: WRK-0001 pre-registers a theory/02 finite-index reproduction with anchors, alternative/falsifier, non-effects, rollback, and existing Lean commands. | Macro 1/5 early; closed |
 | 3 | Pilot experiment | Closed: WRK-0001's positive/negative Lean reproduction is retained and append-only manifested as L3 evidence. It remains `not-promoted`; no theory or implementation claim moved. | Macro 1/5 middle; closed |
-| 4 | Pilot checkpoint | Current package: perform authoritative clean-worktree validation, obtain an independent cross-cut read, synchronize dashboards, and decide only the next target class or escalation bundle. This is the current run's planned stop. | Macro 0/1 closeout; 1 session |
-| 5 | Subsequent ratchet | Select the next eligible candidate only after the checkpoint; do not pre-commit its detailed semantics. | Macro 1/5 reserve; recurring |
+| 4 | Pilot checkpoint | Closed: authoritative clean-worktree validation, full local validation, independent review, dashboard synchronization, and a next candidate class were completed without L3 promotion. | Macro 0/1 closeout; closed |
+| 5 | Subsequent ratchet | Current next package: assess OBL-021 single-projection countermodel eligibility and, only if eligible, commit a separate L3 pre-registration before any edit or outcome command. | Macro 1/5 reserve; 1-2 research sessions |
 
 ## self-driven macro phase reading
 

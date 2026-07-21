@@ -1105,7 +1105,7 @@
    "summary": "theory/02 が許す有限 index 断片と CurrentL2FiniteIndexFirstLayer.lean の helper-local 正例・拒否例を再現する L3 pilot。最終型体系、Mir primitive、OBL 状態は変更しない。",
    "open_items": [],
    "path": "working/WRK-0001-finite-index-boundaries.md",
-   "bytes": 4035
+   "bytes": 4250
   }
  ]
 }
