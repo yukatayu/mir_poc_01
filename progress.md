@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 22:40 JST
+最終更新: 2026-07-21 22:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,13 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 22:57 JST: audited machine-readable readiness claims across the
+  Full System V1 helper family. The bounded effectful runtime matrix had the
+  only mismatch: it was already dashboard-classified as evidence-closed but
+  emitted `workflow_ready: true`. The helper now emits `false` and a unit test
+  fixes that contract. All 42 checker/runtime/operational rows still pass. No
+  Canon, workflow classification, conformance, or public-product status
+  changed.
 - 2026-07-21 22:40 JST: hardened the bounded Full System V1 validation path.
   Checker/runtime rows now require accepted/rejected exit-code agreement;
   provider/renderer helpers read and compare committed generated evidence rather

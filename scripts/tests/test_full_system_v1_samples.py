@@ -45,6 +45,7 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertEqual(payload["family"], "full_system_v1_runtime")
         self.assertEqual(payload["sample_count"], 17)
         self.assertEqual(payload["executable_count"], 17)
+        self.assertFalse(payload["workflow_ready"])
         self.assertEqual(payload["validation_errors"], [])
 
     def test_operational_matrix_reports_source_operational_rows(self) -> None:

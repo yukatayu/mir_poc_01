@@ -380,7 +380,7 @@ def runtime_matrix() -> dict[str, Any]:
         "executable_count": len(executable_rows),
         "executable_rows": executable_rows,
         "matrix_status": data["current_status"],
-        "workflow_ready": True,
+        "workflow_ready": False,
         "rows": rows,
         "validation_errors": validation_errors,
     }
