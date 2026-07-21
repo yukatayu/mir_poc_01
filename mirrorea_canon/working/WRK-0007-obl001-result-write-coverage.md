@@ -36,12 +36,21 @@ Non-claims: This does not identify an experiment-local Result, Write, result/wri
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: Registration only. No existing Canon text, LAB statement source, helper, schema, runner, CI, Make surface, or product behavior changes.
+Positive evidence: Lean 4.29.1 compiled the unchanged OBL-001 draft and the imported countermodel. The source proves `statement_draft_holds`, a successful `untrackedCross` result, experiment-only write membership, absence of `GeneratedWrite`, and `result_write_coverage_fails`.
+Negative evidence: The registered pre-source absence check passed. A source search found no prior OBL-001 countermodel with a successful experiment-local result/write membership relation outside `GeneratedWrite`. The exact flat external output location cannot resolve the imported module prefix; recompiling the unchanged draft beneath its import-relative path makes the same source compile. This is an operational path condition, not an additional semantic premise.
+Evidence artifacts: LAB:plan/wrk-0007-obl001-result-write-coverage.md@8d28ed89b63595296a2acb508b884de611b7a6d6:3a94f2e70cd362a271b218cf93909c5180ec2bc9ccf7515a42a63242a4ee79f6, LAB:samples/lean/lab-statements/obl001/ResultWriteCoverageCountermodel.lean@8d28ed89b63595296a2acb508b884de611b7a6d6:b4099aba75273018bd6c9cb355478064e02099f8974fa2bf5aecd9ea3fd3b23b, LAB:samples/lean/lab-statements/obl001/ResultWriteCoverageCountermodel.md@8d28ed89b63595296a2acb508b884de611b7a6d6:c76159178bdef525f00fa598c30f1da2ffc440f4604f7391ba6f49588ccefa0e
+Evidence commits: 8d28ed89b63595296a2acb508b884de611b7a6d6
+Impact / non-effects: This retained L3 evidence uses only the declared `plan` and `samples/lean` lanes. It establishes a LAB statement-shape gap only; no existing Canon text, Core representation, helper, schema, runner, CI, Make surface, runtime behavior, or product behavior changes.
 Independent review: not-required-for-L3
+
+### Method clarification — 2026-07-22
+
+The pre-registered flat external `.olean` command is preserved as historical
+registration text. The imported source names the draft by its repository module
+path, so reproducible replay writes the unchanged draft to the matching relative
+directory under a fresh external root and supplies that root via `LEAN_PATH`.
+This changes neither the question, result class, finite countermodel, nor any
+Canon boundary.
 
 ## Supersession
 

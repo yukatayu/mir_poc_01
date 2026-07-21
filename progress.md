@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 01:57 JST
+最終更新: 2026-07-22 02:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; post-WRK-0006 priority selection found no new small theorem-shaped L3 target, while the foundation audit raised PROPOSAL-008 for the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007 now records a distinct OBL-001 LAB result/write-coverage countermodel, while PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
@@ -138,7 +138,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 L3 evidence is manifested; foundation audit isolates a P008 owner boundary and no new theorem-shaped target is selected | medium | ADR-0014 eligibility remains available for a genuinely new scoped candidate; P008 and any Canon binding/L2 promotion remain owner-reserved |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 and WRK-0007 are manifested L3 evidence; foundation audit isolates the separate P008 owner boundary | medium | ADR-0014 eligibility remains available for a genuinely new scoped candidate; P008 and any Canon binding/L2 promotion remain owner-reserved |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -152,13 +152,19 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006 evidence, and a fresh import-bearing Lean replay | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | no new small theorem-shaped target selected; ADR-0014 remains independently available, while WRK-0006 may not choose coverage, a step taxonomy, or Canon binding |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, and fresh import-bearing Lean replay | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | WRK-0007 exposes only the LAB Result/write enumeration gap; its future Core/result bridge, WRK-0006 coverage/taxonomy, and Canon binding remain unselected |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible when target is scoped |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 02:44 JST: WRK-0007 pre-registered and manifested an imported
+  OBL-001 LAB countermodel. A successful experiment-local Result can contain
+  a labeled write outside `GeneratedWrite` while the unchanged statement draft
+  holds, so the draft alone does not encode result/write enumeration coverage.
+  This is neither a THM-001 counterexample nor a Core/result carrier choice;
+  no OBL/Gate/Phase/Canon status moved, and PROPOSAL-008 remains independent.
 - 2026-07-22 01:57 JST: foundation integrity audit found no need for new Core
   primitives and no proof-status overclaim. It isolated BND-001 outcome-totality
   as an owner-reserved source-to-ledger question in PROPOSAL-008, reconfirmed

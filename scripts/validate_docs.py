@@ -598,6 +598,7 @@ REQUIRED = [
     "plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md",
     "plan/162-post-wrk0006-candidate-selection.md",
     "plan/163-foundation-integrity-and-elaboration-outcome-audit.md",
+    "plan/164-obl001-result-write-coverage-boundary.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

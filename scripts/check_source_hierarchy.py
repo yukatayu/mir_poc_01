@@ -249,6 +249,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md",
         "plan/162-post-wrk0006-candidate-selection.md",
         "plan/163-foundation-integrity-and-elaboration-outcome-audit.md",
+        "plan/164-obl001-result-write-coverage-boundary.md",
     ],
     "scripts": [
         "scripts",
