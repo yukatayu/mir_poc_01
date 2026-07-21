@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 81,
+ "files": 82,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 3463
+   "bytes": 3687
   },
   {
    "id": "root/north-star",
@@ -1120,6 +1120,20 @@
    "open_items": [],
    "path": "working/WRK-0002-obl021-projection-vacuity.md",
    "bytes": 6720
+  },
+  {
+   "id": "working/WRK-0003",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/03-elaboration",
+    "theory/10-diagnostics"
+   ],
+   "summary": "OBL-021 の LAB statement draft に各 projection の total/unique witness と component equality を与えても異なる成功 Result を許すかを、joint extensionality 不在の小さな countermodel で検査する L3 research record。最終 equality、Diagnostic ABI、OBL 状態は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0003-obl021-projection-extensionality.md",
+   "bytes": 5689
   }
  ]
 }

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 19:59 JST
+最終更新: 2026-07-21 20:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -32,7 +32,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 4 | Pilot checkpoint | Closed: authoritative clean-worktree validation, full local validation, independent review, dashboard synchronization, and a next candidate class were completed without L3 promotion. | Macro 0/1 closeout; closed |
 | 5 | OBL-021 countermodel pre-registration | Closed: WRK-0002 pre-registers a projection-vacuity countermodel in the existing `samples/lean` lane, with a concrete alternative, falsifier, rollback, and no outcome evidence. | Macro 1/5 reserve; closed |
 | 6 | OBL-021 countermodel evidence | Closed: the registered red/green Lean workflow was retained as WRK-0002 L3 evidence. It demonstrates only that the current LAB draft does not itself force result identity or projection non-vacuity; it remains `not-promoted`. | Macro 1/5 reserve; closed |
-| 7 | OBL-021 premise-gap triage | Current next package: use the countermodel and advisory review to compare the smallest non-reserved next questions, then pre-register at most one falsifiable L3 candidate. Do not select a final equality or alter OBL status. | Macro 1/5 reserve; 1 research session |
+| 7 | OBL-021 premise-gap triage | Closed: the countermodel, temporary Oracle review, and independent Canon audit establish that Canon fixes the intended tuple/function contract but does not furnish the LAB draft's projection witness or extensionality bridge. | Macro 1/5 reserve; closed |
+| 8 | OBL-021 projection-extensionality evidence | Current next package: run WRK-0003's registered red/green Lean countermodel to test whether total/unique per-result projections and equality comparisons still allow distinct successes. Retain only an L3 result. | Macro 1/5 reserve; 1 research session |
 
 ## self-driven macro phase reading
 
