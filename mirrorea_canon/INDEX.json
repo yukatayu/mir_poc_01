@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 89,
+ "files": 90,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 5237
+   "bytes": 5563
   },
   {
    "id": "root/north-star",
@@ -1235,6 +1235,20 @@
    "open_items": [],
    "path": "working/WRK-0009-current-l2-e5-skeleton-identity.md",
    "bytes": 8522
+  },
+  {
+   "id": "working/WRK-0010",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "arch/02-boundary-contracts",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "existing current-L2 static gate の decision payload が formal-hook artifact に literal または明示的 lossless reference として残るかを監査する可逆な L3 record。診断意味、defect、carrier、helper/schema は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0010-static-formal-hook-decision-attribution.md",
+   "bytes": 7394
   }
  ]
 }

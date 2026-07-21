@@ -75,6 +75,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0007 | L3-open | OBL-001 LAB statement draft が実験用 Result 内の write を `GeneratedWrite` で尽くすことを要求するかを検査。Core 表現・OBL status は選ばない。`working/WRK-0007-obl001-result-write-coverage.md` |
 | WRK-0008 | L3-open | current-L2 runtime try/cut formal hook が same-Place の atomic_cut frontier を根拠として区別するかを既存レーンで監査。OBL-027、carrier、helper/schema は変更しない。`working/WRK-0008-obl027-formal-hook-attribution.md` |
 | WRK-0009 | L3-open | current-L2 static e5 route と Lean proof-skeleton の review-unit / emitted-stub identity tuple が literal に整合するかを既存レーンで監査。theorem 意味、OBL、carrier、helper/schema は変更しない。`working/WRK-0009-current-l2-e5-skeleton-identity.md` |
+| WRK-0010 | L3-open | current-L2 static-gate decision payload が static formal-hook artifact に literal または明示的 lossless reference として残るかを既存レーンで監査。診断意味、defect、carrier、helper/schema は変更しない。`working/WRK-0010-static-formal-hook-decision-attribution.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 
