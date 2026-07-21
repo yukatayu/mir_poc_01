@@ -116,11 +116,13 @@
 98. WRK evidence-commit integrity recut は `plan/159`
 99. OBL-021 statement-shape checkpoint は `plan/160`
 100. post-checkpoint candidate triage and runnable baseline は `plan/161`
-101. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
-102. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
-103. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
-104. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-105. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+101. post-WRK-0006 candidate selection は
+    `plan/162-post-wrk0006-candidate-selection.md`
+102. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
+103. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
+104. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
+105. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+106. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -648,6 +650,8 @@
   `plan/wrk-0001-pilot-checkpoint.md`
 - OBL-021 statement-shape checkpoint:
   `plan/160-obl021-statement-shape-checkpoint.md`
+- Post-WRK-0006 candidate selection:
+  `plan/162-post-wrk0006-candidate-selection.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

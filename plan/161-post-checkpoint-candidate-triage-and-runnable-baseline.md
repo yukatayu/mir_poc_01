@@ -156,10 +156,13 @@ conformance, Gate, Phase, OBL, or public-product status.
 ## Reopen rule
 
 The WRK-0006 evidence package is closed at the abstract composition boundary.
-Select any next candidate through ADR-0014's standing predicate and use the
-stricter distinct-live-branch test as a LAB priority heuristic, not as an
-invented Canon eligibility condition. Prepare a clearly labeled escalation
-bundle when a candidate needs a reserved decision.
+The post-WRK-0006 independent and local selection review in
+`plan/162-post-wrk0006-candidate-selection.md` found no next non-duplicative
+candidate in the existing permitted lanes. Reopen only through ADR-0014's
+standing predicate when a new structural mismatch appears; use the stricter
+distinct-live-branch test as a LAB priority heuristic, not as an invented Canon
+eligibility condition. Prepare a clearly labeled escalation bundle when a
+candidate needs a reserved decision.
 
 ## Non-claims
 

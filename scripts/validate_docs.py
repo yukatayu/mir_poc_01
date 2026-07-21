@@ -596,6 +596,7 @@ REQUIRED = [
     "plan/159-wrk-evidence-commit-integrity-recut.md",
     "plan/160-obl021-statement-shape-checkpoint.md",
     "plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md",
+    "plan/162-post-wrk0006-candidate-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

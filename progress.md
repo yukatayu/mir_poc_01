@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 01:22 JST
+最終更新: 2026-07-22 01:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0006 manifests only the abstract OBL-020 familywise/global composition boundary, and L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; post-WRK-0006 selection found no non-duplicative current L3 target in the existing lanes, and L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
@@ -137,7 +137,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 L3 evidence is manifested | medium | select a next bounded LAB target; no Canon binding or L2 promotion |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 L3 evidence is manifested and no next target is selected | medium | reopen only for a new structural mismatch or a scoped owner-facing package; no Canon binding or L2 promotion |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -151,13 +151,19 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, and manifested WRK-0006 evidence | reviewed working premises, proof skeletons, `theory/11` final status | select a next bounded target; WRK-0006 may not choose coverage, a step taxonomy, or Canon binding |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, and manifested WRK-0006 evidence | reviewed working premises, proof skeletons, `theory/11` final status | no current non-duplicative L3 target; WRK-0006 may not choose coverage, a step taxonomy, or Canon binding |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible when target is scoped |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 01:40 JST: post-WRK-0006 local and temporary Oracle selection
+  reviews found no new non-duplicative L3 target in the existing lanes. Further
+  OBL-020/021/024/025 artifacts would repeat known boundaries or select a
+  reserved interface. No WRK-0007, Canon change, proof claim, or status change
+  was made; reopen conditions are recorded in
+  `plan/162-post-wrk0006-candidate-selection.md`.
 - 2026-07-22 01:22 JST: manifested WRK-0006 L3 source evidence at `be85c975`.
   In the existing abstract OBL-020 vocabulary, global preservation implies the
   family-qualified wrapper; the converse needs an explicit experiment-local
