@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 20:25 JST
+最終更新: 2026-07-21 20:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,12 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 20:28 JST: pre-registered WRK-0004 as an L3 no-outcome
+  countermodel test of whether the OBL-021 LAB statement draft permits a
+  well-scoped input with neither success nor Diagnostic. This investigates the
+  draft's entailment only; it does not assign totality to OBL-021 or any Canon
+  obligation. No WRK-0004 outcome has run or been relied on; no theory/11,
+  Gate/Phase, conformance, implementation, or public status changed.
 - 2026-07-21 20:25 JST: appended WRK-0003 correction evidence after Oracle
   review found that its first aggregate theorem did not package all nine
   projection and equality premises. The corrected theorem compiles and retains
