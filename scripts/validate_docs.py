@@ -588,6 +588,7 @@ REQUIRED = [
     "plan/154-project-control-cockpit.md",
     "plan/155-t0-g0-governance-profile-proposal.md",
     "plan/156-t0-t2-research-autonomy-envelope.md",
+    "plan/157-delegated-theory-research-governance.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
