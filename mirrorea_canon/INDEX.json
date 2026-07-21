@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 87,
+ "files": 88,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 4659
+   "bytes": 4933
   },
   {
    "id": "root/north-star",
@@ -1206,6 +1206,21 @@
    "open_items": [],
    "path": "working/WRK-0007-obl001-result-write-coverage.md",
    "bytes": 7858
+  },
+  {
+   "id": "working/WRK-0008",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/04-ordering-and-cuts",
+    "theory/11-metatheory-ledger",
+    "arch/02-boundary-contracts"
+   ],
+   "summary": "existing current-L2 runtime try/cut formal hook が、same-Place atomic_cut frontier の no-cross 境界を区別して根拠化するかを監査する可逆な L3 record。OBL-027、carrier、helper/schema、適合性は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0008-obl027-formal-hook-attribution.md",
+   "bytes": 6774
   }
  ]
 }
