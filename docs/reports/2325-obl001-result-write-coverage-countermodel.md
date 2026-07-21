@@ -42,8 +42,15 @@ that no small new L3 candidate had been selected after WRK-0006.
 - `samples/lean/lab-statements/obl001/ResultWriteCoverageCountermodel.*`
 - `samples/lean/lab-statements/obl001/README.md`
 - `plan/wrk-0007-obl001-result-write-coverage.md`
-- `plan/164-obl001-result-write-coverage-boundary.md` and current snapshots
-- this report and the required plan/source-hierarchy registrations
+- `plan/164-obl001-result-write-coverage-boundary.md`
+- `Documentation.md`
+- `docs/project-status.md`
+- `progress.md`
+- `tasks.md`
+- `plan/00-index.md`
+- `scripts/check_source_hierarchy.py`
+- `scripts/validate_docs.py`
+- this report
 
 ## Commands run
 
@@ -81,33 +88,36 @@ Continue autonomous L3 research only where a new source-grounded structural
 mismatch has distinct positive and adverse outcomes. Do not choose the future
 Core/result bridge from this countermodel alone.
 
-## plan/ update status
+## Plan update status
 
-Updated: added `plan/164-obl001-result-write-coverage-boundary.md`, the WRK
-evidence plan, and the index entry.
+`plan/` 更新済み: added `plan/164-obl001-result-write-coverage-boundary.md`,
+the WRK evidence plan, and the index entry.
 
 ## Documentation.md update status
 
-Updated to point readers to the new bounded OBL-001 evidence.
+`Documentation.md` 更新済み: points readers to the new bounded OBL-001
+evidence.
 
 ## docs/project-status.md update status
 
-Updated to replace the stale “no WRK-0007” reading with the bounded L3 result.
+更新済み: replaces the stale “no WRK-0007” reading with the bounded L3 result.
 
 ## progress.md update status
 
-Updated logical-specification, macro-phase, feature, and recent-log wording.
+`progress.md` 更新済み: logical-specification, macro-phase, feature, and
+recent-log wording now record the bounded evidence.
 
 ## tasks.md update status
 
-Updated the current task map with WRK-0007 registration and evidence closure.
+`tasks.md` 更新済み: the current task map records WRK-0007 registration and
+evidence closure.
 
 ## samples_progress.md update status
 
-No update: this is a statement-shape countermodel, not an active runnable
-sample/dashboard workflow change.
+`samples_progress.md` 更新不要: this is a statement-shape countermodel, not an
+active runnable sample/dashboard workflow change.
 
-## reviewer findings and follow-up
+## Reviewer findings and follow-up
 
 One planner retained the earlier no-candidate conclusion. A separate reviewer,
 an adjudicating reviewer, and the temporary Oracle independently found the
@@ -115,18 +125,18 @@ result/write coverage gap distinct from T-RESEARCH-001 and eligible for L3.
 The local source comparison accepted that latter reading. Final diff review is
 recorded after the documentation synchronization.
 
-## skipped validations and reasons
+## Skipped validations and reasons
 
 No runtime, distributed, conformance, or production validation applies to this
 LAB-only proof-shape package. No new Lean manifest/runner was added; the
 countermodel uses a fresh external `.olean` import replay instead.
 
-## commit / push status
+## Commit / push status
 
 Pre-registration `cb83300e` and evidence `8d28ed89` were committed and pushed.
 The manifest/documentation closeout commit is pending at report write time.
 
-## sub-agent session close status
+## Sub-agent session close status
 
 Planner, initial reviewer, and adjudicating reviewer completed read-only work.
 Temporary Oracle `mirrorea-obl001-core-write-coverage` completed; its advisory
