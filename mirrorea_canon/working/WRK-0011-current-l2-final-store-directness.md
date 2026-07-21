@@ -36,12 +36,21 @@ Non-claims: This does not treat either final store, event sequence, terminal out
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending pre-registered existing-lane execution.
-Negative evidence: Pending pre-registered existing-lane execution.
-Evidence artifacts: pending
-Evidence commits: none
+Positive evidence: The registered command ran in a clean detached worktree at `fa130a499cecca20c625663e4ad20872ef192d67`. Its six named focused tests each passed, and the unchanged current-L2 regression passed all 23 commands. The pinned source-route test-file search found no `final_place_store` reference in the registered three source-route test files.
+Negative evidence: The direct-source-route expected falsifier did not occur: neither named e21/e22 source-route body compares an exact `run_report.final_place_store`. The two named direct fixture/evaluator bodies instead compare exact `evaluator.state.place_store` values. This is literal assertion provenance only and not a conclusion about state meaning, correctness, sufficiency, or repair.
+Evidence artifacts: LAB:plan/wrk-0011-current-l2-final-store-directness.md@7c16c8abce99f2ff23f8d34c2f849f1ef54c8da1:ae6dfe0e40586cf2b4c85e18e83b8577a7a8da84ddd3e6f8638722977d498130
+Evidence commits: 7c16c8abce99f2ff23f8d34c2f849f1ef54c8da1
 Impact / non-effects: This record is limited to declared `plan` and `samples/current-l2` LAB locations plus disposable `/tmp` outputs. It changes no Canon theory, Place/cut meaning, OBL state, carrier, helper, test, fixture, schema, source, runner, conformance, Gate/Phase, runtime, diagnostic contract, or public behavior.
 Independent review: not-required-for-L3
+
+### Evidence addendum — 2026-07-22
+
+The evidence commit owns only the retained `plan/` matrix, its index entry, and
+direct report operational metadata. Existing unmodified source/tests were
+executed and inspected at the pinned revision as non-production machinery; they
+are neither retained artifacts nor changed evidence. The result does not make a
+source/fixture equivalence, state-semantics, defect, coverage, OBL, or repair
+claim.
 
 ## Supersession
 

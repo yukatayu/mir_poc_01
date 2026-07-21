@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 07:22 JST
+最終更新: 2026-07-22 08:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -62,6 +62,14 @@ Canon semantics. `plan/wrk-0009-e5-skeleton-identity.md` retains the matrix;
 plan/168 records why the upstream projection audit was not selectable and why
 the remaining candidates stay reserve paths.
 
+WRK-0010 is manifested scoped L3 evidence: existing static formal hooks retain
+neither the selected static decision payload nor an exact artifact reference.
+WRK-0011 is separately manifested assertion-provenance evidence: its four
+named e21/e22 source-route bodies do not directly compare
+`RunReport.final_place_store`, while two named direct fixture/evaluator bodies
+compare `evaluator.state.place_store`. Neither record judges diagnostics,
+state meaning, correctness, coverage, defects, or repair.
+
 The executable computational baseline audit is closed as LAB classification
 evidence. The 15-row matrix has two direct Product Alpha Rust-runtime
 acceptances, ten helper-only `P-COMP-03` rows, and three direct package-check
@@ -110,7 +118,8 @@ production implementation; otherwise it escalates. See
 | 25 | WRK-0009 e5 proof-skeleton identity evidence | Closed scoped result: the registered command passed Lean, 4 theorem-stub support tests, and 23/23 regression commands, but the foundation and emitted tuple mismatch literally at both positions. No mapping, semantic conclusion, or repair was selected. | Macro 1/5 reserve; closed scoped evidence |
 | 26 | Next standing-eligible target triage | Closed selection: planner/Oracle/local review selected WRK-0010 static decision attribution; e21/e22 final-store assertion coverage remains reserve. | Macro 1/5 reserve; closed selection |
 | 27 | WRK-0010 static decision attribution evidence | Closed scoped result: 5 support tests, four static smokes, and 23/23 regression passed. Static decision payload is not literally attributed by the existing formal hook; no diagnostic/defect/schema conclusion or repair was selected. | Macro 1/5 reserve; closed scoped evidence |
-| 28 | Next standing-eligible target triage | In progress: select only a distinct existing-lane falsifier, excluding interpretation or repair of WRK-0010. | Macro 1/5 reserve; self-driven |
+| 28 | WRK-0011 final-store assertion directness evidence | Closed scoped result: in the named e21/e22 source-route bodies no exact `RunReport.final_place_store` equality occurs; two named direct fixture/evaluator bodies directly compare `evaluator.state.place_store`. Six focused tests and 23/23 regression passed in a clean detached worktree. No state meaning, correctness, coverage, defect, or repair conclusion was selected. | Macro 1/5 reserve; closed scoped evidence |
+| 29 | Next standing-eligible target triage | In progress: select only a distinct existing-lane falsifier, excluding interpretation or repair of WRK-0010/0011. | Macro 1/5 reserve; self-driven |
 
 ## self-driven macro phase reading
 
@@ -163,6 +172,8 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - WRK-0008 formal-hook attribution evidence: `plan/wrk-0008-obl027-formal-hook-attribution.md`.
 - WRK-0009 e5 identity selection: `plan/168-wrk0009-e5-skeleton-identity-selection.md`.
 - WRK-0009 e5 identity evidence: `plan/wrk-0009-e5-skeleton-identity.md`.
+- WRK-0010 static decision attribution evidence: `plan/wrk-0010-static-formal-hook-decision-attribution.md`.
+- WRK-0011 final-store assertion directness evidence: `plan/wrk-0011-current-l2-final-store-directness.md`.
 - Mir computational directness audit: `plan/166-mir-computational-baseline-directness-audit.md`.
 - Historical research evidence: `plan/156-t0-t2-research-autonomy-envelope.md` and `plan/157-delegated-theory-research-governance.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.

@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -100,6 +100,12 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   ことを scoped LAB evidence として manifest しました。これは diagnostic meaning、
   defect、schema repair、carrier、theorem/OBL を決めません。詳細は
   `plan/wrk-0010-static-formal-hook-decision-attribution.md` にあります。
+- WRK-0011 は、e21/e22 の四つの named source-route test body に exact
+  `RunReport.final_place_store` comparison がなく、別の二つの fixture/direct-evaluator
+  test body には exact `evaluator.state.place_store` comparison があることを literal に
+  記録しました。状態意味、正しさ、source/fixture equivalence、defect、coverage、修理、
+  theorem/OBL は判断しません。詳細は
+  `plan/wrk-0011-current-l2-final-store-directness.md` にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と

@@ -1262,7 +1262,7 @@
    "summary": "existing current-L2 e21/e22 source route が exact final PlaceStore を直接アサートするか、fixture/direct-evaluator lane に限定されるかを literal に監査する可逆な L3 record。状態意味、同値性、defect、coverage 要求、carrier は選ばない。",
    "open_items": [],
    "path": "working/WRK-0011-current-l2-final-store-directness.md",
-   "bytes": 6951
+   "bytes": 8194
   }
  ]
 }
