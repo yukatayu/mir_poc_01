@@ -108,7 +108,8 @@ production implementation; otherwise it escalates. See
 | 23 | OBL-027 formal-hook attribution | Closed scoped audit: WRK-0008 uses four current-L2 runtime cases and the 23-command regression to show the formal-hook row is a coarse reachability/identity reference, not a same-Place cut-frontier witness. Separate runtime locality remains non-claimed; the Canon working record remains `L3-open`. | Macro 1/5 reserve; closed scoped audit |
 | 24 | Next standing-eligible target triage | Closed selection: planner/Oracle/local source review selected WRK-0009 e5 proof-skeleton literal identity fidelity. Upstream projection loss lacked an existing discriminating record; static verdict/reason and source-route state coverage remain reserve candidates. | Macro 1/5 reserve; closed selection |
 | 25 | WRK-0009 e5 proof-skeleton identity evidence | Closed scoped result: the registered command passed Lean, 4 theorem-stub support tests, and 23/23 regression commands, but the foundation and emitted tuple mismatch literally at both positions. No mapping, semantic conclusion, or repair was selected. | Macro 1/5 reserve; closed scoped evidence |
-| 26 | Next standing-eligible target triage | In progress: compare remaining existing-lane questions for a new structural mismatch, rejecting duplicate tuple-label interpretation and owner-reserved mapping/carrier/OBL/Gate/Phase decisions. | Macro 1/5 reserve; self-driven |
+| 26 | Next standing-eligible target triage | Closed selection: planner/Oracle/local review selected WRK-0010 static decision attribution; e21/e22 final-store assertion coverage remains reserve. | Macro 1/5 reserve; closed selection |
+| 27 | WRK-0010 static decision attribution evidence | In progress: execute the committed four static smokes and 23-command regression, retain only literal attribution classification, and stop before diagnostics/defect/schema interpretation. | Macro 1/5 reserve; self-driven |
 
 ## self-driven macro phase reading
 

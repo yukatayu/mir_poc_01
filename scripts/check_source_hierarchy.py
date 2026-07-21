@@ -254,6 +254,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/166-mir-computational-baseline-directness-audit.md",
         "plan/167-pcomp03-rejection-phase-cross-carrier-audit.md",
         "plan/168-wrk0009-e5-skeleton-identity-selection.md",
+        "plan/169-wrk0010-static-decision-attribution-selection.md",
     ],
     "scripts": [
         "scripts",

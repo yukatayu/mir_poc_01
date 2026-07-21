@@ -148,7 +148,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006, WRK-0007, WRK-0008, and WRK-0009 are manifested L3 evidence; WRK-0009 establishes only literal e5 foundation/active-route tuple mismatch | medium | reopen target triage for a distinct existing-lane question; P008 and any Canon binding/L2 promotion remain owner-reserved |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0009 are manifested L3 evidence; WRK-0010 is registered only to audit static-gate decision attribution | medium | execute WRK-0010's existing-lane literal artifact audit; P008 and any Canon binding/L2 promotion remain owner-reserved |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
