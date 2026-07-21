@@ -197,8 +197,10 @@ would duplicate a known unavailable request.
 
 ## Commit / push status
 
-All review and validation are complete. Integration commit and push are pending
-at report write.
+Governance package commit `8090274e` (`docs: establish delegated theory
+research governance`) passed the recorded validation set and was pushed to
+`origin/main`. This closeout status synchronization is committed and pushed
+immediately after the package commit.
 
 ## Sub-agent session close status
 

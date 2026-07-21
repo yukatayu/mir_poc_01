@@ -204,7 +204,7 @@ decision boundary. It remains a derived view and cannot make a normative claim.
   `make check`.
 - [x] Obtain one final independent review of the complete diff, address valid
   findings, and rerun affected checks.
-- [ ] Commit each coherent package with `git commit --no-gpg-sign`, push it,
+- [x] Commit each coherent package with `git commit --no-gpg-sign`, push it,
   and confirm `main...origin/main` is clean.
 
 ### Task 5: Pilot the research ratchet

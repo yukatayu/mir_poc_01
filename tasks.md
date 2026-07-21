@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 10:21 JST
+最終更新: 2026-07-21 10:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -12,7 +12,7 @@ evidence; `docs/project-status.md` is the concise reader view.
 
 ## current promoted package
 
-The governance adoption package is validated and ready for integration:
+The governance adoption package is integrated:
 `mirrorea_canon/adr/ADR-0014.md` and
 `plan/157-delegated-theory-research-governance.md` now govern L2/L3 working
 theory research. It does not promote a Gate, Phase, implementation, or proof
