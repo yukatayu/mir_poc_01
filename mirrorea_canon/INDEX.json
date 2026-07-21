@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 88,
+ "files": 89,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 4933
+   "bytes": 5237
   },
   {
    "id": "root/north-star",
@@ -1221,6 +1221,20 @@
    "open_items": [],
    "path": "working/WRK-0008-obl027-formal-hook-attribution.md",
    "bytes": 8261
+  },
+  {
+   "id": "working/WRK-0009",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/06-existence-fallback",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "existing current-L2 static e5 route と Lean proof-skeleton の review-unit / emitted-stub identity tuple が literal に整合するかを監査する可逆な L3 record。theorem 意味、OBL、carrier、helper/schema は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0009-current-l2-e5-skeleton-identity.md",
+   "bytes": 6868
   }
  ]
 }
