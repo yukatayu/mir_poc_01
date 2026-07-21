@@ -1220,7 +1220,7 @@
    "summary": "existing current-L2 runtime try/cut formal hook が、same-Place atomic_cut frontier の no-cross 境界を区別して根拠化するかを監査する可逆な L3 record。OBL-027、carrier、helper/schema、適合性は選ばない。",
    "open_items": [],
    "path": "working/WRK-0008-obl027-formal-hook-attribution.md",
-   "bytes": 6774
+   "bytes": 8261
   }
  ]
 }

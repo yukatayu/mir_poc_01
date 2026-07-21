@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -82,12 +82,19 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   metadata-tuple model、OBL-024 の projection modelを比較し、新しい L3 record を
   選びませんでした。既知の scope guard、既存の coupling boundary、または未選択の
   carrier law を言い換えるだけの候補を避けています。
+- WRK-0008 は current-L2 formal hook の attribution を既存レーンで監査しました。
+  cut だけの `e1`、rollback だけの `e2`、両方を含む `e21`、nested Place の
+  `e22` はすべて同じ obligation-shaped row を出します。これは formal-hook row
+  単体が same-Place frontier の証拠ではないことを示す LAB 結果です。current-L2
+  interpreter の別の Place-sensitive rollback path を否定せず、OBL-027、carrier、
+  helper/schema、runtime、Gate/Phase は変更しません。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
 `plan/157-delegated-theory-research-governance.md`、WRK の Git evidence
 provenance は `plan/159-wrk-evidence-commit-integrity-recut.md`、実行可能
-サンプルの正確な分類は `samples_progress.md` にあります。
+サンプルの正確な分類は `samples_progress.md` にあります。WRK-0008 の scoped
+evidence は `plan/wrk-0008-obl027-formal-hook-attribution.md` にあります。
 
 ## Roadmap の読み方
 

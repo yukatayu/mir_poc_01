@@ -36,12 +36,21 @@ Non-claims: This does not identify an LAB `runtime_try_cut_cluster` or its event
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending pre-registered existing-lane execution.
-Negative evidence: Pending pre-registered existing-lane execution.
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: This record is limited to the declared existing LAB locations and disposable `/tmp` outputs. It changes no Canon theory, OBL state, carrier, helper, schema, source fixture, test, runner, conformance, Gate/Phase, runtime, or public behavior.
+Positive evidence: The registered run passed the five formal-hook support tests, two source-sample runner tests, four runtime formal-hook smokes, and the complete 23-command current-L2 regression. `e1` has atomic-cut without rollback, `e2` has rollback without atomic-cut, `e21` has both, and nested-Place `e22` has both; all four emitted the same single `runtime_try_cut_cluster` / `rollback_cut_non_interference` row shape with only fixture/runtime-cluster references.
+Negative evidence: The expected discriminating falsifier did not occur. The emitted row contains no Place/locus, occurrence identity, causal/order relation, frontier, removed-occurrence set, or rollback-crossing relation. The existing current-L2 interpreter has a separate Place-sensitive rollback snapshot path and distinct `e21` / `e22` stores; this record does not claim that the runtime lacks locality.
+Evidence artifacts: LAB:plan/wrk-0008-obl027-formal-hook-attribution.md@efeef79192c5b5bd76808f3c1ddde3e5f33519b1:56711c4d18c6a3222abf07abd03da80e7c8e58352671786ade5f4d2bf9ef727c
+Evidence commits: efeef79192c5b5bd76808f3c1ddde3e5f33519b1
+Impact / non-effects: This retained L3 evidence uses only the declared `plan` and `samples/current-l2` lane plus disposable `/tmp` outputs. It classifies the LAB formal-hook row as coarse reachability/identity evidence only. It changes no Canon theory, OBL state, carrier, helper, schema, source fixture, test, runner, conformance, Gate/Phase, runtime, or public behavior.
 Independent review: not-required-for-L3
+
+### Evidence addendum — 2026-07-22
+
+The evidence commit is `efeef79192c5b5bd76808f3c1ddde3e5f33519b1` and is
+append-only ownership for the retained LAB plan artifact. The formal-hook row
+is not promoted and must not be treated as a proof/model-check result, a
+same-Place frontier witness, or an OBL-027 status change. A read-only review
+confirmed the distinction between the row's coarse output and the separate
+LAB-local interpreter behavior.
 
 ## Supersession
 

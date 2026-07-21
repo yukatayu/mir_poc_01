@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 04:29 JST
+最終更新: 2026-07-22 05:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -46,6 +46,14 @@ explicit LAB scope or the recorded repair-realization boundary; and OBL-024
 projection variants require an unselected field-functionality reading. This is
 a new evidence-backed priority disposition, not a Canon ban on future L3 work.
 
+WRK-0008's scoped L3 audit is now closed in the existing current-L2 lane; its
+Canon working record remains `L3-open`. Its
+four discriminating cases show that the formal-hook row accepts either cut or
+rollback event presence and carries only symbolic identity references, not a
+same-Place frontier relation. The current interpreter's separate locality
+handling remains outside that row. This closes the attribution question only;
+it does not select a carrier or change OBL-027, theory, runtime, or lifecycle.
+
 The executable computational baseline audit is closed as LAB classification
 evidence. The 15-row matrix has two direct Product Alpha Rust-runtime
 acceptances, ten helper-only `P-COMP-03` rows, and three direct package-check
@@ -89,6 +97,8 @@ production implementation; otherwise it escalates. See
 | 20 | OBL-001 result/write coverage pre-registration and evidence | Closed: WRK-0007 manifests an imported finite model where a successful experiment-local Result has a labeled write outside `GeneratedWrite` while the unchanged LAB draft holds. It is a statement-shape gap only, not a THM-001 counterexample or Core/result interface selection. | Macro 1/5 reserve; closed L3 evidence |
 | 21 | Post-WRK-0007 candidate selection | Closed: Canon/LAB source audit, independent reviews, and temporary Oracle adjudication found no distinct next L3 record. OBL-001 request/result variants duplicate prior evidence; OBL-025 scope/metadata variants are known LAB boundaries; OBL-024 extra-projection variants need an unselected carrier law. | Macro 1/5 reserve; closed selection, reopen only on a new structural mismatch |
 | 22 | Mir computational baseline directness audit | Closed: reproduced the 15-row matrix, direct CLI probes, Rust semantic/schema/runtime tests, source mapping, and Oracle boundary review. It records direct fixtures, helper-only fixtures, and separate closed-registry runtime tests without adding implementation. | Macro 2 parser-free substrate; closed audit |
+| 23 | OBL-027 formal-hook attribution | Closed scoped audit: WRK-0008 uses four current-L2 runtime cases and the 23-command regression to show the formal-hook row is a coarse reachability/identity reference, not a same-Place cut-frontier witness. Separate runtime locality remains non-claimed; the Canon working record remains `L3-open`. | Macro 1/5 reserve; closed scoped audit |
+| 24 | Next standing-eligible target triage | In progress: compare remaining existing-lane questions for a new structural mismatch, while rejecting duplicate models and owner-reserved carrier/OBL/Gate/Phase decisions. | Macro 1/5 reserve; self-driven |
 
 ## self-driven macro phase reading
 
@@ -114,7 +124,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
 | textual runnable research core | whether the existing Full System V1 source-first lane can be used as L3 retained evidence without changing governance | current WRK validator permits only `plan`, `samples/clean-near-end`, `samples/current-l2`, and `samples/lean`; the Full System V1 lane is outside that boundary, so retain this as an escalation candidate rather than silently widening the permitted roots |
-| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; choose a new candidate with a falsifier |
+| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. Choose a new candidate with a falsifier rather than a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |
 
@@ -138,6 +148,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - OBL-001 Result/write coverage boundary: `plan/164-obl001-result-write-coverage-boundary.md`.
 - WRK-0007 evidence: `plan/wrk-0007-obl001-result-write-coverage.md`.
 - Post-WRK-0007 candidate selection: `plan/165-post-wrk0007-candidate-selection.md`.
+- WRK-0008 formal-hook attribution evidence: `plan/wrk-0008-obl027-formal-hook-attribution.md`.
 - Mir computational directness audit: `plan/166-mir-computational-baseline-directness-audit.md`.
 - Historical research evidence: `plan/156-t0-t2-research-autonomy-envelope.md` and `plan/157-delegated-theory-research-governance.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
