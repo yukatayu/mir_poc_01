@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 20:14 JST
+最終更新: 2026-07-21 20:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -34,7 +34,7 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 6 | OBL-021 countermodel evidence | Closed: the registered red/green Lean workflow was retained as WRK-0002 L3 evidence. It demonstrates only that the current LAB draft does not itself force result identity or projection non-vacuity; it remains `not-promoted`. | Macro 1/5 reserve; closed |
 | 7 | OBL-021 premise-gap triage | Closed: the countermodel, temporary Oracle review, and independent Canon audit establish that Canon fixes the intended tuple/function contract but does not furnish the LAB draft's projection witness or extensionality bridge. | Macro 1/5 reserve; closed |
 | 8 | OBL-021 projection-extensionality evidence | Closed: WRK-0003 retained a total/unique-projection plus equality countermodel. It isolates the absence of a joint extensionality/direct-Result bridge without selecting either; it remains `not-promoted`. | Macro 1/5 reserve; closed |
-| 9 | OBL-021 bridge-shape triage | Current next package: use the two countermodels and pending advisory review to compare a direct abstract Result relation against a joint-extensionality premise, then pre-register at most one falsifiable L3 candidate. Do not select a final equality or alter OBL status. | Macro 1/5 reserve; 1 research session |
+| 9 | OBL-021 outcome-totality pre-registration | Current next package: pre-register a countermodel testing whether a well-scoped input can satisfy the LAB draft while having neither a successful Result nor a Diagnostic. Do not assign totality to a Canon obligation or alter OBL status. | Macro 1/5 reserve; 1 research session |
 
 ## self-driven macro phase reading
 

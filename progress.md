@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 20:14 JST
+最終更新: 2026-07-21 20:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,12 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 20:25 JST: appended WRK-0003 correction evidence after Oracle
+  review found that its first aggregate theorem did not package all nine
+  projection and equality premises. The corrected theorem compiles and retains
+  the same L3 non-entailment result. Planner review selected an outcome-totality
+  countermodel as the next more primitive package; no final bridge, theory/11,
+  Gate/Phase, conformance, implementation, or public status changed.
 - 2026-07-21 20:14 JST: manifested WRK-0003's L3 Lean countermodel evidence.
   Lean 4.29.1 checks that all nine result projections can be total/unique and
   all component comparisons can be native equality while two distinct success

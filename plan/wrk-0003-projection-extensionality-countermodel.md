@@ -57,6 +57,11 @@ relation bridge がないという L3 の限定結論である。どの bridge �
 equality、Diagnostic equivalence、OBL-021 の proof/status は未決のまま残る。evidence
 commit の SHA と artifact hash は WRK-0003 を正本とする。
 
+Oracle の advisory review は、初回 aggregate theorem が CoreTerm projection だけを
+束ねていたことを検出した。`701a001f` の追加 evidence は全九 projection、全 component
+equality、draft、distinct success を一つの theorem に束ねてこの packaging 欠落を訂正した。
+これは結論を強めず、すでに分離済みの L3 evidence を明確化するだけである。
+
 ## 変更境界
 
 変更候補は `samples/lean/lab-statements/obl021/` と `plan/` に限る。Canon working record と
