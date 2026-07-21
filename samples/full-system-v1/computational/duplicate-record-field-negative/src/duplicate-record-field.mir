@@ -1,0 +1,10 @@
+module Computational.DuplicateRecordFieldNegative
+
+record Pair {
+  value: Int64,
+}
+
+fn duplicate(x: Int64) -> Int64 {
+  let pair: Pair = Pair { value: x, value: 0 }
+  return pair.value
+}

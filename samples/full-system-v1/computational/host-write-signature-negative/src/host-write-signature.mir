@@ -1,0 +1,12 @@
+module Computational.HostWriteSignatureNegative
+
+capability HostWrite
+
+effect write_int(y: Text) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostWrite {
+  perform write_int("not-an-int") via host_output
+}

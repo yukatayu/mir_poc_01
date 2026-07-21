@@ -97,6 +97,78 @@
       "current_status": "executable",
       "source": "undeclared-capability-negative/src/undeclared-capability.mir",
       "expected": "undeclared-capability-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-write-capability-negative",
+      "root_name": "host-write-capability-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-write-capability-negative/src/host-write-capability.mir",
+      "expected": "host-write-capability-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-duplicate-record-field-negative",
+      "root_name": "duplicate-record-field-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "duplicate-record-field-negative/src/duplicate-record-field.mir",
+      "expected": "duplicate-record-field-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-record-equality-negative",
+      "root_name": "record-equality-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "record-equality-negative/src/record-equality.mir",
+      "expected": "record-equality-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-fixed-array-equality-negative",
+      "root_name": "fixed-array-equality-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "fixed-array-equality-negative/src/fixed-array-equality.mir",
+      "expected": "fixed-array-equality-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-write-signature-negative",
+      "root_name": "host-write-signature-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-write-signature-negative/src/host-write-signature.mir",
+      "expected": "host-write-signature-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-read-capability-negative",
+      "root_name": "host-read-capability-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-read-capability-negative/src/host-read-capability.mir",
+      "expected": "host-read-capability-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-adapter-function-context-negative",
+      "root_name": "host-adapter-function-context-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-adapter-function-context-negative/src/host-adapter-function-context.mir",
+      "expected": "host-adapter-function-context-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-adapter-ambient-capability-negative",
+      "root_name": "host-adapter-ambient-capability-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-adapter-ambient-capability-negative/src/host-adapter-ambient-capability.mir",
+      "expected": "host-adapter-ambient-capability-negative/expected/check.json"
+    },
+    {
+      "sample_id": "mir-02-host-read-signature-negative",
+      "root_name": "host-read-signature-negative",
+      "stage": "P-MIR-02",
+      "current_status": "executable",
+      "source": "host-read-signature-negative/src/host-read-signature.mir",
+      "expected": "host-read-signature-negative/expected/check.json"
     }
   ]
 }

@@ -10,6 +10,9 @@ use mir_ast::textual_alpha::{
     parse_textual_mir_report_path, resolve_textual_mir_module_reference,
 };
 
+use super::adapter_policy::{
+    HostAdapterInput, HostAdapterOutput, HostAdapterPolicy, resolve_host_adapter_policy,
+};
 use super::typed_ir::{
     FullSystemV1CheckReport, FullSystemV1Obligation, TypedBinaryOp, TypedBindValue,
     TypedCapabilityDecl, TypedContractClause, TypedEffectDecl, TypedEffectOutput, TypedExpr,
@@ -990,6 +993,41 @@ fn lower_perform_call(
         Resolution::Found(effect) => {
             required_capabilities = effect.value.required_capabilities.clone();
             failure_row = effect.value.failure_row.clone();
+            let adapter_policy =
+                resolve_host_adapter_policy(&effect.value.effect_name, &call.boundary_ref);
+            if let Some(policy) = adapter_policy {
+                if !host_adapter_signature_matches(effect.value, policy) {
+                    diagnostics.push(diagnostic(
+                        "adapter_effect_signature_mismatch",
+                        format!(
+                            "perform `{}` via `{}` does not match the bounded host adapter signature",
+                            effect.value.effect_name, call.boundary_ref
+                        ),
+                        call.span.clone(),
+                    ));
+                }
+                if !effect
+                    .value
+                    .required_capabilities
+                    .iter()
+                    .any(|capability| capability == policy.required_capability)
+                {
+                    diagnostics.push(diagnostic(
+                        "adapter_capability_policy_mismatch",
+                        format!(
+                            "perform `{}` via `{}` requires capability `{}` in the effect declaration",
+                            effect.value.effect_name, call.boundary_ref, policy.required_capability
+                        ),
+                        call.span.clone(),
+                    ));
+                }
+                if !required_capabilities
+                    .iter()
+                    .any(|capability| capability == policy.required_capability)
+                {
+                    required_capabilities.push(policy.required_capability.to_string());
+                }
+            }
             output_type = effect.value.output.as_ref().map(|output| {
                 lower_type(
                     &output.output_type,
@@ -1055,6 +1093,32 @@ fn lower_perform_call(
                         ));
                     }
                 }
+                if let Some(policy) = adapter_policy
+                    && !effect
+                        .value
+                        .required_capabilities
+                        .iter()
+                        .any(|capability| capability == policy.required_capability)
+                    && !ambient_capabilities.contains(policy.required_capability)
+                {
+                    diagnostics.push(diagnostic(
+                        "capability_requirement_missing",
+                        format!(
+                            "perform `{}` requires capability `{}` in the ambient transition row",
+                            effect.value.effect_name, policy.required_capability
+                        ),
+                        call.span.clone(),
+                    ));
+                }
+            } else if adapter_policy.is_some() {
+                diagnostics.push(diagnostic(
+                    "capability_context_missing",
+                    format!(
+                        "perform `{}` via `{}` requires an ambient transition capability row",
+                        effect.value.effect_name, call.boundary_ref
+                    ),
+                    call.span.clone(),
+                ));
             }
         }
     }
@@ -1204,6 +1268,19 @@ fn lower_expr(
                         .iter()
                         .map(|field| field.field_name.clone())
                         .collect::<BTreeSet<_>>();
+                    let mut seen_fields = BTreeSet::new();
+                    for field in fields {
+                        if !seen_fields.insert(field.field_name.clone()) {
+                            diagnostics.push(diagnostic(
+                                "duplicate_record_field",
+                                format!(
+                                    "record `{record_name}` supplies field `{}` more than once",
+                                    field.field_name
+                                ),
+                                field.span.clone(),
+                            ));
+                        }
+                    }
                     let actual_fields = fields
                         .iter()
                         .map(|field| field.field_name.clone())
@@ -1550,8 +1627,18 @@ fn lower_binary_result_type(
             }
         }
         Op::Equal | Op::NotEqual => {
-            if types_compatible(&left.ty, &right.ty) {
+            if types_compatible(&left.ty, &right.ty) && equality_type_supported(&left.ty) {
                 TypedType::Bool
+            } else if types_compatible(&left.ty, &right.ty) {
+                diagnostics.push(diagnostic(
+                    "equality_type_unsupported",
+                    format!(
+                        "equality is not admitted for type `{}` at the alpha checker floor; only Int64, Float64, Bool, and Text are supported",
+                        left.ty.display_name()
+                    ),
+                    left.span.clone(),
+                ));
+                TypedType::Error
             } else {
                 diagnostics.push(diagnostic(
                     "binary_type_mismatch",
@@ -1903,6 +1990,38 @@ fn require_exact_type(
 
 fn types_compatible(expected: &TypedType, actual: &TypedType) -> bool {
     expected.is_error() || actual.is_error() || expected == actual
+}
+
+fn equality_type_supported(ty: &TypedType) -> bool {
+    matches!(
+        ty,
+        TypedType::Int64
+            | TypedType::Float64
+            | TypedType::Bool
+            | TypedType::Text
+            | TypedType::Error
+    )
+}
+
+fn host_adapter_signature_matches(
+    effect: &mir_ast::textual_alpha::AstEffectDecl,
+    policy: HostAdapterPolicy,
+) -> bool {
+    let inputs_match = match policy.input {
+        HostAdapterInput::None => effect.parameters.is_empty(),
+        HostAdapterInput::OneInt64 => {
+            effect.parameters.len() == 1
+                && matches!(effect.parameters[0].param_type, AstType::Int64)
+        }
+    };
+    let output_matches = match policy.output {
+        HostAdapterOutput::Unit => effect.output.is_none(),
+        HostAdapterOutput::Int64 => matches!(
+            effect.output.as_ref().map(|output| &output.output_type),
+            Some(AstType::Int64)
+        ),
+    };
+    inputs_match && output_matches
 }
 
 fn matches_symbol(query: &str, module_path: &str, declaration_name: &str) -> bool {

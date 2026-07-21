@@ -35,8 +35,8 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         payload = _run_helper("matrix")
 
         self.assertEqual(payload["family"], "full_system_v1_typed_ir")
-        self.assertEqual(payload["sample_count"], 12)
-        self.assertEqual(payload["executable_count"], 12)
+        self.assertEqual(payload["sample_count"], 21)
+        self.assertEqual(payload["executable_count"], 21)
         self.assertEqual(payload["validation_errors"], [])
 
     def test_runtime_matrix_reports_runtime_row_set(self) -> None:
@@ -74,6 +74,26 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertTrue(payload["accepted"])
         self.assertEqual(payload["actual"]["record_summaries"][0]["record_name"], "Pair")
         self.assertEqual(payload["actual"]["diagnostic_codes"], [])
+
+    def test_checker_invariant_negative_samples_have_expected_diagnostics(self) -> None:
+        cases = {
+            "mir-02-host-write-capability-negative": "adapter_capability_policy_mismatch",
+            "mir-02-duplicate-record-field-negative": "duplicate_record_field",
+            "mir-02-record-equality-negative": "equality_type_unsupported",
+            "mir-02-fixed-array-equality-negative": "equality_type_unsupported",
+            "mir-02-host-write-signature-negative": "adapter_effect_signature_mismatch",
+            "mir-02-host-read-capability-negative": "adapter_capability_policy_mismatch",
+            "mir-02-host-adapter-function-context-negative": "capability_context_missing",
+            "mir-02-host-adapter-ambient-capability-negative": "capability_requirement_missing",
+            "mir-02-host-read-signature-negative": "adapter_effect_signature_mismatch",
+        }
+
+        for sample_id, expected_diagnostic in cases.items():
+            with self.subTest(sample_id=sample_id):
+                payload = _run_helper("run", sample_id)
+                self.assertTrue(payload["passed"])
+                self.assertFalse(payload["actual"]["accepted"])
+                self.assertIn(expected_diagnostic, payload["actual"]["diagnostic_codes"])
 
     def test_runtime_positive_sample_keeps_trace_summary(self) -> None:
         payload = _run_helper("run-runtime", "mir-03-control-flow-positive")
@@ -345,10 +365,10 @@ class FullSystemV1SamplesTests(unittest.TestCase):
 
         self.assertEqual(payload["failed"], [])
         self.assertEqual(payload["validation_errors"], [])
-        self.assertEqual(len(payload["checker"]["passed"]), 12)
+        self.assertEqual(len(payload["checker"]["passed"]), 21)
         self.assertEqual(len(payload["runtime"]["passed"]), 17)
         self.assertEqual(len(payload["operational"]["passed"]), 12)
-        self.assertEqual(len(payload["passed"]), 41)
+        self.assertEqual(len(payload["passed"]), 50)
 
 
 def subprocess_completed(stdout: str) -> object:

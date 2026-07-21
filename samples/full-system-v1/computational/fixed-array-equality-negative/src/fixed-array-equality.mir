@@ -1,0 +1,7 @@
+module Computational.FixedArrayEqualityNegative
+
+fn same(x: Int64) -> Bool {
+  let left: [Int64; 1] = [x]
+  let right: [Int64; 1] = [x]
+  return left != right
+}

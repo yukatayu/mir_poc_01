@@ -1,0 +1,11 @@
+module Computational.RecordEqualityNegative
+
+record Pair {
+  value: Int64,
+}
+
+fn same(x: Int64) -> Bool {
+  let left: Pair = Pair { value: x }
+  let right: Pair = Pair { value: x }
+  return left = right
+}

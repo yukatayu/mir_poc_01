@@ -198,7 +198,7 @@ class FullSystemV1ReleaseCheckTests(unittest.TestCase):
                 payload = {
                     "failed": [],
                     "validation_errors": [],
-                    "passed": [f"row-{index}" for index in range(40)],
+                    "passed": [f"row-{index}" for index in range(49)],
                 }
             stdout = "" if payload is None else json.dumps(payload)
             return runner.CommandResult(
@@ -353,7 +353,7 @@ def payload_for(name: str) -> dict | None:
         "helper:full-v1-check-all": {
             "failed": [],
             "validation_errors": [],
-            "passed": [f"row-{index}" for index in range(41)],
+            "passed": [f"row-{index}" for index in range(50)],
         },
         "helper:posegraph-runtime": {
             "sample_count": 9,

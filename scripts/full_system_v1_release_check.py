@@ -105,7 +105,7 @@ COMPATIBILITY_FLOOR_COMMANDS = [
 EXPECTED_PASSED_COUNTS = {
     "helper:textual-mir": 10,
     "helper:full-v1-operational-check": 12,
-    "helper:full-v1-check-all": 41,
+    "helper:full-v1-check-all": 50,
     "helper:posegraph-runtime": 9,
     "helper:projection-ir": 6,
     "helper:provider-admission": 5,

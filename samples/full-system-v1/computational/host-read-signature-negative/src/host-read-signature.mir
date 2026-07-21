@@ -1,0 +1,13 @@
+module Computational.HostReadSignatureNegative
+
+capability HostRead
+
+effect read_int(seed: Int64) {
+  requires HostRead
+  output x: Text
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead {
+  x <- perform read_int(1) via host_input
+}

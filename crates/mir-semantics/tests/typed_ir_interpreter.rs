@@ -232,6 +232,291 @@ transition main at HostPlace {
 }
 
 #[test]
+fn typed_ir_checker_rejects_host_output_without_host_write_requirement() {
+    let root = unique_temp_dir("mir-full-system-v1-host-write-requirement");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-write-with-read-only-effect.mir",
+        r#"module FullSystemV1.HostWriteRequirement
+
+capability HostRead
+
+effect write_int(y: Int64) {
+  requires HostRead
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead {
+  perform write_int(1) via host_output
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(
+        diagnostics(&report).contains(&"adapter_capability_policy_mismatch"),
+        "{report:?}"
+    );
+}
+
+#[test]
+fn typed_ir_checker_rejects_host_adapter_signature_mismatch() {
+    let root = unique_temp_dir("mir-full-system-v1-host-adapter-signature");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-adapter-signature-mismatch.mir",
+        r#"module FullSystemV1.HostAdapterSignatureMismatch
+
+capability HostWrite
+
+effect write_int(y: Text) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostWrite {
+  perform write_int("not-an-int") via host_output
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(
+        diagnostics(&report).contains(&"adapter_effect_signature_mismatch"),
+        "{report:?}"
+    );
+}
+
+#[test]
+fn typed_ir_checker_rejects_host_input_without_host_read_requirement() {
+    let root = unique_temp_dir("mir-full-system-v1-host-read-requirement");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-read-with-write-only-effect.mir",
+        r#"module FullSystemV1.HostReadRequirement
+
+capability HostWrite
+
+effect read_int {
+  requires HostWrite
+  output x: Int64
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostWrite {
+  x <- perform read_int via host_input
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(
+        diagnostics(&report).contains(&"adapter_capability_policy_mismatch"),
+        "{report:?}"
+    );
+}
+
+#[test]
+fn typed_ir_checker_rejects_host_input_signature_mismatch() {
+    let root = unique_temp_dir("mir-full-system-v1-host-read-signature");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-read-signature-mismatch.mir",
+        r#"module FullSystemV1.HostReadSignatureMismatch
+
+capability HostRead
+
+effect read_int(seed: Int64) {
+  requires HostRead
+  output x: Text
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead {
+  x <- perform read_int(1) via host_input
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(
+        diagnostics(&report).contains(&"adapter_effect_signature_mismatch"),
+        "{report:?}"
+    );
+}
+
+#[test]
+fn typed_ir_checker_rejects_host_adapter_perform_without_ambient_capability_context() {
+    let root = unique_temp_dir("mir-full-system-v1-host-adapter-function-context");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-adapter-function-context.mir",
+        r#"module FullSystemV1.HostAdapterFunctionContext
+
+capability HostWrite
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+fn emit(x: Int64) -> Int64 {
+  perform write_int(x) via host_output
+  return x
+}
+"#,
+    );
+
+    let report = run_textual_mir_function_path(&source, "emit", 41);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(
+        report.outcome,
+        FullSystemV1ExecutionOutcome::StaticRejection
+    );
+    assert_eq!(
+        diagnostics(&report.check_report),
+        vec!["capability_context_missing"]
+    );
+    assert!(report.compute_trace.is_empty());
+    assert!(report.effect_session.host_output.is_empty());
+}
+
+#[test]
+fn typed_ir_checker_rejects_host_adapter_perform_missing_transition_capability() {
+    let root = unique_temp_dir("mir-full-system-v1-host-adapter-ambient-capability");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/host-adapter-ambient-capability.mir",
+        r#"module FullSystemV1.HostAdapterAmbientCapability
+
+capability HostRead
+capability HostWrite
+
+effect write_int(y: Int64) {
+  requires HostWrite
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead {
+  perform write_int(1) via host_output
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert_eq!(diagnostics(&report), vec!["capability_requirement_missing"]);
+}
+
+#[test]
+fn typed_ir_checker_rejects_duplicate_record_construct_fields() {
+    let root = unique_temp_dir("mir-full-system-v1-duplicate-record-field");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/duplicate-record-field.mir",
+        r#"module FullSystemV1.DuplicateRecordField
+
+record Pair {
+  value: Int64,
+}
+
+fn duplicate(x: Int64) -> Int64 {
+  let pair: Pair = Pair { value: x, value: 0 }
+  return pair.value
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(diagnostics(&report).contains(&"duplicate_record_field"));
+    let duplicate = report
+        .diagnostics
+        .iter()
+        .find(|diagnostic| diagnostic.code == "duplicate_record_field")
+        .expect("duplicate field diagnostic should be present");
+    assert_eq!(duplicate.span.line, 8);
+    assert_eq!(duplicate.span.column, 37);
+}
+
+#[test]
+fn typed_ir_checker_rejects_record_equality_until_its_semantics_are_decided() {
+    let root = unique_temp_dir("mir-full-system-v1-record-equality");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/record-equality.mir",
+        r#"module FullSystemV1.RecordEquality
+
+record Pair {
+  value: Int64,
+}
+
+fn same(x: Int64) -> Bool {
+  let left: Pair = Pair { value: x }
+  let right: Pair = Pair { value: x }
+  return left != right
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(diagnostics(&report).contains(&"equality_type_unsupported"));
+}
+
+#[test]
+fn typed_ir_checker_rejects_fixed_array_equality_until_its_semantics_are_decided() {
+    let root = unique_temp_dir("mir-full-system-v1-fixed-array-equality");
+    fs::create_dir_all(&root).expect("temp root should be created");
+    fs::write(root.join("matrix.json"), "{}").expect("matrix marker should be written");
+    let source = write_module(
+        &root,
+        "main/src/fixed-array-equality.mir",
+        r#"module FullSystemV1.FixedArrayEquality
+
+fn same(x: Int64) -> Bool {
+  let left: [Int64; 1] = [x]
+  let right: [Int64; 1] = [x]
+  return left = right
+}
+"#,
+    );
+
+    let report = check_textual_mir_module_path(source);
+
+    assert!(!report.accepted, "{report:?}");
+    assert!(diagnostics(&report).contains(&"equality_type_unsupported"));
+}
+
+#[test]
 fn typed_ir_checker_rejects_semantically_broken_imported_modules() {
     let root = unique_temp_dir("mir-full-system-v1-check-imported-bad");
     fs::create_dir_all(&root).expect("temp root should be created");

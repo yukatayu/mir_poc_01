@@ -7,6 +7,7 @@ use mir_ast::textual_alpha::{AstContractClauseKind, TextualMirDiagnostic};
 use serde::{Deserialize, Serialize};
 
 use super::{
+    adapter_policy::{HostAdapterOperation, resolve_host_adapter_policy},
     checker::{analyze_textual_mir_program_path, build_check_report},
     typed_ir::{
         FullSystemV1CheckReport, FullSystemV1Obligation, TypedBinaryOp, TypedBindValue,
@@ -969,40 +970,45 @@ impl Interpreter {
         let effect_name = call.effect_name.as_str();
         let boundary_ref = call.boundary_ref.as_str();
 
+        if let Some(policy) = resolve_host_adapter_policy(effect_name, boundary_ref) {
+            return match policy.operation {
+                HostAdapterOperation::ReadInt => {
+                    let value =
+                        self.effect_session
+                            .take_host_input()
+                            .ok_or_else(|| RuntimeError {
+                                code: "adapter_unavailable".to_string(),
+                                message: "host_input is empty".to_string(),
+                                module_path: module_path.to_string(),
+                                function_id: function_name.to_string(),
+                            })?;
+                    self.record_event(
+                        trace_index,
+                        "host_read",
+                        format!("read_int -> {}", snapshot_value(&value).summary),
+                    );
+                    Ok(Some(value))
+                }
+                HostAdapterOperation::WriteInt => {
+                    let value = expect_single_argument(
+                        module_path,
+                        function_name,
+                        effect_name,
+                        &arguments,
+                        &TypedType::Int64,
+                    )?;
+                    self.effect_session.host_outputs.push(value.clone());
+                    self.record_event(
+                        trace_index,
+                        "host_write",
+                        format!("write_int <- {}", snapshot_value(&value).summary),
+                    );
+                    Ok(None)
+                }
+            };
+        }
+
         match (effect_name, boundary_ref) {
-            ("read_int", "host_input") => {
-                let value = self
-                    .effect_session
-                    .take_host_input()
-                    .ok_or_else(|| RuntimeError {
-                        code: "adapter_unavailable".to_string(),
-                        message: "host_input is empty".to_string(),
-                        module_path: module_path.to_string(),
-                        function_id: function_name.to_string(),
-                    })?;
-                self.record_event(
-                    trace_index,
-                    "host_read",
-                    format!("read_int -> {}", snapshot_value(&value).summary),
-                );
-                Ok(Some(value))
-            }
-            ("write_int", "host_output") => {
-                let value = expect_single_argument(
-                    module_path,
-                    function_name,
-                    effect_name,
-                    &arguments,
-                    &TypedType::Int64,
-                )?;
-                self.effect_session.host_outputs.push(value.clone());
-                self.record_event(
-                    trace_index,
-                    "host_write",
-                    format!("write_int <- {}", snapshot_value(&value).summary),
-                );
-                Ok(None)
-            }
             ("seal_places", "session_admin") => {
                 expect_zero_arguments(module_path, function_name, effect_name, &arguments)?;
                 self.effect_session.all_places_sealed = true;

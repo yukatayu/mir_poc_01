@@ -34,7 +34,7 @@
 - `full-system-v1/`
   source-first Full System V1 sample root under `specs/33..38` / `plan/58..63`
   - `P-MIR-01` actualizes `samples/full-system-v1/computational/` as the first textual Mir alpha grammar lane with 2 positive rows, 8 negative rows, `matrix.json`, `expected/parse.json`, and `python3 scripts/textual_mir_samples.py check-all --format json`
-  - `P-MIR-02` adds the first typed checker lane with 3 positive rows, 9 negative rows, `typed-ir-matrix.json`, `expected/check.json`, and explicit accepted/residual obligations
+  - `P-MIR-02` adds the first typed checker lane with 3 positive rows, 18 negative rows, `typed-ir-matrix.json`, `expected/check.json`, explicit accepted/residual obligations, host-adapter signature/capability/context rejection, duplicate-record-field rejection, and restricted scalar equality
   - `P-MIR-03` adds the first pure interpreter lane with `runtime-matrix.json`, `expected/run.json`, `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`, `cargo test -p mir-runtime --test full_system_v1_session -- --nocapture`, and `python3 scripts/full_system_v1_samples.py check-all --format json`
   - `P-MIR-04` widens the same root to bounded transition/effect rows for host read/write, publish/observe, witness/handoff, and local atomic-cut negatives
   - `P-POSE-03` / `P-POSE-04` actualize `samples/full-system-v1/avatar-pose/` as the bounded runtime PoseGraph lane with 9 executable rows, `matrix.json`, `expected/run.json`, `cargo test -p mir-runtime --test posegraph_runtime -- --nocapture`, and `python3 scripts/posegraph_runtime_samples.py check-all --format json`

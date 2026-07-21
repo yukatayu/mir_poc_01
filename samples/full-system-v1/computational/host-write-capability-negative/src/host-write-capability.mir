@@ -1,0 +1,13 @@
+module Computational.HostWriteCapabilityNegative
+
+capability HostRead
+capability HostWrite
+
+effect write_int(y: Int64) {
+  requires HostRead
+  failure AdapterUnavailable
+}
+
+transition main at HostPlace requires HostRead, HostWrite {
+  perform write_int(1) via host_output
+}

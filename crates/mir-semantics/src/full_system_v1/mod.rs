@@ -1,3 +1,4 @@
+mod adapter_policy;
 mod checker;
 mod interpreter;
 mod projection;

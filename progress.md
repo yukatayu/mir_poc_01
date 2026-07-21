@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 23:08 JST
+最終更新: 2026-07-22 00:20 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,18 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-22 00:20 JST: closed the bounded Full System V1 semantic-invariant
+  maintenance package. The checker and runtime now share a private exact-pair
+  host-adapter policy; static checking verifies adapter signature, the
+  operation-specific declared/ambient capability requirement, and the presence
+  of a transition capability context before runtime. It also rejects duplicate
+  record construction fields and record/fixed-array equality. The checker
+  corpus is now 3 positive / 18 negative rows, and the aggregate
+  checker/runtime/operational partition is 21/17/12 = 50. The final release
+  workflow accepted all 29 planned commands. This is LAB typed
+  boundary evidence only: it does not authenticate a runtime principal, create
+  a public adapter ABI, decide composite equality, or alter Canon,
+  conformance, workflow classification, Gate/Phase, or public-product status.
 - 2026-07-21 23:08 JST: completed the remaining Full System V1 helper
   exit-code audit. Textual parser, PoseGraph, and projection/local-split rows
   now fail closed unless their nested command exits 0 for accepted output or 2

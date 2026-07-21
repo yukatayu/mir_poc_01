@@ -25,6 +25,9 @@ Current scope:
     - undeclared effect
     - missing effect failure row
     - undeclared capability requirement
+    - host adapter signature, operation-capability, and missing transition-context mismatch
+    - duplicate record construction field
+    - record or fixed-array equality outside the bounded scalar equality floor
 - `P-MIR-03`
   - source-derived runtime acceptance for add-one, lexical scope, arrays, records, control-flow, and imports
   - explicit split between static rejection and runtime rejection

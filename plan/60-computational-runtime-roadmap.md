@@ -42,6 +42,18 @@ This is first-floor evidence. It is not Rust-level language completion.
 - `python3 scripts/full_system_v1_samples.py runtime-matrix --format json`
 - `python3 scripts/full_system_v1_samples.py check-all --format json`
 
+The checker/runtime share a private exact-pair host-adapter policy for the
+existing `read_int@host_input` and `write_int@host_output` examples. The
+checker verifies the adapter signature and operation-specific minimum
+capability, carries that minimum in the typed perform row, and rejects adapter
+use without an ambient transition capability row. It also rejects duplicate
+record construction fields and non-scalar equality before evaluation. The
+active checker corpus is 3 positive and 18 negative rows. This is a bounded
+LAB safeguard: it does not authenticate an executing principal, define a
+public adapter ABI, infer capability inheritance through functions, or decide
+record/array equality semantics. The final bounded release workflow accepted
+all 29 planned commands with the 21/17/12 = 50 source-matrix partition.
+
 ## package sequence
 
 | Package | Goal | Close condition |
