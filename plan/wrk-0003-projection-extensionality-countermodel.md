@@ -44,6 +44,18 @@ Result relation がない current LAB draft の表現力についての counterm
 または既存 interface 内の direct bridge 発見である。その場合は成功扱いにせず、WRK の
 Reliance status を凍結して失敗を残す。
 
+## 実施結果
+
+evidence commit `bf373a3ff46584d805a5da6618fb8e16a83ea6dd` は、既存 draft を直接
+import した countermodel を Lean 4.29.1 で検査した。各 Result の全九 projection は
+total/unique で、各 component equivalence は native equality だが、同一 well-scoped
+input に対して二つの異なる成功 `Result` が存在した。
+
+この evidence が支えるのは、current LAB draft に joint extensionality/direct Result
+relation bridge がないという L3 の限定結論である。どの bridge を採用するか、final Result
+equality、Diagnostic equivalence、OBL-021 の proof/status は未決のまま残る。evidence
+commit の SHA と artifact hash は WRK-0003 を正本とする。
+
 ## 変更境界
 
 変更候補は `samples/lean/lab-statements/obl021/` と `plan/` に限る。Canon working record と

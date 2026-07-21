@@ -36,11 +36,11 @@ Non-claims: This does not select final Result equality, a joint extensionality l
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. It may add a LAB-only countermodel and explanation in the existing OBL-021 statement-draft directory, plus manifest/plan/report metadata. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
+Positive evidence: Lean 4.29.1 checks the imported existing statement draft and the countermodel, including `projection_predicates_are_total_and_unique`, `component_equivalences_are_equality`, `statement_draft_holds`, `distinct_results_can_elaborate`, and their conjunction. In the concrete model, all nine result projections have one witness per Result and component comparisons are native equality, while two distinct successful Result values coexist for one well-scoped input.
+Negative evidence: The registered pre-source red check confirmed that the target did not exist before the evidence commit. The registered source audit found the four required theorem names and no `sorry`, `admit`, `axiom`, `unsafe`, `partial`, or `implemented_by` token. The existing Lean synchronization test passed.
+Evidence artifacts: LAB:plan/wrk-0003-projection-extensionality-countermodel.md@bf373a3ff46584d805a5da6618fb8e16a83ea6dd:3b541113342034f00561b121bee6f07a108d8024a9f661f09aaa0b3acc2105ef, LAB:samples/lean/lab-statements/obl021/ElabDeterminismProjectionExtensionalityCountermodel.lean@bf373a3ff46584d805a5da6618fb8e16a83ea6dd:32ff605a4aadee56a907267384868f283dc19ffc43dd98ea1d61f782a1a663fa, LAB:samples/lean/lab-statements/obl021/ElabDeterminismProjectionExtensionalityCountermodel.md@bf373a3ff46584d805a5da6618fb8e16a83ea6dd:087e064c99903664af4c04345f821ebf423141614584761e46fcdbf937026dce
+Evidence commits: bf373a3ff46584d805a5da6618fb8e16a83ea6dd
+Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. Its retained result is limited to a countermodel of the current LAB statement shape: it shows that per-projection totality/uniqueness and component equality do not by themselves entail Result identity without a joint extensionality or direct Result-relation bridge. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, selected bridge, final equality, diagnostic ABI, or public claim.
 Independent review: not-required-for-L3
 
 ## Supersession

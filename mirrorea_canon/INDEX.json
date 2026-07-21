@@ -1133,7 +1133,7 @@
    "summary": "OBL-021 の LAB statement draft に各 projection の total/unique witness と component equality を与えても異なる成功 Result を許すかを、joint extensionality 不在の小さな countermodel で検査する L3 research record。最終 equality、Diagnostic ABI、OBL 状態は変更しない。",
    "open_items": [],
    "path": "working/WRK-0003-obl021-projection-extensionality.md",
-   "bytes": 5689
+   "bytes": 7208
   }
  ]
 }
