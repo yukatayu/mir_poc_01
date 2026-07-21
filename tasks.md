@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 17:32 JST
+最終更新: 2026-07-21 17:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -63,6 +63,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - Keep `docs/project-status.md`, `progress.md`, `tasks.md`, and `samples_progress.md` synchronized when their owned dimensions change.
 - Re-run documentation/source-hierarchy validation after plan or snapshot changes. Rebase/freeze a proposed L2 working-record update before review and re-review when its cited canon blob or diff changes.
 - Keep research source in existing documented LAB lanes. It is retained as WRK evidence only through an append-only manifested full commit; it is never production implementation or a conformance surface.
+- Heavy build / generated-artifact work is paused while root has about 2.4 GiB free and `/mnt/mirrorea-work` is unmounted. Existing `target/` and `/tmp` candidates require explicit cleanup confirmation; see `docs/reports/2294-storage-followup.md`.
 - Commit with `--no-gpg-sign` and push each completed task package.
 
 ## non-promoted references

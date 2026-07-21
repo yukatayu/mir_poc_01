@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:32 JST
+最終更新: 2026-07-21 17:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:37 JST: storage audit found the root filesystem at 99% use with
+  about 2.4 GiB free and no mounted `/mnt/mirrorea-work`. Existing `target/`
+  (7.0 GiB) and `/tmp` (2.5 GiB) are not removed without explicit confirmation;
+  future heavy work is paused pending cleanup approval or an external workdir.
+  This does not change research or implementation claims.
 - 2026-07-21 17:32 JST: closed the WRK-0001 pilot checkpoint. Clean detached
   authoritative validation, `make check`, full Python tests, and independent
   review passed; wording now distinguishes finite lifetime/capture carriers
