@@ -44,6 +44,18 @@ projection comparison が vacuous になり得る」という LAB countermodel e
 停止条件は import 解決不能、既存条件との矛盾、または theorem の未証明である。その場合は
 実験を成功扱いにせず、WRK の Reliance status を凍結し、失敗を report に残す。
 
+## 実施結果
+
+evidence commit `b275dde722a79e2903745f92c580e55b0b9cc732` は、既存 draft を直接
+import した countermodel を Lean 4.29.1 で検査した。単一の well-scoped input に対して
+二つの異なる成功 `Result` を許し、九つの result projection predicate をすべて空にしても、
+`OBL021StatementDraft` は成立した。
+
+したがって、この evidence が支えるのは「現在の抽象 projection comparison だけでは
+result identity または projection non-vacuity を導けない」という L3 の限定結論である。
+最小の追加前提、最終 Result equality、Diagnostic equivalence、OBL-021 の proof / status は
+未決のまま残る。evidence commit の SHA と artifact hash は WRK-0002 を正本とする。
+
 ## 変更境界
 
 変更候補は `samples/lean/lab-statements/obl021/` と `plan/` に限る。canon の WRK record と

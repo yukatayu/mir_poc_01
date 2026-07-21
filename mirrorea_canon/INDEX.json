@@ -1119,7 +1119,7 @@
    "summary": "OBL-021 の LAB statement draft が projection の存在・一意性なしに異なる成功 Result を許すかを、既存 Lean lane の小さな countermodel で検査する L3 research record。最終 equality、Diagnostic ABI、OBL 状態は変更しない。",
    "open_items": [],
    "path": "working/WRK-0002-obl021-projection-vacuity.md",
-   "bytes": 5435
+   "bytes": 6720
   }
  ]
 }

@@ -36,11 +36,11 @@ Non-claims: This does not select final Result equality, diagnostic equivalence, 
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. It may add a LAB-only countermodel and explanation in the existing OBL-021 statement-draft directory, plus manifest/plan/report metadata. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, or public claim.
+Positive evidence: Lean 4.29.1 checks the imported existing statement draft and the countermodel, including `projection_predicates_are_empty`, `statement_draft_holds`, `distinct_results_can_elaborate`, and their conjunction. In the concrete model, two distinct successful Result values coexist for one well-scoped input while all nine result-projection predicates are empty.
+Negative evidence: The registered pre-source red check confirmed that the target did not exist before the evidence commit. The registered source audit found the three required theorem names and no `sorry`, `admit`, `axiom`, `unsafe`, `partial`, or `implemented_by` token. The existing Lean synchronization test passed.
+Evidence artifacts: LAB:plan/wrk-0002-projection-vacuity-countermodel.md@b275dde722a79e2903745f92c580e55b0b9cc732:242e8094f028e8fb751db3386a439a618e7ed01429cc98b1eb3f847c10dfad8c, LAB:samples/lean/lab-statements/obl021/ElabDeterminismProjectionVacuityCountermodel.lean@b275dde722a79e2903745f92c580e55b0b9cc732:5cb7a60b68bb0bdf23d8fed5f4e5acf963f162ede5d2a6161bae21b90f548098, LAB:samples/lean/lab-statements/obl021/ElabDeterminismProjectionVacuityCountermodel.md@b275dde722a79e2903745f92c580e55b0b9cc732:9aced87b5191b92d078d5f2426717d4d5e6ebac515ad1ef3169d39ae7596e1be
+Evidence commits: b275dde722a79e2903745f92c580e55b0b9cc732
+Impact / non-effects: The record uses only existing `plan` and `samples/lean` lanes. Its retained result is limited to a countermodel of the current LAB statement shape: it shows that the draft alone does not entail result identity or projection non-vacuity. It introduces no primitive, helper family, schema, CI/Make target, source/runtime API, contract, Gate/Phase action, proof-status change, final equality, diagnostic ABI, or public claim.
 Independent review: not-required-for-L3
 
 ## Supersession

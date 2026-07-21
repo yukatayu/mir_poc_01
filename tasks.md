@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 19:46 JST
+最終更新: 2026-07-21 19:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -31,7 +31,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 3 | Pilot experiment | Closed: WRK-0001's positive/negative Lean reproduction is retained and append-only manifested as L3 evidence. It remains `not-promoted`; no theory or implementation claim moved. | Macro 1/5 middle; closed |
 | 4 | Pilot checkpoint | Closed: authoritative clean-worktree validation, full local validation, independent review, dashboard synchronization, and a next candidate class were completed without L3 promotion. | Macro 0/1 closeout; closed |
 | 5 | OBL-021 countermodel pre-registration | Closed: WRK-0002 pre-registers a projection-vacuity countermodel in the existing `samples/lean` lane, with a concrete alternative, falsifier, rollback, and no outcome evidence. | Macro 1/5 reserve; closed |
-| 6 | OBL-021 countermodel evidence | Current next package: first run the registered missing-file red check, then add and compile the countermodel plus its static guard; retain only an L3 result. | Macro 1/5 reserve; 1-2 research sessions |
+| 6 | OBL-021 countermodel evidence | Closed: the registered red/green Lean workflow was retained as WRK-0002 L3 evidence. It demonstrates only that the current LAB draft does not itself force result identity or projection non-vacuity; it remains `not-promoted`. | Macro 1/5 reserve; closed |
+| 7 | OBL-021 premise-gap triage | Current next package: use the countermodel and advisory review to compare the smallest non-reserved next questions, then pre-register at most one falsifiable L3 candidate. Do not select a final equality or alter OBL status. | Macro 1/5 reserve; 1 research session |
 
 ## self-driven macro phase reading
 

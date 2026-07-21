@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 19:46 JST
+最終更新: 2026-07-21 19:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,13 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 19:59 JST: manifested WRK-0002's L3 Lean countermodel evidence.
+  Lean 4.29.1 checks that the existing OBL-021 LAB statement draft can hold
+  with two distinct successful results for one well-scoped input when all nine
+  result projections are empty. This narrows the statement-shape gap to result
+  identity / projection non-vacuity; it does not choose a premise, equality,
+  diagnostic ABI, proof status, Gate/Phase action, conformance, implementation,
+  or public status. L2 remains fail-closed.
 - 2026-07-21 19:42 JST: pre-registered WRK-0002 as an L3 countermodel test of
   whether OBL-021's existing LAB statement draft permits distinct successful
   results through empty result projections. No Lean outcome has run or been
