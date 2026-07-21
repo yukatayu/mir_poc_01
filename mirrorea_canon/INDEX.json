@@ -1175,7 +1175,7 @@
    "summary": "OBL-020 LAB statement draft の global preservation と familywise preservation の論理的接続を、coverage を Canon 要件化せず既存 Lean lane で検査する L3 research record。OBL status、step taxonomy、proof interface は変更しない。",
    "open_items": [],
    "path": "working/WRK-0006-obl020-familywise-global-boundary.md",
-   "bytes": 6641
+   "bytes": 8335
   }
  ]
 }

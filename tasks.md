@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 00:45 JST
+最終更新: 2026-07-22 01:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -50,9 +50,10 @@ no-candidate research selection remains unchanged.
 | 11 | OBL-021 conditional outcome relation pre-registration | Closed: WRK-0005 registers an explicit-totality conditional lemma in the existing Lean lane without selecting equality, relation laws, or Canon placement. | Macro 1/5 reserve; closed |
 | 12 | OBL-021 conditional outcome relation evidence | Closed: WRK-0005 retained and corrected an L3 conditional lemma. The draft and well-scopedness give guarded all-pairs coherence on a fixed input's actual-outcome fiber; explicit totality makes that fiber nonempty. This does not establish equality, global laws, quotient semantics, diagnostics adequacy, or Canon placement. | Macro 1/5 reserve; closed |
 | 13 | OBL-021 statement-shape checkpoint | Closed: WRK-0002 through WRK-0005 now distinguish projection vacuity, absent joint Result adequacy, absent outcome existence, and positive fiberwise coherence. No fifth local theorem has enough decision value before an actual candidate is selected. | Macro 1/5 reserve; closed |
-| 14 | Post-checkpoint candidate selection | Closed: source audit, read-only candidate mapping, planner challenge, and temporary Oracle review found no standing-eligible L3 proposition with distinct live-branch outcomes. OBL-024 soundness-to-comparison would repeat the known abstract bridge gap; no WRK-0006 was opened. | Macro 1/5 reserve; closed |
-| 15 | Selection reopen condition | Current: retain the OBL-021 checkpoint without manufacturing a theorem. Reopen only when an exact existing-carrier/existing-lane question has plausible positive and falsifying outcomes that route to different already-recorded branches while excluding ADR-0014 reserved surfaces. | Macro 1/5 reserve; dormant research selection |
-| 16 | Full System V1 semantic invariant repair | Closed and post-repair attested at clean `4a52dd3e` matching the upstream tracking ref: shared private host-adapter policy checks exact pair signature, operation-specific declared and ambient capability requirements, and rejects host adapter use without a transition context. The checker also rejects duplicate record fields and record/fixed-array equality before runtime. The active checker corpus is 3 positive / 18 negative rows. | Macro 2/3 maintenance; closed with Rust/Python/source-matrix/release evidence; no widened claim |
+| 14 | Post-checkpoint candidate selection | Closed: at that checkpoint, source audit, read-only candidate mapping, planner challenge, and temporary Oracle review found no standing-eligible L3 proposition with distinct live-branch outcomes. OBL-024 soundness-to-comparison would repeat the known abstract bridge gap; no WRK-0006 was opened then. | Macro 1/5 reserve; closed historical triage |
+| 15 | OBL-020 familywise/global pre-registration | Closed: WRK-0006 registered an existing-LAB-vocabulary question about the global preservation draft and the familywise wrapper. It leaves coverage experiment-local and does not select a Canon step taxonomy, theorem interface, or binding. | Macro 1/5 reserve; registration closed |
+| 16 | OBL-020 familywise/global evidence | Closed: WRK-0006 manifests that global preservation implies the wrapper, while only an explicit experiment-local coverage premise gives the converse; its non-vacuous finite model has an unclassified actual non-preserving step. It remains `not-promoted`, selects no Canon coverage rule or taxonomy, and changes no `theory/11` status. | Macro 1/5 reserve; closed L3 evidence |
+| 17 | Full System V1 semantic invariant repair | Closed and post-repair attested at clean `4a52dd3e` matching the upstream tracking ref: shared private host-adapter policy checks exact pair signature, operation-specific declared and ambient capability requirements, and rejects host adapter use without a transition context. The checker also rejects duplicate record fields and record/fixed-array equality before runtime. The active checker corpus is 3 positive / 18 negative rows. | Macro 2/3 maintenance; closed with Rust/Python/source-matrix/release evidence; no widened claim |
 
 ## self-driven macro phase reading
 
@@ -75,7 +76,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
-| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; `plan/161` currently finds no branch-distinguishing candidate; reopen only under the standing predicate; no `theory/11` movement |
+| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; manifested WRK-0006 records an abstract composition boundary only, and may not turn coverage into a Canon requirement; select any next target without `theory/11` movement |
 | textual runnable research core | whether the existing Full System V1 source-first lane can be used as L3 retained evidence without changing governance | current WRK validator permits only `plan`, `samples/clean-near-end`, `samples/current-l2`, and `samples/lean`; the Full System V1 lane is outside that boundary, so retain this as an escalation candidate rather than silently widening the permitted roots |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; choose a new candidate with a falsifier |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |

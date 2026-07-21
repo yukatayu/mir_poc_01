@@ -24,7 +24,8 @@ already-recorded decision branch, without choosing equality, adequacy,
 totality placement, Diagnostic semantics, input identity, an external
 contract, or another reserved boundary?
 
-The answer at this checkpoint is **no**. No `WRK-0006` is opened.
+The answer at this checkpoint is **no**. No `WRK-0006` was opened at that
+checkpoint.
 
 The selection predicate used here is:
 
@@ -36,6 +37,28 @@ and those outcomes lead to distinct live downstream branches
 ```
 
 It is a LAB triage criterion, not a new Canon rule.
+
+## Reopened bounded candidate
+
+On 2026-07-22, a fresh read-only audit distinguished this checkpoint-specific
+priority test from ADR-0014's standing eligibility predicate. The exact
+relationship between the existing aggregate `OBL020StatementDraft` and its
+separate `FamilyStepPreservesWF` wrapper is a smaller existing-lane question:
+the aggregate proposition does not consume either family-classification
+predicate, while a familywise proof decomposition needs an explicit or
+definitional route covering the relevant steps before it can establish the
+aggregate form.
+
+`WRK-0006` retained source evidence for that conditional, experiment-local
+relation at `be85c975`. The global draft implies the family-qualified wrapper;
+the converse uses only an explicit experiment-local coverage premise; and a
+non-vacuous finite model separates familywise from aggregate preservation using
+an unclassified actual step. This does not require a family-indexed final
+theorem, make coverage a Canon requirement, identify the abstract predicates
+with MirCore, or reopen the 0/65 selected-rule source-adequacy result. The
+earlier no-selection conclusion remains historical and correctly rejects
+duplicate OBL-021 candidates; it is not a Canon prohibition on this separately
+identified L3 experiment.
 
 ## Evidence read
 
@@ -72,6 +95,7 @@ disposition.
 | Joint adequacy / Result extensionality | Do not open | It either assumes the desired bridge or selects the reserved observation/equality boundary. |
 | OBL-024 soundness to diagnostic comparison | Do not open now | Current source and draft already leave the bridge open; a new countermodel does not select or prune a `plan/143` Axis B option. |
 | OBL-025 repair realization/coverage | Do not open | T-RESEARCH-027 already isolates the carrier-to-realization gap; further work either duplicates it or selects repair semantics. |
+| OBL-020 familywise/global relation | Manifested WRK-0006 L3 evidence | The abstract global-to-family implication, coverage-conditioned converse, and non-vacuous separation model are retained. They select no coverage mechanism, step taxonomy, or Canon interface. |
 | Existing Full System V1 workflow | Validation only | It is runnable LAB evidence outside the current `working/` permitted roots, so it is not retained L3 theory evidence. |
 
 ## Runnable baseline
@@ -131,11 +155,11 @@ conformance, Gate, Phase, OBL, or public-product status.
 
 ## Reopen rule
 
-Keep no active new working record. Reopen autonomous L3 selection only when an
-exact existing proposition is identified whose positive and falsifying outcomes
-both alter a recorded live branch while excluding every ADR-0014 reserved
-surface. Otherwise continue ordinary maintenance/reproducibility validation or
-prepare a clearly labeled escalation bundle when a reserved decision is needed.
+The WRK-0006 evidence package is closed at the abstract composition boundary.
+Select any next candidate through ADR-0014's standing predicate and use the
+stricter distinct-live-branch test as a LAB priority heuristic, not as an
+invented Canon eligibility condition. Prepare a clearly labeled escalation
+bundle when a candidate needs a reserved decision.
 
 ## Non-claims
 

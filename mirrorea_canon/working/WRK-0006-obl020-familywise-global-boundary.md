@@ -36,10 +36,10 @@ Non-claims: This does not identify V.Config, P.WellFormed, P.Step, V.StepLabel, 
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Not run. The evidence source is intentionally absent at registration.
-Negative evidence: Not run. The pre-source absence check is reserved for the post-registration evidence package.
-Evidence artifacts: none
-Evidence commits: none
+Positive evidence: Lean 4.29.1 compiled `global_implies_familywise` and `coverage_and_familywise_imply_global` in the imported existing LAB vocabulary. The finite model has a canonical family and a classified preserving step, proves family-qualified preservation, and has an unclassified actual step from `good` to `bad` that falsifies the aggregate draft.
+Negative evidence: The registered pre-source absence check passed. Required-name and forbidden-token audits passed, with no reusable helper, draft edit, taxonomy, or coverage rule added. Bare `lean` has no repository module search path for this import-bearing source; the same runner condition affects the prior imported OBL-021 source, while a fresh external `.olean` supplied by `LEAN_PATH` compiled this evidence.
+Evidence artifacts: LAB:plan/wrk-0006-obl020-familywise-global-boundary.md@be85c975f9b092adc87644dac87727b9396f1b2f:7f4b4e0c7ba3ce2f6b8f2420d8cb664a9af9108b9d28ce51d3f904c0730c4174, LAB:samples/lean/lab-statements/obl020/FamilywiseGlobalBoundary.lean@be85c975f9b092adc87644dac87727b9396f1b2f:811009b0d5dd3c2fa4b6b15ace1d3af117e2ef35091bfa261cb4d8f2a6f3604d, LAB:samples/lean/lab-statements/obl020/FamilywiseGlobalBoundary.md@be85c975f9b092adc87644dac87727b9396f1b2f:a094bc68cf35c6c640ea53c04d5de8307ef3650e30c2a1d71ba193e3f99eaba1
+Evidence commits: be85c975f9b092adc87644dac87727b9396f1b2f
 Impact / non-effects: This record uses only the existing `samples/lean` and `plan` LAB lanes. It examines proof-composition logic inside the existing abstract statement vocabulary. Any conditional coverage premise remains experiment-local and cannot be read as a Canon requirement or final OBL-020 interface.
 Independent review: not-required-for-L3
 
@@ -52,6 +52,16 @@ on selection priority: one recommends deferral because the result is low-impact;
 the other identifies this exact relation as standing-eligible under ADR-0014.
 The record follows the latter only for a bounded L3 experiment and retains the
 former's no-overclaim boundary.
+
+### Method clarification — 2026-07-22
+
+The pre-registered direct source command is preserved as written. Its bare
+standalone invocation cannot resolve the repository module prefix, which is the
+same existing runner condition as WRK-0005's import-bearing source and does not
+depend on any theorem or model premise. The reproducible evidence runner first
+builds the unchanged imported draft into a fresh external `.olean` path and
+then supplies that path through `LEAN_PATH`. This clarification changes neither
+the question, the result class, nor any Canon or coverage boundary.
 
 ## Supersession
 
