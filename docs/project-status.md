@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-21 17:37 JST
+最終更新: 2026-07-21 17:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,10 +55,10 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
   `plan/158-standing-bounded-autonomy.md`
 - `PROPOSAL-003` と `PROPOSAL-004` は L1-reserved question なので delegated route
   では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`
-- 運用 storage は root filesystem のみで、2026-07-21 17:37 JST 時点の空きは約
-  2.4 GiB です。configured external workdir は未マウントなので、重い build /
-  generated artifact / toolchain work は、明示 cleanup 確認または外部 workdir 準備まで
-  着手しません。既存 build output と temporary artifact は監査済みですが、本 task では削除しません。
+- 運用 storage は root filesystem のみで、2026-07-21 17:49 JST 時点の空きは約
+  12 GiB です。承認済み cleanup で再生成可能な local build output と Mirrorea 一時成果物を
+  除去しました。configured external workdir は依然未マウントなので、次の heavy build / generated
+  artifact / toolchain work の前にも容量を再確認し、外部 workdir を優先します。
 
 ## オーナーの確認・判断待ち
 
@@ -82,7 +82,7 @@ fail-closed です。
 | 目的・体系の地図 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md`, `docs/diagrams/layer-stack.mmd` |
 | Gate / Phase と実用化の順序 | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md`, `docs/diagrams/workflow.mmd` |
 | delegated research の境界 | `mirrorea_canon/adr/ADR-0014.md`, `mirrorea_canon/working/README.md`, `mirrorea_canon/plan/02-operating-model.md`, `plan/158-standing-bounded-autonomy.md`, `plan/159-wrk-evidence-commit-integrity-recut.md` |
-| storage / heavy work guard | `docs/reports/2294-storage-followup.md`; `AGENTS.md` |
+| storage / heavy work guard | `docs/reports/2295-approved-artifact-cleanup.md`; `AGENTS.md` |
 | proof の唯一の状態台帳 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
 | runnable LAB の範囲 | `samples_progress.md` |
 | 現在の次作業と選択肢 | `progress.md`, `tasks.md`, `plan/158-standing-bounded-autonomy.md` |

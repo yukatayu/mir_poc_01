@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:37 JST
+最終更新: 2026-07-21 17:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:49 JST: after explicit approval, `cargo clean` removed 18,248
+  local build files (reported 8.5 GiB) and 460 Mirrorea temporary directories.
+  Root free space rose from about 2.4 GiB to 12 GiB; source, Git history, and
+  retained evidence were not removed. External workdir remains unmounted, so
+  heavy-work capacity checks remain required.
 - 2026-07-21 17:37 JST: storage audit found the root filesystem at 99% use with
   about 2.4 GiB free and no mounted `/mnt/mirrorea-work`. Existing `target/`
   (7.0 GiB) and `/tmp` (2.5 GiB) are not removed without explicit confirmation;
