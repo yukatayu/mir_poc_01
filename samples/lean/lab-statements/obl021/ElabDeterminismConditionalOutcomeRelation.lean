@@ -4,8 +4,10 @@ import samples.lean.«lab-statements».obl021.ElabDeterminismStatementDraft
 LAB-only conditional outcome relation for the OBL-021 statement-shape draft.
 
 The tagged Outcome carrier, OutcomeOf predicate, SameOutcome relation, and
-OutcomeTotal premise are experiment-local.  The theorem does not select native
-equality, relation laws, quotient semantics, or a Canon home for totality.
+OutcomeTotal premise are experiment-local. The theorems do not select native
+equality, global equivalence/setoid laws on the full Outcome carrier, quotient
+semantics, or a Canon home for totality. They relate only a fixed input's
+OutcomeOf fiber.
 -/
 
 namespace MirCore.Lab.OBL021.ConditionalOutcomeRelation
@@ -82,7 +84,7 @@ theorem statement_draft_implies_outcomes_related
           exact (draft env ctx locus item wellScoped).2.1
             leftDiagnostic rightDiagnostic leftOutcome rightOutcome
 
-theorem outcome_totality_and_draft_imply_unique_relation
+theorem outcome_totality_supplies_witness_and_draft_relates_actual_outcomes
     {V : Vocab.{u}}
     (P : Pred V)
     (draft : OBL021StatementDraft V P)
