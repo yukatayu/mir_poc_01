@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 17:00 JST
+最終更新: 2026-07-21 17:09 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -27,8 +27,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | Order | Work unit | Aim and completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
 | 1 | Governance closeout | Closed: standing route, WRK structure/history/evidence/index checks, canon/LAB mirrors, validation, commit/push, and clean detached-worktree authoritative pass. | Macro 0/1 early; closed |
-| 2 | Pilot triage and pre-registration | Current next package: select one eligible target; commit a WRK L3 question with anchors, alternative/falsifier, non-effects, rollback, and existing-lane command plan. | Macro 1/5 early; 1-2 research sessions |
-| 3 | Pilot experiment | Reproduce anchors and run the smallest positive/negative Lean or existing-lane implementation validation. Keep its result as L3 evidence or escalation; current L2 promotion is fail-closed pending owner trust configuration. | Macro 1/5 middle; 1-4 research sessions |
+| 2 | Pilot triage and pre-registration | Closed: WRK-0001 pre-registers a theory/02 finite-index reproduction with anchors, alternative/falsifier, non-effects, rollback, and existing Lean commands. | Macro 1/5 early; closed |
+| 3 | Pilot experiment | Current package: run WRK-0001's positive/negative Lean reproduction, retain only manifested existing-lane evidence, and keep L2 fail-closed. | Macro 1/5 middle; 1 session |
 | 4 | Pilot checkpoint | Independent review, cross-cut impact read, dashboard/report synchronization, and next target class or escalation bundle. This is the current run's planned stop. | Macro 0/1 closeout; 1 session |
 | 5 | Subsequent ratchet | Select the next eligible candidate only after the checkpoint; do not pre-commit its detailed semantics. | Macro 1/5 reserve; recurring |
 

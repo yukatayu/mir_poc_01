@@ -62,6 +62,12 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 相互参照は必ず ID で行う。`INDEX.json` に全 id → path → status → depends_on の索引がある(`meta/build-index.py` で再生成)。
 
+## Current working records
+
+| ID | Status | Bounded question |
+|---|---|---|
+| WRK-0001 | L3-open | theory/02 の有限 index 許容範囲と helper-local Lean 正例・拒否例の再現。`working/WRK-0001-finite-index-boundaries.md` |
+
 ## 「ここから推論してはいけないこと」(canon 全体)
 
 - 図・例・シナリオの語彙(`World`, `Player` 等)は S5 のドメイン語彙であり、core primitive ではない(ADR-0001)。

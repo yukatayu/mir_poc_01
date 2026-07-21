@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:00 JST
+最終更新: 2026-07-21 17:09 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:09 JST: opened WRK-0001 as a committed L3 pre-registration for
+  a bounded reproduction of theory/02's finite-index allowance in the existing
+  helper-local Lean fragment. No outcome evidence has been run or relied on;
+  L2 remains fail-closed. No Gate, Phase, SCN, OBL discharge, conformance,
+  production implementation, or public status changed.
 - 2026-07-21 17:00 JST: committed and pushed the standing bounded-autonomy
   governance package. Its authoritative WRK validation passed in a clean
   disposable detached worktree; the ordinary worktree's ignored local
