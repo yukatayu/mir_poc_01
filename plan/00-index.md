@@ -136,8 +136,9 @@
 112. WRK-0009 e5 proof-skeleton identity selection は `plan/168-wrk0009-e5-skeleton-identity-selection.md`
 113. WRK-0009 e5 proof-skeleton literal identity evidence は `plan/wrk-0009-e5-skeleton-identity.md`
 114. WRK-0010 static decision attribution selection は `plan/169-wrk0010-static-decision-attribution-selection.md`
-115. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-116. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+115. WRK-0010 static decision attribution evidence は `plan/wrk-0010-static-formal-hook-decision-attribution.md`
+116. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+117. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
