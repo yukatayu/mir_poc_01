@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 90,
+ "files": 91,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 5563
+   "bytes": 5886
   },
   {
    "id": "root/north-star",
@@ -1249,6 +1249,20 @@
    "open_items": [],
    "path": "working/WRK-0010-static-formal-hook-decision-attribution.md",
    "bytes": 8554
+  },
+  {
+   "id": "working/WRK-0011",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "arch/02-boundary-contracts",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "existing current-L2 e21/e22 source route が exact final PlaceStore を直接アサートするか、fixture/direct-evaluator lane に限定されるかを literal に監査する可逆な L3 record。状態意味、同値性、defect、coverage 要求、carrier は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0011-current-l2-final-store-directness.md",
+   "bytes": 6951
   }
  ]
 }
