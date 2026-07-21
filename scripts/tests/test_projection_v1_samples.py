@@ -81,6 +81,7 @@ class ProjectionV1SamplesTests(unittest.TestCase):
 
         self.assertEqual(payload["sample_count"], 6)
         self.assertEqual(payload["executable_count"], 6)
+        self.assertFalse(payload["workflow_ready"])
         self.assertEqual(payload["validation_errors"], [])
 
     def test_positive_projection_keeps_target_manifest_summary(self) -> None:

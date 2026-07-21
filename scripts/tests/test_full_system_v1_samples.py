@@ -244,6 +244,24 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in argv))
         self.assertEqual(mocked_run.call_args.kwargs["cwd"], runner.REPO_ROOT)
 
+    def test_checker_row_rejects_accepted_payload_with_failure_exit_code(self) -> None:
+        row = next(
+            row
+            for row in runner._checker_matrix()["rows"]
+            if row["sample_id"] == "mir-02-add-one-positive"
+        )
+        source_path = runner._row_source_path(row)
+        inconsistent_payload = dict(runner._check_source(source_path))
+        self.assertTrue(inconsistent_payload["accepted"])
+        inconsistent_payload["returncode"] = 2
+
+        with mock.patch.object(runner, "_check_source", return_value=inconsistent_payload):
+            payload = runner._run_checker_row(row)
+
+        self.assertFalse(payload["passed"])
+        self.assertEqual(payload["returncode_expected"], 0)
+        self.assertFalse(payload["returncode_passed"])
+
     def test_run_runtime_source_uses_repo_relative_source_arg(self) -> None:
         source_path = runner.COMPUTATIONAL_ROOT / "add-one-positive/src/add-one.mir"
         completed = subprocess_completed(stdout=json.dumps({"accepted": True}))
@@ -261,6 +279,28 @@ class FullSystemV1SamplesTests(unittest.TestCase):
         )
         self.assertFalse(any(str(arg).startswith(f"{runner.REPO_ROOT}/") for arg in argv))
         self.assertEqual(mocked_run.call_args.kwargs["cwd"], runner.REPO_ROOT)
+
+    def test_runtime_row_rejects_accepted_payload_with_failure_exit_code(self) -> None:
+        row = next(
+            row
+            for row in runner._runtime_matrix()["rows"]
+            if row["sample_id"] == "mir-03-add-one-positive"
+        )
+        source_path = runner._row_source_path(row)
+        inconsistent_payload = dict(
+            runner._run_runtime_source(source_path, row["entry_function"], row["input"])
+        )
+        self.assertTrue(inconsistent_payload["runtime"]["accepted"])
+        inconsistent_payload["returncode"] = 2
+
+        with mock.patch.object(
+            runner, "_run_runtime_source", return_value=inconsistent_payload
+        ):
+            payload = runner._run_runtime_row(row)
+
+        self.assertFalse(payload["passed"])
+        self.assertEqual(payload["returncode_expected"], 0)
+        self.assertFalse(payload["returncode_passed"])
 
     def test_pure_runtime_sample_keeps_empty_effect_session(self) -> None:
         payload = _run_helper("run-runtime", "mir-03-add-one-positive")

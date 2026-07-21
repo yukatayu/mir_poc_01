@@ -4,6 +4,7 @@ import importlib
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -87,6 +88,33 @@ class ProviderAdmissionSamplesTests(unittest.TestCase):
         self.assertFalse(payload["actual"]["execution_admitted"])
         self.assertEqual(payload["actual"]["diagnostic_codes"], [])
         self.assertEqual(payload["actual"]["local_split_launched_targets"], ["world-client"])
+
+    def test_run_reads_committed_generated_evidence_without_writing(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        with patch.object(Path, "write_text", autospec=True) as write_text:
+            payload = provider_admission_samples.run("eng-02-viewer-diagnostic-positive")
+
+        write_text.assert_not_called()
+        self.assertTrue(payload["matches_generated"])
+
+    def test_run_rejects_mismatched_committed_generated_evidence(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            generated_path = Path(tmpdir) / "provider-admission-report.json"
+            generated_path.write_text("{}\n", encoding="utf-8")
+            with patch.object(
+                provider_admission_samples,
+                "_row_generated_path",
+                return_value=generated_path,
+            ):
+                payload = provider_admission_samples.run("eng-02-viewer-diagnostic-positive")
+
+        self.assertIn("matches_generated", payload)
+        self.assertFalse(payload["matches_generated"])
 
     def test_negative_over_capability_row_reports_rejection(self) -> None:
         payload = _run_helper("run", "eng-02-over-capability-negative")
@@ -221,6 +249,38 @@ class ProviderAdmissionSamplesTests(unittest.TestCase):
         self.assertEqual(payload["failed"], [])
         self.assertEqual(payload["validation_errors"], [])
         self.assertEqual(payload["passed"], EXPECTED_SAMPLE_IDS)
+
+    def test_main_returns_failure_when_check_all_fails(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        with patch.object(
+            provider_admission_samples,
+            "check_all",
+            return_value={"failed": ["forced-regression"], "validation_errors": []},
+        ):
+            self.assertEqual(provider_admission_samples.main(["check-all"]), 2)
+
+    def test_check_all_reports_invalid_matrix_before_running_samples(self) -> None:
+        if provider_admission_samples is None:
+            self.fail("provider admission helper missing")
+
+        status = {
+            "family": "full_system_v1_provider_admission",
+            "sample_root": "samples/full-system-v1/provider-adapter",
+            "matrix_path": "samples/full-system-v1/provider-adapter/matrix.json",
+            "sample_count": 5,
+            "validation_errors": [{"kind": "missing_generated"}],
+        }
+        with patch.object(provider_admission_samples, "matrix", return_value=status), patch.object(
+            provider_admission_samples, "run"
+        ) as run:
+            payload = provider_admission_samples.check_all()
+
+        run.assert_not_called()
+        self.assertEqual(payload["passed"], [])
+        self.assertEqual(payload["failed"], [])
+        self.assertEqual(payload["validation_errors"], status["validation_errors"])
 
 
 if __name__ == "__main__":

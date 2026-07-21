@@ -4,6 +4,7 @@ import importlib
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -104,8 +105,7 @@ class RendererPoseBackendSamplesTests(unittest.TestCase):
             ["packet.renderer.pose_snapshot"],
         )
 
-    def test_positive_row_writes_portable_provider_report_paths(self) -> None:
-        _run_helper("run", "eng-03-renderer-pose-positive")
+    def test_positive_row_reads_portable_committed_provider_report_paths(self) -> None:
         provider_report_path = (
             REPO_ROOT
             / "samples"
@@ -121,6 +121,33 @@ class RendererPoseBackendSamplesTests(unittest.TestCase):
         self.assertTrue(path_fields)
         for path in path_fields:
             self.assertFalse(Path(path).is_absolute(), path)
+
+        if renderer_pose_backend_samples is None:
+            self.fail("renderer pose backend helper missing")
+
+        with mock.patch.object(Path, "write_text", autospec=True) as write_text:
+            payload = renderer_pose_backend_samples.run("eng-03-renderer-pose-positive")
+
+        write_text.assert_not_called()
+        self.assertTrue(payload["matches_generated"])
+        self.assertTrue(payload["matches_generated_provider_admission"])
+
+    def test_run_rejects_mismatched_committed_renderer_evidence(self) -> None:
+        if renderer_pose_backend_samples is None:
+            self.fail("renderer pose backend helper missing")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            generated_path = Path(tmpdir) / "renderer-pose-backend-report.json"
+            generated_path.write_text("{}\n", encoding="utf-8")
+            with mock.patch.object(
+                renderer_pose_backend_samples,
+                "_row_generated_path",
+                return_value=generated_path,
+            ):
+                payload = renderer_pose_backend_samples.run("eng-03-renderer-pose-positive")
+
+        self.assertIn("matches_generated", payload)
+        self.assertFalse(payload["matches_generated"])
 
     def test_repo_relative_arg_preserves_external_paths(self) -> None:
         if renderer_pose_backend_samples is None:
@@ -161,6 +188,38 @@ class RendererPoseBackendSamplesTests(unittest.TestCase):
         self.assertEqual(payload["failed"], [])
         self.assertEqual(payload["validation_errors"], [])
         self.assertEqual(payload["passed"], EXPECTED_SAMPLE_IDS)
+
+    def test_main_returns_failure_when_check_all_fails(self) -> None:
+        if renderer_pose_backend_samples is None:
+            self.fail("renderer pose backend helper missing")
+
+        with mock.patch.object(
+            renderer_pose_backend_samples,
+            "check_all",
+            return_value={"failed": ["forced-regression"], "validation_errors": []},
+        ):
+            self.assertEqual(renderer_pose_backend_samples.main(["check-all"]), 2)
+
+    def test_check_all_reports_invalid_matrix_before_running_samples(self) -> None:
+        if renderer_pose_backend_samples is None:
+            self.fail("renderer pose backend helper missing")
+
+        status = {
+            "family": "full_system_v1_renderer_pose_backend",
+            "sample_root": "samples/full-system-v1/provider-adapter",
+            "matrix_path": "samples/full-system-v1/provider-adapter/renderer-pose-matrix.json",
+            "sample_count": 3,
+            "validation_errors": [{"kind": "missing_generated"}],
+        }
+        with mock.patch.object(
+            renderer_pose_backend_samples, "matrix", return_value=status
+        ), mock.patch.object(renderer_pose_backend_samples, "run") as run:
+            payload = renderer_pose_backend_samples.check_all()
+
+        run.assert_not_called()
+        self.assertEqual(payload["passed"], [])
+        self.assertEqual(payload["failed"], [])
+        self.assertEqual(payload["validation_errors"], status["validation_errors"])
 
     def test_helper_executes_cli_surface(self) -> None:
         if renderer_pose_backend_samples is None:

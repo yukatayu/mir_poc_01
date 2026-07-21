@@ -110,6 +110,12 @@ class FullSystemV1ReleaseCheckTests(unittest.TestCase):
 
         self.assertEqual(runner.repo_relative_arg(external_path), str(external_path))
 
+    def test_release_non_claims_exclude_distributed_conformance_and_transport(self) -> None:
+        non_claims = runner.release_non_claims()
+
+        self.assertIn("not C-distributed conformance", non_claims)
+        self.assertIn("not real transport or multi-process distributed execution", non_claims)
+
     def test_check_all_builds_bundle_and_viewer(self) -> None:
         def fake_run(command: runner.PlannedCommand) -> runner.CommandResult:
             payload = payload_for(command.name)

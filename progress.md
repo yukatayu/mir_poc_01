@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 21:48 JST
+最終更新: 2026-07-21 22:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,15 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 22:40 JST: hardened the bounded Full System V1 validation path.
+  Checker/runtime rows now require accepted/rejected exit-code agreement;
+  provider/renderer helpers read and compare committed generated evidence rather
+  than rewriting it, stop before execution on an invalid matrix, and return
+  nonzero for failed standalone validation. Projection's machine-readable
+  readiness now matches its evidence-closed dashboard reading, and the release
+  bundle explicitly excludes C-distributed conformance and real transport /
+  multi-process execution. No Canon, conformance, workflow classification, or
+  public-product status changed.
 - 2026-07-21 21:48 JST: completed post-checkpoint candidate triage with
   independent source mapping, planner challenge, and temporary Oracle review.
   No proposed L3 question both avoided reserved semantics and changed a live

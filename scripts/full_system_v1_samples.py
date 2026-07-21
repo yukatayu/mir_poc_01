@@ -682,14 +682,18 @@ def _run_checker_row(row: dict[str, Any]) -> dict[str, Any]:
     actual_payload = _check_source(source_path)
     actual = _payload_checker_projection(actual_payload)
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
-    passed = actual == expected
+    returncode = actual_payload["returncode"]
+    returncode_expected = 0 if actual.get("accepted") else 2
+    returncode_passed = returncode == returncode_expected
     return {
         "sample_id": row["sample_id"],
         "source": str(source_path.relative_to(REPO_ROOT)),
         "expected_path": str(expected_path.relative_to(REPO_ROOT)),
         "accepted": bool(actual.get("accepted")),
-        "returncode": actual_payload["returncode"],
-        "passed": passed,
+        "returncode": returncode,
+        "returncode_expected": returncode_expected,
+        "returncode_passed": returncode_passed,
+        "passed": actual == expected and returncode_passed,
         "actual": actual,
         "expected": expected,
     }
@@ -703,7 +707,9 @@ def _run_runtime_row(row: dict[str, Any]) -> dict[str, Any]:
     )
     actual = _payload_runtime_projection(actual_payload)
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
-    passed = actual == expected
+    returncode = actual_payload["returncode"]
+    returncode_expected = 0 if actual.get("accepted") else 2
+    returncode_passed = returncode == returncode_expected
     return {
         "sample_id": row["sample_id"],
         "source": str(source_path.relative_to(REPO_ROOT)),
@@ -711,8 +717,10 @@ def _run_runtime_row(row: dict[str, Any]) -> dict[str, Any]:
         "input": row["input"],
         "expected_path": str(expected_path.relative_to(REPO_ROOT)),
         "accepted": bool(actual.get("accepted")),
-        "returncode": actual_payload["returncode"],
-        "passed": passed,
+        "returncode": returncode,
+        "returncode_expected": returncode_expected,
+        "returncode_passed": returncode_passed,
+        "passed": actual == expected and returncode_passed,
         "actual": actual,
         "expected": expected,
     }

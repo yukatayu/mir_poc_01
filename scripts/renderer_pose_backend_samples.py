@@ -86,6 +86,8 @@ def validate_rows(rows: list[dict[str, Any]]) -> list[dict[str, str]]:
             ("missing_provider_manifest", _row_provider_path(row)),
             ("missing_posegraph_package", _row_posegraph_path(row)),
             ("missing_expected", _row_expected_path(row)),
+            ("missing_generated", _row_generated_path(row)),
+            ("missing_generated_provider_admission", _row_generated_provider_path(row)),
         ]:
             if not path.exists():
                 errors.append(
@@ -280,50 +282,65 @@ def run(sample_id: str) -> dict[str, Any]:
     actual = _summary(actual_payload)
     expected = json.loads(_row_expected_path(row).read_text(encoding="utf-8"))
     generated_actual = _generated_payload(actual_payload)
-
     generated_path = _row_generated_path(row)
-    generated_path.parent.mkdir(parents=True, exist_ok=True)
-    generated_path.write_text(
-        json.dumps(generated_actual, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
-
     provider_generated_path = _row_generated_provider_path(row)
-    provider_generated_path.parent.mkdir(parents=True, exist_ok=True)
-    provider_generated_path.write_text(
-        json.dumps(
-            actual_payload.get("provider_admission_report") or {},
-            indent=2,
-            ensure_ascii=False,
-        )
-        + "\n",
-        encoding="utf-8",
+    generated_expected = json.loads(generated_path.read_text(encoding="utf-8"))
+    provider_generated_actual = actual_payload.get("provider_admission_report") or {}
+    provider_generated_expected = json.loads(
+        provider_generated_path.read_text(encoding="utf-8")
     )
+    returncode = actual_payload.get("returncode")
+    returncode_expected = 0 if actual_payload.get("accepted") else 2
+    returncode_passed = returncode == returncode_expected
 
     return {
         "command": "run",
         "family": data["family"],
         "sample_id": sample_id,
         "accepted": actual_payload.get("accepted"),
-        "returncode": actual_payload.get("returncode"),
+        "returncode": returncode,
+        "returncode_expected": returncode_expected,
+        "returncode_passed": returncode_passed,
         "expected": expected,
         "actual": actual,
         "generated_actual": generated_actual,
         "matches_expected": actual == expected,
+        "matches_generated": generated_actual == generated_expected,
+        "matches_generated_provider_admission": (
+            provider_generated_actual == provider_generated_expected
+        ),
     }
 
 
 def check_all() -> dict[str, Any]:
     data = _load_matrix()
+    status = matrix()
+    if status["validation_errors"]:
+        return {
+            "command": "check-all",
+            "family": data["family"],
+            "sample_root": status["sample_root"],
+            "matrix_path": status["matrix_path"],
+            "sample_count": status["sample_count"],
+            "passed": [],
+            "failed": [],
+            "validation_errors": status["validation_errors"],
+            "workflow_ready": False,
+        }
+
     passed: list[str] = []
     failed: list[str] = []
     for row in data["rows"]:
         payload = run(row["sample_id"])
-        if payload["matches_expected"]:
+        if (
+            payload["matches_expected"]
+            and payload["matches_generated"]
+            and payload["matches_generated_provider_admission"]
+            and payload["returncode_passed"]
+        ):
             passed.append(row["sample_id"])
         else:
             failed.append(row["sample_id"])
-    status = matrix()
     return {
         "command": "check-all",
         "family": data["family"],
@@ -453,7 +470,20 @@ def main(argv: list[str] | None = None) -> int:
         payload = run(args.sample_id)
 
     _print(payload, args.format)
-    return 0
+    if args.command == "run":
+        succeeded = (
+            payload["matches_expected"]
+            and payload["matches_generated"]
+            and payload["matches_generated_provider_admission"]
+            and payload["returncode_passed"]
+        )
+    elif args.command == "check-all":
+        succeeded = not payload["failed"] and not payload["validation_errors"]
+    elif args.command in {"matrix", "closeout"}:
+        succeeded = not payload["validation_errors"]
+    else:
+        succeeded = True
+    return 0 if succeeded else 2
 
 
 if __name__ == "__main__":

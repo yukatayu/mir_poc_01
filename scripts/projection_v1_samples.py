@@ -191,7 +191,7 @@ def matrix() -> dict[str, Any]:
         "executable_count": len(executable_rows),
         "executable_rows": executable_rows,
         "matrix_status": sorted({root["matrix_status"] for root in roots}),
-        "workflow_ready": True,
+        "workflow_ready": False,
         "roots": [
             {
                 "root_name": root["root_name"],

@@ -763,8 +763,10 @@ def release_non_claims() -> list[str]:
     return [
         "not final public grammar",
         "not final typed IR or runtime API",
+        "not C-distributed conformance",
         "not final packet or FFI transport semantics",
         "not final server/client binary split",
+        "not real transport or multi-process distributed execution",
         "not arbitrary native or WASM execution",
         "not final engine/provider SDK",
         "not final public viewer/devtools family",
