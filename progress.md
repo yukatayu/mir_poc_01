@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:17 JST
+最終更新: 2026-07-21 17:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 17:22 JST: manifested evidence commit `887a0f6c` in WRK-0001 with
+  its exact plan artifact hash. The Lean reproduction remains L3
+  `not-promoted`; clean-worktree validation and the cross-cut checkpoint remain
+  next. No Gate, Phase, SCN, OBL discharge, conformance, production
+  implementation, or public status changed.
 - 2026-07-21 17:17 JST: WRK-0001's registered Lean reproduction passed: the
   existing finite-index fragment compiled with Lean 4.29.1, and its four named
   local positive/rejection lemmas passed the placeholder/escape-token audit.

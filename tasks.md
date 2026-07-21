@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 17:17 JST
+最終更新: 2026-07-21 17:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -28,8 +28,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | --- | --- | --- | --- |
 | 1 | Governance closeout | Closed: standing route, WRK structure/history/evidence/index checks, canon/LAB mirrors, validation, commit/push, and clean detached-worktree authoritative pass. | Macro 0/1 early; closed |
 | 2 | Pilot triage and pre-registration | Closed: WRK-0001 pre-registers a theory/02 finite-index reproduction with anchors, alternative/falsifier, non-effects, rollback, and existing Lean commands. | Macro 1/5 early; closed |
-| 3 | Pilot experiment | Evidence captured: WRK-0001's positive/negative Lean reproduction passed and is retained in the existing `plan/` lane. The separate WRK manifest commit and authoritative validation remain. | Macro 1/5 middle; evidence captured |
-| 4 | Pilot checkpoint | Current package: manifest WRK-0001's evidence commit, perform authoritative validation, obtain an independent review/cross-cut read, synchronize dashboards, and select the next target class or escalation bundle. This is the current run's planned stop. | Macro 0/1 closeout; 1 session |
+| 3 | Pilot experiment | Closed: WRK-0001's positive/negative Lean reproduction is retained and append-only manifested as L3 evidence. It remains `not-promoted`; no theory or implementation claim moved. | Macro 1/5 middle; closed |
+| 4 | Pilot checkpoint | Current package: perform authoritative clean-worktree validation, obtain an independent cross-cut read, synchronize dashboards, and decide only the next target class or escalation bundle. This is the current run's planned stop. | Macro 0/1 closeout; 1 session |
 | 5 | Subsequent ratchet | Select the next eligible candidate only after the checkpoint; do not pre-commit its detailed semantics. | Macro 1/5 reserve; recurring |
 
 ## self-driven macro phase reading
