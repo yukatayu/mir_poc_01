@@ -114,8 +114,9 @@
 96. historical exact-target delegated L2/L3 theory research governance は `plan/157`
 97. standing bounded autonomy と first research ratchet は `plan/158`
 98. WRK evidence-commit integrity recut は `plan/159`
-99. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-100. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+99. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
+100. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+101. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -637,6 +638,8 @@
   `plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md`
 - G1 OBL-025 branch-local non-coverage refinement:
   `plan/108-g1-obl025-branch-local-noncoverage-refinement.md`
+- WRK-0001 finite-index reproduction evidence:
+  `plan/wrk-0001-finite-index-reproduction.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 
