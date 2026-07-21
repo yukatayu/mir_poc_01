@@ -67,6 +67,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | ID | Status | Bounded question |
 |---|---|---|
 | WRK-0001 | L3-open | theory/02 の有限 index 許容範囲と helper-local Lean 正例・拒否例の再現。`working/WRK-0001-finite-index-boundaries.md` |
+| WRK-0002 | L3-open | OBL-021 LAB statement draft の projection vacuity を既存 Lean lane の countermodel で検査。`working/WRK-0002-obl021-projection-vacuity.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

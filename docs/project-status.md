@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-21 17:49 JST
+最終更新: 2026-07-21 19:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | 論理仕様 | L0/L1 の軸は canon に固定。ADR-0014 は standing boundary 内の existing LAB research と committed `WRK-####` L3 record を許す。L2 は owner-authenticated trust anchor が未構成のため fail-closed で、falsifier は既存 L2 を即時 `frozen` にする将来の安全弁として定義される。 | `mirrorea_canon/adr/ADR-0014.md`; `mirrorea_canon/working/README.md`; `mirrorea_canon/plan/02-operating-model.md` |
 | ユーザ向け仕様 | companion notation と runnable LAB examples はあるが、Surface v0 grammar closure と public contract は未完。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `samples_progress.md` |
 | 実装 / 運用 | alpha / Surface / operational roots は限定 LAB evidence。conformance、実 transport、分散永続、public product は未主張。 | `samples_progress.md`; `mirrorea_canon/plan/01-phases.md` |
-| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001 は theory/02 の lifetime/capture 有限断片と `Nat` budget parameter を existing Lean fragment で L3 として再現し、証跡 manifest・clean-worktree validation・cross-cut review まで完了した。結果は `not-promoted` のままで、OBL-021 は未採択の次候補に留まり、L2 selection は将来の owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `plan/wrk-0001-finite-index-reproduction.md`; `plan/wrk-0001-pilot-checkpoint.md`; `plan/156-t0-t2-research-autonomy-envelope.md`; `plan/158-standing-bounded-autonomy.md`; `plan/159-wrk-evidence-commit-integrity-recut.md` |
+| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001 は theory/02 の lifetime/capture 有限断片と `Nat` budget parameter を existing Lean fragment で L3 として再現し、証跡 manifest・clean-worktree validation・cross-cut review まで完了した。結果は `not-promoted` のままである。WRK-0002 は OBL-021 LAB statement draft の projection vacuity countermodel を L3 として pre-register したが、まだ結果はない。いずれも L2 selection は将来の owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `mirrorea_canon/working/WRK-0002-obl021-projection-vacuity.md`; `plan/wrk-0001-finite-index-reproduction.md`; `plan/wrk-0001-pilot-checkpoint.md`; `plan/156-t0-t2-research-autonomy-envelope.md`; `plan/158-standing-bounded-autonomy.md`; `plan/159-wrk-evidence-commit-integrity-recut.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
 ## 現在の停止線

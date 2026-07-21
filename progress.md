@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 17:49 JST
+最終更新: 2026-07-21 19:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,11 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-21 19:42 JST: pre-registered WRK-0002 as an L3 countermodel test of
+  whether OBL-021's existing LAB statement draft permits distinct successful
+  results through empty result projections. No Lean outcome has run or been
+  relied on. This does not change theory/11, Gate/Phase, conformance,
+  implementation, or public status; L2 remains fail-closed.
 - 2026-07-21 17:49 JST: after explicit approval, `cargo clean` removed 18,248
   local build files (reported 8.5 GiB) and 460 Mirrorea temporary directories.
   Root free space rose from about 2.4 GiB to 12 GiB; source, Git history, and

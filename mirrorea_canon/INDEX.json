@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 80,
+ "files": 81,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 3290
+   "bytes": 3463
   },
   {
    "id": "root/north-star",
@@ -1106,6 +1106,20 @@
    "open_items": [],
    "path": "working/WRK-0001-finite-index-boundaries.md",
    "bytes": 4250
+  },
+  {
+   "id": "working/WRK-0002",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/03-elaboration",
+    "theory/10-diagnostics"
+   ],
+   "summary": "OBL-021 の LAB statement draft が projection の存在・一意性なしに異なる成功 Result を許すかを、既存 Lean lane の小さな countermodel で検査する L3 research record。最終 equality、Diagnostic ABI、OBL 状態は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0002-obl021-projection-vacuity.md",
+   "bytes": 5435
   }
  ]
 }

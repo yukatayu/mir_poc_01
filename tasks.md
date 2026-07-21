@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 17:49 JST
+最終更新: 2026-07-21 19:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -30,7 +30,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 2 | Pilot triage and pre-registration | Closed: WRK-0001 pre-registers a theory/02 finite-index reproduction with anchors, alternative/falsifier, non-effects, rollback, and existing Lean commands. | Macro 1/5 early; closed |
 | 3 | Pilot experiment | Closed: WRK-0001's positive/negative Lean reproduction is retained and append-only manifested as L3 evidence. It remains `not-promoted`; no theory or implementation claim moved. | Macro 1/5 middle; closed |
 | 4 | Pilot checkpoint | Closed: authoritative clean-worktree validation, full local validation, independent review, dashboard synchronization, and a next candidate class were completed without L3 promotion. | Macro 0/1 closeout; closed |
-| 5 | Subsequent ratchet | Current next package: assess OBL-021 single-projection countermodel eligibility and, only if eligible, commit a separate L3 pre-registration before any edit or outcome command. | Macro 1/5 reserve; 1-2 research sessions |
+| 5 | OBL-021 countermodel pre-registration | Closed: WRK-0002 pre-registers a projection-vacuity countermodel in the existing `samples/lean` lane, with a concrete alternative, falsifier, rollback, and no outcome evidence. | Macro 1/5 reserve; closed |
+| 6 | OBL-021 countermodel evidence | Current next package: first run the registered missing-file red check, then add and compile the countermodel plus its static guard; retain only an L3 result. | Macro 1/5 reserve; 1-2 research sessions |
 
 ## self-driven macro phase reading
 
@@ -54,6 +55,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; select a bounded WRK candidate under `plan/158`; no `theory/11` movement |
+| textual runnable research core | whether the existing Full System V1 source-first lane can be used as L3 retained evidence without changing governance | current WRK validator permits only `plan`, `samples/clean-near-end`, `samples/current-l2`, and `samples/lean`; the Full System V1 lane is outside that boundary, so retain this as an escalation candidate rather than silently widening the permitted roots |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; choose a new candidate with a falsifier |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |
