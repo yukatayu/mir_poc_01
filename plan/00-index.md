@@ -114,11 +114,12 @@
 96. historical exact-target delegated L2/L3 theory research governance は `plan/157`
 97. standing bounded autonomy と first research ratchet は `plan/158`
 98. WRK evidence-commit integrity recut は `plan/159`
-99. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
-100. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
-101. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
-102. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-103. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+99. OBL-021 statement-shape checkpoint は `plan/160`
+100. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
+101. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
+102. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
+103. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+104. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 
@@ -644,6 +645,8 @@
   `plan/wrk-0001-finite-index-reproduction.md`
 - WRK-0001 pilot checkpoint:
   `plan/wrk-0001-pilot-checkpoint.md`
+- OBL-021 statement-shape checkpoint:
+  `plan/160-obl021-statement-shape-checkpoint.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 

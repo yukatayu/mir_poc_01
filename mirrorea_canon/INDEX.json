@@ -1161,7 +1161,7 @@
    "summary": "OBL-021 の LAB statement draft に明示的 outcome-totality を仮定したとき、success/reject をまとめる実験用 SameOutcome relation で全 outcome pair の関係が導けるかを検査する L3 conditional lemma record。最終 equality、relation laws、Canon 帰属、OBL 状態は変更しない。",
    "open_items": [],
    "path": "working/WRK-0005-obl021-conditional-outcome-relation.md",
-   "bytes": 6841
+   "bytes": 8550
   }
  ]
 }

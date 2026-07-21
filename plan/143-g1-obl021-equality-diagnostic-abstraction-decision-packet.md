@@ -66,7 +66,7 @@ annex or status packet is allowed to use.
 | State | Meaning | Current file status |
 |---|---|---|
 | Artifact annex template | Names the OBL-021 artifact and unresolved slots. | Already supplied by `plan/140`. |
-| Boundary decision packet | Asks whether the current abstract equivalence boundary is acceptable before status drafting. | This file. |
+| Boundary decision packet | Asks whether the current abstract comparison-predicate boundary is acceptable before status drafting. | This file. |
 | Filled annex | Provides fresh validation and selected decision values. | Not created here. |
 | Draft status proposal | Chooses requested status and ledger delta proposal text. | Not created here. |
 | Submitted / accepted status movement | Human/canon process decides and canon ledger changes. | Not created here. |
@@ -92,10 +92,19 @@ The current statement shape says that for a fixed well-scoped input:
 - two rejections have `SameDiagnostic`;
 - the same input cannot both elaborate successfully and reject.
 
-`SameElabResult` is component-wise and abstract. It names equivalence for Core
-term, type, mode, effect row, failure row, constraints, obligations, generated
-edges, and source spans. `SameDiagnostic` is also abstract and delegates to an
+`SameElabResult` is component-wise and abstract. It names comparison predicates
+for Core term, type, mode, effect row, failure row, constraints, obligations,
+generated edges, and source spans. The LAB draft assumes no reflexivity,
+symmetry, transitivity, adequacy, or extensionality law for those predicates.
+`SameDiagnostic` likewise delegates only to the abstract
 `EquivalentDiagnostic` predicate.
+
+WRK-0002 through WRK-0005 add bounded LAB evidence about this shape. The draft
+does not entail result identity, projection non-vacuity, or outcome existence.
+For one fixed well-scoped input it does entail a possibly-vacuous all-pairs
+`SameOutcome` relation on actual outcomes; a separate experimental totality
+premise makes that fiber nonempty. This is partial relational coherence, not a
+selected equality/equivalence, total function contract, or Canon statement.
 
 This is statement-shape evidence. It is not a proof that the implementation is
 deterministic.
@@ -105,9 +114,9 @@ deterministic.
 The smallest useful human/canon question is:
 
 ```text
-For OBL-021 requested-status drafting, is the current abstract equivalence
+For OBL-021 requested-status drafting, is the current abstract comparison-predicate
 boundary acceptable as statement-status vocabulary, or must the project first
-choose stronger concrete equality / diagnostic / projection-totality relations?
+choose stronger concrete equality / diagnostic / joint-adequacy relations?
 ```
 
 This question must stay separate from:
@@ -127,19 +136,19 @@ The packet should ask for decisions on four axes.
 
 | Option | Meaning | Consequence |
 |---|---|---|
-| A1 Abstract component equivalence accepted | `SameElabResult` and its component predicates are acceptable statement-status vocabulary for this checkpoint. | A later packet may request conditional OBL-021 status using the current abstract result-equivalence boundary, still without proof or conformance. |
+| A1 Abstract component comparisons accepted | `SameElabResult` and its component predicates are acceptable statement-status vocabulary for this checkpoint, without asserting relation laws. | A later packet may request conditional OBL-021 status using the current abstract result-comparison boundary, still without proof or conformance. |
 | A2 Concrete equality required first | The packet must choose concrete equality / equivalence relations for result components before any status request. | Open a statement-refinement package before OBL-021 status drafting. |
-| A3 Projection-totality required first | The packet must state or prove that result projections are total / unique enough for deterministic comparison. | Defer status drafting or refine the statement shape to expose projection-totality obligations. |
+| A3 Joint adequacy or direct Result relation required first | Projection totality / uniqueness alone is insufficient; the packet must state or prove a joint extensionality/adequacy bridge, or select a direct Result relation. | Defer status drafting or refine the statement shape to expose the selected bridge. |
 | A4 Defer | Human/canon review does not accept or reject the result boundary yet. | Keep OBL-021 requested-status work deferred. |
 
-### Axis B - diagnostic equivalence boundary
+### Axis B - diagnostic comparison boundary
 
 | Option | Meaning | Consequence |
 |---|---|---|
-| B1 Abstract diagnostic equivalence accepted | `SameDiagnostic` / `EquivalentDiagnostic` is acceptable statement-status vocabulary for reject/reject determinism. | A later packet may keep Diagnostic ABI details outside OBL-021 status drafting, with explicit non-claims. |
+| B1 Abstract diagnostic comparison accepted | `SameDiagnostic` / `EquivalentDiagnostic` is acceptable statement-status vocabulary for reject/reject determinism, without asserting relation laws or theory/10 adequacy. | A later packet may keep Diagnostic ABI details outside OBL-021 status drafting, with explicit non-claims. |
 | B2 Final Diagnostic ABI required first | A final or canon-facing Diagnostic carrier/equality contract must exist before OBL-021 status request. | Defer OBL-021 status drafting to a diagnostic-boundary package. |
 | B3 Diagnostic soundness link required first | OBL-021 status must wait until the relation to OBL-024 diagnostic soundness is stated more concretely. | Open a cross-OBL boundary package before status drafting. |
-| B4 Defer | Human/canon review leaves diagnostic equivalence unresolved. | Keep OBL-021 requested-status work deferred. |
+| B4 Defer | Human/canon review leaves diagnostic comparison unresolved. | Keep OBL-021 requested-status work deferred. |
 
 ### Axis C - artifact identity / wrapper boundary
 
@@ -155,7 +164,7 @@ The packet should ask for decisions on four axes.
 |---|---|---|
 | D1 Current fixed-input abstraction accepted | `env`, `ctx`, `locus`, `item`, plus `WellScopedInput`, are acceptable as the fixed-input boundary for statement-status vocabulary. | A later packet may keep canonical input snapshot / context equality outside OBL-021 status drafting. |
 | D2 Canonical input snapshot required first | Status drafting must define equality or canonicalization for environment, context, locus, and Surface item. | Open a statement-refinement or input-snapshot boundary package before OBL-021 status drafting. |
-| D3 Projection non-vacuity laws required first | Status drafting must state that successful results expose enough total / unique projections for component comparison to be meaningful. | Refine OBL-021 statement shape before status drafting. |
+| D3 Projection non-vacuity plus joint adequacy required first | Status drafting must state that successful results expose enough projections for non-vacuous comparison and select a joint adequacy / direct-Result bridge. | Refine OBL-021 statement shape before status drafting. |
 | D4 Defer | Human/canon review leaves fixed-input identity unresolved. | Keep OBL-021 requested-status work deferred. |
 
 ## Current LAB recommendation
@@ -163,7 +172,7 @@ The packet should ask for decisions on four axes.
 The current LAB recommendation is:
 
 - Ask Axis A and Axis B before any OBL-021 status draft.
-- Ask Axis D in the same packet, because abstract result equivalence can look
+- Ask Axis D in the same packet, because abstract result comparison can look
   stronger than it is if fixed-input identity or projection non-vacuity remains
   implicit.
 - Treat A1 and B1 as plausible scoped acceptances for **statement-status
@@ -189,10 +198,10 @@ rewrite the old draft into an accepted decision.
 
 | Outcome | Unblocks | Does not unblock |
 |---|---|---|
-| A1 + B1 accepted, C unresolved | A later OBL-021 annex can say the abstraction boundary is accepted for statement-status drafting. | Artifact identity, requested status, ledger movement, proof, conformance, G1 exit. |
+| A1 + B1 accepted, C unresolved | A later OBL-021 annex can say the comparison-predicate boundary is accepted for statement-status drafting. | Artifact identity, requested status, ledger movement, proof, conformance, G1 exit. |
 | A1 + B1 + C1 accepted | A later status proposal draft may cite the current LAB artifact as the requested artifact, if fresh validation is rerun. | Canon status movement until submitted and accepted; proof / final ABI claims. |
 | A1 + B1 + C2 accepted | A wrapper package may be opened with strict non-applied wording. | Status request until wrapper and validation package close. |
-| A2 or A3 selected | A statement-refinement or projection-boundary package should happen before status drafting. | Direct status proposal. |
+| A2 or A3 selected | A statement-refinement or joint-adequacy/direct-Result package should happen before status drafting. | Direct status proposal. |
 | B2 or B3 selected | A diagnostic-boundary or OBL-024 relation package should happen before status drafting. | Direct status proposal. |
 | D2 or D3 selected | A fixed-input identity or projection non-vacuity refinement should happen before status drafting. | Direct status proposal. |
 | Any axis deferred | OBL-021 status remains deferred. | Silent assumption that the current draft is accepted. |
@@ -212,15 +221,15 @@ Canon ledger target:
   OBL-021 / MirCore.Elab.Det
 
 Decision requested:
-  1. Is abstract component result equivalence acceptable as OBL-021
+  1. Are abstract component result comparison predicates acceptable as OBL-021
      statement-status vocabulary at this checkpoint?
-  2. Is abstract diagnostic equivalence acceptable as OBL-021
+  2. Is the abstract diagnostic comparison predicate acceptable as OBL-021
      statement-status vocabulary at this checkpoint?
   3. Does OBL-021 status drafting require direct LAB artifact acceptance,
      a canon-facing wrapper, or deferral?
   4. Is the current fixed-input abstraction non-vacuous enough, or must the
-     project first define canonical input equality / snapshot and projection
-     totality / uniqueness constraints?
+     project first define canonical input equality / snapshot and a joint
+     projection adequacy / direct-Result bridge?
 
 Non-claim:
   This decision does not prove OBL-021, complete OBL-021, move the ledger,

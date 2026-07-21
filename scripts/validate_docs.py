@@ -594,6 +594,7 @@ REQUIRED = [
     "plan/157-delegated-theory-research-governance.md",
     "plan/158-standing-bounded-autonomy.md",
     "plan/159-wrk-evidence-commit-integrity-recut.md",
+    "plan/160-obl021-statement-shape-checkpoint.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

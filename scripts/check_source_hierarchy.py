@@ -245,6 +245,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/157-delegated-theory-research-governance.md",
         "plan/158-standing-bounded-autonomy.md",
         "plan/159-wrk-evidence-commit-integrity-recut.md",
+        "plan/160-obl021-statement-shape-checkpoint.md",
     ],
     "scripts": [
         "scripts",
