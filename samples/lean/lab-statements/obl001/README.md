@@ -18,3 +18,10 @@ Boundary:
 - no OBL-001 completion;
 - no proof discharge;
 - no proof skeleton, runtime dispatch, G1 exit, or conformance claim.
+
+## Adjacent bounded evidence
+
+`ResultWriteCoverageCountermodel.lean` imports this draft and checks a distinct
+LAB-only question: the draft's `GeneratedWrite` predicate need not enumerate an
+experiment-local Result/write membership relation. It does not alter this draft
+or define Canon Core. Its governing L3 record is `WRK-0007`.
