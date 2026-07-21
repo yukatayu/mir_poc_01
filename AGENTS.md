@@ -49,10 +49,15 @@ source hierarchy; do not treat an external chat as normative state.
    - If something is not decided, write **UNRESOLVED** or **OPEN QUESTION**.
    - Do not silently turn a hypothesis into a fact.
    - Under ADR-0014, research may progress autonomously in existing LAB lanes.
-     A canon L2/L3 working position additionally requires an active exact
-     owner-listed target, a rebased frozen final diff, independent review,
-     negative evidence, non-effects, and rollback trigger. It is not an L0/L1
-     decision, implementation contract, or proof/ledger change.
+     An L3 `working/WRK-####` pre-registration needs the standing-eligibility
+     check, alternative/falsifier, non-effects, and rollback trigger before
+     evidence is relied on; it does not need an independent review to begin.
+     L2 promotion is currently fail-closed pending an owner-authenticated trust
+     anchor; its future route needs the rebased frozen final cut and
+     independent review.
+     A frozen L2 record is retained and followed by a successor, not demoted in
+     place. Neither is an L0/L1 decision, implementation contract,
+     or proof/ledger change.
 
 3. **Respect decision levels**
    - `L0` = foundational / changing it affects the whole system.
@@ -80,10 +85,13 @@ source hierarchy; do not treat an external chat as normative state.
 7. **Prefer clarification in writing over silent assumption**
    - If a task needs a choice between two unresolved options, document both and state the reason you chose a temporary working assumption.
    - A temporary assumption may remain a LAB working candidate. It may become a
-     canon L2/L3 working position only through an active ADR-0014 exact target
-     and final-delta review. Escalate instead when it touches L0/L1, a
-     core/external contract, SCN/Gate/Phase, any `theory/11` state, or a new
-     moratorium-protected lane.
+     canon L3 pre-registration in `working/WRK-####` through ADR-0014's
+     standing predicate; L2 promotion is currently fail-closed and, after an
+     owner-authenticated trust anchor exists, additionally needs final-cut
+     review.
+     Escalate instead when it touches
+     L0/L1, a core/external contract, SCN/Gate/Phase, any `theory/11` state, or
+     a new moratorium-protected lane.
 
 ## Strong project-specific constraints
 
@@ -155,7 +163,7 @@ Every report should contain, in this order:
 
 ## Editing policy
 
-- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, human decision, required ADR / changelog / index update. ADR-0014 is the limited standing route only where its owner-maintained exact target table is active; retain its frozen authority/evidence cut and pre-update review before writing canon.
+- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, human decision, required ADR / changelog / index update. ADR-0014 permits agent-maintained L3 work only in `working/WRK-####` when its standing predicate holds. L2 promotion is fail-closed pending an owner-authenticated trust anchor; its future route retains a frozen authority/evidence cut and pre-update review. A frozen L2 record is followed forward rather than rewritten.
 - Legacy LAB `specs/` remain historical evidence and implementation memory. Edit carefully, and do not treat them as canonical unless the claim is mirrored into `mirrorea_canon/`.
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.

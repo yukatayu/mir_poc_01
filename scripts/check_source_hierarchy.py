@@ -24,6 +24,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "mirrorea_canon/README.md",
         "mirrorea_canon/MAP.md",
         "mirrorea_canon/INDEX.json",
+        "mirrorea_canon/working/README.md",
+        "mirrorea_canon/meta/review-keys.json",
         "mirrorea_canon/meta/source-hierarchy.md",
         "mirrorea_canon/adr/ADR-0012.md",
         "mirrorea_canon/plan/00-gates.md",
@@ -241,6 +243,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/155-t0-g0-governance-profile-proposal.md",
         "plan/156-t0-t2-research-autonomy-envelope.md",
         "plan/157-delegated-theory-research-governance.md",
+        "plan/158-standing-bounded-autonomy.md",
+        "plan/159-wrk-evidence-commit-integrity-recut.md",
     ],
     "scripts": [
         "scripts",

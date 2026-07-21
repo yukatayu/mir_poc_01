@@ -3,11 +3,15 @@ id: meta/proposal-005
 status: L1-fixed
 maturity: draft
 depends_on: [adr/ADR-0012]
-summary: 採択済みの delegated L2/L3 theory research route。LAB は候補・反証・実験・履歴を保持し、canon update は ADR-0014 の exact owner allowlist と final-delta review を要する。
+summary: 歴史的な pre-amendment delegated L2/L3 theory research route。exact owner allowlist は PROPOSAL-006 と改訂 ADR-0014 により superseded である。
 open_items: []
 ---
 
 # PROPOSAL-005 - Delegated L2/L3 theory research
+
+> Historical operating memo. Its owner-maintained exact-target mechanism is
+> superseded by PROPOSAL-006 and the amended ADR-0014. It remains evidence of
+> the pre-amendment safety analysis.
 
 > Adopted design memo. The effective delegation is ADR-0014 together with
 > `plan/02-operating-model` and `meta/agent-instructions`. This memo records

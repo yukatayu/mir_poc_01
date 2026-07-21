@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import hashlib
 import io
+import json
+import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -126,6 +130,137 @@ class ValidateDocsTests(unittest.TestCase):
         (root / "docs" / "reports" / "0001-smoke.md").write_text(
             "# Report 0001\n", encoding="utf-8"
         )
+
+    def _git(
+        self, root: Path, *args: str, env: dict[str, str] | None = None
+    ) -> str:
+        result = subprocess.run(
+            ["git", "-C", str(root), *args],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=env,
+        )
+        return result.stdout.strip()
+
+    def _signed_identity(
+        self, root: Path, email: str
+    ) -> tuple[dict[str, str], str]:
+        gnupg_home = root / "test-gnupg"
+        gnupg_home.mkdir(mode=0o700, exist_ok=True)
+        environment = {**os.environ, "GNUPGHOME": str(gnupg_home)}
+        subprocess.run(
+            [
+                "gpg",
+                "--batch",
+                "--pinentry-mode",
+                "loopback",
+                "--passphrase",
+                "",
+                "--quick-generate-key",
+                email,
+                "ed25519",
+                "sign",
+                "never",
+            ],
+            check=True,
+            capture_output=True,
+            env=environment,
+        )
+        keys = subprocess.run(
+            [
+                "gpg",
+                "--batch",
+                "--with-colons",
+                "--list-secret-keys",
+                email,
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=environment,
+        ).stdout.splitlines()
+        fingerprint = next(line.split(":")[9] for line in keys if line.startswith("fpr:"))
+        self._git(root, "config", "user.signingkey", fingerprint)
+        self._git(root, "config", "gpg.program", "gpg")
+        return environment, fingerprint
+
+    def _write_review_keys(
+        self, root: Path, author_fingerprint: str, reviewer_fingerprint: str
+    ) -> None:
+        (root / "mirrorea_canon" / "meta" / "review-keys.json").write_text(
+            json.dumps(
+                {
+                    "format": 1,
+                    "author_fingerprints": [author_fingerprint],
+                    "reviewer_fingerprints": [reviewer_fingerprint],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def _working_record_context(self, root: Path) -> dict[str, str]:
+        """Create a committed authority/evidence cut for WRK validator tests."""
+        (root / "mirrorea_canon" / "adr").mkdir(parents=True, exist_ok=True)
+        (root / "mirrorea_canon" / "adr" / "ADR-0014.md").write_text(
+            "---\n"
+            "id: adr/ADR-0014\n"
+            "status: L0-frozen\n"
+            "maturity: draft\n"
+            "depends_on: []\n"
+            "summary: test authority anchor\n"
+            "open_items: []\n"
+            "---\n\n"
+            "# ADR-0014 test anchor\n",
+            encoding="utf-8",
+        )
+        (root / "plan" / "156.md").write_text(
+            "# retained LAB evidence\n", encoding="utf-8"
+        )
+        self._git(root, "init", "-q")
+        self._git(root, "config", "user.name", "test reviewer")
+        self._git(root, "config", "user.email", "reviewer@example.test")
+        self._git(root, "add", ".")
+        self._git(root, "commit", "-qm", "test: authority and evidence cut")
+        base = self._git(root, "rev-parse", "HEAD")
+        canon_blob = hashlib.sha256(
+            (root / "mirrorea_canon" / "adr" / "ADR-0014.md").read_bytes()
+        ).hexdigest()
+        lab_blob = hashlib.sha256((root / "plan" / "156.md").read_bytes()).hexdigest()
+        return {
+            "base": base,
+            "canon_anchor": f"adr/ADR-0014@{base}:{canon_blob}",
+            "lab_input": f"LAB:plan/156.md@{base}:{lab_blob}",
+        }
+
+    def _reviewed_record_text(
+        self,
+        context: dict[str, str],
+        frozen_base: str,
+        author_fingerprint: str,
+        reviewer_fingerprint: str,
+    ) -> str:
+        provisional = self._valid_working_record_text(
+            status="L2-working",
+            reliance="active",
+            canon_anchor=context["canon_anchor"],
+            lab_input=context["lab_input"],
+            evidence_artifacts=context["lab_input"],
+            author_fingerprint=author_fingerprint,
+            review=(
+                f"reviewer-fingerprint={reviewer_fingerprint}; "
+                f"frozen-base={frozen_base}; "
+                "record-sha256=" + ("0" * 64) + "; decision=approved"
+            ),
+        )
+        normalized = provisional.replace(
+            f"Independent review: reviewer-fingerprint={reviewer_fingerprint}; "
+            f"frozen-base={frozen_base}; record-sha256=" + ("0" * 64)
+            + "; decision=approved",
+            "Independent review: <review-metadata>",
+        )
+        record_hash = hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+        return provisional.replace("record-sha256=" + ("0" * 64), f"record-sha256={record_hash}")
 
     def test_report_template_requires_commands_run_section(self) -> None:
         heading = "## Commands run"
@@ -1632,6 +1767,1119 @@ class ValidateDocsTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertIn("Documentation scaffold looks complete", stdout.getvalue())
 
+    def _valid_working_record_text(
+        self,
+        status: str = "L3-open",
+        reliance: str = "not-promoted",
+        positive_evidence: str | None = None,
+        negative_evidence: str | None = None,
+        review: str | None = None,
+        author: str = "author-agent",
+        author_fingerprint: str = "not-required-for-L3",
+        canon_anchor: str = (
+            "adr/ADR-0014@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:"
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ),
+        lab_input: str = (
+            "LAB:plan/156.md@cccccccccccccccccccccccccccccccccccccccc:"
+            "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        ),
+        evidence_artifacts: str = "pending",
+        evidence_commits: str = "none",
+        permitted_lab_locations: str = "plan",
+    ) -> str:
+        is_l2 = status == "L2-working"
+        positive_evidence = positive_evidence or (
+            "python3 scripts/validate_docs.py passed"
+            if is_l2
+            else "pending"
+        )
+        negative_evidence = negative_evidence or (
+            "countermodel rejection passed" if is_l2 else "pending"
+        )
+        review = review or (
+            "reviewer=independent-agent; "
+            "frozen-cut=dddddddddddddddddddddddddddddddddddddddd; decision=approved"
+            if is_l2
+            else "not-required-for-L3"
+        )
+        return (
+            "---\n"
+            "id: working/WRK-0001\n"
+            f"status: {status}\n"
+            f"maturity: {'reviewed' if is_l2 else 'draft'}\n"
+            "depends_on: [adr/ADR-0014]\n"
+            "summary: test working record\n"
+            "open_items: []\n"
+            "---\n\n"
+            "# WRK-0001 - test\n\n"
+            "## Classification and authority cut\n\n"
+            "Standing eligibility: pass\n"
+            f"Author: {author}\n"
+            f"Author fingerprint: {author_fingerprint}\n"
+            f"Canon anchors: {canon_anchor}\n"
+            f"LAB inputs: {lab_input}\n"
+            f"Permitted LAB locations: {permitted_lab_locations}\n"
+            "Reserved surfaces: excluded\n\n"
+            "## Pre-registered working question\n\n"
+            "Question: does the test record remain bounded?\n"
+            "Status quo: no pilot result exists.\n"
+            "Alternative: the route requires escalation.\n"
+            "Expected falsifier: a reserved-surface dependency is required.\n"
+            "Rollback / reopen trigger: a reproduced falsifier.\n\n"
+            "## Method and evidence plan\n\n"
+            "Result class: countermodel\n"
+            "Commands: python3 scripts/validate_docs.py\n"
+            "Non-claims: no Gate, Phase, proof, or public claim.\n\n"
+            "## Results and review\n\n"
+            f"Reliance status: {reliance}\n"
+            f"Positive evidence: {positive_evidence}\n"
+            f"Negative evidence: {negative_evidence}\n"
+            f"Evidence artifacts: {evidence_artifacts}\n"
+            f"Evidence commits: {evidence_commits}\n"
+            "Impact / non-effects: no existing canon text changes.\n"
+            f"Independent review: {review}\n\n"
+            "## Supersession\n\n"
+            "Supersession: none\n"
+        )
+
+    def test_working_record_requires_preregistration_sections_and_reliance_status(
+        self,
+    ) -> None:
+        headings = (
+            "## Classification and authority cut",
+            "## Pre-registered working question",
+            "## Method and evidence plan",
+            "## Results and review",
+            "## Supersession",
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(record_text, encoding="utf-8")
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            self.assertEqual([], checker(root))
+
+            record_path.write_text(
+                record_text.replace("Reliance status: not-promoted", "Reliance status: active"),
+                encoding="utf-8",
+            )
+            self.assertTrue(checker(root))
+
+            record_path.write_text(
+                record_text.replace(
+                    "Reliance status: not-promoted",
+                    "Reliance status: not-promoted\nReliance status: bypass",
+                ),
+                encoding="utf-8",
+            )
+            self.assertTrue(checker(root))
+
+            record_path.write_text(
+                record_text.replace(
+                    headings[3] + "\n\nReliance status: not-promoted",
+                    headings[3]
+                    + "\n\nNo reliance marker here\n\n"
+                    + headings[4]
+                    + "\n\nReliance status: not-promoted",
+                ),
+                encoding="utf-8",
+            )
+            self.assertTrue(checker(root))
+
+    def test_working_record_rejects_renamed_and_reidentified_l3_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            working_root = root / "mirrorea_canon" / "working"
+            original = working_root / "WRK-0001-test.md"
+            original.parent.mkdir(parents=True, exist_ok=True)
+            original.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", original.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register L3 record")
+
+            replacement = working_root / "WRK-0002-renamed.md"
+            original.rename(replacement)
+            replacement.write_text(
+                record_text.replace("WRK-0001", "WRK-0002"), encoding="utf-8"
+            )
+            self._git(root, "add", "-A")
+            self._git(root, "commit", "-qm", "research: rename L3 record")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("historical WRK identity" in error for error in errors), errors
+        )
+
+    def test_working_record_rejects_transient_merged_l3_rename_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            working_root = root / "mirrorea_canon" / "working"
+            original = working_root / "WRK-0001-test.md"
+            original.parent.mkdir(parents=True, exist_ok=True)
+            original.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", original.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register L3 record")
+            main_branch = self._git(root, "branch", "--show-current")
+
+            self._git(root, "checkout", "-qb", "side")
+            transient = working_root / "WRK-0002-transient.md"
+            original.rename(transient)
+            transient.write_text(
+                record_text.replace("WRK-0001", "WRK-0002"), encoding="utf-8"
+            )
+            self._git(root, "add", "-A")
+            self._git(root, "commit", "-qm", "research: transient L3 rename")
+            transient.rename(original)
+            original.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", "-A")
+            self._git(root, "commit", "-qm", "research: restore L3 path")
+            self._git(root, "checkout", "-q", main_branch)
+            self._git(root, "merge", "--no-ff", "-qm", "merge transient L3 history", "side")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("historical WRK identity" in error for error in errors), errors
+        )
+
+    def test_working_record_rejects_uncommitted_record_deletion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            record_path.unlink()
+            helper_path = root / "scripts" / "out-of-lane-after-delete.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('out of lane')\n", encoding="utf-8")
+
+            errors = validate_docs.working_annex_errors(root, authoritative=True)
+
+        self.assertTrue(any("clean worktree" in error for error in errors), errors)
+        self.assertTrue(any("WRK-0001-test.md" in error for error in errors), errors)
+        self.assertTrue(any("out-of-lane-after-delete.py" in error for error in errors), errors)
+
+    def test_working_record_rejects_committed_deletion_when_annex_disappears(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            self._git(root, "rm", "-r", "mirrorea_canon/working")
+            self._git(root, "commit", "-qm", "research: delete working annex")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("historical WRK identity is absent" in error for error in errors), errors)
+
+    def test_working_record_rejects_transient_malformed_identity_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register L3 record")
+            main_branch = self._git(root, "branch", "--show-current")
+
+            self._git(root, "checkout", "-qb", "side")
+            record_path.write_text(
+                record_text.replace("id: working/WRK-0001", "id: meta/temporary"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: transient malformed identity")
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: restore L3 identity")
+            self._git(root, "checkout", "-q", main_branch)
+            self._git(root, "merge", "--no-ff", "-qm", "merge malformed identity history", "side")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("historical WRK identity" in error for error in errors), errors)
+
+    def test_working_record_rejects_non_lane_change_since_preregistration(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            helper_path = root / "scripts" / "unregistered-l3-helper.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('out of lane')\n", encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "add", helper_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register with helper")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("outside its declared package" in error for error in errors), errors
+        )
+
+    def test_working_record_rejects_uncommitted_non_lane_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            helper_path = root / "scripts" / "uncommitted-l3-helper.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('out of lane')\n", encoding="utf-8")
+
+            errors = validate_docs.working_annex_errors(root, authoritative=True)
+
+        self.assertTrue(
+            any("uncommitted-l3-helper.py" in error for error in errors), errors
+        )
+
+    def test_working_record_rejects_ignored_uncommitted_non_lane_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            (root / ".gitignore").write_text("scripts/ignored-l3-helper.py\n", encoding="utf-8")
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            helper_path = root / "scripts" / "ignored-l3-helper.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('out of lane')\n", encoding="utf-8")
+
+            errors = validate_docs.working_annex_errors(root, authoritative=True)
+
+        self.assertTrue(
+            any("ignored-l3-helper.py" in error for error in errors), errors
+        )
+
+    def test_working_record_does_not_attribute_unmanifested_policy_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            readme_path = root / "mirrorea_canon" / "working" / "README.md"
+            readme_path.parent.mkdir(parents=True, exist_ok=True)
+            readme_path.write_text("# working policy\n", encoding="utf-8")
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            readme_path.write_text("# altered working policy\n", encoding="utf-8")
+            self._git(root, "add", readme_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "docs: alter working policy")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_ignores_pre_registration_side_branch_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            main_branch = self._git(root, "branch", "--show-current")
+            self._git(root, "checkout", "-qb", "side")
+            side_path = root / "scripts" / "pre-registration-side-branch.py"
+            side_path.parent.mkdir(parents=True, exist_ok=True)
+            side_path.write_text("print('unrelated earlier work')\n", encoding="utf-8")
+            self._git(root, "add", side_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: side branch before registration")
+            self._git(root, "checkout", "-q", main_branch)
+
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            self._git(root, "merge", "--no-ff", "-qm", "merge earlier side branch", "side")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_rejects_non_markdown_control_path_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            helper_path = root / "docs" / "reports" / "l3-helper.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('out of lane')\n", encoding="utf-8")
+            prefix_path = root / "tasks.md-helper.py"
+            prefix_path.write_text("print('out of lane')\n", encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "add", helper_path.relative_to(root).as_posix())
+            self._git(root, "add", prefix_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: hide helpers under controls")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("outside its declared package" in error for error in errors), errors
+        )
+        self.assertTrue(any("docs/reports/l3-helper.py" in error for error in errors), errors)
+        self.assertTrue(any("tasks.md-helper.py" in error for error in errors), errors)
+
+    def test_working_record_allows_markdown_control_report(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            report_path = root / "docs" / "reports" / "0002-l3-note.md"
+            report_path.write_text("# L3 note\n", encoding="utf-8")
+            self._git(root, "add", report_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "docs: record L3 note")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_allows_declared_lane_change_since_preregistration(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+
+            lane_path = root / "plan" / "157.md"
+            lane_path.write_text("# declared lane experiment\n", encoding="utf-8")
+            self._git(root, "add", lane_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: update declared lane")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_accepts_manifested_evidence_in_declared_lane(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+
+            artifact_path = root / "plan" / "157.md"
+            artifact_path.write_text("# declared lane experiment\n", encoding="utf-8")
+            self._git(root, "add", artifact_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: run declared experiment")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            artifact_digest = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            record_path.write_text(
+                record_text.replace(
+                    "Evidence artifacts: pending",
+                    f"Evidence artifacts: LAB:plan/157.md@{evidence_commit}:{artifact_digest}",
+                ).replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest evidence")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_rejects_manifested_evidence_outside_declared_lane(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+
+            helper_path = root / "scripts" / "evidence-helper.py"
+            helper_path.parent.mkdir(parents=True, exist_ok=True)
+            helper_path.write_text("print('not a declared lane')\n", encoding="utf-8")
+            self._git(root, "add", helper_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: out-of-lane evidence")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            record_path.write_text(
+                record_text.replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest invalid evidence")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("evidence-helper.py" in error for error in errors), errors)
+
+    def test_working_record_rejects_evidence_that_predates_registration(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            artifact_path = root / "plan" / "157.md"
+            artifact_path.write_text("# too early\n", encoding="utf-8")
+            self._git(root, "add", artifact_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: evidence before pre-registration")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"],
+                    lab_input=context["lab_input"],
+                    evidence_commits=evidence_commit,
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register too-late evidence")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("must follow registration" in error for error in errors), errors)
+
+    def test_working_record_rejects_evidence_manifest_removal(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register working record")
+            artifact_path = root / "plan" / "157.md"
+            artifact_path.write_text("# evidence\n", encoding="utf-8")
+            self._git(root, "add", artifact_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: run evidence")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            manifested_text = record_text.replace(
+                "Evidence commits: none", f"Evidence commits: {evidence_commit}"
+            )
+            record_path.write_text(manifested_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest evidence")
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: remove evidence manifest")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("Evidence commits are not append-only" in error for error in errors), errors)
+
+    def test_working_record_rejects_duplicate_evidence_ownership(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            working_root = root / "mirrorea_canon" / "working"
+            working_root.mkdir(parents=True, exist_ok=True)
+            record_one = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"], lab_input=context["lab_input"]
+            )
+            record_one_path = working_root / "WRK-0001-test.md"
+            record_one_path.write_text(record_one, encoding="utf-8")
+            self._git(root, "add", record_one_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register first record")
+            record_two = record_one.replace("WRK-0001", "WRK-0002")
+            record_two_path = working_root / "WRK-0002-test.md"
+            record_two_path.write_text(record_two, encoding="utf-8")
+            self._git(root, "add", record_two_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register second record")
+            artifact_path = root / "plan" / "157.md"
+            artifact_path.write_text("# shared evidence\n", encoding="utf-8")
+            self._git(root, "add", artifact_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: run shared evidence")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            record_one_path.write_text(
+                record_one.replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_one_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest first ownership")
+            record_two_path.write_text(
+                record_two.replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_two_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest duplicate ownership")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(any("claimed by both" in error for error in errors), errors)
+
+    def test_working_record_rejects_empty_required_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text().replace(
+                    "Alternative: the route requires escalation.", "Alternative:"
+                ),
+                encoding="utf-8",
+            )
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+
+    def test_working_record_rejects_front_matter_identity_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text().replace(
+                    "id: working/WRK-0001", "id: meta/not-a-wrk"
+                ).replace("status: L3-open", "status: L1-fixed", 1).replace(
+                    "# WRK-0001 - test\n\n",
+                    "# WRK-0001 - test\n\nstatus: L3-open\n\n",
+                ),
+                encoding="utf-8",
+            )
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+
+    def test_working_record_reports_missing_sections_without_crashing(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text().replace(
+                    "## Results and review\n\n", ""
+                ),
+                encoding="utf-8",
+            )
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+
+    def test_working_record_rejects_unrecognized_or_nested_markdown(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            working_root = root / "mirrorea_canon" / "working"
+            working_root.mkdir(parents=True, exist_ok=True)
+            (working_root / "notes.md").write_text("# unregistered note\n", encoding="utf-8")
+            nested = working_root / "archive" / "WRK-0001-test.md"
+            nested.parent.mkdir(parents=True, exist_ok=True)
+            nested.write_text(self._valid_working_record_text(), encoding="utf-8")
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+
+    def test_working_record_rejects_non_markdown_helper_in_working_annex(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            working_root = root / "mirrorea_canon" / "working"
+            working_root.mkdir(parents=True, exist_ok=True)
+            (working_root / "unregistered-helper.py").write_text(
+                "print('not a WRK record')\n", encoding="utf-8"
+            )
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("working annex permits only README.md or WRK records" in error for error in errors),
+            errors,
+        )
+
+    def test_l2_working_record_requires_evidence_and_review_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    status="L2-working",
+                    reliance="active",
+                    positive_evidence="pending",
+                    negative_evidence="pending",
+                    review="pending",
+                ),
+                encoding="utf-8",
+            )
+            checker = getattr(
+                validate_docs,
+                "working_annex_errors",
+                lambda _root: ["working record validator is missing"],
+            )
+            self.assertTrue(checker(root))
+
+            record_path.write_text(
+                self._valid_working_record_text(
+                    status="L2-working", reliance="active", review="none"
+                ),
+                encoding="utf-8",
+            )
+            self.assertTrue(checker(root))
+
+            record_path.write_text(
+                self._valid_working_record_text(
+                    status="L2-working",
+                    reliance="active",
+                    review="reviewer=author-agent; "
+                    "frozen-cut=dddddddddddddddddddddddddddddddddddddddd; decision=approved",
+                ),
+                encoding="utf-8",
+            )
+            self.assertTrue(checker(root))
+
+    def test_l2_working_record_fail_closes_without_owner_trust_anchor(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            author_environment, author_fingerprint = self._signed_identity(
+                root, "author@example.test"
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"],
+                    lab_input=context["lab_input"],
+                    author_fingerprint=author_fingerprint,
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "research: freeze L3 working material",
+                env=author_environment,
+            )
+            frozen_base = self._git(root, "rev-parse", "HEAD")
+            reviewer_environment, reviewer_fingerprint = self._signed_identity(
+                root, "reviewer@example.test"
+            )
+            self._write_review_keys(root, author_fingerprint, reviewer_fingerprint)
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "review: approve bounded working record",
+                env=reviewer_environment,
+            )
+            with mock.patch.dict(os.environ, reviewer_environment):
+                errors = validate_docs.working_annex_errors(root)
+            self.assertTrue(
+                any("owner-authenticated trust anchor" in error for error in errors),
+                errors,
+            )
+
+    def test_l2_working_record_rejects_unknown_base_or_changed_review_material(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            author_environment, author_fingerprint = self._signed_identity(
+                root, "author@example.test"
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"],
+                    lab_input=context["lab_input"],
+                    author_fingerprint=author_fingerprint,
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "research: freeze L3 working material",
+                env=author_environment,
+            )
+            frozen_base = self._git(root, "rev-parse", "HEAD")
+            reviewer_environment, reviewer_fingerprint = self._signed_identity(
+                root, "reviewer@example.test"
+            )
+            self._write_review_keys(root, author_fingerprint, reviewer_fingerprint)
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "review: approve bounded working record",
+                env=reviewer_environment,
+            )
+
+            record_path.write_text(
+                record_path.read_text(encoding="utf-8").replace(
+                    frozen_base, "e" * 40, 1
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch.dict(os.environ, reviewer_environment):
+                self.assertTrue(validate_docs.working_annex_errors(root))
+
+    def test_l2_working_record_rejects_admission_atop_a_stale_base(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            author_environment, author_fingerprint = self._signed_identity(
+                root, "author@example.test"
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"],
+                    lab_input=context["lab_input"],
+                    author_fingerprint=author_fingerprint,
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "research: freeze L3 working material",
+                env=author_environment,
+            )
+            frozen_base = self._git(root, "rev-parse", "HEAD")
+            reviewer_environment, reviewer_fingerprint = self._signed_identity(
+                root, "reviewer@example.test"
+            )
+            self._write_review_keys(root, author_fingerprint, reviewer_fingerprint)
+            (root / "intervening.md").write_text("# intervening change\n", encoding="utf-8")
+            self._git(root, "add", "intervening.md")
+            self._git(
+                root,
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "-qm",
+                "docs: intervening change",
+            )
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "review: stale-base approval",
+                env=reviewer_environment,
+            )
+
+            with mock.patch.dict(os.environ, reviewer_environment):
+                errors = validate_docs.working_annex_errors(root)
+            self.assertTrue(
+                any("one parent equal to frozen base" in error for error in errors), errors
+            )
+
+    def test_l2_working_record_requires_a_prior_l3_at_frozen_base(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            author_environment, author_fingerprint = self._signed_identity(
+                root, "author@example.test"
+            )
+            reviewer_environment, reviewer_fingerprint = self._signed_identity(
+                root, "reviewer@example.test"
+            )
+            self._write_review_keys(root, author_fingerprint, reviewer_fingerprint)
+            (root / "unrelated.md").write_text("# signed but unrelated base\n", encoding="utf-8")
+            self._git(root, "add", "unrelated.md")
+            self._git(root, "config", "user.signingkey", author_fingerprint)
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "research: unrelated signed base",
+                env=author_environment,
+            )
+            frozen_base = self._git(root, "rev-parse", "HEAD")
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "config", "user.signingkey", reviewer_fingerprint)
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "review: direct L2 without L3",
+                env=reviewer_environment,
+            )
+
+            with mock.patch.dict(os.environ, reviewer_environment):
+                errors = validate_docs.working_annex_errors(root)
+            self.assertTrue(
+                any("must contain the prior L3 record" in error for error in errors),
+                errors,
+            )
+
+    def test_l2_working_record_rejects_unsigned_admission(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            context = self._working_record_context(root)
+            author_environment, author_fingerprint = self._signed_identity(
+                root, "author@example.test"
+            )
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text(
+                    canon_anchor=context["canon_anchor"],
+                    lab_input=context["lab_input"],
+                    author_fingerprint=author_fingerprint,
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "research: freeze L3 working material",
+                env=author_environment,
+            )
+            frozen_base = self._git(root, "rev-parse", "HEAD")
+            reviewer_environment, reviewer_fingerprint = self._signed_identity(
+                root, "reviewer@example.test"
+            )
+            self._write_review_keys(root, author_fingerprint, reviewer_fingerprint)
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "-qm",
+                "review: unsigned admission",
+            )
+
+            with mock.patch.dict(os.environ, reviewer_environment):
+                errors = validate_docs.working_annex_errors(root)
+            self.assertTrue(
+                any("valid reviewer signature" in error for error in errors), errors
+            )
+
+            record_path.write_text(
+                self._reviewed_record_text(
+                    context, frozen_base, author_fingerprint, reviewer_fingerprint
+                ),
+                encoding="utf-8",
+            )
+            record_path.write_text(
+                record_path.read_text(encoding="utf-8").replace(
+                    "no existing canon text changes.", "different reviewed wording.", 1
+                ),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(
+                root,
+                "commit",
+                "-S",
+                "-qm",
+                "review: alter working record",
+                env=reviewer_environment,
+            )
+            with mock.patch.dict(os.environ, reviewer_environment):
+                self.assertTrue(validate_docs.working_annex_errors(root))
+
+    def test_working_record_rejects_duplicate_front_matter_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_path.write_text(
+                self._valid_working_record_text().replace(
+                    "status: L3-open\n", "status: L1-fixed\nstatus: L3-open\n", 1
+                ),
+                encoding="utf-8",
+            )
+            self.assertTrue(validate_docs.working_annex_errors(root))
 
 if __name__ == "__main__":
     unittest.main()

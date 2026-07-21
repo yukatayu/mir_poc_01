@@ -9,7 +9,7 @@ for T-RESEARCH-001 through T-RESEARCH-033 and their evidence boundaries.
 
 The current controlling route is ADR-0014,
 `mirrorea_canon/plan/02-operating-model.md`, and
-`plan/157-delegated-theory-research-governance.md`. This file does not grant
+`plan/158-standing-bounded-autonomy.md`. This file does not grant
 new authority, promote a canon package, change a Gate/Phase, change an OBL
 status, or create implementation authority.
 

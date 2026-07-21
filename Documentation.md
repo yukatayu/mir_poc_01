@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/157-delegated-theory-research-governance.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -50,17 +50,20 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 ## 現在の位置
 
 - canon 上は `T0/G0 rebaseline`。G0 exit と T1 entry はまだありません。
-- T0-T2 は、既存 LAB lane で理論候補を自走して比較・反証できる研究段階です。
-  ADR-0014 の active exact owner-listed target があるときだけ、rebased final diff の
-  independent review を経て canon L2/L3 working state を更新できます。Gate exit、
+- T0-T2 は、既存 LAB lane で理論候補を自走して比較・反証・bounded implementation
+  validation できる研究段階です。ADR-0014 の standing predicate を満たすときだけ、
+  `working/WRK-####` に L3 record を作れ、rebased final cut の independent review を
+  経て L2 working state を更新できます。Gate exit、
   ADR effectivity、L0/L1、external contract、SCN/Phase、`theory/11`、final proof /
   OBL discharge は owner と canon process の責務です。
 - Product Alpha、Full System V1、Surface sample は限定された runnable LAB
   evidence です。最終言語・最終ABI・実 transport・分散永続・public product を
   意味しません。
 
-この境界の詳細は `plan/157-delegated-theory-research-governance.md`、過去の
-research evidence は `plan/156-t0-t2-research-autonomy-envelope.md`、実行可能
+この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
+research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
+`plan/157-delegated-theory-research-governance.md`、WRK の Git evidence
+provenance は `plan/159-wrk-evidence-commit-integrity-recut.md`、実行可能
 サンプルの正確な分類は `samples_progress.md` にあります。
 
 ## Roadmap の読み方
@@ -90,6 +93,8 @@ research evidence は `plan/156-t0-t2-research-autonomy-envelope.md`、実行可
 調査で L0/L1 / core / external contract / SCN / Gate / Phase / final proof に触れる
 choice、canon-LAB 衝突、新しい実装レーン、または authority ambiguity が生じたら、
 agent は止まり、選択肢・影響・反例・Lean/実行証拠・非主張を含む escalation bundle
-を作ります。その他の scoped candidate は evidence と review を満たして LAB working
-state として継続できます。canon working state への更新には、さらに ADR-0014 の
-active exact owner target と rebased frozen diff の independent review が必要です。
+を作ります。その他の scoped candidate は evidence を LAB working state として継続できます。
+canon working state への更新は `working/WRK-####` に限られ、L3 の事前登録は ADR-0014 の
+standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
+material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
+ため fail-closed です。frozen L2 の follow-up は successor にします。

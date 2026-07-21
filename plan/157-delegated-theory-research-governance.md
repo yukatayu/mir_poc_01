@@ -1,5 +1,10 @@
 # plan/157 - Delegated theory research governance and adoption plan
 
+> **Historical operating plan.** Its exact owner-listed canon-target mechanism
+> was superseded by ADR-0014's 2026-07-21 standing bounded-autonomy amendment
+> and `plan/158-standing-bounded-autonomy.md`. Retain this document as evidence
+> of the pre-amendment safety analysis; do not use it to select new work.
+
 ## Purpose
 
 This LAB plan turns the owner's 2026-07-21 authorization into an implementable

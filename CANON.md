@@ -17,7 +17,9 @@ Read canon first:
 Use LAB files to preserve and verify evidence. Promote or revise canon only by
 the canon process: proposal, human decision, ADR or file update where required,
 `CHANGELOG.md` update where required, and `INDEX.json` regeneration. ADR-0014
-permits autonomous LAB research and, only for an active exact owner-listed
-target, independently reviewed reversible L2/L3 canon working-state
-maintenance. It does not delegate L0/L1, contracts, SCN/Gate/Phase action, any
-`theory/11` change, or final proof.
+permits autonomous bounded research and a reversible L3 pre-registration only
+in `mirrorea_canon/working/`; L2 promotion is currently fail-closed pending an
+owner-authenticated trust anchor, and its future route requires an independent
+frozen-cut review. A frozen L2 position is followed by a successor. It does not
+delegate L0/L1, contracts, SCN/Gate/Phase action, any `theory/11` change, or
+final proof.

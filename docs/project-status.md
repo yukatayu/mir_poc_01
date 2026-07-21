@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-21 10:21 JST
+最終更新: 2026-07-21 16:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -35,10 +35,10 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | 面 | 現在の読み | 根拠 |
 | --- | --- | --- |
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
-| 論理仕様 | L0/L1 の軸は canon に固定。ADR-0014 は existing LAB research を許すが、canon L2/L3 update には active exact owner target と final-delta review が必要。現在 active row はない。 | `mirrorea_canon/adr/ADR-0014.md`; `mirrorea_canon/plan/02-operating-model.md` |
+| 論理仕様 | L0/L1 の軸は canon に固定。ADR-0014 は standing boundary 内の existing LAB research と committed `WRK-####` L3 record を許す。L2 は owner-authenticated trust anchor が未構成のため fail-closed で、falsifier は既存 L2 を即時 `frozen` にする将来の安全弁として定義される。 | `mirrorea_canon/adr/ADR-0014.md`; `mirrorea_canon/working/README.md`; `mirrorea_canon/plan/02-operating-model.md` |
 | ユーザ向け仕様 | companion notation と runnable LAB examples はあるが、Surface v0 grammar closure と public contract は未完。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `samples_progress.md` |
 | 実装 / 運用 | alpha / Surface / operational roots は限定 LAB evidence。conformance、実 transport、分散永続、public product は未主張。 | `samples_progress.md`; `mirrorea_canon/plan/01-phases.md` |
-| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。次の candidate は authority cut -> LAB comparison/falsifier を使う。canon L3/L2 update は owner が exact row を追加した後だけ review 経路へ進む。 | `plan/156-t0-t2-research-autonomy-envelope.md`; `plan/157-delegated-theory-research-governance.md` |
+| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。次の candidate は standing eligibility -> committed WRK pre-registration -> explicitly manifested existing-lane LAB evidence / falsifier を使う。L2 selection は将来の owner trust configuration まで fail-closed である。 | `plan/156-t0-t2-research-autonomy-envelope.md`; `plan/158-standing-bounded-autonomy.md`; `plan/159-wrk-evidence-commit-integrity-recut.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
 ## 現在の停止線
@@ -48,10 +48,11 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
   completion は owner/canon action が必要です。`mirrorea_canon/adr/ADR-0014.md`
 - 新 evidence lane、helper、schema、CI、Make target、production implementation は
   T1 exit 前の moratorium に残ります。`mirrorea_canon/plan/02-operating-model.md`
-- active exact target がないため、現在の candidate は LAB evidence としてのみ進みます。
-  owner が row を追加した場合は rebased final diff の review 後にだけ canon current
-  state を更新できます。falsifier は LAB reliance を即時停止し、canon rollback には
-  review が必要です。`plan/157-delegated-theory-research-governance.md`
+- working annex の `WRK-####` 外の既存 canon text は read-only です。standing predicate を
+  満たす candidate は L3 record と manifest 済み LAB evidence を自律的に進められ、L2 promotion には
+  将来の rebased final cut review が必要です。現行は owner-authenticated trust anchor
+  未構成のため fail-closed です。frozen L2 は successor で forward に扱います。
+  `plan/158-standing-bounded-autonomy.md`
 - `PROPOSAL-003` と `PROPOSAL-004` は L1-reserved question なので delegated route
   では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`
 
@@ -65,8 +66,10 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | PROPOSAL-004 | owner record pending | Surface v0 grammar closure の A / B / C。LAB recommendation は A。 |
 
 この表以外の non-reserved candidate は ADR-0014 route により LAB research で選別
-できます。canon update を希望する最初の target row は owner 判断待ちです。
-`tasks.md`; `plan/157-delegated-theory-research-governance.md`
+できます。routine target approval は不要です。canon current state は
+working annex の `WRK-####` に限定され、L2 selection は将来の trust anchor 構成まで
+fail-closed です。
+`tasks.md`; `plan/158-standing-bounded-autonomy.md`
 
 ## 根拠と詳細
 
@@ -74,10 +77,10 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | --- | --- |
 | 目的・体系の地図 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md`, `docs/diagrams/layer-stack.mmd` |
 | Gate / Phase と実用化の順序 | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md`, `docs/diagrams/workflow.mmd` |
-| delegated research の境界 | `mirrorea_canon/adr/ADR-0014.md`, `mirrorea_canon/plan/02-operating-model.md`, `plan/157-delegated-theory-research-governance.md` |
+| delegated research の境界 | `mirrorea_canon/adr/ADR-0014.md`, `mirrorea_canon/working/README.md`, `mirrorea_canon/plan/02-operating-model.md`, `plan/158-standing-bounded-autonomy.md`, `plan/159-wrk-evidence-commit-integrity-recut.md` |
 | proof の唯一の状態台帳 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
 | runnable LAB の範囲 | `samples_progress.md` |
-| 現在の次作業と選択肢 | `progress.md`, `tasks.md`, `plan/157-delegated-theory-research-governance.md` |
+| 現在の次作業と選択肢 | `progress.md`, `tasks.md`, `plan/158-standing-bounded-autonomy.md` |
 
 ## 更新規約
 

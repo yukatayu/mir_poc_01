@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import sys
+from dataclasses import dataclass
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
@@ -589,6 +592,8 @@ REQUIRED = [
     "plan/155-t0-g0-governance-profile-proposal.md",
     "plan/156-t0-t2-research-autonomy-envelope.md",
     "plan/157-delegated-theory-research-governance.md",
+    "plan/158-standing-bounded-autonomy.md",
+    "plan/159-wrk-evidence-commit-integrity-recut.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -641,6 +646,8 @@ REQUIRED = [
     "mirrorea_canon/README.md",
     "mirrorea_canon/MAP.md",
     "mirrorea_canon/INDEX.json",
+    "mirrorea_canon/working/README.md",
+    "mirrorea_canon/meta/review-keys.json",
     "mirrorea_canon/meta/source-hierarchy.md",
     "mirrorea_canon/adr/ADR-0012.md",
     "mirrorea_canon/plan/00-gates.md",
@@ -889,6 +896,109 @@ LAST_UPDATED_PATTERN = re.compile(
     re.MULTILINE,
 )
 NUMBERED_PLAN_FILE_PATTERN = re.compile(r"^\d+-.*\.md$")
+WORKING_RECORD_FILE_PATTERN = re.compile(r"^WRK-\d{4}-[a-z0-9][a-z0-9-]*\.md$")
+WORKING_RECORD_RELIANCE_PATTERN = re.compile(
+    r"^Reliance status:[ \t]*(.*)$", re.MULTILINE
+)
+WORKING_RECORD_REVIEW_PATTERN = re.compile(
+    r"^reviewer-fingerprint=([0-9A-Fa-f]{40}); "
+    r"frozen-base=([0-9a-f]{40}); record-sha256=([0-9a-f]{64}); "
+    r"decision=approved$"
+)
+WORKING_RECORD_FINGERPRINT_PATTERN = re.compile(r"^[0-9A-Fa-f]{40}$")
+WORKING_RECORD_CANON_ANCHORS_PATTERN = re.compile(
+    r"^[a-z][a-z0-9-]*/[A-Za-z0-9_.-]+@[0-9a-f]{40}:[0-9a-f]{64}"
+    r"(?:, [a-z][a-z0-9-]*/[A-Za-z0-9_.-]+@[0-9a-f]{40}:[0-9a-f]{64})*$"
+)
+WORKING_RECORD_LAB_SNAPSHOTS_PATTERN = re.compile(
+    r"^LAB:([A-Za-z0-9][A-Za-z0-9_./-]*)@([0-9a-f]{40}):([0-9a-f]{64})"
+    r"(?:, LAB:[A-Za-z0-9][A-Za-z0-9_./-]*@[0-9a-f]{40}:[0-9a-f]{64})*$"
+)
+WORKING_RECORD_REQUIRED_HEADINGS = [
+    "## Classification and authority cut",
+    "## Pre-registered working question",
+    "## Method and evidence plan",
+    "## Results and review",
+    "## Supersession",
+]
+WORKING_RECORD_SECTION_FIELDS = {
+    "## Classification and authority cut": (
+        "Standing eligibility",
+        "Author",
+        "Author fingerprint",
+        "Canon anchors",
+        "LAB inputs",
+        "Permitted LAB locations",
+        "Reserved surfaces",
+    ),
+    "## Pre-registered working question": (
+        "Question",
+        "Status quo",
+        "Alternative",
+        "Expected falsifier",
+        "Rollback / reopen trigger",
+    ),
+    "## Method and evidence plan": ("Result class", "Commands", "Non-claims"),
+    "## Results and review": (
+        "Positive evidence",
+        "Negative evidence",
+        "Evidence artifacts",
+        "Evidence commits",
+        "Impact / non-effects",
+        "Independent review",
+    ),
+    "## Supersession": ("Supersession",),
+}
+WORKING_RECORD_RESULT_CLASSES = {
+    "reproduction",
+    "literal-transcription",
+    "countermodel",
+    "conditional-lemma",
+    "existing-lane-experiment",
+}
+WORKING_RECORD_PENDING_VALUES = {
+    "pending",
+    "not-run",
+    "not-required-for-l3",
+    "none",
+    "n/a",
+    "na",
+}
+WORKING_REVIEW_KEYS_PATH = "mirrorea_canon/meta/review-keys.json"
+WORKING_RECORD_ALLOWED_LAB_ROOTS = (
+    "plan",
+    "samples/clean-near-end",
+    "samples/current-l2",
+    "samples/lean",
+)
+WORKING_RECORD_EVIDENCE_COMMIT_PATTERN = re.compile(
+    r"^[0-9a-f]{40}(?:, [0-9a-f]{40})*$"
+)
+DIRECT_NUMBERED_REPORT_PATTERN = re.compile(
+    r"^docs/reports/\d{4}-[A-Za-z0-9][A-Za-z0-9_.-]*\.md$"
+)
+WORKING_RECORD_CONTROL_FILES = {
+    "docs/project-status.md",
+    "mirrorea_canon/CHANGELOG.md",
+    "mirrorea_canon/INDEX.json",
+    "mirrorea_canon/MAP.md",
+    "progress.md",
+    "samples_progress.md",
+    "tasks.md",
+}
+
+
+@dataclass(frozen=True)
+class WorkingRecordDescriptor:
+    """The immutable identity and append-only evidence state of one WRK."""
+
+    identifier: str
+    relative: str
+    preregistration: tuple[str, str, str]
+    permitted_locations: tuple[str, ...]
+    registration: str
+    evidence_commits: tuple[str, ...]
+    evidence_artifact_revisions: tuple[str, ...]
 
 
 def _heading_match(text: str, heading: str) -> re.Match[str] | None:
@@ -1386,7 +1496,974 @@ def unregistered_numbered_plan_files() -> list[str]:
     return unregistered
 
 
-def main() -> int:
+def working_record_front_matter(text: str) -> tuple[dict[str, str], set[str]] | None:
+    match = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
+    if match is None:
+        return None
+
+    fields: dict[str, str] = {}
+    duplicate_fields: set[str] = set()
+    for line in match.group(1).splitlines():
+        field = re.match(r"^(\w+):\s*(.*)$", line)
+        if field is not None:
+            if field.group(1) in fields:
+                duplicate_fields.add(field.group(1))
+            fields[field.group(1)] = field.group(2).strip()
+    return fields, duplicate_fields
+
+
+def working_record_field_value(body: str, label: str) -> str | None:
+    match = re.search(rf"^{re.escape(label)}:[ \t]*(.*)$", body, re.MULTILINE)
+    if match is None:
+        return None
+    value = match.group(1).strip()
+    return value or None
+
+
+def _git_bytes(root: Path, *args: str) -> bytes | None:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), *args],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return result.stdout
+
+
+def _git_text(root: Path, *args: str) -> str | None:
+    result = _git_bytes(root, *args)
+    if result is None:
+        return None
+    return result.decode("utf-8", errors="replace").strip()
+
+
+def _git_commit_exists(root: Path, commit: str) -> bool:
+    return _git_bytes(root, "cat-file", "-e", f"{commit}^{{commit}}") is not None
+
+
+def _safe_snapshot_path(value: str) -> str | None:
+    path = PurePosixPath(value)
+    if (
+        not value
+        or path.is_absolute()
+        or any(part in {"", ".", ".."} for part in path.parts)
+    ):
+        return None
+    return path.as_posix()
+
+
+def _historical_canon_anchor_contents(
+    root: Path, identifier: str, revision: str
+) -> list[bytes]:
+    paths = _git_text(
+        root, "ls-tree", "-r", "--name-only", revision, "--", "mirrorea_canon"
+    )
+    if paths is None:
+        return []
+    matches: list[bytes] = []
+    for source_path in paths.splitlines():
+        if not source_path.endswith(".md"):
+            continue
+        content = _git_bytes(root, "show", f"{revision}:{source_path}")
+        if content is None:
+            continue
+        parsed = working_record_front_matter(content.decode("utf-8", errors="replace"))
+        if parsed is None:
+            continue
+        fields, duplicates = parsed
+        if not duplicates and fields.get("id") == identifier:
+            matches.append(content)
+    return matches
+
+
+def _permitted_lab_locations(value: str) -> list[str] | None:
+    locations = [_safe_snapshot_path(item) for item in value.split(", ")]
+    if (
+        not locations
+        or any(location is None for location in locations)
+        or any(location not in WORKING_RECORD_ALLOWED_LAB_ROOTS for location in locations)
+    ):
+        return None
+    return [location for location in locations if location is not None]
+
+
+def _is_permitted_lab_path(path: str, locations: list[str]) -> bool:
+    return any(path == location or path.startswith(f"{location}/") for location in locations)
+
+
+def _snapshot_digest_errors(
+    root: Path,
+    values: dict[str, str],
+    relative: str,
+) -> list[str]:
+    errors: list[str] = []
+    anchors = values.get("Canon anchors")
+    if anchors is not None:
+        for entry in anchors.split(", "):
+            identifier, revision_and_digest = entry.split("@", 1)
+            revision, expected_digest = revision_and_digest.split(":", 1)
+            if not _git_commit_exists(root, revision):
+                errors.append(f"{relative}: Canon anchor commit is not present: {revision}")
+                continue
+            contents = _historical_canon_anchor_contents(root, identifier, revision)
+            if not contents:
+                errors.append(
+                    f"{relative}: Canon anchor id is absent at {revision}: {identifier}"
+                )
+                continue
+            if len(contents) != 1:
+                errors.append(
+                    f"{relative}: Canon anchor id is ambiguous at {revision}: {identifier}"
+                )
+                continue
+            if hashlib.sha256(contents[0]).hexdigest() != expected_digest:
+                errors.append(f"{relative}: Canon anchor digest does not match: {identifier}")
+
+    permitted_locations = _permitted_lab_locations(
+        values.get("Permitted LAB locations", "")
+    )
+    if permitted_locations is None:
+        errors.append(f"{relative}: Permitted LAB locations must be safe relative paths")
+    for label in ("LAB inputs", "Evidence artifacts"):
+        value = values.get(label)
+        if value is None or value.lower() in WORKING_RECORD_PENDING_VALUES:
+            continue
+        if not WORKING_RECORD_LAB_SNAPSHOTS_PATTERN.fullmatch(value):
+            errors.append(f"{relative}: {label} must use LAB:path@commit:sha256 entries")
+            continue
+        for entry in value.split(", "):
+            path_and_revision, expected_digest = entry[4:].split(":", 1)
+            source_path, revision = path_and_revision.rsplit("@", 1)
+            source_path = _safe_snapshot_path(source_path)
+            if source_path is None:
+                errors.append(f"{relative}: {label} has an unsafe LAB path")
+                continue
+            if (
+                permitted_locations is not None
+                and not _is_permitted_lab_path(source_path, permitted_locations)
+            ):
+                errors.append(
+                    f"{relative}: {label} path is outside Permitted LAB locations: {source_path}"
+                )
+                continue
+            if not _git_commit_exists(root, revision):
+                errors.append(f"{relative}: {label} commit is not present: {revision}")
+                continue
+            content = _git_bytes(root, "show", f"{revision}:{source_path}")
+            if content is None:
+                errors.append(
+                    f"{relative}: {label} is absent at {revision}: {source_path}"
+                )
+                continue
+            if hashlib.sha256(content).hexdigest() != expected_digest:
+                errors.append(f"{relative}: {label} digest does not match: {source_path}")
+    return errors
+
+
+def _normalized_working_record_digest(text: str) -> str | None:
+    normalized, count = re.subn(
+        r"^Independent review:[^\n]*$",
+        "Independent review: <review-metadata>",
+        text,
+        count=1,
+        flags=re.MULTILINE,
+    )
+    if count != 1:
+        return None
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def _signed_commit_fingerprint(root: Path, commit: str) -> str | None:
+    if _git_bytes(root, "verify-commit", commit) is None:
+        return None
+    fingerprint = _git_text(root, "show", "-s", "--format=%GF", commit)
+    if fingerprint is None or not WORKING_RECORD_FINGERPRINT_PATTERN.fullmatch(
+        fingerprint
+    ):
+        return None
+    return fingerprint.upper()
+
+
+def _trusted_review_keys(root: Path) -> tuple[set[str], set[str]] | None:
+    path = root / WORKING_REVIEW_KEYS_PATH
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if data.get("format") != 1:
+        return None
+    author_keys = data.get("author_fingerprints")
+    reviewer_keys = data.get("reviewer_fingerprints")
+    if not isinstance(author_keys, list) or not isinstance(reviewer_keys, list):
+        return None
+    normalized = []
+    for keys in (author_keys, reviewer_keys):
+        if not all(
+            isinstance(key, str) and WORKING_RECORD_FINGERPRINT_PATTERN.fullmatch(key)
+            for key in keys
+        ):
+            return None
+        normalized.append({key.upper() for key in keys})
+    return normalized[0], normalized[1]
+
+
+def _record_history(root: Path, relative: str) -> list[str]:
+    history = _git_text(root, "log", "--format=%H", "HEAD", "--", relative)
+    return [] if history is None else history.splitlines()
+
+
+def _reachable_commits(root: Path) -> list[str]:
+    commits = _git_text(root, "rev-list", "--reverse", "HEAD")
+    return [] if commits is None else commits.splitlines()
+
+
+def _git_is_ancestor(root: Path, ancestor: str, descendant: str) -> bool:
+    return _git_bytes(root, "merge-base", "--is-ancestor", ancestor, descendant) is not None
+
+
+def _commit_local_changed_paths(root: Path, commit: str) -> list[str]:
+    """Return paths authored by a commit, without merge-parent double counting."""
+    parents = _commit_parents(root, commit)
+    if len(parents) > 1:
+        paths = _git_text(
+            root, "diff-tree", "--no-commit-id", "-r", "--cc", "--name-only", commit
+        )
+    else:
+        paths = _git_text(
+            root, "diff-tree", "--root", "--no-commit-id", "-r", "--name-only", commit
+        )
+    return [] if paths is None else paths.splitlines()
+
+
+def _working_tree_paths(root: Path) -> list[str]:
+    paths = _git_text(
+        root, "ls-tree", "-r", "--name-only", "HEAD", "--", "mirrorea_canon/working"
+    )
+    return [] if paths is None else paths.splitlines()
+
+
+def _working_tree_paths_at(root: Path, commit: str) -> list[str]:
+    paths = _git_text(
+        root,
+        "ls-tree",
+        "-r",
+        "--name-only",
+        commit,
+        "--",
+        "mirrorea_canon/working",
+    )
+    return [] if paths is None else paths.splitlines()
+
+
+def _working_record_snapshot_revisions(value: str | None) -> tuple[str, ...]:
+    if value is None or value.lower() in WORKING_RECORD_PENDING_VALUES:
+        return ()
+    if not WORKING_RECORD_LAB_SNAPSHOTS_PATTERN.fullmatch(value):
+        return ()
+    revisions = []
+    for entry in value.split(", "):
+        path_and_revision, _digest = entry[4:].split(":", 1)
+        _path, revision = path_and_revision.rsplit("@", 1)
+        revisions.append(revision)
+    return tuple(revisions)
+
+
+def _working_record_anchor_revisions(value: str | None) -> tuple[str, ...]:
+    if value is None or not WORKING_RECORD_CANON_ANCHORS_PATTERN.fullmatch(value):
+        return ()
+    return tuple(entry.split("@", 1)[1].split(":", 1)[0] for entry in value.split(", "))
+
+
+def _working_record_evidence_commits(value: str | None) -> tuple[str, ...] | None:
+    if value is None:
+        return None
+    if value == "none":
+        return ()
+    if not WORKING_RECORD_EVIDENCE_COMMIT_PATTERN.fullmatch(value):
+        return None
+    commits = tuple(value.split(", "))
+    return commits if len(commits) == len(set(commits)) else None
+
+
+def _working_record_descriptor(
+    root: Path, commit: str, relative: str, text: str
+) -> tuple[WorkingRecordDescriptor | None, list[str]]:
+    """Parse the history-critical subset of a direct WRK entry."""
+    errors: list[str] = []
+    name_match = re.fullmatch(r"WRK-(\d{4})-[a-z0-9][a-z0-9-]*\.md", Path(relative).name)
+    if Path(relative).parent.as_posix() != "mirrorea_canon/working" or name_match is None:
+        return None, [f"{relative}@{commit[:12]}: working annex permits only direct WRK records"]
+    parsed = working_record_front_matter(text)
+    if parsed is None:
+        return None, [f"{relative}@{commit[:12]}: missing WRK front matter"]
+    front_matter, duplicates = parsed
+    if duplicates:
+        errors.append(f"{relative}@{commit[:12]}: duplicate front matter fields")
+    expected_id = f"working/WRK-{name_match.group(1)}"
+    if front_matter.get("id") != expected_id:
+        errors.append(f"{relative}@{commit[:12]}: historical WRK identity does not match {expected_id}")
+    if front_matter.get("status") not in {"L3-open", "L2-working"}:
+        errors.append(f"{relative}@{commit[:12]}: invalid WRK status")
+    missing = missing_headings(text, WORKING_RECORD_REQUIRED_HEADINGS)
+    if missing or out_of_order_headings(text, WORKING_RECORD_REQUIRED_HEADINGS):
+        errors.append(f"{relative}@{commit[:12]}: WRK lacks ordered required sections")
+        return None, errors
+    bodies = section_bodies(text, WORKING_RECORD_REQUIRED_HEADINGS)
+    values = {
+        label: working_record_field_value(bodies[heading], label)
+        for heading, labels in WORKING_RECORD_SECTION_FIELDS.items()
+        for label in labels
+    }
+    permitted = _permitted_lab_locations(values.get("Permitted LAB locations", ""))
+    evidence_commits = _working_record_evidence_commits(values.get("Evidence commits"))
+    if permitted is None:
+        errors.append(f"{relative}@{commit[:12]}: invalid Permitted LAB locations")
+    if evidence_commits is None:
+        errors.append(f"{relative}@{commit[:12]}: Evidence commits must be none or unique 40-hex commits")
+    if errors:
+        return None, errors
+    assert permitted is not None and evidence_commits is not None
+    preregistration = tuple(
+        bodies[heading]
+        for heading in (
+            "## Classification and authority cut",
+            "## Pre-registered working question",
+            "## Method and evidence plan",
+        )
+    )
+    return (
+        WorkingRecordDescriptor(
+            identifier=expected_id,
+            relative=relative,
+            preregistration=preregistration,
+            permitted_locations=tuple(permitted),
+            registration=commit,
+            evidence_commits=evidence_commits,
+            evidence_artifact_revisions=_working_record_snapshot_revisions(
+                values.get("Evidence artifacts")
+            ),
+        ),
+        [],
+    )
+
+
+def _is_working_record_metadata_path(path: str, relative: str) -> bool:
+    return (
+        path == relative
+        or path in WORKING_RECORD_CONTROL_FILES
+        or DIRECT_NUMBERED_REPORT_PATTERN.fullmatch(path) is not None
+    )
+
+
+def _record_delta_errors(
+    root: Path,
+    commit: str,
+    descriptor: WorkingRecordDescriptor,
+    *,
+    registration: bool,
+) -> list[str]:
+    errors: list[str] = []
+    for path in _commit_local_changed_paths(root, commit):
+        allowed = _is_working_record_metadata_path(path, descriptor.relative)
+        if not registration:
+            allowed = allowed or _is_permitted_lab_path(path, list(descriptor.permitted_locations))
+        if not allowed:
+            errors.append(
+                f"{descriptor.relative}@{commit[:12]}: {'registration' if registration else 'evidence'} commit changes path outside its declared package: {path}"
+            )
+    return errors
+
+
+def _registration_snapshot_errors(
+    root: Path,
+    descriptor: WorkingRecordDescriptor,
+    text: str,
+) -> list[str]:
+    """Pre-registration inputs must be available before the record is created."""
+    errors: list[str] = []
+    parents = _commit_parents(root, descriptor.registration)
+    if len(parents) != 1:
+        return [f"{descriptor.relative}@{descriptor.registration[:12]}: L3 registration requires exactly one parent"]
+    parent = parents[0]
+    parsed = working_record_front_matter(text)
+    assert parsed is not None
+    bodies = section_bodies(text, WORKING_RECORD_REQUIRED_HEADINGS)
+    values = {
+        label: working_record_field_value(bodies[heading], label)
+        for heading, labels in WORKING_RECORD_SECTION_FIELDS.items()
+        for label in labels
+    }
+    if parsed[0].get("status") != "L3-open" or parsed[0].get("maturity") != "draft":
+        errors.append(f"{descriptor.relative}@{descriptor.registration[:12]}: a new WRK must register as draft L3-open")
+    reliance = working_record_field_value(
+        bodies["## Results and review"], "Reliance status"
+    )
+    if reliance != "not-promoted":
+        errors.append(f"{descriptor.relative}@{descriptor.registration[:12]}: L3 registration must be not-promoted")
+    for location in descriptor.permitted_locations:
+        if _git_text(root, "cat-file", "-t", f"{parent}:{location}") != "tree":
+            errors.append(
+                f"{descriptor.relative}@{descriptor.registration[:12]}: declared LAB location was not an existing directory before registration: {location}"
+            )
+    revisions = (
+        _working_record_anchor_revisions(values.get("Canon anchors"))
+        + _working_record_snapshot_revisions(values.get("LAB inputs"))
+    )
+    for revision in revisions:
+        if not _git_is_ancestor(root, revision, parent):
+            errors.append(f"{descriptor.relative}@{descriptor.registration[:12]}: pre-registration input does not predate registration: {revision}")
+    errors.extend(_record_delta_errors(root, descriptor.registration, descriptor, registration=True))
+    return errors
+
+
+def _is_subsequence(prefix: tuple[str, ...], value: tuple[str, ...]) -> bool:
+    iterator = iter(value)
+    return all(any(candidate == expected for candidate in iterator) for expected in prefix)
+
+
+def _working_record_history_errors(root: Path) -> list[str]:
+    """Audit reachable WRK history as a DAG of immutable registrations and evidence."""
+    commits = _reachable_commits(root)
+    if not commits:
+        return []
+    states: dict[str, dict[str, WorkingRecordDescriptor]] = {}
+    errors: list[str] = []
+    for commit in commits:
+        parents = _commit_parents(root, commit)
+        inherited: dict[str, list[WorkingRecordDescriptor]] = {}
+        for parent in parents:
+            for identifier, descriptor in states.get(parent, {}).items():
+                inherited.setdefault(identifier, []).append(descriptor)
+
+        current: dict[str, WorkingRecordDescriptor] = {}
+        current_text: dict[str, str] = {}
+        for relative in _working_tree_paths_at(root, commit):
+            within = PurePosixPath(relative).relative_to("mirrorea_canon/working")
+            if within.as_posix() == "README.md":
+                continue
+            if len(within.parts) != 1 or not WORKING_RECORD_FILE_PATTERN.fullmatch(within.name):
+                errors.append(f"{relative}@{commit[:12]}: working annex contains a non-record entry")
+                continue
+            raw = _git_bytes(root, "show", f"{commit}:{relative}")
+            if raw is None:
+                continue
+            text = raw.decode("utf-8", errors="replace")
+            descriptor, descriptor_errors = _working_record_descriptor(root, commit, relative, text)
+            errors.extend(descriptor_errors)
+            if descriptor is None:
+                continue
+            if descriptor.identifier in current:
+                errors.append(f"{relative}@{commit[:12]}: duplicate historical WRK identity")
+                continue
+            current[descriptor.identifier] = descriptor
+            current_text[descriptor.identifier] = text
+
+        next_state: dict[str, WorkingRecordDescriptor] = {}
+        for identifier, predecessors in inherited.items():
+            baseline = predecessors[0]
+            if any(
+                candidate.relative != baseline.relative
+                or candidate.preregistration != baseline.preregistration
+                or candidate.permitted_locations != baseline.permitted_locations
+                or candidate.registration != baseline.registration
+                for candidate in predecessors[1:]
+            ):
+                errors.append(f"{identifier}@{commit[:12]}: merge has conflicting historical WRK identities")
+            candidate = current.get(identifier)
+            if candidate is None:
+                errors.append(
+                    f"{identifier}@{commit[:12]}: historical WRK identity is absent; records may not be renamed, reidentified, or deleted"
+                )
+                continue
+            if (
+                candidate.relative != baseline.relative
+                or candidate.preregistration != baseline.preregistration
+                or candidate.permitted_locations != baseline.permitted_locations
+            ):
+                errors.append(
+                    f"{identifier}@{commit[:12]}: historical WRK identity or pre-registration changed"
+                )
+            if any(
+                not _is_subsequence(previous.evidence_commits, candidate.evidence_commits)
+                for previous in predecessors
+            ):
+                errors.append(f"{identifier}@{commit[:12]}: Evidence commits are not append-only")
+            next_state[identifier] = WorkingRecordDescriptor(
+                identifier=candidate.identifier,
+                relative=baseline.relative,
+                preregistration=baseline.preregistration,
+                permitted_locations=baseline.permitted_locations,
+                registration=baseline.registration,
+                evidence_commits=candidate.evidence_commits,
+                evidence_artifact_revisions=candidate.evidence_artifact_revisions,
+            )
+
+        for identifier, candidate in current.items():
+            if identifier in inherited:
+                continue
+            errors.extend(_registration_snapshot_errors(root, candidate, current_text[identifier]))
+            next_state[identifier] = candidate
+
+        evidence_owner: dict[str, str] = {}
+        for identifier, descriptor in next_state.items():
+            for artifact_revision in descriptor.evidence_artifact_revisions:
+                if artifact_revision not in descriptor.evidence_commits:
+                    errors.append(
+                        f"{descriptor.relative}@{commit[:12]}: Evidence artifacts must be owned by a listed Evidence commit: {artifact_revision}"
+                    )
+            for evidence_commit in descriptor.evidence_commits:
+                owner = evidence_owner.setdefault(evidence_commit, identifier)
+                if owner != identifier:
+                    errors.append(f"{evidence_commit}: Evidence commit is claimed by both {owner} and {identifier}")
+                if not _git_is_ancestor(root, descriptor.registration, evidence_commit) or evidence_commit == descriptor.registration:
+                    errors.append(f"{descriptor.relative}@{commit[:12]}: Evidence commit must follow registration: {evidence_commit}")
+                    continue
+                if not _git_is_ancestor(root, evidence_commit, commit):
+                    errors.append(f"{descriptor.relative}@{commit[:12]}: Evidence commit is not reachable at this record state: {evidence_commit}")
+                    continue
+                errors.extend(_record_delta_errors(root, evidence_commit, descriptor, registration=False))
+        states[commit] = next_state
+    return sorted(set(errors))
+
+
+def _authoritative_worktree_errors(root: Path) -> list[str]:
+    """A release-grade WRK audit must not accept uncommitted or ignored evidence."""
+    outputs = (
+        _git_text(root, "diff", "--name-only", "HEAD"),
+        _git_text(root, "ls-files", "--others", "--exclude-standard"),
+        _git_text(root, "ls-files", "--others", "--ignored", "--exclude-standard"),
+    )
+    disposable = {"target", ".lake", "__pycache__", ".pytest_cache", ".mypy_cache"}
+    paths = {
+        path
+        for output in outputs
+        if output is not None
+        for path in output.splitlines()
+        if not (set(PurePosixPath(path).parts) & disposable)
+    }
+    return [f"authoritative WRK audit requires a clean worktree: {path}" for path in sorted(paths)]
+
+
+def _commit_parents(root: Path, commit: str) -> list[str]:
+    line = _git_text(root, "rev-list", "--parents", "-n", "1", commit)
+    if line is None:
+        return []
+    fields = line.split()
+    return fields[1:]
+
+
+def _committed_working_record_errors(root: Path, relative: str, text: str) -> list[str]:
+    if _git_text(root, "rev-parse", "HEAD") is None:
+        return [f"{relative}: working record requires a Git HEAD"]
+    if _git_bytes(root, "show", f"HEAD:{relative}") != text.encode("utf-8"):
+        return [f"{relative}: working record must be committed at HEAD"]
+    return []
+
+
+def _base_l3_errors(
+    root: Path,
+    relative: str,
+    text: str,
+    frozen_base: str,
+    author_fingerprint: str,
+) -> list[str]:
+    content = _git_bytes(root, "show", f"{frozen_base}:{relative}")
+    if content is None:
+        return [f"{relative}: frozen base must contain the prior L3 record"]
+    base_text = content.decode("utf-8", errors="replace")
+    front_matter = working_record_front_matter(base_text)
+    if front_matter is None:
+        return [f"{relative}: frozen base has no WRK front matter"]
+    fields, duplicates = front_matter
+    if duplicates or fields.get("status") != "L3-open" or fields.get("maturity") != "draft":
+        return [f"{relative}: frozen base must be a draft L3 record"]
+    if fields.get("id") != working_record_front_matter(text)[0].get("id"):
+        return [f"{relative}: frozen base record identity differs"]
+    base_reliance = WORKING_RECORD_RELIANCE_PATTERN.findall(base_text)
+    if base_reliance != ["not-promoted"]:
+        return [f"{relative}: frozen base must retain Reliance status: not-promoted"]
+    headings = (
+        "## Classification and authority cut",
+        "## Pre-registered working question",
+        "## Method and evidence plan",
+        "## Supersession",
+    )
+    if missing_headings(base_text, list(headings)):
+        return [f"{relative}: frozen base lacks preserved pre-registration sections"]
+    current_bodies = section_bodies(text, WORKING_RECORD_REQUIRED_HEADINGS)
+    base_bodies = section_bodies(base_text, WORKING_RECORD_REQUIRED_HEADINGS)
+    if any(current_bodies[heading] != base_bodies[heading] for heading in headings):
+        return [f"{relative}: L2 admission rewrites pre-registration material"]
+    author_value = working_record_field_value(
+        base_bodies["## Classification and authority cut"], "Author fingerprint"
+    )
+    if author_value != author_fingerprint:
+        return [f"{relative}: frozen base Author fingerprint differs"]
+    return []
+
+
+def _reviewed_record_errors(
+    root: Path,
+    relative: str,
+    text: str,
+    reviewer_fingerprint: str,
+    author_fingerprint: str,
+    frozen_base: str,
+    expected_digest: str,
+    admission: str | None = None,
+) -> list[str]:
+    errors: list[str] = []
+    if not _git_commit_exists(root, frozen_base):
+        return [f"{relative}: frozen base is not an existing Git commit"]
+    digest = _normalized_working_record_digest(text)
+    if digest != expected_digest:
+        errors.append(f"{relative}: reviewed record SHA-256 does not match frozen material")
+    if reviewer_fingerprint.upper() == author_fingerprint.upper():
+        errors.append(f"{relative}: reviewer fingerprint must differ from Author fingerprint")
+    trusted_keys = _trusted_review_keys(root)
+    if trusted_keys is None:
+        errors.append(f"{relative}: review-key registry is invalid")
+    else:
+        trusted_authors, trusted_reviewers = trusted_keys
+        if author_fingerprint.upper() not in trusted_authors:
+            errors.append(f"{relative}: Author fingerprint is not owner-trusted")
+        if reviewer_fingerprint.upper() not in trusted_reviewers:
+            errors.append(f"{relative}: reviewer fingerprint is not owner-trusted")
+    errors.append(
+        f"{relative}: L2 promotion is unavailable until an owner-authenticated trust anchor is configured"
+    )
+    if _signed_commit_fingerprint(root, frozen_base) != author_fingerprint.upper():
+        errors.append(f"{relative}: frozen base must be signed by Author fingerprint")
+    errors.extend(_base_l3_errors(root, relative, text, frozen_base, author_fingerprint))
+
+    admission = admission or ( _record_history(root, relative) or [None] )[0]
+    if admission is None or _git_bytes(root, "show", f"{admission}:{relative}") != text.encode("utf-8"):
+        errors.append(f"{relative}: reviewed record must be its latest path revision")
+        return errors
+    parents = _commit_parents(root, admission)
+    if parents != [frozen_base]:
+        errors.append(
+            f"{relative}: reviewed admission must have one parent equal to frozen base"
+        )
+    elif _signed_commit_fingerprint(root, admission) != reviewer_fingerprint.upper():
+        errors.append(
+            f"{relative}: admission commit requires a valid reviewer signature"
+        )
+    return errors
+
+
+def _emergency_frozen_l2_errors(
+    root: Path,
+    relative: str,
+    text: str,
+    values: dict[str, str],
+) -> list[str]:
+    history = _record_history(root, relative)
+    if not history or _git_bytes(root, "show", f"{history[0]}:{relative}") != text.encode("utf-8"):
+        return [f"{relative}: emergency freeze must be the latest path revision"]
+    parents = _commit_parents(root, history[0])
+    if len(parents) != 1:
+        return [f"{relative}: emergency freeze must have one direct parent"]
+    active_text_bytes = _git_bytes(root, "show", f"{parents[0]}:{relative}")
+    if active_text_bytes is None:
+        return [f"{relative}: emergency freeze has no prior active L2 record"]
+    active_text = active_text_bytes.decode("utf-8", errors="replace")
+    if text != active_text.replace(
+        "Reliance status: active", "Reliance status: frozen", 1
+    ):
+        return [f"{relative}: emergency freeze may change only Reliance status"]
+    active_front_matter = working_record_front_matter(active_text)
+    if (
+        active_front_matter is None
+        or active_front_matter[0].get("status") != "L2-working"
+        or active_front_matter[0].get("maturity") != "reviewed"
+    ):
+        return [f"{relative}: emergency freeze requires a prior reviewed L2 record"]
+    active_bodies = section_bodies(active_text, WORKING_RECORD_REQUIRED_HEADINGS)
+    active_review = working_record_field_value(
+        active_bodies["## Results and review"], "Independent review"
+    )
+    review_match = WORKING_RECORD_REVIEW_PATTERN.fullmatch(active_review or "")
+    author_fingerprint = values.get("Author fingerprint", "")
+    if review_match is None or not WORKING_RECORD_FINGERPRINT_PATTERN.fullmatch(
+        author_fingerprint
+    ):
+        return [f"{relative}: emergency freeze has no valid prior review binding"]
+    prior_admission = history[1] if len(history) > 1 else None
+    return _reviewed_record_errors(
+        root,
+        relative,
+        active_text,
+        review_match.group(1),
+        author_fingerprint,
+        review_match.group(2),
+        review_match.group(3),
+        admission=prior_admission,
+    )
+
+
+def _historical_l2_exists(root: Path, relative: str) -> bool:
+    for commit in _record_history(root, relative)[1:]:
+        content = _git_bytes(root, "show", f"{commit}:{relative}")
+        if content is None:
+            continue
+        parsed = working_record_front_matter(content.decode("utf-8", errors="replace"))
+        if parsed is not None and parsed[0].get("status") == "L2-working":
+            return True
+    return False
+
+
+def _l3_preregistration_history_errors(root: Path, relative: str, text: str) -> list[str]:
+    historical_l3: str | None = None
+    for commit in reversed(_record_history(root, relative)[1:]):
+        content = _git_bytes(root, "show", f"{commit}:{relative}")
+        if content is None:
+            continue
+        candidate = content.decode("utf-8", errors="replace")
+        parsed = working_record_front_matter(candidate)
+        if parsed is not None and parsed[0].get("status") == "L3-open":
+            historical_l3 = candidate
+            break
+    if historical_l3 is None:
+        return []
+    headings = (
+        "## Classification and authority cut",
+        "## Pre-registered working question",
+        "## Method and evidence plan",
+    )
+    if missing_headings(historical_l3, list(headings)):
+        return [f"{relative}: prior L3 record lacks pre-registration sections"]
+    current_bodies = section_bodies(text, WORKING_RECORD_REQUIRED_HEADINGS)
+    historical_bodies = section_bodies(historical_l3, WORKING_RECORD_REQUIRED_HEADINGS)
+    if any(current_bodies[heading] != historical_bodies[heading] for heading in headings):
+        return [f"{relative}: L3 pre-registration may not be rewritten"]
+    return []
+
+
+def _deleted_working_record_errors(root: Path) -> list[str]:
+    deleted = _git_text(
+        root,
+        "log",
+        "--diff-filter=D",
+        "--name-only",
+        "--format=",
+        "HEAD",
+        "--",
+        "mirrorea_canon/working",
+    )
+    if deleted is None:
+        return []
+    records = [
+        path
+        for path in deleted.splitlines()
+        if WORKING_RECORD_FILE_PATTERN.fullmatch(Path(path).name)
+    ]
+    return [f"{path}: deleted WRK records are not allowed" for path in records]
+
+
+def working_annex_errors(root: Path = ROOT, *, authoritative: bool = False) -> list[str]:
+    working_root = root / "mirrorea_canon" / "working"
+    errors: list[str] = []
+    if not working_root.exists():
+        errors.extend(_working_record_history_errors(root))
+        if authoritative:
+            errors.extend(_authoritative_worktree_errors(root))
+        return errors
+
+    seen_record_numbers: set[str] = set()
+    for path in sorted(working_root.rglob("*")):
+        if not path.is_file():
+            continue
+        relative = path.relative_to(root).as_posix()
+        within_working = path.relative_to(working_root)
+        if within_working.as_posix() == "README.md":
+            continue
+        if len(within_working.parts) != 1:
+            errors.append(f"{relative}: nested working records are not allowed")
+            continue
+        if not WORKING_RECORD_FILE_PATTERN.fullmatch(path.name):
+            errors.append(f"{relative}: working annex permits only README.md or WRK records")
+            continue
+
+        text = path.read_text(encoding="utf-8")
+        filename_match = re.fullmatch(r"WRK-(\d{4})-[a-z0-9][a-z0-9-]*\.md", path.name)
+        assert filename_match is not None
+        record_number = filename_match.group(1)
+        if record_number in seen_record_numbers:
+            errors.append(f"{relative}: duplicate WRK-{record_number} record number")
+        seen_record_numbers.add(record_number)
+
+        parsed_front_matter = working_record_front_matter(text)
+        if parsed_front_matter is None:
+            errors.append(f"{relative}: missing front matter")
+            continue
+        front_matter, duplicate_fields = parsed_front_matter
+        if duplicate_fields:
+            errors.append(
+                f"{relative}: duplicate front matter fields: {', '.join(sorted(duplicate_fields))}"
+            )
+        expected_id = f"working/WRK-{record_number}"
+        if front_matter.get("id") != expected_id:
+            errors.append(f"{relative}: id must be {expected_id}")
+        status = front_matter.get("status")
+        if status not in {"L3-open", "L2-working"}:
+            errors.append(f"{relative}: front matter status must be L3-open or L2-working")
+            continue
+        expected_maturity = "reviewed" if status == "L2-working" else "draft"
+        if front_matter.get("maturity") != expected_maturity:
+            errors.append(
+                f"{relative}: {status} requires front matter maturity {expected_maturity}"
+            )
+
+        missing = missing_headings(text, WORKING_RECORD_REQUIRED_HEADINGS)
+        if missing:
+            errors.append(f"{relative}: missing required sections: {', '.join(missing)}")
+            continue
+        if out_of_order_headings(text, WORKING_RECORD_REQUIRED_HEADINGS):
+            errors.append(f"{relative}: required sections are out of order")
+            continue
+
+        bodies = section_bodies(text, WORKING_RECORD_REQUIRED_HEADINGS)
+        values: dict[str, str] = {}
+        for heading, labels in WORKING_RECORD_SECTION_FIELDS.items():
+            for label in labels:
+                value = working_record_field_value(bodies[heading], label)
+                if value is None:
+                    errors.append(f"{relative}: {heading} requires {label}")
+                else:
+                    values[label] = value
+
+        anchors = values.get("Canon anchors")
+        if anchors is not None and not WORKING_RECORD_CANON_ANCHORS_PATTERN.fullmatch(anchors):
+            errors.append(f"{relative}: Canon anchors must use id@commit:blob-hash entries")
+        lab_inputs = values.get("LAB inputs")
+        if lab_inputs is not None and not WORKING_RECORD_LAB_SNAPSHOTS_PATTERN.fullmatch(
+            lab_inputs
+        ):
+            errors.append(f"{relative}: LAB inputs must use LAB:path@commit:sha256 entries")
+        if (
+            anchors is not None
+            and WORKING_RECORD_CANON_ANCHORS_PATTERN.fullmatch(anchors)
+            and lab_inputs is not None
+            and WORKING_RECORD_LAB_SNAPSHOTS_PATTERN.fullmatch(lab_inputs)
+        ):
+            errors.extend(_snapshot_digest_errors(root, values, relative))
+        result_class = values.get("Result class")
+        if result_class is not None and result_class not in WORKING_RECORD_RESULT_CLASSES:
+            errors.append(f"{relative}: invalid Result class {result_class!r}")
+        if values.get("Standing eligibility") != "pass":
+            errors.append(f"{relative}: Standing eligibility must be pass")
+        if values.get("Reserved surfaces") != "excluded":
+            errors.append(f"{relative}: Reserved surfaces must be excluded")
+
+        errors.extend(_committed_working_record_errors(root, relative, text))
+
+        reliance_statuses = WORKING_RECORD_RELIANCE_PATTERN.findall(
+            bodies["## Results and review"]
+        )
+        all_reliance_statuses = WORKING_RECORD_RELIANCE_PATTERN.findall(text)
+        if len(reliance_statuses) != 1:
+            errors.append(
+                f"{relative}: require exactly one Reliance status marker in Results and review"
+            )
+            continue
+        if len(all_reliance_statuses) != 1:
+            errors.append(f"{relative}: Reliance status marker appears outside Results and review")
+            continue
+
+        reliance = reliance_statuses[0]
+        permitted = (
+            {"not-promoted", "frozen"}
+            if status == "L3-open"
+            else {"active", "frozen"}
+        )
+        if reliance not in permitted:
+            errors.append(
+                f"{relative}: Reliance status '{reliance}' is invalid for {status}"
+            )
+        if status == "L2-working":
+            for label in (
+                "Positive evidence",
+                "Negative evidence",
+                "Evidence artifacts",
+                "Independent review",
+            ):
+                value = values.get(label, "").lower()
+                if value in WORKING_RECORD_PENDING_VALUES:
+                    errors.append(f"{relative}: {status} requires completed {label}")
+            if reliance == "frozen":
+                errors.extend(_emergency_frozen_l2_errors(root, relative, text, values))
+            else:
+                review_match = WORKING_RECORD_REVIEW_PATTERN.fullmatch(
+                    values.get("Independent review", "")
+                )
+                if review_match is None:
+                    errors.append(
+                        f"{relative}: {status} requires reviewer-fingerprint=<40-hex>; frozen-base=<40-hex>; record-sha256=<64-hex>; decision=approved"
+                    )
+                else:
+                    author_fingerprint = values.get("Author fingerprint", "")
+                    if not WORKING_RECORD_FINGERPRINT_PATTERN.fullmatch(author_fingerprint):
+                        errors.append(
+                            f"{relative}: {status} requires Author fingerprint=<40-hex>"
+                        )
+                    else:
+                        errors.extend(
+                            _reviewed_record_errors(
+                                root,
+                                relative,
+                                text,
+                                review_match.group(1),
+                                author_fingerprint,
+                                review_match.group(2),
+                                review_match.group(3),
+                            )
+                        )
+        elif values.get("Independent review") != "not-required-for-L3":
+            review_match = WORKING_RECORD_REVIEW_PATTERN.fullmatch(
+                values.get("Independent review", "")
+            )
+            if review_match is None:
+                errors.append(
+                    f"{relative}: L3 review must be not-required-for-L3 or a frozen-base approval"
+                )
+            else:
+                author_fingerprint = values.get("Author fingerprint", "")
+                if not WORKING_RECORD_FINGERPRINT_PATTERN.fullmatch(author_fingerprint):
+                    errors.append(
+                        f"{relative}: reviewed L3 rollback requires Author fingerprint=<40-hex>"
+                    )
+                else:
+                    errors.extend(
+                        _reviewed_record_errors(
+                            root,
+                            relative,
+                            text,
+                            review_match.group(1),
+                            author_fingerprint,
+                            review_match.group(2),
+                            review_match.group(3),
+                        )
+                    )
+        elif _historical_l2_exists(root, relative):
+            errors.append(
+                f"{relative}: in-place L2-to-L3 demotion is prohibited; use a successor record"
+            )
+        else:
+            errors.extend(_l3_preregistration_history_errors(root, relative, text))
+
+    errors.extend(_working_record_history_errors(root))
+    if authoritative:
+        errors.extend(_authoritative_worktree_errors(root))
+    return errors
+
+
+def main(argv: list[str] | None = None) -> int:
+    arguments = sys.argv[1:] if argv is None else argv
+    authoritative_working_annex = "--authoritative-working-annex" in arguments
     missing = [p for p in REQUIRED if not (ROOT / p).exists()]
     if missing:
         print("Missing required files:")
@@ -1399,6 +2476,13 @@ def main() -> int:
         print("Numbered plan files are not registered in REQUIRED:")
         for p in unregistered_plans:
             print(" -", p)
+        return 1
+
+    working_errors = working_annex_errors(authoritative=authoritative_working_annex)
+    if working_errors:
+        print("Working annex records violate the WRK contract:")
+        for error in working_errors:
+            print(" -", error)
         return 1
 
     missing_notices = missing_canon_notices()

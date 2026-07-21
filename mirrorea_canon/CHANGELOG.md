@@ -18,7 +18,16 @@ open_items: []
 
 ## 履歴
 
-- **2026-07-21** ADR-0014 により、existing LAB lane における可逆な L2/L3
+- **2026-07-21** PROPOSAL-007 により、ADR-0014 の既存 L3 retained-evidence
+  condition を WRK の append-only `Evidence commits:` と reachable-DAG audit
+  で精密化した。これは L2 activation、reserved boundary、L0/L1 theory を変更せず、
+  既存 LAB lane の証拠帰属を機械検査可能にする運用改定である。
+- **2026-07-21** ADR-0014 を PROPOSAL-006 により改訂。owner-maintained exact
+  editable-target table を standing bounded autonomy に置換し、agent-maintained
+  canon surface を `working/` に限定した。L3 pre-registration、existing-lane
+  evidence、L2 の author/reviewer distinct signed frozen-material review、forward rollback を要する。L0/L1、contracts、
+  SCN/Gate/Phase、`theory/11`、final proof、public claim は引き続き留保する。
+- **2026-07-21 (superseded operating detail)** ADR-0014 により、existing LAB lane における可逆な L2/L3
   working-theory research を委任した。canon update は owner-maintained exact
   editable-target row、rebased frozen evidence/diff、independent review、reviewed
   rollback を要する。L0/L1、external contract、SCN/Gate/Phase、全 `theory/11`、

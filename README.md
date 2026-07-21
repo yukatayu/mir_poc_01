@@ -12,13 +12,16 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 `mirrorea_canon/` remains the sole normative source. ADR-0014 permits
 autonomous research in existing LAB lanes; canon L2/L3 working-state updates
-need an active exact owner-listed target plus a rebased final-delta independent
-review. Candidates, countermodels, experiments, and history remain in LAB.
+are limited to `working/WRK-####` and need a standing-eligibility check,
+pre-registered falsifier, and a rebased final-cut independent review for any
+future L2. L3 pre-registration is active; L2 is intentionally fail-closed
+until an owner-authenticated trust anchor exists.
+Candidates, countermodels, experiments, and history remain in LAB.
 L0/L1 direction, core and external contracts, SCN/Gate/Phase action, every
 proof-ledger change, final proof / OBL discharge, and public claims remain
 owner-reserved. The concise control view is
 `docs/project-status.md`; the detailed lifecycle is
-`plan/157-delegated-theory-research-governance.md`.
+`plan/158-standing-bounded-autonomy.md`.
 
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア

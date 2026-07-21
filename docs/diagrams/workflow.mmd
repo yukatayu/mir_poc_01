@@ -1,15 +1,15 @@
 flowchart TD
-  Target[LAB target ID + pinned authority cut]
-  Check{Reserved boundary\nor existing-lane eligibility failure?}
-  Listed{ADR-0014 exact owner\neditable target active?}
+  Target[Candidate and read-only canon anchors]
+  Check{ADR-0014 standing eligibility\nand no reserved boundary?}
   Dormant[Dormant deferred item\nrecorded reopen trigger absent]
   Escalate[Escalated bundle\nowner / canon action required]
-  Candidate[LAB candidate\ncomparison and falsifier]
+  WRK[Commit WRK L3 pre-registration\nalternative, falsifier, non-effects, rollback]
+  Candidate[Existing-lane comparison\nformal or implementation experiment]
   Evidence[Positive and negative evidence\nreproducible commands]
-  Freeze[Steward rebase/freeze\nbase, blobs, diff, evidence, rollback]
+  Freeze[Steward rebase/freeze\nbase, blobs, record diff, evidence, rollback]
   Review{Independent review\nof exact frozen cut passes?}
-  L3[Canon L3 working state\nLAB candidate history]
-  L2[Canon L2 working state\nreviewed and reversible]
+  L3[WRK L3 open\nreversible working question]
+  L2[WRK L2 working state\nreviewed and reversible]
   Falsified[Falsified or superseded\nforward-recorded in LAB]
   Owner[Owner disposition or ADR]
   Recut[Re-read affected canon / SCN / ledger\nand update derived views]
@@ -17,24 +17,21 @@ flowchart TD
   Target --> Check
   Check -- deferred without trigger --> Dormant
   Check -- reserved or ambiguous --> Escalate
-  Check -- eligible --> Candidate --> Evidence --> Listed
-  Listed -- no --> Candidate
-  Listed -- yes --> Freeze --> Review
+  Check -- eligible --> WRK --> Candidate --> Evidence --> L3
+  L3 -- request L2 selection --> Freeze --> Review
   Review -- scope defect --> Escalate
-  Review -- candidate remains open --> L3
-  Review -- provisional selection --> L2
+  Review -- approved --> L2
   L3 --> Candidate
   L2 -- falsifier: freeze reliance --> Falsified --> Freeze
   L2 --> Recut
   L3 --> Recut
   Escalate --> Owner
   Owner -- deferred --> Dormant
-  Owner -- scoped authorization --> Target
   Owner -- L0/L1 or lifecycle record --> Recut
 
   classDef canon fill:#dcefe2,stroke:#22543d,color:#102a22
   classDef lab fill:#edf2f7,stroke:#4a5568,color:#1a202c
   classDef stop fill:#fff3cd,stroke:#9c6b00,color:#3b2f00
-  class Target,L3,L2,Owner canon
+  class Target,WRK,L3,L2,Owner canon
   class Candidate,Evidence,Falsified,Recut lab
-  class Check,Listed,Dormant,Escalate,Review stop
+  class Check,Dormant,Escalate,Review,Freeze stop

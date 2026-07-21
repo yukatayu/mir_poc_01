@@ -15,9 +15,9 @@ open_items: []
   SCN/Gate/Phase action、ADR の発効、最終 proof / OBL discharge / public claim
   の承認。月次(以上)の「決める会」で reserved 未決を必ず一つ以上減らす。
 - **研究 author agent**: existing LAB lane で可逆な L2/L3 working theory の候補
-  比較、反例、文献、Lean transcription / conditional lemma、実験、暫定採択、撤回を
-  行う。ADR-0014 の exact editable target があるときだけ canon update を提案する。
-  reserved boundary は選ばない。
+  比較、反例、文献、Lean transcription / conditional lemma、実験、bounded implementation
+  validation、暫定採択、撤回を行う。ADR-0014 の standing eligibility predicate を満たす
+  `working/WRK-####` を自律的に開始できる。reserved boundary は選ばない。
 - **独立 reviewer agent**: final rebased authority/evidence cut、registry membership、
   semantic delta、evidence、non-effects、rollback、canon wording を review する。
   author の authority を拡張しない。
@@ -30,7 +30,7 @@ open_items: []
 | 種別 | 産物 | close 条件 |
 |---|---|---|
 | design-memo | owner-reserved decision request (`meta/proposals/`) | owner disposition または explicit defer |
-| delegated-theory-research | target-ID scoped L2/L3 candidate | authority cut、positive/negative evidence、non-effects、rollback、LAB lifecycle record。canon update は ADR-0014 editable-target row と final-delta review が追加で必要 |
+| delegated-theory-research | `WRK-####` scoped L3 candidate / future L2 candidate | authority cut、alternative/falsifier、positive/negative evidence、non-effects、rollback、LAB lifecycle record。L2 selection は現在 fail-closed で、将来は ADR-0014 frozen-cut review が追加で必要 |
 | calculus-experiment | 理論の変種検討・反例 | 結論と falsifier を LAB 台帳へ反映。current state を変えるなら delegated-theory-research 条件も満たす |
 | proof | OBL の statement/証明 | Lean artifact は LAB evidence。`theory/11` の全 status / identity movement は owner action |
 | spike | 使い捨て実装実験 | 学びの 1 頁メモ。main に残すコードは既存の許可済み lane にある delegated-theory-research artifact に限る |
@@ -39,24 +39,32 @@ open_items: []
 
 LAB lifecycle は `proposed -> compared -> provisionally-selected ->`
 `superseded | falsified | escalated`。canon document status と混同しない。ADR-0014
-editable-target row が無い candidate は、LAB lifecycle だけを進み canon を変えない。
+standing eligibility predicate を満たす candidate は `working/WRK-####` に L3 question
+を置ける。それ以外は LAB lifecycle だけを進み canon を変えない。
 
-開始時に、governing ADR、target IDs、pinned canon/LAB revision、allowed operation、
-forbidden surface、result class、expected falsifier、rollback、integration steward を
-固定する。canon update を求める場合、steward は review 前に intended integration
-base、cited/affected canon blobs、proposed diff、artifact digests、rollback diff を
-freeze する。これらのいずれかが変われば review は失効する。
+開始時に、governing ADR、read-only anchor IDs、pinned canon/LAB revision、standing
+eligibility check、forbidden surface、result class、alternative、expected falsifier、rollback、
+integration steward を固定する。L2 selection を求める場合、steward は review 前に intended
+integration base、cited/affected canon blobs、proposed working-record diff、artifact digests、
+rollback diff を freeze する。これらのいずれかが変われば review は失効する。
 
-LAB candidate の `L3-open -> L2-working` provisional selection には、少なくとも status quo と
-代替/falsifier、positive/negative evidence、reproducible command / tool version /
-retained artifact hash、dependent IDs / frozen SCN impact read、non-effects、
-independent review が必要である。canon working statement は ADR-0014 の editable
-target row がある場合だけ、scope、assumptions、LAB evidence cut、review、rollback
-trigger を保持する。
+standing predicate を満たす L3 pre-registration は commit 後に review なしで LAB
+comparison を開始できる。LAB candidate の `L3-open -> L2-working` provisional selection
+には、少なくとも status quo と代替/falsifier、positive/negative evidence、reproducible
+command / tool version / retained artifact hash、dependent IDs / frozen SCN impact read、
+non-effects、independent review が必要である。review binding は author-signed Git base、exact
+canon/LAB SHA-256 snapshots、normalized record SHA-256、author と異なる reviewer signing
+fingerprint、およびその base の直上にある signed admission commit を残す。canon working statement は ADR-0014 standing
+eligibility predicate を満たす `WRK-####` だけに置き、scope、assumptions、LAB evidence
+cut、review、rollback trigger を保持する。
+
+現行の `meta/review-keys.json` は owner-authenticated trust anchor をまだ持たないため、
+L2 promotion は fail-closed である。これは L3 candidate research の停止理由ではない。
 
 再現可能な falsifier は依存作業と新しい integration を LAB で即時停止できる。
-canon L2-to-L3 demotion は rebase/freeze と independent review 後に行う。replacement
-L2 は再 review を要する。history は消さず LAB に forward record する。
+canon L2 record は `frozen` のまま保持し、follow-up は forward L3 successor または
+escalation bundle とする。in-place L2-to-L3 demotion はしない。replacement L2 は再
+review を要する。history は消さず LAB に forward record する。
 
 次の場合は `escalated` として owner/canon action を要求する: L0/L1 の再解釈、
 primitive / external contract / SCN / conformance / Gate / Phase / any theory/11 / final proof の変更、
@@ -69,10 +77,10 @@ MirCore v0(T1 exit)まで、新しい evidence lane・新規 helper 群・新規
 
 ## レビューと外部性
 
-L0/L1 と reserved boundary の規範変更は必ず二重レビュー(起案したモデルと別系統のモデル、可能なら人間)。delegated L2/L3 working-state update は author と異なる independent reviewer を必須とする。四半期ごとに canon 全体の recut(矛盾・肥大の刈り込み)。T2 前後にワークショップ論文 1 本を蒸留の強制装置として書く。
+L0/L1 と reserved boundary の規範変更は必ず二重レビュー(起案したモデルと別系統のモデル、可能なら人間)。delegated L3 pre-registration は standing predicate と commit を要するが independent review を待たない。L2 promotion は現在 fail-closed であり、owner-authenticated trust anchor の導入後にだけ owner-trusted author/reviewer signing key による distinct review を必須とする。frozen L2 の follow-up は successor record にする。四半期ごとに canon 全体の recut(矛盾・肥大の刈り込み)。T2 前後にワークショップ論文 1 本を蒸留の強制装置として書く。
 
 ## 記録の置き場
 
 作業履歴・候補・実験ログ・生成物は LAB へ。canon に入るのは規範・ADR-0014 の
-exact row に許された current working theory・計画・規約のみ。progress 系ダッシュ
+`working/` に許された current working theory・計画・規約のみ。progress 系ダッシュ
 ボードは鏡であって記憶にしない。

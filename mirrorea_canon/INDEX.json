@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 76,
+ "files": 79,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 1972
+   "bytes": 2829
   },
   {
    "id": "root/glossary",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 2726
+   "bytes": 3051
   },
   {
    "id": "root/north-star",
@@ -61,7 +61,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2538
+   "bytes": 2773
   },
   {
    "id": "adr/ADR-0001",
@@ -207,10 +207,10 @@
    "depends_on": [
     "root/readme"
    ],
-   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続きで、ADR-0014 の review-gated L2/L3 working-theory route のみを例外とする。",
+   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続きで、ADR-0014 の standing L3 / future review-gated L2 working-theory route のみを例外とする。",
    "open_items": [],
    "path": "adr/ADR-0012.md",
-   "bytes": 1506
+   "bytes": 1630
   },
   {
    "id": "adr/ADR-0013",
@@ -239,12 +239,12 @@
    "maturity": "draft",
    "depends_on": [
     "adr/ADR-0012",
-    "meta/proposal-005"
+    "meta/proposal-006"
    ],
-   "summary": "owner-maintained exact allowlist と review を条件に、可逆な L2/L3 working-theory canon update を委任する。L0/L1・全 theory/11・外部契約・SCN/Gate・最終 proof は owner に留保する。",
+   "summary": "standing negative-list boundary と canonical working annex により、可逆な L3 theory research と future L2 route、および既存 LAB lane の実装検証を委任する。L0/L1・theory/11・契約・SCN/Gate は owner に留保する。",
    "open_items": [],
    "path": "adr/ADR-0014.md",
-   "bytes": 6906
+   "bytes": 6776
   },
   {
    "id": "adr/readme",
@@ -256,7 +256,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 1828
+   "bytes": 1858
   },
   {
    "id": "arch/01-strata",
@@ -403,10 +403,10 @@
     "adr/ADR-0014",
     "plan/02-operating-model"
    ],
-   "summary": "AI エージェントの読込プロトコルと権限境界。review-gated L2/L3 working-theory route、reserved boundary、衝突時の挙動。",
+   "summary": "AI エージェントの読込プロトコルと権限境界。standing L3 pre-registration と review-gated L2 working-theory route、reserved boundary、衝突時の挙動。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 3272
+   "bytes": 3571
   },
   {
    "id": "meta/proposal-001",
@@ -486,10 +486,35 @@
    "depends_on": [
     "adr/ADR-0012"
    ],
-   "summary": "採択済みの delegated L2/L3 theory research route。LAB は候補・反証・実験・履歴を保持し、canon update は ADR-0014 の exact owner allowlist と final-delta review を要する。",
+   "summary": "歴史的な pre-amendment delegated L2/L3 theory research route。exact owner allowlist は PROPOSAL-006 と改訂 ADR-0014 により superseded である。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-005-l2-l3-theory-research-delegation.md",
-   "bytes": 3237
+   "bytes": 3386
+  },
+  {
+   "id": "meta/proposal-006",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0012"
+   ],
+   "summary": "採択済みの standing bounded autonomy。agent は既存 LAB lane で可逆な理論・実験・実装検証を自走し、working annex に active L3 record と future L2 route を置く。L2 は owner-authenticated trust anchor まで fail-closed、reserved boundary は owner に留保する。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-006-standing-bounded-autonomy.md",
+   "bytes": 2721
+  },
+  {
+   "id": "meta/proposal-007",
+   "status": "L2-working",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "meta/proposal-006"
+   ],
+   "summary": "WRK の L3 evidence を append-only の明示 commit list と DAG history audit で帰属させる運用精密化。既存の standing boundary・L2 fail-close・reserved surface は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-007-wrk-evidence-commit-integrity.md",
+   "bytes": 2992
   },
   {
    "id": "meta/source-hierarchy",
@@ -502,7 +527,7 @@
    "summary": "canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 2342
+   "bytes": 2550
   },
   {
    "id": "meta/style-guide",
@@ -515,7 +540,7 @@
    "summary": "執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。",
    "open_items": [],
    "path": "meta/style-guide.md",
-   "bytes": 3000
+   "bytes": 3569
   },
   {
    "id": "plan/00-gates",
@@ -547,7 +572,7 @@
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 13493
+   "bytes": 13567
   },
   {
    "id": "plan/02-operating-model",
@@ -560,7 +585,7 @@
    "summary": "運用規約。owner-reserved boundary、delegated L2/L3 theory research、package 5 種、モラトリアム、KPI、相互レビュー。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 5381
+   "bytes": 6554
   },
   {
    "id": "plan/03-risks",
@@ -572,7 +597,7 @@
    "summary": "リスク台帳 R-01..R-13。LAB plan/12 の蒸留+相談で特定された構造リスク。",
    "open_items": [],
    "path": "plan/03-risks.md",
-   "bytes": 2150
+   "bytes": 2209
   },
   {
    "id": "plan/readme",
@@ -1055,6 +1080,19 @@
    "open_items": [],
    "path": "theory/README.md",
    "bytes": 1438
+  },
+  {
+   "id": "working/readme",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "meta/proposal-006"
+   ],
+   "summary": "可逆な L2/L3 research proposition の canonical working annex。WRK-#### の必須記録、review、supersession、非宣言を定める。",
+   "open_items": [],
+   "path": "working/README.md",
+   "bytes": 7121
   }
  ]
 }

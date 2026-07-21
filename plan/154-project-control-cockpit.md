@@ -21,8 +21,8 @@ process. An owner-recorded LAB decision may only change a separate
 - No G0 exit, T1 entry, OBL completion, proof discharge, conformance result,
   or runtime/product readiness is created by this plan.
 - The current delegated-research policy is ADR-0014 plus
-  `plan/157-delegated-theory-research-governance.md`; `plan/156` remains the
-  pre-delegation evidence record.
+  `working/README.md` and `plan/158-standing-bounded-autonomy.md`; `plan/156`
+  and `plan/157` remain historical evidence records.
 - No Gate/Phase or implementation package is promoted by this baseline.
 
 ## Design
@@ -63,9 +63,10 @@ been recorded elsewhere.
 `plan/155` records G0-D1/D2/D4. G0-D3 is deferred and dormant: it re-enters
 the queue only through an owner reopen, not because an agent needs a next task.
 `plan/156` records the pre-delegation research envelope and its bounded evidence.
-ADR-0014 plus `plan/157` now govern autonomous LAB research and the exact-row,
-review-gated route for a canon L2/L3 update. They do not grant Gate/Phase
-movement, ADR effectivity, any proof-ledger status, or OBL discharge authority.
+ADR-0014 plus `working/README.md` and `plan/158` now govern autonomous LAB
+research and the standing-boundary, review-gated route for a canon L2/L3
+working record. They do not grant Gate/Phase movement, ADR effectivity, any
+proof-ledger status, or OBL discharge authority.
 
 ## Update transaction
 

@@ -17,6 +17,8 @@ NORTH-STAR (軸)
    ▼
 adr/ (決定 ADR-0001..0014) ◄──── GLOSSARY (概念 CON-###)
    │
+   ├──── working/ (WRK-####: 可逆な L2/L3 research annex、既存正本は read-only)
+   │
    ▼
 theory/ (MirCore v0)                     mental-model/ (表と裏の対応)
   00 見取り図                                 ▲
@@ -55,6 +57,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | BND-### | 層間契約 | architecture/02 |
 | GATE-# / PHASE-x | 計画単位 | plan/00, 01 |
 | OPEN-### | 未決 | 各ファイル open_items と INDEX.json |
+| WRK-#### | 可逆な research working proposition | working/ |
 | E-XXXX-### | 診断 ID | spec/07 |
 
 相互参照は必ず ID で行う。`INDEX.json` に全 id → path → status → depends_on の索引がある(`meta/build-index.py` で再生成)。
@@ -64,3 +67,4 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 - 図・例・シナリオの語彙(`World`, `Player` 等)は S5 のドメイン語彙であり、core primitive ではない(ADR-0001)。
 - ファイルが存在すること自体は、その内容が実装済みであることを意味しない。実装状態は plan/01 のみが語る。
 - LAB(旧 repo)の記述は evidence であり規範ではない(ADR-0012)。
+- `working/` の記録は settled theory ではない。既存の theory/spec/scenario/plan/ledger を変更せず、ADR-0014 の範囲だけを示す。

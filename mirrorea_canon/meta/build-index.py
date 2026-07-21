@@ -18,18 +18,22 @@ def parse_front_matter(text, path):
     m = re.match(r"\A---\n(.*?)\n---\n", text, re.S)
     if not m:
         return None
-    fm, out = m.group(1), {}
+    fm, out, errors = m.group(1), {}, []
     for line in fm.splitlines():
         mm = re.match(r"(\w+):\s*(.*)$", line)
         if not mm:
+            if line.strip():
+                errors.append(f"malformed front matter line '{line}': {path}")
             continue
         k, v = mm.group(1), mm.group(2).strip()
+        if k in out:
+            errors.append(f"duplicate front matter field '{k}': {path}")
         if v.startswith("["):
             items = [x.strip() for x in v.strip("[]").split(",") if x.strip()]
             out[k] = items
         else:
             out[k] = v
-    return out
+    return out, errors
 
 def main():
     root = find_root(os.getcwd())
@@ -43,10 +47,12 @@ def main():
             rel = os.path.relpath(path, root)
             with open(path, encoding="utf-8") as f:
                 text = f.read()
-            fm = parse_front_matter(text, rel)
-            if fm is None:
+            parsed = parse_front_matter(text, rel)
+            if parsed is None:
                 errors.append(f"missing front matter: {rel}")
                 continue
+            fm, parse_errors = parsed
+            errors.extend(parse_errors)
             for req in ("id", "status", "maturity", "summary"):
                 if req not in fm:
                     errors.append(f"missing '{req}': {rel}")
@@ -68,10 +74,23 @@ def main():
     index = {"canon_version": "0.1.0",
              "files": len(entries),
              "entries": sorted(entries, key=lambda e: e["path"])}
+    index_path = os.path.join(root, "INDEX.json")
+    if errors:
+        print("VALIDATION ERRORS:")
+        for e in errors:
+            print(" -", e)
+        sys.exit(1)
     if "--check" in sys.argv:
-        pass
+        try:
+            with open(index_path, encoding="utf-8") as f:
+                existing_index = json.load(f)
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"INDEX.json cannot be read: {exc}")
+        else:
+            if existing_index != index:
+                errors.append("INDEX.json is stale; run python3 meta/build-index.py")
     else:
-        with open(os.path.join(root, "INDEX.json"), "w", encoding="utf-8") as f:
+        with open(index_path, "w", encoding="utf-8") as f:
             json.dump(index, f, ensure_ascii=False, indent=1)
     if errors:
         print("VALIDATION ERRORS:")

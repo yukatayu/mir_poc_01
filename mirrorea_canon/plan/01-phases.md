@@ -11,7 +11,7 @@ open_items: [OPEN-032]
 
 **唯一の実装状態の正本。** 他のどのファイルの存在も実装を意味しない。現在位置: **T0**。
 
-## 理論フェーズ(実装凍結。例外は使い捨て spike と ADR-0014 に従う既存 lane の scoped research artifact のみ。production implementation は main 不合流)
+## 理論フェーズ(実装凍結。例外は使い捨て spike と ADR-0014 に従う既存 lane の scoped research artifact / bounded implementation validation のみ。いずれも LAB evidence であり、production implementation は main 不合流)
 
 | Phase | ゴール(exit) | 動くもの / 実用性 |
 |---|---|---|

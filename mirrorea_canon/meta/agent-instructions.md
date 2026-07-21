@@ -3,7 +3,7 @@ id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
 depends_on: [adr/ADR-0012, adr/ADR-0014, plan/02-operating-model]
-summary: AI エージェントの読込プロトコルと権限境界。review-gated L2/L3 working-theory route、reserved boundary、衝突時の挙動。
+summary: AI エージェントの読込プロトコルと権限境界。standing L3 pre-registration と review-gated L2 working-theory route、reserved boundary、衝突時の挙動。
 open_items: []
 ---
 
@@ -17,12 +17,14 @@ open_items: []
 
 - design-memo(提案)の起票(`meta/proposals/PROPOSAL-###.md`。本文に: 対象 ID、現状、提案、影響範囲、代替案)。
 - 決定済み事項の帰結の機械的展開: サンプル再表現、SCN 整合検証、INDEX 再生成、対比表更新、Lean への写経、反例探索、誤字・参照切れの修正(規範文の意味を変えない範囲)。
-- ADR-0014 の delegated route に従う L2/L3 working theory: target ID、pinned
-  authority cut、allowed operation、result class、non-effects、falsifier、rollback
-  を先に記録し、existing LAB lane で candidate を比較・検証する。ADR-0014 の exact
-  editable-target row があり、steward が rebased final diff を freeze し、
-  independent review が通った場合に限り、その row の current L3/L2 statement を
-  維持できる。
+- ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
+  read-only canon anchors、pinned authority cut、result class、non-effects、alternative /
+  falsifier、rollback を先に記録し、existing LAB lane で candidate を比較・検証する。
+  standing eligibility predicate を満たす L3 record は自律的に開始できる。steward が
+  rebased final cut を freeze し、owner-authenticated trust anchor による review が
+  通った場合に限り、その record を L2 working position として維持できる。現行
+  `meta/review-keys.json` は `UNRESOLVED` placeholder なので L2 を fail-closed にするが、
+  L3 research を止めない。
 - 「分からない・矛盾がある」の報告(それ自体が価値ある産物)。
 
 ## できないこと(禁止)
@@ -48,5 +50,6 @@ replacement が必要なら review をやり直す。
 ## 産物の置き場
 
 owner-reserved 提案 → `meta/proposals/`。candidate・実験・ログ・生成コード → LAB。
-canon の delegated write は ADR-0014 editable-target row の exact section のみで、
-その根拠と history を LAB に残す。「できること」の範囲を超える canon write はしない。
+canon の delegated write は `working/WRK-####` のみで、その根拠と history を LAB に
+残す。既存の canon text を変更する必要があるときは「できること」の範囲を超えるため
+escalate する。

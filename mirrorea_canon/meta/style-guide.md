@@ -40,16 +40,21 @@ MAP.md の表が正本。新 ID は台帳(GLOSSARY / theory/11 / plan/03 / spec/
 ### Delegated working state
 
 ADR-0014 の route で L2/L3 working theory を更新するとき、update surface は
-ADR-0014 の exact editable-target row に限る。候補、代替、command output、artifact
-source、history は LAB に置く。file-level L2/L3 status は agent authority の grant
-ではない。
+`working/WRK-####` に限る。候補、代替、command output、artifact source、history は
+LAB に置く。file-level L2/L3 status は agent authority の grant ではない。
 
-update 前に target ID、pinned authority cut、allowed operation、result class、
-falsifier を記録する。canon steward は intended integration base、affected blob set、
-proposed diff、evidence digest、rollback diff を rebase/freeze し、independent reviewer
-はその exact cut を **update 前に** review する。review 後の change は approval を
-失効させる。L0/L1、external contract、SCN/Gate/Phase、`theory/11`、final proof / OBL
-discharge は通常の owner decision route を使う。
+L3 pre-registration 前に read-only anchor ID、pinned authority cut、result class、
+alternative、falsifier を記録する。これは standing predicate を満たせば review なしに
+commit できる。L2 promotion では、canon steward が intended
+integration base、affected blob set、proposed working-record diff、evidence digest、
+rollback diff を rebase/freeze し、independent reviewer はその exact cut を **update
+前に** review する。review 後の change は approval を失効させる。L0/L1、external
+contract、SCN/Gate/Phase、`theory/11`、final proof / OBL discharge は通常の owner
+decision route を使う。
+
+現行の review-key registry は owner-authenticated trust anchor ではないため、L2
+promotion は fail-closed である。上の L2 手順は、別の owner/canon action により信頼
+anchor が導入された後の future route であり、L3 research の停止理由ではない。
 
 ## サイズ規律
 
@@ -58,7 +63,10 @@ discharge は通常の owner decision route を使う。
 ## 改定手続き
 
 CHANGELOG.md 冒頭の 4 手順。L0/L1 に触れる場合は ADR 追記が必須。ADR-0014
-の delegated L2/L3 working-state update は、editable-target row、frozen authority /
-evidence cut、update 前の independent review を LAB に残し、current-state wording を
-最小に保つ。SCN の期待変更も ADR 必須(scenarios/README)。改定後は
+の delegated L3 pre-registration は standing eligibility check と commit を LAB に残す。
+L2 promotion は frozen authority / evidence cut と update 前の independent review を LAB
+に残す future route であり、現行は fail-closed である。current-state wording を最小に保つ。
+frozen L2 の follow-up は successor record
+にする。SCN の期待変更も
+ADR 必須(scenarios/README)。改定後は
 `python3 meta/build-index.py --check` を通すこと。
