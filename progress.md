@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 06:45 JST
+最終更新: 2026-07-22 07:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007 records the OBL-001 result/write-coverage gap, WRK-0008 records that the existing current-L2 formal-hook row lacks same-Place cut-frontier attribution, and registered WRK-0009 awaits literal e5 tuple evidence. None selects a Canon carrier or moves an OBL. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007 records the OBL-001 result/write-coverage gap, WRK-0008 records that the existing current-L2 formal-hook row lacks same-Place cut-frontier attribution, and WRK-0009 records literal e5 foundation/static-route mismatch only. None selects a Canon carrier or moves an OBL. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
@@ -148,7 +148,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006, WRK-0007, and WRK-0008 are manifested L3 evidence; WRK-0009 is registered to audit e5 foundation/active-route tuple fidelity before evidence is read | medium | execute WRK-0009 only as literal-transcription evidence; P008 and any Canon binding/L2 promotion remain owner-reserved |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006, WRK-0007, WRK-0008, and WRK-0009 are manifested L3 evidence; WRK-0009 establishes only literal e5 foundation/active-route tuple mismatch | medium | reopen target triage for a distinct existing-lane question; P008 and any Canon binding/L2 promotion remain owner-reserved |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -162,13 +162,20 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, and WRK-0008 hook-attribution evidence; WRK-0009 is registered only, with no evidence yet | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | execute WRK-0009's literal tuple audit without treating its output as a theorem or carrier; Core/result bridge, coverage/taxonomy, and Canon binding remain unselected |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, and WRK-0009 literal tuple-mismatch evidence | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | WRK-0009 does not choose a mapping, synthetic-role reading, defect, theorem, or carrier; Core/result bridge, coverage/taxonomy, and Canon binding remain unselected |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 does not reopen it; it audits only e5 tuple identity |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 07:22 JST: manifested WRK-0009's bounded L3 e5 identity result.
+  The foundation's hyphenated subject and first `rollback_cut_non_interference`
+  obligation do not literally equal the emitted route's underscored subject and
+  first `canonical_normalization_law` obligation; both positions mismatch.
+  Lean, 4 theorem-stub support tests, and all 23 current-L2 regression commands
+  passed. This does not select a mapping, synthetic role, defect, semantics,
+  carrier, OBL status, Gate/Phase action, or sample workflow change.
 - 2026-07-22 06:45 JST: selected and committed WRK-0009 under ADR-0014. It
   will compare the literal e5 foundation tuple with the existing static
   current-L2 pipeline tuple, with no semantic mapping assumed. Execution is

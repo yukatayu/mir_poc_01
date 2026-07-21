@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -89,10 +89,12 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   interpreter の別の Place-sensitive rollback path を否定せず、OBL-027、carrier、
   helper/schema、runtime、Gate/Phase は変更しません。
 - WRK-0009 は、current-L2 static e5 route と Lean proof skeleton の identity
-  tuple を literal に照合するために登録済みです。これは proof skeleton の
-  semantic meaning、theorem/OBL、carrier を判断せず、既存コマンドの evidence
-  実行待ちです。選定理由と停止条件は
-  `plan/168-wrk0009-e5-skeleton-identity-selection.md` にあります。
+  tuple を literal に照合し、不一致を retained LAB evidence として manifest しました。
+  foundation の `e5-underdeclared-lineage` / `rollback_cut_non_interference` と
+  emitted route の `e5_underdeclared_lineage` / `canonical_normalization_law` は
+  literal に一致しません。mapping、意図的 synthetic role、defect、意味論、theorem/OBL、
+  carrier は判断せず、修理もしません。選定理由は plan/168、再現結果と停止条件は
+  `plan/wrk-0009-e5-skeleton-identity.md` にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と

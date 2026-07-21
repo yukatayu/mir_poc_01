@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-22 05:34 JST
+Last updated: 2026-07-22 07:22 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -29,6 +29,13 @@ is reproducible entry/identity evidence, not a same-Place `atomic_cut`
 frontier witness. The four selected runtime examples and their runner remain
 at their existing workflow classification; no helper, schema, sample status,
 or public verification surface changed.
+
+WRK-0009 adds a separate scoped artifact-identity result for the existing e5
+static route and Lean foundation: their two displayed tuples do not literally
+match. The command passed Lean, four theorem-stub support tests, and the full
+23-command current-L2 regression. This does not choose a mapping, synthetic
+role, defect, semantics, or proof status, and does not change any sample or
+workflow classification.
 
 The self-contained `mir_hilight.html` is LAB readability/debug evidence only.
 P109 keeps legacy domain words `world` and `game` out of current core syntax
@@ -215,6 +222,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-22 07:22 JST | WRK-0009 e5 proof-skeleton identity audit | pass | Lean, 4 theorem-stub support tests, and the current-L2 regression passed 23/23. The foundation's hyphenated e5 subject and first `rollback_cut_non_interference` obligation do not literally equal the emitted route's underscored subject and first `canonical_normalization_law` obligation; both positions mismatch. This is bounded identity evidence only, with no mapping, semantic, sample-status, or workflow-status relabel. |
 | 2026-07-22 05:34 JST | WRK-0008 formal-hook attribution audit | pass | Focused formal-hook and source-runner tests passed 5/5 and 2/2; the full current-L2 regression passed 23/23. Cut-only `e1`, rollback-only `e2`, cut-plus-rollback `e21`, and nested-Place `e22` all emitted the same symbolic `rollback_cut_non_interference` row. This classifies the formal-hook row as coarse reachability/identity evidence only, not a same-Place frontier witness. Separate current-L2 runtime locality remains non-claimed; no sample/workflow-status relabel occurred. |
 | 2026-07-22 04:29 JST | P-COMP-03 rejection-phase / carrier audit | pass | The 15-row matrix and `check-all` remained green. Source mapping plus focused semantic/runtime tests establish that checked-in P-COMP-03 fixtures are Python-helper classifications, not Product Alpha phase observations. The closed Rust registry has four typecheck rejections (unbound variable, unknown field, non-Bool condition, missing import) and one evaluation-time `OutOfBounds`; Product Alpha wraps all as `MirCompute`. This is a LAB evidence correction only, with no sample status or workflow-status relabel. |
 | 2026-07-22 03:35 JST | Mir computational baseline directness audit | pass | `mir_computational_samples.py matrix/check-all` accepted all 15 expected rows; direct accepted `comp-02` and positive `comp-04` produced `Int(42)` with host-input / Mir-compute / host-output events; the undeclared-effect package rejected with `SchemaDecode`. Rust semantic/schema/runtime tests passed 4/32/29, including constructed valid-package direct runtime coverage for the closed `P-COMP-03` registry. Source mapping and a temporary Oracle review confirmed that the 10 checked-in `P-COMP-03` fixtures are Python-helper classifications, Product Alpha `check` / `run-local` intentionally reject direct `.mir`, and no grammar/runtime-completion claim follows. No sample status or workflow-status relabel occurred. |

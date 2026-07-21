@@ -36,12 +36,24 @@ Non-claims: This does not claim that `rollbackCutNonInterference` corresponds to
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending pre-registered existing-lane execution.
-Negative evidence: Pending pre-registered existing-lane execution.
-Evidence artifacts: pending
-Evidence commits: none
+Positive evidence: The registered clean existing-lane run passed the Lean foundation check, 4 theorem-stub support tests, emitted 2 e5 review units and 2 matched Lean stubs, and passed the complete 23-command current-L2 regression. The retained artifact's literal matrix shows no equality at either position: the foundation begins `e5-underdeclared-lineage` / `rollback_cut_non_interference`, while the emitted route begins `e5_underdeclared_lineage` / `canonical_normalization_law`; the second positions retain different subject spelling and derived theorem name.
+Negative evidence: The exact-transcription falsifier did not occur in the registered run. This record does not infer a lossless mapping, intentional synthetic role, defect, or semantic divergence from the mismatches, and does not claim an independent source audit established any of those alternatives.
+Evidence artifacts: LAB:plan/wrk-0009-e5-skeleton-identity.md@edf28ee06c581ce59816a2237b1609951ee6c7ed:a11429333ae20ee5e8bd920ea616d310c672b92ecf8cd92b2e8d023502017fa6
+Evidence commits: edf28ee06c581ce59816a2237b1609951ee6c7ed
 Impact / non-effects: This record is limited to the declared `plan`, `samples/current-l2`, and `samples/lean` LAB locations plus disposable `/tmp` outputs. It changes no Canon theory, OBL state, carrier, helper, schema, source fixture, test, runner, conformance, Gate/Phase, runtime, or public behavior.
 Independent review: not-required-for-L3
+
+### Evidence addendum — 2026-07-22
+
+The evidence commit is `edf28ee06c581ce59816a2237b1609951ee6c7ed`; it is
+append-only ownership for the retained `plan/` artifact. The pre-registration's
+status-quo prose described the second emitted obligation as `no_repromotion`.
+The fresh emitter output is `no_re_promotion`. This dated clarification preserves
+the original pre-registration text rather than rewriting it to fit the result;
+it does not alter the literal mismatch, select a mapping, or create any semantic
+claim. A focused read-only review verified the matrix, execution counts, and
+non-claim boundary. Direct numbered reports are operational metadata under the
+working process; the retained evidence artifact remains only under `plan/`.
 
 ## Supersession
 

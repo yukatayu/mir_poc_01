@@ -1234,7 +1234,7 @@
    "summary": "existing current-L2 static e5 route と Lean proof-skeleton の review-unit / emitted-stub identity tuple が literal に整合するかを監査する可逆な L3 record。theorem 意味、OBL、carrier、helper/schema は選ばない。",
    "open_items": [],
    "path": "working/WRK-0009-current-l2-e5-skeleton-identity.md",
-   "bytes": 6868
+   "bytes": 8522
   }
  ]
 }

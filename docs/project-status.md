@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 06:45 JST
+最終更新: 2026-07-22 07:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | ユーザ向け仕様 | companion notation と runnable LAB examples はあるが、Surface v0 grammar closure と public contract は未完。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `samples_progress.md` |
 | 実装 / 運用 | alpha / Surface / operational roots は限定 LAB evidence。Full System V1 helper は accepted/rejected の内側 CLI 終了コード整合を確認し、committed provider/renderer generated evidence は実行時に書き換えず fresh report と比較する。Full System V1 checker は既存 host adapter の exact pair を宣言 signature / operation-specific capability / transition context に照合し、duplicate record field と非 scalar equality を runtime 前に拒否する。clean `4a52dd3e` と upstream tracking ref の一致上で 21/17/12 = 50 行を含む final release check 29 command を再現した。ただしこれは LAB の typed boundary guard であり、実行主体への trusted authorization、public adapter ABI、関数をまたぐ capability inheritance、Float64 runtime 実行は未実装である。release bundle は C-distributed conformance / 実 transport / multi-process execution を非主張とする。 | `samples_progress.md`; `scripts/README.md`; `tasks.md`; `mirrorea_canon/plan/01-phases.md` |
 | Mir computational evidence | 15 行の sample matrix は 2 direct Product Alpha runtime acceptance、10 helper-only rows、3 direct package-check rejection から成る。`P-COMP-03` fixture は helper-only だが、Rust runtime test は構成した有効 package で五つの正例を直接実行し、五つの負例を直接 reject する。closed registry の負例は四つの静的型検査拒否と一つの評価時範囲外拒否に分かれるが、fixture の `runtime_rejection` と Product Alpha の `MirCompute` carrier はその位相を公開上区別しない。`.mir` は Product Alpha `check` / `run-local` の入力ではない。 | `plan/53-mir-computational-core-roadmap.md`; `plan/166-mir-computational-baseline-directness-audit.md`; `plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`; `samples_progress.md` |
-| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001..0006 は既存 Lean lane で finite-index、OBL-021 outcome/projection、OBL-020 familywise/global の限定 L3 evidence を manifest し、いずれも `not-promoted` である。WRK-0007 は OBL-001 LAB draft の Result/write enumeration gap を、WRK-0008 は current-L2 formal-hook row が same-Place cut frontier を保持せず coarse runtime-cluster identity に留まることを manifest した。WRK-0009 は current-L2 static e5 route と Lean foundation tuple の literal fidelity を事前登録しただけで、evidence は未実行である。いずれも Canon theorem/OBL の反証・証明、carrier の選択、OBL status、Gate/Phase の変更ではない。L2 selection は owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `mirrorea_canon/working/WRK-0002-obl021-projection-vacuity.md`; `mirrorea_canon/working/WRK-0003-obl021-projection-extensionality.md`; `mirrorea_canon/working/WRK-0004-obl021-outcome-totality.md`; `mirrorea_canon/working/WRK-0005-obl021-conditional-outcome-relation.md`; `mirrorea_canon/working/WRK-0006-obl020-familywise-global-boundary.md`; `mirrorea_canon/working/WRK-0007-obl001-result-write-coverage.md`; `mirrorea_canon/working/WRK-0008-obl027-formal-hook-attribution.md`; `mirrorea_canon/working/WRK-0009-current-l2-e5-skeleton-identity.md`; `plan/164-obl001-result-write-coverage-boundary.md`; `plan/165-post-wrk0007-candidate-selection.md`; `plan/168-wrk0009-e5-skeleton-identity-selection.md`; `plan/wrk-0008-obl027-formal-hook-attribution.md` |
+| 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001..0006 は既存 Lean lane で finite-index、OBL-021 outcome/projection、OBL-020 familywise/global の限定 L3 evidence を manifest し、いずれも `not-promoted` である。WRK-0007 は OBL-001 LAB draft の Result/write enumeration gap を、WRK-0008 は current-L2 formal-hook row が same-Place cut frontier を保持せず coarse runtime-cluster identity に留まることを manifest した。WRK-0009 は e5 foundation と static route の literal tuple 不一致を manifest した。これは mapping、意図的 synthetic role、defect、意味論を決めず、既存 lane の runnable 状態だけを再現した。いずれも Canon theorem/OBL の反証・証明、carrier の選択、OBL status、Gate/Phase の変更ではない。L2 selection は owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `mirrorea_canon/working/WRK-0002-obl021-projection-vacuity.md`; `mirrorea_canon/working/WRK-0003-obl021-projection-extensionality.md`; `mirrorea_canon/working/WRK-0004-obl021-outcome-totality.md`; `mirrorea_canon/working/WRK-0005-obl021-conditional-outcome-relation.md`; `mirrorea_canon/working/WRK-0006-obl020-familywise-global-boundary.md`; `mirrorea_canon/working/WRK-0007-obl001-result-write-coverage.md`; `mirrorea_canon/working/WRK-0008-obl027-formal-hook-attribution.md`; `mirrorea_canon/working/WRK-0009-current-l2-e5-skeleton-identity.md`; `plan/164-obl001-result-write-coverage-boundary.md`; `plan/165-post-wrk0007-candidate-selection.md`; `plan/168-wrk0009-e5-skeleton-identity-selection.md`; `plan/wrk-0009-e5-skeleton-identity.md`; `plan/wrk-0008-obl027-formal-hook-attribution.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
 `plan/162-post-wrk0006-candidate-selection.md` の priority pause は、当時の既知候補に
@@ -58,9 +58,9 @@ statement/proof/status、runtime semantics を決めない。詳細は
 `plan/wrk-0008-obl027-formal-hook-attribution.md` に残す。
 
 WRK-0009 は同じ helper を修理せず、existing static e5 route と foundation の
-literal tuple identity だけを調べる次の L3 record である。実行前の registration
-なので result を主張せず、詳細な選定と stop line は
-`plan/168-wrk0009-e5-skeleton-identity-selection.md` に残す。
+literal tuple identity だけを調べた L3 record である。両位置で literal mismatch
+を retained evidence として記録したが、mapping や semantic meaning は主張しない。
+詳細は `plan/wrk-0009-e5-skeleton-identity.md` に残す。
 
 ## 現在の停止線
 
