@@ -109,7 +109,8 @@ production implementation; otherwise it escalates. See
 | 24 | Next standing-eligible target triage | Closed selection: planner/Oracle/local source review selected WRK-0009 e5 proof-skeleton literal identity fidelity. Upstream projection loss lacked an existing discriminating record; static verdict/reason and source-route state coverage remain reserve candidates. | Macro 1/5 reserve; closed selection |
 | 25 | WRK-0009 e5 proof-skeleton identity evidence | Closed scoped result: the registered command passed Lean, 4 theorem-stub support tests, and 23/23 regression commands, but the foundation and emitted tuple mismatch literally at both positions. No mapping, semantic conclusion, or repair was selected. | Macro 1/5 reserve; closed scoped evidence |
 | 26 | Next standing-eligible target triage | Closed selection: planner/Oracle/local review selected WRK-0010 static decision attribution; e21/e22 final-store assertion coverage remains reserve. | Macro 1/5 reserve; closed selection |
-| 27 | WRK-0010 static decision attribution evidence | In progress: execute the committed four static smokes and 23-command regression, retain only literal attribution classification, and stop before diagnostics/defect/schema interpretation. | Macro 1/5 reserve; self-driven |
+| 27 | WRK-0010 static decision attribution evidence | Closed scoped result: 5 support tests, four static smokes, and 23/23 regression passed. Static decision payload is not literally attributed by the existing formal hook; no diagnostic/defect/schema conclusion or repair was selected. | Macro 1/5 reserve; closed scoped evidence |
+| 28 | Next standing-eligible target triage | In progress: select only a distinct existing-lane falsifier, excluding interpretation or repair of WRK-0010. | Macro 1/5 reserve; self-driven |
 
 ## self-driven macro phase reading
 

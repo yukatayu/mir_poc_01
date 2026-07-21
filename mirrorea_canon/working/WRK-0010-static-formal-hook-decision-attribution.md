@@ -36,12 +36,20 @@ Non-claims: This does not treat a static verdict, reason, reason code, formal-ho
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending pre-registered existing-lane execution.
-Negative evidence: Pending pre-registered existing-lane execution.
-Evidence artifacts: pending
-Evidence commits: none
+Positive evidence: The registered run passed 5 formal-hook support tests, the four e4/e5/e12/e14 static smokes, and the complete 23-command current-L2 regression. Static gates distinguish malformed/underdeclared verdicts, raw reasons, and `detached_noncore` presence/reason-code values, while all four hooks emit the same two obligation kinds and fixture-level references only.
+Negative evidence: The full-attribution falsifier did not occur. No hook literally carries the selected decision payload or an explicit reference to the exact static-gate artifact; `static_gate_artifact` references name only the fixture ID. This does not infer a defect, diagnostic meaning, required field, mapping, or semantic consequence.
+Evidence artifacts: LAB:plan/wrk-0010-static-formal-hook-decision-attribution.md@15fa586a8733d6c59f9fe23809b902d311fa9861:b59243925e9ffbdd47dcbf86e7b67fc08ac0a341b3468371b696884db888d3d0
+Evidence commits: 15fa586a8733d6c59f9fe23809b902d311fa9861
 Impact / non-effects: This record is limited to declared `plan` and `samples/current-l2` LAB locations plus disposable `/tmp` outputs. It changes no Canon theory, OBL state, carrier, helper, schema, source fixture, test, runner, conformance, Gate/Phase, runtime, diagnostic contract, or public behavior.
 Independent review: not-required-for-L3
+
+### Evidence addendum — 2026-07-22
+
+The evidence commit is `15fa586a8733d6c59f9fe23809b902d311fa9861` and owns
+the retained `plan/` artifact append-only. The result is a static artifact
+attribution classification only. It neither requires a payload extension nor
+changes Canon diagnostics, proof status, OBLs, carriers, helpers, schema,
+runtime, lifecycle, or public behavior.
 
 ## Supersession
 

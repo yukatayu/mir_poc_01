@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 07:58 JST
+最終更新: 2026-07-22 08:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,10 +62,10 @@ literal tuple identity だけを調べた L3 record である。両位置で lit
 を retained evidence として記録したが、mapping や semantic meaning は主張しない。
 詳細は `plan/wrk-0009-e5-skeleton-identity.md` に残す。
 
-WRK-0010 は登録済みで evidence 未実行の L3 record である。e4/e5/e12/e14 の
-existing static-gate decision payload が formal-hook artifact に literal または
-explicit lossless reference として残るかだけを調べる。diagnostic meaning、defect、
-schema/helper repair、carrier、OBL、Gate/Phase は扱わない。
+WRK-0010 は e4/e5/e12/e14 の static-gate decision payload が existing formal-hook
+artifact に literal または exact artifact reference として残らないことを manifest
+した L3 record である。これは attribution classification だけであり、diagnostic
+meaning、defect、schema/helper repair、carrier、OBL、Gate/Phase は扱わない。
 
 ## 現在の停止線
 

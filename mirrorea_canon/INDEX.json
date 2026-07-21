@@ -1248,7 +1248,7 @@
    "summary": "existing current-L2 static gate の decision payload が formal-hook artifact に literal または明示的 lossless reference として残るかを監査する可逆な L3 record。診断意味、defect、carrier、helper/schema は選ばない。",
    "open_items": [],
    "path": "working/WRK-0010-static-formal-hook-decision-attribution.md",
-   "bytes": 7394
+   "bytes": 8554
   }
  ]
 }

@@ -95,6 +95,11 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   literal に一致しません。mapping、意図的 synthetic role、defect、意味論、theorem/OBL、
   carrier は判断せず、修理もしません。選定理由は plan/168、再現結果と停止条件は
   `plan/wrk-0009-e5-skeleton-identity.md` にあります。
+- WRK-0010 は、e4/e5/e12/e14 static-gate decision payload が existing formal
+  hook に literal または exact artifact reference として残るかを監査し、残らない
+  ことを scoped LAB evidence として manifest しました。これは diagnostic meaning、
+  defect、schema repair、carrier、theorem/OBL を決めません。詳細は
+  `plan/wrk-0010-static-formal-hook-decision-attribution.md` にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
