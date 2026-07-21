@@ -66,8 +66,10 @@ that no small new L3 candidate had been selected after WRK-0006.
 Lean 4.29.1 compiled the unchanged statement draft and the countermodel. The
 countermodel proves `statement_draft_holds`, a successful untracked result, the
 experiment-only write membership, absence of `GeneratedWrite`, and
-`result_write_coverage_fails`. The 21-test Lean synchronization suite passed.
-The external `.olean` directory is 412 KiB under `/tmp` and is not committed.
+`result_write_coverage_fails`. `make check`, the 83-test documentation-validator
+suite, and the 21-test Lean synchronization suite passed. A fresh external
+`.olean` import replay also passed. The external `.olean` directories are small
+temporary evidence under `/tmp` and are not committed.
 
 ## What changed in understanding
 
@@ -122,8 +124,10 @@ active runnable sample/dashboard workflow change.
 One planner retained the earlier no-candidate conclusion. A separate reviewer,
 an adjudicating reviewer, and the temporary Oracle independently found the
 result/write coverage gap distinct from T-RESEARCH-001 and eligible for L3.
-The local source comparison accepted that latter reading. Final diff review is
-recorded after the documentation synchronization.
+The local source comparison accepted that latter reading. A final independent
+review verified the authority cut, hashes, evidence ancestry, lanes,
+registrations, and required report sections; it found only the stale
+commit/push wording corrected below.
 
 ## Skipped validations and reasons
 
@@ -133,11 +137,14 @@ countermodel uses a fresh external `.olean` import replay instead.
 
 ## Commit / push status
 
-Pre-registration `cb83300e` and evidence `8d28ed89` were committed and pushed.
-The manifest/documentation closeout commit is pending at report write time.
+Pre-registration `cb83300e`, evidence `8d28ed89`, and the manifest/current-doc
+closeout `bfa1e9b6` were committed and pushed. Report-format alignment
+`dfb1be4a` was also committed and pushed. This reviewer-informed status update
+is committed and pushed immediately after this report revision.
 
 ## Sub-agent session close status
 
-Planner, initial reviewer, and adjudicating reviewer completed read-only work.
-Temporary Oracle `mirrorea-obl001-core-write-coverage` completed; its advisory
-result is distilled here and no Oracle transcript is committed.
+Planner, initial reviewer, adjudicating reviewer, and final reviewer completed
+read-only work. Temporary Oracle `mirrorea-obl001-core-write-coverage`
+completed; its advisory result is distilled here and no Oracle transcript is
+committed. Completed sub-agent sessions are closed after this closeout commit.
