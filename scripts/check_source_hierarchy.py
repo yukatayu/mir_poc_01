@@ -252,6 +252,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/164-obl001-result-write-coverage-boundary.md",
         "plan/165-post-wrk0007-candidate-selection.md",
         "plan/166-mir-computational-baseline-directness-audit.md",
+        "plan/167-pcomp03-rejection-phase-cross-carrier-audit.md",
     ],
     "scripts": [
         "scripts",

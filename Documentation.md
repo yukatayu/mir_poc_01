@@ -62,10 +62,14 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - Mir computational sample の 15 行は、直接 Rust 実行の二つの Product Alpha
   package 行、Python helper の十行、package schema の三つの拒否行に分かれます。
   ただし Rust runtime test は別途、有効な構成 package で五つの `P-COMP-03` 正例を
-  直接実行し、五つの負例を直接 reject します。`.mir` は Product Alpha `check` / `run-local` の実行入力では
-  ありません。したがってこれは限定された計算・境界検査の証拠であり、完成した
-  言語実装ではありません。詳細は
-  `plan/166-mir-computational-baseline-directness-audit.md` と
+  直接実行し、五つの負例を直接 reject します。この closed registry では四件が
+  型検査で止まり、一件だけが評価中の範囲外拒否です。fixture の
+  `runtime_rejection` はこの位相を表す名前ではなく、Product Alpha の current
+  `MirCompute` carrier も両者を公開上は区別しません。`.mir` は Product Alpha
+  `check` / `run-local` の実行入力ではありません。したがってこれは限定された計算・
+  境界検査の証拠であり、完成した言語実装ではありません。詳細は
+  `plan/166-mir-computational-baseline-directness-audit.md`、
+  `plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`、
   `samples_progress.md` を参照してください。
 - Foundation audit は、Core に不要な domain/I/O primitive を見つけず、BND-001 の
   outcome-totality 読みだけを owner-reserved な PROPOSAL-008 として分離しました。

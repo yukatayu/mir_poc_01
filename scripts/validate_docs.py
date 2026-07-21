@@ -601,6 +601,7 @@ REQUIRED = [
     "plan/164-obl001-result-write-coverage-boundary.md",
     "plan/165-post-wrk0007-candidate-selection.md",
     "plan/166-mir-computational-baseline-directness-audit.md",
+    "plan/167-pcomp03-rejection-phase-cross-carrier-audit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

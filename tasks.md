@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 03:35 JST
+最終更新: 2026-07-22 04:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -52,12 +52,16 @@ acceptances, ten helper-only `P-COMP-03` rows, and three direct package-check
 rejections; direct textual `.mir` input is intentionally unsupported by Product
 Alpha `check` / `run-local`. Separate runtime tests execute the closed
 `P-COMP-03` positive modules and reject its negative modules through constructed
-valid packages, but this does not turn their checked-in helper fixtures into
-package-runtime evidence. A direct
+valid packages. Their five negative registry modules split into four static
+typecheck rejections and one evaluation-time bounds rejection; helper
+`runtime_rejection` and Product Alpha `MirCompute` do not represent that phase
+split. This does not turn checked-in helper fixtures into package-runtime
+evidence. A direct
 fixture widening remains self-driven only while it stays an existing-lane,
 non-production artifact without a new helper/schema/CI/Make surface or runtime
 production implementation; otherwise it escalates. See
-`plan/166-mir-computational-baseline-directness-audit.md`.
+`plan/166-mir-computational-baseline-directness-audit.md` and
+`plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`.
 
 ## ordered self-driven packages
 

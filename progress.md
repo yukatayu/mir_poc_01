@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 03:35 JST
+最終更新: 2026-07-22 04:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -39,7 +39,7 @@ visualization into an untyped transport/debug channel.
 | --- | --- | --- |
 | Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007 records the OBL-001 result/write-coverage countermodel, while post-WRK-0007 selection found no distinct next L3 candidate and PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
-| Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections, while runtime tests directly exercise the closed `P-COMP-03` registry through constructed packages | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
+| Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -73,9 +73,13 @@ not a final product, public compatibility promise, or canon implementation
 status. The computational matrix's direct Rust runtime fixtures are limited to
 `comp-02` and positive `comp-04`; the `comp-03` fixtures are helper-only, but
 their closed registry modules are directly exercised by runtime tests using
-constructed valid packages. Direct textual `.mir` input is a Product Alpha
-`check` / `run-local` non-goal. See
-`plan/166-mir-computational-baseline-directness-audit.md` and
+constructed valid packages. Its five negative registry modules are four static
+typecheck rejections plus one evaluator bounds rejection; helper
+`runtime_rejection` and Product Alpha `MirCompute` do not preserve this phase
+as an external carrier. Direct textual `.mir` input is a Product Alpha `check`
+/ `run-local` non-goal. See
+`plan/166-mir-computational-baseline-directness-audit.md`,
+`plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`, and
 `samples_progress.md`.
 
 ### Operational Suite line
@@ -165,6 +169,14 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-22 04:29 JST: audited the phase and carrier of every negative
+  P-COMP-03 case. The checked-in fixtures remain Python-helper classifications;
+  their `runtime_rejection` label is not a Rust execution phase. Constructed
+  Product Alpha packages establish four static typecheck rejections and one
+  evaluation-time `OutOfBounds` rejection, all currently carried as
+  `MirCompute`. This corrects an over-broad phrase in report 2327 through a
+  successor LAB record; no helper, schema, runtime, Canon, Gate, Phase, OBL,
+  conformance, or workflow-status change was made.
 - 2026-07-22 03:35 JST: replayed the Product Alpha computational matrix and
   traced its execution paths. All 15 rows matched their expected outcomes, but
   only two accepted fixtures enter the Rust Product Alpha runtime; the ten

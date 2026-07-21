@@ -75,6 +75,14 @@ modules; semantic tests also typecheck/evaluate the registered module forms.
 This is useful first-floor evidence, but it is not the same claim as direct
 package-runtime sample-fixture evidence.
 
+The helper's `runtime_rejection` label is a matrix comparison category, not a
+rejection-phase carrier. In the closed Rust registry, four P-COMP-03 negatives
+reject during typechecking and only the array-bounds negative reaches evaluator
+execution and yields `OutOfBounds`. Product Alpha currently wraps all five as
+`MirCompute`; neither that wrapper nor the helper fixture path exposes the
+static-versus-evaluation split. This does not select a future public diagnostic
+or failure carrier. See `plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`.
+
 Direct textual `.mir` input remains an explicit Product Alpha `check` /
 `run-local` non-goal; this line uses versioned `package.mir.json` inputs. A new
 direct fixture can be researched in the existing lane only while it remains a
