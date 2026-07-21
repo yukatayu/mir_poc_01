@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -97,4 +97,5 @@ agent は止まり、選択肢・影響・反例・Lean/実行証拠・非主張
 canon working state への更新は `working/WRK-####` に限られ、L3 の事前登録は ADR-0014 の
 standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
 material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
-ため fail-closed です。frozen L2 の follow-up は successor にします。
+ため fail-closed です。frozen L2 の follow-up は successor にします。直近の候補なし
+triage は `plan/161` にあり、候補を作ること自体を目的にしません。

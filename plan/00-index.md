@@ -115,11 +115,12 @@
 97. standing bounded autonomy と first research ratchet は `plan/158`
 98. WRK evidence-commit integrity recut は `plan/159`
 99. OBL-021 statement-shape checkpoint は `plan/160`
-100. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
-101. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
-102. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
-103. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-104. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+100. post-checkpoint candidate triage and runnable baseline は `plan/161`
+101. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
+102. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
+103. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
+104. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+105. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

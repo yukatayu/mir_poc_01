@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-21 21:06 JST
+最終更新: 2026-07-21 21:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -39,7 +39,8 @@ in `plan/156-t0-t2-research-autonomy-envelope.md`.
 | 11 | OBL-021 conditional outcome relation pre-registration | Closed: WRK-0005 registers an explicit-totality conditional lemma in the existing Lean lane without selecting equality, relation laws, or Canon placement. | Macro 1/5 reserve; closed |
 | 12 | OBL-021 conditional outcome relation evidence | Closed: WRK-0005 retained and corrected an L3 conditional lemma. The draft and well-scopedness give guarded all-pairs coherence on a fixed input's actual-outcome fiber; explicit totality makes that fiber nonempty. This does not establish equality, global laws, quotient semantics, diagnostics adequacy, or Canon placement. | Macro 1/5 reserve; closed |
 | 13 | OBL-021 statement-shape checkpoint | Closed: WRK-0002 through WRK-0005 now distinguish projection vacuity, absent joint Result adequacy, absent outcome existence, and positive fiberwise coherence. No fifth local theorem has enough decision value before an actual candidate is selected. | Macro 1/5 reserve; closed |
-| 14 | Post-checkpoint candidate selection | Current: identify only a standing-eligible L3 question whose alternative outcomes change a live decision branch. Do not reopen OBL-021 for a relation-law restatement; status/refinement requests use the updated `plan/143` decision surface. | Macro 1/5 reserve; research selection |
+| 14 | Post-checkpoint candidate selection | Closed: source audit, read-only candidate mapping, planner challenge, and temporary Oracle review found no standing-eligible L3 proposition with distinct live-branch outcomes. OBL-024 soundness-to-comparison would repeat the known abstract bridge gap; no WRK-0006 was opened. | Macro 1/5 reserve; closed |
+| 15 | Selection reopen condition | Current: retain the OBL-021 checkpoint without manufacturing a theorem. Reopen only when an exact existing-carrier/existing-lane question has plausible positive and falsifying outcomes that route to different already-recorded branches while excluding ADR-0014 reserved surfaces. | Macro 1/5 reserve; dormant research selection |
 
 ## self-driven macro phase reading
 
@@ -62,7 +63,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
-| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; select a bounded WRK candidate under `plan/158`; no `theory/11` movement |
+| OBL-020 / OBL-021 / OBL-001 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; `plan/161` currently finds no branch-distinguishing candidate; reopen only under the standing predicate; no `theory/11` movement |
 | textual runnable research core | whether the existing Full System V1 source-first lane can be used as L3 retained evidence without changing governance | current WRK validator permits only `plan`, `samples/clean-near-end`, `samples/current-l2`, and `samples/lean`; the Full System V1 lane is outside that boundary, so retain this as an escalation candidate rather than silently widening the permitted roots |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; choose a new candidate with a falsifier |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
@@ -70,7 +71,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 
 ## maintenance tasks
 
-- Keep `docs/project-status.md`, `progress.md`, `tasks.md`, and `samples_progress.md` synchronized when their owned dimensions change.
+- Keep `docs/project-status.md`, `progress.md`, `tasks.md`, and `samples_progress.md` synchronized when their owned dimensions change. The latest runnable baseline is `plan/161`; it does not widen working-annex evidence roots.
 - Re-run documentation/source-hierarchy validation after plan or snapshot changes. Rebase/freeze a proposed L2 working-record update before review and re-review when its cited canon blob or diff changes.
 - Keep research source in existing documented LAB lanes. It is retained as WRK evidence only through an append-only manifested full commit; it is never production implementation or a conformance surface.
 - Before heavy build / generated-artifact work, recheck root capacity and prefer the configured external workdir, which remains unmounted. The approved cleanup removed local `target/` and Mirrorea `/tmp` artifacts; see `docs/reports/2295-approved-artifact-cleanup.md`.
@@ -82,6 +83,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - Delegated research authority: `mirrorea_canon/adr/ADR-0014.md`, `mirrorea_canon/working/README.md`, and `mirrorea_canon/plan/02-operating-model.md`.
 - Current lifecycle and finite autonomous horizon: `plan/158-standing-bounded-autonomy.md`.
 - WRK evidence-commit integrity and its limits: `plan/159-wrk-evidence-commit-integrity-recut.md`.
+- Current no-candidate triage and runnable baseline: `plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`.
 - Historical research evidence: `plan/156-t0-t2-research-autonomy-envelope.md` and `plan/157-delegated-theory-research-governance.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - Runnable LAB dashboard: `samples_progress.md`.

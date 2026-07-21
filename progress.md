@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-21 21:06 JST
+最終更新: 2026-07-21 21:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; L3 is limited to committed `working/WRK-####`, while L2 is fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; the current post-OBL-021 triage has no active new L3 candidate, and L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
@@ -137,7 +137,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; LAB candidates can be selected | medium | bounded LAB research and WRK L3; L2 review-gated |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; post-checkpoint triage retains no active new candidate | medium | bounded LAB research only when an exact branch-distinguishing candidate exists; L2 review-gated |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -151,13 +151,21 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, and static evidence | reviewed working premises, proof skeletons, `theory/11` final status | research eligible |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, and static evidence | reviewed working premises, proof skeletons, `theory/11` final status | reopen only for an exact branch-distinguishing candidate |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory exists | G5 statements / proof research | research eligible when target is scoped |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-21 21:48 JST: completed post-checkpoint candidate triage with
+  independent source mapping, planner challenge, and temporary Oracle review.
+  No proposed L3 question both avoided reserved semantics and changed a live
+  downstream branch, so no WRK-0006 was opened. `make check` and the Full
+  System V1 release-check also passed; the latter accepted all 29 planned
+  commands while retaining real transport, arbitrary provider execution, and
+  distributed durable save/load as deferred. No theory/11, Gate/Phase,
+  conformance, implementation, or public status changed.
 - 2026-07-21 21:06 JST: appended WRK-0005's L3 precision correction and
   closed the bounded OBL-021 statement-shape checkpoint. The LAB draft gives
   possibly-vacuous pairwise coherence on a fixed input's actual-outcome fiber;
