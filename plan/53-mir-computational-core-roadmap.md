@@ -60,6 +60,29 @@ cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/computational/h
 
 These commands validate matrix classification, prove one bounded Mir-owned `add_one` runtime execution, prove helper-executable positive / runtime-rejection first-floor rows, and prove the bounded host read/write boundary package with accepted/check-rejection rows. They do not yet prove broad effectful semantics beyond that boundary.
 
+### Execution-route boundary (2026-07-22 audit)
+
+The matrix's `executable` label is intentionally broader than direct Product
+Alpha runtime execution. `comp-02-pure-add-one` and positive `comp-04` enter
+`mirrorea-cli run-local`, the Product Alpha session runtime, and the registered
+Rust semantic evaluator. The five positive and five negative `P-COMP-03` rows
+are evaluated by the existing Python helper's module-ID dispatcher; their
+`package.mir.json` manifests and explanatory `.mir` files are not sent to the
+Product Alpha Rust runtime through their fixture path. Separately, the existing
+Rust runtime tests construct valid Product Alpha packages and directly execute
+the five positive closed-registry modules and directly reject the five negative
+modules; semantic tests also typecheck/evaluate the registered module forms.
+This is useful first-floor evidence, but it is not the same claim as direct
+package-runtime sample-fixture evidence.
+
+Direct textual `.mir` input remains an explicit Product Alpha `check` /
+`run-local` non-goal; this line uses versioned `package.mir.json` inputs. A new
+direct fixture can be researched in the existing lane only while it remains a
+non-production artifact and introduces no new helper, schema, CI/Make surface,
+or production runtime implementation. Any such reserved expansion requires
+owner/canon action. See
+`plan/166-mir-computational-baseline-directness-audit.md`.
+
 ## typing and failure-row roadmap
 
 The pure fragment should first use a narrow typing judgment:

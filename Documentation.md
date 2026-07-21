@@ -59,6 +59,14 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - Product Alpha、Full System V1、Surface sample は限定された runnable LAB
   evidence です。最終言語・最終ABI・実 transport・分散永続・public product を
   意味しません。
+- Mir computational sample の 15 行は、直接 Rust 実行の二つの Product Alpha
+  package 行、Python helper の十行、package schema の三つの拒否行に分かれます。
+  ただし Rust runtime test は別途、有効な構成 package で五つの `P-COMP-03` 正例を
+  直接実行し、五つの負例を直接 reject します。`.mir` は Product Alpha `check` / `run-local` の実行入力では
+  ありません。したがってこれは限定された計算・境界検査の証拠であり、完成した
+  言語実装ではありません。詳細は
+  `plan/166-mir-computational-baseline-directness-audit.md` と
+  `samples_progress.md` を参照してください。
 - Foundation audit は、Core に不要な domain/I/O primitive を見つけず、BND-001 の
   outcome-totality 読みだけを owner-reserved な PROPOSAL-008 として分離しました。
   これは OBL/Gate/Phase の変更ではありません。

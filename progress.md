@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 03:20 JST
+最終更新: 2026-07-22 03:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -39,7 +39,7 @@ visualization into an untyped transport/debug channel.
 | --- | --- | --- |
 | Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007 records the OBL-001 result/write-coverage countermodel, while post-WRK-0007 selection found no distinct next L3 candidate and PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
-| Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
+| Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections, while runtime tests directly exercise the closed `P-COMP-03` registry through constructed packages | no C-static/C-runtime/C-distributed conformance or final runtime/product claim |
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -70,7 +70,13 @@ Exact exits are `mirrorea_canon/plan/00-gates.md` and
 
 `samples/product-alpha1/` provides bounded runnable product-alpha evidence,
 not a final product, public compatibility promise, or canon implementation
-status. See `samples_progress.md`.
+status. The computational matrix's direct Rust runtime fixtures are limited to
+`comp-02` and positive `comp-04`; the `comp-03` fixtures are helper-only, but
+their closed registry modules are directly exercised by runtime tests using
+constructed valid packages. Direct textual `.mir` input is a Product Alpha
+`check` / `run-local` non-goal. See
+`plan/166-mir-computational-baseline-directness-audit.md` and
+`samples_progress.md`.
 
 ### Operational Suite line
 
@@ -159,6 +165,16 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-22 03:35 JST: replayed the Product Alpha computational matrix and
+  traced its execution paths. All 15 rows matched their expected outcomes, but
+  only two accepted fixtures enter the Rust Product Alpha runtime; the ten
+  `P-COMP-03` fixtures are Python-helper classification. Separate Rust runtime
+  tests execute their five positive modules and reject their five negative
+  modules through constructed valid packages; Product Alpha `check` /
+  `run-local` reject direct textual `.mir`.
+  This refines LAB evidence classification only: no grammar, schema, helper,
+  production implementation, Canon, Gate, Phase, or workflow-status change was
+  made.
 - 2026-07-22 03:20 JST: post-WRK-0007 source review, planner/reviewer passes,
   and temporary Oracle adjudication selected no new L3 record. An OBL-001
   predicate-disconnection model duplicates existing evidence; OBL-025 scope and

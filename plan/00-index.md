@@ -124,12 +124,14 @@
     `plan/164-obl001-result-write-coverage-boundary.md`
 104. post-WRK-0007 candidate selection は
     `plan/165-post-wrk0007-candidate-selection.md`
-105. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
-106. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
-107. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
-108. WRK-0007 OBL-001 result/write coverage countermodel は `plan/wrk-0007-obl001-result-write-coverage.md`
-109. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
-110. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+105. Mir computational baseline directness audit は
+    `plan/166-mir-computational-baseline-directness-audit.md`
+106. WRK-0001 finite-index reproduction evidence は `plan/wrk-0001-finite-index-reproduction.md`
+107. WRK-0001 pilot checkpoint は `plan/wrk-0001-pilot-checkpoint.md`
+108. WRK-0002 OBL-021 projection-vacuity countermodel は `plan/wrk-0002-projection-vacuity-countermodel.md`
+109. WRK-0007 OBL-001 result/write coverage countermodel は `plan/wrk-0007-obl001-result-write-coverage.md`
+110. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
+111. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
 
 ## current repo の短い要約
 

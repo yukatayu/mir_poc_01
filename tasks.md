@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 03:20 JST
+最終更新: 2026-07-22 03:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -46,6 +46,19 @@ explicit LAB scope or the recorded repair-realization boundary; and OBL-024
 projection variants require an unselected field-functionality reading. This is
 a new evidence-backed priority disposition, not a Canon ban on future L3 work.
 
+The executable computational baseline audit is closed as LAB classification
+evidence. The 15-row matrix has two direct Product Alpha Rust-runtime
+acceptances, ten helper-only `P-COMP-03` rows, and three direct package-check
+rejections; direct textual `.mir` input is intentionally unsupported by Product
+Alpha `check` / `run-local`. Separate runtime tests execute the closed
+`P-COMP-03` positive modules and reject its negative modules through constructed
+valid packages, but this does not turn their checked-in helper fixtures into
+package-runtime evidence. A direct
+fixture widening remains self-driven only while it stays an existing-lane,
+non-production artifact without a new helper/schema/CI/Make surface or runtime
+production implementation; otherwise it escalates. See
+`plan/166-mir-computational-baseline-directness-audit.md`.
+
 ## ordered self-driven packages
 
 | Order | Work unit | Aim and completion signal | Macro / rough estimate |
@@ -71,6 +84,7 @@ a new evidence-backed priority disposition, not a Canon ban on future L3 work.
 | 19 | Foundation integrity and outcome audit | Closed: Core direction and proof-status separation were rechecked; all five import-bearing OBL-020/021 L3 Lean sources replayed from external `.olean` inputs; BND-001 outcome-totality placement is PROPOSAL-008. | Macro 1/5 audit; owner P008 is the totality decision surface |
 | 20 | OBL-001 result/write coverage pre-registration and evidence | Closed: WRK-0007 manifests an imported finite model where a successful experiment-local Result has a labeled write outside `GeneratedWrite` while the unchanged LAB draft holds. It is a statement-shape gap only, not a THM-001 counterexample or Core/result interface selection. | Macro 1/5 reserve; closed L3 evidence |
 | 21 | Post-WRK-0007 candidate selection | Closed: Canon/LAB source audit, independent reviews, and temporary Oracle adjudication found no distinct next L3 record. OBL-001 request/result variants duplicate prior evidence; OBL-025 scope/metadata variants are known LAB boundaries; OBL-024 extra-projection variants need an unselected carrier law. | Macro 1/5 reserve; closed selection, reopen only on a new structural mismatch |
+| 22 | Mir computational baseline directness audit | Closed: reproduced the 15-row matrix, direct CLI probes, Rust semantic/schema/runtime tests, source mapping, and Oracle boundary review. It records direct fixtures, helper-only fixtures, and separate closed-registry runtime tests without adding implementation. | Macro 2 parser-free substrate; closed audit |
 
 ## self-driven macro phase reading
 
@@ -120,6 +134,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 - OBL-001 Result/write coverage boundary: `plan/164-obl001-result-write-coverage-boundary.md`.
 - WRK-0007 evidence: `plan/wrk-0007-obl001-result-write-coverage.md`.
 - Post-WRK-0007 candidate selection: `plan/165-post-wrk0007-candidate-selection.md`.
+- Mir computational directness audit: `plan/166-mir-computational-baseline-directness-audit.md`.
 - Historical research evidence: `plan/156-t0-t2-research-autonomy-envelope.md` and `plan/157-delegated-theory-research-governance.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - Runnable LAB dashboard: `samples_progress.md`.
