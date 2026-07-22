@@ -119,7 +119,12 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   これは `not-promoted` の provenance evidence であり、全 P-COMP-03、general carrier、
   workflow、runtime claim にはなりません。選定・結果は
   `plan/wrk-0013-retained-reproduction-selection.md` と
-  `plan/wrk-0013-pcomp03-retained-reproduction.md` にあります。
+  `plan/wrk-0013-pcomp03-retained-reproduction.md` にあります。post-WRK-0013 の
+  source screen は、現時点では十分な情報量を持つ次の standing target を選べないと記録した。
+  byte-identical source の二経路観測は reserve に留まり、Product Alpha の textual input 化、
+  helper/source equivalence、general source compatibility、workflow への昇格を意味しない。
+  outcome command は未実行で、再開条件は
+  `plan/post-wrk0013-no-candidate-disposition.md` にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
@@ -163,5 +168,6 @@ material の independent review を必要とし、現行は owner-authenticated 
 または escalation にします。`plan/170` は WRK-0012 の選定履歴です。source screen は
 closed で、WRK-0013 retained reproduction の fresh outcome は unnumbered memo とともに
 manifest 済みです。二つの sidecar は input に限られ、得られた result も scoped
-provenance evidence に留まります。次の自走候補は別の standing-eligible target の triage
-であり、workflow や runtime claim は増えません。
+  provenance evidence に留まります。post-WRK-0013 target triage は evidence-backed
+  no-candidate で閉じ、具体的な structural mismatch または downstream branch を伴う候補が
+  見つかるまで新たな pre-registration は開きません。workflow や runtime claim は増えません。

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 13:59 JST
+最終更新: 2026-07-22 14:55 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has now retained its fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. Neither record selects a Canon carrier, general workflow, or OBL movement. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. Post-WRK-0013 triage found no next target meeting the stricter LAB information-value criterion; this selects no Canon carrier, workflow, source authority, or OBL movement. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -148,7 +148,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | triage the next distinct standing-eligible target; do not repair WRK-0012 or reinterpret W13 as diagnostics, correctness, a required repair, general direct execution, or a Canon carrier choice |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. Post-WRK-0013 triage found no priority target at this cut. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | monitor existing lanes for a structural mismatch or a downstream decision that gives a bounded candidate distinct live branches; do not repair WRK-0012 or reinterpret W13 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -162,13 +162,20 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, and manifested/not-promoted WRK-0013 retention evidence | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | next is a distinct standing-eligible target triage. W13 does not choose a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, Canon binding, or general direct-execution workflow |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, and manifested/not-promoted WRK-0013 retention evidence | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | no priority target currently selected. W13 does not choose a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, Canon binding, or general direct-execution workflow. Reopen only on an exact existing key or a bounded candidate with distinct downstream branches |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution and assertion-provenance evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 audits only e5 tuple identity; WRK-0011 records no semantic cut inference from final-store assertions |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 14:55 JST: post-WRK-0013 source screen closed as an
+  evidence-backed no-candidate disposition. Surface source-patch / ELAB
+  artifacts expose no pre-registerable shared literal span or fixture key; the
+  byte-identical Full System two-path probe is retained only as a low-information
+  reserve. No outcome command, source/runtime/helper/schema/CLI change,
+  Product Alpha textual-input claim, Canon/OBL/Gate/Phase movement, or workflow
+  status change occurred.
 - 2026-07-22 13:59 JST: manifested WRK-0013's fresh retained reproduction.
   In a clean checkout after registration, both pinned sidecars matched their
   digests; the positive `sum_to` result was `Int(15)` and the negative route

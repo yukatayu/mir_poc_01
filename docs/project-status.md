@@ -83,6 +83,14 @@ manifest として適用し、committed pre-registration 後に登録済み comm
 repair、Canon carrier、OBL、Gate/Phase を決めず、future successor は独立に登録する必要がある。
 詳細は `plan/170-post-wrk0011-candidate-selection.md` と WRK-0012 に残す。
 
+post-WRK-0013 triage は evidence-backed no-candidate で閉じた。Surface source-patch と
+ELAB には事前固定できる literal span/fixture key がなく、byte-identical
+`Computational.Scope.Positive.clamp_zero` source の二経路観測は既存 Full System V1 runner の
+低情報量な reserve に留める。Product Alpha 側の `.mir` は引き続き explanatory であり、
+source authority、Product Alpha textual input、helper/source equivalence、general compatibility、
+runtime correctness、workflow、Canon/OBL/Gate/Phase は扱わない。
+`plan/post-wrk0013-no-candidate-disposition.md`
+
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /

@@ -145,7 +145,7 @@ production implementation; otherwise it escalates. See
 | 31 | Post-WRK-0012 retention-boundary triage | Closed selection: an existing unnumbered `plan/wrk-...` artifact path supports a distinct retained-reproduction question without validator change. The old run remains history and WRK-0012 stays frozen. | Macro 0/1 and 2 reserve; selection closed |
 | 32 | WRK-0013 retained-reproduction registration | Closed: committed a new L3 preregistration that pins the two sidecars as inputs, declares the exact unnumbered result memo/index path and stop line, and performs no outcome command or plan/index edit. | Macro 2 parser-free substrate; registration closed |
 | 33 | WRK-0013 fresh retained reproduction | Closed: the fresh registered two-input command reproduced both classifications, and the exact unnumbered memo/index/report delta passed unchanged validation and was manifested as `not-promoted` L3 evidence. | Macro 2 parser-free substrate; closed scoped evidence |
-| 34 | Post-WRK-0013 standing-eligible target triage | Next self-driven package: identify the next distinct existing-lane L3 proposition or record an evidence-backed no-candidate disposition; do not reuse W13 as a generic carrier/workflow result. | Macro 0/1 and 2 reserve; ready for triage |
+| 34 | Post-WRK-0013 standing-eligible target triage | Closed as evidence-backed no-candidate. Surface source-patch / ELAB lacks an exact shared literal key; the byte-identical source probe and control-flow syntax probe remain reserves because no identified outcome selects a live downstream branch. No `WRK-0014` is opened. | Macro 0/1 and 2 reserve; reopen on structural mismatch or bounded downstream decision |
 
 ## self-driven macro phase reading
 
