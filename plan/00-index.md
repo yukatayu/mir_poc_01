@@ -150,6 +150,10 @@
     `plan/post-wrk0013-portfolio-review.md`
 124. theory core correspondence と disposition checkpoint は
     `plan/171-theory-core-correspondence-and-disposition-checkpoint.md`
+125. WRK-0015 stale-fence source-local candidate selection は
+    `plan/wrk-0015-stale-grant-fence-selection.md`
+126. WRK-0015 stale-fence registration preflight は
+    `plan/wrk-0015-stale-grant-fence-registration-preflight.md`
 
 ## current repo の短い要約
 

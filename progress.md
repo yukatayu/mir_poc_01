@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 20:35 JST
+最終更新: 2026-07-22 21:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. Post-WRK-0014 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no existing second relation/mapping exists, and diagnostics plus authority/time/cut repeat their recorded source boundaries. Those screens do not narrow other standing-eligible ADR-0014 L3 research. A P-SURF-05 second-admission stale-fence experiment is selected but not registered; an unregistered exploratory command is excluded, and no registered fresh evidence command has run. It is source-local operational evidence only. The committed source history passes the authoritative audit only after reversible quarantine of ignored local state; its ordinary working tree intentionally does not satisfy that clean-worktree predicate. The current LAB OBL-001 draft still needs a direct-`c` reading or explicit enumeration bridge, its familywise OBL-020 wrapper still needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. Post-WRK-0014 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no existing second relation/mapping exists, and diagnostics plus authority/time/cut repeat their recorded source boundaries. Those screens do not narrow other standing-eligible ADR-0014 L3 research. The selected P-SURF-05 second-admission candidate stopped before registration: its pinned checker/test/sample inputs are outside the current permitted LAB roots, and the target-literal search found no matching input in an allowed root. No fresh registered evidence command has run; the earlier exploratory command remains excluded. This is source-local operational selection memory only. The committed source history passes the authoritative audit only after reversible quarantine of ignored local state; its ordinary working tree intentionally does not satisfy that clean-worktree predicate. The current LAB OBL-001 draft still needs a direct-`c` reading or explicit enumeration bridge, its familywise OBL-020 wrapper still needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -151,7 +151,7 @@ LAB evidence.
 | 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
-| 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stale-fence second-admission experiment is selected but not registered | heavy | commit the narrow pre-registration before a fresh disposable-source evidence command |
+| 4 | sample expansion | bounded operational evidence exists; the P-SURF-05 second-admission candidate stopped before WRK registration because its inputs are outside permitted LAB roots | heavy | do not execute it; select only an eligible existing-lane candidate, unless a future owner/canon action changes the lane policy |
 | 5 | theorem / model-check bridge | historical countermodels and conditional kernels exist | medium | review-gated research without proof laundering |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
@@ -168,6 +168,21 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 21:12 JST: Oracle independently confirmed that the P-SURF-05
+  candidate is an admission-policy block, not a frozen WRK or checker
+  falsifier. The final local reviewer did not return after two long waits, so
+  the close relies on the recorded validator failure, allowed-root search, and
+  Oracle advice. No Canon/OBL/Gate/Phase, authority, implementation, sample,
+  or workflow-status movement occurred.
+
+- 2026-07-22 20:52 JST: stopped the selected P-SURF-05 second-admission
+  candidate before WRK registration. Its checker/test/sample inputs are outside
+  the current permitted LAB roots, and the target-literal search found no
+  matching allowed-root input.
+  No fresh command ran; the earlier exploratory command remains excluded. No
+  Canon/OBL/Gate/Phase, authority, revocation, rejoin, defect, implementation,
+  sample, or workflow-status movement occurred.
 
 - 2026-07-22 20:23 JST: selected a distinct P-SURF-05 source-local
   second-admission stale-fence experiment for future ADR-0014 registration.
