@@ -981,6 +981,10 @@ WORKING_RECORD_ALLOWED_LAB_ROOTS = (
     "samples/clean-near-end",
     "samples/current-l2",
     "samples/lean",
+    "samples/product-alpha1/computational",
+)
+WORKING_RECORD_ALLOWED_LAB_DESCENDANT_ROOTS = (
+    "samples/product-alpha1/computational",
 )
 WORKING_RECORD_EVIDENCE_COMMIT_PATTERN = re.compile(
     r"^[0-9a-f]{40}(?:, [0-9a-f]{40})*$"
@@ -1595,10 +1599,21 @@ def _permitted_lab_locations(value: str) -> list[str] | None:
     if (
         not locations
         or any(location is None for location in locations)
-        or any(location not in WORKING_RECORD_ALLOWED_LAB_ROOTS for location in locations)
+        or any(
+            not _is_documented_lab_location(location)
+            for location in locations
+            if location is not None
+        )
     ):
         return None
     return [location for location in locations if location is not None]
+
+
+def _is_documented_lab_location(location: str) -> bool:
+    return location in WORKING_RECORD_ALLOWED_LAB_ROOTS or any(
+        location.startswith(f"{root}/")
+        for root in WORKING_RECORD_ALLOWED_LAB_DESCENDANT_ROOTS
+    )
 
 
 def _is_permitted_lab_path(path: str, locations: list[str]) -> bool:

@@ -2258,6 +2258,128 @@ class ValidateDocsTests(unittest.TestCase):
 
         self.assertEqual([], errors)
 
+    def test_working_record_allows_product_alpha_computational_lane_and_descendants(self) -> None:
+        root = "samples/product-alpha1/computational"
+        for allowed in (
+            root,
+            "samples/product-alpha1/computational/control-flow/positive",
+            "samples/product-alpha1/computational/variables-scope/negative",
+        ):
+            with self.subTest(allowed=allowed):
+                self.assertEqual(validate_docs._permitted_lab_locations(allowed), [allowed])
+
+        for rejected in (
+            "samples",
+            "samples/product-alpha1",
+            "samples/product-alpha1/posegraph",
+            "scripts",
+            "crates/mir-runtime",
+            "plan/arbitrary-unregistered-child",
+            "samples/clean-near-end/arbitrary-unregistered-child",
+            "samples/current-l2/arbitrary-unregistered-child",
+            "samples/lean/arbitrary-unregistered-child",
+        ):
+            with self.subTest(rejected=rejected):
+                self.assertIsNone(validate_docs._permitted_lab_locations(rejected))
+
+    def test_working_record_accepts_declared_product_alpha_row_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            row = "samples/product-alpha1/computational/control-flow/positive"
+            existing_package = root / row / "package.mir.json"
+            existing_package.parent.mkdir(parents=True, exist_ok=True)
+            existing_package.write_text("{\"fixture\": \"existing\"}\n", encoding="utf-8")
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"],
+                lab_input=context["lab_input"],
+                permitted_lab_locations=f"plan, {row}",
+            )
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register Product Alpha row")
+
+            artifact_path = root / row / "direct-world" / "package.mir.json"
+            artifact_path.parent.mkdir(parents=True, exist_ok=True)
+            artifact_path.write_text("{\"package_kind\": \"world\"}\n", encoding="utf-8")
+            self._git(root, "add", artifact_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: retain row-local evidence")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            artifact_digest = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            record_path.write_text(
+                record_text.replace(
+                    "Evidence artifacts: pending",
+                    f"Evidence artifacts: LAB:{row}/direct-world/package.mir.json@{evidence_commit}:{artifact_digest}",
+                ).replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest row-local evidence")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertEqual([], errors)
+
+    def test_working_record_rejects_product_alpha_parent_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_required_scaffold(root, self._valid_template_text())
+            row = "samples/product-alpha1/computational/control-flow/positive"
+            existing_package = root / row / "package.mir.json"
+            existing_package.parent.mkdir(parents=True, exist_ok=True)
+            existing_package.write_text("{\"fixture\": \"existing\"}\n", encoding="utf-8")
+            context = self._working_record_context(root)
+            record_path = root / "mirrorea_canon" / "working" / "WRK-0001-test.md"
+            record_path.parent.mkdir(parents=True, exist_ok=True)
+            record_text = self._valid_working_record_text(
+                canon_anchor=context["canon_anchor"],
+                lab_input=context["lab_input"],
+                permitted_lab_locations=f"plan, {row}",
+            )
+            record_path.write_text(record_text, encoding="utf-8")
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: pre-register Product Alpha row")
+
+            parent_artifact = root / "samples/product-alpha1/computational/control-flow/package.mir.json"
+            parent_artifact.parent.mkdir(parents=True, exist_ok=True)
+            parent_artifact.write_text("{\"fixture\": \"out-of-row\"}\n", encoding="utf-8")
+            self._git(root, "add", parent_artifact.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: retain parent evidence")
+            evidence_commit = self._git(root, "rev-parse", "HEAD")
+            record_path.write_text(
+                record_text.replace("Evidence commits: none", f"Evidence commits: {evidence_commit}"),
+                encoding="utf-8",
+            )
+            self._git(root, "add", record_path.relative_to(root).as_posix())
+            self._git(root, "commit", "-qm", "research: manifest parent evidence")
+
+            errors = validate_docs.working_annex_errors(root)
+
+        self.assertTrue(
+            any("control-flow/package.mir.json" in error for error in errors), errors
+        )
+
+    def test_product_alpha_row_location_limits_evidence_to_that_row(self) -> None:
+        declared = ["samples/product-alpha1/computational/control-flow/positive"]
+
+        self.assertTrue(
+            validate_docs._is_permitted_lab_path(
+                "samples/product-alpha1/computational/control-flow/positive/direct-world/package.mir.json",
+                declared,
+            )
+        )
+        for rejected in (
+            "samples/product-alpha1/computational/control-flow/negative/package.mir.json",
+            "samples/product-alpha1/computational/variables-scope/negative/direct-world/package.mir.json",
+            "samples/product-alpha1/computational/matrix.json",
+            "scripts/mir_computational_samples.py",
+        ):
+            with self.subTest(rejected=rejected):
+                self.assertFalse(validate_docs._is_permitted_lab_path(rejected, declared))
+
     def test_working_record_accepts_manifested_evidence_in_declared_lane(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
