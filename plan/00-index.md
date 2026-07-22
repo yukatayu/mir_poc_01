@@ -162,6 +162,8 @@
     `plan/173-local-predicate-constructive-decidability-selection.md`
 130. local predicate proposition-decidability successor selection は
     `plan/174-local-predicate-proposition-decidability-selection.md`
+131. post-WRK-0017 axiom-profile disposition は
+    `plan/175-post-wrk0017-axiom-profile-disposition.md`
 
 ## current repo の短い要約
 

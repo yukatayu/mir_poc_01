@@ -260,6 +260,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/172-standing-autonomy-lane-correspondence-checkpoint.md",
         "plan/173-local-predicate-constructive-decidability-selection.md",
         "plan/174-local-predicate-proposition-decidability-selection.md",
+        "plan/175-post-wrk0017-axiom-profile-disposition.md",
     ],
     "scripts": [
         "scripts",

@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-23 01:15 JST
+最終更新: 2026-07-23 01:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -122,7 +122,7 @@ actual bridge を再開する最小条件は OBL-001 の direct-`c` または ex
 interface の owner/canon disposition である。ただしこれは ADR-0014 の別種の standing-eligible
 L3 research を閉じない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
 P-SURF-05 second-admission stale-fence candidate は現行 validator により停止し、`WRK-0015` は作らなかった。後続の current-root 再選別も候補を選ばず、validator tuple の ADR-0014 existing documented LAB lane との対応は **UNRESOLVED** のまま fail-close を維持する。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
-これと独立した基礎 obligation 再監査は、OBL-003/005/015 の既存証跡を重複させず、現在の `captureSubset` helper の全入力決定可能性だけを L3 候補として選んだ。WRK-0016 は source-visible `Decidable` value declaration の制約で frozen になった。後継 WRK-0017 は proposition-valued excluded-middle theorem を試し、局所の一時 theorem は公理なしで通ったが、登録済み opaque generic-domain control が暗黙の古典公理を伴って通った。したがって明示 finite interface なしの generic decision を拒むという登録済み停止条件に従い、この route も frozen である。両方とも構成性、構成的 undecidability、OBL-003、Line-1、checker、Canon carrier を前進・反証せず、試験ソースは復元済みである。匿名 `example`、別の宣言形式、または axiom-profile を使う別の control は修理ではなく別の事前登録対象である。`plan/174-local-predicate-proposition-decidability-selection.md`; `mirrorea_canon/working/WRK-0017-local-predicate-proposition-decidability.md`; `docs/reports/2377-wrk0017-proposition-decidability-outcome.md`
+これと独立した基礎 obligation 再監査は、OBL-003/005/015 の既存証跡を重複させず、現在の `captureSubset` helper の全入力決定可能性だけを L3 候補として選んだ。WRK-0016 は source-visible `Decidable` value declaration の制約で frozen になった。後継 WRK-0017 は proposition-valued excluded-middle theorem を試し、局所の一時 theorem は公理なしで通ったが、登録済み opaque generic-domain control が暗黙の古典公理を伴って通ったため frozen である。次の axiom-profile comparison は測定としては別問題になり得るが、両方の profile は既に Report 2377 にあり、retained theorem / decision value / witness を必要とする既存 consumer がない。よって新 WRK や再実行はせず no-candidate で閉じた。再開には concrete consumer と retain/reject 判断を持つ別の事前登録が必要である。これは構成性、構成的 undecidability、OBL-003、Line-1、checker、Canon carrier を前進・反証せず、試験ソースは復元済みである。`plan/175-post-wrk0017-axiom-profile-disposition.md`; `docs/reports/2377-wrk0017-proposition-decidability-outcome.md`
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /
