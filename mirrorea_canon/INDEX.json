@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 92,
+ "files": 93,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 6347
+   "bytes": 6723
   },
   {
    "id": "root/north-star",
@@ -1277,6 +1277,20 @@
    "open_items": [],
    "path": "working/WRK-0012-pcomp03-direct-carrier.md",
    "bytes": 9677
+  },
+  {
+   "id": "working/WRK-0013",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "arch/02-boundary-contracts",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "凍結した WRK-0012 の二つの固定 direct-world sidecar を入力としてのみ pin し、登録後の fresh execution を既存 unnumbered plan artifact 経路へ独立に保持できるかを調べる可逆な L3 reproduction record。sidecar、validator、helper、schema、runtime、CLI、public carrier は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0013-pcomp03-retention-reproduction.md",
+   "bytes": 8698
   }
  ]
 }
