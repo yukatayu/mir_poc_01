@@ -121,3 +121,54 @@ theorem unauthorized_live_fingerprint_release_is_impossible :
   exact no_secret_release_without_authority proof
 
 end CurrentL2IfcSecretExamples
+/-! WRK-0018: experiment-local telemetry-effect dependency model. -/
+
+namespace WRK0018TelemetryEffectModel
+
+structure ModelTelemetryConfig where
+  lowPosition : Nat
+  highFlag : Bool
+deriving DecidableEq, Repr
+
+structure ModelTelemetryRow where
+  visiblePosition : Nat
+deriving DecidableEq, Repr
+
+def ModelLowAgreement (first second : ModelTelemetryConfig) : Prop :=
+  first.lowPosition = second.lowPosition
+
+def ModelTelemetryEffect := ModelTelemetryConfig -> ModelTelemetryRow
+
+def modelExport
+    (effect : ModelTelemetryEffect)
+    (config : ModelTelemetryConfig) :
+    ModelTelemetryRow :=
+  effect config
+
+def lowDeterminedTelemetry (config : ModelTelemetryConfig) : ModelTelemetryRow :=
+  { visiblePosition := config.lowPosition }
+
+def highDependentTelemetry (config : ModelTelemetryConfig) : ModelTelemetryRow :=
+  { visiblePosition := config.lowPosition + if config.highFlag then 1 else 0 }
+
+def adverseLeft : ModelTelemetryConfig :=
+  { lowPosition := 7, highFlag := false }
+
+def adverseRight : ModelTelemetryConfig :=
+  { lowPosition := 7, highFlag := true }
+
+theorem low_determined_effect_respects_low_agreement
+    (first second : ModelTelemetryConfig)
+    (agreement : ModelLowAgreement first second) :
+    modelExport lowDeterminedTelemetry first = modelExport lowDeterminedTelemetry second := by
+  simp_all [ModelLowAgreement, modelExport, lowDeterminedTelemetry]
+
+theorem high_dependent_effect_has_fixed_adverse_pair :
+    ModelLowAgreement adverseLeft adverseRight ∧
+      Not (modelExport highDependentTelemetry adverseLeft =
+        modelExport highDependentTelemetry adverseRight) := by
+  constructor
+  · rfl
+  · decide
+
+end WRK0018TelemetryEffectModel
