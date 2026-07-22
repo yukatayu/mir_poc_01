@@ -1,6 +1,5 @@
 # Project status
-
-最終更新: 2026-07-22 20:35 JST
+最終更新: 2026-07-22 22:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -122,8 +121,8 @@ remaining-ledger revalidation は、OBL-024/025 と authority/time/cut の残り
 actual bridge を再開する最小条件は OBL-001 の direct-`c` または exact output/Core-write
 interface の owner/canon disposition である。ただしこれは ADR-0014 の別種の standing-eligible
 L3 research を閉じない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
-P-SURF-05 second-admission stale-fence candidate は必須入力が許可済み LAB root 外と判明し、`WRK-0015` を作らず停止した。後続の permitted-root 再選別もこの run では候補を選ばなかった。
-これは恒久的閉鎖ではなく、fresh 実行や Canon 解釈を伴わない current source cut の LAB disposition である。事前探索 command は除外したままである。`plan/post-wrk0015-permitted-root-no-candidate-disposition.md`
+P-SURF-05 second-admission stale-fence candidate は現行 validator により停止し、`WRK-0015` は作らなかった。後続の current-root 再選別も候補を選ばなかった。
+ただし validator tuple が ADR-0014 の existing documented LAB lane の閉じた正本かは **UNRESOLVED** である。fail-close と事前探索 command の除外を維持し、有限な `plan/158-standing-bounded-autonomy.md` ratchet だけを checkpoint close とする。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /
@@ -152,6 +151,7 @@ P-SURF-05 second-admission stale-fence candidate は必須入力が許可済み 
 | PROPOSAL-003 | owner record pending | OBL-020 organization の A / B / C。 |
 | PROPOSAL-004 | owner record pending | Surface v0 grammar closure の A / B / C。LAB recommendation は A。 |
 | PROPOSAL-008 | owner record pending | BND-001 outcome totality の読みと、将来の obligation placement。 |
+| LANE-CATALOG correspondence | owner record pending | validator tuple が closed catalog か fail-closed guardrail/cache かを明示する。defer は可。 |
 
 この表以外の non-reserved candidate は ADR-0014 route により LAB research で選別
 できます。routine target approval は不要です。canon current state は

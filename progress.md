@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 21:46 JST
+最終更新: 2026-07-22 22:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -46,6 +46,11 @@ permitted-root screen selected no candidate in this run under run-specific
 non-duplication, exact-command, live-decision-branch, and reserved-boundary
 filters. This is a bounded LAB selection disposition, not a fresh result,
 frozen WRK, ADR-0014 rule change, or permanent closure.
+
+The validator tuple is a deliberate fail-closed guardrail, but its
+correspondence to ADR-0014's existing documented LAB lane remains UNRESOLVED.
+The current `plan/158` ratchet is checkpoint-closed without changing the
+validator, Canon, P-SURF classification, or future ADR-0014 eligibility.
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -157,7 +162,7 @@ LAB evidence.
 | 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
-| 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the permitted-root re-screen selected no new candidate in this run | heavy | reopen on a fresh permitted-root discriminator with a live decision fork, or explicit owner/canon lane-policy action |
+| 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
 | 5 | theorem / model-check bridge | historical countermodels and conditional kernels exist | medium | review-gated research without proof laundering |
 | 6 | distributed fabric and runtime evolution | later | heavy | later dependency |
 | 7 | toolchain/backend surface | bounded LAB evidence only | heavy | later dependency |
@@ -174,6 +179,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 22:14 JST: provenance review and temporary Oracle/planner
+  challenge established that the validator's exact-root tuple is deliberate
+  fail-closed operational behavior, but not proven to be ADR-0014's exhaustive
+  existing-lane catalog. The correspondence is UNRESOLVED. No validator
+  root-policy, Canon, WRK, P-SURF command, evidence result, Gate/Phase, or
+  workflow state changed; the finite `plan/158` ratchet is checkpoint-closed
+  only.
 
 - 2026-07-22 21:46 JST: the permitted-root candidate screen following the
   P-SURF-05 policy stop selected no candidate under run-specific

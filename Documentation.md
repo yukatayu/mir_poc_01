@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`、`plan/post-wrk0013-no-candidate-disposition.md`、`plan/post-wrk0013-portfolio-review.md`、`plan/post-wrk0014-actual-bridge-disposition.md`、`plan/post-wrk0014-remaining-ledger-revalidation.md`、`plan/wrk-0015-stale-grant-fence-selection.md`、`plan/wrk-0015-stale-grant-fence-registration-preflight.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、`mirrorea_canon/working/WRK-0014-same-carrier-variance.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`、`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`、`plan/post-wrk0013-no-candidate-disposition.md`、`plan/post-wrk0013-portfolio-review.md`、`plan/post-wrk0014-actual-bridge-disposition.md`、`plan/post-wrk0014-remaining-ledger-revalidation.md`、`plan/wrk-0015-stale-grant-fence-selection.md`、`plan/wrk-0015-stale-grant-fence-registration-preflight.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、`mirrorea_canon/working/WRK-0014-same-carrier-variance.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -180,10 +180,13 @@ manifest 済みです。二つの sidecar は input に限られ、得られた 
   standing-eligible L3 research を閉じない。Canon lifecycle は依然 T0 であり、後段の LAB
   evidence floor と混同しない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
   その後、P-SURF-05 の second-admission stale-fence branch を source-local 運用候補として
-  選定したが、登録 preflight で入力が ADR-0014 の許可済み LAB root 外と判明したため、WRK を作らず停止した。
+  選定したが、登録 preflight で入力が現行 validator の許可 root 外と判明したため、WRK を作らず停止した。
   登録済み fresh 実行・Canon 解釈はなく、事前の探索実行は引き続き除外する。
   `plan/wrk-0015-stale-grant-fence-selection.md`;
   `plan/wrk-0015-stale-grant-fence-registration-preflight.md`
   後続の許可済み root 再選別も、この source cut では候補を選ばなかった。これは恒久的閉鎖ではなく、
   fresh 実行や Canon 解釈を伴わない LAB の限定的な選別結果である。
   `plan/post-wrk0015-permitted-root-no-candidate-disposition.md`
+  続く lane-correspondence checkpoint は、validator の exact-root guardrail が ADR-0014 の
+  existing documented LAB lane の閉じた正本かを **UNRESOLVED** とした。現行 fail-close は維持し、
+  有限な `plan/158` ratchet だけを閉じる。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
