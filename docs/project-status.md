@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 19:06 JST
+最終更新: 2026-07-22 19:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -113,6 +113,11 @@ lemma を manifest した。universal safety/coherence は intended-to-model inc
 示す。これは各補題形の十分条件であり、actual Canon relation の coverage/realizability、
 Core/result correspondence、fairness、BND-001 totality placement を選ばず、OBL を前進させない。
 `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`
+
+post-WRK-0014 actual-bridge screen は no-candidate で閉じた。OBL-020 direct-global route は
+既存の第二 same-carrier relation と literal mapping が現れた場合だけ reserve とし、OBL-001 は
+direct-`c` または output/Core-write interface の owner choice、OBL-021 は PROPOSAL-008 の
+owner disposition を待つ。`plan/post-wrk0014-actual-bridge-disposition.md`
 
 ## 現在の停止線
 
