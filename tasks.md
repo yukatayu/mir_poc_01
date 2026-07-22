@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 03:23 JST
+最終更新: 2026-07-23 03:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -165,6 +165,7 @@ production implementation; otherwise it escalates. See
 | 47 | Current standing-candidate triage | Closed no-candidate: all screened near-misses are either frozen-route repairs, known-evidence replay/coverage widening, owner-reserved proof-interface choices, or P-SURF lane-catalog correspondence. No source locus meets the full current dossier test. | Macro 1/5 reserve; next owner checkpoint is plan 172, otherwise reopen on a new source locus with a bounded falsifier and downstream decision. |
 | 48 | THM-005 declared telemetry-effect boundary | Closed frozen: WRK-0018's first marked-tail compiler failure is its registered falsifier. The later green toy tail was an impermissible repair, is not retained, and the IFC source/explanation are restored to their pinned digests. No telemetry semantics, label algebra, export ABI, THM-005/OBL, BND-008, or Canon result moved. | Macro 1/5 reserve; do not repair or replay this route. Reopen only through independent selection of a distinct question with an explicit pre-source procedure and a live downstream decision. |
 | 49 | Post-WRK-0018 candidate re-screen | Closed no-candidate: Product Alpha observer-export attribution has a literal source split, but comp-02 already directly checks its host-I/O/event sequence and existing roadmap text already says typed host-I/O is observed in the same event DAG. The suggested later provenance-input choice has no current consumer, so a fresh run would be replay/coverage widening rather than a live binary decision. | Macro 1/5 reserve; reopen only on a new literal mismatch plus named current consumer and bounded adverse branch. Do not convert this into Canon H/BND-008/telemetry/export-ABI interpretation. |
+| 50 | Independent source-locus audit | Closed with no candidate under the current LAB prioritization screen: generated-failure containment lacks a live consumer and reaches a reserved failure/Core bridge; outcome production is WRK-0004/PROPOSAL-008; observer export is frozen WRK-0018. Independent local, sub-agent, and Oracle screens agree. | Macro 1/5 reserve; reapply this screen on a new literal mismatch with a named current consumer and a non-reserved adverse branch. Do not replay a prior Lean artifact to manufacture a target. This does not narrow ADR-0014. |
 
 ## self-driven macro phase reading
 

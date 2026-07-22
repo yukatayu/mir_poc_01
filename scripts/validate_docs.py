@@ -613,6 +613,7 @@ REQUIRED = [
     "plan/176-current-standing-candidate-disposition.md",
     "plan/177-thm005-telemetry-effect-boundary-selection.md",
     "plan/178-post-wrk0018-candidate-rescreen.md",
+    "plan/179-independent-source-locus-audit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

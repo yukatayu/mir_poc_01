@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 03:23 JST
+最終更新: 2026-07-23 03:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -87,6 +87,13 @@ comp-02 execution/event order and same-event-DAG host-I/O reading already exist;
 the proposed future provenance-input selection has no current consumer.  It is
 therefore replay/coverage widening, not a current L3 question.
 `plan/178-post-wrk0018-candidate-rescreen.md`
+
+An independent source-locus audit confirmed that the remaining apparent Lean
+gaps do not form a new L3 package under the current LAB prioritization screen:
+generated-failure containment has no live consumer and reaches a reserved
+bridge, outcome production duplicates WRK-0004/PROPOSAL-008, and observer-
+export dependency is frozen WRK-0018. This screen does not narrow ADR-0014.
+`plan/179-independent-source-locus-audit.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -195,7 +202,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 is frozen because its first marked-tail compile failed; its later green toy tail was discarded and source restored. Its post-freeze Product Alpha attribution re-screen is no-candidate because the source split has no live consumer and replays existing execution. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Do not repair WRK-0012 or WRK-0018, or treat Product Alpha source shape as Canon H/BND-008 provenance. Do not reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 is frozen because its first marked-tail compile failed; its later green toy tail was discarded and source restored. Its post-freeze Product Alpha attribution re-screen and independent source-locus audit are no-candidate under their current LAB prioritization screens: the audited gaps lack a live consumer or a non-reserved outcome branch. Those screens do not narrow ADR-0014. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Do not repair WRK-0012 or WRK-0018, or treat Product Alpha source shape as Canon H/BND-008 provenance. Do not reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -215,6 +222,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 03:34 JST: independent source-locus audit selected no candidate
+  under its current LAB prioritization screen. Local review, an independent
+  sub-agent, and a temporary Oracle review agree: generated-failure containment
+  has no live consumer and would select a bridge, outcome production duplicates
+  WRK-0004/PROPOSAL-008, and observer export is frozen WRK-0018. This does not
+  narrow ADR-0014. No WRK, source edit, Lean outcome command, runtime command,
+  Canon/OBL/Gate/Phase, implementation, sample workflow, or public status moved.
 
 - 2026-07-23 03:23 JST: post-WRK-0018 candidate re-screen closed no-candidate.
   A conditional Product Alpha observer-export split was rejected because its
