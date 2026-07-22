@@ -41,12 +41,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | WRK-0014 evidence | Canon carrier を具体化せず、同一 carrier の relation inclusion を前提にした三つの generic Lean lemma を manifest した。universal safety/coherence には intended-to-model inclusion、outcome existence には model-to-intended realization を置く補題形での十分条件であり、一般の必要条件や actual coverage/realizability、Core/result correspondence、fairness、BND-001 totality placement、OBL status は未選択である。`f01e5160` の source-history audit は、ignored local state を可逆に退避した状態で通過した。通常作業ツリーでは validator がその local state も dirty として拒否するため、これは clean-worktree release claim ではない。 | `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`; `docs/reports/2361-wrk0014-same-carrier-variance-evidence.md`; `docs/reports/2363-wrk0014-authoritative-audit.md`; `plan/171-theory-core-correspondence-and-disposition-checkpoint.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
-WRK-0019 は arrays-bounds の一つの non-production direct-world package 観測を
-事前登録しただけであり、sidecar は未作成、candidate command は未実行である。これは
-helper 分類、closed registry 内部の evaluator phase、Product Alpha `MirCompute`
-carrier を同一視せず、公開 error contract、workflow、Canon、Gate/Phase を変えない。
-
-`plan/162-post-wrk0006-candidate-selection.md` の priority pause は、当時の既知候補に
+WRK-0019 は arrays-bounds の一つの non-production direct-world package 観測を事前登録しただけで、sidecar は未作成、candidate command は未実行であり、公開 error contract、phase、workflow、Canon、Gate/Phase を変えない。`plan/162-post-wrk0006-candidate-selection.md` の priority pause は、当時の既知候補に
 対する LAB disposition のままである。WRK-0007 はその再開条件に該当した、Result/write
 coverage の別系統の structural mismatch を L3 evidence として記録する。Foundation audit の
 PROPOSAL-008 は BND-001 outcome-totality 専用の owner decision surface のままで、この
