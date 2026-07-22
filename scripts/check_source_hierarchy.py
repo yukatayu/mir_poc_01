@@ -265,6 +265,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/177-thm005-telemetry-effect-boundary-selection.md",
         "plan/178-post-wrk0018-candidate-rescreen.md",
         "plan/179-independent-source-locus-audit.md",
+        "plan/180-t1-t2-statement-identity-dependency-closure-audit.md",
     ],
     "scripts": [
         "scripts",

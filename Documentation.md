@@ -22,7 +22,8 @@ notes. If LAB text conflicts with canon, canon wins.
 現在の候補選別: `plan/176-current-standing-candidate-disposition.md`、
 `plan/177-thm005-telemetry-effect-boundary-selection.md`、
 `plan/178-post-wrk0018-candidate-rescreen.md`、
-`plan/179-independent-source-locus-audit.md`
+`plan/179-independent-source-locus-audit.md`、
+`plan/180-t1-t2-statement-identity-dependency-closure-audit.md`
 
 ## 最初に読む順序
 

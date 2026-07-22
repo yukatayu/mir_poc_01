@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 03:34 JST
+最終更新: 2026-07-23 04:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -94,6 +94,12 @@ generated-failure containment has no live consumer and reaches a reserved
 bridge, outcome production duplicates WRK-0004/PROPOSAL-008, and observer-
 export dependency is frozen WRK-0018. This screen does not narrow ADR-0014.
 `plan/179-independent-source-locus-audit.md`
+
+The subsequent T1/T2 statement-identity audit maps each exit-critical row to
+its Canon domain, available LAB evidence, and first missing relation. It adds
+no model or OBL status: Core-write coverage, global step coverage, elaboration
+outcome boundary, and save/load restoration remain explicit proof-facing
+boundaries. `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -202,7 +208,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 is frozen because its first marked-tail compile failed; its later green toy tail was discarded and source restored. Its post-freeze Product Alpha attribution re-screen and independent source-locus audit are no-candidate under their current LAB prioritization screens: the audited gaps lack a live consumer or a non-reserved outcome branch. Those screens do not narrow ADR-0014. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Do not repair WRK-0012 or WRK-0018, or treat Product Alpha source shape as Canon H/BND-008 provenance. Do not reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 is frozen because its first marked-tail compile failed; its later green toy tail was discarded and source restored. Its post-freeze Product Alpha attribution re-screen and independent source-locus audit are no-candidate under their current LAB prioritization screens. The T1/T2 statement-identity audit then classified all exit-critical rows without selecting a Core/model interface. Those screens do not narrow ADR-0014. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Do not repair WRK-0012 or WRK-0018, or treat Product Alpha source shape as Canon H/BND-008 provenance. Do not reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -216,12 +222,19 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, manifested/not-promoted WRK-0013 retention evidence, manifested WRK-0014 same-carrier relation-polarity evidence, and post-W14 no-candidate screens | reviewed working premises, proof skeletons, `theory/11` final status, current LAB direct-`c` versus Result correspondence, global-step coverage when its familywise wrapper is used, actual correspondence inclusion/realizability evidence, and PROPOSAL-008's open outcome-totality request | W14 identifies only sufficient directions inside its stated lemma forms; it cannot choose a Canon carrier, coverage, realization, fairness, taxonomy, theorem, or workflow. Diagnostics and authority/time/cut repeat their recorded boundaries. The Canon's direct global OBL-020 target remains the safe reading; the LAB familywise wrapper is not a substitute without coverage. These actual-bridge conditions do not narrow other standing-eligible ADR-0014 L3 research. |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, manifested/not-promoted WRK-0013 retention evidence, manifested WRK-0014 same-carrier relation-polarity evidence, post-W14 no-candidate screens, and the T1/T2 statement-identity map | reviewed working premises, proof skeletons, `theory/11` final status, current LAB direct-`c` versus Result correspondence, global-step coverage when its familywise wrapper is used, actual correspondence inclusion/realizability evidence, and PROPOSAL-008's open outcome-totality request | W14 identifies only sufficient directions inside its stated lemma forms; it cannot choose a Canon carrier, coverage, realization, fairness, taxonomy, theorem, or workflow. The statement-identity map keeps Core-write, step-coverage, outcome, and save/load relations explicit. Diagnostics and authority/time/cut repeat their recorded boundaries. The Canon's direct global OBL-020 target remains the safe reading; the LAB familywise wrapper is not a substitute without coverage. These actual-bridge conditions do not narrow other standing-eligible ADR-0014 L3 research. |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution and assertion-provenance evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 audits only e5 tuple identity; WRK-0011 records no semantic cut inference from final-store assertions |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 04:00 JST: completed a T1/T2 statement-identity and dependency
+  closure audit. It classifies every exit-critical row by Canon domain, present
+  LAB evidence, and first missing relation; it does not choose a Core/model
+  interface, move an OBL, open a WRK, or change Gate/Phase/implementation or
+  sample workflow status. The active Lean replay also records the portable
+  module-rooted `.olean` procedure for import-bearing models.
 
 - 2026-07-23 03:34 JST: independent source-locus audit selected no candidate
   under its current LAB prioritization screen. Local review, an independent

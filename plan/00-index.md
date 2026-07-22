@@ -172,6 +172,8 @@
     `plan/178-post-wrk0018-candidate-rescreen.md`
 135. independent source-locus candidate audit は
     `plan/179-independent-source-locus-audit.md`
+136. T1/T2 statement identity and dependency closure audit は
+    `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`
 
 ## current repo の短い要約
 
