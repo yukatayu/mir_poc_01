@@ -19,8 +19,9 @@ notes. If LAB text conflicts with canon, canon wins.
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
 | 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`、`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`、`plan/173-local-predicate-constructive-decidability-selection.md`、`plan/174-local-predicate-proposition-decidability-selection.md`、`plan/175-post-wrk0017-axiom-profile-disposition.md`、`plan/post-wrk0013-no-candidate-disposition.md`、`plan/post-wrk0013-portfolio-review.md`、`plan/post-wrk0014-actual-bridge-disposition.md`、`plan/post-wrk0014-remaining-ledger-revalidation.md`、`plan/wrk-0015-stale-grant-fence-selection.md`、`plan/wrk-0015-stale-grant-fence-registration-preflight.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、`mirrorea_canon/working/WRK-0014-same-carrier-variance.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
-現在の候補選別: `plan/176-current-standing-candidate-disposition.md` と
-`plan/177-thm005-telemetry-effect-boundary-selection.md`
+現在の候補選別: `plan/176-current-standing-candidate-disposition.md`、
+`plan/177-thm005-telemetry-effect-boundary-selection.md`、
+`plan/178-post-wrk0018-candidate-rescreen.md`
 
 ## 最初に読む順序
 

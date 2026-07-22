@@ -263,6 +263,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/175-post-wrk0017-axiom-profile-disposition.md",
         "plan/176-current-standing-candidate-disposition.md",
         "plan/177-thm005-telemetry-effect-boundary-selection.md",
+        "plan/178-post-wrk0018-candidate-rescreen.md",
     ],
     "scripts": [
         "scripts",

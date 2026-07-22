@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 03:02 JST
+最終更新: 2026-07-23 03:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -33,6 +33,9 @@ candidate, trusted runtime authorization, or a public effect ABI. No further
 Full System V1 maintenance item is currently selected. A separate focused
 theory audit selected and registered one THM-005 telemetry-effect candidate,
 but its first marked-tail compile failure froze the route and restored source.
+The immediate post-freeze re-screen selected no successor: the only conditional
+Product Alpha observer-export split would replay existing direct execution and
+introduce no current consumer-driven decision.
 
 The foundation integrity audit is also closed as LAB evidence. It found no need
 for an additional Core primitive and isolated the owner-reserved BND-001
@@ -161,6 +164,7 @@ production implementation; otherwise it escalates. See
 | 46 | Post-WRK-0017 axiom-profile triage | Closed no-candidate: a profile comparison is distinct in principle, but both profiles are already retained in Report 2377 and no existing consumer needs a theorem, decision value, witness, or proof-hygiene artifact. No WRK or Lean replay ran. | Macro 1/5 reserve; reopen only with a named consumer, binary retain/reject decision, and fresh forward pre-registration. |
 | 47 | Current standing-candidate triage | Closed no-candidate: all screened near-misses are either frozen-route repairs, known-evidence replay/coverage widening, owner-reserved proof-interface choices, or P-SURF lane-catalog correspondence. No source locus meets the full current dossier test. | Macro 1/5 reserve; next owner checkpoint is plan 172, otherwise reopen on a new source locus with a bounded falsifier and downstream decision. |
 | 48 | THM-005 declared telemetry-effect boundary | Closed frozen: WRK-0018's first marked-tail compiler failure is its registered falsifier. The later green toy tail was an impermissible repair, is not retained, and the IFC source/explanation are restored to their pinned digests. No telemetry semantics, label algebra, export ABI, THM-005/OBL, BND-008, or Canon result moved. | Macro 1/5 reserve; do not repair or replay this route. Reopen only through independent selection of a distinct question with an explicit pre-source procedure and a live downstream decision. |
+| 49 | Post-WRK-0018 candidate re-screen | Closed no-candidate: Product Alpha observer-export attribution has a literal source split, but comp-02 already directly checks its host-I/O/event sequence and existing roadmap text already says typed host-I/O is observed in the same event DAG. The suggested later provenance-input choice has no current consumer, so a fresh run would be replay/coverage widening rather than a live binary decision. | Macro 1/5 reserve; reopen only on a new literal mismatch plus named current consumer and bounded adverse branch. Do not convert this into Canon H/BND-008/telemetry/export-ABI interpretation. |
 
 ## self-driven macro phase reading
 
@@ -187,7 +191,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; plan/171 records the LAB reading that the familywise wrapper cannot replace direct global OBL-020 without coverage, the OBL-021 coherence draft does not give totality, and WRK-0007's Result/write gap needs a future direct-`c` or explicit bridge. Manifested WRK-0014 establishes only two sufficient same-carrier transfer forms: intended-to-model for universal safety/coherence and model-to-intended for outcome existence. Post-W14 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no second relation/mapping exists, while diagnostics and authority/time/cut repeat recorded source boundaries. Those actual-bridge conditions do not narrow independent ADR-0014 L3 eligibility. P008 is an open BND-001 totality decision request. No `theory/11` movement |
 | textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Local and portfolio triage are closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 and Product Alpha source observations remain reserves until an exact structural mismatch and documented downstream branch appear. This does not establish the old carrier result, general direct execution, or workflow readiness. |
-| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0018's THM-005 telemetry-effect dependency route is frozen at its first marked-tail compile failure; the later toy result is not retained. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
+| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0018's THM-005 telemetry-effect dependency route is frozen at its first marked-tail compile failure; the later toy result is not retained. The post-freeze Product Alpha export attribution screen is no-candidate because its source split lacks a named consumer and replays existing execution. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |
 

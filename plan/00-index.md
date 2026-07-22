@@ -168,6 +168,8 @@
     `plan/176-current-standing-candidate-disposition.md`
 133. THM-005 telemetry-effect boundary selection は
     `plan/177-thm005-telemetry-effect-boundary-selection.md`
+134. post-WRK-0018 candidate re-screen は
+    `plan/178-post-wrk0018-candidate-rescreen.md`
 
 ## current repo の短い要約
 
