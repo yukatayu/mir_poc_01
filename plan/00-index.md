@@ -166,6 +166,8 @@
     `plan/175-post-wrk0017-axiom-profile-disposition.md`
 132. current standing-candidate disposition は
     `plan/176-current-standing-candidate-disposition.md`
+133. THM-005 telemetry-effect boundary selection は
+    `plan/177-thm005-telemetry-effect-boundary-selection.md`
 
 ## current repo の短い要約
 

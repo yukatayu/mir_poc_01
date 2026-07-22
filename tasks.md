@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 01:56 JST
+最終更新: 2026-07-23 02:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -30,8 +30,9 @@ equality floor. The 21-row checker corpus, direct static-rejection coverage,
 and accepted 29-command final release check at clean `4a52dd3e` matching the
 upstream tracking ref make these guards runnable LAB evidence only; they do not promote a theory
 candidate, trusted runtime authorization, or a public effect ABI. No further
-Full System V1 maintenance item is currently selected, so the current
-no-candidate research selection remains unchanged.
+Full System V1 maintenance item is currently selected. A separate focused
+theory audit has selected one THM-005 telemetry-effect candidate for L3
+pre-registration; it is not yet a working record or an executed outcome.
 
 The foundation integrity audit is also closed as LAB evidence. It found no need
 for an additional Core primitive and isolated the owner-reserved BND-001
@@ -159,6 +160,7 @@ production implementation; otherwise it escalates. See
 | 45 | WRK-0017 proposition-decidability outcome | Closed frozen: the temporary local proposition theorem compiled with no reported axioms, but the registered opaque generic-domain control compiled with `Classical.choice`. The generic-control success is the exact falsifier; source is restored. This is not a constructivity theorem or OBL/checker/Canon movement. | Macro 1/5 reserve; do not repair this route. Reopen only after independent selection of a distinct, decision-relevant axiom-profile or other bounded control question. |
 | 46 | Post-WRK-0017 axiom-profile triage | Closed no-candidate: a profile comparison is distinct in principle, but both profiles are already retained in Report 2377 and no existing consumer needs a theorem, decision value, witness, or proof-hygiene artifact. No WRK or Lean replay ran. | Macro 1/5 reserve; reopen only with a named consumer, binary retain/reject decision, and fresh forward pre-registration. |
 | 47 | Current standing-candidate triage | Closed no-candidate: all screened near-misses are either frozen-route repairs, known-evidence replay/coverage widening, owner-reserved proof-interface choices, or P-SURF lane-catalog correspondence. No source locus meets the full current dossier test. | Macro 1/5 reserve; next owner checkpoint is plan 172, otherwise reopen on a new source locus with a bounded falsifier and downstream decision. |
+| 48 | THM-005 declared telemetry-effect boundary | Selected, registration pending: test whether a declared telemetry effect can make observer-safe exports differ despite modeled low-state agreement. Positive and adverse controls are confined to the existing IFC Lean foundation; no telemetry semantics, label algebra, export ABI, OBL, or Canon result may be chosen. | Macro 1/5 active L3 preparation; commit/push WRK-0018 before any outcome command, freeze rather than repair on scope pressure. |
 
 ## self-driven macro phase reading
 
@@ -174,6 +176,7 @@ production implementation; otherwise it escalates. See
 | OBL-001 Core/result correspondence | whether a future proof-facing package uses direct Core `c` or a selected Result/write enumeration bridge | defer; authorize a specific formalization boundary | prefer direct-`c` reading; do not identify experiment-only Result with Canon Core |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
+| SCN-08 scalar state syntax | whether frozen avatar fallback scenario is valid under the current indexed-only `StateDecl` grammar | permit scalar state; rewrite the scenario with an index; defer exact parser applicability | owner chooses; do not silently extend grammar or rewrite SCN-08 |
 | PROPOSAL-008 | BND-001 outcome-totality interpretation | separate obligation; OBL-021 scope; outcome-classification reading; defer | owner chooses before a proof-facing package assumes totality |
 
 Routine non-reserved target selection is **not** a user decision gate. A target that touches the reserved boundary is escalated with its evidence rather than placed in `working/`.
@@ -184,7 +187,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; plan/171 records the LAB reading that the familywise wrapper cannot replace direct global OBL-020 without coverage, the OBL-021 coherence draft does not give totality, and WRK-0007's Result/write gap needs a future direct-`c` or explicit bridge. Manifested WRK-0014 establishes only two sufficient same-carrier transfer forms: intended-to-model for universal safety/coherence and model-to-intended for outcome existence. Post-W14 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no second relation/mapping exists, while diagnostics and authority/time/cut repeat recorded source boundaries. Those actual-bridge conditions do not narrow independent ADR-0014 L3 eligibility. P008 is an open BND-001 totality decision request. No `theory/11` movement |
 | textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Local and portfolio triage are closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 and Product Alpha source observations remain reserves until an exact structural mismatch and documented downstream branch appear. This does not establish the old carrier result, general direct execution, or workflow readiness. |
-| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
+| existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. The next selected L3 test is THM-005 declared telemetry-effect dependency: it may test a finite low-observation countermodel after registration, but cannot select telemetry/pipeline semantics. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |
 

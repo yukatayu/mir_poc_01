@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 01:56 JST
+最終更新: 2026-07-23 02:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -72,12 +72,12 @@ forward pre-registration. This is not constructive undecidability, Line-1,
 OBL-003, checker, or Canon evidence.
 `plan/173-local-predicate-constructive-decidability-selection.md`; `plan/174-local-predicate-proposition-decidability-selection.md`; `plan/175-post-wrk0017-axiom-profile-disposition.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`; `mirrorea_canon/working/WRK-0017-local-predicate-proposition-decidability.md`
 
-The wider current-cut screen likewise found no standing-eligible candidate:
-P-SURF-05 is blocked by the owner-reserved lane-catalog correspondence in plan
-172, OBL bridge routes need a proof-interface decision, and computational or
-current-L2 variants replay known evidence. Reopen only after that owner
-checkpoint or a new dossier supplies an existing locus, bounded falsifier, and
-downstream decision. `plan/176-current-standing-candidate-disposition.md`
+The wider current-cut screen found no standing-eligible candidate at its own
+cut: P-SURF-05 remains blocked by the owner-reserved lane-catalog
+correspondence, OBL bridge routes need a proof-interface decision, and
+computational/current-L2 variants replay known evidence. A later focused audit
+selected only a forward THM-005 declared-telemetry-effect dependency test for
+L3 pre-registration; no WRK or outcome exists yet. `plan/176-current-standing-candidate-disposition.md`; `plan/177-thm005-telemetry-effect-boundary-selection.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -186,7 +186,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. A focused audit has selected, but not registered or run, one THM-005 telemetry-effect dependency candidate. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. The selected telemetry candidate may proceed only through a new L3 pre-registration and its stop line. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -207,11 +207,12 @@ LAB evidence.
 
 ## recent log
 
-- 2026-07-23 01:56 JST: broad standing-candidate triage closed with zero
-  eligible L3 candidates. Planner, reviewer, and temporary Oracle review agree
-  that the remaining near-misses are lane-catalog, proof-interface, or replay
-  paths. No new WRK, source edit, outcome command, Canon/OBL/Gate/Phase,
-  implementation, sample, or workflow movement occurred.
+- 2026-07-23 02:17 JST: focused Canon/Lean audit selected the THM-005
+  declared-telemetry-effect dependency as the sole forward L3 candidate. The
+  THM-002 history-maximum route repeats existing T-RESEARCH evidence; SCN-08
+  scalar state syntax is an owner grammar/scenario issue. No WRK, source edit,
+  outcome command, Canon/OBL/Gate/Phase, implementation, sample, or workflow
+  movement occurred at selection.
 
 - 2026-07-23 01:27 JST: post-WRK-0017 axiom-profile triage closed as
   no-candidate. Existing direct evidence already contains the local empty and
