@@ -77,7 +77,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0009 | L3-open | current-L2 static e5 route と Lean proof-skeleton の review-unit / emitted-stub identity tuple が literal に整合するかを既存レーンで監査。theorem 意味、OBL、carrier、helper/schema は変更しない。`working/WRK-0009-current-l2-e5-skeleton-identity.md` |
 | WRK-0010 | L3-open | current-L2 static-gate decision payload が static formal-hook artifact に literal または明示的 lossless reference として残るかを既存レーンで監査。診断意味、defect、carrier、helper/schema は変更しない。`working/WRK-0010-static-formal-hook-decision-attribution.md` |
 | WRK-0011 | L3-open | current-L2 e21/e22 source route が exact final store を直接アサートするか、fixture/direct-evaluator lane に限定されるかを literal に監査。状態意味、同値性、defect、coverage 要求、carrier は選ばない。`working/WRK-0011-current-l2-final-store-directness.md` |
-| WRK-0012 | L3-open | P-COMP-03 の固定一正例・一負例を既存 Product Alpha `world` package の direct carrier で検証。helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0012-pcomp03-direct-carrier.md` |
+| WRK-0012 | L3-open, frozen | P-COMP-03 の固定一正例・一負例を既存 Product Alpha `world` package の direct carrier で検証した L3 record。二つの sidecar は観測されたが、番号付き結果 artifact の登録には許可外の validator/source-hierarchy 変更が必要となり凍結。helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0012-pcomp03-direct-carrier.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

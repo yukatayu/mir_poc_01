@@ -36,14 +36,14 @@ Non-claims: This does not claim direct textual .mir execution, all P-COMP-03 cov
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: not-run; the registration commits before all outcome commands.
-Negative evidence: not-run; the registration commits before all outcome commands.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: The planned evidence commit may retain only plan/171-wrk0012-pcomp03-direct-carrier-evidence.md and the two exact non-production direct-world/package.mir.json leaves under the declared locations; /tmp outputs and MIRROREA_ALPHA_SESSION_DIR sessions are disposable. Existing scripts and Rust tests are pinned unmodified execution machinery, not retained LAB inputs or artifacts. No Canon theory, helper, schema, runtime, CLI, public behavior, OBL, Gate, Phase, conformance, or sample-dashboard state changes at registration.
+Reliance status: frozen
+Positive evidence: At 2242901a44d3feb7708f82ff535d91bff4fbe143, the registered sequence completed: the existing 15-row matrix/check-all retained its expected classifications, both selected Rust tests passed, the fixed positive sidecar checked and ran with Int(5) -> Int(15), and the fixed negative sidecar checked then exited 2 with MirCompute and message "UnboundVariable: unbound variable `y`". R-2347 preserves this as historical metadata; it is not a substitute evidence artifact.
+Negative evidence: The registered positive/negative outcome falsifier did not occur. A separate reproducible operational falsifier did occur: the required plan/171-wrk0012-pcomp03-direct-carrier-evidence.md cannot be admitted by the current numbered-plan validator without changing scripts/validate_docs.py and source-hierarchy registration outside this record's declared locations and stop line. The plan draft was not retained.
+Evidence artifacts: LAB:samples/product-alpha1/computational/control-flow/positive/direct-world/package.mir.json@2242901a44d3feb7708f82ff535d91bff4fbe143:af09bf1cf56c341b6f91e7572b0f20c67e8f1b9942730270bdf753fae0da1fa3, LAB:samples/product-alpha1/computational/variables-scope/negative/direct-world/package.mir.json@2242901a44d3feb7708f82ff535d91bff4fbe143:220452b11ea7410f889833e05ee9519b884036bd74b708cd4f401ef1bc5c41b1
+Evidence commits: 2242901a44d3feb7708f82ff535d91bff4fbe143
+Impact / non-effects: The only retained evidence artifacts are the two exact non-production direct-world/package.mir.json leaves under the declared locations; /tmp outputs and MIRROREA_ALPHA_SESSION_DIR sessions are disposable. The uncommitted numbered-plan draft is not retained. Existing scripts and Rust tests are pinned unmodified execution machinery, not retained LAB inputs or artifacts. No Canon theory, helper, schema, runtime, CLI, public behavior, OBL, Gate, Phase, conformance, or sample-dashboard state changes at registration.
 Independent review: not-required-for-L3
 
 ## Supersession
 
-Supersession: none
+Supersession: escalation needed for a separately scoped numbered-plan retention policy or a forward successor with an admissible artifact path; no repair is selected in this frozen record.
