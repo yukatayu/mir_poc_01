@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 15:16 JST
+最終更新: 2026-07-22 16:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -146,6 +146,7 @@ production implementation; otherwise it escalates. See
 | 32 | WRK-0013 retained-reproduction registration | Closed: committed a new L3 preregistration that pins the two sidecars as inputs, declares the exact unnumbered result memo/index path and stop line, and performs no outcome command or plan/index edit. | Macro 2 parser-free substrate; registration closed |
 | 33 | WRK-0013 fresh retained reproduction | Closed: the fresh registered two-input command reproduced both classifications, and the exact unnumbered memo/index/report delta passed unchanged validation and was manifested as `not-promoted` L3 evidence. | Macro 2 parser-free substrate; closed scoped evidence |
 | 34 | Post-WRK-0013 standing-eligible target triage | Closed as evidence-backed no-candidate after local and whole-portfolio review. Surface source-patch / ELAB lacks an exact shared literal key; source probes, current-L2 variants, OBL-024/025 gaps, and operational reserves either duplicate prior evidence, lack live branches, or require a reserved choice. No `WRK-0014` is opened. | Macro 0/1 and 2 reserve; reopen on exact structural mismatch plus bounded downstream decision |
+| 35 | Theory-core correspondence checkpoint | Closed: clean Lean replay and independent reviews confirm that the current LAB OBL-001 draft's Result carrier is not a Core/write enumeration proof, its familywise OBL-020 wrapper cannot replace global preservation without coverage, and its OBL-021 coherence draft does not supply outcome totality. No new L3 record is selected. | Macro 1/5 reserve; PROPOSAL-008 is an open owner-decision request with no owner answer |
 
 ## self-driven macro phase reading
 
@@ -158,7 +159,7 @@ production implementation; otherwise it escalates. See
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
-| OBL-001 concrete-evidence bridge | whether static elaborator output can instantiate authority/capability/witness evidence | defer; authorize artifact-free design comparison | defer until a selected proof-facing package needs it |
+| OBL-001 Core/result correspondence | whether a future proof-facing package uses direct Core `c` or a selected Result/write enumeration bridge | defer; authorize a specific formalization boundary | prefer direct-`c` reading; do not identify experiment-only Result with Canon Core |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
 | PROPOSAL-008 | BND-001 outcome-totality interpretation | separate obligation; OBL-021 scope; outcome-classification reading; defer | owner chooses before a proof-facing package assumes totality |
@@ -169,7 +170,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
-| OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
+| OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; plan/171 records the LAB reading that the familywise wrapper cannot replace direct global OBL-020 without coverage, the OBL-021 coherence draft does not give totality, and WRK-0007's Result/write gap needs a future direct-`c` or explicit bridge. ADR-0014 eligibility remains independent; P008 is an open BND-001 totality decision request. No `theory/11` movement |
 | textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Local and portfolio triage are closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 and Product Alpha source observations remain reserves until an exact structural mismatch and documented downstream branch appear. This does not establish the old carrier result, general direct execution, or workflow readiness. |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |

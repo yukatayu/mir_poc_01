@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 15:16 JST
+最終更新: 2026-07-22 16:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. Post-WRK-0013 local and whole-portfolio triage found no next target meeting the stricter LAB information-value criterion; this selects no Canon carrier, workflow, source authority, or OBL movement. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. The theory-core correspondence audit adds no new candidate: the current LAB OBL-001 draft needs a direct-`c` reading or explicit enumeration bridge, its familywise OBL-020 wrapper needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an open owner-decision request with no owner answer. This selects no Canon carrier, workflow, source authority, or OBL movement; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -162,13 +162,19 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, and manifested/not-promoted WRK-0013 retention evidence | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | no priority target currently selected after whole-portfolio review. W13 does not choose a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, Canon binding, or general direct-execution workflow. Reopen only on an exact existing key plus a bounded candidate with distinct downstream branches |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, and manifested/not-promoted WRK-0013 retention evidence | reviewed working premises, proof skeletons, `theory/11` final status, current LAB direct-`c` versus Result correspondence, global-step coverage when its familywise wrapper is used, and PROPOSAL-008's open outcome-totality request | no priority target currently selected after whole-portfolio review. The Canon's direct global OBL-020 target remains the safe reading; the LAB familywise wrapper is not a substitute without coverage. W13 does not choose a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, Canon binding, or general direct-execution workflow. Reopen only on an exact existing key plus a bounded candidate with distinct downstream branches |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution and assertion-provenance evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 audits only e5 tuple identity; WRK-0011 records no semantic cut inference from final-store assertions |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 15:48 JST: theory-core correspondence audit independently replayed
+  the existing OBL-001/020/021 Lean sources from a clean worktree and recorded
+  the direct-`c`, global-coverage, and outcome-totality proof boundaries. No new
+  WRK, Canon/OBL/Gate/Phase movement, implementation change, or workflow-status
+  change occurred; PROPOSAL-008 remains an active owner-decision request with no
+  owner answer or automatic Canon effect.
 - 2026-07-22 15:16 JST: independent formal and operational source screens plus
   two temporary advisory reviews confirmed that no existing documented LAB lane
   currently supplies both an exact discriminator and two live downstream

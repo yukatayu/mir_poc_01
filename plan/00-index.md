@@ -148,6 +148,8 @@
     `plan/post-wrk0013-no-candidate-disposition.md`
 123. post-WRK-0013 whole-portfolio review は
     `plan/post-wrk0013-portfolio-review.md`
+124. theory core correspondence と disposition checkpoint は
+    `plan/171-theory-core-correspondence-and-disposition-checkpoint.md`
 
 ## current repo の短い要約
 
