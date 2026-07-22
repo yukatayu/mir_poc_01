@@ -36,12 +36,12 @@ Non-claims: This does not define or select a MirCore decidability rule, a generi
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
+Reliance status: frozen
+Positive evidence: At the pushed registration base, the registered red check confirmed that the marker and all three candidate names were absent. Lean 4.29.1 compiled the unmodified exact foundation before and after the trial. The registered opaque arbitrary-domain probe also failed to infer `Decidable`, so it supplies no generic all-input control term. These checks are context only; they do not establish a local named term.
+Negative evidence: The direct registered trial in LAB report 2372 failed before any proof body could be retained. Lean rejects each proposed `theorem` because its target is a data type rather than a proposition, including `(lhs rhs : CaptureSet) -> Decidable (captureSubset lhs rhs)`. A named non-instance value of that type therefore needs a value-defining declaration such as `def` or an equivalent declaration form. That is the record's explicit no-new-definition falsifier. The trial source was restored and no alternate form was attempted.
 Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This registration fixes only the experiment's exact inputs, local proof shape, controls, falsifiers, and stop line. It records no Lean outcome and has no Canon, OBL, lifecycle, API, implementation, or workflow effect.
+Evidence commits: afcbae2fc5c5b77b82293b8e680a666666e13534
+Impact / non-effects: The retained evidence is the direct numbered report in the declared evidence commit; no source artifact is retained because the tentative source was restored. This freezes only the registered named-value/no-new-definition route. It does not establish constructive undecidability of `captureSubset`, define or reject an unnamed local example, select a generic carrier or API, or change Canon, OBL, lifecycle, implementation, or workflow status.
 Independent review: not-required-for-L3
 
 ## Supersession

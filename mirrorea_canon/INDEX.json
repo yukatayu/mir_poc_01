@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 7554
+   "bytes": 7722
   },
   {
    "id": "root/north-star",
@@ -1320,7 +1320,7 @@
    "summary": "既存 Lean foundation の二 constructor Capability に限り、任意 CaptureSet 間の captureSubset を明示的な局所消去で構成的に決定できるかを検査する可逆な L3 record。OBL、MirCore の decidability、checker、grammar、carrier、API は変更しない。",
    "open_items": [],
    "path": "working/WRK-0016-local-predicate-constructivity.md",
-   "bytes": 7911
+   "bytes": 9087
   }
  ]
 }
