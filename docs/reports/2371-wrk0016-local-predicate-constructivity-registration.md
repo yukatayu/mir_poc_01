@@ -98,7 +98,7 @@ After this registration commit is pushed, execute exactly the WRK-0016 command
 plan, retain the result only if every stop condition holds, and independently
 review the evidence boundary.
 
-## plan/ update status
+## Plan update status
 
 `plan/` update unnecessary: `plan/173` is an immutable LAB input to this
 registration, and editing it in the registration commit would violate the
@@ -113,7 +113,7 @@ exclude a reader-map rewrite.
 
 ## docs/project-status.md update status
 
-Updated: the concise control view now distinguishes committed WRK-0016
+更新済み: the concise control view now distinguishes committed WRK-0016
 registration from an unexecuted Lean outcome and from OBL-003 progress.
 
 ## progress.md update status
@@ -151,9 +151,10 @@ the same reason. Post-commit documentation validation is required before push.
 
 ## Commit / push status
 
-Pending at report write. The registration will be committed with
-`--no-gpg-sign`, documentation-validated after the commit, and pushed
-immediately when that validation passes.
+The registration was committed locally as `0d56c1d3` with `--no-gpg-sign`.
+The first post-commit documentation validation exposed a report-template
+heading defect; this correction commit and a fresh successful validation are
+required before both commits are pushed.
 
 ## Sub-agent session close status
 
