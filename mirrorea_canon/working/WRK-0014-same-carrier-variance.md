@@ -37,11 +37,11 @@ Non-claims: This does not define, select, or identify a Canon Core/Config/Step/W
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending committed registration. No outcome command has run.
-Negative evidence: Pending committed registration. No falsifier has yet been evaluated.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This registration pins only a relation-polarity question in the existing LAB Lean lane. It has no current theorem, OBL, Canon, implementation, or workflow effect.
+Positive evidence: After the committed and pushed registration, the registered red check confirmed that the source did not pre-exist. At f459895fe895b1eed600871ce14e8b49e25e69db, Lean 4.29.1 compiled the standalone `wf_preservation_transfers`, `coherence_transfers`, and `outcome_existence_transfers` lemmas. The same source passed the registered required-name and forbidden-token audit. These are conditional same-carrier relation laws only.
+Negative evidence: The final retained source needs no concrete carrier, relation definition, import, local data declaration, transition rule, write enumeration, scheduler/fairness assumption, outcome wrapper, or extra theorem premise beyond the stated inclusions. An uncommitted numbered-plan draft was rejected by documentation validation because retaining it would require validator-source registration outside the declared execution cut. The cut says the listed plan artifact may be added, not that it must be; it and its index/README edits were omitted rather than repaired. This is a retention-boundary observation, not a theorem falsifier or a Canon result.
+Evidence artifacts: LAB:samples/lean/lab-statements/obl020/SameCarrierVarianceBoundary.lean@f459895fe895b1eed600871ce14e8b49e25e69db:76135520f45cb64dc9566571a12c42364a1a8c18e984320d82f8b7a57fa5222d, LAB:samples/lean/lab-statements/obl020/SameCarrierVarianceBoundary.md@f459895fe895b1eed600871ce14e8b49e25e69db:bd8e83c55610c1e408fd266f0ad2a579b1a0953625454206c211e49ca3ec3a2e
+Evidence commits: f459895fe895b1eed600871ce14e8b49e25e69db
+Impact / non-effects: The retained artifacts are exactly the declared standalone Lean source and its explanation. On unchanged identical carriers, they establish two sufficient conditional transfer forms: intended-to-model inclusion suffices in the stated universal safety/coherence lemmas, and model-to-intended realization suffices in the stated outcome-existence lemma. They do not show either premise necessary for every possible bridge, nor establish actual inclusion, coverage, realization, Core/write enumeration, a Canon representation, fairness, BND-001 totality, theorem/OBL status, implementation behavior, or workflow readiness.
 Independent review: not-required-for-L3
 
 ## Supersession

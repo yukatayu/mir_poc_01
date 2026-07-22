@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`、`plan/post-wrk0013-no-candidate-disposition.md`、`plan/post-wrk0013-portfolio-review.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`、`plan/post-wrk0013-no-candidate-disposition.md`、`plan/post-wrk0013-portfolio-review.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、`mirrorea_canon/working/WRK-0014-same-carrier-variance.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -170,5 +170,7 @@ material の independent review を必要とし、現行は owner-authenticated 
 closed で、WRK-0013 retained reproduction の fresh outcome は unnumbered memo とともに
 manifest 済みです。二つの sidecar は input に限られ、得られた result も scoped
   provenance evidence に留まります。post-WRK-0013 target triage は evidence-backed
-  no-candidate で閉じ、具体的な structural mismatch または downstream branch を伴う候補が
-  見つかるまで新たな pre-registration は開きません。workflow や runtime claim は増えません。
+  no-candidate で閉じたが、その後の theory-core correspondence audit は同一 carrier の
+  relation inclusion に polarity mismatch を見つけ、WRK-0014 が三つの generic Lean lemma として
+  manifest した。これは future bridge に使える conditional transfer の方向だけを示し、実際の Canon correspondence、
+  Core representation、outcome totality、workflow や runtime claim は増やさない。

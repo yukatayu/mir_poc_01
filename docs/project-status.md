@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 17:58 JST
+最終更新: 2026-07-22 18:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -35,12 +35,12 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | 面 | 現在の読み | 根拠 |
 | --- | --- | --- |
 | Canon lifecycle | `T0/G0 rebaseline`。G0 exit と T1 entry は未成立。 | `mirrorea_canon/plan/01-phases.md` |
-| 論理仕様 | L0/L1 の軸は canon に固定。ADR-0014 は standing boundary 内の existing LAB research と committed `WRK-####` L3 record を許す。WRK-0014 は outcome 前の committed pre-registration として、same-carrier relation inclusion の必要な向きだけを検査対象に固定した。L2 は owner-authenticated trust anchor が未構成のため fail-closed であり、reproducible falsifier は L3/L2 を問わず record を即時 `frozen` にする安全弁である。 | `mirrorea_canon/adr/ADR-0014.md`; `mirrorea_canon/working/README.md`; `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`; `mirrorea_canon/plan/02-operating-model.md` |
+| 論理仕様 | L0/L1 の軸は canon に固定。ADR-0014 は standing boundary 内の existing LAB research と committed `WRK-####` L3 record を許す。WRK-0014 は same-carrier relation inclusion を前提にした三つの conditional transfer lemma を manifest した。これは実際の bridge を選ばず、各補題形での十分条件だけを示す。L2 は owner-authenticated trust anchor が未構成のため fail-closed であり、reproducible falsifier は L3/L2 を問わず record を即時 `frozen` にする安全弁である。 | `mirrorea_canon/adr/ADR-0014.md`; `mirrorea_canon/working/README.md`; `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`; `mirrorea_canon/plan/02-operating-model.md` |
 | ユーザ向け仕様 | companion notation と runnable LAB examples はあるが、Surface v0 grammar closure と public contract は未完。 | `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `samples_progress.md` |
 | 実装 / 運用 | alpha / Surface / operational roots は限定 LAB evidence。Full System V1 helper は accepted/rejected の内側 CLI 終了コード整合を確認し、committed provider/renderer generated evidence は実行時に書き換えず fresh report と比較する。Full System V1 checker は既存 host adapter の exact pair を宣言 signature / operation-specific capability / transition context に照合し、duplicate record field と非 scalar equality を runtime 前に拒否する。clean `4a52dd3e` と upstream tracking ref の一致上で 21/17/12 = 50 行を含む final release check 29 command を再現した。ただしこれは LAB の typed boundary guard であり、実行主体への trusted authorization、public adapter ABI、関数をまたぐ capability inheritance、Float64 runtime 実行は未実装である。release bundle は C-distributed conformance / 実 transport / multi-process execution を非主張とする。 | `samples_progress.md`; `scripts/README.md`; `tasks.md`; `mirrorea_canon/plan/01-phases.md` |
 | Mir computational evidence | 15 行の sample matrix は 2 direct Product Alpha runtime acceptance、10 helper-only rows、3 direct package-check rejection から成る。`P-COMP-03` fixture は helper-only だが、Rust runtime test は構成した有効 package で五つの正例を直接実行し、五つの負例を直接 reject する。closed registry の負例は四つの静的型検査拒否と一つの評価時範囲外拒否に分かれる。WRK-0012 は固定一正例・一負例を観測したが番号付き結果 artifact の保持に許可外変更が必要となり `frozen` である。WRK-0013 は二 sidecar を immutable input として fresh run し、同じ正負分類を既存 unnumbered plan memo/index 経路へ保持した `not-promoted` L3 evidence である。これは一般 direct carrier や workflow の evidence ではない。`.mir` は Product Alpha `check` / `run-local` の入力ではない。 | `plan/53-mir-computational-core-roadmap.md`; `plan/166-mir-computational-baseline-directness-audit.md`; `plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`; `plan/170-post-wrk0011-candidate-selection.md`; `plan/wrk-0013-retained-reproduction-selection.md`; `plan/wrk-0013-pcomp03-retained-reproduction.md`; `mirrorea_canon/working/WRK-0012-pcomp03-direct-carrier.md`; `mirrorea_canon/working/WRK-0013-pcomp03-retention-reproduction.md`; `samples_progress.md` |
 | 研究 lifecycle | T-RESEARCH-001..033 は pre-delegation evidence。WRK-0001..0006 は既存 Lean lane で finite-index、OBL-021 outcome/projection、OBL-020 familywise/global の限定 L3 evidence を manifest し、いずれも `not-promoted` である。WRK-0007 は OBL-001 LAB draft の Result/write enumeration gap を、WRK-0008 は current-L2 formal-hook row が same-Place cut frontier を保持せず coarse runtime-cluster identity に留まることを、WRK-0009 は e5 foundation/static-route tuple 不一致を、WRK-0010 は static decision payload 非 attribution を、WRK-0011 は named source-route と direct-evaluator の final-store assertion location の差を記録した。WRK-0012 は固定一正例・一負例の direct-carrier command を観測後、必要な番号付き結果 artifact が許可外の validator/source-hierarchy 変更を要求したため `frozen` になった。WRK-0013 retained reproduction は二 sidecar を input として pin し、fresh post-registration output を existing unnumbered plan artifact へ保持して manifest 済みである。これは scoped provenance/retention evidence に限られ、Canon theorem/OBL の反証・証明、OBL status、Gate/Phase、general carrier/workflow の変更ではない。L2 selection は owner trust configuration まで fail-closed である。 | `mirrorea_canon/working/WRK-0001-finite-index-boundaries.md`; `mirrorea_canon/working/WRK-0002-obl021-projection-vacuity.md`; `mirrorea_canon/working/WRK-0003-obl021-projection-extensionality.md`; `mirrorea_canon/working/WRK-0004-obl021-outcome-totality.md`; `mirrorea_canon/working/WRK-0005-obl021-conditional-outcome-relation.md`; `mirrorea_canon/working/WRK-0006-obl020-familywise-global-boundary.md`; `mirrorea_canon/working/WRK-0007-obl001-result-write-coverage.md`; `mirrorea_canon/working/WRK-0008-obl027-formal-hook-attribution.md`; `mirrorea_canon/working/WRK-0009-current-l2-e5-skeleton-identity.md`; `mirrorea_canon/working/WRK-0010-static-formal-hook-decision-attribution.md`; `mirrorea_canon/working/WRK-0011-current-l2-final-store-directness.md`; `mirrorea_canon/working/WRK-0012-pcomp03-direct-carrier.md`; `mirrorea_canon/working/WRK-0013-pcomp03-retention-reproduction.md`; `plan/164-obl001-result-write-coverage-boundary.md`; `plan/165-post-wrk0007-candidate-selection.md`; `plan/168-wrk0009-e5-skeleton-identity-selection.md`; `plan/wrk-0009-e5-skeleton-identity.md`; `plan/wrk-0010-static-formal-hook-decision-attribution.md`; `plan/wrk-0011-current-l2-final-store-directness.md`; `plan/170-post-wrk0011-candidate-selection.md`; `plan/wrk-0013-retained-reproduction-selection.md`; `plan/wrk-0013-pcomp03-retained-reproduction.md`; `plan/wrk-0008-obl027-formal-hook-attribution.md` |
-| WRK-0014 registration | Canon carrier を具体化せず、同一 carrier の relation inclusion が safety/coherence と outcome existence に必要とする向きだけを事前登録した。outcome evidence は未実行であり、actual coverage/realizability、Core/result correspondence、fairness、BND-001 totality placement、OBL status は未選択である。 | `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`; `plan/171-theory-core-correspondence-and-disposition-checkpoint.md` |
+| WRK-0014 evidence | Canon carrier を具体化せず、同一 carrier の relation inclusion を前提にした三つの generic Lean lemma を manifest した。universal safety/coherence には intended-to-model inclusion、outcome existence には model-to-intended realization を置く補題形での十分条件であり、一般の必要条件や actual coverage/realizability、Core/result correspondence、fairness、BND-001 totality placement、OBL status は未選択である。 | `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`; `docs/reports/2361-wrk0014-same-carrier-variance-evidence.md`; `plan/171-theory-core-correspondence-and-disposition-checkpoint.md` |
 | システム配置 | Mir Surface/Core/Trace/Verify、Mirrorea fabric/projection、typed provider/View、domain application は分離して扱う。 | `docs/diagrams/layer-stack.mmd`; `mirrorea_canon/MAP.md` |
 
 `plan/162-post-wrk0006-candidate-selection.md` の priority pause は、当時の既知候補に
@@ -95,7 +95,7 @@ runtime correctness、workflow、Canon/OBL/Gate/Phase は扱わない。
 その後の whole-portfolio review も、formal/Lean、current-L2、Surface patch、Full System
 V1、operational の各 existing lane に、二つの live downstream branch を持つ新規 L3 target
 がないことを確認した。以後は exact structural mismatch と documented downstream decision が
-同時に現れるまで新しい L3 record を開かない。theory-core correspondence audit はその cut 後に、将来の model-to-Canon transfer で safety/coherence と outcome existence が逆向きの inclusion を必要とする、別の source-grounded structural mismatch を切り出した。WRK-0014 はこの向きだけを登録し、具体意味論も outcome evidence もまだ追加していない。これは将来の研究禁止ではない。
+同時に現れるまで新しい L3 record を開かない。theory-core correspondence audit はその cut 後に、safety/coherence と outcome existence の conditional transfer lemma が異なる inclusion direction を使う、別の source-grounded structural mismatch を切り出した。WRK-0014 はその三補題を manifest したが、具体意味論や actual bridge は追加していない。これは将来の研究禁止ではない。
 `plan/post-wrk0013-portfolio-review.md`
 
 Theory core correspondence audit は、既存 Lean source を clean worktree で再実行し、
@@ -107,10 +107,11 @@ familywise result を global result として扱わず、PROPOSAL-008 につい�
 required Canon process が完了するまで OBL-021 で outcome existence を仮定または非主張に
 留める。`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`
 
-WRK-0014 は、same-carrier の parameterized relation に限定して transfer direction を
-機械検査するための committed pre-registration である。これは actual Canon relation の
-coverage/realizability、Core/result correspondence、fairness、BND-001 totality placement を
-選ばず、OBL を前進させない。
+WRK-0014 は、same-carrier の parameterized relation に限定した三つの conditional Lean
+lemma を manifest した。universal safety/coherence は intended-to-model inclusion を前提とする
+補題形で、outcome existence は model-to-intended realization を前提とする補題形で transfer を
+示す。これは各補題形の十分条件であり、actual Canon relation の coverage/realizability、
+Core/result correspondence、fairness、BND-001 totality placement を選ばず、OBL を前進させない。
 `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`
 
 ## 現在の停止線

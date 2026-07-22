@@ -1305,7 +1305,7 @@
    "summary": "Canon carrier を具体化せず、同一 carrier 上の relation inclusion が safety/coherence と outcome existence に必要とする向きを既存 Lean LAB lane で検査する可逆な L3 record。OBL、Core/Config/Step/WellFormed、outcome representation、proof interface は変更しない。",
    "open_items": [],
    "path": "working/WRK-0014-same-carrier-variance.md",
-   "bytes": 7673
+   "bytes": 9455
   }
  ]
 }
