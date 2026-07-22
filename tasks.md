@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 14:55 JST
+最終更新: 2026-07-22 15:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -170,7 +170,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
-| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. It does not establish the old carrier result, general direct execution, or workflow readiness. The next package is distinct-target triage; Full System V1 remains a conditional reserve pending an exact shared-key crosswalk, not a globally excluded root |
+| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Post-WRK-0013 triage is now closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 source observations remain reserves until a structural mismatch or documented downstream branch appears. This does not establish the old carrier result, general direct execution, or workflow readiness. |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |

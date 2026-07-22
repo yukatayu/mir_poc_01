@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 13:59 JST
+最終更新: 2026-07-22 15:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
