@@ -141,6 +141,7 @@
 117. post-WRK-0011 candidate selection は `plan/170-post-wrk0011-candidate-selection.md`
 118. ChatGPT Pro Oracle browser consults の repo-local 運用は `.docs/oracle-chatgpt-pro-operations.md`
 119. リスクと heavy line は `plan/12`, `plan/13`, `plan/18`
+120. WRK-0013 retained-reproduction selection は `plan/wrk-0013-retained-reproduction-selection.md`
 
 ## current repo の短い要約
 

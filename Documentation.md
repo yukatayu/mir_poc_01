@@ -156,5 +156,6 @@ canon working state への更新は `working/WRK-####` に限られ、L3 の事�
 standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
 material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
 ため fail-closed です。frozen record の follow-up は in-place repair ではなく successor
-または escalation にします。`plan/170` は WRK-0012 の選定履歴であり、現在の再開点は
-admissible retention path の独立した source screen です。
+または escalation にします。`plan/170` は WRK-0012 の選定履歴です。現在は source
+screen が closed となり、WRK-0013 retained reproduction の registration が次の action
+です。二つの sidecar は input に限られ、registration 前の outcome command は許されません。

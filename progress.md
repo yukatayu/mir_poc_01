@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 12:52 JST
+最終更新: 2026-07-22 13:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 pre-registered and ran a fixed two-row P-COMP-03 direct-carrier cut, then froze because retaining its required numbered plan artifact would need an excluded validator/source-hierarchy change. Its two sidecars and historical report do not select a Canon carrier or move an OBL. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. A source screen selected a distinct WRK-0013 retained-reproduction registration using an existing unnumbered plan artifact path; its sidecars are inputs only until a fresh post-registration run. Neither record selects a Canon carrier or moves an OBL. PROPOSAL-008 remains the owner-reserved BND-001 outcome-totality boundary; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -148,7 +148,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | assess a separately scoped successor or retention-policy escalation; do not repair this frozen record or reinterpret its observations as diagnostics, correctness, a required repair, or a Canon carrier choice |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 retained reproduction is selected for registration only. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | commit WRK-0013 before any outcome command; do not repair WRK-0012 or reinterpret either record as diagnostics, correctness, a required repair, or a Canon carrier choice |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists | heavy | maintenance only |
@@ -162,13 +162,20 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, and frozen WRK-0012 carrier observations | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | WRK-0012 has no reliance path after its artifact-retention falsifier. A forward successor must pre-register an admissible retention path or escalate policy; no existing observation chooses a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, or Canon binding |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, and frozen WRK-0012 carrier observations | reviewed working premises, proof skeletons, `theory/11` final status, and P008's outcome-totality disposition | WRK-0013 retained reproduction is the next preregistration: it must use the existing unnumbered result-memo path, fresh post-registration output, and an independent evidence commit. No observation chooses a mapping, synthetic-role reading, defect, theorem, carrier, Core/result bridge, taxonomy, or Canon binding |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution and assertion-provenance evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 audits only e5 tuple identity; WRK-0011 records no semantic cut inference from final-store assertions |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
 
+- 2026-07-22 13:27 JST: post-WRK-0012 retention-boundary source screen closed.
+  Existing unnumbered `plan/wrk-...` evidence conventions, static-validator
+  inspection, a disposable validator probe, planner review, and a temporary
+  Oracle advisory selected WRK-0013 retained reproduction for registration.
+  It will pin the sidecars only as inputs, rerun after registration, and test
+  an unnumbered result-memo path. No WRK-0013 record or outcome exists yet; no
+  Canon, OBL, Gate, Phase, sample workflow, or runtime status moved.
 - 2026-07-22 12:52 JST: WRK-0012 ran its fixed accepted/rejected Product Alpha
   direct-world sidecars after committed pre-registration. The observations met
   the registered command checks, but the required numbered result artifact

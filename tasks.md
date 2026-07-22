@@ -81,6 +81,15 @@ sidecars, and R-2347 is historical metadata. It changes no helper, schema,
 runtime, CLI, public carrier, Canon state, OBL, Gate, Phase, or sample workflow.
 `plan/170-post-wrk0011-candidate-selection.md` remains the pre-selection memory.
 
+The post-WRK-0012 source screen is now closed. Existing unnumbered
+`plan/wrk-...` evidence files are an indexed LAB convention, and a disposable
+validator probe passed without static-list changes. The selected next question
+is a fresh retained reproduction, not another direct-carrier discovery:
+WRK-0013 may pin the two existing sidecars only as inputs, run only after its
+registration, and try to retain fresh output through an unnumbered result memo
+plus its index entry. The old run remains history. Details are in
+`plan/wrk-0013-retained-reproduction-selection.md`.
+
 The executable computational baseline audit is closed as LAB classification
 evidence. The 15-row matrix has two direct Product Alpha Rust-runtime
 acceptances, ten helper-only `P-COMP-03` rows, and three direct package-check
@@ -132,7 +141,8 @@ production implementation; otherwise it escalates. See
 | 28 | WRK-0011 final-store assertion directness evidence | Closed scoped result: in the named e21/e22 source-route bodies no exact `RunReport.final_place_store` equality occurs; two named direct fixture/evaluator bodies directly compare `evaluator.state.place_store`. Six focused tests and 23/23 regression passed in a clean detached worktree. No state meaning, correctness, coverage, defect, or repair conclusion was selected. | Macro 1/5 reserve; closed scoped evidence |
 | 29 | Next standing-eligible target triage | Closed after correction: P-COMP-03 direct-carrier evidence is the selected next cut. The selected scope is one fixed accepted and one fixed rejected row; earlier WRK roots are not a global whitelist. | Macro 1/5 reserve; selection closed |
 | 30 | P-COMP-03 direct-carrier record | Closed frozen: `WRK-0012` pre-registered, committed two sidecars, and ran the exact command sequence. Its required numbered result artifact would require an excluded validator/source-hierarchy change, so the record is frozen without repair; its observations are not reusable evidence. | Macro 2 parser-free substrate; frozen L3 stop |
-| 31 | Post-WRK-0012 retention-boundary triage | Next self-driven research package: determine whether an admissible forward artifact path can be pre-registered without validator change, or whether numbered-plan policy requires a separately scoped escalation. Do not modify the frozen record or reuse its run as successor evidence. | Macro 0/1 and 2 reserve; source screen required |
+| 31 | Post-WRK-0012 retention-boundary triage | Closed selection: an existing unnumbered `plan/wrk-...` artifact path supports a distinct retained-reproduction question without validator change. The old run remains history and WRK-0012 stays frozen. | Macro 0/1 and 2 reserve; selection closed |
+| 32 | WRK-0013 retained-reproduction registration | Next self-driven package: commit a new L3 preregistration that pins the two sidecars as inputs, declares the exact unnumbered result memo/index path and stop line, and performs no outcome command or plan/index edit. | Macro 2 parser-free substrate; ready for registration |
 
 ## self-driven macro phase reading
 
@@ -157,7 +167,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
-| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0012's fixed direct-carrier experiment is frozen at the result-retention boundary. A future record must independently pre-register an admissible retention path; Full System V1 remains a conditional reserve pending an exact shared-key crosswalk, not a globally excluded root |
+| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained reproduction is selected for registration: it tests fresh execution provenance plus an existing unnumbered result-memo path, not the old carrier result. Full System V1 remains a conditional reserve pending an exact shared-key crosswalk, not a globally excluded root |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |
