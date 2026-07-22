@@ -78,7 +78,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0010 | L3-open | current-L2 static-gate decision payload が static formal-hook artifact に literal または明示的 lossless reference として残るかを既存レーンで監査。診断意味、defect、carrier、helper/schema は変更しない。`working/WRK-0010-static-formal-hook-decision-attribution.md` |
 | WRK-0011 | L3-open | current-L2 e21/e22 source route が exact final store を直接アサートするか、fixture/direct-evaluator lane に限定されるかを literal に監査。状態意味、同値性、defect、coverage 要求、carrier は選ばない。`working/WRK-0011-current-l2-final-store-directness.md` |
 | WRK-0012 | L3-open, frozen | P-COMP-03 の固定一正例・一負例を既存 Product Alpha `world` package の direct carrier で検証した L3 record。二つの sidecar は観測されたが、番号付き結果 artifact の登録には許可外の validator/source-hierarchy 変更が必要となり凍結。helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0012-pcomp03-direct-carrier.md` |
-| WRK-0013 | L3-open | frozen WRK-0012 の二つの direct-world sidecar を入力としてのみ pin し、登録後の fresh execution を既存 unnumbered plan artifact 経路へ独立に保持できるかを検査。sidecar、validator、helper、schema、runtime、CLI、public carrier は変更・主張しない。`working/WRK-0013-pcomp03-retention-reproduction.md` |
+| WRK-0013 | L3-open, not-promoted | frozen WRK-0012 の二つの direct-world sidecar を入力としてのみ pin し、登録後の fresh execution と既存 unnumbered plan artifact 経路を独立に再現・保持した L3 record。sidecar、validator、helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0013-pcomp03-retention-reproduction.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

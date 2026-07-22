@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-07-22 12:52 JST
+Last updated: 2026-07-22 13:59 JST
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -230,6 +230,7 @@ python3 scripts/operational_product_samples.py check-all --format json
 
 | Timestamp | Scope | Status | Notes |
 |---|---|---|---|
+| 2026-07-22 13:59 JST | WRK-0013 retained fresh reproduction | pass | The registered two-input command ran in a clean checkout after registration: pinned hashes matched, the positive sidecar produced `sum_to(Int(5)) -> Int(15)`, and the negative sidecar produced the expected exit 2 / `MirCompute` / unbound-variable detail. The declared unnumbered memo/index/report path passed unchanged validation and is `not-promoted` L3 provenance evidence only; no sample/workflow status, general carrier claim, Canon, Gate, Phase, or OBL moved. |
 | 2026-07-22 12:52 JST | WRK-0012 direct-world carrier execution | frozen | The exact pre-registered command observed the fixed accepted and rejected sidecars with their expected classifications, but the required numbered result artifact needs an excluded validator/source-hierarchy change. The WRK is frozen; only the sidecars are artifacts, and no sample/workflow status, runtime claim, Canon, Gate, Phase, or OBL moved. |
 | 2026-07-22 08:51 JST | WRK-0011 final-store assertion directness audit | pass | In a clean detached worktree, six focused tests passed and the current-L2 regression passed 23/23. Four named e21/e22 source-route test bodies contain no exact `RunReport.final_place_store` comparison; two named direct fixture/evaluator bodies compare `evaluator.state.place_store`. This is assertion provenance only, with no state-meaning, correctness, coverage, defect, or workflow-status relabel. |
 | 2026-07-22 08:19 JST | WRK-0010 static decision attribution audit | pass | Five support tests, four static smokes, and the current-L2 regression passed 23/23. Static gates distinguish verdict/reason/reason-code payloads, while each existing formal hook retains only fixed obligation rows and fixture-level references. This is an artifact-attribution classification only, with no diagnostic/defect/schema or workflow-status relabel. |

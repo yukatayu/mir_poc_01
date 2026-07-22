@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 13:41 JST
+最終更新: 2026-07-22 13:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -85,11 +85,11 @@ The post-WRK-0012 source screen is now closed. Existing unnumbered
 `plan/wrk-...` evidence files are an indexed LAB convention, and a disposable
 validator probe passed without static-list changes. The selected next question
 is a fresh retained reproduction, not another direct-carrier discovery:
-WRK-0013 is now registered to pin the two existing sidecars only as inputs,
-run only after its registration, and try to retain fresh output through an
-unnumbered result memo plus its index entry. The old run remains history; no
-WRK-0013 outcome or evidence exists yet. Details are in
-`plan/wrk-0013-retained-reproduction-selection.md`.
+WRK-0013 pinned the two existing sidecars only as inputs, ran only after its
+pushed registration, and retained fresh output through the declared unnumbered
+memo plus its index entry. The old W12 run remains history; W13 is manifested
+`not-promoted` provenance/retention evidence, not a general direct-carrier or
+workflow result. Details are in `plan/wrk-0013-pcomp03-retained-reproduction.md`.
 
 The executable computational baseline audit is closed as LAB classification
 evidence. The 15-row matrix has two direct Product Alpha Rust-runtime
@@ -144,7 +144,8 @@ production implementation; otherwise it escalates. See
 | 30 | P-COMP-03 direct-carrier record | Closed frozen: `WRK-0012` pre-registered, committed two sidecars, and ran the exact command sequence. Its required numbered result artifact would require an excluded validator/source-hierarchy change, so the record is frozen without repair; its observations are not reusable evidence. | Macro 2 parser-free substrate; frozen L3 stop |
 | 31 | Post-WRK-0012 retention-boundary triage | Closed selection: an existing unnumbered `plan/wrk-...` artifact path supports a distinct retained-reproduction question without validator change. The old run remains history and WRK-0012 stays frozen. | Macro 0/1 and 2 reserve; selection closed |
 | 32 | WRK-0013 retained-reproduction registration | Closed: committed a new L3 preregistration that pins the two sidecars as inputs, declares the exact unnumbered result memo/index path and stop line, and performs no outcome command or plan/index edit. | Macro 2 parser-free substrate; registration closed |
-| 33 | WRK-0013 fresh retained reproduction | Next self-driven package: run only the registered positive/negative command after the registration is pushed, then attempt exactly the declared unnumbered result memo/index evidence delta under unchanged validators. | Macro 2 parser-free substrate; ready after registration validation/push |
+| 33 | WRK-0013 fresh retained reproduction | Closed: the fresh registered two-input command reproduced both classifications, and the exact unnumbered memo/index/report delta passed unchanged validation and was manifested as `not-promoted` L3 evidence. | Macro 2 parser-free substrate; closed scoped evidence |
+| 34 | Post-WRK-0013 standing-eligible target triage | Next self-driven package: identify the next distinct existing-lane L3 proposition or record an evidence-backed no-candidate disposition; do not reuse W13 as a generic carrier/workflow result. | Macro 0/1 and 2 reserve; ready for triage |
 
 ## self-driven macro phase reading
 
@@ -169,7 +170,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
-| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained reproduction is registered: it tests fresh execution provenance plus an existing unnumbered result-memo path, not the old carrier result. Fresh output/evidence remains absent until the pushed registration is followed by its exact command. Full System V1 remains a conditional reserve pending an exact shared-key crosswalk, not a globally excluded root |
+| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. It does not establish the old carrier result, general direct execution, or workflow readiness. The next package is distinct-target triage; Full System V1 remains a conditional reserve pending an exact shared-key crosswalk, not a globally excluded root |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |

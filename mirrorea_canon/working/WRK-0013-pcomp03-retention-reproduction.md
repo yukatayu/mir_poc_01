@@ -38,12 +38,20 @@ Non-claims: This does not claim a new direct carrier, general P-COMP-03 coverage
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: not-run; fresh execution is permitted only after this committed registration and may not reuse WRK-0012/R-2347 output.
-Negative evidence: not-run; any registered provenance, classification, or retention falsifier freezes this record rather than repairing it.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: The only prospective retained result is the exact unnumbered plan memo at its future evidence commit. The two pre-existing sidecars are pinned LAB inputs, not WRK-0013 evidence artifacts; temporary JSON/session output is disposable. No Canon theory, helper, schema, validator, runtime, CLI, public behavior, OBL, Gate, Phase, conformance, or sample-dashboard workflow changes at registration.
+Positive evidence: After the registration and its reader-guide-only successor were pushed, the exact registered command ran in a clean detached checkout at ac8e1f3b90e5d33baf025a66b415ce09fa103713. Both pinned input hashes matched. The positive package checked and ran with one sum_to history entry from Int(5) to Int(15); the negative package checked, then run-local exited 2 with MirCompute and the registered unbound-variable detail. The command and its JSON assertions returned 0. The fresh output is retained only through the declared plan memo owned by acf542feb9bb94f5d471054004065cb096517ea8.
+Negative evidence: The registered provenance, classification, and retention falsifiers did not occur. The old WRK-0012/R-2347 output was not used; the two inputs matched their pins; the fresh positive/negative classifications matched; and the exact memo/index/direct-report evidence delta passed unchanged documentation, source-hierarchy, and Canon-index validation. This does not convert the reproduction into a general carrier or workflow conclusion.
+Evidence artifacts: LAB:plan/wrk-0013-pcomp03-retained-reproduction.md@acf542feb9bb94f5d471054004065cb096517ea8:5e9f078f99570261d5c20469c2484eb5e45e3bd9c24a6cc8b866155fec3e9d75
+Evidence commits: acf542feb9bb94f5d471054004065cb096517ea8
+Impact / non-effects: The retained artifact is exactly the declared unnumbered plan memo and its index/report operational metadata at the listed evidence commit. The pre-existing sidecars remain pinned LAB inputs, not W13 evidence artifacts; temporary JSON/session/trace output is disposable. No Canon theory, helper, schema, validator, runtime, CLI, public behavior, OBL, Gate, Phase, conformance, or sample-dashboard workflow classification changes.
 Independent review: not-required-for-L3
+
+### Evidence addendum — 2026-07-22
+
+The listed evidence commit owns only the declared `plan/` memo, its index entry,
+and R-2353. Existing CLI/Rust machinery executed in the fresh checkout remains
+unchanged non-production execution machinery. This result is a retained fresh
+reproduction/provenance observation only; it neither repairs frozen WRK-0012
+nor widens any runtime, language, carrier, diagnostic, workflow, or Canon claim.
 
 ## Supersession
 

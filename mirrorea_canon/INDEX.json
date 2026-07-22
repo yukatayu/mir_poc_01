@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 6723
+   "bytes": 6760
   },
   {
    "id": "root/north-star",
@@ -1290,7 +1290,7 @@
    "summary": "凍結した WRK-0012 の二つの固定 direct-world sidecar を入力としてのみ pin し、登録後の fresh execution を既存 unnumbered plan artifact 経路へ独立に保持できるかを調べる可逆な L3 reproduction record。sidecar、validator、helper、schema、runtime、CLI、public carrier は変更しない。",
    "open_items": [],
    "path": "working/WRK-0013-pcomp03-retention-reproduction.md",
-   "bytes": 8698
+   "bytes": 10134
   }
  ]
 }
