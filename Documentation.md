@@ -113,9 +113,11 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   番号付き結果 artifact を保持するには許可外の validator/source-hierarchy change が
   必要となったため record は `frozen` です。sidecar 二つだけが artifact であり、
   R-2347 は履歴 metadata に留まります。全 P-COMP-03、`.mir` の直接実行、public
-  interface、Canon status は主張しません。次の候補はこの結果を再利用せず、admissible
-  artifact path を独立に事前登録するか policy escalation を扱います。選定履歴は
-  `plan/170-post-wrk0011-candidate-selection.md`、現況は WRK-0012 と R-2348 にあります。
+  interface、Canon status は主張しません。forward `WRK-0013` は、二 sidecar を input
+  のみに pin した retained reproduction として登録済みです。fresh execution、結果 memo、
+  evidence commit はまだなく、W12 の観測を再利用しません。選定履歴は
+  `plan/170-post-wrk0011-candidate-selection.md`、現況は WRK-0012、WRK-0013、R-2348、
+  R-2351 にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
@@ -156,6 +158,7 @@ canon working state への更新は `working/WRK-####` に限られ、L3 の事�
 standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
 material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
 ため fail-closed です。frozen record の follow-up は in-place repair ではなく successor
-または escalation にします。`plan/170` は WRK-0012 の選定履歴です。現在は source
-screen が closed となり、WRK-0013 retained reproduction の registration が次の action
-です。二つの sidecar は input に限られ、registration 前の outcome command は許されません。
+または escalation にします。`plan/170` は WRK-0012 の選定履歴です。source screen は
+closed で、WRK-0013 retained reproduction は登録済みです。二つの sidecar は input に
+限られ、fresh outcome command はその pushed registration 後の registered sequence に
+限ります。結果 memo と evidence manifest が通るまで workflow や runtime claim は増えません。
