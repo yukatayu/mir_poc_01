@@ -80,6 +80,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0012 | L3-open, frozen | P-COMP-03 の固定一正例・一負例を既存 Product Alpha `world` package の direct carrier で検証した L3 record。二つの sidecar は観測されたが、番号付き結果 artifact の登録には許可外の validator/source-hierarchy 変更が必要となり凍結。helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0012-pcomp03-direct-carrier.md` |
 | WRK-0013 | L3-open, not-promoted | frozen WRK-0012 の二つの direct-world sidecar を入力としてのみ pin し、登録後の fresh execution と既存 unnumbered plan artifact 経路を独立に再現・保持した L3 record。sidecar、validator、helper、schema、runtime、CLI、public carrier、全 row coverage は変更・主張しない。`working/WRK-0013-pcomp03-retention-reproduction.md` |
 | WRK-0014 | L3-open, not-promoted | Canon carrier を具体化せず、同一 carrier 上の relation inclusion が safety/coherence と outcome existence に必要とする向きを既存 Lean lane で検査する登録済み L3 record。OBL、Core/Config/Step/WellFormed、outcome representation、proof interface は変更しない。`working/WRK-0014-same-carrier-variance.md` |
+| WRK-0016 | L3-open, not-promoted | exact current-L2 Lean foundation の二 constructor `Capability` に限り、任意 `CaptureSet` 間の `captureSubset` を明示的局所消去で構成的に決定できるかを登録した L3 record。OBL-003、Line-1、generic carrier、global instance、checker、Canon carrier/API は変更・主張しない。`working/WRK-0016-local-predicate-constructivity.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

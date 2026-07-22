@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 22:54 JST
+最終更新: 2026-07-22 23:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -52,10 +52,13 @@ correspondence to ADR-0014's existing documented LAB lane remains UNRESOLVED.
 The current `plan/158` ratchet is checkpoint-closed without changing the
 validator, Canon, P-SURF classification, or future ADR-0014 eligibility.
 
-The independent foundational revalidation selected only a future L3 test of
-constructive all-input `captureSubset` decidability in the existing Lean
-foundation. It is not Line-1, OBL-003, checker, or Canon evidence; registration
-must be committed and pushed before any outcome command. `plan/173-local-predicate-constructive-decidability-selection.md`
+The independent foundational revalidation selected only the bounded all-input
+`captureSubset` constructivity experiment in the existing Lean foundation.
+WRK-0016 now pre-registers explicit elimination of the exact two-constructor
+`Capability` carrier, positive controls, an opaque-domain adverse probe, and
+its stop line. It is not Line-1, OBL-003, checker, or Canon evidence; no outcome
+command ran at registration, and the declared Lean evidence may run only after
+this commit is pushed. `plan/173-local-predicate-constructive-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -164,7 +167,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is a separate registered, unexecuted local constructivity experiment in the existing Lean foundation; it does not identify a MirCore decision procedure. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -184,6 +187,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 23:48 JST: registered WRK-0016 as a local constructive
+  `captureSubset` decision experiment on the exact two-constructor Lean
+  foundation. The record fixes non-instance, no-generic-carrier/no-classical
+  constraints, two positive controls, and an opaque-domain adverse probe.
+  No outcome command, Canon/OBL/Gate/Phase, implementation, sample, or
+  workflow-status movement occurred at registration.
 
 - 2026-07-22 22:54 JST: foundational obligation mapping, adversarial review,
   and temporary Oracle review rejected a duplicate OBL-005 replay and an
