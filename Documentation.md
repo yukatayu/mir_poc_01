@@ -17,7 +17,7 @@ notes. If LAB text conflicts with canon, canon wins.
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 三軸の成熟度と検証面 | `progress.md` と `samples_progress.md` |
-| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
+| 次の研究と候補履歴 | `tasks.md`、`plan/158-standing-bounded-autonomy.md`、`plan/160-obl021-statement-shape-checkpoint.md`、`plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md`、`plan/163-foundation-integrity-and-elaboration-outcome-audit.md`、`plan/164-obl001-result-write-coverage-boundary.md`、`plan/165-post-wrk0007-candidate-selection.md`、`plan/168-wrk0009-e5-skeleton-identity-selection.md`、`plan/wrk-0009-e5-skeleton-identity.md`、`plan/169-wrk0010-static-decision-attribution-selection.md`、`plan/wrk-0010-static-formal-hook-decision-attribution.md`、`plan/wrk-0011-current-l2-final-store-directness.md`、`plan/170-post-wrk0011-candidate-selection.md`、`plan/wrk-0008-obl027-formal-hook-attribution.md`、WRK provenance refinement `plan/159-wrk-evidence-commit-integrity-recut.md`、historical `plan/156-t0-t2-research-autonomy-envelope.md` / `plan/157-delegated-theory-research-governance.md` |
 
 ## 最初に読む順序
 
@@ -107,6 +107,14 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   theorem/OBL は判断しません。詳細は
   `plan/wrk-0011-current-l2-final-store-directness.md` にあります。
 
+- post-WRK-0011 の候補再選別では、P-COMP-03 の固定された一正例・一負例を、既存
+  Product Alpha `MirCompute` carrier で直接実行できるかを調べる次の限定 L3 候補を
+  選びました。`WRK-0012` はまだ事前登録も実行もされていません。既存の helper、
+  schema、runtime、CLI を変更せず、二つの既存 row directory 内だけに置く
+  non-production sidecar package を候補とします。全 P-COMP-03、`.mir` の直接実行、
+  public interface、Canon status を主張しません。詳細は
+  `plan/170-post-wrk0011-candidate-selection.md` にあります。
+
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
 `plan/157-delegated-theory-research-governance.md`、WRK の Git evidence
@@ -145,5 +153,6 @@ agent は止まり、選択肢・影響・反例・Lean/実行証拠・非主張
 canon working state への更新は `working/WRK-####` に限られ、L3 の事前登録は ADR-0014 の
 standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
 material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
-ため fail-closed です。frozen L2 の follow-up は successor にします。直近の候補なし
-triage は `plan/161` にあり、候補を作ること自体を目的にしません。
+ため fail-closed です。frozen L2 の follow-up は successor にします。直近の候補選別は
+`plan/170` にあり、固定された P-COMP-03 direct-carrier cut を次の事前登録対象として
+います。
