@@ -60,8 +60,8 @@ temporary Oracle governance review.
 - read-only Canon/LAB/source/validator inspection
 - current Git-state and SHA-256 checks for all pinned inputs
 - temporary `ask-chatgpt-pro-temp` governance and experiment-design review
-- Canon index generation/check and documentation/working-history validation
-  are recorded after registration closeout
+- Canon index generation/check, `make docs`, and
+  `python3 scripts/validate_docs.py --authoritative-working-annex`
 
 ## Evidence / outputs / test results
 
@@ -149,9 +149,12 @@ closeout runs only the Canon/index and documentation/working-history checks.
 
 ## Commit / push status
 
-Pending at report draft time. This registration will be committed with
-`--no-gpg-sign`, documentation-validated after commit, and pushed before any
-candidate command.
+The registration was committed with `--no-gpg-sign` as `d035a614`
+(`research: preregister bounds carrier observation`). The concise status-view
+correction was committed as `e49003aa` (`docs: keep registration status
+concise`). Both commits were pushed to `origin/main` after `make docs` and the
+authoritative working-annex validation passed. This report-status closeout is
+committed and pushed separately before any candidate command.
 
 ## Sub-agent session close status
 
