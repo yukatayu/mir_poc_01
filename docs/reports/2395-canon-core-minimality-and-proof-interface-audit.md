@@ -152,8 +152,11 @@ focused registry tests passed and are the relevant closeout evidence.
 
 ## Commit / push status
 
-Pending at report draft time. The plan, registries, progress log, and report
-will be validated, committed with `--no-gpg-sign`, and pushed.
+The audited plan, registries, progress log, and report were validated,
+committed with `--no-gpg-sign` as `931c6838` (`research: audit Canon Core
+minimality`), and pushed to `origin/main`. This closeout status update is
+committed and pushed separately so the immutable report records the actual
+first package commit.
 
 ## Sub-agent session close status
 
