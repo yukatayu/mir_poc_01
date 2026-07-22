@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 18:50 JST
+最終更新: 2026-07-22 19:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. The current LAB OBL-001 draft still needs a direct-`c` reading or explicit enumeration bridge, its familywise OBL-020 wrapper still needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. The committed source history passes the authoritative audit only after reversible quarantine of ignored local state; its ordinary working tree intentionally does not satisfy that clean-worktree predicate. The current LAB OBL-001 draft still needs a direct-`c` reading or explicit enumeration bridge, its familywise OBL-020 wrapper still needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -168,6 +168,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 19:06 JST: `f01e5160` passed the authoritative WRK audit, source
+  hierarchy, Canon index, and `make docs` only after six ignored local-state
+  files were reversibly quarantined and restored. The raw audit intentionally
+  rejects those files. The document-validator unit suite passed 87 tests in
+  549.535 seconds. This is source-history evidence, not a clean-worktree
+  release, Canon/OBL/Gate/Phase movement, or workflow-status promotion.
 
 - 2026-07-22 18:50 JST: independent review corrected the current WRK-0014
   wording from general necessity to sufficiency inside the stated conditional

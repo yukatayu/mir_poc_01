@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 18:50 JST
+最終更新: 2026-07-22 19:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -147,7 +147,7 @@ production implementation; otherwise it escalates. See
 | 33 | WRK-0013 fresh retained reproduction | Closed: the fresh registered two-input command reproduced both classifications, and the exact unnumbered memo/index/report delta passed unchanged validation and was manifested as `not-promoted` L3 evidence. | Macro 2 parser-free substrate; closed scoped evidence |
 | 34 | Post-WRK-0013 standing-eligible target triage | Closed as evidence-backed no-candidate after local and whole-portfolio review. Surface source-patch / ELAB lacks an exact shared literal key; source probes, current-L2 variants, OBL-024/025 gaps, and operational reserves either duplicate prior evidence, lack live branches, or require a reserved choice. This historical cut does not forbid a later, distinct source-grounded theory mismatch. | Macro 0/1 and 2 reserve; reopen on exact structural mismatch plus bounded downstream decision |
 | 35 | Theory-core correspondence checkpoint | Closed: clean Lean replay and independent reviews confirm that the current LAB OBL-001 draft's Result carrier is not a Core/write enumeration proof, its familywise OBL-020 wrapper cannot replace global preservation without coverage, and its OBL-021 coherence draft does not supply outcome totality. The audit subsequently supports a distinct parameter-only variance question, without selecting a Canon interface. | Macro 1/5 reserve; PROPOSAL-008 is an open owner-decision request with no owner answer |
-| 36 | WRK-0014 same-carrier variance evidence | Closed scoped evidence: three standalone Lean lemmas compile with only identical carrier and relation parameters. In their stated forms, intended-to-model inclusion suffices to transfer universal safety/coherence and model-to-intended realization suffices to transfer outcome existence. No actual bridge, concrete Canon relation, coverage/realizability, fairness, outcome representation, OBL, or theorem interface is introduced. | Macro 1/5 reserve; use as proof-hygiene guard, then reopen only for a distinct actual-bridge candidate |
+| 36 | WRK-0014 same-carrier variance evidence | Closed scoped evidence: three standalone Lean lemmas compile with only identical carrier and relation parameters. In their stated forms, intended-to-model inclusion suffices to transfer universal safety/coherence and model-to-intended realization suffices to transfer outcome existence. `f01e5160` passes source-history audit only with reversible ignored-local-state quarantine; the normal audit rejects those local files by design. No actual bridge, concrete Canon relation, coverage/realizability, fairness, outcome representation, OBL, or theorem interface is introduced. | Macro 1/5 reserve; use as proof-hygiene guard, then reopen only for a distinct actual-bridge candidate |
 
 ## self-driven macro phase reading
 
