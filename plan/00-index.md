@@ -164,6 +164,8 @@
     `plan/174-local-predicate-proposition-decidability-selection.md`
 131. post-WRK-0017 axiom-profile disposition は
     `plan/175-post-wrk0017-axiom-profile-disposition.md`
+132. current standing-candidate disposition は
+    `plan/176-current-standing-candidate-disposition.md`
 
 ## current repo の短い要約
 

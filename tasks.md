@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 01:34 JST
+最終更新: 2026-07-23 01:56 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -158,6 +158,7 @@ production implementation; otherwise it escalates. See
 | 44 | Local predicate proposition-decidability selection | Closed selection: planner/reviewer comparison selected only `captureSubset lhs rhs ∨ ¬ captureSubset lhs rhs` as a proposition-valued successor. It separates body constructivity from frozen value declaration policy; anonymous/local/value declaration variants are not repairs, and ledger routes remain duplicate or reserved. | Macro 1/5 reserve; create a fresh WRK before source edit or outcome command, then freeze on any excluded mechanism or scope pressure. |
 | 45 | WRK-0017 proposition-decidability outcome | Closed frozen: the temporary local proposition theorem compiled with no reported axioms, but the registered opaque generic-domain control compiled with `Classical.choice`. The generic-control success is the exact falsifier; source is restored. This is not a constructivity theorem or OBL/checker/Canon movement. | Macro 1/5 reserve; do not repair this route. Reopen only after independent selection of a distinct, decision-relevant axiom-profile or other bounded control question. |
 | 46 | Post-WRK-0017 axiom-profile triage | Closed no-candidate: a profile comparison is distinct in principle, but both profiles are already retained in Report 2377 and no existing consumer needs a theorem, decision value, witness, or proof-hygiene artifact. No WRK or Lean replay ran. | Macro 1/5 reserve; reopen only with a named consumer, binary retain/reject decision, and fresh forward pre-registration. |
+| 47 | Current standing-candidate triage | Closed no-candidate: all screened near-misses are either frozen-route repairs, known-evidence replay/coverage widening, owner-reserved proof-interface choices, or P-SURF lane-catalog correspondence. No source locus meets the full current dossier test. | Macro 1/5 reserve; next owner checkpoint is plan 172, otherwise reopen on a new source locus with a bounded falsifier and downstream decision. |
 
 ## self-driven macro phase reading
 
