@@ -36,12 +36,12 @@ Non-claims: This does not define or select a Canon configuration, low-equivalenc
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
+Reliance status: frozen
+Positive evidence: none. Commit `5b33d915bab2741e7b1fa72e627a7ed5f916da38` later contained a green concrete toy tail, but it follows the registered marked-tail compiler falsifier and is discarded rather than retained.
+Negative evidence: Report 2383 records that an initially incomplete marked `WRK0018TelemetryEffectModel` tail failed to compile because its model identifiers were absent. This is the exact `Lean cannot compile the marked tail` falsifier. The subsequent proof-form changes were an impermissible repair. Commit `5f4bea5906f557ef5855bc52ebae1c5974bc359c` restores both pinned source inputs byte-for-byte; its `lean --trust=0` compile and source-absence/digest guard pass. A voluntary independent review of `5b33d915` identified this literal-falsifier violation, so the later green tail is excluded.
 Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This registration fixes only the exact concrete toy carrier, low-determined positive control, high-dependent fixed adverse pair, existing lane, and freeze line. It records no Lean outcome and has no Canon, OBL, grammar, scenario, lifecycle, API, implementation, sample workflow, or public effect.
+Evidence commits: 5b33d915bab2741e7b1fa72e627a7ed5f916da38, 5f4bea5906f557ef5855bc52ebae1c5974bc359c
+Impact / non-effects: This route is frozen at its literal compile falsifier. The source and explanation are restored to the pinned inputs; no toy theorem, telemetry/effect/provenance rule, Canon, OBL, grammar, scenario, lifecycle, API, implementation, sample workflow, or public result is retained. A future inquiry needs a distinct fresh pre-registration and must not repair this record.
 Independent review: not-required-for-L3
 
 ## Supersession

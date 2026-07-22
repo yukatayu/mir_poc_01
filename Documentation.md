@@ -201,6 +201,7 @@ manifest 済みです。二つの sidecar は input に限られ、得られた 
   続く axiom-profile screen は、同じ診断を再実行する具体的 consumer がないため新 WRK を作らず
   no-candidate で閉じた。`plan/173-local-predicate-constructive-decidability-selection.md`; `plan/174-local-predicate-proposition-decidability-selection.md`; `plan/175-post-wrk0017-axiom-profile-disposition.md`
   広域 screen は standing-eligible な候補を選ばなかったが、その後の focused audit は
-  THM-005 の declared telemetry-effect dependency だけを次の L3 pre-registration 候補として
-  選んだ。実行はまだしていない。`plan/176-current-standing-candidate-disposition.md`;
-  `plan/177-thm005-telemetry-effect-boundary-selection.md`
+  THM-005 の declared telemetry-effect dependency だけを L3 record として事前登録したが、
+  marked tail の最初のコンパイル失敗が登録済み falsifier となり frozen である。後続の green tail は
+  保持せず、source は復元済みである。`plan/176-current-standing-candidate-disposition.md`;
+  `plan/177-thm005-telemetry-effect-boundary-selection.md`; `mirrorea_canon/working/WRK-0018-thm005-telemetry-effect-boundary.md`

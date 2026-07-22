@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 8791
+   "bytes": 8833
   },
   {
    "id": "root/north-star",
@@ -1351,7 +1351,7 @@
    "summary": "THM-005 の observer-safe export に対し、既存 IFC Lean foundation 内の有限 toy telemetry source が modeled high state に依存すると low agreement から row equality が導けないことを検査する可逆 L3 record。telemetry semantics、label lattice、export ABI、OBL は変更しない。",
    "open_items": [],
    "path": "working/WRK-0018-thm005-telemetry-effect-boundary.md",
-   "bytes": 7782
+   "bytes": 8684
   }
  ]
 }

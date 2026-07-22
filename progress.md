@@ -76,8 +76,10 @@ The wider current-cut screen found no standing-eligible candidate at its own
 cut: P-SURF-05 remains blocked by the owner-reserved lane-catalog
 correspondence, OBL bridge routes need a proof-interface decision, and
 computational/current-L2 variants replay known evidence. A later focused audit
-selected and WRK-0018 pre-registered only a THM-005 declared-telemetry-effect
-dependency test; no outcome exists yet. `plan/176-current-standing-candidate-disposition.md`; `plan/177-thm005-telemetry-effect-boundary-selection.md`; `mirrorea_canon/working/WRK-0018-thm005-telemetry-effect-boundary.md`
+selected and pre-registered only a THM-005 declared-telemetry-effect dependency
+test. Its first marked-tail compiler failure is the registered falsifier; the
+later green tail is not retained, the source is restored, and WRK-0018 is
+frozen. `plan/176-current-standing-candidate-disposition.md`; `plan/177-thm005-telemetry-effect-boundary-selection.md`; `mirrorea_canon/working/WRK-0018-thm005-telemetry-effect-boundary.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -186,7 +188,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 registers, but has not run, one THM-005 telemetry-effect dependency candidate. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. WRK-0018 may execute only its recorded existing-lane commands and freeze on its stop line. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0018 is frozen because its first marked-tail compile failed; its later green toy tail was discarded and source restored. | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Do not repair WRK-0012 or WRK-0018, or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -206,6 +208,12 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 03:02 JST: WRK-0018 froze at its literal registered falsifier:
+  the first marked-tail Lean compile failed. The later green toy tail was
+  discarded as an impermissible repair; the pinned foundation/explanation were
+  restored and their digest/absence guard plus `lean --trust=0` passed. No
+  Canon/OBL/Gate/Phase, implementation, sample workflow, or public status moved.
 
 - 2026-07-23 02:39 JST: registered WRK-0018 for one THM-005
   declared-telemetry-effect dependency model in the existing IFC Lean
