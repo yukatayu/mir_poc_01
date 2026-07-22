@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 02:17 JST
+最終更新: 2026-07-23 02:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -160,7 +160,7 @@ production implementation; otherwise it escalates. See
 | 45 | WRK-0017 proposition-decidability outcome | Closed frozen: the temporary local proposition theorem compiled with no reported axioms, but the registered opaque generic-domain control compiled with `Classical.choice`. The generic-control success is the exact falsifier; source is restored. This is not a constructivity theorem or OBL/checker/Canon movement. | Macro 1/5 reserve; do not repair this route. Reopen only after independent selection of a distinct, decision-relevant axiom-profile or other bounded control question. |
 | 46 | Post-WRK-0017 axiom-profile triage | Closed no-candidate: a profile comparison is distinct in principle, but both profiles are already retained in Report 2377 and no existing consumer needs a theorem, decision value, witness, or proof-hygiene artifact. No WRK or Lean replay ran. | Macro 1/5 reserve; reopen only with a named consumer, binary retain/reject decision, and fresh forward pre-registration. |
 | 47 | Current standing-candidate triage | Closed no-candidate: all screened near-misses are either frozen-route repairs, known-evidence replay/coverage widening, owner-reserved proof-interface choices, or P-SURF lane-catalog correspondence. No source locus meets the full current dossier test. | Macro 1/5 reserve; next owner checkpoint is plan 172, otherwise reopen on a new source locus with a bounded falsifier and downstream decision. |
-| 48 | THM-005 declared telemetry-effect boundary | Selected, registration pending: test whether a declared telemetry effect can make observer-safe exports differ despite modeled low-state agreement. Positive and adverse controls are confined to the existing IFC Lean foundation; no telemetry semantics, label algebra, export ABI, OBL, or Canon result may be chosen. | Macro 1/5 active L3 preparation; commit/push WRK-0018 before any outcome command, freeze rather than repair on scope pressure. |
+| 48 | THM-005 declared telemetry-effect boundary | Closed registration: WRK-0018 pins the existing IFC Lean foundation, an exact low-determined positive control, high-dependent fixed adverse pair, source hashes, and freeze line. No Lean source or outcome command ran. No telemetry semantics, label algebra, export ABI, OBL, or Canon result may be chosen. | Macro 1/5 active L3 evidence; execute only the pushed registered commands, then retain or freeze rather than repair. |
 
 ## self-driven macro phase reading
 

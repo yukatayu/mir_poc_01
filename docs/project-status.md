@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-23 02:17 JST
+最終更新: 2026-07-23 02:39 JST
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
@@ -122,7 +122,7 @@ interface の owner/canon disposition である。ただしこれは ADR-0014 �
 L3 research を閉じない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
 P-SURF-05 second-admission stale-fence candidate は現行 validator により停止し、`WRK-0015` は作らなかった。後続の current-root 再選別も候補を選ばず、validator tuple の ADR-0014 existing documented LAB lane との対応は **UNRESOLVED** のまま fail-close を維持する。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
 これと独立した基礎 obligation 再監査は、OBL-003/005/015 の既存証跡を重複させず、現在の `captureSubset` helper の全入力決定可能性だけを L3 候補として選んだ。WRK-0016 は source-visible `Decidable` value declaration の制約で frozen になった。後継 WRK-0017 は proposition-valued excluded-middle theorem を試し、局所の一時 theorem は公理なしで通ったが、登録済み opaque generic-domain control が暗黙の古典公理を伴って通ったため frozen である。次の axiom-profile comparison は測定としては別問題になり得るが、両方の profile は既に Report 2377 にあり、retained theorem / decision value / witness を必要とする既存 consumer がない。よって新 WRK や再実行はせず no-candidate で閉じた。再開には concrete consumer と retain/reject 判断を持つ別の事前登録が必要である。これは構成性、構成的 undecidability、OBL-003、Line-1、checker、Canon carrier を前進・反証せず、試験ソースは復元済みである。`plan/175-post-wrk0017-axiom-profile-disposition.md`; `docs/reports/2377-wrk0017-proposition-decidability-outcome.md`
-広域 screen は候補なしで閉じたが、その後の focused audit は THM-005 の declared telemetry-effect dependency を、既存 IFC Lean foundation 内の可逆 L3 pre-registration 候補として選んだ。実行・WRK 登録・Canon/OBL/Gate/Phase movement はまだない。THM-002 history-maximum は既存 T-RESEARCH と重複し、SCN-08 の scalar state は owner grammar/scenario disposition として分離した。`plan/176-current-standing-candidate-disposition.md`; `plan/177-thm005-telemetry-effect-boundary-selection.md`
+広域 screen は候補なしで閉じたが、その後の focused audit は THM-005 の declared telemetry-effect dependency を既存 IFC Lean foundation 内の可逆 L3 candidate として選び、WRK-0018 が exact toy carrier、positive/adverse control、freeze line を事前登録した。Lean source と outcome command は未実行である。THM-002 history-maximum は既存 T-RESEARCH と重複し、SCN-08 の scalar state は owner grammar/scenario disposition として分離した。`plan/176-current-standing-candidate-disposition.md`; `plan/177-thm005-telemetry-effect-boundary-selection.md`; `mirrorea_canon/working/WRK-0018-thm005-telemetry-effect-boundary.md`
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /

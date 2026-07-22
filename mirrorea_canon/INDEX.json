@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 96,
+ "files": 97,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 8379
+   "bytes": 8791
   },
   {
    "id": "root/north-star",
@@ -1336,6 +1336,22 @@
    "open_items": [],
    "path": "working/WRK-0017-local-predicate-proposition-decidability.md",
    "bytes": 8604
+  },
+  {
+   "id": "working/WRK-0018",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/02-types-effects-failures",
+    "theory/07-observation",
+    "theory/11-metatheory-ledger",
+    "arch/02-boundary-contracts"
+   ],
+   "summary": "THM-005 の observer-safe export に対し、既存 IFC Lean foundation 内の有限 toy telemetry source が modeled high state に依存すると low agreement から row equality が導けないことを検査する可逆 L3 record。telemetry semantics、label lattice、export ABI、OBL は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0018-thm005-telemetry-effect-boundary.md",
+   "bytes": 7782
   }
  ]
 }
