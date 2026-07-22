@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 22:14 JST
+最終更新: 2026-07-22 22:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -51,6 +51,11 @@ The validator tuple is a deliberate fail-closed guardrail, but its
 correspondence to ADR-0014's existing documented LAB lane remains UNRESOLVED.
 The current `plan/158` ratchet is checkpoint-closed without changing the
 validator, Canon, P-SURF classification, or future ADR-0014 eligibility.
+
+The independent foundational revalidation selected only a future L3 test of
+constructive all-input `captureSubset` decidability in the existing Lean
+foundation. It is not Line-1, OBL-003, checker, or Canon evidence; registration
+must be committed and pushed before any outcome command. `plan/173-local-predicate-constructive-decidability-selection.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -179,6 +184,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 22:54 JST: foundational obligation mapping, adversarial review,
+  and temporary Oracle review rejected a duplicate OBL-005 replay and an
+  unsupported OBL-015 association. They selected only a bounded
+  `captureSubset` constructivity experiment in the existing Lean foundation.
+  It excludes OBL-003 and all checker/Canon claims; no registration or outcome
+  command ran in this selection package.
 
 - 2026-07-22 22:14 JST: provenance review and temporary Oracle/planner
   challenge established that the validator's exact-root tuple is deliberate

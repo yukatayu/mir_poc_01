@@ -257,6 +257,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/169-wrk0010-static-decision-attribution-selection.md",
         "plan/170-post-wrk0011-candidate-selection.md",
         "plan/171-theory-core-correspondence-and-disposition-checkpoint.md",
+        "plan/172-standing-autonomy-lane-correspondence-checkpoint.md",
+        "plan/173-local-predicate-constructive-decidability-selection.md",
     ],
     "scripts": [
         "scripts",
