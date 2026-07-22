@@ -154,6 +154,8 @@
     `plan/wrk-0015-stale-grant-fence-selection.md`
 126. WRK-0015 stale-fence registration preflight は
     `plan/wrk-0015-stale-grant-fence-registration-preflight.md`
+127. post-WRK-0015 permitted-root candidate disposition は
+    `plan/post-wrk0015-permitted-root-no-candidate-disposition.md`
 
 ## current repo の短い要約
 

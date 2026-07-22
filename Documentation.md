@@ -184,3 +184,6 @@ manifest 済みです。二つの sidecar は input に限られ、得られた 
   登録済み fresh 実行・Canon 解釈はなく、事前の探索実行は引き続き除外する。
   `plan/wrk-0015-stale-grant-fence-selection.md`;
   `plan/wrk-0015-stale-grant-fence-registration-preflight.md`
+  後続の許可済み root 再選別も、この source cut では候補を選ばなかった。これは恒久的閉鎖ではなく、
+  fresh 実行や Canon 解釈を伴わない LAB の限定的な選別結果である。
+  `plan/post-wrk0015-permitted-root-no-candidate-disposition.md`

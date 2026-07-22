@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 21:12 JST
+最終更新: 2026-07-22 21:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -151,6 +151,7 @@ production implementation; otherwise it escalates. See
 | 37 | Post-WRK-0014 actual-bridge triage | Closed as evidence-backed no-candidate: the OBL-020 LAB source has only one abstract `P.Step` and no second same-carrier relation/literal mapping or variance-lemma importer. OBL-001 requires a Core/write interface and OBL-021 is PROPOSAL-008-bound. | Macro 1/5 reserve; reopen only on an existing second relation/mapping, an already-fixed proof interface, or owner/canon action |
 | 38 | Post-WRK-0014 remaining-ledger revalidation | Closed as evidence-backed no-candidate for the screened OBL-024/025 and authority/time/cut families: they repeat recorded T-RESEARCH boundaries unless a reserved association, repair, epoch/evidence, frame, rollback, or clock relation is selected. The smallest useful actual-bridge prerequisite is an OBL-001 direct-`c` versus output/Core-write interface decision. | Macro 1/5 reserve; actual-bridge reopen needs a new relation/mapping or fixed proof interface. Other ADR-0014-eligible non-duplicative L3 research remains independently selectable. |
 | 39 | P-SURF-05 stale-fence registration preflight | Closed without a WRK: the selected checker/test/sample inputs are outside the current permitted LAB roots, and the target-literal search found no matching input in an allowed root. The earlier exploratory command remains excluded; no fresh command ran. Do not widen the allowlist or conceal the inputs through a plan transcript/Git blob. | Macro 4 / reserve; select another standing-eligible existing-lane candidate. Reopen only if a matching documented allowed-root input is available or an explicit owner/canon action changes lane policy. |
+| 40 | Post-WRK-0015 permitted-root triage | Closed as a bounded no-candidate selection: P-SURF-05 is an input-location/policy stop; duplicate, no-command/no-live-branch, and reserved-boundary variants were separately rejected. No WRK or fresh command was created. This is not a general ADR-0014 rule or permanent closure. | Macro 4 / reserve; reopen only on a fresh permitted-root discriminator with a live decision fork, or explicit owner/canon lane-policy action. |
 
 ## self-driven macro phase reading
 
