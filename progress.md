@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 04:07 JST
+最終更新: 2026-07-23 04:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,17 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 04:51 JST: replayed the OBL-020 Lean statement and its retained
+  boundary experiments, including the import-bearing familywise source through
+  the external module-root procedure. The existing global-versus-familywise
+  coverage result remains the correct boundary; queue/admissibility and
+  transition-coverage questions are future proof-model decisions, not grounds
+  for an autonomous Core expansion. Under the current LAB priority screen, a
+  proposed two-point label-model lemma package was rejected because it has no
+  identified live downstream decision; this does not narrow ADR-0014 research.
+  No WRK, OBL, Gate/Phase, implementation, sample workflow, or public status
+  changed.
 
 - 2026-07-23 04:00 JST: completed a T1/T2 statement-identity and dependency
   closure audit. It classifies every exit-critical row by Canon domain, present
