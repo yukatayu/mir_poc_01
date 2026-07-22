@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 05:14 JST
+最終更新: 2026-07-23 07:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,16 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 07:22 JST: revalidated the existing non-final Full System V1
+  parser/checker/runtime/operational release workflow on the current source
+  tree. The first 29-command release bundle stopped at 26/29 because the new
+  numbered plan 181 was registered in `validate_docs.py` but missing from the
+  parallel source-hierarchy list. After the one-line list synchronization, the
+  focused equality tests and `make docs` passed, and a fresh release bundle
+  passed 29/29. This refreshes bounded LAB evidence only: final grammar/API,
+  real multi-process transport, C-distributed conformance, and public
+  completion remain open.
 
 - 2026-07-23 05:14 JST: compared the OBL-020 proof-readiness boundary with
   asynchronous queue and causal-order literature, and mapped every active Lean
