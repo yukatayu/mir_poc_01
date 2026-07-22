@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 20:15 JST
+最終更新: 2026-07-22 20:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -113,7 +113,6 @@ lemma を manifest した。universal safety/coherence は intended-to-model inc
 示す。これは各補題形の十分条件であり、actual Canon relation の coverage/realizability、
 Core/result correspondence、fairness、BND-001 totality placement を選ばず、OBL を前進させない。
 `mirrorea_canon/working/WRK-0014-same-carrier-variance.md`
-
 post-WRK-0014 actual-bridge screen は no-candidate で閉じた。OBL-020 direct-global route は
 既存の第二 same-carrier relation と literal mapping が現れた場合だけ reserve とし、OBL-001 は
 direct-`c` または output/Core-write interface の owner choice、OBL-021 は PROPOSAL-008 の
@@ -123,7 +122,8 @@ remaining-ledger revalidation は、OBL-024/025 と authority/time/cut の残り
 actual bridge を再開する最小条件は OBL-001 の direct-`c` または exact output/Core-write
 interface の owner/canon disposition である。ただしこれは ADR-0014 の別種の standing-eligible
 L3 research を閉じない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
-
+P-SURF-05 の second-admission stale-fence branch は source-local 運用候補として選定したが、
+未登録で fresh 実行・Canon 解釈はなく、事前探索 command は除外した。`plan/wrk-0015-stale-grant-fence-selection.md`
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /
