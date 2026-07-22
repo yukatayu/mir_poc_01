@@ -36,12 +36,12 @@ Non-claims: This does not construct a `Decidable` value, define or select a glob
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: pending
-Negative evidence: pending
+Reliance status: frozen
+Positive evidence: The temporary exact local theorem compiled and its `#print axioms` output reported no axioms. It was removed before evidence retention; this diagnostic does not retain a theorem or establish a constructivity result.
+Negative evidence: The registered opaque generic-domain adverse probe compiled, contrary to its required failure condition. Its diagnostic `#print axioms` output depended on `[propext, Classical.choice, Quot.sound]`, showing that generic `by_cases` can obtain a classical decision without an explicit finite interface or a visible `Classical` token. This is the registered falsifier.
 Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This registration fixes only the exact proposition target, closed-carrier explicit-elimination method, generic-domain adverse control, semantic declaration boundary, and stop line. It records no Lean outcome and has no Canon, OBL, lifecycle, API, implementation, or workflow effect.
+Evidence commits: 384e05811ce10a1707e04d84d77f7b87b189bce3
+Impact / non-effects: This freezes the exact proposition route and its generic-control criterion. The source was restored; the listed evidence commit retains only its direct operational report, not a permitted LAB artifact. It does not establish a local theorem, generic constructivity, undecidability, OBL-003, Line-1, checker, Canon, lifecycle, API, implementation, or workflow result.
 Independent review: not-required-for-L3
 
 ## Supersession

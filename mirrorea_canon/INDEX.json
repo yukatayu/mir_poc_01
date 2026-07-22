@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 8245
+   "bytes": 8379
   },
   {
    "id": "root/north-star",
@@ -1335,7 +1335,7 @@
    "summary": "exact current-L2 Lean foundation の二 constructor Capability に限り、任意 CaptureSet 間の captureSubset に対する proposition-valued excluded-middle theorem を明示局所消去で構成できるかを検査する可逆なL3 record。WRK-0016のdata-valued declaration routeは再開せず、OBL、checker、Core、APIは変更しない。",
    "open_items": [],
    "path": "working/WRK-0017-local-predicate-proposition-decidability.md",
-   "bytes": 7926
+   "bytes": 8604
   }
  ]
 }

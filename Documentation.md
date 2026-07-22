@@ -192,6 +192,7 @@ manifest 済みです。二つの sidecar は input に限られ、得られた 
   有限な `plan/158` ratchet だけを閉じる。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
   その後の基礎 obligation 再監査は、既存 OBL-003/005/015 の証跡を重複させず、現行
   `captureSubset` helper の named `Decidable` value route は、Lean declaration form のため
-  frozen になった。後継として proposition-valued excluded-middle theorem を、OBL-003 を
-  前進させない別L3候補として選んだ。結果 command の前に別コミットで登録する。
+  frozen になった。後継の proposition-valued excluded-middle route も、局所定理自体は一時的に
+  公理なしで通った一方、登録済み opaque generic-domain control が暗黙の古典公理を使って通ったため
+  frozen である。どちらも OBL-003 を前進させず、試験ソースは復元済みである。
   `plan/173-local-predicate-constructive-decidability-selection.md`; `plan/174-local-predicate-proposition-decidability-selection.md`
