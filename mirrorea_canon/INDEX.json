@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 93,
+ "files": 94,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 6760
+   "bytes": 7144
   },
   {
    "id": "root/north-star",
@@ -1291,6 +1291,21 @@
    "open_items": [],
    "path": "working/WRK-0013-pcomp03-retention-reproduction.md",
    "bytes": 10134
+  },
+  {
+   "id": "working/WRK-0014",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "Canon carrier を具体化せず、同一 carrier 上の relation inclusion が safety/coherence と outcome existence に必要とする向きを既存 Lean LAB lane で検査する可逆な L3 record。OBL、Core/Config/Step/WellFormed、outcome representation、proof interface は変更しない。",
+   "open_items": [],
+   "path": "working/WRK-0014-same-carrier-variance.md",
+   "bytes": 7673
   }
  ]
 }
