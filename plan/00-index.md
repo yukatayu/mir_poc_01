@@ -174,6 +174,8 @@
     `plan/179-independent-source-locus-audit.md`
 136. T1/T2 statement identity and dependency closure audit は
     `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`
+137. preservation-proof prerequisite literature audit は
+    `plan/181-preservation-proof-prerequisite-literature-audit.md`
 
 ## current repo の短い要約
 
@@ -711,6 +713,8 @@
   `plan/wrk-0007-obl001-result-write-coverage.md`
 - twin peaks の detailed memory:
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
+- preservation-proof prerequisite literature audit:
+  `plan/181-preservation-proof-prerequisite-literature-audit.md`
 
 ## maintenance rule
 

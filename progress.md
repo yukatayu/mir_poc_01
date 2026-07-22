@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 04:51 JST
+最終更新: 2026-07-23 05:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 05:14 JST: compared the OBL-020 proof-readiness boundary with
+  asynchronous queue and causal-order literature, and mapped every active Lean
+  artifact to its actual consumer and prior WRK coverage. Queue admissibility,
+  safe occurrence insertion, owner dispatch, and successful `[E-PATCH]` remain
+  proof-package prerequisites, not autonomous Core additions. No new L3 source
+  locus was selected under the current LAB priority screen; that screen does
+  not narrow ADR-0014.
 
 - 2026-07-23 04:51 JST: replayed the OBL-020 Lean statement and its retained
   boundary experiments, including the import-bearing familywise source through

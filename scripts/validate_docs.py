@@ -615,6 +615,7 @@ REQUIRED = [
     "plan/178-post-wrk0018-candidate-rescreen.md",
     "plan/179-independent-source-locus-audit.md",
     "plan/180-t1-t2-statement-identity-dependency-closure-audit.md",
+    "plan/181-preservation-proof-prerequisite-literature-audit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
