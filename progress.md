@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-22 16:21 JST
+最終更新: 2026-07-22 18:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -168,6 +168,11 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-22 18:06 JST: post-registration documentation validation detected a
+  stale `progress.md` header despite the current 17:58 log entry. The header
+  was synchronized in a docs-only correction; no research result, Canon/OBL/
+  Gate/Phase, implementation, or workflow status changed.
 
 - 2026-07-22 17:58 JST: registered WRK-0014 as a parameter-only same-carrier
   variance probe. It fixes the opposite inclusion directions required to
