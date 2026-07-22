@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 07:22 JST
+最終更新: 2026-07-23 07:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,15 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 07:36 JST: completed a bounded all-chapter Canon Core minimality
+  and proof-interface audit. It identified no contradiction and no reason to
+  expand the Core. It distinguishes later interfaces for elaboration
+  determinism, generated-row/runtime correspondence, step preservation,
+  fallback lineage, save/load reconstruction, and observer-safe equivalence
+  from existing L2/open work. No new L3 source locus was selected; this is a
+  common-proof-model checklist, not a ledger, Gate/Phase, implementation, or
+  workflow change.
 
 - 2026-07-23 07:22 JST: revalidated the existing non-final Full System V1
   parser/checker/runtime/operational release workflow on the current source

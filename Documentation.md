@@ -24,7 +24,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/178-post-wrk0018-candidate-rescreen.md`、
 `plan/179-independent-source-locus-audit.md`、
 `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`、
-`plan/181-preservation-proof-prerequisite-literature-audit.md`
+`plan/181-preservation-proof-prerequisite-literature-audit.md`、
+`plan/182-canon-core-minimality-and-proof-interface-audit.md`
 
 ## 最初に読む順序
 

@@ -267,6 +267,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/179-independent-source-locus-audit.md",
         "plan/180-t1-t2-statement-identity-dependency-closure-audit.md",
         "plan/181-preservation-proof-prerequisite-literature-audit.md",
+        "plan/182-canon-core-minimality-and-proof-interface-audit.md",
     ],
     "scripts": [
         "scripts",

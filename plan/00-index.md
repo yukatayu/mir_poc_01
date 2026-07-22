@@ -176,6 +176,8 @@
     `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`
 137. preservation-proof prerequisite literature audit は
     `plan/181-preservation-proof-prerequisite-literature-audit.md`
+138. Canon Core minimality and proof-interface audit は
+    `plan/182-canon-core-minimality-and-proof-interface-audit.md`
 
 ## current repo の短い要約
 
@@ -715,6 +717,8 @@
   `plan/18-type-proof-modelcheck-and-ordering-research-program.md`
 - preservation-proof prerequisite literature audit:
   `plan/181-preservation-proof-prerequisite-literature-audit.md`
+- Canon Core minimality and proof-interface audit:
+  `plan/182-canon-core-minimality-and-proof-interface-audit.md`
 
 ## maintenance rule
 
