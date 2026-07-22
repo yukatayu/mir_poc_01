@@ -37,12 +37,17 @@ Non-claims: This does not define or select a MirCore decidability rule, a generi
 ## Results and review
 
 Reliance status: frozen
-Positive evidence: At the pushed registration base, the registered red check confirmed that the marker and all three candidate names were absent. Lean 4.29.1 compiled the unmodified exact foundation before and after the trial. The registered opaque arbitrary-domain probe also failed to infer `Decidable`, so it supplies no generic all-input control term. These checks are context only; they do not establish a local named term.
-Negative evidence: The direct registered trial in LAB report 2372 failed before any proof body could be retained. Lean rejects each proposed `theorem` because its target is a data type rather than a proposition, including `(lhs rhs : CaptureSet) -> Decidable (captureSubset lhs rhs)`. A named non-instance value of that type therefore needs a value-defining declaration such as `def` or an equivalent declaration form. That is the record's explicit no-new-definition falsifier. The trial source was restored and no alternate form was attempted.
+Positive evidence: At the pushed registration base, the registered red check confirmed that the marker and all three source-visible candidate names were absent. Lean 4.29.1 compiled the unmodified exact foundation before and after the trial. The registered opaque arbitrary-domain probe also failed to infer `Decidable`, so it supplies no generic all-input control term. These checks are context only; the planned positive controls were masked by the common declaration-kind failure and do not establish any local decision body.
+Negative evidence: The direct registered trial in LAB report 2372 failed before any proof body could be retained. Lean rejects each proposed `theorem` because its target is a data type rather than a proposition, including `(lhs rhs : CaptureSet) -> Decidable (captureSubset lhs rhs)`. Retaining the registered source-visible top-level name for that value therefore needs a data-valued declaration form such as `def`, `abbrev`, `opaque`, or an equivalent form. That is the record's explicit no-new-definition falsifier. The trial source was restored and no alternate form was attempted; temporary review also confirms that an anonymous `example : Decidable True` is a distinct, non-retained form rather than a repair.
 Evidence artifacts: none
 Evidence commits: afcbae2fc5c5b77b82293b8e680a666666e13534
-Impact / non-effects: The retained evidence is the direct numbered report in the declared evidence commit; no source artifact is retained because the tentative source was restored. This freezes only the registered named-value/no-new-definition route. It does not establish constructive undecidability of `captureSubset`, define or reject an unnamed local example, select a generic carrier or API, or change Canon, OBL, lifecycle, implementation, or workflow status.
+Impact / non-effects: The retained evidence is the direct numbered report in the declared evidence commit; no source artifact is retained because the tentative source was restored. This freezes only the conjunction of the registered persistent source-visible top-level naming requirement and the no-new-data-valued-declaration restriction. It does not establish constructive undecidability of `captureSubset`, validate or reject an unnamed local example or local binding, validate a `def`/`abbrev`/`opaque` body, select a generic carrier or API, or change Canon, OBL, lifecycle, implementation, or workflow status.
 Independent review: not-required-for-L3
+
+Temporary Oracle review of the frozen result agreed with the reliance stop and
+identified the source-visible qualification and underinclusive lexical guard as
+future-successor requirements. It is advisory LAB review only and does not
+change this record's L3 status or evidence commit.
 
 ## Supersession
 

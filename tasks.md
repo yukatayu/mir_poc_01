@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 00:02 JST
+最終更新: 2026-07-23 00:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -154,7 +154,7 @@ production implementation; otherwise it escalates. See
 | 40 | Post-WRK-0015 current-root triage | Closed as a bounded no-candidate selection: duplicates, absent concrete source/digest differentiation, and reserved-boundary variants were separately rejected. No WRK or fresh command was created. Non-duplication/exact-command/live-decision are this run's priority filters, not new ADR requirements. | Macro 4 / reserve; reopen on a concrete current-validator-permitted dossier with pre-registrable alternative/falsifier and no reserved choice. |
 | 41 | Standing-autonomy lane correspondence checkpoint | Closed as the `plan/158` finite-ratchet checkpoint: validator tuple is deliberate fail-closed behavior, while its exhaustive correspondence to ADR-0014's existing documented lane remains UNRESOLVED. No Canon or validator root-policy change was made. | Macro 0/1 and 4 checkpoint; owner may choose closed catalog, reviewed guardrail correction, or defer. Other concrete admitted L3 candidates remain independently selectable. |
 | 42 | Foundational local-predicate candidate selection | Closed selection: OBL-005 repeats Report 2262; OBL-015 has no identified consumer that treats the IFC Boolean helper as grant-lineage evidence. Only all-input `captureSubset` constructivity is selected, as a non-OBL existing-LAB experiment with positive controls. | Macro 1/5 reserve; pre-register a fresh record before any outcome command, then freeze on helper/API, generic-carrier, global-instance, classical-leakage, or OBL/Line-1 scope pressure. |
-| 43 | WRK-0016 local-predicate constructivity registration and outcome | Closed frozen: registration pinned the exact two-constructor Lean foundation, non-instance local form, controls, adverse probe, and stop line. The direct trial showed that a named `Decidable` value cannot be declared as a Lean theorem; a forbidden new definition would be required. Source restored; this is neither constructive undecidability nor OBL-003/Line-1/checker/Canon/implementation/sample-workflow movement. | Macro 1/5 reserve; do not repair this route. Reopen only through a separately registered question with a different value-declaration and scope boundary. |
+| 43 | WRK-0016 local-predicate constructivity registration and outcome | Closed frozen: registration pinned the exact two-constructor Lean foundation, non-instance local form, controls, adverse probe, and stop line. The direct trial showed that the requested source-visible top-level `Decidable` value cannot be declared as a Lean theorem; a forbidden data-valued declaration would be required. The controls were masked and source restored; this is neither constructive undecidability nor OBL-003/Line-1/checker/Canon/implementation/sample-workflow movement. | Macro 1/5 reserve; do not repair this route. Reopen only through a separately registered question that states the value-declaration, visibility, lexical/semantic guard, and proof-body scope. |
 
 ## self-driven macro phase reading
 

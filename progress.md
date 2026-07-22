@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 00:02 JST
+最終更新: 2026-07-23 00:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -55,11 +55,12 @@ validator, Canon, P-SURF classification, or future ADR-0014 eligibility.
 The independent foundational revalidation selected only the bounded all-input
 `captureSubset` constructivity experiment in the existing Lean foundation.
 After pushed registration, WRK-0016 executed its direct trial and froze: Lean
-rejects a `theorem` whose named target is `Decidable (...)`, so the selected
-non-instance value form requires a new value definition that the record
-forbids. The source was restored and the opaque-domain adverse probe still
-supplies no generic decision. This is not constructive undecidability, Line-1,
-OBL-003, checker, or Canon evidence. `plan/173-local-predicate-constructive-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`; `docs/reports/2372-wrk0016-local-predicate-constructivity-outcome.md`
+rejects a `theorem` whose source-visible top-level target is `Decidable (...)`,
+so the selected non-instance value form requires a new data-valued declaration
+that the record forbids. The source was restored and the opaque-domain adverse
+probe still supplies no generic decision. An unnamed `example` or another
+declaration form changes the registered question. This is not constructive
+undecidability, Line-1, OBL-003, checker, or Canon evidence. `plan/173-local-predicate-constructive-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`; `docs/reports/2372-wrk0016-local-predicate-constructivity-outcome.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -168,7 +169,7 @@ LAB evidence.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and reporting discipline | delegated governance and cockpit are current | light | maintenance and drift audit |
-| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected named `Decidable` value cannot be a Lean theorem without a forbidden new definition; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
+| 1 | semantic kernel and invariant boundaries | canon direction fixed; WRK-0006 through WRK-0011 are manifested L3 evidence. WRK-0012 observed its two-row P-COMP-03 cut but is frozen at the registered retention boundary. WRK-0013 independently retained its fresh two-input reproduction through the unnumbered plan path and remains not-promoted. WRK-0014 manifests a same-carrier variance matrix only; actual-bridge and remaining-ledger screens found no distinct candidate in their screened families. WRK-0016 is frozen because the selected source-visible top-level `Decidable` value cannot be a Lean theorem without a forbidden data-valued declaration; it does not identify a MirCore decision procedure or constructive undecidability. WRK-0011 records assertion location only, not a final-store meaning or source-route requirement | medium | actual-bridge reopen needs a new literal relation/mapping, an already-fixed Canon proof interface, or owner/canon action. Other standing-eligible ADR-0014 L3 research remains independently selectable. Do not repair WRK-0012 or reinterpret W13/W14 as diagnostics, correctness, a required repair, general direct execution, a Canon carrier choice, or Product Alpha source authority |
 | 2 | parser-free validation substrate | existing runners are compatibility anchors | medium | reproduce / existing-lane research only |
 | 3 | compile-ready actualization | Surface alpha evidence closed | heavy | maintenance only |
 | 4 | sample expansion | bounded operational evidence exists; P-SURF-05 stopped before WRK registration, and the current-root re-screen selected no new candidate | heavy | current fail-close remains; lane-catalog correspondence is owner-pending, while a concrete currently admitted non-reserved candidate may still reopen research |
@@ -188,6 +189,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 00:43 JST: temporary Oracle review and an independent disposable
+  Lean control confirmed that `example : Decidable True` can elaborate while a
+  source-visible top-level `theorem : Decidable True` cannot. WRK-0016 is
+  therefore frozen only on its registered persistent-name/no-data-declaration
+  conjunction; the planned controls were masked, and `example`, local binding,
+  `def`, `abbrev`, or `opaque` are separate future questions. No Canon/OBL/
+  Gate/Phase, implementation, sample, or workflow-status movement occurred.
 
 - 2026-07-23 00:02 JST: manifested WRK-0016 as frozen direct evidence. The
   named non-instance `Decidable` target is a value, while Lean `theorem`
