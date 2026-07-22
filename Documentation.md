@@ -107,13 +107,15 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   theorem/OBL は判断しません。詳細は
   `plan/wrk-0011-current-l2-final-store-directness.md` にあります。
 
-- post-WRK-0011 の候補再選別では、P-COMP-03 の固定された一正例・一負例を、既存
-  Product Alpha `MirCompute` carrier で直接実行できるかを調べる次の限定 L3 候補を
-  選びました。`WRK-0012` はまだ事前登録も実行もされていません。既存の helper、
-  schema、runtime、CLI を変更せず、二つの既存 row directory 内だけに置く
-  non-production sidecar package を候補とします。全 P-COMP-03、`.mir` の直接実行、
-  public interface、Canon status を主張しません。詳細は
-  `plan/170-post-wrk0011-candidate-selection.md` にあります。
+- post-WRK-0011 の候補再選別から `WRK-0012` は、P-COMP-03 の固定一正例・一負例を
+  既存 Product Alpha `MirCompute` carrier で直接実行するために事前登録されました。
+  二つの non-production sidecar は登録済み command の観測を満たしましたが、必須の
+  番号付き結果 artifact を保持するには許可外の validator/source-hierarchy change が
+  必要となったため record は `frozen` です。sidecar 二つだけが artifact であり、
+  R-2347 は履歴 metadata に留まります。全 P-COMP-03、`.mir` の直接実行、public
+  interface、Canon status は主張しません。次の候補はこの結果を再利用せず、admissible
+  artifact path を独立に事前登録するか policy escalation を扱います。選定履歴は
+  `plan/170-post-wrk0011-candidate-selection.md`、現況は WRK-0012 と R-2348 にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
 research evidence は `plan/156-t0-t2-research-autonomy-envelope.md` と
@@ -153,6 +155,6 @@ agent は止まり、選択肢・影響・反例・Lean/実行証拠・非主張
 canon working state への更新は `working/WRK-####` に限られ、L3 の事前登録は ADR-0014 の
 standing predicate と commit のみで開始できます。L2 promotion だけが rebased frozen
 material の independent review を必要とし、現行は owner-authenticated trust anchor 未構成の
-ため fail-closed です。frozen L2 の follow-up は successor にします。直近の候補選別は
-`plan/170` にあり、固定された P-COMP-03 direct-carrier cut を次の事前登録対象として
-います。
+ため fail-closed です。frozen record の follow-up は in-place repair ではなく successor
+または escalation にします。`plan/170` は WRK-0012 の選定履歴であり、現在の再開点は
+admissible retention path の独立した source screen です。
