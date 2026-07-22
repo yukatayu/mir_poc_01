@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-22 15:05 JST
+最終更新: 2026-07-22 15:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -145,7 +145,7 @@ production implementation; otherwise it escalates. See
 | 31 | Post-WRK-0012 retention-boundary triage | Closed selection: an existing unnumbered `plan/wrk-...` artifact path supports a distinct retained-reproduction question without validator change. The old run remains history and WRK-0012 stays frozen. | Macro 0/1 and 2 reserve; selection closed |
 | 32 | WRK-0013 retained-reproduction registration | Closed: committed a new L3 preregistration that pins the two sidecars as inputs, declares the exact unnumbered result memo/index path and stop line, and performs no outcome command or plan/index edit. | Macro 2 parser-free substrate; registration closed |
 | 33 | WRK-0013 fresh retained reproduction | Closed: the fresh registered two-input command reproduced both classifications, and the exact unnumbered memo/index/report delta passed unchanged validation and was manifested as `not-promoted` L3 evidence. | Macro 2 parser-free substrate; closed scoped evidence |
-| 34 | Post-WRK-0013 standing-eligible target triage | Closed as evidence-backed no-candidate. Surface source-patch / ELAB lacks an exact shared literal key; the byte-identical source probe and control-flow syntax probe remain reserves because no identified outcome selects a live downstream branch. No `WRK-0014` is opened. | Macro 0/1 and 2 reserve; reopen on structural mismatch or bounded downstream decision |
+| 34 | Post-WRK-0013 standing-eligible target triage | Closed as evidence-backed no-candidate after local and whole-portfolio review. Surface source-patch / ELAB lacks an exact shared literal key; source probes, current-L2 variants, OBL-024/025 gaps, and operational reserves either duplicate prior evidence, lack live branches, or require a reserved choice. No `WRK-0014` is opened. | Macro 0/1 and 2 reserve; reopen on exact structural mismatch plus bounded downstream decision |
 
 ## self-driven macro phase reading
 
@@ -170,7 +170,7 @@ Routine non-reserved target selection is **not** a user decision gate. A target 
 | Item | What research must establish | Current route |
 | --- | --- | --- |
 | OBL-020 / OBL-021 / OBL-001 / OBL-024 / OBL-025 | whether a scoped premise or relation is canon-compatible, sufficiently explicit, and non-reserved | historical source-adequacy evidence in `plan/156`; WRK-0007 adds the LAB-only Result/write enumeration gap; plan/165 rejects the next apparent variants as duplicate or reserved. ADR-0014 eligibility remains independent; P008 reserves only BND-001 totality interpretation. No `theory/11` movement |
-| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Post-WRK-0013 triage is now closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 source observations remain reserves until a structural mismatch or documented downstream branch appears. This does not establish the old carrier result, general direct execution, or workflow readiness. |
+| textual runnable research core | whether existing source-first lanes can yield a distinct direct execution or literal parity question without changing governance | WRK-0013 retained fresh execution provenance and the existing unnumbered result-memo path as not-promoted L3 evidence. Local and portfolio triage are closed as no-candidate: Surface artifacts lack an exact shared key, while Full System V1 and Product Alpha source observations remain reserves until an exact structural mismatch and documented downstream branch appear. This does not establish the old carrier result, general direct execution, or workflow readiness. |
 | existence, authority, observation, cut, diagnostics | a smallest formal boundary without turning an experiment-local carrier into canon | T-RESEARCH-009..027 are historical bounds; WRK-0008 closes only the current-L2 formal-hook attribution gap. WRK-0009 closes a separate e5 literal-identity mismatch; any mapping/synthetic-role question needs a new registered falsifier, not a helper/schema repair |
 | proof ledger integrity | that no LAB evidence is presented as a ledger/status change | `mirrorea_canon/theory/11-metatheory-ledger.md`; every ledger edit is owner-reserved |
 | literature / comparison | that a comparison clarifies an existing canon difference without importing a new primitive | `mirrorea_canon/theory/12-literature.md`; existing literature route |

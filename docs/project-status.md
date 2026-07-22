@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-22 15:05 JST
+最終更新: 2026-07-22 15:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -90,6 +90,12 @@ ELAB には事前固定できる literal span/fixture key がなく、byte-ident
 source authority、Product Alpha textual input、helper/source equivalence、general compatibility、
 runtime correctness、workflow、Canon/OBL/Gate/Phase は扱わない。
 `plan/post-wrk0013-no-candidate-disposition.md`
+
+その後の whole-portfolio review も、formal/Lean、current-L2、Surface patch、Full System
+V1、operational の各 existing lane に、二つの live downstream branch を持つ新規 L3 target
+がないことを確認した。以後は exact structural mismatch と documented downstream decision が
+同時に現れるまで `WRK-0014` を開かない。これは将来の研究禁止ではない。
+`plan/post-wrk0013-portfolio-review.md`
 
 ## 現在の停止線
 

@@ -146,6 +146,8 @@
     `plan/wrk-0013-pcomp03-retained-reproduction.md`
 122. post-WRK-0013 standing-target no-candidate disposition は
     `plan/post-wrk0013-no-candidate-disposition.md`
+123. post-WRK-0013 whole-portfolio review は
+    `plan/post-wrk0013-portfolio-review.md`
 
 ## current repo の短い要約
 
