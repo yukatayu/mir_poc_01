@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-23 00:43 JST
+最終更新: 2026-07-23 00:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -122,7 +122,7 @@ actual bridge を再開する最小条件は OBL-001 の direct-`c` または ex
 interface の owner/canon disposition である。ただしこれは ADR-0014 の別種の standing-eligible
 L3 research を閉じない。`plan/post-wrk0014-remaining-ledger-revalidation.md`
 P-SURF-05 second-admission stale-fence candidate は現行 validator により停止し、`WRK-0015` は作らなかった。後続の current-root 再選別も候補を選ばず、validator tuple の ADR-0014 existing documented LAB lane との対応は **UNRESOLVED** のまま fail-close を維持する。`plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
-これと独立した基礎 obligation 再監査は、OBL-003/005/015 の既存証跡を重複させず、現在の `captureSubset` helper の全入力決定可能性だけを L3 候補として選んだ。WRK-0016 はその exact Lean foundation の二 constructor を明示消去するソース可視トップレベルの非 instance `Decidable` 値を事前登録したが、Lean の `theorem` は `Decidable` のような値をその形で保持できず、禁止済みの data-valued declaration が必要になるため frozen になった。これは構成的 undecidability、OBL-003、Line-1、checker、Canon carrier を前進・反証せず、試験ソースは復元済みである。匿名 `example` や別の値宣言はこの結果の修理ではなく別の事前登録対象である。`plan/173-local-predicate-constructive-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`; `docs/reports/2372-wrk0016-local-predicate-constructivity-outcome.md`
+これと独立した基礎 obligation 再監査は、OBL-003/005/015 の既存証跡を重複させず、現在の `captureSubset` helper の全入力決定可能性だけを L3 候補として選んだ。WRK-0016 はその exact Lean foundation の二 constructor を明示消去するソース可視トップレベルの非 instance `Decidable` 値を事前登録したが、Lean の `theorem` は `Decidable` のような値をその形で保持できず、禁止済みの data-valued declaration が必要になるため frozen になった。これは構成的 undecidability、OBL-003、Line-1、checker、Canon carrier を前進・反証せず、試験ソースは復元済みである。planner/reviewer の再選別は、値宣言ではなく proposition-valued `captureSubset lhs rhs ∨ ¬ captureSubset lhs rhs` を唯一の後継候補として選んだ。匿名 `example` や別の値宣言はこの結果の修理ではなく別の事前登録対象であり、後継の登録・結果 command はまだ存在しない。`plan/173-local-predicate-constructive-decidability-selection.md`; `plan/174-local-predicate-proposition-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`
 ## 現在の停止線
 
 - L0/L1、core primitive、external contract、SCN expectation、conformance、Gate /

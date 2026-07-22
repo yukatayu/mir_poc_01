@@ -160,6 +160,8 @@
     `plan/172-standing-autonomy-lane-correspondence-checkpoint.md`
 129. current local predicate constructive-decidability candidate selection は
     `plan/173-local-predicate-constructive-decidability-selection.md`
+130. local predicate proposition-decidability successor selection は
+    `plan/174-local-predicate-proposition-decidability-selection.md`
 
 ## current repo の短い要約
 

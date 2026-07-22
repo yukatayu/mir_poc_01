@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 00:43 JST
+最終更新: 2026-07-23 00:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -58,9 +58,13 @@ After pushed registration, WRK-0016 executed its direct trial and froze: Lean
 rejects a `theorem` whose source-visible top-level target is `Decidable (...)`,
 so the selected non-instance value form requires a new data-valued declaration
 that the record forbids. The source was restored and the opaque-domain adverse
-probe still supplies no generic decision. An unnamed `example` or another
-declaration form changes the registered question. This is not constructive
-undecidability, Line-1, OBL-003, checker, or Canon evidence. `plan/173-local-predicate-constructive-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`; `docs/reports/2372-wrk0016-local-predicate-constructivity-outcome.md`
+probe still supplies no generic decision. A fresh planner/reviewer screen
+selected only a proposition-valued `captureSubset lhs rhs ∨ ¬ captureSubset lhs
+rhs` successor: it isolates body constructivity without using a value
+declaration. Its registration and outcome are still absent. An unnamed
+`example` or another declaration form changes the registered question. This is
+not constructive undecidability, Line-1, OBL-003, checker, or Canon evidence.
+`plan/173-local-predicate-constructive-decidability-selection.md`; `plan/174-local-predicate-proposition-decidability-selection.md`; `mirrorea_canon/working/WRK-0016-local-predicate-constructivity.md`
 
 `plan/156-t0-t2-research-autonomy-envelope.md` remains the evidence record for
 T-RESEARCH-001..033. Its `research-complete` and `decision-ready` labels do
@@ -189,6 +193,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 00:58 JST: planner and reviewer re-screened the remaining ledger
+  routes after WRK-0016. They rejected anonymous/local/value-declaration
+  repairs, duplicate OBL routes, and reserved interfaces; selected only the
+  proposition-valued `captureSubset` excluded-middle theorem as a distinct
+  future L3 candidate. No WRK, source edit, outcome command, Canon/OBL/Gate/
+  Phase, implementation, sample, or workflow-status movement occurred.
 
 - 2026-07-23 00:43 JST: temporary Oracle review and an independent disposable
   Lean control confirmed that `example : Decidable True` can elaborate while a
