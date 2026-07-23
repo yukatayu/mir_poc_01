@@ -91,7 +91,7 @@ failure paths. First-class or migratory continuations remain outside v0.
 
 | Option | Owner-level effect if selected | Required later design boundary | Immediate non-effect |
 | --- | --- | --- | --- |
-| R1 - explicit typed reply and receipt | A later package may model owner service result and requester receipt as separate, typed causal steps. The requester resumes only after its matching receipt. | It must state request/result correlation, result provenance, send/receive order, duplicate/stale/wrong-locus rejection, redaction, no raw-value history leak, and failure behavior. | Does not require a transport, delivery, fairness, retry, or public wire protocol. |
+| R1 - explicit typed reply and receipt | A later package may model owner service result and requester receipt as separate, typed causal steps. The requester resumes only after its matching receipt. | It must state request/result correlation, result provenance, send/receive order, duplicate/stale/wrong-locus rejection, redaction, no raw-value history leak, and failure behavior. | Does not require a transport, delivery, fairness, retry, or public wire protocol, and does not decide an acknowledgement for a successful write. |
 | R2 - abstract receipt with refinement | A later package may abstract delivery into a service-level result only with an explicit refinement/linearization relation that proves no separately observable or interleavable receipt fact was hidden. | It must still provide a unique requester-side pending-control transition and account for failure, save/load, and causality. | Does not make a hidden callback, future, or transport event into a semantic carrier. |
 | RD - defer | OPEN-011 remains unresolved; a proof or implementation may not assume a successful-reply mapping. | A package needing result delivery stops for a successor decision. | Does not reject either future model. |
 
@@ -106,7 +106,7 @@ refinement boundary; it is not an implicit shortcut.
 
 | Option | Owner-level effect if selected | Required later design boundary | Immediate non-effect |
 | --- | --- | --- | --- |
-| SW1 - atomic served-write occurrence | A later package may represent validation and one owner mutation by one typed `ServedWrite` occurrence carrying named service and mutation facets. | It must state the projection-to-DAG rule, make the same node satisfy the state-mutation predicate, preserve validated capability/witness lineage, and leave independently observable reply/receipt facts to R. | Does not permit an opaque batch delta, erase request/failure occurrences, or merge transport identity with authority. |
+| SW1 - atomic served-write occurrence | A later package may represent validation and one owner mutation by one typed `ServedWrite` occurrence carrying named service and mutation facets. | It must state the projection-to-DAG rule, make the same node satisfy the state-mutation predicate, preserve validated capability/witness lineage, and account separately for any reply/receipt fact. Question R remains limited to read results and does not decide a successful-write acknowledgement. | Does not permit an opaque batch delta, erase request/failure occurrences, or merge transport identity with authority. |
 | SW2 - decomposed service and write | A later package may represent validation/service and a later mutation by distinct occurrences. | It must state the pending authorized-operation state, causal edges, intermediate observability, revocation/epoch/time-of-check protection, and failure/no-mutation behavior. | Does not require a queue, delivery, fairness, retry, cryptographic, or transport model. |
 | SWD - defer | The current `[E-SERVE]` wording remains a rule sketch only; no proof or implementation may assume one particular event identity. | Any package requiring service-event identity stops for a successor decision. | Does not reject future decomposition or composite representation. |
 
@@ -134,10 +134,23 @@ separately failing, observable, or schedulable issuance phase needs A1 instead.
 
 ## Dependency and verification order
 
-`V` and `R` govern read-result service. `S` governs served writes and is
-otherwise independent of `R`; `A` is independently answerable. The four
-dispositions may be mixed; this
-proposal does not require all to be accepted at once.
+The four dispositions may be recorded separately and mixed at the **owner
+decision** level; this proposal does not require all to be accepted at once.
+Neither packet recordability nor any individual or mixed tuple is evidence of
+semantic compatibility, a shared proof model, or an implementation. `V`
+concerns a result's use in dependent computation, while `R` is limited to a
+successful cross-locus read result; this proposal does not decide a
+successful-write acknowledgement. `S` is a separate owner question for
+write-only service, not a claim that its runtime carrier is disjoint from `R`.
+`A` is independently answerable, not causally isolated from its already named
+grant/use, witness/use, and membership/dispatch orders.
+
+No Canon wording requires the owner to answer `V` before `R`. The LAB package
+sequencing in `plan/187` is advice for a later design that needs read-returning
+service, not a runtime or causal ordering rule. In particular, the current
+sources do not provide the relation that would compose a read receipt or
+abstract result availability through dependent computation into SCN-02's later
+write; that relation remains unresolved until a later selected design package.
 
 Before any resulting Canon amendment, a later design package must test its
 chosen family against SCN-02; owner-serial service; request-to-serve,

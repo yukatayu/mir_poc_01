@@ -601,7 +601,7 @@
    "summary": "read の値フロー、成功 service、admission の occurrence identity を個別に owner へ問う。Core、OBL、Gate、runtime は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md",
-   "bytes": 13203
+   "bytes": 14318
   },
   {
    "id": "meta/source-hierarchy",

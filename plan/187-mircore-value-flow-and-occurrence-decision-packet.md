@@ -59,12 +59,12 @@ sources, not claimed published minimality theorems for Mir:
 
 `PROPOSAL-012` asks the owner for four independently recordable dispositions:
 
-| ID | Alternatives | Dependency | Why it is separate |
+| ID | Alternatives | LAB design-package sequencing | Why it is separate |
 | --- | --- | --- | --- |
-| V | V1 restricted result-binding contract; VD defer | First for read-returning service | An evaluation frame may be an equivalent presentation of V1, not a no-semantics alternative. |
-| R | R1 explicit typed reply/receipt; R2 explicit abstract-receipt refinement; RD defer | After V and before read-returning service | It decides how one requester can resume without a hidden callback. |
-| S | SW1 atomic served-write with typed facets; SW2 decomposed service/write; SWD defer | Independent of R for write-only service | It decides successful owner mutation identity, not admission lifecycle. |
-| A | A1 decomposed admission occurrences; A2 composite admission/verdict occurrence with explicit projections; AD defer | Independent | It decides membership/grant/witness identity, not read computation. |
+| V | V1 restricted result-binding contract; VD defer | First issue to make explicit in a package that needs a read value in dependent computation | An evaluation frame may be an equivalent presentation of V1, not a no-semantics alternative. |
+| R | R1 explicit typed reply/receipt; R2 explicit abstract-receipt refinement; RD defer | A later package for cross-locus read return must reconcile its pending-control interface with V; no Canon owner-answer order is asserted | It decides how one requester can resume without a hidden callback. |
+| S | SW1 atomic served-write with typed facets; SW2 decomposed service/write; SWD defer | Separate question for write-only service; this does not assert a disjoint runtime carrier from R | It decides successful owner mutation identity, not admission lifecycle. |
+| A | A1 decomposed admission occurrences; A2 composite admission/verdict occurrence with explicit projections; AD defer | Separately recordable owner question; this does not assert causal isolation from later service | It decides membership/grant/witness identity, not read computation. |
 
 The candidate families deliberately exclude a new fused read-modify-write
 primitive, general continuations, generic I/O, source syntax for S1
@@ -72,6 +72,18 @@ requests/publications or S2 occurrences, transport-defined authority, and
 domain vocabulary. S5 domain events remain distinct and may appear in source.
 Those alternatives would
 either prematurely specialize the Core or contradict existing L0/L1 boundaries.
+
+### Packet-reading boundary
+
+The table organizes owner questions only. `PROPOSAL-012` permits separate and
+mixed dispositions, but neither recordability nor any individual or mixed tuple
+is a claim of semantic compatibility, proof readiness, or executability. Its R
+scope is a successful **read** result; it neither supplies nor rules out a
+successful-write acknowledgement. The current sources do not select a common
+pending-control or correlation carrier for V/R, the V/R/S composition used by
+SCN-02, or the occurrence/projection carrier that realizes A's already named
+causal links to later service. These are `UNRESOLVED` design boundaries, not
+consequences of the table or of its sequencing column.
 
 ## Required later proof obligations
 

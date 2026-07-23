@@ -103,8 +103,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   後二者は owner/canon clarification 待ちであり、実装や proof の完了を意味しません。BND-001 outcome は
   既存 PROPOSAL-008 の独立した owner boundary のままです。
 - PROPOSAL-012 / Plan 187 は上の二境界を、`V` (read の値フロー)、`R` (成功 read の受領)、`S` (成功 write service)、
-  `A` (admission) の独立した owner disposition として整理します。`V1/R1/SW1/conditional A2` は研究上の推奨であり
-  採択ではありません。`PROPOSAL-008` と `PROPOSAL-009` は独立のまま保ち、LAB 実装は tie-breaker とも扱いません。
+  `A` (admission) の個別記録可能な owner disposition として整理します。個別記録・個別/混合 tuple は意味論的な互換性や実行可能性を意味せず、
+  `V -> R` の順序は LAB の設計順序、`R` は read 受領だけを対象とします。V/R/S の合成と A から後続 service への occurrence/projection carrier は未決です。
+  `V1/R1/SW1/conditional A2` は研究上の推奨であり採択ではありません。`PROPOSAL-008` と `PROPOSAL-009` は独立のまま保ち、LAB 実装は tie-breaker とも扱いません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing
