@@ -220,8 +220,9 @@ documentation validation passed.
 
 ## Commit / push status
 
-Pending final validation, focused review, commit with `--no-gpg-sign`, and
-push to `origin/main`.
+The parser, test, snapshot, and report package was committed as `cab894db`
+with `--no-gpg-sign` and pushed to `origin/main`. A documentation-only closeout
+commit follows to record this status.
 
 ## Sub-agent session close status
 

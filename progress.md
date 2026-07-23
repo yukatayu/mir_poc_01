@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 06:33 JST
+最終更新: 2026-07-24 08:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -237,6 +237,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 08:02 JST: committed and pushed `cab894db`, which makes the
+  bounded LAB parser fail closed for unlowered compound, `let` / `if`, and
+  equality forms and proves parse-stage source-patch rejection. Full Rust
+  workspace tests, final `make check`, three captured 87-test documentation
+  suites, and final narrow review passed. No Canon semantics, OBL, Gate/Phase,
+  sample workflow, or public claim moved; PROPOSAL-012 V/R remains the next
+  owner decision boundary.
 
 - 2026-07-24 06:33 JST: final review also found `let`, `if`, and `==` dispatch
   defects, plus compound forms hidden by braced/nested target or RHS contexts.
