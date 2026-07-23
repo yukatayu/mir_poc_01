@@ -190,6 +190,8 @@
     `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 144. cost-bound substitutability primary-literature audit は
     `plan/185-cost-bound-substitutability-primary-literature-audit.md`
+145. canonical elaboration/trace interface-closure audit は
+    `plan/186-canonical-elaboration-trace-interface-closure-audit.md`
 
 ## current repo の短い要約
 
@@ -741,6 +743,8 @@
   `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 - cost-bound substitutability primary-literature audit:
   `plan/185-cost-bound-substitutability-primary-literature-audit.md`
+- canonical elaboration/trace interface-closure audit:
+  `plan/186-canonical-elaboration-trace-interface-closure-audit.md`
 
 ## maintenance rule
 

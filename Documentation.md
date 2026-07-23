@@ -28,7 +28,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/182-canon-core-minimality-and-proof-interface-audit.md`、
 `plan/183-transparent-cost-bound-substitutability-decision.md`、
 `plan/184-post-wrk0021-autonomous-frontier-triage.md`、
-`plan/185-cost-bound-substitutability-primary-literature-audit.md`
+`plan/185-cost-bound-substitutability-primary-literature-audit.md`、
+`plan/186-canonical-elaboration-trace-interface-closure-audit.md`
 
 ## 最初に読む順序
 
@@ -96,6 +97,10 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   分離します。一次文献比較は、transparent rule に carrier/fragment、比較方向、未知・比較不能時の
   扱い、composition premise が必要だと整理しただけで、最終 cost algebra、runtime、OBL、patch
   carrier や proposal の選択は行いません。
+- Plan 186 は、proof model 前の Canon source audit として、dependency row が `G_e` に属することを
+  明示記述から確認し、Core の値フローと remote service/admission の occurrence identity を分離しました。
+  後二者は owner/canon clarification 待ちであり、実装や proof の完了を意味しません。BND-001 outcome は
+  既存 PROPOSAL-008 の独立した owner boundary のままです。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

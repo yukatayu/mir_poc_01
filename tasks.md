@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 01:50 JST
+最終更新: 2026-07-24 02:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -71,6 +71,13 @@ algebra, runtime model, OBL, patch carrier, Core feature, or implementation work
 Its primary-literature audit now identifies the carrier/fragment, comparison
 direction, unknown/incomparable policy, and composition premise that any
 transparent rule would need, but it does not select an alternative.
+
+The Canon elaboration/trace interface audit is closed as LAB source evidence.
+It confirms that dependency rows belong to `G_e` and identifies two unselected
+Core/occurrence boundaries: a value-flow relation from `read` to computed
+`write`, and the event identity of service/admission effects. No repair, Core
+extension, or proof model is selected. BND-001 outcome interpretation remains
+the existing independent PROPOSAL-008 owner question.
 
 WRK-0020 is frozen. Its exact registered source-audit command failed at shell
 quoting before it could establish any text fact, so it supplies no
@@ -220,6 +227,7 @@ production implementation; otherwise it escalates. See
 | 56 | WRK-0021 CostBudget scalar-projection countermodel | Closed frozen: after pushed registration, the marker was absent but Lean could not synthesize `Decidable` for either registered comparison alias. The attempted theorem and manifest update were restored; no finite countermodel result is retained. | Macro 1/5 reserve; do not repair or retry this record. A later CostBudget experiment needs a distinct registration and must not select a Contract cost rule, final algebra, runtime accounting, or PROPOSAL-011 outcome. |
 | 57 | Post-WRK-0021 autonomous frontier triage | Closed no-candidate: local source inventory, an independent reviewer, and temporary Oracle review agree that no current permitted-lane locus has a non-duplicative question, bounded falsifier, and live non-reserved retain/reject consumer. | Macro 0/1 and 2 reserve; do not manufacture a successor. Reopen only on a new admitted source-locus dossier, an existing second relation plus importer, or a prior owner/canon disposition that concretely removes the named boundary. |
 | 58 | Cost-bound substitutability primary-literature audit | Closed LAB decision support: primary sources require an explicit resource carrier/fragment, comparison direction, unknown/incomparable policy, and composition premise before transparent resource refinement can be used. They do not classify the existing field, select a Mir algebra, or validate the LAB counter. | Macro 1 owner-support close; record its matrix in Plan 185. Do not create a WRK from the audit. A later canon disposition may use the matrix to define a scoped A, select B/C/D, or retain the boundary. |
+| 59 | Canonical elaboration/trace interface-closure audit | Closed read-only source audit: dependency rows are explicitly in `G_e`, so the initial carrier-mismatch reading was corrected. Core read-to-write value flow and serve/admit occurrence identity are not literally closed. The metadata-cycle advisory claim was rejected because Canon permits mutual knowledge dependencies. | Current owner/canon clarification boundary. Do not build a proof model or implementation that assumes an evaluation device or composite/decomposed event model. A complete `G_e` schema is future proof-representation work, not a reason to move dependency rows. PROPOSAL-008 remains independent. |
 
 ## self-driven macro phase reading
 
@@ -235,6 +243,7 @@ production implementation; otherwise it escalates. See
 | PROPOSAL-009 OBL-001 Core/write statement interface | whether a future proof-facing package states the existing Core `c` clause directly or derives it through an explicit output/Core correspondence | A direct Core; B explicit bridge; C defer | direct-`c` remains LAB advice only; do not identify experiment-only Result with Canon Core |
 | PROPOSAL-010 locus/admission subject wording | whether the overview's undefined child-locus/admission-path sentence is replaced, deleted, made an extension question, or deferred unchanged | A existing admission summary; B delete; C future extension; defer | A: retain only the existing principal/admission model and do not introduce hierarchy or provenance semantics |
 | PROPOSAL-011 Contract cost-bound transparency | whether and how a changed `cost_bound` participates in transparent overlay before the final algebra is selected | A owner-selected scoped non-weakening; B explicit update per change; C advisory; D interpretation defer | Plan 185: A requires carrier/fragment, direction, unknown/incomparable policy, and composition premise; B is conservative while none is selected; C requires an affirmative advisory policy; D preserves openness. No current Canon rule is inferred. |
+| Canon elaboration/trace closure | whether Core value flow and service/admission event identity should be clarified before formal transcription | existing/open Core value-flow relation; composite/decomposed events | Plan 186 is an escalation packet, not a Canon proposal or selected repair. `G_e` dependency membership is already fixed by the existing text; human/canon review is required before a proof model relies on either remaining answer. |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
 | SCN-08 scalar state syntax | whether frozen avatar fallback scenario is valid under the current indexed-only `StateDecl` grammar | permit scalar state; rewrite the scenario with an index; defer exact parser applicability | owner chooses; do not silently extend grammar or rewrite SCN-08 |

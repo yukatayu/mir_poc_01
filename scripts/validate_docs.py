@@ -620,6 +620,7 @@ REQUIRED = [
     "plan/183-transparent-cost-bound-substitutability-decision.md",
     "plan/184-post-wrk0021-autonomous-frontier-triage.md",
     "plan/185-cost-bound-substitutability-primary-literature-audit.md",
+    "plan/186-canonical-elaboration-trace-interface-closure-audit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

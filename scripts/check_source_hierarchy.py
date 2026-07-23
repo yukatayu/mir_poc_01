@@ -271,6 +271,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/183-transparent-cost-bound-substitutability-decision.md",
         "plan/184-post-wrk0021-autonomous-frontier-triage.md",
         "plan/185-cost-bound-substitutability-primary-literature-audit.md",
+        "plan/186-canonical-elaboration-trace-interface-closure-audit.md",
     ],
     "scripts": [
         "scripts",
