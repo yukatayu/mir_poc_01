@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 22:05 JST
+最終更新: 2026-07-23 22:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -62,6 +62,17 @@ PROPOSAL-010 separately asks how to remove the undefined `child locus` /
 principal/admission summary, delete the sentence, or defer any hierarchy intent
 to a later extension. It adds no locus hierarchy, membership-provenance rule,
 Core feature, OBL, or implementation work.
+
+The post-PROPOSAL-010 independent frontier screen is closed without opening
+`WRK-0020`. The nearest concrete runtime/Surface candidates are outside the
+current permitted LAB roots and therefore remain behind the unresolved
+lane-catalog correspondence; the admitted current-L2 and Product Alpha variants
+are already retained evidence or coverage widening. This screen applies fresh
+source discrimination and a non-reserved downstream decision as LAB
+prioritization filters, and selected no candidate. It is a source-cut
+disposition, not a restriction on future ADR-0014 eligibility. Reapply this
+screen when an already permitted literal mismatch with a live retain/reject
+decision appears, or after the owner/canon resolves the lane-catalog boundary.
 
 WRK-0008's scoped L3 audit is now closed in the existing current-L2 lane; its
 Canon working record remains `L3-open`. Its
@@ -181,6 +192,7 @@ production implementation; otherwise it escalates. See
 | 50 | Independent source-locus audit | Closed with no candidate under the current LAB prioritization screen: generated-failure containment lacks a live consumer and reaches a reserved failure/Core bridge; outcome production is WRK-0004/PROPOSAL-008; observer export is frozen WRK-0018. Independent local, sub-agent, and Oracle screens agree. | Macro 1/5 reserve; reapply this screen on a new literal mismatch with a named current consumer and a non-reserved adverse branch. Do not replay a prior Lean artifact to manufacture a target. This does not narrow ADR-0014. |
 | 51 | T1/T2 statement identity and dependency closure audit | Closed read-only audit: all listed exit-critical T1/T2 OBL rows now distinguish Canon domain, available LAB evidence, and the first missing formal relation. It rejects proof laundering and does not select direct-Core versus Result enumeration, complete step coverage, outcome totality, chain relation, or save/load model. | Macro 1/5 checkpoint; use `plan/180` to prepare owner/canon decisions and a later common proof model. Non-OBL Gate/SCN criteria remain separately scoped. No WRK or OBL/Gate/Phase movement. |
 | 52 | WRK-0019 P-COMP-03 bounds direct-carrier evidence | Closed scoped result: the one exact existing-lane non-production arrays-bounds `world` sidecar passed Product Alpha `check`; `run-local` returned exit 2 with the registered `MirCompute` / `OutOfBounds` detail. No helper/schema/validator/runtime/CLI change, phase assertion, public error contract, general carrier, or workflow claim follows. | Macro 2 parser-free substrate reserve; retain as `not-promoted` L3 evidence. No successor is selected automatically; reopen only on a distinct pre-registrable input with a live decision consumer. |
+| 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate: independent local, planner, reviewer, and Oracle checks selected no new ADR-0014 record under this source-cut LAB prioritization screen. It applies a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. | Macro 0/1 and 2 reserve; do not open WRK-0020 or run a candidate outcome command under this screen. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
 
 ## self-driven macro phase reading
 
