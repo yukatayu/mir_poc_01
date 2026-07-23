@@ -100,10 +100,11 @@ Theory core correspondence audit は、既存 Lean source を clean worktree で
 current LAB OBL-001 draft の Core `c` / opaque Result enumeration gap、current LAB
 OBL-020 wrapper の global / familywise coverage boundary、current LAB OBL-021 coherence
 draft の totality separation を再確認した。これは Canon OBL の反証・完了・変更ではない。
-現時点の proof-facing package は OBL-001 を直接 `c` に結び、coverage を示さない
-familywise result を global result として扱わず、PROPOSAL-008 について owner response と
-required Canon process が完了するまで OBL-021 で outcome existence を仮定または非主張に
-留める。`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`
+現時点の proof-facing package では、OBL-001 の direct-`c` route も output/Core
+correspondence route も owner により選ばれていない。coverage を示さない familywise result を
+global result として扱わず、PROPOSAL-008 について owner response と required Canon process が
+完了するまで OBL-021 で outcome existence を仮定または非主張に留める。
+`plan/171-theory-core-correspondence-and-disposition-checkpoint.md`
 
 WRK-0014 は、same-carrier の parameterized relation に限定した三つの conditional Lean
 lemma を manifest した。universal safety/coherence は intended-to-model inclusion を前提とする
@@ -146,7 +147,7 @@ P-SURF-05 second-admission stale-fence candidate は現行 validator により�
 | ID | 状態 | いま必要なこと |
 | --- | --- | --- |
 | G0-D3 | DEFERRED (dormant) | owner が明示的に reopen するまで選定しない。 |
-| OBL-001 Core/result correspondence | owner/canon record pending | future proof-facing package が Result carrier を使うなら、THM-001 の `c` write とどう対応させるかを明示する。現在は direct-`c` reading を推奨し、実験用 Result を Core と同一視しない。 |
+| OBL-001 Core/write correspondence | PROPOSAL-009 owner record pending | 将来の proof-facing package は THM-001 の既存 `c` write 条件を直接表明するか、同条件を導く明示 correspondence を持つ output view にするかを選ぶ。実験用 Result を Core と同一視しない。 |
 | PROPOSAL-003 | owner record pending | OBL-020 organization の A / B / C。 |
 | PROPOSAL-004 | owner record pending | Surface v0 grammar closure の A / B / C。LAB recommendation は A。 |
 | PROPOSAL-008 | owner record pending | BND-001 outcome totality の読みと、将来の obligation placement。 |

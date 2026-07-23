@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 98,
+ "files": 99,
  "entries": [
   {
    "id": "root/changelog",
@@ -530,6 +530,22 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md",
    "bytes": 4897
+  },
+  {
+   "id": "meta/proposal-009",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "theory/11-metatheory-ledger",
+    "adr/ADR-0014",
+    "plan/02-operating-model"
+   ],
+   "summary": "THM-001 / OBL-001 の proof-facing Core/write statement interface を owner に問う。Core、OBL、Gate、proof status は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-009-obl001-core-write-correspondence.md",
+   "bytes": 7433
   },
   {
    "id": "meta/source-hierarchy",

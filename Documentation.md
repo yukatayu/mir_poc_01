@@ -82,6 +82,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - Foundation audit は、Core に不要な domain/I/O primitive を見つけず、BND-001 の
   outcome-totality 読みだけを owner-reserved な PROPOSAL-008 として分離しました。
   これは OBL/Gate/Phase の変更ではありません。
+- PROPOSAL-009 は、THM-001 の既存 Core `c` write 条件を将来の OBL-001 package が
+  直接表明するか、明示 correspondence を持つ output view で表明するかを owner に問います。
+  実験用 Result を Core と同一視せず、Core/runtime/OBL の意味は変更しません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

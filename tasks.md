@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 18:19 JST
+最終更新: 2026-07-23 21:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -49,6 +49,13 @@ disconnection repeats existing evidence; OBL-025 scope/metadata variants are
 explicit LAB scope or the recorded repair-realization boundary; and OBL-024
 projection variants require an unselected field-functionality reading. This is
 a new evidence-backed priority disposition, not a Canon ban on future L3 work.
+
+PROPOSAL-009 now makes the OBL-001 owner/canon boundary explicit: a later
+proof-facing package must either state THM-001's existing Core `c` write
+condition directly, use an output view with an explicit correspondence that
+derives that condition, or remain deferred. This does not select a carrier,
+runtime occurrence model, or proof artifact, and it leaves PROPOSAL-008's
+outcome-totality question independent.
 
 WRK-0008's scoped L3 audit is now closed in the existing current-L2 lane; its
 Canon working record remains `L3-open`. Its
@@ -180,7 +187,7 @@ production implementation; otherwise it escalates. See
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
-| OBL-001 Core/result correspondence | whether a future proof-facing package uses direct Core `c` or a selected Result/write enumeration bridge | defer; authorize a specific formalization boundary | prefer direct-`c` reading; do not identify experiment-only Result with Canon Core |
+| PROPOSAL-009 OBL-001 Core/write statement interface | whether a future proof-facing package states the existing Core `c` clause directly or derives it through an explicit output/Core correspondence | A direct Core; B explicit bridge; C defer | direct-`c` remains LAB advice only; do not identify experiment-only Result with Canon Core |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
 | SCN-08 scalar state syntax | whether frozen avatar fallback scenario is valid under the current indexed-only `StateDecl` grammar | permit scalar state; rewrite the scenario with an index; defer exact parser applicability | owner chooses; do not silently extend grammar or rewrite SCN-08 |
