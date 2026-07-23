@@ -182,6 +182,8 @@
     `plan/183-transparent-cost-bound-substitutability-decision.md`
 140. WRK-0019 P-COMP-03 bounds direct-carrier evidence は
     `plan/wrk-0019-pcomp03-bounds-direct-carrier.md`
+141. WRK-0020 option-admit literal-audit falsifier は
+    `plan/wrk-0020-option-admit-carrier-literal-audit.md`
 
 ## current repo の短い要約
 
@@ -725,6 +727,8 @@
   `plan/182-canon-core-minimality-and-proof-interface-audit.md`
 - transparent cost-bound substitutability decision memory:
   `plan/183-transparent-cost-bound-substitutability-decision.md`
+- WRK-0020 option-admit literal-audit falsifier:
+  `plan/wrk-0020-option-admit-carrier-literal-audit.md`
 
 ## maintenance rule
 

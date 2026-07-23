@@ -63,7 +63,7 @@ the committed and clean-worktree-audited PROPOSAL-011 package.
   working-record validator/control-file inspection
 - Canon index rebuild/check and `git diff --check`
 - focused registration-diff review
-- post-commit validation and push remain to run
+- post-commit `make check` and push of `fec0a0da`
 
 ## Evidence / outputs / test results
 
@@ -143,7 +143,10 @@ execution applies to this source-only registration.
 
 ## Commit / push status
 
-Pending validation, commit, and immediate push with `--no-gpg-sign`.
+The registration was committed with `--no-gpg-sign` as `fec0a0da`
+(`research: preregister option admit carrier audit`) and pushed to
+`origin/main`. Its post-commit `make check` passed before the separate
+post-push execution package began.
 
 ## Sub-agent session close status
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 00:06 JST
+最終更新: 2026-07-24 00:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -69,10 +69,10 @@ owner-selected scoped non-weakening relation, explicit update for every bound
 change, advisory treatment, or interpretation defer. It selects no final cost
 algebra, runtime model, OBL, patch carrier, Core feature, or implementation work.
 
-WRK-0020 registration is prepared but unexecuted. It asks only whether the pinned
-theory/01 Option syntax and the pinned theory/06 / Surface / companion / e3
-texts have a literal option-local `admit` carrier correspondence. It cannot
-choose whether a carrier belongs in Option, constraints, residual obligations,
+WRK-0020 is frozen. Its exact registered source-audit command failed at shell
+quoting before it could establish any text fact, so it supplies no
+Option/admit carrier correspondence result. It cannot be repaired or rerun;
+it also cannot choose a carrier in Option, constraints, residual obligations,
 another Core form, grammar, parser, or runtime.
 
 The post-PROPOSAL-010 independent frontier screen is closed without opening
@@ -206,7 +206,7 @@ production implementation; otherwise it escalates. See
 | 52 | WRK-0019 P-COMP-03 bounds direct-carrier evidence | Closed scoped result: the one exact existing-lane non-production arrays-bounds `world` sidecar passed Product Alpha `check`; `run-local` returned exit 2 with the registered `MirCompute` / `OutOfBounds` detail. No helper/schema/validator/runtime/CLI change, phase assertion, public error contract, general carrier, or workflow claim follows. | Macro 2 parser-free substrate reserve; retain as `not-promoted` L3 evidence. No successor is selected automatically; reopen only on a distinct pre-registrable input with a live decision consumer. |
 | 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate: independent local, planner, reviewer, and Oracle checks selected no new ADR-0014 record under this source-cut LAB prioritization screen. It applies a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. | Macro 0/1 and 2 reserve; do not open WRK-0020 or run a candidate outcome command under this screen. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
 | 54 | Contract cost-bound transparency decision packet | Current Canon lists `cost_bound` in Contract but not in its named transparent-overlay conditions. The text does not settle whether that list is complete or how a cost-only change is treated. PROPOSAL-011 exposes A owner-selected scoped non-weakening, B explicit update until algebra selection, C advisory treatment, and D interpretation defer; no alternative is selected. | Owner/canon decision boundary; do not amend theory/02, OBL-026, patch compatibility, runtime, or final algebra from LAB samples. An independent L3 sample-model countermodel may proceed only through separate pre-registration. |
-| 55 | WRK-0020 Option/admit literal audit | Registration draft prepared, no outcome yet: pin the theory/01 Option form, theory/06 option form, Surface grammar, Core companion, plan/07, and current-L2 e3. The alternative is an already explicit theory/01-local carrier or absent option-local `admit` in one of the named texts. | Macro 1/5 current scoped research. Commit and push the registration, then run only its exact digest/literal command. A mismatch is owner-decision evidence, never a carrier/grammar/parser/runtime repair. |
+| 55 | WRK-0020 Option/admit literal audit | Frozen command-level falsifier: after pushed registration, backticks in the exact double-quoted Python command were shell-substituted; Bash reported `OptionDecl.admit: command not found`, then Python raised `AssertionError`. No literal source result is retained. | Closed scoped route. Do not repair or retry this record. A later audit requires an independently selected fresh question and registration; it must not infer a carrier/grammar/parser/runtime conclusion from this failure. |
 
 ## self-driven macro phase reading
 

@@ -58,17 +58,26 @@ Non-claims: This does not decide whether `admit` belongs in Option, a constraint
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: not-run
-Negative evidence: not-run
+Reliance status: frozen
+Positive evidence: none. The registered command did not complete its source
+audit, so it establishes no literal carrier mismatch or source consistency
+result.
+Negative evidence: After registration commit `fec0a0da` was pushed, the exact
+registered command was extracted and evaluated. Bash interpreted the backticked
+`OptionDecl.admit` substring in the double-quoted `python3 -c` program as
+command substitution, printed `OptionDecl.admit: command not found`, and the
+altered Python program raised `AssertionError`. This is the registered
+`cannot establish the exact selected text facts` falsifier. The unconditional
+following shell `printf` returned zero but was outside the registered command
+and is not success evidence. Do not repair or rerun this record.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: The registered outcome is limited to whether the pinned
-named texts literally agree on an explicit option-local `admit` carrier. It
+Impact / non-effects: This route is frozen before it establishes whether the
+pinned named texts literally agree on an option-local `admit` carrier. It
 introduces no source, test, helper, schema, CI/Make target, API, runtime,
-contract, proof-status, conformance, Gate, Phase, or public claim. A positive
-literal mismatch is evidence for a later owner decision, not an instruction to
-choose its resolution.
+contract, proof-status, conformance, Gate, Phase, or public claim. A future
+inquiry needs a distinct fresh pre-registration; it must not repair or reuse
+this record as source-consistency evidence.
 Independent review: not-required-for-L3
 
 ## Supersession

@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 9614
+   "bytes": 9640
   },
   {
    "id": "root/north-star",
@@ -1433,7 +1433,7 @@
    "summary": "option-local admit を含む Canon の chain / Surface / companion notation と theory/01 の Option payload の literal carrier 対応を既存 current-L2 lane で監査する。carrier、grammar、OBL は選ばない。",
    "open_items": [],
    "path": "working/WRK-0020-option-admit-carrier-literal-audit.md",
-   "bytes": 7081
+   "bytes": 7795
   }
  ]
 }
