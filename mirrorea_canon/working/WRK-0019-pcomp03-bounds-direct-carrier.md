@@ -147,11 +147,27 @@ Non-claims: Observed `OutOfBounds` is retained as LAB evidence only. It is not a
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: none
-Negative evidence: none
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: Registration adds no sidecar and executes no candidate command. Existing helper, registry, Product Alpha runtime, and CLI material remain pinned read-only execution machinery until the separately committed evidence package. No Canon theory, helper, schema, validator, runtime, CLI, public behavior, OBL, Gate, Phase, conformance, sample-dashboard workflow classification, or project-completion status changes at registration.
+Positive evidence: After the registration was pushed, the exact registered command
+matched all four pinned input digests. The 15-row matrix and `check-all` passed;
+each registered focused Rust test passed. The declared sidecar checked as
+`accepted`, and `run-local` exited 2 with `diagnostic_code` `MirCompute` and
+the registered `OutOfBounds: array index 1 is out of bounds for length 1`
+detail. The JSON assertions returned 0.
+Negative evidence: No registered falsifier occurred: the sidecar is structurally
+identical to the pre-registered JSON, all four inputs matched, no helper,
+schema, validator, CI/Make surface, Rust crate, runtime, CLI, public API, or
+Canon file changed, and only the declared sidecar/LAB memo/index/direct report
+were retained. This does not make the helper and Product Alpha routes the same
+path or promote a phase/carrier conclusion.
+Evidence artifacts: LAB:samples/product-alpha1/computational/arrays-bounds/negative/direct-world/package.mir.json@249bc846678550e98ccca21bb38036b0ca4fea28:7d833a2c2e41a5dfc695246716e1a8343a5a3d1dca26bc29d9b6d0d86370d8f3, LAB:plan/wrk-0019-pcomp03-bounds-direct-carrier.md@249bc846678550e98ccca21bb38036b0ca4fea28:28cc041f77e121df09573dfaa79cf4808aa5ca511b4bbce1e5bc57c34987828d
+Evidence commits: 249bc846678550e98ccca21bb38036b0ca4fea28
+Impact / non-effects: The retained artifacts are exactly the declared sidecar
+and LAB memo with index/report metadata at the listed evidence commit; temporary
+JSON/session output is disposable. This is a fixed non-production package-path
+observation only. No Canon theory, helper, schema, validator, runtime, CLI,
+public behavior, public failure contract, failure phase, general carrier,
+OBL, Gate, Phase, conformance, sample-dashboard workflow classification, or
+project-completion status changes.
 Independent review: not-required-for-L3
 
 ## Supersession

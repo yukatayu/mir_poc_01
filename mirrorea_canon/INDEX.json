@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 9250
+   "bytes": 9242
   },
   {
    "id": "root/north-star",
@@ -1365,7 +1365,7 @@
    "summary": "P-COMP-03 arrays-bounds negative の既存 helper input を、非 production の一つの Product Alpha world sidecar で既存 check/run-local 経路へ通したときの固定 MirCompute error 観測を検査する可逆 L3 record。helper、schema、runtime、CLI、public failure carrier は変更しない。",
    "open_items": [],
    "path": "working/WRK-0019-pcomp03-bounds-direct-carrier.md",
-   "bytes": 11483
+   "bytes": 12738
   }
  ]
 }
