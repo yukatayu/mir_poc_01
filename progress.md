@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 01:04 JST
+最終更新: 2026-07-24 01:11 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -230,6 +230,11 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 01:11 JST: manifested WRK-0021's frozen failure memo with the
+  exact source-evidence commit and SHA-256. A clean detached worktree at that
+  manifest commit passed Canon index, source-hierarchy, and documentation
+  validation; this validates record/document structure, not a CostBudget result.
 
 - 2026-07-24 01:04 JST: after `4ac08f77` was pushed, WRK-0021's pre-source
   marker passed but its registered Lean proof could not synthesize `Decidable`

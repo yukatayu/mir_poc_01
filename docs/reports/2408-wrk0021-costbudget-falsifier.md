@@ -66,6 +66,10 @@ they are restored in this package.
 - the exact registered `lean --trust=0` proof, source audit, clean-near-end
   typing runner, Lean manifest sync, and manifest diff check sequence once
 - focused failure inspection and restoration diff review
+- frozen evidence commit `fbfbc31a8ec0ac4a085b704a21400326b7b96952` and
+  metadata manifest commit `6628784a3b6e77e85b74fb61bbb63bdafe5e93f2`
+- clean detached-worktree `make docs` at `6628784a`, passing Canon index,
+  source hierarchy, and documentation validation
 
 ## Evidence / outputs / test results
 
@@ -145,9 +149,11 @@ record.
 
 ## Commit / push status
 
-Registration `4ac08f77f0ef718803ab0628abce7ac85eebff43` was pushed. This frozen
-evidence package will be committed with `--no-gpg-sign` and pushed immediately;
-a later metadata-only manifest commit will append its exact commit and digest.
+Registration `4ac08f77f0ef718803ab0628abce7ac85eebff43`, frozen evidence
+`fbfbc31a8ec0ac4a085b704a21400326b7b96952`, and metadata manifest
+`6628784a3b6e77e85b74fb61bbb63bdafe5e93f2` were each committed with
+`--no-gpg-sign` and pushed immediately. This report closeout is committed and
+pushed immediately as a separate documentation-only commit.
 
 ## Sub-agent session close status
 
