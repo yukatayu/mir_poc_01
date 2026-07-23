@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 02:16 JST
+最終更新: 2026-07-24 02:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -56,6 +56,15 @@ condition directly, use an output view with an explicit correspondence that
 derives that condition, or remain deferred. This does not select a carrier,
 runtime occurrence model, or proof artifact, and it leaves PROPOSAL-008's
 outcome-totality question independent.
+
+PROPOSAL-012 is the next decision packet, not a semantic amendment. It divides
+Plan 186's remaining boundaries into independent owner dispositions: `V` for
+read-to-write value flow, `R` for successful read receipt, `S` for successful
+owner-write service, and `A` for admission/verdict/grant/witness identity. Its
+research recommendation is V1/R1/SW1/conditional A2, but it preserves the
+existing dependency/occurrence/authority invariants and selects no Canon rule.
+It asks for a later design package after any non-defer answer and does not
+change PROPOSAL-008 or PROPOSAL-009.
 
 PROPOSAL-010 separately asks how to remove the undefined `child locus` /
 `admission path` subject from the theory overview: use the existing

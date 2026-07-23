@@ -192,6 +192,8 @@
     `plan/185-cost-bound-substitutability-primary-literature-audit.md`
 145. canonical elaboration/trace interface-closure audit は
     `plan/186-canonical-elaboration-trace-interface-closure-audit.md`
+146. MirCore value-flow / occurrence identity decision packet は
+    `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`
 
 ## current repo の短い要約
 
@@ -745,6 +747,8 @@
   `plan/185-cost-bound-substitutability-primary-literature-audit.md`
 - canonical elaboration/trace interface-closure audit:
   `plan/186-canonical-elaboration-trace-interface-closure-audit.md`
+- MirCore value-flow / occurrence identity decision packet:
+  `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`
 
 ## maintenance rule
 

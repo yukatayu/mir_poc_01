@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 103,
+ "files": 104,
  "entries": [
   {
    "id": "root/changelog",
@@ -582,6 +582,26 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-011-transparent-cost-bound-substitutability.md",
    "bytes": 7490
+  },
+  {
+   "id": "meta/proposal-012",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "adr/ADR-0002",
+    "adr/ADR-0003",
+    "adr/ADR-0005",
+    "adr/ADR-0014",
+    "meta/proposal-009"
+   ],
+   "summary": "read の値フロー、成功 service、admission の occurrence identity を個別に owner へ問う。Core、OBL、Gate、runtime は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md",
+   "bytes": 13203
   },
   {
    "id": "meta/source-hierarchy",
