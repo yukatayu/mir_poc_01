@@ -177,8 +177,10 @@ boundary. No existing admitted executable lane supplies the shared semantics.
 
 ## Commit / push status
 
-Validation is complete. The package is ready to commit with `--no-gpg-sign`
-and push immediately.
+The decision-packet package was committed with `--no-gpg-sign` as `f952eacc`
+(`docs: add core value-flow decision packet`) and pushed to `origin/main`.
+This publication-status correction is committed and pushed immediately as the
+same task's follow-up documentation record.
 
 ## Sub-agent session close status
 
