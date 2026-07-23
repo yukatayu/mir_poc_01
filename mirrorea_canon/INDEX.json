@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 99,
+ "files": 100,
  "entries": [
   {
    "id": "root/changelog",
@@ -546,6 +546,25 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-009-obl001-core-write-correspondence.md",
    "bytes": 7433
+  },
+  {
+   "id": "meta/proposal-010",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "root/glossary",
+    "theory/00-overview",
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "adr/ADR-0012",
+    "adr/ADR-0014",
+    "plan/02-operating-model"
+   ],
+   "summary": "theory/00-overview の child locus / admission path という未定義の主語を owner に問う。Locus 階層、membership provenance、Core、OBL、Gate は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-010-locus-admission-subject-clarification.md",
+   "bytes": 6964
   },
   {
    "id": "meta/source-hierarchy",

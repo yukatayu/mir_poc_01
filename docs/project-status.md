@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-23 20:43 JST
+最終更新: 2026-07-23 22:05 JST
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
@@ -136,11 +136,10 @@ P-SURF-05 second-admission stale-fence candidate は現行 validator により�
   将来の rebased final cut review が必要です。現行は owner-authenticated trust anchor
   未構成のため fail-closed です。frozen L2 は successor で forward に扱います。
   `plan/158-standing-bounded-autonomy.md`
-- `PROPOSAL-003`、`PROPOSAL-004`、`PROPOSAL-008` は L1-reserved question なので delegated route
-  では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`
+- `PROPOSAL-003`、`PROPOSAL-004`、`PROPOSAL-008`、`PROPOSAL-009`、`PROPOSAL-010` は owner/canon
+  question なので delegated route では採択しません。各 proposal record を正本とする。
 - `df -h .` は 2026-07-23 20:43 JST 時点で root filesystem の空き約 74 GiB を報告した。
-  これは bounded local check の余力確認であり、heavy build / generated artifact / toolchain
-  work の前には容量と external workdir の mount を再確認する。
+  これは bounded local check の余力確認であり、heavy work 前には容量と external workdir を再確認する。
 
 ## オーナーの確認・判断待ち
 
@@ -148,6 +147,7 @@ P-SURF-05 second-admission stale-fence candidate は現行 validator により�
 | --- | --- | --- |
 | G0-D3 | DEFERRED (dormant) | owner が明示的に reopen するまで選定しない。 |
 | OBL-001 Core/write correspondence | PROPOSAL-009 owner record pending | 将来の proof-facing package は THM-001 の既存 `c` write 条件を直接表明するか、同条件を導く明示 correspondence を持つ output view にするかを選ぶ。実験用 Result を Core と同一視しない。 |
+| Locus/admission subject wording | PROPOSAL-010 owner record pending | overview の `child locus` / `admission path` を既存 principal/admission 説明に置換するか、削除するか、将来 extension に分離するかを選ぶ。階層、membership provenance、Core/OBL は追加しない。 |
 | PROPOSAL-003 | owner record pending | OBL-020 organization の A / B / C。 |
 | PROPOSAL-004 | owner record pending | Surface v0 grammar closure の A / B / C。LAB recommendation は A。 |
 | PROPOSAL-008 | owner record pending | BND-001 outcome totality の読みと、将来の obligation placement。 |

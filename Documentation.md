@@ -85,6 +85,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - PROPOSAL-009 は、THM-001 の既存 Core `c` write 条件を将来の OBL-001 package が
   直接表明するか、明示 correspondence を持つ output view で表明するかを owner に問います。
   実験用 Result を Core と同一視せず、Core/runtime/OBL の意味は変更しません。
+- PROPOSAL-010 は、overview の `child locus` / `admission path` という未定義の主語を、
+  既存の principal による join/admission 説明へ置換するか、削除するか、将来 extension に
+  分離するかを owner に問います。Locus 階層、membership provenance、Core/OBL は追加しません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 21:26 JST
+最終更新: 2026-07-23 22:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -37,7 +37,7 @@ visualization into an untyped transport/debug channel.
 
 | Axis | Status | Readiness / next boundary |
 | --- | --- | --- |
-| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. Post-WRK-0014 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no existing second relation/mapping exists, and diagnostics plus authority/time/cut repeat their recorded source boundaries. Those screens do not narrow other standing-eligible ADR-0014 L3 research. The selected P-SURF-05 second-admission candidate stopped before registration: its pinned checker/test/sample inputs are outside the current permitted LAB roots, and the target-literal search found no matching input in an allowed root. No fresh registered evidence command has run; the earlier exploratory command remains excluded. This is source-local operational selection memory only. The committed source history passes the authoritative audit only after reversible quarantine of ignored local state; its ordinary working tree intentionally does not satisfy that clean-worktree predicate. PROPOSAL-009 now presents the owner-facing OBL-001 direct-Core / explicit-bridge / defer boundary; the current LAB Result draft remains insufficient by itself. Its familywise OBL-020 wrapper still needs demonstrated coverage before it supports a global conclusion, and its OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an independent open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
+| Logical specification | `T0/G0 rebaseline`; ADR-0014 enables autonomous bounded LAB theory research | G0 exit and T1 entry remain unrecorded under `mirrorea_canon/plan/01-phases.md`; WRK-0007..0011 remain scoped L3 evidence. WRK-0012 stays frozen at its numbered-plan retention boundary. WRK-0013 has retained a fresh two-input reproduction through the existing unnumbered plan path as `not-promoted` L3 evidence. WRK-0014 now manifests three same-carrier generic lemmas: under their stated premises, intended-to-model inclusion transfers universal safety/coherence, while model-to-intended realization transfers outcome existence. They establish no actual bridge or general necessary condition. Post-WRK-0014 actual-bridge and remaining-ledger screens found no distinct record in their screened families: no existing second relation/mapping exists, and diagnostics plus authority/time/cut repeat their recorded source boundaries. Those screens do not narrow other standing-eligible ADR-0014 L3 research. The selected P-SURF-05 second-admission candidate stopped before registration: its pinned checker/test/sample inputs are outside the current permitted LAB roots, and the target-literal search found no matching input in an allowed root. No fresh registered evidence command has run; the earlier exploratory command remains excluded. This is source-local operational selection memory only. The committed source history passes the authoritative audit only after reversible quarantine of ignored local state; its ordinary working tree intentionally does not satisfy that clean-worktree predicate. PROPOSAL-009 presents the OBL-001 direct-Core / explicit-bridge / defer boundary; the current LAB Result draft remains insufficient by itself. Separate PROPOSAL-010 isolates the overview's undefined child-locus/admission-path wording as an owner terminology choice, not a membership invariant. The LAB OBL-020 familywise wrapper still needs demonstrated coverage before it supports a global conclusion, and the LAB OBL-021 coherence draft does not supply outcome existence. PROPOSAL-008 remains an independent open owner-decision request with no owner answer. No Canon carrier, workflow, source authority, or OBL movement is selected; L2 remains fail-closed pending an owner-authenticated trust anchor |
 | User-facing specification | source-first direction and examples have bounded LAB evidence | Surface grammar closure and public contract remain owner-reserved |
 | Implementation / operation | Product Alpha, Full System V1, Surface, and operational roots are runnable bounded LAB evidence; the computational matrix contains 2 direct runtime acceptances, 10 helper-only fixtures, and 3 direct package-check rejections. WRK-0012's one accepted and one rejected direct-world sidecar produced the registered observations but its reliance is frozen at the artifact-retention boundary. Constructed-package runtime tests directly exercise the closed `P-COMP-03` registry, whose five negative cases split into 4 typecheck rejections and 1 evaluation-time bounds rejection; the helper matrix and Product Alpha `MirCompute` carrier do not expose that phase split | no C-static/C-runtime/C-distributed conformance, general direct P-COMP-03 workflow, or final runtime/product claim |
 
@@ -200,6 +200,7 @@ LAB evidence.
 | Owner / canon | PROPOSAL-003 and PROPOSAL-004 | L1-reserved organization / grammar choices; owner records A/B/C |
 | Owner / canon | PROPOSAL-008 | BND-001 outcome-totality interpretation and its future obligation placement |
 | Owner / canon | PROPOSAL-009 | OBL-001 direct-Core statement, explicit output/Core correspondence, or defer |
+| Owner / canon | PROPOSAL-010 | undefined overview wording: existing admission summary, deletion, or future extension separation |
 | Research | non-reserved theory target | pin standing eligibility, pre-register alternatives/falsifier, and seek evidence in LAB. It may enter WRK L3; steward rebase/freeze and independent review precede L2 integration or escalation |
 | Later dependency | runtime, conformance, final ABI, transport, federation | do not preempt theory phase |
 
@@ -228,6 +229,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 22:05 JST: added PROPOSAL-010 for the overview sentence that calls
+  a locus a child and says it joins through an admission path. Cross-source
+  review confirms that Locus is not Participant and `join` is a principal's
+  admission request; no source defines the alleged hierarchy, path, or global
+  membership provenance. The owner may replace the sentence with the existing
+  admission summary, delete it, or defer hierarchy intent to a future
+  extension. No Core, OBL, Gate/Phase, workflow, or public status moved.
 
 - 2026-07-23 21:26 JST: added PROPOSAL-009 as the owner decision surface for
   the OBL-001 proof-facing statement interface. It separates a direct Core
