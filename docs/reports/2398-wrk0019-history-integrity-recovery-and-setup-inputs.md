@@ -61,7 +61,7 @@ validator-exception, and history-reconstruction options.
 - Git history/path audit and remote-tip comparison
 - exact registered WRK-0019 command with four SHA-256 guards
 - `git push --force-with-lease=refs/heads/main:8b3b0385f73e5472fe764f52af77160c4df7a6ec`
-- Canon index generation and documentation validation
+- `make check` and `python3 scripts/validate_docs.py --authoritative-working-annex`
 
 ## Evidence / outputs / test results
 
@@ -73,6 +73,8 @@ matrix rows, both focused Rust tests, Product Alpha `check`, and the registered
 
 The old commits are no longer reachable from `main`; their identifiers are
 retained here as the incident record. The validator itself was not changed.
+The normal check and the authoritative working-annex audit both passed on the
+reconstructed reachable history.
 
 ## What changed in understanding
 
@@ -135,7 +137,7 @@ reconstruction because a frozen record or validator exception would preserve
 an invalid reachable history. The final reviewer found one P2 README error:
 `session` reads a stored session rather than creating it. The table now cites
 the `run-local`-returned `session_path`; no other scope or factual defect was
-found.
+found. The corrected diff, normal check, and authoritative audit passed.
 
 ## Skipped validations and reasons
 
@@ -146,8 +148,8 @@ new transport or product claim.
 ## Commit / push status
 
 The strict replacement evidence commit `249bc846` was force-with-lease pushed,
-then metadata commit `ad634ca9` was normally pushed. This status/setup package
-is pending commit and push at report write.
+then metadata commit `ad634ca9` and status/setup commit `e348b159` were
+normally pushed. This report closeout follows as its own commit.
 
 ## Sub-agent session close status
 
