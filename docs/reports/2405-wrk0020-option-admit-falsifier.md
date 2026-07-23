@@ -63,8 +63,11 @@ WRK-0020 registration and its successful `make check` history validation.
   source-hierarchy, documentation, and Cargo checks
 - `sha256sum plan/wrk-0020-option-admit-carrier-literal-audit.md`, which
   produced `6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf`
-- follow-up manifest metadata update, Canon index rebuild/check, diff review,
-  commit, and push
+- follow-up manifest metadata update, diff review, commit, and push at
+  `3d281755`
+- clean detached worktree audit at `3d281755`: `make docs`
+- final report closeout diff review, commit, push, and main-worktree
+  `make check`
 
 ## Evidence / outputs / test results
 
@@ -82,6 +85,12 @@ Frozen evidence is retained only as
 `LAB:plan/wrk-0020-option-admit-carrier-literal-audit.md` at
 `19ee70e6bf791f748e3c0f7348e97e9b480aad08` with SHA-256
 `6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf`.
+
+The detached audit of manifest commit `3d281755` passed `make docs`: Canon
+index check reported 102 files, source hierarchy reported all 733 required
+paths present, and documentation validation exited successfully. This validates
+the record structure and documentation graph, not the failed source-audit
+claim.
 
 ## What changed in understanding
 
@@ -142,7 +151,8 @@ The registration-diff reviewer found no blocking issue before execution and
 confirmed that the record should freeze rather than repair on a falsifier. The
 failure itself needs no semantic reviewer: it is directly shown by the shell
 and Python error output. The focused frozen-falsifier diff review found no
-blocking issue.
+blocking issue. The clean detached `make docs` audit of the manifest commit
+also passed; it validates document/record structure only, not source facts.
 
 ## Skipped validations and reasons
 
@@ -154,11 +164,13 @@ experiment outside this record.
 ## Commit / push status
 
 Frozen evidence commit `19ee70e6bf791f748e3c0f7348e97e9b480aad08` was pushed
-with `--no-gpg-sign`. This follow-up appends only its exact commit/hash to the
-working-record manifest, updates the related LAB status wording, and will be
-committed and pushed immediately with `--no-gpg-sign`.
+with `--no-gpg-sign`. Manifest commit `3d281755` was also pushed with
+`--no-gpg-sign`; it appends only the exact commit/hash to the working-record
+manifest and corrects the source-cut status wording. This report closeout will
+be committed and pushed immediately with `--no-gpg-sign`.
 
 ## Sub-agent session close status
 
-The registration-diff reviewer completed read-only work. No sub-agent made
+The registration-diff reviewer completed read-only work and was closed after
+manifest integration, reporting no blocking finding. No sub-agent made
 repository edits or interpreted the failed command as a semantic result.
