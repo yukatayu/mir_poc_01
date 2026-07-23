@@ -178,13 +178,14 @@ research procedure.
 
 ## Commit / push status
 
-Pending at report write. The validated report and synchronized LAB snapshots
-will be committed with `--no-gpg-sign` and pushed immediately. A closeout
-commit will then record the first package commit and final push status without
-self-referential history.
+The validated report and synchronized LAB snapshots were committed with
+`--no-gpg-sign` as `5a70e398` (`docs: record autonomous theory frontier`) and
+pushed to `origin/main`. This closeout update is committed and pushed
+immediately afterward as a separate status commit so the report records the
+first package commit without self-referential history.
 
 ## Sub-agent session close status
 
-The planner and reviewer completed read-only work without repository edits and
-were closed after their conclusions were incorporated. The temporary Oracle
-consultation completed successfully and remains advisory only.
+The planner and both reviewers completed read-only work without repository
+edits and were closed after their conclusions were incorporated. The temporary
+Oracle consultation completed successfully and remains advisory only.
