@@ -21,10 +21,13 @@ activity.
 
 ## Start state / dirty state
 
-Started at pushed `d820751a` on `main`, with no worktree diff and no local/remote
-divergence. At the check time, `df -h .` reported `/dev/sda2` as 188 GiB total,
-106 GiB used, and approximately 74 GiB available. The checks below did not
-require a new large toolchain or retained generated artifact.
+Started at pushed `d820751a` on `main`, with no tracked worktree diff and no
+local/remote divergence. The ordinary tree also contains ignored local webhook
+and helper state, so the authoritative WRK audit was later run from a clean
+disposable worktree rather than deleting that local state. At the check time,
+`df -h .` reported `/dev/sda2` as 188 GiB total, 106 GiB used, and
+approximately 74 GiB available. The checks below did not require a new large
+toolchain or retained generated artifact.
 
 ## Documents consulted
 
@@ -63,6 +66,8 @@ the current snapshots; the WRK-0019 record; and the report template.
 - `python3 scripts/mir_computational_samples.py check-all --format json`
 - `cargo test -p mir-semantics --test typed_ir_interpreter -- --nocapture`
 - `MIRROREA_ALPHA_SESSION_DIR=/tmp/mirrorea-theory-session cargo run -q -p mirrorea-cli -- run-local samples/product-alpha1/demo --format json`
+- `python3 scripts/validate_docs.py --authoritative-working-annex` in a clean,
+  detached disposable worktree at this package's commit
 
 ## Evidence / outputs / test results
 
@@ -72,6 +77,11 @@ helper matrix passed all 15 classifications: 7 accepted, 5 expected runtime
 rejections, and 3 expected check rejections. These five runtime-rejection rows
 are helper classifications, not direct Product Alpha runtime-phase evidence.
 The typed-IR interpreter suite passed 20 tests.
+
+The authoritative audit intentionally rejected the ordinary tree because it
+sees ignored local webhook and helper state. The exact committed source cut
+passed the same audit in a clean detached worktree; no local configuration was
+deleted or made evidence.
 
 The Product Alpha demo package check was accepted and its bounded local session
 ran with typed host I/O `Int(41)` to `Int(42)`. Its own output retains explicit
