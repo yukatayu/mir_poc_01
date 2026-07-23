@@ -178,7 +178,9 @@
     `plan/181-preservation-proof-prerequisite-literature-audit.md`
 138. Canon Core minimality and proof-interface audit は
     `plan/182-canon-core-minimality-and-proof-interface-audit.md`
-139. WRK-0019 P-COMP-03 bounds direct-carrier evidence は
+139. transparent cost-bound substitutability decision memory は
+    `plan/183-transparent-cost-bound-substitutability-decision.md`
+140. WRK-0019 P-COMP-03 bounds direct-carrier evidence は
     `plan/wrk-0019-pcomp03-bounds-direct-carrier.md`
 
 ## current repo の短い要約
@@ -721,6 +723,8 @@
   `plan/181-preservation-proof-prerequisite-literature-audit.md`
 - Canon Core minimality and proof-interface audit:
   `plan/182-canon-core-minimality-and-proof-interface-audit.md`
+- transparent cost-bound substitutability decision memory:
+  `plan/183-transparent-cost-bound-substitutability-decision.md`
 
 ## maintenance rule
 

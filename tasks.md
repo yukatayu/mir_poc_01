@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-23 22:57 JST
+最終更新: 2026-07-24 00:01 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -62,6 +62,12 @@ PROPOSAL-010 separately asks how to remove the undefined `child locus` /
 principal/admission summary, delete the sentence, or defer any hierarchy intent
 to a later extension. It adds no locus hierarchy, membership-provenance rule,
 Core feature, OBL, or implementation work.
+
+PROPOSAL-011 separately asks how Contract `cost_bound` participates in the
+transparent overlay rule whose listed conditions do not name cost: an
+owner-selected scoped non-weakening relation, explicit update for every bound
+change, advisory treatment, or interpretation defer. It selects no final cost
+algebra, runtime model, OBL, patch carrier, Core feature, or implementation work.
 
 The post-PROPOSAL-010 independent frontier screen is closed without opening
 `WRK-0020`. The nearest concrete runtime/Surface candidates are outside the
@@ -193,6 +199,7 @@ production implementation; otherwise it escalates. See
 | 51 | T1/T2 statement identity and dependency closure audit | Closed read-only audit: all listed exit-critical T1/T2 OBL rows now distinguish Canon domain, available LAB evidence, and the first missing formal relation. It rejects proof laundering and does not select direct-Core versus Result enumeration, complete step coverage, outcome totality, chain relation, or save/load model. | Macro 1/5 checkpoint; use `plan/180` to prepare owner/canon decisions and a later common proof model. Non-OBL Gate/SCN criteria remain separately scoped. No WRK or OBL/Gate/Phase movement. |
 | 52 | WRK-0019 P-COMP-03 bounds direct-carrier evidence | Closed scoped result: the one exact existing-lane non-production arrays-bounds `world` sidecar passed Product Alpha `check`; `run-local` returned exit 2 with the registered `MirCompute` / `OutOfBounds` detail. No helper/schema/validator/runtime/CLI change, phase assertion, public error contract, general carrier, or workflow claim follows. | Macro 2 parser-free substrate reserve; retain as `not-promoted` L3 evidence. No successor is selected automatically; reopen only on a distinct pre-registrable input with a live decision consumer. |
 | 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate: independent local, planner, reviewer, and Oracle checks selected no new ADR-0014 record under this source-cut LAB prioritization screen. It applies a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. | Macro 0/1 and 2 reserve; do not open WRK-0020 or run a candidate outcome command under this screen. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
+| 54 | Contract cost-bound transparency decision packet | Current Canon lists `cost_bound` in Contract but not in its named transparent-overlay conditions. The text does not settle whether that list is complete or how a cost-only change is treated. PROPOSAL-011 exposes A owner-selected scoped non-weakening, B explicit update until algebra selection, C advisory treatment, and D interpretation defer; no alternative is selected. | Owner/canon decision boundary; do not amend theory/02, OBL-026, patch compatibility, runtime, or final algebra from LAB samples. An independent L3 sample-model countermodel may proceed only through separate pre-registration. |
 
 ## self-driven macro phase reading
 
@@ -207,6 +214,7 @@ production implementation; otherwise it escalates. See
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
 | PROPOSAL-009 OBL-001 Core/write statement interface | whether a future proof-facing package states the existing Core `c` clause directly or derives it through an explicit output/Core correspondence | A direct Core; B explicit bridge; C defer | direct-`c` remains LAB advice only; do not identify experiment-only Result with Canon Core |
 | PROPOSAL-010 locus/admission subject wording | whether the overview's undefined child-locus/admission-path sentence is replaced, deleted, made an extension question, or deferred unchanged | A existing admission summary; B delete; C future extension; defer | A: retain only the existing principal/admission model and do not introduce hierarchy or provenance semantics |
+| PROPOSAL-011 Contract cost-bound transparency | whether and how a changed `cost_bound` participates in transparent overlay before the final algebra is selected | A owner-selected scoped non-weakening; B explicit update per change; C advisory; D interpretation defer | A: select only a bounded interim comparison relation and its outside-fragment handling; do not claim that current Canon already supplies it |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
 | SCN-08 scalar state syntax | whether frozen avatar fallback scenario is valid under the current indexed-only `StateDecl` grammar | permit scalar state; rewrite the scenario with an index; defer exact parser applicability | owner chooses; do not silently extend grammar or rewrite SCN-08 |

@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 100,
+ "files": 101,
  "entries": [
   {
    "id": "root/changelog",
@@ -565,6 +565,23 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-010-locus-admission-subject-clarification.md",
    "bytes": 6964
+  },
+  {
+   "id": "meta/proposal-011",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "root/glossary",
+    "theory/02-types-effects-failures",
+    "theory/08-patch-hotplug",
+    "theory/11-metatheory-ledger",
+    "plan/03-risks",
+    "adr/ADR-0012"
+   ],
+   "summary": "Contract の cost_bound と transparent overlay の列挙条件の対応を owner に問う。最終 cost algebra、runtime、OBL、patch carrier は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-011-transparent-cost-bound-substitutability.md",
+   "bytes": 7490
   },
   {
    "id": "meta/source-hierarchy",
