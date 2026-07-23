@@ -231,6 +231,13 @@ LAB evidence.
 
 ## recent log
 
+- 2026-07-24 00:21 JST: clarified the relation between the prior
+  post-PROPOSAL-010 no-candidate screen and WRK-0020. That screen covered its
+  reviewed runtime/Surface, current-L2, and Product Alpha families only; it
+  did not audit the later-named Canon Option/admit literal chain and therefore
+  does not prohibit that distinct record. WRK-0020 nevertheless remains
+  frozen at its own command falsifier, with no semantic conclusion.
+
 - 2026-07-24 00:15 JST: WRK-0020 executed its one registered source-audit
   command after push and froze at its first falsifier. Backticks in the
   double-quoted Python command were shell command-substituted, so the audit

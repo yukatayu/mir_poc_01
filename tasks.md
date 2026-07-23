@@ -75,16 +75,14 @@ Option/admit carrier correspondence result. It cannot be repaired or rerun;
 it also cannot choose a carrier in Option, constraints, residual obligations,
 another Core form, grammar, parser, or runtime.
 
-The post-PROPOSAL-010 independent frontier screen is closed without opening
-`WRK-0020`. The nearest concrete runtime/Surface candidates are outside the
-current permitted LAB roots and therefore remain behind the unresolved
-lane-catalog correspondence; the admitted current-L2 and Product Alpha variants
-are already retained evidence or coverage widening. This screen applies fresh
-source discrimination and a non-reserved downstream decision as LAB
-prioritization filters, and selected no candidate. It is a source-cut
-disposition, not a restriction on future ADR-0014 eligibility. Reapply this
-screen when an already permitted literal mismatch with a live retain/reject
-decision appears, or after the owner/canon resolves the lane-catalog boundary.
+The post-PROPOSAL-010 independent frontier screen selected no candidate from
+its reviewed runtime/Surface, current-L2, and Product Alpha families. It did
+not audit the later-named Canon Option/admit literal chain. WRK-0020 was
+subsequently selected and independently registered for that distinct question,
+then froze at its command falsifier. The original screen remains a source-cut
+disposition, not a restriction on future ADR-0014 eligibility. Reapply it when
+an already permitted literal mismatch with a live retain/reject decision
+appears, or after the owner/canon resolves the lane-catalog boundary.
 
 WRK-0008's scoped L3 audit is now closed in the existing current-L2 lane; its
 Canon working record remains `L3-open`. Its
@@ -204,7 +202,7 @@ production implementation; otherwise it escalates. See
 | 50 | Independent source-locus audit | Closed with no candidate under the current LAB prioritization screen: generated-failure containment lacks a live consumer and reaches a reserved failure/Core bridge; outcome production is WRK-0004/PROPOSAL-008; observer export is frozen WRK-0018. Independent local, sub-agent, and Oracle screens agree. | Macro 1/5 reserve; reapply this screen on a new literal mismatch with a named current consumer and a non-reserved adverse branch. Do not replay a prior Lean artifact to manufacture a target. This does not narrow ADR-0014. |
 | 51 | T1/T2 statement identity and dependency closure audit | Closed read-only audit: all listed exit-critical T1/T2 OBL rows now distinguish Canon domain, available LAB evidence, and the first missing formal relation. It rejects proof laundering and does not select direct-Core versus Result enumeration, complete step coverage, outcome totality, chain relation, or save/load model. | Macro 1/5 checkpoint; use `plan/180` to prepare owner/canon decisions and a later common proof model. Non-OBL Gate/SCN criteria remain separately scoped. No WRK or OBL/Gate/Phase movement. |
 | 52 | WRK-0019 P-COMP-03 bounds direct-carrier evidence | Closed scoped result: the one exact existing-lane non-production arrays-bounds `world` sidecar passed Product Alpha `check`; `run-local` returned exit 2 with the registered `MirCompute` / `OutOfBounds` detail. No helper/schema/validator/runtime/CLI change, phase assertion, public error contract, general carrier, or workflow claim follows. | Macro 2 parser-free substrate reserve; retain as `not-promoted` L3 evidence. No successor is selected automatically; reopen only on a distinct pre-registrable input with a live decision consumer. |
-| 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate: independent local, planner, reviewer, and Oracle checks selected no new ADR-0014 record under this source-cut LAB prioritization screen. It applies a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. | Macro 0/1 and 2 reserve; do not open WRK-0020 or run a candidate outcome command under this screen. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
+| 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate within its reviewed runtime/Surface, current-L2, and Product Alpha families. Independent local, planner, reviewer, and Oracle checks applied a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. The screen did not audit the later-named Canon Option/admit literal chain, which was independently selected as WRK-0020 and then froze at a command falsifier. | Macro 0/1 and 2 reserve; do not use this historical source-cut screen to prohibit a distinct new audit. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
 | 54 | Contract cost-bound transparency decision packet | Current Canon lists `cost_bound` in Contract but not in its named transparent-overlay conditions. The text does not settle whether that list is complete or how a cost-only change is treated. PROPOSAL-011 exposes A owner-selected scoped non-weakening, B explicit update until algebra selection, C advisory treatment, and D interpretation defer; no alternative is selected. | Owner/canon decision boundary; do not amend theory/02, OBL-026, patch compatibility, runtime, or final algebra from LAB samples. An independent L3 sample-model countermodel may proceed only through separate pre-registration. |
 | 55 | WRK-0020 Option/admit literal audit | Frozen command-level falsifier: after pushed registration, backticks in the exact double-quoted Python command were shell-substituted; Bash reported `OptionDecl.admit: command not found`, then Python raised `AssertionError`. No literal source result is retained. | Closed scoped route. Do not repair or retry this record. A later audit requires an independently selected fresh question and registration; it must not infer a carrier/grammar/parser/runtime conclusion from this failure. |
 

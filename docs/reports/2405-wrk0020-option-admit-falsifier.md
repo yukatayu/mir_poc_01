@@ -59,7 +59,11 @@ WRK-0020 registration and its successful `make check` history validation.
   evaluated once after push
 - root-cause source inspection of the quoted command and its shell/Python
   failure output
-- pending close checks: Canon index rebuild/check, `make check`, diff review,
+- `make check` at frozen evidence commit `19ee70e6`, which passed Canon index,
+  source-hierarchy, documentation, and Cargo checks
+- `sha256sum plan/wrk-0020-option-admit-carrier-literal-audit.md`, which
+  produced `6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf`
+- follow-up manifest metadata update, Canon index rebuild/check, diff review,
   commit, and push
 
 ## Evidence / outputs / test results
@@ -74,11 +78,21 @@ This satisfies WRK-0020's `cannot establish the exact selected text facts`
 falsifier. No positive source audit, parser test, runtime test, or Lean test
 was run or claimed.
 
+Frozen evidence is retained only as
+`LAB:plan/wrk-0020-option-admit-carrier-literal-audit.md` at
+`19ee70e6bf791f748e3c0f7348e97e9b480aad08` with SHA-256
+`6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf`.
+
 ## What changed in understanding
 
 The candidate's first evidence is a reproducible pre-registration failure, not
 a semantics result. The project guardrail worked: the record freezes instead of
 allowing a convenient command repair to become evidence.
+
+The earlier post-PROPOSAL-010 source screen is only a source-cut result for its
+reviewed runtime/Surface, current-L2, and Product Alpha families. It did not
+review this later-named Canon literal chain, so it cannot be read as a ban on
+WRK-0020 or another distinct future L3 audit.
 
 ## Open questions
 
@@ -109,11 +123,13 @@ source-consistency or Canon conclusion.
 ## progress.md update status
 
 更新済み: the current snapshot and dated log distinguish the frozen command
-failure from a semantic result.
+failure from a semantic result and qualify the earlier source-cut screen.
 
 ## tasks.md update status
 
-更新済み: the task map closes WRK-0020 and forbids a repair/retry route.
+更新済み: the task map closes WRK-0020 and forbids a repair/retry route; it also
+corrects the historical source-cut screen so it does not misstate a prohibition
+on this distinct audit.
 
 ## samples_progress.md update status
 
@@ -137,9 +153,10 @@ experiment outside this record.
 
 ## Commit / push status
 
-Pending the frozen evidence commit and immediate push with `--no-gpg-sign`.
-The exact evidence commit and artifact digest will be appended through the
-permitted follow-up metadata route.
+Frozen evidence commit `19ee70e6bf791f748e3c0f7348e97e9b480aad08` was pushed
+with `--no-gpg-sign`. This follow-up appends only its exact commit/hash to the
+working-record manifest, updates the related LAB status wording, and will be
+committed and pushed immediately with `--no-gpg-sign`.
 
 ## Sub-agent session close status
 

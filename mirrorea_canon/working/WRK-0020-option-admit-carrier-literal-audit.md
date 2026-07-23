@@ -70,8 +70,8 @@ altered Python program raised `AssertionError`. This is the registered
 `cannot establish the exact selected text facts` falsifier. The unconditional
 following shell `printf` returned zero but was outside the registered command
 and is not success evidence. Do not repair or rerun this record.
-Evidence artifacts: none
-Evidence commits: none
+Evidence artifacts: LAB:plan/wrk-0020-option-admit-carrier-literal-audit.md@19ee70e6bf791f748e3c0f7348e97e9b480aad08:6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf
+Evidence commits: 19ee70e6bf791f748e3c0f7348e97e9b480aad08
 Impact / non-effects: This route is frozen before it establishes whether the
 pinned named texts literally agree on an option-local `admit` carrier. It
 introduces no source, test, helper, schema, CI/Make target, API, runtime,
