@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 03:49 JST
+最終更新: 2026-07-24 06:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -237,6 +237,30 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 06:33 JST: final review also found `let`, `if`, and `==` dispatch
+  defects, plus compound forms hidden by braced/nested target or RHS contexts.
+  New red/green parser tests make the bounded LAB parser reject all inspected
+  forms before lowering; a source-patch test verifies a braced `+=` fails at
+  parse and cannot activate. This changes observable LAB rejection reports, but
+  defines no expression, binding, conditional, equality, or read-modify-write
+  semantics; no Canon rule, OBL, Gate/Phase, sample workflow, or public claim
+  moved.
+
+- 2026-07-24 05:54 JST: the Surface/Core form screen found no second theory
+  decision, but final review exposed a bounded LAB parser defect: `+=` / `-=`
+  were silently treated as ordinary assignment. A red/green parser regression
+  now makes P-SURF reject both forms with `compound_assignment_not_supported`
+  until an explicitly selected Surface-to-Core lowering exists. This changes
+  no Canon grammar, Core rule, OBL, Gate/Phase, runtime execution semantics,
+  sample workflow, or public claim.
+
+- 2026-07-24 05:24 JST: screened Surface `let`, `if`, expression, and compound
+  assignment lowering against the current Core sketches and bounded LAB Surface
+  path. The literal gaps do not create a second decision: runtime-value use is
+  already PROPOSAL-012 V/R, conditional normalization remains OPEN-012, and
+  outcome totality remains PROPOSAL-008. No Plan, WRK, Core rule, OBL, Gate/
+  Phase, runtime, sample workflow, or public claim moved.
 
 - 2026-07-24 03:49 JST: closed the post-PROPOSAL-012 packet coherence review.
   Local source reread, an independent reviewer, and a GPT-5.6 Sol Pro temporary

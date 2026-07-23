@@ -323,3 +323,164 @@ BrowserClient[self] {
     };
     assert_eq!(block.place_ref, "World");
 }
+
+#[test]
+fn rejects_compound_assignment_until_lowering_is_defined() {
+    for operator in ["+", "-"] {
+        let source = format!(
+            r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {{
+  when start {{
+    player[self].hp {operator}= 1
+  }}
+}}
+"#
+        );
+
+        assert_eq!(
+            diagnostic_codes(&source),
+            vec!["compound_assignment_not_supported"],
+            "operator {operator} must not silently lower as ordinary assignment"
+        );
+    }
+}
+
+#[test]
+fn rejects_compound_assignment_in_braced_or_nested_contexts() {
+    for source in [
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[Key { id: 1 }].hp += 1
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self += 1].hp = 0
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self].hp = next_hp += 1
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self].hp = next_hp -= 1
+  }
+}
+"#,
+    ] {
+        assert_eq!(
+            diagnostic_codes(source),
+            vec!["compound_assignment_not_supported"],
+            "compound tokens must not reach ordinary assignment lowering"
+        );
+    }
+}
+
+#[test]
+fn rejects_unlowered_let_and_if_before_assignment_dispatch() {
+    for source in [
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    let value = 1
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    if true {
+    }
+  }
+}
+"#,
+    ] {
+        assert_eq!(
+            diagnostic_codes(source),
+            vec!["unsupported_surface_statement"],
+            "unlowered statement forms must not be accepted as assignment or raw syntax"
+        );
+    }
+}
+
+#[test]
+fn rejects_equality_from_assignment_dispatch() {
+    for source in [
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self].hp == 1
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self].hp = next_hp == 1
+  }
+}
+"#,
+        r#"
+module Surface.Syntax
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[self == other].hp = 0
+  }
+}
+"#,
+    ] {
+        assert_eq!(
+            diagnostic_codes(source),
+            vec!["unsupported_surface_expression_operator"],
+            "equality must not be parsed as an assignment with an equals-prefixed RHS"
+        );
+    }
+}

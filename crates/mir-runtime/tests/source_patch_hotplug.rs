@@ -60,6 +60,20 @@ World {
 "#
 }
 
+fn compound_assignment_patch() -> &'static str {
+    r#"
+module Patch.CompoundAssignment
+
+role BrowserClient
+
+BrowserClient[self] {
+  when start {
+    player[Key { id: 1 }].hp += 1
+  }
+}
+"#
+}
+
 #[test]
 fn accepted_patch_runs_checked_pipeline_and_emits_activation_cut() {
     let report = check_surface_source_patch_source(visible_state_patch(), "session#world");
@@ -140,5 +154,23 @@ fn self_grant_server_authority_is_rejected_before_activation_cut() {
             .as_ref()
             .map(|row| row.verdict_kind.as_str()),
         Some("rejected")
+    );
+}
+
+#[test]
+fn compound_assignment_rejects_at_parse_before_patch_activation() {
+    let report = check_surface_source_patch_source(compound_assignment_patch(), "session#world");
+
+    assert!(!report.accepted);
+    assert_eq!(report.stage_status("parse"), Some(false));
+    assert_eq!(report.stage_status("typecheck"), Some(false));
+    assert_eq!(report.stage_status("elaborate"), Some(false));
+    assert_eq!(report.stage_status("admission"), Some(false));
+    assert!(!report.runtime_mutation_applied);
+    assert!(report.activation_cut.is_none());
+    assert!(
+        report
+            .diagnostic_codes()
+            .contains(&"compound_assignment_not_supported".to_string())
     );
 }

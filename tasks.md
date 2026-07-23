@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 03:49 JST
+最終更新: 2026-07-24 06:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -69,6 +69,21 @@ design advice, R does not decide a successful-write acknowledgement, and V/R/S
 composition plus the A-to-service occurrence/projection carrier stay unresolved.
 It asks for a later design package after any non-defer answer and does not change
 PROPOSAL-008 or PROPOSAL-009.
+
+A source recheck of Surface `let`, `if`, ordinary expressions, and compound
+assignment found no additional lowering rule in the current sketches. It does
+not open a second decision: runtime-value use remains V/R, conditional join
+normalization remains OPEN-012, and outcome totality remains PROPOSAL-008. The
+missing pure-expression lowering cannot be chosen autonomously. Final review
+found bounded-LAB parser integrity defects: `+=` / `-=` could discard their
+operator, and `let`, `if`, or `==` could reach ordinary-assignment dispatch.
+The parser now rejects compound forms, including braced/nested target and RHS
+contexts, with
+`compound_assignment_not_supported`; it rejects `let` / `if` statements and
+equality expressions before lowering. A source-patch regression confirms parse
+rejection prevents later stage execution and activation. This is fail-closed
+implementation scope, not a decision on compound, binder, conditional, or
+equality semantics; no new Plan or WRK is selected.
 
 PROPOSAL-010 separately asks how to remove the undefined `child locus` /
 `admission path` subject from the theory overview: use the existing

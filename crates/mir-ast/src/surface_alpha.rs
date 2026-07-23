@@ -284,7 +284,9 @@ enum Keyword {
     Grant,
     Import,
     Init,
+    If,
     Join,
+    Let,
     Module,
     Place,
     Principal,
@@ -514,7 +516,9 @@ impl<'a> Lexer<'a> {
             "grant" => TokenKind::Keyword(Keyword::Grant),
             "import" => TokenKind::Keyword(Keyword::Import),
             "init" => TokenKind::Keyword(Keyword::Init),
+            "if" => TokenKind::Keyword(Keyword::If),
             "join" => TokenKind::Keyword(Keyword::Join),
+            "let" => TokenKind::Keyword(Keyword::Let),
             "module" => TokenKind::Keyword(Keyword::Module),
             "place" => TokenKind::Keyword(Keyword::Place),
             "principal" => TokenKind::Keyword(Keyword::Principal),
@@ -1169,6 +1173,10 @@ impl Parser {
             TokenKind::Keyword(Keyword::Publish) => self
                 .parse_keyword_raw_stmt(Keyword::Publish)
                 .map(SurfaceStmt::Publish),
+            TokenKind::Keyword(Keyword::Let | Keyword::If) => Err(self.error_here(
+                "unsupported_surface_statement",
+                "P-SURF parser does not lower `let` or `if` statements yet",
+            )),
             TokenKind::Identifier(_) => {
                 if let Some(head) = self.lookahead_brace_block_head() {
                     if self.is_declared_place_path(&head) {
@@ -1234,11 +1242,23 @@ impl Parser {
     fn parse_assignment_stmt(&mut self) -> ParseResult<SurfaceAssignStmt> {
         let start = self.current_span();
         let target_tokens = self.collect_tokens_until_equals()?;
+        if let Some((operator, token)) = compound_assignment_operator(&target_tokens) {
+            return Err(unsupported_compound_assignment(
+                operator,
+                token.span.clone(),
+            ));
+        }
+        if let Some(token) = equality_operator_token(&target_tokens) {
+            return Err(unsupported_surface_expression_operator(token.span.clone()));
+        }
         self.expect(
             TokenKind::Equals,
             "expected_equals",
             "expected `=` in assignment statement",
         )?;
+        if self.check(&TokenKind::Equals) {
+            return Err(unsupported_surface_expression_operator(self.current_span()));
+        }
         let value = self.parse_expr_until_statement_break()?;
         Ok(SurfaceAssignStmt {
             target_text: tokens_to_text(&target_tokens),
@@ -1303,6 +1323,15 @@ impl Parser {
         if tokens.is_empty() {
             return Err(self.error_here("expected_expression", "expected expression"));
         }
+        if let Some((operator, token)) = compound_assignment_operator(&tokens) {
+            return Err(unsupported_compound_assignment(
+                operator,
+                token.span.clone(),
+            ));
+        }
+        if let Some(token) = equality_operator_token(&tokens) {
+            return Err(unsupported_surface_expression_operator(token.span.clone()));
+        }
         let span = span_from(
             start,
             tokens.last().expect("non-empty token list").span.clone(),
@@ -1361,11 +1390,27 @@ impl Parser {
 
     fn collect_tokens_until_equals(&mut self) -> ParseResult<Vec<Token>> {
         let mut tokens = Vec::new();
+        let mut brace_depth = 0usize;
         let mut square_depth = 0usize;
         let mut paren_depth = 0usize;
         while !self.at_eof() {
             match self.peek_kind() {
-                TokenKind::Equals if square_depth == 0 && paren_depth == 0 => break,
+                TokenKind::Equals if brace_depth == 0 && square_depth == 0 && paren_depth == 0 => {
+                    break;
+                }
+                TokenKind::LeftBrace => {
+                    brace_depth += 1;
+                    tokens.push(self.advance());
+                }
+                TokenKind::RightBrace
+                    if brace_depth == 0 && square_depth == 0 && paren_depth == 0 =>
+                {
+                    break;
+                }
+                TokenKind::RightBrace => {
+                    brace_depth = brace_depth.saturating_sub(1);
+                    tokens.push(self.advance());
+                }
                 TokenKind::LeftBracket => {
                     square_depth += 1;
                     tokens.push(self.advance());
@@ -1382,7 +1427,11 @@ impl Parser {
                     paren_depth = paren_depth.saturating_sub(1);
                     tokens.push(self.advance());
                 }
-                TokenKind::Newline | TokenKind::Semicolon | TokenKind::RightBrace => break,
+                TokenKind::Newline | TokenKind::Semicolon
+                    if brace_depth == 0 && square_depth == 0 && paren_depth == 0 =>
+                {
+                    break;
+                }
                 _ => tokens.push(self.advance()),
             }
         }
@@ -1470,12 +1519,26 @@ impl Parser {
 
     fn statement_contains_equals_before_break(&self) -> bool {
         let mut index = self.index;
+        let mut brace_depth = 0usize;
         let mut square_depth = 0usize;
         let mut paren_depth = 0usize;
         while let Some(token) = self.tokens.get(index) {
             match &token.kind {
-                TokenKind::Equals if square_depth == 0 && paren_depth == 0 => return true,
-                TokenKind::Newline | TokenKind::Semicolon | TokenKind::RightBrace => return false,
+                TokenKind::Equals if brace_depth == 0 && square_depth == 0 && paren_depth == 0 => {
+                    return true;
+                }
+                TokenKind::Newline | TokenKind::Semicolon
+                    if brace_depth == 0 && square_depth == 0 && paren_depth == 0 =>
+                {
+                    return false;
+                }
+                TokenKind::RightBrace
+                    if brace_depth == 0 && square_depth == 0 && paren_depth == 0 =>
+                {
+                    return false;
+                }
+                TokenKind::LeftBrace => brace_depth += 1,
+                TokenKind::RightBrace => brace_depth = brace_depth.saturating_sub(1),
                 TokenKind::LeftBracket => square_depth += 1,
                 TokenKind::RightBracket => square_depth = square_depth.saturating_sub(1),
                 TokenKind::LeftParen => paren_depth += 1,
@@ -1593,6 +1656,49 @@ impl Parser {
             message: message.to_string(),
             span: self.previous_span(),
         }
+    }
+}
+
+fn compound_assignment_operator(tokens: &[Token]) -> Option<(&'static str, &Token)> {
+    match tokens.last().map(|token| &token.kind) {
+        Some(TokenKind::Plus) => return Some(("+", tokens.last()?)),
+        Some(TokenKind::Minus) => return Some(("-", tokens.last()?)),
+        _ => {}
+    }
+    tokens
+        .windows(2)
+        .find_map(|pair| match (&pair[0].kind, &pair[1].kind) {
+            (TokenKind::Plus, TokenKind::Equals) => Some(("+", &pair[0])),
+            (TokenKind::Minus, TokenKind::Equals) => Some(("-", &pair[0])),
+            _ => None,
+        })
+}
+
+fn unsupported_compound_assignment(operator: &str, span: SourceSpan) -> TextualMirDiagnostic {
+    TextualMirDiagnostic {
+        code: "compound_assignment_not_supported".to_string(),
+        message: format!(
+            "compound assignment `{operator}=` is not supported until its Surface-to-Core lowering is defined"
+        ),
+        span,
+    }
+}
+
+fn equality_operator_token(tokens: &[Token]) -> Option<&Token> {
+    tokens.windows(2).find_map(|pair| {
+        matches!(
+            (&pair[0].kind, &pair[1].kind),
+            (TokenKind::Equals, TokenKind::Equals)
+        )
+        .then_some(&pair[0])
+    })
+}
+
+fn unsupported_surface_expression_operator(span: SourceSpan) -> TextualMirDiagnostic {
+    TextualMirDiagnostic {
+        code: "unsupported_surface_expression_operator".to_string(),
+        message: "P-SURF parser does not lower equality expressions yet".to_string(),
+        span,
     }
 }
 
@@ -1775,7 +1881,9 @@ fn keyword_name(keyword: Keyword) -> &'static str {
         Keyword::Grant => "grant",
         Keyword::Import => "import",
         Keyword::Init => "init",
+        Keyword::If => "if",
         Keyword::Join => "join",
+        Keyword::Let => "let",
         Keyword::Module => "module",
         Keyword::Place => "place",
         Keyword::Principal => "principal",
