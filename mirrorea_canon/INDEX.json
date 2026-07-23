@@ -1447,7 +1447,7 @@
    "summary": "active clean-near-end の三 counter CostBudget に限り、ordinary scalar total の順序が pointwise natural bound を反映するという実験候補を finite Lean countermodel で検査する。Contract の cost rule、final algebra、runtime は選ばない。",
    "open_items": [],
    "path": "working/WRK-0021-costbudget-scalar-projection.md",
-   "bytes": 7169
+   "bytes": 7366
   }
  ]
 }

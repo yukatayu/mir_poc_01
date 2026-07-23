@@ -70,8 +70,8 @@ failed at lines 152 and 156: Lean could not synthesize `Decidable
 so later baseline commands ran after that failure; their output is not retained
 as countermodel evidence. The amendment and generated manifest change were
 restored. Do not repair or rerun this record.
-Evidence artifacts: none
-Evidence commits: none
+Evidence artifacts: LAB:plan/wrk-0021-costbudget-scalar-projection-falsifier.md@fbfbc31a8ec0ac4a085b704a21400326b7b96952:42fe79fe60f21dfaf467dc3ead8c6724b7091daa3a2d6ea712d6aef7efc811d1
+Evidence commits: fbfbc31a8ec0ac4a085b704a21400326b7b96952
 Impact / non-effects: This route is frozen before it establishes the fixed
 scalar-reflection implication. It cannot make the pointwise relation, the
 witness pair, any scalar representation, a Canon or Contract rule, or decide
