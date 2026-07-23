@@ -161,8 +161,10 @@ pending-control, occurrence, or projection relation that remains owner-pending.
 
 ## Commit / push status
 
-Pending final validation, focused review, `git diff --check`, commit with
-`--no-gpg-sign`, and push to `origin/main`.
+The main package was committed with `--no-gpg-sign` as `d37501a4`
+(`docs: clarify value-flow decision packet`) and pushed to `origin/main`.
+This commit/push-status correction is committed and pushed immediately as the
+same package's documentation follow-up.
 
 ## Sub-agent session close status
 
