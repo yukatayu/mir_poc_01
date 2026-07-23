@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 00:15 JST
+最終更新: 2026-07-24 00:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -74,6 +74,14 @@ quoting before it could establish any text fact, so it supplies no
 Option/admit carrier correspondence result. It cannot be repaired or rerun;
 it also cannot choose a carrier in Option, constraints, residual obligations,
 another Core form, grammar, parser, or runtime.
+
+WRK-0021 is pre-registered but not yet run. It asks only whether one explicit
+ordinary scalar-total relation over the active three-counter CostBudget model
+reflects that model's pointwise bound for a fixed finite pair. Its evidence can
+reject that experimental implication only. It cannot select a pointwise or
+scalar Contract rule, old/new direction, transparent-overlay classification,
+final algebra, OBL-026 premise, patch carrier, runtime accounting, or public
+behavior.
 
 The post-PROPOSAL-010 independent frontier screen selected no candidate from
 its reviewed runtime/Surface, current-L2, and Product Alpha families. It did
@@ -205,6 +213,7 @@ production implementation; otherwise it escalates. See
 | 53 | Post-PROPOSAL-010 autonomous frontier screen | Closed no-candidate within its reviewed runtime/Surface, current-L2, and Product Alpha families. Independent local, planner, reviewer, and Oracle checks applied a permitted lane, bounded falsifier, non-duplication, live downstream decision, and reserved-boundary exclusion without changing ADR-0014's standing predicate. PoseGraph and Surface near-misses are stopped by the unresolved lane-catalog correspondence; admitted variants replay recorded evidence. The screen did not audit the later-named Canon Option/admit literal chain, which was independently selected as WRK-0020 and then froze at a command falsifier. | Macro 0/1 and 2 reserve; do not use this historical source-cut screen to prohibit a distinct new audit. Reapply it on a permitted literal mismatch with a live decision, or after an owner/canon lane-catalog disposition. |
 | 54 | Contract cost-bound transparency decision packet | Current Canon lists `cost_bound` in Contract but not in its named transparent-overlay conditions. The text does not settle whether that list is complete or how a cost-only change is treated. PROPOSAL-011 exposes A owner-selected scoped non-weakening, B explicit update until algebra selection, C advisory treatment, and D interpretation defer; no alternative is selected. | Owner/canon decision boundary; do not amend theory/02, OBL-026, patch compatibility, runtime, or final algebra from LAB samples. An independent L3 sample-model countermodel may proceed only through separate pre-registration. |
 | 55 | WRK-0020 Option/admit literal audit | Frozen command-level falsifier: after pushed registration, backticks in the exact double-quoted Python command were shell-substituted; Bash reported `OptionDecl.admit: command not found`, then Python raised `AssertionError`. No literal source result is retained. | Closed scoped route. Do not repair or retry this record. A later audit requires an independently selected fresh question and registration; it must not infer a carrier/grammar/parser/runtime conclusion from this failure. |
+| 56 | WRK-0021 CostBudget scalar-projection countermodel | Registered only: a fixed three-counter finite Lean model will test whether ordinary scalar total reflects the existing pointwise bound. The input and result are LAB-only; no outcome command has run. | Macro 1/5 reserve. Commit/push registration first, then run only the exact marker, Lean, and baseline commands. Freeze on any source, prior-duplicate, Lean, or reserved-cost-policy falsifier. |
 
 ## self-driven macro phase reading
 

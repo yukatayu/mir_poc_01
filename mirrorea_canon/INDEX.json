@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 102,
+ "files": 103,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 9640
+   "bytes": 9981
   },
   {
    "id": "root/north-star",
@@ -1434,6 +1434,20 @@
    "open_items": [],
    "path": "working/WRK-0020-option-admit-carrier-literal-audit.md",
    "bytes": 7988
+  },
+  {
+   "id": "working/WRK-0021",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/02-types-effects-failures",
+    "meta/proposal-011"
+   ],
+   "summary": "active clean-near-end の三 counter CostBudget に限り、ordinary scalar total の順序が pointwise natural bound を反映するという実験候補を finite Lean countermodel で検査する。Contract の cost rule、final algebra、runtime は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0021-costbudget-scalar-projection.md",
+   "bytes": 6444
   }
  ]
 }

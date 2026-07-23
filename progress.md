@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 00:21 JST
+最終更新: 2026-07-24 00:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -230,6 +230,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 00:57 JST: selected and pre-registered WRK-0021 for one finite
+  LAB countermodel: the explicitly experimental scalar-total relation over the
+  existing three CostBudget counters may not reflect their pointwise bound. No
+  marker check, Lean run, sample runner, or cost-policy conclusion has run.
+  The record cannot decide PROPOSAL-011, a Contract direction, final algebra,
+  OBL-026, runtime accounting, or a transparent-overlay classification.
 
 - 2026-07-24 00:21 JST: clarified the relation between the prior
   post-PROPOSAL-010 no-candidate screen and WRK-0020. That screen covered its
