@@ -69,6 +69,9 @@ ADR-0014 or prohibit a later independent candidate.
   timestamp; both metadata omissions were corrected before the next run)
 - final `make check` and `git diff --check` after the review corrections
 - focused final package-diff re-review
+- `git worktree add --detach /tmp/mir-poc-2403-audit-9e0901c8 9e0901c8`
+- `make docs` in that clean disposable worktree
+- `git worktree remove /tmp/mir-poc-2403-audit-9e0901c8`
 
 ## Evidence / outputs / test results
 
@@ -82,8 +85,9 @@ LAB CostBudget evidence uses named, pointwise counters and rejects
 
 The final `make check` passed: Canon index check, source-hierarchy check (733
 required paths), docs validation (1,557 numbered reports), and `cargo check`.
-The final whitespace check passed. A clean-worktree docs audit remains for the
-committed package close.
+The final whitespace check passed. The clean disposable worktree at committed
+`9e0901c8` was clean before and after `make docs`; that audit passed the Canon
+index, source-hierarchy, and docs validations with the same 733/1,557 counts.
 
 ## What changed in understanding
 
@@ -161,9 +165,11 @@ later working record has not pre-registered.
 
 ## Commit / push status
 
-Pending the first package commit and push. The commit will use `--no-gpg-sign`;
-the subsequent clean-worktree audit and report closeout will be committed and
-pushed separately.
+The validated package was committed with `--no-gpg-sign` as `9e0901c8`
+(`docs: add contract cost decision packet`) and pushed to `origin/main`. This
+audit/closeout update is committed and pushed immediately afterward as a
+separate status commit so the report records the first package commit without
+self-referential history.
 
 ## Sub-agent session close status
 
