@@ -47,7 +47,10 @@ report was pushed. The worktree was clean before the final `make check`.
 - `git diff --check` after the header repair
 - `make check` after the header repair, which passed Canon index,
   source-hierarchy, documentation, and Cargo checks
-- pending: final diff review, commit, push, and committed-head `make check`
+- corrective commit/push at `1cd321db`
+- committed-head `make check` at `1cd321db`, which passed Canon index,
+  source-hierarchy, documentation, and Cargo checks
+- final closeout diff review, commit, and push
 
 ## Evidence / outputs / test results
 
@@ -62,7 +65,7 @@ The corrected header now equals the latest pre-existing dated log. No source,
 runtime, parser, sample, or theory evidence was run or changed in this package.
 The post-repair `make check` passed with 102 indexed Canon files, all 733
 required hierarchy paths present, 1,560 numbered reports, and a successful
-Cargo check.
+Cargo check. The same checks passed again from committed `HEAD` at `1cd321db`.
 
 ## What changed in understanding
 
@@ -114,12 +117,13 @@ entry; the final documentation and repository checks remain required.
 ## Skipped validations and reasons
 
 No theory, parser, runtime, Lean, or sample command is run because no such
-layer changed. A committed-head `make check` remains pending after the
-corrective commit.
+layer changed. No relevant validation was skipped; the correction and its
+committed-head validation are complete.
 
 ## Commit / push status
 
-Pending corrective commit and immediate push with `--no-gpg-sign`.
+Corrective commit `1cd321db` was pushed with `--no-gpg-sign`. This report
+closeout update will be committed and pushed immediately with `--no-gpg-sign`.
 
 ## Sub-agent session close status
 
