@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-23 18:19 JST
+最終更新: 2026-07-23 20:43 JST
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
@@ -137,10 +137,9 @@ P-SURF-05 second-admission stale-fence candidate は現行 validator により�
   `plan/158-standing-bounded-autonomy.md`
 - `PROPOSAL-003`、`PROPOSAL-004`、`PROPOSAL-008` は L1-reserved question なので delegated route
   では採択しません。`mirrorea_canon/meta/proposals/PROPOSAL-003-obl020-formalization-boundary-review.md`; `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`; `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`
-- 運用 storage は root filesystem のみで、2026-07-23 03:34 JST 時点の空きは約
-  6.9 GiB です。承認済み cleanup で再生成可能な local build output と Mirrorea 一時成果物を
-  除去しました。configured external workdir は依然未マウントなので、次の heavy build / generated
-  artifact / toolchain work の前にも容量を再確認し、外部 workdir を優先します。
+- `df -h .` は 2026-07-23 20:43 JST 時点で root filesystem の空き約 74 GiB を報告した。
+  これは bounded local check の余力確認であり、heavy build / generated artifact / toolchain
+  work の前には容量と external workdir の mount を再確認する。
 
 ## オーナーの確認・判断待ち
 

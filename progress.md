@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 18:19 JST
+最終更新: 2026-07-23 20:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,21 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 20:43 JST: re-triaged the autonomous theory frontier against
+  Canon, the existing no-toy proof-interface audits, an independent planner,
+  an external advisory review, and an independent challenge review. No new L3
+  record was selected: the advisory's abstract carrier/step-premise transfer
+  idea would need an unselected proof-side queue frame, occurrence
+  representation, or patch lifecycle model and has no current consumer. Canon
+  already fixes the relevant state and step shapes, but not that proof
+  interface; the current LAB prioritization therefore retains its stopped
+  toy-model route without narrowing ADR-0014 eligibility. `OBL-001` direct-`c`
+  versus explicit Result/write-bridge remains the smallest owner decision that
+  can unlock a proof-facing package. `make check`, the 15-row computational
+  helper matrix, the 20-test typed-IR interpreter suite, and one bounded
+  Product Alpha local session run passed; no Canon, OBL, Gate/Phase, workflow,
+  or public status moved.
 
 - 2026-07-23 18:19 JST: rewrote the two invalid WRK-0019 history commits with
   an explicitly approved force-with-lease recovery. The re-executed evidence
