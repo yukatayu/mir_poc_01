@@ -186,6 +186,8 @@
     `plan/wrk-0020-option-admit-carrier-literal-audit.md`
 142. WRK-0021 CostBudget scalar-projection falsifier は
     `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
+143. post-WRK-0021 autonomous frontier triage は
+    `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 
 ## current repo の短い要約
 
@@ -733,6 +735,8 @@
   `plan/wrk-0020-option-admit-carrier-literal-audit.md`
 - WRK-0021 CostBudget scalar-projection falsifier:
   `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
+- Post-WRK-0021 autonomous frontier triage:
+  `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 
 ## maintenance rule
 
