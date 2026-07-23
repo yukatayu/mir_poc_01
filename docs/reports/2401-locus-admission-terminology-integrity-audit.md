@@ -163,10 +163,14 @@ change.
 
 ## Commit / push status
 
-Pending at report write. The package will be validated, committed with
-`--no-gpg-sign`, pushed, and then recorded in a closeout update.
+The validated proposal, index, snapshots, and initial report were committed
+with `--no-gpg-sign` as `20420fd9` (`docs: add locus admission decision
+packet`) and pushed to `origin/main`. This closeout update is committed and
+pushed immediately afterward as a separate status commit so the report records
+the first package commit without self-referential history.
 
 ## Sub-agent session close status
 
-The planner and reviewer completed read-only work without edits. They remain
-available until the final diff review, then will be closed.
+The planner and reviewer completed read-only work without edits. The reviewer
+reported five initial documentation/scope issues and two follow-up wording
+issues; all were corrected and revalidated. Both sessions are closed.
