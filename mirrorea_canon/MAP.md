@@ -84,6 +84,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0017 | L3-open, frozen | exact current-L2 Lean foundation の二 constructor `Capability` に限る proposition-valued `captureSubset` excluded-middle route。局所の一時 theorem は公理なしで通ったが、登録済み opaque generic-domain control は `Classical.choice` を伴って通ったため、明示 finite interface なしに generic decision を拒むという停止条件を満たし frozen。source は復元済みで、構成性、OBL-003、Line-1、checker、generic carrier、Canon carrier/APIは変更・主張しない。`working/WRK-0017-local-predicate-proposition-decidability.md` |
 | WRK-0018 | L3-open, frozen | exact IFC Lean foundation 内の marked tail が最初にコンパイル失敗した registered falsifier で凍結した L3 record。後続の green toy tail は修正であり保持せず、source は登録時 digest に復元済み。telemetry semantics、label lattice、export ABI、THM-005/OBL、BND-008、grammar、SCN、runtime は変更・主張しない。`working/WRK-0018-thm005-telemetry-effect-boundary.md` |
 | WRK-0019 | L3-open, not-promoted | P-COMP-03 arrays-bounds negative の一つの non-production direct-world sidecar は、既存 Product Alpha package route で固定 `MirCompute` / `OutOfBounds` を観測した L3 record。helper、schema、validator、runtime、CLI、public failure carrier、failure phase、Gate/Phase は変更・主張しない。`working/WRK-0019-pcomp03-bounds-direct-carrier.md` |
+| WRK-0020 | L3-open, not-promoted | theory/01 Option、theory/06 chain、Surface grammar、Core companion、current-L2 e3 の option-local `admit` の literal carrier 対応を登録済み source audit で検査する。Option/constraint/residual/other carrier、grammar、OBL、parser/runtime は選ばない。`working/WRK-0020-option-admit-carrier-literal-audit.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

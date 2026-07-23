@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 101,
+ "files": 102,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 9242
+   "bytes": 9614
   },
   {
    "id": "root/north-star",
@@ -1418,6 +1418,22 @@
    "open_items": [],
    "path": "working/WRK-0019-pcomp03-bounds-direct-carrier.md",
    "bytes": 12738
+  },
+  {
+   "id": "working/WRK-0020",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/06-existence-fallback",
+    "spec/02-surface-grammar",
+    "spec/04-core-ir"
+   ],
+   "summary": "option-local admit を含む Canon の chain / Surface / companion notation と theory/01 の Option payload の literal carrier 対応を既存 current-L2 lane で監査する。carrier、grammar、OBL は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0020-option-admit-carrier-literal-audit.md",
+   "bytes": 7081
   }
  ]
 }
