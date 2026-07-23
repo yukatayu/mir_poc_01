@@ -188,6 +188,8 @@
     `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
 143. post-WRK-0021 autonomous frontier triage は
     `plan/184-post-wrk0021-autonomous-frontier-triage.md`
+144. cost-bound substitutability primary-literature audit は
+    `plan/185-cost-bound-substitutability-primary-literature-audit.md`
 
 ## current repo の短い要約
 
@@ -737,6 +739,8 @@
   `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
 - Post-WRK-0021 autonomous frontier triage:
   `plan/184-post-wrk0021-autonomous-frontier-triage.md`
+- cost-bound substitutability primary-literature audit:
+  `plan/185-cost-bound-substitutability-primary-literature-audit.md`
 
 ## maintenance rule
 

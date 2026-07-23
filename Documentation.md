@@ -26,7 +26,9 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`、
 `plan/181-preservation-proof-prerequisite-literature-audit.md`、
 `plan/182-canon-core-minimality-and-proof-interface-audit.md`、
-`plan/183-transparent-cost-bound-substitutability-decision.md`
+`plan/183-transparent-cost-bound-substitutability-decision.md`、
+`plan/184-post-wrk0021-autonomous-frontier-triage.md`、
+`plan/185-cost-bound-substitutability-primary-literature-audit.md`
 
 ## 最初に読む順序
 
@@ -91,7 +93,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   分離するかを owner に問います。Locus 階層、membership provenance、Core/OBL は追加しません。
 - PROPOSAL-011 は、Contract に含まれる `cost_bound` が transparent overlay の列挙条件から
   漏れている点を、non-weakening、全変更の明示更新、advisory 化、現状維持の owner 選択として
-  分離します。最終 cost algebra、runtime、OBL、patch carrier は選びません。
+  分離します。一次文献比較は、transparent rule に carrier/fragment、比較方向、未知・比較不能時の
+  扱い、composition premise が必要だと整理しただけで、最終 cost algebra、runtime、OBL、patch
+  carrier や proposal の選択は行いません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

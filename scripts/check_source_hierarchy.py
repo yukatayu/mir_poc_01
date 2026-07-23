@@ -270,6 +270,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/182-canon-core-minimality-and-proof-interface-audit.md",
         "plan/183-transparent-cost-bound-substitutability-decision.md",
         "plan/184-post-wrk0021-autonomous-frontier-triage.md",
+        "plan/185-cost-bound-substitutability-primary-literature-audit.md",
     ],
     "scripts": [
         "scripts",
