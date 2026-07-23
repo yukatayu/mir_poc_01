@@ -381,6 +381,21 @@ current clean near-end layer では、次を built-in vocabulary として扱い
 
 ## まず実行するコマンド
 
+### Product Alpha Docker fixture の setup 入力例
+
+通常は `mirrorea-alpha transport --mode docker` または release-check helper が
+下表を内部で設定するため、手入力は不要です。Compose を直接確認する場合だけ、全て
+absolute path で渡します。パスワードや実アカウントは不要で、fixture token は
+accidental-use guard であって認証情報ではありません。
+
+| 入力 | 具体例 | 用途 |
+| --- | --- | --- |
+| `MIRROREA_PRODUCT_ALPHA1_BINARY` | `"$PWD/target/debug/mirrorea-alpha"` | `cargo build -p mirrorea-cli` 後の実行可能 binary |
+| `MIRROREA_ALPHA_SESSION_DIR` | `"/tmp/mirrorea-readme-session"` | `run-local` 前に指定する local session store |
+| `MIRROREA_PRODUCT_ALPHA1_SESSION_FILE` | `"/tmp/mirrorea-readme-session/session_product-alpha1-demo.4c1aa1672b497b43.session.json"` | `run-local` JSON が返した `session_path`。`session` はこの既存 file を読む |
+| `MIRROREA_PRODUCT_ALPHA1_OUTPUT_DIR` | `"/tmp/mirrorea-alpha1-docker"` | Compose の `world.json` / `participant.json` 出力先 |
+| `MIRROREA_PRODUCT_ALPHA1_TRANSPORT_FIXTURE_TOKEN` | `"mirrorea-local-fixture-20260723"` | Docker fixture 専用の一致 token。password / public credential ではない |
+
 active clean near-end suite の確認:
 
 ```bash

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-23 08:05 JST
+最終更新: 2026-07-23 18:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -228,6 +228,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-23 18:19 JST: rewrote the two invalid WRK-0019 history commits with
+  an explicitly approved force-with-lease recovery. The re-executed evidence
+  commit now contains only the registered sidecar, LAB memo/index, and direct
+  report; all four pins, the matrix, focused tests, `check`, and `run-local`
+  passed. The result remains `not-promoted` L3 LAB evidence only, with no
+  public error-contract, failure-phase, workflow, Canon, Gate, or Phase change.
 
 - 2026-07-23 08:05 JST: registered WRK-0019 as an unexecuted, existing-lane
   P-COMP-03 arrays-bounds direct-world observation. It pins one future Product

@@ -131,8 +131,12 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   source screen は、現時点では十分な情報量を持つ次の standing target を選べないと記録した。
   byte-identical source の二経路観測は reserve に留まり、Product Alpha の textual input 化、
   helper/source equivalence、general source compatibility、workflow への昇格を意味しない。
-  outcome command は未実行で、再開条件は
-  `plan/post-wrk0013-no-candidate-disposition.md` と
+  `WRK-0019` は別 input の一つの non-production direct-world sidecar を既存 package path
+  へ通し、`check` の受理と `run-local` の固定 `MirCompute` / `OutOfBounds` を観測した。
+  これは LAB の一件の evidence であり、general carrier、runtime、public error contract、
+  Canon、Gate/Phase、workflow を主張しない。詳細と再開条件は
+  `plan/wrk-0019-pcomp03-bounds-direct-carrier.md`、
+  `plan/post-wrk0013-no-candidate-disposition.md`、
   `plan/post-wrk0013-portfolio-review.md` にあります。
 
 この境界と current run の詳細は `plan/158-standing-bounded-autonomy.md`、過去の
