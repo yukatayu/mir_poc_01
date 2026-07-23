@@ -184,6 +184,8 @@
     `plan/wrk-0019-pcomp03-bounds-direct-carrier.md`
 141. WRK-0020 option-admit literal-audit falsifier は
     `plan/wrk-0020-option-admit-carrier-literal-audit.md`
+142. WRK-0021 CostBudget scalar-projection falsifier は
+    `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
 
 ## current repo の短い要約
 
@@ -729,6 +731,8 @@
   `plan/183-transparent-cost-bound-substitutability-decision.md`
 - WRK-0020 option-admit literal-audit falsifier:
   `plan/wrk-0020-option-admit-carrier-literal-audit.md`
+- WRK-0021 CostBudget scalar-projection falsifier:
+  `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
 
 ## maintenance rule
 

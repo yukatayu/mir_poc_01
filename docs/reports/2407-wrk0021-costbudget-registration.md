@@ -58,8 +58,10 @@ WRK-0020 closeout and its final successful `make check`.
   capture
 - `lean --version`, which reported Lean 4.29.1
 - resource audit: `df -h .` and `free -h`
-- pending: Canon index rebuild/check, diff review, commit, push, and
-  committed-head `make check`
+- Canon index rebuild/check, diff review, registration commit, and immediate
+  push at `4ac08f77f0ef718803ab0628abce7ac85eebff43`
+- committed-head `make check`, which passed Canon index, source hierarchy,
+  documentation, and Cargo checks before outcome execution
 
 ## Evidence / outputs / test results
 
@@ -139,8 +141,9 @@ implementation or Contract/layer test applies because no such surface changed.
 
 ## Commit / push status
 
-Pending registration commit and immediate push with `--no-gpg-sign`; outcome
-commands are prohibited until then.
+Registration commit `4ac08f77f0ef718803ab0628abce7ac85eebff43` was created
+with `--no-gpg-sign` and pushed immediately. The post-push outcome is recorded
+separately in Report 2408; this report remains registration evidence only.
 
 ## Sub-agent session close status
 

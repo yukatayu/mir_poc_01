@@ -57,17 +57,26 @@ Non-claims: This does not select pointwise order, scalar total, named-vector, we
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: none. No registered marker check, Lean compilation, sample
-runner, or source audit has run before this registration is committed and
-pushed.
-Negative evidence: none.
+Reliance status: frozen
+Positive evidence: none. The registered source amendment did not compile, so
+it establishes no scalar/pointwise countermodel and no CostBudget conclusion.
+Negative evidence: After registration commit `4ac08f77` was pushed, the
+pre-source marker check passed. The declared source amendment was then added
+only in the existing Lean foundation and the exact registered Lean command
+failed at lines 152 and 156: Lean could not synthesize `Decidable
+(scalarTotalLeq scalarCandidate scalarReference)` or `Decidable
+¬pointwiseBudgetLeq scalarCandidate scalarReference`. This is the registered
+`Lean cannot establish` falsifier. The outer command used semicolon separators,
+so later baseline commands ran after that failure; their output is not retained
+as countermodel evidence. The amendment and generated manifest change were
+restored. Do not repair or rerun this record.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: If evidence is later retained, it can only reject the
-one explicitly written scalar-reflection implication in the fixed finite LAB
-model. It cannot make the pointwise relation, the witness pair, or any scalar
-representation a Canon or Contract rule, and it cannot decide PROPOSAL-011.
+Impact / non-effects: This route is frozen before it establishes the fixed
+scalar-reflection implication. It cannot make the pointwise relation, the
+witness pair, any scalar representation, a Canon or Contract rule, or decide
+PROPOSAL-011. A future inquiry requires a distinct registration; it must not
+repair or reuse this record as a CostBudget result.
 Independent review: not-required-for-L3
 
 ## Supersession
