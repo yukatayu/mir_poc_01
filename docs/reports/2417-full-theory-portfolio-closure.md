@@ -150,11 +150,11 @@ and existing-lane checks are run after the documentation edits.
 
 ## Commit / push status
 
-Pending at report write; the documentation-only package will be committed with
-`--no-gpg-sign` and pushed before task close.
+The documentation-only package was committed with `--no-gpg-sign` as
+`cea80fbde555e2e7046ff6520ea7f7cee44e7272` and pushed to `origin/main`.
+This report-status closeout is recorded in the follow-up documentation commit.
 
 ## Sub-agent session close status
 
-Planner and formal reviewer completed read-only work. They will be closed after
-the final validation and documentation review; no sub-agent edited repository
-files.
+Planner and formal reviewer completed read-only work and were closed after
+final validation. No sub-agent edited repository files.
