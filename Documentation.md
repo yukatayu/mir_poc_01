@@ -33,7 +33,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`、
 `plan/192-post-admission-request-validation-context-audit.md`、
 `plan/193-post-admission-validation-context-literature-and-counterexample-memo.md`、
-`plan/194-product-alpha1-installed-binary-replay-evidence.md`
+`plan/194-product-alpha1-installed-binary-replay-evidence.md`、
+`plan/195-post-proposal013-autonomous-frontier-delta-audit.md`
 
 ## 最初に読む順序
 

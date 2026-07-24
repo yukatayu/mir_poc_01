@@ -753,6 +753,8 @@
   `plan/193-post-admission-validation-context-literature-and-counterexample-memo.md`
 - Product Alpha installed-binary replay evidence boundary:
   `plan/194-product-alpha1-installed-binary-replay-evidence.md`
+- post-PROPOSAL-013 autonomous frontier delta audit:
+  `plan/195-post-proposal013-autonomous-frontier-delta-audit.md`
 - Post-WRK-0021 autonomous frontier triage:
   `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 - cost-bound substitutability primary-literature audit:

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 23:16 JST
+最終更新: 2026-07-25 00:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -88,6 +88,14 @@ the existing Canon premises: request-associated claims remain non-authoritative
 until checked, and an M2 correlation must stop if it needs an unselected
 request-instance/queue/event/side carrier. It does not promote external
 credential, provenance, or authorization systems into Mir semantics.
+
+Plan 195 closes a fresh delta screen, not the theory frontier. From Plan 191's
+source cut through `f829820b`, the Canon change is only unanswered
+PROPOSAL-013; Plans 192/193 are non-selecting owner support and Plan 194 is
+bounded operational evidence. No successor WRK is selected. The current
+consumer/non-duplication dossier is LAB selection discipline, not an additional
+ADR-0014 prohibition; the independent Canon reason is that a decisive
+PROPOSAL-013 experiment would choose its reserved representation boundary.
 
 A source recheck of Surface `let`, `if`, ordinary expressions, and compound
 assignment found no additional lowering rule in the current sketches. It does
@@ -328,6 +336,7 @@ the precise boundary.
 | 64 | Post-admission request validation context | Owner decision packet: literal Canon comparison leaves the semantic carrier or non-transport recovery relation for post-admission principal/epoch/incarnation validation unselected. It is non-duplicative and separately recordable from value flow and occurrence identity; compatibility/dependency remains unresolved. | Macro 1/5 boundary. Review PROPOSAL-013 M1/M2/MD; do not create a request field, queue/wire schema, event identity, runtime route, or L3 proof from helper-local envelopes. |
 | 65 | Post-admission validation-context comparison | LAB decision support: bearer credential, trusted provenance, provenance-aware authorization, and causal-authorization literature define contrasts and conditional adverse cases only. | Macro 1/5 boundary support. Use Plan 193 to evaluate an owner disposition; do not import a credential/middleware/ACL model or select a request identity/carrier. |
 | 66 | Product Alpha installed-binary replay | Closed bounded execution replay: inspected observed reports accept the documented demo, native bundle verification, and Docker Compose TCP roundtrip. The outer helper's aggregate terminal JSON is unavailable, so no aggregate release-check result is claimed. | Macro 2/4 evidence maintenance. Retain Plan 194 as direct artifact evidence only; do not promote WAN/federation, distributed durability, arbitrary native execution, signature safety, final public ABI, or Canon status. |
+| 67 | Post-PROPOSAL-013 frontier delta audit | Closed no-successor screen: the delta supplies an owner decision request, support memo, and bounded operational replay, but no permitted-lane non-reserved decisive question. Consumer/non-duplication are LAB selection criteria, not ADR-0014 additions. | Macro 0/1 and 5 reserve. Reopen only on a fresh permitted-lane discrepancy with a current consumer, an existing selected relation/importer, or a non-defer owner/Canon action that removes the exact representation stop line; a defer does not unlock work. |
 
 ## self-driven macro phase reading
 
