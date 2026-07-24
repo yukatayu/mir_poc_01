@@ -86,6 +86,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0019 | L3-open, not-promoted | P-COMP-03 arrays-bounds negative の一つの non-production direct-world sidecar は、既存 Product Alpha package route で固定 `MirCompute` / `OutOfBounds` を観測した L3 record。helper、schema、validator、runtime、CLI、public failure carrier、failure phase、Gate/Phase は変更・主張しない。`working/WRK-0019-pcomp03-bounds-direct-carrier.md` |
 | WRK-0020 | L3-open, frozen | theory/01 Option、theory/06 chain、Surface grammar、Core companion、current-L2 e3 の option-local `admit` literal audit は、登録済み command の shell quoting falsifier で凍結。source consistency、Option/constraint/residual/other carrier、grammar、OBL、parser/runtime は結論しない。`working/WRK-0020-option-admit-carrier-literal-audit.md` |
 | WRK-0021 | L3-open, frozen | active clean-near-end の三 counter CostBudget に限る scalar-total reflection audit は、登録後の Lean proof が comparison aliases の `Decidable` instance を合成できない first falsifier で凍結。countermodel、Contract cost rule、final algebra、runtime は結論しない。`working/WRK-0021-costbudget-scalar-projection.md` |
+| WRK-0022 | L3-open | `[WRITE-CROSS]` の表示済み failure-row 包含節だけが experiment-local `phi_gen` を一意に定めるかを、既存 OBL-021 Lean lane の有限 countermodel で検査する登録済み L3 record。意図した生成関数、Canon derivation、failure-row equality、OBL は選ばない。`working/WRK-0022-write-cross-failure-generation-boundary.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 17:26 JST
+最終更新: 2026-07-24 20:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -135,9 +135,19 @@ transient finite theorem and generated manifest update were restored, so no
 scalar/pointwise countermodel or CostBudget conclusion is retained. A different
 tactic, relation encoding, or decidability declaration would repair the frozen
 record and is prohibited. The post-WRK-0021 independent candidate screen found
-no distinct standing-eligible L3 target; it cannot select a pointwise or scalar
+no distinct target at that source cut; it cannot select a pointwise or scalar
 Contract rule, old/new direction, transparent-overlay classification, final
 algebra, OBL-026 premise, patch carrier, runtime accounting, or public behavior.
+
+WRK-0022 is the current promoted package. It is an unrun existing-OBL-021-lane
+countermodel of only the displayed `[WRITE-CROSS]` row-containment premises.
+The registration fixes an empty row and `{StaleMembership}` as finite
+experiment candidates, then asks whether both satisfy the displayed premises
+while differing. It must first be committed and pushed. It neither selects the
+intended generator nor claims two Canon elaboration derivations, failure-row
+equality, E-ROW-001 behavior, OBL status, Gate/Phase movement, or implementation
+behavior. The next package is its exact registered marker/baseline/new-source/
+source-audit/synchronization sequence in `samples/lean` and `plan` only.
 
 The post-PROPOSAL-010 independent frontier screen selected no candidate from
 its reviewed runtime/Surface, current-L2, and Product Alpha families. It did
@@ -275,6 +285,7 @@ production implementation; otherwise it escalates. See
 | 59 | Canonical elaboration/trace interface-closure audit | Closed read-only source audit: dependency rows are explicitly in `G_e`, so the initial carrier-mismatch reading was corrected. Core read-to-write value flow and serve/admit occurrence identity are not literally closed. The metadata-cycle advisory claim was rejected because Canon permits mutual knowledge dependencies. | Current owner/canon clarification boundary. Do not build a proof model or implementation that assumes an evaluation device or composite/decomposed event model. A complete `G_e` schema is future proof-representation work, not a reason to move dependency rows. PROPOSAL-008 remains independent. |
 | 60 | Autonomous theory frontier revalidation | Closed no-candidate: `[E-WRITE]` duplicates T-RESEARCH-002/-006; a concrete step/frame/membership mapping is owner-reserved and lacks a current second mapping/importer and binary consumer. History maximum and `atomic_cut` repeat prior audits; grammar closure remains owner-reserved. | Macro 0/1 reserve; do not open a WRK. Reopen only under Plan 184's exact dossier. The observed `return` Surface/Core alignment is an owner/canon grammar-elaboration item, not an L3 parser task. |
 | 61 | Full theory-portfolio closure and first-unlock reading | Closed no-candidate after P009 A was recorded: direct-Core re-triage passes only the owner-boundary reopen condition. The current admitted LAB source still lacks a direct-Core object/literal mapping, a non-duplicate falsifier, and a binary consumer; a new traversal would select a reserved boundary. P003 is organizational only and is not prior for this narrow path. | Macro 0/1 reserve. Reopen only when an exact pinned admitted direct-Core classification or literal mapping has a named current importer/package with explicit retain/reject actions. |
+| 62 | WRK-0022 WRITE-CROSS failure-generation boundary | Registered, outcome pending: the exact finite OBL-021-lane countermodel asks only whether the two displayed containment clauses admit both fixed experiment rows. The post-push source artifact and plan memo are not yet present. | Macro 1/5 research. Run only the registered command sequence after this registration is pushed. Retain the premise result or freeze on its falsifier; do not choose a generator, row equality, diagnostic behavior, or an OBL result. |
 
 ## self-driven macro phase reading
 
