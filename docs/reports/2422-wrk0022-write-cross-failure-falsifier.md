@@ -69,6 +69,8 @@ only during the one declared source command and are removed in this package.
   `python3 -m unittest scripts.tests.test_current_l2_lean_sample_sync`, which
   passed all 21 tests; neither is countermodel evidence after the first failure
 - focused failure inspection and restoration diff review
+- post-freeze `make check`, which passed Canon index, source hierarchy,
+  documentation, and Cargo validation before metadata manifestation
 
 ## Evidence / outputs / test results
 
@@ -151,10 +153,11 @@ this frozen record.
 
 ## Commit / push status
 
-Registration `cc8652f9d3dbebf465a28e09bde0e760fc953d66` was pushed. This
-frozen evidence package will be committed with `--no-gpg-sign` and pushed
-immediately; a later metadata-only manifest commit will append its exact commit
-and artifact digest.
+Registration `cc8652f9d3dbebf465a28e09bde0e760fc953d66` and frozen evidence
+commit `81781b4e6fbf6feb8f82676e7e142fe59dc45070` were created with
+`--no-gpg-sign` and pushed immediately. `make check` passed at the frozen
+evidence commit. A metadata-only commit will append the exact evidence commit
+and artifact digest to the WRK record.
 
 ## Sub-agent session close status
 

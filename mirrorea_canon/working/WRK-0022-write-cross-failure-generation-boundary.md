@@ -77,8 +77,8 @@ The source-audit and synchronization commands ran independently after source
 creation, but they do not establish a countermodel after the failed import. The
 transient source and explanation were removed. Do not repair or rerun this
 record.
-Evidence artifacts: none
-Evidence commits: none
+Evidence artifacts: LAB:plan/wrk-0022-write-cross-failure-generation-boundary-falsifier.md@81781b4e6fbf6feb8f82676e7e142fe59dc45070:bda556db8668ce1d2501cc6706176ae5bbb33db5f1f7ce76da628b347d4fc86c
+Evidence commits: 81781b4e6fbf6feb8f82676e7e142fe59dc45070
 Impact / non-effects: This route is frozen before it establishes any
 displayed-premise result. It neither defines nor changes the intended
 failure-generation function, Canon rule, OBL-021 statement/status,
