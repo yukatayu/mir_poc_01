@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-25 01:22 JST
+最終更新: 2026-07-25 01:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -96,6 +96,20 @@ bounded operational evidence. No successor WRK is selected. The current
 consumer/non-duplication dossier is LAB selection discipline, not an additional
 ADR-0014 prohibition; the independent Canon reason is that a decisive
 PROPOSAL-013 experiment would choose its reserved representation boundary.
+
+The whole-theory foundation audit is closed as a source-checked reconciliation
+packet. It opens no WRK. The immediate exact issue is the T0 profile: prose,
+checks, derivation, exit text, and plan/155 use `pass`, whereas the exact root
+JSON placeholder requires `derived-pass`. The artifact is retained LAB
+evidence but must not be read as fully profile-conforming until an owner/canon
+correction and fresh validation. Value/event identity, validation context,
+outcome totality, and cost treatment are pending decision-request routes in
+PROPOSAL-012/013/008/011. Gate-status wording, load precondition/postcondition separation,
+and the channel-state parenthetical remain formalization boundaries; observation
+provenance is a scope interaction. Revisit a narrower Canon reconciliation only
+when a later package actually needs it, and do not choose a carrier first. The
+audit's ordering and no-new-L3 screen are in
+`plan/whole-theory-foundation-audit-20260725.md`.
 
 WRK-0023 is a separately registered literal-transcription package. Its pushed
 scratch execution is a literal reproduction of theory/04's printed consequence
@@ -347,6 +361,7 @@ the precise boundary.
 | 66 | Product Alpha installed-binary replay | Closed bounded execution replay: inspected observed reports accept the documented demo, native bundle verification, and Docker Compose TCP roundtrip. The outer helper's aggregate terminal JSON is unavailable, so no aggregate release-check result is claimed. | Macro 2/4 evidence maintenance. Retain Plan 194 as direct artifact evidence only; do not promote WAN/federation, distributed durability, arbitrary native execution, signature safety, final public ABI, or Canon status. |
 | 67 | Post-PROPOSAL-013 frontier delta audit | Closed no-successor screen: the delta supplies an owner decision request, support memo, and bounded operational replay, but no permitted-lane non-reserved decisive question. Consumer/non-duplication are LAB selection criteria, not ADR-0014 additions. | Macro 0/1 and 5 reserve. Reopen only on a fresh permitted-lane discrepancy with a current consumer, an existing selected relation/importer, or a non-defer owner/Canon action that removes the exact representation stop line; a defer does not unlock work. |
 | 68 | Consistent-cut channel-state literal boundary | Closed scoped evidence: the compiled event lemma is a literal reproduction; the retained boundary is that the displayed predicate does not formalize the channel-state parenthetical or establish interchangeability. | Macro 1/5 reserve; no successor selected. Reopen only on a new permitted-lane discrepancy, an already fixed relation/importer, or a non-defer owner/canon action. |
+| 69 | Whole-theory foundation audit | Closed source-checked reconciliation: no successor WRK is selected from the examined issues. The T0 profile has an exact `pass` / `derived-pass` conflict; PROPOSAL-008/011/012/013 are pending decision-request routes. Gate wording needs reconciliation; load/cut remain formalization boundaries and observation is a scope interaction. | Macro 0/1 owner/canon checkpoint; correct the T0 literal and revalidate plan/155 before any profile reliance. Do not use this as a Gate/Phase/OBL movement or invent a new carrier. |
 
 ## self-driven macro phase reading
 
@@ -359,10 +374,12 @@ the precise boundary.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
+| T0 profile success literal | exact profile contract and plan/155 evidence validity | standardize on `pass`; standardize on `derived-pass`; or return for clarification | recommend `pass`: it is used by the prose, check objects, derivation, exit wording, and retained artifact. Correct Canon and revalidate before any profile reliance; this does not decide G0-D3. |
 | PROPOSAL-009 OBL-001 Core/write statement interface | owner disposition recorded: a future proof-facing package may state the existing Core `c` clause directly | A accepted; B explicit bridge and C defer remain unselected alternatives | P009 A is recorded in Canon. Its re-triage selected no package because the current tree lacks an admitted direct-Core object/literal mapping, non-duplicate falsifier, and binary consumer; it does not identify experiment-only Result with Canon Core |
 | PROPOSAL-010 locus/admission subject wording | whether the overview's undefined child-locus/admission-path sentence is replaced, deleted, made an extension question, or deferred unchanged | A existing admission summary; B delete; C future extension; defer | A: retain only the existing principal/admission model and do not introduce hierarchy or provenance semantics |
 | PROPOSAL-011 Contract cost-bound transparency | whether and how a changed `cost_bound` participates in transparent overlay before the final algebra is selected | A owner-selected scoped non-weakening; B explicit update per change; C advisory; D interpretation defer | Plan 185: A requires carrier/fragment, direction, unknown/incomparable policy, and composition premise; B is conservative while none is selected; C requires an affirmative advisory policy; D preserves openness. No current Canon rule is inferred. |
 | Canon elaboration/trace closure | whether Core value flow and service/admission event identity should be clarified before formal transcription | existing/open Core value-flow relation; composite/decomposed events | Plan 186 is an escalation packet, not a Canon proposal or selected repair. `G_e` dependency membership is already fixed by the existing text; human/canon review is required before a proof model relies on either remaining answer. |
+| PROPOSAL-012 / PROPOSAL-013 | G1 value/event identity and post-admission non-transport validation context | individually recordable `V/R/S/A`; separately `M1/M2/MD` | a later owner-reviewed package must demonstrate any required tuple compatibility/dependency. Do not infer a request context, receipt, result binding, or occurrence identity from LAB helpers or transport. |
 | PROPOSAL-003 | OBL-020 formalization organization | A shared checklist; B package-local organization; C defer | owner chooses; exclude from pilot |
 | PROPOSAL-004 | Surface v0 grammar closure | A Participant-only closure; B custom keyspaces; C defer | A is LAB recommendation; owner chooses |
 | Surface v0 `return` alignment | whether `return` belongs to the exact v0 Surface fragment and, if so, which Core/elaboration treatment applies | retain and specify; exclude from exact v0; defer | owner/canon must decide; existing LAB parsers do not decide it |

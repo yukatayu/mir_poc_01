@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 01:22 JST
+最終更新: 2026-07-25 01:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -105,6 +105,17 @@ branch or establish interchangeability with event membership. The resulting
 source screen selects no successor L3 package; every materially different
 continuation needs a reserved representation, checker, checkpoint, or ledger
 decision. `plan/post-wrk0023-literal-boundary-review.md`
+
+The whole-theory foundation audit is now closed as a source-checked LAB
+reconciliation packet. It selects no successor WRK from the issues examined:
+value/event identity, validation context, outcome totality, and cost are
+pending decision-request routes; state/checkpoint/provenance routes remain
+reserved. It does identify one exact
+current-profile conflict: T0 profile prose and check objects use `pass`, while
+the exact root JSON placeholder requires `derived-pass`; plan/155 uses `pass`.
+The artifact is retained but not treated as fully profile-conforming until a
+Canon correction and fresh validation. This does not move G0, T1, any OBL, or
+an implementation status. `plan/whole-theory-foundation-audit-20260725.md`
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -288,6 +299,8 @@ LAB evidence.
 | Kind | Item | Current handling |
 | --- | --- | --- |
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
+| Owner / canon | T0 profile success literal | `pass` versus `derived-pass` exact-contract correction; recommend `pass`, then revalidate plan/155 without inferring G0 exit |
+| Owner / canon | PROPOSAL-012 / PROPOSAL-013 | pending individual `V/R/S/A` and `M1/M2/MD` dispositions; compatibility/dependency is not yet selected |
 | Owner / canon | PROPOSAL-003 and PROPOSAL-004 | L1-reserved organization / grammar choices; owner records A/B/C |
 | Owner / canon | PROPOSAL-008 | BND-001 outcome-totality interpretation and its future obligation placement |
 | Owner / canon | PROPOSAL-009 | `A accepted`: a later OBL-001 package may state THM-001's existing Core `c` condition directly; post-decision triage selected no package |
@@ -321,6 +334,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-25 01:50 JST: completed a source-checked whole-theory audit with an
+  independent Oracle review. It selects no successor WRK from the examined
+  issues; semantic gaps are pending decision-request routes or reserved
+  formal-carrier boundaries. The T0 profile has an exact `pass` / `derived-pass` conflict, so
+  plan/155 is retained but not treated as fully conforming until Canon repair
+  and fresh validation. No Gate/Phase, OBL, implementation, or public status
+  moved.
 
 - 2026-07-25 01:22 JST: completed the post-WRK-0023 independent review and
   forward clarification. The compiled event lemma is a literal reproduction,
