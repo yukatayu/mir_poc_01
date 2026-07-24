@@ -628,6 +628,7 @@ REQUIRED = [
     "plan/191-post-wrk0022-autonomous-frontier-triage.md",
     "plan/192-post-admission-request-validation-context-audit.md",
     "plan/193-post-admission-validation-context-literature-and-counterexample-memo.md",
+    "plan/194-product-alpha1-installed-binary-replay-evidence.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

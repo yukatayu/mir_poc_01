@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 22:41 JST
+最終更新: 2026-07-24 23:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -193,6 +193,17 @@ as an external carrier. Direct textual `.mir` input is a Product Alpha `check`
 `plan/167-pcomp03-rejection-phase-cross-carrier-audit.md`, and
 `samples_progress.md`.
 
+An installed-binary replay at `f90c2c29` left retained accepted Product Alpha
+demo, native-bundle verification, and Docker Compose TCP transport reports.
+The demo report records same-session reopen and attach-matrix checks;
+the Docker report records an accepted two-process TCP wire roundtrip. This is
+bounded LAB execution evidence, not an aggregate release-helper acceptance,
+WAN/federation, distributed durable save/load, arbitrary native package
+execution, signature-is-safety, or final public API/ABI claim. The outer helper
+summary was not captured after its terminal transport detached, so the claim is
+limited to the inspected observed reports. See
+`plan/194-product-alpha1-installed-binary-replay-evidence.md`.
+
 ### Operational Suite line
 
 The WorldCore through TwoShard/Gradient suite checks documented same-session
@@ -309,6 +320,15 @@ LAB evidence.
   fresh-but-unauthorized, and owner-mediated cases, and does not derive or
   choose Mir semantics; no Canon rule, L3, OBL/Gate/Phase, runtime, or public
   claim moved.
+
+- 2026-07-24 23:16 JST: replayed the installed Product Alpha binary workflow at
+  `f90c2c29`. Retained reports show accepted bounded demo, native host launch
+  bundle verification, and Docker Compose TCP roundtrip; `cargo check`
+  and `cargo fmt --check` also passed. The helper's aggregate terminal JSON was
+  not captured after console-session detachment, so this is not an aggregate
+  release-check acceptance or a public/distributed-product claim. Plan 194
+  preserves the evidence and non-claims; no Canon, OBL, Gate/Phase, runtime
+  semantics, sample workflow, or public status moved.
 
 - 2026-07-24 20:45 JST: froze WRK-0022 at its first registered source compile
   falsifier. The pushed marker check was absent and the existing OBL-021 draft

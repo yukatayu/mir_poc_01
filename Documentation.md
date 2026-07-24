@@ -32,7 +32,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/186-canonical-elaboration-trace-interface-closure-audit.md`、
 `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`、
 `plan/192-post-admission-request-validation-context-audit.md`、
-`plan/193-post-admission-validation-context-literature-and-counterexample-memo.md`
+`plan/193-post-admission-validation-context-literature-and-counterexample-memo.md`、
+`plan/194-product-alpha1-installed-binary-replay-evidence.md`
 
 ## 最初に読む順序
 
@@ -74,6 +75,11 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - Product Alpha、Full System V1、Surface sample は限定された runnable LAB
   evidence です。最終言語・最終ABI・実 transport・分散永続・public product を
   意味しません。
+- Product Alpha の installed-binary replay は、native host launch bundle と
+  Docker Compose TCP の限定実行を再現しました。これは実際の binary / bundle /
+  two-process transport の証跡ですが、WAN/federation、分散 durable save/load、
+  arbitrary native package execution、signature-is-safety、最終 public ABI は
+  依然として非主張です。詳細は Plan 194 を参照してください。
 - Mir computational sample の 15 行は、直接 Rust 実行の二つの Product Alpha
   package 行、Python helper の十行、package schema の三つの拒否行に分かれます。
   ただし Rust runtime test は別途、有効な構成 package で五つの `P-COMP-03` 正例を
