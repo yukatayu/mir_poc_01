@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 10:53 JST
+最終更新: 2026-07-24 12:29 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -252,6 +252,16 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 12:29 JST: re-read the complete pre-delegation research envelope,
+  all open ledger families, and current reopening rules. Two independent
+  read-only reviews again found no standing-eligible L3 package. A focused
+  GPT-5.6 Sol Pro review conditionally confirms that owner acceptance of
+  PROPOSAL-009 option A is the smallest OBL-001-specific action that can
+  trigger a fresh eligibility screen; it neither selects nor guarantees a
+  package. PROPOSAL-003 is organizational only and is not a prerequisite for
+  this narrow re-triage. No Canon, WRK, OBL/Gate/Phase, sample-workflow, or
+  public claim moved.
 
 - 2026-07-24 10:53 JST: revalidated the post-WRK-0021 autonomous theory
   frontier with local source evidence, three read-only sub-agents, and two

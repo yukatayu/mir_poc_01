@@ -755,6 +755,8 @@
   `plan/188-parser-free-chain-closure-integrity.md`
 - autonomous theory frontier revalidation:
   `plan/189-autonomous-theory-frontier-revalidation.md`
+- first unlocking owner-disposition reading:
+  `plan/190-first-unlocking-owner-disposition.md`
 
 ## maintenance rule
 
