@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 00:50 JST
+最終更新: 2026-07-25 01:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -88,11 +88,13 @@ See `plan/195-post-proposal013-autonomous-frontier-delta-audit.md`.
 
 An independent challenge review found one separate, source-local candidate:
 theory/04 prints an event-only consistent-cut predicate, a `send -> receive`
-edge, and the parenthetical `or channel state carries it`. WRK-0023 is now
-registered, but unrun, to transcribe only the event-membership implication and
-to check whether the displayed predicate itself supplies a state representation
-relation. This does not choose a checkpoint/SaveObject carrier, reinterpret
-the parenthetical, change a checker or OBL, or move any Canon lifecycle state.
+edge, and the parenthetical `or channel state carries it`. After pushed
+registration, WRK-0023's external scratch Lean transcription passed without
+imports or added carrier assumptions: event membership of `receive` and the
+displayed precedence edge entail event membership of `send`. The printed
+predicate itself has no channel-state parameter or representation relation.
+This is a retained literal boundary, not a checkpoint/SaveObject carrier,
+checker, OBL, lifecycle, or public conclusion.
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -309,6 +311,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-25 01:06 JST: executed the pushed WRK-0023 scratch-only literal
+  transcription. Lean 4.29.1 proved the direct event-prefix implication with
+  no imports, axioms, classical choice, or state carrier; the pinned displayed
+  definition has no channel-state representation relation. Plan evidence
+  preserves the digest and stop line. No Canon theory, checker/OBL,
+  checkpoint/SaveObject design, implementation, Gate/Phase, or public status
+  moved.
 
 - 2026-07-25 00:50 JST: registered WRK-0023 for a source-only literal
   transcription of theory/04's event-only `Consistent(Kc)` closure. The
