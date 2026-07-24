@@ -745,6 +745,8 @@
   `plan/wrk-0021-costbudget-scalar-projection-falsifier.md`
 - WRK-0022 WRITE-CROSS failure-generation falsifier:
   `plan/wrk-0022-write-cross-failure-generation-boundary-falsifier.md`
+- Post-WRK-0022 autonomous frontier triage:
+  `plan/191-post-wrk0022-autonomous-frontier-triage.md`
 - Post-WRK-0021 autonomous frontier triage:
   `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 - cost-bound substitutability primary-literature audit:

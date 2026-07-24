@@ -625,6 +625,7 @@ REQUIRED = [
     "plan/188-parser-free-chain-closure-integrity.md",
     "plan/189-autonomous-theory-frontier-revalidation.md",
     "plan/190-first-unlocking-owner-disposition.md",
+    "plan/191-post-wrk0022-autonomous-frontier-triage.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
