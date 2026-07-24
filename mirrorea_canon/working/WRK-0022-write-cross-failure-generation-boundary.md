@@ -64,16 +64,26 @@ claim.
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: none; registration precedes every outcome command.
-Negative evidence: none; the registered falsifier checks are deferred until
-the pushed registration.
+Reliance status: frozen
+Positive evidence: none. The registered transient source did not compile, so
+it establishes no finite premise countermodel or failure-generation conclusion.
+Negative evidence: After registration commit `cc8652f9` was pushed, the
+pre-source marker check passed and the existing OBL-021 statement draft
+compiled with Lean 4.29.1. The declared standalone source was then added only
+in the existing OBL-021 lane and the exact registered bare `lean` command
+failed at line 1 with `unknown module prefix 'samples'`. This is the registered
+`Lean cannot prove both containment instances and row difference` falsifier.
+The source-audit and synchronization commands ran independently after source
+creation, but they do not establish a countermodel after the failed import. The
+transient source and explanation were removed. Do not repair or rerun this
+record.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: This record reserves one finite check of the literal
-displayed premises in existing `plan` and `samples/lean` lanes. It neither
-defines nor changes the intended failure-generation function, Canon rule,
-OBL-021 statement/status, implementation, or public behavior.
+Impact / non-effects: This route is frozen before it establishes any
+displayed-premise result. It neither defines nor changes the intended
+failure-generation function, Canon rule, OBL-021 statement/status,
+implementation, or public behavior. A future inquiry requires a distinct
+registration; it must not repair or reuse this record as a premise result.
 Independent review: not-required-for-L3
 
 ## Supersession

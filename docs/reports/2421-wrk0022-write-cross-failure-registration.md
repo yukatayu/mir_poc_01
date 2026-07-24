@@ -61,12 +61,15 @@ free on the root filesystem, about 7.3G available memory, and 6G free swap.
 
 - ordered Canon/LAB reads, duplicate searches, exact input digest capture, and
   resource/status checks
-- Canon index rebuild/check and committed-head registration validation
-- no registered marker, new Lean source, or outcome command
+- Canon index rebuild/check, source hierarchy, documentation validation, and
+  `cargo check` before outcome execution
+- registration commit and immediate push at
+  `cc8652f9d3dbebf465a28e09bde0e760fc953d66`
+- no registered marker, new Lean source, or outcome command before that push
 
 ## Evidence / outputs / test results
 
-No WRK-0022 outcome command has run. The selection evidence is limited to the
+No WRK-0022 outcome command ran before the registration push. The selection evidence is limited to the
 literal `[WRITE-CROSS]` clauses and plan/76's explicit fixed
 failure-generation dependency. The downstream action is binary: successful
 finite evidence retains that displayed clauses do not determine the row; a
@@ -88,9 +91,9 @@ semantic choice.
 
 ## Suggested next prompt
 
-After this registration is pushed, run only WRK-0022's registered marker,
-baseline Lean, new Lean, source-audit, and existing synchronization commands;
-then retain or freeze its finite premise result without selecting a generator.
+The post-push execution is recorded separately in Report 2422. Treat the
+frozen result only as a source-procedure boundary, not as a finite premise
+result or generator decision.
 
 ## Plan update status
 
@@ -132,16 +135,15 @@ Both local reviewers completed read-only work and were closed.
 
 ## Skipped validations and reasons
 
-The registered marker test, source insertion, Lean compilation, source audit,
-and synchronization test are deliberately deferred until this registration
-commit is pushed. No runtime or distributed validation applies because this is
-an unrun theory-evidence registration.
+The registered outcome commands are deliberately absent from this registration
+package and are recorded separately after push. No runtime or distributed
+validation applies because this is theory-evidence registration only.
 
 ## Commit / push status
 
-Pending at report creation. This registration must be committed with
-`--no-gpg-sign` and pushed before any outcome command; the exact commit is
-recorded in the later evidence report.
+Registration commit `cc8652f9d3dbebf465a28e09bde0e760fc953d66` was created
+with `--no-gpg-sign` and pushed immediately. Its post-push outcome is recorded
+separately in Report 2422; this report remains registration evidence only.
 
 ## Sub-agent session close status
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 20:35 JST
+最終更新: 2026-07-24 20:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -49,10 +49,11 @@ owner/canon relation or interface. This is a bounded research disposition, not
 a project completion or a narrowing of future ADR-0014 eligibility.
 
 A subsequent independent review identified the narrower, existing-lane
-WRK-0022 premise check. Its registration is pending evidence: only the literal
-two `[WRITE-CROSS]` containment clauses and one fixed finite row pair are in
-scope. It does not define the generator, admit two Canon derivations, or move
-an OBL, Gate, Phase, implementation, or public claim.
+WRK-0022 premise check. The pushed registration then reached its first
+falsifier: the bare registered `lean` command could not resolve the `samples`
+module prefix. The transient source was removed and the record is frozen. It
+supplies no finite premise result, generator, Canon derivation, OBL, Gate,
+Phase, implementation, or public claim.
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -258,6 +259,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 20:45 JST: froze WRK-0022 at its first registered source compile
+  falsifier. The pushed marker check was absent and the existing OBL-021 draft
+  compiled, but the new source's bare `lean` invocation reported `unknown
+  module prefix 'samples'`. Source was removed without changing the import or
+  command. This is procedure failure only, not a failure-row, determinism,
+  OBL, Gate/Phase, implementation, or public result.
 
 - 2026-07-24 20:35 JST: registered WRK-0022 for a finite, existing OBL-021
   Lean-lane check of whether `[WRITE-CROSS]`'s two displayed containment

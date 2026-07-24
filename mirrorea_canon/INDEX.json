@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 10407
+   "bytes": 10435
   },
   {
    "id": "root/north-star",
@@ -1482,7 +1482,7 @@
    "summary": "WRITE-CROSS の表示済み failure-row 包含節だけが experiment-local な phi_gen を一意に定めるかを、既存 OBL-021 Lean lane の有限 countermodel で検査する L3 record。意図した生成関数や Canon derivation は選ばない。",
    "open_items": [],
    "path": "working/WRK-0022-write-cross-failure-generation-boundary.md",
-   "bytes": 6894
+   "bytes": 7635
   }
  ]
 }
