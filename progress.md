@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 10:04 JST
+最終更新: 2026-07-24 10:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -246,6 +246,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 10:25 JST: committed and pushed `3b22ff38`, which makes the
+  parser-free static gate preserve ordered fallback-chain continuity and keeps
+  missing-endpoint diagnostics from gaining a stale continuity finding. Three
+  red/green regressions, the full Rust workspace, `make check`, and the final
+  87-test documentation suite passed. No Canon, WRK, OBL/Gate/Phase,
+  sample-workflow, or public claim moved.
 
 - 2026-07-24 10:04 JST: follow-up review found that a missing chain endpoint
   could leave the parser-free gate's expected predecessor stale and add a

@@ -105,14 +105,15 @@ confirms that the later syntactically connected edge receives no additional
 continuity reason. All 11
 `current_l2_static_gate_support` tests pass, all 46
 `current_l2_minimal_interpreter` tests pass, and the full `mir-semantics`
-suite passed before the missing-endpoint follow-up; its final workspace rerun is
-pending. The first post-review documentation run passed all 87 tests in
-1109.860 seconds. A later closeout `make check` correctly rejected a 189-line
+suite passes. The final `cargo check --workspace` and `cargo test --workspace`
+pass after the missing-endpoint follow-up. The first post-review documentation
+run passed all 87 tests in 1109.860 seconds. A later closeout `make check`
+correctly rejected a 189-line
 `docs/project-status.md` against its 180-line concise-view budget; the new
 detail was the only overage and is folded into an existing table row. A second
 documentation run passed all 87 tests in 1086.601 seconds; the final rerun
-after this follow-up is pending. Existing source parsing already carries the
-preceding option forward; the correction protects the parser-free
+after this follow-up passed all 87 tests in 1109.674 seconds. Existing source
+parsing already carries the preceding option forward; the correction protects the parser-free
 representation before fixture or source-runtime consumers reach evaluation.
 
 ## What changed in understanding
@@ -193,14 +194,13 @@ schema, and runtime behavior remain outside this package.
 No Lean proof or new executable semantic lane was created because the repair
 uses the existing parser-free test lane and makes no theorem claim. Focused
 red/green, full parser-free semantics, full workspace, formatting, and diff
-checks ran. The final workspace and documentation reruns remain pending after
-the missing-endpoint correction.
+checks ran. No required validation was skipped.
 
 ## Commit / push status
 
-The implementation package will be committed with `--no-gpg-sign` and pushed
-only after the final workspace and documentation reruns pass; its closeout
-commit will record the resulting commit and push status.
+Implementation commit `3b22ff38` was made with `--no-gpg-sign` and pushed to
+`origin/main` after the final workspace and documentation reruns. This
+documentation-only closeout commit follows it.
 
 ## Sub-agent session close status
 
