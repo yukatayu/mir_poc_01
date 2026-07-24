@@ -162,11 +162,11 @@ audit scope.
 
 ## Commit / push status
 
-Pending at report write; the documentation-only audit package will be committed
-with `--no-gpg-sign` and pushed before task close.
+The documentation-only audit package was committed with `--no-gpg-sign` as
+`04ecbc9b5df9c95a0a6a2c3621ff834fba286990` and pushed to `origin/main`.
+This report-status closeout is recorded in the follow-up documentation commit.
 
 ## Sub-agent session close status
 
-Planner, code mapper, and reviewer completed read-only work. They will be
-closed after the final documentation and validation review; no sub-agent edited
-repository files.
+Planner, code mapper, and reviewer completed read-only work and were closed
+after final review. No sub-agent edited repository files.
