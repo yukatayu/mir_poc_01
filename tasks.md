@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 21:08 JST
+最終更新: 2026-07-24 22:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -81,6 +81,13 @@ runtime. It is separately recordable from PROPOSAL-012, while compatibility
 and dependency with its `S`/`A` outcomes remain unresolved. M1/M2/MD is a
 prerequisite only for a later package that needs this validation representation;
 it does not reopen Plan 191 or replace PROPOSAL-012.
+
+Plan 193 is non-selecting decision support for that owner packet. It records
+only primary-source contrasts and conditional adverse cases that pressure-test
+the existing Canon premises: request-associated claims remain non-authoritative
+until checked, and an M2 correlation must stop if it needs an unselected
+request-instance/queue/event/side carrier. It does not promote external
+credential, provenance, or authorization systems into Mir semantics.
 
 A source recheck of Surface `let`, `if`, ordinary expressions, and compound
 assignment found no additional lowering rule in the current sketches. It does
@@ -311,6 +318,7 @@ production implementation; otherwise it escalates. See
 | 62 | WRK-0022 WRITE-CROSS failure-generation boundary | Closed frozen: after pushed registration, the first bare `lean` source command could not resolve the `samples` module prefix. The transient source was removed; no finite premise countermodel result is retained. | Macro 1/5 reserve. Do not repair or retry this record. A later source-procedure inquiry requires independent selection and registration; it must not select a generator, row equality, diagnostic behavior, or OBL result. |
 | 63 | Post-WRK-0022 autonomous frontier triage | Closed no-candidate: independent local, planner, reviewer, and Oracle screens find no existing permitted lane with an exact independent locus, non-reserved binary consumer, and non-duplicate falsifier. | Macro 0/1 and 5 reserve. Do not manufacture a successor or repair WRK-0022. Reopen only under Plan 191's exact qualifying source/consumer/relation/owner-disposition conditions. |
 | 64 | Post-admission request validation context | Owner decision packet: literal Canon comparison leaves the semantic carrier or non-transport recovery relation for post-admission principal/epoch/incarnation validation unselected. It is non-duplicative and separately recordable from value flow and occurrence identity; compatibility/dependency remains unresolved. | Macro 1/5 boundary. Review PROPOSAL-013 M1/M2/MD; do not create a request field, queue/wire schema, event identity, runtime route, or L3 proof from helper-local envelopes. |
+| 65 | Post-admission validation-context comparison | LAB decision support: bearer credential, trusted provenance, provenance-aware authorization, and causal-authorization literature define contrasts and conditional adverse cases only. | Macro 1/5 boundary support. Use Plan 193 to evaluate an owner disposition; do not import a credential/middleware/ACL model or select a request identity/carrier. |
 
 ## self-driven macro phase reading
 

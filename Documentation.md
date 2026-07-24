@@ -31,7 +31,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/185-cost-bound-substitutability-primary-literature-audit.md`、
 `plan/186-canonical-elaboration-trace-interface-closure-audit.md`、
 `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`、
-`plan/192-post-admission-request-validation-context-audit.md`
+`plan/192-post-admission-request-validation-context-audit.md`、
+`plan/193-post-admission-validation-context-literature-and-counterexample-memo.md`
 
 ## 最初に読む順序
 
@@ -113,7 +114,9 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   principal / epoch / incarnation 等の validation claims の意味論的な保持又は非 transport 的導出を別の
   owner decision として切り出します。これは PROPOSAL-012 と別記録可能ですが、値フロー・
   event identity との互換性・依存は未解決のままです。Core IR、queue、wire、runtime、OBL は
-  変更しません。
+  変更しません。Plan 193 は bearer credential、trusted provenance tracking、causal authorization の
+  一次資料を contrast として比較し、Canon の検証前提を pressure-test する最低 adverse case だけを記録します。
+  外部方式や M1/M2/MD は採択しません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

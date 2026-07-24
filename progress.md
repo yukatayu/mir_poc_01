@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 21:43 JST
+最終更新: 2026-07-24 22:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -69,6 +69,13 @@ recordable from PROPOSAL-012, while compatibility and dependency with its
 value-flow and occurrence dispositions remain unresolved. It does not select a
 Core/queue/generated-edge carrier, reopen Plan 191, or authorize an L3
 experiment to infer context from a helper-local envelope.
+
+Plan 193 supplies non-selecting decision support for this owner packet. Its
+primary-source contrasts and conditional adverse cases pressure-test the Canon
+premises of authoritative comparison for carried claims and an M2 stop when an
+unselected request identity/carrier is needed. They do not derive those
+premises from literature or import an external credential, middleware,
+authorization, queue, or transport design.
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -289,6 +296,19 @@ LAB evidence.
   Canon reading leaves the Core/queue/generated-edge carrier or non-transport
   recovery relation unselected; no L3, OBL/Gate/Phase, runtime, or public claim
   moved.
+
+- 2026-07-24 22:18 JST: recorded Plan 193 as non-selecting primary-source and
+  adversarial-case decision support for PROPOSAL-013. It pressure-tests, rather
+  than derives, the existing Canon requirements for authoritative comparison of
+  carried claims and an M2 stop on an unselected identity/carrier; no Canon
+  rule, L3, OBL/Gate/Phase, runtime, or public claim moved.
+
+- 2026-07-24 22:41 JST: completed an independent framing critique for Plan 193.
+  The memo now treats external systems only as contrasts, includes complete-claim
+  copy/replay, same-locus alias, turnover/load, single-lineage-component,
+  fresh-but-unauthorized, and owner-mediated cases, and does not derive or
+  choose Mir semantics; no Canon rule, L3, OBL/Gate/Phase, runtime, or public
+  claim moved.
 
 - 2026-07-24 20:45 JST: froze WRK-0022 at its first registered source compile
   falsifier. The pushed marker check was absent and the existing OBL-021 draft
