@@ -18,6 +18,9 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-24** Added PROPOSAL-013, an owner decision request for the semantic
+  provenance of post-admission request validation context. It selects no Core,
+  queue, wire, runtime, OBL, Gate, Phase, or public behavior.
 - **2026-07-24** `PROPOSAL-009` の owner disposition を記録。将来の
   OBL-001 proof-facing package は THM-001 の既存 every-write Core `c` 条件を
   直接表明できる。この記録は再triage を許すだけで、新規 WRK、Core

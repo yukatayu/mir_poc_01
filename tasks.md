@@ -72,6 +72,16 @@ composition plus the A-to-service occurrence/projection carrier stay unresolved.
 It asks for a later design package after any non-defer answer and does not change
 PROPOSAL-008 or PROPOSAL-009.
 
+PROPOSAL-013 is a separate owner decision packet for post-admission request
+validation context. The current Core request and illustrative Core-IR request
+edge do not state where the principal, epoch, and incarnation required by
+`[E-SERVE]` / theory/05 are retained or recovered without transport identity.
+It does not select a request field, queue, wire envelope, event identity, or
+runtime. It is separately recordable from PROPOSAL-012, while compatibility
+and dependency with its `S`/`A` outcomes remain unresolved. M1/M2/MD is a
+prerequisite only for a later package that needs this validation representation;
+it does not reopen Plan 191 or replace PROPOSAL-012.
+
 A source recheck of Surface `let`, `if`, ordinary expressions, and compound
 assignment found no additional lowering rule in the current sketches. It does
 not open a second decision: runtime-value use remains V/R, conditional join
@@ -154,6 +164,13 @@ repair a frozen record, repeat retained evidence, lack an existing non-reserved
 binary consumer, or require an owner/canon relation. The next self-driven work
 is therefore not another WRK. Reopen selection only on Plan 191's exact
 admitted-locus/consumer/relation/owner-disposition conditions.
+
+Plan 192 records a distinct owner decision surface, not a selected successor:
+post-admission request validation requires a representation family before a
+proof or runtime package can claim a closed, Canon-grounded account of the full
+theory/05 lineage check. Until an owner selects PROPOSAL-013 M1, M2, or MD, no
+L3 experiment may manufacture a request-context carrier or infer it from a
+helper-local envelope.
 
 The post-PROPOSAL-010 independent frontier screen selected no candidate from
 its reviewed runtime/Surface, current-L2, and Product Alpha families. It did
@@ -293,6 +310,7 @@ production implementation; otherwise it escalates. See
 | 61 | Full theory-portfolio closure and first-unlock reading | Closed no-candidate after P009 A was recorded: direct-Core re-triage passes only the owner-boundary reopen condition. The current admitted LAB source still lacks a direct-Core object/literal mapping, a non-duplicate falsifier, and a binary consumer; a new traversal would select a reserved boundary. P003 is organizational only and is not prior for this narrow path. | Macro 0/1 reserve. Reopen only when an exact pinned admitted direct-Core classification or literal mapping has a named current importer/package with explicit retain/reject actions. |
 | 62 | WRK-0022 WRITE-CROSS failure-generation boundary | Closed frozen: after pushed registration, the first bare `lean` source command could not resolve the `samples` module prefix. The transient source was removed; no finite premise countermodel result is retained. | Macro 1/5 reserve. Do not repair or retry this record. A later source-procedure inquiry requires independent selection and registration; it must not select a generator, row equality, diagnostic behavior, or OBL result. |
 | 63 | Post-WRK-0022 autonomous frontier triage | Closed no-candidate: independent local, planner, reviewer, and Oracle screens find no existing permitted lane with an exact independent locus, non-reserved binary consumer, and non-duplicate falsifier. | Macro 0/1 and 5 reserve. Do not manufacture a successor or repair WRK-0022. Reopen only under Plan 191's exact qualifying source/consumer/relation/owner-disposition conditions. |
+| 64 | Post-admission request validation context | Owner decision packet: literal Canon comparison leaves the semantic carrier or non-transport recovery relation for post-admission principal/epoch/incarnation validation unselected. It is non-duplicative and separately recordable from value flow and occurrence identity; compatibility/dependency remains unresolved. | Macro 1/5 boundary. Review PROPOSAL-013 M1/M2/MD; do not create a request field, queue/wire schema, event identity, runtime route, or L3 proof from helper-local envelopes. |
 
 ## self-driven macro phase reading
 

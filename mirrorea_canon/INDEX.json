@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 105,
+ "files": 106,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 3163
+   "bytes": 3384
   },
   {
    "id": "root/glossary",
@@ -602,6 +602,26 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md",
    "bytes": 14318
+  },
+  {
+   "id": "meta/proposal-013",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/05-authority",
+    "spec/04-core-ir",
+    "spec/05-runtime-semantics",
+    "adr/ADR-0003",
+    "adr/ADR-0005",
+    "adr/ADR-0012",
+    "adr/ADR-0014",
+    "meta/proposal-012"
+   ],
+   "summary": "post-admission request の authority validation claims を Core / queue / generated edge のどこで保持又は非 transport 的に導出するかを owner に問う。Core、OBL、runtime、wire は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-013-post-admission-request-validation-context.md",
+   "bytes": 8891
   },
   {
    "id": "meta/source-hierarchy",

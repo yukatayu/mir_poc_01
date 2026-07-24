@@ -30,7 +30,8 @@ notes. If LAB text conflicts with canon, canon wins.
 `plan/184-post-wrk0021-autonomous-frontier-triage.md`、
 `plan/185-cost-bound-substitutability-primary-literature-audit.md`、
 `plan/186-canonical-elaboration-trace-interface-closure-audit.md`、
-`plan/187-mircore-value-flow-and-occurrence-decision-packet.md`
+`plan/187-mircore-value-flow-and-occurrence-decision-packet.md`、
+`plan/192-post-admission-request-validation-context-audit.md`
 
 ## 最初に読む順序
 
@@ -108,6 +109,11 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
   `A` (admission) の個別記録可能な owner disposition として整理します。個別記録・個別/混合 tuple は意味論的な互換性や実行可能性を意味せず、
   `V -> R` の順序は LAB の設計順序、`R` は read 受領だけを対象とします。V/R/S の合成と A から後続 service への occurrence/projection carrier は未決です。
   `V1/R1/SW1/conditional A2` は研究上の推奨であり採択ではありません。`PROPOSAL-008` と `PROPOSAL-009` は独立のまま保ち、LAB 実装は tie-breaker とも扱いません。
+- PROPOSAL-013 / Plan 192 は、post-admission request を owner が検証する際の
+  principal / epoch / incarnation 等の validation claims の意味論的な保持又は非 transport 的導出を別の
+  owner decision として切り出します。これは PROPOSAL-012 と別記録可能ですが、値フロー・
+  event identity との互換性・依存は未解決のままです。Core IR、queue、wire、runtime、OBL は
+  変更しません。
 - WRK-0007 は、OBL-001 LAB draft の `GeneratedWrite` が実験用 Result 内の
   write を尽くさない有限 countermodel を L3 evidence として記録しました。これは
   Canon THM-001 の反証でも Core IR の選択でもなく、将来の proof-facing

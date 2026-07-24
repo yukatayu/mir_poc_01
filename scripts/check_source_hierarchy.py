@@ -276,6 +276,8 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/188-parser-free-chain-closure-integrity.md",
         "plan/189-autonomous-theory-frontier-revalidation.md",
         "plan/190-first-unlocking-owner-disposition.md",
+        "plan/191-post-wrk0022-autonomous-frontier-triage.md",
+        "plan/192-post-admission-request-validation-context-audit.md",
     ],
     "scripts": [
         "scripts",
