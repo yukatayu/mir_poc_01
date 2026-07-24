@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 00:00 JST
+最終更新: 2026-07-25 00:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -85,6 +85,14 @@ additional ADR-0014 predicate. A decisive experiment would still choose the
 reserved request-context/recovery representation, so this remains a narrow
 current-cut disposition rather than a closure of autonomous theory research.
 See `plan/195-post-proposal013-autonomous-frontier-delta-audit.md`.
+
+An independent challenge review found one separate, source-local candidate:
+theory/04 prints an event-only consistent-cut predicate, a `send -> receive`
+edge, and the parenthetical `or channel state carries it`. WRK-0023 is now
+registered, but unrun, to transcribe only the event-membership implication and
+to check whether the displayed predicate itself supplies a state representation
+relation. This does not choose a checkpoint/SaveObject carrier, reinterpret
+the parenthetical, change a checker or OBL, or move any Canon lifecycle state.
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -301,6 +309,14 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-25 00:50 JST: registered WRK-0023 for a source-only literal
+  transcription of theory/04's event-only `Consistent(Kc)` closure. The
+  post-push scratch check will test the `send -> receive` membership implication
+  and whether the printed definition itself contains a channel-state
+  representation relation. No marker check, scratch source, Lean run, source
+  outcome, carrier choice, checker/OBL result, implementation, or public claim
+  has occurred in this registration package.
 
 - 2026-07-24 21:08 JST: closed the post-WRK-0022 autonomous screen with no
   new L3 package. Local review, independent planner/reviewer, and temporary

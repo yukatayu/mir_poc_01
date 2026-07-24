@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 106,
+ "files": 107,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 10435
+   "bytes": 10830
   },
   {
    "id": "root/north-star",
@@ -1503,6 +1503,20 @@
    "open_items": [],
    "path": "working/WRK-0022-write-cross-failure-generation-boundary.md",
    "bytes": 7843
+  },
+  {
+   "id": "working/WRK-0023",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/04-ordering-and-cuts",
+    "theory/11-metatheory-ledger"
+   ],
+   "summary": "theory/04 の表示済み event-only Consistent(Kc) 定義が send -> receive の前件から send membership を導くことと、channel state を代替として読むには別の表現関係が必要なことを既存 LAB lane の literal Lean transcription で検査する。checkpoint carrier、OBL、checker は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0023-consistent-cut-channel-state-boundary.md",
+   "bytes": 6155
   }
  ]
 }

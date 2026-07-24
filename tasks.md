@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-25 00:00 JST
+最終更新: 2026-07-25 00:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -96,6 +96,15 @@ bounded operational evidence. No successor WRK is selected. The current
 consumer/non-duplication dossier is LAB selection discipline, not an additional
 ADR-0014 prohibition; the independent Canon reason is that a decisive
 PROPOSAL-013 experiment would choose its reserved representation boundary.
+
+WRK-0023 is a separately registered literal-transcription package. It asks
+only whether theory/04's displayed event-only closure makes sent-event
+membership follow from `send -> receive`, and whether the printed definition
+itself has a state representation relation for the adjacent channel-state
+parenthetical. Its scratch source is outside the repository and must not run
+until the registration is pushed. The package cannot define a checkpoint,
+SaveObject, queue, channel state, or checker; it cannot select an OBL, theory
+wording, Gate/Phase, implementation, or public behavior.
 
 A source recheck of Surface `let`, `if`, ordinary expressions, and compound
 assignment found no additional lowering rule in the current sketches. It does
@@ -337,6 +346,7 @@ the precise boundary.
 | 65 | Post-admission validation-context comparison | LAB decision support: bearer credential, trusted provenance, provenance-aware authorization, and causal-authorization literature define contrasts and conditional adverse cases only. | Macro 1/5 boundary support. Use Plan 193 to evaluate an owner disposition; do not import a credential/middleware/ACL model or select a request identity/carrier. |
 | 66 | Product Alpha installed-binary replay | Closed bounded execution replay: inspected observed reports accept the documented demo, native bundle verification, and Docker Compose TCP roundtrip. The outer helper's aggregate terminal JSON is unavailable, so no aggregate release-check result is claimed. | Macro 2/4 evidence maintenance. Retain Plan 194 as direct artifact evidence only; do not promote WAN/federation, distributed durability, arbitrary native execution, signature safety, final public ABI, or Canon status. |
 | 67 | Post-PROPOSAL-013 frontier delta audit | Closed no-successor screen: the delta supplies an owner decision request, support memo, and bounded operational replay, but no permitted-lane non-reserved decisive question. Consumer/non-duplication are LAB selection criteria, not ADR-0014 additions. | Macro 0/1 and 5 reserve. Reopen only on a fresh permitted-lane discrepancy with a current consumer, an existing selected relation/importer, or a non-defer owner/Canon action that removes the exact representation stop line; a defer does not unlock work. |
+| 68 | Consistent-cut channel-state literal boundary | Registered, unrun L3 package: transcribe theory/04's printed event-only closure and `send -> receive` consequence; inspect whether that printed predicate contains a state representation relation for the channel-state parenthetical. | Macro 1/5 reserve; execute only the pushed scratch-only commands. Freeze on the registered falsifier. Do not choose a checkpoint/state carrier, checker, OBL, theory interpretation, Gate/Phase, implementation, or public behavior. |
 
 ## self-driven macro phase reading
 
