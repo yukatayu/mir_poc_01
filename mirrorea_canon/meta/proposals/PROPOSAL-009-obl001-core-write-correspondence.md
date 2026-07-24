@@ -3,14 +3,15 @@ id: meta/proposal-009
 status: L3-open
 maturity: draft
 depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/11-metatheory-ledger, adr/ADR-0014, plan/02-operating-model]
-summary: THM-001 / OBL-001 の proof-facing Core/write statement interface を owner に問う。Core、OBL、Gate、proof status は変更しない。
+summary: THM-001 / OBL-001 の proof-facing Core/write statement interface と記録済み owner disposition。Core、OBL、Gate、proof status は変更しない。
 open_items: []
 ---
 
 # PROPOSAL-009 - OBL-001 Core/write correspondence boundary review
 
-> Decision-request artifact only. This proposal records no owner answer and has
-> no automatic repository effect.
+> Decision-request artifact only. At filing, this proposal recorded no owner
+> answer. The owner disposition is recorded below and has no automatic
+> repository effect.
 >
 > It does not change THM-001, a Core constructor, a runtime rule, an OBL,
 > `theory/11` status, a Gate, a Phase, a contract, an implementation, or a
@@ -101,6 +102,29 @@ with the disputed boundary. An acceptance authorizes only the corresponding
 later design package. It requires the ordinary Canon process before changing
 `theory/03-elaboration`, `theory/11-metatheory-ledger`, an ADR, a Gate, a
 Phase, or a proof-facing artifact.
+
+## Owner Disposition
+
+- Recorded: 2026-07-24
+- Response: `A accepted`
+
+A later OBL-001 proof-facing design package may state THM-001's existing
+every-write condition directly over elaborated Core `c`.
+
+This removes only the direct-Core-versus-output/Core-bridge decision stop line.
+It authorizes a fresh, ordinary eligibility screen for a later bounded package;
+it does not create a `WRK-####` record or establish that one is eligible. The
+screen must still identify an existing admitted LAB locus, a non-duplicate
+question and falsifier, a current binary retain/reject consumer, a permitted
+evidence path, and an adverse branch that does not select another reserved
+relation.
+
+This disposition does not revise THM-001, `theory/03-elaboration`,
+`theory/11-metatheory-ledger`, an OBL status or Lean target, a Gate, a Phase,
+or a proof. It does not select a Core representation, traversal, occurrence
+relation, equality, enumeration or duplicate policy, Lean API, outcome-totality
+premise, runtime behavior, or public interface. PROPOSAL-008 and PROPOSAL-012
+remain independent.
 
 ## Non-effects
 

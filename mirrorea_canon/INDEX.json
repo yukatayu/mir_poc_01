@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 2829
+   "bytes": 3163
   },
   {
    "id": "root/glossary",
@@ -542,10 +542,10 @@
     "adr/ADR-0014",
     "plan/02-operating-model"
    ],
-   "summary": "THM-001 / OBL-001 の proof-facing Core/write statement interface を owner に問う。Core、OBL、Gate、proof status は変更しない。",
+   "summary": "THM-001 / OBL-001 の proof-facing Core/write statement interface と記録済み owner disposition。Core、OBL、Gate、proof status は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-009-obl001-core-write-correspondence.md",
-   "bytes": 7433
+   "bytes": 8580
   },
   {
    "id": "meta/proposal-010",

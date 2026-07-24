@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 12:29 JST
+最終更新: 2026-07-24 17:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -221,7 +221,7 @@ LAB evidence.
 | Owner / canon | G0-D3 | deferred and dormant until explicit owner reopen |
 | Owner / canon | PROPOSAL-003 and PROPOSAL-004 | L1-reserved organization / grammar choices; owner records A/B/C |
 | Owner / canon | PROPOSAL-008 | BND-001 outcome-totality interpretation and its future obligation placement |
-| Owner / canon | PROPOSAL-009 | OBL-001 direct-Core statement, explicit output/Core correspondence, or defer |
+| Owner / canon | PROPOSAL-009 | `A accepted`: a later OBL-001 package may state THM-001's existing Core `c` condition directly; post-decision triage selected no package |
 | Owner / canon | PROPOSAL-010 | undefined overview wording: existing admission summary, deletion, or future extension separation |
 | Owner / canon | PROPOSAL-011 | Contract `cost_bound`: owner-selected scoped non-weakening, explicit update for every change, advisory treatment, or interpretation defer |
 | Research | non-reserved theory target | pin standing eligibility, pre-register alternatives/falsifier, and seek evidence in LAB. It may enter WRK L3; steward rebase/freeze and independent review precede L2 integration or escalation |
@@ -246,12 +246,21 @@ LAB evidence.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- |
 | multi-node / fabric | local and bounded LAB evidence | I2/I3 and transport choice | later dependency |
-| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, manifested/not-promoted WRK-0013 retention evidence, manifested WRK-0014 same-carrier relation-polarity evidence, post-W14 no-candidate screens, the T1/T2 statement-identity map, and the owner-facing PROPOSAL-009 | reviewed working premises, proof skeletons, `theory/11` final status, a PROPOSAL-009 OBL-001 direct-Core or explicit output/Core correspondence decision, global-step coverage when its familywise wrapper is used, actual correspondence inclusion/realizability evidence, and PROPOSAL-008's open outcome-totality request | W14 identifies only sufficient directions inside its stated lemma forms; it cannot choose a Canon carrier, coverage, realization, fairness, taxonomy, theorem, or workflow. PROPOSAL-009 makes the OBL-001 interface decision explicit but does not select it. The statement-identity map keeps Core-write, step-coverage, outcome, and save/load relations explicit. Diagnostics and authority/time/cut repeat their recorded boundaries. The Canon's direct global OBL-020 target remains the safe reading; the LAB familywise wrapper is not a substitute without coverage. These actual-bridge conditions do not narrow other standing-eligible ADR-0014 L3 research. |
+| contracts / theorem / model-check boundary | statement drafts, countermodels, static evidence, manifested WRK-0006/0007 evidence, fresh import-bearing Lean replay, WRK-0008 hook-attribution evidence, WRK-0009 literal tuple-mismatch evidence, WRK-0011 assertion-provenance evidence, frozen WRK-0012 carrier observations, manifested/not-promoted WRK-0013 retention evidence, manifested WRK-0014 same-carrier relation-polarity evidence, post-W14 no-candidate screens, the T1/T2 statement-identity map, and recorded P009 A | reviewed working premises, proof skeletons, `theory/11` final status, an exact admitted direct-Core object/literal mapping with a binary consumer, global-step coverage when its familywise wrapper is used, actual correspondence inclusion/realizability evidence, and PROPOSAL-008's open outcome-totality request | W14 identifies only sufficient directions inside its stated lemma forms; it cannot choose a Canon carrier, coverage, realization, fairness, taxonomy, theorem, or workflow. P009 A removes only the interface-choice stop line. Its post-decision screen found no existing direct-Core object/literal mapping, non-duplicate falsifier, or binary consumer, so it selected no WRK. The statement-identity map keeps Core-write, step-coverage, outcome, and save/load relations explicit. Diagnostics and authority/time/cut repeat their recorded boundaries. The Canon's direct global OBL-020 target remains the safe reading; the LAB familywise wrapper is not a substitute without coverage. These actual-bridge conditions do not narrow other standing-eligible ADR-0014 L3 research. |
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | canon G7 / implementation | later dependency |
 | `atomic_cut` / ordering | canon theory plus scoped current-L2 hook-attribution and assertion-provenance evidence | G5 statements / proof research | WRK-0008 closed the coarse-hook audit. WRK-0009 audits only e5 tuple identity; WRK-0011 records no semantic cut inference from final-store assertions |
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 17:26 JST: recorded the owner's `PROPOSAL-009` option A
+  disposition through the Canon proposal and reran Plan 184 eligibility. The
+  owner boundary is now open for a later direct-Core OBL-001 statement, but the
+  current tree has no admitted direct-Core object/literal mapping, non-duplicate
+  falsifier, or binary consumer; no WRK was selected. A temporary GPT-5.6 Sol
+  Pro review independently agreed. No THM/OBL wording or status, Core
+  representation/traversal, outcome-totality premise, Gate/Phase, runtime, or
+  public claim moved.
 
 - 2026-07-24 12:29 JST: re-read the complete pre-delegation research envelope,
   all open ledger families, and current reopening rules. Two independent

@@ -9,7 +9,7 @@ change an OBL, or move a Gate or Phase.
 
 ## Evidence cut and screen
 
-The screen uses current `main` after the WRK-0021 closeout. A new L3 record
+The historical screen used `main` after the WRK-0021 closeout. A new L3 record
 would need an existing admitted LAB lane, exact source locus, non-duplicative
 question, alternative and falsifier, permitted evidence path, and a current
 binary retain/reject consumer. Its adverse branch must not select a Core
@@ -27,7 +27,7 @@ is advisory; this disposition relies on the cited repository sources.
 | Option-local `admit` literal correspondence | theory/01, theory/06, Surface/Core companion, current-L2 e3 | Duplicate/frozen: correcting WRK-0020's quoting or changing its search is a repair, while carrier and grammar conclusions remain reserved. |
 | CostBudget scalar projection | theory/02, PROPOSAL-011, clean-near-end CostBudget, Lean foundations | Duplicate/frozen: adding decidability structure, changing the relation, or changing proof tactics repairs WRK-0021. The only actual consumer would be the owner-pending Contract cost decision. |
 | `G_e` row-kind or dependency correspondence | theory/01, theory/03, OBL-001/004-related LAB evidence | No current non-reserved consumer. The composition kernel and formalization boundary are already recorded; a result would otherwise select a BND-001/OBL correspondence. |
-| Core/write, step preservation, or elaboration outcome bridge | theory/03, theory/11, PROPOSAL-009, existing Lean drafts | No existing second relation/mapping plus importer; selecting one would choose the owner-pending proof interface or outcome-totality placement. |
+| Core/write, step preservation, or elaboration outcome bridge | theory/03, theory/11, PROPOSAL-009, existing Lean drafts | No existing second relation/mapping plus importer; selecting one would choose the then-owner-pending proof interface or outcome-totality placement. P009 A later removed only the direct-Core interface stop line; see Plan 190 for its no-package re-triage. |
 | Surface/P-SURF/current-L2/Product Alpha near-misses | plan/172, plan/178, plan/179, current admitted roots | Either the candidate is outside the admitted lane catalog, duplicates retained observations, or lacks a named immediate binary consumer. |
 
 ## Disposition
@@ -63,7 +63,8 @@ They would be repairs, not new evidence.
 
 ## Non-claims
 
-This screen does not decide PROPOSAL-008, PROPOSAL-009, PROPOSAL-011, a cost
+At its historical cut, this screen did not decide PROPOSAL-008, PROPOSAL-009,
+PROPOSAL-011, a cost
 algebra, Contract direction, grammar, parser, Core carrier, OBL statement or
 proof, runtime, transport, sample workflow, Gate, Phase, conformance, or
 public readiness.

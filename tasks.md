@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 10:04 JST
+最終更新: 2026-07-24 17:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -50,10 +50,12 @@ explicit LAB scope or the recorded repair-realization boundary; and OBL-024
 projection variants require an unselected field-functionality reading. This is
 a new evidence-backed priority disposition, not a Canon ban on future L3 work.
 
-PROPOSAL-009 now makes the OBL-001 owner/canon boundary explicit: a later
-proof-facing package must either state THM-001's existing Core `c` write
-condition directly, use an output view with an explicit correspondence that
-derives that condition, or remain deferred. This does not select a carrier,
+PROPOSAL-009 now records owner acceptance of option A: a later proof-facing
+package may state THM-001's existing Core `c` every-write condition directly.
+The post-decision Plan 184 screen still selects no WRK: the admitted LAB draft
+has no direct-Core object or literal mapping, the Result/write gap is already
+WRK-0007 evidence, no current binary consumer exists, and defining a traversal
+would select a reserved occurrence boundary. This does not select a carrier,
 runtime occurrence model, or proof artifact, and it leaves PROPOSAL-008's
 outcome-totality question independent.
 
@@ -272,7 +274,7 @@ production implementation; otherwise it escalates. See
 | 58 | Cost-bound substitutability primary-literature audit | Closed LAB decision support: primary sources require an explicit resource carrier/fragment, comparison direction, unknown/incomparable policy, and composition premise before transparent resource refinement can be used. They do not classify the existing field, select a Mir algebra, or validate the LAB counter. | Macro 1 owner-support close; record its matrix in Plan 185. Do not create a WRK from the audit. A later canon disposition may use the matrix to define a scoped A, select B/C/D, or retain the boundary. |
 | 59 | Canonical elaboration/trace interface-closure audit | Closed read-only source audit: dependency rows are explicitly in `G_e`, so the initial carrier-mismatch reading was corrected. Core read-to-write value flow and serve/admit occurrence identity are not literally closed. The metadata-cycle advisory claim was rejected because Canon permits mutual knowledge dependencies. | Current owner/canon clarification boundary. Do not build a proof model or implementation that assumes an evaluation device or composite/decomposed event model. A complete `G_e` schema is future proof-representation work, not a reason to move dependency rows. PROPOSAL-008 remains independent. |
 | 60 | Autonomous theory frontier revalidation | Closed no-candidate: `[E-WRITE]` duplicates T-RESEARCH-002/-006; a concrete step/frame/membership mapping is owner-reserved and lacks a current second mapping/importer and binary consumer. History maximum and `atomic_cut` repeat prior audits; grammar closure remains owner-reserved. | Macro 0/1 reserve; do not open a WRK. Reopen only under Plan 184's exact dossier. The observed `return` Surface/Core alignment is an owner/canon grammar-elaboration item, not an L3 parser task. |
-| 61 | Full theory-portfolio closure and first-unlock reading | Closed no-candidate: complete ledger/source-envelope re-read and two independent reviews found no standing-eligible L3 package. P009 option A is the smallest OBL-001-specific owner disposition that can trigger re-triage; it does not itself create a package. P003 is organizational only and is not prior for that narrow path. | Macro 0/1 reserve. Owner may accept P009 A only through Canon process; then rerun Plan 184 eligibility against the then-current tree. Retain no-package result unless an exact existing-lane binary consumer and non-duplicate falsifier exists. |
+| 61 | Full theory-portfolio closure and first-unlock reading | Closed no-candidate after P009 A was recorded: direct-Core re-triage passes only the owner-boundary reopen condition. The current admitted LAB source still lacks a direct-Core object/literal mapping, a non-duplicate falsifier, and a binary consumer; a new traversal would select a reserved boundary. P003 is organizational only and is not prior for this narrow path. | Macro 0/1 reserve. Reopen only when an exact pinned admitted direct-Core classification or literal mapping has a named current importer/package with explicit retain/reject actions. |
 
 ## self-driven macro phase reading
 
@@ -285,7 +287,7 @@ production implementation; otherwise it escalates. See
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | G0-D3 | G0 exit and official T1 entry | continue defer; owner reopens and records canonical exit | dormant; do not solicit absent owner reopen |
-| PROPOSAL-009 OBL-001 Core/write statement interface | whether a future proof-facing package states the existing Core `c` clause directly or derives it through an explicit output/Core correspondence | A direct Core; B explicit bridge; C defer | A is the smallest OBL-001-specific owner action that can trigger re-triage; it remains LAB advice only, does not create a package, and does not identify experiment-only Result with Canon Core |
+| PROPOSAL-009 OBL-001 Core/write statement interface | owner disposition recorded: a future proof-facing package may state the existing Core `c` clause directly | A accepted; B explicit bridge and C defer remain unselected alternatives | P009 A is recorded in Canon. Its re-triage selected no package because the current tree lacks an admitted direct-Core object/literal mapping, non-duplicate falsifier, and binary consumer; it does not identify experiment-only Result with Canon Core |
 | PROPOSAL-010 locus/admission subject wording | whether the overview's undefined child-locus/admission-path sentence is replaced, deleted, made an extension question, or deferred unchanged | A existing admission summary; B delete; C future extension; defer | A: retain only the existing principal/admission model and do not introduce hierarchy or provenance semantics |
 | PROPOSAL-011 Contract cost-bound transparency | whether and how a changed `cost_bound` participates in transparent overlay before the final algebra is selected | A owner-selected scoped non-weakening; B explicit update per change; C advisory; D interpretation defer | Plan 185: A requires carrier/fragment, direction, unknown/incomparable policy, and composition premise; B is conservative while none is selected; C requires an affirmative advisory policy; D preserves openness. No current Canon rule is inferred. |
 | Canon elaboration/trace closure | whether Core value flow and service/admission event identity should be clarified before formal transcription | existing/open Core value-flow relation; composite/decomposed events | Plan 186 is an escalation packet, not a Canon proposal or selected repair. `G_e` dependency membership is already fixed by the existing text; human/canon review is required before a proof model relies on either remaining answer. |

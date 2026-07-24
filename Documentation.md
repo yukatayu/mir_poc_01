@@ -87,9 +87,11 @@ Typed-Effect Wiring Platform は関連しますが、意図的に分離して扱
 - Foundation audit は、Core に不要な domain/I/O primitive を見つけず、BND-001 の
   outcome-totality 読みだけを owner-reserved な PROPOSAL-008 として分離しました。
   これは OBL/Gate/Phase の変更ではありません。
-- PROPOSAL-009 は、THM-001 の既存 Core `c` write 条件を将来の OBL-001 package が
-  直接表明するか、明示 correspondence を持つ output view で表明するかを owner に問います。
-  実験用 Result を Core と同一視せず、Core/runtime/OBL の意味は変更しません。
+- PROPOSAL-009 は owner の `A accepted` を記録した。将来の OBL-001 package は
+  THM-001 の既存 Core `c` every-write 条件を直接表明できる。ただし post-decision
+  triage は、既存の direct-Core object / literal mapping、non-duplicate falsifier、
+  current binary consumer がないため新 WRK を選ばない。実験用 Result を Core と
+  同一視せず、Core/runtime/OBL の意味は変更しない。
 - PROPOSAL-010 は、overview の `child locus` / `admission path` という未定義の主語を、
   既存の principal による join/admission 説明へ置換するか、削除するか、将来 extension に
   分離するかを owner に問います。Locus 階層、membership provenance、Core/OBL は追加しません。
