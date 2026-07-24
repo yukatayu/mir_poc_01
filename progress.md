@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 01:06 JST
+最終更新: 2026-07-25 01:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -93,8 +93,9 @@ registration, WRK-0023's external scratch Lean transcription passed without
 imports or added carrier assumptions: event membership of `receive` and the
 displayed precedence edge entail event membership of `send`. The printed
 predicate itself has no channel-state parameter or representation relation.
-This is a retained literal boundary, not a checkpoint/SaveObject carrier,
-checker, OBL, lifecycle, or public conclusion.
+The exact Plan artifact is manifested by WRK-0023 as `not-promoted` L3
+evidence. This is not a checkpoint/SaveObject carrier, checker, OBL,
+lifecycle, or public conclusion.
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -311,6 +312,12 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-25 01:10 JST: manifested the immutable WRK-0023 Plan evidence.
+  The record now pins the evidence commit and digest for the event-only prefix
+  implication and the displayed channel-state representation boundary. Its
+  reliance remains `not-promoted`; no checkpoint/SaveObject carrier, checker,
+  OBL, Canon theory, implementation, Gate/Phase, or public status moved.
 
 - 2026-07-25 01:06 JST: executed the pushed WRK-0023 scratch-only literal
   transcription. Lean 4.29.1 proved the direct event-prefix implication with

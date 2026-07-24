@@ -37,11 +37,11 @@ Non-claims: This does not define a channel-state, checkpoint, SaveObject, queue,
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending post-registration execution.
-Negative evidence: pending post-registration execution.
-Evidence artifacts: pending
-Evidence commits: none
-Impact / non-effects: Pending. Any retained result is limited to a literal event-only implication and the absence or presence of a displayed representation relation. It cannot choose a state carrier or make a checker, OBL, lifecycle, implementation, or public conclusion.
+Positive evidence: After registration `73253441aa04fb0ef39ff5836c016b6a6331063a` was pushed, the registered marker check confirmed that the external scratch source did not exist. Lean 4.29.1 then compiled `receive_membership_implies_send_membership` with `--trust=0`; the registered required-name and forbidden-token audit also passed. The scratch source SHA-256 is `72915e34c77a2bf4f88c11d8b71e4cd24582b3a311253adb9f7473f0ce695759`. This is a literal event-only prefix-closure implication only.
+Negative evidence: No registered falsifier occurred. The pinned theory/04 source audit shows that the displayed `Consistent(Kc)` definition contains only event membership and precedence, with no channel-state parameter, state predicate, or event/state representation relation. This is a boundary of that displayed definition, not an absence claim about future Canon state models.
+Evidence artifacts: LAB:plan/wrk-0023-consistent-cut-channel-state-boundary.md@fbb197b81de18fa41bb30233358fedc66eca92a4:edf2678c79f1d1aacea66bcdc6596c22a18e4b9df6ab6b336926f586096b52bb
+Evidence commits: fbb197b81de18fa41bb30233358fedc66eca92a4
+Impact / non-effects: The retained Plan artifact records only the direct event-membership lemma and displayed-definition boundary. It neither defines nor selects a channel-state/checkpoint/SaveObject representation, changes `Consistent`, a checker, load semantics, theorem/OBL status, lifecycle, implementation, or public behavior.
 Independent review: not-required-for-L3
 
 ## Supersession

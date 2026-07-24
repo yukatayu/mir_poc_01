@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 10830
+   "bytes": 10853
   },
   {
    "id": "root/north-star",
@@ -1516,7 +1516,7 @@
    "summary": "theory/04 の表示済み event-only Consistent(Kc) 定義が send -> receive の前件から send membership を導くことと、channel state を代替として読むには別の表現関係が必要なことを既存 LAB lane の literal Lean transcription で検査する。checkpoint carrier、OBL、checker は選ばない。",
    "open_items": [],
    "path": "working/WRK-0023-consistent-cut-channel-state-boundary.md",
-   "bytes": 6155
+   "bytes": 7172
   }
  ]
 }
