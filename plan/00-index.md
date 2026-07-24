@@ -757,6 +757,8 @@
   `plan/195-post-proposal013-autonomous-frontier-delta-audit.md`
 - WRK-0023 consistent-cut channel-state literal transcription:
   `plan/wrk-0023-consistent-cut-channel-state-boundary.md`
+- post-WRK-0023 literal-boundary review:
+  `plan/post-wrk0023-literal-boundary-review.md`
 - Post-WRK-0021 autonomous frontier triage:
   `plan/184-post-wrk0021-autonomous-frontier-triage.md`
 - cost-bound substitutability primary-literature audit:

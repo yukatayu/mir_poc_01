@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 01:10 JST
+最終更新: 2026-07-25 01:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -96,6 +96,15 @@ predicate itself has no channel-state parameter or representation relation.
 The exact Plan artifact is manifested by WRK-0023 as `not-promoted` L3
 evidence. This is not a checkpoint/SaveObject carrier, checker, OBL,
 lifecycle, or public conclusion.
+
+The post-evidence independent review corrects one reading: the compiled
+event-membership theorem is a literal reproduction of theory/04's stated
+consequence and Report 2273's generic closure pattern, not new theory. The
+displayed definition still does not formalize the parenthetical channel-state
+branch or establish interchangeability with event membership. The resulting
+source screen selects no successor L3 package; every materially different
+continuation needs a reserved representation, checker, checkpoint, or ledger
+decision. `plan/post-wrk0023-literal-boundary-review.md`
 
 A subsequent source-complete revalidation confirmed that no successor is
 hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
@@ -312,6 +321,13 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-25 01:22 JST: completed the post-WRK-0023 independent review and
+  forward clarification. The compiled event lemma is a literal reproduction,
+  while the retained boundary is only the unformalized channel-state
+  parenthetical. Local and Oracle screens select no new L3 package; no Canon
+  theory, checker/OBL, checkpoint design, implementation, Gate/Phase, or public
+  status moved.
 
 - 2026-07-25 01:10 JST: manifested the immutable WRK-0023 Plan evidence.
   The record now pins the evidence commit and digest for the event-only prefix

@@ -87,7 +87,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0020 | L3-open, frozen | theory/01 Option、theory/06 chain、Surface grammar、Core companion、current-L2 e3 の option-local `admit` literal audit は、登録済み command の shell quoting falsifier で凍結。source consistency、Option/constraint/residual/other carrier、grammar、OBL、parser/runtime は結論しない。`working/WRK-0020-option-admit-carrier-literal-audit.md` |
 | WRK-0021 | L3-open, frozen | active clean-near-end の三 counter CostBudget に限る scalar-total reflection audit は、登録後の Lean proof が comparison aliases の `Decidable` instance を合成できない first falsifier で凍結。countermodel、Contract cost rule、final algebra、runtime は結論しない。`working/WRK-0021-costbudget-scalar-projection.md` |
 | WRK-0022 | L3-open, frozen | `[WRITE-CROSS]` の表示済み failure-row 包含節だけを対象にする finite Lean audit は、登録後の bare `lean` command が `samples` module prefix を解決できない first falsifier で凍結。finite premise result、生成関数、Canon derivation、failure-row equality、OBL は結論しない。`working/WRK-0022-write-cross-failure-generation-boundary.md` |
-| WRK-0023 | L3-open, not-promoted | theory/04 の表示済み event-only Consistent(Kc) と `send -> receive` から send membership が遡ることを literal Lean transcription で確認し、表示済み定義には channel state を代替とする表現関係がないと記録する L3 evidence。checkpoint carrier、checker、OBL は選ばない。`working/WRK-0023-consistent-cut-channel-state-boundary.md` |
+| WRK-0023 | L3-open, not-promoted | theory/04 の表示済み event-only Consistent(Kc) と `send -> receive` の literal Lean transcription は、既記載 consequence と既存 generic closure kernel の再現である。表示済み定義が channel-state branch を形式化・event membership と交換可能と確立していない境界だけを記録する。checkpoint carrier、checker、OBL は選ばない。`working/WRK-0023-consistent-cut-channel-state-boundary.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 
