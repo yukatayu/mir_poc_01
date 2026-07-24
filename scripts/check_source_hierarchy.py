@@ -274,6 +274,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/186-canonical-elaboration-trace-interface-closure-audit.md",
         "plan/187-mircore-value-flow-and-occurrence-decision-packet.md",
         "plan/188-parser-free-chain-closure-integrity.md",
+        "plan/189-autonomous-theory-frontier-revalidation.md",
     ],
     "scripts": [
         "scripts",

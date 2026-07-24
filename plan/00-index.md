@@ -753,6 +753,8 @@
   `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`
 - parser-free chain closure integrity correction:
   `plan/188-parser-free-chain-closure-integrity.md`
+- autonomous theory frontier revalidation:
+  `plan/189-autonomous-theory-frontier-revalidation.md`
 
 ## maintenance rule
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 10:25 JST
+最終更新: 2026-07-24 10:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -47,6 +47,12 @@ either duplicate retained audits, lack a current binary consumer, are outside
 the admitted lane catalog, or require an owner/canon relation or interface.
 This is a bounded research disposition, not a project completion or a narrowing
 of future ADR-0014 eligibility.
+
+A subsequent source-complete revalidation confirmed that no successor is
+hidden in the apparent `[E-WRITE]` route: its conditional store-key kernel is
+T-RESEARCH-002 and its Canon-source-adequacy result is T-RESEARCH-006. A
+concrete step/frame/membership mapping is owner-reserved and has no current
+second mapping/importer or binary consumer. `plan/189-autonomous-theory-frontier-revalidation.md`
 
 The subsequent parser-free current-L2 source review found a distinct LAB
 integrity defect rather than a new theory candidate: a `ChainDecl` could pass
@@ -246,6 +252,16 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 10:53 JST: revalidated the post-WRK-0021 autonomous theory
+  frontier with local source evidence, three read-only sub-agents, and two
+  temporary GPT-5.6 Sol Pro Oracle reviews. The first Oracle's apparent
+  E-WRITE candidate duplicates T-RESEARCH-002/-006; the corrective review
+  agrees that no current L3 record may be opened. Active Lean manifest sync
+  left no diff. A `return` Surface/Core alignment observation is recorded as
+  an owner/canon grammar-elaboration item, not a parser instruction or L3
+  candidate. No Canon, WRK, OBL/Gate/Phase, sample-workflow, or public claim
+  moved.
 
 - 2026-07-24 10:25 JST: committed and pushed `3b22ff38`, which makes the
   parser-free static gate preserve ordered fallback-chain continuity and keeps
