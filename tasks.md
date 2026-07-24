@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-24 06:33 JST
+最終更新: 2026-07-24 10:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -83,7 +83,22 @@ contexts, with
 equality expressions before lowering. A source-patch regression confirms parse
 rejection prevents later stage execution and activation. This is fail-closed
 implementation scope, not a decision on compound, binder, conditional, or
-equality semantics; no new Plan or WRK is selected.
+equality semantics; no new semantic Plan or WRK is selected.
+
+An independent parser-free current-L2 review found one separate existing-lane
+integrity defect: the static gate checked each fallback-chain edge locally but
+accepted an edge sequence that did not begin at the declared head or continue
+from the prior successor. The evaluator then constructed order from the head
+and successor list, silently ignoring the disconnected predecessor. The gate
+now rejects that representation before evaluation. Base and later-edge
+red/green regressions cover discontinuity; a third preserves existing
+missing-endpoint diagnostics when a later syntactically connected edge follows
+an undeclared option. No new reason-code schema is added. This preserves
+theory/06's already-settled left-to-right chain shape; it does not select chain
+algebra, option repetition, cycle policy, grammar, Core, OBL, Gate/Phase,
+sample workflow, or public API.
+`plan/188-parser-free-chain-closure-integrity.md` records the bounded repair;
+it is not a new WRK or owner decision.
 
 PROPOSAL-010 separately asks how to remove the undefined `child locus` /
 `admission path` subject from the theory overview: use the existing

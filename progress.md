@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-24 08:02 JST
+最終更新: 2026-07-24 10:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -47,6 +47,15 @@ either duplicate retained audits, lack a current binary consumer, are outside
 the admitted lane catalog, or require an owner/canon relation or interface.
 This is a bounded research disposition, not a project completion or a narrowing
 of future ADR-0014 eligibility.
+
+The subsequent parser-free current-L2 source review found a distinct LAB
+integrity defect rather than a new theory candidate: a `ChainDecl` could pass
+the static gate with an edge whose predecessor did not continue from the head
+or previous successor, while evaluation used only the head and successors. The
+gate now rejects that disconnected ordered-edge representation before
+evaluation. This preserves the already-settled theory/06 left-to-right chain
+shape; it creates no Core, chain-algebra, OBL, Gate/Phase, sample-workflow, or
+public claim. `plan/188-parser-free-chain-closure-integrity.md`
 
 The P-SURF-05 preflight remains an input-location/policy stop. Its following
 permitted-root screen selected no candidate in this run under run-specific
@@ -237,6 +246,33 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-24 10:04 JST: follow-up review found that a missing chain endpoint
+  could leave the parser-free gate's expected predecessor stale and add a
+  spurious later continuity reason. A third red/green regression now preserves
+  only the pre-existing missing-endpoint diagnostics by advancing from every
+  raw successor while checking continuity only after endpoint resolution. This
+  remains the bounded theory/06 order-preservation repair, not a new Canon
+  choice, WRK, OBL/Gate/Phase movement, sample workflow, or public claim.
+
+- 2026-07-24 09:43 JST: the parser-free chain correction's final review found
+  a project-status heading-rule violation, a report manifest omission, and a
+  missing check that the new wording remains outside the stable reason-code
+  carrier. All three are corrected. Base and later-edge regressions now also
+  assert absent `detached_noncore`; the full Rust workspace, `make check`, and
+  the 87-test documentation suite pass. This preserves existing theory/06
+  ordering without a Canon, WRK, OBL/Gate/Phase, sample-workflow, or public
+  claim.
+
+- 2026-07-24 08:46 JST: an independent parser-free current-L2 review found
+  that static edge-local checks accepted a disconnected fallback-chain edge and
+  the evaluator then ignored its predecessor. Base and later-edge red/green
+  regressions now make the static gate reject an edge that does not continue
+  from the declared head or preceding successor. The full `mir-semantics`
+  suite and final review pass.
+  This is a bounded LAB integrity repair preserving theory/06 order, not a
+  Canon semantic choice, WRK, OBL/Gate/Phase movement, sample workflow, or
+  public claim.
 
 - 2026-07-24 08:02 JST: committed and pushed `cab894db`, which makes the
   bounded LAB parser fail closed for unlowered compound, `let` / `if`, and

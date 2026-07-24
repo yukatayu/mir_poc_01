@@ -1,7 +1,8 @@
 use std::path::PathBuf;
 
 use mir_semantics::{
-    CurrentL2Fixture, StaticGateVerdict, load_fixture_from_path, static_gate_detailed,
+    ChainEdge, CurrentL2Fixture, LineageAssertion, Statement, StaticGateVerdict,
+    load_fixture_from_path, static_gate_detailed,
 };
 use serde_json::json;
 
@@ -94,6 +95,91 @@ fn synthetic_multi_reason_fixture(chain_names: [&str; 2]) -> CurrentL2Fixture {
     .unwrap()
 }
 
+fn synthetic_disconnected_chain_fixture() -> CurrentL2Fixture {
+    serde_json::from_value(json!({
+        "schema_version": "current-l2-ast-fixture-v0",
+        "fixture_id": "synthetic_disconnected_chain",
+        "source_example_id": "SYNTHETIC_DISCONNECTED_CHAIN",
+        "program": {
+            "kind": "Program",
+            "body": [{
+                "kind": "PlaceBlock",
+                "place": "root",
+                "body": [{
+                    "kind": "OptionDecl",
+                    "name": "primary",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                }, {
+                    "kind": "OptionDecl",
+                    "name": "mirror",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                }, {
+                    "kind": "OptionDecl",
+                    "name": "archive",
+                    "target": "profile_doc",
+                    "capability": "read",
+                    "lease": "live",
+                    "admit": null
+                }, {
+                    "kind": "ChainDecl",
+                    "name": "profile_ref",
+                    "head": "primary",
+                    "edges": [{
+                        "predecessor": "mirror",
+                        "successor": "archive",
+                        "lineage_assertion": {
+                            "predecessor": "mirror",
+                            "successor": "archive"
+                        }
+                    }]
+                }]
+            }]
+        },
+        "expected_static": {
+            "verdict": "malformed",
+            "reasons": []
+        },
+        "expected_runtime": {
+            "enters_evaluation": false,
+            "final_outcome": "not_evaluated",
+            "notes": []
+        },
+        "expected_trace_audit": {
+            "event_kinds": [],
+            "non_admissible_metadata": [],
+            "narrative_explanations": [],
+            "must_explain": []
+        }
+    }))
+    .unwrap()
+}
+
+fn replace_only_chain_edges(fixture: &mut CurrentL2Fixture, edges: Vec<ChainEdge>) {
+    let Statement::PlaceBlock { body, .. } = fixture
+        .program
+        .body
+        .first_mut()
+        .expect("synthetic fixture has one place block")
+    else {
+        panic!("synthetic fixture starts with a place block");
+    };
+    let Some(Statement::ChainDecl {
+        edges: chain_edges, ..
+    }) = body
+        .iter_mut()
+        .find(|statement| matches!(statement, Statement::ChainDecl { .. }))
+    else {
+        panic!("synthetic fixture has one chain declaration");
+    };
+    *chain_edges = edges;
+}
+
 #[test]
 fn static_gate_support_preserves_fixture_context_and_malformed_reasons() {
     let path = fixture_path("e4-malformed-lineage.json");
@@ -146,6 +232,111 @@ fn static_gate_reasons_are_deterministic_for_multi_reason_fixture() {
 
     assert_eq!(left.reasons, expected);
     assert_eq!(right.reasons, expected);
+}
+
+#[test]
+fn static_gate_rejects_a_chain_whose_first_edge_does_not_start_at_its_head() {
+    let fixture = synthetic_disconnected_chain_fixture();
+    let gate = static_gate_detailed(&fixture);
+
+    assert_eq!(gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        gate.reasons,
+        vec!["chain edge mirror -> archive does not continue from primary".to_string()]
+    );
+
+    let artifact = build_detached_static_gate_artifact(
+        PathBuf::from("synthetic-disconnected-chain.json"),
+        &fixture,
+        &gate,
+    );
+    assert!(artifact.detached_noncore.is_none());
+}
+
+#[test]
+fn static_gate_rejects_a_later_edge_that_does_not_continue_from_its_predecessor() {
+    let mut fixture = synthetic_disconnected_chain_fixture();
+    replace_only_chain_edges(
+        &mut fixture,
+        vec![
+            ChainEdge {
+                predecessor: "primary".to_string(),
+                successor: "mirror".to_string(),
+                lineage_assertion: Some(LineageAssertion {
+                    predecessor: "primary".to_string(),
+                    successor: "mirror".to_string(),
+                }),
+            },
+            ChainEdge {
+                predecessor: "archive".to_string(),
+                successor: "primary".to_string(),
+                lineage_assertion: Some(LineageAssertion {
+                    predecessor: "archive".to_string(),
+                    successor: "primary".to_string(),
+                }),
+            },
+        ],
+    );
+
+    let gate = static_gate_detailed(&fixture);
+
+    assert_eq!(gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        gate.reasons,
+        vec!["chain edge archive -> primary does not continue from mirror".to_string()]
+    );
+
+    let artifact = build_detached_static_gate_artifact(
+        PathBuf::from("synthetic-later-disconnected-chain.json"),
+        &fixture,
+        &gate,
+    );
+    assert!(artifact.detached_noncore.is_none());
+}
+
+#[test]
+fn static_gate_does_not_add_continuity_to_missing_endpoint_diagnostics() {
+    let mut fixture = synthetic_disconnected_chain_fixture();
+    replace_only_chain_edges(
+        &mut fixture,
+        vec![
+            ChainEdge {
+                predecessor: "primary".to_string(),
+                successor: "ghost".to_string(),
+                lineage_assertion: Some(LineageAssertion {
+                    predecessor: "primary".to_string(),
+                    successor: "ghost".to_string(),
+                }),
+            },
+            ChainEdge {
+                predecessor: "ghost".to_string(),
+                successor: "mirror".to_string(),
+                lineage_assertion: Some(LineageAssertion {
+                    predecessor: "ghost".to_string(),
+                    successor: "mirror".to_string(),
+                }),
+            },
+            ChainEdge {
+                predecessor: "mirror".to_string(),
+                successor: "archive".to_string(),
+                lineage_assertion: Some(LineageAssertion {
+                    predecessor: "mirror".to_string(),
+                    successor: "archive".to_string(),
+                }),
+            },
+        ],
+    );
+
+    let gate = static_gate_detailed(&fixture);
+
+    assert_eq!(gate.verdict, StaticGateVerdict::Malformed);
+    assert_eq!(
+        gate.reasons,
+        vec![
+            "missing predecessor option ghost at root".to_string(),
+            "missing successor option ghost at root".to_string(),
+        ]
+    );
 }
 
 #[test]

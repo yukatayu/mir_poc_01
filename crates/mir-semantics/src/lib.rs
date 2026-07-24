@@ -1389,10 +1389,10 @@ pub fn static_gate_program_detailed(program: &Program) -> StaticGateResult {
 
     for (scope, chains) in &declarations.chains_by_scope {
         for chain in chains.values() {
-            if declarations
+            let has_declared_head = declarations
                 .resolve_option_in_scope(scope, &chain.head)
-                .is_none()
-            {
+                .is_some();
+            if !has_declared_head {
                 verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
                 reasons.push(format!(
                     "missing option declaration for chain head {} at {}",
@@ -1401,7 +1401,9 @@ pub fn static_gate_program_detailed(program: &Program) -> StaticGateResult {
                 ));
             }
 
+            let mut expected_predecessor = chain.head.as_str();
             for edge in &chain.edges {
+                let next_expected_predecessor = edge.successor.as_str();
                 let Some(predecessor) =
                     declarations.resolve_option_in_scope(scope, &edge.predecessor)
                 else {
@@ -1411,6 +1413,7 @@ pub fn static_gate_program_detailed(program: &Program) -> StaticGateResult {
                         edge.predecessor,
                         display_scope(scope),
                     ));
+                    expected_predecessor = next_expected_predecessor;
                     continue;
                 };
                 let Some(successor) = declarations.resolve_option_in_scope(scope, &edge.successor)
@@ -1421,8 +1424,18 @@ pub fn static_gate_program_detailed(program: &Program) -> StaticGateResult {
                         edge.successor,
                         display_scope(scope),
                     ));
+                    expected_predecessor = next_expected_predecessor;
                     continue;
                 };
+
+                if has_declared_head && edge.predecessor != expected_predecessor {
+                    verdict = escalate_verdict(verdict, StaticGateVerdict::Malformed);
+                    reasons.push(format!(
+                        "chain edge {} -> {} does not continue from {}",
+                        edge.predecessor, edge.successor, expected_predecessor
+                    ));
+                }
+                expected_predecessor = next_expected_predecessor;
 
                 match &edge.lineage_assertion {
                     None => {
