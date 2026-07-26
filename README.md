@@ -8,6 +8,9 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 この repository は、4 系統を分離可能なまま扱う **specification-first research repo** です。
 
+前提知識なしで目的・理論・システム構成・公式工程・LAB 実証・現在の判断点を
+一度に確認する入口は `docs/mirrorea-project-overview.html` です。
+
 ## Current research governance
 
 `mirrorea_canon/` remains the sole normative source. ADR-0014 permits

@@ -13,6 +13,7 @@ notes. If LAB text conflicts with canon, canon wins.
 
 | 知りたいこと | 読む場所 |
 | --- | --- |
+| 前提知識なしで全体像・現在地・判断点を掴む | `docs/mirrorea-project-overview.html` |
 | 正本の層と依存 | `mirrorea_canon/MAP.md` と `docs/diagrams/layer-stack.mmd` |
 | 理論から実装への道筋 | `mirrorea_canon/plan/00-gates.md`、`mirrorea_canon/plan/01-phases.md`、`docs/diagrams/workflow.mmd` |
 | 現在地と owner 判断 | `docs/project-status.md` |

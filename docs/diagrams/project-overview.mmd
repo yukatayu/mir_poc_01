@@ -1,0 +1,93 @@
+%% Title: Mir / Mirrorea target responsibility and dataflow map
+%% Description: This diagram separates authoring, Core, verification, runtime occurrence production, projection, external boundaries, four graph families, and independent satellites. It does not represent completion, conformance, Gate exit, or Phase entry.
+flowchart TB
+  accTitle: Mir / Mirrorea target responsibility and dataflow map
+  accDescr: Target architecture only. Parsing produces AST. The mir-check front door checks AST while BND-002 constrains the Core to Checker semantic boundary. Elaboration produces Core. Verdict-approved Core plus a script runs and produces occurrence Trace. Projection consumes Core and topology independently of Trace. Four graph families and independent satellites remain distinct.
+
+  Notice["TARGET RESPONSIBILITY MAP<br/>completion / conformance / Gate exit / Phase entry を表さない"]
+  Legend["凡例<br/>実線 = typed data / artifact flow<br/>破線 = normative / structural association or non-evidence mapping"]
+
+  subgraph User["User-defined domain"]
+    Domain["S5 Domain<br/>World / Room / Avatar / game<br/>Mir core primitive ではない"]
+  end
+
+  subgraph Mir["Mir: authoring, semantics, verification"]
+    Surface["S0 Surface<br/>ordinary .mir source"]
+    AST["AST + source span"]
+    Core["S1 Core IR<br/>explicit request / effect / failure<br/>capability / witness obligation"]
+    Checker["S3 decidable checker<br/>diagnostics + verdict"]
+    Residual["ResidualObligation"]
+    Model["bounded ModelChecker"]
+    Prover["proof project / Lean skeleton"]
+    Script["runtime script / step input"]
+    Runtime["mir-run / runtime<br/>verdict 済み Core only"]
+    Trace["S2 occurrence Trace H<br/>occurrence DAG / cut / save-load"]
+  end
+
+  subgraph Mirrorea["Mirrorea: projection and fabric"]
+    Topology["topology Π<br/>locus / placement input"]
+    Projection["S4 Projection / Fabric<br/>per-locus artifact + communication boundary"]
+    Transport["transport<br/>delivery only; authority owner ではない"]
+    Patch["patch check + activation<br/>frontier-bound"]
+    Devtools["typed Devtools<br/>redacted H-derived evidence"]
+  end
+
+  subgraph Boundary["Typed external boundary and Host"]
+    Provider["Provider boundary<br/>semantic owner ではない"]
+    View["View boundary<br/>domain logic を置かない"]
+    Host["(S6) Host<br/>OS / browser / engine / FFI"]
+  end
+
+  subgraph GraphFamilies["Four distinct graph families"]
+    OccGraph["occurrence DAG<br/>write / send / receive / admission / activation"]
+    ExistGraph["state / existence DAG<br/>lifetime / lease / fallback lineage"]
+    LocusGraph["locus / admission graph<br/>participant / epoch / incarnation / grant"]
+    PatchGraph["patch / overlay DAG<br/>dependency / compatibility / activation cut"]
+  end
+
+  subgraph Satellites["Independent satellites; exact integration and strata are unresolved"]
+    Prism["PrismCascade"]
+    Wiring["Typed-Effect Wiring Platform"]
+  end
+
+  Domain -->|"Mir Surface として記述"| Surface
+  Surface -->|"parse"| AST
+  AST -->|"elaboration"| Core
+  AST -->|"mir-check front door"| Checker
+  Core -.->|"BND-002 semantic boundary"| Checker
+  Checker -->|"未解決部分"| Residual
+  Residual -->|"finite / bounded inquiry"| Model
+  Residual -->|"proof-facing statement"| Prover
+  Core -->|"Core artifact"| Runtime
+  Script -->|"step / execution input"| Runtime
+  Checker -->|"accepted verdict"| Runtime
+  Runtime -->|"occurrence rows"| Trace
+
+  Core -->|"Core IR"| Projection
+  Topology -->|"Π"| Projection
+  Projection -->|"derived communication boundary"| Transport
+  Projection -->|"typed adapter contract"| Provider
+  Projection -->|"typed View contract"| View
+  Provider -->|"explicit boundary"| Host
+  View -->|"explicit boundary"| Host
+  Patch -->|"verified activation"| Runtime
+  Trace -->|"H-derived evidence"| Devtools
+  Projection -.->|"source / schema / artifact mapping only<br/>occurrence evidence ではない"| Devtools
+
+  Trace -.-> OccGraph
+  Core -.-> ExistGraph
+  Topology -.-> LocusGraph
+  Patch -.-> PatchGraph
+
+  classDef notice fill:#fff8d8,stroke:#8a6809,color:#423400,stroke-width:2px
+  classDef mir fill:#e7f4f1,stroke:#0d756d,color:#12302d
+  classDef mirrorea fill:#eaf2fb,stroke:#1c5ca5,color:#102d52
+  classDef boundary fill:#fff2e8,stroke:#b85a18,color:#4a2511
+  classDef graphFamily fill:#fff0ee,stroke:#b64235,color:#4a1b15
+  classDef satellite fill:#eef1f4,stroke:#657480,color:#27343e,stroke-dasharray:5 3
+  class Notice,Legend notice
+  class Surface,AST,Core,Checker,Residual,Model,Prover,Script,Runtime,Trace mir
+  class Topology,Projection,Transport,Patch,Devtools mirrorea
+  class Domain,Provider,View,Host boundary
+  class OccGraph,ExistGraph,LocusGraph,PatchGraph graphFamily
+  class Prism,Wiring satellite

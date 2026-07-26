@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-25 01:50 JST
+最終更新: 2026-07-26 23:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
@@ -334,6 +334,15 @@ LAB evidence.
 | executable sample corpus | runnable bounded LAB workflows | conformance and public operational workflow | maintenance only |
 
 ## recent log
+
+- 2026-07-26 23:54 JST: added a self-contained Japanese HTML orientation map
+  and tracked Mermaid source that separate Canon Phase, Gate exit order, bounded
+  LAB evidence, end-user milestones, toolchain responsibilities, four graph
+  families, and current decision surfaces. Independent sub-agent and GPT-5.6
+  Sol Pro reviews were reconciled against Canon; browser, print, Mermaid,
+  Product Alpha, and operational-suite validations were run. This is a
+  reader-facing LAB map only; no Canon, Gate/Phase, OBL, sample status,
+  implementation, or public-product status moved.
 
 - 2026-07-25 01:50 JST: completed a source-checked whole-theory audit with an
   independent Oracle review. It selects no successor WRK from the examined

@@ -1,5 +1,5 @@
 # Project status
-最終更新: 2026-07-25 01:50 JST
+最終更新: 2026-07-26 23:54 JST
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction, theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB: evidence, history, implementation, and operational notes. If LAB text conflicts with canon, canon wins.
 
 ## この文書の役割
@@ -10,7 +10,7 @@ Gate / Phase 移行、OBL 状態、適合性、実装完了を作りません。
 - 規範正本: `mirrorea_canon/`
 - 詳細な計画・研究の記憶: `plan/`
 - 実行証拠: `docs/reports/`
-- runnable LAB の一覧: `samples_progress.md`
+- runnable LAB と前提知識なし向け全体図: `samples_progress.md` / `docs/mirrorea-project-overview.html`
 ## 全体の進行チェックリスト
 
 Gate: [ ] G0 軸と語彙 -> [ ] G1 普通の代入 -> [ ] G2 存在と fallback ->

@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mir / Mirrorea の目的、理論、システム構成、ロードマップ、現在地を権威レベル別に示すリポジトリ案内。">
+  <title>Mir / Mirrorea: 全体像と現在地</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #52606d;
+      --line: #c8d2da;
+      --paper: #ffffff;
+      --wash: #f4f7f9;
+      --teal: #0d756d;
+      --teal-pale: #e7f4f1;
+      --blue: #1c5ca5;
+      --blue-pale: #eaf2fb;
+      --orange: #b85a18;
+      --orange-pale: #fff2e8;
+      --red: #b64235;
+      --red-pale: #fff0ee;
+      --yellow: #8a6809;
+      --yellow-pale: #fff8d8;
+      --future: #485867;
+      --future-pale: #eef1f4;
+      --shadow: 0 1px 2px rgb(23 33 43 / 8%);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: #113e72; }
+    a:focus-visible { outline: 3px solid #d28c26; outline-offset: 3px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.92em; }
+    .skip-link { position: absolute; left: 12px; top: -60px; z-index: 5; background: #fff; padding: 8px 12px; border: 2px solid var(--blue); }
+    .skip-link:focus { top: 12px; }
+    .container { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .eyebrow { margin: 0 0 8px; color: var(--teal); font-size: 0.86rem; font-weight: 700; }
+    .hero { border-top: 8px solid var(--teal); padding: 42px 0 30px; background: #f4fbfa; }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.2; }
+    .hero .lead { max-width: 860px; margin: 18px 0 0; font-size: 1.13rem; }
+    .source-cut { margin-top: 18px; color: var(--muted); font-size: 0.92rem; }
+    .topnav { border-bottom: 1px solid var(--line); background: #fff; }
+    .topnav .container { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 12px 0; }
+    .topnav a { color: var(--ink); font-size: 0.9rem; font-weight: 650; text-decoration: none; }
+    .topnav a:hover { color: var(--teal); text-decoration: underline; }
+    section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+    section:nth-of-type(even) { background: var(--wash); }
+    h2 { margin: 0 0 8px; font-size: clamp(1.45rem, 2.4vw, 2rem); line-height: 1.3; }
+    h3 { margin: 0 0 8px; font-size: 1.1rem; line-height: 1.4; }
+    p { margin: 0 0 14px; }
+    .section-intro { max-width: 920px; color: #263440; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 18px 0 0; }
+    .tag { display: inline-flex; align-items: center; min-height: 28px; padding: 2px 9px; border: 1px solid; border-radius: 4px; font-size: 0.84rem; font-weight: 700; line-height: 1.35; }
+    .tag.canon { color: #075a54; background: var(--teal-pale); border-color: #78b9b3; }
+    .tag.lab { color: #164b85; background: var(--blue-pale); border-color: #99bce3; }
+    .tag.open { color: #8c420d; background: var(--orange-pale); border-color: #e2aa78; }
+    .tag.stop { color: #8b2f26; background: var(--red-pale); border-color: #e0a09a; }
+    .tag.future { color: #3d4c59; background: var(--future-pale); border-color: #b7c2ca; }
+    .status-band { margin-top: 24px; border: 1px solid #bd8b22; border-left: 7px solid var(--yellow); padding: 18px 20px; background: var(--yellow-pale); box-shadow: var(--shadow); }
+    .status-band h2 { font-size: 1.2rem; }
+    .status-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .status-item { border-top: 3px solid; padding: 10px 0 0; }
+    .status-item:nth-child(1) { border-color: var(--yellow); }
+    .status-item:nth-child(2) { border-color: var(--blue); }
+    .status-item:nth-child(3) { border-color: var(--orange); }
+    .status-item strong { display: block; margin-bottom: 4px; }
+    .columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 22px; }
+    .rule { padding: 18px; border: 1px solid var(--line); border-top: 4px solid var(--teal); background: #fff; box-shadow: var(--shadow); }
+    .rule + .rule { border-top-color: var(--blue); }
+    .rule ul, .plain-list { margin: 8px 0 0; padding-left: 1.25em; }
+    .architecture { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; margin-top: 22px; }
+    .layer-stack { border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
+    .layer { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 14px; padding: 13px 15px; border-bottom: 1px solid var(--line); }
+    .layer:last-child { border-bottom: 0; }
+    .layer-id { color: var(--teal); font-size: 0.9rem; font-weight: 800; }
+    .layer h3 { margin: 0; font-size: 1rem; }
+    .layer p { margin: 3px 0 0; font-size: 0.91rem; }
+    .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 18px 0 0; padding: 0; list-style: none; }
+    .flow-step { flex: 1 1 130px; min-width: 0; border: 1px solid var(--line); border-top: 4px solid var(--teal); padding: 12px; background: #fff; }
+    .flow-step:nth-child(3n + 1) { border-top-color: var(--blue); }
+    .flow-step:nth-child(3n + 2) { border-top-color: var(--teal); }
+    .flow-step:nth-child(3n) { border-top-color: var(--orange); }
+    .flow-arrow { align-self: center; padding: 0 7px; font-size: 1.5rem; color: var(--muted); }
+    .flow-step strong { display: block; font-size: 0.94rem; }
+    .flow-step span { display: block; margin-top: 5px; color: var(--muted); font-size: 0.83rem; line-height: 1.45; }
+    .side-note { padding: 18px; border-left: 5px solid var(--blue); background: var(--blue-pale); }
+    .side-note h3 { color: #174979; }
+    .side-note + .side-note { margin-top: 14px; border-left-color: var(--orange); background: var(--orange-pale); }
+    .subsystem-label { display: inline-block; margin-top: 4px; color: var(--muted); font-size: 0.76rem; font-weight: 700; }
+    .four-graphs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .graph { padding: 16px; border: 1px solid var(--line); background: #fff; }
+    .graph:nth-child(1) { border-top: 4px solid var(--blue); }
+    .graph:nth-child(2) { border-top: 4px solid var(--teal); }
+    .graph:nth-child(3) { border-top: 4px solid var(--orange); }
+    .graph:nth-child(4) { border-top: 4px solid var(--red); }
+    .graph p { font-size: 0.9rem; margin: 0; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+    .boundary { padding: 12px; border: 1px solid var(--line); background: #fff; }
+    .boundary strong { display: block; color: var(--blue); font-size: 0.88rem; }
+    .boundary span { display: block; margin-top: 5px; font-size: 0.8rem; line-height: 1.45; }
+    .table-scroll { overflow-x: auto; margin-top: 22px; padding: 2px 2px 8px; }
+    .table-scroll:focus-visible { outline: 3px solid #d28c26; outline-offset: 2px; }
+    .roadmap-table { min-width: 1040px; width: 100%; border-collapse: collapse; background: #fff; box-shadow: var(--shadow); }
+    .roadmap-table caption, .lab-table caption, .decision-table caption { padding: 0 0 10px; text-align: left; font-weight: 750; }
+    .roadmap-table th, .roadmap-table td { min-width: 98px; padding: 11px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .roadmap-table thead th { background: #edf3f7; font-size: 0.9rem; }
+    .roadmap-table tbody th { min-width: 145px; background: #f2f5f7; color: var(--muted); font-size: 0.88rem; }
+    .roadmap-table td { font-size: 0.8rem; line-height: 1.4; }
+    .roadmap-table .current { background: var(--yellow-pale); box-shadow: inset 0 5px 0 var(--yellow); }
+    .roadmap-table .future-phase { background: var(--future-pale); color: #42525f; }
+    .current-label { display: inline-block; margin-top: 7px; padding: 1px 7px; border-radius: 3px; background: var(--yellow); color: #fff; font-size: 0.76rem; font-weight: 800; }
+    .lab-evidence-band { margin-top: 16px; border: 1px solid #99bce3; border-left: 6px solid var(--blue); background: var(--blue-pale); padding: 15px 17px; }
+    .lab-evidence-band h3 { color: #164b85; }
+    .lab-evidence-band ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px 22px; margin: 8px 0 0; padding-left: 1.2em; }
+    .lab-evidence-band li { font-size: 0.84rem; }
+    .gate-track { display: flex; flex-wrap: wrap; gap: 0; margin: 22px 0 0; border: 1px solid var(--line); background: #fff; }
+    .gate-title { flex: 1 1 100%; padding: 10px 13px; background: var(--teal-pale); color: #075a54; font-size: 0.9rem; font-weight: 750; }
+    .gate-step { flex: 1 1 120px; min-height: 84px; padding: 11px; border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
+    .gate-step:last-child { border-right: 0; }
+    .gate-step strong { display: block; font-size: 0.88rem; }
+    .gate-step span { display: block; margin-top: 4px; color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
+    .gate-step.gate-current { background: var(--yellow-pale); box-shadow: inset 0 4px 0 var(--yellow); }
+    .callout { margin-top: 16px; padding: 14px 16px; border-left: 5px solid var(--orange); background: var(--orange-pale); }
+    .milestones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+    .milestone { padding: 16px; border: 1px solid var(--line); border-top: 4px solid var(--future); background: #fff; }
+    .milestone.current { border-top-color: var(--yellow); background: var(--yellow-pale); }
+    .milestone h3 { color: var(--ink); }
+    .milestone p { font-size: 0.89rem; }
+    .lab-table { min-width: 920px; width: 100%; border-collapse: collapse; background: #fff; box-shadow: var(--shadow); }
+    .lab-table th, .lab-table td { padding: 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .lab-table th { background: #edf3f7; font-size: 0.9rem; }
+    .lab-table td { font-size: 0.9rem; }
+    .gate-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .gate { padding: 14px; border: 1px solid var(--line); background: #fff; }
+    .gate strong { display: block; color: var(--teal); }
+    .gate span { display: block; margin-top: 5px; font-size: 0.84rem; line-height: 1.45; }
+    .gate.current-gate { border-top: 4px solid var(--yellow); background: var(--yellow-pale); }
+    .gate.current-gate strong { color: #725600; }
+    .decision-table { min-width: 980px; width: 100%; border-collapse: collapse; background: #fff; box-shadow: var(--shadow); }
+    .decision-table th, .decision-table td { padding: 13px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .decision-table th { background: #f2f5f7; }
+    .decision-table td { font-size: 0.9rem; }
+    .decision-table .recommendation { color: #164b85; }
+    .decision-table .hold { color: #8b2f26; }
+    .decision-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch; margin-top: 22px; }
+    .decision-node { padding: 16px; border: 2px dashed #bd8b22; background: var(--yellow-pale); }
+    .decision-node.red { border-color: var(--red); background: var(--red-pale); }
+    .decision-node.future-node { border-color: #9eaab3; background: var(--future-pale); }
+    .decision-node h3 { font-size: 1rem; }
+    .decision-node p { margin: 0; font-size: 0.87rem; }
+    .glossary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+    .glossary-item { padding: 12px 14px; border-left: 4px solid var(--blue); background: #fff; }
+    .glossary-item dt { font-weight: 800; }
+    .glossary-item dd { margin: 3px 0 0; color: var(--muted); font-size: 0.86rem; }
+    .read-next { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+    .read-next a { display: block; min-height: 100%; padding: 16px; border: 1px solid var(--line); border-top: 4px solid var(--blue); background: #fff; text-decoration: none; box-shadow: var(--shadow); }
+    .read-next a:nth-child(2) { border-top-color: var(--teal); }
+    .read-next a:nth-child(3) { border-top-color: var(--orange); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .read-next strong { display: block; color: var(--ink); }
+    .read-next span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.87rem; line-height: 1.5; }
+    .sources { columns: 2 320px; column-gap: 28px; margin: 20px 0 0; padding-left: 1.25em; }
+    .sources li { break-inside: avoid; margin-bottom: 6px; font-size: 0.9rem; }
+    footer { padding: 24px 0 38px; background: #12222d; color: #eef4f6; }
+    footer p { margin: 0; font-size: 0.9rem; }
+    @media (max-width: 840px) {
+      .status-grid, .columns, .architecture, .milestones, .read-next { grid-template-columns: 1fr; }
+      .gate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-arrow { display: none; }
+      .flow-step { flex-basis: 45%; }
+      .lab-evidence-band ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .decision-flow, .glossary-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 22px, 1180px); }
+      .hero { padding-top: 30px; }
+      .topnav .container { gap: 6px 12px; }
+      section { padding: 34px 0; }
+      .layer { grid-template-columns: 70px minmax(0, 1fr); padding: 11px; }
+      .four-graphs, .gate-grid, .boundary-grid { grid-template-columns: 1fr; }
+      .lab-evidence-band ul { grid-template-columns: 1fr; }
+      .flow-step { flex-basis: 100%; }
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 8mm; }
+      .topnav { display: none; }
+      body { font-size: 10pt; }
+      .container { width: 100%; }
+      section { break-inside: auto; padding: 22px 0; }
+      .hero { padding: 20px 0; }
+      a { color: inherit; }
+      .table-scroll { overflow: visible; }
+      .roadmap-table, .lab-table, .decision-table { min-width: 0; font-size: 7pt; }
+      .roadmap-table th, .roadmap-table td,
+      .lab-table th, .lab-table td,
+      .decision-table th, .decision-table td { min-width: 0; padding: 4px; font-size: 6pt; }
+      .roadmap-table tr, .lab-table tr, .decision-table tr { break-inside: avoid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">仕様先行研究プロジェクトの案内図</p>
+      <h1>Mir / Mirrorea: 全体像と現在地</h1>
+      <p class="lead">Mir で「普通に書いた」分散システムの意味から、配置・通信・検証・観測・安全な進化を導くための理論と実装実験です。このページは、将来像、理論、実行済みの実験、公式工程、現在の停止点を混同しないように分けて説明します。</p>
+      <p class="source-cut">対象ソース: base commit <code>f9b9bc8a3cb8fc219df9381def4bb01ee3a64449</code>、Canon tree <code>82c4c1363d37dafbe453a4431f156d107ca6cb51</code>。status semantics は <code>docs/project-status.md</code> / <code>progress.md</code> / <code>tasks.md</code> の 2026-07-25 01:50 JST 版と、<code>samples_progress.md</code> の 2026-07-22 14:55 JST 版から読み、この publication package は入口リンクと作業ログだけを後続更新します。規範判断は <a href="../mirrorea_canon/README.md">mirrorea_canon/</a> のみが持ち、この HTML 自身は後続 commit に含まれる LAB の説明ビューです。</p>
+      <div class="legend" aria-label="読み分けの凡例">
+        <span class="tag canon">Canon: 唯一の規範ソース。settled / working / open は各 status に従う</span>
+        <span class="tag lab">LAB: 非規範の実装・実験・証拠・履歴・運用 view</span>
+        <span class="tag open">未決: 設計・判断が必要</span>
+        <span class="tag stop">直接矛盾: 修正後に再検証が必要</span>
+        <span class="tag future">将来フェーズ: 目標であって現状ではない</span>
+      </div>
+      <div class="status-band">
+        <h2>最初に結論</h2>
+        <p><span class="tag stop">直接矛盾</span> 公式工程の最初の評価 JSON で、最上位 <code>result</code> の許容値が本文では <code>pass</code>、JSON 例では <code>derived-pass</code> と食い違っています。このため既存 artifact は完全適合とは扱えません。</p>
+        <div class="status-grid">
+          <div class="status-item"><strong>公式の現在地</strong>Canon 上の公式 implementation state は <code>T0</code>。LAB の current reading は <code>T0 / G0 rebaseline</code> で、G0 exit と T1 entry は未記録です。</div>
+          <div class="status-item"><strong>実際に動くもの</strong>多数の parser / checker / runtime / sample / Lean の <em>限定 LAB 証拠</em>があります。</div>
+          <div class="status-item"><strong>証明の現在地</strong>唯一の proof-status ledger では <code>OBL-001</code>〜<code>OBL-028</code> が全件 <code>open</code> です。Lean の成功は限定 evidence であり、proof discharge ではありません。</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <nav class="topnav" aria-label="ページ内目次"><div class="container">
+    <a href="#goal">何を作るか</a><a href="#architecture">構成と理論</a><a href="#roadmap">公式工程</a><a href="#lab">現在動く実験</a><a href="#gates">障壁と判断</a><a href="#sources">根拠</a>
+  </div></nav>
+  <main id="main">
+    <section id="goal"><div class="container">
+      <p class="eyebrow">01 / 目的</p><h2>目標像: 利用者からは「一つのプログラム」、実行時には「検証された分散システム」</h2>
+      <p class="section-intro">最終的に利用者は、<code>World</code>、<code>Room</code>、<code>Avatar</code>、ゲームなどを Mir のライブラリや自分の型として定義します。これらは言語の組込み概念ではありません。Mir は、どこで処理すべきか、必要な権限・失敗・通信・観測を明示化するための最小の意味論コアです。</p>
+      <ol class="flow" aria-label="最終的に目指す利用者の流れ">
+        <li class="flow-step"><strong>1. Mir を書く</strong><span>通常の代入、読み取り、状態、<code>when</code> を用いてドメインを表す。</span></li><li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><strong>2. 隠れた結果を出す</strong><span>所有者宛 request、effect / failure、権限・witness 義務、publish / observe を明示化する。</span></li><li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><strong>3. 検査して動かす</strong><span>型・契約・残余義務を検査し、verdict 済み Core だけを実行する。</span></li><li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><strong>4. locus ごとに導出する</strong><span>Core と topology から、各実行場所向けの成果物と通信境界を得る。</span></li><li class="flow-arrow" aria-hidden="true">→</li>
+        <li class="flow-step"><strong>5. 観測・進化する</strong><span>redaction 付きの occurrence evidence を観測し、patch を検査して activation cut で有効化する。</span></li>
+      </ol>
+      <div class="columns">
+        <article class="rule"><h3>設計の中心原理</h3><ul><li>通信 API を先に固定せず、検証済みの意味から導出する。</li><li>表層コードをイベント駆動の記述で埋めない。読みは依存、書きは出来事として Core / Trace 側に現す。</li><li>elaboration が生成する capability / witness 義務と request edge は隠さず明示し、authority 自体は新規に創出しない。</li><li>認証・認可・membership・capability を transport metadata に押し込まない。</li></ul></article>
+        <article class="rule"><h3>目標だが、まだ宣言しないこと</h3><ul><li>一般公開サービス、WAN federation、分散耐久保存、最終 ABI / SDK。</li><li>任意 native / WASM provider の実行や、単一ゲームエンジンへの固定。</li><li>実験があることをもって、公式の言語実装・定理証明・適合性達成と呼ぶこと。</li></ul></article>
+      </div>
+    </div></section>
+    <section id="architecture"><div class="container">
+      <p class="eyebrow">02 / 構成と理論</p><h2>Mir / Mirrorea と外部境界を分け、意味を保って層を越える</h2>
+      <p class="section-intro">これは部品の完成度の図ではなく、責務の境界図です。下の層の都合を上の層の意味にせず、上のドメイン語彙を下の primitive にしないことが、置換可能性と検証可能性を守ります。</p>
+      <div class="architecture">
+        <div><div class="layer-stack" aria-label="Mir、Mirrorea、利用者 domain、外部境界の統一層モデル">
+          <div class="layer"><div class="layer-id">S0</div><div><h3>Surface: 通常のソース</h3><p>代入、読み、状態宣言、<code>when</code>、join。利用者が主に触る層。</p><span class="subsystem-label">Mir</span></div></div>
+          <div class="layer"><div class="layer-id">S1</div><div><h3>Core: 明示化された計算</h3><p>owner-directed request、effect / failure row、capability / witness 義務、source span。</p><span class="subsystem-label">Mir</span></div></div>
+          <div class="layer"><div class="layer-id">S2</div><div><h3>Trace: 履歴と cut</h3><p>occurrence DAG、因果順序、<code>atomic_cut</code>、save/load、devtools の根拠行。</p><span class="subsystem-label">Mir の意味層。実現は Mir / Mirrorea 境界にまたがり得る</span></div></div>
+          <div class="layer"><div class="layer-id">S3</div><div><h3>Verify: 検査・モデル・証明</h3><p>decidable checker、model check、Lean、診断。三線を区別し、未解決義務を明示する。</p><span class="subsystem-label">Mir の横断検証層</span></div></div>
+          <div class="layer"><div class="layer-id">S4</div><div><h3>Projection / Fabric: locus ごとの導出</h3><p>Core と topology から per-locus 成果物と通信境界を導き、typed Provider / View 境界へ接続する。</p><span class="subsystem-label">主に Mirrorea</span></div></div>
+          <div class="layer"><div class="layer-id">S5</div><div><h3>Domain: 利用者の世界</h3><p>World、Room、Avatar、ゲーム、協調エディタなど。ライブラリ・アプリケーションとして定義する。</p><span class="subsystem-label">利用者定義。Mir core primitive ではない</span></div></div>
+          <div class="layer"><div class="layer-id">(S6)</div><div><h3>Provider / View 境界と Host</h3><p>Provider / View は typed seam、Host は OS / browser / engine / FFI 先です。意味の owner ではなく、BND-007 を越えて接続します。</p><span class="subsystem-label">外部境界。Provider / View と Host を同一視しない</span></div></div>
+        </div></div>
+        <aside>
+          <div class="side-note"><h3>必ず越えない境界</h3><p>Surface から Core への elaboration は、必要な request edge と capability / witness obligation を生成し得ますが、それらを隠しません。source span と effect / failure row を保存し、authority を新規に創出しません。runtime は verdict 済み Core だけを fail-closed で動かします。</p></div>
+          <div class="side-note"><h3>別物として保つ衛星系</h3><p>Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連しますが、単一実装に融合する前提ではありません。後二者は Canon 上の独立衛星であり、exact な層配置・統合関係・実装責務はこの図では選びません。</p></div>
+        </aside>
+      </div>
+      <h3 style="margin-top:28px">理論が追う四つのグラフ</h3>
+      <div class="four-graphs">
+        <article class="graph"><h3>出来事 DAG</h3><p>write、send / receive、publish / observe、grant / use、admission、activation、cut の因果順序。逆向きの隠れ辺を持たない。</p></article>
+        <article class="graph"><h3>状態・存在 DAG</h3><p>状態セルの親子依存、寿命、lease、fallback lineage。失効時は暗黙復帰でなく単調劣化する。</p></article>
+        <article class="graph"><h3>locus / admission グラフ</h3><p>locus、participant、membership epoch、incarnation、role claim と capability grant の区別を保つ。</p></article>
+        <article class="graph"><h3>patch・overlay DAG</h3><p>source patch、互換性、activation cut、patch 間依存。hot-plug は最後に載せる capstone。</p></article>
+      </div>
+      <p class="callout">admission や activation は occurrence DAG 上にも出来事を持ち得ますが、membership / incarnation の構造は locus / admission graph、patch 依存と互換性は patch / overlay DAG に属します。同じ操作名が現れても、四つの graph の node や relation は同一ではありません。</p>
+      <h3 style="margin-top:28px">層を越える BND 契約の抜粋</h3>
+      <div class="boundary-grid" aria-label="境界契約 BND-001 から BND-009">
+        <div class="boundary"><strong>BND-001 Surface → Core</strong><span>隠れ辺なし。span と row を保存し、決定的に obligation を明示化し、authority を創出しない。</span></div>
+        <div class="boundary"><strong>BND-002 Core → Checker</strong><span>未処理義務は ResidualObligation として残し、hidden success を禁止する。</span></div>
+        <div class="boundary"><strong>BND-003 Checker → Prover / ModelChecker</strong><span>static / model-check / proof を分離し、model-check の結果を一般証明と呼び替えない。</span></div>
+        <div class="boundary"><strong>BND-004 Core → Runtime</strong><span>verdict 済み Core だけを fail-closed で実行する。</span></div>
+        <div class="boundary"><strong>BND-005 Runtime → Transport</strong><span>transport は配送のみ。authority を metadata に潰さない。</span></div>
+        <div class="boundary"><strong>BND-006 Runtime → Projection</strong><span>ownership、read/write dependency、effect/failure row、capability/witness、visibility/redaction/retention、fallback lineage、cut/save-load、span を保存する。</span></div>
+        <div class="boundary"><strong>BND-007 Projection → View</strong><span>provider は semantic owner ではなく、View に game logic を置かない。</span></div>
+        <div class="boundary"><strong>BND-008 Runtime → Devtools</strong><span><code>H</code>（occurrence history / Trace の正規履歴）由来の typed evidence、redaction、retention を守る。</span></div>
+        <div class="boundary"><strong>BND-009 Canon → LAB</strong><span>Canon が規範、LAB は evidence。逆向きの暗黙昇格を禁止する。</span></div>
+      </div>
+      <p class="callout">四つのグラフは別のものです。participant を Place と同一視する、patch を出来事列に潰す、transport を authority とみなす、といった混同を防ぐことが理論の役目です。</p>
+    </div></section>
+    <section id="roadmap"><div class="container">
+      <p class="eyebrow">03 / 公式工程</p><h2>理論を先に固定し、その後に「動く」を段階的に広げる</h2>
+      <p class="section-intro">表の列は Canon の公式 Phase、行は各 Phase のゴールと、その Phase に到達した時点で公式に「動く」範囲です。表の下にある青い帯だけが、Phase 対応や進捗を表さない bounded LAB evidence inventory です。公式 exit は人間の決定、ADR、台帳更新を伴います。</p>
+      <div class="table-scroll" tabindex="0" aria-label="横にスクロールできる公式 Phase 表">
+        <table class="roadmap-table">
+          <caption>Canon の公式 Phase と到達時の利用者向け能力</caption>
+          <thead><tr><th scope="col">読み方</th><th scope="col">T0</th><th scope="col">T1</th><th scope="col">T2</th><th scope="col">I1</th><th scope="col">I2</th><th scope="col">I3</th><th scope="col">I4</th><th scope="col">I5</th><th scope="col">I6</th></tr></thead>
+          <tbody>
+            <tr>
+              <th scope="row">公式ゴール</th>
+              <td class="current">語彙と正本関係。G0 exit。<span class="current-label">公式現在地</span></td>
+              <td class="future-phase">G1 exit、G2 / G3 statement 群、SCN 期待の最終化。</td>
+              <td class="future-phase">OBL-020 / 021 / 002 の proof skeleton と G5 statement 群。</td>
+              <td class="future-phase">parse / check / elab / run が C-static + C-runtime 10 / 10。</td>
+              <td class="future-phase">process 内 multi-locus と生成通信の実 dispatch。</td>
+              <td class="future-phase">2 OS process + real socket、対象 SCN の C-distributed。</td>
+              <td class="future-phase">local durable save/load と live patch。</td>
+              <td class="future-phase">browser client projection、View FFI、viewer devtools。</td>
+              <td class="future-phase">R3 / R4、複数 server、federation 入口。</td>
+            </tr>
+            <tr>
+              <th scope="row">公式に「動く」範囲</th>
+              <td class="current">何も動かない。正しい判断の土台。</td>
+              <td class="future-phase">紙と Lean statement。</td>
+              <td class="future-phase">Lean 上で核が回る。</td>
+              <td class="future-phase">言語に触れ、全 10 SCN を単一 process で検証。</td>
+              <td class="future-phase">一人で遊べる local toy world。</td>
+              <td class="future-phase">LAN で二人が遊べる最初の real distributed execution。</td>
+              <td class="future-phase">落として上げ直せる継続 world。</td>
+              <td class="future-phase">人に見せられる仮想空間 demo。</td>
+              <td class="future-phase">招待制の常設小世界。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lab-evidence-band"><h3>LAB evidence inventory: phase 対応・進捗を表さない限定実証</h3><ul><li>Canon / LAB の切分けと限定研究</li><li>Lean statement draft、countermodel、model-check</li><li>Product Alpha と Full System V1 の bounded runtime</li><li>same-binary role split と helper-local multi-place</li><li>Docker / loopback を含む限定 transport</li><li>限定 save/load・source patch 実験</li><li>provider / renderer admission と static devtools</li><li>将来 subsystem の inventory</li></ul></div>
+      <div class="gate-track" aria-label="Gate の主題と exit 順序">
+        <div class="gate-title">Gate の主題と exit 順序: 並行して着手できるが、exit は原則この順。各セルは主題の要約であり、完全な exit criteria は下の一覧と Canon を参照。Phase と一対一ではない。</div>
+        <div class="gate-step gate-current"><strong>G0 軸と語彙</strong><span>T0 exit に必要な最初の Gate。公式 exit record は未成立。</span></div>
+        <div class="gate-step"><strong>G1 通常の代入</strong><span>elaboration と SCN-01 / 02。</span></div>
+        <div class="gate-step"><strong>G2 存在と fallback</strong><span>existence DAG と単調劣化。</span></div>
+        <div class="gate-step"><strong>G3 権限</strong><span>grant lineage と admission。</span></div>
+        <div class="gate-step"><strong>G4 効果と観測</strong><span>typed effect / redaction。</span></div>
+        <div class="gate-step"><strong>G5 cut と保存</strong><span>consistent cut / save-load。</span></div>
+        <div class="gate-step"><strong>G6 射影</strong><span>意味保存と通信境界。</span></div>
+        <div class="gate-step"><strong>G7 hot-plug</strong><span>patch、Activation cut、admission frontier への束縛。</span></div>
+      </div>
+      <p class="callout"><strong>重要:</strong> I1〜I6 の箱は未来の公式到達条件です。LAB の実験が似た操作を行っていても、Canon の carrier、全 scenario 適合、実 transport、proof、公開 API を満たしたとは限りません。</p>
+      <div class="milestones">
+        <article class="milestone current"><h3>公式現在地（Canon）: T0</h3><p>LAB 派生の運用読みは T0 / G0 rebaseline。G0 exit と T1 entry は未成立です。root literal 修正と fresh validation の後も、valid <code>pass</code> は必要証拠にすぎません。人間が exact digest を受理し、Canon に exit record を記録して初めて移行します。G0-D3 は明示的な owner reopen まで DEFERRED / dormant です。</p></article>
+        <article class="milestone"><h3>次の公式 Phase: T1</h3><p>G1 exit、G2 / G3 の statement 群、SCN 期待の最終化。現在の proof ledger は全28件 open のままです。</p></article>
+        <article class="milestone"><h3>その次の公式 Phase: T2</h3><p>OBL-020 / 021 / 002 の proof skeleton と G5 statement 群。未解決なのは現在の proof status ではなく、将来の Gate wording と ledger status literal の対応です。</p></article>
+        <article class="milestone"><h3>利用者に見える到達: I1〜I6</h3><p>I1 は全10 SCN の単一 process 実行、I2 は一人用 toy world、I3 は最初の real distributed execution、I4 は再起動可能な world、I5 は browser View demo、I6 は招待制の常設小世界です。</p></article>
+      </div>
+    </div></section>
+    <section id="lab"><div class="container">
+      <p class="eyebrow">04 / 現在動く実験</p><h2>すでに確認できるもの。ただし、すべて証拠の範囲を持つ</h2>
+      <p class="section-intro">このリポジトリは構想だけではありません。以下は再実行できる代表的な LAB evidence lane です。「動作した」は右端の非主張を越えません。Product Alpha-1、Full System V1、Surface Mir alpha は、公式 Phase や一列の成熟順を表す名前ではありません。</p>
+      <div class="table-scroll" tabindex="0" aria-label="横にスクロールできる LAB evidence 表">
+        <table class="lab-table">
+          <caption>代表的な LAB evidence lane と非主張範囲</caption>
+          <thead><tr><th scope="col">evidence lane</th><th scope="col">何が観測できるか</th><th scope="col">代表コマンド</th><th scope="col">主張しないこと</th></tr></thead><tbody>
+            <tr><th scope="row">current-L2 parser-free</th><td>型、順序、handoff、小規模 model-check、fallback などの独立した bounded sample。</td><td><code>python3 scripts/current_l2_guided_samples.py smoke-all</code><br><code>python3 scripts/current_l2_guided_samples.py closeout</code></td><td>単一 end-to-end checker、Canon 適合、最終 carrier。</td></tr>
+            <tr><th scope="row">Lean mechanization evidence</th><td>active foundation と LAB statement draft の compile / manifest / sync guard。</td><td><code>python3 scripts/current_l2_lean_sample_sync.py</code></td><td>OBL discharge、Canon ledger movement、最終 theorem contract。</td></tr>
+            <tr><th scope="row">Product Alpha-1</th><td><code>package.mir.json</code> を入力に、check / local run / attach / save/load / devtools / native bundle と限定 Docker runtime を再確認する。</td><td><code>python3 scripts/product_alpha1_release_check.py --format json check-all --out &lt;dir&gt;</code></td><td>最終製品、WAN federation、分散耐久性、最終 ABI。ここでは <code>.mir</code> は実行入力ではない。</td></tr>
+            <tr><th scope="row">Operational product suite</th><td>六つの operational root、portal / shard / gradient の bounded cut、projection inventory、viewer、Docker。</td><td><code>python3 scripts/operational_product_samples.py check-all --format json</code></td><td>最終 shared-space catalog、real federation、分散 durable save/load。</td></tr>
+            <tr><th scope="row">Full System V1</th><td><code>.mir</code> parser、typed checker、bounded runtime、PoseGraph、projection、same-binary role split、provider / renderer、12 operational row を独立 lane から集約する。</td><td><code>python3 scripts/full_system_v1_release_check.py --format json check-all --out &lt;dir&gt;</code></td><td>real multi-process distributed execution、C-distributed conformance、最終 packet / FFI semantics。</td></tr>
+            <tr><th scope="row">Surface Mir alpha</th><td><code>S { ... }</code> source、indexed state、Surface-to-Core、通信生成、role admission、source patch、static devtools を53 rowで照合する。</td><td><code>python3 scripts/surface_mir_samples.py check-all --format json</code></td><td>最終 grammar / SDK、production identity、durable migration、runtime MessageEnvelope dispatch。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout">この二重構造は歪みではなく、意図的な安全装置です。LAB は早期の実験と反証を可能にし、Canon は実験の都合で理論・公開契約・phase を早まって固定しないための境界です。</p>
+    </div></section>
+    <section id="gates"><div class="container">
+      <p class="eyebrow">05 / 障壁と判断</p><h2>何が止まっており、誰が何を決める必要があるか</h2>
+      <p class="section-intro">Gate は「実装がないから止まる」のではなく、以後の証明や実装が暗黙の意味論を勝手に選ばないための確認地点です。公式実装状態は T0、LAB 派生の運用読みは T0 / G0 rebaseline、G0 exit と T1 entry は未成立です。</p>
+      <div class="gate-grid" aria-label="理論 gate">
+        <article class="gate current-gate"><strong>G0 軸と語彙</strong><span>ADR-0001 / 0002 / 0005 / 0009 / 0012、GLOSSARY、LAB 格下げ。T0 exit に必要な最初の Gate。</span></article>
+        <article class="gate"><strong>G1 通常の代入</strong><span>theory/01 / 03 が SCN-01 / 02 を説明し、OBL-001 statement と OBL-020 / 021 を完了。</span></article>
+        <article class="gate"><strong>G2 存在と fallback</strong><span>theory/06 が SCN-08 を説明し、OBL-005..008 statement と OPEN-005 を解消。</span></article>
+        <article class="gate"><strong>G3 権限</strong><span>theory/05 が SCN-03 / 04 を説明し、OBL-015 statement を用意。</span></article>
+        <article class="gate"><strong>G4 効果と観測</strong><span>theory/07 が SCN-07 を説明し、OBL-017 statement と label 語彙初版を用意。</span></article>
+        <article class="gate"><strong>G5 cut と保存</strong><span>theory/04 が SCN-10 を説明し、OBL-009..014 statement を用意。</span></article>
+        <article class="gate"><strong>G6 射影</strong><span>BND-006 の保存リストと、SCN-01 / 02 の projection expectation を確定。</span></article>
+        <article class="gate"><strong>G7 hot-plug</strong><span>theory/08 が SCN-09 を説明し、OBL-019 statement を用意。</span></article>
+        <article class="gate"><strong>証明の位置づけ</strong><span>proof discharge は一般に Gate exit の必須条件ではありません。各 Gate 固有の criteria を満たし、主要 proof skeleton は T2 exit で必要です。</span></article>
+        <article class="gate"><strong>公式 exit の条件</strong><span>人間の決定、ADR、台帳更新が必要。LAB 実行だけでは出口にならない。</span></article>
+      </div>
+      <p class="callout">proof status の唯一の正本では、OBL-001〜OBL-028 は全件 <code>open</code> です。未解決なのは現在の status ではなく、将来の Gate criteria にある「完了」「statement」を ledger のどの status literal に対応させるかです。</p>
+      <div class="decision-flow" aria-label="現在の判断境界と後続作業の関係">
+        <article class="decision-node red"><h3>T0 の狭い整合性修正</h3><p>Canon の root <code>result</code> literal を一つに修正し、artifact を fresh validation する。valid <code>pass</code> の後も exact digest の人間受理と Canon exit record が別途必要です。</p></article>
+        <article class="decision-node"><h3>独立した owner / Canon decision surface</h3><p>V / R / S / A、post-admission validation context、outcome totality、cost、grammar などは別々に記録できます。並び順は依存、採択順、互換性を表しません。</p></article>
+        <article class="decision-node future-node"><h3>選択後の限定 package</h3><p>各 decision で選択された範囲だけを scenario、carrier、proof obligation、実装実験で検証します。未選択の relation、wire、ABI を補ってはなりません。</p></article>
+      </div>
+      <h3 style="margin-top:30px">現在の owner / Canon decision surface</h3>
+      <div class="table-scroll" tabindex="0" aria-label="横にスクロールできる判断事項表">
+        <table class="decision-table">
+          <caption>現在の判断・記録状態と、その判断が許す後続作業</caption>
+          <thead><tr><th scope="col">問い / 状態</th><th scope="col">何に影響するか</th><th scope="col">候補・現在の見解</th><th scope="col">進められる範囲</th></tr></thead><tbody>
+            <tr><th scope="row">G0-D3: DEFERRED / dormant</th><td>G0 exit と公式 T1 entry。</td><td>owner が明示的に reopen するまで solicit しない。</td><td class="hold">T0 literal correction だけでは reopen しない。</td></tr>
+            <tr><th scope="row">T0 の root result literal</th><td><code>pass</code> と <code>derived-pass</code> が同じ artifact に要求され、既存 evidence を完全適合と扱えない。</td><td class="recommendation"><strong>LAB 推奨: <code>pass</code> に統一。</strong>prose、checks、derivation、exit 文、既存 artifact と整合する。</td><td>owner / Canon correction、fresh validation、exact digest の人間受理、Canon exit record を順に行う。</td></tr>
+            <tr><th scope="row">PROPOSAL-009: option A recorded</th><td>OBL-001 が既存 Core <code>c</code> の every-write 条件を直接述べられるか。</td><td>A は記録済み。ただし direct-Core object / literal mapping、non-duplicate falsifier、binary consumer がない。</td><td class="hold">proof package は未選定。Result と Canon Core を同一視しない。</td></tr>
+            <tr><th scope="row">V: read-to-write value flow</th><td>remote read の値を後続 write の右辺へ渡す意味。</td><td>限定 result binding、明示 relation、defer。LAB recommendation はあるが未採択。</td><td class="hold">選択後に値フローだけを限定設計・形式化。</td></tr>
+            <tr><th scope="row">R: successful read receipt</th><td>read 成功と値受領をどの occurrence で表すか。</td><td>明示 receipt、既存 occurrence への位置づけ、defer。</td><td class="hold">V や S との順序・互換性は別途示す。</td></tr>
+            <tr><th scope="row">S: successful owner-write service</th><td>served write の成功 occurrence と acknowledgement。</td><td>atomic served-write、複合 / 分解 occurrence、defer。</td><td class="hold">R は successful-write acknowledgement を自動決定しない。</td></tr>
+            <tr><th scope="row">A: admission / verdict / grant / witness identity</th><td>admission 系のどの構造と occurrence を同一視できるか。</td><td>composite、decomposed、conditional mapping、defer。</td><td class="hold">V / R / S との composition と carrier は未解決。</td></tr>
+            <tr><th scope="row">PROPOSAL-013: post-admission validation context</th><td>principal / epoch / incarnation を transport identity に潰さず request 時に検証する。</td><td>request-local context、明示的な非 transport correlation、defer。</td><td class="hold">request field、queue / wire、event identity、runtime route は未選択。</td></tr>
+            <tr><th scope="row">PROPOSAL-010: locus / admission wording</th><td>未定義 child-locus / admission-path wording。</td><td>既存 admission summary、削除、future extension、defer。LAB recommendation は既存 summary。</td><td class="hold">階層や membership provenance を追加しない。</td></tr>
+            <tr><th scope="row">PROPOSAL-011: cost-bound transparency</th><td>overlay が <code>cost_bound</code> を変えたとき透明と言える条件。</td><td>scoped non-weakening、全変更を explicit update、advisory、defer。現状は明示更新が保守的。</td><td class="hold">最終 resource algebra、runtime accounting、OBL-026 は選ばない。</td></tr>
+            <tr><th scope="row">PROPOSAL-003: OBL-020 organization</th><td>共通 checklist と package-local proof organization。</td><td>shared、package-local、defer。</td><td class="hold">owner choice。pilot からは除外。</td></tr>
+            <tr><th scope="row">PROPOSAL-004: Surface v0 grammar closure</th><td>Participant-only closure か custom keyspace を含めるか。</td><td>A Participant-only、B custom keyspace、C defer。A は LAB recommendation。</td><td class="hold">owner choice。final grammar を先取りしない。</td></tr>
+            <tr><th scope="row">Surface v0 <code>return</code> alignment</th><td><code>return</code> が exact v0 fragment に属するかと Core treatment。</td><td>retain and specify、exclude、defer。</td><td class="hold">既存 LAB parser は判断しない。</td></tr>
+            <tr><th scope="row">SCN-08 scalar-state syntax</th><td>indexed-only <code>StateDecl</code> grammar と frozen scenario の整合。</td><td>scalar を許す、scenario を index 化、defer。</td><td class="hold">grammar 拡張や SCN 改稿を暗黙に行わない。</td></tr>
+            <tr><th scope="row">PROPOSAL-008: elaboration outcome totality</th><td>well-scoped input が必ず Core または Diagnostic を持つか。</td><td>別 OBL、OBL-021 scope、outcome-classification、defer。</td><td class="hold">proof-facing package が totality を仮定する前に必要。</td></tr>
+            <tr><th scope="row">LANE-CATALOG correspondence</th><td>validator tuple が closed catalog か、fail-closed guardrail / cache か。</td><td>いずれかを明示、または defer。</td><td class="hold">未選択のまま tuple を規範 catalog と扱わない。</td></tr>
+            <tr><th scope="row">load / cut formalization boundaries</th><td>load precondition / postcondition の分離と、channel-state parenthetical。</td><td>formal relation が必要になる package まで未選択を維持。</td><td class="hold">checkpoint、SaveObject、queue、channel state を LAB から作らない。</td></tr>
+            <tr><th scope="row">observation-provenance scope interaction</th><td>BND-008 の H 由来 evidence と report-local mapping の境界。</td><td>scope interaction として保持。</td><td class="hold">helper-local log や projection metadata を occurrence evidence と呼ばない。</td></tr>
+            <tr><th scope="row">OPEN-001: Two-layer time</th><td>離散検証遷移と高頻度 stream を frontier で接続する語彙。</td><td>theory/09 の成熟に伴って改訂し得る L2 語彙。</td><td class="hold">現在の runtime / ordering を固定せず、関連理論の成熟まで open を維持。</td></tr>
+            <tr><th scope="row">OPEN-029: mir-lsp</th><td>editor / Language Server Protocol 統合。</td><td>I5 で検討。現在の CLI 名も仮称。</td><td class="hold">前段 Phase の semantics / carrier を先取りしない。</td></tr>
+            <tr><th scope="row">OPEN-032: I3 transport</th><td>I3 の real transport 選定。</td><td>QUIC / WebTransport 系などを I2 exit 時に ADR で決定。</td><td class="hold">現行 Docker / loopback evidence から final transport を選ばない。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="columns"><article class="rule"><h3>現在、自律的にできること</h3><p>既存の非予約レーンで、明確な仮説・falsifier・利用先を持つ限定研究を行い、LAB evidence として残すことです。ただし現行 source cut では、新規で非重複の候補は選定されていません。</p></article><article class="rule"><h3>現在、勝手にしてはいけないこと</h3><p>Core carrier、transport / wire、event identity、OBL status、Gate / Phase、公開 API を実験の都合で確定することです。未決事項は未決のまま可視化します。</p></article></div>
+    </div></section>
+    <section id="sources"><div class="container">
+      <p class="eyebrow">06 / 根拠と読み方</p><h2>この図の読み方と、詳細へ進む入口</h2>
+      <p class="section-intro">より深く読むときは、まず Canon、次に現在 snapshot、最後に LAB の実行証拠を見ます。番号付き report や proposal は、結論そのものではなく、下の自然言語の問いを裏付ける記録として使います。</p>
+      <h3 style="margin-top:24px">このページで使う短縮語</h3>
+      <dl class="glossary-grid">
+        <div class="glossary-item"><dt>Phase</dt><dd>T0〜T2 / I1〜I6 の公式実装工程。現在は T0。</dd></div>
+        <div class="glossary-item"><dt>Gate</dt><dd>G0〜G7 の理論凍結条件。Phase と一対一ではない。</dd></div>
+        <div class="glossary-item"><dt>SCN</dt><dd>scenario。意味・適合性を具体例で固定する試験単位。</dd></div>
+        <div class="glossary-item"><dt>OBL</dt><dd>proof obligation。唯一の ledger では全28件 open。</dd></div>
+        <div class="glossary-item"><dt>ADR</dt><dd>Architecture Decision Record。規範判断の記録。</dd></div>
+        <div class="glossary-item"><dt>row / carrier</dt><dd>effect / failure 等の明示的集合と、それを運ぶ構造化 artifact。</dd></div>
+        <div class="glossary-item"><dt>Locus (Place)</dt><dd>state、queue、capability、visibility、observation frontier を持つ一つの実行の座。Participant そのものではない。</dd></div>
+        <div class="glossary-item"><dt>witness</dt><dd>権限・関係・検査結果を裏付ける明示的な証拠。</dd></div>
+        <div class="glossary-item"><dt>Activation cut</dt><dd>patch 有効化の明示的境界。admission 時の frontier に束縛される。</dd></div>
+      </dl>
+      <p><a href="../mirrorea_canon/GLOSSARY.md">Canon GLOSSARY で用語の規範定義を確認する</a></p>
+      <div class="read-next">
+        <a href="../mirrorea_canon/MAP.md"><strong>正本の全体依存図</strong><span>何が規範で、理論・仕様・scenario・計画がどうつながるか。</span></a>
+        <a href="project-status.md"><strong>現在地の短い運用 view</strong><span>現在の lifecycle、停止線、更新規約を追う。</span></a>
+        <a href="../samples_progress.md"><strong>実行可能な sample dashboard</strong><span>各 runnable root の command、evidence、blocker を見る。</span></a>
+      </div>
+      <h3 style="margin-top:28px">主な根拠</h3>
+      <ul class="sources">
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/GLOSSARY.md">GLOSSARY.md</a>: project 固有語彙。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/NORTH-STAR.md">NORTH-STAR.md</a>: 五動詞と非軸。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/architecture/01-strata.md">architecture/01-strata.md</a>: 統一層モデル。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/architecture/02-boundary-contracts.md">architecture/02-boundary-contracts.md</a>: BND-001〜009。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/architecture/03-toolchain.md">architecture/03-toolchain.md</a>: tool の入出力と禁止事項。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/theory/00-overview.md">theory/00-overview.md</a>: 四つの graph family。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/theory/11-metatheory-ledger.md">theory/11-metatheory-ledger.md</a>: 唯一の proof-status ledger。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/plan/00-gates.md">plan/00-gates.md</a>: G0〜G7 の exit 条件。</li>
+        <li><strong>[Canon]</strong> <a href="../mirrorea_canon/plan/01-phases.md">plan/01-phases.md</a>: T0〜T2 / I1〜I6 と唯一の公式実装状態。</li>
+        <li><strong>[LAB]</strong> <a href="project-status.md">docs/project-status.md</a>: 現在の派生 view。</li>
+        <li><strong>[LAB]</strong> <a href="../plan/whole-theory-foundation-audit-20260725.md">whole-theory foundation audit</a>: 現在の整合性修正・判断経路。</li>
+        <li><strong>[LAB]</strong> <a href="diagrams/project-overview.mmd">Mermaid source</a>: completion を表さない責務・dataflow 図。</li>
+      </ul>
+    </div></section>
+  </main>
+  <footer><div class="container"><p>このページは base commit <code>f9b9bc8a</code> / Canon tree <code>82c4c136</code> の source cut を説明します。Canon を変更せず、LAB の実行証拠を正本の Phase 達成と混同しないための reader-facing map です。</p></div></footer>
+</body>
+</html>
