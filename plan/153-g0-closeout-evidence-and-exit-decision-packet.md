@@ -70,9 +70,11 @@ defines `phase-governance/t0-g0` as the T0 interpretation of the universal
 Phase JSON condition. It is not `arch/03-toolchain`'s SCN-suite `mir-conform`
 tool output and is not C-static, C-runtime, or C-distributed conformance.
 
-The only permitted route was one ephemeral evaluation that produced the
-artifact recorded by `plan/155`. Its `pass` is structured T0 evidence, not an
-AI conclusion, docs-validator result, executable tool result, or exit record.
+The version-1 route and artifact at `plan/155` are now nonconforming historical
+evidence because its bound profile contract had incompatible root-result
+vocabulary. The amended ADR-0013 defines version 2 and authorizes exactly one
+fresh artifact at `plan/198`. Its result is structured T0 evidence, not an AI
+conclusion, docs-validator result, executable tool result, or exit record.
 G0-D3 remains independently deferred.
 
 ## Owner decision record and applied profile
@@ -86,8 +88,10 @@ The owner decisions of 2026-07-15 are now reflected by canon
 2. **G0-D2 adopted:** the T0-specific `phase-governance/t0-g0` JSON profile is
    defined in canon `plan/01-phases`. It is neither the SCN `mir-conform` tool
    contract nor a C-static/C-runtime/C-distributed result.
-3. **Evaluation:** the one-off artifact recorded by `plan/155` has all three
-   checks `pass`. Its revision and self digest are bound in the artifact.
+3. **Evaluation:** `plan/198` is the one authorized v2 artifact. Its checks
+   are `pass` / `fail` / `pass`, so its derived root result is `fail`; it cannot
+   support G0-D3 acceptance. The v1 `plan/155` artifact is retained only as
+   nonconforming historical evidence.
 4. **G0-D3 deferred:** the owner deliberately did not apply G0 exit or T1
    entry. A future approval must separately accept the exact artifact digest and
    identify the canonical exit record.
@@ -100,11 +104,13 @@ The owner decisions of 2026-07-15 are now reflected by canon
 This packet is not a proof, C-static/C-runtime/C-distributed claim, runnable
 sample status change, public-product claim, or G1 preparation promotion. It
 does not alter `plan/141` unresolved status slots. The remaining reopen point
-is G0-D3, or a concrete drift finding in the cited evidence.
+is G0-D3 after valid `pass` evidence, or a separately scoped decision about the
+concrete fixed-control drift now recorded by `plan/198`.
 
 ## Current conclusion
 
-The audit, owner acceptance, adopted T0 profile, and one-off `pass` result are
-now evidence-backed. They still do not prove every semantic aspect of LAB
-demotion. **G0 exit is not currently established** because G0-D3 is explicitly
-deferred. The canonical implementation state consequently remains T0.
+The original audit/acceptance history and the v2 profile are evidence-backed,
+but the sole v2 evaluation result is `fail` on fixed control drift. They still
+do not prove every semantic aspect of LAB demotion. **G0 exit is not currently
+established** because G0-D3 is explicitly deferred and lacks a valid `pass`
+artifact. The canonical implementation state consequently remains T0.

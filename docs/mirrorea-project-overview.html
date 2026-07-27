@@ -228,9 +228,9 @@
       </div>
       <div class="status-band">
         <h2>最初に結論</h2>
-        <p><span class="tag stop">直接矛盾</span> 公式工程の最初の評価 JSON で、最上位 <code>result</code> の許容値が本文では <code>pass</code>、JSON 例では <code>derived-pass</code> と食い違っています。このため既存 artifact は完全適合とは扱えません。</p>
+        <p><span class="tag stop">固定 control drift</span> root <code>result</code> の矛盾は v2 で修正済みです。唯一の fresh artifact は4件の固定 control 不一致を検出して valid <code>fail</code> となりました。既存 v1 artifact は nonconforming historical evidence であり、G0-D3 は未成立です。</p>
         <div class="status-grid">
-          <div class="status-item"><strong>公式の現在地</strong>Canon 上の公式 implementation state は <code>T0</code>。LAB の current reading は <code>T0 / G0 rebaseline</code> で、G0 exit と T1 entry は未記録です。</div>
+          <div class="status-item"><strong>公式の現在地</strong>Canon 上の公式 implementation state は <code>T0</code>。v2 artifact は valid <code>fail</code> で、G0 exit と T1 entry は未記録です。</div>
           <div class="status-item"><strong>実際に動くもの</strong>多数の parser / checker / runtime / sample / Lean の <em>限定 LAB 証拠</em>があります。</div>
           <div class="status-item"><strong>証明の現在地</strong>唯一の proof-status ledger では <code>OBL-001</code>〜<code>OBL-028</code> が全件 <code>open</code> です。Lean の成功は限定 evidence であり、proof discharge ではありません。</div>
         </div>
@@ -372,7 +372,7 @@
     </div></section>
     <section id="gates"><div class="container">
       <p class="eyebrow">05 / 障壁と判断</p><h2>何が止まっており、誰が何を決める必要があるか</h2>
-      <p class="section-intro">Gate は「実装がないから止まる」のではなく、以後の証明や実装が暗黙の意味論を勝手に選ばないための確認地点です。公式実装状態は T0、LAB 派生の運用読みは T0 / G0 rebaseline、G0 exit と T1 entry は未成立です。</p>
+      <p class="section-intro">Gate は「実装がないから止まる」のではなく、以後の証明や実装が暗黙の意味論を勝手に選ばないための確認地点です。公式実装状態は T0、v2 artifact は fixed-control drift の valid <code>fail</code>、G0 exit と T1 entry は未成立です。</p>
       <div class="gate-grid" aria-label="理論 gate">
         <article class="gate current-gate"><strong>G0 軸と語彙</strong><span>ADR-0001 / 0002 / 0005 / 0009 / 0012、GLOSSARY、LAB 格下げ。T0 exit に必要な最初の Gate。</span></article>
         <article class="gate"><strong>G1 通常の代入</strong><span>theory/01 / 03 が SCN-01 / 02 を説明し、OBL-001 statement と OBL-020 / 021 を完了。</span></article>
@@ -387,7 +387,7 @@
       </div>
       <p class="callout">proof status の唯一の正本では、OBL-001〜OBL-028 は全件 <code>open</code> です。未解決なのは現在の status ではなく、将来の Gate criteria にある「完了」「statement」を ledger のどの status literal に対応させるかです。</p>
       <div class="decision-flow" aria-label="現在の判断境界と後続作業の関係">
-        <article class="decision-node red"><h3>T0 の狭い整合性修正</h3><p>Canon の root <code>result</code> literal を一つに修正し、artifact を fresh validation する。valid <code>pass</code> の後も exact digest の人間受理と Canon exit record が別途必要です。</p></article>
+        <article class="decision-node red"><h3>T0 の固定 control drift</h3><p>Canon は v2 と唯一の fresh artifact を記録済みです。artifact は固定 control の不一致を検出して valid <code>fail</code> となり、G0-D3 は進みません。rebase や再評価は別の owner / Canon decision が必要です。</p></article>
         <article class="decision-node"><h3>独立した owner / Canon decision surface</h3><p>V / R / S / A、post-admission validation context、outcome totality、cost、grammar などは別々に記録できます。並び順は依存、採択順、互換性を表しません。</p></article>
         <article class="decision-node future-node"><h3>選択後の限定 package</h3><p>各 decision で選択された範囲だけを scenario、carrier、proof obligation、実装実験で検証します。未選択の relation、wire、ABI を補ってはなりません。</p></article>
       </div>
@@ -396,8 +396,8 @@
         <table class="decision-table">
           <caption>現在の判断・記録状態と、その判断が許す後続作業</caption>
           <thead><tr><th scope="col">問い / 状態</th><th scope="col">何に影響するか</th><th scope="col">候補・現在の見解</th><th scope="col">進められる範囲</th></tr></thead><tbody>
-            <tr><th scope="row">G0-D3: deferred</th><td>G0 exit と公式 T1 entry。</td><td>fresh artifact の exact digest を owner が accept するか、defer を継続する。</td><td class="hold">T0 literal correction や passing artifact だけでは exit しない。</td></tr>
-            <tr><th scope="row">T0 の root result literal</th><td><code>pass</code> と <code>derived-pass</code> が同じ artifact に要求され、既存 evidence を完全適合と扱えない。</td><td class="recommendation"><strong>LAB 推奨: <code>pass</code> に統一。</strong>prose、checks、derivation、exit 文、既存 artifact と整合する。</td><td>owner / Canon correction、fresh validation、exact digest の人間受理、Canon exit record を順に行う。</td></tr>
+            <tr><th scope="row">G0-D3: deferred</th><td>G0 exit と公式 T1 entry。</td><td>current v2 artifact は valid <code>fail</code>。将来 valid <code>pass</code> があれば exact digest を owner が accept するか、defer を継続する。</td><td class="hold">current artifact は exit evidence ではない。</td></tr>
+            <tr><th scope="row">T0 の fixed control drift</th><td>v2 は root literal を <code>pass</code> に統一したが、historical control pin と現在の4 blob が一致しない。</td><td class="recommendation"><strong>現在の見解: silent rebase をしない。</strong>scope を監査するか、normal Canon process で rebase を提案するかは次の owner decision。</td><td>rebase / retry / G0-D3 acceptance は O0 から導かれない。</td></tr>
             <tr><th scope="row">T2 と I1-entry readiness</th><td>現行 T2 criterion だけでは、I1 の全十 SCN に必要な theory interface が固定されたか判定できない。</td><td class="recommendation"><strong>LAB 推奨: 両者を結ぶ場合だけ T2 profile に all-SCN / G0-G7 criterion を追加。</strong>狭い T2 は独立に閉じられる。</td><td class="hold">integrated route は OBL-003 / 027 の evidence class も T2 前に記録。narrow route は I1 readiness を後続 owner record に残す。</td></tr>
             <tr><th scope="row">PROPOSAL-009: option A recorded</th><td>OBL-001 が既存 Core <code>c</code> の every-write 条件を直接述べられるか。</td><td>A は記録済み。ただし direct-Core object / literal mapping、non-duplicate falsifier、binary consumer がない。</td><td class="hold">proof package は未選定。Result と Canon Core を同一視しない。</td></tr>
             <tr><th scope="row">V: read-to-write value flow</th><td>remote read の値を後続 write の右辺へ渡す意味。</td><td>限定 result binding、明示 relation、defer。LAB recommendation はあるが未採択。</td><td class="hold">選択後に値フローだけを限定設計・形式化。</td></tr>

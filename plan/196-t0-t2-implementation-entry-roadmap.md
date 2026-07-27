@@ -14,6 +14,12 @@ proof status / Core / contract を変更しない。owner の判断が必要な�
 
 ## 結論
 
+> 2026-07-28 status update: O0 was applied through profile v2 and its single
+> fresh artifact. The artifact is a valid `fail` on unchanged fixed controls,
+> so this roadmap's former C0/C1 repair route is closed without opening G0-D3
+> or official T1. A control rebase or another artifact now requires a new owner
+> / Canon decision; the rest of this historical conditional roadmap is unchanged.
+
 **現在の source cut から official T2 exit までを、user input なしで連続自走することは
 できない。** 現在は official `T0` で、全 OBL は `open`、かつ直前の autonomous
 rescreen は当時の delta から新しい L3 package を選んでいない。これはその source cut
@@ -41,7 +47,7 @@ production implementation、新 lane/helper は owner action のままである�
 | 項目 | 現在の状態 | 意味 |
 | --- | --- | --- |
 | official lifecycle | `T0`; G0 exit / T1 entry record なし | 後段 LAB evidence は lifecycle を進めない |
-| T0 profile | root result が `pass` / `derived-pass` で矛盾 | `plan/155` を fully profile-conforming と扱えない |
+| T0 profile | v2 adopted; sole fresh artifact is valid `fail` on fixed-control drift | `plan/155` is nonconforming history; `plan/198` cannot support G0-D3 |
 | proof ledger | OBL-001..028 が全件 `open` | Lean compile や countermodel は proof status ではない |
 | autonomous frontier | current source cut では新 WRK なし | frozen record の修理や重複実験で進捗を作らない |
 | common formal model | Canon-aligned Core / Config / Step / WellFormed / elaboration relation なし | opaque LAB draft は exit artifact にならない |

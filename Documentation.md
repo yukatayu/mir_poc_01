@@ -53,9 +53,9 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 
 - official lifecycle は `T0`。G0 exit と T1 entry はまだありません。
 - OBL-001..028 は唯一の Canon ledger 上ですべて `open` です。
-- T0 profile には root result の `pass` / `derived-pass` 矛盾があります。既存
-  artifact は矛盾した v1 source を自己 bind するため、後から文言だけ直しても fully
-  conforming にはなりません。
+- T0 profile v2 は adopted 済みです。v1 artifact は nonconforming historical
+  evidence として保持され、唯一の fresh v2 artifact は fixed-control drift により
+  `fail` です。G0-D3、G0 exit、T1 entry、I1 authorization は未成立です。
 - T1/T2 には canonical phase-exit JSON profile がありません。
 - 現行 T2 criterion は OBL-020/021/002 proof skeleton と G5 statement 群です。
   これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。
@@ -86,7 +86,7 @@ evidence として進め、official status とは区別します。
 
 | 段階 | 主眼 | 現在の扱い |
 | --- | --- | --- |
-| T0 | 語彙・decision・G0 | current。profile correction、fresh evaluation、G0-D3 が必要 |
+| T0 | 語彙・decision・G0 | current。v2 evaluation は `fail`。control rebase 等の新 owner decision と、その後の G0-D3 が必要 |
 | T1 | 計算体系・G1-G3 statement | no official entry。semantic disposition と shared model 後に自走 |
 | T2 | OBL-020/021/002 skeleton・G5 statement | later。profile と proof-skeleton evidence class が未定義 |
 | I1 | 単一 process reference implementation | T2 と all-SCN/G0-G7 readiness の関係を先に固定 |

@@ -759,6 +759,8 @@
   `plan/196-t0-t2-implementation-entry-roadmap.md`
 - I1 bootstrap の判断・readiness 監査:
   `plan/197-i1-bootstrap-decision-and-readiness-audit.md`
+- T0/G0 governance-profile v2 evaluation:
+  `plan/198-t0-g0-governance-profile-v2.md`
 - WRK-0023 consistent-cut channel-state literal transcription:
   `plan/wrk-0023-consistent-cut-channel-state-boundary.md`
 - post-WRK-0023 literal-boundary review:

@@ -17,7 +17,7 @@ process. An owner-recorded LAB decision may only change a separate
 
 ## Current baseline
 
-- Canonical lifecycle position: `T0/G0 rebaseline`.
+- Canonical lifecycle position: `T0`; v2 profile evaluation is a valid `fail`.
 - No G0 exit, T1 entry, OBL completion, proof discharge, conformance result,
   or runtime/product readiness is created by this plan.
 - The current delegated-research policy is ADR-0014 plus
@@ -60,8 +60,10 @@ been recorded elsewhere.
 
 ### Current decision routing
 
-`plan/155` records G0-D1/D2/D4. G0-D3 is deferred and dormant: it re-enters
-the queue only through an owner reopen, not because an agent needs a next task.
+`plan/155` is nonconforming historical v1 evidence. `plan/198` records the
+sole v2 evaluation: fixed-control drift derives `fail`, so it cannot reopen
+G0-D3 acceptance. A rebase, drift interpretation, or another artifact needs a
+new owner/Canon decision; no automatic reopen follows from the result.
 `plan/156` records the pre-delegation research envelope and its bounded evidence.
 ADR-0014 plus `working/README.md` and `plan/158` now govern autonomous LAB
 research and the standing-boundary, review-gated route for a canon L2/L3

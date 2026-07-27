@@ -241,6 +241,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
         "plan/154-project-control-cockpit.md",
         "plan/155-t0-g0-governance-profile-proposal.md",
+        "plan/198-t0-g0-governance-profile-v2.md",
         "plan/156-t0-t2-research-autonomy-envelope.md",
         "plan/157-delegated-theory-research-governance.md",
         "plan/158-standing-bounded-autonomy.md",

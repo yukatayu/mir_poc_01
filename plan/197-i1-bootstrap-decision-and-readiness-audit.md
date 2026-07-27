@@ -107,6 +107,15 @@ O0 の受理は G0 exit ではない。次の `A0` が exact Git blobs、順序�
 RFC 8785 digest、three checks、non-claims を検証し、その後に `O1` で owner が
 exact digest を accept するか defer する。
 
+### O0 outcome (2026-07-28)
+
+The owner accepted the displayed O0 wording. Canon v2 was adopted and the sole
+artifact was recorded at `plan/198`. Its three checks are `pass` / `fail` /
+`pass`, deriving root `fail` because four fixed controls changed after the
+historical cut. This is a valid evaluation, not a malformed artifact, but it
+does not make an O1/G0-D3 acceptance available. Re-pinning controls or allowing
+another artifact is a new owner/Canon decision outside O0.
+
 ### O2 - lifecycle / proof evidence / C-static の読み方
 
 このパケットは profile を追加するため、owner-reserved である。少なくとも次を

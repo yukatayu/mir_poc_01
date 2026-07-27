@@ -36,10 +36,9 @@ start audit. Their conclusion is conditional:
 
 Immediate blocker:
 
-1. T0 profileの`pass` / `derived-pass`矛盾。
-2. 旧artifactが矛盾したsource revisionを自己bindしているため、単純な文言修正では
-   artifact continuityが成立しないこと。
-3. G0-D3がexplicit deferであること。
+1. v2 profile の唯一の artifact は valid `fail`。fixed source-hierarchy と三つの
+   LAB notice control が historical pin と一致せず、O0 は rebase / retry を許可していない。
+2. G0-D3 は explicit defer のままであり、current `fail` は T0 exit evidence にならない。
 
 Sources: `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/adr/ADR-0014.md`,
@@ -59,9 +58,9 @@ review。
 | --- | --- | --- | --- |
 | 0 | T0-T2 planning audit | `A/R`; closed when Plan 196 and snapshots agree with Canon | Macro 0/1 checkpoint; current package |
 | 0A | Conservative statement preflight | `A/R`; inspect literal/conditional candidates, open a WRK only if every ADR-0014 condition and a non-duplicate consumer pass | Macro 1/5 early; autonomous, no official movement |
-| 1 | T0 profile revision packet | `A` prepares, `O` decides; result literal, versioning, old artifact, one-off route are unambiguous | Macro 0/1 early; one decision package |
-| 2 | Fresh T0 evaluation | `A/R`; exact Git blobs, ordering, RFC 8785 digest, three checks, non-claims pass | Macro 0/1 early; bounded |
-| 3 | G0-D3 exit decision | `O`; exact digest acceptance and canonical exit record | official T1 entry blocker |
+| 1 | T0 profile v2 and fresh evaluation | `O` accepted; `A/R` completed one direct-child artifact. It is valid `fail`, not a lifecycle result | Macro 0/1 complete; no retry authorized |
+| 2 | Fixed-control drift disposition | `O`; retain/defer, separately scope drift, or start normal Canon rebase proposal | Macro 0/1 current blocker |
+| 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
 | 5 | Semantic decision closure | `A` prepares and `O` decides; P013 comparison starts only after M1/M2/MD disposition | Macro 1 early; several decision records |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and adverse cases exist | Macro 1/5 middle; heavy |
@@ -97,9 +96,8 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
-| T0 profile contract | profile validity | v2; v1 corrigendum; clarify | v2 with `pass`; retain v1 as nonconforming historical evidence |
-| T0 artifact route | source-bound artifact continuity | authorize one fresh v2 artifact; preserve old only; clarify | one fresh v2 artifact, no inferred G0 exit |
-| G0-D3 | official T1 entry | accept exact fresh digest; continue defer | decide only after fresh evaluation |
+| fixed-control drift | whether a new v2 `pass` route can exist | retain/defer; scoped audit; normal Canon rebase proposal | no silent rebase; O0's one artifact is consumed |
+| G0-D3 | official T1 entry | accept a future valid `pass` digest; continue defer | current v2 `fail` is not eligible |
 | T2 / I1 relation | narrow T2 or integrated I1 readiness; bootstrap/C-static timing | narrow T2; integrated profile; phase-contract amendment | if narrow route is selected, separate readiness/authorization; C-static is formal entry and remains I1-exit evidence |
 
 ### Before a shared formal model

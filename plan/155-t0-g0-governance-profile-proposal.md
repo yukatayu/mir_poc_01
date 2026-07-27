@@ -2,20 +2,20 @@
 
 ## status
 
-LAB repository-memory and execution-routing note. `PROPOSAL-002` was adopted
-through `adr/ADR-0013` in canon revision `edc2a36ce5145a897bf0e7a0e8788cf69216b2c3`.
-The one-off derived result is
-`plan/155-t0-g0-governance-profile-evaluation.json`. It is LAB evidence, not a
-tool, SCN conformance output, proof, Gate exit record, or implementation state
-change.
+Historical LAB repository-memory and execution-routing note. `PROPOSAL-002`
+was adopted through `adr/ADR-0013` in canon revision
+`edc2a36ce5145a897bf0e7a0e8788cf69216b2c3`. Its one-off derived result at
+`plan/155-t0-g0-governance-profile-evaluation.json` is byte-preserved
+nonconforming historical evidence: its source profile had incompatible
+root-result vocabulary. It is not a tool, SCN conformance output, proof, Gate
+exit record, implementation state change, or current profile artifact.
 
-## owner decisions applied
+## historical owner decisions applied
 
 - **G0-D1 accepted:** the exact five ADRs, `root/glossary` baseline, and
   `LAB:plan/153` evidence are accepted at the pinned repository evidence cut.
-- **G0-D2 adopted:** `phase-governance/t0-g0` version 1 is defined by
-  `plan/01-phases` and remains separate from `arch/03-toolchain`'s SCN
-  `mir-conform` tool contract.
+- **G0-D2 historical adoption:** version 1 was defined by `plan/01-phases` and
+  remained separate from `arch/03-toolchain`'s SCN `mir-conform` tool contract.
 - **Production boundary:** one ephemeral evaluation produced exactly this one
   JSON artifact. No producer implementation, reusable helper, schema, CI,
   Make target, evidence lane, or report series was committed.
@@ -23,7 +23,7 @@ change.
 - **G0-D4 waived:** no separate semantic/historical LAB-demotion audit is
   required at this checkpoint; concrete future drift can reopen it.
 
-## evaluation result
+## historical evaluation result
 
 The artifact evaluates canon revision
 `edc2a36ce5145a897bf0e7a0e8788cf69216b2c3`, the direct parent of the commit
@@ -38,10 +38,11 @@ all three checks, and an RFC 8785-based self digest.
 | `g0-demotion-audit-scope` | pass |
 | profile result | pass |
 
-This `pass` is necessary T0 profile evidence only. It cannot accept itself,
-exit G0, enter T1, make an additional ADR effective, establish C-static /
-C-runtime / C-distributed conformance, or establish a proof/runtime/product
-claim.
+The stored `pass` is not conforming profile evidence because the bound v1
+contract was inconsistent. It cannot accept itself, exit G0, enter T1, make an
+additional ADR effective, establish C-static / C-runtime / C-distributed
+conformance, or establish a proof/runtime/product claim. Current v2 evidence
+is recorded separately by `plan/198`.
 
 ## review and validation record
 
@@ -57,10 +58,11 @@ the focused highlighter tests, and `make check`.
 
 ## remaining stop line
 
-G0-D3 remains the only next Gate decision: the owner must either continue to
-defer G0 exit or separately accept this exact artifact digest and record the
-canonical exit. Until that occurs, canon remains T0. No autonomous T1 package
-is promoted by this note or by the `pass` result.
+This historical note has no current Gate-decision effect. The current stop line
+is the fixed-control drift recorded by `plan/198`: rebase, audit scope, and any
+future artifact route need a new owner/Canon decision. G0-D3 remains deferred
+and cannot be considered until separately authorized valid `pass` evidence and
+a canonical exit record exist. Canon remains T0.
 
 ## non-claims
 

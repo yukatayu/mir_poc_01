@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 00:41 JST
+最終更新: 2026-07-28 03:51 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,22 +38,23 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; all OBL rows `open`; core direction fixed, proof-facing interfaces incomplete | T0 profile repair, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; all OBL rows `open` | control-drift owner decision, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; final Surface closure unresolved | PROPOSAL-004, OPEN-005, `return`, SCN-08 reconciliation | owner specification required |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | owner-selected I1 authorization route, exact target fragment, and C-static timing | later dependency |
 
 Current exact blockers:
 
-1. T0 profile uses both `pass` and `derived-pass`.
-2. The retained artifact self-binds the contradictory v1 source and cannot be
-   made conforming by a later text-only correction.
-3. G0-D3 remains deferred; no G0 exit / T1 entry record exists.
-4. T1/T2 lack canonical phase profiles.
-5. Outcome totality, value/receipt/service/admission identity, request
+1. The v2 artifact derives `fail` because the fixed source-hierarchy control
+   and three fixed LAB notice controls drifted; O0 did not authorize rebase or
+   a retry.
+2. G0-D3 remains deferred and cannot consume the v2 `fail`; no G0 exit / T1
+   entry record exists.
+3. T1/T2 lack canonical phase profiles.
+4. Outcome totality, value/receipt/service/admission identity, request
    validation context, and Surface/SCN closure remain owner-reserved choices.
-6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
+5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages.
-7. `spec/06` calls C-static 10/10 I1 entry while the phase table places it in
+6. `spec/06` calls C-static 10/10 I1 entry while the phase table places it in
    I1 exit; Canon has no distinct bootstrap authorization.
 
 The last source-cut screen selected no new WRK from its reviewed delta. That
@@ -70,7 +71,7 @@ Sources: `mirrorea_canon/plan/01-phases.md`,
 
 | Phase | Primary aim | Current position | Self-drive |
 | --- | --- | --- | --- |
-| T0 | vocabulary, decisions, G0 | official current; exact profile conflict | research/preparation yes; exit no |
+| T0 | vocabulary, decisions, G0 | official current; v2 profile validly reports fixed-control drift | research/preparation yes; exit no |
 | T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | ADR-0014-eligible packages after owner dispositions |
 | T2 | OBL-020/021/002 skeletons and G5 statements | later | skeleton research after accepted model; exit no |
 | I1 | single-process reference implementation | later | blocked on owner-selected authorization route and C-static timing |
@@ -146,8 +147,8 @@ durable save/load, or public product completion is claimed.
 
 | Kind | Item | Current handling |
 | --- | --- | --- |
-| Owner / Canon | T0 profile and artifact route | recommend v2 `pass`, retain v1 as nonconforming history, authorize one fresh v2 artifact |
-| Owner / Canon | G0-D3 | decide exact fresh digest separately from profile repair |
+| Owner / Canon | fixed-control drift | decide whether to retain pins/defer, scope an audit, or start a normal rebase proposal; no silent rebase or retry |
+| Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | define profiles, Gate-to-ledger mapping, proof-skeleton evidence class, narrow T2 vs I1 readiness, bootstrap/C-static relation |
 | Owner / Canon | PROPOSAL-008/012/013 | decide totality, V/R/S/A, and request-validation context |
 | Owner / Canon | Surface/SCN closure | decide PROPOSAL-004, OPEN-005, `return`, and SCN-08 coherently |
@@ -186,6 +187,12 @@ durable save/load, or public product completion is claimed.
 
 ## recent log
 
+- 2026-07-28 03:51 JST: applied owner O0 through PROPOSAL-014 and the ADR-0013
+  v2 amendment, then recorded exactly one direct-child v2 artifact. Independent
+  Git-blob, JSON-shape, RFC 8785 digest, and topology validation passed. The
+  artifact is valid `fail` because four fixed controls drifted; v1 remains
+  nonconforming history. G0-D3, G0 exit, T1, I1, OBL, conformance, and
+  implementation status did not move.
 - 2026-07-28 00:41 JST: completed an I1 bootstrap/readiness audit with a
   planner, an independent reviewer, and GPT-5.6 Sol Pro Oracle. It found no
   current official start path and isolated the C-static entry/exit tension.
