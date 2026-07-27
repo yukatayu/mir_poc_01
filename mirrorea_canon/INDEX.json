@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 113,
+ "files": 114,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 12046
+   "bytes": 12587
   },
   {
    "id": "root/north-star",
@@ -1621,6 +1621,24 @@
    "open_items": [],
    "path": "working/WRK-0026-m1-replay-discrimination-inventory.md",
    "bytes": 7819
+  },
+  {
+   "id": "working/WRK-0027",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "spec/02-surface-grammar",
+    "spec/03-static-semantics",
+    "theory/01-mircore-v0",
+    "theory/06-existence-fallback",
+    "scenarios/SCN-08",
+    "meta/proposal-015"
+   ],
+   "summary": "SCN-08 の scalar `room_anchor` と terminal `default_pose` について、表示済み Surface/Core/static source が明示的な宣言・解決対応を既に供給するかを literal comparison で検査する。scalar representation、grammar、Core、fallback policy は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0027-scn08-scalar-terminal-correspondence.md",
+   "bytes": 6202
   }
  ]
 }
