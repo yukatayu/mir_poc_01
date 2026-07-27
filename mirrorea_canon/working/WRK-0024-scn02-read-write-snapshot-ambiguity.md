@@ -66,14 +66,26 @@ transport, API, or public behavior.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending registration and the registered commands.
-Negative evidence: Pending registration and the registered commands.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: Until an outcome is retained, this record merely fixes a
-read-only countermodel question. It neither changes nor interprets the Canon
-as choosing an asynchronous reply, a stale-read schedule, or a fused atomic
-operation.
+Positive evidence: After registration `2a08b2f2dba9060138d99152dfdd22d29ca3674f`
+was pushed, the registered marker confirmed that the scratch source did not
+exist. Lean 4.29.1 compiled the finite model with `--trust=0`; the registered
+required-name and forbidden-token audit also passed. It proves
+`ownerSerialFinal(10, [7, 6]) = 6`, `atomicDamageFinal(10, [3, 4]) = 3`, and
+their inequality. The scratch source SHA-256 is
+`9c02e90a8accaf156dffd4ee14c9fc10052a8d6f16b2ec6e82fca85b99b15cac`.
+Negative evidence: No registered falsifier occurred. The pinned source audit
+does not state a snapshot, owner-side evaluation, read-modify-write fusion, or
+pending relation that would make the finite model a complete Canon trace or
+rule it out. This is a displayed-boundary observation, not an absence claim
+about future Canon design.
+Evidence artifacts: LAB:plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md@e7fe81004759b02adf84661d13e09690ded156f8:dbd5bdf895ac34640c27a09dd051b2cebdc90db14ebd7836d1f8d9d1dc6d55f1
+Evidence commits: e7fe81004759b02adf84661d13e09690ded156f8
+Impact / non-effects: The retained Plan artifact records only the finite
+non-implication from owner-serial submitted writes to atomic read-dependent
+updates. It neither selects nor interprets the Canon as choosing an
+asynchronous reply, stale-read schedule, fused atomic operation, snapshot,
+pending carrier, or repair; it changes no SCN, Core, OBL, lifecycle,
+implementation, or public behavior.
 Independent review: not-required-for-L3
 
 ## Supersession
