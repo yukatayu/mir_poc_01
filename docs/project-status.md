@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 00:41 JST
+最終更新: 2026-07-28 01:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -47,8 +47,9 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 
 現在の Canon T2 criterion は OBL-020 / 021 / 002 の proof skeleton と G5
 statement 群です。これだけでは、全十 SCN を対象とする I1 実装を安全に始められる
-ことまで保証しません。さらに `spec/06` は C-static 10/10 を I1 entry、C-runtime
-10/10 を I1 exit と書く一方、phase table は両方を I1 exit に置いています。
+ことまで保証しません。さらに `mirrorea_canon/spec/06-conformance.md` は C-static
+10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、phase table は両方を
+I1 exit に置いています。
 
 不足しているのは、proof skeleton と ledger status の対応、T1/T2 phase profile、
 G4/G6/G7 の扱い、OBL-003/027 の evidence class、全 SCN と実装対象 fragment の対応です。
