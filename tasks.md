@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 05:35 JST
+最終更新: 2026-07-28 05:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -68,7 +68,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R`; Plan 199 C0--C7 closes countermodels, exact-domain, identity/facet, scalar, and safe-inference boundaries | Macro 1 early; current autonomous research |
+| 5 | Selected-direction composition | `A/R`; WRK-0024 completed the C1 non-implication. Continue C0/C2/C6 and retain C1 as an explicit snapshot/evaluation decision boundary | Macro 1 early; current autonomous research |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -111,7 +111,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | exact well-scoped domain / total diagnostic coverage | P008 A direction is recorded; determine the minimum proof-facing boundary |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | P012 tuple is recorded; reject hidden identity or intermediate mutation |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient; P012 tuple is recorded; reject hidden identity or intermediate mutation |
 | Plan 199 C2 | post-admission validation context | explicit binding/replay/failure classifier alternatives | P013 M1 is recorded; claims remain non-authoritative |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | P004/P015 directions recorded; no hidden key/default |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts | reject ambiguous/irreconstructible omission |

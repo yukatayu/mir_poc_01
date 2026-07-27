@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 05:35 JST
+最終更新: 2026-07-28 05:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -51,9 +51,10 @@ Current exact blockers:
 2. G0-D3 remains deferred and cannot consume the v2 `fail`; no G0 exit / T1
    entry record exists.
 3. T1/T2 lack canonical phase profiles.
-4. The selected directions are not composition-closed: SCN-02 snapshot,
-   semantic request/replay identity, pending value control, served/admission
-   facets, scalar terminal, and total domain remain to be falsified and bound.
+4. WRK-0024 falsifies the inference that owner-serial submitted writes alone
+   provide SCN-02 atomic read-dependent behavior. Snapshot/evaluation/pending
+   semantics, request/replay identity, served/admission facets, scalar terminal,
+   and total domain remain to be bound.
 5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages.
 6. P016 records bootstrap then C-static formal entry, but Canon has no
@@ -153,6 +154,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | Plan 199 C0--C7 tests totality domain, snapshot, request/replay, pending/facets, scalar terminal, and safe inference before a shared model |
+| Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
 | Research | conservative statement preflight | test ADR-0014 eligibility; open L3 only for non-duplicate existing-lane literal/conditional evidence |
 | Research after decisions | shared model and Gate packages | compare, formalize, falsify, validate, review, and prepare acceptance packets |
@@ -188,6 +190,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 05:44 JST: committed/pushed WRK-0024 pre-registration, then
+  reproduced its finite Lean countermodel at `--trust=0`. Two stale replies can
+  lead to serial writes 7 then 6 from HP 10, unlike owner-side sequential
+  damage 3 then 4. This is a non-implication boundary, not a Canon execution,
+  SCN change, or snapshot/pending design choice.
 
 - 2026-07-28 05:35 JST: recorded the owner-accepted P004/P008/P012/P013/P015/
   P016 directions without changing a Core rule, SCN, Gate, Phase, OBL, or

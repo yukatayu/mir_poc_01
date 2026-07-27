@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 05:35 JST
+最終更新: 2026-07-28 05:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。exact domain、request/replay/pending/occurrence/scalar の合成は未完 | Plan 199 の C0--C7 で countermodel と shared-model入力を作る |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。C1 は owner-serial write だけでは atomic read-dependent update を導けないと反例化 | C0/C2/C6 と、C1 の snapshot/evaluation/pending decision boundary を shared-model入力へ進める |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -81,6 +81,8 @@ official T2 まで無条件に連続自走することはできません。次�
   表記の整合化。
 - 記録済みの方向を一つの shared model に合成する C0--C7: SCN-02 snapshot、M1
   request/replay、V1/R1 pending control、SW1/A2 facets、SCN-08 scalar、exact total domain。
+- WRK-0024 は、already-computed write の owner seriality が SCN-02 の atomic update を
+  含意しない有限反例を再現した。これは現行 Canon trace や solution の選択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
 - production implementation と新しい helper / schema / CI / evidence lane。
@@ -129,6 +131,7 @@ shared formal model、T1 statement、T2 skeleton を長い自走 package とし�
 | T0-T2 dependency plan | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 decision and readiness audit | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | selected semantic composition | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
+| WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |
 | statement identity and blockers | `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`, `plan/whole-theory-foundation-audit-20260725.md` |
 | runnable evidence | `samples_progress.md` |

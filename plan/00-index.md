@@ -198,6 +198,8 @@
     `plan/188-parser-free-chain-closure-integrity.md`
 148. 選択済み意味論の合成と推論境界は
     `plan/199-selected-semantic-composition-and-inference-boundary.md`
+149. WRK-0024 SCN-02 read/write snapshot ambiguity evidence は
+    `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md`
 
 ## current repo の短い要約
 

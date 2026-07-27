@@ -52,6 +52,18 @@ snapshot/evaluation rule なしに `x = x - y` と compound atomic update を同
 どちらかの減算が失われ得る。この問題は実装最適化ではなく、SCN-02 が必要とする
 意味論の一部である。
 
+### C1 の限定結果（WRK-0024）
+
+WRK-0024 は、二つの read reply がともに HP=10 を返した後に、owner が 7 と 6 の
+write を直列に適用する有限モデルを Lean で再現した。最終値は 6 で、owner で 3 と 4
+を順に減算するモデルの 3 と異なる。これは **already-computed write の owner seriality
+だけでは** atomic read-dependent update を導けないという反例である。
+
+この結果は current Canon execution、SCN-02 failure、又は特定 repair の選択ではない。
+必要な snapshot/evaluation/pending/request relation は未選択であり、Plan 199 C1 は
+shared model 前の explicit decision boundary として残る。再現手順と scratch digest は
+`plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` にある。
+
 ## 明示と推論の規律
 
 source 上の fact を省略できるのは、次の二条件を同時に満たす場合だけとする。
