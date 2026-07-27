@@ -64,12 +64,27 @@ public behavior.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending post-registration execution.
-Negative evidence: Pending post-registration execution.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: Pending. This registration does not change the scenario,
-theory, grammar, Core, fallback policy, implementation, or public behavior.
+Positive evidence: After registration `dfbe31d3d2b75ebaab6182240e80769ff6e95048`
+was pushed, every registered source-existence, marker, and worktree command
+exited 0. The displayed Surface marker is the indexed `StateDecl`; the MirCore
+marker is indexed `state x[k:K]`; SCN-08 contains scalar `room_anchor` and its
+chain contains `default_pose`; P015 records the explicit-correspondence and
+no-hidden-default boundary. The retained source comparison is reproducible in
+the cited LAB artifact.
+Negative evidence: No registered falsifier occurred. The pinned comparison
+does not provide a scalar declaration/reference correspondence, terminal/default
+declaration/resolution, scalar owner/store/well-formedness form, or permission
+to use a hidden membership key, type-derived default, or unbound terminal. This
+is a bounded observation about the displayed sources, not a claim that another
+future representation is impossible or that SCN-08 is invalid.
+Evidence artifacts: LAB:plan/wrk-0027-scn08-scalar-terminal-correspondence.md@a09568819c28fbad764e15b139e3cbde3e942e5d:104ba9fdbd13accaaf768204e82c623256edf83de2e0ae744723825b2aa5010b
+Evidence commits: a09568819c28fbad764e15b139e3cbde3e942e5d
+Impact / non-effects: The retained Plan artifact records only the literal
+boundary that SCN-08's scalar/terminal notation needs an explicit later
+correspondence before a model relies on it. It selects no scalar Core form or
+finite-domain elaboration, changes no scenario or fallback law, and changes no
+grammar, static semantics, Core, OBL, lifecycle, implementation, or public
+behavior.
 Independent review: not-required-for-L3
 
 ## Supersession
