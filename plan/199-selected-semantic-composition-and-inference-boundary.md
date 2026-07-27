@@ -64,6 +64,17 @@ write を直列に適用する有限モデルを Lean で再現した。最終�
 shared model 前の explicit decision boundary として残る。再現手順と scratch digest は
 `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` にある。
 
+### C0 の登録済み falsifier（WRK-0025）
+
+WRK-0025 は source inventory を実行する前に、登録済みの required-token check が
+`spec/02` に存在しない `CallArgs` を要求したため `frozen` となった。`CallArgs` は
+P004 の候補 EBNF の非終端であり、displayed `spec/02` は postfix `call` を prose で
+列挙する。この失敗は「call が unclassified」又は「C0 は不要」という結果ではない。
+
+したがって C0 は未着手のままである。再開するなら、別番号の pre-registration で
+displayed grammar と P004 candidate grammar を明示的に分け、token assertion 自体の
+alternative/falsifier を再登録する。凍結 record を修理又は再実行してはならない。
+
 ## 明示と推論の規律
 
 source 上の fact を省略できるのは、次の二条件を同時に満たす場合だけとする。

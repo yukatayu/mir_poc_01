@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 05:44 JST
+最終更新: 2026-07-28 05:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,7 +52,8 @@ Current exact blockers:
    entry record exists.
 3. T1/T2 lack canonical phase profiles.
 4. WRK-0024 falsifies the inference that owner-serial submitted writes alone
-   provide SCN-02 atomic read-dependent behavior. Snapshot/evaluation/pending
+   provide SCN-02 atomic read-dependent behavior. WRK-0025 is frozen on its
+   registered command, not on a C0 semantic result. Snapshot/evaluation/pending
    semantics, request/replay identity, served/admission facets, scalar terminal,
    and total domain remain to be bound.
 5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
@@ -190,6 +191,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 05:52 JST: froze WRK-0025 immediately after its registered token
+  audit required `CallArgs` in displayed `spec/02`, where it does not occur.
+  The token exists only in P004's candidate EBNF. No C0 inventory conclusion
+  was retained; a new pre-registration is required rather than repairing or
+  rerunning the frozen record.
 
 - 2026-07-28 05:44 JST: committed/pushed WRK-0024 pre-registration, then
   reproduced its finite Lean countermodel at `--trust=0`. Two stale replies can
