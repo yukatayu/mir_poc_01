@@ -75,6 +75,21 @@ P004 の候補 EBNF の非終端であり、displayed `spec/02` は postfix `cal
 displayed grammar と P004 candidate grammar を明示的に分け、token assertion 自体の
 alternative/falsifier を再登録する。凍結 record を修理又は再実行してはならない。
 
+### C2 の登録済み falsifier（WRK-0026）
+
+WRK-0026 は P013 に存在しない連続 token `copied/replayed requests` を登録済み
+assertion が要求したため `frozen` となった。P013 は `copied/replayed, stale,
+wrong-target, ... requests` と列挙する。これは M1 が replay discrimination を供給する
+かどうかの結果ではない。C2 は未着手のままであり、再開するなら別番号で request
+equality、request identity、duplicate policy を混同しない source inventory を
+pre-register する必要がある。
+
+この二つの command falsifier から、Canon の結論を推論してはならない。以後の
+source-inventory successor は、一つの連続引用 token への依存を避け、各 source の
+literal fact を独立に記録するか、pre-registration 前に read-only source check で
+確定した最小 assertion だけを採る。これは LAB execution discipline であり、Canon の
+研究権限・意味論・証拠基準を変更しない。
+
 ## 明示と推論の規律
 
 source 上の fact を省略できるのは、次の二条件を同時に満たす場合だけとする。

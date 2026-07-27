@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 05:52 JST
+最終更新: 2026-07-28 05:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,10 +52,10 @@ Current exact blockers:
    entry record exists.
 3. T1/T2 lack canonical phase profiles.
 4. WRK-0024 falsifies the inference that owner-serial submitted writes alone
-   provide SCN-02 atomic read-dependent behavior. WRK-0025 is frozen on its
-   registered command, not on a C0 semantic result. Snapshot/evaluation/pending
-   semantics, request/replay identity, served/admission facets, scalar terminal,
-   and total domain remain to be bound.
+   provide SCN-02 atomic read-dependent behavior. WRK-0025/0026 are frozen on
+   their registered commands, not on C0/C2 semantic results. Snapshot/evaluation/
+   pending semantics, request/replay identity, served/admission facets, scalar
+   terminal, and total domain remain to be bound.
 5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages.
 6. P016 records bootstrap then C-static formal entry, but Canon has no
@@ -191,6 +191,11 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 05:57 JST: froze WRK-0026 immediately after its registered token
+  audit required the absent contiguous phrase `copied/replayed requests` in
+  P013. This is a command falsifier, not a conclusion about M1/replay; C2
+  remains open and any restart needs a new pre-registration.
 
 - 2026-07-28 05:52 JST: froze WRK-0025 immediately after its registered token
   audit required `CallArgs` in displayed `spec/02`, where it does not occur.
