@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 00:41 JST
+最終更新: 2026-07-28 04:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -45,9 +45,11 @@ Sources: `mirrorea_canon/plan/01-phases.md`,
 `plan/196-t0-t2-implementation-entry-roadmap.md`,
 `plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
 
-Current LAB recommendation is a versioned correction: retain v1 as historical
-evidence, define profile v2 with `pass`, authorize one fresh v2 artifact, and
-keep G0-D3 acceptance separate.
+The versioned correction has completed: v1 is retained as nonconforming
+historical evidence, v2 uses `pass` as its only success literal, and its one
+authorized fresh artifact is a valid `fail` on fixed-control drift. There is
+no authorized retry or automatic successor. The only autonomous path is a
+fresh ADR-0014 preflight after an exact non-reserved reopening event.
 
 ## ordered self-driven packages
 
@@ -56,8 +58,8 @@ review。
 
 | Order | Work unit | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
-| 0 | T0-T2 planning audit | `A/R`; closed when Plan 196 and snapshots agree with Canon | Macro 0/1 checkpoint; current package |
-| 0A | Conservative statement preflight | `A/R`; inspect literal/conditional candidates, open a WRK only if every ADR-0014 condition and a non-duplicate consumer pass | Macro 1/5 early; autonomous, no official movement |
+| 0 | T0-T2 planning audit | `A/R`; closed when Plan 196 and snapshots agree with Canon | Macro 0/1 checkpoint; completed baseline |
+| 0A | Conservative statement preflight | `A/R`; re-screen literal/conditional candidates only after a qualifying reopening event; open a WRK only if every ADR-0014 condition and a non-duplicate consumer pass | Macro 1/5 early; trigger-based autonomous work, no official movement |
 | 1 | T0 profile v2 and fresh evaluation | `O` accepted; `A/R` completed one direct-child artifact. It is valid `fail`, not a lifecycle result | Macro 0/1 complete; no retry authorized |
 | 2 | Fixed-control drift disposition | `O`; retain/defer, separately scope drift, or start normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
