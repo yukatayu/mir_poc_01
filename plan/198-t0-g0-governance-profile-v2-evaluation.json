@@ -1,0 +1,65 @@
+{
+  "kind": "phase-governance-evaluation",
+  "profile": {
+    "id": "phase-governance/t0-g0",
+    "version": 2,
+    "source_id": "plan/01-phases",
+    "source_revision": "0ee3fdec553de31252a37478fc4a31f507221258",
+    "source_sha256": "404b66669691df4d3ab69ff18f3b1d5ad0cfa7f666c27755218453a478e78298"
+  },
+  "owner_record": {
+    "id": "adr/ADR-0013",
+    "path": "mirrorea_canon/adr/ADR-0013.md",
+    "sha256": "ee2bda324e396cd05a31378a0f4bcaf340ead888b497f945d798c3d2508bf2e1"
+  },
+  "accepted_evidence_cut": {
+    "repository_revision": "6f96ce17e74173ca5d86ed76cee3db75d60dcbfe",
+    "items": [
+      {"id": "adr/ADR-0001", "path": "mirrorea_canon/adr/ADR-0001.md", "sha256": "5161146a7331ed6cb848459f756442bb1eaed409466e83c0c17548c124ff1d83"},
+      {"id": "adr/ADR-0002", "path": "mirrorea_canon/adr/ADR-0002.md", "sha256": "95ed79d55d1ffe5e411b5a1498ad5162fb148da4f82253151bba6ef0c2e46fdd"},
+      {"id": "adr/ADR-0005", "path": "mirrorea_canon/adr/ADR-0005.md", "sha256": "93ae8564a72b1de3297211bfbc7ec2771f2f4758babce64b362e6b8498a4554d"},
+      {"id": "adr/ADR-0009", "path": "mirrorea_canon/adr/ADR-0009.md", "sha256": "8299791c54e7519a87a70f1d4f7def0653cc07bff2e85ac8265aec179f7e61ee"},
+      {"id": "adr/ADR-0012", "path": "mirrorea_canon/adr/ADR-0012.md", "sha256": "9147f795e48c86aa4c0364c33cf31071f71b38f6d471685f4f493fd63458545e"},
+      {"id": "root/glossary", "path": "mirrorea_canon/GLOSSARY.md", "sha256": "4dc814b2eab7e462af06af520755641b089aa825a1065291cc1a400c6b9ad7f8"},
+      {"id": "meta/source-hierarchy", "path": "mirrorea_canon/meta/source-hierarchy.md", "sha256": "4908801f708af9ce28c5c0f3cf281f0544dbd46894b1c8186a699b938a36c4c4"},
+      {"id": "LAB:plan/153", "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md", "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"}
+    ]
+  },
+  "current_controls": {
+    "source_hierarchy": {"id": "meta/source-hierarchy", "path": "mirrorea_canon/meta/source-hierarchy.md", "sha256": "e766e2bd34354b0a2924b56b2cf9b12ab45507a5c288e292c375134f1ce9ce25"},
+    "lab_controls": [
+      {"id": "lab-root-canon-notice", "path": "CANON.md", "sha256": "95399a51c9dc2e89e5e95277b8cbea5d78d8b20a9da8eedc6999154b5c6277de"},
+      {"id": "lab-root-readme-notice", "path": "README.md", "sha256": "a8a814b49a5a85bc05b38f7c37eae8b3ad7a8180288a197c388738b1a765b1a9"},
+      {"id": "lab-agents-notice", "path": "AGENTS.md", "sha256": "e5a5debd6c2bd95fb6cd2e83703926935cea53d4df02ffec1c1229ac94057f51"},
+      {"id": "lab-highlighter-legacy-vocabulary", "path": "mir_hilight.html", "sha256": "d1d81ec317b2cccff60234ee728129391902a2f804d60c80f5744bf0b8442aee"},
+      {"id": "lab-clean-suite-classification", "path": "samples/clean-near-end/README.md", "sha256": "fcc6488461860af685a34139d3d953eb6c4f83e77ab23fe281b00b1483b518d9"}
+    ]
+  },
+  "checks": [
+    {"id": "g0-substantive-owner-record", "result": "pass", "evidence": [
+      {"id": "adr/ADR-0013", "path": "mirrorea_canon/adr/ADR-0013.md", "sha256": "ee2bda324e396cd05a31378a0f4bcaf340ead888b497f945d798c3d2508bf2e1"},
+      {"id": "adr/ADR-0001", "path": "mirrorea_canon/adr/ADR-0001.md", "sha256": "5161146a7331ed6cb848459f756442bb1eaed409466e83c0c17548c124ff1d83"},
+      {"id": "adr/ADR-0002", "path": "mirrorea_canon/adr/ADR-0002.md", "sha256": "95ed79d55d1ffe5e411b5a1498ad5162fb148da4f82253151bba6ef0c2e46fdd"},
+      {"id": "adr/ADR-0005", "path": "mirrorea_canon/adr/ADR-0005.md", "sha256": "93ae8564a72b1de3297211bfbc7ec2771f2f4758babce64b362e6b8498a4554d"},
+      {"id": "adr/ADR-0009", "path": "mirrorea_canon/adr/ADR-0009.md", "sha256": "8299791c54e7519a87a70f1d4f7def0653cc07bff2e85ac8265aec179f7e61ee"},
+      {"id": "adr/ADR-0012", "path": "mirrorea_canon/adr/ADR-0012.md", "sha256": "9147f795e48c86aa4c0364c33cf31071f71b38f6d471685f4f493fd63458545e"},
+      {"id": "root/glossary", "path": "mirrorea_canon/GLOSSARY.md", "sha256": "4dc814b2eab7e462af06af520755641b089aa825a1065291cc1a400c6b9ad7f8"},
+      {"id": "LAB:plan/153", "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md", "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"}
+    ]},
+    {"id": "g0-source-hierarchy-controls", "result": "fail", "evidence": [
+      {"id": "meta/source-hierarchy", "path": "mirrorea_canon/meta/source-hierarchy.md", "sha256": "e766e2bd34354b0a2924b56b2cf9b12ab45507a5c288e292c375134f1ce9ce25"},
+      {"id": "lab-root-canon-notice", "path": "CANON.md", "sha256": "95399a51c9dc2e89e5e95277b8cbea5d78d8b20a9da8eedc6999154b5c6277de"},
+      {"id": "lab-root-readme-notice", "path": "README.md", "sha256": "a8a814b49a5a85bc05b38f7c37eae8b3ad7a8180288a197c388738b1a765b1a9"},
+      {"id": "lab-agents-notice", "path": "AGENTS.md", "sha256": "e5a5debd6c2bd95fb6cd2e83703926935cea53d4df02ffec1c1229ac94057f51"},
+      {"id": "lab-highlighter-legacy-vocabulary", "path": "mir_hilight.html", "sha256": "d1d81ec317b2cccff60234ee728129391902a2f804d60c80f5744bf0b8442aee"},
+      {"id": "lab-clean-suite-classification", "path": "samples/clean-near-end/README.md", "sha256": "fcc6488461860af685a34139d3d953eb6c4f83e77ab23fe281b00b1483b518d9"}
+    ]},
+    {"id": "g0-demotion-audit-scope", "result": "pass", "evidence": [
+      {"id": "adr/ADR-0013", "path": "mirrorea_canon/adr/ADR-0013.md", "sha256": "ee2bda324e396cd05a31378a0f4bcaf340ead888b497f945d798c3d2508bf2e1"},
+      {"id": "LAB:plan/153", "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md", "sha256": "cc9e4a10948e2627f47e042ab1a9fb62edbe8103f4c739af515fee3a703d295c"}
+    ]}
+  ],
+  "result": "fail",
+  "non_claims": ["SCN conformance", "C-static", "C-runtime", "C-distributed", "proof", "ADR effectivity", "G0-D3 acceptance", "G0 exit", "Gate exit", "T1 entry", "I1 authorization"],
+  "artifact_digest": {"algorithm": "sha256", "canonicalization": "RFC8785", "scope": "canonical-json-with-artifact_digest-omitted", "value": "b3748cb62569e25da4eaabf124eea97e97e98147185e433557575127b33895e4"}
+}
