@@ -59,14 +59,23 @@ SCN, Gate/Phase, conformance, runtime, transport, API, or public behavior.
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: Pending registration and the registered commands.
-Negative evidence: Pending registration and the registered commands.
+Reliance status: frozen
+Positive evidence: The registration was committed and pushed at
+`1bbd8529442a1ecd0188f8030c540d3332cd4427`; the registered `rg` source audit
+ran and confirmed the displayed grammar/Core/BND-001 anchors.
+Negative evidence: The registered required-token Python audit failed before any
+inventory conclusion because it required `CallArgs` in `spec/02`, but that
+source only describes postfix `call` in prose; `CallArgs` is a nonterminal in
+P004's candidate EBNF, not in the displayed grammar. This pre-registered
+command failure is the first falsifier. It does not establish that calls are
+classified, unclassified, or invalid, and this record must not be repaired or
+rerun.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: Until an outcome is retained, this record only fixes a
-read-only inventory question. It neither turns parseability into well-scopedness
-nor treats a proposal direction as a grammar/Core amendment.
+Impact / non-effects: This record is frozen and supplies no inventory result.
+It neither turns parseability into well-scopedness, treats a proposal direction
+as a grammar/Core amendment, nor authorizes a corrected command. Any successor
+must have a new pre-registration, alternative, and falsifier.
 Independent review: not-required-for-L3
 
 ## Supersession

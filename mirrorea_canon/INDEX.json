@@ -1602,7 +1602,7 @@
    "summary": "P004 A と P015 return exclusion 後も、表示済み Surface grammar の全 parse form が Core または明示的 Diagnostic へ一意に分類されるかを literal inventory で検査する。exact domain、grammar、Core、OBL は選ばない。",
    "open_items": [],
    "path": "working/WRK-0025-surface-totality-domain-inventory.md",
-   "bytes": 6472
+   "bytes": 7079
   }
  ]
 }
