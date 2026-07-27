@@ -3,14 +3,14 @@ id: meta/proposal-008
 status: L3-open
 maturity: draft
 depends_on: [theory/03-elaboration, theory/11-metatheory-ledger, adr/ADR-0014, plan/02-operating-model]
-summary: BND-001 の outcome totality 読みと OBL-021 の台帳上の責務配置を owner に問う。意味論、OBL、Gate、proof status は変更しない。
+summary: BND-001 の outcome totality と OBL-021 determinism の関係について、totality を別 obligation とする owner disposition を記録する。意味論、OBL、Gate、proof status は変更しない。
 open_items: []
 ---
 
 # PROPOSAL-008 - Elaboration outcome-totality boundary review
 
-> Decision-request artifact only. This proposal records no owner answer and has
-> no automatic repository effect.
+> Decision-request artifact. The owner disposition is recorded below and has
+> only the stated design-package effect; it has no automatic repository effect.
 >
 > It does not add or change an obligation, theorem, ledger entry, Core
 > primitive, Surface grammar, contract, Gate, Phase, implementation, or public
@@ -56,6 +56,18 @@ where should that requirement be tracked before a proof package relies on it?
 > one; or **D**,
 > defer the interpretation and do not let a proof package rely on totality.
 
+## Owner disposition
+
+Recorded on 2026-07-28: **A accepted — separate totality obligation.**
+
+A later Canon design package must state outcome existence separately from
+OBL-021's determinism boundary and explain their relation. Before it can amend
+theory text or the ledger, that package must select the statement domain,
+well-scopedness predicate, result/Diagnostic abstraction, and a new or
+otherwise explicitly placed obligation identity through the ordinary Canon
+process. This disposition does not select any of those details, change BND-001
+wording today, alter OBL-021, or claim totality/proof status.
+
 ## Alternatives
 
 | Option | Owner-level effect if selected | Immediate non-effect |
@@ -78,6 +90,8 @@ Record `A accepted`, `B accepted`, `C accepted`, `D deferred`, or `return for
 clarification` with the disputed reading. Any acceptance requires the ordinary
 canon process before it changes `theory/03`, `theory/11`, an ADR, a Gate, or a
 proof-facing artifact.
+
+Recorded output on 2026-07-28: `A accepted`.
 
 ## Non-effects
 

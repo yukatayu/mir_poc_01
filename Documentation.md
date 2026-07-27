@@ -19,6 +19,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 現在地と owner 判断 | `docs/project-status.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
+| 選択済み方向の合成・推論境界 | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -61,8 +62,9 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。
 - `spec/06` は C-static 10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、
   phase table は両方を I1 exit に置いています。bootstrap の定義と整合化が必要です。
-- outcome totality、read value/receipt、served-write/admission occurrence、
-  post-admission validation context、Surface/SCN closure は owner decision が必要です。
+- P004/P008/P012/P013/P015/P016 の方向は owner が記録しました。exact grammar、
+  shared model、request/replay identity、scalar correspondence、profile は未確定で、
+  Plan 199 の composition/falsifier 研究が先です。
 - Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
   evidence は bounded LAB として実行できます。final grammar/API/ABI、official
   conformance、production runtime、WAN federation、distributed durable save/load
@@ -88,18 +90,17 @@ owner 判断前でも、既存 Canon の literal transcription 又は conditiona
 | 段階 | 主眼 | 現在の扱い |
 | --- | --- | --- |
 | T0 | 語彙・decision・G0 | current。v2 evaluation は `fail`。4 control は統治文書 drift と監査済みだが、rebase/retry は未承認。将来の rebase decision と、その後の G0-D3 が必要 |
-| T1 | 計算体系・G1-G3 statement | no official entry。semantic disposition と shared model 後に自走 |
+| T1 | 計算体系・G1-G3 statement | no official entry。記録済み方向の composition research と shared model 後に自走 |
 | T2 | OBL-020/021/002 skeleton・G5 statement | later。profile と proof-skeleton evidence class が未定義 |
 | I1 | 単一 process reference implementation | T2 と all-SCN/G0-G7 readiness の関係を先に固定 |
 | I2 | process 内 multi-place | I1 後 |
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
-I1 実装を始める文脈での LAB 推奨は、owner が narrow T2 route を選ぶ場合に、その
-直後へ all-SCN / G0-G7 statement-level readiness、OBL-003/027 の evidence class、
-C-static の位置、範囲付き production authorization を bind する別 I1-readiness record
-を置くことです。統合 route と phase-contract amendment は未選択の代替であり、これは
-Canon 判断ではありません。
+I1 実装を始める文脈では、P016 が narrow T2 の直後に all-SCN / G0-G7
+statement-level readiness、OBL-003/027 の evidence class、C-static の位置、範囲付き
+production authorization を bind する別 I1-readiness record という方向を記録しました。
+profile と Canon amendment は未作成です。
 
 ## 作業の管理
 
@@ -110,6 +111,8 @@ Canon 判断ではありません。
   package close 条件。
 - `plan/197-i1-bootstrap-decision-and-readiness-audit.md`: I1 bootstrap、formal
   I1 entry、I1 exit の区別、owner 判断の順序・候補・推奨。
+- `plan/199-selected-semantic-composition-and-inference-boundary.md`: selected
+  directions を shared model に合成する前の countermodel と安全な推論境界。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

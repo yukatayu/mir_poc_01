@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 108,
+ "files": 110,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 3798
+   "bytes": 4308
   },
   {
    "id": "root/glossary",
@@ -475,10 +475,10 @@
     "scenarios/readme",
     "plan/02-operating-model"
    ],
-   "summary": "Surface v0 EBNF 閉包の owner decision request。Participant-only index と既存語彙だけによる最小閉包を推奨し、custom keyspace / 新 builtin は後段へ送る。",
+   "summary": "Surface v0 EBNF 閉包の owner decision record。Participant-only index と既存語彙だけによる最小閉包を採択し、custom keyspace / 新 builtin は後段へ送る。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md",
-   "bytes": 8116
+   "bytes": 9005
   },
   {
    "id": "meta/proposal-005",
@@ -527,10 +527,10 @@
     "adr/ADR-0014",
     "plan/02-operating-model"
    ],
-   "summary": "BND-001 の outcome totality 読みと OBL-021 の台帳上の責務配置を owner に問う。意味論、OBL、Gate、proof status は変更しない。",
+   "summary": "BND-001 の outcome totality と OBL-021 determinism の関係について、totality を別 obligation とする owner disposition を記録する。意味論、OBL、Gate、proof status は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md",
-   "bytes": 4897
+   "bytes": 5651
   },
   {
    "id": "meta/proposal-009",
@@ -599,10 +599,10 @@
     "adr/ADR-0014",
     "meta/proposal-009"
    ],
-   "summary": "read の値フロー、成功 service、admission の occurrence identity を個別に owner へ問う。Core、OBL、Gate、runtime は変更しない。",
+   "summary": "read の値フロー、成功 service、admission の occurrence identity について、V1/R1/SW1/conditional A2 の owner disposition を記録する。Core、OBL、Gate、runtime は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md",
-   "bytes": 14318
+   "bytes": 15628
   },
   {
    "id": "meta/proposal-013",
@@ -619,10 +619,10 @@
     "adr/ADR-0014",
     "meta/proposal-012"
    ],
-   "summary": "post-admission request の authority validation claims を Core / queue / generated edge のどこで保持又は非 transport 的に導出するかを owner に問う。Core、OBL、runtime、wire は変更しない。",
+   "summary": "post-admission request の authority validation claims を request-local に置く M1 の owner disposition を記録する。Core、OBL、runtime、wire は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-013-post-admission-request-validation-context.md",
-   "bytes": 8891
+   "bytes": 9885
   },
   {
    "id": "meta/proposal-014",
@@ -638,6 +638,40 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-014-t0-g0-governance-profile-v2.md",
    "bytes": 2930
+  },
+  {
+   "id": "meta/proposal-015",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/01-lexical-and-modules",
+    "spec/02-surface-grammar",
+    "theory/01-mircore-v0",
+    "theory/06-existence-fallback",
+    "scenarios/SCN-08",
+    "meta/proposal-004",
+    "adr/ADR-0014"
+   ],
+   "summary": "SCN-08 の scalar terminal fallback と Surface v0 の未elaborated return を、明示的 closure として扱う owner disposition を記録する。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-015-surface-fallback-and-return-closure.md",
+   "bytes": 3428
+  },
+  {
+   "id": "meta/proposal-016",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "plan/00-gates",
+    "plan/01-phases",
+    "spec/06-conformance",
+    "theory/11-metatheory-ledger",
+    "adr/ADR-0014"
+   ],
+   "summary": "narrow T2 と separate I1-readiness/bootstrap、C-static formal entry の owner disposition を記録する。現行 Phase は動かさない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-016-t2-i1-bootstrap-separation.md",
+   "bytes": 2772
   },
   {
    "id": "meta/source-hierarchy",

@@ -42,6 +42,10 @@ rollback 条件を満たす範囲だけ自走できる。Canon integration、led
 production implementation、新 lane/helper は owner action のままである。したがって
 採るべき運用は **少数の owner checkpoint で区切った長い research ratchet** である。
 
+> 2026-07-28 update: P004/P008/P012/P013/P015/P016 の方向は owner が記録した。
+> ただし shared model の前に C0--C7 の composition/falsifier 研究が必要である。
+> 詳細は Plan 199。これは Canon rule、Gate/Phase、実装認可を変更しない。
+
 ## 現在確認できる事実
 
 | 項目 | 現在の状態 | 意味 |
@@ -117,12 +121,15 @@ official T1 entry
 
 並行して準備可能だが、Canon integration は owner disposition 後:
 
-D1 [O] P008 totality + P012 V/R/S/A + P013 request-validation context
-D2 [O] P004 / OPEN-005 / return / SCN-08 の Surface-SCN closure
-D3 [O] Gate status mapping + T1/T2 profile + proof-skeleton meaning
+D1 [O] recorded: P008 totality + P012 V/R/S/A + P013 request-validation context
+D2 [O] recorded: P004 / return / SCN-08 の closure direction
+D3 [O] recorded direction: narrow T2 / separate I1 readiness / bootstrap-C-static
 P009-A は記録済み
           \                |                /
            +---------------+---------------+
+                           |
+                           v
+M0 [A/R] composition and inference-boundary research (Plan 199 C0--C7)
                            |
                            v
 M1 [A/R -> O] shared formal model
@@ -168,8 +175,9 @@ execution dependency であり、`INDEX.json` の dependency graph をそのま�
 | P1 T0 profile repair design | A prepares, O decides | `pass` に統一する profile revision と旧 artifact の扱い | proposal、代替、互換性、non-claims、移行規則を owner が disposition | Canon edit 前 |
 | P2 T0 fresh evaluation | A/R | 修正版 exact contract に従う一回限りの artifact | exact Git blob、順序、cardinality、RFC 8785 digest、3 check、non-claims が一致 | G0-D3 |
 | P3 lifecycle contract | A prepares, O decides | Gate ledger-status mapping、T1/T2 profile、T2-I1 関係 | profile が artifact identity、status literal、human acceptance を一意化 | lifecycle action 前 |
-| P4 semantic decisions | A prepares, O decides; P013 comparison is post-disposition only | P008 / P012 / P013 / P004 と SCN/Syntax reconciliation | 各 disposition と、その disposition が許す後続 comparison / compatibility package の scope が記録 | common model 前 |
-| P5 shared formal model | A/R, O integrates | Canon-aligned formal domains / relations | opaque placeholder でなく、正負例、coverage、non-effects、source anchors が揃う | ledger movement |
+| P4 semantic directions | A/O recorded; follow-up is A/R | P004/008/012/013/015/016 の bounded direction | direction と non-effects を proposal に記録。具体的 rule は未改訂 | composition research 前 |
+| P4A composition/inference boundary | A/R | Plan 199 C0--C7 source anchors、countermodels、safe omission matrix | shared carrier が hidden identity/authority/default を要さず、停止条件が明示される | common model 前 |
+| P5 shared formal model | A/R, O integrates | Canon-aligned formal domains / relations | opaque placeholder でなく、P4A の正負例、coverage、non-effects、source anchors が揃う | ledger movement |
 | P6 G1 package | A/R, O accepts | OBL-001 / 020 / 021 exact statement、SCN-01/02 explanation | Core-write coverage、global-step coverage、outcome/equality が明示 | G1 exit |
 | P7 G2/G3 package | A/R, O accepts | OBL-005..007 / 015 statement と OBL-008 owner-defined proof/status package、SCN-03/04/08 explanation | P3 が OBL-008 の required status/artifact/acceptance を固定し、chain/lineage/reacquire と mutation/grant relation が同一 model に束縛 | T1 exit |
 | P8 T1 close | A prepares, O accepts | SCN finalization record、T1 profile artifact、exit record | exact statuses、profile pass、human acceptance | official T2 entry |
@@ -208,25 +216,22 @@ repair の承認を G0 exit の承認として扱わない。
 狭い T2 と I1-entry readiness を同じ checkpoint とするかを owner が記録する。
 本計画は「同じ checkpoint、ただし追加 criteria を profile に明記」を推奨する。
 
-## Semantic owner checkpoint 2
+## Semantic direction checkpoint 2
 
 ### Critical path
 
 | Boundary | 必要な理由 | 現在の LAB recommendation |
 | --- | --- | --- |
-| PROPOSAL-008 | OBL-021 coherence だけでは outcome existence が出ない | A: totality を determinism と別 obligation にする |
-| PROPOSAL-012 V | SCN-02 の read result を dependent write に渡す関係がない | V1: restricted result-binding contract |
-| PROPOSAL-012 R | successful read の reply / receipt / resumption がない | R1: explicit typed reply and receipt |
-| PROPOSAL-012 S | successful owner write の service / mutation occurrence identity がない | SW1: one atomic served-write occurrence with typed facets |
-| PROPOSAL-012 A | admission / membership / grant / witness の occurrence projection がない | conditional A2: composite occurrence + explicit projections |
-| PROPOSAL-013 | post-admission validation claims の保持又は導出が未選択 | owner が先に M1/M2/MD を disposition し、後続 package が選択済み family だけを adverse cases で検証 |
-| PROPOSAL-004 | exact Surface parser / SCN finalization ができない | A: Participant-only minimal closure |
-| OPEN-005 / SCN-08 | chain 表記と scalar/indexed state の不一致 | G2 package 前に一つの source/scenario readingへ統一 |
-| `return` alignment | Surface にある語の Core/elaborationがない | exact v0 に含めて規則を与えるか、v0 から除外 |
+| PROPOSAL-008 | OBL-021 coherence だけでは outcome existence が出ない | **A recorded**。exact domain/total diagnostic coverage は P4A |
+| PROPOSAL-012 V/R/S/A | value/receipt/service/admission identity がない | **V1/R1/SW1/conditional A2 recorded**。pending/facet/causal composition は P4A |
+| PROPOSAL-013 | validation claims の保持又は導出が未選択 | **M1 recorded**。request binding/replay/failure classification は P4A |
+| PROPOSAL-004 | exact Surface parser / SCN finalization ができない | **A recorded**。exact accepted domain は P4A |
+| SCN-08 / `return` | scalar/indexed mismatch と unelaborated control token | **P015 recorded**。scalar correspondence と diagnostic rule は P4A/normal process |
+| lifecycle | T2/I1 relation と C-static timing | **P016 recorded**。profile/authorization は後続 normal process |
 
-P012/P013 は個別に記録できるが、選択肢の tuple が互換であるとは限らない。
-disposition 後に、V/R/S/A/M の composition と adverse cases を確認する一つの
-owner-reviewed design package が必要である。
+方向の記録は tuple の互換性を証明しない。P4A では V/R/S/A/M、SCN-02、SCN-08、
+totality の composition と adverse cases を比較し、必要な Canon amendment は別 proposal
+として停止する。
 
 ### Deferrable from the explicit T0-T2 critical path
 

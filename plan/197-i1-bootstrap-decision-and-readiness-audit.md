@@ -5,12 +5,13 @@
 これは Canon と現行 LAB 証拠を照合して作る **LAB repository memory** である。
 規範正本は `mirrorea_canon/` であり、この文書は Gate / Phase / SCN / OBL /
 proof status / Core / carrier / conformance / production implementation を変更しない。
-特に、ここでいう推奨は owner disposition ではない。
+記録済み disposition は各 proposal を正本とし、この LAB 文書はその後続順序だけを
+整理する。
 
 Plan 196 は T0 から T2 までの条件付き研究計画である。本計画はそのうち
 **I1 実装をいつ、何を根拠に始められるか** を深掘りする。Plan 196 の履歴を
-書き換えず、I1 入口についてはより保守的な `narrow T2 + separate I1-readiness`
-を LAB 推奨として採る。
+書き換えず、I1 入口については `narrow T2 + separate I1-readiness` という記録済み
+方向を追跡する。
 
 ## 結論
 
@@ -25,7 +26,7 @@ I1 を安全に開始するには、少なくとも次を分けて成立させ�
 2. T1/T2 の profile、proof/status の意味、T2 と I1 の関係を Canon で定義する。
 3. all-SCN I1 が消費する Surface/Core/runtime の未決意味論を選び、選択後の
    shared model と反例検査を通す。
-4. owner が narrow T2 route を選んだ場合は、T2 を閉じた後に別の I1-readiness
+4. 記録済み narrow T2 direction に従う場合は、T2 を閉じた後に別の I1-readiness
    profile で bootstrap の範囲、C-static の位置、all-SCN の意味、carrier baseline を
    owner が受理する。統合 route 又は phase-contract amendment も未選択の代替である。
 
@@ -118,13 +119,13 @@ another artifact is a new owner/Canon decision outside O0.
 
 ### O2 - lifecycle / proof evidence / C-static の読み方
 
-このパケットは profile を追加するため、owner-reserved である。少なくとも次を
+P016 は方向を記録した。profile を追加する通常の Canon package は、少なくとも次を
 一意化する。
 
 | 問題 | 候補 | 推奨 |
 | --- | --- | --- |
-| T2 と I1 の関係 | `narrow T2` の後に I1-readiness profile を置く / T2 profile に I1-readiness を統合する | **narrow T2 + separate readiness**。現行 T2 の proof-skeleton/G5 意味を過積載せず、all-SCN implementation 条件を別 record で監査できる |
-| bootstrap と formal entry | C-static を非-production prequalification にする / bootstrap を明示し C-static を I1 の最初の formal milestone とする / I1 exit table を含め phase/conformance 関係を別に改める | **範囲付き bootstrap を明示し、C-static 10/10 を formal I1 entry とする**。`spec/06` の entry 読みを保ちつつ、実装開始の循環を解く。ただし C-static は phase table の I1 exit evidence から除外しない。entry/exit の二重記述は通常の Canon process で整合化する |
+| T2 と I1 の関係 | `narrow T2` の後に I1-readiness profile を置く / T2 profile に I1-readiness を統合する | **P016により narrow T2 + separate readiness を記録済み**。profile/acceptance は未作成 |
+| bootstrap と formal entry | C-static を非-production prequalification にする / bootstrap を明示し C-static を I1 の最初の formal milestone とする / I1 exit table を含め phase/conformance 関係を別に改める | **P016により explicit bootstrap と C-static formal I1 entry を記録済み**。C-static は I1 exit evidence から除外しない |
 | proof evidence | ledger status だけへ overload / profile-local evidence class と acceptance を定義し ledger は既存 status のままにする | **後者**。`statement`、`complete`、`proof skeleton` を勝手に `lean-proved` 等へ読み替えない |
 | OBL-003/027 と G4/G6/G7 | 全てを T2 exit に暗黙要求 / I1-readiness profile で `pre-bootstrap`、`I1-time`、`later` を明示分類 | **明示分類**。all-SCN に消費される interface は省略できないが、最終 proof / ABI を前倒ししない |
 
@@ -137,14 +138,14 @@ implementation convenience ではできず、Phase 又は conformance の Canon 
 | 境界 | 主な候補 | 推奨と根拠 |
 | --- | --- | --- |
 | I1 scope | current all-SCN / I1 を narrow fragment に変更 | **current all-SCN**。frozen conformance definition と no-waiver rule を維持する。狭めるなら別途 Canon amendment |
-| Surface grammar | PROPOSAL-004 A Participant-only / B custom keyspace / C partial の維持 | **A**。現行 SCN と active LAB は `Participant` のみで、新 builtin や keyspace declaration を入れない |
-| elaboration outcome | PROPOSAL-008 A separate totality / B OBL-021 内 / C contract 弱化 / D defer | **A**。existence と determinism を別の proof boundary にし、BND-001 を暗黙に弱めない |
-| value and occurrence | PROPOSAL-012 の V/R/S/A | **V1/R1/SW1/conditional A2**。SCN-02 の read-dependent write、owner-serial mutation、admission lineage を明示できる。selection 後にも tuple compatibility review が必要 |
-| validation context | PROPOSAL-013 M1 request-local claims / M2 explicit non-transport correlation / MD defer | **M1**。authoritative state と照合する claims を明示でき、transport identity や hidden side relation に寄らない。これは proposal 自身の順位ではなく audit の推論 |
-| SCN-08 and OPEN-005 | scalar/terminal fallback を明示 closure / indexed state に読み替える / scenario を I1 から除外 | **scalar state と terminal/default declaration を明示 closure**。anchor は participant-specific life より長く生きる必要がある。SCN を変えるなら ADR が必要 |
-| `return` | Core/elaboration rule を追加 / v0 exact fragment から明示除外 / partial のまま | **明示除外**。canonical SCN は必要とせず、control-flow semantics を先取りしない。ただし現在の Surface grammar から除外する Canon action と diagnostic policy を要する |
+| Surface grammar | PROPOSAL-004 A Participant-only / B custom keyspace / C partial の維持 | **P004 A recorded**。exact domain/grammar は Plan 199 C0 |
+| elaboration outcome | PROPOSAL-008 A separate totality / B OBL-021 内 / C contract 弱化 / D defer | **P008 A recorded**。obligation/domain is Plan 199 C0 |
+| value and occurrence | PROPOSAL-012 の V/R/S/A | **V1/R1/SW1/conditional A2 recorded**。composition review は Plan 199 C1--C5 |
+| validation context | PROPOSAL-013 M1 request-local claims / M2 explicit non-transport correlation / MD defer | **P013 M1 recorded**。binding/replay/failure mapping は Plan 199 C2 |
+| SCN-08 and OPEN-005 | scalar/terminal fallback を明示 closure / indexed state に読み替える / scenario を I1 から除外 | **P015 direction recorded**。scalar representation は Plan 199 C6 |
+| `return` | Core/elaboration rule を追加 / v0 exact fragment から明示除外 / partial のまま | **P015 exclusion recorded**。grammar/diagnostic amendment は後続 normal process |
 
-いずれの選択も、選択しただけで implementation-ready にはならない。`A1` では
+いずれの方向も、記録しただけで implementation-ready にはならない。`A1` では
 V/R/S/A/M の composition、SCN-01..10 の positive/negative trace、failure no-mutation、
 DAG、redaction、fallback lineage、cut/save/load の adverse cases を検証する。
 
@@ -213,17 +214,13 @@ L3 research と owner による直接 Canon adoption の妨げではない。
 single-process reference implementation が実際に消費する semantic interface と、
 後段の replaceable implementation choice を分離するためである。
 
-## 今回到達した停止線
+## 現在の停止線
 
-最初に owner が判断すべき文は次である。
-
-> `phase-governance/t0-g0` v2 を作り、success literal は `pass` のみとする。v1
-> artifact は nonconforming historical evidence として保持し、v2 に対する fresh
-> exact evaluation を一回だけ許可する。この判断は G0-D3 acceptance、G0 exit、
-> T1 entry、I1 authorization を含まない。
-
-これを受理した後は、fresh artifact の生成・独立検証・report・commit/push までを
-自走できる。その後の exact digest acceptance が次の owner checkpoint である。
+O0 は完了し、v2 artifact は valid `fail` だったため、G0-D3 はなお進めない。一方、
+P004/P008/P012/P013/P015/P016 の方向は記録済みである。直近の自走線は Plan 199
+C0--C7 であり、ここで共通 model に必要な snapshot、identity、pending control、facet、
+scalar、total-domain、safe inference を反例で絞る。これらが最低限の Canon amendment
+又は profile wording を要求した時点で、その選択を次の owner/Canon packet に戻す。
 
 ## 根拠
 
@@ -231,8 +228,8 @@ single-process reference implementation が実際に消費する semantic interf
   `plan/02-operating-model.md`, `spec/02-surface-grammar.md`,
   `spec/05-runtime-semantics.md`, `spec/06-conformance.md`,
   `architecture/02-boundary-contracts.md`, `architecture/04-runtime-carriers.md`,
-  ADR-0013, ADR-0014, SCN-01..10, PROPOSAL-004/008/012/013.
-- LAB: Plan 196、Plan 180、Plan 187、whole-theory foundation audit。
+  ADR-0013, ADR-0014, SCN-01..10, PROPOSAL-004/008/012/013/015/016.
+- LAB: Plan 196、Plan 180、Plan 187、Plan 199、whole-theory foundation audit。
 - Independent review: planner と reviewer の read-only audit、temporary GPT-5.6 Sol
   Pro Oracle consultation。いずれも advisory evidence であり、Canon を上書きしない。
 

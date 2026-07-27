@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 03:51 JST
+最終更新: 2026-07-28 05:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,9 +38,9 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; control drift is scoped-audited as governance-only; all OBL rows `open` | rebase decision if a future pass route is wanted, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
-| User-facing specification | bounded notation/scenario/sample evidence; final Surface closure unresolved | PROPOSAL-004, OPEN-005, `return`, SCN-08 reconciliation | owner specification required |
-| Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | owner-selected I1 authorization route, exact target fragment, and C-static timing | later dependency |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; all OBL rows `open` | rebase decision if a future pass route is wanted, C0--C7 composition research, T1/T2 profiles, shared formal model | conditional |
+| User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return` | exact grammar/domain, scalar correspondence, rejection diagnostic | autonomous research then Canon process |
+| Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
 Current exact blockers:
 
@@ -51,12 +51,13 @@ Current exact blockers:
 2. G0-D3 remains deferred and cannot consume the v2 `fail`; no G0 exit / T1
    entry record exists.
 3. T1/T2 lack canonical phase profiles.
-4. Outcome totality, value/receipt/service/admission identity, request
-   validation context, and Surface/SCN closure remain owner-reserved choices.
+4. The selected directions are not composition-closed: SCN-02 snapshot,
+   semantic request/replay identity, pending value control, served/admission
+   facets, scalar terminal, and total domain remain to be falsified and bound.
 5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages.
-6. `spec/06` calls C-static 10/10 I1 entry while the phase table places it in
-   I1 exit; Canon has no distinct bootstrap authorization.
+6. P016 records bootstrap then C-static formal entry, but Canon has no
+   lifecycle profile or phase/conformance reconciliation yet.
 
 The last source-cut screen selected no new WRK from its reviewed delta. That
 is a LAB priority result, not a permanent restriction on ADR-0014. A fresh
@@ -73,19 +74,19 @@ Sources: `mirrorea_canon/plan/01-phases.md`,
 | Phase | Primary aim | Current position | Self-drive |
 | --- | --- | --- | --- |
 | T0 | vocabulary, decisions, G0 | official current; v2 profile validly reports fixed-control drift | research/preparation yes; exit no |
-| T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | ADR-0014-eligible packages after owner dispositions |
+| T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | ADR-0014-eligible composition research after recorded directions |
 | T2 | OBL-020/021/002 skeletons and G5 statements | later | skeleton research after accepted model; exit no |
 | I1 | single-process reference implementation | later | blocked on owner-selected authorization route and C-static timing |
 | I2 | in-process multi-locus | later | blocked on I1 |
 | I3 | real transport | later; first real LAN phase | blocked on I2 and transport ADR |
 | I4-I6 | persistence/patch, View, distributed persistence/federation | later | sequential dependency |
 
-Current Canon T2 is narrower than proven I1 readiness. The current LAB
-recommendation, if the owner selects narrow T2, is a separately accepted
-I1-readiness / bootstrap record. It would bind all-SCN / G0-G7 statement-level
-criteria, OBL-003/027 classification, C-static timing, and scoped production
-authorization; integrated and phase-contract alternatives remain open. It does
-not imply final carrier freeze or C-runtime conformance.
+Current Canon T2 is narrower than proven I1 readiness. P016 records the
+narrow-T2 direction: a separately accepted I1-readiness / bootstrap record
+must bind all-SCN / G0-G7 statement-level criteria, OBL-003/027 classification,
+C-static timing, and scoped production authorization. The actual profile and
+Canon reconciliation remain open; this does not imply carrier freeze or
+C-runtime conformance.
 
 ## line snapshots
 
@@ -150,9 +151,9 @@ durable save/load, or public product completion is claimed.
 | --- | --- | --- |
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
-| Owner / Canon | T1/T2/I1 lifecycle contract | define profiles, Gate-to-ledger mapping, proof-skeleton evidence class, narrow T2 vs I1 readiness, bootstrap/C-static relation |
-| Owner / Canon | PROPOSAL-008/012/013 | decide totality, V/R/S/A, and request-validation context |
-| Owner / Canon | Surface/SCN closure | decide PROPOSAL-004, OPEN-005, `return`, and SCN-08 coherently |
+| Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
+| Research | selected semantic composition | Plan 199 C0--C7 tests totality domain, snapshot, request/replay, pending/facets, scalar terminal, and safe inference before a shared model |
+| Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
 | Research | conservative statement preflight | test ADR-0014 eligibility; open L3 only for non-duplicate existing-lane literal/conditional evidence |
 | Research after decisions | shared model and Gate packages | compare, formalize, falsify, validate, review, and prepare acceptance packets |
 | Later dependency | runtime, conformance, transport, federation | do not preempt the theory/lifecycle contract |
@@ -162,7 +163,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | direction fixed; proof-facing relations incomplete | heavy | owner choices unlock only ADR-0014-eligible existing-lane packages |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete | heavy | C0--C7 research, then existing-lane packages |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -180,13 +181,20 @@ durable save/load, or public product completion is claimed.
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | G7 and implementation contract | later dependency |
 | `atomic_cut` / ordering | Canon theory plus bounded hook/cut evidence | noncircular G5 model and OBL-009..014 statements | after model choice |
 | executable sample corpus | runnable active roots | conformance and public workflow | maintenance |
-| Mir language foundation | bounded parse/check/elaboration/compute evidence | exact Surface/Core fragment, owner-selected I1 authorization route, C-static timing | owner specification required |
+| Mir language foundation | bounded parse/check/elaboration/compute evidence | exact Surface/Core fragment, P016 profile/authorization, C-static timing | composition research then Canon process |
 | Mirrorea fabric | bounded alpha/runtime evidence | I2/I3 semantics and transport ADR | later dependency |
 | Typed-Effect Wiring | typed adapter evidence | public contract and authority integration | later dependency |
 | PrismCascade | separable bounded sample/kernel evidence | dedicated semantics/performance contract | later dependency |
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 05:35 JST: recorded the owner-accepted P004/P008/P012/P013/P015/
+  P016 directions without changing a Core rule, SCN, Gate, Phase, OBL, or
+  implementation status. A temporary GPT-5.6 Sol Pro review and local source
+  check found that the directions are not yet composition-closed; Plan 199 now
+  orders the C0--C7 countermodel and safe-inference research before a shared
+  operational model.
 
 - 2026-07-28 05:13 JST: audited the four v2 fixed-control mismatches against
   the accepted evidence cut. They are intentional source-hierarchy and agent/

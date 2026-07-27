@@ -284,6 +284,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/195-post-proposal013-autonomous-frontier-delta-audit.md",
         "plan/196-t0-t2-implementation-entry-roadmap.md",
         "plan/197-i1-bootstrap-decision-and-readiness-audit.md",
+        "plan/199-selected-semantic-composition-and-inference-boundary.md",
     ],
     "scripts": [
         "scripts",

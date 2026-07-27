@@ -3,14 +3,15 @@ id: meta/proposal-012
 status: L3-open
 maturity: draft
 depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/04-ordering-and-cuts, theory/05-authority, adr/ADR-0002, adr/ADR-0003, adr/ADR-0005, adr/ADR-0014, meta/proposal-009]
-summary: read の値フロー、成功 service、admission の occurrence identity を個別に owner へ問う。Core、OBL、Gate、runtime は変更しない。
+summary: read の値フロー、成功 service、admission の occurrence identity について、V1/R1/SW1/conditional A2 の owner disposition を記録する。Core、OBL、Gate、runtime は変更しない。
 open_items: []
 ---
 
 # PROPOSAL-012 - MirCore value flow and occurrence identity
 
-> Decision-request artifact only. This proposal records no owner answer and has
-> no automatic repository effect.
+> Decision-request artifact. The owner disposition is recorded below and has
+> only the stated bounded design-package effect; it has no automatic repository
+> effect.
 >
 > It does not add or select a Core constructor, a result/reply carrier, an
 > operational rule, an occurrence schema, an OBL, a Gate, a Phase, a scenario,
@@ -34,8 +35,33 @@ theory text, an ADR, `theory/11`, scenarios, Gates, Phases, or implementation.
 
 `PROPOSAL-008` remains the exclusive decision record for BND-001 outcome
 totality and ledger placement. `PROPOSAL-009` remains the separate static
-THM-001 Core/write statement-interface decision. Neither is answered or
-presupposed here.
+THM-001 Core/write statement-interface decision. Their detailed downstream
+designs are neither selected nor presupposed here.
+
+## Owner disposition
+
+Recorded on 2026-07-28:
+
+```text
+V = V1  restricted result-binding contract
+R = R1  explicit typed reply and receipt
+S = SW1 atomic served-write occurrence with typed facets
+A = A2  composite admission/verdict occurrence with named projections,
+         conditional on atomic verdict-time issuance
+```
+
+The A2 disposition applies only when one verdict atomically establishes the
+membership transition and its finite named grant/witness set. A later design
+that exposes a separately failing, observable, or schedulable issuance phase
+must stop for an A1 successor decision rather than treating the composite as a
+shortcut.
+
+These four dispositions authorize one later compatibility-reviewed design
+package. It must make the required binding, pending-control, correlation,
+projection, failure, cut/save/load, DAG, and linearity relations explicit. The
+dispositions do not themselves add a Core constructor, grammar form, result
+carrier, transition rule, history schema, runtime, wire protocol, public
+contract, proof obligation, or implementation authorization.
 
 ## Current source reading
 
@@ -177,6 +203,9 @@ R = R1 | R2 | RD
 S = SW1 | SW2 | SWD
 A = A1 | A2 | AD
 ```
+
+Recorded output on 2026-07-28: `V1`, `R1`, `SW1`, and conditional `A2` as
+stated above.
 
 An owner may return `clarify <question>` for any item. A non-defer disposition
 authorizes only the corresponding bounded design/comparison package; it does

@@ -3,14 +3,15 @@ id: meta/proposal-013
 status: L3-open
 maturity: draft
 depends_on: [theory/01-mircore-v0, theory/05-authority, spec/04-core-ir, spec/05-runtime-semantics, adr/ADR-0003, adr/ADR-0005, adr/ADR-0012, adr/ADR-0014, meta/proposal-012]
-summary: post-admission request の authority validation claims を Core / queue / generated edge のどこで保持又は非 transport 的に導出するかを owner に問う。Core、OBL、runtime、wire は変更しない。
+summary: post-admission request の authority validation claims を request-local に置く M1 の owner disposition を記録する。Core、OBL、runtime、wire は変更しない。
 open_items: []
 ---
 
 # PROPOSAL-013 - Post-admission request validation context
 
-> Decision-request artifact only. This proposal records no owner answer and has
-> no automatic repository effect.
+> Decision-request artifact. The owner disposition is recorded below and has
+> only the stated bounded design-package effect; it has no automatic repository
+> effect.
 >
 > It does not add or select a Core constructor, a request field, a queue
 > carrier, a generated-edge schema, an occurrence identity, an OBL, a Gate, a
@@ -30,6 +31,23 @@ is non-duplicative and separately recordable from PROPOSAL-012: it concerns
 validation-input provenance, not the value-flow, reply/receipt, served-write,
 or admission-occurrence identity families requested there. Compatibility and
 dependency with the `S` and `A` dispositions remain unresolved.
+
+## Owner disposition
+
+Recorded on 2026-07-28: **M1 accepted — request-local validation context.**
+
+A later compatibility-reviewed design package may formalize request-associated
+claims sufficient to identify principal, epoch, incarnation, and referenced
+capability/witness provenance. The claims remain non-authoritative inputs that
+the owner validates against authoritative membership, lineage, witness,
+admission, visibility, and history facts. This disposition selects neither
+field names nor an encoding, queue carrier, request-instance identity,
+occurrence identity, transport session, wire envelope, or public interface.
+
+The package must reject copied/replayed, stale, wrong-target, missing-witness,
+and severed-lineage requests without store mutation, including two active
+principals at one source locus. If it needs a hidden correlation, a new Core
+primitive, or another unselected carrier, it stops for a successor decision.
 
 ## Current source reading
 
@@ -110,6 +128,8 @@ clarification`. This proposal ranks no alternative. A later design package may
 compare the alternatives only after an owner disposition, while preserving the
 project rule that transport is not authority. This is not a selection by the
 proposal.
+
+Recorded output on 2026-07-28: `M1 accepted`.
 
 An acceptance authorizes only a later design package. It requires the ordinary
 Canon process before editing theory/spec text, an ADR, `theory/11`, scenarios,

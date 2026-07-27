@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-28** PROPOSAL-004/008/012/013/015/016 に owner disposition を
+  記録した。Participant-only Surface v0、outcome totality の別 obligation、
+  V1/R1/SW1/conditional A2、M1 request-local validation context、explicit
+  scalar terminal fallback / `return` exclusion、narrow T2 と separate I1
+  readiness/bootstrap が後続設計 package の方向となった。Core rule、grammar、
+  ledger、SCN、Gate、Phase、runtime、public contract はこの記録だけでは変更しない。
 - **2026-07-28** PROPOSAL-014 と ADR-0013 amendment により
   `phase-governance/t0-g0` version 2 を採用した。v1 artifact は
   nonconforming historical evidence として byte-preserved し、既存の fixed

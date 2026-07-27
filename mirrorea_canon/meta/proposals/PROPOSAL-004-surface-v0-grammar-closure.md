@@ -3,14 +3,15 @@ id: meta/proposal-004
 status: L3-open
 maturity: draft
 depends_on: [adr/ADR-0001, adr/ADR-0002, adr/ADR-0005, adr/ADR-0008, adr/ADR-0009, spec/01-lexical-and-modules, spec/02-surface-grammar, spec/03-static-semantics, theory/01-mircore-v0, theory/02-types-effects-failures, scenarios/readme, plan/02-operating-model]
-summary: Surface v0 EBNF 閉包の owner decision request。Participant-only index と既存語彙だけによる最小閉包を推奨し、custom keyspace / 新 builtin は後段へ送る。
+summary: Surface v0 EBNF 閉包の owner decision record。Participant-only index と既存語彙だけによる最小閉包を採択し、custom keyspace / 新 builtin は後段へ送る。
 open_items: []
 ---
 
 # PROPOSAL-004 - Surface v0 grammar closure
 
-> Decision-request artifact only. It records no owner answer and has no
-> automatic repository effect.
+> Decision-request artifact. The owner disposition is recorded below and has
+> only the stated design-package effect; it has no automatic implementation or
+> lifecycle effect.
 >
 > It does not change Surface syntax, lexical rules, static semantics, Core,
 > SCN expectations, proof status, Gate/Phase state, implementation, or public
@@ -53,6 +54,21 @@ ADR-0009's `.mir` source authority.
 > the bounded EBNF below; **B**, add named custom keyspaces and an explicit
 > declaration surface now; or **C**, leave the grammar intentionally partial
 > and make no exact parser/checker claim yet?
+
+## Owner disposition
+
+Recorded on 2026-07-28: **A accepted — Participant-only closure.**
+
+The accepted direction authorizes a later Canon wording package to make
+`Participant` the sole Surface v0 indexed-state keyspace, retain the abstract
+finite-keyspace family in Core, and use the bounded lexical/expression closure
+below. It does not itself amend `spec/01`, `spec/02`, `spec/03`, a scenario, a
+parser, or a checker. Scalar-state/terminal-fallback alignment and the
+unelaborated `return` token are separate decisions in PROPOSAL-015.
+
+Custom keyspaces remain a later extension requiring their own declaration,
+resolution, diagnostics, examples, compatibility analysis, and ordinary Canon
+integration. The accepted direction does not introduce a `keyspace` builtin.
 
 ## Alternatives
 
@@ -133,6 +149,8 @@ Record one of:
 - `B accepted`: authorize a separate custom-keyspace syntax/semantics design;
 - `C deferred`: retain the current partial grammar until a later need; or
 - `return for clarification`, naming the disputed construct.
+
+Recorded output on 2026-07-28: `A accepted`.
 
 For C, reopen when an exact parser/checker claim or a canonical scenario needs
 a non-`Participant` indexed-state keyspace. For B, the owner record must name

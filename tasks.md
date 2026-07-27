@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 04:30 JST
+最終更新: 2026-07-28 05:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -22,14 +22,15 @@ not a permanent narrowing of ADR-0014.
 
 `plan/196-t0-t2-implementation-entry-roadmap.md` is the T0--T2 execution map;
 `plan/197-i1-bootstrap-decision-and-readiness-audit.md` is the current I1
-start audit. Their conclusion is conditional:
+start audit, and Plan 199 is the selected-direction composition plan. Their
+current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
   閉じる候補のADR-0014 eligibility preflightは自走できる。
-- ownerがreserved boundaryを選んだ後も、各packageがADR-0014のstanding
-  predicateとexisting-lane条件を個別に満たす範囲で、次のowner checkpointまでの
-  研究、形式化、反例、bounded validation、review、report、commit/pushは自走できる。
+- P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
+  ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
+  composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
 - current CanonのT2条件だけでは、userが意図するI1 bootstrap/readinessと同義にならない。
 - `spec/06`のC-static entryとphase tableのI1 exit表記を、bootstrap recordなしに
   implementation convenienceで読み替えてはならない。
@@ -67,8 +68,8 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Semantic decision closure | `A` prepares and `O` decides; P013 comparison starts only after M1/M2/MD disposition | Macro 1 early; several decision records |
-| 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and adverse cases exist | Macro 1/5 middle; heavy |
+| 5 | Selected-direction composition | `A/R`; Plan 199 C0--C7 closes countermodels, exact-domain, identity/facet, scalar, and safe-inference boundaries | Macro 1 early; current autonomous research |
+| 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
 | 9 | T1 close | `A` prepares, `O` accepts; SCN finalization, profile pass, exact ledger statuses, exit record | official T2 entry blocker |
@@ -109,13 +110,12 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
-| PROPOSAL-008 | elaboration outcome existence | A/B/C/D | A: separate totality obligation |
-| PROPOSAL-012 | value flow, read receipt, write/admission occurrence | V/R/S/A families | V1/R1/SW1/conditional A2, followed by compatibility review |
-| PROPOSAL-013 | post-admission validation context | M1/M2/MD | owner first selects M1/M2/MD; then test only the selected family against adverse cases |
-| PROPOSAL-004 | exact Surface v0 closure | A/B/C | A Participant-only closure |
-| OPEN-005 / SCN-08 | chain syntax and scalar/indexed scenario reading | select one coherent source/scenario form | settle before G2 statement identity |
-| Surface `return` | exact v0 fragment | specify Core/elaboration; exclude; defer | exclude unless an immediate canonical scenario needs it |
-| Gate/Phase status contract | official exits | map existing status vocabulary and define T1/T2 profiles | required before any exit packet |
+| Plan 199 C0 | elaboration outcome existence | exact well-scoped domain / total diagnostic coverage | P008 A direction is recorded; determine the minimum proof-facing boundary |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | P012 tuple is recorded; reject hidden identity or intermediate mutation |
+| Plan 199 C2 | post-admission validation context | explicit binding/replay/failure classifier alternatives | P013 M1 is recorded; claims remain non-authoritative |
+| Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | P004/P015 directions recorded; no hidden key/default |
+| Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts | reject ambiguous/irreconstructible omission |
+| Gate/Phase status contract | official exits | map existing status vocabulary and define T1/T2/I1 profiles | P016 direction recorded; required before any exit/implementation packet |
 
 ### Not on the explicit current critical path
 
@@ -131,6 +131,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Research must establish | Stop condition |
 | --- | --- | --- |
 | Shared elaboration model | exact input/output, value flow, equality, Diagnostic, request/result relation | any unselected Core/occurrence/contract choice |
+| Ergonomic inference | source omission preserves elaborated authority/failure/history evidence | ambiguity or non-reconstructible semantic fact |
 | Global OBL-020 model | complete step-family coverage, frame/freshness, safe H insertion, owner seriality | opaque predicates or missing rule family |
 | G2 chain model | normalization relation, confluence, lineage/lease/reacquire trace | unresolved grammar/scenario identity |
 | G3 authority model | mutation-to-use/owner-local relation and all lineage claims | validation context or event identity unselected |
@@ -164,6 +165,7 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - Current T0-T2 route: `plan/196-t0-t2-implementation-entry-roadmap.md`.
 - Current I1 decision/readiness audit: `plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
+- Selected-direction composition and inference boundary: `plan/199-selected-semantic-composition-and-inference-boundary.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

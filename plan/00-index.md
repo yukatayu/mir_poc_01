@@ -196,6 +196,8 @@
     `plan/187-mircore-value-flow-and-occurrence-decision-packet.md`
 147. parser-free chain closure integrity correction は
     `plan/188-parser-free-chain-closure-integrity.md`
+148. 選択済み意味論の合成と推論境界は
+    `plan/199-selected-semantic-composition-and-inference-boundary.md`
 
 ## current repo の短い要約
 
