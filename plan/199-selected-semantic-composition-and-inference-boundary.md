@@ -133,16 +133,21 @@ capability、default/terminal evidence を省略してはならない。推論�
 ## 自走する研究順序
 
 ```text
-C0 exact domain
-  -> C1 read/write countermodels, C2 request/replay, C6 scalar terminal
-  -> C3 pending value flow, C4 served-write facets, C5 admission facets
+R0 common Canon-cut re-anchor
+  -> C0-A..D domain/staging/diagnostic/totality split
+  -> C2-A..E equality/identity/binding/replay/persistence split
+  -> C1 candidate families, C6a scalar-cell and C6b terminal-target candidates
+  -> C3 pending value flow and C5 conditional-A2 facet models
+  -> C4a local SW1 facets, then C4b C2/C5/C3 integration
   -> C7 inference/desugaring equivalence matrix
   -> shared Core / Config / Step / WellFormed / elaboration / history model
 ```
 
-前半の独立調査は並行にできるが、共通 carrier を確定したことにしてはならない。各
-research package は ADR-0014 の standing predicate を個別に満たすかを先に確認し、
-必要なら L3 `working/WRK-####` の pre-registration を作る。C0--C7 が新しい
+R0--C7 の詳細な task 境界、candidate-local micro-model と candidate-neutral observation
+record の区別、adverse trace、stop condition は Plan 200 に置く。前半の独立調査は並行に
+できるが、共通 carrier を確定したことにしてはならない。各 research package は
+ADR-0014 の standing predicate を個別に満たすかを先に確認し、必要なら L3
+`working/WRK-####` の pre-registration を作る。C0--C7 が新しい
 Core/judgment/SCN/OBL/Gate/Phase/external contract を必要とした時点で止め、代替・反例・
 non-effects を含む successor proposal に切り替える。
 

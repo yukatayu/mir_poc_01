@@ -789,6 +789,8 @@
   `plan/199-selected-semantic-composition-and-inference-boundary.md`
 - WRK-0027 SCN-08 scalar terminal literal comparison:
   `plan/wrk-0027-scn08-scalar-terminal-correspondence.md`
+- re-anchored semantic composition research plan:
+  `plan/200-reanchored-semantic-composition-research-plan.md`
 
 ## maintenance rule
 

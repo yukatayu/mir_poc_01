@@ -86,6 +86,9 @@ official T2 まで無条件に連続自走することはできません。次�
 - WRK-0027 は、SCN-08 の `room_anchor` / `default_pose` と indexed Surface/Core state
   form の間に明示 correspondence が必要なことを source-bound に記録した。これは
   SCN-08 の invalid 判定でも scalar representation の選択でもない。
+- Oracle の independent review と local source check により、次の自走は common Canon
+  cut の re-anchor、C0/C2 の分割、candidate-local micro-model の比較であると整理した。
+  これは shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
 - production implementation と新しい helper / schema / CI / evidence lane。
@@ -134,6 +137,7 @@ shared formal model、T1 statement、T2 skeleton を長い自走 package とし�
 | T0-T2 dependency plan | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 decision and readiness audit | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | selected semantic composition | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
+| re-anchored composition research | `plan/200-reanchored-semantic-composition-research-plan.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

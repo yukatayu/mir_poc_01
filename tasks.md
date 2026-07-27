@@ -68,7 +68,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R`; WRK-0024 completed the C1 non-implication. WRK-0025/0026 froze on command preconditions, so C0/C2 each need new successor pre-registration. WRK-0027 retained the C6 source boundary: scalar/terminal correspondence is required but not selected. | Macro 1 early; current autonomous research |
+| 5 | Selected-direction composition | `A/R`; Plan 200 first re-anchors current facts to one Canon cut, then splits C0 domain/staging/diagnostics/totality and C2 equality/identity/binding/replay/persistence. WRK-0024/0027 remain bounded evidence; WRK-0025/0026 remain frozen and are never repaired. | Macro 1 early; current autonomous research |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -110,9 +110,9 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
-| Plan 199 C0 | elaboration outcome existence | exact well-scoped domain / total diagnostic coverage | P008 A direction is recorded. WRK-0025 has no semantic result and is frozen; a successor must re-register a correct displayed-vs-candidate inventory |
+| Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | P008 A direction is recorded. WRK-0025 has no semantic result and is frozen; Plan 200 requires a new split inventory that never treats P004 candidate detail as current grammar. |
 | Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient; P012 tuple is recorded; reject hidden identity or intermediate mutation |
-| Plan 199 C2 | post-admission validation context | explicit binding/replay/failure classifier alternatives | P013 M1 is recorded; claims remain non-authoritative. WRK-0026 has no semantic result and is frozen; successor must distinguish request equality/identity/policy |
+| Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | P013 M1 is recorded; claims remain non-authoritative. WRK-0026 has no semantic result and is frozen. Plan 200 treats nominal issuance identity as an advisory candidate, never payload/transport identity, and stops before selecting a carrier. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts | reject ambiguous/irreconstructible omission |
 | Gate/Phase status contract | official exits | map existing status vocabulary and define T1/T2/I1 profiles | P016 direction recorded; required before any exit/implementation packet |

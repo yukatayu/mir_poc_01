@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 05:57 JST
+最終更新: 2026-07-28 06:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; C6 source boundary is retained; all OBL rows `open` | rebase decision if a future pass route is wanted, C0--C7 composition research, T1/T2 profiles, shared formal model | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; C6 source boundary is retained; all OBL rows `open` | common-cut re-anchor, split C0/C2 research, C1/C3--C7 candidate comparison, T1/T2 profiles, shared formal model | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -59,7 +59,8 @@ Current exact blockers:
    Snapshot/evaluation/pending semantics, request/replay identity, served/admission
    facets, scalar candidate comparison, and total domain remain to be bound.
 5. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
-   exists for T1/T2 proof-facing packages.
+   exists for T1/T2 proof-facing packages. Plan 200 orders a common-cut,
+   candidate-local research route; it does not make one shared model accepted.
 6. P016 records bootstrap then C-static formal entry, but Canon has no
    lifecycle profile or phase/conformance reconciliation yet.
 
@@ -156,7 +157,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | Plan 199 C0--C7 tests totality domain, snapshot, request/replay, pending/facets, scalar terminal, and safe inference before a shared model |
+| Research | selected semantic composition | Plan 199/200 split C0/C2, compare C1/C3--C7 at one source cut, and require candidate-neutral observation before a shared model |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -194,6 +195,11 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 06:23 JST: a temporary GPT-5.6 Sol Pro review, checked against
+  current Canon, recommended a common-cut re-anchor and staged C0/C2/C1/C3--C7
+  candidate comparison. Plan 200 records this as LAB execution order only; no
+  grammar, Core, identity carrier, failure family, or shared model was chosen.
 
 - 2026-07-28 06:04 JST: committed/pushed WRK-0027, then ran its registered
   source comparison. SCN-08's scalar `room_anchor` and `default_pose` are not
