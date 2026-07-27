@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 112,
+ "files": 113,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 11644
+   "bytes": 12046
   },
   {
    "id": "root/north-star",
@@ -1603,6 +1603,24 @@
    "open_items": [],
    "path": "working/WRK-0025-surface-totality-domain-inventory.md",
    "bytes": 7079
+  },
+  {
+   "id": "working/WRK-0026",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "spec/05-runtime-semantics",
+    "meta/proposal-012",
+    "meta/proposal-013"
+   ],
+   "summary": "M1 request-local validation claims と既存 authority/history 文言が、同一 claims を持つ二つの request を replay と別個の正当要求に分類する semantic relation を既に供給するかを literal inventory で検査する。request identity、replay policy、Core、runtime は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0026-m1-replay-discrimination-inventory.md",
+   "bytes": 7142
   }
  ]
 }
