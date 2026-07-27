@@ -89,6 +89,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0022 | L3-open, frozen | `[WRITE-CROSS]` の表示済み failure-row 包含節だけを対象にする finite Lean audit は、登録後の bare `lean` command が `samples` module prefix を解決できない first falsifier で凍結。finite premise result、生成関数、Canon derivation、failure-row equality、OBL は結論しない。`working/WRK-0022-write-cross-failure-generation-boundary.md` |
 | WRK-0023 | L3-open, not-promoted | theory/04 の表示済み event-only Consistent(Kc) と `send -> receive` の literal Lean transcription は、既記載 consequence と既存 generic closure kernel の再現である。表示済み定義が channel-state branch を形式化・event membership と交換可能と確立していない境界だけを記録する。checkpoint carrier、checker、OBL は選ばない。`working/WRK-0023-consistent-cut-channel-state-boundary.md` |
 | WRK-0024 | L3-open, not-promoted | SCN-02 の cross-locus read-dependent write において、owner-serial mutation だけでは二つの read reply 後の stale write を排除できないことを最小 non-production countermodel で検査する。snapshot、pending/request identity、Core rule、SCN、OBL は選ばない。`working/WRK-0024-scn02-read-write-snapshot-ambiguity.md` |
+| WRK-0025 | L3-open, not-promoted | P004 A と P015 return exclusion 後も、表示済み Surface grammar の各 parse form が Core 又は明示的 Diagnostic へ分類されるかを literal inventory で検査する。exact domain、grammar、Core、OBL は選ばない。`working/WRK-0025-surface-totality-domain-inventory.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

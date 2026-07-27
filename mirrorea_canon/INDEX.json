@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 111,
+ "files": 112,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 11309
+   "bytes": 11644
   },
   {
    "id": "root/north-star",
@@ -1584,6 +1584,25 @@
    "open_items": [],
    "path": "working/WRK-0024-scn02-read-write-snapshot-ambiguity.md",
    "bytes": 7422
+  },
+  {
+   "id": "working/WRK-0025",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "spec/01-lexical-and-modules",
+    "spec/02-surface-grammar",
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "meta/proposal-004",
+    "meta/proposal-008",
+    "meta/proposal-015"
+   ],
+   "summary": "P004 A と P015 return exclusion 後も、表示済み Surface grammar の全 parse form が Core または明示的 Diagnostic へ一意に分類されるかを literal inventory で検査する。exact domain、grammar、Core、OBL は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0025-surface-totality-domain-inventory.md",
+   "bytes": 6472
   }
  ]
 }
