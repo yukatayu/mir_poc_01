@@ -218,7 +218,7 @@
       <p class="eyebrow">仕様先行研究プロジェクトの案内図</p>
       <h1>Mir / Mirrorea: 全体像と現在地</h1>
       <p class="lead">Mir で「普通に書いた」分散システムの意味から、配置・通信・検証・観測・安全な進化を導くための理論と実装実験です。このページは、将来像、理論、実行済みの実験、公式工程、現在の停止点を混同しないように分けて説明します。</p>
-      <p class="source-cut">対象ソース: base commit <code>f9b9bc8a3cb8fc219df9381def4bb01ee3a64449</code>、Canon tree <code>82c4c1363d37dafbe453a4431f156d107ca6cb51</code>。status semantics は <code>docs/project-status.md</code> / <code>progress.md</code> / <code>tasks.md</code> の 2026-07-25 01:50 JST 版と、<code>samples_progress.md</code> の 2026-07-22 14:55 JST 版から読み、この publication package は入口リンクと作業ログだけを後続更新します。規範判断は <a href="../mirrorea_canon/README.md">mirrorea_canon/</a> のみが持ち、この HTML 自身は後続 commit に含まれる LAB の説明ビューです。</p>
+      <p class="source-cut">対象ソース: base commit <code>91f64b5f5d4443bc37b1699d301e5bdfd1a51510</code>、Canon tree <code>82c4c1363d37dafbe453a4431f156d107ca6cb51</code>。status semantics は <code>docs/project-status.md</code> / <code>progress.md</code> / <code>tasks.md</code> の 2026-07-27 19:38 JST 版と、<code>samples_progress.md</code> の current snapshot から読みます。規範判断は <a href="../mirrorea_canon/README.md">mirrorea_canon/</a> のみが持ち、この HTML は後続 commit に含まれる LAB の説明ビューです。</p>
       <div class="legend" aria-label="読み分けの凡例">
         <span class="tag canon">Canon: 唯一の規範ソース。settled / working / open は各 status に従う</span>
         <span class="tag lab">LAB: 非規範の実装・実験・証拠・履歴・運用 view</span>
@@ -320,7 +320,7 @@
               <th scope="row">公式に「動く」範囲</th>
               <td class="current">何も動かない。正しい判断の土台。</td>
               <td class="future-phase">紙と Lean statement。</td>
-              <td class="future-phase">Lean 上で核が回る。</td>
+              <td class="future-phase">proof skeleton / statement が揃う。exact evidence class と proof discharge は別。</td>
               <td class="future-phase">言語に触れ、全 10 SCN を単一 process で検証。</td>
               <td class="future-phase">一人で遊べる local toy world。</td>
               <td class="future-phase">LAN で二人が遊べる最初の real distributed execution。</td>
@@ -344,10 +344,11 @@
         <div class="gate-step"><strong>G7 hot-plug</strong><span>patch、Activation cut、admission frontier への束縛。</span></div>
       </div>
       <p class="callout"><strong>重要:</strong> I1〜I6 の箱は未来の公式到達条件です。LAB の実験が似た操作を行っていても、Canon の carrier、全 scenario 適合、実 transport、proof、公開 API を満たしたとは限りません。</p>
+      <p class="callout"><strong>T2 と I1 の境界:</strong> 現行 Canon T2 は OBL-020 / 021 / 002 の proof skeleton と G5 statement 群だけを明記しており、全十 SCN の I1 実装入口を自動的には保証しません。T2 exit を I1 authorization と結ぶ場合だけ、all-SCN / G0-G7 の statement-level readiness と OBL-003 / 027 の evidence class を追加する必要があります。狭い T2 は独立に閉じ、I1 readiness を後続 owner record に残せます。</p>
       <div class="milestones">
-        <article class="milestone current"><h3>公式現在地（Canon）: T0</h3><p>LAB 派生の運用読みは T0 / G0 rebaseline。G0 exit と T1 entry は未成立です。root literal 修正と fresh validation の後も、valid <code>pass</code> は必要証拠にすぎません。人間が exact digest を受理し、Canon に exit record を記録して初めて移行します。G0-D3 は明示的な owner reopen まで DEFERRED / dormant です。</p></article>
+        <article class="milestone current"><h3>公式現在地（Canon）: T0</h3><p>LAB 派生の運用読みは T0 / G0 rebaseline。G0 exit と T1 entry は未成立です。root literal 修正と fresh validation の後も、valid <code>pass</code> は必要証拠にすぎません。G0-D3 は exact digest に対する別の owner acceptance と Canon exit record まで defer されています。</p></article>
         <article class="milestone"><h3>次の公式 Phase: T1</h3><p>G1 exit、G2 / G3 の statement 群、SCN 期待の最終化。現在の proof ledger は全28件 open のままです。</p></article>
-        <article class="milestone"><h3>その次の公式 Phase: T2</h3><p>OBL-020 / 021 / 002 の proof skeleton と G5 statement 群。未解決なのは現在の proof status ではなく、将来の Gate wording と ledger status literal の対応です。</p></article>
+        <article class="milestone"><h3>その次の公式 Phase: T2</h3><p>OBL-020 / 021 / 002 の proof skeleton と G5 statement 群。proof skeleton と ledger status の対応、T2 phase profile、G4 / G6 / G7 と I1 entry の関係は未定義です。</p></article>
         <article class="milestone"><h3>利用者に見える到達: I1〜I6</h3><p>I1 は全10 SCN の単一 process 実行、I2 は一人用 toy world、I3 は最初の real distributed execution、I4 は再起動可能な world、I5 は browser View demo、I6 は招待制の常設小世界です。</p></article>
       </div>
     </div></section>
@@ -375,7 +376,7 @@
       <div class="gate-grid" aria-label="理論 gate">
         <article class="gate current-gate"><strong>G0 軸と語彙</strong><span>ADR-0001 / 0002 / 0005 / 0009 / 0012、GLOSSARY、LAB 格下げ。T0 exit に必要な最初の Gate。</span></article>
         <article class="gate"><strong>G1 通常の代入</strong><span>theory/01 / 03 が SCN-01 / 02 を説明し、OBL-001 statement と OBL-020 / 021 を完了。</span></article>
-        <article class="gate"><strong>G2 存在と fallback</strong><span>theory/06 が SCN-08 を説明し、OBL-005..008 statement と OPEN-005 を解消。</span></article>
+        <article class="gate"><strong>G2 存在と fallback</strong><span>Canon wording は OBL-005..008 statement。OBL-008 は ledger 上 proof なので、required status / artifact の対応が未解決。</span></article>
         <article class="gate"><strong>G3 権限</strong><span>theory/05 が SCN-03 / 04 を説明し、OBL-015 statement を用意。</span></article>
         <article class="gate"><strong>G4 効果と観測</strong><span>theory/07 が SCN-07 を説明し、OBL-017 statement と label 語彙初版を用意。</span></article>
         <article class="gate"><strong>G5 cut と保存</strong><span>theory/04 が SCN-10 を説明し、OBL-009..014 statement を用意。</span></article>
@@ -395,8 +396,9 @@
         <table class="decision-table">
           <caption>現在の判断・記録状態と、その判断が許す後続作業</caption>
           <thead><tr><th scope="col">問い / 状態</th><th scope="col">何に影響するか</th><th scope="col">候補・現在の見解</th><th scope="col">進められる範囲</th></tr></thead><tbody>
-            <tr><th scope="row">G0-D3: DEFERRED / dormant</th><td>G0 exit と公式 T1 entry。</td><td>owner が明示的に reopen するまで solicit しない。</td><td class="hold">T0 literal correction だけでは reopen しない。</td></tr>
+            <tr><th scope="row">G0-D3: deferred</th><td>G0 exit と公式 T1 entry。</td><td>fresh artifact の exact digest を owner が accept するか、defer を継続する。</td><td class="hold">T0 literal correction や passing artifact だけでは exit しない。</td></tr>
             <tr><th scope="row">T0 の root result literal</th><td><code>pass</code> と <code>derived-pass</code> が同じ artifact に要求され、既存 evidence を完全適合と扱えない。</td><td class="recommendation"><strong>LAB 推奨: <code>pass</code> に統一。</strong>prose、checks、derivation、exit 文、既存 artifact と整合する。</td><td>owner / Canon correction、fresh validation、exact digest の人間受理、Canon exit record を順に行う。</td></tr>
+            <tr><th scope="row">T2 と I1-entry readiness</th><td>現行 T2 criterion だけでは、I1 の全十 SCN に必要な theory interface が固定されたか判定できない。</td><td class="recommendation"><strong>LAB 推奨: 両者を結ぶ場合だけ T2 profile に all-SCN / G0-G7 criterion を追加。</strong>狭い T2 は独立に閉じられる。</td><td class="hold">integrated route は OBL-003 / 027 の evidence class も T2 前に記録。narrow route は I1 readiness を後続 owner record に残す。</td></tr>
             <tr><th scope="row">PROPOSAL-009: option A recorded</th><td>OBL-001 が既存 Core <code>c</code> の every-write 条件を直接述べられるか。</td><td>A は記録済み。ただし direct-Core object / literal mapping、non-duplicate falsifier、binary consumer がない。</td><td class="hold">proof package は未選定。Result と Canon Core を同一視しない。</td></tr>
             <tr><th scope="row">V: read-to-write value flow</th><td>remote read の値を後続 write の右辺へ渡す意味。</td><td>限定 result binding、明示 relation、defer。LAB recommendation はあるが未採択。</td><td class="hold">選択後に値フローだけを限定設計・形式化。</td></tr>
             <tr><th scope="row">R: successful read receipt</th><td>read 成功と値受領をどの occurrence で表すか。</td><td>明示 receipt、既存 occurrence への位置づけ、defer。</td><td class="hold">V や S との順序・互換性は別途示す。</td></tr>
@@ -419,7 +421,7 @@
           </tbody>
         </table>
       </div>
-      <div class="columns"><article class="rule"><h3>現在、自律的にできること</h3><p>既存の非予約レーンで、明確な仮説・falsifier・利用先を持つ限定研究を行い、LAB evidence として残すことです。ただし現行 source cut では、新規で非重複の候補は選定されていません。</p></article><article class="rule"><h3>現在、勝手にしてはいけないこと</h3><p>Core carrier、transport / wire、event identity、OBL status、Gate / Phase、公開 API を実験の都合で確定することです。未決事項は未決のまま可視化します。</p></article></div>
+      <div class="columns"><article class="rule"><h3>現在、自律的にできること</h3><p>既存の非予約レーンで、明確な仮説・falsifier・利用先を持つ限定研究を LAB evidence として進められます。直前の source-cut screen は候補を選びませんでしたが、これは永久禁止ではありません。literal transcription / conditional lemma の候補は、その時点の ADR-0014 eligibility を再審査します。</p></article><article class="rule"><h3>現在、勝手にしてはいけないこと</h3><p>Core carrier、transport / wire、event identity、OBL status、Gate / Phase、公開 API を実験の都合で確定することです。未決事項は未決のまま可視化します。</p></article></div>
     </div></section>
     <section id="sources"><div class="container">
       <p class="eyebrow">06 / 根拠と読み方</p><h2>この図の読み方と、詳細へ進む入口</h2>
@@ -454,11 +456,12 @@
         <li><strong>[Canon]</strong> <a href="../mirrorea_canon/plan/00-gates.md">plan/00-gates.md</a>: G0〜G7 の exit 条件。</li>
         <li><strong>[Canon]</strong> <a href="../mirrorea_canon/plan/01-phases.md">plan/01-phases.md</a>: T0〜T2 / I1〜I6 と唯一の公式実装状態。</li>
         <li><strong>[LAB]</strong> <a href="project-status.md">docs/project-status.md</a>: 現在の派生 view。</li>
+        <li><strong>[LAB]</strong> <a href="../plan/196-t0-t2-implementation-entry-roadmap.md">Plan 196</a>: T0 から T2 / I1 入口までの依存 DAG、owner checkpoint、自走 package。</li>
         <li><strong>[LAB]</strong> <a href="../plan/whole-theory-foundation-audit-20260725.md">whole-theory foundation audit</a>: 現在の整合性修正・判断経路。</li>
         <li><strong>[LAB]</strong> <a href="diagrams/project-overview.mmd">Mermaid source</a>: completion を表さない責務・dataflow 図。</li>
       </ul>
     </div></section>
   </main>
-  <footer><div class="container"><p>このページは base commit <code>f9b9bc8a</code> / Canon tree <code>82c4c136</code> の source cut を説明します。Canon を変更せず、LAB の実行証拠を正本の Phase 達成と混同しないための reader-facing map です。</p></div></footer>
+  <footer><div class="container"><p>このページは base commit <code>91f64b5f</code> / Canon tree <code>82c4c136</code> を基準にした LAB reader view です。Canon を変更せず、LAB の実行証拠を正本の Phase 達成と混同しません。</p></div></footer>
 </body>
 </html>

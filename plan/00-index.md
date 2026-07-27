@@ -755,6 +755,8 @@
   `plan/194-product-alpha1-installed-binary-replay-evidence.md`
 - post-PROPOSAL-013 autonomous frontier delta audit:
   `plan/195-post-proposal013-autonomous-frontier-delta-audit.md`
+- T0 から T2 / I1 入口までの条件付き自走ロードマップ:
+  `plan/196-t0-t2-implementation-entry-roadmap.md`
 - WRK-0023 consistent-cut channel-state literal transcription:
   `plan/wrk-0023-consistent-cut-channel-state-boundary.md`
 - post-WRK-0023 literal-boundary review:

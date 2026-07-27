@@ -281,6 +281,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/193-post-admission-validation-context-literature-and-counterexample-memo.md",
         "plan/194-product-alpha1-installed-binary-replay-evidence.md",
         "plan/195-post-proposal013-autonomous-frontier-delta-audit.md",
+        "plan/196-t0-t2-implementation-entry-roadmap.md",
     ],
     "scripts": [
         "scripts",
