@@ -1620,7 +1620,7 @@
    "summary": "M1 request-local validation claims と既存 authority/history 文言が、同一 claims を持つ二つの request を replay と別個の正当要求に分類する semantic relation を既に供給するかを literal inventory で検査する。request identity、replay policy、Core、runtime は選ばない。",
    "open_items": [],
    "path": "working/WRK-0026-m1-replay-discrimination-inventory.md",
-   "bytes": 7142
+   "bytes": 7819
   }
  ]
 }

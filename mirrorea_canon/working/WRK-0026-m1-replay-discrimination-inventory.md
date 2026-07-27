@@ -64,14 +64,24 @@ Gate/Phase, conformance, runtime, transport, API, or public behavior.
 
 ## Results and review
 
-Reliance status: not-promoted
-Positive evidence: Pending registration and the registered commands.
-Negative evidence: Pending registration and the registered commands.
+Reliance status: frozen
+Positive evidence: The registration was committed and pushed at
+`37ab87d1034985ae5474630b13afcb9f0efc2501`; the registered `rg` source audit
+ran and confirmed the displayed request, queue, authority, lifecycle, and
+proposal anchors.
+Negative evidence: The registered required-token Python audit failed before any
+inventory conclusion because it required the contiguous text
+`copied/replayed requests` in P013. That source instead says the package must
+reject `copied/replayed, stale, wrong-target, ... requests`; no such contiguous
+token exists. This pre-registered command failure is the first falsifier. It
+does not establish that M1 does or does not supply replay discrimination, and
+this record must not be repaired or rerun.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: Until an outcome is retained, this record only fixes a
-read-only replay-discrimination question. It does not equate claim equality
-with request identity or treat transport delivery as authority.
+Impact / non-effects: This record is frozen and supplies no replay inventory
+result. It neither equates claim equality with request identity nor treats
+transport delivery as authority, and it does not authorize a corrected command.
+Any successor must have a new pre-registration, alternative, and falsifier.
 Independent review: not-required-for-L3
 
 ## Supersession
