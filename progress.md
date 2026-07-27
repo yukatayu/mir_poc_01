@@ -38,15 +38,16 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; all OBL rows `open` | control-drift owner decision, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; control drift is scoped-audited as governance-only; all OBL rows `open` | rebase decision if a future pass route is wanted, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; final Surface closure unresolved | PROPOSAL-004, OPEN-005, `return`, SCN-08 reconciliation | owner specification required |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | owner-selected I1 authorization route, exact target fragment, and C-static timing | later dependency |
 
 Current exact blockers:
 
 1. The v2 artifact derives `fail` because the fixed source-hierarchy control
-   and three fixed LAB notice controls drifted; O0 did not authorize rebase or
-   a retry.
+   and three fixed LAB notice controls drifted. The scoped audit finds
+   governance/readability changes only; O0 still did not authorize rebase or a
+   retry.
 2. G0-D3 remains deferred and cannot consume the v2 `fail`; no G0 exit / T1
    entry record exists.
 3. T1/T2 lack canonical phase profiles.
@@ -147,7 +148,7 @@ durable save/load, or public product completion is claimed.
 
 | Kind | Item | Current handling |
 | --- | --- | --- |
-| Owner / Canon | fixed-control drift | decide whether to retain pins/defer, scope an audit, or start a normal rebase proposal; no silent rebase or retry |
+| Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | define profiles, Gate-to-ledger mapping, proof-skeleton evidence class, narrow T2 vs I1 readiness, bootstrap/C-static relation |
 | Owner / Canon | PROPOSAL-008/012/013 | decide totality, V/R/S/A, and request-validation context |
@@ -187,6 +188,10 @@ durable save/load, or public product completion is claimed.
 
 ## recent log
 
+- 2026-07-28 05:13 JST: audited the four v2 fixed-control mismatches against
+  the accepted evidence cut. They are intentional source-hierarchy and agent/
+  reader governance changes, not Mir semantics, SCN, OBL, Gate, or Phase drift.
+  No pin was rebased, artifact regenerated, or lifecycle claim advanced.
 - 2026-07-28 04:30 JST: independently reviewed the post-v2 autonomous theory
   frontier with GPT-5.6 Sol Pro. The v2 `fail` is fixed-control document drift
   only; after candidate-specific comparison, no new ADR-0014 L3 record was

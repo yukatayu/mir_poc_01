@@ -48,6 +48,28 @@ another artifact is a new owner/Canon decision. It is not implied by O0, this
 note, or the failed result. ADR-0013 permits a concrete drift to reopen a
 separately scoped audit, but does not reopen one automatically.
 
+## Scoped drift audit (2026-07-28)
+
+The owner selected the recommended first step: audit the drift before any
+proposal to re-pin controls. The audit compared the four mismatching blobs at
+the accepted evidence cut `6f96ce17e74173ca5d86ed76cee3db75d60dcbfe` with
+the version-2 source cut `0ee3fdec553de31252a37478fc4a31f507221258`.
+
+| Control | Change class | Audit result |
+| --- | --- | --- |
+| `meta/source-hierarchy` | Canon process wording | Adds ADR-0014's bounded working-theory route while retaining `canon > LAB`; it neither changes Mir semantics nor promotes LAB evidence. |
+| `CANON.md` | LAB entry-point wording | Points readers to the same bounded route and its reserved boundaries; it introduces no competing authority source. |
+| `README.md` | LAB reader/operational guidance | Adds a project overview link and describes the existing research-governance boundary; it does not amend a Canon claim. |
+| `AGENTS.md` | agent operating guidance | Corrects Oracle wrapper preference and spells out existing ADR-0014 limits; it does not grant agents a reserved edit. |
+
+The four changes are intentional governance/readability drift, not a change to
+the accepted substantive ADR set, MirCore, an SCN expectation, an OBL, a Gate,
+or a Phase. The audit therefore finds no semantic reinterpretation to correct.
+It does **not** re-pin a control, create another artifact, change the root
+result, or make G0-D3 acceptance available. A normal Canon rebase proposal
+remains a separately recordable owner decision if a future valid `pass` route
+is desired.
+
 ## Non-claims
 
 No G0-D3 acceptance, G0 exit, T1 entry, I1 authorization, SCN conformance,

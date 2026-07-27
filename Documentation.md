@@ -87,7 +87,7 @@ owner 判断前でも、既存 Canon の literal transcription 又は conditiona
 
 | 段階 | 主眼 | 現在の扱い |
 | --- | --- | --- |
-| T0 | 語彙・decision・G0 | current。v2 evaluation は `fail`。control rebase 等の新 owner decision と、その後の G0-D3 が必要 |
+| T0 | 語彙・decision・G0 | current。v2 evaluation は `fail`。4 control は統治文書 drift と監査済みだが、rebase/retry は未承認。将来の rebase decision と、その後の G0-D3 が必要 |
 | T1 | 計算体系・G1-G3 statement | no official entry。semantic disposition と shared model 後に自走 |
 | T2 | OBL-020/021/002 skeleton・G5 statement | later。profile と proof-skeleton evidence class が未定義 |
 | I1 | 単一 process reference implementation | T2 と all-SCN/G0-G7 readiness の関係を先に固定 |

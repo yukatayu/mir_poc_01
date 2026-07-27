@@ -37,7 +37,8 @@ start audit. Their conclusion is conditional:
 Immediate blocker:
 
 1. v2 profile の唯一の artifact は valid `fail`。fixed source-hierarchy と三つの
-   LAB notice control が historical pin と一致せず、O0 は rebase / retry を許可していない。
+   LAB notice control は historical pin と一致しないが、scoped audit は統治文書 drift
+   のみと確認した。O0 は rebase / retry を許可していない。
 2. G0-D3 は explicit defer のままであり、current `fail` は T0 exit evidence にならない。
 
 Sources: `mirrorea_canon/plan/01-phases.md`,
@@ -63,7 +64,7 @@ review。
 | 0 | T0-T2 planning audit | `A/R`; closed when Plan 196 and snapshots agree with Canon | Macro 0/1 checkpoint; completed baseline |
 | 0A | Conservative statement preflight | `A/R`; assess every genuinely new literal/conditional candidate against ADR-0014. Fresh evidence and Plan 195 patterns are strong LAB selection signals, but do not replace the Canon predicate. | Macro 1/5 early; autonomous screening, no official movement |
 | 1 | T0 profile v2 and fresh evaluation | `O` accepted; `A/R` completed one direct-child artifact. It is valid `fail`, not a lifecycle result | Macro 0/1 complete; no retry authorized |
-| 2 | Fixed-control drift disposition | `O`; retain/defer, separately scope drift, or start normal Canon rebase proposal | Macro 0/1 current blocker |
+| 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
 | 5 | Semantic decision closure | `A` prepares and `O` decides; P013 comparison starts only after M1/M2/MD disposition | Macro 1 early; several decision records |
@@ -100,7 +101,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
-| fixed-control drift | whether a new v2 `pass` route can exist | retain/defer; scoped audit; normal Canon rebase proposal | no silent rebase; O0's one artifact is consumed |
+| fixed-control drift | whether a new v2 `pass` route can exist | retain/defer; normal Canon rebase proposal | scoped audit found governance-only drift; no silent rebase; O0's one artifact is consumed |
 | G0-D3 | official T1 entry | accept a future valid `pass` digest; continue defer | current v2 `fail` is not eligible |
 | T2 / I1 relation | narrow T2 or integrated I1 readiness; bootstrap/C-static timing | narrow T2; integrated profile; phase-contract amendment | if narrow route is selected, separate readiness/authorization; C-static is formal entry and remains I1-exit evidence |
 

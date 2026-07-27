@@ -37,7 +37,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | --- | --- | --- |
 | Canon lifecycle | official `T0`。G0 exit / T1 entry record はない | L0/L1 の方向、語彙、境界の正本を読める |
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
-| T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail` | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる |
+| T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
 | semantic kernel | project axis と主要 invariant は固定。outcome totality、value/receipt/service/admission identity、request validation context、grammar/scenario closure は未選択 | owner decision 後に shared formal model を作る順序を定義済み |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
@@ -70,8 +70,9 @@ phase-table readingを、Canon で整合化する必要があります。
 official T2 まで無条件に連続自走することはできません。次は owner / Canon action
 なしに変更できません。
 
-- Fixed control drift の扱い（pin を維持する、scope を監査する、又は normal Canon
-  process で rebase を提案するか）。O0 は rebase / retry を許可していない。
+- Fixed control drift は scoped audit 済みで、意味論や SCN を変えない統治文書 drift
+  と確認した。pin 維持又は normal Canon process による rebase proposal はなお別の
+  owner action であり、O0 は rebase / retry を許可していない。
 - valid `pass` evidence がない状態での G0-D3 / T0 exit。現在の v2 `fail` は受理対象に
   ならない。
 - T1/T2 profile、Gate criterion と ledger status の対応、T2 と I1 entry の関係。
@@ -93,7 +94,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 
 | 順序 | 判断 | 主な候補 | LAB の推奨 |
 | --- | --- | --- | --- |
-| 1 | fixed-control drift | pin 維持 / scoped audit / normal Canon rebase proposal | **silent rebase はしない**。O0 の外側の owner/Canon decision として扱う |
+| 1 | fixed-control drift | pin 維持 / normal Canon rebase proposal | scoped audit は完了。**silent rebase はしない**。rebase は O0 の外側の owner/Canon decision として扱う |
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | 狭い T2 + 別 I1 readiness / T2 統合 / phase-contract amendment | 狭い route なら別 readiness record。C-static は formal entry とし、I1 exit evidence から外さない |
 | 4 | outcome semantics | PROPOSAL-008 A/B/C/D | totality を determinism と別 obligation にする |
@@ -101,8 +102,9 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 6 | request validation | PROPOSAL-013 M1/M2/MD | owner が先に M1/M2/MD を選び、後続 package で選択済み family だけを adverse cases に照らす |
 | 7 | Surface / SCN closure | PROPOSAL-004、OPEN-005、`return`、SCN-08 | Participant-only と scalar terminal fallback を明示し、`return` は v0 exact fragment から明示除外 |
 
-O0 の 1/2 は完了したが、artifact は valid `fail` であるため G0-D3 へ進めません。
-次に必要なのは fixed-control drift の扱いに関する新しい owner/Canon decision です。
+O0 と drift の scoped audit は完了したが、artifact は valid `fail` であるため
+G0-D3 へ進めません。将来 `pass` route を作るには pin 維持又は normal Canon rebase
+proposal の owner/Canon decision が別途必要です。
 3-7 は decision
 packet をまとめて検討でき、その後の shared formal model、T1 statement、T2
 skeleton は長い自走 package にできます。
