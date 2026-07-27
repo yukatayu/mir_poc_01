@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 03:51 JST
+最終更新: 2026-07-28 04:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -84,8 +84,10 @@ official T2 まで無条件に連続自走することはできません。次�
 
 owner 判断前でも、既存 Canon の literal transcription 又は conditional lemma だけで
 閉じる候補を ADR-0014 に照らして再審査できます。既存 lane、非重複の利用先、正負
-branch、reserved-boundary exclusion が全て通る候補だけを L3 LAB evidence として
-進めます。これは official lifecycle を進めません。
+branch は保守的な LAB 選別規律であり、ADR-0014 の standing predicate を狭める
+追加の Canon 条件ではありません。predicate と reserved-boundary exclusion を満たす
+真に新規な candidate は個別に L3 preflight できます。これは official lifecycle
+を進めません。
 
 ## オーナーの確認・判断待ち
 

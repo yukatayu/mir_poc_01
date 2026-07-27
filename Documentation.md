@@ -79,8 +79,9 @@ owner action のままです。
 
 owner 判断前でも、既存 Canon の literal transcription 又は conditional lemma だけで
 閉じる候補は ADR-0014 の standing predicate を再審査できます。既存 lane、
-非重複の利用先、falsifier、reserved-boundary exclusion が揃う候補だけを L3 LAB
-evidence として進め、official status とは区別します。
+非重複の利用先、falsifier は保守的な LAB 選別規律であり、standing predicate を
+狭める追加の Canon 条件ではありません。predicate と reserved-boundary exclusion を
+満たす真に新規な candidate は個別に検討し、official status とは区別します。
 
 ## Roadmap の読み方
 
