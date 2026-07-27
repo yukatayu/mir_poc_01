@@ -51,16 +51,23 @@ literal source だけでは決まらない場合である。その場合は down
 
 ### C0 - Four separate front-end questions
 
-| Package | Narrow question | Stop condition |
-| --- | --- | --- |
-| C0-A source authority | current lexical/grammar/static source と selected-direction detail をどう分類するか | prose を新 EBNF に翻訳する必要がある |
-| C0-B domain staging | lexical、parse、static、`WellScoped` elaboration の domain を非循環に分けられるか | `WellScoped` を elaboration success で定義する |
-| C0-C diagnostic abstraction | 各 claimed stage の reject に existing Diagnostic abstraction/family があるか | new code/family、raw source totality、implementation exception が必要になる |
-| C0-D totality shape | 同一 domain 上で outcome existence と coherence を別 statement にできるか | OBL identity、final equality、Diagnostic ABI を選ぶ必要がある |
+| Package | Disposition | Narrow question | Stop / reopen condition |
+| --- | --- | --- | --- |
+| C0-A source authority | `complete-by-R0` at the pinned R0 cut | current lexical/grammar/static source と selected-direction detail を source-local にどう分類するか | R0 が pre-enumerated span を literal に分類済み。Canon cut、source span、又は authority wording が変わるか、source 間の precedence/reconciliation が必要なら別 record で reopen する |
+| C0-B domain staging | next candidate | lexical、parse、static、`WellScoped` elaboration の domain を非循環に分けられるか | `WellScoped` を elaboration success で定義する |
+| C0-C diagnostic abstraction | queued | 各 claimed stage の reject に existing Diagnostic abstraction/family があるか | new code/family、raw source totality、implementation exception が必要になる |
+| C0-D totality shape | queued | 同一 domain 上で outcome existence と coherence を別 statement にできるか | OBL identity、final equality、Diagnostic ABI を選ぶ必要がある |
 
 P008 A は totality を determinism から分離する direction であり、exact domain 又は
 diagnostic-code completeness を既に決めたものではない。C0 は P004 candidate の
 `CallArgs`、P015 の future `return` rejection を present Canon fact として扱わない。
+
+R0 の `complete-by-R0` は provenance の完了であり、C0 の semantic domain、accepted/
+rejected item、`WellScoped` predicate、elaboration outcome、Diagnostic assignment を決めない。
+従って次の独立 package は C0-B である。C0-B は lexical domain、parse domain、
+surface-static domain、BND-001 `WellScoped` input domain という四つの opaque role の
+dependency shape だけを conditional lemma として検査する。四 role の具体的 member、
+parser/checker、accept/reject、outcome relation、Diagnostic family、Core/judgment は導入しない。
 
 ### C2 - Five separate identity questions
 
@@ -151,7 +158,9 @@ fresh identity は source omission の推論ではなく、明示的に生成・
 
 ## Immediate next autonomous package
 
-R0 common-cut fact manifest を ADR-0014 standing eligibility と existing LAB lane に照らして
-pre-register する。manifest は source authority と research boundary だけを固定し、
-grammar/Core/diagnostic/replay/scalar policy を選ばない。R0 の結果を受けて C0-A と C2-A を
-別 record にするか、reserved-boundary stop を report する。
+R0 が C0-A と同じ current-cut/source-authority span を既に source-local に分類したため、
+C0-A を重複して pre-register しない。次は C0-B domain staging を ADR-0014 standing
+eligibility と existing LAB lane に照らして pre-register する。conditional lemma は四つの
+opaque domain role の acyclic dependency skeleton だけを固定し、grammar/Core/`WellScoped`
+definition/elaboration outcome/Diagnostic/replay/scalar policy を選ばない。C2-A はその後も
+独立した candidate として残る。

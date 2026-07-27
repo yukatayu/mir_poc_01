@@ -71,9 +71,12 @@ WRK-0025 は source inventory を実行する前に、登録済みの required-t
 P004 の候補 EBNF の非終端であり、displayed `spec/02` は postfix `call` を prose で
 列挙する。この失敗は「call が unclassified」又は「C0 は不要」という結果ではない。
 
-したがって C0 は未着手のままである。再開するなら、別番号の pre-registration で
-displayed grammar と P004 candidate grammar を明示的に分け、token assertion 自体の
-alternative/falsifier を再登録する。凍結 record を修理又は再実行してはならない。
+したがって C0 の semantic domain / outcome question は未着手のままである。current-cut の
+source authority subquestion は後続 WRK-0028 が literal に完了したため、C0-A を重複して
+再登録しない。次は C0-B として、displayed grammar、static source、BND-001 `WellScoped`
+input の四つの opaque domain role が elaboration success や Diagnostic を定義せずに非循環
+dependency skeleton を持てるかだけを pre-register する。凍結 record を修理又は再実行しては
+ならない。
 
 ### C2 の登録済み falsifier（WRK-0026）
 
@@ -134,7 +137,7 @@ capability、default/terminal evidence を省略してはならない。推論�
 
 ```text
 R0 common Canon-cut re-anchor
-  -> C0-A..D domain/staging/diagnostic/totality split
+  -> C0-A complete-by-R0, then C0-B..D domain/staging/diagnostic/totality split
   -> C2-A..E equality/identity/binding/replay/persistence split
   -> C1 candidate families, C6a scalar-cell and C6b terminal-target candidates
   -> C3 pending value flow and C5 conditional-A2 facet models
@@ -169,10 +172,11 @@ non-effects を含む successor proposal に切り替える。
 
 ## 次の成果物
 
-最初の自走 package は C0--C2/C6 の source-anchor と countermodel matrix である。
-そこでは候補を比較しても Canon rule を改訂せず、各行について「決定済み事実」「必要な
-追加表現」「falsifier」「既存 invariant への影響なし」を記録する。C3--C7 と実装は、
-その matrix が共通 carrier の最小性を支持してから扱う。
+R0 により source-anchor は current cut に固定された。次の最小自走 package は C0-B の
+four-role domain-staging conditional lemma である。そこでは候補を比較しても Canon rule を
+改訂せず、各行について「決定済み事実」「必要な追加表現」「falsifier」「既存 invariant
+への影響なし」を記録する。C2-A、C3--C7 と実装は、その matrix が共通 carrier の最小性を
+支持してから扱う。
 
 ## Non-claims
 
