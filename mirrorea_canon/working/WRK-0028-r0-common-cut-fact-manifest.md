@@ -78,13 +78,24 @@ machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending post-registration execution.
-Negative evidence: Pending post-registration execution.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: Pending post-registration execution. Any retained result
-is only a provenance aid for later source-local research and has no semantic or
-operational effect.
+Positive evidence: After registration
+`b1ef315040bc37f499526b70d18de7b7bcb60983` was pushed, the registered
+pre-source marker and all 13 source-existence checks passed. Every registered
+SHA-256 matched the pinned authority anchors. `make docs` passed with Canon
+index 115/115, source hierarchy 750/750, and 1608 numbered reports. The
+retained manifest classifies each pre-enumerated C0/C2 span source-locally and
+preserves its stated qualifier/non-effect.
+Negative evidence: No registered falsifier occurred. No row required a
+precedence rule, semantic reconciliation, synthesized proposition, new schema,
+helper, validator, CI/Make surface, or reserved decision. This is only a fact
+about the listed spans at the pinned cut; it does not show that C0/C2 compose.
+Evidence artifacts: LAB:plan/wrk-0028-r0-common-cut-fact-manifest.md@2b4a89801b3d30442426926d6aff96b1d709874a:23c7668615d35f8ee82c85db8f5e73f779badeb7db57f7b94990c63a3bc8e478
+Evidence commits: 2b4a89801b3d30442426926d6aff96b1d709874a
+Impact / non-effects: The retained manifest is a provenance aid only. It
+distinguishes current source wording from bounded proposal directions so later
+records can pin their own source-local questions. It selects no C0 domain,
+Diagnostic abstraction, equality/identity/replay carrier, scalar form, shared
+model, theory/11 status, Gate/Phase, implementation, or public behavior.
 Independent review: not-required-for-L3
 
 ## Supersession
