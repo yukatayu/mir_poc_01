@@ -17,7 +17,8 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 規範正本の構造 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
-| T0 から T2 / I1 入口までの依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
+| T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
+| I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -58,6 +59,8 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 - T1/T2 には canonical phase-exit JSON profile がありません。
 - 現行 T2 criterion は OBL-020/021/002 proof skeleton と G5 statement 群です。
   これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。
+- `spec/06` は C-static 10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、
+  phase table は両方を I1 exit に置いています。bootstrap の定義と整合化が必要です。
 - outcome totality、read value/receipt、served-write/admission occurrence、
   post-admission validation context、Surface/SCN closure は owner decision が必要です。
 - Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
@@ -91,18 +94,21 @@ evidence として進め、official status とは区別します。
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
-T2 exit を「理論を固めて I1 実装に入る authorization」と結ぶなら、T2 profile に
-all-SCN / G0-G7 statement-level readiness と OBL-003/027 の evidence class を追加する
-のが LAB の推奨です。狭い T2 は独立に閉じられ、I1 の対象 fragment と readiness は
-T2 後の別 owner record に残せます。
+I1 実装を始める文脈での LAB 推奨は、owner が narrow T2 route を選ぶ場合に、その
+直後へ all-SCN / G0-G7 statement-level readiness、OBL-003/027 の evidence class、
+C-static の位置、範囲付き production authorization を bind する別 I1-readiness record
+を置くことです。統合 route と phase-contract amendment は未選択の代替であり、これは
+Canon 判断ではありません。
 
 ## 作業の管理
 
 - `docs/project-status.md`: 人間向け現在地、停止線、判断待ち。
 - `progress.md`: 三軸、macro phase、feature maturity、recent log。
 - `tasks.md`: 自走 package、research discovery、owner decision。
-- `plan/196-t0-t2-implementation-entry-roadmap.md`: current dependency DAG と
+- `plan/196-t0-t2-implementation-entry-roadmap.md`: T0--T2 の dependency DAG と
   package close 条件。
+- `plan/197-i1-bootstrap-decision-and-readiness-audit.md`: I1 bootstrap、formal
+  I1 entry、I1 exit の区別、owner 判断の順序・候補・推奨。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-27 19:38 JST
+最終更新: 2026-07-28 00:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,8 +20,9 @@ all OBL rows remain `open`. The last autonomous source-cut screen selected no
 new `WRK-####` from its reviewed delta. That is a LAB priority disposition,
 not a permanent narrowing of ADR-0014.
 
-`plan/196-t0-t2-implementation-entry-roadmap.md` is the current LAB execution
-map. Its conclusion is conditional:
+`plan/196-t0-t2-implementation-entry-roadmap.md` is the T0--T2 execution map;
+`plan/197-i1-bootstrap-decision-and-readiness-audit.md` is the current I1
+start audit. Their conclusion is conditional:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
@@ -29,7 +30,9 @@ map. Its conclusion is conditional:
 - ownerがreserved boundaryを選んだ後も、各packageがADR-0014のstanding
   predicateとexisting-lane条件を個別に満たす範囲で、次のowner checkpointまでの
   研究、形式化、反例、bounded validation、review、report、commit/pushは自走できる。
-- current CanonのT2条件だけでは、userが意図するI1-entry readinessと同義にならない。
+- current CanonのT2条件だけでは、userが意図するI1 bootstrap/readinessと同義にならない。
+- `spec/06`のC-static entryとphase tableのI1 exit表記を、bootstrap recordなしに
+  implementation convenienceで読み替えてはならない。
 
 Immediate blocker:
 
@@ -40,7 +43,8 @@ Immediate blocker:
 
 Sources: `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/adr/ADR-0014.md`,
-`plan/196-t0-t2-implementation-entry-roadmap.md`.
+`plan/196-t0-t2-implementation-entry-roadmap.md`,
+`plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
 
 Current LAB recommendation is a versioned correction: retain v1 as historical
 evidence, define profile v2 with `pass`, authorize one fresh v2 artifact, and
@@ -58,7 +62,7 @@ review。
 | 1 | T0 profile revision packet | `A` prepares, `O` decides; result literal, versioning, old artifact, one-off route are unambiguous | Macro 0/1 early; one decision package |
 | 2 | Fresh T0 evaluation | `A/R`; exact Git blobs, ordering, RFC 8785 digest, three checks, non-claims pass | Macro 0/1 early; bounded |
 | 3 | G0-D3 exit decision | `O`; exact digest acceptance and canonical exit record | official T1 entry blocker |
-| 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, T2-I1 relation are exact | Macro 0/1 middle; one design/decision package |
+| 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
 | 5 | Semantic decision closure | `A` prepares and `O` decides; P013 comparison starts only after M1/M2/MD disposition | Macro 1 early; several decision records |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -66,8 +70,9 @@ review。
 | 9 | T1 close | `A` prepares, `O` accepts; SCN finalization, profile pass, exact ledger statuses, exit record | official T2 entry blocker |
 | 10 | T2 proof-skeleton package | `A/R`, then `O`; OBL-020/021/002 import-bearing skeletons with explicit assumptions/coverage | Macro 5 late; heavy |
 | 11 | G5 statement package | `A/R`, then `O`; OBL-009..014 use separate saved predicate, restore relation, live-state postcondition, checker and checkpoint graph | Macro 1/5 late; heavy |
-| 12 | I1-entry readiness audit | `A/R`; all SCN/Core/G0-G7 interfaces, including OBL-003/027, classified as I1-blocking, implementation choice, or later; pre-T2 only on the integrated route | Macro 1/3 boundary; medium |
-| 13 | T2 close | `A` prepares, `O` accepts; T2 profile pass, evidence cut, exit record | separate owner-defined I1 readiness / authorization |
+| 12 | I1-readiness matrix | `A/R`; all SCN/Core/G0-G7 interfaces, including OBL-003/027, classified as pre-bootstrap, I1-time, or later | Macro 1/3 boundary; medium |
+| 13 | T2 close | `A` prepares, `O` accepts; narrow T2 profile pass, evidence cut, exit record | separate owner-defined I1 readiness / authorization |
+| 14 | I1 authorization route | `A` prepares, `O` accepts; narrow-route readiness record, integrated profile, or phase-contract amendment binds fragment, C-static timing, all-SCN profile, carrier/BND baseline, and scoped moratorium lift | no route is current Canon; production starts only after the owner-selected route authorizes it |
 
 Packages 5, 7/8, and 10/11 may have parallel research branches after their
 shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
@@ -95,7 +100,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | T0 profile contract | profile validity | v2; v1 corrigendum; clarify | v2 with `pass`; retain v1 as nonconforming historical evidence |
 | T0 artifact route | source-bound artifact continuity | authorize one fresh v2 artifact; preserve old only; clarify | one fresh v2 artifact, no inferred G0 exit |
 | G0-D3 | official T1 entry | accept exact fresh digest; continue defer | decide only after fresh evaluation |
-| T2 target | whether T2 means I1-entry readiness | narrow T2; T2 plus explicit I1 criteria | add all-SCN/G0-G7 statement-level readiness to the T2 profile, or explicitly narrow I1 |
+| T2 / I1 relation | narrow T2 or integrated I1 readiness; bootstrap/C-static timing | narrow T2; integrated profile; phase-contract amendment | if narrow route is selected, separate readiness/authorization; C-static is formal entry and remains I1-exit evidence |
 
 ### Before a shared formal model
 
@@ -155,6 +160,7 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `mirrorea_canon/plan/02-operating-model.md`.
 - Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
 - Current T0-T2 route: `plan/196-t0-t2-implementation-entry-roadmap.md`.
+- Current I1 decision/readiness audit: `plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-27 19:38 JST
+最終更新: 2026-07-28 00:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,7 +40,7 @@ is not an untyped debug leak.
 | --- | --- | --- | --- |
 | Logical specification | official `T0`; all OBL rows `open`; core direction fixed, proof-facing interfaces incomplete | T0 profile repair, semantic dispositions, T1/T2 profiles, shared formal model | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; final Surface closure unresolved | PROPOSAL-004, OPEN-005, `return`, SCN-08 reconciliation | owner specification required |
-| Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | official I1 authorization and exact target fragment | later dependency |
+| Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | owner-selected I1 authorization route, exact target fragment, and C-static timing | later dependency |
 
 Current exact blockers:
 
@@ -53,6 +53,8 @@ Current exact blockers:
    validation context, and Surface/SCN closure remain owner-reserved choices.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages.
+7. `spec/06` calls C-static 10/10 I1 entry while the phase table places it in
+   I1 exit; Canon has no distinct bootstrap authorization.
 
 The last source-cut screen selected no new WRK from its reviewed delta. That
 is a LAB priority result, not a permanent restriction on ADR-0014. A fresh
@@ -61,7 +63,8 @@ its own standing-eligibility preflight.
 
 Sources: `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/theory/11-metatheory-ledger.md`,
-`plan/196-t0-t2-implementation-entry-roadmap.md`.
+`plan/196-t0-t2-implementation-entry-roadmap.md`,
+`plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
 
 ## milestone map
 
@@ -70,16 +73,17 @@ Sources: `mirrorea_canon/plan/01-phases.md`,
 | T0 | vocabulary, decisions, G0 | official current; exact profile conflict | research/preparation yes; exit no |
 | T1 | calculus, G1-G3 statements, final SCN expectations | no official entry | ADR-0014-eligible packages after owner dispositions |
 | T2 | OBL-020/021/002 skeletons and G5 statements | later | skeleton research after accepted model; exit no |
-| I1 | single-process reference implementation | later | blocked on T2/I1 readiness contract |
+| I1 | single-process reference implementation | later | blocked on owner-selected authorization route and C-static timing |
 | I2 | in-process multi-locus | later | blocked on I1 |
 | I3 | real transport | later; first real LAN phase | blocked on I2 and transport ADR |
 | I4-I6 | persistence/patch, View, distributed persistence/federation | later | sequential dependency |
 
-Current Canon T2 is narrower than proven I1-entry readiness. Only when T2 exit
-is intended to authorize I1 entry must the owner add all-SCN / G0-G7
-statement-level criteria, including an explicit classification for OBL-003
-and OBL-027. A narrow T2 may close independently, leaving a separate
-owner-defined I1 readiness profile and authorization afterward.
+Current Canon T2 is narrower than proven I1 readiness. The current LAB
+recommendation, if the owner selects narrow T2, is a separately accepted
+I1-readiness / bootstrap record. It would bind all-SCN / G0-G7 statement-level
+criteria, OBL-003/027 classification, C-static timing, and scoped production
+authorization; integrated and phase-contract alternatives remain open. It does
+not imply final carrier freeze or C-runtime conformance.
 
 ## line snapshots
 
@@ -144,7 +148,7 @@ durable save/load, or public product completion is claimed.
 | --- | --- | --- |
 | Owner / Canon | T0 profile and artifact route | recommend v2 `pass`, retain v1 as nonconforming history, authorize one fresh v2 artifact |
 | Owner / Canon | G0-D3 | decide exact fresh digest separately from profile repair |
-| Owner / Canon | T1/T2 lifecycle contract | define profiles, Gate-to-ledger mapping, proof-skeleton evidence class, T2/I1 relation |
+| Owner / Canon | T1/T2/I1 lifecycle contract | define profiles, Gate-to-ledger mapping, proof-skeleton evidence class, narrow T2 vs I1 readiness, bootstrap/C-static relation |
 | Owner / Canon | PROPOSAL-008/012/013 | decide totality, V/R/S/A, and request-validation context |
 | Owner / Canon | Surface/SCN closure | decide PROPOSAL-004, OPEN-005, `return`, and SCN-08 coherently |
 | Research | conservative statement preflight | test ADR-0014 eligibility; open L3 only for non-duplicate existing-lane literal/conditional evidence |
@@ -174,7 +178,7 @@ durable save/load, or public product completion is claimed.
 | dynamic attach/detach / DAG-safe evolution | bounded LAB sample evidence | G7 and implementation contract | later dependency |
 | `atomic_cut` / ordering | Canon theory plus bounded hook/cut evidence | noncircular G5 model and OBL-009..014 statements | after model choice |
 | executable sample corpus | runnable active roots | conformance and public workflow | maintenance |
-| Mir language foundation | bounded parse/check/elaboration/compute evidence | exact Surface/Core fragment and T2/I1 readiness | owner specification required |
+| Mir language foundation | bounded parse/check/elaboration/compute evidence | exact Surface/Core fragment, owner-selected I1 authorization route, C-static timing | owner specification required |
 | Mirrorea fabric | bounded alpha/runtime evidence | I2/I3 semantics and transport ADR | later dependency |
 | Typed-Effect Wiring | typed adapter evidence | public contract and authority integration | later dependency |
 | PrismCascade | separable bounded sample/kernel evidence | dedicated semantics/performance contract | later dependency |
@@ -182,6 +186,13 @@ durable save/load, or public product completion is claimed.
 
 ## recent log
 
+- 2026-07-28 00:41 JST: completed an I1 bootstrap/readiness audit with a
+  planner, an independent reviewer, and GPT-5.6 Sol Pro Oracle. It found no
+  current official start path and isolated the C-static entry/exit tension.
+  Plan 197 recommends a separate I1-readiness record only if the owner selects
+  narrow T2; integrated and phase-contract alternatives remain open. The first
+  owner checkpoint remains the T0 profile/artifact route. No Canon, Gate/Phase,
+  OBL, sample, implementation, or public status moved.
 - 2026-07-27 19:38 JST: audited the path from official T0 through T2 and the
   I1 implementation entrance with independent sub-agent and GPT-5.6 Sol Pro
   review. Plan 196 now separates official owner-reserved transitions from
