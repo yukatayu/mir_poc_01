@@ -90,6 +90,25 @@ literal fact を独立に記録するか、pre-registration 前に read-only sou
 確定した最小 assertion だけを採る。これは LAB execution discipline であり、Canon の
 研究権限・意味論・証拠基準を変更しない。
 
+### C6 の literal source boundary（WRK-0027）
+
+WRK-0027 は、SCN-08 が `live_pose[p: Participant]` と scalar
+`room_anchor`、terminal `default_pose` を並べること、表示済み Surface grammar と
+MirCore v0 の state declaration はいずれも indexed form であることを、登録後の
+source comparison で確認した。static semantics も indexed state を
+`Active(K, epoch) ⇀ A` と説明し、theory/06 は chain の各 option に declared access
+target を要求する。P015 はこの比較と整合し、scalar terminal/default の明示的な
+Surface/Core correspondence を将来 package の要件として残している。
+
+この記録は SCN-08 が現在不適合である、又は state/terminal の候補を決めた、という
+結論ではない。表示済みの source だけでは `room_anchor` を scalar cell としてどう
+所有・保存・初期化・可視化するか、`default_pose` をどこで宣言し chain target として
+どう解決するかを導けない、という bounded source fact である。後続比較は少なくとも
+distinct scalar Core declaration と、既に明示された有限 domain への conservative
+elaboration を候補として分け、init/default、target resolution、store
+well-formedness、lineage law を同じ観点で検査する。hidden membership key、type
+default、unbound terminal を推論又は desugaring で補うことはできない。
+
 ## 明示と推論の規律
 
 source 上の fact を省略できるのは、次の二条件を同時に満たす場合だけとする。

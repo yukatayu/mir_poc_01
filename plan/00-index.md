@@ -785,6 +785,10 @@
   `plan/189-autonomous-theory-frontier-revalidation.md`
 - first unlocking owner-disposition reading:
   `plan/190-first-unlocking-owner-disposition.md`
+- 選択済み意味論の合成と推論境界:
+  `plan/199-selected-semantic-composition-and-inference-boundary.md`
+- WRK-0027 SCN-08 scalar terminal literal comparison:
+  `plan/wrk-0027-scn08-scalar-terminal-correspondence.md`
 
 ## maintenance rule
 
