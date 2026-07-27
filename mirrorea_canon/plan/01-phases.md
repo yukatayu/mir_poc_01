@@ -32,38 +32,60 @@ open_items: [OPEN-032]
 
 ## T0/G0 phase-governance profile
 
-`phase-governance/t0-g0` version 1 is the **only** T0 interpretation of the
-universal JSON condition below. It is a phase-governance profile, not an
-implementation, an `arch/03-toolchain` `mir-conform` tool output, or
-an SCN conformance result under `spec/06-conformance`.
+`phase-governance/t0-g0` version 2 is the **only current** T0 interpretation
+of the universal JSON condition below. It is a phase-governance profile, not an
+implementation, an `arch/03-toolchain` `mir-conform` tool output, or an SCN
+conformance result under `spec/06-conformance`.
 
-### Definition and scope
+### Version-1 historical disposition
 
-- **Profile identity:** `phase-governance/t0-g0`, version `1`, kind
+`LAB:plan/155` at `plan/155-t0-g0-governance-profile-evaluation.json` is
+retained byte-for-byte as nonconforming historical evidence of the version-1
+attempt. The version-1 source contract had incompatible root-result vocabulary.
+Its stored JSON, evidence hashes, and internal RFC 8785 digest are not edited,
+but do not make it a conforming profile artifact, a valid `fail`, or evidence
+eligible for G0-D3. Version 1 is not a current profile and cannot be
+regenerated, renamed, or interpreted as version 2.
+
+The preserved whole-file SHA-256 is
+`0ad49fa84cd766165c5f28bee4dda9a8794f674873e072bf1919eba9027ca943`; it was
+first recorded at commit `17f2c813378e400a9d88e1a13bd3499428a81df9`. This is
+the stored-byte pin, not the version-1 internal artifact digest.
+
+### Version-2 definition and scope
+
+- **Profile identity:** `phase-governance/t0-g0`, version `2`, kind
   `phase-governance-evaluation`.
-- **Normative source:** this document under ADR-0013. Let `B` be the commit
-  that first records the single artifact recorded by `LAB:plan/155`.
-  `profile.source_revision` must be the immediate first parent `C` of `B`.
-  `C` must descend from the accepted repository evidence cut, contain the
-  complete ADR-0013/profile-v1/INDEX adoption patch, have a first parent that
-  lacks at least one of the exact ADR-0013 or profile-v1 blobs in `C`, and lack
-  the artifact from its own tree. No other revision is valid.
+- **Normative source:** this document under the 2026-07-28 amendment to
+  ADR-0013. Let `B2` be the one-parent non-merge commit that first records
+  `LAB:plan/198`, path `plan/198-t0-g0-governance-profile-v2-evaluation.json`,
+  on the authoritative `main` history. `profile.source_revision` must be its
+  immediate parent `C2`. `C2` must descend from the accepted evidence cut and
+  the version-1 recording commit, retain the version-1 artifact whole-file
+  SHA-256 pinned above, contain the complete
+  PROPOSAL-014/amended-ADR-0013/profile-v2/CHANGELOG/INDEX adoption patch, and
+  lack the version-2 artifact. `C2`'s first parent must lack at least one exact
+  amended ADR-0013 or profile-v2 blob in `C2`. The designated version-2 path
+  must be absent from every ancestor of `B2`; `B2` changes exactly that path.
+  No other revision or artifact path is valid.
 - **Checks:** `g0-substantive-owner-record`,
   `g0-source-hierarchy-controls`, and `g0-demotion-audit-scope`.
-- **Inputs:** the exact ADR-0013 owner record; the five ADR and
+- **Inputs:** the amended ADR-0013 owner record; the five ADR and
   `root/glossary` hashes plus `LAB:plan/153` evidence revision accepted by that
-  record; `meta/source-hierarchy`; and the concrete LAB controls below.
+  record; `meta/source-hierarchy`; and the fixed LAB controls below.
 - **Result:** `pass` when all checks pass; `pending` when required evidence is
-  absent or ambiguous; `fail` when evidence conflicts or a required hash does
-  not match. No other result value is valid.
+  absent or genuinely ambiguous; `fail` when evidence conflicts or a required
+  hash does not match. `pass` is the only success literal; no other result
+  value is valid.
 
-`g0-substantive-owner-record` passes only when the cited ADR expressly accepts
-the exact five ADRs as effective for G0, the named GLOSSARY baseline as
+`g0-substantive-owner-record` passes only when the cited amended ADR expressly
+retains the exact five ADRs as effective for G0, the named GLOSSARY baseline as
 prepared, and the named LAB-demotion evidence as complete for its checkpoint.
 `g0-source-hierarchy-controls` passes only when the `meta/source-hierarchy`
 blob at `profile.source_revision` matches the accepted evidence-cut hash and
 every following blob exists and matches the listed SHA-256. This is a
-byte-level control pin, not a newly inferred semantic audit.
+byte-level control pin, not a newly inferred semantic audit. These pins are not
+rebased by version 2.
 
 | Control id | Blob path | SHA-256 |
 | --- | --- | --- |
@@ -83,65 +105,26 @@ the accepted scoped audit evidence is bound.
 
 ### Derived artifact binding
 
-The only authorized production route is a one-off ephemeral evaluation that
-produces one derived JSON artifact recorded by `LAB:plan/155`. No producer
-implementation, generator, helper, schema, CI surface, Make target, evidence
-lane, or report series is committed. The artifact is LAB evidence.
+The only authorized production route is the one-off ephemeral version-2
+evaluation described above. It produces one derived JSON artifact at
+`LAB:plan/198`. No producer implementation, generator, helper, schema, CI
+surface, Make target, evidence lane, or report series is committed. The
+artifact is LAB evidence.
 
-The version-1 artifact is one JSON object with **exactly** these top-level
+The version-2 artifact is one JSON object with **exactly** these top-level
 members and no others:
 
 ```json
 {
   "kind": "phase-governance-evaluation",
-  "profile": {
-    "id": "phase-governance/t0-g0",
-    "version": 1,
-    "source_id": "plan/01-phases",
-    "source_revision": "<40-lowercase-hex-git-commit>",
-    "source_sha256": "<64-lowercase-hex>"
-  },
-  "owner_record": {
-    "id": "adr/ADR-0013",
-    "path": "<repo-relative-blob-path>",
-    "sha256": "<64-lowercase-hex>"
-  },
-  "accepted_evidence_cut": {
-    "repository_revision": "6f96ce17e74173ca5d86ed76cee3db75d60dcbfe",
-    "items": [
-      {"id": "adr/ADR-0001", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "adr/ADR-0002", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "adr/ADR-0005", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "adr/ADR-0009", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "adr/ADR-0012", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "root/glossary", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "meta/source-hierarchy", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-      {"id": "LAB:plan/153", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"}
-    ]
-  },
-  "current_controls": {
-    "source_hierarchy": {"id": "meta/source-hierarchy", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
-    "lab_controls": [
-      {"id": "lab-root-canon-notice", "path": "CANON.md", "sha256": "<64-lowercase-hex-or-null>"},
-      {"id": "lab-root-readme-notice", "path": "README.md", "sha256": "<64-lowercase-hex-or-null>"},
-      {"id": "lab-agents-notice", "path": "AGENTS.md", "sha256": "<64-lowercase-hex-or-null>"},
-      {"id": "lab-highlighter-legacy-vocabulary", "path": "mir_hilight.html", "sha256": "<64-lowercase-hex-or-null>"},
-      {"id": "lab-clean-suite-classification", "path": "samples/clean-near-end/README.md", "sha256": "<64-lowercase-hex-or-null>"}
-    ]
-  },
-  "checks": [
-    {"id": "g0-substantive-owner-record", "result": "<pass|pending|fail>", "evidence": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"}]},
-    {"id": "g0-source-hierarchy-controls", "result": "<pass|pending|fail>", "evidence": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex-or-null>"}]},
-    {"id": "g0-demotion-audit-scope", "result": "<pass|pending|fail>", "evidence": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"}]}
-  ],
-  "result": "<derived-pass|pending|fail>",
-  "non_claims": ["SCN conformance", "C-static", "C-runtime", "C-distributed", "proof", "ADR effectivity", "Gate exit", "T1 entry"],
-  "artifact_digest": {
-    "algorithm": "sha256",
-    "canonicalization": "RFC8785",
-    "scope": "canonical-json-with-artifact_digest-omitted",
-    "value": "<64-lowercase-hex>"
-  }
+  "profile": {"id": "phase-governance/t0-g0", "version": 2, "source_id": "plan/01-phases", "source_revision": "<40-lowercase-hex-git-commit>", "source_sha256": "<64-lowercase-hex>"},
+  "owner_record": {"id": "adr/ADR-0013", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"},
+  "accepted_evidence_cut": {"repository_revision": "6f96ce17e74173ca5d86ed76cee3db75d60dcbfe", "items": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"}]},
+  "current_controls": {"source_hierarchy": {"id": "meta/source-hierarchy", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex>"}, "lab_controls": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex-or-null>"}]},
+  "checks": [{"id": "<required-id>", "result": "<pass|pending|fail>", "evidence": [{"id": "<required-id>", "path": "<repo-relative-blob-path>", "sha256": "<64-lowercase-hex-or-null>"}]}],
+  "result": "<pass|pending|fail>",
+  "non_claims": ["SCN conformance", "C-static", "C-runtime", "C-distributed", "proof", "ADR effectivity", "G0-D3 acceptance", "G0 exit", "Gate exit", "T1 entry", "I1 authorization"],
+  "artifact_digest": {"algorithm": "sha256", "canonicalization": "RFC8785", "scope": "canonical-json-with-artifact_digest-omitted", "value": "<64-lowercase-hex>"}
 }
 ```
 
@@ -152,9 +135,10 @@ array position with `sha256: null`; every present control has a 64-lowercase-hex
 string. Each check is exactly an object with string `id`, `result` in
 `pass`/`pending`/`fail`, and `evidence`, an array of evidence items. No object
 accepts additional members. `profile.version` is the only number and is integer
-`1`; floats and non-finite numbers are forbidden.
+`2`; floats and non-finite numbers are forbidden. Duplicate JSON member names
+are rejected.
 
-`accepted_evidence_cut.repository_revision` is the repository evidence cut
+`accepted_evidence_cut.repository_revision` is
 `6f96ce17e74173ca5d86ed76cee3db75d60dcbfe`. Its `items` have this exact order:
 
 1. `adr/ADR-0001`, `adr/ADR-0002`, `adr/ADR-0005`, `adr/ADR-0009`,
@@ -192,28 +176,29 @@ check is `fail`; otherwise `pending` if any check is `pending`; otherwise
 `pass`. A missing fixed-tree control or hash mismatch is `fail`. `pending` is
 reserved for a declared non-conflicting prerequisite that is not yet bound or
 whose canonical owner record is genuinely ambiguous. A forbidden member,
-incorrect type/cardinality/order, malformed JSON, non-RFC-8785 input, or
-incorrect digest makes an invalid artifact that consumers reject; it is not a
-valid artifact whose root result is `fail`.
+incorrect type/cardinality/order, malformed JSON, data that cannot be
+canonicalized under RFC 8785, or incorrect digest makes an invalid artifact
+that consumers reject; it is not a valid artifact whose root result is `fail`.
 
-`non_claims` has this exact order: `SCN conformance`, `C-static`, `C-runtime`,
-`C-distributed`, `proof`, `ADR effectivity`, `Gate exit`, `T1 entry`. The
-artifact must not use the `conformance` carrier or SCN pass/fail fields.
+`non_claims` has the exact order shown in the JSON template. The artifact must
+not use the `conformance` carrier or SCN pass/fail fields. `ADR effectivity`
+means that the artifact itself cannot make an additional ADR effective.
 
 For `artifact_digest`, omit the complete top-level `artifact_digest` member and
-serialize the remainder according to RFC 8785 JSON Canonicalization Scheme as
-UTF-8. The SHA-256 of those bytes is `artifact_digest.value`. Every listed file
-hash is SHA-256 of exact Git blob bytes at the cited revision, never a working
-tree read. A consumer must reject a stored digest that differs from the
-calculated value.
+serialize the remaining parsed JSON value according to RFC 8785 JSON
+Canonicalization Scheme as UTF-8. The SHA-256 of those bytes is
+`artifact_digest.value`. Every listed file hash is SHA-256 of exact Git blob
+bytes at the cited revision, never a working-tree read. A consumer must reject
+a stored digest that differs from the calculated value.
 
 ### Exit boundary
 
 A `pass` is necessary evidence for this T0 profile only. It does not accept
-itself, exit G0, enter T1, make an additional ADR effective, or change the
-current implementation state. G0 exit still requires a separate human
-acceptance of the exact digest and a canonical exit record. ADR-0013 defers
-that decision, so the current phase remains T0 even after a valid `pass`.
+G0-D3, exit G0, enter T1, authorize I1, make an additional ADR effective, or
+change the current implementation state. G0 exit still requires a separate
+human acceptance of the exact digest and a canonical exit record. ADR-0013
+defers that decision, so the current phase remains T0 even after a valid
+`pass`.
 
 各 Phase の exit は、その Phase に canonically defined JSON profile の合否と
 人間の受理で成立する。T0 は本節の `phase-governance/t0-g0` を用いる。SCN の

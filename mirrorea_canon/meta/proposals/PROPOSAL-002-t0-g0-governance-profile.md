@@ -9,13 +9,15 @@ open_items: []
 
 # PROPOSAL-002 - T0/G0 Governance Profile
 
-> Adopted design memo. The effective profile is defined by `plan/01-phases`
-> under ADR-0013; this memo is not an exit record or a tool contract.
+> Adopted version-1 design memo. Its profile/artifact route is superseded by
+> PROPOSAL-014 and the 2026-07-28 amendment to ADR-0013. The G0-D1 acceptance
+> and G0-D4 waiver recorded here remain historical decision context; this memo
+> is not an exit record or a tool contract.
 >
 > It does not establish G0 exit, T1 entry, an SCN conformance result, or an
 > implementation claim.
 
-## Owner Disposition
+## Original owner disposition
 
 Recorded on 2026-07-15 and applied through ADR-0013.
 

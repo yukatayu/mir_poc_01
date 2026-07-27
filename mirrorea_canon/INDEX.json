@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 107,
+ "files": 108,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 3384
+   "bytes": 3798
   },
   {
    "id": "root/glossary",
@@ -218,6 +218,7 @@
    "maturity": "draft",
    "depends_on": [
     "meta/proposal-002",
+    "meta/proposal-014",
     "plan/00-gates",
     "plan/01-phases",
     "plan/02-operating-model",
@@ -228,10 +229,10 @@
     "adr/ADR-0009",
     "adr/ADR-0012"
    ],
-   "summary": "T0/G0 phase-governance profile と G0 substantive evidence の owner acceptance を記録する。G0 exit と T1 entry は明示 defer。",
+   "summary": "T0/G0 phase-governance profile と G0 substantive evidence の owner acceptance を記録する。2026-07-28 amendment は v2 を採用し、G0 exit と T1 entry を引き続き defer する。",
    "open_items": [],
    "path": "adr/ADR-0013.md",
-   "bytes": 5678
+   "bytes": 7587
   },
   {
    "id": "adr/ADR-0014",
@@ -256,7 +257,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 1858
+   "bytes": 1861
   },
   {
    "id": "arch/01-strata",
@@ -437,7 +438,7 @@
    "summary": "採択済み T0/G0 phase-governance profile の design memo。SCN 適合性、Gate exit、実装状態は動かさない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-002-t0-g0-governance-profile.md",
-   "bytes": 5961
+   "bytes": 6102
   },
   {
    "id": "meta/proposal-003",
@@ -624,6 +625,21 @@
    "bytes": 8891
   },
   {
+   "id": "meta/proposal-014",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-002",
+    "plan/00-gates",
+    "plan/01-phases",
+    "meta/source-hierarchy"
+   ],
+   "summary": "T0/G0 phase-governance profile v2 と一回限りの fresh artifact を記録する採択済み design memo。G0-D3、Gate/Phase、実装状態は動かさない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-014-t0-g0-governance-profile-v2.md",
+   "bytes": 2930
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -679,7 +695,7 @@
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 13567
+   "bytes": 13331
   },
   {
    "id": "plan/02-operating-model",

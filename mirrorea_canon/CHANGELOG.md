@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-28** PROPOSAL-014 と ADR-0013 amendment により
+  `phase-governance/t0-g0` version 2 を採用した。v1 artifact は
+  nonconforming historical evidence として byte-preserved し、既存の fixed
+  evidence/control predicates を rebase せず one-off fresh v2 artifact だけを
+  許可する。G0-D3、G0 exit、T1 entry、I1 authorization は引き続き defer /
+  non-effect である。
 - **2026-07-24** Added PROPOSAL-013, an owner decision request for the semantic
   provenance of post-admission request validation context. It selects no Core,
   queue, wire, runtime, OBL, Gate, Phase, or public behavior.
