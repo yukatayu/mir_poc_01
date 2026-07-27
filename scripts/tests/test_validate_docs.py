@@ -2282,6 +2282,27 @@ class ValidateDocsTests(unittest.TestCase):
             with self.subTest(rejected=rejected):
                 self.assertIsNone(validate_docs._permitted_lab_locations(rejected))
 
+    def test_working_record_allows_only_direct_numbered_reports_in_report_lane(self) -> None:
+        locations = validate_docs._permitted_lab_locations("plan, docs/reports")
+
+        self.assertEqual(locations, ["plan", "docs/reports"])
+        self.assertTrue(
+            validate_docs._is_permitted_lab_path(
+                "docs/reports/2453-working-annex-report-lane-validation.md",
+                locations,
+            )
+        )
+        for rejected in (
+            "docs/reports/TEMPLATE.md",
+            "docs/reports/README.md",
+            "docs/reports/helper.py",
+            "docs/reports/nested/2453-report.md",
+        ):
+            with self.subTest(rejected=rejected):
+                self.assertFalse(
+                    validate_docs._is_permitted_lab_path(rejected, locations)
+                )
+
     def test_working_record_accepts_declared_product_alpha_row_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

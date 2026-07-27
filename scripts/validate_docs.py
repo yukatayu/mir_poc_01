@@ -634,6 +634,7 @@ REQUIRED = [
     "plan/196-t0-t2-implementation-entry-roadmap.md",
     "plan/197-i1-bootstrap-decision-and-readiness-audit.md",
     "plan/199-selected-semantic-composition-and-inference-boundary.md",
+    "plan/200-reanchored-semantic-composition-research-plan.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
@@ -1006,6 +1007,7 @@ WORKING_RECORD_PENDING_VALUES = {
 }
 WORKING_REVIEW_KEYS_PATH = "mirrorea_canon/meta/review-keys.json"
 WORKING_RECORD_ALLOWED_LAB_ROOTS = (
+    "docs/reports",
     "plan",
     "samples/clean-near-end",
     "samples/current-l2",
@@ -1646,7 +1648,17 @@ def _is_documented_lab_location(location: str) -> bool:
 
 
 def _is_permitted_lab_path(path: str, locations: list[str]) -> bool:
-    return any(path == location or path.startswith(f"{location}/") for location in locations)
+    return any(
+        (
+            location == "docs/reports"
+            and DIRECT_NUMBERED_REPORT_PATTERN.fullmatch(path) is not None
+        )
+        or (
+            location != "docs/reports"
+            and (path == location or path.startswith(f"{location}/"))
+        )
+        for location in locations
+    )
 
 
 def _snapshot_digest_errors(
