@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 110,
+ "files": 111,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 10918
+   "bytes": 11309
   },
   {
    "id": "root/north-star",
@@ -1567,6 +1567,23 @@
    "open_items": [],
    "path": "working/WRK-0023-consistent-cut-channel-state-boundary.md",
    "bytes": 7866
+  },
+  {
+   "id": "working/WRK-0024",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "spec/05-runtime-semantics",
+    "scenarios/SCN-02",
+    "meta/proposal-012"
+   ],
+   "summary": "SCN-02 の cross-locus read-dependent write について、owner-serial mutation だけでは二つの read reply 後の stale write を排除できないことを最小非production countermodel で検査する。snapshot、pending carrier、Core rule、SCN、OBL は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0024-scn02-read-write-snapshot-ambiguity.md",
+   "bytes": 6386
   }
  ]
 }
