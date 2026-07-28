@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 14034
+   "bytes": 14099
   },
   {
    "id": "root/north-star",
@@ -1717,7 +1717,7 @@
    "summary": "Plan 200 C0-C の pre-enumerated source span について、literal terminal/reject/Diagnostic wording と明示 cross-reference の有無だけを source-local に記録する。stage membership、coverage、reject domain、Diagnostic assignment/equality/completeness、totality/coherence は選ばない。",
    "open_items": [],
    "path": "working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md",
-   "bytes": 8500
+   "bytes": 9410
   }
  ]
 }
