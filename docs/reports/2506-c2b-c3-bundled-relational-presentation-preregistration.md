@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2506`
 **Date:** 2026-07-28 19:33 JST
-**Status:** registration content staged; commit and push pending
+**Status:** registration committed and pushed; report closeout pending
 
 ## Objective
 
@@ -40,7 +40,7 @@ Started after Plan 212 and its report were committed, pushed, and remote-matched
 ## Commands run
 
 - Duplicate-path check, focused Canon/LAB and validator reads, Git-history check, and exact digest collection
-- Canon index rebuild, `git diff --check`, `make docs`, commit/push, and remote equality verification are required before registration is valid
+- Canon index rebuild, `git diff --check`, `make docs`, `git commit --no-gpg-sign`, `git push origin HEAD:main`, `git fetch origin main`, and remote equality verification
 
 ## Evidence / outputs / test results
 
@@ -93,7 +93,9 @@ Lean, runtime, parser, transport, and end-to-end validation are deferred because
 
 ## Commit / push status
 
-Pending at report write.
+Registration content was committed as `5b876c523b83bcdb2774eb17f2e12ee264338719`
+with `--no-gpg-sign`, pushed to `origin/main`, and verified after fetch with
+`HEAD == origin/main`. This report closeout update is the only pending commit.
 
 ## Sub-agent session close status
 
