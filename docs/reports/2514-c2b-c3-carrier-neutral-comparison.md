@@ -108,7 +108,8 @@ No required validation was skipped.
 The evidence commit is `2e2d3615c184a33c7ae0c86eca5d99c44975984b`
 (`docs: define carrier-neutral C2-B/C3 comparison`). It was pushed to
 `origin/main`; after `git fetch origin main`, `HEAD` and `origin/main` both
-equal that commit. This report closeout commit remains pending.
+equal that commit. This report is versioned and pushed in its task-closeout Git
+history; its containing commit is the closeout identity.
 
 ## Sub-agent session close status
 
