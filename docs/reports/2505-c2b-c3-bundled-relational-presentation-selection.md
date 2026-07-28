@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2505`
 **Date:** 2026-07-28 19:21 JST
-**Status:** selection content staged; commit and push pending
+**Status:** selection committed and pushed; report closeout pending
 
 ## Objective
 
@@ -46,7 +46,7 @@ Started at committed, pushed, clean `HEAD` `6b27fb74d50911dca0dee5ccc37a074b3a82
 - Targeted Canon/LAB reads, SHA-256 collection, `git status`, and duplicate-path checks
 - `oracle status` and two `ask-chatgpt-pro-temp` preflight attempts; the first attachment failure was observed before the narrowed retry
 - `git diff --check` and `make docs`; the latter passed Canon index, source-hierarchy, report-structure, and secret-scan validation
-- Remaining at report write: focused diff inspection, commit/push, and remote equality verification
+- Focused diff inspection before commit; `git commit --no-gpg-sign`, `git push origin HEAD:main`, `git fetch origin main`, and exact local/remote `HEAD` equality verification
 
 ## Evidence / outputs / test results
 
@@ -100,7 +100,9 @@ No Lean, runtime, parser, transport, or end-to-end command applies before WRK-00
 
 ## Commit / push status
 
-Pending at report write.
+Selection content was committed as `ca53a83f73976ffa613e7bbe35ee51fc62a43435`
+with `--no-gpg-sign`, pushed to `origin/main`, then verified after fetch with
+`HEAD == origin/main`. This report closeout update is the only pending commit.
 
 ## Sub-agent session close status
 
