@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2501`
 **Date:** 2026-07-28 16:56 JST
-**Status:** local validation passed; commit/push pending
+**Status:** local validation passed; content commit pushed; closeout update pending
 
 ## Objective
 
@@ -162,8 +162,10 @@ are reserved ordinary-design choices.
 
 ## Commit / push status
 
-Pending at report drafting. The package is committed with `--no-gpg-sign`,
-pushed, fetched, and checked against `origin/main` after local validation.
+The content package was committed with `--no-gpg-sign` as
+`e73c1fdc439ee977c272d7c415f36911b1304b2d` and pushed to `origin/main`.
+After `git fetch origin main`, local `HEAD` and `origin/main` matched that
+commit. This report-status closeout is committed and pushed separately.
 
 ## Sub-agent session close status
 
