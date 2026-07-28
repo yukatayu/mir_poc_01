@@ -194,5 +194,8 @@ literal に監査する別の narrow candidate として選別済みである。
 failure、queue/scheduling、又は independent observation が明示されるかだけを記録する。これは A2
 atomicity、absence の global claim、same/different occurrence、facet cardinality、rejection transaction、
 request identity、save/load を決めない。patch admission は ordinary admission と別 subsystem のため
-corpus から除外する。Plan 201 の preflight を満たすことを、次の WRK pre-registration で current cut
-に pin してから実行する。
+corpus から除外する。WRK-0032 はこの audit を current cut で完了し、P012 guard direction と
+four named ordinary-admission theory/spec span の non-match を source-local に retained した。
+結果は A2 atomicity、compatibility、facet、carrier を決めず、C3/C4/C5 proper の ordinary Canon
+design boundary を解除しない。次は candidate を仮定せず、remaining recorded-direction frontier を
+fresh ADR-0014 preflight で再審査する。

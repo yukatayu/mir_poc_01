@@ -193,11 +193,13 @@ evidence として retained した。source span の literal reference の有無
 又は stage/reject domain を導かない。C0-D、C1、C2-B、C6 は現行 evidence cut では L3 の
 非重複な result に閉じない。C3/C5/C4 portfolio の local/Oracle screen は、C3 と C4 の最初の
 有意な検査が pending/request/occurrence identity 又は carrier を選ぶため ordinary Canon design
-boundary へ停止すると確認した。C5 だけは、通常 admission source span に P012 の conditional-A2
-停止条件を明示する独立 issuance phase が literal に現れるかを記録する `C5-PRE` に狭めれば、
-nonsemantic L3 literal-transcription 候補になる。詳細と patch-admission 除外は Plan 201 に置く。
-この選別は A2 atomicity、compatibility、facet、carrier を支持せず、実装は common carrier の最小性を
-evidence が支持してから扱う。
+boundary へ停止すると確認した。C5-PRE は通常 admission source span に P012 の conditional-A2
+停止条件を明示する独立 issuance phase が literal に現れるかだけを監査し、WRK-0032 は P012 guard
+direction と four named ordinary-admission theory/spec span の non-match を retained した。詳細と
+patch-admission 除外は Plan 201 と WRK-0032 evidence に置く。この result は A2 atomicity、
+compatibility、facet、carrier を支持せず、実装は common carrier の最小性を evidence が支持してから
+扱う。次の autonomous action は C3/C4/C5 本体を先取りせず、remaining frontier に non-duplicate
+existing-lane L3 candidate があるかを fresh preflight で再審査することである。
 
 ## Non-claims
 

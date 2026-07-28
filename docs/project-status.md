@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 10:17 JST
+最終更新: 2026-07-28 10:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query だけを保持、C1/C6 は既存の限定 evidence を保持する | C5-PRE を current cut で pre-register し、通常 admission に P012 A2 の停止条件を明示する独立 issuance phase が literal にあるかだけを監査する。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection を要するため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match だけを保持、C1/C6 は既存の限定 evidence を保持する | remaining frontier の fresh ADR-0014 preflight を実施中。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は、現時点では semantic selection 又は duplicate-evidence risk のため deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -92,12 +92,12 @@ official T2 まで無条件に連続自走することはできません。次�
   条件付きで非循環であることだけを retained し、WRK-0030 は six source-tagged local
   question labels の documentary non-substitution だけを retained した。WRK-0031 は C0-C の
   literal named-error/Diagnostic reference query だけを retained し、stage/reject domain/
-  coverage を導かない。C3/C5/C4 portfolio re-screen は、C3 pending と C4 served-write の
-  検査が unselected identity/carrier を必要とするため停止すると分類した。次の自走は C5-PRE
-  の source-local guard audit を current cut で pre-register することである。これは ordinary
-  admission に独立 issuance phase が明示されるかだけを調べ、A2 atomicity/facet/compatibility は
-  導かない。C0-D/C1/C2-B/C6 は既存 evidence の再述又は semantic selection を要するため deferred
-  である。
+  coverage を導かない。WRK-0032 は C5-PRE の source-local guard audit を current cut で完了し、
+  P012 の conditional direction と four named ordinary-admission theory/spec span の non-match だけを
+  retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
+  又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
+  を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
+  を要する。次の自走は candidate を仮定しない fresh ADR-0014 frontier preflight である。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -128,11 +128,12 @@ proposal の owner/Canon decision が別途必要です。
 3-7 の方向は記録済みです。WRK-0028 は source-role re-anchor を完了し、C0-A はその
 pinned cut では完了済みです。WRK-0029 は C0-B の条件付き DAG、WRK-0030 は C2-A の
 source-tagged documentary non-substitution だけを retained しました。WRK-0031 は C0-C の
-source-local Diagnostic reference query だけを retained しました。C3/C5/C4 の candidate re-screen
-は、この portfolio 内で C5-PRE だけを nonsemantic L3 candidate とし、次に通常 admission issuance guard を
-pre-register します。C3/C4/C5 本体は ordinary Canon design boundary です。その後も composition/
-falsifier research を経て、shared formal model、T1 statement、T2 skeleton を長い自走 package として
-進めます。
+source-local Diagnostic reference query だけを retained しました。WRK-0032 は通常 admission issuance
+guard を完了し、P012 condition と four named span の source-local result のみを retained しました。
+C3/C4/C5 本体は ordinary Canon design boundary のままです。次に candidate を仮定しない frontier
+preflight を行い、standing-eligible package があれば pre-register し、なければ ordinary Canon
+proposal/owner decision boundary として報告します。その後も composition/falsifier research を経て、
+shared formal model、T1 statement、T2 skeleton を長い自走 package として進めます。
 
 根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
 `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`,
@@ -155,6 +156,7 @@ falsifier research を経て、shared formal model、T1 statement、T2 skeleton 
 | selected semantic composition | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
 | re-anchored composition research | `plan/200-reanchored-semantic-composition-research-plan.md` |
 | C5-PRE candidate selection | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
+| C5-PRE retained evidence | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

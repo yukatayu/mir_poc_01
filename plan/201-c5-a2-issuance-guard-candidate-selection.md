@@ -108,6 +108,18 @@ that any source fact may be ergonomically inferred.
 5. Re-open C3/C4/C5 proper only through an ordinary Canon design proposal that
    selects the required reference/correlation/persistence boundary.
 
+## Execution outcome
+
+WRK-0032 was registered at `a6c2981b4b222ab90af68dfb1f58b5ab22800c80`, retained
+its matrix at `7737b0348dadf6271beff466f648106ce66487a6`, and linked the exact
+artifact digest forward at `339377e9fca7b867142a13bdef0ef6cce1bd9f25`. The
+matrix retains P012's conditional guard direction and a non-match for each of
+the four named ordinary-admission theory/spec spans. It is not an A1/A2
+decision, atomicity proof, global absence claim, occurrence identity, or
+implementation authorization. See
+`plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` and
+`working/WRK-0032-c5pre-ordinary-admission-issuance-guard.md`.
+
 ## Non-claims
 
 This selection does not advance official T0/T1/T2 or I1, promote an L3 result,

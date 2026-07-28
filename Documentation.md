@@ -22,6 +22,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 選択済み方向の合成・推論境界 | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
 | 合成研究の再anchor済み実行順 | `plan/200-reanchored-semantic-composition-research-plan.md` |
 | C5-PRE admission 発行段階ガード監査の選別 | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
+| C5-PRE admission 発行段階ガード監査の証跡 | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -120,6 +121,9 @@ profile と Canon amendment は未作成です。
 - `plan/201-c5-a2-issuance-guard-candidate-selection.md`: C5 の本体設計を
   選ばず、通常 admission に独立した issuance phase が明示されるかだけを監査する
   次の候補と停止線。
+- `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md`: P012 の条件文と
+  four named ordinary-admission span の source-local reading。A2 atomicity や
+  admission occurrence identity は導かない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
