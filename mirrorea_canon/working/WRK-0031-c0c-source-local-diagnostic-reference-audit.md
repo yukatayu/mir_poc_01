@@ -100,9 +100,7 @@ of literal references/nonreferences. It cannot define a stage, rejection,
 Diagnostic relation, totality, coverage, or an implementation contract. Any
 future ergonomic inference remains subject to a uniquely settled fact and a
 reconstructible elaborated artifact; this record supplies neither.
-Independent review: not-required-for-L3; the preceding temporary Oracle
-screen's scope control was checked against the registered source output, and
-no semantic conclusion was retained.
+Independent review: not-required-for-L3
 
 ## Supersession
 

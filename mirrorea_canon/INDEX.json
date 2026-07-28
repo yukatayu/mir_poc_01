@@ -1717,7 +1717,7 @@
    "summary": "Plan 200 C0-C の pre-enumerated source span について、literal terminal/reject/Diagnostic wording と明示 cross-reference の有無だけを source-local に記録する。stage membership、coverage、reject domain、Diagnostic assignment/equality/completeness、totality/coherence は選ばない。",
    "open_items": [],
    "path": "working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md",
-   "bytes": 9410
+   "bytes": 9264
   }
  ]
 }
