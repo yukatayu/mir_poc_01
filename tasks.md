@@ -30,9 +30,9 @@ record the retained generic C7 factorization boundary, Plan 206 plus WRK-0036
 record the retained cumulative-erasure countermodel, Plan 207 records the
 fresh no-candidate disposition, and Plans 208/209 prepare and prefix-locally
 audit the C2-B/C3 comparison. Plan 210 compares the A/B instantiation limits,
-and Plan 211/WRK-0037 execute B2-OPAQUE only as bounded finite L3 evidence;
-Plan 212 selects a same-table bundled/relational comparison for separate L3
-pre-registration.
+and Plan 211/WRK-0037 execute B2-OPAQUE only as bounded finite L3 evidence.
+Plan 212/WRK-0038's bare-view comparison is unexecuted after scope review; Plan
+213 selects a key-supplied fiberwise relation comparison for successor L3 registration.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -78,8 +78,8 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0037 retain finite evidence and Plan 212 selects only a same-table bundled/relational comparison. It is not an A/B carrier selection. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; WRK-0038 pre-registration next; owner/Canon C2-B/C3 selection remains later |
-| 5A | bundled/relational finite comparison | `A/R`; Plan 212 has a direct C2-B/C3 consumer and falsifier. Register before source, then test inverse translations over the exact WRK-0037 table only | Macro 1 early; next autonomous existing-lane package, no semantic selection |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0037 retain finite evidence. Plan 212/WRK-0038 is unexecuted because a bare view loses its supplied key; Plan 213 selects only a ten-cell fiberwise comparison. It is not an A/B carrier selection. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; WRK-0039 registration next; owner/Canon C2-B/C3 selection remains later |
+| 5A | fiberwise relational finite comparison | `A/R`; Plan 213 has direct C2-B/C3 consumer, fixed key-supplied fiber domain, and falsifiers. Register before source, then test independent graph relations only over the exact WRK-0037 table | Macro 1 early; next autonomous existing-lane package, no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -122,7 +122,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | Family A relation primary; Family B request-occurrence anchor primary; Family C reserve after an A/B failure | WRK-0037 runs one B2-OPAQUE finite table. Plan 212 may compare bundled and explicit relation-first representations only on that table. Owner/Canon must still select identity/correlation/pending/restore rules. Reject hidden identity, receipt correlation, intermediate mutation, and incidental inference |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | Family A relation primary; Family B request-occurrence anchor primary; Family C reserve after an A/B failure | WRK-0037 runs one B2-OPAQUE finite table. Plan 213 may compare bundled and explicit relation-first representations only at supplied keys over that table. Owner/Canon must still select identity/correlation/pending/restore rules. Reject key reconstruction, hidden identity, receipt correlation, intermediate mutation, and incidental inference |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -194,6 +194,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`.
 - C2-B/C3 bundled/relational presentation comparison selection:
   `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md`.
+- C2-B/C3 fiberwise relational comparison selection:
+  `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

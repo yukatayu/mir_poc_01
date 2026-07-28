@@ -38,6 +38,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 Family A/B instantiation audit | `plan/210-c2b-c3-family-a-b-instantiation-audit.md` |
 | C2-B/C3 B-primary opaque-anchor candidate selection | `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md` |
 | C2-B/C3 bundled/relational presentation comparison selection | `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md` |
+| C2-B/C3 fiberwise relational comparison selection | `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -185,6 +186,9 @@ profile と Canon amendment は未作成です。
 - `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md`: WRK-0037 と同じ
   有限表に限り、bundled explicit view と independently stated relational view の観測・遷移保存を
   比較する。いずれも Canon carrier、identity、source inference を選ばない。
+- `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`: bare view は key を保持しない
+  ことを確認し、未実行の WRK-0038 を書き換えず、全十の supplied key ごとの fiberwise relation
+  comparison だけを successor 候補にする。key recovery や source inference は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

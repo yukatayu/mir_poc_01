@@ -647,6 +647,7 @@ REQUIRED = [
     "plan/210-c2b-c3-family-a-b-instantiation-audit.md",
     "plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md",
     "plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md",
+    "plan/213-c2b-c3-fiberwise-relational-comparison-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

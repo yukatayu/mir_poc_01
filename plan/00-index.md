@@ -835,6 +835,8 @@
   `plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md`
 - C2-B/C3 bundled/relational presentation comparison selection:
   `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md`
+- C2-B/C3 fiberwise relational comparison selection:
+  `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`
 
 ## maintenance rule
 
