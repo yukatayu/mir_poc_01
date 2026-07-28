@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2510`
 **Date:** 2026-07-28 22:40 JST
-**Status:** evidence package ready to commit; final reviewer capture timed out
+**Status:** evidence committed and pushed; WRK metadata link in progress
 
 ## Objective
 
@@ -272,9 +272,11 @@ recorded above.
 
 ## Commit / push status
 
-Evidence commit and push are not yet performed at report write. The subsequent
-metadata-only update will append the exact evidence commit and artifact digest
-to WRK-0039 without altering its pre-registration.
+Evidence was committed with `--no-gpg-sign` as
+`f250e117ffd4c7f1b81a1d604900ff63973cd582`, pushed to `origin/main`, and
+verified after fetch with `HEAD == origin/main`. The subsequent metadata-only
+update appends this evidence commit and artifact digest to WRK-0039 without
+altering its pre-registration; it is the current uncommitted follow-up.
 
 ## Sub-agent session close status
 

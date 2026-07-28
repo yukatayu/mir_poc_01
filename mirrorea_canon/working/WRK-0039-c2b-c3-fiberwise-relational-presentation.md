@@ -37,11 +37,11 @@ Non-claims: This does not select Family A, B, or C; define any Mir request/attem
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: not-run
-Negative evidence: not-run
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This record is normative only about a reversible L3 boundary and procedure. Before all registered outcome commands complete, it supplies no relation equivalence, distinction, key recovery, carrier, identity, source inference, proof, or implementation result.
+Positive evidence: Every registered outcome command completed after the registration push. At the pinned authority/input cut, the marked WRK-0037 baseline matched byte-for-byte, and the artifact-local successor source with SHA-256 `468563ff31258b1010e4f22c73b3751a0427c6ce40f8548d09afa18dde049208` passed Lean 4.29.1 at `--trust=0`; all 35 declared theorem reports have no axioms. The independent direct graphs enumerate all ten cell rows, two incidental rows, twenty receipt results, ten resume results, two restore rows, and the receipt/resume-derived combined relation. Cell/view fibers have pointwise round trips preserving every `DirectView` column; separate finite soundness/completeness/commutation propositions cover incidental, receipt, resume, combined, and restore observations.
+Negative evidence: No registered typed falsifier occurred. Registered input digests, relation-isolation, placeholder, duplicate/reserved-surface, evidence-commit allowlist, and diff checks passed. Two advisory Oracle reviews found evidence-retention, scan-boundary, wording, and coverage-reporting defects that were corrected before this metadata link; a third acceptance-review response timed out and supplied no semantic finding. The retained result is one finite supplied-key table, not a general recovery, restore, carrier, identity, or source-inference result.
+Evidence artifacts: LAB:plan/wrk-0039-c2b-c3-fiberwise-relational-presentation-experiment.md@f250e117ffd4c7f1b81a1d604900ff63973cd582:bfbc66cf7fea87bdebb42e0412dd9e6c9279fd8dcfd24c672ebac5150c9aa229
+Evidence commits: f250e117ffd4c7f1b81a1d604900ff63973cd582
+Impact / non-effects: This record is normative only about a reversible L3 research boundary and procedure. The finite pass establishes only that this explicitly bounded supplied-key candidate did not trigger its registered falsifiers; it cannot make either presentation a Canon carrier, define request identity, authorize source omission/inference, establish a persistence/recovery rule, or establish an implementation result.
 Independent review: not-required-for-L3
 
 ## Supersession
