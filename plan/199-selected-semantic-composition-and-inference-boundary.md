@@ -231,6 +231,10 @@ identity、correlation、pending boundary を比較可能な decision preparatio
 Plan 208 は P012 V1/R1 と P013 M1 を同じ C2-B/C3-alpha trace に置き、relation-first reference、
 request-occurrence anchoring、nominal attempt alternative を比較する。どの carrier も採択せず、
 reply/receipt、failure、held linear context、cut/save-load の explicit obligations を整理する。
+Plan 209 はこの comparison を prefix-local に監査し、completed-success shorthand の四項 `Corr` を
+sole relation とせず、pending / validation-outcome / reply / receipt / failure の staged relation と
+restore configuration requirement を比較条件にする。これは carrier、source rule、or implementation を
+採択しない。
 
 ## Non-claims
 

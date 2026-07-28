@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 16:28 JST
+最終更新: 2026-07-28 16:56 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0036 retain bounded evidence; Plan 207 records no further L3 candidate and Plan 208 prepares the C2-B/C3 comparison; all OBL rows `open` | C7 remains no source rule; a final cumulative representation requires direct checking. C2-B/C3 needs owner/Canon carrier selection after the prepared comparison; C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0036 retain bounded evidence; Plan 207 records no further L3 candidate and Plans 208/209 prepare and audit the C2-B/C3 comparison; all OBL rows `open` | C7 remains no source rule; a final cumulative representation requires direct checking. C2-B/C3 needs owner/Canon carrier selection after the staged relation audit; C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -58,10 +58,11 @@ Current exact blockers:
    by the displayed indexed rules, but no scalar representation is selected.
    Snapshot/evaluation/pending semantics, request/replay identity, served/admission
    facets, scalar candidate comparison, and total domain remain to be bound.
-5. Plan 207 finds no remaining non-duplicate L3 candidate. Plan 208 prepares
-   C2-B/C3 relations and alternatives; owner/Canon must select identity,
-   pending, receipt, restore, and held-context semantics before a shared model
-   or source ergonomics can advance. C4/C5, C0-D/C1/C6 remain later boundaries.
+5. Plan 207 finds no remaining non-duplicate L3 candidate. Plans 208/209
+   prepare C2-B/C3 alternatives and prefix-local staged relation obligations;
+   owner/Canon must select identity, pending, receipt, restore, and held-context
+   semantics before a shared model or source ergonomics can advance. C4/C5,
+   C0-D/C1/C6 remain later boundaries.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -162,7 +163,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0034 retain their bounded C0/C2/C3/C5 evidence; Plan 204 records no successor over the fixed line; WRK-0035/0036 retain C7 guards. Plan 207 finds no new L3 candidate; Plan 208 prepares C2-B/C3 alternatives but leaves carrier selection to owner/Canon |
+| Research | selected semantic composition | WRK-0028--0034 retain their bounded C0/C2/C3/C5 evidence; Plan 204 records no successor over the fixed line; WRK-0035/0036 retain C7 guards. Plan 207 finds no new L3 candidate; Plans 208/209 prepare C2-B/C3 alternatives and staged relation/restore checks but leave carrier selection to owner/Canon |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -200,6 +201,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 16:56 JST: Plan 209 used a temporary Oracle challenge review and
+  local Canon check to correct the C2-B/C3 comparison. A completed-success
+  `Corr` is not prefix-local, so the active audit now distinguishes pending,
+  owner validation outcome, reply, receipt, failure, linear consumption, and
+  restored-configuration reconstruction. It selects no carrier, source rule,
+  OBL, Gate, Phase, or implementation.
 
 - 2026-07-28 16:28 JST: Plan 208 prepared the first C2-B/C3 value-flow
   comparison around P012 V1/R1 and P013 M1. It compares relation-first,

@@ -41,7 +41,26 @@ Failed(pending, failure)
 DepOf(later-occurrence, pending)
 ```
 
-Every family must show: (1) `Corr` functional at request/reply/receipt/pending endpoints; (2) at most one accepted success receipt and one resume per pending within an admissible restored-prefix extension; (3) failure leaves the owner store unchanged, produces no success reply, prevents success resumption, and produces no dependent occurrence; (4) M1 claims are inputs to authoritative membership/lineage/witness/admission/visibility/history validation and confer no authority; (5) held `Gamma`/`Delta` ownership is explicit and linear evidence is neither duplicated nor silently dropped; (6) correlation, pending, result provenance, and spent/failed status are explicit or uniquely reconstructed after save/load; and (7) result value, history metadata, provenance, and redaction are distinct.
+This four-ended `Corr` is an initial compact shorthand only. It is not
+prefix-local before reply/receipt exists and cannot by itself describe the
+failure branch. Plan 209 replaces it, for active comparison audit purposes,
+with staged carrier-neutral obligations (`PendingFor`, `ReplyFor`,
+`ReceiptFor`, and `FailureFor`) plus an owner-validation/outcome relation.
+Those names are audit vocabulary, not selected Canon primitives or fields.
+
+Every family must meet Plan 209's active prefix-local conditions: applicable
+staged relations are functional; within one admissible restored-prefix
+extension there is at most one accepted success receipt and one resume per
+pending; an owner-service failure leaves the owner store unchanged and cannot
+produce a matching success continuation or dependent occurrence derived from
+that pending; M1 claims are inputs to authoritative
+membership/lineage/witness/admission/visibility/history validation and confer
+no authority; held `Gamma`/`Delta` ownership is explicit and linear evidence
+is neither duplicated nor silently dropped; and correlation, pending, result
+provenance, validation grounds, and post-consumption/failed status are present
+in or uniquely reconstructible from the restored admissible configuration.
+Result value, history metadata, provenance, and redaction remain distinct,
+though provenance may refer to admissible history.
 
 `one-shot` is branch-scoped. It does not claim transport exactly-once, global uniqueness across two loads of the same SaveObject, or durable exactly-once.
 
@@ -81,7 +100,11 @@ This cut excludes SW1 service/mutation identity, A2 admission projections, succe
 
 The following need owner/Canon selection before a semantic model or implementation relies on them: identity foundation and equality/reuse scope; occurrence identity across save/load; pending/correlation locus including result/provenance/spent/failed status; receipt/resume granularity; result freshness/revalidation timing and requester-side failure mapping; held `Delta` ownership and one-shot scope across load; and the exact artifact retaining M1 context, source span, failure row, and dependency grounds.
 
-Before that selection, autonomous preparation may define relation signatures, map families A/B/C to common obligations, build the finite adverse matrix, audit save/load frontiers, and state machine-presentation equivalence requirements. It may not create a new WRK theorem, runtime helper, schema, queue, or source syntax.
+Before that selection, autonomous preparation may define relation signatures,
+map families A/B/C to common obligations, build the finite adverse matrix,
+audit save/load frontiers, and state machine-presentation equivalence
+requirements. Plan 209 performs the first such prefix-local audit. It may not
+create a new WRK theorem, runtime helper, schema, queue, or source syntax.
 
 ## Reopen and non-effects
 

@@ -825,6 +825,8 @@
   `plan/207-post-wrk0036-autonomous-frontier-disposition.md`
 - C2-B/C3 value-flow design preparation:
   `plan/208-c2b-c3-value-flow-design-preparation.md`
+- C2-B/C3 relation-obligation audit:
+  `plan/209-c2b-c3-relation-obligation-audit.md`
 
 ## maintenance rule
 

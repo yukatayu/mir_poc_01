@@ -227,3 +227,7 @@ C2-B/C3 の ordinary design comparison であり、identity、receipt correlatio
 success/failure/resumption、cut/save-load/replay を先取りして選択しない。
 Plan 208 はその preparation packet として family-neutral relation signature と three presentation
 families を比較するが、Core、history、request identity、runtime、source inference を決めない。
+Plan 209 は preparation の four-ended shorthand が intermediate frontier / failure branch を単独で
+表せないことを comparison audit として修正し、staged relation、owner validation outcome、restored
+configuration の uniqueness、and carrier-neutral ergonomic projection conditions を追加する。これも
+ordinary Canon design/owner boundary を越えない。

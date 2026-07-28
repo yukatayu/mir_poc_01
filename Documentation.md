@@ -34,6 +34,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C7 cumulative-erasure countermodel の L3 証跡 | `plan/wrk-0036-c7-cumulative-erasure-countermodel.md` |
 | WRK-0036 後の自律研究 frontier | `plan/207-post-wrk0036-autonomous-frontier-disposition.md` |
 | C2-B/C3 value-flow design preparation | `plan/208-c2b-c3-value-flow-design-preparation.md` |
+| C2-B/C3 relation-obligation audit | `plan/209-c2b-c3-relation-obligation-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -167,6 +168,9 @@ profile と Canon amendment は未作成です。
 - `plan/208-c2b-c3-value-flow-design-preparation.md`: P012 V1/R1 と P013 M1 の最初の
   value-flow comparison cut。relation-first reference、request-occurrence anchoring、nominal
   attempt alternative を比較するが、carrier、runtime、source syntax は採択しない。
+- `plan/209-c2b-c3-relation-obligation-audit.md`: Plan 208 の completed-success shorthand を
+  prefix-local staged relation へ補正し、M1 validation outcome、linearity、save/load 復元、
+  carrier-neutral な ergonomic projection の検査条件を整理する。Carrier や source rule は採択しない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
