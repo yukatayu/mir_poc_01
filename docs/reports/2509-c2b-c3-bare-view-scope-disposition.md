@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2509`
 **Date:** 2026-07-28 20:08 JST
-**Status:** disposition content staged; commit and push pending
+**Status:** disposition committed and pushed; report closeout pending
 
 ## Objective
 
@@ -39,7 +39,7 @@ Started at clean, pushed `HEAD` `9f90bb3cda7eb137cf306d33570d5fcc29f63e48`. WRK-
 ## Commands run
 
 - Focused history/diff review and Canon index rebuild
-- `git diff --check`, `make docs`, commit/push, and remote equality verification are required before this disposition is valid
+- `git diff --check`, `make docs`, `git commit --no-gpg-sign`, `git push origin HEAD:main`, `git fetch origin main`, and remote equality verification
 
 ## Evidence / outputs / test results
 
@@ -92,7 +92,9 @@ No Lean, runtime, parser, transport, or end-to-end command applies: this package
 
 ## Commit / push status
 
-Pending at report write.
+Disposition was committed as `2c072617f9d8d11c36afc79387b943cba4844433`
+with `--no-gpg-sign`, pushed to `origin/main`, and verified after fetch with
+`HEAD == origin/main`. This report closeout update is the only pending commit.
 
 ## Sub-agent session close status
 
