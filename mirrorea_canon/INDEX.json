@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 117,
+ "files": 118,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 13689
+   "bytes": 14034
   },
   {
    "id": "root/north-star",
@@ -1699,6 +1699,25 @@
    "open_items": [],
    "path": "working/WRK-0030-c2a-source-tagged-anti-collapse-vocabulary.md",
    "bytes": 8496
+  },
+  {
+   "id": "working/WRK-0031",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "spec/01-lexical-and-modules",
+    "spec/02-surface-grammar",
+    "spec/03-static-semantics",
+    "spec/07-diagnostics-format",
+    "theory/03-elaboration",
+    "theory/10-diagnostics",
+    "meta/proposal-008"
+   ],
+   "summary": "Plan 200 C0-C の pre-enumerated source span について、literal terminal/reject/Diagnostic wording と明示 cross-reference の有無だけを source-local に記録する。stage membership、coverage、reject domain、Diagnostic assignment/equality/completeness、totality/coherence は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md",
+   "bytes": 8500
   }
  ]
 }
