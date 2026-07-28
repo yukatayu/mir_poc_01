@@ -648,6 +648,7 @@ REQUIRED = [
     "plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md",
     "plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md",
     "plan/213-c2b-c3-fiberwise-relational-comparison-selection.md",
+    "plan/214-post-wrk0039-autonomous-frontier-disposition.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

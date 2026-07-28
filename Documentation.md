@@ -39,6 +39,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 B-primary opaque-anchor candidate selection | `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md` |
 | C2-B/C3 bundled/relational presentation comparison selection | `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md` |
 | C2-B/C3 fiberwise relational comparison selection | `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md` |
+| WRK-0039 後の C2-B/C3 autonomous frontier | `plan/214-post-wrk0039-autonomous-frontier-disposition.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -189,6 +190,9 @@ profile と Canon amendment は未作成です。
 - `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`: bare view は key を保持しない
   ことを確認し、未実行の WRK-0038 を書き換えず、全十の supplied key ごとの fiberwise relation
   comparison だけを successor 候補にする。key recovery や source inference は選ばない。
+- `plan/214-post-wrk0039-autonomous-frontier-disposition.md`: WRK-0039 後の同一 authority cut では
+  新しい L3 candidate を作らない。有限比較の重複を避け、pending、reply/receipt/failure、restore/load、
+  source reconstruction は ordinary Canon design boundary に戻す。これは carrier を選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

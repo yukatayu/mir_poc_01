@@ -839,6 +839,8 @@
   `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`
 - WRK-0039 C2-B/C3 fiberwise relational presentation finite evidence:
   `plan/wrk-0039-c2b-c3-fiberwise-relational-presentation-experiment.md`
+- Post-WRK-0039 autonomous frontier disposition:
+  `plan/214-post-wrk0039-autonomous-frontier-disposition.md`
 
 ## maintenance rule
 

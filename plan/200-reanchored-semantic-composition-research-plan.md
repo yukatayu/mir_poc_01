@@ -249,3 +249,9 @@ relation graph は cell/incidental/receipt-result/resume-result/restore の五�
 receipt/resume graph から導出する。key-supplied fiber translation と有限 observation preservation は
 retained したが、そこから semantic request identity、actual pending/control state、save/load contract、
 又は source omission rule を読むことはできない。今後の ergonomics は別の direct check を必要とする。
+
+Plan 214 の post-WRK-0039 screen は、同じ有限 table の theorem packaging を duplicate とし、
+cross-load/pending/reply/receipt/failure/replay/restore/source reconstruction の拡張を ordinary Canon
+design boundary とした。この cut では successor WKR を pre-register しない。reopen は Canon/owner が
+concrete premise を供給した場合、authority cut が変わった場合、downstream proposal が WRK-0039 より
+強い claim を具体化した場合、又は WRK-0039 の再現可能な defect が見つかった場合に限る。
