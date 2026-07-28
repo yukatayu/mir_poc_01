@@ -107,5 +107,19 @@ carrier, or a new helper/schema/CI/Make/API/evidence lane.
 
 ## Execution outcome
 
-Selection only. No `WRK-0035` record, Lean source, generated artifact, or outcome command
-exists at this selection cut.
+This selection was executed in a later package without changing this selection cut.
+`working/WRK-0035-c7-parametric-factorization.md` was registered, then the
+single fenced source in `plan/wrk-0035-c7-parametric-factorization.md` passed
+`lean --trust=0` at evidence commit
+`e3bd47217365acbfe2d861de7e2377d06ba61d14`. The four designated theorem
+checks reported no axioms; the input digests matched and the forbidden-token
+scan was clean. Bare Lean 4.29 does not expose `exists!` or `ExistsUnique` in
+this unimported lane, so the identical pointwise existence-and-uniqueness
+proposition is written explicitly in the artifact.
+
+The Canon metadata link is
+`eb075ace20bdcd9d9d646feb96f874e1deb22944`. The result remains `L3-open,
+not-promoted`: it retains only the generic range-only conditional lemma,
+collision refutations, and fixed full-codomain countermodel. It selects no
+Mir source form, grounds/provenance model, concrete elaborated artifact,
+reconstruction function, or source authorization.

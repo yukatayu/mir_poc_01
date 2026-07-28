@@ -8,7 +8,8 @@ authority、契約、SCN、OBL、Gate/Phase、runtime、wire、公開 API を選
 
 ここでいう `no-candidate` は、WRK-0034 と同じ固定 finite-presentation line に新しい
 `WRK-####` を pre-register できない、という局所的な disposition である。C7 の抽象的な
-reconstructibility criterion は fresh preflight 未了なので、この Plan 全体は provisional とする。
+reconstructibility criterion は別 package で preflight、登録、実行、metadata link まで完了したため、
+この Plan は fixed finite line の disposition と C7 への分岐を記録する historical LAB memory とする。
 プロジェクト全体の研究、将来の既存 LAB lane、又は owner/canon による通常の設計を閉じるものではない。
 
 ## 対象 cut と確定している事実
@@ -60,12 +61,13 @@ standing predicate に追加条件を設けるものではない。
 | C4 SW1 | served-write の語を抽象化すること | **owner/Canon boundary**。request binding、facet projection、validation/mutation/failure relation を定義しなければ有意な検査にならない |
 | C5 proper conditional A2 | ordinary-admission source span の追加 audit | **owner/Canon boundary**。composite occurrence、membership/grant/witness projection、lineage、rejection residue、load/rollback を選ぶ必要がある。issuance が独立に失敗・観測・schedule されるなら A1 successor decision が先行する |
 | C6 scalar / terminal closure | source gap の再監査 | **no-candidate**。WRK-0027 の重複であり、scalar representation 又は finite-domain elaboration、ownership、initialization、visibility、persistence、terminal target を選ぶ必要がある |
-| C7 source ergonomics | `erase : E -> S` と `observe : E -> O` を parameter にした fiber-constancy / unique-reconstruction criterion | **selected for pre-registration in Plan 205**。pointwise `exists!` over `range erase` と explicit collision に限定し、concrete source omission rule、Mir carrier、authority、failure、identity、history を選ばない |
+| C7 source ergonomics | `erase : E -> S` と `observe : E -> O` を parameter にした fiber-constancy / unique-reconstruction criterion | **retained as WRK-0035 L3 evidence**。pointwise unique realized observation on `range erase` と explicit collision、full-codomain countermodel に限定する。concrete source omission rule、Mir carrier、authority、failure、identity、history は選ばない |
 
 したがって、WRK-0034 と同じ fixed model に対する list-prefix specialization、別名の
 final-observation theorem、`List.length xs <= n` に制限した同じ fold-preservation statement、
 又は同じ有限 model の proof embellishment は、新しい L3 result として開始しない。C7 の
-carrier-neutral factorization criterion は別の fresh preflight として未解決である。trace、delivery、
+carrier-neutral factorization criterion は WRK-0035 で generic L3 conditional lemma として retained
+したが、source rule、grounds、concrete elaborated artifact、又は reconstruction function は未解決である。trace、delivery、
 history、persistence、liveness、infinite behavior を扱うために model を拡張することは、この
 fixed-presentation line では新たな semantic selection となる。
 
@@ -73,8 +75,8 @@ fixed-presentation line では新たな semantic selection となる。
 
 WRK-0034 と同じ fixed finite model に関する次の substantive action は、新規 successor WRK ではない。
 carrier を選択する作業について現在記録されている ordinary design boundary は C3 proper であるが、
-その着手順序と採否は owner/Canon process に属する。C7 factorization criterion の fresh preflight が
-non-duplicative existing-lane L3 candidate と判定されなかった場合、C3 proper は少なくとも次を明示する必要がある。
+その着手順序と採否は owner/Canon process に属する。C7 の retained L3 result は C3 proper の
+carrier 選択又は source inference を代替しない。C3 proper は少なくとも次を明示する必要がある。
 
 1. typed pending / result / reply / receipt / correlation の carrier と equality/identity の範囲。
 2. held `Gamma` / `Delta`、success と failure の transition、one resumption、evaluation order。
@@ -109,7 +111,7 @@ L2 promotion、proof/OBL status、conformance、Gate/Phase、implementation read
 
 - `plan/199` と `plan/200` は、この scoped disposition を current frontier の状態として参照する。
 - `progress.md` と `tasks.md` は「C3 proper を始める前に再審査」の古い next step を、
-  「固定 finite-presentation line は no-candidate、C7 factorization は fresh preflight、carrier 選択は
+  「固定 finite-presentation line は no-candidate、C7 factorization は retained L3 evidence、carrier 選択は
   ordinary Canon design boundary」へ更新する。
 - 新しい L3 evidence を作る場合は、この Plan 204 を根拠にせず、未来の authority cut で
   ADR-0014 の standing predicate を最初から再評価する。

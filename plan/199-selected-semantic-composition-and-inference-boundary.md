@@ -217,8 +217,9 @@ reply list の local-observation equality を conditional lemma として retain
 transport/scheduler/history、C3 pending/correlation/persistence、source inference を含まない。WRK-0034 後の
 fresh ADR-0014 preflight は Plan 204 に provisional disposition として記録した。fixed model の追加定理は
 既存結果の系又は重複である。一方 C7 は `erase`/`observe` を parameter にした carrier-neutral
-factorization criterion が既存規律の言い換えか非重複 conditional lemma かを fresh preflight するまで
-未決である。C0-D/C1/C2-B/C3--C6 の有意な前進は ordinary Canon design/owner boundary を越える。C3 proper の
+factorization criterion を WRK-0035 で non-promoted L3 conditional lemma として retained した。これは
+unique realized observation on `range erase` の extensional boundary に限られ、inspectable grounds、concrete
+elaborated artifact、又は source omission rule を供給しない。C0-D/C1/C2-B/C3--C6 の有意な前進は ordinary Canon design/owner boundary を越える。C3 proper の
 semantic design package は carrier-selecting boundary として記録するが、着手順序をこの LAB plan が決めない。
 
 ## Non-claims

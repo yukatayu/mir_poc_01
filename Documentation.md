@@ -29,6 +29,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | V1/R1 finite-sequence presentation 比較の証跡 | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md` |
 | WRK-0034 後の意味論合成 frontier provisional disposition | `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md` |
 | C7 parametric factorization の選別 | `plan/205-c7-parametric-factorization-candidate-selection.md` |
+| C7 parametric factorization の L3 証跡 | `plan/wrk-0035-c7-parametric-factorization.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -144,12 +145,14 @@ profile と Canon amendment は未作成です。
   preservation と `List.foldl` 後の local observation equality を保持するが、full
   trace equivalence、C3 proper、source inference は選ばない。
 - `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`: WRK-0034 後の
-  ADR-0014 semantic-composition frontier を provisional に記録する。固定 finite-presentation line は
-  scoped `no-candidate` だが、carrier-neutral C7 factorization criterion は fresh preflight とし、
-  プロジェクト全体を閉じない。source-ergonomics は唯一に再構成できる fact だけを検討する。
+  fixed finite-presentation line は scoped `no-candidate` とする。C7 の separate L3 result は
+  retained 済みだが、carrier 選択、grounds、source rule には進まず、プロジェクト全体を閉じない。
 - `plan/205-c7-parametric-factorization-candidate-selection.md`: C7 の local `erase`/`observe`
-  parameter に対する pointwise unique-observation criterion を L3 pre-registration 候補として選別する。
+  parameter に対する pointwise unique-observation criterion を選別し、後続の登録・実行結果を記録する。
   Mir source rule や concrete inference を選ばず、choice/quotient を outcome stop line にする。
+- `plan/wrk-0035-c7-parametric-factorization.md`: `range erase` 上の pointwise unique observation と
+  fiber constancy の generic L3 conditional lemma、collision refutation、full-codomain countermodel を
+  `--trust=0` で確認した LAB evidence。concrete Mir source、grounds、reconstruction は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

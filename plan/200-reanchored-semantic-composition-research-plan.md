@@ -213,7 +213,8 @@ C3 carrier、source inference、C7 を意味しない。WRK-0034 は standalone 
 この fixed route を実行し、translation-preservation と arbitrary finite reply list の local observation equality を
 retained した。WRK-0034 後の fresh ADR-0014 preflight は Plan 204 に provisional disposition として記録した。
 fixed model の変更又は追加の corollary はこの frontier の新 result にしない。一方 C7 の `erase`/`observe`
-parameterized factorization criterion は既存規律の言い換えか非重複 conditional lemma かを fresh preflight
-するまで未決である。C0-D/C1/C2-B/C3--C6 に必要な semantic selection は ordinary Canon design/owner boundary
+parameterized factorization criterion は WRK-0035 で non-promoted L3 conditional lemma として retained した。
+これは `range erase` 上の extensional unique observation だけを扱い、grounds、concrete elaborated artifact、
+source omission rule、又は reconstruction function を供給しない。C0-D/C1/C2-B/C3--C6 に必要な semantic selection は ordinary Canon design/owner boundary
 へ戻す。C3 proper の候補比較・adverse case・compatibility review は carrier-selecting 通常設計の boundary として
 記録し、source inference は一意な semantic fact と reconstructible elaborated basis が得られるまで rule にしない。
