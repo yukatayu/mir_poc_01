@@ -287,3 +287,9 @@ relation-state definitions, proof obligations, adverse cases, and non-claims
 that prevent a future proposal from hiding delivery, redaction, typed failure,
 or post-load linearity assumptions. It creates no formal model or successor L3
 record before the selected semantics exists.
+
+`PROPOSAL-017` now presents the bounded X1/XD owner choice without converting
+the Plan 220 matrix into semantics or proof. It narrows X1 to cross-locus reads
+and leaves the precise relation schema, operational transition presentation,
+source convenience, observer projection, and implementation outside the
+choice. Pending the owner record, no successor L3 model follows.

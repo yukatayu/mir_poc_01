@@ -1,0 +1,83 @@
+# Plan 221: C2-B/C3 Canon Proposal Preparation
+
+## Role and authority
+
+This is LAB repository memory for the preparation of Canon `PROPOSAL-017`.
+It records no owner disposition and does not make the proposal's candidate
+effective. `mirrorea_canon/` remains normative; the only authoritative outcome
+is a human decision recorded in the proposal and then, if adopted, the ordinary
+amendment chain.
+
+## What is now prepared
+
+Plans 219--220 reduced the C2-B/C3 gap to a proposed **relation-state
+envelope**, not a field schema. `PROPOSAL-017` asks whether subsequent work may
+define the smallest relation-valued configuration component anchored by an
+existing request occurrence in the current/restored history. It keeps a fresh
+nominal identity, history-only reconstruction, delivery semantics, and source
+syntax outside the decision.
+
+The requested package is bounded by the Plan 220 matrix: M1 context/grounds,
+terminal typed branches, receipt acceptance, causal links, one-shot linear use,
+redacted observation, complete save/load, explicit scope exclusions, and later
+conservative elaboration. This is enough to prevent an implementation or proof
+from inventing a hidden correlation carrier, but not enough to assert that any
+row is already satisfied.
+
+## Critical review incorporated
+
+An independent advisory review found that the first draft was too broad and
+premature in ten concrete ways. `PROPOSAL-017` now limits X1 to cross-locus
+**read** requests; separates owner-service outcome from receipt/use state;
+requires a unique pending administrative binding; leaves receipt rejection,
+consumption presentation, generated causal/edge vocabulary, observation, and
+source syntax unselected; and requires the complete save/load state matrix.
+
+The resulting proposal does not assert a `pure` or zero-occurrence consumption
+rule. It only requires a later package to preserve theory/01's zero-or-one
+occurrence discipline while choosing the exact presentation. It also does not
+authorize ergonomic omission: a separate future proposal must prove any
+source-level convenience from declared static syntax and context without
+inventing dynamic correlation.
+
+A separate final advisory review then returned `PASS`: no owner-blocking
+assumption remained after those corrections. That review is evidence for the
+proposal's boundedness only. It does not record X1, make the candidate
+effective, or replace the owner's normal disposition.
+
+## Owner decision still required
+
+`PROPOSAL-017` deliberately requests only:
+
+```text
+X = X1 relation-state envelope | XD defer | return for clarification
+```
+
+The user's agreement with the preceding LAB recommendations supports preparing
+this proposal. It is not silently transcribed here as an exact Canon amendment
+because the proposal's concrete scope and non-effects must remain reviewable.
+An accepted X1 would open the bounded integration design package; it would not
+directly alter `Core`, `Config`, `SaveObject`, an operational rule, OBL, Gate,
+Phase, implementation, or public contract.
+
+## Ergonomic direction, deferred correctly
+
+The later language surface should not force authors to write administrative
+correlation syntax when selected semantics determines it uniquely. This does
+not justify inferring a semantic fact now. A future elaboration rule must show
+one complete explicit record or one Diagnostic, preserve and expose generated
+communication/effect/failure/authority/provenance/dependency/linearity/load
+facts, and never derive them from incidental source or transport data.
+
+## Immediate next state
+
+After proposal review and an owner record, the first autonomous technical work
+is a narrow selected-scope model against Plan 220's three-frontier test. Until
+then, no `working/` record, Lean theorem, runtime experiment, or rule text is
+authorized by this preparation alone.
+
+## Non-effects
+
+This plan does not select a Canon carrier or implementation, add a Core or
+source construct, create a theorem/OBL claim, or alter any scenario, Gate,
+Phase, sample, public contract, or readiness statement.

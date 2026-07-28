@@ -853,6 +853,8 @@
   `plan/219-c2b-c3-minimal-semantic-residence-options.md`
 - C2-B/C3 relation-state proof-obligation audit:
   `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`
+- C2-B/C3 Canon proposal preparation:
+  `plan/221-c2b-c3-canon-proposal-preparation.md`
 
 ## maintenance rule
 

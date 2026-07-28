@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 01:31 JST
+最終更新: 2026-07-29 02:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,9 +39,10 @@ carrier-neutral comparison, Plan 218 finds the first-card carrier gap, and
 Plan 219 reduces it to three semantic-residence alternatives. Its LAB
 recommendation is explicit relation-valued configuration state anchored by the
 in-history request occurrence. Plan 220 then records the pending, typed branch,
-causal, linear, redaction, load, scope, and elaboration obligations needed
-before that recommendation can be used as semantics; both remain distinct from
-Canon selection. Their current conclusion is:
+causal, linear, redaction, load, scope, and elaboration obligations. P017 passes
+an independent final review as an X1/XD owner decision request for V1/R1
+cross-locus reads only; it remains distinct from Canon selection. Their current
+conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
@@ -130,7 +131,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | explicit relation state; history-only projection; fresh nominal identity | Plan 219 recommends relation-valued configuration state anchored by the in-history request occurrence. Plan 220 requires pending, typed branch, causality, linearity, redaction, SaveObject closure, scope, and elaboration proof rows before reliance. Owner/Canon must select semantics; reject hidden state, incidental identity, and premature nominal identity |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope; XD defer | P017 is limited to V1/R1 cross-locus reads. X1 requires unique pending binding, separate service/receipt-use state, authority, save/load, observation, and source non-effects; schema/rule/proof remain unselected. Owner/Canon records X1/XD before any model |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -220,6 +221,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/219-c2b-c3-minimal-semantic-residence-options.md`.
 - C2-B/C3 relation-state proof-obligation audit:
   `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`.
+- C2-B/C3 Canon proposal preparation:
+  `plan/221-c2b-c3-canon-proposal-preparation.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

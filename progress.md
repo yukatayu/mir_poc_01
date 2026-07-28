@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-29 01:31 JST
+最終更新: 2026-07-29 02:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -70,7 +70,9 @@ Current exact blockers:
    cut; Plan 215--218 group, audit, compare, and source-screen the ordinary
    decision boundary. Plan 219 recommends explicit relation state over a
    history-only projection or fresh nominal identity; Plan 220 lists its
-   pending/branch/redaction/load proof obligations without selecting Canon.
+   pending/branch/redaction/load proof obligations. P017 now narrows the owner
+   decision request to X1/XD for V1/R1 cross-locus reads, without selecting
+   Canon semantics.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -171,8 +173,8 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plans 215--220 make the carrier gap, alternatives, and undischargeable proof rows explicit. No Canon carrier changed |
-| Owner / Canon | C2-B/C3 presentation and state locus | explicit relation state / history-only projection / fresh nominal identity | Plan 219 recommends relation-valued configuration state anchored by the in-history request occurrence; Plan 220 requires explicit pending, typed branch, causality, linearity, redaction, and load definitions before proof reliance |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plans 215--221 and P017 make the carrier gap, alternatives, obligations, and bounded decision request explicit. No Canon carrier changed |
+| Owner / Canon | C2-B/C3 presentation and state locus | P017 X1 relation-state envelope / XD defer | P017 limits X1 to V1/R1 cross-locus reads, requires unique pending binding and separated service/receipt-use state, and defers schema/rules/proof/source/runtime |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -185,7 +187,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, a recommendation prepared, and its proof-obligation matrix exposed | heavy | normal Canon decision, then conditional existing-lane research |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, a final-reviewed X1/XD decision request and proof-obligation matrix prepared | heavy | owner disposition, then conditional existing-lane research |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -210,6 +212,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 02:17 JST: P017 passed an independent final review as a bounded
+  V1/R1 cross-locus read X1/XD owner decision request. The review required a
+  unique pending binding and full save/load matrix, and removed premature
+  transition, observation, source-inference, and OBL implications. No owner
+  disposition, Canon rule, proof, OBL, Gate, Phase, implementation, or public
+  claim changed.
 
 - 2026-07-29 01:31 JST: Plan 220 red-teamed the Plan 219 recommendation. It
   corrected premature terminal/receipt wording and makes pending, typed branch,

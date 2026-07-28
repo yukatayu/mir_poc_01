@@ -46,6 +46,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 first candidate-card source preflight | `plan/218-c2b-c3-first-card-source-preflight.md` |
 | C2-B/C3 minimal semantic-residence options | `plan/219-c2b-c3-minimal-semantic-residence-options.md` |
 | C2-B/C3 relation-state proof-obligation audit | `plan/220-c2b-c3-relation-state-proof-obligation-audit.md` |
+| C2-B/C3 Canon proposal preparation | `plan/221-c2b-c3-canon-proposal-preparation.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -218,6 +219,13 @@ profile と Canon amendment は未作成です。
 - `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`: Plan 219 の推奨を
   proof と取り違えず、pending、typed branch、causality、linearity、redaction、load、
   elaboration の obligation と falsifier を owner-facing decision 前に整理する。
+- `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
+  V1/R1/M1 の C2-B/C3 relation-state envelope を通常の owner decision request として
+  起票する。cross-locus read に限り、carrier、transition、source grammar、runtime、OBL を
+  選ばない。将来の省略記法も別 proposal として扱う。
+- `plan/221-c2b-c3-canon-proposal-preparation.md`: P017 の owner disposition 前に、
+  unique pending binding、owner outcome/receipt 分離、complete save/load、authority、
+  observation、source boundary を review 済みの decision envelope として整理する。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

@@ -295,6 +295,12 @@ then records only the definitions, obligations, and falsifiers a selected
 design must close. It does not turn the recommendation into a theorem or a
 Canon carrier.
 
+`PROPOSAL-017` is the resulting ordinary owner decision request. It scopes the
+candidate envelope to V1/R1 cross-locus reads, requires one selected pending
+binding and a separated owner-service/receipt-use boundary, and defers its
+carrier schema, transitions, observation, source grammar, and runtime. It has
+no owner disposition at this cut.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once

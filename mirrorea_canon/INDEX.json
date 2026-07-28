@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 126,
+ "files": 127,
  "entries": [
   {
    "id": "root/changelog",
@@ -672,6 +672,27 @@
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-016-t2-i1-bootstrap-separation.md",
    "bytes": 2772
+  },
+  {
+   "id": "meta/proposal-017",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/02-types-effects-failures",
+    "theory/03-elaboration",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "adr/ADR-0012",
+    "adr/ADR-0014",
+    "meta/proposal-012",
+    "meta/proposal-013"
+   ],
+   "summary": "V1/R1/M1 が必要とする C2-B/C3 の相関・receipt・one-shot/use・save/load 境界について、relation-state envelope を採択候補として起票する。Core、runtime、OBL、公開契約は変更しない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md",
+   "bytes": 12634
   },
   {
    "id": "meta/source-hierarchy",
