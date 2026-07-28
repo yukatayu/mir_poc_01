@@ -37,6 +37,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 relation-obligation audit | `plan/209-c2b-c3-relation-obligation-audit.md` |
 | C2-B/C3 Family A/B instantiation audit | `plan/210-c2b-c3-family-a-b-instantiation-audit.md` |
 | C2-B/C3 B-primary opaque-anchor candidate selection | `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md` |
+| C2-B/C3 bundled/relational presentation comparison selection | `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -181,6 +182,9 @@ profile と Canon amendment は未作成です。
   二つの不透明な request occurrence と明示的な model-local projection を使う有限 L3 experiment
   だけを pre-register 候補にする。payload、DAG、span、locus、transport、queue position は identity
   又は correlation の根拠にしない。
+- `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md`: WRK-0037 と同じ
+  有限表に限り、bundled explicit view と independently stated relational view の観測・遷移保存を
+  比較する。いずれも Canon carrier、identity、source inference を選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

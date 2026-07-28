@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 18:41 JST
+最終更新: 2026-07-28 19:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0036 は各々の限定結果を保持し、Plan 204 は fixed line の no-candidate を保持する。Plan 207 は新しい L3 candidate を作らず、Plan 208--210 は C2-B/C3 comparison を準備し、Plan 211/WRK-0037 は B2-OPAQUE の fixed finite L3 evidence を retained した | C7 は source rule でなく L3 boundary。WRK-0037 は model-local table のみを検査し、carrier を採択しない。A/B の identity/pending/receipt/save-load は owner/Canon selection を待つ。C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0037 は限定結果を保持し、Plan 212 は同一有限表の bundled/relational comparison だけを次候補にした | C7 は source rule でなく L3 boundary。Plan 212 は carrier を選ばず、A/B の identity/pending/receipt/save-load は owner/Canon selection を待つ。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -97,7 +97,7 @@ official T2 まで無条件に連続自走することはできません。次�
   retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
   又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
   を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207 は残る C0-D--C7 を再審査し、Plan 208--210 は C2-B/C3 comparison を prefix-local staged relation、validation outcome、restore configuration と A/B instantiation audit へ整理した。Plan 211/WRK-0037 は B2-OPAQUE finite L3 table を実行したが、carrier は選ばない。
+  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207--210 は C2-B/C3 comparison を整理し、Plan 211/WRK-0037 は B2-OPAQUE finite table を実行した。Plan 212 はその同一有限表の bundled/relational comparison を選んだが、carrier は選ばない。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -118,7 +118,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
 | 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | C5-PRE は source-local issuance guard のみを監査可能。Plan 211/WRK-0037 は B2-OPAQUE の有限表を実行したが、pending/reply/receipt/load の Canon carrier は選ばない。C3/C4/C5 本体は ordinary Canon design boundary |
+| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | Plan 212 は B2-OPAQUE と同じ有限表で bundled/relational presentation を比較する候補のみを選んだ。pending/reply/receipt/load の Canon carrier は選ばない。C3/C4/C5 本体は ordinary Canon design boundary |
 | 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
 | 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
 
@@ -164,7 +164,7 @@ C3 carrier、full trace equivalence、source inference、Core rule を選びま�
 | V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | V1/R1 retained finite evidence | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence selection | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
-| V1/R1 finite-sequence / C7 evidence and design frontier | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md`; `plan/wrk-0035-c7-parametric-factorization.md`; `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`; `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`; `plan/207-post-wrk0036-autonomous-frontier-disposition.md`; `plan/208-c2b-c3-value-flow-design-preparation.md`; `plan/209-c2b-c3-relation-obligation-audit.md`; `plan/210-c2b-c3-family-a-b-instantiation-audit.md`; `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`; `plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md` |
+| V1/R1 finite-sequence / C7 evidence and design frontier | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md`; `plan/wrk-0035-c7-parametric-factorization.md`; `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`; `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`; `plan/207-post-wrk0036-autonomous-frontier-disposition.md`; `plan/208-c2b-c3-value-flow-design-preparation.md`; `plan/209-c2b-c3-relation-obligation-audit.md`; `plan/210-c2b-c3-family-a-b-instantiation-audit.md`; `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`; `plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md`; `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |
