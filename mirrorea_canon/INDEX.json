@@ -1806,7 +1806,7 @@
    "summary": "C2-B/C3 の Canon carrier を選ばず、二つの opaque request atom、direct staged projection、injective restore を持つ固定有限 B-primary experiment が incidental identity なしに一つの coherent presentation を持つかを検査する。Core、Config、history、SaveObject、source rule、runtime は除外する。",
    "open_items": [],
    "path": "working/WRK-0037-c2b-c3-b-primary-opaque-anchor.md",
-   "bytes": 9407
+   "bytes": 10755
   }
  ]
 }

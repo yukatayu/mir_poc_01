@@ -1,8 +1,8 @@
 # Report 2504 - C2-B/C3 B-primary opaque-anchor finite evidence
 
 **Identifier:** `LAB-REPORT-2504`
-**Date:** 2026-07-28 18:41 JST
-**Status:** local evidence and independent review passed; evidence commit pending
+**Date:** 2026-07-28 18:59 JST
+**Status:** evidence commit pushed; WRK metadata link pending
 
 ## Objective
 
@@ -173,14 +173,14 @@ No runtime, transport, parser, sample, or end-to-end command applies to this
 artifact-local theorem table. `make docs` passed before the evidence commit:
 Canon index, source hierarchy, report structure, and its secret scan all passed.
 Committed WRK-history validation remains pending because the evidence commit has
-not yet been created.
+not yet been linked from WRK-0037 metadata.
 
 ## Commit / push status
 
-Evidence commit pending. It will be made with `--no-gpg-sign`, pushed to
-`origin/main`, followed by a fetch and `HEAD == origin/main` check. A separate
-metadata-only commit will then append the exact evidence commit and artifact
-digest to WRK-0037.
+Evidence was committed with `--no-gpg-sign` as
+`99f468d6d5e415ed05f90b77c2b37956102fdc36`, pushed to `origin/main`, and
+verified after fetch with `HEAD == origin/main`. The metadata-only link commit
+is pending and will be validated and pushed separately.
 
 ## Sub-agent session close status
 

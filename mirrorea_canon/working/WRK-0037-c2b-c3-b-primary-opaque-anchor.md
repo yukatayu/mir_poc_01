@@ -67,12 +67,25 @@ Non-claims: This does not select A, B, or C; define any Mir request/attempt/occu
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: none; registration only.
-Negative evidence: none; outcome commands are not yet authorized.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This record is normative only about the reversible L3 research boundary and its procedure. A future finite pass can establish only that one explicitly bounded candidate did not trigger its registered falsifiers; it cannot make B a Canon carrier or authorize a downstream design.
-Independent review: not-required-for-L3
+Positive evidence: Every registered outcome command completed after the
+registration push. At the pinned authority/input cut, the fenced finite source
+proves distinct equal-incidental request atoms, no total left inverse from the
+listed incidental record recovering both atoms, explicit staged records,
+involutive local reindexing of every frontier/view, unique receipt and resume
+extensions, rejected receipt/resume combinations, terminal failure exclusion
+including local mutation, grounded dependency, and local non-authority. Lean
+4.29 passed the extracted source at `--trust=0`; `#print axioms` reports no
+axioms for every retained theorem.
+Negative evidence: No registered falsifier occurred. The pinned input digests
+match the authority cut; the duplicate query found the expected
+selection/registration/evidence references rather than a prior
+statement-equivalent result; and the extracted source has no scanned
+placeholder, unsafe, classical-choice, quotient, or axiom token. The retained
+result is one finite table, not a general recovery, restore, or carrier result.
+Evidence artifacts: LAB:plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md@99f468d6d5e415ed05f90b77c2b37956102fdc36:839ffda0e4c01fb1dab476598b97f658a8f85e27d8ce2547ab6a8c49e8662739
+Evidence commits: 99f468d6d5e415ed05f90b77c2b37956102fdc36
+Impact / non-effects: This record is normative only about the reversible L3 research boundary and its procedure. The finite pass establishes only that one explicitly bounded candidate did not trigger its registered falsifiers; it cannot make B a Canon carrier, define request identity, authorize a downstream design, or establish a recovery/persistence/inference rule.
+Independent review: not-required-for-L3; two temporary GPT-5.6 Sol Pro advisory reviews challenged coverage and then accepted the revised finite scope.
 
 ## Supersession
 
