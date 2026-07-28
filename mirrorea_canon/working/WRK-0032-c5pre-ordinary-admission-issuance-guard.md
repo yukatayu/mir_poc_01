@@ -86,13 +86,21 @@ implementation readiness, or a machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: pending execution after the pushed registration.
-Negative evidence: pending execution after the pushed registration.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: Pending execution can retain only a source-local literal
-matrix over the named ordinary-admission spans. It cannot supply an ergonomic
-inference, choose A1/A2, establish atomic issuance, or alter a Canon rule.
+Positive evidence: Every registered command passed at the pinned cut. P012
+literally records the conditional-A2 issuance guard direction. The evidence
+matrix records that the four named ordinary-admission theory/spec spans do not
+literally name a distinct issuance rule, transition, state, issuance-specific
+failure, scheduling point, or independent observation.
+Negative evidence: No registered falsifier occurred. The source-local reading
+did not require an occurrence identity, atomicity, cardinality, operational
+trace, patch-admission classification, source-wide absence claim, or a
+reserved-surface change.
+Evidence artifacts: LAB:plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md@7737b0348dadf6271beff466f648106ce66487a6:1efcb4d5c965a72e09eca57e30410139e3b8e22534e740843992187396f89380
+Evidence commits: 7737b0348dadf6271beff466f648106ce66487a6
+Impact / non-effects: The retained result is only the source-local matrix of
+P012's conditional guard direction and the four named ordinary-admission span
+non-matches. It cannot supply an ergonomic inference, choose A1/A2, establish
+atomic issuance, or alter a Canon rule.
 Independent review: not-required-for-L3
 
 ## Supersession
