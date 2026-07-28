@@ -89,17 +89,23 @@ machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: No outcome evidence has been run. This registration pins the
-question, alternative, falsifiers, non-effects, and exact cut before any new
-Lean source is written or command is executed.
-Negative evidence: No registered outcome command has run. No semantic carrier,
-source form, helper, schema, validator, CI/Make surface, evidence lane, or
-reserved surface is introduced by this registration.
-Evidence artifacts: none
-Evidence commits: none
+Positive evidence: Every registered outcome command passed at the pinned cut.
+The 182-line finite Lean source preserves `toMachine` across one fixed step and
+then across every finite `List.foldl` of the same opaque reply labels; the
+fixed local observations agree after the two runs. Its first 133 lines are
+byte-identical to WRK-0033. Lean 4.29.1 passed at `--trust=0` with no output.
+Negative evidence: The RED draft failed exactly because `rfl` cannot reduce
+arbitrary opaque state/reply inputs; finite case analysis is required. This was
+a proof-authoring check, not a semantic falsifier. No registered falsifier
+occurred. The input digests match; no semantic carrier, source form, helper,
+schema, validator, CI/Make surface, evidence lane, or reserved surface was
+introduced. The result is not generalized beyond the fixed finite assumptions.
+Evidence artifacts: LAB:plan/wrk-0034-v1-r1-finite-sequence-refinement.md@dc66f08237acd11e4de722cd67a42fae0b26e1eb:0e3eb3513f39afb241f796248737fc4a9f66665986fd32e143503991a71b820b
+Evidence commits: dc66f08237acd11e4de722cd67a42fae0b26e1eb
 Impact / non-effects: This record is normative only about its reversible,
-fixed-model research boundary and procedure. It leaves V1/R1's eventual
-presentation and every semantic/operational contract unresolved.
+fixed-model research boundary and procedure. It establishes neither a Mir
+trace nor V1/R1's eventual presentation, source inference, or any
+semantic/operational contract.
 Independent review: not-required-for-L3
 
 ## Supersession

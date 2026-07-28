@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 15438
+   "bytes": 15429
   },
   {
    "id": "root/north-star",
@@ -1761,7 +1761,7 @@
    "summary": "Plan 203 の固定 WRK-0033 presentation を変更せず、opaque LAB reply の有限列に対する translation-preservation と local-observation equality だけを conditional lemma として検査する。Mir trace、pending/request/occurrence identity、Core/history/runtime、source inference は定義・選択しない。",
    "open_items": [],
    "path": "working/WRK-0034-v1r1-finite-sequence-refinement.md",
-   "bytes": 9433
+   "bytes": 10095
   }
  ]
 }
