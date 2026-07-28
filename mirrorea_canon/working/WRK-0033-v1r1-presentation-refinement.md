@@ -89,17 +89,25 @@ proof, conformance, implementation readiness, or a machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: No outcome evidence has been run. This registration pins the
-question, alternative, falsifiers, and non-effects before any model source or
-Lean command is materialized.
-Negative evidence: No registered outcome command has run. No semantic carrier,
-source form, helper, schema, validator, CI/Make surface, evidence lane, or
-reserved surface is introduced by the registration.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: This record is normative only about the bounded research
-question and procedure. It leaves V1/R1's eventual presentation and every
-semantic/operational contract unresolved.
+Positive evidence: Every registered outcome command passed at the pinned cut.
+The finite `presentation_refinement` theorem relates the six administrative
+states and four reply labels to their one-slot machine presentations under the
+registered assumptions. The one-shot and failure checks pass for both
+presentations. The three adversarial checks distinguish swapped reply,
+duplicate reply, and failure-then-success when matching, single-use, or
+failure-exclusion is respectively weakened.
+Negative evidence: No registered falsifier occurred. The source inputs and
+SHA-256 digests match the authority cut; the source query did not require a
+semantic carrier; Lean 4.29.1 passed the 133-line fenced source at `--trust=0`;
+and no helper, schema, validator, CI/Make surface, evidence lane, or reserved
+surface was introduced. The finite result is not generalized beyond its stated
+assumptions.
+Evidence artifacts: LAB:plan/wrk-0033-v1r1-presentation-refinement.md@37d2fd00a01aa5cf302f0293f0b6be51a337b217:6347a2b4603e485c3e040302fc69a54746a4aecf7c4180d597729688859fc4fd
+Evidence commits: 37d2fd00a01aa5cf302f0293f0b6be51a337b217
+Impact / non-effects: The retained result is only a finite conditional
+presentation comparison and three finite adverse distinctions. It does not
+select V1/R1 syntax, a pending/correlation/payload/failure/persistence carrier,
+source elaboration, or any semantic/operational contract.
 Independent review: not-required-for-L3
 
 ## Supersession
