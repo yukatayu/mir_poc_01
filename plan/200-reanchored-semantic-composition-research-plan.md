@@ -160,7 +160,7 @@ fresh identity は source omission の推論ではなく、明示的に生成・
 複数 candidate が残る場合は comparison ranking と successor proposal を作るだけで選ばない。
 一候補だけが残っても、Canon amendment、OBL、implementation authorization を意味しない。
 
-## Immediate next autonomous package
+## Autonomous package sequence and current outcome
 
 R0 が C0-A と同じ current-cut/source-authority span を既に source-local に分類したため、
 C0-A を重複して pre-register しない。C0-B は opaque role の conditional DAG として閉じ、
@@ -211,6 +211,9 @@ assumption を固定し、one-step translation-preservation から arbitrary fin
 equality へ閉包できるかだけを conditional lemma として検査する。これは trace/delivery/scheduler/history、
 C3 carrier、source inference、C7 を意味しない。WRK-0034 は standalone pre-registration の commit/push 後に
 この fixed route を実行し、translation-preservation と arbitrary finite reply list の local observation equality を
-retained した。fixed model の変更が必要なら no-candidate disposition に戻り、ordinary Canon design/owner boundary
-を要求する。次は C3 proper を開始せず、remaining frontier の non-duplicate existing-lane L3 candidate を fresh
-ADR-0014 preflight で再審査する。
+retained した。WRK-0034 後の fresh ADR-0014 preflight は Plan 204 に provisional disposition として記録した。
+fixed model の変更又は追加の corollary はこの frontier の新 result にしない。一方 C7 の `erase`/`observe`
+parameterized factorization criterion は既存規律の言い換えか非重複 conditional lemma かを fresh preflight
+するまで未決である。C0-D/C1/C2-B/C3--C6 に必要な semantic selection は ordinary Canon design/owner boundary
+へ戻す。C3 proper の候補比較・adverse case・compatibility review は carrier-selecting 通常設計の boundary として
+記録し、source inference は一意な semantic fact と reconstructible elaborated basis が得られるまで rule にしない。

@@ -114,6 +114,12 @@ local-observation equality after every finite `List.foldl` of opaque replies.
 Its copied 133-line predecessor prefix is byte-identical. This does not supply
 a Mir trace, carrier, source inference, C3 proper, or implementation.
 
+The required post-result frontier re-screen is recorded by Plan 204 as a
+provisional disposition. Further theorems over the unchanged finite model would
+be corollaries or restatements. Plan 204 separately leaves a carrier-neutral C7
+factorization criterion for fresh preflight; it does not authorize source
+inference or change the fixed presentation result.
+
 ## Non-claims
 
 This selection does not establish full trace equivalence, a read-result

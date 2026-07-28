@@ -27,6 +27,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | V1/R1 administrative presentation 比較の証跡 | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence presentation 比較の選別 | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
 | V1/R1 finite-sequence presentation 比較の証跡 | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md` |
+| WRK-0034 後の意味論合成 frontier provisional disposition | `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -141,6 +142,10 @@ profile と Canon amendment は未作成です。
   `--trust=0` で確認した有限列 comparison。fixed translation の one-step
   preservation と `List.foldl` 後の local observation equality を保持するが、full
   trace equivalence、C3 proper、source inference は選ばない。
+- `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`: WRK-0034 後の
+  ADR-0014 semantic-composition frontier を provisional に記録する。固定 finite-presentation line は
+  scoped `no-candidate` だが、carrier-neutral C7 factorization criterion は fresh preflight とし、
+  プロジェクト全体を閉じない。source-ergonomics は唯一に再構成できる fact だけを検討する。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

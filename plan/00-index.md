@@ -811,6 +811,8 @@
   `plan/203-v1-r1-finite-sequence-candidate-selection.md`
 - WRK-0034 V1/R1 fixed finite-sequence presentation evidence:
   `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`
+- WRK-0034 後の意味論合成 frontier provisional disposition:
+  `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`
 
 ## maintenance rule
 
