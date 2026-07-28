@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 02:17 JST
+最終更新: 2026-07-29 02:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -41,7 +41,8 @@ recommendation is explicit relation-valued configuration state anchored by the
 in-history request occurrence. Plan 220 then records the pending, typed branch,
 causal, linear, redaction, load, scope, and elaboration obligations. P017 passes
 an independent final review as an X1/XD owner decision request for V1/R1
-cross-locus reads only; it remains distinct from Canon selection. Their current
+cross-locus reads only; a post-proposal C0--C7 screen finds no new L3 candidate
+before that disposition. It remains distinct from Canon selection. Their current
 conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。

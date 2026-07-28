@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-29 02:17 JST
+最終更新: 2026-07-29 02:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -173,7 +173,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plans 215--221 and P017 make the carrier gap, alternatives, obligations, and bounded decision request explicit. No Canon carrier changed |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 and the P017 post-proposal C0--C7 screen find no successor L3; Plans 215--221 and P017 make the carrier gap, alternatives, obligations, and bounded decision request explicit. No Canon carrier changed |
 | Owner / Canon | C2-B/C3 presentation and state locus | P017 X1 relation-state envelope / XD defer | P017 limits X1 to V1/R1 cross-locus reads, requires unique pending binding and separated service/receipt-use state, and defers schema/rules/proof/source/runtime |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -187,7 +187,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, a final-reviewed X1/XD decision request and proof-obligation matrix prepared | heavy | owner disposition, then conditional existing-lane research |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, final-reviewed X1/XD request prepared, and post-proposal screen has no new L3 candidate | heavy | owner disposition, then conditional existing-lane research |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -212,6 +212,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 02:35 JST: An independent C0--C7 post-P017 autonomy screen found
+  no genuinely non-duplicate ADR-0014 L3 candidate. A pre-disposition model
+  would instantiate X1; the remaining apparent work duplicates retained
+  evidence or selects unresolved semantics. No WRK, Canon rule, proof, OBL,
+  Gate, Phase, implementation, or public claim changed.
 
 - 2026-07-29 02:17 JST: P017 passed an independent final review as a bounded
   V1/R1 cross-locus read X1/XD owner decision request. The review required a

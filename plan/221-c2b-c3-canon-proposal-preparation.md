@@ -45,6 +45,22 @@ assumption remained after those corrections. That review is evidence for the
 proposal's boundedness only. It does not record X1, make the candidate
 effective, or replace the owner's normal disposition.
 
+## Post-proposal autonomous frontier screen
+
+An independent all-frontier screen rechecked C0--C7, Plan 214's closed finite
+lane, the retained WRK evidence, and P017's actual non-effects. It found **no
+genuinely non-duplicate ADR-0014 L3 candidate** at this cut. In particular,
+testing a P017 state, receipt, one-shot, or restore model now would silently
+instantiate X1; repeating C0/C1/C2/C4/C5/C6/C7 audits would either duplicate
+retained evidence or choose the missing semantics.
+
+This is a LAB disposition about the present cut, not a restriction on ADR-0014.
+The active C2-B/C3 frontier reopens when an owner records X1, relevant Canon
+wording changes, a concrete downstream claim supplies a distinct falsifier, or
+a reproducible defect is found in retained evidence. X1 opens only the first
+selected-scope pre-registration; it does not make any integration rule
+effective.
+
 ## Owner decision still required
 
 `PROPOSAL-017` deliberately requests only:
