@@ -38,12 +38,19 @@ Non-claims: This does not select Family A, B, or C; define any Mir request/attem
 
 Reliance status: not-promoted
 Positive evidence: not-run
-Negative evidence: not-run
+Negative evidence: Pre-execution review found that bare `DirectView` values
+collide across supplied `(Frontier, Request)` keys and that WRK-0037 has no
+reachability closure. No registered outcome command or relation source ran.
 Evidence artifacts: none
 Evidence commits: none
-Impact / non-effects: This record is normative only about a reversible L3 research boundary and procedure. Before registered outcome commands complete, it supplies no equivalence, distinction, carrier, identity, recovery, source inference, proof, or implementation result.
+Impact / non-effects: This record remains not-promoted and unexecuted. It
+supplies no equivalence, distinction, carrier, identity, recovery, source
+inference, proof, or implementation result. Its protected pre-registration is
+preserved; the all-ten-cell key-supplied successor is WRK-0039.
 Independent review: not-required-for-L3
 
 ## Supersession
 
-Supersession: none
+Supersession: unexecuted scope superseded by
+`working/WRK-0039-c2b-c3-fiberwise-relational-presentation.md`; this record's
+pre-registration remains preserved and is not rewritten.

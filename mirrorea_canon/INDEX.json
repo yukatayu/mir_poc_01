@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 17601
+   "bytes": 17592
   },
   {
    "id": "root/north-star",
@@ -1823,7 +1823,7 @@
    "summary": "C2-B/C3 の Canon carrier を選ばず、WRK-0037 の二原子有限表に限って bundled DirectView と independently stated relation-first presentation が同じ観測・遷移を保持するかを検査する。identity、authority、persistence、source rule、runtime は除外する。",
    "open_items": [],
    "path": "working/WRK-0038-c2b-c3-bundled-relational-presentation.md",
-   "bytes": 9151
+   "bytes": 9530
   },
   {
    "id": "working/WRK-0039",
