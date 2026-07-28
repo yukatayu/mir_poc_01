@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 17:50 JST
+最終更新: 2026-07-28 18:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0036 retain bounded evidence; Plan 207 records no further L3 candidate; Plans 208--210 prepare C2-B/C3 presentations and Plan 211 selects a bounded B2-OPAQUE pre-registration; all OBL rows `open` | C7 remains no source rule. B2-OPAQUE may test one model-local finite instantiation only; C2-B/C3 still needs owner/Canon identity/pending/receipt/restore selection. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0037 retain bounded evidence; Plan 207 records no further L3 candidate; Plans 208--211 prepare and execute one B2-OPAQUE finite table; all OBL rows `open` | C7 remains no source rule. WRK-0037 is one model-local finite instantiation only; C2-B/C3 still needs owner/Canon identity/pending/receipt/restore selection. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -59,9 +59,9 @@ Current exact blockers:
    Snapshot/evaluation/pending semantics, request/replay identity, served/admission
    facets, scalar candidate comparison, and total domain remain to be bound.
 5. Plan 207 finds no remaining non-duplicate L3 candidate before the C2-B/C3
-   comparison cut. Plans 208--210 prepare C2-B/C3 alternatives and Plan 211
-   selects B2-OPAQUE for a bounded L3 experiment only: two opaque request
-   atoms, explicit model-local projections, and injective restore mapping.
+   comparison cut. Plans 208--211 prepare and execute B2-OPAQUE as one bounded
+   finite table: two opaque request atoms, explicit staged projections, finite
+   receipt/resume extensions, grounded dependency, and involutive local restore.
    A/B are still conditional: neither DAG ancestry nor an unlocated relation
    supplies identity, pending, receipt, restore, or held context. Owner/Canon
    must select these semantics before a shared model or source ergonomics can
@@ -166,7 +166,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0034 retain their bounded C0/C2/C3/C5 evidence; Plan 204 records no successor over the fixed line; WRK-0035/0036 retain C7 guards. Plans 208--210 prepare C2-B/C3 alternatives and Plan 211 selects B2-OPAQUE for reversible finite testing only; carrier selection remains owner/Canon |
+| Research | selected semantic composition | WRK-0028--0034 retain bounded C0/C2/C3/C5 evidence; Plan 204 records no successor over the fixed line; WRK-0035/0036 retain C7 guards. Plans 208--211 prepare and execute B2-OPAQUE as reversible finite L3 evidence only; carrier selection remains owner/Canon |
 | Owner / Canon | C2-B/C3 presentation and state locus | Family A relation primary; Family B request-occurrence anchor primary; Family C only after an A/B failure | Plan 210 leaves A/B unselected. Choose the smallest model that defines pending, reply, receipt, failure, one-shot resume, and restore behavior without identity inferred from incidental data |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -205,6 +205,14 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 18:41 JST: WRK-0037 was executed as finite L3 evidence after its
+  committed/pushed registration. The final model passed `lean --trust=0` with
+  no axioms: it gives one receipt/resume extension, failure-no-mutation, grounded
+  dependency, and involutive local reindexing for two equal-incidental atoms.
+  Two temporary Oracle reviews first found and then cleared finite-coverage gaps;
+  it selects no carrier, recovery rule, persistence law, source rule, OBL, Gate,
+  or Phase.
 
 - 2026-07-28 17:50 JST: a temporary Oracle challenge review and local ADR-0014
   check selected B2-OPAQUE only for pre-registration: a two-request finite

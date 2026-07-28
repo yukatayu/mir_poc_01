@@ -831,6 +831,8 @@
   `plan/210-c2b-c3-family-a-b-instantiation-audit.md`
 - C2-B/C3 B-primary opaque-anchor candidate selection:
   `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`
+- WRK-0037 C2-B/C3 B-primary opaque-anchor finite evidence:
+  `plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md`
 
 ## maintenance rule
 

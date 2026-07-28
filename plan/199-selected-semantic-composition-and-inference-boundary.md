@@ -241,6 +241,12 @@ DAG の ancestry/order も unlocated relation も semantic correlation/pending/r
 Plan 211 は owner disposition を置換せず、B2-OPAQUE を有限 L3 experiment の pre-registration
 候補に限って選別する。二つの opaque request atom と explicit q-indexed projection/injective restore を
 使うが、それらを Core、Config、history、SaveObject の selected carrier と読まない。
+WRK-0037 は registration/push 後にその fixed finite table を実行した。equal-incidental な二 atom、
+staged view、one scoped receipt/resume extension、failure-no-mutation、grounded dependency、
+involutive local reindexing を `--trust=0` で確認した。これは一表における non-promoted L3
+evidence に限り、request carrier、restore/persistence rule、source inference、又は Canon design
+selection を支持しない。特に incidental record について retained するのはこの二 atom を両方回復する
+total left inverse がないことだけであり、一般の recovery/inference rule を否定しない。
 
 ## Non-claims
 

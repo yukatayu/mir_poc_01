@@ -237,3 +237,9 @@ load behavior なしには staged obligation を満たさない conditional pres
 Plan 211 は B2-OPAQUE の fixed finite model を existing-lane experiment として only pre-register
 する。opaque q distinction、direct projection、injective restore、adversarial branches を固定するが、
 candidate-local mathematics を Canon semantic state 又は source inference に読み替えない。
+WRK-0037 は registration/push 後にその model を実行し、receipt/resume の唯一の local extension、
+failure branch の mutation exclusion、result/provenance ground を持つ dependency、all-frontier
+involutive reindexing を finite L3 evidence として retained した。これは shared carrier、restore
+contract、or source rule を作らない。一覧された incidental record の total left inverse がこの二 atom
+を同時に回復できないことも local fact として retained するが、別 carrier/context の recovery や
+ergonomic inference を一般に否定しない。

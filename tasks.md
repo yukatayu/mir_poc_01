@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 17:50 JST
+最終更新: 2026-07-28 18:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -30,8 +30,8 @@ record the retained generic C7 factorization boundary, Plan 206 plus WRK-0036
 record the retained cumulative-erasure countermodel, Plan 207 records the
 fresh no-candidate disposition, and Plans 208/209 prepare and prefix-locally
 audit the C2-B/C3 comparison. Plan 210 compares the A/B instantiation limits,
-and Plan 211 selects B2-OPAQUE only for bounded L3 pre-registration. Their
-current conclusion is:
+and Plan 211/WRK-0037 execute B2-OPAQUE only as bounded finite L3 evidence.
+Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
@@ -76,8 +76,8 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. WRK-0035/0036 retain C7 guards. Plans 208--210 prepare C2-B/C3 alternatives and Plan 211 selects B2-OPAQUE: a two-request finite q-indexed experiment with explicit state and injective restoration. It is a reversible L3 test, not an A/B carrier selection. C4/C5 proper are Canon design, and C0-D/C1/C6 are duplicate or select semantics. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; B2-OPAQUE registration and test are autonomous; owner/Canon C2-B/C3 selection then compatibility design |
-| 5A | B2-OPAQUE finite experiment | `A/R`; commit a valid WRK-0037 pre-registration before materializing the model, then run only its fenced temporary Lean command and registered falsifiers | Macro 1 early; autonomous existing-lane evidence, no semantic selection |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. WRK-0035/0036 retain C7 guards. Plans 208--211 prepare and execute B2-OPAQUE: a two-request finite q-indexed table with explicit staged fields, finite receipt/resume extensions, grounded dependency, and involutive local restoration. It is reversible L3 evidence, not an A/B carrier selection. C4/C5 proper are Canon design, and C0-D/C1/C6 are duplicate or select semantics. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; B2-OPAQUE test complete; owner/Canon C2-B/C3 selection then compatibility design |
+| 5A | B2-OPAQUE finite experiment | `A/R`; WRK-0037 was preregistered, pushed, locally executed, and independently re-reviewed; its retained result is finite L3 evidence only | Macro 1 early; completed autonomous existing-lane evidence, no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -120,7 +120,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | Family A relation primary; Family B request-occurrence anchor primary; Family C reserve after an A/B failure | WRK-0024 shows write seriality alone is insufficient. Plans 208--210 prepare C2-B/C3 alternatives; Plan 211 may test one B2-OPAQUE model with explicit q-indexed state and injective restore. Owner/Canon must still select identity/correlation/pending/restore rules. Reject hidden identity, receipt correlation, or intermediate mutation |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | Family A relation primary; Family B request-occurrence anchor primary; Family C reserve after an A/B failure | WRK-0024 shows write seriality alone is insufficient. Plans 208--211 execute one B2-OPAQUE finite table with explicit q-indexed state, finite receipt/resume extension, failure mutation exclusion, grounded dependency, and involutive local restore. Owner/Canon must still select identity/correlation/pending/restore rules. Reject hidden identity, receipt correlation, or intermediate mutation |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
