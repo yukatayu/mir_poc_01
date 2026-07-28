@@ -815,6 +815,8 @@
   `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`
 - C7 parametric factorization candidate selection:
   `plan/205-c7-parametric-factorization-candidate-selection.md`
+- WRK-0035 C7 parametric factorization evidence:
+  `plan/wrk-0035-c7-parametric-factorization.md`
 
 ## maintenance rule
 
