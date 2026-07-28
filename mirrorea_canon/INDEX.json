@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 125,
+ "files": 126,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 17209
+   "bytes": 17601
   },
   {
    "id": "root/north-star",
@@ -1824,6 +1824,24 @@
    "open_items": [],
    "path": "working/WRK-0038-c2b-c3-bundled-relational-presentation.md",
    "bytes": 9151
+  },
+  {
+   "id": "working/WRK-0039",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "meta/proposal-012",
+    "meta/proposal-013",
+    "working/WRK-0038"
+   ],
+   "summary": "C2-B/C3 の Canon carrier を選ばず、WRK-0037 の全十 supplied key ごとに independently enumerated relation graph と bundled lookup の fiberwise translation を検査する。key recovery、identity、authority、persistence、source rule、runtime は除外する。",
+   "open_items": [],
+   "path": "working/WRK-0039-c2b-c3-fiberwise-relational-presentation.md",
+   "bytes": 8127
   }
  ]
 }
