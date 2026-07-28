@@ -795,6 +795,8 @@
   `plan/wrk-0028-r0-common-cut-fact-manifest.md`
 - WRK-0029 C0-B noncircular domain-staging conditional lemma:
   `plan/wrk-0029-c0b-noncircular-domain-staging.md`
+- WRK-0030 C2-A source-tagged anti-collapse vocabulary:
+  `plan/wrk-0030-c2a-source-tagged-anti-collapse-vocabulary.md`
 
 ## maintenance rule
 

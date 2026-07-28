@@ -73,7 +73,7 @@ parser/checker、accept/reject、outcome relation、Diagnostic family、Core/jud
 
 | Package | Narrow question | Stop condition |
 | --- | --- | --- |
-| C2-A anti-collapse vocabulary | source-owned termsを WRK-local question label として index し、label 間の non-substitution だけを保持できるか | field partition、equality/identity、binding relation、attempt cardinality、replay classification を選ぶ必要がある |
+| C2-A anti-collapse vocabulary | **closed as WRK-0030:** source-owned termsを WRK-local question label として index し、label 間の documentary non-substitution だけを retained | field partition、equality/identity、binding relation、attempt cardinality、replay classification はなお未選択 |
 | C2-B identity anchor | request occurrence reference と explicit issuance token を candidate として比較できるか | Core primitive、edge schema、hidden side relation、wire commitment が必要になる |
 | C2-C admitted-execution binding | non-authoritative claims と authoritative membership/verdict/grant/witness/history をどう関連付ける必要があるか | locus/transport/token possession を authority にする |
 | C2-D replay policy | in-flight/success/reject/stale/restore の同一 semantic request attempt を total に分類できるか | exact failure family、retry/acknowledgement、unbounded hidden history を選ぶ |
@@ -163,9 +163,13 @@ fresh identity は source omission の推論ではなく、明示的に生成・
 ## Immediate next autonomous package
 
 R0 が C0-A と同じ current-cut/source-authority span を既に source-local に分類したため、
-C0-A を重複して pre-register しない。C0-B は opaque role の conditional DAG として閉じたが、
-domain/`WellScoped`/outcome/Diagnostic を選ばない。次は C2-A source-tagged anti-collapse
-vocabulary audit を ADR-0014 standing eligibility と existing LAB lane に照らして pre-register
-する。six WRK-local question label と source-owned subject の対応、及び label 間の documentary
-non-substitution だけを対象とし、payload field partition、structural equality、identity anchor、
-binding/replay policy、Core/edge schema、attempt cardinality、wire commitment を選ばない。
+C0-A を重複して pre-register しない。C0-B は opaque role の conditional DAG として閉じ、
+WRK-0030 は C2-A を source-tagged anti-collapse vocabulary として閉じた。後者の retained
+result は six WRK-local question label と source-owned subject の対応、及び label 間の
+documentary non-substitution だけである。payload field partition、structural equality、identity
+anchor、binding/replay policy、Core/edge schema、attempt cardinality、wire commitment は選ばない。
+
+次は candidate を固定せず、C0-C/C0-D、C1、C2-B、C6 の候補を common cut・既存の
+countermodel/literal evidence・adverse input・ADR-0014 standing eligibility に照らして再選別する。
+選別結果が existing lane の非重複 L3 literal/conditional package として閉じなければ、無理に
+pre-register せず ordinary Canon proposal 又は owner decision の boundary として報告する。
