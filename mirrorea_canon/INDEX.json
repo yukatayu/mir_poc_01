@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 116,
+ "files": 117,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 13296
+   "bytes": 13665
   },
   {
    "id": "root/north-star",
@@ -1683,6 +1683,22 @@
    "open_items": [],
    "path": "working/WRK-0029-c0b-noncircular-domain-staging.md",
    "bytes": 9047
+  },
+  {
+   "id": "working/WRK-0030",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/05-authority",
+    "meta/proposal-012",
+    "meta/proposal-013"
+   ],
+   "summary": "Plan 200 C2-A の source-owned request/authority/occurrence/replay wording を六つの WRK-local question label に source-tag して記録し、一 label の fact/comparison を別 label の答えとして扱わない documentary non-substitution を検査する。field partition、identity、binding、attempt、replay relation は定義・選択しない。",
+   "open_items": [],
+   "path": "working/WRK-0030-c2a-source-tagged-anti-collapse-vocabulary.md",
+   "bytes": 7987
   }
  ]
 }
