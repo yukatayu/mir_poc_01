@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2507`
 **Date:** 2026-07-28 19:59 JST
-**Status:** corrective selection content staged; commit and push pending
+**Status:** corrective selection committed and pushed; report closeout pending
 
 ## Objective
 
@@ -46,7 +46,7 @@ Started at clean, pushed `HEAD` `78dde80d6cb42acac7c6d80a680beec9edcd7ee1`. WRK-
 - Resource audit, registered input digest recheck, Git status/history, and duplicate-path checks
 - One `ask-chatgpt-pro-temp` finite-design review and a local streamed `lean --trust=0` equality check over the exact WRK-0037 block
 - `git diff --check` and `make docs`; the latter passed Canon index, source-hierarchy, report-structure, and secret-scan validation
-- Remaining at report write: focused diff inspection, commit/push, and remote equality verification
+- Focused diff inspection before commit; `git commit --no-gpg-sign`, `git push origin HEAD:main`, `git fetch origin main`, and exact local/remote `HEAD` equality verification
 
 ## Evidence / outputs / test results
 
@@ -100,7 +100,9 @@ No relation source was written because executing WRK-0038 would violate the newl
 
 ## Commit / push status
 
-Pending at report write.
+Corrective selection was committed as `6e366925b185f49a7c214b86e3cfb4f564bbca69`
+with `--no-gpg-sign`, pushed to `origin/main`, and verified after fetch with
+`HEAD == origin/main`. This report closeout update is the only pending commit.
 
 ## Sub-agent session close status
 
