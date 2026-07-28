@@ -95,7 +95,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0028 | L3-open, not-promoted | Plan 200 の C0/C2 pre-enumerated source span を current Canon cut で literal に転記し、current wording と bounded proposal direction を source 自身の authority language だけから区別して保持した。意味論の合成・選択はしない。`working/WRK-0028-r0-common-cut-fact-manifest.md` |
 | WRK-0029 | L3-open, not-promoted | Plan 200 C0-B の lexical/parse/surface-static/`WellScoped` input role を opaque node とする conditional dependency graph を retained した。条件付き有限 DAG 以外は結論せず、domain、`WellScoped`、outcome、Diagnostic、Core は選ばない。`working/WRK-0029-c0b-noncircular-domain-staging.md` |
 | WRK-0030 | L3-open, not-promoted | Plan 200 C2-A の request/authority/occurrence/replay wording を WRK-local question label で source-tag し、label 間の documentary non-substitution だけを retained した。semantic vocabulary、field partition、identity、binding、attempt、replay classifier は選ばない。`working/WRK-0030-c2a-source-tagged-anti-collapse-vocabulary.md` |
-| WRK-0031 | L3-open | Plan 200 C0-C の pre-enumerated source span に literal terminal/reject/`Diagnostic` wording 又は明示 cross-reference があるかを source-local に検査する。stage、coverage、reject domain、Diagnostic relation、totality は選ばない。`working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md` |
+| WRK-0031 | L3-open, not-promoted | Plan 200 C0-C の pre-enumerated source span に literal terminal/reject/`Diagnostic` wording 又は明示 cross-reference があるかを source-local に検査し、source-local query record だけを retained した。stage、coverage、reject domain、Diagnostic relation、totality は選ばない。`working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

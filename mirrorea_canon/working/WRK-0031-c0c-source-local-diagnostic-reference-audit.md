@@ -85,14 +85,24 @@ proof, conformance, implementation readiness, or a machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending registered commands and a source-tagged LAB result.
-Negative evidence: Pending registered falsifier check.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: No result exists at registration. Any retained result can
-be only a source-local query record of literal references/nonreferences. It
-cannot define a stage, rejection, Diagnostic relation, totality, or coverage.
-Independent review: not-required-for-L3
+Positive evidence: Every registered command passed at the pinned cut. The LAB
+artifact records the literal named-error and explicit Diagnostic-reference
+wording in the enumerated source spans, while marking the previously retained
+WRK-0028 BND-001 and generic-carrier facts as overlap rather than new evidence.
+Negative evidence: No registered falsifier occurred. The source reading did
+not require stage membership/order, a reject relation/domain, Diagnostic
+assignment/equality/coverage, an outcome relation, source reconciliation, or
+any reserved surface.
+Evidence artifacts: LAB:plan/wrk-0031-c0c-source-local-diagnostic-reference-audit.md@d5ba348634364315477a323b4d771be84844db9e:a49570aae0dc34228f15a58e3c8e5cc4b13dfc9ea10ce3886253fb3f953ba5f8
+Evidence commits: d5ba348634364315477a323b4d771be84844db9e
+Impact / non-effects: The retained result is only a source-local query record
+of literal references/nonreferences. It cannot define a stage, rejection,
+Diagnostic relation, totality, coverage, or an implementation contract. Any
+future ergonomic inference remains subject to a uniquely settled fact and a
+reconstructible elaborated artifact; this record supplies neither.
+Independent review: not-required-for-L3; the preceding temporary Oracle
+screen's scope control was checked against the registered source output, and
+no semantic conclusion was retained.
 
 ## Supersession
 
