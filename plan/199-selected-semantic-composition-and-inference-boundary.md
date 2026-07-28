@@ -222,8 +222,9 @@ unique realized observation on `range erase` の extensional boundary に限ら�
 elaborated artifact、又は source omission rule を供給しない。C0-D/C1/C2-B/C3--C6 の有意な前進は ordinary Canon design/owner boundary を越える。C3 proper の
 semantic design package は carrier-selecting boundary として記録するが、着手順序をこの LAB plan が決めない。
 WRK-0035 後の fresh screen は、個別 factorization を同時 omission へ合成してはならないことを
-Plan 199 の C7 matrix consumer に結ぶ fixed finite countermodel だけを Plan 206 で pre-registration
-候補に選別した。これは source fact、grounds、artifact、又は rule の組合せを定義しない。
+Plan 199 の C7 matrix consumer に結ぶ fixed finite countermodel だけを Plan 206 で選別し、
+WRK-0036 が `--trust=0` で retained した。これは source fact、grounds、artifact、又は rule の
+組合せを定義せず、未来の final cumulative representation を直接検査する negative guard に限る。
 
 ## Non-claims
 

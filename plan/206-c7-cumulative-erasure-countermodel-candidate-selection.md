@@ -128,3 +128,12 @@ countermodel changes no validation decision and is theorem churn. The explicit m
 common-coarsening equations, and fixed two-local-erasure shape are therefore mandatory at
 registration and evidence time. No `WRK-0036`, Lean source, or outcome command exists at this
 selection cut.
+
+## Post-selection outcome
+
+The selected record was registered, executed after its registration push, and linked as
+`working/WRK-0036`. Its fixed artifact-local Lean source passed at `--trust=0`; the two individual
+fiber-constancy results and common-coarsening equations hold, while the common coarsening collides
+on the paired observation and is not fiber-constant. This retains the stated negative guard only.
+It does not turn an actual source fact into an inferred fact, define grounds or an elaborated
+artifact, supply a general composition law, or authorize any omission.

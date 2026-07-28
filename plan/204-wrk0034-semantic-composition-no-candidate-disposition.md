@@ -71,8 +71,8 @@ carrier-neutral factorization criterion は WRK-0035 で generic L3 conditional 
 history、persistence、liveness、infinite behavior を扱うために model を拡張することは、この
 fixed-presentation line では新たな semantic selection となる。
 WRK-0035 後の別 frontier では、Plan 206 が individually checked erasures の common coarsening を
-直接検査しない危険だけを fixed finite countermodel として pre-register する候補に選別した。
-この selection は C7 source rule 又は C3 proper の carrier 設計を開始しない。
+直接検査しない危険だけを fixed finite countermodel として選別し、WRK-0036 が L3 evidence として
+retained した。この result は C7 source rule 又は C3 proper の carrier 設計を開始しない。
 
 ## 次に必要な通常設計の最小境界
 

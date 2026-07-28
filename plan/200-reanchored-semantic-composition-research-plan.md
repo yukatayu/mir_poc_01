@@ -219,5 +219,6 @@ source omission rule、又は reconstruction function を供給しない。C0-D/
 へ戻す。C3 proper の候補比較・adverse case・compatibility review は carrier-selecting 通常設計の boundary として
 記録し、source inference は一意な semantic fact と reconstructible elaborated basis が得られるまで rule にしない。
 WRK-0035 後の fresh screen は、individually checked erasures の cumulative application を別途
-検査する必要を示す fixed finite countermodel だけを Plan 206 で pre-registration 候補に選別した。
-これは C7 matrix の negative guard であり、concrete source/evidence composition を選ばない。
+検査する必要を示す fixed finite countermodel だけを Plan 206 で選別し、WRK-0036 が
+`--trust=0` で retained した。これは C7 matrix の negative guard であり、concrete
+source/evidence composition を選ばない。
