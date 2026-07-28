@@ -243,3 +243,9 @@ involutive reindexing を finite L3 evidence として retained した。これ�
 contract、or source rule を作らない。一覧された incidental record の total left inverse がこの二 atom
 を同時に回復できないことも local fact として retained するが、別 carrier/context の recovery や
 ergonomic inference を一般に否定しない。
+WRK-0039 は Plan 213 の scope correction を実行した。比較 domain は bare view 又は undefined
+reachability closure ではなく、WRK-0037 の全十 supplied key である。independently enumerated
+relation graph は cell/incidental/receipt-result/resume-result/restore の五つだけで、combined result は
+receipt/resume graph から導出する。key-supplied fiber translation と有限 observation preservation は
+retained したが、そこから semantic request identity、actual pending/control state、save/load contract、
+又は source omission rule を読むことはできない。今後の ergonomics は別の direct check を必要とする。

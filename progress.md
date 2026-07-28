@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 19:59 JST
+最終更新: 2026-07-28 22:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0037 retain bounded evidence; Plan 213 selects an all-ten-cell fiberwise relation comparison; all OBL rows `open` | WRK-0038 is unexecuted after a scope correction. The successor does not choose a carrier; C2-B/C3 still needs owner/Canon identity/pending/receipt/restore selection. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence, including an all-ten-cell fiberwise relation comparison; all OBL rows `open` | WRK-0038 is unexecuted after a scope correction. WRK-0039 does not choose a carrier; C2-B/C3 still needs owner/Canon identity/pending/receipt/restore selection. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -62,9 +62,11 @@ Current exact blockers:
    two opaque request atoms, explicit staged projections, finite receipt/resume
    extensions, grounded dependency, and involutive local restore. Plan 212's
    bare-view comparison is not executed because the view loses supplied keys.
-   Plan 213 instead compares every supplied cell fiberwise. A/B remain
-   conditional: neither DAG ancestry nor an unlocated relation supplies identity,
-   pending, receipt, restore, or held context.
+   Plan 213 instead compares every supplied cell fiberwise. WRK-0039 retained
+   that finite relation/bundle comparison with all direct graph rows and exact
+   transition/restore observations. A/B remain conditional: neither DAG ancestry
+   nor an unlocated relation supplies identity, pending, receipt, restore, or
+   held context.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -165,7 +167,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0037 retain bounded evidence. Plan 213 selects a fiberwise all-ten-cell relation comparison; WRK-0038 remains unexecuted. Carrier selection remains owner/Canon |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. WRK-0039 executes Plan 213's all-ten-cell fiberwise relation comparison; WRK-0038 remains unexecuted. Carrier selection remains owner/Canon |
 | Owner / Canon | C2-B/C3 presentation and state locus | Family A relation primary; Family B request-occurrence anchor primary; Family C only after an A/B failure | Plan 210 leaves A/B unselected. Choose the smallest model that defines pending, reply, receipt, failure, one-shot resume, and restore behavior without identity inferred from incidental data |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -204,6 +206,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 21:06 JST: WRK-0039 executed Plan 213's all-ten-cell fiberwise
+  relation comparison after its registration was committed and pushed. The
+  artifact passed `lean --trust=0` with no axioms for the maps, graph
+  soundness/completeness, derived combined result, restore graph, and recovery
+  nonexistence statements. It retains no carrier, identity, persistence,
+  source-inference, OBL, Gate, Phase, implementation, or public claim.
 
 - 2026-07-28 19:59 JST: an Oracle design review and local `lean --trust=0`
   check found that bare WRK-0037 `DirectView` values collide across supplied

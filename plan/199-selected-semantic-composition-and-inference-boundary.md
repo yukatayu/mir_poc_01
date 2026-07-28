@@ -247,6 +247,12 @@ involutive local reindexing を `--trust=0` で確認した。これは一表に
 evidence に限り、request carrier、restore/persistence rule、source inference、又は Canon design
 selection を支持しない。特に incidental record について retained するのはこの二 atom を両方回復する
 total left inverse がないことだけであり、一般の recovery/inference rule を否定しない。
+WRK-0039 は、その exact table を全十の supplied `(Frontier, Request)` fiber ごとに independent
+relation graph と bundled lookup の間で往復させる有限 L3 evidence を retained した。五 graph の
+enumeration、全 receipt/resume `none` 結果、derived combined relation、restore graph、すべての
+fiberwise round trip を `--trust=0` で検査した。bare `DirectView` から全十 key の request を回復する
+single total function はないが、これは一部の fixed-frontier view が request を区別しないことを意味しない。
+この evidence は key recovery、carrier、identity、persistence、source inference を選ばない。
 
 ## Non-claims
 
