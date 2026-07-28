@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 118,
+ "files": 119,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 14099
+   "bytes": 14469
   },
   {
    "id": "root/north-star",
@@ -1718,6 +1718,24 @@
    "open_items": [],
    "path": "working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md",
    "bytes": 9264
+  },
+  {
+   "id": "working/WRK-0032",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "spec/05-runtime-semantics",
+    "meta/proposal-012",
+    "meta/proposal-013"
+   ],
+   "summary": "Plan 201 C5-PRE の ordinary-admission source span に、verdict から独立した membership/grant/witness issuance phase を示す literal wording があるかだけを source-local に記録する。A2 atomicity/facet/compatibility、occurrence identity、Core/history/runtime は選ばない。",
+   "open_items": [],
+   "path": "working/WRK-0032-c5pre-ordinary-admission-issuance-guard.md",
+   "bytes": 8405
   }
  ]
 }
