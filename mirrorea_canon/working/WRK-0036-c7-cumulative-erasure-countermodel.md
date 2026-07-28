@@ -100,11 +100,21 @@ machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: none; no outcome source or command is run before this
-registration is committed and pushed.
-Negative evidence: none; the selection cut contains no registered falsifier.
-Evidence artifacts: none
-Evidence commits: none
+Positive evidence: Every registered outcome command completed after the
+registration push. At the pinned authority/input cut, the fenced source proves
+two individual fiber-constancy results, both explicit common-coarsening
+equations, a paired-observation collision after the common coarsening, and the
+negated cumulative fiber-constancy predicate. Lean 4.29 passed the extracted
+source at `--trust=0`. `#print axioms` reports no axioms for all six retained
+theorems.
+Negative evidence: No registered falsifier occurred. The pinned input digests
+match the authority cut; the duplicate query found only the expected
+selection/registration/evidence references rather than a prior
+statement-equivalent result; and the extracted source has no scanned
+placeholder, unsafe, classical-choice, quotient, or axiom token. The retained
+result is a fixed countermodel and does not state a general composition law.
+Evidence artifacts: LAB:plan/wrk-0036-c7-cumulative-erasure-countermodel.md@32de8b2a8a10d0df2e91587199d6ad608a918a19:21f7b1ab6dc5618d9ccb4050ad0358ffb3f428a146ad0f57aee78dfc04937687
+Evidence commits: 32de8b2a8a10d0df2e91587199d6ad608a918a19
 Impact / non-effects: This record is normative only about its reversible L3
 research boundary and procedure. It cannot make individually checked source
 facts jointly omittable or make C7 satisfied; it establishes no
