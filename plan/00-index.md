@@ -823,6 +823,8 @@
   `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`
 - WRK-0036 後の自律研究 frontier disposition:
   `plan/207-post-wrk0036-autonomous-frontier-disposition.md`
+- C2-B/C3 value-flow design preparation:
+  `plan/208-c2b-c3-value-flow-design-preparation.md`
 
 ## maintenance rule
 

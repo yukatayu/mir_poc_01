@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 16:03 JST
+最終更新: 2026-07-28 16:28 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -27,8 +27,8 @@ start audit; Plans 199/200 are the selected-direction composition plan, Plan
 record the completed bounded presentation comparison, and Plan 203 plus WRK-0034
 record the completed fixed finite-sequence comparison. Plan 205 plus WRK-0035
 record the retained generic C7 factorization boundary, Plan 206 plus WRK-0036
-record the retained cumulative-erasure countermodel, and Plan 207 records the
-fresh no-candidate disposition. Their
+record the retained cumulative-erasure countermodel, Plan 207 records the
+fresh no-candidate disposition, and Plan 208 prepares the C2-B/C3 comparison. Their
 current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -74,7 +74,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. WRK-0035/0036 retain C7 range-only and cumulative guards; Plan 207 finds no further L3 candidate. C2-B/C3 need ordinary design preparation, C4/C5 proper are Canon design, and C0-D/C1/C6 are duplicate or select semantics. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; C2-B/C3 design preparation, then owner/Canon boundary |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. WRK-0035/0036 retain C7 guards; Plan 207 finds no further L3 candidate; Plan 208 prepares relation-first, request-occurrence, and nominal-attempt C2-B/C3 alternatives. C4/C5 proper are Canon design, and C0-D/C1/C6 are duplicate or select semantics. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; owner/Canon C2-B/C3 selection, then compatibility design |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -117,7 +117,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient; Plan 207 makes C2-B/C3 the next ordinary design preparation. Reject hidden identity, receipt correlation, or intermediate mutation |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient. Plan 208 prepares C2-B/C3 alternatives and adverse cases; owner/Canon must select identity/correlation/pending/restore rules. Reject hidden identity, receipt correlation, or intermediate mutation |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -179,6 +179,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`.
 - Post-WRK-0036 autonomous frontier disposition:
   `plan/207-post-wrk0036-autonomous-frontier-disposition.md`.
+- C2-B/C3 value-flow design preparation:
+  `plan/208-c2b-c3-value-flow-design-preparation.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

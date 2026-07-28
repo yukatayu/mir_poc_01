@@ -225,3 +225,5 @@ source/evidence composition を選ばない。
 Plan 207 の fresh disposition は、この line に新しい L3 candidate を作らない。次の準備は
 C2-B/C3 の ordinary design comparison であり、identity、receipt correlation、pending、
 success/failure/resumption、cut/save-load/replay を先取りして選択しない。
+Plan 208 はその preparation packet として family-neutral relation signature と three presentation
+families を比較するが、Core、history、request identity、runtime、source inference を決めない。
