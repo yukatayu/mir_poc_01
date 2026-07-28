@@ -201,5 +201,8 @@ design boundary を解除しない。fresh ADR-0014 preflight の結果は Plan 
 選ばず、P012 V1/R1 の administrative binding と one-slot machine presentation を explicit assumption
 の下で比較する `C3-VR-PRE` だけを next candidate とした。これは `LAB$Correlation` 等を opaque に
 保つ conditional-lemma route であり、matching、one-shot、failure exclusion を省略又は Mir carrier に
-読み替えない。実行は WRK-0033 の standalone pre-registration を commit/push した後に限る。C3/C4/C5
-proper、C0-D/C1/C2-B/C6、そして full C7 inference matrix は引き続き deferred である。
+読み替えない。WRK-0033 は registration/push 後にこの finite route を実行し、matching、one-shot、
+failure exclusion を満たす二表現の local observation equality と、各 assumption を外した三つの
+adversarial distinction だけを retained した。C3/C4/C5 proper、C0-D/C1/C2-B/C6、そして full C7
+inference matrix は引き続き deferred である。次は C3 proper を開始せず、remaining frontier の
+non-duplicate existing-lane L3 candidate を fresh ADR-0014 preflight で再審査する。

@@ -24,6 +24,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C5-PRE admission 発行段階ガード監査の選別 | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
 | C5-PRE admission 発行段階ガード監査の証跡 | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
 | V1/R1 administrative presentation 比較の選別 | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
+| V1/R1 administrative presentation 比較の証跡 | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -127,7 +128,11 @@ profile と Canon amendment は未作成です。
   admission occurrence identity は導かない。
 - `plan/202-v1-r1-presentation-refinement-candidate-selection.md`: C3 本体を
   設計せず、V1/R1 の administrative binding と one-slot presentation を有限 LAB
-  comparison として検査できるかの選別。WRK-0033 の登録前には model を実行しない。
+  comparison として検査できるかの選別。
+- `plan/wrk-0033-v1r1-presentation-refinement.md`: WRK-0033 の登録後に
+  `--trust=0` で確認した有限 comparison。matching/single-use/failure exclusion
+  の下で二表現を比較し、各条件を外す adversarial distinction を保持する。C3 の
+  semantic carrier や source inference を選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

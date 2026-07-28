@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 10:40 JST
+最終更新: 2026-07-28 12:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028 retains a current-cut C0/C2 provenance reading and completes C0-A only at that cut; WRK-0029 retains C0-B only as an opaque conditional DAG; WRK-0030 closes C2-A as source-tagged documentary non-substitution only; WRK-0031 closes C0-C as a source-local Diagnostic-reference query only; WRK-0032 closes C5-PRE as a P012 guard-direction plus four named-span non-match matrix; Plan 202 selects only a V1/R1 administrative presentation comparison; all OBL rows `open` | pre-register and push WRK-0033 before any finite model. C3/C4/C5 semantic models and C0-D/C1/C2-B/C6 remain deferred until a Canon proposal exists | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028 retains a current-cut C0/C2 provenance reading and completes C0-A only at that cut; WRK-0029 retains C0-B only as an opaque conditional DAG; WRK-0030 closes C2-A as source-tagged documentary non-substitution only; WRK-0031 closes C0-C as a source-local Diagnostic-reference query only; WRK-0032 closes C5-PRE as a P012 guard-direction plus four named-span non-match matrix; WRK-0033 retains a finite V1/R1 presentation comparison and three adverse distinctions; all OBL rows `open` | fresh ADR-0014 frontier preflight without starting C3 proper. C3/C4/C5 semantic models and C0-D/C1/C2-B/C6 remain deferred until a Canon proposal exists | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -158,7 +158,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028 completed the C0/C2 source-role re-anchor and subsumes C0-A at its pinned cut; WRK-0029 retained C0-B as an opaque conditional DAG; WRK-0030 retained C2-A as source-tagged documentary non-substitution; WRK-0031 retained C0-C as a source-local Diagnostic-reference query only; WRK-0032 retained C5-PRE as P012's conditional guard direction plus four named ordinary-admission span non-matches. Plan 202 selected only C3-VR-PRE, an explicitly assumed V1/R1 presentation comparison; WRK-0033 registration/push is required before any model. C3/C4/C5 proper remain at the Canon design boundary |
+| Research | selected semantic composition | WRK-0028 completed the C0/C2 source-role re-anchor and subsumes C0-A at its pinned cut; WRK-0029 retained C0-B as an opaque conditional DAG; WRK-0030 retained C2-A as source-tagged documentary non-substitution; WRK-0031 retained C0-C as a source-local Diagnostic-reference query only; WRK-0032 retained C5-PRE as P012's conditional guard direction plus four named ordinary-admission span non-matches. WRK-0033 retains only a finite V1/R1 administrative-binding versus one-slot presentation equality and three adverse distinctions for matching/single-use/failure exclusion. C3/C4/C5 proper remain at the Canon design boundary |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -196,6 +196,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 12:49 JST: registered, executed, and linked WRK-0033. Its
+  133-line finite Lean model passed at `--trust=0`: administrative binding and
+  one-slot machine presentations agree only under explicit matching, single-use,
+  and failure-exclusion assumptions; removing each condition yields the
+  registered finite distinction. This selects neither a Mir semantic carrier
+  nor ergonomic source inference, and C3 proper remains deferred.
 
 - 2026-07-28 12:07 JST: re-screened the remaining recorded-direction frontier.
   Plan 202 selects C3-VR-PRE only: a finite comparison between V1/R1

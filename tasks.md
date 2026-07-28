@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 12:07 JST
+最終更新: 2026-07-28 12:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -23,8 +23,8 @@ not a permanent narrowing of ADR-0014.
 `plan/196-t0-t2-implementation-entry-roadmap.md` is the T0--T2 execution map;
 `plan/197-i1-bootstrap-decision-and-readiness-audit.md` is the current I1
 start audit; Plans 199/200 are the selected-direction composition plan, Plan
-201 plus WRK-0032 record the completed C5-PRE audit, and Plan 202 records the
-next bounded presentation-comparison selection. Their
+201 plus WRK-0032 record the completed C5-PRE audit, and Plan 202 plus WRK-0033
+record the completed bounded presentation comparison. Their
 current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -70,7 +70,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R`; WRK-0028 completed the source-role re-anchor for C0/C2 without semantic reconciliation and subsumes C0-A at its pinned cut. WRK-0029 retained only C0-B's opaque conditional DAG; WRK-0030 retained C2-A only as source-tagged documentary non-substitution; WRK-0031 retained C0-C's literal Diagnostic-reference query only; WRK-0032 retained P012's C5 guard direction and four named ordinary-admission span non-matches. Plan 202 now selects C3-VR-PRE: a finite V1/R1 administrative-presentation comparison under explicit matching, single-use, and failure assumptions. Next, pre-register and push WRK-0033 before any model command. C3/C4/C5 proper and C0-D/C1/C2-B/C6 still need semantic choice or have duplicate-evidence risk. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; current autonomous research |
+| 5 | Selected-direction composition | `A/R`; WRK-0028 completed the source-role re-anchor for C0/C2 without semantic reconciliation and subsumes C0-A at its pinned cut. WRK-0029 retained only C0-B's opaque conditional DAG; WRK-0030 retained C2-A only as source-tagged documentary non-substitution; WRK-0031 retained C0-C's literal Diagnostic-reference query only; WRK-0032 retained P012's C5 guard direction and four named ordinary-admission span non-matches. WRK-0033 retained a finite V1/R1 administrative-binding versus one-slot comparison under matching, single-use, and failure assumptions, plus one adverse distinction per assumption. Next, re-screen the remaining ADR-0014 frontier without assuming C3 proper. C3/C4/C5 proper and C0-D/C1/C2-B/C6 still need semantic choice or have duplicate-evidence risk. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; current autonomous research |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |

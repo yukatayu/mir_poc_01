@@ -204,8 +204,12 @@ existing-lane L3 candidate があるかを fresh preflight で再審査するこ
 だけを選別した。これは pending/control/correlation/persistence の C3 本体設計ではなく、matching、
 single-use、failure exclusion を明示した場合にのみ有限 LAB comparison ができるかを調べる候補である。
 いかなる結果も source-level inference を自動承認せず、fact と一意な根拠が elaborated artifact から
-復元できることを別途必要とする。次は WRK-0033 の standalone pre-registration であり、登録・push
-より前に model source 又は Lean command を実行しない。
+復元できることを別途必要とする。WRK-0033 は登録後、administrative binding と one-slot machine
+presentation の finite observation equality、並びに matching/single-use/failure exclusion を各々外した
+三つの distinction を retained した。これは C3 pending/correlation/persistence の設計、full trace
+equivalence、又は source inference を支持しない。次の autonomous action は C3/C4/C5 本体を先取りせず、
+remaining frontier に non-duplicate existing-lane L3 candidate があるかを fresh preflight で再審査すること
+である。
 
 ## Non-claims
 

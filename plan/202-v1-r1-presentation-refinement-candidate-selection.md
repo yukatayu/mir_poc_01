@@ -118,6 +118,18 @@ proposal, never a reinterpretation of the finite model.
    correlation, pending-control, failure, persistence, and source-elaboration
    boundaries.
 
+## Execution outcome
+
+The selected route was committed at `ddabd97bb3e13df51ede3ba00ead626600e1011a`,
+pre-registered as WRK-0033 at `32e7d9a8e7ec4db526812bec650e54d766b0abc6`,
+and retained at `37d2fd00a01aa5cf302f0293f0b6be51a337b217`; its Canon metadata
+link is `0cccb94373284b7659659ba203ab78a0af1c8072`. The fenced 133-line Lean
+source passed `lean --trust=0` and retains only the finite observation equality
+under matching/single-use/failure-exclusion assumptions plus the three
+registered adverse distinctions. It neither supplies a Mir correlation or
+pending carrier nor authorizes source omission, full trace equivalence, C3
+proper, or implementation.
+
 ## Non-claims
 
 This selection does not claim a completed formalization, a valid C3 design, a
