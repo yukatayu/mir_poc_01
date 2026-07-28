@@ -801,6 +801,8 @@
   `plan/wrk-0031-c0c-source-local-diagnostic-reference-audit.md`
 - C5-PRE conditional-A2 issuance-guard candidate selection:
   `plan/201-c5-a2-issuance-guard-candidate-selection.md`
+- WRK-0032 C5-PRE ordinary-admission issuance-guard evidence:
+  `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md`
 
 ## maintenance rule
 
