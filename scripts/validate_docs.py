@@ -651,6 +651,7 @@ REQUIRED = [
     "plan/214-post-wrk0039-autonomous-frontier-disposition.md",
     "plan/215-c2b-c3-ordinary-design-decision-packet.md",
     "plan/216-c2b-c3-cross-boundary-compatibility-audit.md",
+    "plan/217-c2b-c3-carrier-neutral-conditional-comparison.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

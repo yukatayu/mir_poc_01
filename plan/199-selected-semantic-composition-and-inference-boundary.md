@@ -274,6 +274,11 @@ the full admissible load state, static-versus-dynamic failure separation, and
 trace-set rather than scheduler determinism. It changes no Canon proposition
 or carrier selection.
 
+Plan 217 corrects the comparison method itself: candidate cards use erased,
+candidate-native observations and linkage relations, not a shared pending/key
+signature. It can expose `CARRIER-GAP` or a countermodel without selecting a
+candidate or a common lifecycle model.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once

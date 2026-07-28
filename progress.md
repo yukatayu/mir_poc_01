@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-29 00:14 JST
+最終更新: 2026-07-29 00:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plan 214 closes the finite lane and Plan 215/216 prepare and audit ordinary design; all OBL rows `open` | WRK-0038 is unexecuted after a scope correction. C2-B/C3 needs one owner/Canon candidate satisfying semantic residence, typed branch, and admissible-load conditions; C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plan 214 closes the finite lane and Plan 215--217 prepare/audit carrier-neutral comparison; all OBL rows `open` | WRK-0038 is unexecuted after a scope correction. C2-B/C3 may screen candidate-native observations for semantic residence, typed branch, and admissible load without selection; C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -67,8 +67,8 @@ Current exact blockers:
    transition/restore observations. A/B remain conditional: neither DAG ancestry
    nor an unlocated relation supplies identity, pending, receipt, restore, or
    held context. Plan 214 finds no non-duplicate L3 successor at this unchanged
-   cut; Plan 215/216 group and audit the ordinary decision boundary without
-   selecting it.
+   cut; Plan 215--217 group, audit, and compare the ordinary decision boundary
+   without selecting it or assuming a common carrier.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -169,7 +169,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plan 215/216 prepare and audit correlation/lifecycle/restore with semantic-stratum, typed-branch, and admissible-load constraints. WRK-0038 remains unexecuted. Carrier selection remains ordinary Canon work |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plan 215--217 prepare, audit, and carrier-neutrally compare correlation/lifecycle/restore. WRK-0038 remains unexecuted. Carrier selection remains ordinary Canon work |
 | Owner / Canon | C2-B/C3 presentation and state locus | Family A relation-first; Family B request-occurrence anchor; Family C or hybrid as non-exhaustive comparison views | Plan 210 leaves the views unselected. Choose the smallest model that defines pending, reply, receipt, failure, one-shot resume, restore, and semantic residence without identity inferred from incidental data |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -183,7 +183,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; C2-B/C3 decision packet compatibility-audited, finite presentation lane closed | heavy | bounded candidate sketch, then normal Canon selection |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; C2-B/C3 carrier-neutral comparison prepared, finite presentation lane closed | heavy | conditional candidate card or gap report, then normal Canon selection |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -208,6 +208,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 00:44 JST: Plan 217 replaced the structurally biased shared
+  request/pending/reply/receipt shorthand with candidate-native erased
+  observations. It can classify a conditional row, countermodel, or carrier
+  gap without selecting a model. No Canon, implementation, OBL, Gate, Phase,
+  or public claim changed.
 
 - 2026-07-29 00:14 JST: Plan 216 audited Plan 215 against the wider theory
   boundary. A future C2-B/C3 candidate must make semantic residence, typed

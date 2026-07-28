@@ -36,7 +36,7 @@ request emission -> owner validation and typed reply/failure -> requester receip
 
 The later occurrence's service semantics, result freshness, and atomicity are outside this cut. WRK-0039 remains finite key-supplied presentation evidence; it does not decide semantic correlation, equality, persistence, or inference. Plan 214 therefore prohibits treating a renamed finite theorem as a substitute for the ordinary decision below.
 
-The common audit vocabulary is Plan 209's staged signature:
+Plan 209's staged signature is retained as historical LAB shorthand:
 
 ```text
 CtxOf(q, ctx)                  PendingFor(q, p)
@@ -47,7 +47,13 @@ Accepted(t, p)                 ResumeOnce(p, t, r, value, provenance)
 DepOf(later, p, t, value)
 ```
 
-These are comparison judgments, not selected Canon predicates, fields, or constructors. Completed-success shorthand cannot be the sole specification because it does not exist before reply/receipt and cannot state failure.
+These are comparison judgments, not selected Canon predicates, fields, or
+constructors. They are not a carrier-neutral signature: their fixed
+`q,p,r,t` factorization can bias relation-first or hybrid candidates. Plan 217
+therefore replaces them for future autonomous comparison with candidate-native
+role observations and linkage hyperedges. Completed-success shorthand cannot
+be the sole specification because it does not exist before reply/receipt and
+cannot state failure.
 
 ## Cross-boundary candidate constraints
 
@@ -102,13 +108,12 @@ globally rejected by this packet.
 
 ### D2 - Branch model and explicit projections
 
-M1 context is semantically request-local. It may be carried by, or projected
-directly from, the selected request-associated object, but it may not be
-recovered by ambient lookup, a correlation-only relation, transport, queue
-position, source locus, session, or incidental equality. For each owner outcome
-the candidate must account for the authoritative validation frontier: verdict,
-principal, role, target, epoch, incarnation, capability lineage, required
-witness, grant-policy version, visibility, and relevant history.
+M1 context is semantically request-associated. The candidate must state its
+candidate-native relation or projection to the relevant emission facts, but it
+may not be recovered solely by ambient lookup, transport, queue position,
+source locus, session, incidental equality, or a fallback-selected object. For
+each owner outcome, the candidate must expose the authoritative validation
+grounds applicable to that operation; it may not treat M1 claims as authority.
 
 The candidate must distinguish request emission, pending creation, owner
 outcome, owner success availability, requester receipt, receipt acceptance,
@@ -116,8 +121,9 @@ success consumption, explicit owner failure, requester-side failure
 availability, and the corresponding pending disposition. Result value,
 redacted history/audit projection, result provenance, authority-lineage
 provenance, source/diagnostic provenance, source span, and failure information
-remain separate. A compact representation is allowed only if every projection
-is explicit and functional.
+remain separate. A compact representation is allowed only if every required
+observation is explicit and its relation or functionality law is stated;
+functionality is not presumed by this packet.
 
 Reply remains distinct from receipt. Only matching accepted requester-side
 success may enable V1 computation; failure cannot enable it. Failure is not
@@ -146,9 +152,10 @@ explicit. It must not silently substitute validation against post-load current
 state for the recorded service outcome.
 
 Within one trace extending that restored configuration, success and failure for
-one pending are mutually exclusive terminal branches. At most one matching
-success receipt may be accepted and at most one success computation may consume
-the pending. A consumed or failed pending cannot become resumable after load.
+one candidate-native outstanding branch are mutually exclusive terminal
+branches. Receipt multiplicity and acceptance policy remain explicit candidate
+parameters, but at most one success computation may consume the linked result.
+A consumed or failed branch cannot become resumable after load.
 The candidate identifies the result-supplying fact and the later consuming
 occurrence or projection, with explicit or uniquely derivable state dependency
 that preserves DAG acyclicity. This does not require a particular direct-edge
@@ -193,7 +200,7 @@ source-backed argument.
 | --- | --- |
 | two requests share payload and M1 claims | distinct request/pending/correlation instances |
 | two active principals share one requester locus | neither authority nor correlation collapses to locus or transport identity |
-| duplicate or late success reply | no second accepted receipt, transition, or resume after consumed/failed status |
+| duplicate or late success reply | receipt/acceptance policy remains explicit and no second consumption or resume follows after consumed/failed status |
 | wrong-locus receipt | cannot consume the requester pending |
 | copied/replayed claims | authoritative membership, lineage, witness, admission, visibility, and history validation decides; claims confer no authority |
 | leave/rejoin, revocation, wrong target, missing witness, or severed lineage | fail closed, no owner mutation, no matching success continuation |
@@ -217,7 +224,12 @@ requirements. Exact storage is a later decision.
 
 The user-facing goal is to avoid forcing authors to spell merely administrative facts when a selected model can create them unambiguously. It is not a license to infer semantic identity, authority, provenance, or restoration from source resemblance. This boundary is downstream of D1--D3 and P008; it creates no current grammar or inference rule.
 
-A later convenience package must separately state its admitted domain, well-scopedness predicate, result/Diagnostic abstraction, output equality, outcome-existence obligation, determinism obligation, and explicit-presentation correspondence. Outcome existence and determinism remain distinct: a no-outcome input is not vacuously deterministic. The static property must not be confused with runtime schedule determinism, eventual delivery, or equality of dynamic fresh identities.
+A later convenience package may investigate its admitted domain, well-scopedness
+predicate, result/Diagnostic abstraction, output equality, outcome-existence
+obligation, determinism obligation, and explicit-presentation correspondence.
+Outcome existence and determinism remain distinct: a no-outcome input is not
+vacuously deterministic. The static property must not be confused with runtime
+schedule determinism, eventual delivery, or equality of dynamic fresh identities.
 
 For every admitted source input, elaboration must yield one equivalent checked artifact or one equivalent Diagnostic. A successful artifact must preserve all selected Core/`G_e`/`C`/`O` facts, spans on generated Core items and edges, effect and failure rows, authority obligations, pending/correlation/provenance/redaction projections, dependency, one-shot conditions, and admissible-load properties of the explicit model. It may not add a hidden edge, callback, future completion, runtime side table, or transport lookup. If reply/receipt needs a generated-edge kind beyond the current schema, the later Canon proposal must either derive it from the selected request semantics or amend that schema explicitly.
 

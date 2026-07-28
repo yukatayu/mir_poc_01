@@ -266,3 +266,7 @@ Plan 216 is the compatibility audit of that packet. A next candidate sketch
 must map all facts to explicit semantic strata, retain the full admissible
 load boundary, and make user-facing omission a checkable elaboration property.
 This is a research constraint, not a selection or implementation authorization.
+
+Plan 217 supplies the next research method: use candidate-native, erasable
+observations and classify each row conditionally. It intentionally does not
+assume a common request/pending/reply/receipt carrier or factorization key.

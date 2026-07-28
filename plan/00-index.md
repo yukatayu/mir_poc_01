@@ -845,6 +845,8 @@
   `plan/215-c2b-c3-ordinary-design-decision-packet.md`
 - C2-B/C3 cross-boundary compatibility audit:
   `plan/216-c2b-c3-cross-boundary-compatibility-audit.md`
+- C2-B/C3 carrier-neutral conditional comparison:
+  `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md`
 
 ## maintenance rule
 
