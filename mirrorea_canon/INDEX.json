@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 122,
+ "files": 123,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 15938
+   "bytes": 16404
   },
   {
    "id": "root/north-star",
@@ -1776,6 +1776,20 @@
    "open_items": [],
    "path": "working/WRK-0035-c7-parametric-factorization.md",
    "bytes": 9909
+  },
+  {
+   "id": "working/WRK-0036",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/03-elaboration",
+    "meta/proposal-012"
+   ],
+   "summary": "C7 の concrete source rule を選ばず、二つの individually fiber-constant local erasure とその common coarsening が paired observation を失う固定有限 countermodel を検査する。choice、quotient、Mir carrier、source inference は除外する。",
+   "open_items": [],
+   "path": "working/WRK-0036-c7-cumulative-erasure-countermodel.md",
+   "bytes": 10319
   }
  ]
 }
