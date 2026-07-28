@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 15:03 JST
+最終更新: 2026-07-28 15:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0034 retain their bounded C0/C2/C3/C5 evidence; Plan 204 closes only the fixed finite line; WRK-0035 retains C7's generic range-only factorization, collision refutations, and full-codomain countermodel as L3 evidence; all OBL rows `open` | C7 remains a non-promoted source-ergonomics boundary, not a source rule. C3/C4/C5 carrier-selecting work requires ordinary Canon design; C0-D/C1/C2-B/C6 are deferred at this cut, while a genuinely new non-duplicative candidate remains eligible for ADR-0014 preflight | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0035 retain bounded C0/C2/C3/C5/C7 evidence; Plan 204 closes only the fixed finite line; Plan 206 selects a fixed C7 common-coarsening countermodel for pre-registration; all OBL rows `open` | C7-CUM-PRE can run only as an L3 countermodel. C7 remains no source rule; C3/C4/C5 carrier-selecting work and C0-D/C1/C2-B/C6 require ordinary Canon design or a distinct fresh preflight | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -158,7 +158,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028 completed the C0/C2 source-role re-anchor and subsumes C0-A at its pinned cut; WRK-0029--0032 retain bounded C0-B/C2-A/C0-C/C5-PRE evidence; WRK-0033 and WRK-0034 retain their fixed presentation and finite-sequence results; Plan 204 records no successor over that fixed line; WRK-0035 retains C7's generic range-only conditional lemma, collision refutations, and full-codomain countermodel. C3/C4/C5 proper remain at the Canon design boundary |
+| Research | selected semantic composition | WRK-0028--0034 retain their bounded C0/C2/C3/C5 evidence; Plan 204 records no successor over the fixed line; WRK-0035 retains C7's generic range-only lemma and countermodels; Plan 206 selects only a common-coarsening countermodel so a future C7 matrix cannot compose individual checks unchecked. C3/C4/C5 proper remain at the Canon design boundary |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -196,6 +196,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 15:22 JST: current-cut duplicate scans and a temporary Oracle
+  challenge review selected only `C7-CUM-PRE`: a fixed finite countermodel in
+  which two individually fiber-constant erasures have a common coarsening that
+  loses their paired observation. It is pending L3 pre-registration and does
+  not select source transformations, grounds, artifacts, a reconstruction rule,
+  OBL, SCN, Gate, or Phase.
 
 - 2026-07-28 15:03 JST: WRK-0035 was registered, executed, and linked. Its
   artifact-local Lean statement passed at `--trust=0` with no axioms reported

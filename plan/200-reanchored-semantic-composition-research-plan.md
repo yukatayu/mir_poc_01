@@ -218,3 +218,6 @@ parameterized factorization criterion は WRK-0035 で non-promoted L3 condition
 source omission rule、又は reconstruction function を供給しない。C0-D/C1/C2-B/C3--C6 に必要な semantic selection は ordinary Canon design/owner boundary
 へ戻す。C3 proper の候補比較・adverse case・compatibility review は carrier-selecting 通常設計の boundary として
 記録し、source inference は一意な semantic fact と reconstructible elaborated basis が得られるまで rule にしない。
+WRK-0035 後の fresh screen は、individually checked erasures の cumulative application を別途
+検査する必要を示す fixed finite countermodel だけを Plan 206 で pre-registration 候補に選別した。
+これは C7 matrix の negative guard であり、concrete source/evidence composition を選ばない。

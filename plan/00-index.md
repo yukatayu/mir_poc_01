@@ -817,6 +817,8 @@
   `plan/205-c7-parametric-factorization-candidate-selection.md`
 - WRK-0035 C7 parametric factorization evidence:
   `plan/wrk-0035-c7-parametric-factorization.md`
+- C7 cumulative-erasure countermodel candidate selection:
+  `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`
 
 ## maintenance rule
 

@@ -221,6 +221,9 @@ factorization criterion を WRK-0035 で non-promoted L3 conditional lemma と�
 unique realized observation on `range erase` の extensional boundary に限られ、inspectable grounds、concrete
 elaborated artifact、又は source omission rule を供給しない。C0-D/C1/C2-B/C3--C6 の有意な前進は ordinary Canon design/owner boundary を越える。C3 proper の
 semantic design package は carrier-selecting boundary として記録するが、着手順序をこの LAB plan が決めない。
+WRK-0035 後の fresh screen は、個別 factorization を同時 omission へ合成してはならないことを
+Plan 199 の C7 matrix consumer に結ぶ fixed finite countermodel だけを Plan 206 で pre-registration
+候補に選別した。これは source fact、grounds、artifact、又は rule の組合せを定義しない。
 
 ## Non-claims
 

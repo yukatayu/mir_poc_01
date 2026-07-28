@@ -640,6 +640,7 @@ REQUIRED = [
     "plan/203-v1-r1-finite-sequence-candidate-selection.md",
     "plan/204-wrk0034-semantic-composition-no-candidate-disposition.md",
     "plan/205-c7-parametric-factorization-candidate-selection.md",
+    "plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
