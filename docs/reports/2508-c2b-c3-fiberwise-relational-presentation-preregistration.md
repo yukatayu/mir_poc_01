@@ -2,7 +2,7 @@
 
 **Identifier:** `LAB-REPORT-2508`
 **Date:** 2026-07-28 20:07 JST
-**Status:** registration content staged; commit and push pending
+**Status:** registration committed and pushed; report closeout pending
 
 ## Objective
 
@@ -39,7 +39,7 @@ Started at committed, pushed, clean `HEAD` `7f245eca1c2c40422adf806dd2bce65fed98
 ## Commands run
 
 - Duplicate-path and clean-state checks, digest collection, focused Canon/LAB reads, and working-history inspection
-- Canon index rebuild, `git diff --check`, `make docs`, commit/push, and remote equality verification are required before the registration is valid
+- Canon index rebuild, `git diff --check`, `make docs`, `git commit --no-gpg-sign`, `git push origin HEAD:main`, `git fetch origin main`, and remote equality verification
 
 ## Evidence / outputs / test results
 
@@ -92,7 +92,9 @@ Lean, runtime, parser, transport, and end-to-end commands are deferred because r
 
 ## Commit / push status
 
-Pending at report write.
+Registration was committed as `bff2a6dc579fcf807c94deeaabf01bdca23ba428` with
+`--no-gpg-sign`, pushed to `origin/main`, and verified after fetch with
+`HEAD == origin/main`. This report closeout update is the only pending commit.
 
 ## Sub-agent session close status
 
