@@ -63,9 +63,11 @@ Plan 214 had closed the finite autonomous presentation lane at this cut.
   grouped file-list bullets did not meet the validator's individual-path rule;
   after listing every changed path separately, the rerun passed Canon index,
   source hierarchy, documentation, report-structure, and history checks.
-- Remaining after this report update: `git diff --check`, `make docs`,
-  `git commit --no-gpg-sign`, `git push origin HEAD:main`, fetch, and remote
-  equality verification
+- Evidence commit `f643de0c4510ddf50c473f1c5e9def80f7ef5736` was created with
+  `git commit --no-gpg-sign`, pushed to `origin/main`, fetched, and verified
+  equal to `HEAD`. Remaining after this report closeout update: final
+  `git diff --check`, `make docs`, commit, push, fetch, and remote equality
+  verification.
 
 ## Evidence / outputs / test results
 
@@ -150,7 +152,10 @@ claimed success.
 
 ## Commit / push status
 
-Pending at report write.
+Evidence commit `f643de0c4510ddf50c473f1c5e9def80f7ef5736`
+(`docs: prepare c2b c3 decision packet`) is pushed. `HEAD` and `origin/main`
+were equal at that commit. This report closeout update is pending its own
+commit and push.
 
 ## Sub-agent session close status
 
