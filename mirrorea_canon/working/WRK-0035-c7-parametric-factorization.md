@@ -92,11 +92,22 @@ machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: none; no outcome source or command is run before this
-registration is committed and pushed.
-Negative evidence: none; the selection cut contains no registered falsifier.
-Evidence artifacts: none
-Evidence commits: none
+Positive evidence: Every registered outcome command completed after the
+registration push. At the pinned authority/input cut, the fenced source proves
+the constructive equivalence of fiber constancy and pointwise unique realized
+observation on `range erase`; an explicit collision refutes both predicates;
+and the fixed `Unit`/`Bool`/`Bool` model rejects unique reconstruction by a
+function on all of `S`. Lean 4.29 passed the extracted source at `--trust=0`.
+`#print axioms` reports no axioms for the equivalence, both collision
+refutations, and the full-codomain non-uniqueness theorem.
+Negative evidence: No registered falsifier occurred. The pinned input digests
+match the authority cut; the duplicate query found only the expected
+selection/registration/evidence references rather than a prior
+statement-equivalent result; and the extracted source has no scanned
+placeholder, unsafe, classical-choice, quotient, or axiom token. The retained
+result remains pointwise and does not construct a reconstructor.
+Evidence artifacts: LAB:plan/wrk-0035-c7-parametric-factorization.md@e3bd47217365acbfe2d861de7e2377d06ba61d14:8e27a94f876b9db33d6d30cc56b4569f83094b0cc4d17261bd680497327309a3
+Evidence commits: e3bd47217365acbfe2d861de7e2377d06ba61d14
 Impact / non-effects: This record is normative only about its reversible L3
 research boundary and procedure. It cannot make C7 satisfied or make a fact
 omittable; it establishes no semantic/operational contract.

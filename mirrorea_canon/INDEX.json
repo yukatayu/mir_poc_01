@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 15798
+   "bytes": 15938
   },
   {
    "id": "root/north-star",
@@ -1775,7 +1775,7 @@
    "summary": "C7 の concrete source rule を選ばず、任意の local erase/observe function に対する fiber constancy と range 上の pointwise unique observation の構成的 conditional lemma を検査する。choice、quotient、Mir carrier、source inference は除外する。",
    "open_items": [],
    "path": "working/WRK-0035-c7-parametric-factorization.md",
-   "bytes": 8900
+   "bytes": 9909
   }
  ]
 }
