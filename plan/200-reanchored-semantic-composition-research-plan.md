@@ -281,3 +281,9 @@ recommendation; history-only projection is insufficient at this cut, and fresh
 nominal identity is reserve-only. The packet does not amend Canon or authorize
 implementation. After a Canon decision, only ADR-0014-eligible consequences
 reopen autonomously.
+
+Plan 220 is the last autonomous check before that decision: it enumerates the
+relation-state definitions, proof obligations, adverse cases, and non-claims
+that prevent a future proposal from hiding delivery, redaction, typed failure,
+or post-load linearity assumptions. It creates no formal model or successor L3
+record before the selected semantics exists.

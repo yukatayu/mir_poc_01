@@ -851,6 +851,8 @@
   `plan/218-c2b-c3-first-card-source-preflight.md`
 - C2-B/C3 minimal semantic-residence options:
   `plan/219-c2b-c3-minimal-semantic-residence-options.md`
+- C2-B/C3 relation-state proof-obligation audit:
+  `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`
 
 ## maintenance rule
 

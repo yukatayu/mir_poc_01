@@ -67,20 +67,25 @@ The ordinary proposal would define enough rows to observe:
 
 | Observation | Minimum intended meaning |
 | --- | --- |
-| request context | `q` is paired with the complete M1 context used for validation and the separate authoritative grounds actually checked. |
-| owner outcome | exactly one selected success or explicit typed failure branch for `q`; failure has no owner-store mutation. |
-| reply availability | a success value/provenance or explicit failure is available for a requester-side delivery step, without implying that delivery happened. |
-| requester receipt | a requester-side receipt occurrence is causally linked to the selected available branch; receipt availability, acceptance, and consumption are distinct observations. |
+| request context | `q` is paired with the request-associated M1 claims used for validation and the separate authoritative grounds actually checked. |
+| pending disposition | `q` has an explicit outstanding / terminal / accepted / consumed-or-failed disposition; no result use is enabled merely by emission or owner service. |
+| owner outcome | when owner service reaches a terminal branch, at most one selected success or explicit typed failure branch is linked to `q`; failure has no owner-store mutation. |
+| reply availability | a success value, provenance, and redaction basis, or explicit failure, is available for a requester-side delivery step without implying that delivery happened. |
+| requester receipt | a requester-side **semantic** receipt occurrence is causally linked to the selected available branch; raw adapter delivery is not silently identified with it, and receipt availability, acceptance, and consumption are distinct observations. |
 | one-shot use | only an accepted success enables the V1 restricted, zero-occurrence pure use; the linked linear disposition makes a second use impossible. |
-| restore | `X`, held linear state, and their causal predecessors are in the complete `SaveObject`; post-load reasoning uses a declared restore correspondence, not global occurrence equality. |
+| observation / redaction | any observer-facing value is a selected redacted projection of the result/provenance record; raw result availability is not an untyped history or telemetry leak. |
+| restore | `X`, held linear state, and every `X` fact's causal predecessor are in the complete `SaveObject` or its saved channel/in-flight state; post-load reasoning uses a declared restore correspondence, not global occurrence equality. |
 
-The smallest associated operational refinement is a requester-side receipt
-step, provisionally called `[E-RECEIVE]`. It appends at most one receipt
-occurrence and has a causal predecessor in the owner outcome/reply-availability
-row. `[E-SERVE]` remains the owner validation/outcome step. The proposal must
-state the exact success and failure occurrence placement and the policy for an
-invalid or duplicate receipt: audit-only exclusion, or a declared dynamic
-failure contained in the request row. This packet does not choose that policy.
+The smallest associated operational refinement consistent with P012 R1 is a
+requester-side **semantic receipt** step, provisionally called `[E-RECEIVE]`.
+Each accepted receipt transition appends one receipt occurrence and has a causal
+predecessor in the owner outcome/reply-availability row; `[E-SERVE]` remains
+the owner validation/outcome step. This does not assert that raw transport
+delivery is at-most-once. The proposal must state the exact success and failure
+occurrence placement, receipt acceptance predicate, and the policy for an
+invalid or duplicate candidate receipt: audit-only exclusion, or a declared
+dynamic failure contained in the request row. This packet does not choose that
+policy or a final Core constructor name.
 
 The relation is explicit semantic state: it cannot be reconstructed from
 transport metadata or `Q`. A transport implementation may refine a selected
@@ -92,10 +97,10 @@ observable semantic effect, the chosen policy must say so.
 occurrence without adding a second identity sort; it keeps success, failure,
 receipt, acceptance, and consumption separately observable; and it gives
 save/load an explicit object to preserve. It also avoids assuming that every
-link is a function or factors through one hidden token. Its only new semantic
-residence is one relation-valued configuration component plus the required
-receipt transition, which is smaller than a public attempt object or a general
-asynchronous abstraction.
+link is a function or factors through one hidden token. Its only proposed
+semantic residence is one relation-valued configuration component plus the
+R1-required receipt transition, which is smaller than a public attempt object
+or a general asynchronous abstraction.
 
 ### B. History-only request-occurrence projection - not recommended
 
@@ -160,7 +165,8 @@ decisions:
    occurrence only within the restored history.
 2. **Transition boundary:** introduce a requester receipt transition distinct
    from owner service; success/failure availability, receipt, acceptance, and
-   zero-occurrence restricted consumption have separately stated meanings.
+   zero-occurrence restricted consumption have separately stated meanings. The
+   proposal must also name its redaction projection and invalid-receipt policy.
 3. **Safety scope:** require branch exclusivity and at-most-one accepted
    consumption in one trace extending an admissibly restored configuration;
    do not claim delivery, retry, global exactly-once, freshness, or atomic
@@ -171,6 +177,9 @@ receipt, `Gamma`/`Delta` disposition, invalid receipt policy, and fallback
 interaction must be specified by that ordinary proposal only to the extent
 needed by these three choices. They must not be invented as source syntax or
 runtime API here.
+
+Plan 220 records the conditional proof-obligation and falsifier matrix that
+the ordinary proposal must close. It is not a proof or an additional carrier.
 
 ## Future ergonomic inference boundary
 

@@ -289,6 +289,12 @@ in-history request occurrence and restored by correspondence, over a
 history-only projection or a fresh nominal identity. This is LAB advice for an
 ordinary Canon design packet, not an adopted carrier or source-inference rule.
 
+Plan 220 audits the recommendation's proof boundary. It corrects pending,
+terminal-branch, semantic-receipt, redaction, and save/load-closure wording,
+then records only the definitions, obligations, and falsifiers a selected
+design must close. It does not turn the recommendation into a theorem or a
+Canon carrier.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once

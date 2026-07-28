@@ -45,6 +45,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 carrier-neutral conditional comparison | `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md` |
 | C2-B/C3 first candidate-card source preflight | `plan/218-c2b-c3-first-card-source-preflight.md` |
 | C2-B/C3 minimal semantic-residence options | `plan/219-c2b-c3-minimal-semantic-residence-options.md` |
+| C2-B/C3 relation-state proof-obligation audit | `plan/220-c2b-c3-relation-state-proof-obligation-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -214,6 +215,9 @@ profile と Canon amendment は未作成です。
   の選択肢を explicit relation state / history-only / nominal identity に絞る。
   relation state を LAB 推奨とするが、Canon carrier は選ばず、将来の source omission は
   選択済み意味論から一意に検査できる administration に限る。
+- `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`: Plan 219 の推奨を
+  proof と取り違えず、pending、typed branch、causality、linearity、redaction、load、
+  elaboration の obligation と falsifier を owner-facing decision 前に整理する。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
