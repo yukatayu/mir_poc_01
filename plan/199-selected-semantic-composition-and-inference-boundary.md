@@ -211,12 +211,12 @@ equivalence、又は source inference を支持しない。次の autonomous act
 remaining frontier に non-duplicate existing-lane L3 candidate があるかを fresh preflight で再審査すること
 である。
 
-その再審査は Plan 203 の `C3-VR-SEQ-PRE` を選別した。これは WRK-0033 の finite state/reply/transition/
-translation/observation/assumption を固定したまま、one-step translation-preservation と arbitrary finite
-reply list の local-observation equality を conditional lemma として検査する候補である。full trace
-equivalence、transport/scheduler/history、C3 pending/correlation/persistence、source inference を含まない。
-WRK-0034 の registration/push 前には新しい Lean source 又は command を実行せず、fixed model を変える必要が
-出れば no-candidate disposition とする。
+その再審査は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 は finite state/reply/transition/
+translation/observation/assumption を固定したまま one-step translation-preservation と arbitrary finite
+reply list の local-observation equality を conditional lemma として retained した。full trace equivalence、
+transport/scheduler/history、C3 pending/correlation/persistence、source inference を含まない。次は C3 proper を
+開始せず、remaining frontier を fresh ADR-0014 preflight で再審査する。fixed model の変更が必要なら
+no-candidate disposition とし、ordinary Canon boundary を要求する。
 
 ## Non-claims
 

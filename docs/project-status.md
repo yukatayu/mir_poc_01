@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match、WRK-0033 は V1/R1 の有限 presentation comparison と三つの adverse distinction だけを保持、Plan 203 は固定 model の finite-sequence closure を未実行の L3 candidate として選別、C1/C6 は既存の限定 evidence を保持する | WRK-0034 を pre-register し commit/push した後だけ固定 model の list lemma を検査できる。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match、WRK-0033 は V1/R1 の有限 presentation comparison と三つの adverse distinction、WRK-0034 は同じ fixed model の有限列 closure を保持、C1/C6 は既存の限定 evidence を保持する | C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred。次の自走は C3 本体を先取りしない fresh ADR-0014 frontier preflight |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -135,12 +135,11 @@ C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 202 の
 local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
 C3 pending/correlation/persistence、source inference、Core rule を選びません。次は shared formal model、T1
 statement、T2 skeleton へ至る composition/falsifier research です。
-その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` だけを選別しました。WRK-0033 の
-state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
-translation/local-observation preservation だけを後続 L3 record で検査します。source/Lean command は未作成・未実行で、
-list は delivery/scheduler/history/trace の意味を持たず、C3 carrier、full trace equivalence、source inference、Core
-rule を選びません。fixed model の変更が必要なら no-candidate に戻り、ordinary Canon design boundary を越えません。
-
+その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。
+WRK-0033 の state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
+translation/local-observation preservation だけを retained します。list は delivery/scheduler/history/trace の意味を持たず、
+C3 carrier、full trace equivalence、source inference、Core rule を選びません。次は C3 本体を先取りしない fresh frontier
+preflight であり、fixed model を変える必要が出れば no-candidate に戻って ordinary Canon boundary を越えません。
 根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
 `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`,
 `mirrorea_canon/meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md`,
@@ -166,6 +165,7 @@ rule を選びません。fixed model の変更が必要なら no-candidate に�
 | V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | V1/R1 retained finite evidence | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence selection | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
+| V1/R1 finite-sequence retained evidence | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

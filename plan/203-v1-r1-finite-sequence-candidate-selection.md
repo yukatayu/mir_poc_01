@@ -103,6 +103,17 @@ decision.
 4. Re-screen the remaining frontier. Do not extend the result into C3 proper
    or C7 without an ordinary Canon design package.
 
+## Execution outcome
+
+The selection was committed at `1553bcc8fd140ad5ca98f5d7294fd802f776c7f1`,
+pre-registered as WRK-0034 at `384a94bb3882da7acab393a38d663cf8994c59b4`,
+retained at `dc66f08237acd11e4de722cd67a42fae0b26e1eb`, and linked in Canon at
+`c1af9c5007eb0a16ca6224d4742fd59883027321`. The 182-line Lean source passed
+`--trust=0`; it retains only fixed one-step translation preservation and final
+local-observation equality after every finite `List.foldl` of opaque replies.
+Its copied 133-line predecessor prefix is byte-identical. This does not supply
+a Mir trace, carrier, source inference, C3 proper, or implementation.
+
 ## Non-claims
 
 This selection does not establish full trace equivalence, a read-result

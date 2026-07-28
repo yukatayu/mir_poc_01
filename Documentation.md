@@ -26,6 +26,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | V1/R1 administrative presentation 比較の選別 | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | V1/R1 administrative presentation 比較の証跡 | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence presentation 比較の選別 | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
+| V1/R1 finite-sequence presentation 比較の証跡 | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -135,9 +136,11 @@ profile と Canon amendment は未作成です。
   の下で二表現を比較し、各条件を外す adversarial distinction を保持する。C3 の
   semantic carrier や source inference を選ばない。
 - `plan/203-v1-r1-finite-sequence-candidate-selection.md`: WRK-0033 と同じ
-  finite model を一切変えず、arbitrary finite reply list へ閉包できるかを次の
-  pre-registration 候補として選別した。full trace equivalence、C3 proper、source
-  inference ではなく、登録・push 前には source を書かず実行しない。
+  finite model を一切変えず、arbitrary finite reply list へ閉包できるかを選別した。
+- `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`: WRK-0034 の登録後に
+  `--trust=0` で確認した有限列 comparison。fixed translation の one-step
+  preservation と `List.foldl` 後の local observation equality を保持するが、full
+  trace equivalence、C3 proper、source inference は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

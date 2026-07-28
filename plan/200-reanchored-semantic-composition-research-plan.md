@@ -209,6 +209,8 @@ non-duplicate existing-lane L3 candidate を fresh ADR-0014 preflight で再審�
 Plan 203 の `C3-VR-SEQ-PRE` だけを選別した。WRK-0033 の state/reply/transition/translation/observation/
 assumption を固定し、one-step translation-preservation から arbitrary finite reply list の local observation
 equality へ閉包できるかだけを conditional lemma として検査する。これは trace/delivery/scheduler/history、
-C3 carrier、source inference、C7 を意味しない。WRK-0034 の standalone pre-registration が commit/push
-されるまで source 又は Lean command を実行しない。fixed model の変更が必要なら no-candidate disposition に
-戻り、ordinary Canon design/owner boundary を要求する。
+C3 carrier、source inference、C7 を意味しない。WRK-0034 は standalone pre-registration の commit/push 後に
+この fixed route を実行し、translation-preservation と arbitrary finite reply list の local observation equality を
+retained した。fixed model の変更が必要なら no-candidate disposition に戻り、ordinary Canon design/owner boundary
+を要求する。次は C3 proper を開始せず、remaining frontier の non-duplicate existing-lane L3 candidate を fresh
+ADR-0014 preflight で再審査する。
