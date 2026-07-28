@@ -843,6 +843,8 @@
   `plan/214-post-wrk0039-autonomous-frontier-disposition.md`
 - C2-B/C3 ordinary design decision packet:
   `plan/215-c2b-c3-ordinary-design-decision-packet.md`
+- C2-B/C3 cross-boundary compatibility audit:
+  `plan/216-c2b-c3-cross-boundary-compatibility-audit.md`
 
 ## maintenance rule
 

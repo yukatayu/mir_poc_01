@@ -41,6 +41,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 fiberwise relational comparison selection | `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md` |
 | WRK-0039 後の C2-B/C3 autonomous frontier | `plan/214-post-wrk0039-autonomous-frontier-disposition.md` |
 | C2-B/C3 ordinary design decision packet | `plan/215-c2b-c3-ordinary-design-decision-packet.md` |
+| C2-B/C3 cross-boundary compatibility audit | `plan/216-c2b-c3-cross-boundary-compatibility-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -197,6 +198,9 @@ profile と Canon amendment は未作成です。
 - `plan/215-c2b-c3-ordinary-design-decision-packet.md`: ordinary design で連動して決める
   correlation basis、branch/lifecycle、restore/one-shot/linearity を整理する。自明な source
   convenience は、後段の選択済みモデルへの一意な elaboration proof としてのみ扱う。
+- `plan/216-c2b-c3-cross-boundary-compatibility-audit.md`: Plan 215 を theory/01--06、
+  typed branch、admissible load、M1 locality、trace-set boundary と照合する。carrier、
+  Canon rule、implementation を選ばず、後段の省略記法を完全で検査可能な elaboration に限る。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

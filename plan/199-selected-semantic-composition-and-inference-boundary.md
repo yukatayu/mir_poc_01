@@ -268,6 +268,12 @@ decomposition or carrier selection. Its source-convenience condition is a
 future model-relative elaboration proof, never reconstruction of identity or
 authority from incidental source facts.
 
+Plan 216 audits that packet across the existing theory boundaries before any
+candidate comparison. It requires semantic residence for every staged fact,
+the full admissible load state, static-versus-dynamic failure separation, and
+trace-set rather than scheduler determinism. It changes no Canon proposition
+or carrier selection.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once

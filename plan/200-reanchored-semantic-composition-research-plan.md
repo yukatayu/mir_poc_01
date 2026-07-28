@@ -261,3 +261,8 @@ must answer correlation basis, branch/lifecycle projections, and restore/
 one-shot/linearity scope together. It leaves source convenience downstream of
 that selected model, where unique trace-preserving elaboration rather than
 incidental-value inference is required.
+
+Plan 216 is the compatibility audit of that packet. A next candidate sketch
+must map all facts to explicit semantic strata, retain the full admissible
+load boundary, and make user-facing omission a checkable elaboration property.
+This is a research constraint, not a selection or implementation authorization.

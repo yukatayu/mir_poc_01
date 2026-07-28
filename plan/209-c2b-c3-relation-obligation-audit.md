@@ -103,12 +103,14 @@ the eventual across-load consumption scope remains unresolved.
 | --- | --- | --- | --- |
 | A: relational administrative reference | typed relations directly expose pending, validation/outcome, reply, receipt, failure, result/provenance, and held-context obligations | semantic locus of every relation, direct staged projections, and restore behavior | if a relation exists only in prose or evaluator meta-state, it is not a carrier-neutral solution |
 | B: request-occurrence anchor | one request occurrence anchors M1 context plus direct staged relations to pending, outcome, reply/receipt or failure, and provenance | occurrence equality preserved or uniquely reconstructed under the selected load scope; direct relation, not merely a causal ancestor | if equal-payload requests or terminal states cannot be distinguished after restore, B cannot instantiate the obligations alone |
-| C: nominal attempt/exchange | a fresh semantic identity maps injectively to request, pending, reply, and receipt status | freshness, equality, retirement, persistence, branch scope, and non-reuse rules | do not choose C merely to reuse a wire/session/queue identifier; compare it only after a concrete A/B failure |
+| C: nominal attempt/exchange | a fresh semantic identity maps injectively to request, pending, reply, and receipt status | freshness, equality, retirement, persistence, branch scope, and non-reuse rules | do not choose C merely to reuse a wire/session/queue identifier; it is a non-exhaustive comparison view, not a fallback priority |
 
-The current comparison recommendation is therefore unchanged but sharper:
-use A as the reference vocabulary, test B against every table row, and retain
-C as a reserve alternative. A is not selected as a Canon representation, and
-B is not approved merely because request-to-service order already exists.
+The current comparison reading, corrected by Plans 215/216, is that A, B, and
+C are non-exhaustive LAB views. A remains useful relation vocabulary and B
+must satisfy every table row, but neither A priority nor an A/B failure is a
+precondition for comparing C or a hybrid. No view is selected as a Canon
+representation, and B is not approved merely because request-to-service order
+already exists.
 
 ## Save/load frontier audit
 
@@ -201,7 +203,7 @@ provenance, source span, and dependency grounds. No Core, Config, history,
 SaveObject, source grammar, runtime, transport, proof/OBL, Gate/Phase, sample,
 or public status changes.
 
-Reopen this comparison only on an owner/Canon carrier choice, a concrete
-A/B failure against a matrix row, or a source-based ergonomic proposal that
-can meet every projection condition. Do not create a new theorem or runtime
-helper solely from this audit.
+Reopen this comparison on an owner/Canon carrier choice, a concrete candidate
+or hybrid that can meet every projection condition, a matrix-row defect, or a
+source-based ergonomic proposal with complete elaboration evidence. Do not
+create a new theorem or runtime helper solely from this audit.
