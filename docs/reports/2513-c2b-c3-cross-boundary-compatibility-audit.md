@@ -117,7 +117,8 @@ No required validation was skipped.
 The evidence commit is `686bbebd60edf5bcee9d94a7a75c05bff124e463`
 (`docs: audit C2-B/C3 design boundaries`). It was pushed to `origin/main`;
 after `git fetch origin main`, `HEAD` and `origin/main` both equal that commit.
-This report closeout commit remains pending.
+This report is versioned and pushed in its task-closeout Git history; its
+containing commit is the closeout identity.
 
 ## Sub-agent session close status
 
