@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 123,
+ "files": 124,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 16408
+   "bytes": 16825
   },
   {
    "id": "root/north-star",
@@ -1790,6 +1790,23 @@
    "open_items": [],
    "path": "working/WRK-0036-c7-cumulative-erasure-countermodel.md",
    "bytes": 11225
+  },
+  {
+   "id": "working/WRK-0037",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "meta/proposal-012",
+    "meta/proposal-013"
+   ],
+   "summary": "C2-B/C3 の Canon carrier を選ばず、二つの opaque request atom、direct staged projection、injective restore を持つ固定有限 B-primary experiment が incidental identity なしに一つの coherent presentation を持つかを検査する。Core、Config、history、SaveObject、source rule、runtime は除外する。",
+   "open_items": [],
+   "path": "working/WRK-0037-c2b-c3-b-primary-opaque-anchor.md",
+   "bytes": 9407
   }
  ]
 }
