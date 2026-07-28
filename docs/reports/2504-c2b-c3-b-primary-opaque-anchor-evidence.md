@@ -1,8 +1,8 @@
 # Report 2504 - C2-B/C3 B-primary opaque-anchor finite evidence
 
 **Identifier:** `LAB-REPORT-2504`
-**Date:** 2026-07-28 18:59 JST
-**Status:** evidence commit pushed; WRK metadata link pending
+**Date:** 2026-07-28 19:04 JST
+**Status:** evidence and WRK metadata pushed; report closeout pending
 
 ## Objective
 
@@ -172,15 +172,18 @@ was available or opened.
 No runtime, transport, parser, sample, or end-to-end command applies to this
 artifact-local theorem table. `make docs` passed before the evidence commit:
 Canon index, source hierarchy, report structure, and its secret scan all passed.
-Committed WRK-history validation remains pending because the evidence commit has
-not yet been linked from WRK-0037 metadata.
+After the metadata link and its field-classification correction, `make docs`
+passed again, including committed WRK-history validation.
 
 ## Commit / push status
 
 Evidence was committed with `--no-gpg-sign` as
 `99f468d6d5e415ed05f90b77c2b37956102fdc36`, pushed to `origin/main`, and
-verified after fetch with `HEAD == origin/main`. The metadata-only link commit
-is pending and will be validated and pushed separately.
+verified after fetch with `HEAD == origin/main`. Metadata was linked as
+`d9b7fecafa458f3e78834a88d5a919674116c998` and its field-classification
+correction as `cbe662741f637d1f440bee8ed83aa25a1cb86752`; both were pushed and
+the remote match was verified. This report closeout update is the only pending
+non-evidence commit.
 
 ## Sub-agent session close status
 
