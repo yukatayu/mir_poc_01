@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 08:48 JST
+最終更新: 2026-07-28 09:01 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、C1/C6 は既存の限定 evidence を保持する | C0-B の non-circular domain staging、C2-A、C1 の snapshot/evaluation/pending、C3--C5/C7 と scalar candidate comparison を shared-model入力へ進める |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG だけを保持、C1/C6 は既存の限定 evidence を保持する | C2-A、C1 の snapshot/evaluation/pending、C3--C5/C7 と scalar candidate comparison を shared-model入力へ進める |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -88,9 +88,9 @@ official T2 まで無条件に連続自走することはできません。次�
   SCN-08 の invalid 判定でも scalar representation の選択でもない。
 - Oracle の independent review と local source check により、WRK-0028 は common
   Canon cut の C0/C2 source-role re-anchor を完了した。C0-A は同じ source-authority
-  span を重複して扱わない。次の自走は C0-B の opaque domain role に限る non-circular
-  dependency screening、続いて C2-A 等の candidate-local micro-model 比較であり、shared
-  proof-facing model や Core proposal の採択ではない。
+  span を重複して扱わない。WRK-0029 は opaque domain role の rank-increasing graph が
+  条件付きで非循環であることだけを retained した。次の自走は C2-A 等の candidate-local
+  micro-model 比較であり、shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
 - production implementation と新しい helper / schema / CI / evidence lane。
@@ -118,9 +118,9 @@ O0 と drift の scoped audit は完了したが、artifact は valid `fail` で
 G0-D3 へ進めません。将来 `pass` route を作るには pin 維持又は normal Canon rebase
 proposal の owner/Canon decision が別途必要です。
 3-7 の方向は記録済みです。WRK-0028 は source-role re-anchor を完了し、C0-A はその
-pinned cut では完了済みです。次は Plan 199 の C0-B/C2-A と composition/falsifier
-research を経て、shared formal model、T1 statement、T2 skeleton を長い自走 package として
-進めます。
+pinned cut では完了済みです。WRK-0029 は C0-B の条件付き DAG だけを retained しました。
+次は Plan 199 の C2-A と composition/falsifier research を経て、shared formal model、T1
+statement、T2 skeleton を長い自走 package として進めます。
 
 根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
 `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`,

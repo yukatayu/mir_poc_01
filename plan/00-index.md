@@ -793,6 +793,8 @@
   `plan/200-reanchored-semantic-composition-research-plan.md`
 - WRK-0028 R0 common-cut source-local fact manifest:
   `plan/wrk-0028-r0-common-cut-fact-manifest.md`
+- WRK-0029 C0-B noncircular domain-staging conditional lemma:
+  `plan/wrk-0029-c0b-noncircular-domain-staging.md`
 
 ## maintenance rule
 
