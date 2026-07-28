@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-28 09:52 JST
+最終更新: 2026-07-28 10:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028 retains a current-cut C0/C2 provenance reading and completes C0-A only at that cut; WRK-0029 retains C0-B only as an opaque conditional DAG; WRK-0030 closes C2-A as source-tagged documentary non-substitution only; WRK-0031 closes C0-C as a source-local Diagnostic-reference query only; all OBL rows `open` | re-screen C3/C5/C4 recorded-direction families; C0-D/C1/C2-B/C6 remain deferred until a non-duplicate nonsemantic package or Canon proposal exists | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028 retains a current-cut C0/C2 provenance reading and completes C0-A only at that cut; WRK-0029 retains C0-B only as an opaque conditional DAG; WRK-0030 closes C2-A as source-tagged documentary non-substitution only; WRK-0031 closes C0-C as a source-local Diagnostic-reference query only; all OBL rows `open` | pre-register C5-PRE: a literal normal-admission issuance-phase guard audit. C3/C4/C5 semantic models and C0-D/C1/C2-B/C6 remain deferred until a Canon proposal exists | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -158,7 +158,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028 completed the C0/C2 source-role re-anchor and subsumes C0-A at its pinned cut; WRK-0029 retained C0-B as an opaque conditional DAG; WRK-0030 retained C2-A as source-tagged documentary non-substitution; WRK-0031 retained C0-C as a source-local Diagnostic-reference query only. Re-screen C3/C5/C4 before a shared model |
+| Research | selected semantic composition | WRK-0028 completed the C0/C2 source-role re-anchor and subsumes C0-A at its pinned cut; WRK-0029 retained C0-B as an opaque conditional DAG; WRK-0030 retained C2-A as source-tagged documentary non-substitution; WRK-0031 retained C0-C as a source-local Diagnostic-reference query only. C5-PRE is selected for pre-registration as a literal ordinary-admission issuance guard; C3/C4/C5 models stop at a Canon design boundary |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -196,6 +196,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-28 10:17 JST: local source review plus temporary GPT-5.6 Sol Pro
+  advisory screen selected only C5-PRE from C3/C5/C4: a pinned source-local
+  audit for an explicit ordinary-admission issuance phase that would require
+  an A1 successor assessment. It selects neither A2 atomicity/facets nor any
+  request/pending/occurrence identity. C3 and C4 require an ordinary Canon
+  design boundary before their first nontrivial test.
 
 - 2026-07-28 09:52 JST: WRK-0031 retained only a source-local query record for
   literal named-error/Diagnostic references and explicit `spec/07`/theory/10

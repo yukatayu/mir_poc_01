@@ -286,6 +286,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/197-i1-bootstrap-decision-and-readiness-audit.md",
         "plan/199-selected-semantic-composition-and-inference-boundary.md",
         "plan/200-reanchored-semantic-composition-research-plan.md",
+        "plan/201-c5-a2-issuance-guard-candidate-selection.md",
     ],
     "scripts": [
         "scripts",

@@ -799,6 +799,8 @@
   `plan/wrk-0030-c2a-source-tagged-anti-collapse-vocabulary.md`
 - WRK-0031 C0-C source-local Diagnostic reference audit:
   `plan/wrk-0031-c0c-source-local-diagnostic-reference-audit.md`
+- C5-PRE conditional-A2 issuance-guard candidate selection:
+  `plan/201-c5-a2-issuance-guard-candidate-selection.md`
 
 ## maintenance rule
 

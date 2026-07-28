@@ -152,8 +152,9 @@ R0 common Canon-cut re-anchor
   -> C0-A complete-by-R0, C0-B retained conditional DAG, then C0-C..D diagnostic/totality split
   -> C2-A..E equality/identity/binding/replay/persistence split
   -> C1 candidate families, C6a scalar-cell and C6b terminal-target candidates
-  -> C3 pending value flow and C5 conditional-A2 facet models
-  -> C4a local SW1 facets, then C4b C2/C5/C3 integration
+  -> C5-PRE source-local conditional-A2 issuance-guard audit
+  -> ordinary Canon design for C5 facets, C4 SW1 identity, and C3 pending control
+  -> C4b/C5/C3 integration only after the required reference/correlation boundary
   -> C7 inference/desugaring equivalence matrix
   -> shared Core / Config / Step / WellFormed / elaboration / history model
 ```
@@ -190,10 +191,13 @@ documentary non-substitution だけを retained した。いずれも shared car
 result ではない。WRK-0031 は C0-C の source-local Diagnostic reference audit を closed
 evidence として retained した。source span の literal reference の有無だけを記録し、coverage
 又は stage/reject domain を導かない。C0-D、C1、C2-B、C6 は現行 evidence cut では L3 の
-非重複な result に閉じない。次の最小自走 action は、C3/C5/C4 など残る recorded-direction
-familiesを、依存未決と reserved-boundary risk に照らして portfolio re-screen することである。
-選別前に semantic candidate を先取りせず、実装は common carrier の最小性を evidence が支持して
-から扱う。
+非重複な result に閉じない。C3/C5/C4 portfolio の local/Oracle screen は、C3 と C4 の最初の
+有意な検査が pending/request/occurrence identity 又は carrier を選ぶため ordinary Canon design
+boundary へ停止すると確認した。C5 だけは、通常 admission source span に P012 の conditional-A2
+停止条件を明示する独立 issuance phase が literal に現れるかを記録する `C5-PRE` に狭めれば、
+nonsemantic L3 literal-transcription 候補になる。詳細と patch-admission 除外は Plan 201 に置く。
+この選別は A2 atomicity、compatibility、facet、carrier を支持せず、実装は common carrier の最小性を
+evidence が支持してから扱う。
 
 ## Non-claims
 

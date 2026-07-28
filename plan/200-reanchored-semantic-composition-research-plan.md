@@ -182,8 +182,17 @@ C1 は WRK-0024 の非含意を越える比較で snapshot/evaluation/fusion/pen
 identity ontology を前提化する。したがって、いずれもこの時点では pre-register せず、ordinary
 Canon proposal 又は owner decision が必要になる地点まで deferred とする。
 
-次は C0-C result を semantic evidence と扱わず、C3（V1/R1 pending）、C5（conditional A2）、
-C4（SW1 facets）を含む remaining recorded-direction families の依存・既存 evidence・adverse
-trace・ADR-0014 standing eligibility を portfolio re-screen する。そこで non-duplicate L3
-literal/conditional package に閉じなければ、ordinary Canon proposal 又は owner decision の
-boundary として報告する。
+Portfolio re-screen の結果、C3 は pending unit、receipt correlation、held `Delta`、failure/resume
+transition を選ばずには D3/D4 を検査できず、C4 は served-write node、request-to-serve binding、
+validation/mutation boundary を選ばずには D9 を検査できない。両者は ordinary Canon design/owner
+boundary として deferred にする。C5 本体も admission occurrence/facet/identity を選ぶため同じ
+boundary である。
+
+ただし C5-PRE は、P012 の conditional-A2 stop line を current ordinary-admission source に照らして
+literal に監査する別の narrow candidate として選別済みである。pre-enumerated source span に、verdict
+から独立した membership/grant/witness issuance の distinct rule/transition/state、issuance-specific
+failure、queue/scheduling、又は independent observation が明示されるかだけを記録する。これは A2
+atomicity、absence の global claim、same/different occurrence、facet cardinality、rejection transaction、
+request identity、save/load を決めない。patch admission は ordinary admission と別 subsystem のため
+corpus から除外する。Plan 201 の preflight を満たすことを、次の WRK pre-registration で current cut
+に pin してから実行する。

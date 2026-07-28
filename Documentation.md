@@ -21,6 +21,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | 選択済み方向の合成・推論境界 | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
 | 合成研究の再anchor済み実行順 | `plan/200-reanchored-semantic-composition-research-plan.md` |
+| C5-PRE admission 発行段階ガード監査の選別 | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -114,6 +115,11 @@ profile と Canon amendment は未作成です。
   I1 entry、I1 exit の区別、owner 判断の順序・候補・推奨。
 - `plan/199-selected-semantic-composition-and-inference-boundary.md`: selected
   directions を shared model に合成する前の countermodel と安全な推論境界。
+- `plan/200-reanchored-semantic-composition-research-plan.md`: C0--C7 を
+  bounded research package に分解する実行順。
+- `plan/201-c5-a2-issuance-guard-candidate-selection.md`: C5 の本体設計を
+  選ばず、通常 admission に独立した issuance phase が明示されるかだけを監査する
+  次の候補と停止線。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
