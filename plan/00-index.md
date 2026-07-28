@@ -819,6 +819,8 @@
   `plan/wrk-0035-c7-parametric-factorization.md`
 - C7 cumulative-erasure countermodel candidate selection:
   `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`
+- WRK-0036 C7 cumulative-erasure countermodel evidence:
+  `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`
 
 ## maintenance rule
 
