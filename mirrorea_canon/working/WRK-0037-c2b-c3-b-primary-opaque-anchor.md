@@ -85,7 +85,7 @@ result is one finite table, not a general recovery, restore, or carrier result.
 Evidence artifacts: LAB:plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md@99f468d6d5e415ed05f90b77c2b37956102fdc36:839ffda0e4c01fb1dab476598b97f658a8f85e27d8ce2547ab6a8c49e8662739
 Evidence commits: 99f468d6d5e415ed05f90b77c2b37956102fdc36
 Impact / non-effects: This record is normative only about the reversible L3 research boundary and its procedure. The finite pass establishes only that one explicitly bounded candidate did not trigger its registered falsifiers; it cannot make B a Canon carrier, define request identity, authorize a downstream design, or establish a recovery/persistence/inference rule.
-Independent review: not-required-for-L3; two temporary GPT-5.6 Sol Pro advisory reviews challenged coverage and then accepted the revised finite scope.
+Independent review: not-required-for-L3
 
 ## Supersession
 
