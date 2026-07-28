@@ -238,6 +238,9 @@ restore configuration requirement を比較条件にする。これは carrier�
 Plan 210 はその各 obligation に relation-first Family A と request-occurrence Family B を対応させ、
 DAG の ancestry/order も unlocated relation も semantic correlation/pending/receipt/load identity を
 自動供給しないと記録する。A/B は conditional candidate のままであり、source omission を先取りしない。
+Plan 211 は owner disposition を置換せず、B2-OPAQUE を有限 L3 experiment の pre-registration
+候補に限って選別する。二つの opaque request atom と explicit q-indexed projection/injective restore を
+使うが、それらを Core、Config、history、SaveObject の selected carrier と読まない。
 
 ## Non-claims
 

@@ -36,6 +36,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 value-flow design preparation | `plan/208-c2b-c3-value-flow-design-preparation.md` |
 | C2-B/C3 relation-obligation audit | `plan/209-c2b-c3-relation-obligation-audit.md` |
 | C2-B/C3 Family A/B instantiation audit | `plan/210-c2b-c3-family-a-b-instantiation-audit.md` |
+| C2-B/C3 B-primary opaque-anchor candidate selection | `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -176,6 +177,10 @@ profile と Canon amendment は未作成です。
   relation-first Family A と request-occurrence Family B を比較する。DAG は必要な順序制約のみを
   供給し、A/B とも semantic carrier ではなく、identity、pending、receipt、restore、held context
   の ordinary Canon design selection を待つ。
+- `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`: B を Canon として選ばず、
+  二つの不透明な request occurrence と明示的な model-local projection を使う有限 L3 experiment
+  だけを pre-register 候補にする。payload、DAG、span、locus、transport、queue position は identity
+  又は correlation の根拠にしない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

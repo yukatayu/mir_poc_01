@@ -234,3 +234,6 @@ ordinary Canon design/owner boundary を越えない。
 Plan 210 は Family A/B の instantiation audit を追加し、どちらも selected configuration state と
 load behavior なしには staged obligation を満たさない conditional presentation であると記録する。
 この比較は carrier、source syntax、or implementation を選ばない。
+Plan 211 は B2-OPAQUE の fixed finite model を existing-lane experiment として only pre-register
+する。opaque q distinction、direct projection、injective restore、adversarial branches を固定するが、
+candidate-local mathematics を Canon semantic state 又は source inference に読み替えない。

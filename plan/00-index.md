@@ -829,6 +829,8 @@
   `plan/209-c2b-c3-relation-obligation-audit.md`
 - C2-B/C3 Family A/B instantiation audit:
   `plan/210-c2b-c3-family-a-b-instantiation-audit.md`
+- C2-B/C3 B-primary opaque-anchor candidate selection:
+  `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`
 
 ## maintenance rule
 
