@@ -1,8 +1,8 @@
 # Report 2510 - C2-B/C3 fiberwise relational presentation finite evidence
 
 **Identifier:** `LAB-REPORT-2510`
-**Date:** 2026-07-28 22:40 JST
-**Status:** evidence committed and pushed; WRK metadata link in progress
+**Date:** 2026-07-28 22:46 JST
+**Status:** evidence and WRK metadata pushed; report closeout in progress
 
 ## Objective
 
@@ -266,17 +266,18 @@ evidence for this package. No callable sub-agent session was available or opened
 
 No runtime, transport, parser, sample, or end-to-end command applies to this
 artifact-local theorem table. `make docs` passed before the evidence commit;
-committed WRK-history validation will run after the metadata link. The final
-Oracle acceptance answer was skipped only because its capture timed out, as
-recorded above.
+committed WRK-history validation passed after the metadata link. The final Oracle
+acceptance answer was skipped only because its capture timed out, as recorded
+above.
 
 ## Commit / push status
 
 Evidence was committed with `--no-gpg-sign` as
 `f250e117ffd4c7f1b81a1d604900ff63973cd582`, pushed to `origin/main`, and
-verified after fetch with `HEAD == origin/main`. The subsequent metadata-only
-update appends this evidence commit and artifact digest to WRK-0039 without
-altering its pre-registration; it is the current uncommitted follow-up.
+verified after fetch with `HEAD == origin/main`. Metadata was linked as
+`34a4979e7310ee80d3e3e919014dca0ef506ea17`, pushed to `origin/main`, and
+verified after fetch with `HEAD == origin/main`. This report closeout update is
+the only pending commit.
 
 ## Sub-agent session close status
 
