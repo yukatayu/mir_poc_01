@@ -73,17 +73,21 @@ parser/checker、accept/reject、outcome relation、Diagnostic family、Core/jud
 
 | Package | Narrow question | Stop condition |
 | --- | --- | --- |
-| C2-A equality vocabulary | payload/claims/binding/semantic request/service attempt/replay を区別できるか | structural equality を identity とする |
+| C2-A anti-collapse vocabulary | source-owned termsを WRK-local question label として index し、label 間の non-substitution だけを保持できるか | field partition、equality/identity、binding relation、attempt cardinality、replay classification を選ぶ必要がある |
 | C2-B identity anchor | request occurrence reference と explicit issuance token を candidate として比較できるか | Core primitive、edge schema、hidden side relation、wire commitment が必要になる |
 | C2-C admitted-execution binding | non-authoritative claims と authoritative membership/verdict/grant/witness/history をどう関連付ける必要があるか | locus/transport/token possession を authority にする |
 | C2-D replay policy | in-flight/success/reject/stale/restore の同一 semantic request attempt を total に分類できるか | exact failure family、retry/acknowledgement、unbounded hidden history を選ぶ |
 | C2-E persistence | selected candidate が save/load 後にも再分類に必要な fact を保つか | raw read leak、volatile queue-only identity、new persistence contract が必要になる |
 
 「nominal issuance identity」は Oracle の advisory candidate であり、現行 Canon の
-constructor ではない。payload equality と transport/queue/session identity は、equal but
-distinct operation、same-locus two-principal、save/load の adverse trace を満たせない候補
-として比較から除外する。request identity 自体の選択が必要になった時点で owner/Canon
-proposal に切り替える。
+constructor ではない。C2-A の six headings は `PAYLOAD_QUESTION`、
+`VALIDATION_CLAIMS_QUESTION`、`BINDING_QUESTION`、`REQUEST_UNIT_QUESTION`、
+`ATTEMPT_UNIT_QUESTION`、`REPLAY_CLASSIFICATION_QUESTION` という WRK-local question
+label であり、Canon object/carrier/predicate ではない。source fact 又は comparison を一つの
+label に記録しても、別 label の答えにはならない。この documentary non-substitution を越えて、
+payload equality、transport/queue/session identity、request identity、attempt cardinality、
+replay policy、save/load classification を選ぶ必要が出た時点で owner/Canon proposal 又は
+C2-B--E の successor に切り替える。
 
 ### C1/C6 - Independent candidate families
 
@@ -160,7 +164,8 @@ fresh identity は source omission の推論ではなく、明示的に生成・
 
 R0 が C0-A と同じ current-cut/source-authority span を既に source-local に分類したため、
 C0-A を重複して pre-register しない。C0-B は opaque role の conditional DAG として閉じたが、
-domain/`WellScoped`/outcome/Diagnostic を選ばない。次は C2-A equality vocabulary を
-ADR-0014 standing eligibility と existing LAB lane に照らして pre-register する。payload、
-claims、binding、semantic request、service attempt、replay を区別する語彙表だけを対象とし、
-structural equality、identity anchor、replay policy、Core/edge schema、wire commitment を選ばない。
+domain/`WellScoped`/outcome/Diagnostic を選ばない。次は C2-A source-tagged anti-collapse
+vocabulary audit を ADR-0014 standing eligibility と existing LAB lane に照らして pre-register
+する。six WRK-local question label と source-owned subject の対応、及び label 間の documentary
+non-substitution だけを対象とし、payload field partition、structural equality、identity anchor、
+binding/replay policy、Core/edge schema、attempt cardinality、wire commitment を選ばない。

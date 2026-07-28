@@ -76,8 +76,10 @@ source authority subquestion は後続 WRK-0028 が literal に完了したた�
 再登録しない。WRK-0029 は、displayed grammar、static source、BND-001 `WellScoped` input
 の四つの opaque role と terminal branch が rank-increasing なら非循環、という条件文だけを
 retained した。これは input role、`WellScoped`、outcome 又は Diagnostic を定義しない。
-したがって次の独立 package は C2-A equality vocabulary である。凍結 record を修理又は
-再実行してはならない。
+したがって次の独立 package は C2-A source-tagged anti-collapse vocabulary audit である。
+payload、claims、binding、request unit、attempt unit、replay classification は同じ種類の
+object と仮定せず、WRK-local question label と source-owned subject の対応だけを調べる。
+凍結 record を修理又は再実行してはならない。
 
 ### C2 の登録済み falsifier（WRK-0026）
 
@@ -175,10 +177,10 @@ non-effects を含む successor proposal に切り替える。
 
 R0 により source-anchor は current cut に固定された。C0-B は four-role domain-staging
 conditional lemma として閉じたが、shared carrier を支持する semantic result ではない。次の
-最小自走 package は C2-A equality vocabulary である。そこでは候補を比較しても Canon rule を
-改訂せず、各行について「決定済み事実」「必要な追加表現」「falsifier」「既存 invariant
-への影響なし」を記録する。C3--C7 と実装は、その matrix が共通 carrier の最小性を支持して
-から扱う。
+最小自走 package は C2-A source-tagged anti-collapse vocabulary audit である。そこでは候補を
+比較しても Canon rule を改訂せず、各行について「決定済み事実」「必要な追加表現」
+「falsifier」「既存 invariant への影響なし」を記録する。C3--C7 と実装は、その matrix が
+共通 carrier の最小性を支持してから扱う。
 
 ## Non-claims
 
