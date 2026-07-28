@@ -235,6 +235,9 @@ Plan 209 はこの comparison を prefix-local に監査し、completed-success 
 sole relation とせず、pending / validation-outcome / reply / receipt / failure の staged relation と
 restore configuration requirement を比較条件にする。これは carrier、source rule、or implementation を
 採択しない。
+Plan 210 はその各 obligation に relation-first Family A と request-occurrence Family B を対応させ、
+DAG の ancestry/order も unlocated relation も semantic correlation/pending/receipt/load identity を
+自動供給しないと記録する。A/B は conditional candidate のままであり、source omission を先取りしない。
 
 ## Non-claims
 

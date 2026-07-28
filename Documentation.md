@@ -35,6 +35,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | WRK-0036 後の自律研究 frontier | `plan/207-post-wrk0036-autonomous-frontier-disposition.md` |
 | C2-B/C3 value-flow design preparation | `plan/208-c2b-c3-value-flow-design-preparation.md` |
 | C2-B/C3 relation-obligation audit | `plan/209-c2b-c3-relation-obligation-audit.md` |
+| C2-B/C3 Family A/B instantiation audit | `plan/210-c2b-c3-family-a-b-instantiation-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -171,6 +172,10 @@ profile と Canon amendment は未作成です。
 - `plan/209-c2b-c3-relation-obligation-audit.md`: Plan 208 の completed-success shorthand を
   prefix-local staged relation へ補正し、M1 validation outcome、linearity、save/load 復元、
   carrier-neutral な ergonomic projection の検査条件を整理する。Carrier や source rule は採択しない。
+- `plan/210-c2b-c3-family-a-b-instantiation-audit.md`: staged obligation ごとに
+  relation-first Family A と request-occurrence Family B を比較する。DAG は必要な順序制約のみを
+  供給し、A/B とも semantic carrier ではなく、identity、pending、receipt、restore、held context
+  の ordinary Canon design selection を待つ。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

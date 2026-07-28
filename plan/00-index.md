@@ -827,6 +827,8 @@
   `plan/208-c2b-c3-value-flow-design-preparation.md`
 - C2-B/C3 relation-obligation audit:
   `plan/209-c2b-c3-relation-obligation-audit.md`
+- C2-B/C3 Family A/B instantiation audit:
+  `plan/210-c2b-c3-family-a-b-instantiation-audit.md`
 
 ## maintenance rule
 

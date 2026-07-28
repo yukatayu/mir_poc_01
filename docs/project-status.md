@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0036 は各々の限定結果を保持し、Plan 204 は fixed line の no-candidate を保持する。Plan 207 は新しい L3 candidate を作らず、Plan 208/209 は P012 V1/R1 と P013 M1 の C2-B/C3 comparison cut と staged relation audit を準備した | C7 は source rule でなく L3 boundary。Plan 208/209 は carrier を採択しない。C2-B/C3 の identity/pending/receipt/save-load は owner/Canon selection を待ち、C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0036 は各々の限定結果を保持し、Plan 204 は fixed line の no-candidate を保持する。Plan 207 は新しい L3 candidate を作らず、Plan 208--210 は P012 V1/R1 と P013 M1 の C2-B/C3 comparison、staged relation、A/B instantiation audit を準備した | C7 は source rule でなく L3 boundary。Plan 208--210 は carrier を採択しない。A/B はいずれも conditional であり、C2-B/C3 の identity/pending/receipt/save-load は owner/Canon selection を待つ。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -97,7 +97,7 @@ official T2 まで無条件に連続自走することはできません。次�
   retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
   又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
   を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207 は残る C0-D--C7 を再審査し、Plan 208/209 は C2-B/C3 の relation-first comparison を prefix-local staged relation、validation outcome、restore configuration の監査へ補正したが、carrier は選ばない。
+  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207 は残る C0-D--C7 を再審査し、Plan 208--210 は C2-B/C3 comparison を prefix-local staged relation、validation outcome、restore configuration と A/B instantiation audit へ整理したが、carrier は選ばない。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -118,7 +118,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
 | 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | C5-PRE は source-local issuance guard のみを監査可能。C3/C4/C5 本体は request/pending/occurrence identity を選ぶ ordinary Canon design boundary |
+| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | C5-PRE は source-local issuance guard のみを監査可能。Plan 210 は Family A/B のどちらも pending/reply/receipt/load を自動供給しないと確認した。C3/C4/C5 本体は ordinary Canon design boundary |
 | 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
 | 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
 
@@ -135,7 +135,7 @@ C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 202 の
 local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
   C3 pending/correlation/persistence、source inference、Core rule を選びません。これは shared formal model、T1
   statement、T2 skeleton への readiness ではなく、その前段の限定 evidence です。
-その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。Plan 205 から WRK-0035 は C7 の carrier-neutral factorization を登録・実行・metadata link まで完了しましたが、これは range-only の generic L3 evidence であり、source rule、grounds、concrete artifact ではありません。Plan 206 / WRK-0036 は個別に検査した erasure の common coarsening が paired observation を失う固定 finite countermodel を登録・実行・metadata link まで完了しました。Plan 207 は新しい L3 candidate を作らず、Plan 208/209 は C2-B/C3 relation-first comparison を staged relation、validation outcome、linearity、restore configuration、ergonomic projection の監査へ整理しました。
+その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。Plan 205 から WRK-0035 は C7 の carrier-neutral factorization を登録・実行・metadata link まで完了しましたが、これは range-only の generic L3 evidence であり、source rule、grounds、concrete artifact ではありません。Plan 206 / WRK-0036 は個別に検査した erasure の common coarsening が paired observation を失う固定 finite countermodel を登録・実行・metadata link まで完了しました。Plan 207 は新しい L3 candidate を作らず、Plan 208--210 は C2-B/C3 comparison を staged relation、validation outcome、linearity、restore configuration、ergonomic projection と A/B instantiation audit へ整理しました。A/B はともに conditional であり、carrier は選びません。
 WRK-0033 の state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
 translation/local-observation preservation だけを retained します。list は delivery/scheduler/history/trace の意味を持たず、
 C3 carrier、full trace equivalence、source inference、Core rule を選びません。次は C3 proper を先取りせず、その通常 Canon design package を準備する boundary です。

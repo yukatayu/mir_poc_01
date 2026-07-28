@@ -644,6 +644,7 @@ REQUIRED = [
     "plan/207-post-wrk0036-autonomous-frontier-disposition.md",
     "plan/208-c2b-c3-value-flow-design-preparation.md",
     "plan/209-c2b-c3-relation-obligation-audit.md",
+    "plan/210-c2b-c3-family-a-b-instantiation-audit.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
