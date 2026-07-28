@@ -197,5 +197,9 @@ request identity、save/load を決めない。patch admission は ordinary admi
 corpus から除外する。WRK-0032 はこの audit を current cut で完了し、P012 guard direction と
 four named ordinary-admission theory/spec span の non-match を source-local に retained した。
 結果は A2 atomicity、compatibility、facet、carrier を決めず、C3/C4/C5 proper の ordinary Canon
-design boundary を解除しない。次は candidate を仮定せず、remaining recorded-direction frontier を
-fresh ADR-0014 preflight で再審査する。
+design boundary を解除しない。fresh ADR-0014 preflight の結果は Plan 202 に記録した。C3 proper を
+選ばず、P012 V1/R1 の administrative binding と one-slot machine presentation を explicit assumption
+の下で比較する `C3-VR-PRE` だけを next candidate とした。これは `LAB$Correlation` 等を opaque に
+保つ conditional-lemma route であり、matching、one-shot、failure exclusion を省略又は Mir carrier に
+読み替えない。実行は WRK-0033 の standalone pre-registration を commit/push した後に限る。C3/C4/C5
+proper、C0-D/C1/C2-B/C6、そして full C7 inference matrix は引き続き deferred である。

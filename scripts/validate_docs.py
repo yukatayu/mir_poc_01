@@ -636,6 +636,7 @@ REQUIRED = [
     "plan/199-selected-semantic-composition-and-inference-boundary.md",
     "plan/200-reanchored-semantic-composition-research-plan.md",
     "plan/201-c5-a2-issuance-guard-candidate-selection.md",
+    "plan/202-v1-r1-presentation-refinement-candidate-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

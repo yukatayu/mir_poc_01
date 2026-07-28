@@ -199,7 +199,13 @@ direction と four named ordinary-admission theory/spec span の non-match を r
 patch-admission 除外は Plan 201 と WRK-0032 evidence に置く。この result は A2 atomicity、
 compatibility、facet、carrier を支持せず、実装は common carrier の最小性を evidence が支持してから
 扱う。次の autonomous action は C3/C4/C5 本体を先取りせず、remaining frontier に non-duplicate
-existing-lane L3 candidate があるかを fresh preflight で再審査することである。
+existing-lane L3 candidate があるかを fresh preflight で再審査することであった。Plan 202 はその
+再審査により、P012 の V1/R1 を二つの administrative presentation として比較する `C3-VR-PRE`
+だけを選別した。これは pending/control/correlation/persistence の C3 本体設計ではなく、matching、
+single-use、failure exclusion を明示した場合にのみ有限 LAB comparison ができるかを調べる候補である。
+いかなる結果も source-level inference を自動承認せず、fact と一意な根拠が elaborated artifact から
+復元できることを別途必要とする。次は WRK-0033 の standalone pre-registration であり、登録・push
+より前に model source 又は Lean command を実行しない。
 
 ## Non-claims
 

@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match だけを保持、C1/C6 は既存の限定 evidence を保持する | remaining frontier の fresh ADR-0014 preflight を実施中。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は、現時点では semantic selection 又は duplicate-evidence risk のため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match だけを保持、Plan 202 は V1/R1 の限定 presentation comparison を選別、C1/C6 は既存の限定 evidence を保持する | WRK-0033 を pre-register し commit/push した後だけ、opaque finite model を実行できる。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -130,9 +130,11 @@ pinned cut では完了済みです。WRK-0029 は C0-B の条件付き DAG、WR
 source-tagged documentary non-substitution だけを retained しました。WRK-0031 は C0-C の
 source-local Diagnostic reference query だけを retained しました。WRK-0032 は通常 admission issuance
 guard を完了し、P012 condition と four named span の source-local result のみを retained しました。
-C3/C4/C5 本体は ordinary Canon design boundary のままです。次に candidate を仮定しない frontier
-preflight を行い、standing-eligible package があれば pre-register し、なければ ordinary Canon
-proposal/owner decision boundary として報告します。その後も composition/falsifier research を経て、
+C3/C4/C5 本体は ordinary Canon design boundary のままです。frontier preflight は Plan 202 の
+`C3-VR-PRE` を選別しました。これは V1/R1 の二つの administrative presentation だけを明示的な
+matching/one-shot/failure assumptions の下で比較する candidate であり、C3 の pending/correlation/
+persistence design ではありません。WRK-0033 の registration/push 前には model を実行しません。
+その後も composition/falsifier research を経て、
 shared formal model、T1 statement、T2 skeleton を長い自走 package として進めます。
 
 根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
@@ -157,6 +159,7 @@ shared formal model、T1 statement、T2 skeleton を長い自走 package とし�
 | re-anchored composition research | `plan/200-reanchored-semantic-composition-research-plan.md` |
 | C5-PRE candidate selection | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
 | C5-PRE retained evidence | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
+| V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

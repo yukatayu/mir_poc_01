@@ -23,6 +23,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 合成研究の再anchor済み実行順 | `plan/200-reanchored-semantic-composition-research-plan.md` |
 | C5-PRE admission 発行段階ガード監査の選別 | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
 | C5-PRE admission 発行段階ガード監査の証跡 | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
+| V1/R1 administrative presentation 比較の選別 | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -124,6 +125,9 @@ profile と Canon amendment は未作成です。
 - `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md`: P012 の条件文と
   four named ordinary-admission span の source-local reading。A2 atomicity や
   admission occurrence identity は導かない。
+- `plan/202-v1-r1-presentation-refinement-candidate-selection.md`: C3 本体を
+  設計せず、V1/R1 の administrative binding と one-slot presentation を有限 LAB
+  comparison として検査できるかの選別。WRK-0033 の登録前には model を実行しない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

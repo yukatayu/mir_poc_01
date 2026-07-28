@@ -803,6 +803,8 @@
   `plan/201-c5-a2-issuance-guard-candidate-selection.md`
 - WRK-0032 C5-PRE ordinary-admission issuance-guard evidence:
   `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md`
+- V1/R1 presentation-refinement candidate selection:
+  `plan/202-v1-r1-presentation-refinement-candidate-selection.md`
 
 ## maintenance rule
 
