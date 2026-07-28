@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 119,
+ "files": 120,
  "entries": [
   {
    "id": "root/changelog",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 14575
+   "bytes": 14962
   },
   {
    "id": "root/north-star",
@@ -1736,6 +1736,19 @@
    "open_items": [],
    "path": "working/WRK-0032-c5pre-ordinary-admission-issuance-guard.md",
    "bytes": 9121
+  },
+  {
+   "id": "working/WRK-0033",
+   "status": "L3-open",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0014",
+    "meta/proposal-012"
+   ],
+   "summary": "Plan 202 の V1/R1 administrative binding と one-slot machine presentation を、opaque LAB correlation と explicit matching/single-use/failure assumptions の下で比較する conditional-lemma research。Mir pending/request/occurrence identity、Core/history/runtime は定義・選択しない。",
+   "open_items": [],
+   "path": "working/WRK-0033-v1r1-presentation-refinement.md",
+   "bytes": 9183
   }
  ]
 }

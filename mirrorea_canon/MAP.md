@@ -97,6 +97,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0030 | L3-open, not-promoted | Plan 200 C2-A の request/authority/occurrence/replay wording を WRK-local question label で source-tag し、label 間の documentary non-substitution だけを retained した。semantic vocabulary、field partition、identity、binding、attempt、replay classifier は選ばない。`working/WRK-0030-c2a-source-tagged-anti-collapse-vocabulary.md` |
 | WRK-0031 | L3-open, not-promoted | Plan 200 C0-C の pre-enumerated source span に literal terminal/reject/`Diagnostic` wording 又は明示 cross-reference があるかを source-local に検査し、source-local query record だけを retained した。stage、coverage、reject domain、Diagnostic relation、totality は選ばない。`working/WRK-0031-c0c-source-local-diagnostic-reference-audit.md` |
 | WRK-0032 | L3-open, not-promoted | Plan 201 C5-PRE の pre-enumerated ordinary-admission source span に、verdict から独立した issuance phase を示す literal wording があるかを source-local に記録した。P012 guard direction と four named theory/spec span の non-match だけを retained し、A2 atomicity/facet/compatibility、occurrence identity、Core/history/runtime は選ばない。`working/WRK-0032-c5pre-ordinary-admission-issuance-guard.md` |
+| WRK-0033 | L3-open, not-promoted | Plan 202 の V1/R1 administrative binding と one-slot machine presentation を opaque LAB correlation と明示 matching/single-use/failure assumptions の下で比較する conditional-lemma research。Mir pending/request/occurrence identity、Core/history/runtime は定義・選択しない。`working/WRK-0033-v1r1-presentation-refinement.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 
