@@ -205,4 +205,10 @@ design boundary を解除しない。fresh ADR-0014 preflight の結果は Plan 
 failure exclusion を満たす二表現の local observation equality と、各 assumption を外した三つの
 adversarial distinction だけを retained した。C3/C4/C5 proper、C0-D/C1/C2-B/C6、そして full C7
 inference matrix は引き続き deferred である。次は C3 proper を開始せず、remaining frontier の
-non-duplicate existing-lane L3 candidate を fresh ADR-0014 preflight で再審査する。
+non-duplicate existing-lane L3 candidate を fresh ADR-0014 preflight で再審査する。その preflight は
+Plan 203 の `C3-VR-SEQ-PRE` だけを選別した。WRK-0033 の state/reply/transition/translation/observation/
+assumption を固定し、one-step translation-preservation から arbitrary finite reply list の local observation
+equality へ閉包できるかだけを conditional lemma として検査する。これは trace/delivery/scheduler/history、
+C3 carrier、source inference、C7 を意味しない。WRK-0034 の standalone pre-registration が commit/push
+されるまで source 又は Lean command を実行しない。fixed model の変更が必要なら no-candidate disposition に
+戻り、ordinary Canon design/owner boundary を要求する。

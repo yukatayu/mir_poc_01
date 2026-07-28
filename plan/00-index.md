@@ -807,6 +807,8 @@
   `plan/202-v1-r1-presentation-refinement-candidate-selection.md`
 - WRK-0033 V1/R1 presentation-refinement evidence:
   `plan/wrk-0033-v1r1-presentation-refinement.md`
+- V1/R1 fixed finite-sequence presentation candidate selection:
+  `plan/203-v1-r1-finite-sequence-candidate-selection.md`
 
 ## maintenance rule
 
