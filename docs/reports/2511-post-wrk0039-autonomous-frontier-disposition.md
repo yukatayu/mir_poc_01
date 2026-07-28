@@ -68,9 +68,11 @@ evidence.
   Plan 214 was absent from the validator's explicit `REQUIRED` list; after the
   adjacent manifest registration, the rerun passed Canon index, source hierarchy,
   documentation, report-structure, and history checks.
-- Remaining after this report update: `git diff --check`, `make docs`,
-  `git commit --no-gpg-sign`, `git push origin HEAD:main`, fetch, and remote
-  equality verification
+- Evidence commit `c66c610096ff7f166256dff9240228ee33bbf757` was created with
+  `git commit --no-gpg-sign`, pushed to `origin/main`, fetched, and verified
+  equal to `HEAD`. Remaining after this report closeout update: final
+  `git diff --check`, `make docs`, commit, push, fetch, and remote equality
+  verification.
 
 ## Evidence / outputs / test results
 
@@ -163,7 +165,10 @@ success.
 
 ## Commit / push status
 
-Pending at report write.
+Evidence commit `c66c610096ff7f166256dff9240228ee33bbf757`
+(`docs: record post-wrk0039 frontier disposition`) is pushed. `HEAD` and
+`origin/main` were equal at that commit. This report closeout update is pending
+its own commit and push.
 
 ## Sub-agent session close status
 
