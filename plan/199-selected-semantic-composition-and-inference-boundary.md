@@ -82,12 +82,13 @@ claims、binding、request unit、attempt unit、replay classification は同じ
 documentary non-substitution は、payload equality、request identity、binding、attempt、
 replay policy のいずれも選ばない。次の candidate は、この index を semantic result と
 誤用せず、C0-C/C0-D、C1、C2-B、C6 を source cut と adverse case に照らして再選別した。
-次は C0-C をさらに限定した source-local Diagnostic reference audit とする。これは literal
-terminal/reject/`Diagnostic` wording と、同一 span 又は明示 cross-reference の既存 carrier/
-named family 指示だけを記録する。coverage、stage membership、accepted/rejected domain、
-Diagnostic assignment、totality/coherence は扱わない。C0-D は P008 と既存 outcome-totality
-evidence の重複、C1/C6/C2-B は candidate comparison が snapshot/scalar/identity の選択に
-直結するため、この時点の L3 route から除外する。凍結 record を修理又は再実行してはならない。
+WRK-0031 は C0-C を source-local Diagnostic reference audit として閉じた。literal named-error
+又は explicit carrier/family reference は記録したが、coverage、stage membership、accepted/
+rejected domain、Diagnostic assignment、totality/coherence は扱わない。C0-D は P008 と既存
+outcome-totality evidence の重複、C1/C6/C2-B は candidate comparison が snapshot/scalar/
+identity の選択に直結するため、この時点の L3 route から除外する。次の自走 action は C0-C
+を semantic result と誤用しない portfolio re-screen であり、凍結 record を修理又は再実行しては
+ならない。
 
 ### C2 の登録済み falsifier（WRK-0026）
 
@@ -186,11 +187,13 @@ non-effects を含む successor proposal に切り替える。
 R0 により source-anchor は current cut に固定された。C0-B は four-role domain-staging
 conditional lemma として閉じ、WRK-0030 は C2-A の six source-tagged question labels と
 documentary non-substitution だけを retained した。いずれも shared carrier を支持する semantic
-result ではない。candidate re-screen の結果、次の最小自走 package は C0-C
-source-local Diagnostic reference audit である。source span の literal reference の有無だけを
-監査し、coverage 又は stage/reject domain を導かない。C0-D、C1、C2-B、C6 は現行 evidence
-cut では L3 の非重複な result に閉じない。選別前に semantic candidate を先取りせず、C3--C7
-と実装は common carrier の最小性を evidence が支持してから扱う。
+result ではない。WRK-0031 は C0-C の source-local Diagnostic reference audit を closed
+evidence として retained した。source span の literal reference の有無だけを記録し、coverage
+又は stage/reject domain を導かない。C0-D、C1、C2-B、C6 は現行 evidence cut では L3 の
+非重複な result に閉じない。次の最小自走 action は、C3/C5/C4 など残る recorded-direction
+familiesを、依存未決と reserved-boundary risk に照らして portfolio re-screen することである。
+選別前に semantic candidate を先取りせず、実装は common carrier の最小性を evidence が支持して
+から扱う。
 
 ## Non-claims
 

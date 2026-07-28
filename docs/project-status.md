@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 09:47 JST
+最終更新: 2026-07-28 09:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution だけを保持、C1/C6 は既存の限定 evidence を保持する | C0-C の source-local Diagnostic reference audit を事前登録する。C0-D/C1/C2-B/C6 は既存証拠との重複又は semantic selection を要するため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query だけを保持、C1/C6 は既存の限定 evidence を保持する | C3/C5/C4 recorded-direction families を再選別する。C0-D/C1/C2-B/C6 は既存証拠との重複又は semantic selection を要するため deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -90,8 +90,9 @@ official T2 まで無条件に連続自走することはできません。次�
   Canon cut の C0/C2 source-role re-anchor を完了した。C0-A は同じ source-authority
   span を重複して扱わない。WRK-0029 は opaque domain role の rank-increasing graph が
   条件付きで非循環であることだけを retained し、WRK-0030 は six source-tagged local
-  question labels の documentary non-substitution だけを retained した。candidate re-screen
-  は C0-C の source-local Diagnostic reference audit だけを L3 pre-registration candidate とした。
+  question labels の documentary non-substitution だけを retained した。WRK-0031 は C0-C の
+  literal named-error/Diagnostic reference query だけを retained し、stage/reject domain/
+  coverage を導かない。次の自走は C3/C5/C4 recorded-direction families の candidate re-screen である。
   C0-D/C1/C2-B/C6 は既存 evidence の再述又は semantic selection を要するため deferred である。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
@@ -122,10 +123,10 @@ G0-D3 へ進めません。将来 `pass` route を作るには pin 維持又は 
 proposal の owner/Canon decision が別途必要です。
 3-7 の方向は記録済みです。WRK-0028 は source-role re-anchor を完了し、C0-A はその
 pinned cut では完了済みです。WRK-0029 は C0-B の条件付き DAG、WRK-0030 は C2-A の
-source-tagged documentary non-substitution だけを retained しました。candidate re-screen は
-C0-C の source-local Diagnostic reference audit だけを選びました。次はその pre-registration
-と composition/falsifier research を経て、shared formal model、T1 statement、T2 skeleton を
-長い自走 package として進めます。
+source-tagged documentary non-substitution だけを retained しました。WRK-0031 は C0-C の
+source-local Diagnostic reference query だけを retained しました。次は C3/C5/C4 の candidate
+re-screen と composition/falsifier research を経て、shared formal model、T1 statement、T2
+skeleton を長い自走 package として進めます。
 
 根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
 `mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`,

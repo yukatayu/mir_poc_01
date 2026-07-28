@@ -55,7 +55,7 @@ literal source だけでは決まらない場合である。その場合は down
 | --- | --- | --- | --- |
 | C0-A source authority | `complete-by-R0` at the pinned R0 cut | current lexical/grammar/static source と selected-direction detail を source-local にどう分類するか | R0 が pre-enumerated span を literal に分類済み。Canon cut、source span、又は authority wording が変わるか、source 間の precedence/reconciliation が必要なら別 record で reopen する |
 | C0-B domain staging | retained conditional lemma | lexical、parse、static、`WellScoped` elaboration の domain を非循環に分けられるか | `WellScoped` を elaboration success で定義する、又は candidate edge を current Canon rule とする |
-| C0-C diagnostic abstraction | **selected for pre-registration:** pre-enumerated source span の literal terminal/reject/`Diagnostic` wording と明示 cross-reference だけを source-local に記録できるか | stage membership、coverage、reject domain、Diagnostic assignment/equality/completeness、新 code/family/carrier/ABI、raw source totality、implementation exception が必要になる |
+| C0-C diagnostic abstraction | **closed as WRK-0031:** pre-enumerated source span の literal terminal/reject/`Diagnostic` wording と明示 cross-reference だけを source-local に retained | stage membership、coverage、reject domain、Diagnostic assignment/equality/completeness、新 code/family/carrier/ABI、raw source totality、implementation exception はなお未選択 |
 | C0-D totality shape | deferred after re-screen | 同一 domain 上で outcome existence と coherence を別 statement にできるか | P008 と existing outcome-totality evidence を再述するか、OBL identity、final equality、Diagnostic ABI を選ぶ必要がある |
 
 P008 A は totality を determinism から分離する direction であり、exact domain 又は
@@ -170,14 +170,20 @@ documentary non-substitution だけである。payload field partition、structu
 anchor、binding/replay policy、Core/edge schema、attempt cardinality、wire commitment は選ばない。
 
 candidate re-screen は、C0-C だけを existing-lane の非重複 L3 literal-transcription として
-選んだ。事前登録では current Canon cut の pre-enumerated span ごとに、literal terminal/
-reject/`Diagnostic` wording と明示 cross-reference の有無だけを記録する。`Lex`/`Parse`/
-`Static`/`WellScoped` の member・順序・stage/reject relation、coverage、accepted/rejected
-domain、Diagnostic assignment/equality/completeness、totality/coherence、new family/carrier/ABI は
-全て stop boundary である。
+選び、WRK-0031 は current Canon cut の pre-enumerated span ごとに literal terminal/reject/
+`Diagnostic` wording と明示 cross-reference の source-local query record を retained した。
+`Lex`/`Parse`/`Static`/`WellScoped` の member・順序・stage/reject relation、coverage、accepted/
+rejected domain、Diagnostic assignment/equality/completeness、totality/coherence、new family/
+carrier/ABI は全て stop boundary のままである。
 
 C0-D は P008 と既存 outcome-totality evidence を再述するか、OBL identity/equality/ABI を選ぶ。
 C1 は WRK-0024 の非含意を越える比較で snapshot/evaluation/fusion/pending relation を選ぶ。C6
 は WRK-0027 の literal gap を越えると scalar representation/target resolution を選ぶ。C2-B は
 identity ontology を前提化する。したがって、いずれもこの時点では pre-register せず、ordinary
 Canon proposal 又は owner decision が必要になる地点まで deferred とする。
+
+次は C0-C result を semantic evidence と扱わず、C3（V1/R1 pending）、C5（conditional A2）、
+C4（SW1 facets）を含む remaining recorded-direction families の依存・既存 evidence・adverse
+trace・ADR-0014 standing eligibility を portfolio re-screen する。そこで non-duplicate L3
+literal/conditional package に閉じなければ、ordinary Canon proposal 又は owner decision の
+boundary として報告する。

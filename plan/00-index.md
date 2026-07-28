@@ -797,6 +797,8 @@
   `plan/wrk-0029-c0b-noncircular-domain-staging.md`
 - WRK-0030 C2-A source-tagged anti-collapse vocabulary:
   `plan/wrk-0030-c2a-source-tagged-anti-collapse-vocabulary.md`
+- WRK-0031 C0-C source-local Diagnostic reference audit:
+  `plan/wrk-0031-c0c-source-local-diagnostic-reference-audit.md`
 
 ## maintenance rule
 
