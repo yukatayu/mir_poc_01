@@ -849,6 +849,8 @@
   `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md`
 - C2-B/C3 first candidate-card source preflight:
   `plan/218-c2b-c3-first-card-source-preflight.md`
+- C2-B/C3 minimal semantic-residence options:
+  `plan/219-c2b-c3-minimal-semantic-residence-options.md`
 
 ## maintenance rule
 

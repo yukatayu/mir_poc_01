@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-29 00:54 JST
+最終更新: 2026-07-29 01:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plan 214 closes the finite lane and Plan 215--218 prepare/audit/screen comparison; all OBL rows `open` | Existing request facts support only a source ledger: reply/receipt/consumption linkage is a carrier gap. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plan 219 compares the carrier gap; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence; owner/Canon must select any Core/Config change. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -67,8 +67,9 @@ Current exact blockers:
    transition/restore observations. A/B remain conditional: neither DAG ancestry
    nor an unlocated relation supplies identity, pending, receipt, restore, or
    held context. Plan 214 finds no non-duplicate L3 successor at this unchanged
-   cut; Plan 215--217 group, audit, and compare the ordinary decision boundary
-   without selecting it or assuming a common carrier.
+   cut; Plan 215--218 group, audit, compare, and source-screen the ordinary
+   decision boundary. Plan 219 recommends explicit relation state over a
+   history-only projection or fresh nominal identity, without selecting Canon.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -169,8 +170,8 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plans 215--218 prepare/audit/compare then source-screen correlation/lifecycle/restore. First card is a carrier gap. Carrier selection remains ordinary Canon work |
-| Owner / Canon | C2-B/C3 presentation and state locus | Family A relation-first; Family B request-occurrence anchor; Family C or hybrid as non-exhaustive comparison views | Plan 210 leaves the views unselected. Choose the smallest model that defines pending, reply, receipt, failure, one-shot resume, restore, and semantic residence without identity inferred from incidental data |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 finds no successor L3; Plans 215--219 make the carrier gap and minimal alternatives explicit. No Canon carrier changed |
+| Owner / Canon | C2-B/C3 presentation and state locus | explicit relation state / history-only projection / fresh nominal identity | Plan 219 recommends relation-valued configuration state anchored by the in-history request occurrence, a distinct receipt step, and restore correspondence; do not infer identity from incidental data |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -183,7 +184,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; C2-B/C3 carrier-neutral comparison prepared, finite presentation lane closed | heavy | conditional candidate card or gap report, then normal Canon selection |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed and a minimal carrier recommendation is prepared | heavy | normal Canon decision, then conditional existing-lane research |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -208,6 +209,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 01:05 JST: Plan 219 reduced the C2-B/C3 carrier gap to three
+  semantic-residence alternatives. It recommends explicit relation-valued
+  configuration state anchored by the in-history request occurrence, with a
+  separate receipt step and restore correspondence. Canon, Core, Config,
+  SaveObject, implementation, OBL, Gate, Phase, and public claims remain
+  unchanged; a normal owner/Canon decision is required.
 
 - 2026-07-29 00:54 JST: Plan 218 source-screened the smallest existing request
   cut. Emission, rows, authority constraints, and load admissibility are

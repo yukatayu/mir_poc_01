@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 00:54 JST
+最終更新: 2026-07-29 01:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -35,8 +35,11 @@ Plan 212/WRK-0038's bare-view comparison is unexecuted after scope review; Plan
 213's key-supplied fiberwise relation comparison is executed as WRK-0039 finite
 L3 evidence. Plan 214 records no successor L3 at the same cut; Plan 215 prepares
 the ordinary decision surface, Plan 216 audits compatibility, Plan 217 defines
-carrier-neutral comparison, and Plan 218 finds the first-card carrier gap.
-All remain distinct from selection. Their current conclusion is:
+carrier-neutral comparison, Plan 218 finds the first-card carrier gap, and
+Plan 219 reduces it to three semantic-residence alternatives. Plan 219's LAB
+recommendation is explicit relation-valued configuration state anchored by the
+in-history request occurrence; this remains distinct from Canon selection.
+Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
@@ -81,7 +84,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plan 214 finds no non-duplicate successor; Plans 215--218 prepare/audit/compare then show the first request card lacks reply/receipt/consumption residence. They select no A/B/C carrier. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; normal Canon design proposal is the next non-duplicate route |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plan 214 finds no non-duplicate successor; Plans 215--219 expose the reply/receipt/consumption gap and compare explicit relation state, history-only projection, and nominal identity. The relation state is LAB-recommended, not Canon-selected. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; normal Canon decision is the next non-duplicate route |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -125,7 +128,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | Family A relation-first; Family B request-occurrence anchor; Family C or hybrid as non-exhaustive LAB views | WRK-0037/0039 retain finite evidence; Plan 214 adds no L3 successor; Plan 218 finds no first card because reply/receipt/consumption residence is unselected. Owner/Canon must still select semantics. Reject key reconstruction, hidden identity, receipt correlation, intermediate mutation, and incidental inference |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | explicit relation state; history-only projection; fresh nominal identity | Plan 219 recommends relation-valued configuration state anchored by the in-history request occurrence, plus a distinct receipt transition and restore correspondence. Owner/Canon must select it; reject hidden state, incidental identity, and premature nominal identity |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -211,6 +214,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md`.
 - C2-B/C3 first candidate-card source preflight:
   `plan/218-c2b-c3-first-card-source-preflight.md`.
+- C2-B/C3 minimal semantic-residence options:
+  `plan/219-c2b-c3-minimal-semantic-residence-options.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

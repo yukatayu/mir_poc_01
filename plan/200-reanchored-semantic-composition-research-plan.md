@@ -274,3 +274,10 @@ assume a common request/pending/reply/receipt carrier or factorization key.
 Plan 218's source preflight confirms that no `CONDITIONALLY-SATISFIES` card is
 available using only the current request form. It retains a source-ledger gap,
 not a hypothesis, carrier, or successor L3 record.
+
+Plan 219 narrows the next owner-facing choice: explicit relation-valued
+configuration state anchored by the in-history request occurrence is the LAB
+recommendation; history-only projection is insufficient at this cut, and fresh
+nominal identity is reserve-only. The packet does not amend Canon or authorize
+implementation. After a Canon decision, only ADR-0014-eligible consequences
+reopen autonomously.

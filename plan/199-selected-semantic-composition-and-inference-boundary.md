@@ -283,6 +283,12 @@ Plan 218 applies that method to the smallest existing request cut. It finds
 Canon-native emission/failure/authority/load constraints, but no selected
 reply/receipt/consumption linkage; the first card is a gap report, not a model.
 
+Plan 219 turns that gap into an owner-facing minimality comparison. It
+recommends explicit relation-valued configuration state, anchored by the
+in-history request occurrence and restored by correspondence, over a
+history-only projection or a fresh nominal identity. This is LAB advice for an
+ordinary Canon design packet, not an adopted carrier or source-inference rule.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once
