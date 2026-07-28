@@ -93,7 +93,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0026 | L3-open, frozen | M1 request-local claims と既存 authority/history 文言が、同一 claims を持つ二つの request を replay と別個の正当要求に分類する semantic relation を既に供給するかを literal inventory で検査する登録済み記録。登録 command の source-marker falsifier により凍結し、request identity、replay policy、Core、runtime は選ばない。`working/WRK-0026-m1-replay-discrimination-inventory.md` |
 | WRK-0027 | L3-open, not-promoted | SCN-08 の scalar `room_anchor` と terminal `default_pose` について、表示済み Surface/Core/static source が明示的な宣言・解決対応を既に供給するかを literal comparison で検査する。scalar representation、grammar、Core、fallback policy は選ばない。`working/WRK-0027-scn08-scalar-terminal-correspondence.md` |
 | WRK-0028 | L3-open, not-promoted | Plan 200 の C0/C2 pre-enumerated source span を current Canon cut で literal に転記し、current wording と bounded proposal direction を source 自身の authority language だけから区別して保持した。意味論の合成・選択はしない。`working/WRK-0028-r0-common-cut-fact-manifest.md` |
-| WRK-0029 | L3-open | Plan 200 C0-B の lexical/parse/surface-static/`WellScoped` input role を opaque node とする conditional dependency graph を検査する。条件付き有限 DAG 以外は結論せず、domain、`WellScoped`、outcome、Diagnostic、Core は選ばない。`working/WRK-0029-c0b-noncircular-domain-staging.md` |
+| WRK-0029 | L3-open, not-promoted | Plan 200 C0-B の lexical/parse/surface-static/`WellScoped` input role を opaque node とする conditional dependency graph を retained した。条件付き有限 DAG 以外は結論せず、domain、`WellScoped`、outcome、Diagnostic、Core は選ばない。`working/WRK-0029-c0b-noncircular-domain-staging.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 

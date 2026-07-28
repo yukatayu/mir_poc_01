@@ -83,14 +83,23 @@ proof, conformance, implementation readiness, or a machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending registered commands and a source-local LAB result.
-Negative evidence: Pending registered falsifier check.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: No result exists at registration. Any retained result can
-be only a conditional fact about an opaque, finite directed graph. It cannot
-turn the four labels into Canon sets, define `WellScoped`, or authorize a
-front-end implementation or source inference.
+Positive evidence: After registration
+`ef9035dfc80c9e36a68b424338d4898a4b668dee` was pushed, the registered
+pre-source marker and all nine source-existence checks passed. Every registered
+SHA-256 matched its pinned authority anchor, and `git diff --check` passed.
+The retained LAB artifact states only the rank proof for its explicitly
+hypothesized opaque graph.
+Negative evidence: No registered falsifier occurred. The artifact did not need
+a concrete role member, grammar/static rule, source acceptance/rejection,
+`WellScoped` predicate, outcome/Diagnostic relation, Core/judgment, source
+precedence, or a new helper/schema/validator/CI/Make surface. It does not show
+that the hypothesized orientation is a current Canon dependency.
+Evidence artifacts: LAB:plan/wrk-0029-c0b-noncircular-domain-staging.md@8774a39808a5c7aa8375aa7b9e0e98e27d74241a:c5b858485953653bee5c693776e93c3fe780ef044ace5bd8ea2e49065d50c02f
+Evidence commits: 8774a39808a5c7aa8375aa7b9e0e98e27d74241a
+Impact / non-effects: The retained evidence is a conditional fact about an
+opaque, finite directed graph. It cannot turn the four labels into Canon sets,
+define `WellScoped`, assert a staging rule, or authorize a front-end
+implementation or source inference.
 Independent review: not-required-for-L3
 
 ## Supersession

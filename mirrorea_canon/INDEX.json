@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 13278
+   "bytes": 13296
   },
   {
    "id": "root/north-star",
@@ -1682,7 +1682,7 @@
    "summary": "Plan 200 C0-B の四つの opaque front-end role を条件付きの有限依存グラフとしてだけ置き、elaboration outcome 又は Diagnostic を input role の定義に使わない限り非循環であることを既存 LAB Markdown lane で検査する。語彙、受理域、WellScoped、outcome、Diagnostic、Core は定義・選択しない。",
    "open_items": [],
    "path": "working/WRK-0029-c0b-noncircular-domain-staging.md",
-   "bytes": 8274
+   "bytes": 9047
   }
  ]
 }
