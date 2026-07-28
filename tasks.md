@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-28 15:48 JST
+最終更新: 2026-07-28 16:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -16,9 +16,9 @@ task evidence lives in `docs/reports/`.
 ## current promoted package
 
 The current official phase is `T0`. G0 exit and T1 entry are unrecorded, and
-all OBL rows remain `open`. The latest autonomous source-cut chain retained
-WRK-0036 as a bounded L3 countermodel. That is LAB evidence, not a permanent
-narrowing of ADR-0014 or an official lifecycle movement.
+all OBL rows remain `open`. The latest autonomous source-cut chain retains
+WRK-0036 and then records Plan 207 `no-candidate`. That is LAB evidence and a
+local disposition, not an ADR-0014 narrowing or official lifecycle movement.
 
 `plan/196-t0-t2-implementation-entry-roadmap.md` is the T0--T2 execution map;
 `plan/197-i1-bootstrap-decision-and-readiness-audit.md` is the current I1
@@ -26,8 +26,9 @@ start audit; Plans 199/200 are the selected-direction composition plan, Plan
 201 plus WRK-0032 record the completed C5-PRE audit, Plan 202 plus WRK-0033
 record the completed bounded presentation comparison, and Plan 203 plus WRK-0034
 record the completed fixed finite-sequence comparison. Plan 205 plus WRK-0035
-record the retained generic C7 factorization boundary, and Plan 206 plus
-WRK-0036 record the retained cumulative-erasure countermodel. Their
+record the retained generic C7 factorization boundary, Plan 206 plus WRK-0036
+record the retained cumulative-erasure countermodel, and Plan 207 records the
+fresh no-candidate disposition. Their
 current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -73,7 +74,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. Plan 205 plus WRK-0035 retain C7's generic range-only factorization and countermodels; Plan 206 plus WRK-0036 retain that individual checks do not justify their common coarsening. C3/C4/C5 proper and C0-D/C1/C2-B/C6 need semantic choice or have duplicate-evidence risk. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; fresh frontier preflight, then carrier-design boundary |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line closed locally: WRK-0028--0034 retain bounded C0/C2/C3/C5 results and Plan 204 finds no successor there. WRK-0035/0036 retain C7 range-only and cumulative guards; Plan 207 finds no further L3 candidate. C2-B/C3 need ordinary design preparation, C4/C5 proper are Canon design, and C0-D/C1/C6 are duplicate or select semantics. C7 source rules remain downstream of concrete uniquely reconstructible semantics and inspectable grounds. WRK-0024/0027 remain bounded evidence and WRK-0025/0026 remain frozen. | Macro 1 early; C2-B/C3 design preparation, then owner/Canon boundary |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
 | 8 | G2/G3 package | `A/R`, then `O`; OBL-005..007/015 statements and owner-defined OBL-008 proof/status package share selected carriers | Macro 1/5 middle; heavy |
@@ -116,7 +117,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient; P012 tuple is recorded; reject hidden identity or intermediate mutation |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | snapshot/pending/facet/correlation alternatives | WRK-0024 shows write seriality alone is insufficient; Plan 207 makes C2-B/C3 the next ordinary design preparation. Reject hidden identity, receipt correlation, or intermediate mutation |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -176,6 +177,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
 - C7 cumulative-erasure selection and retained evidence:
   `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`,
   `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`.
+- Post-WRK-0036 autonomous frontier disposition:
+  `plan/207-post-wrk0036-autonomous-frontier-disposition.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

@@ -32,6 +32,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C7 parametric factorization の L3 証跡 | `plan/wrk-0035-c7-parametric-factorization.md` |
 | C7 cumulative-erasure countermodel の選別 | `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md` |
 | C7 cumulative-erasure countermodel の L3 証跡 | `plan/wrk-0036-c7-cumulative-erasure-countermodel.md` |
+| WRK-0036 後の自律研究 frontier | `plan/207-post-wrk0036-autonomous-frontier-disposition.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -159,6 +160,9 @@ profile と Canon amendment は未作成です。
   `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`: individually checked erasures を common
   coarsening へ同時適用してはならない固定有限 countermodel を `--trust=0` で確認した L3 evidence。
   future C7 matrix の negative guard に限り、actual source transformation や omission rule は選ばない。
+- `plan/207-post-wrk0036-autonomous-frontier-disposition.md`: current cut の C0-D--C7 を
+  再審査し、新しい L3 candidate は作らないと記録する。次は C2-B/C3 の ordinary design
+  preparation であり、identity、carrier、source rule は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

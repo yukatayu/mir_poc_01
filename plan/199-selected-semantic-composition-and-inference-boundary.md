@@ -225,6 +225,9 @@ WRK-0035 後の fresh screen は、個別 factorization を同時 omission へ�
 Plan 199 の C7 matrix consumer に結ぶ fixed finite countermodel だけを Plan 206 で選別し、
 WRK-0036 が `--trust=0` で retained した。これは source fact、grounds、artifact、又は rule の
 組合せを定義せず、未来の final cumulative representation を直接検査する negative guard に限る。
+Plan 207 の fresh frontier disposition は C0-D/C1/C2-B/C6/C7 を no-candidate、C3/C4/C5 を
+ordinary Canon design boundary とした。次の LAB 作業は source rule を先取りせず、C2-B/C3 の
+identity、correlation、pending boundary を比較可能な decision preparation として整理することに限る。
 
 ## Non-claims
 

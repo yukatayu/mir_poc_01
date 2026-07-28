@@ -292,6 +292,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/204-wrk0034-semantic-composition-no-candidate-disposition.md",
         "plan/205-c7-parametric-factorization-candidate-selection.md",
         "plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md",
+        "plan/207-post-wrk0036-autonomous-frontier-disposition.md",
     ],
     "scripts": [
         "scripts",

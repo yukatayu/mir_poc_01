@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 15:48 JST
+最終更新: 2026-07-28 16:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0036 は各々の限定結果を保持し、Plan 204 は fixed line の no-candidate を保持する。WRK-0036 は個別 C7 factorization を common coarsening へ未検査で合成できない有限反例を retained した。C1/C6 も既存の限定 evidence に留まる | C7 は source rule でなく L3 boundary。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0036 は各々の限定結果を保持し、Plan 204 は fixed line の no-candidate を保持する。WRK-0036 は個別 C7 factorization を common coarsening へ未検査で合成できない有限反例を retained し、Plan 207 は新しい L3 candidate を作らないと記録した | C7 は source rule でなく L3 boundary。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred。次は C2-B/C3 の ordinary design preparation |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -97,7 +97,7 @@ official T2 まで無条件に連続自走することはできません。次�
   retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
   又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
   を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。
+  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207 は残る C0-D--C7 を再審査し、新たな L3 は開かず C2-B/C3 の ordinary design preparation が次の境界と記録した。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -135,7 +135,7 @@ C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 202 の
 local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
   C3 pending/correlation/persistence、source inference、Core rule を選びません。これは shared formal model、T1
   statement、T2 skeleton への readiness ではなく、その前段の限定 evidence です。
-その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。Plan 205 から WRK-0035 は C7 の carrier-neutral factorization を登録・実行・metadata link まで完了しましたが、これは range-only の generic L3 evidence であり、source rule、grounds、concrete artifact ではありません。Plan 206 / WRK-0036 は個別に検査した erasure の common coarsening が paired observation を失う固定 finite countermodel を登録・実行・metadata link まで完了しました。
+その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。Plan 205 から WRK-0035 は C7 の carrier-neutral factorization を登録・実行・metadata link まで完了しましたが、これは range-only の generic L3 evidence であり、source rule、grounds、concrete artifact ではありません。Plan 206 / WRK-0036 は個別に検査した erasure の common coarsening が paired observation を失う固定 finite countermodel を登録・実行・metadata link まで完了しました。Plan 207 は新しい L3 candidate を作らず、次を C2-B/C3 ordinary design preparation としました。
 WRK-0033 の state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
 translation/local-observation preservation だけを retained します。list は delivery/scheduler/history/trace の意味を持たず、
 C3 carrier、full trace equivalence、source inference、Core rule を選びません。次は C3 proper を先取りせず、その通常 Canon design package を準備する boundary です。
@@ -164,7 +164,7 @@ C3 carrier、full trace equivalence、source inference、Core rule を選びま�
 | V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | V1/R1 retained finite evidence | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence selection | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
-| V1/R1 finite-sequence / C7 evidence and selection | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md`; `plan/wrk-0035-c7-parametric-factorization.md`; `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`; `plan/wrk-0036-c7-cumulative-erasure-countermodel.md` |
+| V1/R1 finite-sequence / C7 evidence and frontier | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md`; `plan/wrk-0035-c7-parametric-factorization.md`; `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`; `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`; `plan/207-post-wrk0036-autonomous-frontier-disposition.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

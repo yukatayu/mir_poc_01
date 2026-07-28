@@ -821,6 +821,8 @@
   `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`
 - WRK-0036 C7 cumulative-erasure countermodel evidence:
   `plan/wrk-0036-c7-cumulative-erasure-countermodel.md`
+- WRK-0036 後の自律研究 frontier disposition:
+  `plan/207-post-wrk0036-autonomous-frontier-disposition.md`
 
 ## maintenance rule
 
