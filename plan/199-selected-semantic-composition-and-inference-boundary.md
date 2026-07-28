@@ -261,6 +261,13 @@ restore 又は source reconstruction は C2-B/C3/C7 の ordinary Canon design �
 Canonical premise の追加、authority cut の変更、具体的な downstream claim、又は WRK-0039 defect が
 reopen trigger になるまで、有限 presentation lane を別名で拡張しない。
 
+Plan 215 converts the resulting ordinary C2-B/C3 decision boundary into three
+coupled LAB bundles: definitional correlation basis, branch/lifecycle
+projections, and restore/one-shot/linearity scope. This is not a new Canon
+decomposition or carrier selection. Its source-convenience condition is a
+future model-relative elaboration proof, never reconstruction of identity or
+authority from incidental source facts.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once

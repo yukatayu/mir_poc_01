@@ -40,6 +40,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 bundled/relational presentation comparison selection | `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md` |
 | C2-B/C3 fiberwise relational comparison selection | `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md` |
 | WRK-0039 後の C2-B/C3 autonomous frontier | `plan/214-post-wrk0039-autonomous-frontier-disposition.md` |
+| C2-B/C3 ordinary design decision packet | `plan/215-c2b-c3-ordinary-design-decision-packet.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -193,6 +194,9 @@ profile と Canon amendment は未作成です。
 - `plan/214-post-wrk0039-autonomous-frontier-disposition.md`: WRK-0039 後の同一 authority cut では
   新しい L3 candidate を作らない。有限比較の重複を避け、pending、reply/receipt/failure、restore/load、
   source reconstruction は ordinary Canon design boundary に戻す。これは carrier を選ばない。
+- `plan/215-c2b-c3-ordinary-design-decision-packet.md`: ordinary design で連動して決める
+  correlation basis、branch/lifecycle、restore/one-shot/linearity を整理する。自明な source
+  convenience は、後段の選択済みモデルへの一意な elaboration proof としてのみ扱う。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

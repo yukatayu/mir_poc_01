@@ -255,3 +255,9 @@ cross-load/pending/reply/receipt/failure/replay/restore/source reconstruction �
 design boundary とした。この cut では successor WKR を pre-register しない。reopen は Canon/owner が
 concrete premise を供給した場合、authority cut が変わった場合、downstream proposal が WRK-0039 より
 強い claim を具体化した場合、又は WRK-0039 の再現可能な defect が見つかった場合に限る。
+
+Plan 215 prepares, without selecting it, the normal owner/Canon packet that
+must answer correlation basis, branch/lifecycle projections, and restore/
+one-shot/linearity scope together. It leaves source convenience downstream of
+that selected model, where unique trace-preserving elaboration rather than
+incidental-value inference is required.
