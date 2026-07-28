@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-28 14:18 JST
+最終更新: 2026-07-28 14:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match、WRK-0033 は V1/R1 の有限 presentation comparison と三つの adverse distinction、WRK-0034 は同じ fixed model の有限列 closure を保持、Plan 204 は fixed line の no-candidate と C7 fresh preflight を分離、C1/C6 は既存の限定 evidence を保持する | C7 factorization の fresh ADR-0014 preflight。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028 は current grammar/theory wording と bounded C0/C2 proposal direction を source-local に区別し、C0-A はその pinned cut で完了、WRK-0029 は opaque role の条件付き DAG、WRK-0030 は C2-A の source-tagged documentary non-substitution、WRK-0031 は C0-C の source-local Diagnostic reference query、WRK-0032 は P012 guard direction と four named ordinary-admission span の non-match、WRK-0033 は V1/R1 の有限 presentation comparison と三つの adverse distinction、WRK-0034 は同じ fixed model の有限列 closure を保持、Plan 204 は fixed line の no-candidate を保持、Plan 205 は C7 pointwise factorization を pre-registration 候補に選別、C1/C6 は既存の限定 evidence を保持する | C7-FAC-PRE の L3 pre-registration。C3/C4/C5 本体と C0-D/C1/C2-B/C6 は semantic selection 又は duplicate-evidence risk のため deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -97,7 +97,7 @@ official T2 まで無条件に連続自走することはできません。次�
   retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
   又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
   を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` としたが、C7 factorization criterion は fresh ADR-0014 preflight 未了である。
+  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 は C7 factorization criterion を L3 pre-registration 候補として選別した。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -135,7 +135,7 @@ C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 202 の
 local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
   C3 pending/correlation/persistence、source inference、Core rule を選びません。これは shared formal model、T1
   statement、T2 skeleton への readiness ではなく、その前段の限定 evidence です。
-その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。一方、C7 の carrier-neutral factorization criterion は fresh preflight 未了です。
+その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。C7 の carrier-neutral factorization criterion は Plan 205 で pre-registration 候補に選別済みですが、まだ working record でも source rule でもありません。
 WRK-0033 の state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
 translation/local-observation preservation だけを retained します。list は delivery/scheduler/history/trace の意味を持たず、
 C3 carrier、full trace equivalence、source inference、Core rule を選びません。次は C3 proper を先取りせず、その通常 Canon design package を準備する boundary です。
@@ -164,7 +164,7 @@ C3 carrier、full trace equivalence、source inference、Core rule を選びま�
 | V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
 | V1/R1 retained finite evidence | `plan/wrk-0033-v1r1-presentation-refinement.md` |
 | V1/R1 finite-sequence selection | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
-| V1/R1 finite-sequence evidence / provisional disposition | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md` |
+| V1/R1 finite-sequence evidence / C7 selection | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md` |
 | WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
 | WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
 | v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |

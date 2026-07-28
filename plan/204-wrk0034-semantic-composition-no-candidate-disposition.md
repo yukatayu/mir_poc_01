@@ -60,7 +60,7 @@ standing predicate に追加条件を設けるものではない。
 | C4 SW1 | served-write の語を抽象化すること | **owner/Canon boundary**。request binding、facet projection、validation/mutation/failure relation を定義しなければ有意な検査にならない |
 | C5 proper conditional A2 | ordinary-admission source span の追加 audit | **owner/Canon boundary**。composite occurrence、membership/grant/witness projection、lineage、rejection residue、load/rollback を選ぶ必要がある。issuance が独立に失敗・観測・schedule されるなら A1 successor decision が先行する |
 | C6 scalar / terminal closure | source gap の再監査 | **no-candidate**。WRK-0027 の重複であり、scalar representation 又は finite-domain elaboration、ownership、initialization、visibility、persistence、terminal target を選ぶ必要がある |
-| C7 source ergonomics | `erase : E -> S` と `observe : E -> O` を parameter にした fiber-constancy / unique-reconstruction criterion | **fresh preflight 未了**。各 erased representation の fiber 上で observation が一定であることと、`range erase` 上の observation が一意であることの条件付き同値又は negative branch は、具体的な source omission rule、Mir carrier、authority、failure、identity、history を選ばずに検査できる可能性がある。既存 C7 規律の単なる言い換えか、既存 lane の非重複な conditional lemma かを先に審査する |
+| C7 source ergonomics | `erase : E -> S` と `observe : E -> O` を parameter にした fiber-constancy / unique-reconstruction criterion | **selected for pre-registration in Plan 205**。pointwise `exists!` over `range erase` と explicit collision に限定し、concrete source omission rule、Mir carrier、authority、failure、identity、history を選ばない |
 
 したがって、WRK-0034 と同じ fixed model に対する list-prefix specialization、別名の
 final-observation theorem、`List.length xs <= n` に制限した同じ fold-preservation statement、

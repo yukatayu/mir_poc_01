@@ -813,6 +813,8 @@
   `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`
 - WRK-0034 後の意味論合成 frontier provisional disposition:
   `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`
+- C7 parametric factorization candidate selection:
+  `plan/205-c7-parametric-factorization-candidate-selection.md`
 
 ## maintenance rule
 

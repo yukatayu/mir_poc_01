@@ -290,6 +290,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/202-v1-r1-presentation-refinement-candidate-selection.md",
         "plan/203-v1-r1-finite-sequence-candidate-selection.md",
         "plan/204-wrk0034-semantic-composition-no-candidate-disposition.md",
+        "plan/205-c7-parametric-factorization-candidate-selection.md",
     ],
     "scripts": [
         "scripts",
