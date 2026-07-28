@@ -270,3 +270,7 @@ This is a research constraint, not a selection or implementation authorization.
 Plan 217 supplies the next research method: use candidate-native, erasable
 observations and classify each row conditionally. It intentionally does not
 assume a common request/pending/reply/receipt carrier or factorization key.
+
+Plan 218's source preflight confirms that no `CONDITIONALLY-SATISFIES` card is
+available using only the current request form. It retains a source-ledger gap,
+not a hypothesis, carrier, or successor L3 record.

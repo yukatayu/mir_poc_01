@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-29 00:44 JST
+最終更新: 2026-07-29 00:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214 は no-successor、Plan 215--217 は ordinary boundary、互換性、carrier-neutral comparison を整理した | finite presentation lane は閉じ、carrier は選ばない。candidate は native observation で semantic residence、typed branch、admissible load を検査し、gap は明示する。C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214 は no-successor、Plan 215--218 は boundary、comparison、first-card gap を整理した | finite presentation lane は閉じ、carrier は選ばない。existing request cut は reply/receipt/consumption linkage の `CARRIER-GAP` を示す。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -118,7 +118,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
 | 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | Plan 215--217 は correlation/lifecycle/restore の boundary と carrier-neutral conditional comparison を整理した。WRK-0039 は carrier を選ばず、Plan 214 は次の L3 を作らない。C3/C4/C5 本体は ordinary Canon design boundary |
+| 5 | value / occurrence | P012 V1/R1/SW1/conditional A2 の pending/facet/correlation | Plan 215--218 は correlation/lifecycle/restore の boundary、comparison、first-card gap を整理した。WRK-0039 は carrier を選ばず、Plan 214 は次の L3 を作らない。C3/C4/C5 本体は ordinary Canon design boundary |
 | 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
 | 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
 

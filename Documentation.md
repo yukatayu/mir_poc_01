@@ -43,6 +43,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 ordinary design decision packet | `plan/215-c2b-c3-ordinary-design-decision-packet.md` |
 | C2-B/C3 cross-boundary compatibility audit | `plan/216-c2b-c3-cross-boundary-compatibility-audit.md` |
 | C2-B/C3 carrier-neutral conditional comparison | `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md` |
+| C2-B/C3 first candidate-card source preflight | `plan/218-c2b-c3-first-card-source-preflight.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -205,6 +206,9 @@ profile と Canon amendment は未作成です。
 - `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md`: candidate-native の
   observation と erasable definition だけで比較する。shared pending/key/lifecycle を
   導入せず、`CARRIER-GAP`、`OPEN`、countermodel を candidate selection と区別する。
+- `plan/218-c2b-c3-first-card-source-preflight.md`: existing `request` cut を
+  source-ledger 化し、reply/receipt/consumption の selected semantic residence が
+  無いため最初の candidate card は gap report に留まると確認する。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

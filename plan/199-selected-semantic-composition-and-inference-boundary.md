@@ -279,6 +279,10 @@ candidate-native observations and linkage relations, not a shared pending/key
 signature. It can expose `CARRIER-GAP` or a countermodel without selecting a
 candidate or a common lifecycle model.
 
+Plan 218 applies that method to the smallest existing request cut. It finds
+Canon-native emission/failure/authority/load constraints, but no selected
+reply/receipt/consumption linkage; the first card is a gap report, not a model.
+
 ## Non-claims
 
 本計画は final grammar、parser/checker/runtime、request wire format、exactly-once
