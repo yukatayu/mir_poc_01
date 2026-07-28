@@ -93,14 +93,18 @@ machine-consumed artifact.
 ## Results and review
 
 Reliance status: not-promoted
-Positive evidence: Pending registered commands and a source-tagged LAB result.
-Negative evidence: Pending registered falsifier check.
-Evidence artifacts: none
-Evidence commits: none
-Impact / non-effects: No result exists at registration. Any retained result can
-be only a documentary index over source-owned senses and the non-substitution
-of its local question labels. It cannot define a semantic vocabulary, carrier,
-equality, identity, binding, attempt, or replay classifier.
+Positive evidence: The registered absence marker, five non-empty source checks,
+five pinned SHA-256 checks, and `git diff --check` passed. LAB evidence retains
+six source-tagged local questions and documentary non-substitution only.
+Negative evidence: No registered falsifier occurred. The artifact introduces no
+field partition, equality/identity, occurrence/queue anchor, binding relation,
+attempt cardinality, or replay classifier.
+Evidence artifacts: LAB:plan/wrk-0030-c2a-source-tagged-anti-collapse-vocabulary.md@8dcfc17a8a28adf507257cac791a08761dbfd5f6:bf27394c0b914c51987a34d6342181e93125c4fd2abc09b9d275dd820a409721
+Evidence commits: 8dcfc17a8a28adf507257cac791a08761dbfd5f6
+Impact / non-effects: The retained result is only a documentary index over
+source-owned senses and the non-substitution of its local question labels. It
+does not define a semantic vocabulary, carrier, equality, identity, binding,
+attempt, or replay classifier; it does not alter any existing Canon rule.
 Independent review: not-required-for-L3
 
 ## Supersession
