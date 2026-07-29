@@ -105,6 +105,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 | WRK-0038 | L3-open, not-promoted, unexecuted | bare DirectView が supplied key を保持しない scope review の後、実験せず WRK-0039 へ前方 supersede した。元の pre-registration は保持し、carrier、identity、authority、persistence、source rule、runtime は定義・選択しない。`working/WRK-0038-c2b-c3-bundled-relational-presentation.md` |
 | WRK-0039 | L3-open, not-promoted | WRK-0037 の全十 supplied key ごとの independently enumerated relation graph と bundled lookup の fiberwise comparison を finite L3 evidence として retained。key recovery、identity、authority、persistence、source rule、runtime は定義・選択しない。`working/WRK-0039-c2b-c3-fiberwise-relational-presentation.md` |
 | WRK-0040 | L3-open, not-promoted | P017 X1 の V1/R1 cross-locus read に限り、二つの supplied occurrence / restore witness を用いる predicate-only finite countermodel が `SEP`、`PHASE`、`ONE`、`AUTH`、`OBS` の五 collapse を検出できるかを検査した。有限 fixture の detector table は通ったが、Core、relation schema、identity、transition、restore、runtime は定義・選択しない。`working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md` |
+| WRK-0041 | L3-open, not-promoted | P017 X1 の V1/R1 cross-locus read に限り、supplied fixture の owner-terminal positive / negative fact が同時に成立する collapse を predicate-only finite countermodel で検出できるかを検査する。failure row、transition、carrier、runtime は定義・選択しない。`working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` |
 
 ## 「ここから推論してはいけないこと」(canon 全体)
 
