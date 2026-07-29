@@ -871,6 +871,8 @@
   `plan/228-p017-x1-minimum-coherence-candidate-selection.md`
 - P017 X1 minimum relation-envelope coherence evidence:
   `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md`
+- Post-WRK-0044 no-successor and ordinary-design boundary:
+  `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md`
 
 ## maintenance rule
 
