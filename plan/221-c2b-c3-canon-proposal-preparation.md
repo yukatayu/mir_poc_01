@@ -119,6 +119,16 @@ Boolean combinations are not automatic successors: a fresh candidate needs an
 independently stated source condition and falsifier or the line retains a
 scoped `no-candidate` disposition.
 
+The post-WRK-0042 screen found exactly one such independent input-condition
+candidate. Plan 224 records P013/P017's source-named M1 adverse conditions as
+one supplied finite tag family, distinct from WRK-0042's terminal-negative
+outcome mark. `working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md`
+is registered and pushed but unexecuted. It may test only the supplied
+adverse-tag / owner-mutation overlap; it does not classify a request, represent
+validation, rejection, failure, mutation attribution, a branch, transition, or
+runtime. After this package, the current fixture-only line stops unless a later
+Canon cut supplies a new explicit source condition, consumer, and falsifier.
+
 ## Non-effects
 
 This plan does not select a Canon carrier or implementation, add a Core or

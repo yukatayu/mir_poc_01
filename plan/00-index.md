@@ -859,6 +859,8 @@
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`
 - P017 X1 owner-negative/mutation candidate selection:
   `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`
+- P017 X1 M1 adverse/mutation candidate selection:
+  `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`
 
 ## maintenance rule
 

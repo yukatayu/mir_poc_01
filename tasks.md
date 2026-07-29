@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 21:54 JST
+最終更新: 2026-07-29 22:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -47,13 +47,15 @@ finite detector and not a Canon carrier selection. Plan 222 then selected and
 WRK-0041 executed the distinct `X-BRANCH` owner-terminal-overlap detector; it
 is not a Canon branch model. Plan 223 then selected and WRK-0042 executed the
 distinct supplied owner-terminal-negative / owner-mutation detector; it is not
-a failure or mutation model.
+a failure or mutation model. Plan 224 then selected and WRK-0043 registered the
+distinct supplied M1 adverse-input / owner-mutation detector; it remains
+unexecuted and is not a validation, failure, or mutation model.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
   閉じる候補のADR-0014 eligibility preflightは自走できる。
-- P017 X1 の selected scope では、WRK-0042 の bounded detector evidence の後、
+- P017 X1 の selected scope では、WRK-0043 の registered execution boundary の後、
   独立した source condition と falsifier がある候補だけを再審査できる。なければ
   scoped `no-candidate` とし、Boolean table を拡張しない。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
@@ -96,7 +98,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the separate supplied owner-negative/mutation detector. None selects a Canon carrier, branch, failure, or mutation model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; screen independent candidate or no-candidate |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 is registered to test the distinct M1 adverse-input/mutation overlap. None selects a Canon carrier, validation, branch, failure, or mutation model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; execute WRK-0043, then screen independent candidate or no-candidate |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -140,7 +142,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040 detected five collapsed cases; WRK-0041 detected owner-terminal overlap; WRK-0042 detected supplied owner-negative/mutation overlap only. Schema/rule/proof remain unselected |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040 detected five collapsed cases; WRK-0041 detected owner-terminal overlap; WRK-0042 detected supplied owner-negative/mutation overlap; WRK-0043 is registered for distinct M1 adverse-input/mutation overlap only. Schema/rule/proof remain unselected |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -236,6 +238,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`.
 - P017 X1 owner-negative/mutation candidate selection:
   `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`.
+- P017 X1 M1 adverse/mutation candidate selection:
+  `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`.
 - P017 X1 finite L3 detector evidence:
   `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`,
   `plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md`.
@@ -244,6 +248,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`,
   `mirrorea_canon/working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md`,
   `plan/wrk-0042-p017-x1-owner-negative-mutation-countermodel.md`.
+- P017 X1 registered M1 adverse/mutation L3 detector:
+  `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.

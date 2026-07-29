@@ -96,9 +96,9 @@ authority, load, and observation mechanisms remain unresolved.
 
 ## Suggested next prompt
 
-After this registration is committed and pushed, materialize only the declared
-four-fixture Lean source and retain or freeze the exact result without selecting
-M1 validation or mutation semantics.
+After the registered execution boundary is synchronized, materialize only the
+declared four-fixture Lean source and retain or freeze the exact result without
+selecting M1 validation or mutation semantics.
 
 ## Plan update status
 
@@ -147,8 +147,10 @@ or sample command applies to a registration-only Canon/LAB metadata package.
 
 ## Commit / push status
 
-Registration commit and push follow final metadata validation. The exact
-identity and remote equality will be recorded before outcome materialization.
+Registration committed as `8ff73b23ab8d45c503852341b0f036b212082fd5`
+(`docs: preregister P017 X1 M1 mutation countermodel`), pushed to `origin/main`,
+and verified equal to fetched `origin/main` before outcome materialization. The
+reader-facing snapshot follows as a separate package.
 
 ## Sub-agent session close status
 
