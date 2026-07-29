@@ -109,14 +109,15 @@ projection.
 
 Plan 223 then screened the separate P017 / `X-BRANCH` clause that owner failure
 has no owner mutation. It selected and registered
-`working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md` before any
-outcome source exists. The proposed four-fixture detector may classify only a
-supplied owner-terminal-negative / owner-mutation overlap. It is not a failure
-model, mutation rule, attribution criterion, identity, branch state,
-transition, persistence representation, or runtime experiment. After this one
-registered test, new Boolean combinations are not automatic successors: a fresh
-candidate needs an independently stated source condition and falsifier or the
-line retains a scoped `no-candidate` disposition.
+`working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md`, then
+executed its sole source. The supplied four-fixture detector passed Lean
+`--trust=0` with no axioms and classifies only a supplied
+owner-terminal-negative / owner-mutation overlap. It is not a failure model,
+mutation rule, attribution criterion, identity, branch state, transition,
+persistence representation, or runtime experiment. After this test, new
+Boolean combinations are not automatic successors: a fresh candidate needs an
+independently stated source condition and falsifier or the line retains a
+scoped `no-candidate` disposition.
 
 ## Non-effects
 

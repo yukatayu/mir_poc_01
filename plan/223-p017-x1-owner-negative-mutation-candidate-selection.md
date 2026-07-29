@@ -41,12 +41,12 @@ the local duplication/read-only-boundary check.
 ## Selected package
 
 `working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md` was
-committed and pushed before any outcome source exists. Its future sole retained
-source may use only one supplied anchor and four supplied fixture labels:
-neutral, owner-terminal-negative only, owner-mutation only, and their seeded
-simultaneous overlap. The labels are not a Mir failure, mutation, owner,
-identity, value, occurrence, storage field, transport key, source form, or
-runtime event.
+committed and pushed before any outcome source existed. Its sole retained source
+uses one supplied anchor and four supplied fixture labels: neutral,
+owner-terminal-negative only, owner-mutation only, and their seeded simultaneous
+overlap. The source passed Lean `--trust=0`; all four retained theorem reports
+have no axioms. The labels are not a Mir failure, mutation, owner, identity,
+value, occurrence, storage field, transport key, source form, or runtime event.
 
 The expected result is deliberately narrow: a passing table would show only
 that the supplied labels distinguish the three controls from the seeded pair.
@@ -56,12 +56,13 @@ that P017's no-mutation condition is satisfied by an implementation.
 
 ## Execution order and termination rule
 
-1. WRK-0042 is registered and pushed before outcome evidence.
-2. Materialize one Markdown-held Lean block in the declared `plan/` lane only.
-3. Require the registered digest, extraction, `lean --trust=0`, axiom, matrix,
-   reserved-vocabulary, allowlist, and diff checks to pass; otherwise freeze
-   rather than repair it.
-4. After its evidence is linked, run a fresh screen. Do not automatically add
+1. WRK-0042 was registered and pushed before outcome evidence.
+2. Its one Markdown-held Lean block was materialized in the declared `plan/`
+   lane only.
+3. The registered digest, extraction, `lean --trust=0`, axiom, matrix,
+   reserved-vocabulary, allowlist, and diff checks passed. The RED test first
+   rejected an intentionally all-false `both` detector.
+4. Its evidence is linked. Run a fresh screen; do not automatically add
    another Boolean detector: a successor must identify a new explicit source
    condition, independent consumer, and typed falsifier that survive the
    reserved-boundary review. Otherwise retain scoped `no-candidate`.

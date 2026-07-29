@@ -60,9 +60,9 @@ has a typed failure, or satisfies `X-BRANCH`.
 3. The registered digest, extraction, `lean --trust=0`, axiom, matrix,
    reserved-vocabulary, allowlist, and diff checks passed.
 4. The exact finite evidence is linked forward. Plan 223 separately screened
-   the post-WRK-0041 cut and registered WRK-0042 for the distinct supplied
-   owner-terminal-negative / owner-mutation pair; it does not extend this
-   terminal-exclusivity table.
+   the post-WRK-0041 cut and executed WRK-0042 for the distinct supplied
+   owner-terminal-negative / owner-mutation pair. Its passed table does not
+   extend this terminal-exclusivity table or select a failure/mutation model.
 
 Stop and escalate instead of repairing the artifact if it needs a terminal
 branch carrier, dynamic failure row, semantic transition, outcome generation,

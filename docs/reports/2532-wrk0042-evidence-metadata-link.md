@@ -124,7 +124,8 @@ was already executed in Report 2531.
 
 ## Commit / push status
 
-Pending at report write. Metadata must be committed, pushed, and verified equal
+Metadata committed as `e0eec1000debc88aa1778e2053ccb6591a851834`
+(`docs: link WRK-0042 evidence`), pushed to `origin/main`, and verified equal
 to fetched `origin/main` before reader-facing synchronization starts.
 
 ## Sub-agent session close status

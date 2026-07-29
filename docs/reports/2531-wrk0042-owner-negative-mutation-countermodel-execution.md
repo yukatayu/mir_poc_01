@@ -149,9 +149,10 @@ semantic claim is inferred from the fixture-only Lean table.
 
 ## Commit / push status
 
-Pending at report write. The evidence commit must contain only the declared
-LAB source and this direct report, then be pushed and verified before any WRK
-Results metadata is linked.
+Evidence committed as `7828a5212b464b30d643c109635aaab52996c0b1`
+(`test: execute P017 X1 mutation countermodel`), pushed to `origin/main`, and
+verified equal to fetched `origin/main` before WRK-0042 Results metadata was
+linked. The reader-facing snapshot follows as a separate package.
 
 ## Sub-agent session close status
 
