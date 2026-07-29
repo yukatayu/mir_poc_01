@@ -137,9 +137,9 @@ the earlier immutable evidence package and is cited rather than rerun here.
 
 ## Commit / push status
 
-At report authoring, final validation is complete and the snapshot commit/push
-follows immediately. Its exact identifier and remote equality are verified
-before the next autonomous research package starts.
+Snapshot committed as `187c3eacf0f45a194072f004443728e9b94f672b`
+(`docs: sync WRK-0040 evidence snapshots`), pushed to `origin/main`, then
+verified equal to fetched `origin/main` before the next autonomous package.
 
 ## Sub-agent session close status
 

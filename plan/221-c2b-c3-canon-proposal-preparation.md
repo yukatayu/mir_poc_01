@@ -96,13 +96,16 @@ axioms. It remains neither a rule text nor a runtime experiment, proof claim,
 or positive relation-state model: the occurrence and post-load witnesses,
 restore correspondences, and detector facts are supplied finite fixtures.
 
-The next autonomous package does not extend that finite table. It screens the
-post-execution cut for one distinct ADR-0014-eligible existing-lane candidate,
-or records a scoped `no-candidate` result. The research stops and returns to
-the ordinary Canon process if it needs a Core primitive, source identity,
-transport carrier, public contract, causal generator, occurrence kind, dynamic
-failure row, relation schema, transition, restore function, consumption
-representation, authority algorithm, or observer projection.
+The post-execution screen is retained in Plan 222. It selected only
+`working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`, now
+registered but unexecuted, for the distinct `X-BRANCH` owner-terminal-overlap
+detector. It does not extend WRK-0040's table or choose an outcome type,
+failure row, branch algebra, transition, or storage representation. The
+research stops and returns to the ordinary Canon process if it needs a Core
+primitive, source identity, transport carrier, public contract, causal
+generator, occurrence kind, dynamic failure row, relation schema, transition,
+restore function, consumption representation, authority algorithm, or observer
+projection.
 
 ## Non-effects
 

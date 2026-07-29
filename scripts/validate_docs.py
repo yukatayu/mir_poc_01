@@ -656,6 +656,7 @@ REQUIRED = [
     "plan/219-c2b-c3-minimal-semantic-residence-options.md",
     "plan/220-c2b-c3-relation-state-proof-obligation-audit.md",
     "plan/221-c2b-c3-canon-proposal-preparation.md",
+    "plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

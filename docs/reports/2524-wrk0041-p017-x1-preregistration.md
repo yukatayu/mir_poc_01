@@ -141,8 +141,10 @@ or sample command applies to a registration-only Canon/LAB metadata package.
 
 ## Commit / push status
 
-Registration commit and push follow final validation. Exact commit identity and
-remote equality are verified before materializing any WRK-0041 outcome source.
+Registration committed as `487380dfa623159bcda73ee20678803511df145a`
+(`docs: preregister P017 X1 terminal countermodel`), pushed to `origin/main`,
+and verified equal to fetched `origin/main` before materializing any WRK-0041
+outcome source. The reader-facing snapshot follows as a separate package.
 
 ## Sub-agent session close status
 

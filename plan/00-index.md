@@ -855,6 +855,8 @@
   `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`
 - C2-B/C3 Canon proposal preparation:
   `plan/221-c2b-c3-canon-proposal-preparation.md`
+- P017 X1 owner-terminal exclusivity candidate selection:
+  `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`
 
 ## maintenance rule
 
