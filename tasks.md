@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 22:52 JST
+最終更新: 2026-07-29 23:04 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -49,15 +49,16 @@ is not a Canon branch model. Plan 223 then selected and WRK-0042 executed the
 distinct supplied owner-terminal-negative / owner-mutation detector; it is not
 a failure or mutation model. Plan 224 then selected and WRK-0043 executed the
 distinct supplied M1 adverse-input / owner-mutation detector; it is not a
-validation, failure, or mutation model.
+validation, failure, or mutation model. Plan 225 closes the current P017 X1
+fixture-only line as scoped no-candidate.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
   閉じる候補のADR-0014 eligibility preflightは自走できる。
-- P017 X1 の selected scope では、WRK-0043 の bounded detector evidence の後、
-  独立した source condition と falsifier がある候補だけを再審査できる。なければ
-  scoped `no-candidate` とし、Boolean table を拡張しない。
+- P017 X1 の selected scope では、Plan 225 が current fixture-only line を
+  scoped `no-candidate` とした。再審査には独立した source condition、consumer、
+  typed falsifier が必要で、Boolean table を拡張しない。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -98,7 +99,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap. None selects a Canon carrier, validation, branch, failure, or mutation model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; screen independent candidate or no-candidate |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap; Plan 225 closes this fixture-only line. None selects a Canon carrier, validation, branch, failure, or mutation model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; independent new-source screen only |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |

@@ -659,6 +659,7 @@ REQUIRED = [
     "plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md",
     "plan/223-p017-x1-owner-negative-mutation-candidate-selection.md",
     "plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md",
+    "plan/225-post-wrk0043-fixture-frontier-disposition.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

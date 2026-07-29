@@ -129,6 +129,7 @@ adverse-tag / owner-mutation overlap. It does not classify a request, represent
 validation, rejection, failure, mutation attribution, a branch, transition, or
 runtime. After this package, the current fixture-only line stops unless a later
 Canon cut supplies a new explicit source condition, consumer, and falsifier.
+Plan 225 records the resulting scoped `no-candidate` disposition at this cut.
 
 ## Non-effects
 

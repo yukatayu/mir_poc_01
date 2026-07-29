@@ -77,6 +77,9 @@ failure row, a store delta, a mutation function, a transition, or a causal edge.
    Reopen only for a later Canon cut with a genuinely new explicit source
    condition, independent consumer, and typed falsifier.
 
+Plan 225 records the post-execution scoped no-candidate disposition. It is not
+a conclusion about the unselected positive P017 X1 design work.
+
 Freeze rather than repair the source if it needs an actual adverse-condition
 classifier, validation result, failure mapping, owner-terminal-negative fact,
 mutation rule/attribution, identity, carrier, transition, persistence,
