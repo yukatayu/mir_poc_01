@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 00:56 JST
+最終更新: 2026-07-30 02:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226 reject their respective duplicate successors; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 preregisters one minimum coherence candidate; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. WRK-0044 may test only its external-rejection/no-observation candidate after push; it does not select them. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226 reject their respective duplicate successors; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. WRK-0044 confirms only explicit-premise static compatibility for its external-rejection/no-observation candidate; it does not select them. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -179,7 +179,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 passed WRK-0040--0043 detectors and Plan 225 closes its fixture-only line. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 selects and WRK-0044 preregisters one external-rejection/no-observation coherence candidate | After push, test its exact row ledger in the existing lane or freeze it. Positive schema/rules/proof/source/runtime remain ordinary Canon design work |
+| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 now retain a five-pair static external-rejection/no-observation account with explicit premises | Screen the next independent source condition or stop for an ordinary design package. The retained source selects no schema/rules/proof/source/runtime and cannot be extended as a lifecycle |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -218,6 +218,11 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-30 02:05 JST: Executed and linked WRK-0044. The five-pair Lean
+  `--trust=0` source has eleven no-axiom conditional theorems for named
+  witnesses only; it is not a relation schema, transition, identity, causal
+  order, SaveObject/load account, proof, or implementation result.
 
 - 2026-07-30 00:56 JST: Registered WRK-0044 as an unexecuted P017 X1 L3
   candidate. Its eight-row ledger fixes only the experiment's hypotheses,

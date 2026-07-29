@@ -869,6 +869,8 @@
   `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`
 - P017 X1 minimum coherence candidate selection:
   `plan/228-p017-x1-minimum-coherence-candidate-selection.md`
+- P017 X1 minimum relation-envelope coherence evidence:
+  `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md`
 
 ## maintenance rule
 

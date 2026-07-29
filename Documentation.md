@@ -54,6 +54,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | post-WRK-0043 cross-lane candidate preflight | `plan/226-post-wrk0043-cross-lane-p0a-preflight.md` |
 | P017 X1 decision vector and choice-neutral candidate review | `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md` |
 | P017 X1 minimum coherence candidate selection | `plan/228-p017-x1-minimum-coherence-candidate-selection.md` |
+| P017 X1 linked static coherence evidence (not promoted) | `mirrorea_canon/working/WRK-0044-p017-x1-minimum-relation-envelope-coherence.md`, `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -235,6 +236,11 @@ profile と Canon amendment は未作成です。
   no-observation の最小 coherence presentation を ADR-0014 L3 登録後にのみ既存
   Lean lane で検査する候補として選別した。fixture expansion、schema、transition、
   source、runtime、proof、Canon amendment は選ばない。
+- `mirrorea_canon/working/WRK-0044-p017-x1-minimum-relation-envelope-coherence.md`:
+  five-pair の非網羅的 witness と明示前提による static conditional account を
+  Lean `--trust=0` で実行・link 済みとする。これは relation schema、lifecycle、
+  transition、identity、causal order、SaveObject、validation、runtime、proof を
+  選ばず、P017 X1 satisfaction や実装 readiness を主張しない。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
