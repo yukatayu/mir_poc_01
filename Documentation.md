@@ -53,6 +53,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 M1 adverse/mutation L3 detector (not promoted) | `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md`, `plan/wrk-0043-p017-x1-m1-adverse-mutation-countermodel.md`, `plan/225-post-wrk0043-fixture-frontier-disposition.md` |
 | post-WRK-0043 cross-lane candidate preflight | `plan/226-post-wrk0043-cross-lane-p0a-preflight.md` |
 | P017 X1 decision vector and choice-neutral candidate review | `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md` |
+| P017 X1 minimum coherence candidate selection | `plan/228-p017-x1-minimum-coherence-candidate-selection.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -229,6 +230,11 @@ profile と Canon amendment は未作成です。
   P017 X1 の通常設計で連動して比較する六つの意味論的選択軸と、選択中立の
   反例ケース・candidate-native card を整理する。具体 carrier、遷移、文法、runtime、
   proof は選ばない。
+- `plan/228-p017-x1-minimum-coherence-candidate-selection.md`:
+  P017 X1 の current cut で残る唯一の独立 candidate として、external rejection /
+  no-observation の最小 coherence presentation を ADR-0014 L3 登録後にのみ既存
+  Lean lane で検査する候補として選別した。fixture expansion、schema、transition、
+  source、runtime、proof、Canon amendment は選ばない。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、

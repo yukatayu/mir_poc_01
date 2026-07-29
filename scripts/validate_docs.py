@@ -662,6 +662,7 @@ REQUIRED = [
     "plan/225-post-wrk0043-fixture-frontier-disposition.md",
     "plan/226-post-wrk0043-cross-lane-p0a-preflight.md",
     "plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md",
+    "plan/228-p017-x1-minimum-coherence-candidate-selection.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
