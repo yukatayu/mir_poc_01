@@ -69,8 +69,10 @@ until a positive native basis or erasable derivation is supplied. Plan 234
 compares direct typed terminal success, typed result plus local terminality, and
 OPEN; its A/A minimum is advisory and does not close a row. Plan 235 finds that
 A also needs an explicit owner-result role declaration; it remains unadopted.
-Nothing selects a relation schema, transition, source form, runtime, proof, or
-Canon amendment.
+Plan 236 then screens owner-result provenance under LAB-local `RP-min`: direct
+incidence is conditional, static derivation is non-definable, and `OPEN` remains
+operative. Nothing selects a relation schema, transition, source form, runtime,
+proof, or Canon amendment.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -94,8 +96,9 @@ Their current conclusion is:
   constraints は neutral skeleton、R/L primitive delta は OPEN、B eight rows も
   positive basis 待ちの OPEN として残す。Plan 234 の A/A は未採用の advisory
   recommendation である。Plan 235 は A が explicit owner-result role declaration
-  を持つ時だけ conditionally compatible とし、A を採用しない。K1 は failure row
-  の Canon gap として止める。
+  を持つ時だけ conditionally compatible とし、A を採用しない。Plan 236 は LAB
+  `RP-min` 下で result provenance A を conditional、B を non-derivable、C を
+  operative `OPEN` とし、A を採用しない。K1 は failure row の Canon gap として止める。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -136,7 +139,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and adverse rows. Plan 227 prepares R/B/T/U/C/L; Plans 228/WRK-0044 retain static account; Plans 230--232 retain K0 R/L OPEN delta; Plan 233 keeps all B classifications OPEN; Plan 234 compares a direct terminal-success basis with result-plus-terminality; Plan 235 finds A conditionally compatible only through an explicit owner-result role declaration. No Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model is selected. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics. | Macro 1 early; screen minimal result-provenance basis or explicitly stop; retain OPEN and do not choose presentation or repair K1 |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and adverse rows. Plan 227 prepares R/B/T/U/C/L; Plans 228/WRK-0044 retain static account; Plans 230--232 retain K0 R/L OPEN delta; Plan 233 keeps all B classifications OPEN; Plan 234 compares a direct terminal-success basis with result-plus-terminality; Plan 235 finds A conditionally compatible only through an explicit owner-result role declaration; Plan 236 keeps result provenance A unadopted/conditional, B non-derivable under `RP-min`, and C operative `OPEN`. No Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model is selected. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics. | Macro 1 early; preflight one independent B fact role; retain OPEN and do not choose presentation or repair K1 |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -180,7 +183,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040--0043 retain detector-only evidence; Plan 228/WRK-0044 retain static account; Plan 230 opens K0 and bounds K1; Plan 232 retains K0 R/L delta; Plan 233 leaves all B rows OPEN; Plan 234's A/A is advisory; Plan 235 finds its owner-result role conditional on explicit declaration. Schema/rule/proof remain unselected |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040--0043 retain detector-only evidence; Plan 228/WRK-0044 retain static account; Plan 230 opens K0 and bounds K1; Plan 232 retains K0 R/L delta; Plan 233 leaves all B rows OPEN; Plan 234's A/A is advisory; Plan 235 finds its owner-result role conditional on explicit declaration; Plan 236 keeps result-provenance A unadopted and C `OPEN`. Schema/rule/proof remain unselected |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -294,6 +297,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/234-p017-x1-k0-terminal-success-positive-basis-card.md`.
 - P017 X1 typed owner-result role conformance audit:
   `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md`.
+- P017 X1 K0 owner-result provenance basis and definability screen:
+  `plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md`.
 - P017 X1 owner-terminal candidate selection:
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`.
 - P017 X1 owner-negative/mutation candidate selection:

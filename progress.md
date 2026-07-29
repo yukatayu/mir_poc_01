@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 03:35 JST
+最終更新: 2026-07-30 04:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. K0 common R/L is neutral, its primitive delta remains OPEN, and all eight B fact rows remain OPEN. Plan 235 finds A conditionally compatible only with an explicit role declaration; it does not adopt A or choose a carrier. Next is result-provenance screening; K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; Plan 236 screens owner-result provenance under `RP-min`; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. K0 common R/L is neutral, its primitive delta remains OPEN, and all eight B fact rows remain OPEN. Plan 236 retains A as an unadopted conditional positive basis, B as non-derivable under `RP-min`, and C as operative `OPEN`; it chooses no carrier. Next is an independent B fact-role preflight; K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -179,7 +179,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 passed WRK-0040--0043 detectors and Plan 225 closes its fixture-only line. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 retain a five-pair static account; Plans 230--232 define K0/K1 and R/L; Plan 233 records the separate B fact-status screen with eight OPEN rows; Plan 234 compares direct/derived success; Plan 235 finds direct success conditionally compatible with the owner-result role | A later candidate may close an individual B row only with explicit native positive basis or erasable derivation. Plan 235 requires an explicit role declaration and does not adopt A. Screen result provenance before another positive basis; T/U/C must not assume it. Do not treat K0 as selected or repair K1 without ordinary failure-row process |
+| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 retain a five-pair static account; Plans 230--232 define K0/K1 and R/L; Plan 233 records the separate B fact-status screen with eight OPEN rows; Plan 234 compares direct/derived success; Plan 235 finds direct success conditionally compatible with the owner-result role; Plan 236 screens result provenance | A later candidate may close an individual B row only with explicit native positive basis or erasable derivation. Under LAB `RP-min`, Plan 236 retains A as unadopted conditional basis, rejects B derivation, and leaves C operative OPEN. T/U/C must not assume it. Do not treat K0 as selected or repair K1 without ordinary failure-row process |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -232,6 +232,11 @@ durable save/load, or public product completion is claimed.
   may also be P017's typed owner-result fact only by explicit candidate-local
   role declaration. It neither adopts A nor closes Plan 233; receipt,
   provenance, causality, and save/load remain separate open obligations.
+- 2026-07-30 04:41 JST: Plan 236 screened owner-result provenance without
+  choosing a carrier. Under LAB-local `RP-min`, direct positive incidence is
+  conditional, static derivation has a two-interpretation countermodel, and
+  `OPEN` remains operative; no Plan 233 cell, relation schema, causal edge, or
+  save/load behavior changed.
 
 - 2026-07-30 03:17 JST: Plan 232 executed the K0 R/L interpretation screen.
   The common constraint ledger is neutral, but primitive whole-fiber and
