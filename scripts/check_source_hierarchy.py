@@ -318,6 +318,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/230-p017-x1-first-ordinary-design-card-preflight.md",
         "plan/231-k0-rl-factorization-preflight.md",
         "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
+        "plan/233-p017-x1-k0-b-fact-status-screen.md",
     ],
     "scripts": [
         "scripts",

@@ -59,6 +59,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 first ordinary-design card preflight | `plan/230-p017-x1-first-ordinary-design-card-preflight.md` |
 | P017 X1 K0 R/L factorization preflight | `plan/231-k0-rl-factorization-preflight.md` |
 | P017 X1 K0 R/L definitional collapse screen | `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md` |
+| P017 X1 K0 B fact-status screen | `plan/233-p017-x1-k0-b-fact-status-screen.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -262,6 +263,10 @@ profile と Canon amendment は未作成です。
   K0 R/L の共通制約は中立 skeleton にまとめるが、primitive unity と primitive
   plurality は tag/record/factorization/coherence を追加せずには相互定義できないと
   screen する。両案は未選択の OPEN delta として残し、次は各案に分けた B review とする。
+- `plan/233-p017-x1-k0-b-fact-status-screen.md`:
+  A-Sigma/B-Pi ごとに owner outstanding、typed terminal success/failure、consulted
+  provenance の status を `OPEN` から始め、primitive/derived に閉じるための正の
+  basis と停止線だけを記録する。branch model や failure row は選ばない。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
