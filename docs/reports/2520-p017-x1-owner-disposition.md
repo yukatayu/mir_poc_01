@@ -139,7 +139,10 @@ skipped.
 
 ## Commit / push status
 
-Pending at report write.
+Decision record committed as
+`d7db0e6e097de23319ac9b872c69f20354c1b3d0` (`docs: record P017 X1
+disposition`), pushed to `origin/main`, and verified equal to fetched
+`origin/main`. This report-closeout update is committed and pushed next.
 
 ## Sub-agent session close status
 
