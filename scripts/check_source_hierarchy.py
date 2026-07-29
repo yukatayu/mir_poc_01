@@ -317,6 +317,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md",
         "plan/230-p017-x1-first-ordinary-design-card-preflight.md",
         "plan/231-k0-rl-factorization-preflight.md",
+        "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
     ],
     "scripts": [
         "scripts",

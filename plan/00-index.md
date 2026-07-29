@@ -877,6 +877,8 @@
   `plan/230-p017-x1-first-ordinary-design-card-preflight.md`
 - P017 X1 K0 R/L factorization preflight:
   `plan/231-k0-rl-factorization-preflight.md`
+- P017 X1 K0 R/L definitional collapse screen:
+  `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md`
 
 ## maintenance rule
 

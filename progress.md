@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 03:00 JST
+最終更新: 2026-07-30 03:17 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230/231 preflight K0 cards and its R/L presentation fork; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. WRK-0044 confirms only explicit-premise static compatibility; K0 R/L is open and collapses to a neutral skeleton if its alternatives are definitionally duplicate; K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--232 preflight K0/K1 and screen K0 R/L; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. WRK-0044 confirms only explicit-premise static compatibility; K0 common R/L is neutral while its primitive unity/plurality delta remains OPEN; K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -179,7 +179,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 passed WRK-0040--0043 detectors and Plan 225 closes its fixture-only line. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 retain a five-pair static external-rejection/no-observation account with explicit premises; Plan 229 closes abstract successors; Plan 230 opens K0 and identifies K1 failure-row gap; Plan 231 makes K0 R/L whole-fiber versus factorized-family delta and collapse test explicit | Complete the non-identity collapse screen, retain only a real primitive-placement delta if one survives, then review B on that candidate-native presentation; do not treat K0 as selected or repair K1 without ordinary failure-row process |
+| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 retain a five-pair static external-rejection/no-observation account with explicit premises; Plan 229 closes abstract successors; Plan 230 opens K0 and identifies K1 failure-row gap; Plan 231 frames and Plan 232 executes the K0 R/L screen | Common K0 R/L constraints are neutral; retain the irreducible whole-fiber/factorized-family OPEN delta and review B separately in each candidate-native presentation. Do not treat K0 as selected or repair K1 without ordinary failure-row process |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -218,6 +218,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-30 03:17 JST: Plan 232 executed the K0 R/L interpretation screen.
+  The common constraint ledger is neutral, but primitive whole-fiber and
+  primitive factorized-family presentations cannot define each other without
+  excluded aggregation or factorization surfaces. The OPEN delta remains; no
+  relation model, identity, transition, or restore function was selected.
 
 - 2026-07-30 03:00 JST: Plan 231 prepared the K0 R/L factorization
   comparison. An integrated q-scoped relation fiber and coherent factorized

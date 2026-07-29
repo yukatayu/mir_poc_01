@@ -666,6 +666,7 @@ REQUIRED = [
     "plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md",
     "plan/230-p017-x1-first-ordinary-design-card-preflight.md",
     "plan/231-k0-rl-factorization-preflight.md",
+    "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

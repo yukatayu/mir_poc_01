@@ -58,6 +58,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | post-WRK-0044 L3 frontier and ordinary-design handoff | `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md` |
 | P017 X1 first ordinary-design card preflight | `plan/230-p017-x1-first-ordinary-design-card-preflight.md` |
 | P017 X1 K0 R/L factorization preflight | `plan/231-k0-rl-factorization-preflight.md` |
+| P017 X1 K0 R/L definitional collapse screen | `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -257,6 +258,10 @@ profile と Canon amendment は未作成です。
   q-scoped fiber と coherence を持つ factorized relation families として比較する。
   両案が追加仮定なしに相互定義できるなら中立 skeleton に畳み、schema、ID、lifecycle、
   restore function、動的性質を選ばない。
+- `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md`:
+  K0 R/L の共通制約は中立 skeleton にまとめるが、primitive unity と primitive
+  plurality は tag/record/factorization/coherence を追加せずには相互定義できないと
+  screen する。両案は未選択の OPEN delta として残し、次は各案に分けた B review とする。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
