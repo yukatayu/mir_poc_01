@@ -126,13 +126,21 @@ transport/session keys, source syntax, storage fields, or runtime events.
 
 Reliance status: not-promoted
 
-Positive evidence: not-run
+Positive evidence: At the pinned authority/input cut, the sole extracted
+predicate-only source passed Lean 4.29.1 with `--trust=0`. The neutral,
+adverse-only, mutation-only, and seeded overlap fixture forms proved the
+registered detector matrix; all four retained theorem reports had no axioms.
 
-Negative evidence: not-run
+Negative evidence: No registered typed falsifier occurred. Pinned input
+digests, sole-block extraction, placeholder/unsafe/classical/quotient/native
+decision scans, reserved-surface vocabulary scans, the four-form matrix check,
+the evidence-commit allowlist, and the diff check passed. A disposable initial
+Green draft depended on `propext`; it was replaced before retention by the
+inductive-mark source recorded in the evidence artifact.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0043-p017-x1-m1-adverse-mutation-countermodel.md@22d0f95c25500a1018f301ed9ebcc6f3b6d91354:0cc958ee31eb7d4ed07dda77372f4c8a4b118b88ba894b0f5d6520cdcfe53cd3
 
-Evidence commits: none
+Evidence commits: 22d0f95c25500a1018f301ed9ebcc6f3b6d91354
 
 Impact / non-effects: This record is normative only about a reversible L3
 research boundary and procedure. It changes no settled theory or implementation
