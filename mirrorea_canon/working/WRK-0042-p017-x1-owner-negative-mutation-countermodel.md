@@ -117,13 +117,22 @@ transport/session keys, source syntax, storage fields, or runtime events.
 
 Reliance status: not-promoted
 
-Positive evidence: none; this is a pre-registration.
+Positive evidence: At the pinned authority/input cut, the sole extracted
+predicate-only source passed Lean 4.29.1 with `--trust=0`. The neutral,
+negative-only, mutation-only, and simultaneous fixture rows proved the
+registered overlap matrix; all four retained theorem reports had no axioms.
 
-Negative evidence: none; outcome commands have not run.
+Negative evidence: No registered typed falsifier occurred. Pinned input
+digests, sole-block extraction, placeholder/unsafe/classical/quotient/native
+decision scans, reserved-surface vocabulary scans, the four-row matrix check,
+the evidence-commit allowlist, and the diff check passed. The disposable axiom
+harness first named theorems outside their namespace and then matched Lean
+output without its quotation marks; both harness corrections left the retained
+source and digest unchanged.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0042-p017-x1-owner-negative-mutation-countermodel.md@7828a5212b464b30d643c109635aaab52996c0b1:87d181913310cf69f49a659d5d232367719267f101200a21fa4b50c18d4c4aea
 
-Evidence commits: none
+Evidence commits: 7828a5212b464b30d643c109635aaab52996c0b1
 
 Impact / non-effects: This record is normative only about a reversible L3
 research boundary and procedure. It changes no settled theory or implementation

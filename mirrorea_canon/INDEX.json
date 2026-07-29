@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 18905
+   "bytes": 18968
   },
   {
    "id": "root/north-star",
@@ -1901,7 +1901,7 @@
    "summary": "P017 X1 の V1/R1 cross-locus read に限り、supplied fixture の owner-terminal-negative fact と owner-mutation fact が同時に成立する collapse を predicate-only 有限 countermodel で検出できるかを既存 Lean LAB lane で検査する。failure semantics、mutation rule、transition、carrier、runtime は選ばない。",
    "open_items": [],
    "path": "working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md",
-   "bytes": 8198
+   "bytes": 9073
   }
  ]
 }
