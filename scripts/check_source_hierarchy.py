@@ -320,6 +320,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
         "plan/233-p017-x1-k0-b-fact-status-screen.md",
         "plan/234-p017-x1-k0-terminal-success-positive-basis-card.md",
+        "plan/235-p017-x1-typed-owner-result-role-conformance-audit.md",
     ],
     "scripts": [
         "scripts",

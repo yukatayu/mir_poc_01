@@ -84,11 +84,12 @@ its `H_K`, Plan 233 classifies that candidate's typed-terminal-success cell as
 `primitive`. This is a conditional ledger result, not a claim that either
 membership already exists in Canon or in a completed X1 model.
 
-The typed value content is sufficient for this *fact-status comparison*; it
-does not decide whether a later complete P017 package needs a separately useful
-owner-result view, nor does it choose a result carrier. A direct success fact
-must never be weakened into an untyped terminal assertion and then treated as
-P017's typed-result requirement.
+For the narrow Plan 233 terminal-success cell, intrinsic typing is sufficient.
+Whether the same membership is also P017's typed owner-result fact requires an
+explicit candidate-local role declaration; the annotation alone does not make
+it so. That declaration does not choose a separately useful result view or a
+result carrier. A direct success fact must never be weakened into an untyped
+terminal assertion and then treated as P017's typed-result requirement.
 
 ## Candidate B: typed result plus local terminality derivation
 
@@ -137,11 +138,13 @@ success is absent.
 
 ## Consumer, uniqueness test, and falsifiers
 
-The only immediate consumers are the two typed-terminal-success cells in Plan
-233: A-Sigma and B-Pi. The only later bookkeeping consumer is its existing
-owner-success frontier inventory: a future L package may know whether it must
-preserve one primitive fact or the declared derivation premises. This card does
-not supply persistence or restoration behavior.
+The immediate consumers in this local Plan 233 exercise are its two
+typed-terminal-success cells: A-Sigma and B-Pi. The only later bookkeeping
+consumer here is its existing owner-success frontier inventory: a future L
+package may know whether it must preserve one primitive fact or the declared
+derivation premises. This card does not supply persistence or restoration
+behavior. P017 owner-result conformance has separate consumers, audited in Plan
+235; this sentence does not exclude them.
 
 For Candidate B, hold fixed all positive typed owner-result memberships and
 the permitted local static constraints. If two admissible interpretations can
@@ -173,10 +176,11 @@ The three alternatives have the following local cost:
 | B | typed result membership plus a local terminality clause | `uniquely derived` |
 | C | no positive basis | `OPEN` |
 
-For this one consumer, the smallest admissible conditional candidate is A in
-both presentations. It directly expresses the fact Plan 233 asks about and
-does not add B's terminality clause. The advisory recommendation is therefore
-**A/A**, subject to each presentation's independent falsifier.
+For this one ledger consumer, the smallest positive basis is A in both
+presentations. It directly expresses the fact Plan 233 asks about and does not
+add B's terminality clause. The advisory recommendation is therefore **A/A**,
+subject to each presentation's independent falsifier. Its P017 owner-result
+role remains conditional on the explicit declaration audited in Plan 235.
 
 This is not a conclusion that the final language should expose an owner success
 primitive, nor that a complete X1 design should lack a reusable result view.
@@ -197,11 +201,11 @@ validation/mutation algorithm, transition, occurrence/causal rule, persistence
 realization, proof, runtime, or public contract. Do not repair a failed B-Pi
 form by adding a hidden family index or package.
 
-The next autonomous question is a source-conformance audit: whether a direct
-typed terminal-success membership can serve P017's stated typed owner-result
-fact without silently selecting a result carrier or a separately reusable
-result view. That audit may only clarify the requirement boundary; it may not
-turn this advisory A/A recommendation into a Canon or model acceptance.
+The source-conformance audit is recorded in Plan 235. It finds that the direct
+membership may serve P017's typed owner-result role only through an explicit
+candidate-local declaration, without a separately reusable result view or
+result carrier. That clarification does not turn this advisory A/A
+recommendation into a Canon or model acceptance.
 
 ## Non-effects
 

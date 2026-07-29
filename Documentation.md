@@ -61,6 +61,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 R/L definitional collapse screen | `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md` |
 | P017 X1 K0 B fact-status screen | `plan/233-p017-x1-k0-b-fact-status-screen.md` |
 | P017 X1 K0 typed terminal-success positive-basis card | `plan/234-p017-x1-k0-terminal-success-positive-basis-card.md` |
+| P017 X1 typed owner-result role conformance audit | `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -273,6 +274,11 @@ profile と Canon amendment は未作成です。
   (A)、typed result と local terminality の derivation (B)、`OPEN` (C) を
   A-Sigma/B-Pi 別に比較する。A/A は advisory recommendation に留め、basis を
   adopt せず全 eight rows の repository-wide `OPEN` は維持する。
+- `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md`:
+  P012/P017 を照合し、A の同一 membership は explicit candidate-local declaration
+  がある場合だけ typed owner-result role も持てると整理する。payload typing
+  だけでは足りず、requester receipt、provenance、causality、save/load は別の
+  未決事項である。A は未採用で、Plan 233 の全 eight rows は `OPEN` のままである。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、

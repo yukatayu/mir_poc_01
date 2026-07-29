@@ -883,6 +883,8 @@
   `plan/233-p017-x1-k0-b-fact-status-screen.md`
 - P017 X1 K0 typed terminal-success positive-basis card:
   `plan/234-p017-x1-k0-terminal-success-positive-basis-card.md`
+- P017 X1 typed owner-result role conformance audit:
+  `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md`
 
 ## maintenance rule
 
