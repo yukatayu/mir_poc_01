@@ -63,6 +63,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 typed terminal-success positive-basis card | `plan/234-p017-x1-k0-terminal-success-positive-basis-card.md` |
 | P017 X1 typed owner-result role conformance audit | `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md` |
 | P017 X1 K0 owner-result provenance basis / definability screen | `plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md` |
+| P017 X1 K0 owner-outstanding positive-basis / pending-nonconflation card | `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -285,6 +286,11 @@ profile と Canon amendment は未作成です。
   `RP-min` の下で direct positive incidence (A) は conditional、静的導出 (B) は
   二解釈 countermodel、現況 (C) は `OPEN` とする。A は未採用で、reply/receipt、
   causal、save/load、schema はこの card では選ばない。
+- `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md`:
+  owner outstanding は requester `PendingFor`、端末事実の不在、M1/authority、queue、
+  transport から導かない。A-Sigma/B-Pi とも direct positive membership (A) が最小の
+  条件付き basis だが未採用であり、owner-service-pending 由来の導出 (B) は独立した
+  positive source を待つ。したがって二 cell を含む Plan 233 の全 row は `OPEN` のまま。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、

@@ -671,6 +671,7 @@ REQUIRED = [
     "plan/234-p017-x1-k0-terminal-success-positive-basis-card.md",
     "plan/235-p017-x1-typed-owner-result-role-conformance-audit.md",
     "plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md",
+    "plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
