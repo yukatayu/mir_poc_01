@@ -144,8 +144,10 @@ or sample command applies to a registration-only Canon/LAB metadata package.
 
 ## Commit / push status
 
-Pending at report write. Registration must be committed, pushed, and verified
-equal to fetched `origin/main` before materializing WRK-0042 outcome source.
+Registration committed as `d2a8b7838911ce664fa1c45ff801bff6fd8b5464`
+(`docs: preregister P017 X1 mutation countermodel`), pushed to `origin/main`,
+and verified equal to fetched `origin/main` before materializing any WRK-0042
+outcome source. The reader-facing snapshot follows as a separate package.
 
 ## Sub-agent session close status
 

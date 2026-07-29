@@ -857,6 +857,8 @@
   `plan/221-c2b-c3-canon-proposal-preparation.md`
 - P017 X1 owner-terminal exclusivity candidate selection:
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`
+- P017 X1 owner-negative/mutation candidate selection:
+  `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`
 
 ## maintenance rule
 
