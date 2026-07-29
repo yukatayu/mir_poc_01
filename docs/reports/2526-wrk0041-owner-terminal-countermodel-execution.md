@@ -144,9 +144,10 @@ within its declared allowlist.
 
 ## Commit / push status
 
-Evidence commit and push follow the registered outcome checks. The commit
-allowlist and exact remote equality are verified before the metadata-only link
-package starts.
+Evidence committed as `30a28de1c59c3c075e22b685879b0e1f4bf432b4`
+(`test: execute P017 X1 terminal countermodel`), pushed to `origin/main`, and
+verified equal to fetched `origin/main`. The immutable WRK Results/MAP metadata
+link and reader-facing snapshot synchronization follow as separate packages.
 
 ## Sub-agent session close status
 

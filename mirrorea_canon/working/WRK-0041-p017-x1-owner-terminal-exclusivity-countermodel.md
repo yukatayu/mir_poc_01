@@ -115,13 +115,22 @@ transport/session keys, source syntax, storage fields, or runtime events.
 
 Reliance status: not-promoted
 
-Positive evidence: not-run
+Positive evidence: At the pinned authority/input cut, the sole extracted
+predicate-only source passed Lean 4.29.1 with `--trust=0`. The no-terminal,
+positive-only, negative-only, and simultaneous fixture rows proved the
+registered overlap matrix; all four retained theorem reports had no axioms.
 
-Negative evidence: no registered outcome command has run.
+Negative evidence: No registered typed falsifier occurred. Pinned input
+digests, sole-block extraction, placeholder/unsafe/classical/quotient/native
+decision scans, reserved-surface vocabulary scans, the four-row matrix check,
+the evidence-commit allowlist, and the diff check passed. A pre-retention scan
+initially included appended `#print axioms` commands; separating the axiom copy
+from the unmodified extracted source corrected that harness defect without
+changing the retained source or this record.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md@30a28de1c59c3c075e22b685879b0e1f4bf432b4:c86cf27ac586dc322d2cd991add42949fa7e3108f7a81ec9714c7beb1e70c675
 
-Evidence commits: none
+Evidence commits: 30a28de1c59c3c075e22b685879b0e1f4bf432b4
 
 Impact / non-effects: This record is normative only about a reversible L3
 research boundary and procedure. It changes no settled theory or implementation
