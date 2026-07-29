@@ -170,18 +170,38 @@ interface, predicate vocabulary, or lifecycle enumeration.
 
 Reliance status: not-promoted
 
-Positive evidence: not-run; registration only.
+Positive evidence: At the pinned authority/input cut, the sole extracted
+candidate-local source passed Lean 4.29.1 with `--trust=0`. It gives five
+non-exhaustive pre-load/restored witness pairs, explicit local pending-binding
+conditions, separate static frontier facts, and five opaque correspondence
+facts. All eleven retained theorem reports had no axioms. This is only a static
+conditional account: its witness separation, pending uniqueness/non-sharing,
+frontier facts, one-shot premises, and correspondence facts remain explicit
+premises, not derived global behavior.
 
-Negative evidence: not-run; no expected falsifier has been executed.
+Negative evidence: No registered typed falsifier occurred. The initial
+unretained two-pair sketch was underpopulated for P017's five required
+save/load frontiers and was not materialized. The retained five-pair source has
+one Lean block, no imports, and clean scans for placeholders, unsafe/classical/
+quotient/native facilities and the audited reserved-surface vocabulary. It
+does not define a finite identity/key carrier, lifecycle, transition, restore
+function, causal relation/generator, observer, source form, transport, runtime,
+or `SaveObject` representation. The causal row remains a textual conditional
+mapping to existing theory/04 generator families; it proves no order or
+reachability.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md@8223e754b800121a13249b5640306ac268b188ac:83ca22f480970bb5f63884bcb330c8d67bd90f617ec380f64962f4aefda44867
 
-Evidence commits: none
+Evidence commits: 8223e754b800121a13249b5640306ac268b188ac
 
 Impact / non-effects: This record is normative only about a reversible L3
-research boundary and procedure. It changes no settled theory or implementation
-surface and does not make a future result an adoption, proof, Gate/Phase move,
-or readiness claim.
+research boundary and procedure. The retained source changes no settled theory
+or implementation surface and does not establish P017 satisfaction, a positive
+X1 model, satisfiability/reachability, validation/fail-closed semantics, typed
+failure semantics, owner-mutation behavior, a semantic receipt transition,
+consumption over executions or restored continuations, authority enforcement,
+observation policy, SaveObject/load closure, a Core/Config rule, theorem/OBL,
+scenario conformance, implementation readiness, or public behavior.
 
 Independent review: not-required-for-L3
 
