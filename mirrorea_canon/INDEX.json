@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 18032
+   "bytes": 18072
   },
   {
    "id": "root/north-star",
@@ -1875,7 +1875,7 @@
    "summary": "P017 X1 の V1/R1 cross-locus read に限り、五つの不適切な collapse を predicate-only 有限 countermodel で検出できるかを既存 Lean LAB lane で検査する。Core、relation schema、request identity、transition、restore、runtime は選ばない。",
    "open_items": [],
    "path": "working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md",
-   "bytes": 8701
+   "bytes": 9660
   }
  ]
 }

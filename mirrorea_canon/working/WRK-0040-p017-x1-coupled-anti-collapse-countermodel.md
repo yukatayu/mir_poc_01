@@ -125,13 +125,23 @@ outside the experiment and remains unselected.
 
 Reliance status: not-promoted
 
-Positive evidence: none; execution has not started.
+Positive evidence: At the pinned authority/input cut, the sole extracted
+predicate-only source passed Lean 4.29.1 with `--trust=0`. The control and five
+cumulative fixture rows proved the registered `SEP`, `PHASE`, `ONE`, `AUTH`,
+and `OBS` columns; supplied `q0`/`q1` equal-incidental and `q0 -> r0` /
+`q1 -> r1` correspondence witnesses were retained; and all 14 retained theorem
+reports had no axioms.
 
-Negative evidence: none; execution has not started.
+Negative evidence: No registered typed falsifier occurred. Pinned input
+digests, sole-block extraction, placeholder/unsafe/classical/quotient/native
+decision scans, reserved-surface vocabulary scans, the six-row matrix check,
+the evidence-commit allowlist, and the diff check passed. Pre-retention Lean
+notation and `propext` diagnostics were corrected locally before evidence was
+retained; they are not a semantic counterexample or a change to this record.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md@64e9c18314ef28396ace068729ba67c0b86f3444:857480c7f4f26c58bb607d988eeb0fa568aecfebc6ae098ac229f94b9ae04475
 
-Evidence commits: none
+Evidence commits: 64e9c18314ef28396ace068729ba67c0b86f3444
 
 Impact / non-effects: This record is normative only about a reversible L3
 research boundary and procedure. It changes no settled theory or implementation

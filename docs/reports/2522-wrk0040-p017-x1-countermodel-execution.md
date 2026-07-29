@@ -67,6 +67,10 @@ fixture annotations for the authority/observation cases.
   request/save/config/linearity/failure/causal/history/state vocabulary; both
   scans had no matches. Confirmed the six declared row theorems, ran
   `git diff --check`, and inspected the extracted source SHA-256.
+- Committed the declared source/report evidence as
+  `64e9c18314ef28396ace068729ba67c0b86f3444`, pushed it, fetched
+  `origin/main`, and confirmed its two-path allowlist plus the exact full-file
+  artifact SHA-256.
 
 ## Evidence / outputs / test results
 
@@ -86,6 +90,12 @@ Replacing those with direct proof constructors and exhaustive fixture branches
 removed the dependency. These were local implementation corrections before the
 evidence commit, not semantic counterexamples and not a change to the
 pre-registration.
+
+The retained full Markdown artifact is
+`857480c7f4f26c58bb607d988eeb0fa568aecfebc6ae098ac229f94b9ae04475`
+at evidence commit `64e9c18314ef28396ace068729ba67c0b86f3444`. Its commit
+contains only that artifact and this direct report, satisfying WRK-0040's
+declared evidence allowlist.
 
 ## What changed in understanding
 
@@ -156,9 +166,10 @@ predicate-only Lean artifact. No heavy build is required.
 
 ## Commit / push status
 
-Pending at report closeout. The evidence commit is made now with only the
-declared `plan/` source and this direct numbered report; it is pushed before
-the later WRK metadata link.
+Evidence committed as `64e9c18314ef28396ace068729ba67c0b86f3444`
+(`test: execute P017 X1 countermodel`), pushed to `origin/main`, and verified
+equal to fetched `origin/main`. The WRK metadata link is committed and pushed
+next; reader-facing snapshot synchronization follows as a separate package.
 
 ## Sub-agent session close status
 
