@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 4308
+   "bytes": 4703
   },
   {
    "id": "root/glossary",
@@ -689,10 +689,10 @@
     "meta/proposal-012",
     "meta/proposal-013"
    ],
-   "summary": "V1/R1/M1 が必要とする C2-B/C3 の相関・receipt・one-shot/use・save/load 境界について、relation-state envelope を採択候補として起票する。Core、runtime、OBL、公開契約は変更しない。",
+   "summary": "V1/R1/M1 が必要とする C2-B/C3 の相関・receipt・one-shot/use・save/load 境界について、X1 relation-state envelope の owner disposition を記録する。Core、runtime、OBL、公開契約は変更しない。",
    "open_items": [],
    "path": "meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md",
-   "bytes": 12634
+   "bytes": 13411
   },
   {
    "id": "meta/source-hierarchy",

@@ -220,12 +220,12 @@ profile と Canon amendment は未作成です。
   proof と取り違えず、pending、typed branch、causality、linearity、redaction、load、
   elaboration の obligation と falsifier を owner-facing decision 前に整理する。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
-  V1/R1/M1 の C2-B/C3 relation-state envelope を通常の owner decision request として
-  起票する。cross-locus read に限り、carrier、transition、source grammar、runtime、OBL を
-  選ばない。将来の省略記法も別 proposal として扱う。
-- `plan/221-c2b-c3-canon-proposal-preparation.md`: P017 の owner disposition 前に、
-  unique pending binding、owner outcome/receipt 分離、complete save/load、authority、
-  observation、source boundary を review 済みの decision envelope として整理する。
+  V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
+  cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
+  runtime、OBL は選ばない。将来の省略記法も別 proposal として扱う。
+- `plan/221-c2b-c3-canon-proposal-preparation.md`: P017 の X1 disposition と、次の
+  ADR-0014 pre-registration が unique pending binding、owner outcome/receipt 分離、
+  complete save/load、authority、observation、source boundary を検査することを整理する。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

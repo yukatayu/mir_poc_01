@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-29 02:35 JST
+最終更新: 2026-07-29 18:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214 は no-successor、Plan 215--221 と P017 は gap、obligation、final review 済み owner decision request を整理した | finite presentation lane は閉じた。P017 後の全-frontier screen も新規 L3 candidate はなし。X1/XD disposition、pending/receipt/load definition、proof は未選択。C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214 は no-successor、Plan 215--221 と P017 は gap、obligation、review、X1 disposition を整理した | finite presentation lane は閉じた。X1 は最小 L3 model を開くが、pending/receipt/load definition、proof、Canon amendment は未選択。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -97,7 +97,7 @@ official T2 まで無条件に連続自走することはできません。次�
   retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
   又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
   を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207--210 は C2-B/C3 comparison を整理し、Plan 211/WRK-0037 は B2-OPAQUE finite table を実行した。Plan 212/WRK-0038 の bare-view comparison は未実行で scope correction に入り、WRK-0039 は Plan 213 の all-ten-cell fiberwise comparison を実行した。Plan 214 は successor L3 を作らず、Plan 215--220 は carrier gap と obligation を確認した。P017 は independent final review `PASS` の後、V1/R1 cross-locus read だけの X1 relation-state envelope / XD defer を owner decision request として起票した。P017 後の C0--C7 screen は新規 L3 を作らない。Canon carrier は未選択である。
+  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207--210 は C2-B/C3 comparison を整理し、Plan 211/WRK-0037 は B2-OPAQUE finite table を実行した。Plan 212/WRK-0038 の bare-view comparison は未実行で scope correction に入り、WRK-0039 は Plan 213 の all-ten-cell fiberwise comparison を実行した。Plan 214 は successor L3 を作らず、Plan 215--220 は carrier gap と obligation を確認した。P017 は independent final review `PASS` の後、V1/R1 cross-locus read だけの X1 relation-state envelope / XD defer を owner decision request として起票し、2026-07-29 に X1 が記録された。次は ADR-0014 の L3 pre-registration であり、Canon carrier は未選択である。
   shared proof-facing model や Core proposal の採択ではない。
 - Gate / Phase、SCN、Core/external contract、
   `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
@@ -118,7 +118,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
 | 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P017 X1 relation-state envelope / XD defer | P017 は V1/R1 cross-locus read の unique pending binding、owner-service/receipt-use 分離、authority、save/load、observation、source non-effect を X1 条件にする。schema/rule/proof は未選択で、owner/Canon が X1/XD を判断する |
+| 5 | value / occurrence | P017 X1 relation-state envelope | X1 は記録済み。V1/R1 cross-locus read の unique pending binding、owner-service/receipt-use 分離、authority、save/load、observation、source non-effect を次の L3 model が検査する。schema/rule/proof は未選択 |
 | 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
 | 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
 
@@ -131,7 +131,7 @@ source-tagged documentary non-substitution だけを retained しました。WRK
 source-local Diagnostic reference query だけを retained しました。WRK-0032 は通常 admission issuance
 guard を完了し、P012 condition と four named span の source-local result のみを retained しました。
 C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 219 は C2-B/C3 の最小 semantic residence を
-explicit relation state / history-only / nominal identity に整理し、前者を LAB 推奨とします。Plan 220 は pending、redaction、typed branch、load の relation-state obligation を未証明のまま明示します。P017 はその提案を V1/R1 cross-locus read の X1/XD owner decision request に限定し、source や transport から semantic fact を推測しない。Canon decision はまだ記録していません。Plan 202 の `C3-VR-PRE` は WRK-0033 として
+explicit relation state / history-only / nominal identity に整理し、前者を LAB 推奨とします。Plan 220 は pending、redaction、typed branch、load の relation-state obligation を未証明のまま明示します。P017 はその提案を V1/R1 cross-locus read の X1/XD owner decision request に限定し、2026-07-29 に X1 を記録した。source や transport から semantic fact を推測しない。次は ADR-0014 適格な L3 pre-registration である。Plan 202 の `C3-VR-PRE` は WRK-0033 として
 登録、実行、metadata link まで完了しました。有限 LAB model は matching/single-use/failure-exclusion 下の
 local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
   C3 pending/correlation/persistence、source inference、Core rule を選びません。これは shared formal model、T1

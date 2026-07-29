@@ -70,9 +70,9 @@ Current exact blockers:
    cut; Plan 215--218 group, audit, compare, and source-screen the ordinary
    decision boundary. Plan 219 recommends explicit relation state over a
    history-only projection or fresh nominal identity; Plan 220 lists its
-   pending/branch/redaction/load proof obligations. P017 now narrows the owner
-   decision request to X1/XD for V1/R1 cross-locus reads, without selecting
-   Canon semantics.
+   pending/branch/redaction/load proof obligations. P017 records the owner's
+   X1 disposition for V1/R1 cross-locus reads. It opens one bounded L3 model
+   only; it does not select Canon semantics.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -173,8 +173,8 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 and the P017 post-proposal C0--C7 screen find no successor L3; Plans 215--221 and P017 make the carrier gap, alternatives, obligations, and bounded decision request explicit. No Canon carrier changed |
-| Owner / Canon | C2-B/C3 presentation and state locus | P017 X1 relation-state envelope / XD defer | P017 limits X1 to V1/R1 cross-locus reads, requires unique pending binding and separated service/receipt-use state, and defers schema/rules/proof/source/runtime |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 and the pre-disposition screen found no successor L3; P017 now records X1 and opens a bounded ADR-0014 model. No Canon carrier changed |
+| Research | C2-B/C3 relation-state model | P017 X1 recorded | The first L3 record must test unique pending binding and separated service/receipt-use state. Schema/rules/proof/source/runtime remain deferred |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -187,7 +187,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, final-reviewed X1/XD request prepared, and post-proposal screen has no new L3 candidate | heavy | owner disposition, then conditional existing-lane research |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; finite C2-B/C3 lane closed, X1 recorded, and the first bounded L3 model is next | heavy | yes, within ADR-0014 and P017 scope |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -212,6 +212,11 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 18:42 JST: The owner recorded P017 `X1 relation-state envelope`.
+  It authorizes only the first ADR-0014-eligible L3 model for V1/R1
+  cross-locus reads. No Core, Config, SaveObject, transition, OBL, scenario,
+  Gate, Phase, runtime, source, wire/API, or public contract changed.
 
 - 2026-07-29 02:35 JST: An independent C0--C7 post-P017 autonomy screen found
   no genuinely non-duplicate ADR-0014 L3 candidate. A pre-disposition model

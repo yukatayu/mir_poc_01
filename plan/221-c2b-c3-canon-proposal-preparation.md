@@ -2,10 +2,10 @@
 
 ## Role and authority
 
-This is LAB repository memory for the preparation of Canon `PROPOSAL-017`.
-It records no owner disposition and does not make the proposal's candidate
-effective. `mirrorea_canon/` remains normative; the only authoritative outcome
-is a human decision recorded in the proposal and then, if adopted, the ordinary
+This is LAB repository memory for the preparation and disposition of Canon
+`PROPOSAL-017`. `mirrorea_canon/` remains normative: the owner's recorded X1
+disposition authorizes only its stated bounded research package, while any
+theory, specification, or operational change remains subject to the ordinary
 amendment chain.
 
 ## What is now prepared
@@ -61,20 +61,19 @@ a reproducible defect is found in retained evidence. X1 opens only the first
 selected-scope pre-registration; it does not make any integration rule
 effective.
 
-## Owner decision still required
+## Owner disposition recorded
 
-`PROPOSAL-017` deliberately requests only:
+On 2026-07-29, the owner recorded:
 
 ```text
-X = X1 relation-state envelope | XD defer | return for clarification
+X = X1 relation-state envelope
 ```
 
-The user's agreement with the preceding LAB recommendations supports preparing
-this proposal. It is not silently transcribed here as an exact Canon amendment
-because the proposal's concrete scope and non-effects must remain reviewable.
-An accepted X1 would open the bounded integration design package; it would not
-directly alter `Core`, `Config`, `SaveObject`, an operational rule, OBL, Gate,
-Phase, implementation, or public contract.
+The disposition opens the first bounded integration-design investigation. It
+does not directly alter `Core`, `Config`, `SaveObject`, an operational rule,
+OBL, Gate, Phase, implementation, or public contract. Before outcome evidence
+is relied on, the next artifact must independently pass ADR-0014 standing
+eligibility as an L3 pre-registration in an existing LAB lane.
 
 ## Ergonomic direction, deferred correctly
 
@@ -87,10 +86,12 @@ facts, and never derive them from incidental source or transport data.
 
 ## Immediate next state
 
-After proposal review and an owner record, the first autonomous technical work
-is a narrow selected-scope model against Plan 220's three-frontier test. Until
-then, no `working/` record, Lean theorem, runtime experiment, or rule text is
-authorized by this preparation alone.
+After the recorded X1 disposition, the first autonomous technical work is a
+narrow selected-scope model against Plan 220's three-frontier test. It begins
+with a new L3 pre-registration, not a rule text, runtime experiment, or proof
+claim. The research stops and returns to the ordinary Canon process if the
+model needs a Core primitive, source identity, transport carrier, public
+contract, causal generator, occurrence kind, or new dynamic failure row.
 
 ## Non-effects
 

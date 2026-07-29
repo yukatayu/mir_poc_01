@@ -3,7 +3,7 @@ id: meta/proposal-017
 status: L3-open
 maturity: draft
 depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, adr/ADR-0012, adr/ADR-0014, meta/proposal-012, meta/proposal-013]
-summary: V1/R1/M1 が必要とする C2-B/C3 の相関・receipt・one-shot/use・save/load 境界について、relation-state envelope を採択候補として起票する。Core、runtime、OBL、公開契約は変更しない。
+summary: V1/R1/M1 が必要とする C2-B/C3 の相関・receipt・one-shot/use・save/load 境界について、X1 relation-state envelope の owner disposition を記録する。Core、runtime、OBL、公開契約は変更しない。
 open_items: []
 ---
 
@@ -11,10 +11,10 @@ open_items: []
 
 > Decision-request artifact. It presents the smallest candidate identified on
 > the current Canon reading and supporting LAB evidence for the already recorded
-> V1/R1/M1 directions. It records no owner disposition
-> at creation. Acceptance authorizes only the bounded integration design
-> package described below; it does not itself amend theory, select a concrete
-> carrier schema, or authorize implementation.
+> V1/R1/M1 directions. The owner disposition is recorded below. Acceptance
+> authorizes only the bounded integration design package described below; it
+> does not itself amend theory, select a concrete carrier schema, or authorize
+> implementation.
 
 ## Target and authority boundary
 
@@ -31,6 +31,22 @@ failure paths and M1 request-local validation context. Owner-local reads, other
 result-returning operation families, successful-write acknowledgements,
 admission, fallback, a general continuation, protocol, and source grammar are
 outside X1.
+
+## Owner disposition
+
+Recorded on 2026-07-29: **X1 accepted -- relation-state envelope.**
+
+The owner accepted the bounded X1 direction for the V1/R1 cross-locus-read
+scope above. This authorizes a first ADR-0014-eligible, existing-LAB-lane L3
+pre-registration to define and falsify a minimum model. That record must still
+state its own authority cut, alternative, falsifier, rollback trigger,
+non-effects, and permitted LAB locations before any outcome is relied on.
+
+This disposition does not amend `Config`, `SaveObject`, `Core`, any transition
+rule, the failure universe, theory/11, a scenario, a Gate, a Phase, runtime,
+wire/API contract, source grammar, or public behavior. Each such change needs
+its own ordinary Canon amendment after the bounded research package supplies
+reviewable evidence.
 
 ## Candidate disposition X
 
@@ -155,12 +171,12 @@ public contract, causal generator, occurrence kind, or `G_e` row. The relation
 itself records state only when an explicitly selected transition updates it; it
 does not itself generate communication.
 
-## Requested owner output
+## Recorded owner output
 
-Record one of:
+The recorded owner output is:
 
 ```text
-X = X1 relation-state envelope | XD defer | return for clarification
+X = X1 relation-state envelope
 ```
 
 `X1` authorizes only the required integration package. It does not change

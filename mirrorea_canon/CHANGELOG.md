@@ -18,6 +18,11 @@ open_items: []
 
 ## 履歴
 
+- **2026-07-29** PROPOSAL-017 の owner disposition として、V1/R1 の
+  cross-locus read に限る `X1 relation-state envelope` を記録した。これは
+  ADR-0014 適格な最小 L3 設計・反例 package を開くのみであり、Core、Config、
+  SaveObject、failure、theory/11、SCN、Gate、Phase、runtime、source grammar、
+  wire/API、public contract は変更しない。
 - **2026-07-28** PROPOSAL-004/008/012/013/015/016 に owner disposition を
   記録した。Participant-only Surface v0、outcome totality の別 obligation、
   V1/R1/SW1/conditional A2、M1 request-local validation context、explicit
