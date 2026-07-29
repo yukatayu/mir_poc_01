@@ -151,8 +151,9 @@ focused execution is the next package, not evidence for this snapshot.
 
 ## Commit / push status
 
-Snapshot commit and push follow final validation. Exact identity and remote
-equality are verified before the WRK-0041 outcome package starts.
+Snapshot committed as `dd7449290389606910032cb54272c0ffa1e92511`
+(`docs: plan WRK-0041 terminal evidence`), pushed to `origin/main`, and
+verified equal to fetched `origin/main` before the WRK-0041 outcome package.
 
 ## Sub-agent session close status
 

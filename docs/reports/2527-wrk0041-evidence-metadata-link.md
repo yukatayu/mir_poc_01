@@ -123,8 +123,9 @@ was already executed in Report 2526.
 
 ## Commit / push status
 
-Metadata commit and push follow final index/diff/secret checks. Exact identity
-and remote equality are verified before reader-facing synchronization starts.
+Metadata committed as `65971a91a7d37eb7a77cbbc5713139530ffdaff8`
+(`docs: link WRK-0041 evidence`), pushed to `origin/main`, and verified equal
+to fetched `origin/main` before reader-facing synchronization starts.
 
 ## Sub-agent session close status
 

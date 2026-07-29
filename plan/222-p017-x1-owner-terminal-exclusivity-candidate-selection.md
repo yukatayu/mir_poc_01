@@ -40,12 +40,13 @@ conditions and the local duplication search.
 ## Selected package
 
 `working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` is the
-only selected candidate. Its source, when materialized after the registration
-push, may contain only a supplied anchor and four finite fixture labels:
-no-terminal, positive-only, negative-only, and simultaneous. It may test a
-predicate detecting the simultaneous pair, but may not define an outcome enum,
-failure type/row, branch state, transition, owner mutation, receipt,
-persistence field, relation, or runtime event.
+only selected candidate. Its retained source at
+`plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` contains
+only a supplied anchor and four finite fixture labels: no-terminal,
+positive-only, negative-only, and simultaneous. Its overlap detector passed
+the registered matrix under Lean `--trust=0` with no axioms, but does not
+define an outcome enum, failure type/row, branch state, transition, owner
+mutation, receipt, persistence field, relation, or runtime event.
 
 The expected value is narrow: the test can show that a detector table can keep
 the three allowed fixture classes separate from the seeded overlap. A passing
@@ -54,12 +55,12 @@ has a typed failure, or satisfies `X-BRANCH`.
 
 ## Execution order and stop line
 
-1. Commit and push the pre-registration before outcome evidence.
-2. Materialize one Markdown-held Lean block in the declared `plan/` lane.
-3. Run the registered digest, extraction, `lean --trust=0`, axiom, matrix,
-   reserved-vocabulary, allowlist, and diff checks.
-4. Freeze immediately if any expected falsifier occurs; otherwise retain only
-   the exact finite evidence and link its digest forward.
+1. Pre-registration was committed and pushed before outcome evidence.
+2. One Markdown-held Lean block was materialized in the declared `plan/` lane.
+3. The registered digest, extraction, `lean --trust=0`, axiom, matrix,
+   reserved-vocabulary, allowlist, and diff checks passed.
+4. The exact finite evidence is linked forward. The next package screens the
+   post-WRK-0041 cut rather than extending this table.
 
 Stop and escalate instead of repairing the artifact if it needs a terminal
 branch carrier, dynamic failure row, semantic transition, outcome generation,

@@ -48,7 +48,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 relation-state proof-obligation audit | `plan/220-c2b-c3-relation-state-proof-obligation-audit.md` |
 | C2-B/C3 Canon proposal preparation | `plan/221-c2b-c3-canon-proposal-preparation.md` |
 | P017 X1 finite L3 detector (not promoted) | `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`, `plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md` |
-| P017 X1 terminal L3 preregistration (unexecuted) | `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`, `mirrorea_canon/working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` |
+| P017 X1 terminal L3 detector (not promoted) | `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`, `mirrorea_canon/working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`, `plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -232,8 +232,9 @@ profile と Canon amendment は未作成です。
   ある。これは carrier schema、transition、source grammar、runtime、OBL、または
   positive relation model を選ばない non-promoted L3 evidence である。Plan 222 は
   その後の distinct `X-BRANCH` candidate として WRK-0041 を登録した。これは
-  owner-terminal overlap を四 fixture で検出する未実行 L3 であり、outcome type、
-  failure row、branch state、transition、runtime は選ばない。
+  owner-terminal overlap を四 fixture で検出し Lean `--trust=0` を通った
+  non-promoted L3 evidence である。outcome type、failure row、branch state、
+  transition、runtime は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
