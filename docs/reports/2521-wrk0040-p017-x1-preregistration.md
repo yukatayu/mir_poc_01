@@ -94,7 +94,9 @@ in the WRK and this report, not treated as a normative source.
   registration commit.
 - Ran `make docs` after the registration push. It reached the registered WRK
   checks, then correctly found an unrelated stale `progress.md` update header;
-  the current LAB snapshot synchronizes that header before the final rerun.
+  the current LAB snapshot synchronized that header. The final `make docs`
+  rerun passed with 128 Canon files, 761 source-hierarchy paths, and 1,675
+  numbered reports.
   No registered outcome command was run before the registration commit.
 
 ## Evidence / outputs / test results
@@ -105,8 +107,9 @@ was not yet committed at `HEAD`, confirming the pre-registration guard. After
 the registration was committed and pushed, `make docs` reached that guard and
 instead found the stale progress-header timestamp now corrected in this
 snapshot. No Lean source exists yet, so no Lean command, countermodel result,
-or theorem claim is available. The final documentation validation is run before
-this snapshot commit and recorded in the closeout amendment.
+or theorem claim is available. The final `make docs` validation passed after
+the snapshot synchronization; it reported `Documentation scaffold looks
+complete` and found 1,675 numbered reports.
 
 ## What changed in understanding
 
@@ -176,17 +179,20 @@ review.
 
 ## Skipped validations and reasons
 
-Lean compilation, axiom reporting, source scans, and the six-row matrix are
-intentionally skipped until after this WRK registration is committed and
-pushed, as required by `working/README.md`. No heavy build was needed.
+Lean compilation, axiom reporting, source scans, and the six-row matrix remain
+unrun because no outcome source has been materialized in the declared LAB lane.
+They were also forbidden before the registration commit and push. No heavy
+build was needed.
 
 ## Commit / push status
 
 Registration committed as
 `fd85fbc5ebcc193357f9d1f9123211d82d4bc4bf` (`docs: preregister P017 X1
-countermodel`), pushed to `origin/main`, and verified equal to fetched
-`origin/main`. This LAB snapshot update is committed and pushed next; the
-final report-closeout amendment follows that commit.
+countermodel`), then the LAB snapshot as
+`5e50474104a0bc12458e687a4c3ea2d541c7d168` (`docs: sync WRK-0040
+preregistration status`). Both were pushed to `origin/main`; this report
+closeout update is committed and pushed next, followed by a final remote-equality
+check.
 
 ## Sub-agent session close status
 
