@@ -873,6 +873,8 @@
   `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md`
 - Post-WRK-0044 no-successor and ordinary-design boundary:
   `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md`
+- P017 X1 first ordinary-design candidate-card preflight:
+  `plan/230-p017-x1-first-ordinary-design-card-preflight.md`
 
 ## maintenance rule
 

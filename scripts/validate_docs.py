@@ -664,6 +664,7 @@ REQUIRED = [
     "plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md",
     "plan/228-p017-x1-minimum-coherence-candidate-selection.md",
     "plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md",
+    "plan/230-p017-x1-first-ordinary-design-card-preflight.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

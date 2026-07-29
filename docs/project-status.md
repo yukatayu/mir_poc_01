@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-30 02:16 JST
+最終更新: 2026-07-30 02:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214、225、226、229 は各 scope で no-successor、Plan 215--224 と P017 は gap、obligation、review、X1 disposition を整理した。WRK-0040 は六 fixture の五 collapse column、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を実行した。Plan 227 は通常設計の選択軸を、Plan 228 は最小 coherence candidate を選別し、WRK-0044 は five-pair static conditional account を Lean `--trust=0` で実行・link した | finite presentation lane は閉じた。WRK-0040--0043 は supplied fixture 上の検出可能性だけを示し、P017 X1 fixture line、proposed G5 restore-quantifier line、WRK-0044 後の abstract successor line は current cut で no-candidate。WRK-0044 は明示前提に対する static account のみで not-promoted。次は Plan 227 の ordinary design preparation であり、external rejection/no-observation、pending/receipt/load definition、positive model、proof、Canon amendment は未選択。C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214、225、226、229 は各 scope で no-successor、Plan 215--224 と P017 は gap、obligation、review、X1 disposition を整理した。WRK-0040 は六 fixture の五 collapse column、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を実行した。Plan 227 は通常設計の選択軸を、Plan 228 は最小 coherence candidate を選別し、WRK-0044 は five-pair static conditional account を Lean `--trust=0` で実行・link した。Plan 230 は K0 external-rejection seed と K1 typed-rejection gap の未選択 card を preflight 化した | finite presentation lane は閉じた。WRK-0040--0043 は supplied fixture 上の検出可能性だけを示し、P017 X1 fixture line、proposed G5 restore-quantifier line、WRK-0044 後の abstract successor line は current cut で no-candidate。Plan 230 K0 は open、K1 は failure row 未選択の Canon gap。relation schema、transition、pending/receipt/load definition、positive model、proof、Canon amendment は未選択。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 

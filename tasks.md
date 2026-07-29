@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-30 02:16 JST
+最終更新: 2026-07-30 02:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,8 +59,9 @@ rejection and no observation surface. WRK-0044 now retains a five-pair static
 conditional account with explicit premises and no axioms. Plan 229 finds no
 independent finite-satisfiability, abstract-dynamic, or causal-only L3
 successor at this cut; substantive work passes to ordinary design preparation.
-Nothing selects a relation schema, transition, source form, runtime, proof, or
-Canon amendment.
+Plan 230 now preflights K0 external rejection as open and K1 typed rejection
+as a failure-row Canon gap. Nothing selects a relation schema, transition,
+source form, runtime, proof, or Canon amendment.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -79,8 +80,9 @@ Their current conclusion is:
   Plan 229 は finite satisfiability、abstract one-shot countermodel、causal-only audit
   を current cut の新規 L3 にしない。external rejection は候補仮説、no-observation は
   負の scope のままであり、vacuity と restore identity は falsifier として維持する。
-  positive schema/rule/proof は ordinary Canon design work のままであり、card の
-  common identity や lifecycle を Plan 側から導入しない。
+  positive schema/rule/proof は ordinary Canon design work のままであり、Plan 230
+  は K0/K1 を比較用の shared identity や lifecycle にしない。K0 は open、K1 は
+  failure row の Canon gap として止める。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -121,7 +123,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap; Plan 225 closes this fixture-only line. Plan 227 prepares the choice-neutral R/B/T/U/C/L tuple, and Plan 228 / WRK-0044 retain one external-rejection/no-observation five-pair static account. Plan 229 closes finite-satisfiability, abstract-dynamic, and causal-only L3 successors. It selects no Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; prepare an ordinary candidate-native design card without preselecting coordinates |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap; Plan 225 closes this fixture-only line. Plan 227 prepares the choice-neutral R/B/T/U/C/L tuple, and Plan 228 / WRK-0044 retain one external-rejection/no-observation five-pair static account. Plan 229 closes abstract L3 successors; Plan 230 preflights K0 external rejection as open and K1 typed rejection as failure-row Canon gap. It selects no Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; continue K0 R/L then B review without selecting coordinates or repairing K1 |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -165,7 +167,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040 detected five collapsed cases; WRK-0041 detected owner-terminal overlap; WRK-0042 detected supplied owner-negative/mutation overlap; WRK-0043 detected distinct M1 adverse-input/mutation overlap only. Plan 228 / WRK-0044 retain an all-row static conditional account with five non-exhaustive pairs; Plan 229 closes the further abstract L3 line and sends the concrete choices to ordinary design; schema/rule/proof remain unselected |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040 detected five collapsed cases; WRK-0041 detected owner-terminal overlap; WRK-0042 detected supplied owner-negative/mutation overlap; WRK-0043 detected distinct M1 adverse-input/mutation overlap only. Plan 228 / WRK-0044 retain an all-row static conditional account with five non-exhaustive pairs; Plan 229 closes the abstract L3 line; Plan 230 opens K0 and bounds K1 at the failure row; schema/rule/proof remain unselected |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -267,6 +269,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md`.
 - Post-WRK-0044 no-successor and ordinary-design boundary:
   `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md`.
+- P017 X1 first ordinary-design candidate-card preflight:
+  `plan/230-p017-x1-first-ordinary-design-card-preflight.md`.
 - P017 X1 owner-terminal candidate selection:
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`.
 - P017 X1 owner-negative/mutation candidate selection:
