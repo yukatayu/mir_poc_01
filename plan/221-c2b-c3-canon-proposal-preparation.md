@@ -86,17 +86,19 @@ facts, and never derive them from incidental source or transport data.
 
 ## Immediate next state
 
-The first autonomous technical work is now registered as
-`working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`. It is an
-unexecuted predicate-only finite countermodel, not a rule text, runtime
-experiment, proof claim, or positive relation-state model. It receives two
-supplied equal-incidental but distinct occurrence witnesses, two supplied
-post-load witnesses, and supplied restore correspondences; it tests only
-whether a neutral control can be distinguished from the five `SEP`, `PHASE`,
-`ONE`, `AUTH`, and `OBS` collapse mutants.
+The first autonomous technical work was registered and executed as
+`working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`, with its
+sole source retained at
+`plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md`. The
+predicate-only finite detector passed its six fixture rows and five `SEP`,
+`PHASE`, `ONE`, `AUTH`, and `OBS` columns under Lean `--trust=0`, with no
+axioms. It remains neither a rule text nor a runtime experiment, proof claim,
+or positive relation-state model: the occurrence and post-load witnesses,
+restore correspondences, and detector facts are supplied finite fixtures.
 
-The next autonomous package materializes and executes that registered artifact
-in the existing `plan/` Lean evidence lane. The research stops and returns to
+The next autonomous package does not extend that finite table. It screens the
+post-execution cut for one distinct ADR-0014-eligible existing-lane candidate,
+or records a scoped `no-candidate` result. The research stops and returns to
 the ordinary Canon process if it needs a Core primitive, source identity,
 transport carrier, public contract, causal generator, occurrence kind, dynamic
 failure row, relation schema, transition, restore function, consumption

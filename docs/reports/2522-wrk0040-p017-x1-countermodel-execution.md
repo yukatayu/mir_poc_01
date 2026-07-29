@@ -168,8 +168,10 @@ predicate-only Lean artifact. No heavy build is required.
 
 Evidence committed as `64e9c18314ef28396ace068729ba67c0b86f3444`
 (`test: execute P017 X1 countermodel`), pushed to `origin/main`, and verified
-equal to fetched `origin/main`. The WRK metadata link is committed and pushed
-next; reader-facing snapshot synchronization follows as a separate package.
+equal to fetched `origin/main`. The immutable WRK Results/MAP metadata link
+was then committed as `d528f8da95078f77d40b289e42617b943a271154`, pushed, and
+verified equal to fetched `origin/main`; reader-facing snapshot synchronization
+follows as a separate package.
 
 ## Sub-agent session close status
 

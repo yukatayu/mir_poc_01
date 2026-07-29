@@ -47,7 +47,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | C2-B/C3 minimal semantic-residence options | `plan/219-c2b-c3-minimal-semantic-residence-options.md` |
 | C2-B/C3 relation-state proof-obligation audit | `plan/220-c2b-c3-relation-state-proof-obligation-audit.md` |
 | C2-B/C3 Canon proposal preparation | `plan/221-c2b-c3-canon-proposal-preparation.md` |
-| P017 X1 first L3 preregistration (unexecuted) | `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md` |
+| P017 X1 finite L3 detector (not promoted) | `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`, `plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -225,10 +225,11 @@ profile と Canon amendment は未作成です。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
   runtime、OBL は選ばない。将来の省略記法も別 proposal として扱う。
 - `plan/221-c2b-c3-canon-proposal-preparation.md`: P017 の X1 disposition と、次の
-  ADR-0014 package の境界を整理する。`mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md` はその最初の
-  preregistration であり、未実行の predicate-only finite countermodel として
-  `SEP` / `PHASE` / `ONE` / `AUTH` / `OBS` だけを検出対象にする。carrier schema、
-  transition、source grammar、runtime、OBL は引き続き未選択である。
+  ADR-0014 package の境界を整理する。`mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md` の最初の
+  preregistration は、`plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md`
+  で有限 fixture の `SEP` / `PHASE` / `ONE` / `AUTH` / `OBS` detector として実行済みで
+  ある。これは carrier schema、transition、source grammar、runtime、OBL、または
+  positive relation model を選ばない non-promoted L3 evidence である。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 
