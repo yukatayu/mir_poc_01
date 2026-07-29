@@ -865,6 +865,8 @@
   `plan/225-post-wrk0043-fixture-frontier-disposition.md`
 - Post-WRK-0043 cross-lane P0A preflight:
   `plan/226-post-wrk0043-cross-lane-p0a-preflight.md`
+- P017 X1 owner-decision vector and choice-neutral consistency matrix:
+  `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`
 
 ## maintenance rule
 

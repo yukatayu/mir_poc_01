@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-29 23:25 JST
+最終更新: 2026-07-30 00:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,7 +39,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
 | T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214、225、226 は各 scope で no-successor、Plan 215--224 と P017 は gap、obligation、review、X1 disposition を整理した。WRK-0040 は六 fixture の五 collapse column、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を実行した | finite presentation lane は閉じた。WRK-0040--0043 は supplied fixture 上の検出可能性だけを示し、P017 X1 fixture line と proposed G5 restore-quantifier line は current cut で no-candidate。pending/receipt/load definition、positive model、proof、Canon amendment は未選択。C4/C5 と C0-D/C1/C6 は deferred |
+| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定結果を保持し、Plan 214、225、226 は各 scope で no-successor、Plan 215--224 と P017 は gap、obligation、review、X1 disposition を整理した。WRK-0040 は六 fixture の五 collapse column、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を実行した。Plan 227 は次の通常設計を residence/branch/receipt/use/causality/restore の選択軸と中立反例行列に分解した | finite presentation lane は閉じた。WRK-0040--0043 は supplied fixture 上の検出可能性だけを示し、P017 X1 fixture line と proposed G5 restore-quantifier line は current cut で no-candidate。Plan 227 は decision preparation のみで、pending/receipt/load definition、positive model、proof、Canon amendment は未選択。C4/C5 と C0-D/C1/C6 は deferred |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
 
@@ -118,7 +118,7 @@ branch は保守的な LAB 選別規律であり、ADR-0014 の standing predica
 | 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
 | 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
 | 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P017 X1 relation-state envelope | X1 は記録済み。WRK-0040 は五つの collapse、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を supplied fixture 上で検出した。unique pending binding、branch / mutation representation、authority、save/load、observation の positive schema/rule/proof は未選択 |
+| 5 | value / occurrence | P017 X1 relation-state envelope | X1 は記録済み。WRK-0040 は五つの collapse、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を supplied fixture 上で検出した。Plan 227 は residence/branch/receipt/use/causality/restore を通常提案で選ぶ連動軸として整理した。positive schema/rule/proof は未選択 |
 | 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
 | 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
 

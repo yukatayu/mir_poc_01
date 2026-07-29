@@ -131,6 +131,16 @@ runtime. After this package, the current fixture-only line stops unless a later
 Canon cut supplies a new explicit source condition, consumer, and falsifier.
 Plan 225 records the resulting scoped `no-candidate` disposition at this cut.
 
+After the fixture-only line and the cross-lane restore-quantifier duplicate
+screen, Plan 227 records the next ordinary-design preparation step. It turns
+P017's required integration package into six decision coordinates:
+residence/reference scope; owner branch/provenance; requester receipt/rejection;
+restricted-use disposition; causal integration; and persistence/restore. It
+also records their coupling graph, a choice-neutral adverse matrix, and a
+blank candidate-native comparison contract. It intentionally selects no
+relation schema, `Config`/`SaveObject` field, transition, source
+form, runtime, proof, or Canon amendment.
+
 ## Non-effects
 
 This plan does not select a Canon carrier or implementation, add a Core or

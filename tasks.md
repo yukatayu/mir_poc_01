@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 23:25 JST
+最終更新: 2026-07-30 00:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,7 +52,12 @@ distinct supplied M1 adverse-input / owner-mutation detector; it is not a
 validation, failure, or mutation model. Plan 225 closes the current P017 X1
 fixture-only line as scoped no-candidate. Plan 226 separately rejects the
 proposed G5 restore-quantifier countermodel as T-RESEARCH-014/Report 2267
-duplicate evidence.
+duplicate evidence. Plan 227 now prepares the next ordinary-design package as
+six coupled decision coordinates: semantic residence/reference scope, owner
+branch/provenance, requester receipt/rejection, restricted-use disposition,
+causal integration, and persistence/restore. It remains choice-neutral and
+does not select a relation schema, transition, source form, runtime, proof, or
+Canon amendment.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -64,6 +69,9 @@ Their current conclusion is:
 - G5 restoration については、Plan 226 が good/bad result alternatives を一 relation
   にまとめるだけの quantifier candidate を duplicate とした。新しい source/consumer
   delta 又は reproducible defect なしに WRK を作らない。
+- Plan 227 は P017 X1 の通常設計で何を一つの tuple として比較するかを固定した。
+  positive schema/rule/proof はまだ ordinary Canon design work であり、card の
+  common identity や lifecycle を Plan 側から導入しない。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -104,7 +112,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap; Plan 225 closes this fixture-only line. None selects a Canon carrier, validation, branch, failure, or mutation model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; independent new-source screen only |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. WRK-0040 passed its V1/R1 supplied-fixture detector; Plan 222 / WRK-0041 passed a distinct P017 `X-BRANCH` owner-terminal-overlap detector; Plan 223 / WRK-0042 passed the supplied owner-negative/mutation detector; Plan 224 / WRK-0043 passed the distinct M1 adverse-input/mutation overlap; Plan 225 closes this fixture-only line. Plan 227 prepares the choice-neutral R/B/T/U/C/L tuple for the ordinary design proposal. None selects a Canon carrier, validation, branch, failure, mutation, transition, or model. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; independent new-source screen and ordinary-design preparation |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -240,6 +248,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`.
 - C2-B/C3 Canon proposal preparation:
   `plan/221-c2b-c3-canon-proposal-preparation.md`.
+- P017 X1 decision vector and choice-neutral consistency matrix:
+  `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`.
 - P017 X1 owner-terminal candidate selection:
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`.
 - P017 X1 owner-negative/mutation candidate selection:

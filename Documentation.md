@@ -52,6 +52,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 owner-negative/mutation L3 detector (not promoted) | `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md`, `plan/wrk-0042-p017-x1-owner-negative-mutation-countermodel.md` |
 | P017 X1 M1 adverse/mutation L3 detector (not promoted) | `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md`, `plan/wrk-0043-p017-x1-m1-adverse-mutation-countermodel.md`, `plan/225-post-wrk0043-fixture-frontier-disposition.md` |
 | post-WRK-0043 cross-lane candidate preflight | `plan/226-post-wrk0043-cross-lane-p0a-preflight.md` |
+| P017 X1 decision vector and choice-neutral candidate review | `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -224,6 +225,10 @@ profile と Canon amendment は未作成です。
 - `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`: Plan 219 の推奨を
   proof と取り違えず、pending、typed branch、causality、linearity、redaction、load、
   elaboration の obligation と falsifier を owner-facing decision 前に整理する。
+- `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`:
+  P017 X1 の通常設計で連動して比較する六つの意味論的選択軸と、選択中立の
+  反例ケース・candidate-native card を整理する。具体 carrier、遷移、文法、runtime、
+  proof は選ばない。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
