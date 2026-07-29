@@ -875,6 +875,8 @@
   `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md`
 - P017 X1 first ordinary-design candidate-card preflight:
   `plan/230-p017-x1-first-ordinary-design-card-preflight.md`
+- P017 X1 K0 R/L factorization preflight:
+  `plan/231-k0-rl-factorization-preflight.md`
 
 ## maintenance rule
 

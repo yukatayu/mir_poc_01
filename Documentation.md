@@ -57,6 +57,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 linked static coherence evidence (not promoted) | `mirrorea_canon/working/WRK-0044-p017-x1-minimum-relation-envelope-coherence.md`, `plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md` |
 | post-WRK-0044 L3 frontier and ordinary-design handoff | `plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md` |
 | P017 X1 first ordinary-design card preflight | `plan/230-p017-x1-first-ordinary-design-card-preflight.md` |
+| P017 X1 K0 R/L factorization preflight | `plan/231-k0-rl-factorization-preflight.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -251,6 +252,11 @@ profile と Canon amendment は未作成です。
   Plan 227 の card を K0 external rejection と K1 typed rejection の最小差で
   preflight 化する。K0 は open、K1 は failure row 未選択の Canon gap であり、
   いずれも relation schema、transition、runtime、Canon proposal は選ばない。
+- `plan/231-k0-rl-factorization-preflight.md`:
+  K0 の relation residence と abstract restore correspondence だけを、一体の
+  q-scoped fiber と coherence を持つ factorized relation families として比較する。
+  両案が追加仮定なしに相互定義できるなら中立 skeleton に畳み、schema、ID、lifecycle、
+  restore function、動的性質を選ばない。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
