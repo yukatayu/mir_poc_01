@@ -881,6 +881,8 @@
   `plan/232-p017-x1-k0-rl-definitional-collapse-screen.md`
 - P017 X1 K0 B fact-status screen:
   `plan/233-p017-x1-k0-b-fact-status-screen.md`
+- P017 X1 K0 typed terminal-success positive-basis card:
+  `plan/234-p017-x1-k0-terminal-success-positive-basis-card.md`
 
 ## maintenance rule
 

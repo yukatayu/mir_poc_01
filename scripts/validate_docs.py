@@ -668,6 +668,7 @@ REQUIRED = [
     "plan/231-k0-rl-factorization-preflight.md",
     "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
     "plan/233-p017-x1-k0-b-fact-status-screen.md",
+    "plan/234-p017-x1-k0-terminal-success-positive-basis-card.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",
