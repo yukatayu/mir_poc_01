@@ -60,8 +60,13 @@ operating notes.
   `python3 scripts/validate_docs.py --authoritative-working-annex`;
   `python3 -m unittest -q scripts.tests.test_validate_docs`; and
   `python3 scripts/check_source_hierarchy.py`.
-- Pending at report write: staged secret/whitespace scans, commit, push, and
-  remote equality check.
+- The direct authoritative run in the dirty main worktree correctly refused
+  unrelated local files. The same committed source was then checked in a clean
+  detached worktree with `python3 scripts/validate_docs.py
+  --authoritative-working-annex` and `python3 -m unittest -q
+  scripts.tests.test_validate_docs`.
+- Pending at report update: final report-only docs validation, follow-up
+  commit/push, and remote equality check.
 
 ## Evidence / outputs / test results
 
@@ -73,10 +78,12 @@ ground-sensitive. A can name a positive candidate-native incidence without
 selecting its ground domain, provided it passes the no-smuggling screen. No
 candidate adopts A, so `OPEN` remains the current result. Canon index accepted
 132 files; source hierarchy accepted 786/786 required paths; documentation,
-authoritative-annex, and focused documentation unit validation are pending
-the final rerun. The first `make docs` run correctly rejected the stale
-`progress.md` header (03:35 JST versus the new 04:41 JST log); this package
-updates the header before final validation.
+and authoritative-annex validation passed. The clean-worktree focused
+documentation unit suite passed 88 tests in 7199.123 seconds. The first
+`make docs` run correctly rejected the stale `progress.md` header (03:35 JST
+versus the new 04:41 JST log), and the next run correctly required the report's
+validator-recognized `更新済み:`/Files-changed form; both were corrected before
+the successful final `make docs` run.
 
 ## What changed in understanding
 
@@ -138,13 +145,14 @@ does not duplicate it. No callable sub-agent interface is available.
 
 ## Skipped validations and reasons
 
-No executable source changed; Lean/runtime/sample runs do not apply. Standard
-documentation and secret validation remain required before close.
+No executable source changed; Lean/runtime/sample runs do not apply. The
+authoritative clean-worktree validation avoids treating unrelated local dirty
+files as this package's evidence.
 
 ## Commit / push status
 
-Pending at report write; validate, commit with `--no-gpg-sign`, push, then
-verify `HEAD == origin/main`.
+The package content is committed and pushed as `c353a88f`. A final report-only
+follow-up commit/push and remote equality check are pending this update.
 
 ## Sub-agent session close status
 
