@@ -146,8 +146,10 @@ because the registered source intentionally supplies only opaque fixture labels.
 
 ## Commit / push status
 
-Evidence commit and push follow final validation. The exact evidence commit,
-artifact digest, and remote equality will be linked before a successor screen.
+Evidence committed as `22d0f95c25500a1018f301ed9ebcc6f3b6d91354`
+(`test: execute P017 X1 M1 countermodel`), pushed to `origin/main`, and verified
+equal to fetched `origin/main`. The evidence is linked by the following
+metadata package before the successor screen.
 
 ## Sub-agent session close status
 

@@ -49,11 +49,12 @@ them as the same would silently select validation-to-failure semantics.
 ## Selected package
 
 working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md was committed
-and pushed before any outcome source existed. Its later source may use exactly
-one opaque fixture anchor, a finite AdverseTag copied only from the P013/P017
-adverse-condition names, and an opaque owner-mutation mark. The source must
-keep the tag vocabulary non-exhaustive and non-operational: it must not compare
-epochs, query authority, inspect witnesses, infer history, or run validation.
+and pushed before any outcome source existed. Its sole retained source uses
+exactly one opaque fixture anchor, a finite AdverseTag copied only from the
+P013/P017 adverse-condition names, and an opaque owner-mutation mark. The
+source keeps the tag vocabulary non-exhaustive and non-operational: it does not
+compare epochs, query authority, inspect witnesses, infer history, or run
+validation.
 
 The registered four controls are neutral, adverse-only for a supplied tag,
 mutation-only, and their seeded overlap. The detector is the existential
@@ -64,9 +65,9 @@ failure row, a store delta, a mutation function, a transition, or a causal edge.
 ## Execution order and stop rule
 
 1. WRK-0043 is registered and pushed before outcome evidence.
-2. Its one Markdown-held Lean block may be materialized only in the declared
-   plan/ lane, then checked under lean --trust=0 with its matrix, axiom,
-   vocabulary, allowlist, and diff checks.
+2. Its one Markdown-held Lean block was materialized only in the declared
+   plan/ lane. The matrix, Lean --trust=0, four theorem axiom reports,
+   vocabulary, allowlist, and diff checks passed.
 3. A detector pass can show only the supplied labels distinguish the controls
    from a seeded overlap. It cannot establish a Mir execution, a validation
    result, rejection, fail-closed behavior, owner failure, mutation behavior,

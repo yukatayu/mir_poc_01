@@ -50,7 +50,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 finite L3 detector (not promoted) | `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`, `plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md` |
 | P017 X1 terminal L3 detector (not promoted) | `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`, `mirrorea_canon/working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`, `plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md` |
 | P017 X1 owner-negative/mutation L3 detector (not promoted) | `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md`, `plan/wrk-0042-p017-x1-owner-negative-mutation-countermodel.md` |
-| P017 X1 M1 adverse/mutation L3 detector (registered) | `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md` |
+| P017 X1 M1 adverse/mutation L3 detector (not promoted) | `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`, `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md`, `plan/wrk-0043-p017-x1-m1-adverse-mutation-countermodel.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -241,9 +241,10 @@ profile と Canon amendment は未作成です。
   `--trust=0` と no-axiom checks を通った non-promoted L3 evidence である。failure
   semantics、mutation rule、attribution、carrier、transition、runtime は選ばない。
   Plan 224 / WRK-0043 は、P013/P017 の source-named M1 adverse condition を
-  supplied finite tag とし、owner-mutation との overlap だけを検査するために
-  登録・push 済みだが、Lean source はまだ materialize していない。validation、
-  rejection、failure、mutation rule、carrier、transition、runtime は選ばない。
+  supplied finite tag とし、owner-mutation との overlap だけを検査した。四 fixture
+  form は Lean `--trust=0` と four no-axiom checks を通った non-promoted L3 evidence
+  である。validation、rejection、failure、mutation rule、carrier、transition、runtime
+  は選ばない。
 - `samples_progress.md`: runnable sample dashboard。
 - `docs/reports/`: task ごとの不変な証跡。
 

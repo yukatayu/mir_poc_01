@@ -131,8 +131,9 @@ rather than recreated.
 
 ## Commit / push status
 
-Metadata commit and push follow final validation. Exact identity and remote
-equality are verified before the reader snapshot and successor screen.
+Metadata committed as `d04074db9d209a222fce3fd30e8671da5e2924ae`
+(`docs: link WRK-0043 evidence`), pushed to `origin/main`, and verified equal to
+fetched `origin/main` before the reader snapshot and successor screen.
 
 ## Sub-agent session close status
 

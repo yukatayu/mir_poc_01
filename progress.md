@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-29 22:24 JST
+最終更新: 2026-07-29 22:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0042 passed distinct finite detectors and WRK-0043 is registered/unexecuted; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -74,8 +74,8 @@ Current exact blockers:
    X1 disposition for V1/R1 cross-locus reads. WRK-0040 passed the
    predicate-only finite detector for that scope; WRK-0041 passed a distinct
    owner-terminal overlap detector; WRK-0042 passed the separate supplied
-   owner-negative/mutation detector; and WRK-0043 is registered to test the
-   distinct supplied M1 adverse-input/mutation overlap. None selects Canon semantics.
+   owner-negative/mutation detector; and WRK-0043 passed the distinct supplied
+   M1 adverse-input/mutation overlap. None selects Canon semantics.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -177,8 +177,8 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 has passed WRK-0040--0042 detectors and registered unexecuted WRK-0043. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 / WRK-0043 registered finite detector | Execute only its declared adverse-input/mutation source, then run a fresh screen only for an independent source condition and falsifier; otherwise retain scoped `no-candidate`. Schema/rules/proof/source/runtime and every positive relation model remain deferred |
+| Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 has passed WRK-0040--0043 detectors. No Canon carrier changed |
+| Research | C2-B/C3 relation-state model | P017 X1 / WRK-0043 passed finite detector | Run a fresh screen only for an independent source condition and falsifier; otherwise retain scoped `no-candidate`. Schema/rules/proof/source/runtime and every positive relation model remain deferred |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
 | Owner / Canon | resulting Canon amendments | only after C0--C7 identifies a minimum rule/profile change; do not infer one from a proposal record |
@@ -191,7 +191,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; X1 has WRK-0040--0042 finite evidence and registered WRK-0043 | heavy | yes, within ADR-0014 and P017 scope |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; X1 has WRK-0040--0043 finite evidence | heavy | yes, within ADR-0014 and P017 scope |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -216,6 +216,12 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-29 22:52 JST: Executed and linked WRK-0043's sole predicate-only
+  Lean source. Its neutral, adverse-only, mutation-only, and seeded overlap
+  fixture forms pass under `--trust=0` with four no-axiom theorem reports. This
+  is non-promoted L3 fixture distinguishability, not M1 validation, fail-closed,
+  mutation, transition, or runtime semantics.
 
 - 2026-07-29 22:24 JST: Completed a fresh P013/P017 source-cut screen and
   registered/pushed WRK-0043. It may test only a supplied M1 adverse-input tag

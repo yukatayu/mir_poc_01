@@ -80,10 +80,10 @@ It identified a separate P013/P017 `X-M1` input-condition consumer: a supplied
 source-named M1 adverse tag must not coexist with a supplied owner-mutation
 mark. Plan 224 records the selection and
 `working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md` is registered,
-pushed, and unexecuted. It is distinct from this plan because no current Canon
-rule maps an M1 adverse input to an owner-terminal-negative result. The new
-record remains fixture-only and does not introduce validation, failure, or
-mutation semantics.
+pushed, executed, and linked with four no-axiom Lean theorem reports. It is
+distinct from this plan because no current Canon rule maps an M1 adverse input
+to an owner-terminal-negative result. The new record remains fixture-only and
+does not introduce validation, failure, or mutation semantics.
 
 ## Non-effects
 
