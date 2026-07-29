@@ -383,6 +383,9 @@ P0A は「T2 の proof skeleton を先に作る」許可ではない。current s
 重複排除を再確認し、既存 lane と現行 consumer を特定し、reserved relation を選ばずに
 正負 branch を区別できる候補だけを pre-register する。候補がなければ追加 WRK を開かず、
 owner checkpoint 1 を待つ。frozen record を修理せず、既存 toy relation を包み直さない。
+Plan 226 は、この規律で post-WRK-0043 の G5 restore-quantifier candidate を再審査し、
+T-RESEARCH-014 / Report 2267 の coupled restoration-interface boundary を弱く言い換えた
+重複と確認した。新しい L3 record は作らない。
 
 owner input 後は次のように一 package ずつ委任する。
 

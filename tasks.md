@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 23:04 JST
+最終更新: 2026-07-29 23:25 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -50,7 +50,9 @@ distinct supplied owner-terminal-negative / owner-mutation detector; it is not
 a failure or mutation model. Plan 224 then selected and WRK-0043 executed the
 distinct supplied M1 adverse-input / owner-mutation detector; it is not a
 validation, failure, or mutation model. Plan 225 closes the current P017 X1
-fixture-only line as scoped no-candidate.
+fixture-only line as scoped no-candidate. Plan 226 separately rejects the
+proposed G5 restore-quantifier countermodel as T-RESEARCH-014/Report 2267
+duplicate evidence.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
@@ -59,6 +61,9 @@ Their current conclusion is:
 - P017 X1 の selected scope では、Plan 225 が current fixture-only line を
   scoped `no-candidate` とした。再審査には独立した source condition、consumer、
   typed falsifier が必要で、Boolean table を拡張しない。
+- G5 restoration については、Plan 226 が good/bad result alternatives を一 relation
+  にまとめるだけの quantifier candidate を duplicate とした。新しい source/consumer
+  delta 又は reproducible defect なしに WRK を作らない。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -94,7 +99,7 @@ review。
 | Order | Work unit | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
 | 0 | T0-T2 planning audit | `A/R`; closed when Plan 196 and snapshots agree with Canon | Macro 0/1 checkpoint; completed baseline |
-| 0A | Conservative statement preflight | `A/R`; assess every genuinely new literal/conditional candidate against ADR-0014. Fresh evidence and Plan 195 patterns are strong LAB selection signals, but do not replace the Canon predicate. | Macro 1/5 early; autonomous screening, no official movement |
+| 0A | Conservative statement preflight | `A/R`; assess every genuinely new literal/conditional candidate against ADR-0014. Plan 226 rejects the proposed G5 restore-quantifier relation as a duplicate of T-RESEARCH-014 / Report 2267. Fresh evidence and Plan 195 patterns are strong LAB selection signals, but do not replace the Canon predicate. | Macro 1/5 early; autonomous screening, no official movement |
 | 1 | T0 profile v2 and fresh evaluation | `O` accepted; `A/R` completed one direct-child artifact. It is valid `fail`, not a lifecycle result | Macro 0/1 complete; no retry authorized |
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |

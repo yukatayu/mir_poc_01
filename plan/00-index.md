@@ -863,6 +863,8 @@
   `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`
 - Post-WRK-0043 fixture-only frontier disposition:
   `plan/225-post-wrk0043-fixture-frontier-disposition.md`
+- Post-WRK-0043 cross-lane P0A preflight:
+  `plan/226-post-wrk0043-cross-lane-p0a-preflight.md`
 
 ## maintenance rule
 
