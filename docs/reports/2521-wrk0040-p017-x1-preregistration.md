@@ -76,6 +76,11 @@ in the WRK and this report, not treated as a normative source.
 - `mirrorea_canon/MAP.md`
 - `mirrorea_canon/INDEX.json`
 - `docs/reports/2521-wrk0040-p017-x1-preregistration.md`
+- `plan/221-c2b-c3-canon-proposal-preparation.md`
+- `Documentation.md`
+- `docs/project-status.md`
+- `progress.md`
+- `tasks.md`
 
 ## Commands run
 
@@ -84,17 +89,24 @@ in the WRK and this report, not treated as a normative source.
 - Checked `git status --short`, `git rev-parse HEAD`, `git rev-parse
   origin/main`, and the timestamp before editing.
 - Ran `cd mirrorea_canon && python3 meta/build-index.py`.
-- Planned before-commit validation: `python3 meta/build-index.py --check`,
-  `make docs`, `git diff --check`, focused WRK wording scans, and a secret
-  scan. No registered outcome command was run before the registration commit.
+- Ran `python3 meta/build-index.py --check`, `git diff --check`, a focused WRK
+  reserved-vocabulary scan, and a concrete Discord-webhook scan before the
+  registration commit.
+- Ran `make docs` after the registration push. It reached the registered WRK
+  checks, then correctly found an unrelated stale `progress.md` update header;
+  the current LAB snapshot synchronizes that header before the final rerun.
+  No registered outcome command was run before the registration commit.
 
 ## Evidence / outputs / test results
 
 `meta/build-index.py` completed successfully with `ok: 128 files indexed`.
-No Lean source exists yet, so no Lean command, countermodel result, or theorem
-claim is available. Documentation and diff validation are run immediately
-before the registration commit and recorded in the closeout amendment to this
-report.
+Before registration, `validate_docs.py` reported only that the proposed WRK
+was not yet committed at `HEAD`, confirming the pre-registration guard. After
+the registration was committed and pushed, `make docs` reached that guard and
+instead found the stale progress-header timestamp now corrected in this
+snapshot. No Lean source exists yet, so no Lean command, countermodel result,
+or theorem claim is available. The final documentation validation is run before
+this snapshot commit and recorded in the closeout amendment.
 
 ## What changed in understanding
 
@@ -121,32 +133,32 @@ evidence.
 
 ## Plan update status
 
-`plan/` update deferred to the immediately following LAB snapshot commit. The
-ADR-0014 registration commit is intentionally restricted to the WRK and exact
-operational metadata; Plan 221 will then record that registration exists before
-any outcome source is added.
+`plan/` 更新済み: Plan 221 now names WRK-0040 as the registered, unexecuted
+predicate-only countermodel and narrows the next package to its materialization
+and execution without adding a positive semantic claim.
 
 ## Documentation.md update status
 
-`Documentation.md` update deferred to the immediately following LAB snapshot
-commit for the same registration-cut isolation reason. The reader-facing state
-does not yet claim an executed result.
+`Documentation.md` 更新済み: the reader index links WRK-0040 and labels it as
+an unexecuted, five-detector L3 preregistration rather than a language or
+runtime feature.
 
 ## docs/project-status.md update status
 
-`更新` deferred to the immediately following LAB snapshot commit. The concise
-status will say that the X1 countermodel is pre-registered and unexecuted.
+更新済み: the concise status now distinguishes the registered detector from an
+unselected receipt/load definition, positive model, proof, or Canon amendment.
 
 ## progress.md update status
 
-`progress.md` update deferred to the immediately following LAB snapshot commit.
-The progress log will record the registration with its actual timestamp.
+`progress.md` 更新済み: the current macro/feature state and timestamped log
+record registration and snapshot synchronization while retaining the
+unexecuted/non-promoted boundary.
 
 ## tasks.md update status
 
-`tasks.md` update deferred to the immediately following LAB snapshot commit.
-The next autonomous package remains registered execution, not a positive
-semantic adoption.
+`tasks.md` 更新済み: package 5 now makes registered detector execution the
+next autonomous task and keeps every positive relation model outside the
+current package.
 
 ## samples_progress.md update status
 
@@ -170,9 +182,11 @@ pushed, as required by `working/README.md`. No heavy build was needed.
 
 ## Commit / push status
 
-Pending at report write. The registration commit and push are performed only
-after the planned documentation/diff validation passes; its exact SHA is added
-in the closeout amendment.
+Registration committed as
+`fd85fbc5ebcc193357f9d1f9123211d82d4bc4bf` (`docs: preregister P017 X1
+countermodel`), pushed to `origin/main`, and verified equal to fetched
+`origin/main`. This LAB snapshot update is committed and pushed next; the
+final report-closeout amendment follows that commit.
 
 ## Sub-agent session close status
 

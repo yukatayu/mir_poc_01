@@ -86,12 +86,21 @@ facts, and never derive them from incidental source or transport data.
 
 ## Immediate next state
 
-After the recorded X1 disposition, the first autonomous technical work is a
-narrow selected-scope model against Plan 220's three-frontier test. It begins
-with a new L3 pre-registration, not a rule text, runtime experiment, or proof
-claim. The research stops and returns to the ordinary Canon process if the
-model needs a Core primitive, source identity, transport carrier, public
-contract, causal generator, occurrence kind, or new dynamic failure row.
+The first autonomous technical work is now registered as
+`working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`. It is an
+unexecuted predicate-only finite countermodel, not a rule text, runtime
+experiment, proof claim, or positive relation-state model. It receives two
+supplied equal-incidental but distinct occurrence witnesses, two supplied
+post-load witnesses, and supplied restore correspondences; it tests only
+whether a neutral control can be distinguished from the five `SEP`, `PHASE`,
+`ONE`, `AUTH`, and `OBS` collapse mutants.
+
+The next autonomous package materializes and executes that registered artifact
+in the existing `plan/` Lean evidence lane. The research stops and returns to
+the ordinary Canon process if it needs a Core primitive, source identity,
+transport carrier, public contract, causal generator, occurrence kind, dynamic
+failure row, relation schema, transition, restore function, consumption
+representation, authority algorithm, or observer projection.
 
 ## Non-effects
 

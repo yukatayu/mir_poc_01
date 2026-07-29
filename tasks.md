@@ -1,6 +1,6 @@
 # tasks
 
-最終更新: 2026-07-29 18:42 JST
+最終更新: 2026-07-29 19:32 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -41,14 +41,15 @@ recommendation is explicit relation-valued configuration state anchored by the
 in-history request occurrence. Plan 220 then records the pending, typed branch,
 causal, linear, redaction, load, scope, and elaboration obligations. P017 passed
 an independent final review and the owner recorded X1 for V1/R1 cross-locus
-reads only. The pre-disposition C0--C7 screen found no new L3 candidate; X1 now
-opens the first ADR-0014-eligible bounded model, not a Canon carrier selection.
+reads only. The pre-disposition C0--C7 screen found no new L3 candidate;
+WRK-0040 is now the first ADR-0014-eligible bounded model, registered but
+unexecuted, not a Canon carrier selection.
 Their current conclusion is:
 
 - owner inputなしでofficial T2 exitまで連続自走することはできない。
 - owner input前でも、既存Canonのliteral transcription / conditional lemmaだけで
   閉じる候補のADR-0014 eligibility preflightは自走できる。
-- P017 X1 の selected scope では、first L3 pre-registration と、その後の
+- P017 X1 の selected scope では、WRK-0040 の registered execution と、その後の
   existing-lane model/falsification package を ADR-0014 の範囲で自走できる。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
@@ -90,7 +91,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. P017 X1 now authorizes one narrow ADR-0014 L3 model for V1/R1 cross-locus reads; it does not select a Canon carrier. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; first bounded L3 model is next |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and its adverse rows. P017 X1 now has one narrow ADR-0014 L3 model, WRK-0040, pre-registered for V1/R1 cross-locus reads; its predicate-only execution is next and does not select a Canon carrier. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics with inspectable grounds. | Macro 1 early; registered detector execution next |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -134,7 +135,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. The next L3 model must test unique pending binding, separate service/receipt-use state, authority, save/load, observation, and source non-effects; schema/rule/proof remain unselected |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040 is registered to detect five collapsed cases before any positive model; schema/rule/proof remain unselected |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -226,6 +227,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`.
 - C2-B/C3 Canon proposal preparation:
   `plan/221-c2b-c3-canon-proposal-preparation.md`.
+- P017 X1 registered L3 countermodel:
+  `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`.
 - Statement identity: `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`.
 - Whole-theory reconciliation: `plan/whole-theory-foundation-audit-20260725.md`.
 - Last autonomous source-cut screen: `docs/reports/2433-post-audit-autonomous-rescreen.md`.
