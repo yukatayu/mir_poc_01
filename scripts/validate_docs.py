@@ -677,6 +677,7 @@ REQUIRED = [
     "plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md",
     "plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md",
     "plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md",
+    "plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

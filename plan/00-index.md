@@ -899,6 +899,8 @@
   `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md`
 - P017 X1 K0 H_K-rs integrated conditional candidate selection:
   `plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md`
+- P017 X1 K0 H_K-rs L3 standing-eligibility recheck:
+  `plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md`
 
 ## maintenance rule
 
