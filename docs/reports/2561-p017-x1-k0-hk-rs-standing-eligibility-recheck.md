@@ -59,7 +59,13 @@ before the actual record.
 - target file discovery, source reads, and targeted `rg` audits
 - exact SHA-256 capture for the prospective Canon and LAB authority inputs
 - proposed source-path absence check
-- validation commands: pending after the documentation edits
+- `git diff --check`
+- `python3 scripts/validate_docs.py` (normal worktree)
+- `python3 scripts/check_source_hierarchy.py` (normal worktree)
+- `python3 scripts/validate_docs.py --authoritative-working-annex` (clean
+  detached worktree at `8eb1aff9`)
+- `python3 -m unittest -q scripts.tests.test_validate_docs` (the same clean
+  detached worktree)
 
 ## Evidence / outputs / test results
 
@@ -67,8 +73,11 @@ At the screened cut, the prospective record has an existing LAB lane, a
 source-backed independent consumer, a candidate-specific falsifier set, and a
 result ceiling below all reserved surfaces. It can therefore be registered,
 but only after it pins a new exact parent cut. No outcome source or execution
-exists. Documentation and focused validator results are pending for this new
-plan/report update.
+exists. Normal documentation validation passed with 1715 numbered reports;
+source-hierarchy validation found 793/793 required paths. The fixed content
+commit `8eb1aff9` passed authoritative working-annex validation in a clean
+detached worktree. Its focused validator regression suite completed `88` tests
+in `4153.040s` with `OK`.
 
 ## What changed in understanding
 
@@ -128,12 +137,15 @@ validate its own exact inputs rather than relying on this report as authority.
 ## Skipped validations and reasons
 
 No Lean/runtime/sample command applies because this package creates no source
-or executable behavior. Documentation validation and focused validator tests
-are pending after the registration-screen edits.
+or executable behavior. The applicable documentation, working-annex,
+source-hierarchy, and focused validator checks were run. No validation was
+skipped that could exercise this change.
 
 ## Commit / push status
 
-Pending at report write.
+The validated content commit `8eb1aff9` was pushed to `origin/main` before the
+clean-worktree checks. This report/result follow-up is committed and pushed as
+the immediate next documentation-only commit; no force push was needed.
 
 ## Sub-agent session close status
 
