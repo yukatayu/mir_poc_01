@@ -76,7 +76,9 @@ role, retains direct A/A only as unadopted advice, and forbids requester
 `PendingFor`, terminal absence, M1/authority, queue, and transport as its
 basis. Plan 238 then compares typed terminal failure under abstract row
 containment; its A/A is unadopted and does not select a concrete row, validation,
-receipt, no-mutation, or persistence. Nothing selects a relation schema, transition, source form, runtime,
+receipt, no-mutation, or persistence. Plan 239 then separates consulted
+validation provenance from M1 input and result provenance; A/B are unadopted
+and C remains OPEN. Nothing selects a relation schema, transition, source form, runtime,
 proof, or Canon amendment.
 Their current conclusion is:
 
@@ -105,8 +107,8 @@ Their current conclusion is:
   `RP-min` 下で result provenance A を conditional、B を non-derivable、C を
   operative `OPEN` とし、A を採用しない。Plan 237 は outstanding A/A を未採用の
   advisory とし、requester pending 等による shortcut を禁止する。Plan 238 は typed
-  terminal failure A/A を未採用に保ち、concrete row 等を選ばない。K1 は failure row の
-  Canon gap として止める。
+  terminal failure A/A を未採用に保ち、concrete row 等を選ばない。Plan 239 は最後の
+  consulted provenance cell を OPEN に保つ。次は complete `H_K` intake か stop record、K1 は failure row の Canon gap。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
@@ -147,7 +149,7 @@ review。
 | 2 | Fixed-control drift disposition | `A/R` scoped audit complete; `O` retains/defer or starts normal Canon rebase proposal | Macro 0/1 current blocker |
 | 3 | G0-D3 exit decision | `O`; only after a valid `pass` artifact, exact digest acceptance and canonical exit record | official T1 entry blocker |
 | 4 | Lifecycle/profile contract | `A` prepares, `O` decides; Gate status mapping, T1/T2 profiles, proof-skeleton meaning, narrow T2/I1-readiness relation, bootstrap/C-static timing are exact | Macro 0/1 middle; one design/decision package |
-| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and adverse rows. Plan 227 prepares R/B/T/U/C/L; Plans 228/WRK-0044 retain static account; Plans 230--232 retain K0 R/L OPEN delta; Plan 233 keeps all B classifications OPEN; Plans 234--235 compare direct success and the typed owner-result role; Plan 236 keeps result provenance A unadopted/conditional, B non-derivable under `RP-min`, and C operative `OPEN`; Plan 237 keeps owner outstanding A/A unadopted; Plan 238 keeps typed terminal failure A/A unadopted without choosing a row. No Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model is selected. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics. | Macro 1 early; preflight consulted validation provenance; retain OPEN and do not choose presentation or repair K1 |
+| 5 | Selected-direction composition | `A/R` fixed-presentation line is bounded: WRK-0028--0039 retain finite evidence. Plans 215--220 expose the reply/receipt/consumption gap and adverse rows. Plan 227 prepares R/B/T/U/C/L; Plans 228/WRK-0044 retain static account; Plans 230--232 retain K0 R/L OPEN delta; Plan 233 keeps all B classifications OPEN; Plans 234--235 compare direct success and the typed owner-result role; Plan 236 retains result provenance C OPEN; Plans 237--238 retain outstanding/failure A/A unadopted; Plan 239 retains consulted provenance C OPEN and completes the per-cell inventory. No Canon carrier, validation, branch, failure, mutation, transition, causal order, SaveObject, or model is selected. C4/C5 proper are Canon design, C0-D/C1/C6 are duplicate or select semantics, and C7 remains downstream of concrete uniquely reconstructible semantics. | Macro 1 early; prepare one complete `H_K` candidate intake or explicit stop record; do not add per-cell cards or repair K1 |
 | 5A | fiberwise relational finite comparison | `A/R`; WRK-0039 passed the declared exact-table graph checks and retained bounded evidence only. Plan 214 closes this finite lane at the current cut. Plans 215--217 specify correlation/lifecycle/restore conditions and a carrier-neutral comparison method. | Macro 1 early; completed finite package; no semantic selection |
 | 6 | Shared formal model | `A/R`, then `O` integration; non-opaque Core/Config/Step/WF/elaboration/history relations and Plan 199 adverse cases exist | Macro 1/5 middle; heavy |
 | 7 | G1 package | `A/R`, then `O`; exact OBL-001/020/021 statements and SCN-01/02 explanation | Macro 1/5 middle; heavy |
@@ -191,7 +193,7 @@ shared prerequisites are fixed. Gate/Phase acceptance remains ordered.
 | Item | Impact | Options | Current recommendation |
 | --- | --- | --- | --- |
 | Plan 199 C0 | elaboration outcome existence | source authority, front-end stage domain, diagnostic abstraction, totality/equality separation | WRK-0028 confirms source-local roles at one cut: current displayed grammar differs from P004/P015 direction, and P008 does not select domain/Diagnostic/OBL details. C0-A is complete-by-R0 only at that cut; WRK-0029 retains C0-B only as an opaque rank-increasing conditional DAG, without defining `WellScoped` or outcomes. |
-| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040--0043 retain detector-only evidence; Plan 228/WRK-0044 retain static account; Plan 230 opens K0 and bounds K1; Plan 232 retains K0 R/L delta; Plan 233 leaves all B rows OPEN; Plan 234's A/A is advisory; Plan 235 finds its owner-result role conditional on explicit declaration; Plan 236 keeps result-provenance A unadopted and C `OPEN`; Plans 237--238 keep outstanding and typed-terminal-failure A/A unadopted. Schema/rule/proof remain unselected |
+| Plan 199 C1--C5 | value flow, receipt, service/admission occurrence | P017 X1 relation-state envelope | X1 is recorded and limited to V1/R1 cross-locus reads. WRK-0040--0043 retain detector-only evidence; Plan 228/WRK-0044 retain static account; Plan 230 opens K0 and bounds K1; Plan 232 retains K0 R/L delta; Plan 233 leaves all B rows OPEN; Plans 234/237/238 retain A/A advice unadopted; Plan 235 retains its conditional owner-result role; Plans 236/239 retain provenance C `OPEN`. The per-cell basis inventory is complete; schema/rule/proof remain unselected |
 | Plan 199 C2 | post-admission validation context | payload equality, semantic request identity, admitted-execution binding, replay policy, persistence | WRK-0028 confirms source-local roles: theory/01/05 expose request/authority facts, while P012/P013 remain bounded directions and M1 leaves identity/replay open. WRK-0030 closes C2-A as source-tagged documentary non-substitution only, not an equality matrix or semantic candidate. |
 | Plan 199 C6 | Surface/SCN scalar closure | explicit scalar/Core correspondence alternatives | WRK-0027 confirms displayed indexed rules do not silently cover SCN-08's scalar/terminal. Compare distinct scalar Core versus already-declared finite-domain elaboration; no hidden key/default or SCN-invalid inference. |
 | Plan 199 C7 | source ergonomics | infer only uniquely reconstructible facts with inspectable grounds | WRK-0035 checks a generic range-only condition; WRK-0036 shows individually checked erasures cannot be composed unchecked. Do not treat either as a source rule; future cumulative representations require direct checking |
@@ -311,6 +313,8 @@ candidate touching L0/L1, Core/external contracts, SCN/Gate/Phase, or
   `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md`.
 - P017 X1 K0 typed terminal owner-service-failure positive-basis card:
   `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md`.
+- P017 X1 K0 consulted validation-provenance basis and nonconflation screen:
+  `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md`.
 - P017 X1 owner-terminal candidate selection:
   `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`.
 - P017 X1 owner-negative/mutation candidate selection:

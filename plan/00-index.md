@@ -891,6 +891,8 @@
   `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md`
 - P017 X1 K0 typed terminal owner-service-failure positive-basis card:
   `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md`
+- P017 X1 K0 consulted validation-provenance basis and nonconflation screen:
+  `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md`
 
 ## maintenance rule
 

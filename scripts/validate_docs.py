@@ -673,6 +673,7 @@ REQUIRED = [
     "plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md",
     "plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md",
     "plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md",
+    "plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

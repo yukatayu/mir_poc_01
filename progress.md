@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 10:56 JST
+最終更新: 2026-07-30 11:01 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; Plan 236 screens owner-result provenance under `RP-min`; Plans 237--238 screen owner outstanding and typed terminal failure; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. K0 common R/L is neutral, its primitive delta remains OPEN, and all eight B fact rows remain OPEN. Plan 238 keeps direct typed terminal-failure A/A unadopted and forbids concrete rows, validation, receipt, no-mutation, and persistence as bases. Next is consulted validation-provenance preflight; K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; Plans 236--239 screen each per-cell provenance/outstanding/failure basis; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. K0 common R/L is neutral, its primitive delta remains OPEN, and all eight B fact rows remain OPEN. Plan 239 distinguishes M1 input, consulted validation, and result provenance; A/B remain unadopted and C OPEN. Per-cell work now stops: next is complete `H_K` candidate intake or an explicit stop record. K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -247,6 +247,8 @@ durable save/load, or public product completion is claimed.
   A/A is advisory only, while concrete rows and failure-delivery behavior stay open.
 - 2026-07-30 10:56 JST: Plan 238's clean-worktree authoritative documentation
   validation passed; the focused validator suite passed 88 tests in 4111.259s.
+- 2026-07-30 11:01 JST: Plan 239 completed the consulted validation-provenance
+  screen. It separates M1 input and result provenance; all Plan 233 cells stay OPEN.
 
 - 2026-07-30 03:17 JST: Plan 232 executed the K0 R/L interpretation screen.
   The common constraint ledger is neutral, but primitive whole-fiber and
