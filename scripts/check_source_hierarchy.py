@@ -327,6 +327,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md",
         "plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md",
         "plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md",
+        "plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md",
     ],
     "scripts": [
         "scripts",

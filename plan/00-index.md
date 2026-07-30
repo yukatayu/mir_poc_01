@@ -897,6 +897,8 @@
   `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md`
 - P017 X1 K0 H_K-rs occurrence-accounting preflight:
   `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md`
+- P017 X1 K0 H_K-rs integrated conditional candidate selection:
+  `plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md`
 
 ## maintenance rule
 
