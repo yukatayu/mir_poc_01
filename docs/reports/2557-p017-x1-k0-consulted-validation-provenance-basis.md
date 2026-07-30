@@ -1,6 +1,6 @@
 # Report 2557 — P017 X1 K0 consulted validation-provenance basis
 
-- Date: 2026-07-30 11:01 JST
+- Date: 2026-07-30 12:22 JST
 - Author / agent: Codex
 - Scope: Complete the final Plan 233 per-cell basis screen.
 - Decision levels touched: LAB ordinary design; no Canon/OBL/Gate/Phase decision.
@@ -46,8 +46,8 @@ temporary Oracle review `p017-consulted-validation-provenance-preflight`.
 ## Commands run
 
 Source reads, status inspection, Oracle review, `make docs`, whitespace check,
-and concrete Discord-webhook scan. Clean-worktree authoritative validation and
-focused documentation tests remain after the content commit.
+concrete Discord-webhook scan, clean-worktree authoritative documentation
+validation, and the focused documentation-validator unit suite.
 
 ## Evidence / outputs / test results
 
@@ -59,6 +59,20 @@ premises; all Plan 233 rows remain `OPEN`.
 Documentation validation passed with Canon index `132`, source hierarchy
 `789/789`, and `1711` numbered reports. Whitespace and webhook scans had no
 findings.
+
+After the content commit, a detached clean worktree at `2d5b17f2` passed
+`python3 scripts/validate_docs.py --authoritative-working-annex`. The focused
+`python3 -m unittest -q scripts.tests.test_validate_docs` suite then passed all
+88 tests in `4267.646s`. This package changes documentation evidence only; it
+does not require Lean, runtime, or active-sample execution.
+
+After the evidence-sync edits, the normal current-worktree
+`python3 scripts/validate_docs.py` again passed with `1711` reports. An
+authoritative-mode attempt on the intentionally non-clean main worktree stopped
+only at its clean-worktree precondition, listing local ignored state and the
+four uncommitted documentation files; it found no content violation. The final
+authoritative check is therefore deferred to the fresh clean worktree created
+from this evidence commit.
 
 ## What changed in understanding
 
@@ -78,7 +92,8 @@ minimum model, or record a justified stop if no candidate is available.
 
 ## Plan update status
 
-`plan/` updated: Plan 239 completes the per-cell inventory and index.
+`plan/` content was updated in the already-pushed Plan 239 commit; this final
+validation-evidence update makes no further `plan/` change.
 
 ## Documentation.md update status
 
@@ -86,15 +101,18 @@ minimum model, or record a justified stop if no candidate is available.
 
 ## docs/project-status.md update status
 
-更新済み: per-cell work is complete without model adoption.
+更新済み: per-cell work is complete without model adoption, and its independent
+documentation validation is recorded.
 
 ## progress.md update status
 
-`progress.md` updated: next work is complete candidate intake or stop record.
+`progress.md` updated: Plan 239 validation is complete; next work is a
+complete candidate intake or stop record.
 
 ## tasks.md update status
 
-`tasks.md` updated: per-cell cards are closed and must not be extended.
+`tasks.md` updated: the validated per-cell cards are closed and must not be
+extended.
 
 ## samples_progress.md update status
 
@@ -109,12 +127,15 @@ interface is available.
 ## Skipped validations and reasons
 
 No executable source changed; Lean/runtime/sample runs do not apply. The
-authoritative and focused documentation tests remain for the committed source.
+authoritative validation and focused documentation tests passed as recorded
+above. The final evidence-commit authoritative validation is intentionally
+performed after commit in a fresh clean worktree.
 
 ## Commit / push status
 
-Content is ready for the first commit with `--no-gpg-sign`; then run clean
-worktree validation, record evidence, push, and verify remote equality.
+Content was committed and pushed as `2d5b17f2`. This validation-evidence
+follow-up is committed with `--no-gpg-sign`, pushed, and checked for
+`HEAD == origin/main` in the same package close.
 
 ## Sub-agent session close status
 

@@ -108,7 +108,9 @@ Their current conclusion is:
   operative `OPEN` とし、A を採用しない。Plan 237 は outstanding A/A を未採用の
   advisory とし、requester pending 等による shortcut を禁止する。Plan 238 は typed
   terminal failure A/A を未採用に保ち、concrete row 等を選ばない。Plan 239 は最後の
-  consulted provenance cell を OPEN に保つ。次は complete `H_K` intake か stop record、K1 は failure row の Canon gap。
+  consulted provenance cell を OPEN に保ち、clean-worktree documentation validation と
+  88 件の focused validator unit test を通過した。次は complete `H_K` intake か stop
+  record、K1 は failure row の Canon gap。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
