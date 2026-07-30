@@ -66,6 +66,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 owner-outstanding positive-basis / pending-nonconflation card | `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md` |
 | P017 X1 K0 typed terminal owner-service-failure positive-basis card | `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md` |
 | P017 X1 K0 consulted validation-provenance basis / nonconflation screen | `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md` |
+| P017 X1 K0 minimum-model H_K intake / receipt-endpoint reopen | `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -301,6 +302,12 @@ profile と Canon amendment は未作成です。
   P013 の入力 claim、P017 item 1 の実際に consultation した authority ground、Plan 236
   の result-producing ground を分ける。direct linkage A は条件付き、導出 B は現在の
   positive premise 不足で不成立、C は `OPEN`。全 eight row は未採用のまま維持する。
+- `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md`:
+  Canon だけでは successful requester semantic receipt の endpoint は未選択だが、
+  `s` の reply-send projection と distinct generic receive occurrence `r` を `H_K` として
+  screen する余地は残る。owner-side service を receipt に潰さず、predicate や relation
+  membership を causal edge の代用にしない。次は `H_K-rs` occurrence-accounting preflight
+  であり、new primitive が不可避な場合だけ ordinary Canon boundary へ止める。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、

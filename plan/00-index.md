@@ -893,6 +893,8 @@
   `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md`
 - P017 X1 K0 consulted validation-provenance basis and nonconflation screen:
   `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md`
+- P017 X1 K0 minimum-model H_K intake and fail-closed receipt-causality gate:
+  `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md`
 
 ## maintenance rule
 

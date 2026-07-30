@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 12:22 JST
+最終更新: 2026-07-30 12:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; Plans 236--239 screen each per-cell provenance/outstanding/failure basis; all OBL rows `open` | A LAB recommendation exists for explicit relation state anchored by request occurrence, but pending, typed branch, redaction, load, validation/mutation semantics, and any positive model remain obligations until Canon selects a model. K0 common R/L is neutral, its primitive delta remains OPEN, and all eight B fact rows remain OPEN. Plan 239 distinguishes M1 input, consulted validation, and result provenance; A/B remain unadopted and C OPEN. Per-cell work now stops: next is complete `H_K` candidate intake or an explicit stop record. K1 stops at an unselected failure row. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--235 compare direct success and the typed owner-result role; Plans 236--239 screen each per-cell provenance/outstanding/failure basis; Plan 240 finds no C-level successful receipt endpoint but reopens the H_K-rs generic-receive candidate screen; all OBL rows `open` | The accepted X1 direction remains bounded. Plan 240 establishes that relation/pending/branch/provenance names cannot replace a C-level endpoint, but this does not prohibit an explicit H_K reply-send/generic-receive account using existing Theory 04 `send -> receive`. Next is the H_K-rs occurrence-accounting preflight; it stops for owner/Canon only if a new primitive, rule, constructor, or history schema is unavoidable. K1 remains a failure-row Canon gap. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -218,6 +218,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-30 12:38 JST: Plan 240 ran the first complete P017 X1 K0 H_K intake.
+  Canon alone has no successful requester semantic-receipt endpoint distinct
+  from owner service, but independent review found that this does not exclude
+  the reversible H_K-rs reply-send/generic-receive screen. No relation
+  presentation, owner fact basis, event kind, transition, or model was selected;
+  the next autonomous task is that fail-closed occurrence-accounting preflight.
 
 - 2026-07-30 12:22 JST: Plan 239's detached clean-worktree authoritative
   documentation validation and all 88 focused validator unit tests passed
