@@ -1,6 +1,6 @@
 # Report 2558 — P017 X1 K0 minimum-model H_K intake
 
-- Date: 2026-07-30 12:38 JST
+- Date: 2026-07-30 14:12 JST
 - Author / agent: Codex
 - Scope: Decide whether the completed per-cell basis inventory admits one full bounded H_K model.
 - Decision levels touched: LAB ordinary design; no Canon/OBL/Gate/Phase decision.
@@ -54,9 +54,9 @@ Canon README/MAP, theory/01/02/04/05/07, P012/P013/P017, ADR-0014; LAB Plans
 
 ## Commands run
 
-Source reads, Oracle temporary review, source hierarchy/doc validation,
-whitespace and secret scans, and clean-worktree authoritative validation are
-run before close.
+Source reads, two Oracle temporary reviews, Canon index/source-hierarchy/doc
+validation, whitespace and secret scans, clean-worktree authoritative
+validation, and the focused documentation-validator unit suite.
 
 ## Evidence / outputs / test results
 
@@ -70,6 +70,12 @@ these facts do not rule out the explicit H_K-rs path: `s` has a reply-send
 projection and a later generic receive occurrence `r` performs semantic
 receipt through the existing generator. The intake therefore reopens for that
 candidate screen; it does not freeze a complete tuple or promote `r` to Canon.
+
+At `ec18e571`, a detached clean worktree passed
+`python3 scripts/validate_docs.py --authoritative-working-annex` with `1712`
+reports. The focused `python3 -m unittest -q scripts.tests.test_validate_docs`
+suite then passed all 88 tests in `4031.022s`. The current-worktree source
+hierarchy was `790/790` and Canon index check found `132` files.
 
 ## What changed in understanding
 
@@ -131,12 +137,15 @@ its own fail-closed screen. No callable sub-agent interface is available.
 ## Skipped validations and reasons
 
 No executable source changed. Lean/runtime/sample validation does not apply to
-this source-conformance and design-boundary package.
+this source-conformance and design-boundary package. The clean-worktree
+authoritative and focused documentation-validator tests passed as recorded
+above.
 
 ## Commit / push status
 
-Pending package validation, `--no-gpg-sign` commit, push, and remote-equality
-check.
+Plan content was committed and pushed as `ec18e571`. This validation-evidence
+follow-up is committed with `--no-gpg-sign`, pushed, and checked for
+`HEAD == origin/main` in the same package close.
 
 ## Sub-agent session close status
 

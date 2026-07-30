@@ -111,8 +111,9 @@ Their current conclusion is:
   consulted provenance cell を OPEN に保ち、clean-worktree documentation validation と
   88 件の focused validator unit test を通過した。Plan 240 は complete `H_K` intake を
   実施し、C-level successful requester semantic receipt endpoint は未選択だが、
-  `H_K-rs` generic-receive candidate を reopen した。次はその occurrence-accounting
-  preflight であり、K1 は failure row の Canon gap。
+  `H_K-rs` generic-receive candidate を reopen し、exact clean commit の authoritative
+  validation と 88 件の focused validator unit test を通過した。次はその
+  occurrence-accounting preflight であり、K1 は failure row の Canon gap。
 - P004/P008/P012/P013/P015/P016 の direction は記録済みである。各 package が
   ADR-0014 の standing predicate と existing-lane 条件を個別に満たす範囲で、
   composition、形式化、反例、bounded validation、review、report、commit/push は自走できる。
