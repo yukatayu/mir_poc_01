@@ -895,6 +895,8 @@
   `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md`
 - P017 X1 K0 minimum-model H_K intake and fail-closed receipt-causality gate:
   `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md`
+- P017 X1 K0 H_K-rs occurrence-accounting preflight:
+  `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md`
 
 ## maintenance rule
 

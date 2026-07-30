@@ -67,6 +67,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 typed terminal owner-service-failure positive-basis card | `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md` |
 | P017 X1 K0 consulted validation-provenance basis / nonconflation screen | `plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md` |
 | P017 X1 K0 minimum-model H_K intake / receipt-endpoint reopen | `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md` |
+| P017 X1 K0 H_K-rs occurrence-accounting preflight | `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -304,10 +305,16 @@ profile と Canon amendment は未作成です。
   positive premise 不足で不成立、C は `OPEN`。全 eight row は未採用のまま維持する。
 - `plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md`:
   Canon だけでは successful requester semantic receipt の endpoint は未選択だが、
-  `s` の reply-send projection と distinct generic receive occurrence `r` を `H_K` として
-  screen する余地は残る。owner-side service を receipt に潰さず、predicate や relation
-  membership を causal edge の代用にしない。次は `H_K-rs` occurrence-accounting preflight
-  であり、new primitive が不可避な場合だけ ordinary Canon boundary へ止める。
+  `s` の reply-send projection と、receive role を担う distinct candidate occurrence `r` を
+  `H_K` として screen する余地は残る。owner-side service を receipt に潰さず、predicate や
+  relation membership を causal edge の代用にしない。
+- `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md`:
+  この screen は `PREFLIGHT-ADMIT`。Theory 04 が既存の generic occurrence kind や receive
+  rule を供給するとは読まない。`q -> s -> r` は明示した `H_K` trace としてのみ比較でき、
+  `r` を operational に生成する rule、history field、new constructor、hidden matching/persistence
+  key が必要なら Canon gap として止める。次は一つの presentation を選び、R/B/T/U/C/L を
+  全て明示した conditional trace candidate が ADR-0014 の L3 preregistration 条件を満たすかを
+  選別する。実装・Canon amendment・public behavior は未選択。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
