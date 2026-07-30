@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 08:00 JST
+最終更新: 2026-07-30 09:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -241,6 +241,8 @@ durable save/load, or public product completion is claimed.
   Direct positive membership is the smallest conditional A/A basis, but is not
   adopted; requester `PendingFor`, terminal absence, M1/authority, queue, and
   transport cannot establish owner outstanding, so all Plan 233 rows stay OPEN.
+- 2026-07-30 09:23 JST: Plan 237's clean-worktree authoritative documentation
+  validation passed; the focused validator suite passed 88 tests in 3993.006s.
 
 - 2026-07-30 03:17 JST: Plan 232 executed the K0 R/L interpretation screen.
   The common constraint ledger is neutral, but primitive whole-fiber and

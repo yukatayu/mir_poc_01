@@ -63,8 +63,9 @@ operating notes.
 - `make docs`; `python3 scripts/validate_docs.py`; `python3
   scripts/check_source_hierarchy.py`; `git diff --check`; process-residue
   inspection; and a direct concrete-Discord-webhook scan.
-- Authoritative validation and the focused documentation unit suite remain for
-  the committed clean worktree.
+- In a clean detached worktree at `eb725b34`: `python3
+  scripts/validate_docs.py --authoritative-working-annex` and `python3 -m
+  unittest -q scripts.tests.test_validate_docs`.
 
 ## Evidence / outputs / test results
 
@@ -80,7 +81,9 @@ not presently available. Therefore Plan 233 remains all `OPEN`.
 Documentation validation passed with Canon index `132`, source hierarchy
 `787/787`, and `1709` numbered reports. The direct hierarchy rerun also passed.
 The whitespace check and concrete-webhook scan had no findings, and no prior
-documentation-validation or unit-test process remained running.
+documentation-validation or unit-test process remained running. The clean
+worktree authoritative-annex validation passed; its focused documentation unit
+suite passed all 88 tests in `3993.006s`.
 
 ## What changed in understanding
 
@@ -143,14 +146,14 @@ callable sub-agent interface is available.
 ## Skipped validations and reasons
 
 No executable source changed; Lean/runtime/sample runs do not apply. The
-authoritative validation and focused documentation unit suite require the
-committed clean worktree; they have not yet run at this report update.
+clean-worktree authoritative validation and focused documentation unit suite
+were run. No additional validation is skipped.
 
 ## Commit / push status
 
-Content is ready for the first commit with `--no-gpg-sign`; then run the clean
-worktree validations, record their evidence in a follow-up report update, push,
-and verify `HEAD == origin/main`.
+The package content is committed and pushed as `eb725b34`. This final
+report-evidence update still needs its own commit/push and remote-equality
+check.
 
 ## Sub-agent session close status
 
