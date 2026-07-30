@@ -889,6 +889,8 @@
   `plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md`
 - P017 X1 K0 owner-outstanding positive-basis and pending-nonconflation card:
   `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md`
+- P017 X1 K0 typed terminal owner-service-failure positive-basis card:
+  `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md`
 
 ## maintenance rule
 

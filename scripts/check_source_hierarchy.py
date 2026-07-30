@@ -323,6 +323,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/235-p017-x1-typed-owner-result-role-conformance-audit.md",
         "plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md",
         "plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md",
+        "plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md",
     ],
     "scripts": [
         "scripts",

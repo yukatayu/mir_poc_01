@@ -64,6 +64,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 typed owner-result role conformance audit | `plan/235-p017-x1-typed-owner-result-role-conformance-audit.md` |
 | P017 X1 K0 owner-result provenance basis / definability screen | `plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md` |
 | P017 X1 K0 owner-outstanding positive-basis / pending-nonconflation card | `plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md` |
+| P017 X1 K0 typed terminal owner-service-failure positive-basis card | `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
@@ -291,6 +292,10 @@ profile と Canon amendment は未作成です。
   transport から導かない。A-Sigma/B-Pi とも direct positive membership (A) が最小の
   条件付き basis だが未採用であり、owner-service-pending 由来の導出 (B) は独立した
   positive source を待つ。したがって二 cell を含む Plan 233 の全 row は `OPEN` のまま。
+- `plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md`:
+  typed terminal owner-service failure は theory/02 の抽象 row containment の範囲で
+  A/B/C を比較する。A/A は未採用の advisory で、failure row、validation、receipt、
+  no-mutation、persistence は選ばず、Plan 233 の全 row を `OPEN` に保つ。
 - `mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md`:
   V1/R1/M1 の C2-B/C3 について、owner が `X1 relation-state envelope` を記録した。
   cross-locus read に限る最小 L3 研究を開くが、carrier schema、transition、source grammar、
