@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-30 09:34 JST
+最終更新: 2026-07-30 10:56 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -245,6 +245,8 @@ durable save/load, or public product completion is claimed.
   validation passed; the focused validator suite passed 88 tests in 3993.006s.
 - 2026-07-30 09:34 JST: Plan 238 compared typed terminal owner-service failure;
   A/A is advisory only, while concrete rows and failure-delivery behavior stay open.
+- 2026-07-30 10:56 JST: Plan 238's clean-worktree authoritative documentation
+  validation passed; the focused validator suite passed 88 tests in 4111.259s.
 
 - 2026-07-30 03:17 JST: Plan 232 executed the K0 R/L interpretation screen.
   The common constraint ledger is neutral, but primitive whole-fiber and

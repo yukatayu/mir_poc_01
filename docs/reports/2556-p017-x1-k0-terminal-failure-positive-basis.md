@@ -47,7 +47,8 @@ Canon P012/P013/P017, theory/02/04/05, ADR-0014; LAB Plans 208--210, 220,
 
 Source reads, clean-status inspection, one temporary Oracle review, `make
 docs`, whitespace check, and a concrete Discord-webhook scan. Authoritative
-validation and focused documentation unit tests remain for the clean worktree.
+validation and focused documentation unit tests in a clean detached worktree at
+`54e3f92e`.
 
 ## Evidence / outputs / test results
 
@@ -58,7 +59,8 @@ consulted-provenance linkage; all Plan 233 rows remain `OPEN`.
 
 Documentation validation passed with Canon index `132`, source hierarchy
 `788/788`, and `1710` numbered reports. Whitespace and concrete-webhook scans
-had no findings.
+had no findings. Clean-worktree authoritative validation passed, and the
+focused documentation suite passed all 88 tests in `4111.259s`.
 
 ## What changed in understanding
 
@@ -111,13 +113,13 @@ No callable sub-agent interface is available.
 ## Skipped validations and reasons
 
 No executable source changed; Lean/runtime/sample runs do not apply. The
-authoritative and focused documentation tests remain for the committed clean
-worktree.
+authoritative and focused documentation tests were run. No further validation
+is skipped.
 
 ## Commit / push status
 
-Content is ready for the first commit with `--no-gpg-sign`; then run clean
-worktree validation, record evidence, push, and verify remote equality.
+Package content is committed and pushed as `54e3f92e`. This final report-evidence
+update still needs its own commit/push and remote-equality check.
 
 ## Sub-agent session close status
 
