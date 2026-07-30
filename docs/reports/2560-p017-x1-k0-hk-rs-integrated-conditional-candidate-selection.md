@@ -61,7 +61,13 @@ or reserved-surface need.
 - source reads and targeted `rg` audits over the canon, working record, plans,
   and current snapshots
 - `oracle status`, `oracle session canon-is-normative-plan-is`
-- validation commands: pending after the selection edits
+- `git diff --check`
+- `python3 scripts/validate_docs.py` (normal worktree)
+- `python3 scripts/check_source_hierarchy.py` (normal worktree)
+- `python3 scripts/validate_docs.py --authoritative-working-annex` (clean
+  detached worktree at `9369be24`)
+- `python3 -m unittest -q scripts.tests.test_validate_docs` (the same clean
+  detached worktree)
 
 ## Evidence / outputs / test results
 
@@ -70,8 +76,11 @@ conditional compatibility/countermodel candidate with an explicit `H_K` ledger
 and fail-closed DEFER outcome. Local source checks confirm that ADR-0014 allows
 such an L3 only in an existing LAB lane and excludes every reserved surface;
 WRK-0044 explicitly retained no causal generator, receipt endpoint, transition,
-or reachability result. Documentation validation and focused validator tests
-are pending at this report-write stage.
+or reachability result. Normal documentation validation passed with 1714
+numbered reports; source-hierarchy validation found 792/792 required paths.
+The fixed content commit `9369be24` passed authoritative working-annex
+validation in a clean detached worktree. Its focused validator regression suite
+completed `88` tests in `4095.007s` with `OK`.
 
 ## What changed in understanding
 
@@ -133,13 +142,15 @@ Plan 231, Plan 241, and WRK-0044 before recording it.
 ## Skipped validations and reasons
 
 No Lean/runtime/sample command applies because this package creates neither
-source evidence nor executable behavior. Documentation validation and the
-focused validator suite are pending after the selection edits; their outcomes
-will be appended before commit.
+source evidence nor executable behavior. The applicable documentation,
+working-annex, source-hierarchy, and focused validator checks were run. No
+validation was skipped that could exercise this change.
 
 ## Commit / push status
 
-Pending at report write.
+The validated content commit `9369be24` was pushed to `origin/main` before the
+clean-worktree checks. This report/result follow-up is committed and pushed as
+the immediate next documentation-only commit; no force push was needed.
 
 ## Sub-agent session close status
 
