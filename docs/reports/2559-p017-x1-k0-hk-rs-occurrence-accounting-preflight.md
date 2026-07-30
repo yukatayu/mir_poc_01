@@ -43,11 +43,27 @@ Canon README/MAP; theory/01/02/04/05; P012, P013, P017; ADR-0014; working README
 
 ## Commands run
 
-Source reads, Oracle status/session retrieval, targeted repository searches, timestamp/status inspection, and the validation commands recorded below after the package commit.
+Source reads, Oracle status/session retrieval, targeted repository searches,
+timestamp/status inspection, `python3 scripts/check_source_hierarchy.py`,
+`python3 scripts/validate_docs.py`,
+`git diff --check`, a concrete webhook-token scan, detached-worktree
+`python3 scripts/validate_docs.py --authoritative-working-annex`, and detached
+`python3 -m unittest -q scripts.tests.test_validate_docs`.
 
 ## Evidence / outputs / test results
 
-Pending validation of this package. Source findings are recorded in Plan 241: Canon supplies the causal generator vocabulary but not a successful requester receipt occurrence, receive constructor, or operational receive rule. The preflight result is `PREFLIGHT-ADMIT` only for an explicit conditional trace screen.
+Source findings are recorded in Plan 241: Canon supplies the causal generator
+vocabulary but not a successful requester receipt occurrence, receive
+constructor, or operational receive rule. The preflight result is
+`PREFLIGHT-ADMIT` only for an explicit conditional trace screen.
+
+The ordinary source-hierarchy check passed `791/791`; ordinary documentation
+validation found `1713` numbered reports. In a detached clean worktree at
+`bfce3e13954066544ffe887dce83a5396f547ac2`, authoritative validation also
+passed with `1713` reports. The focused validator suite passed all `88` tests
+in `4321.938s`. `git diff --check` passed. A concrete webhook-token scan found
+no credential; the only broader literal match was a historical report that
+prints the search pattern itself.
 
 ## What changed in understanding
 
@@ -91,11 +107,13 @@ Oracle review advised that a source-constrained ordinary preflight is permissibl
 
 ## Skipped validations and reasons
 
-Lean, runtime, and sample suites are not run for this documentation/theory-boundary package: it introduces no formal artifact, implementation, or runnable sample. Documentation, source-hierarchy, whitespace, secret, and clean-worktree validation remain pending at report creation.
+Lean, runtime, and sample suites are not run for this documentation/theory-boundary package: it introduces no formal artifact, implementation, or runnable sample. The documentation, source-hierarchy, whitespace, credential, and clean-worktree checks passed as recorded above.
 
 ## Commit / push status
 
-Pending at report write.
+Plan content was committed and pushed as `bfce3e13`. This validation-evidence
+follow-up is committed with `--no-gpg-sign`, pushed, and checked for
+`HEAD == origin/main` in the same package close.
 
 ## Sub-agent session close status
 
