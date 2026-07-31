@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-07-31 22:40 JST
+最終更新: 2026-07-31 23:45 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -19,8 +19,8 @@ task ごとの不変な証跡は `docs/reports/` にあります。ここでは�
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon/L2/Gate/Phase の promotion ではありません。
 
-**official critical path の最初は fixed-control disposition のままです。** 並走 reserve として、未実行の
-`X1-K0-QF-UL-LIFT` の事前登録準備 package が一件だけあります。official lifecycle は `T0`、v2 profile の
+**official critical path の最初は fixed-control disposition のままです。** 並走 reserve として、
+source-free・unexecuted の `WRK-0046 X1-K0-QF-UL-LIFT` が一件だけあります。official lifecycle は `T0`、v2 profile の
 唯一の fresh artifact は valid `fail`、G0-D3 は defer、OBL-001..028 は `open` です。
 最初の公式 blocker は fixed-control drift の owner/Canon disposition です。valid `pass` route
 が将来別途認可・評価・digest accept されるまで G0 exit / T1 entry は起きません。
@@ -56,7 +56,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | 0 | snapshot and evidence maintenance | `A/R`; current task map と derived views が Canon cut と一致 | Macro 0; small; current only when status changes |
 | CP-1 | fixed-control drift disposition | `O`; pin 維持/defer 又は normal Canon rebase proposal | official T1 blocker; not autonomous |
 | CP-2 | valid `pass` / G0-D3 exit route | `O` with `A/R` evidence preparation; authorized artifact、exact evaluation、digest acceptance、exit record | Macro 0/1; triggered after CP-1 |
-| R1 (parallel reserve) | `X1-K0-QF-UL-LIFT` source-free L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | Macro 1 reserve; no Lean source; neither Gate input nor CP dependency |
+| R1 (parallel reserve) | `WRK-0046 X1-K0-QF-UL-LIFT` source-free L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | closed: registered without Lean source; neither Gate input nor CP dependency |
 | R2 (parallel reserve) | bounded q-fiber mixed-trace evidence | `A/R`; after pushed R1, one disposable Markdown-held Lean source plus `lean --trust=0`, ablation, and review | Macro 1 reserve; no full P017 claim; neither Gate input nor CP dependency |
 | CP-3 | selected semantic integration / shared model | `A/R`, then `O`; non-opaque Core/Config/Step/WellFormed/elaboration/history relations and adverse cases | Macro 1/5 middle; after T1 entry and relevant semantic selections |
 | CP-4 | T1 statement and profile package | `A/R`, then `O`; exact OBL-001/020/021, SCN explanation, canonical profile | official T2 blocker; after CP-3 |
@@ -70,7 +70,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | Canon hierarchy, derived views, reports, Plans 196/197 are available | maintenance and decision-packet preparation |
-| 1 semantic kernel | directions and bounded evidence exist; shared proof-facing composition is incomplete | one narrowed P017 K0 U/L candidate is ready only for source-free ADR-0014 registration; no inventory expansion or lifecycle package |
+| 1 semantic kernel | directions and bounded evidence exist; shared proof-facing composition is incomplete | WRK-0046 is source-free/unexecuted; only its declared bounded evidence package may proceed, with no inventory expansion or lifecycle package |
 | 2 parser-free validation | compatibility anchors are runnable | reproduce and maintain; not a Gate substitute |
 | 3 compile-ready actualization | bounded Surface/Full System evidence exists | production widening waits for authorization |
 | 4 sample expansion | runnable samples exist | maintenance only before I1 |
