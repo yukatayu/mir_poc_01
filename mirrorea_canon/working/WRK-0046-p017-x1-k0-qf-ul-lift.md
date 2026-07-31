@@ -136,18 +136,37 @@ claim.
 
 Reliance status: not-promoted
 
-Positive evidence: not-run
+Positive evidence: At evidence commit
+`7e4b01eb6bc431be044a6343ec686a3b8d7d2a96`, the sole 434-line Lean
+block extracted from `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md` had
+SHA-256 `07538caaf5e1c369e4baf1a1f3b3dac1a957b8f3947998c6bb2d2304d3349efd`
+and passed Lean 4.29.1 with `--trust=0`. All 53 retained declarations
+reported no axiom dependency. For the declared supplied finite one-restore
+line, valid ordinary segments, one supplied restore witness, and local
+`PreservesSpentAt` imply `Not HasTwoConsumes`. The closed A0 fixture
+inhabits the registered one-consume/one-restore, post-restore acceptance,
+and preserved-`Spent` premises. This is candidate-local conditional
+sufficiency only.
 
-Negative evidence: not-run
+Negative evidence: The registered A1 omission/reset control retains the
+same supplied restore bridge and ordinary-edge validity, exhibits one
+consume before and one after the bridge with post-restore
+`AcceptedSuccess` and `Not Spent`, and constructs `HasTwoConsumes`; it
+also derives `Not PreservesSpentAt`. A1 therefore is the required adverse
+control, not an A0 falsifier. No registered A0 falsifier or
+reserved-surface dependency was reproduced in this bounded source.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0046-p017-x1-k0-qf-ul-lift.md@7e4b01eb6bc431be044a6343ec686a3b8d7d2a96:37753dbde1290c0b5e1602a60e1159a830cc31cc9fb99c9e4ff6f34e64eab7c1, LAB:docs/reports/2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md@7e4b01eb6bc431be044a6343ec686a3b8d7d2a96:2005bfe0c4aabbeabd98369f01e17992503bfde2ae0bbe76df5e2595e267f57d
 
-Evidence commits: none
+Evidence commits: 7e4b01eb6bc431be044a6343ec686a3b8d7d2a96
 
-Impact / non-effects: This source-free registration retains only a reversible
-question and no outcome evidence. It changes no settled theory or implementation
-surface and cannot be used as an L2 position, proof, Gate/Phase movement, or
-implementation authorization.
+Impact / non-effects: This non-promoted L3 record retains only an
+axiom-free finite conditional lemma and its omission control. It does not
+select K0; make `AcceptedSuccess` or `Spent` Canon state; define identity,
+relation schema, transition, receipt, restore/persistence, Core, Canon
+proof/OBL, runtime, or public behavior; or change any Gate, Phase,
+lifecycle state, implementation authorization, or official critical-path
+dependency.
 
 Independent review: not-required-for-L3
 
