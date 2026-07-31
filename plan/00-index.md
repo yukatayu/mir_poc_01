@@ -903,6 +903,9 @@
   `plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md`
 - P017 X1 K0 H_K-rs single-block premise/falsifier design:
   `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md`
+- P017 X1 K0 H_K-rs A-Sigma conditional trace source evidence:
+  `plan/wrk-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md`
+  (`frozen / DEFER`; registered branch-sharing falsifier reproduced; no successor selected)
 
 ## maintenance rule
 
