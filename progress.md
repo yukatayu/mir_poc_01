@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-31 23:45 JST
+最終更新: 2026-08-01 03:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,7 +40,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plans 230--245 retain K0/K1 and R/B/T/U/C/L screens; WRK-0045 is `frozen / DEFER` only for its predicate-only A-Sigma line; WRK-0046 is source-free / unexecuted for one K0 U/L q-fiber conditional lemma; all OBL rows `open` | Official next boundary remains the fixed-control owner/Canon disposition. In parallel, only WRK-0046's declared bounded evidence may materialize: a q-fibered candidate-local `Spent` predicate, monotone experimental consume, and local restore-preservation ablation. It cannot create a receipt, identity, actual persistence model, Gamma/Delta disposition, Core rule, OBL, or implementation claim. K1 remains a failure-row Canon gap. C4/C5 and C0-D/C1/C6 remain later boundaries | CP: owner fixed-control disposition; reserve: post-push bounded WRK-0046 evidence only |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plans 230--245 retain K0/K1 and R/B/T/U/C/L screens; WRK-0045 is `frozen / DEFER` only for its predicate-only A-Sigma line; WRK-0046 is executed, linked, `L3-open` / `not-promoted` finite conditional evidence; all OBL rows `open` | Official next boundary remains the fixed-control owner/Canon disposition. WRK-0046's R1/R2 packages are closed: A0 conditionally excludes two consumes on one supplied finite lineage and A1 supplies the omission/reset control. This selects neither K0 nor receipt, identity, actual persistence, Gamma/Delta, Core, OBL, implementation, or a next candidate. K1 remains a failure-row Canon gap. C4/C5 and C0-D/C1/C6 remain later boundaries | CP: owner fixed-control disposition; reserve: no new package selected |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016-directed future Canon profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -60,18 +60,13 @@ Current exact blockers:
    by the displayed indexed rules, but no scalar representation is selected.
    Snapshot/evaluation/pending semantics, request/replay identity, served/admission
    facets, scalar candidate comparison, and total domain remain to be bound.
-5. The bounded C2-B/C3 and P017 screens do not supply a shared model: finite
-   B2-OPAQUE / fiberwise evidence, detector results, and the relation-state
-   obligation audit leave identity, pending, receipt, failure, restore, and
-   held context unselected. P017 X1 remains an owner-accepted bounded direction.
-   WRK-0045 reproduced a candidate-local branch-to-binding non-sharing falsifier
-   under Lean; only that predicate-only A-Sigma L3 line is `frozen / DEFER` and
-   Plan 245's original `NO-SUCCESSOR` remains limited to that line. A re-screen
-   found one distinct K0 U/L candidate with a direct Plan 230/231 consumer.
-   WRK-0046 now records it source-free and unexecuted: only its candidate-local
-   q-fibered `Spent` trace and local restore preservation may be materialized,
-   and it must stop before any selected semantic or persistence surface. No
-   inventory expansion follows.
+5. **WRK-0046 は実行・link 済みだが非昇格**
+   - R1 registration と R2 evidence/link package は完了した。
+   - A0 は registered preservation premises の下で two-consume を排除した。
+   - A1 は restore preservation を外した omission/reset control を構成した。
+   - record は `L3-open` / `not-promoted` であり、K0、state/identity、receipt、
+     actual persistence/restore、Core、OBL、runtime、Gate/Phase、critical path を選ばない。
+   - successor、inventory、lifecycle package は選択されていない。
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -177,7 +172,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 passed WRK-0040--0043 detectors and Plan 225 closes its fixture-only line. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 remains owner-accepted. WRK-0045 / Plan 245 close only the failed predicate-only line; WRK-0046 is source-free / unexecuted before its one allowed materialization | Materialize only WRK-0046's candidate-local q-fiber `Spent`/restore trace after push. Do not treat K0 as selected, repair WRK-0045, repair K1, switch to B-Pi, or claim actual persistence/receipt/identity semantics |
+| Research | C2-B/C3 relation-state model | P017 X1 remains owner-accepted. WRK-0045 / Plan 245 close only the failed predicate-only line. WRK-0046 now retains executed, linked, `not-promoted` finite conditional evidence: A0 excludes two consumes under the registered preservation premises and A1 exhibits the omission/reset control. It selects no K0, receipt/identity, actual persistence, or shared model. No next candidate is selected; any future record needs a fresh source delta, consumer, falsifier, standing preflight, and rollback trigger. |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -191,7 +186,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; P017 X1 is owner-accepted, while its WRK-0045 predicate-only L3 line is frozen | heavy | one narrowed K0 U/L ADR-0014 registration; no inventory or lifecycle package |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; P017 X1 is owner-accepted, while its WRK-0045 predicate-only L3 line is frozen | heavy | WRK-0046 R1/R2 closed as non-promoted evidence; no new inventory/lifecycle/research package selected |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -216,6 +211,14 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-08-01 03:37 JST: Synchronized current LAB reader/status snapshots with
+  pushed WRK-0046 metadata link `c05653c4`. The linked evidence remains
+  `L3-open` / `not-promoted`: its 434-line Lean block passed `--trust=0`, all
+  53 retained declarations are axiom-free, A0 conditionally excludes two
+  consumes, and A1 supplies the omission/reset control. No Canon, OBL, Gate,
+  Phase, official critical path, runtime, sample, public status, or successor
+  candidate changed.
 
 - 2026-07-31 23:45 JST: Registered WRK-0046 as a source-free, unexecuted,
   reversible K0 U/L conditional-lemma candidate. It pins one finite linear

@@ -77,6 +77,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 H_K-rs single-block premise/falsifier design | `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md` |
 | P017 X1 K0 H_K-rs A-Sigma conditional trace (frozen / DEFER) | `mirrorea_canon/working/WRK-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md`, `docs/reports/2564-wrk0045-p017-x1-asigma-conditional-trace-execution.md` |
 | post-WRK-0045 no-successor / ordinary X1 handoff | `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md` |
+| P017 X1 K0 q-fiber U/L finite conditional evidence (not promoted) | `mirrorea_canon/working/WRK-0046-p017-x1-k0-qf-ul-lift.md`, `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md`, `docs/reports/2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md`, `docs/reports/2573-wrk0046-positive-conditional-evidence-metadata-link.md` |
 | post-WRK-0045 autonomous-frontier reconciliation | `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
@@ -126,9 +127,12 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   自律 package を開きません。
 - P017 X1 は V1/R1 cross-locus-read に限る owner-accepted relation-state direction のままです。
   `frozen / DEFER` と Plan 245 の当初の `NO-SUCCESSOR` は WRK-0045 の predicate-only A-Sigma L3
-  line にだけ及びます。独立再査読は、K0 U/L に限定した q-fibered spent/restore conditional trace を
-  一件だけ source-free L3 registration に進めます。これは carrier、receipt、identity、actual
-  persistence、Core、OBL、runtime を選ばず、inventory/lifecycle の拡張も作りません。
+  line にだけ及びます。WRK-0046 は `L3-open` / `not-promoted` の bounded evidence として実行・link 済みです。
+  registered finite-line premises の下で ordinary-edge preservation と一つの supplied restore-edge
+  preservation は二つの counted consume を排除し、A1 omission/reset control は restore preservation を
+  外した exact two-consume trace を構成しました。これは K0、`Spent` の primitive/derived classification、
+  carrier、receipt、identity、actual persistence/restore、Core、OBL、runtime、Gate/Phase、public behavior
+  を選ばず、inventory/lifecycle の拡張も作りません。
 - Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
   evidence は bounded LAB として実行できます。final grammar/API/ABI、official
   conformance、production runtime、WAN federation、distributed durable save/load

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-31 23:45 JST
+最終更新: 2026-08-01 03:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,7 +40,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB evidence と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted、唯一の fresh artifact は fixed-control drift に対する valid `fail` | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる |
 | lifecycle / I1 | P016 は narrow T2、separate I1-readiness/bootstrap、C-static formal entry の方向を記録 | selected statement-level semantics を bind する profile、ledger mapping、phase/conformance wording、実装認可は未作成 |
-| semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`。WRK-0046 K0 U/L q-fibered `Spent`/restore conditional trace は source-free / unexecuted | 反例・finite screen は carrier、transition、proof、実装を選ばない |
+| semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`。WRK-0046 は実行・link 済みの `L3-open` / `not-promoted` finite conditional evidence で、A0 は一つの supplied finite lineage 上の two-consume を排除し、A1 は restore preservation を外した two-consume control を構成した | この evidence は P017 model、K0、carrier、transition、receipt/identity、actual restore/persistence、proof/OBL、実装を選ばない |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence を限定範囲で実行できる | 個別の parser/checker/runtime/transport evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、official conformance、production runtime、WAN federation は主張しない |
 
@@ -59,13 +59,16 @@ official T0
   -> I1 authorization
 ```
 
-P017 X1 は owner-accepted direction のままです。WRK-0045 の predicate-only A-Sigma L3
-line は `DEFER` のままですが、再査読は同じ line を修復せず、Plan 230 K0 の U/L に一件だけ
-独立 consumer を見出しました。`X1-K0-QF-UL-LIFT` は q-fibered spent fact と local restore
-preservation の条件付き検査であり、source-free L3 record として登録済みです。receipt、
-matching、identity、actual storage/restore、Gamma/Delta、Core、OBL、runtime は引き続き未選択
-です。この reserve は official path の Gate input でも dependency でもありません。Plan 227 の
-inventory 拡張や lifecycle preparation は新規 package にしません。
+P017 X1 は owner-accepted relation-state direction のままです。WRK-0045 の
+`frozen / DEFER` は predicate-only A-Sigma line に限られます。WRK-0046 は
+実行・link 済みで、sole 434-line source は Lean 4.29.1 `--trust=0` を通過し、
+retained 53 declarations は axiom dependency を持ちません。A0 は登録済み
+preservation premises の下で two-consume を排除し、A1 は restore preservation
+を外した omission/reset control を構成しました。
+
+WRK-0046 の registration/evidence package は完了していますが、record 自体は
+`L3-open` / `not-promoted` です。Gate input でも critical-path dependency でもなく、
+successor、inventory、lifecycle package は選択されていません。
 根拠: `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/theory/11-metatheory-ledger.md`,
 `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`。
@@ -89,8 +92,8 @@ record で明示的に整合化する必要があります。
   T1/T2 profile、proof-skeleton evidence class は未選択である。
 - P017 X1 の branch/request association、receipt matching、failure row、causal integration、
   actual restore relationは未選択である。WRK-0045 を修復せず、B-Pi へ切替えず、K1 を修復しない。
-  `X1-K0-QF-UL-LIFT` が actual semantic surface、global one-shot、又は full P017 closureを
-  要求した時点でも停止する。
+  WRK-0046 の bounded result は actual semantic surface、global one-shot、又は full P017 closureを
+  供給しない。それらを必要とする future work は owner/Canon stop のままである。
 - I1 は T2 close と同義ではない。all-SCN scope、G4/G6/G7、OBL-003/027、C-static、
   carrier/BND baseline、scoped moratorium lift を readiness record が bind するまで実装認可はない。
 
@@ -129,6 +132,7 @@ audit、countermodel、conditional lemma、review、acceptance packet 準備に�
 | I1 readiness boundary | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | statement identity / shared-model gaps | `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`, `plan/199-selected-semantic-composition-and-inference-boundary.md` |
 | WRK-0045 predicate-only A-Sigma L3-line closure / P017 ordinary-design boundary | `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`, `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`, `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md` |
+| WRK-0046 finite conditional evidence | `mirrorea_canon/working/WRK-0046-p017-x1-k0-qf-ul-lift.md`, `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md`, `docs/reports/2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md`, `docs/reports/2573-wrk0046-positive-conditional-evidence-metadata-link.md` |
 | runnable evidence | `samples_progress.md` |
 
 ## 更新規約

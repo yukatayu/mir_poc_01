@@ -908,7 +908,13 @@
   (`Reliance status: frozen`; `DEFER`; registered branch-sharing falsifier reproduced)
 - Post-WRK-0045 no-successor / ordinary X1 handoff:
   `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`
-  (no autonomous L3 successor at this cut; candidate-local branch law is not a direct P017 rule)
+  (the original `NO-SUCCESSOR / DEFER` applies only to the predicate-only
+  WRK-0045 A-Sigma line; the independent K0 U/L re-screen is recorded in Plan 245)
+- WRK-0046 P017 X1 K0 q-fiber U/L finite conditional evidence:
+  `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md`
+  (`L3-open`, `not-promoted`; A0 conditionally excludes two consumes on one
+  supplied finite line and A1 retains the omission/reset control. It has no
+  P017 model, semantic-selection, or critical-path effect.)
 
 ## maintenance rule
 

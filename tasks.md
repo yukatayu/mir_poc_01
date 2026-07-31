@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-07-31 23:45 JST
+最終更新: 2026-08-01 03:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -19,9 +19,13 @@ task ごとの不変な証跡は `docs/reports/` にあります。ここでは�
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon/L2/Gate/Phase の promotion ではありません。
 
-**official critical path の最初は fixed-control disposition のままです。** 並走 reserve として、
-source-free・unexecuted の `WRK-0046 X1-K0-QF-UL-LIFT` が一件だけあります。official lifecycle は `T0`、v2 profile の
-唯一の fresh artifact は valid `fail`、G0-D3 は defer、OBL-001..028 は `open` です。
+**Official critical path remains the owner-controlled fixed-control disposition.**
+WRK-0046 R1 registration and R2 evidence/link are completed parallel-reserve
+packages. The record remains `L3-open` / `not-promoted`; it is neither a Gate
+input nor a critical-path dependency. No promoted autonomous research package,
+successor, inventory extension, or lifecycle package is selected. Official
+lifecycle is `T0`, the v2 profile's sole fresh artifact is valid `fail`, G0-D3
+is defer, and OBL-001..028 are `open`.
 最初の公式 blocker は fixed-control drift の owner/Canon disposition です。valid `pass` route
 が将来別途認可・評価・digest accept されるまで G0 exit / T1 entry は起きません。
 
@@ -31,8 +35,10 @@ P017 X1 は owner-accepted のままです。WRK-0045 `frozen / DEFER` と Plan 
 `NO-SUCCESSOR` は predicate-only A-Sigma L3 line を閉じるだけで、P017 X1 本体を閉じません。
 独立再査読により、K0 external-rejection branch の q-fibered spent/use と local restore
 preservation に限る一件だけが、Plans 230--231 の未消化 U/L consumer を持つと判明しました。
-これは source-free WRK 事前登録までであり、receipt、identity、actual persistence、Core、
-Gamma/Delta、OBL、実装を選びません。同種の inventory 拡張や WRK-0045 の修復はしません。
+WRK-0046 の R1/R2 packages は完了したが、record は `L3-open` / `not-promoted` のままです。
+A0 は registered preservation premises の下で two-consume を排除し、A1 は omission/reset
+control を構成した。receipt、identity、actual persistence、Core、Gamma/Delta、OBL、実装は
+選ばず、同種の inventory 拡張や WRK-0045 の修復はしません。
 
 ```text
 T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
@@ -56,8 +62,8 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | 0 | snapshot and evidence maintenance | `A/R`; current task map と derived views が Canon cut と一致 | Macro 0; small; current only when status changes |
 | CP-1 | fixed-control drift disposition | `O`; pin 維持/defer 又は normal Canon rebase proposal | official T1 blocker; not autonomous |
 | CP-2 | valid `pass` / G0-D3 exit route | `O` with `A/R` evidence preparation; authorized artifact、exact evaluation、digest acceptance、exit record | Macro 0/1; triggered after CP-1 |
-| R1 (parallel reserve) | `WRK-0046 X1-K0-QF-UL-LIFT` source-free L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | closed: registered without Lean source; neither Gate input nor CP dependency |
-| R2 (parallel reserve) | bounded q-fiber mixed-trace evidence | `A/R`; after pushed R1, one disposable Markdown-held Lean source plus `lean --trust=0`, ablation, and review | Macro 1 reserve; no full P017 claim; neither Gate input nor CP dependency |
+| R1 (parallel reserve) | `WRK-0046 X1-K0-QF-UL-LIFT` L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | closed registration stage: source-free at that cut; current evidence state is tracked by R2; neither Gate input nor CP dependency |
+| R2 (parallel reserve) | bounded q-fiber mixed-trace evidence | `A/R`; one Markdown-held Lean source, `lean --trust=0`, axiom scan, A0/A1 control, immutable evidence link | closed: evidence commit `7e4b01eb` linked by `c05653c4`; `L3-open` / `not-promoted`; neither Gate input nor critical-path dependency |
 | CP-3 | selected semantic integration / shared model | `A/R`, then `O`; non-opaque Core/Config/Step/WellFormed/elaboration/history relations and adverse cases | Macro 1/5 middle; after T1 entry and relevant semantic selections |
 | CP-4 | T1 statement and profile package | `A/R`, then `O`; exact OBL-001/020/021, SCN explanation, canonical profile | official T2 blocker; after CP-3 |
 | CP-5 | narrow T2 skeleton and G5 package | `A/R`, then `O`; import-bearing OBL-020/021/002 skeletons and separate G5 predicates/relations | Macro 5 late; after CP-4 |
@@ -70,7 +76,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | Canon hierarchy, derived views, reports, Plans 196/197 are available | maintenance and decision-packet preparation |
-| 1 semantic kernel | directions and bounded evidence exist; shared proof-facing composition is incomplete | WRK-0046 is source-free/unexecuted; only its declared bounded evidence package may proceed, with no inventory expansion or lifecycle package |
+| 1 semantic kernel | directions and bounded evidence exist; shared proof-facing composition is incomplete | WRK-0046 R1/R2 are closed bounded-evidence packages; no next candidate is selected. Only a trigger-based fresh ADR-0014 screen may later proceed |
 | 2 parser-free validation | compatibility anchors are runnable | reproduce and maintain; not a Gate substitute |
 | 3 compile-ready actualization | bounded Surface/Full System evidence exists | production widening waits for authorization |
 | 4 sample expansion | runnable samples exist | maintenance only before I1 |
@@ -131,4 +137,9 @@ contract, SCN/Gate/Phase, `theory/11` wording/status, or a new moratorium-protec
   `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`,
   `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`,
   `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md`.
+- WRK-0046 non-promoted finite conditional evidence:
+  `mirrorea_canon/working/WRK-0046-p017-x1-k0-qf-ul-lift.md`,
+  `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md`,
+  `docs/reports/2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md`,
+  `docs/reports/2573-wrk0046-positive-conditional-evidence-metadata-link.md`.
 - Runnable evidence dashboard: `samples_progress.md`.
