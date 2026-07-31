@@ -54,14 +54,23 @@ the Canon MAP. No source was materialized.
 - parent `HEAD` / upstream / clean-status checks
 - Canon and LAB SHA-256 capture at the parent cut
 - proposed source-path absence check
-- working-annex validator and clean-worktree validation: pending after
-  registration commit
+- `python3 scripts/validate_docs.py --authoritative-working-annex` in a fresh
+  detached worktree at the registration commit
+- `python3 -m unittest -q scripts.tests.test_validate_docs` in that detached
+  worktree
+- `python3 scripts/validate_docs.py`, `python3 scripts/check_source_hierarchy.py`,
+  `python3 meta/build-index.py --check` from `mirrorea_canon/`, and
+  `git diff --check` at the committed registration cut
 
 ## Evidence / outputs / test results
 
 WRK-0045 has no source, execution, artifact, or result. Its retained evidence
-state is `not-promoted`, `not-run`, `none`, and `none`. Validation results are
-pending for the committed registration.
+state is `not-promoted`, `not-run`, `none`, and `none`. The fresh detached
+worktree passed authoritative documentation validation. The complete focused
+documentation-validator suite passed all 88 tests in 4879.085 seconds. The
+normal documentation, source-hierarchy, Canon index, and whitespace checks
+also exited successfully at the committed registration cut. These are
+registration-process checks only, not Lean or semantic evidence.
 
 ## What changed in understanding
 
@@ -122,12 +131,16 @@ pins the already reviewed candidate boundary.
 ## Skipped validations and reasons
 
 No Lean/runtime/sample command applies: source creation is prohibited until
-after this registration is committed and pushed. Working-annex and documentation
-validation are pending for the new committed state.
+after this registration is committed and pushed. No experimental Lean command
+was run, and no source/artifact was created, because this package closes only
+the preregistration and validation boundary.
 
 ## Commit / push status
 
-Pending at report write.
+Registration commit `b900cedd0e0fa2bf1f31cbfde19affaf0769580f` was committed
+and pushed before the post-registration checks. This validation addendum is a
+separate documentation-only follow-up and is committed and pushed after its
+own final diff and detached-worktree validation.
 
 ## Sub-agent session close status
 

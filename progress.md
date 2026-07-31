@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-31 08:58 JST
+最終更新: 2026-07-31 11:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -218,6 +218,14 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-31 11:07 JST: the committed WRK-0045 preregistration passed fresh
+  detached-worktree authoritative documentation validation and all 88 focused
+  validator tests in 4879.085 seconds; normal documentation, source-hierarchy,
+  Canon-index, and whitespace checks also passed. This verifies the
+  source-free L3 registration route only. It adds no Lean result, Canon
+  semantic claim, runtime behavior, or lifecycle advancement; next is the
+  bounded source/premise design screen.
 
 - 2026-07-31 08:58 JST: registered WRK-0045 as an unexecuted, source-free L3
   question for the A-Sigma H_K-rs conditional trace. It pins its exact cut,
