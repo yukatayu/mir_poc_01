@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="WRK-0046 の実行・リンク後における Mirrorea の現在地、前回からの進捗、公式経路、自律研究フロンティアを示す LAB チェックポイント。">
+  <title>Mirrorea 現在地チェックポイント - WRK-0046 後</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #51606d;
+      --line: #c7d1d9;
+      --paper: #ffffff;
+      --wash: #f4f7f9;
+      --teal: #0a7169;
+      --teal-pale: #e5f3f0;
+      --blue: #1b5b9e;
+      --blue-pale: #e9f1fb;
+      --amber: #8a6706;
+      --amber-pale: #fff7d8;
+      --red: #a93d33;
+      --red-pale: #fff0ee;
+      --slate: #425363;
+      --slate-pale: #eef2f5;
+      --shadow: 0 1px 2px rgb(23 33 43 / 8%);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: #113d70; }
+    a:focus-visible { outline: 3px solid #c68312; outline-offset: 3px; }
+    code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.91em; }
+    .skip-link { position: absolute; top: -60px; left: 12px; z-index: 2; padding: 8px 12px; border: 2px solid var(--blue); background: #fff; }
+    .skip-link:focus { top: 12px; }
+    .container { width: min(1160px, calc(100% - 32px)); min-width: 0; margin: 0 auto; }
+    .hero { border-top: 8px solid var(--teal); background: #f2fbf9; padding: 42px 0 30px; }
+    .eyebrow { margin: 0 0 8px; color: var(--teal); font-size: 0.86rem; font-weight: 750; }
+    h1, h2, h3 { line-height: 1.3; }
+    h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.25rem); }
+    h2 { margin: 0 0 9px; font-size: clamp(1.45rem, 2.4vw, 2rem); }
+    h3 { margin: 0 0 7px; font-size: 1.06rem; }
+    p { margin: 0 0 14px; }
+    .lead { max-width: 880px; margin-top: 16px; font-size: 1.13rem; }
+    .source-cut { margin: 16px 0 0; color: var(--muted); font-size: 0.9rem; overflow-wrap: anywhere; }
+    .topnav { border-bottom: 1px solid var(--line); background: #fff; }
+    .topnav .container { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 12px 0; }
+    .topnav a { color: var(--ink); font-size: 0.9rem; font-weight: 700; text-decoration: none; }
+    .topnav a:hover { color: var(--teal); text-decoration: underline; }
+    section { padding: 42px 0; border-bottom: 1px solid var(--line); }
+    section:nth-of-type(even) { background: var(--wash); }
+    .intro { max-width: 900px; color: #263440; }
+    .tag { display: inline-flex; align-items: center; min-height: 27px; padding: 2px 9px; border: 1px solid; border-radius: 4px; font-size: 0.82rem; font-weight: 750; line-height: 1.3; }
+    .tag.canon { color: #075c55; border-color: #75b8b1; background: var(--teal-pale); }
+    .tag.lab { color: #154b85; border-color: #9abde4; background: var(--blue-pale); }
+    .tag.current { color: #725600; border-color: #d1b45e; background: var(--amber-pale); }
+    .tag.stop { color: #892f27; border-color: #dda098; background: var(--red-pale); }
+    .tag.future { color: #40505e; border-color: #b7c2ca; background: var(--slate-pale); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .answer-band { margin-top: 24px; padding: 19px 21px; border: 1px solid #c7a750; border-left: 7px solid var(--amber); background: var(--amber-pale); box-shadow: var(--shadow); }
+    .answer-band h2 { font-size: 1.25rem; }
+    .answer-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; margin-top: 16px; }
+    .answer { padding-top: 10px; border-top: 3px solid var(--teal); }
+    .answer:nth-child(2) { border-color: var(--blue); }
+    .answer:nth-child(3) { border-color: var(--amber); }
+    .answer strong { display: block; margin-bottom: 4px; }
+    .answer p { margin: 0; font-size: 0.91rem; }
+    .notice { margin-top: 18px; padding: 14px 16px; border-left: 5px solid var(--blue); background: var(--blue-pale); }
+    .notice.warn { border-color: var(--red); background: var(--red-pale); }
+    .status-grid, .two-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 21px; }
+    .status-card, .panel { padding: 17px; border: 1px solid var(--line); border-top: 4px solid var(--teal); background: #fff; box-shadow: var(--shadow); }
+    .status-card:nth-child(2), .panel.blue { border-top-color: var(--blue); }
+    .status-card:nth-child(3), .panel.amber { border-top-color: var(--amber); }
+    .status-card:nth-child(4), .panel.red { border-top-color: var(--red); }
+    .status-card p, .panel p { margin-bottom: 0; font-size: 0.91rem; }
+    .timeline { display: grid; grid-template-columns: repeat(6, minmax(142px, 1fr)); width: 100%; max-width: 100%; min-width: 0; gap: 10px; margin-top: 22px; overflow-x: auto; padding: 2px 2px 10px; }
+    .milestone { min-height: 176px; padding: 14px; border: 1px solid var(--line); border-top: 5px solid var(--slate); background: #fff; box-shadow: var(--shadow); }
+    .milestone.done { border-top-color: var(--teal); }
+    .milestone.evidence { border-top-color: var(--blue); }
+    .milestone.current { border-top-color: var(--amber); background: var(--amber-pale); }
+    .milestone h3 { font-size: 0.98rem; }
+    .milestone p { margin: 0; color: var(--muted); font-size: 0.83rem; line-height: 1.52; }
+    .timeline-arrow { display: none; }
+    .table-wrap { width: 100%; max-width: 100%; min-width: 0; margin-top: 22px; overflow-x: auto; padding: 2px 2px 10px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: var(--shadow); }
+    th, td { padding: 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #edf3f7; font-size: 0.9rem; }
+    td { font-size: 0.9rem; overflow-wrap: anywhere; }
+    .diff-table { min-width: 900px; }
+    .diff-table .changed { background: var(--blue-pale); }
+    .diff-table .unchanged { background: var(--amber-pale); }
+    .diff-table .none { background: var(--slate-pale); }
+    .rail { display: grid; grid-template-columns: repeat(7, minmax(135px, 1fr)); width: 100%; max-width: 100%; min-width: 0; gap: 0; margin-top: 22px; border: 1px solid var(--line); background: #fff; }
+    .rail-title { grid-column: 1 / -1; padding: 10px 14px; color: #075c55; background: var(--teal-pale); font-size: 0.92rem; font-weight: 750; }
+    .rail-step { min-height: 122px; padding: 12px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .rail-step:last-child { border-right: 0; }
+    .rail-step strong { display: block; font-size: 0.9rem; }
+    .rail-step span { display: block; margin-top: 5px; color: var(--muted); font-size: 0.79rem; line-height: 1.45; }
+    .rail-step.current-step { background: var(--amber-pale); box-shadow: inset 0 4px 0 var(--amber); }
+    .rail-step.owner-step { background: var(--red-pale); box-shadow: inset 0 4px 0 var(--red); }
+    .stack { margin-top: 22px; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
+    .layer { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 16px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    .layer:last-child { border-bottom: 0; }
+    .layer-label { color: var(--teal); font-size: 0.9rem; font-weight: 800; }
+    .layer h3 { margin: 0; font-size: 1rem; }
+    .layer p { margin: 4px 0 0; font-size: 0.9rem; }
+    .four-way { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .way { padding: 14px; border: 1px solid var(--line); background: #fff; }
+    .way:nth-child(1) { border-top: 4px solid var(--red); }
+    .way:nth-child(2) { border-top: 4px solid var(--teal); }
+    .way:nth-child(3) { border-top: 4px solid var(--amber); background: var(--amber-pale); }
+    .way:nth-child(4) { border-top: 4px solid var(--blue); }
+    .way h3 { font-size: 1rem; }
+    .way p { margin: 0; font-size: 0.86rem; }
+    .checklist { margin: 15px 0 0; padding: 0; list-style: none; }
+    .checklist li { position: relative; padding: 6px 0 6px 30px; }
+    .checklist li::before { position: absolute; left: 0; top: 7px; width: 19px; height: 19px; border: 1px solid #768692; color: #075c55; background: #fff; content: ""; text-align: center; line-height: 18px; font-weight: 800; }
+    .checklist li.done::before { border-color: #45958d; background: var(--teal-pale); content: "✓"; }
+    .checklist li.pending::before { border-color: #ca9d20; background: var(--amber-pale); content: ""; }
+    .checklist li.stop::before { border-color: #d08c85; background: var(--red-pale); content: "!"; color: var(--red); }
+    .source-list { columns: 2 320px; column-gap: 28px; margin: 20px 0 0; padding-left: 1.3em; }
+    .source-list li { break-inside: avoid; margin-bottom: 7px; font-size: 0.9rem; }
+    footer { padding: 24px 0 38px; color: #eef4f6; background: #12222d; }
+    footer p { margin: 0; font-size: 0.9rem; }
+    @media (max-width: 920px) {
+      .answer-grid, .status-grid, .two-column { grid-template-columns: 1fr; }
+      .four-way { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rail-step:nth-child(2n + 1) { border-right: 0; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 22px, 1160px); }
+      .hero { padding-top: 30px; }
+      section { padding: 34px 0; }
+      .topnav .container { gap: 7px 12px; }
+      .four-way, .rail { grid-template-columns: 1fr; }
+      .rail-step { border-right: 0; }
+      .layer { grid-template-columns: 1fr; gap: 4px; }
+      .source-list { columns: 1; }
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 8mm; }
+      .topnav { display: none; }
+      body { font-size: 10pt; }
+      .container { width: 100%; }
+      .hero { padding: 20px 0; }
+      section { padding: 21px 0; }
+      .timeline { grid-template-columns: repeat(6, minmax(0, 1fr)); overflow: visible; }
+      .milestone { min-height: 0; }
+      .rail { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+      .table-wrap { overflow: visible; }
+      th, td { padding: 5px; font-size: 7pt; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">LAB checkpoint / 2026-08-01</p>
+      <h1>Mirrorea 現在地チェックポイント</h1>
+      <p class="lead">前回の全体像ページ以後に、P017 X1 周辺の限定的な理論実験を一つ実行し、その証拠を Canon と reader view にリンクしたうえで、次の自律研究候補を再審査しました。このページは、進んだ事実、変わらない公式状態、次に再開できる条件を混同しないための一枚の報告です。</p>
+      <p class="source-cut">観測 cut: <code>09dd08c886edeb6dc43e4fd3e1d1137b2350fa3d</code>（この報告を追加する直前の <code>HEAD == origin/main</code>）。規範判断は常に <a href="../../mirrorea_canon/README.md">mirrorea_canon/</a> が持ち、本ページは LAB の reader-facing checkpoint です。</p>
+      <div class="legend" aria-label="読み分けの凡例">
+        <span class="tag canon">Canon: 唯一の規範正本</span>
+        <span class="tag lab">LAB: 実験・証拠・現在地の派生 view</span>
+        <span class="tag current">現在の停止点</span>
+        <span class="tag stop">この時点では進めない境界</span>
+        <span class="tag future">将来工程</span>
+      </div>
+      <div class="answer-band">
+        <h2>最初に結論</h2>
+        <p><strong>公式 lifecycle は依然として <code>T0</code> です。</strong>一方で、WRK-0046 は有限の candidate-local line について、restore 境界で <code>Spent</code> を保持する仮定が two-consume を排除する十分条件であることを Lean で検証しました。これは有効な LAB 証拠ですが、P017 の意味論、K0/K1、実際の保存・復元、Core、OBL、Gate、Phase、実装を決めたものではありません。</p>
+        <div class="answer-grid">
+          <div class="answer"><strong>前回から進んだこと</strong><p>一つの厳密に境界づけた L3 evidence package を registration、実行、Canon link、reader snapshot まで閉じました。</p></div>
+          <div class="answer"><strong>今回のフロンティア結論</strong><p>新しい <code>WRK-0047</code> は作りません。現 cut には、重複せず下流で消費できる自律 L3 candidate がありません。</p></div>
+          <div class="answer"><strong>公式に次へ進む鍵</strong><p>最初の公式 blocker は fixed-control drift の owner/Canon disposition です。これを飛ばして T1 や実装へは進みません。</p></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="topnav" aria-label="ページ内目次">
+    <div class="container">
+      <a href="#difference">前回からの進捗</a>
+      <a href="#evidence">得られた証拠</a>
+      <a href="#position">全体像と現在地</a>
+      <a href="#roadmap">公式経路</a>
+      <a href="#t0-exit">T0 が終わらない理由</a>
+      <a href="#frontier">自律研究の境界</a>
+      <a href="#resume">再開条件</a>
+      <a href="#sources">根拠</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section id="difference">
+      <div class="container">
+        <p class="eyebrow">01 / 前回からの進捗</p>
+        <h2>「工程が進んだ」のではなく、限定補題を証拠として閉じ、次を無理に作らないことまで確認した</h2>
+        <p class="intro">前回の <a href="../mirrorea-project-overview.html">全体像ページ</a> は 2026-07-27 の reader view です。その後の多数の commit を、公式工程の完了数として数えるべきではありません。本ページは、その間の T0 governance、P016/P017 の owner-recorded direction、bounded research を時系列で圧縮し、今回の WRK-0046 checkpoint を詳述します。Canon の T0、OBL の全件 <code>open</code>、G0 exit 未成立という公式状態は変わっていません。</p>
+        <div class="timeline" aria-label="前回から今回までの決定に関係する時系列">
+          <article class="milestone"><h3>前回の全体像</h3><p>2026-07-27。公式状態は T0。LAB には多数の runnable evidence があるが、Gate/Phase/OBL の完了とは混同しない。</p></article>
+          <article class="milestone done"><h3>T0 / P016 / P017</h3><p>v2 artifact は valid fail。P016 と P017 の owner-recorded direction、bounded research の operating boundary を Canon に記録。T1 entry は生じない。</p></article>
+          <article class="milestone done"><h3>bounded research 群</h3><p>WRK-0024--0044 などの countermodel・conditional evidence を蓄積。P017 X1 の ordinary design を先取りせず、候補を選別する。</p></article>
+          <article class="milestone evidence"><h3>WRK-0045</h3><p>predicate-only A-Sigma line の countermodel により、登録済み branch-to-binding 帰結は導けないと判明。reliance は frozen / DEFER。</p></article>
+          <article class="milestone evidence"><h3>WRK-0046</h3><p>別の q-fiber U/L question を登録・実行・link。A0/A1 の条件比較を残し、record は L3-open / not-promoted のまま。</p></article>
+          <article class="milestone current"><h3>今回の再審査</h3><p>二つの独立 review が、現 cut での新規自律 candidate なしと結論。新規 WRK を作らず停止する。</p></article>
+        </div>
+        <div class="table-wrap" tabindex="0" aria-label="前回と今回の差分表">
+          <table class="diff-table">
+            <thead><tr><th scope="col">観点</th><th scope="col">前回の読者向け状態</th><th scope="col">今回追加された確定事実</th><th scope="col">公式 status への影響</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">P017 X1 の限定実験</th><td>P017 X1 はまだ owner-recorded direction ではなく、WRK-0045/0046 も存在しない。</td><td class="changed">P017 direction と bounded detector/research が整備され、WRK-0046 の source/evidence/link が完了。A0/A1 の限定比較が再現可能な形で残った。</td><td class="unchanged">P017 X1 の ordinary semantics は未選択。Gate input でも critical-path dependency でもない。</td></tr>
+              <tr><th scope="row">形式検証</th><td>Lean は LAB evidence として存在。</td><td class="changed">434 行の sole Lean block が Lean 4.29.1 <code>--trust=0</code> を通過し、53 declaration の axiom dependency がないことを記録。</td><td class="unchanged">proof ledger の OBL-001..028 は全件 <code>open</code>。theorem discharge ではない。</td></tr>
+              <tr><th scope="row">次の自律研究</th><td>source cut ごとに ADR-0014 の再審査が必要。</td><td class="changed">有限 restore 数を増やす案、no-merge countermodel、uniquely-derived <code>Spent</code> 案を比較し、現 cut ではいずれも採択しないと確認。</td><td class="none">研究権限を狭める規範判断ではない。実質的な source/design delta が届けば再審査する。</td></tr>
+              <tr><th scope="row">公式の一本道</th><td>T0。v2 governance profile とその one-off artifact はまだ後の作業。</td><td class="changed">v2 artifact は valid <code>fail</code> として消費済み。P016 の separate I1-readiness direction も記録済み。</td><td class="unchanged">後継 evaluation route の Canon authorization、G0-D3、T1 entry、実装認可は未成立。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence">
+      <div class="container">
+        <p class="eyebrow">02 / 得られた証拠</p>
+        <h2>WRK-0046 が示したことと、示していないこと</h2>
+        <p class="intro">実験の対象は、実際の save/load や branch model ではありません。一つの supplied finite linear experimental lineage の上で、opaque な <code>AcceptedSuccess</code> と disposable な <code>Spent</code> を置いた candidate-local な条件文です。記号や実験名を、Core state や public behavior として読まないことが重要です。</p>
+        <div class="status-grid">
+          <article class="status-card"><h3>A0: 条件付き十分性</h3><p>ordinary edge と一つの supplied restore edge の双方で <code>Spent</code> が保持され、consume が unspent source から spent target を作るなら、その有限 line に二つの counted consume は存在しません。</p></article>
+          <article class="status-card"><h3>A1: omission/reset control</h3><p>同じ bridge と ordinary-edge validity を残し、restore-edge preservation だけを外すと、post-restore の acceptance と <code>Not Spent</code> を含む exact two-consume trace を構成できます。</p></article>
+          <article class="status-card"><h3>検証の強さ</h3><p>sole Lean block は <code>--trust=0</code> で通過し、53 retained declarations は axiom-free。閉じた A0 fixture と A1 control の双方を含みます。</p></article>
+          <article class="status-card"><h3>正しい依拠上限</h3><p>A1 は A0 の反証ではありません。また、preservation の唯一性・最小性・実装上の保存場所を導くものでもありません。</p></article>
+        </div>
+        <div class="two-column">
+          <article class="panel">
+            <h3>この証拠から言えること</h3>
+            <ul class="checklist">
+              <li class="done">登録済みの有限 line では、restore-preservation を含む前提が two-consume を排除する。</li>
+              <li class="done">その preservation を外した登録済み adverse fixture では、two-consume が可能である。</li>
+              <li class="done">この限定された候補において、restore-preservation が load-bearing premise であることを示す。</li>
+            </ul>
+          </article>
+          <article class="panel red">
+            <h3>この証拠から言ってはいけないこと</h3>
+            <ul class="checklist">
+              <li class="stop">全実行・全 admissible restore での global one-shot。</li>
+              <li class="stop"><code>Spent</code> が Canon の state、field、budget、SaveObject member であるという結論。</li>
+              <li class="stop">K0 の採択、receipt/identity/causality/actual persistence の設計、OBL/Gate/Phase の前進、実装認可。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="notice warn"><strong>過大解釈を防ぐ要点:</strong> supplied finite line を actual execution に、sufficiency を necessity に、opaque predicate を semantic inventory に読み替えることはできません。特に、WRK-0045 が凍結された branch-to-binding 問題を、新しい branch/key を追加して迂回修復してはいけません。</div>
+      </div>
+    </section>
+
+    <section id="position">
+      <div class="container">
+        <p class="eyebrow">03 / 全体像と現在地</p>
+        <h2>最終像、公式工程、LAB 実験は別の層にある</h2>
+        <p class="intro">目標は、利用者が `.mir` を書き、配置・通信・検証・観測・安全な hot-plug を型付き境界から導ける仮想空間基盤です。現在の repository には parser、checker、runtime、sample、Lean の runnable LAB がある一方、Canon が認める implementation lifecycle は T0 に留まります。</p>
+        <div class="stack" aria-label="最終像と現在地の層構成">
+          <article class="layer"><div class="layer-label">最終利用者</div><div><h3>Mir の source を書く</h3><p><code>World</code> や <code>Game</code> は組込み概念ではなく、利用者が定義する型・ライブラリ概念。最終的には通常のプログラムから分散配置と安全性の義務を導く。</p></div></article>
+          <article class="layer"><div class="layer-label">将来の処理列</div><div><h3>parse / elaborate → typed Core と obligations → checker/runtime → projection/deployment → View evidence</h3><p>通信、authority、failure、observation、evolution は typed boundary に留め、transport identity や untyped debug output へ潰さない。</p></div></article>
+          <article class="layer"><div class="layer-label">Canon の現在地</div><div><h3><span class="tag current">T0</span> 語彙と decision の工程</h3><p>G0 exit と T1 entry は未成立。唯一の fresh v2 artifact は fixed-control drift を検出する valid <code>fail</code>。OBL-001..028 はすべて <code>open</code>。</p></div></article>
+          <article class="layer"><div class="layer-label">今回の LAB</div><div><h3><span class="tag lab">WRK-0046</span> non-promoted L3 conditional evidence</h3><p>有限の candidate-local U/L question のみを検証。Canon semantics と official lifecycle の一段下にある、並走の証拠レーン。</p></div></article>
+          <article class="layer"><div class="layer-label">既存 runnable LAB</div><div><h3>Surface / current-L2 / Product Alpha / Full System / operational / Lean</h3><p>各層に再現可能な bounded evidence はある。ただし final grammar/API/ABI、official conformance、production runtime、WAN federation、distributed durable save/load は未到達。</p></div></article>
+        </div>
+        <div class="notice"><strong>従って現在は「何も動かない」状態ではありません。</strong>しかし「実際に動く限定実験」と「仕様が固定され、外部開発者がその layer を再現・使用できる official implementation」は明確に別です。今回の進捗は前者の理論的証拠を強化し、後者の入口を早めてはいません。</div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="container">
+        <p class="eyebrow">04 / 公式経路</p>
+        <h2>公式に T1、T2、I1 へ進む一本道</h2>
+        <p class="intro">この rail は phase の完了率ではありません。どの決定や証拠が前段で必要かを示します。現在の位置は最初の owner/Canon checkpoint の手前です。WRK-0046 はこの rail と別の parallel reserve であり、一本道をショートカットしません。</p>
+        <div class="rail" aria-label="公式 critical path">
+          <div class="rail-title">Official critical path: <code>T0 → fixed-control disposition → valid pass / G0-D3 → T1 → shared semantics → T2 → I1</code></div>
+          <article class="rail-step current-step"><strong>現在: T0</strong><span>語彙と decision。唯一の v2 artifact は valid <code>fail</code>。</span></article>
+          <article class="rail-step owner-step"><strong>CP-1</strong><span>owner が fixed-control pin の維持/defer と ordinary Canon rebase proposal の扱いを決める。</span></article>
+          <article class="rail-step owner-step"><strong>CP-2</strong><span>後継 evaluation route を Canon が認可してから、valid <code>pass</code>、G0-D3 digest acceptance、exit record へ進む。</span></article>
+          <article class="rail-step"><strong>T1 entry</strong><span>selected semantic integration と shared model を用意し、計算体系の statement/profile を形にする。</span></article>
+          <article class="rail-step"><strong>T2</strong><span>narrow proof skeleton と G5 statement。I1 readiness と自動的に同一ではない。</span></article>
+          <article class="rail-step"><strong>P016 readiness</strong><span>all-SCN scope、ledger mapping、C-static wording、authorization を別 record で bind。</span></article>
+          <article class="rail-step"><strong>I1 authorization</strong><span>単一 process reference implementation を正式に開始できる条件。</span></article>
+        </div>
+        <div class="two-column">
+          <article class="panel amber"><h3>いま owner が判断する対象</h3><p>最初の判断は P017 の K0/K1、<code>Spent</code> の保存場所、または runtime 設計ではありません。fixed-control drift を現 pin のまま defer するか、通常の Canon rebase proposal を開始するかです。後者でも、後継 evaluation route を明示的に認可する amendment が必要です。silent rebase、無承認 retry、現 <code>fail</code> の pass 扱いはしません。</p></article>
+          <article class="panel blue"><h3>後段でのみ判断する対象</h3><p>shared Core/Config/Step/WellFormed/elaboration/history model、P017 の branch/request association・receipt・failure row・actual restore relation、T1/T2 profile、P016 I1 readiness は、前段の正当な source/evidence cut がそろってから ordinary Canon process で扱います。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="t0-exit">
+      <div class="container">
+        <p class="eyebrow">04A / T0 exit の条件</p>
+        <h2>なぜ T0 のままなのか、どうすれば T0 を終えられるのか</h2>
+        <p class="intro">T0 は「理論実験がまだ足りないから」だけで止まっているのではありません。T0 は、以後の全ての理論・実装が参照する語彙と統治上の基準器を、Canon の手続で固定する工程です。現在の v2 evaluation は壊れた JSON ではなく、固定された control と現在の blob が一致しないことを正しく検出した <strong>valid <code>fail</code></strong> です。したがって、結果を無視して次へ進むこと自体が T0 の目的に反します。</p>
+        <div class="status-grid">
+          <article class="status-card"><h3>1. 現在の直接原因</h3><p>唯一の fresh v2 artifact は fixed source-hierarchy control と三つの fixed LAB notice control の drift を検出し、root result を <code>fail</code> としました。<code>fail</code> は pass の不足ではなく、現在の pin では acceptance route を開けないことを意味します。</p></article>
+          <article class="status-card"><h3>2. なぜ自律作業で解消しないか</h3><p>pin を維持するか、通常の Canon rebase proposal を始めるかは owner/Canon の統治判断です。agent が documentation や実験の都合で hash を差し替えたり retry を作れば、固定 control が守るべき再現性を失います。</p></article>
+          <article class="status-card"><h3>3. WRK-0046 との関係</h3><p>WRK-0046 は P017 周辺の parallel LAB evidence です。T0 profile の control、G0-D3、G0 exit を入力としても出力としても持たないため、成功しても T0 を終えられません。</p></article>
+          <article class="status-card"><h3>4. 終了は一つの pass ではない</h3><p>現在の one-off route は消費済みです。ordinary Canon amendment が後継 evaluation route を明示的に認可し、その route の valid <code>pass</code>、owner の exact-digest acceptance、Canon の exit record が揃うまで、official lifecycle は T0 のままです。</p></article>
+        </div>
+        <div class="rail" aria-label="T0 を終了するための必要条件">
+          <div class="rail-title">T0 exit の必要条件。矢印を飛ばしたり、LAB evidence で置換したりしない。</div>
+          <article class="rail-step current-step"><strong>現在の valid fail</strong><span>fixed control drift を正しく検出して停止している。ここを pass 扱いしない。</span></article>
+          <article class="rail-step owner-step"><strong>owner disposition</strong><span>現 pin を維持して defer するか、ordinary Canon rebase proposal と後継 evaluation route を認可するかを決める。</span></article>
+          <article class="rail-step"><strong>認可済みの後継 route</strong><span>rebase route なら、ordinary Canon amendment が新たな profile/evidence cut と evaluation route を明示する。消費済み v2 route は再利用しない。</span></article>
+          <article class="rail-step"><strong>exact evaluation</strong><span>認可済み後継 route を仕様通り実行し、artifact が valid で root result が <code>pass</code> であることを確認する。</span></article>
+          <article class="rail-step"><strong>G0-D3 acceptance</strong><span>owner が exact artifact digest を明示的に受理する。pass 自体は受理を代替しない。</span></article>
+          <article class="rail-step"><strong>Canon exit record</strong><span>G0 exit と T1 entry を Canon に記録する。ここで初めて official lifecycle が T0 を離れる。</span></article>
+          <article class="rail-step"><strong>その後の T1</strong><span>shared semantics と statement/profile を、T0 exit 後の正しい authority cut で扱う。</span></article>
+        </div>
+        <div class="two-column">
+          <article class="panel red"><h3>「いつまでも終わらない」状態を防ぐ運用</h3><p>CP-1 の disposition を曖昧にしたまま、LAB の成功を積み上げて T0 exit の代わりにしないことです。defer を選ぶなら、T0 は意図的に停止している状態であり、失敗した実装作業ではありません。rebase を選ぶなら、その選択と後継 route を ordinary Canon process として記録し、固定 control の意味を検査可能に保ちます。</p></article>
+          <article class="panel blue"><h3>この repo が今すぐ実行できる準備</h3><p>owner の判断を代行することはできませんが、current artifact、control drift の scoped audit、source hierarchy、exact evaluation 手順、acceptance packet の材料を整え、判断後に同じ手順を再現できるように保守できます。これは T0 を短絡せず、終えるための正しい準備です。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="frontier">
+      <div class="container">
+        <p class="eyebrow">05 / 自律研究の境界</p>
+        <h2>「候補がない」は研究停止ではなく、同じ補題を増殖させないための現在の判断</h2>
+        <p class="intro">ADR-0014 は既存 LAB lane での可逆な L3 research を許します。ただし現 cut では、形式上書ける命題と、プロジェクト全体を前へ進めるために今選ぶ価値がある命題は一致しません。planner と独立 Oracle review は、どちらも <strong>NO-CANDIDATE / RE-SCREEN-ONLY</strong> と結論しました。</p>
+        <div class="four-way">
+          <article class="way"><h3>公式 critical path</h3><p>owner/Canon が CP-1、CP-2、selected semantics、profile、I1 authorization を順に扱う。agent はそのための evidence を準備できる。</p></article>
+          <article class="way"><h3>自律 maintenance</h3><p>WRK-0045/0046 の digest、Lean、axiom scan、index、snapshot を source/status change があるときに再現・監査する。</p></article>
+          <article class="way"><h3>今の新規 L3</h3><p><strong>なし。</strong>新しい <code>WRK-0047</code>、Lean fixture、inventory 拡張、lifecycle package は作らない。</p></article>
+          <article class="way"><h3>再審査 trigger</h3><p>実質的な Canon/P017 source delta、concrete fact/occurrence/order inventory を伴う ordinary-design artifact、独立 consumer、別種の falsifier、または再現可能な欠陥。</p></article>
+        </div>
+        <div class="table-wrap" tabindex="0" aria-label="今回の候補スクリーニング">
+          <table>
+            <thead><tr><th scope="col">近い候補</th><th scope="col">なぜ魅力的に見えるか</th><th scope="col">現 cut で採択しない理由</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">有限個 restore edge への lifting</th><td>一 restore の補題を任意有限 line に一般化できる。</td><td>同じ <code>Spent</code> monotonicity と A1 型 control の量化的強化に過ぎず、actual admissibility・branch continuity・no-merge を与えない。同じ consumer を再利用するだけである。</td></tr>
+              <tr><th scope="row">no-merge/no-duplicate generic countermodel</th><td>local preservation と restore integrity が別問題であることを明示できる。</td><td>generic に保つと P017 の consumer がなく、P017 的に読むと未選択 identity を必要とする。既に非 claim として明記されている。</td></tr>
+              <tr><th scope="row"><code>Spent</code> uniquely-derived alternative</th><td>primitive か導出かを比較することは ordinary design で重要になり得る。</td><td>導出 basis（receipt、occurrence、history equality、restore identity）が未選択。具体化すれば reserved semantic inventory の先取り、抽象化すれば定義の言い換えになる。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice"><strong>今回の停止線:</strong> WRK-0046 の A0/A1 を、actual restore、global exactly-once、identity、receipt、persistence、Core、runtime に接続するには、owner-controlled ordinary design が先に concrete inventory を選ぶ必要があります。そこを補題の数で埋めようとすると局所最適化になります。</div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <div class="container">
+        <p class="eyebrow">06 / 再開条件と今回の停止理由</p>
+        <h2>ここで止めてよい理由と、次に何が来たら再開するか</h2>
+        <div class="two-column">
+          <article class="panel">
+            <h3>この checkpoint で閉じたこと</h3>
+            <ul class="checklist">
+              <li class="done">WRK-0046 の registration、source execution、evidence link、reader snapshot を完了。</li>
+              <li class="done">Canon-first planner と独立 Oracle review により、現在の自律フロンティアを再スクリーニング。</li>
+              <li class="done">重複候補と owner-boundary を切り分け、official critical path が変わらないことを確認。</li>
+              <li class="done">単一 HTML の reader-facing checkpoint と task evidence を追加。</li>
+            </ul>
+          </article>
+          <article class="panel amber">
+            <h3>停止後に起こり得る再開</h3>
+            <ul class="checklist">
+              <li class="pending">owner が CP-1 の fixed-control disposition を与える。以後、認可された範囲だけを通常の Canon process で進める。</li>
+              <li class="pending">P017 に concrete fact/occurrence/order inventory を持つ ordinary-design artifact が現れる。ADR-0014 を最初から再審査する。</li>
+              <li class="pending">evidence defect、source/status change、hash mismatch が見つかる。maintenance と再現検証を行う。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="notice warn"><strong>今回してはいけない次手:</strong> no-candidate という結論を Canon の恒久的な禁止へ昇格すること、または空白を埋めるためだけに新しい WRK・fixture・semantic inventory・implementation plan を作ることです。どちらも project axis の「最小で正しい理論」と反します。</div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="container">
+        <p class="eyebrow">07 / 根拠と読み方</p>
+        <h2>この報告を検証するための入口</h2>
+        <p class="intro">規範判断は Canon を先に読みます。HTML、`plan/`、`progress.md`、`tasks.md` は Canon を上書きしない LAB の説明・証拠・作業記憶です。</p>
+        <ul class="source-list">
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/README.md">README</a> と <a href="../../mirrorea_canon/MAP.md">MAP</a>: source hierarchy と project map。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/plan/01-phases.md">01-phases</a>: 唯一の official implementation state（T0）。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/adr/ADR-0013.md">ADR-0013</a>: v2 の one-off evaluation、G0-D3 defer、lifecycle acceptance boundary。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/theory/11-metatheory-ledger.md">metatheory ledger</a>: OBL status の唯一の正本。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/adr/ADR-0014.md">ADR-0014</a>: 可逆 L3 research の standing boundary。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/meta/proposals/PROPOSAL-016-t2-i1-bootstrap-separation.md">PROPOSAL-016</a> と <a href="../../mirrorea_canon/meta/proposals/PROPOSAL-017-c2b-c3-relation-state-envelope.md">PROPOSAL-017</a>: I1 readiness と P017 direction の owner-recorded boundaries。</li>
+          <li><strong>[Canon]</strong> <a href="../../mirrorea_canon/working/WRK-0046-p017-x1-k0-qf-ul-lift.md">WRK-0046</a>: preregistration、Results、non-claims。</li>
+          <li><strong>[LAB]</strong> <a href="../../plan/wrk-0046-p017-x1-k0-qf-ul-lift.md">WRK-0046 Lean source</a>: 434-line evidence artifact。</li>
+          <li><strong>[LAB]</strong> <a href="../../plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md">Plan 245</a>: WRK-0045 と subsequent re-screen の境界。</li>
+          <li><strong>[LAB]</strong> <a href="../../plan/198-t0-g0-governance-profile-v2.md">Plan 198</a>: 消費済み v2 artifact の valid fail と、後継 route が別 owner/Canon decision であること。</li>
+          <li><strong>[LAB]</strong> <a href="../project-status.md">project-status</a>、<a href="../../progress.md">progress</a>、<a href="../../tasks.md">tasks</a>: 現在の派生 snapshot。</li>
+          <li><strong>[LAB]</strong> <a href="2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md">Report 2572</a>、<a href="2573-wrk0046-positive-conditional-evidence-metadata-link.md">Report 2573</a>、<a href="2574-wrk0046-positive-conditional-reader-snapshot.md">Report 2574</a>: execution、link、snapshot の不変な task evidence。</li>
+          <li><strong>[LAB]</strong> <a href="../mirrorea-project-overview.html">前回の全体像ページ</a>: 2026-07-27 の広い reader view。</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container"><p>2026-08-01 の LAB checkpoint。WRK-0046 は non-promoted L3 evidence、公式 lifecycle は T0、次の自律 theory package は未選択です。</p></div></footer>
+</body>
+</html>
