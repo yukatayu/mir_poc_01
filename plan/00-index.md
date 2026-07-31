@@ -901,6 +901,8 @@
   `plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md`
 - P017 X1 K0 H_K-rs L3 standing-eligibility recheck:
   `plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md`
+- P017 X1 K0 H_K-rs single-block premise/falsifier design:
+  `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md`
 
 ## maintenance rule
 

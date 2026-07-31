@@ -70,6 +70,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 H_K-rs occurrence-accounting preflight | `plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md` |
 | P017 X1 K0 H_K-rs integrated conditional candidate selection | `plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md` |
 | P017 X1 K0 H_K-rs L3 standing-eligibility recheck | `plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md` |
+| P017 X1 K0 H_K-rs single-block premise/falsifier design | `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
