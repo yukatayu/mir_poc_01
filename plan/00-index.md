@@ -905,7 +905,10 @@
   `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md`
 - P017 X1 K0 H_K-rs A-Sigma conditional trace source evidence:
   `plan/wrk-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md`
-  (`frozen / DEFER`; registered branch-sharing falsifier reproduced; no successor selected)
+  (`Reliance status: frozen`; `DEFER`; registered branch-sharing falsifier reproduced)
+- Post-WRK-0045 no-successor / ordinary X1 handoff:
+  `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`
+  (no autonomous L3 successor at this cut; candidate-local branch law is not a direct P017 rule)
 
 ## maintenance rule
 
