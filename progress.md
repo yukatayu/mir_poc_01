@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-31 08:51 JST
+最終更新: 2026-07-31 08:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -38,7 +38,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--239 screen each per-cell provenance/outstanding/failure basis; Plan 240 finds no C-level successful receipt endpoint; Plan 241 admits only a bounded H_K-rs occurrence-accounting preflight; Plan 242 selects A-Sigma only as a possible next L3 presentation and makes DEFER mandatory; Plan 243 passes a registration-only ADR-0014 recheck; all OBL rows `open` | The accepted X1 direction remains bounded. `q -> s -> r` is still explicit H_K role hypotheses, not a C-level generic occurrence kind or receive rule. A future record must make functional typed matching, every relied-on R/B/T/U/C/L premise, non-vacuity, and r-sensitive load closure explicit while excluding operational reachability. Next is a separate WRK preregistration at its own fresh cut, with no source. It stops for owner/Canon if it needs a primitive, rule, constructor, history schema, identity/persistence key, or hidden failure/authority surface. K1 remains a failure-row Canon gap. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; P004/008/012/013/015 directions are recorded; WRK-0028--0039 retain bounded evidence; Plans 219/220 compare the carrier gap and audit its obligations; WRK-0040--0043 passed distinct finite detectors; Plans 225/226/229 close their respective duplicate or abstract-successor lines; Plan 227 prepares the coupled ordinary-design decision vector; Plan 228 selects and WRK-0044 executes/links one five-pair static minimum coherence account; Plans 230--233 preflight K0/K1, R/L, and B fact status; Plans 234--239 screen each per-cell provenance/outstanding/failure basis; Plan 240 finds no C-level successful receipt endpoint; Plan 241 admits only a bounded H_K-rs occurrence-accounting preflight; Plan 242 selects A-Sigma only as a possible next L3 presentation and makes DEFER mandatory; Plan 243 passes a registration-only ADR-0014 recheck; WRK-0045 registers the source-free L3 question; all OBL rows `open` | The accepted X1 direction remains bounded. `q -> s -> r` is still explicit H_K role hypotheses, not a C-level generic occurrence kind or receive rule. WRK-0045 is unexecuted: its source must make functional typed matching, every relied-on R/B/T/U/C/L premise, non-vacuity, and r-sensitive load closure explicit while excluding operational reachability. Next is a premise/falsifier design screen before any source materialization. It stops for owner/Canon if it needs a primitive, rule, constructor, history schema, identity/persistence key, or hidden failure/authority surface. K1 remains a failure-row Canon gap. C4/C5 and C0-D/C1/C6 remain later boundaries | conditional |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016 profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -218,6 +218,11 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-31 08:58 JST: registered WRK-0045 as an unexecuted, source-free L3
+  question for the A-Sigma H_K-rs conditional trace. It pins its exact cut,
+  DEFER alternative, hypotheses, falsifiers, and stop line; no Lean source,
+  Canon semantics, runtime, or lifecycle claim was added.
 
 - 2026-07-31 08:51 JST: Plan 243's content commit passed clean-worktree
   authoritative documentation validation and all 88 focused validator tests
