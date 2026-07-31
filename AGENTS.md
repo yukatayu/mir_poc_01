@@ -308,6 +308,12 @@ Every report should contain, in this order:
 - user 入力なしで次へ進めるときは、package close 後も止まらずそのまま続行すること。
 - user 入力が必要になったとき、または user が依頼したスコープを完了したときだけ、その turn の final `complete` を送って止まること。
 - self-check、focused diff review、local validation を先に行う。
+- 大局的な管理（current status、critical path、phase recut、lifecycle inventory、
+  roadmap の更新）では、編集前と package close 前に Canon-first の read-only
+  `planner` sub-agent review を受ける。review は pinned committed cut と差分を照合し、
+  current blocker、direct consumer、owner/Canon と autonomous の境界、必要 evidence、
+  stop / reopen trigger を確認する。source delta がなければ新しい plan を作らず、
+  snapshot maintenance に限定する。planner は advisory であり Canon を変更しない。
 - reviewer はむやみに何度も呼ばず、最後に 1 回だけ長めに待つのを基本にする。
 - 必要なら task 内部で narrow-scope re-review を行ってよい。
 - reviewer が返らない場合だけ retry を 1 回行い、なお返らなければ local evidence と diff inspection を report に残す。

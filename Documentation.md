@@ -11,6 +11,10 @@ notes. If LAB text conflicts with canon, canon wins.
 `mirrorea_canon/`、現在地は `docs/project-status.md`、詳細計画は `plan/`、
 task ごとの不変な証跡は `docs/reports/` にあります。
 
+下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
+「次」は current queue を意味しません。現在の一本道は
+`docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
+
 | 知りたいこと | 読む場所 |
 | --- | --- |
 | 前提知識なしで全体像を掴む | `docs/mirrorea-project-overview.html` |
@@ -117,8 +121,14 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 - `spec/06` は C-static 10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、
   phase table は両方を I1 exit に置いています。bootstrap の定義と整合化が必要です。
 - P004/P008/P012/P013/P015/P016 の方向は owner が記録しました。exact grammar、
-  shared model、request/replay identity、scalar correspondence、profile は未確定で、
-  Plan 199 の composition/falsifier 研究が先です。
+  shared model、request/replay identity、scalar correspondence、profile は未確定です。
+  Plan 199 は後続の composition/falsifier 境界を記録する LAB plan であり、現在の
+  自律 package を開きません。
+- P017 X1 は V1/R1 cross-locus-read に限る owner-accepted relation-state direction のままです。
+  `frozen / DEFER` と Plan 245 の `NO-SUCCESSOR` は WRK-0045 の predicate-only A-Sigma L3
+  line にだけ及びます。choice-neutral inventory は既存の Plan 227 と Plans 230--245 にあり、
+  現在の自律 L3 successor/inventory はありません。lifecycle についても P016 と Plans 196/197
+  が preparation を記録済みで、新しい自律 inventory は作りません。
 - Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
   evidence は bounded LAB として実行できます。final grammar/API/ABI、official
   conformance、production runtime、WAN federation、distributed durable save/load
@@ -165,6 +175,9 @@ profile と Canon amendment は未作成です。
   package close 条件。
 - `plan/197-i1-bootstrap-decision-and-readiness-audit.md`: I1 bootstrap、formal
   I1 entry、I1 exit の区別、owner 判断の順序・候補・推奨。
+- 大局的な current status / critical path / roadmap 更新は、Canon-first の read-only
+  `planner` review を編集前と package close 前に受けます。review は新しい規範判断を
+  作らず、既存 snapshot の blocker、権限境界、evidence、stop line を照合します。
 - `plan/199-selected-semantic-composition-and-inference-boundary.md`: selected
   directions を shared model に合成する前の countermodel と安全な推論境界。
 - `plan/200-reanchored-semantic-composition-research-plan.md`: C0--C7 を

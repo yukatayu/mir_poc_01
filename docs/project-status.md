@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-31 19:34 JST
+最終更新: 2026-07-31 21:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -9,15 +9,16 @@ notes. If LAB text conflicts with canon, canon wins.
 
 ## この文書の役割
 
-これは、人間が短時間で現在地と次の判断を確認するための **LAB 派生ビュー** です。
-Gate / Phase、OBL status、理論、適合性、実装完了を新たに決めません。
+これは、人間が短時間で現在地、公式の一本道、次の owner 判断を確認するための
+**LAB 派生ビュー**です。Gate / Phase、OBL status、理論、適合性、実装完了を新たに
+決めません。詳細な時系列の候補・実験は `plan/` と `docs/reports/` に残し、索引や
+過去の「次」を current queue と読み替えません。
 
 - 規範正本: `mirrorea_canon/`
-- T0--T2 計画: `plan/196-t0-t2-implementation-entry-roadmap.md`
-- I1 開始判断: `plan/197-i1-bootstrap-decision-and-readiness-audit.md`
-- current task map: `tasks.md`
+- T0--T2 の依存: `plan/196-t0-t2-implementation-entry-roadmap.md`
+- I1 bootstrap/readiness: `plan/197-i1-bootstrap-decision-and-readiness-audit.md`
+- 現在の task map: `tasks.md`
 - runnable LAB: `samples_progress.md`
-- task ごとの証跡: `docs/reports/`
 
 ## 全体の進行チェックリスト
 
@@ -29,152 +30,107 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 [ ] I1 参照実装 -> [ ] I2 multi-locus -> [ ] I3 実 transport ->
 [ ] I4 永続と patch -> [ ] I5 射影と View -> [ ] I6 分散永続と連合
 
-チェックは、引用可能な Canon exit record が成立したときだけ埋めます。
+チェックは引用可能な Canon exit record が成立したときだけ埋めます。
 
 ## 現在地
 
 | 観点 | 現在の状態 | 保証できること |
 | --- | --- | --- |
-| Canon lifecycle | official `T0`。G0 exit / T1 entry record はない | L0/L1 の方向、語彙、境界の正本を読める |
-| proof ledger | OBL-001..028 は全件 `open` | LAB の Lean compile / countermodel と official proof status を区別できる |
-| T0 evaluation | v2 profile は adopted。唯一の fresh artifact は fixed-control drift を検出して valid `fail`。drift は統治文書上の変更として scoped audit 済み | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる。rebase/retry はなお未承認 |
-| T1/T2 exit | narrative criterion はあるが、T1/T2 の canonical JSON profile はない | 必要 package と未定義の exit interface を特定済み |
-| semantic kernel | P004/008/012/013/015 の方向は記録済み。WRK-0028--0039 は限定 evidence、Plans 214/225/226/229 は各 scope の no-successor、Plan 227 は P017 X1 の R/B/T/U/C/L decision vector を記録する。Plans 230--245 は K0/K1、R/L、B、H_K、A-Sigma screen を進め、WRK-0045 は Lean `--trust=0` で登録済み branch-to-binding falsifier を再現して Reliance `frozen` / `DEFER`、Plan 245 は successor なしとした | finite fixture と conditional screen は Canon carrier、transition、proof、実装を選ばない。反例は P017/A-Sigma 一般でなく candidate-local branch law の未導出。Plan 227 と Plans 230--245 に choice-neutral inventory は既にあるため新しい X1 package は作らない。新しい source delta、concrete owner direction、または独立 consumer/falsifier を伴う ADR-0014 candidate まで X1 は `DEFER`。K1 は failure-row Canon gap |
-| runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence が限定範囲で動く | parser/checker/runtime/transport の個別 evidence を再現できる |
-| public/product | 未到達 | final grammar/API/ABI、C-static/C-runtime/C-distributed、WAN federation、分散 durable save/load は主張しない |
+| Canon lifecycle | official `T0`。G0 exit / T1 entry record はない | 正本の語彙・境界を読める |
+| proof ledger | OBL-001..028 は全件 `open` | LAB evidence と official proof status を区別できる |
+| T0 evaluation | v2 profile は adopted、唯一の fresh artifact は fixed-control drift に対する valid `fail` | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる |
+| lifecycle / I1 | P016 は narrow T2、separate I1-readiness/bootstrap、C-static formal entry の方向を記録 | selected statement-level semantics を bind する profile、ledger mapping、phase/conformance wording、実装認可は未作成 |
+| semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`、Plan 245 `NO-SUCCESSOR` | 反例・finite screen は carrier、transition、proof、実装を選ばない |
+| runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence を限定範囲で実行できる | 個別の parser/checker/runtime/transport evidence を再現できる |
+| public/product | 未到達 | final grammar/API/ABI、official conformance、production runtime、WAN federation は主張しない |
+
+公式の最短経路は次です。最初の active node は「G0 を受理する」ことではなく、valid
+`pass` route を開くか defer を続けるかという owner/Canon 判断です。
+
+```text
+official T0
+  -> fixed-control disposition (owner/Canon)
+  -> authorized valid pass route, exact evaluation, G0-D3 acceptance
+  -> G0 exit / T1 entry
+  -> selected semantic integration and shared formal model
+  -> T1 statements / profile
+  -> narrow T2 skeleton and G5 statements
+  -> separate I1-readiness/bootstrap
+  -> I1 authorization
+```
+
+P017 X1 は owner-accepted direction のままですが、WRK-0045 の predicate-only A-Sigma L3
+line には current autonomous successor がありません。Plan 227 と Plans 230--245 は X1 の
+choice-neutral inventory を、P016 と Plans 196/197 は lifecycle の decision preparation を
+既に保持します。新しい source delta、concrete owner direction、又は独立
+consumer/falsifier がない限り、同じ L3/inventory を再package化しません。
+根拠: `mirrorea_canon/plan/01-phases.md`,
+`mirrorea_canon/theory/11-metatheory-ledger.md`,
+`plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`。
 
 ### T2 の意味
 
-現在の Canon T2 criterion は OBL-020 / 021 / 002 の proof skeleton と G5
-statement 群です。これだけでは、全十 SCN を対象とする I1 実装を安全に始められる
-ことまで保証しません。さらに `mirrorea_canon/spec/06-conformance.md` は C-static
-10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、phase table は両方を
-I1 exit に置いています。
-
-不足しているのは、proof skeleton と ledger status の対応、T1/T2 phase profile、
-G4/G6/G7 の扱い、OBL-003/027 の evidence class、全 SCN と実装対象 fragment の対応です。
-I1 実装開始についての LAB 推奨は、owner が狭い T2 route を選んだ場合に、その直後の
-別 I1-readiness / bootstrap record で all-SCN / G0-G7 の statement-level readiness、
-OBL-003/027 の evidence class、C-static の位置、範囲付き production authorization を
-明記することです。統合 route と phase-contract amendment は未選択です。C-static 10/10
-は formal I1 entry、C-static + C-runtime 10/10 と carrier freeze は I1 exit とする
-phase-table readingを、Canon で整合化する必要があります。
-
-根拠: `mirrorea_canon/plan/01-phases.md`,
-`mirrorea_canon/theory/11-metatheory-ledger.md`,
-`plan/196-t0-t2-implementation-entry-roadmap.md`,
-`plan/197-i1-bootstrap-decision-and-readiness-audit.md`
+現行 Canon T2 criterion は OBL-020 / 021 / 002 の proof skeleton と G5 statement 群です。
+これは全十 SCN の I1 実装 readiness を自動では保証しません。P016 は narrow T2 の後に
+separate I1-readiness/bootstrap record を置く方向を既に記録しました。integrated route 又は
+phase-contract amendment は、必要になった場合だけ別の Canon reopen として扱います。
+`mirrorea_canon/spec/06-conformance.md` と phase table の C-static / C-runtime 表記も、その
+record で明示的に整合化する必要があります。
 
 ## 現在の停止線
 
-official T2 まで無条件に連続自走することはできません。次は owner / Canon action
-なしに変更できません。
+- fixed-control drift の pin 維持、normal Canon rebase proposal、又は defer は owner/Canon
+  action である。O0 は silent rebase / retry を許可していない。
+- valid `pass` evidence がないため、G0-D3 / T0 exit は不可能である。current v2 `fail` は
+  受理対象にならない。
+- shared Core/Config/Step/WellFormed/elaboration/history model、exact statement identity、
+  T1/T2 profile、proof-skeleton evidence class は未選択である。
+- P017 X1 の branch/request association、receipt matching、failure row、causal integration、
+  restore relationは未選択である。WRK-0045 を修復せず、B-Pi へ切替えず、K1 を修復しない。
+- I1 は T2 close と同義ではない。all-SCN scope、G4/G6/G7、OBL-003/027、C-static、
+  carrier/BND baseline、scoped moratorium lift を readiness record が bind するまで実装認可はない。
 
-- Fixed control drift は scoped audit 済みで、意味論や SCN を変えない統治文書 drift
-  と確認した。pin 維持又は normal Canon process による rebase proposal はなお別の
-  owner action であり、O0 は rebase / retry を許可していない。
-- valid `pass` evidence がない状態での G0-D3 / T0 exit。現在の v2 `fail` は受理対象に
-  ならない。
-- T1/T2 profile、Gate criterion と ledger status の対応、P016 に沿う T2/I1 record の
-  実際の Canon wording。
-- I1 bootstrap authorization と C-static formal entry の関係、および phase/conformance
-  表記の整合化。
-- 記録済みの方向を一つの shared model に合成する C0--C7: SCN-02 snapshot、M1
-  request/replay、V1/R1 pending control、SW1/A2 facets、SCN-08 scalar、exact total domain。
-- WRK-0024 は、already-computed write の owner seriality が SCN-02 の atomic update を
-  含意しない有限反例を再現した。これは現行 Canon trace や solution の選択ではない。
-- WRK-0027 は、SCN-08 の `room_anchor` / `default_pose` と indexed Surface/Core state
-  form の間に明示 correspondence が必要なことを source-bound に記録した。これは
-  SCN-08 の invalid 判定でも scalar representation の選択でもない。
-- Oracle の independent review と local source check により、WRK-0028 は common
-  Canon cut の C0/C2 source-role re-anchor を完了した。C0-A は同じ source-authority
-  span を重複して扱わない。WRK-0029 は opaque domain role の rank-increasing graph が
-  条件付きで非循環であることだけを retained し、WRK-0030 は six source-tagged local
-  question labels の documentary non-substitution だけを retained した。WRK-0031 は C0-C の
-  literal named-error/Diagnostic reference query だけを retained し、stage/reject domain/
-  coverage を導かない。WRK-0032 は C5-PRE の source-local guard audit を current cut で完了し、
-  P012 の conditional direction と four named ordinary-admission theory/spec span の non-match だけを
-  retained した。これは ordinary admission が atomic であること、A2 compatibility、facet、identity、
-  又は global absence を導かない。C3 pending と C4 served-write の検査は unselected identity/carrier
-  を必要とするため停止したままであり、C0-D/C1/C2-B/C6 も既存 evidence の再述又は semantic selection
-  を要する。Plan 204 は同一 fixed-presentation line を scoped `no-candidate` とし、Plan 205 から WRK-0035 は C7 factorization criterion の range-only L3 evidence を retained した。Plan 206 / WRK-0036 は個別 C7 check の common coarsening failure を `--trust=0` の L3 countermodel として retained した。Plan 207--210 は C2-B/C3 comparison を整理し、Plan 211/WRK-0037 は B2-OPAQUE finite table を実行した。Plan 212/WRK-0038 の bare-view comparison は未実行で scope correction に入り、WRK-0039 は Plan 213 の all-ten-cell fiberwise comparison を実行した。Plan 214 は successor L3 を作らず、Plan 215--220 は carrier gap と obligation を確認した。P017 は independent final review `PASS` の後、V1/R1 cross-locus read だけの X1 relation-state envelope / XD defer を owner decision request として起票し、2026-07-29 に X1 が記録された。WRK-0040 の五 collapse detector、Plan 222 / WRK-0041 の four-fixture owner-terminal overlap detector、Plan 223 / WRK-0042 の owner-negative/mutation overlap detector、Plan 224 / WRK-0043 の M1 adverse-input/mutation overlap detector はそれぞれ Lean `--trust=0` と no-axiom checks を通った。Plan 225 は per-tag/permutation successor を作らず current fixture-only line を scoped `no-candidate` とした。いずれも fixture-level detectability だけを残し、outcome type、failure row、validation/mutation rule、branch state、transition、runtime は未選択である。source や transport から semantic fact を推測しない。Canon carrier は未選択である。
-  shared proof-facing model や Core proposal の採択ではない。
-- Gate / Phase、SCN、Core/external contract、
-  `mirrorea_canon/theory/11-metatheory-ledger.md`、final proof status。
-- production implementation と新しい helper / schema / CI / evidence lane。
-
-owner 判断前でも、既存 Canon の literal transcription 又は conditional lemma だけで
-閉じる候補を ADR-0014 に照らして再審査できます。既存 lane、非重複の利用先、正負
-branch は保守的な LAB 選別規律であり、ADR-0014 の standing predicate を狭める
-追加の Canon 条件ではありません。predicate と reserved-boundary exclusion を満たす
-真に新規な candidate は個別に L3 preflight できます。これは official lifecycle
-を進めません。
+上の停止線に触れる L0/L1、Core/external contract、SCN/Gate/Phase、
+`mirrorea_canon/theory/11-metatheory-ledger.md`、新規
+moratorium-protected lane は owner/Canon task へ戻します。根拠:
+`mirrorea_canon/adr/ADR-0013.md`, `mirrorea_canon/adr/ADR-0014.md`,
+`plan/180-t1-t2-statement-identity-dependency-closure-audit.md`,
+`plan/197-i1-bootstrap-decision-and-readiness-audit.md`。
 
 ## オーナーの確認・判断待ち
 
-| 順序 | 判断 | 主な候補 | LAB の推奨 |
+| 順序 | 判断 | 主な候補 | 現在の見解 |
 | --- | --- | --- | --- |
-| 1 | fixed-control drift | pin 維持 / normal Canon rebase proposal | scoped audit は完了。**silent rebase はしない**。rebase は O0 の外側の owner/Canon decision として扱う |
-| 2 | G0-D3 | valid `pass` evidence の後に exact digest を accept / defer 継続 | current v2 `fail` では受理不能。official T1 entry は開かない |
-| 3 | lifecycle / bootstrap | P016 の profile/Canon wording | narrow T2、separate readiness、explicit bootstrap/C-static entry は記録済み。profile は未作成 |
-| 4 | composition / totality | P008 A の exact domain と Diagnostic coverage | totality を determinism と別 obligation にする方向は記録済み |
-| 5 | value / occurrence | P017 X1 relation-state envelope | X1 は記録済み。WRK-0040 は五つの collapse、WRK-0041 は owner-terminal overlap、WRK-0042 は owner-negative/mutation overlap、WRK-0043 は M1 adverse/mutation overlap を supplied fixture 上で検出した。Plan 227 は residence/branch/receipt/use/causality/restore を通常提案で選ぶ連動軸として整理した。positive schema/rule/proof は未選択 |
-| 6 | request validation | P013 M1 の binding/replay/failure mapping | claims は authoritative facts と照合。hidden correlation は禁止して停止 |
-| 7 | Surface / SCN closure | P004/P015 の scalar correspondence と return diagnostic | Participant-only、explicit scalar terminal、v0 return exclusion は記録済み |
+| 1 | fixed-control drift の disposition | pin 維持/defer; normal Canon rebase proposal | scoped audit は統治文書 drift に限定。silent rebase はしない |
+| 2 | G0-D3 | future valid `pass` digest を accept; defer 継続 | `fail` は受理不能。ここまで T1 entry は開かない |
+| 3 | semantic composition | C0--C7 の未選択 relation、identity、totality、scalar、failure 境界を ordinary Canon work で選ぶ | finite evidence を正の意味論に読み替えない |
+| 4 | lifecycle/profile contract | selected statement-level semantics と narrow T2 evidence の後に、P016 の separate readiness を actual Canon profile/wording に bind | P016 は記録済みの本線。integrated/phase amendment は reopen-only |
+| 5 | T1/T2/I1 acceptance | selected shared model、statement/profile、skeleton/readiness を evidence cut として受理 | 前段が揃うまで判断しない |
 
-O0 と drift の scoped audit は完了したが、artifact は valid `fail` であるため
-G0-D3 へ進めません。将来 `pass` route を作るには pin 維持又は normal Canon rebase
-proposal の owner/Canon decision が別途必要です。
-3-7 の方向は記録済みです。WRK-0028 は source-role re-anchor を完了し、C0-A はその
-pinned cut では完了済みです。WRK-0029 は C0-B の条件付き DAG、WRK-0030 は C2-A の
-source-tagged documentary non-substitution だけを retained しました。WRK-0031 は C0-C の
-source-local Diagnostic reference query だけを retained しました。WRK-0032 は通常 admission issuance
-guard を完了し、P012 condition と four named span の source-local result のみを retained しました。
-C3/C4/C5 本体は ordinary Canon design boundary のままです。Plan 219 は C2-B/C3 の最小 semantic residence を
-explicit relation state / history-only / nominal identity に整理し、前者を LAB 推奨とします。Plan 220 は pending、redaction、typed branch、load の relation-state obligation を未証明のまま明示します。P017 はその提案を V1/R1 cross-locus read の X1/XD owner decision request に限定し、2026-07-29 に X1 を記録した。WRK-0040 は supplied finite fixture による五 collapse detector、WRK-0041 は owner-terminal overlap detector、Plan 223 / WRK-0042 は no-owner-mutation clause の supplied owner-negative/mutation overlap、Plan 224 / WRK-0043 は distinct M1 adverse-input/mutation overlap を実行済みとした。source や transport から semantic fact を推測しない。WRK-0043 後は Boolean table を自動拡張せず、independent source condition と falsifier がなければ scoped `no-candidate` とする。Plan 202 の `C3-VR-PRE` は WRK-0033 として
-登録、実行、metadata link まで完了しました。有限 LAB model は matching/single-use/failure-exclusion 下の
-local observation equality と、swapped reply・duplicate reply・failure-then-success の三 distinction だけを確認し、
-  C3 pending/correlation/persistence、source inference、Core rule を選びません。これは shared formal model、T1
-  statement、T2 skeleton への readiness ではなく、その前段の限定 evidence です。
-その fresh preflight は Plan 203 の `C3-VR-SEQ-PRE` を選別し、WRK-0034 が登録・実行・metadata link まで完了しました。続く再審査は Plan 204 により、同じ fixed model の追加定理を scoped `no-candidate` としました。Plan 205 から WRK-0035 は C7 の carrier-neutral factorization を登録・実行・metadata link まで完了しましたが、これは range-only の generic L3 evidence であり、source rule、grounds、concrete artifact ではありません。Plan 206 / WRK-0036 は個別に検査した erasure の common coarsening が paired observation を失う固定 finite countermodel を登録・実行・metadata link まで完了しました。Plan 207 は新しい L3 candidate を作らず、Plan 208--210 は C2-B/C3 comparison を staged relation、validation outcome、linearity、restore configuration、ergonomic projection と A/B instantiation audit へ整理しました。Plan 211/WRK-0037 は B2-OPAQUE の bounded finite table を実行しましたが、A/B carrier や source rule は選びません。
-WRK-0033 の state/reply/transition/translation/observation/assumption を変えず、opaque reply の arbitrary finite list に対する
-translation/local-observation preservation だけを retained します。list は delivery/scheduler/history/trace の意味を持たず、
-C3 carrier、full trace equivalence、source inference、Core rule を選びません。次は C3 proper を先取りせず、その通常 Canon design package を準備する boundary です。
-根拠: `mirrorea_canon/meta/proposals/PROPOSAL-004-surface-v0-grammar-closure.md`,
-`mirrorea_canon/meta/proposals/PROPOSAL-008-elaboration-outcome-totality-boundary.md`,
-`mirrorea_canon/meta/proposals/PROPOSAL-012-mircore-value-flow-and-occurrence-identity.md`,
-`mirrorea_canon/meta/proposals/PROPOSAL-013-post-admission-request-validation-context.md`,
-`mirrorea_canon/plan/00-gates.md`,
-`plan/196-t0-t2-implementation-entry-roadmap.md`,
-`plan/197-i1-bootstrap-decision-and-readiness-audit.md`.
+owner 判断前の autonomous work は ADR-0014 の standing predicate 内の pinned-source
+audit、countermodel、conditional lemma、review、acceptance packet 準備に限ります。新規候補は
+独立 consumer/falsifier と rollback trigger を要し、Gate/Phase/OBL/semantics を動かしません。
+`plan/196-t0-t2-implementation-entry-roadmap.md` と
+`plan/199-selected-semantic-composition-and-inference-boundary.md` がこの境界を詳述します。
 
 ## 根拠と詳細
 
 | 知りたいこと | 正本または証拠 |
 | --- | --- |
-| 目的と source hierarchy | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
-| Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
-| delegated research boundary | `mirrorea_canon/adr/ADR-0014.md`, `mirrorea_canon/working/README.md` |
+| 目的、source hierarchy、概念地図 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
+| Gate / Phase と current lifecycle | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
+| G0 defer と agent research boundary | `mirrorea_canon/adr/ADR-0013.md`, `mirrorea_canon/adr/ADR-0014.md` |
 | proof status | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| T0-T2 dependency plan | `plan/196-t0-t2-implementation-entry-roadmap.md` |
-| I1 decision and readiness audit | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
-| selected semantic composition | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
-| re-anchored composition research | `plan/200-reanchored-semantic-composition-research-plan.md` |
-| C5-PRE candidate selection | `plan/201-c5-a2-issuance-guard-candidate-selection.md` |
-| C5-PRE retained evidence | `plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md` |
-| V1/R1 presentation selection | `plan/202-v1-r1-presentation-refinement-candidate-selection.md` |
-| V1/R1 retained finite evidence | `plan/wrk-0033-v1r1-presentation-refinement.md` |
-| V1/R1 finite-sequence selection | `plan/203-v1-r1-finite-sequence-candidate-selection.md` |
-| V1/R1 finite-sequence / C7 evidence and design frontier | `plan/wrk-0034-v1-r1-finite-sequence-refinement.md`; `plan/204-wrk0034-semantic-composition-no-candidate-disposition.md`; `plan/205-c7-parametric-factorization-candidate-selection.md`; `plan/wrk-0035-c7-parametric-factorization.md`; `plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md`; `plan/207-post-wrk0036-autonomous-frontier-disposition.md`; `plan/208-c2b-c3-value-flow-design-preparation.md`; `plan/209-c2b-c3-relation-obligation-audit.md`; `plan/210-c2b-c3-family-a-b-instantiation-audit.md`; `plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md`; `plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md`; `plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md`; `plan/213-c2b-c3-fiberwise-relational-comparison-selection.md`; `plan/wrk-0039-c2b-c3-fiberwise-relational-presentation-experiment.md`; `plan/214-post-wrk0039-autonomous-frontier-disposition.md`; `plan/215-c2b-c3-ordinary-design-decision-packet.md`; `plan/216-c2b-c3-cross-boundary-compatibility-audit.md`; `plan/217-c2b-c3-carrier-neutral-conditional-comparison.md`; `plan/218-c2b-c3-first-card-source-preflight.md`; `plan/219-c2b-c3-minimal-semantic-residence-options.md`; `plan/220-c2b-c3-relation-state-proof-obligation-audit.md`; `plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md`; `plan/223-p017-x1-owner-negative-mutation-candidate-selection.md`; `plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md`; `mirrorea_canon/working/WRK-0040-p017-x1-coupled-anti-collapse-countermodel.md`; `plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md`; `mirrorea_canon/working/WRK-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`; `plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md`; `mirrorea_canon/working/WRK-0042-p017-x1-owner-negative-mutation-countermodel.md`; `mirrorea_canon/working/WRK-0043-p017-x1-m1-adverse-mutation-countermodel.md` |
-| WRK-0024 C1 evidence | `plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md` |
-| WRK-0027 C6 evidence | `plan/wrk-0027-scn08-scalar-terminal-correspondence.md` |
-| v2 evaluation | `plan/198-t0-g0-governance-profile-v2.md` |
-| statement identity and blockers | `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`, `plan/whole-theory-foundation-audit-20260725.md` |
+| T0--T2 critical path | `plan/196-t0-t2-implementation-entry-roadmap.md` |
+| I1 readiness boundary | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
+| statement identity / shared-model gaps | `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`, `plan/199-selected-semantic-composition-and-inference-boundary.md` |
+| WRK-0045 predicate-only A-Sigma L3-line closure / P017 ordinary-design boundary | `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`, `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`, `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md` |
 | runnable evidence | `samples_progress.md` |
-| current work order | `tasks.md`, `progress.md` |
 
 ## 更新規約
 
-authority-bearing Canon 又は bounded LAB evidence を先に更新し、その後
-`progress.md`、`tasks.md`、`samples_progress.md` とこの文書を必要な範囲で同期します。
-未解決事項は推測で埋めず、詳細な履歴は `plan/` と `docs/reports/` に残します。
+authority-bearing Canon 又は bounded LAB evidence を先に更新し、その後この派生ビュー、
+`progress.md`、`tasks.md`、`samples_progress.md` を必要な範囲で同期します。大局的な
+current status、critical path、roadmap、phase recut、lifecycle inventory の更新は、Canon-first
+read-only planner review を編集前と package close 前に受けます。planner は advisory であり、
+source delta がない場合は新しい plan を作らず snapshot maintenance に留めます。

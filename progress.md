@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-31 19:34 JST
+最終更新: 2026-07-31 21:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -11,7 +11,9 @@ notes. If LAB text conflicts with canon, canon wins.
 
 `docs/project-status.md` is the human control view, `tasks.md` is the current
 work map, `plan/` is detailed repository memory, and `docs/reports/` is
-immutable task evidence. This file creates no normative decision.
+immutable task evidence. This file creates no normative decision. Broad status,
+critical-path, roadmap, phase-recut, and lifecycle-inventory updates receive a
+Canon-first read-only `planner` review before editing and before package close.
 
 ## project axis
 
@@ -58,24 +60,16 @@ Current exact blockers:
    by the displayed indexed rules, but no scalar representation is selected.
    Snapshot/evaluation/pending semantics, request/replay identity, served/admission
    facets, scalar candidate comparison, and total domain remain to be bound.
-5. Plans 208--211 prepare and execute B2-OPAQUE as one bounded finite table:
-   two opaque request atoms, explicit staged projections, finite receipt/resume
-   extensions, grounded dependency, and involutive local restore. Plan 212's
-   bare-view comparison is not executed because the view loses supplied keys.
-   Plan 213 instead compares every supplied cell fiberwise. WRK-0039 retained
-   that finite relation/bundle comparison with all direct graph rows and exact
-   transition/restore observations. A/B remain conditional: neither DAG ancestry
-   nor an unlocated relation supplies identity, pending, receipt, restore, or
-   held context. Plan 214 finds no non-duplicate L3 successor at this unchanged
-   cut; Plan 215--218 group, audit, compare, and source-screen the ordinary
-   decision boundary. Plan 219 recommends explicit relation state over a
-   history-only projection or fresh nominal identity; Plan 220 lists its
-   pending/branch/redaction/load proof obligations. P017 records the owner's
-   X1 disposition for V1/R1 cross-locus reads. WRK-0040 passed the
-   predicate-only finite detector for that scope; WRK-0041 passed a distinct
-   owner-terminal overlap detector; WRK-0042 passed the separate supplied
-   owner-negative/mutation detector; and WRK-0043 passed the distinct supplied
-   M1 adverse-input/mutation overlap. None selects Canon semantics.
+5. The bounded C2-B/C3 and P017 screens do not supply a shared model: finite
+   B2-OPAQUE / fiberwise evidence, detector results, and the relation-state
+   obligation audit leave identity, pending, receipt, failure, restore, and
+   held context unselected. P017 X1 remains an owner-accepted bounded direction.
+   WRK-0045 reproduced a candidate-local branch-to-binding non-sharing falsifier
+   under Lean; only that predicate-only A-Sigma L3 line is `frozen / DEFER` and
+   Plan 245 finds it `NO-SUCCESSOR`. Plan 227 and Plans 230--245 already hold
+   the choice-neutral inventory, so there is no current autonomous X1 L3
+   successor/inventory. Reopen only for a new source delta, concrete owner
+   direction, or an ADR-0014 candidate with an independent consumer/falsifier.
 6. No accepted shared Core/Config/Step/WellFormed/elaboration/history model
    exists for T1/T2 proof-facing packages. WRK-0028 retains only a source-local
    C0/C2 fact manifest: it confirms proposal directions are not current rules
@@ -181,7 +175,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
 | Research | selected semantic composition | WRK-0028--0039 retain bounded evidence. Plan 214 is closed at its cut; P017 X1 passed WRK-0040--0043 detectors and Plan 225 closes its fixture-only line. No Canon carrier changed |
-| Research | C2-B/C3 relation-state model | P017 X1 fixture line: scoped no-candidate; Plan 227 prepares the ordinary decision tuple; Plan 228 / WRK-0044 retain a five-pair static account; Plans 230--245 complete the candidate-card, R/L, B, intake, and frozen-WRK screens | Plan 227 and Plans 230--245 already give the choice-neutral inventory. There is no current autonomous X1 package. A later candidate needs a new source delta, concrete owner direction, or an ADR-0014 proposition with independent consumer/falsifier. Do not treat K0 as selected, repair WRK-0045, repair K1, or switch to B-Pi |
+| Research | C2-B/C3 relation-state model | P017 X1 remains owner-accepted. Its fixture/predicate-only L3 screens end at WRK-0045 / Plan 245; Plans 227 and 230--245 retain the ordinary decision vector and inventory | There is no current autonomous X1 L3 successor/inventory. A later candidate needs a new source delta, concrete owner direction, or an ADR-0014 proposition with independent consumer/falsifier. Do not treat K0 as selected, repair WRK-0045, repair K1, or switch to B-Pi |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
 | Research evidence | WRK-0027 C6 source comparison | SCN-08's scalar/terminal needs explicit correspondence; no invalidity or representation conclusion |
@@ -195,7 +189,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; X1 has WRK-0040--0043 finite evidence and no current successor after WRK-0045 / Plan 245 | heavy | new ADR-0014 candidate only; no current X1 or lifecycle preparation package |
+| 1 | semantic kernel | directions recorded; proof-facing composition incomplete; P017 X1 is owner-accepted, while its WRK-0045 predicate-only L3 line has no successor | heavy | new ADR-0014 candidate only; no current X1 L3 successor or lifecycle inventory package |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -221,6 +215,15 @@ durable save/load, or public product completion is claimed.
 
 ## recent log
 
+- 2026-07-31 21:52 JST: A Canon-first planner review and an independent Oracle
+  review both found that a new critical-path plan would duplicate Plans 196/197
+  and the current task map. Derived views now make the active fixed-control/G0
+  owner boundary, P016 recorded route, and the distinction between owner-accepted
+  P017 X1 and its `DEFER / NO-SUCCESSOR` predicate-only L3 line explicit. The
+  repository rule now requires planner review around broad
+  management changes; no Canon, Gate, Phase, OBL, semantic, or implementation
+  status changed.
+
 - 2026-07-31 19:34 JST: Independent source-cut re-screen found that Plan 227
   and Plans 230--245 already contain the neutral P017 X1 inventory, while
   P016 and Plans 196/197 already contain lifecycle/profile decision
@@ -231,8 +234,9 @@ durable save/load, or public product completion is claimed.
 - 2026-07-31 15:37 JST: Plan 245 independently re-screened the frozen
   WRK-0045 result and selected `NO-SUCCESSOR / DEFER`. The countermodel is
   candidate-local: P017 does not itself define the candidate's branch law.
-  No repair or new L3 record follows; the next boundary is ordinary X1 design
-  preparation under Plan 227's R/B/T/U/C/L vector.
+  No repair or new L3 record follows. This historical closeout applies only to
+  the predicate-only L3 line; P017 X1 remains an owner-accepted ordinary design
+  boundary, with no current autonomous L3 successor/inventory.
 
 - 2026-07-31 15:19 JST: Executed and froze WRK-0045. The retained A-Sigma
   source compiled structurally with Lean `--trust=0`, but the exact one-binding,
