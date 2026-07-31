@@ -73,6 +73,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | P017 X1 K0 H_K-rs single-block premise/falsifier design | `plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md` |
 | P017 X1 K0 H_K-rs A-Sigma conditional trace (frozen / DEFER) | `mirrorea_canon/working/WRK-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md`, `docs/reports/2564-wrk0045-p017-x1-asigma-conditional-trace-execution.md` |
 | post-WRK-0045 no-successor / ordinary X1 handoff | `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md` |
+| post-WRK-0045 autonomous-frontier reconciliation | `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 

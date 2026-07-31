@@ -7,6 +7,17 @@
 proof status / Core / contract を変更しない。owner の判断が必要な箇所を agent が
 選んだことにもならない。
 
+## Current disposition note (2026-07-31)
+
+This roadmap preserves its original conditional comparison for repository
+memory. Its earlier LAB recommendation to integrate T2 and I1 readiness at one
+checkpoint is superseded by the owner disposition in `PROPOSAL-016`: **narrow
+T2**, followed by a separately accepted I1-readiness/bootstrap record, with an
+explicit bootstrap before C-static formal I1 entry. The actual profiles,
+evidence-class mapping, wording reconciliation, and authorization remain
+future ordinary Canon work. This note changes no Canon criterion or lifecycle
+state.
+
 目的は、次の二つを混同せずに T2 までの実行順を固定することである。
 
 1. ADR-0014 の範囲で agent が自律的に進められる研究・検証。
@@ -92,8 +103,10 @@ readiness は T2 後の別 profile / acceptance に残してよい。
    G0-G7 の statement-level criterion を閉じるか、I1 の対象 SCN / fragment を明示的に
    狭める。
 
-この計画は user の表現に合わせ、2 を推奨する。ただしこれは LAB recommendation
-であり、Canon criterion の変更ではない。
+この計画が元の source cut で user の表現に合わせていた 2 の推奨は、後に記録された
+P016 の narrow T2 + separate I1-readiness disposition により superseded である。
+現在の正本読解では、T2 profile と I1-readiness/bootstrap record を別々に扱う。
+これは profile の内容・受理・実装認可を決めるものではない。
 
 ## 依存 DAG
 
@@ -174,7 +187,7 @@ execution dependency であり、`INDEX.json` の dependency graph をそのま�
 | P0A conservative statement preflight | A/R | 既存 Canon literal だけで閉じる signature / statement 候補の eligibility matrix | ADR-0014 五条件、非重複、既存 lane、明示 falsifier、reserved-boundary exclusion が全て通る候補だけを選ぶ | candidate がなければ owner checkpoint 1 |
 | P1 T0 profile repair design | A prepares, O decides | `pass` に統一する profile revision と旧 artifact の扱い | proposal、代替、互換性、non-claims、移行規則を owner が disposition | Canon edit 前 |
 | P2 T0 fresh evaluation | A/R | 修正版 exact contract に従う一回限りの artifact | exact Git blob、順序、cardinality、RFC 8785 digest、3 check、non-claims が一致 | G0-D3 |
-| P3 lifecycle contract | A prepares, O decides | Gate ledger-status mapping、T1/T2 profile、T2-I1 関係 | profile が artifact identity、status literal、human acceptance を一意化 | lifecycle action 前 |
+| P3 lifecycle contract | LAB preparation complete; O/Canon decides | P016, Plan 196, and Plan 197 already identify the Gate/ledger mapping, T1/T2 profile, proof-skeleton evidence, and T2-I1 boundary that the ordinary Canon package must bind | no separate autonomous LAB preparation remains without a new source delta; the future Canon package fixes artifact identity, status literal, and human acceptance | ordinary Canon lifecycle action |
 | P4 semantic directions | A/O recorded; follow-up is A/R | P004/008/012/013/015/016 の bounded direction | direction と non-effects を proposal に記録。具体的 rule は未改訂 | composition research 前 |
 | P4A composition/inference boundary | A/R | Plan 199 C0--C7 source anchors、countermodels、safe omission matrix | shared carrier が hidden identity/authority/default を要さず、停止条件が明示される | common model 前 |
 | P5 shared formal model | A/R, O integrates | Canon-aligned formal domains / relations | opaque placeholder でなく、P4A の正負例、coverage、non-effects、source anchors が揃う | ledger movement |
@@ -213,8 +226,9 @@ repair の承認を G0 exit の承認として扱わない。
 
 ### 3. T2 target
 
-狭い T2 と I1-entry readiness を同じ checkpoint とするかを owner が記録する。
-本計画は「同じ checkpoint、ただし追加 criteria を profile に明記」を推奨する。
+本計画の元の「同じ checkpoint」推奨は superseded である。P016 の recorded
+direction は narrow T2 の後に separate I1-readiness/bootstrap record を置く。
+具体的な profile wording と acceptance は引き続き owner / Canon action である。
 
 ## Semantic direction checkpoint 2
 

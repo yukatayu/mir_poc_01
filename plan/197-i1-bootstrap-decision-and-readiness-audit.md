@@ -8,6 +8,15 @@ proof status / Core / carrier / conformance / production implementation を変�
 記録済み disposition は各 proposal を正本とし、この LAB 文書はその後続順序だけを
 整理する。
 
+## Current disposition note (2026-07-31)
+
+`PROPOSAL-016` has since recorded the current direction: narrow T2, a separate
+I1-readiness/bootstrap record, and explicit bootstrap before C-static formal
+I1 entry. The integrated profile and direct phase-contract-amendment routes
+remain reopen-only alternatives, not coequal current recommendations. This
+plan remains LAB preparation; it does not create the future Canon profile,
+acceptance, or authorization.
+
 Plan 196 は T0 から T2 までの条件付き研究計画である。本計画はそのうち
 **I1 実装をいつ、何を根拠に始められるか** を深掘りする。Plan 196 の履歴を
 書き換えず、I1 入口については `narrow T2 + separate I1-readiness` という記録済み
@@ -163,12 +172,12 @@ G5 では saved-object validation predicate、restore relation、restored-state 
 property を分ける。`no stale resurrection` を success predicate に埋めて同じ性質を
 導くことは evidence として認めない。
 
-### O6 - narrow route を選んだ場合の separate I1-readiness / bootstrap authorization
+### O6 - P016-recorded narrow route の separate I1-readiness / bootstrap authorization
 
-O6 は owner が narrow T2 route を採った場合に、T2 を I1 authorization と混同しない
-ための **提案された** record である。これは現在の Canon gate ではない。owner が
-integrated profile 又は direct phase-contract amendment を採る場合は、その選択済み
-record が以下と同等の情報を bind する。
+O6 は P016 が narrow T2 route を記録した後、T2 を I1 authorization と混同しない
+ための **将来の、まだ受理されていない** record である。これは現在の Canon gate
+ではない。integrated profile 又は direct phase-contract amendment は P016 を reopening
+する明示的な Canon action がある場合だけ再検討する。
 
 separate route では、少なくとも次を bind する。
 
@@ -217,10 +226,13 @@ single-process reference implementation が実際に消費する semantic interf
 ## 現在の停止線
 
 O0 は完了し、v2 artifact は valid `fail` だったため、G0-D3 はなお進めない。一方、
-P004/P008/P012/P013/P015/P016 の方向は記録済みである。直近の自走線は Plan 199
-C0--C7 であり、ここで共通 model に必要な snapshot、identity、pending control、facet、
-scalar、total-domain、safe inference を反例で絞る。これらが最低限の Canon amendment
-又は profile wording を要求した時点で、その選択を次の owner/Canon packet に戻す。
+P004/P008/P012/P013/P015/P016 の方向は記録済みである。Plan 199 C0--C7 は shared
+model 前の source-bound research memory として残るが、その後の P017 X1 line は
+Plan 245 で `NO-SUCCESSOR / DEFER` とした。Plan 227 と Plans 230--245 は ordinary
+X1 inventory をすでに記録しており、現在その inventory を言い換えた autonomous
+package は作らない。新しい source delta、concrete owner direction、又は適格な
+ADR-0014 candidate が現れるまで、lifecycle/profile 側も X1 側も Canon preparation
+の水増しで進めない。
 
 ## 根拠
 
