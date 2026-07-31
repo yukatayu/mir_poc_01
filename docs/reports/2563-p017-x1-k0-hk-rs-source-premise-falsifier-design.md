@@ -59,7 +59,14 @@ source declaration ban list, execution protocol, and DEFER/freeze criteria.
 - Oracle status/session inspection and one temporary `wrk0045-premise-design`
   review with direct Canon, WRK, and LAB-plan inputs attached
 - Git status/upstream checks and timestamp capture
-- validation commands are run after this documentation change
+- `python3 -m py_compile scripts/validate_docs.py scripts/check_source_hierarchy.py`
+- `git diff --check`, `python3 scripts/check_source_hierarchy.py`,
+  `python3 scripts/validate_docs.py`, and `python3 meta/build-index.py --check`
+  from `mirrorea_canon/`
+- `python3 scripts/validate_docs.py --authoritative-working-annex` in a fresh
+  detached worktree at `6be5894675445f7c95d6b18c623f977e6e1ef8b2`
+- `python3 -m unittest -q scripts.tests.test_validate_docs` in that detached
+  worktree
 
 ## Evidence / outputs / test results
 
@@ -72,6 +79,12 @@ disposable harness because WRK-0045 forbids a retained fixed role index.
 
 No Lean source, harness, artifact, semantic result, or implementation behavior
 was created or run in this documentation-only task.
+
+The source-hierarchy check found 794/794 required paths. Normal documentation,
+Canon-index, Python syntax, and whitespace checks passed. The fresh detached
+worktree passed authoritative documentation validation, and the complete focused
+validator suite passed all 88 tests in 4598.312 seconds. These results validate
+the plan/documentation registration only; they are not Lean or semantic evidence.
 
 ## What changed in understanding
 
@@ -139,8 +152,9 @@ this one, runs the materialized source and disposable harnesses.
 
 ## Commit / push status
 
-Pending at report write. The plan, required-path registrations, snapshots, and
-this report are committed and pushed after local and clean-worktree validation.
+Content commit `6be5894675445f7c95d6b18c623f977e6e1ef8b2` was committed and
+pushed before the clean-worktree checks. This validation addendum is committed
+and pushed separately after its own final diff and detached-worktree validation.
 
 ## Sub-agent session close status
 

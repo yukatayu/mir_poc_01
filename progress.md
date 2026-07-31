@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-07-31 11:52 JST
+最終更新: 2026-07-31 13:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -218,6 +218,13 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-07-31 13:12 JST: Plan 244's committed source-design gate passed fresh
+  detached-worktree authoritative documentation validation and all 88 focused
+  validator tests in 4598.312 seconds; normal hierarchy, documentation,
+  Canon-index, Python syntax, and whitespace checks also passed. The source is
+  still unmaterialized, and no Lean result, Canon decision, runtime behavior,
+  or lifecycle claim advanced.
 
 - 2026-07-31 11:52 JST: Plan 244 completed the WRK-0045 premise/falsifier
   design screen. It conditionally admits only the declared single source after
