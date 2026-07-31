@@ -147,21 +147,31 @@ implementation readiness, runtime behavior, or public claim.
 
 ## Results and review
 
-Reliance status: not-promoted
+Reliance status: frozen
 
-Positive evidence: not-run
+Positive evidence: none. The source's `lean --trust=0` acceptance and no-axiom
+reports establish only that the declared conditional presentation is accepted
+by Lean; they do not overcome the registered falsifier and do not establish a
+candidate model, satisfiability, or semantic result.
 
-Negative evidence: No outcome source or outcome command exists. The current
-boundary rejects any source that needs a reserved surface or hides a required
-H_K premise; this is a pre-registration condition, not an experimental result.
+Negative evidence: The declared source was materialized and executed at
+`ad52a6c4364235af92ec0218d9592979b86039b3`. Its exact extracted-source
+countermodel has one requester, one binding, and two distinct `Bool` branches:
+the same binding is pending on both branches while every premise of
+`pending_has_one_named_binding_and_no_shared_requester` holds. Its conclusion
+only forces the requester, not the branch, to agree. This is the registered
+branch-to-binding non-sharing falsifier. The result is `DEFER`; do not repair
+this source in place or switch to B-Pi.
 
-Evidence artifacts: none
+Evidence artifacts: LAB:plan/wrk-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md@ad52a6c4364235af92ec0218d9592979b86039b3:690d67db0de7aca7182cf6dc6c74988480c0923fffc6fa687c132cd706dbba1d, LAB:docs/reports/2564-wrk0045-p017-x1-asigma-conditional-trace-execution.md@ad52a6c4364235af92ec0218d9592979b86039b3:42b500638f41b5507cbf378d851746b9793948fe9a5d8d748f931ab7025ebdfb
 
-Evidence commits: none
+Evidence commits: ad52a6c4364235af92ec0218d9592979b86039b3
 
-Impact / non-effects: This record is normative only about its reversible L3
-research boundary and procedure. It does not promote WRK-0044's static evidence
-or establish the joint satisfiability of this record's hypotheses.
+Impact / non-effects: This frozen L3 record retains the exact negative LAB
+artifact and changes no settled theory or implementation surface. It does not
+promote WRK-0044, establish joint satisfiability, select a branch key or
+identity, introduce a receipt transition/schema/restore function, or establish
+any proof/OBL, Gate/Phase, implementation, runtime, or public result.
 
 Independent review: not-required-for-L3
 

@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 20558
+   "bytes": 20557
   },
   {
    "id": "root/north-star",
@@ -1945,7 +1945,7 @@
    "summary": "P017 X1 の V1/R1 cross-locus read に限り、Plan 242 の A-Sigma H_K-rs を一つの conditional trace として既存 Lean LAB lane で検査できるかを事前登録する。候補 occurrence `r` の到達可能性、Canon schema、transition、identity、proof、runtime は選ばない。",
    "open_items": [],
    "path": "working/WRK-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md",
-   "bytes": 11853
+   "bytes": 12972
   }
  ]
 }
