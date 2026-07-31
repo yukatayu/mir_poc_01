@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-07-31 21:52 JST
+最終更新: 2026-07-31 22:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,7 +40,7 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB evidence と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted、唯一の fresh artifact は fixed-control drift に対する valid `fail` | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる |
 | lifecycle / I1 | P016 は narrow T2、separate I1-readiness/bootstrap、C-static formal entry の方向を記録 | selected statement-level semantics を bind する profile、ledger mapping、phase/conformance wording、実装認可は未作成 |
-| semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`、Plan 245 `NO-SUCCESSOR` | 反例・finite screen は carrier、transition、proof、実装を選ばない |
+| semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`。K0 U/L の q-fibered spent/restore conditional trace は source-free L3 registration 準備中 | 反例・finite screen は carrier、transition、proof、実装を選ばない |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence を限定範囲で実行できる | 個別の parser/checker/runtime/transport evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、official conformance、production runtime、WAN federation は主張しない |
 
@@ -59,11 +59,13 @@ official T0
   -> I1 authorization
 ```
 
-P017 X1 は owner-accepted direction のままですが、WRK-0045 の predicate-only A-Sigma L3
-line には current autonomous successor がありません。Plan 227 と Plans 230--245 は X1 の
-choice-neutral inventory を、P016 と Plans 196/197 は lifecycle の decision preparation を
-既に保持します。新しい source delta、concrete owner direction、又は独立
-consumer/falsifier がない限り、同じ L3/inventory を再package化しません。
+P017 X1 は owner-accepted direction のままです。WRK-0045 の predicate-only A-Sigma L3
+line は `DEFER` のままですが、再査読は同じ line を修復せず、Plan 230 K0 の U/L に一件だけ
+独立 consumer を見出しました。`X1-K0-QF-UL-LIFT` は q-fibered spent fact と local restore
+preservation の条件付き検査であり、まず source-free L3 record として登録します。receipt、
+matching、identity、actual storage/restore、Gamma/Delta、Core、OBL、runtime は引き続き未選択
+です。この reserve は official path の Gate input でも dependency でもありません。Plan 227 の
+inventory 拡張や lifecycle preparation は新規 package にしません。
 根拠: `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/theory/11-metatheory-ledger.md`,
 `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`。
@@ -86,7 +88,9 @@ record で明示的に整合化する必要があります。
 - shared Core/Config/Step/WellFormed/elaboration/history model、exact statement identity、
   T1/T2 profile、proof-skeleton evidence class は未選択である。
 - P017 X1 の branch/request association、receipt matching、failure row、causal integration、
-  restore relationは未選択である。WRK-0045 を修復せず、B-Pi へ切替えず、K1 を修復しない。
+  actual restore relationは未選択である。WRK-0045 を修復せず、B-Pi へ切替えず、K1 を修復しない。
+  `X1-K0-QF-UL-LIFT` が actual semantic surface、global one-shot、又は full P017 closureを
+  要求した時点でも停止する。
 - I1 は T2 close と同義ではない。all-SCN scope、G4/G6/G7、OBL-003/027、C-static、
   carrier/BND baseline、scoped moratorium lift を readiness record が bind するまで実装認可はない。
 

@@ -125,10 +125,10 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   Plan 199 は後続の composition/falsifier 境界を記録する LAB plan であり、現在の
   自律 package を開きません。
 - P017 X1 は V1/R1 cross-locus-read に限る owner-accepted relation-state direction のままです。
-  `frozen / DEFER` と Plan 245 の `NO-SUCCESSOR` は WRK-0045 の predicate-only A-Sigma L3
-  line にだけ及びます。choice-neutral inventory は既存の Plan 227 と Plans 230--245 にあり、
-  現在の自律 L3 successor/inventory はありません。lifecycle についても P016 と Plans 196/197
-  が preparation を記録済みで、新しい自律 inventory は作りません。
+  `frozen / DEFER` と Plan 245 の当初の `NO-SUCCESSOR` は WRK-0045 の predicate-only A-Sigma L3
+  line にだけ及びます。独立再査読は、K0 U/L に限定した q-fibered spent/restore conditional trace を
+  一件だけ source-free L3 registration に進めます。これは carrier、receipt、identity、actual
+  persistence、Core、OBL、runtime を選ばず、inventory/lifecycle の拡張も作りません。
 - Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
   evidence は bounded LAB として実行できます。final grammar/API/ABI、official
   conformance、production runtime、WAN federation、distributed durable save/load

@@ -13,6 +13,73 @@ countermodel closes the current predicate-only A-Sigma L3 line. It does not
 justify a repair or another autonomous source-free L3 record. Future
 substantive work returns to the ordinary P017 X1 design boundary.
 
+## Independent re-screen correction (2026-07-31)
+
+The preceding conclusion remains controlling for **WRK-0045's predicate-only
+A-Sigma proposition**: its failed branch-to-binding premise is not repaired,
+renamed, or used as a route to B-Pi. An independent Oracle review followed by a
+Canon-first planner review found one omission in this plan's candidate screen,
+however. It did not test the narrower K0 U/L question below against the already
+recorded consumer in Plans 230--231.
+
+This LAB re-screen identifies at most one fresh ADR-0014 preregistration
+candidate. P017's owner disposition and ADR-0014, rather than this plan or the
+Plan 227 matrix-omission trigger, are its only possible starting authority; its
+own pinned authority cut and standing-predicate check remain mandatory:
+
+```text
+X1-K0-QF-UL-LIFT
+```
+
+This is not a repair or successor presentation of WRK-0045. It is a separate,
+candidate-local conditional trace within Plan 230's K0 external-rejection
+branch. Its direct consumer is the still-open `H_K0-U` / `H_K0-L` no-reset /
+re-enable preservation obligation: what minimum candidate-local premise is
+needed before a later ordinary design can test that obligation. The final
+primitive-versus-uniquely-derived classification remains OPEN. Plans 230--231
+leave this U/L conclusion unproved; WRK-0045 only assumed named use
+functionality and did not prove a mixed step/restore preservation result.
+
+The proposed record may use only the following disposable hypotheses:
+
+1. an opaque `AcceptedSuccess(state, q)` premise for each visited
+   experimental state, without deriving its preservation across restore or
+   defining receipt generation, matching, a semantic transition, an occurrence
+   kind, or a causal generator;
+2. a disposable `H_K` predicate `Spent(state, q)`, without calling it
+   semantic state, a stored field, a final consumption primitive, a `Branch`
+   sort, request key, `Config`/`SaveObject` field, Core form, runtime bit, or
+   public schema;
+3. a candidate-local experimental consume step that requires accepted success
+   and an unspent fact, establishes `Spent`, and is monotone under non-restore
+   ordinary experimental steps; and
+4. a candidate-local experimental restore edge that relates `(state_pre, q_pre)`
+   to `(state_post, q_post)` and preserves `Spent` along that one tracked fiber.
+   It assumes neither `q_pre = q_post`, an identity/key, independent-load
+   equality, a restore function, nor a persistence format.
+
+Its sole possible positive conclusion is conditional: those hypotheses suffice
+for at-most-one experimental consumption along one finite **linear** mixed
+step/restore lineage without an independent Branch identity. It claims neither
+totality, functionality, injectivity, no-merge/no-duplicate, nor every
+admissible restored continuation. Its adverse alternative removes `Spent`
+preservation from one restore edge only, while retaining opaque acceptance and
+non-restore ordinary-step preservation, then must exhibit a two-consumption
+trace. This is an omission/reset countermodel, not a claim that the remaining
+alternative is a genuinely derived final representation. A future comparison
+with a uniquely derived fact needs its own explicit derivation and consumer.
+
+Stop rather than registering or executing if the source needs a receipt
+transition/matching identity/occurrence/causal generator to obtain
+`AcceptedSuccess`; treats `Spent` as a Canon or shared storage surface; selects
+actual `Gamma`/`Delta` disposition; assumes global at-most-one or equivalent
+use functionality; claims actual admissible-load or full P017 closure; or needs
+a new helper, module, schema, CI/Make surface, or evidence lane.
+
+This correction follows Plan 227's explicit independent-review reopen condition
+for a matrix omission. It does not alter Canon, select K0 as an ordinary design,
+or make an official T0/T1/T2/I1 change.
+
 ## Authority and evidence cut
 
 DIRECT Canon constraints are ADR-0014, P017 X1 relation-state envelope,
@@ -86,6 +153,13 @@ Another autonomous L3 record is eligible only when every condition holds:
 A changed Canon cut or a pinned ordinary-design artifact with a concrete
 fact/occurrence/order inventory may satisfy the first condition later. The
 current countermodel alone does not.
+
+For this plan's condition 5, a named relation, transition, or correspondence
+means a selected/shared or claimed semantic surface. A reversible `H_K` may
+state an explicitly candidate-local experimental predicate, step, or local
+correspondence only when it has the separate consumer, falsifier, non-effects,
+and stop line required above. It must not be read as a selected Canon relation
+schema, transition, persistence mechanism, or implementation surface.
 
 ## Ordinary X1 handoff
 
