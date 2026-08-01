@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-01 12:43 JST
+最終更新: 2026-08-01 14:46 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -226,6 +226,14 @@ current lifecycle status.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-08-01 14:46 JST: Refreshed
+  `docs/mirrorea-project-overview.html` as a Canon-first three-lane reader
+  view. It makes official T0, completed LAB S2-A awaiting N1/N2/N3, and
+  bounded runnable evidence visible independently, and records the
+  SCN-02/SCN-08, Gate/ledger, save/load, C2 exchange-state, and I1 bootstrap
+  connections. No Canon, Gate, Phase, OBL, evidence classification, or blocker
+  moved.
 
 - 2026-08-01 12:43 JST: Completed the S2-A C1/C2 LAB amendment comparison.
   The packet separates C1-A-r owner-sampled same-owner RMW from current-shape

@@ -1,0 +1,47 @@
+%% Title: Mir / Mirrorea current state — three independent lanes
+%% Description: Current status map. Canon lifecycle, goal-first semantic integration, and bounded runnable LAB evidence are independent lanes. Official Canon lifecycle is T0 and OBL-001 through OBL-028 are all open. The map does not claim phase entry, conformance, proof discharge, or production readiness.
+flowchart TB
+  accTitle: Mir / Mirrorea current state — three independent lanes
+  accDescr: Official Canon lifecycle is T0, stopped at valid fail, and has OBL-001 through OBL-028 all open. Goal-first semantic integration completed integration package S2-A but waits for owner/Canon reconciliation and selection before a shared model. Runnable LAB evidence is reusable but does not advance the other two lanes.
+
+  subgraph Official["A. 公式 lifecycle（Canon のみが動かせる）"]
+    T0["T0: 現在\nG0 profile v2 = valid fail\nOBL-001..028 = all open"]
+    O0["owner / Canon\nfixed-control disposition"]
+    G0["G0 exit / T1 entry\n未成立"]
+    T1["T1: calculus + G1-G3 statements"]
+    T2["T2: skeletons + G5 statements"]
+    I1["I1: single-process reference\nC-static entry; C-runtime/carrier exit"]
+    T0 --> O0 --> G0 --> T1 --> T2 --> I1
+  end
+
+  subgraph Semantic["B. 意味論統合（LAB packet。選択後のみモデル化）"]
+    S1["integration package S1\nauthority-aware cut: 完了"]
+    S2A["integration package S2-A\nC1/C2 comparison: 完了"]
+    N["owner / Canon: N1 / N2 / N3\nSCN-02 reconciliation + amendment selection"]
+    Freeze["ordinary amendment freeze\nintegration package S2-B より前"]
+    S2B["integration package S2-B\nshared model: Surface / Core / Config / Step / WF"]
+    S3["integration packages S3-S5\nstatements, narrow T2,\nI1-readiness / authorization"]
+    Stop["I1 entry closeout\nfirst implementation package の前で停止"]
+    S1 --> S2A --> N --> Freeze --> S2B --> S3 --> Stop
+  end
+
+  subgraph Evidence["C. runnable LAB evidence（再利用可、昇格ではない）"]
+    L1["Surface / current-L2\nparser-free and bounded checks"]
+    L2["Lean / countermodel\nconditional evidence"]
+    L3["Product Alpha / Full System V1\noperational suites"]
+    L4["limited Docker / transport / view\nevidence only"]
+    L1 --- L2 --- L3 --- L4
+  end
+
+  Evidence -. "実装材料・反証・再現証拠\nとして使えるが、Gate/Phase/OBL を進めない" .-> Semantic
+  Freeze -. "official acceptance / authorization は別途必要" .-> Official
+  S3 -. "all-SCN scope と explicit authorization が揃って初めて\nI1 implementation を開始可能" .-> I1
+
+  classDef official fill:#fff8d8,stroke:#8a6809,color:#423400,stroke-width:2px
+  classDef semantic fill:#e7f4f1,stroke:#0d756d,color:#12302d,stroke-width:2px
+  classDef decision fill:#fff0ee,stroke:#b64235,color:#4a1b15,stroke-width:2px
+  classDef evidence fill:#eaf2fb,stroke:#1c5ca5,color:#102d52
+  class T0,O0,G0,T1,T2,I1 official
+  class S1,S2A,Freeze,S2B,S3,Stop semantic
+  class N decision
+  class L1,L2,L3,L4 evidence
