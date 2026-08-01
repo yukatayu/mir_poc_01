@@ -182,7 +182,11 @@ or sample blocker changed.
 
 ## Commit / push status
 
-Pending initial package commit, push, and remote-parity check.
+The initial package content was committed as
+`740cf906dc0e32264d8bcc2136629adaf81fbefb` (`docs: refresh project overview`)
+and pushed to `origin/main`. This closeout metadata is committed in a second
+documentation commit; after that push, `HEAD` / `origin/main` parity and a
+clean worktree are verified.
 
 ## Sub-agent session close status
 
