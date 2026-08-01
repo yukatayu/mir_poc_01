@@ -18,6 +18,16 @@ evidence-class mapping, wording reconciliation, and authorization remain
 future ordinary Canon work. This note changes no Canon criterion or lifecycle
 state.
 
+### Goal-first integration reading (2026-08-01)
+
+The official lifecycle dependency recorded below remains accurate for Gate / Phase acceptance. It is
+not a requirement to serialise all semantic integration behind the T0 fixed-control disposition.
+ADR-0013's phase-governance artifact is not program meaning, proof, or SCN conformance evidence.
+`plan/246-goal-first-semantic-integration-and-i1-entry.md` therefore starts a parallel LAB
+integration line: it turns the already recorded semantic directions into one falsifiable I1 candidate
+without claiming a Gate exit, Canon amendment, or implementation authorization. The official path must
+rejoin before T1/T2/I1 acceptance; this correction changes no Canon criterion.
+
 目的は、次の二つを混同せずに T2 までの実行順を固定することである。
 
 1. ADR-0014 の範囲で agent が自律的に進められる研究・検証。

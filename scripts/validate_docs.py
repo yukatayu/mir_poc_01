@@ -680,6 +680,7 @@ REQUIRED = [
     "plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md",
     "plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md",
     "plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md",
+    "plan/246-goal-first-semantic-integration-and-i1-entry.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

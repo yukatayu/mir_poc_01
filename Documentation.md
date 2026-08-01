@@ -21,6 +21,7 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 規範正本の構造 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
+| 目的起点の semantic integration / I1 entry | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | 選択済み方向の合成・推論境界 | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
@@ -116,6 +117,11 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 - T0 profile v2 は adopted 済みです。v1 artifact は nonconforming historical
   evidence として保持され、唯一の fresh v2 artifact は fixed-control drift により
   `fail` です。G0-D3、G0 exit、T1 entry、I1 authorization は未成立です。
+- governance drift は official lifecycle の lane に限る。program meaning / SCN
+  conformance の前提ではないため、goal-first integration は `plan/246-goal-first-semantic-integration-and-i1-entry.md` に従い
+  並行して開始済みです。D0/D3/D4 は LAB working candidate、D1/D2 は Core/SCN
+  amendment hypothesis であり、現時点の自走範囲は plan/report の comparison に限る。
+  formalization / prototype は ordinary Canon selection 後である。
 - T1/T2 には canonical phase-exit JSON profile がありません。
 - 現行 T2 criterion は OBL-020/021/002 proof skeleton と G5 statement 群です。
   これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。

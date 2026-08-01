@@ -915,6 +915,10 @@
   (`L3-open`, `not-promoted`; A0 conditionally excludes two consumes on one
   supplied finite line and A1 retains the omission/reset control. It has no
   P017 model, semantic-selection, or critical-path effect.)
+- Goal-first semantic integration / I1 entry decision packet:
+  `plan/246-goal-first-semantic-integration-and-i1-entry.md`
+  (official T0/G0 governance and autonomous semantic integration are tracked
+  as separate lanes; D0--D4 is a LAB working candidate, not a Canon change.)
 
 ## maintenance rule
 

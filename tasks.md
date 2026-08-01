@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-01 03:37 JST
+最終更新: 2026-08-01 11:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,6 +40,13 @@ A0 は registered preservation premises の下で two-consume を排除し、A1 
 control を構成した。receipt、identity、actual persistence、Core、Gamma/Delta、OBL、実装は
 選ばず、同種の inventory 拡張や WRK-0045 の修復はしません。
 
+**Parallel semantic mainline:** `plan/246-goal-first-semantic-integration-and-i1-entry.md` の S1 authority-aware semantic-cut packet は
+review-corrected である。D0/D3/D4 は LAB candidate、D1/C1-A と D2/C2-A は ordinary
+Core/SCN amendment hypothesis であり、S2-A は既存 `plan/` / `docs/reports/` lane の
+comparison に限る。official T0、G0-D3、OBL status、Canon Core は変えない。fixed-control
+drift は official lifecycle blocker だが、S2-A preparation の前提ではない。formal model、
+prototype、runtime は ordinary selection 前に作らない。
+
 ```text
 T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
    -- T1 entry -- selected semantic integration -- T1 statements/profile
@@ -60,11 +67,15 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | Order | Work unit | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
 | 0 | snapshot and evidence maintenance | `A/R`; current task map と derived views が Canon cut と一致 | Macro 0; small; current only when status changes |
+| S1 | goal-first authority-aware packet | `A/R`; D0/D3/D4 candidate と C1-A/C2-A amendment hypothesis、authority/rollback/no-effects を整理 | review-corrected: `plan/246-goal-first-semantic-integration-and-i1-entry.md`; no Canon effect |
+| S2-A | bounded comparison and amendment packet | `A/R`; existing `plan/` / `docs/reports/` onlyで C1-A/C1-B、C2-A/status quo、adverse trace、exact delta を比較 | Macro 1 middle; current autonomous mainline; no formal model/prototype/runtime |
+| S2-B | selected shared kernel model | `O`, then `A/R`; selected Core/SCN surface を non-opaque model、permitted Lean/prototype checks にする | Macro 1/5 middle; after ordinary selection |
+| S3 | candidate-local statement preparation | `A/R` after S2-B; selected model を statement drafts/SCN explanation に接続 | Macro 1/5 late; no ledger/OBL/profile change |
 | CP-1 | fixed-control drift disposition | `O`; pin 維持/defer 又は normal Canon rebase proposal | official T1 blocker; not autonomous |
 | CP-2 | valid `pass` / G0-D3 exit route | `O` with `A/R` evidence preparation; authorized artifact、exact evaluation、digest acceptance、exit record | Macro 0/1; triggered after CP-1 |
 | R1 (parallel reserve) | `WRK-0046 X1-K0-QF-UL-LIFT` L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | closed registration stage: source-free at that cut; current evidence state is tracked by R2; neither Gate input nor CP dependency |
 | R2 (parallel reserve) | bounded q-fiber mixed-trace evidence | `A/R`; one Markdown-held Lean source, `lean --trust=0`, axiom scan, A0/A1 control, immutable evidence link | closed: evidence commit `7e4b01eb` linked by `c05653c4`; `L3-open` / `not-promoted`; neither Gate input nor critical-path dependency |
-| CP-3 | selected semantic integration / shared model | `A/R`, then `O`; non-opaque Core/Config/Step/WellFormed/elaboration/history relations and adverse cases | Macro 1/5 middle; after T1 entry and relevant semantic selections |
+| CP-3 | ordinary selection of C1/C2 amendment surface | `A/R`, then `O`; S2-A packet is accepted, declined, or revised before S2-B | Macro 1 middle; does not block S2-A comparison |
 | CP-4 | T1 statement and profile package | `A/R`, then `O`; exact OBL-001/020/021, SCN explanation, canonical profile | official T2 blocker; after CP-3 |
 | CP-5 | narrow T2 skeleton and G5 package | `A/R`, then `O`; import-bearing OBL-020/021/002 skeletons and separate G5 predicates/relations | Macro 5 late; after CP-4 |
 | CP-6 | P016 I1-readiness/profile package | `O` with `A/R`; after selected statement-level semantics and narrow T2 evidence, bind all-SCN scope, ledger mapping, C-static wording, and any moratorium exception | after CP-5; no early accepted lifecycle/profile contract |
@@ -76,7 +87,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | Canon hierarchy, derived views, reports, Plans 196/197 are available | maintenance and decision-packet preparation |
-| 1 semantic kernel | directions and bounded evidence exist; shared proof-facing composition is incomplete | WRK-0046 R1/R2 are closed bounded-evidence packages; no next candidate is selected. Only a trigger-based fresh ADR-0014 screen may later proceed |
+| 1 semantic kernel | directions and bounded evidence exist; S2-A compares D0/D3/D4 with C1-A/C2-A hypotheses | plan/report comparison now; ordinary selection before formal model/prototype |
 | 2 parser-free validation | compatibility anchors are runnable | reproduce and maintain; not a Gate substitute |
 | 3 compile-ready actualization | bounded Surface/Full System evidence exists | production widening waits for authorization |
 | 4 sample expansion | runnable samples exist | maintenance only before I1 |
@@ -133,6 +144,7 @@ contract, SCN/Gate/Phase, `theory/11` wording/status, or a new moratorium-protec
   `plan/197-i1-bootstrap-decision-and-readiness-audit.md`,
   `plan/180-t1-t2-statement-identity-dependency-closure-audit.md`,
   `plan/199-selected-semantic-composition-and-inference-boundary.md`.
+- Goal-first autonomous semantic mainline: `plan/246-goal-first-semantic-integration-and-i1-entry.md`.
 - WRK-0045 predicate-only A-Sigma L3-line closure / P017 ordinary-design boundary:
   `plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md`,
   `plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md`,
