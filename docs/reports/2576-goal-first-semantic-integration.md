@@ -244,8 +244,12 @@ separate focused runs.
 
 ## Commit / push status
 
-Pending final reviewer result, local validation, scoped commit with
-`--no-gpg-sign`, push to `origin/main`, and post-push parity verification.
+The S1 content package was committed with `--no-gpg-sign` as
+`effa4fa42f1de3baea32d7d5e635816969fd5a74` (`docs: add goal-first semantic
+integration plan`) and pushed to `origin/main`. At that check, `HEAD` and
+`origin/main` were equal. This closeout-status correction is committed and
+pushed immediately afterward in the same task package; final parity is
+verified before reporting the package close.
 
 ## Sub-agent session close status
 
