@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-01 11:21 JST
+最終更新: 2026-08-01 12:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,7 +40,7 @@ is not an untyped debug leak.
 
 | Axis | Status | Next boundary | Startability |
 | --- | --- | --- | --- |
-| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; all OBL rows `open`. In parallel, S1 (`plan/246-goal-first-semantic-integration-and-i1-entry.md`) distinguishes D0/D3/D4 LAB candidates from D1/C1-A and D2/C2-A Core/SCN amendment hypotheses. WRK-0045/0046 remain bounded non-promoted evidence, not the model itself | Official boundary: fixed-control owner/Canon disposition. Autonomous S2-A is plan/report-only comparison: C1-A vs determined-value C1-B, C2-A vs no-receipt-state status quo, exact delta and adverse traces. Formal model/prototype waits for ordinary selection | official CP: owner fixed-control disposition; autonomous mainline: S2-A comparison packet |
+| Logical specification | official `T0`; v2 profile is adopted but its sole artifact is valid `fail`; all OBL rows `open`. S2-A now completes LAB comparison of C1-A-r/C1-B and C2-A-r/defer; it found a SCN-02 two-dependency/read-authority baseline reconciliation. WRK-0045/0046 remain bounded non-promoted evidence, not the model itself | Official boundary: fixed-control owner/Canon disposition. Semantic boundary: reconcile SCN-02, then choose C1/C2 amendment surfaces before a model/prototype | official CP: owner fixed-control disposition; semantic CP: ordinary owner/Canon choice |
 | User-facing specification | bounded notation/scenario/sample evidence; v0 direction is Participant-only with explicit scalar terminal and excluded `return`; WRK-0027 confirms correspondence is not implicitly supplied by displayed indexed rules | exact grammar/domain, scalar candidate comparison, rejection diagnostic | autonomous research then Canon process |
 | Implementation / operation | bounded Surface/current-L2/Product Alpha/Full System/operational/Lean evidence is runnable | P016-directed future Canon profile/authorization, exact target fragment, C-static timing | later dependency |
 
@@ -53,12 +53,15 @@ Current exact blockers:
 2. G0-D3 remains deferred and cannot consume the v2 `fail`; no G0 exit / T1
    entry record exists.
 3. T1/T2 lack canonical phase profiles. This blocks official acceptance, not S2 semantic research.
-4. **Autonomous semantic work:** S2-A must compare D0/D3/D4 and C1-A/C2-A within
-   the exact SCN/adversarial matrix before a proposal. In particular, a
-   cross-locus result cannot resume before a semantic receipt, failure must
-   suppress a dependent write, equal incidental request data cannot merge
-   exchange state, and scalar terminal/default cannot be inferred. A formal
-   Core/Config model or prototype waits for ordinary selection.
+4. **Semantic selection:** S2-A completed the C1/C2 adversarial and SCN matrix.
+   It recommends C1-A-r conditionally and C2-A-r directionally, but cannot
+   repair Canon baseline text: SCN-02 names two cross-locus dependencies while
+   the worked shape and stated read authority do not yet account for both.
+   An ordinary owner/Canon selection must decide the reconciliation, C1-A-r /
+   C1-B / defer, and C2-A-r / defer before a formal Core/Config model or
+   prototype. A cross-locus result still cannot resume before a semantic receipt,
+   failure must suppress dependent write, equal incidental request data cannot
+   merge exchange state, and scalar terminal/default cannot be inferred.
 5. WRK-0024 falsifies the inference that owner-serial submitted writes alone
    provide SCN-02 atomic read-dependent behavior. WRK-0025/0026 are frozen on
    their registered commands, not on C0/C2 semantic results. WRK-0027 retains
@@ -177,7 +180,7 @@ durable save/load, or public product completion is claimed.
 | Owner / Canon | fixed-control drift | scoped audit complete; decide whether to retain pins/defer or start a normal rebase proposal; no silent rebase or retry |
 | Owner / Canon | G0-D3 | unavailable until a valid `pass` artifact exists; current v2 `fail` has no exit effect |
 | Owner / Canon | T1/T2/I1 lifecycle contract | P016 direction is recorded; define actual profiles, Gate-to-ledger mapping, proof-skeleton evidence class, and phase/conformance wording |
-| Research | selected semantic composition | S1 supplies a review-corrected authority packet: D0/D3/D4 are LAB candidates; C1-A/C2-A are amendment hypotheses. S2-A compares them only in Plan/report before an ordinary selection. WRK-0028--0046 remain bounded evidence, not a semantic carrier or Canon change |
+| Owner / Canon | C1/C2 semantic composition | S2-A comparison is complete: reconcile SCN-02 baseline authority/dependencies, then select C1-A-r / C1-B / defer and C2-A-r / defer. C1-A-r must preserve read/visibility authority unless a separate operation authority is proposed. C2-A-r is a candidate-specific X1 extension; its static response path, `H`, cut, SaveObject, restore, and optional projection must be selected explicitly, not inferred from P017. No Canon change yet |
 | Research | C2-B/C3 relation-state model | P017 X1 remains owner-accepted. WRK-0045 / Plan 245 close only the failed predicate-only line. WRK-0046 now retains executed, linked, `not-promoted` finite conditional evidence: A0 excludes two consumes under the registered preservation premises and A1 exhibits the omission/reset control. It selects no K0, receipt/identity, actual persistence, or shared model. No next candidate is selected; any future record needs a fresh source delta, consumer, falsifier, standing preflight, and rollback trigger. |
 | Research | G5 restoration-interface boundary | Plan 226: proposed quantifier countermodel duplicates T-RESEARCH-014 / Report 2267 | Reopen only for a new source/consumer delta or a reproducible defect; no Load relation or liveness semantics selected |
 | Research evidence | WRK-0024 C1 countermodel | owner-serial writes do not alone imply atomic read-dependent update; no repair selected |
@@ -192,7 +195,7 @@ durable save/load, or public product completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | repository memory and governance | current snapshots and Plan 196 synchronized | light | yes |
-| 1 | semantic kernel | directions recorded; S2-A now compares D0/D3/D4 candidates and C1-A/C2-A amendment hypotheses with no retained formal model | heavy | current autonomous mainline is plan/report-only comparison; ordinary selection precedes formal model/prototype |
+| 1 | semantic kernel | S2-A comparison is complete; C1-A-r/C1-B and C2-A-r/defer are separated, with SCN-02 reconciliation exposed | heavy | owner/Canon reconciliation and selection precede S2-B formal model/prototype |
 | 2 | parser-free validation | compatibility anchors runnable | medium | maintenance/reproduction |
 | 3 | compile-ready actualization | bounded Surface/Full System evidence exists | heavy | production widening deferred |
 | 4 | sample expansion | active roots runnable | heavy | maintenance before I1 |
@@ -200,6 +203,12 @@ durable save/load, or public product completion is claimed.
 | 6 | distributed fabric | later | heavy | after I1/I2 |
 | 7 | toolchain/backend | bounded LAB only | heavy | later |
 | 8 | applications | bounded samples only | heavy | outside T0-T2 critical path |
+
+Autonomous stop condition: after the selected semantics, shared model, all-SCN
+implementation scope, I1-readiness record, and explicit implementation
+authorization make I1 startable, produce the I1-entry closeout and stop before
+the first I1 implementation package. This condition does not advance any
+current lifecycle status.
 
 ## feature maturity rows
 
@@ -217,6 +226,16 @@ durable save/load, or public product completion is claimed.
 | upper applications | user-defined sample worlds | stable lower-layer workflow | later dependency |
 
 ## recent log
+
+- 2026-08-01 12:43 JST: Completed the S2-A C1/C2 LAB amendment comparison.
+  The packet separates C1-A-r owner-sampled same-owner RMW from current-shape
+  C1-B determined-value writes, and C2-A-r as a candidate-specific extension
+  of P017 X1 from defer. It exposed a real SCN-02 alignment question: both
+  cross-locus dependencies are frozen expected output, while their
+  read/visibility authority and failure treatment need owner/Canon
+  reconciliation. No Canon, OBL, Gate, Phase, model, prototype, or runtime
+  changed. The autonomous mainline now stops at I1-entry readiness before the
+  first I1 implementation package.
 
 - 2026-08-01 11:21 JST: Completed the S1 authority-aware semantic-cut packet.
   Independent review required D1/D2 to be treated as Core/SCN amendment

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-01 11:21 JST
+最終更新: 2026-08-01 12:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -41,14 +41,16 @@ Phase: [ ] T0 語彙と決定 -> [ ] T1 計算体系 -> [ ] T2 骨格証明 ->
 | proof ledger | OBL-001..028 は全件 `open` | LAB evidence と official proof status を区別できる |
 | T0 evaluation | v2 profile は adopted、唯一の fresh artifact は fixed-control drift に対する valid `fail` | v1 と malformed `fail` を区別し、G0-D3 を進めない証拠を再現できる |
 | lifecycle / I1 | P016 は narrow T2、separate I1-readiness/bootstrap、C-static formal entry の方向を記録 | selected statement-level semantics を bind する profile、ledger mapping、phase/conformance wording、実装認可は未作成 |
-| goal-first semantic integration | S1 は review-corrected authority packet。D0/D3/D4 は LAB candidate、D1 target-owner transition と D2 X1 exchange は ordinary Core/SCN amendment hypothesis として C1-A/C1-B・C2-A/status-quo comparison に送る | Canon Core/Config/SaveObject/failure/SCN/profile は未変更。S2-A は plan/report 内 comparison のみ、formal model/prototype は owner/Canon selection 後にする |
+| goal-first semantic integration | S2-A の LAB comparison は完了。`C1-A-r`（target owner 内 RMW）と `C1-B`（determined `v′`）を分離し、P017 X1 を candidate-specific presentation で拡張する `C2-A-r` を defer と比較した。SCN-02 には two dependency / read-authority reconciliation が残る | Canon Core/Config/SaveObject/failure/SCN/profile は未変更。S2-B shared model/prototype は、SCN-02 reconciliation と C1/C2 の ordinary owner/Canon selection 後にのみ開始する |
 | semantic kernel | P004/008/012/013/015 の方向と有限 LAB evidence はある。P017 X1 は owner-accepted のまま、WRK-0045 predicate-only A-Sigma L3 line だけが `frozen / DEFER`。WRK-0046 は実行・link 済みの `L3-open` / `not-promoted` finite conditional evidence で、A0 は一つの supplied finite lineage 上の two-consume を排除し、A1 は restore preservation を外した two-consume control を構成した | この evidence は P017 model、K0、carrier、transition、receipt/identity、actual restore/persistence、proof/OBL、実装を選ばない |
 | runnable LAB | Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean evidence を限定範囲で実行できる | 個別の parser/checker/runtime/transport evidence を再現できる |
 | public/product | 未到達 | final grammar/API/ABI、official conformance、production runtime、WAN federation は主張しない |
 
 official lifecycle の最短経路と、現在自走する semantic integration は別 lane です。
 前者の active node は valid `pass` route を開くか defer を続けるかという owner/Canon
-判断ですが、後者はそれを待たず D0/D3/D4 と C1/C2 の S2-A comparison を行います。
+判断です。後者の S2-A comparison は完了しており、S2-B に進むには別途、SCN-02 の
+two dependency と read/visibility authority をどう Core/SCN に表すか、および C1/C2
+amendment surface を owner/Canon が選択する必要があります。
 
 ```text
 official T0
@@ -59,12 +61,18 @@ official T0
 
 parallel now:
   S1 authority-aware semantic-cut packet (review-corrected)
-  -> S2-A bounded comparison / ordinary amendment packet
-  -> owner/Canon selection -> S2-B shared model
+  -> S2-A bounded comparison / ordinary amendment packet (complete)
+  -> SCN-02 reconciliation + owner/Canon selection -> S2-B shared model
   -> S3 candidate-local statements -> S4 narrow T2+G5 preparation
   -> S5 I1 readiness/bootstrap packet
   -> authorized I1 implementation
 ```
+
+Owner instruction fixes a separate stop condition for this autonomous mainline:
+when selected semantics, the shared model, all-SCN implementation scope, the
+I1-readiness record, and implementation authorization make I1 startable, issue
+an I1-entry closeout and stop before the first implementation package. This is
+not an I1 authorization claim today.
 
 P017 X1 は owner-accepted relation-state direction のままです。WRK-0045 の
 `frozen / DEFER` は predicate-only A-Sigma line に限られます。WRK-0046 は
@@ -102,13 +110,17 @@ record で明示的に整合化する必要があります。
 
 ### semantic integration で今検証するもの
 
-- S2-A は `plan/246-goal-first-semantic-integration-and-i1-entry.md` 内で C1-A/C1-B と C2-A/status quo を SCN-01..10/adverse matrix に
-  照らして比較し、exact Core/SCN delta を ordinary proposal packet にする。shared model,
-  Lean, prototype, runtime はその選択前に作らない。
-- D1/D2 hypothesis では target owner 内の read/calculate/write atomicity と、cross-locus
-  receipt/result/use の proposed residence を明示する。hidden cross-owner transaction、
-  hidden request identity、evaluator-only exchange state、load による consumed reset、又は
-  semantic receipt を static `G_e` row と読むことは immediate falsifier である。
+- S2-A は `plan/246-goal-first-semantic-integration-and-i1-entry.md` と Report 2577 に
+  comparison を固定した。SCN-02 の two dependency rows と `[READ-CROSS]` の
+  read/visibility authority/failure-row をどう整合化するかは、LAB が補完できない
+  baseline reconciliation である。C1-A-r/C1-B/defer と C2-A-r/defer を ordinary proposal
+  packet として選択した後にのみ、shared model, Lean, prototype, runtime を作る。
+- C1-A-r は target owner 内の read/calculate/write atomicity を条件付きで提案するが、
+  write capability から private read authority を導かない。C2-A-r は P017 X1 に対する
+  candidate-specific extension として cross-locus receipt/result/use の residence と
+  occurrence/consumption presentation を提案する。hidden cross-owner
+  transaction、hidden request identity、evaluator-only exchange state、load による consumed
+  reset、又は semantic receipt を static `G_e` row と読むことは immediate falsifier である。
 - D4 では scalar/terminal を explicit declaration として扱い、hidden singleton/default
   を許さない。必要な Canon change は実証後の通常 proposal に集約する。
 - P017 X1 の branch/request association、receipt matching、failure row、causal integration、
@@ -131,8 +143,8 @@ moratorium-protected lane は owner/Canon task へ戻します。根拠:
 | --- | --- | --- | --- |
 | 1 | fixed-control drift の disposition | pin 維持/defer; normal Canon rebase proposal | scoped audit は統治文書 drift に限定。silent rebase はしない |
 | 2 | G0-D3 | future valid `pass` digest を accept; defer 継続 | `fail` は受理不能。ここまで T1 entry は開かない |
-| 3 | semantic composition | C0--C7 の未選択 relation、identity、totality、scalar、failure 境界を ordinary Canon work で選ぶ | finite evidence を正の意味論に読み替えない |
-| parallel | D0/D3/D4 candidate; C1-A/C2-A hypotheses | S2-A plan/report comparison を自走する | Core/Config/SCN delta を含む D1/D2 formal model/prototype は ordinary Canon selection 後にする |
+| 3 | C1/C2 semantic composition | SCN-02 の two dependencies/read authority を整合化し、C1-A-r/C1-B/defer と C2-A-r/defer を ordinary Canon work で選ぶ | S2-A comparison は complete。finite evidence を正の意味論に読み替えず、selected amendment 前に model/prototype を作らない |
+| parallel reserve | D0/D3/D4 candidate と ADR-0014 eligible literal/conditional work | selected semantics を前提にしない独立 consumer/falsifier を持つものだけを自走する | Core/Config/SCN delta を含む shared formal model/prototype は ordinary Canon selection 後にする |
 | 4 | lifecycle/profile contract | selected statement-level semantics と narrow T2 evidence の後に、P016 の separate readiness を actual Canon profile/wording に bind | P016 は記録済みの本線。integrated/phase amendment は reopen-only |
 | 5 | T1/T2/I1 acceptance | selected shared model、statement/profile、skeleton/readiness を evidence cut として受理 | 前段が揃うまで判断しない |
 

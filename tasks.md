@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-01 11:21 JST
+最終更新: 2026-08-01 12:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -40,12 +40,15 @@ A0 は registered preservation premises の下で two-consume を排除し、A1 
 control を構成した。receipt、identity、actual persistence、Core、Gamma/Delta、OBL、実装は
 選ばず、同種の inventory 拡張や WRK-0045 の修復はしません。
 
-**Parallel semantic mainline:** `plan/246-goal-first-semantic-integration-and-i1-entry.md` の S1 authority-aware semantic-cut packet は
-review-corrected である。D0/D3/D4 は LAB candidate、D1/C1-A と D2/C2-A は ordinary
-Core/SCN amendment hypothesis であり、S2-A は既存 `plan/` / `docs/reports/` lane の
-comparison に限る。official T0、G0-D3、OBL status、Canon Core は変えない。fixed-control
-drift は official lifecycle blocker だが、S2-A preparation の前提ではない。formal model、
-prototype、runtime は ordinary selection 前に作らない。
+**Parallel semantic mainline:** S2-A は `plan/246-goal-first-semantic-integration-and-i1-entry.md`
+と Report 2577 で完了した LAB comparison である。D0/D3/D4 は LAB candidate、`C1-A-r`
+（target-owner RMW）/ `C1-B`（determined value）と `C2-A-r`（P017 X1 の
+candidate-specific extension）/ defer は
+ordinary Core/SCN amendment choice であり、現行 Canon の semantics ではない。SCN-02 の
+two dependencies と read/visibility authority の baseline reconciliation を含め、owner/Canon
+selection 前に formal model、prototype、runtime は作らない。official T0、G0-D3、OBL status、
+Canon Core は変えない。fixed-control drift は official lifecycle blocker だが、S2-A completion
+の前提ではなかった。
 
 ```text
 T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
@@ -68,18 +71,18 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | --- | --- | --- | --- |
 | 0 | snapshot and evidence maintenance | `A/R`; current task map と derived views が Canon cut と一致 | Macro 0; small; current only when status changes |
 | S1 | goal-first authority-aware packet | `A/R`; D0/D3/D4 candidate と C1-A/C2-A amendment hypothesis、authority/rollback/no-effects を整理 | review-corrected: `plan/246-goal-first-semantic-integration-and-i1-entry.md`; no Canon effect |
-| S2-A | bounded comparison and amendment packet | `A/R`; existing `plan/` / `docs/reports/` onlyで C1-A/C1-B、C2-A/status quo、adverse trace、exact delta を比較 | Macro 1 middle; current autonomous mainline; no formal model/prototype/runtime |
-| S2-B | selected shared kernel model | `O`, then `A/R`; selected Core/SCN surface を non-opaque model、permitted Lean/prototype checks にする | Macro 1/5 middle; after ordinary selection |
+| S2-A | bounded comparison and amendment packet | `A/R`; C1-A-r/C1-B/defer と C2-A-r/defer、adverse trace、SCN-01..10 impact、exact amendment surface を comparison 済み | **complete**: `plan/246-goal-first-semantic-integration-and-i1-entry.md` / Report 2577; no Canon effect |
+| S2-B | selected shared kernel model | `O`, then `A/R`; selected Core/SCN surface を non-opaque model、permitted Lean/prototype checks にする | Macro 1/5 middle; **blocked on owner/Canon choice**: SCN-02 reconciliation と C1/C2 amendment selection |
 | S3 | candidate-local statement preparation | `A/R` after S2-B; selected model を statement drafts/SCN explanation に接続 | Macro 1/5 late; no ledger/OBL/profile change |
 | CP-1 | fixed-control drift disposition | `O`; pin 維持/defer 又は normal Canon rebase proposal | official T1 blocker; not autonomous |
 | CP-2 | valid `pass` / G0-D3 exit route | `O` with `A/R` evidence preparation; authorized artifact、exact evaluation、digest acceptance、exit record | Macro 0/1; triggered after CP-1 |
 | R1 (parallel reserve) | `WRK-0046 X1-K0-QF-UL-LIFT` L3 registration | `A/R`; exact cut, alternative, ablation falsifier, no-effects, rollback, existing `plan/` Lean lane only | closed registration stage: source-free at that cut; current evidence state is tracked by R2; neither Gate input nor CP dependency |
 | R2 (parallel reserve) | bounded q-fiber mixed-trace evidence | `A/R`; one Markdown-held Lean source, `lean --trust=0`, axiom scan, A0/A1 control, immutable evidence link | closed: evidence commit `7e4b01eb` linked by `c05653c4`; `L3-open` / `not-promoted`; neither Gate input nor critical-path dependency |
-| CP-3 | ordinary selection of C1/C2 amendment surface | `A/R`, then `O`; S2-A packet is accepted, declined, or revised before S2-B | Macro 1 middle; does not block S2-A comparison |
+| CP-3 | ordinary selection of C1/C2 amendment surface | `A/R`, then `O`; reconcile SCN-02 dependencies/read authority, select C1-A-r/C1-B/defer and C2-A-r/defer, then freeze ordinary proposal before S2-B | Macro 1 middle; current semantic blocker after S2-A |
 | CP-4 | T1 statement and profile package | `A/R`, then `O`; exact OBL-001/020/021, SCN explanation, canonical profile | official T2 blocker; after CP-3 |
 | CP-5 | narrow T2 skeleton and G5 package | `A/R`, then `O`; import-bearing OBL-020/021/002 skeletons and separate G5 predicates/relations | Macro 5 late; after CP-4 |
 | CP-6 | P016 I1-readiness/profile package | `O` with `A/R`; after selected statement-level semantics and narrow T2 evidence, bind all-SCN scope, ledger mapping, C-static wording, and any moratorium exception | after CP-5; no early accepted lifecycle/profile contract |
-| CP-7 | I1 authorization | `O` with `A/R` readiness evidence; explicit bootstrap authorization then later C-static formal entry | after CP-6; implementation is still unauthorized now |
+| CP-7 | I1 authorization / autonomous stop | `O` with `A/R` readiness evidence; explicit bootstrap authorization then later C-static formal entry | I1-entry condition: close out and stop before the first implementation package; do not silently start it |
 | on demand | fresh ADR-0014 candidate screen | `A/R`; nonduplicate literal/conditional candidate has standing eligibility, consumer, falsifier, non-effects, rollback trigger | Macro 1 reserve; never create merely to extend P017/lifecycle inventory |
 
 ## self-driven macro phase reading
@@ -87,7 +90,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | Canon hierarchy, derived views, reports, Plans 196/197 are available | maintenance and decision-packet preparation |
-| 1 semantic kernel | directions and bounded evidence exist; S2-A compares D0/D3/D4 with C1-A/C2-A hypotheses | plan/report comparison now; ordinary selection before formal model/prototype |
+| 1 semantic kernel | S2-A comparison complete; no shared model yet | owner/Canon reconciliation and selection before formal model/prototype |
 | 2 parser-free validation | compatibility anchors are runnable | reproduce and maintain; not a Gate substitute |
 | 3 compile-ready actualization | bounded Surface/Full System evidence exists | production widening waits for authorization |
 | 4 sample expansion | runnable samples exist | maintenance only before I1 |
@@ -103,7 +106,7 @@ T0 -- owner fixed-control disposition -- authorized valid pass / G0-D3
 | fixed-control drift | whether a future valid `pass` route can exist | retain pins/defer; normal Canon rebase proposal | scoped audit found governance-only drift; no silent rebase/retry |
 | G0-D3 | official T1 entry | accept a future valid `pass` digest; continue defer | current `fail` is ineligible |
 | lifecycle / I1 boundary | profile, ledger mapping, phase/conformance wording, authorization | materialize P016's narrow T2 + separate readiness; explicit Canon reopen for another route | P016 direction is the recorded path; do not create a duplicate autonomous map |
-| semantic composition | shared model and later statements | ordinary Canon selection of exact domain, identity, receipt, failure, scalar, totality relations | finite/conditional LAB evidence does not select semantics |
+| C1/C2 amendment surface | shared model and later statements | reconcile SCN-02's two dependencies/read authority; choose C1-A-r/C1-B/defer and C2-A-r/defer | C1-A-r conditionally and C2-A-r directionally recommended; LAB evidence does not select semantics |
 | T1/T2/I1 acceptance | official phase movement | accept later evidence/profile/record; keep current state | do not decide before their direct evidence exists |
 
 ## research discovery items

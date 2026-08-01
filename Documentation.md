@@ -119,9 +119,12 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   `fail` です。G0-D3、G0 exit、T1 entry、I1 authorization は未成立です。
 - governance drift は official lifecycle の lane に限る。program meaning / SCN
   conformance の前提ではないため、goal-first integration は `plan/246-goal-first-semantic-integration-and-i1-entry.md` に従い
-  並行して開始済みです。D0/D3/D4 は LAB working candidate、D1/D2 は Core/SCN
-  amendment hypothesis であり、現時点の自走範囲は plan/report の comparison に限る。
-  formalization / prototype は ordinary Canon selection 後である。
+  並行して進めています。S2-A は C1-A-r/C1-B と C2-A-r/defer の比較を完了しました。
+  これは LAB の decision packet であり、Canon Core/Config/SaveObject/failure/SCN を変えません。
+  C1-A-r は target owner 内の read/calculate/write を一つの service にする条件付き推奨、
+  C2-A-r は P017 X1 を candidate-specific presentation で拡張する推奨方向です。S2-B の
+  formalization / prototype は、SCN-02 の dependency・read authority の整合化と、両 amendment
+  surface の ordinary owner/Canon selection 後にのみ開始します。
 - T1/T2 には canonical phase-exit JSON profile がありません。
 - 現行 T2 criterion は OBL-020/021/002 proof skeleton と G5 statement 群です。
   これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。
@@ -153,11 +156,27 @@ pre-registration、falsifier、non-effects、rollback を満たす範囲だけ�
 Canon integration、ledger movement、production implementation、新 lane/helper は
 owner action のままです。
 
+S2-A が提示する次の判断は分離されています。C1 は、同一 target owner の二つの
+read-dependent attack を service 時点で累積させる `C1-A-r`、既存の determined value
+`v′` を requester 側で先に計算して後から write する `C1-B`、又は defer の選択です。
+`C1-A-r` を選ぶ場合も、write capability が private RHS operand の read/visibility authority
+を暗黙に与えることはありません。既存の read/visibility rule を維持するか、別の明示的
+operation/declassification authority を通常 proposal として扱う必要があります。C2 は、
+request/result/receipt/one-shot use と cut/save/load を `X` に保持する、P017 X1 を
+拡張する候補 `C2-A-r` と defer の選択です。occurrence/consumption の表現と static
+request-response row は X1 自体が決めたものではありません。いずれも現在の Canon の
+決定ではありません。
+
 owner 判断前でも、既存 Canon の literal transcription 又は conditional lemma だけで
 閉じる候補は ADR-0014 の standing predicate を再審査できます。既存 lane、
 非重複の利用先、falsifier は保守的な LAB 選別規律であり、standing predicate を
 狭める追加の Canon 条件ではありません。predicate と reserved-boundary exclusion を
 満たす真に新規な candidate は個別に検討し、official status とは区別します。
+
+この主線の停止条件は、I1 を開始できる状態です。すなわち selected semantics、shared
+kernel model、必要な I1-readiness record、all-SCN implementation scope、明示的な実装認可が
+揃った時点で、最初の I1 実装 package は開始せずに停止します。その closeout では実装入力、
+保証・非保証、後段の境界を整理します。
 
 ## Roadmap の読み方
 
