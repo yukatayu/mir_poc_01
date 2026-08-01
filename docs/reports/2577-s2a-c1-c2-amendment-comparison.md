@@ -255,8 +255,12 @@ stop condition. No Canon file was edited.
 
 ## Commit / push status
 
-Documentation evidence and reviewer closeout are complete. Commit/push status
-is updated after the closeout commit.
+The package content was committed as
+`26f146563a7705f97ffbd52b835884652b0462a3`
+(`docs: record C1 C2 amendment comparison`) and pushed to `origin/main`.
+At this report update, local `HEAD` equals `origin/main`. This closeout update
+is committed and pushed separately immediately after its final documentation
+validation.
 
 ## Sub-agent session close status
 
