@@ -16,9 +16,10 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 「次」は current queue を意味しません。現在の一本道は Plan 247 と、その派生ビュー
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
-現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M0 Bootstrap**
-である。M0 は agent/governance/roadmap の整合だけを閉じる。official lifecycle は
-`T0` のままで、G0 exit/T1 entry、OBL、SCN/conformance、runtime 実装を動かさない。
+M0 Bootstrap は agent/governance/roadmap の整合を閉じた。現在は ADR-0015 の
+owner-approved Mir Theory v0 / I1+ program の **M1 Constitution** である。official
+lifecycle は `T0` のままで、G0 exit/T1 entry、OBL、SCN/conformance、runtime 実装を
+動かさない。
 
 | 知りたいこと | 読む場所 |
 | --- | --- |

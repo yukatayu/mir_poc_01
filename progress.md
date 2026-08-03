@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-03 19:20 JST
+最終更新: 2026-08-03 19:44 JST
 
 **Canon notice:** `mirrorea_canon/` is normative; this file is a concise LAB
 snapshot and creates no Canon, Gate, Phase, proof, or conformance decision.
@@ -37,15 +37,15 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0 Bootstrap active; official lifecycle remains T0; M1 Constitution is next | **着手可能**: finish M0 evidence/review/parity |
-| User-facing specification | No M0 syntax change. M6 owns Surface v0 after M5 shared model | **後段依存**: M0--M5 |
-| Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M0--M7 |
+| Logical specification | M0 Bootstrap closed; official lifecycle remains T0; M1 Constitution is active | **着手可能**: M1 contradiction audit |
+| User-facing specification | No M0 syntax change. M6 owns Surface v0 after M5 shared model | **後段依存**: M1--M5 |
+| Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M1--M7 |
 
 Sources: `mirrorea_canon/adr/ADR-0015.md`,
 `mirrorea_canon/plan/01-phases.md`, and
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
 
-M0 preserves: v2 T0 artifact valid `fail`; G0-D3/G0 exit/T1 entry absent;
+M0 preserved: v2 T0 artifact valid `fail`; G0-D3/G0 exit/T1 entry absent;
 OBL-001..028 `open`; SCN-01..10 and official conformance unchanged. Its direct
 consumer is the M1 Constitution input bundle.
 
@@ -53,8 +53,8 @@ consumer is the M1 Constitution input bundle.
 
 | Milestone | Aim | Position | Startability |
 | --- | --- | --- | --- |
-| M0 | governance, agent config, one roadmap | active | finish close evidence |
-| M1 | concise Constitution | next | after M0 |
+| M0 | governance, agent config, one roadmap | closed | Report 2581 / push parity |
+| M1 | concise Constitution | active | contradiction audit / Canon placement |
 | M2 | semantic-assertion T0/G0 closeout | later | after M1 |
 | M3 | evaluation/materialization calculus | later | after M2 |
 | M4 | maintained relation/late projection | later | after M3 |
@@ -129,8 +129,8 @@ completion is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
-| 0 | governance/repository memory | M0 active | medium | yes |
-| 1 | semantics/shared model | M1--M5 | heavy | after M0 |
+| 0 | governance/repository memory | M0 closed | medium | maintenance only |
+| 1 | semantics/shared model | M1--M5; M1 active | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
 | 3 | source/checker/runtime | M6--M8 | heavy | after shared model |
 | 4 | executable samples | historical evidence | medium | maintenance only |
@@ -158,3 +158,6 @@ completion is claimed.
 - 2026-08-03 19:20 JST: M0 bootstrapped ADR-0015 governance, Codex role
   validation, a single Plan 247 roadmap, and derived snapshots; official T0,
   proof, scenario, conformance, and implementation state remain unchanged.
+- 2026-08-03 19:44 JST: M0 completed independent review, approval-policy
+  regression coverage, focused validation, commit/push, and parity; M1
+  Constitution is now the sole active semantic milestone.

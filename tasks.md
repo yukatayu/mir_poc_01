@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-03 19:04 JST
+最終更新: 2026-08-03 19:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,16 +20,16 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M0 Bootstrap. Next: M1 Constitution.** 根拠は
+**Active: M1 Constitution. Next: M2 semantic-assertion T0/G0 closeout.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
 
-M0 の direct blocker は、start revision
-`b9dcaa054c548112a7977776723418559b8ba8b2` 上の Canon governance、agent-role
-configuration、sole roadmap、derived snapshots を一つの cut として統合し、fresh
-validation、独立 review、一つの M0 report、commit / push / remote parity を閉じること。
-direct consumer は M1 の concise Constitution input bundle である。
+M0 は start revision `b9dcaa054c548112a7977776723418559b8ba8b2` から bootstrap
+payload `be5928a168fd519c05867fba2746ddd833a3bde5` を push して閉じた。official
+lifecycle は `T0` のままである。現在の direct blocker は concise Constitution の
+Canon placement と contradiction audit を、positive/adverse examples と独立 review で
+閉じること。direct consumer は M2 の semantic-assertion profile である。
 
 M0 では official lifecycle は `T0`、v2 artifact は valid `fail`、G0-D3 / G0 exit /
 T1 entry は未成立、OBL-001..028 はすべて `open`、SCN-01..10 と conformance claim は
@@ -43,10 +43,8 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 
 | Order | Current task package | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
-| M0-A | Canon / agent / governance bootstrap integration | `A/O`; ADR-0015 program cut、role ownership、agent-config contract が整合 | Macro 0; active; medium |
-| M0-B | Plan 247 + derived snapshot sync | `A`; sole roadmap、active/next、blocker/consumer、owner boundary、deferred scope が一致 | Macro 0; active; small |
-| M0-C | validation / review / report / integration close | `A/R/O`; config validator、focused tests、`make docs`、diff check、one M0 report、commit/push/parity | Macro 0; active; medium |
-| M1 | Constitution | `A/R/O`; concise Canon Constitution、scope/invariants/decision priority/falsifiers accepted | Macro 1; next; medium |
+| M0-A--C | Canon / agent / governance bootstrap | closed; ADR-0015 cut、role contract、Plan 247、review/validation/push evidence in Report 2581 | Macro 0; complete |
+| M1 | Constitution | `A/R/O`; concise Canon Constitution、scope/invariants/decision priority/falsifiers accepted | Macro 1; active; medium |
 | M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; after M1; medium |
 | M3 | evaluation / materialization | `A/R/O`; owner/designated/consumer/provider evaluation、deterministic inference、same-owner RMW、cross-owner Diagnostic/result path | Macro 1/5; after M2; heavy |
 | M4 | maintained relation / late projection | `A/R/O`; bird/shoulder relation DAG、C-local projection、coherence/fallback/reacquire/privacy/split-frame evidence | Macro 1/5/6; after M3; heavy |
@@ -65,8 +63,8 @@ report、commit/push/parity が閉じるまで開始しない。
 
 | Macro | Current reading | Startability |
 | --- | --- | --- |
-| 0 repository memory / governance | M0 bootstrap active; Plan 247 is sole queue | **着手可能**: current package |
-| 1 semantic kernel | M1--M5 fixed sequence; no Constitution artifact yet | **後段依存**: M0 close |
+| 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
+| 1 semantic kernel | M1--M5 fixed sequence; Constitution artifact starts at M1 | **着手可能**: current package |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
 | 3 compile-ready actualization | historical Surface/runtime evidence exists | **後段依存**: M5/M6 accepted model |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
@@ -77,7 +75,7 @@ report、commit/push/parity が閉じるまで開始しない。
 
 ## user decision gates
 
-現在、M0 を止める owner decision item はない。ADR-0015 が owner-approved objective、
+現在、M1 を止める owner decision item はない。ADR-0015 が owner-approved objective、
 M0--M10 order、bounded execution authority を記録しているため、旧 tasks にあった
 fixed-control、C1/C2、Gate/ledger 一般の「常時 owner 待ち」は current queue から外す。
 それらの具体内容は該当 milestone が evidence-gated に選び、Canon へ統合する。
@@ -86,7 +84,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M0 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M1 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items

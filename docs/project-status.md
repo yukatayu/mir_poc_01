@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-03 19:20 JST
+最終更新: 2026-08-03 19:44 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. This document is a LAB derived view.
@@ -28,15 +28,16 @@ classification、independent review、validation、commit/push/parity を閉じ�
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M0 Bootstrap**。次は M1 Constitution | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| active frontier | **M1 Constitution**。次は M2 semantic-assertion T0/G0 closeout | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
 | official lifecycle | `T0`。v2 artifact は valid `fail`、G0-D3/G0 exit/T1 entry は未成立 | `mirrorea_canon/plan/01-phases.md` |
 | proof / scenarios | OBL-001..028 は `open`、SCN-01..10 の official status は不変 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0 non-effect | I1+ runtime、SCN conformance、public API/ABI/wire、production deployment は開始・主張しない | `mirrorea_canon/plan/02-operating-model.md` |
+| M0 close/non-effect | bootstrap payload `be5928a1` は review/validation/push 済み。I1+ runtime、SCN conformance、public API/ABI/wire、production deployment は開始・主張しない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md` |
 
-M0 の direct blocker は governance/agent role/sole roadmap/derived-status cut の fresh
-validation、independent review、one report、commit/push/remote parity である。direct consumer
-は M1 の concise Constitution input bundle である。
+M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
+review、one report、commit/push/remote parity で閉じた。M1 の direct blocker は concise
+Constitution の Canon placement と contradiction audit であり、direct consumer は M2 の
+semantic-assertion profile である。
 
 ## 現在の停止線
 
@@ -52,7 +53,7 @@ validation、independent review、one report、commit/push/remote parity であ�
 
 ## オーナーの確認・判断待ち
 
-現在の M0 を止める owner decision はない。以下だけが escalation 条件であり、通常の
+現在の M1 を止める owner decision はない。以下だけが escalation 条件であり、通常の
 grammar、internal carrier、proof decomposition、test、bounded model、roadmap wording は
 milestone 内で evidence-gated に決める。
 

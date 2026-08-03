@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-03 19:04 JST
+最終更新: 2026-08-03 19:44 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- active milestone: **M0 Bootstrap**
-- next milestone: **M1 Constitution**
+- active milestone: **M1 Constitution**
+- next milestone: **M2 semantic-assertion T0/G0 closeout**
 - active frontier limit: 一つの milestone
-- current direct blocker: M0 の Canon / agent-role / roadmap / derived-status cut を
-  統合し、focused validation、独立 review、一つの M0 report、commit / push / remote
-  parity まで閉じること
-- direct consumer: M1 が読み込む accepted governance cut と、空でない M1 input
-  bundle
+- current direct blocker: concise Constitution の Canon placement と contradiction
+  audit を、M0 accepted governance cut に対して一つの evidence-gated milestone として
+  閉じること
+- direct consumer: M2 が読み込む concise Constitution と semantic-assertion
+  requirements vocabulary
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -93,7 +93,7 @@ M0 Bootstrap
 
 ## Milestone acceptance map
 
-### M0 - Bootstrap (active)
+### M0 - Bootstrap (completed 2026-08-03)
 
 **Intended outcome:** ADR-0015 program を再現可能に実行する repository / agent /
 governance floor を作り、Plan 247 を一つだけ current queue として指定する。
@@ -121,12 +121,13 @@ governance floor を作り、Plan 247 を一つだけ current queue として指
 delegated config writer、Plan 247 と派生 planning/status は planner、tests は test author、
 review は同じ変更を書いていない independent reviewer。
 
-**Direct blocker:** shared worktree 上の M0 cut を統合後の fresh validation と final review
-で閉じ、report / commit / push / remote parity を得ること。
+**Close evidence:** payload commit `be5928a168fd519c05867fba2746ddd833a3bde5` was
+pushed after fresh validation and independent review. The closeout report/snapshot commit
+records the final remote-parity check without changing M0's pinned official state.
 
 **Direct consumer:** M1 Constitution input bundle。
 
-### M1 - Constitution (next)
+### M1 - Constitution (active)
 
 **Intended outcome:** North Star と preserved invariants を短い、矛盾のない Mir Theory v0
 Constitution に集約し、後続 milestone の decision priority と禁止事項を固定する。

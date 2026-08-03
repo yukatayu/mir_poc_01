@@ -260,7 +260,7 @@
    "summary": "Mir Theory v0 / I1+ の owner-approved program に限り、evidence-gated bounded autonomy と milestone 単位の直列 integration を採用する。",
    "open_items": [],
    "path": "adr/ADR-0015.md",
-   "bytes": 3699
+   "bytes": 3698
   },
   {
    "id": "adr/readme",

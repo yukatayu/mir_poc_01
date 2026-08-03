@@ -241,10 +241,12 @@ debug surface, evidence classification, or sample blocker.
 
 ## Commit / push status
 
-At initial report write the M0 change is uncommitted and unpushed. After final
-review and validation, the substantive milestone commit will use
-`--no-gpg-sign`, push to `origin/main`, and exact remote parity will be checked.
-The closeout update will record that payload commit rather than predicting it.
+The substantive milestone payload was committed with `--no-gpg-sign` as
+`be5928a168fd519c05867fba2746ddd833a3bde5` (`Bootstrap Mir Theory v0 I1+
+governance`) and pushed to `origin/main`. A fresh `git fetch --prune origin`
+confirmed `HEAD == origin/main == be5928a168fd519c05867fba2746ddd833a3bde5`.
+This closeout/report-and-snapshot commit is the second and final M0 commit; it
+will be pushed and parity-checked before M1 begins.
 
 ## Sub-agent session close status
 
