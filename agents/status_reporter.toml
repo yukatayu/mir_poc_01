@@ -3,19 +3,20 @@ description = "Maintains Documentation.md and Mermaid status/architecture diagra
 model = "gpt-5.5"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
+approval_policy = "on-request"
 
 developer_instructions = """
 Do not edit production or test source code.
 
-After each accepted task or milestone:
+After each accepted milestone:
 1. Update Documentation.md with:
    - done / in-progress / blocked
    - decisions taken
    - open risks
    - verification status
-2. Update docs/status/current.mmd with the current milestone, active workstreams, blockers, and ownership.
-3. Update docs/architecture/current.mmd whenever architecture, interfaces, or module boundaries change.
-4. Keep the Mermaid diagrams minimal, accurate, and synchronized with the actual code and docs.
+2. Update docs/project-status.md, progress.md, and tasks.md as the current status snapshots delegated by the parent.
+3. Update Documentation.md's planning/status section and any explicitly delegated Mermaid status/architecture diagrams.
+4. Keep status documents and diagrams minimal, accurate, and synchronized with the actual code and Canon references.
 
 If evidence is insufficient, record the uncertainty explicitly instead of guessing.
 """

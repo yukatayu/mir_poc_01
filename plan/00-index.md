@@ -15,6 +15,10 @@
 
 ## 先に読む順序
 
+Current execution は **唯一** `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
+である。これは ADR-0015 の Mir Theory v0 / I1+ M0--M10 を直列に管理する LAB
+roadmap であり、Gate/Phase/OBL の正本は Canon のままである。
+
 1. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
    task-specific canon files を先に読む
 2. LAB memory として `plan/00-index.md`

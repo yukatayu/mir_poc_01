@@ -1,10 +1,13 @@
 # Agent configuration notes
 
-These TOML files are **project-local guidance stubs** intended to work with a Codex setup that points each helper agent to `./agents/<name>.toml`.
+These TOML files are the project-local custom-agent configurations registered by `.codex/config.toml`.
 
-Because Codex host implementations may vary, these files intentionally use a conservative structure:
-- human-readable TOML,
-- an `instructions` multi-line string,
-- lightweight metadata.
+They target the installed Codex custom-agent schema and use:
+- `name`, `description`, and `developer_instructions`,
+- an explicit supported `sandbox_mode`, and
+- an explicit `approval_policy` default for the role.
 
-If your Codex installation expects a different schema, adapt these files while preserving the intent.
+Codex live parent-session permission overrides are reapplied to children. These
+files therefore state role intent and least-privilege defaults; the parent must
+still delegate exact write ownership. Run `python3 scripts/validate_agent_configs.py`
+and `codex --strict-config -C . --help` after changes.

@@ -8,12 +8,17 @@ notes. If LAB text conflicts with canon, canon wins.
 ## この文書の役割
 
 この文書はリポジトリを読み始めるための短い案内です。規範判断は
-`mirrorea_canon/`、現在地は `docs/project-status.md`、詳細計画は `plan/`、
-task ごとの不変な証跡は `docs/reports/` にあります。
+`mirrorea_canon/`、現在地は `docs/project-status.md`、唯一の current execution
+roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの不変な
+証跡は `docs/reports/` にあります。
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
-「次」は current queue を意味しません。現在の一本道は
+「次」は current queue を意味しません。現在の一本道は Plan 247 と、その派生ビュー
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
+
+現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M0 Bootstrap**
+である。M0 は agent/governance/roadmap の整合だけを閉じる。official lifecycle は
+`T0` のままで、G0 exit/T1 entry、OBL、SCN/conformance、runtime 実装を動かさない。
 
 | 知りたいこと | 読む場所 |
 | --- | --- |
@@ -21,7 +26,8 @@ task ごとの不変な証跡は `docs/reports/` にあります。
 | 規範正本の構造 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
-| 目的起点の semantic integration / I1 entry | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
+| 唯一の current execution roadmap | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| 旧 goal-first semantic integration（historical LAB evidence） | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
 | 選択済み方向の合成・推論境界 | `plan/199-selected-semantic-composition-and-inference-boundary.md` |
@@ -110,7 +116,7 @@ Mir の `.mir` を意味の正本とし、正しい理論に基づいて Place �
 Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連しますが、
 意図的に分離します。`World` と `Game` は Mir 上で user が定義する概念です。
 
-## 現在の位置
+## Historical LAB orientation（current queueではない）
 
 - official lifecycle は `T0`。G0 exit と T1 entry はまだありません。
 - OBL-001..028 は唯一の Canon ledger 上ですべて `open` です。

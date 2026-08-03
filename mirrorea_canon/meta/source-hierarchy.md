@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014]
-summary: canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015]
+summary: canon > LAB の正本関係、LAB 格下げ、owner-approved program と通常 research route の境界。
 open_items: []
 ---
 
@@ -19,7 +19,7 @@ open_items: []
 2. LAB README / AGENTS.md の冒頭に同旨の 3 行を追記(既存本文は改変しない — evidence の凍結保存)。
 3. `mir_hilight.html` の KEYWORDS から `world` を除去、または「歴史的表示」と注記。
 4. clean-near-end 系サンプルに「旧語彙(world 等)を含む歴史的 suite」の注記 1 行。
-5. 以後、LAB への新規追加は spike 産物と evidence のみ(plan/02 の記録の置き場)。ADR-0014 の bounded research artifact は既存の許可済み lane にのみ残せる。新 lane / helper / schema / CI surface は別途禁止のままである。
+5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。ADR-0015 program で必要な新 lane/helper/schema/CI surface は current milestone の direct consumer と falsifier を持ち、Canon consequence と独立 review を伴う場合だけ追加できる。program 外の ADR-0014 research artifact は既存の許可済み lane に限る。
 
 ## 移行規則
 
@@ -29,11 +29,16 @@ open_items: []
 
 ## Delegated working-theory route
 
-ADR-0014 の delegated route でも canon > LAB は変わらない。LAB は candidate /
+ADR-0015 の bounded program でも canon > LAB は変わらない。`.mir` source、Rust、
+Lean、tests、generated traces は normative Canon rules の implementation/evidence であり、
+存在だけで規範や proof status を変更しない。規範変更は proposal/ADR/changelog/index、
+実証は milestone report と proof ledger に追跡する。
+
+program 外の ADR-0014 delegated route でも canon > LAB は変わらない。LAB は candidate /
 alternative / countermodel / command evidence / review / supersession history を保持
 する。canon の agent-maintained state は `working/WRK-####` だけであり、standing
 eligibility predicate と frozen final-cut review に従う。現行の
 `meta/review-keys.json` は owner-authenticated trust anchor ではないため L2 は
 fail-closed である。将来有効化する reviewer identity は owner-managed trust
-anchor による。LAB evidence だけから既存
+anchor による。program 外では LAB evidence だけから既存
 canon の status、proof、Gate、Phase、SCN、conformance を動かしてはならない。

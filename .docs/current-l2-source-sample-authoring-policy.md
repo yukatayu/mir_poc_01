@@ -37,7 +37,8 @@ current meaning は、
 5. current task に応じて `Documentation.md`、`progress.md`、`tasks.md`、relevant `plan/`、research abstract を mirror 更新する。
 6. `python3 scripts/current_l2_source_sample_regression.py inventory` で current authored/deferred inventory と file presence / absence を確認する。
 7. `python3 scripts/current_l2_source_sample_regression.py regression --run-label <label> --artifact-root <root>` を実行する。
-8. 非自明 task なら report を追加し、current package / next line を snapshot に反映する。
+8. 変更を current milestone report に記録し、milestone close で current package /
+   next line を snapshot に反映する。sample task だけを理由に別 report は作らない。
 
 ## regression bundle
 

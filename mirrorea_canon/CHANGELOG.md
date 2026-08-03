@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-03** PROPOSAL-018 の owner disposition と ADR-0015 により、Mir
+  Theory v0 / I1+ Milestones 0--10 に限る evidence-gated bounded autonomy、
+  一つの semantic frontier、原則一 milestone 一 report、独立 review、実証済み
+  proof-ledger 更新を採用した。ADR-0014 はこの program 外の default research
+  route として残り、North Star・保証の弱化・final public contract・production
+  deployment は owner-reserved のままである。
 - **2026-07-29** PROPOSAL-017 の owner disposition として、V1/R1 の
   cross-locus read に限る `X1 relation-state envelope` を記録した。これは
   ADR-0014 適格な最小 L3 設計・反例 package を開くのみであり、Core、Config、

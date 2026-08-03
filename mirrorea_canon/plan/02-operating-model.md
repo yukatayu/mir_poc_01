@@ -1,86 +1,169 @@
 ---
 id: plan/02-operating-model
 status: L1-fixed
-maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014]
-summary: 運用規約。owner-reserved boundary、delegated L2/L3 theory research、package 5 種、モラトリアム、KPI、相互レビュー。
+maturity: reviewed
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015]
+summary: Mir v0/I1+ milestone 実行、単一 frontier/roadmap、report/WRK/candidate 制限、通常 L3 research route、review と evidence の運用規約。
 open_items: []
 ---
 
-# 02 — 運用規約
+# 02 — Operating model
 
-## 役割
+## Authority profiles
 
-- **人間(オーナー)**: L0/L1 の決定、core primitive / external contract、
-  SCN/Gate/Phase action、ADR の発効、最終 proof / OBL discharge / public claim
-  の承認。月次(以上)の「決める会」で reserved 未決を必ず一つ以上減らす。
-- **研究 author agent**: existing LAB lane で可逆な L2/L3 working theory の候補
-  比較、反例、文献、Lean transcription / conditional lemma、実験、bounded implementation
-  validation、暫定採択、撤回を行う。ADR-0014 の standing eligibility predicate を満たす
-  `working/WRK-####` を自律的に開始できる。reserved boundary は選ばない。
-- **独立 reviewer agent**: final rebased authority/evidence cut、registry membership、
-  semantic delta、evidence、non-effects、rollback、canon wording を review する。
-  author の authority を拡張しない。
-- **canon steward**: integration を直列化し、review 前に target base と evidence
-  cut を rebase/freeze し、shared snapshots、validation、commit、push を担当する。
-  same change の reviewer を兼ねず、review 後の変化には再 review を要求する。
+Two profiles are deliberately separate.
 
-## Package 5 種(close 条件が異なる)
+1. **Mir v0/I1+ milestone execution** follows ADR-0015 and PROPOSAL-018.
+   The owner has already approved the objective, Constitution-level direction,
+   internal decision priority, Milestones 0--10, and bounded semantic and
+   implementation writes. Evidence and independent review gate integration.
+2. **Research outside that program** follows ADR-0014. Its Canon write surface
+   remains a reversible `working/WRK-####` L3 record; L2 promotion remains
+   fail-closed while the owner-authenticated trust anchor is absent.
 
-| 種別 | 産物 | close 条件 |
-|---|---|---|
-| design-memo | owner-reserved decision request (`meta/proposals/`) | owner disposition または explicit defer |
-| delegated-theory-research | `WRK-####` scoped L3 candidate / future L2 candidate | authority cut、alternative/falsifier、positive/negative evidence、non-effects、rollback、LAB lifecycle record。L2 selection は現在 fail-closed で、将来は ADR-0014 frozen-cut review が追加で必要 |
-| calculus-experiment | 理論の変種検討・反例 | 結論と falsifier を LAB 台帳へ反映。current state を変えるなら delegated-theory-research 条件も満たす |
-| proof | OBL の statement/証明 | Lean artifact は LAB evidence。`theory/11` の全 status / identity movement は owner action |
-| spike | 使い捨て実装実験 | 学びの 1 頁メモ。main に残すコードは既存の許可済み lane にある delegated-theory-research artifact に限る |
+Neither profile changes `canon > LAB`. An agent's filesystem write capability
+is not semantic authority.
 
-## Delegated L2/L3 research lifecycle
+## Roles and single-writer surfaces
 
-LAB lifecycle は `proposed -> compared -> provisionally-selected ->`
-`superseded | falsified | escalated`。canon document status と混同しない。ADR-0014
-standing eligibility predicate を満たす candidate は `working/WRK-####` に L3 question
-を置ける。それ以外は LAB lifecycle だけを進み canon を変えない。
+- **owner**: supplies the North Star and program authorization; decides only
+  ADR-0015 owner-reserved escalations during this program.
+- **parent/orchestrator**: owns milestone state, Canon integration, writer
+  delegation, final evidence judgment, commit, push, and remote parity.
+- **planner**: single writer for the delegated current roadmap, dependency map,
+  milestone criteria, decision queue, and derived status snapshots. It may
+  apply and validate those edits. It does not normally write production Rust,
+  tests, Lean proofs, or normative semantics unless the parent delegates an
+  exact file surface.
+- **theory/formalization writer**: owns a delegated Canon/Lean surface.
+- **implementer**: normally the single production Rust/source writer.
+- **test author**: owns test/fixture/model-check harness surfaces.
+- **reviewer**: read-only and independent from the author of the same change.
+- **status reporter**: updates current status only at milestone close when that
+  surface has not been delegated to the planner.
 
-開始時に、governing ADR、read-only anchor IDs、pinned canon/LAB revision、standing
-eligibility check、forbidden surface、result class、alternative、expected falsifier、rollback、
-integration steward を固定する。L2 selection を求める場合、steward は review 前に intended
-integration base、cited/affected canon blobs、proposed working-record diff、artifact digests、
-rollback diff を freeze する。これらのいずれかが変われば review は失効する。
+Agents share a worktree: each writer preserves other writers' edits and stays
+inside its assigned surface. The orchestrator serializes overlapping changes.
 
-standing predicate を満たす L3 pre-registration は commit 後に review なしで LAB
-comparison を開始できる。LAB candidate の `L3-open -> L2-working` provisional selection
-には、少なくとも status quo と代替/falsifier、positive/negative evidence、reproducible
-command / tool version / retained artifact hash、dependent IDs / frozen SCN impact read、
-non-effects、independent review が必要である。review binding は author-signed Git base、exact
-canon/LAB SHA-256 snapshots、normalized record SHA-256、author と異なる reviewer signing
-fingerprint、およびその base の直上にある signed admission commit を残す。canon working statement は ADR-0014 standing
-eligibility predicate を満たす `WRK-####` だけに置き、scope、assumptions、LAB evidence
-cut、review、rollback trigger を保持する。
+## One semantic frontier and one roadmap
 
-現行の `meta/review-keys.json` は owner-authenticated trust anchor をまだ持たないため、
-L2 promotion は fail-closed である。これは L3 candidate research の停止理由ではない。
+The active semantic work-in-progress limit is one milestone. Independent
+implementation, tests, formalization, and review may run concurrently only when
+they test the same semantic candidate. Do not open competing candidate families
+as separate active frontiers.
 
-再現可能な falsifier は依存作業と新しい integration を LAB で即時停止できる。
-canon L2 record は `frozen` のまま保持し、follow-up は forward L3 successor または
-escalation bundle とする。in-place L2-to-L3 demotion はしない。replacement L2 は再
-review を要する。history は消さず LAB に forward record する。
+One LAB document is designated the **current execution roadmap**. It contains:
 
-次の場合は `escalated` として owner/canon action を要求する: L0/L1 の再解釈、
-primitive / external contract / SCN / conformance / Gate / Phase / any theory/11 / final proof の変更、
-new lane/helper/schema/CI/Make target、又は authority ambiguity / settled invariant
-conflict。
+- active and next milestone;
+- direct blocker and direct consumer;
+- acceptance criteria and validation gates;
+- current owner boundary; and
+- deferred scope.
 
-## モラトリアムと KPI
+`progress.md`, `tasks.md`, `docs/project-status.md`, and `Documentation.md` are
+derived snapshots. Older numbered plans remain repository memory and are not a
+queue. `plan/01-phases` remains the official Gate/Phase lifecycle source; the
+LAB roadmap sequences work but cannot invent a lifecycle fact.
 
-MirCore v0(T1 exit)まで、新しい evidence lane・新規 helper 群・新規 report 系列の追加は凍結する。既存の許可済み lane における scoped research artifact は、この凍結を解除しない。KPI は (a) Gate exit criteria の充足数、(b) SCN 通過数(実装期)、(c) review 済みで rollback 可能な L3→L2 working selection の質である。report 枚数・決定 ID の増加は進捗ではない。
+## Milestone close unit
 
-## レビューと外部性
+Each milestone closes the relevant subset of:
 
-L0/L1 と reserved boundary の規範変更は必ず二重レビュー(起案したモデルと別系統のモデル、可能なら人間)。delegated L3 pre-registration は standing predicate と commit を要するが independent review を待たない。L2 promotion は現在 fail-closed であり、owner-authenticated trust anchor の導入後にだけ owner-trusted author/reviewer signing key による distinct review を必須とする。frozen L2 の follow-up は successor record にする。四半期ごとに canon 全体の recut(矛盾・肥大の刈り込み)。T2 前後にワークショップ論文 1 本を蒸留の強制装置として書く。
+```text
+normative rule
+Lean definition/statement/theorem
+executable reference behavior
+positive case
+negative/counterexample case
+independent review
+focused validation
+commit + push + remote parity
+```
 
-## 記録の置き場
+A later layer must not redefine an earlier accepted semantic rule. Where a
+feature adds an extension, prove or test its local preservation condition and
+compose extensions only after those local conditions close.
 
-作業履歴・候補・実験ログ・生成物は LAB へ。canon に入るのは規範・ADR-0014 の
-`working/` に許された current working theory・計画・規約のみ。progress 系ダッシュ
-ボードは鏡であって記憶にしない。
+## Report policy
+
+Create **one report per milestone by default**. The report combines objective,
+decisions, model, implementation, tests, proof evidence, review, corrections,
+non-claims, commit/push, and next milestone.
+
+Do not create a separate report merely for registration, evidence attachment,
+metadata linking, snapshot synchronization, configuration wording, path fixes,
+or closeout. Add a second report only when material counterevidence requires a
+forward record without rewriting the original milestone report. Trivial work
+is recorded in the open milestone report or commit and does not create a report.
+Report count is never a progress metric.
+
+## WRK admission and candidate limit
+
+A new `WRK-####` is allowed only when all are true:
+
+1. a named current-milestone direct consumer exists;
+2. it reduces a real current blocker;
+3. the milestone report cannot contain the investigation;
+4. an explicit falsifier exists; and
+5. an adoption/discard rule exists.
+
+Do not reopen frozen or closed WRKs to create progress. ADR-0014 adds its
+standing eligibility requirements for research outside the program.
+
+For one design question compare at most:
+
+```text
+current proposal
+one smallest viable alternative
+```
+
+If both are falsified, integrate their causes before proposing one successor.
+Do not enumerate a third candidate speculatively.
+
+## Review and correction
+
+Each milestone receives one independent review after author self-check and
+focused validation. Review prioritizes hidden communication/authority,
+source/Core mismatch, lost update, stale resurrection, fallback re-promotion,
+information leaks, rejected-patch mutation, projection loss, fake evidence,
+theorem/implementation mismatch, and unexplained residual obligations.
+
+Apply one correction cycle. A second review/correction is justified only by new
+material counterevidence. Style-only preference does not reopen a closed
+semantic decision.
+
+## Evidence and proof claims
+
+Classify every proof obligation as one of:
+
+```text
+lean-proved
+lean-stated
+model-checked-bounded
+runtime-monitored
+intentionally-deferred
+```
+
+`lean-proved` requires trusted compilation, an axiom/placeholder scan, and
+theorem-to-implementation correspondence. `sorry`, `admit`, a `True` stub, or a
+bounded enumeration is not a general proof. Run only validations actually
+claimed and record skipped validations with reasons.
+
+## Reading and record discipline
+
+Read Canon first and resolve locations through `INDEX.json`. Read only reports
+directly referenced by current Canon, roadmap, or status; do not reconstruct the
+entire report chronology. LAB keeps implementation, tests, artifacts, reports,
+and historical plans. Canon keeps current normative rules, decisions, assurance
+status, and lifecycle state.
+
+Heavy disposable artifacts use a verified configured external workdir. Never
+assume a mount exists. Preserve user changes, history, old T0 artifacts, secrets,
+and source data; do not force-push or rewrite history.
+
+## Stop condition
+
+Within ADR-0015, stop only at an owner-reserved condition. Otherwise close the
+current milestone, send a concise progress checkpoint, and continue without
+waiting for owner confirmation. Outside ADR-0015, use ADR-0014's escalation and
+fail-closed rules.

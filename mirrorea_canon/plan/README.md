@@ -9,6 +9,6 @@ open_items: []
 
 # plan/ — 計画
 
-二軸で進む: **Gate 0–7** は理論の凍結順(何を先に固めるか)、**Phase T0–T2 / I1–I6** は時系列の作業段階(何がいつ動くか)。Gate は plan/00、Phase は plan/01。進め方の規約(エージェント運用・KPI・提案手続き・delegated L2/L3 research)は plan/02、リスク台帳は plan/03。
+二軸で進む: **Gate 0–7** は理論の凍結順(何を先に固めるか)、**Phase T0–T2 / I1–I6** は時系列の作業段階(何がいつ動くか)。Gate は plan/00、Phase は plan/01。ADR-0015 の Mir v0/I1+ milestone 実行、agent 運用、単一 frontier/roadmap、report/WRK/candidate 制限と program 外の ADR-0014 research route は plan/02、リスク台帳は plan/03。
 
-進捗の定義: report の枚数でも決定 ID の増加でもなく、**Gate の exit criteria 充足数と SCN 通過数**である(plan/02)。
+進捗の定義: report の枚数でも決定 ID の増加でもなく、**milestone acceptance、Gate exit criteria、SCN/conformance、正確に分類された proof evidence**である(plan/02)。

@@ -3,6 +3,7 @@ description = "Verifies external APIs, language semantics, papers, standards, an
 model = "gpt-5.6-terra"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
+approval_policy = "untrusted"
 
 developer_instructions = """
 Stay read-only.

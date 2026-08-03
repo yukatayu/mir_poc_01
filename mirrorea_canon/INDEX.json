@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 134,
+ "files": 136,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 4703
+   "bytes": 5194
   },
   {
    "id": "root/glossary",
@@ -39,7 +39,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21258
+   "bytes": 21548
   },
   {
    "id": "root/north-star",
@@ -61,7 +61,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2773
+   "bytes": 2667
   },
   {
    "id": "adr/ADR-0001",
@@ -207,10 +207,10 @@
    "depends_on": [
     "root/readme"
    ],
-   "summary": "canon が正本、旧 repo は LAB。規範改定は「提案→人間の決定→ADR/CHANGELOG 追記」の一方向手続きで、ADR-0014 の standing L3 / future review-gated L2 working-theory route のみを例外とする。",
+   "summary": "canon が正本、旧 repo は LAB。規範改定は owner decision を通常手続きへ一方向反映し、ADR-0014 の research route と ADR-0015 の bounded program を明示する。",
    "open_items": [],
    "path": "adr/ADR-0012.md",
-   "bytes": 1630
+   "bytes": 1512
   },
   {
    "id": "adr/ADR-0013",
@@ -245,7 +245,22 @@
    "summary": "standing negative-list boundary と canonical working annex により、可逆な L3 theory research と future L2 route、および既存 LAB lane の実装検証を委任する。L0/L1・theory/11・契約・SCN/Gate は owner に留保する。",
    "open_items": [],
    "path": "adr/ADR-0014.md",
-   "bytes": 6776
+   "bytes": 7036
+  },
+  {
+   "id": "adr/ADR-0015",
+   "status": "L0-frozen",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "adr/ADR-0012",
+    "adr/ADR-0014",
+    "meta/proposal-018"
+   ],
+   "summary": "Mir Theory v0 / I1+ の owner-approved program に限り、evidence-gated bounded autonomy と milestone 単位の直列 integration を採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0015.md",
+   "bytes": 3699
   },
   {
    "id": "adr/readme",
@@ -257,7 +272,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 1861
+   "bytes": 2014
   },
   {
    "id": "arch/01-strata",
@@ -402,12 +417,13 @@
    "depends_on": [
     "adr/ADR-0012",
     "adr/ADR-0014",
+    "adr/ADR-0015",
     "plan/02-operating-model"
    ],
-   "summary": "AI エージェントの読込プロトコルと権限境界。standing L3 pre-registration と review-gated L2 working-theory route、reserved boundary、衝突時の挙動。",
+   "summary": "agent の読込、Mir v0/I1+ bounded autonomy、通常 L3 research route、review と owner escalation 境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 3571
+   "bytes": 4397
   },
   {
    "id": "meta/proposal-001",
@@ -695,17 +711,32 @@
    "bytes": 13411
   },
   {
+   "id": "meta/proposal-018",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "adr/ADR-0012",
+    "adr/ADR-0014"
+   ],
+   "summary": "owner が Mir Theory v0 と I1+ の有限な完走 scope、bounded autonomy、単一 milestone/report/frontier 運用、proof-status 更新条件を承認した記録。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-018-mir-v0-i1plus-autonomous-execution.md",
+   "bytes": 3710
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
    "depends_on": [
     "adr/ADR-0012",
-    "adr/ADR-0014"
+    "adr/ADR-0014",
+    "adr/ADR-0015"
    ],
-   "summary": "canon > LAB の正本関係、LAB 格下げの実施手順、引用形式、旧語彙の移行。",
+   "summary": "canon > LAB の正本関係、LAB 格下げ、owner-approved program と通常 research route の境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 2550
+   "bytes": 3106
   },
   {
    "id": "meta/style-guide",
@@ -713,12 +744,13 @@
    "maturity": "draft",
    "depends_on": [
     "root/readme",
-    "adr/ADR-0014"
+    "adr/ADR-0014",
+    "adr/ADR-0015"
    ],
-   "summary": "執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。",
+   "summary": "執筆規約。front matter schema、ID、claim、bounded program と通常 route の改定手続き。",
    "open_items": [],
    "path": "meta/style-guide.md",
-   "bytes": 3569
+   "bytes": 4267
   },
   {
    "id": "plan/00-gates",
@@ -755,15 +787,16 @@
   {
    "id": "plan/02-operating-model",
    "status": "L1-fixed",
-   "maturity": "draft",
+   "maturity": "reviewed",
    "depends_on": [
     "adr/ADR-0012",
-    "adr/ADR-0014"
+    "adr/ADR-0014",
+    "adr/ADR-0015"
    ],
-   "summary": "運用規約。owner-reserved boundary、delegated L2/L3 theory research、package 5 種、モラトリアム、KPI、相互レビュー。",
+   "summary": "Mir v0/I1+ milestone 実行、単一 frontier/roadmap、report/WRK/candidate 制限、通常 L3 research route、review と evidence の運用規約。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 6554
+   "bytes": 6833
   },
   {
    "id": "plan/03-risks",
@@ -772,10 +805,10 @@
    "depends_on": [
     "plan/02-operating-model"
    ],
-   "summary": "リスク台帳 R-01..R-13。LAB plan/12 の蒸留+相談で特定された構造リスク。",
+   "summary": "リスク台帳 R-01..R-14。LAB plan/12 の蒸留と Mir v0/I1+ bounded execution の構造リスク。",
    "open_items": [],
    "path": "plan/03-risks.md",
-   "bytes": 2209
+   "bytes": 2419
   },
   {
    "id": "plan/readme",
@@ -787,7 +820,7 @@
    "summary": "計画の読み方。Gate(理論凍結)と Phase(実装)の二軸、運用規約、リスク。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 718
+   "bytes": 829
   },
   {
    "id": "scenarios/readme",

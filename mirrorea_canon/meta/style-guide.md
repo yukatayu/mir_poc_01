@@ -2,8 +2,8 @@
 id: meta/style-guide
 status: L1-fixed
 maturity: draft
-depends_on: [root/readme, adr/ADR-0014]
-summary: 執筆規約。front matter schema、ID 規則、言語方針、claim 規律、サイズ規律、改定手続き。
+depends_on: [root/readme, adr/ADR-0014, adr/ADR-0015]
+summary: 執筆規約。front matter schema、ID、claim、bounded program と通常 route の改定手続き。
 open_items: []
 ---
 
@@ -39,6 +39,13 @@ MAP.md の表が正本。新 ID は台帳(GLOSSARY / theory/11 / plan/03 / spec/
 
 ### Delegated working state
 
+ADR-0015 の owner-approved Mir Theory v0 / I1+ program では、accepted
+Constitution、current milestone、owner-reserved conditions、independent review、
+evidence classification に従い、必要な theory/spec/scenario/Gate/Phase/ledger を
+通常の proposal / ADR / CHANGELOG / INDEX 手続きで更新できる。これは file status
+だけによる grant ではなく、PROPOSAL-018 の目的と acceptance criteria に結び付く。
+
+program 外では、
 ADR-0014 の route で L2/L3 working theory を更新するとき、update surface は
 `working/WRK-####` に限る。候補、代替、command output、artifact source、history は
 LAB に置く。file-level L2/L3 status は agent authority の grant ではない。
@@ -62,7 +69,10 @@ anchor が導入された後の future route であり、L3 research の停止�
 
 ## 改定手続き
 
-CHANGELOG.md 冒頭の 4 手順。L0/L1 に触れる場合は ADR 追記が必須。ADR-0014
+CHANGELOG.md 冒頭の 4 手順。L0/L1 に触れる場合は ADR 追記が必須。ADR-0015
+program 内の owner decision は PROPOSAL-018 に記録済みであり、各 bounded
+consequence に owner 再確認を要求しない。owner-reserved condition に達した場合だけ
+停止する。program 外の ADR-0014
 の delegated L3 pre-registration は standing eligibility check と commit を LAB に残す。
 L2 promotion は frozen authority / evidence cut と update 前の independent review を LAB
 に残す future route であり、現行は fail-closed である。current-state wording を最小に保つ。

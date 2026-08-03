@@ -27,5 +27,5 @@ description = "Test-only author."
 config_file = "../agents/test_author.toml"
 
 [agents.planner]
-description = "Read-only strategic planner for task sequencing and plan maintenance."
+description = "Planning, roadmap, governance-proposal, and status-maintenance writer; production source remains separately owned."
 config_file = "../agents/planner.toml"

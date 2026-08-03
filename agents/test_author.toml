@@ -3,6 +3,7 @@ description = "Writes or updates litmus tests, conformance tests, and test-only 
 model = "gpt-5.5"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "workspace-write"
+approval_policy = "on-request"
 
 developer_instructions = """
 Write or update tests only.

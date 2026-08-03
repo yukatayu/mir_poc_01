@@ -13,18 +13,17 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 ## Current research governance
 
-`mirrorea_canon/` remains the sole normative source. ADR-0014 permits
-autonomous research in existing LAB lanes; canon L2/L3 working-state updates
-are limited to `working/WRK-####` and need a standing-eligibility check,
-pre-registered falsifier, and a rebased final-cut independent review for any
-future L2. L3 pre-registration is active; L2 is intentionally fail-closed
-until an owner-authenticated trust anchor exists.
-Candidates, countermodels, experiments, and history remain in LAB.
-L0/L1 direction, core and external contracts, SCN/Gate/Phase action, every
-proof-ledger change, final proof / OBL discharge, and public claims remain
-owner-reserved. The concise control view is
-`docs/project-status.md`; the detailed lifecycle is
-`plan/158-standing-bounded-autonomy.md`.
+`mirrorea_canon/` remains the sole normative source. ADR-0015 records the
+owner-approved Mir Theory v0 / I1+ Milestones 0--10 and permits evidence-gated
+Canon, proof-ledger, implementation, test, roadmap, and status updates inside
+that bounded program. North Star changes, weakened safety/privacy guarantees,
+irreversible final public contracts, and production deployment remain
+owner-reserved. Outside the program, ADR-0014 keeps research in the reversible
+L3 `working/WRK-####` route and L2 remains fail-closed until an
+owner-authenticated trust anchor exists. Candidates, countermodels,
+experiments, and history remain LAB. The concise control view is
+`docs/project-status.md`; the sole current execution roadmap is
+`plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
 
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア

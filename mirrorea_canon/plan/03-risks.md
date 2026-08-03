@@ -3,7 +3,7 @@ id: plan/03-risks
 status: L2-working
 maturity: draft
 depends_on: [plan/02-operating-model]
-summary: リスク台帳 R-01..R-13。LAB plan/12 の蒸留+相談で特定された構造リスク。
+summary: リスク台帳 R-01..R-14。LAB plan/12 の蒸留と Mir v0/I1+ bounded execution の構造リスク。
 open_items: []
 ---
 
@@ -11,7 +11,7 @@ open_items: []
 
 | ID | リスク | 兆候 | 対策 |
 |---|---|---|---|
-| R-01 | エージェントのフロンティア回避(閉じやすい所だけ掘る) | 台帳が「〜してよい/later」で増える | package 4 種と KPI(plan/02)、決める会 |
+| R-01 | エージェントのフロンティア回避(閉じやすい所だけ掘る) | 台帳が「〜してよい/later」で増える | active semantic frontier=1、direct consumer/acceptance criterion、milestone close gate(plan/02) |
 | R-02 | 文書エントロピー(ガードレール文の肥大) | ファイル 15KB 超、重複防衛文 | 四半期 recut、style-guide のサイズ規律 |
 | R-03 | 理論ドリフト(載せたかったものとのズレ) | SCN が説明できない改訂 | SCN 凍結+変更に ADR 必須 |
 | R-04 | 実装先行による理論の歪み | verdict なし実行路、隠れ辺 | BND-004/001、C-static を CI の門に |
@@ -23,4 +23,5 @@ open_items: []
 | R-10 | auth の transport 吸収 | envelope に権限が滲む | BND-005、SCN-03 の系譜検査 |
 | R-11 | 二層時間の未成熟(theory/09) | pose 線の場当たり実装 | I5 前に G4/09 の再訪を必須化 |
 | R-12 | 文献接続の停滞 | 新規性主張の宙吊り | theory/12 の row 追加を proof package に随伴 |
-| R-13 | delegated research の semantic / proof laundering | L2 と書いた carrier が core / contract / completed proof として扱われる | ADR-0014 の standing boundary、WRK pre-registration、現行 L2 fail-closed、将来の frozen final-cut review、forward-only successor、all-ledger reservation、reserved-boundary escalation |
+| R-13 | delegated research の semantic / proof laundering | L2 や bounded result が core / completed proof として扱われる | ADR-0015 の evidence classification と independent review。program 外は ADR-0014 の standing boundary / L2 fail-closed |
+| R-14 | roadmap/report 増殖による current queue の消失 | 複数 plan/report が同時に current を名乗る | current execution roadmap は一つ、原則一 milestone 一 report、snapshot は derived view(plan/02) |

@@ -27,3 +27,4 @@ open_items: []
 | ADR-0012 | canon が正本、旧 repo は LAB。改定は一方向手続き | 運用 L0 |
 | ADR-0013 | T0/G0 governance profile v2 と G0 substantive evidence acceptance。G0 exit は defer | L1 |
 | ADR-0014 | standing L3 pre-registration と review-gated L2 working theory research を委任。reserved boundary は owner に留保 | 運用 L0 |
+| ADR-0015 | Mir Theory v0 / I1+ の owner-approved program に evidence-gated bounded autonomy と milestone 直列 integration を委任 | 運用 L0 |

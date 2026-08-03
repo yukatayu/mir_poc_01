@@ -43,7 +43,11 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..03 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014。
+- **運用筋**(進め方を知る): plan/00..03 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015。
+
+Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015 と
+PROPOSAL-018 を追加で読み、LAB の designated current roadmap と derived status
+だけを current queue として使う。下の historical working records 一覧は queue ではない。
 
 ## ID 体系
 

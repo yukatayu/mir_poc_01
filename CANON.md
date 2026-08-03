@@ -15,11 +15,10 @@ Read canon first:
 3. The task-specific canon files listed from there
 
 Use LAB files to preserve and verify evidence. Promote or revise canon only by
-the canon process: proposal, human decision, ADR or file update where required,
-`CHANGELOG.md` update where required, and `INDEX.json` regeneration. ADR-0014
-permits autonomous bounded research and a reversible L3 pre-registration only
-in `mirrorea_canon/working/`; L2 promotion is currently fail-closed pending an
-owner-authenticated trust anchor, and its future route requires an independent
-frozen-cut review. A frozen L2 position is followed by a successor. It does not
-delegate L0/L1, contracts, SCN/Gate/Phase action, any `theory/11` change, or
-final proof.
+the canon process: proposal, owner decision, ADR or file update where required,
+`CHANGELOG.md` update where required, and `INDEX.json` regeneration. ADR-0015
+records the owner-approved bounded route for Mir Theory v0 / I1+ Milestones
+0--10, including evidence-gated Canon, proof-ledger, implementation, test, and
+status updates. Outside that program, ADR-0014 permits only reversible L3
+pre-registration in `mirrorea_canon/working/`; L2 remains fail-closed pending
+an owner-authenticated trust anchor.

@@ -3,6 +3,7 @@ description = "Runs tests, litmus checks, conformance checks, and verification c
 model = "gpt-5.5"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
+approval_policy = "on-request"
 
 developer_instructions = """
 Run verification, do not implement fixes.
