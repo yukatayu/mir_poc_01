@@ -181,7 +181,7 @@ M9 auth/verification and M10 official release conformance are later milestones a
 
 ## Commit / push status
 
-No M8 commit or push exists at report start. M7 closeout `420432e1f2507cbd475ea6bd327b580fc6376571` is pushed with remote parity verified.
+The M8 implementation/formal/status closeout is commit `588f2f4204b2f11025b77e80eec5441b4bc0e10c`, pushed to `origin/main`.  Post-push fetch verified `HEAD == origin/main == 588f2f4204b2f11025b77e80eec5441b4bc0e10c` with a clean worktree.  This report-status correction is the final report-only closeout commit and is pushed immediately after creation; no production, proof, or status meaning changes in that correction.
 
 ## Sub-agent session close status
 
