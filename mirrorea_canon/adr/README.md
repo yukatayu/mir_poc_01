@@ -35,3 +35,4 @@ open_items: []
 | ADR-0020 | M5のconcrete shared formal modelを採用し、M6--M8のsemantic sourceを固定 | L1 |
 | ADR-0021 | M6 bounded ordinary Surface と M5 fragment への分類を採用 | L1 |
 | ADR-0022 | M6 fixed input の finite checked elaboration と typed residual obligation を採用 | L1 |
+| ADR-0023 | M7 checked artifactからM8 runtimeへのfinite admission・lowering・state boundaryを採用 | L1 |

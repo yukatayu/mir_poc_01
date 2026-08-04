@@ -25,6 +25,9 @@
 ## current reading
 
 - foundations は actual proof fragment
+- `foundations/MirTheoryV0M8DeterministicRuntime.lean` is the manually-run
+  finite M8 checked-artifact/admission evidence; its exact OBL boundary is
+  documented beside the file and in the Canon ledger
 - lab-statements は compile-check only の statement-shape draft
 - generated stub は proof bridge の足場
 - old corpus は historical appendix

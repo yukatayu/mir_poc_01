@@ -24,10 +24,14 @@ open_items: []
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
-  `theory/15-shared-formal-model.md` → `theory/16-m7-checked-elaboration.md`
+  `theory/15-shared-formal-model.md` → `theory/16-m7-checked-elaboration.md` →
+  `theory/17-m8-deterministic-runtime.md`
 - M6 source: `adr/ADR-0021.md` → `spec/01-lexical-and-modules.md` →
   `spec/02-surface-grammar.md` → `spec/03-static-semantics.md` →
   `spec/04-core-ir.md` → `spec/08-m7-checked-elaboration.md`
+- M8 runtime handoff: `adr/ADR-0023.md` →
+  `theory/17-m8-deterministic-runtime.md` →
+  `spec/09-m8-deterministic-runtime.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。

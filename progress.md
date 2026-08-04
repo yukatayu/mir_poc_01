@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-04 18:56 JST
+最終更新: 2026-08-04 23:26 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -38,9 +38,9 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0--M7 are evidence-complete; official lifecycle is T1; M8 deterministic runtime is active | **着手可能**: consume the checked M7 Core/obligation/residual boundary without bypass |
-| User-facing specification | M7 source-first static route is closed; M8 adds no final public grammar/ABI | **後段依存**: M8 then M9 |
-| Implementation / operation | M8 owns the deterministic I1+ runtime reference | **着手可能**: one checked-source runtime route |
+| Logical specification | M0--M8 are evidence-complete; official lifecycle is T1; M9 typed auth/verification extension is active | **着手可能**: transform the M8 contract without creating authority or redefining base semantics |
+| User-facing specification | M8 source-first runtime route is closed; M9 adds no final public syntax/grammar/ABI | **後段依存**: M9 then M10 |
+| Implementation / operation | M8 finite deterministic runtime evidence is closed; M9 owns explicit contract update, activation, and provenance/invalidation | **着手可能**: one M8-admitted-program extension route |
 
 Sources: `mirrorea_canon/adr/ADR-0015.md`,
 `mirrorea_canon/plan/01-phases.md`, and
@@ -63,8 +63,14 @@ M7 then closed one ordinary `.mir` route through M6 full classification retentio
 finite checking, typed Core/effects/obligations/residuals/source map. Eight AST tests,
 11 M6 classifier tests, 22 M7 pipeline tests, full `mir-ast` / `mir-semantics`
 suites, format/clippy, and OBL-049's 16 trusted Lean theorems are bounded evidence.
-The 10-row M7 fixture matrix is not frozen SCN-01..10 official conformance. M8 is now
-the direct consumer; M9/M10 and official conformance remain unchanged.
+The 10-row M7 fixture matrix is not frozen SCN-01..10 official conformance. M8 then
+closed the deterministic single-process runtime over one checked artifact: 53 focused
+tests, full `mir-runtime` and `mir-semantics` all-target suites, format/clippy, and 28
+axiom-free `--trust=0` Lean theorem checks. OBL-050--056 are exact finite
+`lean-proved` evidence; OBL-057 is runtime-monitored for bounded validation correspondence. This is a source/runtime
+fixture and trace/replay/cut/save/patch evidence cut, not official SCN conformance,
+public ABI/wire, sockets, production deployment, or a general proof. M9 is now the
+direct consumer and M10 retains official conformance/closeout.
 
 ## milestone map
 
@@ -78,9 +84,9 @@ the direct consumer; M9/M10 and official conformance remain unchanged.
 | M5 | shared model/metatheory | closed; finite shared model and exact evidence | ADR-0020/theory-15, Report 2586 |
 | M6 | Surface | closed; finite grammar/AST/span/classification evidence | ADR-0021/spec-01--04, Report 2587 |
 | M7 | checker/elaborator | closed; finite checked source-to-Core boundary | Report 2588 / OBL-049; 10-row fixture matrix is not SCN conformance |
-| M8 | deterministic runtime | active | consume M7 checked output; deterministic runtime/trace/cut/save/patch |
-| M9 | auth/verification | next | after M8 |
-| M10 | conformance/closeout | later | after M9 |
+| M8 | deterministic runtime | closed; finite checked-artifact runtime evidence | 53 focused tests; full target suites; exact OBL-050--056 Lean evidence; OBL-057 runtime-monitored for bounded validation correspondence |
+| M9 | auth/verification | active | MembershipAuth, CapabilityAuth, non-transparent ContractUpdate, revocation/removal, refinement/model/Lean evidence, provenance/invalidation |
+| M10 | conformance/closeout | next | after M9; first official fresh SCN-01..10 release profile |
 
 ## line snapshots
 
@@ -106,8 +112,9 @@ fragment without making renderer/IK/LOD behavior authoritative.
 
 ### Projection/Backend line
 
-Provider/rendering/backend remain typed later boundaries. M4 closes only a finite
-consumer-local projection fragment; M8 owns deterministic runtime behavior.
+Provider/rendering/backend remain typed later boundaries. M4/M8 close finite
+consumer-local projection and deterministic runtime fragments; M9 adds only typed
+auth/verification extension behavior.
 
 ### Engine/Provider line
 
@@ -144,21 +151,22 @@ completion is claimed.
 | M5 shared model | closed finite shared model, correspondence, exact assurance mapping | general theorem/runtime remains deferred |
 | M6 Surface | closed finite grammar, source spans, total M5-aligned classification | no final grammar/runtime/general theorem claim |
 | M7 | closed one source-first checker/elaborator preserving M6 meaning | exact finite evidence only; no official SCN conformance |
-| M8 | deterministic runtime over M7 checked output | reject bypass, model drift, hidden side table, stale resurrection, or patch mutation on rejection |
-| M9--M10 | extensions, closeout | sequentially after M8 acceptance |
+| M8 | closed deterministic runtime over one checked artifact | exact finite evidence only; no official SCN conformance or general runtime theorem |
+| M9 | typed auth/verification contract extension | reject authority grant conflation, untyped layer mutation, stale capability after removal/revocation, hidden residual success, or base-semantics redefinition |
+| M10 | release conformance/closeout | fresh official profile only after M9 acceptance |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | M0 closed | medium | maintenance only |
-| 1 | semantics/shared model | M1--M7 accepted; M8 is the active deterministic-runtime cut | heavy | yes |
+| 1 | semantics/shared model | M1--M8 accepted; M9 is the active contract-transformer cut | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
-| 3 | source/checker/runtime | M7 closed; M8 active | heavy | M8 active |
+| 3 | source/checker/runtime | M8 closed; M9 extends only its typed runtime contract | heavy | M9 active |
 | 4 | executable samples | historical evidence | medium | maintenance only |
-| 5 | theorem/model-check | finite M3/M4/M5/M6/M7 evidence; general proof remains deferred | heavy | M8 correspondence consumer |
+| 5 | theorem/model-check | finite M3--M8 evidence; OBL-050--056 Lean-proved and OBL-057 runtime-monitored for bounded validation correspondence; general proof remains deferred | heavy | M9 extension evidence |
 | 6 | distributed fabric | beyond I1+ | heavy | deferred |
-| 7 | toolchain/backend | M8--M9 bounded support | heavy | after M7 |
+| 7 | toolchain/backend | M9 bounded auth/verification support | heavy | M9 active |
 | 8 | applications | domain consumers | heavy | deferred |
 
 ## feature maturity rows
@@ -166,13 +174,13 @@ completion is claimed.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- | --- |
 | multi-node/fabric | historical LAB only | beyond deterministic I1+ | deferred |
-| contracts/theorem/model-check | finite M3 OBL-029--034, M4 OBL-035--039, M5 OBL-040--047, M6 OBL-048, and M7 OBL-049 evidence; general ledger deferred | M8 runtime correspondence | active |
-| dynamic attach/detach/DAG evolution | bounded LAB evidence | M8 patch then M10 | active |
+| contracts/theorem/model-check | finite M3 OBL-029--034, M4 OBL-035--039, M5 OBL-040--047, M6 OBL-048, M7 OBL-049, M8 OBL-050--056 Lean evidence, and OBL-057 runtime-monitored bounded validation correspondence; general ledger deferred | M9 auth/verification extension evidence | active |
+| dynamic attach/detach/DAG evolution | M8 bounded patch evidence | M9 layer activation/removal then M10 | active |
 | atomic_cut/ordering | Canon + LAB evidence | M5 model | later |
 | executable sample corpus | runnable historical roots | source-first conformance profile | M10 consumer |
 | Mirrorea | separate fabric layer | later I2+ | deferred |
 | PrismCascade | separate performance kernel | not I1+ Core | deferred |
-| Typed-Effect platform | separate adapter boundary | M9 extension evidence | later |
+| Typed-Effect platform | separate adapter boundary | M9 typed contract-transformer evidence | active |
 | domain applications | LAB consumers | no Core promotion | deferred |
 
 ## recent log
@@ -218,3 +226,9 @@ completion is claimed.
   `mir-ast` / `mir-semantics` suites, format/clippy, and 16 exact OBL-049 Lean
   theorems passed. The 10-row fixture matrix is not SCN official conformance; M8
   deterministic runtime is now the sole active milestone.
+- 2026-08-04 23:26 JST: M8 closed the finite deterministic runtime over a checked
+  source artifact. Fifty-three focused tests, full `mir-runtime` / `mir-semantics`
+  all-target suites, format/clippy, and 28 axiom-free `--trust=0` Lean theorem checks
+  passed; OBL-050--056 are exact `lean-proved` evidence and OBL-057 is runtime-monitored
+  for bounded validation correspondence. No official SCN conformance, public ABI/wire, sockets, production, or
+  general proof is claimed. M9 auth/verification is now the sole active milestone.

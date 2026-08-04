@@ -18,15 +18,15 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
-formal model / metatheory、M6 Surface、M7 checker/elaborator は閉じた。現在は ADR-0015 の
-owner-approved Mir Theory v0 / I1+ program の **M8 deterministic runtime** であり、次は M9
-auth/verification である。M7 は一つの ordinary `.mir` `parse → M6 full classification retention
-→ finite check → typed Core/effects/obligations/residuals/source map` route を閉じ、8 AST tests、
-11 classifier tests、22 M7 pipeline tests、full `mir-ast` / `mir-semantics` suite、format/clippy、
-OBL-049 の exact finite 16-theorem `lean-proved` evidence を記録した。10-row result は M7
-fixture matrix であり、SCN-01..10 official conformance ではない。M8 runtime、M9 extension、
-M10 conformance、final public grammar/diagnostic ABI/wire、general theorem、transport、I1、deployment
-をこの close は主張しない。M2 は
+formal model / metatheory、M6 Surface、M7 checker/elaborator、M8 deterministic runtime は閉じた。
+現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M9 auth/verification** であり、
+次は M10 conformance/closeout である。M8 は M7 checked artifactを唯一のsource-program inputとする
+finite single-process runtimeを閉じ、53 focused tests、full `mir-runtime` / `mir-semantics` all-targets、
+format/clippy、`--trust=0` の28 axiom-free theorem checks、Canon index 163、hierarchy 798/798、
+docs validationを記録した。OBL-050--056は exact finite `lean-proved`、OBL-057はbounded validation
+correspondenceの`runtime-monitored`である。M8 fixture matrixはSCN-01..10 official
+conformanceではない。M9 extension、M10 conformance、final public grammar/diagnostic ABI/wire、socket、
+production、general theorem、I1をこのcloseは主張しない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、

@@ -13,6 +13,13 @@ This chapter fixes the M5 finite shared semantic source.  It is a
 proof-facing reference model for M6--M8, not a selected Surface grammar,
 runtime implementation, public representation, or general theorem.
 
+Theory/17 constrains its one finite M8 state using M5-aligned semantic
+categories, with admitted-program identity, deterministic queues, patch
+lifecycle, and runtime trace data.  The M8 Lean foundation is deliberately
+fresh rather than an import/type alias of this M5 file; that implementation
+fact establishes neither Rust/M5/M7 type identity nor a second M8 semantic
+state.
+
 ## 1. One finite universe
 
 The finite model has one concrete carrier family:

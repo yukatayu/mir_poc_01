@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 159,
+ "files": 163,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 10608
+   "bytes": 11517
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21891
+   "bytes": 21929
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3133
+   "bytes": 3309
   },
   {
    "id": "adr/ADR-0001",
@@ -381,6 +381,21 @@
    "bytes": 5100
   },
   {
+   "id": "adr/ADR-0023",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0020",
+    "adr/ADR-0022",
+    "meta/proposal-026"
+   ],
+   "summary": "M7 checked artifactから M8 deterministic runtimeへ渡す有限 admission・lowering・state boundaryを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0023.md",
+   "bytes": 3288
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -390,7 +405,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2800
+   "bytes": 2915
   },
   {
    "id": "arch/01-strata",
@@ -946,6 +961,21 @@
    "bytes": 6054
   },
   {
+   "id": "meta/proposal-026",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0020",
+    "adr/ADR-0022"
+   ],
+   "summary": "M7 checked artifactだけを入力にする、有限 M8 runtime admission と deterministic lowering の提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-026-m8-deterministic-runtime-admission.md",
+   "bytes": 3572
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1345,6 +1375,21 @@
    "bytes": 7068
   },
   {
+   "id": "spec/09-m8-deterministic-runtime",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/05-runtime-semantics",
+    "spec/08-m7-checked-elaboration",
+    "theory/17-m8-deterministic-runtime",
+    "adr/ADR-0023"
+   ],
+   "summary": "M8 reference runtimeのchecked-artifact-only input、finite admission、deterministic trace/state output boundary。",
+   "open_items": [],
+   "path": "spec/09-m8-deterministic-runtime.md",
+   "bytes": 5062
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1353,12 +1398,13 @@
     "adr/ADR-0008",
     "adr/ADR-0009",
     "adr/ADR-0021",
-    "adr/ADR-0022"
+    "adr/ADR-0022",
+    "adr/ADR-0023"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1096
+   "bytes": 1142
   },
   {
    "id": "theory/00-overview",
@@ -1548,12 +1594,13 @@
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model",
-    "theory/16-m7-checked-elaboration"
+    "theory/16-m7-checked-elaboration",
+    "theory/17-m8-deterministic-runtime"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 13774
+   "bytes": 19089
   },
   {
    "id": "theory/12-literature",
@@ -1627,7 +1674,7 @@
    "summary": "M1--M4 を一つの concrete finite proof-facing model に統合する M5 shared semantic source。",
    "open_items": [],
    "path": "theory/15-shared-formal-model.md",
-   "bytes": 7451
+   "bytes": 7828
   },
   {
    "id": "theory/16-m7-checked-elaboration",
@@ -1644,7 +1691,27 @@
    "summary": "M6 fixed source classificationを有限検査し、deterministic checked elaboration・義務・residualを返すM7境界。",
    "open_items": [],
    "path": "theory/16-m7-checked-elaboration.md",
-   "bytes": 7839
+   "bytes": 7903
+  },
+  {
+   "id": "theory/17-m8-deterministic-runtime",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/08-patch-hotplug",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model",
+    "theory/16-m7-checked-elaboration",
+    "adr/ADR-0023"
+   ],
+   "summary": "M7 checked artifactを唯一のsource inputとする、有限M8 deterministic runtime admission・lowering・state model。",
+   "open_items": [],
+   "path": "theory/17-m8-deterministic-runtime.md",
+   "bytes": 7401
   },
   {
    "id": "theory/readme",
@@ -1657,7 +1724,7 @@
    "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
    "open_items": [],
    "path": "theory/README.md",
-   "bytes": 1681
+   "bytes": 1713
   },
   {
    "id": "working/readme",

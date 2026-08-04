@@ -134,6 +134,275 @@ pub enum M7DiagnosticKind {
 /// reconstructing it from the Surface AST.
 pub type ConsumedM6Classification = SurfaceV0Classification;
 
+/// Structural identity for the checked source artifact that M8 may admit.
+///
+/// This deliberately retains source identity rather than deriving an opaque
+/// content hash.  M8 admission therefore remains tied to the checked source
+/// artifact and its canonical root location.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedProgramIdentity {
+    module: String,
+    source_file: String,
+    root_source_ref: SourceRef,
+    structural_entries: Vec<String>,
+}
+
+impl CheckedProgramIdentity {
+    pub fn new(
+        module: impl Into<String>,
+        source_file: impl Into<String>,
+        root_source_ref: SourceRef,
+    ) -> Self {
+        Self {
+            module: module.into(),
+            source_file: source_file.into(),
+            root_source_ref,
+            structural_entries: Vec::new(),
+        }
+    }
+
+    fn with_structural_entries(mut self, structural_entries: Vec<String>) -> Self {
+        self.structural_entries = structural_entries;
+        self
+    }
+
+    pub fn module(&self) -> &str {
+        &self.module
+    }
+
+    pub fn source_file(&self) -> &str {
+        &self.source_file
+    }
+
+    pub fn root_source_ref(&self) -> &SourceRef {
+        &self.root_source_ref
+    }
+
+    pub fn stable_key(&self) -> String {
+        let root = &self.root_source_ref;
+        let base = format!(
+            "{}:{}:{}:{}:{}:{}",
+            self.module,
+            self.source_file,
+            root.start_line,
+            root.start_column,
+            root.end_line,
+            root.end_column
+        );
+        if self.structural_entries.is_empty() {
+            base
+        } else {
+            format!("{base}|{}", self.structural_entries.join("|"))
+        }
+    }
+
+    pub fn structural_entries(&self) -> &[String] {
+        &self.structural_entries
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedStaticDeclaration {
+    name: String,
+    source_ref: SourceRef,
+}
+
+impl CheckedStaticDeclaration {
+    fn new(name: impl Into<String>, source_ref: SourceRef) -> Self {
+        Self {
+            name: name.into(),
+            source_ref,
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedStateFieldSchema {
+    name: String,
+    type_name: String,
+    source_ref: SourceRef,
+}
+
+impl CheckedStateFieldSchema {
+    fn new(name: impl Into<String>, type_name: impl Into<String>, source_ref: SourceRef) -> Self {
+        Self {
+            name: name.into(),
+            type_name: type_name.into(),
+            source_ref,
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn type_name(&self) -> &str {
+        &self.type_name
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedIndexedStateSchema {
+    name: String,
+    index_name: String,
+    index_type: String,
+    owner_locus: String,
+    fields: Vec<CheckedStateFieldSchema>,
+    source_ref: SourceRef,
+}
+
+impl CheckedIndexedStateSchema {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn index_name(&self) -> &str {
+        &self.index_name
+    }
+
+    pub fn index_type(&self) -> &str {
+        &self.index_type
+    }
+
+    pub fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub fn fields(&self) -> &[CheckedStateFieldSchema] {
+        &self.fields
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedEvaluationParameter {
+    name: String,
+    type_name: String,
+    source_ref: SourceRef,
+}
+
+impl CheckedEvaluationParameter {
+    fn new(name: impl Into<String>, type_name: impl Into<String>, source_ref: SourceRef) -> Self {
+        Self {
+            name: name.into(),
+            type_name: type_name.into(),
+            source_ref,
+        }
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn type_name(&self) -> &str {
+        &self.type_name
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedEvaluationSignature {
+    name: String,
+    kind: CheckedEvaluationKind,
+    actor: Option<String>,
+    owner_locus: Option<String>,
+    parameters: Vec<CheckedEvaluationParameter>,
+    source_ref: SourceRef,
+}
+
+impl CheckedEvaluationSignature {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub const fn kind(&self) -> CheckedEvaluationKind {
+        self.kind
+    }
+
+    pub fn actor(&self) -> Option<&str> {
+        self.actor.as_deref()
+    }
+
+    pub fn owner_locus(&self) -> Option<&str> {
+        self.owner_locus.as_deref()
+    }
+
+    pub fn parameters(&self) -> &[CheckedEvaluationParameter] {
+        &self.parameters
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+/// The finite, read-only declarations retained from a checked M7 artifact.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CheckedStaticEnvironment {
+    module: String,
+    loci: Vec<CheckedStaticDeclaration>,
+    principals: Vec<CheckedStaticDeclaration>,
+    types: Vec<CheckedStaticDeclaration>,
+    indexed_state_schemas: Vec<CheckedIndexedStateSchema>,
+    evaluation_signatures: Vec<CheckedEvaluationSignature>,
+}
+
+impl CheckedStaticEnvironment {
+    pub fn module(&self) -> &str {
+        &self.module
+    }
+
+    pub fn loci(&self) -> &[CheckedStaticDeclaration] {
+        &self.loci
+    }
+
+    pub fn principals(&self) -> &[CheckedStaticDeclaration] {
+        &self.principals
+    }
+
+    pub fn types(&self) -> &[CheckedStaticDeclaration] {
+        &self.types
+    }
+
+    pub fn indexed_state_schemas(&self) -> &[CheckedIndexedStateSchema] {
+        &self.indexed_state_schemas
+    }
+
+    pub fn indexed_state_schema(&self, name: &str) -> Option<&CheckedIndexedStateSchema> {
+        self.indexed_state_schemas
+            .iter()
+            .find(|schema| schema.name == name)
+    }
+
+    pub fn evaluation_signatures(&self) -> &[CheckedEvaluationSignature] {
+        &self.evaluation_signatures
+    }
+
+    pub fn evaluation_signature(&self, name: &str) -> Option<&CheckedEvaluationSignature> {
+        self.evaluation_signatures
+            .iter()
+            .find(|signature| signature.name == name)
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M7Diagnostic {
     kind: M7DiagnosticKind,
@@ -326,6 +595,10 @@ impl TypedStateRead {
 
     pub fn value_type(&self) -> &str {
         &self.value_type
+    }
+
+    pub fn source_ref(&self) -> SourceRef {
+        self.span.source_ref()
     }
 
     pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
@@ -1085,8 +1358,32 @@ pub struct CheckedEvaluation {
 }
 
 impl CheckedEvaluation {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn result_name(&self) -> Option<&str> {
+        self.result_name.as_deref()
+    }
+
     pub const fn kind(&self) -> CheckedEvaluationKind {
         self.kind
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        self.effect_row
+            .entries()
+            .first()
+            .expect("every M7 checked evaluation has a source-bound effect entry")
+            .source_ref()
+    }
+
+    pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
+        self.effect_row
+            .entries()
+            .first()
+            .expect("every M7 checked evaluation has a source-bound effect entry")
+            .source_lexeme(source)
     }
 
     pub fn actor_authority_origin(&self) -> &str {
@@ -1186,6 +1483,7 @@ pub struct ResidualObligation {
     kind: ResidualObligationKind,
     name: String,
     span: PipelineSourceSpan,
+    source_ref: SourceRef,
     required_authority: Option<String>,
 }
 
@@ -1196,16 +1494,30 @@ impl ResidualObligation {
         span: PipelineSourceSpan,
         required_authority: Option<String>,
     ) -> Self {
+        let source_ref = span.source_ref();
         Self {
             kind,
             name,
             span,
+            source_ref,
             required_authority,
         }
     }
 
     pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
         self.span.lexeme(source)
+    }
+
+    pub const fn kind(&self) -> ResidualObligationKind {
+        self.kind
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
     }
 
     pub fn required_authority(&self) -> Option<&str> {
@@ -1239,6 +1551,10 @@ pub struct ResidualObligations {
 }
 
 impl ResidualObligations {
+    pub fn entries(&self) -> &[ResidualObligation] {
+        &self.entries
+    }
+
     pub const fn is_empty(&self) -> bool {
         self.entries.is_empty()
     }
@@ -1285,6 +1601,10 @@ impl CheckedSourceMapEntry {
 
     pub fn core_ref(&self) -> &str {
         &self.core_ref
+    }
+
+    pub const fn kind(&self) -> SourceToCoreKind {
+        self.kind
     }
 
     pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
@@ -1379,6 +1699,8 @@ impl CheckedSourceMapEntries {
 pub struct CheckedSurfaceV0 {
     source_file: String,
     root_span: PipelineSourceSpan,
+    program_identity: CheckedProgramIdentity,
+    static_environment: CheckedStaticEnvironment,
     evaluations: Vec<CheckedEvaluation>,
     source_map: CheckedSourceMap,
     residual_obligations: ResidualObligations,
@@ -1388,6 +1710,18 @@ pub struct CheckedSurfaceV0 {
 impl CheckedSurfaceV0 {
     pub fn source_file(&self) -> &str {
         &self.source_file
+    }
+
+    pub fn program_identity(&self) -> &CheckedProgramIdentity {
+        &self.program_identity
+    }
+
+    pub fn static_environment(&self) -> &CheckedStaticEnvironment {
+        &self.static_environment
+    }
+
+    pub fn evaluations(&self) -> &[CheckedEvaluation] {
+        &self.evaluations
     }
 
     pub fn evaluation(&self, name: &str) -> Option<&CheckedEvaluation> {
@@ -1455,6 +1789,249 @@ pub fn check_and_elaborate_surface_v0(
         return Err(diagnostic);
     }
     Ok(build_checked_artifact(source, ast, classification))
+}
+
+fn checked_static_environment(
+    ast: &SurfaceV0File,
+    evaluations: &[CheckedEvaluation],
+) -> CheckedStaticEnvironment {
+    let evaluation_signatures = evaluations
+        .iter()
+        .map(|evaluation| match evaluation.kind() {
+            CheckedEvaluationKind::OwnerRmw => {
+                let when = ast
+                    .when(evaluation.name())
+                    .expect("checked owner evaluation retains its declared event");
+                CheckedEvaluationSignature {
+                    name: evaluation.name().to_string(),
+                    kind: evaluation.kind(),
+                    actor: Some(evaluation.actor_authority_origin().to_string()),
+                    owner_locus: Some(evaluation.owner_evaluation_locus().to_string()),
+                    parameters: when
+                        .parameters()
+                        .iter()
+                        .map(|parameter| {
+                            CheckedEvaluationParameter::new(
+                                parameter.name(),
+                                parameter.type_name(),
+                                PipelineSourceSpan::from_surface(parameter.span()).source_ref(),
+                            )
+                        })
+                        .collect(),
+                    source_ref: evaluation.source_ref().clone(),
+                }
+            }
+            CheckedEvaluationKind::PublishRelation => {
+                let relation = ast
+                    .relation(evaluation.name())
+                    .expect("checked relation evaluation retains its declaration");
+                CheckedEvaluationSignature {
+                    name: evaluation.name().to_string(),
+                    kind: evaluation.kind(),
+                    actor: None,
+                    owner_locus: Some(evaluation.owner_evaluation_locus().to_string()),
+                    parameters: vec![CheckedEvaluationParameter::new(
+                        relation.subject(),
+                        relation.subject_type(),
+                        PipelineSourceSpan::from_surface(relation.span()).source_ref(),
+                    )],
+                    source_ref: evaluation.source_ref().clone(),
+                }
+            }
+            CheckedEvaluationKind::DesignatedPublishValue => CheckedEvaluationSignature {
+                name: format!(
+                    "{}.{}",
+                    evaluation.name(),
+                    evaluation
+                        .result_name()
+                        .expect("checked designated evaluation retains its result name")
+                ),
+                kind: evaluation.kind(),
+                actor: None,
+                owner_locus: None,
+                parameters: Vec::new(),
+                source_ref: evaluation.source_ref().clone(),
+            },
+            CheckedEvaluationKind::ConsumerLocalProjection => {
+                unreachable!("M7 has no standalone consumer-projection evaluation")
+            }
+        })
+        .collect();
+
+    CheckedStaticEnvironment {
+        module: ast.module().name().to_string(),
+        loci: ast
+            .loci()
+            .iter()
+            .map(|decl| {
+                CheckedStaticDeclaration::new(
+                    decl.name(),
+                    PipelineSourceSpan::from_surface(decl.span()).source_ref(),
+                )
+            })
+            .collect(),
+        principals: ast
+            .principals()
+            .iter()
+            .map(|decl| {
+                CheckedStaticDeclaration::new(
+                    decl.name(),
+                    PipelineSourceSpan::from_surface(decl.span()).source_ref(),
+                )
+            })
+            .collect(),
+        types: ast
+            .types()
+            .iter()
+            .map(|decl| {
+                CheckedStaticDeclaration::new(
+                    decl.name(),
+                    PipelineSourceSpan::from_surface(decl.span()).source_ref(),
+                )
+            })
+            .collect(),
+        indexed_state_schemas: ast
+            .states()
+            .iter()
+            .map(|state| CheckedIndexedStateSchema {
+                name: state.name().to_string(),
+                index_name: state.index_name().to_string(),
+                index_type: state.index_type().to_string(),
+                owner_locus: state.owner_locus().to_string(),
+                fields: state
+                    .fields()
+                    .iter()
+                    .map(|field| {
+                        CheckedStateFieldSchema::new(
+                            field.name(),
+                            field.type_name(),
+                            PipelineSourceSpan::from_surface(field.span()).source_ref(),
+                        )
+                    })
+                    .collect(),
+                source_ref: PipelineSourceSpan::from_surface(state.span()).source_ref(),
+            })
+            .collect(),
+        evaluation_signatures,
+    }
+}
+
+fn checked_identity_structure(
+    environment: &CheckedStaticEnvironment,
+    evaluations: &[CheckedEvaluation],
+    source_map: &CheckedSourceMap,
+) -> Vec<String> {
+    let mut entries = vec![format!("module:{}", environment.module())];
+    entries.extend(
+        environment
+            .loci()
+            .iter()
+            .map(|decl| format!("locus:{}:{:?}", decl.name(), decl.source_ref())),
+    );
+    entries.extend(
+        environment
+            .principals()
+            .iter()
+            .map(|decl| format!("principal:{}:{:?}", decl.name(), decl.source_ref())),
+    );
+    entries.extend(
+        environment
+            .types()
+            .iter()
+            .map(|decl| format!("type:{}:{:?}", decl.name(), decl.source_ref())),
+    );
+    entries.extend(environment.indexed_state_schemas().iter().map(|schema| {
+        format!(
+            "state:{}:{}:{}:{}:{:?}",
+            schema.name(),
+            schema.index_name(),
+            schema.index_type(),
+            schema.owner_locus(),
+            schema.fields()
+        )
+    }));
+    entries.extend(environment.evaluation_signatures().iter().map(|signature| {
+        format!(
+            "signature:{}:{:?}:{:?}:{:?}:{:?}:{:?}",
+            signature.name(),
+            signature.kind(),
+            signature.actor(),
+            signature.owner_locus(),
+            signature.parameters(),
+            signature.source_ref()
+        )
+    }));
+    entries.extend(evaluations.iter().map(|evaluation| {
+        let core = match evaluation.kind() {
+            CheckedEvaluationKind::OwnerRmw => {
+                let owner = evaluation
+                    .owner_rmw_core()
+                    .expect("owner evaluation retains its checked Core");
+                format!(
+                    "owner:{:?}:{:?}:{:?}",
+                    owner.target(),
+                    owner.expression(),
+                    owner.same_owner_reads()
+                )
+            }
+            CheckedEvaluationKind::PublishRelation => {
+                let relation = evaluation
+                    .relation_core()
+                    .expect("relation evaluation retains its checked Core");
+                format!(
+                    "relation:{}:{}:{}:{:?}:{:?}:{:?}:{:?}",
+                    relation.owner_locus(),
+                    relation.subject(),
+                    relation.subject_type(),
+                    relation.primary(),
+                    relation.fallback(),
+                    relation.binding_frontier(),
+                    relation.consumer_projection_locus()
+                )
+            }
+            CheckedEvaluationKind::DesignatedPublishValue => {
+                let designated = evaluation
+                    .designated_core()
+                    .expect("designated evaluation retains its checked Core");
+                format!(
+                    "designated:{}:{}:{:?}:{:?}:{:?}:{:?}:{:?}:{:?}:{:?}",
+                    designated.evaluator(),
+                    designated.result(),
+                    designated.trigger(),
+                    designated.result_frontier(),
+                    designated.input_frontier(),
+                    designated.result_version(),
+                    designated.evaluation_policy(),
+                    designated.observation_policy(),
+                    designated.expression(),
+                )
+            }
+            CheckedEvaluationKind::ConsumerLocalProjection => {
+                unreachable!("M7 has no standalone consumer-projection evaluation")
+            }
+        };
+        format!(
+            "evaluation:{}:{:?}:{}:{:?}:{:?}:{:?}:{:?}:{:?}",
+            evaluation.name(),
+            evaluation.kind(),
+            core,
+            evaluation.evaluation_axes(),
+            evaluation.effect_row().entries(),
+            evaluation.generated_obligations().entries(),
+            evaluation.declared_failure_row(),
+            evaluation.generated_failure_row(),
+        )
+    }));
+    entries.extend(source_map.entries().iter().map(|entry| {
+        format!(
+            "source-map:{}:{:?}:{}:{:?}",
+            entry.ordinal(),
+            entry.kind(),
+            entry.core_ref(),
+            entry.source_ref()
+        )
+    }));
+    entries
 }
 
 fn build_checked_artifact(
@@ -1746,9 +2323,20 @@ fn build_checked_artifact(
     }
 
     source_map.finalize();
+    let root_span = PipelineSourceSpan::from_surface(ast.root().span());
+    let static_environment = checked_static_environment(&ast, &evaluations);
+    let program_identity =
+        CheckedProgramIdentity::new(ast.module().name(), source.file(), root_span.source_ref())
+            .with_structural_entries(checked_identity_structure(
+                &static_environment,
+                &evaluations,
+                &source_map,
+            ));
     CheckedSurfaceV0 {
         source_file: source.file().to_string(),
-        root_span: PipelineSourceSpan::from_surface(ast.root().span()),
+        root_span,
+        program_identity,
+        static_environment,
         evaluations,
         source_map,
         residual_obligations: ResidualObligations {

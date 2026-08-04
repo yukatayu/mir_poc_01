@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-04 18:56 JST
+最終更新: 2026-08-04 23:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,7 +20,7 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M8 deterministic runtime. Next: M9 auth/verification.** 根拠は
+**Active: M9 auth/verification. Next: M10 conformance/closeout.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
@@ -40,15 +40,21 @@ meaningを変更せず、ordinary `.mir` の `parse → M6 full classification r
 → typed Core/effects/obligations/residuals/source map` routeを閉じた。8 AST tests、11 classifier
 tests、22 M7 pipeline tests、full `mir-ast` / `mir-semantics` suites、format/clippy、OBL-049の16
 exact finite `--trust=0` Lean theoremsがevidenceである。10-rowはM7 fixture matrixでありSCN
-official conformanceではない。official lifecycleは`T1`、v1/v2はhistorical evidenceのままで
-ある。現在のdirect blockerはM7 checked outputをbypassなしに消費するM8 deterministic runtimeで
-あり、direct consumerはM9である。
+official conformanceではない。M8 は一つの checked artifact を消費する有限 deterministic runtimeを
+閉じ、53 focused tests、full `mir-runtime` / `mir-semantics` all-target suites、format/clippy、28
+axiom-free `--trust=0` Lean theorem checksを通した。OBL-050--056は exact finite
+`lean-proved`、OBL-057はbounded validation correspondenceの`runtime-monitored`である。これはsource/runtime fixture、trace/replay、
+cut/save/patch evidenceであり、SCN-01..10 official conformanceではない。official lifecycleは`T1`、
+v1/v2はhistorical evidenceのままである。現在のdirect blockerは M8 runtime contractを変えずに
+MembershipAuth、CapabilityAuth、non-transparent ContractUpdate、attach/remove/revocation、finite
+refinement/model/Lean evidence、evidence provenance/invalidationを実装するM9であり、direct consumerはM10である。
 
 M2 close 時点で official lifecycle は `T1`。これにより I1 は開始しない。General
 OBL-001..028 は `intentionally-deferred`、finite M3 OBL-029..032 は `lean-proved`、033は
 `model-checked-bounded`、034は`runtime-monitored`、finite M4 OBL-035..039、M5 OBL-040..047、
-M6 OBL-048、M7 OBL-049は exact scope の `lean-proved`である。SCN-01..10のofficial
-conformance claimはunchangedであり、M8 runtime implementationが次のactive scopeである。
+M6 OBL-048、M7 OBL-049、M8 OBL-050..056は exact scope の `lean-proved`であり、OBL-057はbounded
+validation correspondenceの`runtime-monitored`である。SCN-01..10のofficial conformance claimはunchangedであり、M9
+auth/verification extensionが次のactive scopeである。
 
 ## ordered self-driven packages
 
@@ -66,9 +72,9 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | M5 | shared formal model / metatheory | closed; finite shared model、13 Rust tests、exact OBL-040..047 Lean evidence、bounded/runtime correspondence | Macro 1/5; complete |
 | M6 | Surface | closed; bounded grammar/AST/span/classification、3 parser/11 classifier tests、OBL-048 evidence | Macro 1/3; complete |
 | M7 | checker / elaborator | closed; M6-preserving source-first finite route、OBL-049、M7 fixture matrix（SCN conformanceではない） | Macro 3/5/7; complete |
-| M8 | deterministic runtime | `A/R/O`; M7 checked output、explicit state/effect/failure trace、deterministic replay、cut/save/patch | Macro 3/5; active; heavy |
-| M9 | auth / verification | `A/R/O`; typed auth/authority/verification、negative security evidence、M8 regression | Macro 1/5/7; next after M8; heavy |
-| M10 | conformance / closeout | `A/R/O`; fresh full evidence matrix、clean-clone reproduction、claims/non-claims、program report/parity | Macro 0/2/4/5; after M9; heavy |
+| M8 | deterministic runtime | closed; one checked artifact、explicit state/effect/failure trace、deterministic replay、cut/save/patch、exact OBL-050..056 Lean evidence | Macro 3/5; complete; OBL-057 runtime-monitored bounded validation correspondence |
+| M9 | auth / verification | `A/R/O`; MembershipAuth、CapabilityAuth、non-transparent ContractUpdate、attach/remove/revocation、finite refinement/model/Lean evidence、provenance/invalidation | Macro 1/5/7; active; heavy |
+| M10 | conformance / closeout | `A/R/O`; fresh official SCN-01..10 evidence matrix、clean-clone reproduction、claims/non-claims、program report/parity | Macro 0/2/4/5; next after M9; heavy |
 
 次の semantic milestone は current milestone の normative rule/non-effect、reference
 behavior、positive/negative evidence、formal classification、independent review、validation、
@@ -79,18 +85,18 @@ report、commit/push/parity が閉じるまで開始しない。
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
-| 1 semantic kernel | M1--M7 accepted; M8 is the current checked-Core runtime package | **着手可能**: runtime without M7 bypass or semantic drift |
+| 1 semantic kernel | M1--M8 accepted; M9 is the current contract-transformer package | **着手可能**: typed extensions without authority creation or base-semantics drift |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
-| 3 compile-ready actualization | M7 checked boundary is accepted | **着手可能**: M8 deterministic runtime |
+| 3 compile-ready actualization | M8 checked-artifact runtime is accepted | **着手可能**: M9 contract extension |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
-| 5 theorem/model-check bridge | finite M3/M4/M5/M6/M7 evidence closed; general proof remains deferred | M8 correspondence consumer |
+| 5 theorem/model-check bridge | finite M3--M8 evidence closed; OBL-050..056 Lean-proved and OBL-057 runtime-monitored for bounded validation correspondence; general proof remains deferred | M9 extension evidence |
 | 6 distributed fabric | not in M0--M10 deterministic I1+ target | deferred / future owner direction |
-| 7 toolchain/backend | M8--M9 bounded reference surfaces only | **後段依存**: M7 |
+| 7 toolchain/backend | M9 bounded typed auth/verification surface | **着手可能**: M9 |
 | 8 applications | user-defined worlds remain LAB consumers | deferred; not a Core milestone |
 
 ## user decision gates
 
-現在、M8 を止める owner decision item はない。ADR-0015 が owner-approved objective、
+現在、M9 を止める owner decision item はない。ADR-0015 が owner-approved objective、
 M0--M10 order、bounded execution authority を記録しているため、旧 tasks にあった
 fixed-control、C1/C2、Gate/ledger 一般の「常時 owner 待ち」は current queue から外す。
 それらの具体内容は該当 milestone が evidence-gated に選び、Canon へ統合する。
@@ -99,7 +105,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M8 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M9 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items
@@ -115,8 +121,8 @@ smallest viable alternative を falsifier で比較する。
 | M5 | closed finite shared model、statement/implementation identity、proof classes | general proof/runtime overclaim |
 | M6 | closed finite Surface grammar/AST/span/classification | runtime/general-theorem/public-contract overclaim |
 | M7 | closed source-first checker/elaborator preserving M6 meaning | exact finite evidenceのみ; 10-row fixture matrixをSCN conformanceへ読み替えない |
-| M8 | runtime algorithms that consume checked M7 output | parser/classifier bypass、model drift、hidden side table、transport-as-authority、stale resurrection、rejected-patch mutation |
-| M9 | typed auth/verification extension | M8 regression failure、authority grant conflation、untyped observation leak |
+| M8 | closed runtime algorithm over one checked artifact | finite evidence only; no SCN conformance/public ABI/general proof overclaim |
+| M9 | typed auth/verification extension | M8 regression failure、authority grant conflation、untyped ContractUpdate、stale capability after removal/revocation、hidden residual success、base-semantics redefinition、untyped observation leak |
 | M10 | exact repo-local completion claim and remaining deferrals | any unreproduced required evidence or stale current reference |
 
 ## maintenance tasks

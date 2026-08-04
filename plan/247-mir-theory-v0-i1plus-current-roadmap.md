@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 18:56 JST
+最終更新: 2026-08-04 23:26 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M7 checker/elaborator**
-- active milestone: **M8 deterministic runtime**
-- next milestone: **M9 auth/verification**
+- completed milestone: **M8 deterministic runtime**
+- active milestone: **M9 auth/verification**
+- next milestone: **M10 conformance/closeout**
 - active frontier limit: 一つの milestone
-- current direct blocker: M7 の checked Core / generated effect・failure・authority・visibility /
-  relation-lifetime・evaluation obligation / residual / deterministic source-to-Core map を、parser /
-  classifier bypass なしに実行する deterministic single-process multi-locus runtime を実装すること
-- direct consumer: M9 typed auth/verification extension
+- current direct blocker: M8 runtime contract を固定入力として、MembershipAuth、CapabilityAuth、
+  non-transparent `ContractUpdate`、attach/remove/revocation、finite refinement/model/Lean obligation、
+  evidence provenance / invalidation を typed extension として実装・検証すること
+- direct consumer: M10 conformance/closeout
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -348,7 +348,7 @@ grammar/diagnostic ABI/wire, transport, and deployment remain deferred.
 re-parsing or reaching around the M7 checker. M6 grammar, spans, classification,
 and M7's reference-only/non-public-contract boundary remain fixed inputs.
 
-### M8 - Deterministic runtime
+### M8 - Deterministic runtime (completed 2026-08-04)
 
 **Intended outcome:** M7 output を M5 semantics に従って実行する single-process
 deterministic reference runtime を閉じる。
@@ -356,21 +356,31 @@ deterministic reference runtime を閉じる。
 **Acceptance criteria:**
 
 - explicit state / effect / failure / witness / history / cut trace を持つ `run` route がある。
-- C-runtime SCN-01..10 が waiver なし 10/10 で、replay は frozen profile に対して
-  deterministic である。
+- M8 source/runtime fixture matrix は M7 checked-artifact identity、runtime profile identity、
+  expected transition / typed trace、`Deferred` / `Reject` outcome、deterministic replay を同じ
+  source-first route で検査する。これは report/expected JSON を成功へ組み立てる wrapper ではない。
+- official C-static / C-runtime SCN-01..10 waiver なし 10/10 は、SCN expectation / Canon statusを
+  変更せず、M10 release profile の fresh evidence でのみ主張する。
 - rejection-no-mutation、owner seriality、no stale resurrection、redaction、patch frontier を
   negative / recovery tests で検査する。
 - helper-local output や evaluator side table を semantic carrier / public ABI にしない。
 - I1 carrier freeze を Canon の accepted reference scope に限定し、final public / wire contract
   と混同しない。
 
-**Evidence:** runtime traces、state/failure assertions、replay hashes、regression tests、
-model correspondence、independent review。
+**Close evidence:** M7 checked-artifact identityを唯一の source-program inputへ結んだ finite
+M8 source/runtime fixture matrix、runtime profile identity、transition/state/failure/observer-safe
+trace assertions、`Deferred` / `Reject` negative rows、replay、local cut/save-load、bounded patchを
+同じ runtime state で検査した。53 focused M8 tests、full `mir-runtime` と `mir-semantics`
+all-targets、changed-crate clippy/formatを通過し、M8 Lean foundationは `--trust=0` で28の
+axiom-free theorem checksを通過した。OBL-050--056は exact finite `lean-proved`、OBL-057は
+bounded validation correspondenceの `runtime-monitored` である。Canon index
+163、source hierarchy 798/798、docs validationも通過した。この有限runtime evidenceは official
+SCN conformance の代用ではなく、final release profileはM10がfreshに再実行する。public ABI/wire、
+socket/production、general proofは主張しない。
 
-**Direct blocker / consumer:** M7 checked boundary is the fixed input; M9 typed
-auth-verification extension is the direct consumer. M8 must not use a parser /
-classifier bypass, hidden evaluator side table, transport-as-authority, or a
-final-public ABI/wire claim.
+**Direct consumer:** completed; M9 consumes the typed M8 runtime contract and
+must not alter Core/runtime semantics, manufacture authority, erase failures, or
+use a transport/session/locus as authority.
 
 ### M9 - Auth / verification
 
@@ -392,7 +402,11 @@ verification extensions を加え、transport と観測から分離して検証�
 **Evidence:** auth/verification tests、formal statements、bounded models、runtime traces、
 security-focused independent review。
 
-**Direct blocker / consumer:** M8 runtime / M10 conformance closeout。
+**Direct blocker / consumer:** M8 runtime contract is the fixed input; M10
+conformance/closeout is the direct consumer. M9 must provide MembershipAuth and
+CapabilityAuth, one non-transparent `ContractUpdate`, attach/remove/revocation,
+one finite refinement/model/Lean obligation, evidence provenance, and dependent
+artifact invalidation without redefining M8 base semantics.
 
 ### M10 - Conformance / closeout
 
@@ -430,8 +444,8 @@ reproduction、final independent review。
 | M5 | formalization writer | M3/M4 accepted rules | closed: shared-model coverage, exact finite OBL-040--047 Lean evidence, bounded/runtime correspondence, lifecycle mapping |
 | M6 | language/spec writer | M5 shared model | closed: grammar, AST/span, finite M5-aligned classification, OBL-048 evidence |
 | M7 | implementer + test/formal writers | M6 Surface | closed: source-first finite check/elaboration, OBL-049 exact evidence, M7 fixture matrix; no official SCN conformance |
-| M8 | implementer + test/formal writers | M7 checked Core/obligation/residual output | active: deterministic replay, owner queue, relation/evaluator, cut/save/patch, safety regressions |
-| M9 | auth/security + test/formal writers | M8 runtime | next: lineage/validation/redaction negative evidence |
+| M8 | implementer + test/formal writers | M7 checked Core/obligation/residual output | closed: finite checked-artifact runtime, OBL-050--056 exact Lean evidence, bounded runtime fixture matrix; no official SCN conformance |
+| M9 | auth/security + test/formal writers | M8 runtime contract | active: typed auth/verification, ContractUpdate, revocation, refinement evidence/invalidation |
 | M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | fresh full matrix and clean-clone closeout |
 
 同一変更の writer はその milestone の independent reviewer を兼ねない。production Rust は
@@ -495,8 +509,7 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M8 の deterministic single-process multi-locus runtime を開始する。M7 checked output を唯一の
-入力とし、owner queue/request-serve/same-owner RMW、maintained relation と designated result
-store、capability/witness validation、occurrence/dependency trace、local cut/save-load、bounded patch、
-observer-safe export を同じ runtime state で実装する。M8 report、independent review、focused
-validation、commit/push/remote parity が閉じるまで M9 は開始しない。
+M9 の typed auth/verification extension を開始する。M8 runtime contractを固定入力として、
+MembershipAuth、CapabilityAuth、non-transparent `ContractUpdate`、attach/remove/revocation、finite
+refinement/model/Lean obligation、evidence provenance/invalidationを実装・検証する。M9 report、
+independent review、focused validation、commit/push/remote parityが閉じるまでM10は開始しない。

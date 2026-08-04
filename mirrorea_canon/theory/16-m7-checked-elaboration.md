@@ -138,7 +138,8 @@ evaluation and an empty residual row. Each residual is non-executable and create
 no authority, capability, effect, semantic mutation, verification verdict, or
 runtime admission. The only finite outcome of explicitly demanding execution
 admission in this state is `ResidualCannotExecute` at the selected residual
-span. M8 may consume this distinction, but no M8 runtime rule is defined here.
+span. M8 consumes this distinction through the separate finite runtime
+admission judgment in theory/17; it does not redefine this M7 judgment.
 
 ## 4. Determinism and source preservation statements
 

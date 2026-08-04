@@ -1,0 +1,31 @@
+module Combat.M8.UnifiedLocalCut
+
+locus S
+locus C
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+
+relation bird_follow at S {
+  subject bird: Player
+  primary perch_anchor epoch primary_epoch transform translate(3, -2)
+  fallback nest_anchor epoch fallback_epoch transform identity
+  bind frontier bird_binding_frontier
+  publish relation
+  project at C local
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 2

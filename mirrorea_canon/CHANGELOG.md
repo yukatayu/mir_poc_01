@@ -18,6 +18,16 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-026 と ADR-0023 により、M7 immutable checked artifact
+  だけをsource-program inputとする有限 M8 runtime admission を採用した。checked
+  identity は static environment、evaluation/Core、effect/obligation、stable source
+  map の shape を覆い、residual evidence はidentity/source-ref boundである。relation
+  / designatedのbase residualだけを有限に検査でき、`AuthDeferred` / `VerifyDeferred`
+  はM9まで`DeferredToM9`に留まる。M8のfresh Lean carrierはM5/M7/Rust typeの合成を
+  主張せず、M5-aligned categoriesを持つ一つのfresh runtime semantic state、deterministic queue/replay、local
+  cut、bounded rejected/deferred patch、observer-safe projectionのexact evidenceだけを
+  記録する。M10のfresh official SCN conformance、M9、transport、general theorem、public
+  ABI/wireは採用・主張しない。
 - **2026-08-04** PROPOSAL-025 と ADR-0022 により、M6 fixed source input を
   finite checked elaboration に精密化した。M7 は M6 diagnostic/span を保持し、
   typed Core/evaluation axes/effect row/generated obligation/total stable
