@@ -1,0 +1,20 @@
+module Combat.M7.ArithmeticRequiresInt
+
+locus S
+principal self
+type Player
+type Name
+
+state player[id: Player] at S {
+  hp: Int
+  name: Name
+  alias: Name
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].hp = player[self].name + player[self].alias
+    }
+  }
+}

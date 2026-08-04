@@ -1,0 +1,8 @@
+module Combat.M7.UndefinedStateIndexType
+
+locus S
+principal self
+
+state player[id: Player] at S {
+  hp: Int
+}

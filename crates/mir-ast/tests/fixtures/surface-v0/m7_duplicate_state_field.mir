@@ -1,0 +1,10 @@
+module Combat.M7.DuplicateStateField
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  hp: Int
+}

@@ -1,0 +1,13 @@
+module Combat.M7.DuplicateEvent
+
+locus S
+principal self
+principal target
+type Player
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+  }
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+  }
+}

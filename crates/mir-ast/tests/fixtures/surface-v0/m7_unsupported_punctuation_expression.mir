@@ -1,0 +1,18 @@
+module Combat.M7.UnsupportedPunctuationExpression
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].hp = (player[self].hp + (player[self].atk, 1))
+    }
+  }
+}

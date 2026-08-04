@@ -1,0 +1,7 @@
+module Combat.M7.DuplicateDeferred
+
+locus S
+principal self
+
+verify finite_refinement
+verify finite_refinement

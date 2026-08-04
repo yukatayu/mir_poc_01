@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 155,
+ "files": 159,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 8754
+   "bytes": 10608
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21855
+   "bytes": 21891
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3051
+   "bytes": 3133
   },
   {
    "id": "adr/ADR-0001",
@@ -363,7 +363,22 @@
    "summary": "M6 bounded Surface を M5 shared model の source-facing reference として採用する。",
    "open_items": [],
    "path": "adr/ADR-0021.md",
-   "bytes": 3874
+   "bytes": 3910
+  },
+  {
+   "id": "adr/ADR-0022",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0021",
+    "meta/proposal-025",
+    "theory/15-shared-formal-model"
+   ],
+   "summary": "M6 fixed inputを有限検査し、deterministic checked elaborationとtyped residual obligationを返すM7境界を採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0022.md",
+   "bytes": 5100
   },
   {
    "id": "adr/readme",
@@ -375,7 +390,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2694
+   "bytes": 2800
   },
   {
    "id": "arch/01-strata",
@@ -916,6 +931,21 @@
    "bytes": 4662
   },
   {
+   "id": "meta/proposal-025",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0021",
+    "theory/15-shared-formal-model"
+   ],
+   "summary": "M6 fixed inputを有限検査し、deterministic checked elaborationとresidual obligationを返すM7境界を選ぶ提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-025-m7-checked-elaboration.md",
+   "bytes": 6054
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1233,7 +1263,7 @@
    "summary": "実装済み M6 source form の M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。",
    "open_items": [],
    "path": "spec/03-static-semantics.md",
-   "bytes": 6244
+   "bytes": 6339
   },
   {
    "id": "spec/04-core-ir",
@@ -1252,7 +1282,7 @@
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 7452
+   "bytes": 7485
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1300,6 +1330,21 @@
    "bytes": 2287
   },
   {
+   "id": "spec/08-m7-checked-elaboration",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/03-static-semantics",
+    "spec/04-core-ir",
+    "theory/16-m7-checked-elaboration",
+    "adr/ADR-0022"
+   ],
+   "summary": "M6 sourceを唯一の入力とするM7 finite check/elaboration API、生成義務、residual、非実行境界。",
+   "open_items": [],
+   "path": "spec/08-m7-checked-elaboration.md",
+   "bytes": 7068
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1307,12 +1352,13 @@
     "theory/readme",
     "adr/ADR-0008",
     "adr/ADR-0009",
-    "adr/ADR-0021"
+    "adr/ADR-0021",
+    "adr/ADR-0022"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1041
+   "bytes": 1096
   },
   {
    "id": "theory/00-overview",
@@ -1501,12 +1547,13 @@
     "theory/08-patch-hotplug",
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
-    "theory/15-shared-formal-model"
+    "theory/15-shared-formal-model",
+    "theory/16-m7-checked-elaboration"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 12501
+   "bytes": 13774
   },
   {
    "id": "theory/12-literature",
@@ -1583,6 +1630,23 @@
    "bytes": 7451
   },
   {
+   "id": "theory/16-m7-checked-elaboration",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "theory/03-elaboration",
+    "theory/10-diagnostics",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model",
+    "adr/ADR-0022"
+   ],
+   "summary": "M6 fixed source classificationを有限検査し、deterministic checked elaboration・義務・residualを返すM7境界。",
+   "open_items": [],
+   "path": "theory/16-m7-checked-elaboration.md",
+   "bytes": 7839
+  },
+  {
    "id": "theory/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1593,7 +1657,7 @@
    "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
    "open_items": [],
    "path": "theory/README.md",
-   "bytes": 1651
+   "bytes": 1681
   },
   {
    "id": "working/readme",

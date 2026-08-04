@@ -11,9 +11,9 @@ open_items: [OPEN-026]
 
 ## M6 lowering template (non-wire, non-final)
 
-M6 emits inspectable typed `CoreTemplate` records before any M7
-checker/elaborator or exchange JSON exists. Its current parser/classifier
-profile retains:
+M6 emits inspectable typed `CoreTemplate` records before exchange JSON exists.
+M7 subsequently refines those records only through spec/08; the M6
+parser/classifier profile itself retains:
 
 ```text
 source_span

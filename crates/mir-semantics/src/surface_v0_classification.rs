@@ -404,6 +404,7 @@ impl AuthorityAudit {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SurfaceV0Classification {
     kind: ClassificationKind,
+    template_names: Vec<String>,
     root_source_ref: SourceRef,
     source_refs: Vec<(SurfaceV0Span, SourceRef)>,
     source_to_core_map: SourceToCoreMap,
@@ -417,6 +418,12 @@ pub struct SurfaceV0Classification {
 impl SurfaceV0Classification {
     pub const fn kind(&self) -> ClassificationKind {
         self.kind
+    }
+
+    /// Stable names derived from the accepted Core templates, rather than
+    /// re-parsed Surface syntax.
+    pub fn template_names(&self) -> &[String] {
+        &self.template_names
     }
 
     pub fn root_source_ref(&self) -> &SourceRef {
@@ -604,8 +611,18 @@ pub fn classify_surface_v0(
         !relation_templates.is_empty(),
         !designated_templates.is_empty(),
     );
+    let mut template_names = core_templates
+        .iter()
+        .chain(designated_templates.iter())
+        .chain(relation_templates.iter())
+        .chain(deferred_templates.iter())
+        .map(|template| template.name().to_string())
+        .collect::<Vec<_>>();
+    template_names.sort();
+    template_names.dedup();
     Ok(SurfaceV0Classification {
         kind,
+        template_names,
         root_source_ref,
         source_refs,
         source_to_core_map,
@@ -917,6 +934,7 @@ fn parse_error_kind(diagnostics: ParseDiagnostics) -> SurfaceV0DiagnosticKind {
         ParseErrorKind::RoleActorMustBeLiteralSelf => {
             SurfaceV0DiagnosticKind::RoleActorMustBeLiteralSelf
         }
+        ParseErrorKind::IntegerLiteralOutOfRange => SurfaceV0DiagnosticKind::UnexpectedSyntax,
         ParseErrorKind::UnsupportedTransportSyntax => {
             SurfaceV0DiagnosticKind::UnsupportedTransportSyntax
         }

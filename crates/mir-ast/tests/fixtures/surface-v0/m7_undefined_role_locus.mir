@@ -1,0 +1,10 @@
+module Combat.M7.UndefinedRoleLocus
+
+locus S
+principal self
+type Player
+
+Role[self] at MissingRoleLocus {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+  }
+}

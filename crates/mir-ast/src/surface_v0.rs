@@ -224,6 +224,7 @@ impl DeferredForm {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum ParseErrorKind {
     RoleActorMustBeLiteralSelf,
+    IntegerLiteralOutOfRange,
     UnsupportedTransportSyntax,
     UnsupportedOccurrenceSyntax,
     UnsupportedEnvelopeSyntax,
@@ -469,7 +470,9 @@ pub struct StateDecl {
     name: String,
     index_name: String,
     index_type: String,
+    index_type_span: SurfaceV0Span,
     owner_locus: String,
+    owner_locus_span: SurfaceV0Span,
     fields: Vec<StateField>,
     node: SyntaxNode,
 }
@@ -487,8 +490,16 @@ impl StateDecl {
         &self.index_type
     }
 
+    pub fn index_type_span(&self) -> &SurfaceV0Span {
+        &self.index_type_span
+    }
+
     pub fn owner_locus(&self) -> &str {
         &self.owner_locus
+    }
+
+    pub fn owner_locus_span(&self) -> &SurfaceV0Span {
+        &self.owner_locus_span
     }
 
     pub fn fields(&self) -> &[StateField] {
@@ -505,6 +516,7 @@ pub struct StateField {
     name: String,
     type_name: String,
     span: SurfaceV0Span,
+    type_span: SurfaceV0Span,
 }
 
 impl StateField {
@@ -519,12 +531,18 @@ impl StateField {
     pub fn span(&self) -> &SurfaceV0Span {
         &self.span
     }
+
+    pub fn type_span(&self) -> &SurfaceV0Span {
+        &self.type_span
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RoleInstance {
     actor: String,
+    actor_span: SurfaceV0Span,
     evaluation_locus: String,
+    evaluation_locus_span: SurfaceV0Span,
     whens: Vec<WhenDecl>,
     node: SyntaxNode,
 }
@@ -534,8 +552,16 @@ impl RoleInstance {
         &self.actor
     }
 
+    pub fn actor_span(&self) -> &SurfaceV0Span {
+        &self.actor_span
+    }
+
     pub fn evaluation_locus(&self) -> &str {
         &self.evaluation_locus
+    }
+
+    pub fn evaluation_locus_span(&self) -> &SurfaceV0Span {
+        &self.evaluation_locus_span
     }
 
     pub fn whens(&self) -> &[WhenDecl] {
@@ -640,10 +666,167 @@ impl SurfaceReference {
     }
 }
 
+/// The deliberately bounded arithmetic operators retained by Surface v0.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum BoundedBinaryOperator {
+    Add,
+    Subtract,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BoundedBinaryOperation {
+    operator: BoundedBinaryOperator,
+    span: SurfaceV0Span,
+}
+
+impl BoundedBinaryOperation {
+    pub const fn operator(&self) -> BoundedBinaryOperator {
+        self.operator
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BoundedIntegerLiteral {
+    value: i64,
+    span: SurfaceV0Span,
+}
+
+impl BoundedIntegerLiteral {
+    pub const fn value(&self) -> i64 {
+        self.value
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BoundedExpressionToken {
+    span: SurfaceV0Span,
+}
+
+impl BoundedExpressionToken {
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum BoundedExpressionTree {
+    StateReference(SurfaceReference),
+    IntegerLiteral(BoundedIntegerLiteral),
+    Binary {
+        operator: BoundedBinaryOperator,
+        span: SurfaceV0Span,
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Opaque {
+        span: SurfaceV0Span,
+    },
+}
+
+impl BoundedExpressionTree {
+    pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
+        self.span().lexeme(source)
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        match self {
+            Self::StateReference(reference) => reference.span(),
+            Self::IntegerLiteral(literal) => literal.span(),
+            Self::Binary { span, .. } | Self::Opaque { span } => span,
+        }
+    }
+
+    pub const fn operator(&self) -> Option<BoundedBinaryOperator> {
+        match self {
+            Self::Binary { operator, .. } => Some(*operator),
+            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => None,
+        }
+    }
+
+    pub fn left(&self) -> &Self {
+        match self {
+            Self::Binary { left, .. } => left,
+            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => {
+                panic!("only bounded binary expression trees have a left child")
+            }
+        }
+    }
+
+    pub fn right(&self) -> &Self {
+        match self {
+            Self::Binary { right, .. } => right,
+            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => {
+                panic!("only bounded binary expression trees have a right child")
+            }
+        }
+    }
+
+    pub fn int_literal(&self) -> Option<&BoundedIntegerLiteral> {
+        match self {
+            Self::IntegerLiteral(literal) => Some(literal),
+            Self::StateReference(_) | Self::Binary { .. } | Self::Opaque { .. } => None,
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum BoundedExpressionPart {
+    StateReference(SurfaceReference),
+    IntegerLiteral(BoundedIntegerLiteral),
+    BinaryOperation(BoundedBinaryOperation),
+    Opaque,
+}
+
+/// A parser-retained, finite expression surface for the M6/M7 path.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BoundedExpression {
+    span: SurfaceV0Span,
+    state_refs: Vec<SurfaceReference>,
+    int_literals: Vec<BoundedIntegerLiteral>,
+    binary_ops: Vec<BoundedBinaryOperation>,
+    tokens: Vec<BoundedExpressionToken>,
+    tree: BoundedExpressionTree,
+}
+
+impl BoundedExpression {
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+
+    pub fn state_refs(&self) -> &[SurfaceReference] {
+        &self.state_refs
+    }
+
+    pub fn int_literals(&self) -> &[BoundedIntegerLiteral] {
+        &self.int_literals
+    }
+
+    pub fn binary_ops(&self) -> &[BoundedBinaryOperation] {
+        &self.binary_ops
+    }
+
+    pub fn tokens(&self) -> &[BoundedExpressionToken] {
+        &self.tokens
+    }
+
+    pub fn tree(&self) -> &BoundedExpressionTree {
+        &self.tree
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Assignment {
     target: SurfaceReference,
     rhs_references: Vec<SurfaceReference>,
+    expression: BoundedExpression,
     role_locus: String,
     owner_locus: String,
     owner_locus_span: SurfaceV0Span,
@@ -660,6 +843,10 @@ impl Assignment {
 
     pub fn rhs_references(&self) -> &[SurfaceReference] {
         &self.rhs_references
+    }
+
+    pub fn expression(&self) -> &BoundedExpression {
+        &self.expression
     }
 
     pub fn owner_locus(&self) -> &str {
@@ -692,9 +879,17 @@ impl Assignment {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub enum RelationTransform {
+    Translate { x: i64, y: i64 },
+    Identity,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RelationAnchor {
     anchor: String,
     epoch: String,
+    transform: RelationTransform,
+    transform_span: SurfaceV0Span,
     span: SurfaceV0Span,
 }
 
@@ -705,6 +900,14 @@ impl RelationAnchor {
 
     pub fn epoch(&self) -> &str {
         &self.epoch
+    }
+
+    pub fn transform(&self) -> &RelationTransform {
+        &self.transform
+    }
+
+    pub fn transform_span(&self) -> &SurfaceV0Span {
+        &self.transform_span
     }
 
     pub fn span(&self) -> &SurfaceV0Span {
@@ -730,13 +933,16 @@ impl RelationPublication {
 pub struct MaintainedRelation {
     name: String,
     owner_locus: String,
+    owner_locus_span: SurfaceV0Span,
     subject: String,
     subject_type: String,
+    subject_type_span: SurfaceV0Span,
     primary: RelationAnchor,
     fallback: RelationAnchor,
     binding_frontier: String,
     publication: RelationPublication,
     consumer_projection_locus: Option<String>,
+    consumer_projection_locus_span: Option<SurfaceV0Span>,
     node: SyntaxNode,
 }
 
@@ -749,12 +955,20 @@ impl MaintainedRelation {
         &self.owner_locus
     }
 
+    pub fn owner_locus_span(&self) -> &SurfaceV0Span {
+        &self.owner_locus_span
+    }
+
     pub fn subject(&self) -> &str {
         &self.subject
     }
 
     pub fn subject_type(&self) -> &str {
         &self.subject_type
+    }
+
+    pub fn subject_type_span(&self) -> &SurfaceV0Span {
+        &self.subject_type_span
     }
 
     pub fn primary(&self) -> &RelationAnchor {
@@ -784,6 +998,10 @@ impl MaintainedRelation {
         self.consumer_projection_locus.as_deref()
     }
 
+    pub fn consumer_projection_locus_span(&self) -> Option<&SurfaceV0Span> {
+        self.consumer_projection_locus_span.as_ref()
+    }
+
     pub fn span(&self) -> &SurfaceV0Span {
         self.node.span()
     }
@@ -794,6 +1012,7 @@ pub struct DesignatedResultDecl {
     evaluator: String,
     tick_frontier: String,
     result: String,
+    expression: BoundedExpression,
     expression_span: SurfaceV0Span,
     node: SyntaxNode,
 }
@@ -813,6 +1032,10 @@ impl DesignatedResultDecl {
 
     pub const fn materialization(&self) -> &str {
         "publish-value"
+    }
+
+    pub fn expression(&self) -> &BoundedExpression {
+        &self.expression
     }
 
     pub fn expression_span(&self) -> &SurfaceV0Span {
@@ -999,10 +1222,10 @@ impl Parser {
         self.expect("[")?;
         let (index_name, _) = self.identifier()?;
         self.expect(":")?;
-        let (index_type, _) = self.identifier()?;
+        let (index_type, index_type_span) = self.identifier()?;
         self.expect("]")?;
         self.expect("at")?;
-        let (owner_locus, _) = self.identifier()?;
+        let (owner_locus, owner_locus_span) = self.identifier()?;
         self.expect("{")?;
         let mut fields = Vec::new();
         while !self.check("}") {
@@ -1013,6 +1236,7 @@ impl Parser {
                 name: field_name,
                 type_name,
                 span: joined_span(&field_start, &field_end),
+                type_span: field_end,
             });
         }
         let end = self.expect("}")?.span;
@@ -1021,7 +1245,9 @@ impl Parser {
             name: name.clone(),
             index_name,
             index_type,
+            index_type_span,
             owner_locus,
+            owner_locus_span,
             fields,
             node: SyntaxNode::new(SyntaxKind::State, name, span, Vec::new()),
         })
@@ -1052,7 +1278,9 @@ impl Parser {
         let node = SyntaxNode::new(SyntaxKind::RoleInstance, label, header_span, children);
         self.roles.push(RoleInstance {
             actor,
+            actor_span,
             evaluation_locus,
+            evaluation_locus_span: end,
             whens,
             node,
         });
@@ -1138,24 +1366,14 @@ impl Parser {
         let target = self.parse_reference()?;
         let start = target.span.clone();
         self.expect("=")?;
-        let expression_start = self.current().span.clone();
-        let mut rhs_references = Vec::new();
-        let mut last = expression_start.clone();
-        while !self.check("}") && !self.is_eof() {
-            if self.current_is_identifier() && self.reference_starts_here() {
-                let reference = self.parse_reference()?;
-                last = reference.span.clone();
-                rhs_references.push(reference);
-            } else {
-                last = self.advance().span;
-            }
-        }
-        let expression_span = joined_span(&expression_start, &last);
-        let span = joined_span(&start, &last);
+        let expression = self.parse_bounded_expression_until(&["}"])?;
+        let expression_span = expression.span().clone();
+        let span = joined_span(&start, expression.span());
         let label = target.text.clone();
         self.assignments.push(Assignment {
             target,
-            rhs_references,
+            rhs_references: expression.state_refs.clone(),
+            expression,
             role_locus: role_locus.to_string(),
             owner_locus: locus.to_string(),
             owner_locus_span: owner_locus_span.clone(),
@@ -1185,13 +1403,13 @@ impl Parser {
         let start = self.expect("relation")?.span;
         let (name, _) = self.identifier()?;
         self.expect("at")?;
-        let (owner_locus, _) = self.identifier()?;
+        let (owner_locus, owner_locus_span) = self.identifier()?;
         self.expect("{")?;
 
         self.expect("subject")?;
         let (subject, _) = self.identifier()?;
         self.expect(":")?;
-        let (subject_type, _) = self.identifier()?;
+        let (subject_type, subject_type_span) = self.identifier()?;
 
         let primary = self.parse_relation_anchor("primary")?;
         let fallback = self.parse_relation_anchor("fallback")?;
@@ -1213,26 +1431,30 @@ impl Parser {
             }
         };
 
-        let consumer_projection_locus = if self.consume("project") {
+        let (consumer_projection_locus, consumer_projection_locus_span) = if self.consume("project")
+        {
             self.expect("at")?;
-            let (locus, _) = self.identifier()?;
+            let (locus, span) = self.identifier()?;
             self.expect("local")?;
-            Some(locus)
+            (Some(locus), Some(span))
         } else {
-            None
+            (None, None)
         };
         let end = self.expect("}")?.span;
         let span = joined_span(&start, &end);
         self.relations.push(MaintainedRelation {
             name: name.clone(),
             owner_locus,
+            owner_locus_span,
             subject,
             subject_type,
+            subject_type_span,
             primary,
             fallback,
             binding_frontier,
             publication,
             consumer_projection_locus,
+            consumer_projection_locus_span,
             node: SyntaxNode::new(SyntaxKind::Relation, name, span, Vec::new()),
         });
         Ok(())
@@ -1247,32 +1469,38 @@ impl Parser {
         self.expect("epoch")?;
         let (epoch, _) = self.identifier()?;
         self.expect("transform")?;
-        self.parse_transform()?;
-        let end = self.previous().span.clone();
+        let (transform, transform_span) = self.parse_transform()?;
+        let end = transform_span.clone();
         Ok(RelationAnchor {
             anchor,
             epoch,
+            transform,
+            transform_span,
             span: joined_span(&start, &end),
         })
     }
 
-    fn parse_transform(&mut self) -> Result<(), ParseDiagnostics> {
-        if self.consume("identity") {
-            return Ok(());
+    fn parse_transform(&mut self) -> Result<(RelationTransform, SurfaceV0Span), ParseDiagnostics> {
+        if self.check("identity") {
+            let span = self.advance().span;
+            return Ok((RelationTransform::Identity, span));
         }
-        self.expect("translate")?;
+        let start = self.expect("translate")?.span;
         self.expect("(")?;
-        self.parse_signed_integer()?;
+        let x = self.parse_signed_integer()?;
         self.expect(",")?;
-        self.parse_signed_integer()?;
-        self.expect(")")?;
-        Ok(())
+        let y = self.parse_signed_integer()?;
+        let end = self.expect(")")?.span;
+        Ok((
+            RelationTransform::Translate { x, y },
+            joined_span(&start, &end),
+        ))
     }
 
-    fn parse_signed_integer(&mut self) -> Result<(), ParseDiagnostics> {
-        let _ = self.consume("-");
-        let (_, _) = self.integer()?;
-        Ok(())
+    fn parse_signed_integer(&mut self) -> Result<i64, ParseDiagnostics> {
+        let is_negative = self.consume("-");
+        let value = self.parse_bounded_i64()?;
+        Ok(if is_negative { -value } else { value })
     }
 
     fn parse_designated(&mut self) -> Result<(), ParseDiagnostics> {
@@ -1285,21 +1513,104 @@ impl Parser {
         self.expect("publish")?;
         let (result, _) = self.identifier()?;
         self.expect("=")?;
-        let expression_start = self.current().span.clone();
-        let mut last = expression_start.clone();
-        while !self.is_eof() && !self.check("with") && !self.check("verify") {
-            last = self.advance().span;
-        }
-        let expression_span = joined_span(&expression_start, &last);
-        let span = joined_span(&start, &last);
+        let expression = self.parse_bounded_expression_until(&["with", "verify", "designated"])?;
+        let expression_span = expression.span().clone();
+        let span = joined_span(&start, expression.span());
         self.designated_results.push(DesignatedResultDecl {
             evaluator: evaluator.clone(),
             tick_frontier,
             result: result.clone(),
+            expression,
             expression_span,
             node: SyntaxNode::new(SyntaxKind::DesignatedResult, evaluator, span, Vec::new()),
         });
         Ok(())
+    }
+
+    fn parse_bounded_expression_until(
+        &mut self,
+        terminators: &[&str],
+    ) -> Result<BoundedExpression, ParseDiagnostics> {
+        if self.is_eof() || terminators.iter().any(|terminator| self.check(terminator)) {
+            return Err(self.unexpected());
+        }
+        let token_start = self.index;
+        let start = self.current().span.clone();
+        let mut last = start.clone();
+        let mut state_refs = Vec::new();
+        let mut int_literals = Vec::new();
+        let mut binary_ops = Vec::new();
+        let mut parts = Vec::new();
+
+        while !self.is_eof() && !terminators.iter().any(|terminator| self.check(terminator)) {
+            if self.current_is_identifier() && self.reference_starts_here() {
+                let reference = self.parse_reference()?;
+                last = reference.span.clone();
+                state_refs.push(reference.clone());
+                parts.push(BoundedExpressionPart::StateReference(reference));
+                continue;
+            }
+
+            if self
+                .current()
+                .text
+                .bytes()
+                .all(|byte| byte.is_ascii_digit())
+            {
+                let span = self.current().span.clone();
+                let value = self.parse_bounded_i64()?;
+                last = span.clone();
+                let literal = BoundedIntegerLiteral { value, span };
+                int_literals.push(literal.clone());
+                parts.push(BoundedExpressionPart::IntegerLiteral(literal));
+                continue;
+            }
+
+            match self.current().text.as_str() {
+                "+" | "-" => {
+                    let operator = if self.check("+") {
+                        BoundedBinaryOperator::Add
+                    } else {
+                        BoundedBinaryOperator::Subtract
+                    };
+                    let span = self.advance().span;
+                    last = span.clone();
+                    let operation = BoundedBinaryOperation { operator, span };
+                    binary_ops.push(operation.clone());
+                    parts.push(BoundedExpressionPart::BinaryOperation(operation));
+                }
+                // M6 deliberately retains its broad expression-token
+                // collector. `}` remains the surrounding owner-block
+                // terminator, while the other grammar tokens are retained as
+                // opaque input for M7's finite expression check.
+                "{" | "[" | "]" | "(" | ")" | ":" | "," | "." | "=" => {
+                    last = self.advance().span;
+                    parts.push(BoundedExpressionPart::Opaque);
+                }
+                _ if self.current_is_identifier() => {
+                    last = self.advance().span;
+                    parts.push(BoundedExpressionPart::Opaque);
+                }
+                _ => return Err(self.unexpected()),
+            }
+        }
+
+        let span = joined_span(&start, &last);
+        let tokens = self.tokens[token_start..self.index]
+            .iter()
+            .map(|token| BoundedExpressionToken {
+                span: token.span.clone(),
+            })
+            .collect();
+
+        Ok(BoundedExpression {
+            span: span.clone(),
+            state_refs,
+            int_literals,
+            binary_ops,
+            tokens,
+            tree: bounded_expression_tree(parts, span),
+        })
     }
 
     fn parse_with_auth(&mut self) -> Result<(), ParseDiagnostics> {
@@ -1378,6 +1689,13 @@ impl Parser {
         }
     }
 
+    fn parse_bounded_i64(&mut self) -> Result<i64, ParseDiagnostics> {
+        let (value, span) = self.integer()?;
+        value
+            .parse::<i64>()
+            .map_err(|_| ParseDiagnostics::one(ParseErrorKind::IntegerLiteralOutOfRange, span))
+    }
+
     fn expect(&mut self, expected: &str) -> Result<Token, ParseDiagnostics> {
         if self.check(expected) {
             Ok(self.advance())
@@ -1440,6 +1758,67 @@ impl Parser {
             ParseErrorKind::UnexpectedSyntax,
             self.current().span.clone(),
         )
+    }
+}
+
+fn bounded_expression_tree(
+    parts: Vec<BoundedExpressionPart>,
+    fallback_span: SurfaceV0Span,
+) -> BoundedExpressionTree {
+    let mut parts = parts.into_iter();
+    let Some(first) = parts.next() else {
+        return BoundedExpressionTree::Opaque {
+            span: fallback_span,
+        };
+    };
+    let mut tree = match first {
+        BoundedExpressionPart::StateReference(reference) => {
+            BoundedExpressionTree::StateReference(reference)
+        }
+        BoundedExpressionPart::IntegerLiteral(literal) => {
+            BoundedExpressionTree::IntegerLiteral(literal)
+        }
+        BoundedExpressionPart::BinaryOperation(_) | BoundedExpressionPart::Opaque => {
+            return BoundedExpressionTree::Opaque {
+                span: fallback_span,
+            };
+        }
+    };
+
+    loop {
+        let Some(part) = parts.next() else {
+            return tree;
+        };
+        let BoundedExpressionPart::BinaryOperation(operation) = part else {
+            return BoundedExpressionTree::Opaque {
+                span: fallback_span,
+            };
+        };
+        let Some(next) = parts.next() else {
+            return BoundedExpressionTree::Opaque {
+                span: fallback_span,
+            };
+        };
+        let right = match next {
+            BoundedExpressionPart::StateReference(reference) => {
+                BoundedExpressionTree::StateReference(reference)
+            }
+            BoundedExpressionPart::IntegerLiteral(literal) => {
+                BoundedExpressionTree::IntegerLiteral(literal)
+            }
+            BoundedExpressionPart::BinaryOperation(_) | BoundedExpressionPart::Opaque => {
+                return BoundedExpressionTree::Opaque {
+                    span: fallback_span,
+                };
+            }
+        };
+        let span = joined_span(tree.span(), right.span());
+        tree = BoundedExpressionTree::Binary {
+            operator: operation.operator,
+            span,
+            left: Box::new(tree),
+            right: Box::new(right),
+        };
     }
 }
 

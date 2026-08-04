@@ -1,0 +1,9 @@
+module Combat.M7.UndefinedOwnerLocus
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at MissingOwner {
+  hp: Int
+}

@@ -1,0 +1,9 @@
+module Combat.M7.UndefinedStateFieldType
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: HitPoints
+}

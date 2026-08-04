@@ -1,0 +1,9 @@
+module Combat.M7.UndeclaredSelfPrincipal
+
+locus S
+type Player
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+  }
+}

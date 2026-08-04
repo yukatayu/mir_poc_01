@@ -1,0 +1,23 @@
+module Combat.M7.CrossOwnerAndUnderdeclaredFailure
+
+locus S
+locus T
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+}
+
+state enemy[id: Player] at T {
+  atk: Int
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership) {
+    at S {
+      player[target].hp = player[target].hp - enemy[target].atk
+    }
+  }
+}

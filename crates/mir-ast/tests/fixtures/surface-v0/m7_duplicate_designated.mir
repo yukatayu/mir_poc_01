@@ -1,0 +1,12 @@
+module Combat.M7.DuplicateDesignated
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  atk: Int
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 1
+designated evaluate E on tick F publish result = player[self].atk + 1

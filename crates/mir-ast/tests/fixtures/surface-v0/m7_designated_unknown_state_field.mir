@@ -1,0 +1,11 @@
+module Combat.M7.DesignatedUnknownStateField
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  atk: Int
+}
+
+designated evaluate E on tick F publish result = player[self].hp + 1

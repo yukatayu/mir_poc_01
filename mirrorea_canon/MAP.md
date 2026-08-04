@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0021) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0022) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -26,7 +26,7 @@ DESIGN-CONSTITUTION (v0/I1+ の横断判断)
 theory/ (MirCore v0)                     mental-model/ (表と裏の対応)
   00 見取り図                                 ▲
   01 計算体系 ──► 02 型/効果/失敗              │ 03 が theory/10 と対応
-  01 ──► 03 elaboration ──► 13 evaluation/materialization ──► 15 shared model ──► THM-001 │
+  01 ──► 03 elaboration ──► 13 evaluation/materialization ──► 15 shared model ──► 16 M7 checked elaboration ──► THM-001 │
   01 ──► 04 順序と cut ──► 05 権限            │
   01 ──► 06 存在と fallback                   │
   01 ──► 07 観測  08 patch  09 二層時間  10 診断
@@ -49,8 +49,8 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
 - **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0017。
 
-Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015--0021、
-PROPOSAL-018--024 を追加で読み、LAB の designated current roadmap と derived status
+Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015--0022、
+PROPOSAL-018--025 を追加で読み、LAB の designated current roadmap と derived status
 だけを current queue として使う。下の historical working records 一覧は queue ではない。
 
 ## ID 体系

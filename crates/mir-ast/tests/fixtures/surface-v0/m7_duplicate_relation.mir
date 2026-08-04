@@ -1,0 +1,24 @@
+module Combat.M7.DuplicateRelation
+
+locus S
+locus C
+principal self
+type Bird
+
+relation bird_follow at S {
+  subject bird: Bird
+  primary perch_anchor epoch primary_epoch transform translate(3, -2)
+  fallback nest_anchor epoch fallback_epoch transform identity
+  bind frontier bird_binding_frontier
+  publish relation
+  project at C local
+}
+
+relation bird_follow at S {
+  subject bird: Bird
+  primary perch_anchor epoch primary_epoch transform translate(3, -2)
+  fallback nest_anchor epoch fallback_epoch transform identity
+  bind frontier bird_binding_frontier
+  publish relation
+  project at C local
+}

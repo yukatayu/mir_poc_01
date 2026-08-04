@@ -1,0 +1,9 @@
+module Combat.M7.ResidualOnly
+
+locus S
+principal self
+type Player
+
+with auth MembershipAuth
+
+verify finite_refinement

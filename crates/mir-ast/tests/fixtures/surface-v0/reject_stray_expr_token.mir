@@ -1,0 +1,17 @@
+module Combat.M7.RejectStrayExprToken
+
+locus S
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].hp = player[self].hp * 2
+    }
+  }
+}

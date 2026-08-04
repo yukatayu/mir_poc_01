@@ -104,6 +104,19 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "foundation",
+      "filename": "MirTheoryV0M7CheckedElaboration.lean",
+      "lean_path": "samples/lean/foundations/MirTheoryV0M7CheckedElaboration.lean",
+      "explanation_path": "samples/lean/foundations/MirTheoryV0M7CheckedElaboration.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "'MirTheoryV0M7CheckedElaboration.check_and_elaborate_surface_v0_deterministic' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.canonical_same_owner_failure_capability_witness_authority_evaluation_obligations' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.relation_projection_retains_visibility_lifetime_and_fallback_residuals' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.designated_checked_evaluation_preserves_its_distinct_kind' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.auth_verify_residuals_are_static_without_hidden_success' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.residual_obligations_grant_no_authority_capability_execution_effect_mutation_or_verdict' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.m6_diagnostic_is_forwarded_with_its_original_source_span_and_no_executable_core' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.m6_classification_precedes_m7_failure_row_check' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.m6_broad_tokens_are_accepted_before_finite_m7_expression_rejection' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.checked_expression_trees_retain_operand_order_spans_and_int_typing' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.generated_authority_obligations_are_source_bound_and_never_success' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.m7_rejects_failure_row_duplicate_and_unknown_field_without_executable_core' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.canonical_source_to_core_map_preserves_each_m6_template_span' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.canonical_checked_core_axes_effect_rows_and_total_stable_source_map' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.designated_value_core_preserves_m3_input_and_policy_stamp' does not depend on any axioms\n'MirTheoryV0M7CheckedElaboration.owner_only_checked_artifact_is_execution_admissible_with_evaluation_and_no_residuals' does not depend on any axioms\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ],
   "statement_drafts": [

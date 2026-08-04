@@ -1,0 +1,19 @@
+module Combat.M7.TypeMismatch
+
+locus S
+principal self
+type Player
+type Name
+
+state player[id: Player] at S {
+  hp: Int
+  name: Name
+}
+
+Role[self] at S {
+  when rename(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].hp = player[self].hp + player[self].name
+    }
+  }
+}

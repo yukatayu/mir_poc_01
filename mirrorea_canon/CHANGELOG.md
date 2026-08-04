@@ -18,6 +18,28 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-025 と ADR-0022 により、M6 fixed source input を
+  finite checked elaboration に精密化した。M7 は M6 diagnostic/span を保持し、
+  typed Core/evaluation axes/effect row/generated obligation/total stable
+  source-to-Core map を返す。owner RMW、maintained relation、designated value は
+  distinct のままであり、relation lifetime/visibility/fallback validity、designated
+  value visibility/redaction、auth/verify は typed
+  residual に残る。residual は static artifact を成功にしても authority/capability/
+  effect/mutation/verdict を生成せず、residual row が空でない場合は execution
+  admission は `ResidualCannotExecute` に fail-closed する。admission は nonempty
+  checked evaluation と empty residual row を併せて必要とする。OBL-049 は exact finite
+  Lean evidence のみを記録し、runtime/M9 semantics、conformance、public API/wire、
+  final grammar は採用・主張しない。
+- **2026-08-04** M7 final review correction: M6 の broad ordered expression-token
+  collector は canonical `M6ExprToken` 全集合（`{ } [ ] ( ) : , . = + -` を含む）を
+  span 付きで保持し、M7 はその後で finite ordered typed expression tree と `Int`
+  arithmetic を検査する。`CheckedSurfaceV0` は accepted M6
+  `SurfaceV0Classification` 全体を move 保持して公開し、root/source `SourceRef`、
+  template、source-to-Core map を summary/rebuild に置き換えない。effect /
+  generated-obligation row は source span / `SourceRef` 付きで enumerable にし、designated value は M3
+  `InputFrontier`、deterministic evaluation policy、conservative observation policy、
+  policy stamp を保持する。`Authority` / `AdmittedEvaluatorAuthority` は authority
+  success ではなく obligation として残る。
 - **2026-08-04** PROPOSAL-024 と ADR-0021 により、M6 bounded ordinary
   Surface を M5 shared model の source-facing reference として採用した。
   same-owner owner action は authority origin と owner evaluation を分け、

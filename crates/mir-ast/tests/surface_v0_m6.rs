@@ -1,7 +1,8 @@
 use std::{ops::Range, path::PathBuf};
 
 use mir_ast::surface_v0::{
-    DeferredFormKind, FixtureSource, ParseErrorKind, SyntaxKind, parse_surface_v0,
+    BoundedBinaryOperator, DeferredFormKind, FixtureSource, ParseErrorKind, RelationTransform,
+    SyntaxKind, parse_surface_v0,
 };
 
 const FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
@@ -35,8 +36,54 @@ fn byte_range_after(source: &str, anchor: &str, needle: &str) -> Range<usize> {
     start..start + needle.len()
 }
 
+fn byte_range_nth(source: &str, needle: &str, occurrence: usize) -> Range<usize> {
+    let mut search_from = 0;
+    for _ in 0..occurrence {
+        let relative_start = source[search_from..]
+            .find(needle)
+            .unwrap_or_else(|| panic!("fixture contains occurrence {occurrence} of {needle:?}"));
+        search_from += relative_start + needle.len();
+    }
+    let relative_start = source[search_from..]
+        .find(needle)
+        .unwrap_or_else(|| panic!("fixture contains occurrence {occurrence} of {needle:?}"));
+    let start = search_from + relative_start;
+    start..start + needle.len()
+}
+
+fn byte_range_nth_after_offset(
+    source: &str,
+    byte_start: usize,
+    needle: &str,
+    occurrence: usize,
+) -> Range<usize> {
+    let mut search_from = byte_start;
+    for _ in 0..occurrence {
+        let relative_start = source[search_from..]
+            .find(needle)
+            .unwrap_or_else(|| panic!("fixture contains occurrence {occurrence} of {needle:?}"));
+        search_from += relative_start + needle.len();
+    }
+    let relative_start = source[search_from..]
+        .find(needle)
+        .unwrap_or_else(|| panic!("fixture contains occurrence {occurrence} of {needle:?}"));
+    let start = search_from + relative_start;
+    start..start + needle.len()
+}
+
 fn parse_error_kind_name(kind: ParseErrorKind) -> String {
     format!("{kind:?}")
+}
+
+fn token_lexemes<'a>(
+    source: &'a str,
+    expression: &'a mir_ast::surface_v0::BoundedExpression,
+) -> Vec<&'a str> {
+    expression
+        .tokens()
+        .iter()
+        .map(|token| token.span().lexeme(source))
+        .collect()
 }
 
 #[test]
@@ -130,6 +177,244 @@ fn parses_surface_v0_bundle_with_canonical_file_and_child_spans() {
 }
 
 #[test]
+fn parser_retains_bounded_assignment_designated_exprs_and_relation_transforms_with_spans() {
+    let (path, source) = load_fixture("canonical_attack_bundle.mir");
+    let ast = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("canonical surface-v0 source parses");
+
+    let assignment = ast
+        .assignment("player[target].hp")
+        .expect("attack assignment");
+    let assignment_expr = assignment.expression();
+    assert_eq!(
+        assignment_expr.span().byte_range(),
+        byte_range(&source, "player[target].hp - player[self].atk")
+    );
+    assert_eq!(assignment_expr.state_refs().len(), 2);
+    assert_eq!(assignment_expr.state_refs()[0].base(), "player");
+    assert_eq!(assignment_expr.state_refs()[0].index(), Some("target"));
+    assert_eq!(assignment_expr.state_refs()[0].field(), Some("hp"));
+    assert_eq!(
+        assignment_expr.state_refs()[0].span().byte_range(),
+        byte_range_nth(&source, "player[target].hp", 1)
+    );
+    assert_eq!(assignment_expr.state_refs()[1].base(), "player");
+    assert_eq!(assignment_expr.state_refs()[1].index(), Some("self"));
+    assert_eq!(assignment_expr.state_refs()[1].field(), Some("atk"));
+    assert_eq!(
+        assignment_expr.state_refs()[1].span().byte_range(),
+        byte_range(&source, "player[self].atk")
+    );
+    assert!(assignment_expr.int_literals().is_empty());
+    assert_eq!(assignment_expr.binary_ops().len(), 1);
+    assert_eq!(
+        assignment_expr.binary_ops()[0].operator(),
+        BoundedBinaryOperator::Subtract
+    );
+    assert_eq!(
+        assignment_expr.binary_ops()[0].span().byte_range(),
+        byte_range_after(&source, "player[target].hp -", "-")
+    );
+
+    let designated = ast.designated_result("E", "result").expect("designated E");
+    let designated_expr = designated.expression();
+    assert_eq!(
+        designated_expr.span().byte_range(),
+        byte_range(&source, "player[self].atk + 1")
+    );
+    assert_eq!(designated_expr.state_refs().len(), 1);
+    assert_eq!(designated_expr.state_refs()[0].base(), "player");
+    assert_eq!(designated_expr.state_refs()[0].index(), Some("self"));
+    assert_eq!(designated_expr.state_refs()[0].field(), Some("atk"));
+    assert_eq!(
+        designated_expr.state_refs()[0].span().byte_range(),
+        byte_range_after(&source, "designated evaluate", "player[self].atk")
+    );
+    assert_eq!(designated_expr.int_literals().len(), 1);
+    assert_eq!(designated_expr.int_literals()[0].value(), 1);
+    assert_eq!(
+        designated_expr.int_literals()[0].span().byte_range(),
+        byte_range_after(&source, "player[self].atk +", "1")
+    );
+    assert_eq!(designated_expr.binary_ops().len(), 1);
+    assert_eq!(
+        designated_expr.binary_ops()[0].operator(),
+        BoundedBinaryOperator::Add
+    );
+    assert_eq!(
+        designated_expr.binary_ops()[0].span().byte_range(),
+        byte_range_after(&source, "designated evaluate", "+")
+    );
+
+    let relation = ast.relation("bird_follow").expect("maintained relation");
+    assert_eq!(
+        relation.primary().transform(),
+        &RelationTransform::Translate { x: 3, y: -2 }
+    );
+    assert_eq!(
+        relation.primary().transform_span().byte_range(),
+        byte_range(&source, "translate(3, -2)")
+    );
+    assert_eq!(
+        relation.fallback().transform(),
+        &RelationTransform::Identity
+    );
+    assert_eq!(
+        relation.fallback().transform_span().byte_range(),
+        byte_range(&source, "identity")
+    );
+}
+
+#[test]
+fn parser_preserves_broad_ordered_expression_tokens_before_m7_finite_rejection() {
+    let (path, source) = load_fixture("m7_unsupported_punctuation_expression.mir");
+    let ast = parse_surface_v0(FixtureSource::new(path, source.clone()))
+        .expect("M6 parser accepts broad expression token collector input");
+
+    let assignment = ast
+        .assignment("player[self].hp")
+        .expect("punctuation expression assignment");
+    let expression = assignment.expression();
+    let expression_anchor = byte_range(&source, "player[self].hp =");
+    let expected_expression_range = byte_range_nth_after_offset(
+        &source,
+        expression_anchor.end,
+        "(player[self].hp + (player[self].atk, 1))",
+        0,
+    );
+    assert_eq!(expression.span().byte_range(), expected_expression_range);
+    assert_eq!(
+        token_lexemes(&source, expression),
+        vec![
+            "(", "player", "[", "self", "]", ".", "hp", "+", "(", "player", "[", "self", "]", ".",
+            "atk", ",", "1", ")", ")",
+        ]
+    );
+    assert_eq!(
+        expression.tokens()[0].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, "(", 0)
+    );
+    assert_eq!(
+        expression.tokens()[15].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, ",", 0)
+    );
+    assert_eq!(
+        expression.tokens()[18].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, ")", 1)
+    );
+}
+
+#[test]
+fn parser_preserves_canon_m6_expr_token_punctuation_before_m7_rejection() {
+    let (path, source) = load_fixture("m7_unsupported_expr_token_set_punctuation.mir");
+    let ast = parse_surface_v0(FixtureSource::new(path, source.clone()))
+        .expect("M6 parser accepts every Canon M6ExprToken in the broad collector");
+
+    let assignment = ast
+        .assignment("player[self].hp")
+        .expect("punctuation token-set assignment");
+    let expression = assignment.expression();
+    let expression_anchor = byte_range(&source, "player[self].hp =");
+    let expected_expression_range = byte_range_nth_after_offset(
+        &source,
+        expression_anchor.end,
+        "[ player[self].hp : player[self].atk = . ]",
+        0,
+    );
+    assert_eq!(expression.span().byte_range(), expected_expression_range);
+    assert_eq!(
+        token_lexemes(&source, expression),
+        vec![
+            "[", "player", "[", "self", "]", ".", "hp", ":", "player", "[", "self", "]", ".",
+            "atk", "=", ".", "]",
+        ]
+    );
+    assert_eq!(
+        expression.tokens()[0].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, "[", 0)
+    );
+    assert_eq!(
+        expression.tokens()[7].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, ":", 0)
+    );
+    assert_eq!(
+        expression.tokens()[14].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, "=", 0)
+    );
+    assert_eq!(
+        expression.tokens()[15].span().byte_range(),
+        byte_range_nth_after_offset(&source, expected_expression_range.start, ".", 2)
+    );
+}
+
+#[test]
+fn parser_retains_left_associated_ordered_expression_tree_with_spans() {
+    let (path, source) = load_fixture("m7_ordered_expression_tree.mir");
+    let ast = parse_surface_v0(FixtureSource::new(path, source.clone()))
+        .expect("ordered expression fixture parses");
+
+    let assignment = ast
+        .assignment("player[self].hp")
+        .expect("ordered owner assignment");
+    let assignment_tree = assignment.expression().tree();
+    assert_eq!(
+        assignment_tree.source_lexeme(&source),
+        "player[self].hp - player[self].atk + 1"
+    );
+    assert_eq!(assignment_tree.operator(), Some(BoundedBinaryOperator::Add));
+    assert_eq!(
+        assignment_tree.left().operator(),
+        Some(BoundedBinaryOperator::Subtract)
+    );
+    assert_eq!(
+        assignment_tree.left().left().source_lexeme(&source),
+        "player[self].hp"
+    );
+    assert_eq!(
+        assignment_tree.left().right().source_lexeme(&source),
+        "player[self].atk"
+    );
+    assert_eq!(assignment_tree.right().int_literal().unwrap().value(), 1);
+    assert_eq!(
+        assignment_tree.left().span().byte_range(),
+        byte_range(&source, "player[self].hp - player[self].atk")
+    );
+
+    let designated = ast.designated_result("E", "result").expect("designated E");
+    let designated_tree = designated.expression().tree();
+    assert_eq!(
+        designated_tree.source_lexeme(&source),
+        "player[self].hp - 1 + player[self].atk"
+    );
+    assert_eq!(designated_tree.operator(), Some(BoundedBinaryOperator::Add));
+    assert_eq!(
+        designated_tree.left().operator(),
+        Some(BoundedBinaryOperator::Subtract)
+    );
+    assert_eq!(
+        designated_tree.left().left().source_lexeme(&source),
+        "player[self].hp"
+    );
+    assert_eq!(
+        designated_tree
+            .left()
+            .right()
+            .int_literal()
+            .unwrap()
+            .value(),
+        1
+    );
+    assert_eq!(
+        designated_tree.right().source_lexeme(&source),
+        "player[self].atk"
+    );
+    assert_eq!(
+        designated_tree.left().span().byte_range(),
+        byte_range(&source, "player[self].hp - 1")
+    );
+}
+
+#[test]
 fn parser_rejects_transport_occurrence_and_envelope_surface() {
     for (fixture, rejected_lexeme, expected_kind) in [
         (
@@ -151,6 +436,34 @@ fn parser_rejects_transport_occurrence_and_envelope_surface() {
             "reject_envelope_syntax.mir",
             "envelope",
             ParseErrorKind::UnsupportedEnvelopeSyntax,
+        ),
+    ] {
+        let (path, source) = load_fixture(fixture);
+        let diagnostics =
+            parse_surface_v0(FixtureSource::new(path.clone(), source.clone())).unwrap_err();
+        let primary = diagnostics.primary();
+        assert_eq!(primary.kind(), expected_kind);
+        assert_eq!(primary.span().file(), path);
+        assert_eq!(
+            primary.span().byte_range(),
+            byte_range(&source, rejected_lexeme)
+        );
+        assert_eq!(primary.span().lexeme(&source), rejected_lexeme);
+    }
+}
+
+#[test]
+fn parser_rejects_tokens_outside_m6_expr_token_set_with_typed_spans() {
+    for (fixture, rejected_lexeme, expected_kind) in [
+        (
+            "reject_oversize_int_literal.mir",
+            "9223372036854775808",
+            ParseErrorKind::IntegerLiteralOutOfRange,
+        ),
+        (
+            "reject_stray_expr_token.mir",
+            "*",
+            ParseErrorKind::UnexpectedSyntax,
         ),
     ] {
         let (path, source) = load_fixture(fixture);

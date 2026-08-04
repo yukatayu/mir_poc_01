@@ -73,6 +73,8 @@ receipt/release facts, runtime steps, membership state, proof verdict, or
 presentation state. Capability/witness *obligations* in an owner template are
 not source-level witness or transport objects.
 
-The exact finite classifier evidence is OBL-048 in theory/11. General parser
-coverage, elaboration determinism, diagnostic soundness/completeness, checker
-decidability, M7 implementation, and M9 semantics remain separately deferred.
+The exact finite classifier evidence is OBL-048 in theory/11. M7's separate
+finite refinement/evidence is spec/08 and OBL-049; neither changes this M6
+classification contract. General parser coverage, elaboration determinism,
+diagnostic soundness/completeness, checker decidability, and M9 semantics
+remain separately deferred.
