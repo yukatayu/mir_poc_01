@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 150,
+ "files": 153,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 7243
+   "bytes": 7932
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21803
+   "bytes": 21855
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2846
+   "bytes": 2887
   },
   {
    "id": "adr/ADR-0001",
@@ -334,6 +334,22 @@
    "bytes": 3099
   },
   {
+   "id": "adr/ADR-0020",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0018",
+    "adr/ADR-0019",
+    "meta/proposal-023",
+    "root/design-constitution"
+   ],
+   "summary": "M5 の shared formal model を採用し、M6--M8 の semantic source を有限 concrete carrier に固定する。",
+   "open_items": [],
+   "path": "adr/ADR-0020.md",
+   "bytes": 3212
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -343,7 +359,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2506
+   "bytes": 2608
   },
   {
    "id": "arch/01-strata",
@@ -853,6 +869,21 @@
    "bytes": 3012
   },
   {
+   "id": "meta/proposal-023",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0018",
+    "adr/ADR-0019"
+   ],
+   "summary": "owner-approved M5 scopeで、M1--M4 を一つの concrete finite shared model に統合する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-023-shared-formal-model-metatheory.md",
+   "bytes": 3562
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1256,7 +1287,7 @@
    "summary": "意味層 S0-S5、4 本のグラフ族、理論全体の分業と依存の見取り図。",
    "open_items": [],
    "path": "theory/00-overview.md",
-   "bytes": 3078
+   "bytes": 3185
   },
   {
    "id": "theory/01-mircore-v0",
@@ -1275,7 +1306,7 @@
     "OPEN-012"
    ],
    "path": "theory/01-mircore-v0.md",
-   "bytes": 11504
+   "bytes": 11537
   },
   {
    "id": "theory/02-types-effects-failures",
@@ -1430,12 +1461,13 @@
     "theory/07-observation",
     "theory/08-patch-hotplug",
     "theory/13-evaluation-materialization",
-    "theory/14-maintained-relation-projection"
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 8291
+   "bytes": 11962
   },
   {
    "id": "theory/12-literature",
@@ -1466,7 +1498,7 @@
    "summary": "M3 の評価場所・clock・authority origin・materialization を分離する有限 calculus。owner RMW、explicit receipt、designated evaluator の規則を定義する。",
    "open_items": [],
    "path": "theory/13-evaluation-materialization.md",
-   "bytes": 9895
+   "bytes": 9990
   },
   {
    "id": "theory/14-maintained-relation-projection",
@@ -1487,7 +1519,29 @@
     "OPEN-033"
    ],
    "path": "theory/14-maintained-relation-projection.md",
-   "bytes": 7986
+   "bytes": 8161
+  },
+  {
+   "id": "theory/15-shared-formal-model",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/03-elaboration",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/06-existence-fallback",
+    "theory/07-observation",
+    "theory/09-two-layer-time",
+    "theory/10-diagnostics",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "adr/ADR-0020"
+   ],
+   "summary": "M1--M4 を一つの concrete finite proof-facing model に統合する M5 shared semantic source。",
+   "open_items": [],
+   "path": "theory/15-shared-formal-model.md",
+   "bytes": 7451
   },
   {
    "id": "theory/readme",
@@ -1500,7 +1554,7 @@
    "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
    "open_items": [],
    "path": "theory/README.md",
-   "bytes": 1620
+   "bytes": 1651
   },
   {
    "id": "working/readme",

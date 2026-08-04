@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-04 13:24 JST
+最終更新: 2026-08-04 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,7 +20,7 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M5 shared formal model/metatheory. Next: M6 Surface.** 根拠は
+**Active: M6 Surface. Next: M7 checker/elaborator.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
@@ -33,17 +33,18 @@ pass した。M2 は revision-bound semantic-assertion v3 の reproduced `pass` 
 G0-D3、G0 exit、T1 entry を順に適用した。M3 は finite `EvalPlan`、owner RMW、
 release-admitted causal receipt、designated publish/consume を Lean/bounded model/Rust traceと
 independent reviewで閉じた。M4 は ADR-0019/theory/14/SCN-12 の finite relation-first
-calculusを、OBL-035..039 の `--trust=0` Lean、13 focused Rust tests、full
-`mir-semantics` test、test-target clippy、Oracle advisory、independent final reviewで閉じた。
-official lifecycle は `T1`、v1/v2はhistorical evidenceのままである。現在の direct blocker は
-M5 の non-opaque shared model と correspondence matrix であり、direct consumer は M6 Surface
-である。
+calculusを閉じた。M5 は ADR-0020/theory/15 の finite concrete
+`SurfaceFragment → Core | Diagnostic` shared modelを、13 focused Rust tests、OBL-040..047 の
+exact finite `--trust=0` Lean evidence、independent final reviewで閉じた。official lifecycle は
+`T1`、v1/v2はhistorical evidenceのままである。現在の direct blocker は M5 semantic boundaryに
+対応する bounded Surface grammar/source span/total classificationであり、direct consumer は M7
+checker/elaboratorである。
 
 M2 close 時点で official lifecycle は `T1`。これにより I1 は開始しない。General
 OBL-001..028 は `intentionally-deferred`、finite M3 OBL-029..032 は `lean-proved`、033は
-`model-checked-bounded`、034は`runtime-monitored`、finite M4 OBL-035..039 は
-`lean-proved`である。SCN-01..10のofficial conformance claimとM8 runtime implementationは
-unchangedである。
+`model-checked-bounded`、034は`runtime-monitored`、finite M4 OBL-035..039 と M5 OBL-040..047 は
+exact scope の `lean-proved`である。SCN-01..10のofficial conformance claimとM8 runtime
+implementationは unchangedである。
 
 ## ordered self-driven packages
 
@@ -58,8 +59,8 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | M2 | semantic-assertion T0/G0 closeout | closed; `plan/248` reproduced pass, independent review, and ADR-0017 acceptance applied | Macro 0/1; complete |
 | M3 | evaluation / materialization | closed; ADR-0018/theory-13, finite Lean/bounded model/Rust trace, independent re-review | Macro 1/5; complete |
 | M4 | maintained relation / late projection | closed; ADR-0019/theory-14/SCN-12, finite Lean/Rust evidence, final independent review | Macro 1/5/6; complete |
-| M5 | shared formal model / metatheory | `A/R/O`; non-opaque common model、coverage、Lean/model evidence、T1/T2/I1-readiness mapping | Macro 1/5; active; heavy |
-| M6 | Surface | `A/R/O`; bounded Surface v0、total Core/Diagnostic mapping、SCN source matrix | Macro 1/3; next after M5; heavy |
+| M5 | shared formal model / metatheory | closed; finite shared model、13 Rust tests、exact OBL-040..047 Lean evidence、bounded/runtime correspondence | Macro 1/5; complete |
+| M6 | Surface | `A/R/O`; bounded Surface v0、total Core/Diagnostic mapping、SCN source matrix | Macro 1/3; active; heavy |
 | M7 | checker / elaborator | `A/R/O`; source-first route、C-static SCN 10/10 no waiver、formal correspondence | Macro 3/5/7; after M6; heavy |
 | M8 | deterministic runtime | `A/R/O`; explicit state/effect/failure trace、C-runtime SCN 10/10、deterministic replay | Macro 3/5; after M7; heavy |
 | M9 | auth / verification | `A/R/O`; typed auth/authority/verification、negative security evidence、M8 regression | Macro 1/5/7; after M8; heavy |
@@ -74,18 +75,18 @@ report、commit/push/parity が閉じるまで開始しない。
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
-| 1 semantic kernel | M1--M4 accepted; M5 is the current integration package | **着手可能**: shared model/metatheory |
+| 1 semantic kernel | M1--M5 accepted; M6 is the current language package | **着手可能**: bounded Surface v0 |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
 | 3 compile-ready actualization | historical Surface/runtime evidence exists | **後段依存**: M5/M6 accepted model |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
-| 5 theorem/model-check bridge | finite M3/M4 evidence closed; general proof remains deferred | **着手可能**: M5 shared statements/correspondence |
+| 5 theorem/model-check bridge | finite M3/M4/M5 evidence closed; general proof remains deferred | M6 correspondence consumer |
 | 6 distributed fabric | not in M0--M10 deterministic I1+ target | deferred / future owner direction |
 | 7 toolchain/backend | M7--M9 bounded reference surfaces only | **後段依存**: M6 |
 | 8 applications | user-defined worlds remain LAB consumers | deferred; not a Core milestone |
 
 ## user decision gates
 
-現在、M5 を止める owner decision item はない。ADR-0015 が owner-approved objective、
+現在、M6 を止める owner decision item はない。ADR-0015 が owner-approved objective、
 M0--M10 order、bounded execution authority を記録しているため、旧 tasks にあった
 fixed-control、C1/C2、Gate/ledger 一般の「常時 owner 待ち」は current queue から外す。
 それらの具体内容は該当 milestone が evidence-gated に選び、Canon へ統合する。
@@ -94,7 +95,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M5 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M6 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items
@@ -107,7 +108,7 @@ smallest viable alternative を falsifier で比較する。
 | M2 | semantic assertion identity、evidence binding、negative control、acceptance separation | historical artifact rewrite or premature lifecycle claim |
 | M3 evaluation/materialization | closed finite calculus | no general proof/runtime/conformance claim |
 | M4 relation/projection | closed finite relation-first fragment | no general DAG/runtime/conformance claim |
-| M5 | non-opaque shared model、statement/implementation identity、proof classes | opaque stub、missing rule-family coverage、axiom overclaim |
+| M5 | closed finite shared model、statement/implementation identity、proof classes | general proof/runtime overclaim |
 | M6 | total Surface-to-Core/Diagnostic domain | implicit default/authority/communication or premature public freeze |
 | M7--M9 | checker/runtime/auth algorithms that preserve M5 semantics | model drift、waiver、hidden side table、transport-as-authority |
 | M10 | exact repo-local completion claim and remaining deferrals | any unreproduced required evidence or stale current reference |

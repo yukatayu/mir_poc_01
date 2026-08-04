@@ -184,5 +184,7 @@ multi-owner transaction, final grammar, or public schema.
 
 The relevant statements are OBL-001/003/004/020/021 in theory/11. M3 finite
 evidence proves only its declared finite model; it is not a proof of arbitrary
-topology, relation DAG, save/load, or patch behavior. M4 and M5 extend this
-same `EP`, `Config`, `Step`, `WellFormed`, `Trace`, and Diagnostic universe.
+topology, relation DAG, save/load, or patch behavior. Theory/15 supplies the
+one concrete finite shared `EP`, `Config`, `Step`, `WellFormed`, `Trace`, and
+Diagnostic universe for the accepted M3/M4 profile; it does not generalize
+this M3 boundary.

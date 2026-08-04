@@ -18,6 +18,15 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-023 と ADR-0020 により、M1--M4 の有限
+  `SurfaceFragment`/`Core`/`Config`/`Step`/`WellFormed`/trace/diagnostic/
+  relation/cut-save carrier を一つの concrete M5 shared model に採用した。
+  result frontier/version、relation frontier/epoch、presentation context、cut は
+  distinct type のままとし、owner bind → `publish-relation` による exact
+  relation/binding carrier の保持 → consumer-local projection と consumer
+  materialization/J-mutation reject を有限 evidence にした。
+  これは M6 grammar、general theorem、save/load algorithm、patch/runtime/transport、
+  public contract を採用・主張しない。
 - **2026-08-04** PROPOSAL-022 と ADR-0019 により、M4 の owner-held
   maintained relation と consumer-local late projection を採用した。relation は
   `publish-relation` で投影され、absolute value / adapter stream には具体化しない。

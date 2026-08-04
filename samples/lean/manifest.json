@@ -78,6 +78,19 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "foundation",
+      "filename": "MirTheoryV0M5SharedModel.lean",
+      "lean_path": "samples/lean/foundations/MirTheoryV0M5SharedModel.lean",
+      "explanation_path": "samples/lean/foundations/MirTheoryV0M5SharedModel.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "'MirTheoryV0M5SharedModel.elaboration_deterministic' does not depend on any axioms\n'MirTheoryV0M5SharedModel.project_then_evaluate_matches_owner_held_relation' depends on axioms: [propext]\n'MirTheoryV0M5SharedModel.semantic_fallback_is_monotone' depends on axioms: [propext, Quot.sound]\n'MirTheoryV0M5SharedModel.owner_binding_publish_then_consumer_local_projection' depends on axioms: [propext]\n'MirTheoryV0M5SharedModel.consumer_store_publishvalue_and_j_mutation_reject_without_semantic_mutation' depends on axioms: [propext]\n'MirTheoryV0M5SharedModel.supported_finite_steps_preserve_wellFormed' depends on axioms: [propext]\n'MirTheoryV0M5SharedModel.cut_backed_save_restore_preserves_wellFormed' depends on axioms: [propext]\n'MirTheoryV0M5SharedModel.cut_backed_save_restore_preserves_published_relation' depends on axioms: [propext]\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ],
   "statement_drafts": [

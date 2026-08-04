@@ -157,6 +157,9 @@ semantic fallback/no automatic re-promotion/fresh lineage, presentation-gap
 nonmutation and context coherence, greatest-restriction propagation, and the
 finite rejection set. OBL-005--008 and OBL-022--023 remain the general
 fallback/two-layer-time obligations and are intentionally deferred.
+Theory/15 places this finite M4 profile and the M3 carriers in one concrete
+shared model; it does not turn the M4 finite profile into a general relation
+or save/load theorem.
 
 OPEN-033: the finite profile has two ordered anchors. Arbitrary acyclic
 relation-DAG composition, approximation, and a general label lattice remain a

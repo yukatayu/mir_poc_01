@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 13:24 JST
+最終更新: 2026-08-04 15:15 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M4 maintained relation/late projection**
-- active milestone: **M5 shared formal model/metatheory**
-- next milestone: **M6 Surface**
+- completed milestone: **M5 shared formal model/metatheory**
+- active milestone: **M6 Surface**
+- next milestone: **M7 checker/elaborator**
 - active frontier limit: 一つの milestone
-- current direct blocker: accepted M1--M4 rules と finite evidence を、Surface、Core、
-  Config、Step、WellFormed、Trace、Diagnostic の一つの non-opaque model と
-  correspondence matrix に統合すること
-- direct consumer: M6 Surface
+- current direct blocker: accepted M5 finite semantic boundary に total に対応する bounded
+  Surface v0 の grammar、name/locus/index/chain/effect/failure syntax、source span と
+  Core/Diagnostic classification を定義すること
+- direct consumer: M7 checker/elaborator
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -261,7 +261,7 @@ P017/WRK evidence は historical LAB evidence であり、新しい Canon relati
 
 **Direct blocker / consumer:** completed; M5 shared formal model/metatheory is the direct consumer。
 
-### M5 - Shared formal model / metatheory
+### M5 - Shared formal model / metatheory (completed 2026-08-04)
 
 **Intended outcome:** M1--M4 を一つの non-opaque proof-facing model に統合し、Surface、
 checker、runtime が共有する semantic source を固定する。
@@ -277,10 +277,17 @@ checker、runtime が共有する semantic source を固定する。
   Canon に整合させ、M6/M7 が着手可能な scope を明示する。
 - opaque predicate、`True` stub、bounded enumeration を general proof に読み替えない。
 
-**Evidence:** theory/11 ledger、Gate / Phase sources、M3/M4 artifacts、Lean / model checks、
-independent review。
+**Close evidence:** ADR-0020 / theory/15 and Report 2586 adopt one finite,
+concrete `SurfaceFragment → Core | Diagnostic` semantic source with shared
+Config / Step / WellFormed / Trace / Projection carriers, rather than an M3/M4
+adapter. The executable shared model passed 13 focused Rust tests. OBL-040--047
+are `lean-proved` only for their exact finite profiles under `--trust=0`; the
+report and ledger retain the bounded-model/runtime correspondence and every
+non-claim. This does not select M6 grammar or final spans, a final ABI/wire,
+M8 runtime, a general theorem, general save/load/patch, conformance, I1, or
+deployment.
 
-**Direct blocker / consumer:** accepted M1--M4 semantics / M6 Surface。
+**Direct blocker / consumer:** completed; M6 Surface is the direct consumer.
 
 ### M6 - Surface
 
@@ -399,8 +406,8 @@ reproduction、final independent review。
 | M2 | governance/evidence writer | accepted Constitution | exact artifact, digest, negative control, exit record |
 | M3 | semantics + formal/test writers | Constitution + T1 entry | evaluation/materialization model and adverse traces |
 | M4 | semantics + formal/test writers | M3 calculus | relation/projection preservation and anti-collapse tests |
-| M5 | formalization writer | M3/M4 accepted rules | shared-model coverage, Lean/model checks, lifecycle mapping |
-| M6 | language/spec writer | M5 shared model | grammar/elaboration totality and SCN source matrix |
+| M5 | formalization writer | M3/M4 accepted rules | closed: shared-model coverage, exact finite OBL-040--047 Lean evidence, bounded/runtime correspondence, lifecycle mapping |
+| M6 | language/spec writer | M5 shared model | active: grammar/elaboration totality and SCN source matrix |
 | M7 | implementer + test/formal writers | M6 Surface | C-static 10/10 and correspondence |
 | M8 | implementer + test/formal writers | M7 Core output | C-runtime 10/10, deterministic replay, safety regressions |
 | M9 | auth/security + test/formal writers | M8 runtime | lineage/validation/redaction negative evidence |
@@ -467,7 +474,7 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M5 の shared formal model / metatheory を開始する。accepted M1--M4 の Surface fragment、
-Core、Config、Step、WellFormed、Trace、Diagnostic、relation state、cut/save interface を
-一つの non-opaque model と correspondence matrix に統合する。M5 report、independent review、
-focused validation、commit/push/remote parity が閉じるまで M6 は開始しない。
+M6 の bounded Surface v0 を開始する。M5 の shared `SurfaceFragment → Core | Diagnostic`
+boundary を唯一の意味入力として、ordinary source grammar、name/locus/index/chain/effect/
+failure syntax、source span と total classification を定義する。M6 report、independent
+review、focused validation、commit/push/remote parity が閉じるまで M7 は開始しない。

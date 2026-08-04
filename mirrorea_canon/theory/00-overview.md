@@ -41,4 +41,5 @@ These four are distinct: collapsing any two (e.g. treating a participant as a lo
 - 04 fixes ordering, `atomic_cut`, consistent cuts, SaveObject, load admissibility, Z-cycles.
 - 05–08 fix authority, existence/fallback, observation, patching, each as axioms + carriers over 01/04.
 - 09 connects discrete verified time with high-rate streams. 10 makes rejection itself a formal object.
+- 13 and 14 contribute finite M3/M4 carriers; 15 fixes their one concrete shared finite source for M6--M8.
 - 11 is the single ledger of THM/OBL. 12 anchors everything in prior art.

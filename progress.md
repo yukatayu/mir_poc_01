@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-04 13:24 JST
+最終更新: 2026-08-04 15:15 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -38,8 +38,8 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0--M4 are evidence-complete; official lifecycle is T1; M5 shared formal model/metatheory is active | **着手可能**: one non-opaque shared model and correspondence matrix |
-| User-facing specification | No M0 syntax change. M6 owns Surface v0 after M5 shared model | **後段依存**: M1--M5 |
+| Logical specification | M0--M5 are evidence-complete; official lifecycle is T1; M6 Surface is active | **着手可能**: bounded grammar and total M5-aligned Core/Diagnostic classification |
+| User-facing specification | M6 owns Surface v0 on the accepted M5 shared model | **着手可能**: M6 only; M7 follows M6 |
 | Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M1--M7 |
 
 Sources: `mirrorea_canon/adr/ADR-0015.md`,
@@ -54,8 +54,10 @@ M3 established a finite `EvalPlan` calculus with owner RMW, exact release-admitt
 receipt, and designated publication/explicit consumption evidence. M4 then closed
 the finite owner-held relation / C-local coherent projection calculus, including
 semantic/presentation fallback separation, fresh reacquire, privacy and split-frame
-rejection. Its direct consumer is M5's shared model; official conformance and M8
-runtime state remain unchanged.
+rejection. M5 then closed one finite concrete `SurfaceFragment → Core | Diagnostic`
+model with shared Config / Step / WellFormed / Trace / Projection, 13 focused Rust
+tests, and exact finite OBL-040--047 Lean evidence. M6 is now its direct consumer;
+official conformance and M8 runtime state remain unchanged.
 
 ## milestone map
 
@@ -66,8 +68,9 @@ runtime state remain unchanged.
 | M2 | semantic-assertion T0/G0 closeout | closed; T1 entry accepted | `plan/248` reproduced pass / ADR-0017 |
 | M3 | evaluation/materialization calculus | closed; finite theory/Lean/Rust evidence | ADR-0018/theory-13, Report 2584, closeout commit/push parity |
 | M4 | maintained relation/late projection | closed; finite theory/Lean/Rust evidence | ADR-0019/theory-14/SCN-12, Report 2585, closeout evidence |
-| M5 | shared model/metatheory | active | M1--M4 common model, correspondence, assurance mapping |
-| M6/M7 | Surface, checker/elaborator | later | after M5 |
+| M5 | shared model/metatheory | closed; finite shared model and exact evidence | ADR-0020/theory-15, Report 2586 |
+| M6 | Surface | active | bounded grammar, source spans, total Core/Diagnostic classification |
+| M7 | checker/elaborator | next | after M6 |
 | M8/M9 | runtime, auth/verification | later | after M7/M8 |
 | M10 | conformance/closeout | later | after M9 |
 
@@ -130,19 +133,20 @@ completion is claimed.
 | M2 research | semantic assertions/profile/fresh evaluation | preserve v1/v2 history; no premature exit |
 | M3 research | eval policy and RMW inference | reject hidden communication/authority/transaction |
 | M4 relation/projection | closed finite owner-held relation and C-local projection evidence | no general DAG/naturality or runtime claim |
-| M5 research | non-opaque shared model, correspondence, exact assurance mapping | reject opaque/stub model or untracked rule family |
-| M6--M10 | Surface, toolchain, runtime, extensions, closeout | sequentially after M5 acceptance |
+| M5 shared model | closed finite shared model, correspondence, exact assurance mapping | general theorem/runtime remains deferred |
+| M6 | Surface grammar, source spans, total Core/Diagnostic mapping | reject implicit default/authority/communication or public freeze |
+| M7--M10 | checker, runtime, extensions, closeout | sequentially after M6 acceptance |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | M0 closed | medium | maintenance only |
-| 1 | semantics/shared model | M1--M4 accepted; M5 is the active integration cut | heavy | yes |
+| 1 | semantics/shared model | M1--M5 accepted; M6 is the active language cut | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
 | 3 | source/checker/runtime | M6--M8 | heavy | after shared model |
 | 4 | executable samples | historical evidence | medium | maintenance only |
-| 5 | theorem/model-check | finite M3/M4 evidence; M5 shared correspondence then M10 | heavy | active shared-model input |
+| 5 | theorem/model-check | finite M3/M4/M5 evidence; general proof remains deferred | heavy | M6 correspondence consumer |
 | 6 | distributed fabric | beyond I1+ | heavy | deferred |
 | 7 | toolchain/backend | M7--M9 bounded support | heavy | after M6 |
 | 8 | applications | domain consumers | heavy | deferred |
@@ -186,3 +190,9 @@ completion is claimed.
   13 focused Rust tests, the full `mir-semantics` suite, and test-target clippy
   passed. Oracle advice remained advisory; the reviewer corrected authority after
   five initial P1/P2 findings and found no final P0/P1. M5 is now sole active.
+- 2026-08-04 15:15 JST: M5 closed ADR-0020/theory-15's finite shared
+  `SurfaceFragment → Core | Diagnostic` model with shared Config / Step /
+  WellFormed / Trace / Projection. Thirteen focused Rust tests and exact finite
+  OBL-040..047 Lean evidence passed final independent review; M6 Surface is now
+  the sole active semantic milestone, without a grammar, final ABI/wire, M8
+  runtime, general theorem, conformance, or I1 completion claim.

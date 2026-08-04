@@ -73,7 +73,7 @@ Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ; R ; D ; J ⟩
   P  patch lifecycle store                          theory/08
   R  explicit remote-result receipt store            theory/13
   D  designated-result/version store                 theory/13
-  J  maintained relation / binding store              theory/14
+  J  maintained relation / binding store              theory/14, finite shared profile theory/15
 ```
 
 A configuration is **well-formed** iff H is acyclic, every `use(ρ)` in H has a
