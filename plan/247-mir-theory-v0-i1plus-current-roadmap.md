@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 16:50 JST
+最終更新: 2026-08-04 18:56 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M6 Surface**
-- active milestone: **M7 checker/elaborator**
-- next milestone: **M8 deterministic runtime**
+- completed milestone: **M7 checker/elaborator**
+- active milestone: **M8 deterministic runtime**
+- next milestone: **M9 auth/verification**
 - active frontier limit: 一つの milestone
-- current direct blocker: accepted M6 grammar、span-rich AST、name resolution、M5-aligned
-  Core-template/Diagnostic classification を、一つの source-first `parse → check → elaborate`
-  routeとして実装し、generated Core/obligation/source trace を検査可能にすること
-- direct consumer: M8 deterministic runtime
+- current direct blocker: M7 の checked Core / generated effect・failure・authority・visibility /
+  relation-lifetime・evaluation obligation / residual / deterministic source-to-Core map を、parser /
+  classifier bypass なしに実行する deterministic single-process multi-locus runtime を実装すること
+- direct consumer: M9 typed auth/verification extension
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -317,7 +317,7 @@ I1, or deployment.
 **Direct blocker / consumer:** completed; M7 checker/elaborator is the direct
 consumer and must preserve M6 syntax/span/Core-template meaning.
 
-### M7 - Checker / elaborator
+### M7 - Checker / elaborator (completed 2026-08-04)
 
 **Intended outcome:** M6 Surface を parse / check / elaborate し、M5 model と一致する
 deterministic reference toolchain を作る。
@@ -326,21 +326,27 @@ deterministic reference toolchain を作る。
 
 - one source-first `parse -> check -> elaborate` route があり、internal bypass を conformance
   route に使わない。
-- C-static SCN-01..10 が waiver なし 10/10 で、negative は expected id / span / reason を返す。
+- source-first M7 fixture matrix の positive / negative row が expected id / span / reason を返す。
+  この matrix は official SCN-01..10 conformance ではなく、後者は M10 release profile の
+  fresh evidence でのみ主張する。
 - generated Core、communication / authority / effect / failure obligations、source traceability が
   inspectable で、hidden edge を持たない。
 - elaborator determinism と explanation claims を shared model / ledger target に対応付け、
   actual evidence class だけを記録する。
 
-**Evidence:** executable tests、goldens、fresh C-static artifact、formal correspondence、
-independent review。
+**Close evidence:** one ordinary `.mir` route now performs `parse → M6 full
+classification retention → finite M7 check → typed Core / effects / obligations /
+residuals / source map`. The accepted finite static evidence contains 8 M6 AST
+tests, 11 M6 classifier tests, and 22 M7 pipeline tests, plus the full
+`mir-ast` / `mir-semantics` suites, format/clippy, and OBL-049's 16 trusted
+`--trust=0` Lean theorems with no axioms or placeholders. The 10-row result is
+an M7 source-fixture matrix only; it does not change frozen SCN-01..10 official
+conformance. M8 runtime, M9 extension semantics, M10 release conformance, final
+grammar/diagnostic ABI/wire, transport, and deployment remain deferred.
 
-**Direct acceptance / blocker:** M6's bounded grammar, AST, source spans, and
-classification matrix are fixed inputs. Implement exactly one source-first
-`parse → check → elaborate` route, generate inspectable Core/communication /
-authority/effect/failure obligations with source traceability, and reject every
-invalid M6 form without changing M6 semantics. M8 deterministic runtime is the
-direct consumer.
+**Direct consumer:** completed; M8 must consume this checked boundary without
+re-parsing or reaching around the M7 checker. M6 grammar, spans, classification,
+and M7's reference-only/non-public-contract boundary remain fixed inputs.
 
 ### M8 - Deterministic runtime
 
@@ -361,7 +367,10 @@ deterministic reference runtime を閉じる。
 **Evidence:** runtime traces、state/failure assertions、replay hashes、regression tests、
 model correspondence、independent review。
 
-**Direct blocker / consumer:** M7 C-static toolchain / M9 typed auth-verification extension。
+**Direct blocker / consumer:** M7 checked boundary is the fixed input; M9 typed
+auth-verification extension is the direct consumer. M8 must not use a parser /
+classifier bypass, hidden evaluator side table, transport-as-authority, or a
+final-public ABI/wire claim.
 
 ### M9 - Auth / verification
 
@@ -420,9 +429,9 @@ reproduction、final independent review。
 | M4 | semantics + formal/test writers | M3 calculus | relation/projection preservation and anti-collapse tests |
 | M5 | formalization writer | M3/M4 accepted rules | closed: shared-model coverage, exact finite OBL-040--047 Lean evidence, bounded/runtime correspondence, lifecycle mapping |
 | M6 | language/spec writer | M5 shared model | closed: grammar, AST/span, finite M5-aligned classification, OBL-048 evidence |
-| M7 | implementer + test/formal writers | M6 Surface | active: C-static 10/10 and source/Core correspondence without changing M6 meaning |
-| M8 | implementer + test/formal writers | M7 Core output | C-runtime 10/10, deterministic replay, safety regressions |
-| M9 | auth/security + test/formal writers | M8 runtime | lineage/validation/redaction negative evidence |
+| M7 | implementer + test/formal writers | M6 Surface | closed: source-first finite check/elaboration, OBL-049 exact evidence, M7 fixture matrix; no official SCN conformance |
+| M8 | implementer + test/formal writers | M7 checked Core/obligation/residual output | active: deterministic replay, owner queue, relation/evaluator, cut/save/patch, safety regressions |
+| M9 | auth/security + test/formal writers | M8 runtime | next: lineage/validation/redaction negative evidence |
 | M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | fresh full matrix and clean-clone closeout |
 
 同一変更の writer はその milestone の independent reviewer を兼ねない。production Rust は
@@ -486,7 +495,8 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M7 の source-first checker/elaborator を開始する。M6 の grammar、AST/span、name-resolution、
-Core-template/Diagnostic classification を固定入力として、`parse → check → elaborate` を
-実装する。M7 report、independent review、focused validation、commit/push/remote parity が
-閉じるまで M8 は開始しない。
+M8 の deterministic single-process multi-locus runtime を開始する。M7 checked output を唯一の
+入力とし、owner queue/request-serve/same-owner RMW、maintained relation と designated result
+store、capability/witness validation、occurrence/dependency trace、local cut/save-load、bounded patch、
+observer-safe export を同じ runtime state で実装する。M8 report、independent review、focused
+validation、commit/push/remote parity が閉じるまで M9 は開始しない。

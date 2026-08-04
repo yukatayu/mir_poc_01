@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-04 16:50 JST
+最終更新: 2026-08-04 18:56 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/`
@@ -29,11 +29,11 @@ classification、independent review、validation、commit/push/parity を閉じ�
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M7 checker/elaborator**。次は M8 deterministic runtime | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| active frontier | **M8 deterministic runtime**。次は M9 auth/verification | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
 | official lifecycle | `T1`。v3 `pass` digest acceptance により G0-D3/G0 exit/T1 entry を順に受理。v1/v2 artifact は historical evidence のまま | `mirrorea_canon/plan/01-phases.md`, `mirrorea_canon/adr/ADR-0017.md` |
-| proof / scenarios | General OBL-001..028 は `intentionally-deferred`; finite M3 OBL-029..032 は `lean-proved`、033 は `model-checked-bounded`、034 は `runtime-monitored`; finite M4 OBL-035..039、M5 OBL-040..047、M6 OBL-048 は `lean-proved` の exact scope のみ。SCN-01..10 official status は不変、SCN-11/12 は milestone pressure scenario | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0--M6 close/non-effect | M6 は bounded declaration/action grammar、span-rich AST、M5-aligned Core-template/typed Diagnostic classification を、3 AST parser tests、11 classifier tests、trusted OBL-048 Lean evidenceで閉じた。M7 checker/elaborator、M8 runtime、final public grammar/diagnostic ABI/wire、general theorem、transport、official conformance、I1、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md`, `docs/reports/2583-mir-theory-v0-i1plus-milestone-2-t0-g0-semantic-assertions.md`, `docs/reports/2584-mir-theory-v0-i1plus-milestone-3-evaluation-materialization.md`, `docs/reports/2585-mir-theory-v0-i1plus-milestone-4-maintained-relation-projection.md`, `docs/reports/2586-mir-theory-v0-i1plus-milestone-5-shared-model-metatheory.md`, `docs/reports/2587-mir-theory-v0-i1plus-milestone-6-surface-v0.md` |
+| proof / scenarios | General OBL-001..028 は `intentionally-deferred`; finite M3 OBL-029..032 は `lean-proved`、033 は `model-checked-bounded`、034 は `runtime-monitored`; finite M4 OBL-035..039、M5 OBL-040..047、M6 OBL-048、M7 OBL-049 は `lean-proved` の exact scope のみ。SCN-01..10 official status は不変、SCN-11/12 は milestone pressure scenario | `mirrorea_canon/theory/11-metatheory-ledger.md` |
+| M0--M7 close/non-effect | M7 は one ordinary `.mir` source-first routeを、M6 full classification retention、finite check、typed Core/effects/obligations/residuals/source mapへ接続し、8 AST tests、11 classifier tests、22 M7 tests、trusted OBL-049 Lean evidenceで閉じた。10-rowはM7 fixture matrixでありSCN official conformanceではない。M8 runtime、M9 extension、M10 conformance、final public ABI/wire、transport、I1、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md`, `docs/reports/2583-mir-theory-v0-i1plus-milestone-2-t0-g0-semantic-assertions.md`, `docs/reports/2584-mir-theory-v0-i1plus-milestone-3-evaluation-materialization.md`, `docs/reports/2585-mir-theory-v0-i1plus-milestone-4-maintained-relation-projection.md`, `docs/reports/2586-mir-theory-v0-i1plus-milestone-5-shared-model-metatheory.md`, `docs/reports/2587-mir-theory-v0-i1plus-milestone-6-surface-v0.md`, `docs/reports/2588-mir-theory-v0-i1plus-milestone-7-checker-elaborator.md` |
 
 M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
 review、one report、commit/push/remote parity で閉じた。M1 は concise Constitution の Canon
@@ -43,22 +43,26 @@ entry を受理した。M3 は ADR-0018/theory/13 の有限 calculusを、Lean�
 enumeration・focused Rust traces・independent reviewで閉じた。M4 は ADR-0019/theory/14/SCN-12 の
 有限 relation calculusを閉じた。M5 は ADR-0020/theory/15 の non-opaque finite shared modelを閉じた。
 M6 は ADR-0021/spec/01--04 の ordinary Surface grammar、span-rich AST、total M5-aligned
-classificationを、3 AST parser tests、11 classifier tests、OBL-048 `--trust=0` Lean、independent
-final reviewで閉じた。M7 は M6 の syntax/span/Core-template meaningを変更せず、source-first
-checker/elaboratorを作る唯一の active milestoneである。
+classificationを閉じた。M7 は M6 syntax/span/Core-template meaningを変えず、ordinary `.mir`
+から M6 classification、finite check、typed Core/effects/obligations/residuals/source mapまでを
+接続した。一つのrouteは22 M7 tests、full `mir-ast` / `mir-semantics` suites、format/clippy、16
+trusted OBL-049 Lean theoremsで検査した。M8 はこの checked boundary を唯一の入力として
+deterministic runtimeを実装する。M7の10-row fixture matrixは frozen SCN-01..10 conformanceを
+変更しない。
 
 ## 現在の停止線
 
-- M7 は M6 grammar、AST/source span、total classificationを固定入力として、唯一の
-  `parse → check → elaborate` route と inspectable generated Core/obligation/source traceを作る。
-  M8 runtime、final public grammar/diagnostic ABI/wire は開始・固定しない。
+- M8 は M7 checked Core/effect/failure/authority/visibility/relation-lifetime/evaluation obligation、
+  residual、source mapを唯一の入力として、deterministic single-process multi-locus runtimeを作る。
+  parser/classifier bypass、hidden evaluator side table、transport-as-authority、final public ABI/wire
+  の固定はしない。
   `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
 - final public contract、production deployment、guarantee weakening、domain vocabularyのCore化
   は ADR-0015 owner-reserved condition である。`mirrorea_canon/adr/ADR-0015.md`
 
 ## オーナーの確認・判断待ち
 
-現在の M7 を止める owner decision はない。以下だけが escalation 条件であり、通常の
+現在の M8 を止める owner decision はない。以下だけが escalation 条件であり、通常の
 grammar、internal carrier、proof decomposition、test、bounded model、roadmap wording は
 milestone 内で evidence-gated に決める。
 
