@@ -11,7 +11,7 @@ open_items: []
 
 ## 章構成と読み順
 
-00 見取り図(意味層と 4 グラフ) → 01 MirCore v0(構文・統合判定・操作意味論) → 02 型・効果・失敗 → 03 elaboration(THM-001) → 13 評価/materialization → 04 順序と cut → 05 権限 → 06 存在と fallback → 07 観測 → 08 patch → 09 二層時間 → 14 maintained relation / late projection → 15 shared formal model → 16 M7 checked elaboration → 17 M8 deterministic runtime → 10 診断 → 11 定理・義務台帳 → 12 文献。
+00 見取り図(意味層と 4 グラフ) → 01 MirCore v0(構文・統合判定・操作意味論) → 02 型・効果・失敗 → 03 elaboration(THM-001) → 13 評価/materialization → 04 順序と cut → 05 権限 → 06 存在と fallback → 07 観測 → 08 patch → 09 二層時間 → 14 maintained relation / late projection → 15 shared formal model → 16 M7 checked elaboration → 17 M8 deterministic runtime → 18 M9 auth/verification → 10 診断 → 11 定理・義務台帳 → 12 文献。
 
 各章は英語の formal style で書く(LAB specs/39-43 の先例に従う)。散文の直感は mental-model/ が担う。
 

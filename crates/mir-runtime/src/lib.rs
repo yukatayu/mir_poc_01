@@ -33,6 +33,7 @@ pub mod m8_runtime_observer;
 pub mod m8_runtime_owner_queue;
 pub mod m8_runtime_patch;
 pub mod m8_runtime_relation_projection;
+pub mod m9_auth_verification;
 pub mod posegraph_runtime;
 pub mod practical_alpha05_host_io;
 pub mod practical_alpha05_session;

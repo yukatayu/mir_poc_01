@@ -381,6 +381,148 @@ impl M8Runtime {
     }
 }
 
+/// Lossless, crate-private M8 plan view retained by the M9 outer judgment.
+///
+/// This is deliberately neither `M8RuntimeInstance` nor an M8 admission
+/// result.  It retains the checked artifact, source-bound M8 evidence, ordered
+/// lowering, and exact M9 residual descriptors so that a fully resolved M9
+/// carrier can later cross the private M8 execution seam without reparsing
+/// source, reconstructing Core, or making M8 direct admission succeed.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8DeferredM9Base {
+    program_identity: CheckedProgramIdentity,
+    checked_surface: CheckedSurfaceV0,
+    admission: M8RuntimeAdmission,
+    ordered_lowering: OrderedRuntimeLowering,
+    deferred_residuals: Vec<M8DeferredM9Residual>,
+}
+
+impl M8DeferredM9Base {
+    pub(crate) fn program_identity(&self) -> &CheckedProgramIdentity {
+        &self.program_identity
+    }
+
+    pub(crate) fn deferred_residuals(&self) -> &[M8DeferredM9Residual] {
+        &self.deferred_residuals
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8DeferredM9Residual {
+    kind: ResidualObligationKind,
+    name: String,
+    source_ref: SourceRef,
+}
+
+impl M8DeferredM9Residual {
+    pub(crate) const fn kind(&self) -> ResidualObligationKind {
+        self.kind
+    }
+
+    pub(crate) fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub(crate) fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+/// Validate only M8-owned residual evidence before an outer M9 judgment.
+///
+/// M8 direct admission intentionally keeps its earlier `DeferredToM9`
+/// outcome.  This helper is the sole crate-private seam that lets M9 prove
+/// that all non-M9 M8 evidence is complete while retaining the M7 residual
+/// row unchanged.
+pub(crate) fn prepare_deferred_m9_base(
+    checked: &CheckedSurfaceV0,
+    admission: &M8RuntimeAdmission,
+) -> Result<M8DeferredM9Base, M8AdmissionDiagnostics> {
+    if admission.program_identity() != checked.program_identity() {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(checked),
+        ));
+    }
+
+    for residual in checked.residual_obligations().entries() {
+        if matches!(
+            residual.kind(),
+            ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred
+        ) {
+            continue;
+        }
+        let evidence: Vec<&M8AdmissionEvidence> = admission
+            .evidence()
+            .iter()
+            .filter(|evidence| {
+                evidence.residual_kind() == residual.kind()
+                    && evidence.residual_name() == residual.name()
+            })
+            .collect();
+        let Some(first) = evidence.first() else {
+            return Err(M8AdmissionDiagnostics::one(
+                M8AdmissionDiagnostic::for_residual(
+                    M8AdmissionDiagnosticKind::MissingResidualEvidence,
+                    residual,
+                ),
+            ));
+        };
+        if evidence
+            .iter()
+            .any(|evidence| evidence.source_ref() != residual.source_ref())
+        {
+            return Err(M8AdmissionDiagnostics::one(
+                M8AdmissionDiagnostic::source_ref_mismatch(residual),
+            ));
+        }
+        if evidence.len() > 1 {
+            let diagnostic_kind = if evidence.iter().all(|evidence| *evidence == *first) {
+                M8AdmissionDiagnosticKind::DuplicateResidualEvidence
+            } else {
+                M8AdmissionDiagnosticKind::ConflictingResidualEvidence
+            };
+            return Err(M8AdmissionDiagnostics::one(
+                M8AdmissionDiagnostic::for_residual(diagnostic_kind, residual),
+            ));
+        }
+    }
+
+    if let Some(diagnostic) = relation_payload_diagnostic(checked, admission) {
+        return Err(M8AdmissionDiagnostics::one(diagnostic));
+    }
+
+    Ok(M8DeferredM9Base {
+        program_identity: checked.program_identity().clone(),
+        checked_surface: checked.clone(),
+        admission: admission.clone(),
+        ordered_lowering: OrderedRuntimeLowering::from_checked(checked),
+        deferred_residuals: checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .filter(|residual| {
+                matches!(
+                    residual.kind(),
+                    ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred
+                )
+            })
+            .map(|residual| M8DeferredM9Residual {
+                kind: residual.kind(),
+                name: residual.name().to_string(),
+                source_ref: residual.source_ref().clone(),
+            })
+            .collect(),
+    })
+}
+
+/// Cross the M8 plan seam only after the outer M9 judgment has resolved its
+/// retained residuals.  This is crate-private so neither direct M8 admission
+/// nor the prepared M9 base can be mistaken for a public runtime success.
+#[allow(dead_code)] // Reserved crate-private M10 seam; no public M8 success route exists.
+pub(crate) fn materialize_m9_resolved_base(base: M8DeferredM9Base) -> M8RuntimeInstance {
+    M8RuntimeInstance::from_admitted(base.checked_surface, base.admission)
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum RuntimeLoweringKind {
     OwnerRequest,

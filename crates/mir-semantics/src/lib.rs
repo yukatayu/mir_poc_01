@@ -16,6 +16,8 @@ pub mod computational_core;
 pub mod evaluation_materialization;
 pub mod full_system_v1;
 mod harness;
+pub mod m9_finite_refinement;
+pub mod m9_model_check_auth;
 pub mod maintained_relation;
 pub mod shared_model;
 pub mod surface_indexed_state;

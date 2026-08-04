@@ -36,3 +36,4 @@ open_items: []
 | ADR-0021 | M6 bounded ordinary Surface と M5 fragment への分類を採用 | L1 |
 | ADR-0022 | M6 fixed input の finite checked elaboration と typed residual obligation を採用 | L1 |
 | ADR-0023 | M7 checked artifactからM8 runtimeへのfinite admission・lowering・state boundaryを採用 | L1 |
+| ADR-0024 | M8 deferred residualのsource-bound M9 auth/verification seamを採用 | L1 |

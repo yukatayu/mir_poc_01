@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 23:26 JST
+最終更新: 2026-08-05 01:59 JST
 
 ## 役割と authority
 
@@ -19,14 +19,15 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M8 deterministic runtime**
-- active milestone: **M9 auth/verification**
-- next milestone: **M10 conformance/closeout**
+- completed milestone: **M9 auth/verification**
+- active milestone: **M10 conformance/closeout**
+- next milestone: **none inside the owner-approved M0--M10 program**
 - active frontier limit: 一つの milestone
-- current direct blocker: M8 runtime contract を固定入力として、MembershipAuth、CapabilityAuth、
-  non-transparent `ContractUpdate`、attach/remove/revocation、finite refinement/model/Lean obligation、
-  evidence provenance / invalidation を typed extension として実装・検証すること
-- direct consumer: M10 conformance/closeout
+- current direct blocker: 同じ ordinary `.mir` source から parse / check / elaborate / M8 / M9 /
+  trace / projection までを再実行する fresh release profile、SCN-01..10 の C-static / C-runtime
+  waiverなし10/10、fresh checkout reproduction、proof/diagnostic/status correspondence、独立 reviewを
+  一つのM10 closeoutへ揃えること
+- direct consumer: M0--M10 program closeout; post-program direction is owner-defined
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -382,7 +383,7 @@ socket/production、general proofは主張しない。
 must not alter Core/runtime semantics, manufacture authority, erase failures, or
 use a transport/session/locus as authority.
 
-### M9 - Auth / verification
+### M9 - Auth / verification (completed 2026-08-05)
 
 **Intended outcome:** deterministic reference system に typed authority / authentication /
 verification extensions を加え、transport と観測から分離して検証する。
@@ -402,13 +403,22 @@ verification extensions を加え、transport と観測から分離して検証�
 **Evidence:** auth/verification tests、formal statements、bounded models、runtime traces、
 security-focused independent review。
 
-**Direct blocker / consumer:** M8 runtime contract is the fixed input; M10
-conformance/closeout is the direct consumer. M9 must provide MembershipAuth and
-CapabilityAuth, one non-transparent `ContractUpdate`, attach/remove/revocation,
-one finite refinement/model/Lean obligation, evidence provenance, and dependent
-artifact invalidation without redefining M8 base semantics.
+**Close evidence:** exact source-bound outer resolution preserves M7/M8 identity,
+source map, and deferred rows while direct M8 admission remains `DeferredToM9`.
+MembershipAuth / CapabilityAuth, one non-transparent `ContractUpdate`, attach/remove/
+revocation, provenance/invalidation, and observer-safe projection are exercised by 29 focused
+M9 tests (11 crate-private runtime, 1 external boundary, 8 finite refinement, 9 bounded model).
+The full workspace and both changed crates pass; changed-crate all-target clippy and formatting
+pass. OBL-026 is exact finite `lean-proved` with five axiom-free `--trust=0` theorems;
+OBL-028 is exact `model-checked-bounded` for the one-subject/one-capability reachable-state
+graph at bound 4 only. Independent review findings are closed. This does not claim a general
+authority/revocation/noninterference theorem, official SCN conformance, public ABI/wire,
+transport, production, or final grammar.
 
-### M10 - Conformance / closeout
+**Direct consumer:** completed; M10 consumes the M1--M9 accepted cuts without
+reinterpreting their bounded evidence classes.
+
+### M10 - Conformance / closeout (active 2026-08-05)
 
 **Intended outcome:** Mir Theory v0 + Mir I1+ deterministic reference system の evidence、
 claims、non-claims、reproduction route を一つの closeout cut に固定する。
@@ -430,7 +440,13 @@ claims、non-claims、reproduction route を一つの closeout cut に固定す�
 **Evidence:** full focused validation matrix、fresh conformance artifacts、proof audit、clean-clone
 reproduction、final independent review。
 
-**Direct blocker / consumer:** M9 acceptance / owner-defined post-program direction。
+**Direct blocker / consumer:** M9 acceptance is complete. The active blocker is
+fresh same-source release conformance: one ordinary `.mir` input must actually
+drive parse / check / elaborate / M8 / M9 / trace / projection, then establish
+C-static and C-runtime SCN-01..10 waiverなし10/10, fresh-checkout reproduction,
+and independent adversarial review. No M10 pass is implied before that evidence.
+There is no next semantic consumer inside the owner-approved program; a
+post-program direction is owner-reserved.
 
 ## Milestone dependency / ownership summary
 
@@ -445,8 +461,8 @@ reproduction、final independent review。
 | M6 | language/spec writer | M5 shared model | closed: grammar, AST/span, finite M5-aligned classification, OBL-048 evidence |
 | M7 | implementer + test/formal writers | M6 Surface | closed: source-first finite check/elaboration, OBL-049 exact evidence, M7 fixture matrix; no official SCN conformance |
 | M8 | implementer + test/formal writers | M7 checked Core/obligation/residual output | closed: finite checked-artifact runtime, OBL-050--056 exact Lean evidence, bounded runtime fixture matrix; no official SCN conformance |
-| M9 | auth/security + test/formal writers | M8 runtime contract | active: typed auth/verification, ContractUpdate, revocation, refinement evidence/invalidation |
-| M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | fresh full matrix and clean-clone closeout |
+| M9 | auth/security + test/formal writers | M8 runtime contract | closed: source-bound M9 resolution, typed ContractUpdate/revocation/invalidation, OBL-026 exact Lean and OBL-028 exact bounded-model evidence; no M10 conformance |
+| M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | active: fresh same-source full matrix, C-static/C-runtime SCN-01..10 10/10, fresh checkout, and closeout review |
 
 同一変更の writer はその milestone の independent reviewer を兼ねない。production Rust は
 原則一 writer、test / planner / review は別 ownership とする。
@@ -509,7 +525,8 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M9 の typed auth/verification extension を開始する。M8 runtime contractを固定入力として、
-MembershipAuth、CapabilityAuth、non-transparent `ContractUpdate`、attach/remove/revocation、finite
-refinement/model/Lean obligation、evidence provenance/invalidationを実装・検証する。M9 report、
-independent review、focused validation、commit/push/remote parityが閉じるまでM10は開始しない。
+M10 の fresh release conformance/closeout を開始する。同じ ordinary `.mir` sourceから
+parse / check / elaborate / M8 / M9 / trace / projectionを実行し、C-static / C-runtime
+SCN-01..10 waiverなし10/10、fresh checkout reproduction、proof/diagnostic/status correspondence、
+independent reviewを一つのrelease profileで検証する。成功をwrapper/report/expected JSONから
+組み立てず、M10 report、validation、commit/push/remote parityが閉じるまでprogram completionは主張しない。

@@ -18,15 +18,17 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
-formal model / metatheory、M6 Surface、M7 checker/elaborator、M8 deterministic runtime は閉じた。
-現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M9 auth/verification** であり、
-次は M10 conformance/closeout である。M8 は M7 checked artifactを唯一のsource-program inputとする
-finite single-process runtimeを閉じ、53 focused tests、full `mir-runtime` / `mir-semantics` all-targets、
-format/clippy、`--trust=0` の28 axiom-free theorem checks、Canon index 163、hierarchy 798/798、
-docs validationを記録した。OBL-050--056は exact finite `lean-proved`、OBL-057はbounded validation
-correspondenceの`runtime-monitored`である。M8 fixture matrixはSCN-01..10 official
-conformanceではない。M9 extension、M10 conformance、final public grammar/diagnostic ABI/wire、socket、
-production、general theorem、I1をこのcloseは主張しない。M2 は
+formal model / metatheory、M6 Surface、M7 checker/elaborator、M8 deterministic runtime、M9
+auth/verification は閉じた。現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の
+**M10 conformance/closeout** である。M9 はM8 direct admissionを`DeferredToM9`のまま保持した
+source-bound outer resolution、MembershipAuth / CapabilityAuth、non-transparent `ContractUpdate`、
+attach/remove/revocation、provenance/invalidationを有限reference scopeで閉じた。29 focused tests、
+workspace tests、changed-crate all-target clippy、format、five axiom-free `--trust=0` Lean theorems、
+Canon index 167、hierarchy 798/798、docs validationがevidenceである。OBL-026は exact finite
+`lean-proved`、OBL-028は one-subject/one-capability bound-4 modelの exact
+`model-checked-bounded`である。これはofficial SCN-01..10 conformance、final public grammar/
+diagnostic ABI/wire、socket、production、general theorem、I1 completionを主張しない。M10 は同じ
+ordinary `.mir` sourceからfreshにrelease conformanceを実行する。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、

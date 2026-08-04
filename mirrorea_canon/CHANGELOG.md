@@ -18,6 +18,17 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-05** accepted Rust correction と independent finite-only review により、
+  OBL-028 を `model-checked-bounded` に更新した。evidence は
+  `crates/mir-semantics/src/m9_model_check_auth.rs` と
+  `crates/mir-semantics/tests/m9_model_check_auth.rs` の one-subject /
+  one-capability、bound 4、`admit` / `grant` / `revoke` / `use` /
+  `reacquire` の reachable-state graph に限る。input-sensitive
+  revocation/use/rejected-use/reacquire、monotone revocation、
+  rejected-use-no-M8-mutation、concrete fault counterexample を記録するが、
+  general proof、action-sequence enumeration、authorization composition は主張しない。
+- **2026-08-04** PROPOSAL-027 と ADR-0024 により、M8の`AuthDeferred` /
+  `VerifyDeferred`を保持したM7/M8 identity/source-mapから外部M9 resolutionへ渡す有限 seamを採用した。MembershipAuth / CapabilityAuthはnon-transparent ContractUpdateのpolicy lane、`finite_refinement`はEvidence / Diagnostic / Residualだけを返す verifier laneであり、evidenceはgrantではない。OBL-026はexact SourceRef/identity/deferred-row resolution、M8-only deferral、verifier non-authority、二つのtransparent overlayの`ContractRef` equalityだけを記録する。OBL-028はinput-sensitive model/Rust behaviorを主張せず、accepted Rust correctionとaccepted bounded evidenceまでintentionally-deferredである。M10/SCN、general theorem、transport、public ABI/wireは主張しない。
 - **2026-08-04** PROPOSAL-026 と ADR-0023 により、M7 immutable checked artifact
   だけをsource-program inputとする有限 M8 runtime admission を採用した。checked
   identity は static environment、evaluation/Core、effect/obligation、stable source
