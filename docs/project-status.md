@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-04 09:48 JST
+最終更新: 2026-08-04 10:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/`
@@ -29,23 +29,21 @@ classification、independent review、validation、commit/push/parity を閉じ�
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M2 semantic-assertion T0/G0 closeout**。次は M3 evaluation/materialization calculus | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| active frontier | **M3 evaluation/materialization calculus**。次は M4 maintained relation/late projection | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
-| official lifecycle | `T0`。v2 artifact は valid `fail`、G0-D3/G0 exit/T1 entry は未成立 | `mirrorea_canon/plan/01-phases.md` |
+| official lifecycle | `T1`。v3 `pass` digest acceptance により G0-D3/G0 exit/T1 entry を順に受理。v1/v2 artifact は historical evidence のまま | `mirrorea_canon/plan/01-phases.md`, `mirrorea_canon/adr/ADR-0017.md` |
 | proof / scenarios | OBL-001..028 は `open`、SCN-01..10 の official status は不変 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0/M1 close/non-effect | M0 bootstrap と M1 Constitution は push 済み。M1 payload `aa0771ec` は `mirrorea_canon/DESIGN-CONSTITUTION.md` と ADR-0016 を採用し、SCN-02 RMW と fallback の prose conflict を修正したが、T0/G0/T1、OBL、official conformance、runtime、public API/ABI/wire、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md` |
+| M0--M2 close/non-effect | M0 bootstrap と M1 Constitution は push 済み。M2 は v3 pass digestによる G0-D3/G0 exit/T1 entryだけを動かし、OBL、official conformance、runtime、I1、public API/ABI/wire、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md`, `docs/reports/2583-mir-theory-v0-i1plus-milestone-2-t0-g0-semantic-assertions.md` |
 
 M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
 review、one report、commit/push/remote parity で閉じた。M1 は concise Constitution の Canon
-placement と contradiction audit を同じ discipline で閉じた。M2 の direct blocker は、その
-stable clauses を subject とする deterministic semantic-assertion producer、fresh evaluation、
-negative control、acceptance record であり、direct consumer は M3 の calculus である。
+placement と contradiction audit を同じ discipline で閉じた。M2 は revision-bound semantic
+assertion producer、fresh `pass` artifact、negative control、acceptance record を閉じ、T1
+entry を受理した。M3 の direct blocker は、その accepted Constitution/T1 vocabulary に
+基づく evaluation/materialization calculus であり、direct consumer は M4 relation calculus である。
 
 ## 現在の停止線
 
-- M2 は fresh semantic assertion と acceptance record を閉じるまで、G0 exit/T1 entryを
-  先取りしない。
-  `mirrorea_canon/adr/ADR-0013.md`
 - M3 は evaluation site/trigger/authority/materialization と same-owner RMW を閉じるまで、
   cross-owner snapshot/transactionを仮定しない。`mirrorea_canon/plan/02-operating-model.md`
 - M4 は bird/shoulder relation を C-local evaluationへ遅延し、split frame、stale anchor、
@@ -56,7 +54,7 @@ negative control、acceptance record であり、direct consumer は M3 の calc
 
 ## オーナーの確認・判断待ち
 
-現在の M1 を止める owner decision はない。以下だけが escalation 条件であり、通常の
+現在の M3 を止める owner decision はない。以下だけが escalation 条件であり、通常の
 grammar、internal carrier、proof decomposition、test、bounded model、roadmap wording は
 milestone 内で evidence-gated に決める。
 

@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 09:48 JST
+最終更新: 2026-08-04 10:36 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- active milestone: **M2 semantic-assertion T0/G0 closeout**
-- next milestone: **M3 evaluation/materialization calculus**
+- completed milestone: **M2 semantic-assertion T0/G0 closeout**
+- active milestone: **M3 evaluation/materialization calculus**
+- next milestone: **M4 maintained relation/late projection**
 - active frontier limit: 一つの milestone
-- current direct blocker: M1 Constitution に対する deterministic semantic-assertion
-  producer、fresh evaluation、negative control、acceptance record を一つの M2 evidence
-  unit として閉じること
-- direct consumer: M3 evaluation/materialization calculus が読む official T1 entry と
-  semantic-assertion acceptance vocabulary
+- current direct blocker: M3 の shared evaluation/materialization calculus を、M1
+  Constitution と accepted T1 entry に沿って定義し、same-owner RMW と cross-owner
+  diagnostic の positive/negative evidence を閉じること
+- direct consumer: M4 maintained relation/late projection semantics
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -153,7 +153,7 @@ push した。
 
 **Direct blocker / consumer:** M0 accepted governance cut / M2 T0/G0 closeout。
 
-### M2 - Semantic-assertion T0/G0 closeout
+### M2 - Semantic-assertion T0/G0 closeout (completed 2026-08-04)
 
 **Intended outcome:** M1 Constitution に対して意味のある T0/G0 assertion とその evidence
 binding を定義・評価・受理し、公式 T0/G0 を一度だけ閉じる。
@@ -170,10 +170,14 @@ binding を定義・評価・受理し、公式 T0/G0 を一度だけ閉じる�
   `plan/01-phases` と derived status を同期する。
 - SCN conformance / proof / I1 authorization でないことを artifact と report に保持する。
 
-**Evidence:** M1 Constitution、ADR-0013 と retained T0 artifacts、Git-blob / canonicalization /
-digest checks、negative control、independent review。
+**Evidence:** `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md`、ADR-0017、
+`plan/248-t0-g0-semantic-assertion-v3-evaluation.json` の Git-blob / canonicalization /
+digest checks、negative controls、independent review。revision
+`644ec1cdfa7d69600af3463ab60a6b7d745913c8` の reproduced `pass` digest
+`b32bd2c87e1dc77ca2a4f7a7426cda0bff8bcbf80155d19addd7db3a8288aa23` を受理し、
+G0-D3 → G0 exit → T1 entry を適用した。v1/v2 は historical evidence のままである。
 
-**Direct blocker / consumer:** accepted Constitution / M3 evaluation-materialization calculus。
+**Direct blocker / consumer:** completed; the direct consumer is M3 evaluation-materialization calculus。
 
 ### M3 - Evaluation / materialization
 
@@ -440,8 +444,8 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M0 の shared cut を統合し、まず agent-config validation と `make docs` を fresh に実行する。
-その後、同じ変更を書いていない independent reviewer が start revision、current blocker、
-owner boundary、Plan 247 sole-queue claim、M0 non-effects を照合する。M0 report、commit、push、
-remote parity が閉じたら Plan 247 の active milestone を M1、next を M2 へ進め、Constitution
-の exact Canon deliverable を着手する。
+M3 の evaluation/materialization calculus を、M1 Constitution と accepted T1 entry から
+定義する。まず evaluation site、trigger/clock、authority origin、materialization を直交する
+shared judgment に置き、same-owner RMW の `100 → 90 → 80` positive case と cross-owner
+hidden transaction rejection を同じ reference evidence で閉じる。M3 report、independent
+review、focused validation、commit/push/remote parity が閉じるまで M4 は開始しない。

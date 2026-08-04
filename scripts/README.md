@@ -17,7 +17,9 @@
   scripts/evaluate_t0_semantic_assertions.py --revision <commit>` は指定 Git
   commit の blob だけを読み、six assertion rows と profile-local digest を JSON に
   出力する。mutable reader-facing document の whole-file hash を control にせず、
-  output は `plan/248` の fresh LAB evidence としてのみ使う。
+  output は `plan/248` の fresh LAB evidence としてのみ使う。`--validate-artifact
+  plan/248-t0-g0-semantic-assertion-v3-evaluation.json` は digest、source binding、
+  declared Git revision の producer blob を実行した canonical bytes の再生成一致を検証する。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`

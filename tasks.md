@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-04 09:48 JST
+最終更新: 2026-08-04 10:36 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,8 +20,8 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M2 semantic-assertion T0/G0 closeout. Next: M3 evaluation/materialization
-calculus.** 根拠は
+**Active: M3 evaluation/materialization calculus. Next: M4 maintained relation/late
+projection.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
@@ -30,13 +30,14 @@ M0 は start revision `b9dcaa054c548112a7977776723418559b8ba8b2` から bootstra
 payload `be5928a168fd519c05867fba2746ddd833a3bde5` を push して閉じた。M1 は
 `root/design-constitution` と ADR-0016 を採用し、SCN-02 owner-side RMW と
 semantic/presentation fallback を整合させ、independent review と one correction cycle を
-pass した。official lifecycle は `T0` のままである。現在の direct blocker は M2 の
-deterministic semantic-assertion producer、fresh evaluation、negative control、acceptance
-record であり、direct consumer は M3 calculus である。
+pass した。M2 は revision-bound semantic-assertion v3 の reproduced `pass` digestを受理し、
+G0-D3、G0 exit、T1 entry を順に適用した。official lifecycle は `T1` であり、v1/v2 は
+historical evidence のままである。現在の direct blocker は M3 の evaluation site、trigger、
+authority origin、materialization の deterministic calculus であり、direct consumer は M4
+relation/projection semantics である。
 
-M0 では official lifecycle は `T0`、v2 artifact は valid `fail`、G0-D3 / G0 exit /
-T1 entry は未成立、OBL-001..028 はすべて `open`、SCN-01..10 と conformance claim は
-unchanged である。semantic / proof / runtime package は開始しない。
+M2 close 時点で official lifecycle は `T1`。これにより I1 は開始しない。OBL-001..028 は
+すべて `open`、SCN-01..10 と conformance claim、runtime implementation は unchanged である。
 
 ## ordered self-driven packages
 
@@ -48,8 +49,8 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | --- | --- | --- | --- |
 | M0-A--C | Canon / agent / governance bootstrap | closed; ADR-0015 cut、role contract、Plan 247、review/validation/push evidence in Report 2581 | Macro 0; complete |
 | M1 | Constitution | closed; payload `aa0771ec` pushed with review/validation evidence in `root/design-constitution`、ADR-0016、Report 2582 | Macro 1; complete |
-| M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; active; medium |
-| M3 | evaluation / materialization | `A/R/O`; owner/designated/consumer/provider evaluation、deterministic inference、same-owner RMW、cross-owner Diagnostic/result path | Macro 1/5; after M2; heavy |
+| M2 | semantic-assertion T0/G0 closeout | closed; `plan/248` reproduced pass, independent review, and ADR-0017 acceptance applied | Macro 0/1; complete |
+| M3 | evaluation / materialization | `A/R/O`; owner/designated/consumer/provider evaluation、deterministic inference、same-owner RMW、cross-owner Diagnostic/result path | Macro 1/5; active; heavy |
 | M4 | maintained relation / late projection | `A/R/O`; bird/shoulder relation DAG、C-local projection、coherence/fallback/reacquire/privacy/split-frame evidence | Macro 1/5/6; after M3; heavy |
 | M5 | shared formal model / metatheory | `A/R/O`; non-opaque common model、coverage、Lean/model evidence、T1/T2/I1-readiness mapping | Macro 1/5; after M4; heavy |
 | M6 | Surface | `A/R/O`; bounded Surface v0、total Core/Diagnostic mapping、SCN source matrix | Macro 1/3; after M5; heavy |
@@ -67,7 +68,7 @@ report、commit/push/parity が閉じるまで開始しない。
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
-| 1 semantic kernel | M1--M5 fixed sequence; Constitution accepted, M2 is current package | **着手可能**: semantic assertion profile |
+| 1 semantic kernel | M1--M5 fixed sequence; Constitution/T1 entry accepted, M3 is current package | **着手可能**: evaluation/materialization calculus |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
 | 3 compile-ready actualization | historical Surface/runtime evidence exists | **後段依存**: M5/M6 accepted model |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
@@ -87,7 +88,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M2 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M3 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items

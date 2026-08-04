@@ -22,4 +22,11 @@ open_items: []
 | G6 射影 | 意味保存射影・通信境界導出 | BND-006 の保存リスト確定、SCN-01/02 の射影期待の明文化 | 最適配置・最終 codegen/ABI |
 | G7 hot-plug | patch pipeline・frontier 束縛 | theory/08 が SCN-09 を説明、OBL-019 statement | 最終 hot-plug ABI・移行エンジン |
 
+## Current G0 status
+
+G0-D3, G0 exit, and T1 entry were accepted once by the M2 record in
+`plan/04-t0-g0-semantic-assertion-profile` and ADR-0017, using the reproduced
+v3 pass artifact `LAB:plan/248`. This is phase-governance acceptance only; no
+other gate or implementation/conformance/proof claim is implied.
+
 横断規則: どの Gate も、対応する SCN の期待を変えるなら ADR を要する。proof(OBL の discharge)は Gate exit の必須条件ではない(statement 化まで)が、PHASE-T2 の exit には主要 proof の骨格が要る(plan/01)。

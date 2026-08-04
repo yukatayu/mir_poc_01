@@ -280,16 +280,93 @@ def evaluate_revision(revision: str) -> dict[str, object]:
     return artifact
 
 
+def rendered_artifact(artifact: Mapping[str, object]) -> bytes:
+    """Return the sole checked-in presentation form for a profile artifact."""
+
+    return (json.dumps(artifact, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+
+
+def evaluate_with_declared_producer(revision: str) -> dict[str, object]:
+    """Run the producer blob declared by a source cut, not this checkout's code.
+
+    The in-memory launcher gives the historical blob the canonical script path
+    for its ``__file__``-relative repository lookup.  No temporary source file
+    is written into the repository.  This keeps a later validator change from
+    silently reinterpreting an older producer SHA as current evaluator logic.
+    """
+
+    source_revision = resolve_revision(revision)
+    producer_bytes = git_blob(
+        source_revision, "scripts/evaluate_t0_semantic_assertions.py"
+    )
+    declared_path = REPO_ROOT / "scripts" / "evaluate_t0_semantic_assertions.py"
+    launcher = (
+        "import sys\n"
+        f"__file__ = {str(declared_path)!r}\n"
+        "exec(compile(sys.stdin.buffer.read(), __file__, 'exec'))\n"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", launcher, "--revision", source_revision],
+        cwd=REPO_ROOT,
+        input=producer_bytes,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise ValueError(f"declared producer rejected source revision: {detail}")
+    try:
+        artifact = json.loads(completed.stdout.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError(f"declared producer JSON: {error}") from error
+    if not isinstance(artifact, dict):
+        raise ValueError("declared producer root")
+    validate_artifact(artifact)
+    return artifact
+
+
+def validate_stored_artifact(path: Path) -> None:
+    """Validate integrity, source binding, and exact declared-producer output."""
+
+    raw = path.read_bytes()
+    try:
+        artifact = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ValueError(f"artifact JSON: {error}") from error
+    if not isinstance(artifact, dict):
+        raise ValueError("artifact root")
+    validate_artifact(artifact)
+    profile = artifact.get("profile")
+    if not isinstance(profile, dict) or not isinstance(
+        profile.get("source_revision"), str
+    ):
+        raise ValueError("profile source revision")
+    reproduced = evaluate_with_declared_producer(profile["source_revision"])
+    if raw != rendered_artifact(reproduced):
+        raise ValueError("artifact reproduction mismatch")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--revision", required=True, help="Git commit to evaluate")
+    action = parser.add_mutually_exclusive_group(required=True)
+    action.add_argument("--revision", help="Git commit to evaluate")
+    action.add_argument(
+        "--validate-artifact",
+        metavar="PATH",
+        help="validate a checked-in artifact and reproduce its declared source cut",
+    )
     arguments = parser.parse_args(argv)
     try:
+        if arguments.validate_artifact:
+            validate_stored_artifact(Path(arguments.validate_artifact))
+            print("semantic assertion artifact validation passed")
+            return 0
+        assert arguments.revision is not None
         artifact = evaluate_revision(arguments.revision)
     except ValueError as error:
         print(f"semantic assertion evaluation rejected: {error}", file=sys.stderr)
         return 2
-    print(json.dumps(artifact, ensure_ascii=False, indent=2) + "\n", end="")
+    print(rendered_artifact(artifact).decode("utf-8"), end="")
     return 0
 
 

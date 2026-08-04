@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-04 09:48 JST
+最終更新: 2026-08-04 10:36 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -38,7 +38,7 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0 Bootstrap and M1 Constitution are evidence-complete; official lifecycle remains T0; M2 semantic-assertion closeout is next | **着手可能**: M2 producer/profile design |
+| Logical specification | M0--M2 are evidence-complete; official lifecycle is T1; M3 evaluation/materialization calculus is active | **着手可能**: deterministic policy/RMW calculus |
 | User-facing specification | No M0 syntax change. M6 owns Surface v0 after M5 shared model | **後段依存**: M1--M5 |
 | Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M1--M7 |
 
@@ -48,9 +48,10 @@ Sources: `mirrorea_canon/adr/ADR-0015.md`,
 
 M1 adopts `root/design-constitution` and ADR-0016, separating authority origin
 from evaluation site, semantic from presentation fallback, and a pre-M6 grammar
-candidate from final Surface. It corrects the SCN-02 owner-side RMW reading but
-does not change official lifecycle, ledger, conformance, or runtime state. The
-M2 direct consumer is its stable semantic-assertion vocabulary.
+candidate from final Surface. M2 then accepted the reproduced v3 semantic
+assertion `pass` digest through ADR-0017, moving only the lifecycle to T1. The
+M3 direct consumer is M4 relation/projection semantics; proof, conformance, and
+runtime state remain unchanged.
 
 ## milestone map
 
@@ -58,8 +59,8 @@ M2 direct consumer is its stable semantic-assertion vocabulary.
 | --- | --- | --- | --- |
 | M0 | governance, agent config, one roadmap | closed | Report 2581 / push parity |
 | M1 | concise Constitution | closed; payload `aa0771ec` pushed | `root/design-constitution`, ADR-0016, Report 2582 |
-| M2 | semantic-assertion T0/G0 closeout | active | deterministic producer / fresh evidence / negative control |
-| M3 | evaluation/materialization calculus | later | after M2 |
+| M2 | semantic-assertion T0/G0 closeout | closed; T1 entry accepted | `plan/248` reproduced pass / ADR-0017 |
+| M3 | evaluation/materialization calculus | active | owner/designated/consumer/provider calculus, RMW and cross-owner diagnostic |
 | M4 | maintained relation/late projection | later | after M3 |
 | M5 | shared model/metatheory | later | after M4 |
 | M6/M7 | Surface, checker/elaborator | later | after M5 |
@@ -132,7 +133,7 @@ completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | M0 closed | medium | maintenance only |
-| 1 | semantics/shared model | M1--M5; M2 is next active cut | heavy | yes |
+| 1 | semantics/shared model | M1--M5; M3 is active cut after accepted T1 entry | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
 | 3 | source/checker/runtime | M6--M8 | heavy | after shared model |
 | 4 | executable samples | historical evidence | medium | maintenance only |
@@ -167,3 +168,6 @@ completion is claimed.
   ADR-0016, corrected SCN-02 owner-side RMW and fallback prose conflicts, and
   passed independent review/one correction cycle; payload `aa0771ec` pushed
   with remote parity, so M2 is the sole active semantic milestone.
+- 2026-08-04 10:36 JST: M2 accepted the reproduced semantic-assertion v3 pass
+  digest in `plan/248`, then G0-D3, G0 exit, and T1 entry under ADR-0017;
+  v1/v2 remain historical evidence and M3 is now the sole active milestone.

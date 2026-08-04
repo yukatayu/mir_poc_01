@@ -10,7 +10,8 @@ open_items: [OPEN-032]
 # 01 — フェーズ計画
 
 **唯一の実装状態の正本。** 他のどのファイルの存在も実装を意味しない。現在位置:
-**T0**（M2 semantic-assertion profile v3 adoption 済み、acceptance 未適用）。
+**T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、G0 exit、T1 entry を
+ADR-0017 により受理済み）。
 
 ## 理論フェーズ
 
@@ -58,18 +59,19 @@ with the six revision-bound semantic assertions.
 
 ### Version-3 acceptance boundary
 
-Profile adoption does not exit G0. The first fresh artifact at
-`LAB:plan/248` must be regenerated from its declared source revision, have a
-valid digest and root `pass`, and survive negative controls. Only the exact
-acceptance amendment in `plan/04` and ADR-0017 may then apply, in order:
+The first fresh artifact at `LAB:plan/248` was regenerated from source revision
+`644ec1cdfa7d69600af3463ab60a6b7d745913c8`, has root `pass` and canonical
+digest `b32bd2c87e1dc77ca2a4f7a7426cda0bff8bcbf80155d19addd7db3a8288aa23`, and
+passed its negative controls and exact reproduction validation. The acceptance
+amendment in `plan/04` and ADR-0017 applied, in order:
 
 ```text
 v3 pass digest acceptance → G0-D3 acceptance → G0 exit → T1 entry
 ```
 
-The acceptance does not authorize I1 and does not claim SCN/C-static/C-runtime/
-C-distributed conformance, proof/OBL completion, runtime implementation, or a
-public contract.
+The resulting `T1` entry does not authorize I1 and does not claim
+SCN/C-static/C-runtime/C-distributed conformance, proof/OBL completion, runtime
+implementation, or a public contract.
 
 ## Universal phase-exit rule
 

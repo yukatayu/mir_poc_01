@@ -923,6 +923,14 @@ roadmap であり、Gate/Phase/OBL の正本は Canon のままである。
   `plan/246-goal-first-semantic-integration-and-i1-entry.md`
   (official T0/G0 governance and autonomous semantic integration are tracked
   as separate lanes; D0--D4 is a LAB working candidate, not a Canon change.)
+- Mir Theory v0 / I1+ sole current execution roadmap:
+  `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
+  (the only current LAB execution queue; historical numbered plans are memory,
+  not parallel work.)
+- T0/G0 semantic-assertion v3 fresh evaluation:
+  `plan/248-t0-g0-semantic-assertion-v3-evaluation.json`
+  (M2 LAB evidence; reproduced `pass` digest accepted by Canon ADR-0017 while
+  v1/v2 remain historical artifacts.)
 
 ## maintenance rule
 

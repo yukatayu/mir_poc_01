@@ -16,18 +16,20 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 「次」は current queue を意味しません。現在の一本道は Plan 247 と、その派生ビュー
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
-M0 Bootstrap と M1 Constitution は閉じた。現在は ADR-0015 の owner-approved Mir
-Theory v0 / I1+ program の **M2 semantic-assertion T0/G0 closeout** である。M1 は
-`root/design-constitution` と ADR-0016 に、ordinary Surface、evaluation/authority、
-relation/fallback、assurance の判断フィルタを置いた。official lifecycle は `T0` のままで、
-M2 の fresh acceptance record まで G0 exit/T1 entry、OBL、SCN/conformance、runtime
-実装を主張しない。
+M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout は閉じた。現在は
+ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M3
+evaluation/materialization calculus** である。M2 は
+`mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
+`644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
+G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、
+SCN/conformance、runtime 実装、I1 authorization はまだ主張しない。
 
 | 知りたいこと | 読む場所 |
 | --- | --- |
 | 前提知識なしで全体像を掴む | `docs/mirrorea-project-overview.html` |
 | 規範正本の構造 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
 | M1 の設計判断フィルタ | `mirrorea_canon/DESIGN-CONSTITUTION.md`, `mirrorea_canon/adr/ADR-0016.md` |
+| T0/G0 v3 acceptance | `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md`, `mirrorea_canon/adr/ADR-0017.md`, `plan/248-t0-g0-semantic-assertion-v3-evaluation.json` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 唯一の current execution roadmap | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
@@ -122,11 +124,12 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 
 ## Historical LAB orientation（current queueではない）
 
-- official lifecycle は `T0`。G0 exit と T1 entry はまだありません。
+- official lifecycle は `T1`。M2 の v3 pass digest acceptance により G0-D3、G0
+  exit、T1 entry が受理されたが、それ以外の Gate/Phase は未成立です。
 - OBL-001..028 は唯一の Canon ledger 上ですべて `open` です。
-- T0 profile v2 は adopted 済みです。v1 artifact は nonconforming historical
-  evidence として保持され、唯一の fresh v2 artifact は fixed-control drift により
-  `fail` です。G0-D3、G0 exit、T1 entry、I1 authorization は未成立です。
+- T0 profile v3 が current profile として M2 acceptance を閉じた。v1 artifact は
+  nonconforming historical evidence、v2 artifact は fixed-control drift の historical
+  `fail` として保持され、再解釈しない。I1 authorization は未成立である。
 - governance drift は official lifecycle の lane に限る。program meaning / SCN
   conformance の前提ではないため、goal-first integration は `plan/246-goal-first-semantic-integration-and-i1-entry.md` に従い
   並行して進めています。S2-A は C1-A-r/C1-B と C2-A-r/defer の比較を完了しました。

@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import unittest
 from copy import deepcopy
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -86,6 +88,30 @@ class T0SemanticAssertionTests(unittest.TestCase):
         tampered["assertions"][0]["result"] = "fail"
         with self.assertRaisesRegex(ValueError, "artifact digest"):
             producer.validate_artifact(tampered)
+
+    def test_stored_artifact_validation_rejects_nonreproduced_bytes(self) -> None:
+        producer = load_producer()
+        artifact = producer.evaluate_with_declared_producer(
+            "644ec1cdfa7d69600af3463ab60a6b7d745913c8"
+        )
+
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "artifact.json"
+            path.write_bytes(producer.rendered_artifact(artifact))
+            producer.validate_stored_artifact(path)
+
+            altered = deepcopy(artifact)
+            altered["assertions"][0]["normalized_finding"] = "different but digest-valid"
+            altered["artifact_digest"]["value"] = hashlib.sha256(
+                producer.canonical_artifact_bytes(altered)
+            ).hexdigest()
+            path.write_bytes(producer.rendered_artifact(altered))
+            with self.assertRaisesRegex(ValueError, "artifact reproduction mismatch"):
+                producer.validate_stored_artifact(path)
+
+            path.write_text('{"kind":"wrong"}\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "artifact kind"):
+                producer.validate_stored_artifact(path)
 
 
 if __name__ == "__main__":

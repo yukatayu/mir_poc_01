@@ -74,5 +74,30 @@ deployment remain non-claims.
 
 ## M2 acceptance record
 
-Not yet applied at profile-adoption cut. This section is amended only after a
-fresh v3 `pass` artifact and independent evidence review exist.
+The fresh v3 `pass` artifact is
+`LAB:plan/248-t0-g0-semantic-assertion-v3-evaluation.json`, generated from
+source revision `644ec1cdfa7d69600af3463ab60a6b7d745913c8`. Its profile source
+SHA-256 is `45cf5da9c7be03de89a47f74d37d3454c7c9029e0ac59bb7538f7c11b5974f37`,
+its declared producer SHA-256 is
+`1234566706bcfda51279bb6d0a88176be85c84f812e7f368171bc0ae6070a59f`, and its
+canonical artifact digest is
+`b32bd2c87e1dc77ca2a4f7a7426cda0bff8bcbf80155d19addd7db3a8288aa23`.
+
+The artifact validator checked its digest, declared source binding, and exact
+canonical-byte reproduction from that revision. Focused negative controls
+reject clean-suite/agent-hierarchy selector drift and digest tampering. An
+independent M2 review found no unresolved P0/P1 counterevidence.
+
+Under the owner-approved M2 scope in ADR-0015 and ADR-0017, the ordered
+acceptance is now applied exactly once:
+
+```text
+v3 pass digest accepted
+→ G0-D3 accepted
+→ G0 exit accepted
+→ T1 entry accepted
+```
+
+This moves the official lifecycle to `T1` only. It does not claim
+SCN/C-static/C-runtime/C-distributed conformance, proof/OBL completion, runtime
+implementation, I1 authorization, public API/ABI/wire, or deployment.

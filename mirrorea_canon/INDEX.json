@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 5748
+   "bytes": 6184
   },
   {
    "id": "root/design-constitution",
@@ -302,7 +302,7 @@
    "summary": "owner-approved M2 scopeでT0/G0 semantic-assertion profile v3を採用し、v1/v2をimmutable historical evidenceとして維持する。",
    "open_items": [],
    "path": "adr/ADR-0017.md",
-   "bytes": 1684
+   "bytes": 2300
   },
   {
    "id": "adr/readme",
@@ -314,7 +314,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2248
+   "bytes": 2267
   },
   {
    "id": "arch/01-strata",
@@ -834,7 +834,7 @@
    "summary": "理論凍結ゲート G0-G7。各 exit criteria と「宣言してはならないこと」。",
    "open_items": [],
    "path": "plan/00-gates.md",
-   "bytes": 2094
+   "bytes": 2406
   },
   {
    "id": "plan/01-phases",
@@ -856,7 +856,7 @@
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 4848
+   "bytes": 4976
   },
   {
    "id": "plan/02-operating-model",
@@ -896,7 +896,7 @@
    "summary": "T0/G0 semantic-assertion profile v3。revision-bound な意味 assertion と deterministic artifact の contract を定め、mutable reader-facing whole-file hash を control にしない。",
    "open_items": [],
    "path": "plan/04-t0-g0-semantic-assertion-profile.md",
-   "bytes": 3892
+   "bytes": 4943
   },
   {
    "id": "plan/readme",

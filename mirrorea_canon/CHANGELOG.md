@@ -18,6 +18,11 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** ADR-0017 / Plan 04 の M2 acceptance record に、revision-bound
+  semantic-assertion v3 の fresh `pass` artifact (`LAB:plan/248`、digest
+  `b32bd2c87e1dc77ca2a4f7a7426cda0bff8bcbf80155d19addd7db3a8288aa23`) を受理した。
+  順に G0-D3、G0 exit、T1 entry を適用した。これは phase-governance のみであり、SCN、
+  proof/OBL、runtime、I1、public contract/deployment は動かしていない。
 - **2026-08-04** PROPOSAL-019 と ADR-0016 により、`root/design-constitution`
   を Mir Theory v0 / deterministic I1+ の横断判断として採用した。SCN-02 は
   requester authority origin と S-side owner RMW を区別するよう是正し、semantic
