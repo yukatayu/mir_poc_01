@@ -131,11 +131,11 @@ Independent final review reported two P0s: publicly forgeable provider-proof str
 
 ## Skipped validations and reasons
 
-Commit/push and remote parity remain pending.  Workspace-wide Clippy is not claimed because an unrelated pre-existing CLI boolean-assert lint remains outside the two changed crates; both changed crates pass combined all-target `-D warnings`, and the full workspace test suite passes.  M10 release conformance, fresh reproduction, and public CLI workflow checks are later work rather than M9 claims.
+Workspace-wide Clippy is not claimed because an unrelated pre-existing CLI boolean-assert lint remains outside the two changed crates; both changed crates pass combined all-target `-D warnings`, and the full workspace test suite passes.  M10 release conformance, fresh reproduction, and public CLI workflow checks are later work rather than M9 claims.
 
 ## Commit / push status
 
-No M9 commit or push exists at report start. M8 closeout `7f23a72ef1a20be27c5fa916ffe189fe0a44ba20` is pushed with remote parity verified.
+M9 integration commit `39edf42f9778067856b7e033dedb89da2cf5d554` is pushed to `origin/main`; a fresh fetch and exact `HEAD == origin/main` comparison passed.  This bounded report amendment records that evidence, and the orchestrator performs the same exact parity comparison after pushing the closeout metadata commit.
 
 ## Sub-agent session close status
 
