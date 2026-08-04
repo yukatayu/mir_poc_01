@@ -33,7 +33,10 @@ open_items: []
 - 状態はシステム全体で親子・依存・寿命を持ち、fallback により「最悪でも先祖の値へ**単調に劣化**する」参照が書ける。復帰は暗黙でなく明示的再取得(ADR-0004、theory/06)。
 - 世界は 4 本のグラフで読める: 出来事 DAG / 存在 DAG / locus-admission グラフ / パッチ DAG(theory/00)。
 - イベント駆動の代償として検証を強く入れる。ただし Mir は定理証明器そのものにはならない(三線分離、theory/00・spec/03)。
-- 認証・型検証・観測は付け外し可能な**契約変換層**である(theory/05, 07)。
+- 認証・runtime policy は付け外し可能な**型付き Contract 変換層**である。一方、
+  verifier は Judgment / Obligation から Evidence / Diagnostic /
+  ResidualObligation へ出る別の線であり、観測は型付き information effect である
+  (theory/02, 05, 07)。
 - プログラムは「ブラウザ的なもの」で参加し、View は FFI へ切り出し、ロジックは Mir 内に置く(architecture/05, BND-007)。
 
 ## 非軸(やらないこと)

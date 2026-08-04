@@ -40,9 +40,14 @@ one interpretation step, samples interpreted against two different frontiers
 for anchors that the discrete layer declares atomic together (e.g. two bones
 of one avatar). Violations are a devtools-visible row class.
 
-**Degradation.** Stream loss degrades along the anchor's fallback chain
-(theory/06): live pose > last snapshot > ancestor pose > default. Recovery is
-a reacquire occurrence — so THM-002 governs streams too.
+**Two fallback domains.** Semantic fallback is triggered only by discrete
+semantic invalidation of an anchor (existence, membership/incarnation, lease,
+authority, or lineage loss). It advances the chain with the ordinary
+occurrence/frontier record, and recovery is a fresh reacquire occurrence.
+Consumer-local sample loss, latency-budget exhaustion, temporary packet loss,
+interpolation, prediction, or LOD is presentation fallback. It may choose a
+safe local rendering response but does not advance semantic lineage, create an
+occurrence, change authority, or permit a stale anchor sample for semantic use.
 
 ## Proof surface
 

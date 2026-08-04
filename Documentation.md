@@ -16,15 +16,18 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 「次」は current queue を意味しません。現在の一本道は Plan 247 と、その派生ビュー
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
-M0 Bootstrap は agent/governance/roadmap の整合を閉じた。現在は ADR-0015 の
-owner-approved Mir Theory v0 / I1+ program の **M1 Constitution** である。official
-lifecycle は `T0` のままで、G0 exit/T1 entry、OBL、SCN/conformance、runtime 実装を
-動かさない。
+M0 Bootstrap と M1 Constitution は閉じた。現在は ADR-0015 の owner-approved Mir
+Theory v0 / I1+ program の **M2 semantic-assertion T0/G0 closeout** である。M1 は
+`root/design-constitution` と ADR-0016 に、ordinary Surface、evaluation/authority、
+relation/fallback、assurance の判断フィルタを置いた。official lifecycle は `T0` のままで、
+M2 の fresh acceptance record まで G0 exit/T1 entry、OBL、SCN/conformance、runtime
+実装を主張しない。
 
 | 知りたいこと | 読む場所 |
 | --- | --- |
 | 前提知識なしで全体像を掴む | `docs/mirrorea-project-overview.html` |
 | 規範正本の構造 | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
+| M1 の設計判断フィルタ | `mirrorea_canon/DESIGN-CONSTITUTION.md`, `mirrorea_canon/adr/ADR-0016.md` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
 | 唯一の current execution roadmap | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |

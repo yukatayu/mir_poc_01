@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-03 19:44 JST
+最終更新: 2026-08-04 09:48 JST
 
 **Canon notice:** `mirrorea_canon/` is normative; this file is a concise LAB
 snapshot and creates no Canon, Gate, Phase, proof, or conformance decision.
@@ -37,7 +37,7 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0 Bootstrap closed; official lifecycle remains T0; M1 Constitution is active | **着手可能**: M1 contradiction audit |
+| Logical specification | M0 Bootstrap and M1 Constitution are evidence-complete; official lifecycle remains T0; M2 semantic-assertion closeout is next | **着手可能**: M2 producer/profile design |
 | User-facing specification | No M0 syntax change. M6 owns Surface v0 after M5 shared model | **後段依存**: M1--M5 |
 | Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M1--M7 |
 
@@ -45,17 +45,19 @@ Sources: `mirrorea_canon/adr/ADR-0015.md`,
 `mirrorea_canon/plan/01-phases.md`, and
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
 
-M0 preserved: v2 T0 artifact valid `fail`; G0-D3/G0 exit/T1 entry absent;
-OBL-001..028 `open`; SCN-01..10 and official conformance unchanged. Its direct
-consumer is the M1 Constitution input bundle.
+M1 adopts `root/design-constitution` and ADR-0016, separating authority origin
+from evaluation site, semantic from presentation fallback, and a pre-M6 grammar
+candidate from final Surface. It corrects the SCN-02 owner-side RMW reading but
+does not change official lifecycle, ledger, conformance, or runtime state. The
+M2 direct consumer is its stable semantic-assertion vocabulary.
 
 ## milestone map
 
 | Milestone | Aim | Position | Startability |
 | --- | --- | --- | --- |
 | M0 | governance, agent config, one roadmap | closed | Report 2581 / push parity |
-| M1 | concise Constitution | active | contradiction audit / Canon placement |
-| M2 | semantic-assertion T0/G0 closeout | later | after M1 |
+| M1 | concise Constitution | evidence-complete; closeout commit pending | `root/design-constitution`, ADR-0016, Report 2582 |
+| M2 | semantic-assertion T0/G0 closeout | active after M1 commit/push | deterministic producer / fresh evidence / negative control |
 | M3 | evaluation/materialization calculus | later | after M2 |
 | M4 | maintained relation/late projection | later | after M3 |
 | M5 | shared model/metatheory | later | after M4 |
@@ -119,7 +121,6 @@ completion is claimed.
 | Kind | Item | Current handling |
 | --- | --- | --- |
 | Owner-reserved | North Star/safety weakening, Core domain promotion, final public contract, deployment, user-data/secret risk | stop only if triggered; none observed |
-| M1 research | compact Constitution and contradiction audit | one current proposal plus smallest viable alternative/falsifier |
 | M2 research | semantic assertions/profile/fresh evaluation | preserve v1/v2 history; no premature exit |
 | M3 research | eval policy and RMW inference | reject hidden communication/authority/transaction |
 | M4 research | bird DAG, local projection, fallbacks/privacy | reject stale/split-frame/re-promotion/leak |
@@ -130,7 +131,7 @@ completion is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | M0 closed | medium | maintenance only |
-| 1 | semantics/shared model | M1--M5; M1 active | heavy | yes |
+| 1 | semantics/shared model | M1--M5; M2 is next active cut | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
 | 3 | source/checker/runtime | M6--M8 | heavy | after shared model |
 | 4 | executable samples | historical evidence | medium | maintenance only |
@@ -161,3 +162,7 @@ completion is claimed.
 - 2026-08-03 19:44 JST: M0 completed independent review, approval-policy
   regression coverage, focused validation, commit/push, and parity; M1
   Constitution is now the sole active semantic milestone.
+- 2026-08-04 09:48 JST: M1 adopted the concise `root/design-constitution` and
+  ADR-0016, corrected SCN-02 owner-side RMW and fallback prose conflicts, and
+  passed independent review/one correction cycle; closeout commit/push remains
+  before M2 becomes officially active.

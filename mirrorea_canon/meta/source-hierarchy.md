@@ -29,10 +29,12 @@ open_items: []
 
 ## Delegated working-theory route
 
-ADR-0015 の bounded program でも canon > LAB は変わらない。`.mir` source、Rust、
-Lean、tests、generated traces は normative Canon rules の implementation/evidence であり、
-存在だけで規範や proof status を変更しない。規範変更は proposal/ADR/changelog/index、
-実証は milestone report と proof ledger に追跡する。
+ADR-0015 の bounded program でも canon > LAB は変わらない。`root/design-constitution`
+は North Star/ADR の下で後続 Canon を拘束する current decision filter であり、LAB
+roadmap/report はそれを再解釈しない。`.mir` source、Rust、Lean、tests、generated traces
+は normative Canon rules の implementation/evidence であり、存在だけで規範や proof
+status を変更しない。規範変更は proposal/ADR/changelog/index、実証は milestone report
+と proof ledger に追跡する。
 
 program 外の ADR-0014 delegated route でも canon > LAB は変わらない。LAB は candidate /
 alternative / countermodel / command evidence / review / supersession history を保持

@@ -87,5 +87,12 @@ Composition: `all_of(A, B)` requires both; `any_of` only when explicitly
 declared with per-branch failure/audit surfaces and capability-union bounds
 (hidden policy weakening is forbidden).
 
+Runtime layers and verification modules are intentionally distinct. Runtime
+layers transform `Contract`; a verifier maps a `Judgment` or
+`ResidualObligation` to `Evidence | Diagnostic | ResidualObligation`. A
+verifier may reject more, strengthen a contract, discharge an obligation, or
+add evidence, but may not mint authority, permit an undeclared effect, erase a
+failure, redefine a Core operation, or change projection semantics.
+
 OPEN-013: cost_bound algebra (currently an opaque bound checked by simple
 numeric comparison; runtime cost semantics deferred to Gate 4 / plan/03 R-09).

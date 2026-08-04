@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-03 19:44 JST
+最終更新: 2026-08-04 09:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. This document is a LAB derived view.
@@ -28,20 +28,22 @@ classification、independent review、validation、commit/push/parity を閉じ�
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M1 Constitution**。次は M2 semantic-assertion T0/G0 closeout | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| active frontier | **M2 semantic-assertion T0/G0 closeout**。次は M3 evaluation/materialization calculus | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
 | official lifecycle | `T0`。v2 artifact は valid `fail`、G0-D3/G0 exit/T1 entry は未成立 | `mirrorea_canon/plan/01-phases.md` |
 | proof / scenarios | OBL-001..028 は `open`、SCN-01..10 の official status は不変 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0 close/non-effect | bootstrap payload `be5928a1` は review/validation/push 済み。I1+ runtime、SCN conformance、public API/ABI/wire、production deployment は開始・主張しない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md` |
+| M0/M1 close/non-effect | M0 bootstrap は push 済み。M1 Constitution は review/validation を終え、`root/design-constitution` と ADR-0016 を採用する closeout commit を準備中である。SCN-02 RMW と fallback の prose conflict を修正するが、T0/G0/T1、OBL、official conformance、runtime、public API/ABI/wire、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md` |
 
 M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
-review、one report、commit/push/remote parity で閉じた。M1 の direct blocker は concise
-Constitution の Canon placement と contradiction audit であり、direct consumer は M2 の
-semantic-assertion profile である。
+review、one report、commit/push/remote parity で閉じた。M1 は concise Constitution の Canon
+placement と contradiction audit を同じ discipline で閉じた。M2 の direct blocker は、その
+stable clauses を subject とする deterministic semantic-assertion producer、fresh evaluation、
+negative control、acceptance record であり、direct consumer は M3 の calculus である。
 
 ## 現在の停止線
 
-- M0 は M2 の semantic-assertion profile、G0 exit、T1 entryを先取りしない。
+- M2 は fresh semantic assertion と acceptance record を閉じるまで、G0 exit/T1 entryを
+  先取りしない。
   `mirrorea_canon/adr/ADR-0013.md`
 - M3 は evaluation site/trigger/authority/materialization と same-owner RMW を閉じるまで、
   cross-owner snapshot/transactionを仮定しない。`mirrorea_canon/plan/02-operating-model.md`

@@ -30,19 +30,27 @@ well-scoped Surface item under (Σ, Ψ, Γ, Δ, L), it either produces
 ## Worked shape (the canonical attack, SCN-02)
 
 ```text
-Participant[self] {                                (current locus L = self's)
+BrowserClient[self] {                         (authority origin = self)
   when attack(target: Participant)
     fails StaleMembership, MissingCapability, MissingWitness, RouteUnavailable {
     S { player[target].hp = player[target].hp - player[self].atk }
   }
 }
-⇝  read(S, player[self].atk)   as observe/read-request (cross-locus read)
-   request(L → S, write(player[target].hp), v′,
+⇝  request(self → S,
+           owner_transition(player[target].hp :=
+             player[target].hp - player[self].atk),
            ρ̄ = {cap_write_player}, ω̄ = ∅,
            φ = {StaleMembership, MissingCapability, MissingWitness,
                 RouteUnavailable})
-   G_e = { request row, dependency row(atk), spans }
+   G_e = { request row, S-local dependency rows(target.hp, self.atk), spans }
 ```
+
+`owner_transition` is a schematic M1 consequence, not a new Core constructor:
+M3 chooses its exact carrier. Both operands are S-owned, so service at S reads
+them and writes hp in one bounded owner transition. The requester never
+receives either private value, and neither dependency is an actor-side
+observe/read-request. A real other-owner operand instead needs an explicit
+result/receipt path or a v0 Diagnostic (ADR-0016).
 
 ## THM-001 — Assignment elaboration soundness
 
@@ -53,7 +61,7 @@ then every write in c is either
   (b) an explicit owner-directed request whose
       – authority obligation is in C ∪ O,
       – generated failure set is contained in the declared fails row,
-      – dependency edges are recorded in G_e, and
+      – dependency edges, including their evaluation locus, are recorded in G_e, and
       – source span maps back to s.
 ```
 

@@ -11,7 +11,9 @@ open_items: [OPEN-010, OPEN-011, OPEN-012]
 
 This chapter fixes the minimal calculus. It unifies the two judgments that were
 separate in LAB (`LAB:specs/19` checking, `LAB:specs/39` elaboration) into one.
-Everything here is syntax-independent; concrete grammar lives in spec/02.
+Everything here is syntax-independent. The displayed `Surface` alternatives
+are semantic categories rather than a selected concrete grammar; spec/02 is
+the retained pre-M6 candidate and M6 chooses the final bounded grammar.
 
 ## 1. Abstract syntax
 
@@ -119,6 +121,13 @@ current_locus := O (save/restore). If L ≠ O, the block is **not** an ambient
 authority switch: body is checked under O for owner invariants, but elaborates
 to owner-directed requests authorized from L, carrying L's principal, epoch,
 incarnation, capability refs, witness refs, and spans.
+
+For an owner-directed body whose mutable operands and write are all O-owned,
+O is also the evaluation site: on service it evaluates the reads and write as
+one bounded owner transition. L remains the authority origin. This is not a
+requester-side private read or a blind write; a genuinely other-owner operand
+uses an explicit result/receipt path or is outside the ordinary v0 fragment
+(ADR-0016). M3 fixes the exact evaluation/materialization carrier.
 
 **[HANDLER]** `when h(p̄) fails φ_d { s̄ }`: body elaborated with parameters
 bound; every generated failure of the body must be ⊆ φ_d (containment is a

@@ -11,6 +11,8 @@ open_items: []
 
 言語・システム仕様の正本。LAB の specs 44 本のうち利用者・実装者が必要とする面をここに蒸留する。**theory/ と矛盾した場合は theory/ が勝ち**、本 spec を修正する。
 
-章: 01 字句とモジュール → 02 Surface 文法(EBNF) → 03 静的意味 → 04 Core IR → 05 runtime 意味(参照実装の観測可能挙動) → 06 適合性 → 07 診断形式。
+章: 01 字句とモジュール → 02 Surface grammar profile (M6 まで provisional) →
+03 静的意味 → 04 Core IR → 05 runtime 意味(参照実装の観測可能挙動) → 06 適合性 →
+07 診断形式。
 
-ここから推論してはいけないこと: 文法の存在は parser 実装の存在を意味しない(plan/01)。`chain` 表記は OPEN-005(最も調整が入りやすい箇所)。
+ここから推論してはいけないこと: 文法の存在は parser 実装の存在を意味しない(plan/01)。`chain` 表記は OPEN-005(最も調整が入りやすい箇所)。ADR-0016 により、spec/02 は final grammar ではなく M6 の current candidate である。

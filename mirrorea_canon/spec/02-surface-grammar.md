@@ -1,13 +1,20 @@
 ---
 id: spec/02-surface-grammar
-status: L1-fixed
+status: L2-working
 maturity: draft
-depends_on: [spec/01-lexical-and-modules, adr/ADR-0008, theory/06-existence-fallback]
-summary: Surface Mir v0 の EBNF。place/role ブロック、state、when、join、chain 宣言、式。
+depends_on: [spec/01-lexical-and-modules, adr/ADR-0008, adr/ADR-0016, theory/06-existence-fallback]
+summary: M6 前の Surface Mir grammar candidate。place/role ブロック、state、when、join、chain 宣言、式。
 open_items: [OPEN-005, OPEN-006]
 ---
 
 # 02 — Surface grammar (EBNF)
+
+This is the retained **pre-M6 grammar candidate**, not a final public grammar.
+It documents the current compatibility profile and its explicit rejects. M6
+selects the final bounded grammar only after the shared semantic model, using
+this candidate and at most one smallest viable alternative. No current LAB
+parser, fixture, or package becomes normative merely because it follows this
+profile.
 
 ```ebnf
 Module        ::= "module" ModulePath { Item }

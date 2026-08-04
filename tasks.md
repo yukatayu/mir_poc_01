@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-03 19:44 JST
+最終更新: 2026-08-04 09:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,16 +20,19 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M1 Constitution. Next: M2 semantic-assertion T0/G0 closeout.** 根拠は
+**Active: M2 semantic-assertion T0/G0 closeout. Next: M3 evaluation/materialization
+calculus.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
 
 M0 は start revision `b9dcaa054c548112a7977776723418559b8ba8b2` から bootstrap
-payload `be5928a168fd519c05867fba2746ddd833a3bde5` を push して閉じた。official
-lifecycle は `T0` のままである。現在の direct blocker は concise Constitution の
-Canon placement と contradiction audit を、positive/adverse examples と独立 review で
-閉じること。direct consumer は M2 の semantic-assertion profile である。
+payload `be5928a168fd519c05867fba2746ddd833a3bde5` を push して閉じた。M1 は
+`root/design-constitution` と ADR-0016 を採用し、SCN-02 owner-side RMW と
+semantic/presentation fallback を整合させ、independent review と one correction cycle を
+pass した。official lifecycle は `T0` のままである。現在の direct blocker は M2 の
+deterministic semantic-assertion producer、fresh evaluation、negative control、acceptance
+record であり、direct consumer は M3 calculus である。
 
 M0 では official lifecycle は `T0`、v2 artifact は valid `fail`、G0-D3 / G0 exit /
 T1 entry は未成立、OBL-001..028 はすべて `open`、SCN-01..10 と conformance claim は
@@ -44,8 +47,8 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | Order | Current task package | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
 | M0-A--C | Canon / agent / governance bootstrap | closed; ADR-0015 cut、role contract、Plan 247、review/validation/push evidence in Report 2581 | Macro 0; complete |
-| M1 | Constitution | `A/R/O`; concise Canon Constitution、scope/invariants/decision priority/falsifiers accepted | Macro 1; active; medium |
-| M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; after M1; medium |
+| M1 | Constitution | closed pending closeout commit/push; `root/design-constitution`、ADR-0016、Report 2582、review/validation evidence | Macro 1; evidence-complete |
+| M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; active after M1 commit/push; medium |
 | M3 | evaluation / materialization | `A/R/O`; owner/designated/consumer/provider evaluation、deterministic inference、same-owner RMW、cross-owner Diagnostic/result path | Macro 1/5; after M2; heavy |
 | M4 | maintained relation / late projection | `A/R/O`; bird/shoulder relation DAG、C-local projection、coherence/fallback/reacquire/privacy/split-frame evidence | Macro 1/5/6; after M3; heavy |
 | M5 | shared formal model / metatheory | `A/R/O`; non-opaque common model、coverage、Lean/model evidence、T1/T2/I1-readiness mapping | Macro 1/5; after M4; heavy |
@@ -64,7 +67,7 @@ report、commit/push/parity が閉じるまで開始しない。
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
-| 1 semantic kernel | M1--M5 fixed sequence; Constitution artifact starts at M1 | **着手可能**: current package |
+| 1 semantic kernel | M1--M5 fixed sequence; Constitution accepted, M2 is current package | **着手可能**: semantic assertion profile |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
 | 3 compile-ready actualization | historical Surface/runtime evidence exists | **後段依存**: M5/M6 accepted model |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
@@ -84,7 +87,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M1 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M2 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items
@@ -94,7 +97,6 @@ smallest viable alternative を falsifier で比較する。
 
 | Milestone | Research must establish | Stop / discard condition |
 | --- | --- | --- |
-| M1 | Constitution exact Canon path、scope、decision priority | preserved invariant conflict or owner-reserved trigger |
 | M2 | semantic assertion identity、evidence binding、negative control、acceptance separation | historical artifact rewrite or premature lifecycle claim |
 | M3 | evaluation-site/trigger/authority/materialization calculus and deterministic inference | hidden authority/effect/state, cross-owner hidden transaction, or stale blind write |
 | M4 | relation DAG, bird local projection, semantic/presentation fallback, and privacy propagation | split frame, stale anchor, semantic re-promotion, or derived information leak |

@@ -18,6 +18,13 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-019 と ADR-0016 により、`root/design-constitution`
+  を Mir Theory v0 / deterministic I1+ の横断判断として採用した。SCN-02 は
+  requester authority origin と S-side owner RMW を区別するよう是正し、semantic
+  fallback と consumer-local presentation fallback を分離した。pre-M6 Surface
+  profile は historical compatibility candidate として保持し、final grammar を
+  先取りしない。T0/G0/T1、OBL/proof、conformance、runtime、public contract は
+  動かしていない。
 - **2026-08-03** PROPOSAL-018 の owner disposition と ADR-0015 により、Mir
   Theory v0 / I1+ Milestones 0--10 に限る evidence-gated bounded autonomy、
   一つの semantic frontier、原則一 milestone 一 report、独立 review、実証済み

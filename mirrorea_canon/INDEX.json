@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 136,
+ "files": 139,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,20 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 5194
+   "bytes": 5748
+  },
+  {
+   "id": "root/design-constitution",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "adr/ADR-0015"
+   ],
+   "summary": "Mir Theory v0 / deterministic I1+ の横断的な設計判断規則。詳細 carrier、grammar、algorithm を固定せず、後続 theory/spec/implementation を拘束する。",
+   "open_items": [],
+   "path": "DESIGN-CONSTITUTION.md",
+   "bytes": 10367
   },
   {
    "id": "root/glossary",
@@ -39,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21548
+   "bytes": 21645
   },
   {
    "id": "root/north-star",
@@ -51,7 +64,7 @@
    "summary": "軸・非軸の 1 枚。プロジェクトの起点、五動詞の軸、地平、世界観の要約。",
    "open_items": [],
    "path": "NORTH-STAR.md",
-   "bytes": 3325
+   "bytes": 3521
   },
   {
    "id": "root/readme",
@@ -61,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2667
+   "bytes": 2696
   },
   {
    "id": "adr/ADR-0001",
@@ -158,13 +171,13 @@
     "adr/ADR-0001",
     "adr/ADR-0002"
    ],
-   "summary": "Surface 文法 v0 を確定(S{ } / Role[x]{ } 系、== 等価、chain 宣言、// コメント)。Core companion 記法は存置。",
+   "summary": "pre-M6 Surface grammar profile(S{ } / Role[x]{ } 系、== 等価、chain 宣言、// コメント)を保持する。Core companion 記法は存置。",
    "open_items": [
     "OPEN-005",
     "OPEN-006"
    ],
    "path": "adr/ADR-0008.md",
-   "bytes": 1520
+   "bytes": 2062
   },
   {
    "id": "adr/ADR-0009",
@@ -263,6 +276,20 @@
    "bytes": 3698
   },
   {
+   "id": "adr/ADR-0016",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/design-constitution",
+    "adr/ADR-0015",
+    "meta/proposal-019"
+   ],
+   "summary": "Design Constitution を採用し、owner-evaluated RMW、fallback domain、Surface grammar の M1 alignment を記録する。",
+   "open_items": [],
+   "path": "adr/ADR-0016.md",
+   "bytes": 3068
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -272,7 +299,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2014
+   "bytes": 2122
   },
   {
    "id": "arch/01-strata",
@@ -381,7 +408,7 @@
    "summary": "SCN-02(attack)一行の裏で起きる全段の時系列。表の一行と裏の各段の対応。",
    "open_items": [],
    "path": "mental-model/02-behind-the-scenes.md",
-   "bytes": 2283
+   "bytes": 2588
   },
   {
    "id": "mm/03-correspondence",
@@ -725,6 +752,20 @@
    "bytes": 3710
   },
   {
+   "id": "meta/proposal-019",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "root/north-star"
+   ],
+   "summary": "owner-approved Mir v0/I1+ program の M1 として、短い Design Constitution と既知の Canon alignment を採択する記録。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-019-design-constitution-adoption.md",
+   "bytes": 1520
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -736,7 +777,7 @@
    "summary": "canon > LAB の正本関係、LAB 格下げ、owner-approved program と通常 research route の境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3106
+   "bytes": 3275
   },
   {
    "id": "meta/style-guide",
@@ -833,7 +874,7 @@
    "summary": "10 本の正準シナリオ。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。",
    "open_items": [],
    "path": "scenarios/README.md",
-   "bytes": 1493
+   "bytes": 1490
   },
   {
    "id": "scenarios/SCN-01",
@@ -854,10 +895,10 @@
    "depends_on": [
     "scenarios/SCN-01"
    ],
-   "summary": "attack。ブログ由来の規範例。cross-locus read+write、failure row 包含、THM-001 の主試験。",
+   "summary": "attack。ブログ由来の規範例。authority origin と S-owner RMW、failure row 包含、THM-001 の主試験。",
    "open_items": [],
    "path": "scenarios/SCN-02-attack.md",
-   "bytes": 1537
+   "bytes": 1943
   },
   {
    "id": "scenarios/SCN-03",
@@ -969,20 +1010,21 @@
   },
   {
    "id": "spec/02-surface-grammar",
-   "status": "L1-fixed",
+   "status": "L2-working",
    "maturity": "draft",
    "depends_on": [
     "spec/01-lexical-and-modules",
     "adr/ADR-0008",
+    "adr/ADR-0016",
     "theory/06-existence-fallback"
    ],
-   "summary": "Surface Mir v0 の EBNF。place/role ブロック、state、when、join、chain 宣言、式。",
+   "summary": "M6 前の Surface Mir grammar candidate。place/role ブロック、state、when、join、chain 宣言、式。",
    "open_items": [
     "OPEN-005",
     "OPEN-006"
    ],
    "path": "spec/02-surface-grammar.md",
-   "bytes": 3684
+   "bytes": 4111
   },
   {
    "id": "spec/03-static-semantics",
@@ -1070,7 +1112,7 @@
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 848
+   "bytes": 972
   },
   {
    "id": "theory/00-overview",
@@ -1104,7 +1146,7 @@
     "OPEN-012"
    ],
    "path": "theory/01-mircore-v0.md",
-   "bytes": 9639
+   "bytes": 10242
   },
   {
    "id": "theory/02-types-effects-failures",
@@ -1119,7 +1161,7 @@
     "OPEN-013"
    ],
    "path": "theory/02-types-effects-failures.md",
-   "bytes": 3781
+   "bytes": 4215
   },
   {
    "id": "theory/03-elaboration",
@@ -1135,7 +1177,7 @@
     "OPEN-014"
    ],
    "path": "theory/03-elaboration.md",
-   "bytes": 3265
+   "bytes": 3744
   },
   {
    "id": "theory/04-ordering-and-cuts",
@@ -1151,7 +1193,7 @@
     "OPEN-016"
    ],
    "path": "theory/04-ordering-and-cuts.md",
-   "bytes": 4619
+   "bytes": 5087
   },
   {
    "id": "theory/05-authority",
@@ -1197,7 +1239,7 @@
     "OPEN-020"
    ],
    "path": "theory/07-observation.md",
-   "bytes": 2059
+   "bytes": 2303
   },
   {
    "id": "theory/08-patch-hotplug",
@@ -1230,7 +1272,7 @@
     "OPEN-023"
    ],
    "path": "theory/09-two-layer-time.md",
-   "bytes": 2617
+   "bytes": 3016
   },
   {
    "id": "theory/10-diagnostics",

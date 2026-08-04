@@ -19,8 +19,8 @@ open_items: []
 
 ## 最短の読み順
 
-- 全体像: `MAP.md` → `NORTH-STAR.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(15 本の決定の一覧)
+- 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
+- 決定: `adr/README.md`(16 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md`
 - 何がいつ動くか: `plan/01-phases.md`
 

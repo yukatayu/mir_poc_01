@@ -3,7 +3,7 @@ id: scenarios/SCN-02
 status: L0-frozen
 maturity: draft
 depends_on: [scenarios/SCN-01]
-summary: attack。ブログ由来の規範例。cross-locus read+write、failure row 包含、THM-001 の主試験。
+summary: attack。ブログ由来の規範例。authority origin と S-owner RMW、failure row 包含、THM-001 の主試験。
 open_items: []
 ---
 
@@ -30,13 +30,19 @@ BrowserClient[self] {
 }
 ```
 
-**Expected (C-static)**: request edge (→ S, write player[target].hp);
-dependency rows for player[target].hp and player[self].atk (cross-locus
-reads); generated failure set exactly ⊆ declared fails; nested `S { }` is not
-ambient authority (owner-directed, authorized from the actor locus).
-**Expected (C-runtime)**: with a granted write capability, target hp 100→90;
-without it, explicit MissingCapability failure occurrence, store unchanged.
+**Expected (C-static)**: one owner-directed request edge (→ S) whose source
+operation is an S-evaluated RMW; S-local dependency rows for
+player[target].hp and player[self].atk; generated failure set exactly ⊆
+declared fails; and source spans. `BrowserClient[self]` is the authority
+origin, while S is the evaluation locus. Nested `S { }` is not ambient
+authority and does not return S-private values to the actor.
+**Expected (C-runtime)**: with a granted write capability, one attack changes
+target hp 100→90. Two accepted attacks queued at S yield 100→90→80 because
+each RHS is evaluated at owner service. Without the capability, an explicit
+MissingCapability failure occurrence leaves the store unchanged.
 **Negative variants**: (a) drop `MissingCapability` from fails ⇒ E-ROW-001;
-(b) claim the nested block as local write in an implementation ⇒ fails
-C-static (edge must exist); (c) attack after target leave ⇒ StaleMembership.
-**Refs**: THM-001, THM-004, ADR-0005, mental-model/02.
+(b) read `player[self].atk` at the requester or blind-write a requester
+precomputed hp ⇒ fails C-static; (c) treat same-owner RMW as cross-owner
+atomicity ⇒ reject/defer rather than infer a transaction; (d) attack after
+target leave ⇒ StaleMembership.
+**Refs**: THM-001, THM-004, ADR-0003, ADR-0005, ADR-0016, mental-model/02.

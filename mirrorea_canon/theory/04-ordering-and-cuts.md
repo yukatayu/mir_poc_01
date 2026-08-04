@@ -63,6 +63,13 @@ SaveObject = { cut, causal_frontier, place_states, queues,
   external_effect_obligations, provenance }
 ```
 
+M4/M5 must add the semantic state required for maintained relations and their
+activation frontiers, designated-result versioning, and receipt/consumption.
+This document deliberately selects neither field names nor an internal
+representation or serialization.  Whatever carrier M4/M5 selects belongs
+inside the SaveObject consistent cut and its provenance closure, never in
+untracked side state.
+
 Widening candidates (two-layer time, theory/09): computational_state,
 anchor_graph, pose_snapshot_frontier, pose_versions, anchor_switch_state — if
 admitted they live *inside* SaveObject under Consistent(cut), never as side
@@ -72,7 +79,8 @@ state.
 
 Load may succeed only if: Consistent(cut) ∧ no rollback across atomic_cut ∧
 no stale membership / witness / lease resurrection ∧ capability & auth
-provenance connected ∧ package versions compatible ∧ external irreversible
+provenance connected ∧ every M4/M5 relation/result/consumption carrier's
+lineage connected ∧ package versions compatible ∧ external irreversible
 effects compensated or isolated.
 
 ```text

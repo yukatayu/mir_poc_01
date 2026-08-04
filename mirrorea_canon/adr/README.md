@@ -20,7 +20,7 @@ open_items: []
 | ADR-0005 | 名前・場所・transport は権限でない。権限は grant の系譜 | L0 |
 | ADR-0006 | patch は eval でない。pipeline + activation cut のみ | L0 |
 | ADR-0007 | 順序の source principal は高水準関係族 | L1 |
-| ADR-0008 | Surface 文法 v0 の採用(S{ } 系、== 等価、chain 宣言) | L1 |
+| ADR-0008 | pre-M6 Surface profile の保持(S{ } 系、== 等価、chain 宣言) | L1 |
 | ADR-0009 | .mir ソースが意味の正本。package 成果物は生成物 | L1 |
 | ADR-0010 | 検証は三線分離 + 明示的義務 carrier。Lean-first | L1 |
 | ADR-0011 | stdio は core builtin にしない。外界は typed adapter 境界 | L1 |
@@ -28,3 +28,4 @@ open_items: []
 | ADR-0013 | T0/G0 governance profile v2 と G0 substantive evidence acceptance。G0 exit は defer | L1 |
 | ADR-0014 | standing L3 pre-registration と review-gated L2 working theory research を委任。reserved boundary は owner に留保 | 運用 L0 |
 | ADR-0015 | Mir Theory v0 / I1+ の owner-approved program に evidence-gated bounded autonomy と milestone 直列 integration を委任 | 運用 L0 |
+| ADR-0016 | Design Constitution を採用し、M1 の RMW/fallback/Surface alignment を記録 | L1 |

@@ -23,6 +23,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
     "canon": [
         "mirrorea_canon/README.md",
         "mirrorea_canon/MAP.md",
+        "mirrorea_canon/DESIGN-CONSTITUTION.md",
         "mirrorea_canon/INDEX.json",
         "mirrorea_canon/working/README.md",
         "mirrorea_canon/meta/review-keys.json",

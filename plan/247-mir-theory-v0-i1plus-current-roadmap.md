@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-03 19:44 JST
+最終更新: 2026-08-04 09:48 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- active milestone: **M1 Constitution**
-- next milestone: **M2 semantic-assertion T0/G0 closeout**
+- active milestone: **M2 semantic-assertion T0/G0 closeout**
+- next milestone: **M3 evaluation/materialization calculus**
 - active frontier limit: 一つの milestone
-- current direct blocker: concise Constitution の Canon placement と contradiction
-  audit を、M0 accepted governance cut に対して一つの evidence-gated milestone として
-  閉じること
-- direct consumer: M2 が読み込む concise Constitution と semantic-assertion
-  requirements vocabulary
+- current direct blocker: M1 Constitution に対する deterministic semantic-assertion
+  producer、fresh evaluation、negative control、acceptance record を一つの M2 evidence
+  unit として閉じること
+- direct consumer: M3 evaluation/materialization calculus が読む official T1 entry と
+  semantic-assertion acceptance vocabulary
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -127,7 +127,7 @@ records the final remote-parity check without changing M0's pinned official stat
 
 **Direct consumer:** M1 Constitution input bundle。
 
-### M1 - Constitution (active)
+### M1 - Constitution (completed 2026-08-04)
 
 **Intended outcome:** North Star と preserved invariants を短い、矛盾のない Mir Theory v0
 Constitution に集約し、後続 milestone の decision priority と禁止事項を固定する。
@@ -145,8 +145,10 @@ Constitution に集約し、後続 milestone の decision priority と禁止事�
 - M2 が参照できる semantic-assertion requirements と acceptance vocabulary を出力する。
 
 **Evidence:** `NORTH-STAR.md`、ADRs、theory/spec/scenarios の contradiction audit、
-M1 report、Canon validation。Constitution の exact path は M1 で決めるため、M0 時点では
-**UNRESOLVED** である。
+M1 report、Canon validation。`root/design-constitution` (`DESIGN-CONSTITUTION.md`) と
+ADR-0016 が canonical decision filter を採用した。SCN-02 の owner-side RMW、semantic /
+presentation fallback、pre-M6 grammar status を同じ cut で整合させ、独立 review と
+one correction cycle を pass した。
 
 **Direct blocker / consumer:** M0 accepted governance cut / M2 T0/G0 closeout。
 

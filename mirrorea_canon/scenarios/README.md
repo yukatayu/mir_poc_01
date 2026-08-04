@@ -14,7 +14,7 @@ open_items: []
 | ID | 題材 | 主に縛る理論 |
 |---|---|---|
 | SCN-01 | 双六の roll(owner 宛 write + publish) | 01, 03 |
-| SCN-02 | attack(cross-locus read/write + failure row) | 03 (THM-001) |
+| SCN-02 | attack(owner-evaluated RMW + failure row) | 03 (THM-001) |
 | SCN-03 | 後から join(admission・epoch・過去としての履歴) | 05 |
 | SCN-04 | owner の退出(incarnation 引退・stale key) | 05, 04 |
 | SCN-05 | portal(世界間リンクと可視性) | 03, 07 |

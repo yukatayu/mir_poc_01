@@ -14,12 +14,17 @@ helper-local leak. Carrier:
 
 ```text
 ObservationEvent = { subject_event, observer_principal, view_label,
-  redaction_level, retention_scope, export_surface, proof_or_reason_refs }
+  redaction_level, retention_scope, export_surface, source_spans,
+  proof_or_reason_refs }
 ```
 
 Pipeline: runtime occurrence → typed telemetry row → authority check →
 redaction → retention decision → export → viewer surface. Every exported row
 derives from the occurrence DAG or a declared telemetry effect.
+
+A relation-derived export is no less restrictive than every input's
+visibility/redaction policy; an implementation must reject or redact a derived
+release that would weaken one. This law does not require a final label lattice.
 
 **Redaction is monotone**: `admin_full ≥ redacted_admin ≥ observer_safe ≥
 public_summary`; layers may strengthen redaction, never weaken it
