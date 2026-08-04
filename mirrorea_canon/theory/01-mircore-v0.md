@@ -42,6 +42,9 @@ Core  c ::= read(ℓ, x[v].f)                       dependency, not occurrence
           | write(ℓ, x[v].f, v′)                  owner-local occurrence
           | request(ℓ_src → ℓ_own, op, v̄, ρ̄, ω̄, φ)  owner-directed occurrence
           | eval(k, body, EP)                         theory/13; pure body
+          | relationdef(r, O, subject, primary, fallback, transform, policy, label)
+          | bindrel(r, selected, lineage, epoch, witness, frontier)
+          | projectrel(r, selected, anchor, epoch, transform, frontier, label)
           | remote-result(r, O → T, read, receipt, EP) | consume-result(k, F, version, C)
           | publish(ℓ, x[v].f, v′, vis) | observe(π, ℓ, x[v].f, vis)
           | grant(π, g, verdict) | use(ρ) | witness(ω) | usewit(ω)
@@ -59,7 +62,7 @@ frontier `F` (theory/08).
 ## 2. Runtime configurations
 
 ```text
-Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ; R ; D ⟩
+Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ; R ; D ; J ⟩
   H  occurrence DAG (E, ≺)                       theory/04
   Q  per-locus request queues  Locus → Queue(request)
   S  stores: ℓ ↦ (x ↦ Active(K, epoch) ⇀ value)   indexed state, owner-local
@@ -70,13 +73,17 @@ Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ; R ; D ⟩
   P  patch lifecycle store                          theory/08
   R  explicit remote-result receipt store            theory/13
   D  designated-result/version store                 theory/13
+  J  maintained relation / binding store              theory/14
 ```
 
 A configuration is **well-formed** iff H is acyclic, every `use(ρ)` in H has a
 `grant` ancestor with matching lineage, every `observe` has a `publish`
 ancestor, every store entry's key is Active at its recorded epoch or explicitly
-tombstoned, and every chain position is ≤ its history maximum (monotone).
-Well-formedness is preserved by every step rule below (OBL-020).
+tombstoned, every chain position is ≤ its history maximum (monotone), and every
+J relation dependency graph is acyclic with an owner-held binding whose selected
+anchor/epoch/frontier is live. `projectrel` is an admitted relation publication;
+it is not a derived-value stream. Well-formedness is preserved by every step
+rule below (OBL-020).
 
 ## 3. The unified judgment
 
@@ -172,6 +179,11 @@ Steps are labelled `Σᵣ ─a→ Σᵣ′` where `a` appends zero or one occurr
 [E-DEGRADE] lease expiry / explicit failure advances chain position
             monotonically (never decreases);  [E-REACQ] explicit reacquire
             starts a new lineage with new witness/epoch (ADR-0004).
+[E-REL-DEGRADE] semantic invalidation of a J binding is owner-recorded and
+            advances its selected relation option primary → fallback; a
+            consumer presentation gap has no J mutation.
+[E-REL-PROJECT] owner emits an admitted `projectrel` with `publish-relation`;
+            a consumer evaluates it only with a coherent presentation context.
 [E-PATCH]   admitted patch activates via activate(P, F) only if the live
             frontier still matches F; otherwise verdict flips to deferred.
 ```

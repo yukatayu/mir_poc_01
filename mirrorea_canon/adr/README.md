@@ -31,3 +31,4 @@ open_items: []
 | ADR-0016 | Design Constitution を採用し、M1 の RMW/fallback/Surface alignment を記録 | L1 |
 | ADR-0017 | T0/G0 semantic-assertion profile v3を採用し、reproduced pass digestからG0 exit/T1 entryを受理 | L1 |
 | ADR-0018 | M3のfinite evaluation/materialization calculus、owner RMW、explicit receipt boundaryを採用 | L1 |
+| ADR-0019 | M4のowner-held maintained relation、late projection、semantic/presentation fallback分離を採用 | L1 |

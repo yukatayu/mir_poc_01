@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 146,
+ "files": 150,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 6646
+   "bytes": 7243
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21715
+   "bytes": 21803
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2746
+   "bytes": 2846
   },
   {
    "id": "adr/ADR-0001",
@@ -319,6 +319,21 @@
    "bytes": 4218
   },
   {
+   "id": "adr/ADR-0019",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0018",
+    "meta/proposal-022",
+    "root/design-constitution"
+   ],
+   "summary": "M4 の owner-held maintained relation、semantic/presentation fallback 分離、late projection を採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0019.md",
+   "bytes": 3099
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -328,7 +343,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2384
+   "bytes": 2506
   },
   {
    "id": "arch/01-strata",
@@ -824,6 +839,20 @@
    "bytes": 1861
   },
   {
+   "id": "meta/proposal-022",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0018"
+   ],
+   "summary": "owner-approved M4 scopeで、owner-held maintained relation と consumer-local late projection を採用する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-022-maintained-relation-late-projection.md",
+   "bytes": 3012
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -949,7 +978,7 @@
    "summary": "10 本の凍結正準シナリオと M3 pressure scenario。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。",
    "open_items": [],
    "path": "scenarios/README.md",
-   "bytes": 1730
+   "bytes": 1798
   },
   {
    "id": "scenarios/SCN-01",
@@ -1085,6 +1114,19 @@
    "bytes": 1866
   },
   {
+   "id": "scenarios/SCN-12",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "scenarios/readme",
+    "theory/14-maintained-relation-projection"
+   ],
+   "summary": "maintained bird relation の relation-first publication、C-local projection、fallback と split-frame reject を圧する M4 pressure scenario。",
+   "open_items": [],
+   "path": "scenarios/SCN-12-bird-relation-projection.md",
+   "bytes": 2656
+  },
+  {
    "id": "spec/01-lexical-and-modules",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1141,7 +1183,7 @@
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 3425
+   "bytes": 4517
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1157,7 +1199,7 @@
     "OPEN-027"
    ],
    "path": "spec/05-runtime-semantics.md",
-   "bytes": 2608
+   "bytes": 3331
   },
   {
    "id": "spec/06-conformance",
@@ -1233,7 +1275,7 @@
     "OPEN-012"
    ],
    "path": "theory/01-mircore-v0.md",
-   "bytes": 10640
+   "bytes": 11504
   },
   {
    "id": "theory/02-types-effects-failures",
@@ -1280,7 +1322,7 @@
     "OPEN-016"
    ],
    "path": "theory/04-ordering-and-cuts.md",
-   "bytes": 5087
+   "bytes": 5554
   },
   {
    "id": "theory/05-authority",
@@ -1311,7 +1353,7 @@
     "OPEN-019"
    ],
    "path": "theory/06-existence-fallback.md",
-   "bytes": 4197
+   "bytes": 4954
   },
   {
    "id": "theory/07-observation",
@@ -1326,7 +1368,7 @@
     "OPEN-020"
    ],
    "path": "theory/07-observation.md",
-   "bytes": 2303
+   "bytes": 2756
   },
   {
    "id": "theory/08-patch-hotplug",
@@ -1359,7 +1401,7 @@
     "OPEN-023"
    ],
    "path": "theory/09-two-layer-time.md",
-   "bytes": 3016
+   "bytes": 3600
   },
   {
    "id": "theory/10-diagnostics",
@@ -1387,12 +1429,13 @@
     "theory/06-existence-fallback",
     "theory/07-observation",
     "theory/08-patch-hotplug",
-    "theory/13-evaluation-materialization"
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 6736
+   "bytes": 8291
   },
   {
    "id": "theory/12-literature",
@@ -1426,6 +1469,27 @@
    "bytes": 9895
   },
   {
+   "id": "theory/14-maintained-relation-projection",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/06-existence-fallback",
+    "theory/07-observation",
+    "theory/09-two-layer-time",
+    "theory/13-evaluation-materialization",
+    "adr/ADR-0019"
+   ],
+   "summary": "M4 maintained relation、owner-held binding、semantic/presentation fallback 分離、consumer-local late projection の有限 calculus。",
+   "open_items": [
+    "OPEN-033"
+   ],
+   "path": "theory/14-maintained-relation-projection.md",
+   "bytes": 7986
+  },
+  {
    "id": "theory/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1436,7 +1500,7 @@
    "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
    "open_items": [],
    "path": "theory/README.md",
-   "bytes": 1468
+   "bytes": 1620
   },
   {
    "id": "working/readme",

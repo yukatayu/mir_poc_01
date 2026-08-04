@@ -17,11 +17,12 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
-evaluation/materialization calculus は閉じた。現在は ADR-0015 の
-owner-approved Mir Theory v0 / I1+ program の **M4 maintained relation / late
-projection** である。M3 は ADR-0018 / theory/13 の有限 `EvalPlan` calculus、owner
-serial RMW、release-admitted receipt、designated publication/consumer
-consumption を実証したが、relation DAG とprojection実行はM4へ残した。M2 は
+evaluation/materialization calculus、M4 maintained relation / late projection は閉じた。
+現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の **M5 shared formal
+model / metatheory** である。M4 は ADR-0019 / theory/14 / SCN-12 の有限
+relation-first calculus、C-local coherent projection、semantic/presentation fallback
+分離、fresh reacquire、privacy/split-frame rejectionを閉じた。これは M6 grammar、wire/API、
+M8 runtime、general save/load/patch、conformance を主張しない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、
@@ -131,8 +132,8 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   exit、T1 entry が受理されたが、それ以外の Gate/Phase は未成立です。
 - General OBL-001..028 は `intentionally-deferred`。M3 finite OBL-029..032 は
   `lean-proved`、OBL-033 は `model-checked-bounded`、OBL-034 は
-  `runtime-monitored` であり、いずれも theory/11 の明記された有限scopeを超える
-  claimではありません。
+  `runtime-monitored`、M4 finite OBL-035..039 は `lean-proved` であり、いずれも
+  theory/11 の明記された有限scopeを超える claimではありません。
 - T0 profile v3 が current profile として M2 acceptance を閉じた。v1 artifact は
   nonconforming historical evidence、v2 artifact は fixed-control drift の historical
   `fail` として保持され、再解釈しない。I1 authorization は未成立である。

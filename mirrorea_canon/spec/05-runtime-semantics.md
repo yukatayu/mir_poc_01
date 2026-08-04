@@ -25,6 +25,16 @@ conformance profile.
   designated evaluator decides and publishes one versioned value per
   evaluator/key/canonical-frontier; an explicit consumer occurrence consumes
   that value without re-deciding it.
+- **Maintained relation / late projection**: an owner holds relation definition
+  and binding state, and may publish only an admitted `publish-relation`
+  projection. A consumer evaluates it locally at presentation-frame from a
+  coherent one-frontier presentation context; it does not receive a derived
+  absolute value or adapter stream and cannot mutate the binding. Semantic
+  invalidation advances the owner-recorded selected relation option
+  monotonically; fresh witness+binding-epoch reacquire begins a new lineage.
+  A missing, stale, or split-frame presentation sample yields a local gap or
+  reject without semantic binding mutation. Derived release respects the
+  greatest restriction of relation/input labels.
 - **Membership**: join/leave bump epoch; leave retires the incarnation and
   tombstones entries; rejoin creates a fresh incarnation; stale-epoch
   messages are rejected with StaleMembership.

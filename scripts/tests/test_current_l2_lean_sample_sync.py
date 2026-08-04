@@ -108,7 +108,7 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         self.assertTrue(payload["success"])
         self.assertEqual(
             mocked_run.call_args.args[0],
-            ["lean", "samples/lean/foundations/CurrentL2LabelModel.lean"],
+            ["lean", "--trust=0", "samples/lean/foundations/CurrentL2LabelModel.lean"],
         )
         self.assertEqual(mocked_run.call_args.kwargs["cwd"], sync.REPO_ROOT)
 
@@ -119,7 +119,10 @@ class CurrentL2LeanSampleSyncTests(unittest.TestCase):
         with mock.patch.object(sync.subprocess, "run", return_value=completed) as mocked_run:
             sync.verify_lean(lean_path)
 
-        self.assertEqual(mocked_run.call_args.args[0], ["lean", str(lean_path)])
+        self.assertEqual(
+            mocked_run.call_args.args[0],
+            ["lean", "--trust=0", str(lean_path)],
+        )
 
     def test_main_prints_repo_relative_manifest_path(self) -> None:
         target_root = sync.REPO_ROOT / "target"

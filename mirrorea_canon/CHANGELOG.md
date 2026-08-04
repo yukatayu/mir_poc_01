@@ -18,6 +18,13 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-022 と ADR-0019 により、M4 の owner-held
+  maintained relation と consumer-local late projection を採用した。relation は
+  `publish-relation` で投影され、absolute value / adapter stream には具体化しない。
+  semantic fallback は同一 lineage 内で単調、fresh reacquire は新 lineage、presentation
+  gap は semantic state 非変異である。有限 Lean evidence は exact M4 rows のみを対象とし、
+  general fallback / two-layer-time proof、grammar、wire/API、save/load 実装、runtime
+  conformance は主張しない。
 - **2026-08-04** PROPOSAL-021 と ADR-0018 により、M3 の有限 `EvalPlan` を採用した。
   owner RMW は caller authority と owner evaluation を分離して serial service し、
   other-owner operand は explicit receipt または Diagnostic とする。designated evaluator

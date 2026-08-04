@@ -63,17 +63,23 @@ SaveObject = { cut, causal_frontier, place_states, queues,
   external_effect_obligations, provenance }
 ```
 
-M4/M5 must add the semantic state required for maintained relations and their
-activation frontiers, designated-result versioning, and receipt/consumption.
-This document deliberately selects neither field names nor an internal
-representation or serialization.  Whatever carrier M4/M5 selects belongs
-inside the SaveObject consistent cut and its provenance closure, never in
-untracked side state.
+M4 adds every live owner-held `RelationDef`/`BindingState`, selected fallback
+position, relation lineage, binding/witness/anchor epochs, and activation
+frontier to this provenance closure. M5 must integrate those carriers with
+designated-result versioning and receipt/consumption in the shared model. This
+document deliberately selects neither field names nor an internal
+representation or serialization. Temporary consumer presentation samples and
+local no-frame decisions are not semantic binding state and do not imply
+per-sample persistence. Whatever carrier M4/M5 selects belongs inside the
+SaveObject consistent cut and its provenance closure, never in untracked side
+state. This is a required semantic closure, not a general M4 load/restore proof
+or implementation claim.
 
 Widening candidates (two-layer time, theory/09): computational_state,
 anchor_graph, pose_snapshot_frontier, pose_versions, anchor_switch_state — if
 admitted they live *inside* SaveObject under Consistent(cut), never as side
-state.
+state. M4's finite relation model does not select or implement these widening
+candidates.
 
 ## Load admissibility and THM-003
 

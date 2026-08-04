@@ -77,6 +77,19 @@ with fresh witness/epoch (ADR-0004).
 are audit-side non-admissible subreasons, not dedicated occurrences; request-
 level outcomes dominate the event surface.
 
+## Maintained-relation binding (M4)
+
+A maintained relation uses this chain law through its owner-held
+`BindingState`. Its selected primary/fallback anchor is a semantic choice only
+when the anchor's existence, membership/incarnation, lease, authority, witness,
+and relation lineage are live. Semantic invalidation records the owner-side
+primary → fallback advance and is causally before later access on that lineage.
+An earlier anchor becomes selectable only through explicit fresh witness plus
+binding-epoch reacquire, which starts a new relation lineage. A consumer's
+missing/stale/split presentation sample is not a semantic invalidation and may
+not invoke this rule. The exact M4 finite carrier is theory/14; OBL-005--008
+remain general obligations.
+
 ## Why this matters for virtual space (informative)
 
 Hosts leave, shards split, anchors vanish, links drop: "degrade to an ancestor

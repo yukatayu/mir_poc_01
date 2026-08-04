@@ -40,6 +40,15 @@ one interpretation step, samples interpreted against two different frontiers
 for anchors that the discrete layer declares atomic together (e.g. two bones
 of one avatar). Violations are a devtools-visible row class.
 
+**M4 maintained-relation profile.** For one projected relation,
+`PresentationContext` fixes one consumer frontier and contains every required
+anchor sample at that frontier and the `BindingState`-recorded anchor epoch.
+Missing, old-epoch, or mixed-frontier samples reject semantic relation
+evaluation; the consumer may report a local presentation gap instead. The gap
+does not mutate the owner-held relation binding, fallback option, authority,
+lineage, or occurrence history. This is the finite profile of theory/14, not
+the resolution of the general clock/latency questions below.
+
 **Two fallback domains.** Semantic fallback is triggered only by discrete
 semantic invalidation of an anchor (existence, membership/incarnation, lease,
 authority, or lineage loss). It advances the chain with the ordinary

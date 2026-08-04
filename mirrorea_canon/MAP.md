@@ -30,6 +30,7 @@ theory/ (MirCore v0)                     mental-model/ (表と裏の対応)
   01 ──► 04 順序と cut ──► 05 権限            │
   01 ──► 06 存在と fallback                   │
   01 ──► 07 観測  08 patch  09 二層時間  10 診断
+  04 / 05 / 06 / 07 / 09 ──► 14 relation/projection
   11 定理・義務台帳(THM/OBL)  12 文献
    │
    ▼
@@ -49,7 +50,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 - **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0017。
 
 Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015--0018、
-PROPOSAL-018--021 を追加で読み、LAB の designated current roadmap と derived status
+PROPOSAL-018--022 を追加で読み、LAB の designated current roadmap と derived status
 だけを current queue として使う。下の historical working records 一覧は queue ではない。
 
 ## ID 体系
@@ -60,7 +61,7 @@ PROPOSAL-018--021 を追加で読み、LAB の designated current roadmap と de
 | CON-### | 概念 | GLOSSARY.md |
 | THM-### | 定理(statement) | theory/11 |
 | OBL-### | 証明・検証義務 | theory/11 |
-| SCN-## | 適合性シナリオ | scenarios/ |
+| SCN-## | 適合性シナリオ / milestone pressure scenario | scenarios/ |
 | BND-### | 層間契約 | architecture/02 |
 | GATE-# / PHASE-x | 計画単位 | plan/00, 01 |
 | OPEN-### | 未決 | 各ファイル open_items と INDEX.json |

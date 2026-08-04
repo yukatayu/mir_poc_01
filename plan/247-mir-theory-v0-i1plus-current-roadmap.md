@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 12:09 JST
+最終更新: 2026-08-04 13:24 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M3 evaluation/materialization calculus**
-- active milestone: **M4 maintained relation/late projection**
-- next milestone: **M5 shared formal model/metatheory**
+- completed milestone: **M4 maintained relation/late projection**
+- active milestone: **M5 shared formal model/metatheory**
+- next milestone: **M6 Surface**
 - active frontier limit: 一つの milestone
-- current direct blocker: M4 の maintained relation、guarded reference、semantic /
-  presentation fallback、consumer-local late projection を、accepted M3 `EvalPlan`
-  calculus の上で閉じること
-- direct consumer: M5 shared formal model/metatheory
+- current direct blocker: accepted M1--M4 rules と finite evidence を、Surface、Core、
+  Config、Step、WellFormed、Trace、Diagnostic の一つの non-opaque model と
+  correspondence matrix に統合すること
+- direct consumer: M6 Surface
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -220,7 +220,7 @@ focused Rust/model tests, and independent review.
 
 **Direct blocker / consumer:** completed; M4 is the direct consumer.
 
-### M4 - Maintained relation / late projection
+### M4 - Maintained relation / late projection (completed 2026-08-04)
 
 **Intended outcome:** maintained relation、guarded reference、fallback、relation DAG と
 consumer-local late projection を同じ semantic model に置き、value stream へ早期具体化
@@ -243,11 +243,23 @@ consumer-local late projection を同じ semantic model に置き、value stream
 - anchor visibility/redaction を弱めない derived label、no stale sample、no hidden
   communication/authority/value materializationを検査する。final wire/API/ABIは固定しない。
 
-**Evidence:** M3 calculus、theory/04--07、existing relation/fallback evidence、new bird
-scenario and finite projection model、independent review。P017/WRK evidence は historical
-LAB evidence であり、新しい Canon relation の代用にしない。
+**Close evidence:** ADR-0019 / theory/14 / SCN-12 establish the finite
+owner-held relation, guarded primary/fallback binding, consumer-local projection,
+coherent presentation context, monotone semantic fallback, fresh reacquire, and
+derived-label boundary. The finite Lean foundation compiled with `--trust=0`;
+OBL-035--039 are `lean-proved` only for their stated finite fragments. The Rust
+reference passed 13 focused M4 tests, the full `mir-semantics` test suite, and
+test-target clippy. An Oracle consultation was advisory only. The independent
+review initially found five P1/P2 findings, the authority correction passed its
+second P1 review, and final review found no P0/P1 finding. This is not a general
+relation-DAG theorem, final grammar/wire/API, M8 runtime, general save/load or
+patch implementation, conformance, I1 completion, or deployment claim.
 
-**Direct blocker / consumer:** M3 materialization semantics / M5 shared model。
+**Evidence:** M3 calculus、ADR-0019、theory/04--07/09/11/14、SCN-12、finite Lean
+foundation、focused Rust/model tests、advisory Oracle consultation、independent review。
+P017/WRK evidence は historical LAB evidence であり、新しい Canon relation の代用にしない。
+
+**Direct blocker / consumer:** completed; M5 shared formal model/metatheory is the direct consumer。
 
 ### M5 - Shared formal model / metatheory
 
@@ -268,7 +280,7 @@ checker、runtime が共有する semantic source を固定する。
 **Evidence:** theory/11 ledger、Gate / Phase sources、M3/M4 artifacts、Lean / model checks、
 independent review。
 
-**Direct blocker / consumer:** accepted M3/M4 semantics / M6 Surface。
+**Direct blocker / consumer:** accepted M1--M4 semantics / M6 Surface。
 
 ### M6 - Surface
 
@@ -455,8 +467,7 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M4 の maintained-relation / late-projection calculus を開始する。小鳥/肩 scenario を
-relation-first で定義し、C-local projection、relative-offset coherence、semantic versus
-presentation fallback、fresh reacquire、visibility propagation と split-frame rejection を、M3
-`EvalPlan` / receipt / occurrence vocabularyを拡張して閉じる。M4 report、independent review、
-focused validation、commit/push/remote parity が閉じるまで M5 は開始しない。
+M5 の shared formal model / metatheory を開始する。accepted M1--M4 の Surface fragment、
+Core、Config、Step、WellFormed、Trace、Diagnostic、relation state、cut/save interface を
+一つの non-opaque model と correspondence matrix に統合する。M5 report、independent review、
+focused validation、commit/push/remote parity が閉じるまで M6 は開始しない。

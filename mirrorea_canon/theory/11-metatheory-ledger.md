@@ -2,7 +2,7 @@
 id: theory/11-metatheory-ledger
 status: L1-fixed
 maturity: draft
-depends_on: [theory/03-elaboration, theory/04-ordering-and-cuts, theory/05-authority, theory/06-existence-fallback, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization]
+depends_on: [theory/03-elaboration, theory/04-ordering-and-cuts, theory/05-authority, theory/06-existence-fallback, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/14-maintained-relation-projection]
 summary: 定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。
 open_items: []
 ---
@@ -70,6 +70,11 @@ success or a generic `open` bucket.
 | OBL-032 | Finite M3 designated duplicate stability | THM-010 | duplicate decision and idempotent consumption lemmas | lean-proved | one evaluator/key lineage; no save/load/stale-result theorem |
 | OBL-033 | Finite M3 materialization target checker | judgment | exhaustive six-target model enumeration | model-checked-bounded | exact 64 target subsets only; no general checker claim |
 | OBL-034 | M3 typed reference trace invariants | M3 reference | Rust focused trace tests | runtime-monitored | parser-free deterministic reference, not M8 runtime conformance |
+| OBL-035 | Finite M4 projection coherence / relative-offset preservation | M4 relation | `project_then_evaluate_equals_evaluate_relation`, `relative_offset_is_preserved_by_projection` in M4 Lean foundation | lean-proved | one owner, consumer, subject, two anchors, exact `Int` offset and coherent finite context; no arbitrary DAG or renderer theorem |
+| OBL-036 | Finite M4 semantic fallback monotonicity / fresh reacquire | THM-002 fragment | `semantic_fallback_is_monotone`, no-auto-repromotion, and fresh/nonfresh reacquire lemmas in M4 Lean foundation | lean-proved | exactly primary → fallback; fresh epochs begin one new finite lineage; no general chain proof |
+| OBL-037 | Finite M4 presentation-context coherence / gap nonmutation | OBL-023 fragment | coherence, stale/split reject, and `presentation_gap_does_not_mutate_semantic_binding` in M4 Lean foundation | lean-proved | two-anchor one-frontier profile only; no general clock, latency, or stream theorem |
+| OBL-038 | Finite M4 greatest-restriction label propagation | M4 observation fragment | three-label order / dominance and private-to-public reject lemmas in M4 Lean foundation | lean-proved | exact `public < restricted < private` chain only; no general label lattice/noninterference proof |
+| OBL-039 | Finite M4 relation admission rejects | M4 relation | cycle and consumer-mutation reject lemmas in M4 Lean foundation | lean-proved | direct self-cycle and one non-owner consumer only; no arbitrary cycle detection or authority theorem |
 
 Discharge order recommendation: 020 → 021 → 001/002 → 005–008 → 009–014 →
 015/016 → 017/018 → 019 (matches Gate order, plan/00).

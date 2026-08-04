@@ -26,6 +26,13 @@ A relation-derived export is no less restrictive than every input's
 visibility/redaction policy; an implementation must reject or redact a derived
 release that would weaken one. This law does not require a final label lattice.
 
+M4 instantiates a decidable finite profile for a maintained relation:
+`public < restricted < private`. `publish-relation` carries the relation label;
+the evaluated/observed derived release label is the greatest restriction of it
+and every admitted anchor-sample label. Consumer-local evaluation inherits that
+bound. A requested weaker release, including private-to-public, rejects. This
+finite order does not finalize OPEN-020's general label lattice.
+
 **Redaction is monotone**: `admin_full ≥ redacted_admin ≥ observer_safe ≥
 public_summary`; layers may strengthen redaction, never weaken it
 transparently. **Retention** ∈ {none, ephemeral, report_local, session_local,

@@ -24,3 +24,4 @@ SCN-01..10 は「本来上に載せたかったもの」の凍結標本である
 | SCN-09 | patch 受理と拒否(self-grant 無変異) | 08 (THM-006) |
 | SCN-10 | save/load の stale 拒否 | 04 (THM-003) |
 | SCN-11 | designated evaluator / versioned value | 13 |
+| SCN-12 | maintained relation / late projection | 14, 06, 07, 09 |

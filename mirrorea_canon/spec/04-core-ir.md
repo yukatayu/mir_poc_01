@@ -52,6 +52,25 @@ dependency/occurrence rows with a source span or, in the parser-free M3
 reference only, its deterministic operation key. This paragraph does
 not select JSON names or make the exchange form public; OPEN-026 remains.
 
+## M4 maintained-relation delta (non-wire, non-final)
+
+The M4 internal Core carries a domain-neutral `RelationDef` and owner-held
+`BindingState`, plus an admitted `ProjectedRelation` publication. The relation
+publication is the M3 `publish-relation` materialization; it contains relation
+reference, required anchor refs/epochs, selected anchor, relative transform,
+lineage/binding epoch,
+activation frontier, and relation label. The evaluated/observed derived result
+uses the greatest restriction of that label and its admitted inputs. It is not
+a `publish-value` or `adapter-stream` record for an absolute derived pose.
+
+The consumer's presentation-frame `eval` remains `local-only` and must cite a
+coherent `PresentationContext` with all required anchors at one frontier and
+the expected anchor epochs. Its Core outcome is a local presentation result or
+an M4 semantic reject category (cycle, stale anchor, split frame, non-owner
+mutation, weak release), not an inferred owner mutation. These paragraphs do
+not select exchange JSON names, Surface syntax, wire fields, or final public
+ABI.
+
 ## Appendix — Core companion textual notation (non-Surface)
 
 For theory prose, fixtures, and Core-level tests (inherits LAB D-030..D-044):

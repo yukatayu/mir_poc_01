@@ -63,6 +63,10 @@ FOUNDATIONS = [
         filename="MirTheoryV0M3EvaluationMaterialization.lean",
         explanation_path="samples/lean/foundations/MirTheoryV0M3EvaluationMaterialization.md",
     ),
+    FoundationSpec(
+        filename="MirTheoryV0M4MaintainedRelationProjection.lean",
+        explanation_path="samples/lean/foundations/MirTheoryV0M4MaintainedRelationProjection.md",
+    ),
 ]
 
 

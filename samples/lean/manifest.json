@@ -65,6 +65,19 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "foundation",
+      "filename": "MirTheoryV0M4MaintainedRelationProjection.lean",
+      "lean_path": "samples/lean/foundations/MirTheoryV0M4MaintainedRelationProjection.lean",
+      "explanation_path": "samples/lean/foundations/MirTheoryV0M4MaintainedRelationProjection.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "'MirTheoryV0M4MaintainedRelationProjection.project_then_evaluate_equals_evaluate_relation' depends on axioms: [propext]\n'MirTheoryV0M4MaintainedRelationProjection.semantic_fallback_is_monotone' depends on axioms: [propext, Quot.sound]\n'MirTheoryV0M4MaintainedRelationProjection.presentation_gap_does_not_mutate_semantic_binding' depends on axioms: [propext]\n'MirTheoryV0M4MaintainedRelationProjection.derived_label_dominates_each_input' does not depend on any axioms\n'MirTheoryV0M4MaintainedRelationProjection.relation_cycle_is_rejected' does not depend on any axioms\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ],
   "statement_drafts": [
