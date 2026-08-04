@@ -30,3 +30,4 @@ open_items: []
 | ADR-0015 | Mir Theory v0 / I1+ の owner-approved program に evidence-gated bounded autonomy と milestone 直列 integration を委任 | 運用 L0 |
 | ADR-0016 | Design Constitution を採用し、M1 の RMW/fallback/Surface alignment を記録 | L1 |
 | ADR-0017 | T0/G0 semantic-assertion profile v3を採用し、reproduced pass digestからG0 exit/T1 entryを受理 | L1 |
+| ADR-0018 | M3のfinite evaluation/materialization calculus、owner RMW、explicit receipt boundaryを採用 | L1 |

@@ -3,13 +3,13 @@ id: scenarios/readme
 status: L0-frozen
 maturity: draft
 depends_on: [spec/06-conformance, theory/03-elaboration]
-summary: 10 本の正準シナリオ。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。
+summary: 10 本の凍結正準シナリオと M3 pressure scenario。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。
 open_items: []
 ---
 
-# scenarios/ — 正準シナリオ(凍結)
+# scenarios/ — 正準シナリオと pressure scenario
 
-この 10 本は「本来上に載せたかったもの」の凍結標本である。**理論・仕様のどの改訂も、10 本すべてを説明できなければ却下される**(変更それ自体に ADR が必要)。各ファイルは: 目的 / Surface ソース / 期待される elaboration・実行 / 否定変種と期待診断 / 参照 ID を持つ。語彙(World, Player 等)は S5 のドメイン語彙である(ADR-0001)。
+SCN-01..10 は「本来上に載せたかったもの」の凍結標本である。**理論・仕様のどの改訂も、10 本すべてを説明できなければ却下される**(変更それ自体に ADR が必要)。SCN-11 以降は owner-approved milestone が追加する pressure scenario であり、凍結十本を遡及変更しない。各ファイルは: 目的 / Surface 又は Core-level source / 期待される elaboration・実行 / 否定変種と期待診断 / 参照 ID を持つ。語彙(World, Player 等)は S5 のドメイン語彙である(ADR-0001)。
 
 | ID | 題材 | 主に縛る理論 |
 |---|---|---|
@@ -23,3 +23,4 @@ open_items: []
 | SCN-08 | avatar fallback(lease 失効・単調劣化・再取得) | 06 (THM-002) |
 | SCN-09 | patch 受理と拒否(self-grant 無変異) | 08 (THM-006) |
 | SCN-10 | save/load の stale 拒否 | 04 (THM-003) |
+| SCN-11 | designated evaluator / versioned value | 13 |

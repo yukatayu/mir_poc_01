@@ -10,7 +10,10 @@
   base current-L2 source corpus
 - `lean/`
   mechanization evidence and LAB statement-shape drafts
-  - `foundations/` は small actual proof fragments
+  - `foundations/` は small actual proof fragments。M3 `EvalPlan` / owner-RMW /
+    explicit receipt / designated-result finite model is
+    `MirTheoryV0M3EvaluationMaterialization.lean`; `--trust=0` で個別 compile
+    する。これは一般 runtime / relation / save-load proof ではない
   - `lab-statements/` は compile-check only の statement-shape drafts であり、canon OBL status movement ではない
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`

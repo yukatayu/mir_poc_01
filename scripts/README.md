@@ -305,7 +305,8 @@
   current-L2 source corpus、detached validation loop、diff/export assist、Lean sync、checker support
 - `current_l2_lean_sample_sync.py`
   active Lean foundations、LAB statement drafts、clean-near-end generated
-  theorem stubs を検証し、`samples/lean/manifest.json` に同期する。
+  theorem stubs を `lean --trust=0` で検証し、`samples/lean/manifest.json` に同期する。
+  M3 finite evaluation/materialization foundation もこの inventory に含む。
   `statement_drafts` は compile-check only であり、proof discharge や canon
   OBL status ではない。
 - `current_l2_model_check_carrier_pipeline.py`

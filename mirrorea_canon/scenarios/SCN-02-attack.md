@@ -45,4 +45,5 @@ MissingCapability failure occurrence leaves the store unchanged.
 precomputed hp ⇒ fails C-static; (c) treat same-owner RMW as cross-owner
 atomicity ⇒ reject/defer rather than infer a transaction; (d) attack after
 target leave ⇒ StaleMembership.
-**Refs**: THM-001, THM-004, ADR-0003, ADR-0005, ADR-0016, mental-model/02.
+**Refs**: THM-001, THM-004, ADR-0003, ADR-0005, ADR-0016, ADR-0018,
+theory/13, mental-model/02.

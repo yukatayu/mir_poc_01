@@ -37,7 +37,9 @@ type-level computation.
 
 `μ ::= local | remote(ℓ)` — where the value/action is anchored. `remote`
 results are always mediated by request/observe; there is no transparent remote
-lvalue.
+lvalue. This residency mode is not an evaluation plan: theory/13 records
+evaluation site, trigger/clock, authority origin, and materialization as
+independent typed coordinates.
 
 ## Effect rows
 

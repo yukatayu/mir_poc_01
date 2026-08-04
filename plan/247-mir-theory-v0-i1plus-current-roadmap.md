@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 10:36 JST
+最終更新: 2026-08-04 12:09 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M2 semantic-assertion T0/G0 closeout**
-- active milestone: **M3 evaluation/materialization calculus**
-- next milestone: **M4 maintained relation/late projection**
+- completed milestone: **M3 evaluation/materialization calculus**
+- active milestone: **M4 maintained relation/late projection**
+- next milestone: **M5 shared formal model/metatheory**
 - active frontier limit: 一つの milestone
-- current direct blocker: M3 の shared evaluation/materialization calculus を、M1
-  Constitution と accepted T1 entry に沿って定義し、same-owner RMW と cross-owner
-  diagnostic の positive/negative evidence を閉じること
-- direct consumer: M4 maintained relation/late projection semantics
+- current direct blocker: M4 の maintained relation、guarded reference、semantic /
+  presentation fallback、consumer-local late projection を、accepted M3 `EvalPlan`
+  calculus の上で閉じること
+- direct consumer: M5 shared formal model/metatheory
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -179,7 +179,7 @@ G0-D3 → G0 exit → T1 entry を適用した。v1/v2 は historical evidence �
 
 **Direct blocker / consumer:** completed; the direct consumer is M3 evaluation-materialization calculus。
 
-### M3 - Evaluation / materialization
+### M3 - Evaluation / materialization (completed 2026-08-04)
 
 **Intended outcome:** source-level meaning の semantic form、evaluation site、trigger /
 clock、authority origin、materialization を直交して保持する deterministic calculus と
@@ -204,10 +204,21 @@ executable reference を閉じる。
   explicit effect/failure/no-mutation を Canon/Lean/bounded model/reference behavior に
   対応付け、実証 class を正確に記録する。
 
-**Evidence:** theory/01--03、SCN-01/02、historical LAB Plans 196/246 と countermodels、
-focused model / executable tests、independent review。
+**Close evidence:** ADR-0018 / theory/13 define the finite `EvalPlan` and
+single `eval` carrier. The parser-free Rust reference has canonical six-target
+checking (all 64 target subsets), owner-serial `100 → 90 → 80`, explicit
+release-admitted request → serve → reply → receive receipts, deterministic
+operation-origin keys, and separately recorded designated publication / one
+consumer consumption. Its focused suite has 18 tests. The finite Lean model
+compiled with `--trust=0`; OBL-029--032 are `lean-proved` only in their exact
+finite scopes, OBL-033 is `model-checked-bounded`, and OBL-034 is
+`runtime-monitored`. This does not claim M4 relation execution, M6 Surface
+spans, M8 runtime, save/load, patch, a wire format, or public API.
 
-**Direct blocker / consumer:** M2 close / M4 relation calculus。
+**Evidence:** ADR-0018, theory/01--03/11/13, SCN-02/11, the M3 Lean foundation,
+focused Rust/model tests, and independent review.
+
+**Direct blocker / consumer:** completed; M4 is the direct consumer.
 
 ### M4 - Maintained relation / late projection
 
@@ -444,8 +455,8 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M3 の evaluation/materialization calculus を、M1 Constitution と accepted T1 entry から
-定義する。まず evaluation site、trigger/clock、authority origin、materialization を直交する
-shared judgment に置き、same-owner RMW の `100 → 90 → 80` positive case と cross-owner
-hidden transaction rejection を同じ reference evidence で閉じる。M3 report、independent
-review、focused validation、commit/push/remote parity が閉じるまで M4 は開始しない。
+M4 の maintained-relation / late-projection calculus を開始する。小鳥/肩 scenario を
+relation-first で定義し、C-local projection、relative-offset coherence、semantic versus
+presentation fallback、fresh reacquire、visibility propagation と split-frame rejection を、M3
+`EvalPlan` / receipt / occurrence vocabularyを拡張して閉じる。M4 report、independent review、
+focused validation、commit/push/remote parity が閉じるまで M5 は開始しない。

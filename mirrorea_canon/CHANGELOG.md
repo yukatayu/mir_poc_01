@@ -18,6 +18,11 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-021 と ADR-0018 により、M3 の有限 `EvalPlan` を採用した。
+  owner RMW は caller authority と owner evaluation を分離して serial service し、
+  other-owner operand は explicit receipt または Diagnostic とする。designated evaluator
+  は frontier/versioned value を決定する。これは M6 grammar、wire/API、transaction、
+  save/load/patch、I1/conformance/deployment を固定・主張しない。
 - **2026-08-04** ADR-0017 / Plan 04 の M2 acceptance record に、revision-bound
   semantic-assertion v3 の fresh `pass` artifact (`LAB:plan/248`、digest
   `b32bd2c87e1dc77ca2a4f7a7426cda0bff8bcbf80155d19addd7db3a8288aa23`) を受理した。

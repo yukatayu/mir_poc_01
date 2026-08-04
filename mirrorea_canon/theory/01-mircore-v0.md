@@ -4,7 +4,7 @@ status: L1-fixed
 maturity: draft
 depends_on: [theory/00-overview, theory/02-types-effects-failures, adr/ADR-0003, adr/ADR-0004, adr/ADR-0005]
 summary: MirCore v0 計算体系。抽象構文、実行構成、統合判定、小ステップ操作意味論、定理 statement の所在。
-open_items: [OPEN-010, OPEN-011, OPEN-012]
+open_items: [OPEN-010, OPEN-012]
 ---
 
 # 01 — MirCore v0
@@ -41,6 +41,8 @@ Expr e    ::= v | y | x[e].f | e ⊕ e | e == e | ¬e | e ∧ e | ⟨f̄ = ē⟩
 Core  c ::= read(ℓ, x[v].f)                       dependency, not occurrence
           | write(ℓ, x[v].f, v′)                  owner-local occurrence
           | request(ℓ_src → ℓ_own, op, v̄, ρ̄, ω̄, φ)  owner-directed occurrence
+          | eval(k, body, EP)                         theory/13; pure body
+          | remote-result(r, O → T, read, receipt, EP) | consume-result(k, F, version, C)
           | publish(ℓ, x[v].f, v′, vis) | observe(π, ℓ, x[v].f, vis)
           | grant(π, g, verdict) | use(ρ) | witness(ω) | usewit(ω)
           | admitreq(π, R, ℓ) | verdict(π, R, ℓ, out, epoch, inc, ρ̄, ω)
@@ -57,7 +59,7 @@ frontier `F` (theory/08).
 ## 2. Runtime configurations
 
 ```text
-Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ⟩
+Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ; R ; D ⟩
   H  occurrence DAG (E, ≺)                       theory/04
   Q  per-locus request queues  Locus → Queue(request)
   S  stores: ℓ ↦ (x ↦ Active(K, epoch) ⇀ value)   indexed state, owner-local
@@ -66,6 +68,8 @@ Config  Σᵣ = ⟨ H ; Q ; S ; M ; G ; W ; L ; P ⟩
   W  witness store: ω ↦ witness record
   L  lease/chain store: c ↦ (position, per-option lease state)  theory/06
   P  patch lifecycle store                          theory/08
+  R  explicit remote-result receipt store            theory/13
+  D  designated-result/version store                 theory/13
 ```
 
 A configuration is **well-formed** iff H is acyclic, every `use(ρ)` in H has a
@@ -127,7 +131,7 @@ O is also the evaluation site: on service it evaluates the reads and write as
 one bounded owner transition. L remains the authority origin. This is not a
 requester-side private read or a blind write; a genuinely other-owner operand
 uses an explicit result/receipt path or is outside the ordinary v0 fragment
-(ADR-0016). M3 fixes the exact evaluation/materialization carrier.
+(ADR-0016, ADR-0018). The exact `EP` carrier and service rules are theory/13.
 
 **[HANDLER]** `when h(p̄) fails φ_d { s̄ }`: body elaborated with parameters
 bound; every generated failure of the body must be ⊆ φ_d (containment is a
@@ -176,6 +180,8 @@ Scheduling: the calculus is nondeterministic over enabled steps; the
 **conformance profile** (spec/05) fixes a deterministic schedule for testing.
 Owner queues are served serially per owner — this *is* the concurrency model
 (ADR-0003): interleaving exists between loci, never inside one owner's store.
+`eval`, `remote-result`, and designated-result rows refine this shape in
+theory/13; no receipt, evaluator version, or evaluation coordinate is implicit.
 
 ## 6. Theorems anchored on this calculus
 
@@ -194,6 +200,5 @@ indexed-state owners, dynamic locus expressions (`at e { }` needs a separate
 decision), distributed transactions.
 
 OPEN-010: whether `serve` failure replies are occurrences at the requester too
-(currently: yes, as receive-occ). OPEN-011: exact reply/receipt carrier for
-read requests. OPEN-012: whether `cond` needs join-point normalization for the
-checker's finite fragment.
+(currently: yes, as receive-occ). OPEN-012: whether `cond` needs join-point
+normalization for the checker's finite fragment.

@@ -59,6 +59,10 @@ FOUNDATIONS = [
         filename="CurrentL2ProofSkeleton.lean",
         explanation_path="samples/lean/foundations/CurrentL2ProofSkeleton.md",
     ),
+    FoundationSpec(
+        filename="MirTheoryV0M3EvaluationMaterialization.lean",
+        explanation_path="samples/lean/foundations/MirTheoryV0M3EvaluationMaterialization.md",
+    ),
 ]
 
 
@@ -120,7 +124,7 @@ def lean_version() -> str:
 
 def verify_lean(path: Path) -> dict[str, object]:
     completed = subprocess.run(
-        ["lean", repo_relative_source_path(str(path))],
+        ["lean", "--trust=0", repo_relative_source_path(str(path))],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,

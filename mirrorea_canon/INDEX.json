@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 142,
+ "files": 146,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 6184
+   "bytes": 6646
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21658
+   "bytes": 21715
   },
   {
    "id": "root/north-star",
@@ -305,6 +305,20 @@
    "bytes": 2300
   },
   {
+   "id": "adr/ADR-0018",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0016",
+    "meta/proposal-021"
+   ],
+   "summary": "M3 の finite evaluation/materialization calculus と explicit remote receipt boundary を固定する。",
+   "open_items": [],
+   "path": "adr/ADR-0018.md",
+   "bytes": 4218
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -314,7 +328,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2267
+   "bytes": 2384
   },
   {
    "id": "arch/01-strata",
@@ -796,6 +810,20 @@
    "bytes": 1532
   },
   {
+   "id": "meta/proposal-021",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0016"
+   ],
+   "summary": "owner-approved M3 scopeで、有限 EvalPlan と owner transition / explicit receipt / designated materialization を採用する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-021-evaluation-materialization-calculus.md",
+   "bytes": 1861
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -918,10 +946,10 @@
     "spec/06-conformance",
     "theory/03-elaboration"
    ],
-   "summary": "10 本の正準シナリオ。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。",
+   "summary": "10 本の凍結正準シナリオと M3 pressure scenario。理論ドリフト防止装置であり適合性の定義。変更には ADR が要る。",
    "open_items": [],
    "path": "scenarios/README.md",
-   "bytes": 1490
+   "bytes": 1730
   },
   {
    "id": "scenarios/SCN-01",
@@ -945,7 +973,7 @@
    "summary": "attack。ブログ由来の規範例。authority origin と S-owner RMW、failure row 包含、THM-001 の主試験。",
    "open_items": [],
    "path": "scenarios/SCN-02-attack.md",
-   "bytes": 1943
+   "bytes": 1964
   },
   {
    "id": "scenarios/SCN-03",
@@ -1044,6 +1072,19 @@
    "bytes": 1542
   },
   {
+   "id": "scenarios/SCN-11",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "theory/13-evaluation-materialization",
+    "scenarios/SCN-02"
+   ],
+   "summary": "designated evaluator が frontier ごとに versioned value を決定し、consumer は再評価しない M3 pressure scenario。",
+   "open_items": [],
+   "path": "scenarios/SCN-11-designated-evaluator.md",
+   "bytes": 1866
+  },
+  {
    "id": "spec/01-lexical-and-modules",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1100,7 +1141,7 @@
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 2487
+   "bytes": 3425
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1116,7 +1157,7 @@
     "OPEN-027"
    ],
    "path": "spec/05-runtime-semantics.md",
-   "bytes": 2074
+   "bytes": 2608
   },
   {
    "id": "spec/06-conformance",
@@ -1189,11 +1230,10 @@
    "summary": "MirCore v0 計算体系。抽象構文、実行構成、統合判定、小ステップ操作意味論、定理 statement の所在。",
    "open_items": [
     "OPEN-010",
-    "OPEN-011",
     "OPEN-012"
    ],
    "path": "theory/01-mircore-v0.md",
-   "bytes": 10242
+   "bytes": 10640
   },
   {
    "id": "theory/02-types-effects-failures",
@@ -1208,7 +1248,7 @@
     "OPEN-013"
    ],
    "path": "theory/02-types-effects-failures.md",
-   "bytes": 4215
+   "bytes": 4384
   },
   {
    "id": "theory/03-elaboration",
@@ -1224,7 +1264,7 @@
     "OPEN-014"
    ],
    "path": "theory/03-elaboration.md",
-   "bytes": 3744
+   "bytes": 3760
   },
   {
    "id": "theory/04-ordering-and-cuts",
@@ -1346,12 +1386,13 @@
     "theory/05-authority",
     "theory/06-existence-fallback",
     "theory/07-observation",
-    "theory/08-patch-hotplug"
+    "theory/08-patch-hotplug",
+    "theory/13-evaluation-materialization"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 3320
+   "bytes": 6736
   },
   {
    "id": "theory/12-literature",
@@ -1369,6 +1410,22 @@
    "bytes": 5609
   },
   {
+   "id": "theory/13-evaluation-materialization",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "theory/01-mircore-v0",
+    "theory/02-types-effects-failures",
+    "theory/03-elaboration",
+    "theory/05-authority",
+    "adr/ADR-0018"
+   ],
+   "summary": "M3 の評価場所・clock・authority origin・materialization を分離する有限 calculus。owner RMW、explicit receipt、designated evaluator の規則を定義する。",
+   "open_items": [],
+   "path": "theory/13-evaluation-materialization.md",
+   "bytes": 9895
+  },
+  {
    "id": "theory/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1379,7 +1436,7 @@
    "summary": "理論正本の読み方。章構成、記法規約、証明状態の見方、「ここから推論してはいけないこと」。",
    "open_items": [],
    "path": "theory/README.md",
-   "bytes": 1438
+   "bytes": 1468
   },
   {
    "id": "working/readme",

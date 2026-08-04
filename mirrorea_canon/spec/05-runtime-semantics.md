@@ -18,6 +18,13 @@ conformance profile.
   failure ∈ declared row. Fail-closed: validation failure changes no store.
 - **Owner seriality**: one owner's store mutations are totally ordered by its
   serve loop (ADR-0003). Cross-owner interleaving is otherwise free.
+- **Evaluation/materialization**: an owner transition evaluates its same-owner
+  reads and RHS only at validated owner service; the requester does not obtain
+  private operands or blind-write a stale value. An other-owner operand needs
+  the explicit receipt boundary in theory/13 or a static Diagnostic. A
+  designated evaluator decides and publishes one versioned value per
+  evaluator/key/canonical-frontier; an explicit consumer occurrence consumes
+  that value without re-deciding it.
 - **Membership**: join/leave bump epoch; leave retires the incarnation and
   tombstones entries; rejoin creates a fresh incarnation; stale-epoch
   messages are rejected with StaleMembership.
@@ -38,4 +45,5 @@ the scenario; timestamps are logical (turn counter). This profile exists so
 SCN expectations are exact; real deployments are nondeterministic within the
 calculus.
 
-OPEN-027: reply/receipt observability for read-requests (with OPEN-011).
+OPEN-027: M8 external/runtime receipt delivery observability beyond the M3
+single-process typed occurrence boundary.

@@ -35,7 +35,22 @@ runtime, projector, devtools. Shape (field names L2-working):
 
 Invariants: every generated edge and core op carries a span (BND-001); the
 obligations array is exactly the judgment's O; nothing in the runtime may
-execute Core IR that lacks a checker verdict (BND-004).
+execute Core IR that lacks a checker verdict (BND-004). Before M6, the
+parser-free reference has no Surface span: it carries a deterministic operation
+key in every `EvalPlan` and trace row as the bounded BND-001 surrogate. It
+cannot be presented as an M6 source-map implementation.
+
+## M3 evaluation delta (non-wire, non-final)
+
+The M3 internal Core adds an `eval_plan` on each evaluation-bearing operation:
+`form`, `site`, `trigger`, `authority_origin`, and `materialization`, plus a
+declared finite policy and required frontier for a designated materialization.
+`eval` is the Core operation; owner transition, remote result/receipt,
+designated evaluation, and result consumption are its normalized forms or
+occurrence categories in theory/13. They must be visible in generated
+dependency/occurrence rows with a source span or, in the parser-free M3
+reference only, its deterministic operation key. This paragraph does
+not select JSON names or make the exchange form public; OPEN-026 remains.
 
 ## Appendix — Core companion textual notation (non-Surface)
 

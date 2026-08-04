@@ -36,17 +36,17 @@ BrowserClient[self] {                         (authority origin = self)
     S { player[target].hp = player[target].hp - player[self].atk }
   }
 }
-⇝  request(self → S,
-           owner_transition(player[target].hp :=
-             player[target].hp - player[self].atk),
-           ρ̄ = {cap_write_player}, ω̄ = ∅,
-           φ = {StaleMembership, MissingCapability, MissingWitness,
-                RouteUnavailable})
-   G_e = { request row, S-local dependency rows(target.hp, self.atk), spans }
+⇝  eval(r,
+           body = player[target].hp - player[self].atk,
+           EP = ⟨state, owner(S), on-request, caller(self), {store}, -, -⟩)
+   with request(self → S, ρ̄ = {cap_write_player}, ω̄ = ∅,
+                φ = {StaleMembership, MissingCapability, MissingWitness,
+                     RouteUnavailable})
+   G_e = { request row, S-local dependency rows(target.hp, self.atk),
+           evaluation-plan row, spans }
 ```
 
-`owner_transition` is a schematic M1 consequence, not a new Core constructor:
-M3 chooses its exact carrier. Both operands are S-owned, so service at S reads
+This is the owner-store form of M3 `eval` (theory/13). Both operands are S-owned, so service at S reads
 them and writes hp in one bounded owner transition. The requester never
 receives either private value, and neither dependency is an actor-side
 observe/read-request. A real other-owner operand instead needs an explicit
@@ -76,7 +76,7 @@ visible fields to elaborate an additional publish row at declared visibility.
 Private fields never auto-publish (E-VIS-002). Authority-bearing witnesses are
 never silently created; devtools/audit witnesses may be, and are labelled so.
 
-OPEN-014: materialization policy for transparent cross-locus reads (always a
-row? cache windows? freshness-driven?). Working rule: cross-locus reads always
-generate an observe/read-request row in v0; optimization is a projection
-concern that must preserve the dependency record (BND-006).
+For a real other-owner operand, the only M3 success path is an explicit
+`remote-result` receipt in Core/trace; otherwise `E-EVAL-CROSS-OWNER` is
+returned. Cache windows and freshness optimization remain later projection
+work and must preserve the dependency record (BND-006).

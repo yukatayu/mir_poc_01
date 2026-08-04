@@ -6,9 +6,14 @@ Type checking, effect rows, contracts, graph extraction, and semantic normalizat
 This crate currently hosts a **parser-free current L2 minimal interpreter skeleton**
 for representative fixtures. It is intentionally narrow and does not try to become
 the full Mir runtime.
+
+The `evaluation_materialization` module is a separate finite M3 reference
+calculus. It has no dependency on this crate's parser-free current-L2 paths and
+does not define a public wire, ABI, or Surface syntax.
 "#]
 
 pub mod computational_core;
+pub mod evaluation_materialization;
 pub mod full_system_v1;
 mod harness;
 pub mod surface_indexed_state;
