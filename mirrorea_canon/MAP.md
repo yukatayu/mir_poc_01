@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0016) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0017) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -46,10 +46,10 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..03 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0017。
 
-Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015、ADR-0016、
-PROPOSAL-018/019 を追加で読み、LAB の designated current roadmap と derived status
+Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015--0017、
+PROPOSAL-018--020 を追加で読み、LAB の designated current roadmap と derived status
 だけを current queue として使う。下の historical working records 一覧は queue ではない。
 
 ## ID 体系

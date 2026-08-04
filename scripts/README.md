@@ -12,6 +12,12 @@
   `.codex/config.toml` から参照する agent TOML の必須 metadata、sandbox / approval の role policy、planner の write/delegation guard を検査する。`config_file` は宣言した `.codex/config.toml` から相対解決される。`python3 scripts/validate_agent_configs.py` を単独で実行でき、`make docs` は source/doc validation の前に同じ検査を実行する。
 - `validate_docs.py`
   required documentation scaffold、root canon notices、reader-facing source-hierarchy wording lint、active reader-facing host-specific repo path lint、concrete Discord webhook URL leak guard、numbered `plan/*.md` registration guard、`progress.md` / `tasks.md` / `samples_progress.md` top `最終更新` / `Last updated` freshness、required snapshot heading order、phase-position guard phrases including `late pre-exit`、numbered report、report template closeout headings、latest numbered report の required heading presence / order、empty required section、unresolved update-status placeholder を確認する docs validation check。current line では snapshot docs、`CANON.md`、`mirrorea_canon/` entry files、`samples/README.md` / `scripts/README.md`、`.docs/`、`docs/hands_on/`、`docs/research_abstract/`、`samples/alpha/README.md`、`samples/product-alpha1/README.md`、`samples/product-alpha1/demo/README.md`、`samples/product-alpha1/demo/package.mir.json`、active sample roots、storage/env helper scripts/tests、Surface Mir guides、Surface parser / indexed-state / elaboration / role-admission / source-patch / devtools / operational-source scripts/tests、`samples/full-system-v1-surface/{syntax,indexed-state,elaboration,role-admission,source-patch,devtools,world-core,membership-chat,sugoroku-world,portal-worldlink,two-shard-hard-boundary,gradient-observation}/`、registered numbered `plan/` catalog と source-traceability / maintenance rules、`specs/13..43` も required scaffold または lint 対象に入る。historical report 全体の semantic validation、sample execution、Cargo validation は別 command の責務。
+- `evaluate_t0_semantic_assertions.py`
+  M2 の revision-bound T0/G0 semantic-assertion profile v3 producer。`python3
+  scripts/evaluate_t0_semantic_assertions.py --revision <commit>` は指定 Git
+  commit の blob だけを読み、six assertion rows と profile-local digest を JSON に
+  出力する。mutable reader-facing document の whole-file hash を control にせず、
+  output は `plan/248` の fresh LAB evidence としてのみ使う。
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`

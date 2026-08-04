@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 139,
+ "files": 142,
  "entries": [
   {
    "id": "root/changelog",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21645
+   "bytes": 21658
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2696
+   "bytes": 2746
   },
   {
    "id": "adr/ADR-0001",
@@ -245,7 +245,7 @@
    "summary": "T0/G0 phase-governance profile と G0 substantive evidence の owner acceptance を記録する。2026-07-28 amendment は v2 を採用し、G0 exit と T1 entry を引き続き defer する。",
    "open_items": [],
    "path": "adr/ADR-0013.md",
-   "bytes": 7587
+   "bytes": 7934
   },
   {
    "id": "adr/ADR-0014",
@@ -290,6 +290,21 @@
    "bytes": 3068
   },
   {
+   "id": "adr/ADR-0017",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0013",
+    "adr/ADR-0015",
+    "meta/proposal-020",
+    "plan/04-t0-g0-semantic-assertion-profile"
+   ],
+   "summary": "owner-approved M2 scopeでT0/G0 semantic-assertion profile v3を採用し、v1/v2をimmutable historical evidenceとして維持する。",
+   "open_items": [],
+   "path": "adr/ADR-0017.md",
+   "bytes": 1684
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -299,7 +314,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2122
+   "bytes": 2248
   },
   {
    "id": "arch/01-strata",
@@ -766,6 +781,21 @@
    "bytes": 1519
   },
   {
+   "id": "meta/proposal-020",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-014",
+    "adr/ADR-0013",
+    "adr/ADR-0015",
+    "root/design-constitution"
+   ],
+   "summary": "owner-approved M2 scopeで、mutable reader-facing whole-file pinに代わるT0/G0 semantic-assertion profile v3を採用するproposal。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-020-t0-g0-semantic-assertion-profile.md",
+   "bytes": 1532
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -816,14 +846,17 @@
     "spec/06-conformance",
     "meta/source-hierarchy",
     "adr/ADR-0013",
-    "adr/ADR-0014"
+    "adr/ADR-0014",
+    "adr/ADR-0015",
+    "adr/ADR-0017",
+    "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズ T0-T2 / I1-I6。各段階の正確なゴール、何が動き、どの程度実用的か、非宣言。",
+   "summary": "実装フェーズ T0-T2 / I1-I6。T0のcurrent profileはsemantic-assertion v3であり、v1/v2 artifactはhistorical evidenceとして保持する。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 13331
+   "bytes": 4848
   },
   {
    "id": "plan/02-operating-model",
@@ -852,6 +885,20 @@
    "bytes": 2419
   },
   {
+   "id": "plan/04-t0-g0-semantic-assertion-profile",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "root/design-constitution",
+    "adr/ADR-0013",
+    "adr/ADR-0015"
+   ],
+   "summary": "T0/G0 semantic-assertion profile v3。revision-bound な意味 assertion と deterministic artifact の contract を定め、mutable reader-facing whole-file hash を control にしない。",
+   "open_items": [],
+   "path": "plan/04-t0-g0-semantic-assertion-profile.md",
+   "bytes": 3892
+  },
+  {
    "id": "plan/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -861,7 +908,7 @@
    "summary": "計画の読み方。Gate(理論凍結)と Phase(実装)の二軸、運用規約、リスク。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 829
+   "bytes": 879
   },
   {
    "id": "scenarios/readme",

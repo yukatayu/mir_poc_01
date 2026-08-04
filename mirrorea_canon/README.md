@@ -20,9 +20,9 @@ open_items: []
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(16 本の決定の一覧)
+- 決定: `adr/README.md`(17 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md`
-- 何がいつ動くか: `plan/01-phases.md`
+- 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。
 
