@@ -86,6 +86,12 @@ presentation fallback ambiguity in the same integration unit.
 - Direct semantic alignment: theory 01--04, 07, 09; the behind-the-scenes
   mental model; spec README/spec 02; scenarios README/SCN-02.
 - Structural validation: `scripts/check_source_hierarchy.py`.
+- Derived current snapshots and roadmap:
+  - `Documentation.md`
+  - `docs/project-status.md`
+  - `progress.md`
+  - `tasks.md`
+  - `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
 - Report: this file.
 
 ## Commands run
@@ -109,13 +115,16 @@ presentation fallback ambiguity in the same integration unit.
   runtime algorithm, public ABI/wire declaration, lifecycle verdict, or proof
   completion claim.
 - Canon index generation reported `ok: 139 files indexed`.
-- Final pre-commit `make docs` passed: agent configuration, Canon index
-  (`139` files), source hierarchy (`798/798`), and documentation validation
-  all exited zero. Focused documentation/config unittest, strict Codex config,
-  `git diff --check`, stale-wording/schema scans also passed.
-- Closeout formatting removed one trailing blank line from PROPOSAL-019; its
-  byte metadata therefore required one final INDEX regeneration, after which
-  `make docs` and `git diff --check` passed again.
+- Focused pre-close checks passed for agent configuration, Canon index (`139`
+  files), source hierarchy (`798/798`), strict Codex config, `git diff --check`,
+  Constitution word count, and stale-wording/schema scans. The full
+  documentation validator then exposed two inherited snapshot notices missing
+  its required literal `Everything outside … is LAB; canon wins` wording.
+- The closeout corrects those notices in `docs/project-status.md` and
+  `progress.md`. The final complete `make docs` passed: agent configuration,
+  Canon index (`139` files), source hierarchy (`798/798`), and documentation
+  scaffold (`1736` numbered reports). Proposal trailing-whitespace
+  normalization also required one final INDEX byte-metadata regeneration.
 - The fixed decision corpus below is the M1 positive/adverse evidence and the
   input for the final Constitution-only reviewer classification.
 
@@ -149,30 +158,30 @@ autonomously with M2 semantic-assertion T0/G0 closeout.
 
 ## Plan update status
 
-Updated: Plan 247 remains the sole roadmap, records the accepted Constitution
+更新済み: Plan 247 remains the sole roadmap, records the accepted Constitution
 path, M2 direct consumer, M1 payload `aa0771ec`, and its pushed close.
 
 ## Documentation.md update status
 
-Updated: it links the M1 decision filter and preserves the T0 non-effect.
+更新済み: it links the M1 decision filter and preserves the T0 non-effect.
 
 ## docs/project-status.md update status
 
-Updated: it names M2 as the active frontier and records M1's pushed payload and
+更新済み: it names M2 as the active frontier and records M1's pushed payload and
 unchanged T0 non-effect.
 
 ## progress.md update status
 
-Updated: it records the M1 close checkpoint with command-derived timestamp and
+更新済み: it records the M1 close checkpoint with command-derived timestamp and
 retains the official T0 state until M2 acceptance.
 
 ## tasks.md update status
 
-Updated: it moves M1 to closed and makes M2 the only active package.
+更新済み: it moves M1 to closed and makes M2 the only active package.
 
 ## samples_progress.md update status
 
-`samples_progress.md` update unnecessary: M1 changes no runnable sample path,
+更新不要: M1 changes no runnable sample path,
 command, debug surface, classification, or sample blocker.
 
 ## Reviewer findings and follow-up
@@ -192,6 +201,10 @@ command, debug surface, classification, or sample blocker.
   made a derived stream an M4-only explicit preserving boundary, split the
   corpus into ownership and deferred-stream cases, regenerated INDEX, and
   reran focused validation. Narrow independent re-review passed with no P0/P1.
+- Final documentation validation found only inherited snapshot notice wording,
+  a report-template declaration, and a Canon source-path spelling. Those
+  mechanical corrections do not change the reviewed M1 semantic decision; the
+  repaired full validator passed.
 
 ## Skipped validations and reasons
 
@@ -199,6 +212,9 @@ command, debug surface, classification, or sample blocker.
   patch, relation, evaluator, auth, and release conformance were not run for
   the initial M1 semantic-document cut because no corresponding executable or
   proof source changed. M3--M10 own those validations.
+- The focused unittest invocation was not retained as M1 evidence because it
+  duplicates the validator's expensive immutable WRK-history audit; the final
+  complete `make docs` is the executed documentation/configuration validation.
 - No heavy build was started because M1 has no build target and the configured
   external workdir remains absent.
 
@@ -206,9 +222,10 @@ command, debug surface, classification, or sample blocker.
 
 M1 payload `aa0771ecdec4a7cec8f9f454dcbb455025ede8dc` (`Adopt Mir v0 design
 constitution`) was committed with `--no-gpg-sign`, pushed to `origin/main`, and
-verified `HEAD == origin/main == aa0771ecdec4a7cec8f9f454dcbb455025ede8dc`.
-The closeout-record commit follows this report update and is pushed with its
-own parity check before M2 begins.
+verified at that cut. Closeout record `10c2c2de77a28e88eb2404f37faf37d6e491f4d0`
+(`Close Milestone 1 constitution`) was also committed with `--no-gpg-sign` and
+pushed. The final notice/validation record is included in the third and last
+M1 integration commit; it is pushed with a final remote-parity check.
 
 ## Sub-agent session close status
 

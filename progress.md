@@ -2,8 +2,9 @@
 
 最終更新: 2026-08-04 09:48 JST
 
-**Canon notice:** `mirrorea_canon/` is normative; this file is a concise LAB
-snapshot and creates no Canon, Gate, Phase, proof, or conformance decision.
+**Canon notice:** `mirrorea_canon/` is normative. Everything outside
+`mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
+creates no Canon, Gate, Phase, proof, or conformance decision.
 
 ## document role
 
