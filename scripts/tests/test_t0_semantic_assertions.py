@@ -24,11 +24,12 @@ VALID_SOURCES = {
     "CANON.md": "`mirrorea_canon/` is the normative canon. Everything outside is LAB.",
     "README.md": "`mirrorea_canon/` remains the sole normative source.",
     "mirrorea_canon/DESIGN-CONSTITUTION.md": (
-        "Communication is a projection of checked meaning. `World`, `Room`, "
-        "`Avatar`, and `Game` remain domain/library vocabulary, never Mir Core primitives."
+        "Communication interfaces, per-locus programs, and generated edges are "
+        "projections of checked source meaning. `World`, `Room`, `Avatar`, and "
+        "`Game` remain domain/library vocabulary, never Core primitives."
     ),
-    "mirrorea_canon/NORTH-STAR.md": "Do not start with an RPC/API boundary.",
-    "mirrorea_canon/adr/ADR-0001.md": "World is not a core primitive.",
+    "mirrorea_canon/NORTH-STAR.md": "通信境界・API 境界は設計の出発点ではなく、検証済みの意味からの射影の産物。",
+    "mirrorea_canon/adr/ADR-0001.md": "World / Room / Avatar / Game はドメイン語彙。",
     "mirrorea_canon/adr/ADR-0012.md": "Canon is normative and LAB is evidence.",
     "mirrorea_canon/meta/source-hierarchy.md": "canon(規範) > LAB(evidence)",
     "samples/clean-near-end/README.md": "Canon note: this is LAB evidence.",

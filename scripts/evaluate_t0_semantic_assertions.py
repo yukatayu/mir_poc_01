@@ -68,10 +68,13 @@ def evaluate_assertions(sources: Mapping[str, str]) -> list[dict[str, object]]:
             ),
             "meaning-before-communication-interface",
             (
-                ("mirrorea_canon/NORTH-STAR.md", ("RPC/API",)),
+                (
+                    "mirrorea_canon/NORTH-STAR.md",
+                    ("通信境界・API 境界は設計の出発点ではなく", "射影の産物"),
+                ),
                 (
                     "mirrorea_canon/DESIGN-CONSTITUTION.md",
-                    ("Communication is a projection of checked meaning",),
+                    ("Communication interfaces", "projections of checked source meaning"),
                 ),
             ),
         ),
@@ -83,10 +86,13 @@ def evaluate_assertions(sources: Mapping[str, str]) -> list[dict[str, object]]:
             ),
             "world-room-avatar-game-are-not-core-primitives",
             (
-                ("mirrorea_canon/adr/ADR-0001.md", ("World", "core primitive")),
+                (
+                    "mirrorea_canon/adr/ADR-0001.md",
+                    ("World", "Room", "Avatar", "Game", "ドメイン"),
+                ),
                 (
                     "mirrorea_canon/DESIGN-CONSTITUTION.md",
-                    ("`World`", "`Room`", "`Avatar`", "`Game`", "never Mir Core primitives"),
+                    ("`World`", "`Room`", "`Avatar`", "`Game`", "never", "Core primitives"),
                 ),
             ),
         ),

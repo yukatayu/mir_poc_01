@@ -56,6 +56,10 @@ rewriting v1/v2 history or claiming implementation readiness.
 3. Added the v3 profile/ADR/proposal route and the profile producer. Fresh
    artifact generation and lifecycle acceptance are recorded below after their
    evidence is available.
+4. The first fresh run rejected two selectors whose English adjacency did not
+   match their Japanese/line-wrapped Canon witnesses. Tightened them to the
+   minimal stable semantic phrases; the focused negative controls remain
+   rejecting.
 
 ## Files changed
 
