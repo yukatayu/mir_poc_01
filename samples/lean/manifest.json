@@ -91,6 +91,19 @@
         "stderr": "",
         "returncode": 0
       }
+    },
+    {
+      "kind": "foundation",
+      "filename": "MirTheoryV0M6Surface.lean",
+      "lean_path": "samples/lean/foundations/MirTheoryV0M6Surface.lean",
+      "explanation_path": "samples/lean/foundations/MirTheoryV0M6Surface.md",
+      "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "verification": {
+        "success": true,
+        "stdout": "'MirTheoryV0M6Surface.classifier_deterministic' does not depend on any axioms\n'MirTheoryV0M6Surface.classification_preserves_parse_span' depends on axioms: [propext]\n'MirTheoryV0M6Surface.core_template_preserves_canonical_source_span' depends on axioms: [propext]\n'MirTheoryV0M6Surface.generated_obligations_preserve_canonical_source_span' depends on axioms: [propext]\n'MirTheoryV0M6Surface.generated_edges_preserve_canonical_source_span' depends on axioms: [propext]\n'MirTheoryV0M6Surface.static_diagnostic_preserves_canonical_source_span' depends on axioms: [propext]\n'MirTheoryV0M6Surface.owner_assignment_keeps_role_self_authority_and_owner_site' does not depend on any axioms\n'MirTheoryV0M6Surface.non_literal_role_actor_is_typed_parser_diagnostic' does not depend on any axioms\n'MirTheoryV0M6Surface.target_owner_outside_action_locus_is_typed_diagnostic' does not depend on any axioms\n'MirTheoryV0M6Surface.fieldless_assignment_target_is_typed_diagnostic' does not depend on any axioms\n'MirTheoryV0M6Surface.cross_owner_rhs_requires_explicit_receipt_diagnostic' does not depend on any axioms\n'MirTheoryV0M6Surface.maintained_relation_uses_relation_publication_not_value_publication' does not depend on any axioms\n'MirTheoryV0M6Surface.auth_and_finite_refinement_are_non_executable_deferred_templates' does not depend on any axioms\n'MirTheoryV0M6Surface.relation_value_and_consumer_mutation_are_typed_diagnostics' does not depend on any axioms\n",
+        "stderr": "",
+        "returncode": 0
+      }
     }
   ],
   "statement_drafts": [

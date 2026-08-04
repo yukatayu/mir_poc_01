@@ -18,13 +18,13 @@ roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの�
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
-formal model / metatheory は閉じた。現在は ADR-0015 の owner-approved Mir Theory v0 / I1+
-program の **M6 Surface** であり、次は M7 checker/elaborator である。M5 は
-ADR-0020 / theory/15 / Report 2586 で、有限 concrete
-`SurfaceFragment → Core | Diagnostic` と共有 Config / Step / WellFormed / Trace /
-Projection model を採用し、13 focused Rust tests と OBL-040--047 の exact finite
-`lean-proved` evidence を記録した。これは M6 grammar/final span、final wire/API/ABI、M8
-runtime、general theorem/save-load/patch、conformance、I1、deployment を主張しない。M2 は
+formal model / metatheory、M6 Surface は閉じた。現在は ADR-0015 の owner-approved Mir Theory
+v0 / I1+ program の **M7 checker/elaborator** であり、次は M8 deterministic runtime である。
+M6 は ADR-0021 / spec/01--04 / Report 2587 で、bounded declaration/action grammar、span-rich
+AST、M5-aligned Core-template/typed Diagnostic classification を閉じ、3 focused AST parser
+tests、11 classifier tests、OBL-048 の exact finite `lean-proved` evidence を記録した。これは
+M7 checker/elaborator、M8 runtime、final public grammar/diagnostic ABI/wire、general theorem、
+transport、conformance、I1、deployment を主張しない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、

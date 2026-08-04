@@ -1,0 +1,6 @@
+module Combat.M6.RejectOccurrence
+
+locus S
+principal self
+
+occurrence attack_started at S

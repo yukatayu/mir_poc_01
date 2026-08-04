@@ -2,12 +2,65 @@
 id: spec/04-core-ir
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/03-elaboration]
-summary: Core IR の交換形(JSON)、生成辺・義務・span の形。Core companion 記法の附録。
+depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021]
+summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。
 open_items: [OPEN-026]
 ---
 
-# 04 — Core IR exchange form
+# 04 — M6 CoreTemplate and later Core IR exchange form
+
+## M6 lowering template (non-wire, non-final)
+
+M6 emits inspectable typed `CoreTemplate` records before any M7
+checker/elaborator or exchange JSON exists. Its current parser/classifier
+profile retains:
+
+```text
+source_span
+m5_core                   present only for accepted ownerRmw
+result_frontier/version   designated-result fields only
+binding_frontier          maintained-relation field only
+owner_publication_kind    PublishRelation for maintained relation
+published_relation_carrier true only for accepted maintained relation
+consumer_projection_site  optional consumer-local relation projection
+deferred_policy_kind      WithAuth | Verify, non-executable only
+source_to_core_map        source span -> ownerRmw/local-read/local-write |
+                          designated-decision | publish-relation |
+                          consumer-local-projection | deferred-policy
+authority_audit           Role authority origin, nested owner site,
+                          required authority names
+```
+
+`result_frontier` and `binding_frontier` are distinct nominal carriers. A
+same-owner action has M5 `ownerRmw`, `Role[self]` origin, owner evaluation,
+`store`, request-to-owner and owner-write edges, and separate
+capability/witness obligations. Its source-to-Core map separately records the
+owner-local RHS dependency; it emits no receipt or receipt-release fact. This
+does not claim that a cross-owner action has no receipt: such an operand is
+rejected with the receipt-required diagnostic rather than lowered through a
+hidden receipt path.
+
+No owner `CoreTemplate` exists for a non-literal role actor, a fieldless
+assignment target, or a target whose declared state owner is outside the
+action locus. They remain respectively `RoleActorMustBeLiteralSelf` (parser
+diagnostic at the actor token), `FieldlessAssignmentTarget`, and
+`CrossOwnerWriteTargetOutsideActionLocus` (classifier diagnostics at the
+target reference). These are distinct from
+`CrossOwnerOperandRequiresReceipt`, which describes an RHS operand.
+
+Maintained relation lowering retains an owner publication of the relation
+carrier and an optional consumer-local projection, with only a binding
+frontier. Designated evaluation retains `publish-value`, a result frontier, and
+a result version, never a binding frontier. `with auth` and `verify` emit
+successful non-executable typed deferred templates; the former only supplies a
+required-authority name. Neither settles M9 semantics. Every listed node
+preserves the canonical source span.
+
+This template is not M5 Core, a final AST, JSON, ABI, wire record, runtime
+instruction, or public contract.  It does not add a `PresentationContext`
+field, receipt source syntax, transport, or execution behavior.
+
+## Later exchange form (still L2-working)
 
 Purpose: a stable, inspectable JSON form of elaboration output for checker,
 runtime, projector, devtools. Shape (field names L2-working):

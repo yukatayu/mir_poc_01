@@ -18,6 +18,16 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-04** PROPOSAL-024 と ADR-0021 により、M6 bounded ordinary
+  Surface を M5 shared model の source-facing reference として採用した。
+  same-owner owner action は authority origin と owner evaluation を分け、
+  request/write edge と local-RHS-dependency の別 source-to-Core entry、
+  capability/witness obligation をもつ `ownerRmw` template に分類するが、receipt
+  fact は生成しない。cross-owner dependency は明示 receipt-required diagnostic、
+  maintained relation と designated result は nominally separate
+  frontier / materialization template、auth/finite-refinement は successful
+  non-executable typed deferred template とする。これは parser/checker、
+  runtime/transport、M9 semantics、final public grammar/API/ABI を採用・主張しない。
 - **2026-08-04** PROPOSAL-023 と ADR-0020 により、M1--M4 の有限
   `SurfaceFragment`/`Core`/`Config`/`Step`/`WellFormed`/trace/diagnostic/
   relation/cut-save carrier を一つの concrete M5 shared model に採用した。

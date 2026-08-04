@@ -1,0 +1,9 @@
+module Combat.M6.RejectEnvelope
+
+locus S
+principal self
+
+envelope AttackEnvelope {
+  from self
+  to S
+}

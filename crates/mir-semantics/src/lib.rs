@@ -21,6 +21,7 @@ pub mod shared_model;
 pub mod surface_indexed_state;
 pub mod surface_role_admission;
 pub mod surface_to_core_elaboration;
+pub mod surface_v0_classification;
 
 use std::{
     collections::{BTreeMap, HashMap},

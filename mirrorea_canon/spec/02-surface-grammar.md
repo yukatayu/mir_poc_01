@@ -1,89 +1,115 @@
 ---
 id: spec/02-surface-grammar
-status: L2-working
+status: L1-fixed
 maturity: draft
-depends_on: [spec/01-lexical-and-modules, adr/ADR-0008, adr/ADR-0016, theory/06-existence-fallback]
-summary: M6 前の Surface Mir grammar candidate。place/role ブロック、state、when、join、chain 宣言、式。
-open_items: [OPEN-005, OPEN-006]
+depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
+summary: 実装済み M6 parser / fixture に一致する bounded ordinary Surface grammar。
+open_items: []
 ---
 
-# 02 — Surface grammar (EBNF)
+# 02 — M6 bounded Surface grammar
 
-This is the retained **pre-M6 grammar candidate**, not a final public grammar.
-It documents the current compatibility profile and its explicit rejects. M6
-selects the final bounded grammar only after the shared semantic model, using
-this candidate and at most one smallest viable alternative. No current LAB
-parser, fixture, or package becomes normative merely because it follows this
-profile.
+This is the selected M6 grammar and the exact current parser/fixture profile.
+It supersedes the retained pre-M6 grammar as the current source direction, but
+it remains a bounded reference grammar, not a final public language or a
+general expression parser.
 
 ```ebnf
-Module        ::= "module" ModulePath { Item }
-Item          ::= Import | PlaceDecl | RoleDecl | RecordDecl
-                | ChainDecl | PlaceBlock | RoleInstanceBlock
-Import        ::= "import" ModulePath
-PlaceDecl     ::= "place" Ident
-RoleDecl      ::= "role" Ident [ "{" { "supports" DottedName } "}" ]
-RecordDecl    ::= "record" Ident "{" [ Field { "," Field } [","] ] "}"
-Field         ::= Ident ":" Type
-Type          ::= "Int64" | "Float64" | "Bool" | "Text" | TypePath
+Module          ::= "module" ModulePath { Item }
+ModulePath      ::= Ident { "." Ident }
+Item            ::= LocusDecl | PrincipalDecl | TypeDecl | StateDecl
+                  | ActorBlock | RelationDecl | DesignatedEval
+                  | DeferredAuth | DeferredVerify
 
-PlaceBlock    ::= PlacePath "{" { BlockItem } "}"
-BlockItem     ::= StateDecl | Handler | Stmt
-StateDecl     ::= "state" Ident "[" Ident ":" Keyspace "]" ":" Type
-                  [ "init" Expr ]
-                  [ "visible" VisLevel [ "fields" "{" Ident {"," Ident} "}" ] ]
-Keyspace      ::= "Participant" | Ident          (* declared keyspaces *)
-VisLevel      ::= "observer_safe" | "admin_debug"
+LocusDecl       ::= "locus" LocusName
+PrincipalDecl   ::= "principal" PrincipalName
+TypeDecl        ::= "type" TypeName
+StateDecl       ::= "state" StateName "[" IndexName ":" TypeName "]"
+                  "at" LocusName "{" { StateField } "}"
+StateField      ::= FieldName ":" TypeName
 
-RoleInstanceBlock ::= RolePath "[" Binder "]" "{" { Handler } "}"
-Binder        ::= Ident                           (* e.g. self *)
-Handler       ::= "when" Ident [ "(" [ Param {"," Param} ] ")" ]
-                  [ "fails" FailName {"," FailName} ] Block
-Block         ::= "{" { Stmt } "}"
+ActorBlock      ::= "Role" "[" "self" "]" "at" LocusName
+                  "{" { Handler } "}"
+Handler         ::= "when" HandlerName "(" [ Param { "," Param } ] ")"
+                  "fails" "(" [ FailureName { "," FailureName } ] ")"
+                  "{" { OwnerAction } "}"
+Param           ::= Ident ":" TypeName
+OwnerAction     ::= "at" LocusName "{" { ActionItem } "}"
+ActionItem      ::= OwnerAssignment | RelationMutation
+OwnerAssignment ::= StateRef "=" OwnerExpr
+RelationMutation ::= "relation" RelationName "mutate" Ident
 
-Stmt          ::= Assign | Compound | Let | If | Return | Join
-                | Grant | Require | Publish | PlaceBlock | Expr
-Assign        ::= LValue "=" Expr
-Compound      ::= LValue ("+=" | "-=") Expr
-Let           ::= "let" Ident "=" Expr
-If            ::= "if" Expr Block [ "else" Block ]
-Return        ::= "return" Expr
-Join          ::= "join" PlacePath "as" RolePath "via" PlacePath
-Grant         ::= "grant" Ident "(" [ Expr {"," Expr} ] ")"
-Require       ::= "require" Expr
-Publish       ::= "publish" Expr [ "produces" "witness" Ident ]
+RelationDecl    ::= "relation" RelationName "at" LocusName "{"
+                  "subject" Ident ":" TypeName
+                  PrimaryAnchor FallbackAnchor
+                  "bind" "frontier" BindingFrontierName
+                  "publish" ("relation" | "value" Ident)
+                  [ "project" "at" LocusName "local" ] "}"
+PrimaryAnchor   ::= "primary" AnchorName "epoch" EpochName "transform" Transform
+FallbackAnchor  ::= "fallback" AnchorName "epoch" EpochName "transform" Transform
+Transform       ::= "identity"
+                  | "translate" "(" SignedInt "," SignedInt ")"
+SignedInt       ::= [ "-" ] IntLiteral
 
-LValue        ::= Path [ "[" Expr "]" ] { "." Ident }
-Path          ::= Ident { "." Ident }
+DesignatedEval  ::= "designated" "evaluate" LocusName "on" "tick"
+                  ResultFrontierName "publish" ResultName "=" DesignatedExpr
+DeferredAuth    ::= "with" "auth" AuthName
+DeferredVerify  ::= "verify" DeferredName
 
-ChainDecl     ::= "chain" Ident ":" Type "=" OptionRef
-                  { ">" OptionRef "@" "lineage" }
-OptionRef     ::= Ident "on" LValue "cap" Ident "lease" Ident
-                  [ "admit" Expr ]
+StateRef        ::= Ident [ "[" Ident "]" ] [ "." Ident ]
+FieldBearingStateRef ::= Ident [ "[" Ident "]" ] "." Ident
+OwnerExpr       ::= M6ExprToken { M6ExprToken }
+DesignatedExpr  ::= M6ExprToken { M6ExprToken }
+M6ExprToken     ::= Ident | IntLiteral | "{" | "}" | "[" | "]"
+                  | "(" | ")" | ":" | "," | "." | "=" | "+" | "-"
 ```
 
-Expression precedence (loosest→tightest): `or` < `and` < `not` <
-comparisons `== != < <= > >=` (non-associative) < additive `+ -` <
-multiplicative `* /` < unary `-` < postfix (index, field, call) < atoms
-(literal, path, `(` Expr `)`, record literal `TypePath { f: e, ... }`).
+There are no semicolon terminators.  `OwnerExpr` is the parser's bounded token
+collector through the closing `}` of its `at` block.  `DesignatedExpr` is the
+corresponding collector through the next `with`, `verify`, or end of file; the
+canonical fixture profile therefore places a designated evaluation after other
+ordinary items and before any deferred forms.  This preserves the implemented
+parser boundary without claiming a general M6 expression grammar.
 
-## Brace disambiguation (normative, inherits LAB:specs/39)
+The parser recognizes the syntactically valid `publish value Name` and
+`relation Name mutate Field` variants so that classification can return a
+typed diagnostic with their exact spans.  They are not accepted semantic
+relation operations.  `publish relation` is the only relation form that
+classifies to the maintained relation template.
 
-1. `X { ... }` is a place block only when `X` resolves to a declared place
-   path in item/statement context. 2. `X[b] { ... }` is a role-instance block
-   only when `X` resolves to a declared role; bare `Role { ... }` is not.
-3. `T { f: e }` is a record literal only when `T` resolves to a type in
-   expression context. 4. Colliding place/role/type/value names that make a
-   brace construct ambiguous are rejected (E-NAME-003). 5. `S[ ... ]` as
-   place scope is rejected with E-PARSE-002; `[]` is indexing only.
-6. Dynamic locus heads are not expressions; a future `at expr { ... }`
-   requires a separate ADR.
+`ResultFrontierName` and `BindingFrontierName` are distinct source references.
+The former becomes the finite M5 result frontier for designated evaluation;
+the latter becomes the finite binding activation frontier for maintained
+relation.  M6 adds no separate declaration production for either.
 
-## Notes
+## Fixed source distinctions
 
-- `=` is assignment; `==` is equality (ADR-0008; the LAB FSV1 style
-  `if seed = 1` is invalid here, E-PARSE-006).
-- `fails` lists the failures the handler agrees to absorb; static containment
-  per theory/03.
-- ChainDecl: each `>` edge must carry `@ lineage` (edge-local annotation,
-  theory/06). Missing annotation ⇒ E-DECL-001. This surface is OPEN-005.
+- `Role[self] at S` has literal `Role[self]` authority origin.  A nested owner
+  action must write at the same `S`; a different locus is the typed
+  `OwnerActionLocusMismatch` reject. A non-`self` bracket token is rejected
+  by the parser as `RoleActorMustBeLiteralSelf`, at the token span.
+- The parser accepts the broad `StateRef = OwnerExpr` shape in an `at` block,
+  but a lowerable owner mutation requires `FieldBearingStateRef` on the left.
+  A fieldless target is `FieldlessAssignmentTarget` at the target span. A
+  field-bearing target whose declared state owner differs from the action site
+  is `CrossOwnerWriteTargetOutsideActionLocus`, also at the target span. Both
+  have no CoreTemplate.
+- A resolved state-valued RHS dependency owned at another locus is separately
+  `CrossOwnerOperandRequiresReceipt` at the RHS-reference span, never implicit
+  communication. It is not the cross-owner write-target diagnostic.
+- `designated evaluate E on tick F publish result = Expr` is one
+  designated-result template binding, not a state mutation.  `result` is an
+  ordinary result name in this fixture profile, not a reserved punctuation
+  token.
+- A maintained relation owns an explicit relation/binding frontier and may
+  describe a consumer-local projection site.  It publishes a relation carrier,
+  not an early materialized absolute value.
+- `with auth MembershipAuth` and `verify finite_refinement` have no braced
+  body.  Each classifies successfully to a non-executable typed deferred
+  CoreTemplate with a source span; neither executes an effect nor settles M9
+  membership, grant, or verification semantics.
+
+There is no Surface production for `send`, `receive`, receipt/release,
+occurrence/envelope/witness, `PresentationContext`, `chain`, `try`, patch,
+transport, provider, or renderer control.  The historical ADR-0008
+place/role/chain profile remains LAB compatibility evidence only.

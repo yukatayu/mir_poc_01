@@ -1,0 +1,10 @@
+module Combat.M6.RejectSend
+
+locus S
+principal self
+
+Role[self] at S {
+  when attack(target: Player) fails (RouteUnavailable) {
+    send attack to S
+  }
+}

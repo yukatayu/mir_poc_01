@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-04 15:15 JST
+最終更新: 2026-08-04 16:50 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,7 +20,7 @@ notes. If LAB text conflicts with canon, canon wins.
 この legacy heading の `promoted` は documentation validator が要求する current LAB
 frontier の意味であり、Canon / L2 / Gate / Phase promotion ではない。
 
-**Active: M6 Surface. Next: M7 checker/elaborator.** 根拠は
+**Active: M7 checker/elaborator. Next: M8 deterministic runtime.** 根拠は
 `mirrorea_canon/adr/ADR-0015.md`、
 `mirrorea_canon/plan/02-operating-model.md`、
 `plan/247-mir-theory-v0-i1plus-current-roadmap.md` である。
@@ -34,17 +34,18 @@ G0-D3、G0 exit、T1 entry を順に適用した。M3 は finite `EvalPlan`、ow
 release-admitted causal receipt、designated publish/consume を Lean/bounded model/Rust traceと
 independent reviewで閉じた。M4 は ADR-0019/theory/14/SCN-12 の finite relation-first
 calculusを閉じた。M5 は ADR-0020/theory/15 の finite concrete
-`SurfaceFragment → Core | Diagnostic` shared modelを、13 focused Rust tests、OBL-040..047 の
-exact finite `--trust=0` Lean evidence、independent final reviewで閉じた。official lifecycle は
-`T1`、v1/v2はhistorical evidenceのままである。現在の direct blocker は M5 semantic boundaryに
-対応する bounded Surface grammar/source span/total classificationであり、direct consumer は M7
-checker/elaboratorである。
+`SurfaceFragment → Core | Diagnostic` shared modelを閉じた。M6 は ADR-0021/spec/01--04 の
+bounded ordinary grammar、span-rich AST、total M5-aligned classificationを、3 AST parser tests、
+11 classifier tests、OBL-048 の exact finite `--trust=0` Lean evidence、independent final
+reviewで閉じた。official lifecycle は `T1`、v1/v2はhistorical evidenceのままである。現在の
+direct blocker は M6 syntax/span/Core-template meaningを変更しない source-first
+`parse → check → elaborate` routeであり、direct consumer は M8 deterministic runtimeである。
 
 M2 close 時点で official lifecycle は `T1`。これにより I1 は開始しない。General
 OBL-001..028 は `intentionally-deferred`、finite M3 OBL-029..032 は `lean-proved`、033は
-`model-checked-bounded`、034は`runtime-monitored`、finite M4 OBL-035..039 と M5 OBL-040..047 は
-exact scope の `lean-proved`である。SCN-01..10のofficial conformance claimとM8 runtime
-implementationは unchangedである。
+`model-checked-bounded`、034は`runtime-monitored`、finite M4 OBL-035..039、M5 OBL-040..047、
+M6 OBL-048 は exact scope の `lean-proved`である。SCN-01..10のofficial conformance claimと
+M8 runtime implementationは unchangedである。
 
 ## ordered self-driven packages
 
@@ -60,9 +61,9 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | M3 | evaluation / materialization | closed; ADR-0018/theory-13, finite Lean/bounded model/Rust trace, independent re-review | Macro 1/5; complete |
 | M4 | maintained relation / late projection | closed; ADR-0019/theory-14/SCN-12, finite Lean/Rust evidence, final independent review | Macro 1/5/6; complete |
 | M5 | shared formal model / metatheory | closed; finite shared model、13 Rust tests、exact OBL-040..047 Lean evidence、bounded/runtime correspondence | Macro 1/5; complete |
-| M6 | Surface | `A/R/O`; bounded Surface v0、total Core/Diagnostic mapping、SCN source matrix | Macro 1/3; active; heavy |
-| M7 | checker / elaborator | `A/R/O`; source-first route、C-static SCN 10/10 no waiver、formal correspondence | Macro 3/5/7; after M6; heavy |
-| M8 | deterministic runtime | `A/R/O`; explicit state/effect/failure trace、C-runtime SCN 10/10、deterministic replay | Macro 3/5; after M7; heavy |
+| M6 | Surface | closed; bounded grammar/AST/span/classification、3 parser/11 classifier tests、OBL-048 evidence | Macro 1/3; complete |
+| M7 | checker / elaborator | `A/R/O`; one source-first route、C-static SCN 10/10 no waiver、M6-preserving correspondence | Macro 3/5/7; active; heavy |
+| M8 | deterministic runtime | `A/R/O`; explicit state/effect/failure trace、C-runtime SCN 10/10、deterministic replay | Macro 3/5; next after M7; heavy |
 | M9 | auth / verification | `A/R/O`; typed auth/authority/verification、negative security evidence、M8 regression | Macro 1/5/7; after M8; heavy |
 | M10 | conformance / closeout | `A/R/O`; fresh full evidence matrix、clean-clone reproduction、claims/non-claims、program report/parity | Macro 0/2/4/5; after M9; heavy |
 
@@ -75,18 +76,18 @@ report、commit/push/parity が閉じるまで開始しない。
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory / governance | M0 bootstrap closed; Plan 247 is sole queue | maintenance only |
-| 1 semantic kernel | M1--M5 accepted; M6 is the current language package | **着手可能**: bounded Surface v0 |
+| 1 semantic kernel | M1--M6 accepted; M7 is the current source-to-Core package | **着手可能**: checker/elaborator without M6 semantic drift |
 | 2 parser-free validation | bounded LAB compatibility evidence exists | maintenance only; M10 reproduction consumer |
-| 3 compile-ready actualization | historical Surface/runtime evidence exists | **後段依存**: M5/M6 accepted model |
+| 3 compile-ready actualization | M6 source boundary is accepted | **着手可能**: M7 source-first checker/elaborator |
 | 4 executable sample expansion | active sample roots remain runnable LAB | maintenance; no M0 relabel |
-| 5 theorem/model-check bridge | finite M3/M4/M5 evidence closed; general proof remains deferred | M6 correspondence consumer |
+| 5 theorem/model-check bridge | finite M3/M4/M5/M6 evidence closed; general proof remains deferred | M7 correspondence consumer |
 | 6 distributed fabric | not in M0--M10 deterministic I1+ target | deferred / future owner direction |
 | 7 toolchain/backend | M7--M9 bounded reference surfaces only | **後段依存**: M6 |
 | 8 applications | user-defined worlds remain LAB consumers | deferred; not a Core milestone |
 
 ## user decision gates
 
-現在、M6 を止める owner decision item はない。ADR-0015 が owner-approved objective、
+現在、M7 を止める owner decision item はない。ADR-0015 が owner-approved objective、
 M0--M10 order、bounded execution authority を記録しているため、旧 tasks にあった
 fixed-control、C1/C2、Gate/ledger 一般の「常時 owner 待ち」は current queue から外す。
 それらの具体内容は該当 milestone が evidence-gated に選び、Canon へ統合する。
@@ -95,7 +96,7 @@ owner escalation は次の場合だけ行う。
 
 | Item | Impact | Main options | Current recommendation |
 | --- | --- | --- | --- |
-| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M6 |
+| ADR-0015 owner-reserved condition | North Star、safety/privacy weakening、domain-to-Core promotion、mandatory v0 non-goal、irreversible public API/ABI/wire、deployment/publication、tied irreversible choice、user data/secret risk | stop and present exact alternatives/evidence; or remain inside current scope | no trigger observed; continue M7 |
 | post-M10 direction | next public/distributed/product program | new owner roadmap; remain closed | decide only after M10 evidence cut |
 
 ## research discovery items
@@ -109,8 +110,9 @@ smallest viable alternative を falsifier で比較する。
 | M3 evaluation/materialization | closed finite calculus | no general proof/runtime/conformance claim |
 | M4 relation/projection | closed finite relation-first fragment | no general DAG/runtime/conformance claim |
 | M5 | closed finite shared model、statement/implementation identity、proof classes | general proof/runtime overclaim |
-| M6 | total Surface-to-Core/Diagnostic domain | implicit default/authority/communication or premature public freeze |
-| M7--M9 | checker/runtime/auth algorithms that preserve M5 semantics | model drift、waiver、hidden side table、transport-as-authority |
+| M6 | closed finite Surface grammar/AST/span/classification | runtime/general-theorem/public-contract overclaim |
+| M7 | source-first checker/elaborator preserving M6 meaning | bypass、semantic drift、hidden edge、unspanned diagnostic |
+| M8--M9 | runtime/auth algorithms that preserve M5/M6 semantics | model drift、waiver、hidden side table、transport-as-authority |
 | M10 | exact repo-local completion claim and remaining deferrals | any unreproduced required evidence or stale current reference |
 
 ## maintenance tasks

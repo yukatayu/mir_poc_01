@@ -402,6 +402,44 @@ pub struct Core {
 }
 
 impl Core {
+    /// Conservative M6 lowering factory for an already-local owner RMW.  It
+    /// intentionally records no receipt materialization: same-owner reads do
+    /// not fabricate a cross-owner release chain.
+    pub fn same_owner_rmw(
+        source_ref: SourceRef,
+        caller: PrincipalRef,
+        owner: LocusRef,
+        command: OwnerCommand,
+        capability: CapabilityName,
+    ) -> Self {
+        Self {
+            source_ref: source_ref.clone(),
+            ops: vec![CoreOp::owner_rmw(owner.clone(), command.clone())],
+            generated_edges: vec![
+                GeneratedEdge::request(
+                    source_ref.clone(),
+                    caller.clone(),
+                    owner.clone(),
+                    capability.clone(),
+                ),
+                GeneratedEdge::owner_write(
+                    source_ref.clone(),
+                    owner.clone(),
+                    command.state().clone(),
+                ),
+            ],
+            authority_obligations: vec![
+                AuthorityObligation::capability(
+                    source_ref.clone(),
+                    caller.clone(),
+                    owner.clone(),
+                    capability,
+                ),
+                AuthorityObligation::witness(source_ref, caller, owner),
+            ],
+        }
+    }
+
     pub fn source_ref(&self) -> &SourceRef {
         &self.source_ref
     }
@@ -559,6 +597,9 @@ impl Elaboration {
 /// counterexamples.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum DiagnosticCode {
+    OwnerActionLocusMismatch,
+    CrossOwnerWriteTargetOutsideActionLocus,
+    FieldlessAssignmentTarget,
     CrossOwnerOperandRequiresReceipt,
     EmptyResultFrontier,
     DuplicateResultFrontier,

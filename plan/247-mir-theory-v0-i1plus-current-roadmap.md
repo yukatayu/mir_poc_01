@@ -1,6 +1,6 @@
 # Plan 247 - Mir Theory v0 / I1+ current execution roadmap
 
-最終更新: 2026-08-04 15:15 JST
+最終更新: 2026-08-04 16:50 JST
 
 ## 役割と authority
 
@@ -19,14 +19,14 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M5 shared formal model/metatheory**
-- active milestone: **M6 Surface**
-- next milestone: **M7 checker/elaborator**
+- completed milestone: **M6 Surface**
+- active milestone: **M7 checker/elaborator**
+- next milestone: **M8 deterministic runtime**
 - active frontier limit: 一つの milestone
-- current direct blocker: accepted M5 finite semantic boundary に total に対応する bounded
-  Surface v0 の grammar、name/locus/index/chain/effect/failure syntax、source span と
-  Core/Diagnostic classification を定義すること
-- direct consumer: M7 checker/elaborator
+- current direct blocker: accepted M6 grammar、span-rich AST、name resolution、M5-aligned
+  Core-template/Diagnostic classification を、一つの source-first `parse → check → elaborate`
+  routeとして実装し、generated Core/obligation/source trace を検査可能にすること
+- direct consumer: M8 deterministic runtime
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
@@ -289,7 +289,7 @@ deployment.
 
 **Direct blocker / consumer:** completed; M6 Surface is the direct consumer.
 
-### M6 - Surface
+### M6 - Surface (completed 2026-08-04)
 
 **Intended outcome:** shared model へ total に elaboration できる bounded Surface v0 と
 diagnostic contract を定義する。
@@ -305,10 +305,17 @@ diagnostic contract を定義する。
 - final public grammar / API を不可逆に固定せず、I1 reference scope と後段 extension point を
   区別する。
 
-**Evidence:** spec/02--04、SCN sources、historical Surface LAB evidence、grammar and
-elaboration fixtures、independent review。
+**Close evidence:** ADR-0021 and the M6 specs establish the bounded
+declaration/action grammar, span-rich AST, and total M5-aligned classification.
+The direct evidence comprises 3 focused AST parser tests, 11 focused classifier
+tests with source fixtures, and OBL-048's trusted `--trust=0` Lean proof with no
+placeholder/stub. Canon documentation and index validation are included in
+Report 2587. This does not claim M7 checking/elaboration, M8 runtime, a final
+public grammar/diagnostic ABI/wire, general elaboration, transport, conformance,
+I1, or deployment.
 
-**Direct blocker / consumer:** M5 model/readiness / M7 checker-elaborator。
+**Direct blocker / consumer:** completed; M7 checker/elaborator is the direct
+consumer and must preserve M6 syntax/span/Core-template meaning.
 
 ### M7 - Checker / elaborator
 
@@ -328,7 +335,12 @@ deterministic reference toolchain を作る。
 **Evidence:** executable tests、goldens、fresh C-static artifact、formal correspondence、
 independent review。
 
-**Direct blocker / consumer:** M6 Surface / M8 deterministic runtime。
+**Direct acceptance / blocker:** M6's bounded grammar, AST, source spans, and
+classification matrix are fixed inputs. Implement exactly one source-first
+`parse → check → elaborate` route, generate inspectable Core/communication /
+authority/effect/failure obligations with source traceability, and reject every
+invalid M6 form without changing M6 semantics. M8 deterministic runtime is the
+direct consumer.
 
 ### M8 - Deterministic runtime
 
@@ -407,8 +419,8 @@ reproduction、final independent review。
 | M3 | semantics + formal/test writers | Constitution + T1 entry | evaluation/materialization model and adverse traces |
 | M4 | semantics + formal/test writers | M3 calculus | relation/projection preservation and anti-collapse tests |
 | M5 | formalization writer | M3/M4 accepted rules | closed: shared-model coverage, exact finite OBL-040--047 Lean evidence, bounded/runtime correspondence, lifecycle mapping |
-| M6 | language/spec writer | M5 shared model | active: grammar/elaboration totality and SCN source matrix |
-| M7 | implementer + test/formal writers | M6 Surface | C-static 10/10 and correspondence |
+| M6 | language/spec writer | M5 shared model | closed: grammar, AST/span, finite M5-aligned classification, OBL-048 evidence |
+| M7 | implementer + test/formal writers | M6 Surface | active: C-static 10/10 and source/Core correspondence without changing M6 meaning |
 | M8 | implementer + test/formal writers | M7 Core output | C-runtime 10/10, deterministic replay, safety regressions |
 | M9 | auth/security + test/formal writers | M8 runtime | lineage/validation/redaction negative evidence |
 | M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | fresh full matrix and clean-clone closeout |
@@ -474,7 +486,7 @@ active milestone 又は public completion へ暗黙昇格しない。
 
 ## Recommended next action
 
-M6 の bounded Surface v0 を開始する。M5 の shared `SurfaceFragment → Core | Diagnostic`
-boundary を唯一の意味入力として、ordinary source grammar、name/locus/index/chain/effect/
-failure syntax、source span と total classification を定義する。M6 report、independent
-review、focused validation、commit/push/remote parity が閉じるまで M7 は開始しない。
+M7 の source-first checker/elaborator を開始する。M6 の grammar、AST/span、name-resolution、
+Core-template/Diagnostic classification を固定入力として、`parse → check → elaborate` を
+実装する。M7 report、independent review、focused validation、commit/push/remote parity が
+閉じるまで M8 は開始しない。

@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 153,
+ "files": 155,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 7932
+   "bytes": 8754
   },
   {
    "id": "root/design-constitution",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 2887
+   "bytes": 3051
   },
   {
    "id": "adr/ADR-0001",
@@ -171,13 +171,13 @@
     "adr/ADR-0001",
     "adr/ADR-0002"
    ],
-   "summary": "pre-M6 Surface grammar profile(S{ } / Role[x]{ } 系、== 等価、chain 宣言、// コメント)を保持する。Core companion 記法は存置。",
+   "summary": "retained pre-M6 Surface grammar profile(S{ } / Role[x]{ } 系、== 等価、chain 宣言、// コメント)。ADR-0021 後は current grammar ではない。",
    "open_items": [
     "OPEN-005",
     "OPEN-006"
    ],
    "path": "adr/ADR-0008.md",
-   "bytes": 2062
+   "bytes": 2476
   },
   {
    "id": "adr/ADR-0009",
@@ -287,7 +287,7 @@
    "summary": "Design Constitution を採用し、owner-evaluated RMW、fallback domain、Surface grammar の M1 alignment を記録する。",
    "open_items": [],
    "path": "adr/ADR-0016.md",
-   "bytes": 3068
+   "bytes": 3088
   },
   {
    "id": "adr/ADR-0017",
@@ -350,6 +350,22 @@
    "bytes": 3212
   },
   {
+   "id": "adr/ADR-0021",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "adr/ADR-0015",
+    "adr/ADR-0016",
+    "adr/ADR-0020",
+    "meta/proposal-024",
+    "root/design-constitution"
+   ],
+   "summary": "M6 bounded Surface を M5 shared model の source-facing reference として採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0021.md",
+   "bytes": 3874
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -359,7 +375,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 2608
+   "bytes": 2694
   },
   {
    "id": "arch/01-strata",
@@ -884,6 +900,22 @@
    "bytes": 3562
   },
   {
+   "id": "meta/proposal-024",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "meta/proposal-018",
+    "adr/ADR-0015",
+    "adr/ADR-0016",
+    "adr/ADR-0020",
+    "theory/15-shared-formal-model"
+   ],
+   "summary": "M6 で retained pre-M6 profile を置換し、M5 shared model に total に分類する bounded ordinary Surface を選ぶ提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-024-m6-bounded-surface.md",
+   "bytes": 4662
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1162,30 +1194,28 @@
    "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
-    "adr/ADR-0008"
+    "adr/ADR-0021"
    ],
-   "summary": "字句(識別子・リテラル・コメント)、予約語、モジュールとインポート。",
+   "summary": "M6 bounded Surface の字句、予約語、module header、source span の正本。",
    "open_items": [],
    "path": "spec/01-lexical-and-modules.md",
-   "bytes": 1380
+   "bytes": 3027
   },
   {
    "id": "spec/02-surface-grammar",
-   "status": "L2-working",
+   "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
     "spec/01-lexical-and-modules",
-    "adr/ADR-0008",
-    "adr/ADR-0016",
-    "theory/06-existence-fallback"
+    "adr/ADR-0021",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model"
    ],
-   "summary": "M6 前の Surface Mir grammar candidate。place/role ブロック、state、when、join、chain 宣言、式。",
-   "open_items": [
-    "OPEN-005",
-    "OPEN-006"
-   ],
+   "summary": "実装済み M6 parser / fixture に一致する bounded ordinary Surface grammar。",
+   "open_items": [],
    "path": "spec/02-surface-grammar.md",
-   "bytes": 4111
+   "bytes": 5974
   },
   {
    "id": "spec/03-static-semantics",
@@ -1193,13 +1223,17 @@
    "maturity": "draft",
    "depends_on": [
     "spec/02-surface-grammar",
-    "theory/02-types-effects-failures",
-    "theory/03-elaboration"
+    "theory/03-elaboration",
+    "theory/10-diagnostics",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model",
+    "adr/ADR-0021"
    ],
-   "summary": "宣言義務、名前解決、型付け(theory への束縛)、failure row 包含、可視性、keyspace 制限。",
+   "summary": "実装済み M6 source form の M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。",
    "open_items": [],
    "path": "spec/03-static-semantics.md",
-   "bytes": 2490
+   "bytes": 6244
   },
   {
    "id": "spec/04-core-ir",
@@ -1207,14 +1241,18 @@
    "maturity": "draft",
    "depends_on": [
     "theory/01-mircore-v0",
-    "theory/03-elaboration"
+    "theory/03-elaboration",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "theory/15-shared-formal-model",
+    "adr/ADR-0021"
    ],
-   "summary": "Core IR の交換形(JSON)、生成辺・義務・span の形。Core companion 記法の附録。",
+   "summary": "M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。",
    "open_items": [
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 4517
+   "bytes": 7452
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1268,12 +1306,13 @@
    "depends_on": [
     "theory/readme",
     "adr/ADR-0008",
-    "adr/ADR-0009"
+    "adr/ADR-0009",
+    "adr/ADR-0021"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 972
+   "bytes": 1041
   },
   {
    "id": "theory/00-overview",
@@ -1467,7 +1506,7 @@
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 11962
+   "bytes": 12501
   },
   {
    "id": "theory/12-literature",

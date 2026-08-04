@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-04 15:15 JST
+最終更新: 2026-08-04 16:50 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -38,8 +38,8 @@ observation is a typed information effect; patches use a checked activation cut.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0--M5 are evidence-complete; official lifecycle is T1; M6 Surface is active | **着手可能**: bounded grammar and total M5-aligned Core/Diagnostic classification |
-| User-facing specification | M6 owns Surface v0 on the accepted M5 shared model | **着手可能**: M6 only; M7 follows M6 |
+| Logical specification | M0--M6 are evidence-complete; official lifecycle is T1; M7 checker/elaborator is active | **着手可能**: one source-first route preserving M6 syntax/span/Core-template meaning |
+| User-facing specification | M6 Surface is closed; M7 consumes it without grammar drift | **後段依存**: M7 then M8 |
 | Implementation / operation | No M0 runtime change. M8 owns deterministic I1+ runtime after M7 | **後段依存**: M1--M7 |
 
 Sources: `mirrorea_canon/adr/ADR-0015.md`,
@@ -56,8 +56,11 @@ the finite owner-held relation / C-local coherent projection calculus, including
 semantic/presentation fallback separation, fresh reacquire, privacy and split-frame
 rejection. M5 then closed one finite concrete `SurfaceFragment → Core | Diagnostic`
 model with shared Config / Step / WellFormed / Trace / Projection, 13 focused Rust
-tests, and exact finite OBL-040--047 Lean evidence. M6 is now its direct consumer;
-official conformance and M8 runtime state remain unchanged.
+tests, and exact finite OBL-040--047 Lean evidence. M6 then closed bounded
+ordinary Surface grammar, source spans, and total M5-aligned classification with
+3 AST parser tests, 11 classifier tests, and exact finite OBL-048 Lean evidence.
+M7 is now its direct consumer; official conformance and M8 runtime state remain
+unchanged.
 
 ## milestone map
 
@@ -69,8 +72,9 @@ official conformance and M8 runtime state remain unchanged.
 | M3 | evaluation/materialization calculus | closed; finite theory/Lean/Rust evidence | ADR-0018/theory-13, Report 2584, closeout commit/push parity |
 | M4 | maintained relation/late projection | closed; finite theory/Lean/Rust evidence | ADR-0019/theory-14/SCN-12, Report 2585, closeout evidence |
 | M5 | shared model/metatheory | closed; finite shared model and exact evidence | ADR-0020/theory-15, Report 2586 |
-| M6 | Surface | active | bounded grammar, source spans, total Core/Diagnostic classification |
-| M7 | checker/elaborator | next | after M6 |
+| M6 | Surface | closed; finite grammar/AST/span/classification evidence | ADR-0021/spec-01--04, Report 2587 |
+| M7 | checker/elaborator | active | source-first route, C-static source/Core correspondence |
+| M8 | deterministic runtime | next | after M7 |
 | M8/M9 | runtime, auth/verification | later | after M7/M8 |
 | M10 | conformance/closeout | later | after M9 |
 
@@ -134,19 +138,20 @@ completion is claimed.
 | M3 research | eval policy and RMW inference | reject hidden communication/authority/transaction |
 | M4 relation/projection | closed finite owner-held relation and C-local projection evidence | no general DAG/naturality or runtime claim |
 | M5 shared model | closed finite shared model, correspondence, exact assurance mapping | general theorem/runtime remains deferred |
-| M6 | Surface grammar, source spans, total Core/Diagnostic mapping | reject implicit default/authority/communication or public freeze |
-| M7--M10 | checker, runtime, extensions, closeout | sequentially after M6 acceptance |
+| M6 Surface | closed finite grammar, source spans, total M5-aligned classification | no final grammar/runtime/general theorem claim |
+| M7 | one source-first checker/elaborator preserving M6 meaning | reject bypass, semantic drift, hidden edge, or unspanned diagnostic |
+| M8--M10 | runtime, extensions, closeout | sequentially after M7 acceptance |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | M0 closed | medium | maintenance only |
-| 1 | semantics/shared model | M1--M5 accepted; M6 is the active language cut | heavy | yes |
+| 1 | semantics/shared model | M1--M6 accepted; M7 is the active source-to-Core cut | heavy | yes |
 | 2 | parser-free evidence | historical maintenance | medium | not current semantic frontier |
-| 3 | source/checker/runtime | M6--M8 | heavy | after shared model |
+| 3 | source/checker/runtime | M7--M8 | heavy | M7 active |
 | 4 | executable samples | historical evidence | medium | maintenance only |
-| 5 | theorem/model-check | finite M3/M4/M5 evidence; general proof remains deferred | heavy | M6 correspondence consumer |
+| 5 | theorem/model-check | finite M3/M4/M5/M6 evidence; general proof remains deferred | heavy | M7 correspondence consumer |
 | 6 | distributed fabric | beyond I1+ | heavy | deferred |
 | 7 | toolchain/backend | M7--M9 bounded support | heavy | after M6 |
 | 8 | applications | domain consumers | heavy | deferred |
@@ -156,7 +161,7 @@ completion is claimed.
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- | --- |
 | multi-node/fabric | historical LAB only | beyond deterministic I1+ | deferred |
-| contracts/theorem/model-check | finite M3 OBL-029--034 and M4 OBL-035--039 evidence; general ledger deferred | M5 shared statements | active |
+| contracts/theorem/model-check | finite M3 OBL-029--034, M4 OBL-035--039, M5 OBL-040--047, and M6 OBL-048 evidence; general ledger deferred | M7 source/Core correspondence | active |
 | dynamic attach/detach/DAG evolution | bounded LAB evidence | M8 patch then M10 | later |
 | atomic_cut/ordering | Canon + LAB evidence | M5 model | later |
 | executable sample corpus | runnable historical roots | source-first conformance profile | M10 consumer |
@@ -196,3 +201,9 @@ completion is claimed.
   OBL-040..047 Lean evidence passed final independent review; M6 Surface is now
   the sole active semantic milestone, without a grammar, final ABI/wire, M8
   runtime, general theorem, conformance, or I1 completion claim.
+- 2026-08-04 16:50 JST: M6 closed ADR-0021/spec-01--04's bounded ordinary
+  Surface grammar, span-rich AST, and total M5-aligned classification. Three
+  AST parser tests, 11 classifier tests, and exact finite OBL-048 Lean evidence
+  passed without stubs; M7 checker/elaborator is now the sole active semantic
+  milestone, without runtime, final grammar/ABI/wire, general theorem,
+  conformance, or I1 completion claim.

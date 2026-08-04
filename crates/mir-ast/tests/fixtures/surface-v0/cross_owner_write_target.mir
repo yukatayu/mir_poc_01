@@ -1,0 +1,24 @@
+module Combat.M6
+
+locus S
+locus T
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+state enemy[id: Player] at T {
+  hp: Int
+}
+
+Role[self] at S {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness) {
+    at S {
+      enemy[target].hp = player[self].atk
+    }
+  }
+}

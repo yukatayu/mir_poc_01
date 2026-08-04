@@ -1,0 +1,14 @@
+module Combat.M6.RelationAbsolutePose
+
+locus S
+locus C
+type Bird
+
+relation bird_follow at S {
+  subject bird: Bird
+  primary perch_anchor epoch primary_epoch transform translate(3, -2)
+  fallback nest_anchor epoch fallback_epoch transform identity
+  bind frontier bird_binding_frontier
+  publish value absolute_pose
+  project at C local
+}

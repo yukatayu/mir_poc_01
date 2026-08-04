@@ -58,6 +58,7 @@ pub mod practical_alpha1_save_load_plan;
 pub mod practical_alpha1_transport_plan;
 pub mod product_alpha1;
 pub mod surface_alpha;
+pub mod surface_v0;
 pub mod textual_alpha;
 
 pub fn crate_name() -> &'static str {
