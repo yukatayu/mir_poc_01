@@ -113,6 +113,9 @@ presentation fallback ambiguity in the same integration unit.
   (`139` files), source hierarchy (`798/798`), and documentation validation
   all exited zero. Focused documentation/config unittest, strict Codex config,
   `git diff --check`, stale-wording/schema scans also passed.
+- Closeout formatting removed one trailing blank line from PROPOSAL-019; its
+  byte metadata therefore required one final INDEX regeneration, after which
+  `make docs` and `git diff --check` passed again.
 - The fixed decision corpus below is the M1 positive/adverse evidence and the
   input for the final Constitution-only reviewer classification.
 
@@ -147,8 +150,7 @@ autonomously with M2 semantic-assertion T0/G0 closeout.
 ## Plan update status
 
 Updated: Plan 247 remains the sole roadmap, records the accepted Constitution
-path and M2 direct consumer, and marks M1 evidence-complete pending closeout
-commit/push.
+path, M2 direct consumer, M1 payload `aa0771ec`, and its pushed close.
 
 ## Documentation.md update status
 
@@ -156,18 +158,17 @@ Updated: it links the M1 decision filter and preserves the T0 non-effect.
 
 ## docs/project-status.md update status
 
-Updated for the closeout commit: it names M2 as the next active frontier while
-truthfully recording that M1 commit/push is still pending.
+Updated: it names M2 as the active frontier and records M1's pushed payload and
+unchanged T0 non-effect.
 
 ## progress.md update status
 
-Updated: it records the M1 evidence-complete checkpoint with command-derived
-timestamp and retains the official T0 state until M2 acceptance.
+Updated: it records the M1 close checkpoint with command-derived timestamp and
+retains the official T0 state until M2 acceptance.
 
 ## tasks.md update status
 
-Updated for the closeout commit: it moves M1 to evidence-complete and makes M2
-the next package, while retaining the pending commit/push condition.
+Updated: it moves M1 to closed and makes M2 the only active package.
 
 ## samples_progress.md update status
 
@@ -203,9 +204,11 @@ command, debug surface, classification, or sample blocker.
 
 ## Commit / push status
 
-M1 closeout commits are pending at this report update. The sequence uses
-`--no-gpg-sign`, pushes to `origin/main`, and verifies exact parity before M2
-begins.
+M1 payload `aa0771ecdec4a7cec8f9f454dcbb455025ede8dc` (`Adopt Mir v0 design
+constitution`) was committed with `--no-gpg-sign`, pushed to `origin/main`, and
+verified `HEAD == origin/main == aa0771ecdec4a7cec8f9f454dcbb455025ede8dc`.
+The closeout-record commit follows this report update and is pushed with its
+own parity check before M2 begins.
 
 ## Sub-agent session close status
 

@@ -47,8 +47,8 @@ acceptance evidence と independent review で直列に閉じる。`A` = autonom
 | Order | Current task package | Authority / completion signal | Macro / rough estimate |
 | --- | --- | --- | --- |
 | M0-A--C | Canon / agent / governance bootstrap | closed; ADR-0015 cut、role contract、Plan 247、review/validation/push evidence in Report 2581 | Macro 0; complete |
-| M1 | Constitution | closed pending closeout commit/push; `root/design-constitution`、ADR-0016、Report 2582、review/validation evidence | Macro 1; evidence-complete |
-| M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; active after M1 commit/push; medium |
+| M1 | Constitution | closed; payload `aa0771ec` pushed with review/validation evidence in `root/design-constitution`、ADR-0016、Report 2582 | Macro 1; complete |
+| M2 | semantic-assertion T0/G0 closeout | `A/R/O`; exact semantic assertion + fresh evaluation + separate acceptance record; only then G0 exit/T1 entry | Macro 0/1; active; medium |
 | M3 | evaluation / materialization | `A/R/O`; owner/designated/consumer/provider evaluation、deterministic inference、same-owner RMW、cross-owner Diagnostic/result path | Macro 1/5; after M2; heavy |
 | M4 | maintained relation / late projection | `A/R/O`; bird/shoulder relation DAG、C-local projection、coherence/fallback/reacquire/privacy/split-frame evidence | Macro 1/5/6; after M3; heavy |
 | M5 | shared formal model / metatheory | `A/R/O`; non-opaque common model、coverage、Lean/model evidence、T1/T2/I1-readiness mapping | Macro 1/5; after M4; heavy |

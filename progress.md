@@ -56,8 +56,8 @@ M2 direct consumer is its stable semantic-assertion vocabulary.
 | Milestone | Aim | Position | Startability |
 | --- | --- | --- | --- |
 | M0 | governance, agent config, one roadmap | closed | Report 2581 / push parity |
-| M1 | concise Constitution | evidence-complete; closeout commit pending | `root/design-constitution`, ADR-0016, Report 2582 |
-| M2 | semantic-assertion T0/G0 closeout | active after M1 commit/push | deterministic producer / fresh evidence / negative control |
+| M1 | concise Constitution | closed; payload `aa0771ec` pushed | `root/design-constitution`, ADR-0016, Report 2582 |
+| M2 | semantic-assertion T0/G0 closeout | active | deterministic producer / fresh evidence / negative control |
 | M3 | evaluation/materialization calculus | later | after M2 |
 | M4 | maintained relation/late projection | later | after M3 |
 | M5 | shared model/metatheory | later | after M4 |
@@ -164,5 +164,5 @@ completion is claimed.
   Constitution is now the sole active semantic milestone.
 - 2026-08-04 09:48 JST: M1 adopted the concise `root/design-constitution` and
   ADR-0016, corrected SCN-02 owner-side RMW and fallback prose conflicts, and
-  passed independent review/one correction cycle; closeout commit/push remains
-  before M2 becomes officially active.
+  passed independent review/one correction cycle; payload `aa0771ec` pushed
+  with remote parity, so M2 is the sole active semantic milestone.

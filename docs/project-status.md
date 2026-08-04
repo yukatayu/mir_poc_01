@@ -32,7 +32,7 @@ classification、independent review、validation、commit/push/parity を閉じ�
 | authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
 | official lifecycle | `T0`。v2 artifact は valid `fail`、G0-D3/G0 exit/T1 entry は未成立 | `mirrorea_canon/plan/01-phases.md` |
 | proof / scenarios | OBL-001..028 は `open`、SCN-01..10 の official status は不変 | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0/M1 close/non-effect | M0 bootstrap は push 済み。M1 Constitution は review/validation を終え、`root/design-constitution` と ADR-0016 を採用する closeout commit を準備中である。SCN-02 RMW と fallback の prose conflict を修正するが、T0/G0/T1、OBL、official conformance、runtime、public API/ABI/wire、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md` |
+| M0/M1 close/non-effect | M0 bootstrap と M1 Constitution は push 済み。M1 payload `aa0771ec` は `root/design-constitution` と ADR-0016 を採用し、SCN-02 RMW と fallback の prose conflict を修正したが、T0/G0/T1、OBL、official conformance、runtime、public API/ABI/wire、production deployment は動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md` |
 
 M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
 review、one report、commit/push/remote parity で閉じた。M1 は concise Constitution の Canon

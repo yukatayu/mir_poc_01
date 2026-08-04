@@ -148,7 +148,8 @@ Constitution に集約し、後続 milestone の decision priority と禁止事�
 M1 report、Canon validation。`root/design-constitution` (`DESIGN-CONSTITUTION.md`) と
 ADR-0016 が canonical decision filter を採用した。SCN-02 の owner-side RMW、semantic /
 presentation fallback、pre-M6 grammar status を同じ cut で整合させ、独立 review と
-one correction cycle を pass した。
+one correction cycle を pass し、payload `aa0771ecdec4a7cec8f9f454dcbb455025ede8dc` を
+push した。
 
 **Direct blocker / consumer:** M0 accepted governance cut / M2 T0/G0 closeout。
 
