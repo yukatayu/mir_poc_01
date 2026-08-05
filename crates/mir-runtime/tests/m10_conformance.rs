@@ -3145,6 +3145,45 @@ fn require_string_set_pointer(
     }
 }
 
+fn require_absent_null_or_empty_array_pointer(
+    value: &Value,
+    pointer: &str,
+    context: &str,
+    failures: &mut Vec<String>,
+) {
+    match value.pointer(pointer) {
+        None | Some(Value::Null) => {}
+        Some(Value::Array(values)) if values.is_empty() => {}
+        Some(actual) => failures.push(format!(
+            "{context} expected {pointer} to be absent/null/empty, got {actual:#}"
+        )),
+    }
+}
+
+fn require_actual_trace_id_pointer(
+    value: &Value,
+    pointer: &str,
+    context: &str,
+    failures: &mut Vec<String>,
+) {
+    let Some(trace_id) = require_non_empty_string_pointer(value, pointer, context, failures) else {
+        return;
+    };
+    let forbidden_literals = [
+        "presence.admit",
+        "presence.retire",
+        "source_derived_occurrence",
+        "external_control",
+        "schedule_control",
+        "SCN02.target.leave",
+    ];
+    if forbidden_literals.contains(&trace_id) || trace_id.starts_with("evidence:") {
+        failures.push(format!(
+            "{context} expected {pointer} to be an actual trace id, not evidence literal {trace_id:?}"
+        ));
+    }
+}
+
 fn require_scn02_target_leave_no_mint_delta(row: &Value, failures: &mut Vec<String>) {
     let context = "SCN02-R-N-STALE target_leave M9 authority no-mint delta";
     let base =
@@ -3223,16 +3262,19 @@ fn require_scn02_initial_target_context_and_presence_retirement(
         "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/provenance",
         "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/m9_snapshot_ref",
         "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/m8_authority_use_ref",
+        "/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/occurrence_id",
+        "/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/trace_node_id",
         "/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/source_ref",
-        "/initial_target_context/m8_initial_presence_sync/control_trace/0/source_ref",
         "/m8_presence_store_transition/source_derived_reference",
         "/m8_presence_store_transition/schedule_action_reference",
         "/m8_presence_store_transition/sealed_m9_to_m8_bridge/provenance",
         "/m8_presence_store_transition/sealed_m9_to_m8_bridge/m9_snapshot_ref",
         "/m8_presence_store_transition/sealed_m9_to_m8_bridge/m8_authority_use_ref",
         "/m8_presence_store_transition/occurrence_trace/0/occurrence_id",
+        "/m8_presence_store_transition/occurrence_trace/0/trace_node_id",
         "/m8_presence_store_transition/occurrence_trace/0/source_ref",
         "/m8_presence_store_transition/control_trace/0/control_id",
+        "/m8_presence_store_transition/control_trace/0/trace_node_id",
         "/m8_presence_store_transition/control_trace/0/schedule_action_reference",
     ] {
         require_non_empty_string_pointer(row, &format!("{base}{pointer}"), context, failures);
@@ -3287,10 +3329,24 @@ fn require_scn02_initial_target_context_and_presence_retirement(
         context,
         failures,
     );
-    require_absent_or_null_pointer(
+    require_absent_null_or_empty_array_pointer(
+        row,
+        &format!("{base}/initial_target_context/m8_initial_presence_sync/control_trace"),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
         row,
         &format!(
-            "{base}/initial_target_context/m8_initial_presence_sync/control_trace/0/schedule_action_reference"
+            "{base}/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/occurrence_id"
+        ),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
+        row,
+        &format!(
+            "{base}/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/trace_node_id"
         ),
         context,
         failures,
@@ -3322,6 +3378,50 @@ fn require_scn02_initial_target_context_and_presence_retirement(
         row,
         &format!("{base}/m8_presence_store_transition/transition"),
         json!("presence.retire"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/schedule_action_reference"),
+        json!("SCN02.target.leave"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/control_trace/0/schedule_action_reference"),
+        json!("SCN02.target.leave"),
+        context,
+        failures,
+    );
+    require_absent_or_null_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/control_trace/0/source_ref"),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/occurrence_trace/0/occurrence_id"),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/occurrence_trace/0/trace_node_id"),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/control_trace/0/control_id"),
+        context,
+        failures,
+    );
+    require_actual_trace_id_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/control_trace/0/trace_node_id"),
         context,
         failures,
     );

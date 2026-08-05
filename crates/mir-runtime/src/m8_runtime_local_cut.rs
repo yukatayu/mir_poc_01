@@ -182,7 +182,6 @@ pub enum M8LocalTraceKind {
     DesignatedEvaluationRejected,
     DesignatedConsumptionRejected,
     EntityPresenceSynchronized,
-    EntityPresenceControlApplied,
 }
 
 /// Local-only references retained in K8/H.  They never cross the runtime
@@ -434,11 +433,28 @@ pub(crate) struct M8EntityPresenceSynchronization {
     pub(crate) source_ref: SourceRef,
     pub(crate) occurrence_id: String,
     pub(crate) occurrence_trace_id: String,
-    pub(crate) control_id: String,
-    pub(crate) control_trace_id: String,
+    pub(crate) external_control: Option<M8EntityPresenceExternalControl>,
     pub(crate) sealed_membership_ref: String,
     pub(crate) m9_snapshot_ref: String,
     pub(crate) m8_authority_use_ref: String,
+}
+
+/// The cause that is allowed to move a sealed M9 presence lineage at M8.
+/// Checked initial admission is source-derived; a later retirement is an
+/// external control action and deliberately carries no Core `SourceRef`.
+pub(crate) enum M8EntityPresenceSynchronizationCause {
+    CheckedSourceInitialAdmission,
+    ExternalControl { schedule_action_reference: String },
+}
+
+/// Source-free M8 control trace for an external entity-presence action. This
+/// is intentionally separate from `M8LocalTrace`, whose rows are Core-origin
+/// and therefore always have a source reference.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8EntityPresenceExternalControl {
+    pub(crate) control_id: String,
+    pub(crate) trace_node_id: String,
+    pub(crate) schedule_action_reference: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -689,6 +705,7 @@ pub struct M8LocalSavePayload {
     designated: M8LocalDesignatedSaveState,
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
+    entity_presence_external_controls: Vec<M8EntityPresenceExternalControl>,
 }
 
 /// A cut-local causal witness carried by each saved local cut. It uses the
@@ -1147,6 +1164,7 @@ pub struct M8LocalRuntime {
     designated: M8DesignatedRuntime,
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
+    entity_presence_external_controls: Vec<M8EntityPresenceExternalControl>,
     trace: RefCell<M8LocalTrace>,
 }
 
@@ -1188,6 +1206,7 @@ impl M8LocalRuntime {
             designated,
             lease_inventory: live_leases,
             patch_lifecycle: M8LocalPatchLifecycle::default(),
+            entity_presence_external_controls: Vec::new(),
             trace: RefCell::new(M8LocalTrace::default()),
         }
     }
@@ -1389,6 +1408,7 @@ impl M8LocalRuntime {
     pub(crate) fn synchronize_entity_presence(
         &mut self,
         bridge: M9M8EntityPresenceBridge,
+        cause: M8EntityPresenceSynchronizationCause,
     ) -> Result<M8EntityPresenceSynchronization, String> {
         let namespace = bridge.namespace().to_string();
         let identity = bridge.identity().to_string();
@@ -1400,6 +1420,15 @@ impl M8LocalRuntime {
             .unwrap_or_else(|| "absent".to_string());
         match bridge.status() {
             M9M8EntityPresenceStatus::Live => {
+                if !matches!(
+                    &cause,
+                    M8EntityPresenceSynchronizationCause::CheckedSourceInitialAdmission
+                ) {
+                    return Err(
+                        "M8 live entity presence requires checked-source initial admission"
+                            .to_string(),
+                    );
+                }
                 if before_status == "retired" {
                     return Err(
                         "M8 entity presence bridge attempted to resurrect a retired target"
@@ -1413,6 +1442,15 @@ impl M8LocalRuntime {
                 );
             }
             M9M8EntityPresenceStatus::Retired => {
+                if !matches!(
+                    &cause,
+                    M8EntityPresenceSynchronizationCause::ExternalControl { .. }
+                ) {
+                    return Err(
+                        "M8 retired entity presence requires external control provenance"
+                            .to_string(),
+                    );
+                }
                 if before_status != "live"
                     || !self
                         .shared_snapshot
@@ -1442,27 +1480,28 @@ impl M8LocalRuntime {
             .latest_observation(M8LocalTraceKind::EntityPresenceSynchronized)
             .expect("M8 presence synchronization appends an occurrence trace")
             .node_id;
-        self.trace.borrow_mut().append(
-            M8LocalTraceKind::EntityPresenceControlApplied,
-            source_ref.clone(),
-            None,
-            None,
-            false,
-        );
-        let control_trace_id = self
-            .trace
-            .borrow()
-            .latest_observation(M8LocalTraceKind::EntityPresenceControlApplied)
-            .expect("M8 presence synchronization appends a control trace")
-            .node_id;
+        let external_control = match cause {
+            M8EntityPresenceSynchronizationCause::CheckedSourceInitialAdmission => None,
+            M8EntityPresenceSynchronizationCause::ExternalControl {
+                schedule_action_reference,
+            } => {
+                let sequence = self.entity_presence_external_controls.len();
+                let control = M8EntityPresenceExternalControl {
+                    control_id: format!("m8-entity-presence-control-{sequence:020}"),
+                    trace_node_id: format!("m8-entity-presence-external-control-{sequence:020}"),
+                    schedule_action_reference,
+                };
+                self.entity_presence_external_controls.push(control.clone());
+                Some(control)
+            }
+        };
         Ok(M8EntityPresenceSynchronization {
             before_status,
             after_status: bridge.status().as_str().to_string(),
             source_ref,
             occurrence_id,
             occurrence_trace_id,
-            control_id: control_trace_id.clone(),
-            control_trace_id,
+            external_control,
             sealed_membership_ref: bridge.sealed_membership_ref().to_string(),
             m9_snapshot_ref: bridge.m9_snapshot_ref().to_string(),
             m8_authority_use_ref: bridge.m8_authority_use_ref().to_string(),
@@ -1639,6 +1678,7 @@ impl M8LocalRuntime {
             },
             lease_inventory: self.lease_inventory.clone(),
             patch_lifecycle: self.patch_lifecycle.clone(),
+            entity_presence_external_controls: self.entity_presence_external_controls.clone(),
         }
     }
 
@@ -1981,6 +2021,7 @@ impl M8LocalRuntime {
             .replace_live_leases(payload.lease_inventory.clone());
         self.lease_inventory = payload.lease_inventory.clone();
         self.patch_lifecycle = payload.patch_lifecycle.clone();
+        self.entity_presence_external_controls = payload.entity_presence_external_controls.clone();
     }
 }
 

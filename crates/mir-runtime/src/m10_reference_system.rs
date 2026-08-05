@@ -33,8 +33,8 @@ use crate::{
         M8InputReceiptSet,
     },
     m8_runtime_local_cut::{
-        M8EntityPresenceSynchronization, M8LeaseRecord, M8LiveFloor, M8LocalRuntime,
-        M8LocalRuntimeSeed, M8LocalTraceKind,
+        M8EntityPresenceSynchronization, M8EntityPresenceSynchronizationCause, M8LeaseRecord,
+        M8LiveFloor, M8LocalRuntime, M8LocalRuntimeSeed, M8LocalTraceKind,
     },
     m8_runtime_observer::{
         M8ObserverAuthorityGrant, M8ObserverDiagnosticKind, M8ObserverPolicy, M8ObserverRetention,
@@ -2741,7 +2741,10 @@ impl M10Scn02TargetLeaveSession {
             witness_ref: live_bridge.sealed_witness_ref().to_string(),
             epoch: live_bridge.sealed_epoch().to_string(),
             incarnation: live_bridge.sealed_incarnation().to_string(),
-            initial_presence_sync: execution.runtime.synchronize_entity_presence(live_bridge)?,
+            initial_presence_sync: execution.runtime.synchronize_entity_presence(
+                live_bridge,
+                M8EntityPresenceSynchronizationCause::CheckedSourceInitialAdmission,
+            )?,
         };
         let actor_authority = execution.bridge.owner_use().ok_or_else(|| {
             "M10 SCN02 checked self actor lacks an M9-issued owner authority".to_string()
@@ -2797,10 +2800,12 @@ impl M10Scn02TargetLeaveSession {
                 "M10 SCN02 retired bridge did not bind the initial target lineage".to_string(),
             );
         }
-        let transition = self
-            .execution
-            .runtime
-            .synchronize_entity_presence(retired_bridge)?;
+        let transition = self.execution.runtime.synchronize_entity_presence(
+            retired_bridge,
+            M8EntityPresenceSynchronizationCause::ExternalControl {
+                schedule_action_reference: self.leave_action_id.clone(),
+            },
+        )?;
         if transition.before_status != "live" || transition.after_status != "retired" {
             return Err(
                 "M10 SCN02 M8 presence did not make a live-to-retired transition".to_string(),
@@ -2947,7 +2952,6 @@ impl M10Scn02TargetLeaveSession {
                     "target_identity_bound_to_membership_principal": true,
                     "m8_initial_presence_sync": m10_scn02_presence_sync_evidence(
                         &self.initial_target_context.initial_presence_sync,
-                        None,
                     ),
                 },
                 "target_presence_check": {
@@ -2964,7 +2968,6 @@ impl M10Scn02TargetLeaveSession {
                 "target_leave_m9_authority_delta": target_leave_m9_authority_delta,
                 "m8_presence_store_transition": m10_scn02_presence_sync_evidence(
                     &m8_presence_store_transition,
-                    Some(&self.leave_action_id),
                 ),
                 "self_authority_bridge_invariant": {
                     "accessor": "M9M10AuthorityBridge::authority_state",
@@ -3028,13 +3031,10 @@ fn m10_source_ref_label(source_ref: &SourceRef) -> String {
     )
 }
 
-fn m10_scn02_presence_sync_evidence(
-    synchronization: &M8EntityPresenceSynchronization,
-    schedule_action_reference: Option<&str>,
-) -> Value {
+fn m10_scn02_presence_sync_evidence(synchronization: &M8EntityPresenceSynchronization) -> Value {
     json!({
         "source_derived_reference": m10_source_ref_label(&synchronization.source_ref),
-        "schedule_action_reference": schedule_action_reference,
+        "schedule_action_reference": synchronization.external_control.as_ref().map(|control| &control.schedule_action_reference),
         "membership_ref": synchronization.sealed_membership_ref,
         "transition": if synchronization.after_status == "retired" {
             "presence.retire"
@@ -3053,12 +3053,11 @@ fn m10_scn02_presence_sync_evidence(
             "source_ref": m10_source_ref_label(&synchronization.source_ref),
             "trace_node_id": synchronization.occurrence_trace_id,
         }],
-        "control_trace": [{
-            "control_id": synchronization.control_id,
-            "schedule_action_reference": schedule_action_reference,
-            "source_ref": m10_source_ref_label(&synchronization.source_ref),
-            "trace_node_id": synchronization.control_trace_id,
-        }],
+        "control_trace": synchronization.external_control.as_ref().map(|control| json!([{
+            "control_id": control.control_id,
+            "schedule_action_reference": control.schedule_action_reference,
+            "trace_node_id": control.trace_node_id,
+        }])).unwrap_or_else(|| json!([])),
         "public_runtime_execution_bypass_used": false,
         "raw_presence_provenance_accessor_used": false,
     })
