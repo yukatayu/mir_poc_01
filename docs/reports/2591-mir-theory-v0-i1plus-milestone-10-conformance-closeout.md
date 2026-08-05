@@ -266,13 +266,20 @@ inventory again. Neither skipped item is claimed as a new pass.
 
 ## Commit / push status
 
-No commit or push performed by this delegated closeout agent. The accepted R5
-source cut is already pushed at `23f5a8130334bf0c8516d51e9dcea38b92f50db1`.
-This status synchronization remains an uncommitted working-tree change for the
-parent/integration owner.
+The delegated closeout writer did not commit or push. The parent integrated the
+Canon/status/roadmap acceptance cut as
+`15267b128d3167b422154e6767b1861fc082e926`, pushed it to `origin/main`, fetched
+the remote, and verified exact `HEAD == origin/main`; its tree is
+`c3eba859ba61268a6e13aefeaabb2f14e20b612b`. The accepted immutable R5 source
+cut remains `23f5a8130334bf0c8516d51e9dcea38b92f50db1`. This forward metadata
+correction is committed and pushed as the final report-only closeout record;
+the final HEAD/parity is also stated in the terminal handoff.
 
 ## Sub-agent session close status
 
-This delegated closeout session edited only the six authorized LAB closeout
-files. No additional sub-agent was spawned from this session. Prior R5 reviewer
-ACCEPT is recorded as supplied evidence.
+The dedicated implementation, test, theory, semantic-review, planning, and
+closeout-planner sessions returned their evidence. The status writer was
+interrupted only after its six authorized LAB files had been written; the
+parent inspected and corrected those files directly. The final source reviewer
+and closeout planner both returned ACCEPT with no remaining P0/P1/P2. No live
+sub-agent owns unfinished M0--M10 work at report close.
