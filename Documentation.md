@@ -8,31 +8,31 @@ notes. If LAB text conflicts with canon, canon wins.
 ## この文書の役割
 
 この文書はリポジトリを読み始めるための短い案内です。規範判断は
-`mirrorea_canon/`、現在地は `docs/project-status.md`、唯一の current execution
-roadmap は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの不変な
-証跡は `docs/reports/` にあります。
+`mirrorea_canon/`、現在地は `docs/project-status.md`、閉じた M0--M10 program record は
+`plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの不変な証跡は
+`docs/reports/` にあります。現在activeな execution roadmapはありません。
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
-「次」は current queue を意味しません。現在の一本道は Plan 247 と、その派生ビュー
+「次」は current queue を意味しません。閉じた一本道は Plan 247、現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
 formal model / metatheory、M6 Surface、M7 checker/elaborator、M8 deterministic runtime、M9
-auth/verification は閉じた。現在は ADR-0015 の owner-approved Mir Theory v0 / I1+ program の
-**M10 conformance/closeout** である。M9 はM8 direct admissionを`DeferredToM9`のまま保持した
-source-bound outer resolution、MembershipAuth / CapabilityAuth、non-transparent `ContractUpdate`、
-attach/remove/revocation、provenance/invalidationを有限reference scopeで閉じた。29 focused tests、
-workspace tests、changed-crate all-target clippy、format、five axiom-free `--trust=0` Lean theorems、
-Canon index 167、hierarchy 798/798、docs validationがevidenceである。OBL-026は exact finite
-`lean-proved`、OBL-028は one-subject/one-capability bound-4 modelの exact
-`model-checked-bounded`である。これはofficial SCN-01..10 conformance、final public grammar/
-diagnostic ABI/wire、socket、production、general theorem、I1 completionを主張しない。M10 は同じ
-ordinary `.mir` sourceからfreshにrelease conformanceを実行する。M2 は
+auth/verification、M10 conformance/closeout は閉じた。ADR-0015 の owner-approved Mir
+Theory v0 / I1+ M0--M10 program は、R5 commit
+`23f5a8130334bf0c8516d51e9dcea38b92f50db1` の有限reference profileで受理済みである。
+M10 evidence は static 26/26、runtime 47/47、mismatch 0、missing 0、anchor true、
+waiver null、fresh clone output SHA256
+`083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7` repeated twice、
+reviewer ACCEPT no P0/P1/P2 である。これは frozen SCN-01..10 の有限 I1+
+deterministic reference profile acceptance であり、broad PHASE-I1 exit、I2 activation、
+final public grammar/diagnostic ABI/wire/carrier freeze、socket、production、general theorem、
+public product completion は主張しない。次の program direction は owner-defined である。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
-G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` だが、OBL、
-SCN/conformance、runtime 実装、I1 authorization はまだ主張しない。
+G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` のままであり、
+proof ledger は M10 で変更していない。
 
 | 知りたいこと | 読む場所 |
 | --- | --- |
@@ -42,7 +42,7 @@ SCN/conformance、runtime 実装、I1 authorization はまだ主張しない。
 | T0/G0 v3 acceptance | `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md`, `mirrorea_canon/adr/ADR-0017.md`, `plan/248-t0-g0-semantic-assertion-v3-evaluation.json` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
-| 唯一の current execution roadmap | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
+| 閉じた M0--M10 execution record | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | 旧 goal-first semantic integration（historical LAB evidence） | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
 | I1 実装開始の判断・readiness | `plan/197-i1-bootstrap-decision-and-readiness-audit.md` |
@@ -103,6 +103,7 @@ SCN/conformance、runtime 実装、I1 authorization はまだ主張しない。
 | P017 X1 K0 q-fiber U/L finite conditional evidence (not promoted) | `mirrorea_canon/working/WRK-0046-p017-x1-k0-qf-ul-lift.md`, `plan/wrk-0046-p017-x1-k0-qf-ul-lift.md`, `docs/reports/2572-wrk0046-p017-x1-k0-qf-ul-lift-execution.md`, `docs/reports/2573-wrk0046-positive-conditional-evidence-metadata-link.md` |
 | post-WRK-0045 autonomous-frontier reconciliation | `docs/reports/2568-post-wrk0045-autonomous-frontier-reconciliation.md` |
 | current task と runnable evidence | `tasks.md`, `progress.md`, `samples_progress.md` |
+| M10 closeout evidence | `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
 | Oracle 運用 | `.docs/oracle-chatgpt-pro-operations.md` |
 
 ## 最初に読む順序
@@ -208,11 +209,11 @@ kernel model、必要な I1-readiness record、all-SCN implementation scope、�
 
 | 段階 | 主眼 | 現在の扱い |
 | --- | --- | --- |
-| T0 | 語彙・decision・G0 | current。v2 evaluation は `fail`。4 control は統治文書 drift と監査済みだが、rebase/retry は未承認。将来の rebase decision と、その後の G0-D3 が必要 |
-| T1 | 計算体系・G1-G3 statement | no official entry。記録済み方向の composition research と shared model 後に自走 |
-| T2 | OBL-020/021/002 skeleton・G5 statement | later。profile と proof-skeleton evidence class が未定義 |
-| I1 | 単一 process reference implementation | T2 と all-SCN/G0-G7 readiness の関係を先に固定 |
-| I2 | process 内 multi-place | I1 後 |
+| T0 | 語彙・decision・G0 | closed through the M2 v3 acceptance record; v1/v2 remain historical evidence |
+| T1 | 計算体系・G1-G3 statement | official lifecycle remains here after M10; M10 does not claim broad PHASE-I1 exit |
+| T2 | OBL-020/021/002 skeleton・G5 statement | not reopened by M10; proof ledger unchanged |
+| I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
+| I2 | process 内 multi-place | owner-defined future direction; not activated by M10 |
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 

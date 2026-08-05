@@ -18,6 +18,15 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-05** ADR-0015 の owner delegation と ADR-0025 acceptance amendment により、
+  source/validation cut `23f5a8130334bf0c8516d51e9dcea38b92f50db1` の M10 I1+
+  deterministic reference profileを受理した。fresh remote cloneで同一output digestを
+  二回再現し、26 static + 47 runtime correspondence rows、zero mismatch/missing、
+  release-anchor match、waiverなし、独立review ACCEPTを確認した。theory lifecycleは
+  T1、proof ledgerは不変である。architecture/04 L2 carrier freeze / OPEN-030、広い
+  PHASE-I1 exit、public API/ABI/wire、C-distributed、I2 activation、deploymentは
+  非主張として残し、I2には新しいowner directionを要求するentry contractだけを置いた。
+
 - **2026-08-05** PROPOSAL-028 と ADR-0025 により、凍結SCN-01..10の primary ordinary
   `.mir` source（SCN間共有可）と有限の named negative source variants を direct path の
   typed terminal まで通す有限M10 conformance profileを採用した。SCN-09には有限の

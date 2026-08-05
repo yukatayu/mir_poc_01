@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0022) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0025) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -49,9 +49,12 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
 - **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0017。
 
-Mir Theory v0 / I1+ Milestones 0--10 の current execution は ADR-0015--0022、
-PROPOSAL-018--025 を追加で読み、LAB の designated current roadmap と derived status
-だけを current queue として使う。下の historical working records 一覧は queue ではない。
+Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
+PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
+ADR-0025である。理論 lifecycle は T1 のままであり、広い PHASE-I1 exit、public
+carrier/API/ABI/wire freeze、I2 activation はこの acceptance から導かない。LAB の
+Plan 247 は close record / repository memory であって、次の current queue ではない。
+下の historical working records 一覧も queue ではない。
 
 ## ID 体系
 

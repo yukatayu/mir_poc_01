@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 14120
+   "bytes": 14868
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 21996
+   "bytes": 22219
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3599
+   "bytes": 3608
   },
   {
    "id": "adr/ADR-0001",
@@ -424,7 +424,7 @@
    "summary": "凍結SCN-01..10のordinary-source有限M10 conformance profileと唯一のM6/M7 direct-consumer seamを採用する。",
    "open_items": [],
    "path": "adr/ADR-0025.md",
-   "bytes": 7163
+   "bytes": 10182
   },
   {
    "id": "adr/readme",
@@ -1096,7 +1096,7 @@
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 4976
+   "bytes": 6113
   },
   {
    "id": "plan/02-operating-model",

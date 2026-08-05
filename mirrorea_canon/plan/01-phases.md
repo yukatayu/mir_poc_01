@@ -9,9 +9,14 @@ open_items: [OPEN-032]
 
 # 01 — フェーズ計画
 
-**唯一の実装状態の正本。** 他のどのファイルの存在も実装を意味しない。現在位置:
-**T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、G0 exit、T1 entry を
-ADR-0017 により受理済み）。
+**唯一の phase 状態の正本。** 他のどのファイルの存在も phase entry/exit を意味しない。
+現在位置は二軸で読む。
+
+- theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
+  G0 exit、T1 entry を ADR-0017 により受理済み）;
+- implementation evidence: **M10 I1+ deterministic reference profile accepted**
+  （ADR-0025）。architecture/04 の L2 carrier freeze と OPEN-030 が残るため、広い
+  PHASE-I1 exit と I2 entry は未受理。
 
 ## 理論フェーズ
 
@@ -35,6 +40,21 @@ production implementation は main 不合流である。
 | I4 永続と patch | save/load(local durable)、ライブ patch(SCN-09 を実セッションで) | 落として上げ直せる world | 継続世界の試作 | 分散 durable(R3/R4) |
 | I5 射影と View | ブラウザ client への projection、View FFI(pose 契約)、viewer devtools | 人に見せられる仮想空間デモ | デモ可能な α | 最終 ABI・複数エンジン |
 | I6 分散永続と連合 | R3/R4、複数サーバ、federation 入口、限定公開 | 招待制の常設小世界 | 限定公開 α | 一般公開・スケール保証 |
+
+## I1+ deterministic reference-profile acceptance
+
+ADR-0025 は source/validation cut
+`23f5a8130334bf0c8516d51e9dcea38b92f50db1`、tree
+`d8a296fac7a94a37da92563d5feeeeaa96dbc682` の有限 M10 profileを受理した。
+fresh remote clone は同一 output SHA-256
+`083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7`
+を二回再現し、26 static + 47 runtime rows、zero mismatch/missing、anchor match、
+waiverなしで `ConformanceAccepted` となった。
+
+これは owner-approved M0--M10 program の実行可能 reference-profile close である。
+architecture/04 の L2 carrier freeze / OPEN-030 を解決せずに、spec/06 の広い
+PHASE-I1 exit、public grammar/API/ABI/wire、C-distributed、I2 activationを主張しない。
+I2 entry は ADR-0025 の entry contractと新しい owner-directed current roadmapを必要とする。
 
 ## T0/G0 phase-governance profile
 

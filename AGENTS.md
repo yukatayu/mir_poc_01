@@ -58,10 +58,12 @@ source hierarchy; do not treat an external chat as normative state.
      A frozen L2 record is retained and followed by a successor, not demoted in
      place. Neither is an L0/L1 decision, implementation contract,
      or proof/ledger change.
-   - Within the owner-approved Mir Theory v0 / I1+ Milestones 0--10, follow
-     ADR-0015 and the designated current roadmap instead. Apply bounded Canon,
-     proof-ledger, implementation, test, and status changes when their current
-     milestone acceptance criteria and independent evidence support them.
+   - While the owner-approved Mir Theory v0 / I1+ Milestones 0--10 program is
+     active, follow ADR-0015 and its designated current roadmap instead. Apply
+     bounded Canon, proof-ledger, implementation, test, and status changes when
+     the active milestone acceptance criteria and independent evidence support
+     them. After that program closes, its roadmap is a closed record and does
+     not authorize a post-program milestone without new owner direction.
 
 3. **Respect decision levels**
    - `L0` = foundational / changing it affects the whole system.
@@ -96,9 +98,12 @@ source hierarchy; do not treat an external chat as normative state.
      standing predicate; L2 promotion is currently fail-closed and, after an
      owner-authenticated trust anchor exists, additionally needs final-cut
      review.
-     Outside ADR-0015, escalate when it touches L0/L1, a core/external contract,
-     SCN/Gate/Phase, any `theory/11` state, or a new moratorium-protected lane.
-     Within ADR-0015, use the explicit owner-reserved conditions in that ADR.
+     While the ADR-0015 M0--M10 program was active, its explicit owner-reserved
+     conditions governed that bounded program. It is now closed and grants no
+     successor authority. Post-program work follows ADR-0014 or new owner
+     direction as applicable; escalate changes to L0/L1, core/external
+     contracts, SCN/Gate/Phase, any `theory/11` state, or a new
+     moratorium-protected lane.
 
 ## Strong project-specific constraints
 
@@ -176,8 +181,11 @@ Every report should contain, in this order:
 
 ## Current-frontier discipline
 
-- Keep exactly one active semantic milestone and one designated current roadmap.
-  Older `plan/` files remain repository memory, not an active queue.
+- While a program is active, keep exactly one active semantic milestone and one
+  designated current roadmap. A closed program may have neither; its last
+  roadmap remains a closed record/regression baseline until owner direction
+  designates a successor. Older `plan/` files remain repository memory, not an
+  active queue.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the
@@ -190,7 +198,7 @@ Every report should contain, in this order:
 
 ## Editing policy
 
-- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 records the owner decision for the bounded Mir Theory v0 / I1+ program and permits evidence-gated milestone updates without repeated owner confirmation. Outside that program, ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`; L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
+- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 records the owner decision for the bounded Mir Theory v0 / I1+ program and permitted evidence-gated milestone updates without repeated owner confirmation while M0--M10 was active. That program is closed and ADR-0015 grants no successor/post-program authority. Post-program work follows ADR-0014 or new owner direction as applicable; ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`, and L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
 - Legacy LAB `specs/` remain historical evidence and implementation memory. Edit carefully, and do not treat them as canonical unless the claim is mirrored into `mirrorea_canon/`.
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.

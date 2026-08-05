@@ -22,8 +22,10 @@ owner-reserved. Outside the program, ADR-0014 keeps research in the reversible
 L3 `working/WRK-####` route and L2 remains fail-closed until an
 owner-authenticated trust anchor exists. Candidates, countermodels,
 experiments, and history remain LAB. The concise control view is
-`docs/project-status.md`; the sole current execution roadmap is
-`plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
+`docs/project-status.md`. M0--M10 is closed, so there is currently no active
+execution roadmap; `plan/247-mir-theory-v0-i1plus-current-roadmap.md` is the
+closed program record and regression baseline until a new owner direction
+designates a successor.
 
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア

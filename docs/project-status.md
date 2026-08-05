@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-05 01:59 JST
+最終更新: 2026-08-05 16:34 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/`
@@ -9,9 +9,8 @@ is LAB; canon wins. This document is a LAB derived view.
 ## この文書の役割
 
 これは人間向けの短い **派生ビュー** である。規範判断は
-`mirrorea_canon/`、唯一の current execution roadmap は
-`plan/247-mir-theory-v0-i1plus-current-roadmap.md`、詳細な履歴は他の `plan/` と
-`docs/reports/` にある。この文書は Gate/Phase、OBL、SCN、適合性、実装完了を決めない。
+`mirrorea_canon/`、詳細な履歴は `plan/` と `docs/reports/` にある。この文書は
+Gate/Phase、OBL、SCN、適合性、実装完了を決めない。
 
 ## 全体の進行チェックリスト
 
@@ -20,82 +19,68 @@ M0 bootstrap → M1 Constitution → M2 T0/G0 semantic assertions
 → M3 evaluation/materialization → M4 maintained relation/projection
 → M5 shared model → M6 Surface → M7 checker/elaborator
 → M8 deterministic runtime → M9 auth/verification → M10 closeout
+→ owner-defined post-program direction
 ```
 
-各矢印は current milestone の rule/non-effect、positive/negative evidence、formal
-classification、independent review、validation、commit/push/parity を閉じた後にだけ進む。
+M0--M10 は ADR-0015 の owner-approved bounded program として閉じた。各 milestone の
+acceptance/non-effect は個別 report と Canon evidence に従う。
 
 ## 現在地
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M10 conformance/closeout**。M0--M10 program内に次のsemantic milestoneはない | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
-| authority | ADR-0015 の owner-approved bounded program。owner-reserved condition 以外は milestone evidence で自走する | `mirrorea_canon/adr/ADR-0015.md` |
-| official lifecycle | `T1`。v3 `pass` digest acceptance により G0-D3/G0 exit/T1 entry を順に受理。v1/v2 artifact は historical evidence のまま | `mirrorea_canon/plan/01-phases.md`, `mirrorea_canon/adr/ADR-0017.md` |
-| proof / scenarios | General OBL-001..025 と 027 は `intentionally-deferred`; finite M3 OBL-029..032 は `lean-proved`、033 は `model-checked-bounded`、034 は `runtime-monitored`; finite M4 OBL-035..039、M5 OBL-040..047、M6 OBL-048、M7 OBL-049、M8 OBL-050..056、M9 OBL-026 は exact `lean-proved`。M8 OBL-057はbounded validation correspondenceの`runtime-monitored`、M9 OBL-028はone-subject/one-capability bound-4 graphの`model-checked-bounded`。SCN-01..10 official status は不変、SCN-11/12 は milestone pressure scenario | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M0--M9 close/non-effect | M9 はM7/M8 identity/source-map/deferred-rowを保持するouter resolution、MembershipAuth / CapabilityAuth、non-transparent `ContractUpdate`、attach/remove/revocation、provenance/invalidationを29 focused tests、workspace tests、changed-crate clippy/format、five trusted Lean theorems、bounded model、independent reviewで閉じた。M10 conformance、final public ABI/wire、socket、production、general proof、I1 completionは動かさない | `docs/reports/2581-mir-theory-v0-i1plus-milestone-0-bootstrap.md`, `docs/reports/2582-mir-theory-v0-i1plus-milestone-1-constitution.md`, `docs/reports/2583-mir-theory-v0-i1plus-milestone-2-t0-g0-semantic-assertions.md`, `docs/reports/2584-mir-theory-v0-i1plus-milestone-3-evaluation-materialization.md`, `docs/reports/2585-mir-theory-v0-i1plus-milestone-4-maintained-relation-projection.md`, `docs/reports/2586-mir-theory-v0-i1plus-milestone-5-shared-model-metatheory.md`, `docs/reports/2587-mir-theory-v0-i1plus-milestone-6-surface-v0.md`, `docs/reports/2588-mir-theory-v0-i1plus-milestone-7-checker-elaborator.md`, `docs/reports/2589-mir-theory-v0-i1plus-milestone-8-deterministic-runtime.md`, `docs/reports/2590-mir-theory-v0-i1plus-milestone-9-auth-verification.md` |
+| active frontier | **M0--M10 closed**。program 内に次の autonomous semantic milestone はない | `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
+| authority | ADR-0015 の bounded program は R5 で完了。次の public / distributed / product direction は owner-defined | `mirrorea_canon/adr/ADR-0015.md` |
+| official lifecycle | `T1` remains. M10 does not claim broad PHASE-I1 exit, I2 activation, or public ABI/wire/carrier freeze | `mirrorea_canon/plan/01-phases.md`, `mirrorea_canon/adr/ADR-0025.md` |
+| proof / scenarios | Proof ledger unchanged. General OBL-001..025 and OBL-027 remain `intentionally-deferred`; M3--M9 finite evidence keeps its exact recorded classes. SCN-01..10 finite M10 C-static/C-runtime profile is accepted; SCN-11/12 remain pressure scenarios | `mirrorea_canon/theory/11-metatheory-ledger.md`, `mirrorea_canon/spec/11-m10-i1plus-conformance.md` |
+| M10 accepted evidence | R5 commit `23f5a8130334bf0c8516d51e9dcea38b92f50db1`, tree `d8a296fac7a94a37da92563d5feeeeaa96dbc682`; output SHA256 reproduced twice `083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7`; static 26/26, runtime 47/47, mismatch 0, missing 0, anchor true, waiver null; reviewer ACCEPT no P0/P1/P2 | Report 2591 |
 
-M0 は governance/agent role/sole roadmap/derived-status cut を fresh validation、independent
-review、one report、commit/push/remote parity で閉じた。M1 は concise Constitution の Canon
-placement と contradiction audit を同じ discipline で閉じた。M2 は revision-bound semantic
-assertion producer、fresh `pass` artifact、negative control、acceptance record を閉じ、T1
-entry を受理した。M3 は ADR-0018/theory/13 の有限 calculusを、Lean・64 target-set
-enumeration・focused Rust traces・independent reviewで閉じた。M4 は ADR-0019/theory/14/SCN-12 の
-有限 relation calculusを閉じた。M5 は ADR-0020/theory/15 の non-opaque finite shared modelを閉じた。
-M6 は ADR-0021/spec/01--04 の ordinary Surface grammar、span-rich AST、total M5-aligned
-classificationを閉じた。M7 は M6 syntax/span/Core-template meaningを変えず、ordinary `.mir`
-から M6 classification、finite check、typed Core/effects/obligations/residuals/source mapまでを
-接続した。M8 はこの checked boundaryを唯一のsource-program inputとして、owner queue、relation/
-designated store、trace、local cut/save-load、bounded patch、observer-safe exportを同じfinite runtime
-stateで閉じた。53 focused tests、full `mir-runtime` / `mir-semantics` all-targets、format/clippy、
-28 trusted Lean theorem checksがevidenceである。M9 はこのruntime contractを固定入力として
-source-bound auth/verification extensionを閉じた。M8 direct admissionは`DeferredToM9`のままで、
-M9の29 focused tests、workspace tests、five axiom-free Lean theorems、OBL-028 bounded model、
-independent reviewはM10のfresh official conformanceを代替しない。
+M10 accepted the finite I1+ deterministic reference profile only. It preserves
+the same-source path through M6/M7/M8/M9/runtime/projection and exact
+correspondence verification, with profile/manifest
+`fnv1a64:6a1cfac2a0950323`, verifier `fnv1a64:420308515cf98e18`, source
+revision `fnv1a64:7bff6aa952a8ad53`, and execution
+`fnv1a64:5b4d58cf1cd20428`.
 
 ## 現在の停止線
 
-- M10 は同じ ordinary `.mir` sourceから parse / check / elaborate / M8 / M9 / trace / projectionを
-  freshに実行し、C-static / C-runtime SCN-01..10 waiverなし10/10、fresh checkout reproduction、
-  proof/diagnostic/status correspondence、independent reviewを一つのrelease profileで確認する。
-  report/expected JSONを成功へ組み立てるwrapper、SCN statusの先取り、M1--M9 evidence classの読み替えはしない。
-  `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
-- final public contract、production deployment、guarantee weakening、domain vocabularyのCore化
-  は ADR-0015 owner-reserved condition である。`mirrorea_canon/adr/ADR-0015.md`
+Source boundary: `mirrorea_canon/adr/ADR-0025.md` and
+`plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
+
+- No autonomous package remains inside M0--M10.
+- Post-program work requires a new owner direction, especially for OPEN-030 /
+  carrier boundary, broad PHASE-I1 exit, public ABI/wire/carrier freeze, I2
+  entry, product publication, or deployment.
+- M10 does not claim C-distributed, sockets, final public grammar/API/ABI/wire,
+  production runtime, general theorem discharge, I2+, or public-product
+  completion.
 
 ## オーナーの確認・判断待ち
 
-現在の M10 を止める owner decision はない。以下だけが escalation 条件であり、通常の
-grammar、internal carrier、proof decomposition、test、bounded model、roadmap wording は
-milestone 内で evidence-gated に決める。
+Authority boundary: `mirrorea_canon/adr/ADR-0015.md` and
+`mirrorea_canon/adr/ADR-0025.md`.
 
 | 条件 | 影響 | 現在の扱い |
 | --- | --- | --- |
-| North Star / safety/privacy weakening | project guarantee | stop and issue a concise decision bundle |
-| World等の Core primitive化 / v0 non-goalの必須化 | scope | stop and escalate |
-| final public API/ABI/wire、deployment/publication | irreversible external contract | stop and escalate |
-| user data/secret risk | safety | stop and escalate |
-
-根拠: `mirrorea_canon/adr/ADR-0015.md`。
+| Post-M0--M10 program direction | next roadmap and authority boundary | owner decision required |
+| OPEN-030 / carrier boundary | public carrier / ABI / wire readiness | unresolved; do not freeze silently |
+| PHASE-I1 exit / I2 activation | lifecycle and next implementation scope | not claimed by M10; owner-defined |
+| production deployment / publication | irreversible external contract | owner-reserved |
+| North Star / safety/privacy weakening or Core domain promotion | project guarantee | owner-reserved |
 
 ## 根拠と詳細
 
 | 知りたいこと | 正本またはLAB evidence |
 | --- | --- |
 | Constitution/program authority | `mirrorea_canon/meta/proposals/PROPOSAL-018-mir-v0-i1plus-autonomous-execution.md`, `mirrorea_canon/adr/ADR-0015.md` |
+| M10 conformance boundary | `mirrorea_canon/adr/ADR-0025.md`, `mirrorea_canon/spec/11-m10-i1plus-conformance.md`, `mirrorea_canon/spec/06-conformance.md` |
 | official lifecycle / Gate | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
-| operating rules / source hierarchy | `mirrorea_canon/plan/02-operating-model.md`, `mirrorea_canon/meta/source-hierarchy.md` |
 | proof status | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| current execution sequence | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
-| runnable historical evidence | `samples_progress.md` |
+| M10 report | `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
+| runnable evidence dashboard | `samples_progress.md` |
 
 ## 更新規約
 
-M0--M10 close では Canon consequence を先に、then Plan 247、this derived view,
-`progress.md`、`tasks.md` を同期する。一 milestone 原則一 reportであり、report/history
-は current queue ではない。sample path/command/classification/blocker が変わらない限り
-`samples_progress.md` は更新しない。
-
-各 milestone は author と異なる independent reviewer の review、focused validation、
-`git diff --check`、commit/push/remote parityを必要とする。未実行 validation を pass と
-記録しない。
+Derived snapshots must not create new Canon or owner decisions. Report 2591 is
+the closeout evidence for M10; future roadmap edits should first establish a new
+owner-defined post-program direction.

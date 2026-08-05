@@ -20,7 +20,7 @@ open_items: []
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(22 本の決定の一覧)
+- 決定: `adr/README.md`(25 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -36,7 +36,7 @@ open_items: []
 - M9 auth/verification seam: `adr/ADR-0024.md` →
   `theory/18-m9-auth-verification.md` →
   `spec/10-m9-auth-verification.md`
-- M10 I1+ finite conformance: `adr/ADR-0025.md` →
+- accepted M10 I1+ finite conformance: `adr/ADR-0025.md` →
   `spec/11-m10-i1plus-conformance.md` → `spec/06-conformance.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 

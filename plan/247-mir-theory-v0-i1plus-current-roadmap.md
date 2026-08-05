@@ -1,6 +1,6 @@
-# Plan 247 - Mir Theory v0 / I1+ current execution roadmap
+# Plan 247 - Mir Theory v0 / I1+ closed execution record
 
-最終更新: 2026-08-05 01:59 JST
+最終更新: 2026-08-05 16:22 JST
 
 ## 役割と authority
 
@@ -10,7 +10,8 @@
 Mir Theory v0 + Mir I1+ deterministic reference system
 ```
 
-の **唯一の current execution roadmap** である。規範正本は
+の直列実行に使われ、現在は **closed program record / regression baseline** である。
+activeなexecution roadmapは存在せず、後続roadmapは新しいowner directionを要する。規範正本は
 `mirrorea_canon/`、公式 Gate / Phase の実装状態は
 `mirrorea_canon/plan/01-phases.md`、proof status は
 `mirrorea_canon/theory/11-metatheory-ledger.md` だけが決める。この文書は LAB の
@@ -19,20 +20,32 @@ conformance 又は public status を変更しない。
 
 - program start revision:
   `b9dcaa054c548112a7977776723418559b8ba8b2`
-- completed milestone: **M9 auth/verification**
-- active milestone: **M10 conformance/closeout**
-- next milestone: **none inside the owner-approved M0--M10 program**
-- active frontier limit: 一つの milestone
-- current direct blocker: 同じ ordinary `.mir` source から parse / check / elaborate / M8 / M9 /
-  trace / projection までを再実行する fresh release profile、SCN-01..10 の C-static / C-runtime
-  waiverなし10/10、fresh checkout reproduction、proof/diagnostic/status correspondence、独立 reviewを
-  一つのM10 closeoutへ揃えること
-- direct consumer: M0--M10 program closeout; post-program direction is owner-defined
+- completed milestones: **M0--M10**（M10 conformance/closeout は 2026-08-05 に close）
+- active milestone: **none**。owner-approved M0--M10 program 内の current semantic frontier はない。
+- next milestone: **none**。I2 は未activateであり、新しい owner direction なしに roadmap を作らない。
+- current direct blocker: **none inside the closed M0--M10 program**。post-program の direct consumer と
+  scope selection は owner-defined である。
+- accepted M10 reference cut: R5 commit
+  `23f5a8130334bf0c8516d51e9dcea38b92f50db1` / tree
+  `d8a296fac7a94a37da92563d5feeeeaa96dbc682`。固定 release anchor は source revision
+  `fnv1a64:7bff6aa952a8ad53`、execution identity
+  `fnv1a64:5b4d58cf1cd20428`、complete `profile_hash` / `manifest_hash`
+  `fnv1a64:6a1cfac2a0950323`、`verifier_profile_hash`
+  `fnv1a64:420308515cf98e18` である。profile は SCN-01..10 waiverなし10/10、
+  C-static 26/26、C-runtime 47/47、missing/mismatch 0、`waiver_carrier: null`、
+  `anchor_match: true`、`ConformanceAccepted` を受理 evidence とする。fresh remote clone の
+  output SHA-256 は二回とも
+  `083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7` であり、
+  392/392 `mir-runtime` tests（67 targets）と 886/886 workspace tests（149 targets）、
+  format、warnings-denied Clippy、independent final review（remaining P0/P1/P2なし）を含む。
+- lifecycle boundary: Theory は **T1 のまま**。I1+ deterministic reference profile は受理済みだが、
+  broad PHASE-I1 exit、`arch/04` carrier freeze、public carrier/API/ABI/wire freeze、I2 activation は
+  主張しない。
 
 Plans 196 / 197 / 246 と、それ以前の numbered plans は削除しない。これらは
 historical LAB evidence / repository memory であり、Plan 247 と並行する active queue
 ではない。`progress.md`、`tasks.md`、`docs/project-status.md`、
-`Documentation.md` はこの roadmap の派生 snapshot である。
+`Documentation.md` はこのclosed recordとCanonから導くcurrent snapshotである。
 
 ## M0 start-state pin と non-effects
 
@@ -418,7 +431,7 @@ transport, production, or final grammar.
 **Direct consumer:** completed; M10 consumes the M1--M9 accepted cuts without
 reinterpreting their bounded evidence classes.
 
-### M10 - Conformance / closeout (active 2026-08-05)
+### M10 - Conformance / closeout (completed 2026-08-05)
 
 **Intended outcome:** Mir Theory v0 + Mir I1+ deterministic reference system の evidence、
 claims、non-claims、reproduction route を一つの closeout cut に固定する。
@@ -440,13 +453,29 @@ claims、non-claims、reproduction route を一つの closeout cut に固定す�
 **Evidence:** full focused validation matrix、fresh conformance artifacts、proof audit、clean-clone
 reproduction、final independent review。
 
-**Direct blocker / consumer:** M9 acceptance is complete. The active blocker is
-fresh same-source release conformance: one ordinary `.mir` input must actually
-drive parse / check / elaborate / M8 / M9 / trace / projection, then establish
-C-static and C-runtime SCN-01..10 waiverなし10/10, fresh-checkout reproduction,
-and independent adversarial review. No M10 pass is implied before that evidence.
-There is no next semantic consumer inside the owner-approved program; a
-post-program direction is owner-reserved.
+**Close evidence:** R5 commit
+`23f5a8130334bf0c8516d51e9dcea38b92f50db1` / tree
+`d8a296fac7a94a37da92563d5feeeeaa96dbc682` is the accepted immutable source
+cut. Its release anchor binds source revision `fnv1a64:7bff6aa952a8ad53`,
+execution identity `fnv1a64:5b4d58cf1cd20428`, complete profile/manifest hash
+`fnv1a64:6a1cfac2a0950323`, and verifier-profile hash
+`fnv1a64:420308515cf98e18`. The source-first profile has no waiver carrier and
+accepted SCN-01..10 with C-static 26/26 and C-runtime 47/47 correspondence
+rows, zero missing/mismatch rows, and a matching fixed release anchor. Fresh
+checkout reproduction produced SHA-256
+`083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7` twice. Focused
+validation includes 392/392 `mir-runtime` tests (67 targets), 886/886 workspace
+tests (149 targets), format, and warnings-denied Clippy. The trusted
+Lean/kernel-dependency audit and independent final semantic review with no
+remaining P0/P1/P2 finding are recorded in the one M10 report and the Canon
+acceptance record; the profile is not a report/fixture wrapper.
+
+**Lifecycle consequence / direct consumer:** The owner-approved M0--M10
+program is closed. This accepts the bounded I1+ deterministic reference profile
+only. Theory remains at T1; no broad PHASE-I1 exit, `arch/04` carrier freeze,
+public carrier/API/ABI/wire freeze, C-distributed result, production deployment,
+or I2 activation follows. There is no next current semantic consumer or active
+roadmap inside the program; any post-program consumer is owner-reserved.
 
 ## Milestone dependency / ownership summary
 
@@ -462,7 +491,7 @@ post-program direction is owner-reserved.
 | M7 | implementer + test/formal writers | M6 Surface | closed: source-first finite check/elaboration, OBL-049 exact evidence, M7 fixture matrix; no official SCN conformance |
 | M8 | implementer + test/formal writers | M7 checked Core/obligation/residual output | closed: finite checked-artifact runtime, OBL-050--056 exact Lean evidence, bounded runtime fixture matrix; no official SCN conformance |
 | M9 | auth/security + test/formal writers | M8 runtime contract | closed: source-bound M9 resolution, typed ContractUpdate/revocation/invalidation, OBL-026 exact Lean and OBL-028 exact bounded-model evidence; no M10 conformance |
-| M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | active: fresh same-source full matrix, C-static/C-runtime SCN-01..10 10/10, fresh checkout, and closeout review |
+| M10 | orchestrator + independent reviewer | M1--M9 accepted cuts | closed: R5 source-first full matrix; SCN-01..10 waiverなし10/10, C-static 26/26, C-runtime 47/47, fresh checkout, and final independent review; bounded I1+ reference profile only |
 
 同一変更の writer はその milestone の independent reviewer を兼ねない。production Rust は
 原則一 writer、test / planner / review は別 ownership とする。
@@ -471,18 +500,19 @@ post-program direction is owner-reserved.
 
 ### Assumptions
 
-- owner が milestone の名前と順番を承認したことは ADR-0015 / PROPOSAL-018 に記録済み。
-- future milestone の internal carriers / algorithms / provisional syntax は、Constitution と
-  acceptance criteria を満たす範囲で evidence-gated に選べる。
-- M0 より詳しい Constitution 内容や semantic rules はまだ accepted fact ではなく、該当
-  milestone で falsifiable に選ぶ。
+- owner が M0--M10 の名前と順番を承認したことは ADR-0015 / PROPOSAL-018 に記録済み。
+- program がactiveだった間、後続milestoneのinternal carriers / algorithms /
+  provisional syntaxは、Constitutionと各acceptance criteriaの範囲でevidence-gatedに
+  選択できた。この権限はM10 closeで終了し、post-program workへ移らない。
+- M1--M10で選択・受理されたConstitutionとsemantic rulesは、各Canon acceptance recordの
+  exact finite scopeでacceptedである。未受理の一般化や後続scopeはowner directionを要する。
 
 ### Main risks and mitigations
 
 | Risk | Trigger | Mitigation / rollback |
 | --- | --- | --- |
-| multiple current queues | older plan が「current next」を名乗る | Plan 247 だけを queue とし、older plan は historical label |
-| semantic work leaks forward | current milestone 未closeで後段 model/code開始 | active frontier=1; changes stay unintegrated or rollback |
+| multiple current queues | closed Plan 247やolder planが「current next」を名乗る | current queueはnone。新owner directionが指定する後続roadmapだけをactiveにする |
+| semantic work leaks forward | owner directionなしでpost-program model/codeを開始 | R5 regression baselineを保持し、後続scope/acceptanceが指定されるまで開始しない |
 | proof/conformance laundering | bounded/placeholder evidence を proof/pass 扱い | exact evidence classification, axiom/placeholder scans |
 | hidden authority/effect/projection | transport/debug/evaluator state が意味を保持 | typed carrier, negative tests, late projection review |
 | lifecycle overclaim | M0/M1 evidence から T0/G0/T1 を推測 | only M2 exact acceptance record may move T0/G0 |
@@ -490,10 +520,11 @@ post-program direction is owner-reserved.
 | shared-worktree overwrite | concurrent writer surface が衝突 | single-writer ownership, focused diff, preserve unrelated edits |
 | stale status/report growth | snapshot と historical memory が queue 化 | one report per milestone, derived snapshot recut at close |
 
-### Owner-reserved stop conditions
+### Historical owner-reserved stop conditions during M0--M10
 
-次のいずれかに到達した場合だけ owner input を待つ。その他の milestone-local choice は
-ADR-0015 の evidence gate と independent review で進める。
+programがactiveだった間は、次のいずれかに到達した場合だけowner inputを待ち、その他の
+milestone-local choiceをADR-0015のevidence gateとindependent reviewで進めた。この記録は
+closed M0--M10 programの外へ自律変更権限を付与しない。
 
 - North Star の変更。
 - safety / authority / privacy / redaction / no-stale-resurrection guarantee の弱化。
@@ -504,9 +535,9 @@ ADR-0015 の evidence gate と independent review で進める。
 - project priorities で順序付けられない同順位・不可逆な選択肢。
 - current user data / secret の破壊又は公開リスク。
 
-checkpoint では `escalated` bundle に exact choice、consumer、evidence、falsifier、
-alternatives、rollback、影響する milestone を記録する。単なる難しさ、validation failure、
-又は未完成は owner-reserved stop ではなく、active milestone 内で修正する。
+当時のcheckpointでは `escalated` bundle に exact choice、consumer、evidence、falsifier、
+alternatives、rollback、影響する milestone を記録した。単なる難しさ、validation failure、
+又は未完成は owner-reserved stop とせず、当時activeだった milestone 内で修正した。
 
 ## Deferred scope
 
@@ -523,10 +554,26 @@ alternatives、rollback、影響する milestone を記録する。単なる難�
 これらの bounded LAB evidence は regression / design evidence として再利用できるが、
 active milestone 又は public completion へ暗黙昇格しない。
 
+## I2 entry contract (not an active roadmap)
+
+I2 はこの closeout により開始しない。開始には新しい owner direction と、その direction に
+対応する唯一の current roadmap が必要である。少なくとも次を明示的に選択・受理するまで、
+M10 の reference evidence を I2 evidence へ読み替えない。
+
+- `arch/04` の bounded carrier freeze と `OPEN-030`（envelope reply/receipt shape）の解決範囲、
+  acceptance record、そして public ABI/wire ではないこと。
+- generated communication が source-derived seam から実際の dispatch を行うこと、process 内
+  multi-locus behavior と最小 devtools surface の受入条件、および corresponding adverse cases。
+- M10 の non-claims を保持すること。すなわち C-distributed、実 transport/WAN、durable distributed
+  persistence、final public grammar/API/ABI/wire、production deployment を遡及して主張しない。
+
+この contract は I2 の設計案・作業queue・実装許可ではない。新しい owner direction が上記の
+direct consumer、scope、acceptance criteria を与えるまで、M10 R5 profile は regression baseline
+としてのみ参照する。
+
 ## Recommended next action
 
-M10 の fresh release conformance/closeout を開始する。同じ ordinary `.mir` sourceから
-parse / check / elaborate / M8 / M9 / trace / projectionを実行し、C-static / C-runtime
-SCN-01..10 waiverなし10/10、fresh checkout reproduction、proof/diagnostic/status correspondence、
-independent reviewを一つのrelease profileで検証する。成功をwrapper/report/expected JSONから
-組み立てず、M10 report、validation、commit/push/remote parityが閉じるまでprogram completionは主張しない。
+M0--M10 内では action を開始しない。R5 profile を regression baseline として保ち、I2 を含む
+post-program work は新しい owner direction が direct consumer、carrier/`OPEN-030` の解決範囲、
+generated-dispatch/multi-locus/devtools の acceptance criteria、及び preserved non-claims を定義した
+ときだけ、別の唯一の current roadmap として開始する。
