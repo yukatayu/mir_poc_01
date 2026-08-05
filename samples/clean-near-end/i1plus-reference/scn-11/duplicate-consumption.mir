@@ -1,0 +1,15 @@
+module M10.Scn11.DuplicateConsumption
+
+locus World
+locus Evaluator
+principal self
+type Player
+
+state player[id: Player] at World {
+  atk: Int
+}
+
+designated evaluate Evaluator on tick attack_tick publish result = player[self].atk + 1
+
+with auth MembershipAuth
+verify finite_refinement

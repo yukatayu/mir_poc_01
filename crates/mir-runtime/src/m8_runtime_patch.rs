@@ -102,6 +102,7 @@ pub struct M8PatchCandidate {
     state: M8PatchCandidateState,
     checked: Option<CheckedSurfaceV0>,
     admission: Option<M8RuntimeAdmission>,
+    resolved_instance: Option<M8RuntimeInstance>,
     base_program_identity: Option<CheckedProgramIdentity>,
     base_admission: Option<M8RuntimeAdmission>,
     patch_authority: Option<M8PatchAuthorityUse>,
@@ -122,6 +123,7 @@ impl M8PatchCandidate {
             source_ref: checked.program_identity().root_source_ref().clone(),
             checked: Some(checked),
             admission: Some(admission),
+            resolved_instance: None,
             base_program_identity: None,
             base_admission: None,
             patch_authority: None,
@@ -141,6 +143,7 @@ impl M8PatchCandidate {
             state: M8PatchCandidateState::Unadmitted,
             checked: Some(checked),
             admission: None,
+            resolved_instance: None,
             base_program_identity: None,
             base_admission: None,
             patch_authority: None,
@@ -161,6 +164,7 @@ impl M8PatchCandidate {
             source_ref: checked.program_identity().root_source_ref().clone(),
             checked: Some(checked),
             admission: Some(admission),
+            resolved_instance: None,
             base_program_identity: None,
             base_admission: None,
             patch_authority: None,
@@ -179,6 +183,7 @@ impl M8PatchCandidate {
             state: M8PatchCandidateState::Unknown,
             checked: None,
             admission: None,
+            resolved_instance: None,
             base_program_identity: None,
             base_admission: None,
             patch_authority: None,
@@ -199,6 +204,29 @@ impl M8PatchCandidate {
     pub fn with_base_admission(mut self, base_admission: M8RuntimeAdmission) -> Self {
         self.base_admission = Some(base_admission);
         self
+    }
+
+    /// Reserved for M10 after the candidate has crossed the sealed M9 route.
+    /// This does not alter M8 direct admission: only the crate-private M9
+    /// seam can supply the already resolved instance.
+    pub(crate) fn from_m10_resolved(
+        patch_id: impl Into<String>,
+        checked: CheckedSurfaceV0,
+        resolved_instance: M8RuntimeInstance,
+    ) -> Self {
+        Self {
+            patch_id: patch_id.into(),
+            state: M8PatchCandidateState::Bound,
+            source_ref: checked.program_identity().root_source_ref().clone(),
+            admission: Some(resolved_instance.admission().clone()),
+            resolved_instance: Some(resolved_instance),
+            checked: Some(checked),
+            base_program_identity: None,
+            base_admission: None,
+            patch_authority: None,
+            designated_input_receipts: None,
+            reason_ref: None,
+        }
     }
 
     pub fn with_patch_authority(mut self, patch_authority: M8PatchAuthorityUse) -> Self {
@@ -552,6 +580,12 @@ impl M8PatchRuntime {
         &self.lifecycle
     }
 
+    /// The accepted patch identity is part of this runtime's retained local
+    /// configuration, not a facade-side route flag.
+    pub(crate) fn active_patch_id(&self) -> Option<&str> {
+        self.session.last_activated_patch()
+    }
+
     pub fn enqueue_owner(
         &mut self,
         request: M8OwnerRequest,
@@ -559,8 +593,52 @@ impl M8PatchRuntime {
         self.session.enqueue_owner(request)
     }
 
+    /// Serve an owner request in this same patch runtime session.  A route
+    /// activation and its follow-up owner effect therefore share one M8
+    /// local state rather than rebuilding an owner facade after the patch.
+    pub fn serve_next_owner(
+        &mut self,
+        owner_locus: &str,
+    ) -> Result<
+        crate::m8_runtime_owner_queue::M8ServeOutcome,
+        crate::m8_runtime_owner_queue::M8ServeDiagnostics,
+    > {
+        self.session.serve_next_owner(owner_locus)
+    }
+
     pub fn pending_owner_fifo(&self, owner_locus: &str) -> Vec<String> {
         self.session.pending_owner_fifo(owner_locus)
+    }
+
+    /// Replace only the sealed M9-derived authority inventory while retaining
+    /// this patch runtime's local execution session and activation lifecycle.
+    pub(crate) fn refresh_m9_authority_state(
+        &mut self,
+        authority_state: crate::m8_runtime_authority::M8AuthorityState,
+    ) {
+        self.session.refresh_m9_authority_state(authority_state);
+    }
+
+    pub(crate) fn local_session_clone(&self) -> M8LocalRuntime {
+        self.session.clone()
+    }
+
+    /// The activation frontier's generated initialization is restricted to a
+    /// checked newly-declared finite-v0 Int field and its zero default.
+    pub(crate) fn initialize_declared_int_for_activation(
+        &mut self,
+        state: &str,
+        principal: &str,
+        field: &str,
+        source_ref: SourceRef,
+    ) -> Result<bool, &'static str> {
+        if self.session.last_activated_patch().is_none() {
+            return Err("M8 patch initialization requires an activation cut");
+        }
+        Ok(self.session.initialize_patch_declared_int(
+            M8StateKey::indexed_field(state, principal, field),
+            source_ref,
+        ))
     }
 
     pub fn evaluate_designated(
@@ -603,7 +681,42 @@ impl M8PatchRuntime {
         }
     }
 
-    pub fn activate_patch(&mut self, candidate: M8PatchCandidate) -> M8PatchOutcome {
+    pub(crate) fn canonical_semantic_projection(&self) -> String {
+        format!(
+            "active_program|{}\nactivated_patch|{}\nsession|{}\nlifecycle|{}",
+            self.active_program_identity().stable_key(),
+            self.session.last_activated_patch().unwrap_or(""),
+            self.session.canonical_semantic_projection(),
+            self.lifecycle
+                .rows
+                .iter()
+                .map(|row| canonical_patch_lifecycle_kind(row.kind).to_string())
+                .collect::<Vec<_>>()
+                .join(","),
+        )
+    }
+
+    /// Native M8 receipt domains exposed to the crate's M10 conformance
+    /// boundary.  Patch lifecycle rows remain audit data, while activation
+    /// identity belongs to configuration.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        self.session.canonical_store_projection()
+    }
+
+    pub(crate) fn canonical_relation_projection(&self) -> String {
+        self.session.canonical_relation_projection()
+    }
+
+    pub(crate) fn canonical_configuration_projection(&self) -> String {
+        format!(
+            "program|{}\nactivated_patch|{}\nsession_config|{}",
+            self.active_program_identity().stable_key(),
+            self.session.last_activated_patch().unwrap_or(""),
+            self.session.canonical_configuration_projection(),
+        )
+    }
+
+    pub fn activate_patch(&mut self, mut candidate: M8PatchCandidate) -> M8PatchOutcome {
         if let Some((verdict, diagnostic_kind, lifecycle_kind)) =
             self.pre_activation_failure(&candidate)
         {
@@ -638,20 +751,48 @@ impl M8PatchRuntime {
             base_program_identity: self.active_program_identity().clone(),
             activated_program_identity: candidate.checked_program_identity().clone(),
         };
-        let admitted = M8Runtime::default()
-            .admit(
-                candidate
-                    .checked
-                    .as_ref()
-                    .expect("bound candidate retains checked structure")
-                    .clone(),
-                candidate
-                    .admission
-                    .as_ref()
-                    .expect("bound candidate retains M8 admission")
-                    .clone(),
-            )
-            .expect("pre-activation validation admitted the checked candidate");
+        let admitted = match candidate.resolved_instance.take() {
+            Some(instance) => instance,
+            None => match (candidate.checked.as_ref(), candidate.admission.as_ref()) {
+                (Some(checked), Some(admission)) => match M8Runtime::default()
+                    .admit(checked.clone(), admission.clone())
+                {
+                    Ok(instance) => instance,
+                    Err(_) => {
+                        let diagnostic = diagnostic_for(
+                            &candidate,
+                            M8PatchDiagnosticKind::AdmissionProvenanceMismatch,
+                        );
+                        attempt.push_diagnostic(M8PatchLifecycleKind::Rejected, diagnostic.clone());
+                        self.lifecycle.rows.extend(attempt.rows.iter().cloned());
+                        return M8PatchOutcome {
+                            verdict: M8PatchVerdictKind::Rejected,
+                            lifecycle: attempt,
+                            diagnostic: Some(diagnostic),
+                            activation_cut: None,
+                            source_ref: candidate.source_ref,
+                            reason_ref: candidate.reason_ref,
+                        };
+                    }
+                },
+                _ => {
+                    let diagnostic = diagnostic_for(
+                        &candidate,
+                        M8PatchDiagnosticKind::AdmissionProvenanceMismatch,
+                    );
+                    attempt.push_diagnostic(M8PatchLifecycleKind::Rejected, diagnostic.clone());
+                    self.lifecycle.rows.extend(attempt.rows.iter().cloned());
+                    return M8PatchOutcome {
+                        verdict: M8PatchVerdictKind::Rejected,
+                        lifecycle: attempt,
+                        diagnostic: Some(diagnostic),
+                        activation_cut: None,
+                        source_ref: candidate.source_ref,
+                        reason_ref: candidate.reason_ref,
+                    };
+                }
+            },
+        };
         self.session.install_admitted_patch(
             admitted,
             candidate.designated_input_receipts.clone(),
@@ -718,24 +859,32 @@ impl M8PatchRuntime {
                 M8PatchLifecycleKind::Rejected,
             ));
         }
+        let has_exact_m10_instance = candidate
+            .resolved_instance
+            .as_ref()
+            .is_some_and(|instance| {
+                instance.program_identity() == candidate.checked_program_identity()
+                    && candidate.admission.as_ref() == Some(instance.admission())
+            });
         if candidate.base_admission.as_ref() != Some(self.active_admission())
             || candidate.admission.as_ref().is_none_or(|admission| {
                 admission.program_identity() != candidate.checked_program_identity()
             })
-            || M8Runtime::default()
-                .admit(
-                    candidate
-                        .checked
-                        .as_ref()
-                        .expect("bound candidate retains checked structure")
-                        .clone(),
-                    candidate
-                        .admission
-                        .as_ref()
-                        .expect("bound candidate retains M8 admission")
-                        .clone(),
-                )
-                .is_err()
+            || (!has_exact_m10_instance
+                && M8Runtime::default()
+                    .admit(
+                        candidate
+                            .checked
+                            .as_ref()
+                            .expect("bound candidate retains checked structure")
+                            .clone(),
+                        candidate
+                            .admission
+                            .as_ref()
+                            .expect("bound candidate retains M8 admission")
+                            .clone(),
+                    )
+                    .is_err())
         {
             return Some((
                 M8PatchVerdictKind::Rejected,
@@ -784,6 +933,20 @@ impl M8PatchRuntime {
                 capability_ref: authority.capability_ref.as_deref(),
                 witness_ref: authority.witness_ref.as_deref(),
             })
+    }
+}
+
+fn canonical_patch_lifecycle_kind(kind: M8PatchLifecycleKind) -> &'static str {
+    match kind {
+        M8PatchLifecycleKind::CandidateBound => "candidate_bound",
+        M8PatchLifecycleKind::Parsed => "parsed",
+        M8PatchLifecycleKind::Checked => "checked",
+        M8PatchLifecycleKind::Elaborated => "elaborated",
+        M8PatchLifecycleKind::Compatible => "compatible",
+        M8PatchLifecycleKind::RuntimeAdmitted => "runtime_admitted",
+        M8PatchLifecycleKind::ActivationCut => "activation_cut",
+        M8PatchLifecycleKind::Rejected => "rejected",
+        M8PatchLifecycleKind::Deferred => "deferred",
     }
 }
 

@@ -2,7 +2,7 @@
 id: spec/04-core-ir
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021]
+depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025]
 summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。
 open_items: [OPEN-026]
 ---
@@ -17,6 +17,7 @@ parser/classifier profile itself retains:
 
 ```text
 source_span
+state_observer_safe_fields declaration-only source-bound field subset
 m5_core                   present only for accepted ownerRmw
 result_frontier/version   designated-result fields only
 binding_frontier          maintained-relation field only
@@ -26,19 +27,30 @@ consumer_projection_site  optional consumer-local relation projection
 deferred_policy_kind      WithAuth | Verify, non-executable only
 source_to_core_map        source span -> ownerRmw/local-read/local-write |
                           designated-decision | publish-relation |
-                          consumer-local-projection | deferred-policy
+                          consumer-local-projection | deferred-policy |
+                          observer-publish
 authority_audit           Role authority origin, nested owner site,
                           required authority names
 ```
 
 `result_frontier` and `binding_frontier` are distinct nominal carriers. A
-same-owner action has M5 `ownerRmw`, `Role[self]` origin, owner evaluation,
-`store`, request-to-owner and owner-write edges, and separate
-capability/witness obligations. Its source-to-Core map separately records the
-owner-local RHS dependency; it emits no receipt or receipt-release fact. This
-does not claim that a cross-owner action has no receipt: such an operand is
-rejected with the receipt-required diagnostic rather than lowered through a
-hidden receipt path.
+`Role[self] at L_actor` action nested at `L_owner` has M5 `ownerRmw`: its
+authority origin remains `L_actor`, its evaluation/request site is `L_owner`,
+and the two loci may differ. The target state's declared owner must equal
+`L_owner`; same-owner RHS reads resolve there, not at `L_actor`. The template
+retains `store`, request-to-owner and owner-write edges, `RouteUnavailable`,
+and separate capability/witness obligations. Its source-to-Core map separately
+records the owner-local RHS dependency; it emits no receipt or receipt-release
+fact. This does not claim that a cross-owner action has no receipt: such an
+operand is rejected with the receipt-required diagnostic rather than lowered
+through a hidden receipt path.
+
+`state_observer_safe_fields` records only the explicitly declared
+`visible observer_safe fields (...)` subset; omission is private. A write to a
+listed field adds a source-bound `observer-publish` effect/map entry and the
+typed `VisibilityDenied` failure entry. A private-field write adds neither.
+This is one facet of M10's bounded M6/M7 direct-consumer seam, not a final
+observer API or a runtime publication instruction.
 
 No owner `CoreTemplate` exists for a non-literal role actor, a fieldless
 assignment target, or a target whose declared state owner is outside the

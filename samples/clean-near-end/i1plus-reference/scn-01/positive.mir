@@ -1,0 +1,23 @@
+module M10.Scn01.Positive
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state player[id: Player] at World {
+  position: Int
+  hp: Int
+  visible observer_safe fields (position)
+}
+
+Role[self] at BrowserClient {
+  when roll(draw: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied) {
+    at World {
+      player[self].position = player[self].position + draw
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

@@ -1,0 +1,30 @@
+module M10.Scn05.Positive
+
+locus WorldA
+locus WorldB
+locus BrowserClient
+principal self
+type Player
+
+state player_a[id: Player] at WorldA {
+  position: Int
+  secret_key: Int
+  visible observer_safe fields (position)
+}
+
+state player_b[id: Player] at WorldB {
+  position: Int
+  secret_key: Int
+  visible observer_safe fields (position)
+}
+
+Role[self] at BrowserClient {
+  when portal(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied) {
+    at WorldB {
+      player_b[self].position = player_b[self].position + delta
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

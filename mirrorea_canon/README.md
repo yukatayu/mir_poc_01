@@ -36,6 +36,8 @@ open_items: []
 - M9 auth/verification seam: `adr/ADR-0024.md` →
   `theory/18-m9-auth-verification.md` →
   `spec/10-m9-auth-verification.md`
+- M10 I1+ finite conformance: `adr/ADR-0025.md` →
+  `spec/11-m10-i1plus-conformance.md` → `spec/06-conformance.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。

@@ -474,6 +474,7 @@ pub struct StateDecl {
     owner_locus: String,
     owner_locus_span: SurfaceV0Span,
     fields: Vec<StateField>,
+    visibility: Option<StateVisibility>,
     node: SyntaxNode,
 }
 
@@ -506,6 +507,17 @@ impl StateDecl {
         &self.fields
     }
 
+    /// The optional source-declared observer visibility for this state block.
+    /// Fields absent from this declaration deliberately remain unspecified at
+    /// the syntax layer; M7 gives them their private-by-default meaning.
+    pub fn visibility(&self) -> Option<&StateVisibility> {
+        self.visibility.as_ref()
+    }
+
+    pub fn field(&self, name: &str) -> Option<&StateField> {
+        self.fields.iter().find(|field| field.name == name)
+    }
+
     pub fn span(&self) -> &SurfaceV0Span {
         self.node.span()
     }
@@ -517,6 +529,7 @@ pub struct StateField {
     type_name: String,
     span: SurfaceV0Span,
     type_span: SurfaceV0Span,
+    visibility: Option<StateFieldVisibility>,
 }
 
 impl StateField {
@@ -534,6 +547,74 @@ impl StateField {
 
     pub fn type_span(&self) -> &SurfaceV0Span {
         &self.type_span
+    }
+
+    pub fn visibility(&self) -> Option<&StateFieldVisibility> {
+        self.visibility.as_ref()
+    }
+}
+
+/// A field name retained directly from a `visible … fields (…)` declaration.
+/// It is separate from `StateField` so M7 can reject unknown and duplicate
+/// names at their declaration spans without losing the original syntax.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StateVisibilityField {
+    name: String,
+    span: SurfaceV0Span,
+}
+
+impl StateVisibilityField {
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+}
+
+/// The bounded M6 state-block visibility declaration.  M6 retains the
+/// channel and exact named fields; it does not grant observation authority.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StateVisibility {
+    channel: String,
+    fields: Vec<StateVisibilityField>,
+    span: SurfaceV0Span,
+}
+
+impl StateVisibility {
+    pub fn channel(&self) -> &str {
+        &self.channel
+    }
+
+    pub fn fields(&self) -> &[StateVisibilityField] {
+        &self.fields
+    }
+
+    pub fn field(&self, name: &str) -> Option<&StateVisibilityField> {
+        self.fields.iter().find(|field| field.name == name)
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
+    }
+}
+
+/// State-field-local lookup convenience.  Its presence records only the
+/// source declaration; authority and observer emission remain M7 concerns.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StateFieldVisibility {
+    channel: String,
+    declaration_span: SurfaceV0Span,
+}
+
+impl StateFieldVisibility {
+    pub fn channel(&self) -> &str {
+        &self.channel
+    }
+
+    pub fn declaration_span(&self) -> &SurfaceV0Span {
+        &self.declaration_span
     }
 }
 
@@ -719,6 +800,10 @@ impl BoundedExpressionToken {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum BoundedExpressionTree {
     StateReference(SurfaceReference),
+    Identifier {
+        name: String,
+        span: SurfaceV0Span,
+    },
     IntegerLiteral(BoundedIntegerLiteral),
     Binary {
         operator: BoundedBinaryOperator,
@@ -740,21 +825,29 @@ impl BoundedExpressionTree {
         match self {
             Self::StateReference(reference) => reference.span(),
             Self::IntegerLiteral(literal) => literal.span(),
-            Self::Binary { span, .. } | Self::Opaque { span } => span,
+            Self::Identifier { span, .. } | Self::Binary { span, .. } | Self::Opaque { span } => {
+                span
+            }
         }
     }
 
     pub const fn operator(&self) -> Option<BoundedBinaryOperator> {
         match self {
             Self::Binary { operator, .. } => Some(*operator),
-            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => None,
+            Self::StateReference(_)
+            | Self::Identifier { .. }
+            | Self::IntegerLiteral(_)
+            | Self::Opaque { .. } => None,
         }
     }
 
     pub fn left(&self) -> &Self {
         match self {
             Self::Binary { left, .. } => left,
-            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => {
+            Self::StateReference(_)
+            | Self::Identifier { .. }
+            | Self::IntegerLiteral(_)
+            | Self::Opaque { .. } => {
                 panic!("only bounded binary expression trees have a left child")
             }
         }
@@ -763,7 +856,10 @@ impl BoundedExpressionTree {
     pub fn right(&self) -> &Self {
         match self {
             Self::Binary { right, .. } => right,
-            Self::StateReference(_) | Self::IntegerLiteral(_) | Self::Opaque { .. } => {
+            Self::StateReference(_)
+            | Self::Identifier { .. }
+            | Self::IntegerLiteral(_)
+            | Self::Opaque { .. } => {
                 panic!("only bounded binary expression trees have a right child")
             }
         }
@@ -772,7 +868,10 @@ impl BoundedExpressionTree {
     pub fn int_literal(&self) -> Option<&BoundedIntegerLiteral> {
         match self {
             Self::IntegerLiteral(literal) => Some(literal),
-            Self::StateReference(_) | Self::Binary { .. } | Self::Opaque { .. } => None,
+            Self::StateReference(_)
+            | Self::Identifier { .. }
+            | Self::Binary { .. }
+            | Self::Opaque { .. } => None,
         }
     }
 }
@@ -780,6 +879,7 @@ impl BoundedExpressionTree {
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum BoundedExpressionPart {
     StateReference(SurfaceReference),
+    Identifier { name: String, span: SurfaceV0Span },
     IntegerLiteral(BoundedIntegerLiteral),
     BinaryOperation(BoundedBinaryOperation),
     Opaque,
@@ -1228,7 +1328,23 @@ impl Parser {
         let (owner_locus, owner_locus_span) = self.identifier()?;
         self.expect("{")?;
         let mut fields = Vec::new();
+        let mut visibility = None;
         while !self.check("}") {
+            if self.check("visible") {
+                if visibility.is_some() {
+                    return Err(self.unexpected());
+                }
+                visibility = Some(self.parse_state_visibility()?);
+                // The bounded M6 grammar permits at most one visibility
+                // declaration, and only after the ordinary field schema.
+                // Keeping this terminal makes a second `visible` (or a late
+                // field) a deterministic typed parse rejection rather than
+                // silently changing the declaration's scope.
+                if !self.check("}") {
+                    return Err(self.unexpected());
+                }
+                continue;
+            }
             let (field_name, field_start) = self.identifier()?;
             self.expect(":")?;
             let (type_name, field_end) = self.identifier()?;
@@ -1237,7 +1353,18 @@ impl Parser {
                 type_name,
                 span: joined_span(&field_start, &field_end),
                 type_span: field_end,
+                visibility: None,
             });
+        }
+        if let Some(declaration) = &visibility {
+            for declared in declaration.fields() {
+                if let Some(field) = fields.iter_mut().find(|field| field.name == declared.name) {
+                    field.visibility = Some(StateFieldVisibility {
+                        channel: declaration.channel.clone(),
+                        declaration_span: declared.span.clone(),
+                    });
+                }
+            }
         }
         let end = self.expect("}")?.span;
         let span = joined_span(&start, &end);
@@ -1249,7 +1376,32 @@ impl Parser {
             owner_locus,
             owner_locus_span,
             fields,
+            visibility,
             node: SyntaxNode::new(SyntaxKind::State, name, span, Vec::new()),
+        })
+    }
+
+    fn parse_state_visibility(&mut self) -> Result<StateVisibility, ParseDiagnostics> {
+        let start = self.expect("visible")?.span;
+        let (channel, _) = self.identifier()?;
+        self.expect("fields")?;
+        self.expect("(")?;
+        let mut fields = Vec::new();
+        if self.check(")") {
+            return Err(self.unexpected());
+        }
+        while !self.check(")") {
+            let (name, span) = self.identifier()?;
+            fields.push(StateVisibilityField { name, span });
+            if !self.consume(",") {
+                break;
+            }
+        }
+        let end = self.expect(")")?.span;
+        Ok(StateVisibility {
+            channel,
+            fields,
+            span: joined_span(&start, &end),
         })
     }
 
@@ -1588,8 +1740,12 @@ impl Parser {
                     parts.push(BoundedExpressionPart::Opaque);
                 }
                 _ if self.current_is_identifier() => {
-                    last = self.advance().span;
-                    parts.push(BoundedExpressionPart::Opaque);
+                    let token = self.advance();
+                    last = token.span.clone();
+                    parts.push(BoundedExpressionPart::Identifier {
+                        name: token.text,
+                        span: token.span,
+                    });
                 }
                 _ => return Err(self.unexpected()),
             }
@@ -1775,6 +1931,9 @@ fn bounded_expression_tree(
         BoundedExpressionPart::StateReference(reference) => {
             BoundedExpressionTree::StateReference(reference)
         }
+        BoundedExpressionPart::Identifier { name, span } => {
+            BoundedExpressionTree::Identifier { name, span }
+        }
         BoundedExpressionPart::IntegerLiteral(literal) => {
             BoundedExpressionTree::IntegerLiteral(literal)
         }
@@ -1802,6 +1961,9 @@ fn bounded_expression_tree(
         let right = match next {
             BoundedExpressionPart::StateReference(reference) => {
                 BoundedExpressionTree::StateReference(reference)
+            }
+            BoundedExpressionPart::Identifier { name, span } => {
+                BoundedExpressionTree::Identifier { name, span }
             }
             BoundedExpressionPart::IntegerLiteral(literal) => {
                 BoundedExpressionTree::IntegerLiteral(literal)

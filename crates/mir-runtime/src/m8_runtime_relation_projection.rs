@@ -12,7 +12,7 @@ use crate::{
     m8_runtime_admission::{M8RelationExecutionPlan, M8RuntimeInstance, M8SecurityClass},
     m8_runtime_authority::{M8AuthorityState, M8RelationAuthorityLookup},
     m8_runtime_owner_queue::{
-        M8SemanticRelation, M8SemanticRelationInitialState, M8SemanticSnapshot,
+        M8RelationFloor, M8SemanticRelation, M8SemanticRelationInitialState, M8SemanticSnapshot,
     },
 };
 
@@ -90,6 +90,25 @@ impl M8LeaseInventory {
             .is_some_and(|record| record.live)
     }
 
+    pub(crate) fn canonical_projection(&self) -> String {
+        self.records
+            .values()
+            .map(|record| {
+                format!(
+                    "lease|{}|{}|{}|{}|{}|{}|{}",
+                    record.reference,
+                    record.live,
+                    record.relation.as_deref().unwrap_or(""),
+                    record.owner_locus.as_deref().unwrap_or(""),
+                    record.binding_frontier.as_deref().unwrap_or(""),
+                    record.epoch.as_deref().unwrap_or(""),
+                    record.anchor_epoch.as_deref().unwrap_or(""),
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
+    }
+
     fn contains_live_exact_binding(
         &self,
         reference: &str,
@@ -126,6 +145,115 @@ impl M8LeaseInventory {
             .records
             .get(reference)
             .is_some_and(|record| record.anchor_epoch.as_deref() == Some(anchor_epoch))
+    }
+}
+
+/// A finite, already-validated three-option relation chain retained by M8.
+/// M10 may seed this carrier only after validating its typed fallback input;
+/// subsequent option selection is owned by this runtime rather than an M10
+/// cursor or report-local state.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8FiniteFallbackOption {
+    target: String,
+    lease_ref: String,
+    required_capability: String,
+    epoch: String,
+}
+
+impl M8FiniteFallbackOption {
+    pub(crate) fn new(
+        target: impl Into<String>,
+        lease_ref: impl Into<String>,
+        required_capability: impl Into<String>,
+        epoch: impl Into<String>,
+    ) -> Self {
+        Self {
+            target: target.into(),
+            lease_ref: lease_ref.into(),
+            required_capability: required_capability.into(),
+            epoch: epoch.into(),
+        }
+    }
+
+    pub(crate) fn canonical_projection(&self) -> String {
+        format!(
+            "target|{}|lease|{}|capability|{}|epoch|{}",
+            self.target, self.lease_ref, self.required_capability, self.epoch
+        )
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8FiniteFallbackChain {
+    relation: String,
+    options: [M8FiniteFallbackOption; 3],
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8FiniteFallbackSelection {
+    option_index: usize,
+    floor: M8RelationFloor,
+    target: String,
+    lease_ref: String,
+    required_capability: String,
+    epoch: String,
+}
+
+impl M8FiniteFallbackSelection {
+    pub(crate) const fn option_index(&self) -> usize {
+        self.option_index
+    }
+
+    pub(crate) const fn floor(&self) -> M8RelationFloor {
+        self.floor
+    }
+
+    pub(crate) fn target(&self) -> &str {
+        &self.target
+    }
+
+    pub(crate) fn lease_ref(&self) -> &str {
+        &self.lease_ref
+    }
+
+    pub(crate) fn required_capability(&self) -> &str {
+        &self.required_capability
+    }
+
+    pub(crate) fn epoch(&self) -> &str {
+        &self.epoch
+    }
+}
+
+impl M8FiniteFallbackChain {
+    pub(crate) fn live_anchor_frozen(
+        relation: impl Into<String>,
+        live: M8FiniteFallbackOption,
+        anchor: M8FiniteFallbackOption,
+        frozen: M8FiniteFallbackOption,
+    ) -> Self {
+        Self {
+            relation: relation.into(),
+            options: [live, anchor, frozen],
+        }
+    }
+
+    fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    fn option(&self, index: usize) -> Option<&M8FiniteFallbackOption> {
+        self.options.get(index)
+    }
+
+    pub(crate) fn canonical_projection(&self) -> String {
+        format!(
+            "relation|{}|0:{}|1:{}|2:{}",
+            self.relation,
+            self.options[0].canonical_projection(),
+            self.options[1].canonical_projection(),
+            self.options[2].canonical_projection(),
+        )
     }
 }
 
@@ -250,6 +378,14 @@ pub struct M8Point {
 impl M8Point {
     pub const fn new(x: i64, y: i64) -> Self {
         Self { x, y }
+    }
+
+    pub const fn x(&self) -> i64 {
+        self.x
+    }
+
+    pub const fn y(&self) -> i64 {
+        self.y
     }
 
     fn translated(self, transform: &M8Transform2) -> Option<Self> {
@@ -412,6 +548,10 @@ pub struct M8RelationAuthorityUse {
     principal: Option<String>,
     membership_ref: Option<String>,
     capability_ref: Option<String>,
+    // The authority membership epoch and the relation binding epoch are
+    // distinct clocks.  Older local callers omit this and retain the legacy
+    // binding-epoch interpretation; the sealed M9 bridge supplies it.
+    membership_epoch: Option<String>,
     binding_epoch: Option<String>,
     witness_ref: Option<String>,
     witness_epoch: Option<String>,
@@ -426,6 +566,7 @@ impl M8RelationAuthorityUse {
             principal: None,
             membership_ref: None,
             capability_ref: None,
+            membership_epoch: None,
             binding_epoch: None,
             witness_ref: None,
             witness_epoch: None,
@@ -454,6 +595,11 @@ impl M8RelationAuthorityUse {
 
     pub fn with_capability_ref(mut self, capability_ref: impl Into<String>) -> Self {
         self.capability_ref = Some(capability_ref.into());
+        self
+    }
+
+    pub(crate) fn with_membership_epoch(mut self, membership_epoch: impl Into<String>) -> Self {
+        self.membership_epoch = Some(membership_epoch.into());
         self
     }
 
@@ -493,6 +639,22 @@ impl M8RelationAuthorityUse {
 pub struct M8BindingInvalidation {
     anchor: String,
     frontier: Option<String>,
+    cause: M8BindingInvalidationCause,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum M8BindingInvalidationCause {
+    AnchorUnavailable,
+    LeaseExpired,
+}
+
+impl M8BindingInvalidationCause {
+    pub const fn audit_subreason(self) -> &'static str {
+        match self {
+            Self::AnchorUnavailable => "anchor-unavailable",
+            Self::LeaseExpired => "lease-expired",
+        }
+    }
 }
 
 impl M8BindingInvalidation {
@@ -500,6 +662,15 @@ impl M8BindingInvalidation {
         Self {
             anchor: anchor.into(),
             frontier: None,
+            cause: M8BindingInvalidationCause::AnchorUnavailable,
+        }
+    }
+
+    pub fn lease_expired(anchor: impl Into<String>) -> Self {
+        Self {
+            anchor: anchor.into(),
+            frontier: None,
+            cause: M8BindingInvalidationCause::LeaseExpired,
         }
     }
 
@@ -569,6 +740,7 @@ impl M8RelationReacquire {
 pub enum M8ProjectionKind {
     ConsumerLocalPresentation,
     ConsumerLocalFallback,
+    OpaqueSemanticTarget,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -620,6 +792,7 @@ pub enum M8RelationDiagnosticKind {
     MissingRelationAuthority,
     InvalidRelationTransition,
     MissingLiveRelationLease,
+    WriteCapabilityUnavailable,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -670,6 +843,7 @@ impl M8RelationDiagnostics {
 pub enum M8RelationTraceKind {
     SemanticPrimaryInvalidated,
     RelationOptionAdvanced,
+    FallbackOptionFrozen,
     SameLineagePrimaryReturnIgnored,
     FreshRelationLineageReacquired,
 }
@@ -679,6 +853,7 @@ pub struct M8RelationTraceEntry {
     kind: M8RelationTraceKind,
     relation: String,
     source_ref: SourceRef,
+    invalidation_cause: Option<M8BindingInvalidationCause>,
 }
 
 impl M8RelationTraceEntry {
@@ -688,6 +863,10 @@ impl M8RelationTraceEntry {
 
     pub fn source_ref(&self) -> &SourceRef {
         &self.source_ref
+    }
+
+    pub const fn invalidation_cause(&self) -> Option<M8BindingInvalidationCause> {
+        self.invalidation_cause
     }
 }
 
@@ -715,6 +894,7 @@ pub struct M8RelationTransition {
     current_option_index: usize,
     authority: M8RelationAuthorityUse,
     fresh_reacquire_witness: Option<String>,
+    invalidation_cause: Option<M8BindingInvalidationCause>,
 }
 
 impl M8RelationTransition {
@@ -733,6 +913,10 @@ impl M8RelationTransition {
     pub fn fresh_reacquire_witness(&self) -> &str {
         self.fresh_reacquire_witness.as_deref().unwrap_or("")
     }
+
+    pub const fn invalidation_cause(&self) -> Option<M8BindingInvalidationCause> {
+        self.invalidation_cause
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -741,6 +925,7 @@ pub struct M8RelationProjection {
     consumer_locus: String,
     kind: M8ProjectionKind,
     subject: String,
+    selected_floor: M8RelationFloor,
     selected_anchor: String,
     context_frontier: String,
     anchor_samples: Vec<M8AnchorSample>,
@@ -784,6 +969,10 @@ impl M8RelationProjection {
 
     pub fn selected_anchor(&self) -> &str {
         &self.selected_anchor
+    }
+
+    pub const fn selected_floor(&self) -> M8RelationFloor {
+        self.selected_floor
     }
 
     pub fn context_frontier(&self) -> &str {
@@ -832,6 +1021,7 @@ impl M8RelationProjection {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8RelationProjectionRuntime {
     relation_plans: Vec<M8RelationExecutionPlan>,
+    finite_fallback_chains: BTreeMap<String, M8FiniteFallbackChain>,
     presentation_policies: M8PresentationPolicies,
     pub(crate) semantic_snapshot: M8SemanticSnapshot,
     pub(crate) trace: M8RelationTrace,
@@ -851,6 +1041,7 @@ impl M8RelationProjectionRuntime {
         }
         Self {
             relation_plans,
+            finite_fallback_chains: BTreeMap::new(),
             presentation_policies,
             semantic_snapshot,
             trace: M8RelationTrace::default(),
@@ -887,6 +1078,126 @@ impl M8RelationProjectionRuntime {
         self.live_leases = live_leases;
     }
 
+    pub(crate) fn live_lease_inventory(&self) -> M8LeaseInventory {
+        self.live_leases.clone()
+    }
+
+    pub(crate) fn finite_fallback_chains(&self) -> BTreeMap<String, M8FiniteFallbackChain> {
+        self.finite_fallback_chains.clone()
+    }
+
+    pub(crate) fn has_finite_fallback_chain(&self, relation: &str) -> bool {
+        self.finite_fallback_chains.contains_key(relation)
+    }
+
+    pub(crate) fn replace_finite_fallback_chains(
+        &mut self,
+        chains: BTreeMap<String, M8FiniteFallbackChain>,
+    ) {
+        self.finite_fallback_chains = chains;
+    }
+
+    pub(crate) fn canonical_fallback_configuration_projection(&self) -> String {
+        self.finite_fallback_chains
+            .values()
+            .map(M8FiniteFallbackChain::canonical_projection)
+            .collect::<Vec<_>>()
+            .join("\n")
+    }
+
+    pub(crate) fn finite_fallback_selection(
+        &self,
+        relation: &M8SemanticRelation,
+    ) -> Option<M8FiniteFallbackSelection> {
+        let option = self
+            .finite_fallback_chains
+            .get(&relation.name)
+            .and_then(|chain| chain.option(relation.selected_option_index()))?;
+        if option.target != relation.selected_anchor()
+            || option.lease_ref != relation.active_lease_ref()
+            || option.epoch != relation.selected_option_epoch()
+        {
+            return None;
+        }
+        Some(M8FiniteFallbackSelection {
+            option_index: relation.selected_option_index(),
+            floor: relation.selected_floor(),
+            target: option.target.clone(),
+            lease_ref: option.lease_ref.clone(),
+            required_capability: option.required_capability.clone(),
+            epoch: option.epoch.clone(),
+        })
+    }
+
+    pub(crate) fn install_finite_fallback_chain(
+        &mut self,
+        chain: M8FiniteFallbackChain,
+    ) -> Result<M8LeaseInventory, M8RelationDiagnostics> {
+        let relation = chain.relation().to_string();
+        let plan = self.relation_plan_or_diagnostic(&relation)?.clone();
+        let current = self.semantic_relation(&relation).clone();
+        let Some(live) = chain.option(0) else {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        };
+        let Some(anchor) = chain.option(1) else {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        };
+        if chain.options.iter().any(|option| {
+            option.target.is_empty()
+                || option.lease_ref.is_empty()
+                || option.required_capability.is_empty()
+                || option.epoch.is_empty()
+        }) {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if live.target != plan.core().primary().anchor()
+            || live.epoch != plan.core().primary().epoch()
+            || anchor.target != plan.core().fallback().anchor()
+            || anchor.epoch != plan.core().fallback().epoch()
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        }
+
+        for option in &chain.options {
+            self.live_leases.records.insert(
+                option.lease_ref.clone(),
+                M8LeaseRecord::live(&option.lease_ref)
+                    .for_relation(&relation)
+                    .with_owner_locus(current.owner_locus())
+                    .with_binding_frontier(current.binding_frontier())
+                    .with_epoch(current.binding_epoch())
+                    .with_anchor_epoch(&option.epoch),
+            );
+        }
+        let relation_state = self
+            .semantic_snapshot
+            .relation_mut(&relation)
+            .expect("admitted relation semantic state exists");
+        relation_state.selected_option_index = 0;
+        relation_state.selected_floor = M8RelationFloor::Live;
+        relation_state.selected_anchor = live.target.clone();
+        relation_state.selected_option_epoch = live.epoch.clone();
+        relation_state.active_lease_ref = live.lease_ref.clone();
+        self.finite_fallback_chains.insert(relation, chain);
+        Ok(self.live_leases.clone())
+    }
+
     pub fn project_relation(
         &mut self,
         relation: &str,
@@ -914,12 +1225,36 @@ impl M8RelationProjectionRuntime {
                 plan.source_ref().clone(),
             ));
         }
+        if semantic.selected_option_index() == 2 {
+            return Ok(M8RelationProjection {
+                relation: relation.to_string(),
+                consumer_locus: context.consumer_locus,
+                kind: M8ProjectionKind::OpaqueSemanticTarget,
+                subject: plan.core().subject().to_string(),
+                selected_floor: semantic.selected_floor(),
+                selected_anchor: semantic.selected_anchor().to_string(),
+                context_frontier: semantic.activation_frontier().to_string(),
+                anchor_samples: context.anchor_samples,
+                relative_transform: M8Transform2::identity(),
+                anchor_pose: None,
+                derived_pose: None,
+                fallback_pose: None,
+                derived_visibility: self
+                    .presentation_policies
+                    .relation_policy(relation)
+                    .join(restriction_from_admitted_label(
+                        plan.visibility_label().security_class(),
+                    ))
+                    .join(
+                        self.presentation_policies
+                            .subject_policy(plan.core().subject()),
+                    ),
+                redaction_policy: plan.redaction().as_str().to_string(),
+                absolute_value_stream: Vec::new(),
+            });
+        }
         let selected_anchor = semantic.selected_anchor();
-        let expected_epoch = if semantic.selected_option_index() == 0 {
-            semantic.primary_epoch()
-        } else {
-            plan.core().fallback().epoch()
-        };
+        let expected_epoch = semantic.selected_option_epoch();
         let transform = if semantic.selected_option_index() == 0 {
             transform_from_plan(plan.core().primary().transform())
         } else {
@@ -963,6 +1298,7 @@ impl M8RelationProjectionRuntime {
             consumer_locus: context.consumer_locus,
             kind: M8ProjectionKind::ConsumerLocalPresentation,
             subject: plan.core().subject().to_string(),
+            selected_floor: semantic.selected_floor(),
             selected_anchor: selected_anchor.to_string(),
             context_frontier: semantic.activation_frontier().to_string(),
             anchor_samples: context.anchor_samples,
@@ -1011,24 +1347,128 @@ impl M8RelationProjectionRuntime {
             .frontier
             .unwrap_or_else(|| current.activation_frontier().to_string());
         let previous_option_index = current.selected_option_index();
+        let chain_option = self
+            .finite_fallback_chains
+            .get(relation)
+            .and_then(|chain| chain.option(1))
+            .cloned();
         let relation_state = self
             .semantic_snapshot
             .relation_mut(relation)
             .expect("admitted relation semantic state exists");
         relation_state.selected_option_index = 1;
-        relation_state.selected_anchor = plan.core().fallback().anchor().to_string();
+        relation_state.selected_floor = M8RelationFloor::Anchor;
+        relation_state.selected_anchor = chain_option
+            .as_ref()
+            .map(|option| option.target.clone())
+            .unwrap_or_else(|| plan.core().fallback().anchor().to_string());
+        relation_state.selected_option_epoch = chain_option
+            .as_ref()
+            .map(|option| option.epoch.clone())
+            .unwrap_or_else(|| plan.core().fallback().epoch().to_string());
+        if let Some(option) = chain_option {
+            relation_state.active_lease_ref = option.lease_ref;
+        }
         relation_state.activation_frontier = next_frontier;
         relation_state.lineage.push(format!(
             "{relation}:advance:{}",
             relation_state.lineage.len()
         ));
-        self.append_trace(M8RelationTraceKind::SemanticPrimaryInvalidated, &plan);
-        self.append_trace(M8RelationTraceKind::RelationOptionAdvanced, &plan);
+        if invalidation.cause == M8BindingInvalidationCause::LeaseExpired
+            && let Some(lease) = self.live_leases.records.get_mut(current.active_lease_ref())
+        {
+            lease.live = false;
+        }
+        self.append_trace(
+            M8RelationTraceKind::SemanticPrimaryInvalidated,
+            &plan,
+            Some(invalidation.cause),
+        );
+        self.append_trace(M8RelationTraceKind::RelationOptionAdvanced, &plan, None);
         Ok(M8RelationTransition {
             previous_option_index,
             current_option_index: 1,
             authority,
             fresh_reacquire_witness: None,
+            invalidation_cause: Some(invalidation.cause),
+        })
+    }
+
+    /// Freeze the currently selected fallback inside the M8-owned relation
+    /// snapshot.  This is monotone: a fresh M8 reacquire is the only path
+    /// that can return the relation to its live primary floor.
+    pub fn advance_anchor_to_frozen(
+        &mut self,
+        relation: &str,
+        prior_transition: &M8RelationTransition,
+    ) -> Result<M8RelationTransition, M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let current = self.semantic_relation(relation).clone();
+        if !self.has_live_lease(&plan, &current) {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::MissingLiveRelationLease,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if current.selected_option_index() != 1
+            || current.selected_floor() != M8RelationFloor::Anchor
+            || prior_transition.previous_option_index() != 0
+            || prior_transition.current_option_index() != 1
+            || prior_transition.invalidation_cause()
+                != Some(M8BindingInvalidationCause::LeaseExpired)
+            || !self.authority_matches(
+                &plan,
+                &current,
+                prior_transition.authority(),
+                "invalidate_primary",
+            )
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        let frozen = self
+            .finite_fallback_chains
+            .get(relation)
+            .and_then(|chain| chain.option(2))
+            .cloned()
+            .ok_or_else(|| {
+                M8RelationDiagnostics::one(
+                    M8RelationDiagnosticKind::InvalidRelationTransition,
+                    relation,
+                    plan.source_ref().clone(),
+                )
+            })?;
+        let relation_state = self
+            .semantic_snapshot
+            .relation_mut(relation)
+            .expect("admitted relation semantic state exists");
+        relation_state.selected_option_index = 2;
+        relation_state.selected_floor = M8RelationFloor::Frozen;
+        relation_state.selected_anchor = frozen.target;
+        relation_state.selected_option_epoch = frozen.epoch;
+        relation_state.active_lease_ref = frozen.lease_ref;
+        relation_state.lineage.push(format!(
+            "{relation}:freeze:{}",
+            relation_state.lineage.len()
+        ));
+        if let Some(lease) = self.live_leases.records.get_mut(current.active_lease_ref()) {
+            lease.live = false;
+        }
+        self.append_trace(
+            M8RelationTraceKind::FallbackOptionFrozen,
+            &plan,
+            Some(M8BindingInvalidationCause::LeaseExpired),
+        );
+        Ok(M8RelationTransition {
+            previous_option_index: current.selected_option_index(),
+            current_option_index: 2,
+            authority: M8RelationAuthorityUse::for_relation(relation),
+            fresh_reacquire_witness: None,
+            invalidation_cause: Some(M8BindingInvalidationCause::LeaseExpired),
         })
     }
 
@@ -1053,13 +1493,41 @@ impl M8RelationProjectionRuntime {
                 plan.source_ref().clone(),
             ));
         }
-        self.append_trace(M8RelationTraceKind::SameLineagePrimaryReturnIgnored, &plan);
+        self.append_trace(
+            M8RelationTraceKind::SameLineagePrimaryReturnIgnored,
+            &plan,
+            None,
+        );
         Ok(M8RelationTransition {
             previous_option_index: current.selected_option_index(),
             current_option_index: current.selected_option_index(),
             authority: M8RelationAuthorityUse::for_relation(relation),
             fresh_reacquire_witness: None,
+            invalidation_cause: None,
         })
+    }
+
+    /// The finite fallback carrier is read-only.  A post-selection write must
+    /// be rejected from the selected M8 option rather than inferred by an
+    /// outer schedule layer.
+    pub fn request_selected_option_write(
+        &mut self,
+        relation: &str,
+    ) -> Result<(), M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let current = self.semantic_relation(relation).clone();
+        if self.finite_fallback_selection(&current).is_none() {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        Err(M8RelationDiagnostics::one(
+            M8RelationDiagnosticKind::WriteCapabilityUnavailable,
+            relation,
+            plan.source_ref().clone(),
+        ))
     }
 
     pub fn reacquire_primary(
@@ -1136,19 +1604,26 @@ impl M8RelationProjectionRuntime {
             .relation_mut(relation)
             .expect("admitted relation semantic state exists");
         relation_state.selected_option_index = 0;
+        relation_state.selected_floor = M8RelationFloor::Live;
         relation_state.selected_anchor = plan.core().primary().anchor().to_string();
+        relation_state.selected_option_epoch = anchor_epoch.to_string();
         relation_state.primary_epoch = anchor_epoch.to_string();
         relation_state.binding_epoch = binding_epoch.to_string();
         relation_state.binding_frontier = binding_frontier.to_string();
         relation_state.active_lease_ref = fresh_lease_ref.to_string();
         relation_state.activation_frontier = binding_frontier.to_string();
         relation_state.lineage = vec![format!("{relation}:lineage:{binding_epoch}")];
-        self.append_trace(M8RelationTraceKind::FreshRelationLineageReacquired, &plan);
+        self.append_trace(
+            M8RelationTraceKind::FreshRelationLineageReacquired,
+            &plan,
+            None,
+        );
         Ok(M8RelationTransition {
             previous_option_index,
             current_option_index: 0,
             authority,
             fresh_reacquire_witness: reacquire.fresh_witness,
+            invalidation_cause: None,
         })
     }
 
@@ -1180,6 +1655,7 @@ impl M8RelationProjectionRuntime {
             consumer_locus: context.consumer_locus,
             kind: M8ProjectionKind::ConsumerLocalFallback,
             subject: fallback.subject,
+            selected_floor: semantic.selected_floor(),
             selected_anchor: semantic.selected_anchor().to_string(),
             context_frontier: semantic.activation_frontier().to_string(),
             anchor_samples: context.anchor_samples,
@@ -1233,6 +1709,7 @@ impl M8RelationProjectionRuntime {
                     principal: authority.principal.as_deref().unwrap_or(""),
                     membership_ref: authority.membership_ref.as_deref(),
                     capability_ref: authority.capability_ref.as_deref(),
+                    membership_epoch: authority.membership_epoch.as_deref(),
                     binding_epoch: authority.binding_epoch.as_deref(),
                     witness_ref: authority.witness_ref.as_deref(),
                     witness_epoch: authority.witness_epoch.as_deref(),
@@ -1269,11 +1746,17 @@ impl M8RelationProjectionRuntime {
         )
     }
 
-    fn append_trace(&mut self, kind: M8RelationTraceKind, plan: &M8RelationExecutionPlan) {
+    fn append_trace(
+        &mut self,
+        kind: M8RelationTraceKind,
+        plan: &M8RelationExecutionPlan,
+        invalidation_cause: Option<M8BindingInvalidationCause>,
+    ) {
         self.trace.entries.push(M8RelationTraceEntry {
             kind,
             relation: plan.name().to_string(),
             source_ref: plan.source_ref().clone(),
+            invalidation_cause,
         });
     }
 }

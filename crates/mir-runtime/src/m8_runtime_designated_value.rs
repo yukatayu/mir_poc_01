@@ -487,6 +487,12 @@ pub struct M8DesignatedTrace {
 }
 
 impl M8DesignatedTrace {
+    /// Complete designated execution trace retained by a local save payload.
+    /// This is crate-private receipt input, never an observer export.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!("{self:?}")
+    }
+
     pub fn kinds(&self) -> Vec<M8DesignatedTraceKind> {
         self.entries.iter().map(|entry| entry.kind).collect()
     }
@@ -733,6 +739,11 @@ pub struct M8DesignatedResultStore {
 }
 
 impl M8DesignatedResultStore {
+    /// Complete versioned designated-result store for local save receipts.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!("{self:?}")
+    }
+
     pub fn success_publications(&self, value_name: &str) -> Vec<&M8PublishedDesignatedValue> {
         self.values
             .iter()
@@ -783,6 +794,11 @@ pub struct M8ReceiptState {
 }
 
 impl M8ReceiptState {
+    /// Complete input receipt inventory for no-replay/save receipts.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!("{self:?}")
+    }
+
     pub fn receipt(&self, reference: &str) -> Option<&M8InputReceipt> {
         self.receipts.receipts.get(reference)
     }
@@ -794,6 +810,11 @@ pub struct M8ConsumptionState {
 }
 
 impl M8ConsumptionState {
+    /// Complete consumed-delivery ledger for no-replay/save receipts.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!("{self:?}")
+    }
+
     pub fn consumed_deliveries(&self, consumer: &str, value_name: &str) -> Vec<String> {
         self.consumed
             .get(&(consumer.to_string(), value_name.to_string()))
@@ -829,6 +850,11 @@ pub struct M8ResultVersionStore {
 }
 
 impl M8ResultVersionStore {
+    /// Complete result-version floor for save/restore receipts.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!("{self:?}")
+    }
+
     pub fn version(&self, value_name: &str) -> Option<ResultVersion> {
         self.versions.get(value_name).copied()
     }
@@ -1574,6 +1600,9 @@ fn evaluate_checked_expression(
             .get(&state_key_from_read(read).ok_or(())?)
             .copied()
             .ok_or(()),
+        // Designated evaluations have no owner-event parameter environment;
+        // an identifier therefore cannot be interpreted as a hidden input.
+        CheckedExpressionTree::ParameterRead { .. } => Err(()),
         CheckedExpressionTree::IntegerLiteral(literal) => Ok(literal.value()),
         CheckedExpressionTree::Binary {
             operator,

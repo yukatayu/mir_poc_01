@@ -1,0 +1,277 @@
+{
+  "schema_version": "m10-i1plus-typed-carriers-v0",
+  "patch_carriers": [
+    {
+      "id": "scn09-candidate-a",
+      "kind": "source_patch_intent",
+      "base_source": "scn-09/base.mir",
+      "candidate_source": "scn-09/candidate-accepted.mir",
+      "base_source_hash": "fnv1a64:b9c340f16b83dd1f",
+      "candidate_source_hash": "fnv1a64:8ed23bca052f90cc",
+      "state_additions": [
+        {
+          "state": "lamp",
+          "fields": [
+            "enabled"
+          ]
+        }
+      ],
+      "required_capabilities": [
+        "patch.activate"
+      ],
+      "required_effects": [
+        "observer_publish"
+      ],
+      "required_failures": [
+        "VisibilityDenied"
+      ],
+      "authority_intent": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "scn09-candidate-b",
+      "kind": "source_patch_intent",
+      "base_source": "scn-09/base.mir",
+      "candidate_source": "scn-09/candidate-rejected.mir",
+      "base_source_hash": "fnv1a64:b9c340f16b83dd1f",
+      "candidate_source_hash": "fnv1a64:d82bbc20690ba1d6",
+      "state_additions": [
+        {
+          "state": "lamp",
+          "fields": [
+            "enabled"
+          ]
+        }
+      ],
+      "required_capabilities": [
+        "patch.activate"
+      ],
+      "required_effects": [
+        "observer_publish"
+      ],
+      "required_failures": [
+        "VisibilityDenied"
+      ],
+      "authority_intent": {
+        "kind": "self_grant",
+        "authority": "ServerAuthority",
+        "grantee": "self"
+      }
+    },
+    {
+      "id": "scn09-candidate-c",
+      "kind": "source_patch_intent",
+      "base_source": "scn-09/base.mir",
+      "candidate_source": "scn-09/candidate-missing-capability.mir",
+      "base_source_hash": "fnv1a64:b9c340f16b83dd1f",
+      "candidate_source_hash": "fnv1a64:7de36c4b16c898ec",
+      "state_additions": [
+        {
+          "state": "lamp",
+          "fields": [
+            "enabled"
+          ]
+        }
+      ],
+      "required_capabilities": [],
+      "required_effects": [
+        "observer_publish"
+      ],
+      "required_failures": [
+        "VisibilityDenied"
+      ],
+      "authority_intent": {
+        "kind": "none"
+      }
+    }
+  ],
+  "policy_carriers": [
+    {
+      "id": "portal-secret-redaction-policy",
+      "subject_source": "scn-05/negative-secret-cross-locus.mir",
+      "private_state": "player_a",
+      "private_field": "secret_key",
+      "source_owner_locus": "WorldA",
+      "destination_state": "player_b",
+      "destination_field": "position",
+      "destination_owner_locus": "WorldB",
+      "request_class": "cross_locus_observation",
+      "required_failures": [
+        "VisibilityDenied"
+      ]
+    },
+    {
+      "id": "portal-secret-missing-required-failure",
+      "subject_source": "scn-05/negative-secret-cross-locus.mir",
+      "private_state": "player_a",
+      "private_field": "secret_key",
+      "source_owner_locus": "WorldA",
+      "destination_state": "player_b",
+      "destination_field": "position",
+      "destination_owner_locus": "WorldB",
+      "request_class": "cross_locus_observation",
+      "required_failures": []
+    },
+    {
+      "id": "observer-safe-position-only",
+      "field_policy_source": "scn-07/positive.mir",
+      "observer_fields": [
+        "position"
+      ],
+      "debug_fields": [
+        "position",
+        "hp",
+        "inventory_note"
+      ]
+    },
+    {
+      "id": "inventory-note-private-policy",
+      "field_policy_source": "scn-07/negative-inventory-visible.mir",
+      "private_like_fields": [
+        "inventory_note"
+      ],
+      "observer_channel": "observer_safe"
+    }
+  ],
+  "fallback_carriers": [
+    {
+      "id": "view-pose-normal-fallback",
+      "relation": "view_pose",
+      "source": "scn-08/positive.mir",
+      "negative_capability_floor": "write_after_read_without_fresh_reacquire",
+      "options": [
+        {
+          "kind": "live",
+          "target": "live_pose",
+          "lease": "lease:view_pose:live",
+          "capability": "cap:relation:view_pose:live",
+          "epoch": "avatar_session",
+          "lineage_edges": []
+        },
+        {
+          "kind": "anchor",
+          "target": "room_anchor",
+          "lease": "lease:view_pose:anchor",
+          "capability": "cap:relation:view_pose:anchor",
+          "epoch": "room_epoch",
+          "lineage_edges": [
+            {
+              "from": "live",
+              "to": "anchor"
+            }
+          ]
+        },
+        {
+          "kind": "frozen",
+          "target": "default_pose",
+          "lease": "lease:view_pose:frozen",
+          "capability": "cap:relation:view_pose:frozen",
+          "epoch": "static",
+          "lineage_edges": [
+            {
+              "from": "anchor",
+              "to": "frozen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "view-pose-missing-lineage",
+      "relation": "view_pose",
+      "source": "scn-08/negative-missing-fallback-anchor.mir",
+      "negative_capability_floor": "missing_live_to_anchor_lineage_edge",
+      "options": [
+        {
+          "kind": "live",
+          "target": "live_pose",
+          "lease": "lease:view_pose:live",
+          "capability": "cap:relation:view_pose:live",
+          "epoch": "avatar_session",
+          "lineage_edges": []
+        },
+        {
+          "kind": "anchor",
+          "target": "room_anchor",
+          "lease": "lease:view_pose:anchor",
+          "capability": "cap:relation:view_pose:anchor",
+          "epoch": "room_epoch",
+          "lineage_edges": []
+        },
+        {
+          "kind": "frozen",
+          "target": "default_pose",
+          "lease": "lease:view_pose:frozen",
+          "capability": "cap:relation:view_pose:frozen",
+          "epoch": "static",
+          "lineage_edges": [
+            {
+              "from": "anchor",
+              "to": "frozen"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "view-pose-write-after-read",
+      "relation": "view_pose",
+      "source": "scn-08/negative-write-after-read-lineage.mir",
+      "negative_capability_floor": "write_after_read_without_fresh_reacquire",
+      "options": [
+        {
+          "kind": "live",
+          "target": "live_pose",
+          "lease": "lease:view_pose:live",
+          "capability": "cap:relation:view_pose:live",
+          "epoch": "avatar_session",
+          "lineage_edges": []
+        },
+        {
+          "kind": "anchor",
+          "target": "room_anchor",
+          "lease": "lease:view_pose:anchor",
+          "capability": "cap:relation:view_pose:anchor",
+          "epoch": "room_epoch",
+          "lineage_edges": [
+            {
+              "from": "live",
+              "to": "anchor"
+            }
+          ]
+        },
+        {
+          "kind": "frozen",
+          "target": "default_pose",
+          "lease": "lease:view_pose:frozen",
+          "capability": "cap:relation:view_pose:frozen",
+          "epoch": "static",
+          "lineage_edges": [
+            {
+              "from": "anchor",
+              "to": "frozen"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "route_patch_carriers": [
+    {
+      "id": "scn06-route-patch-east-west",
+      "kind": "route_patch_intent",
+      "candidate_source": "scn-06/route-candidate-accepted.mir",
+      "candidate_source_hash": "fnv1a64:b7624043042005eb",
+      "from_locus": "ShardA",
+      "to_locus": "ShardB",
+      "route_state": "available",
+      "required_capabilities": [
+        "route.patch"
+      ],
+      "authority_intent": {
+        "kind": "none"
+      }
+    }
+  ]
+}

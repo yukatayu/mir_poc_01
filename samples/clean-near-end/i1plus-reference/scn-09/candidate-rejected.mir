@@ -1,0 +1,22 @@
+module M10.Scn09.CandidateRejected
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state lamp[id: Player] at World {
+  enabled: Int
+  visible observer_safe fields (enabled)
+}
+
+Role[self] at BrowserClient {
+  when escalate(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied) {
+    at World {
+      lamp[self].enabled = lamp[self].enabled + delta
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

@@ -26,7 +26,7 @@ DESIGN-CONSTITUTION (v0/I1+ の横断判断)
 theory/ (MirCore v0)                     mental-model/ (表と裏の対応)
   00 見取り図                                 ▲
   01 計算体系 ──► 02 型/効果/失敗              │ 03 が theory/10 と対応
-  01 ──► 03 elaboration ──► 13 evaluation/materialization ──► 15 shared model ──► 16 M7 checked elaboration ──► 17 M8 deterministic runtime ──► 18 M9 auth/verification ──► THM-001 │
+  01 ──► 03 elaboration ──► 13 evaluation/materialization ──► 15 shared model ──► 16 M7 checked elaboration ──► 17 M8 deterministic runtime ──► 18 M9 auth/verification ──► M10 finite conformance ──► THM-001 │
   01 ──► 04 順序と cut ──► 05 権限            │
   01 ──► 06 存在と fallback                   │
   01 ──► 07 観測  08 patch  09 二層時間  10 診断

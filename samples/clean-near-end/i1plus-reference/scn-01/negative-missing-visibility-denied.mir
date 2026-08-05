@@ -1,0 +1,20 @@
+module M10.Scn01.NegativeMissingVisibilityDenied
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state player[id: Player] at World {
+  position: Int
+  hp: Int
+  visible observer_safe fields (position)
+}
+
+Role[self] at BrowserClient {
+  when roll(draw: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership) {
+    at World {
+      player[self].position = player[self].position + draw
+    }
+  }
+}

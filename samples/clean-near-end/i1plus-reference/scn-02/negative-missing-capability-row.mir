@@ -1,0 +1,20 @@
+module M10.Scn02.NegativeMissingCapabilityRow
+
+locus World
+locus BrowserClient
+principal self
+principal target
+type Player
+
+state player[id: Player] at World {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at BrowserClient {
+  when attack(target: Player) fails (StaleMembership, MissingWitness, RouteUnavailable) {
+    at World {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}

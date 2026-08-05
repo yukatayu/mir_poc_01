@@ -1,0 +1,19 @@
+module M10.Scn06.NegativeRouteUnavailableRow
+
+locus ShardA
+locus ShardB
+locus BrowserClient
+principal self
+type Player
+
+state player_b[id: Player] at ShardB {
+  position: Int
+}
+
+Role[self] at BrowserClient {
+  when move_to_b(delta: Int) fails (MissingCapability, MissingWitness, StaleMembership) {
+    at ShardB {
+      player_b[self].position = player_b[self].position + delta
+    }
+  }
+}

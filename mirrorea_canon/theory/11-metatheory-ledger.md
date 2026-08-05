@@ -36,33 +36,33 @@ success or a generic `open` bucket.
 
 | ID | Obligation | For | Evidence target | Status | Boundary / next owner |
 |---|---|---|---|---|---|
-| OBL-001 | THM-001 general Lean statement | THM-001 | MirCore.Elab.Soundness | intentionally-deferred | M5 shared model; M3 finite support is OBL-029--031, not this general statement |
-| OBL-002 | THM-001 general proof | THM-001 | same | intentionally-deferred | M5 after exact Core/source correspondence |
-| OBL-003 | Line-1 decidability on declared fragment | judgment | MirCore.Check.Decidable | intentionally-deferred | M7 checker; OBL-033 covers only the M3 finite target set |
-| OBL-004 | General no-undeclared-communication corollary | THM-001 | MirCore.Elab.NoHidden | intentionally-deferred | M5; OBL-031 is a finite M3 receipt boundary |
-| OBL-005 | Canonical flattening laws (assoc/unit) | chains | MirCore.Chain.Canon | intentionally-deferred | M4 relation/fallback calculus |
-| OBL-006 | Canon uniqueness / confluence | chains | same | intentionally-deferred | M4 relation/fallback calculus |
-| OBL-007 | THM-002 Lean statement | THM-002 | MirCore.Chain.Monotone | intentionally-deferred | M4 fallback model |
-| OBL-008 | THM-002 proof | THM-002 | same | intentionally-deferred | M4 fallback model |
-| OBL-009 | THM-003 Lean statement | THM-003 | MirCore.Cut.Load | intentionally-deferred | M5/M8 cut-save shared model |
-| OBL-010 | Consistent(K) checker soundness | 04 | MirCore.Cut.Consistent | intentionally-deferred | M5/M7 |
-| OBL-011 | No stale membership resurrection | THM-003 | lemma | intentionally-deferred | M5/M8 |
-| OBL-012 | No stale witness resurrection | THM-003 | lemma | intentionally-deferred | M5/M8 |
-| OBL-013 | No expired lease resurrection | THM-003 | lemma | intentionally-deferred | M5/M8 |
-| OBL-014 | Z-cycle reject ≙ Netzer–Xu useless checkpoint | 04 | MirCore.Cut.ZCycle | intentionally-deferred | M5 finite cut model |
-| OBL-015 | THM-004 Lean statement | THM-004 | MirCore.Auth.Sound | intentionally-deferred | M5 authority extension |
-| OBL-016 | THM-004 proof | THM-004 | same | intentionally-deferred | M5 authority extension |
-| OBL-017 | THM-005 Lean statement | THM-005 | MirCore.Obs.NI | intentionally-deferred | M5/M9 observation model |
-| OBL-018 | THM-005 proof (explicit-flow fragment) | THM-005 | same | intentionally-deferred | M5/M9 |
-| OBL-019 | THM-006 statement+proof | THM-006 | MirCore.Patch.NoMut | intentionally-deferred | M5/M8 patch model |
-| OBL-020 | General well-formedness preservation of step rules | 01 | MirCore.Step.WF | intentionally-deferred | M5; finite M3 owner step is OBL-030 |
-| OBL-021 | General elaboration determinism | 03 | MirCore.Elab.Det | intentionally-deferred | M5; finite M3 elaborator is OBL-029 |
-| OBL-022 | Stream non-influence on discrete state | 09 | MirCore.Time.ReadSide | intentionally-deferred | M4/M5 time model |
-| OBL-023 | Temporal coherence from frontier admissibility | 09 | MirCore.Time.Coherent | intentionally-deferred | M4 relation/presentation model |
-| OBL-024 | Explanation soundness | 10 | MirCore.Diag.Sound | intentionally-deferred | M5/M7 diagnostics |
-| OBL-025 | Explanation completeness (Line-1, single-edit) | 10 | MirCore.Diag.Complete | intentionally-deferred | M5/M7 diagnostics |
+| OBL-001 | THM-001 general Lean statement | THM-001 | MirCore.Elab.Soundness | intentionally-deferred | post-program owner-defined; M3 finite support is OBL-029--031, not this general statement |
+| OBL-002 | THM-001 general proof | THM-001 | same | intentionally-deferred | post-program owner-defined after exact Core/source correspondence |
+| OBL-003 | Line-1 decidability on declared fragment | judgment | MirCore.Check.Decidable | intentionally-deferred | post-program owner-defined; OBL-033 covers only the M3 finite target set |
+| OBL-004 | General no-undeclared-communication corollary | THM-001 | MirCore.Elab.NoHidden | intentionally-deferred | post-program owner-defined; OBL-031 is a finite M3 receipt boundary |
+| OBL-005 | Canonical flattening laws (assoc/unit) | chains | MirCore.Chain.Canon | intentionally-deferred | post-program owner-defined; M4 finite relation/fallback evidence does not discharge it |
+| OBL-006 | Canon uniqueness / confluence | chains | same | intentionally-deferred | post-program owner-defined; M4 finite relation/fallback evidence does not discharge it |
+| OBL-007 | THM-002 Lean statement | THM-002 | MirCore.Chain.Monotone | intentionally-deferred | post-program owner-defined; M4 finite fallback evidence does not discharge it |
+| OBL-008 | THM-002 proof | THM-002 | same | intentionally-deferred | post-program owner-defined; M4 finite fallback evidence does not discharge it |
+| OBL-009 | THM-003 Lean statement | THM-003 | MirCore.Cut.Load | intentionally-deferred | post-program owner-defined; M5/M8 finite cut-save evidence does not discharge it |
+| OBL-010 | Consistent(K) checker soundness | 04 | MirCore.Cut.Consistent | intentionally-deferred | post-program owner-defined; M5/M7 finite evidence does not discharge it |
+| OBL-011 | No stale membership resurrection | THM-003 | lemma | intentionally-deferred | post-program owner-defined; M5/M8 finite stale-context rejects do not discharge it |
+| OBL-012 | No stale witness resurrection | THM-003 | lemma | intentionally-deferred | post-program owner-defined; M5/M8 finite stale-context rejects do not discharge it |
+| OBL-013 | No expired lease resurrection | THM-003 | lemma | intentionally-deferred | post-program owner-defined; M5/M8 finite stale-context rejects do not discharge it |
+| OBL-014 | Z-cycle reject ≙ Netzer–Xu useless checkpoint | 04 | MirCore.Cut.ZCycle | intentionally-deferred | post-program owner-defined; M5 finite cut evidence does not discharge it |
+| OBL-015 | THM-004 Lean statement | THM-004 | MirCore.Auth.Sound | intentionally-deferred | post-program owner-defined; M5/M9 finite authority evidence does not discharge it |
+| OBL-016 | THM-004 proof | THM-004 | same | intentionally-deferred | post-program owner-defined; M5/M9 finite authority evidence does not discharge it |
+| OBL-017 | THM-005 Lean statement | THM-005 | MirCore.Obs.NI | intentionally-deferred | post-program owner-defined; M5/M9 finite observation evidence does not discharge it |
+| OBL-018 | THM-005 proof (explicit-flow fragment) | THM-005 | same | intentionally-deferred | post-program owner-defined; M5/M9 finite observation evidence does not discharge it |
+| OBL-019 | THM-006 statement+proof | THM-006 | MirCore.Patch.NoMut | intentionally-deferred | post-program owner-defined; M5/M8 finite patch evidence does not discharge it |
+| OBL-020 | General well-formedness preservation of step rules | 01 | MirCore.Step.WF | intentionally-deferred | post-program owner-defined; finite M3 owner step is OBL-030 |
+| OBL-021 | General elaboration determinism | 03 | MirCore.Elab.Det | intentionally-deferred | post-program owner-defined; finite M3 elaborator is OBL-029 |
+| OBL-022 | Stream non-influence on discrete state | 09 | MirCore.Time.ReadSide | intentionally-deferred | post-program owner-defined; M4/M5 finite time evidence does not discharge it |
+| OBL-023 | Temporal coherence from frontier admissibility | 09 | MirCore.Time.Coherent | intentionally-deferred | post-program owner-defined; M4 relation/presentation evidence does not discharge it |
+| OBL-024 | Explanation soundness | 10 | MirCore.Diag.Sound | intentionally-deferred | post-program owner-defined; M5/M7 finite diagnostics do not discharge it |
+| OBL-025 | Explanation completeness (Line-1, single-edit) | 10 | MirCore.Diag.Complete | intentionally-deferred | post-program owner-defined; M5/M7 finite diagnostics do not discharge it |
 | OBL-026 | Finite M9 source-resolution and transparent-overlay composition | 02 / M9 | `external_m9_resolution_requires_exact_source_bound_rows`, `m8_admit_alone_remains_deferred_to_m9`, `verifier_evidence_cannot_mint_authority_or_activate_contract_update`, and `transparent_overlay_composition_is_finite_and_exact` in `MirTheoryV0M9AuthVerification.lean` | lean-proved | exact SourceRef/identity/deferred-row resolution, M8-only deferral, verifier non-authority, and ContractRef equality for two transparent overlays; MembershipAuth/CapabilityAuth are separate non-transparent ContractUpdate cases. No cost-bound, general resolution/authority, or stack-composition theorem |
-| OBL-027 | Rollback cannot cross atomic_cut | 04 | MirCore.Cut.NoCross | intentionally-deferred | M5/M8 |
+| OBL-027 | Rollback cannot cross atomic_cut | 04 | MirCore.Cut.NoCross | intentionally-deferred | post-program owner-defined; M5/M8 finite cut evidence does not discharge it |
 | OBL-028 | Finite M9 revocation / rejected-use model | 05 / M9 | `crates/mir-semantics/src/m9_model_check_auth.rs`, `crates/mir-semantics/tests/m9_model_check_auth.rs`, and accepted independent finite-only review | model-checked-bounded | fixed one-subject/one-capability reachable-state graph, bound 4, and actions `{admit, grant, revoke, use, reacquire}` only. Input-sensitive revocation/use/rejected-use/reacquire constraints check monotone revocation and rejected-use-no-M8-mutation; fault injection yields concrete counterexamples. Not a general proof, action-sequence enumeration theorem, or authorization-composition theorem |
 | OBL-029 | Finite M3 EvalPlan elaboration functional | THM-007 | `elaboration_deterministic` in M3 Lean foundation | lean-proved | finite `Input` and `EvalPlan` only; `lean --trust=0`, no `sorry`/`admit`/axiom |
 | OBL-030 | Finite M3 owner RMW / failure / WF fragment | THM-008 | `two_attacks_are_serial_owner_rmw`, no-mutation and WF lemmas | lean-proved | one owner cell, `-10` request, non-negative hp; no general Core preservation claim |

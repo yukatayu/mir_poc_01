@@ -1,0 +1,18 @@
+module M10.Scn12.SplitFrame
+
+locus World
+locus Viewer
+principal bird
+type Player
+
+relation bird_follow at World {
+  subject bird: Player
+  primary perch_anchor epoch primary_epoch transform translate(3, -2)
+  fallback nest_anchor epoch fallback_epoch transform identity
+  bind frontier split_frame_frontier
+  publish relation
+  project at Viewer local
+}
+
+with auth MembershipAuth
+verify finite_refinement

@@ -2,7 +2,7 @@
 id: spec/03-static-semantics
 status: L1-fixed
 maturity: draft
-depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021]
+depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025]
 summary: 実装済み M6 source form の M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。
 open_items: []
 ---
@@ -21,14 +21,14 @@ runtime occurrence, nor presentation input.
 
 | Source form | Current M6 classification | Required retained boundary |
 |---|---|---|
-| `module`, `locus`, `principal`, `type`, indexed `state` | parsed declaration input | declaration span/name data; no M5 action or runtime step is implied |
+| `module`, `locus`, `principal`, `type`, indexed `state` | parsed declaration input | declaration span/name data; `visible observer_safe fields (...)` is a unique source-bound subset of that state's fields, all other fields are private; no M5 action or runtime step is implied |
+| unknown/duplicate name in `visible observer_safe fields (...)` | `UnknownObserverSafeField` / `DuplicateObserverSafeField` diagnostic | offending declaration-token span; no checked Core or hidden visibility fallback |
 | `Role[self] at S` / `when ... fails(...)` | handler authority context | literal `Role[self]` authority origin, declared header locus, failure row, source span |
 | `Role[Name]` where `Name` is not `self` | parser diagnostic `RoleActorMustBeLiteralSelf` | actor-token span; no parsed role, CoreTemplate, or static classification |
-| site-aligned owner `at S { StateRef = Expr }` | M5 `ownerRmw` Core through owner-mutation template | actor authority origin separate from owner evaluation; `store`; request-to-owner and owner-write generated edges; capability/witness obligations; no receipt/receipt-release fact |
+| `Role[self] at L_actor { ... at L_owner { StateRef = Expr } }` | M5 `ownerRmw` Core through owner-mutation template | `L_actor` is authority origin; `L_owner` is separate owner evaluation/request site and may differ. The target state's declared owner must equal `L_owner`; same-owner RHS reads resolve at `L_owner`, not `L_actor`. Retain `store`, request-to-owner and owner-write generated edges, capability/witness obligations, and `RouteUnavailable`; emit no receipt/receipt-release fact. A write to an explicitly observer-safe field additionally carries source-bound observer-publish effect and `VisibilityDenied` failure; a private field carries neither |
 | fieldless assignment target | `FieldlessAssignmentTarget` diagnostic | target-reference span; no CoreTemplate or panic path |
 | field-bearing target state owned outside the action locus | `CrossOwnerWriteTargetOutsideActionLocus` diagnostic | target-reference span; no CoreTemplate or implicit cross-owner write |
-| local RHS dependency of that assignment | source-to-Core map entry | same assignment span records `OwnerRmw`, `OwnerLocalRead`, and `OwnerLocalWrite`; local dependency is not a receipt edge |
-| owner action site differs from enclosing `Role[self] at S` site | `OwnerActionLocusMismatch` diagnostic | action span; no owner Core or hidden authority |
+| local RHS dependency of that assignment | source-to-Core map entry | same assignment span records `OwnerRmw`, `OwnerLocalRead`, and `OwnerLocalWrite`; local dependency is at `L_owner`, not `L_actor`, and is not a receipt edge |
 | RHS state dependency owned at another locus | `CrossOwnerOperandRequiresReceipt` diagnostic | offending RHS reference span; no hidden request, receipt, release, snapshot, capability, or witness |
 | `relation ... publish relation [project at C local]` | maintained-relation template | M5 relation bind/publication/projection boundary, typed binding frontier, `publish-relation`, optional consumer-local projection site, no result frontier |
 | `relation ... publish value Name` | `RelationMustPublishRelationCarrier` diagnostic | publication-clause span; no absolute-value relation carrier |
@@ -43,15 +43,18 @@ runtime occurrence, nor presentation input.
    a locus name that collides with a declared type name, and an unresolved RHS
    state base. Each diagnostic carries the exact token/reference span. M7 owns
    general namespace, type, and diagnostic-completeness claims.
-2. A nested owner action's explicit `at` site must equal its enclosing
-   `Role[self] at` site. The classifier keeps the Role authority origin and
-   owner evaluation site separate; the nested `at` never mints authority.
+2. A nested owner action's explicit `at L_owner` site is separate from its
+   enclosing `Role[self] at L_actor` authority origin. Their difference is
+   accepted as an owner-directed request; the nested `at` never mints
+   authority. The target-state owner, rather than `L_actor`, must equal
+   `L_owner`.
 3. An accepted owner mutation has a field-bearing target whose declared state
    owner equals the action site. Fieldless targets and cross-owner targets are
    rejected at the target reference before Core construction.
-4. For an accepted owner mutation, every resolved RHS state reference must be
-   owned by the action site. A cross-owner operand is rejected at the operand
-   span, and the M6 grammar offers no receipt syntax to recover it.
+4. For an accepted owner mutation, every resolved same-owner RHS state
+   reference is owned by and resolves at `L_owner`, never at `L_actor`. A
+   cross-owner operand is rejected at the operand span, and the M6 grammar
+   offers no receipt syntax to recover it.
 5. Same-owner lowering records separate capability and witness obligations and
    two generated M5 edges (request-to-owner, owner-write). The third
    owner-local RHS dependency is a distinct source-to-Core map entry. The
@@ -63,6 +66,11 @@ runtime occurrence, nor presentation input.
 7. `with auth` and `verify` are successful source classifications only as
    non-executable typed deferred templates. They retain no authorization
    grant, membership decision, proof verdict, state update, or runtime step.
+8. A `visible observer_safe fields (...)` list is checked against fields in its
+   own `StateDecl`: every listed name is known and appears once. All omitted
+   fields are private. Only a write to a listed field may create the typed
+   observer-publish effect and its `VisibilityDenied` failure entry; attempted
+   observer publication of a private field rejects without semantic mutation.
 
 ## Rejections and non-effects
 
@@ -72,6 +80,11 @@ emits transport/communication syntax, occurrence/envelope machinery,
 receipt/release facts, runtime steps, membership state, proof verdict, or
 presentation state. Capability/witness *obligations* in an owner template are
 not source-level witness or transport objects.
+
+Visibility is not profile-only metadata. The M10 direct consumer requires the
+above declared source profile so that observer policy participates in the
+checked identity. This is a bounded M6/M7 refinement, not a final public
+observation grammar or general noninterference claim.
 
 The exact finite classifier evidence is OBL-048 in theory/11. M7's separate
 finite refinement/evidence is spec/08 and OBL-049; neither changes this M6

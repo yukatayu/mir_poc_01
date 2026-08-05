@@ -1,0 +1,23 @@
+module M10.Scn04.NegativeHiddenRepair
+
+locus World
+locus BrowserClient
+principal self
+principal target
+type Player
+
+state player[id: Player] at World {
+  hp: Int
+  tombstone: Int
+}
+
+Role[self] at BrowserClient {
+  when revive(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at World {
+      player[target].hp = player[target].hp + 1
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

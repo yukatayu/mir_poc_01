@@ -348,9 +348,10 @@ impl M8AuthorityState {
         let Some(membership) = self.memberships.get(membership_ref) else {
             return false;
         };
+        let membership_epoch = use_refs.membership_epoch.unwrap_or(binding_epoch);
         if membership.principal.as_deref() != Some(use_refs.principal)
             || membership.locus.as_deref() != Some(use_refs.owner_locus)
-            || membership.epoch.as_deref() != Some(binding_epoch)
+            || membership.epoch.as_deref() != Some(membership_epoch)
         {
             return false;
         }
@@ -542,6 +543,7 @@ pub(crate) struct M8RelationAuthorityLookup<'a> {
     pub(crate) principal: &'a str,
     pub(crate) membership_ref: Option<&'a str>,
     pub(crate) capability_ref: Option<&'a str>,
+    pub(crate) membership_epoch: Option<&'a str>,
     pub(crate) binding_epoch: Option<&'a str>,
     pub(crate) witness_ref: Option<&'a str>,
     pub(crate) witness_epoch: Option<&'a str>,

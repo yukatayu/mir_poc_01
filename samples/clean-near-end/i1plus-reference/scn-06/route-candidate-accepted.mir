@@ -1,0 +1,22 @@
+module M10.Scn06.RouteCandidateAccepted
+
+locus ShardA
+locus ShardB
+locus BrowserClient
+principal self
+type Player
+
+state route_marker[id: Player] at ShardA {
+  enabled: Int
+}
+
+Role[self] at BrowserClient {
+  when mark_route(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership) {
+    at ShardA {
+      route_marker[self].enabled = route_marker[self].enabled + delta
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

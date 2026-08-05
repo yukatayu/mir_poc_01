@@ -243,6 +243,90 @@ impl M8SemanticSnapshot {
         &self.authority_state
     }
 
+    /// Crate-internal M9 bridge refresh.  The surrounding M8 local session
+    /// retains its store, relation, and configuration state; only the
+    /// authority inventory is replaced from the sealed upstream snapshot.
+    pub(crate) fn replace_authority_state(&mut self, authority_state: M8AuthorityState) {
+        self.authority_state = authority_state;
+    }
+
+    /// Patch activation may introduce a checked Int field with the finite-v0
+    /// default.  This crate-private operation is intentionally narrower than
+    /// an owner write: it cannot set an arbitrary value or replace an existing
+    /// field, and M8PatchRuntime records the resulting occurrence separately.
+    pub(crate) fn initialize_int_default(&mut self, key: M8StateKey) -> bool {
+        if self.ints.contains_key(&key) {
+            return false;
+        }
+        self.ints.insert(key, 0);
+        true
+    }
+
+    /// Exact mutable store domain for crate-internal runtime receipts.  This
+    /// intentionally excludes maintained relations and admission/config
+    /// state, so a relation transition cannot be represented as a store
+    /// change merely by hashing a combined snapshot.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        let ints = self.ints.iter().map(|(key, value)| {
+            format!(
+                "int|{}|{}|{}|{}",
+                key.namespace(),
+                key.index(),
+                key.field(),
+                value
+            )
+        });
+        let published_values = self
+            .published_values
+            .iter()
+            .map(|(subject, values)| format!("published|{subject}|{}", values.join(",")));
+        ints.chain(published_values).collect::<Vec<_>>().join("\n")
+    }
+
+    /// Exact maintained-relation domain for crate-internal runtime receipts.
+    pub(crate) fn canonical_relation_projection(&self) -> String {
+        self.relations
+            .values()
+            .map(|relation| {
+                format!(
+                    "relation|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}",
+                    relation.name,
+                    relation.owner_locus,
+                    relation.selected_option_index,
+                    relation.selected_floor.as_str(),
+                    relation.selected_anchor,
+                    relation.selected_option_epoch,
+                    relation.primary_epoch,
+                    relation.binding_epoch,
+                    relation.binding_frontier,
+                    relation.active_lease_ref,
+                    relation.activation_frontier,
+                    relation.lineage.join(","),
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
+    }
+
+    /// The semantic snapshot has no independent configuration domain: its
+    /// membership/authority caches are M9-derived and are intentionally not
+    /// reclassified as M8 configuration receipt input.
+    pub(crate) fn canonical_configuration_projection(&self) -> String {
+        String::new()
+    }
+
+    /// Ordered semantic projection used only by crate-internal diagnostics
+    /// that genuinely need every M8 domain.  Receipt hashing uses the domain
+    /// accessors above instead of this aggregate projection.
+    pub(crate) fn canonical_projection(&self) -> String {
+        [
+            self.canonical_configuration_projection(),
+            self.canonical_store_projection(),
+            self.canonical_relation_projection(),
+        ]
+        .join("\n")
+    }
+
     pub(crate) fn empty_with_authority_state(authority_state: M8AuthorityState) -> Self {
         Self {
             authority_state,
@@ -257,12 +341,31 @@ impl M8SemanticSnapshot {
 
 /// M8's semantic relation state lives in the same snapshot as owner state.
 /// Presentation contexts, samples, and derived poses are intentionally absent.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum M8RelationFloor {
+    Live,
+    Anchor,
+    Frozen,
+}
+
+impl M8RelationFloor {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Live => "live",
+            Self::Anchor => "anchor",
+            Self::Frozen => "frozen",
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8SemanticRelation {
     pub(crate) name: String,
     pub(crate) owner_locus: String,
     pub(crate) selected_option_index: usize,
+    pub(crate) selected_floor: M8RelationFloor,
     pub(crate) selected_anchor: String,
+    pub(crate) selected_option_epoch: String,
     pub(crate) primary_epoch: String,
     pub(crate) binding_epoch: String,
     pub(crate) binding_frontier: String,
@@ -294,7 +397,9 @@ impl M8SemanticRelation {
             name: initial.name,
             owner_locus: initial.owner_locus,
             selected_option_index: initial.selected_option_index,
+            selected_floor: M8RelationFloor::Live,
             selected_anchor: initial.selected_anchor,
+            selected_option_epoch: initial.primary_epoch.clone(),
             primary_epoch: initial.primary_epoch,
             binding_epoch: initial.binding_epoch,
             binding_frontier: initial.binding_frontier,
@@ -312,8 +417,16 @@ impl M8SemanticRelation {
         self.selected_option_index
     }
 
+    pub const fn selected_floor(&self) -> M8RelationFloor {
+        self.selected_floor
+    }
+
     pub fn selected_anchor(&self) -> &str {
         &self.selected_anchor
+    }
+
+    pub fn selected_option_epoch(&self) -> &str {
+        &self.selected_option_epoch
     }
 
     pub fn primary_epoch(&self) -> &str {
@@ -699,6 +812,61 @@ impl M8RuntimeExecution {
         }
     }
 
+    /// Exact replay-relevant owner execution state for M8 store receipts.
+    /// Pending FIFO contents, occurrence counters, and queue trace nodes are
+    /// mutable state and therefore cannot be omitted from save/load evidence.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        let queues = self.owner_queues.iter().flat_map(|(locus, queue)| {
+            queue.iter().map(move |queued| {
+                format!(
+                    "queue|{}|{}|{}|{}|{}|{}|{}|{}",
+                    locus,
+                    queued.occurrence.id(),
+                    queued.enqueue_trace_node_id,
+                    queued.request.evaluation(),
+                    queued
+                        .request
+                        .arguments()
+                        .iter()
+                        .map(|(name, value)| format!("{name}={value}"))
+                        .collect::<Vec<_>>()
+                        .join(","),
+                    queued
+                        .request
+                        .authority_use()
+                        .and_then(M8AuthorityUse::membership_ref)
+                        .unwrap_or(""),
+                    queued
+                        .request
+                        .authority_use()
+                        .and_then(M8AuthorityUse::capability_ref)
+                        .unwrap_or(""),
+                    queued
+                        .request
+                        .authority_use()
+                        .and_then(M8AuthorityUse::witness_ref)
+                        .unwrap_or(""),
+                )
+            })
+        });
+        let trace = self.trace.entries().iter().map(|entry| {
+            format!(
+                "queue_trace|{:?}|{}|{}",
+                entry.kind(),
+                entry.trace_node_id(),
+                entry.request_occurrence_id().unwrap_or(""),
+            )
+        });
+        std::iter::once(format!(
+            "owner_counters|{}|{}",
+            self.next_occurrence, self.next_trace_node,
+        ))
+        .chain(queues)
+        .chain(trace)
+        .collect::<Vec<_>>()
+        .join("\n")
+    }
+
     /// M7 rejection is terminal for this queue facade: it never manufactures a
     /// checked owner plan, request, or receipt path from a rejected source.
     pub fn from_rejected_m7(
@@ -1018,6 +1186,10 @@ impl M8RuntimeExecution {
                 reads.insert(key, value);
                 Ok(value)
             }
+            CheckedExpressionTree::ParameterRead { name, .. } => arguments
+                .get(name)
+                .and_then(|value| value.parse::<i64>().ok())
+                .ok_or(()),
             CheckedExpressionTree::IntegerLiteral(literal) => Ok(literal.value()),
             CheckedExpressionTree::Binary {
                 operator,

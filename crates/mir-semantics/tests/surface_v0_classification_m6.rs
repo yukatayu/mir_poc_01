@@ -314,29 +314,36 @@ fn classifies_with_auth_and_verify_as_span_tracked_non_executable_deferred_templ
 }
 
 #[test]
-fn role_action_locus_mismatch_rejects_before_rhs_owner_checks_without_core_success() {
+fn action_locus_state_owner_mismatch_is_cross_owner_write_without_core_success() {
     let (path, source) = load_fixture("owner_action_locus_mismatch.mir");
     let parsed = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
-        .expect("owner/action locus mismatch is syntactically valid");
+        .expect("action-locus/state-owner mismatch is syntactically valid");
 
     let diagnostics = classify_surface_v0(&parsed, SurfaceV0ClassificationOptions::default())
-        .expect_err("nested action locus must reject classification before Core success");
+        .expect_err("nested action locus that is not the state owner rejects classification");
 
     assert_eq!(diagnostics.entries().len(), 1);
     let primary = diagnostics.primary();
     assert_eq!(
         primary.kind(),
-        SurfaceV0DiagnosticKind::OwnerActionLocusMismatch
+        SurfaceV0DiagnosticKind::CrossOwnerWriteTargetOutsideActionLocus
     );
-    assert_eq!(primary.m5_code(), DiagnosticCode::OwnerActionLocusMismatch);
+    assert_eq!(
+        primary.m5_code(),
+        DiagnosticCode::CrossOwnerWriteTargetOutsideActionLocus
+    );
     assert_ne!(
         primary.kind(),
         SurfaceV0DiagnosticKind::CrossOwnerOperandRequiresReceipt
     );
-    assert_eq!(primary.span().lexeme(&source), "at T");
+    assert_ne!(
+        primary.kind(),
+        SurfaceV0DiagnosticKind::OwnerActionLocusMismatch
+    );
+    assert_eq!(primary.span().lexeme(&source), "player[target].hp");
     assert_eq!(
         primary.source_ref(),
-        &expected_source_ref(&path, &source, "at T")
+        &expected_source_ref(&path, &source, "player[target].hp")
     );
 }
 

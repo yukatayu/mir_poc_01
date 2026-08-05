@@ -1,0 +1,44 @@
+module M10.Scn10.Positive
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state player[id: Player] at World {
+  hp: Int
+}
+
+Role[self] at BrowserClient {
+  when checkpoint(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership) {
+    at World {
+      player[self].hp = player[self].hp + delta
+    }
+  }
+}
+
+locus Viewer
+principal relation_maintainer
+
+state live_pose[id: Player] at World {
+  x: Int
+  y: Int
+  visible observer_safe fields (x, y)
+}
+
+state room_anchor[id: Player] at World {
+  x: Int
+  y: Int
+}
+
+relation view_pose at World {
+  subject self: Player
+  primary live_pose epoch avatar_session transform translate(0, 0)
+  fallback room_anchor epoch room_epoch transform identity
+  bind frontier pose_binding_frontier
+  publish relation
+  project at Viewer local
+}
+
+with auth MembershipAuth
+verify finite_refinement

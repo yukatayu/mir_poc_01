@@ -1,0 +1,21 @@
+module M10.Scn07.NegativeInventoryVisible
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state player[id: Player] at World {
+  position: Int
+  hp: Int
+  inventory_note: Int
+  visible observer_safe fields (position, inventory_note)
+}
+
+Role[self] at BrowserClient {
+  when move(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership, VisibilityDenied) {
+    at World {
+      player[self].position = player[self].position + delta
+    }
+  }
+}

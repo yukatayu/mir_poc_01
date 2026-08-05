@@ -7,8 +7,9 @@
 use std::collections::BTreeMap;
 
 use mir_ast::surface_v0::{
-    BoundedExpression, BoundedExpressionTree, DeferredFormKind, FixtureSource, ParseErrorKind,
-    RelationTransform, SurfaceReference, SurfaceV0File, SurfaceV0Span, parse_surface_v0,
+    BoundedExpression, BoundedExpressionTree, DeferredFormKind, FixtureSource, Parameter,
+    ParseErrorKind, RelationTransform, SurfaceReference, SurfaceV0File, SurfaceV0Span,
+    parse_surface_v0,
 };
 
 use crate::{
@@ -33,6 +34,9 @@ const OWNER_RMW_FAILURES: [&str; 4] = [
     "MissingWitness",
     "RouteUnavailable",
 ];
+
+const OBSERVER_SAFE_CHANNEL: &str = "observer_safe";
+const VISIBILITY_DENIED_FAILURE: &str = "VisibilityDenied";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PipelineSourceSpan {
@@ -128,6 +132,24 @@ pub enum M7DiagnosticKind {
     DuplicateDesignated,
     DuplicateDeferred,
     ResidualCannotExecute,
+}
+
+/// Reason retained for an under-declared generated failure row.
+///
+/// The kind alone deliberately remains broad so existing M7 consumers can
+/// continue to classify the diagnostic.  The missing row member is retained
+/// separately for release-code selection and source-bound evidence.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum M7GeneratedFailureReason {
+    MissingDeclaredFailure(String),
+}
+
+impl M7GeneratedFailureReason {
+    pub fn missing_failure(&self) -> &str {
+        match self {
+            Self::MissingDeclaredFailure(name) => name,
+        }
+    }
 }
 
 /// Compatibility name for the accepted M6 evidence retained without
@@ -228,14 +250,21 @@ impl CheckedStaticDeclaration {
 pub struct CheckedStateFieldSchema {
     name: String,
     type_name: String,
+    visibility_channel: Option<String>,
     source_ref: SourceRef,
 }
 
 impl CheckedStateFieldSchema {
-    fn new(name: impl Into<String>, type_name: impl Into<String>, source_ref: SourceRef) -> Self {
+    fn new(
+        name: impl Into<String>,
+        type_name: impl Into<String>,
+        visibility_channel: Option<String>,
+        source_ref: SourceRef,
+    ) -> Self {
         Self {
             name: name.into(),
             type_name: type_name.into(),
+            visibility_channel,
             source_ref,
         }
     }
@@ -246,6 +275,10 @@ impl CheckedStateFieldSchema {
 
     pub fn type_name(&self) -> &str {
         &self.type_name
+    }
+
+    pub fn visibility_channel(&self) -> Option<&str> {
+        self.visibility_channel.as_deref()
     }
 
     pub fn source_ref(&self) -> &SourceRef {
@@ -408,6 +441,7 @@ pub struct M7Diagnostic {
     kind: M7DiagnosticKind,
     span: PipelineSourceSpan,
     source_ref: SourceRef,
+    generated_failure_reason: Option<M7GeneratedFailureReason>,
 }
 
 impl M7Diagnostic {
@@ -417,11 +451,40 @@ impl M7Diagnostic {
             kind,
             span,
             source_ref,
+            generated_failure_reason: None,
+        }
+    }
+
+    fn missing_generated_failure(span: PipelineSourceSpan, failure: impl Into<String>) -> Self {
+        let source_ref = span.source_ref();
+        Self {
+            kind: M7DiagnosticKind::GeneratedFailureNotDeclared,
+            span,
+            source_ref,
+            generated_failure_reason: Some(M7GeneratedFailureReason::MissingDeclaredFailure(
+                failure.into(),
+            )),
         }
     }
 
     pub const fn kind(&self) -> M7DiagnosticKind {
         self.kind
+    }
+
+    pub fn canonical_code(&self) -> &'static str {
+        match (&self.kind, &self.generated_failure_reason) {
+            (M7DiagnosticKind::GeneratedFailureNotDeclared, Some(reason))
+                if reason.missing_failure() == VISIBILITY_DENIED_FAILURE =>
+            {
+                "E-ROW-002"
+            }
+            (M7DiagnosticKind::GeneratedFailureNotDeclared, _) => "E-ROW-001",
+            _ => "E-M7-PROVISIONAL",
+        }
+    }
+
+    pub fn generated_failure_reason(&self) -> Option<&M7GeneratedFailureReason> {
+        self.generated_failure_reason.as_ref()
     }
 
     pub fn span(&self) -> &PipelineSourceSpan {
@@ -442,6 +505,12 @@ impl SurfaceV0PipelineDiagnostics {
     fn one(kind: M7DiagnosticKind, span: PipelineSourceSpan) -> Self {
         Self {
             entries: vec![M7Diagnostic::new(kind, span)],
+        }
+    }
+
+    fn missing_generated_failure(span: PipelineSourceSpan, failure: impl Into<String>) -> Self {
+        Self {
+            entries: vec![M7Diagnostic::missing_generated_failure(span, failure)],
         }
     }
 
@@ -634,6 +703,10 @@ pub enum CheckedBinaryOperator {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum CheckedExpressionTree {
     StateRead(TypedStateRead),
+    ParameterRead {
+        name: String,
+        span: PipelineSourceSpan,
+    },
     IntegerLiteral(CheckedIntegerLiteral),
     Binary {
         operator: CheckedBinaryOperator,
@@ -649,6 +722,10 @@ impl CheckedExpressionTree {
             BoundedExpressionTree::StateReference(reference) => Some(Self::StateRead(
                 TypedStateRead::from_reference(ast, reference),
             )),
+            BoundedExpressionTree::Identifier { name, span } => Some(Self::ParameterRead {
+                name: name.clone(),
+                span: PipelineSourceSpan::from_surface(span),
+            }),
             BoundedExpressionTree::IntegerLiteral(literal) => Some(Self::IntegerLiteral(
                 CheckedIntegerLiteral::from_surface(literal),
             )),
@@ -679,14 +756,14 @@ impl CheckedExpressionTree {
     pub fn operator(&self) -> Option<CheckedBinaryOperator> {
         match self {
             Self::Binary { operator, .. } => Some(*operator),
-            Self::StateRead(_) | Self::IntegerLiteral(_) => None,
+            Self::StateRead(_) | Self::ParameterRead { .. } | Self::IntegerLiteral(_) => None,
         }
     }
 
     pub fn left(&self) -> &Self {
         match self {
             Self::Binary { left, .. } => left,
-            Self::StateRead(_) | Self::IntegerLiteral(_) => {
+            Self::StateRead(_) | Self::ParameterRead { .. } | Self::IntegerLiteral(_) => {
                 panic!("only checked binary expression trees have a left child")
             }
         }
@@ -695,7 +772,7 @@ impl CheckedExpressionTree {
     pub fn right(&self) -> &Self {
         match self {
             Self::Binary { right, .. } => right,
-            Self::StateRead(_) | Self::IntegerLiteral(_) => {
+            Self::StateRead(_) | Self::ParameterRead { .. } | Self::IntegerLiteral(_) => {
                 panic!("only checked binary expression trees have a right child")
             }
         }
@@ -704,7 +781,7 @@ impl CheckedExpressionTree {
     pub fn int_literal(&self) -> Option<&CheckedIntegerLiteral> {
         match self {
             Self::IntegerLiteral(literal) => Some(literal),
-            Self::StateRead(_) | Self::Binary { .. } => None,
+            Self::StateRead(_) | Self::ParameterRead { .. } | Self::Binary { .. } => None,
         }
     }
 
@@ -715,6 +792,7 @@ impl CheckedExpressionTree {
     fn span(&self) -> &PipelineSourceSpan {
         match self {
             Self::StateRead(read) => &read.span,
+            Self::ParameterRead { span, .. } => span,
             Self::IntegerLiteral(literal) => &literal.span,
             Self::Binary { span, .. } => span,
         }
@@ -780,12 +858,17 @@ impl TypedExpression {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct OwnerRmwCheckedCore {
+    authority_origin_locus: String,
     owner_locus: String,
     target: TypedStateRead,
     expression: TypedExpression,
 }
 
 impl OwnerRmwCheckedCore {
+    pub fn authority_origin_locus(&self) -> &str {
+        &self.authority_origin_locus
+    }
+
     pub fn owner_locus(&self) -> &str {
         &self.owner_locus
     }
@@ -1074,6 +1157,10 @@ pub enum EffectKind {
     OwnerRequest,
     OwnerLocalRead,
     OwnerWrite,
+    /// Present in the typed row vocabulary so consumers can reject an
+    /// accidental actor reply; M7 never emits it for owner-local reads.
+    ActorReadReply,
+    ObserverPublish,
     RelationPublish,
     DesignatedRemoteRequest,
     DesignatedReceiptUse,
@@ -1089,6 +1176,8 @@ pub struct EffectEntry {
     owner: Option<String>,
     namespace: Option<String>,
     field: Option<String>,
+    redaction_label: Option<String>,
+    failure: Option<String>,
     relation: Option<String>,
     evaluator: Option<String>,
     result: Option<String>,
@@ -1105,6 +1194,8 @@ impl EffectEntry {
             owner: None,
             namespace: None,
             field: None,
+            redaction_label: None,
+            failure: None,
             relation: None,
             evaluator: None,
             result: None,
@@ -1121,6 +1212,18 @@ impl EffectEntry {
 
     pub fn source_lexeme<'a>(&self, source: &'a str) -> &'a str {
         self.span.lexeme(source)
+    }
+
+    pub fn field(&self) -> Option<&str> {
+        self.field.as_deref()
+    }
+
+    pub fn redaction_label(&self) -> &str {
+        self.redaction_label.as_deref().unwrap_or("")
+    }
+
+    pub fn failure(&self) -> Option<&str> {
+        self.failure.as_deref()
     }
 }
 
@@ -1220,12 +1323,12 @@ pub struct GeneratedObligations {
 }
 
 impl GeneratedObligations {
-    fn owner_rmw(span: PipelineSourceSpan) -> Self {
-        let mut entries = OWNER_RMW_FAILURES
+    fn owner_rmw(span: PipelineSourceSpan, observer_safe: bool) -> Self {
+        let mut entries = owner_rmw_failure_names(observer_safe)
             .iter()
             .map(|failure| {
                 GeneratedObligation::new(
-                    GeneratedObligationKind::Failure((*failure).to_string()),
+                    GeneratedObligationKind::Failure(failure.clone()),
                     span.clone(),
                 )
             })
@@ -1313,6 +1416,27 @@ impl GeneratedObligations {
     }
 }
 
+fn owner_rmw_failure_names(observer_safe: bool) -> Vec<String> {
+    let mut names = OWNER_RMW_FAILURES
+        .iter()
+        .map(|failure| (*failure).to_string())
+        .collect::<Vec<_>>();
+    if observer_safe {
+        names.push(VISIBILITY_DENIED_FAILURE.to_string());
+    }
+    names
+}
+
+fn observer_visibility_channel<'a>(
+    ast: &'a SurfaceV0File,
+    reference: &SurfaceReference,
+) -> Option<&'a str> {
+    ast.state(reference.base())?
+        .field(reference.field()?)?
+        .visibility()
+        .map(|visibility| visibility.channel())
+}
+
 fn designated_effect_entries(
     span: PipelineSourceSpan,
     evaluator: &str,
@@ -1346,6 +1470,7 @@ pub struct CheckedEvaluation {
     name: String,
     result_name: Option<String>,
     actor_authority_origin: String,
+    authority_origin_locus: String,
     owner_evaluation_locus: String,
     declared_failure_row: FailureRow,
     generated_failure_row: FailureRow,
@@ -1388,6 +1513,10 @@ impl CheckedEvaluation {
 
     pub fn actor_authority_origin(&self) -> &str {
         &self.actor_authority_origin
+    }
+
+    pub fn authority_origin_locus(&self) -> &str {
+        &self.authority_origin_locus
     }
 
     pub fn owner_evaluation_locus(&self) -> &str {
@@ -1625,10 +1754,11 @@ impl CheckedSourceMapEntry {
             SourceToCoreKind::OwnerRmw => 0,
             SourceToCoreKind::OwnerLocalRead => 1,
             SourceToCoreKind::OwnerLocalWrite => 2,
-            SourceToCoreKind::DesignatedDecision => 3,
-            SourceToCoreKind::PublishRelation => 4,
-            SourceToCoreKind::ConsumerLocalProjection => 5,
-            SourceToCoreKind::DeferredPolicy => 6,
+            SourceToCoreKind::ObserverPublish => 3,
+            SourceToCoreKind::DesignatedDecision => 4,
+            SourceToCoreKind::PublishRelation => 5,
+            SourceToCoreKind::ConsumerLocalProjection => 6,
+            SourceToCoreKind::DeferredPolicy => 7,
         }
     }
 }
@@ -1905,6 +2035,9 @@ fn checked_static_environment(
                         CheckedStateFieldSchema::new(
                             field.name(),
                             field.type_name(),
+                            field
+                                .visibility()
+                                .map(|visibility| visibility.channel().to_string()),
                             PipelineSourceSpan::from_surface(field.span()).source_ref(),
                         )
                     })
@@ -2050,7 +2183,10 @@ fn build_checked_artifact(
         );
         let target = TypedStateRead::from_target(&ast, assignment.target());
         let expression = TypedExpression::from_surface(&ast, assignment.expression());
+        let observer_safe =
+            observer_visibility_channel(&ast, assignment.target()) == Some(OBSERVER_SAFE_CHANNEL);
         let owner_core = OwnerRmwCheckedCore {
+            authority_origin_locus: assignment.role_locus().to_string(),
             owner_locus: assignment.owner_locus().to_string(),
             target: target.clone(),
             expression,
@@ -2059,7 +2195,7 @@ fn build_checked_artifact(
             .when(assignment.event())
             .expect("accepted assignment is nested under its declared event");
         let mut request = EffectEntry::new(EffectKind::OwnerRequest, source_span.clone());
-        request.caller = Some(assignment.actor().to_string());
+        request.caller = Some(assignment.role_locus().to_string());
         request.owner = Some(assignment.owner_locus().to_string());
         let mut local_read = EffectEntry::new(EffectKind::OwnerLocalRead, source_span.clone());
         local_read.owner = Some(assignment.owner_locus().to_string());
@@ -2069,14 +2205,22 @@ fn build_checked_artifact(
         owner_write.owner = Some(assignment.owner_locus().to_string());
         owner_write.namespace = Some(target.namespace.clone());
         owner_write.field = target.field.clone();
+        let observer_publish = observer_safe.then(|| EffectEntry {
+            namespace: Some(target.namespace.clone()),
+            field: target.field.clone(),
+            redaction_label: Some(OBSERVER_SAFE_CHANNEL.to_string()),
+            failure: Some(VISIBILITY_DENIED_FAILURE.to_string()),
+            ..EffectEntry::new(EffectKind::ObserverPublish, source_span.clone())
+        });
         evaluations.push(CheckedEvaluation {
             kind: CheckedEvaluationKind::OwnerRmw,
             name: assignment.event().to_string(),
             result_name: None,
             actor_authority_origin: assignment.actor().to_string(),
+            authority_origin_locus: assignment.role_locus().to_string(),
             owner_evaluation_locus: assignment.owner_locus().to_string(),
             declared_failure_row: FailureRow::new(failure_row.failures().iter().cloned()),
-            generated_failure_row: FailureRow::new(OWNER_RMW_FAILURES),
+            generated_failure_row: FailureRow::new(owner_rmw_failure_names(observer_safe)),
             owner_rmw_core: Some(owner_core),
             relation_core: None,
             designated_core: None,
@@ -2088,9 +2232,20 @@ fn build_checked_artifact(
                 Materialization::Store,
             ),
             effect_row: EffectRow {
-                entries: vec![request, local_read, owner_write],
+                entries: [
+                    Some(request),
+                    Some(local_read),
+                    Some(owner_write),
+                    observer_publish,
+                ]
+                .into_iter()
+                .flatten()
+                .collect(),
             },
-            generated_obligations: GeneratedObligations::owner_rmw(source_span.clone()),
+            generated_obligations: GeneratedObligations::owner_rmw(
+                source_span.clone(),
+                observer_safe,
+            ),
         });
         for (kind, suffix) in [
             (SourceToCoreKind::OwnerRmw, "owner-rmw"),
@@ -2100,7 +2255,26 @@ fn build_checked_artifact(
             source_map.add(
                 source_span.clone(),
                 kind,
-                format!("{}:{suffix}", assignment.event()),
+                format!(
+                    "{}:{suffix}:principal={}:caller={}:owner={}",
+                    assignment.event(),
+                    assignment.actor(),
+                    assignment.role_locus(),
+                    assignment.owner_locus(),
+                ),
+            );
+        }
+        if observer_safe {
+            source_map.add(
+                source_span.clone(),
+                SourceToCoreKind::ObserverPublish,
+                format!(
+                    "{}:observer-publish:principal={}:caller={}:owner={}",
+                    assignment.event(),
+                    assignment.actor(),
+                    assignment.role_locus(),
+                    assignment.owner_locus(),
+                ),
             );
         }
     }
@@ -2132,6 +2306,7 @@ fn build_checked_artifact(
             name: relation.name().to_string(),
             result_name: None,
             actor_authority_origin: String::new(),
+            authority_origin_locus: String::new(),
             owner_evaluation_locus: relation.owner_locus().to_string(),
             declared_failure_row: FailureRow::new([] as [String; 0]),
             generated_failure_row: FailureRow::new([] as [String; 0]),
@@ -2249,6 +2424,7 @@ fn build_checked_artifact(
             name: evaluator.clone(),
             result_name: Some(designated.result().to_string()),
             actor_authority_origin: String::new(),
+            authority_origin_locus: String::new(),
             owner_evaluation_locus: String::new(),
             declared_failure_row: FailureRow::new([] as [String; 0]),
             generated_failure_row: FailureRow::new([] as [String; 0]),
@@ -2470,6 +2646,29 @@ fn declaration_consistency_diagnostic(ast: &SurfaceV0File) -> Option<SurfaceV0Pi
                 PipelineSourceSpan::from_surface(state.owner_locus_span()),
             ));
         }
+        if let Some(visibility) = state.visibility() {
+            if visibility.channel() != OBSERVER_SAFE_CHANNEL {
+                return Some(SurfaceV0PipelineDiagnostics::one(
+                    M7DiagnosticKind::UnexpectedSyntax,
+                    PipelineSourceSpan::from_surface(visibility.span()),
+                ));
+            }
+            let mut visible_fields = BTreeMap::new();
+            for declared in visibility.fields() {
+                if visible_fields.insert(declared.name(), ()).is_some() {
+                    return Some(SurfaceV0PipelineDiagnostics::one(
+                        M7DiagnosticKind::DuplicateStateField,
+                        PipelineSourceSpan::from_surface(declared.span()),
+                    ));
+                }
+                if state.field(declared.name()).is_none() {
+                    return Some(SurfaceV0PipelineDiagnostics::one(
+                        M7DiagnosticKind::UnknownStateField,
+                        PipelineSourceSpan::from_surface(declared.span()),
+                    ));
+                }
+            }
+        }
         for field in state.fields() {
             if !known_types(field.type_name()) {
                 return Some(SurfaceV0PipelineDiagnostics::one(
@@ -2531,14 +2730,28 @@ fn generated_failure_diagnostic(
             .when(assignment.event())
             .expect("accepted assignment has a declared event");
         let declared = FailureRow::new(when.failures().iter().cloned());
-        let generated = FailureRow::new(OWNER_RMW_FAILURES);
+        let observer_safe =
+            observer_visibility_channel(ast, assignment.target()) == Some(OBSERVER_SAFE_CHANNEL);
+        let generated = FailureRow::new(owner_rmw_failure_names(observer_safe));
         if !generated.is_subset_of(&declared) {
+            let Some(missing) = generated
+                .names()
+                .into_iter()
+                .find(|name| !declared.names().iter().any(|candidate| candidate == name))
+            else {
+                continue;
+            };
+            if missing == VISIBILITY_DENIED_FAILURE {
+                return Some(SurfaceV0PipelineDiagnostics::missing_generated_failure(
+                    PipelineSourceSpan::from_surface(assignment.span()),
+                    missing,
+                ));
+            }
             let lexeme = format!("fails ({})", when.failures().join(", "));
             let span = find_lexeme_in_span(source, when.span(), &lexeme)
                 .unwrap_or_else(|| PipelineSourceSpan::from_surface(when.span()));
-            return Some(SurfaceV0PipelineDiagnostics::one(
-                M7DiagnosticKind::GeneratedFailureNotDeclared,
-                span,
+            return Some(SurfaceV0PipelineDiagnostics::missing_generated_failure(
+                span, missing,
             ));
         }
     }
@@ -2557,10 +2770,15 @@ fn expression_diagnostic(
             Ok(value) => value,
             Err(diagnostic) => return Some(diagnostic),
         };
-        let expression_type = match bounded_expression_type(source, ast, assignment.expression()) {
-            Ok(value) => value,
-            Err(diagnostic) => return Some(diagnostic),
-        };
+        let parameters = ast
+            .when(assignment.event())
+            .expect("accepted assignment is nested under its declared event")
+            .parameters();
+        let expression_type =
+            match bounded_expression_type(source, ast, assignment.expression(), parameters) {
+                Ok(value) => value,
+                Err(diagnostic) => return Some(diagnostic),
+            };
         if let Some(expression_type) = expression_type
             && expression_type.0 != target_type.0
         {
@@ -2571,7 +2789,8 @@ fn expression_diagnostic(
         }
     }
     for designated in ast.designated_results() {
-        if let Err(diagnostic) = bounded_expression_type(source, ast, designated.expression()) {
+        if let Err(diagnostic) = bounded_expression_type(source, ast, designated.expression(), &[])
+        {
             return Some(diagnostic);
         }
     }
@@ -2616,18 +2835,33 @@ fn bounded_expression_type(
     source: &FixtureSource,
     ast: &SurfaceV0File,
     expression: &BoundedExpression,
+    parameters: &[Parameter],
 ) -> Result<Option<(String, PipelineSourceSpan)>, SurfaceV0PipelineDiagnostics> {
-    finite_expression_tree_type(source, ast, expression.tree()).map(Some)
+    finite_expression_tree_type(source, ast, expression.tree(), parameters).map(Some)
 }
 
 fn finite_expression_tree_type(
     source: &FixtureSource,
     ast: &SurfaceV0File,
     tree: &BoundedExpressionTree,
+    parameters: &[Parameter],
 ) -> Result<(String, PipelineSourceSpan), SurfaceV0PipelineDiagnostics> {
     match tree {
         BoundedExpressionTree::StateReference(reference) => {
             state_reference_type(source, ast, reference)
+        }
+        BoundedExpressionTree::Identifier { name, span } => {
+            let Some(parameter) = parameters.iter().find(|parameter| parameter.name() == name)
+            else {
+                return Err(SurfaceV0PipelineDiagnostics::one(
+                    M7DiagnosticKind::UnresolvedName,
+                    PipelineSourceSpan::from_surface(span),
+                ));
+            };
+            Ok((
+                parameter.type_name().to_string(),
+                PipelineSourceSpan::from_surface(span),
+            ))
         }
         BoundedExpressionTree::IntegerLiteral(literal) => Ok((
             "Int".to_string(),
@@ -2640,8 +2874,8 @@ fn finite_expression_tree_type(
         BoundedExpressionTree::Binary {
             span, left, right, ..
         } => {
-            let left_type = finite_expression_tree_type(source, ast, left)?;
-            let right_type = finite_expression_tree_type(source, ast, right)?;
+            let left_type = finite_expression_tree_type(source, ast, left, parameters)?;
+            let right_type = finite_expression_tree_type(source, ast, right, parameters)?;
             if left_type.0 != right_type.0 {
                 return Err(SurfaceV0PipelineDiagnostics::one(
                     M7DiagnosticKind::TypeMismatch,

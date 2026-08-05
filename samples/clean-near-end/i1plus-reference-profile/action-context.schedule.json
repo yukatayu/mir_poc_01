@@ -1,0 +1,551 @@
+{
+  "schema_version": "m10-i1plus-action-context-schedule-v0",
+  "kind": "typed_conformance_input",
+  "direct_mutation_api": false,
+  "cases": [
+    {
+      "id": "SCN01.roll.self.draw3",
+      "scn": "SCN-01",
+      "source": "scn-01/positive.mir",
+      "operation": {
+        "kind": "owner_event",
+        "event": "roll",
+        "principal": "self",
+        "arguments": {
+          "draw": 3
+        }
+      }
+    },
+    {
+      "id": "SCN02.attack.repeat2.step1",
+      "scn": "SCN-02",
+      "source": "scn-02/positive.mir",
+      "operation": {
+        "kind": "owner_event",
+        "event": "attack",
+        "principal": "self",
+        "target": "target",
+        "step": 1,
+        "seed": {
+          "player[target].hp": 100,
+          "player[self].atk": 10
+        }
+      }
+    },
+    {
+      "id": "SCN02.attack.repeat2.step2",
+      "scn": "SCN-02",
+      "source": "scn-02/positive.mir",
+      "operation": {
+        "kind": "owner_event",
+        "event": "attack",
+        "principal": "self",
+        "target": "target",
+        "step": 2,
+        "seed": {
+          "player[target].hp": 90,
+          "player[self].atk": 10
+        }
+      }
+    },
+    {
+      "id": "SCN02.attack.without_capability",
+      "scn": "SCN-02",
+      "source": "scn-02/positive.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "event": "attack",
+        "principal": "self",
+        "target": "target",
+        "missing": "capability"
+      }
+    },
+    {
+      "id": "SCN02.attack.stale_membership",
+      "scn": "SCN-02",
+      "source": "scn-02/positive.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "event": "attack",
+        "principal": "self",
+        "target": "target",
+        "membership": "stale"
+      }
+    },
+    {
+      "id": "SCN03.admission_then_start",
+      "scn": "SCN-03",
+      "source": "scn-03/positive.mir",
+      "operation": {
+        "kind": "admission_then_owner_event",
+        "event": "start",
+        "principal": "self"
+      }
+    },
+    {
+      "id": "SCN03.start_before_admission",
+      "scn": "SCN-03",
+      "source": "scn-03/negative-write-before-verdict.mir",
+      "operation": {
+        "kind": "owner_event_before_admission",
+        "event": "start",
+        "principal": "self"
+      }
+    },
+    {
+      "id": "SCN03.role_spoof",
+      "scn": "SCN-03",
+      "source": "scn-03/positive.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "event": "start",
+        "principal": "attacker",
+        "spoofed_role": "self"
+      }
+    },
+    {
+      "id": "SCN03.capability_replay",
+      "scn": "SCN-03",
+      "source": "scn-03/positive.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "event": "start",
+        "principal": "self",
+        "capability": "replayed_from_prior_epoch"
+      }
+    },
+    {
+      "id": "SCN04.leave.attack_stale",
+      "scn": "SCN-04",
+      "source": "scn-04/positive.mir",
+      "operation": {
+        "kind": "membership_lifecycle",
+        "events": [
+          "leave",
+          "attack_stale"
+        ]
+      }
+    },
+    {
+      "id": "SCN04.leave",
+      "scn": "SCN-04",
+      "source": "scn-04/positive.mir",
+      "operation": {
+        "kind": "membership_lifecycle",
+        "events": [
+          "leave"
+        ]
+      }
+    },
+    {
+      "id": "SCN04.compact_before_audit_cut",
+      "scn": "SCN-04",
+      "source": "scn-04/positive.mir",
+      "operation": {
+        "kind": "compaction_request",
+        "membership_frontier": "before_audit_cut"
+      }
+    },
+    {
+      "id": "SCN04.compact_after_audit_cut",
+      "scn": "SCN-04",
+      "source": "scn-04/positive.mir",
+      "operation": {
+        "kind": "compaction_request",
+        "membership_frontier": "after_audit_cut"
+      }
+    },
+    {
+      "id": "SCN04.rejoin",
+      "scn": "SCN-04",
+      "source": "scn-04/positive.mir",
+      "operation": {
+        "kind": "membership_lifecycle",
+        "events": [
+          "rejoin"
+        ],
+        "fresh_incarnation": true
+      }
+    },
+    {
+      "id": "SCN04.leave_then_rejoin_without_fresh_incarnation",
+      "scn": "SCN-04",
+      "source": "scn-04/negative-hidden-repair.mir",
+      "operation": {
+        "kind": "membership_lifecycle",
+        "events": [
+          "leave",
+          "rejoin"
+        ],
+        "fresh_incarnation": false
+      }
+    },
+    {
+      "id": "SCN05.leave_a.join_b.spawn_b",
+      "scn": "SCN-05",
+      "source": "scn-05/positive.mir",
+      "operation": {
+        "kind": "portal_handoff",
+        "events": [
+          "leave_a",
+          "join_b",
+          "spawn_b"
+        ]
+      }
+    },
+    {
+      "id": "SCN05.cross_locus_observation_request",
+      "scn": "SCN-05",
+      "source": "scn-05/negative-secret-cross-locus.mir",
+      "operation": {
+        "kind": "observation_request",
+        "request_class": "cross_locus_observation",
+        "validated_policy_carrier_ref": "portal-secret-redaction-policy"
+      }
+    },
+    {
+      "id": "SCN05.cross_locus_secret_request",
+      "scn": "SCN-05",
+      "source": "scn-05/negative-secret-cross-locus.mir",
+      "operation": {
+        "kind": "observation_request",
+        "request_class": "cross_locus_secret_read",
+        "validated_policy_carrier_ref": "portal-secret-redaction-policy"
+      }
+    },
+    {
+      "id": "SCN05.observation_wrong_capability",
+      "scn": "SCN-05",
+      "source": "scn-05/negative-secret-cross-locus.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "request_class": "cross_locus_secret_read",
+        "capability": "wrong_observation_capability",
+        "validated_policy_carrier_ref": "portal-secret-redaction-policy"
+      }
+    },
+    {
+      "id": "SCN06.route_absent",
+      "scn": "SCN-06",
+      "source": "scn-06/positive.mir",
+      "operation": {
+        "kind": "route_context",
+        "events": [
+          "invoke_before_patch"
+        ]
+      }
+    },
+    {
+      "id": "SCN06.invoke_before_patch.submit_checked_route_patch_artifact.invoke_after_patch",
+      "scn": "SCN-06",
+      "source": "scn-06/positive.mir",
+      "operation": {
+        "kind": "route_context",
+        "events": [
+          "invoke_before_patch",
+          "submit_checked_route_patch_artifact",
+          "invoke_after_patch"
+        ],
+        "route_patch_carrier_ref": "scn06-route-patch-east-west"
+      }
+    },
+    {
+      "id": "SCN06.route_absent_with_finite_turn_budget",
+      "scn": "SCN-06",
+      "source": "scn-06/positive.mir",
+      "operation": {
+        "kind": "route_context",
+        "events": [
+          "invoke_before_patch"
+        ],
+        "turn_budget": "finite"
+      }
+    },
+    {
+      "id": "SCN07.observer_projection",
+      "scn": "SCN-07",
+      "source": "scn-07/positive.mir",
+      "operation": {
+        "kind": "observer_projection",
+        "policy_carrier_ref": "observer-safe-position-only",
+        "channel": "observer_safe"
+      }
+    },
+    {
+      "id": "SCN07.admin_projection",
+      "scn": "SCN-07",
+      "source": "scn-07/positive.mir",
+      "operation": {
+        "kind": "observer_projection",
+        "policy_carrier_ref": "observer-safe-position-only",
+        "channel": "admin_debug"
+      }
+    },
+    {
+      "id": "SCN07.history_origin_violation",
+      "scn": "SCN-07",
+      "source": "scn-07/positive.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "projection": "observer_history",
+        "origin": "forged_without_redaction"
+      }
+    },
+    {
+      "id": "SCN08.live",
+      "scn": "SCN-08",
+      "source": "scn-08/positive.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "live"
+        ]
+      }
+    },
+    {
+      "id": "SCN08.lease_expiry",
+      "scn": "SCN-08",
+      "source": "scn-08/positive.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "lease_expiry"
+        ]
+      }
+    },
+    {
+      "id": "SCN08.write",
+      "scn": "SCN-08",
+      "source": "scn-08/positive.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "write"
+        ]
+      }
+    },
+    {
+      "id": "SCN08.rollback",
+      "scn": "SCN-08",
+      "source": "scn-08/positive.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "rollback"
+        ]
+      }
+    },
+    {
+      "id": "SCN08.fresh_reacquire",
+      "scn": "SCN-08",
+      "source": "scn-08/positive.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "fresh_reacquire"
+        ]
+      }
+    },
+    {
+      "id": "SCN08.write_after_read_lineage",
+      "scn": "SCN-08",
+      "source": "scn-08/negative-write-after-read-lineage.mir",
+      "operation": {
+        "kind": "lease_option_lifecycle",
+        "events": [
+          "write_after_read_lineage"
+        ]
+      }
+    },
+    {
+      "id": "SCN09.submit_checked_patch_a",
+      "scn": "SCN-09",
+      "operation": {
+        "kind": "submit_checked_patch_artifact",
+        "patch_carrier_ref": "scn09-candidate-a"
+      }
+    },
+    {
+      "id": "SCN09.membership_frontier_drift",
+      "scn": "SCN-09",
+      "operation": {
+        "kind": "membership_frontier_drift",
+        "events": [
+          "admit_patch",
+          "membership_changes",
+          "activate_checked_patch"
+        ],
+        "patch_carrier_ref": "scn09-candidate-a"
+      }
+    },
+    {
+      "id": "SCN09.membership_frontier_drift_between_admit_activation",
+      "scn": "SCN-09",
+      "operation": {
+        "kind": "membership_frontier_drift",
+        "events": [
+          "admit_patch",
+          "membership_changes",
+          "activate_checked_patch"
+        ],
+        "patch_carrier_ref": "scn09-candidate-a"
+      }
+    },
+    {
+      "id": "SCN10.save_s1",
+      "scn": "SCN-10",
+      "source": "scn-10/positive.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "save_s1"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.leave_a.lease_expiry.save_s2",
+      "scn": "SCN-10",
+      "source": "scn-10/positive.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "leave_a",
+          "lease_expiry",
+          "save_s2"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.load_s1_fresh",
+      "scn": "SCN-10",
+      "source": "scn-10/positive.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "load_s1_fresh"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.merge_stale_s1_into_current",
+      "scn": "SCN-10",
+      "source": "scn-10/negative-stale-restore.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "merge_stale_s1_into_current"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.doctor_expired_lease_live",
+      "scn": "SCN-10",
+      "source": "scn-10/negative-stale-restore.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "events": [
+          "doctor_expired_lease_live"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.doctor_cut_receive_without_send",
+      "scn": "SCN-10",
+      "source": "scn-10/negative-stale-restore.mir",
+      "operation": {
+        "kind": "corrupted_request",
+        "events": [
+          "doctor_cut_receive_without_send"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.timeline_panel",
+      "scn": "SCN-10",
+      "source": "scn-10/positive.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "timeline_panel"
+        ]
+      }
+    },
+    {
+      "id": "SCN10.reacquire_after_load",
+      "scn": "SCN-10",
+      "source": "scn-10/positive.mir",
+      "operation": {
+        "kind": "save_load_timeline",
+        "events": [
+          "reacquire_after_load"
+        ]
+      }
+    },
+    {
+      "id": "SCN11.designated_version",
+      "scn": "SCN-11",
+      "source": "scn-11/designated-version.mir",
+      "operation": {
+        "kind": "designated_consumption",
+        "designated_value_ref": "Evaluator.result",
+        "consumer": "self",
+        "version": 1
+      }
+    },
+    {
+      "id": "SCN11.duplicate_consumption",
+      "scn": "SCN-11",
+      "source": "scn-11/duplicate-consumption.mir",
+      "operation": {
+        "kind": "designated_consumption",
+        "designated_value_ref": "Evaluator.result",
+        "consumer": "self",
+        "version": 1,
+        "repeat": 2
+      }
+    },
+    {
+      "id": "SCN12.bird_relation",
+      "scn": "SCN-12",
+      "source": "scn-12/bird-relation.mir",
+      "operation": {
+        "kind": "relation_projection",
+        "relation": "bird_follow",
+        "consumer": "Viewer"
+      }
+    },
+    {
+      "id": "SCN12.split_frame",
+      "scn": "SCN-12",
+      "source": "scn-12/split-frame.mir",
+      "operation": {
+        "kind": "relation_projection",
+        "relation": "bird_follow",
+        "consumer": "Viewer",
+        "presentation_context": "split_frame"
+      }
+    },
+    {
+      "id": "SCN12.fallback",
+      "scn": "SCN-12",
+      "source": "scn-12/fallback.mir",
+      "operation": {
+        "kind": "relation_projection",
+        "relation": "bird_follow",
+        "consumer": "Viewer",
+        "presentation_context": "fallback"
+      }
+    },
+    {
+      "id": "SCN12.reacquire",
+      "scn": "SCN-12",
+      "source": "scn-12/reacquire.mir",
+      "operation": {
+        "kind": "relation_projection",
+        "relation": "bird_follow",
+        "consumer": "Viewer",
+        "presentation_context": "fresh_reacquire"
+      }
+    }
+  ]
+}

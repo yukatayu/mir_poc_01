@@ -2,7 +2,7 @@
 id: spec/09-m8-deterministic-runtime
 status: L1-fixed
 maturity: draft
-depends_on: [spec/05-runtime-semantics, spec/08-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0023]
+depends_on: [spec/05-runtime-semantics, spec/08-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0023, adr/ADR-0025]
 summary: M8 reference runtimeのchecked-artifact-only input、finite admission、deterministic trace/state output boundary。
 open_items: []
 ---
@@ -38,6 +38,12 @@ carrier names are not a public API, ABI, wire, or diagnostic catalog.
 
 `RuntimeAdmitted` is an M8 result.  It does not mutate M7
 `execution_is_admissible` or make an unresolved M7 residual disappear.
+
+M10 may use a separate crate-private, provisional bridge only after M9
+source-bound resolution. The bridge losslessly translates M9-issued active
+membership, capability, and witness records into the typed M8 authority
+inventory; it never exposes provider proof, changes direct M8
+`AuthDeferred`/`VerifyDeferred` handling, or auto-attaches a `ContractUpdate`.
 
 Admission validates only the declared lease reference, binding frontier, and
 primary/fallback epochs. It does not prove or read a current live lease

@@ -2,7 +2,7 @@
 id: spec/08-m7-checked-elaboration
 status: L1-fixed
 maturity: draft
-depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022]
+depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025]
 summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、生成義務、residual、非実行境界。
 open_items: []
 ---
@@ -57,6 +57,7 @@ JSON, ABI, wire, or diagnostic-catalog names.
 | M7 condition | Typed result | Required non-effect |
 |---|---|---|
 | M6 parse/classification diagnostic | corresponding forwarded `M7DiagnosticKind` | no executable Core |
+| unknown/duplicate `visible observer_safe fields (...)` name | `UnknownObserverSafeField` / `DuplicateObserverSafeField` at declaration-token span | no executable Core or profile-only visibility fallback |
 | duplicate declaration | `DuplicateDeclaration` at duplicate declaration span | no executable Core |
 | unresolved target field | `UnknownStateField` at field span | no executable Core |
 | generated owner failure absent from `fails(...)` | `GeneratedFailureNotDeclared` at failure-row span | no executable Core |
@@ -68,16 +69,26 @@ JSON, ABI, wire, or diagnostic-catalog names.
 | designated result | `DesignatedPublishValue` + `ValueVisibilityRedaction` residual | no binding-frontier conversion |
 | `with auth` / `verify` | `AuthDeferred` / `VerifyDeferred` residual | no grant, proof verdict, effect, mutation, or execution admission |
 | explicit execution demand on unresolved residual artifact | `ResidualCannotExecute` | no runtime success |
+| write to explicitly observer-safe declared field | source-bound `ObserverSafePublish` effect plus `VisibilityDenied` failure entry | no provider proof, hidden observer policy, or implicit public release |
+| `Role[self] at L_actor { ... at L_owner { ... } }`, including `L_actor != L_owner` | owner RMW with authority origin `L_actor` and evaluation/request site `L_owner` | locus difference alone is not a diagnostic or authority grant; target owner must equal `L_owner`, same-owner RHS reads resolve at `L_owner`, and `RouteUnavailable` remains generated |
 
-For a valid owner RMW, the generated failure row is exactly the finite
-`StaleMembership`, `MissingCapability`, `MissingWitness`, and
-`RouteUnavailable` row, and it must be a subset of the declared row. The
-artifact separately retains capability, witness, and `OwnerRmw` evaluation
-obligations. Relation publication retains `Authority` plus
+For a valid owner RMW without an observer-safe write, the generated failure
+row is exactly the finite `StaleMembership`, `MissingCapability`,
+`MissingWitness`, and `RouteUnavailable` row, and it must be a subset of the
+declared row. The M10 observer-safe write seam retains that base row and adds
+`VisibilityDenied`; its full row must likewise be declared. The artifact
+separately retains capability, witness, and `OwnerRmw` evaluation obligations.
+Relation publication retains `Authority` plus
 `PublishRelation` evaluation, and designated value publication retains
 `AdmittedEvaluatorAuthority` plus `DesignatedPublishValue` evaluation. An
 obligation is evidence required by a later consumer, not the associated
 authority/capability/effect itself.
+
+The bounded M10 direct consumer reads a `Role[self] at L_actor` header as an
+authority origin and the nested `at L_owner` as the owner evaluation/request
+site. It accepts different loci without treating the request as a grant. A
+checked owner RMW instead requires the target state owner to equal `L_owner`;
+its same-owner RHS reads remain local to `L_owner`, never to `L_actor`.
 
 Every `CheckedEvaluation` has orthogonal M3 `SemanticForm`, `EvaluationSite`,
 `TriggerClock`, `AuthorityOrigin`, and `Materialization` axes, plus a typed
@@ -99,6 +110,13 @@ are M8 input evidence, not M8 execution or transport/delivery behavior. Its
 axes use `SemanticForm::Value`, and `InputFrontier(F)` is distinct from the
 result frontier. `Authority` and `AdmittedEvaluatorAuthority` are obligations,
 not authority-success evidence.
+
+The bounded M10 direct consumer may additionally retain the source declaration
+profile for `visible observer_safe fields (...)`: unlisted state fields are
+private. Only a write to a listed field has `ObserverSafePublish` and
+`VisibilityDenied`; a private-field write has neither. This does not grant an
+observer release or make visibility profile metadata outside the checked
+identity.
 
 ## Residual admission rule
 

@@ -16,7 +16,7 @@ profile as the direct source input to M7.  The selected source forms are:
 
 ```text
 module / locus / principal / type / indexed state-with-fields
-Role[self] at S { when h(...) fails (...) { at S { field = expr } } }
+Role[self] at L_actor { when h(...) fails (...) { at L_owner { field = expr } } }
 relation name at S { subject/primary/fallback/bind/publish/project }
 designated evaluate E on tick F publish result = expr
 with auth MembershipAuth
@@ -28,10 +28,12 @@ subject type, primary/fallback anchor plus epoch/transform, binding frontier,
 `publish relation`, and optional `project at C local`. Its syntactically valid
 `publish value` sibling is a typed diagnostic, not a relation lowering.
 `fails(...)` is mandatory, including `fails()` for an empty declared row.
-The actor form has literal `self`, not an inferred authority binder.  Its
-`at S` records the owner evaluation site; `Role[self]` remains the authority
-origin.  The nested owner action also writes `at S`, and a mismatch is a typed
-static diagnostic.
+The actor form has literal `self`, not an inferred authority binder.
+`Role[self] at L_actor` records authority origin, while nested `at L_owner`
+records the owner evaluation/request site. The loci may differ without an
+authority grant; the target state's declared owner must instead equal
+`L_owner`. Same-owner RHS reads resolve at `L_owner`, and `RouteUnavailable`
+remains in the generated failure row.
 
 The parser rejects any non-`self` role actor as `RoleActorMustBeLiteralSelf`.
 Before owner-RMW lowering, a fieldless target is

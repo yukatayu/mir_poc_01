@@ -64,6 +64,12 @@ impl M8ObserverAuthorityGrant {
         self
     }
 
+    /// Crate-private bridge inspection only.  The reference is emitted in
+    /// typed observer policy matching; it is not a public credential export.
+    pub(crate) fn reference(&self) -> &str {
+        &self.reference
+    }
+
     fn admits(&self, policy: &M8ObserverPolicy) -> bool {
         self.admitted
             && self.principal.as_deref() == Some(policy.observer_principal())
@@ -369,6 +375,7 @@ impl M8ObserverDiagnostics {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum M8ObserverRowKind {
     OwnerWrite,
+    PatchStateInitialized,
     RelationLineage,
     DesignatedValue,
 }
@@ -508,6 +515,18 @@ impl M8ObserverRuntime {
         }
     }
 
+    /// Crate-private bridge for an observer export over an already executing
+    /// local M8 session.  This avoids reconstructing state for M10 evidence.
+    pub(crate) fn from_local_session(
+        session: M8LocalRuntime,
+        observer_authorities: Vec<M8ObserverAuthorityGrant>,
+    ) -> Self {
+        Self {
+            session,
+            observer_authorities,
+        }
+    }
+
     pub fn enqueue_owner(
         &mut self,
         request: M8OwnerRequest,
@@ -604,6 +623,15 @@ impl M8ObserverRuntime {
             rows.push(redacted_row(
                 M8ObserverRowKind::OwnerWrite,
                 "owner-write",
+                policy,
+                observation,
+            ));
+        }
+        if let Some(observation) = trace.latest_observation(M8LocalTraceKind::PatchStateInitialized)
+        {
+            rows.push(redacted_row(
+                M8ObserverRowKind::PatchStateInitialized,
+                "patch-state-initialization",
                 policy,
                 observation,
             ));

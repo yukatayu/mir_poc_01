@@ -1,0 +1,21 @@
+module M10.Scn10.NegativeStaleRestore
+
+locus World
+locus BrowserClient
+principal self
+type Player
+
+state player[id: Player] at World {
+  hp: Int
+}
+
+Role[self] at BrowserClient {
+  when checkpoint(delta: Int) fails (MissingCapability, MissingWitness, RouteUnavailable, StaleMembership) {
+    at World {
+      player[self].hp = player[self].hp + delta
+    }
+  }
+}
+
+with auth MembershipAuth
+verify finite_refinement

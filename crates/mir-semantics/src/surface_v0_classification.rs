@@ -49,6 +49,7 @@ pub enum SourceToCoreKind {
     OwnerRmw,
     OwnerLocalRead,
     OwnerLocalWrite,
+    ObserverPublish,
     DesignatedDecision,
     PublishRelation,
     ConsumerLocalProjection,
@@ -478,12 +479,6 @@ pub fn classify_surface_v0(
     ast: &SurfaceV0File,
     _: SurfaceV0ClassificationOptions,
 ) -> Result<SurfaceV0Classification, SurfaceV0Diagnostics> {
-    let owner_action_locus_diagnostics = owner_action_locus_diagnostics(ast);
-    if !owner_action_locus_diagnostics.is_empty() {
-        return Err(SurfaceV0Diagnostics {
-            entries: owner_action_locus_diagnostics,
-        });
-    }
     let assignment_target_diagnostics = assignment_target_diagnostics(ast);
     if !assignment_target_diagnostics.is_empty() {
         return Err(SurfaceV0Diagnostics {
@@ -658,7 +653,7 @@ fn name_resolution_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> 
     for role in ast.roles() {
         for when in role.whens() {
             for parameter in when.parameters() {
-                if !type_names.contains(parameter.type_name()) {
+                if parameter.type_name() != "Int" && !type_names.contains(parameter.type_name()) {
                     diagnostics.push(SurfaceV0Diagnostic::new(
                         SurfaceV0DiagnosticKind::UnresolvedName,
                         parameter.type_span().clone(),
@@ -710,20 +705,6 @@ fn relation_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> {
         ));
     }
     diagnostics
-}
-
-fn owner_action_locus_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> {
-    ast.assignments()
-        .iter()
-        .filter(|assignment| assignment.role_locus() != assignment.owner_locus())
-        .map(|assignment| {
-            SurfaceV0Diagnostic::new(
-                SurfaceV0DiagnosticKind::OwnerActionLocusMismatch,
-                assignment.owner_locus_span().clone(),
-                DiagnosticCode::OwnerActionLocusMismatch,
-            )
-        })
-        .collect()
 }
 
 fn assignment_target_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> {

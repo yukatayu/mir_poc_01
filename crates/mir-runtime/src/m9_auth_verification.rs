@@ -10,7 +10,7 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use mir_semantics::{
     m9_finite_refinement::{M9FiniteContractDelta, M9FiniteRefinementDischarge},
-    shared_model::SourceRef,
+    shared_model::{ResultVersion, SourceRef},
     surface_v0_pipeline::{
         CheckedProgramIdentity, CheckedSourceMapEntry, CheckedSurfaceV0, ResidualObligationKind,
     },
@@ -20,6 +20,14 @@ use crate::m8_runtime_admission::{
     M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base, M8RuntimeAdmission,
     M8RuntimeInstance, materialize_m9_resolved_base, prepare_deferred_m9_base,
 };
+use crate::m8_runtime_authority::{
+    M8AuthorityState, M8CapabilityGrant, M8MembershipRecord, M8WitnessRecord,
+};
+use crate::m8_runtime_designated_value::M8DesignatedAuthorityUse;
+use crate::m8_runtime_observer::M8ObserverAuthorityGrant;
+use crate::m8_runtime_owner_queue::M8AuthorityUse;
+use crate::m8_runtime_patch::M8PatchAuthorityUse;
+use crate::m8_runtime_relation_projection::M8RelationAuthorityUse;
 
 const M9_AUTH_CONTRACT_PREFIX: &str = "membership-authority/";
 const M9_VERIFY_CONTRACT: &str = "finite-refinement/MembershipAuth";
@@ -34,6 +42,8 @@ pub struct M9SourceArtifact {
     program_identity: CheckedProgramIdentity,
     root_source_ref: SourceRef,
     owner_evaluation_scopes: BTreeSet<(String, String)>,
+    relation_scopes: BTreeSet<(String, String, String)>,
+    designated_scopes: BTreeSet<(String, String, String)>,
 }
 
 impl M9SourceArtifact {
@@ -53,6 +63,41 @@ impl M9SourceArtifact {
                     })
                 })
                 .collect(),
+            relation_scopes: checked
+                .evaluations()
+                .iter()
+                .filter_map(|evaluation| {
+                    evaluation.relation_core().map(|relation| {
+                        (
+                            evaluation.name().to_string(),
+                            relation.owner_locus().to_string(),
+                            relation
+                                .binding_frontier()
+                                .as_slice()
+                                .first()
+                                .map_or_else(String::new, |occurrence| {
+                                    occurrence.as_str().to_string()
+                                }),
+                        )
+                    })
+                })
+                .collect(),
+            designated_scopes: checked
+                .evaluations()
+                .iter()
+                .filter_map(|evaluation| {
+                    evaluation.designated_core().map(|designated| {
+                        (
+                            designated.evaluator().to_string(),
+                            designated.result().to_string(),
+                            designated
+                                .trigger()
+                                .frontier()
+                                .map_or_else(String::new, ToString::to_string),
+                        )
+                    })
+                })
+                .collect(),
         }
     }
 
@@ -64,9 +109,47 @@ impl M9SourceArtifact {
         &self.root_source_ref
     }
 
+    /// Internal M10 negative-validation seam.  The ordinary construction path
+    /// remains `from_checked_surface`; this only permits the reference system
+    /// to present a deliberately non-matching retained source artifact to the
+    /// existing M9 outer-admission validator.
+    pub(crate) fn with_validation_program_identity(
+        mut self,
+        program_identity: CheckedProgramIdentity,
+    ) -> Self {
+        self.program_identity = program_identity;
+        self
+    }
+
     fn contains_owner_evaluation_scope(&self, evaluation: &str, owner_locus: &str) -> bool {
         self.owner_evaluation_scopes
             .contains(&(evaluation.to_string(), owner_locus.to_string()))
+    }
+
+    fn contains_relation_scope(
+        &self,
+        relation: &str,
+        owner_locus: &str,
+        binding_frontier: &str,
+    ) -> bool {
+        self.relation_scopes.contains(&(
+            relation.to_string(),
+            owner_locus.to_string(),
+            binding_frontier.to_string(),
+        ))
+    }
+
+    fn contains_designated_scope(
+        &self,
+        evaluator: &str,
+        result: &str,
+        input_frontier: &str,
+    ) -> bool {
+        self.designated_scopes.contains(&(
+            evaluator.to_string(),
+            result.to_string(),
+            input_frontier.to_string(),
+        ))
     }
 }
 
@@ -225,6 +308,9 @@ pub enum M9AdmissionErrorKind {
     ConflictingCapabilityReference,
     DuplicateWitnessReference,
     ConflictingWitnessReference,
+    InvalidAuthorityCut,
+    ReplayedAuthorityCut,
+    CompactionBeforeAuditCut,
     MissingVerifyDischarge,
 }
 
@@ -391,6 +477,13 @@ impl M9AdmittedBase {
             program_identity: self.program_identity.clone(),
             evidence: self.m8_base_evidence.clone(),
         }
+    }
+
+    /// Reserved M10 composition hook.  The authority runtime is initialized
+    /// from the exact outer admission retained by this base; callers cannot
+    /// substitute a provider or a different checked artifact.
+    pub(crate) fn authority_runtime(&self) -> M9AuthorityRuntime {
+        M9AuthorityRuntime::from_outer_admission(self.outer_admission.clone())
     }
 
     #[allow(dead_code)] // Called only by the reserved crate-private M10 seam.
@@ -572,6 +665,162 @@ pub struct M9RuntimeAdmitted {
     evidence: M9FinalAdmissionEvidence,
 }
 
+/// Crate-private M9-to-M8 execution material.  Only the final M9 judgment
+/// creates this carrier; it exposes neither provider data nor an authority
+/// constructor to callers.
+pub(crate) struct M9M10ExecutionSeam {
+    instance: M8RuntimeInstance,
+    authority_state: M8AuthorityState,
+    authority_snapshot_projection: String,
+    authority_membership_projection: String,
+    authority_grant_projection: String,
+    owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
+    patch_uses: BTreeMap<(String, String, String), M8PatchAuthorityUse>,
+    relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
+    designated_evaluation_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
+    designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
+    observer_authorities: BTreeMap<String, M8ObserverAuthorityGrant>,
+    translation_refs: BTreeMap<String, (String, String, String)>,
+}
+
+/// A sealed M9 authority snapshot translated for one already-admitted M8
+/// execution session.  This is intentionally crate-private: only M9 may
+/// materialize M8 authority records from authenticated M9 lineage.
+#[derive(Clone)]
+pub(crate) struct M9M10AuthorityBridge {
+    authority_state: M8AuthorityState,
+    authority_snapshot_projection: String,
+    owner_use: Option<(String, String, M8AuthorityUse)>,
+    patch_use: Option<M8PatchAuthorityUse>,
+    relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
+}
+
+impl M9M10AuthorityBridge {
+    pub(crate) fn authority_state(&self) -> M8AuthorityState {
+        self.authority_state.clone()
+    }
+
+    pub(crate) fn authority_snapshot_projection(&self) -> &str {
+        &self.authority_snapshot_projection
+    }
+
+    pub(crate) fn owner_use(&self) -> Option<(String, String, M8AuthorityUse)> {
+        self.owner_use.clone()
+    }
+
+    pub(crate) fn patch_use(&self) -> Option<M8PatchAuthorityUse> {
+        self.patch_use.clone()
+    }
+
+    /// Return the exact M8 relation transition use derived from an active M9
+    /// membership/capability/witness lineage.  This remains an internal
+    /// bridge accessor; it does not mint M8 authority.
+    pub(crate) fn relation_authority_use(
+        &self,
+        relation: &str,
+        transition: &str,
+    ) -> Option<M8RelationAuthorityUse> {
+        self.relation_uses
+            .get(&(relation.to_string(), transition.to_string()))
+            .cloned()
+    }
+}
+
+impl M9M10ExecutionSeam {
+    pub(crate) fn into_parts(self) -> (M8RuntimeInstance, M8AuthorityState) {
+        (self.instance, self.authority_state)
+    }
+
+    pub(crate) fn canonical_m9_snapshot_projection(&self) -> &str {
+        &self.authority_snapshot_projection
+    }
+
+    pub(crate) fn canonical_m9_membership_projection(&self) -> &str {
+        &self.authority_membership_projection
+    }
+
+    pub(crate) fn canonical_m9_grant_projection(&self) -> &str {
+        &self.authority_grant_projection
+    }
+
+    pub(crate) fn owner_authority_use(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M8AuthorityUse> {
+        self.owner_uses
+            .get(&(
+                evaluation.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .cloned()
+    }
+
+    /// M10's patch route can only consume the already admitted M9
+    /// ContractUpdate lineage.  This is an explicit execution use, not an
+    /// automatic contract attachment or a provider/minting API.
+    pub(crate) fn patch_authority_use(
+        &self,
+        patch_program: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M8PatchAuthorityUse> {
+        self.patch_uses
+            .get(&(
+                patch_program.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .cloned()
+    }
+
+    pub(crate) fn relation_authority_use(
+        &self,
+        relation: &str,
+        transition: &str,
+    ) -> Option<M8RelationAuthorityUse> {
+        self.relation_uses
+            .get(&(relation.to_string(), transition.to_string()))
+            .cloned()
+    }
+
+    pub(crate) fn designated_evaluation_authority_use(
+        &self,
+        evaluator: &str,
+        result: &str,
+    ) -> Option<M8DesignatedAuthorityUse> {
+        self.designated_evaluation_uses
+            .get(&(evaluator.to_string(), result.to_string()))
+            .cloned()
+    }
+
+    pub(crate) fn designated_consumption_authority_use(
+        &self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Option<M8DesignatedAuthorityUse> {
+        self.designated_consumption_uses
+            .get(&(consumer.to_string(), value_name.to_string()))
+            .cloned()
+    }
+
+    pub(crate) fn observer_authority(
+        &self,
+        observer_principal: &str,
+    ) -> Option<M8ObserverAuthorityGrant> {
+        self.observer_authorities.get(observer_principal).cloned()
+    }
+
+    pub(crate) fn translation_refs(
+        &self,
+        capability_ref: &str,
+    ) -> Option<&(String, String, String)> {
+        self.translation_refs.get(capability_ref)
+    }
+}
+
 impl std::fmt::Debug for M9RuntimeAdmitted {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
@@ -618,9 +867,363 @@ impl M9RuntimeAdmitted {
     /// Reserved for M10 composition.  The result is crate-private so the
     /// resolved M9 wrapper, not a public constructor, remains the route into
     /// owner/relation/designated execution.
-    #[allow(dead_code)] // M10 consumes this sealed carrier in a later milestone.
+    /// Materialize the M8 execution plan and only the active owner-evaluation
+    /// lineage already sealed in this M9 admission.  ContractUpdate records
+    /// remain evidence for the final M9 judgment; this bridge neither applies
+    /// an update nor exposes a provider or minting path.
+    pub(crate) fn into_m10_execution_seam(self) -> M9M10ExecutionSeam {
+        let M9RuntimeAdmitted {
+            base,
+            authority_runtime,
+            evidence: _,
+        } = self;
+        let snapshot = authority_runtime.authority_snapshot();
+        let authority_snapshot_projection = authority_runtime.canonical_snapshot_projection();
+        let authority_membership_projection = authority_runtime.canonical_membership_projection();
+        let authority_grant_projection = authority_runtime.canonical_grant_projection();
+        let mut authority_state = M8AuthorityState::new();
+        for membership in snapshot.memberships.values().filter(|membership| {
+            membership.active
+                && snapshot
+                    .current_memberships
+                    .get(&(membership.principal.clone(), membership.locus.clone()))
+                    == Some(&membership.reference)
+        }) {
+            authority_state = authority_state.with_membership_record(
+                M8MembershipRecord::already_admitted(membership.reference.clone())
+                    .with_principal(membership.principal.clone())
+                    .with_locus(membership.locus.clone())
+                    .with_epoch(membership.epoch.clone()),
+            );
+        }
+
+        let mut owner_uses = BTreeMap::new();
+        let mut patch_uses = BTreeMap::new();
+        let mut relation_uses = BTreeMap::new();
+        let mut designated_evaluation_uses = BTreeMap::new();
+        let mut designated_consumption_uses = BTreeMap::new();
+        let mut observer_authorities = BTreeMap::new();
+        let mut translation_refs = BTreeMap::new();
+        for capability in snapshot
+            .capabilities
+            .values()
+            .filter(|capability| capability.active)
+        {
+            let M9CapabilityScope::OwnerEvaluation {
+                evaluation,
+                owner_locus,
+            } = &capability.scope
+            else {
+                continue;
+            };
+            let Some(membership) = snapshot.memberships.get(&capability.membership_ref) else {
+                continue;
+            };
+            if !membership.active
+                || membership.epoch != capability.lineage_epoch
+                || snapshot
+                    .current_memberships
+                    .get(&(membership.principal.clone(), membership.locus.clone()))
+                    != Some(&membership.reference)
+            {
+                continue;
+            }
+            authority_state = authority_state.with_capability_grant(
+                M8CapabilityGrant::already_admitted(capability.reference.clone())
+                    .for_owner_evaluation(evaluation.clone())
+                    .with_owner_locus(owner_locus.clone())
+                    .with_principal(membership.principal.clone())
+                    .with_membership_ref(membership.reference.clone())
+                    .with_epoch(membership.epoch.clone()),
+            );
+            if let Some(witness) = snapshot.witnesses.values().find(|witness| {
+                witness.live
+                    && witness.membership_ref == membership.reference
+                    && witness.capability_ref == capability.reference
+            }) {
+                authority_state = authority_state.with_witness_record(
+                    M8WitnessRecord::live(witness.reference.clone())
+                        .for_capability(capability.reference.clone())
+                        .with_membership_ref(membership.reference.clone())
+                        .with_epoch(membership.epoch.clone()),
+                );
+                owner_uses.insert(
+                    (
+                        evaluation.clone(),
+                        membership.principal.clone(),
+                        owner_locus.clone(),
+                    ),
+                    M8AuthorityUse::for_principal(membership.principal.clone())
+                        .with_membership_ref(membership.reference.clone())
+                        .with_capability_ref(capability.reference.clone())
+                        .with_witness_ref(witness.reference.clone()),
+                );
+                translation_refs.insert(
+                    capability.reference.clone(),
+                    (
+                        membership.reference.clone(),
+                        capability.reference.clone(),
+                        witness.reference.clone(),
+                    ),
+                );
+            }
+        }
+        for capability in snapshot
+            .capabilities
+            .values()
+            .filter(|capability| capability.active)
+        {
+            let M9CapabilityScope::ContractUpdate { module, .. } = &capability.scope else {
+                continue;
+            };
+            let Some(membership) = snapshot.memberships.get(&capability.membership_ref) else {
+                continue;
+            };
+            if !membership.active
+                || membership.epoch != capability.lineage_epoch
+                || snapshot
+                    .current_memberships
+                    .get(&(membership.principal.clone(), membership.locus.clone()))
+                    != Some(&membership.reference)
+            {
+                continue;
+            }
+            let Some(witness) = snapshot.witnesses.values().find(|witness| {
+                witness.live
+                    && witness.membership_ref == membership.reference
+                    && witness.capability_ref == capability.reference
+            }) else {
+                continue;
+            };
+            authority_state = authority_state.with_capability_grant(
+                M8CapabilityGrant::already_admitted(capability.reference.clone())
+                    .for_patch_activation(module.clone())
+                    .with_owner_locus(membership.locus.clone())
+                    .with_principal(membership.principal.clone())
+                    .with_membership_ref(membership.reference.clone())
+                    .with_epoch(membership.epoch.clone()),
+            );
+            authority_state = authority_state.with_witness_record(
+                M8WitnessRecord::live(witness.reference.clone())
+                    .for_capability(capability.reference.clone())
+                    .with_membership_ref(membership.reference.clone())
+                    .with_epoch(membership.epoch.clone()),
+            );
+            patch_uses.insert(
+                (
+                    module.clone(),
+                    membership.principal.clone(),
+                    membership.locus.clone(),
+                ),
+                M8PatchAuthorityUse::for_patch_program(module.clone())
+                    .with_owner_locus(membership.locus.clone())
+                    .with_principal(membership.principal.clone())
+                    .with_membership_ref(membership.reference.clone())
+                    .with_capability_ref(capability.reference.clone())
+                    .with_witness_ref(witness.reference.clone()),
+            );
+            translation_refs.insert(
+                capability.reference.clone(),
+                (
+                    membership.reference.clone(),
+                    capability.reference.clone(),
+                    witness.reference.clone(),
+                ),
+            );
+        }
+        for capability in snapshot
+            .capabilities
+            .values()
+            .filter(|capability| capability.active)
+        {
+            let Some(membership) = snapshot.memberships.get(&capability.membership_ref) else {
+                continue;
+            };
+            let Some(witness) = snapshot.witnesses.values().find(|witness| {
+                witness.live
+                    && witness.membership_ref == membership.reference
+                    && witness.capability_ref == capability.reference
+            }) else {
+                continue;
+            };
+            if !membership.active
+                || membership.epoch != capability.lineage_epoch
+                || snapshot
+                    .current_memberships
+                    .get(&(membership.principal.clone(), membership.locus.clone()))
+                    != Some(&membership.reference)
+            {
+                continue;
+            }
+            match &capability.scope {
+                M9CapabilityScope::RelationTransition {
+                    relation,
+                    transition,
+                    owner_locus,
+                    binding_frontier: _,
+                } => {
+                    // M9's membership epoch authenticates the authority
+                    // lineage.  M8's relation binding epoch is a separate
+                    // semantic clock, so translate the admitted transition
+                    // into the exact M8 epoch that it is allowed to serve.
+                    let execution_binding_epoch = match transition.as_str() {
+                        "invalidate_primary" => "binding_epoch:1".to_string(),
+                        "reacquire_primary" => "binding_epoch:2".to_string(),
+                        other => format!("m9-transition:{other}:{}", capability.reference),
+                    };
+                    authority_state = authority_state.with_capability_grant(
+                        M8CapabilityGrant::already_admitted(capability.reference.clone())
+                            .for_relation_transition(relation.clone(), transition.clone())
+                            .with_owner_locus(owner_locus.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_epoch(membership.epoch.clone())
+                            .with_binding_epoch(execution_binding_epoch.clone()),
+                    );
+                    authority_state = authority_state.with_witness_record(
+                        M8WitnessRecord::live(witness.reference.clone())
+                            .for_capability(capability.reference.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    relation_uses.insert(
+                        (relation.clone(), transition.clone()),
+                        M8RelationAuthorityUse::for_relation(relation.clone())
+                            .with_owner_locus(owner_locus.clone())
+                            .with_transition(transition.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_capability_ref(capability.reference.clone())
+                            .with_membership_epoch(membership.epoch.clone())
+                            .with_binding_epoch(execution_binding_epoch)
+                            .with_witness_ref(witness.reference.clone())
+                            .with_witness_epoch(membership.epoch.clone()),
+                    );
+                    translation_refs.insert(
+                        capability.reference.clone(),
+                        (
+                            membership.reference.clone(),
+                            capability.reference.clone(),
+                            witness.reference.clone(),
+                        ),
+                    );
+                }
+                M9CapabilityScope::DesignatedEvaluation {
+                    evaluator,
+                    result,
+                    input_frontier,
+                } => {
+                    authority_state = authority_state.with_capability_grant(
+                        M8CapabilityGrant::already_admitted(capability.reference.clone())
+                            .for_designated_evaluation(evaluator.clone(), result.clone())
+                            .with_evaluator_locus(evaluator.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_input_frontier(input_frontier.clone())
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    authority_state = authority_state.with_witness_record(
+                        M8WitnessRecord::live(witness.reference.clone())
+                            .for_capability(capability.reference.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    designated_evaluation_uses.insert(
+                        (evaluator.clone(), result.clone()),
+                        M8DesignatedAuthorityUse::for_evaluator(evaluator.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_capability_ref(capability.reference.clone())
+                            .with_witness_ref(witness.reference.clone()),
+                    );
+                    translation_refs.insert(
+                        capability.reference.clone(),
+                        (
+                            membership.reference.clone(),
+                            capability.reference.clone(),
+                            witness.reference.clone(),
+                        ),
+                    );
+                }
+                M9CapabilityScope::DesignatedConsumption {
+                    consumer,
+                    value_name,
+                    result_version,
+                } => {
+                    authority_state = authority_state.with_capability_grant(
+                        M8CapabilityGrant::already_admitted(capability.reference.clone())
+                            .for_designated_consumption(consumer.clone(), value_name.clone())
+                            .with_consumer_locus(consumer.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_result_version(ResultVersion::new(*result_version))
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    authority_state = authority_state.with_witness_record(
+                        M8WitnessRecord::live(witness.reference.clone())
+                            .for_capability(capability.reference.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    designated_consumption_uses.insert(
+                        (consumer.clone(), value_name.clone()),
+                        M8DesignatedAuthorityUse::for_consumer(consumer.clone())
+                            .with_principal(membership.principal.clone())
+                            .with_membership_ref(membership.reference.clone())
+                            .with_capability_ref(capability.reference.clone())
+                            .with_witness_ref(witness.reference.clone()),
+                    );
+                    translation_refs.insert(
+                        capability.reference.clone(),
+                        (
+                            membership.reference.clone(),
+                            capability.reference.clone(),
+                            witness.reference.clone(),
+                        ),
+                    );
+                }
+                M9CapabilityScope::Observation {
+                    observer_principal, ..
+                } => {
+                    observer_authorities.insert(
+                        observer_principal.clone(),
+                        M8ObserverAuthorityGrant::already_admitted(capability.reference.clone())
+                            .for_principal(observer_principal.clone())
+                            .with_epoch(membership.epoch.clone()),
+                    );
+                    translation_refs.insert(
+                        capability.reference.clone(),
+                        (
+                            membership.reference.clone(),
+                            capability.reference.clone(),
+                            witness.reference.clone(),
+                        ),
+                    );
+                }
+                M9CapabilityScope::OwnerEvaluation { .. }
+                | M9CapabilityScope::ContractUpdate { .. } => {}
+            }
+        }
+        let instance = materialize_m9_resolved_base(base.into_embedded_m8_base());
+        M9M10ExecutionSeam {
+            instance,
+            authority_state,
+            authority_snapshot_projection,
+            authority_membership_projection,
+            authority_grant_projection,
+            owner_uses,
+            patch_uses,
+            relation_uses,
+            designated_evaluation_uses,
+            designated_consumption_uses,
+            observer_authorities,
+            translation_refs,
+        }
+    }
+
+    #[allow(dead_code)] // Compatibility for internal callers before M10.
     pub(crate) fn into_m8_execution_seam(self) -> M8RuntimeInstance {
-        materialize_m9_resolved_base(self.base.into_embedded_m8_base())
+        self.into_m10_execution_seam().into_parts().0
     }
 }
 
@@ -1272,6 +1875,22 @@ pub enum M9CapabilityScope {
         redaction: String,
         retention: String,
     },
+    RelationTransition {
+        relation: String,
+        transition: String,
+        owner_locus: String,
+        binding_frontier: String,
+    },
+    DesignatedEvaluation {
+        evaluator: String,
+        result: String,
+        input_frontier: String,
+    },
+    DesignatedConsumption {
+        consumer: String,
+        value_name: String,
+        result_version: u64,
+    },
 }
 
 impl M9CapabilityScope {
@@ -1312,6 +1931,47 @@ impl M9CapabilityScope {
             M9_OBSERVER_REDACTION,
             M9_OBSERVER_RETENTION,
         )
+    }
+
+    /// These scope constructors are crate-internal M10 bridge vocabulary.
+    /// They retain the checked relation/value site rather than allowing M10
+    /// to fabricate an already-admitted M8 authority record.
+    pub(crate) fn relation_transition(
+        relation: impl Into<String>,
+        transition: impl Into<String>,
+        owner_locus: impl Into<String>,
+        binding_frontier: impl Into<String>,
+    ) -> Self {
+        Self::RelationTransition {
+            relation: relation.into(),
+            transition: transition.into(),
+            owner_locus: owner_locus.into(),
+            binding_frontier: binding_frontier.into(),
+        }
+    }
+
+    pub(crate) fn designated_evaluation(
+        evaluator: impl Into<String>,
+        result: impl Into<String>,
+        input_frontier: impl Into<String>,
+    ) -> Self {
+        Self::DesignatedEvaluation {
+            evaluator: evaluator.into(),
+            result: result.into(),
+            input_frontier: input_frontier.into(),
+        }
+    }
+
+    pub(crate) fn designated_consumption(
+        consumer: impl Into<String>,
+        value_name: impl Into<String>,
+        result_version: u64,
+    ) -> Self {
+        Self::DesignatedConsumption {
+            consumer: consumer.into(),
+            value_name: value_name.into(),
+            result_version,
+        }
     }
 }
 
@@ -1600,6 +2260,20 @@ pub(crate) struct M9AuthoritySnapshot {
     revoked_capabilities: BTreeSet<String>,
     consumed_proof_refs: BTreeSet<M9ProofRef>,
     current_memberships: BTreeMap<(String, String), String>,
+    /// A retired membership remains inspectable until its sealed audit cut.
+    /// The value is the frontier at which its tombstone became durable.
+    retired_memberships: BTreeMap<String, String>,
+}
+
+/// Crate-private immutable authority cut.  It deliberately owns a coherent
+/// M9 snapshot and evidence graph; callers cannot reconstruct one from
+/// public membership/capability/witness values.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9AuthorityCut {
+    reference: String,
+    program_identity: String,
+    snapshot: M9AuthoritySnapshot,
+    evidence_graph: M9EvidenceGraph,
 }
 
 #[derive(PartialEq, Eq)]
@@ -1607,6 +2281,8 @@ pub struct M9AuthorityRuntime {
     outer_admission: Option<M9OuterAdmission>,
     snapshot: M9AuthoritySnapshot,
     evidence_graph: M9EvidenceGraph,
+    next_authority_cut: u64,
+    restored_authority_cuts: BTreeSet<String>,
 }
 
 impl std::fmt::Debug for M9AuthorityRuntime {
@@ -1628,6 +2304,8 @@ impl M9AuthorityRuntime {
             outer_admission: None,
             snapshot: M9AuthoritySnapshot::default(),
             evidence_graph: M9EvidenceGraph::default(),
+            next_authority_cut: 0,
+            restored_authority_cuts: BTreeSet::new(),
         }
     }
 
@@ -1636,6 +2314,8 @@ impl M9AuthorityRuntime {
             outer_admission: Some(outer_admission),
             snapshot: M9AuthoritySnapshot::default(),
             evidence_graph: M9EvidenceGraph::default(),
+            next_authority_cut: 0,
+            restored_authority_cuts: BTreeSet::new(),
         }
     }
 
@@ -1645,6 +2325,565 @@ impl M9AuthorityRuntime {
 
     pub(crate) fn evidence_graph(&self) -> &M9EvidenceGraph {
         &self.evidence_graph
+    }
+
+    /// Exact membership lineage domain for crate-internal cross-layer
+    /// receipts.  Grants, witnesses, revocations, and consumed proof records
+    /// are intentionally excluded so membership-only transitions do not
+    /// inherit an unrelated authority hash change.
+    pub(crate) fn canonical_membership_projection(&self) -> String {
+        let memberships = self.snapshot.memberships.values().map(|membership| {
+            let source_ref = membership.auth_residual_source_ref.as_ref().map_or_else(
+                || "none".to_string(),
+                |source_ref| {
+                    format!(
+                        "{}:{}:{}:{}:{}",
+                        source_ref.path,
+                        source_ref.start_line,
+                        source_ref.start_column,
+                        source_ref.end_line,
+                        source_ref.end_column,
+                    )
+                },
+            );
+            format!(
+                "membership|{}|{}|{}|{}|{}|{}|{}|{}|auth_source_ref|{}|proof_ref|{}",
+                membership.reference,
+                membership.principal,
+                membership.locus,
+                membership.epoch,
+                membership.incarnation,
+                membership.provider_ref,
+                membership.policy_version,
+                membership.active,
+                source_ref,
+                membership
+                    .proof_ref
+                    .as_ref()
+                    .map_or("", |proof| proof.0.as_str()),
+            )
+        });
+        let current_memberships =
+            self.snapshot
+                .current_memberships
+                .iter()
+                .map(|((principal, locus), membership_ref)| {
+                    format!("current_membership|{principal}|{locus}|{membership_ref}")
+                });
+        let retired =
+            self.snapshot
+                .retired_memberships
+                .iter()
+                .map(|(membership_ref, audit_frontier)| {
+                    format!("retired_membership|{membership_ref}|{audit_frontier}")
+                });
+        memberships
+            .chain(current_memberships)
+            .chain(retired)
+            .collect::<Vec<_>>()
+            .join("\n")
+    }
+
+    /// Exact grant/evidence domain for crate-internal cross-layer receipts.
+    /// Capability and witness SourceRefs are rendered in full so an otherwise
+    /// identical grant at a different source span cannot share a receipt hash.
+    pub(crate) fn canonical_grant_projection(&self) -> String {
+        let capabilities = self.snapshot.capabilities.values().map(|capability| {
+            let source_ref = capability.source_ref.as_ref().map_or_else(
+                || "none".to_string(),
+                |source_ref| {
+                    format!(
+                        "{}:{}:{}:{}:{}",
+                        source_ref.path,
+                        source_ref.start_line,
+                        source_ref.start_column,
+                        source_ref.end_line,
+                        source_ref.end_column,
+                    )
+                },
+            );
+            format!(
+                "capability|{}|{}|{}|{}|{}|{}|source_ref|{}",
+                capability.reference,
+                capability.membership_ref,
+                canonical_m9_capability_scope(&capability.scope),
+                capability.lineage_epoch,
+                capability.policy_version,
+                capability.active,
+                source_ref,
+            )
+        });
+        let witnesses = self.snapshot.witnesses.values().map(|witness| {
+            let source_ref = witness.source_ref.as_ref().map_or_else(
+                || "none".to_string(),
+                |source_ref| {
+                    format!(
+                        "{}:{}:{}:{}:{}",
+                        source_ref.path,
+                        source_ref.start_line,
+                        source_ref.start_column,
+                        source_ref.end_line,
+                        source_ref.end_column,
+                    )
+                },
+            );
+            format!(
+                "witness|{}|{}|{}|{}|{}|source_ref|{}",
+                witness.reference,
+                witness.membership_ref,
+                witness.capability_ref,
+                witness.source_ref.is_some(),
+                witness.live,
+                source_ref,
+            )
+        });
+        let revoked = self
+            .snapshot
+            .revoked_capabilities
+            .iter()
+            .map(|reference| format!("revoked|{reference}"));
+        let consumed = self
+            .snapshot
+            .consumed_proof_refs
+            .iter()
+            .map(|reference| format!("consumed_proof|{}", reference.0));
+        capabilities
+            .chain(witnesses)
+            .chain(revoked)
+            .chain(consumed)
+            .collect::<Vec<_>>()
+            .join("\n")
+    }
+
+    /// Canonical internal aggregate for diagnostics that truly require the
+    /// full M9 authority state.  Domain-native receipt hashes consume the two
+    /// projections above independently.
+    pub(crate) fn canonical_snapshot_projection(&self) -> String {
+        [
+            self.canonical_membership_projection(),
+            self.canonical_grant_projection(),
+        ]
+        .join("\n")
+    }
+
+    /// Translate already authenticated M9 lineage into the sealed M8
+    /// inventory for a persistent M10 execution session.  The caller only
+    /// passes typed facts it received from this authority runtime; this method
+    /// revalidates them before it constructs any M8 authority record.
+    pub(crate) fn m10_authority_bridge(
+        &mut self,
+        membership: &M9MembershipAuth,
+        contract_capability: &M9CapabilityAuth,
+        contract_witness: &M9WitnessAuth,
+        owner: Option<(&str, &str, &M9CapabilityAuth, &M9WitnessAuth)>,
+    ) -> M9M10AuthorityBridge {
+        let authority_snapshot_projection = self.canonical_snapshot_projection();
+        let contract_is_live = self
+            .use_authority(
+                M9FactUse::capability(contract_capability.ref_id())
+                    .with_membership_ref(membership.ref_id())
+                    .with_witness_ref(contract_witness.ref_id())
+                    .with_epoch(membership.epoch())
+                    .with_scope(contract_capability.scope().clone()),
+            )
+            .is_ok();
+        if !contract_is_live {
+            return M9M10AuthorityBridge {
+                authority_state: M8AuthorityState::new(),
+                authority_snapshot_projection,
+                owner_use: None,
+                patch_use: None,
+                relation_uses: BTreeMap::new(),
+            };
+        }
+
+        let M9CapabilityScope::ContractUpdate { module, .. } = contract_capability.scope() else {
+            return M9M10AuthorityBridge {
+                authority_state: M8AuthorityState::new(),
+                authority_snapshot_projection,
+                owner_use: None,
+                patch_use: None,
+                relation_uses: BTreeMap::new(),
+            };
+        };
+        let mut authority_state = M8AuthorityState::new()
+            .with_membership_record(
+                M8MembershipRecord::already_admitted(membership.ref_id())
+                    .with_principal(membership.principal())
+                    .with_locus(membership.locus())
+                    .with_epoch(membership.epoch()),
+            )
+            .with_capability_grant(
+                M8CapabilityGrant::already_admitted(contract_capability.ref_id())
+                    .for_patch_activation(module)
+                    .with_owner_locus(membership.locus())
+                    .with_principal(membership.principal())
+                    .with_membership_ref(membership.ref_id())
+                    .with_epoch(membership.epoch()),
+            )
+            .with_witness_record(
+                M8WitnessRecord::live(contract_witness.ref_id())
+                    .for_capability(contract_capability.ref_id())
+                    .with_membership_ref(membership.ref_id())
+                    .with_epoch(membership.epoch()),
+            );
+        let patch_use = Some(
+            M8PatchAuthorityUse::for_patch_program(module)
+                .with_owner_locus(membership.locus())
+                .with_principal(membership.principal())
+                .with_membership_ref(membership.ref_id())
+                .with_capability_ref(contract_capability.ref_id())
+                .with_witness_ref(contract_witness.ref_id()),
+        );
+        let owner_use = owner.and_then(|(evaluation, owner_locus, capability, witness)| {
+            let owner_is_live = self
+                .use_authority(
+                    M9FactUse::capability(capability.ref_id())
+                        .with_membership_ref(membership.ref_id())
+                        .with_witness_ref(witness.ref_id())
+                        .with_epoch(membership.epoch())
+                        .with_scope(capability.scope().clone()),
+                )
+                .is_ok();
+            if !owner_is_live {
+                return None;
+            }
+            authority_state = authority_state
+                .clone()
+                .with_capability_grant(
+                    M8CapabilityGrant::already_admitted(capability.ref_id())
+                        .for_owner_evaluation(evaluation)
+                        .with_owner_locus(owner_locus)
+                        .with_principal(membership.principal())
+                        .with_membership_ref(membership.ref_id())
+                        .with_epoch(membership.epoch()),
+                )
+                .with_witness_record(
+                    M8WitnessRecord::live(witness.ref_id())
+                        .for_capability(capability.ref_id())
+                        .with_membership_ref(membership.ref_id())
+                        .with_epoch(membership.epoch()),
+                );
+            Some((
+                evaluation.to_string(),
+                owner_locus.to_string(),
+                M8AuthorityUse::for_principal(membership.principal())
+                    .with_membership_ref(membership.ref_id())
+                    .with_capability_ref(capability.ref_id())
+                    .with_witness_ref(witness.ref_id()),
+            ))
+        });
+        let mut relation_uses = BTreeMap::new();
+        let relation_capabilities = self
+            .snapshot
+            .capabilities
+            .values()
+            .filter(|capability| {
+                capability.active
+                    && capability.membership_ref == membership.ref_id()
+                    && matches!(
+                        capability.scope,
+                        M9CapabilityScope::RelationTransition { .. }
+                    )
+            })
+            .cloned()
+            .collect::<Vec<_>>();
+        for capability in relation_capabilities {
+            let M9CapabilityScope::RelationTransition {
+                relation,
+                transition,
+                owner_locus,
+                binding_frontier: _,
+            } = capability.scope()
+            else {
+                continue;
+            };
+            let Some(witness) = self
+                .snapshot
+                .witnesses
+                .values()
+                .find(|witness| {
+                    witness.live
+                        && witness.membership_ref == membership.ref_id()
+                        && witness.capability_ref == capability.ref_id()
+                })
+                .cloned()
+            else {
+                continue;
+            };
+            if self
+                .use_authority(
+                    M9FactUse::capability(capability.ref_id())
+                        .with_membership_ref(membership.ref_id())
+                        .with_witness_ref(witness.ref_id())
+                        .with_epoch(membership.epoch())
+                        .with_scope(capability.scope().clone()),
+                )
+                .is_err()
+            {
+                continue;
+            }
+            let binding_epoch = match transition.as_str() {
+                "invalidate_primary" => "binding_epoch:1".to_string(),
+                "reacquire_primary" => "binding_epoch:2".to_string(),
+                other => format!("m9-transition:{other}:{}", capability.ref_id()),
+            };
+            authority_state = authority_state
+                .with_capability_grant(
+                    M8CapabilityGrant::already_admitted(capability.ref_id())
+                        .for_relation_transition(relation.clone(), transition.clone())
+                        .with_owner_locus(owner_locus.clone())
+                        .with_principal(membership.principal())
+                        .with_membership_ref(membership.ref_id())
+                        .with_epoch(membership.epoch())
+                        .with_binding_epoch(binding_epoch.clone()),
+                )
+                .with_witness_record(
+                    M8WitnessRecord::live(witness.ref_id())
+                        .for_capability(capability.ref_id())
+                        .with_membership_ref(membership.ref_id())
+                        .with_epoch(membership.epoch()),
+                );
+            relation_uses.insert(
+                (relation.clone(), transition.clone()),
+                M8RelationAuthorityUse::for_relation(relation.clone())
+                    .with_owner_locus(owner_locus.clone())
+                    .with_transition(transition.clone())
+                    .with_principal(membership.principal())
+                    .with_membership_ref(membership.ref_id())
+                    .with_capability_ref(capability.ref_id())
+                    .with_membership_epoch(membership.epoch())
+                    .with_binding_epoch(binding_epoch)
+                    .with_witness_ref(witness.ref_id())
+                    .with_witness_epoch(membership.epoch()),
+            );
+        }
+        M9M10AuthorityBridge {
+            authority_state,
+            authority_snapshot_projection,
+            owner_use,
+            patch_use,
+            relation_uses,
+        }
+    }
+
+    /// Save the whole M9 authority state as one coherent internal cut.  The
+    /// cut is intentionally not a transport or public persistence format.
+    pub(crate) fn save_authority_cut(&mut self) -> Result<M9AuthorityCut, M9AdmissionDiagnostics> {
+        let Some(outer) = self.outer_admission.as_ref() else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidAuthorityCut,
+            ));
+        };
+        if !Self::snapshot_is_coherent(&self.snapshot) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidAuthorityCut,
+            ));
+        }
+        let reference = format!(
+            "m9-authority-cut:{}:{}",
+            outer.program_identity.stable_key(),
+            self.next_authority_cut
+        );
+        self.next_authority_cut += 1;
+        Ok(M9AuthorityCut {
+            reference,
+            program_identity: outer.program_identity.stable_key(),
+            snapshot: self.snapshot.clone(),
+            evidence_graph: self.evidence_graph.clone(),
+        })
+    }
+
+    /// Restore exactly one previously saved cut into a fresh compatible M9
+    /// authority runtime.  A cut with split lineage, inconsistent live
+    /// authority, a different checked program, or a second delivery fails
+    /// closed before it changes the runtime.
+    pub(crate) fn restore_authority_cut(
+        &mut self,
+        cut: M9AuthorityCut,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        let Some(outer) = self.outer_admission.as_ref() else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidAuthorityCut,
+            ));
+        };
+        if cut.program_identity != outer.program_identity.stable_key()
+            || self.restored_authority_cuts.contains(&cut.reference)
+            || !Self::snapshot_is_coherent(&cut.snapshot)
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                if self.restored_authority_cuts.contains(&cut.reference) {
+                    M9AdmissionErrorKind::ReplayedAuthorityCut
+                } else {
+                    M9AdmissionErrorKind::InvalidAuthorityCut
+                },
+            ));
+        }
+        self.snapshot = cut.snapshot;
+        self.evidence_graph = cut.evidence_graph;
+        self.restored_authority_cuts.insert(cut.reference);
+        Ok(())
+    }
+
+    /// Retire a membership as one authority operation.  It removes the
+    /// current principal/locus mapping, tombstones the membership, and
+    /// invalidates every active capability/witness in that lineage while
+    /// retaining the evidence graph until the named audit frontier permits
+    /// compaction.
+    pub(crate) fn retire_membership(
+        &mut self,
+        membership_ref: &str,
+        audit_frontier: impl Into<String>,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        let Some(membership) = self.snapshot.memberships.get(membership_ref).cloned() else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        };
+        let membership_key = (membership.principal.clone(), membership.locus.clone());
+        if !membership.active
+            || self.snapshot.current_memberships.get(&membership_key) != Some(&membership.reference)
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        let audit_frontier = audit_frontier.into();
+        self.snapshot.current_memberships.remove(&membership_key);
+        self.snapshot
+            .retired_memberships
+            .insert(membership.reference.clone(), audit_frontier);
+        self.snapshot
+            .memberships
+            .get_mut(membership_ref)
+            .expect("checked membership remains present")
+            .active = false;
+
+        let capability_refs = self
+            .snapshot
+            .capabilities
+            .values()
+            .filter(|capability| capability.membership_ref == membership_ref && capability.active)
+            .map(|capability| capability.reference.clone())
+            .collect::<Vec<_>>();
+        for capability_ref in capability_refs {
+            self.retire_capability(
+                &capability_ref,
+                [format!("membership-retired:{membership_ref}")],
+            );
+        }
+        Ok(())
+    }
+
+    /// Tombstones may be compacted only at the exact recorded audit cut.  A
+    /// caller cannot erase a current membership or pre-audit evidence.
+    pub(crate) fn compact_retired_membership(
+        &mut self,
+        membership_ref: &str,
+        audit_frontier: &str,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        if self
+            .snapshot
+            .retired_memberships
+            .get(membership_ref)
+            .is_none_or(|recorded| recorded != audit_frontier)
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::CompactionBeforeAuditCut,
+            ));
+        }
+        self.snapshot.retired_memberships.remove(membership_ref);
+        Ok(())
+    }
+
+    fn retire_capability(
+        &mut self,
+        capability_ref: &str,
+        dependent_refs: impl IntoIterator<Item = String>,
+    ) {
+        if let Some(capability) = self.snapshot.capabilities.get_mut(capability_ref) {
+            capability.active = false;
+        }
+        let mut all_dependents = dependent_refs.into_iter().collect::<BTreeSet<_>>();
+        for witness in self.snapshot.witnesses.values_mut() {
+            if witness.capability_ref == capability_ref {
+                witness.live = false;
+                all_dependents.insert(witness.reference.clone());
+            }
+        }
+        self.snapshot
+            .revoked_capabilities
+            .insert(capability_ref.to_string());
+        self.evidence_graph.revoke(capability_ref, all_dependents);
+    }
+
+    fn snapshot_is_coherent(snapshot: &M9AuthoritySnapshot) -> bool {
+        let current_memberships_are_live =
+            snapshot
+                .current_memberships
+                .iter()
+                .all(|((principal, locus), membership_ref)| {
+                    snapshot
+                        .memberships
+                        .get(membership_ref)
+                        .is_some_and(|membership| {
+                            membership.active
+                                && membership.principal == *principal
+                                && membership.locus == *locus
+                                && !snapshot.retired_memberships.contains_key(membership_ref)
+                        })
+                });
+        let active_capabilities_are_current = snapshot.capabilities.values().all(|capability| {
+            !capability.active
+                || snapshot
+                    .memberships
+                    .get(&capability.membership_ref)
+                    .is_some_and(|membership| {
+                        membership.active
+                            && snapshot
+                                .current_memberships
+                                .get(&(membership.principal.clone(), membership.locus.clone()))
+                                == Some(&membership.reference)
+                    })
+        });
+        let live_witnesses_are_bound = snapshot.witnesses.values().all(|witness| {
+            !witness.live
+                || snapshot
+                    .capabilities
+                    .get(&witness.capability_ref)
+                    .is_some_and(|capability| {
+                        capability.active
+                            && capability.membership_ref == witness.membership_ref
+                            && snapshot
+                                .memberships
+                                .get(&witness.membership_ref)
+                                .is_some_and(|membership| membership.active)
+                    })
+        });
+        let revoked_are_inactive = snapshot.revoked_capabilities.iter().all(|capability_ref| {
+            snapshot
+                .capabilities
+                .get(capability_ref)
+                .is_some_and(|capability| !capability.active)
+        });
+        let tombstones_are_not_current =
+            snapshot.retired_memberships.keys().all(|membership_ref| {
+                snapshot
+                    .memberships
+                    .get(membership_ref)
+                    .is_some_and(|membership| {
+                        !membership.active
+                            && snapshot
+                                .current_memberships
+                                .get(&(membership.principal.clone(), membership.locus.clone()))
+                                != Some(&membership.reference)
+                    })
+            });
+        current_memberships_are_live
+            && active_capabilities_are_current
+            && live_witnesses_are_bound
+            && revoked_are_inactive
+            && tombstones_are_not_current
     }
 
     #[allow(dead_code)] // finite provider adapter/test seam; not public authority minting.
@@ -1986,6 +3225,47 @@ impl M9AuthorityRuntime {
                     && redaction == M9_OBSERVER_REDACTION
                     && retention == M9_OBSERVER_RETENTION
             }
+            M9CapabilityScope::RelationTransition {
+                relation,
+                owner_locus,
+                binding_frontier,
+                ..
+            } => outer.source_artifact.contains_relation_scope(
+                relation,
+                owner_locus,
+                binding_frontier,
+            ),
+            M9CapabilityScope::DesignatedEvaluation {
+                evaluator,
+                result,
+                input_frontier,
+            } => outer
+                .source_artifact
+                .contains_designated_scope(evaluator, result, input_frontier),
+            M9CapabilityScope::DesignatedConsumption {
+                consumer,
+                value_name,
+                ..
+            } => value_name
+                .split_once('.')
+                .is_some_and(|(evaluator, result)| {
+                    !consumer.is_empty()
+                        && outer.source_artifact.contains_designated_scope(
+                            evaluator,
+                            result,
+                            // The consumer scope is tied to the checked value;
+                            // the input frontier is checked at evaluation.
+                            outer
+                                .source_artifact
+                                .designated_scopes
+                                .iter()
+                                .find_map(|(candidate_evaluator, candidate_result, frontier)| {
+                                    (candidate_evaluator == evaluator && candidate_result == result)
+                                        .then_some(frontier.as_str())
+                                })
+                                .unwrap_or(""),
+                        )
+                }),
         }
     }
 
@@ -2194,6 +3474,42 @@ impl M9AuthorityRuntime {
                     contract: scope_contract,
                 } if scope_module == module && scope_contract == contract
             )
+    }
+}
+
+fn canonical_m9_capability_scope(scope: &M9CapabilityScope) -> String {
+    match scope {
+        M9CapabilityScope::OwnerEvaluation {
+            evaluation,
+            owner_locus,
+        } => format!("owner_evaluation:{evaluation}:{owner_locus}"),
+        M9CapabilityScope::ContractUpdate { module, contract } => {
+            format!("contract_update:{module}:{contract}")
+        }
+        M9CapabilityScope::Observation {
+            observer_principal,
+            label,
+            redaction,
+            retention,
+        } => format!("observation:{observer_principal}:{label}:{redaction}:{retention}"),
+        M9CapabilityScope::RelationTransition {
+            relation,
+            transition,
+            owner_locus,
+            binding_frontier,
+        } => {
+            format!("relation_transition:{relation}:{transition}:{owner_locus}:{binding_frontier}")
+        }
+        M9CapabilityScope::DesignatedEvaluation {
+            evaluator,
+            result,
+            input_frontier,
+        } => format!("designated_evaluation:{evaluator}:{result}:{input_frontier}"),
+        M9CapabilityScope::DesignatedConsumption {
+            consumer,
+            value_name,
+            result_version,
+        } => format!("designated_consumption:{consumer}:{value_name}:{result_version}"),
     }
 }
 
@@ -2419,9 +3735,11 @@ impl M9ContractAuthorityUse {
     pub fn from_grant_and_witness(capability: &M9CapabilityAuth, witness: &M9WitnessAuth) -> Self {
         let target_module = match &capability.scope {
             M9CapabilityScope::ContractUpdate { module, .. } => Some(module.clone()),
-            M9CapabilityScope::OwnerEvaluation { .. } | M9CapabilityScope::Observation { .. } => {
-                None
-            }
+            M9CapabilityScope::OwnerEvaluation { .. }
+            | M9CapabilityScope::Observation { .. }
+            | M9CapabilityScope::RelationTransition { .. }
+            | M9CapabilityScope::DesignatedEvaluation { .. }
+            | M9CapabilityScope::DesignatedConsumption { .. } => None,
         };
         Self {
             membership_ref: Some(capability.membership_ref.clone()),
@@ -2766,7 +4084,10 @@ impl M9ObserverRequest {
                 observer_principal, ..
             } => observer_principal.clone(),
             M9CapabilityScope::OwnerEvaluation { .. }
-            | M9CapabilityScope::ContractUpdate { .. } => String::new(),
+            | M9CapabilityScope::ContractUpdate { .. }
+            | M9CapabilityScope::RelationTransition { .. }
+            | M9CapabilityScope::DesignatedEvaluation { .. }
+            | M9CapabilityScope::DesignatedConsumption { .. } => String::new(),
         };
         Self {
             observer_principal,

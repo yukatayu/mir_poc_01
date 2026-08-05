@@ -25,6 +25,7 @@ pub mod full_system_v1_provider_admission;
 pub mod full_system_v1_renderer_pose_backend;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;
+pub mod m10_reference_system;
 pub mod m8_runtime_admission;
 pub mod m8_runtime_authority;
 pub mod m8_runtime_designated_value;

@@ -34,10 +34,11 @@ use crate::{
         M8SemanticSnapshot, M8ServeDiagnosticKind, M8ServeDiagnostics, M8ServeOutcome, M8StateKey,
     },
     m8_runtime_relation_projection::{
-        M8BindingInvalidation, M8PresentationContext, M8ProjectionDiagnostics,
-        M8RelationAuthorityUse, M8RelationDiagnosticKind, M8RelationDiagnostics,
-        M8RelationProjection, M8RelationProjectionRuntime, M8RelationProjectionSeed,
-        M8RelationReacquire, M8RelationTrace, M8RelationTraceKind,
+        M8BindingInvalidation, M8FiniteFallbackChain, M8FiniteFallbackSelection,
+        M8PresentationContext, M8ProjectionDiagnostics, M8RelationAuthorityUse,
+        M8RelationDiagnosticKind, M8RelationDiagnostics, M8RelationProjection,
+        M8RelationProjectionRuntime, M8RelationProjectionSeed, M8RelationReacquire,
+        M8RelationTrace, M8RelationTraceKind,
     },
 };
 
@@ -162,6 +163,7 @@ pub enum M8LocalTraceKind {
     OwnerWrite,
     RelationPrimaryInvalidated,
     RelationOptionAdvanced,
+    RelationFallbackFrozen,
     RelationPrimaryReturnIgnored,
     RelationFreshLineageReacquired,
     DesignatedAuthorityValidated,
@@ -169,6 +171,7 @@ pub enum M8LocalTraceKind {
     DesignatedValuePublished,
     DesignatedConsumerAuthorityValidated,
     DesignatedValueConsumed,
+    PatchStateInitialized,
     LocalCutSaved,
     RestoreRejected,
     OwnerEnqueueRejected,
@@ -662,6 +665,7 @@ pub struct M8LocalSavePayload {
     shared_snapshot: M8SemanticSnapshot,
     owner_execution: M8RuntimeExecution,
     relation_trace: M8RelationTrace,
+    finite_fallback_chains: BTreeMap<String, M8FiniteFallbackChain>,
     designated: M8LocalDesignatedSaveState,
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
@@ -778,6 +782,83 @@ impl M8LocalCut {
 
     pub fn save_relevant_payload(&self) -> M8LocalSavePayload {
         self.payload.clone()
+    }
+
+    /// Receipt-only projection of concrete owner/designated store data.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!(
+            "snapshot|{}\nowner|{}\ndesignated_receipts|{}\ndesignated_results|{}\ndesignated_versions|{}\ndesignated_consumption|{}\ndesignated_trace|{}",
+            self.payload.shared_snapshot.canonical_store_projection(),
+            self.payload.owner_execution.canonical_store_projection(),
+            self.payload
+                .designated
+                .receipt_state
+                .canonical_store_projection(),
+            self.payload
+                .designated
+                .result_store
+                .canonical_store_projection(),
+            self.payload
+                .designated
+                .version_store
+                .canonical_store_projection(),
+            self.payload
+                .designated
+                .consumption_state
+                .canonical_store_projection(),
+            self.payload.designated.trace.canonical_store_projection(),
+        )
+    }
+
+    /// Receipt-only projection of maintained relations together with the
+    /// leases that determine their admissible frontier.
+    pub(crate) fn canonical_relation_projection(&self) -> String {
+        format!(
+            "relations|{}\nleases|{}\nfallback_chain|{}",
+            self.payload.shared_snapshot.canonical_relation_projection(),
+            self.payload.lease_inventory.canonical_projection(),
+            self.payload
+                .finite_fallback_chains
+                .values()
+                .map(M8FiniteFallbackChain::canonical_projection)
+                .collect::<Vec<_>>()
+                .join("\n"),
+        )
+    }
+
+    /// Receipt-only checked program identity.  M9 membership/grant caches and
+    /// patch lifecycle history are deliberately excluded from this M8 domain.
+    pub(crate) fn canonical_configuration_projection(&self) -> String {
+        format!(
+            "program|{}\nsnapshot_config|{}\nfallback_chain|{}",
+            self.admission_provenance.program_identity().stable_key(),
+            self.payload
+                .shared_snapshot
+                .canonical_configuration_projection(),
+            self.payload
+                .finite_fallback_chains
+                .values()
+                .map(M8FiniteFallbackChain::canonical_projection)
+                .collect::<Vec<_>>()
+                .join("\n"),
+        )
+    }
+
+    pub(crate) fn canonical_semantic_projection(&self) -> String {
+        format!(
+            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}",
+            self.cut_id,
+            self.admission_provenance.program_identity().stable_key(),
+            self.payload.shared_snapshot.canonical_projection(),
+            self.payload.lease_inventory.canonical_projection(),
+            self.payload
+                .finite_fallback_chains
+                .values()
+                .map(M8FiniteFallbackChain::canonical_projection)
+                .collect::<Vec<_>>()
+                .join("\n"),
+            self.payload.patch_lifecycle.rows().join(","),
+        )
     }
 }
 
@@ -989,6 +1070,9 @@ impl M8LocalRuntime {
             runtime.invalidate_primary(relation, authority, invalidation)
         });
         self.append_relation_trace_since(trace_len);
+        if outcome.is_ok() {
+            self.lease_inventory = self.relation.live_lease_inventory();
+        }
         if let Err(diagnostics) = &outcome {
             self.trace.borrow_mut().append_fact(
                 M8LocalTraceKind::RelationTransitionRejected,
@@ -1037,12 +1121,133 @@ impl M8LocalRuntime {
         outcome
     }
 
+    pub fn advance_anchor_to_frozen(
+        &mut self,
+        relation: &str,
+        prior_transition: &crate::m8_runtime_relation_projection::M8RelationTransition,
+    ) -> Result<crate::m8_runtime_relation_projection::M8RelationTransition, M8RelationDiagnostics>
+    {
+        let trace_len = self.relation.trace().entries().len();
+        let outcome = self.with_relation_snapshot(|runtime| {
+            runtime.advance_anchor_to_frozen(relation, prior_transition)
+        });
+        self.append_relation_trace_since(trace_len);
+        if outcome.is_ok() {
+            self.lease_inventory = self.relation.live_lease_inventory();
+        }
+        if let Err(diagnostics) = &outcome {
+            self.trace.borrow_mut().append_fact(
+                M8LocalTraceKind::RelationTransitionRejected,
+                diagnostics.primary().source_ref().clone(),
+                None,
+                None,
+                false,
+                M8LocalAuthorityRefs::default(),
+                Some(M8LocalFailure::RelationTransition(
+                    diagnostics.primary().kind(),
+                )),
+                None,
+            );
+        }
+        outcome
+    }
+
+    pub fn request_selected_option_write(
+        &mut self,
+        relation: &str,
+    ) -> Result<(), M8RelationDiagnostics> {
+        self.with_relation_snapshot(|runtime| runtime.request_selected_option_write(relation))
+    }
+
+    pub(crate) fn install_finite_fallback_chain(
+        &mut self,
+        chain: M8FiniteFallbackChain,
+    ) -> Result<(), M8RelationDiagnostics> {
+        let inventory =
+            self.with_relation_snapshot(|runtime| runtime.install_finite_fallback_chain(chain))?;
+        self.lease_inventory = inventory.clone();
+        self.relation.replace_live_leases(inventory);
+        Ok(())
+    }
+
+    pub fn note_primary_available_same_lineage(
+        &mut self,
+        relation: &str,
+        anchor: &str,
+    ) -> Result<crate::m8_runtime_relation_projection::M8RelationTransition, M8RelationDiagnostics>
+    {
+        let trace_len = self.relation.trace().entries().len();
+        let outcome = self.with_relation_snapshot(|runtime| {
+            runtime.note_primary_available_same_lineage(relation, anchor)
+        });
+        self.append_relation_trace_since(trace_len);
+        if let Err(diagnostics) = &outcome {
+            self.trace.borrow_mut().append_fact(
+                M8LocalTraceKind::RelationTransitionRejected,
+                diagnostics.primary().source_ref().clone(),
+                None,
+                None,
+                false,
+                M8LocalAuthorityRefs::default(),
+                Some(M8LocalFailure::RelationTransition(
+                    diagnostics.primary().kind(),
+                )),
+                None,
+            );
+        }
+        outcome
+    }
+
     pub fn project_relation(
         &mut self,
         relation: &str,
         context: M8PresentationContext,
     ) -> Result<M8RelationProjection, M8ProjectionDiagnostics> {
         self.with_relation_snapshot(|runtime| runtime.project_relation(relation, context))
+    }
+
+    /// Refresh only the sealed M9-derived authority inventory while retaining
+    /// this M8 session's mutable execution state and identity.
+    pub(crate) fn refresh_m9_authority_state(&mut self, authority_state: M8AuthorityState) {
+        self.shared_snapshot
+            .replace_authority_state(authority_state.clone());
+        // The unified local runtime swaps the shared snapshot through the
+        // owner, relation, and designated engines for each operation.  Keep
+        // their parked snapshots on the same sealed M9 authority inventory;
+        // otherwise an owner occurrence immediately after a bridge refresh
+        // could swap a stale inventory back into the shared relation state.
+        self.owner
+            .snapshot
+            .replace_authority_state(authority_state.clone());
+        self.relation
+            .semantic_snapshot
+            .replace_authority_state(authority_state.clone());
+        self.designated
+            .semantic_snapshot
+            .replace_authority_state(authority_state);
+    }
+
+    /// Crate-private patch seam for a checked, newly declared finite-v0 Int
+    /// field.  It can only insert the default value once and always leaves an
+    /// occurrence-bearing semantic trace; ordinary M10 requests cannot call
+    /// this directly.
+    pub(crate) fn initialize_patch_declared_int(
+        &mut self,
+        key: M8StateKey,
+        source_ref: SourceRef,
+    ) -> bool {
+        let initialized = self.shared_snapshot.initialize_int_default(key);
+        if initialized {
+            let occurrence_id = format!("m8-patch-init-{:020}", self.trace.borrow().len());
+            self.trace.borrow_mut().append(
+                M8LocalTraceKind::PatchStateInitialized,
+                source_ref,
+                Some(occurrence_id),
+                None,
+                false,
+            );
+        }
+        initialized
     }
 
     pub fn evaluate_designated(
@@ -1135,7 +1340,13 @@ impl M8LocalRuntime {
             .satisfies_floor(&floor.version_floor)
         {
             Some(M8LocalRestoreDiagnosticKind::ResultVersionRollback)
-        } else if cut.payload.shared_snapshot.relations != floor.relation_floor {
+        } else if relation_option_floor_regresses_same_lineage(
+            &cut.payload.shared_snapshot.relations,
+            &floor.relation_floor,
+        ) || cut.payload.shared_snapshot.relations != floor.relation_floor
+        {
+            // Same-lineage finite fallback floors are monotone; only a fresh
+            // M9 reacquire starts a new lineage at option zero.
             Some(M8LocalRestoreDiagnosticKind::OldRelationLineage)
         } else {
             None
@@ -1162,6 +1373,7 @@ impl M8LocalRuntime {
             shared_snapshot: self.shared_snapshot.clone(),
             owner_execution: self.owner.clone(),
             relation_trace: self.relation.trace().clone(),
+            finite_fallback_chains: self.relation.finite_fallback_chains(),
             designated: M8LocalDesignatedSaveState {
                 receipt_state: self.designated.receipt_state.clone(),
                 result_store: self.designated.result_store.clone(),
@@ -1174,6 +1386,54 @@ impl M8LocalRuntime {
             lease_inventory: self.lease_inventory.clone(),
             patch_lifecycle: self.patch_lifecycle.clone(),
         }
+    }
+
+    /// Exact mutable local store, including pending owner FIFO/counters and
+    /// designated receipt/version/consumption state needed by no-replay.
+    pub(crate) fn canonical_store_projection(&self) -> String {
+        format!(
+            "snapshot|{}\nowner|{}\ndesignated_receipts|{}\ndesignated_results|{}\ndesignated_versions|{}\ndesignated_consumption|{}\ndesignated_trace|{}",
+            self.shared_snapshot.canonical_store_projection(),
+            self.owner.canonical_store_projection(),
+            self.designated.receipt_state.canonical_store_projection(),
+            self.designated.result_store.canonical_store_projection(),
+            self.designated.version_store.canonical_store_projection(),
+            self.designated
+                .consumption_state
+                .canonical_store_projection(),
+            self.designated.trace.canonical_store_projection(),
+        )
+    }
+
+    /// Exact maintained relation and lease frontier state.
+    pub(crate) fn canonical_relation_projection(&self) -> String {
+        format!(
+            "relations|{}\nleases|{}\nfallback_chain|{}",
+            self.shared_snapshot.canonical_relation_projection(),
+            self.lease_inventory.canonical_projection(),
+            self.relation.canonical_fallback_configuration_projection(),
+        )
+    }
+
+    /// Checked program identity only.  Membership epoch, authority cache, and
+    /// patch lifecycle history never feed M8 configuration receipts.
+    pub(crate) fn canonical_configuration_projection(&self) -> String {
+        format!(
+            "program|{}\nsnapshot_config|{}\nfallback_chain|{}",
+            self.admitted.program_identity().stable_key(),
+            self.shared_snapshot.canonical_configuration_projection(),
+            self.relation.canonical_fallback_configuration_projection(),
+        )
+    }
+
+    pub(crate) fn canonical_semantic_projection(&self) -> String {
+        format!(
+            "program|{}\nsnapshot|{}\nleases|{}\npatch_rows|{}",
+            self.admitted.program_identity().stable_key(),
+            self.shared_snapshot.canonical_projection(),
+            self.lease_inventory.canonical_projection(),
+            self.patch_lifecycle.rows().join(","),
+        )
     }
 
     pub fn trace(&self) -> M8LocalTrace {
@@ -1193,6 +1453,22 @@ impl M8LocalRuntime {
 
     pub fn relation_state(&self, relation: &str) -> Option<&M8SemanticRelation> {
         self.shared_snapshot.relations.get(relation)
+    }
+
+    pub(crate) fn finite_fallback_selection(
+        &self,
+        relation: &str,
+    ) -> Option<M8FiniteFallbackSelection> {
+        self.relation
+            .finite_fallback_selection(self.shared_snapshot.relation(relation)?)
+    }
+
+    pub(crate) fn has_finite_fallback_chain(&self, relation: &str) -> bool {
+        self.relation.has_finite_fallback_chain(relation)
+    }
+
+    pub(crate) fn contains_live_relation_lease(&self, reference: &str) -> bool {
+        self.lease_inventory.contains_live(reference)
     }
 
     pub fn designated_result_store(&self) -> &M8DesignatedResultStore {
@@ -1367,6 +1643,9 @@ impl M8LocalRuntime {
                 M8RelationTraceKind::RelationOptionAdvanced => {
                     M8LocalTraceKind::RelationOptionAdvanced
                 }
+                M8RelationTraceKind::FallbackOptionFrozen => {
+                    M8LocalTraceKind::RelationFallbackFrozen
+                }
                 M8RelationTraceKind::SameLineagePrimaryReturnIgnored => {
                     M8LocalTraceKind::RelationPrimaryReturnIgnored
                 }
@@ -1435,6 +1714,8 @@ impl M8LocalRuntime {
         self.shared_snapshot = payload.shared_snapshot.clone();
         self.owner = payload.owner_execution.clone();
         self.relation.trace = payload.relation_trace.clone();
+        self.relation
+            .replace_finite_fallback_chains(payload.finite_fallback_chains.clone());
         self.designated.receipt_state = payload.designated.receipt_state.clone();
         self.designated.result_store = payload.designated.result_store.clone();
         self.designated.version_store = payload.designated.version_store.clone();
@@ -1447,4 +1728,16 @@ impl M8LocalRuntime {
         self.lease_inventory = payload.lease_inventory.clone();
         self.patch_lifecycle = payload.patch_lifecycle.clone();
     }
+}
+
+fn relation_option_floor_regresses_same_lineage(
+    saved: &BTreeMap<String, M8SemanticRelation>,
+    current: &BTreeMap<String, M8SemanticRelation>,
+) -> bool {
+    saved.iter().any(|(relation, saved_state)| {
+        current.get(relation).is_some_and(|current_state| {
+            saved_state.binding_epoch() == current_state.binding_epoch()
+                && saved_state.selected_option_index() < current_state.selected_option_index()
+        })
+    })
 }

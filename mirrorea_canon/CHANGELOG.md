@@ -18,6 +18,18 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-05** PROPOSAL-028 と ADR-0025 により、凍結SCN-01..10の primary ordinary
+  `.mir` source（SCN間共有可）と有限の named negative source variants を direct path の
+  typed terminal まで通す有限M10 conformance profileを採用した。SCN-09には有限の
+  named candidate patch sources を追加する。各 source unit hash、finite carrier
+  correspondence、exogenous schedule action、expectation predicateはprofileに束縛され、
+  generatorとverifierの分離、program/scheduleのdual provenance、SCN-08のnon-Surface
+  three-option typed fallback carrierを要求する。setup prose、expected JSON/report/
+  fixture-name、waiverはsemantic shortcutにできない。field declarations後に一つだけ置ける
+  `visible observer_safe fields (...)` をM10 direct consumerの唯一のM6/M7 seamとして
+  採用し、private-by-default、source-bound observer publish、`VisibilityDenied` failureを
+  定めた。M10はgeneral proof/OBL、C-distributed、public grammar/API/ABI/wire、deployment、
+  product/I2+、SCN-11/12の10/10昇格を主張しない。
 - **2026-08-05** accepted Rust correction と independent finite-only review により、
   OBL-028 を `model-checked-bounded` に更新した。evidence は
   `crates/mir-semantics/src/m9_model_check_auth.rs` と

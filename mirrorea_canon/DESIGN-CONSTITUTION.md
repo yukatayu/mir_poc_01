@@ -19,10 +19,14 @@ claim.
 ## C1. Authority, scope, and decision procedure
 
 Canon is the only normative source; LAB is evidence and implementation. The
-v0 outcome is one ordinary `.mir` source whose checked meaning can be parsed,
-statically checked, elaborated into typed Core/obligations/generated
-communication, run by a deterministic single-process logical multi-locus
-reference runtime, traced, saved/loaded, patched, projected, and diagnosed.
+v0 outcome includes one ordinary `.mir` integration spine whose checked meaning
+can be parsed, statically checked, elaborated into typed Core/obligations/
+generated communication, run by a deterministic single-process logical
+multi-locus reference runtime, traced, saved/loaded, patched, projected, and
+diagnosed. That integration spine does not replace the finite M10 release
+carrier bundle of ADR-0025: distinct negative source identities, separately
+checked patch artifacts, and explicit non-Surface typed carriers remain
+required where their frozen expectations demand them.
 
 For an ordinary design question, decide in this order: (1) semantic meaning
 and owner, (2) authority origin, (3) evaluation site and trigger, (4)
