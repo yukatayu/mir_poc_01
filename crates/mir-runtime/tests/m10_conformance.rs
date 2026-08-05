@@ -26,9 +26,16 @@ const DOMAIN_PROJECTION_REQUIREMENTS: [(&str, &str); 5] = [
     ("relation", "relation_hash"),
     ("config", "config_hash"),
 ];
+const M10_SCN02_SCENARIO_SOURCE_PATH: &str = "mirrorea_canon/scenarios/SCN-02-attack.md";
+const M10_SCN02_STALE_CANON_LINE_START: i64 = 39;
+const M10_SCN02_STALE_CANON_LINE_END: i64 = 47;
 const M10_SCN10_CANON_SOURCE_PATH: &str = "mirrorea_canon/spec/11-m10-i1plus-conformance.md";
 const M10_SCN10_CANON_LINE_START: i64 = 19;
 const M10_SCN10_CANON_LINE_END: i64 = 24;
+const M10_SCN10_SCENARIO_SOURCE_PATH: &str =
+    "mirrorea_canon/scenarios/SCN-10-saveload-stale-reject.md";
+const M10_SCN10_SCENARIO_LINE_START: i64 = 15;
+const M10_SCN10_SCENARIO_LINE_END: i64 = 27;
 const M10_NO_STALE_RESURRECTION_CANON_SOURCE_PATH: &str =
     "mirrorea_canon/theory/04-ordering-and-cuts.md";
 const M10_NO_STALE_RESURRECTION_CANON_LINE_START: i64 = 86;
@@ -175,6 +182,12 @@ fn schedule_cases() -> Vec<Value> {
             "SCN-02",
             Some("scn-02/positive.mir"),
             json!({"kind": "corrupted_request", "event": "attack", "principal": "self", "target": "target", "missing": "capability"}),
+        ),
+        schedule_case(
+            "SCN02.target.leave",
+            "SCN-02",
+            Some("scn-02/positive.mir"),
+            json!({"kind": "target_leave", "target": "target"}),
         ),
         schedule_case(
             "SCN02.attack.stale_membership",
@@ -2520,6 +2533,23 @@ fn require_json_pointer_equal(
     }
 }
 
+fn require_json_pointer_equal_across(
+    left_value: &Value,
+    left: &str,
+    right_value: &Value,
+    right: &str,
+    context: &str,
+    failures: &mut Vec<String>,
+) {
+    let left_actual = require_pointer(left_value, left, context, failures).cloned();
+    let right_actual = require_pointer(right_value, right, context, failures).cloned();
+    if left_actual.is_some() && right_actual.is_some() && left_actual != right_actual {
+        failures.push(format!(
+            "{context} expected {left} and {right} to match across rows; left={left_actual:?}, right={right_actual:?}"
+        ));
+    }
+}
+
 fn fail_if_true_pointer(value: &Value, pointer: &str, context: &str, failures: &mut Vec<String>) {
     if value.pointer(pointer) == Some(&json!(true)) {
         failures.push(format!("{context} must not report {pointer}=true"));
@@ -2590,6 +2620,250 @@ fn require_scn10_no_stale_resurrection_canon_binding(
         "/runtime_transition_trace/no_stale_resurrection/canon_refs/0/theorem",
         json!("THM-003"),
         &context,
+        failures,
+    );
+}
+
+fn require_scn10_scenario_thm003_guard_binding(
+    row: &Value,
+    expectation_id: &str,
+    failures: &mut Vec<String>,
+) {
+    let context = format!("{expectation_id} Canon SCN10 stale-reject scenario/THM-003 guard");
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/canon_refs/0/source_path",
+        json!(M10_SCN10_SCENARIO_SOURCE_PATH),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/canon_refs/0/line_start",
+        json!(M10_SCN10_SCENARIO_LINE_START),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/canon_refs/0/line_end",
+        json!(M10_SCN10_SCENARIO_LINE_END),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/canon_refs/0/scn_id",
+        json!("SCN-10"),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/thm_refs/0/theorem",
+        json!("THM-003"),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/thm_refs/0/source_path",
+        json!(M10_NO_STALE_RESURRECTION_CANON_SOURCE_PATH),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/thm_refs/0/line_start",
+        json!(M10_NO_STALE_RESURRECTION_CANON_LINE_START),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_stale_reject_guard/thm_refs/0/line_end",
+        json!(M10_NO_STALE_RESURRECTION_CANON_LINE_END),
+        &context,
+        failures,
+    );
+}
+
+fn require_scn10_current_s2_positive_lineage(
+    row: &Value,
+    s2_row: &Value,
+    expectation_id: &str,
+    failures: &mut Vec<String>,
+) {
+    let context = format!("{expectation_id} SCN10 current S2 positive lineage guard");
+    require_scn10_scenario_thm003_guard_binding(row, expectation_id, failures);
+    for (index, event) in [
+        (0, "save_s1"),
+        (1, "a_leave"),
+        (2, "maintainer_actual_lease_expiry"),
+        (3, "save_s2"),
+    ] {
+        require_json_value_pointer(
+            row,
+            &format!("/runtime_transition_trace/scn10_current_s2_lineage/events/{index}"),
+            json!(event),
+            &context,
+            failures,
+        );
+    }
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/fresh_initial_negative_session_used",
+        false,
+        &context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/sentinel_only_live_floor_used",
+        false,
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/sentinel_only_control/result",
+        json!("insufficient_without_persistent_s2_lineage"),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/sentinel_only_control/sentinel",
+        json!("M8LiveFloor::with_stale_membership(\"m10-stale\")"),
+        &context,
+        failures,
+    );
+    require_json_pointer_equal_across(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/session_id",
+        s2_row,
+        "/runtime_transition_trace/session_id",
+        &context,
+        failures,
+    );
+}
+
+fn require_scn10_current_s2_no_domain_mutation(
+    row: &Value,
+    expectation_id: &str,
+    failures: &mut Vec<String>,
+) {
+    let context = format!("{expectation_id} current S2 five-domain no-mutation guard");
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/current_s2_no_mutation/no_current_s2_mutation",
+        true,
+        &context,
+        failures,
+    );
+    for hash_key in [
+        "store_hash",
+        "membership_hash",
+        "grant_hash",
+        "relation_hash",
+        "config_hash",
+    ] {
+        let before =
+            format!("/runtime_transition_trace/current_s2_no_mutation/original_before/{hash_key}");
+        let after =
+            format!("/runtime_transition_trace/current_s2_no_mutation/final_after/{hash_key}");
+        require_json_pointer_equal(row, &before, &after, &context, failures);
+    }
+}
+
+fn require_scn10_s2_cut_clone_doctor_guard(
+    row: &Value,
+    expectation_id: &str,
+    mutation_kind: &str,
+    diagnostic_code: &str,
+    failures: &mut Vec<String>,
+) {
+    let context = format!("{expectation_id} actual S2 cut clone doctor guard");
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/mutation_kind",
+        json!(mutation_kind),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/base_cut/save_id",
+        json!("S2"),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/result",
+        json!("rejected"),
+        &context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/diagnostic/code",
+        json!(diagnostic_code),
+        &context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/rejected_before_current_s2_restore",
+        true,
+        &context,
+        failures,
+    );
+    require_json_pointer_not_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/clone_identity_before",
+        "/runtime_transition_trace/s2_cut_clone_mutation/clone_identity_after",
+        &context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/scn10_current_s2_lineage/session_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/base_cut/session_id",
+        &context,
+        failures,
+    );
+    require_scn10_current_s2_no_domain_mutation(row, expectation_id, failures);
+}
+
+fn require_scn02_stale_membership_canon_binding(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN02-R-N-STALE Canon stale-membership guard binding";
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/canon_refs/0/source_path",
+        json!(M10_SCN02_SCENARIO_SOURCE_PATH),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/canon_refs/0/line_start",
+        json!(M10_SCN02_STALE_CANON_LINE_START),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/canon_refs/0/line_end",
+        json!(M10_SCN02_STALE_CANON_LINE_END),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/canon_refs/0/scn_id",
+        json!("SCN-02"),
+        context,
         failures,
     );
 }
@@ -6482,14 +6756,40 @@ fn p0_scn10_reacquire_after_load_must_execute_fresh_m9_admission_bridge_and_m8_o
 }
 
 #[test]
+fn p0_scn10_negative_branches_must_start_from_same_persistent_positive_s2_lineage() {
+    let report = run_conformance();
+    let s2_row = inventory_row(&report, "SCN10-R-P-S2");
+    let mut failures = Vec::new();
+
+    for expectation_id in [
+        "SCN10-R-N-MERGE",
+        "SCN10-R-N-LEASEDOCTOR",
+        "SCN10-R-N-CUTDOCTOR",
+    ] {
+        let row = inventory_row(&report, expectation_id);
+        require_scn10_canon_line_binding(row, expectation_id, &mut failures);
+        require_scn10_no_stale_resurrection_canon_binding(row, expectation_id, &mut failures);
+        require_scn10_current_s2_positive_lineage(row, s2_row, expectation_id, &mut failures);
+    }
+
+    assert!(
+        failures.is_empty(),
+        "SCN10 negative stale merge / lease doctor / cut doctor branches must all start from the same persistent positive M9+M8 current session that executed S1 -> A leave -> maintainer actual lease expiry -> S2; sentinel-only stale floors or fresh initial negative sessions are insufficient:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
 fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation() {
     let report = run_conformance();
     let row = inventory_row(&report, "SCN10-R-N-MERGE");
+    let s2_row = inventory_row(&report, "SCN10-R-P-S2");
     let context = "SCN10-R-N-MERGE stale merge current-session no-mutation";
     let mut failures = Vec::new();
 
     require_scn10_canon_line_binding(row, "SCN10-R-N-MERGE", &mut failures);
     require_scn10_no_stale_resurrection_canon_binding(row, "SCN10-R-N-MERGE", &mut failures);
+    require_scn10_current_s2_positive_lineage(row, s2_row, "SCN10-R-N-MERGE", &mut failures);
     for pointer in [
         "/runtime_transition_trace/stale_merge_preflight",
         "/runtime_transition_trace/stale_merge_preflight/source",
@@ -6550,7 +6850,21 @@ fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation(
     require_json_value_pointer(
         row,
         "/runtime_transition_trace/stale_merge_preflight/preflight_target",
-        json!("candidate_clone"),
+        json!("S2_current"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/s1_candidate_ref",
+        json!("S1"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/current_s2_ref",
+        json!("S2"),
         context,
         &mut failures,
     );
@@ -6605,8 +6919,36 @@ fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation(
     );
     require_json_value_pointer(
         row,
+        "/runtime_transition_trace/stale_merge_preflight/candidate_m9_restore/stage",
+        json!("candidate_m9_restore"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
         "/runtime_transition_trace/stale_merge_preflight/candidate_m9_restore/result",
-        json!("candidate_rejected"),
+        json!("accepted"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/s2_current_preflight/stage",
+        json!("s2_current_preflight"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/s2_current_preflight/result",
+        json!("rejected"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/s2_current_preflight/diagnostic/code",
+        json!("E-CUT-002"),
         context,
         &mut failures,
     );
@@ -6614,6 +6956,13 @@ fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation(
         row,
         "/runtime_transition_trace/stale_merge_preflight/candidate_m8_restore/accessor",
         json!("M8LocalRuntime::try_restore_local_cut"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/stale_merge_preflight/candidate_m8_restore/stage",
+        json!("candidate_m8_restore"),
         context,
         &mut failures,
     );
@@ -6668,6 +7017,7 @@ fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation(
             format!("/runtime_transition_trace/current_session_no_mutation/final_after/{hash_key}");
         require_json_pointer_equal(row, &before, &after, context, &mut failures);
     }
+    require_scn10_current_s2_no_domain_mutation(row, "SCN10-R-N-MERGE", &mut failures);
     if let Some(entries) = row
         .pointer("/runtime_transition_trace/transition_trace")
         .and_then(Value::as_array)
@@ -6687,7 +7037,45 @@ fn p0_scn10_stale_merge_must_preflight_reject_without_current_m9_or_m8_mutation(
 
     assert!(
         failures.is_empty(),
-        "SCN10 stale merge must reject in a candidate/preflight clone before mutating current M9 or M8, and original-before/final-after current-session store/membership/grant/relation/config/cut/ledger hashes must match:\n{}",
+        "SCN10 stale merge must preflight an S1 candidate against current S2, keep candidate M9 restore acceptance separate from rejected S2/M8 preflight, and preserve current S2 store/membership/grant/relation/config hashes:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
+fn p0_scn10_doctor_branches_must_mutate_actual_s2_cut_clone_and_preserve_current_s2() {
+    let report = run_conformance();
+    let s2_row = inventory_row(&report, "SCN10-R-P-S2");
+    let mut failures = Vec::new();
+
+    for (expectation_id, mutation_kind, diagnostic_code) in [
+        (
+            "SCN10-R-N-LEASEDOCTOR",
+            "expired_lease_flipped_live",
+            "E-CUT-001",
+        ),
+        (
+            "SCN10-R-N-CUTDOCTOR",
+            "receive_without_send_injected",
+            "E-CUT-001",
+        ),
+    ] {
+        let row = inventory_row(&report, expectation_id);
+        require_scn10_canon_line_binding(row, expectation_id, &mut failures);
+        require_scn10_no_stale_resurrection_canon_binding(row, expectation_id, &mut failures);
+        require_scn10_current_s2_positive_lineage(row, s2_row, expectation_id, &mut failures);
+        require_scn10_s2_cut_clone_doctor_guard(
+            row,
+            expectation_id,
+            mutation_kind,
+            diagnostic_code,
+            &mut failures,
+        );
+    }
+
+    assert!(
+        failures.is_empty(),
+        "SCN10 lease doctor and cut doctor must mutate an actual S2 cut clone, reject that clone, and prove the current S2 store/membership/grant/relation/config domains remain unchanged:\n{}",
         failures.join("\n")
     );
 }
@@ -6702,6 +7090,22 @@ fn p1_fallback_repromotion_falsifier_must_expose_actual_m8_negative_stage_or_nar
     let claim_narrowed = value.pointer("/validation/fallback_lineage_claim_scope")
         == Some(&json!("typed_carrier_only"))
         && value.pointer("/runtime/no_m8_negative_stage_claimed") == Some(&json!(true));
+    let has_m8_stage_evidence = has_any_pointer(
+        &value,
+        &[
+            "/validation/validator_results/fallback_lineage_validator/input_stage",
+            "/validation/validator_state/fallback_lineage_validator/m8_negative_stage/runtime_session_id",
+            "/runtime/no_mutation_boundary/stage",
+        ],
+    );
+    if claim_narrowed
+        && !has_m8_stage_evidence
+        && value.pointer("/validation/real_validator_invoked") == Some(&json!(true))
+    {
+        failures.push(
+            "fallback_repromotion_without_reacquire typed-carrier-only scope has no M8 stage evidence, so validation.real_validator_invoked must be false or omitted".to_string(),
+        );
+    }
     if !claim_narrowed {
         for pointer in [
             "/validation/validator_results/fallback_lineage_validator/input_stage",
@@ -6804,6 +7208,121 @@ fn p1_fallback_repromotion_falsifier_must_expose_actual_m8_negative_stage_or_nar
     assert!(
         failures.is_empty(),
         "fallback_repromotion_without_reacquire must either expose actual M8 validator negative-stage evidence for the same-lineage repromotion rejection or explicitly narrow the claim to typed-carrier validation:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
+fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reject() {
+    let report = run_conformance();
+    let row = inventory_row(&report, "SCN02-R-N-STALE");
+    let context = "SCN02-R-N-STALE actual target leave stale-membership guard";
+    let mut failures = Vec::new();
+
+    require_scn02_stale_membership_canon_binding(row, &mut failures);
+    for pointer in [
+        "/runtime_transition_trace/scn02_stale_membership_guard/persistent_session/m9_authority_session_id",
+        "/runtime_transition_trace/scn02_stale_membership_guard/persistent_session/m8_runtime_session_id",
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/request_identity",
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/old_authority_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/exogenous_leave_action/input_action_id",
+    ] {
+        require_pointer(row, pointer, context, &mut failures);
+    }
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/leave_action_source",
+        json!("exogenous_schedule_input"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retire_transition",
+        json!("membership.retire"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/bridge_refresh/accessor",
+        json!("M9M10AuthorityBridge::refresh"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/bridge_refresh/result",
+        json!("refreshed_after_target_leave"),
+        context,
+        &mut failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/reuses_same_attack_request",
+        true,
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/result",
+        json!("rejected"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/diagnostic/code",
+        json!("StaleMembership"),
+        context,
+        &mut failures,
+    );
+    for (left, right) in [
+        (
+            "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_membership_ref",
+            "/runtime_transition_trace/scn02_stale_membership_guard/stale_membership_trace/membership_ref",
+        ),
+        (
+            "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_epoch",
+            "/runtime_transition_trace/scn02_stale_membership_guard/stale_membership_trace/epoch",
+        ),
+        (
+            "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_incarnation",
+            "/runtime_transition_trace/scn02_stale_membership_guard/stale_membership_trace/incarnation",
+        ),
+        (
+            "/runtime_transition_trace/scn02_stale_membership_guard/store_no_mutation/before_hash",
+            "/runtime_transition_trace/scn02_stale_membership_guard/store_no_mutation/after_hash",
+        ),
+    ] {
+        require_json_pointer_equal(row, left, right, context, &mut failures);
+    }
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/exogenous_leave_action/result_supplied",
+        false,
+        context,
+        &mut failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/exogenous_leave_action/authority_supplied",
+        false,
+        context,
+        &mut failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/generic_corrupted_object_used",
+        false,
+        context,
+        &mut failures,
+    );
+
+    assert!(
+        failures.is_empty(),
+        "SCN02 stale-membership must be produced by an actual target leave/retire in a persistent M9/M8 session, bridge refresh, and the same attack request rejected with old authority while store remains unchanged; a generic corrupted object/string ref is insufficient:\n{}",
         failures.join("\n")
     );
 }
@@ -8218,7 +8737,16 @@ fn falsifiers_use_typed_input_mutations_real_validators_and_exact_diagnostics() 
             json!("m10-i1plus-source-run-mutation-v0"),
         );
         assert_pointer(&value, "/falsifier/name_driven_terminal_used", json!(false));
-        assert_pointer(&value, "/validation/real_validator_invoked", json!(true));
+        if fault == "fallback_repromotion_without_reacquire" {
+            assert_pointer(
+                &value,
+                "/validation/fallback_lineage_claim_scope",
+                json!("typed_carrier_only"),
+            );
+            assert_pointer(&value, "/validation/real_validator_invoked", json!(false));
+        } else {
+            assert_pointer(&value, "/validation/real_validator_invoked", json!(true));
+        }
         assert_pointer(
             &value,
             &format!("/validation/invocations/{validator}"),

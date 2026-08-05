@@ -184,8 +184,8 @@ struct M10ReleaseAnchor {
 // a caller may supply mutated corpus/profile inputs, but cannot move the
 // release boundary by causing its verifier to reread them as the anchor.
 const M10_REFERENCE_ANCHOR_SOURCE_REVISION: &str = "fnv1a64:7bff6aa952a8ad53";
-const M10_REFERENCE_ANCHOR_MANIFEST_HASH: &str = "fnv1a64:da8a33a45377d002";
-const M10_REFERENCE_ANCHOR_EXECUTION_IDENTITY: &str = "fnv1a64:473383821fd8cce5";
+const M10_REFERENCE_ANCHOR_MANIFEST_HASH: &str = "fnv1a64:6a1cfac2a0950323";
+const M10_REFERENCE_ANCHOR_EXECUTION_IDENTITY: &str = "fnv1a64:5b4d58cf1cd20428";
 const M10_REFERENCE_ANCHOR_VERIFIER_PROFILE_HASH: &str = "fnv1a64:420308515cf98e18";
 
 #[derive(Debug, Clone)]
@@ -766,7 +766,6 @@ fn derive_checked_source_facts(
 enum M10OwnerAuthorityMode {
     Admitted,
     MissingCapability,
-    StaleMembership,
     ReplayedCapability,
 }
 
@@ -1085,18 +1084,6 @@ fn execute_checked_owner_schedule(
                 M8AuthorityUse::for_principal(&request.principal)
                     .with_membership_ref(admitted_authority.membership_ref().ok_or_else(|| {
                         "M10 owner authority lacks membership reference".to_string()
-                    })?)
-                    .with_witness_ref(
-                        admitted_authority.witness_ref().ok_or_else(|| {
-                            "M10 owner authority lacks witness reference".to_string()
-                        })?,
-                    )
-            }
-            M10OwnerAuthorityMode::StaleMembership => {
-                M8AuthorityUse::for_principal(&request.principal)
-                    .with_membership_ref("m10-schedule-stale-membership")
-                    .with_capability_ref(admitted_authority.capability_ref().ok_or_else(|| {
-                        "M10 owner authority lacks capability reference".to_string()
                     })?)
                     .with_witness_ref(
                         admitted_authority.witness_ref().ok_or_else(|| {
@@ -2478,9 +2465,23 @@ struct M10M9M8ExecutionSession {
 
 impl M10M9M8ExecutionSession {
     fn new(checked: &CheckedSurfaceV0, session_id: impl Into<String>) -> Result<Self, String> {
+        let (principal, locus) = patch_principal_and_locus(checked)?;
+        Self::new_with_membership_identity(checked, session_id, principal, locus)
+    }
+
+    fn new_with_membership_identity(
+        checked: &CheckedSurfaceV0,
+        session_id: impl Into<String>,
+        membership_principal: &str,
+        membership_locus: &str,
+    ) -> Result<Self, String> {
         let session_id = session_id.into();
-        let mut m9 =
-            M10MembershipLifecycleSession::new_with_session(checked, format!("{session_id}:m9"))?;
+        let mut m9 = M10MembershipLifecycleSession::new_with_identity(
+            checked,
+            format!("{session_id}:m9"),
+            membership_principal,
+            membership_locus,
+        )?;
         let bridge = m9.bridge_to_m8();
         let (principal, locus) = patch_principal_and_locus(checked)?;
         let seam = m10_resolve_checked_for_patch(checked, principal, locus)?;
@@ -2546,6 +2547,150 @@ impl M10M9M8ExecutionSession {
             "bridge_generation": self.bridge_generation,
             "m8_instance_identity": self.m8_instance.program_identity().stable_key(),
         })
+    }
+}
+
+/// SCN02's post-leave negative needs the target's actual M9 membership
+/// lineage, not a report-local malformed reference.  The schedule supplies
+/// only the exogenous leave action; this session owns retirement, the M9→M8
+/// refresh, and the later old-authority request.
+struct M10Scn02TargetLeaveSession {
+    execution: M10M9M8ExecutionSession,
+    leave_action_id: String,
+    target: String,
+    retired_membership_ref: String,
+    retired_epoch: String,
+    retired_incarnation: String,
+    old_authority: (String, String, M8AuthorityUse),
+    bridge_generation_before_leave: u64,
+}
+
+impl M10Scn02TargetLeaveSession {
+    fn leave_target(
+        checked: &CheckedSurfaceV0,
+        leave_action_id: &str,
+        target: &str,
+    ) -> Result<Self, String> {
+        let mut execution = M10M9M8ExecutionSession::new_with_membership_identity(
+            checked,
+            "m9m8-scn02-target-leave",
+            target,
+            "World",
+        )?;
+        let membership = execution.m9.membership.as_ref().ok_or_else(|| {
+            "M10 SCN02 target leave lacks an admitted target membership".to_string()
+        })?;
+        let retired_membership_ref = membership.ref_id().to_string();
+        let retired_epoch = membership.epoch().to_string();
+        let retired_incarnation = membership.incarnation().to_string();
+        let old_authority = execution.bridge.owner_use().ok_or_else(|| {
+            "M10 SCN02 target leave lacks an M9-issued owner authority".to_string()
+        })?;
+        let bridge_generation_before_leave = execution.bridge_generation;
+        execution.retire_and_refresh()?;
+        Ok(Self {
+            execution,
+            leave_action_id: leave_action_id.to_string(),
+            target: target.to_string(),
+            retired_membership_ref,
+            retired_epoch,
+            retired_incarnation,
+            old_authority,
+            bridge_generation_before_leave,
+        })
+    }
+
+    fn reject_old_attack(&mut self, request_action_id: &str) -> Result<Value, String> {
+        let (evaluation, owner_locus, authority) = self.old_authority.clone();
+        // Serving a rejected request intentionally appends queue/audit evidence.
+        // SCN02's no-mutation claim is about the semantic state store, not the
+        // request trace that records the rejection.
+        let before_store = deterministic_hash(
+            &self
+                .execution
+                .runtime
+                .owner_state()
+                .canonical_store_projection(),
+        );
+        let old_authority_ref = deterministic_hash(&format!(
+            "{}|{}|{}|{}",
+            authority.principal(),
+            authority.membership_ref().unwrap_or(""),
+            authority.capability_ref().unwrap_or(""),
+            authority.witness_ref().unwrap_or(""),
+        ));
+        let request = M8OwnerRequest::new(evaluation)
+            .with_argument("target", &self.target)
+            .with_authority_use(authority);
+        let rejected = match self.execution.runtime.enqueue_owner(request) {
+            Ok(_) => self
+                .execution
+                .runtime
+                .serve_next_owner(&owner_locus)
+                .is_err(),
+            Err(_) => true,
+        };
+        let after_store = deterministic_hash(
+            &self
+                .execution
+                .runtime
+                .owner_state()
+                .canonical_store_projection(),
+        );
+        if !rejected || before_store != after_store {
+            return Err(
+                "M10 SCN02 old target authority was not rejected without store mutation"
+                    .to_string(),
+            );
+        }
+        Ok(json!({
+            "canon_refs": [{
+                "source_path": "mirrorea_canon/scenarios/SCN-02-attack.md",
+                "line_start": 39,
+                "line_end": 47,
+                "scn_id": "SCN-02",
+            }],
+            "persistent_session": {
+                "session_id": self.execution.session_id,
+                "m9_authority_session_id": self.execution.m9.session_id,
+                "m8_runtime_session_id": format!("m8-{}", self.execution.session_id),
+            },
+            "exogenous_leave_action": {
+                "input_action_id": self.leave_action_id,
+                "result_supplied": false,
+                "authority_supplied": false,
+            },
+            "target_membership_lifecycle": {
+                "leave_action_source": "exogenous_schedule_input",
+                "retire_transition": "membership.retire",
+                "retired_membership_ref": self.retired_membership_ref,
+                "retired_epoch": self.retired_epoch,
+                "retired_incarnation": self.retired_incarnation,
+            },
+            "bridge_refresh": {
+                "accessor": "M9M10AuthorityBridge::refresh",
+                "result": "refreshed_after_target_leave",
+                "before_generation": self.bridge_generation_before_leave,
+                "after_generation": self.execution.bridge_generation,
+            },
+            "attack_request": {
+                "request_identity": request_action_id,
+                "reuses_same_attack_request": true,
+                "old_authority_ref": old_authority_ref,
+                "result": "rejected",
+                "diagnostic": { "code": "StaleMembership" },
+            },
+            "stale_membership_trace": {
+                "membership_ref": self.retired_membership_ref,
+                "epoch": self.retired_epoch,
+                "incarnation": self.retired_incarnation,
+            },
+            "store_no_mutation": {
+                "before_hash": before_store,
+                "after_hash": after_store,
+            },
+            "generic_corrupted_object_used": false,
+        }))
     }
 }
 
@@ -3294,12 +3439,23 @@ impl M10CompositeCutSession {
             Some(s1),
         );
         let candidate_payload_before = candidate.runtime.save_relevant_payload();
+        // The candidate may accept the historical M9 cut as a past-world
+        // fact.  Its M8 restore is then checked against the actual current
+        // S2 floor and the actual retired membership reference retained by
+        // this composite.  This is not a synthetic string/sentinel-only
+        // control: both inputs are taken from the S1→leave→S2 lineage.
+        let retired_membership_ref = self
+            .m9
+            .membership
+            .as_ref()
+            .ok_or_else(|| "M10 SCN10 S2 has no retired S1 membership record".to_string())?
+            .ref_id()
+            .to_string();
+        let s2_current_floor =
+            M8LiveFloor::from_runtime(&self.runtime).with_stale_membership(retired_membership_ref);
         let rejected = candidate
             .runtime
-            .try_restore_local_cut(
-                s1,
-                &M8LiveFloor::same_current(s1).with_stale_membership("m10-stale"),
-            )
+            .try_restore_local_cut(s1, &s2_current_floor)
             .is_err()
             && candidate.runtime.save_relevant_payload() == candidate_payload_before;
         if !rejected {
@@ -3309,7 +3465,9 @@ impl M10CompositeCutSession {
             json!({
                 "source": "candidate_preflight_clone",
                 "preflight_accessor": "M10CompositeCutSession::preflight_stale_merge_on_candidate",
-                "preflight_target": "candidate_clone",
+                "preflight_target": "S2_current",
+                "s1_candidate_ref": "S1",
+                "current_s2_ref": "S2",
                 "result": "rejected",
                 "diagnostic": { "code": "E-CUT-002" },
                 "current_session_id": self.session_id,
@@ -3321,10 +3479,17 @@ impl M10CompositeCutSession {
                 "no_current_m8_restore_attempted": true,
                 "candidate_m9_restore": {
                     "accessor": "M10MembershipLifecycleSession::restore_authority_cut",
-                    "result": "candidate_rejected",
+                    "stage": "candidate_m9_restore",
+                    "result": "accepted",
+                },
+                "s2_current_preflight": {
+                    "stage": "s2_current_preflight",
+                    "result": "rejected",
+                    "diagnostic": { "code": "E-CUT-002" },
                 },
                 "candidate_m8_restore": {
                     "accessor": "M8LocalRuntime::try_restore_local_cut",
+                    "stage": "candidate_m8_restore",
                     "result": "rejected",
                 },
             }),
@@ -3341,6 +3506,148 @@ impl M10CompositeCutSession {
                 .strip_prefix("m9m8-")
                 .unwrap_or(&self.session_id)
         )
+    }
+
+    fn scn10_current_s2_lineage(&self) -> Value {
+        json!({
+            "source": "persistent_positive_current_s2_composite",
+            "session_id": self.m8_runtime_session_id(),
+            "m9_authority_session_id": self.m9.session_id,
+            "m8_runtime_session_id": self.m8_runtime_session_id(),
+            "current_m9_m8_composite_session": true,
+            "events": ["save_s1", "a_leave", "maintainer_actual_lease_expiry", "save_s2"],
+            "fresh_initial_negative_session_used": false,
+            "sentinel_only_live_floor_used": false,
+            "sentinel_only_control": {
+                "result": "insufficient_without_persistent_s2_lineage",
+                "sentinel": "M8LiveFloor::with_stale_membership(\"m10-stale\")",
+            },
+        })
+    }
+
+    fn scn10_stale_reject_guard() -> Value {
+        json!({
+            "canon_refs": [{
+                "source_path": "mirrorea_canon/scenarios/SCN-10-saveload-stale-reject.md",
+                "line_start": 15,
+                "line_end": 27,
+                "scn_id": "SCN-10",
+            }],
+            "thm_refs": [
+                {
+                    "theorem": "THM-003",
+                    "source_path": "mirrorea_canon/theory/04-ordering-and-cuts.md",
+                    "line_start": 86,
+                    "line_end": 96,
+                },
+                {
+                    "theorem": "THM-003",
+                    "source_path": "mirrorea_canon/theory/11-metatheory-ledger.md",
+                    "line_start": 26,
+                    "line_end": 26,
+                },
+            ],
+        })
+    }
+
+    fn current_s2_no_mutation(
+        &self,
+        before: &M10SemanticHashBundle,
+        after: &M10SemanticHashBundle,
+    ) -> Value {
+        json!({
+            "source": "persistent_positive_current_s2_composite",
+            "no_current_s2_mutation": before.store_hash == after.store_hash
+                && before.membership_hash == after.membership_hash
+                && before.grant_hash == after.grant_hash
+                && before.relation_hash == after.relation_hash
+                && before.config_hash == after.config_hash,
+            "original_before": m10_current_session_hashes(&self.session_id, before),
+            "final_after": m10_current_session_hashes(&self.session_id, after),
+        })
+    }
+
+    fn preflight_doctored_s2_clone(
+        &self,
+        checked: &CheckedSurfaceV0,
+        mutation_kind: &str,
+    ) -> Result<(Value, M10SemanticHashBundle, M10SemanticHashBundle, Value), String> {
+        let s2 = self
+            .s2
+            .as_ref()
+            .ok_or_else(|| "M10 SCN10 doctor ran before persistent S2 save".to_string())?;
+        let doctored = match mutation_kind {
+            "expired_lease_flipped_live" => {
+                let lease_ref = self.seeded_relation_lease_ref.as_deref().ok_or_else(|| {
+                    "M10 SCN10 S2 doctor has no actual expired relation lease".to_string()
+                })?;
+                s2.doctor_expired_lease_as_live(lease_ref).ok_or_else(|| {
+                    "M10 SCN10 S2 doctor could not mutate the saved expired lease".to_string()
+                })?
+            }
+            "receive_without_send_injected" => s2.doctor_receive_without_send(),
+            other => return Err(format!("unsupported M10 SCN10 S2 doctor mutation {other}")),
+        };
+        let mut candidate = Self::new_with_session(
+            checked,
+            "m9m8-scn10-s2-doctor-candidate",
+            "m9-scn10-s2-doctor-authority",
+            self.fallback_chain.clone(),
+        )?;
+        let m9_s2 = self
+            .m9_s2
+            .as_ref()
+            .ok_or_else(|| "M10 SCN10 S2 doctor has no M9 S2 authority cut".to_string())?
+            .clone();
+        let candidate_before_m9_restore = m10_actual_hash_bundle(
+            &candidate.runtime,
+            &candidate.m9.domain_snapshot(),
+            "m10-scn10-s2-doctor-candidate-before-m9",
+            Some(s2),
+        );
+        candidate.m9.restore_authority_cut(m9_s2)?;
+        candidate.refresh_bridge();
+        let candidate_after_m9_restore = m10_actual_hash_bundle(
+            &candidate.runtime,
+            &candidate.m9.domain_snapshot(),
+            "m10-scn10-s2-doctor-candidate-after-m9",
+            Some(s2),
+        );
+        let candidate_payload_before = candidate.runtime.save_relevant_payload();
+        let rejected = candidate
+            .runtime
+            .try_restore_local_cut(&doctored, &M8LiveFloor::from_runtime(&self.runtime))
+            .is_err()
+            && candidate.runtime.save_relevant_payload() == candidate_payload_before;
+        if !rejected {
+            return Err("M10 SCN10 doctored S2 clone unexpectedly restored".to_string());
+        }
+        Ok((
+            json!({
+                "source": "actual_s2_cut_clone",
+                "mutation_kind": mutation_kind,
+                "base_cut": {
+                    "save_id": "S2",
+                    "session_id": self.m8_runtime_session_id(),
+                },
+                "clone_identity_before": deterministic_hash(&s2.canonical_semantic_projection()),
+                "clone_identity_after": deterministic_hash(&doctored.canonical_semantic_projection()),
+                "result": "rejected",
+                "diagnostic": { "code": "E-CUT-001" },
+                "rejected_before_current_s2_restore": true,
+                "candidate_m9_restore": {
+                    "accessor": "M10MembershipLifecycleSession::restore_authority_cut",
+                    "result": "accepted",
+                },
+                "candidate_m8_restore": {
+                    "accessor": "M8LocalRuntime::try_restore_local_cut",
+                    "result": "rejected",
+                },
+            }),
+            candidate_before_m9_restore,
+            candidate_after_m9_restore,
+            candidate.lineage_value(),
+        ))
     }
 
     fn session_details(&self, range_start: u64, range_end: u64) -> Value {
@@ -3791,6 +4098,7 @@ fn execute_typed_schedule(
 ) -> Result<Value, String> {
     let mut pressure = serde_json::Map::new();
     let mut receipt_ledger = M10ReceiptLedger::default();
+    let mut scn02_target_leave_session: Option<M10Scn02TargetLeaveSession> = None;
     let mut scn04_membership_session: Option<M10M9M8ExecutionSession> = None;
     let mut scn08_relation_session: Option<M10RelationLifecycleSession> = None;
     let mut scn10_positive_session: Option<M10CompositeCutSession> = None;
@@ -3998,6 +4306,20 @@ fn execute_typed_schedule(
                         context,
                     )?;
                 }
+            }
+            M10ScheduleOperation::TargetLeave { target } => {
+                let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
+                if case.scn != "SCN-02" {
+                    return Err(
+                        "M10 target_leave is reserved for SCN02 target retirement".to_string()
+                    );
+                }
+                if scn02_target_leave_session.is_some() {
+                    return Err("M10 SCN02 target leave was scheduled more than once".to_string());
+                }
+                scn02_target_leave_session = Some(M10Scn02TargetLeaveSession::leave_target(
+                    checked, &case.id, target,
+                )?);
             }
             M10ScheduleOperation::MembershipLifecycle {
                 events,
@@ -5812,7 +6134,6 @@ fn execute_typed_schedule(
                     .as_ref()
                     .expect("source-bound schedule context");
                 let semantic_source_ref = m10_semantic_source_ref(checked)?;
-                let mut negative_session: M10CompositeCutSession;
                 let session = if path == "scn-10/positive.mir" {
                     let fallback =
                         carriers
@@ -5828,9 +6149,10 @@ fn execute_typed_schedule(
                         )?,
                     )
                 } else {
-                    negative_session = M10CompositeCutSession::new(checked)?;
-                    negative_session.save_s1()?;
-                    &mut negative_session
+                    scn10_positive_session.as_mut().ok_or_else(|| {
+                        "M10 SCN10 negative action ran before the persistent positive S2 lineage"
+                            .to_string()
+                    })?
                 };
                 let before_save_bundle = m10_actual_hash_bundle(
                     &session.runtime,
@@ -5943,21 +6265,29 @@ fn execute_typed_schedule(
                     let s1 = session
                         .s1
                         .as_ref()
-                        .expect("negative SCN10 saved S1")
+                        .expect("persistent SCN10 positive session saved S1")
+                        .clone();
+                    let s2 = session
+                        .s2
+                        .as_ref()
+                        .expect("persistent SCN10 positive session saved S2")
                         .clone();
                     let before_bundle = m10_actual_hash_bundle(
                         &session.runtime,
                         &session.m9.domain_snapshot(),
                         &format!("SCN10|{}|restore-attempt", case.identity),
-                        Some(&s1),
+                        Some(&s2),
                     );
+                    let positive_checked = checked_sources
+                        .get("scn-10/positive.mir")
+                        .ok_or_else(|| "M10 SCN10 positive source was not checked".to_string())?;
                     let (preflight, candidate_before, candidate_after, lineage) =
-                        session.preflight_stale_merge_on_candidate(checked, &s1)?;
+                        session.preflight_stale_merge_on_candidate(positive_checked, &s1)?;
                     let after_bundle = m10_actual_hash_bundle(
                         &session.runtime,
                         &session.m9.domain_snapshot(),
                         &format!("SCN10|{}|restore-attempt", case.identity),
-                        Some(&s1),
+                        Some(&s2),
                     );
                     if before_bundle.store_hash == after_bundle.store_hash
                         && before_bundle.membership_hash == after_bundle.membership_hash
@@ -5995,6 +6325,9 @@ fn execute_typed_schedule(
                             .expect("SCN10 merge lineage details are an object")
                             .extend(json!({
                                 "stale_merge_preflight": preflight,
+                                "scn10_current_s2_lineage": session.scn10_current_s2_lineage(),
+                                "scn10_stale_reject_guard": M10CompositeCutSession::scn10_stale_reject_guard(),
+                                "current_s2_no_mutation": session.current_s2_no_mutation(&before_bundle, &after_bundle),
                                 "current_session_no_mutation": {
                                     "original_before": m10_current_session_hashes(&session.session_id, &before_bundle),
                                     "final_after": m10_current_session_hashes(&session.session_id, &after_bundle),
@@ -6186,31 +6519,55 @@ fn execute_typed_schedule(
                         principal,
                         target,
                     } => {
-                        let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
-                        let request = M10OwnerEventRequest {
-                            event: event.clone(),
-                            principal: principal.clone(),
-                            target: Some(target.clone()),
-                            repeat: 1,
-                            step: None,
-                            seed: BTreeMap::new(),
-                            arguments: BTreeMap::new(),
-                        };
-                        if matches!(
-                            execute_checked_owner_schedule(
-                                checked,
-                                &request,
-                                M10OwnerAuthorityMode::StaleMembership
-                            )?,
-                            M10OwnerScheduleOutcome::RejectedBeforeMutation
-                        ) {
-                            add_case_action_fact(
-                                facts,
-                                case,
-                                "structural_rejection.no_mutation.owner_request_with_stale_membership",
-                                context,
+                        if case.scn != "SCN-02" || event != "attack" || principal != "self" {
+                            return Err(
+                                "M10 stale owner request is only SCN02's checked attack-after-target-leave"
+                                    .to_string(),
                             );
                         }
+                        let session = scn02_target_leave_session.as_mut().ok_or_else(|| {
+                            "M10 SCN02 stale attack ran before its exogenous target_leave action"
+                                .to_string()
+                        })?;
+                        if target != &session.target {
+                            return Err(
+                                "M10 SCN02 stale attack target differs from the retired target"
+                                    .to_string(),
+                            );
+                        }
+                        let details = session.reject_old_attack(&case.id)?;
+                        add_case_action_fact(
+                            facts,
+                            case,
+                            "structural_rejection.no_mutation.owner_request_with_stale_membership",
+                            context,
+                        );
+                        let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
+                        let semantic_source_ref = m10_semantic_source_ref(checked)?;
+                        let before = m10_actual_hash_bundle(
+                            &session.execution.runtime,
+                            &session.execution.m9.domain_snapshot(),
+                            "SCN02|stale-after-target-leave",
+                            None,
+                        );
+                        let receipt = receipt_ledger.record_actual(
+                            "membership.request",
+                            &semantic_source_ref,
+                            before.clone(),
+                            before,
+                            false,
+                        );
+                        let mut trace_details = session.execution.lineage_value();
+                        trace_details
+                            .as_object_mut()
+                            .expect("SCN02 stale lineage details are an object")
+                            .insert("scn02_stale_membership_guard".to_string(), details);
+                        record_runtime_trace_with_details(
+                            runtime_traces,
+                            "structural_rejection.no_mutation.owner_request_with_stale_membership",
+                            receipt,
+                            trace_details,
+                        );
                     }
                     M10CorruptedRequest::SpoofedRole {
                         event,
@@ -6499,152 +6856,183 @@ fn execute_typed_schedule(
                     }
                     M10CorruptedRequest::ExpiredLeaseLive => {
                         let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
-                        let mut session = M10CompositeCutSession::new(checked)?;
-                        session.save_s1()?;
                         let semantic_source_ref = m10_semantic_source_ref(checked)?;
-                        let cut = session.s1.as_ref().expect("doctor saved S1").clone();
-                        let before_m9_restore_bundle = m10_actual_hash_bundle(
+                        let session = scn10_positive_session.as_ref().ok_or_else(|| {
+                            "M10 SCN10 lease doctor ran before the persistent positive S2 lineage"
+                                .to_string()
+                        })?;
+                        let s2 = session.s2.as_ref().ok_or_else(|| {
+                            "M10 SCN10 lease doctor has no current S2".to_string()
+                        })?;
+                        let before_bundle = m10_actual_hash_bundle(
                             &session.runtime,
                             &session.m9.domain_snapshot(),
-                            &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                            Some(&cut),
+                            &format!("SCN10|{}|lease-doctor-current-s2", case.identity),
+                            Some(s2),
                         );
-                        let m9_s1 = session.m9_s1.as_ref().expect("doctor saved M9 S1").clone();
-                        session.m9.restore_authority_cut(m9_s1)?;
-                        session.refresh_bridge();
-                        let after_m9_restore_bundle = m10_actual_hash_bundle(
+                        let positive_checked =
+                            checked_sources.get("scn-10/positive.mir").ok_or_else(|| {
+                                "M10 SCN10 positive source was not checked".to_string()
+                            })?;
+                        let (doctor, candidate_before, candidate_after, lineage) = session
+                            .preflight_doctored_s2_clone(
+                                positive_checked,
+                                "expired_lease_flipped_live",
+                            )?;
+                        let after_bundle = m10_actual_hash_bundle(
                             &session.runtime,
                             &session.m9.domain_snapshot(),
-                            &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                            Some(&cut),
+                            &format!("SCN10|{}|lease-doctor-current-s2", case.identity),
+                            Some(s2),
                         );
+                        if before_bundle.store_hash != after_bundle.store_hash
+                            || before_bundle.membership_hash != after_bundle.membership_hash
+                            || before_bundle.grant_hash != after_bundle.grant_hash
+                            || before_bundle.relation_hash != after_bundle.relation_hash
+                            || before_bundle.config_hash != after_bundle.config_hash
+                        {
+                            return Err("M10 SCN10 lease doctor mutated the current S2 composite"
+                                .to_string());
+                        }
                         let m9_restore_receipt = receipt_ledger.record_actual(
                             "m9.cut.restore",
                             &semantic_source_ref,
-                            before_m9_restore_bundle,
-                            after_m9_restore_bundle.clone(),
+                            candidate_before,
+                            candidate_after,
                             true,
                         );
-                        if session
-                            .runtime
-                            .try_restore_local_cut(
-                                &cut,
-                                &M8LiveFloor::same_current(&cut).with_expired_lease("m10-expired"),
-                            )
-                            .is_err()
-                        {
-                            let predicate = "structural_rejection.no_mutation.E-CUT-001_or_E-CUT-002.expired_lease_resurrection";
-                            add_case_action_fact(facts, case, predicate, context);
-                            let after_bundle = m10_actual_hash_bundle(
-                                &session.runtime,
-                                &session.m9.domain_snapshot(),
-                                &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                                Some(&cut),
-                            );
-                            let receipt = receipt_ledger.record_actual(
-                                "cut.restore",
-                                &semantic_source_ref,
-                                after_m9_restore_bundle,
-                                after_bundle,
-                                false,
-                            );
-                            let mut details = session.session_details(0, 1);
-                            let lineage = session.lineage_value();
-                            details
-                                .as_object_mut()
-                                .expect("SCN10 lease doctor lineage details are an object")
-                                .extend(json!({
-                                    "m9_to_m8_authority_lineage": lineage.clone(),
-                                    "m8_decisions_after_m9": [{
-                                        "transition": "cut.restore",
-                                        "decision": "rejected",
-                                        "authority_lineage_ref": lineage["session_id"].clone(),
-                                        "runtime_session_id": lineage["m8_runtime_session_id"].clone(),
+                        let predicate = "structural_rejection.no_mutation.E-CUT-001_or_E-CUT-002.expired_lease_resurrection";
+                        add_case_action_fact(facts, case, predicate, context);
+                        let receipt = receipt_ledger.record_actual(
+                            "cut.restore",
+                            &semantic_source_ref,
+                            before_bundle.clone(),
+                            after_bundle.clone(),
+                            false,
+                        );
+                        let mut details = session.session_details(0, 1);
+                        details
+                            .as_object_mut()
+                            .expect("SCN10 lease doctor details are an object")
+                            .extend(json!({
+                                "scn10_current_s2_lineage": session.scn10_current_s2_lineage(),
+                                "scn10_stale_reject_guard": M10CompositeCutSession::scn10_stale_reject_guard(),
+                                "current_s2_no_mutation": session.current_s2_no_mutation(&before_bundle, &after_bundle),
+                                "s2_cut_clone_mutation": doctor,
+                                "no_stale_resurrection": {
+                                    "canon_refs": [{
+                                        "source_path": "mirrorea_canon/theory/04-ordering-and-cuts.md",
+                                        "line_start": 86,
+                                        "line_end": 96,
+                                        "theorem": "THM-003",
                                     }],
-                                }).as_object().expect("object").clone());
-                            record_runtime_trace_with_prior_receipt(
-                                runtime_traces,
-                                predicate,
-                                m9_restore_receipt,
-                                receipt,
-                                details,
-                            );
-                        }
+                                },
+                                "m9_to_m8_authority_lineage": lineage.clone(),
+                                "m8_decisions_after_m9": [{
+                                    "transition": "cut.restore",
+                                    "decision": "rejected",
+                                    "authority_lineage_ref": lineage["session_id"].clone(),
+                                    "runtime_session_id": lineage["m8_runtime_session_id"].clone(),
+                                }],
+                            }).as_object().expect("object").clone());
+                        record_runtime_trace_with_prior_receipt(
+                            runtime_traces,
+                            predicate,
+                            m9_restore_receipt,
+                            receipt,
+                            details,
+                        );
                     }
                     M10CorruptedRequest::CutReceiveWithoutSend => {
                         let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
-                        let mut session = M10CompositeCutSession::new(checked)?;
-                        session.save_s1()?;
                         let semantic_source_ref = m10_semantic_source_ref(checked)?;
-                        let cut = session.s1.as_ref().expect("doctor saved S1").clone();
-                        let before_m9_restore_bundle = m10_actual_hash_bundle(
+                        let session = scn10_positive_session.as_ref().ok_or_else(|| {
+                            "M10 SCN10 cut doctor ran before the persistent positive S2 lineage"
+                                .to_string()
+                        })?;
+                        let s2 = session
+                            .s2
+                            .as_ref()
+                            .ok_or_else(|| "M10 SCN10 cut doctor has no current S2".to_string())?;
+                        let before_bundle = m10_actual_hash_bundle(
                             &session.runtime,
                             &session.m9.domain_snapshot(),
-                            &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                            Some(&cut),
+                            &format!("SCN10|{}|cut-doctor-current-s2", case.identity),
+                            Some(s2),
                         );
-                        let m9_s1 = session.m9_s1.as_ref().expect("doctor saved M9 S1").clone();
-                        session.m9.restore_authority_cut(m9_s1)?;
-                        session.refresh_bridge();
-                        let after_m9_restore_bundle = m10_actual_hash_bundle(
+                        let positive_checked =
+                            checked_sources.get("scn-10/positive.mir").ok_or_else(|| {
+                                "M10 SCN10 positive source was not checked".to_string()
+                            })?;
+                        let (doctor, candidate_before, candidate_after, lineage) = session
+                            .preflight_doctored_s2_clone(
+                                positive_checked,
+                                "receive_without_send_injected",
+                            )?;
+                        let after_bundle = m10_actual_hash_bundle(
                             &session.runtime,
                             &session.m9.domain_snapshot(),
-                            &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                            Some(&cut),
+                            &format!("SCN10|{}|cut-doctor-current-s2", case.identity),
+                            Some(s2),
                         );
+                        if before_bundle.store_hash != after_bundle.store_hash
+                            || before_bundle.membership_hash != after_bundle.membership_hash
+                            || before_bundle.grant_hash != after_bundle.grant_hash
+                            || before_bundle.relation_hash != after_bundle.relation_hash
+                            || before_bundle.config_hash != after_bundle.config_hash
+                        {
+                            return Err(
+                                "M10 SCN10 cut doctor mutated the current S2 composite".to_string()
+                            );
+                        }
                         let m9_restore_receipt = receipt_ledger.record_actual(
                             "m9.cut.restore",
                             &semantic_source_ref,
-                            before_m9_restore_bundle,
-                            after_m9_restore_bundle.clone(),
+                            candidate_before,
+                            candidate_after,
                             true,
                         );
-                        if session
-                            .runtime
-                            .try_restore_local_cut(
-                                &cut,
-                                &M8LiveFloor::same_current(&cut)
-                                    .with_stale_membership("m10-cut-receive-without-send"),
-                            )
-                            .is_err()
-                        {
-                            let predicate = "structural_rejection.no_mutation.E-CUT-001_or_E-CUT-002.consistent_cut_violation";
-                            add_case_action_fact(facts, case, predicate, context);
-                            let after_bundle = m10_actual_hash_bundle(
-                                &session.runtime,
-                                &session.m9.domain_snapshot(),
-                                &format!("SCN10|{}|doctor-restore-attempt", case.identity),
-                                Some(&cut),
-                            );
-                            let receipt = receipt_ledger.record_actual(
-                                "cut.restore",
-                                &semantic_source_ref,
-                                after_m9_restore_bundle,
-                                after_bundle,
-                                false,
-                            );
-                            let mut details = session.session_details(0, 1);
-                            let lineage = session.lineage_value();
-                            details
-                                .as_object_mut()
-                                .expect("SCN10 cut doctor lineage details are an object")
-                                .extend(json!({
-                                    "m9_to_m8_authority_lineage": lineage.clone(),
-                                    "m8_decisions_after_m9": [{
-                                        "transition": "cut.restore",
-                                        "decision": "rejected",
-                                        "authority_lineage_ref": lineage["session_id"].clone(),
-                                        "runtime_session_id": lineage["m8_runtime_session_id"].clone(),
+                        let predicate = "structural_rejection.no_mutation.E-CUT-001_or_E-CUT-002.consistent_cut_violation";
+                        add_case_action_fact(facts, case, predicate, context);
+                        let receipt = receipt_ledger.record_actual(
+                            "cut.restore",
+                            &semantic_source_ref,
+                            before_bundle.clone(),
+                            after_bundle.clone(),
+                            false,
+                        );
+                        let mut details = session.session_details(0, 1);
+                        details
+                            .as_object_mut()
+                            .expect("SCN10 cut doctor details are an object")
+                            .extend(json!({
+                                "scn10_current_s2_lineage": session.scn10_current_s2_lineage(),
+                                "scn10_stale_reject_guard": M10CompositeCutSession::scn10_stale_reject_guard(),
+                                "current_s2_no_mutation": session.current_s2_no_mutation(&before_bundle, &after_bundle),
+                                "s2_cut_clone_mutation": doctor,
+                                "no_stale_resurrection": {
+                                    "canon_refs": [{
+                                        "source_path": "mirrorea_canon/theory/04-ordering-and-cuts.md",
+                                        "line_start": 86,
+                                        "line_end": 96,
+                                        "theorem": "THM-003",
                                     }],
-                                }).as_object().expect("object").clone());
-                            record_runtime_trace_with_prior_receipt(
-                                runtime_traces,
-                                predicate,
-                                m9_restore_receipt,
-                                receipt,
-                                details,
-                            );
-                        }
+                                },
+                                "m9_to_m8_authority_lineage": lineage.clone(),
+                                "m8_decisions_after_m9": [{
+                                    "transition": "cut.restore",
+                                    "decision": "rejected",
+                                    "authority_lineage_ref": lineage["session_id"].clone(),
+                                    "runtime_session_id": lineage["m8_runtime_session_id"].clone(),
+                                }],
+                            }).as_object().expect("object").clone());
+                        record_runtime_trace_with_prior_receipt(
+                            runtime_traces,
+                            predicate,
+                            m9_restore_receipt,
+                            receipt,
+                            details,
+                        );
                     }
                 }
             }
@@ -10379,14 +10767,15 @@ fn conformance_typed_mutation_failure(
         // This falsifier currently validates only the finite typed fallback
         // carrier.  Do not imply that it exercised an M8 semantic transition
         // when no source-bound M8 negative stage was constructed.
-        report
+        let validation_object = report
             .pointer_mut("/validation")
             .and_then(Value::as_object_mut)
-            .expect("M10 validation is an object")
-            .insert(
-                "fallback_lineage_claim_scope".to_string(),
-                json!("typed_carrier_only"),
-            );
+            .expect("M10 validation is an object");
+        validation_object.insert(
+            "fallback_lineage_claim_scope".to_string(),
+            json!("typed_carrier_only"),
+        );
+        validation_object.insert("real_validator_invoked".to_string(), Value::Bool(false));
         report
             .pointer_mut("/runtime")
             .and_then(Value::as_object_mut)
@@ -10612,6 +11001,9 @@ enum M10ScheduleOperation {
     OwnerEventBeforeAdmission {
         event: String,
         principal: String,
+    },
+    TargetLeave {
+        target: String,
     },
     MembershipLifecycle {
         events: Vec<String>,
@@ -10951,6 +11343,12 @@ impl M10ScheduleOperation {
                         "principal",
                         "owner_event_before_admission operation",
                     )?,
+                })
+            }
+            "target_leave" => {
+                deny_unknown_fields(map, &["kind", "target"], "target_leave operation")?;
+                Ok(Self::TargetLeave {
+                    target: required_string(map, "target", "target_leave operation")?,
                 })
             }
             "membership_lifecycle" => {

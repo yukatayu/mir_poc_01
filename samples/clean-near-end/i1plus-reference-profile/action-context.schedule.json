@@ -61,6 +61,15 @@
       }
     },
     {
+      "id": "SCN02.target.leave",
+      "scn": "SCN-02",
+      "source": "scn-02/positive.mir",
+      "operation": {
+        "kind": "target_leave",
+        "target": "target"
+      }
+    },
+    {
       "id": "SCN02.attack.stale_membership",
       "scn": "SCN-02",
       "source": "scn-02/positive.mir",

@@ -90,6 +90,18 @@ impl M8LeaseInventory {
             .is_some_and(|record| record.live)
     }
 
+    /// Deliberately corrupt one saved lease clone for the bounded M10
+    /// save/load negative.  Normal relation execution has no route to this
+    /// mutator; restore must reject the resulting clone against the live
+    /// lease floor before it can affect a runtime.
+    pub(crate) fn doctor_expired_lease_as_live(&mut self, reference: &str) -> bool {
+        let Some(record) = self.records.get_mut(reference) else {
+            return false;
+        };
+        record.live = true;
+        true
+    }
+
     pub(crate) fn canonical_projection(&self) -> String {
         self.records
             .values()

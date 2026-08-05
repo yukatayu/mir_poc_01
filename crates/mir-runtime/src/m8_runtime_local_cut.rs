@@ -702,6 +702,15 @@ pub struct M8LocalCut {
     admitted: M8RuntimeInstance,
     payload: M8LocalSavePayload,
     trace_prefix: M8LocalTrace,
+    integrity_violation: Option<M8LocalCutIntegrityViolation>,
+}
+
+/// A corruption marker is part of a doctored *cut clone*, never mutable
+/// runtime state.  It keeps the receive-without-send negative at the saved
+/// cut boundary rather than simulating it with an unrelated stale authority.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum M8LocalCutIntegrityViolation {
+    ReceiveWithoutSend,
 }
 
 impl M8LocalCut {
@@ -846,7 +855,7 @@ impl M8LocalCut {
 
     pub(crate) fn canonical_semantic_projection(&self) -> String {
         format!(
-            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}",
+            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}\nintegrity_violation|{}",
             self.cut_id,
             self.admission_provenance.program_identity().stable_key(),
             self.payload.shared_snapshot.canonical_projection(),
@@ -858,13 +867,38 @@ impl M8LocalCut {
                 .collect::<Vec<_>>()
                 .join("\n"),
             self.payload.patch_lifecycle.rows().join(","),
+            match self.integrity_violation {
+                Some(M8LocalCutIntegrityViolation::ReceiveWithoutSend) => "receive_without_send",
+                None => "none",
+            },
         )
+    }
+
+    pub(crate) fn doctor_expired_lease_as_live(&self, lease_ref: &str) -> Option<Self> {
+        let mut doctored = self.clone();
+        if !doctored
+            .payload
+            .lease_inventory
+            .doctor_expired_lease_as_live(lease_ref)
+        {
+            return None;
+        }
+        doctored.cut_id = format!("{}:doctor-expired-lease-live", self.cut_id);
+        Some(doctored)
+    }
+
+    pub(crate) fn doctor_receive_without_send(&self) -> Self {
+        let mut doctored = self.clone();
+        doctored.cut_id = format!("{}:doctor-receive-without-send", self.cut_id);
+        doctored.integrity_violation = Some(M8LocalCutIntegrityViolation::ReceiveWithoutSend);
+        doctored
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum M8LocalRestoreDiagnosticKind {
     AdmissionProvenanceMismatch,
+    InconsistentCut,
     StaleMembership,
     RevokedCapability,
     StaleWitness,
@@ -1299,6 +1333,7 @@ impl M8LocalRuntime {
             admitted: self.admitted.clone(),
             payload: self.save_relevant_payload(),
             trace_prefix: self.trace.borrow().clone(),
+            integrity_violation: None,
         }
     }
 
@@ -1310,6 +1345,8 @@ impl M8LocalRuntime {
         let provenance = M8LocalAdmissionProvenance::from_instance(&self.admitted);
         let failure = if cut.admission_provenance != provenance {
             Some(M8LocalRestoreDiagnosticKind::AdmissionProvenanceMismatch)
+        } else if cut.integrity_violation.is_some() {
+            Some(M8LocalRestoreDiagnosticKind::InconsistentCut)
         } else if let Some(reference) = floor.stale_memberships.iter().next() {
             let _ = reference;
             Some(M8LocalRestoreDiagnosticKind::StaleMembership)
