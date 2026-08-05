@@ -456,6 +456,28 @@ fn unknown_evaluation_enqueue_is_typed_rejection_without_panic_or_semantic_mutat
 }
 
 #[test]
+fn target_presence_retirement_rejects_attack_enqueue_without_runtime_mutation() {
+    let (_, _, instance) = checked_runtime_instance("m7_owner_only_no_residuals.mir");
+    let mut execution = execution(instance);
+
+    execution.retire_entity_presence("player", "target");
+    let before_rejected_enqueue = execution.clone();
+
+    let diagnostics = execution
+        .try_enqueue(attack_request(valid_authority_use()))
+        .expect_err("attack(target) must reject before enqueue when target presence is retired");
+
+    assert_eq!(
+        diagnostics.primary().kind(),
+        M8EnqueueDiagnosticKind::StaleMembership
+    );
+    assert_eq!(
+        execution, before_rejected_enqueue,
+        "stale target rejection must not allocate an occurrence, enqueue a request, append trace rows, or advance owner counters"
+    );
+}
+
+#[test]
 fn replay_of_same_checked_artifact_seed_and_request_log_is_exactly_deterministic() {
     let (_, _, first_instance) = checked_runtime_instance("m7_owner_only_no_residuals.mir");
     let (_, _, second_instance) = checked_runtime_instance("m7_owner_only_no_residuals.mir");

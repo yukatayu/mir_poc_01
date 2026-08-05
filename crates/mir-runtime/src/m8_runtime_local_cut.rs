@@ -11,7 +11,7 @@ use std::{
 };
 
 use mir_semantics::{
-    shared_model::{ResultVersion, SourceRef},
+    shared_model::{OccurrenceId, ResultVersion, SourceRef, TraceEntry, TraceKind},
     surface_v0_pipeline::CheckedProgramIdentity,
 };
 
@@ -29,9 +29,10 @@ use crate::{
         M8ResultVersionStore,
     },
     m8_runtime_owner_queue::{
-        M8AuthorityUse, M8EnqueueDiagnosticKind, M8EnqueueDiagnostics, M8ExecutionSeed,
-        M8Occurrence, M8OwnerRequest, M8QueueTraceKind, M8RuntimeExecution, M8SemanticRelation,
-        M8SemanticSnapshot, M8ServeDiagnosticKind, M8ServeDiagnostics, M8ServeOutcome, M8StateKey,
+        M8AuthorityUse, M8EnqueueDiagnosticKind, M8EnqueueDiagnostics, M8EntityPresenceRegistry,
+        M8ExecutionSeed, M8Occurrence, M8OwnerRequest, M8QueueTraceKind, M8RuntimeExecution,
+        M8SemanticRelation, M8SemanticSnapshot, M8ServeDiagnosticKind, M8ServeDiagnostics,
+        M8ServeOutcome, M8StateKey,
     },
     m8_runtime_relation_projection::{
         M8BindingInvalidation, M8FiniteFallbackChain, M8FiniteFallbackSelection,
@@ -671,6 +672,103 @@ pub struct M8LocalSavePayload {
     patch_lifecycle: M8LocalPatchLifecycle,
 }
 
+/// A cut-local causal witness carried by each saved local cut. It uses the
+/// shared trace vocabulary only to prove local-cut admission consistency:
+/// restoring a cut must not retain its local receive edge when its local reply
+/// predecessor is absent. It does not claim a transport exchange.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct M8CutReceiptCausality {
+    reply: Option<TraceEntry>,
+    receive: TraceEntry,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8CutReceiptCausalityEvidence {
+    pub(crate) reply_occurrence_id: Option<String>,
+    pub(crate) receive_occurrence_id: String,
+    pub(crate) receive_predecessor_id: Option<String>,
+    pub(crate) dependency_edge_id: String,
+}
+
+impl M8CutReceiptCausality {
+    fn for_cut(cut_id: &str, save_sequence: usize, source_ref: SourceRef) -> Self {
+        let reply_occurrence =
+            OccurrenceId::new(format!("m8-local-cut-reply-{cut_id}-{save_sequence:020}"));
+        let receive_occurrence =
+            OccurrenceId::new(format!("m8-local-cut-receive-{cut_id}-{save_sequence:020}"));
+        Self {
+            reply: Some(TraceEntry {
+                kind: TraceKind::ReceiptReplied,
+                occurrence: reply_occurrence.clone(),
+                causal_predecessor: None,
+                source_ref: Some(source_ref.clone()),
+            }),
+            receive: TraceEntry {
+                kind: TraceKind::ReceiptReceived,
+                occurrence: receive_occurrence,
+                causal_predecessor: Some(reply_occurrence),
+                source_ref: Some(source_ref),
+            },
+        }
+    }
+
+    fn is_consistent(&self) -> bool {
+        let Some(reply) = self.reply.as_ref() else {
+            return false;
+        };
+        reply.kind == TraceKind::ReceiptReplied
+            && self.receive.kind == TraceKind::ReceiptReceived
+            && self.receive.causal_predecessor.as_ref() == Some(&reply.occurrence)
+    }
+
+    fn evidence(&self) -> M8CutReceiptCausalityEvidence {
+        let receive_occurrence_id = self.receive.occurrence.as_str().to_string();
+        let receive_predecessor_id = self
+            .receive
+            .causal_predecessor
+            .as_ref()
+            .map(|occurrence| occurrence.as_str().to_string());
+        M8CutReceiptCausalityEvidence {
+            reply_occurrence_id: self
+                .reply
+                .as_ref()
+                .map(|entry| entry.occurrence.as_str().to_string()),
+            receive_occurrence_id: receive_occurrence_id.clone(),
+            dependency_edge_id: format!(
+                "m8-cut-receive-dependency|{}|{}",
+                receive_predecessor_id.as_deref().unwrap_or("missing"),
+                receive_occurrence_id,
+            ),
+            receive_predecessor_id,
+        }
+    }
+
+    fn without_reply(mut self) -> Self {
+        self.reply = None;
+        self
+    }
+
+    fn canonical_projection(&self) -> String {
+        format!(
+            "reply|{}|{}\nreceive|{}|{}",
+            self.reply
+                .as_ref()
+                .map(|entry| entry.occurrence.as_str())
+                .unwrap_or("missing"),
+            self.reply
+                .as_ref()
+                .map(|entry| format!("{:?}", entry.kind))
+                .unwrap_or_else(|| "missing".to_string()),
+            self.receive.occurrence.as_str(),
+            self.receive
+                .causal_predecessor
+                .as_ref()
+                .map(|occurrence| occurrence.as_str())
+                .unwrap_or("missing"),
+        )
+    }
+}
+
 /// The saved M8 semantic state with patch lifecycle rows omitted.  This is
 /// internal support for checking that an activation cut changes no owner,
 /// relation, designated, lease, or authority state.
@@ -701,21 +799,17 @@ pub struct M8LocalCut {
     admission_provenance: M8LocalAdmissionProvenance,
     admitted: M8RuntimeInstance,
     payload: M8LocalSavePayload,
+    cut_receipt_causality: M8CutReceiptCausality,
     trace_prefix: M8LocalTrace,
-    integrity_violation: Option<M8LocalCutIntegrityViolation>,
-}
-
-/// A corruption marker is part of a doctored *cut clone*, never mutable
-/// runtime state.  It keeps the receive-without-send negative at the saved
-/// cut boundary rather than simulating it with an unrelated stale authority.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-enum M8LocalCutIntegrityViolation {
-    ReceiveWithoutSend,
 }
 
 impl M8LocalCut {
     pub fn program_identity(&self) -> &CheckedProgramIdentity {
         self.admission_provenance.program_identity()
+    }
+
+    pub(crate) fn cut_id(&self) -> &str {
+        &self.cut_id
     }
 
     pub fn admission_provenance(&self) -> &M8LocalAdmissionProvenance {
@@ -793,6 +887,10 @@ impl M8LocalCut {
         self.payload.clone()
     }
 
+    pub(crate) fn cut_receipt_causality(&self) -> M8CutReceiptCausalityEvidence {
+        self.cut_receipt_causality.evidence()
+    }
+
     /// Receipt-only projection of concrete owner/designated store data.
     pub(crate) fn canonical_store_projection(&self) -> String {
         format!(
@@ -855,7 +953,7 @@ impl M8LocalCut {
 
     pub(crate) fn canonical_semantic_projection(&self) -> String {
         format!(
-            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}\nintegrity_violation|{}",
+            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}\ncut_receipt_causality|{}",
             self.cut_id,
             self.admission_provenance.program_identity().stable_key(),
             self.payload.shared_snapshot.canonical_projection(),
@@ -867,10 +965,7 @@ impl M8LocalCut {
                 .collect::<Vec<_>>()
                 .join("\n"),
             self.payload.patch_lifecycle.rows().join(","),
-            match self.integrity_violation {
-                Some(M8LocalCutIntegrityViolation::ReceiveWithoutSend) => "receive_without_send",
-                None => "none",
-            },
+            self.cut_receipt_causality.canonical_projection(),
         )
     }
 
@@ -890,7 +985,7 @@ impl M8LocalCut {
     pub(crate) fn doctor_receive_without_send(&self) -> Self {
         let mut doctored = self.clone();
         doctored.cut_id = format!("{}:doctor-receive-without-send", self.cut_id);
-        doctored.integrity_violation = Some(M8LocalCutIntegrityViolation::ReceiveWithoutSend);
+        doctored.cut_receipt_causality = doctored.cut_receipt_causality.clone().without_reply();
         doctored
     }
 }
@@ -945,6 +1040,7 @@ impl M8LocalRestoreDiagnostics {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8LiveFloor {
     authority_inventory: M8AuthorityState,
+    entity_presence: M8EntityPresenceRegistry,
     lease_inventory: M8LeaseInventory,
     consumption_floor: M8ConsumptionState,
     version_floor: M8ResultVersionStore,
@@ -959,6 +1055,11 @@ impl M8LiveFloor {
     pub fn same_current(cut: &M8LocalCut) -> Self {
         Self {
             authority_inventory: cut.authority_inventory().clone(),
+            entity_presence: cut
+                .payload
+                .shared_snapshot
+                .entity_presence_registry()
+                .clone(),
             lease_inventory: cut.lease_inventory().clone(),
             consumption_floor: cut.designated_consumption_state().clone(),
             version_floor: cut.designated_version_store().clone(),
@@ -973,6 +1074,7 @@ impl M8LiveFloor {
     pub fn from_runtime(runtime: &M8LocalRuntime) -> Self {
         Self {
             authority_inventory: runtime.shared_snapshot.authority_state().clone(),
+            entity_presence: runtime.shared_snapshot.entity_presence_registry().clone(),
             lease_inventory: runtime.lease_inventory.clone(),
             consumption_floor: runtime.designated.consumption_state.clone(),
             version_floor: runtime.designated.version_store.clone(),
@@ -1261,6 +1363,51 @@ impl M8LocalRuntime {
             .replace_authority_state(authority_state);
     }
 
+    /// Admit or overwrite independently tracked target presence from a
+    /// separate M9 membership record. This changes neither caller authority
+    /// nor capability/witness state; checked owner admission resolves the
+    /// target directly from its bound state-read parameter. The facade
+    /// snapshots stay empty between operations; the shared snapshot is the
+    /// sole holder of this semantic state.
+    pub(crate) fn admit_target_presence(
+        &mut self,
+        namespace: &str,
+        identity: &str,
+        membership_ref: &str,
+        principal: &str,
+        locus: &str,
+        epoch: &str,
+    ) {
+        let provenance = format!(
+            "m9-target-membership|ref={membership_ref}|principal={principal}|locus={locus}|epoch={epoch}"
+        );
+        self.shared_snapshot
+            .admit_entity_presence(namespace, identity, provenance);
+    }
+
+    /// Retire target presence without revoking or removing the actor's M9
+    /// authority inventory. The record stays retired when this shared
+    /// snapshot is swapped through an execution facade.
+    pub(crate) fn retire_target_presence(&mut self, namespace: &str, identity: &str) -> bool {
+        self.shared_snapshot
+            .retire_entity_presence(namespace, identity)
+    }
+
+    pub(crate) fn entity_presence_status_and_provenance(
+        &self,
+        namespace: &str,
+        identity: &str,
+    ) -> Option<(String, String)> {
+        self.shared_snapshot
+            .entity_presence(namespace, identity)
+            .map(|record| {
+                (
+                    record.status().as_str().to_string(),
+                    record.provenance().to_string(),
+                )
+            })
+    }
+
     /// Crate-private patch seam for a checked, newly declared finite-v0 Int
     /// field.  It can only insert the default value once and always leaves an
     /// occurrence-bearing semantic trace; ordinary M10 requests cannot call
@@ -1320,6 +1467,13 @@ impl M8LocalRuntime {
     }
 
     pub fn save_local_cut(&self, cut_id: impl Into<String>) -> M8LocalCut {
+        let cut_id = cut_id.into();
+        let save_sequence = self.trace.borrow().len();
+        let cut_receipt_causality = M8CutReceiptCausality::for_cut(
+            &cut_id,
+            save_sequence,
+            self.admitted.program_identity().root_source_ref().clone(),
+        );
         self.trace.borrow_mut().append(
             M8LocalTraceKind::LocalCutSaved,
             self.admitted.program_identity().root_source_ref().clone(),
@@ -1328,12 +1482,12 @@ impl M8LocalRuntime {
             false,
         );
         M8LocalCut {
-            cut_id: cut_id.into(),
+            cut_id,
             admission_provenance: M8LocalAdmissionProvenance::from_instance(&self.admitted),
             admitted: self.admitted.clone(),
             payload: self.save_relevant_payload(),
+            cut_receipt_causality,
             trace_prefix: self.trace.borrow().clone(),
-            integrity_violation: None,
         }
     }
 
@@ -1345,7 +1499,7 @@ impl M8LocalRuntime {
         let provenance = M8LocalAdmissionProvenance::from_instance(&self.admitted);
         let failure = if cut.admission_provenance != provenance {
             Some(M8LocalRestoreDiagnosticKind::AdmissionProvenanceMismatch)
-        } else if cut.integrity_violation.is_some() {
+        } else if !cut.cut_receipt_causality.is_consistent() {
             Some(M8LocalRestoreDiagnosticKind::InconsistentCut)
         } else if let Some(reference) = floor.stale_memberships.iter().next() {
             let _ = reference;
@@ -1358,7 +1512,9 @@ impl M8LocalRuntime {
             Some(M8LocalRestoreDiagnosticKind::StaleWitness)
         } else if floor.expired_leases.iter().next().is_some() {
             Some(M8LocalRestoreDiagnosticKind::ExpiredLease)
-        } else if cut.authority_inventory() != &floor.authority_inventory {
+        } else if cut.authority_inventory() != &floor.authority_inventory
+            || cut.payload.shared_snapshot.entity_presence_registry() != &floor.entity_presence
+        {
             Some(M8LocalRestoreDiagnosticKind::StaleMembership)
         } else if !cut
             .payload

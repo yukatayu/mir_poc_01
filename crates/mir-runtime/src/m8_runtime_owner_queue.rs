@@ -181,22 +181,115 @@ impl Default for M8ExecutionSeed {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum M8EntityPresenceStatus {
+    Live,
+    Retired,
+}
+
+impl M8EntityPresenceStatus {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::Live => "live",
+            Self::Retired => "retired",
+        }
+    }
+}
+
+/// A bounded entity-presence record is distinct from caller authority. It is
+/// keyed by a checked indexed-state namespace and concrete identity.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct M8EntityPresenceRecord {
+    namespace: String,
+    identity: String,
+    status: M8EntityPresenceStatus,
+    provenance: String,
+}
+
+impl M8EntityPresenceRecord {
+    fn seeded(namespace: impl Into<String>, identity: impl Into<String>) -> Self {
+        let namespace = namespace.into();
+        let identity = identity.into();
+        Self {
+            provenance: format!("bounded-v0-seed:int|{namespace}|{identity}"),
+            namespace,
+            identity,
+            status: M8EntityPresenceStatus::Live,
+        }
+    }
+
+    fn admitted(
+        namespace: impl Into<String>,
+        identity: impl Into<String>,
+        provenance: impl Into<String>,
+    ) -> Self {
+        Self {
+            namespace: namespace.into(),
+            identity: identity.into(),
+            status: M8EntityPresenceStatus::Live,
+            provenance: provenance.into(),
+        }
+    }
+
+    pub fn namespace(&self) -> &str {
+        &self.namespace
+    }
+
+    pub fn identity(&self) -> &str {
+        &self.identity
+    }
+
+    pub const fn status(&self) -> M8EntityPresenceStatus {
+        self.status
+    }
+
+    pub fn provenance(&self) -> &str {
+        &self.provenance
+    }
+
+    fn is_live(&self) -> bool {
+        self.status == M8EntityPresenceStatus::Live
+    }
+
+    fn retire(&mut self) -> bool {
+        if !self.is_live() {
+            return false;
+        }
+        self.status = M8EntityPresenceStatus::Retired;
+        true
+    }
+}
+
+pub(crate) type M8EntityPresenceRegistry = BTreeMap<(String, String), M8EntityPresenceRecord>;
+
 /// The sole mutable semantic state for this bounded execution facade.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8SemanticSnapshot {
     ints: BTreeMap<M8StateKey, i64>,
     membership_epoch: u64,
     authority_state: M8AuthorityState,
+    entity_presence: M8EntityPresenceRegistry,
     pub(crate) relations: BTreeMap<String, M8SemanticRelation>,
     published_values: BTreeMap<String, Vec<String>>,
 }
 
 impl M8SemanticSnapshot {
     fn from_seed(seed: M8ExecutionSeed) -> Self {
+        let entity_presence = seed
+            .ints
+            .keys()
+            .map(|key| {
+                (
+                    (key.namespace().to_string(), key.index().to_string()),
+                    M8EntityPresenceRecord::seeded(key.namespace(), key.index()),
+                )
+            })
+            .collect();
         Self {
             ints: seed.ints,
             membership_epoch: seed.membership_epoch,
             authority_state: seed.authority_state,
+            entity_presence,
             relations: BTreeMap::new(),
             published_values: BTreeMap::new(),
         }
@@ -207,6 +300,7 @@ impl M8SemanticSnapshot {
             ints: BTreeMap::new(),
             membership_epoch: 1,
             authority_state: M8AuthorityState::new(),
+            entity_presence: BTreeMap::new(),
             relations: BTreeMap::new(),
             published_values: BTreeMap::new(),
         }
@@ -243,6 +337,44 @@ impl M8SemanticSnapshot {
         &self.authority_state
     }
 
+    pub fn entity_presence(
+        &self,
+        namespace: &str,
+        identity: &str,
+    ) -> Option<&M8EntityPresenceRecord> {
+        self.entity_presence
+            .get(&(namespace.to_string(), identity.to_string()))
+    }
+
+    pub(crate) fn entity_presence_registry(&self) -> &M8EntityPresenceRegistry {
+        &self.entity_presence
+    }
+
+    pub(crate) fn admit_entity_presence(
+        &mut self,
+        namespace: impl Into<String>,
+        identity: impl Into<String>,
+        provenance: impl Into<String>,
+    ) {
+        let namespace = namespace.into();
+        let identity = identity.into();
+        self.entity_presence.insert(
+            (namespace.clone(), identity.clone()),
+            M8EntityPresenceRecord::admitted(namespace, identity, provenance),
+        );
+    }
+
+    pub(crate) fn retire_entity_presence(&mut self, namespace: &str, identity: &str) -> bool {
+        self.entity_presence
+            .get_mut(&(namespace.to_string(), identity.to_string()))
+            .is_some_and(M8EntityPresenceRecord::retire)
+    }
+
+    fn entity_is_live(&self, namespace: &str, identity: &str) -> bool {
+        self.entity_presence(namespace, identity)
+            .is_some_and(M8EntityPresenceRecord::is_live)
+    }
+
     /// Crate-internal M9 bridge refresh.  The surrounding M8 local session
     /// retains its store, relation, and configuration state; only the
     /// authority inventory is replaced from the sealed upstream snapshot.
@@ -263,9 +395,9 @@ impl M8SemanticSnapshot {
     }
 
     /// Exact mutable store domain for crate-internal runtime receipts.  This
-    /// intentionally excludes maintained relations and admission/config
-    /// state, so a relation transition cannot be represented as a store
-    /// change merely by hashing a combined snapshot.
+    /// includes entity presence but intentionally excludes maintained
+    /// relations and admission/config state, so a relation transition cannot
+    /// be represented as a store change merely by hashing a combined snapshot.
     pub(crate) fn canonical_store_projection(&self) -> String {
         let ints = self.ints.iter().map(|(key, value)| {
             format!(
@@ -280,7 +412,19 @@ impl M8SemanticSnapshot {
             .published_values
             .iter()
             .map(|(subject, values)| format!("published|{subject}|{}", values.join(",")));
-        ints.chain(published_values).collect::<Vec<_>>().join("\n")
+        let entity_presence = self.entity_presence.values().map(|record| {
+            format!(
+                "entity_presence|{}|{}|{}|{}",
+                record.namespace,
+                record.identity,
+                record.status.as_str(),
+                record.provenance,
+            )
+        });
+        ints.chain(published_values)
+            .chain(entity_presence)
+            .collect::<Vec<_>>()
+            .join("\n")
     }
 
     /// Exact maintained-relation domain for crate-internal runtime receipts.
@@ -501,6 +645,7 @@ pub enum M8ServeDiagnosticKind {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum M8EnqueueDiagnosticKind {
     UnknownEvaluation,
+    StaleMembership,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -534,6 +679,16 @@ impl M8EnqueueDiagnostics {
         Self {
             entries: vec![M8EnqueueDiagnostic {
                 kind: M8EnqueueDiagnosticKind::UnknownEvaluation,
+                evaluation: evaluation.to_string(),
+                source_ref,
+            }],
+        }
+    }
+
+    fn stale_membership(evaluation: &str, source_ref: SourceRef) -> Self {
+        Self {
+            entries: vec![M8EnqueueDiagnostic {
+                kind: M8EnqueueDiagnosticKind::StaleMembership,
                 evaluation: evaluation.to_string(),
                 source_ref,
             }],
@@ -907,12 +1062,27 @@ impl M8RuntimeExecution {
             );
             return Err(diagnostics);
         };
-        let occurrence = M8Occurrence::new(format!("m8-occurrence-{:020}", self.next_occurrence));
-        self.next_occurrence += 1;
         let authority = request
             .authority_use()
             .cloned()
             .unwrap_or_else(|| M8AuthorityUse::for_principal(""));
+        // Caller authority has priority over target presence. An invalid
+        // caller follows the established enqueue-then-serve failure path and
+        // cannot use this preflight to probe target existence. Only an
+        // authority-valid caller reaches the pre-occurrence target guard.
+        if self.authority_failure(&plan, &authority).is_none()
+            && let Some((namespace, identity)) =
+                self.materialize_entity_identity(plan.target(), request.arguments())
+            && identity != plan.actor()
+            && !self.snapshot.entity_is_live(&namespace, &identity)
+        {
+            return Err(M8EnqueueDiagnostics::stale_membership(
+                request.evaluation(),
+                plan.source_ref().clone(),
+            ));
+        }
+        let occurrence = M8Occurrence::new(format!("m8-occurrence-{:020}", self.next_occurrence));
+        self.next_occurrence += 1;
         let enqueue_trace_node_id = self.append_trace(
             M8QueueTraceKind::Enqueued,
             Some(&occurrence),
@@ -952,6 +1122,12 @@ impl M8RuntimeExecution {
 
     pub fn snapshot(&self) -> M8SemanticSnapshot {
         self.snapshot.clone()
+    }
+
+    /// Retire an independently tracked entity presence record. This neither
+    /// changes M9-derived caller authority nor allocates an owner occurrence.
+    pub fn retire_entity_presence(&mut self, namespace: &str, identity: &str) -> bool {
+        self.snapshot.retire_entity_presence(namespace, identity)
     }
 
     pub fn trace(&self) -> &M8QueueTrace {
@@ -1161,11 +1337,26 @@ impl M8RuntimeExecution {
         read: &mir_semantics::surface_v0_pipeline::TypedStateRead,
         arguments: &BTreeMap<String, String>,
     ) -> Option<M8StateKey> {
+        let (namespace, identity) = self.materialize_entity_identity(read, arguments)?;
         Some(M8StateKey::indexed_field(
-            read.namespace(),
-            read.index()
-                .map(|index| arguments.get(index).map(String::as_str).unwrap_or(index))?,
+            namespace,
+            identity,
             read.field()?,
+        ))
+    }
+
+    fn materialize_entity_identity(
+        &self,
+        read: &mir_semantics::surface_v0_pipeline::TypedStateRead,
+        arguments: &BTreeMap<String, String>,
+    ) -> Option<(String, String)> {
+        Some((
+            read.namespace().to_string(),
+            arguments
+                .get(read.index()?)
+                .map(String::as_str)
+                .unwrap_or(read.index()?)
+                .to_string(),
         ))
     }
 

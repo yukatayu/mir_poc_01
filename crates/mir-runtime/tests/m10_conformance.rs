@@ -2836,6 +2836,104 @@ fn require_scn10_s2_cut_clone_doctor_guard(
     require_scn10_current_s2_no_domain_mutation(row, expectation_id, failures);
 }
 
+fn require_scn10_cutdoctor_send_receive_edge_guard(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN10-R-N-CUTDOCTOR actual send/receive cut-prefix doctor guard";
+    require_object_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor",
+        context,
+        failures,
+    );
+    require_object_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation",
+        context,
+        failures,
+    );
+    for pointer in [
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/send_occurrence/provenance/source_accessor",
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/receive_occurrence/provenance/source_accessor",
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/dependency_edge/provenance/source_accessor",
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/dependency_edge/provenance/source_cut_ref",
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation/source_cut_ref",
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation/doctored_cut_ref",
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/accessor",
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/consistency_check",
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/diagnostic/code",
+    ] {
+        require_pointer(row, pointer, context, failures);
+    }
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/send_occurrence/occurrence_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/dependency_edge/from_occurrence_id",
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/receive_occurrence/occurrence_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/dependency_edge/to_occurrence_id",
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/dependency_edge/edge_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation/retained_dependency_edge_id",
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/send_occurrence/occurrence_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation/excluded_send_occurrence_id",
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/actual_m8_cut_before_doctor/receive_occurrence/occurrence_id",
+        "/runtime_transition_trace/s2_cut_clone_mutation/doctored_m8_cut_prefix_mutation/retained_receive_occurrence_id",
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/accessor",
+        json!("M8LocalRuntime::try_restore_local_cut"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/consistency_check",
+        json!("send_receive_dependency"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/diagnostic/code",
+        json!("E-CUT-001"),
+        context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/restore_detector/private_integrity_marker_used",
+        false,
+        context,
+        failures,
+    );
+    fail_if_true_pointer(
+        row,
+        "/runtime_transition_trace/s2_cut_clone_mutation/private_integrity_marker_only",
+        context,
+        failures,
+    );
+}
+
 fn require_scn02_stale_membership_canon_binding(row: &Value, failures: &mut Vec<String>) {
     let context = "SCN02-R-N-STALE Canon stale-membership guard binding";
     require_json_value_pointer(
@@ -2866,6 +2964,158 @@ fn require_scn02_stale_membership_canon_binding(row: &Value, failures: &mut Vec<
         context,
         failures,
     );
+}
+
+fn require_scn02_actor_self_target_stale_guard(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN02-R-N-STALE actor-self authority and retired-target guard";
+    for pointer in [
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_membership_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_capability_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_witness_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/target_existence_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_membership_ref",
+    ] {
+        require_pointer(row, pointer, context, failures);
+    }
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/actor_principal",
+        json!("self"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/authority_principal",
+        json!("self"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/target_identity",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/origin",
+        json!("BrowserClient[self]"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/principal",
+        json!("self"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/membership_status",
+        json!("live"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/target_identity",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retire_action_target",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/stale_membership_trace/principal",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/diagnostic/stale_subject",
+        json!("target_membership"),
+        context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_presence_check/derived_from_checked_owner_plan",
+        true,
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_presence_check/binding_parameter",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_presence_check/resolved_identity",
+        json!("target"),
+        context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_presence_check/optional_request_target_ref_used",
+        false,
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_presence_check/registry_status",
+        json!("retired"),
+        context,
+        failures,
+    );
+    require_json_pointer_not_equal(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_membership_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_membership_ref",
+        context,
+        failures,
+    );
+}
+
+fn require_scn02_five_domain_no_mutation_guard(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN02-R-N-STALE five semantic-domain no-mutation guard";
+    let base = "/runtime_transition_trace/scn02_stale_membership_guard/five_domain_no_mutation";
+    if row
+        .pointer("/runtime_transition_trace/scn02_stale_membership_guard/store_no_mutation")
+        .is_some()
+        && row.pointer(base).is_none()
+    {
+        failures.push(
+            "SCN02-R-N-STALE store_no_mutation alone is insufficient; stale target rejection must expose store/membership/grant/relation/config before/after hashes"
+                .to_string(),
+        );
+    }
+    require_bool_pointer(
+        row,
+        &format!("{base}/no_semantic_domain_mutation"),
+        true,
+        context,
+        failures,
+    );
+    for hash_key in FIVE_DOMAIN_HASH_KEYS {
+        let before = format!("{base}/original_before/{hash_key}");
+        let after = format!("{base}/final_after/{hash_key}");
+        require_json_pointer_equal(row, &before, &after, context, failures);
+    }
 }
 
 fn require_bool_pointer(
@@ -7081,6 +7331,32 @@ fn p0_scn10_doctor_branches_must_mutate_actual_s2_cut_clone_and_preserve_current
 }
 
 #[test]
+fn p0_scn10_cutdoctor_must_remove_actual_send_from_real_receive_dependency_edge() {
+    let report = run_conformance();
+    let row = inventory_row(&report, "SCN10-R-N-CUTDOCTOR");
+    let s2_row = inventory_row(&report, "SCN10-R-P-S2");
+    let mut failures = Vec::new();
+
+    require_scn10_canon_line_binding(row, "SCN10-R-N-CUTDOCTOR", &mut failures);
+    require_scn10_no_stale_resurrection_canon_binding(row, "SCN10-R-N-CUTDOCTOR", &mut failures);
+    require_scn10_current_s2_positive_lineage(row, s2_row, "SCN10-R-N-CUTDOCTOR", &mut failures);
+    require_scn10_s2_cut_clone_doctor_guard(
+        row,
+        "SCN10-R-N-CUTDOCTOR",
+        "receive_without_send_injected",
+        "E-CUT-001",
+        &mut failures,
+    );
+    require_scn10_cutdoctor_send_receive_edge_guard(row, &mut failures);
+
+    assert!(
+        failures.is_empty(),
+        "SCN10 cut doctor must start from an actual S2 M8 cut with concrete send/receive occurrence IDs and a dependency edge, doctor a real cut prefix by excluding the send while retaining the receive, and have ordinary M8LocalRuntime::try_restore_local_cut reject the missing-send consistency violation; private marker booleans are insufficient:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
 fn p1_fallback_repromotion_falsifier_must_expose_actual_m8_negative_stage_or_narrow_claim() {
     let value = falsifier_report("fallback_repromotion_without_reacquire");
     let context = "fallback_repromotion_without_reacquire actual M8 negative stage";
@@ -7213,10 +7489,10 @@ fn p1_fallback_repromotion_falsifier_must_expose_actual_m8_negative_stage_or_nar
 }
 
 #[test]
-fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reject() {
+fn p1_scn02_stale_membership_must_use_target_leave_live_self_authority_and_target_stale_reject() {
     let report = run_conformance();
     let row = inventory_row(&report, "SCN02-R-N-STALE");
-    let context = "SCN02-R-N-STALE actual target leave stale-membership guard";
+    let context = "SCN02-R-N-STALE target leave/live self authority lifecycle guard";
     let mut failures = Vec::new();
 
     require_scn02_stale_membership_canon_binding(row, &mut failures);
@@ -7224,11 +7500,35 @@ fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reje
         "/runtime_transition_trace/scn02_stale_membership_guard/persistent_session/m9_authority_session_id",
         "/runtime_transition_trace/scn02_stale_membership_guard/persistent_session/m8_runtime_session_id",
         "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/request_identity",
-        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/old_authority_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/actor_authority_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_membership_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_capability_ref",
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/live_witness_ref",
         "/runtime_transition_trace/scn02_stale_membership_guard/exogenous_leave_action/input_action_id",
     ] {
         require_pointer(row, pointer, context, &mut failures);
     }
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/actor_principal",
+        json!("self"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/authority_principal",
+        json!("self"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/target_identity",
+        json!("target"),
+        context,
+        &mut failures,
+    );
     require_json_value_pointer(
         row,
         "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/leave_action_source",
@@ -7240,6 +7540,20 @@ fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reje
         row,
         "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retire_transition",
         json!("membership.retire"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/principal",
+        json!("self"),
+        context,
+        &mut failures,
+    );
+    require_json_value_pointer(
+        row,
+        "/runtime_transition_trace/scn02_stale_membership_guard/actor_authority/membership_status",
+        json!("live"),
         context,
         &mut failures,
     );
@@ -7292,12 +7606,13 @@ fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reje
             "/runtime_transition_trace/scn02_stale_membership_guard/stale_membership_trace/incarnation",
         ),
         (
-            "/runtime_transition_trace/scn02_stale_membership_guard/store_no_mutation/before_hash",
-            "/runtime_transition_trace/scn02_stale_membership_guard/store_no_mutation/after_hash",
+            "/runtime_transition_trace/scn02_stale_membership_guard/five_domain_no_mutation/original_before/store_hash",
+            "/runtime_transition_trace/scn02_stale_membership_guard/five_domain_no_mutation/final_after/store_hash",
         ),
     ] {
         require_json_pointer_equal(row, left, right, context, &mut failures);
     }
+    require_scn02_five_domain_no_mutation_guard(row, &mut failures);
     require_bool_pointer(
         row,
         "/runtime_transition_trace/scn02_stale_membership_guard/exogenous_leave_action/result_supplied",
@@ -7322,7 +7637,24 @@ fn p1_scn02_stale_membership_must_use_actual_target_leave_and_old_authority_reje
 
     assert!(
         failures.is_empty(),
-        "SCN02 stale-membership must be produced by an actual target leave/retire in a persistent M9/M8 session, bridge refresh, and the same attack request rejected with old authority while store remains unchanged; a generic corrupted object/string ref is insufficient:\n{}",
+        "SCN02 stale-membership lifecycle evidence must come from target_leave retiring target while attack(target) is still issued by live BrowserClient[self] authority, then reject with StaleMembership and preserve the five semantic domains; old target-authority or store-only evidence is insufficient:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
+fn p0_scn02_stale_attack_must_keep_self_actor_authority_and_target_stale_subject() {
+    let report = run_conformance();
+    let row = inventory_row(&report, "SCN02-R-N-STALE");
+    let mut failures = Vec::new();
+
+    require_scn02_stale_membership_canon_binding(row, &mut failures);
+    require_scn02_actor_self_target_stale_guard(row, &mut failures);
+    require_scn02_five_domain_no_mutation_guard(row, &mut failures);
+
+    assert!(
+        failures.is_empty(),
+        "SCN02 post-target-leave stale attack must keep the request actor and authority principal as BrowserClient[self] with live self authority, retire the separate target membership/existence ref via target_leave, reject attack(target) because the target membership is stale, and preserve store/membership/grant/relation/config semantic domains; substituting target as the authority principal or store-only no-mutation evidence is insufficient:\n{}",
         failures.join("\n")
     );
 }
@@ -7615,15 +7947,27 @@ fn persistent_session_families_reject_reordered_or_name_only_predecessor_actions
     let reordered =
         schedule_with_case_moved_before("SCN10.leave_a.lease_expiry.save_s2", "SCN10.save_s1");
     let reordered_report =
-        run_conformance_with_schedule_and_predicates(reordered.clone(), predicate_profile());
-    let rebound = run_conformance_with_schedule_and_predicates(
-        reordered,
-        profile_rebound_to_actual_evidence(&reordered_report),
-    );
+        run_conformance_with_schedule_and_predicates(reordered, predicate_profile());
     assert_ne!(
-        rebound.pointer("/terminal_outcome"),
+        reordered_report.pointer("/terminal_outcome"),
         Some(&json!("ConformanceAccepted")),
-        "SCN10 S2 moved before S1 must not pass after profile rebound; facts must depend on same-session predecessor execution"
+        "SCN10 S2 moved before S1 must not pass; facts must depend on same-session predecessor execution"
+    );
+    let reordered_row = inventory_row(&reordered_report, "SCN10-R-N-MERGE");
+    assert_eq!(
+        reordered_row.pointer("/result"),
+        Some(&json!("fail")),
+        "SCN10-R-N-MERGE must fail when reordered S2 has no honest S1 predecessor evidence: {reordered_row:#}"
+    );
+    assert_eq!(
+        reordered_row.pointer("/actual_evidence"),
+        Some(&json!([])),
+        "SCN10-R-N-MERGE reordered path must expose no actual evidence candidates rather than a fabricated same-predicate candidate: {reordered_row:#}"
+    );
+    assert_eq!(
+        reordered_row.pointer("/fail_diagnostic/code"),
+        Some(&json!("CorrespondenceEvidenceMismatch")),
+        "SCN10-R-N-MERGE reordered path must expose a correspondence mismatch/fail diagnostic: {reordered_row:#}"
     );
 
     let report = run_conformance();
