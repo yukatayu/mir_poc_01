@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeSet,
     fs,
     path::{Path, PathBuf},
 };
@@ -3089,6 +3090,348 @@ fn require_scn02_actor_self_target_stale_guard(row: &Value, failures: &mut Vec<S
         context,
         failures,
     );
+}
+
+fn require_u64_pointer(
+    value: &Value,
+    pointer: &str,
+    context: &str,
+    failures: &mut Vec<String>,
+) -> Option<u64> {
+    match require_pointer(value, pointer, context, failures) {
+        Some(actual) => match actual.as_u64() {
+            Some(value) => Some(value),
+            None => {
+                failures.push(format!(
+                    "{context} expected {pointer} to be an unsigned integer, got {actual:#}"
+                ));
+                None
+            }
+        },
+        None => None,
+    }
+}
+
+fn require_string_set_pointer(
+    value: &Value,
+    pointer: &str,
+    context: &str,
+    failures: &mut Vec<String>,
+) -> Option<BTreeSet<String>> {
+    match require_pointer(value, pointer, context, failures) {
+        Some(actual) => match actual.as_array() {
+            Some(values) => {
+                let mut refs = BTreeSet::new();
+                for value in values {
+                    match value.as_str() {
+                        Some(value) if !value.trim().is_empty() => {
+                            refs.insert(value.to_string());
+                        }
+                        _ => failures.push(format!(
+                            "{context} expected {pointer} to contain only non-empty string refs, got {actual:#}"
+                        )),
+                    }
+                }
+                Some(refs)
+            }
+            None => {
+                failures.push(format!(
+                    "{context} expected {pointer} to be an array of refs, got {actual:#}"
+                ));
+                None
+            }
+        },
+        None => None,
+    }
+}
+
+fn require_scn02_target_leave_no_mint_delta(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN02-R-N-STALE target_leave M9 authority no-mint delta";
+    let base =
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_leave_m9_authority_delta";
+    for domain in ["membership", "grant", "witness"] {
+        let before_count = format!("{base}/before/{domain}_count");
+        let after_count = format!("{base}/after/{domain}_count");
+        match (
+            require_u64_pointer(row, &before_count, context, failures),
+            require_u64_pointer(row, &after_count, context, failures),
+        ) {
+            (Some(before), Some(after)) if after > before => failures.push(format!(
+                "{context} expected {domain} count to be non-increasing across target_leave, before={before}, after={after}"
+            )),
+            _ => {}
+        }
+
+        let before_refs = format!("{base}/before/{domain}_refs");
+        let after_refs = format!("{base}/after/{domain}_refs");
+        if let (Some(before), Some(after)) = (
+            require_string_set_pointer(row, &before_refs, context, failures),
+            require_string_set_pointer(row, &after_refs, context, failures),
+        ) {
+            let unexpected = after.difference(&before).cloned().collect::<Vec<_>>();
+            if !unexpected.is_empty() {
+                failures.push(format!(
+                    "{context} expected {domain} ref set to be non-increasing across target_leave; unexpected new refs {unexpected:?}"
+                ));
+            }
+        }
+
+        require_json_value_pointer(
+            row,
+            &format!("{base}/minted/{domain}_refs"),
+            json!([]),
+            context,
+            failures,
+        );
+    }
+    require_bool_pointer(
+        row,
+        &format!("{base}/target_leave_minted_m9_authority_facts"),
+        false,
+        context,
+        failures,
+    );
+    require_pointer(
+        row,
+        &format!("{base}/new_retirement_tombstones/0/membership_ref"),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/new_retirement_tombstones/0/membership_ref"),
+        "/runtime_transition_trace/scn02_stale_membership_guard/target_membership_lifecycle/retired_membership_ref",
+        context,
+        failures,
+    );
+}
+
+fn require_scn02_initial_target_context_and_presence_retirement(
+    row: &Value,
+    failures: &mut Vec<String>,
+) {
+    let context = "SCN02-R-N-STALE explicit target context and sealed presence retirement";
+    let base = "/runtime_transition_trace/scn02_stale_membership_guard";
+    for pointer in [
+        "/initial_target_context/live_membership/ref",
+        "/initial_target_context/live_membership/epoch",
+        "/initial_target_context/live_membership/incarnation",
+        "/initial_target_context/live_capability/ref",
+        "/initial_target_context/live_witness/ref",
+        "/initial_target_context/source_derived_reference",
+        "/initial_target_context/m8_initial_presence_sync/source_derived_reference",
+        "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/provenance",
+        "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/m9_snapshot_ref",
+        "/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/m8_authority_use_ref",
+        "/initial_target_context/m8_initial_presence_sync/occurrence_trace/0/source_ref",
+        "/initial_target_context/m8_initial_presence_sync/control_trace/0/source_ref",
+        "/m8_presence_store_transition/source_derived_reference",
+        "/m8_presence_store_transition/schedule_action_reference",
+        "/m8_presence_store_transition/sealed_m9_to_m8_bridge/provenance",
+        "/m8_presence_store_transition/sealed_m9_to_m8_bridge/m9_snapshot_ref",
+        "/m8_presence_store_transition/sealed_m9_to_m8_bridge/m8_authority_use_ref",
+        "/m8_presence_store_transition/occurrence_trace/0/occurrence_id",
+        "/m8_presence_store_transition/occurrence_trace/0/source_ref",
+        "/m8_presence_store_transition/control_trace/0/control_id",
+        "/m8_presence_store_transition/control_trace/0/schedule_action_reference",
+    ] {
+        require_non_empty_string_pointer(row, &format!("{base}{pointer}"), context, failures);
+    }
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/admission_source"),
+        json!("checked_source_bound_initial_admission"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/admitted_before_action_id"),
+        json!("SCN02.target.leave"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/target_identity"),
+        json!("target"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/live_membership/principal"),
+        json!("target"),
+        context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        &format!("{base}/initial_target_context/target_identity_bound_to_membership_principal"),
+        true,
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/initial_target_context/target_identity"),
+        &format!("{base}/initial_target_context/live_membership/principal"),
+        context,
+        failures,
+    );
+    require_absent_or_null_pointer(
+        row,
+        &format!(
+            "{base}/initial_target_context/m8_initial_presence_sync/schedule_action_reference"
+        ),
+        context,
+        failures,
+    );
+    require_absent_or_null_pointer(
+        row,
+        &format!(
+            "{base}/initial_target_context/m8_initial_presence_sync/control_trace/0/schedule_action_reference"
+        ),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/m8_initial_presence_sync/transition"),
+        json!("presence.admit"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!(
+            "{base}/initial_target_context/m8_initial_presence_sync/sealed_m9_to_m8_bridge/provenance"
+        ),
+        json!("crate::m9_auth_verification::M9M8EntityPresenceBridge"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/initial_target_context/live_membership/status"),
+        json!("live"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/transition"),
+        json!("presence.retire"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/before/status"),
+        json!("live"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/after/status"),
+        json!("retired"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/sealed_m9_to_m8_bridge/provenance"),
+        json!("crate::m9_auth_verification::M9M8EntityPresenceBridge"),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/public_runtime_execution_bypass_used"),
+        json!(false),
+        context,
+        failures,
+    );
+    require_json_value_pointer(
+        row,
+        &format!("{base}/m8_presence_store_transition/raw_presence_provenance_accessor_used"),
+        json!(false),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/initial_target_context/live_membership/ref"),
+        &format!("{base}/target_membership_lifecycle/retired_membership_ref"),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/initial_target_context/live_membership/epoch"),
+        &format!("{base}/target_membership_lifecycle/retired_epoch"),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/initial_target_context/live_membership/incarnation"),
+        &format!("{base}/target_membership_lifecycle/retired_incarnation"),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/m8_presence_store_transition/membership_ref"),
+        &format!("{base}/target_membership_lifecycle/retired_membership_ref"),
+        context,
+        failures,
+    );
+    require_scn02_target_leave_no_mint_delta(row, failures);
+}
+
+fn require_scn02_self_authority_bridge_not_refreshed(row: &Value, failures: &mut Vec<String>) {
+    let context = "SCN02-R-N-STALE self M9M10 authority bridge no-refresh invariant";
+    let base = "/runtime_transition_trace/scn02_stale_membership_guard";
+    for pointer in [
+        "/self_authority_bridge_invariant/accessor",
+        "/self_authority_bridge_invariant/before_generation",
+        "/self_authority_bridge_invariant/after_generation",
+        "/self_authority_bridge_invariant/before_authority_identity",
+        "/self_authority_bridge_invariant/after_authority_identity",
+    ] {
+        require_pointer(row, &format!("{base}{pointer}"), context, failures);
+    }
+    require_json_value_pointer(
+        row,
+        &format!("{base}/self_authority_bridge_invariant/accessor"),
+        json!("M9M10AuthorityBridge::authority_state"),
+        context,
+        failures,
+    );
+    require_bool_pointer(
+        row,
+        &format!("{base}/self_authority_bridge_invariant/refreshed_for_target_leave"),
+        false,
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/self_authority_bridge_invariant/before_generation"),
+        &format!("{base}/self_authority_bridge_invariant/after_generation"),
+        context,
+        failures,
+    );
+    require_json_pointer_equal(
+        row,
+        &format!("{base}/self_authority_bridge_invariant/before_authority_identity"),
+        &format!("{base}/self_authority_bridge_invariant/after_authority_identity"),
+        context,
+        failures,
+    );
+    require_absent_or_null_pointer(row, &format!("{base}/bridge_refresh"), context, failures);
 }
 
 fn require_scn02_five_domain_no_mutation_guard(row: &Value, failures: &mut Vec<String>) {
@@ -7557,20 +7900,7 @@ fn p1_scn02_stale_membership_must_use_target_leave_live_self_authority_and_targe
         context,
         &mut failures,
     );
-    require_json_value_pointer(
-        row,
-        "/runtime_transition_trace/scn02_stale_membership_guard/bridge_refresh/accessor",
-        json!("M9M10AuthorityBridge::refresh"),
-        context,
-        &mut failures,
-    );
-    require_json_value_pointer(
-        row,
-        "/runtime_transition_trace/scn02_stale_membership_guard/bridge_refresh/result",
-        json!("refreshed_after_target_leave"),
-        context,
-        &mut failures,
-    );
+    require_scn02_self_authority_bridge_not_refreshed(row, &mut failures);
     require_bool_pointer(
         row,
         "/runtime_transition_trace/scn02_stale_membership_guard/attack_request/reuses_same_attack_request",
@@ -7638,6 +7968,25 @@ fn p1_scn02_stale_membership_must_use_target_leave_live_self_authority_and_targe
     assert!(
         failures.is_empty(),
         "SCN02 stale-membership lifecycle evidence must come from target_leave retiring target while attack(target) is still issued by live BrowserClient[self] authority, then reject with StaleMembership and preserve the five semantic domains; old target-authority or store-only evidence is insufficient:\n{}",
+        failures.join("\n")
+    );
+}
+
+#[test]
+fn p0_scn02_target_leave_requires_initial_authority_context_and_sealed_presence_retirement() {
+    let report = run_conformance();
+    let row = inventory_row(&report, "SCN02-R-N-STALE");
+    let mut failures = Vec::new();
+
+    require_scn02_stale_membership_canon_binding(row, &mut failures);
+    require_scn02_actor_self_target_stale_guard(row, &mut failures);
+    require_scn02_initial_target_context_and_presence_retirement(row, &mut failures);
+    require_scn02_self_authority_bridge_not_refreshed(row, &mut failures);
+    require_scn02_five_domain_no_mutation_guard(row, &mut failures);
+
+    assert!(
+        failures.is_empty(),
+        "SCN02 target_leave must be derived from explicit pre-leave target admission/context, must not mint new M9 membership/grant/witness facts while retiring target, must carry sealed M9->M8 presence-store live->retired provenance with source/schedule/trace evidence, and stale attack/self authority/five-domain no-mutation must remain intact:\n{}",
         failures.join("\n")
     );
 }

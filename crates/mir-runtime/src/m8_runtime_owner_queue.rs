@@ -182,13 +182,13 @@ impl Default for M8ExecutionSeed {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum M8EntityPresenceStatus {
+pub(crate) enum M8EntityPresenceStatus {
     Live,
     Retired,
 }
 
 impl M8EntityPresenceStatus {
-    pub const fn as_str(self) -> &'static str {
+    pub(crate) const fn as_str(self) -> &'static str {
         match self {
             Self::Live => "live",
             Self::Retired => "retired",
@@ -198,12 +198,18 @@ impl M8EntityPresenceStatus {
 
 /// A bounded entity-presence record is distinct from caller authority. It is
 /// keyed by a checked indexed-state namespace and concrete identity.
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct M8EntityPresenceRecord {
+#[derive(Clone, PartialEq, Eq)]
+pub(crate) struct M8EntityPresenceRecord {
     namespace: String,
     identity: String,
     status: M8EntityPresenceStatus,
     provenance: String,
+}
+
+impl std::fmt::Debug for M8EntityPresenceRecord {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8EntityPresenceRecord(<sealed>)")
+    }
 }
 
 impl M8EntityPresenceRecord {
@@ -231,20 +237,8 @@ impl M8EntityPresenceRecord {
         }
     }
 
-    pub fn namespace(&self) -> &str {
-        &self.namespace
-    }
-
-    pub fn identity(&self) -> &str {
-        &self.identity
-    }
-
-    pub const fn status(&self) -> M8EntityPresenceStatus {
+    pub(crate) const fn status(&self) -> M8EntityPresenceStatus {
         self.status
-    }
-
-    pub fn provenance(&self) -> &str {
-        &self.provenance
     }
 
     fn is_live(&self) -> bool {
@@ -337,7 +331,7 @@ impl M8SemanticSnapshot {
         &self.authority_state
     }
 
-    pub fn entity_presence(
+    pub(crate) fn entity_presence(
         &self,
         namespace: &str,
         identity: &str,
@@ -1122,12 +1116,6 @@ impl M8RuntimeExecution {
 
     pub fn snapshot(&self) -> M8SemanticSnapshot {
         self.snapshot.clone()
-    }
-
-    /// Retire an independently tracked entity presence record. This neither
-    /// changes M9-derived caller authority nor allocates an owner occurrence.
-    pub fn retire_entity_presence(&mut self, namespace: &str, identity: &str) -> bool {
-        self.snapshot.retire_entity_presence(namespace, identity)
     }
 
     pub fn trace(&self) -> &M8QueueTrace {

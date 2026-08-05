@@ -1,4 +1,11 @@
-use std::{collections::BTreeSet, ops::Range, path::PathBuf};
+use std::{
+    collections::BTreeSet,
+    env, fs,
+    ops::Range,
+    path::PathBuf,
+    process::Command,
+    time::{SystemTime, UNIX_EPOCH},
+};
 
 use mir_ast::surface_v0::FixtureSource;
 use mir_runtime::m8_runtime_admission::{M8Runtime, M8RuntimeAdmission, M8RuntimeInstance};
@@ -171,6 +178,73 @@ fn attack_request(authority_use: M8AuthorityUse) -> M8OwnerRequest {
     M8OwnerRequest::new("attack")
         .with_argument("target", "target")
         .with_authority_use(authority_use)
+}
+
+fn assert_external_consumer_cannot_compile_m8_api(
+    snippet_name: &str,
+    forbidden_api: &str,
+    main_rs: &str,
+) -> Option<String> {
+    let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let nonce = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("system clock is after unix epoch")
+        .as_nanos();
+    let crate_dir = env::temp_dir().join(format!(
+        "mir_m8_public_api_boundary_{}_{}_{}",
+        snippet_name,
+        std::process::id(),
+        nonce
+    ));
+    let src_dir = crate_dir.join("src");
+    fs::create_dir_all(&src_dir).expect("temporary API-boundary crate directory is writable");
+    fs::write(
+        crate_dir.join("Cargo.toml"),
+        format!(
+            r#"[package]
+name = "mir-m8-public-api-boundary-{snippet_name}"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+mir-runtime = {{ path = "{}" }}
+"#,
+            manifest_dir.display()
+        ),
+    )
+    .expect("temporary API-boundary manifest is writable");
+    fs::write(src_dir.join("main.rs"), main_rs).expect("temporary API-boundary source is writable");
+
+    let cargo = env::var("CARGO").unwrap_or_else(|_| "cargo".to_string());
+    let output = Command::new(cargo)
+        .arg("check")
+        .arg("--quiet")
+        .arg("--manifest-path")
+        .arg(crate_dir.join("Cargo.toml"))
+        .env("CARGO_INCREMENTAL", "0")
+        .env("CARGO_BUILD_JOBS", "1")
+        .env("CARGO_TARGET_DIR", manifest_dir.join("../../target"))
+        .output()
+        .expect("cargo check runs for temporary external API-boundary crate");
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    let _ = fs::remove_dir_all(&crate_dir);
+
+    if output.status.success() {
+        return Some(format!(
+            "external consumer unexpectedly compiled forbidden public API {forbidden_api}; stdout={stdout}\nstderr={stderr}"
+        ));
+    }
+    if !(stderr.contains("E0599")
+        || stderr.contains("no method named")
+        || stderr.contains("private"))
+    {
+        return Some(format!(
+            "external consumer rejected {forbidden_api} for an unexpected reason; stdout={stdout}\nstderr={stderr}"
+        ));
+    }
+    None
 }
 
 fn assert_owner_success(outcome: &M8ServeOutcome, before: i64, after: i64, source_ref: &SourceRef) {
@@ -456,24 +530,62 @@ fn unknown_evaluation_enqueue_is_typed_rejection_without_panic_or_semantic_mutat
 }
 
 #[test]
-fn target_presence_retirement_rejects_attack_enqueue_without_runtime_mutation() {
-    let (_, _, instance) = checked_runtime_instance("m7_owner_only_no_residuals.mir");
-    let mut execution = execution(instance);
+fn external_runtime_execution_api_does_not_expose_presence_retirement_bypass_or_raw_provenance() {
+    let forbidden_checks = [
+        (
+            "retire-presence-bypass",
+            "M8RuntimeExecution::retire_entity_presence",
+            r#"
+use mir_runtime::m8_runtime_owner_queue::M8RuntimeExecution;
 
-    execution.retire_entity_presence("player", "target");
-    let before_rejected_enqueue = execution.clone();
+fn forbidden(execution: &mut M8RuntimeExecution) {
+    let _ = execution.retire_entity_presence("player", "target");
+}
 
-    let diagnostics = execution
-        .try_enqueue(attack_request(valid_authority_use()))
-        .expect_err("attack(target) must reject before enqueue when target presence is retired");
+fn main() {}
+"#,
+        ),
+        (
+            "execution-raw-presence-provenance",
+            "M8RuntimeExecution::entity_presence_status_and_provenance",
+            r#"
+use mir_runtime::m8_runtime_owner_queue::M8RuntimeExecution;
 
-    assert_eq!(
-        diagnostics.primary().kind(),
-        M8EnqueueDiagnosticKind::StaleMembership
-    );
-    assert_eq!(
-        execution, before_rejected_enqueue,
-        "stale target rejection must not allocate an occurrence, enqueue a request, append trace rows, or advance owner counters"
+fn forbidden(execution: &M8RuntimeExecution) {
+    let _ = execution.entity_presence_status_and_provenance("player", "target");
+}
+
+fn main() {}
+"#,
+        ),
+        (
+            "snapshot-raw-presence-provenance",
+            "M8RuntimeExecution::snapshot().entity_presence_status_and_provenance",
+            r#"
+use mir_runtime::m8_runtime_owner_queue::M8RuntimeExecution;
+
+fn forbidden(execution: &M8RuntimeExecution) {
+    let _ = execution
+        .snapshot()
+        .entity_presence_status_and_provenance("player", "target");
+}
+
+fn main() {}
+"#,
+        ),
+    ];
+
+    let failures = forbidden_checks
+        .into_iter()
+        .filter_map(|(snippet_name, forbidden_api, main_rs)| {
+            assert_external_consumer_cannot_compile_m8_api(snippet_name, forbidden_api, main_rs)
+        })
+        .collect::<Vec<_>>();
+
+    assert!(
+        failures.is_empty(),
+        "M8RuntimeExecution must not expose public target-presence retirement bypasses or raw presence-provenance accessors; target presence retirement must flow through sealed M9->M8/conformance evidence:\n{}",
+        failures.join("\n")
     );
 }
 

@@ -33,7 +33,8 @@ use crate::{
         M8InputReceiptSet,
     },
     m8_runtime_local_cut::{
-        M8LeaseRecord, M8LiveFloor, M8LocalRuntime, M8LocalRuntimeSeed, M8LocalTraceKind,
+        M8EntityPresenceSynchronization, M8LeaseRecord, M8LiveFloor, M8LocalRuntime,
+        M8LocalRuntimeSeed, M8LocalTraceKind,
     },
     m8_runtime_observer::{
         M8ObserverAuthorityGrant, M8ObserverDiagnosticKind, M8ObserverPolicy, M8ObserverRetention,
@@ -48,9 +49,10 @@ use crate::{
     },
     m9_auth_verification::{
         M9AdmissionBindingDelta, M9AdmissionEnvelope, M9AdmissionRuntime, M9AuthorityCut,
-        M9AuthorityRuntime, M9CapabilityAuth, M9CapabilityGrantRequest, M9CapabilityScope,
-        M9FactUse, M9FinalAdmissionEvidence, M9M10AuthorityBridge, M9MembershipAuth,
-        M9MembershipRequest, M9ResidualBinding, M9SourceArtifact, M9WitnessAuth, M9WitnessRequest,
+        M9AuthorityFactInventory, M9AuthorityRuntime, M9CapabilityAuth, M9CapabilityGrantRequest,
+        M9CapabilityScope, M9FactUse, M9FinalAdmissionEvidence, M9M8EntityPresenceBridge,
+        M9M10AuthorityBridge, M9MembershipAuth, M9MembershipRequest, M9ResidualBinding,
+        M9SourceArtifact, M9WitnessAuth, M9WitnessRequest,
     },
 };
 
@@ -1742,6 +1744,40 @@ struct M10MembershipLifecycleSession {
 }
 
 impl M10MembershipLifecycleSession {
+    fn sealed_entity_presence_bridge(
+        &self,
+        namespace: &str,
+        identity: &str,
+        source_ref: SourceRef,
+    ) -> Result<M9M8EntityPresenceBridge, String> {
+        let membership = self
+            .membership
+            .as_ref()
+            .ok_or_else(|| "M10 target presence requires an admitted membership".to_string())?;
+        let capability = self
+            .capability
+            .as_ref()
+            .ok_or_else(|| "M10 target presence requires an admitted capability".to_string())?;
+        let witness = self
+            .witness
+            .as_ref()
+            .ok_or_else(|| "M10 target presence requires an admitted witness".to_string())?;
+        self.authority
+            .m10_entity_presence_bridge(
+                membership, capability, witness, namespace, identity, source_ref,
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "M10 sealed target presence bridge: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })
+    }
+
+    fn authority_fact_inventory(&self) -> M9AuthorityFactInventory {
+        self.authority.authority_fact_inventory()
+    }
+
     fn new_with_session(
         checked: &CheckedSurfaceV0,
         session_id: impl Into<String>,
@@ -2554,82 +2590,246 @@ impl M10M9M8ExecutionSession {
     }
 }
 
-/// SCN02 keeps the BrowserClient actor's authority separate from the target
-/// whose membership is retired.  The schedule supplies only the target leave;
-/// M8 receives the live actor authority and a distinct target-presence fact.
+/// Checked SCN02 target facts extracted before schedule execution.  The
+/// schedule supplies only the exogenous leave action; target identity, actor,
+/// owner locus, state namespace, and source span all come from checked Core.
+#[derive(Clone)]
+struct M10Scn02CheckedTargetContext {
+    actor: String,
+    target: String,
+    owner_locus: String,
+    namespace: String,
+    source_ref: SourceRef,
+}
+
+#[derive(Clone)]
+struct M10Scn02InitialTargetContext {
+    checked: M10Scn02CheckedTargetContext,
+    membership_ref: String,
+    capability_ref: String,
+    witness_ref: String,
+    epoch: String,
+    incarnation: String,
+    initial_presence_sync: M8EntityPresenceSynchronization,
+}
+
+fn m10_scn02_checked_target_context(
+    checked: &CheckedSurfaceV0,
+) -> Result<M10Scn02CheckedTargetContext, String> {
+    let evaluation = checked
+        .evaluation("attack")
+        .ok_or_else(|| "M10 SCN02 initial target context lacks attack evaluation".to_string())?;
+    let owner = evaluation
+        .owner_rmw_core()
+        .ok_or_else(|| "M10 SCN02 attack lacks checked owner Core".to_string())?;
+    let target_read = owner.target();
+    let target_parameter = target_read.index().ok_or_else(|| {
+        "M10 SCN02 attack target must be an indexed checked state read".to_string()
+    })?;
+    let matching_state_schemas = checked
+        .static_environment()
+        .indexed_state_schemas()
+        .iter()
+        .filter(|schema| {
+            schema.name() == target_read.namespace()
+                && schema.owner_locus() == target_read.owner_locus()
+        })
+        .collect::<Vec<_>>();
+    let matching_parameters = checked
+        .static_environment()
+        .evaluation_signature("attack")
+        .ok_or_else(|| "M10 SCN02 attack lacks checked signature".to_string())?
+        .parameters()
+        .iter()
+        .filter(|parameter| parameter.name() == target_parameter)
+        .collect::<Vec<_>>();
+    if matching_state_schemas.len() != 1
+        || matching_parameters.len() != 1
+        || matching_parameters[0].type_name() != matching_state_schemas[0].index_type()
+    {
+        return Err(
+            "M10 SCN02 target_leave does not bind the checked attack target parameter".to_string(),
+        );
+    }
+    let target_is_declared_once = checked
+        .static_environment()
+        .principals()
+        .iter()
+        .filter(|principal| principal.name() == target_parameter)
+        .count()
+        == 1;
+    let owner_locus_is_declared_once = checked
+        .static_environment()
+        .loci()
+        .iter()
+        .filter(|locus| locus.name() == target_read.owner_locus())
+        .count()
+        == 1;
+    let actor = evaluation.actor_authority_origin();
+    if !target_is_declared_once
+        || !owner_locus_is_declared_once
+        || actor.is_empty()
+        || actor == target_parameter
+    {
+        return Err(
+            "M10 SCN02 target/actor/owner context is not uniquely checked-source bound".to_string(),
+        );
+    }
+    Ok(M10Scn02CheckedTargetContext {
+        actor: actor.to_string(),
+        target: target_parameter.to_string(),
+        owner_locus: target_read.owner_locus().to_string(),
+        namespace: target_read.namespace().to_string(),
+        source_ref: target_read.source_ref(),
+    })
+}
+
+/// SCN02 keeps the BrowserClient actor's authority separate from a target
+/// whose M9 membership is admitted once from checked initial context, then
+/// retired by the schedule without minting replacement authority facts.
 struct M10Scn02TargetLeaveSession {
     execution: M10M9M8ExecutionSession,
     target_membership: M10MembershipLifecycleSession,
     leave_action_id: String,
-    target: String,
-    target_existence_ref: String,
-    target_presence_provenance: String,
-    retired_membership_ref: String,
-    retired_epoch: String,
-    retired_incarnation: String,
+    initial_target_context: M10Scn02InitialTargetContext,
     actor_authority: (String, String, M8AuthorityUse),
-    bridge_generation_before_leave: u64,
+    target_leave_m9_authority_delta: Option<Value>,
+    m8_presence_store_transition: Option<M8EntityPresenceSynchronization>,
+    self_authority_bridge_invariant: Option<M10Scn02SelfAuthorityBridgeInvariant>,
+}
+
+#[derive(Clone)]
+struct M10Scn02SelfAuthorityBridgeInvariant {
+    before_generation: u64,
+    after_generation: u64,
+    before_authority_identity: String,
+    after_authority_identity: String,
 }
 
 impl M10Scn02TargetLeaveSession {
-    fn leave_target(
+    fn establish_initial_context(
         checked: &CheckedSurfaceV0,
         leave_action_id: &str,
-        target: &str,
     ) -> Result<Self, String> {
+        let checked_target = m10_scn02_checked_target_context(checked)?;
         let mut execution = M10M9M8ExecutionSession::new(checked, "m9m8-scn02-self-actor")?;
-        let mut target_membership = M10MembershipLifecycleSession::new_with_identity(
+        if execution.m9.principal != checked_target.actor
+            || execution.m9.locus != checked_target.owner_locus
+        {
+            return Err(
+                "M10 SCN02 self authority does not match checked actor/owner context".to_string(),
+            );
+        }
+        let target_membership = M10MembershipLifecycleSession::new_with_identity(
             checked,
             "m9-scn02-target-membership",
-            target,
-            "World",
+            &checked_target.target,
+            &checked_target.owner_locus,
         )?;
-        let membership = target_membership.membership.as_ref().ok_or_else(|| {
-            "M10 SCN02 target leave lacks an admitted target membership".to_string()
+        let live_bridge = target_membership.sealed_entity_presence_bridge(
+            &checked_target.namespace,
+            &checked_target.target,
+            checked_target.source_ref.clone(),
+        )?;
+        if live_bridge.status().as_str() != "live" {
+            return Err("M10 SCN02 initial target bridge was not live".to_string());
+        }
+        let initial_target_context = M10Scn02InitialTargetContext {
+            checked: checked_target,
+            membership_ref: live_bridge.sealed_membership_ref().to_string(),
+            capability_ref: live_bridge.sealed_capability_ref().to_string(),
+            witness_ref: live_bridge.sealed_witness_ref().to_string(),
+            epoch: live_bridge.sealed_epoch().to_string(),
+            incarnation: live_bridge.sealed_incarnation().to_string(),
+            initial_presence_sync: execution.runtime.synchronize_entity_presence(live_bridge)?,
+        };
+        let actor_authority = execution.bridge.owner_use().ok_or_else(|| {
+            "M10 SCN02 checked self actor lacks an M9-issued owner authority".to_string()
         })?;
-        let retired_membership_ref = membership.ref_id().to_string();
-        let retired_epoch = membership.epoch().to_string();
-        let retired_incarnation = membership.incarnation().to_string();
-        execution.runtime.admit_target_presence(
-            "player",
-            target,
-            &retired_membership_ref,
-            target,
-            "World",
-            &retired_epoch,
-        );
-        let actor_authority = execution
-            .bridge
-            .owner_use()
-            .ok_or_else(|| "M10 SCN02 self actor lacks an M9-issued owner authority".to_string())?;
-        let bridge_generation_before_leave = execution.bridge_generation;
-        target_membership.retire()?;
-        if !execution.runtime.retire_target_presence("player", target) {
-            return Err("M10 SCN02 target presence was missing before target leave".to_string());
-        }
-        // Refreshing the sealed self-authority bridge must preserve the
-        // independently retired target-presence record.
-        execution.refresh_bridge();
-        let (target_presence_status, target_presence_provenance) = execution
-            .runtime
-            .entity_presence_status_and_provenance("player", target)
-            .ok_or_else(|| "M10 SCN02 target presence vanished after target leave".to_string())?;
-        if target_presence_status != "retired" {
-            return Err("M10 SCN02 target presence remained live after target leave".to_string());
-        }
         Ok(Self {
             execution,
             target_membership,
             leave_action_id: leave_action_id.to_string(),
-            target: target.to_string(),
-            target_existence_ref: retired_membership_ref.clone(),
-            target_presence_provenance,
-            retired_membership_ref,
-            retired_epoch,
-            retired_incarnation,
+            initial_target_context,
             actor_authority,
-            bridge_generation_before_leave,
+            target_leave_m9_authority_delta: None,
+            m8_presence_store_transition: None,
+            self_authority_bridge_invariant: None,
         })
+    }
+
+    fn target(&self) -> &str {
+        &self.initial_target_context.checked.target
+    }
+
+    fn retire_target(&mut self) -> Result<(), String> {
+        if self.target_leave_m9_authority_delta.is_some() {
+            return Err("M10 SCN02 target leave was scheduled more than once".to_string());
+        }
+        let before = self.target_membership.authority_fact_inventory();
+        let before_generation = self.execution.bridge_generation;
+        let before_authority_identity = m10_scn02_self_authority_identity(&self.actor_authority);
+        self.target_membership.retire()?;
+        let after = self.target_membership.authority_fact_inventory();
+        let new_tombstones = after
+            .retirement_tombstones()
+            .difference(before.retirement_tombstones())
+            .cloned()
+            .collect::<Vec<_>>();
+        let membership = self.target_membership.membership.as_ref().ok_or_else(|| {
+            "M10 SCN02 target membership disappeared before retirement".to_string()
+        })?;
+        if new_tombstones.as_slice() != [membership.ref_id()] {
+            return Err(
+                "M10 SCN02 target leave did not produce exactly one same-membership tombstone"
+                    .to_string(),
+            );
+        }
+        let retired_bridge = self.target_membership.sealed_entity_presence_bridge(
+            &self.initial_target_context.checked.namespace,
+            self.target(),
+            self.initial_target_context.checked.source_ref.clone(),
+        )?;
+        if retired_bridge.status().as_str() != "retired"
+            || retired_bridge.sealed_membership_ref() != self.initial_target_context.membership_ref
+        {
+            return Err(
+                "M10 SCN02 retired bridge did not bind the initial target lineage".to_string(),
+            );
+        }
+        let transition = self
+            .execution
+            .runtime
+            .synchronize_entity_presence(retired_bridge)?;
+        if transition.before_status != "live" || transition.after_status != "retired" {
+            return Err(
+                "M10 SCN02 M8 presence did not make a live-to-retired transition".to_string(),
+            );
+        }
+        let after_generation = self.execution.bridge_generation;
+        let after_authority_identity = m10_scn02_self_authority_identity(&self.actor_authority);
+        if before_generation != after_generation
+            || before_authority_identity != after_authority_identity
+        {
+            return Err(
+                "M10 SCN02 target leave unexpectedly changed self authority bridge identity"
+                    .to_string(),
+            );
+        }
+        self.target_leave_m9_authority_delta = Some(m10_scn02_target_leave_authority_delta(
+            &before,
+            &after,
+            membership.ref_id(),
+            &self.initial_target_context.membership_ref,
+        )?);
+        self.m8_presence_store_transition = Some(transition);
+        self.self_authority_bridge_invariant = Some(M10Scn02SelfAuthorityBridgeInvariant {
+            before_generation,
+            after_generation,
+            before_authority_identity,
+            after_authority_identity,
+        });
+        Ok(())
     }
 
     fn combined_m9_domain_snapshot(&self) -> M10M9DomainSnapshot {
@@ -2655,6 +2855,23 @@ impl M10Scn02TargetLeaveSession {
         &mut self,
         request_action_id: &str,
     ) -> Result<(Value, M10SemanticHashBundle, M10SemanticHashBundle), String> {
+        let target_leave_m9_authority_delta = self
+            .target_leave_m9_authority_delta
+            .clone()
+            .ok_or_else(|| {
+                "M10 SCN02 stale attack ran before target_leave retired its initial context"
+                    .to_string()
+            })?;
+        let m8_presence_store_transition =
+            self.m8_presence_store_transition.clone().ok_or_else(|| {
+                "M10 SCN02 stale attack lacks the sealed target presence retirement".to_string()
+            })?;
+        let self_authority_bridge_invariant = self
+            .self_authority_bridge_invariant
+            .clone()
+            .ok_or_else(|| {
+                "M10 SCN02 stale attack lacks the self-authority bridge invariant".to_string()
+            })?;
         let (evaluation, _owner_locus, authority) = self.actor_authority.clone();
         let before_bundle = self.actual_hash_bundle();
         let before_replay_state = self.execution.runtime.save_relevant_payload();
@@ -2666,7 +2883,7 @@ impl M10Scn02TargetLeaveSession {
             authority.witness_ref().unwrap_or(""),
         ));
         let request = M8OwnerRequest::new(evaluation)
-            .with_argument("target", &self.target)
+            .with_argument("target", self.target())
             .with_authority_use(authority.clone());
         let rejected = matches!(
             self.execution.runtime.enqueue_owner(request),
@@ -2706,36 +2923,63 @@ impl M10Scn02TargetLeaveSession {
                 "target_membership_lifecycle": {
                     "leave_action_source": "exogenous_schedule_input",
                     "retire_transition": "membership.retire",
-                    "target_identity": self.target,
-                    "retire_action_target": self.target,
-                    "target_existence_ref": self.target_existence_ref,
-                    "retired_membership_ref": self.retired_membership_ref,
-                    "retired_epoch": self.retired_epoch,
-                    "retired_incarnation": self.retired_incarnation,
+                    "target_identity": self.target(),
+                    "retire_action_target": self.target(),
+                    "target_existence_ref": self.initial_target_context.membership_ref,
+                    "retired_membership_ref": self.initial_target_context.membership_ref,
+                    "retired_epoch": self.initial_target_context.epoch,
+                    "retired_incarnation": self.initial_target_context.incarnation,
+                },
+                "initial_target_context": {
+                    "admission_source": "checked_source_bound_initial_admission",
+                    "admitted_before_action_id": self.leave_action_id,
+                    "live_membership": {
+                        "ref": self.initial_target_context.membership_ref,
+                        "epoch": self.initial_target_context.epoch,
+                        "incarnation": self.initial_target_context.incarnation,
+                        "principal": self.initial_target_context.checked.target,
+                        "status": "live",
+                    },
+                    "live_capability": { "ref": self.initial_target_context.capability_ref },
+                    "live_witness": { "ref": self.initial_target_context.witness_ref },
+                    "source_derived_reference": m10_source_ref_label(&self.initial_target_context.checked.source_ref),
+                    "target_identity": self.initial_target_context.checked.target,
+                    "target_identity_bound_to_membership_principal": true,
+                    "m8_initial_presence_sync": m10_scn02_presence_sync_evidence(
+                        &self.initial_target_context.initial_presence_sync,
+                        None,
+                    ),
                 },
                 "target_presence_check": {
                     "derived_from_checked_owner_plan": true,
                     "binding_parameter": "target",
-                    "namespace": "player",
-                    "resolved_identity": self.target,
+                    "namespace": self.initial_target_context.checked.namespace,
+                    "resolved_identity": self.target(),
                     "optional_request_target_ref_used": false,
                     "registry_status": "retired",
-                    "presence_ref": self.target_existence_ref,
-                    "membership_ref": self.retired_membership_ref,
-                    "provenance": self.target_presence_provenance,
+                    "presence_ref": self.initial_target_context.membership_ref,
+                    "membership_ref": self.initial_target_context.membership_ref,
+                    "provenance": "sealed:m9-to-m8-entity-presence",
                 },
-                "bridge_refresh": {
-                    "accessor": "M9M10AuthorityBridge::refresh",
-                    "result": "refreshed_after_target_leave",
-                    "before_generation": self.bridge_generation_before_leave,
-                    "after_generation": self.execution.bridge_generation,
+                "target_leave_m9_authority_delta": target_leave_m9_authority_delta,
+                "m8_presence_store_transition": m10_scn02_presence_sync_evidence(
+                    &m8_presence_store_transition,
+                    Some(&self.leave_action_id),
+                ),
+                "self_authority_bridge_invariant": {
+                    "accessor": "M9M10AuthorityBridge::authority_state",
+                    "refreshed_for_target_leave": false,
+                    "before_generation": self_authority_bridge_invariant.before_generation,
+                    "after_generation": self_authority_bridge_invariant.after_generation,
+                    "before_authority_identity": self_authority_bridge_invariant.before_authority_identity,
+                    "after_authority_identity": self_authority_bridge_invariant.after_authority_identity,
                 },
                 "attack_request": {
                     "request_identity": request_action_id,
                     "reuses_same_attack_request": true,
                     "actor_principal": "self",
                     "authority_principal": "self",
-                    "target_identity": self.target,
+                    "target_identity": self.target(),
                     "actor_authority_ref": actor_authority_ref,
                     "result": "rejected",
                     "diagnostic": {
@@ -2746,18 +2990,18 @@ impl M10Scn02TargetLeaveSession {
                     },
                 },
                 "actor_authority": {
-                    "origin": "BrowserClient[self]",
-                    "principal": "self",
+                    "origin": format!("BrowserClient[{}]", self.initial_target_context.checked.actor),
+                    "principal": self.initial_target_context.checked.actor,
                     "membership_status": "live",
                     "live_membership_ref": authority.membership_ref(),
                     "live_capability_ref": authority.capability_ref(),
                     "live_witness_ref": authority.witness_ref(),
                 },
                 "stale_membership_trace": {
-                    "principal": self.target,
-                    "membership_ref": self.retired_membership_ref,
-                    "epoch": self.retired_epoch,
-                    "incarnation": self.retired_incarnation,
+                    "principal": self.target(),
+                    "membership_ref": self.initial_target_context.membership_ref,
+                    "epoch": self.initial_target_context.epoch,
+                    "incarnation": self.initial_target_context.incarnation,
                 },
                 "five_domain_no_mutation": {
                     "no_semantic_domain_mutation": five_domains_unchanged,
@@ -2771,6 +3015,124 @@ impl M10Scn02TargetLeaveSession {
             after_bundle,
         ))
     }
+}
+
+fn m10_source_ref_label(source_ref: &SourceRef) -> String {
+    format!(
+        "{}:{}:{}-{}:{}",
+        source_ref.path,
+        source_ref.start_line,
+        source_ref.start_column,
+        source_ref.end_line,
+        source_ref.end_column,
+    )
+}
+
+fn m10_scn02_presence_sync_evidence(
+    synchronization: &M8EntityPresenceSynchronization,
+    schedule_action_reference: Option<&str>,
+) -> Value {
+    json!({
+        "source_derived_reference": m10_source_ref_label(&synchronization.source_ref),
+        "schedule_action_reference": schedule_action_reference,
+        "membership_ref": synchronization.sealed_membership_ref,
+        "transition": if synchronization.after_status == "retired" {
+            "presence.retire"
+        } else {
+            "presence.admit"
+        },
+        "before": { "status": synchronization.before_status },
+        "after": { "status": synchronization.after_status },
+        "sealed_m9_to_m8_bridge": {
+            "provenance": "crate::m9_auth_verification::M9M8EntityPresenceBridge",
+            "m9_snapshot_ref": synchronization.m9_snapshot_ref,
+            "m8_authority_use_ref": synchronization.m8_authority_use_ref,
+        },
+        "occurrence_trace": [{
+            "occurrence_id": synchronization.occurrence_id,
+            "source_ref": m10_source_ref_label(&synchronization.source_ref),
+            "trace_node_id": synchronization.occurrence_trace_id,
+        }],
+        "control_trace": [{
+            "control_id": synchronization.control_id,
+            "schedule_action_reference": schedule_action_reference,
+            "source_ref": m10_source_ref_label(&synchronization.source_ref),
+            "trace_node_id": synchronization.control_trace_id,
+        }],
+        "public_runtime_execution_bypass_used": false,
+        "raw_presence_provenance_accessor_used": false,
+    })
+}
+
+fn m10_scn02_target_leave_authority_delta(
+    before: &M9AuthorityFactInventory,
+    after: &M9AuthorityFactInventory,
+    raw_membership_ref: &str,
+    sealed_membership_ref: &str,
+) -> Result<Value, String> {
+    let opaque_refs = |refs: &BTreeSet<String>| {
+        refs.iter()
+            .map(|reference| deterministic_hash(&format!("m9-authority-fact|{reference}")))
+            .collect::<Vec<_>>()
+    };
+    let domain_delta = |before: &BTreeSet<String>, after: &BTreeSet<String>| {
+        let minted = after.difference(before).cloned().collect::<Vec<_>>();
+        (!minted.is_empty()).then_some(minted)
+    };
+    let membership_minted = domain_delta(before.membership_refs(), after.membership_refs());
+    let grant_minted = domain_delta(before.grant_refs(), after.grant_refs());
+    let witness_minted = domain_delta(before.witness_refs(), after.witness_refs());
+    if membership_minted.is_some() || grant_minted.is_some() || witness_minted.is_some() {
+        return Err("M10 SCN02 target_leave minted M9 authority facts".to_string());
+    }
+    let new_tombstones = after
+        .retirement_tombstones()
+        .difference(before.retirement_tombstones())
+        .collect::<Vec<_>>();
+    if new_tombstones.len() != 1 || new_tombstones[0].as_str() != raw_membership_ref {
+        return Err(
+            "M10 SCN02 target_leave tombstone did not bind the initial membership".to_string(),
+        );
+    }
+    Ok(json!({
+        "before": {
+            "membership_count": before.membership_refs().len(),
+            "membership_refs": opaque_refs(before.membership_refs()),
+            "grant_count": before.grant_refs().len(),
+            "grant_refs": opaque_refs(before.grant_refs()),
+            "witness_count": before.witness_refs().len(),
+            "witness_refs": opaque_refs(before.witness_refs()),
+        },
+        "after": {
+            "membership_count": after.membership_refs().len(),
+            "membership_refs": opaque_refs(after.membership_refs()),
+            "grant_count": after.grant_refs().len(),
+            "grant_refs": opaque_refs(after.grant_refs()),
+            "witness_count": after.witness_refs().len(),
+            "witness_refs": opaque_refs(after.witness_refs()),
+        },
+        "minted": {
+            "membership_refs": [],
+            "grant_refs": [],
+            "witness_refs": [],
+        },
+        "target_leave_minted_m9_authority_facts": false,
+        "new_retirement_tombstones": [{
+            "membership_ref": sealed_membership_ref,
+        }],
+    }))
+}
+
+fn m10_scn02_self_authority_identity(
+    (evaluation, owner_locus, authority): &(String, String, M8AuthorityUse),
+) -> String {
+    deterministic_hash(&format!(
+        "scn02-self-authority|{evaluation}|{owner_locus}|{}|{}|{}|{}",
+        authority.principal(),
+        authority.membership_ref().unwrap_or(""),
+        authority.capability_ref().unwrap_or(""),
+        authority.witness_ref().unwrap_or(""),
+    ))
 }
 
 struct M10RelationLifecycleRuntime {
@@ -4288,6 +4650,28 @@ fn execute_typed_schedule(
     let cases = schedule
         .cases()
         .ok_or_else(|| "M10 conformance requires action-context schedule cases".to_string())?;
+    let scn02_target_leave_cases = cases
+        .iter()
+        .filter(|case| matches!(case.operation, M10ScheduleOperation::TargetLeave { .. }))
+        .collect::<Vec<_>>();
+    if scn02_target_leave_cases.len() > 1 {
+        return Err("M10 SCN02 target leave was scheduled more than once".to_string());
+    }
+    if let Some(case) = scn02_target_leave_cases.into_iter().next() {
+        let M10ScheduleOperation::TargetLeave { .. } = &case.operation else {
+            unreachable!("target-leave schedule pre-scan retains only target leaves");
+        };
+        let (_, checked) = checked_for_schedule_case(case, checked_sources)?;
+        if case.scn != "SCN-02" {
+            return Err("M10 target_leave is reserved for SCN02 target retirement".to_string());
+        }
+        // This admission intentionally happens before the action loop. The
+        // target_leave action can therefore only retire the same, checked
+        // initial M9 membership rather than minting a new lineage on demand.
+        scn02_target_leave_session = Some(M10Scn02TargetLeaveSession::establish_initial_context(
+            checked, &case.id,
+        )?);
+    }
     for case in cases {
         if !case.id.starts_with(&case.scn.replace('-', "")) {
             return Err(format!(
@@ -4497,12 +4881,24 @@ fn execute_typed_schedule(
                         "M10 target_leave is reserved for SCN02 target retirement".to_string()
                     );
                 }
-                if scn02_target_leave_session.is_some() {
-                    return Err("M10 SCN02 target leave was scheduled more than once".to_string());
+                let session = scn02_target_leave_session.as_mut().ok_or_else(|| {
+                    "M10 SCN02 target leave lacks a checked initial target context".to_string()
+                })?;
+                if target != session.target() {
+                    return Err(
+                        "M10 SCN02 target leave target differs from initial checked context"
+                            .to_string(),
+                    );
                 }
-                scn02_target_leave_session = Some(M10Scn02TargetLeaveSession::leave_target(
-                    checked, &case.id, target,
-                )?);
+                if m10_scn02_checked_target_context(checked)?.source_ref
+                    != session.initial_target_context.checked.source_ref
+                {
+                    return Err(
+                        "M10 SCN02 target leave source does not match initial checked context"
+                            .to_string(),
+                    );
+                }
+                session.retire_target()?;
             }
             M10ScheduleOperation::MembershipLifecycle {
                 events,
@@ -6786,7 +7182,7 @@ fn execute_typed_schedule(
                             "M10 SCN02 stale attack ran before its exogenous target_leave action"
                                 .to_string()
                         })?;
-                        if target != &session.target {
+                        if target != session.target() {
                             return Err(
                                 "M10 SCN02 stale attack target differs from the retired target"
                                     .to_string(),

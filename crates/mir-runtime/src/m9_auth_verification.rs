@@ -695,6 +695,145 @@ pub(crate) struct M9M10AuthorityBridge {
     relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
 }
 
+/// The only crate-private bridge by which M8 may synchronize entity presence
+/// from an M9 membership lineage. Its fields are opaque outside this module;
+/// callers cannot construct presence from a membership string or infer raw
+/// membership provenance from debug output.
+#[derive(Clone)]
+pub(crate) struct M9M8EntityPresenceBridge {
+    namespace: String,
+    identity: String,
+    source_ref: SourceRef,
+    status: M9M8EntityPresenceStatus,
+    sealed_membership_ref: String,
+    sealed_capability_ref: String,
+    sealed_witness_ref: String,
+    sealed_epoch: String,
+    sealed_incarnation: String,
+    m9_snapshot_ref: String,
+    m8_authority_use_ref: String,
+}
+
+impl std::fmt::Debug for M9M8EntityPresenceBridge {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9M8EntityPresenceBridge(<sealed>)")
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum M9M8EntityPresenceStatus {
+    Live,
+    Retired,
+}
+
+impl M9M8EntityPresenceStatus {
+    pub(crate) const fn as_str(self) -> &'static str {
+        match self {
+            Self::Live => "live",
+            Self::Retired => "retired",
+        }
+    }
+}
+
+impl M9M8EntityPresenceBridge {
+    pub(crate) fn namespace(&self) -> &str {
+        &self.namespace
+    }
+
+    pub(crate) fn identity(&self) -> &str {
+        &self.identity
+    }
+
+    pub(crate) fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+
+    pub(crate) const fn status(&self) -> M9M8EntityPresenceStatus {
+        self.status
+    }
+
+    pub(crate) fn sealed_membership_ref(&self) -> &str {
+        &self.sealed_membership_ref
+    }
+
+    pub(crate) fn sealed_capability_ref(&self) -> &str {
+        &self.sealed_capability_ref
+    }
+
+    pub(crate) fn sealed_witness_ref(&self) -> &str {
+        &self.sealed_witness_ref
+    }
+
+    pub(crate) fn sealed_epoch(&self) -> &str {
+        &self.sealed_epoch
+    }
+
+    pub(crate) fn sealed_incarnation(&self) -> &str {
+        &self.sealed_incarnation
+    }
+
+    pub(crate) fn m9_snapshot_ref(&self) -> &str {
+        &self.m9_snapshot_ref
+    }
+
+    pub(crate) fn m8_authority_use_ref(&self) -> &str {
+        &self.m8_authority_use_ref
+    }
+}
+
+/// Crate-private inventory for M10's before/after no-mint evidence. Raw
+/// references never leave the runtime crate; M10 renders only opaque hashes.
+#[derive(Clone)]
+pub(crate) struct M9AuthorityFactInventory {
+    membership_refs: BTreeSet<String>,
+    grant_refs: BTreeSet<String>,
+    witness_refs: BTreeSet<String>,
+    retirement_tombstones: BTreeSet<String>,
+}
+
+impl std::fmt::Debug for M9AuthorityFactInventory {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("M9AuthorityFactInventory")
+            .field("membership_count", &self.membership_refs.len())
+            .field("grant_count", &self.grant_refs.len())
+            .field("witness_count", &self.witness_refs.len())
+            .field(
+                "retirement_tombstone_count",
+                &self.retirement_tombstones.len(),
+            )
+            .finish()
+    }
+}
+
+impl M9AuthorityFactInventory {
+    pub(crate) fn membership_refs(&self) -> &BTreeSet<String> {
+        &self.membership_refs
+    }
+
+    pub(crate) fn grant_refs(&self) -> &BTreeSet<String> {
+        &self.grant_refs
+    }
+
+    pub(crate) fn witness_refs(&self) -> &BTreeSet<String> {
+        &self.witness_refs
+    }
+
+    pub(crate) fn retirement_tombstones(&self) -> &BTreeSet<String> {
+        &self.retirement_tombstones
+    }
+}
+
+fn m9_opaque_ref(input: &str) -> String {
+    let hash = input
+        .as_bytes()
+        .iter()
+        .fold(0xcbf29ce484222325_u64, |hash, byte| {
+            (hash ^ u64::from(*byte)).wrapping_mul(0x100000001b3)
+        });
+    format!("m9-sealed:{hash:016x}")
+}
+
 impl M9M10AuthorityBridge {
     pub(crate) fn authority_state(&self) -> M8AuthorityState {
         self.authority_state.clone()
@@ -2323,6 +2462,15 @@ impl M9AuthorityRuntime {
         self.snapshot.clone()
     }
 
+    pub(crate) fn authority_fact_inventory(&self) -> M9AuthorityFactInventory {
+        M9AuthorityFactInventory {
+            membership_refs: self.snapshot.memberships.keys().cloned().collect(),
+            grant_refs: self.snapshot.capabilities.keys().cloned().collect(),
+            witness_refs: self.snapshot.witnesses.keys().cloned().collect(),
+            retirement_tombstones: self.snapshot.retired_memberships.keys().cloned().collect(),
+        }
+    }
+
     pub(crate) fn evidence_graph(&self) -> &M9EvidenceGraph {
         &self.evidence_graph
     }
@@ -2464,6 +2612,112 @@ impl M9AuthorityRuntime {
             self.canonical_grant_projection(),
         ]
         .join("\n")
+    }
+
+    /// Revalidate one already-issued M9 membership/capability/witness lineage
+    /// against the current sealed snapshot and produce the sole M9→M8 entity
+    /// presence bridge. A live record requires a current live lineage; a
+    /// retired record requires the exact durable membership tombstone. Neither
+    /// M8 nor M10 can construct this bridge from raw facts.
+    pub(crate) fn m10_entity_presence_bridge(
+        &self,
+        membership: &M9MembershipAuth,
+        capability: &M9CapabilityAuth,
+        witness: &M9WitnessAuth,
+        namespace: &str,
+        identity: &str,
+        source_ref: SourceRef,
+    ) -> Result<M9M8EntityPresenceBridge, M9AdmissionDiagnostics> {
+        let Some(snapshot_membership) = self.snapshot.memberships.get(membership.ref_id()) else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        };
+        let Some(snapshot_capability) = self.snapshot.capabilities.get(capability.ref_id()) else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        };
+        let Some(snapshot_witness) = self.snapshot.witnesses.get(witness.ref_id()) else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        };
+        let membership_matches = snapshot_membership.reference == membership.reference
+            && snapshot_membership.principal == membership.principal
+            && snapshot_membership.locus == membership.locus
+            && snapshot_membership.epoch == membership.epoch
+            && snapshot_membership.incarnation == membership.incarnation;
+        let capability_matches = snapshot_capability.reference == capability.reference
+            && snapshot_capability.membership_ref == membership.reference
+            && snapshot_capability.lineage_epoch == membership.epoch;
+        let witness_matches = snapshot_witness.reference == witness.reference
+            && snapshot_witness.membership_ref == membership.reference
+            && snapshot_witness.capability_ref == capability.reference;
+        if !membership_matches
+            || !capability_matches
+            || !witness_matches
+            || snapshot_membership.principal != identity
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+
+        let membership_key = (
+            snapshot_membership.principal.clone(),
+            snapshot_membership.locus.clone(),
+        );
+        let status = if snapshot_membership.active
+            && snapshot_capability.active
+            && snapshot_witness.live
+            && self.snapshot.current_memberships.get(&membership_key)
+                == Some(&snapshot_membership.reference)
+        {
+            M9M8EntityPresenceStatus::Live
+        } else if !snapshot_membership.active
+            && !snapshot_capability.active
+            && !snapshot_witness.live
+            && self
+                .snapshot
+                .retired_memberships
+                .contains_key(&snapshot_membership.reference)
+        {
+            M9M8EntityPresenceStatus::Retired
+        } else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        };
+        let snapshot_projection = self.canonical_snapshot_projection();
+        Ok(M9M8EntityPresenceBridge {
+            namespace: namespace.to_string(),
+            identity: identity.to_string(),
+            source_ref,
+            status,
+            sealed_membership_ref: m9_opaque_ref(&format!(
+                "membership|{}",
+                snapshot_membership.reference
+            )),
+            sealed_capability_ref: m9_opaque_ref(&format!(
+                "capability|{}",
+                snapshot_capability.reference
+            )),
+            sealed_witness_ref: m9_opaque_ref(&format!("witness|{}", snapshot_witness.reference)),
+            sealed_epoch: m9_opaque_ref(&format!(
+                "epoch|{}|{}",
+                snapshot_membership.reference, snapshot_membership.epoch
+            )),
+            sealed_incarnation: m9_opaque_ref(&format!(
+                "incarnation|{}|{}",
+                snapshot_membership.reference, snapshot_membership.incarnation
+            )),
+            m9_snapshot_ref: m9_opaque_ref(&format!("snapshot|{snapshot_projection}")),
+            m8_authority_use_ref: m9_opaque_ref(&format!(
+                "m8-presence-use|{}|{}|{}",
+                snapshot_membership.reference, namespace, identity
+            )),
+        })
     }
 
     /// Translate already authenticated M9 lineage into the sealed M8

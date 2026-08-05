@@ -41,6 +41,7 @@ use crate::{
         M8RelationProjectionRuntime, M8RelationProjectionSeed, M8RelationReacquire,
         M8RelationTrace, M8RelationTraceKind,
     },
+    m9_auth_verification::{M9M8EntityPresenceBridge, M9M8EntityPresenceStatus},
 };
 
 pub use crate::m8_runtime_relation_projection::{M8LeaseInventory, M8LeaseRecord};
@@ -180,6 +181,8 @@ pub enum M8LocalTraceKind {
     RelationTransitionRejected,
     DesignatedEvaluationRejected,
     DesignatedConsumptionRejected,
+    EntityPresenceSynchronized,
+    EntityPresenceControlApplied,
 }
 
 /// Local-only references retained in K8/H.  They never cross the runtime
@@ -420,6 +423,22 @@ pub(crate) struct M8LocalTraceObservation {
     pub(crate) dependencies: Vec<String>,
     pub(crate) source_ref: SourceRef,
     pub(crate) occurrence_id: Option<String>,
+}
+
+/// Sealed M9-to-M8 entity-presence synchronization evidence. It carries only
+/// opaque M9 references; raw membership provenance remains inside M9.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8EntityPresenceSynchronization {
+    pub(crate) before_status: String,
+    pub(crate) after_status: String,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) occurrence_id: String,
+    pub(crate) occurrence_trace_id: String,
+    pub(crate) control_id: String,
+    pub(crate) control_trace_id: String,
+    pub(crate) sealed_membership_ref: String,
+    pub(crate) m9_snapshot_ref: String,
+    pub(crate) m8_authority_use_ref: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -1363,49 +1382,91 @@ impl M8LocalRuntime {
             .replace_authority_state(authority_state);
     }
 
-    /// Admit or overwrite independently tracked target presence from a
-    /// separate M9 membership record. This changes neither caller authority
-    /// nor capability/witness state; checked owner admission resolves the
-    /// target directly from its bound state-read parameter. The facade
-    /// snapshots stay empty between operations; the shared snapshot is the
-    /// sole holder of this semantic state.
-    pub(crate) fn admit_target_presence(
+    /// Synchronize entity presence only from an M9-sealed bridge. The facade
+    /// snapshots remain empty between operations; this shared snapshot is the
+    /// sole semantic holder and the M9 bridge has already revalidated the
+    /// underlying membership lineage.
+    pub(crate) fn synchronize_entity_presence(
         &mut self,
-        namespace: &str,
-        identity: &str,
-        membership_ref: &str,
-        principal: &str,
-        locus: &str,
-        epoch: &str,
-    ) {
-        let provenance = format!(
-            "m9-target-membership|ref={membership_ref}|principal={principal}|locus={locus}|epoch={epoch}"
+        bridge: M9M8EntityPresenceBridge,
+    ) -> Result<M8EntityPresenceSynchronization, String> {
+        let namespace = bridge.namespace().to_string();
+        let identity = bridge.identity().to_string();
+        let source_ref = bridge.source_ref().clone();
+        let before_status = self
+            .shared_snapshot
+            .entity_presence(&namespace, &identity)
+            .map(|record| record.status().as_str().to_string())
+            .unwrap_or_else(|| "absent".to_string());
+        match bridge.status() {
+            M9M8EntityPresenceStatus::Live => {
+                if before_status == "retired" {
+                    return Err(
+                        "M8 entity presence bridge attempted to resurrect a retired target"
+                            .to_string(),
+                    );
+                }
+                self.shared_snapshot.admit_entity_presence(
+                    &namespace,
+                    &identity,
+                    format!("sealed-m9-m8-presence|{}", bridge.sealed_membership_ref()),
+                );
+            }
+            M9M8EntityPresenceStatus::Retired => {
+                if before_status != "live"
+                    || !self
+                        .shared_snapshot
+                        .retire_entity_presence(&namespace, &identity)
+                {
+                    return Err(
+                        "M8 entity presence bridge could not retire an existing live target"
+                            .to_string(),
+                    );
+                }
+            }
+        }
+        let occurrence_id = format!(
+            "m8-entity-presence-occurrence-{:020}",
+            self.trace.borrow().len()
         );
-        self.shared_snapshot
-            .admit_entity_presence(namespace, identity, provenance);
-    }
-
-    /// Retire target presence without revoking or removing the actor's M9
-    /// authority inventory. The record stays retired when this shared
-    /// snapshot is swapped through an execution facade.
-    pub(crate) fn retire_target_presence(&mut self, namespace: &str, identity: &str) -> bool {
-        self.shared_snapshot
-            .retire_entity_presence(namespace, identity)
-    }
-
-    pub(crate) fn entity_presence_status_and_provenance(
-        &self,
-        namespace: &str,
-        identity: &str,
-    ) -> Option<(String, String)> {
-        self.shared_snapshot
-            .entity_presence(namespace, identity)
-            .map(|record| {
-                (
-                    record.status().as_str().to_string(),
-                    record.provenance().to_string(),
-                )
-            })
+        self.trace.borrow_mut().append(
+            M8LocalTraceKind::EntityPresenceSynchronized,
+            source_ref.clone(),
+            Some(occurrence_id.clone()),
+            None,
+            false,
+        );
+        let occurrence_trace_id = self
+            .trace
+            .borrow()
+            .latest_observation(M8LocalTraceKind::EntityPresenceSynchronized)
+            .expect("M8 presence synchronization appends an occurrence trace")
+            .node_id;
+        self.trace.borrow_mut().append(
+            M8LocalTraceKind::EntityPresenceControlApplied,
+            source_ref.clone(),
+            None,
+            None,
+            false,
+        );
+        let control_trace_id = self
+            .trace
+            .borrow()
+            .latest_observation(M8LocalTraceKind::EntityPresenceControlApplied)
+            .expect("M8 presence synchronization appends a control trace")
+            .node_id;
+        Ok(M8EntityPresenceSynchronization {
+            before_status,
+            after_status: bridge.status().as_str().to_string(),
+            source_ref,
+            occurrence_id,
+            occurrence_trace_id,
+            control_id: control_trace_id.clone(),
+            control_trace_id,
+            sealed_membership_ref: bridge.sealed_membership_ref().to_string(),
+            m9_snapshot_ref: bridge.m9_snapshot_ref().to_string(),
+            m8_authority_use_ref: bridge.m8_authority_use_ref().to_string(),
+        })
     }
 
     /// Crate-private patch seam for a checked, newly declared finite-v0 Int
