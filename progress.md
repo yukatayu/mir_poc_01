@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-05 16:34 JST
+最終更新: 2026-08-06 12:15 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -168,6 +168,10 @@ public-product completion, or general OBL discharge is claimed.
 
 ## recent log
 
+- 2026-08-06 12:15 JST: Canon-first の全体像 HTML を finite acceptance / broad
+  phase exit / public-product completion の三境界と T/I 二軸で再構成し、Oracle と
+  planner/theory/implementation の独立照合、source-first conformance 再実行、focused
+  HTML tests 8/8 を通した。reader entry の proof-ledger 表現も現行状態へ修正した。
 - 2026-08-05 16:34 JST: closeout planner review corrected two stale
   owner-boundary/current-frontier references across Plan 247, reader entry
   points, and `AGENTS.md`; final re-review ACCEPT found no remaining P0/P1/P2.

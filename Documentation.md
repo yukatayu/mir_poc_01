@@ -135,75 +135,36 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 
 ## Historical LAB orientation（current queueではない）
 
-- official lifecycle は `T1`。M2 の v3 pass digest acceptance により G0-D3、G0
-  exit、T1 entry が受理されたが、それ以外の Gate/Phase は未成立です。
-- General OBL-001..028 は `intentionally-deferred`。M3 finite OBL-029..032 は
-  `lean-proved`、OBL-033 は `model-checked-bounded`、OBL-034 は
-  `runtime-monitored`、M4 finite OBL-035..039 は `lean-proved` であり、いずれも
-  theory/11 の明記された有限scopeを超える claimではありません。
-- T0 profile v3 が current profile として M2 acceptance を閉じた。v1 artifact は
-  nonconforming historical evidence、v2 artifact は fixed-control drift の historical
-  `fail` として保持され、再解釈しない。I1 authorization は未成立である。
-- governance drift は official lifecycle の lane に限る。program meaning / SCN
-  conformance の前提ではないため、goal-first integration は `plan/246-goal-first-semantic-integration-and-i1-entry.md` に従い
-  並行して進めています。S2-A は C1-A-r/C1-B と C2-A-r/defer の比較を完了しました。
-  これは LAB の decision packet であり、Canon Core/Config/SaveObject/failure/SCN を変えません。
-  C1-A-r は target owner 内の read/calculate/write を一つの service にする条件付き推奨、
-  C2-A-r は P017 X1 を candidate-specific presentation で拡張する推奨方向です。S2-B の
-  formalization / prototype は、SCN-02 の dependency・read authority の整合化と、両 amendment
-  surface の ordinary owner/Canon selection 後にのみ開始します。
-- T1/T2 には canonical phase-exit JSON profile がありません。
-- 現行 T2 criterion は OBL-020/021/002 proof skeleton と G5 statement 群です。
-  これは全十 SCN を対象とする I1-entry readiness を自動的には保証しません。
-- `spec/06` は C-static 10/10 を I1 entry、C-runtime 10/10 を I1 exit と書く一方、
-  phase table は両方を I1 exit に置いています。bootstrap の定義と整合化が必要です。
-- P004/P008/P012/P013/P015/P016 の方向は owner が記録しました。exact grammar、
-  shared model、request/replay identity、scalar correspondence、profile は未確定です。
-  Plan 199 は後続の composition/falsifier 境界を記録する LAB plan であり、現在の
-  自律 package を開きません。
-- P017 X1 は V1/R1 cross-locus-read に限る owner-accepted relation-state direction のままです。
-  `frozen / DEFER` と Plan 245 の当初の `NO-SUCCESSOR` は WRK-0045 の predicate-only A-Sigma L3
-  line にだけ及びます。WRK-0046 は `L3-open` / `not-promoted` の bounded evidence として実行・link 済みです。
-  registered finite-line premises の下で ordinary-edge preservation と一つの supplied restore-edge
-  preservation は二つの counted consume を排除し、A1 omission/reset control は restore preservation を
-  外した exact two-consume trace を構成しました。これは K0、`Spent` の primitive/derived classification、
-  carrier、receipt、identity、actual persistence/restore、Core、OBL、runtime、Gate/Phase、public behavior
-  を選ばず、inventory/lifecycle の拡張も作りません。
-- Surface、current-L2、Product Alpha、Full System V1、operational suite、Lean
-  evidence は bounded LAB として実行できます。final grammar/API/ABI、official
-  conformance、production runtime、WAN federation、distributed durable save/load
-  は主張しません。
-
-official T2 まで owner input なしで連続自走することはできません。ただし、
-owner-reserved checkpoint の間は、candidate comparison、countermodel、shared formal
-model、Lean statement/skeleton、bounded implementation validation、review、
-validation、report、commit/push を package 単位で進められます。ただし owner
-disposition 後も、個別 package が ADR-0014 の standing predicate、既存 lane、
-pre-registration、falsifier、non-effects、rollback を満たす範囲だけが自走可能です。
-Canon integration、ledger movement、production implementation、新 lane/helper は
-owner action のままです。
-
-S2-A が提示する次の判断は分離されています。C1 は、同一 target owner の二つの
-read-dependent attack を service 時点で累積させる `C1-A-r`、既存の determined value
-`v′` を requester 側で先に計算して後から write する `C1-B`、又は defer の選択です。
-`C1-A-r` を選ぶ場合も、write capability が private RHS operand の read/visibility authority
-を暗黙に与えることはありません。既存の read/visibility rule を維持するか、別の明示的
-operation/declassification authority を通常 proposal として扱う必要があります。C2 は、
-request/result/receipt/one-shot use と cut/save/load を `X` に保持する、P017 X1 を
-拡張する候補 `C2-A-r` と defer の選択です。occurrence/consumption の表現と static
-request-response row は X1 自体が決めたものではありません。いずれも現在の Canon の
-決定ではありません。
-
-owner 判断前でも、既存 Canon の literal transcription 又は conditional lemma だけで
-閉じる候補は ADR-0014 の standing predicate を再審査できます。既存 lane、
-非重複の利用先、falsifier は保守的な LAB 選別規律であり、standing predicate を
-狭める追加の Canon 条件ではありません。predicate と reserved-boundary exclusion を
-満たす真に新規な candidate は個別に検討し、official status とは区別します。
-
-この主線の停止条件は、I1 を開始できる状態です。すなわち selected semantics、shared
-kernel model、必要な I1-readiness record、all-SCN implementation scope、明示的な実装認可が
-揃った時点で、最初の I1 実装 package は開始せずに停止します。その closeout では実装入力、
-保証・非保証、後段の境界を整理します。
+- official lifecycle は `T1`。M2 の semantic-assertion v3 acceptance により
+  G0-D3、G0 exit、T1 entry は受理済みです。M0--M10 program は closed であり、
+  frozen SCN-01..10 の有限 I1+ deterministic reference profile は M10 R5 で受理済みです。
+  ただし、広い PHASE-I1 exit、I2 activation、public grammar/API/ABI/wire/carrier freeze、
+  C-distributed、production はこの acceptance から導きません。
+- proof status は `mirrorea_canon/theory/11-metatheory-ledger.md` だけが決めます。
+  General OBL-001..025 と OBL-027 は `intentionally-deferred` です。
+  OBL-026 は `lean-proved`、OBL-028 は `model-checked-bounded` です。finite
+  OBL-029..057 は
+  ledger の exact scope に従い、`lean-proved`、`model-checked-bounded`、
+  `runtime-monitored` に分類されています。finite evidence を general theorem に
+  読み替えません。
+- T0 profile v3 が current governance profile です。v1 は nonconforming historical
+  evidence、v2 は fixed-control drift を検出した historical `fail` として保持し、
+  v3 acceptance へ再解釈しません。
+- Plan 246 とそれ以前の semantic-integration plans、P017/WRK records、Product Alpha、
+  Full System V1、Surface alpha、current-L2 は historical LAB evidence / repository
+  memory です。現在の queue ではありません。旧 C1/C2 candidate family は M3--M10 の
+  accepted finite rulesへ置き換わる current decision sourceではなく、反例・設計履歴として
+  読みます。
+- Plan 247 は名前に `current-roadmap` を含みますが、現在は closed execution record / R5
+  regression baseline です。active execution roadmap と post-program autonomous semantic
+  package はありません。
+- 次の formalization、I2、public/distributed/product program は owner-defined です。
+  ADR-0014 に収まる既存 lane の bounded L3 research と snapshot maintenance だけは
+  separate evidence として行えますが、L2 promotion、Gate/Phase acceptance、production
+  implementation、public contract を作りません。
+- reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
+  `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
+  `samples_progress.md` を使います。
 
 ## Roadmap の読み方
 
@@ -217,12 +178,19 @@ kernel model、必要な I1-readiness record、all-SCN implementation scope、�
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
-I1 実装を始める文脈では、P016 が narrow T2 の直後に all-SCN / G0-G7
-statement-level readiness、OBL-003/027 の evidence class、C-static の位置、範囲付き
-production authorization を bind する別 I1-readiness record という方向を記録しました。
-profile と Canon amendment は未作成です。
+M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。broad
+PHASE-I1 acceptance と narrow I2 entry は別々の gate であり、現行 Canon は両者の
+厳密な先後関係をまだ決めていません。I2 を
+開始する場合は、ADR-0025 の entry contract に従い、`architecture/04` の L2 carrier /
+`OPEN-030` reply-receipt 境界、ordinary source 由来の generated dispatch、process 内
+multi-locus、minimal typed devtools、preserved non-claims を一つの新 owner-directed
+roadmap と acceptance profile に束縛します。
 
-## 作業の管理
+## Historical plan index（repository memory、current queue ではない）
+
+以下の `plan/` はすべて設計経緯を保持する repository memory です。再開対象や現在の
+実行順ではありません。現行の停止線と判断待ちは `docs/project-status.md`、
+`progress.md`、`tasks.md` を参照してください。
 
 - `docs/project-status.md`: 人間向け現在地、停止線、判断待ち。
 - `progress.md`: 三軸、macro phase、feature maturity、recent log。
