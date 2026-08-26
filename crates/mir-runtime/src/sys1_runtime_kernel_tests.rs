@@ -17,7 +17,7 @@ use crate::semantic_runtime_kernel::{
 
 const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const OWNER_FIXTURE: &str = "m7_owner_only_no_residuals.mir";
-const DESIGNATED_FIXTURE: &str = "designated_tick_publish_result.mir";
+const DESIGNATED_FIXTURE: &str = "canonical_attack_bundle.mir";
 
 const PRINCIPAL: &str = "self";
 const ACTOR_LOCUS: &str = "L_actor";
@@ -100,7 +100,25 @@ fn designated_source_ref(path: &str, source: &str) -> SourceRef {
 }
 
 fn designated_input_source_ref(path: &str, source: &str) -> SourceRef {
-    source_ref(path, source, "player[self].atk")
+    let anchor = "designated evaluate E on tick F publish result = ";
+    let lexeme = "player[self].atk";
+    let anchor_start = source
+        .find(anchor)
+        .expect("fixture must contain the designated evaluation anchor");
+    let lexeme_start = source[anchor_start..]
+        .find(lexeme)
+        .map(|offset| anchor_start + offset)
+        .expect("fixture must contain the designated remote input source span");
+    let lexeme_end = lexeme_start + lexeme.len();
+    let (start_line, start_column) = line_column(source, lexeme_start);
+    let (end_line, end_column) = line_column(source, lexeme_end);
+    SourceRef::new(
+        path.to_owned(),
+        start_line,
+        start_column,
+        end_line,
+        end_column,
+    )
 }
 
 fn hp_key() -> KernelStateKey {
