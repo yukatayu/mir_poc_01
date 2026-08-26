@@ -15,9 +15,10 @@ use mir_semantics::{
         SurfaceV0ClassificationOptions, classify_surface_v0,
     },
     surface_v0_pipeline::{
-        CheckedBinaryOperator, CheckedEvaluationKind, EffectEntry, EffectKind, GeneratedObligation,
-        GeneratedObligationKind, M7DiagnosticKind, ResidualObligationKind, StaticRetryContractKind,
-        SurfaceV0PipelineDiagnostics, check_and_elaborate_surface_v0,
+        CheckedBinaryOperator, CheckedEvaluationKind, CheckedEvaluationSignature, EffectEntry,
+        EffectKind, GeneratedObligation, GeneratedObligationKind, M7DiagnosticKind,
+        ResidualObligationKind, StaticRetryContractKind, SurfaceV0PipelineDiagnostics,
+        check_and_elaborate_surface_v0,
     },
 };
 
@@ -818,6 +819,78 @@ fn designated_result_consumer_core_is_source_bound_and_authority_distinct() {
         consumer
             .authority_requirements()
             .does_not_grant_authority_success()
+    );
+
+    let environment = checked.static_environment();
+    assert!(
+        environment.evaluation_signature("E.result").is_none(),
+        "name-only signature lookup must fail closed when producer and consumer share E.result"
+    );
+    let named_signatures = environment.evaluation_signatures_named("E.result");
+    assert_eq!(named_signatures.len(), 2);
+    assert_eq!(
+        named_signatures
+            .iter()
+            .map(|signature: &CheckedEvaluationSignature| (
+                signature.kind(),
+                signature.owner_locus()
+            ))
+            .collect::<Vec<_>>(),
+        vec![
+            (CheckedEvaluationKind::DesignatedPublishValue, None),
+            (CheckedEvaluationKind::DesignatedResultConsume, Some("C")),
+        ],
+        "ambiguous names remain inspectable in deterministic typed order"
+    );
+    let producer_signature = environment
+        .evaluation_signature_by_identity(
+            "E.result",
+            CheckedEvaluationKind::DesignatedPublishValue,
+            None,
+        )
+        .expect("producer signature resolves by typed identity");
+    assert_eq!(producer_signature.name(), "E.result");
+    assert_eq!(
+        producer_signature.kind(),
+        CheckedEvaluationKind::DesignatedPublishValue
+    );
+    assert_eq!(producer_signature.owner_locus(), None);
+    assert_eq!(producer_signature.source_ref(), designated.source_ref());
+
+    let (producer_only_path, producer_only_source) =
+        load_fixture("designated_tick_publish_result.mir");
+    let producer_only = check_and_elaborate_surface_v0(FixtureSource::new(
+        producer_only_path,
+        producer_only_source,
+    ))
+    .expect("producer-only designated source still checks");
+    let unique_signature = producer_only
+        .static_environment()
+        .evaluation_signature("E.result")
+        .expect("legacy name-only lookup remains available when E.result is unique");
+    assert_eq!(
+        unique_signature.kind(),
+        CheckedEvaluationKind::DesignatedPublishValue
+    );
+    assert_eq!(unique_signature.owner_locus(), None);
+
+    let consumer_signature = environment
+        .evaluation_signature_by_identity(
+            "E.result",
+            CheckedEvaluationKind::DesignatedResultConsume,
+            Some("C"),
+        )
+        .expect("consumer signature resolves by typed identity");
+    assert_eq!(consumer_signature.name(), "E.result");
+    assert_eq!(
+        consumer_signature.kind(),
+        CheckedEvaluationKind::DesignatedResultConsume
+    );
+    assert_eq!(consumer_signature.owner_locus(), Some("C"));
+    assert_eq!(consumer_signature.source_ref(), consumer.source_ref());
+    assert_ne!(
+        producer_signature.source_ref(),
+        consumer_signature.source_ref()
     );
 
     let consume_entries = checked.source_map().entries_for_source_ref(&consume_ref);
