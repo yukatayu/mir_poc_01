@@ -18,6 +18,18 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-26** PROPOSAL-029 の owner disposition と ADR-0026 により、accepted
+  M10 semanticsからmeaning-preserving per-locus executable artifacts、generated
+  communication、process-internal dispatch、typed devtoolsへ進む Mirrorea I2
+  Systems Foundation SYS-0--SYS-7 bounded programを開始した。sole current LAB
+  roadmapはPlan 249、SYS-0 close後のactive goalはSYS-1である。goal statement、
+  direct-consumer/candidate/stop/report/review/evidence規律とowner-reserved stop lineを
+  採用した。ADR-0015/Plan 247/M10 cutはclosed immutable baselineとして保持する。
+  program activationはofficial theory T1を動かさず、broad PHASE-I1 exit、I2 lifecycle
+  entry/exit、proof ledger、public grammar/API/ABI/wire、real transport、durable
+  distributed persistence、production、browser/View renderer、I3 implementationを
+  受理・固定・開始しない。
+
 - **2026-08-05** ADR-0015 の owner delegation と ADR-0025 acceptance amendment により、
   source/validation cut `23f5a8130334bf0c8516d51e9dcea38b92f50db1` の M10 I1+
   deterministic reference profileを受理した。fresh remote cloneで同一output digestを

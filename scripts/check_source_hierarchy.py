@@ -334,6 +334,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md",
         "plan/246-goal-first-semantic-integration-and-i1-entry.md",
         "plan/247-mir-theory-v0-i1plus-current-roadmap.md",
+        "plan/249-mirrorea-i2-systems-foundation-current-roadmap.md",
     ],
     "scripts": [
         "scripts",

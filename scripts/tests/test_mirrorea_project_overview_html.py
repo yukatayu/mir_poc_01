@@ -65,12 +65,12 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "M0–M10 は完走・閉鎖",
             "有限 I1+ deterministic reference profile は受理済み",
             "広い PHASE-I1 exit は未受理",
-            "I2 は未開始",
-            "M10 は自動認可しない",
-            "broad I1 exit と I2 entry の先後",
-            "厳密な前提とも、不要とも決めていない",
-            'aria-label="broad I1 exit と narrow I2 entry は別 gate で先後未決"',
-            "successor を開くか pause するか",
+            "ADR-0026",
+            "active roadmap は Plan 249",
+            "SYS-0 closing",
+            "next goal は SYS-1",
+            "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
+            "Plan 247 は closed",
             "OPEN-030",
             "26/26",
             "47/47",
@@ -111,6 +111,14 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "integration S2-A の直後",
             "現在地は integration S2-A",
             "G0 exit と T1 entry は未成立",
+            "active roadmap なし",
+            "新 owner direction が必要",
+            "owner direction 待ち",
+            "successor を開くか pause するか",
+            "I2 は未開始",
+            "新 owner roadmap",
+            "post-program scope を owner が選ぶ地点",
+            "closed M10 baseline の次に、どの direct consumer と acceptance profile を開くかが未選択",
         )
         for claim in stale_claims:
             self.assertNotIn(claim, self.html)
@@ -156,6 +164,9 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assertIn("OBL-026 は `lean-proved`", documentation)
         self.assertIn("OBL-028 は `model-checked-bounded`", documentation)
         self.assertIn("M0--M10 program は closed", documentation)
+        self.assertIn("active roadmap は Plan 249", documentation)
+        self.assertIn("SYS-0 closing", documentation)
+        self.assertIn("next goal は SYS-1", documentation)
         self.assertNotIn("goal-first integration は `plan/246", documentation)
         self.assertNotIn("S2-A が提示する次の判断", documentation)
         self.assertNotIn("この主線の停止条件は、I1 を開始できる状態", documentation)

@@ -8,12 +8,15 @@ notes. If LAB text conflicts with canon, canon wins.
 ## この文書の役割
 
 この文書はリポジトリを読み始めるための短い案内です。規範判断は
-`mirrorea_canon/`、現在地は `docs/project-status.md`、閉じた M0--M10 program record は
-`plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの不変な証跡は
-`docs/reports/` にあります。現在activeな execution roadmapはありません。
+`mirrorea_canon/`、現在地は `docs/project-status.md`、active Mirrorea I2 Systems
+Foundation roadmap は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`、
+閉じた M0--M10 record は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの
+不変な証跡は `docs/reports/` にあります。
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
-「次」は current queue を意味しません。閉じた一本道は Plan 247、現在の停止線は
+「次」は current queue を意味しません。active roadmap は Plan 249 だけであり、
+SYS-0 closing が唯一の current goal、next goal は SYS-1 です。Plan 247とolder
+plansはhistorical memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
@@ -28,7 +31,11 @@ waiver null、fresh clone output SHA256
 reviewer ACCEPT no P0/P1/P2 である。これは frozen SCN-01..10 の有限 I1+
 deterministic reference profile acceptance であり、broad PHASE-I1 exit、I2 activation、
 final public grammar/diagnostic ABI/wire/carrier freeze、socket、production、general theorem、
-public product completion は主張しない。次の program direction は owner-defined である。M2 は
+public product completion は主張しない。2026-08-26のowner directionはADR-0026により
+SYS-0--SYS-7のMirrorea I2 Systems Foundation bounded programを開始した。現在は
+**SYS-0 closing** で、**next goal は SYS-1** runtime-kernel/conformance separation and
+internal carrier boundary である。SYS-1はSYS-0 review/commit/push/parity close前にはactiveでない。
+これはprogram authorizationであってbroad I1/I2 lifecycle acceptanceではない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` のままであり、
@@ -42,6 +49,7 @@ proof ledger は M10 で変更していない。
 | T0/G0 v3 acceptance | `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md`, `mirrorea_canon/adr/ADR-0017.md`, `plan/248-t0-g0-semantic-assertion-v3-evaluation.json` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
+| active I2 Systems Foundation roadmap | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
 | 閉じた M0--M10 execution record | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | 旧 goal-first semantic integration（historical LAB evidence） | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
@@ -133,7 +141,7 @@ Mir の `.mir` を意味の正本とし、正しい理論に基づいて Place �
 Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連しますが、
 意図的に分離します。`World` と `Game` は Mir 上で user が定義する概念です。
 
-## Historical LAB orientation（current queueではない）
+## Current program and historical LAB orientation
 
 - official lifecycle は `T1`。M2 の semantic-assertion v3 acceptance により
   G0-D3、G0 exit、T1 entry は受理済みです。M0--M10 program は closed であり、
@@ -156,12 +164,11 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   accepted finite rulesへ置き換わる current decision sourceではなく、反例・設計履歴として
   読みます。
 - Plan 247 は名前に `current-roadmap` を含みますが、現在は closed execution record / R5
-  regression baseline です。active execution roadmap と post-program autonomous semantic
-  package はありません。
-- 次の formalization、I2、public/distributed/product program は owner-defined です。
-  ADR-0014 に収まる既存 lane の bounded L3 research と snapshot maintenance だけは
-  separate evidence として行えますが、L2 promotion、Gate/Phase acceptance、production
-  implementation、public contract を作りません。
+  regression baseline です。active roadmapはPlan 249だけです。
+- ADR-0026 は accepted finite semantics を per-locus artifact/generated communication/
+  in-process dispatch/typed devtoolsへ進めるSYS-0--SYS-7をowner-authorized bounded
+  programとして開始しました。現在はSYS-0 closing、next goalはSYS-1です。
+  program外はADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
   `samples_progress.md` を使います。
@@ -171,22 +178,21 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | 段階 | 主眼 | 現在の扱い |
 | --- | --- | --- |
 | T0 | 語彙・decision・G0 | closed through the M2 v3 acceptance record; v1/v2 remain historical evidence |
-| T1 | 計算体系・G1-G3 statement | official lifecycle remains here after M10; M10 does not claim broad PHASE-I1 exit |
+| T1 | 計算体系・G1-G3 statement | official lifecycle remains here; ADR-0026 program activation does not claim broad PHASE-I1/I2 acceptance |
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened by M10; proof ledger unchanged |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
-| I2 | process 内 multi-place | owner-defined future direction; not activated by M10 |
+| I2 | process 内 multi-place | ADR-0026 bounded implementation program is closing SYS-0; SYS-1 is next, while official I2 lifecycle entry/exit remains unaccepted |
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
-M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。broad
-PHASE-I1 acceptance と narrow I2 entry は別々の gate であり、現行 Canon は両者の
-厳密な先後関係をまだ決めていません。I2 を
-開始する場合は、ADR-0025 の entry contract に従い、`architecture/04` の L2 carrier /
-`OPEN-030` reply-receipt 境界、ordinary source 由来の generated dispatch、process 内
-multi-locus、minimal typed devtools、preserved non-claims を一つの新 owner-directed
-roadmap と acceptance profile に束縛します。
+M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
+Plan 249 はADR-0025のentry contractを満たすnew owner directionとして、`architecture/04`
+のinternal L2 carrier / OPEN-030、ordinary source由来generated dispatch、process内
+multi-locus、minimal typed devtools、preserved non-claimsを一つのprogramへ束縛しました。
+ただし、broad PHASE-I1 acceptance と official I2 lifecycle acceptanceはactual criteria、
+fresh evidence、independent review、明示acceptance recordが揃うまで未受理です。
 
-## Historical plan index（repository memory、current queue ではない）
+## Historical plan index（Plan 249以外はrepository memory、current queueではない）
 
 以下の `plan/` はすべて設計経緯を保持する repository memory です。再開対象や現在の
 実行順ではありません。現行の停止線と判断待ちは `docs/project-status.md`、

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-05 16:34 JST
+最終更新: 2026-08-26 19:31 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/`
@@ -9,78 +9,99 @@ is LAB; canon wins. This document is a LAB derived view.
 ## この文書の役割
 
 これは人間向けの短い **派生ビュー** である。規範判断は
-`mirrorea_canon/`、詳細な履歴は `plan/` と `docs/reports/` にある。この文書は
-Gate/Phase、OBL、SCN、適合性、実装完了を決めない。
+`mirrorea_canon/`、current execution controlはPlan 249、詳細履歴はPlan 247と
+milestone reportsにある。この文書はGate/Phase、OBL、SCN、適合性、実装完了を
+決めない。
 
 ## 全体の進行チェックリスト
 
 ```text
-M0 bootstrap → M1 Constitution → M2 T0/G0 semantic assertions
-→ M3 evaluation/materialization → M4 maintained relation/projection
-→ M5 shared model → M6 Surface → M7 checker/elaborator
-→ M8 deterministic runtime → M9 auth/verification → M10 closeout
-→ owner-defined post-program direction
+closed M0--M10 finite reference baseline
+→ [~] SYS-0 baseline/goal alignment (closing review/integration)
+→ [ ] SYS-1 kernel/conformance separation + internal carrier (next)
+→ [ ] SYS-2 ST/OW concurrency refinement
+→ [ ] SYS-3 per-locus artifact/communication generation
+→ [ ] SYS-4 in-process generated dispatch
+→ [ ] SYS-5 typed devtools + four-locus toy world
+→ [ ] SYS-6 finite I2 assurance/lifecycle closeout
+→ [ ] SYS-7 inactive I3 entry contract only
 ```
 
-M0--M10 は ADR-0015 の owner-approved bounded program として閉じた。各 milestone の
-acceptance/non-effect は個別 report と Canon evidence に従う。
+ADR-0026 authorizes the bounded SYS-0--SYS-7 program. The list above is an
+implementation-program roadmap, not an official Phase acceptance checklist.
 
 ## 現在地
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **M0--M10 closed**。program 内に次の autonomous semantic milestone はない | `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
-| authority | ADR-0015 の bounded program は R5 で完了。次の public / distributed / product direction は owner-defined | `mirrorea_canon/adr/ADR-0015.md` |
-| official lifecycle | `T1` remains. M10 does not claim broad PHASE-I1 exit, I2 activation, or public ABI/wire/carrier freeze | `mirrorea_canon/plan/01-phases.md`, `mirrorea_canon/adr/ADR-0025.md` |
-| proof / scenarios | Proof ledger unchanged. General OBL-001..025 and OBL-027 remain `intentionally-deferred`; M3--M9 finite evidence keeps its exact recorded classes. SCN-01..10 finite M10 C-static/C-runtime profile is accepted; SCN-11/12 remain pressure scenarios | `mirrorea_canon/theory/11-metatheory-ledger.md`, `mirrorea_canon/spec/11-m10-i1plus-conformance.md` |
-| M10 accepted evidence | R5 commit `23f5a8130334bf0c8516d51e9dcea38b92f50db1`, tree `d8a296fac7a94a37da92563d5feeeeaa96dbc682`; output SHA256 reproduced twice `083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7`; static 26/26, runtime 47/47, mismatch 0, missing 0, anchor true, waiver null; reviewer ACCEPT no P0/P1/P2 | Report 2591 |
+| active frontier | **SYS-0 closing** — correction review, integration commit, push, and remote parity remain; **SYS-1 is next, not active** | `mirrorea_canon/adr/ADR-0026.md`, `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
+| authority | ADR-0026 / PROPOSAL-029 permit evidence-gated SYS-0--SYS-7 work. ADR-0015 / Plan 247 remain closed M0--M10 history | `mirrorea_canon/meta/proposals/PROPOSAL-029-mirrorea-i2-systems-foundation.md`, `mirrorea_canon/adr/ADR-0015.md` |
+| official lifecycle | Theory remains **T1**. Broad PHASE-I1 exit, I2 lifecycle entry, and I2 exit are not accepted by program activation/SYS-0 | `mirrorea_canon/plan/01-phases.md` |
+| accepted baseline | M10 R5 cut `23f5a8130334bf0c8516d51e9dcea38b92f50db1`; static 26/26, runtime 47/47, mismatch/missing 0, anchor true, waiver null | `mirrorea_canon/adr/ADR-0025.md`, `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
+| SYS-0 evidence | baseline HEAD/origin `49e6845...`; focused M10 groups 67+2+4+3+5 pass; config validator/9 tests/strict-help pass; prechange review GO; first close review REJECT without P0 and correction cycle active | `docs/reports/2592-mirrorea-i2-systems-foundation-sys0-baseline-goal-alignment.md` |
+| proof/scenarios | Proof ledger and frozen SCN expectations unchanged; bounded M3--M9 evidence retains exact classes | `mirrorea_canon/theory/11-metatheory-ledger.md`, `mirrorea_canon/spec/06-conformance.md` |
 
-M10 accepted the finite I1+ deterministic reference profile only. It preserves
-the same-source path through M6/M7/M8/M9/runtime/projection and exact
-correspondence verification, with profile/manifest
-`fnv1a64:6a1cfac2a0950323`, verifier `fnv1a64:420308515cf98e18`, source
-revision `fnv1a64:7bff6aa952a8ad53`, and execution
-`fnv1a64:5b4d58cf1cd20428`.
+The active work separates semantic/runtime kernel, projection/compiler,
+dispatch fabric, conformance evidence generator/verifier, release/profile
+orchestration, and CLI facade. It does not extend the M10 release facade as the
+new runtime architecture.
 
 ## 現在の停止線
 
-Source boundary: `mirrorea_canon/adr/ADR-0025.md` and
-`plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
+Current blocker: close the first-review corrections, repeat independent review,
+then integrate/commit/push and verify remote parity. Only then does SYS-1 become
+active.
 
-- No autonomous package remains inside M0--M10.
-- Post-program work requires a new owner direction, especially for OPEN-030 /
-  carrier boundary, broad PHASE-I1 exit, public ABI/wire/carrier freeze, I2
-  entry, product publication, or deployment.
-- M10 does not claim C-distributed, sockets, final public grammar/API/ABI/wire,
-  production runtime, general theorem discharge, I2+, or public-product
-  completion.
+Next technical blocker: `mirrorea_canon/architecture/04-runtime-carriers.md`
+OPEN-030 and the current M10 conformance facade's mixed dependency boundary.
+
+After SYS-0 closes, SYS-1 may autonomously define the smallest typed **internal** carrier and
+kernel seam, with positive/negative tests and review. It must keep receipt
+non-authoritative, source/Core provenance explicit, effect/failure/redaction
+typed, and conformance dependent on the kernel rather than the reverse.
+
+Stop for owner input only if the North Star/guarantees must weaken, domain
+vocabulary must become Core, a hidden multi-owner transaction becomes
+unavoidable, a public API/ABI/wire must be frozen, real transport must be
+selected/implemented now, production/publication or risky data/secret/paid
+resource action is required, an irreversible semantic tie remains, or the
+parent goal contradicts North Star. Official T1, deferred general OBLs, open
+public contracts, later I3+, and unoptimized performance are not stop reasons.
 
 ## オーナーの確認・判断待ち
 
-Authority boundary: `mirrorea_canon/adr/ADR-0015.md` and
-`mirrorea_canon/adr/ADR-0025.md`.
+There is **no owner decision required for current SYS-0 correction/close or
+the next SYS-1 work**. The following
+remain reserved future checkpoints rather than current blockers:
 
-| 条件 | 影響 | 現在の扱い |
+Boundary sources: `mirrorea_canon/adr/ADR-0026.md` and
+`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
+
+| Item | Earliest effect | Current handling |
 | --- | --- | --- |
-| Post-M0--M10 program direction | next roadmap and authority boundary | owner decision required |
-| OPEN-030 / carrier boundary | public carrier / ABI / wire readiness | unresolved; do not freeze silently |
-| PHASE-I1 exit / I2 activation | lifecycle and next implementation scope | not claimed by M10; owner-defined |
-| production deployment / publication | irreversible external contract | owner-reserved |
-| North Star / safety/privacy weakening or Core domain promotion | project guarantee | owner-reserved |
+| public API/ABI/wire freeze | external compatibility | keep internal/provisional; stop before irreversible freeze |
+| real transport selection/implementation | future I3 program | SYS-7 writes an inactive entry contract only |
+| production/publication | external state/product | owner-reserved |
+| North Star or safety/privacy weakening | project guarantee | owner-reserved stop |
 
 ## 根拠と詳細
 
 | 知りたいこと | 正本またはLAB evidence |
 | --- | --- |
-| Constitution/program authority | `mirrorea_canon/meta/proposals/PROPOSAL-018-mir-v0-i1plus-autonomous-execution.md`, `mirrorea_canon/adr/ADR-0015.md` |
-| M10 conformance boundary | `mirrorea_canon/adr/ADR-0025.md`, `mirrorea_canon/spec/11-m10-i1plus-conformance.md`, `mirrorea_canon/spec/06-conformance.md` |
-| official lifecycle / Gate | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
+| project axis / decision filter | `mirrorea_canon/NORTH-STAR.md`, `mirrorea_canon/DESIGN-CONSTITUTION.md` |
+| active authority | `mirrorea_canon/meta/proposals/PROPOSAL-029-mirrorea-i2-systems-foundation.md`, `mirrorea_canon/adr/ADR-0026.md` |
+| official lifecycle | `mirrorea_canon/plan/01-phases.md` |
+| operating rules | `mirrorea_canon/plan/02-operating-model.md` |
+| current roadmap | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
+| M10 closed baseline | `mirrorea_canon/adr/ADR-0025.md`, `plan/247-mir-theory-v0-i1plus-current-roadmap.md`, `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
+| SYS-0 evidence | `docs/reports/2592-mirrorea-i2-systems-foundation-sys0-baseline-goal-alignment.md` |
 | proof status | `mirrorea_canon/theory/11-metatheory-ledger.md` |
-| M10 report | `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
 | runnable evidence dashboard | `samples_progress.md` |
 
 ## 更新規約
 
-Derived snapshots must not create new Canon or owner decisions. Report 2591 is
-the closeout evidence for M10; future roadmap edits should first establish a new
-owner-defined post-program direction.
+Derived snapshots do not create Canon, lifecycle, proof, or conformance facts.
+At every SYS close, synchronize Plan 249, this view, `progress.md`, `tasks.md`,
+and the one milestone report from actual evidence. Change official Phase state
+only through its pre-existing criteria and an explicit authorized acceptance
+record.

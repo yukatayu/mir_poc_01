@@ -15,10 +15,12 @@
 
 ## 先に読む順序
 
-ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution は閉じており、現在activeな
-roadmap / queueはない。`plan/247-mir-theory-v0-i1plus-current-roadmap.md` はその
-直列実行のclosed LAB record / regression baselineである。Gate/Phase/OBL の正本は
-Canon のままであり、後続roadmapは新しいowner directionなしに作らない。
+ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
+record / regression baselineである。2026-08-26のowner directionを記録したADR-0026の
+sole current LAB roadmapは
+`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`であり、SYS-0 close後の
+active goalはSYS-1である。Gate/Phase/OBL の正本はCanonのままなので、program
+activationをbroad I1/I2 lifecycle acceptanceへ読み替えない。
 
 1. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
    task-specific canon files を先に読む
@@ -926,12 +928,19 @@ Canon のままであり、後続roadmapは新しいowner directionなしに作�
   as separate lanes; D0--D4 is a LAB working candidate, not a Canon change.)
 - Mir Theory v0 / I1+ closed execution record:
   `plan/247-mir-theory-v0-i1plus-current-roadmap.md`
-  (M0--M10 is closed; no current LAB execution queue exists. Historical
-  numbered plans remain memory, not parallel work.)
+  (M0--M10 is closed and has no current queue inside that program. It remains
+  the regression baseline; successor Plan 249 is separately owner-authorized.
+  Historical numbered plans remain memory, not parallel work.)
 - T0/G0 semantic-assertion v3 fresh evaluation:
   `plan/248-t0-g0-semantic-assertion-v3-evaluation.json`
   (M2 LAB evidence; reproduced `pass` digest accepted by Canon ADR-0017 while
   v1/v2 remain historical artifacts.)
+- Mirrorea I2 Systems Foundation current roadmap:
+  `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
+  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。現在はSYS-0
+  baseline/goal alignmentがactive / closingであり、SYS-1 runtime-kernel/
+  conformance separation and internal carrier boundaryはnext / not active。
+  Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule
 

@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015]
-summary: Mir v0/I1+ milestone 実行、単一 frontier/roadmap、report/WRK/candidate 制限、通常 L3 research route、review と evidence の運用規約。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026]
+summary: active I2 Systems Foundation、closed Mir v0/I1+、通常L3 researchを分離し、goal statement、単一frontier/roadmap、direct-consumer/report/WRK/candidate/review/evidence規律を定める。
 open_items: []
 ---
 
@@ -11,13 +11,16 @@ open_items: []
 
 ## Authority profiles
 
-Two profiles are deliberately separate.
+Three profiles are deliberately separate.
 
-1. **Mir v0/I1+ milestone execution** follows ADR-0015 and PROPOSAL-018.
-   The owner has already approved the objective, Constitution-level direction,
-   internal decision priority, Milestones 0--10, and bounded semantic and
-   implementation writes. Evidence and independent review gate integration.
-2. **Research outside that program** follows ADR-0014. Its Canon write surface
+1. **Mirrorea I2 Systems Foundation execution** follows ADR-0026 and
+   PROPOSAL-029. The owner approved the parent capability, SYS-0--SYS-7 order,
+   decision priority, bounded semantic/implementation writes, non-effects, and
+   stop line. Evidence and independent review gate integration.
+2. **Mir v0/I1+ M0--M10** followed ADR-0015 and PROPOSAL-018. It is closed;
+   its accepted cuts and Plan 247 remain immutable history/regression baseline
+   and grant no successor authority.
+3. **Research outside an active bounded program** follows ADR-0014. Its Canon write surface
    remains a reversible `working/WRK-####` L3 record; L2 promotion remains
    fail-closed while the owner-authenticated trust anchor is absent.
 
@@ -27,7 +30,7 @@ is not semantic authority.
 ## Roles and single-writer surfaces
 
 - **owner**: supplies the North Star and program authorization; decides only
-  ADR-0015 owner-reserved escalations during this program.
+  ADR-0026 owner-reserved escalations during the active program.
 - **parent/orchestrator**: owns milestone state, Canon integration, writer
   delegation, final evidence judgment, commit, push, and remote parity.
 - **planner**: single writer for the delegated current roadmap, dependency map,
@@ -60,6 +63,10 @@ One LAB document is designated the **current execution roadmap**. It contains:
 - current owner boundary; and
 - deferred scope.
 
+For the active ADR-0026 program this is
+`LAB:plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`; closed Plan
+247 and older numbered plans are not current queues.
+
 `progress.md`, `tasks.md`, `docs/project-status.md`, and `Documentation.md` are
 derived snapshots. Older numbered plans remain repository memory and are not a
 queue. `plan/01-phases` remains the official Gate/Phase lifecycle source; the
@@ -83,6 +90,29 @@ commit + push + remote parity
 A later layer must not redefine an earlier accepted semantic rule. Where a
 feature adds an extension, prove or test its local preservation condition and
 compose extensions only after those local conditions close.
+
+## Goal Statement and direct-consumer protocol
+
+Before each ADR-0026 milestone begins, its current roadmap records:
+
+```text
+Goal ID and capability sentence
+North Star link
+User-visible outcome
+Semantic invariants
+Direct consumer
+Non-goals
+Primary falsifier
+Exit evidence
+Stop condition
+```
+
+The goal sentence names a system capability or a semantic contract directly
+required by it; “research” or “write documents” is not sufficient. Every new
+subtask/research/lemma/carrier/report records its direct consumer, blocker
+reduced, and acceptance use. Do not start it unless it advances per-locus
+generation/dispatch or closes a required meaning/authority/failure/memory
+boundary, and can close through a positive case plus falsifier.
 
 ## Report policy
 
@@ -120,6 +150,11 @@ one smallest viable alternative
 If both are falsified, integrate their causes before proposing one successor.
 Do not enumerate a third candidate speculatively.
 
+Close the question when the accepted choice preserves the Constitution, runs
+the positive case, detects the representative falsifier, is usable by the
+direct consumer, has a conservative extension path, freezes no public
+compatibility boundary, and independent review has no major counterexample.
+
 ## Review and correction
 
 Each milestone receives one independent review after author self-check and
@@ -149,6 +184,10 @@ theorem-to-implementation correspondence. `sorry`, `admit`, a `True` stub, or a
 bounded enumeration is not a general proof. Run only validations actually
 claimed and record skipped validations with reasons.
 
+Hash, manifest, release anchor, and artifact identity support reproducibility;
+they do not become the semantic/runtime goal or force runtime architecture to
+depend on conformance/release orchestration.
+
 ## Reading and record discipline
 
 Read Canon first and resolve locations through `INDEX.json`. Read only reports
@@ -163,7 +202,9 @@ and source data; do not force-push or rewrite history.
 
 ## Stop condition
 
-Within ADR-0015, stop only at an owner-reserved condition. Otherwise close the
-current milestone, send a concise progress checkpoint, and continue without
-waiting for owner confirmation. Outside ADR-0015, use ADR-0014's escalation and
-fail-closed rules.
+Within ADR-0026, stop only at its owner-reserved condition. Otherwise close the
+current SYS milestone, send a concise progress checkpoint, and continue without
+waiting for owner confirmation. Official T1, deferred general obligations,
+open public contracts, incomplete later phases, or unoptimized performance are
+not stop conditions. Outside an active bounded program, use ADR-0014's
+escalation and fail-closed rules.

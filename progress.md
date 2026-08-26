@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-06 12:15 JST
+最終更新: 2026-08-26 19:31 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -8,9 +8,10 @@ creates no Canon, Gate, Phase, proof, or conformance decision.
 
 ## document role
 
-`docs/project-status.md` is the concise human control view. Plan 247 remains
-historical/current-program repository memory for ADR-0015, but M0--M10 is now
-closed; no new queue is selected in this file.
+`docs/project-status.md` is the concise human control view. The sole current
+execution roadmap is
+`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`. Closed Plan 247
+retains the accepted M0--M10 regression history and is not a parallel queue.
 
 ## project axis
 
@@ -19,166 +20,165 @@ closed; no new queue is selected in this file.
 実行・通信・検証・可視化できる仮想空間システム
 ```
 
-Mir, Mirrorea, PrismCascade, and Typed-Effect Wiring Platform stay separable.
-World/Game/Avatar remain user or library vocabulary, never Mir Core primitives.
+Mir, Mirrorea, PrismCascade, and the Typed-Effect Wiring Platform stay
+separable. World/Game/Avatar/Bird remain sample or library vocabulary, never
+Mir Core primitives.
 
 ## final ideal
 
 ```text
-ordinary .mir → parse → static check → elaborate → typed Core/obligations
-→ deterministic multi-locus runtime → trace/cut/save-load/patch → projection
-→ designated value delivery or consumer-local relation evaluation → diagnostics
+ordinary .mir source
+→ semantic check / elaboration
+→ ownership / authority / dependency / effect / failure / lifetime
+→ per-locus executable artifacts + generated communication
+→ process/network execution
+→ typed trace / diagnostics / devtools
+→ checked save/load / patch / hot-plug
+→ View/provider/browser/renderer projection
+→ persistent virtual-space system
 ```
 
-Communication is derived from checked meaning; authority is not transport;
-observation is a typed information effect; patches use a checked activation cut.
+The active program covers the in-process systems-foundation segment only.
 
 ## current milestone position
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | M0--M10 closed inside ADR-0015. Official lifecycle remains T1; M10 does not claim broad PHASE-I1 exit | **要仕様確認**: next semantic/program direction is owner-defined |
-| User-facing specification | No final public syntax/grammar/API/ABI/wire or product contract is frozen | **要仕様確認**: public surface/carrier scope needs owner direction |
-| Implementation / operation | I1+ finite deterministic reference profile accepted at R5; no I2 or production activation | **後段依存**: wait for post-program direction, OPEN-030/carrier boundary, or I2 scope |
+| Logical specification | Accepted finite M10 semantics are the baseline; ADR-0026 is active, but SYS-0 alignment is still closing after its first review correction. Official lifecycle remains T1; broad I1/I2 acceptance is unclaimed | **着手可能** for SYS-0 correction/close; SYS-1 is next |
+| User-facing specification | One ordinary source remains the authority; Plan 249 fixes the eventual build/run/inspect/conform capability but not final CLI spelling, grammar, API, ABI, or wire | **後段依存** for public surface; SYS-1 starts only after SYS-0 parity |
+| Implementation / operation | M10 finite deterministic reference profile is accepted; no reusable kernel/per-locus generator/actual locus dispatch exists yet | **後段依存** until SYS-0 review/commit/push/parity closes, then SYS-1 is startable |
 
-Sources: `mirrorea_canon/adr/ADR-0015.md`,
-`mirrorea_canon/adr/ADR-0025.md`,
-`mirrorea_canon/spec/11-m10-i1plus-conformance.md`, and Report 2591.
-The closed execution record is
-`plan/247-mir-theory-v0-i1plus-current-roadmap.md`.
+Normative sources: `mirrorea_canon/adr/ADR-0026.md`,
+`mirrorea_canon/plan/01-phases.md`, and
+`mirrorea_canon/plan/02-operating-model.md`. LAB execution source:
+`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
-M0--M9 closed governance, Constitution, T0/G0 semantic assertions,
-evaluation/materialization, maintained relation/projection, shared model,
-Surface, checker/elaborator, deterministic runtime, and auth/verification in
-their exact finite scopes. M10 then accepted the source-first finite
-conformance profile for frozen SCN-01..10: static 26/26, runtime 47/47,
-mismatch 0, missing 0, anchor true, waiver null, fresh-clone output SHA256
-`083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7`
-reproduced twice at commit `23f5a8130334bf0c8516d51e9dcea38b92f50db1`.
+Current direct blocker: close the first-review corrections, obtain repeat
+independent acceptance, integrate/commit/push, and confirm remote parity for
+SYS-0. SYS-1 is not active yet. Its next blocker is to separate semantic
+state/occurrence production from M10 conformance/release/profile orchestration
+and narrowly fix OPEN-030 as a non-public internal carrier/effect boundary.
 
 ## milestone map
 
-| Milestone | Aim | Position | Evidence |
+| Milestone | Capability | Position | Direct evidence/consumer |
 | --- | --- | --- | --- |
-| M0 | governance, agent config, one roadmap | closed | Report 2581 / push parity |
-| M1 | concise Constitution | closed | `root/design-constitution`, ADR-0016, Report 2582 |
-| M2 | semantic-assertion T0/G0 closeout | closed; T1 entry accepted | `plan/248` reproduced pass / ADR-0017 |
-| M3 | evaluation/materialization calculus | closed | ADR-0018/theory-13, finite Lean/Rust evidence |
-| M4 | maintained relation/late projection | closed | ADR-0019/theory-14/SCN-12, finite Lean/Rust evidence |
-| M5 | shared model/metatheory | closed | ADR-0020/theory-15, exact OBL-040..047 evidence |
-| M6 | Surface | closed | ADR-0021/spec-01--04, OBL-048 evidence |
-| M7 | checker/elaborator | closed | Report 2588 / OBL-049; fixture matrix is not public conformance |
-| M8 | deterministic runtime | closed | OBL-050--056 Lean evidence; OBL-057 runtime-monitored |
-| M9 | auth/verification | closed | OBL-026 exact Lean proof; OBL-028 bounded model |
-| M10 | conformance/closeout | accepted / closed | R5 static 26/26, runtime 47/47, reviewer ACCEPT no P0/P1/P2 |
+| M0--M10 | finite theory + deterministic I1+ reference profile | closed baseline | ADR-0025 / Report 2591 |
+| SYS-0 | baseline, authority, one goal/control path | **active / closing correction**; Report 2592 | SYS-1 |
+| SYS-1 | runtime kernel/conformance separation; internal carrier/effect seam | **next, not active** | SYS-2/3 |
+| SYS-2 | ST/OW concurrency and memory refinement | pending after SYS-1 | SYS-3/4 |
+| SYS-3 | per-locus artifacts and generated communication | pending | SYS-4 |
+| SYS-4 | in-process generated dispatch | pending | SYS-5 |
+| SYS-5 | typed devtools + four-locus toy world | pending | SYS-6 |
+| SYS-6 | finite I2 assurance/lifecycle closeout | pending | SYS-7 |
+| SYS-7 | inactive I3 goal/entry contract only | pending/terminal | future owner program only |
 
 ## line snapshots
 
 ### Product Alpha line
 
-Historical runnable LAB evidence only; it does not establish final product API
-or public distribution.
+Historical runnable LAB evidence only. It is not the active program or a final
+product contract.
 
 ### Operational Suite line
 
-Historical bounded operational roots remain evidence. Their commands and
-classification are unchanged by M10 closeout.
+Historical bounded operational roots remain evidence. SYS-0 changed no
+runnable path, command, debug surface, or sample classification.
 
 ### Mir Language line
 
-M6/M7 provide the bounded v0 source-to-Core route used by the accepted M10
-reference profile. This is not a final public grammar or diagnostic ABI.
+M6/M7 ordinary source → checked Core remains the accepted finite source path.
+SYS-3 will project that checked Core; SYS-1 does not reopen final grammar.
 
 ### PoseGraph line
 
-Existing pose evidence is not Mir Core. Renderer/IK/LOD behavior remains outside
-M10.
+Existing pose/renderer evidence is not Mir Core. The SYS-5 relation example is
+headless sample behavior, not a View/renderer product.
 
 ### Projection/Backend line
 
-Projection is observer-safe typed evidence in the finite M10 profile; provider
-and backend public contracts remain later boundaries.
+Canon defines the preservation boundary, but executable per-locus projection
+does not yet exist. SYS-2 supplies ST/OW refinement; SYS-3 supplies artifacts.
 
 ### Engine/Provider line
 
-External providers remain adapters; names, sessions, packages, and transport do
-not grant authority.
+Providers remain typed adapters and non-owners. SYS-1's effect-handler seam
+does not collapse transport, auth, projection, or persistence into providers.
 
 ## validation floor
 
 | Changed layer | Required command family |
 | --- | --- |
-| Canon metadata | `cd mirrorea_canon && python3 meta/build-index.py --check` |
-| hierarchy/docs | `python3 scripts/check_source_hierarchy.py`, `python3 scripts/validate_docs.py` |
-| M10 runtime/conformance | `cargo test -p mir-runtime --test m10_conformance -- --nocapture` and related M10/runtime/workspace suites |
-| Lean inventory | seven M3--M9 `lean --trust=0` foundation checks plus generated axiom audit |
-| diff / secret guard | `git diff --check` and validator secret scan |
+| Canon metadata/docs | regenerate/check `mirrorea_canon/INDEX.json`, `make docs`, `git diff --check` |
+| runtime kernel/carrier | focused red/green boundary tests plus all changed-crate tests and M10 regression |
+| concurrency | ST/OW focused tests, litmus/model-check falsifiers, warnings-denied Clippy |
+| projection/dispatch | deterministic artifact/edge tests, no-manual-edge/no-direct-store negatives, replay |
+| proof/model | `lean --trust=0`, placeholder/axiom scan, exact bounded-model classification when claimed |
+| milestone close | independent review, one report, commit/push, clean worktree, remote parity |
 
 ## non-claims
 
-No broad PHASE-I1 exit, I2 activation, C-distributed, socket/transport delivery,
-final grammar/API/ABI/wire, public carrier freeze, production deployment,
-public-product completion, or general OBL discharge is claimed.
-
-## decisions taken
-
-| Decision | Status |
-| --- | --- |
-| Accept R5 finite I1+ deterministic reference profile | done |
-| Treat R1/R2/R3/R4 as rejected/corrected history | done |
-| Keep proof ledger unchanged; M10 adds no general theorem | done |
-| Treat post-M0--M10 direction as owner-defined | done |
+No broad PHASE-I1 exit, official I2 entry/exit, C-distributed/socket/WAN,
+public grammar/API/ABI/wire, public carrier freeze, durable distributed
+persistence, production/publication, final browser/View renderer, general OBL
+discharge, arbitrary DAG/scheduler/memory theorem, lock-free runtime, or I3
+implementation is claimed.
 
 ## user decision items vs research-discovery items
 
 | Kind | Item | Current handling |
 | --- | --- | --- |
-| Owner decision | post-program roadmap and authority boundary | required before new autonomous semantic milestone |
-| Owner decision | OPEN-030 / carrier boundary and public ABI/wire/carrier freeze | unresolved; do not infer from M10 |
-| Owner decision | broad PHASE-I1 exit or I2 activation | not claimed; requires explicit direction |
-| Research discovery | future carrier/theorem/runtime decomposition inside a new program | wait for owner-defined direct consumer |
+| Self-driven | SYS-0 correction/review/integration close | active; finish before opening SYS-1 |
+| Self-driven | SYS-1 internal kernel/carrier/effect seam | next; decide by Constitution, positive/falsifier, review after SYS-0 parity |
+| Research discovery | exact broad-I1 carrier-freeze residual | determine in SYS-1; do not weaken criteria or stop SYS-2 if narrow seam closes |
+| Research discovery | safe OW primitives and finite memory abstraction | select in SYS-2; no Surface `memory_order_*` |
+| Research discovery | finite DAG extension boundary | select in SYS-3 with one pressure case; no arbitrary theorem |
+| Owner decision | public API/ABI/wire freeze | reserved; not a current blocker |
+| Owner decision | real transport / production / publication | reserved; SYS-7 remains entry-contract only |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
-| 0 | governance/repository memory | M0--M10 closeout snapshots synchronized | medium | maintenance only |
-| 1 | semantics/shared model | finite v0/I1+ line accepted through M10 | heavy | no new line selected |
-| 2 | parser-free evidence | historical LAB evidence retained | medium | maintenance only |
-| 3 | source/checker/runtime | finite I1+ reference profile accepted | heavy | post-program direction required |
-| 4 | executable samples | historical active roots retained | medium | maintenance only |
-| 5 | theorem/model-check | finite M3--M9 proof/model evidence retained; ledger unchanged | heavy | post-program direction required |
-| 6 | distributed fabric | outside M0--M10 | heavy | owner-defined future |
-| 7 | toolchain/backend | bounded reference support accepted; public interface open | heavy | owner-defined future |
-| 8 | applications | domain consumers remain LAB | heavy | deferred |
+| 0 | governance/repository memory | ADR-0026/Plan 249 active; Plan 247 closed | medium | SYS close sync is self-driven |
+| 1 | semantics/shared model | accepted finite semantics; internal carrier boundary next | heavy | SYS-1 after SYS-0 close |
+| 2 | parser-free evidence | historical only; must not become new architecture | medium | maintenance only |
+| 3 | source/checker/runtime | M10 baseline; kernel separation next | heavy | SYS-1/2 startable in order after SYS-0 |
+| 4 | executable samples | no SYS sample change yet | medium | SYS-5 after SYS-4 |
+| 5 | theorem/model-check | finite evidence retained; concurrency obligations next | heavy | SYS-2 in sequence |
+| 6 | distributed fabric | per-locus generation/dispatch not yet realized | heavy | SYS-3/4 after prerequisites |
+| 7 | toolchain/backend | projector/runtime/devtools boundaries planned | heavy | SYS-1 then SYS-2--5 |
+| 8 | applications | four-locus toy is future sample consumer | heavy | SYS-5 only; no Core promotion |
 
 ## feature maturity rows
 
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- | --- |
-| multi-node/fabric | historical LAB only | I2/I3 owner direction | 要仕様確認 |
-| contracts/theorem/model-check | finite M3--M9 evidence retained; proof ledger unchanged | post-program proof policy | 要仕様確認 |
-| dynamic attach/detach/DAG evolution | finite M8/M9/M10 evidence | public/runtime widening decision | 後段依存 |
-| atomic_cut/ordering | finite runtime/profile evidence only | higher-level ordering/memory-order family | 要仕様確認 |
-| executable sample corpus | runnable historical roots plus M10 conformance command | public sample/catalog decision | 着手可能 for maintenance only |
-| Mirrorea | separate fabric layer | later I2+ | 要仕様確認 |
-| PrismCascade | separate performance kernel | not I1+ Core | deferred |
-| Typed-Effect platform | separate adapter boundary | public platform contract | 要仕様確認 |
-| domain applications | LAB consumers | no Core promotion | deferred |
+| multi-node/fabric | logical multi-locus M10 evidence only | generated artifact + actual endpoint dispatch | **後段依存** SYS-3/4 |
+| robustness via contracts/theorem/model-check | finite M3--M10 classes retained | SYS-2/6 exact refinement evidence | **後段依存** |
+| dynamic attach/detach/DAG evolution | finite patch/relation evidence | artifact/dispatch lifecycle and finite DAG pressure | **後段依存** SYS-3/4/5 |
+| `atomic_cut` / higher-level ordering / memory order | high-level edges + deterministic ST | OW mapping and falsifiers | **着手可能** at SYS-2 after SYS-1 |
+| executable sample corpus | existing active roots and M10 commands unchanged | generated four-locus toy | **後段依存** SYS-5 |
+| Mir core/runtime kernel | M10 facade contains finite behavior | reusable typed kernel boundary | **後段依存** until SYS-0 closes; then SYS-1 |
+| Mirrorea projection/fabric | Canon boundary only | per-locus generation and actual dispatch | **後段依存** SYS-3/4 |
+| typed-effect handler seam | effect rows/adapter boundary accepted | internal request/result ordering | **後段依存** until SYS-0 closes; then SYS-1 |
+| PrismCascade | separate performance kernel | no I2 integration required | deferred |
+| View/browser/renderer | BND-007 horizon/historical LAB | final product/API work | deferred beyond SYS-5 headless view |
+| upper applications | LAB consumers | no domain Core promotion | deferred |
 
 ## recent log
 
-- 2026-08-06 12:15 JST: Canon-first の全体像 HTML を finite acceptance / broad
-  phase exit / public-product completion の三境界と T/I 二軸で再構成し、Oracle と
-  planner/theory/implementation の独立照合、source-first conformance 再実行、focused
-  HTML tests 8/8 を通した。reader entry の proof-ledger 表現も現行状態へ修正した。
-- 2026-08-05 16:34 JST: closeout planner review corrected two stale
-  owner-boundary/current-frontier references across Plan 247, reader entry
-  points, and `AGENTS.md`; final re-review ACCEPT found no remaining P0/P1/P2.
-- 2026-08-05 15:53 JST: M10 accepted/closed at R5 commit
-  `23f5a8130334bf0c8516d51e9dcea38b92f50db1`: fresh same-source finite I1+
-  reference conformance passed static 26/26 and runtime 47/47 with mismatch 0,
-  missing 0, anchor true, waiver null; reviewer ACCEPT had no P0/P1/P2. The
-  M0--M10 program is closed; broad PHASE-I1 exit, I2 activation, public
-  ABI/wire/carrier freeze, production, and general theorem discharge remain
-  unclaimed pending owner direction.
+- 2026-08-26 19:31 JST: first SYS-0 close review returned REJECT with no P0;
+  authority-entry, primary HTML reader, current-state timing, and exact-command
+  evidence corrections were applied and locally validated. SYS-0 remains
+  closing and SYS-1 remains next until repeat review plus commit/push/parity.
+- 2026-08-26 18:45 JST: owner direction was recorded through PROPOSAL-029 /
+  ADR-0026; Plan 249 became the sole current roadmap, SYS-0 aligned the M10
+  baseline without changing official T1/broad I1/I2 acceptance, with SYS-1
+  planned as the next kernel/carrier goal. Pre-edit M10 focused groups
+  67+2+4+3+5 and agent-config validation passed; post-edit close evidence is
+  tracked in Report 2592.
+- 2026-08-06 12:15 JST: refreshed the human overview against finite M10
+  acceptance while preserving the lifecycle/public-product boundary.
+- 2026-08-05 15:53 JST: accepted M10 R5 finite source-first profile at static
+  26/26 and runtime 47/47, with no broad I1/I2/public/product claim.

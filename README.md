@@ -13,19 +13,23 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 ## Current research governance
 
-`mirrorea_canon/` remains the sole normative source. ADR-0015 records the
-owner-approved Mir Theory v0 / I1+ Milestones 0--10 and permits evidence-gated
-Canon, proof-ledger, implementation, test, roadmap, and status updates inside
-that bounded program. North Star changes, weakened safety/privacy guarantees,
-irreversible final public contracts, and production deployment remain
+`mirrorea_canon/` remains the sole normative source. ADR-0015 and Plan 247 are
+the closed authority/execution record for the accepted Mir Theory v0 / I1+
+M0--M10 finite reference baseline. The owner has now adopted ADR-0026 for the
+bounded Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. Its sole current
+LAB roadmap is `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
+SYS-0 baseline/goal alignment is active and closing; next goal is SYS-1
+runtime-kernel/conformance separation and the non-public internal carrier
+boundary. SYS-1 is not active until SYS-0 review, commit, push, and remote
+parity close. Program activation does not itself claim broad PHASE-I1 exit or
+I2 lifecycle acceptance; official theory remains T1. North Star changes, weakened
+safety/privacy guarantees, irreversible final public contracts, real transport
+selection/implementation in this program, and production deployment remain
 owner-reserved. Outside the program, ADR-0014 keeps research in the reversible
 L3 `working/WRK-####` route and L2 remains fail-closed until an
 owner-authenticated trust anchor exists. Candidates, countermodels,
 experiments, and history remain LAB. The concise control view is
-`docs/project-status.md`. M0--M10 is closed, so there is currently no active
-execution roadmap; `plan/247-mir-theory-v0-i1plus-current-roadmap.md` is the
-closed program record and regression baseline until a new owner direction
-designates a successor.
+`docs/project-status.md`.
 
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア
@@ -160,15 +164,16 @@ workdir を exact mountpoint として確認し、root filesystem 上の通常 d
 mount provisioning、cache move、sample / workflow status、canon edit、OBL
 status、proof / conformance、runtime readiness、G1 exit は主張しません。
 
-`plan/149` は current phase position reading です。全体計画の現在地を
-canon では `T0/G0 rebaseline`、人間向け stage count では 9 段階中 1 段階目
-と読み、T0 内では late pre-exit だが G0 exit は未達、と整理します。
+`plan/149` は当時の historical phase-position reading です。そこで記録した
+`T0/G0 rebaseline`、9 段階中 1 段階目、T0 late pre-exit / G0 exit 未達という読みは
+M2 semantic-assertion v3 acceptance より前の状態であり、現在地ではありません。
+現在の official lifecycle は T1 です。
 LAB evidence が G1/T1 準備へ先行していることと、canon phase movement を
 混同しません。
 
-`plan/150` は phase-position validator guard です。`plan/149` の短い読みが
-`progress.md` と `tasks.md` から消えたときに `scripts/validate_docs.py` が
-落ちるようにし、phase-position snapshot の drift を管理します。canon edit、
+`plan/150` はその時点の historical phase-position validator guard です。当時の
+`plan/149` / `progress.md` / `tasks.md` snapshot drift を検出した記録であり、現在の
+T1 statusをT0へ戻すvalidator又はlifecycle authorityではありません。canon edit、
 phase / gate movement、percentage-as-gate、runtime / sample / workflow status
 change は主張しません。
 
