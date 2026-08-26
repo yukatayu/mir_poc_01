@@ -1,0 +1,5 @@
+module Combat.M7.DesignatedConsumeMissingProducer
+
+locus C
+
+designated consume Missing.result at C

@@ -866,6 +866,28 @@ fn designated_result_consumer_validation_is_declared_and_single_consumer_finite(
 }
 
 #[test]
+fn designated_result_consume_missing_producer_is_forwarded_unresolved_without_checked_result() {
+    let (path, source) = load_fixture("designated_result_consume_missing_producer.mir");
+    let actual = check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()));
+    let diagnostics = match actual {
+        Ok(checked) => panic!(
+            "missing producer must not produce CheckedSurfaceV0 result: {:?}",
+            checked.program_identity()
+        ),
+        Err(diagnostics) => diagnostics,
+    };
+
+    assert_single_diagnostic_at_range(
+        &diagnostics,
+        M7DiagnosticKind::UnresolvedName,
+        &path,
+        &source,
+        byte_range(&source, "Missing.result"),
+    );
+    assert!(!diagnostics.has_executable_core());
+}
+
+#[test]
 fn evaluation_axes_are_typed_orthogonal_and_nonblank() {
     let (path, source) = load_fixture("canonical_attack_bundle.mir");
     let checked = check_and_elaborate_surface_v0(FixtureSource::new(path, source))

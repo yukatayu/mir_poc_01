@@ -291,6 +291,37 @@ fn classifies_designated_result_consume_as_distinct_template_and_source_map_kind
 }
 
 #[test]
+fn designated_result_consume_missing_producer_is_unresolved_without_classification_success() {
+    let (path, source) = load_fixture("designated_result_consume_missing_producer.mir");
+    let parsed = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("missing producer designated consume is syntactically valid");
+    let consumer = parsed
+        .designated_result_consumer("Missing", "result", "C")
+        .expect("parser exposes the unresolved result reference");
+
+    let diagnostics = classify_surface_v0(&parsed, SurfaceV0ClassificationOptions::default())
+        .expect_err("missing designated result producer rejects classification");
+    assert_eq!(diagnostics.entries().len(), 1);
+    let primary = diagnostics.primary();
+    assert_eq!(primary.kind(), SurfaceV0DiagnosticKind::UnresolvedName);
+    assert_eq!(primary.span(), consumer.result_ref_span());
+    assert_eq!(
+        primary.span().byte_range(),
+        byte_range(&source, "Missing.result")
+    );
+    assert_eq!(
+        primary.source_ref(),
+        &expected_source_ref(&path, &source, "Missing.result")
+    );
+    assert_eq!(primary.m5_code(), DiagnosticCode::BadRelationship);
+    assert_eq!(
+        single_fixture_matrix_outcome("designated_result_consume_missing_producer.mir"),
+        MatrixOutcomeKind::Diagnostic(SurfaceV0DiagnosticKind::UnresolvedName),
+        "matrix classification must not report an accepted artifact for a missing producer"
+    );
+}
+
+#[test]
 fn classifies_with_auth_and_verify_as_span_tracked_non_executable_deferred_templates() {
     let (path, source) = load_fixture("canonical_attack_bundle.mir");
     let parsed = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
