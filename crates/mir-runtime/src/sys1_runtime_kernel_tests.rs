@@ -187,6 +187,25 @@ fn owner_kernel() -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
     owner_kernel_with_seed(owner_seed())
 }
 
+fn owner_arguments() -> std::collections::BTreeMap<String, String> {
+    std::collections::BTreeMap::from([("target".to_string(), TARGET_ID.to_string())])
+}
+
+fn owner_kernel_from_real_m9_seam() -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
+    let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
+    let operation_ref = owner_source_ref(&path, &source);
+    let seam = M9RuntimeExecutionSeam::test_real_admitted_owner_seam_for_kernel(
+        &checked,
+        OWNER_OPERATION,
+        PRINCIPAL,
+        OWNER_LOCUS,
+    )
+    .expect("test helper must build a real admitted M9 owner seam");
+    let kernel = SemanticRuntimeKernel::from_m9_execution_seam(checked.clone(), seam, owner_seed())
+        .expect("real M9 owner seam enters the semantic kernel with owned M8 runtime");
+    (checked, operation_ref, kernel)
+}
+
 fn designated_release_tuple() -> RemoteInputReleaseTuple {
     RemoteInputReleaseTuple::new(
         PrincipalRef::new(PRINCIPAL),
@@ -406,6 +425,148 @@ fn wrong_target_source_or_identity_fails_closed_before_semantic_mutation() {
         assert_eq!(kernel.semantic_snapshot(), &before);
         assert_eq!(kernel.receipt_store(), &before_receipts);
     }
+}
+
+#[test]
+fn rejected_owner_identity_is_not_left_in_owned_m8_queue_or_later_mutated() {
+    let (_checked, _operation_ref, mut kernel) = owner_kernel_from_real_m9_seam();
+    let rejected = kernel
+        .owner_request_from_admitted_lineage(
+            OWNER_OPERATION,
+            LocusRef::new(OWNER_LOCUS),
+            owner_arguments(),
+        )
+        .expect("real M9 owner lineage materializes a source-derived owner carrier")
+        .with_request_identity(RequestIdentity::new("request:caller-supplied:invalid"));
+    let before = kernel.semantic_snapshot().clone();
+    let before_receipts = kernel.receipt_store().clone();
+
+    let diagnostics = kernel
+        .enqueue_owner_request(rejected)
+        .expect_err("caller-supplied request identity is rejected before M8 enqueue");
+    assert_eq!(
+        diagnostics.primary().kind(),
+        KernelDiagnosticKind::UnknownRequestIdentity
+    );
+    assert_eq!(kernel.semantic_snapshot(), &before);
+    assert_eq!(kernel.receipt_store(), &before_receipts);
+    assert!(
+        kernel
+            .m8_runtime_snapshot()
+            .expect("production-style kernel owns an M8 runtime")
+            .pending_owner_fifo(OWNER_LOCUS)
+            .is_empty(),
+        "rejected carrier must not leak into the underlying M8 owner queue"
+    );
+
+    let valid = kernel
+        .owner_request_from_admitted_lineage(
+            OWNER_OPERATION,
+            LocusRef::new(OWNER_LOCUS),
+            owner_arguments(),
+        )
+        .expect("real M9 owner lineage remains usable after a rejected identity");
+    let queued = kernel
+        .enqueue_owner_request(valid)
+        .expect("fresh source-derived request queues after rejected identity");
+    let served = kernel
+        .serve_next_owner(LocusRef::new(OWNER_LOCUS))
+        .expect("fresh request is the only M8-backed owner work item");
+    let reply = kernel
+        .reply_to_served_request(served.serve_occurrence())
+        .expect("fresh request emits a reply");
+    let receipt = kernel
+        .receive_reply(reply)
+        .expect("fresh request installs a receipt");
+
+    assert_eq!(receipt.request_identity(), queued.request_identity());
+    assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
+    assert!(
+        kernel
+            .m8_runtime_snapshot()
+            .expect("production-style kernel owns an M8 runtime")
+            .pending_owner_fifo(OWNER_LOCUS)
+            .is_empty(),
+        "serving the one accepted kernel request must drain the owned M8 queue"
+    );
+}
+
+#[test]
+fn owner_direct_carrier_service_is_fifo_and_receipts_match_each_mutation() {
+    let (checked, operation_ref, mut kernel) = owner_kernel();
+    let first = kernel
+        .enqueue_owner_request(owner_attack_request(&checked, operation_ref.clone()))
+        .expect("first owner request queues");
+    let second = kernel
+        .enqueue_owner_request(owner_attack_request(&checked, operation_ref))
+        .expect("second owner request queues behind the first");
+    let before = kernel.semantic_snapshot().clone();
+    let before_receipts = kernel.receipt_store().clone();
+
+    let _diagnostics = kernel
+        .serve_owner_carrier(second.carrier().clone())
+        .expect_err("direct carrier service must not bypass FIFO order");
+    assert_eq!(kernel.semantic_snapshot(), &before);
+    assert_eq!(kernel.receipt_store(), &before_receipts);
+
+    let first_served = kernel
+        .serve_next_owner(LocusRef::new(OWNER_LOCUS))
+        .expect("FIFO serves the first request");
+    let first_reply = kernel
+        .reply_to_served_request(first_served.serve_occurrence())
+        .expect("first request emits a reply");
+    let first_receipt = kernel
+        .receive_reply(first_reply)
+        .expect("first request installs a receipt");
+    assert_eq!(first_receipt.request_identity(), first.request_identity());
+    assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
+
+    let second_served = kernel
+        .serve_next_owner(LocusRef::new(OWNER_LOCUS))
+        .expect("FIFO then serves the second request");
+    let second_reply = kernel
+        .reply_to_served_request(second_served.serve_occurrence())
+        .expect("second request emits a reply");
+    let second_receipt = kernel
+        .receive_reply(second_reply)
+        .expect("second request installs a receipt");
+    assert_eq!(second_receipt.request_identity(), second.request_identity());
+    assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(80));
+}
+
+#[test]
+fn caller_supplied_owner_origin_locus_must_match_checked_authority_origin() {
+    let (checked, operation_ref, mut kernel) = owner_kernel();
+    let before = kernel.semantic_snapshot().clone();
+    let before_receipts = kernel.receipt_store().clone();
+    let forged_origin = owner_attack_request(&checked, operation_ref)
+        .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new("ForgedCaller"));
+
+    let diagnostics = kernel
+        .enqueue_owner_request(forged_origin)
+        .expect_err("caller-supplied origin locus must match checked authority origin");
+    assert_eq!(
+        diagnostics.primary().kind(),
+        KernelDiagnosticKind::AuthorityLineageRejected
+    );
+    assert_eq!(kernel.semantic_snapshot(), &before);
+    assert_eq!(kernel.receipt_store(), &before_receipts);
+}
+
+#[test]
+fn malformed_designated_dependency_factory_returns_typed_diagnostics_not_panic() {
+    let (_path, _source, checked) = load_checked(DESIGNATED_FIXTURE);
+    let diagnostics = RemoteInputRequestCarrier::try_from_checked_designated_dependency(
+        &checked,
+        EVALUATOR_LOCUS,
+        DESIGNATED_RESULT,
+        99,
+    )
+    .expect_err("malformed checked dependency index returns typed diagnostics, not panic");
+    assert_eq!(
+        diagnostics.primary().kind(),
+        KernelDiagnosticKind::UnknownOperation
+    );
 }
 
 #[test]
