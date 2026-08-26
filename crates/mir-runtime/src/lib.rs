@@ -62,6 +62,8 @@ mod sys1_runtime_kernel_tests;
 mod sys2_bounded_model_tests;
 #[cfg(test)]
 mod sys2_execution_backend_tests;
+#[cfg(test)]
+mod sys3_projection_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

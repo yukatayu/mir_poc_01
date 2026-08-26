@@ -1,0 +1,24 @@
+module Combat.Sys3.RelationExtensionPressure
+
+locus S
+locus C
+principal self
+type Bird
+
+relation bird_follow at S {
+  subject bird: Bird
+  primary shared_anchor epoch bird_primary_epoch transform translate(3, -2)
+  fallback bird_nest epoch bird_fallback_epoch transform identity
+  bind frontier bird_binding_frontier
+  publish relation
+  project at C local
+}
+
+relation shadow_follow at S {
+  subject shadow: Bird
+  primary shared_anchor epoch shadow_primary_epoch transform translate(1, 1)
+  fallback shadow_nest epoch shadow_fallback_epoch transform identity
+  bind frontier shadow_binding_frontier
+  publish relation
+  project at C local
+}
