@@ -11,10 +11,16 @@ use mir_ast::surface_v0::{
     SurfaceV0File, SurfaceV0Span, parse_surface_v0,
 };
 
-use crate::shared_model::{
-    BindingActivationFrontier, CapabilityName, Core, DiagnosticCode, Elaboration, FieldRef,
-    LocusRef, OccurrenceId, OwnerCommand, PrincipalRef, ResultFrontier, ResultKey, ResultVersion,
-    SourceRef, StateKey, SurfaceFragment, Value,
+use crate::{
+    evaluation_materialization::{
+        EvaluationPolicy, InputFrontier, ObservationPolicy, OccurrenceId as M3OccurrenceId,
+        PolicyStamp, StaticRetryContractKind,
+    },
+    shared_model::{
+        BindingActivationFrontier, CapabilityName, Core, DiagnosticCode, Elaboration, FieldRef,
+        LocusRef, OccurrenceId, OwnerCommand, PrincipalRef, ResultFrontier, ResultKey,
+        ResultVersion, SourceRef, StateKey, SurfaceFragment, Value,
+    },
 };
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
@@ -37,6 +43,7 @@ pub enum CoreTemplateKind {
     OwnerLocalRead,
     OwnerLocalWrite,
     DesignatedPublishValue,
+    DesignatedResultConsume,
     MaintainedRelation,
     PublishRelation,
     ConsumerLocalProjection,
@@ -51,6 +58,7 @@ pub enum SourceToCoreKind {
     OwnerLocalWrite,
     ObserverPublish,
     DesignatedDecision,
+    DesignatedResultConsume,
     PublishRelation,
     ConsumerLocalProjection,
     DeferredPolicy,
@@ -140,13 +148,27 @@ pub struct CoreTemplate {
     source_span: SurfaceV0Span,
     m5_core: Option<Core>,
     result_frontier: Option<ResultFrontier>,
+    input_frontier: Option<InputFrontier>,
     result_version: Option<ResultVersion>,
+    observation_policy: Option<ObservationPolicy>,
+    policy_stamp: Option<PolicyStamp>,
+    static_retry_contract: Option<StaticRetryContractKind>,
     binding_frontier: Option<BindingActivationFrontier>,
     owner_publication_kind: Option<CoreTemplateKind>,
     published_relation_carrier: bool,
     consumer_projection_locus: Option<String>,
     consumer_projection_kind: Option<CoreTemplateKind>,
     authority_requirement: Option<String>,
+    consumer_locus: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct DesignatedResultMetadata {
+    result_frontier: ResultFrontier,
+    input_frontier: InputFrontier,
+    result_version: ResultVersion,
+    observation_policy: ObservationPolicy,
+    policy_stamp: PolicyStamp,
 }
 
 impl CoreTemplate {
@@ -158,13 +180,18 @@ impl CoreTemplate {
             source_span,
             m5_core: Some(m5_core),
             result_frontier: None,
+            input_frontier: None,
             result_version: None,
+            observation_policy: None,
+            policy_stamp: None,
+            static_retry_contract: None,
             binding_frontier: None,
             owner_publication_kind: None,
             published_relation_carrier: false,
             consumer_projection_locus: None,
             consumer_projection_kind: None,
             authority_requirement: None,
+            consumer_locus: None,
         }
     }
 
@@ -172,7 +199,7 @@ impl CoreTemplate {
         evaluator: String,
         result: String,
         source_span: SurfaceV0Span,
-        result_frontier: ResultFrontier,
+        metadata: DesignatedResultMetadata,
     ) -> Self {
         Self {
             kind: CoreTemplateKind::DesignatedPublishValue,
@@ -180,14 +207,19 @@ impl CoreTemplate {
             result_name: Some(result),
             source_span,
             m5_core: None,
-            result_frontier: Some(result_frontier),
-            result_version: Some(ResultVersion::new(1)),
+            result_frontier: Some(metadata.result_frontier),
+            input_frontier: Some(metadata.input_frontier),
+            result_version: Some(metadata.result_version),
+            observation_policy: Some(metadata.observation_policy),
+            policy_stamp: Some(metadata.policy_stamp),
+            static_retry_contract: None,
             binding_frontier: None,
             owner_publication_kind: None,
             published_relation_carrier: false,
             consumer_projection_locus: None,
             consumer_projection_kind: None,
             authority_requirement: None,
+            consumer_locus: None,
         }
     }
 
@@ -204,7 +236,11 @@ impl CoreTemplate {
             source_span,
             m5_core: None,
             result_frontier: None,
+            input_frontier: None,
             result_version: None,
+            observation_policy: None,
+            policy_stamp: None,
+            static_retry_contract: None,
             binding_frontier: Some(binding_frontier),
             owner_publication_kind: Some(CoreTemplateKind::PublishRelation),
             published_relation_carrier: true,
@@ -213,6 +249,7 @@ impl CoreTemplate {
                 .map(|_| CoreTemplateKind::ConsumerLocalProjection),
             consumer_projection_locus,
             authority_requirement: None,
+            consumer_locus: None,
         }
     }
 
@@ -226,13 +263,47 @@ impl CoreTemplate {
             source_span,
             m5_core: None,
             result_frontier: None,
+            input_frontier: None,
             result_version: None,
+            observation_policy: None,
+            policy_stamp: None,
+            static_retry_contract: None,
             binding_frontier: None,
             owner_publication_kind: None,
             published_relation_carrier: false,
             consumer_projection_locus: None,
             consumer_projection_kind: None,
             authority_requirement,
+            consumer_locus: None,
+        }
+    }
+
+    fn designated_result_consume(
+        evaluator: String,
+        result: String,
+        consumer_locus: String,
+        source_span: SurfaceV0Span,
+        producer: &CoreTemplate,
+    ) -> Self {
+        Self {
+            kind: CoreTemplateKind::DesignatedResultConsume,
+            name: evaluator,
+            result_name: Some(result),
+            source_span,
+            m5_core: None,
+            result_frontier: Some(producer.result_frontier().clone()),
+            input_frontier: Some(producer.input_frontier().clone()),
+            result_version: Some(producer.result_version()),
+            observation_policy: Some(producer.observation_policy().clone()),
+            policy_stamp: Some(producer.policy_stamp().clone()),
+            static_retry_contract: Some(StaticRetryContractKind::ReturnExistingNoNewConsumption),
+            binding_frontier: None,
+            owner_publication_kind: None,
+            published_relation_carrier: false,
+            consumer_projection_locus: None,
+            consumer_projection_kind: None,
+            authority_requirement: None,
+            consumer_locus: Some(consumer_locus),
         }
     }
 
@@ -279,15 +350,62 @@ impl CoreTemplate {
         false
     }
 
+    pub fn evaluator(&self) -> &str {
+        &self.name
+    }
+
+    pub fn result(&self) -> &str {
+        self.result_name
+            .as_deref()
+            .expect("only designated templates retain a result name")
+    }
+
+    pub fn consumer_locus(&self) -> &str {
+        self.consumer_locus
+            .as_deref()
+            .expect("only designated consumers retain a consumer locus")
+    }
+
+    pub fn consumes_designated_result(&self) -> bool {
+        self.kind == CoreTemplateKind::DesignatedResultConsume
+    }
+
+    pub const fn emits_evaluator_expression(&self) -> bool {
+        false
+    }
+
     pub fn result_frontier(&self) -> &ResultFrontier {
         self.result_frontier
             .as_ref()
             .expect("only designated templates carry a result frontier")
     }
 
+    pub fn input_frontier(&self) -> &InputFrontier {
+        self.input_frontier
+            .as_ref()
+            .expect("valid designated templates carry an input frontier")
+    }
+
     pub fn result_version(&self) -> ResultVersion {
         self.result_version
             .expect("only designated templates carry a result version")
+    }
+
+    pub fn observation_policy(&self) -> &ObservationPolicy {
+        self.observation_policy
+            .as_ref()
+            .expect("valid designated templates carry an observation policy")
+    }
+
+    pub fn policy_stamp(&self) -> &PolicyStamp {
+        self.policy_stamp
+            .as_ref()
+            .expect("valid designated templates carry a policy stamp")
+    }
+
+    pub fn static_retry_contract(&self) -> StaticRetryContractKind {
+        self.static_retry_contract
+            .expect("valid designated result consumer carries a retry contract")
     }
 
     pub const fn preserves_duplicate_version(&self) -> bool {
@@ -411,6 +529,7 @@ pub struct SurfaceV0Classification {
     source_to_core_map: SourceToCoreMap,
     core_templates: Vec<CoreTemplate>,
     designated_templates: Vec<CoreTemplate>,
+    designated_result_consumer_templates: Vec<CoreTemplate>,
     relation_templates: Vec<CoreTemplate>,
     deferred_templates: Vec<CoreTemplate>,
     authority_audits: Vec<AuthorityAudit>,
@@ -451,6 +570,21 @@ impl SurfaceV0Classification {
         self.designated_templates.iter().find(|template| {
             template.name == evaluator && template.result_name.as_deref() == Some(result)
         })
+    }
+
+    pub fn designated_result_consumer_template(
+        &self,
+        evaluator: &str,
+        result: &str,
+        consumer_locus: &str,
+    ) -> Option<&CoreTemplate> {
+        self.designated_result_consumer_templates
+            .iter()
+            .find(|template| {
+                template.evaluator() == evaluator
+                    && template.result() == result
+                    && template.consumer_locus() == consumer_locus
+            })
     }
 
     pub fn relation_template(&self, name: &str) -> Option<&CoreTemplate> {
@@ -557,12 +691,54 @@ pub fn classify_surface_v0(
         let frontier =
             ResultFrontier::from_ordered_results(vec![ResultKey::new(designated.tick_frontier())])
                 .expect("one designated tick frontier is finite and nonempty");
+        let input_frontier = InputFrontier::from_ordered_producers(vec![M3OccurrenceId::new(
+            designated.tick_frontier(),
+        )])
+        .expect("one designated input frontier is finite and nonempty");
+        let evaluation_policy = EvaluationPolicy::declared_deterministic(format!(
+            "inferred:{}.{}",
+            designated.evaluator(),
+            designated.result()
+        ));
+        let observation_policy = ObservationPolicy::declared("conservative");
+        let policy_stamp = evaluation_policy.stamp_with(&observation_policy);
         source_to_core_map.add(span.clone(), SourceToCoreKind::DesignatedDecision);
         designated_templates.push(CoreTemplate::designated(
             designated.evaluator().to_string(),
             designated.result().to_string(),
             span,
-            frontier,
+            DesignatedResultMetadata {
+                result_frontier: frontier,
+                input_frontier,
+                result_version: ResultVersion::new(1),
+                observation_policy,
+                policy_stamp,
+            },
+        ));
+    }
+
+    let mut designated_result_consumer_templates = Vec::new();
+    for consumer in ast.designated_result_consumers() {
+        let span = consumer.span().clone();
+        source_refs.push((span.clone(), source_ref_from_span(&span)));
+        source_to_core_map.add(span.clone(), SourceToCoreKind::DesignatedResultConsume);
+        let Some(producer) = designated_templates.iter().find(|template| {
+            template.evaluator() == consumer.evaluator() && template.result() == consumer.result()
+        }) else {
+            return Err(SurfaceV0Diagnostics {
+                entries: vec![SurfaceV0Diagnostic::new(
+                    SurfaceV0DiagnosticKind::UnresolvedName,
+                    consumer.result_ref_span().clone(),
+                    DiagnosticCode::BadRelationship,
+                )],
+            });
+        };
+        designated_result_consumer_templates.push(CoreTemplate::designated_result_consume(
+            consumer.evaluator().to_string(),
+            consumer.result().to_string(),
+            consumer.consumer_locus().to_string(),
+            span,
+            producer,
         ));
     }
 
@@ -609,6 +785,7 @@ pub fn classify_surface_v0(
     let mut template_names = core_templates
         .iter()
         .chain(designated_templates.iter())
+        .chain(designated_result_consumer_templates.iter())
         .chain(relation_templates.iter())
         .chain(deferred_templates.iter())
         .map(|template| template.name().to_string())
@@ -623,6 +800,7 @@ pub fn classify_surface_v0(
         source_to_core_map,
         core_templates,
         designated_templates,
+        designated_result_consumer_templates,
         relation_templates,
         deferred_templates,
         authority_audits,

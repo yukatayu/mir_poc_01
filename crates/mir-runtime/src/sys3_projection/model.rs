@@ -1,12 +1,15 @@
 use std::collections::{BTreeMap, BTreeSet};
 
 use mir_semantics::{
+    evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{BindingActivationFrontier, SourceRef},
+    shared_model::{ResultFrontier, ResultVersion},
     surface_v0_pipeline::{
         CheckedEvaluation, CheckedEvaluationSignature, CheckedIndexedStateSchema,
-        CheckedProgramIdentity, DesignatedCheckedCore, DesignatedRemoteInputDependency, EffectKind,
-        FailureRow, GeneratedObligationKind, OwnerRmwCheckedCore, RelationCheckedCore,
-        RelationTransformCore, ResidualObligationKind, TypedStateRead,
+        CheckedProgramIdentity, DesignatedCheckedCore, DesignatedRemoteInputDependency,
+        DesignatedResultConsumerCore, EffectKind, FailureRow, GeneratedObligationKind,
+        OwnerRmwCheckedCore, RelationCheckedCore, RelationTransformCore, ResidualObligationKind,
+        StaticRetryContractKind, TypedStateRead,
     },
 };
 
@@ -25,6 +28,9 @@ pub(crate) enum ProjectionDiagnosticKind {
     BackendEligibilityMismatch,
     PersistencePlanMismatch,
     EffectHandlerProvenanceMismatch,
+    MissingDerivedFragment,
+    DesignatedResultConsumerMoved,
+    DesignatedResultConsumerExpressionLeakage,
     StructuralMismatch,
 }
 
@@ -276,6 +282,7 @@ pub(crate) enum ProjectedOperationFragmentKind {
     ConsumerLocalRelationProjection,
     DesignatedRemoteInputService,
     DesignatedEvaluation,
+    DesignatedResultConsumer,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -293,6 +300,12 @@ impl AuthorityRequirements {
     pub(super) fn designated(_operation: &str, _source_ref: &SourceRef) -> Self {
         Self {
             requirements: RuntimeSeamRequirements::designated(),
+        }
+    }
+
+    pub(super) fn designated_result_consumer(_operation: &str, _source_ref: &SourceRef) -> Self {
+        Self {
+            requirements: RuntimeSeamRequirements::designated_result_consumer(),
         }
     }
 
@@ -412,6 +425,9 @@ pub(super) enum PlacementSpecificCore {
     DesignatedEvaluator {
         core: DesignatedCheckedCore,
     },
+    DesignatedResultConsumer {
+        core: DesignatedResultConsumerCore,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -430,6 +446,7 @@ pub(crate) struct ProjectedOperationFragment {
     pub(super) checked_core_identity: CheckedCoreIdentity,
     pub(super) semantic_obligations: SemanticObligations,
     pub(super) runtime_seam_requirements: RuntimeSeamRequirements,
+    pub(super) designated_result_consumer_expression_leakage: bool,
 }
 
 impl ProjectedOperationFragment {
@@ -517,6 +534,28 @@ impl ProjectedOperationFragment {
         }
     }
 
+    pub(crate) fn designated_result_consumer_core(&self) -> Option<&DesignatedResultConsumerCore> {
+        match &self.placement {
+            PlacementSpecificCore::DesignatedResultConsumer { core } => Some(core),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn exposes_typed_expression(&self) -> bool {
+        self.designated_checked_core().is_some()
+            || self.designated_result_consumer_expression_leakage
+    }
+
+    pub(crate) const fn exposes_raw_input(&self) -> bool {
+        false
+    }
+
+    pub(crate) fn static_retry_contract(&self) -> StaticRetryContractKind {
+        self.designated_result_consumer_core()
+            .expect("only a designated result consumer has a retry contract")
+            .retry_contract()
+    }
+
     pub(crate) fn relation_checked_core(&self) -> Option<&RelationCheckedCore> {
         match &self.placement {
             PlacementSpecificCore::RelationOwner { core } => Some(core),
@@ -602,6 +641,9 @@ pub(crate) enum RuntimeSeamRequirementKind {
     ProducerReleaseCapabilitySlot,
     ProducerReleaseWitnessSlot,
     EvaluatorDecisionAuthoritySlot,
+    ConsumerMembershipEpochIncarnation,
+    ConsumerCapabilityRef,
+    ConsumerWitnessRef,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -612,6 +654,9 @@ pub(crate) enum SeamAuthorityKind {
     ProducerReleaseCapability,
     ProducerReleaseWitness,
     EvaluatorDecisionAuthority,
+    DesignatedResultConsumerMembership,
+    DesignatedResultConsumerCapability,
+    DesignatedResultConsumerWitness,
 }
 
 pub(crate) type RuntimeSeamRequirementRow = (
@@ -677,6 +722,30 @@ impl RuntimeSeamRequirements {
                     Some(GeneratedObligationKind::AdmittedEvaluatorAuthority),
                     CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
                     Some(SeamAuthorityKind::EvaluatorDecisionAuthority),
+                ),
+            ],
+        }
+    }
+    pub(super) fn designated_result_consumer() -> Self {
+        Self {
+            rows: vec![
+                (
+                    RuntimeSeamRequirementKind::ConsumerMembershipEpochIncarnation,
+                    Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::DesignatedResultConsumerMembership),
+                ),
+                (
+                    RuntimeSeamRequirementKind::ConsumerCapabilityRef,
+                    Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::DesignatedResultConsumerCapability),
+                ),
+                (
+                    RuntimeSeamRequirementKind::ConsumerWitnessRef,
+                    Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::DesignatedResultConsumerWitness),
                 ),
             ],
         }
@@ -891,6 +960,7 @@ pub(crate) enum CommunicationEdgeKind {
     RelationProjectionPublication,
     DesignatedInputRequest,
     DesignatedInputReceipt,
+    DesignatedResultDelivery,
     AbsoluteValueStream,
 }
 
@@ -901,6 +971,7 @@ pub(crate) enum CarrierLifecycleKind {
     DesignatedInputRequest,
     DesignatedInputReceipt,
     RelationProjectionPublication,
+    DesignatedResultDelivery,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -911,6 +982,7 @@ pub(crate) enum CarrierOccurrenceSlotKind {
     Receive,
     Publish,
     Observe,
+    Consume,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -960,6 +1032,27 @@ impl ReferenceOnlyRedactionPolicy {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum CarrierContractProvenance {
+    CheckedCoreBound,
+}
+
+impl CarrierContractProvenance {
+    pub(crate) const fn is_checked_core_bound(&self) -> bool {
+        matches!(self, Self::CheckedCoreBound)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct DesignatedResultCarrierDetails {
+    result_version: ResultVersion,
+    input_frontier: InputFrontier,
+    result_frontier: ResultFrontier,
+    observation_policy: ObservationPolicy,
+    policy_stamp: PolicyStamp,
+    retry_contract: StaticRetryContractKind,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CarrierContract {
     edge_kind: CommunicationEdgeKind,
@@ -981,6 +1074,8 @@ pub(crate) struct CarrierContract {
     evaluator_receipt_consumption: bool,
     designated_dependency: Option<DesignatedRemoteInputDependency>,
     visibility_policy: ReferenceOnlyRedactionPolicy,
+    provenance: CarrierContractProvenance,
+    designated_result_details: Option<DesignatedResultCarrierDetails>,
 }
 
 impl CarrierContract {
@@ -1080,6 +1175,46 @@ impl CarrierContract {
 
     pub(crate) fn visibility_policy(&self) -> &ReferenceOnlyRedactionPolicy {
         &self.visibility_policy
+    }
+
+    pub(crate) fn provenance(&self) -> &CarrierContractProvenance {
+        &self.provenance
+    }
+
+    pub(crate) fn result_version(&self) -> Option<ResultVersion> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| details.result_version)
+    }
+
+    pub(crate) fn input_frontier(&self) -> Option<&InputFrontier> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| &details.input_frontier)
+    }
+
+    pub(crate) fn result_frontier(&self) -> Option<&ResultFrontier> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| &details.result_frontier)
+    }
+
+    pub(crate) fn observation_policy(&self) -> Option<&ObservationPolicy> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| &details.observation_policy)
+    }
+
+    pub(crate) fn policy_stamp(&self) -> Option<&PolicyStamp> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| &details.policy_stamp)
+    }
+
+    pub(crate) fn static_retry_contract(&self) -> Option<StaticRetryContractKind> {
+        self.designated_result_details
+            .as_ref()
+            .map(|details| details.retry_contract)
     }
 
     pub(crate) const fn transfers_authority(&self) -> bool {
@@ -1226,6 +1361,52 @@ impl CarrierContract {
         )
     }
 
+    pub(super) fn designated_result_delivery(evaluation: &CheckedEvaluation) -> Self {
+        let core = evaluation
+            .designated_result_consumer_core()
+            .expect("delivery carrier comes from checked designated result consumer Core");
+        let mut contract = Self::new(
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            CarrierLifecycleKind::DesignatedResultDelivery,
+            format!("{}.{}", core.evaluator(), core.result()),
+            core.source_ref().clone(),
+            format!(
+                "designated-consume:{}.{}:{}",
+                core.evaluator(),
+                core.result(),
+                core.consumer_locus()
+            ),
+            None,
+            Some(core.evaluator().to_string()),
+            Some(core.consumer_locus().to_string()),
+            evaluation.declared_failure_row().clone(),
+            effect_row_for(evaluation),
+            AuthorityRequirements::designated_result_consumer(
+                &format!("{}.{}", core.evaluator(), core.result()),
+                core.source_ref(),
+            ),
+            [
+                CarrierOccurrenceSlotKind::Publish,
+                CarrierOccurrenceSlotKind::Receive,
+                CarrierOccurrenceSlotKind::Consume,
+            ],
+            [CarrierFrontierKind::Input, CarrierFrontierKind::Result],
+            true,
+            true,
+            true,
+            None,
+        );
+        contract.designated_result_details = Some(DesignatedResultCarrierDetails {
+            result_version: core.result_version(),
+            input_frontier: core.input_frontier().clone(),
+            result_frontier: core.result_frontier().clone(),
+            observation_policy: core.observation_policy().clone(),
+            policy_stamp: core.policy_stamp().clone(),
+            retry_contract: core.retry_contract(),
+        });
+        contract
+    }
+
     #[allow(clippy::too_many_arguments)]
     fn new<I, F>(
         edge_kind: CommunicationEdgeKind,
@@ -1276,6 +1457,8 @@ impl CarrierContract {
             evaluator_receipt_consumption,
             designated_dependency,
             visibility_policy: ReferenceOnlyRedactionPolicy,
+            provenance: CarrierContractProvenance::CheckedCoreBound,
+            designated_result_details: None,
         }
     }
 }
@@ -2245,6 +2428,8 @@ pub(crate) enum PersistenceResponsibilityKind {
     ReceiptConsumption,
     OwnerQueue,
     DeclaredLocusBoundary,
+    ConsumptionIdentity,
+    InFlightDeliveryState,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -2274,6 +2459,14 @@ impl PersistencePlan {
         result: &str,
     ) -> Option<&[PersistenceResponsibilityKind]> {
         self.by_designated.get(result).map(Vec::as_slice)
+    }
+
+    pub(crate) fn responsibilities_for_designated_result_consumer(
+        &self,
+        _operation: &str,
+        locus: &str,
+    ) -> Option<&[PersistenceResponsibilityKind]> {
+        self.by_locus.get(locus).map(Vec::as_slice)
     }
 
     pub(crate) fn global_obligations(&self) -> &[PersistenceResponsibilityKind] {
@@ -2356,6 +2549,12 @@ impl PersistencePlan {
                         PersistenceResponsibilityKind::DesignatedReceiptConsumption,
                         PersistenceResponsibilityKind::DesignatedInputFrontier,
                     ],
+                    ProjectedOperationFragmentKind::DesignatedResultConsumer => vec![
+                        PersistenceResponsibilityKind::ConsumptionIdentity,
+                        PersistenceResponsibilityKind::InFlightDeliveryState,
+                        PersistenceResponsibilityKind::ReceiptConsumption,
+                        PersistenceResponsibilityKind::MembershipCapabilityWitnessRefs,
+                    ],
                 };
                 for responsibility in responsibilities {
                     if !entry.contains(&responsibility) {
@@ -2387,6 +2586,7 @@ pub(crate) enum RuntimeOccurrenceKind {
     Receive,
     Publish,
     Observe,
+    Consume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2437,6 +2637,9 @@ impl ObservationPlan {
             ProjectedOperationFragmentKind::DesignatedRemoteInputService
             | ProjectedOperationFragmentKind::DesignatedEvaluation => {
                 Some(RuntimeOccurrenceKind::Serve)
+            }
+            ProjectedOperationFragmentKind::DesignatedResultConsumer => {
+                Some(RuntimeOccurrenceKind::Consume)
             }
             ProjectedOperationFragmentKind::OwnerRequestInvocation => None,
         }) else {
@@ -2582,6 +2785,18 @@ impl ObservationPlan {
                         CommunicationEdgeKind::RelationProjectionPublication,
                         CarrierOccurrenceSlotKind::Observe,
                     ) => (RuntimeOccurrenceKind::Observe, &edge.target_fragment_ref),
+                    (
+                        CommunicationEdgeKind::DesignatedResultDelivery,
+                        CarrierOccurrenceSlotKind::Publish,
+                    ) => (RuntimeOccurrenceKind::Publish, &edge.source_fragment_ref),
+                    (
+                        CommunicationEdgeKind::DesignatedResultDelivery,
+                        CarrierOccurrenceSlotKind::Receive,
+                    ) => (RuntimeOccurrenceKind::Receive, &edge.target_fragment_ref),
+                    (
+                        CommunicationEdgeKind::DesignatedResultDelivery,
+                        CarrierOccurrenceSlotKind::Consume,
+                    ) => (RuntimeOccurrenceKind::Consume, &edge.target_fragment_ref),
                     _ => continue,
                 };
                 let row = ObservationRow {
@@ -2920,6 +3135,65 @@ pub(crate) struct GlobalProjectionResult {
     static_readiness: StaticProjectionReadiness,
     runtime_admission_status: RuntimeAdmissionStatus,
     backend_requirements: BackendRequirements,
+    static_conflict_policy: StaticConflictPolicy,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum StaticConflictPolicyKind {
+    OneDesignatedResultConsumerFinite,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum StaticConflictResolution {
+    RejectCompetingConsumer,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct DesignatedResultConsumerConflictPolicy {
+    kind: StaticConflictPolicyKind,
+    accepted_consumer_locus: String,
+    on_competing_consumer: StaticConflictResolution,
+}
+
+impl DesignatedResultConsumerConflictPolicy {
+    pub(crate) const fn kind(&self) -> StaticConflictPolicyKind {
+        self.kind
+    }
+    pub(crate) fn accepted_consumer_locus(&self) -> &str {
+        &self.accepted_consumer_locus
+    }
+    pub(crate) const fn on_competing_consumer(&self) -> StaticConflictResolution {
+        self.on_competing_consumer
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct StaticConflictPolicy {
+    designated_result_consumers: BTreeMap<String, DesignatedResultConsumerConflictPolicy>,
+}
+
+impl StaticConflictPolicy {
+    pub(crate) fn designated_result_consumer(
+        &self,
+        operation: &str,
+    ) -> Option<&DesignatedResultConsumerConflictPolicy> {
+        self.designated_result_consumers.get(operation)
+    }
+
+    pub(super) fn add_designated_result_consumer(
+        &mut self,
+        operation: impl Into<String>,
+        consumer_locus: impl Into<String>,
+    ) {
+        self.designated_result_consumers.insert(
+            operation.into(),
+            DesignatedResultConsumerConflictPolicy {
+                kind: StaticConflictPolicyKind::OneDesignatedResultConsumerFinite,
+                accepted_consumer_locus: consumer_locus.into(),
+                on_competing_consumer: StaticConflictResolution::RejectCompetingConsumer,
+            },
+        );
+    }
 }
 
 impl GlobalProjectionResult {
@@ -3009,6 +3283,10 @@ impl GlobalProjectionResult {
         &self.backend_requirements
     }
 
+    pub(crate) fn static_conflict_policy(&self) -> &StaticConflictPolicy {
+        &self.static_conflict_policy
+    }
+
     pub(crate) fn new(
         checked_program_identity: CheckedProgramIdentity,
         topology_loci: BTreeSet<String>,
@@ -3035,6 +3313,7 @@ impl GlobalProjectionResult {
             static_readiness: StaticProjectionReadiness::Ready,
             runtime_admission_status,
             backend_requirements,
+            static_conflict_policy: StaticConflictPolicy::default(),
         }
     }
 
@@ -3062,6 +3341,10 @@ impl GlobalProjectionResult {
 
     pub(crate) fn persistence_plan_mut(&mut self) -> &mut PersistencePlan {
         &mut self.persistence_plan
+    }
+
+    pub(crate) fn static_conflict_policy_mut(&mut self) -> &mut StaticConflictPolicy {
+        &mut self.static_conflict_policy
     }
 
     pub(crate) fn finalize(&mut self) {
@@ -3149,6 +3432,64 @@ impl GlobalProjectionResult {
                 .checked_fragments
                 .owner_operations
                 .push(operation.to_string());
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_remove_designated_result_consumer_fragment(
+        &mut self,
+        operation: &str,
+        locus: &str,
+    ) {
+        if let Some(program) = self.locus_programs.get_mut(locus) {
+            program.operations.entries.retain(|fragment| {
+                !(fragment.operation_id == operation
+                    && fragment.kind == ProjectedOperationFragmentKind::DesignatedResultConsumer)
+            });
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_move_designated_result_consumer_fragment(
+        &mut self,
+        operation: &str,
+        from: &str,
+        to: &str,
+    ) {
+        let moved = self.locus_programs.get_mut(from).and_then(|program| {
+            program
+                .operations
+                .entries
+                .iter()
+                .position(|fragment| {
+                    fragment.operation_id == operation
+                        && fragment.kind == ProjectedOperationFragmentKind::DesignatedResultConsumer
+                })
+                .map(|index| program.operations.entries.remove(index))
+        });
+        if let Some(fragment) = moved {
+            self.locus_programs
+                .get_mut(to)
+                .expect("test target locus exists")
+                .operations
+                .entries
+                .push(fragment);
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_enable_designated_result_consumer_expression_leakage(
+        &mut self,
+        operation: &str,
+        locus: &str,
+    ) {
+        if let Some(fragment) = self.locus_programs.get_mut(locus).and_then(|program| {
+            program.operations.entries.iter_mut().find(|fragment| {
+                fragment.operation_id == operation
+                    && fragment.kind == ProjectedOperationFragmentKind::DesignatedResultConsumer
+            })
+        }) {
+            fragment.designated_result_consumer_expression_leakage = true;
         }
     }
 

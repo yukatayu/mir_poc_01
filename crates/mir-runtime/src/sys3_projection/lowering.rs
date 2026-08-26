@@ -42,6 +42,9 @@ pub(crate) fn project_checked_core(
             CheckedEvaluationKind::DesignatedPublishValue => {
                 project_designated(&mut result, checked, evaluation)
             }
+            CheckedEvaluationKind::DesignatedResultConsume => {
+                project_designated_result_consumer(&mut result, checked, evaluation)
+            }
             CheckedEvaluationKind::ConsumerLocalProjection => {}
         }
     }
@@ -105,6 +108,13 @@ fn required_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
                     loci.insert(dependency.source_owner_locus().to_string());
                 }
             }
+            CheckedEvaluationKind::DesignatedResultConsume => {
+                let core = evaluation
+                    .designated_result_consumer_core()
+                    .expect("checked designated result consumer Core");
+                loci.insert(core.consumer_locus().to_string());
+                loci.insert(core.evaluator().to_string());
+            }
             CheckedEvaluationKind::ConsumerLocalProjection => {}
         }
     }
@@ -142,6 +152,7 @@ fn combined_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
                     loci.insert(dependency.source_owner_locus().to_string());
                 }
             }
+            CheckedEvaluationKind::DesignatedResultConsume => {}
             CheckedEvaluationKind::ConsumerLocalProjection => {}
         }
     }
@@ -205,6 +216,7 @@ fn project_owner(
             ),
             semantic_obligations: SemanticObligations::from_evaluation(evaluation),
             runtime_seam_requirements: RuntimeSeamRequirements::default(),
+            designated_result_consumer_expression_leakage: false,
         });
     result.locus_program_mut(owner).add_failures(
         operation,
@@ -239,7 +251,11 @@ fn project_owner(
         let origin_artifact_ref = artifact_ref(origin, operation, "owner-request");
         let signature = checked
             .static_environment()
-            .evaluation_signature(operation)
+            .evaluation_signature_by_identity(
+                operation,
+                CheckedEvaluationKind::OwnerRmw,
+                Some(owner),
+            )
             .expect("checked owner operation has signature")
             .clone();
         result
@@ -273,6 +289,7 @@ fn project_owner(
                 ),
                 semantic_obligations: SemanticObligations::from_evaluation(evaluation),
                 runtime_seam_requirements: RuntimeSeamRequirements::default(),
+                designated_result_consumer_expression_leakage: false,
             });
         result.observation_plan_mut().add_local_fragment(
             evaluation.source_ref().clone(),
@@ -358,6 +375,7 @@ fn project_relation(
             ),
             semantic_obligations: SemanticObligations::from_evaluation(evaluation),
             runtime_seam_requirements: RuntimeSeamRequirements::default(),
+            designated_result_consumer_expression_leakage: false,
         });
     result.observation_plan_mut().add_local_fragment(
         evaluation.source_ref().clone(),
@@ -398,6 +416,7 @@ fn project_relation(
                 ),
                 semantic_obligations: SemanticObligations::from_evaluation(evaluation),
                 runtime_seam_requirements: RuntimeSeamRequirements::default(),
+                designated_result_consumer_expression_leakage: false,
             });
         result.observation_plan_mut().add_local_fragment(
             evaluation.source_ref().clone(),
@@ -506,6 +525,7 @@ fn project_designated(
             ),
             semantic_obligations: SemanticObligations::from_evaluation(evaluation),
             runtime_seam_requirements: RuntimeSeamRequirements::default(),
+            designated_result_consumer_expression_leakage: false,
         });
     result.effect_handler_plan_mut().add(EffectHandlerInput {
         operation: operation.clone(),
@@ -571,6 +591,7 @@ fn project_designated(
                 ),
                 semantic_obligations: SemanticObligations::from_evaluation(evaluation),
                 runtime_seam_requirements: RuntimeSeamRequirements::default(),
+                designated_result_consumer_expression_leakage: false,
             });
         result.effect_handler_plan_mut().add(EffectHandlerInput {
             operation: operation.clone(),
@@ -655,6 +676,86 @@ fn project_designated(
         }
     }
     result.persistence_plan_mut().add_designated(operation);
+}
+
+fn project_designated_result_consumer(
+    result: &mut GlobalProjectionResult,
+    checked: &CheckedSurfaceV0,
+    evaluation: &CheckedEvaluation,
+) {
+    let core = evaluation
+        .designated_result_consumer_core()
+        .expect("designated result consumer checked Core");
+    let operation = format!("{}.{}", core.evaluator(), core.result());
+    let evaluator = core.evaluator();
+    let consumer = core.consumer_locus();
+    let evaluator_fragment_ref = artifact_ref(evaluator, &operation, "designated-evaluation");
+    let consumer_fragment_ref = artifact_ref(consumer, &operation, "designated-result-consumer");
+    let core_ref = format!(
+        "designated-consume:{}.{}:{}",
+        core.evaluator(),
+        core.result(),
+        core.consumer_locus(),
+    );
+    result
+        .locus_program_mut(consumer)
+        .add_fragment(ProjectedOperationFragment {
+            operation_id: operation.clone(),
+            kind: ProjectedOperationFragmentKind::DesignatedResultConsumer,
+            source_ref: evaluation.source_ref().clone(),
+            core_ref: core_ref.clone(),
+            artifact_ref: consumer_fragment_ref.clone(),
+            authority_requirements: AuthorityRequirements::designated_result_consumer(
+                &operation,
+                evaluation.source_ref(),
+            ),
+            declared_failure_row: evaluation.declared_failure_row().clone(),
+            generated_failure_row: evaluation.generated_failure_row().clone(),
+            placement: PlacementSpecificCore::DesignatedResultConsumer { core: core.clone() },
+            locus_tag: LocusTag::checked(consumer),
+            fragment_ref: consumer_fragment_ref.clone(),
+            checked_core_identity: CheckedCoreIdentity::fragment(
+                checked.program_identity().clone(),
+                &operation,
+                ProjectedOperationFragmentKind::DesignatedResultConsumer,
+                evaluation.source_ref().clone(),
+                None,
+                None,
+            ),
+            semantic_obligations: SemanticObligations::from_evaluation(evaluation),
+            runtime_seam_requirements: RuntimeSeamRequirements::designated_result_consumer(),
+            designated_result_consumer_expression_leakage: false,
+        });
+    result.observation_plan_mut().add_local_fragment(
+        evaluation.source_ref().clone(),
+        core_ref.clone(),
+        consumer_fragment_ref.clone(),
+        ProjectedOperationFragmentKind::DesignatedResultConsumer,
+    );
+    result
+        .communication_plan_mut()
+        .add_derived(CommunicationEdgeInput {
+            operation: operation.clone(),
+            kind: CommunicationEdgeKind::DesignatedResultDelivery,
+            source_locus: evaluator.to_string(),
+            target_locus: consumer.to_string(),
+            core_ref,
+            source_ref: evaluation.source_ref().clone(),
+            carrier_contract: CarrierContract::designated_result_delivery(evaluation),
+            checked_core_identity: CheckedCoreIdentity::edge(
+                checked.program_identity().clone(),
+                &operation,
+                CommunicationEdgeKind::DesignatedResultDelivery,
+                evaluation.source_ref().clone(),
+                None,
+                None,
+            ),
+            source_fragment_ref: evaluator_fragment_ref,
+            target_fragment_ref: consumer_fragment_ref,
+        });
+    result
+        .static_conflict_policy_mut()
+        .add_designated_result_consumer(operation, consumer);
 }
 
 fn artifact_ref(locus: &str, operation: &str, role: &str) -> String {

@@ -36,6 +36,8 @@ pub enum M9FiniteEffectKind {
     DesignatedRemoteRequest,
     DesignatedReceiptUse,
     DesignatedValuePublish,
+    DesignatedResultDelivery,
+    DesignatedResultConsume,
     /// Candidate-only sentinel for a requested effect with no M7 source row.
     /// It exists so the finite checker can represent and reject an actual
     /// effect-set expansion without inventing a runtime effect primitive.
@@ -54,6 +56,8 @@ impl From<EffectKind> for M9FiniteEffectKind {
             EffectKind::DesignatedRemoteRequest => Self::DesignatedRemoteRequest,
             EffectKind::DesignatedReceiptUse => Self::DesignatedReceiptUse,
             EffectKind::DesignatedValuePublish => Self::DesignatedValuePublish,
+            EffectKind::DesignatedResultDelivery => Self::DesignatedResultDelivery,
+            EffectKind::DesignatedResultConsume => Self::DesignatedResultConsume,
         }
     }
 }

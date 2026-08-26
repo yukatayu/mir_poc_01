@@ -15,12 +15,10 @@ use mir_ast::surface_v0::{
 use crate::{
     evaluation_materialization::{
         AuthorityOrigin, EvaluationPolicy, EvaluationSite, InputFrontier, Locus, Materialization,
-        ObservationPolicy, OccurrenceId as M3OccurrenceId, PolicyStamp, Principal, SemanticForm,
-        TriggerClock,
+        ObservationPolicy, PolicyStamp, Principal, SemanticForm, TriggerClock,
     },
     shared_model::{
-        BindingActivationFrontier, OccurrenceId, ResultFrontier, ResultKey, ResultVersion,
-        SourceRef,
+        BindingActivationFrontier, OccurrenceId, ResultFrontier, ResultVersion, SourceRef,
     },
     surface_v0_classification::{
         CoreTemplateKind, SourceToCoreKind, SurfaceV0Classification,
@@ -131,6 +129,8 @@ pub enum M7DiagnosticKind {
     DuplicateRelation,
     DuplicateDesignated,
     DuplicateDeferred,
+    UndefinedDesignatedResultConsumerLocus,
+    CompetingDesignatedResultConsumer,
     ResidualCannotExecute,
 }
 
@@ -430,9 +430,37 @@ impl CheckedStaticEnvironment {
     }
 
     pub fn evaluation_signature(&self, name: &str) -> Option<&CheckedEvaluationSignature> {
+        let mut matches = self
+            .evaluation_signatures
+            .iter()
+            .filter(|signature| signature.name == name);
+        let signature = matches.next()?;
+        matches.next().is_none().then_some(signature)
+    }
+
+    /// Retains all same-name checked signatures in their canonical checked
+    /// order; callers that need one must resolve its typed identity.
+    pub fn evaluation_signatures_named(&self, name: &str) -> Vec<CheckedEvaluationSignature> {
         self.evaluation_signatures
             .iter()
-            .find(|signature| signature.name == name)
+            .filter(|signature| signature.name == name)
+            .cloned()
+            .collect()
+    }
+
+    pub fn evaluation_signature_by_identity(
+        &self,
+        name: &str,
+        kind: CheckedEvaluationKind,
+        owner_locus: Option<&str>,
+    ) -> Option<&CheckedEvaluationSignature> {
+        let mut matches = self.evaluation_signatures.iter().filter(|signature| {
+            signature.name == name
+                && signature.kind == kind
+                && signature.owner_locus() == owner_locus
+        });
+        let signature = matches.next()?;
+        matches.next().is_none().then_some(signature)
     }
 }
 
@@ -558,6 +586,7 @@ pub enum CheckedEvaluationKind {
     DesignatedPublishValue,
     PublishRelation,
     ConsumerLocalProjection,
+    DesignatedResultConsume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1102,6 +1131,67 @@ pub struct DesignatedCheckedCore {
     generated_remote_input_dependencies: Vec<DesignatedRemoteInputDependency>,
 }
 
+pub use crate::evaluation_materialization::StaticRetryContractKind;
+
+/// A consumer receives a sealed designated result; it never retains the
+/// producer expression or the producer's raw remote input.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DesignatedResultConsumerCore {
+    evaluator: String,
+    result: String,
+    consumer_locus: String,
+    source_ref: SourceRef,
+    result_ref_source_ref: SourceRef,
+    result_frontier: ResultFrontier,
+    input_frontier: InputFrontier,
+    result_version: ResultVersion,
+    observation_policy: ObservationPolicy,
+    policy_stamp: PolicyStamp,
+    retry_contract: StaticRetryContractKind,
+}
+
+impl DesignatedResultConsumerCore {
+    pub fn evaluator(&self) -> &str {
+        &self.evaluator
+    }
+    pub fn result(&self) -> &str {
+        &self.result
+    }
+    pub fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+    pub fn result_ref_source_ref(&self) -> &SourceRef {
+        &self.result_ref_source_ref
+    }
+    pub fn result_frontier(&self) -> &ResultFrontier {
+        &self.result_frontier
+    }
+    pub fn input_frontier(&self) -> &InputFrontier {
+        &self.input_frontier
+    }
+    pub const fn result_version(&self) -> ResultVersion {
+        self.result_version
+    }
+    pub fn observation_policy(&self) -> &ObservationPolicy {
+        &self.observation_policy
+    }
+    pub fn policy_stamp(&self) -> &PolicyStamp {
+        &self.policy_stamp
+    }
+    pub const fn retry_contract(&self) -> StaticRetryContractKind {
+        self.retry_contract
+    }
+    pub const fn exposes_typed_expression(&self) -> bool {
+        false
+    }
+    pub const fn exposes_raw_input(&self) -> bool {
+        false
+    }
+}
+
 impl DesignatedCheckedCore {
     pub fn evaluator(&self) -> &str {
         &self.evaluator
@@ -1165,6 +1255,8 @@ pub enum EffectKind {
     DesignatedRemoteRequest,
     DesignatedReceiptUse,
     DesignatedValuePublish,
+    DesignatedResultDelivery,
+    DesignatedResultConsume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1280,6 +1372,7 @@ pub enum GeneratedObligationKind {
     Witness,
     Authority,
     AdmittedEvaluatorAuthority,
+    DesignatedResultConsumerAuthority,
     Evaluation(CheckedEvaluationKind),
 }
 
@@ -1373,6 +1466,23 @@ impl GeneratedObligations {
         }
     }
 
+    fn designated_result_consumer(span: PipelineSourceSpan) -> Self {
+        Self {
+            entries: vec![
+                GeneratedObligation::new(
+                    GeneratedObligationKind::DesignatedResultConsumerAuthority,
+                    span.clone(),
+                ),
+                GeneratedObligation::new(
+                    GeneratedObligationKind::Evaluation(
+                        CheckedEvaluationKind::DesignatedResultConsume,
+                    ),
+                    span,
+                ),
+            ],
+        }
+    }
+
     pub fn entries(&self) -> &[GeneratedObligation] {
         &self.entries
     }
@@ -1405,6 +1515,7 @@ impl GeneratedObligations {
                 entry.kind,
                 GeneratedObligationKind::Authority
                     | GeneratedObligationKind::AdmittedEvaluatorAuthority
+                    | GeneratedObligationKind::DesignatedResultConsumerAuthority
             )
         })
     }
@@ -1464,6 +1575,46 @@ fn designated_effect_entries(
     entries
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct AuthorityRequirements {
+    designated_result_consumer: Option<(String, String, String)>,
+}
+
+impl AuthorityRequirements {
+    fn designated_result_consumer(
+        evaluator: impl Into<String>,
+        result: impl Into<String>,
+        consumer_locus: impl Into<String>,
+    ) -> Self {
+        Self {
+            designated_result_consumer: Some((
+                evaluator.into(),
+                result.into(),
+                consumer_locus.into(),
+            )),
+        }
+    }
+
+    pub fn requires_designated_result_consumer_authority(
+        &self,
+        evaluator: &str,
+        result: &str,
+        consumer_locus: &str,
+    ) -> bool {
+        self.designated_result_consumer
+            .as_ref()
+            .is_some_and(|requirement| {
+                requirement.0 == evaluator
+                    && requirement.1 == result
+                    && requirement.2 == consumer_locus
+            })
+    }
+
+    pub const fn does_not_grant_authority_success(&self) -> bool {
+        true
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CheckedEvaluation {
     kind: CheckedEvaluationKind,
@@ -1477,6 +1628,8 @@ pub struct CheckedEvaluation {
     owner_rmw_core: Option<OwnerRmwCheckedCore>,
     relation_core: Option<RelationCheckedCore>,
     designated_core: Option<DesignatedCheckedCore>,
+    designated_result_consumer_core: Option<DesignatedResultConsumerCore>,
+    authority_requirements: AuthorityRequirements,
     evaluation_axes: EvaluationAxes,
     effect_row: EffectRow,
     generated_obligations: GeneratedObligations,
@@ -1541,6 +1694,14 @@ impl CheckedEvaluation {
 
     pub fn designated_core(&self) -> Option<&DesignatedCheckedCore> {
         self.designated_core.as_ref()
+    }
+
+    pub fn designated_result_consumer_core(&self) -> Option<&DesignatedResultConsumerCore> {
+        self.designated_result_consumer_core.as_ref()
+    }
+
+    pub fn authority_requirements(&self) -> &AuthorityRequirements {
+        &self.authority_requirements
     }
 
     pub fn evaluation_axes(&self) -> &EvaluationAxes {
@@ -1756,9 +1917,10 @@ impl CheckedSourceMapEntry {
             SourceToCoreKind::OwnerLocalWrite => 2,
             SourceToCoreKind::ObserverPublish => 3,
             SourceToCoreKind::DesignatedDecision => 4,
-            SourceToCoreKind::PublishRelation => 5,
-            SourceToCoreKind::ConsumerLocalProjection => 6,
-            SourceToCoreKind::DeferredPolicy => 7,
+            SourceToCoreKind::DesignatedResultConsume => 5,
+            SourceToCoreKind::PublishRelation => 6,
+            SourceToCoreKind::ConsumerLocalProjection => 7,
+            SourceToCoreKind::DeferredPolicy => 8,
         }
     }
 }
@@ -1804,20 +1966,39 @@ impl CheckedSourceMap {
         let source_ref = entries.first()?.source_ref.clone();
         Some(CheckedSourceMapEntries {
             kinds: entries.iter().map(|entry| entry.kind).collect(),
+            core_refs: entries.iter().map(|entry| entry.core_ref.clone()).collect(),
             source_ref,
         })
+    }
+
+    pub fn entries_for_source_ref(&self, source_ref: &SourceRef) -> CheckedSourceMapEntries {
+        let entries = self
+            .entries
+            .iter()
+            .filter(|entry| entry.source_ref == *source_ref)
+            .collect::<Vec<_>>();
+        CheckedSourceMapEntries {
+            kinds: entries.iter().map(|entry| entry.kind).collect(),
+            core_refs: entries.iter().map(|entry| entry.core_ref.clone()).collect(),
+            source_ref: source_ref.clone(),
+        }
     }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CheckedSourceMapEntries {
     kinds: Vec<SourceToCoreKind>,
+    core_refs: Vec<String>,
     source_ref: SourceRef,
 }
 
 impl CheckedSourceMapEntries {
     pub fn kinds(&self) -> Vec<SourceToCoreKind> {
         self.kinds.clone()
+    }
+
+    pub fn core_refs(&self) -> Vec<&str> {
+        self.core_refs.iter().map(String::as_str).collect()
     }
 
     pub fn source_ref(&self) -> &SourceRef {
@@ -1871,6 +2052,20 @@ impl CheckedSurfaceV0 {
             evaluation.kind == CheckedEvaluationKind::DesignatedPublishValue
                 && evaluation.name == evaluator
                 && evaluation.result_name.as_deref() == Some(result)
+        })
+    }
+
+    pub fn designated_result_consumer(
+        &self,
+        evaluator: &str,
+        result: &str,
+        consumer_locus: &str,
+    ) -> Option<&CheckedEvaluation> {
+        self.evaluations.iter().find(|evaluation| {
+            evaluation.kind == CheckedEvaluationKind::DesignatedResultConsume
+                && evaluation.name == evaluator
+                && evaluation.result_name.as_deref() == Some(result)
+                && evaluation.owner_evaluation_locus == consumer_locus
         })
     }
 
@@ -1979,6 +2174,20 @@ fn checked_static_environment(
                 kind: evaluation.kind(),
                 actor: None,
                 owner_locus: None,
+                parameters: Vec::new(),
+                source_ref: evaluation.source_ref().clone(),
+            },
+            CheckedEvaluationKind::DesignatedResultConsume => CheckedEvaluationSignature {
+                name: format!(
+                    "{}.{}",
+                    evaluation.name(),
+                    evaluation
+                        .result_name()
+                        .expect("checked designated consumer retains its result name")
+                ),
+                kind: evaluation.kind(),
+                actor: None,
+                owner_locus: Some(evaluation.owner_evaluation_locus().to_string()),
                 parameters: Vec::new(),
                 source_ref: evaluation.source_ref().clone(),
             },
@@ -2139,6 +2348,22 @@ fn checked_identity_structure(
                     designated.expression(),
                 )
             }
+            CheckedEvaluationKind::DesignatedResultConsume => {
+                let consumer = evaluation
+                    .designated_result_consumer_core()
+                    .expect("designated result consumer retains typed Core");
+                format!(
+                    "designated-consume:{}:{}:{}:{:?}:{:?}:{:?}:{:?}:{:?}",
+                    consumer.evaluator(),
+                    consumer.result(),
+                    consumer.consumer_locus(),
+                    consumer.input_frontier(),
+                    consumer.result_frontier(),
+                    consumer.result_version(),
+                    consumer.observation_policy(),
+                    consumer.policy_stamp(),
+                )
+            }
             CheckedEvaluationKind::ConsumerLocalProjection => {
                 unreachable!("M7 has no standalone consumer-projection evaluation")
             }
@@ -2224,6 +2449,8 @@ fn build_checked_artifact(
             owner_rmw_core: Some(owner_core),
             relation_core: None,
             designated_core: None,
+            designated_result_consumer_core: None,
+            authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::State,
                 EvaluationSite::Owner(Locus::new(assignment.owner_locus())),
@@ -2313,6 +2540,8 @@ fn build_checked_artifact(
             owner_rmw_core: None,
             relation_core: Some(relation_core),
             designated_core: None,
+            designated_result_consumer_core: None,
+            authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::Relation,
                 EvaluationSite::Owner(Locus::new(relation.owner_locus())),
@@ -2355,12 +2584,10 @@ fn build_checked_artifact(
     }
 
     for designated in ast.designated_results() {
-        let span = PipelineSourceSpan::from_surface(
-            consumed_m6_classification
-                .designated_template(designated.evaluator(), designated.result())
-                .expect("accepted M6 classification retains every designated template")
-                .source_span(),
-        );
+        let template = consumed_m6_classification
+            .designated_template(designated.evaluator(), designated.result())
+            .expect("accepted M6 classification retains every designated template");
+        let span = PipelineSourceSpan::from_surface(template.source_span());
         let expression = TypedExpression::from_surface(&ast, designated.expression());
         let designated_input_count = expression.state_reads().len();
         let evaluator = designated.evaluator().to_string();
@@ -2390,31 +2617,18 @@ fn build_checked_artifact(
                 }
             })
             .collect();
-        let result_frontier =
-            ResultFrontier::from_ordered_results(vec![ResultKey::new(designated.tick_frontier())])
-                .expect("one designated tick frontier is finite and nonempty");
-        let input_frontier = InputFrontier::from_ordered_producers(vec![M3OccurrenceId::new(
-            designated.tick_frontier(),
-        )])
-        .expect("one designated input frontier is finite and nonempty");
-        let evaluation_policy = EvaluationPolicy::declared_deterministic(format!(
-            "inferred:{evaluator}.{}",
-            designated.result()
-        ));
-        let observation_policy = ObservationPolicy::declared("conservative");
-        let policy_stamp = evaluation_policy.stamp_with(&observation_policy);
         let designated_core = DesignatedCheckedCore {
             evaluator: evaluator.clone(),
             result: designated.result().to_string(),
             trigger: DesignatedTriggerCore {
                 frontier: designated.tick_frontier().to_string(),
             },
-            result_frontier,
-            input_frontier,
-            result_version: ResultVersion::new(1),
-            evaluation_policy,
-            observation_policy,
-            policy_stamp,
+            result_frontier: template.result_frontier().clone(),
+            input_frontier: template.input_frontier().clone(),
+            result_version: template.result_version(),
+            evaluation_policy: template.policy_stamp().evaluation_policy.clone(),
+            observation_policy: template.observation_policy().clone(),
+            policy_stamp: template.policy_stamp().clone(),
             materialization: DesignatedMaterializationCore,
             expression,
             generated_remote_input_dependencies,
@@ -2431,6 +2645,8 @@ fn build_checked_artifact(
             owner_rmw_core: None,
             relation_core: None,
             designated_core: Some(designated_core),
+            designated_result_consumer_core: None,
+            authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::Value,
                 requester_site,
@@ -2462,6 +2678,93 @@ fn build_checked_artifact(
             span,
             None,
         ));
+    }
+
+    for consumer in ast.designated_result_consumers() {
+        let span = PipelineSourceSpan::from_surface(
+            consumed_m6_classification
+                .designated_result_consumer_template(
+                    consumer.evaluator(),
+                    consumer.result(),
+                    consumer.consumer_locus(),
+                )
+                .expect("accepted M6 classification retains every designated result consumer")
+                .source_span(),
+        );
+        let m6_consumer = consumed_m6_classification
+            .designated_result_consumer_template(
+                consumer.evaluator(),
+                consumer.result(),
+                consumer.consumer_locus(),
+            )
+            .expect("accepted M6 classification retains every designated result consumer");
+        let consumer_core = DesignatedResultConsumerCore {
+            evaluator: consumer.evaluator().to_string(),
+            result: consumer.result().to_string(),
+            consumer_locus: consumer.consumer_locus().to_string(),
+            source_ref: span.source_ref(),
+            result_ref_source_ref: PipelineSourceSpan::from_surface(consumer.result_ref_span())
+                .source_ref(),
+            result_frontier: m6_consumer.result_frontier().clone(),
+            input_frontier: m6_consumer.input_frontier().clone(),
+            result_version: m6_consumer.result_version(),
+            observation_policy: m6_consumer.observation_policy().clone(),
+            policy_stamp: m6_consumer.policy_stamp().clone(),
+            retry_contract: m6_consumer.static_retry_contract(),
+        };
+        let evaluator = consumer.evaluator().to_string();
+        let result = consumer.result().to_string();
+        evaluations.push(CheckedEvaluation {
+            kind: CheckedEvaluationKind::DesignatedResultConsume,
+            name: evaluator.clone(),
+            result_name: Some(result.clone()),
+            actor_authority_origin: String::new(),
+            authority_origin_locus: evaluator.clone(),
+            owner_evaluation_locus: consumer.consumer_locus().to_string(),
+            declared_failure_row: FailureRow::new([] as [String; 0]),
+            generated_failure_row: FailureRow::new([] as [String; 0]),
+            owner_rmw_core: None,
+            relation_core: None,
+            designated_core: None,
+            designated_result_consumer_core: Some(consumer_core),
+            authority_requirements: AuthorityRequirements::designated_result_consumer(
+                evaluator.clone(),
+                result.clone(),
+                consumer.consumer_locus(),
+            ),
+            evaluation_axes: EvaluationAxes::new(
+                SemanticForm::Value,
+                EvaluationSite::Locus(Locus::new(consumer.consumer_locus())),
+                TriggerClock::OnRequest,
+                AuthorityOrigin::AdmittedEvaluator(Locus::new(evaluator.clone())),
+                Materialization::LocalOnly,
+            ),
+            effect_row: EffectRow {
+                entries: vec![
+                    EffectEntry {
+                        evaluator: Some(evaluator.clone()),
+                        result: Some(result.clone()),
+                        ..EffectEntry::new(EffectKind::DesignatedResultDelivery, span.clone())
+                    },
+                    EffectEntry {
+                        evaluator: Some(evaluator),
+                        result: Some(result),
+                        ..EffectEntry::new(EffectKind::DesignatedResultConsume, span.clone())
+                    },
+                ],
+            },
+            generated_obligations: GeneratedObligations::designated_result_consumer(span.clone()),
+        });
+        source_map.add(
+            span,
+            SourceToCoreKind::DesignatedResultConsume,
+            format!(
+                "designated-consume:{}.{}:{}",
+                consumer.evaluator(),
+                consumer.result(),
+                consumer.consumer_locus(),
+            ),
+        );
     }
 
     for form in ast.deferred_forms().entries() {
@@ -2715,6 +3018,34 @@ fn declaration_consistency_diagnostic(ast: &SurfaceV0File) -> Option<SurfaceV0Pi
             return Some(SurfaceV0PipelineDiagnostics::one(
                 M7DiagnosticKind::UndefinedRoleEvaluationLocus,
                 PipelineSourceSpan::from_surface(role.evaluation_locus_span()),
+            ));
+        }
+    }
+    let mut designated_consumers = BTreeMap::new();
+    for consumer in ast.designated_result_consumers() {
+        if !known_locus(consumer.consumer_locus()) {
+            return Some(SurfaceV0PipelineDiagnostics::one(
+                M7DiagnosticKind::UndefinedDesignatedResultConsumerLocus,
+                PipelineSourceSpan::from_surface(consumer.consumer_locus_span()),
+            ));
+        }
+        if ast
+            .designated_result(consumer.evaluator(), consumer.result())
+            .is_none()
+        {
+            return Some(SurfaceV0PipelineDiagnostics::one(
+                M7DiagnosticKind::UnresolvedName,
+                PipelineSourceSpan::from_surface(consumer.result_ref_span()),
+            ));
+        }
+        let key = (consumer.evaluator(), consumer.result());
+        if designated_consumers
+            .insert(key, consumer.consumer_locus())
+            .is_some()
+        {
+            return Some(SurfaceV0PipelineDiagnostics::one(
+                M7DiagnosticKind::CompetingDesignatedResultConsumer,
+                PipelineSourceSpan::from_surface(consumer.span()),
             ));
         }
     }

@@ -89,6 +89,13 @@ pub enum Materialization {
     Persist,
 }
 
+/// The finite static retry rule for a consumer of a versioned designated
+/// result.  It is a semantic contract, not a transport retry policy.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum StaticRetryContractKind {
+    ReturnExistingNoNewConsumption,
+}
+
 impl Materialization {
     const fn canonical_rank(self) -> u8 {
         match self {

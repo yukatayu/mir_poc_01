@@ -132,6 +132,7 @@ pub enum SyntaxKind {
     Assignment,
     Relation,
     DesignatedResult,
+    DesignatedResultConsumer,
     WithAuth,
     Verify,
     RelationMutation,
@@ -282,6 +283,7 @@ pub struct SurfaceV0File {
     assignments: Vec<Assignment>,
     relations: Vec<MaintainedRelation>,
     designated_results: Vec<DesignatedResultDecl>,
+    designated_result_consumers: Vec<DesignatedResultConsumerDecl>,
     deferred_forms: DeferredForms,
     relation_mutations: Vec<RelationMutation>,
 }
@@ -366,6 +368,23 @@ impl SurfaceV0File {
         &self.designated_results
     }
 
+    pub fn designated_result_consumer(
+        &self,
+        evaluator: &str,
+        result: &str,
+        consumer_locus: &str,
+    ) -> Option<&DesignatedResultConsumerDecl> {
+        self.designated_result_consumers.iter().find(|decl| {
+            decl.evaluator == evaluator
+                && decl.result == result
+                && decl.consumer_locus == consumer_locus
+        })
+    }
+
+    pub fn designated_result_consumers(&self) -> &[DesignatedResultConsumerDecl] {
+        &self.designated_result_consumers
+    }
+
     pub fn deferred_forms(&self) -> &DeferredForms {
         &self.deferred_forms
     }
@@ -386,6 +405,11 @@ impl SurfaceV0File {
                 self.designated_results
                     .iter()
                     .map(|designated| &designated.node),
+            )
+            .chain(
+                self.designated_result_consumers
+                    .iter()
+                    .map(|consumer| &consumer.node),
             )
             .find(|node| node.kind == kind && node.label == label)
     }
@@ -1117,6 +1141,42 @@ pub struct DesignatedResultDecl {
     node: SyntaxNode,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct DesignatedResultConsumerDecl {
+    evaluator: String,
+    result: String,
+    consumer_locus: String,
+    result_ref_span: SurfaceV0Span,
+    consumer_locus_span: SurfaceV0Span,
+    node: SyntaxNode,
+}
+
+impl DesignatedResultConsumerDecl {
+    pub fn evaluator(&self) -> &str {
+        &self.evaluator
+    }
+
+    pub fn result(&self) -> &str {
+        &self.result
+    }
+
+    pub fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+
+    pub fn result_ref_span(&self) -> &SurfaceV0Span {
+        &self.result_ref_span
+    }
+
+    pub fn consumer_locus_span(&self) -> &SurfaceV0Span {
+        &self.consumer_locus_span
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        self.node.span()
+    }
+}
+
 impl DesignatedResultDecl {
     pub fn evaluator(&self) -> &str {
         &self.evaluator
@@ -1186,6 +1246,7 @@ struct Parser {
     assignments: Vec<Assignment>,
     relations: Vec<MaintainedRelation>,
     designated_results: Vec<DesignatedResultDecl>,
+    designated_result_consumers: Vec<DesignatedResultConsumerDecl>,
     deferred_forms: DeferredForms,
     relation_mutations: Vec<RelationMutation>,
 }
@@ -1204,6 +1265,7 @@ impl Parser {
             assignments: Vec::new(),
             relations: Vec::new(),
             designated_results: Vec::new(),
+            designated_result_consumers: Vec::new(),
             deferred_forms: DeferredForms::default(),
             relation_mutations: Vec::new(),
         }
@@ -1250,6 +1312,11 @@ impl Parser {
             .chain(self.roles.iter().map(|decl| decl.node.clone()))
             .chain(self.relations.iter().map(|decl| decl.node.clone()))
             .chain(self.designated_results.iter().map(|decl| decl.node.clone()))
+            .chain(
+                self.designated_result_consumers
+                    .iter()
+                    .map(|decl| decl.node.clone()),
+            )
             .collect();
         Ok(SurfaceV0File {
             root: SyntaxNode::new(SyntaxKind::Module, module.name.clone(), root_span, children),
@@ -1262,6 +1329,7 @@ impl Parser {
             assignments: self.assignments,
             relations: self.relations,
             designated_results: self.designated_results,
+            designated_result_consumers: self.designated_result_consumers,
             deferred_forms: self.deferred_forms,
             relation_mutations: self.relation_mutations,
         })
@@ -1657,6 +1725,30 @@ impl Parser {
 
     fn parse_designated(&mut self) -> Result<(), ParseDiagnostics> {
         let start = self.expect("designated")?.span;
+        if self.consume("consume") {
+            let (evaluator, result_start) = self.identifier()?;
+            self.expect(".")?;
+            let (result, result_end) = self.identifier()?;
+            let result_ref_span = joined_span(&result_start, &result_end);
+            self.expect("at")?;
+            let (consumer_locus, consumer_locus_span) = self.identifier()?;
+            let span = joined_span(&start, &consumer_locus_span);
+            self.designated_result_consumers
+                .push(DesignatedResultConsumerDecl {
+                    evaluator: evaluator.clone(),
+                    result: result.clone(),
+                    consumer_locus: consumer_locus.clone(),
+                    result_ref_span,
+                    consumer_locus_span,
+                    node: SyntaxNode::new(
+                        SyntaxKind::DesignatedResultConsumer,
+                        format!("{evaluator}.{result}@{consumer_locus}"),
+                        span,
+                        Vec::new(),
+                    ),
+                });
+            return Ok(());
+        }
         self.expect("evaluate")?;
         let (evaluator, _) = self.identifier()?;
         self.expect("on")?;

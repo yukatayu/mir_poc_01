@@ -18,6 +18,7 @@ pub(crate) use model::{
     ProjectedRelationAnchor, ProjectionDiagnosticKind, ProjectionDiagnostics,
     ProjectionRelationGraph, RelationAnchorRole, RelationGraphClaim, RelationGraphEdgeSeed,
     RelationGraphEdgeTag, RuntimeAdmissionStatus, RuntimeOccurrenceBinding, RuntimeOccurrenceKind,
-    RuntimeSeamRequirementKind, SeamAuthorityKind, StaticProjectionReadiness,
+    RuntimeSeamRequirementKind, SeamAuthorityKind, StaticConflictPolicyKind,
+    StaticConflictResolution, StaticProjectionReadiness,
 };
 pub(crate) use validate::verify_projection;

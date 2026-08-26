@@ -530,6 +530,7 @@ pub enum RuntimeLoweringKind {
     OwnerWrite,
     ObserverPublish,
     DesignatedDecision,
+    DesignatedResultConsume,
     RelationPublish,
     ConsumerLocalProjection,
     DeferredPolicy,
@@ -582,6 +583,9 @@ impl OrderedRuntimeLowering {
                         SourceToCoreKind::ObserverPublish => RuntimeLoweringKind::ObserverPublish,
                         SourceToCoreKind::DesignatedDecision => {
                             RuntimeLoweringKind::DesignatedDecision
+                        }
+                        SourceToCoreKind::DesignatedResultConsume => {
+                            RuntimeLoweringKind::DesignatedResultConsume
                         }
                         SourceToCoreKind::PublishRelation => RuntimeLoweringKind::RelationPublish,
                         SourceToCoreKind::ConsumerLocalProjection => {
