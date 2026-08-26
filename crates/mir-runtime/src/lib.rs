@@ -54,6 +54,8 @@ pub mod surface_source_patch_hotplug;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
+#[cfg(test)]
+mod sys2_execution_backend_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"
