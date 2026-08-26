@@ -1,5 +1,5 @@
 use mir_runtime::m10_reference_system::{M10ReferenceSystem, M10SourceRunRequest};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 
 const INLINE_M10_SOURCE: &str = r#"
 module M10.Temp.AttackRelation
@@ -110,6 +110,21 @@ fn temp_ordinary_source_flows_once_through_m6_m7_m8_m9_trace_and_projection() {
         &value,
         "/runtime/owner_rmw/request/owner_locus",
         json!("World"),
+    );
+    assert_json_pointer_eq(
+        &value,
+        "/runtime/semantic_kernel/owner_path",
+        json!("SemanticRuntimeKernel::from_m9_execution_seam"),
+    );
+    assert_json_pointer_eq(
+        &value,
+        "/runtime/semantic_kernel/lifecycle",
+        json!(["request", "serve", "reply", "receive_receipt"]),
+    );
+    assert_json_pointer_eq(
+        &value,
+        "/runtime/semantic_kernel/m8_runtime_owned",
+        json!(true),
     );
     assert_json_pointer_eq(
         &value,
