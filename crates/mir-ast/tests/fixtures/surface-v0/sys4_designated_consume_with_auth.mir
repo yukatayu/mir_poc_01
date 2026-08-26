@@ -1,0 +1,19 @@
+module Combat.Sys4.DesignatedConsumeAuth
+
+locus S
+locus E
+locus C
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 1
+designated consume E.result at C
+
+with auth MembershipAuth
+
+verify finite_refinement
