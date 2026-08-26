@@ -7,10 +7,10 @@ use mir_semantics::{
 };
 
 use crate::semantic_runtime_kernel::{
-    CapabilityRef, EffectHandlerAdmission, EffectHandlerFailure, EffectHandlerRequest,
-    EffectHandlerResult, EffectHandlerSite, FailureKind, FailureRow, KernelDiagnosticKind,
-    KernelSeed, KernelStateKey, LocusRef, MembershipEpoch, OperationId, OwnerRequestCarrier,
-    PrincipalRef, ProviderRef, RequestIdentity, SealedM9RuntimeAdmission, SemanticRuntimeKernel,
+    CapabilityRef, FailureKind, InputFrontier, KernelDiagnosticKind, KernelSeed, KernelStateKey,
+    LocusRef, MembershipEpoch, MembershipIncarnation, OperationId, OwnerRequestCarrier,
+    PrincipalRef, RemoteInputConsumeRequest, RemoteInputReleaseTuple, RemoteInputRequestCarrier,
+    RemoteInputResult, RequestIdentity, SealedM9RuntimeAdmission, SemanticRuntimeKernel,
     SemanticValue, SourceCoreProvenance, VisibilityClass, WitnessRef,
 };
 
@@ -22,12 +22,15 @@ const PRINCIPAL: &str = "self";
 const ACTOR_LOCUS: &str = "L_actor";
 const OWNER_LOCUS: &str = "S";
 const EVALUATOR_LOCUS: &str = "E";
-const PROVIDER_LOCUS: &str = "P_effect";
 const TARGET_ID: &str = "target";
 const OWNER_OPERATION: &str = "attack";
 const OWNER_MEMBERSHIP_REF: &str = "membership:self:S:epoch1";
+const OWNER_INCARNATION_REF: &str = "incarnation:self:S:epoch1";
 const OWNER_CAPABILITY_REF: &str = "cap:attack:S:self:epoch1";
 const OWNER_WITNESS_REF: &str = "witness:attack:S:self:epoch1";
+const DESIGNATED_RESULT: &str = "result";
+const DESIGNATED_INPUT_FRONTIER: &str = "F";
+const DESIGNATED_INPUT_RELEASE_LABEL: &str = "input:player[self].atk:S:F";
 
 fn surface_fixture_path(name: &str) -> String {
     format!("{SURFACE_FIXTURE_DIR}/{name}")
@@ -95,6 +98,10 @@ fn designated_source_ref(path: &str, source: &str) -> SourceRef {
     )
 }
 
+fn designated_input_source_ref(path: &str, source: &str) -> SourceRef {
+    source_ref(path, source, "player[self].atk")
+}
+
 fn hp_key() -> KernelStateKey {
     KernelStateKey::indexed_field("player", TARGET_ID, "hp")
 }
@@ -126,6 +133,7 @@ fn sealed_owner_admission(checked: &CheckedSurfaceV0) -> SealedM9RuntimeAdmissio
         PrincipalRef::new(PRINCIPAL),
         LocusRef::new(OWNER_LOCUS),
         MembershipEpoch::new("epoch1"),
+        MembershipIncarnation::new(OWNER_INCARNATION_REF),
         CapabilityRef::new(OWNER_CAPABILITY_REF),
         WitnessRef::new(OWNER_WITNESS_REF),
     )
@@ -141,6 +149,7 @@ fn owner_attack_request(
         .with_argument("target", TARGET_ID)
         .with_membership_ref(OWNER_MEMBERSHIP_REF)
         .with_membership_epoch(MembershipEpoch::new("epoch1"))
+        .with_membership_incarnation(MembershipIncarnation::new(OWNER_INCARNATION_REF))
         .with_capability_ref(CapabilityRef::new(OWNER_CAPABILITY_REF))
         .with_witness_ref(WitnessRef::new(OWNER_WITNESS_REF))
         .with_provenance(owner_provenance(checked, operation_source))
@@ -153,6 +162,69 @@ fn owner_kernel() -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
     let kernel = SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, owner_seed())
         .expect("sealed M9 admission should create the SYS-1 semantic runtime kernel");
     (checked, operation_ref, kernel)
+}
+
+fn designated_release_tuple() -> RemoteInputReleaseTuple {
+    RemoteInputReleaseTuple::new(
+        PrincipalRef::new(PRINCIPAL),
+        LocusRef::new(OWNER_LOCUS),
+        LocusRef::new(EVALUATOR_LOCUS),
+        DESIGNATED_INPUT_RELEASE_LABEL,
+    )
+    .with_visibility(VisibilityClass::RestrictedRedacted)
+}
+
+fn designated_seed() -> KernelSeed {
+    KernelSeed::new().with_int(atk_key(), 10)
+}
+
+fn sealed_designated_remote_input_admission(
+    checked: &CheckedSurfaceV0,
+) -> SealedM9RuntimeAdmission {
+    SealedM9RuntimeAdmission::test_seal_checked_designated_remote_input_lineage(
+        checked,
+        EVALUATOR_LOCUS,
+        DESIGNATED_RESULT,
+        0,
+        PrincipalRef::new(PRINCIPAL),
+        LocusRef::new(OWNER_LOCUS),
+        LocusRef::new(EVALUATOR_LOCUS),
+        MembershipEpoch::new("epoch1"),
+        MembershipIncarnation::new(OWNER_INCARNATION_REF),
+        designated_release_tuple(),
+    )
+}
+
+fn designated_remote_input_request(
+    checked: &CheckedSurfaceV0,
+    input_source_ref: SourceRef,
+) -> RemoteInputRequestCarrier {
+    RemoteInputRequestCarrier::from_checked_designated_dependency(
+        checked,
+        EVALUATOR_LOCUS,
+        DESIGNATED_RESULT,
+        0,
+    )
+    .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new(EVALUATOR_LOCUS))
+    .with_source_owner(LocusRef::new(OWNER_LOCUS))
+    .with_target_evaluator(LocusRef::new(EVALUATOR_LOCUS))
+    .with_input_frontier(InputFrontier::new(DESIGNATED_INPUT_FRONTIER))
+    .with_release_tuple(designated_release_tuple())
+    .with_membership_ref(OWNER_MEMBERSHIP_REF)
+    .with_membership_epoch(MembershipEpoch::new("epoch1"))
+    .with_membership_incarnation(MembershipIncarnation::new(OWNER_INCARNATION_REF))
+    .with_capability_ref(CapabilityRef::new(OWNER_CAPABILITY_REF))
+    .with_witness_ref(WitnessRef::new(OWNER_WITNESS_REF))
+    .with_source_ref(input_source_ref)
+}
+
+fn designated_kernel() -> (String, String, CheckedSurfaceV0, SemanticRuntimeKernel) {
+    let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
+    let admission = sealed_designated_remote_input_admission(&checked);
+    let kernel =
+        SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, designated_seed())
+            .expect("sealed M9 designated remote-input admission should enter the kernel");
+    (path, source, checked, kernel)
 }
 
 #[test]
@@ -205,6 +277,10 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
     );
     assert_eq!(receipt.witness_refs(), [WitnessRef::new(OWNER_WITNESS_REF)]);
     assert_eq!(receipt.membership_epoch(), &MembershipEpoch::new("epoch1"));
+    assert_eq!(
+        receipt.membership_incarnation(),
+        &MembershipIncarnation::new(OWNER_INCARNATION_REF)
+    );
     assert!(receipt.redaction().is_observer_safe());
 }
 
@@ -299,15 +375,21 @@ fn source_free_or_forged_authority_carrier_cannot_mutate_or_mint_authority() {
         .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new(ACTOR_LOCUS))
         .with_target_owner(LocusRef::new(OWNER_LOCUS))
         .with_argument("target", TARGET_ID);
-    let forged_authority = owner_attack_request(&checked, operation_ref)
+    let forged_authority = owner_attack_request(&checked, operation_ref.clone())
         .with_capability_ref(CapabilityRef::new("cap:forged-by-carrier"))
         .with_witness_ref(WitnessRef::new("witness:forged-by-carrier"));
+    let stale_incarnation = owner_attack_request(&checked, operation_ref)
+        .with_membership_incarnation(MembershipIncarnation::new("incarnation:self:S:stale"));
 
     for (carrier, expected) in [
         (source_free, KernelDiagnosticKind::SourceFreeCarrierRejected),
         (
             forged_authority,
             KernelDiagnosticKind::AuthorityLineageRejected,
+        ),
+        (
+            stale_incarnation,
+            KernelDiagnosticKind::StaleMembershipIncarnation,
         ),
     ] {
         let diagnostics = kernel
@@ -320,89 +402,160 @@ fn source_free_or_forged_authority_carrier_cannot_mutate_or_mint_authority() {
 }
 
 #[test]
-fn designated_remote_request_effect_handler_is_typed_without_owner_mutation_authority() {
-    let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
+fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_consume() {
+    let (path, source, checked, mut kernel) = designated_kernel();
     let designated_ref = designated_source_ref(&path, &source);
-    let admission = SealedM9RuntimeAdmission::test_seal_checked_designated_lineage(
-        &checked,
-        PrincipalRef::new(PRINCIPAL),
-        LocusRef::new(EVALUATOR_LOCUS),
-        MembershipEpoch::new("epoch1"),
-    );
-    let mut kernel =
-        SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, KernelSeed::new())
-            .expect("designated source plus sealed M9 admission enters kernel");
-    let provider = ProviderRef::new("effect-provider:bounded-designated-input");
-    let handler = EffectHandlerAdmission::new(EffectHandlerSite::provider(
-        LocusRef::new(PROVIDER_LOCUS),
-        provider.clone(),
-    ))
-    .with_effect(EffectKind::DesignatedRemoteRequest)
-    .with_declared_failures(FailureRow::new([
-        FailureKind::RouteUnavailable,
-        FailureKind::HandlerRejected,
-    ]));
-    let request =
-        EffectHandlerRequest::from_checked_designated_remote_request(&checked, "E", "result", 0)
-            .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new(ACTOR_LOCUS))
-            .with_handler(handler.clone())
-            .with_source_ref(designated_ref);
+    let input_ref = designated_input_source_ref(&path, &source);
+    let designated = checked
+        .designated_result(EVALUATOR_LOCUS, DESIGNATED_RESULT)
+        .expect("checked designated result exists");
+    let designated_core = designated
+        .designated_core()
+        .expect("checked designated result retains Core");
+    let dependency = designated_core
+        .generated_remote_input_dependencies()
+        .first()
+        .expect("designated input read generates a remote-input dependency");
 
-    let pending = kernel
-        .request_effect(request)
-        .expect("DesignatedRemoteRequest becomes a typed effect request");
+    assert_eq!(designated.source_ref(), &designated_ref);
+    assert_eq!(dependency.designated_evaluator(), EVALUATOR_LOCUS);
+    assert_eq!(dependency.source_owner_locus(), OWNER_LOCUS);
+    assert_eq!(dependency.typed_state_read().namespace(), "player");
+    assert_eq!(dependency.typed_state_read().index(), Some(PRINCIPAL));
+    assert_eq!(dependency.typed_state_read().field(), Some("atk"));
+    assert_eq!(dependency.typed_state_read().owner_locus(), OWNER_LOCUS);
+    assert_eq!(dependency.typed_state_read().source_ref(), input_ref);
     assert!(
-        pending
+        designated
             .effect_row()
-            .contains(EffectKind::DesignatedRemoteRequest)
+            .entries()
+            .iter()
+            .any(|entry| entry.kind() == EffectKind::DesignatedRemoteRequest)
     );
-    assert!(!pending.handler_site().is_semantic_owner());
+    assert!(
+        designated
+            .effect_row()
+            .entries()
+            .iter()
+            .any(|entry| entry.kind() == EffectKind::DesignatedReceiptUse)
+    );
 
-    let result = kernel
-        .complete_effect(
-            pending.request_identity(),
-            EffectHandlerResult::success(SemanticValue::Int(11)).from_provider(provider.clone()),
+    let requested = kernel
+        .enqueue_remote_input_request(designated_remote_input_request(&checked, input_ref.clone()))
+        .expect("checked dependency and sealed M9 lineage admit remote input request");
+    let served = kernel
+        .serve_next_remote_input(LocusRef::new(OWNER_LOCUS))
+        .expect("source owner serves the remote input read");
+    let reply = kernel
+        .reply_to_remote_input(
+            served.serve_occurrence(),
+            RemoteInputResult::success(SemanticValue::Int(10)),
         )
-        .expect("admitted provider returns typed success");
-    assert_eq!(result.provider(), &provider);
-    assert_eq!(result.value(), Some(&SemanticValue::Int(11)));
-    assert!(result.owner_mutation().is_none());
-    assert!(kernel.trace().contains_effect_lifecycle(
-        pending.request_identity(),
-        ["effect_request", "handler_result"]
-    ));
+        .expect("source owner emits a typed remote input reply");
+    let receipt = kernel
+        .receive_remote_input_reply(reply)
+        .expect("remote input reply installs exactly one typed receipt");
+    let consumed = kernel
+        .consume_remote_input_receipt(
+            RemoteInputConsumeRequest::from_checked_designated_dependency(
+                &checked,
+                EVALUATOR_LOCUS,
+                DESIGNATED_RESULT,
+                0,
+            )
+            .with_receipt(receipt.receipt_id())
+            .with_evaluator(LocusRef::new(EVALUATOR_LOCUS)),
+        )
+        .expect("designated evaluator consumes the exact receipt");
 
-    let rejected = kernel
-        .complete_effect(
-            pending.request_identity(),
-            EffectHandlerResult::success(SemanticValue::Int(12))
-                .from_provider(provider)
-                .with_owner_mutation(hp_key(), SemanticValue::Int(0)),
-        )
-        .expect_err("provider result cannot carry owner mutation authority");
     assert_eq!(
-        rejected.primary().kind(),
-        KernelDiagnosticKind::ProviderCannotMutateOwnerState
+        kernel.trace().lifecycle_for(requested.request_identity()),
+        ["request", "serve", "reply", "receive_receipt", "consume",]
     );
-
-    let failed_pending = kernel
-        .request_effect(
-            EffectHandlerRequest::declared_for_test(EffectKind::DesignatedRemoteRequest)
-                .with_handler(handler),
-        )
-        .expect("declared effect request is admitted before handler failure");
-    let failed = kernel
-        .complete_effect(
-            failed_pending.request_identity(),
-            EffectHandlerResult::failure(EffectHandlerFailure::declared(
-                FailureKind::HandlerRejected,
-            )),
-        )
-        .expect("declared handler failure is typed and traceable");
+    assert_eq!(receipt.request_identity(), requested.request_identity());
+    assert_eq!(receipt.source_owner(), &LocusRef::new(OWNER_LOCUS));
+    assert_eq!(receipt.target_evaluator(), &LocusRef::new(EVALUATOR_LOCUS));
+    assert_eq!(receipt.release_tuple(), &designated_release_tuple());
     assert_eq!(
-        failed.failure(),
-        Some(&EffectHandlerFailure::declared(
-            FailureKind::HandlerRejected
-        ))
+        receipt.input_frontier(),
+        &InputFrontier::new(DESIGNATED_INPUT_FRONTIER)
     );
+    assert_eq!(
+        receipt.visibility_class(),
+        VisibilityClass::RestrictedRedacted
+    );
+    assert_eq!(receipt.source_ref(), &input_ref);
+    assert_eq!(
+        receipt.effect_row().entries(),
+        [EffectKind::DesignatedRemoteRequest]
+    );
+    assert!(
+        receipt
+            .failure_row()
+            .contains(FailureKind::RouteUnavailable)
+    );
+    assert_eq!(receipt.value(), Some(&SemanticValue::Int(10)));
+    assert_eq!(
+        receipt.membership_incarnation(),
+        &MembershipIncarnation::new(OWNER_INCARNATION_REF)
+    );
+    assert_eq!(consumed.value(), Some(&SemanticValue::Int(10)));
+    assert_eq!(kernel.semantic_snapshot().int(&atk_key()), Some(10));
+    assert_eq!(kernel.semantic_snapshot().int(&hp_key()), None);
+
+    let duplicate = kernel
+        .reply_to_remote_input(
+            served.serve_occurrence(),
+            RemoteInputResult::panic_if_inspected_for_test(
+                "duplicate remote input payload must not be inspected",
+            ),
+        )
+        .expect_err("duplicate remote input result is rejected before payload inspection");
+    assert_eq!(
+        duplicate.primary().kind(),
+        KernelDiagnosticKind::DuplicateReply
+    );
+}
+
+#[test]
+fn designated_remote_input_rejects_stale_or_mismatched_carriers_without_receipt_or_mutation() {
+    let (path, source, checked, mut kernel) = designated_kernel();
+    let input_ref = designated_input_source_ref(&path, &source);
+    let before = kernel.semantic_snapshot().clone();
+    let before_receipts = kernel.receipt_store().clone();
+    let base = designated_remote_input_request(&checked, input_ref);
+
+    let stale_incarnation = base
+        .clone()
+        .with_membership_incarnation(MembershipIncarnation::new("incarnation:self:S:stale"));
+    let stale_frontier = base
+        .clone()
+        .with_input_frontier(InputFrontier::new("stale-F"));
+    let wrong_release_tuple = base
+        .clone()
+        .with_release_tuple(RemoteInputReleaseTuple::new(
+            PrincipalRef::new(PRINCIPAL),
+            LocusRef::new(OWNER_LOCUS),
+            LocusRef::new("WrongEvaluator"),
+            DESIGNATED_INPUT_RELEASE_LABEL,
+        ));
+
+    for (carrier, expected) in [
+        (
+            stale_incarnation,
+            KernelDiagnosticKind::StaleMembershipIncarnation,
+        ),
+        (stale_frontier, KernelDiagnosticKind::InputFrontierMismatch),
+        (
+            wrong_release_tuple,
+            KernelDiagnosticKind::ReleaseTupleMismatch,
+        ),
+    ] {
+        let diagnostics = kernel
+            .enqueue_remote_input_request(carrier)
+            .expect_err("malformed designated remote input carrier fails closed");
+        assert_eq!(diagnostics.primary().kind(), expected);
+        assert_eq!(kernel.semantic_snapshot(), &before);
+        assert_eq!(kernel.receipt_store(), &before_receipts);
+    }
 }
