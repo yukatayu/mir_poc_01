@@ -161,7 +161,7 @@ fn owner_attack_request(
     operation_source: SourceRef,
 ) -> OwnerRequestCarrier {
     OwnerRequestCarrier::new(OperationId::new(OWNER_OPERATION))
-        .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new(ACTOR_LOCUS))
+        .with_origin(PrincipalRef::new(PRINCIPAL), LocusRef::new(OWNER_LOCUS))
         .with_target_owner(LocusRef::new(OWNER_LOCUS))
         .with_argument("target", TARGET_ID)
         .with_membership_ref(OWNER_MEMBERSHIP_REF)
@@ -327,7 +327,7 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
     );
     assert_eq!(receipt.request_identity(), queued.request_identity());
     assert_eq!(receipt.origin_principal(), &PrincipalRef::new(PRINCIPAL));
-    assert_eq!(receipt.origin_locus(), &LocusRef::new(ACTOR_LOCUS));
+    assert_eq!(receipt.origin_locus(), &LocusRef::new(OWNER_LOCUS));
     assert_eq!(receipt.target_owner(), &LocusRef::new(OWNER_LOCUS));
     assert_eq!(receipt.operation(), &OperationId::new(OWNER_OPERATION));
     assert_eq!(receipt.source_ref(), &operation_ref);
