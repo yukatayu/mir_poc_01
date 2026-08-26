@@ -1,6 +1,6 @@
 # Plan 249 — Mirrorea I2 Systems Foundation current roadmap
 
-最終更新: 2026-08-26 23:09 JST
+最終更新: 2026-08-27 01:09 JST
 
 ## 役割、authority、current control state
 
@@ -25,17 +25,21 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   process 内の independent locus runtimes で実 dispatch し、source から runtime
   occurrence まで typed devtools で追跡できる local toy fabric を完成させる。
 - completed goals: prior ADR-0015 **M0--M10** baseline, **SYS-0 baseline and
-  goal alignment**, and **SYS-1 runtime kernel / internal carrier boundary**
+  goal alignment**, **SYS-1 runtime kernel / internal carrier boundary**, and
+  **SYS-2 concurrency, memory, and effect-handler refinement**
 - accepted SYS-1 source/evidence cut:
   `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`
-- active goal: **SYS-2 concurrency, memory, and effect-handler refinement**
-- next goal: **SYS-3 per-locus projection and executable artifact generation**
-- current direct blocker: the SYS-1 kernel consumes an immutable final M9
-  authority snapshot; SYS-2 must define the ST/OW happens-before,
-  linearization, and visibility mapping that prevents stale use after
-  revoke/publication/activation/cut edges without importing low-level memory
-  order into ordinary Surface.
-- official lifecycle: theory **T1**。program activation and SYS-0/SYS-1
+- accepted SYS-2 source/evidence cut:
+  `920d3fe050b8b909253f8511d9ad897272323ced`
+- active goal: **SYS-3 per-locus projection and executable artifact generation**
+- next goal: **SYS-4 in-process generated dispatch runtime**
+- current direct blocker: checked global Core does not yet deterministically
+  emit independently executable locus programs and complete generated
+  communication/effect/observation/persistence plans. SYS-3 must preserve
+  owner, source/Core provenance, failure/effect rows, relation lineage, and
+  the SYS-2 ST/OW1 backend requirements without handwritten interfaces or
+  runtime semantic reconstruction.
+- official lifecycle: theory **T1**。program activation and SYS-0--SYS-2
   completion do not accept broad PHASE-I1 exit, I2 lifecycle entry, or I2 exit.
 
 Plan 247 は closed M0--M10 execution record / R5 regression baseline のまま保持する。
@@ -74,7 +78,7 @@ Parent-goal stop evidence:
 
 Milestone addition or reordering requires evidence that the parent goal cannot
 close without it and an explanation in this roadmap. No such addition exists
-through SYS-1.
+through SYS-2.
 
 ```text
 SYS-0 Baseline and goal alignment
@@ -215,7 +219,7 @@ weakening criteria. Reopen on source-free mint/mutation, wrong lineage or
 identity acceptance, kernel dependency on M10 orchestration, or stale use
 past the visibility edge SYS-2 must define.
 
-### SYS-2 — Concurrency, memory, and effect-handler refinement (active)
+### SYS-2 — Concurrency, memory, and effect-handler refinement (completed)
 
 **Goal ID:** SYS-2
 
@@ -247,18 +251,21 @@ real networking, performance optimization, ordinary-Surface memory syntax.
 grant/revoke→use, activation→request, or cut→mutation visibility edge is not
 detected, or ST/OW yield different permitted semantic results.
 
-**Exit evidence:** ST preserved; OW execution; abstract happens-before,
-linearization, reads-from/coherence mapping where needed; owner data-race
-freedom evidence; required litmus/model cases including owner messaging, store
-buffering, publication, witness/capability, patch, save, relation epoch, two
-RMW, and presentation-gap nonmutation; exact proof/model/runtime classes;
-independent review.
+**Exit evidence:** Source cut `920d3fe050b8b909253f8511d9ad897272323ced`;
+deterministic ST plus one coordinator/one dedicated worker-exclusive M8 OW1
+for exactly one combined owner/source-owner locus; actual M8 enqueue/read/write
+linearization and reads-from/coherence evidence; same-seam M9 revoke/full
+retranslation/ack-before-generation-publish; source-owner-derived remote
+effect result/consume; 27/27 focused tests; replayable bound-6 ten-edge model;
+OBL-058 `model-checked-bounded` and OBL-059 `runtime-monitored`; preserved
+SYS-1/M10/full-runtime regression; four independent review lanes ACCEPT with
+no remaining P0/P1/P2.
 
 **Stop condition:** Close when all required edges have a finite mapping and
 counterexample, selected ST/OW observations agree, and SYS-3 has a concrete
 backend contract; defer arbitrary fairness/memory generalization.
 
-### SYS-3 — Per-locus projection and executable artifact generation (next)
+### SYS-3 — Per-locus projection and executable artifact generation (active)
 
 **Goal ID:** SYS-3
 
@@ -303,7 +310,7 @@ reconstruction and every accepted Core operation has complete visible
 placement/communication or a typed projection diagnostic. Defer general DAG
 theory and optimized codegen.
 
-### SYS-4 — In-process generated dispatch runtime
+### SYS-4 — In-process generated dispatch runtime (next)
 
 **Goal ID:** SYS-4
 
@@ -491,15 +498,15 @@ This is a decision aid for program scope, not a new semantic encyclopedia.
 | meaning-derived communication | North Star, C3, BND-001/006 | finite source-to-Core/generated-edge M10 evidence | no general per-locus executable communication path | SYS-1 carrier; SYS-3/4 projection/dispatch |
 | per-locus code generation | S4 projection, `mir-project` responsibility | no accepted generator | global checked Core does not emit runnable locus artifacts | SYS-3, then SYS-4 |
 | ordinary Surface | C2, M6/M7 bounded source path | accepted ordinary `.mir` finite profile | not final grammar; no I2 build/project path | SYS-3/5 |
-| owner evaluation | C4/C5, theory/13, M7/M8 | owner-side RMW, FIFO runtime, and SYS-1 crate-private kernel | concurrent worker refinement absent | SYS-2/4 |
+| owner evaluation | C4/C5, theory/13, M7/M8 | owner-side RMW plus SYS-2 ST/OW1 actual M8 linearization/reads-from evidence | generated artifact placement has not yet bound the backend requirement | SYS-3/4 |
 | relation-first late projection | C7, theory/14, BND-006 | finite two-anchor relation/consumer projection | artifact placement and conservative DAG extension boundary absent | SYS-3/5 |
 | existence/fallback DAG | theory/06/14 monotone lineage | two-anchor/three-floor finite evidence | broader finite acyclic pressure case not projected/executed | SYS-3/5 |
 | designated evaluation/timing | C6, theory/13, M7/M8 | version/frontier decision and finite consume path | generated evaluator placement/delivery across locus artifacts absent | SYS-3/4/5 |
-| auth layers | C9, theory/05/18, M9 | source-bound membership/capability/witness seam integrated into SYS-1 carrier | component dispatch and revoke-after-enqueue/serve visibility absent | SYS-2/4/5 |
+| auth layers | C9, theory/05/18, M9 | source-bound seam plus SYS-2 same-seam revoke/full retranslation/ack-before-publish | per-locus artifact authority obligations and component dispatch absent | SYS-3/4/5 |
 | optional verification | C9/C11, M9 verifier lane | residual/evidence/diagnostic finite seam | runtime/devtools residual/discharge path not joined | SYS-5/6 |
-| algebraic-effect-like visible operations | effect/failure rows, provider/adaptor BNDs | bounded designated remote-input request→source-owner→result→consume contract | ST/OW ordering and later generated handler plan absent; generic registry intentionally unclaimed | SYS-2/3/4 |
+| algebraic-effect-like visible operations | effect/failure rows, provider/adaptor BNDs | bounded designated remote-input request→source-owner read→derived result→consume in ST/OW1 | generated per-locus EffectHandlerPlan absent; generic registry intentionally unclaimed | SYS-3/4 |
 | save/load and Z-cycle | C10, theory/04, M8 local cut | finite local save/restore; general Z-cycle obligations deferred | whole in-process multi-locus artifact/communication cut absent | SYS-4/5/6 |
-| atomicity / memory order | ADR-0007, theory/04 high-level edges, owner seriality | deterministic ST reference | no OW happens-before/visibility/refinement mapping | SYS-2/4/6 |
+| atomicity / memory order | ADR-0007, theory/04 high-level edges, owner seriality | deterministic ST, OW1 worker-exclusive store, ten-edge bounded model and missing-edge counterexamples | multi-locus generated artifact/runtime mapping absent; no general memory theorem | SYS-3/4/6 |
 | browser/headless participation | North Star browser participation horizon; host boundary | headless/helper LAB evidence only | no I2 local causal toy workflow | SYS-5 headless; browser deferred |
 | View / FFI | BND-007 provider/View split | historical LAB/provider evidence | final View/renderer and public FFI not selected | deferred; SYS-5 only minimal report |
 | hot-plug | C10, theory/08, finite M8/M10 patch | accepted/rejected bounded patch evidence | generated-artifact/dispatch lifecycle integration absent | SYS-4/5/6 |
@@ -590,19 +597,52 @@ serve as its independent reviewer.
   M10 SCN-04/09/10/route-patch runners and legacy M8 receipt fixture APIs are
   not SYS-1 kernel evidence.
 
-### SYS-2 direct blockers
+### SYS-2 accepted close evidence
 
-1. Define abstract happens-before and operation linearization for the SYS-1
-   owner and designated remote-input lifecycle in both deterministic ST and
-   one-owner-worker (OW) profiles.
-2. Replace the immutable-snapshot gap with an explicit mapping for
-   revoke-after-enqueue/serve, publication/observation, patch activation,
-   save-cut, witness creation, and relation epoch/sample visibility.
-3. Demonstrate selected ST/OW semantic correspondence and owner data-race
-   freedom, including counterexamples when a required edge is removed.
-4. Keep the bounded remote-input effect ordering explicit without inventing a
-   generic provider registry, lock-free requirement, or Surface
-   `memory_order_*` vocabulary.
+- Accepted source/evidence cut:
+  `920d3fe050b8b909253f8511d9ad897272323ced`.
+- ST remains the deterministic reference. OW1 admits exactly one combined
+  semantic owner/source-owner locus, whose dedicated worker exclusively owns
+  M8 state through acknowledged zero-capacity mailbox commands; another locus
+  count fails typed without state duplication.
+- Successful owner RMW evidence names the actual M8 enqueue, `OwnerRead`, and
+  `OwnerWrite` nodes, with the write as linearization point and per-key
+  version/preceding writer as reads-from/coherence. Failed/revoked serve does
+  not fabricate those rows.
+- Designated remote result derives from the acknowledged source-owner read;
+  a supplied mismatch fails before reply/receipt/mutation and the successful
+  lifecycle reaches explicit evaluator consume.
+- Same-seam M9 revoke fully retranslates the inventory, retains unrelated
+  owner/designated-release lineages and monotone tombstones, waits for ST/OW1
+  owner install acknowledgement, then publishes the successor. A queued stale
+  use rejects with `MissingCapability` and no mutation.
+- The bound-6 typed transition model covers ten required edge families and
+  returns replayable missing-edge counterexamples. Full-edge ST/OW1 selected
+  outcomes agree; store buffering is a separate explicit weak-memory
+  calibration.
+- Combined SYS-2 focused tests passed 27/27 (13 external model + 9 backend + 5
+  internal model-regression). SYS-1 13/13, M10 source 2/2, CLI 4/4,
+  conformance 67/67, full `mir-runtime`, format, warnings-denied Clippy, and
+  diff check passed. Evidence is OBL-058 `model-checked-bounded` plus OBL-059
+  `runtime-monitored`; no Lean/general theorem was added.
+- Semantic/specification, concurrency/code-quality, finite-model, and
+  test-contract reviewers accepted the corrected cut with no remaining
+  P0/P1/P2 finding.
+
+### SYS-3 direct blockers
+
+1. Define the smallest internal `GlobalProjectionResult` and deterministic
+   `LocusProgram`/communication/effect/observation/persistence plan boundary
+   from checked Core plus logical topology.
+2. Prove by construction/tests that every emitted communication edge is
+   source/Core-derived and every accepted cross-locus operation has a complete
+   explicit edge/failure/authority/provenance account.
+3. Preserve same-owner RMW placement, designated non-reexecution, relation/
+   fallback lineage, source spans, and SYS-2 ST/OW1 backend requirements while
+   rejecting malformed/cyclic/owner-moving projection.
+4. Add one conservative finite relation-DAG pressure case without making the
+   M10 two-anchor profile a permanent Core restriction or claiming an
+   arbitrary-DAG theorem.
 
 ## Risks, assumptions, and decision checkpoints
 
@@ -664,11 +704,12 @@ silently folded into the active Mir/Mirrorea kernel.
 
 ## Recommended next action
 
-SYS-1 is completed and SYS-2 is active. The parent first commits and pushes
-this Canon/report/status closeout successor to source cut `94e3707c...` and
-verifies clean remote parity; no SYS-2 source change begins before that
-repository-state check. Then pin the smallest ST and OW backend contracts to
-the SYS-1 owner/designated-input lifecycle, write the required edge-removal
-litmus falsifiers first, and map revocation/publication/activation/cut
-visibility to high-level Mir order. Do not start SYS-3 projection semantics
-until SYS-2 evidence, review, report, commit/push, and remote parity close.
+SYS-2 is completed and SYS-3 is active. The parent first commits and pushes
+this Canon/report/status closeout successor to source cut `920d3fe0...` and
+verifies clean remote parity; no SYS-3 source change begins before that
+repository-state check. Then define the smallest checked-Core-driven
+`GlobalProjectionResult`, per-locus program, and generated plan boundary, with
+determinism and no-hidden-edge/owner-preservation falsifiers before
+implementation. Preserve the SYS-2 ST/OW1 semantic requirements without
+exposing its Rust mailbox/worker layout. Do not start SYS-4 dispatch until
+SYS-3 evidence, review, report, commit/push, and remote parity close.

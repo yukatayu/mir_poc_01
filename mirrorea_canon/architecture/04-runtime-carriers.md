@@ -2,8 +2,8 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027]
-summary: broad runtime carrier catalogと、SYS-1で固定したcrate-private owner/designated-input lifecycle carrier。public API/ABI/wireは未凍結。
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028]
+summary: broad runtime carrier catalog、SYS-1 internal lifecycle、SYS-2 ST/OW1 ordering evidence boundary。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
 
@@ -113,11 +113,50 @@ instance at the admitted source owner. It is not a generic provider registry,
 and transport, auth, projection, persistence, and semantic ownership remain
 separate subsystems.
 
+## SYS-2 selected execution evidence boundary
+
+ADR-0028 fixes two internal execution profiles for the preceding lifecycle.
+ST is the deterministic single-thread reference. OW1 is deliberately bounded
+to exactly one combined semantic owner/source-owner locus: one dedicated
+worker exclusively owns `M8LocalRuntime`, while a coordinator communicates
+through an acknowledged zero-capacity synchronous mailbox. The coordinator
+may retain checked Core, carriers, queues/receipts, and typed ordering
+evidence, but exposes no public shared mutable M8 store. A different combined-
+locus count fails typed; it does not silently share or duplicate owner state.
+
+The evidence carrier is logical and provisional rather than a Rust/public
+schema. It retains, where applicable:
+
+```text
+profile and admitted owner/source-owner locus
+request/serve/reply/receive/consume occurrences
+actual M8 enqueue occurrence
+actual owner-read and owner-write trace nodes
+per-key written version and preceding writer/request
+M9 authority generation and acknowledged publish occurrence
+source-owner read value/version and producer/evaluator release lineage
+worker-execution observation (debug evidence only; never authority)
+```
+
+A successful owner write linearizes at the actual acknowledged M8
+`OwnerWrite` node. A failed/revoked serve has no write linearization,
+reads-from, or version-advance row. A designated-input reply derives from the
+acknowledged source-owner read; caller-supplied mismatch rejects before reply,
+receipt, or mutation. Worker identity, mailbox position, and authority
+generation are evidence/correlation, not authority.
+
+An M9 successor is published only after complete retranslation and the sole
+M8 owner refresh acknowledgement. It must preserve checked program identity,
+advance generation strictly, retain prior tombstones monotonically, and keep
+unrelated admitted owner/designated-release lineages. This boundary does not
+freeze concrete channel types, field names, or an artifact/backend ABI. SYS-3
+may consume its semantic requirements, not its Rust layout.
+
 ## Resolution and remaining L2 boundary
 
-OPEN-030 is resolved for the preceding I2-internal lifecycle only. Its public
-encoding, real transport mapping, retry policy, and compatibility remain
-unset. This file stays L2-working because OPEN-026 field-name/IR exchange,
-OPEN-027 external delivery observability, and the broader carrier catalog/full
-internal freeze remain unresolved. The immutable M9 admission snapshot also
-leaves revoke-after-enqueue/serve visibility to SYS-2's ST/OW refinement.
+OPEN-030 is resolved for the preceding I2-internal lifecycle only. ADR-0028
+closes its selected ST/OW1 ordering and live M9-generation visibility residual,
+but not its public encoding, real transport mapping, retry policy, or
+compatibility. This file stays L2-working because OPEN-026 field-name/IR
+exchange, OPEN-027 external delivery observability, and the broader carrier
+catalog/full internal freeze remain unresolved.

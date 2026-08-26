@@ -2,8 +2,8 @@
 id: theory/05-authority
 status: L1-fixed
 maturity: draft
-depends_on: [theory/01-mircore-v0, adr/ADR-0005]
-summary: role claim / admission / capability 系譜 / witness / incarnation の権限代数と THM-004。
+depends_on: [theory/01-mircore-v0, adr/ADR-0005, adr/ADR-0028]
+summary: role claim / admission / capability系譜 / witness / incarnation / bounded live-generation visibilityの権限代数とTHM-004。
 open_items: [OPEN-017]
 ---
 
@@ -52,6 +52,22 @@ incarnation retired, entries tombstoned (not dropped). rejoin: **new**
 incarnation; old grants/witnesses do not recreate the participant. Revocation
 is monotone unless a new epoch/evidence is issued. Load/rollback never
 resurrects stale authority (with theory/04).
+
+## Bounded live-generation visibility
+
+ADR-0028 refines the selected SYS-1 runtime fragment with immutable authority
+generations. Only the retained M9 publisher for the same admitted program may
+produce a production successor. It performs revocation through M9, translates
+the complete authority inventory, preserves unrelated admitted lineages, and
+retains every earlier revocation tombstone. The successor is visible to the
+kernel only after its owner runtime acknowledges installation.
+
+Generation number, mailbox order, worker identity, transport/session data,
+and a reply/receipt remain non-authority. They may witness causal order but
+cannot grant a capability or repair a revoked lineage. A use whose lineage is
+revoked in the acknowledged current generation rejects without state
+mutation; reacquisition still requires new admitted evidence under the
+existing lifecycle rule.
 
 ## THM-004 — Authority soundness
 

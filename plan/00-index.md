@@ -19,8 +19,10 @@ ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
 record / regression baselineである。2026-08-26のowner directionを記録したADR-0026の
 sole current LAB roadmapは
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`である。SYS-0はclosed、
-SYS-1もsource cut `94e3707c...`でclosed、active goalはSYS-2、next goalはSYS-3である。Gate/Phase/OBL の正本はCanonのままなので、program
-activationをbroad I1/I2 lifecycle acceptanceへ読み替えない。
+SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
+closed、active goalはSYS-3、next goalはSYS-4である。Gate/Phase/OBL の正本は
+Canonのままなので、program activationをbroad I1/I2 lifecycle acceptanceへ
+読み替えない。
 
 1. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
    task-specific canon files を先に読む

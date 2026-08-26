@@ -2,8 +2,8 @@
 id: theory/04-ordering-and-cuts
 status: L1-fixed
 maturity: draft
-depends_on: [theory/01-mircore-v0, adr/ADR-0007]
-summary: 因果関係族、atomic_cut、consistent cut、SaveObject、load 許容性、Z-cycle、durable_cut(all_of)。
+depends_on: [theory/01-mircore-v0, adr/ADR-0007, adr/ADR-0028]
+summary: 因果関係族、SYS-2 ST/OW1 bounded refinement、atomic_cut、consistent cut、SaveObject、load許容性、Z-cycle、durable_cut(all_of)。
 open_items: [OPEN-015, OPEN-016]
 ---
 
@@ -26,6 +26,50 @@ cut(ℓ) → later local transition at ℓ
 Acyclicity is a well-formedness invariant. The source-level principal is this
 high-level family (ADR-0007); `memory_order_*` profiles belong to the
 model-check line and to implementation mappings only.
+
+## SYS-2 bounded backend refinement
+
+For the selected SYS-1 operation fragment, an implementation trace refines
+the Mir history only when each observed lifecycle and successful semantic
+mutation embeds into the high-level order above while preserving its owner,
+typed result/failure, source/Core provenance, and authority generation.
+ADR-0028 fixes two finite profiles:
+
+```text
+ST  = deterministic single-thread reference
+OW1 = one coordinator + one acknowledged mailbox + one worker-exclusive
+      owner store for exactly one combined owner/source-owner locus
+```
+
+The selected successful owner mutation has one linearization point at its
+actual owner-store write. Its same-owner read records either the admitted
+initial version or the preceding successful write; per-key version advance
+supplies the bounded modification/coherence order. A failure has no write
+linearization or version advance. Remote input preserves request → source-
+owner serve/read → reply → receive → evaluator consume and derives its value
+from that source-owner read.
+
+Live authority change follows:
+
+```text
+M9 revoke and complete retranslation
+  -> owner runtime refresh acknowledgement
+  -> immutable generation publish
+  -> later serve/use observes the generation
+```
+
+A queued earlier-generation use served after this publish rejects without
+mutation. A write linearized before the publish remains complete; its later
+reply/receipt does not transfer authority. This is the selected finite
+revocation-visibility rule, not a general memory model.
+
+The SYS-2 bounded model removes one of ten required edge families at a time:
+request/serve, publish/observe, witness/create-use, capability/grant-use,
+revocation/use, patch-activation/request, save-cut/mutation, relation-epoch/
+sample, same-owner reads-from/coherence, and presentation-gap/nonmutation.
+Each removal has a replayable typed bad-state witness at the declared bound.
+Store buffering is a separate weak-memory calibration; it neither defines Mir
+semantics nor imports low-level ordering syntax into Surface.
 
 ## atomic_cut
 

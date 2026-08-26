@@ -1,164 +1,156 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-26 23:09 JST
+最終更新: 2026-08-27 01:09 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
-`mirrorea_canon/` is LAB: evidence, history, implementation, and operational
-notes. If LAB text conflicts with canon, canon wins.
+`mirrorea_canon/` is LAB: evidence, history, implementation, or operational
+state; canon wins.
 
 ## document role
 
 This is the repository-wide current task-map snapshot. Canon holds normative
-decisions, Plan 249 holds the sole active execution sequence, Plan 247 holds
-the closed M0--M10 baseline, and milestone reports hold evidence. Historical
+decisions, Plan 249 is the sole active execution roadmap, Plan 247 is the
+closed M0--M10 baseline, and milestone reports hold evidence. Historical
 plan “next” entries are not active tasks.
 
 ## current promoted package
 
-The legacy word `promoted` in this heading is required by the documentation
-validator. It means current LAB work package, not Canon L2, Gate, Phase, proof,
-conformance, or public-product promotion.
+“Promoted” here means the package selected by the owner-authorized ADR-0026
+program and current roadmap. It is not Canon L2 promotion, Gate/Phase exit,
+proof completion, or public-product acceptance.
 
-**Active: SYS-2 concurrency, memory, and effect-handler refinement.** SYS-0 and
-SYS-1 are completed/closed. ADR-0027 accepts source cut `94e3707c...` as the
-crate-private ordinary-source/generic-OwnerEvent kernel and narrow owner/
-designated-input carrier; SYS-3 per-locus projection/artifact generation is
-next.
+**Active: SYS-3 per-locus projection and executable artifact generation.**
+SYS-0--SYS-2 are completed/closed. ADR-0028 accepts source cut
+`920d3fe050b8b909253f8511d9ad897272323ced` for deterministic ST, exactly-one-
+owner OW1, acknowledged M9 successor visibility, and bounded ordering
+evidence. SYS-4 in-process generated dispatch is next.
 
-Sources: `mirrorea_canon/adr/ADR-0026.md`,
-`mirrorea_canon/adr/ADR-0027.md`,
-`mirrorea_canon/plan/01-phases.md`,
-`mirrorea_canon/architecture/04-runtime-carriers.md`, and
+Sources: `mirrorea_canon/adr/ADR-0028.md`,
+`mirrorea_canon/theory/11-metatheory-ledger.md`, and
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
-Current SYS-2 direct blockers:
+Direct consumer: SYS-4 starts the generated artifacts without reparsing or
+reconstructing source semantics; SYS-5 displays their causal correspondence.
 
-1. define ST and one-owner-worker (OW) execution profiles over the exact SYS-1
-   owner/designated-input lifecycle;
-2. map request→serve, send/publish→receive/observe, witness/grant/revoke→use,
-   verdict→activation, cut→later transition, and relation epoch→sample to
-   abstract happens-before and operation linearization;
-3. close the immutable-M9-snapshot residual so revoke-after-enqueue/serve has
-   explicit visibility and a removed edge yields a bounded counterexample;
-4. show selected ST/OW semantic correspondence and owner-state data-race
-   freedom without introducing Surface `memory_order_*`, lock-free goals, or a
-   generic provider registry.
+Current SYS-3 direct blockers:
 
-Completion signal: positive ST/OW execution, required litmus/model
-counterexamples, exact runtime/model/proof classification, preserved SYS-1 and
-M10 regressions, independent review, Report 2594, commit/push, and clean remote
-parity. Only then does SYS-3 become active.
+1. define the smallest deterministic `GlobalProjectionResult` and per-locus
+   executable plan representation from checked Core plus logical topology;
+2. derive complete communication/effect/observation/persistence plans without
+   handwritten interface edges or fixture-name selection;
+3. preserve owner/site/source span, authority/failure/effect rows, relation and
+   fallback lineage, designated non-reexecution, cut/patch obligations, and
+   the semantic parts of the SYS-2 ST/OW1 contract;
+4. reject missing/extra edges, owner-moving operations, source/Core identity
+   mismatch, and malformed/cyclic projection without partial artifacts; and
+5. exercise one conservative finite relation-DAG pressure case without
+   claiming an arbitrary-DAG theorem or freezing a public artifact ABI.
 
-Official theory remains T1. OPEN-030 is resolved only for the ADR-0027 narrow
-internal contract; OPEN-026/027 and full carrier freeze keep broad PHASE-I1 and
-official I2 lifecycle entry/exit unaccepted.
+Completion signal: deterministic artifacts for at least three loci, visible
+generated plans, positive and malformed cases, no manual interface fixture,
+M10 behavior reproducible, one independent review, one Report 2595, validation,
+commit/push, and remote parity. Only then does SYS-4 become active.
+
+Official theory remains T1. Broad PHASE-I1 exit and official I2 entry/exit stay
+unaccepted; OPEN-026/027 and the full carrier freeze remain exact residuals.
 
 ## ordered self-driven packages
 
-Rough estimates are effort bands, not elapsed-time commitments. Each semantic
-frontier closes before the next opens.
+Packages execute in the fixed order; only one SYS semantic frontier is active.
 
-| Order | Task package | Dependency / completion signal | Macro position / rough estimate |
+| Package | Capability / evidence | Current state | Macro position / rough estimate |
 | --- | --- | --- | --- |
-| SYS-0 | baseline, owner authority, one roadmap, goal alignment | **completed / closed**; Report 2592 | Macro 0 front; closed |
-| SYS-1 | semantic runtime kernel; owner/designated-input internal carrier | **completed / closed** at `94e3707c...`; runtime-monitored, Report 2593 | Macro 1/3/7 front; closed |
-| SYS-2 | define/run ST and OW backend refinement | **active**; high-level edge mapping + litmus counterexamples + selected ST/OW agreement | Macro 3/5/7 middle; heavy |
-| SYS-3 | generate per-locus artifacts and communication/effect/observation/persistence plans | **next**; consumes SYS-1/2 contracts | Macro 6/7 front; heavy |
-| SYS-4 | run generated artifacts through independent in-process locus endpoints | SYS-3 artifacts; actual endpoint dispatch + ST/OW + save/patch/replay negatives | Macro 6/7 middle; heavy |
-| SYS-5 | four-locus headless toy world and one joined typed devtools view | SYS-4 runtime; user walkthrough + semantic/usability/security review | Macro 4/8 middle; heavy |
-| SYS-6 | finite I2 conformance/assurance and lifecycle closeout | SYS-3--5 accepted cuts; exact source→trace profile + evidence classes | Macro 0/5/6 close; heavy |
-| SYS-7 | inactive I3 goal and entry contract only | accepted SYS-6 boundary; transport-neutral contract, no implementation | Macro 0/6 reserve; small |
+| SYS-0 | baseline, authority, one roadmap, goal alignment | **completed / closed**; Report 2592 | Macro 0 front; closed |
+| SYS-1 | semantic runtime kernel; internal owner/designated carrier | **completed / closed** at `94e3707c...`; Report 2593 | Macro 1/3/7 front; closed |
+| SYS-2 | ST/OW1 backend, M9 generation visibility, ten-edge finite model | **completed / closed** at `920d3fe0...`; OBL-058/059, Report 2594 | Macro 3/5/7 middle; closed |
+| SYS-3 | checked Core → per-locus artifacts and generated plans | **active**; deterministic projection + preservation/falsifier evidence | Macro 6/7 front; heavy, multi-day |
+| SYS-4 | independent in-process locus endpoints run SYS-3 artifacts | next; actual endpoint dispatch + ST/OW1 + save/patch/replay negatives | Macro 6/7 middle; heavy, multi-day |
+| SYS-5 | four-locus headless toy + joined typed devtools | after SYS-4 | Macro 4/6/8 middle; heavy, multi-day |
+| SYS-6 | finite I2 conformance/assurance and lifecycle closeout | after SYS-5; exact source→trace profile/evidence classes | Macro 0/5/6 close; heavy, multi-day |
+| SYS-7 | inactive I3 goal and entry contract only | terminal after SYS-6; no transport implementation | Macro 0/6 reserve; small, sub-day |
 
-Active SYS-2 execution order:
+Active SYS-3 execution order:
 
-1. Pin the abstract ordering/refinement contract to the SYS-1 carrier and list
-   each concrete ST/OW direct consumer.
-2. Add the required litmus/model falsifiers before changing backend behavior,
-   including revoke/use, publication/observation, patch/request, save/mutation,
-   relation epoch/sample, two owner RMWs, and presentation-gap nonmutation.
-3. Implement the smallest OW mailbox/worker profile while preserving ST as the
-   deterministic reference; prefer safe channels/mutexes over lock-free work.
-4. Compare allowed ST/OW observations, classify each claim accurately, rerun
-   SYS-1/M10/workspace validation, and obtain independent review.
-5. Close Report 2594, synchronize snapshots, commit/push, verify parity, then
-   and only then activate SYS-3.
+1. Inventory the exact checked-Core operation/dependency/topology inputs and
+   pin one internal projection result with no public compatibility promise.
+2. Write determinism, no-hidden-edge, owner-preservation, source-span, and
+   malformed/cyclic projection falsifiers before production generation.
+3. Generate per-locus programs plus communication/effect/observation/
+   persistence/source-map/diagnostic plans for at least three loci.
+4. Add the smallest finite DAG pressure case and project-then-evaluate
+   coherence evidence for the accepted relation fragment.
+5. Rerun SYS-2/SYS-1/M10/runtime/workspace validation, obtain independent
+   review, synchronize status/report, commit/push, and verify parity.
 
 ## self-driven macro phase reading
 
-| Macro | Current reading | Startability |
+| Macro | Current state | Startability |
 | --- | --- | --- |
-| 0 repository memory/governance | ADR-0026/Plan 249 active; SYS-0/1 closed | SYS close sync startable |
-| 1 semantic kernel | narrow kernel/carrier accepted runtime-monitored | consume in SYS-2; reopen only on listed falsifier |
-| 2 parser-free validation | historical evidence only | maintenance; do not make architecture |
-| 3 source/checker/runtime | source-first M10 + SYS-1 kernel; concurrency gap | **active SYS-2** |
-| 4 executable sample expansion | existing roots unchanged | wait for SYS-5 |
-| 5 theorem/model-check bridge | finite evidence retained; concurrency evidence current | **active SYS-2** |
-| 6 generated/distributed fabric | no per-locus executable generation/dispatch yet | wait for SYS-3/4 |
-| 7 toolchain/backend | kernel available; ST/OW backend current | **active SYS-2**, then SYS-3--5 |
-| 8 applications | four-locus toy is a later domain consumer | wait for SYS-5; no Core promotion |
+| 0 repository memory/governance | ADR-0026/Plan 249 active; SYS-0--SYS-2 closed | SYS close sync startable |
+| 1 semantic kernel | kernel/carrier + bounded ST/OW1 accepted | consume only; reopen on named falsifier |
+| 2 parser-free historical evidence | retained; not current architecture | maintenance only |
+| 3 source/checker/runtime | source-first M10 + executable local backend | projection active; dispatch later |
+| 4 executable samples | no I2 sample yet | wait for SYS-4 then SYS-5 |
+| 5 theorem/model-check bridge | OBL-058 bounded + OBL-059 runtime | projection evidence may add exact finite rows only |
+| 6 generated/distributed fabric | no executable per-locus generation/dispatch yet | **active SYS-3** |
+| 7 toolchain/backend | ST/OW1 internal prerequisite ready | **active SYS-3**, then SYS-4/5 |
+| 8 upper application | four-locus toy remains future consumer | wait for SYS-5 |
 
 ## user decision gates
 
-No owner decision is required to continue SYS-2--SYS-7 inside ADR-0026 unless
-one of the complete reserved conditions below is reached.
+No owner decision is required to continue SYS-3--SYS-7 inside ADR-0026 unless
+an owner-reserved stop condition becomes real.
 
-| Item | Impact | Main options | Current recommendation |
+| Overview | Impact | Major options | Current recommendation / view |
 | --- | --- | --- | --- |
-| public API/ABI/wire freeze | irreversible external compatibility | separately authorize/freeze; or keep internal/provisional | keep internal throughout this program |
-| real transport | future I3 architecture | later compare at most two candidates; or defer | SYS-7 entry contract only; no selection/implementation now |
-| production/publication | external state and user risk | separately authorize/deploy; or defer | defer; owner-reserved |
-| North Star/guarantee change | project meaning/safety | explicit owner change; or preserve | preserve; stop if change is required |
-| domain vocabulary as Core | architecture separability | promote explicitly; or keep library/sample | keep World/Avatar/Bird outside Core |
-| hidden multi-owner transaction | authority/atomicity semantics | introduce explicitly; or preserve visible operations | preserve; stop if unavoidable |
-| user data, secret, or paid-resource danger | safety/external cost | separately authorize; or avoid | avoid and stop |
-| irreversible semantic tie | incompatible observable semantics with no later migration | owner chooses A/B | stop with decision bundle |
-| reproducible parent-goal/North-Star conflict | program feasibility | change North Star/goal; or stop program | stop with counterexample evidence |
+| North Star or safety/privacy/redaction/no-stale guarantee change | whole project semantics | preserve; or explicitly weaken | preserve; stop if weakening is required |
+| domain vocabulary as Core primitive | Core architecture | keep library/sample; or promote | keep library/sample; stop if promotion is unavoidable |
+| hidden multi-owner transaction | authority/atomicity | explicit operations; or hidden transaction | preserve explicit operations; stop if hidden transaction is unavoidable |
+| public API/ABI/wire freeze | external compatibility | keep internal/provisional; or freeze | keep provisional; stop before irreversible freeze |
+| real transport selection/implementation | I3 architecture | defer; or choose now | defer to future owner program; SYS-7 only writes inactive entry contract |
+| production/publication/paid resources | external state/risk | remain local; or deploy | remain local; stop for owner authority |
+| irreversible observable semantic tie | migration compatibility | Constitution orders; or owner decides | use priority order; stop only if tied and non-migratable |
+| reproducible North-Star contradiction | parent program validity | revise program; or revise North Star | return decision bundle; do not weaken silently |
+
+Official T1, deferred general OBLs, open final grammar/public ABI, incomplete
+I3+, and unoptimized performance are not blockers requiring owner input.
 
 ## research discovery items
 
-These are bounded findings inside the named milestone, not user decisions or
-parallel semantic frontiers.
+These are resolved inside the active package from evidence; they are not owner
+decision requests and do not open separate semantic frontiers.
 
-| Item | Direct consumer / blocker reduced | Acceptance use | Stop/discard condition |
+| Item | Direct consumer | Evidence needed | Boundary |
 | --- | --- | --- | --- |
-| ST/OW happens-before map | SYS-3/4 backend contract | exact high-level edge→backend guarantee table | no general memory model or Surface atomics |
-| immutable-M9 revocation visibility | SYS-2 owner/designated-input use | revoke-after-enqueue/serve litmus and fail-closed result | reopen SYS-1 only if its immutable boundary cannot be conservatively refined |
-| OW primitive choice | SYS-3/4 executable artifacts | selected safe mailbox/worker profile | compare at most current design + one viable alternative; no lock-free work |
-| finite relation-DAG extension boundary | SYS-4/5 | one three-step/shared-ancestor pressure case | defer to SYS-3; no arbitrary DAG theorem |
-| provisional CLI spelling | SYS-5/6 user workflow | smallest existing-convention command set | no public compatibility commitment |
-| finite I2 evidence decomposition | SYS-6 acceptance | exact lean/model/runtime/deferred classes | no bounded-to-general proof widening |
+| projection IR granularity | SYS-4 artifact loader | smallest current design vs one viable alternative; determinism and identity tests | no public ABI/field-name freeze |
+| communication completeness | SYS-4 dispatch | accepted Core operation inventory + omitted/extra edge falsifiers | no hand-authored schema or hidden edge |
+| effect/observation/persistence plan split | SYS-4/5 | typed plan presence and source/Core provenance tests | do not collapse transport/auth/projection/persistence |
+| finite relation-DAG extension | SYS-3/5 | three-step fallback or shared-ancestor pressure case | no arbitrary DAG theorem |
+| broad-I1 carrier residual | lifecycle closeout | OPEN-026/027 and full internal freeze inventory | do not weaken exit criteria |
 
-No new WRK is justified. A future WRK still needs a named direct consumer,
-current blocker, reason the milestone report cannot hold it, falsifier, and
-adoption/discard rule.
+Do not open a WRK unless the active blocker cannot fit Report 2595 and all
+direct-consumer/falsifier/adoption-discard conditions in ADR-0026 are met.
 
 ## maintenance tasks
 
 - Preserve `canon > LAB`, official lifecycle T1, and exact evidence classes.
-- Preserve M10 cut, closed Plan 247, and accepted SYS-1 cut; do not reinterpret
-  specialized M10 runners as kernel evidence.
-- Keep Plan 249 as the only active roadmap and one SYS semantic frontier.
-- Maintain one report per milestone; snapshot/metadata sync stays in it.
-- At each close, update Plan 249, `Documentation.md`, `docs/project-status.md`,
-  `progress.md`, `tasks.md`, and inspect `samples_progress.md` update need.
-- Keep public contract, real transport, production, browser renderer, and I3
-  implementation out of SYS-0--SYS-7.
-- Check resources before heavy builds and preserve other shared-worktree edits.
-- Do not commit secrets, force-push, rewrite history, or delete user work.
+- Preserve M10 cut, closed Plan 247, SYS-1 cut, and SYS-2 cut; do not use their
+  release/profile hashes as an I2 runtime architecture.
+- Keep Plan 249 as the sole active roadmap and one SYS semantic frontier.
+- Ordinary `.mir` source and checked Core are semantic authority; topology may
+  place loci but cannot invent message interfaces or semantic edges.
+- Surface gains no worker/mailbox/atomic/`memory_order_*` vocabulary.
+- World/Avatar/Bird remain sample/library terms, never Core primitives.
+- Transport/session/provider/worker identity and receipt remain non-authority.
+- `samples_progress.md` stays unchanged until a runnable path, command, debug
+  surface, or blocker actually changes.
 
 ## non-promoted references
 
 - Active authority/roadmap: PROPOSAL-029, ADR-0026, Plan 249.
-- SYS-1 accepted internal contract: PROPOSAL-030, ADR-0027,
-  `mirrorea_canon/architecture/04-runtime-carriers.md`,
-  `mirrorea_canon/spec/05-runtime-semantics.md`.
+- SYS-1 contract: PROPOSAL-030, ADR-0027, Report 2593.
+- SYS-2 contract: PROPOSAL-031, ADR-0028, OBL-058/059, Report 2594.
 - Official lifecycle: `mirrorea_canon/plan/01-phases.md`.
-- Closed baseline: ADR-0025, Plan 247, Report 2591.
-- Milestone evidence: Report 2592 (SYS-0), Report 2593 (SYS-1).
-- Proof status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
-- Runnable sample dashboard: `samples_progress.md` (unchanged by SYS-1).
-
-No new Gate/Phase exit, broad PHASE-I1/I2 acceptance, general OBL discharge,
-public contract, transport/product deployment, or sample-workflow completion is
-claimed by this task map.
+- Proof/evidence status: `mirrorea_canon/theory/11-metatheory-ledger.md`.
+- Runnable sample dashboard: `samples_progress.md` (unchanged by SYS-2).

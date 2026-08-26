@@ -18,6 +18,19 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-27** PROPOSAL-031 / ADR-0028 により、SYS-1 kernel fragmentの
+  deterministic STと、exactly one combined semantic owner/source-owner locusを
+  dedicated workerが排他的に所有するOW1 backendを採用した。successful owner mutationの
+  linearization/reads-from/coherenceはactual M8 enqueue/`OwnerRead`/`OwnerWrite` traceへ
+  結び、designated remote inputはacknowledged source-owner readからreplyを導出する。
+  same-seam M9 publisherはactual revoke後にcomplete inventoryを再translationし、strict
+  successor・monotone tombstone・unrelated owner/designated lineage retentionを検査して、
+  ST install又はOW1 worker ack後にのみgenerationを公開する。accepted source cutは
+  `920d3fe050b8b909253f8511d9ad897272323ced`。OBL-058を
+  `model-checked-bounded`、OBL-059を`runtime-monitored`として追加したが、Lean/general
+  theorem、multi-owner OW、Surface `memory_order_*`、public API/ABI/wire、broad
+  PHASE-I1/I2 lifecycleは主張しない。SYS-2はcompleted、SYS-3がactive、SYS-4がnextである。
+
 - **2026-08-26** PROPOSAL-030 / ADR-0027 により、ordinary `run_source` とgeneric
   checked `OwnerEvent`のproduction pathをcrate-private `SemanticRuntimeKernel`へ分離し、
   sealed M9 seamからadmitted M8 runtimeを所有・抽出するdependency directionを採用した。

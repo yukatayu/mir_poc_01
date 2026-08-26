@@ -18,14 +18,15 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. The owner has now adopted ADR-0026 for the
 bounded Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. Its sole current
 LAB roadmap is `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
-SYS-0 and SYS-1 are completed and closed. ADR-0027 records the crate-private
-semantic runtime kernel and the narrow I2-internal owner/designated-input
-carrier at source cut `94e3707c...`; active goal is SYS-2 concurrency/memory/
-effect-handler refinement and next goal is SYS-3 per-locus projection/artifact
-generation. OPEN-030 is resolved only for that internal contract; the full
-carrier freeze and OPEN-026/027 remain. SYS-1 completion and SYS-2 activation
-claim neither broad PHASE-I1 exit nor I2 lifecycle acceptance; official theory
-remains T1. North Star changes, weakened
+SYS-0--SYS-2 are completed and closed. ADR-0027 records the crate-private
+semantic runtime kernel and narrow I2-internal carrier at cut `94e3707c...`;
+ADR-0028 records deterministic ST, single-owner OW1, acknowledged M9
+generation visibility, and finite ordering evidence at cut `920d3fe0...`.
+Active goal is SYS-3 per-locus projection/artifact generation and next goal is
+SYS-4 in-process generated dispatch. OPEN-030 is resolved only for that
+internal contract; the full carrier freeze and OPEN-026/027 remain. SYS-2
+completion and SYS-3 activation claim neither broad PHASE-I1 exit nor I2
+lifecycle acceptance; official theory remains T1. North Star changes, weakened
 safety/privacy guarantees, irreversible final public contracts, real transport
 selection/implementation in this program, and production deployment remain
 owner-reserved. Outside the program, ADR-0014 keeps research in the reversible

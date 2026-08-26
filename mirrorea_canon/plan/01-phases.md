@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-1 internal kernel/carrierはclose、ADR-0026 programはSYS-2 activeでbroad I1/I2 acceptanceは未受理。
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-2はclose、ADR-0026 programはSYS-3 activeでbroad I1/I2 acceptanceは未受理。
 open_items: [OPEN-032]
 ---
 
@@ -15,8 +15,8 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  SYS-0/SYS-1 completed; Mirrorea I2 Systems Foundation bounded program active
-  at SYS-2, SYS-3 next**（ADR-0025 / ADR-0026 / ADR-0027）。
+  SYS-0--SYS-2 completed; Mirrorea I2 Systems Foundation bounded program active
+  at SYS-3, SYS-4 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028）。
   architecture/04 の full L2 carrier freeze と OPEN-026/027 が残るため、広い PHASE-I1 exit、
   I2 entry、I2 exitはいずれも未受理。
 
@@ -68,7 +68,11 @@ typed devtools acceptance path、public non-freezeを一つのbounded programへ
 SYS-0はbaseline/goal alignmentをcloseした。PROPOSAL-030 / ADR-0027 はSYS-1の
 crate-private semantic kernelとowner/designated remote-input lifecycleをsource cut
 `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`でcloseした。OPEN-030はこのI2-internal
-bounded contractに限りresolvedである。active goalはSYS-2、next goalはSYS-3である。
+bounded contractに限りresolvedである。PROPOSAL-031 / ADR-0028 はSYS-2のdeterministic
+ST、single-owner OW1、M9 successor generation visibility、finite ordering refinementを
+source cut `920d3fe050b8b909253f8511d9ad897272323ced`でcloseした。OBL-058は
+`model-checked-bounded`、OBL-059は`runtime-monitored`であり、Lean/general theoremでは
+ない。active goalはSYS-3、next goalはSYS-4である。
 
 これは実装programのauthorizationであり、official phase entry/exit recordではない。
 Broad PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027、I2 exitは

@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0027) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0028) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -47,7 +47,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -64,9 +64,13 @@ exit又はI2 lifecycle acceptanceではなく、theory lifecycleはT1である�
 PROPOSAL-030 / ADR-0027 は source cut
 `94e3707c7bc98d4a0764c51f13a12b1dae1968c6` で SYS-1 をcloseした。OPEN-030は
 owner requestとdesignated remote-inputのI2-internal bounded lifecycleに限りresolvedで
-あり、public contractではない。SYS-0/SYS-1はcompleted、active goalはSYS-2、next
-goalはSYS-3である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal
-carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
+あり、public contractではない。PROPOSAL-031 / ADR-0028 は source cut
+`920d3fe050b8b909253f8511d9ad897272323ced` でSYS-2のdeterministic ST、exactly one
+combined owner/source-owner locusのOW1、M9 successorのack後generation公開、bounded
+ordering modelをcloseした。OBL-058は`model-checked-bounded`、OBL-059は
+`runtime-monitored`であり、Lean/general proofではない。SYS-0--SYS-2はcompleted、active
+goalはSYS-3、next goalはSYS-4である。architecture/04はL2-workingのままで、
+OPEN-026/027とfull internal carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
 
 ## ID 体系
 

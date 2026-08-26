@@ -40,3 +40,4 @@ open_items: []
 | ADR-0025 | 凍結SCN-01..10のordinary-source有限M10 conformance profileとM6/M7 direct-consumer seamを採用 | L1 |
 | ADR-0026 | Mirrorea I2 Systems Foundation SYS-0--SYS-7へgoal-driven bounded autonomyを委任 | 運用 L0 |
 | ADR-0027 | crate-private semantic runtime kernelとowner/designated remote-inputのbounded internal lifecycle carrierを採用 | L1 |
+| ADR-0028 | deterministic STとsingle-owner OW1、ack後M9 generation公開、finite ordering refinementを採用 | L1 |

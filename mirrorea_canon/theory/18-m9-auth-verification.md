@@ -2,8 +2,8 @@
 id: theory/18-m9-auth-verification
 status: L1-fixed
 maturity: draft
-depends_on: [theory/02-types-effects-failures, theory/05-authority, theory/07-observation, theory/11-metatheory-ledger, theory/16-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0024]
-summary: M9外部source-bound resolution、Contract transformerとverifierの分離、有限 provenance/invalidation model。
+depends_on: [theory/02-types-effects-failures, theory/05-authority, theory/07-observation, theory/11-metatheory-ledger, theory/16-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0024, adr/ADR-0028]
+summary: M9外部source-bound resolution、Contract transformer/verifier分離、finite provenance/invalidation、SYS-2 immutable successor generation。
 open_items: []
 ---
 
@@ -71,7 +71,36 @@ separate non-transparent `ContractUpdate` cases. The carrier has no cost field
 or cost-bound theorem. OBL-028's separate bounded model evidence does not alter
 the Lean carrier or make either result a general theorem.
 
-## 4. Boundary
+## 4. SYS-2 immutable successor generation
+
+For the selected SYS-1 kernel, the initial admitted seam retains one M9-owned
+successor publisher. A production caller may request revocation of the exact
+checked owner operation, but may not construct a generation, capability, or
+replacement authority inventory. The publisher runs the M9 revocation path,
+then retranslates the complete admitted inventory into an immutable generation
+which retains:
+
+```text
+checked program identity
+strict generation successor
+monotone revocation tombstones
+remaining owner lineages and authority uses
+remaining designated remote-input release lineages
+translated M8 authority state
+```
+
+The kernel validates the successor against its current generation, installs
+the translated state at the sole owner runtime, waits for acknowledgement in
+OW1, and publishes the new generation only afterward. A failed install leaves
+the prior generation and publisher live. The successor view is crate-private
+and read-only to the kernel; it cannot mint authority or act as a wire
+credential.
+
+This finite mechanism closes the SYS-1 revoke-after-enqueue/serve residual for
+ST and OW1 only. OBL-059 records the executable cases; OBL-028's older bounded
+M9 model remains separate evidence and is not widened.
+
+## 5. Boundary
 
 No general M9 calculus, authority/noninterference proof, M10/SCN conformance,
 transport, public ABI/wire, or final grammar follows from this chapter.

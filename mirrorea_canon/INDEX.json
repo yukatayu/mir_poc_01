@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 174,
+ "files": 176,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 17019
+   "bytes": 18103
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 23049
+   "bytes": 23424
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3818
+   "bytes": 3864
   },
   {
    "id": "adr/ADR-0001",
@@ -460,6 +460,20 @@
    "bytes": 4736
   },
   {
+   "id": "adr/ADR-0028",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "meta/proposal-031"
+   ],
+   "summary": "SYS-2のdeterministic STとsingle-owner OW1 execution、ack後M9 generation公開、finite ordering refinementを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0028.md",
+   "bytes": 4251
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -469,7 +483,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 3375
+   "bytes": 3497
   },
   {
    "id": "arch/01-strata",
@@ -523,15 +537,16 @@
     "theory/08-patch-hotplug",
     "theory/13-evaluation-materialization",
     "theory/18-m9-auth-verification",
-    "adr/ADR-0027"
+    "adr/ADR-0027",
+    "adr/ADR-0028"
    ],
-   "summary": "broad runtime carrier catalogと、SYS-1で固定したcrate-private owner/designated-input lifecycle carrier。public API/ABI/wireは未凍結。",
+   "summary": "broad runtime carrier catalog、SYS-1 internal lifecycle、SYS-2 ST/OW1 ordering evidence boundary。public API/ABI/wireは未凍結。",
    "open_items": [
     "OPEN-026",
     "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 5811
+   "bytes": 7844
   },
   {
    "id": "arch/05-satellites",
@@ -1108,6 +1123,27 @@
    "bytes": 6086
   },
   {
+   "id": "meta/proposal-031",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "arch/04-runtime-carriers",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/13-evaluation-materialization",
+    "theory/18-m9-auth-verification",
+    "spec/05-runtime-semantics"
+   ],
+   "summary": "SYS-2のdeterministic STとsingle-owner OW1 backend、M9 successor generation visibility、有限ordering modelを固定する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-031-sys2-st-ow1-concurrency-refinement.md",
+   "bytes": 8005
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1164,14 +1200,15 @@
     "adr/ADR-0017",
     "adr/ADR-0026",
     "adr/ADR-0027",
+    "adr/ADR-0028",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-1 internal kernel/carrierはclose、ADR-0026 programはSYS-2 activeでbroad I1/I2 acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-2はclose、ADR-0026 programはSYS-3 activeでbroad I1/I2 acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 7721
+   "bytes": 8054
   },
   {
    "id": "plan/02-operating-model",
@@ -1466,14 +1503,15 @@
     "theory/04-ordering-and-cuts",
     "theory/05-authority",
     "theory/13-evaluation-materialization",
-    "adr/ADR-0027"
+    "adr/ADR-0027",
+    "adr/ADR-0028"
    ],
-   "summary": "参照実装の観測可能挙動、SYS-1 internal kernel lifecycle、適合試験用の決定的 scheduling profile。",
+   "summary": "参照実装の観測可能挙動、SYS-1 lifecycle、SYS-2 ST/OW1 profile、適合試験用deterministic scheduling。",
    "open_items": [
     "OPEN-027"
    ],
    "path": "spec/05-runtime-semantics.md",
-   "bytes": 5742
+   "bytes": 7961
   },
   {
    "id": "spec/06-conformance",
@@ -1656,15 +1694,16 @@
    "maturity": "draft",
    "depends_on": [
     "theory/01-mircore-v0",
-    "adr/ADR-0007"
+    "adr/ADR-0007",
+    "adr/ADR-0028"
    ],
-   "summary": "因果関係族、atomic_cut、consistent cut、SaveObject、load 許容性、Z-cycle、durable_cut(all_of)。",
+   "summary": "因果関係族、SYS-2 ST/OW1 bounded refinement、atomic_cut、consistent cut、SaveObject、load許容性、Z-cycle、durable_cut(all_of)。",
    "open_items": [
     "OPEN-015",
     "OPEN-016"
    ],
    "path": "theory/04-ordering-and-cuts.md",
-   "bytes": 5554
+   "bytes": 7659
   },
   {
    "id": "theory/05-authority",
@@ -1672,14 +1711,15 @@
    "maturity": "draft",
    "depends_on": [
     "theory/01-mircore-v0",
-    "adr/ADR-0005"
+    "adr/ADR-0005",
+    "adr/ADR-0028"
    ],
-   "summary": "role claim / admission / capability 系譜 / witness / incarnation の権限代数と THM-004。",
+   "summary": "role claim / admission / capability系譜 / witness / incarnation / bounded live-generation visibilityの権限代数とTHM-004。",
    "open_items": [
     "OPEN-017"
    ],
    "path": "theory/05-authority.md",
-   "bytes": 2729
+   "bytes": 3662
   },
   {
    "id": "theory/06-existence-fallback",
@@ -1775,12 +1815,13 @@
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model",
     "theory/16-m7-checked-elaboration",
-    "theory/17-m8-deterministic-runtime"
+    "theory/17-m8-deterministic-runtime",
+    "adr/ADR-0028"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 21510
+   "bytes": 23468
   },
   {
    "id": "theory/12-literature",
@@ -1807,12 +1848,13 @@
     "theory/03-elaboration",
     "theory/05-authority",
     "adr/ADR-0018",
-    "adr/ADR-0027"
+    "adr/ADR-0027",
+    "adr/ADR-0028"
    ],
-   "summary": "評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator及びSYS-1 internal lifecycleを定義する有限calculus。",
+   "summary": "評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。",
    "open_items": [],
    "path": "theory/13-evaluation-materialization.md",
-   "bytes": 12754
+   "bytes": 14177
   },
   {
    "id": "theory/14-maintained-relation-projection",
@@ -1905,12 +1947,13 @@
     "theory/11-metatheory-ledger",
     "theory/16-m7-checked-elaboration",
     "theory/17-m8-deterministic-runtime",
-    "adr/ADR-0024"
+    "adr/ADR-0024",
+    "adr/ADR-0028"
    ],
-   "summary": "M9外部source-bound resolution、Contract transformerとverifierの分離、有限 provenance/invalidation model。",
+   "summary": "M9外部source-bound resolution、Contract transformer/verifier分離、finite provenance/invalidation、SYS-2 immutable successor generation。",
    "open_items": [],
    "path": "theory/18-m9-auth-verification.md",
-   "bytes": 3833
+   "bytes": 5149
   },
   {
    "id": "theory/readme",

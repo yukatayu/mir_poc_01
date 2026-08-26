@@ -2,8 +2,8 @@
 id: spec/05-runtime-semantics
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/04-ordering-and-cuts, theory/05-authority, theory/13-evaluation-materialization, adr/ADR-0027]
-summary: 参照実装の観測可能挙動、SYS-1 internal kernel lifecycle、適合試験用の決定的 scheduling profile。
+depends_on: [theory/01-mircore-v0, theory/04-ordering-and-cuts, theory/05-authority, theory/13-evaluation-materialization, adr/ADR-0027, adr/ADR-0028]
+summary: 参照実装の観測可能挙動、SYS-1 lifecycle、SYS-2 ST/OW1 profile、適合試験用deterministic scheduling。
 open_items: [OPEN-027]
 ---
 
@@ -89,9 +89,60 @@ authority and provides no direct store-write rule.
 
 The remote-input lifecycle is the selected bounded typed effect request/result
 boundary. It is not a generic handler/provider registry. The runtime neither
-retries nor promises exactly-once delivery implicitly. M9 admission is an
-immutable snapshot in this profile; revoke-after-enqueue/serve visibility is
-deferred to the SYS-2 ST/OW happens-before contract.
+retries nor promises exactly-once delivery implicitly. Initial M9 admission is
+an immutable generation; ADR-0028 defines the bounded successor visibility
+contract below.
+
+## SYS-2 ST/OW1 runtime profile
+
+ST preserves the deterministic single-thread event loop. OW1 admits exactly
+one combined owner/source-owner locus, whose dedicated worker exclusively owns
+the M8 runtime. Coordinator/worker communication is acknowledged; there is no
+public shared mutable M8 store. Any other combined-locus count rejects with
+`ExecutionProfileUnsupported` before executing owner work.
+
+For an owner request:
+
+```text
+kernel pre-admit
+  -> owner-runtime enqueue acknowledgement
+  -> owner read
+  -> successful owner write (linearization point) | declared/authority failure
+  -> kernel reply -> receipt
+```
+
+The successful record names the actual M8 enqueue, `OwnerRead`, and
+`OwnerWrite` trace nodes plus per-key version/preceding-writer information.
+Failure records no successful linearization, reads-from, or version advance.
+Two same-owner RMW requests therefore observe the serialized versions in both
+ST and OW1.
+
+For designated remote input, source-owner service reads worker-owned state and
+the kernel derives the reply from that read. A mismatched explicit result
+returns `RemoteInputValueMismatch` before reply/receipt/mutation. The result
+then follows the SYS-1 reply/receive/consume order; acknowledgement and worker
+identity do not confer authority.
+
+Live revocation is:
+
+```text
+same-seam M9 revoke + complete retranslation
+  -> ST install | OW1 owner-worker install+ack
+  -> kernel generation publish
+```
+
+Only a same-program strictly newer generation with monotone tombstones is
+accepted. Unrelated admitted owner and designated-release lineages remain
+available. A queued old-generation use served after publish fails typed with
+no mutation; a write completed before publish remains completed, and its later
+receipt is non-authority. Failed installation retains the prior generation.
+
+The bounded executable model covers the ten high-level edge families in
+theory/04 at bound 6 and emits replayable missing-edge counterexamples. Its ST
+and OW1 full-edge selected observations agree. `WeakMemoryCalibration` is a
+separate store-buffer/flush/read model and is not a third Mir execution
+profile. These are finite internal requirements for SYS-3/4, not public
+backend/API/ABI or general concurrency guarantees.
 
 ## Deterministic conformance profile (testing only, not semantics)
 

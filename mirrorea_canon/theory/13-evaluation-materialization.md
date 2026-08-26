@@ -2,8 +2,8 @@
 id: theory/13-evaluation-materialization
 status: L1-fixed
 maturity: reviewed
-depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027]
-summary: 評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator及びSYS-1 internal lifecycleを定義する有限calculus。
+depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027, adr/ADR-0028]
+summary: 評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。
 open_items: []
 ---
 
@@ -240,9 +240,35 @@ transfer ownership, or authorize any semantic write. Evaluator consumption is
 therefore an explicit later step, not an implicit callback or a multi-owner
 transaction.
 
-The SYS-1 production carrier consumes an immutable final M9 admission
-snapshot. It establishes source-derived lineage at kernel construction but
-does not yet specify revocation visibility after enqueue or serve. That
-happens-before/refinement obligation is the direct SYS-2 residual. This
-section defines no generic provider registry, public API/ABI/wire, transport,
-retry, general memory model, or new proof claim.
+The SYS-1 production carrier initially consumes an immutable M9 generation.
+ADR-0028 supplies its bounded live successor and ST/OW1 ordering refinement as
+specified below. This section defines no generic provider registry, public
+API/ABI/wire, transport, retry, or general memory model.
+
+## 8. SYS-2 bounded execution refinement
+
+For ST and OW1, an admitted owner transition evaluates its same-owner reads
+and performs its successful write at the owner runtime. The successful write's
+actual owner-store trace node is the linearization point; the read records the
+initial or immediately preceding admitted owner version. A declared or
+authority failure produces neither a write linearization nor a version
+advance.
+
+For designated remote input, `serve-at-source-owner(d)` includes an
+acknowledged read from source-owner state. `reply(d, outcome)` is derived from
+that read. A caller-provided divergent value is not a valid effect result and
+rejects before reply/receipt/mutation. The remote operation continues to keep
+producer release authority, evaluator decision authority, and receipt
+causality separate.
+
+An M9 successor generation becomes current only after the owner runtime has
+acknowledged its translated inventory. After this publication, an earlier-
+generation queued owner use rejects without mutation. A transition that
+linearized before publication is not undone; its later result carrier remains
+non-authority. The selected OW1 profile has one combined owner/source-owner
+locus and one worker-exclusive store. Multi-owner placement and actual
+generated dispatch remain SYS-3/4 work.
+
+OBL-058 and OBL-059 classify the exact finite model and executable evidence.
+They add no Lean theorem, general scheduler/memory/data-race result, fairness,
+or ordinary-Surface memory-order vocabulary.
