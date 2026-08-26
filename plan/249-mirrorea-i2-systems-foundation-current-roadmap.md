@@ -1,6 +1,6 @@
 # Plan 249 — Mirrorea I2 Systems Foundation current roadmap
 
-最終更新: 2026-08-26 18:45 JST
+最終更新: 2026-08-26 20:13 JST
 
 ## 役割、authority、current control state
 
@@ -24,21 +24,17 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   executable artifacts と generated communication plan を生成し、単一 OS
   process 内の independent locus runtimes で実 dispatch し、source から runtime
   occurrence まで typed devtools で追跡できる local toy fabric を完成させる。
-- completed goals: prior ADR-0015 **M0--M10** baseline only; no SYS goal is
-  accepted yet
-- active/closing goal: **SYS-0 baseline and goal alignment**
-- next goal: **SYS-1 runtime kernel / conformance separation and internal
+- completed goals: prior ADR-0015 **M0--M10** baseline and **SYS-0 baseline and
+  goal alignment**
+- active goal: **SYS-1 runtime kernel / conformance separation and internal
   carrier boundary**
-- current direct blocker: the first independent close review returned REJECT
-  without P0; its source-hierarchy/reader/status/report corrections are locally
-  validated, but repeat close review, integration commit, push, and remote
-  parity must close before SYS-1 becomes active.
-- first SYS-1 direct blockers after that transition: M10 conformance facade が semantic
+- next goal: **SYS-2 concurrency, memory, and effect-handler refinement**
+- current direct blockers: M10 conformance facade が semantic
   state、release/profile、evidence generation、verification、CLI を同じ大きな boundary
   に持つこと、および `architecture/04` の OPEN-030 reply/receipt internal boundary が
   未固定であること。
-- official lifecycle: theory **T1**。program activation と SYS-0 closing は broad
-  PHASE-I1 exit、I2 lifecycle entry、I2 exit のいずれも受理しない。
+- official lifecycle: theory **T1**。program activation、SYS-0 completion、SYS-1
+  activation は broad PHASE-I1 exit、I2 lifecycle entry、I2 exit のいずれも受理しない。
 
 Plan 247 は closed M0--M10 execution record / R5 regression baseline のまま保持する。
 Plan 249 以外の numbered plan、WRK、historical report は parallel queue ではない。
@@ -126,7 +122,7 @@ and independent review finds no major counterexample.
 
 ## Goal Statements
 
-### SYS-0 — Baseline and goal alignment (active / closing)
+### SYS-0 — Baseline and goal alignment (completed)
 
 **Goal ID:** SYS-0
 
@@ -167,7 +163,7 @@ are explicit, and SYS-1 has a direct blocker/consumer. Reopen for baseline
 regression, conflicting active roadmaps, unrecorded authority, or a material
 review counterexample.
 
-### SYS-1 — Runtime kernel / conformance separation and internal carrier boundary (next)
+### SYS-1 — Runtime kernel / conformance separation and internal carrier boundary (active)
 
 **Goal ID:** SYS-1
 
@@ -208,7 +204,7 @@ representative falsifiers fail closed, and remaining broad-I1 carrier residual
 is recorded exactly. Broad I1 exit is optional here and never obtained by
 weakening criteria.
 
-### SYS-2 — Concurrency, memory, and effect-handler refinement
+### SYS-2 — Concurrency, memory, and effect-handler refinement (next)
 
 **Goal ID:** SYS-2
 
@@ -519,7 +515,7 @@ serve as its independent reviewer.
 
 ## Current acceptance evidence and blockers
 
-### SYS-0 evidence at planning/status cut
+### SYS-0 accepted close evidence
 
 - `HEAD == origin/main == 49e6845ada990a1c9d9944896a5ff1754994a1b3`
   at baseline; main was clean and M10 cut is an ancestor with three docs-only
@@ -540,9 +536,19 @@ serve as its independent reviewer.
   `git diff --check` and the numbered-plan registry test passed. Independent
   close review then returned REJECT without P0 because authority-entry files,
   the primary HTML reader, current-state timing, and report command detail were
-  incomplete. The correction cycle now has fresh Canon-index/docs/diff and
-  focused HTML/registry validation; repeat close review, integration commit,
-  push, and final remote parity remain in the parent SYS-0 closeout.
+  incomplete. Forward correction cycles closed those findings and the final
+  independent close review returned **ACCEPT — no P0/P1/P2**.
+- accepted SYS-0 integration cut:
+  `350e04b400ee5e50147b78af5f5313c761eeaee9`
+  (`docs(i2): start systems foundation program`), pushed as
+  `49e6845a..350e04b4 main -> main`.
+- `git ls-remote --heads origin refs/heads/main` returned
+  `350e04b400ee5e50147b78af5f5313c761eeaee9 refs/heads/main`; local
+  `HEAD == origin/main` at the same cut and `git status --short --branch`
+  returned clean `## main...origin/main`.
+- This mechanical current-view closeout is the immediate successor to the
+  accepted integration cut and cannot self-embed its own commit hash. The
+  parent records its final push/parity before beginning SYS-1 source work.
 
 ### SYS-1 direct blockers
 
@@ -618,14 +624,11 @@ silently folded into the active Mir/Mirrorea kernel.
 
 ## Recommended next action
 
-First close SYS-0: obtain repeat independent acceptance of this correction
-cut, record the finding in Report 2592, then let the parent integrate/commit,
-push, and verify clean remote parity. Only after those conditions move SYS-0
-to completed and activate SYS-1.
-
-Once SYS-1 is active, execute it against the accepted M10 regression boundary:
-map the runtime facade's semantic-state ownership and dependency direction,
-then write failing boundary tests for kernel independence and no-mint/source-
-bound request/reply/receipt behavior before extracting the smallest internal
-kernel and effect-handler seam. Do not start SYS-2 semantics until SYS-1
-evidence, review, report, commit/push, and remote parity close.
+SYS-1 is active. The parent first commits and pushes this mechanical closeout
+successor and verifies remote parity; no SYS-1 source change begins before that
+repository-state check. Then map the runtime facade's semantic-state ownership
+and dependency direction, and write failing boundary tests for kernel
+independence and no-mint/source-bound request/reply/receipt behavior before
+extracting the smallest internal kernel and effect-handler seam. Do not start
+SYS-2 semantics until SYS-1 evidence, review, report, commit/push, and remote
+parity close.

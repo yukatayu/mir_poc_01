@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-08-26 19:31 JST
+最終更新: 2026-08-26 20:13 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -20,26 +20,30 @@ The legacy word `promoted` in this heading is required by the documentation
 validator. It means the current LAB work package, not Canon L2, Gate, Phase,
 proof, conformance, or public-product promotion.
 
-**Active / closing: SYS-0 baseline and goal alignment.** ADR-0026 authorizes
-the bounded Mirrorea I2 Systems Foundation program. Plan 249 is the sole
-current roadmap; the first close review returned REJECT without P0, so SYS-0
-remains the only active frontier. SYS-1 kernel/carrier separation is next and
-is not active before repeat review, integration commit, push, and parity.
+**Active: SYS-1 runtime kernel / conformance separation and internal carrier
+boundary.** ADR-0026 authorizes the bounded Mirrorea I2 Systems Foundation
+program and Plan 249 is its sole current roadmap. SYS-0 baseline/goal alignment
+is completed/closed at accepted integration cut `350e04b4...`; SYS-2
+concurrency/memory/effect-handler refinement is next.
 
 Sources: `mirrorea_canon/adr/ADR-0026.md`,
 `mirrorea_canon/plan/01-phases.md`,
 `mirrorea_canon/architecture/04-runtime-carriers.md`, and
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
-Current SYS-0 direct blockers:
+Current SYS-1 direct blockers:
 
-1. obtain repeat independent close acceptance of the locally validated
-   authority-entry, HTML reader, current-state, and report-command corrections;
-2. integrate/commit/push and verify `HEAD == origin/main` with a clean worktree.
+1. extract semantic state/occurrence production from the M10
+   conformance/release/profile facade without changing accepted behavior;
+2. fix the smallest non-public request/result/receipt carrier with complete
+   source/Core provenance and no authority/state minting;
+3. expose typed effect request → admitted handler → result/failure ordering
+   without collapsing transport, auth, projection, or persistence;
+4. record whether broad PHASE-I1 carrier criteria are met or the exact residual.
 
-Completion signal: Report 2592 records accepted repeat review and exact final
-validation/commit/push/parity; all current views then move SYS-0 to completed
-and SYS-1 to active in the integration closeout.
+Completion signal: positive and primary-falsifier tests, preserved M10
+regression, exact internal/public and lifecycle non-claims, independent review,
+Report 2593, commit/push, and remote parity; only then does SYS-2 become active.
 
 Official theory remains T1. Broad PHASE-I1 exit and official I2 lifecycle
 entry/exit are not implied by SYS-0 or by starting SYS-1.
@@ -51,23 +55,16 @@ closes before the next semantic frontier opens.
 
 | Order | Task package | Dependency / completion signal | Macro position / rough estimate |
 | --- | --- | --- | --- |
-| SYS-0 | baseline, owner authority, one roadmap, goal alignment | **active/closing**; correction + repeat review + commit/push/parity remain | Macro 0 front; small |
-| SYS-1 | extract semantic runtime kernel; internal request/result/receipt and effect seam | **next** after SYS-0 parity; dependency inversion + carrier falsifiers + review | Macro 1/3/7 front; medium-heavy |
-| SYS-2 | define/run ST and OW backend refinement | SYS-1 kernel/carrier; high-level edge mapping + litmus counterexamples + ST/OW agreement | Macro 3/5/7 middle; heavy |
+| SYS-0 | baseline, owner authority, one roadmap, goal alignment | **completed / closed**; accepted integration cut + Report 2592 | Macro 0 front; closed |
+| SYS-1 | extract semantic runtime kernel; internal request/result/receipt and effect seam | **active**; dependency inversion + carrier falsifiers + review | Macro 1/3/7 front; medium-heavy |
+| SYS-2 | define/run ST and OW backend refinement | **next** after SYS-1; high-level edge mapping + litmus counterexamples + ST/OW agreement | Macro 3/5/7 middle; heavy |
 | SYS-3 | generate per-locus artifacts and communication/effect/observation/persistence plans | SYS-1/2 contracts; deterministic 3+ locus projection + malformed negatives | Macro 6/7 front; heavy |
 | SYS-4 | run generated artifacts through independent in-process locus endpoints | SYS-3 artifacts; actual endpoint dispatch + ST/OW + save/patch/replay negatives | Macro 6/7 middle; heavy |
 | SYS-5 | four-locus headless toy world and one joined typed devtools view | SYS-4 runtime; user walkthrough + semantic/usability/security review | Macro 4/8 middle; heavy |
 | SYS-6 | finite I2 conformance/assurance and lifecycle closeout | SYS-3--5 accepted cuts; exact source→trace profile + evidence classes + independent review | Macro 0/5/6 close; heavy |
 | SYS-7 | inactive I3 goal and entry contract only | accepted SYS-6 boundary; reviewed transport-neutral contract, no implementation | Macro 0/6 reserve; small |
 
-Immediate SYS-0 close order:
-
-1. Complete and validate the first-review correction cycle.
-2. Obtain one repeat independent close review.
-3. Record accepted findings, integrate/commit/push, and verify clean remote parity.
-4. Only then mark SYS-0 completed and SYS-1 active.
-
-Next SYS-1 execution order:
+Active SYS-1 execution order:
 
 1. Map the M10 facade's semantic-state ownership/import direction and identify
    the smallest extractable kernel boundary.
@@ -86,18 +83,18 @@ Next SYS-1 execution order:
 | Macro | Current reading | Startability |
 | --- | --- | --- |
 | 0 repository memory/governance | ADR-0026/Plan 249 active; Plan 247 closed | SYS milestone sync startable |
-| 1 semantic kernel | accepted finite semantics; reusable kernel boundary missing | **next SYS-1 after SYS-0 close** |
+| 1 semantic kernel | accepted finite semantics; reusable kernel boundary missing | **active SYS-1** |
 | 2 parser-free validation | historical evidence only | maintenance; do not make architecture |
 | 3 source/checker/runtime | source-first M10 baseline; kernel/concurrency work next | SYS-1 then SYS-2 |
 | 4 executable sample expansion | existing roots unchanged | wait for SYS-5 |
 | 5 theorem/model-check bridge | exact finite evidence retained | SYS-2/6 in order |
 | 6 generated/distributed fabric | no per-locus executable generation/dispatch yet | wait for SYS-3/4 |
-| 7 toolchain/backend | projector/runtime/devtools boundaries planned | SYS-1 next, then SYS-2--5 |
+| 7 toolchain/backend | projector/runtime/devtools boundaries planned | SYS-1 active, then SYS-2--5 |
 | 8 applications | four-locus toy is a later domain consumer | wait for SYS-5; no Core promotion |
 
 ## user decision gates
 
-No owner decision is required to close SYS-0 and then continue SYS-1--SYS-7
+No owner decision is required to continue SYS-1--SYS-7
 inside ADR-0026 unless one of the complete reserved conditions below is reached.
 
 | Item | Impact | Main options | Current recommendation |
@@ -154,9 +151,7 @@ rule. No new WRK is currently justified.
 - Official lifecycle/operating rules:
   `mirrorea_canon/plan/01-phases.md`,
   `mirrorea_canon/plan/02-operating-model.md`.
-- Current close blocker: first-review correction, repeat review, commit/push,
-  and remote parity, recorded in Report 2592.
-- Next SYS-1 technical blocker:
+- Current SYS-1 technical blocker:
   `mirrorea_canon/architecture/04-runtime-carriers.md`,
   `mirrorea_canon/spec/05-runtime-semantics.md`.
 - Closed baseline:

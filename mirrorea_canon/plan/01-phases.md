@@ -3,7 +3,7 @@ id: plan/01-phases
 status: L1-fixed
 maturity: draft
 depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズ T0-T2 / I1-I6。official lifecycleはT1、M10有限profileは受理済み、ADR-0026 programはSYS-0 closingでbroad I1/I2 lifecycle acceptanceは未受理。
+summary: 実装フェーズ T0-T2 / I1-I6。official lifecycleはT1、M10有限profileとSYS-0 closeは受理済み、ADR-0026 programはSYS-1 activeでbroad I1/I2 lifecycle acceptanceは未受理。
 open_items: [OPEN-032]
 ---
 
@@ -15,7 +15,8 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  Mirrorea I2 Systems Foundation bounded program active at SYS-0 closing, SYS-1 next**（ADR-0025 / ADR-0026）。
+  SYS-0 completed; Mirrorea I2 Systems Foundation bounded program active at
+  SYS-1, SYS-2 next**（ADR-0025 / ADR-0026）。
   architecture/04 の L2 carrier freeze と OPEN-030 が残るため、広い PHASE-I1 exit、
   I2 entry、I2 exitはいずれも未受理。
 
@@ -64,7 +65,7 @@ I2 entry は ADR-0025 の entry contractと新しい owner-directed current road
 PROPOSAL-029 / ADR-0026 と `LAB:plan/249` は、ADR-0025の要求したnew owner direction、
 OPEN-030のinternal bounded resolution lane、generated per-locus artifact/dispatch、minimal
 typed devtools acceptance path、public non-freezeを一つのbounded programへ束縛した。
-SYS-0はbaseline/goal alignmentだけをcloseし、active goalをSYS-1へ進める。
+SYS-0はbaseline/goal alignmentだけをcloseし、active goalはSYS-1へ進んだ。
 
 これは実装programのauthorizationであり、official phase entry/exit recordではない。
 Broad PHASE-I1 exitはarchitecture/04 carrierのactual internal freeze criteria、I2 exitは

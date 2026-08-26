@@ -17,9 +17,9 @@ milestone reportsにある。この文書はGate/Phase、OBL、SCN、適合性�
 
 ```text
 closed M0--M10 finite reference baseline
-→ [~] SYS-0 baseline/goal alignment (closing review/integration)
-→ [ ] SYS-1 kernel/conformance separation + internal carrier (next)
-→ [ ] SYS-2 ST/OW concurrency refinement
+→ [x] SYS-0 baseline/goal alignment (completed / closed)
+→ [~] SYS-1 kernel/conformance separation + internal carrier (active)
+→ [ ] SYS-2 ST/OW concurrency refinement (next)
 → [ ] SYS-3 per-locus artifact/communication generation
 → [ ] SYS-4 in-process generated dispatch
 → [ ] SYS-5 typed devtools + four-locus toy world
@@ -34,11 +34,11 @@ implementation-program roadmap, not an official Phase acceptance checklist.
 
 | 観点 | 状態 | 根拠 |
 | --- | --- | --- |
-| active frontier | **SYS-0 closing** — correction review, integration commit, push, and remote parity remain; **SYS-1 is next, not active** | `mirrorea_canon/adr/ADR-0026.md`, `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
+| active frontier | **SYS-1 active** — runtime-kernel/conformance separation and the non-public internal carrier; **SYS-2 is next** | `mirrorea_canon/adr/ADR-0026.md`, `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
 | authority | ADR-0026 / PROPOSAL-029 permit evidence-gated SYS-0--SYS-7 work. ADR-0015 / Plan 247 remain closed M0--M10 history | `mirrorea_canon/meta/proposals/PROPOSAL-029-mirrorea-i2-systems-foundation.md`, `mirrorea_canon/adr/ADR-0015.md` |
-| official lifecycle | Theory remains **T1**. Broad PHASE-I1 exit, I2 lifecycle entry, and I2 exit are not accepted by program activation/SYS-0 | `mirrorea_canon/plan/01-phases.md` |
+| official lifecycle | Theory remains **T1**. Broad PHASE-I1 exit, I2 lifecycle entry, and I2 exit are not accepted by program activation, SYS-0 completion, or SYS-1 activation | `mirrorea_canon/plan/01-phases.md` |
 | accepted baseline | M10 R5 cut `23f5a8130334bf0c8516d51e9dcea38b92f50db1`; static 26/26, runtime 47/47, mismatch/missing 0, anchor true, waiver null | `mirrorea_canon/adr/ADR-0025.md`, `docs/reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md` |
-| SYS-0 evidence | baseline HEAD/origin `49e6845...`; focused M10 groups 67+2+4+3+5 pass; config validator/9 tests/strict-help pass; prechange review GO; first close review REJECT without P0 and correction cycle active | `docs/reports/2592-mirrorea-i2-systems-foundation-sys0-baseline-goal-alignment.md` |
+| SYS-0 evidence | baseline HEAD/origin `49e6845...`; focused M10 groups 67+2+4+3+5 pass; config validator/9 tests/strict-help pass; final review ACCEPT no P0/P1/P2; integration cut `350e04b4...` pushed with clean remote parity | `docs/reports/2592-mirrorea-i2-systems-foundation-sys0-baseline-goal-alignment.md` |
 | proof/scenarios | Proof ledger and frozen SCN expectations unchanged; bounded M3--M9 evidence retains exact classes | `mirrorea_canon/theory/11-metatheory-ledger.md`, `mirrorea_canon/spec/06-conformance.md` |
 
 The active work separates semantic/runtime kernel, projection/compiler,
@@ -48,14 +48,10 @@ new runtime architecture.
 
 ## 現在の停止線
 
-Current blocker: close the first-review corrections, repeat independent review,
-then integrate/commit/push and verify remote parity. Only then does SYS-1 become
-active.
-
-Next technical blocker: `mirrorea_canon/architecture/04-runtime-carriers.md`
+Current technical blocker: `mirrorea_canon/architecture/04-runtime-carriers.md`
 OPEN-030 and the current M10 conformance facade's mixed dependency boundary.
 
-After SYS-0 closes, SYS-1 may autonomously define the smallest typed **internal** carrier and
+SYS-1 may autonomously define the smallest typed **internal** carrier and
 kernel seam, with positive/negative tests and review. It must keep receipt
 non-authoritative, source/Core provenance explicit, effect/failure/redaction
 typed, and conformance dependent on the kernel rather than the reverse.
@@ -70,8 +66,7 @@ public contracts, later I3+, and unoptimized performance are not stop reasons.
 
 ## オーナーの確認・判断待ち
 
-There is **no owner decision required for current SYS-0 correction/close or
-the next SYS-1 work**. The following
+There is **no owner decision required for current SYS-1 work**. The following
 remain reserved future checkpoints rather than current blockers:
 
 Boundary sources: `mirrorea_canon/adr/ADR-0026.md` and

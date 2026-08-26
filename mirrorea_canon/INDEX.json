@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 15784
+   "bytes": 15837
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 22678
+   "bytes": 22702
   },
   {
    "id": "root/north-star",
@@ -1128,12 +1128,12 @@
     "adr/ADR-0026",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズ T0-T2 / I1-I6。official lifecycleはT1、M10有限profileは受理済み、ADR-0026 programはSYS-0 closingでbroad I1/I2 lifecycle acceptanceは未受理。",
+   "summary": "実装フェーズ T0-T2 / I1-I6。official lifecycleはT1、M10有限profileとSYS-0 closeは受理済み、ADR-0026 programはSYS-1 activeでbroad I1/I2 lifecycle acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 7397
+   "bytes": 7421
   },
   {
    "id": "plan/02-operating-model",

@@ -58,7 +58,8 @@ Plan 247 は close record / repository memory であって、次の current queu
 
 2026-08-26 の owner direction は PROPOSAL-029 / ADR-0026 により Mirrorea I2
 Systems Foundation SYS-0--SYS-7 を active bounded program として開始した。sole
-current LAB roadmap は Plan 249、SYS-0 close後のactive goalはSYS-1である。このprogram
+current LAB roadmap は Plan 249、SYS-0はcompleted、active goalはSYS-1、next goalは
+SYS-2である。このprogram
 activationはbroad PHASE-I1 exit又はI2 lifecycle acceptanceではなく、theory lifecycleは
 T1、OPEN-030とarchitecture/04 carrier freezeはSYS-1のexact evidence対象として残る。
 

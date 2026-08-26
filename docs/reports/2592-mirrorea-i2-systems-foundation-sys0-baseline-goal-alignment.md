@@ -2,8 +2,8 @@
 
 - Date: 2026-08-26 JST
 - Milestone: SYS-0
-- Status: final independent close review ACCEPT with no P0/P1/P2; SYS-0 remains
-  active/closing until parent integration, commit, push, and remote parity
+- Status: **SYS-0 completed / closed** after final independent ACCEPT with no
+  P0/P1/P2 and accepted integration cut `350e04b4...`; SYS-1 active, SYS-2 next
 - Decision levels touched: operational L0 owner authority (ADR-0026), L1
   program direction/operating model, LAB roadmap/status
 
@@ -12,7 +12,8 @@
 Preserve the accepted M10 finite reference baseline while recording the
 owner-authorized Mirrorea I2 Systems Foundation program, one sole current
 roadmap, complete goal-driven SYS-0--SYS-7 control statements, the exact
-lifecycle/non-effect boundary, and SYS-1 as the next goal after SYS-0 closes.
+lifecycle/non-effect boundary, and the accepted transition to SYS-1 active with
+SYS-2 next.
 
 ## Scope and assumptions
 
@@ -99,6 +100,10 @@ implementation remain non-effects.
    Plan 249 pointer and recommended-action transition, strengthened the
    stale-state scan across line breaks, and separated parent baseline local-ref
    evidence from the reviewer's remote-head query.
+10. After final independent ACCEPT and parent integration/push/parity,
+    synchronized the current views to SYS-0 completed/closed, SYS-1 active,
+    and SYS-2 next. Theory remains T1 and broad PHASE-I1/I2 lifecycle
+    acceptance remains unclaimed.
 
 ## Files changed
 
@@ -166,6 +171,21 @@ command and result (also rechecked during this correction):
 git ls-remote --heads origin refs/heads/main
 49e6845ada990a1c9d9944896a5ff1754994a1b3	refs/heads/main
 ```
+
+After accepted integration, the parent verified the integration cut before
+this mechanical closeout diff with:
+
+```text
+git rev-parse HEAD
+git rev-parse origin/main
+git ls-remote --heads origin refs/heads/main
+git status --short --branch
+```
+
+The exact revision output was
+`350e04b400ee5e50147b78af5f5313c761eeaee9` for local `HEAD`, local
+`origin/main`, and remote `refs/heads/main`; status was clean
+`## main...origin/main`.
 
 The five exact M10 regression invocations were:
 
@@ -275,6 +295,31 @@ git status --short
 git diff -- CANON.md README.md Documentation.md docs/project-status.md docs/mirrorea-project-overview.html mirrorea_canon/meta/source-hierarchy.md mirrorea_canon/meta/agent-instructions.md mirrorea_canon/plan/README.md mirrorea_canon/plan/01-phases.md progress.md tasks.md scripts/tests/test_mirrorea_project_overview_html.py
 ```
 
+Final mechanical closeout commands were:
+
+```text
+TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S %Z'
+python3 -m unittest scripts.tests.test_mirrorea_project_overview_html
+python3 -m unittest -v scripts.tests.test_mirrorea_project_overview_html
+# workdir: mirrorea_canon/
+python3 meta/build-index.py
+# workdir: repository root
+make docs
+git rev-parse HEAD
+git rev-parse origin/main
+git ls-remote --heads origin refs/heads/main
+git status --short --branch
+git diff --check
+```
+
+The focused test was run after updating its current-state expectations and
+before editing the HTML/Documentation (expected red: 3 failures), then after
+the reader changes (green: 8/8). The current-state assertion used a Python
+here-document to require SYS-0 completed/closed, SYS-1 active, and SYS-2 next
+in Plan 249, Plan 00, README, Documentation, project status, HTML, progress,
+tasks, the three changed Canon pointers, and this report; it also rejected
+`SYS-0 closing` in every non-historical current view.
+
 ## Evidence / outputs / test results
 
 - Parent baseline local-ref evidence: `HEAD == origin/main ==
@@ -317,7 +362,19 @@ git diff -- CANON.md README.md Documentation.md docs/project-status.md docs/mirr
   the final HTML suite passed 8/8, and fresh `git diff --check` passed.
 - The independent close-review sequence and forward correction history are
   recorded below. Final review accepted the listed validation/evidence with
-  **no P0/P1/P2**; SYS-0 integration, commit, push, and parity remain pending.
+  **no P0/P1/P2**.
+- Parent integration succeeded at
+  `350e04b400ee5e50147b78af5f5313c761eeaee9`
+  (`docs(i2): start systems foundation program`) and pushed
+  `49e6845a..350e04b4 main -> main`. The subsequent remote-head query returned
+  that exact cut and `git status --short --branch` was clean
+  `## main...origin/main`.
+- Final mechanical closeout validation: the updated HTML/current-reader test
+  failed 3/8 against the pre-closeout reader as expected, then passed 8/8 after
+  synchronization; Canon index generation passed at 172 files; fresh
+  `make docs` passed with agent config validation, source hierarchy 799/799
+  with zero missing paths, and 1,746 numbered reports; the current-state
+  assertion passed across 12 views; and final `git diff --check` passed.
 
 No proof-ledger, SCN expectation, Rust behavior, Lean source, or runnable sample
 changed in this planning cut. One focused HTML reader regression test changed.
@@ -337,9 +394,10 @@ start, but it does not itself satisfy the pre-existing broad I1/I2 lifecycle
 exit criteria.
 
 Milestone state changes only after its full close gate. Creating the authority,
-roadmap, and local validation did not complete SYS-0: repeat independent review,
-integration commit, push, and remote parity remain. Therefore SYS-0 is
-active/closing and SYS-1 is next, not active.
+roadmap, and local validation alone did not complete SYS-0; final independent
+ACCEPT plus integration commit, push, clean worktree, and remote parity did.
+SYS-0 is therefore completed/closed, SYS-1 is active, and SYS-2 is next. This
+program transition does not move official theory T1 or accept broad I1/I2.
 
 ## Open questions
 
@@ -354,45 +412,47 @@ active/closing and SYS-1 is next, not active.
 - Final CLI spelling remains provisional/internal until the implementation
   follows existing conventions.
 
-None of these is an owner-reserved stop condition at SYS-0.
+None of these is an owner-reserved stop condition at active SYS-1.
 
 ## Suggested next prompt
 
-Repeat the independent SYS-0 close review against this correction diff. If it
-accepts, integrate/commit/push, verify a clean worktree and remote parity,
-record the exact cut in this report, then and only then transition Plan 249 and
-current views from SYS-0 closing to SYS-1 active.
+Begin active SYS-1 at the accepted M10 boundary: map semantic-state ownership
+and dependency direction in the M10 facade, then write the kernel-independence
+and internal-carrier falsifiers before extraction. The parent first commits and
+pushes this final mechanical state-sync successor and verifies remote parity;
+do not begin SYS-1 source edits before that repository-state check.
 
 ## Plan update status
 
 更新済み: Plan 249 is the sole current execution roadmap with complete
 SYS-0--SYS-7 Goal Statements and the meta-alignment matrix. Plan 247 remains an
 unchanged closed record/regression baseline. `plan/00-index.md` points to both
-with distinct current/historical roles. SYS-0 is active/closing and SYS-1 is
-next until review/commit/push/parity close.
+with distinct current/historical roles. SYS-0 is completed/closed, SYS-1 is
+active, and SYS-2 is next.
 
 ## Documentation.md update status
 
-更新済み: the reader entry now identifies ADR-0026/Plan 249, SYS-0 closing,
-and SYS-1 next while retaining the M10 baseline and lifecycle/public non-claims.
+更新済み: the reader entry identifies ADR-0026/Plan 249, SYS-0 completed,
+SYS-1 active, and SYS-2 next while retaining the M10 baseline and
+lifecycle/public non-claims.
 
 ## docs/project-status.md update status
 
-更新済み: the concise LAB control view records SYS-0 closing, SYS-1 next,
-current program authority, exact official T1/non-acceptance boundary, close
-blocker, and following technical blocker.
+更新済み: the concise LAB control view records SYS-0 completed, SYS-1 active,
+SYS-2 next, current program authority, exact official T1/non-acceptance
+boundary, and the active technical blocker.
 
 ## progress.md update status
 
-更新済み: the three axes, macro map, feature rows, startability, SYS-0/SYS-1
-timing, and recent log were synchronized. The correction log uses the actual
-`TZ=Asia/Tokyo date` value `2026-08-26 19:31 JST`.
+更新済み: the three axes, macro map, feature rows, startability, SYS-0/SYS-1/
+SYS-2 timing, and recent log were synchronized. The closeout log uses the
+actually obtained `TZ=Asia/Tokyo date` value `2026-08-26 20:13 JST`.
 
 ## tasks.md update status
 
-更新済み: rewritten as a current snapshot with ordered SYS packages,
-macro/rough estimates, self-driven versus research-discovery items, and the
-complete owner-reserved stop-condition set.
+更新済み: rewritten as a SYS-1-active current snapshot with ordered SYS
+packages, macro/rough estimates, self-driven versus research-discovery items,
+and the complete owner-reserved stop-condition set.
 
 ## samples_progress.md update status
 
@@ -458,9 +518,8 @@ independent acceptance was not pre-claimed at that correction point.
 Final independent close review: **ACCEPT — no P0/P1/P2**. It accepted the
 truthful forward correction history and the validation/evidence listed in this
 report. Plan 247 remains the closed immutable baseline and ADR-0025 remains
-unchanged. This acceptance closes the independent review gate only: SYS-0
-remains active/closing until the parent integrates, commits, pushes, verifies
-remote parity, and records that evidence.
+unchanged. Parent integration/push/parity then closed the remaining SYS-0 gate
+at accepted cut `350e04b400ee5e50147b78af5f5313c761eeaee9`.
 
 ## Skipped validations and reasons
 
@@ -472,20 +531,27 @@ remote parity, and records that evidence.
 - No second Oracle attempt was made: the first failed before submission due to
   a logged-out browser and supplied no advisory result; duplicate retry lacked
   concrete recovery evidence.
-- Integration, commit, push, clean final worktree, and remote parity are
-  pending parent orchestration and are not claimed as passed.
+- The final mechanical status-sync successor commit, push, and parity are
+  pending parent orchestration. They are not claimed as passed and must close
+  before SYS-1 source work begins.
 
 ## Commit / push status
 
-Pending. The planning/status writer was explicitly instructed not to commit or
-push. The parent orchestrator must integrate the independently accepted cut,
-then record the exact commit, push result, and `HEAD == origin/main` parity
-here.
+The independently accepted SYS-0 integration cut is
+`350e04b400ee5e50147b78af5f5313c761eeaee9`
+(`docs(i2): start systems foundation program`). It was pushed as
+`49e6845a..350e04b4 main -> main`; remote `main`, local `HEAD`, and local
+`origin/main` matched that cut, and the worktree was clean.
+
+This report/current-view closeout is the immediate successor to that accepted
+integration cut. A commit cannot truthfully self-embed its own hash, so this
+report does not predict the successor revision. The parent owns its commit,
+push, and final remote-parity verification before any SYS-1 source work.
 
 ## Sub-agent session close status
 
 The config audit, Canon/code mapping, prechange planner review, Oracle attempt,
 all correction reviewers, and the final accepting reviewer returned. The
-planning/status writer session is complete and returns the accepted diff to the
-parent without commit/push. All delegated writer/reviewer sessions are closed;
-parent-owned integration, commit, push, and remote parity remain pending.
+planning/status writer completed the final mechanical closeout sync and returns
+it to the parent without commit/push. All delegated writer/reviewer sessions
+are closed; only parent-owned closeout-successor commit, push, and parity remain.

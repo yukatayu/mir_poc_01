@@ -22,7 +22,8 @@ open_items: []
   M10 semanticsからmeaning-preserving per-locus executable artifacts、generated
   communication、process-internal dispatch、typed devtoolsへ進む Mirrorea I2
   Systems Foundation SYS-0--SYS-7 bounded programを開始した。sole current LAB
-  roadmapはPlan 249、SYS-0 close後のactive goalはSYS-1である。goal statement、
+  roadmapはPlan 249。SYS-0はaccepted integration cutでcompleted、active goalは
+  SYS-1、next goalはSYS-2である。goal statement、
   direct-consumer/candidate/stop/report/review/evidence規律とowner-reserved stop lineを
   採用した。ADR-0015/Plan 247/M10 cutはclosed immutable baselineとして保持する。
   program activationはofficial theory T1を動かさず、broad PHASE-I1 exit、I2 lifecycle
