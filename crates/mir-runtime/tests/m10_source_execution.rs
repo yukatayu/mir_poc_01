@@ -1,5 +1,5 @@
 use mir_runtime::m10_reference_system::{M10ReferenceSystem, M10SourceRunRequest};
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 
 const INLINE_M10_SOURCE: &str = r#"
 module M10.Temp.AttackRelation
@@ -203,15 +203,15 @@ fn wrong_source_residual_or_authority_rejects_before_runtime_mutation() {
             "forged_authority_at_enqueue",
             json!({"kind": "enqueue_owner_with_forged_authority", "authority_ref": "forged:owner:authority"}),
             "ForgedAuthorityRejected",
-            "owner_enqueue_authority_validator",
-            "M8OwnerQueue",
+            "SemanticRuntimeKernel::validate_owner_carrier",
+            "SemanticRuntimeKernelPreAdmission",
         ),
         (
             "missing_live_authority_at_service",
             json!({"kind": "drop_live_authority_before_service", "authority_ref": "m10-owner-capability:attack"}),
             "MissingLiveAuthority",
-            "owner_service_authority_validator",
-            "M8OwnerQueue",
+            "SemanticRuntimeKernel::validate_owner_carrier",
+            "SemanticRuntimeKernelPreAdmission",
         ),
     ] {
         let mut system = M10ReferenceSystem::deterministic_profile("m10-reference-profile");
@@ -252,6 +252,10 @@ fn wrong_source_residual_or_authority_rejects_before_runtime_mutation() {
             json!("tmp/m10/attack_relation_source_execution.mir"),
         );
         assert_json_pointer_eq(&value, "/runtime/mutation_count", json!(0));
+        assert!(
+            value.pointer("/runtime/semantic_kernel").is_none(),
+            "rejected pre-admission carrier must not claim accepted ordinary-run kernel evidence"
+        );
         assert_eq!(
             value.pointer("/runtime/store_hash_before"),
             value.pointer("/runtime/store_hash_after"),

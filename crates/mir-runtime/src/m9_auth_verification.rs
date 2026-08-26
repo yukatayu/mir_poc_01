@@ -16,6 +16,11 @@ use mir_semantics::{
     },
 };
 
+#[cfg(test)]
+use mir_semantics::m9_finite_refinement::{M9ContractCandidate, M9FiniteRefinementChecker};
+
+#[cfg(test)]
+use crate::m8_runtime_admission::{EvidenceRedaction, EvidenceSecurityLabel, M8SecurityClass};
 use crate::m8_runtime_admission::{
     M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base, M8RuntimeAdmission,
     M8RuntimeInstance, materialize_m9_resolved_base, prepare_deferred_m9_base,
@@ -36,6 +41,27 @@ const M9_ADMITTED_AUTH_PROVIDER: &str = "provider:membership-root";
 const M9_OBSERVER_LABEL: &str = "authority-private";
 const M9_OBSERVER_REDACTION: &str = "redact-authority-lineage";
 const M9_OBSERVER_RETENTION: &str = "bounded:contract-update-provenance";
+pub(crate) const M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED: &str = "restricted_redacted";
+
+/// Canonical release identity for one checked source-owner input read.  The
+/// internal release capability carries this value; downstream code may only
+/// verify it against checked Core, never invent it from a carrier header.
+pub(crate) fn canonical_designated_remote_input_release_label(
+    namespace: &str,
+    index: Option<&str>,
+    field: Option<&str>,
+    source_owner: &str,
+    frontier: &str,
+) -> String {
+    format!(
+        "input:{}[{}].{}:{}:{}",
+        namespace,
+        index.unwrap_or(""),
+        field.unwrap_or(""),
+        source_owner,
+        frontier
+    )
+}
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M9SourceArtifact {
@@ -44,6 +70,8 @@ pub struct M9SourceArtifact {
     owner_evaluation_scopes: BTreeSet<(String, String)>,
     relation_scopes: BTreeSet<(String, String, String)>,
     designated_scopes: BTreeSet<(String, String, String)>,
+    designated_remote_input_release_scopes:
+        BTreeSet<(String, String, String, usize, String, String, String)>,
 }
 
 impl M9SourceArtifact {
@@ -98,6 +126,49 @@ impl M9SourceArtifact {
                     })
                 })
                 .collect(),
+            designated_remote_input_release_scopes: checked
+                .evaluations()
+                .iter()
+                .flat_map(|evaluation| {
+                    evaluation
+                        .designated_core()
+                        .into_iter()
+                        .flat_map(|designated| {
+                            let evaluator = designated.evaluator().to_string();
+                            let result = designated.result().to_string();
+                            let frontier = designated
+                                .trigger()
+                                .frontier()
+                                .map_or_else(String::new, ToString::to_string);
+                            designated
+                                .generated_remote_input_dependencies()
+                                .iter()
+                                .enumerate()
+                                .map(move |(dependency_index, dependency)| {
+                                    let read = dependency.typed_state_read();
+                                    let producer_locus =
+                                        dependency.source_owner_locus().to_string();
+                                    let release_label =
+                                        canonical_designated_remote_input_release_label(
+                                            read.namespace(),
+                                            read.index(),
+                                            read.field(),
+                                            &producer_locus,
+                                            &frontier,
+                                        );
+                                    (
+                                        producer_locus,
+                                        evaluator.clone(),
+                                        result.clone(),
+                                        dependency_index,
+                                        frontier.clone(),
+                                        release_label,
+                                        M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED.to_string(),
+                                    )
+                                })
+                        })
+                })
+                .collect(),
         }
     }
 
@@ -149,6 +220,28 @@ impl M9SourceArtifact {
             evaluator.to_string(),
             result.to_string(),
             input_frontier.to_string(),
+        ))
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn contains_designated_remote_input_release_scope(
+        &self,
+        producer_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+        release_label: &str,
+        visibility: &str,
+    ) -> bool {
+        self.designated_remote_input_release_scopes.contains(&(
+            producer_locus.to_string(),
+            evaluator.to_string(),
+            result.to_string(),
+            dependency_index,
+            input_frontier.to_string(),
+            release_label.to_string(),
+            visibility.to_string(),
         ))
     }
 }
@@ -668,7 +761,7 @@ pub struct M9RuntimeAdmitted {
 /// Crate-private M9-to-M8 execution material.  Only the final M9 judgment
 /// creates this carrier; it exposes neither provider data nor an authority
 /// constructor to callers.
-pub(crate) struct M9M10ExecutionSeam {
+pub(crate) struct M9RuntimeExecutionSeam {
     instance: M8RuntimeInstance,
     authority_state: M8AuthorityState,
     authority_snapshot_projection: String,
@@ -681,6 +774,143 @@ pub(crate) struct M9M10ExecutionSeam {
     designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     observer_authorities: BTreeMap<String, M8ObserverAuthorityGrant>,
     translation_refs: BTreeMap<String, (String, String, String)>,
+    kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
+    kernel_designated_remote_input_lineages:
+        BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
+}
+
+/// Historical compatibility spelling for M10's consumer-side bridge.  New
+/// runtime kernel code must depend on [`M9RuntimeExecutionSeam`] directly.
+pub(crate) type M9M10ExecutionSeam = M9RuntimeExecutionSeam;
+
+/// M9-sealed owner lineage exposed only to the internal SYS-1 kernel.  This
+/// is an authenticated execution fact, not a credential constructor or wire
+/// carrier.  The M10 facade may still consume its legacy M8 bridge separately.
+#[derive(Clone)]
+pub(crate) struct M9KernelOwnerLineage {
+    principal: String,
+    owner_locus: String,
+    membership_ref: String,
+    membership_epoch: String,
+    membership_incarnation: String,
+    capability_ref: String,
+    witness_ref: String,
+}
+
+impl std::fmt::Debug for M9KernelOwnerLineage {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9KernelOwnerLineage(<sealed>)")
+    }
+}
+
+impl M9KernelOwnerLineage {
+    pub(crate) fn principal(&self) -> &str {
+        &self.principal
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn membership_ref(&self) -> &str {
+        &self.membership_ref
+    }
+
+    pub(crate) fn membership_epoch(&self) -> &str {
+        &self.membership_epoch
+    }
+
+    pub(crate) fn membership_incarnation(&self) -> &str {
+        &self.membership_incarnation
+    }
+
+    pub(crate) fn capability_ref(&self) -> &str {
+        &self.capability_ref
+    }
+
+    pub(crate) fn witness_ref(&self) -> &str {
+        &self.witness_ref
+    }
+}
+
+/// M9-sealed producer authority for exactly one checked designated remote
+/// input dependency.  The sealed scope, not evaluator authority or carrier
+/// metadata, fixes the release tuple and its producer-side lineage.
+#[derive(Clone)]
+pub(crate) struct M9KernelDesignatedRemoteInputLineage {
+    principal: String,
+    producer_locus: String,
+    evaluator: String,
+    result: String,
+    dependency_index: usize,
+    input_frontier: String,
+    release_label: String,
+    visibility: String,
+    membership_ref: String,
+    membership_epoch: String,
+    membership_incarnation: String,
+    capability_ref: String,
+    witness_ref: String,
+}
+
+impl std::fmt::Debug for M9KernelDesignatedRemoteInputLineage {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9KernelDesignatedRemoteInputLineage(<sealed>)")
+    }
+}
+
+impl M9KernelDesignatedRemoteInputLineage {
+    pub(crate) fn principal(&self) -> &str {
+        &self.principal
+    }
+
+    pub(crate) fn membership_ref(&self) -> &str {
+        &self.membership_ref
+    }
+
+    pub(crate) fn producer_locus(&self) -> &str {
+        &self.producer_locus
+    }
+
+    pub(crate) fn evaluator(&self) -> &str {
+        &self.evaluator
+    }
+
+    pub(crate) fn result(&self) -> &str {
+        &self.result
+    }
+
+    pub(crate) const fn dependency_index(&self) -> usize {
+        self.dependency_index
+    }
+
+    pub(crate) fn input_frontier(&self) -> &str {
+        &self.input_frontier
+    }
+
+    pub(crate) fn release_label(&self) -> &str {
+        &self.release_label
+    }
+
+    pub(crate) fn visibility(&self) -> &str {
+        &self.visibility
+    }
+
+    pub(crate) fn membership_epoch(&self) -> &str {
+        &self.membership_epoch
+    }
+
+    pub(crate) fn membership_incarnation(&self) -> &str {
+        &self.membership_incarnation
+    }
+
+    pub(crate) fn capability_ref(&self) -> &str {
+        &self.capability_ref
+    }
+
+    pub(crate) fn witness_ref(&self) -> &str {
+        &self.witness_ref
+    }
 }
 
 /// A sealed M9 authority snapshot translated for one already-admitted M8
@@ -865,7 +1095,442 @@ impl M9M10AuthorityBridge {
     }
 }
 
-impl M9M10ExecutionSeam {
+impl M9RuntimeExecutionSeam {
+    /// Build a complete owner-operation admission through the normal typed M9
+    /// authority pipeline.  It remains test-only so this does not create a
+    /// production source-free admission path.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_owner_seam_for_kernel(
+        checked: &CheckedSurfaceV0,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Result<Self, String> {
+        let evaluation = checked
+            .evaluation(operation)
+            .ok_or_else(|| "kernel test requested an unchecked owner operation".to_string())?;
+        let owner_core = evaluation
+            .owner_rmw_core()
+            .ok_or_else(|| "kernel test requested a non-owner operation".to_string())?;
+        if evaluation.actor_authority_origin() != principal
+            || evaluation.authority_origin_locus() != owner_locus
+            || owner_core.owner_locus() != owner_locus
+        {
+            return Err("kernel test requested a mismatched owner lineage".to_string());
+        }
+
+        let m9 = M9AdmissionRuntime::default();
+        let base = m9
+            .admit_source_bound_base(
+                checked.clone(),
+                test_kernel_m8_admission_for(checked)?,
+                test_kernel_m9_envelope_for(checked),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 base admission: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let auth_residual = checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
+            .ok_or_else(|| "kernel test source lacks AuthDeferred".to_string())?;
+        let epoch = "epoch1";
+        let incarnation = format!("incarnation:{principal}:{owner_locus}:{epoch}");
+        let mut authority = base.authority_runtime();
+        let attestation = authority
+            .issue_membership_attestation(
+                principal,
+                owner_locus,
+                epoch,
+                incarnation.clone(),
+                auth_residual.name(),
+                auth_residual.source_ref().clone(),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 membership attestation: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let membership = authority
+            .authenticate_membership(
+                M9MembershipRequest::new(principal, owner_locus, epoch)
+                    .with_incarnation(incarnation)
+                    .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
+                    .with_issued_provider_attestation(attestation),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 membership: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let contract_capability = authority
+            .authorize_capability(
+                M9CapabilityGrantRequest::new("kernel-test-contract-capability")
+                    .with_membership_ref(membership.ref_id())
+                    .with_scope(M9CapabilityScope::contract_update(
+                        checked.program_identity().module(),
+                        format!("membership-authority/{}", auth_residual.name()),
+                    ))
+                    .with_lineage_epoch(membership.epoch())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 contract capability: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let contract_witness = authority
+            .materialize_witness(
+                M9WitnessRequest::new("kernel-test-contract-witness")
+                    .with_membership_ref(membership.ref_id())
+                    .with_capability_ref(contract_capability.ref_id())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 contract witness: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let owner_capability = authority
+            .authorize_capability(
+                M9CapabilityGrantRequest::new(format!(
+                    "kernel-test-owner-evaluation:{operation}:{owner_locus}:{principal}:{epoch}"
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_scope(M9CapabilityScope::owner_evaluation(operation, owner_locus))
+                .with_lineage_epoch(membership.epoch())
+                .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 owner capability: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let _owner_witness = authority
+            .materialize_witness(
+                M9WitnessRequest::new(format!(
+                    "kernel-test-owner-witness:{operation}:{owner_locus}:{principal}:{epoch}"
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_capability_ref(owner_capability.ref_id())
+                .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 owner witness: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let discharge = M9FiniteRefinementChecker::default()
+            .discharge_candidate(
+                checked,
+                M9ContractCandidate::from_checked_surface(checked).membership_auth_strengthening(),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 finite refinement: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        m9.admit_runtime(
+            base,
+            authority,
+            M9FinalAdmissionEvidence::from_lineage(
+                &membership,
+                &contract_capability,
+                &contract_witness,
+                discharge,
+            ),
+        )
+        .map(M9RuntimeAdmitted::into_m10_execution_seam)
+        .map_err(|diagnostics| {
+            format!(
+                "kernel test final M9 admission: {:?}",
+                diagnostics.primary().kind()
+            )
+        })
+    }
+
+    /// Build a complete M9 admission through the same typed source, authority,
+    /// witness, and finite-refinement operations used by the production seam.
+    /// This is deliberately test-only: it supplies a real admitted seam to
+    /// kernel boundary tests without adding a production source-free seal.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_designated_remote_input_seam_for_kernel(
+        checked: &CheckedSurfaceV0,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+    ) -> Result<Self, String> {
+        Self::test_real_admitted_designated_seam_for_kernel(
+            checked,
+            evaluator,
+            result,
+            dependency_index,
+            true,
+        )
+    }
+
+    /// Build a real admitted evaluator capability without the distinct
+    /// producer-side release scope.  SYS-1 uses this only to prove that a
+    /// designated evaluator cannot manufacture a remote-input release.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_designated_evaluator_only_seam_for_kernel(
+        checked: &CheckedSurfaceV0,
+        evaluator: &str,
+        result: &str,
+        input_frontier: &str,
+    ) -> Result<Self, String> {
+        let designated = checked
+            .designated_result(evaluator, result)
+            .and_then(|evaluation| evaluation.designated_core())
+            .ok_or_else(|| "kernel test requested an unchecked designated result".to_string())?;
+        if designated.trigger().frontier() != Some(input_frontier) {
+            return Err("kernel test requested a mismatched designated frontier".to_string());
+        }
+        if designated.generated_remote_input_dependencies().is_empty() {
+            return Err(
+                "kernel test designated result lacks a remote input dependency".to_string(),
+            );
+        }
+        Self::test_real_admitted_designated_seam_for_kernel(checked, evaluator, result, 0, false)
+    }
+
+    #[cfg(test)]
+    fn test_real_admitted_designated_seam_for_kernel(
+        checked: &CheckedSurfaceV0,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        issue_remote_input_release: bool,
+    ) -> Result<Self, String> {
+        let dependency = checked
+            .designated_result(evaluator, result)
+            .and_then(|evaluation| evaluation.designated_core())
+            .and_then(|core| {
+                core.generated_remote_input_dependencies()
+                    .get(dependency_index)
+            })
+            .ok_or_else(|| {
+                "kernel test requested an unchecked designated dependency".to_string()
+            })?;
+        let input_frontier = checked
+            .designated_result(evaluator, result)
+            .and_then(|evaluation| evaluation.designated_core())
+            .and_then(|core| core.trigger().frontier())
+            .ok_or_else(|| {
+                "kernel test designated dependency lacks a checked frontier".to_string()
+            })?;
+        let principal = checked
+            .static_environment()
+            .principals()
+            .first()
+            .map(|principal| principal.name())
+            .ok_or_else(|| "kernel test source lacks a principal".to_string())?;
+        let source_owner = dependency.source_owner_locus();
+        let m9 = M9AdmissionRuntime::default();
+        let base = m9
+            .admit_source_bound_base(
+                checked.clone(),
+                test_kernel_m8_admission_for(checked)?,
+                test_kernel_m9_envelope_for(checked),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 base admission: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let auth_residual = checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
+            .ok_or_else(|| "kernel test source lacks AuthDeferred".to_string())?;
+        let epoch = "epoch1";
+        let incarnation = format!("incarnation:{principal}:{source_owner}:{epoch}");
+        let mut authority = base.authority_runtime();
+        let attestation = authority
+            .issue_membership_attestation(
+                principal,
+                source_owner,
+                epoch,
+                incarnation.clone(),
+                auth_residual.name(),
+                auth_residual.source_ref().clone(),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 membership attestation: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let membership = authority
+            .authenticate_membership(
+                M9MembershipRequest::new(principal, source_owner, epoch)
+                    .with_incarnation(incarnation)
+                    .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
+                    .with_issued_provider_attestation(attestation),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 membership: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let contract_capability = authority
+            .authorize_capability(
+                M9CapabilityGrantRequest::new("kernel-test-contract-capability")
+                    .with_membership_ref(membership.ref_id())
+                    .with_scope(M9CapabilityScope::contract_update(
+                        checked.program_identity().module(),
+                        format!("membership-authority/{}", auth_residual.name()),
+                    ))
+                    .with_lineage_epoch(membership.epoch())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 contract capability: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let contract_witness = authority
+            .materialize_witness(
+                M9WitnessRequest::new("kernel-test-contract-witness")
+                    .with_membership_ref(membership.ref_id())
+                    .with_capability_ref(contract_capability.ref_id())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 contract witness: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let evaluation_capability = authority
+            .authorize_capability(
+                M9CapabilityGrantRequest::new(format!(
+                    "kernel-test-designated-evaluation:{evaluator}:{result}:{input_frontier}"
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_scope(M9CapabilityScope::designated_evaluation(
+                    evaluator,
+                    result,
+                    input_frontier,
+                ))
+                .with_lineage_epoch(membership.epoch())
+                .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 designated capability: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let _evaluation_witness = authority
+            .materialize_witness(
+                M9WitnessRequest::new(format!(
+                    "kernel-test-designated-evaluation-witness:{evaluator}:{result}:{input_frontier}"
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_capability_ref(evaluation_capability.ref_id())
+                .with_source_ref(auth_residual.source_ref().clone()),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 designated witness: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        if issue_remote_input_release {
+            let read = dependency.typed_state_read();
+            let release_label = canonical_designated_remote_input_release_label(
+                read.namespace(),
+                read.index(),
+                read.field(),
+                source_owner,
+                input_frontier,
+            );
+            let release_capability = authority
+                .authorize_capability(
+                    M9CapabilityGrantRequest::new(format!(
+                        "cap:attack:{source_owner}:{principal}:{epoch}"
+                    ))
+                    .with_membership_ref(membership.ref_id())
+                    .with_scope(M9CapabilityScope::designated_remote_input_release(
+                        source_owner,
+                        evaluator,
+                        result,
+                        dependency_index,
+                        input_frontier,
+                        release_label,
+                        M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED,
+                    ))
+                    .with_lineage_epoch(membership.epoch())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated release capability: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let _release_witness = authority
+                .materialize_witness(
+                    M9WitnessRequest::new(format!(
+                        "witness:attack:{source_owner}:{principal}:{epoch}"
+                    ))
+                    .with_membership_ref(membership.ref_id())
+                    .with_capability_ref(release_capability.ref_id())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated release witness: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+        }
+        let discharge = M9FiniteRefinementChecker::default()
+            .discharge_candidate(
+                checked,
+                M9ContractCandidate::from_checked_surface(checked).membership_auth_strengthening(),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 finite refinement: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        m9.admit_runtime(
+            base,
+            authority,
+            M9FinalAdmissionEvidence::from_lineage(
+                &membership,
+                &contract_capability,
+                &contract_witness,
+                discharge,
+            ),
+        )
+        .map(M9RuntimeAdmitted::into_m10_execution_seam)
+        .map_err(|diagnostics| {
+            format!(
+                "kernel test final M9 admission: {:?}",
+                diagnostics.primary().kind()
+            )
+        })
+    }
+
     pub(crate) fn into_parts(self) -> (M8RuntimeInstance, M8AuthorityState) {
         (self.instance, self.authority_state)
     }
@@ -958,6 +1623,135 @@ impl M9M10ExecutionSeam {
     ) -> Option<&(String, String, String)> {
         self.translation_refs.get(capability_ref)
     }
+
+    /// Read a M9-issued owner lineage for the internal semantic runtime
+    /// kernel.  The lookup cannot issue, refresh, or transform authority.
+    pub(crate) fn kernel_owner_lineage(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M9KernelOwnerLineage> {
+        self.kernel_owner_lineages
+            .get(&(
+                evaluation.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .cloned()
+    }
+
+    /// Read the active producer-side release lineage for one exact checked
+    /// designated dependency.  The evaluator's decision capability cannot
+    /// satisfy this lookup.
+    pub(crate) fn kernel_designated_remote_input_lineage(
+        &self,
+        producer_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> Option<M9KernelDesignatedRemoteInputLineage> {
+        self.kernel_designated_remote_input_lineages
+            .get(&(
+                producer_locus.to_string(),
+                evaluator.to_string(),
+                result.to_string(),
+                dependency_index,
+                input_frontier.to_string(),
+            ))
+            .cloned()
+    }
+}
+
+#[cfg(test)]
+fn test_kernel_m8_admission_for(checked: &CheckedSurfaceV0) -> Result<M8RuntimeAdmission, String> {
+    let mut admission = M8RuntimeAdmission::new(checked.program_identity().clone());
+    for residual in checked.residual_obligations().entries() {
+        match residual.kind() {
+            ResidualObligationKind::Visibility => {
+                admission = admission.with_evidence(M8AdmissionEvidence::RelationVisibility {
+                    relation: residual.name().to_string(),
+                    label: EvidenceSecurityLabel::new("relation:restricted")
+                        .with_class(M8SecurityClass::Restricted),
+                    redaction: EvidenceRedaction::new("relation-redacted"),
+                    source_ref: residual.source_ref().clone(),
+                });
+            }
+            ResidualObligationKind::RelationLifetime => {
+                let relation = checked
+                    .relation(residual.name())
+                    .and_then(|evaluation| evaluation.relation_core())
+                    .ok_or_else(|| {
+                        "kernel test relation lifetime lacks checked Core".to_string()
+                    })?;
+                let frontier = relation
+                    .binding_frontier()
+                    .as_slice()
+                    .first()
+                    .ok_or_else(|| "kernel test relation lifetime lacks frontier".to_string())?
+                    .as_str()
+                    .to_string();
+                admission = admission.with_evidence(M8AdmissionEvidence::RelationLifetime {
+                    relation: residual.name().to_string(),
+                    live_lease: format!("kernel-test-lease:{}", residual.name()),
+                    binding_frontier: frontier,
+                    source_ref: residual.source_ref().clone(),
+                });
+            }
+            ResidualObligationKind::FallbackValidity => {
+                let relation = checked
+                    .relation(residual.name())
+                    .and_then(|evaluation| evaluation.relation_core())
+                    .ok_or_else(|| "kernel test fallback lacks checked Core".to_string())?;
+                admission =
+                    admission.with_evidence(M8AdmissionEvidence::RelationFallbackValidity {
+                        relation: residual.name().to_string(),
+                        primary_epoch: relation.primary().epoch().to_string(),
+                        fallback_epoch: relation.fallback().epoch().to_string(),
+                        source_ref: residual.source_ref().clone(),
+                    });
+            }
+            ResidualObligationKind::ValueVisibilityRedaction => {
+                admission =
+                    admission.with_evidence(M8AdmissionEvidence::ValueVisibilityRedaction {
+                        value: residual.name().to_string(),
+                        label: EvidenceSecurityLabel::new("value:restricted")
+                            .with_class(M8SecurityClass::Restricted),
+                        redaction: EvidenceRedaction::new("value-redacted"),
+                        source_ref: residual.source_ref().clone(),
+                    });
+            }
+            ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred => {}
+        }
+    }
+    Ok(admission)
+}
+
+#[cfg(test)]
+fn test_kernel_m9_envelope_for(checked: &CheckedSurfaceV0) -> M9AdmissionEnvelope {
+    let mut envelope =
+        M9AdmissionEnvelope::for_checked_identity(checked.program_identity().clone())
+            .with_original_source_artifact(M9SourceArtifact::from_checked_surface(checked));
+    for residual in checked.residual_obligations().entries() {
+        let (binding, contract) = match residual.kind() {
+            ResidualObligationKind::AuthDeferred => (
+                M9ResidualBinding::auth_deferred(residual.name()),
+                format!("membership-authority/{}", residual.name()),
+            ),
+            ResidualObligationKind::VerifyDeferred => (
+                M9ResidualBinding::verify_deferred(residual.name()),
+                "finite-refinement/MembershipAuth".to_string(),
+            ),
+            _ => continue,
+        };
+        envelope = envelope.with_residual_binding(
+            binding
+                .with_source_ref(residual.source_ref().clone())
+                .with_module_contract(checked.program_identity().module(), contract),
+        );
+    }
+    envelope
 }
 
 impl std::fmt::Debug for M9RuntimeAdmitted {
@@ -1043,6 +1837,8 @@ impl M9RuntimeAdmitted {
         let mut designated_consumption_uses = BTreeMap::new();
         let mut observer_authorities = BTreeMap::new();
         let mut translation_refs = BTreeMap::new();
+        let mut kernel_owner_lineages = BTreeMap::new();
+        let mut kernel_designated_remote_input_lineages = BTreeMap::new();
         for capability in snapshot
             .capabilities
             .values()
@@ -1096,6 +1892,22 @@ impl M9RuntimeAdmitted {
                         .with_membership_ref(membership.reference.clone())
                         .with_capability_ref(capability.reference.clone())
                         .with_witness_ref(witness.reference.clone()),
+                );
+                kernel_owner_lineages.insert(
+                    (
+                        evaluation.clone(),
+                        membership.principal.clone(),
+                        owner_locus.clone(),
+                    ),
+                    M9KernelOwnerLineage {
+                        principal: membership.principal.clone(),
+                        owner_locus: owner_locus.clone(),
+                        membership_ref: membership.reference.clone(),
+                        membership_epoch: membership.epoch.clone(),
+                        membership_incarnation: membership.incarnation.clone(),
+                        capability_ref: capability.reference.clone(),
+                        witness_ref: witness.reference.clone(),
+                    },
                 );
                 translation_refs.insert(
                     capability.reference.clone(),
@@ -1284,6 +2096,53 @@ impl M9RuntimeAdmitted {
                         ),
                     );
                 }
+                M9CapabilityScope::DesignatedRemoteInputRelease {
+                    producer_locus,
+                    evaluator,
+                    result,
+                    dependency_index,
+                    input_frontier,
+                    release_label,
+                    visibility,
+                } => {
+                    // This scope is producer-side release authority only. It
+                    // does not materialize an M8 evaluator capability.
+                    if membership.locus != *producer_locus {
+                        continue;
+                    }
+                    kernel_designated_remote_input_lineages.insert(
+                        (
+                            producer_locus.clone(),
+                            evaluator.clone(),
+                            result.clone(),
+                            *dependency_index,
+                            input_frontier.clone(),
+                        ),
+                        M9KernelDesignatedRemoteInputLineage {
+                            principal: membership.principal.clone(),
+                            producer_locus: producer_locus.clone(),
+                            evaluator: evaluator.clone(),
+                            result: result.clone(),
+                            dependency_index: *dependency_index,
+                            input_frontier: input_frontier.clone(),
+                            release_label: release_label.clone(),
+                            visibility: visibility.clone(),
+                            membership_ref: membership.reference.clone(),
+                            membership_epoch: membership.epoch.clone(),
+                            membership_incarnation: membership.incarnation.clone(),
+                            capability_ref: capability.reference.clone(),
+                            witness_ref: witness.reference.clone(),
+                        },
+                    );
+                    translation_refs.insert(
+                        capability.reference.clone(),
+                        (
+                            membership.reference.clone(),
+                            capability.reference.clone(),
+                            witness.reference.clone(),
+                        ),
+                    );
+                }
                 M9CapabilityScope::DesignatedConsumption {
                     consumer,
                     value_name,
@@ -1357,6 +2216,8 @@ impl M9RuntimeAdmitted {
             designated_consumption_uses,
             observer_authorities,
             translation_refs,
+            kernel_owner_lineages,
+            kernel_designated_remote_input_lineages,
         }
     }
 
@@ -2025,6 +2886,18 @@ pub enum M9CapabilityScope {
         result: String,
         input_frontier: String,
     },
+    /// Producer-side authority to release exactly one source-derived input
+    /// into a designated evaluator.  It is intentionally distinct from the
+    /// evaluator's decision authority.
+    DesignatedRemoteInputRelease {
+        producer_locus: String,
+        evaluator: String,
+        result: String,
+        dependency_index: usize,
+        input_frontier: String,
+        release_label: String,
+        visibility: String,
+    },
     DesignatedConsumption {
         consumer: String,
         value_name: String,
@@ -2098,6 +2971,28 @@ impl M9CapabilityScope {
             evaluator: evaluator.into(),
             result: result.into(),
             input_frontier: input_frontier.into(),
+        }
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn designated_remote_input_release(
+        producer_locus: impl Into<String>,
+        evaluator: impl Into<String>,
+        result: impl Into<String>,
+        dependency_index: usize,
+        input_frontier: impl Into<String>,
+        release_label: impl Into<String>,
+        visibility: impl Into<String>,
+    ) -> Self {
+        Self::DesignatedRemoteInputRelease {
+            producer_locus: producer_locus.into(),
+            evaluator: evaluator.into(),
+            result: result.into(),
+            dependency_index,
+            input_frontier: input_frontier.into(),
+            release_label: release_label.into(),
+            visibility: visibility.into(),
         }
     }
 
@@ -3496,6 +4391,28 @@ impl M9AuthorityRuntime {
             } => outer
                 .source_artifact
                 .contains_designated_scope(evaluator, result, input_frontier),
+            M9CapabilityScope::DesignatedRemoteInputRelease {
+                producer_locus,
+                evaluator,
+                result,
+                dependency_index,
+                input_frontier,
+                release_label,
+                visibility,
+            } => {
+                membership.locus == *producer_locus
+                    && outer
+                        .source_artifact
+                        .contains_designated_remote_input_release_scope(
+                            producer_locus,
+                            evaluator,
+                            result,
+                            *dependency_index,
+                            input_frontier,
+                            release_label,
+                            visibility,
+                        )
+            }
             M9CapabilityScope::DesignatedConsumption {
                 consumer,
                 value_name,
@@ -3759,6 +4676,17 @@ fn canonical_m9_capability_scope(scope: &M9CapabilityScope) -> String {
             result,
             input_frontier,
         } => format!("designated_evaluation:{evaluator}:{result}:{input_frontier}"),
+        M9CapabilityScope::DesignatedRemoteInputRelease {
+            producer_locus,
+            evaluator,
+            result,
+            dependency_index,
+            input_frontier,
+            release_label,
+            visibility,
+        } => format!(
+            "designated_remote_input_release:{producer_locus}:{evaluator}:{result}:{dependency_index}:{input_frontier}:{release_label}:{visibility}"
+        ),
         M9CapabilityScope::DesignatedConsumption {
             consumer,
             value_name,
@@ -3993,6 +4921,7 @@ impl M9ContractAuthorityUse {
             | M9CapabilityScope::Observation { .. }
             | M9CapabilityScope::RelationTransition { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
+            | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
             | M9CapabilityScope::DesignatedConsumption { .. } => None,
         };
         Self {
@@ -4341,6 +5270,7 @@ impl M9ObserverRequest {
             | M9CapabilityScope::ContractUpdate { .. }
             | M9CapabilityScope::RelationTransition { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
+            | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
             | M9CapabilityScope::DesignatedConsumption { .. } => String::new(),
         };
         Self {

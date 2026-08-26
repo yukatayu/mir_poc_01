@@ -3,7 +3,7 @@ use std::{ops::Range, path::PathBuf};
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
-    surface_v0_pipeline::{check_and_elaborate_surface_v0, CheckedSurfaceV0, EffectKind},
+    surface_v0_pipeline::{CheckedSurfaceV0, EffectKind, check_and_elaborate_surface_v0},
 };
 
 use crate::m9_auth_verification::M9RuntimeExecutionSeam;
@@ -269,14 +269,6 @@ fn designated_kernel() -> (String, String, CheckedSurfaceV0, SemanticRuntimeKern
     (path, source, checked, kernel)
 }
 
-fn sealed_designated_remote_input_admission_from_real_m9_seam(
-    checked: &CheckedSurfaceV0,
-) -> SealedM9RuntimeAdmission {
-    let seam = real_designated_remote_input_m9_seam(checked);
-    SealedM9RuntimeAdmission::from_m9_execution_seam(checked, &seam)
-        .expect("real admitted M9 seam exposes the checked designated remote-input lineage")
-}
-
 fn real_designated_remote_input_m9_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
     M9RuntimeExecutionSeam::test_real_admitted_designated_remote_input_seam_for_kernel(
         checked,
@@ -336,9 +328,11 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
         owner_provenance(&checked, operation_ref).core_ref()
     );
     assert!(receipt.effect_row().contains(EffectKind::OwnerRequest));
-    assert!(receipt
-        .failure_row()
-        .contains(FailureKind::MissingCapability));
+    assert!(
+        receipt
+            .failure_row()
+            .contains(FailureKind::MissingCapability)
+    );
     assert!(receipt.failure_row().contains(FailureKind::StaleMembership));
     assert_eq!(
         receipt.capability_refs(),
@@ -630,9 +624,12 @@ fn declared_route_unavailable_yields_typed_failure_reply_and_receipt_without_mut
     assert_eq!(receipt.failure(), Some(FailureKind::RouteUnavailable));
     assert_eq!(receipt.request_identity(), queued.request_identity());
     assert_eq!(kernel.semantic_snapshot(), &before);
-    assert!(kernel
-        .trace()
-        .contains_typed_failure_receipt(queued.request_identity(), FailureKind::RouteUnavailable));
+    assert!(
+        kernel.trace().contains_typed_failure_receipt(
+            queued.request_identity(),
+            FailureKind::RouteUnavailable
+        )
+    );
 }
 
 #[test]
@@ -695,16 +692,20 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
     assert_eq!(dependency.typed_state_read().field(), Some("atk"));
     assert_eq!(dependency.typed_state_read().owner_locus(), OWNER_LOCUS);
     assert_eq!(dependency.typed_state_read().source_ref(), input_ref);
-    assert!(designated
-        .effect_row()
-        .entries()
-        .iter()
-        .any(|entry| entry.kind() == EffectKind::DesignatedRemoteRequest));
-    assert!(designated
-        .effect_row()
-        .entries()
-        .iter()
-        .any(|entry| entry.kind() == EffectKind::DesignatedReceiptUse));
+    assert!(
+        designated
+            .effect_row()
+            .entries()
+            .iter()
+            .any(|entry| entry.kind() == EffectKind::DesignatedRemoteRequest)
+    );
+    assert!(
+        designated
+            .effect_row()
+            .entries()
+            .iter()
+            .any(|entry| entry.kind() == EffectKind::DesignatedReceiptUse)
+    );
 
     let requested = kernel
         .enqueue_remote_input_request(designated_remote_input_request(&checked, input_ref.clone()))
@@ -755,9 +756,11 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
         receipt.effect_row().entries(),
         [EffectKind::DesignatedRemoteRequest]
     );
-    assert!(receipt
-        .failure_row()
-        .contains(FailureKind::RouteUnavailable));
+    assert!(
+        receipt
+            .failure_row()
+            .contains(FailureKind::RouteUnavailable)
+    );
     assert_eq!(receipt.value(), Some(&SemanticValue::Int(10)));
     assert_eq!(
         receipt.membership_incarnation(),

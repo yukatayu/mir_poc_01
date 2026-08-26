@@ -54,6 +54,7 @@ use crate::{
         M9M10AuthorityBridge, M9MembershipAuth, M9MembershipRequest, M9ResidualBinding,
         M9SourceArtifact, M9WitnessAuth, M9WitnessRequest,
     },
+    semantic_runtime_kernel::{KernelSeed, LocusRef, SemanticRuntimeKernel},
 };
 
 /// Serializable source request accepted by the provisional M10 profile.
@@ -997,10 +998,10 @@ fn m10_schedule_seed_key(key: &str, principal: &str, target: &str) -> Option<M8S
         .then(|| M8StateKey::indexed_field(namespace, index, field))
 }
 
-/// Execute an owner request through the existing M7 -> M9 -> M8 seam.  The
-/// schedule supplies only exogenous request fields; authority remains sealed
-/// in the M9 execution seam and can only be deliberately corrupted here to
-/// exercise an M8 rejection path.
+/// Execute a generic owner request through M7 -> M9 -> semantic kernel -> M8.
+/// The schedule supplies only exogenous request fields; authority remains
+/// sealed in the M9 execution seam. Deliberately corrupted carriers are
+/// rejected at kernel pre-admission before the M8 owner queue is reached.
 fn execute_checked_owner_schedule(
     checked: &CheckedSurfaceV0,
     request: &M10OwnerEventRequest,
@@ -1025,16 +1026,12 @@ fn execute_checked_owner_schedule(
         &request.principal,
         owner.owner_locus(),
     )?;
-    let admitted_authority = seam
-        .owner_authority_use(&request.event, &request.principal, owner.owner_locus())
-        .ok_or_else(|| "M10 schedule M9 admission did not seal owner authority".to_string())?;
     let m9 = M10M9DomainSnapshot::from_seam(&seam);
     let observer_principal = format!("observer:{}", request.principal);
     let observer_authority = seam
         .observer_authority(&observer_principal)
         .ok_or_else(|| "M10 owner schedule lacks M9-issued observer authority".to_string())?;
-    let (instance, authority_state) = seam.into_parts();
-    let mut seed = M8LocalRuntimeSeed::new().with_authority_state(authority_state);
+    let mut kernel_seed = KernelSeed::new();
     let mut seeded = BTreeSet::new();
     for read in owner
         .same_owner_reads()
@@ -1047,22 +1044,20 @@ fn execute_checked_owner_schedule(
             read.field().unwrap_or(""),
         );
         if seeded.insert(key.clone()) {
-            seed = seed.with_owner_int(key, 0);
+            kernel_seed = kernel_seed.with_int(key, 0);
         }
     }
     for (key, value) in &request.seed {
         let key = m10_schedule_seed_key(key, &request.principal, target)
             .ok_or_else(|| format!("M10 schedule has malformed owner seed {key}"))?;
-        seed = seed.with_owner_int(key, *value);
+        kernel_seed = kernel_seed.with_int(key, *value);
     }
     let target_key = M8StateKey::indexed_field(
         owner.target().namespace(),
         m10_schedule_index(owner.target().index(), &request.principal, target),
         owner.target().field().unwrap_or(""),
     );
-    let mut runtime = M8LocalRuntime::from_admitted(instance, seed);
-    let before_runtime = runtime.clone();
-    let mut owner_request = M8OwnerRequest::new(&request.event);
+    let mut kernel_arguments = BTreeMap::new();
     for parameter in checked
         .static_environment()
         .evaluation_signature(&request.event)
@@ -1074,50 +1069,62 @@ fn execute_checked_owner_schedule(
             .get(parameter.name())
             .copied()
             .unwrap_or(0);
-        owner_request = owner_request.with_argument(parameter.name(), value.to_string());
+        kernel_arguments.insert(parameter.name().to_string(), value.to_string());
     }
     if request.target.is_some() {
-        owner_request = owner_request.with_argument("target", target);
+        kernel_arguments.insert("target".to_string(), target.to_string());
     }
-    let authority =
-        match mode {
-            M10OwnerAuthorityMode::Admitted => admitted_authority,
-            M10OwnerAuthorityMode::MissingCapability => {
-                M8AuthorityUse::for_principal(&request.principal)
-                    .with_membership_ref(admitted_authority.membership_ref().ok_or_else(|| {
-                        "M10 owner authority lacks membership reference".to_string()
-                    })?)
-                    .with_witness_ref(
-                        admitted_authority.witness_ref().ok_or_else(|| {
-                            "M10 owner authority lacks witness reference".to_string()
-                        })?,
-                    )
-            }
-            M10OwnerAuthorityMode::ReplayedCapability => {
-                M8AuthorityUse::for_principal(&request.principal)
-                    .with_membership_ref(admitted_authority.membership_ref().ok_or_else(|| {
-                        "M10 owner authority lacks membership reference".to_string()
-                    })?)
-                    .with_capability_ref("m10-schedule-replayed-capability")
-                    .with_witness_ref(
-                        admitted_authority.witness_ref().ok_or_else(|| {
-                            "M10 owner authority lacks witness reference".to_string()
-                        })?,
-                    )
-            }
-        };
-    let before = runtime.owner_state().clone();
-    if runtime
-        .enqueue_owner(owner_request.with_authority_use(authority))
-        .is_err()
-    {
+    let mut kernel =
+        SemanticRuntimeKernel::from_m9_execution_seam(checked.clone(), seam, kernel_seed)
+            .map_err(|diagnostic| format!("M10 SYS-1 kernel admission rejected: {diagnostic:?}"))?;
+    let carrier = kernel
+        .owner_request_from_admitted_lineage(
+            &request.event,
+            LocusRef::new(owner.authority_origin_locus()),
+            kernel_arguments,
+        )
+        .map_err(|diagnostic| format!("M10 SYS-1 carrier construction rejected: {diagnostic:?}"))?;
+    let carrier = match mode {
+        M10OwnerAuthorityMode::Admitted => carrier,
+        M10OwnerAuthorityMode::MissingCapability => {
+            carrier.without_capability_for_kernel_falsifier()
+        }
+        M10OwnerAuthorityMode::ReplayedCapability => carrier.with_kernel_falsifier_capability(
+            crate::semantic_runtime_kernel::CapabilityRef::new("m10-schedule-replayed-capability"),
+        ),
+    };
+    if kernel.enqueue_owner_request(carrier).is_err() {
         return Ok(M10OwnerScheduleOutcome::RejectedBeforeMutation);
     }
-    if runtime.serve_next_owner(owner.owner_locus()).is_err() {
-        if runtime.owner_state() != &before {
-            return Err("M10 rejected owner request mutated state".to_string());
+    let before_runtime = kernel
+        .m8_runtime_snapshot()
+        .map_err(|diagnostic| format!("M10 SYS-1 runtime snapshot rejected: {diagnostic:?}"))?;
+    let served = kernel
+        .serve_next_owner(LocusRef::new(owner.owner_locus()))
+        .map_err(|diagnostic| format!("M10 SYS-1 owner serve rejected: {diagnostic:?}"))?;
+    let reply = kernel
+        .reply_to_served_request(served.serve_occurrence())
+        .map_err(|diagnostic| format!("M10 SYS-1 owner reply rejected: {diagnostic:?}"))?;
+    let receipt = kernel
+        .receive_reply(reply)
+        .map_err(|diagnostic| format!("M10 SYS-1 owner receipt rejected: {diagnostic:?}"))?;
+    if receipt.failure().is_some() {
+        let runtime = kernel.into_m8_runtime().map_err(|diagnostic| {
+            format!("M10 SYS-1 runtime extraction rejected: {diagnostic:?}")
+        })?;
+        if runtime.owner_state() != before_runtime.owner_state() {
+            return Err("M10 typed owner failure mutated state".to_string());
         }
         return Ok(M10OwnerScheduleOutcome::RejectedBeforeMutation);
+    }
+    let kernel_target_value = kernel.semantic_snapshot().int(&target_key);
+    let runtime = kernel
+        .into_m8_runtime()
+        .map_err(|diagnostic| format!("M10 SYS-1 runtime extraction rejected: {diagnostic:?}"))?;
+    if runtime.owner_state().int(&target_key) != kernel_target_value {
+        return Err(
+            "M10 admitted M8 owner execution diverged from kernel outcome mirror".to_string(),
+        );
     }
     Ok(M10OwnerScheduleOutcome::Served(Box::new(
         M10OwnerScheduleServed {
@@ -15246,10 +15253,6 @@ impl M10ReferenceSystem {
                 )
             })?;
         let seam = admitted.into_m10_execution_seam();
-        let owner_authority = seam
-            .owner_authority_use(event, principal, owner_core.owner_locus())
-            .ok_or_else(|| "M10 sealed M9 bridge lacks owner authority".to_string())?;
-        let (instance, authority_state) = seam.into_parts();
 
         let hp_key = M8StateKey::indexed_field("player", target, "hp");
         let atk_key = M8StateKey::indexed_field("player", principal, "atk");
@@ -15265,40 +15268,38 @@ impl M10ReferenceSystem {
             .ok_or_else(|| "M10 source request lacks actor atk seed".to_string())?;
         let (lease, projection_context) =
             projection_seed(&checked, request.relation_projection.as_ref())?;
-        let mut seed = M8LocalRuntimeSeed::new()
-            .with_owner_int(hp_key.clone(), initial_hp)
-            .with_owner_int(atk_key, initial_atk)
-            .with_authority_state(authority_state);
+        let mut kernel_seed = KernelSeed::new()
+            .with_int(hp_key.clone(), initial_hp)
+            .with_int(atk_key, initial_atk);
         if let Some(lease) = lease {
-            seed = seed.with_live_lease(lease);
+            kernel_seed = kernel_seed.with_live_lease(lease);
         }
-        let mut runtime = M8LocalRuntime::from_admitted(instance, seed);
+        let mut kernel =
+            SemanticRuntimeKernel::from_m9_execution_seam(checked.clone(), seam, kernel_seed)
+                .map_err(|diagnostic| {
+                    format!("M10 SYS-1 kernel admission rejected: {diagnostic:?}")
+                })?;
+        let owner_carrier = |kernel: &SemanticRuntimeKernel| {
+            kernel.owner_request_from_admitted_lineage(
+                event,
+                LocusRef::new(evaluation.authority_origin_locus()),
+                BTreeMap::from([("target".to_string(), target.to_string())]),
+            )
+        };
         if let Some(M10TypedInputMutation {
             kind: M10TypedInputMutationKind::EnqueueOwnerWithForgedAuthority { authority_ref },
             ..
         }) = request.typed_input_mutation.as_ref()
         {
-            let forged_authority = M8AuthorityUse::for_principal(principal)
-                .with_membership_ref(owner_authority.membership_ref().ok_or_else(|| {
-                    "M10 sealed owner authority lacks membership reference".to_string()
-                })?)
-                .with_capability_ref(authority_ref)
-                .with_witness_ref(owner_authority.witness_ref().ok_or_else(|| {
-                    "M10 sealed owner authority lacks witness reference".to_string()
-                })?);
-            runtime
-                .enqueue_owner(
-                    M8OwnerRequest::new(event)
-                        .with_argument("target", target)
-                        .with_authority_use(forged_authority),
-                )
-                .map_err(|diagnostics| {
-                    format!(
-                        "M10 forged-authority enqueue rejected unexpectedly: {:?}",
-                        diagnostics.primary().kind()
-                    )
-                })?;
-            let diagnostics = match runtime.serve_next_owner(owner_core.owner_locus()) {
+            let diagnostics = match kernel.enqueue_owner_request(
+                owner_carrier(&kernel)
+                    .map_err(|diagnostic| {
+                        format!("M10 SYS-1 carrier construction rejected: {diagnostic:?}")
+                    })?
+                    .with_kernel_falsifier_capability(
+                        crate::semantic_runtime_kernel::CapabilityRef::new(authority_ref),
+                    ),
+            ) {
                 Err(diagnostics) => diagnostics,
                 Ok(_) => {
                     return Err(
@@ -15308,8 +15309,8 @@ impl M10ReferenceSystem {
             };
             let store_hash = runtime_store_hash(
                 target,
-                runtime
-                    .owner_state()
+                kernel
+                    .semantic_snapshot()
                     .int(&hp_key)
                     .ok_or_else(|| "M10 owner state lost target hp".to_string())?,
                 principal,
@@ -15330,8 +15331,8 @@ impl M10ReferenceSystem {
                         .kind,
                 ),
                 format!("{:?}", diagnostics.primary().kind()),
-                "owner_enqueue_authority_validator",
-                "M8OwnerQueue",
+                "SemanticRuntimeKernel::validate_owner_carrier",
+                "SemanticRuntimeKernelPreAdmission",
                 &request.source_path,
                 &identity,
                 &direct_outcome,
@@ -15349,15 +15350,13 @@ impl M10ReferenceSystem {
                     owner_capability.ref_id()
                 ));
             }
-            runtime
-                .enqueue_owner(M8OwnerRequest::new(event).with_argument("target", target))
-                .map_err(|diagnostics| {
-                    format!(
-                        "M10 typed missing-authority enqueue rejected unexpectedly: {:?}",
-                        diagnostics.primary().kind()
-                    )
-                })?;
-            let diagnostics = match runtime.serve_next_owner(owner_core.owner_locus()) {
+            let diagnostics = match kernel.enqueue_owner_request(
+                owner_carrier(&kernel)
+                    .map_err(|diagnostic| {
+                        format!("M10 SYS-1 carrier construction rejected: {diagnostic:?}")
+                    })?
+                    .without_capability_for_kernel_falsifier(),
+            ) {
                 Err(diagnostics) => diagnostics,
                 Ok(_) => {
                     return Err(
@@ -15367,8 +15366,8 @@ impl M10ReferenceSystem {
             };
             let store_hash = runtime_store_hash(
                 target,
-                runtime
-                    .owner_state()
+                kernel
+                    .semantic_snapshot()
                     .int(&hp_key)
                     .ok_or_else(|| "M10 owner state lost target hp".to_string())?,
                 principal,
@@ -15389,8 +15388,8 @@ impl M10ReferenceSystem {
                         .kind,
                 ),
                 format!("{:?}", diagnostics.primary().kind()),
-                "owner_service_authority_validator",
-                "M8OwnerQueue",
+                "SemanticRuntimeKernel::validate_owner_carrier",
+                "SemanticRuntimeKernelPreAdmission",
                 &request.source_path,
                 &identity,
                 &direct_outcome,
@@ -15398,15 +15397,13 @@ impl M10ReferenceSystem {
             ));
         }
         if fault == Some("missing_authority") {
-            runtime
-                .enqueue_owner(M8OwnerRequest::new(event).with_argument("target", target))
-                .map_err(|diagnostics| {
-                    format!(
-                        "M10 missing-authority enqueue rejected: {:?}",
-                        diagnostics.primary().kind()
-                    )
-                })?;
-            let diagnostics = match runtime.serve_next_owner(owner_core.owner_locus()) {
+            let diagnostics = match kernel.enqueue_owner_request(
+                owner_carrier(&kernel)
+                    .map_err(|diagnostic| {
+                        format!("M10 SYS-1 carrier construction rejected: {diagnostic:?}")
+                    })?
+                    .without_capability_for_kernel_falsifier(),
+            ) {
                 Err(diagnostics) => diagnostics,
                 Ok(_) => {
                     return Err(
@@ -15416,8 +15413,8 @@ impl M10ReferenceSystem {
             };
             let after = runtime_store_hash(
                 target,
-                runtime
-                    .owner_state()
+                kernel
+                    .semantic_snapshot()
                     .int(&hp_key)
                     .ok_or_else(|| "M10 owner state lost target hp".to_string())?,
                 principal,
@@ -15427,7 +15424,7 @@ impl M10ReferenceSystem {
                 &self.profile,
                 self.public_contract_frozen,
                 "missing_authority",
-                format!("M8Owner::{:?}", diagnostics.primary().kind()),
+                format!("SemanticRuntimeKernel::{:?}", diagnostics.primary().kind()),
                 &request.source_path,
                 &identity,
                 &direct_outcome,
@@ -15436,30 +15433,41 @@ impl M10ReferenceSystem {
             ));
         }
         let mut hp_history = vec![initial_hp];
+        let mut owner_lifecycle = Vec::new();
         for _ in 0..request.attack_count {
-            runtime
-                .enqueue_owner(
-                    M8OwnerRequest::new(event)
-                        .with_argument("target", target)
-                        .with_authority_use(owner_authority.clone()),
-                )
-                .map_err(|diagnostics| {
-                    format!("M10 enqueue rejected: {:?}", diagnostics.primary().kind())
-                })?;
-            runtime
-                .serve_next_owner(owner_core.owner_locus())
-                .map_err(|diagnostics| {
-                    format!(
-                        "M10 owner service rejected: {:?}",
-                        diagnostics.primary().kind()
-                    )
-                })?;
+            let queued = kernel
+                .enqueue_owner_request(owner_carrier(&kernel).map_err(|diagnostic| {
+                    format!("M10 SYS-1 carrier construction rejected: {diagnostic:?}")
+                })?)
+                .map_err(|diagnostic| format!("M10 SYS-1 enqueue rejected: {diagnostic:?}"))?;
+            let served = kernel
+                .serve_next_owner(LocusRef::new(owner_core.owner_locus()))
+                .map_err(|diagnostic| format!("M10 SYS-1 owner serve rejected: {diagnostic:?}"))?;
+            let reply = kernel
+                .reply_to_served_request(served.serve_occurrence())
+                .map_err(|diagnostic| format!("M10 SYS-1 owner reply rejected: {diagnostic:?}"))?;
+            let receipt = kernel.receive_reply(reply).map_err(|diagnostic| {
+                format!("M10 SYS-1 owner receipt rejected: {diagnostic:?}")
+            })?;
+            if let Some(failure) = receipt.failure() {
+                return Err(format!(
+                    "M10 SYS-1 admitted owner request failed: {failure:?}"
+                ));
+            }
+            owner_lifecycle = kernel.trace().lifecycle_for(queued.request_identity());
             hp_history.push(
-                runtime
-                    .owner_state()
+                kernel
+                    .semantic_snapshot()
                     .int(&hp_key)
                     .ok_or_else(|| "M10 owner write omitted hp".to_string())?,
             );
+        }
+        let kernel_final_hp = kernel.semantic_snapshot().int(&hp_key);
+        let mut runtime = kernel.into_m8_runtime().map_err(|diagnostic| {
+            format!("M10 SYS-1 runtime extraction rejected: {diagnostic:?}")
+        })?;
+        if runtime.owner_state().int(&hp_key) != kernel_final_hp {
+            return Err("M10 SYS-1 kernel and M8 owner state diverged".to_string());
         }
         let projection = match (request.relation_projection.as_ref(), projection_context) {
             (Some((relation, _)), Some(context)) => {
@@ -15503,6 +15511,10 @@ impl M10ReferenceSystem {
             .count();
         let replay_hash =
             deterministic_hash(&format!("{}|{:?}|{}", identity, hp_history, self.profile));
+        // This evidence is deliberately limited to the accepted ordinary
+        // `run_source` owner path.  Specialized historical M10 scenario
+        // runners retain their legacy regression role and do not claim this
+        // SYS-1 kernel path as evidence.
         Ok(M10ConformanceReport(json!({
             "profile": self.profile,
             "public_contract_frozen": self.public_contract_frozen,
@@ -15534,6 +15546,11 @@ impl M10ReferenceSystem {
                 "mutation_count": runtime_mutation_count,
                 "store_hash_before": initial_store_hash,
                 "store_hash_after": runtime_store_hash(target, final_hp, principal, initial_atk),
+                "semantic_kernel": {
+                    "owner_path": "SemanticRuntimeKernel::from_m9_execution_seam",
+                    "lifecycle": owner_lifecycle,
+                    "m8_runtime_owned": true,
+                },
                 "owner_rmw": {
                     "hp_history": hp_history,
                     "final_hp": final_hp,

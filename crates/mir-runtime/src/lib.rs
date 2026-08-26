@@ -48,6 +48,8 @@ pub mod practical_alpha1_transport;
 pub mod product_alpha1_devtools;
 pub mod product_alpha1_session;
 pub mod product_alpha1_transport;
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) mod semantic_runtime_kernel;
 pub mod surface_source_patch_hotplug;
 
 #[cfg(test)]
