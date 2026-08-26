@@ -8,8 +8,9 @@ use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::{BindingActivationFrontier, SourceRef},
     surface_v0_pipeline::{
-        CheckedEvaluation, CheckedProgramIdentity, CheckedSurfaceV0, EffectKind,
-        RelationAnchorCore, ResidualObligationKind, check_and_elaborate_surface_v0,
+        CheckedEvaluation, CheckedEvaluationKind, CheckedProgramIdentity, CheckedSurfaceV0,
+        EffectKind, GeneratedObligationKind, RelationAnchorCore, ResidualObligationKind,
+        check_and_elaborate_surface_v0,
     },
 };
 
@@ -28,12 +29,13 @@ use crate::{
     sys3_projection::{
         BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierFrontierKind,
         CarrierLifecycleKind, CarrierOccurrenceSlotKind, CarrierProvenanceKind,
-        CommunicationEdgeKind, DeclaredLogicalTopology, EffectHandlerKind, GlobalProjectionResult,
-        LocusOperationKind, PersistenceResponsibilityKind, ProjectedOperationFragmentKind,
-        ProjectedRelationAnchor, ProjectionDiagnosticKind, ProjectionDiagnostics,
-        ProjectionRelationGraph, RelationAnchorRole, RelationGraphClaim, RelationGraphEdgeSeed,
-        RelationGraphEdgeTag, RuntimeAdmissionStatus, RuntimeOccurrenceBinding,
-        RuntimeOccurrenceKind, StaticProjectionReadiness, project_checked_core, verify_projection,
+        CheckedCoreIdentity, CommunicationEdgeKind, DeclaredLogicalTopology, EffectHandlerKind,
+        GlobalProjectionResult, LocusOperationKind, LocusTag, PersistenceResponsibilityKind,
+        ProjectedOperationFragmentKind, ProjectedRelationAnchor, ProjectionDiagnosticKind,
+        ProjectionDiagnostics, ProjectionRelationGraph, RelationAnchorRole, RelationGraphClaim,
+        RelationGraphEdgeSeed, RelationGraphEdgeTag, RuntimeAdmissionStatus,
+        RuntimeOccurrenceBinding, RuntimeOccurrenceKind, RuntimeSeamRequirementKind,
+        SeamAuthorityKind, StaticProjectionReadiness, project_checked_core, verify_projection,
     },
 };
 
@@ -43,6 +45,7 @@ const SINGLE_OWNER_FIXTURE: &str = "m7_owner_only_no_residuals.mir";
 const CANONICAL_FIXTURE: &str = "canonical_attack_bundle.mir";
 const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
 const EXTENSION_PRESSURE_FIXTURE: &str = "sys3_projection_relation_extension_pressure.mir";
+const ORDERED_EXPR_FIXTURE: &str = "m7_ordered_expression_tree.mir";
 const RELATION_NAME: &str = "bird_follow";
 const RELATION_OWNER: &str = "S";
 const RELATION_LEASE_REF: &str = "bird_binding_frontier/live";
@@ -127,6 +130,23 @@ fn effect_kinds(evaluation: &CheckedEvaluation) -> Vec<EffectKind> {
         .iter()
         .map(|entry| entry.kind())
         .collect()
+}
+
+fn generated_obligation_rows(
+    evaluation: &CheckedEvaluation,
+) -> Vec<(GeneratedObligationKind, SourceRef)> {
+    evaluation
+        .generated_obligations()
+        .entries()
+        .iter()
+        .map(|entry| (entry.kind().clone(), entry.source_ref().clone()))
+        .collect()
+}
+
+fn generated_obligation_kinds(
+    rows: &[(GeneratedObligationKind, SourceRef)],
+) -> Vec<GeneratedObligationKind> {
+    rows.iter().map(|(kind, _)| kind.clone()).collect()
 }
 
 fn assert_projection_diag<T: std::fmt::Debug>(
@@ -1572,24 +1592,37 @@ fn strict_correspondence_map_and_observation_rows_cover_planned_occurrences() {
     assert!(!request_row.has_actual_runtime_occurrence());
     assert!(request_row.redaction_policy().is_reference_only());
 
-    let receive_row = observation
+    assert!(
+        observation
+            .row_for_edge_occurrence(
+                "attack_s",
+                CommunicationEdgeKind::OwnerRequest,
+                "A",
+                "S",
+                RuntimeOccurrenceKind::Receive,
+            )
+            .is_none(),
+        "OwnerRequest observation has Request only; Receive belongs to the reply/receipt edge"
+    );
+
+    let reply_receive_row = observation
         .row_for_edge_occurrence(
             "attack_s",
-            CommunicationEdgeKind::OwnerRequest,
-            "A",
+            CommunicationEdgeKind::OwnerReplyReceipt,
             "S",
+            "A",
             RuntimeOccurrenceKind::Receive,
         )
-        .expect("owner request receive has a distinct stored observation row");
+        .expect("owner reply/receipt receive has a distinct stored observation row");
     assert_eq!(
-        receive_row.runtime_occurrence_binding(),
+        reply_receive_row.runtime_occurrence_binding(),
         RuntimeOccurrenceBinding::Required(RuntimeOccurrenceKind::Receive)
     );
-    assert!(!receive_row.has_actual_runtime_occurrence());
+    assert!(!reply_receive_row.has_actual_runtime_occurrence());
     assert_ne!(
         request_row.observation_row_ref(),
-        receive_row.observation_row_ref(),
-        "Request and Receive observation slots are separate planned rows"
+        reply_receive_row.observation_row_ref(),
+        "Owner request and reply/receipt receive slots are separate planned rows"
     );
 
     let serve_row = observation
@@ -1603,6 +1636,637 @@ fn strict_correspondence_map_and_observation_rows_cover_planned_occurrences() {
         RuntimeOccurrenceBinding::Required(RuntimeOccurrenceKind::Serve)
     );
     assert!(!serve_row.has_actual_runtime_occurrence());
+}
+
+#[test]
+fn strict_sys4_iteration_is_locus_tagged_and_correspondence_is_explicit() {
+    let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["A", "S", "T", "V"]),
+    )
+    .expect("four-locus projection succeeds");
+
+    let programs = result.locus_programs();
+    assert_eq!(
+        programs.locus_tags(),
+        vec![
+            LocusTag::checked("A"),
+            LocusTag::checked("S"),
+            LocusTag::checked("T"),
+            LocusTag::checked("V"),
+        ],
+        "all declared loci, including empty V, are enumerated without inferring from map keys"
+    );
+    assert_eq!(
+        result
+            .locus_program("V")
+            .expect("V program is present")
+            .locus_tag(),
+        &LocusTag::checked("V")
+    );
+    assert!(
+        result
+            .locus_program("V")
+            .expect("V program is present")
+            .operations()
+            .is_empty()
+    );
+
+    let fragments = result.sys4_artifact_fragments();
+    assert!(!fragments.entries().is_empty());
+    let actor_request = fragments
+        .single(
+            "attack_s",
+            ProjectedOperationFragmentKind::OwnerRequestInvocation,
+        )
+        .expect("flattened actor request fragment");
+    assert_eq!(actor_request.locus_tag(), &LocusTag::checked("A"));
+    assert_eq!(actor_request.locus_tag(), actor_request.locus_program_tag());
+    let owner_execution = fragments
+        .single(
+            "attack_s",
+            ProjectedOperationFragmentKind::OwnerRmwExecution,
+        )
+        .expect("flattened owner execution fragment");
+    assert_eq!(owner_execution.locus_tag(), &LocusTag::checked("S"));
+    assert_eq!(
+        owner_execution.locus_tag(),
+        owner_execution.locus_program_tag()
+    );
+    let mut opaque_ref_projection = result.clone();
+    let rewritten = opaque_ref_projection
+        .for_test_rewrite_fragment_ref(
+            "attack_s",
+            ProjectedOperationFragmentKind::OwnerRequestInvocation,
+            "opaque-fragment-0001",
+        )
+        .expect("test mutation rewrites only the fragment ref");
+    assert_eq!(rewritten.locus_tag(), &LocusTag::checked("A"));
+    assert_eq!(rewritten.fragment_ref(), "opaque-fragment-0001");
+    assert!(
+        result
+            .projected_source_map()
+            .covers_all_operations_edges_and_handlers(&result)
+    );
+
+    let canonical = load_checked_fixture(CANONICAL_FIXTURE);
+    let canonical_projection: GlobalProjectionResult = project_checked_core(
+        &canonical,
+        &topology(canonical.program_identity(), ["S", "C", "E"]),
+    )
+    .expect("canonical projection succeeds structurally");
+    let source_map = canonical_projection.projected_source_map();
+
+    let relation_consumer = canonical_projection
+        .locus_program("C")
+        .expect("consumer program")
+        .operations()
+        .single(
+            "bird_follow",
+            ProjectedOperationFragmentKind::ConsumerLocalRelationProjection,
+        )
+        .expect("consumer relation projection fragment");
+    let relation_consumer_entry = source_map
+        .entry_for_fragment_ref(relation_consumer.fragment_ref())
+        .expect("consumer fragment has direct source-map correspondence");
+    assert_eq!(
+        relation_consumer_entry.checked_core_identity(),
+        relation_consumer.checked_core_identity()
+    );
+    let relation_identity: &CheckedCoreIdentity = relation_consumer.checked_core_identity();
+    assert_eq!(
+        relation_identity.checked_program_identity(),
+        canonical.program_identity()
+    );
+    assert_eq!(relation_identity.operation_id(), "bird_follow");
+    assert_eq!(
+        relation_identity.fragment_kind(),
+        Some(ProjectedOperationFragmentKind::ConsumerLocalRelationProjection)
+    );
+    assert_eq!(
+        relation_identity.source_ref(),
+        checked_relation(&canonical, "bird_follow").source_ref()
+    );
+    assert_eq!(relation_identity.dependency_ordinal(), None);
+
+    let designated_source = canonical_projection
+        .locus_program("S")
+        .expect("source-owner program")
+        .operations()
+        .single(
+            "E.result",
+            ProjectedOperationFragmentKind::DesignatedRemoteInputService,
+        )
+        .expect("designated source service fragment");
+    let designated_source_entry = source_map
+        .entry_for_fragment_ref(designated_source.fragment_ref())
+        .expect("designated source fragment has direct source-map correspondence");
+    assert_eq!(
+        designated_source_entry.checked_core_identity(),
+        designated_source.checked_core_identity()
+    );
+    let designated_identity = designated_source.checked_core_identity();
+    assert_eq!(
+        designated_identity.checked_program_identity(),
+        canonical.program_identity()
+    );
+    assert_eq!(designated_identity.operation_id(), "E.result");
+    assert_eq!(
+        designated_identity.fragment_kind(),
+        Some(ProjectedOperationFragmentKind::DesignatedRemoteInputService)
+    );
+    assert_eq!(designated_identity.dependency_ordinal(), Some(0));
+    let designated_dependency = &checked_designated(&canonical, "E", "result")
+        .designated_core()
+        .expect("canonical designated Core")
+        .generated_remote_input_dependencies()[0];
+    assert_eq!(
+        designated_identity.designated_dependency(),
+        Some(designated_dependency)
+    );
+
+    let mut rewritten_ref_projection = canonical_projection.clone();
+    let rewritten_fragment = rewritten_ref_projection
+        .for_test_rewrite_fragment_ref(
+            "bird_follow",
+            ProjectedOperationFragmentKind::ConsumerLocalRelationProjection,
+            "opaque-fragment-0002",
+        )
+        .expect("test mutation rewrites only the fragment ref");
+    assert_eq!(
+        rewritten_fragment.checked_core_identity(),
+        relation_consumer.checked_core_identity()
+    );
+    assert_eq!(rewritten_fragment.locus_tag(), &LocusTag::checked("C"));
+    assert_eq!(rewritten_fragment.fragment_ref(), "opaque-fragment-0002");
+}
+
+#[test]
+fn strict_same_owner_designated_multiread_edges_keep_dependency_identity() {
+    let checked = load_checked_fixture(ORDERED_EXPR_FIXTURE);
+    let result: GlobalProjectionResult =
+        project_checked_core(&checked, &topology(checked.program_identity(), ["S", "E"]))
+            .expect("ordered expression tree projection succeeds");
+    let designated = checked_designated(&checked, "E", "result");
+    let designated_core = designated
+        .designated_core()
+        .expect("ordered expression fixture has designated Core");
+    let dependencies = designated_core.generated_remote_input_dependencies();
+    assert_eq!(
+        dependencies.len(),
+        2,
+        "ordered expression tree has two same-owner designated reads"
+    );
+
+    let requests = result.communication_plan().edges_for(
+        "E.result",
+        CommunicationEdgeKind::DesignatedInputRequest,
+        "E",
+        "S",
+    );
+    let receipts = result.communication_plan().edges_for(
+        "E.result",
+        CommunicationEdgeKind::DesignatedInputReceipt,
+        "S",
+        "E",
+    );
+    assert_eq!(requests.len(), 2);
+    assert_eq!(receipts.len(), 2);
+
+    let edge_refs = requests.edge_refs_union_with(&receipts);
+    assert_eq!(
+        edge_refs.len(),
+        4,
+        "same operation/loci multi-read edges must not overwrite each other"
+    );
+
+    for (dependency_ordinal, dependency) in dependencies.iter().enumerate() {
+        let request = requests
+            .single_for_designated_dependency(dependency)
+            .expect("request edge retains exact dependency identity");
+        let receipt = receipts
+            .single_for_designated_dependency(dependency)
+            .expect("receipt edge retains exact dependency identity");
+        assert_eq!(
+            request
+                .carrier_contract()
+                .designated_remote_input_dependency(),
+            Some(dependency)
+        );
+        assert_eq!(
+            request.source_ref(),
+            dependency.typed_state_read().source_ref()
+        );
+        assert!(request.core_ref().is_some());
+        let request_identity = request.checked_core_identity();
+        assert_eq!(
+            request_identity.checked_program_identity(),
+            checked.program_identity()
+        );
+        assert_eq!(request_identity.operation_id(), "E.result");
+        assert_eq!(
+            request_identity.edge_kind(),
+            Some(CommunicationEdgeKind::DesignatedInputRequest)
+        );
+        assert_eq!(
+            request_identity.source_ref(),
+            dependency.typed_state_read().source_ref()
+        );
+        assert_eq!(
+            request_identity.dependency_ordinal(),
+            Some(dependency_ordinal)
+        );
+        assert_eq!(request_identity.designated_dependency(), Some(dependency));
+        let request_map_entry = result
+            .projected_source_map()
+            .entry_for_edge_ref(request.edge_ref())
+            .expect("request edge has explicit source-map entry");
+        assert_eq!(request_map_entry.source_ref(), request.source_ref());
+        assert_eq!(request_map_entry.edge_ref(), Some(request.edge_ref()));
+        assert_eq!(
+            request_map_entry.checked_core_identity(),
+            request.checked_core_identity()
+        );
+
+        assert_eq!(
+            receipt
+                .carrier_contract()
+                .designated_remote_input_dependency(),
+            Some(dependency)
+        );
+        assert_eq!(
+            receipt.source_ref(),
+            dependency.typed_state_read().source_ref()
+        );
+        assert!(receipt.core_ref().is_some());
+        let receipt_identity = receipt.checked_core_identity();
+        assert_eq!(
+            receipt_identity.checked_program_identity(),
+            checked.program_identity()
+        );
+        assert_eq!(receipt_identity.operation_id(), "E.result");
+        assert_eq!(
+            receipt_identity.edge_kind(),
+            Some(CommunicationEdgeKind::DesignatedInputReceipt)
+        );
+        assert_eq!(
+            receipt_identity.source_ref(),
+            dependency.typed_state_read().source_ref()
+        );
+        assert_eq!(
+            receipt_identity.dependency_ordinal(),
+            Some(dependency_ordinal)
+        );
+        assert_eq!(receipt_identity.designated_dependency(), Some(dependency));
+        let receipt_map_entry = result
+            .projected_source_map()
+            .entry_for_edge_ref(receipt.edge_ref())
+            .expect("receipt edge has explicit source-map entry");
+        assert_eq!(receipt_map_entry.source_ref(), receipt.source_ref());
+        assert_eq!(receipt_map_entry.edge_ref(), Some(receipt.edge_ref()));
+        assert_eq!(
+            receipt_map_entry.checked_core_identity(),
+            receipt.checked_core_identity()
+        );
+    }
+
+    assert_eq!(
+        result
+            .projected_source_map()
+            .count_edge_entries_for_operation("E.result"),
+        4,
+        "source map retains all same operation/loci request+receipt edges"
+    );
+    assert_eq!(
+        result
+            .observation_plan()
+            .unique_row_ref_count_for_operation("E.result"),
+        result
+            .observation_plan()
+            .row_count_for_operation("E.result"),
+        "observation rows for repeated designated dependencies are not overwritten"
+    );
+    assert!(
+        result
+            .observation_plan()
+            .edge_refs_for_operation("E.result")
+            .contains_all(&edge_refs)
+    );
+}
+
+#[test]
+fn strict_observation_lifecycle_matches_each_carrier_contract_exactly() {
+    let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["A", "S", "T", "V"]),
+    )
+    .expect("four-locus projection succeeds");
+    let observation = result.observation_plan();
+
+    let owner_request = result
+        .communication_plan()
+        .single_edge("attack_s", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("owner request edge");
+    assert_eq!(
+        owner_request.carrier_contract().required_occurrence_slots(),
+        &[CarrierOccurrenceSlotKind::Request]
+    );
+    assert_eq!(
+        observation.occurrence_kinds_for_edge(owner_request.edge_ref()),
+        vec![RuntimeOccurrenceKind::Request]
+    );
+    assert!(observation.all_rows_for_edge_ref_have_no_actual_occurrence(owner_request.edge_ref()));
+
+    let owner_reply = result
+        .communication_plan()
+        .single_edge(
+            "attack_s",
+            CommunicationEdgeKind::OwnerReplyReceipt,
+            "S",
+            "A",
+        )
+        .expect("owner reply edge");
+    assert_eq!(
+        owner_reply.carrier_contract().required_occurrence_slots(),
+        &[
+            CarrierOccurrenceSlotKind::Request,
+            CarrierOccurrenceSlotKind::Serve,
+            CarrierOccurrenceSlotKind::Reply,
+            CarrierOccurrenceSlotKind::Receive,
+        ]
+    );
+    assert_eq!(
+        observation.occurrence_kinds_for_edge(owner_reply.edge_ref()),
+        vec![
+            RuntimeOccurrenceKind::Request,
+            RuntimeOccurrenceKind::Serve,
+            RuntimeOccurrenceKind::Reply,
+            RuntimeOccurrenceKind::Receive,
+        ]
+    );
+    assert!(observation.all_rows_for_edge_ref_have_no_actual_occurrence(owner_reply.edge_ref()));
+
+    let canonical = load_checked_fixture(CANONICAL_FIXTURE);
+    let canonical_projection: GlobalProjectionResult = project_checked_core(
+        &canonical,
+        &topology(canonical.program_identity(), ["S", "C", "E"]),
+    )
+    .expect("canonical projection succeeds structurally");
+    let canonical_observation = canonical_projection.observation_plan();
+    let designated_request = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputRequest,
+            "E",
+            "S",
+        )
+        .expect("designated request edge");
+    assert_eq!(
+        designated_request
+            .carrier_contract()
+            .required_occurrence_slots(),
+        &[CarrierOccurrenceSlotKind::Request]
+    );
+    assert_eq!(
+        canonical_observation.occurrence_kinds_for_edge(designated_request.edge_ref()),
+        vec![RuntimeOccurrenceKind::Request]
+    );
+
+    let designated_receipt = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputReceipt,
+            "S",
+            "E",
+        )
+        .expect("designated receipt edge");
+    assert_eq!(
+        designated_receipt
+            .carrier_contract()
+            .required_occurrence_slots(),
+        &[
+            CarrierOccurrenceSlotKind::Request,
+            CarrierOccurrenceSlotKind::Serve,
+            CarrierOccurrenceSlotKind::Reply,
+            CarrierOccurrenceSlotKind::Receive,
+        ]
+    );
+    assert_eq!(
+        canonical_observation.occurrence_kinds_for_edge(designated_receipt.edge_ref()),
+        vec![
+            RuntimeOccurrenceKind::Request,
+            RuntimeOccurrenceKind::Serve,
+            RuntimeOccurrenceKind::Reply,
+            RuntimeOccurrenceKind::Receive,
+        ]
+    );
+
+    let relation_publication = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "bird_follow",
+            CommunicationEdgeKind::RelationProjectionPublication,
+            "S",
+            "C",
+        )
+        .expect("relation publication edge");
+    assert_eq!(
+        relation_publication
+            .carrier_contract()
+            .required_occurrence_slots(),
+        &[
+            CarrierOccurrenceSlotKind::Publish,
+            CarrierOccurrenceSlotKind::Observe,
+        ]
+    );
+    assert_eq!(
+        canonical_observation.occurrence_kinds_for_edge(relation_publication.edge_ref()),
+        vec![
+            RuntimeOccurrenceKind::Publish,
+            RuntimeOccurrenceKind::Observe
+        ]
+    );
+    assert!(
+        canonical_observation
+            .occurrence_kinds_for_edge(relation_publication.edge_ref())
+            .iter()
+            .all(|kind| !matches!(
+                kind,
+                RuntimeOccurrenceKind::Request
+                    | RuntimeOccurrenceKind::Serve
+                    | RuntimeOccurrenceKind::Reply
+                    | RuntimeOccurrenceKind::Receive
+            ))
+    );
+    assert!(canonical_observation.all_planned_rows_have_no_actual_occurrence());
+}
+
+#[test]
+fn strict_semantic_obligations_are_distinct_from_sealed_runtime_seam_requirements() {
+    let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["A", "S", "T", "V"]),
+    )
+    .expect("four-locus projection succeeds");
+    let attack = checked_eval(&checked, "attack_s");
+    let owner_fragment = result
+        .locus_program("S")
+        .expect("owner program")
+        .operations()
+        .single(
+            "attack_s",
+            ProjectedOperationFragmentKind::OwnerRmwExecution,
+        )
+        .expect("owner execution fragment");
+    let owner_obligation_rows = generated_obligation_rows(attack);
+    assert_eq!(
+        owner_fragment.semantic_obligations().rows(),
+        owner_obligation_rows.as_slice()
+    );
+    let owner_obligation_kinds = generated_obligation_kinds(&owner_obligation_rows);
+    assert!(owner_obligation_kinds.contains(&GeneratedObligationKind::Capability));
+    assert!(owner_obligation_kinds.contains(&GeneratedObligationKind::Witness));
+    assert_eq!(
+        owner_fragment.runtime_seam_requirements().rows(),
+        &[],
+        "runtime seam requirements are separate typed descriptors, not copied semantic rows"
+    );
+
+    let owner_request = result
+        .communication_plan()
+        .single_edge("attack_s", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("owner request edge");
+    let owner_seam_rows = vec![
+        (
+            RuntimeSeamRequirementKind::MembershipEpochIncarnation,
+            None,
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::MembershipEpochIncarnation),
+        ),
+        (
+            RuntimeSeamRequirementKind::LiveCapabilityRef,
+            Some(GeneratedObligationKind::Capability),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::OwnerCapabilityRef),
+        ),
+        (
+            RuntimeSeamRequirementKind::LiveWitnessRef,
+            Some(GeneratedObligationKind::Witness),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::OwnerWitnessRef),
+        ),
+    ];
+    assert_eq!(
+        owner_request
+            .carrier_contract()
+            .runtime_seam_requirements()
+            .rows(),
+        owner_seam_rows.as_slice()
+    );
+
+    let canonical = load_checked_fixture(CANONICAL_FIXTURE);
+    let canonical_projection: GlobalProjectionResult = project_checked_core(
+        &canonical,
+        &topology(canonical.program_identity(), ["S", "C", "E"]),
+    )
+    .expect("canonical projection succeeds structurally");
+    let relation_eval = checked_relation(&canonical, "bird_follow");
+    let relation_fragment = canonical_projection
+        .locus_program("S")
+        .expect("relation owner program")
+        .operations()
+        .single(
+            "bird_follow",
+            ProjectedOperationFragmentKind::RelationPublication,
+        )
+        .expect("relation publication fragment");
+    let relation_obligation_rows = generated_obligation_rows(relation_eval);
+    assert_eq!(
+        relation_fragment.semantic_obligations().rows(),
+        relation_obligation_rows.as_slice()
+    );
+    assert_eq!(
+        generated_obligation_kinds(&relation_obligation_rows),
+        vec![
+            GeneratedObligationKind::Authority,
+            GeneratedObligationKind::Evaluation(CheckedEvaluationKind::PublishRelation),
+        ]
+    );
+
+    let designated_eval = checked_designated(&canonical, "E", "result");
+    let designated_fragment = canonical_projection
+        .locus_program("E")
+        .expect("evaluator program")
+        .operations()
+        .single(
+            "E.result",
+            ProjectedOperationFragmentKind::DesignatedEvaluation,
+        )
+        .expect("designated evaluation fragment");
+    let designated_obligation_rows = generated_obligation_rows(designated_eval);
+    assert_eq!(
+        designated_fragment.semantic_obligations().rows(),
+        designated_obligation_rows.as_slice()
+    );
+    assert_eq!(
+        generated_obligation_kinds(&designated_obligation_rows),
+        vec![
+            GeneratedObligationKind::AdmittedEvaluatorAuthority,
+            GeneratedObligationKind::Evaluation(CheckedEvaluationKind::DesignatedPublishValue),
+        ]
+    );
+    let designated_request = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputRequest,
+            "E",
+            "S",
+        )
+        .expect("designated request edge");
+    let designated_seam_rows = vec![
+        (
+            RuntimeSeamRequirementKind::MembershipEpochIncarnation,
+            None,
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::MembershipEpochIncarnation),
+        ),
+        (
+            RuntimeSeamRequirementKind::ProducerReleaseCapabilitySlot,
+            None,
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::ProducerReleaseCapability),
+        ),
+        (
+            RuntimeSeamRequirementKind::ProducerReleaseWitnessSlot,
+            None,
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::ProducerReleaseWitness),
+        ),
+        (
+            RuntimeSeamRequirementKind::EvaluatorDecisionAuthoritySlot,
+            Some(GeneratedObligationKind::AdmittedEvaluatorAuthority),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::EvaluatorDecisionAuthority),
+        ),
+    ];
+    assert_eq!(
+        designated_request
+            .carrier_contract()
+            .runtime_seam_requirements()
+            .rows(),
+        designated_seam_rows.as_slice()
+    );
+    assert_ne!(
+        SeamAuthorityKind::ProducerReleaseCapability,
+        SeamAuthorityKind::EvaluatorDecisionAuthority,
+        "producer release capability and evaluator authority remain distinct authority kinds"
+    );
 }
 
 #[test]
