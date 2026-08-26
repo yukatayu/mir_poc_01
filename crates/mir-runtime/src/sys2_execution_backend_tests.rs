@@ -30,6 +30,7 @@ module Combat.Sys2.TwoOwners
 
 locus S
 locus T
+locus E
 principal self
 principal target
 type Player
@@ -59,6 +60,8 @@ Role[self] at T {
     }
   }
 }
+
+designated evaluate E on tick F publish result = player[self].atk + 1
 
 with auth MembershipAuth
 
@@ -487,13 +490,25 @@ fn revoke_owner_capability_after_enqueue_then_serve(profile: ExecutionProfile) {
             .trace()
             .contains_typed_failure_receipt(&identity, FailureKind::MissingCapability)
     );
+    let ordering = kernel.ordering_evidence();
     assert!(
-        kernel
-            .ordering_evidence()
-            .authority_generation_publish_before_serve(
-                g1.generation_ref(),
-                served.serve_occurrence()
-            )
+        ordering
+            .owner_commit_linearization_point(&identity)
+            .is_none(),
+        "a revoked g0 request has a serve/failure lifecycle but no owner commit LP"
+    );
+    assert!(
+        ordering.reads_from(&identity, &hp_key()).is_none()
+            && ordering.reads_from(&identity, &atk_key()).is_none(),
+        "declared M8 failure cannot manufacture reads-from evidence for syntactic RMW reads"
+    );
+    assert_eq!(ordering.latest_owner_version(&owner_locus(), &hp_key()), 0);
+    assert_eq!(ordering.latest_owner_version(&owner_locus(), &atk_key()), 0);
+    assert!(
+        ordering.authority_generation_publish_before_serve(
+            g1.generation_ref(),
+            served.serve_occurrence()
+        )
     );
 }
 
@@ -546,16 +561,8 @@ fn serve_write_then_revoke_before_reply_preserves_completed_mutation_and_later_u
     assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
 
     let later = kernel
-        .enqueue_owner_request(
-            kernel
-                .owner_request_from_admitted_lineage(
-                    OWNER_OPERATION,
-                    owner_locus(),
-                    owner_arguments(),
-                )
-                .expect("source-derived lineage is requested after revocation"),
-        )
-        .expect_err("later owner-capability use rejects after revocation");
+        .owner_request_from_admitted_lineage(OWNER_OPERATION, owner_locus(), owner_arguments())
+        .expect_err("revoked M9 lineage cannot materialize a new kernel carrier");
     assert_eq!(
         later.primary().kind(),
         KernelDiagnosticKind::MissingCapability
@@ -588,6 +595,200 @@ fn authority_generation_revoke_after_enqueue_blocks_serve_and_reverse_order_pres
 }
 
 #[test]
+fn live_kernel_m9_publisher_retranslates_unrelated_remote_release_before_switching_generation() {
+    for profile in [ExecutionProfile::St, ExecutionProfile::Ow1] {
+        let (checked, mut kernel) = owner_and_remote_kernel(profile);
+        let g0_request = enqueue_owner(&mut kernel);
+        let before = kernel.semantic_snapshot().clone();
+
+        kernel
+            .revoke_owner_capability_and_publish(OWNER_OPERATION)
+            .expect("the live kernel must invoke its own admitted M9 publisher");
+        assert_eq!(kernel.current_authority_generation().generation(), 1);
+
+        // The producer-side release is unrelated to the revoked OwnerEvaluation
+        // capability.  It must survive the same-seam M9 retranslation and
+        // remain usable without recreating a source-free designated lineage.
+        let remote = kernel
+            .enqueue_remote_input_request(
+                kernel
+                    .remote_input_request_from_admitted_lineage(
+                        EVALUATOR_LOCUS,
+                        DESIGNATED_RESULT,
+                        0,
+                    )
+                    .expect("same-seam g1 retains the sealed remote release lineage"),
+            )
+            .expect("unrelated remote release queues after owner-capability revocation");
+        let remote_served = kernel
+            .serve_next_remote_input(owner_locus())
+            .expect("source owner serves retained remote release");
+        let remote_reply = kernel
+            .reply_to_served_remote_input(remote_served.serve_occurrence())
+            .expect("retained release derives a source-owner value");
+        let remote_receipt = kernel
+            .receive_remote_input_reply(remote_reply)
+            .expect("retained release receives its typed receipt");
+        assert_eq!(remote_receipt.request_identity(), remote.request_identity());
+        let consumed = kernel
+            .consume_remote_input_receipt(
+                RemoteInputConsumeRequest::from_checked_designated_dependency(
+                    &checked,
+                    EVALUATOR_LOCUS,
+                    DESIGNATED_RESULT,
+                    0,
+                )
+                .with_receipt(remote_receipt.receipt_id())
+                .with_evaluator(evaluator_locus()),
+            )
+            .expect("the preserved g1 release remains consumable at the designated evaluator");
+        assert_eq!(consumed.value(), Some(&SemanticValue::Int(10)));
+        assert_eq!(
+            kernel.trace().lifecycle_for(remote.request_identity()),
+            ["request", "serve", "reply", "receive_receipt", "consume"]
+        );
+
+        let served = kernel
+            .serve_next_owner(owner_locus())
+            .expect("g0 owner request receives a typed post-revocation serve");
+        let reply = kernel
+            .reply_to_served_request(served.serve_occurrence())
+            .expect("post-revocation serve yields one reply");
+        assert_eq!(reply.failure(), Some(FailureKind::MissingCapability));
+        let receipt = kernel
+            .receive_reply(reply)
+            .expect("post-revocation failure remains receipt-bearing");
+        assert_eq!(receipt.request_identity(), &g0_request);
+        assert_eq!(kernel.semantic_snapshot(), &before);
+        assert!(
+            kernel
+                .owner_request_from_admitted_lineage(
+                    OWNER_OPERATION,
+                    owner_locus(),
+                    owner_arguments(),
+                )
+                .is_err(),
+            "the g0 target remains tombstoned for new owner carrier creation"
+        );
+    }
+}
+
+#[test]
+fn live_m9_successor_retranslation_keeps_unrelated_owner_and_remote_release_usable() {
+    let checked = load_checked_inline(
+        "tests/inline/sys2_two_owner_remote_retranslation.mir",
+        TWO_OWNER_SOURCE,
+    );
+    let seam = M9RuntimeExecutionSeam::
+        test_real_admitted_multi_owner_and_designated_remote_input_seam_for_kernel(
+            &checked,
+            [
+                (OWNER_OPERATION, PRINCIPAL, OWNER_LOCUS),
+                ("strike", PRINCIPAL, SECOND_OWNER_LOCUS),
+            ],
+            EVALUATOR_LOCUS,
+            DESIGNATED_RESULT,
+            0,
+        )
+        .expect("one real M9 admission issues both owner capabilities and the release scope");
+    let enemy_hp = KernelStateKey::indexed_field("enemy", TARGET_ID, "hp");
+    let enemy_atk = KernelStateKey::indexed_field("enemy", PRINCIPAL, "atk");
+    let mut kernel = SemanticRuntimeKernel::from_m9_execution_seam_with_profile(
+        checked.clone(),
+        seam,
+        owner_seed()
+            .with_int(enemy_hp.clone(), 100)
+            .with_int(enemy_atk, 10),
+        ExecutionProfile::St,
+    )
+    .expect("ST admits the full checked multi-owner inventory without cloning M8 state");
+    let revoked_g0_request = enqueue_owner(&mut kernel);
+    let before_revoked_serve = kernel.semantic_snapshot().clone();
+
+    kernel
+        .revoke_owner_capability_and_publish(OWNER_OPERATION)
+        .expect("live M9 publisher revokes only the selected owner capability");
+
+    let strike = kernel
+        .enqueue_owner_request(
+            kernel
+                .owner_request_from_admitted_lineage(
+                    "strike",
+                    LocusRef::new(SECOND_OWNER_LOCUS),
+                    owner_arguments(),
+                )
+                .expect("g1 full retranslation retains an unrelated owner lineage"),
+        )
+        .expect("unrelated owner request queues after g1 publication");
+    let strike_served = kernel
+        .serve_next_owner(LocusRef::new(SECOND_OWNER_LOCUS))
+        .expect("unrelated owner still executes through the M8 backend");
+    let strike_reply = kernel
+        .reply_to_served_request(strike_served.serve_occurrence())
+        .expect("unrelated owner serve yields a reply");
+    let strike_receipt = kernel
+        .receive_reply(strike_reply)
+        .expect("unrelated owner reply yields a receipt");
+    assert_eq!(strike_receipt.request_identity(), strike.request_identity());
+    assert_eq!(kernel.semantic_snapshot().int(&enemy_hp), Some(90));
+
+    let remote = kernel
+        .enqueue_remote_input_request(
+            kernel
+                .remote_input_request_from_admitted_lineage(EVALUATOR_LOCUS, DESIGNATED_RESULT, 0)
+                .expect("g1 full retranslation retains the unrelated release lineage"),
+        )
+        .expect("unrelated producer release queues after g1 publication");
+    let remote_served = kernel
+        .serve_next_remote_input(owner_locus())
+        .expect("unrelated release serves from its checked source owner");
+    let remote_reply = kernel
+        .reply_to_served_remote_input(remote_served.serve_occurrence())
+        .expect("unrelated release derives its source-owner result");
+    let remote_receipt = kernel
+        .receive_remote_input_reply(remote_reply)
+        .expect("unrelated release receives a typed receipt");
+    assert_eq!(remote_receipt.request_identity(), remote.request_identity());
+    let remote_consumed = kernel
+        .consume_remote_input_receipt(
+            RemoteInputConsumeRequest::from_checked_designated_dependency(
+                &checked,
+                EVALUATOR_LOCUS,
+                DESIGNATED_RESULT,
+                0,
+            )
+            .with_receipt(remote_receipt.receipt_id())
+            .with_evaluator(evaluator_locus()),
+        )
+        .expect("g1 remote release consumes at the designated evaluator");
+    assert_eq!(remote_consumed.value(), Some(&SemanticValue::Int(10)));
+    assert_eq!(
+        kernel.trace().lifecycle_for(remote.request_identity()),
+        ["request", "serve", "reply", "receive_receipt", "consume"]
+    );
+
+    let revoked_served = kernel
+        .serve_next_owner(owner_locus())
+        .expect("the g0 target request is served only as typed failure");
+    let revoked_reply = kernel
+        .reply_to_served_request(revoked_served.serve_occurrence())
+        .expect("the g0 target failure remains reply-bearing");
+    assert_eq!(
+        revoked_reply.failure(),
+        Some(FailureKind::MissingCapability)
+    );
+    let revoked_receipt = kernel
+        .receive_reply(revoked_reply)
+        .expect("the g0 target failure remains receipt-bearing");
+    assert_eq!(revoked_receipt.request_identity(), &revoked_g0_request);
+    assert_eq!(
+        kernel.semantic_snapshot().int(&hp_key()),
+        before_revoked_serve.int(&hp_key()),
+        "revoked g0 target cannot mutate its owner state"
+    );
+}
+
+#[test]
 fn ow1_rejects_more_than_one_owner_locus_without_state_duplication() {
     let checked = load_checked_inline("tests/inline/sys2_two_owner_ow1.mir", TWO_OWNER_SOURCE);
     let seam = M9RuntimeExecutionSeam::test_real_admitted_multi_owner_seam_for_kernel(
@@ -615,7 +816,13 @@ fn ow1_rejects_more_than_one_owner_locus_without_state_duplication() {
 #[test]
 fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_edges() {
     let (checked, mut kernel) = owner_kernel(ExecutionProfile::Ow1);
-    let identity = enqueue_owner(&mut kernel);
+    let queued = enqueue_owner_queued(&mut kernel);
+    let identity = queued.request_identity().clone();
+    let m8_request_occurrence = queued
+        .m8_request_occurrence()
+        .expect("OW1 queue retains M8's actual enqueue occurrence")
+        .id()
+        .to_string();
     let receipt = complete_owner_request(&mut kernel);
     assert_eq!(receipt.request_identity(), &identity);
 
@@ -632,6 +839,14 @@ fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_e
     assert_eq!(commit.owner(), &owner_locus());
     assert_eq!(commit.key(), &hp_key());
     assert_eq!(commit.written_version(), 1);
+    assert_eq!(
+        commit.m8_request_occurrence(),
+        Some(m8_request_occurrence.as_str())
+    );
+    assert!(
+        commit.m8_commit_trace_node().is_some(),
+        "OW1 LP is the worker-returned M8 OwnerWrite node, not a coordinator-only occurrence"
+    );
     let read = ordering
         .reads_from(&identity, &atk_key())
         .expect("owner RMW records its source-state read");
@@ -641,6 +856,11 @@ fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_e
         ordering.latest_owner_version(&owner_locus(), &atk_key())
     );
     assert!(read.is_initial_seed());
+    assert!(
+        read.m8_read_trace_node().is_some(),
+        "OW1 reads-from evidence is bound to M8's actual OwnerRead trace node"
+    );
+    assert_eq!(read.observed_value(), Some(10));
 
     let queued_after_g0 = enqueue_owner_queued(&mut kernel);
     let g0 = kernel.current_authority_generation().clone();

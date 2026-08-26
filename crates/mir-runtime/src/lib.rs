@@ -51,9 +51,15 @@ pub mod product_alpha1_transport;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod semantic_runtime_kernel;
 pub mod surface_source_patch_hotplug;
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) mod sys2_bounded_model;
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) mod sys2_execution_backend;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
+#[cfg(test)]
+mod sys2_bounded_model_tests;
 #[cfg(test)]
 mod sys2_execution_backend_tests;
 

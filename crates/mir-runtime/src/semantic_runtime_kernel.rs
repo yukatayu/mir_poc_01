@@ -19,13 +19,21 @@ use mir_semantics::{
 
 use crate::{
     m8_runtime_local_cut::{M8LeaseRecord, M8LocalRuntime, M8LocalRuntimeSeed},
-    m8_runtime_owner_queue::{M8AuthorityUse, M8DeclaredFailure, M8OwnerRequest, M8StateKey},
+    m8_runtime_owner_queue::{
+        M8AuthorityUse, M8DeclaredFailure, M8Occurrence, M8OwnerRequest, M8ServeOutcome, M8StateKey,
+    },
     m9_auth_verification::{
-        M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED, M9KernelDesignatedRemoteInputLineage,
+        M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED, M9AuthorityGeneration,
+        M9AuthoritySuccessorPublisher, M9KernelAuthorityView, M9KernelDesignatedRemoteInputLineage,
         M9KernelOwnerLineage, M9RuntimeExecutionSeam,
         canonical_designated_remote_input_release_label,
     },
+    sys2_execution_backend::{
+        Ow1M8ExecutionReceipt, Ow1WorkerBackend, Ow1WorkerEvidence, Ow1WorkerFailure,
+    },
 };
+
+pub(crate) use crate::sys2_execution_backend::ExecutionProfile;
 
 /// A state key is a checked Core-local coordinate, not a remote-store handle.
 pub(crate) type KernelStateKey = M8StateKey;
@@ -404,6 +412,9 @@ impl QueuePosition {
 pub(crate) struct QueuedOwnerRequest {
     carrier: OwnerRequestCarrier,
     queue_position: QueuePosition,
+    // Present only for M8-backed profiles.  This is M8's own enqueue
+    // occurrence, not a kernel queue position or synthesized request ID.
+    m8_request_occurrence: Option<M8Occurrence>,
 }
 
 impl QueuedOwnerRequest {
@@ -420,6 +431,10 @@ impl QueuedOwnerRequest {
 
     pub(crate) fn carrier(&self) -> &OwnerRequestCarrier {
         &self.carrier
+    }
+
+    pub(crate) fn m8_request_occurrence(&self) -> Option<&M8Occurrence> {
+        self.m8_request_occurrence.as_ref()
     }
 }
 
@@ -480,6 +495,18 @@ impl OccurrenceLifecycle {
             && self.serve.sequence < self.reply.sequence
             && self.reply.sequence < self.receive.sequence
     }
+
+    pub(crate) fn request_before_serve(&self) -> bool {
+        self.request.sequence < self.serve.sequence
+    }
+
+    pub(crate) fn serve_before_reply(&self) -> bool {
+        self.serve.sequence < self.reply.sequence
+    }
+
+    pub(crate) fn reply_before_receive_receipt(&self) -> bool {
+        self.reply.sequence < self.receive.sequence
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -520,6 +547,10 @@ pub(crate) struct KernelReply {
 impl KernelReply {
     pub(crate) fn failure(&self) -> Option<FailureKind> {
         self.outcome.failure()
+    }
+
+    pub(crate) const fn transfers_authority(&self) -> bool {
+        false
     }
 }
 
@@ -618,6 +649,10 @@ impl KernelReceipt {
 
     pub(crate) fn occurrences(&self) -> OccurrenceLifecycle {
         self.occurrences.clone()
+    }
+
+    pub(crate) const fn transfers_authority(&self) -> bool {
+        false
     }
 }
 
@@ -829,6 +864,7 @@ impl ServedRemoteInputRequest {
     }
 }
 
+#[cfg(test)]
 #[derive(Clone, PartialEq, Eq)]
 enum RemoteInputResultInner {
     Success(SemanticValue),
@@ -836,15 +872,16 @@ enum RemoteInputResultInner {
     PanicIfInspected(String),
 }
 
+#[cfg(test)]
 #[derive(Clone, PartialEq, Eq)]
 pub(crate) struct RemoteInputResult(RemoteInputResultInner);
 
+#[cfg(test)]
 impl RemoteInputResult {
     pub(crate) fn success(value: SemanticValue) -> Self {
         Self(RemoteInputResultInner::Success(value))
     }
 
-    #[cfg(test)]
     pub(crate) fn panic_if_inspected_for_test(message: impl Into<String>) -> Self {
         Self(RemoteInputResultInner::PanicIfInspected(message.into()))
     }
@@ -852,9 +889,37 @@ impl RemoteInputResult {
     fn into_value(self) -> SemanticValue {
         match self.0 {
             RemoteInputResultInner::Success(value) => value,
-            #[cfg(test)]
             RemoteInputResultInner::PanicIfInspected(message) => panic!("{message}"),
         }
+    }
+}
+
+/// A source-owner value read performed during a generated remote-input
+/// serve.  It carries no authority and is retained only as typed occurrence
+/// evidence for the exact checked dependency.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct SourceOwnerRead {
+    owner: LocusRef,
+    key: KernelStateKey,
+    value: SemanticValue,
+    observed_version: u64,
+}
+
+impl SourceOwnerRead {
+    pub(crate) fn owner(&self) -> &LocusRef {
+        &self.owner
+    }
+
+    pub(crate) fn key(&self) -> &KernelStateKey {
+        &self.key
+    }
+
+    pub(crate) fn value(&self) -> &SemanticValue {
+        &self.value
+    }
+
+    pub(crate) const fn observed_version(&self) -> u64 {
+        self.observed_version
     }
 }
 
@@ -864,6 +929,13 @@ pub(crate) struct RemoteInputReply {
     serve_occurrence: OccurrenceRef,
     reply_occurrence: OccurrenceRef,
     outcome: KernelOutcome,
+    source_owner_read: Option<SourceOwnerRead>,
+}
+
+impl RemoteInputReply {
+    pub(crate) fn source_owner_read(&self) -> Option<&SourceOwnerRead> {
+        self.source_owner_read.as_ref()
+    }
 }
 
 #[derive(Clone, PartialEq, Eq)]
@@ -1115,6 +1187,297 @@ impl KernelTrace {
     }
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct OwnerCommitLinearizationPoint {
+    owner: LocusRef,
+    key: KernelStateKey,
+    written_version: u64,
+    occurrence: OccurrenceRef,
+    m8_request_occurrence: Option<String>,
+    m8_commit_trace_node: Option<String>,
+}
+
+impl OwnerCommitLinearizationPoint {
+    pub(crate) fn owner(&self) -> &LocusRef {
+        &self.owner
+    }
+    pub(crate) fn key(&self) -> &KernelStateKey {
+        &self.key
+    }
+    pub(crate) const fn written_version(&self) -> u64 {
+        self.written_version
+    }
+
+    /// The M8 queue occurrence that actually committed this write, when the
+    /// selected backend is M8-backed.  Kernel request IDs are intentionally
+    /// separate from it.
+    pub(crate) fn m8_request_occurrence(&self) -> Option<&str> {
+        self.m8_request_occurrence.as_deref()
+    }
+
+    /// Actual M8 owner-write trace node.  OW1 records this worker-issued
+    /// commit marker rather than using the coordinator occurrence as a
+    /// linearization substitute.
+    pub(crate) fn m8_commit_trace_node(&self) -> Option<&str> {
+        self.m8_commit_trace_node.as_deref()
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct ReadsFromEvidence {
+    source_owner: LocusRef,
+    observed_version: u64,
+    producer_request: Option<RequestIdentity>,
+    m8_read_trace_node: Option<String>,
+    observed_value: Option<i64>,
+}
+
+impl ReadsFromEvidence {
+    pub(crate) fn source_owner(&self) -> &LocusRef {
+        &self.source_owner
+    }
+    pub(crate) const fn observed_version(&self) -> u64 {
+        self.observed_version
+    }
+
+    pub(crate) fn producer_request(&self) -> Option<&RequestIdentity> {
+        self.producer_request.as_ref()
+    }
+
+    pub(crate) const fn is_initial_seed(&self) -> bool {
+        self.producer_request.is_none() && self.observed_version == 0
+    }
+
+    pub(crate) fn m8_read_trace_node(&self) -> Option<&str> {
+        self.m8_read_trace_node.as_deref()
+    }
+
+    pub(crate) const fn observed_value(&self) -> Option<i64> {
+        self.observed_value
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct RemoteInputHappensBefore {
+    request: OccurrenceRef,
+    serve: Option<OccurrenceRef>,
+    reply: Option<OccurrenceRef>,
+    receive: Option<OccurrenceRef>,
+    consume: Option<OccurrenceRef>,
+    producer: LocusRef,
+    evaluator: LocusRef,
+    release_tuple: RemoteInputReleaseTuple,
+}
+
+impl RemoteInputHappensBefore {
+    pub(crate) fn request_before_source_owner_serve(&self) -> bool {
+        self.serve
+            .as_ref()
+            .is_some_and(|serve| self.request.sequence < serve.sequence)
+    }
+
+    pub(crate) fn source_owner_serve_before_reply(&self) -> bool {
+        self.serve
+            .as_ref()
+            .zip(self.reply.as_ref())
+            .is_some_and(|(serve, reply)| serve.sequence < reply.sequence)
+    }
+
+    pub(crate) fn reply_before_receive_receipt(&self) -> bool {
+        self.reply
+            .as_ref()
+            .zip(self.receive.as_ref())
+            .is_some_and(|(reply, receive)| reply.sequence < receive.sequence)
+    }
+
+    pub(crate) fn receive_receipt_before_consume(&self) -> bool {
+        self.receive
+            .as_ref()
+            .zip(self.consume.as_ref())
+            .is_some_and(|(receive, consume)| receive.sequence < consume.sequence)
+    }
+
+    pub(crate) fn producer(&self) -> &LocusRef {
+        &self.producer
+    }
+
+    pub(crate) fn evaluator(&self) -> &LocusRef {
+        &self.evaluator
+    }
+
+    pub(crate) fn release_tuple(&self) -> &RemoteInputReleaseTuple {
+        &self.release_tuple
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct WorkerExecutionObservations {
+    coordinator_token: String,
+    owner_worker_token: String,
+    enqueue_worker_token: String,
+    serve_worker_token: String,
+    read_worker_tokens: BTreeMap<KernelStateKey, String>,
+}
+
+impl WorkerExecutionObservations {
+    pub(crate) fn coordinator_token(&self) -> &str {
+        &self.coordinator_token
+    }
+
+    pub(crate) fn owner_worker_token(&self) -> &str {
+        &self.owner_worker_token
+    }
+
+    pub(crate) fn enqueue_worker_token(&self) -> &str {
+        &self.enqueue_worker_token
+    }
+
+    pub(crate) fn serve_worker_token(&self) -> &str {
+        &self.serve_worker_token
+    }
+
+    pub(crate) fn read_worker_token(&self, key: &KernelStateKey) -> Option<&str> {
+        self.read_worker_tokens.get(key).map(String::as_str)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct RemoteWorkerExecutionObservations {
+    coordinator_token: String,
+    source_owner_serve_worker_token: String,
+    read_worker_tokens: BTreeMap<KernelStateKey, String>,
+}
+
+impl RemoteWorkerExecutionObservations {
+    pub(crate) fn coordinator_token(&self) -> &str {
+        &self.coordinator_token
+    }
+
+    pub(crate) fn source_owner_serve_worker_token(&self) -> &str {
+        &self.source_owner_serve_worker_token
+    }
+
+    pub(crate) fn read_worker_token(&self, key: &KernelStateKey) -> Option<&str> {
+        self.read_worker_tokens.get(key).map(String::as_str)
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+pub(crate) struct OrderingEvidence {
+    dedicated_workers: BTreeMap<LocusRef, Ow1WorkerEvidence>,
+    lifecycle: BTreeMap<RequestIdentity, OccurrenceLifecycle>,
+    owner_commits: BTreeMap<RequestIdentity, OwnerCommitLinearizationPoint>,
+    reads_from: BTreeMap<(RequestIdentity, KernelStateKey), ReadsFromEvidence>,
+    owner_versions: BTreeMap<(LocusRef, KernelStateKey), u64>,
+    owner_last_writers: BTreeMap<(LocusRef, KernelStateKey), RequestIdentity>,
+    generation_publishes: BTreeMap<String, OccurrenceRef>,
+    remote_input_hb: BTreeMap<RequestIdentity, RemoteInputHappensBefore>,
+    worker_execution: BTreeMap<RequestIdentity, WorkerExecutionObservations>,
+    remote_worker_execution: BTreeMap<RequestIdentity, RemoteWorkerExecutionObservations>,
+}
+
+impl OrderingEvidence {
+    pub(crate) fn dedicated_owner_worker(&self, owner: &LocusRef) -> Option<&Ow1WorkerEvidence> {
+        self.dedicated_workers.get(owner)
+    }
+    pub(crate) fn lifecycle_occurrences(
+        &self,
+        identity: &RequestIdentity,
+    ) -> Option<OccurrenceLifecycle> {
+        self.lifecycle.get(identity).cloned()
+    }
+    pub(crate) fn owner_commit_linearization_point(
+        &self,
+        identity: &RequestIdentity,
+    ) -> Option<&OwnerCommitLinearizationPoint> {
+        self.owner_commits.get(identity)
+    }
+    pub(crate) fn reads_from(
+        &self,
+        identity: &RequestIdentity,
+        key: &KernelStateKey,
+    ) -> Option<&ReadsFromEvidence> {
+        self.reads_from.get(&(identity.clone(), key.clone()))
+    }
+    pub(crate) fn latest_owner_version(&self, owner: &LocusRef, key: &KernelStateKey) -> u64 {
+        self.owner_versions
+            .get(&(owner.clone(), key.clone()))
+            .copied()
+            .unwrap_or(0)
+    }
+    pub(crate) fn authority_generation_publish_before_serve(
+        &self,
+        generation: &str,
+        serve: &OccurrenceRef,
+    ) -> bool {
+        self.generation_publishes
+            .get(generation)
+            .is_some_and(|publish| publish.sequence < serve.sequence)
+    }
+    pub(crate) fn authority_generation_publish_before_request_serve(
+        &self,
+        generation: &str,
+        _request: &QueuedOwnerRequest,
+        serve: &OccurrenceRef,
+    ) -> bool {
+        self.authority_generation_publish_before_serve(generation, serve)
+    }
+
+    pub(crate) fn owner_commit_before_authority_generation_publish(
+        &self,
+        identity: &RequestIdentity,
+        generation: &str,
+    ) -> bool {
+        self.owner_commits
+            .get(identity)
+            .zip(self.generation_publishes.get(generation))
+            .is_some_and(|(commit, publish)| commit.occurrence.sequence < publish.sequence)
+    }
+
+    pub(crate) fn authority_generation_publish_before_reply_receive(
+        &self,
+        generation: &str,
+        _serve: &OccurrenceRef,
+        identity: &RequestIdentity,
+    ) -> bool {
+        self.generation_publishes
+            .get(generation)
+            .zip(self.lifecycle.get(identity))
+            .is_some_and(|(publish, lifecycle)| {
+                publish.sequence < lifecycle.reply.sequence
+                    && lifecycle.reply.sequence < lifecycle.receive.sequence
+            })
+    }
+
+    pub(crate) fn remote_input_hb(
+        &self,
+        identity: &RequestIdentity,
+    ) -> Option<&RemoteInputHappensBefore> {
+        self.remote_input_hb.get(identity)
+    }
+
+    pub(crate) fn worker_execution_observations(
+        &self,
+        identity: &RequestIdentity,
+    ) -> Option<&WorkerExecutionObservations> {
+        self.worker_execution.get(identity)
+    }
+
+    pub(crate) fn remote_worker_execution_observations(
+        &self,
+        identity: &RequestIdentity,
+    ) -> Option<&RemoteWorkerExecutionObservations> {
+        self.remote_worker_execution.get(identity)
+    }
+
+    pub(crate) fn owner_worker_tokens(&self) -> Vec<&str> {
+        self.dedicated_workers
+            .values()
+            .map(Ow1WorkerEvidence::worker_token)
+            .collect()
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum KernelDiagnosticKind {
     WrongTargetOwner,
@@ -1131,6 +1494,9 @@ pub(crate) enum KernelDiagnosticKind {
     UnknownOperation,
     QueueEmpty,
     OutOfOrderOwnerRequest,
+    MissingCapability,
+    ExecutionProfileUnsupported,
+    AuthorityGenerationRejected,
     RouteUnavailable,
 }
 
@@ -1262,19 +1628,26 @@ impl SealedM9RuntimeAdmission {
         checked: &CheckedSurfaceV0,
         seam: &M9RuntimeExecutionSeam,
     ) -> Result<Self, KernelDiagnostics> {
+        Self::from_m9_authority_view(checked, seam)
+    }
+
+    pub(crate) fn from_m9_authority_view(
+        checked: &CheckedSurfaceV0,
+        authority: &impl M9KernelAuthorityView,
+    ) -> Result<Self, KernelDiagnostics> {
         let mut owner_lineages = BTreeMap::new();
         for evaluation in checked.evaluations() {
             let Some(owner) = evaluation.owner_rmw_core() else {
                 continue;
             };
-            let Some(lineage) = seam.kernel_owner_lineage(
+            let Some(lineage) = authority.kernel_owner_lineage(
                 evaluation.name(),
                 evaluation.actor_authority_origin(),
                 owner.owner_locus(),
             ) else {
                 continue;
             };
-            let m8_authority_use = seam
+            let m8_authority_use = authority
                 .owner_authority_use(
                     evaluation.name(),
                     evaluation.actor_authority_origin(),
@@ -1301,7 +1674,7 @@ impl SealedM9RuntimeAdmission {
                 .iter()
                 .enumerate()
             {
-                let Some(m9_lineage) = seam.kernel_designated_remote_input_lineage(
+                let Some(m9_lineage) = authority.kernel_designated_remote_input_lineage(
                     dependency.source_owner_locus(),
                     designated.evaluator(),
                     designated.result(),
@@ -1550,6 +1923,12 @@ struct ServedOwnerState {
     outcome: KernelOutcome,
 }
 
+#[derive(Clone, PartialEq, Eq)]
+struct ServedRemoteInputState {
+    carrier: RemoteInputRequestCarrier,
+    source_owner_read: Result<SourceOwnerRead, KernelDiagnostics>,
+}
+
 /// The reference constructor is used only by crate tests that pin kernel
 /// semantics.  The production M9 entry owns the admitted M8 local runtime
 /// for ordinary `run_source` and generic OwnerEvent paths.  Specialized M10
@@ -1557,7 +1936,8 @@ struct ServedOwnerState {
 /// kernel claim.
 enum OwnerExecutionBackend {
     Reference,
-    AdmittedM8(Box<M8LocalRuntime>),
+    AdmittedSt(Box<M8LocalRuntime>),
+    Ow1(Ow1WorkerBackend),
 }
 
 fn m8_declared_failure(failure: Option<M8DeclaredFailure>) -> FailureKind {
@@ -1569,6 +1949,10 @@ fn m8_declared_failure(failure: Option<M8DeclaredFailure>) -> FailureKind {
     }
 }
 
+fn coordinator_token() -> String {
+    format!("{:?}", std::thread::current().id())
+}
+
 /// The typed kernel state.  Profile/conformance/release orchestration lives
 /// outside this type and depends on this kernel rather than the reverse.
 pub(crate) struct SemanticRuntimeKernel {
@@ -1577,11 +1961,14 @@ pub(crate) struct SemanticRuntimeKernel {
     semantic_snapshot: SemanticSnapshot,
     authority_view: AuthorityView,
     owner_backend: OwnerExecutionBackend,
+    current_authority_generation: M9AuthorityGeneration,
+    authority_successor_publisher: Option<M9AuthoritySuccessorPublisher>,
+    ordering: OrderingEvidence,
     owner_queues: BTreeMap<LocusRef, VecDeque<QueuedOwnerRequest>>,
     served: BTreeMap<OccurrenceRef, ServedOwnerState>,
     replies: BTreeMap<OccurrenceRef, KernelReply>,
     remote_input_queues: BTreeMap<LocusRef, VecDeque<QueuedRemoteInputRequest>>,
-    served_remote_inputs: BTreeMap<OccurrenceRef, RemoteInputRequestCarrier>,
+    served_remote_inputs: BTreeMap<OccurrenceRef, ServedRemoteInputState>,
     remote_input_replies: BTreeMap<OccurrenceRef, RemoteInputReply>,
     consumed_remote_receipts: BTreeSet<RemoteInputReceiptId>,
     receipt_store: ReceiptStore,
@@ -1589,6 +1976,59 @@ pub(crate) struct SemanticRuntimeKernel {
     next_request: u64,
     next_queue_position: u64,
     next_occurrence: u64,
+}
+
+impl std::fmt::Debug for SemanticRuntimeKernel {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("SemanticRuntimeKernel")
+            .field("program", &self.checked.program_identity().stable_key())
+            .field("owner_queue_count", &self.owner_queues.len())
+            .field("remote_input_queue_count", &self.remote_input_queues.len())
+            .field(
+                "authority_generation",
+                &self.current_authority_generation.generation(),
+            )
+            .finish_non_exhaustive()
+    }
+}
+
+fn authority_view_from_admission(admission: &SealedM9RuntimeAdmission) -> AuthorityView {
+    AuthorityView {
+        membership_refs: admission
+            .owner_lineages
+            .values()
+            .map(|lineage| lineage.membership_ref.clone())
+            .chain(
+                admission
+                    .remote_input_lineages
+                    .values()
+                    .map(|lineage| lineage.membership_ref.clone()),
+            )
+            .collect(),
+        capability_refs: admission
+            .owner_lineages
+            .values()
+            .map(|lineage| lineage.capability_ref.clone())
+            .chain(
+                admission
+                    .remote_input_lineages
+                    .values()
+                    .map(|lineage| lineage.capability_ref.clone()),
+            )
+            .collect(),
+        witness_refs: admission
+            .owner_lineages
+            .values()
+            .map(|lineage| lineage.witness_ref.clone())
+            .chain(
+                admission
+                    .remote_input_lineages
+                    .values()
+                    .map(|lineage| lineage.witness_ref.clone()),
+            )
+            .collect(),
+    }
 }
 
 impl SemanticRuntimeKernel {
@@ -1602,47 +2042,18 @@ impl SemanticRuntimeKernel {
                 KernelDiagnosticKind::SourceCoreProvenanceMismatch,
             ));
         }
-        let authority_view = AuthorityView {
-            membership_refs: admission
-                .owner_lineages
-                .values()
-                .map(|lineage| lineage.membership_ref.clone())
-                .chain(
-                    admission
-                        .remote_input_lineages
-                        .values()
-                        .map(|lineage| lineage.membership_ref.clone()),
-                )
-                .collect(),
-            capability_refs: admission
-                .owner_lineages
-                .values()
-                .map(|lineage| lineage.capability_ref.clone())
-                .chain(
-                    admission
-                        .remote_input_lineages
-                        .values()
-                        .map(|lineage| lineage.capability_ref.clone()),
-                )
-                .collect(),
-            witness_refs: admission
-                .owner_lineages
-                .values()
-                .map(|lineage| lineage.witness_ref.clone())
-                .chain(
-                    admission
-                        .remote_input_lineages
-                        .values()
-                        .map(|lineage| lineage.witness_ref.clone()),
-                )
-                .collect(),
-        };
+        let reference_generation =
+            M9AuthorityGeneration::reference(checked.program_identity().stable_key());
+        let authority_view = authority_view_from_admission(&admission);
         Ok(Self {
             checked,
             admission,
             semantic_snapshot: SemanticSnapshot { ints: seed.ints },
             authority_view,
             owner_backend: OwnerExecutionBackend::Reference,
+            current_authority_generation: reference_generation,
+            authority_successor_publisher: None,
+            ordering: OrderingEvidence::default(),
             owner_queues: BTreeMap::new(),
             served: BTreeMap::new(),
             replies: BTreeMap::new(),
@@ -1664,10 +2075,38 @@ impl SemanticRuntimeKernel {
         seam: M9RuntimeExecutionSeam,
         seed: KernelSeed,
     ) -> Result<Self, KernelDiagnostics> {
+        Self::from_m9_execution_seam_with_profile(checked, seam, seed, ExecutionProfile::St)
+    }
+
+    pub(crate) fn from_m9_execution_seam_with_profile(
+        checked: CheckedSurfaceV0,
+        seam: M9RuntimeExecutionSeam,
+        seed: KernelSeed,
+        profile: ExecutionProfile,
+    ) -> Result<Self, KernelDiagnostics> {
         let admission = SealedM9RuntimeAdmission::from_m9_execution_seam(&checked, &seam)?;
+        let ow1_loci = admission
+            .owner_lineages
+            .values()
+            .map(|lineage| lineage.owner_locus.clone())
+            .chain(
+                admission
+                    .remote_input_lineages
+                    .values()
+                    .map(|lineage| lineage.source_owner.clone()),
+            )
+            .collect::<BTreeSet<_>>();
+        if profile == ExecutionProfile::Ow1 && ow1_loci.len() != 1 {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::ExecutionProfileUnsupported,
+            ));
+        }
         let seed_ints = seed.ints.clone();
         let seed_live_leases = seed.live_leases.clone();
-        let (instance, authority_state) = seam.into_parts();
+        let (instance, authority_state, generation, publisher) =
+            seam.into_kernel_parts().ok_or_else(|| {
+                KernelDiagnostics::one(KernelDiagnosticKind::AuthorityGenerationRejected)
+            })?;
         let mut m8_seed = M8LocalRuntimeSeed::new().with_authority_state(authority_state);
         for (key, value) in seed_ints {
             m8_seed = m8_seed.with_owner_int(key, value);
@@ -1676,15 +2115,32 @@ impl SemanticRuntimeKernel {
             m8_seed = m8_seed.with_live_lease(lease);
         }
         let mut kernel = Self::from_checked_m9(checked, admission, seed)?;
-        kernel.owner_backend = OwnerExecutionBackend::AdmittedM8(Box::new(
-            M8LocalRuntime::from_admitted(instance, m8_seed),
-        ));
+        let runtime = M8LocalRuntime::from_admitted(instance, m8_seed);
+        kernel.current_authority_generation = generation;
+        kernel.authority_successor_publisher = Some(publisher);
+        kernel.owner_backend = match profile {
+            ExecutionProfile::St => OwnerExecutionBackend::AdmittedSt(Box::new(runtime)),
+            ExecutionProfile::Ow1 => {
+                let owner = ow1_loci.into_iter().next().ok_or_else(|| {
+                    KernelDiagnostics::one(KernelDiagnosticKind::ExecutionProfileUnsupported)
+                })?;
+                let worker = Ow1WorkerBackend::spawn(owner.clone(), runtime);
+                kernel
+                    .ordering
+                    .dedicated_workers
+                    .insert(owner, worker.evidence());
+                OwnerExecutionBackend::Ow1(worker)
+            }
+        };
         Ok(kernel)
     }
 
     pub(crate) fn into_m8_runtime(self) -> Result<M8LocalRuntime, KernelDiagnostics> {
         match self.owner_backend {
-            OwnerExecutionBackend::AdmittedM8(runtime) => Ok(*runtime),
+            OwnerExecutionBackend::AdmittedSt(runtime) => Ok(*runtime),
+            OwnerExecutionBackend::Ow1(worker) => worker
+                .shutdown_extract()
+                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable)),
             OwnerExecutionBackend::Reference => Err(KernelDiagnostics::one(
                 KernelDiagnosticKind::AuthorityLineageRejected,
             )),
@@ -1693,11 +2149,124 @@ impl SemanticRuntimeKernel {
 
     pub(crate) fn m8_runtime_snapshot(&self) -> Result<M8LocalRuntime, KernelDiagnostics> {
         match &self.owner_backend {
-            OwnerExecutionBackend::AdmittedM8(runtime) => Ok((**runtime).clone()),
+            OwnerExecutionBackend::AdmittedSt(runtime) => Ok((**runtime).clone()),
+            OwnerExecutionBackend::Ow1(worker) => worker
+                .snapshot()
+                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable)),
             OwnerExecutionBackend::Reference => Err(KernelDiagnostics::one(
                 KernelDiagnosticKind::AuthorityLineageRejected,
             )),
         }
+    }
+
+    pub(crate) fn current_authority_generation(&self) -> &M9AuthorityGeneration {
+        &self.current_authority_generation
+    }
+
+    /// Revoke an exact checked owner-operation capability through the M9
+    /// publisher retained from this kernel's own admitted seam.  No caller
+    /// can inject a successor generation or choose a capability reference.
+    pub(crate) fn revoke_owner_capability_and_publish(
+        &mut self,
+        operation: &str,
+    ) -> Result<(), KernelDiagnostics> {
+        let operation = OperationId::new(operation);
+        let lineage = self
+            .admission
+            .owner_lineages
+            .get(&operation)
+            .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::UnknownOperation))?;
+        let principal = lineage.principal.clone();
+        let owner_locus = lineage.owner_locus.clone();
+        if self
+            .current_authority_generation
+            .owner_capability_is_revoked(
+                operation.as_str(),
+                principal.as_str(),
+                owner_locus.as_str(),
+            )
+        {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::MissingCapability,
+            ));
+        }
+        // Advance a clone first.  The publisher held by the live kernel is
+        // replaced only after the sole M8 owner has acknowledged the new
+        // translated inventory, so a disconnected worker cannot leave M9 at
+        // g1 while the kernel still admits g0.
+        let mut next_publisher = self
+            .authority_successor_publisher
+            .as_ref()
+            .cloned()
+            .ok_or_else(|| {
+                KernelDiagnostics::one(KernelDiagnosticKind::AuthorityGenerationRejected)
+            })?;
+        let successor = next_publisher
+            .revoke_owner_capability(operation.as_str(), principal.as_str(), owner_locus.as_str())
+            .map_err(|_| {
+                KernelDiagnostics::one(KernelDiagnosticKind::AuthorityGenerationRejected)
+            })?;
+        self.refresh_and_publish_m9_successor_generation(successor)?;
+        self.authority_successor_publisher = Some(next_publisher);
+        Ok(())
+    }
+
+    /// Test-only injection seam for independently constructed M9 generation
+    /// falsifiers.  Production callers must use the publisher-backed method
+    /// above so a successor always originates from this admitted seam.
+    #[cfg(test)]
+    pub(crate) fn install_and_ack_m9_successor_generation(
+        &mut self,
+        successor: M9AuthorityGeneration,
+    ) -> Result<(), KernelDiagnostics> {
+        self.refresh_and_publish_m9_successor_generation(successor)
+    }
+
+    /// Validate a complete, immutable M9 successor, refresh the sole M8
+    /// owner and wait for its acknowledgement, then publish it to the kernel.
+    /// Every validation or worker failure leaves the prior generation live.
+    fn refresh_and_publish_m9_successor_generation(
+        &mut self,
+        successor: M9AuthorityGeneration,
+    ) -> Result<(), KernelDiagnostics> {
+        if successor.program_identity() != self.checked.program_identity().stable_key()
+            || successor.generation() <= self.current_authority_generation.generation()
+            || !successor.preserves_tombstones_from(&self.current_authority_generation)
+        {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::AuthorityGenerationRejected,
+            ));
+        }
+        let admission =
+            SealedM9RuntimeAdmission::from_m9_authority_view(&self.checked, &successor)?;
+        let next_authority_view = authority_view_from_admission(&admission);
+        let refreshed = match &mut self.owner_backend {
+            OwnerExecutionBackend::Reference => false,
+            OwnerExecutionBackend::AdmittedSt(runtime) => {
+                runtime.refresh_m9_authority_state(successor.authority_state());
+                true
+            }
+            OwnerExecutionBackend::Ow1(worker) => worker
+                .refresh_authority_and_ack(successor.authority_state())
+                .is_ok(),
+        };
+        if !refreshed {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::RouteUnavailable,
+            ));
+        }
+        let publish = self.next_occurrence("authority-generation-publish");
+        self.ordering
+            .generation_publishes
+            .insert(successor.generation_ref().to_string(), publish);
+        self.admission = admission;
+        self.authority_view = next_authority_view;
+        self.current_authority_generation = successor;
+        Ok(())
+    }
+
+    pub(crate) fn ordering_evidence(&self) -> &OrderingEvidence {
+        &self.ordering
     }
 
     pub(crate) fn enqueue_owner_request(
@@ -1719,17 +2288,34 @@ impl SemanticRuntimeKernel {
             .clone()
             .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::WrongTargetOwner))?;
         let m8_request = match &self.owner_backend {
-            OwnerExecutionBackend::AdmittedM8(_) => Some(self.m8_request_from_carrier(&carrier)?),
             OwnerExecutionBackend::Reference => None,
+            OwnerExecutionBackend::AdmittedSt(_) | OwnerExecutionBackend::Ow1(_) => {
+                Some(self.m8_request_from_carrier(&carrier)?)
+            }
         };
 
-        if let (OwnerExecutionBackend::AdmittedM8(runtime), Some(m8_request)) =
-            (&mut self.owner_backend, m8_request)
-        {
-            runtime
+        let m8_request_occurrence = match (&mut self.owner_backend, m8_request) {
+            (OwnerExecutionBackend::AdmittedSt(runtime), Some(m8_request)) => runtime
                 .enqueue_owner(m8_request)
-                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?;
-        }
+                .map(Some)
+                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?,
+            (OwnerExecutionBackend::Ow1(worker), Some(m8_request)) => worker
+                .enqueue(m8_request)
+                .map(Some)
+                .map_err(|failure| match failure {
+                    Ow1WorkerFailure::Enqueue(diagnostics) => {
+                        let _ = diagnostics.primary();
+                        KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable)
+                    }
+                    _ => KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable),
+                })?,
+            (OwnerExecutionBackend::Reference, None) => None,
+            _ => {
+                return Err(KernelDiagnostics::one(
+                    KernelDiagnosticKind::RouteUnavailable,
+                ));
+            }
+        };
 
         let mut carrier = carrier;
         self.next_request += 1;
@@ -1738,12 +2324,33 @@ impl SemanticRuntimeKernel {
         let queued = QueuedOwnerRequest {
             carrier,
             queue_position: QueuePosition(self.next_queue_position),
+            m8_request_occurrence,
         };
         self.next_queue_position += 1;
         self.owner_queues
             .entry(target_owner)
             .or_default()
             .push_back(queued.clone());
+        if let Some(worker) = self.ordering.dedicated_workers.get_mut(
+            queued
+                .carrier()
+                .target_owner
+                .as_ref()
+                .expect("validated queued carrier retains target owner"),
+        ) {
+            worker.record_mailbox_request(identity.clone());
+            let worker_token = worker.worker_token().to_string();
+            self.ordering.worker_execution.insert(
+                identity.clone(),
+                WorkerExecutionObservations {
+                    coordinator_token: coordinator_token(),
+                    owner_worker_token: worker_token.clone(),
+                    enqueue_worker_token: worker_token,
+                    serve_worker_token: String::new(),
+                    read_worker_tokens: BTreeMap::new(),
+                },
+            );
+        }
         self.trace.append(&identity, "request");
         Ok(queued)
     }
@@ -1765,6 +2372,18 @@ impl SemanticRuntimeKernel {
             .ok_or_else(|| {
                 KernelDiagnostics::one(KernelDiagnosticKind::AuthorityLineageRejected)
             })?;
+        if self
+            .current_authority_generation
+            .owner_capability_is_revoked(
+                operation_id.as_str(),
+                lineage.principal.as_str(),
+                lineage.owner_locus.as_str(),
+            )
+        {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::MissingCapability,
+            ));
+        }
         let mut carrier = OwnerRequestCarrier::new(operation_id)
             .with_origin(lineage.principal.clone(), origin_locus)
             .with_target_owner(lineage.owner_locus.clone())
@@ -1780,19 +2399,60 @@ impl SemanticRuntimeKernel {
         Ok(carrier)
     }
 
+    /// Materialize the one generated source-owner input carrier for an
+    /// already sealed designated dependency.  Source/Core supplies the
+    /// producer read; M9 supplies the matching release lineage.  Callers
+    /// cannot select a provider, a value, or any authority field.
+    pub(crate) fn remote_input_request_from_admitted_lineage(
+        &self,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+    ) -> Result<RemoteInputRequestCarrier, KernelDiagnostics> {
+        let key = RemoteInputKey::new(evaluator, result, dependency_index);
+        let lineage = self
+            .admission
+            .remote_input_lineages
+            .get(&key)
+            .ok_or_else(|| {
+                KernelDiagnostics::one(KernelDiagnosticKind::AuthorityLineageRejected)
+            })?;
+        RemoteInputRequestCarrier::try_from_checked_designated_dependency(
+            &self.checked,
+            evaluator,
+            result,
+            dependency_index,
+        )
+        .map(|carrier| {
+            carrier
+                .with_origin(
+                    lineage.origin_principal.clone(),
+                    lineage.target_evaluator.clone(),
+                )
+                .with_source_owner(lineage.source_owner.clone())
+                .with_target_evaluator(lineage.target_evaluator.clone())
+                .with_input_frontier(lineage.input_frontier.clone())
+                .with_release_tuple(lineage.release_tuple.clone())
+                .with_membership_ref(lineage.membership_ref.clone())
+                .with_membership_epoch(lineage.membership_epoch.clone())
+                .with_membership_incarnation(lineage.membership_incarnation.clone())
+                .with_capability_ref(lineage.capability_ref.clone())
+                .with_witness_ref(lineage.witness_ref.clone())
+        })
+    }
+
     pub(crate) fn serve_next_owner(
         &mut self,
         owner: LocusRef,
     ) -> Result<ServedOwnerRequest, KernelDiagnostics> {
-        let Some(carrier) = self
+        let Some(queued) = self
             .owner_queues
             .get_mut(&owner)
             .and_then(VecDeque::pop_front)
-            .map(|queued| queued.carrier)
         else {
             return Err(KernelDiagnostics::one(KernelDiagnosticKind::QueueEmpty));
         };
-        self.serve_validated_owner_carrier(carrier)
+        self.serve_validated_owner_carrier(queued.carrier, queued.m8_request_occurrence)
     }
 
     /// Direct carrier service is deliberately defensive: it can only consume
@@ -1829,7 +2489,7 @@ impl SemanticRuntimeKernel {
             .get_mut(&target_owner)
             .and_then(VecDeque::pop_front)
             .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::QueueEmpty))?;
-        self.serve_validated_owner_carrier(queued.carrier)
+        self.serve_validated_owner_carrier(queued.carrier, queued.m8_request_occurrence)
     }
 
     pub(crate) fn reply_to_served_request(
@@ -1911,6 +2571,9 @@ impl SemanticRuntimeKernel {
             .append(&reply.request_identity, "receive_receipt");
         self.trace
             .install_occurrences(&reply.request_identity, receipt.occurrences());
+        self.ordering
+            .lifecycle
+            .insert(reply.request_identity.clone(), receipt.occurrences());
         if let Some(failure) = receipt.failure() {
             self.trace
                 .record_typed_failure(&reply.request_identity, failure);
@@ -1943,6 +2606,24 @@ impl SemanticRuntimeKernel {
             .entry(source_owner)
             .or_default()
             .push_back(queued.clone());
+        let lineage = self.remote_input_lineage_for(&queued.carrier)?;
+        self.ordering.remote_input_hb.insert(
+            identity.clone(),
+            RemoteInputHappensBefore {
+                request: queued
+                    .carrier
+                    .request_occurrence
+                    .clone()
+                    .expect("queued remote input retains its request occurrence"),
+                serve: None,
+                reply: None,
+                receive: None,
+                consume: None,
+                producer: lineage.source_owner.clone(),
+                evaluator: lineage.target_evaluator.clone(),
+                release_tuple: lineage.release_tuple.clone(),
+            },
+        );
         self.trace.append(&identity, "request");
         Ok(queued)
     }
@@ -1968,8 +2649,52 @@ impl SemanticRuntimeKernel {
             .expect("queued remote input has identity")
             .clone();
         let occurrence = self.next_occurrence("remote-input-serve");
-        self.served_remote_inputs
-            .insert(occurrence.clone(), carrier);
+        let source_owner_read = self.read_remote_input_source(&carrier);
+        if let Ok(read) = &source_owner_read {
+            self.ordering.reads_from.insert(
+                (identity.clone(), read.key.clone()),
+                ReadsFromEvidence {
+                    source_owner: read.owner.clone(),
+                    observed_version: read.observed_version,
+                    producer_request: self
+                        .ordering
+                        .owner_last_writers
+                        .get(&(read.owner.clone(), read.key.clone()))
+                        .cloned(),
+                    // Generated remote-input reads are worker-acknowledged
+                    // snapshot queries, not owner queue RMW trace rows.
+                    m8_read_trace_node: None,
+                    observed_value: match read.value {
+                        SemanticValue::Int(value) => Some(value),
+                    },
+                },
+            );
+        }
+        if let Some(hb) = self.ordering.remote_input_hb.get_mut(&identity) {
+            hb.serve = Some(occurrence.clone());
+        }
+        if let (OwnerExecutionBackend::Ow1(worker), Ok(read)) =
+            (&self.owner_backend, &source_owner_read)
+        {
+            let token = worker.worker_token().to_string();
+            let mut reads = BTreeMap::new();
+            reads.insert(read.key.clone(), token.clone());
+            self.ordering.remote_worker_execution.insert(
+                identity.clone(),
+                RemoteWorkerExecutionObservations {
+                    coordinator_token: coordinator_token(),
+                    source_owner_serve_worker_token: token,
+                    read_worker_tokens: reads,
+                },
+            );
+        }
+        self.served_remote_inputs.insert(
+            occurrence.clone(),
+            ServedRemoteInputState {
+                carrier,
+                source_owner_read,
+            },
+        );
         self.trace.append(&identity, "serve");
         Ok(ServedRemoteInputRequest {
             request_identity: identity,
@@ -1977,8 +2702,9 @@ impl SemanticRuntimeKernel {
         })
     }
 
-    /// Attach the source-owner read result to an already-served remote input.
-    /// Duplicate replies are rejected before inspecting their payload.
+    /// Test-only explicit-result seam.  Production replies are always
+    /// derived by `reply_to_served_remote_input` from the source-owner read.
+    #[cfg(test)]
     pub(crate) fn reply_to_remote_input(
         &mut self,
         serve_occurrence: &OccurrenceRef,
@@ -1987,14 +2713,27 @@ impl SemanticRuntimeKernel {
         if self.remote_input_replies.contains_key(serve_occurrence) {
             return Err(KernelDiagnostics::one(KernelDiagnosticKind::DuplicateReply));
         }
-        let carrier = self
-            .served_remote_inputs
-            .get(serve_occurrence)
-            .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::UnknownRequestIdentity))?;
-        let outcome = match self.remote_input_source_value(carrier) {
-            Ok(expected_value) => {
+        let (identity, source_owner_read) = {
+            let served = self
+                .served_remote_inputs
+                .get(serve_occurrence)
+                .ok_or_else(|| {
+                    KernelDiagnostics::one(KernelDiagnosticKind::UnknownRequestIdentity)
+                })?;
+            (
+                served
+                    .carrier
+                    .request_identity
+                    .as_ref()
+                    .expect("served remote input has identity")
+                    .clone(),
+                served.source_owner_read.clone(),
+            )
+        };
+        let outcome = match &source_owner_read {
+            Ok(source_read) => {
                 let value = result.into_value();
-                if value != expected_value {
+                if value != source_read.value {
                     return Err(KernelDiagnostics::one(
                         KernelDiagnosticKind::RemoteInputValueMismatch,
                     ));
@@ -2003,17 +2742,62 @@ impl SemanticRuntimeKernel {
             }
             Err(_) => KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
         };
-        let identity = carrier
-            .request_identity
-            .as_ref()
-            .expect("served remote input has identity")
-            .clone();
         let reply = RemoteInputReply {
             request_identity: identity.clone(),
             serve_occurrence: serve_occurrence.clone(),
             reply_occurrence: self.next_occurrence("remote-input-reply"),
             outcome,
+            source_owner_read: source_owner_read.ok(),
         };
+        if let Some(hb) = self.ordering.remote_input_hb.get_mut(&identity) {
+            hb.reply = Some(reply.reply_occurrence.clone());
+        }
+        self.remote_input_replies
+            .insert(serve_occurrence.clone(), reply.clone());
+        self.trace.append(&identity, "reply");
+        Ok(reply)
+    }
+
+    /// Emit a reply only from the value read at the admitted source-owner
+    /// serve.  This is the normal generated path; the explicit-result method
+    /// above remains only as a negative compatibility seam.
+    pub(crate) fn reply_to_served_remote_input(
+        &mut self,
+        serve_occurrence: &OccurrenceRef,
+    ) -> Result<RemoteInputReply, KernelDiagnostics> {
+        if self.remote_input_replies.contains_key(serve_occurrence) {
+            return Err(KernelDiagnostics::one(KernelDiagnosticKind::DuplicateReply));
+        }
+        let (identity, source_owner_read) = {
+            let served = self
+                .served_remote_inputs
+                .get(serve_occurrence)
+                .ok_or_else(|| {
+                    KernelDiagnostics::one(KernelDiagnosticKind::UnknownRequestIdentity)
+                })?;
+            (
+                served
+                    .carrier
+                    .request_identity
+                    .as_ref()
+                    .expect("served remote input has identity")
+                    .clone(),
+                served.source_owner_read.clone(),
+            )
+        };
+        let reply = RemoteInputReply {
+            request_identity: identity.clone(),
+            serve_occurrence: serve_occurrence.clone(),
+            reply_occurrence: self.next_occurrence("remote-input-reply"),
+            outcome: match &source_owner_read {
+                Ok(read) => KernelOutcome::Success(read.value.clone()),
+                Err(_) => KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+            },
+            source_owner_read: source_owner_read.ok(),
+        };
+        if let Some(hb) = self.ordering.remote_input_hb.get_mut(&identity) {
+            hb.reply = Some(reply.reply_occurrence.clone());
+        }
         self.remote_input_replies
             .insert(serve_occurrence.clone(), reply.clone());
         self.trace.append(&identity, "reply");
@@ -2047,6 +2831,7 @@ impl SemanticRuntimeKernel {
             .served_remote_inputs
             .get(&reply.serve_occurrence)
             .expect("stored remote reply retains its served carrier")
+            .carrier
             .clone();
         let receive_occurrence = self.next_occurrence("remote-input-receive");
         let receipt = self.remote_input_receipt_from(
@@ -2070,6 +2855,16 @@ impl SemanticRuntimeKernel {
             .append(&reply.request_identity, "receive_receipt");
         self.trace
             .install_occurrences(&reply.request_identity, receipt.occurrences());
+        self.ordering
+            .lifecycle
+            .insert(reply.request_identity.clone(), receipt.occurrences());
+        if let Some(hb) = self
+            .ordering
+            .remote_input_hb
+            .get_mut(&reply.request_identity)
+        {
+            hb.receive = Some(receipt.occurrences().receive);
+        }
         if let Some(failure) = receipt.failure() {
             self.trace
                 .record_typed_failure(&reply.request_identity, failure);
@@ -2131,10 +2926,16 @@ impl SemanticRuntimeKernel {
                 KernelDiagnosticKind::SourceCoreProvenanceMismatch,
             ));
         }
+        let receipt_identity = receipt.request_identity().clone();
+        let consumed_value = receipt.value().cloned();
         self.consumed_remote_receipts.insert(receipt_id.clone());
-        self.trace.append(receipt.request_identity(), "consume");
+        let consume_occurrence = self.next_occurrence("remote-input-consume");
+        if let Some(hb) = self.ordering.remote_input_hb.get_mut(&receipt_identity) {
+            hb.consume = Some(consume_occurrence);
+        }
+        self.trace.append(&receipt_identity, "consume");
         Ok(ConsumedRemoteInput {
-            value: receipt.value().cloned(),
+            value: consumed_value,
         })
     }
 
@@ -2201,6 +3002,23 @@ impl SemanticRuntimeKernel {
                 KernelDiagnosticKind::AuthorityLineageRejected,
             ));
         }
+        // A materialized carrier retains its original sealed lineage for
+        // audit, but a newly admitted use may not resurrect a capability
+        // tombstoned by a later M9 generation.  Queued g0 work is instead
+        // revalidated by M8 at serve, yielding a typed failure receipt.
+        if !require_identity
+            && self
+                .current_authority_generation
+                .owner_capability_is_revoked(
+                    carrier.operation.as_str(),
+                    lineage.principal.as_str(),
+                    lineage.owner_locus.as_str(),
+                )
+        {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::MissingCapability,
+            ));
+        }
         if require_identity {
             let Some(identity) = &carrier.request_identity else {
                 return Err(KernelDiagnostics::one(
@@ -2244,6 +3062,7 @@ impl SemanticRuntimeKernel {
     fn serve_validated_owner_carrier(
         &mut self,
         carrier: OwnerRequestCarrier,
+        m8_request_occurrence: Option<M8Occurrence>,
     ) -> Result<ServedOwnerRequest, KernelDiagnostics> {
         // Both callers validate while the carrier is still resident in this
         // kernel's queue.  Requiring queue residency again after pop would
@@ -2256,7 +3075,13 @@ impl SemanticRuntimeKernel {
             .owner_rmw_core()
             .expect("validated carrier names checked owner Core")
             .clone();
-        let outcome = match (
+        let identity = carrier
+            .request_identity
+            .as_ref()
+            .expect("validated served carrier has identity")
+            .clone();
+        let occurrence = self.next_occurrence("serve");
+        let (outcome, m8_outcome, worker_token, worker_execution_receipt) = match (
             self.materialize_key(owner.target(), &carrier.arguments),
             owner.target().owner_locus() == owner.owner_locus(),
         ) {
@@ -2268,11 +3093,21 @@ impl SemanticRuntimeKernel {
                 ) {
                     Ok(value) => {
                         self.semantic_snapshot.ints.insert(target, value);
-                        KernelOutcome::Success(SemanticValue::Int(value))
+                        (
+                            KernelOutcome::Success(SemanticValue::Int(value)),
+                            None,
+                            None,
+                            None,
+                        )
                     }
-                    Err(_) => KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                    Err(_) => (
+                        KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                        None,
+                        None,
+                        None,
+                    ),
                 },
-                OwnerExecutionBackend::AdmittedM8(runtime) => {
+                OwnerExecutionBackend::AdmittedSt(runtime) => {
                     match runtime.serve_next_owner(owner.owner_locus()) {
                         Ok(served) => match served.written_int(&target) {
                             Some(value) => {
@@ -2282,24 +3117,107 @@ impl SemanticRuntimeKernel {
                                 // by that typed carrier path; it is updated
                                 // solely from M8's committed outcome.
                                 self.semantic_snapshot.ints.insert(target, value);
-                                KernelOutcome::Success(SemanticValue::Int(value))
+                                (
+                                    KernelOutcome::Success(SemanticValue::Int(value)),
+                                    Some(served),
+                                    None,
+                                    None,
+                                )
                             }
-                            None => KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                            None => (
+                                KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                                Some(served),
+                                None,
+                                None,
+                            ),
                         },
-                        Err(diagnostics) => KernelOutcome::DeclaredFailure(m8_declared_failure(
-                            diagnostics.outcome().failure(),
-                        )),
+                        Err(diagnostics) => (
+                            KernelOutcome::DeclaredFailure(m8_declared_failure(
+                                diagnostics.outcome().failure(),
+                            )),
+                            Some(diagnostics.outcome().clone()),
+                            None,
+                            None,
+                        ),
+                    }
+                }
+                OwnerExecutionBackend::Ow1(worker) => {
+                    let Some(expected_m8_occurrence) = m8_request_occurrence.clone() else {
+                        return Err(KernelDiagnostics::one(
+                            KernelDiagnosticKind::UnknownRequestIdentity,
+                        ));
+                    };
+                    match worker.serve_next(owner.owner_locus(), expected_m8_occurrence) {
+                        Ok(receipt) => {
+                            let worker_token = receipt.worker_token().to_string();
+                            let served = receipt.outcome().clone();
+                            match served.written_int(&target) {
+                                Some(value) => {
+                                    self.semantic_snapshot.ints.insert(target, value);
+                                    (
+                                        KernelOutcome::Success(SemanticValue::Int(value)),
+                                        Some(served),
+                                        Some(worker_token),
+                                        Some(receipt),
+                                    )
+                                }
+                                None => (
+                                    KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                                    Some(served),
+                                    Some(worker_token),
+                                    Some(receipt),
+                                ),
+                            }
+                        }
+                        Err(Ow1WorkerFailure::Serve(diagnostics)) => (
+                            KernelOutcome::DeclaredFailure(m8_declared_failure(
+                                diagnostics.outcome().failure(),
+                            )),
+                            Some(diagnostics.outcome().clone()),
+                            Some(worker.worker_token().to_string()),
+                            None,
+                        ),
+                        Err(_) => (
+                            KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                            None,
+                            None,
+                            None,
+                        ),
                     }
                 }
             },
-            _ => KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+            _ => (
+                KernelOutcome::DeclaredFailure(FailureKind::RouteUnavailable),
+                None,
+                None,
+                None,
+            ),
         };
-        let identity = carrier
-            .request_identity
-            .as_ref()
-            .expect("validated served carrier has identity")
-            .clone();
-        let occurrence = self.next_occurrence("serve");
+        let actual_m8_rmw_success = matches!(&outcome, KernelOutcome::Success(_))
+            && m8_outcome.as_ref().is_some_and(|m8_outcome| {
+                self.materialize_key(owner.target(), &carrier.arguments)
+                    .is_some_and(|key| m8_outcome.written_int(&key).is_some())
+            })
+            && (!matches!(&self.owner_backend, OwnerExecutionBackend::Ow1(_))
+                || worker_execution_receipt.is_some());
+        // A declared M8 failure is a real lifecycle occurrence and must still
+        // produce its typed failure reply/receipt.  It did not execute the
+        // owner RMW, however, so it cannot contribute an abstract owner read,
+        // linearization point, reads-from edge, or coherence version.
+        if actual_m8_rmw_success && let Some(m8_outcome) = m8_outcome.as_ref() {
+            self.record_owner_m8_ordering(
+                &identity,
+                owner.owner_locus(),
+                owner.target(),
+                owner.expression().tree(),
+                &carrier.arguments,
+                m8_outcome,
+                &occurrence,
+                worker_token.as_deref(),
+                m8_request_occurrence.as_ref(),
+                worker_execution_receipt.as_ref(),
+            );
+        }
         self.served
             .insert(occurrence.clone(), ServedOwnerState { carrier, outcome });
         self.trace.append(&identity, "serve");
@@ -2307,6 +3225,161 @@ impl SemanticRuntimeKernel {
             request_identity: identity,
             serve_occurrence: occurrence,
         })
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn record_owner_m8_ordering(
+        &mut self,
+        identity: &RequestIdentity,
+        owner: &str,
+        target_read: &TypedStateRead,
+        expression: &CheckedExpressionTree,
+        arguments: &BTreeMap<String, String>,
+        outcome: &M8ServeOutcome,
+        occurrence: &OccurrenceRef,
+        worker_token: Option<&str>,
+        expected_m8_request_occurrence: Option<&M8Occurrence>,
+        worker_receipt: Option<&Ow1M8ExecutionReceipt>,
+    ) {
+        // OW1's ordering evidence is admissible only when the worker
+        // acknowledged the exact M8 FIFO occurrence the kernel had queued.
+        // A coordinator request identity and queue position are deliberately
+        // not substitutes for this fact.
+        let worker_m8_trace = worker_receipt.and_then(|receipt| {
+            if expected_m8_request_occurrence
+                .is_some_and(|expected| expected != receipt.request_occurrence())
+            {
+                return None;
+            }
+            Some((
+                receipt.request_occurrence().id().to_string(),
+                receipt
+                    .owner_read()
+                    .map(|observation| observation.node_id.clone()),
+                receipt
+                    .owner_write()
+                    .map(|observation| observation.node_id.clone()),
+            ))
+        });
+        if worker_receipt.is_some() && worker_m8_trace.is_none() {
+            // This should be unreachable for the sealed zero-capacity worker
+            // protocol.  Do not synthesize LP/rf/coherence evidence if an
+            // internal backend regression violates the identity binding.
+            return;
+        }
+        let m8_request_occurrence = worker_m8_trace
+            .as_ref()
+            .map(|(request, _, _)| request.clone())
+            .or_else(|| {
+                expected_m8_request_occurrence.map(|occurrence| occurrence.id().to_string())
+            });
+        let m8_read_trace_node = worker_m8_trace
+            .as_ref()
+            .and_then(|(_, read, _)| read.clone());
+        let m8_commit_trace_node = worker_m8_trace
+            .as_ref()
+            .and_then(|(_, _, write)| write.clone());
+        let owner = LocusRef::new(owner);
+        let mut read_keys = Vec::new();
+        self.collect_expression_read_keys(expression, arguments, &mut read_keys);
+        for key in read_keys {
+            // A successful OW1 receipt must include M8's actual OwnerRead
+            // marker for each source-derived state read.  Without it, retain
+            // no reads-from claim rather than deriving one from coordinator
+            // bookkeeping alone.
+            if worker_receipt.is_some() && m8_read_trace_node.is_none() {
+                continue;
+            }
+            let version_key = (owner.clone(), key.clone());
+            let observed_version = self
+                .ordering
+                .owner_versions
+                .get(&version_key)
+                .copied()
+                .unwrap_or(0);
+            let producer_request = self.ordering.owner_last_writers.get(&version_key).cloned();
+            self.ordering.reads_from.insert(
+                (identity.clone(), key.clone()),
+                ReadsFromEvidence {
+                    source_owner: owner.clone(),
+                    observed_version,
+                    producer_request,
+                    m8_read_trace_node: m8_read_trace_node.clone(),
+                    observed_value: outcome.read_int(&key),
+                },
+            );
+            if worker_receipt.is_some()
+                && let Some(token) = worker_token
+                && let Some(observation) = self.ordering.worker_execution.get_mut(identity)
+            {
+                observation
+                    .read_worker_tokens
+                    .insert(key, token.to_string());
+            }
+        }
+        if worker_receipt.is_some()
+            && let Some(token) = worker_token
+            && let Some(observation) = self.ordering.worker_execution.get_mut(identity)
+        {
+            observation.serve_worker_token = token.to_string();
+        }
+        let Some(key) = self.materialize_key(target_read, arguments) else {
+            return;
+        };
+        if outcome.written_int(&key).is_some() {
+            // As for reads, an OW1 write is a linearization point only when
+            // the worker returned the M8 OwnerWrite marker for the exact M8
+            // occurrence.  ST remains the deterministic reference backend.
+            if worker_receipt.is_some() && m8_commit_trace_node.is_none() {
+                return;
+            }
+            let version_key = (owner.clone(), key.clone());
+            let written_version = self
+                .ordering
+                .owner_versions
+                .get(&version_key)
+                .copied()
+                .unwrap_or(0)
+                .saturating_add(1);
+            self.ordering
+                .owner_versions
+                .insert(version_key.clone(), written_version);
+            self.ordering
+                .owner_last_writers
+                .insert(version_key, identity.clone());
+            self.ordering.owner_commits.insert(
+                identity.clone(),
+                OwnerCommitLinearizationPoint {
+                    owner: owner.clone(),
+                    key,
+                    written_version,
+                    occurrence: occurrence.clone(),
+                    m8_request_occurrence,
+                    m8_commit_trace_node,
+                },
+            );
+        }
+    }
+
+    fn collect_expression_read_keys(
+        &self,
+        tree: &CheckedExpressionTree,
+        arguments: &BTreeMap<String, String>,
+        keys: &mut Vec<KernelStateKey>,
+    ) {
+        match tree {
+            CheckedExpressionTree::StateRead(read) => {
+                if let Some(key) = self.materialize_key(read, arguments) {
+                    keys.push(key);
+                }
+            }
+            CheckedExpressionTree::Binary { left, right, .. } => {
+                self.collect_expression_read_keys(left, arguments, keys);
+                self.collect_expression_read_keys(right, arguments, keys);
+            }
+            CheckedExpressionTree::ParameterRead { .. }
+            | CheckedExpressionTree::IntegerLiteral(_) => {}
+        }
     }
 
     fn expected_owner_provenance(
@@ -2416,10 +3489,10 @@ impl SemanticRuntimeKernel {
         Ok(())
     }
 
-    fn remote_input_source_value(
+    fn read_remote_input_source(
         &self,
         carrier: &RemoteInputRequestCarrier,
-    ) -> Result<SemanticValue, KernelDiagnostics> {
+    ) -> Result<SourceOwnerRead, KernelDiagnostics> {
         let key = RemoteInputKey::new(
             carrier.evaluator.clone(),
             carrier.result.clone(),
@@ -2429,10 +3502,25 @@ impl SemanticRuntimeKernel {
         let state_key = self
             .materialize_key(dependency.typed_state_read(), &BTreeMap::new())
             .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?;
-        self.semantic_snapshot
-            .int(&state_key)
-            .map(SemanticValue::Int)
-            .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))
+        let owner = carrier
+            .source_owner
+            .as_ref()
+            .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::AuthorityLineageRejected))?
+            .clone();
+        let value = match &self.owner_backend {
+            OwnerExecutionBackend::Reference => self.semantic_snapshot.int(&state_key),
+            OwnerExecutionBackend::AdmittedSt(runtime) => runtime.owner_state().int(&state_key),
+            OwnerExecutionBackend::Ow1(worker) => worker
+                .read_owner_int(state_key.clone())
+                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?,
+        }
+        .ok_or_else(|| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?;
+        Ok(SourceOwnerRead {
+            owner: owner.clone(),
+            key: state_key.clone(),
+            value: SemanticValue::Int(value),
+            observed_version: self.ordering.latest_owner_version(&owner, &state_key),
+        })
     }
 
     fn remote_input_receipt_from(

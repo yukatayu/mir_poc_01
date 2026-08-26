@@ -777,6 +777,74 @@ pub(crate) struct M9RuntimeExecutionSeam {
     kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
     kernel_designated_remote_input_lineages:
         BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
+    authority_generation: M9AuthorityGeneration,
+    #[cfg_attr(not(test), allow(dead_code))]
+    authority_successor: Option<M9AuthoritySuccessorPublisher>,
+}
+
+/// Immutable, crate-private authority successor view.  It is produced by the
+/// M9 boundary and carries the exact translated inventory and audit lineages
+/// needed by the kernel; it is neither a credential constructor nor a wire
+/// carrier.
+#[derive(Clone)]
+pub(crate) struct M9AuthorityGeneration {
+    program_identity: String,
+    generation: u64,
+    generation_ref: String,
+    authority_state: M8AuthorityState,
+    owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
+    kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
+    revoked_owner_capabilities: BTreeSet<(String, String, String)>,
+    kernel_designated_remote_input_lineages:
+        BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
+}
+
+/// The sole mutable publisher for successor authority generations.  It stays
+/// in the M9 module and calls M9 revocation before materializing the next
+/// immutable view; the kernel receives only the resulting generation.
+#[derive(Clone)]
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) struct M9AuthoritySuccessorPublisher {
+    base: M9AdmittedBase,
+    evidence: M9FinalAdmissionEvidence,
+    authority_runtime: M9AuthorityRuntime,
+    current: M9AuthorityGeneration,
+}
+
+impl std::fmt::Debug for M9AuthorityGeneration {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("M9AuthorityGeneration")
+            .field("generation", &self.generation)
+            .field("program_identity", &self.program_identity)
+            .finish_non_exhaustive()
+    }
+}
+
+/// Read-only authority facts shared by an initial M9 execution seam and an
+/// immutable M9 authority successor.  The semantic kernel only consumes this
+/// view; it cannot publish or transform authority through it.
+pub(crate) trait M9KernelAuthorityView {
+    fn kernel_owner_lineage(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M9KernelOwnerLineage>;
+    fn owner_authority_use(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M8AuthorityUse>;
+    fn kernel_designated_remote_input_lineage(
+        &self,
+        producer_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> Option<M9KernelDesignatedRemoteInputLineage>;
 }
 
 /// Historical compatibility spelling for M10's consumer-side bridge.  New
@@ -1096,6 +1164,20 @@ impl M9M10AuthorityBridge {
 }
 
 impl M9RuntimeExecutionSeam {
+    /// The initial immutable authority generation consumed by SYS-2.  The
+    /// mutable authority runtime remains entirely inside M9; downstream code
+    /// gets only this opaque view and its translated M8 inventory.
+    pub(crate) fn initial_authority_generation(&self) -> M9AuthorityGeneration {
+        self.authority_generation.clone()
+    }
+
+    #[cfg(test)]
+    pub(crate) fn into_authority_successor_publisher(
+        mut self,
+    ) -> Option<M9AuthoritySuccessorPublisher> {
+        self.authority_successor.take()
+    }
+
     /// Build a complete owner-operation admission through the normal typed M9
     /// authority pipeline.  It remains test-only so this does not create a
     /// production source-free admission path.
@@ -1106,17 +1188,68 @@ impl M9RuntimeExecutionSeam {
         principal: &str,
         owner_locus: &str,
     ) -> Result<Self, String> {
-        let evaluation = checked
-            .evaluation(operation)
-            .ok_or_else(|| "kernel test requested an unchecked owner operation".to_string())?;
-        let owner_core = evaluation
-            .owner_rmw_core()
-            .ok_or_else(|| "kernel test requested a non-owner operation".to_string())?;
-        if evaluation.actor_authority_origin() != principal
-            || evaluation.authority_origin_locus() != owner_locus
-            || owner_core.owner_locus() != owner_locus
-        {
-            return Err("kernel test requested a mismatched owner lineage".to_string());
+        Self::test_real_admitted_owner_kernel_seam(
+            checked,
+            [(operation, principal, owner_locus)],
+            None,
+        )
+    }
+
+    /// Test-only admission utility which still uses one normal M9 authority
+    /// runtime for every listed owner capability (and, optionally, the one
+    /// source-owner designated release).  It deliberately has no map
+    /// insertion or synthetic lineage path: the resulting seam is exactly
+    /// what M9 translates from its active typed inventory.
+    #[cfg(test)]
+    fn test_real_admitted_owner_kernel_seam<const N: usize>(
+        checked: &CheckedSurfaceV0,
+        owners: [(&str, &str, &str); N],
+        remote_release: Option<(&str, &str, usize)>,
+    ) -> Result<Self, String> {
+        if owners.is_empty() {
+            return Err("kernel test requested empty owner set".to_string());
+        }
+        let remote_dependency = remote_release
+            .map(|(evaluator, result, dependency_index)| {
+                let dependency = checked
+                    .designated_result(evaluator, result)
+                    .and_then(|evaluation| evaluation.designated_core())
+                    .and_then(|core| {
+                        core.generated_remote_input_dependencies()
+                            .get(dependency_index)
+                    })
+                    .ok_or_else(|| {
+                        "kernel test requested an unchecked designated dependency".to_string()
+                    })?;
+                let input_frontier = checked
+                    .designated_result(evaluator, result)
+                    .and_then(|evaluation| evaluation.designated_core())
+                    .and_then(|core| core.trigger().frontier())
+                    .ok_or_else(|| {
+                        "kernel test designated dependency lacks a checked frontier".to_string()
+                    })?;
+                Ok::<_, String>((
+                    evaluator,
+                    result,
+                    dependency_index,
+                    dependency,
+                    input_frontier,
+                ))
+            })
+            .transpose()?;
+        for &(operation, principal, owner_locus) in &owners {
+            let evaluation = checked
+                .evaluation(operation)
+                .ok_or_else(|| "kernel test requested an unchecked owner operation".to_string())?;
+            let owner_core = evaluation
+                .owner_rmw_core()
+                .ok_or_else(|| "kernel test requested a non-owner operation".to_string())?;
+            if evaluation.actor_authority_origin() != principal
+                || evaluation.authority_origin_locus() != owner_locus
+                || owner_core.owner_locus() != owner_locus
+            {
+                return Err("kernel test requested a mismatched owner lineage".to_string());
+            }
         }
 
         let m9 = M9AdmissionRuntime::default();
@@ -1138,98 +1271,205 @@ impl M9RuntimeExecutionSeam {
             .iter()
             .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
             .ok_or_else(|| "kernel test source lacks AuthDeferred".to_string())?;
-        let epoch = "epoch1";
-        let incarnation = format!("incarnation:{principal}:{owner_locus}:{epoch}");
         let mut authority = base.authority_runtime();
-        let attestation = authority
-            .issue_membership_attestation(
-                principal,
-                owner_locus,
-                epoch,
-                incarnation.clone(),
-                auth_residual.name(),
-                auth_residual.source_ref().clone(),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 membership attestation: {:?}",
-                    diagnostics.primary().kind()
+        let mut final_lineage = None;
+        let mut remote_release_issued = false;
+        for (owner_index, (operation, principal, owner_locus)) in owners.into_iter().enumerate() {
+            let epoch = format!("epoch{}", owner_index + 1);
+            let incarnation = format!("incarnation:{principal}:{owner_locus}:{epoch}");
+            let attestation = authority
+                .issue_membership_attestation(
+                    principal,
+                    owner_locus,
+                    &epoch,
+                    incarnation.clone(),
+                    auth_residual.name(),
+                    auth_residual.source_ref().clone(),
                 )
-            })?;
-        let membership = authority
-            .authenticate_membership(
-                M9MembershipRequest::new(principal, owner_locus, epoch)
-                    .with_incarnation(incarnation)
-                    .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
-                    .with_issued_provider_attestation(attestation),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 membership: {:?}",
-                    diagnostics.primary().kind()
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 membership attestation: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let membership = authority
+                .authenticate_membership(
+                    M9MembershipRequest::new(principal, owner_locus, &epoch)
+                        .with_incarnation(incarnation)
+                        .with_auth_residual(
+                            auth_residual.name(),
+                            auth_residual.source_ref().clone(),
+                        )
+                        .with_issued_provider_attestation(attestation),
                 )
-            })?;
-        let contract_capability = authority
-            .authorize_capability(
-                M9CapabilityGrantRequest::new("kernel-test-contract-capability")
-                    .with_membership_ref(membership.ref_id())
-                    .with_scope(M9CapabilityScope::contract_update(
-                        checked.program_identity().module(),
-                        format!("membership-authority/{}", auth_residual.name()),
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 membership: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            if final_lineage.is_none() {
+                let contract_capability = authority
+                    .authorize_capability(
+                        M9CapabilityGrantRequest::new("kernel-test-contract-capability")
+                            .with_membership_ref(membership.ref_id())
+                            .with_scope(M9CapabilityScope::contract_update(
+                                checked.program_identity().module(),
+                                format!("membership-authority/{}", auth_residual.name()),
+                            ))
+                            .with_lineage_epoch(membership.epoch())
+                            .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 contract capability: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                let contract_witness = authority
+                    .materialize_witness(
+                        M9WitnessRequest::new("kernel-test-contract-witness")
+                            .with_membership_ref(membership.ref_id())
+                            .with_capability_ref(contract_capability.ref_id())
+                            .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 contract witness: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                final_lineage = Some((membership.clone(), contract_capability, contract_witness));
+            }
+            let owner_capability = authority
+                .authorize_capability(
+                    M9CapabilityGrantRequest::new(format!(
+                        "kernel-test-owner-evaluation:{operation}:{owner_locus}:{principal}:{epoch}"
                     ))
+                    .with_membership_ref(membership.ref_id())
+                    .with_scope(M9CapabilityScope::owner_evaluation(operation, owner_locus))
                     .with_lineage_epoch(membership.epoch())
                     .with_source_ref(auth_residual.source_ref().clone()),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 contract capability: {:?}",
-                    diagnostics.primary().kind()
                 )
-            })?;
-        let contract_witness = authority
-            .materialize_witness(
-                M9WitnessRequest::new("kernel-test-contract-witness")
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 owner capability: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let _owner_witness = authority
+                .materialize_witness(
+                    M9WitnessRequest::new(format!(
+                        "kernel-test-owner-witness:{operation}:{owner_locus}:{principal}:{epoch}"
+                    ))
                     .with_membership_ref(membership.ref_id())
-                    .with_capability_ref(contract_capability.ref_id())
+                    .with_capability_ref(owner_capability.ref_id())
                     .with_source_ref(auth_residual.source_ref().clone()),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 contract witness: {:?}",
-                    diagnostics.primary().kind()
                 )
-            })?;
-        let owner_capability = authority
-            .authorize_capability(
-                M9CapabilityGrantRequest::new(format!(
-                    "kernel-test-owner-evaluation:{operation}:{owner_locus}:{principal}:{epoch}"
-                ))
-                .with_membership_ref(membership.ref_id())
-                .with_scope(M9CapabilityScope::owner_evaluation(operation, owner_locus))
-                .with_lineage_epoch(membership.epoch())
-                .with_source_ref(auth_residual.source_ref().clone()),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 owner capability: {:?}",
-                    diagnostics.primary().kind()
-                )
-            })?;
-        let _owner_witness = authority
-            .materialize_witness(
-                M9WitnessRequest::new(format!(
-                    "kernel-test-owner-witness:{operation}:{owner_locus}:{principal}:{epoch}"
-                ))
-                .with_membership_ref(membership.ref_id())
-                .with_capability_ref(owner_capability.ref_id())
-                .with_source_ref(auth_residual.source_ref().clone()),
-            )
-            .map_err(|diagnostics| {
-                format!(
-                    "kernel test M9 owner witness: {:?}",
-                    diagnostics.primary().kind()
-                )
-            })?;
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 owner witness: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+
+            if let Some((evaluator, result, dependency_index, dependency, input_frontier)) =
+                remote_dependency
+                && !remote_release_issued
+                && dependency.source_owner_locus() == owner_locus
+            {
+                let evaluation_capability = authority
+                    .authorize_capability(
+                        M9CapabilityGrantRequest::new(format!(
+                            "kernel-test-designated-evaluation:{evaluator}:{result}:{input_frontier}"
+                        ))
+                        .with_membership_ref(membership.ref_id())
+                        .with_scope(M9CapabilityScope::designated_evaluation(
+                            evaluator,
+                            result,
+                            input_frontier,
+                        ))
+                        .with_lineage_epoch(membership.epoch())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated capability: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                let _evaluation_witness = authority
+                    .materialize_witness(
+                        M9WitnessRequest::new(format!(
+                            "kernel-test-designated-evaluation-witness:{evaluator}:{result}:{input_frontier}"
+                        ))
+                        .with_membership_ref(membership.ref_id())
+                        .with_capability_ref(evaluation_capability.ref_id())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated witness: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                let read = dependency.typed_state_read();
+                let release_label = canonical_designated_remote_input_release_label(
+                    read.namespace(),
+                    read.index(),
+                    read.field(),
+                    owner_locus,
+                    input_frontier,
+                );
+                let release_capability = authority
+                    .authorize_capability(
+                        M9CapabilityGrantRequest::new(format!(
+                            "cap:attack:{owner_locus}:{principal}:{epoch}"
+                        ))
+                        .with_membership_ref(membership.ref_id())
+                        .with_scope(M9CapabilityScope::designated_remote_input_release(
+                            owner_locus,
+                            evaluator,
+                            result,
+                            dependency_index,
+                            input_frontier,
+                            release_label,
+                            M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED,
+                        ))
+                        .with_lineage_epoch(membership.epoch())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated release capability: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                let _release_witness = authority
+                    .materialize_witness(
+                        M9WitnessRequest::new(format!(
+                            "witness:attack:{owner_locus}:{principal}:{epoch}"
+                        ))
+                        .with_membership_ref(membership.ref_id())
+                        .with_capability_ref(release_capability.ref_id())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated release witness: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                remote_release_issued = true;
+            }
+        }
+        if remote_dependency.is_some() && !remote_release_issued {
+            return Err(
+                "kernel test remote release source owner lacks admitted owner lineage".to_string(),
+            );
+        }
+        let (membership, contract_capability, contract_witness) = final_lineage
+            .ok_or_else(|| "kernel test owner admission lacks final lineage".to_string())?;
         let discharge = M9FiniteRefinementChecker::default()
             .discharge_candidate(
                 checked,
@@ -1277,6 +1517,81 @@ impl M9RuntimeExecutionSeam {
             result,
             dependency_index,
             true,
+        )
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_owner_and_designated_remote_input_seam_for_kernel(
+        checked: &CheckedSurfaceV0,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+    ) -> Result<Self, String> {
+        Self::test_real_admitted_owner_kernel_seam(
+            checked,
+            [(operation, principal, owner_locus)],
+            Some((evaluator, result, dependency_index)),
+        )
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_real_successor_generation_revoking_owner_cap_for_kernel(
+        checked: &CheckedSurfaceV0,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+        prior: &M9AuthorityGeneration,
+    ) -> Result<M9AuthorityGeneration, String> {
+        if prior.program_identity() != checked.program_identity().stable_key() {
+            return Err("kernel test successor program identity mismatch".to_string());
+        }
+        let seam = Self::test_real_admitted_owner_seam_for_kernel(
+            checked,
+            operation,
+            principal,
+            owner_locus,
+        )?;
+        let mut publisher = seam
+            .into_authority_successor_publisher()
+            .ok_or_else(|| "kernel test M9 successor publisher unavailable".to_string())?;
+        publisher
+            .revoke_owner_capability(operation, principal, owner_locus)
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test real M9 owner revocation: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_multi_owner_seam_for_kernel<const N: usize>(
+        checked: &CheckedSurfaceV0,
+        owners: [(&str, &str, &str); N],
+    ) -> Result<Self, String> {
+        Self::test_real_admitted_owner_kernel_seam(checked, owners, None)
+    }
+
+    /// The multiple-owner variant is intentionally still one M9 admission:
+    /// it gives SYS-2 an authentic pre-profile inventory for checking that a
+    /// later revocation retranslates every unrelated owner and release lane.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_multi_owner_and_designated_remote_input_seam_for_kernel<
+        const N: usize,
+    >(
+        checked: &CheckedSurfaceV0,
+        owners: [(&str, &str, &str); N],
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+    ) -> Result<Self, String> {
+        Self::test_real_admitted_owner_kernel_seam(
+            checked,
+            owners,
+            Some((evaluator, result, dependency_index)),
         )
     }
 
@@ -1531,6 +1846,28 @@ impl M9RuntimeExecutionSeam {
         })
     }
 
+    /// Split the final M9 seam for the live semantic kernel.  The immutable
+    /// initial generation and its sole M9-owned successor publisher travel
+    /// together; callers cannot synthesize a successor from M8 state.
+    pub(crate) fn into_kernel_parts(
+        self,
+    ) -> Option<(
+        M8RuntimeInstance,
+        M8AuthorityState,
+        M9AuthorityGeneration,
+        M9AuthoritySuccessorPublisher,
+    )> {
+        let Self {
+            instance,
+            authority_state,
+            authority_generation,
+            authority_successor,
+            ..
+        } = self;
+        authority_successor
+            .map(|publisher| (instance, authority_state, authority_generation, publisher))
+    }
+
     pub(crate) fn into_parts(self) -> (M8RuntimeInstance, M8AuthorityState) {
         (self.instance, self.authority_state)
     }
@@ -1645,6 +1982,222 @@ impl M9RuntimeExecutionSeam {
     /// designated dependency.  The evaluator's decision capability cannot
     /// satisfy this lookup.
     pub(crate) fn kernel_designated_remote_input_lineage(
+        &self,
+        producer_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> Option<M9KernelDesignatedRemoteInputLineage> {
+        self.kernel_designated_remote_input_lineages
+            .get(&(
+                producer_locus.to_string(),
+                evaluator.to_string(),
+                result.to_string(),
+                dependency_index,
+                input_frontier.to_string(),
+            ))
+            .cloned()
+    }
+}
+
+impl M9AuthorityGeneration {
+    /// A kernel-reference profile has no M8 authority inventory.  It exists
+    /// only for deterministic crate tests that do not enter an admitted M9
+    /// execution seam.
+    pub(crate) fn reference(program_identity: impl Into<String>) -> Self {
+        Self {
+            program_identity: program_identity.into(),
+            generation: 0,
+            generation_ref: "m9-authority-generation:reference:00000000000000000000".to_string(),
+            authority_state: M8AuthorityState::new(),
+            owner_uses: BTreeMap::new(),
+            kernel_owner_lineages: BTreeMap::new(),
+            revoked_owner_capabilities: BTreeSet::new(),
+            kernel_designated_remote_input_lineages: BTreeMap::new(),
+        }
+    }
+
+    pub(crate) fn program_identity(&self) -> &str {
+        &self.program_identity
+    }
+
+    pub(crate) const fn generation(&self) -> u64 {
+        self.generation
+    }
+
+    pub(crate) fn generation_ref(&self) -> &str {
+        &self.generation_ref
+    }
+
+    pub(crate) fn authority_state(&self) -> M8AuthorityState {
+        self.authority_state.clone()
+    }
+
+    /// A successor may add tombstones but may never remove one already
+    /// published by an earlier immutable generation.
+    pub(crate) fn preserves_tombstones_from(&self, prior: &Self) -> bool {
+        prior
+            .revoked_owner_capabilities
+            .is_subset(&self.revoked_owner_capabilities)
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    fn with_successor_generation_and_revoked_owner_lineage(
+        mut self,
+        previous: &Self,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<Self> {
+        let key = (
+            operation.to_string(),
+            principal.to_string(),
+            owner_locus.to_string(),
+        );
+        let prior_lineage = previous.kernel_owner_lineages.get(&key)?.clone();
+        let prior_use = previous.owner_uses.get(&key)?.clone();
+        if previous.revoked_owner_capabilities.contains(&key) {
+            return None;
+        }
+        self.generation = previous.generation.checked_add(1)?;
+        self.generation_ref = format!("m9-authority-generation:{:020}", self.generation);
+        self.kernel_owner_lineages
+            .insert(key.clone(), prior_lineage);
+        self.owner_uses.insert(key.clone(), prior_use);
+        self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
+        self.revoked_owner_capabilities.insert(key);
+        Some(self)
+    }
+
+    pub(crate) fn owner_capability_is_revoked(
+        &self,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> bool {
+        self.revoked_owner_capabilities.contains(&(
+            operation.to_string(),
+            principal.to_string(),
+            owner_locus.to_string(),
+        ))
+    }
+}
+
+impl M9AuthoritySuccessorPublisher {
+    pub(crate) fn revoke_owner_capability(
+        &mut self,
+        operation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        let lineage = self
+            .current
+            .kernel_owner_lineages
+            .get(&(
+                operation.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        self.authority_runtime.revoke(
+            M9Revocation::capability(lineage.capability_ref())
+                .with_witness_ref(lineage.witness_ref()),
+        )?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_and_revoked_owner_lineage(
+                &self.current,
+                operation,
+                principal,
+                owner_locus,
+            )
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        self.current = successor.clone();
+        Ok(successor)
+    }
+}
+
+impl M9KernelAuthorityView for M9RuntimeExecutionSeam {
+    fn kernel_owner_lineage(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M9KernelOwnerLineage> {
+        M9RuntimeExecutionSeam::kernel_owner_lineage(self, evaluation, principal, owner_locus)
+    }
+
+    fn owner_authority_use(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M8AuthorityUse> {
+        M9RuntimeExecutionSeam::owner_authority_use(self, evaluation, principal, owner_locus)
+    }
+
+    fn kernel_designated_remote_input_lineage(
+        &self,
+        producer_locus: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> Option<M9KernelDesignatedRemoteInputLineage> {
+        M9RuntimeExecutionSeam::kernel_designated_remote_input_lineage(
+            self,
+            producer_locus,
+            evaluator,
+            result,
+            dependency_index,
+            input_frontier,
+        )
+    }
+}
+
+impl M9KernelAuthorityView for M9AuthorityGeneration {
+    fn kernel_owner_lineage(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M9KernelOwnerLineage> {
+        self.kernel_owner_lineages
+            .get(&(
+                evaluation.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .cloned()
+    }
+
+    fn owner_authority_use(
+        &self,
+        evaluation: &str,
+        principal: &str,
+        owner_locus: &str,
+    ) -> Option<M8AuthorityUse> {
+        self.owner_uses
+            .get(&(
+                evaluation.to_string(),
+                principal.to_string(),
+                owner_locus.to_string(),
+            ))
+            .cloned()
+    }
+
+    fn kernel_designated_remote_input_lineage(
         &self,
         producer_locus: &str,
         evaluator: &str,
@@ -1808,7 +2361,7 @@ impl M9RuntimeAdmitted {
         let M9RuntimeAdmitted {
             base,
             authority_runtime,
-            evidence: _,
+            evidence,
         } = self;
         let snapshot = authority_runtime.authority_snapshot();
         let authority_snapshot_projection = authority_runtime.canonical_snapshot_projection();
@@ -2202,6 +2755,23 @@ impl M9RuntimeAdmitted {
                 | M9CapabilityScope::ContractUpdate { .. } => {}
             }
         }
+        let authority_generation = M9AuthorityGeneration {
+            program_identity: base.program_identity.stable_key(),
+            generation: 0,
+            generation_ref: "m9-authority-generation:00000000000000000000".to_string(),
+            authority_state: authority_state.clone(),
+            owner_uses: owner_uses.clone(),
+            kernel_owner_lineages: kernel_owner_lineages.clone(),
+            revoked_owner_capabilities: BTreeSet::new(),
+            kernel_designated_remote_input_lineages: kernel_designated_remote_input_lineages
+                .clone(),
+        };
+        let authority_successor = M9AuthoritySuccessorPublisher {
+            base: base.clone(),
+            evidence,
+            authority_runtime: authority_runtime.clone(),
+            current: authority_generation.clone(),
+        };
         let instance = materialize_m9_resolved_base(base.into_embedded_m8_base());
         M9M10ExecutionSeam {
             instance,
@@ -2218,6 +2788,8 @@ impl M9RuntimeAdmitted {
             translation_refs,
             kernel_owner_lineages,
             kernel_designated_remote_input_lineages,
+            authority_generation,
+            authority_successor: Some(authority_successor),
         }
     }
 
@@ -3310,7 +3882,7 @@ pub(crate) struct M9AuthorityCut {
     evidence_graph: M9EvidenceGraph,
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct M9AuthorityRuntime {
     outer_admission: Option<M9OuterAdmission>,
     snapshot: M9AuthoritySnapshot,
