@@ -19,7 +19,7 @@ ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
 record / regression baselineである。2026-08-26のowner directionを記録したADR-0026の
 sole current LAB roadmapは
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`である。SYS-0はclosed、
-active goalはSYS-1、next goalはSYS-2である。Gate/Phase/OBL の正本はCanonのままなので、program
+SYS-1もsource cut `94e3707c...`でclosed、active goalはSYS-2、next goalはSYS-3である。Gate/Phase/OBL の正本はCanonのままなので、program
 activationをbroad I1/I2 lifecycle acceptanceへ読み替えない。
 
 1. canon 正本として `mirrorea_canon/README.md`、`mirrorea_canon/MAP.md`、
@@ -938,8 +938,9 @@ activationをbroad I1/I2 lifecycle acceptanceへ読み替えない。
 - Mirrorea I2 Systems Foundation current roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
   (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0
-  baseline/goal alignmentはcompleted / closed、SYS-1 runtime-kernel/
-  conformance separation and internal carrier boundaryはactive、SYS-2はnext。
+  baseline/goal alignmentとSYS-1 runtime-kernel/internal carrier boundaryは
+  completed / closed、SYS-2 concurrency/memory/effect-handler refinementはactive、
+  SYS-3 per-locus projection/artifact generationはnext。
   Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule

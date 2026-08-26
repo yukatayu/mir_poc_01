@@ -2,8 +2,8 @@
 id: theory/13-evaluation-materialization
 status: L1-fixed
 maturity: reviewed
-depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018]
-summary: M3 の評価場所・clock・authority origin・materialization を分離する有限 calculus。owner RMW、explicit receipt、designated evaluator の規則を定義する。
+depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027]
+summary: 評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator及びSYS-1 internal lifecycleを定義する有限calculus。
 open_items: []
 ---
 
@@ -188,3 +188,61 @@ topology, relation DAG, save/load, or patch behavior. Theory/15 supplies the
 one concrete finite shared `EP`, `Config`, `Step`, `WellFormed`, `Trace`, and
 Diagnostic universe for the accepted M3/M4 profile; it does not generalize
 this M3 boundary.
+
+## 7. SYS-1 internal carrier refinement
+
+ADR-0027 realizes the previously abstract pending/receipt relation `R` for
+two bounded I2-internal operation families without choosing a public schema:
+
+```text
+owner request r:
+  pre-admit(r) ; request(r) ; serve(r) ; reply(r, outcome) ;
+  receive(receipt(r, outcome))
+
+designated remote input d:
+  pre-admit(d) ; request(d) ; serve-at-source-owner(d) ;
+  reply(d, outcome) ; receive(receipt(d, outcome)) ;
+  consume-at-designated-evaluator(d)
+
+outcome ::= typed-success(v) | declared-failure(f)
+```
+
+`pre-admit` checks the exact checked operation/dependency and source/Core
+origin, target owner or producer/evaluator pair, origin principal/locus,
+membership epoch/incarnation, capability/witness lineage, visibility/
+redaction, effect/failure rows, and applicable input frontier/release tuple.
+A failed `pre-admit` returns a typed diagnostic before `request(r)` exists; it
+adds no semantic occurrence, enqueues no owner work, and changes neither
+semantic state nor authority state. `[E-OWNER-FAIL]` continues to describe a
+request that has passed this boundary and later obtains a declared dynamic
+failure. These cases are not conflated.
+
+For each admitted request, the kernel assigns a stable request identity
+independent of queue position and concrete occurrences satisfying:
+
+```text
+request(r) ≺ serve(r) ≺ reply(r) ≺ receive(r)
+receive(d) ≺ consume-at-designated-evaluator(d)
+```
+
+The owner receipt preserves the exact operation identity and origin/owner
+lineage. The designated-input receipt additionally preserves the input
+frontier, producer release tuple, receipt identity, and explicit consumption
+key/state. Receipt construction is single-assignment. Duplicate or mismatched
+reply/receipt attempts reject, but this implies neither hidden retry nor a
+transport-level exactly-once guarantee.
+
+The remote-input serve is a typed read effect at the checked source owner. Its
+producer release capability is necessary and cannot be replaced by the
+designated evaluator's decision capability. Receipt arrival communicates a
+typed result/failure and causal provenance only; it does not grant authority,
+transfer ownership, or authorize any semantic write. Evaluator consumption is
+therefore an explicit later step, not an implicit callback or a multi-owner
+transaction.
+
+The SYS-1 production carrier consumes an immutable final M9 admission
+snapshot. It establishes source-derived lineage at kernel construction but
+does not yet specify revocation visibility after enqueue or serve. That
+happens-before/refinement obligation is the direct SYS-2 residual. This
+section defines no generic provider registry, public API/ABI/wire, transport,
+retry, general memory model, or new proof claim.

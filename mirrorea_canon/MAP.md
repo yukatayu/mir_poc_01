@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0026) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0027) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -47,7 +47,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -58,10 +58,15 @@ Plan 247 は close record / repository memory であって、次の current queu
 
 2026-08-26 の owner direction は PROPOSAL-029 / ADR-0026 により Mirrorea I2
 Systems Foundation SYS-0--SYS-7 を active bounded program として開始した。sole
-current LAB roadmap は Plan 249、SYS-0はcompleted、active goalはSYS-1、next goalは
-SYS-2である。このprogram
-activationはbroad PHASE-I1 exit又はI2 lifecycle acceptanceではなく、theory lifecycleは
-T1、OPEN-030とarchitecture/04 carrier freezeはSYS-1のexact evidence対象として残る。
+current LAB roadmap は Plan 249 である。このprogram activationはbroad PHASE-I1
+exit又はI2 lifecycle acceptanceではなく、theory lifecycleはT1である。
+
+PROPOSAL-030 / ADR-0027 は source cut
+`94e3707c7bc98d4a0764c51f13a12b1dae1968c6` で SYS-1 をcloseした。OPEN-030は
+owner requestとdesignated remote-inputのI2-internal bounded lifecycleに限りresolvedで
+あり、public contractではない。SYS-0/SYS-1はcompleted、active goalはSYS-2、next
+goalはSYS-3である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal
+carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
 
 ## ID 体系
 

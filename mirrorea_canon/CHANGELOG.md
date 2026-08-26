@@ -18,6 +18,20 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-26** PROPOSAL-030 / ADR-0027 により、ordinary `run_source` とgeneric
+  checked `OwnerEvent`のproduction pathをcrate-private `SemanticRuntimeKernel`へ分離し、
+  sealed M9 seamからadmitted M8 runtimeを所有・抽出するdependency directionを採用した。
+  owner requestのrequest→serve→reply→receive/receiptと、designated remote-inputの
+  request→source-owner serve→reply→receive/receipt→evaluator consumeを、exact checked
+  source/Core provenance、authority lineage、epoch/incarnation、capability/witness、
+  effect/failure、visibility/redaction、frontier/consumptionを保持するI2-internal contractに
+  固定した。accepted source cutは
+  `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`、evidenceはruntime-monitoredである。
+  OPEN-030はこのnarrow internal contractに限りresolved。architecture/04はL2-working、
+  OPEN-026/027とfull carrier freeze、revoke-after-enqueue/serve visibilityは残り、SYS-2が
+  active、SYS-3がnextである。specialized M10 SCN-04/09/10/route-patchはregression-only、
+  public API/ABI/wire、broad PHASE-I1/I2 lifecycle、proof ledger、theory T1は不変である。
+
 - **2026-08-26** PROPOSAL-029 の owner disposition と ADR-0026 により、accepted
   M10 semanticsからmeaning-preserving per-locus executable artifacts、generated
   communication、process-internal dispatch、typed devtoolsへ進む Mirrorea I2

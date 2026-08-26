@@ -68,8 +68,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0026",
             "active roadmap は Plan 249",
             "SYS-0 completed",
-            "active goal は SYS-1",
-            "next goal は SYS-2",
+            "SYS-1 completed",
+            "active goal は SYS-2",
+            "next goal は SYS-3",
+            "OPEN-030 は I2 internal bounded contract として解決",
             "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
             "Plan 247 は closed",
             "OPEN-030",
@@ -122,6 +124,8 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "closed M10 baseline の次に、どの direct consumer と acceptance profile を開くかが未選択",
             "SYS-0 closing",
             "next goal は SYS-1",
+            "active goal は SYS-1",
+            "next goal は SYS-2",
         )
         for claim in stale_claims:
             self.assertNotIn(claim, self.html)
@@ -169,8 +173,9 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assertIn("M0--M10 program は closed", documentation)
         self.assertIn("active roadmap は Plan 249", documentation)
         self.assertIn("SYS-0 completed", documentation)
-        self.assertIn("active goal は SYS-1", documentation)
-        self.assertIn("next goal は SYS-2", documentation)
+        self.assertIn("SYS-1 completed", documentation)
+        self.assertIn("active goal は SYS-2", documentation)
+        self.assertIn("next goal は SYS-3", documentation)
         self.assertNotIn("goal-first integration は `plan/246", documentation)
         self.assertNotIn("S2-A が提示する次の判断", documentation)
         self.assertNotIn("この主線の停止条件は、I1 を開始できる状態", documentation)

@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 172,
+ "files": 174,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 15837
+   "bytes": 17019
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 22702
+   "bytes": 23049
   },
   {
    "id": "root/north-star",
@@ -445,6 +445,21 @@
    "bytes": 6084
   },
   {
+   "id": "adr/ADR-0027",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0024",
+    "adr/ADR-0025",
+    "adr/ADR-0026",
+    "meta/proposal-030"
+   ],
+   "summary": "SYS-1のcrate-private semantic runtime kernelと、owner/designated remote-inputのsource-derived internal lifecycle contractを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0027.md",
+   "bytes": 4736
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -454,7 +469,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 3239
+   "bytes": 3375
   },
   {
    "id": "arch/01-strata",
@@ -500,19 +515,23 @@
   {
    "id": "arch/04-runtime-carriers",
    "status": "L2-working",
-   "maturity": "draft",
+   "maturity": "reviewed",
    "depends_on": [
     "theory/04-ordering-and-cuts",
     "theory/05-authority",
     "theory/07-observation",
-    "theory/08-patch-hotplug"
+    "theory/08-patch-hotplug",
+    "theory/13-evaluation-materialization",
+    "theory/18-m9-auth-verification",
+    "adr/ADR-0027"
    ],
-   "summary": "runtime carrier のフィールド正本(Envelope / Admission / CapRef / Witness / SaveObject / HotPlug / Observation / Obligation / Diagnostic)。",
+   "summary": "broad runtime carrier catalogと、SYS-1で固定したcrate-private owner/designated-input lifecycle carrier。public API/ABI/wireは未凍結。",
    "open_items": [
-    "OPEN-030"
+    "OPEN-026",
+    "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 2132
+   "bytes": 5811
   },
   {
    "id": "arch/05-satellites",
@@ -1071,6 +1090,24 @@
    "bytes": 6577
   },
   {
+   "id": "meta/proposal-030",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0025",
+    "adr/ADR-0026",
+    "arch/04-runtime-carriers",
+    "theory/13-evaluation-materialization",
+    "spec/05-runtime-semantics"
+   ],
+   "summary": "SYS-1のcrate-private semantic runtime kernelと、owner request及びdesignated remote-inputのbounded internal lifecycle carrierを固定する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-030-sys1-runtime-kernel-internal-carrier.md",
+   "bytes": 6086
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1126,14 +1163,15 @@
     "adr/ADR-0015",
     "adr/ADR-0017",
     "adr/ADR-0026",
+    "adr/ADR-0027",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズ T0-T2 / I1-I6。official lifecycleはT1、M10有限profileとSYS-0 closeは受理済み、ADR-0026 programはSYS-1 activeでbroad I1/I2 lifecycle acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-1 internal kernel/carrierはclose、ADR-0026 programはSYS-2 activeでbroad I1/I2 acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 7421
+   "bytes": 7721
   },
   {
    "id": "plan/02-operating-model",
@@ -1426,14 +1464,16 @@
    "depends_on": [
     "theory/01-mircore-v0",
     "theory/04-ordering-and-cuts",
-    "theory/05-authority"
+    "theory/05-authority",
+    "theory/13-evaluation-materialization",
+    "adr/ADR-0027"
    ],
-   "summary": "参照実装が満たすべき観測可能挙動と、適合試験用の決定的スケジューリング profile。",
+   "summary": "参照実装の観測可能挙動、SYS-1 internal kernel lifecycle、適合試験用の決定的 scheduling profile。",
    "open_items": [
     "OPEN-027"
    ],
    "path": "spec/05-runtime-semantics.md",
-   "bytes": 3331
+   "bytes": 5742
   },
   {
    "id": "spec/06-conformance",
@@ -1766,12 +1806,13 @@
     "theory/02-types-effects-failures",
     "theory/03-elaboration",
     "theory/05-authority",
-    "adr/ADR-0018"
+    "adr/ADR-0018",
+    "adr/ADR-0027"
    ],
-   "summary": "M3 の評価場所・clock・authority origin・materialization を分離する有限 calculus。owner RMW、explicit receipt、designated evaluator の規則を定義する。",
+   "summary": "評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator及びSYS-1 internal lifecycleを定義する有限calculus。",
    "open_items": [],
    "path": "theory/13-evaluation-materialization.md",
-   "bytes": 9990
+   "bytes": 12754
   },
   {
    "id": "theory/14-maintained-relation-projection",

@@ -1,6 +1,6 @@
 # Plan 249 — Mirrorea I2 Systems Foundation current roadmap
 
-最終更新: 2026-08-26 20:13 JST
+最終更新: 2026-08-26 23:09 JST
 
 ## 役割、authority、current control state
 
@@ -24,17 +24,19 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   executable artifacts と generated communication plan を生成し、単一 OS
   process 内の independent locus runtimes で実 dispatch し、source から runtime
   occurrence まで typed devtools で追跡できる local toy fabric を完成させる。
-- completed goals: prior ADR-0015 **M0--M10** baseline and **SYS-0 baseline and
-  goal alignment**
-- active goal: **SYS-1 runtime kernel / conformance separation and internal
-  carrier boundary**
-- next goal: **SYS-2 concurrency, memory, and effect-handler refinement**
-- current direct blockers: M10 conformance facade が semantic
-  state、release/profile、evidence generation、verification、CLI を同じ大きな boundary
-  に持つこと、および `architecture/04` の OPEN-030 reply/receipt internal boundary が
-  未固定であること。
-- official lifecycle: theory **T1**。program activation、SYS-0 completion、SYS-1
-  activation は broad PHASE-I1 exit、I2 lifecycle entry、I2 exit のいずれも受理しない。
+- completed goals: prior ADR-0015 **M0--M10** baseline, **SYS-0 baseline and
+  goal alignment**, and **SYS-1 runtime kernel / internal carrier boundary**
+- accepted SYS-1 source/evidence cut:
+  `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`
+- active goal: **SYS-2 concurrency, memory, and effect-handler refinement**
+- next goal: **SYS-3 per-locus projection and executable artifact generation**
+- current direct blocker: the SYS-1 kernel consumes an immutable final M9
+  authority snapshot; SYS-2 must define the ST/OW happens-before,
+  linearization, and visibility mapping that prevents stale use after
+  revoke/publication/activation/cut edges without importing low-level memory
+  order into ordinary Surface.
+- official lifecycle: theory **T1**。program activation and SYS-0/SYS-1
+  completion do not accept broad PHASE-I1 exit, I2 lifecycle entry, or I2 exit.
 
 Plan 247 は closed M0--M10 execution record / R5 regression baseline のまま保持する。
 Plan 249 以外の numbered plan、WRK、historical report は parallel queue ではない。
@@ -72,7 +74,7 @@ Parent-goal stop evidence:
 
 Milestone addition or reordering requires evidence that the parent goal cannot
 close without it and an explanation in this roadmap. No such addition exists
-at SYS-0.
+through SYS-1.
 
 ```text
 SYS-0 Baseline and goal alignment
@@ -163,21 +165,24 @@ are explicit, and SYS-1 has a direct blocker/consumer. Reopen for baseline
 regression, conflicting active roadmaps, unrecorded authority, or a material
 review counterexample.
 
-### SYS-1 — Runtime kernel / conformance separation and internal carrier boundary (active)
+### SYS-1 — Runtime kernel / conformance separation and internal carrier boundary (completed)
 
 **Goal ID:** SYS-1
 
-**Goal sentence:** By the end of this milestone, a typed internal semantic
-runtime kernel owns M10-compatible meaning state independently of conformance
-and release orchestration, and I2 components can exchange explicit typed
-request/result/receipt and effect-handler operations through that kernel.
+**Goal sentence:** By the end of this milestone, the ordinary `run_source` and
+generic checked `OwnerEvent` production paths use a typed internal semantic
+kernel independent of conformance/release orchestration, with explicit owner
+request/receipt and designated remote-input request/result/consume lifecycles.
 
 **North Star link:** Advances correct communication and observation while
 preserving verification, authority, and future placement boundaries.
 
-**User-visible outcome:** Existing M10 behavior runs through a reusable kernel;
-focused inspection shows request → serve → reply → receive/receipt and typed
-effect request → admitted handler → result/failure with provenance.
+**User-visible outcome:** Ordinary source execution and generic checked owner
+events run through a reusable kernel; focused inspection shows owner request →
+serve → reply → receive/receipt and designated remote-input request →
+source-owner serve → reply → receive/receipt → evaluator consume with exact
+provenance. Specialized historical M10 SCN-04/09/10/route-patch runners remain
+regression-only and are not this evidence.
 
 **Semantic invariants:** Conformance depends on the kernel, never the reverse;
 carrier cannot mint Core/state/authority; receipt is not authority transfer;
@@ -194,17 +199,23 @@ threaded execution, per-locus artifact generation, final CLI compatibility.
 **Primary falsifier:** A source-free carrier or conformance fixture can cause a
 semantic mutation/grant, or the kernel imports release/profile/verifier logic.
 
-**Exit evidence:** Internal typed kernel API; explicit dependency direction;
-positive request/reply/receipt and effect-handler tests; wrong identity,
-duplicate/stale receipt, authority-mint, source-free mutation negatives; M10
-regression unchanged; independent review; no public compatibility claim.
+**Exit evidence:** Source cut `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`;
+crate-private typed kernel with M9→kernel→owned M8 dependency direction;
+13/13 focused owner/designated-input lifecycle and falsifier tests; ordinary
+source/generic owner integration; `mir-runtime` library, M10 source/CLI/
+conformance, workspace, format, Clippy, diff, and secret-scan validation;
+independent semantics and code-quality ACCEPT; runtime-monitored only; no
+public compatibility claim.
 
 **Stop condition:** Close once SYS-2/3 can use the internal boundary, the
-representative falsifiers fail closed, and remaining broad-I1 carrier residual
-is recorded exactly. Broad I1 exit is optional here and never obtained by
-weakening criteria.
+representative falsifiers fail closed, and the immutable-M9-snapshot
+revocation visibility plus broad-I1 OPEN-026/027/full-carrier residuals are
+recorded exactly. Broad I1 exit is optional here and never obtained by
+weakening criteria. Reopen on source-free mint/mutation, wrong lineage or
+identity acceptance, kernel dependency on M10 orchestration, or stale use
+past the visibility edge SYS-2 must define.
 
-### SYS-2 — Concurrency, memory, and effect-handler refinement (next)
+### SYS-2 — Concurrency, memory, and effect-handler refinement (active)
 
 **Goal ID:** SYS-2
 
@@ -247,7 +258,7 @@ independent review.
 counterexample, selected ST/OW observations agree, and SYS-3 has a concrete
 backend contract; defer arbitrary fairness/memory generalization.
 
-### SYS-3 — Per-locus projection and executable artifact generation
+### SYS-3 — Per-locus projection and executable artifact generation (next)
 
 **Goal ID:** SYS-3
 
@@ -480,13 +491,13 @@ This is a decision aid for program scope, not a new semantic encyclopedia.
 | meaning-derived communication | North Star, C3, BND-001/006 | finite source-to-Core/generated-edge M10 evidence | no general per-locus executable communication path | SYS-1 carrier; SYS-3/4 projection/dispatch |
 | per-locus code generation | S4 projection, `mir-project` responsibility | no accepted generator | global checked Core does not emit runnable locus artifacts | SYS-3, then SYS-4 |
 | ordinary Surface | C2, M6/M7 bounded source path | accepted ordinary `.mir` finite profile | not final grammar; no I2 build/project path | SYS-3/5 |
-| owner evaluation | C4/C5, theory/13, M7/M8 | owner-side RMW and FIFO finite runtime | reusable kernel and concurrent worker refinement absent | SYS-1/2/4 |
+| owner evaluation | C4/C5, theory/13, M7/M8 | owner-side RMW, FIFO runtime, and SYS-1 crate-private kernel | concurrent worker refinement absent | SYS-2/4 |
 | relation-first late projection | C7, theory/14, BND-006 | finite two-anchor relation/consumer projection | artifact placement and conservative DAG extension boundary absent | SYS-3/5 |
 | existence/fallback DAG | theory/06/14 monotone lineage | two-anchor/three-floor finite evidence | broader finite acyclic pressure case not projected/executed | SYS-3/5 |
 | designated evaluation/timing | C6, theory/13, M7/M8 | version/frontier decision and finite consume path | generated evaluator placement/delivery across locus artifacts absent | SYS-3/4/5 |
-| auth layers | C9, theory/05/18, M9 | source-bound membership/capability/witness finite seam | component dispatch, revocation visibility, carrier integration absent | SYS-1/2/4/5 |
+| auth layers | C9, theory/05/18, M9 | source-bound membership/capability/witness seam integrated into SYS-1 carrier | component dispatch and revoke-after-enqueue/serve visibility absent | SYS-2/4/5 |
 | optional verification | C9/C11, M9 verifier lane | residual/evidence/diagnostic finite seam | runtime/devtools residual/discharge path not joined | SYS-5/6 |
-| algebraic-effect-like visible operations | effect/failure rows, provider/adaptor BNDs | typed effects/obligations but no general handler dispatch | request→handler→result/failure internal contract absent | SYS-1/2/3/4 |
+| algebraic-effect-like visible operations | effect/failure rows, provider/adaptor BNDs | bounded designated remote-input request→source-owner→result→consume contract | ST/OW ordering and later generated handler plan absent; generic registry intentionally unclaimed | SYS-2/3/4 |
 | save/load and Z-cycle | C10, theory/04, M8 local cut | finite local save/restore; general Z-cycle obligations deferred | whole in-process multi-locus artifact/communication cut absent | SYS-4/5/6 |
 | atomicity / memory order | ADR-0007, theory/04 high-level edges, owner seriality | deterministic ST reference | no OW happens-before/visibility/refinement mapping | SYS-2/4/6 |
 | browser/headless participation | North Star browser participation horizon; host boundary | headless/helper LAB evidence only | no I2 local causal toy workflow | SYS-5 headless; browser deferred |
@@ -550,19 +561,48 @@ serve as its independent reviewer.
   accepted integration cut and cannot self-embed its own commit hash. The
   parent records its final push/parity before beginning SYS-1 source work.
 
-### SYS-1 direct blockers
+### SYS-1 accepted close evidence
 
-1. Extract semantic state transitions and typed occurrence production from
-   M10 release/profile/correspondence orchestration without changing accepted
-   M10 behavior.
-2. Select the smallest internal request/reply/receipt carrier that preserves
-   identity, origin/target, typed outcome, occurrences, provenance,
-   effect/failure, redaction, membership/incarnation, capability/witness, and
-   applicable frontier/consumption data.
-3. Materialize the typed effect-handler request/result ordering boundary while
-   keeping transport, auth, projection, and persistence distinct.
-4. Determine, from existing official criteria rather than milestone naming,
-   whether broad I1 exit can be accepted or which exact residual remains.
+- Accepted source/evidence cut:
+  `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`.
+- `SemanticRuntimeKernel` is crate-private and is the ordinary `run_source`
+  and generic checked `OwnerEvent` production path. It consumes the sealed M9
+  seam, owns/extracts M8, and imports no M10 profile/verifier/release/CLI
+  orchestration.
+- The owner and designated remote-input lifecycles preserve checked
+  source/Core provenance, origin/target lineage, typed outcome and
+  effect/failure rows, occurrence identity, visibility/redaction,
+  membership/incarnation, capability/witness, and applicable frontier/
+  consumption state. Receipt transfers no authority; queue position is not
+  request identity; pre-admission failure creates no occurrence/M8 enqueue.
+- Thirteen focused tests cover valid lifecycle, FIFO identity/result alignment,
+  declared failure, malformed factory diagnostics, and invalid/duplicate/
+  stale/wrong target/source/origin/visibility/authority falsifiers. Formatting,
+  warnings-denied changed-crate Clippy, 25/25 runtime library tests, M10 source
+  2/2, CLI 4/4, conformance 67/67, and the full workspace passed.
+- Independent semantics and code-quality reviews returned ACCEPT. Evidence is
+  `runtime-monitored`; no Lean/model-check/general theorem was added. The
+  Oracle attempt produced no advice because its private browser profile was
+  logged out before prompt submission.
+- OPEN-030 is resolved only for this narrow I2-internal contract.
+  Architecture/04 remains L2-working; broad PHASE-I1 is unaccepted because
+  OPEN-026/027 and full internal carrier freeze remain. Specialized historical
+  M10 SCN-04/09/10/route-patch runners and legacy M8 receipt fixture APIs are
+  not SYS-1 kernel evidence.
+
+### SYS-2 direct blockers
+
+1. Define abstract happens-before and operation linearization for the SYS-1
+   owner and designated remote-input lifecycle in both deterministic ST and
+   one-owner-worker (OW) profiles.
+2. Replace the immutable-snapshot gap with an explicit mapping for
+   revoke-after-enqueue/serve, publication/observation, patch activation,
+   save-cut, witness creation, and relation epoch/sample visibility.
+3. Demonstrate selected ST/OW semantic correspondence and owner data-race
+   freedom, including counterexamples when a required edge is removed.
+4. Keep the bounded remote-input effect ordering explicit without inventing a
+   generic provider registry, lock-free requirement, or Surface
+   `memory_order_*` vocabulary.
 
 ## Risks, assumptions, and decision checkpoints
 
@@ -624,11 +664,11 @@ silently folded into the active Mir/Mirrorea kernel.
 
 ## Recommended next action
 
-SYS-1 is active. The parent first commits and pushes this mechanical closeout
-successor and verifies remote parity; no SYS-1 source change begins before that
-repository-state check. Then map the runtime facade's semantic-state ownership
-and dependency direction, and write failing boundary tests for kernel
-independence and no-mint/source-bound request/reply/receipt behavior before
-extracting the smallest internal kernel and effect-handler seam. Do not start
-SYS-2 semantics until SYS-1 evidence, review, report, commit/push, and remote
-parity close.
+SYS-1 is completed and SYS-2 is active. The parent first commits and pushes
+this Canon/report/status closeout successor to source cut `94e3707c...` and
+verifies clean remote parity; no SYS-2 source change begins before that
+repository-state check. Then pin the smallest ST and OW backend contracts to
+the SYS-1 owner/designated-input lifecycle, write the required edge-removal
+litmus falsifiers first, and map revocation/publication/activation/cut
+visibility to high-level Mir order. Do not start SYS-3 projection semantics
+until SYS-2 evidence, review, report, commit/push, and remote parity close.

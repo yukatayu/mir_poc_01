@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-26 20:13 JST
+最終更新: 2026-08-26 23:09 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -44,19 +44,20 @@ The active program covers the in-process systems-foundation segment only.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | Accepted finite M10 semantics remain the baseline; SYS-0 is closed and SYS-1 is active. Official lifecycle remains T1; broad I1/I2 acceptance is unclaimed | **着手可能** for the bounded SYS-1 internal contract |
-| User-facing specification | One ordinary source remains the authority; Plan 249 fixes the eventual build/run/inspect/conform capability but not final CLI spelling, grammar, API, ABI, or wire | **後段依存** for public surface; SYS-1 changes remain internal/non-public |
-| Implementation / operation | M10 finite deterministic reference profile is accepted; no reusable kernel/per-locus generator/actual locus dispatch exists yet | **着手可能** for SYS-1 kernel/carrier separation; SYS-2 is next |
+| Logical specification | Accepted finite M10 semantics remain the baseline; SYS-0/SYS-1 are closed and ADR-0027 fixes only the I2-internal owner/designated-input lifecycle. Official lifecycle remains T1; broad I1/I2 acceptance is unclaimed | **着手可能** for bounded SYS-2 concurrency/refinement |
+| User-facing specification | One ordinary source remains the authority; Plan 249 fixes the eventual build/run/inspect/conform capability but not final CLI spelling, grammar, API, ABI, or wire | **後段依存** for public surface; SYS-2 changes remain backend-internal |
+| Implementation / operation | The crate-private kernel is used by ordinary source and generic checked-owner paths at cut `94e3707c...`; no per-locus generator or actual locus dispatch exists yet | **着手可能** for SYS-2 ST/OW refinement; SYS-3 is next |
 
 Normative sources: `mirrorea_canon/adr/ADR-0026.md`,
+`mirrorea_canon/adr/ADR-0027.md`,
 `mirrorea_canon/plan/01-phases.md`, and
 `mirrorea_canon/plan/02-operating-model.md`. LAB execution source:
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
-Current direct blocker: separate semantic state/occurrence production from M10
-conformance/release/profile orchestration and narrowly fix OPEN-030 as a
-non-public internal carrier/effect boundary. SYS-1 is active; SYS-2 remains
-next and does not open before the SYS-1 close gate.
+Current direct blocker: the SYS-1 kernel consumes an immutable final M9
+snapshot. SYS-2 must map owner/designated-input order to ST/OW happens-before,
+linearization, and revoke/publication/activation/cut visibility, with bounded
+edge-removal counterexamples. SYS-2 is active; SYS-3 remains next.
 
 ## milestone map
 
@@ -64,9 +65,9 @@ next and does not open before the SYS-1 close gate.
 | --- | --- | --- | --- |
 | M0--M10 | finite theory + deterministic I1+ reference profile | closed baseline | ADR-0025 / Report 2591 |
 | SYS-0 | baseline, authority, one goal/control path | **completed / closed**; Report 2592 | SYS-1 |
-| SYS-1 | runtime kernel/conformance separation; internal carrier/effect seam | **active** | SYS-2/3 |
-| SYS-2 | ST/OW concurrency and memory refinement | **next**, after SYS-1 | SYS-3/4 |
-| SYS-3 | per-locus artifacts and generated communication | pending | SYS-4 |
+| SYS-1 | runtime kernel/conformance separation; internal carrier/effect seam | **completed / closed**; cut `94e3707c...`, Report 2593 | SYS-2/3 |
+| SYS-2 | ST/OW concurrency and memory refinement | **active** | SYS-3/4 |
+| SYS-3 | per-locus artifacts and generated communication | **next**, after SYS-2 | SYS-4 |
 | SYS-4 | in-process generated dispatch | pending | SYS-5 |
 | SYS-5 | typed devtools + four-locus toy world | pending | SYS-6 |
 | SYS-6 | finite I2 assurance/lifecycle closeout | pending | SYS-7 |
@@ -81,13 +82,13 @@ product contract.
 
 ### Operational Suite line
 
-Historical bounded operational roots remain evidence. SYS-0 changed no
+Historical bounded operational roots remain evidence. SYS-0/SYS-1 changed no
 runnable path, command, debug surface, or sample classification.
 
 ### Mir Language line
 
 M6/M7 ordinary source → checked Core remains the accepted finite source path.
-SYS-3 will project that checked Core; SYS-1 does not reopen final grammar.
+SYS-3 will project that checked Core; SYS-1 did not reopen final grammar.
 
 ### PoseGraph line
 
@@ -101,8 +102,9 @@ does not yet exist. SYS-2 supplies ST/OW refinement; SYS-3 supplies artifacts.
 
 ### Engine/Provider line
 
-Providers remain typed adapters and non-owners. SYS-1's effect-handler seam
-does not collapse transport, auth, projection, or persistence into providers.
+Providers remain typed adapters and non-owners. SYS-1 selected only a bounded
+designated remote-input effect lifecycle, not a generic registry; transport,
+auth, projection, and persistence remain separate.
 
 ## validation floor
 
@@ -128,9 +130,10 @@ implementation is claimed.
 | Kind | Item | Current handling |
 | --- | --- | --- |
 | Self-driven | SYS-0 baseline/goal alignment | completed; accepted integration cut and Report 2592 retained |
-| Self-driven | SYS-1 internal kernel/carrier/effect seam | active; decide by Constitution, positive/falsifier, and independent review |
-| Research discovery | exact broad-I1 carrier-freeze residual | determine in SYS-1; do not weaken criteria or stop SYS-2 if narrow seam closes |
-| Research discovery | safe OW primitives and finite memory abstraction | select in SYS-2; no Surface `memory_order_*` |
+| Self-driven | SYS-1 internal kernel/carrier/effect seam | completed at `94e3707c...`; runtime-monitored, Report 2593 |
+| Self-driven | SYS-2 ST/OW concurrency/refinement | active; preserve abstract order and detect removed-edge counterexamples |
+| Research discovery | exact broad-I1 carrier-freeze residual | OPEN-026/027 + full carrier freeze retained; no criteria weakening |
+| Research discovery | safe OW primitives and finite memory abstraction | select in active SYS-2; no Surface `memory_order_*` |
 | Research discovery | finite DAG extension boundary | select in SYS-3 with one pressure case; no arbitrary theorem |
 | Owner decision | public API/ABI/wire freeze | reserved; not a current blocker |
 | Owner decision | real transport / production / publication | reserved; SYS-7 remains entry-contract only |
@@ -140,13 +143,13 @@ implementation is claimed.
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
 | 0 | governance/repository memory | ADR-0026/Plan 249 active; Plan 247 closed | medium | SYS close sync is self-driven |
-| 1 | semantics/shared model | accepted finite semantics; internal carrier boundary active | heavy | SYS-1 self-driven |
+| 1 | semantics/shared model | accepted finite semantics + closed narrow internal carrier | heavy | SYS-2 ordering refinement self-driven |
 | 2 | parser-free evidence | historical only; must not become new architecture | medium | maintenance only |
-| 3 | source/checker/runtime | M10 baseline; kernel separation active | heavy | SYS-1 active; SYS-2 next |
+| 3 | source/checker/runtime | M10 baseline; kernel separation closed; concurrency active | heavy | SYS-2 active; SYS-3 next |
 | 4 | executable samples | no SYS sample change yet | medium | SYS-5 after SYS-4 |
 | 5 | theorem/model-check | finite evidence retained; concurrency obligations next | heavy | SYS-2 in sequence |
 | 6 | distributed fabric | per-locus generation/dispatch not yet realized | heavy | SYS-3/4 after prerequisites |
-| 7 | toolchain/backend | projector/runtime/devtools boundaries planned | heavy | SYS-1 then SYS-2--5 |
+| 7 | toolchain/backend | kernel boundary available; projector/runtime/devtools later | heavy | SYS-2 then SYS-3--5 |
 | 8 | applications | four-locus toy is future sample consumer | heavy | SYS-5 only; no Core promotion |
 
 ## feature maturity rows
@@ -156,17 +159,22 @@ implementation is claimed.
 | multi-node/fabric | logical multi-locus M10 evidence only | generated artifact + actual endpoint dispatch | **後段依存** SYS-3/4 |
 | robustness via contracts/theorem/model-check | finite M3--M10 classes retained | SYS-2/6 exact refinement evidence | **後段依存** |
 | dynamic attach/detach/DAG evolution | finite patch/relation evidence | artifact/dispatch lifecycle and finite DAG pressure | **後段依存** SYS-3/4/5 |
-| `atomic_cut` / higher-level ordering / memory order | high-level edges + deterministic ST | OW mapping and falsifiers | **着手可能** at SYS-2 after SYS-1 |
+| `atomic_cut` / higher-level ordering / memory order | high-level edges + deterministic ST + narrow kernel lifecycle | OW mapping and falsifiers | **着手可能** in active SYS-2 |
 | executable sample corpus | existing active roots and M10 commands unchanged | generated four-locus toy | **後段依存** SYS-5 |
-| Mir core/runtime kernel | M10 facade contains finite behavior | reusable typed kernel boundary | **着手可能** in active SYS-1 |
+| Mir core/runtime kernel | crate-private kernel on ordinary source/generic OwnerEvent; 13 focused tests | revoke/publication visibility under OW | **着手可能** in active SYS-2 |
 | Mirrorea projection/fabric | Canon boundary only | per-locus generation and actual dispatch | **後段依存** SYS-3/4 |
-| typed-effect handler seam | effect rows/adapter boundary accepted | internal request/result ordering | **着手可能** in active SYS-1 |
+| typed-effect handler seam | bounded designated remote-input request/result/consume lifecycle | ST/OW effect ordering; no generic registry | **着手可能** in active SYS-2 |
 | PrismCascade | separate performance kernel | no I2 integration required | deferred |
 | View/browser/renderer | BND-007 horizon/historical LAB | final product/API work | deferred beyond SYS-5 headless view |
 | upper applications | LAB consumers | no domain Core promotion | deferred |
 
 ## recent log
 
+- 2026-08-26 23:09 JST: SYS-1 source cut `94e3707c...` and independent
+  semantics/code-quality ACCEPT were mirrored through PROPOSAL-030/ADR-0027.
+  The crate-private owner/designated-input lifecycle is runtime-monitored;
+  SYS-2 is active and SYS-3 next while theory T1 and broad PHASE-I1/I2
+  acceptance remain unchanged.
 - 2026-08-26 20:13 JST: final SYS-0 review accepted with no P0/P1/P2; integration
   cut `350e04b4...` was pushed with clean `HEAD == origin/main` parity. SYS-0
   is closed, SYS-1 is active, and SYS-2 is next without changing official T1
