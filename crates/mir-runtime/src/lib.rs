@@ -50,6 +50,9 @@ pub mod product_alpha1_session;
 pub mod product_alpha1_transport;
 pub mod surface_source_patch_hotplug;
 
+#[cfg(test)]
+mod sys1_runtime_kernel_tests;
+
 pub fn crate_name() -> &'static str {
     "mir_runtime"
 }
