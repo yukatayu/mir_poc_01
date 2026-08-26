@@ -3,9 +3,10 @@ use std::{ops::Range, path::PathBuf};
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
-    surface_v0_pipeline::{CheckedSurfaceV0, EffectKind, check_and_elaborate_surface_v0},
+    surface_v0_pipeline::{check_and_elaborate_surface_v0, CheckedSurfaceV0, EffectKind},
 };
 
+use crate::m9_auth_verification::M9RuntimeExecutionSeam;
 use crate::semantic_runtime_kernel::{
     CapabilityRef, FailureKind, InputFrontier, KernelDiagnosticKind, KernelSeed, KernelStateKey,
     LocusRef, MembershipEpoch, MembershipIncarnation, OperationId, OwnerRequestCarrier,
@@ -116,6 +117,10 @@ fn owner_seed() -> KernelSeed {
         .with_int(atk_key(), 10)
 }
 
+fn owner_runtime_failure_seed() -> KernelSeed {
+    KernelSeed::new().with_int(atk_key(), 10)
+}
+
 fn owner_provenance(checked: &CheckedSurfaceV0, source_ref: SourceRef) -> SourceCoreProvenance {
     SourceCoreProvenance::from_checked_owner_operation(checked, OWNER_OPERATION)
         .with_source_ref(source_ref)
@@ -155,13 +160,19 @@ fn owner_attack_request(
         .with_provenance(owner_provenance(checked, operation_source))
 }
 
-fn owner_kernel() -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
+fn owner_kernel_with_seed(
+    seed: KernelSeed,
+) -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
     let (path, source, checked) = load_checked(OWNER_FIXTURE);
     let operation_ref = owner_source_ref(&path, &source);
     let admission = sealed_owner_admission(&checked);
-    let kernel = SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, owner_seed())
+    let kernel = SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, seed)
         .expect("sealed M9 admission should create the SYS-1 semantic runtime kernel");
     (checked, operation_ref, kernel)
+}
+
+fn owner_kernel() -> (CheckedSurfaceV0, SourceRef, SemanticRuntimeKernel) {
+    owner_kernel_with_seed(owner_seed())
 }
 
 fn designated_release_tuple() -> RemoteInputReleaseTuple {
@@ -227,6 +238,20 @@ fn designated_kernel() -> (String, String, CheckedSurfaceV0, SemanticRuntimeKern
     (path, source, checked, kernel)
 }
 
+fn sealed_designated_remote_input_admission_from_real_m9_seam(
+    checked: &CheckedSurfaceV0,
+) -> SealedM9RuntimeAdmission {
+    let seam = M9RuntimeExecutionSeam::test_real_admitted_designated_remote_input_seam_for_kernel(
+        checked,
+        EVALUATOR_LOCUS,
+        DESIGNATED_RESULT,
+        0,
+    )
+    .expect("test helper must build a real admitted M9 execution seam, not arbitrary strings");
+    SealedM9RuntimeAdmission::from_m9_execution_seam(checked, &seam)
+        .expect("real admitted M9 seam exposes the checked designated remote-input lineage")
+}
+
 #[test]
 fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() {
     let (checked, operation_ref, mut kernel) = owner_kernel();
@@ -266,11 +291,9 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
         owner_provenance(&checked, operation_ref).core_ref()
     );
     assert!(receipt.effect_row().contains(EffectKind::OwnerRequest));
-    assert!(
-        receipt
-            .failure_row()
-            .contains(FailureKind::MissingCapability)
-    );
+    assert!(receipt
+        .failure_row()
+        .contains(FailureKind::MissingCapability));
     assert_eq!(
         receipt.capability_refs(),
         [CapabilityRef::new(OWNER_CAPABILITY_REF)]
@@ -280,6 +303,13 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
     assert_eq!(
         receipt.membership_incarnation(),
         &MembershipIncarnation::new(OWNER_INCARNATION_REF)
+    );
+    let occurrences = receipt.occurrences();
+    assert!(occurrences.all_ids_are_concrete());
+    assert!(occurrences.strictly_orders_request_serve_reply_receive());
+    assert_eq!(
+        kernel.trace().occurrences_for(queued.request_identity()),
+        Some(occurrences)
     );
     assert!(receipt.redaction().is_observer_safe());
 }
@@ -324,6 +354,31 @@ fn wrong_target_source_or_identity_fails_closed_before_semantic_mutation() {
         assert_eq!(diagnostics.primary().kind(), expected);
         assert_eq!(kernel.semantic_snapshot(), &before);
     }
+
+    for provenance in [
+        SourceCoreProvenance::from_checked_owner_operation(&checked, OWNER_OPERATION)
+            .with_source_ref(operation_ref.clone())
+            .with_effect(EffectKind::OwnerWrite)
+            .with_failure(FailureKind::RouteUnavailable)
+            .with_visibility(VisibilityClass::ObserverSafeRedacted),
+        owner_provenance(&checked, operation_ref.clone())
+            .with_visibility(VisibilityClass::RestrictedRedacted),
+    ] {
+        let (_checked, _operation_ref, mut kernel) = owner_kernel();
+        let before = kernel.semantic_snapshot().clone();
+        let before_receipts = kernel.receipt_store().clone();
+        let diagnostics = kernel
+            .enqueue_owner_request(
+                owner_attack_request(&checked, operation_ref.clone()).with_provenance(provenance),
+            )
+            .expect_err("failure-row or visibility/redaction mismatch rejects before enqueue");
+        assert_eq!(
+            diagnostics.primary().kind(),
+            KernelDiagnosticKind::SourceCoreProvenanceMismatch
+        );
+        assert_eq!(kernel.semantic_snapshot(), &before);
+        assert_eq!(kernel.receipt_store(), &before_receipts);
+    }
 }
 
 #[test]
@@ -363,6 +418,33 @@ fn duplicate_reply_or_receipt_is_single_assignment_without_replay_mutation() {
     assert_eq!(kernel.semantic_snapshot(), &after_first);
     assert_eq!(kernel.receipt_store(), &receipt_store_after_first);
     assert!(kernel.receipt_store().contains(receipt.request_identity()));
+}
+
+#[test]
+fn declared_route_unavailable_yields_typed_failure_reply_and_receipt_without_mutation() {
+    let (checked, operation_ref, mut kernel) = owner_kernel_with_seed(owner_runtime_failure_seed());
+    let before = kernel.semantic_snapshot().clone();
+    let queued = kernel
+        .enqueue_owner_request(owner_attack_request(&checked, operation_ref))
+        .expect("admitted owner request queues even when runtime data is unavailable");
+
+    let served = kernel
+        .serve_next_owner(LocusRef::new(OWNER_LOCUS))
+        .expect("declared RouteUnavailable is served as a typed failure occurrence");
+    let reply = kernel
+        .reply_to_served_request(served.serve_occurrence())
+        .expect("declared runtime failure emits a typed reply");
+    assert_eq!(reply.failure(), Some(FailureKind::RouteUnavailable));
+    let receipt = kernel
+        .receive_reply(reply)
+        .expect("typed failure reply installs a typed receipt");
+
+    assert_eq!(receipt.failure(), Some(FailureKind::RouteUnavailable));
+    assert_eq!(receipt.request_identity(), queued.request_identity());
+    assert_eq!(kernel.semantic_snapshot(), &before);
+    assert!(kernel
+        .trace()
+        .contains_typed_failure_receipt(queued.request_identity(), FailureKind::RouteUnavailable));
 }
 
 #[test]
@@ -425,20 +507,16 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
     assert_eq!(dependency.typed_state_read().field(), Some("atk"));
     assert_eq!(dependency.typed_state_read().owner_locus(), OWNER_LOCUS);
     assert_eq!(dependency.typed_state_read().source_ref(), input_ref);
-    assert!(
-        designated
-            .effect_row()
-            .entries()
-            .iter()
-            .any(|entry| entry.kind() == EffectKind::DesignatedRemoteRequest)
-    );
-    assert!(
-        designated
-            .effect_row()
-            .entries()
-            .iter()
-            .any(|entry| entry.kind() == EffectKind::DesignatedReceiptUse)
-    );
+    assert!(designated
+        .effect_row()
+        .entries()
+        .iter()
+        .any(|entry| entry.kind() == EffectKind::DesignatedRemoteRequest));
+    assert!(designated
+        .effect_row()
+        .entries()
+        .iter()
+        .any(|entry| entry.kind() == EffectKind::DesignatedReceiptUse));
 
     let requested = kernel
         .enqueue_remote_input_request(designated_remote_input_request(&checked, input_ref.clone()))
@@ -489,15 +567,20 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
         receipt.effect_row().entries(),
         [EffectKind::DesignatedRemoteRequest]
     );
-    assert!(
-        receipt
-            .failure_row()
-            .contains(FailureKind::RouteUnavailable)
-    );
+    assert!(receipt
+        .failure_row()
+        .contains(FailureKind::RouteUnavailable));
     assert_eq!(receipt.value(), Some(&SemanticValue::Int(10)));
     assert_eq!(
         receipt.membership_incarnation(),
         &MembershipIncarnation::new(OWNER_INCARNATION_REF)
+    );
+    let remote_occurrences = receipt.occurrences();
+    assert!(remote_occurrences.all_ids_are_concrete());
+    assert!(remote_occurrences.strictly_orders_request_serve_reply_receive());
+    assert_eq!(
+        kernel.trace().occurrences_for(requested.request_identity()),
+        Some(remote_occurrences)
     );
     assert_eq!(consumed.value(), Some(&SemanticValue::Int(10)));
     assert_eq!(kernel.semantic_snapshot().int(&atk_key()), Some(10));
@@ -515,6 +598,39 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
         duplicate.primary().kind(),
         KernelDiagnosticKind::DuplicateReply
     );
+}
+
+#[test]
+fn production_m9_execution_seam_admits_checked_designated_remote_input_without_test_seal() {
+    let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
+    let input_ref = designated_input_source_ref(&path, &source);
+    let admission = sealed_designated_remote_input_admission_from_real_m9_seam(&checked);
+    let mut kernel =
+        SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, designated_seed())
+            .expect("production M9 seam-derived admission enters SYS-1 kernel");
+
+    let requested = kernel
+        .enqueue_remote_input_request(designated_remote_input_request(&checked, input_ref))
+        .expect("real M9 seam exposes exact checked designated remote-input lineage");
+    let served = kernel
+        .serve_next_remote_input(LocusRef::new(OWNER_LOCUS))
+        .expect("source owner serves the M9-sealed remote input request");
+    let reply = kernel
+        .reply_to_remote_input(
+            served.serve_occurrence(),
+            RemoteInputResult::success(SemanticValue::Int(10)),
+        )
+        .expect("M9-sealed remote input emits a typed reply");
+    let receipt = kernel
+        .receive_remote_input_reply(reply)
+        .expect("M9-sealed remote input installs a typed receipt");
+
+    assert_eq!(receipt.request_identity(), requested.request_identity());
+    assert_eq!(
+        receipt.source_ref(),
+        &designated_input_source_ref(&path, &source)
+    );
+    assert_eq!(receipt.release_tuple(), &designated_release_tuple());
 }
 
 #[test]
@@ -539,6 +655,11 @@ fn designated_remote_input_rejects_stale_or_mismatched_carriers_without_receipt_
             LocusRef::new("WrongEvaluator"),
             DESIGNATED_INPUT_RELEASE_LABEL,
         ));
+    let substituted_capability = base
+        .clone()
+        .with_capability_ref(CapabilityRef::new("cap:attack:S:self:substituted"));
+    let substituted_witness =
+        base.with_witness_ref(WitnessRef::new("witness:attack:S:self:substituted"));
 
     for (carrier, expected) in [
         (
@@ -549,6 +670,14 @@ fn designated_remote_input_rejects_stale_or_mismatched_carriers_without_receipt_
         (
             wrong_release_tuple,
             KernelDiagnosticKind::ReleaseTupleMismatch,
+        ),
+        (
+            substituted_capability,
+            KernelDiagnosticKind::AuthorityLineageRejected,
+        ),
+        (
+            substituted_witness,
+            KernelDiagnosticKind::AuthorityLineageRejected,
         ),
     ] {
         let diagnostics = kernel
