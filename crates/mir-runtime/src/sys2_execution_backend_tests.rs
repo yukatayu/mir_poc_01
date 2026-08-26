@@ -5,11 +5,12 @@ use mir_semantics::surface_v0_pipeline::{CheckedSurfaceV0, check_and_elaborate_s
 
 use crate::m9_auth_verification::M9RuntimeExecutionSeam;
 use crate::semantic_runtime_kernel::{
-    ExecutionProfile, FailureKind, InputFrontier, KernelDiagnosticKind, KernelReceipt, KernelSeed,
-    KernelStateKey, LocusRef, PrincipalRef, RemoteInputConsumeRequest, RemoteInputReleaseTuple,
+    FailureKind, InputFrontier, KernelDiagnosticKind, KernelReceipt, KernelSeed, KernelStateKey,
+    LocusRef, PrincipalRef, QueuedOwnerRequest, RemoteInputConsumeRequest, RemoteInputReleaseTuple,
     RemoteInputResult, RequestIdentity, SealedM9RuntimeAdmission, SemanticRuntimeKernel,
     SemanticValue, VisibilityClass,
 };
+use crate::sys2_execution_backend::ExecutionProfile;
 
 const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const DESIGNATED_FIXTURE: &str = "canonical_attack_bundle.mir";
@@ -67,6 +68,7 @@ verify finite_refinement
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct OwnerRunSummary {
     hp: Option<i64>,
+    request_ids: Vec<RequestIdentity>,
     lifecycles: Vec<Vec<&'static str>>,
 }
 
@@ -195,8 +197,8 @@ fn owner_and_remote_kernel(profile: ExecutionProfile) -> (CheckedSurfaceV0, Sema
     (checked, kernel)
 }
 
-fn enqueue_owner(kernel: &mut SemanticRuntimeKernel) -> RequestIdentity {
-    let queued = kernel
+fn enqueue_owner_queued(kernel: &mut SemanticRuntimeKernel) -> QueuedOwnerRequest {
+    kernel
         .enqueue_owner_request(
             kernel
                 .owner_request_from_admitted_lineage(
@@ -206,8 +208,11 @@ fn enqueue_owner(kernel: &mut SemanticRuntimeKernel) -> RequestIdentity {
                 )
                 .expect("M9-sealed owner lineage materializes the carrier"),
         )
-        .expect("source-derived owner request queues");
-    queued.request_identity().clone()
+        .expect("source-derived owner request queues")
+}
+
+fn enqueue_owner(kernel: &mut SemanticRuntimeKernel) -> RequestIdentity {
+    enqueue_owner_queued(kernel).request_identity().clone()
 }
 
 fn complete_owner_request(kernel: &mut SemanticRuntimeKernel) -> KernelReceipt {
@@ -222,8 +227,9 @@ fn complete_owner_request(kernel: &mut SemanticRuntimeKernel) -> KernelReceipt {
         .expect("reply installs one typed receipt")
 }
 
-fn run_two_owner_attacks(profile: ExecutionProfile) -> OwnerRunSummary {
+fn run_two_same_owner_attacks(profile: ExecutionProfile) -> OwnerRunSummary {
     let (_checked, mut kernel) = owner_kernel(profile);
+    let mut request_ids = Vec::new();
     let mut lifecycles = Vec::new();
     for _ in 0..2 {
         let identity = enqueue_owner(&mut kernel);
@@ -234,30 +240,92 @@ fn run_two_owner_attacks(profile: ExecutionProfile) -> OwnerRunSummary {
             ["request", "serve", "reply", "receive_receipt"]
         );
         lifecycles.push(kernel.trace().lifecycle_for(&identity));
+        request_ids.push(identity);
     }
+
+    let first_id = &request_ids[0];
+    let second_id = &request_ids[1];
+    let ordering = kernel.ordering_evidence();
+    let first_commit = ordering
+        .owner_commit_linearization_point(first_id)
+        .expect("first same-owner RMW records an owner commit LP");
+    let second_commit = ordering
+        .owner_commit_linearization_point(second_id)
+        .expect("second same-owner RMW records an owner commit LP");
+    assert_eq!(first_commit.owner(), &owner_locus());
+    assert_eq!(second_commit.owner(), &owner_locus());
+    assert_eq!(first_commit.key(), &hp_key());
+    assert_eq!(second_commit.key(), &hp_key());
+    assert_eq!(first_commit.written_version(), 1);
+    assert_eq!(second_commit.written_version(), 2);
+    assert!(
+        first_commit.written_version() < second_commit.written_version(),
+        "per-key modification order for hp must place first same-owner RMW before second"
+    );
+
+    let second_hp_read = ordering
+        .reads_from(second_id, &hp_key())
+        .expect("second same-owner RMW reads the first hp commit");
+    assert_eq!(second_hp_read.source_owner(), &owner_locus());
+    assert_eq!(
+        second_hp_read.observed_version(),
+        first_commit.written_version()
+    );
+    assert_eq!(
+        second_hp_read.producer_request(),
+        Some(first_id),
+        "second hp read must point to the first same-owner commit, not an unversioned store"
+    );
+    for identity in [first_id, second_id] {
+        let atk_read = ordering
+            .reads_from(identity, &atk_key())
+            .expect("same-owner RMW records the atk read");
+        assert_eq!(atk_read.source_owner(), &owner_locus());
+        assert_eq!(atk_read.observed_version(), 0);
+        assert!(
+            atk_read.is_initial_seed(),
+            "atk stays at the Init/v0 source for both same-owner RMWs"
+        );
+    }
+
     if profile == ExecutionProfile::Ow1 {
-        let ordering = kernel.ordering_evidence();
         let worker = ordering
             .dedicated_owner_worker(&owner_locus())
             .expect("OW1 reports a dedicated owner worker for S");
         assert_eq!(worker.target_owner(), &owner_locus());
         assert_eq!(worker.mailbox().target_owner(), &owner_locus());
         assert!(worker.mailbox().is_fifo());
+        assert_eq!(
+            worker.mailbox().observed_request_order(),
+            request_ids.as_slice(),
+            "OW1 owner mailbox evidence must retain exact FIFO request order"
+        );
     }
     OwnerRunSummary {
         hp: kernel.semantic_snapshot().int(&hp_key()),
+        request_ids,
         lifecycles,
     }
 }
 
 #[test]
 fn st_and_ow1_execute_same_owner_rmw_with_identical_result_and_lifecycle() {
-    let st = run_two_owner_attacks(ExecutionProfile::St);
-    let ow1 = run_two_owner_attacks(ExecutionProfile::Ow1);
+    let st = run_two_same_owner_attacks(ExecutionProfile::St);
+    let ow1 = run_two_same_owner_attacks(ExecutionProfile::Ow1);
 
     assert_eq!(st.hp, Some(80));
     assert_eq!(ow1.hp, st.hp);
     assert_eq!(ow1.lifecycles, st.lifecycles);
+    assert_eq!(
+        st.request_ids.len(),
+        2,
+        "same-owner comparison keeps both request identities"
+    );
+    assert_eq!(
+        ow1.request_ids.len(),
+        2,
+        "OW1 same-owner comparison keeps both request identities"
+    );
 }
 
 fn run_remote_input_after_owner(profile: ExecutionProfile) -> RemoteInputRunSummary {
@@ -276,14 +344,22 @@ fn run_remote_input_after_owner(profile: ExecutionProfile) -> RemoteInputRunSumm
         .serve_next_remote_input(owner_locus())
         .expect("source-owner worker serves the remote input read");
     let reply = kernel
-        .reply_to_remote_input(
-            served.serve_occurrence(),
-            RemoteInputResult::success(SemanticValue::Int(10)),
-        )
-        .expect("remote input result matches the source-owner value");
+        .reply_to_served_remote_input(served.serve_occurrence())
+        .expect("remote input reply is derived from the source-owner worker value");
+    let source_read = reply
+        .source_owner_read()
+        .expect("derived remote reply exposes typed source-owner read evidence");
+    assert_eq!(source_read.owner(), &owner_locus());
+    assert_eq!(source_read.key(), &atk_key());
+    assert_eq!(source_read.value(), &SemanticValue::Int(10));
+    let source_read_version = source_read.observed_version();
     let receipt = kernel
         .receive_remote_input_reply(reply)
         .expect("remote input reply installs typed receipt");
+    assert_eq!(receipt.value(), Some(&SemanticValue::Int(10)));
+    assert_eq!(receipt.source_owner(), &owner_locus());
+    assert_eq!(receipt.target_evaluator(), &evaluator_locus());
+    assert_eq!(receipt.release_tuple(), &designated_release_tuple());
     let consumed = kernel
         .consume_remote_input_receipt(
             RemoteInputConsumeRequest::from_checked_designated_dependency(
@@ -306,10 +382,21 @@ fn run_remote_input_after_owner(profile: ExecutionProfile) -> RemoteInputRunSumm
         read.observed_version(),
         ordering.latest_owner_version(&owner_locus(), &atk_key())
     );
+    assert_eq!(read.observed_version(), source_read_version);
     assert_eq!(
         kernel.trace().lifecycle_for(requested.request_identity()),
         ["request", "serve", "reply", "receive_receipt", "consume"]
     );
+    let remote_hb = ordering
+        .remote_input_hb(requested.request_identity())
+        .expect("remote input ordering evidence retains typed HB occurrences");
+    assert!(remote_hb.request_before_source_owner_serve());
+    assert!(remote_hb.source_owner_serve_before_reply());
+    assert!(remote_hb.reply_before_receive_receipt());
+    assert!(remote_hb.receive_receipt_before_consume());
+    assert_eq!(remote_hb.producer(), &owner_locus());
+    assert_eq!(remote_hb.evaluator(), &evaluator_locus());
+    assert_eq!(remote_hb.release_tuple(), &designated_release_tuple());
 
     RemoteInputRunSummary {
         value: consumed.value().cloned(),
@@ -325,6 +412,44 @@ fn ow1_remote_input_reads_latest_worker_owned_owner_version_and_matches_st() {
     assert_eq!(st.value, Some(SemanticValue::Int(10)));
     assert_eq!(ow1.value, st.value);
     assert_eq!(ow1.lifecycle, st.lifecycle);
+}
+
+#[test]
+fn legacy_explicit_remote_input_result_mismatch_rejects_without_reply_receipt_or_mutation() {
+    let (_checked, mut kernel) = owner_and_remote_kernel(ExecutionProfile::Ow1);
+    enqueue_owner(&mut kernel);
+    complete_owner_request(&mut kernel);
+    let requested = kernel
+        .enqueue_remote_input_request(
+            kernel
+                .remote_input_request_from_admitted_lineage(EVALUATOR_LOCUS, DESIGNATED_RESULT, 0)
+                .expect("M9-sealed designated remote input materializes the carrier"),
+        )
+        .expect("source-owner remote input queues");
+    let served = kernel
+        .serve_next_remote_input(owner_locus())
+        .expect("source-owner worker serves the remote input read");
+    let before = kernel.semantic_snapshot().clone();
+    let before_receipts = kernel.receipt_store().clone();
+    let before_lifecycle = kernel.trace().lifecycle_for(requested.request_identity());
+
+    let diagnostics = kernel
+        .reply_to_remote_input(
+            served.serve_occurrence(),
+            RemoteInputResult::success(SemanticValue::Int(999)),
+        )
+        .expect_err("legacy explicit remote-input result cannot fabricate source-owner value");
+    assert_eq!(
+        diagnostics.primary().kind(),
+        KernelDiagnosticKind::RemoteInputValueMismatch
+    );
+    assert_eq!(kernel.semantic_snapshot(), &before);
+    assert_eq!(kernel.receipt_store(), &before_receipts);
+    assert_eq!(
+        kernel.trace().lifecycle_for(requested.request_identity()),
+        before_lifecycle,
+        "mismatched explicit result records no reply or receipt lifecycle event"
+    );
 }
 
 fn revoke_owner_capability_after_enqueue_then_serve(profile: ExecutionProfile) {
@@ -372,13 +497,16 @@ fn revoke_owner_capability_after_enqueue_then_serve(profile: ExecutionProfile) {
     );
 }
 
-fn serve_before_revoke_then_later_use_rejects(profile: ExecutionProfile) {
+fn serve_write_then_revoke_before_reply_preserves_completed_mutation_and_later_use_rejects(
+    profile: ExecutionProfile,
+) {
     let (checked, mut kernel) = owner_kernel(profile);
     let identity = enqueue_owner(&mut kernel);
-    let receipt = complete_owner_request(&mut kernel);
-    assert_eq!(receipt.request_identity(), &identity);
-    assert_eq!(receipt.failure(), None);
+    let served = kernel
+        .serve_next_owner(owner_locus())
+        .expect("owner worker serves and commits the admitted request before revocation");
     assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
+    let after_serve = kernel.semantic_snapshot().clone();
 
     let g0 = kernel.current_authority_generation().clone();
     let g1 = M9RuntimeExecutionSeam::test_real_successor_generation_revoking_owner_cap_for_kernel(
@@ -390,8 +518,32 @@ fn serve_before_revoke_then_later_use_rejects(profile: ExecutionProfile) {
     )
     .expect("successor generation revokes the real M9 owner capability");
     kernel
-        .install_and_ack_m9_successor_generation(g1)
+        .install_and_ack_m9_successor_generation(g1.clone())
         .expect("kernel installs and acknowledges the opaque M9 successor generation");
+    assert_eq!(
+        kernel.semantic_snapshot(),
+        &after_serve,
+        "revocation publish/ack cannot roll back a completed owner mutation"
+    );
+
+    let reply = kernel
+        .reply_to_served_request(served.serve_occurrence())
+        .expect("reply after revocation remains a report for the already-served request");
+    assert_eq!(reply.failure(), None);
+    assert!(
+        !reply.transfers_authority(),
+        "reply/receipt is not an authority-transfer mechanism"
+    );
+    let receipt = kernel
+        .receive_reply(reply)
+        .expect("receipt after revocation records completed result without granting authority");
+    assert_eq!(receipt.request_identity(), &identity);
+    assert_eq!(receipt.failure(), None);
+    assert!(
+        !receipt.transfers_authority(),
+        "receiving the reply cannot revive or transfer revoked authority"
+    );
+    assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
 
     let later = kernel
         .enqueue_owner_request(
@@ -409,13 +561,29 @@ fn serve_before_revoke_then_later_use_rejects(profile: ExecutionProfile) {
         KernelDiagnosticKind::MissingCapability
     );
     assert_eq!(kernel.semantic_snapshot().int(&hp_key()), Some(90));
+    assert!(
+        kernel
+            .ordering_evidence()
+            .owner_commit_before_authority_generation_publish(&identity, g1.generation_ref())
+    );
+    assert!(
+        kernel
+            .ordering_evidence()
+            .authority_generation_publish_before_reply_receive(
+                g1.generation_ref(),
+                served.serve_occurrence(),
+                receipt.request_identity(),
+            )
+    );
 }
 
 #[test]
 fn authority_generation_revoke_after_enqueue_blocks_serve_and_reverse_order_preserves_result() {
     for profile in [ExecutionProfile::St, ExecutionProfile::Ow1] {
         revoke_owner_capability_after_enqueue_then_serve(profile);
-        serve_before_revoke_then_later_use_rejects(profile);
+        serve_write_then_revoke_before_reply_preserves_completed_mutation_and_later_use_rejects(
+            profile,
+        );
     }
 }
 
@@ -472,8 +640,9 @@ fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_e
         read.observed_version(),
         ordering.latest_owner_version(&owner_locus(), &atk_key())
     );
+    assert!(read.is_initial_seed());
 
-    let queued_after_g0 = enqueue_owner(&mut kernel);
+    let queued_after_g0 = enqueue_owner_queued(&mut kernel);
     let g0 = kernel.current_authority_generation().clone();
     let g1 = M9RuntimeExecutionSeam::test_real_successor_generation_revoking_owner_cap_for_kernel(
         &checked,
@@ -502,11 +671,77 @@ fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_e
 
 #[test]
 fn ow1_worker_owns_m8_and_exposes_no_public_shared_store_surface() {
-    let (_checked, kernel) = owner_kernel(ExecutionProfile::Ow1);
+    let (checked, mut kernel) = owner_and_remote_kernel(ExecutionProfile::Ow1);
+    let owner_identity = enqueue_owner(&mut kernel);
+    complete_owner_request(&mut kernel);
+    let remote_requested = kernel
+        .enqueue_remote_input_request(
+            kernel
+                .remote_input_request_from_admitted_lineage(EVALUATOR_LOCUS, DESIGNATED_RESULT, 0)
+                .expect("M9-sealed designated remote input materializes the carrier"),
+        )
+        .expect("source-owner remote input queues");
+    let remote_served = kernel
+        .serve_next_remote_input(owner_locus())
+        .expect("source owner serves remote input through OW1 worker");
+    let remote_reply = kernel
+        .reply_to_served_remote_input(remote_served.serve_occurrence())
+        .expect("source-owner worker derives remote input value");
+    let remote_receipt = kernel
+        .receive_remote_input_reply(remote_reply)
+        .expect("remote input reply installs typed receipt");
+    kernel
+        .consume_remote_input_receipt(
+            RemoteInputConsumeRequest::from_checked_designated_dependency(
+                &checked,
+                EVALUATOR_LOCUS,
+                DESIGNATED_RESULT,
+                0,
+            )
+            .with_receipt(remote_receipt.receipt_id())
+            .with_evaluator(evaluator_locus()),
+        )
+        .expect("designated evaluator consumes exact receipt");
+
     let ordering = kernel.ordering_evidence();
     let worker = ordering
         .dedicated_owner_worker(&owner_locus())
         .expect("OW1 exposes typed worker evidence for the owner locus");
+    let owner_observed = ordering
+        .worker_execution_observations(&owner_identity)
+        .expect("OW1 records actual M8 command execution for owner request");
+    assert_eq!(owner_observed.owner_worker_token(), worker.worker_token());
+    assert_eq!(owner_observed.enqueue_worker_token(), worker.worker_token());
+    assert_eq!(owner_observed.serve_worker_token(), worker.worker_token());
+    assert_eq!(
+        owner_observed.read_worker_token(&atk_key()),
+        Some(worker.worker_token())
+    );
+    assert_ne!(
+        owner_observed.coordinator_token(),
+        worker.worker_token(),
+        "coordinator and owner worker tokens must be distinct"
+    );
+
+    let remote_observed = ordering
+        .remote_worker_execution_observations(remote_requested.request_identity())
+        .expect("OW1 records actual M8 command execution for remote source-owner read");
+    assert_eq!(
+        remote_observed.source_owner_serve_worker_token(),
+        worker.worker_token()
+    );
+    assert_eq!(
+        remote_observed.read_worker_token(&atk_key()),
+        Some(worker.worker_token())
+    );
+    assert_ne!(remote_observed.coordinator_token(), worker.worker_token());
+    let owner_worker_tokens = ordering.owner_worker_tokens();
+    assert_eq!(
+        owner_worker_tokens.len(),
+        1,
+        "OW1 must not create a second owner worker for this selected profile"
+    );
+    assert_eq!(owner_worker_tokens[0], worker.worker_token());
 
     assert!(worker.owns_m8_runtime());
     assert!(worker.public_shared_store_surface().is_none());
