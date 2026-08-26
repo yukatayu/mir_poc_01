@@ -2106,6 +2106,45 @@ fn strict_observation_lifecycle_matches_each_carrier_contract_exactly() {
 }
 
 #[test]
+fn strict_projection_finalize_is_idempotent_for_observation_rows() {
+    let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
+    let mut result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["A", "S", "T", "V"]),
+    )
+    .expect("four-locus projection succeeds");
+
+    let before_rows = result.observation_plan().rows().to_vec();
+    let before_row_refs = before_rows
+        .iter()
+        .map(|row| row.observation_row_ref().to_owned())
+        .collect::<BTreeSet<_>>();
+    assert_eq!(
+        before_row_refs.len(),
+        before_rows.len(),
+        "initial finalized projection should not contain duplicate observation rows"
+    );
+
+    result.finalize();
+
+    let after_rows = result.observation_plan().rows();
+    assert_eq!(
+        after_rows,
+        before_rows.as_slice(),
+        "GlobalProjectionResult::finalize must be idempotent; a second call must not duplicate planned observation rows"
+    );
+    let after_row_refs = after_rows
+        .iter()
+        .map(|row| row.observation_row_ref().to_owned())
+        .collect::<BTreeSet<_>>();
+    assert_eq!(
+        after_row_refs.len(),
+        after_rows.len(),
+        "GlobalProjectionResult::finalize must preserve one planned row per observation ref"
+    );
+}
+
+#[test]
 fn strict_edges_bind_directly_to_artifact_fragments_and_occurrence_loci() {
     let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
     let result: GlobalProjectionResult = project_checked_core(
