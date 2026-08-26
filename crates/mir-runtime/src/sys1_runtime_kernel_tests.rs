@@ -324,7 +324,10 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
         kernel.trace().occurrences_for(queued.request_identity()),
         Some(occurrences)
     );
-    assert!(receipt.redaction().is_observer_safe());
+    assert_eq!(
+        receipt.visibility_class(),
+        VisibilityClass::RestrictedRedacted
+    );
 }
 
 #[test]
@@ -372,7 +375,7 @@ fn wrong_target_source_or_identity_fails_closed_before_semantic_mutation() {
         owner_provenance(&checked, operation_ref.clone())
             .without_failure_for_test(FailureKind::StaleMembership),
         owner_provenance(&checked, operation_ref.clone())
-            .with_visibility(VisibilityClass::RestrictedRedacted),
+            .with_visibility(VisibilityClass::ObserverSafeRedacted),
     ] {
         let (_checked, _operation_ref, mut kernel) = owner_kernel();
         let before = kernel.semantic_snapshot().clone();
