@@ -55,6 +55,7 @@ pub mod surface_source_patch_hotplug;
 pub(crate) mod sys2_bounded_model;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys2_execution_backend;
+pub(crate) mod sys3_projection;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
