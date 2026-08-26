@@ -253,15 +253,29 @@ fn designated_kernel() -> (String, String, CheckedSurfaceV0, SemanticRuntimeKern
 fn sealed_designated_remote_input_admission_from_real_m9_seam(
     checked: &CheckedSurfaceV0,
 ) -> SealedM9RuntimeAdmission {
-    let seam = M9RuntimeExecutionSeam::test_real_admitted_designated_remote_input_seam_for_kernel(
+    let seam = real_designated_remote_input_m9_seam(checked);
+    SealedM9RuntimeAdmission::from_m9_execution_seam(checked, &seam)
+        .expect("real admitted M9 seam exposes the checked designated remote-input lineage")
+}
+
+fn real_designated_remote_input_m9_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
+    M9RuntimeExecutionSeam::test_real_admitted_designated_remote_input_seam_for_kernel(
         checked,
         EVALUATOR_LOCUS,
         DESIGNATED_RESULT,
         0,
     )
-    .expect("test helper must build a real admitted M9 execution seam, not arbitrary strings");
-    SealedM9RuntimeAdmission::from_m9_execution_seam(checked, &seam)
-        .expect("real admitted M9 seam exposes the checked designated remote-input lineage")
+    .expect("test helper must build a real admitted M9 remote-input seam, not arbitrary strings")
+}
+
+fn real_designated_evaluator_only_m9_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
+    M9RuntimeExecutionSeam::test_real_admitted_designated_evaluator_only_seam_for_kernel(
+        checked,
+        EVALUATOR_LOCUS,
+        DESIGNATED_RESULT,
+        DESIGNATED_INPUT_FRONTIER,
+    )
+    .expect("test helper must build a real admitted M9 evaluator-only seam")
 }
 
 #[test]
@@ -617,7 +631,23 @@ fn designated_remote_input_lifecycle_is_source_derived_owner_read_then_receipt_c
 fn production_m9_execution_seam_admits_checked_designated_remote_input_without_test_seal() {
     let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
     let input_ref = designated_input_source_ref(&path, &source);
-    let admission = sealed_designated_remote_input_admission_from_real_m9_seam(&checked);
+    let seam = real_designated_remote_input_m9_seam(&checked);
+    let admission = SealedM9RuntimeAdmission::from_m9_execution_seam(&checked, &seam)
+        .expect("real admitted M9 seam exposes the checked designated remote-input lineage");
+    let sealed = admission
+        .m9_sealed_remote_input_lineage_for_test(EVALUATOR_LOCUS, DESIGNATED_RESULT, 0)
+        .expect("remote-input release lineage is sealed by M9, not filled by caller");
+    assert_eq!(sealed.source_owner(), &LocusRef::new(OWNER_LOCUS));
+    assert_eq!(sealed.target_evaluator(), &LocusRef::new(EVALUATOR_LOCUS));
+    assert_eq!(
+        sealed.input_frontier(),
+        &InputFrontier::new(DESIGNATED_INPUT_FRONTIER)
+    );
+    assert_eq!(sealed.release_tuple(), &designated_release_tuple());
+    assert_eq!(
+        sealed.visibility_class(),
+        VisibilityClass::RestrictedRedacted
+    );
     let mut kernel =
         SemanticRuntimeKernel::from_checked_m9(checked.clone(), admission, designated_seed())
             .expect("production M9 seam-derived admission enters SYS-1 kernel");
@@ -644,6 +674,48 @@ fn production_m9_execution_seam_admits_checked_designated_remote_input_without_t
         &designated_input_source_ref(&path, &source)
     );
     assert_eq!(receipt.release_tuple(), &designated_release_tuple());
+}
+
+#[test]
+fn evaluator_only_m9_designated_authority_cannot_authorize_producer_remote_input() {
+    let (path, source, checked) = load_checked(DESIGNATED_FIXTURE);
+    let input_ref = designated_input_source_ref(&path, &source);
+    let seam = real_designated_evaluator_only_m9_seam(&checked);
+
+    match SealedM9RuntimeAdmission::from_m9_execution_seam(&checked, &seam) {
+        Err(diagnostics) => {
+            assert_eq!(
+                diagnostics.primary().kind(),
+                KernelDiagnosticKind::AuthorityLineageRejected
+            );
+        }
+        Ok(admission) => {
+            assert!(
+                admission
+                    .m9_sealed_remote_input_lineage_for_test(EVALUATOR_LOCUS, DESIGNATED_RESULT, 0)
+                    .is_none(),
+                "evaluator-only M9 authority must not project a producer remote-input release lineage"
+            );
+            let mut kernel = SemanticRuntimeKernel::from_checked_m9(
+                checked.clone(),
+                admission,
+                designated_seed(),
+            )
+            .expect("admission without remote-input lineage may instantiate the kernel");
+            let before = kernel.semantic_snapshot().clone();
+            let before_receipts = kernel.receipt_store().clone();
+
+            let diagnostics = kernel
+                .enqueue_remote_input_request(designated_remote_input_request(&checked, input_ref))
+                .expect_err("evaluator-only M9 authority cannot enqueue producer remote input");
+            assert_eq!(
+                diagnostics.primary().kind(),
+                KernelDiagnosticKind::AuthorityLineageRejected
+            );
+            assert_eq!(kernel.semantic_snapshot(), &before);
+            assert_eq!(kernel.receipt_store(), &before_receipts);
+        }
+    }
 }
 
 #[test]
