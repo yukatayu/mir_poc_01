@@ -13,6 +13,7 @@ use mir_semantics::{
         SurfaceV0ClassificationOptions, SurfaceV0DiagnosticKind, SurfaceV0MatrixSpec,
         classify_surface_v0, classify_surface_v0_matrix,
     },
+    surface_v0_pipeline::StaticRetryContractKind,
 };
 
 const FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
@@ -253,11 +254,23 @@ fn classifies_designated_result_consume_as_distinct_template_and_source_map_kind
     let consume = classified
         .designated_result_consumer_template("E", "result", "C")
         .expect("designated consume has a distinct M6 Core template");
+    let producer = classified
+        .designated_template("E", "result")
+        .expect("producer designated result template");
     assert_eq!(consume.kind(), CoreTemplateKind::DesignatedResultConsume);
     assert_eq!(consume.evaluator(), "E");
     assert_eq!(consume.result(), "result");
     assert_eq!(consume.consumer_locus(), "C");
     assert_eq!(consume.source_span(), consume_ast.span());
+    assert_eq!(consume.input_frontier(), producer.input_frontier());
+    assert_eq!(consume.result_frontier(), producer.result_frontier());
+    assert_eq!(consume.result_version(), producer.result_version());
+    assert_eq!(consume.observation_policy(), producer.observation_policy());
+    assert_eq!(consume.policy_stamp(), producer.policy_stamp());
+    assert_eq!(
+        consume.static_retry_contract(),
+        StaticRetryContractKind::ReturnExistingNoNewConsumption
+    );
     assert_eq!(
         classified
             .source_ref_for_span(consume_ast.span())

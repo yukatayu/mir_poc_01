@@ -747,6 +747,34 @@ fn designated_result_consumer_core_is_source_bound_and_authority_distinct() {
         consumer_core.retry_contract(),
         StaticRetryContractKind::ReturnExistingNoNewConsumption
     );
+    let retained_m6_consume = checked
+        .consumed_m6_classification()
+        .designated_result_consumer_template("E", "result", "C")
+        .expect("checked program retains the consumed M6 designated-consumer template");
+    assert_eq!(
+        retained_m6_consume.input_frontier(),
+        consumer_core.input_frontier()
+    );
+    assert_eq!(
+        retained_m6_consume.result_frontier(),
+        consumer_core.result_frontier()
+    );
+    assert_eq!(
+        retained_m6_consume.result_version(),
+        consumer_core.result_version()
+    );
+    assert_eq!(
+        retained_m6_consume.observation_policy(),
+        consumer_core.observation_policy()
+    );
+    assert_eq!(
+        retained_m6_consume.policy_stamp(),
+        consumer_core.policy_stamp()
+    );
+    assert_eq!(
+        retained_m6_consume.static_retry_contract(),
+        consumer_core.retry_contract()
+    );
     assert!(!consumer_core.exposes_typed_expression());
     assert!(!consumer_core.exposes_raw_input());
 
