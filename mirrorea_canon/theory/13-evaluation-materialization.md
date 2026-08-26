@@ -2,7 +2,7 @@
 id: theory/13-evaluation-materialization
 status: L1-fixed
 maturity: reviewed
-depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027, adr/ADR-0028]
+depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029]
 summary: 評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。
 open_items: []
 ---
@@ -154,6 +154,24 @@ claim a source-span implementation before M6.
   typed conflict in this finite one-consumer profile. Presentation-only
   interpolation may follow, but never a semantic evaluation of expr.
 ```
+
+SYS-3 maps the provisional internal Surface-v0 clause
+`designated consume E.result at C` to this normative rule through a distinct
+source/Core edge. The mapping adds no new multi-consumer semantics and no
+runtime delivery claim; it exists so projection cannot invent the named
+consumer from topology or schedule.
+
+The rule is not a claim about the current M8 direct-consume API. That legacy
+runtime rejects a repeated delivery id with `AlreadyConsumed` and admits a
+different delivery id; M10 retains the same-delivery rejection as accepted
+regression behavior. Therefore `ReturnExistingNoNewConsumption` is a new SYS-4
+endpoint refinement obligation derived from `[E-CONSUME]`. SYS-3 records only
+the source/Core-bound semantic-consumption identity and static requirement.
+SYS-4 must interpose a carrier-side idempotent return or compatible wrapper so
+the accepted first semantic consumption reaches M8 exactly once, while the
+same named consumer's retry returns the decided result without a second M8
+consume. This is not network exactly-once, hidden retry, or SYS-3 runtime
+evidence.
 
 All value-bearing trace rows are observations: requester-visible rows redact
 owner-private operands unless an independent observation policy admits them.

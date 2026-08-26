@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 176,
+ "files": 179,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 18103
+   "bytes": 20803
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 23424
+   "bytes": 24954
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3864
+   "bytes": 3931
   },
   {
    "id": "adr/ADR-0001",
@@ -474,6 +474,21 @@
    "bytes": 4251
   },
   {
+   "id": "adr/ADR-0029",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "adr/ADR-0028",
+    "meta/proposal-032"
+   ],
+   "summary": "SYS-3のbounded designated-consume source/Core edge、pure checked-Core projector、owned per-locus fragments、generated plansをcut 3013e7feで有限受理する。",
+   "open_items": [],
+   "path": "adr/ADR-0029.md",
+   "bytes": 7831
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -483,7 +498,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 3497
+   "bytes": 3645
   },
   {
    "id": "arch/01-strata",
@@ -517,14 +532,16 @@
    "maturity": "draft",
    "depends_on": [
     "arch/02-boundary-contracts",
-    "spec/04-core-ir"
+    "spec/04-core-ir",
+    "spec/12-sys3-per-locus-projection",
+    "adr/ADR-0029"
    ],
-   "summary": "toolchain 各コンポーネントの責務・入出力・してはならないこと。LAB の前身対応。",
+   "summary": "toolchain各componentの責務と、accepted SYS-3 designated-consumeを含むchecked-Core-only internal projection compiler boundary。",
    "open_items": [
     "OPEN-029"
    ],
    "path": "architecture/03-toolchain.md",
-   "bytes": 1735
+   "bytes": 3781
   },
   {
    "id": "arch/04-runtime-carriers",
@@ -538,15 +555,16 @@
     "theory/13-evaluation-materialization",
     "theory/18-m9-auth-verification",
     "adr/ADR-0027",
-    "adr/ADR-0028"
+    "adr/ADR-0028",
+    "adr/ADR-0029"
    ],
-   "summary": "broad runtime carrier catalog、SYS-1 internal lifecycle、SYS-2 ST/OW1 ordering evidence boundary。public API/ABI/wireは未凍結。",
+   "summary": "broad runtime carrier catalogとSYS-1--3 internal lifecycle/execution/projection carrier requirements。public API/ABI/wireは未凍結。",
    "open_items": [
     "OPEN-026",
     "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 7844
+   "bytes": 10696
   },
   {
    "id": "arch/05-satellites",
@@ -1144,6 +1162,27 @@
    "bytes": 8005
   },
   {
+   "id": "meta/proposal-032",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "adr/ADR-0028",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "spec/08-m7-checked-elaboration"
+   ],
+   "summary": "SYS-3のbounded designated-consume source/Core edge、checked-Core-only per-locus artifact、generated plan、source/Core/artifact correspondenceをcut 3013e7feで有限受理した提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-032-sys3-checked-core-per-locus-projection.md",
+   "bytes": 13854
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1201,14 +1240,15 @@
     "adr/ADR-0026",
     "adr/ADR-0027",
     "adr/ADR-0028",
+    "adr/ADR-0029",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-2はclose、ADR-0026 programはSYS-3 activeでbroad I1/I2 acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-3はclose、SYS-4 activeでbroad I1/I2 acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 8054
+   "bytes": 9260
   },
   {
    "id": "plan/02-operating-model",
@@ -1446,14 +1486,15 @@
     "spec/01-lexical-and-modules",
     "adr/ADR-0021",
     "adr/ADR-0025",
+    "adr/ADR-0029",
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model"
    ],
-   "summary": "実装済み M6 parser / fixture に一致する bounded ordinary Surface grammar。",
+   "summary": "実装済み M6 parser / fixture とSYS-3のbounded designated-consume clauseを含むordinary Surface reference grammar。",
    "open_items": [],
    "path": "spec/02-surface-grammar.md",
-   "bytes": 6905
+   "bytes": 7688
   },
   {
    "id": "spec/03-static-semantics",
@@ -1485,14 +1526,15 @@
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model",
     "adr/ADR-0021",
-    "adr/ADR-0025"
+    "adr/ADR-0025",
+    "adr/ADR-0029"
    ],
    "summary": "M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。",
    "open_items": [
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 8295
+   "bytes": 9116
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1551,12 +1593,13 @@
     "spec/04-core-ir",
     "theory/16-m7-checked-elaboration",
     "adr/ADR-0022",
-    "adr/ADR-0025"
+    "adr/ADR-0025",
+    "adr/ADR-0029"
    ],
-   "summary": "M6 sourceを唯一の入力とするM7 finite check/elaboration API、生成義務、residual、非実行境界。",
+   "summary": "M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、生成義務、residual、非実行境界。",
    "open_items": [],
    "path": "spec/08-m7-checked-elaboration.md",
-   "bytes": 8771
+   "bytes": 11332
   },
   {
    "id": "spec/09-m8-deterministic-runtime",
@@ -1606,6 +1649,24 @@
    "bytes": 20104
   },
   {
+   "id": "spec/12-sys3-per-locus-projection",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/04-core-ir",
+    "spec/08-m7-checked-elaboration",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/13-evaluation-materialization",
+    "theory/14-maintained-relation-projection",
+    "adr/ADR-0029"
+   ],
+   "summary": "cut 3013e7feで受理したSYS-3 bounded designated-consume source/Core edgeとfinite checked-Core projectionの入力、per-locus artifact、generated plan、diagnostic、non-execution境界。",
+   "open_items": [],
+   "path": "spec/12-sys3-per-locus-projection.md",
+   "bytes": 11305
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1617,12 +1678,13 @@
     "adr/ADR-0022",
     "adr/ADR-0023",
     "adr/ADR-0024",
-    "adr/ADR-0025"
+    "adr/ADR-0025",
+    "adr/ADR-0029"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1225
+   "bytes": 1315
   },
   {
    "id": "theory/00-overview",
@@ -1816,12 +1878,13 @@
     "theory/15-shared-formal-model",
     "theory/16-m7-checked-elaboration",
     "theory/17-m8-deterministic-runtime",
-    "adr/ADR-0028"
+    "adr/ADR-0028",
+    "adr/ADR-0029"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 23468
+   "bytes": 25145
   },
   {
    "id": "theory/12-literature",
@@ -1849,12 +1912,13 @@
     "theory/05-authority",
     "adr/ADR-0018",
     "adr/ADR-0027",
-    "adr/ADR-0028"
+    "adr/ADR-0028",
+    "adr/ADR-0029"
    ],
    "summary": "評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。",
    "open_items": [],
    "path": "theory/13-evaluation-materialization.md",
-   "bytes": 14177
+   "bytes": 15279
   },
   {
    "id": "theory/14-maintained-relation-projection",
@@ -1909,12 +1973,13 @@
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model",
-    "adr/ADR-0022"
+    "adr/ADR-0022",
+    "adr/ADR-0029"
    ],
-   "summary": "M6 fixed source classificationを有限検査し、deterministic checked elaboration・義務・residualを返すM7境界。",
+   "summary": "M6 fixed source classificationを有限検査し、designated consumeを含むdeterministic checked elaboration・義務・residualを返すM7境界。",
    "open_items": [],
    "path": "theory/16-m7-checked-elaboration.md",
-   "bytes": 7903
+   "bytes": 9520
   },
   {
    "id": "theory/17-m8-deterministic-runtime",

@@ -70,8 +70,19 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-0 completed",
             "SYS-1 completed",
             "SYS-2 completed",
-            "active goal は SYS-3",
-            "next goal は SYS-4",
+            "SYS-0--SYS-3 completed",
+            "active goal は SYS-4",
+            "next goal は SYS-5",
+            "SYS-4 active",
+            "SYS-5 next",
+            "closed / SYS-3",
+            "現在 / SYS-4",
+            "今 / SYS-4",
+            "次 / SYS-5",
+            "受理済みSYS-3 source/evidence cut",
+            "3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9",
+            "partial regression history",
+            "OBL-060 runtime-monitored (static finite only)",
             "OPEN-030 は I2 internal bounded contract として解決",
             "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
             "Plan 247 は closed",
@@ -129,6 +140,15 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "next goal は SYS-2",
             "active goal は SYS-2",
             "next goal は SYS-3",
+            "SYS-3 reopened",
+            "active goal は SYS-3",
+            "next goal は SYS-4",
+            "SYS-3 active / reopened",
+            "現在 / SYS-3",
+            "今 / SYS-3",
+            "SYS-4 next",
+            "次 / SYS-4",
+            "OBL-060 intentionally-deferred",
         )
         for claim in stale_claims:
             self.assertNotIn(claim, self.html)
@@ -175,11 +195,17 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assertIn("OBL-028 は `model-checked-bounded`", documentation)
         self.assertIn("M0--M10 program は closed", documentation)
         self.assertIn("active roadmap は Plan 249", documentation)
-        self.assertIn("SYS-0 completed", documentation)
-        self.assertIn("SYS-1 completed", documentation)
-        self.assertIn("SYS-2 completed", documentation)
-        self.assertIn("active goal は SYS-3", documentation)
-        self.assertIn("next goal は SYS-4", documentation)
+        self.assertIn("SYS-0--SYS-3 completed", documentation)
+        self.assertIn("active goal は SYS-4", documentation)
+        self.assertIn("next goal は SYS-5", documentation)
+        self.assertIn("`ded622fe...`を", documentation)
+        self.assertIn("partial regression evidenceへ", documentation)
+        self.assertIn("corrected source/evidence cut `3013e7fe...`でclosed", documentation)
+        self.assertIn("SYS-3のOBL-060もstatic finite compiler/projector evidenceだけを", documentation)
+        self.assertIn(
+            "`runtime-monitored`とし、Lean/general proof又はruntime dispatch evidenceではありません",
+            documentation,
+        )
         self.assertNotIn("goal-first integration は `plan/246", documentation)
         self.assertNotIn("S2-A が提示する次の判断", documentation)
         self.assertNotIn("この主線の停止条件は、I1 を開始できる状態", documentation)

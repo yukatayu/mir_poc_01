@@ -41,3 +41,4 @@ open_items: []
 | ADR-0026 | Mirrorea I2 Systems Foundation SYS-0--SYS-7へgoal-driven bounded autonomyを委任 | 運用 L0 |
 | ADR-0027 | crate-private semantic runtime kernelとowner/designated remote-inputのbounded internal lifecycle carrierを採用 | L1 |
 | ADR-0028 | deterministic STとsingle-owner OW1、ack後M9 generation公開、finite ordering refinementを採用 | L1 |
+| ADR-0029 | bounded designated-consume source/Core edgeとchecked-Core-only per-locus projectionをcut `3013e7fe...`で採用、SYS-3 close | L1 |

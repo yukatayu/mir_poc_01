@@ -2,7 +2,7 @@
 id: spec/04-core-ir
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025]
+depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029]
 summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。
 open_items: [OPEN-026]
 ---
@@ -20,6 +20,7 @@ source_span
 state_observer_safe_fields declaration-only source-bound field subset
 m5_core                   present only for accepted ownerRmw
 result_frontier/version   designated-result fields only
+designated_consumer       explicit evaluator/result ref + one named consumer
 binding_frontier          maintained-relation field only
 owner_publication_kind    PublishRelation for maintained relation
 published_relation_carrier true only for accepted maintained relation
@@ -27,6 +28,7 @@ consumer_projection_site  optional consumer-local relation projection
 deferred_policy_kind      WithAuth | Verify, non-executable only
 source_to_core_map        source span -> ownerRmw/local-read/local-write |
                           designated-decision | publish-relation |
+                          designated-result-consume |
                           consumer-local-projection | deferred-policy |
                           observer-publish
 authority_audit           Role authority origin, nested owner site,
@@ -63,14 +65,23 @@ target reference). These are distinct from
 Maintained relation lowering retains an owner publication of the relation
 carrier and an optional consumer-local projection, with only a binding
 frontier. Designated evaluation retains `publish-value`, a result frontier, and
-a result version, never a binding frontier. `with auth` and `verify` emit
+a result version, never a binding frontier. The bounded clause
+`designated consume E.result at C` lowers separately to a source-bound
+designated-result-consume template that preserves the producer result identity,
+input/result frontiers, version, observation policy, retry contract, and named
+consumer. It contains neither the evaluator expression nor raw remote input and
+cannot be synthesized from topology or a relation projection. The retry field
+is a static SYS-4 refinement requirement, not current M8 behavior/evidence;
+actual idempotent return is outside this Core. `with auth` and `verify` emit
 successful non-executable typed deferred templates; the former only supplies a
 required-authority name. Neither settles M9 semantics. Every listed node
 preserves the canonical source span.
 
 This template is not M5 Core, a final AST, JSON, ABI, wire record, runtime
-instruction, or public contract.  It does not add a `PresentationContext`
-field, receipt source syntax, transport, or execution behavior.
+instruction, or public contract. The designated-consume template is exactly a
+bounded internal Surface-v0/M6 seam for SYS-3; it does not freeze syntax or
+compatibility. This template does not add a `PresentationContext` field,
+receipt source syntax, transport, or execution behavior.
 
 ## Later exchange form (still L2-working)
 

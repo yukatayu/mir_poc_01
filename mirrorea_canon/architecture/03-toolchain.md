@@ -2,8 +2,8 @@
 id: arch/03-toolchain
 status: L2-working
 maturity: draft
-depends_on: [arch/02-boundary-contracts, spec/04-core-ir]
-summary: toolchain 各コンポーネントの責務・入出力・してはならないこと。LAB の前身対応。
+depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, adr/ADR-0029]
+summary: toolchain各componentの責務と、accepted SYS-3 designated-consumeを含むchecked-Core-only internal projection compiler boundary。
 open_items: [OPEN-029]
 ---
 
@@ -22,5 +22,41 @@ open_items: [OPEN-029]
 | mir-conform | SCN suite 実行 → 合否(spec/06) | expectation の暗黙緩和 | scripts/ 検証群 |
 
 共通則: 各 tool は自分の Diagnostic family(spec/07)だけを発行し、下流の失敗を握り潰さない。全 tool は `--format json` で carrier(arch/04)を吐けること。
+
+## SYS-3 selected internal projection boundary
+
+ADR-0029 / spec/12 は、`mir-project` の最初の executable direct-consumer seamを
+crate-private pure functionとして固定する。
+
+```text
+CheckedSurfaceV0 + exact identity-bound logical locus inventory
+  -> owned LocusProgram[locus]
+  + generated communication/effect/observation/persistence plans
+  + source/Core/artifact correspondence
+  | typed ProjectionDiagnostics
+```
+
+Logical topologyはlocus inventoryだけを与え、edge、authority、failure、handler、
+schema、deployment hostを与えない。projectorはAST/source、M10 conformance facade、
+SYS-1/2 runtime stateを再入力にせず、checked Coreからplacementとedgeを構成する。
+outputはSYS-4がsourceを再parseせずiterateできるplacement-specific checked fragmentを
+ownする。
+
+Close review exposed one required upstream source fact that this no-reparse
+boundary cannot invent: `designated consume E.result at C`. The provisional
+internal Surface-v0 parser/classifier/checker must preserve that clause as a
+distinct AST/M6/M7 checked Core edge before `mir-project` may derive the
+evaluator-to-consumer fragment and delivery plan. This is a bounded SYS-3
+compiler input correction, not a final/public grammar or artifact ABI. The
+direct-consumer seam is accepted at source/evidence cut
+`3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9`. Its
+`ReturnExistingNoNewConsumption` row is only a static source/Core refinement
+requirement. SYS-4, not the accepted compiler step, must implement a carrier-side
+idempotent return/wrapper before legacy M8 consumption and supply actual
+endpoint tests; current M8/M10 duplicate-delivery behavior remains unchanged.
+
+この選択はinternal compiler boundaryであり、CLI spelling、`--format json` encoding、
+public artifact ABI、deployment mapping、runtime admission/dispatchを実装又はfreezeしない。
+SYS-4はこのartifactを実行して初めてruntime occurrenceを作れる。
 
 OPEN-029: mir-lsp(エディタ統合)は I5 で検討。CLI 名は仮称であり、LAB の `mirrorea-alpha` 系列を改称して流用してよい。

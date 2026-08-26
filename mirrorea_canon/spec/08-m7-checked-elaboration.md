@@ -2,8 +2,8 @@
 id: spec/08-m7-checked-elaboration
 status: L1-fixed
 maturity: draft
-depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025]
-summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、生成義務、residual、非実行境界。
+depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025, adr/ADR-0029]
+summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、生成義務、residual、非実行境界。
 open_items: []
 ---
 
@@ -32,7 +32,8 @@ publish the complete accepted `SurfaceV0Classification` via
 not a classification summary or an AST reconstruction. It therefore preserves
 the M6 root/source `SourceRef`s, templates, canonical source spans, and
 source-to-Core entries. Its map is total over checked assignment, relation,
-designated, auth, and verify spans, with stable ordinal/core references. It
+designated decision, designated consume, auth, and verify spans, with stable
+ordinal/core references. It
 must forward an M6 diagnostic at its original span rather than change its
 meaning.
 
@@ -49,6 +50,7 @@ CheckedEvaluationKind
 CheckedBinaryOperator
 EffectEntry / EffectKind
 GeneratedObligation / GeneratedObligationKind
+StaticRetryContractKind
 ```
 
 They are implementation/finite-evidence names, not final public surface,
@@ -67,6 +69,8 @@ JSON, ABI, wire, or diagnostic-catalog names.
 | duplicate field/event/relation/designated/deferred | `DuplicateStateField` or corresponding `Duplicate…` at the second occurrence | no executable Core |
 | relation publication | `PublishRelation`, optional `ConsumerLocalProjection`, `Visibility` + `RelationLifetime` + `FallbackValidity` residuals | no value publication or consumer mutation |
 | designated result | `DesignatedPublishValue` + `ValueVisibilityRedaction` residual | no binding-frontier conversion |
+| explicit `designated consume E.result at C` | distinct `DesignatedResultConsume` checked Core/effects/obligations bound to the declared producer and named consumer | no evaluator-expression copy, topology-derived consumer, authority grant, delivery, or runtime consumption |
+| undeclared designated consumer / second consumer for the same result | `UndefinedDesignatedResultConsumerLocus` / `CompetingDesignatedResultConsumer` at the offending source span | no partial consume Core or inferred replacement consumer |
 | `with auth` / `verify` | `AuthDeferred` / `VerifyDeferred` residual | no grant, proof verdict, effect, mutation, or execution admission |
 | explicit execution demand on unresolved residual artifact | `ResidualCannotExecute` | no runtime success |
 | write to explicitly observer-safe declared field | source-bound `ObserverSafePublish` effect plus `VisibilityDenied` failure entry | no provider proof, hidden observer policy, or implicit public release |
@@ -83,6 +87,23 @@ Relation publication retains `Authority` plus
 `AdmittedEvaluatorAuthority` plus `DesignatedPublishValue` evaluation. An
 obligation is evidence required by a later consumer, not the associated
 authority/capability/effect itself.
+
+The bounded designated-consume evaluation is distinct from designated value
+publication. It carries `DesignatedResultDelivery` and
+`DesignatedResultConsume` effect rows, a
+`DesignatedResultConsumerAuthority` requirement, and an
+`Evaluation(DesignatedResultConsume)` obligation. Its typed Core preserves the
+explicit evaluator/result reference, consumer locus, result version,
+input/result frontiers, observation policy, policy stamp, and the finite retry
+contract `ReturnExistingNoNewConsumption`. That retry returns the already
+decided result to the same named consumer and emits no second semantic consume;
+a competing consumer is the typed static conflict above. None of these rows is
+authority-success, delivery, receipt, or runtime-execution evidence. In
+particular, this new static contract does not describe current M8 behavior:
+legacy M8 returns `AlreadyConsumed` for the same delivery id and can consume a
+different id. SYS-4 must add the source/Core-bound carrier-side idempotent
+return/wrapper and actual endpoint tests; M10 duplicate-delivery behavior stays
+an unchanged regression baseline.
 
 The bounded M10 direct consumer reads a `Role[self] at L_actor` header as an
 authority origin and the nested `at L_owner` as the owner evaluation/request
@@ -111,6 +132,13 @@ axes use `SemanticForm::Value`, and `InputFrontier(F)` is distinct from the
 result frontier. `Authority` and `AdmittedEvaluatorAuthority` are obligations,
 not authority-success evidence.
 
+The separate designated-consume projection owns no typed evaluator expression
+or raw remote input. It retains its own source/Core identity and requires the
+referenced designated producer to exist. Its consumer must be an explicitly
+declared locus, and exactly one consumer is admitted for a designated result in
+this finite profile. M7 never chooses a consumer from logical topology,
+schedule, relation membership, or deployment mapping.
+
 The bounded M10 direct consumer may additionally retain the source declaration
 profile for `visible observer_safe fields (...)`: unlisted state fields are
 private. Only a write to a listed field has `ObserverSafePublish` and
@@ -131,13 +159,20 @@ can satisfy membership or verification at M7.
 
 ## Finite evidence boundary
 
-The selected source matrix contains the canonical owner/relation/designated/
-deferred positive forms; M6 cross-owner/relation-publication/relation-mutation
-diagnostics; M7 failure-row/duplicate/unknown-field negatives; a residual-only
-static artifact; a residual-free owner artifact; and the additional finite
-type/locus/declaration consistency negatives. Its deterministic behavior,
-typed Core/effect/obligation rows, and stable span/source-map preservation are
-OBL-049 finite evidence only.
+The prior OBL-049 `lean-proved` source matrix contains the canonical owner/
+relation/designated/deferred positive forms; M6 cross-owner/relation-
+publication/relation-mutation diagnostics; M7 failure-row/duplicate/unknown-
+field negatives; a residual-only static artifact; a residual-free owner
+artifact; and the additional finite type/locus/declaration consistency
+negatives. Its deterministic behavior, typed Core/effect/obligation rows, and
+stable span/source-map preservation are OBL-049 finite Lean evidence only.
+
+The bounded designated-consume extension is separate evidence. Its AST/M6/M7/
+projection positives and falsifiers are accepted at source/evidence cut
+`3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9` only as OBL-060
+`runtime-monitored` static finite compiler/projector evidence. It does not
+extend OBL-049's Lean theorem, prove runtime admission, or claim M8/runtime
+consume behavior.
 
 This specification does not claim arbitrary checker completeness/decidability,
 runtime admission behavior, transport/receipt semantics, M9 auth/verify

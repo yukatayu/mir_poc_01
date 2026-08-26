@@ -18,6 +18,38 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-27** PROPOSAL-032 / ADR-0029 により、exact checked-program identityへ
+  boundされたlogical locus inventoryと`CheckedSurfaceV0`から、placement-specific typed
+  Coreをownするper-locus fragments、generated communication/effect/observation/
+  persistence plans、source/Core/artifact/edge correspondenceを純粋かつ決定的に作る
+  SYS-3 internal projectorを採用した。same-owner RMWはowner artifact、relationはowner
+  publish/consumer-local projection、designated remote inputはsource-owner serviceと
+  evaluator consumeへ分離し、各edgeはreal source/target fragment refとauthority-neutral
+  typed carrier contractを保持する。初回close reviewはcandidate cut
+  `ded622fef91bab2cadc571ba944e5ee2c69a7b63`に、ordinary source/M6/M7 Coreから
+  evaluator→named consumerを導くE-CONSUME pathがない反例を発見したため、同cutは
+  partial regression evidenceへ戻してSYS-3を一度reopenした。bounded non-final internal
+  clause `designated consume E.result at C`をdistinct AST/M6/M7 Core edgeとして追加し、
+  exactly-one consumer、same-consumer retryはexisting
+  decided result/no-new-consume、competing consumer typed conflictを要求する。consumerは
+  topology/schedule/relationから推論しない。このretryはtheory/13由来のnew static SYS-4
+  endpoint refinement requirementであり、legacy M8 same-delivery `AlreadyConsumed`と
+  accepted M10 duplicate-delivery rejectionは変更・再解釈しない。SYS-3はsemantic identity/
+  contractだけをencodeし、actual carrier-side idempotent return/wrapperとendpoint testsは
+  SYS-4が担う。production relation graphはcurrent checked two-anchor
+  shapeのみで、source-bound deeper/shared DAGはtest-only extension pressure nonclaimに
+  留める。accepted source/evidence cut
+  `3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9`はsource-test commits
+  `b39f3e76`、`f37be73c`、`27e42658`、`30be30bb`を経て、M6 metadata P1、
+  missing-producer P2、silent signature shadow P1を修正した。AST Surface M6 9/9、
+  M6 classification 13/13、M7 pipeline 25/25、M9 8/8、SYS-3 27/27、M8 admission
+  7/7、M10 source 2/2、M10 conformance 67/67、full `mir-runtime` / workspace、format、
+  scoped warnings-denied Clippy、diff checkと最終semantic/code-quality ACCEPTを受理した。
+  OBL-060はこのstatic finite compiler/projector evidenceだけを`runtime-monitored`とする。
+  Lean/general theorem、runtime admission/dispatch、actual occurrence、public
+  API/ABI/wire、multi-consumer、broad PHASE-I1/I2 lifecycleは主張しない。
+  SYS-3はcompleted、SYS-4がsole active goal、SYS-5がnextである。
+
 - **2026-08-27** PROPOSAL-031 / ADR-0028 により、SYS-1 kernel fragmentの
   deterministic STと、exactly one combined semantic owner/source-owner locusを
   dedicated workerが排他的に所有するOW1 backendを採用した。successful owner mutationの

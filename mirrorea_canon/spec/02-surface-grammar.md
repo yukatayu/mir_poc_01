@@ -2,8 +2,8 @@
 id: spec/02-surface-grammar
 status: L1-fixed
 maturity: draft
-depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
-summary: 実装済み M6 parser / fixture に一致する bounded ordinary Surface grammar。
+depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
+summary: 実装済み M6 parser / fixture とSYS-3のbounded designated-consume clauseを含むordinary Surface reference grammar。
 open_items: []
 ---
 
@@ -18,7 +18,7 @@ general expression parser.
 Module          ::= "module" ModulePath { Item }
 ModulePath      ::= Ident { "." Ident }
 Item            ::= LocusDecl | PrincipalDecl | TypeDecl | StateDecl
-                  | ActorBlock | RelationDecl | DesignatedEval
+                  | ActorBlock | RelationDecl | DesignatedEval | DesignatedConsume
                   | DeferredAuth | DeferredVerify
 
 LocusDecl       ::= "locus" LocusName
@@ -55,6 +55,8 @@ SignedInt       ::= [ "-" ] IntLiteral
 
 DesignatedEval  ::= "designated" "evaluate" LocusName "on" "tick"
                   ResultFrontierName "publish" ResultName "=" DesignatedExpr
+DesignatedConsume ::= "designated" "consume" LocusName "." ResultName
+                  "at" LocusName
 DeferredAuth    ::= "with" "auth" AuthName
 DeferredVerify  ::= "verify" DeferredName
 
@@ -108,6 +110,14 @@ relation.  M6 adds no separate declaration production for either.
   designated-result template binding, not a state mutation.  `result` is an
   ordinary result name in this fixture profile, not a reserved punctuation
   token.
+- `designated consume E.result at C` is the bounded SYS-3 internal source
+  clause that names the one consumer locus of an existing designated result.
+  It is a distinct source item with its own result-reference and consumer-locus
+  spans; it neither repeats the evaluator expression nor infers `C` from
+  topology, schedule, relation, or deployment metadata. This exact finite
+  profile accepts at most one consumer for `(E, result)`. An undeclared `C` or
+  a competing second consumer is rejected by M7. This clause is provisional
+  reference Surface v0, not final/public grammar or compatibility syntax.
 - A maintained relation owns an explicit relation/binding frontier and may
   describe a consumer-local projection site.  It publishes a relation carrier,
   not an early materialized absolute value.

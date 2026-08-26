@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0028) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0029) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -46,8 +46,8 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
-- **実装筋**(toolchain を作る): spec/02..07 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028。
+- **実装筋**(toolchain を作る): spec/02..12 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -68,9 +68,28 @@ owner requestとdesignated remote-inputのI2-internal bounded lifecycleに限り
 `920d3fe050b8b909253f8511d9ad897272323ced` でSYS-2のdeterministic ST、exactly one
 combined owner/source-owner locusのOW1、M9 successorのack後generation公開、bounded
 ordering modelをcloseした。OBL-058は`model-checked-bounded`、OBL-059は
-`runtime-monitored`であり、Lean/general proofではない。SYS-0--SYS-2はcompleted、active
-goalはSYS-3、next goalはSYS-4である。architecture/04はL2-workingのままで、
-OPEN-026/027とfull internal carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
+`runtime-monitored`であり、Lean/general proofではない。
+
+PROPOSAL-032 / ADR-0029 は exact identity-bound logical topology と checked Core から
+owned per-locus fragments、generated communication/effect/observation/persistence
+plans、source/Core/artifact correspondenceを決定的に作るSYS-3 finite internal
+projectorを選択した。初回close reviewはcandidate cut
+`ded622fef91bab2cadc571ba944e5ee2c69a7b63`に、ordinary sourceから
+evaluator→named consumerを導くdistinct E-CONSUME Core edgeがない反例を発見した。
+同cutをpartial regression evidenceへ戻してSYS-3を一度reopenし、bounded non-final
+`designated consume E.result at C` clause、one-consumer conflict/retry contract、consumer
+fragment/delivery edgeをsource cut `3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9`
+で実装・受理した。consumerはsourceがexactly oneだけ指定し、topology/schedule/relationは
+inventできない。retry contractはtheory/13
+由来のstatic SYS-4 endpoint refinement requirementであり、legacy M8のsame-delivery
+`AlreadyConsumed`又はaccepted M10 duplicate-delivery rejectionをruntime evidenceへ
+読み替えない。actual idempotent return/wrapperとendpoint testsはSYS-4に属する。production
+relation graphはcurrent checked two-anchor shapeのみで、deeper/shared DAGは
+source-bound test-only extension pressure nonclaimである。OBL-060はstatic finite
+compiler/projector evidenceだけを`runtime-monitored`とし、Lean/general theorem、runtime
+admission/dispatch、public contractを主張しない。SYS-0--SYS-3はcompleted、sole active
+goalはSYS-4、next goalはSYS-5である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal
+carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
 
 ## ID 体系
 

@@ -2,8 +2,8 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028]
-summary: broad runtime carrier catalog、SYS-1 internal lifecycle、SYS-2 ST/OW1 ordering evidence boundary。public API/ABI/wireは未凍結。
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029]
+summary: broad runtime carrier catalogとSYS-1--3 internal lifecycle/execution/projection carrier requirements。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
 
@@ -151,6 +151,55 @@ advance generation strictly, retain prior tombstones monotonically, and keep
 unrelated admitted owner/designated-release lineages. This boundary does not
 freeze concrete channel types, field names, or an artifact/backend ABI. SYS-3
 may consume its semantic requirements, not its Rust layout.
+
+## SYS-3 selected generated carrier-plan boundary
+
+ADR-0029 consumes the preceding semantic requirements as static, crate-private
+carrier contracts attached to checked-Core-derived communication edges. Each
+generated edge directly names its checked operation/dependency identity, exact
+source/Core reference, source and target locus, and real source/target artifact
+fragment refs. The carrier plan retains the applicable subset of:
+
+```text
+operation/request identity slots
+origin principal/locus and target owner/source-owner/evaluator locus
+declared failure and effect rows
+request/serve/reply/receive or publish/observe occurrence slots
+input/result frontier and evaluator consumption state
+membership epoch/incarnation, capability/witness, producer-release,
+  and evaluator-authority requirements from the sealed runtime seam
+reference-only visibility/redaction policy
+```
+
+These are requirements for SYS-4 materialization, not concrete messages,
+runtime occurrences, grants, or admission evidence. `OwnerRequest`, linked
+`OwnerReplyReceipt`, `DesignatedInputRequest`, linked
+`DesignatedInputReceipt`, and `RelationProjectionPublication` are the
+previously implemented finite lifecycle kinds. The accepted SYS-3 boundary
+additionally requires `DesignatedResultDelivery` from the evaluator fragment
+to the consumer fragment, but only when the distinct checked source/Core clause
+`designated consume E.result at C` exists. Logical topology cannot invent that
+edge. The carrier preserves result identity, version, input/result frontiers,
+policy, reference-only visibility, same-consumer no-new-consume retry, and
+sealed consumer authority requirements; it records publish/receive/consume
+slots without claiming actual dispatch or transferring authority. The retry
+field is a new required SYS-4 endpoint refinement contract derived from
+theory/13, not current M8 evidence: legacy M8 rejects the same delivery id as
+`AlreadyConsumed` and may consume a different id. SYS-4 must implement a
+source/Core-bound idempotent return or compatible wrapper before a retry can
+avoid another M8 call. M10 duplicate-delivery rejection remains unchanged.
+`AbsoluteValueStream` remains an explicit non-generated falsifier.
+
+The projection observation plan records required future occurrence bindings.
+It does not claim that request/serve/reply/receive/publish/observe happened.
+Full-row semantic equality is required for idempotent deduplication; rows with
+different provenance, edge, fragment, occurrence, or redaction remain
+distinct. The persistence plan assigns responsibilities but is not a
+SaveObject or restore algorithm.
+
+This generated plan does not serialize the broad catalog above and does not
+resolve OPEN-026/027. Field names, Rust layout, JSON, ABI, wire encoding,
+transport retries, and external delivery observation remain unfrozen.
 
 ## Resolution and remaining L2 boundary
 

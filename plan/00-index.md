@@ -20,7 +20,13 @@ record / regression baselineである。2026-08-26のowner directionを記録し
 sole current LAB roadmapは
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`である。SYS-0はclosed、
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
-closed、active goalはSYS-3、next goalはSYS-4である。Gate/Phase/OBL の正本は
+closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
+partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
+`3013e7fe...`でclosedした。active goalはSYS-4、next goalはSYS-5である。SYS-3のretry
+rowはstatic source/Core refinement contractだけを記録し、legacy M8
+`AlreadyConsumed`又はaccepted M10 duplicate-delivery behaviorをruntime correspondenceへ
+読み替えない。actual carrier-side idempotent return/wrapperとendpoint testsはSYS-4に属する。
+Gate/Phase/OBL の正本は
 Canonのままなので、program activationをbroad I1/I2 lifecycle acceptanceへ
 読み替えない。
 
@@ -939,10 +945,9 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   v1/v2 remain historical artifacts.)
 - Mirrorea I2 Systems Foundation current roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
-  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0
-  baseline/goal alignmentとSYS-1 runtime-kernel/internal carrier boundaryは
-  completed / closed、SYS-2 concurrency/memory/effect-handler refinementはactive、
-  SYS-3 per-locus projection/artifact generationはnext。
+  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-2と
+  SYS-3 per-locus projection/artifact generationはcompleted / closed、SYS-4
+  in-process generated dispatchはactive、SYS-5 typed devtools/toy sliceはnext。
   Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule

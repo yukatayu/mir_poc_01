@@ -15,8 +15,8 @@ Foundation roadmap は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。active roadmap は Plan 249 だけであり、
-SYS-0 completed、SYS-1 completed、SYS-2 completed、active goal は SYS-3、next goal は
-SYS-4 です。Plan 247とolder plansはhistorical memoryです。現在の停止線は
+SYS-0--SYS-3 completed、active goal はSYS-4、next goal はSYS-5です。Plan 247と
+older plansはhistorical memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
@@ -33,10 +33,13 @@ deterministic reference profile acceptance であり、broad PHASE-I1 exit、I2 
 final public grammar/diagnostic ABI/wire/carrier freeze、socket、production、general theorem、
 public product completion は主張しない。2026-08-26のowner directionはADR-0026により
 SYS-0--SYS-7のMirrorea I2 Systems Foundation bounded programを開始した。現在は
-**SYS-0 completed**、**SYS-1 completed**、**SYS-2 completed**。ADR-0027の
+**SYS-0--SYS-3 completed**、**SYS-4 active**、**SYS-5 next**。ADR-0027の
 crate-private kernel/internal carrier cutと、ADR-0028のST/OW1 bounded refinement cut
-`920d3fe0...`を受け、**active goal は SYS-3** per-locus projection/artifact generation、
-**next goal は SYS-4** in-process generated dispatchである。
+`920d3fe0...`を受けている。ADR-0029のprojectionは初回cut `ded622fe...`を
+E-CONSUME evaluator→named-consumer path欠落によりpartial regression evidenceへ
+戻して一度reopenし、corrected source/evidence cut `3013e7fe...`でclosedした。
+**active goal は SYS-4** in-process generated dispatch、**next goal は SYS-5**
+devtools/toy vertical sliceである。
 これはprogram authorizationであってbroad I1/I2 lifecycle acceptanceではない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
@@ -153,11 +156,12 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 - proof status は `mirrorea_canon/theory/11-metatheory-ledger.md` だけが決めます。
   General OBL-001..025 と OBL-027 は `intentionally-deferred` です。
   OBL-026 は `lean-proved`、OBL-028 は `model-checked-bounded` です。finite
-  OBL-029..059 は
+  OBL-029..060 は
   ledger の exact scope に従い、`lean-proved`、`model-checked-bounded`、
   `runtime-monitored` に分類されています。finite evidence を general theorem に
   読み替えません。SYS-2のOBL-058は`model-checked-bounded`、OBL-059は
-  `runtime-monitored`であり、Lean/general proofではありません。
+  `runtime-monitored`、SYS-3のOBL-060もstatic finite compiler/projector evidenceだけを
+  `runtime-monitored`とし、Lean/general proof又はruntime dispatch evidenceではありません。
 - T0 profile v3 が current governance profile です。v1 は nonconforming historical
   evidence、v2 は fixed-control drift を検出した historical `fail` として保持し、
   v3 acceptance へ再解釈しません。
@@ -170,10 +174,17 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   regression baseline です。active roadmapはPlan 249だけです。
 - ADR-0026 は accepted finite semantics を per-locus artifact/generated communication/
   in-process dispatch/typed devtoolsへ進めるSYS-0--SYS-7をowner-authorized bounded
-  programとして開始しました。SYS-0--SYS-2はcompleted / closed、active goalはSYS-3、
-  next goalはSYS-4です。ADR-0027はOPEN-030をI2 internal bounded contractとしてだけ
+  programとして開始しました。SYS-0--SYS-3はcompleted / closed、active goalはSYS-4、
+  next goalはSYS-5です。ADR-0027はOPEN-030をI2 internal bounded contractとしてだけ
   解決し、ADR-0028はそのST/OW1 orderingとlive M9 generation residualをfinite scopeで
-  閉じました。OPEN-026/027とfull carrier freezeは残ります。
+  閉じた。ADR-0029はchecked Coreからowned per-locus fragmentsとgenerated plansを
+  deterministicに作るfinite internal projectionを選択した。consumer path反例で一度
+  reopenした後、bounded non-final `designated consume E.result at C` AST/M6/M7 Core
+  edgeをcut `3013e7fe...`で受理した。`ReturnExistingNoNewConsumption`は
+  theory/13由来のstatic SYS-4 refinement contractであり、legacy M8のsame-delivery
+  `AlreadyConsumed`やaccepted M10 duplicate-delivery behaviorを実装証拠へ読み替えない。
+  actual carrier-side idempotent returnとendpoint testsはSYS-4で行う。OPEN-026/027と
+  full carrier freezeは残ります。
   program外はADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
@@ -185,9 +196,9 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | --- | --- | --- |
 | T0 | 語彙・decision・G0 | closed through the M2 v3 acceptance record; v1/v2 remain historical evidence |
 | T1 | 計算体系・G1-G3 statement | official lifecycle remains here; ADR-0026 program activation does not claim broad PHASE-I1/I2 acceptance |
-| T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2 adds bounded OBL-058/059 only |
+| T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
-| I2 | process 内 multi-place | ADR-0026 bounded implementation program closed SYS-0--SYS-2; SYS-3 is active and SYS-4 is next, while official I2 lifecycle entry/exit remains unaccepted |
+| I2 | process 内 multi-place | ADR-0026 bounded implementation program closed SYS-0--SYS-3; SYS-4 is active and SYS-5 is next, while official I2 lifecycle entry/exit remains unaccepted |
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 

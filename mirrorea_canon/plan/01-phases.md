@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-2はclose、ADR-0026 programはSYS-3 activeでbroad I1/I2 acceptanceは未受理。
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-3はclose、SYS-4 activeでbroad I1/I2 acceptanceは未受理。
 open_items: [OPEN-032]
 ---
 
@@ -15,8 +15,9 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  SYS-0--SYS-2 completed; Mirrorea I2 Systems Foundation bounded program active
-  at SYS-3, SYS-4 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028）。
+  SYS-0--SYS-3 completed; Mirrorea I2 Systems Foundation bounded program active
+  at SYS-4, SYS-5 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
+  ADR-0029）。
   architecture/04 の full L2 carrier freeze と OPEN-026/027 が残るため、広い PHASE-I1 exit、
   I2 entry、I2 exitはいずれも未受理。
 
@@ -72,7 +73,21 @@ bounded contractに限りresolvedである。PROPOSAL-031 / ADR-0028 はSYS-2の
 ST、single-owner OW1、M9 successor generation visibility、finite ordering refinementを
 source cut `920d3fe050b8b909253f8511d9ad897272323ced`でcloseした。OBL-058は
 `model-checked-bounded`、OBL-059は`runtime-monitored`であり、Lean/general theoremでは
-ない。active goalはSYS-3、next goalはSYS-4である。
+ない。PROPOSAL-032 / ADR-0029 はSYS-3のpure checked-Core projector、owned
+per-locus fragments、generated communication/effect/observation/persistence plans、
+source/Core/artifact correspondenceを選択した。candidate cut
+`ded622fef91bab2cadc571ba944e5ee2c69a7b63`はE-CONSUME evaluator→named-consumer
+path欠落によりpartial regression evidenceへ戻して一度reopenし、bounded non-final
+`designated consume E.result at C` AST/M6/M7 Core edge、exactly-one source-named
+consumer、consumer artifact/deliveryをsource/evidence cut
+`3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9`で受理した。そのretry fieldはstatic SYS-4
+refinement requirementだけを記録し、legacy M8/M10を
+idempotent-return evidenceへ再解釈しない。actual carrier-side return/wrapperとendpoint
+testsはSYS-4 direct-consumer obligationである。production relation graphはcurrent checked
+two-anchor shapeだけを扱い、finite DAG extensionはsource-bound test-only pressure
+nonclaimである。OBL-060はstatic finite compiler/projector evidenceだけを
+`runtime-monitored`とし、Lean/general theorem、runtime admission/dispatch、public
+contractを主張しない。SYS-3はcompleted、sole active goalはSYS-4、next goalはSYS-5である。
 
 これは実装programのauthorizationであり、official phase entry/exit recordではない。
 Broad PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027、I2 exitは
