@@ -142,12 +142,6 @@ fn owner_runtime_failure_seed() -> KernelSeed {
 fn owner_provenance(checked: &CheckedSurfaceV0, source_ref: SourceRef) -> SourceCoreProvenance {
     SourceCoreProvenance::from_checked_owner_operation(checked, OWNER_OPERATION)
         .with_source_ref(source_ref)
-        .with_effect(EffectKind::OwnerRequest)
-        .with_effect(EffectKind::OwnerWrite)
-        .with_failure(FailureKind::RouteUnavailable)
-        .with_failure(FailureKind::MissingCapability)
-        .with_failure(FailureKind::MissingWitness)
-        .with_visibility(VisibilityClass::ObserverSafeRedacted)
 }
 
 fn sealed_owner_admission(checked: &CheckedSurfaceV0) -> SealedM9RuntimeAdmission {
@@ -312,6 +306,7 @@ fn owner_request_lifecycle_retains_provenance_and_identity_not_queue_position() 
     assert!(receipt
         .failure_row()
         .contains(FailureKind::MissingCapability));
+    assert!(receipt.failure_row().contains(FailureKind::StaleMembership));
     assert_eq!(
         receipt.capability_refs(),
         [CapabilityRef::new(OWNER_CAPABILITY_REF)]
@@ -374,11 +369,8 @@ fn wrong_target_source_or_identity_fails_closed_before_semantic_mutation() {
     }
 
     for provenance in [
-        SourceCoreProvenance::from_checked_owner_operation(&checked, OWNER_OPERATION)
-            .with_source_ref(operation_ref.clone())
-            .with_effect(EffectKind::OwnerWrite)
-            .with_failure(FailureKind::RouteUnavailable)
-            .with_visibility(VisibilityClass::ObserverSafeRedacted),
+        owner_provenance(&checked, operation_ref.clone())
+            .without_failure_for_test(FailureKind::StaleMembership),
         owner_provenance(&checked, operation_ref.clone())
             .with_visibility(VisibilityClass::RestrictedRedacted),
     ] {
