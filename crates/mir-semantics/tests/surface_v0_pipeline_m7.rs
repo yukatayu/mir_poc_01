@@ -16,7 +16,7 @@ use mir_semantics::{
     },
     surface_v0_pipeline::{
         CheckedBinaryOperator, CheckedEvaluationKind, EffectEntry, EffectKind, GeneratedObligation,
-        GeneratedObligationKind, M7DiagnosticKind, ResidualObligationKind,
+        GeneratedObligationKind, M7DiagnosticKind, ResidualObligationKind, StaticRetryContractKind,
         SurfaceV0PipelineDiagnostics, check_and_elaborate_surface_v0,
     },
 };
@@ -694,6 +694,147 @@ fn designated_checked_core_retains_tick_value_expression_and_remote_input_depend
         dependency.receipt_use().typed_state_read(),
         dependency.typed_state_read()
     );
+}
+
+#[test]
+fn designated_result_consumer_core_is_source_bound_and_authority_distinct() {
+    let (path, source) = load_fixture("designated_result_consume_three_locus.mir");
+    let checked = check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("designated result consumer source checks and elaborates");
+
+    let designated = checked
+        .designated_result("E", "result")
+        .expect("producer designated result remains present");
+    let designated_core = designated
+        .designated_core()
+        .expect("producer designated result keeps checked Core");
+    let consumer = checked
+        .designated_result_consumer("E", "result", "C")
+        .expect("consumer Core is explicit and source-derived");
+    assert_eq!(
+        consumer.kind(),
+        CheckedEvaluationKind::DesignatedResultConsume
+    );
+    let consumer_core = consumer
+        .designated_result_consumer_core()
+        .expect("consumer has typed checked Core");
+    assert_eq!(consumer_core.evaluator(), "E");
+    assert_eq!(consumer_core.result(), "result");
+    assert_eq!(consumer_core.consumer_locus(), "C");
+    assert_eq!(consumer_core.source_ref(), consumer.source_ref());
+    assert_eq!(
+        consumer_core.result_ref_source_ref(),
+        &expected_source_ref(&path, &source, "E.result")
+    );
+    assert_eq!(
+        consumer_core.result_frontier(),
+        designated_core.result_frontier()
+    );
+    assert_eq!(
+        consumer_core.input_frontier(),
+        designated_core.input_frontier()
+    );
+    assert_eq!(
+        consumer_core.result_version(),
+        designated_core.result_version()
+    );
+    assert_eq!(
+        consumer_core.observation_policy(),
+        designated_core.observation_policy()
+    );
+    assert_eq!(consumer_core.policy_stamp(), designated_core.policy_stamp());
+    assert_eq!(
+        consumer_core.retry_contract(),
+        StaticRetryContractKind::ReturnExistingNoNewConsumption
+    );
+    assert!(!consumer_core.exposes_typed_expression());
+    assert!(!consumer_core.exposes_raw_input());
+
+    let consume_lexeme = "designated consume E.result at C";
+    let consume_ref = expected_source_ref(&path, &source, consume_lexeme);
+    assert_eq!(consumer.source_ref(), &consume_ref);
+    assert_effect_entry(
+        consumer.effect_row().entries(),
+        EffectKind::DesignatedResultDelivery,
+        &consume_ref,
+        &source,
+        consume_lexeme,
+    );
+    assert_effect_entry(
+        consumer.effect_row().entries(),
+        EffectKind::DesignatedResultConsume,
+        &consume_ref,
+        &source,
+        consume_lexeme,
+    );
+    assert_obligation_entry(
+        consumer.generated_obligations().entries(),
+        GeneratedObligationKind::DesignatedResultConsumerAuthority,
+        &consume_ref,
+        &source,
+        consume_lexeme,
+    );
+    assert_obligation_entry(
+        consumer.generated_obligations().entries(),
+        GeneratedObligationKind::Evaluation(CheckedEvaluationKind::DesignatedResultConsume),
+        &consume_ref,
+        &source,
+        consume_lexeme,
+    );
+    assert!(
+        consumer
+            .authority_requirements()
+            .requires_designated_result_consumer_authority("E", "result", "C")
+    );
+    assert!(
+        consumer
+            .authority_requirements()
+            .does_not_grant_authority_success()
+    );
+
+    let consume_entries = checked.source_map().entries_for_source_ref(&consume_ref);
+    assert_eq!(
+        consume_entries.kinds(),
+        vec![SourceToCoreKind::DesignatedResultConsume]
+    );
+    assert_eq!(
+        consume_entries.core_refs(),
+        vec!["designated-consume:E.result:C"]
+    );
+
+    let first = run_fixture("designated_result_consume_three_locus.mir")
+        .expect("first consumer elaboration succeeds");
+    let second = run_fixture("designated_result_consume_three_locus.mir")
+        .expect("second consumer elaboration succeeds");
+    assert_eq!(first, second);
+}
+
+#[test]
+fn designated_result_consumer_validation_is_declared_and_single_consumer_finite() {
+    for (fixture, expected_kind, lexeme) in [
+        (
+            "designated_result_consume_unknown_consumer.mir",
+            M7DiagnosticKind::UndefinedDesignatedResultConsumerLocus,
+            "MissingConsumer",
+        ),
+        (
+            "designated_result_consume_competing_consumer.mir",
+            M7DiagnosticKind::CompetingDesignatedResultConsumer,
+            "designated consume E.result at D",
+        ),
+    ] {
+        let (path, source) = load_fixture(fixture);
+        let diagnostics =
+            check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+                .expect_err("{fixture} rejects with typed designated-consumer diagnostic");
+        assert_single_diagnostic_at_range(
+            &diagnostics,
+            expected_kind,
+            &path,
+            &source,
+            byte_range(&source, lexeme),
+        );
+    }
 }
 
 #[test]

@@ -1,0 +1,16 @@
+module Combat.M7.DesignatedConsumeCompetingConsumer
+
+locus S
+locus E
+locus C
+locus D
+principal self
+type Player
+
+state player[id: Player] at S {
+  atk: Int
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 1
+designated consume E.result at C
+designated consume E.result at D

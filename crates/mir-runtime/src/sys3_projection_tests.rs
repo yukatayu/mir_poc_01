@@ -10,7 +10,7 @@ use mir_semantics::{
     surface_v0_pipeline::{
         CheckedEvaluation, CheckedEvaluationKind, CheckedProgramIdentity, CheckedSurfaceV0,
         EffectKind, GeneratedObligationKind, RelationAnchorCore, ResidualObligationKind,
-        check_and_elaborate_surface_v0,
+        StaticRetryContractKind, check_and_elaborate_surface_v0,
     },
 };
 
@@ -35,7 +35,8 @@ use crate::{
         ProjectionDiagnostics, ProjectionRelationGraph, RelationAnchorRole, RelationGraphClaim,
         RelationGraphEdgeSeed, RelationGraphEdgeTag, RuntimeAdmissionStatus,
         RuntimeOccurrenceBinding, RuntimeOccurrenceKind, RuntimeSeamRequirementKind,
-        SeamAuthorityKind, StaticProjectionReadiness, project_checked_core, verify_projection,
+        SeamAuthorityKind, StaticConflictPolicyKind, StaticConflictResolution,
+        StaticProjectionReadiness, project_checked_core, verify_projection,
     },
 };
 
@@ -46,6 +47,7 @@ const CANONICAL_FIXTURE: &str = "canonical_attack_bundle.mir";
 const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
 const EXTENSION_PRESSURE_FIXTURE: &str = "sys3_projection_relation_extension_pressure.mir";
 const ORDERED_EXPR_FIXTURE: &str = "m7_ordered_expression_tree.mir";
+const DESIGNATED_CONSUME_FIXTURE: &str = "designated_result_consume_three_locus.mir";
 const RELATION_NAME: &str = "bird_follow";
 const RELATION_OWNER: &str = "S";
 const RELATION_LEASE_REF: &str = "bird_binding_frontier/live";
@@ -2493,6 +2495,271 @@ fn strict_edges_bind_directly_to_artifact_fragments_and_occurrence_loci() {
             )
             .is_some(),
         "ConsumerLocalRelationProjection keeps its local Observe observation row"
+    );
+}
+
+#[test]
+fn designated_result_consumer_projects_consumer_fragment_delivery_edge_and_consumption_rows() {
+    let checked = load_checked_fixture(DESIGNATED_CONSUME_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["S", "E", "C"]),
+    )
+    .expect("designated result consumer projection succeeds");
+    let consumer_eval = checked
+        .designated_result_consumer("E", "result", "C")
+        .expect("checked source owns explicit result consumer");
+    let consumer_core = consumer_eval
+        .designated_result_consumer_core()
+        .expect("consumer checked Core is retained");
+
+    let evaluator_fragment = result
+        .locus_program("E")
+        .expect("evaluator locus")
+        .operations()
+        .single(
+            "E.result",
+            ProjectedOperationFragmentKind::DesignatedEvaluation,
+        )
+        .expect("producer evaluator fragment");
+    let consumer_fragment = result
+        .locus_program("C")
+        .expect("consumer locus")
+        .operations()
+        .single(
+            "E.result",
+            ProjectedOperationFragmentKind::DesignatedResultConsumer,
+        )
+        .expect("consumer-only fragment");
+    assert_eq!(
+        consumer_fragment.designated_result_consumer_core(),
+        Some(consumer_core)
+    );
+    assert!(consumer_fragment.designated_checked_core().is_none());
+    assert!(!consumer_fragment.exposes_typed_expression());
+    assert!(!consumer_fragment.exposes_raw_input());
+    assert_eq!(
+        consumer_fragment.static_retry_contract(),
+        StaticRetryContractKind::ReturnExistingNoNewConsumption
+    );
+
+    let delivery = result
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("producer-to-consumer designated result delivery edge");
+    assert_eq!(
+        delivery.source_fragment_ref(),
+        evaluator_fragment.fragment_ref()
+    );
+    assert_eq!(
+        delivery.target_fragment_ref(),
+        consumer_fragment.fragment_ref()
+    );
+    assert_eq!(
+        delivery.carrier_contract().lifecycle_kind(),
+        CarrierLifecycleKind::DesignatedResultDelivery
+    );
+    assert_eq!(
+        delivery.carrier_contract().result_version(),
+        Some(consumer_core.result_version())
+    );
+    assert_eq!(
+        delivery.carrier_contract().input_frontier(),
+        Some(consumer_core.input_frontier())
+    );
+    assert_eq!(
+        delivery.carrier_contract().result_frontier(),
+        Some(consumer_core.result_frontier())
+    );
+    assert_eq!(
+        delivery.carrier_contract().observation_policy(),
+        Some(consumer_core.observation_policy())
+    );
+    assert_eq!(
+        delivery.carrier_contract().policy_stamp(),
+        Some(consumer_core.policy_stamp())
+    );
+    assert_eq!(
+        delivery.carrier_contract().static_retry_contract(),
+        Some(StaticRetryContractKind::ReturnExistingNoNewConsumption)
+    );
+    assert!(
+        delivery
+            .carrier_contract()
+            .requires_frontier(CarrierFrontierKind::Input)
+    );
+    assert!(
+        delivery
+            .carrier_contract()
+            .requires_frontier(CarrierFrontierKind::Result)
+    );
+    let delivery_seam_rows = vec![
+        (
+            RuntimeSeamRequirementKind::ConsumerMembershipEpochIncarnation,
+            Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::DesignatedResultConsumerMembership),
+        ),
+        (
+            RuntimeSeamRequirementKind::ConsumerCapabilityRef,
+            Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::DesignatedResultConsumerCapability),
+        ),
+        (
+            RuntimeSeamRequirementKind::ConsumerWitnessRef,
+            Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+            Some(SeamAuthorityKind::DesignatedResultConsumerWitness),
+        ),
+    ];
+    assert_eq!(
+        delivery
+            .carrier_contract()
+            .runtime_seam_requirements()
+            .rows(),
+        delivery_seam_rows.as_slice()
+    );
+    assert!(
+        delivery
+            .carrier_contract()
+            .provenance()
+            .is_checked_core_bound()
+    );
+    assert!(!delivery.carrier_contract().transfers_authority());
+    assert!(!delivery.carrier_contract().mints_authority_without_source());
+
+    let conflict_policy = result
+        .static_conflict_policy()
+        .designated_result_consumer("E.result")
+        .expect("projection exposes finite single-consumer conflict policy");
+    assert_eq!(
+        conflict_policy.kind(),
+        StaticConflictPolicyKind::OneDesignatedResultConsumerFinite
+    );
+    assert_eq!(conflict_policy.accepted_consumer_locus(), "C");
+    assert_eq!(
+        conflict_policy.on_competing_consumer(),
+        StaticConflictResolution::RejectCompetingConsumer
+    );
+
+    let source_map_entry = result
+        .projected_source_map()
+        .entry_for_edge_ref(delivery.edge_ref())
+        .expect("delivery edge has direct source-map correspondence");
+    assert_eq!(
+        source_map_entry.source_fragment_ref(),
+        Some(delivery.source_fragment_ref())
+    );
+    assert_eq!(
+        source_map_entry.target_fragment_ref(),
+        Some(delivery.target_fragment_ref())
+    );
+
+    let observation = result.observation_plan();
+    assert_eq!(
+        observation
+            .row_for_edge_occurrence(
+                "E.result",
+                CommunicationEdgeKind::DesignatedResultDelivery,
+                "E",
+                "C",
+                RuntimeOccurrenceKind::Publish,
+            )
+            .expect("evaluator publish occurrence")
+            .fragment_ref(),
+        evaluator_fragment.fragment_ref()
+    );
+    for kind in [
+        RuntimeOccurrenceKind::Receive,
+        RuntimeOccurrenceKind::Consume,
+    ] {
+        assert_eq!(
+            observation
+                .row_for_edge_occurrence(
+                    "E.result",
+                    CommunicationEdgeKind::DesignatedResultDelivery,
+                    "E",
+                    "C",
+                    kind,
+                )
+                .expect("consumer receive/consume occurrence")
+                .fragment_ref(),
+            consumer_fragment.fragment_ref()
+        );
+    }
+
+    let consumer_persistence = result
+        .persistence_plan()
+        .responsibilities_for_designated_result_consumer("E.result", "C")
+        .expect("consumer has explicit designated result persistence responsibilities");
+    assert!(consumer_persistence.contains(&PersistenceResponsibilityKind::ConsumptionIdentity));
+    assert!(consumer_persistence.contains(&PersistenceResponsibilityKind::InFlightDeliveryState));
+    assert!(consumer_persistence.contains(&PersistenceResponsibilityKind::ReceiptConsumption));
+}
+
+#[test]
+fn designated_result_consumer_verifier_rejects_mutation_and_topology_cannot_invent_consumer() {
+    let checked = load_checked_fixture(DESIGNATED_CONSUME_FIXTURE);
+    let declared_topology = topology(checked.program_identity(), ["S", "E", "C"]);
+    let result: GlobalProjectionResult = project_checked_core(&checked, &declared_topology)
+        .expect("designated result consumer projection succeeds");
+
+    let mut missing_fragment = result.clone();
+    missing_fragment.for_test_remove_designated_result_consumer_fragment("E.result", "C");
+    assert_verify_diag(
+        verify_projection(&checked, &declared_topology, &missing_fragment),
+        ProjectionDiagnosticKind::MissingDerivedFragment,
+    );
+
+    let mut missing_edge = result.clone();
+    missing_edge
+        .for_test_remove_derived_edge("E.result", CommunicationEdgeKind::DesignatedResultDelivery);
+    assert_verify_diag(
+        verify_projection(&checked, &declared_topology, &missing_edge),
+        ProjectionDiagnosticKind::MissingDerivedEdge,
+    );
+
+    let mut extra_edge = result.clone();
+    extra_edge.for_test_insert_non_derived_edge(
+        "extra-designated-delivery",
+        CommunicationEdgeKind::DesignatedResultDelivery,
+        "E",
+        "C",
+        "E.result",
+    );
+    assert_verify_diag(
+        verify_projection(&checked, &declared_topology, &extra_edge),
+        ProjectionDiagnosticKind::ExtraNonDerivedEdge,
+    );
+
+    let mut moved_fragment = result.clone();
+    moved_fragment.for_test_move_designated_result_consumer_fragment("E.result", "C", "S");
+    assert_verify_diag(
+        verify_projection(&checked, &declared_topology, &moved_fragment),
+        ProjectionDiagnosticKind::DesignatedResultConsumerMoved,
+    );
+
+    let mut leaked_expression = result.clone();
+    leaked_expression
+        .for_test_enable_designated_result_consumer_expression_leakage("E.result", "C");
+    assert_verify_diag(
+        verify_projection(&checked, &declared_topology, &leaked_expression),
+        ProjectionDiagnosticKind::DesignatedResultConsumerExpressionLeakage,
+    );
+
+    let publish_only = load_checked_fixture("designated_tick_publish_result.mir");
+    assert_projection_diag(
+        project_checked_core(
+            &publish_only,
+            &topology(publish_only.program_identity(), ["S", "E", "C"]),
+        ),
+        ProjectionDiagnosticKind::UnknownDeclaredLocus,
     );
 }
 

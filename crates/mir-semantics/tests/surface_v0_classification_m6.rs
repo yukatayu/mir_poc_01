@@ -240,6 +240,44 @@ fn classifies_designated_and_relation_templates_without_collapsing_frontiers() {
 }
 
 #[test]
+fn classifies_designated_result_consume_as_distinct_template_and_source_map_kind() {
+    let (path, source) = load_fixture("designated_result_consume_three_locus.mir");
+    let parsed = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("designated consume source parses before classification");
+    let classified = classify_surface_v0(&parsed, SurfaceV0ClassificationOptions::default())
+        .expect("designated consume source classifies");
+
+    let consume_ast = parsed
+        .designated_result_consumer("E", "result", "C")
+        .expect("parser exposes designated result consumer");
+    let consume = classified
+        .designated_result_consumer_template("E", "result", "C")
+        .expect("designated consume has a distinct M6 Core template");
+    assert_eq!(consume.kind(), CoreTemplateKind::DesignatedResultConsume);
+    assert_eq!(consume.evaluator(), "E");
+    assert_eq!(consume.result(), "result");
+    assert_eq!(consume.consumer_locus(), "C");
+    assert_eq!(consume.source_span(), consume_ast.span());
+    assert_eq!(
+        classified
+            .source_ref_for_span(consume_ast.span())
+            .expect("consume declaration has M5 SourceRef visibility"),
+        &expected_source_ref(&path, &source, "designated consume E.result at C")
+    );
+
+    let consume_source_map_entries = classified
+        .source_to_core_map()
+        .entries_for_span(consume_ast.span());
+    assert_eq!(
+        consume_source_map_entries.kinds(),
+        vec![SourceToCoreKind::DesignatedResultConsume]
+    );
+    assert!(consume.consumes_designated_result());
+    assert!(!consume.emits_evaluator_expression());
+    assert!(!consume.mutates_state());
+}
+
+#[test]
 fn classifies_with_auth_and_verify_as_span_tracked_non_executable_deferred_templates() {
     let (path, source) = load_fixture("canonical_attack_bundle.mir");
     let parsed = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))

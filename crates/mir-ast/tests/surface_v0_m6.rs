@@ -177,6 +177,35 @@ fn parses_surface_v0_bundle_with_canonical_file_and_child_spans() {
 }
 
 #[test]
+fn parser_retains_designated_result_consumer_ref_and_spans() {
+    let (path, source) = load_fixture("designated_result_consume_three_locus.mir");
+    let ast = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("designated consume source parses");
+
+    let consumer = ast
+        .designated_result_consumer("E", "result", "C")
+        .expect("designated result consumer is explicit AST");
+    assert_eq!(consumer.evaluator(), "E");
+    assert_eq!(consumer.result(), "result");
+    assert_eq!(consumer.consumer_locus(), "C");
+    assert_eq!(
+        consumer.span().byte_range(),
+        byte_range(&source, "designated consume E.result at C")
+    );
+    assert_eq!(
+        consumer.result_ref_span().byte_range(),
+        byte_range(&source, "E.result")
+    );
+    assert_eq!(
+        consumer.consumer_locus_span().byte_range(),
+        byte_range_after(&source, "designated consume", "C")
+    );
+    assert_eq!(consumer.span().file(), path);
+    assert!(consumer.result_ref_span().is_child_of(consumer.span()));
+    assert!(consumer.consumer_locus_span().is_child_of(consumer.span()));
+}
+
+#[test]
 fn parser_retains_bounded_assignment_designated_exprs_and_relation_transforms_with_spans() {
     let (path, source) = load_fixture("canonical_attack_bundle.mir");
     let ast = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))

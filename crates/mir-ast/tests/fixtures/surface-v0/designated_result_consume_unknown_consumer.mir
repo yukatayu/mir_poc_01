@@ -1,0 +1,13 @@
+module Combat.M7.DesignatedConsumeUnknownConsumer
+
+locus S
+locus E
+principal self
+type Player
+
+state player[id: Player] at S {
+  atk: Int
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 1
+designated consume E.result at MissingConsumer
