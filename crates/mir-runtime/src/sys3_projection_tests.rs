@@ -2106,6 +2106,358 @@ fn strict_observation_lifecycle_matches_each_carrier_contract_exactly() {
 }
 
 #[test]
+fn strict_edges_bind_directly_to_artifact_fragments_and_occurrence_loci() {
+    let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(checked.program_identity(), ["A", "S", "T", "V"]),
+    )
+    .expect("four-locus projection succeeds");
+    let observation = result.observation_plan();
+    let source_map = result.projected_source_map();
+
+    for edge in result.communication_plan().edges() {
+        let source_fragment = result
+            .fragment_by_ref(edge.source_fragment_ref())
+            .expect("edge source fragment ref resolves without span/name inference");
+        let target_fragment = result
+            .fragment_by_ref(edge.target_fragment_ref())
+            .expect("edge target fragment ref resolves without span/name inference");
+        assert_eq!(source_fragment.fragment_ref(), edge.source_fragment_ref());
+        assert_eq!(target_fragment.fragment_ref(), edge.target_fragment_ref());
+        assert!(
+            !edge.source_fragment_ref().as_str().contains(":edge")
+                && !edge.target_fragment_ref().as_str().contains(":edge"),
+            "communication edges must not fall back to invented generic :edge artifact refs"
+        );
+
+        let map_entry = source_map
+            .entry_for_edge_ref(edge.edge_ref())
+            .expect("edge has explicit source-map entry");
+        assert_eq!(
+            map_entry.source_fragment_ref(),
+            Some(edge.source_fragment_ref())
+        );
+        assert_eq!(
+            map_entry.target_fragment_ref(),
+            Some(edge.target_fragment_ref())
+        );
+        assert!(
+            result
+                .fragment_by_ref(map_entry.source_fragment_ref().unwrap())
+                .is_some()
+        );
+        assert!(
+            result
+                .fragment_by_ref(map_entry.target_fragment_ref().unwrap())
+                .is_some()
+        );
+    }
+
+    let owner_request = result
+        .communication_plan()
+        .single_edge("attack_s", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("owner request edge");
+    let actor_request = result
+        .fragment_by_ref(owner_request.source_fragment_ref())
+        .expect("owner request source fragment");
+    let owner_execution = result
+        .fragment_by_ref(owner_request.target_fragment_ref())
+        .expect("owner request target fragment");
+    assert_eq!(actor_request.locus_tag(), &LocusTag::checked("A"));
+    assert_eq!(
+        actor_request.fragment_kind(),
+        ProjectedOperationFragmentKind::OwnerRequestInvocation
+    );
+    assert_eq!(owner_execution.locus_tag(), &LocusTag::checked("S"));
+    assert_eq!(
+        owner_execution.fragment_kind(),
+        ProjectedOperationFragmentKind::OwnerRmwExecution
+    );
+    assert_eq!(
+        observation
+            .row_for_edge_occurrence(
+                "attack_s",
+                CommunicationEdgeKind::OwnerRequest,
+                "A",
+                "S",
+                RuntimeOccurrenceKind::Request,
+            )
+            .expect("owner request Request occurrence")
+            .fragment_ref(),
+        actor_request.fragment_ref()
+    );
+
+    let owner_reply = result
+        .communication_plan()
+        .single_edge(
+            "attack_s",
+            CommunicationEdgeKind::OwnerReplyReceipt,
+            "S",
+            "A",
+        )
+        .expect("owner reply/receipt edge");
+    assert_eq!(
+        owner_reply.source_fragment_ref(),
+        owner_execution.fragment_ref()
+    );
+    assert_eq!(
+        owner_reply.target_fragment_ref(),
+        actor_request.fragment_ref()
+    );
+    for (kind, fragment_ref) in [
+        (RuntimeOccurrenceKind::Request, actor_request.fragment_ref()),
+        (RuntimeOccurrenceKind::Serve, owner_execution.fragment_ref()),
+        (RuntimeOccurrenceKind::Reply, owner_execution.fragment_ref()),
+        (RuntimeOccurrenceKind::Receive, actor_request.fragment_ref()),
+    ] {
+        assert_eq!(
+            observation
+                .row_for_edge_occurrence(
+                    "attack_s",
+                    CommunicationEdgeKind::OwnerReplyReceipt,
+                    "S",
+                    "A",
+                    kind,
+                )
+                .expect("owner reply occurrence maps to a direct artifact fragment")
+                .fragment_ref(),
+            fragment_ref
+        );
+    }
+    assert!(
+        observation
+            .row_for_fragment_occurrence(
+                actor_request.fragment_ref(),
+                RuntimeOccurrenceKind::Serve,
+            )
+            .is_none(),
+        "OwnerRequestInvocation has no unconditional local Serve observation row"
+    );
+    assert!(
+        observation
+            .row_for_fragment_occurrence(
+                owner_execution.fragment_ref(),
+                RuntimeOccurrenceKind::Serve,
+            )
+            .is_some(),
+        "OwnerRmw execution keeps its local Serve observation row"
+    );
+
+    let canonical = load_checked_fixture(CANONICAL_FIXTURE);
+    let canonical_projection: GlobalProjectionResult = project_checked_core(
+        &canonical,
+        &topology(canonical.program_identity(), ["S", "C", "E"]),
+    )
+    .expect("canonical projection succeeds structurally");
+    let canonical_observation = canonical_projection.observation_plan();
+    let canonical_source_map = canonical_projection.projected_source_map();
+
+    for edge in canonical_projection.communication_plan().edges() {
+        assert!(
+            canonical_projection
+                .fragment_by_ref(edge.source_fragment_ref())
+                .is_some()
+        );
+        assert!(
+            canonical_projection
+                .fragment_by_ref(edge.target_fragment_ref())
+                .is_some()
+        );
+        let map_entry = canonical_source_map
+            .entry_for_edge_ref(edge.edge_ref())
+            .expect("canonical edge has explicit source-map entry");
+        assert_eq!(
+            map_entry.source_fragment_ref(),
+            Some(edge.source_fragment_ref())
+        );
+        assert_eq!(
+            map_entry.target_fragment_ref(),
+            Some(edge.target_fragment_ref())
+        );
+        assert!(
+            !edge.source_fragment_ref().as_str().contains(":edge")
+                && !edge.target_fragment_ref().as_str().contains(":edge")
+        );
+    }
+
+    let designated = checked_designated(&canonical, "E", "result");
+    let designated_core = designated
+        .designated_core()
+        .expect("canonical designated Core");
+    let dependency = &designated_core.generated_remote_input_dependencies()[0];
+    let designated_request = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputRequest,
+            "E",
+            "S",
+        )
+        .expect("designated input request edge");
+    let evaluator_fragment = canonical_projection
+        .fragment_by_ref(designated_request.source_fragment_ref())
+        .expect("designated request source fragment");
+    let source_service = canonical_projection
+        .fragment_by_ref(designated_request.target_fragment_ref())
+        .expect("designated request target fragment");
+    assert_eq!(
+        designated_request.source_ref(),
+        dependency.typed_state_read().source_ref()
+    );
+    assert_eq!(evaluator_fragment.locus_tag(), &LocusTag::checked("E"));
+    assert_eq!(
+        evaluator_fragment.fragment_kind(),
+        ProjectedOperationFragmentKind::DesignatedEvaluation
+    );
+    assert_eq!(source_service.locus_tag(), &LocusTag::checked("S"));
+    assert_eq!(
+        source_service.fragment_kind(),
+        ProjectedOperationFragmentKind::DesignatedRemoteInputService
+    );
+    assert_eq!(
+        source_service.designated_remote_input_dependency(),
+        Some(dependency)
+    );
+    assert_eq!(
+        canonical_observation
+            .row_for_edge_occurrence(
+                "E.result",
+                CommunicationEdgeKind::DesignatedInputRequest,
+                "E",
+                "S",
+                RuntimeOccurrenceKind::Request,
+            )
+            .expect("designated request occurrence")
+            .fragment_ref(),
+        evaluator_fragment.fragment_ref()
+    );
+
+    let designated_receipt = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputReceipt,
+            "S",
+            "E",
+        )
+        .expect("designated input receipt edge");
+    assert_eq!(
+        designated_receipt.source_fragment_ref(),
+        source_service.fragment_ref()
+    );
+    assert_eq!(
+        designated_receipt.target_fragment_ref(),
+        evaluator_fragment.fragment_ref()
+    );
+    for (kind, fragment_ref) in [
+        (
+            RuntimeOccurrenceKind::Request,
+            evaluator_fragment.fragment_ref(),
+        ),
+        (RuntimeOccurrenceKind::Serve, source_service.fragment_ref()),
+        (RuntimeOccurrenceKind::Reply, source_service.fragment_ref()),
+        (
+            RuntimeOccurrenceKind::Receive,
+            evaluator_fragment.fragment_ref(),
+        ),
+    ] {
+        assert_eq!(
+            canonical_observation
+                .row_for_edge_occurrence(
+                    "E.result",
+                    CommunicationEdgeKind::DesignatedInputReceipt,
+                    "S",
+                    "E",
+                    kind,
+                )
+                .expect("designated receipt occurrence maps to a direct artifact fragment")
+                .fragment_ref(),
+            fragment_ref
+        );
+    }
+
+    let relation_edge = canonical_projection
+        .communication_plan()
+        .single_edge(
+            "bird_follow",
+            CommunicationEdgeKind::RelationProjectionPublication,
+            "S",
+            "C",
+        )
+        .expect("relation publication edge");
+    let relation_publication = canonical_projection
+        .fragment_by_ref(relation_edge.source_fragment_ref())
+        .expect("relation publication source fragment");
+    let consumer_projection = canonical_projection
+        .fragment_by_ref(relation_edge.target_fragment_ref())
+        .expect("relation publication target fragment");
+    assert_eq!(relation_publication.locus_tag(), &LocusTag::checked("S"));
+    assert_eq!(
+        relation_publication.fragment_kind(),
+        ProjectedOperationFragmentKind::RelationPublication
+    );
+    assert_eq!(consumer_projection.locus_tag(), &LocusTag::checked("C"));
+    assert_eq!(
+        consumer_projection.fragment_kind(),
+        ProjectedOperationFragmentKind::ConsumerLocalRelationProjection
+    );
+    assert_eq!(
+        canonical_observation
+            .row_for_edge_occurrence(
+                "bird_follow",
+                CommunicationEdgeKind::RelationProjectionPublication,
+                "S",
+                "C",
+                RuntimeOccurrenceKind::Publish,
+            )
+            .expect("relation publication Publish occurrence")
+            .fragment_ref(),
+        relation_publication.fragment_ref()
+    );
+    assert_eq!(
+        canonical_observation
+            .row_for_edge_occurrence(
+                "bird_follow",
+                CommunicationEdgeKind::RelationProjectionPublication,
+                "S",
+                "C",
+                RuntimeOccurrenceKind::Observe,
+            )
+            .expect("relation consumer Observe occurrence")
+            .fragment_ref(),
+        consumer_projection.fragment_ref()
+    );
+    assert!(
+        canonical_observation
+            .row_for_fragment_occurrence(
+                relation_publication.fragment_ref(),
+                RuntimeOccurrenceKind::Serve,
+            )
+            .is_none(),
+        "RelationPublication has no unconditional local Serve observation row"
+    );
+    assert!(
+        canonical_observation
+            .row_for_fragment_occurrence(
+                relation_publication.fragment_ref(),
+                RuntimeOccurrenceKind::Publish,
+            )
+            .is_some(),
+        "RelationPublication keeps its local Publish observation row"
+    );
+    assert!(
+        canonical_observation
+            .row_for_fragment_occurrence(
+                consumer_projection.fragment_ref(),
+                RuntimeOccurrenceKind::Observe,
+            )
+            .is_some(),
+        "ConsumerLocalRelationProjection keeps its local Observe observation row"
+    );
+}
+
+#[test]
 fn strict_semantic_obligations_are_distinct_from_sealed_runtime_seam_requirements() {
     let checked = load_checked_fixture(FOUR_LOCUS_FIXTURE);
     let result: GlobalProjectionResult = project_checked_core(
