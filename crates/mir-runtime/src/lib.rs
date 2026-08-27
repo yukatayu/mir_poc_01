@@ -58,6 +58,14 @@ pub(crate) mod sys2_execution_backend;
 pub(crate) mod sys3_projection;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys4_dispatch;
+/// Provisional, non-executing SYS-5 build/project facade.
+///
+/// This exposes observer-safe summaries derived from the checked Core and the
+/// internal SYS-3 projection.  A separate CLI may consume it through Rust
+/// visibility during this profile, but that grants neither a compatibility,
+/// public ABI, nor wire-format promise.
+#[doc(hidden)]
+pub mod sys5_local_slice;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
