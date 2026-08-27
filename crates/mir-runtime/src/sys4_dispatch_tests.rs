@@ -363,6 +363,23 @@ fn assert_backend_owner_operation_rejection_observation(
     assert_eq!(observation.owner_locus(), owner_locus);
 }
 
+fn assert_owner_m8_context_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    envelope: &MailboxEnvelope,
+    operation: &str,
+    owner_locus: &str,
+    kind: M8LocalTraceKind,
+) {
+    let observation = m8_owned_observation(fabric, node_id);
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(observation.kind(), kind);
+    assert_eq!(observation.envelope_id(), envelope.envelope_id());
+    assert_eq!(observation.operation_id(), operation);
+    assert_eq!(observation.owner_locus(), owner_locus);
+    assert_eq!(observation.edge_ref(), envelope.edge_ref());
+}
+
 fn assert_backend_designated_evaluation_rejection_observation(
     fabric: &LocalFabric,
     node_id: &str,
@@ -675,7 +692,7 @@ fn owner_rmw_dispatch_uses_explicit_seed_and_mutates_only_owner_local_store() {
         rmw.m8_writes(),
         vec![RuntimeStoreWrite::int("S", "player", "self", "hp", 90)]
     );
-    assert!(rmw.all_reads_and_writes_have_source_core_provenance());
+    assert!(rmw.has_checked_source_core_provenance());
 
     let trace = fabric.trace().for_request(receipt.request_id());
     assert_eq!(
@@ -1489,6 +1506,22 @@ fn staged_owner_mailbox_dispatch_requires_transport_and_locus_steps_before_m8() 
     assert_eq!(
         s_step.m9_validation().owner_lineage_ref(),
         request_envelope.m9_owner_lineage_ref()
+    );
+    assert_owner_m8_context_observation(
+        &fabric,
+        s_step.m8_request_node_id(),
+        &request_envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerEnqueued,
+    );
+    assert_owner_m8_context_observation(
+        &fabric,
+        s_step.m8_serve_node_id(),
+        &request_envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerWrite,
     );
     assert!(
         fabric
@@ -3467,6 +3500,164 @@ fn st_and_ow1_dispatch_same_projected_program_with_same_semantic_correspondence(
 }
 
 #[test]
+fn ow1_owner_dispatch_refreshes_exact_m8_context_observations_after_dequeue() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let owner_request_edge = projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("projection has owner request edge");
+    let program = fabric_program(projection);
+    assert_eq!(
+        program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible
+    );
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("OW1 owner request is staged");
+    let request_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(request_envelope.envelope_id(), submitted.envelope_id());
+    assert_eq!(request_envelope.edge_ref(), owner_request_edge.edge_ref());
+    let transport = fabric
+        .step_transport("A", "S", request_envelope.envelope_id())
+        .expect("request transports to owner locus");
+    let s_step = fabric
+        .step_locus("S")
+        .expect("OW1 worker serves after S dequeues the exact owner request");
+    assert_eq!(
+        s_step.consumed_envelope_id(),
+        request_envelope.envelope_id()
+    );
+    assert_eq!(
+        s_step.locus_dequeue_record_id(),
+        transport.target_inbox_enqueue_record_id()
+    );
+
+    assert_owner_m8_context_observation(
+        &fabric,
+        s_step.m8_request_node_id(),
+        &request_envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerEnqueued,
+    );
+    assert_owner_m8_context_observation(
+        &fabric,
+        s_step.m8_serve_node_id(),
+        &request_envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerWrite,
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(s_step.m8_request_node_id())
+            .contains(&s_step.locus_dequeue_occurrence_id().to_string()),
+        "OW1 M8 request observation must causally depend on the S dequeue occurrence"
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(s_step.m8_serve_node_id())
+            .contains(&s_step.m8_request_node_id().to_string()),
+        "OW1 M8 serve observation must causally depend on the worker-owned request observation"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack", "S"),
+        1,
+        "fabric devtools surface must contain the OW1 owner request node"
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90)
+    );
+}
+
+#[test]
+fn ow1_owner_declared_failure_after_dequeue_returns_m8_rejection_and_quarantines() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    assert_eq!(
+        program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible
+    );
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("OW1 owner request is staged");
+    let request_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(request_envelope.envelope_id(), submitted.envelope_id());
+    fabric
+        .step_transport("A", "S", request_envelope.envelope_id())
+        .expect("request reaches S before backend rejection is armed");
+    fabric
+        .m8_backend_test_support_mut()
+        .reject_next_owner_operation_after_dequeue(request_envelope.envelope_id(), "attack", "S")
+        .expect(
+            "OW1 must support a declared owner failure after dequeue inside the worker backend",
+        );
+
+    let before = fabric.semantic_snapshot();
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("S"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(request_envelope.envelope_id())
+    );
+    let dequeue_occurrence = rejected
+        .endpoint_dequeue_occurrence_id()
+        .expect("OW1 owner failure is post-dequeue at S");
+    let backend_failure = rejected
+        .backend_m8_failure_inspection()
+        .expect("OW1 failure diagnostic must expose exact M8-owned rejection evidence");
+    assert_eq!(rejected.m8_trace_node_id(), Some(backend_failure.node_id()));
+    assert_owner_m8_context_observation(
+        &fabric,
+        backend_failure.node_id(),
+        &request_envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerOperationRejected,
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(backend_failure.node_id())
+            .contains(&dequeue_occurrence.to_string()),
+        "OW1 owner rejection observation must causally depend on the S dequeue occurrence"
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(request_envelope.envelope_id())
+            .expect("post-dequeue OW1 owner failure is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+}
+
+#[test]
 fn external_action_carries_only_source_operation_args_tick_or_fault_event() {
     let checked = owner_endpoint_checked();
     let projection = owner_endpoint_projection(&checked);
@@ -3657,6 +3848,14 @@ fn post_dequeue_owner_backend_rejection_quarantines_without_state_mutation_or_he
         "attack",
         "S",
         prior_m8_sequence,
+    );
+    assert_owner_m8_context_observation(
+        &fabric,
+        backend_failure.node_id(),
+        &envelope,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerOperationRejected,
     );
     assert!(
         fabric
@@ -4136,6 +4335,25 @@ fn post_dequeue_m8_outcome_ids_must_be_exact_not_latest_trace_lookup() {
 }
 
 #[test]
+fn ow1_owner_backend_branch_must_preserve_context_and_return_serve_observation() {
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let enqueue_body = extract_balanced_fn_body(&sys4, "fn enqueue_and_serve(")
+        .expect("M8ExecutionBackend::enqueue_and_serve body exists");
+    let ow1_arm = extract_balanced_block_after_marker(&enqueue_body, "Self::Ow1(")
+        .expect("M8ExecutionBackend::enqueue_and_serve has an OW1 branch");
+    let compact_ow1 = normalize_source_for_boundary_scan(&ow1_arm);
+
+    assert!(
+        compact_ow1.contains("context"),
+        "OW1 owner execution branch must pass the exact dequeued M8LocalDesignatedTraceContext into worker-owned command/execution"
+    );
+    assert!(
+        !compact_ow1.contains("serve_observation:None"),
+        "OW1 owner execution branch must return an exact M8-owned serve observation, not synthesize serve_observation: None"
+    );
+}
+
+#[test]
 fn m8_runtime_local_cut_must_not_depend_on_sys4_dispatch_module() {
     let m8 = read_runtime_src("m8_runtime_local_cut.rs");
     let banned = [
@@ -4259,6 +4477,12 @@ fn extract_balanced_fn_body(source: &str, signature_marker: &str) -> Option<Stri
     None
 }
 
+fn extract_balanced_block_after_marker(source: &str, marker: &str) -> Option<String> {
+    let marker_start = source.find(marker)?;
+    let open_brace = marker_start + source[marker_start..].find('{')?;
+    extract_balanced_body_from_open_brace(source, open_brace)
+}
+
 fn find_unconditional_m8_observed_context_entrypoint(
     source: &str,
     request_type: &str,
@@ -4266,9 +4490,7 @@ fn find_unconditional_m8_observed_context_entrypoint(
     let mut search_from = 0usize;
     while let Some(relative_fn) = source[search_from..].find("fn ") {
         let fn_start = search_from + relative_fn;
-        let Some(open_relative) = source[fn_start..].find('{') else {
-            return None;
-        };
+        let open_relative = source[fn_start..].find('{')?;
         let signature = &source[fn_start..fn_start + open_relative];
         if signature.contains(request_type)
             && signature.contains("M8LocalDesignatedTraceContext")
