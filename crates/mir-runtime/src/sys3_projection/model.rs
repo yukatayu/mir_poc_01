@@ -3110,7 +3110,13 @@ pub(crate) enum BackendProfile {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) enum BackendIneligibilityReason {
     NoCombinedOwnerSourceOwnerLocus,
-    MultipleCombinedOwnerSourceOwnerLoci { count: usize },
+    MultipleCombinedOwnerSourceOwnerLoci {
+        count: usize,
+    },
+    /// SYS-4 does not yet have an acknowledged worker-owned cut command.
+    /// This is an internal local-persistence defer, not a transport or public
+    /// compatibility decision.
+    Ow1WorkerCutDeferred,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

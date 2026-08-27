@@ -8,7 +8,10 @@
 // SYS-4 remains crate-internal until its CLI facade is introduced.  Its
 // entrypoints are consumed by the crate's SYS-4 conformance tests today.
 
-use std::collections::{BTreeMap, BTreeSet, VecDeque};
+use std::{
+    collections::{BTreeMap, BTreeSet, VecDeque},
+    sync::{Arc, Mutex, MutexGuard},
+};
 
 use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
@@ -20,11 +23,11 @@ use crate::{
     m8_runtime_admission::{EvidenceSecurityLabel, M8RuntimeInstance, M8SecurityClass},
     m8_runtime_designated_value::{
         M8ConsumeRequest, M8DesignatedEvaluationRequest, M8DesignatedTick, M8InputReceipt,
-        M8InputReceiptSet,
+        M8InputReceiptSet, M8PublishedDesignatedValue,
     },
     m8_runtime_local_cut::{
-        M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalRuntimeSeed, M8LocalTrace,
-        M8LocalTraceObservation,
+        M8LiveFloor, M8LocalCut, M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalRuntimeSeed,
+        M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation,
     },
     m8_runtime_owner_queue::{M8OwnerRequest, M8ServeOutcome, M8StateKey},
     m9_auth_verification::{
@@ -36,12 +39,15 @@ use crate::{
     },
     sys2_execution_backend::{Ow1ContextualM8Execution, Ow1WorkerBackend, Ow1WorkerFailure},
     sys3_projection::{
-        BackendEligibility, BackendProfile, CarrierContract, CommunicationEdge,
-        CommunicationEdgeKind, GlobalProjectionResult, LocusProgram, ProjectedOperationFragment,
-        ProjectedOperationFragmentKind, ReferenceOnlyRedactionPolicy, RuntimeAdmissionStatus,
-        SourceRefView,
+        BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierContract,
+        CommunicationEdge, CommunicationEdgeKind, GlobalProjectionResult, LocusProgram,
+        ProjectedOperationFragment, ProjectedOperationFragmentKind, ReferenceOnlyRedactionPolicy,
+        RuntimeAdmissionStatus, SourceRefView,
     },
 };
+
+#[cfg(test)]
+use crate::m8_runtime_local_cut::M8LocalSessionObserver;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum Sys4DiagnosticKind {
@@ -68,6 +74,8 @@ pub(crate) enum Sys4DiagnosticKind {
     CacheBindingDigestMismatch,
     CacheProjectionMismatch,
     CarrierRedactionMismatch,
+    CarrierProvenanceMismatch,
+    CarrierVisibilityMismatch,
     CarrierPolicyMismatch,
     MissingSourceReleaseAuthority,
     UnknownProjectedEdge,
@@ -119,6 +127,7 @@ struct Sys4DiagnosticContext {
     backend_m8_failure: Option<Box<M8LocalTraceObservation>>,
     retarget_fault: Option<Box<RetargetFaultInspection>>,
     cache_projection_mismatch: Option<Box<CacheProjectionMismatchInspection>>,
+    backend_ineligibility_reason: Option<BackendIneligibilityReason>,
 }
 
 /// Observer-safe evidence that a retarget policy was applied to one exact
@@ -223,6 +232,10 @@ impl Sys4DispatchDiagnostics {
 
     pub(crate) fn rejected_envelope_id(&self) -> Option<&str> {
         self.context.rejected_envelope_id.as_deref()
+    }
+
+    pub(crate) fn backend_ineligibility_reason(&self) -> Option<&BackendIneligibilityReason> {
+        self.context.backend_ineligibility_reason.as_ref()
     }
 
     pub(crate) fn rejected_request_id(&self) -> Option<&str> {
@@ -636,6 +649,64 @@ impl ObserverSafeM9Summary {
 }
 
 #[derive(Clone)]
+struct M9AuthorityLiveFloor {
+    current: Arc<Mutex<M9AuthorityGeneration>>,
+}
+
+/// A short critical section over one M9-owned monotone authority floor.
+///
+/// A successor is not published until its sealed authority inventory has
+/// reached the backend. This prevents two fabrics admitted from one M9 seam
+/// from both refreshing M8 from the same predecessor generation.
+struct M9AuthorityLiveFloorGuard<'a> {
+    current: MutexGuard<'a, M9AuthorityGeneration>,
+}
+
+impl M9AuthorityLiveFloorGuard<'_> {
+    fn accepts_successor(
+        &self,
+        prior: &M9AuthorityGeneration,
+        successor: &M9AuthorityGeneration,
+    ) -> bool {
+        self.current.matches_for_restore(prior)
+            && successor.generation() > self.current.generation()
+            && successor.preserves_tombstones_from(&self.current)
+    }
+
+    fn commit_successor(&mut self, successor: &M9AuthorityGeneration) {
+        *self.current = successor.clone();
+    }
+}
+
+impl M9AuthorityLiveFloor {
+    fn new(generation: M9AuthorityGeneration) -> Self {
+        Self {
+            current: Arc::new(Mutex::new(generation)),
+        }
+    }
+
+    fn matches_generation(&self, generation: &M9AuthorityGeneration) -> bool {
+        self.current
+            .lock()
+            .ok()
+            .is_some_and(|current| current.matches_for_restore(generation))
+    }
+
+    /// Lock the floor only when it still names the exact sealed generation
+    /// supplied by the caller. The guard is held across backend refresh or
+    /// restore and the fabric-side generation install.
+    fn guard_matching(
+        &self,
+        generation: &M9AuthorityGeneration,
+    ) -> Option<M9AuthorityLiveFloorGuard<'_>> {
+        let current = self.current.lock().ok()?;
+        current
+            .matches_for_restore(generation)
+            .then_some(M9AuthorityLiveFloorGuard { current })
+    }
+}
+
+#[derive(Clone)]
 pub(crate) struct SealedFabricAdmission {
     program_identity: CheckedProgramIdentity,
     program_fingerprint: BTreeSet<(FabricRouteKey, String)>,
@@ -643,6 +714,7 @@ pub(crate) struct SealedFabricAdmission {
     instance: M8RuntimeInstance,
     authority_generation: M9AuthorityGeneration,
     authority_successor: M9AuthoritySuccessorPublisher,
+    authority_live_floor: M9AuthorityLiveFloor,
     initial_state_seed: Sys4InitialStateSeed,
 }
 
@@ -814,6 +886,7 @@ impl SealedFabricAdmission {
                 designated_consumers,
             },
             instance,
+            authority_live_floor: M9AuthorityLiveFloor::new(authority_generation.clone()),
             authority_generation,
             authority_successor,
             initial_state_seed,
@@ -997,6 +1070,8 @@ pub(crate) struct FaultInjection {
     replacement_policy_stamp: Option<String>,
     replacement_redaction_policy: Option<String>,
     replacement_m8_publication_id: Option<String>,
+    replacement_source_ref: Option<SourceRefView>,
+    replacement_visibility_label: Option<String>,
     kind: FaultInjectionKind,
 }
 
@@ -1005,6 +1080,8 @@ enum FaultInjectionKind {
     RouteUnavailable,
     Retarget,
     CorruptVisibilityRedaction,
+    CorruptSourceRef,
+    CorruptVisibility,
     CorruptPolicyStamp,
     StripIntPayload,
     CorruptM8PublicationId,
@@ -1022,6 +1099,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::RouteUnavailable,
         }
     }
@@ -1043,6 +1122,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::Retarget,
         }
     }
@@ -1059,6 +1140,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::StripIntPayload,
         }
     }
@@ -1075,6 +1158,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::CorruptPolicyStamp,
         }
     }
@@ -1091,6 +1176,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::CorruptVisibilityRedaction,
         }
     }
@@ -1108,7 +1195,48 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: Some(forged_publication_id.into()),
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::CorruptM8PublicationId,
+        }
+    }
+
+    pub(crate) fn corrupt_in_transit_envelope_source_ref_for_edge(
+        edge_ref: impl Into<String>,
+        envelope_id: impl Into<String>,
+        forged_source_path: impl Into<String>,
+    ) -> Self {
+        let forged_source = SourceRef::new(forged_source_path.into(), 1, 1, 1, 1);
+        Self {
+            edge_ref: edge_ref.into(),
+            envelope_id: Some(envelope_id.into()),
+            target_locus: None,
+            replacement_core_ref: None,
+            replacement_policy_stamp: None,
+            replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
+            replacement_source_ref: Some(SourceRefView::new(&forged_source)),
+            replacement_visibility_label: None,
+            kind: FaultInjectionKind::CorruptSourceRef,
+        }
+    }
+
+    pub(crate) fn corrupt_in_transit_envelope_visibility_for_edge(
+        edge_ref: impl Into<String>,
+        envelope_id: impl Into<String>,
+        forged_visibility_label: impl Into<String>,
+    ) -> Self {
+        Self {
+            edge_ref: edge_ref.into(),
+            envelope_id: Some(envelope_id.into()),
+            target_locus: None,
+            replacement_core_ref: None,
+            replacement_policy_stamp: None,
+            replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: Some(forged_visibility_label.into()),
+            kind: FaultInjectionKind::CorruptVisibility,
         }
     }
 
@@ -1121,6 +1249,8 @@ impl FaultInjection {
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::CorruptCacheBindingDigest,
         }
     }
@@ -1140,6 +1270,8 @@ impl FaultInjection {
             replacement_policy_stamp: Some(policy_stamp.into()),
             replacement_redaction_policy: Some(redaction_policy.into()),
             replacement_m8_publication_id: None,
+            replacement_source_ref: None,
+            replacement_visibility_label: None,
             kind: FaultInjectionKind::RewriteCacheRetryProjectionBinding,
         }
     }
@@ -1152,6 +1284,8 @@ struct InTransitFault {
     kind: FaultInjectionKind,
     target_locus: Option<String>,
     replacement_m8_publication_id: Option<String>,
+    replacement_source_ref: Option<SourceRefView>,
+    replacement_visibility_label: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -1363,6 +1497,7 @@ enum MailboxPayload {
     },
     DesignatedDelivery {
         value: Option<i64>,
+        publication: Box<M8PublishedDesignatedValue>,
     },
     CacheRetry,
 }
@@ -1381,6 +1516,13 @@ pub(crate) struct SealedDeliveryBinding {
     policy_stamp: Option<String>,
     visibility_policy: ReferenceOnlyRedactionPolicy,
     redaction_policy: String,
+    // Exact M8-produced visibility evidence travels with the generated
+    // carrier.  It is checked again before consumer admission/import and is
+    // not reconstructed from a later publication lookup.
+    m8_visibility_label: String,
+    m8_visibility_class: M8SecurityClass,
+    m8_redaction: String,
+    m8_source_ref: SourceRefView,
     m8_publication_id: String,
     logical_tick_id: String,
     logical_tick_frontier: String,
@@ -1569,7 +1711,9 @@ impl MailboxEnvelope {
                 source_value: Some(value),
                 ..
             }
-            | MailboxPayload::DesignatedDelivery { value: Some(value) } => RuntimeValue::int(value),
+            | MailboxPayload::DesignatedDelivery {
+                value: Some(value), ..
+            } => RuntimeValue::int(value),
             _ => RuntimeValue::unit(),
         }
     }
@@ -1680,7 +1824,16 @@ impl CausalityGraph {
     }
 
     fn record(&mut self, occurrence_id: impl Into<String>, predecessors: Vec<String>) {
-        self.predecessors.insert(occurrence_id.into(), predecessors);
+        let entry = self.predecessors.entry(occurrence_id.into()).or_default();
+        for predecessor in predecessors {
+            if !entry.contains(&predecessor) {
+                entry.push(predecessor);
+            }
+        }
+    }
+
+    pub(crate) fn contains_occurrence(&self, occurrence_id: &str) -> bool {
+        self.predecessors.contains_key(occurrence_id)
     }
 }
 
@@ -1705,6 +1858,45 @@ impl ActualM8TraceNode {
     pub(crate) fn consumer_locus(&self) -> &str {
         self.consumer_locus.as_deref().unwrap_or("")
     }
+
+    pub(crate) fn kind(&self) -> M8LocalTraceKind {
+        match self.kind.as_str() {
+            "OwnerRequest" | "OwnerEnqueued" => M8LocalTraceKind::OwnerEnqueued,
+            "OwnerAuthorityValidated" => M8LocalTraceKind::OwnerAuthorityValidated,
+            "OwnerRead" => M8LocalTraceKind::OwnerRead,
+            "OwnerServe" | "OwnerWrite" => M8LocalTraceKind::OwnerWrite,
+            "RelationPrimaryInvalidated" => M8LocalTraceKind::RelationPrimaryInvalidated,
+            "RelationOptionAdvanced" => M8LocalTraceKind::RelationOptionAdvanced,
+            "RelationFallbackFrozen" => M8LocalTraceKind::RelationFallbackFrozen,
+            "RelationPrimaryReturnIgnored" => M8LocalTraceKind::RelationPrimaryReturnIgnored,
+            "RelationFreshLineageReacquired" => M8LocalTraceKind::RelationFreshLineageReacquired,
+            "DesignatedAuthorityValidated" => M8LocalTraceKind::DesignatedAuthorityValidated,
+            "DesignatedInputReceipt" | "DesignatedInputReceiptValidated" => {
+                M8LocalTraceKind::DesignatedInputReceiptValidated
+            }
+            "DesignatedValueEvaluated" | "DesignatedValuePublished" => {
+                M8LocalTraceKind::DesignatedValuePublished
+            }
+            "DesignatedPublicationImported" => M8LocalTraceKind::DesignatedPublicationImported,
+            "DesignatedEvaluationIdempotent" => M8LocalTraceKind::DesignatedEvaluationIdempotent,
+            "DesignatedConsumerAuthorityValidated" => {
+                M8LocalTraceKind::DesignatedConsumerAuthorityValidated
+            }
+            "DesignatedValueConsumed" => M8LocalTraceKind::DesignatedValueConsumed,
+            "DesignatedCacheValidated" => M8LocalTraceKind::DesignatedCacheValidated,
+            "OwnerOperationRejected" => M8LocalTraceKind::OwnerOperationRejected,
+            "OwnerEnqueueRejected" => M8LocalTraceKind::OwnerEnqueueRejected,
+            "OwnerServeRejected" => M8LocalTraceKind::OwnerServeRejected,
+            "DesignatedEvaluationRejected" => M8LocalTraceKind::DesignatedEvaluationRejected,
+            "DesignatedConsumptionRejected" => M8LocalTraceKind::DesignatedConsumptionRejected,
+            "PatchStateInitialized" => M8LocalTraceKind::PatchStateInitialized,
+            "LocalCutSaved" => M8LocalTraceKind::LocalCutSaved,
+            "RestoreRejected" => M8LocalTraceKind::RestoreRejected,
+            "RelationTransitionRejected" => M8LocalTraceKind::RelationTransitionRejected,
+            "EntityPresenceSynchronized" => M8LocalTraceKind::EntityPresenceSynchronized,
+            other => panic!("unknown actual M8 trace kind: {other}"),
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -1717,7 +1909,7 @@ impl ActualM8Trace {
         self.nodes
             .iter()
             .filter(|node| {
-                node.kind == "OwnerRequest"
+                node.kind() == M8LocalTraceKind::OwnerEnqueued
                     && node.semantic_identity.as_deref() == Some(operation)
                     && node.consumer_locus.as_deref() == Some(owner_locus)
             })
@@ -1728,7 +1920,7 @@ impl ActualM8Trace {
         self.nodes
             .iter()
             .filter(|node| {
-                node.kind == "DesignatedValueEvaluated"
+                node.kind() == M8LocalTraceKind::DesignatedValuePublished
                     && node.semantic_identity.as_deref() == Some(value_name)
             })
             .count()
@@ -1738,9 +1930,9 @@ impl ActualM8Trace {
         &self,
         node_id: &str,
     ) -> Option<&ActualM8TraceNode> {
-        self.nodes
-            .iter()
-            .find(|node| node.node_id == node_id && node.kind == "DesignatedCacheValidated")
+        self.nodes.iter().find(|node| {
+            node.node_id == node_id && node.kind() == M8LocalTraceKind::DesignatedCacheValidated
+        })
     }
 
     pub(crate) fn stable_digest(&self) -> String {
@@ -1754,7 +1946,7 @@ impl ActualM8Trace {
         self.nodes
             .iter()
             .find(|node| {
-                node.kind == "DesignatedValueConsumed"
+                node.kind() == M8LocalTraceKind::DesignatedValueConsumed
                     && node.semantic_identity.as_deref() == Some(semantic_identity)
                     && node.consumer_locus.as_deref() == Some(consumer_locus)
             })
@@ -1769,7 +1961,7 @@ impl ActualM8Trace {
         self.nodes
             .iter()
             .filter(|node| {
-                node.kind == "DesignatedValueConsumed"
+                node.kind() == M8LocalTraceKind::DesignatedValueConsumed
                     && node.semantic_identity.as_deref() == Some(semantic_identity)
                     && node.consumer_locus.as_deref() == Some(consumer_locus)
             })
@@ -1792,8 +1984,29 @@ impl ActualM8Trace {
         consumer_locus: Option<String>,
         predecessors: Vec<String>,
     ) {
+        let node_id = node_id.into();
+        // A fabric view may first learn a row from a session trace and later
+        // add endpoint-specific predecessors.  It must never create a second
+        // synthetic M8 node for that same M8-owned occurrence.
+        if let Some(existing) = self.nodes.iter_mut().find(|node| node.node_id == node_id) {
+            for predecessor in predecessors {
+                if !existing.predecessors.contains(&predecessor) {
+                    existing.predecessors.push(predecessor);
+                }
+            }
+            if existing.request_id.is_none() {
+                existing.request_id = request_id;
+            }
+            if existing.semantic_identity.is_none() {
+                existing.semantic_identity = semantic_identity;
+            }
+            if existing.consumer_locus.is_none() {
+                existing.consumer_locus = consumer_locus;
+            }
+            return;
+        }
         self.nodes.push(ActualM8TraceNode {
-            node_id: node_id.into(),
+            node_id,
             kind: kind.into(),
             request_id,
             semantic_identity,
@@ -2481,6 +2694,869 @@ impl DesignatedConsumptionState {
     }
 }
 
+/// SYS-4's bounded local-cut receipt evidence.  It records only sealed
+/// carrier identities, never an M8 payload or authority fact; concrete M8
+/// state remains in the per-locus `M8LocalCut` below.
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct ImportedDesignatedPublicationState {
+    entries: BTreeSet<(String, String, String)>,
+}
+
+impl ImportedDesignatedPublicationState {
+    pub(crate) fn contains_exact(
+        &self,
+        semantic_identity: &str,
+        publication_id: &str,
+        sealed_delivery_digest: &str,
+    ) -> bool {
+        self.entries.contains(&(
+            semantic_identity.to_string(),
+            publication_id.to_string(),
+            sealed_delivery_digest.to_string(),
+        ))
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct DesignatedReceiptState {
+    entries: BTreeSet<(String, String, String)>,
+}
+
+impl DesignatedReceiptState {
+    pub(crate) fn contains_exact_receipt(
+        &self,
+        semantic_identity: &str,
+        publication_id: &str,
+        logical_tick_id: &str,
+    ) -> bool {
+        self.entries.contains(&(
+            semantic_identity.to_string(),
+            publication_id.to_string(),
+            logical_tick_id.to_string(),
+        ))
+    }
+}
+
+/// Mutable state of one generated locus endpoint.  The checked artifact and
+/// program identity are deliberately *not* copied into a cut; restore binds
+/// these fields back to the supplied checked projection.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct LocusRuntimeCut {
+    locus: String,
+    local_store: LocusLocalStore,
+    incoming_endpoint: EndpointCarrierHistory,
+    outgoing_endpoint: EndpointCarrierHistory,
+    incoming_mailbox: IncomingMailbox,
+    outgoing_mailbox: OutgoingMailbox,
+}
+
+impl LocusRuntimeCut {
+    fn capture(runtime: &LocusRuntime) -> Self {
+        Self {
+            locus: runtime.locus.clone(),
+            local_store: runtime.local_store.clone(),
+            incoming_endpoint: runtime.incoming_endpoint.clone(),
+            outgoing_endpoint: runtime.outgoing_endpoint.clone(),
+            incoming_mailbox: runtime.incoming_mailbox.clone(),
+            outgoing_mailbox: runtime.outgoing_mailbox.clone(),
+        }
+    }
+
+    fn restore_into(&self, runtime: &mut LocusRuntime) {
+        runtime.local_store = self.local_store.clone();
+        runtime.incoming_endpoint = self.incoming_endpoint.clone();
+        runtime.outgoing_endpoint = self.outgoing_endpoint.clone();
+        runtime.incoming_mailbox = self.incoming_mailbox.clone();
+        runtime.outgoing_mailbox = self.outgoing_mailbox.clone();
+    }
+}
+
+/// A whole-fabric, process-local cut.  This internal bounded representation
+/// retains actual locus endpoints/mailboxes, fabric traces, M8 session cuts,
+/// and the M9 successor lifecycle needed to continue exactly from the cut.
+/// It is neither a durable save format nor a public transport/wire contract.
+#[derive(Clone)]
+pub(crate) struct Sys4LocalCut {
+    cut_id: String,
+    program_identity: CheckedProgramIdentity,
+    program_fingerprint: BTreeSet<(FabricRouteKey, String)>,
+    backend_profile: BackendProfile,
+    loci: BTreeMap<String, LocusRuntimeCut>,
+    m8_cuts: BTreeMap<String, M8LocalCut>,
+    authority_generation: M9AuthorityGeneration,
+    authority_lifecycle: M9AuthorityLifecycle,
+    authority_live_floor: M9AuthorityLiveFloor,
+    trace: FabricTrace,
+    route_faults: BTreeSet<String>,
+    in_transit_faults: InTransitFaults,
+    completed_receipts: BTreeMap<String, FabricReceipt>,
+    local_store_read_audits: BTreeMap<String, LocalStoreReadAudit>,
+    cache: BTreeMap<String, CachedDelivery>,
+    consumption_state: DesignatedConsumptionState,
+    evaluator_publication_bindings: EvaluatorPublicationBindingRegistry,
+    imported_designated_publication_state: ImportedDesignatedPublicationState,
+    designated_receipt_state: DesignatedReceiptState,
+    m8_trace: FabricM8Trace,
+    actual_m8_trace: ActualM8Trace,
+    m8_local_runtime_trace: M8LocalTrace,
+    m8_trace_offsets: BTreeMap<String, usize>,
+    m8_qualified_trace_nodes: BTreeMap<String, BTreeMap<String, String>>,
+    m8_qualified_trace_dependencies: BTreeMap<String, BTreeMap<String, Vec<String>>>,
+    m8_raw_node_loci: BTreeMap<String, BTreeMap<String, String>>,
+    m8_locus_trace_sequences: BTreeMap<String, u64>,
+    m8_locus_sessions: BTreeMap<String, String>,
+    causality: CausalityGraph,
+    next_endpoint_occurrence: u64,
+    next_request: u64,
+}
+
+impl std::fmt::Debug for Sys4LocalCut {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys4LocalCut")
+            .field("cut_id", &self.cut_id)
+            .field("program_identity", &self.program_identity)
+            .field("backend_profile", &self.backend_profile)
+            .field("loci", &self.loci.keys().collect::<Vec<_>>())
+            .field(
+                "authority_generation",
+                &self.authority_generation.generation(),
+            )
+            .finish_non_exhaustive()
+    }
+}
+
+impl Sys4LocalCut {
+    pub(crate) fn imported_designated_publication_state(
+        &self,
+    ) -> &ImportedDesignatedPublicationState {
+        &self.imported_designated_publication_state
+    }
+
+    pub(crate) fn designated_receipt_state(&self) -> &DesignatedReceiptState {
+        &self.designated_receipt_state
+    }
+
+    /// Test-only malformed-cut constructor.  It removes one concrete source
+    /// endpoint send record while retaining the target receive, so restore
+    /// must reject the incomplete generated carrier lifecycle.
+    #[cfg(test)]
+    pub(crate) fn for_test_drop_outgoing_endpoint_record(
+        &mut self,
+        locus: &str,
+        request_id: &str,
+        carrier_id: &str,
+    ) {
+        if let Some(locus_cut) = self.loci.get_mut(locus) {
+            locus_cut.outgoing_endpoint.records.retain(|record| {
+                record.request_id != request_id || record.carrier_id != carrier_id
+            });
+        }
+    }
+
+    /// Test-only malformed-cut constructor for the target half of one moved
+    /// carrier.  A pending inbox envelope without this exact receive record
+    /// must never restore, even when a matching source send remains present.
+    #[cfg(test)]
+    pub(crate) fn for_test_drop_incoming_endpoint_record(
+        &mut self,
+        locus: &str,
+        request_id: &str,
+        carrier_id: &str,
+        record_id: &str,
+    ) {
+        if let Some(locus_cut) = self.loci.get_mut(locus) {
+            locus_cut.incoming_endpoint.records.retain(|record| {
+                record.request_id != request_id
+                    || record.carrier_id != carrier_id
+                    || record.record_id != record_id
+            });
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_duplicate_pending_inbox_envelope_and_receive_record(
+        &mut self,
+        locus: &str,
+        request_id: &str,
+        carrier_id: &str,
+        record_id: &str,
+    ) {
+        let Some(locus_cut) = self.loci.get_mut(locus) else {
+            return;
+        };
+        if let Some(envelope) = locus_cut
+            .incoming_mailbox
+            .pending
+            .iter()
+            .find(|envelope| {
+                envelope.request_id == request_id
+                    && envelope.carrier_id == carrier_id
+                    && envelope.mailbox_record_id == record_id
+            })
+            .cloned()
+        {
+            locus_cut.incoming_mailbox.pending.push_back(envelope);
+        }
+        if let Some(record) = locus_cut
+            .incoming_endpoint
+            .records
+            .iter()
+            .find(|record| {
+                record.request_id == request_id
+                    && record.carrier_id == carrier_id
+                    && record.record_id == record_id
+            })
+            .cloned()
+        {
+            locus_cut.incoming_endpoint.records.push(record);
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_set_next_request_below_retained_max(&mut self, request_id: &str) {
+        self.next_request = request_id
+            .strip_prefix("sys4-request-")
+            .and_then(|suffix| suffix.parse().ok())
+            .unwrap_or_default();
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_set_next_endpoint_occurrence_below_retained_max(
+        &mut self,
+        identifier: &str,
+    ) {
+        self.next_endpoint_occurrence = sys4_counter_suffix(identifier).unwrap_or_default();
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_drop_actual_m8_trace_row(&mut self, node_id: &str) {
+        self.actual_m8_trace
+            .nodes
+            .retain(|node| node.node_id != node_id);
+    }
+
+    /// Add a predecessor that is a real fabric occurrence but not one of the
+    /// saved causal predecessors for this M8 node. Restore must reject the
+    /// copied ActualM8 view rather than accepting a merely well-formed ID.
+    #[cfg(test)]
+    pub(crate) fn for_test_add_actual_m8_trace_predecessor(
+        &mut self,
+        node_id: &str,
+        forged_predecessor_id: &str,
+    ) {
+        if let Some(node) = self
+            .actual_m8_trace
+            .nodes
+            .iter_mut()
+            .find(|node| node.node_id == node_id)
+        {
+            node.predecessors.push(forged_predecessor_id.to_string());
+        }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_drop_causality_row(&mut self, occurrence_id: &str) {
+        self.causality.predecessors.remove(occurrence_id);
+    }
+}
+
+fn cut_projection_mismatch() -> Sys4DispatchDiagnostics {
+    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+}
+
+fn validate_sys4_local_cut(
+    program: &FabricProgram,
+    backend_profile: BackendProfile,
+    cut: &Sys4LocalCut,
+) -> Sys4Result<()> {
+    if cut.program_identity != *program.checked_program_identity()
+        || cut.program_fingerprint != program.projected_fingerprint()
+        || cut.backend_profile != backend_profile
+    {
+        return Err(cut_projection_mismatch());
+    }
+    let expected_loci: BTreeSet<_> = program.locus_names().into_iter().collect();
+    if cut.loci.keys().cloned().collect::<BTreeSet<_>>() != expected_loci
+        || cut.m8_cuts.keys().cloned().collect::<BTreeSet<_>>() != expected_loci
+        || cut
+            .local_store_read_audits
+            .keys()
+            .cloned()
+            .collect::<BTreeSet<_>>()
+            != expected_loci
+    {
+        return Err(cut_projection_mismatch());
+    }
+    if cut.authority_generation.program_identity()
+        != program.checked_program_identity().stable_key()
+        || !cut
+            .authority_lifecycle
+            .matches_generation_for_restore(&cut.authority_generation)
+        || !cut
+            .authority_live_floor
+            .matches_generation(&cut.authority_generation)
+        || cut.m8_cuts.values().any(|m8_cut| {
+            m8_cut.program_identity() != program.checked_program_identity()
+                || m8_cut.authority_inventory() != &cut.authority_generation.authority_state()
+        })
+    {
+        return Err(Sys4DispatchDiagnostics::one(
+            Sys4DiagnosticKind::ProgramAdmissionMismatch,
+        ));
+    }
+
+    for (locus, locus_cut) in &cut.loci {
+        if locus_cut.locus != *locus || !locus_cut.local_store.is_owned_by_locus(locus) {
+            return Err(cut_projection_mismatch());
+        }
+        validate_locus_runtime_cut(program, locus, locus_cut, &cut.causality)?;
+    }
+
+    let sent_records: Vec<_> = cut
+        .loci
+        .values()
+        .flat_map(|locus_cut| locus_cut.outgoing_endpoint.records.iter())
+        .collect();
+    if cut.loci.values().any(|locus_cut| {
+        locus_cut.incoming_endpoint.records.iter().any(|received| {
+            !sent_records
+                .iter()
+                .any(|sent| endpoint_transfer_pair_matches(sent, received))
+        })
+    }) {
+        return Err(cut_projection_mismatch());
+    }
+    // Endpoint history is symmetric with a live inbox: every pending target
+    // envelope must retain its exact receive record and that record must in
+    // turn retain the matching source send. A receive-only history check
+    // would allow a corrupt cut to preserve the carrier payload while
+    // erasing the target endpoint occurrence that made it admissible.
+    if cut.loci.values().any(|locus_cut| {
+        locus_cut.incoming_mailbox.pending.iter().any(|envelope| {
+            let Some(received) = locus_cut
+                .incoming_endpoint
+                .records
+                .iter()
+                .find(|record| endpoint_receive_record_matches_envelope(record, envelope))
+            else {
+                return true;
+            };
+            !sent_records
+                .iter()
+                .any(|sent| endpoint_transfer_pair_matches(sent, received))
+        })
+    }) {
+        return Err(cut_projection_mismatch());
+    }
+    if !cut_endpoint_inventory_is_bijective(cut)
+        || !cut_counters_are_fresh(cut)
+        || !cut_m8_views_are_derived(cut)
+    {
+        return Err(cut_projection_mismatch());
+    }
+
+    if !cut
+        .completed_receipts
+        .iter()
+        .all(|(request_id, receipt)| receipt.request_id == *request_id)
+        || !cut
+            .route_faults
+            .iter()
+            .all(|edge_ref| projected_edge_for_ref(program, edge_ref).is_some())
+        || !cut.in_transit_faults.entries.iter().all(|fault| {
+            projected_edge_for_ref(program, &fault.edge_ref).is_some()
+                && fault.envelope_id.as_ref().is_none_or(|envelope_id| {
+                    cut.loci.values().any(|locus_cut| {
+                        locus_cut.outgoing_mailbox.pending.iter().any(|envelope| {
+                            envelope.envelope_id == *envelope_id
+                                && envelope.edge_ref == fault.edge_ref
+                        })
+                    })
+                })
+        })
+    {
+        return Err(cut_projection_mismatch());
+    }
+    Ok(())
+}
+
+fn projected_edge_for_ref<'a>(
+    program: &'a FabricProgram,
+    edge_ref: &str,
+) -> Option<&'a CommunicationEdge> {
+    program
+        .projection
+        .communication_plan()
+        .edges()
+        .iter()
+        .find(|edge| edge.edge_ref() == edge_ref)
+}
+
+fn envelope_matches_projected_edge(program: &FabricProgram, envelope: &MailboxEnvelope) -> bool {
+    let Some(edge) = projected_edge_for_ref(program, &envelope.edge_ref) else {
+        return false;
+    };
+    FabricRouteKey::from_edge(edge)
+        == FabricRouteKey {
+            operation: envelope.operation_id.clone(),
+            kind: envelope.edge_kind,
+            source_locus: envelope.source_locus.clone(),
+            target_locus: envelope.target_locus.clone(),
+        }
+        && program
+            .route_index
+            .route(&FabricRouteKey::from_edge(edge))
+            .is_some_and(|route| route.edge_ref == envelope.edge_ref)
+        && envelope.carrier_contract == *edge.carrier_contract()
+        && envelope.source_ref == edge.source_ref()
+        && envelope.core_ref.as_deref() == edge.core_ref()
+        && envelope.source_fragment_ref == *edge.source_fragment_ref()
+        && envelope.target_fragment_ref == *edge.target_fragment_ref()
+        && !envelope.envelope_id.is_empty()
+        && !envelope.carrier_id.is_empty()
+        && !envelope.mailbox_record_id.is_empty()
+        && !envelope.mailbox_enqueue_occurrence_id.is_empty()
+}
+
+fn endpoint_record_matches_projected_edge(
+    program: &FabricProgram,
+    record: &EndpointCarrierRecord,
+) -> bool {
+    let Some(edge) = projected_edge_for_ref(program, &record.edge_ref) else {
+        return false;
+    };
+    record.edge_kind == edge.kind()
+        && record.source_locus == edge.source_locus()
+        && record.target_locus == edge.target_locus()
+        && record.source_ref == edge.source_ref()
+        && record.core_ref.as_deref() == edge.core_ref()
+        && record.source_fragment_ref == *edge.source_fragment_ref()
+        && record.target_fragment_ref == *edge.target_fragment_ref()
+        && !record.record_id.is_empty()
+        && !record.carrier_id.is_empty()
+        && !record.request_id.is_empty()
+}
+
+fn endpoint_transfer_pair_matches(
+    sent: &EndpointCarrierRecord,
+    received: &EndpointCarrierRecord,
+) -> bool {
+    sent.carrier_id == received.carrier_id
+        && sent.request_id == received.request_id
+        && sent.edge_kind == received.edge_kind
+        && sent.edge_ref == received.edge_ref
+        && sent.source_locus == received.source_locus
+        && sent.target_locus == received.target_locus
+        && sent.request_carrier_id == received.request_carrier_id
+        && sent.input_receipt_carrier_id == received.input_receipt_carrier_id
+        && sent.source_ref == received.source_ref
+        && sent.core_ref == received.core_ref
+        && sent.source_fragment_ref == received.source_fragment_ref
+        && sent.target_fragment_ref == received.target_fragment_ref
+        && sent.dequeue_occurrence_id.is_some()
+        && received.enqueue_occurrence_id.is_some()
+}
+
+fn endpoint_receive_record_matches_envelope(
+    received: &EndpointCarrierRecord,
+    envelope: &MailboxEnvelope,
+) -> bool {
+    received.record_id == envelope.mailbox_record_id
+        && received.carrier_id == envelope.carrier_id
+        && received.request_id == envelope.request_id
+        && received.edge_kind == envelope.edge_kind
+        && received.edge_ref == envelope.edge_ref
+        && received.source_locus == envelope.source_locus
+        && received.target_locus == envelope.target_locus
+        && received.request_carrier_id == envelope.request_carrier_id
+        && received.input_receipt_carrier_id == envelope.input_receipt_carrier_id
+        && received.source_ref == envelope.source_ref
+        && received.core_ref == envelope.core_ref
+        && received.source_fragment_ref == envelope.source_fragment_ref
+        && received.target_fragment_ref == envelope.target_fragment_ref
+        && received.dequeue_occurrence_id.is_none()
+        && received.enqueue_occurrence_id.as_deref()
+            == Some(envelope.mailbox_enqueue_occurrence_id.as_str())
+}
+
+/// Verify the finite carrier inventory as identities, rather than merely as
+/// matching field shapes.  A transported carrier has one source send and one
+/// target receive; a pending target inbox also names exactly that receive.
+/// These checks deliberately permit the two endpoint records to share their
+/// one carrier ID while prohibiting duplicate logical carriers or endpoint
+/// occurrence IDs.
+fn cut_endpoint_inventory_is_bijective(cut: &Sys4LocalCut) -> bool {
+    let sent_records: Vec<_> = cut
+        .loci
+        .values()
+        .flat_map(|locus_cut| locus_cut.outgoing_endpoint.records.iter())
+        .collect();
+    let received_records: Vec<_> = cut
+        .loci
+        .values()
+        .flat_map(|locus_cut| locus_cut.incoming_endpoint.records.iter())
+        .collect();
+    if sent_records.iter().any(|sent| {
+        received_records
+            .iter()
+            .filter(|received| endpoint_transfer_pair_matches(sent, received))
+            .count()
+            != 1
+    }) || received_records.iter().any(|received| {
+        sent_records
+            .iter()
+            .filter(|sent| endpoint_transfer_pair_matches(sent, received))
+            .count()
+            != 1
+    }) {
+        return false;
+    }
+
+    let mut envelope_ids = BTreeSet::new();
+    let mut pending_carrier_ids = BTreeSet::new();
+    let mut mailbox_record_ids = BTreeSet::new();
+    let mut mailbox_enqueue_ids = BTreeSet::new();
+    for locus_cut in cut.loci.values() {
+        for envelope in locus_cut
+            .outgoing_mailbox
+            .pending
+            .iter()
+            .chain(locus_cut.incoming_mailbox.pending.iter())
+        {
+            if !envelope_ids.insert(envelope.envelope_id.clone())
+                || !pending_carrier_ids.insert(envelope.carrier_id.clone())
+                || !mailbox_record_ids.insert(envelope.mailbox_record_id.clone())
+                || !mailbox_enqueue_ids.insert(envelope.mailbox_enqueue_occurrence_id.clone())
+            {
+                return false;
+            }
+        }
+    }
+
+    let mut endpoint_record_ids = BTreeSet::new();
+    let mut endpoint_occurrence_ids = BTreeSet::new();
+    let mut endpoint_carrier_counts = BTreeMap::<String, usize>::new();
+    for record in sent_records.iter().chain(received_records.iter()) {
+        if !endpoint_record_ids.insert(record.record_id.clone()) {
+            return false;
+        }
+        *endpoint_carrier_counts
+            .entry(record.carrier_id.clone())
+            .or_default() += 1;
+        for occurrence in [
+            record.enqueue_occurrence_id.as_deref(),
+            record.dequeue_occurrence_id.as_deref(),
+        ]
+        .into_iter()
+        .flatten()
+        {
+            if !endpoint_occurrence_ids.insert(occurrence.to_string()) {
+                return false;
+            }
+        }
+    }
+    if endpoint_carrier_counts.values().any(|count| *count != 2) {
+        return false;
+    }
+
+    for locus_cut in cut.loci.values() {
+        for envelope in &locus_cut.outgoing_mailbox.pending {
+            // An outbox envelope has not crossed an endpoint yet. Reusing a
+            // historical endpoint record or occurrence would make the next
+            // transport step ambiguous after restore.
+            if endpoint_record_ids.contains(&envelope.mailbox_record_id)
+                || endpoint_occurrence_ids.contains(&envelope.mailbox_enqueue_occurrence_id)
+                || endpoint_carrier_counts.contains_key(&envelope.carrier_id)
+            {
+                return false;
+            }
+        }
+        for envelope in &locus_cut.incoming_mailbox.pending {
+            let matching_receives = locus_cut
+                .incoming_endpoint
+                .records
+                .iter()
+                .filter(|record| endpoint_receive_record_matches_envelope(record, envelope))
+                .collect::<Vec<_>>();
+            if matching_receives.len() != 1
+                || sent_records
+                    .iter()
+                    .filter(|sent| endpoint_transfer_pair_matches(sent, matching_receives[0]))
+                    .count()
+                    != 1
+            {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+fn sys4_counter_suffix(identifier: &str) -> Option<u64> {
+    identifier
+        .strip_prefix("sys4-")?
+        .rsplit_once('-')?
+        .1
+        .parse()
+        .ok()
+}
+
+fn cut_counters_are_fresh(cut: &Sys4LocalCut) -> bool {
+    let mut max_endpoint = None;
+    let mut max_request = None;
+    let mut observe_endpoint = |identifier: &str| {
+        if let Some(value) = sys4_counter_suffix(identifier) {
+            max_endpoint = Some(max_endpoint.map_or(value, |current: u64| current.max(value)));
+        }
+    };
+    let mut observe_request = |identifier: &str| {
+        if let Some(value) = identifier
+            .strip_prefix("sys4-request-")
+            .and_then(|suffix| suffix.parse::<u64>().ok())
+        {
+            max_request = Some(max_request.map_or(value, |current: u64| current.max(value)));
+        }
+    };
+
+    for locus_cut in cut.loci.values() {
+        for envelope in locus_cut
+            .outgoing_mailbox
+            .pending
+            .iter()
+            .chain(locus_cut.incoming_mailbox.pending.iter())
+        {
+            observe_endpoint(&envelope.envelope_id);
+            observe_endpoint(&envelope.carrier_id);
+            observe_endpoint(&envelope.mailbox_record_id);
+            observe_endpoint(&envelope.mailbox_enqueue_occurrence_id);
+            if let Some(carrier_id) = &envelope.request_carrier_id {
+                observe_endpoint(carrier_id);
+            }
+            if let Some(carrier_id) = &envelope.input_receipt_carrier_id {
+                observe_endpoint(carrier_id);
+            }
+            observe_request(&envelope.request_id);
+        }
+        for record in locus_cut
+            .outgoing_endpoint
+            .records
+            .iter()
+            .chain(locus_cut.incoming_endpoint.records.iter())
+        {
+            observe_endpoint(&record.record_id);
+            observe_endpoint(&record.carrier_id);
+            if let Some(occurrence) = &record.enqueue_occurrence_id {
+                observe_endpoint(occurrence);
+            }
+            if let Some(occurrence) = &record.dequeue_occurrence_id {
+                observe_endpoint(occurrence);
+            }
+            if let Some(carrier_id) = &record.request_carrier_id {
+                observe_endpoint(carrier_id);
+            }
+            if let Some(carrier_id) = &record.input_receipt_carrier_id {
+                observe_endpoint(carrier_id);
+            }
+            observe_request(&record.request_id);
+        }
+    }
+    for (request_id, receipt) in &cut.completed_receipts {
+        observe_request(request_id);
+        observe_request(&receipt.request_id);
+    }
+    // Fault-only actions have neither an endpoint carrier nor a completed
+    // semantic receipt, but still consume the next request ID. Their retained
+    // FabricTrace rows therefore participate in the same freshness floor.
+    for entry in &cut.trace.entries {
+        observe_request(&entry.request_id);
+        if let Some(fault_id) = &entry.fault_id {
+            observe_request(fault_id);
+        }
+    }
+    max_endpoint.is_none_or(|maximum| cut.next_endpoint_occurrence > maximum)
+        && max_request.is_none_or(|maximum| cut.next_request > maximum)
+}
+
+/// `m8_local_runtime_trace`, `actual_m8_trace`, the fabric consumption view,
+/// and their M8 causality roots are observer projections.  They are retained
+/// for devtools/replay correspondence, but the per-session M8 cuts remain
+/// their source.  Reject a cut when a copied projection has been removed,
+/// duplicated, or detached from its owning M8 row.
+fn cut_m8_views_are_derived(cut: &Sys4LocalCut) -> bool {
+    let mut expected = BTreeMap::<String, M8LocalTraceObservation>::new();
+    for (locus, m8_cut) in &cut.m8_cuts {
+        let Some(session_id) = cut.m8_locus_sessions.get(locus) else {
+            return false;
+        };
+        // SYS-4 cuts are ST-only today, so every semantic locus owns the
+        // physical M8 session whose cut it carries.
+        if session_id != locus {
+            return false;
+        }
+        let raw_trace = m8_cut.trace_prefix();
+        let raw_observations = raw_trace.observations();
+        if cut.m8_trace_offsets.get(session_id).copied() != Some(raw_observations.len())
+            || cut
+                .m8_locus_trace_sequences
+                .get(locus)
+                .copied()
+                .unwrap_or_default()
+                != raw_observations.len() as u64
+        {
+            return false;
+        }
+        let Some(qualified_nodes) = cut.m8_qualified_trace_nodes.get(session_id) else {
+            return false;
+        };
+        let Some(dependencies) = cut.m8_qualified_trace_dependencies.get(session_id) else {
+            return false;
+        };
+        let Some(raw_node_loci) = cut.m8_raw_node_loci.get(session_id) else {
+            return false;
+        };
+        if qualified_nodes.len() != raw_observations.len()
+            || dependencies.len() != raw_observations.len()
+            || raw_node_loci.len() != raw_observations.len()
+        {
+            return false;
+        }
+        for (index, observation) in raw_observations.iter().enumerate() {
+            let raw_node_id = observation.node_id();
+            let expected_node_id = format!("sys4-m8:{locus}:m8-fabric-trace-{index:020}");
+            if qualified_nodes.get(raw_node_id) != Some(&expected_node_id)
+                || raw_node_loci.get(raw_node_id) != Some(locus)
+            {
+                return false;
+            }
+            let expected_dependencies = observation
+                .predecessor_ids()
+                .iter()
+                .map(|raw| qualified_nodes.get(raw).cloned())
+                .collect::<Option<Vec<_>>>();
+            let Some(expected_dependencies) = expected_dependencies else {
+                return false;
+            };
+            if dependencies.get(raw_node_id) != Some(&expected_dependencies) {
+                return false;
+            }
+            let qualified =
+                observation.fabric_rekeyed(expected_node_id.clone(), expected_dependencies);
+            if expected.insert(expected_node_id, qualified).is_some() {
+                return false;
+            }
+        }
+    }
+
+    let aggregate = cut.m8_local_runtime_trace.observations();
+    if aggregate.len() != expected.len() {
+        return false;
+    }
+    let mut aggregate_ids = BTreeSet::new();
+    for observation in &aggregate {
+        if !aggregate_ids.insert(observation.node_id().to_string()) {
+            return false;
+        }
+        let Some(expected_observation) = expected.get(observation.node_id()) else {
+            return false;
+        };
+        if !same_derived_m8_observation(observation, expected_observation) {
+            return false;
+        }
+    }
+
+    if cut.actual_m8_trace.nodes.len() != expected.len() {
+        return false;
+    }
+    let mut actual_ids = BTreeSet::new();
+    let mut expected_consumptions = BTreeMap::<(String, String), usize>::new();
+    for expected_observation in expected.values() {
+        if expected_observation.kind() == M8LocalTraceKind::DesignatedValueConsumed {
+            let semantic_identity = expected_observation.semantic_identity();
+            let consumer = expected_observation.consumer_locus();
+            if semantic_identity.is_empty() || consumer.is_empty() {
+                return false;
+            }
+            *expected_consumptions
+                .entry((semantic_identity.to_string(), consumer.to_string()))
+                .or_default() += 1;
+        }
+    }
+    if cut.m8_trace.consumption_counts != expected_consumptions {
+        return false;
+    }
+    for node in &cut.actual_m8_trace.nodes {
+        if !actual_ids.insert(node.node_id.clone()) {
+            return false;
+        }
+        let Some(expected_observation) = expected.get(&node.node_id) else {
+            return false;
+        };
+        if node.kind != format!("{:?}", expected_observation.kind())
+            || !expected_observation
+                .predecessor_ids()
+                .iter()
+                .all(|predecessor| node.predecessors.contains(predecessor))
+            || !cut.causality.contains_occurrence(&node.node_id)
+            || node.predecessors != cut.causality.predecessor_ids(&node.node_id)
+            || !node
+                .predecessors
+                .iter()
+                .all(|predecessor| cut.causality.contains_occurrence(predecessor))
+        {
+            return false;
+        }
+    }
+    true
+}
+
+fn same_derived_m8_observation(
+    actual: &M8LocalTraceObservation,
+    expected: &M8LocalTraceObservation,
+) -> bool {
+    actual.node_id() == expected.node_id()
+        && actual.kind() == expected.kind()
+        && actual.predecessor_ids() == expected.predecessor_ids()
+        && actual.source_ref == expected.source_ref
+        && actual.occurrence_id == expected.occurrence_id
+        && actual.designated_context_digest() == expected.designated_context_digest()
+}
+
+fn validate_locus_runtime_cut(
+    program: &FabricProgram,
+    locus: &str,
+    locus_cut: &LocusRuntimeCut,
+    causality: &CausalityGraph,
+) -> Sys4Result<()> {
+    if locus_cut.outgoing_mailbox.pending.iter().any(|envelope| {
+        envelope.source_locus != locus
+            || !envelope_matches_projected_edge(program, envelope)
+            || !causality.contains_occurrence(&envelope.mailbox_enqueue_occurrence_id)
+    }) || locus_cut.incoming_mailbox.pending.iter().any(|envelope| {
+        envelope.target_locus != locus
+            || !envelope_matches_projected_edge(program, envelope)
+            || !causality.contains_occurrence(&envelope.mailbox_enqueue_occurrence_id)
+    }) || locus_cut.outgoing_endpoint.records.iter().any(|record| {
+        record.source_locus != locus
+            || !endpoint_record_matches_projected_edge(program, record)
+            || record
+                .dequeue_occurrence_id
+                .as_ref()
+                .is_none_or(|occurrence| !causality.contains_occurrence(occurrence))
+    }) || locus_cut.incoming_endpoint.records.iter().any(|record| {
+        record.target_locus != locus
+            || !endpoint_record_matches_projected_edge(program, record)
+            || record
+                .enqueue_occurrence_id
+                .as_ref()
+                .is_none_or(|occurrence| !causality.contains_occurrence(occurrence))
+    }) {
+        return Err(cut_projection_mismatch());
+    }
+
+    Ok(())
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct FabricArtifact {
     designated_consumers: BTreeSet<String>,
@@ -2599,14 +3675,15 @@ impl FabricSemanticSnapshot {
 }
 
 enum M8ExecutionBackend {
-    St(Box<M8LocalRuntime>),
+    /// Independent deterministic M8 sessions, one per admitted logical
+    /// locus.  No ST operation may borrow another locus's semantic snapshot.
+    St(BTreeMap<String, Box<M8LocalRuntime>>),
     Ow1(Ow1WorkerBackend),
 }
 
 struct M8OwnerExecution {
     outcome: M8ServeOutcome,
-    request_node_id: String,
-    serve_node_id: String,
+    request_observation: M8LocalTraceObservation,
     serve_observation: M8LocalTraceObservation,
 }
 
@@ -2638,6 +3715,17 @@ impl M8BackendFailure {
 }
 
 impl M8ExecutionBackend {
+    fn profile(&self) -> BackendProfile {
+        match self {
+            Self::St(_) => BackendProfile::St,
+            Self::Ow1(_) => BackendProfile::Ow1,
+        }
+    }
+
+    fn is_ow1(&self) -> bool {
+        matches!(self, Self::Ow1(_))
+    }
+
     fn enqueue_and_serve(
         &mut self,
         owner_locus: &str,
@@ -2645,13 +3733,14 @@ impl M8ExecutionBackend {
         context: M8LocalDesignatedTraceContext,
     ) -> Result<M8OwnerExecution, M8BackendFailure> {
         match self {
-            Self::St(runtime) => runtime
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or_else(|| M8BackendFailure::unobserved(Sys4DiagnosticKind::BackendIneligible))?
                 .execute_owner_with_context(owner_locus, request, context)
                 .map(
                     |(outcome, request_observation, serve_observation)| M8OwnerExecution {
                         outcome,
-                        request_node_id: request_observation.node_id().to_string(),
-                        serve_node_id: serve_observation.node_id().to_string(),
+                        request_observation,
                         serve_observation,
                     },
                 )
@@ -2662,8 +3751,7 @@ impl M8ExecutionBackend {
                     .map_err(|failure| M8BackendFailure::unobserved(map_worker_failure(failure)))?;
                 match execution {
                     Ow1ContextualM8Execution::Served(receipt) => Ok(M8OwnerExecution {
-                        request_node_id: receipt.request_observation().node_id().to_string(),
-                        serve_node_id: receipt.serve_observation().node_id().to_string(),
+                        request_observation: receipt.request_observation().clone(),
                         serve_observation: receipt.serve_observation().clone(),
                         outcome: receipt.outcome().clone(),
                     }),
@@ -2677,11 +3765,14 @@ impl M8ExecutionBackend {
 
     fn evaluate_designated(
         &mut self,
+        evaluator_locus: &str,
         request: M8DesignatedEvaluationRequest,
         context: M8LocalDesignatedTraceContext,
     ) -> Result<M8DesignatedEvaluation, M8BackendFailure> {
         match self {
-            Self::St(runtime) => runtime
+            Self::St(sessions) => sessions
+                .get_mut(evaluator_locus)
+                .ok_or_else(|| M8BackendFailure::unobserved(Sys4DiagnosticKind::BackendIneligible))?
                 .evaluate_designated_with_context(request, context)
                 .map(|(published, input_observation, evaluation_observation)| {
                     M8DesignatedEvaluation {
@@ -2707,6 +3798,7 @@ impl M8ExecutionBackend {
 
     fn consume_designated(
         &mut self,
+        consumer_locus: &str,
         request: M8ConsumeRequest,
         context: M8LocalDesignatedTraceContext,
     ) -> Result<
@@ -2717,7 +3809,9 @@ impl M8ExecutionBackend {
         M8BackendFailure,
     > {
         match self {
-            Self::St(runtime) => runtime
+            Self::St(sessions) => sessions
+                .get_mut(consumer_locus)
+                .ok_or_else(|| M8BackendFailure::unobserved(Sys4DiagnosticKind::BackendIneligible))?
                 .consume_published_value_with_context(request, context)
                 .map_err(M8BackendFailure::observed),
             Self::Ow1(worker) => worker
@@ -2732,12 +3826,16 @@ impl M8ExecutionBackend {
     /// context; SYS-4 only places it in the fabric causality graph.
     fn read_owner_int_with_context(
         &mut self,
+        source_locus: &str,
         key: M8StateKey,
         source_ref: SourceRef,
         context: M8LocalDesignatedTraceContext,
     ) -> Result<Option<(i64, M8LocalTraceObservation)>, Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => Ok(runtime.read_owner_int_with_context(key, source_ref, context)),
+            Self::St(sessions) => Ok(sessions
+                .get_mut(source_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .read_owner_int_with_context(key, source_ref, context)),
             Self::Ow1(worker) => worker
                 .read_owner_int_with_context(key, source_ref, context)
                 .map_err(map_worker_failure),
@@ -2746,11 +3844,15 @@ impl M8ExecutionBackend {
 
     fn has_designated_publication_id(
         &self,
+        locus: &str,
         value_name: &str,
         value_id: &str,
     ) -> Result<bool, Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => Ok(runtime.has_designated_publication_id(value_name, value_id)),
+            Self::St(sessions) => Ok(sessions
+                .get(locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .has_designated_publication_id(value_name, value_id)),
             Self::Ow1(worker) => worker
                 .has_designated_publication_id(value_name, value_id)
                 .map_err(map_worker_failure),
@@ -2759,11 +3861,14 @@ impl M8ExecutionBackend {
 
     fn validate_designated_non_consuming(
         &mut self,
+        consumer_locus: &str,
         request: M8ConsumeRequest,
         context: M8LocalDesignatedTraceContext,
     ) -> Result<String, Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => runtime
+            Self::St(sessions) => sessions
+                .get_mut(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
                 .validate_published_value_non_consuming(request, context)
                 .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
             Self::Ow1(worker) => worker
@@ -2772,20 +3877,81 @@ impl M8ExecutionBackend {
         }
     }
 
-    fn local_trace_snapshot(&self) -> Option<M8LocalTrace> {
+    fn local_trace_snapshot(&self, locus: &str) -> Option<(String, M8LocalTrace)> {
         match self {
-            Self::St(runtime) => Some(runtime.trace()),
-            Self::Ow1(worker) => worker.local_trace_snapshot().ok(),
+            Self::St(sessions) => sessions
+                .get(locus)
+                .map(|runtime| (locus.to_string(), runtime.trace())),
+            Self::Ow1(worker) => worker
+                .local_trace_snapshot()
+                .ok()
+                .map(|trace| ("ow1".to_string(), trace)),
+        }
+    }
+
+    fn save_local_cuts(
+        &mut self,
+        cut_id: &str,
+    ) -> Result<BTreeMap<String, M8LocalCut>, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => Ok(sessions
+                .iter_mut()
+                .map(|(locus, runtime)| {
+                    (
+                        locus.clone(),
+                        runtime.save_local_cut(format!("{cut_id}:{locus}")),
+                    )
+                })
+                .collect()),
+            // A SYS-4 whole-fabric cut has not yet acquired an acknowledged
+            // worker-cut command.  Fail closed rather than extracting the
+            // worker-owned M8 runtime through the coordinator.
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn restore_local_cuts(
+        &mut self,
+        cuts: &BTreeMap<String, M8LocalCut>,
+        live_authority: &crate::m8_runtime_authority::M8AuthorityState,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => {
+                if sessions.len() != cuts.len()
+                    || !sessions.keys().all(|locus| cuts.contains_key(locus))
+                    || !cuts
+                        .values()
+                        .all(|cut| cut.authority_inventory() == live_authority)
+                {
+                    return Err(Sys4DiagnosticKind::ProgramProjectionMismatch);
+                }
+                for (locus, runtime) in sessions {
+                    let cut = cuts
+                        .get(locus)
+                        .expect("validated session cut inventory is total");
+                    let floor = M8LiveFloor::for_restoration_with_live_authority(
+                        cut,
+                        live_authority.clone(),
+                    );
+                    runtime
+                        .try_restore_local_cut(cut, &floor)
+                        .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected)?;
+                }
+                Ok(())
+            }
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
         }
     }
 
     fn designated_publication_snapshot(&self, value_name: &str) -> Option<String> {
         match self {
-            Self::St(runtime) => runtime
-                .designated_result_store()
-                .published_values(value_name)
-                .first()
-                .map(|value| format!("{value:?}")),
+            Self::St(sessions) => sessions.values().find_map(|runtime| {
+                runtime
+                    .designated_result_store()
+                    .published_values(value_name)
+                    .first()
+                    .map(|value| format!("{value:?}"))
+            }),
             Self::Ow1(worker) => worker
                 .designated_publication_snapshot(value_name)
                 .ok()
@@ -2795,10 +3961,14 @@ impl M8ExecutionBackend {
 
     fn replace_designated_input_receipts(
         &mut self,
+        evaluator_locus: &str,
         receipts: M8InputReceiptSet,
     ) -> Result<(), Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => {
+            Self::St(sessions) => {
+                let runtime = sessions
+                    .get_mut(evaluator_locus)
+                    .ok_or(Sys4DiagnosticKind::BackendIneligible)?;
                 runtime.replace_designated_input_receipts(receipts);
                 Ok(())
             }
@@ -2808,13 +3978,73 @@ impl M8ExecutionBackend {
         }
     }
 
+    fn import_designated_publication(
+        &mut self,
+        consumer_locus: &str,
+        publication: M8PublishedDesignatedValue,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Option<M8LocalTraceObservation>, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => {
+                let source_ref = publication.source_ref().clone();
+                sessions
+                    .get_mut(consumer_locus)
+                    .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                    .import_designated_publication(publication, source_ref, context)
+                    .map_err(|_| Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch)
+            }
+            Self::Ow1(worker) => worker
+                .import_designated_publication_with_context(publication, context)
+                .map_err(map_worker_failure)?
+                .map_err(|_| Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch),
+        }
+    }
+
+    /// Validate publication provenance and visibility/redaction against the
+    /// consumer session's admitted M8 plan before the carrier can reach M9,
+    /// M8 import, cache, or consumption.
+    fn validates_generated_designated_publication(
+        &self,
+        consumer_locus: &str,
+        publication: M8PublishedDesignatedValue,
+    ) -> Result<bool, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => Ok(sessions
+                .get(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .accepts_generated_designated_publication(&publication)),
+            Self::Ow1(worker) => worker
+                .validates_generated_designated_publication(publication)
+                .map_err(map_worker_failure),
+        }
+    }
+
+    #[cfg(test)]
+    fn observer_safe_session(&self, locus: &str) -> Option<M8LocalSessionObserver> {
+        match self {
+            Self::St(sessions) => sessions
+                .get(locus)
+                .map(|runtime| runtime.observer_safe_session()),
+            // OW1 has exactly one worker-owned M8 session.  Its redacted
+            // observer snapshot remains available only at that semantic
+            // worker locus; other fabric loci never acquire a surrogate
+            // partition from the physical worker.
+            Self::Ow1(worker) if worker.evidence().target_owner().as_str() == locus => {
+                worker.observer_safe_session().ok()
+            }
+            Self::Ow1(_) => None,
+        }
+    }
+
     fn refresh_authority(
         &mut self,
         generation: &M9AuthorityGeneration,
     ) -> Result<(), Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => {
-                runtime.refresh_m9_authority_state(generation.authority_state());
+            Self::St(sessions) => {
+                for runtime in sessions.values_mut() {
+                    runtime.refresh_m9_authority_state(generation.authority_state());
+                }
                 Ok(())
             }
             Self::Ow1(worker) => worker
@@ -2831,7 +4061,10 @@ impl M8ExecutionBackend {
         consumer: &str,
     ) -> Sys4Result<()> {
         match self {
-            Self::St(runtime) => {
+            Self::St(sessions) => {
+                let runtime = sessions.get_mut(consumer).ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible)
+                })?;
                 runtime.arm_designated_consume_rejection(M8LocalDesignatedTraceContext::new(
                     envelope_id,
                     "m8-test-armed",
@@ -2856,7 +4089,10 @@ impl M8ExecutionBackend {
         owner_locus: &str,
     ) -> Sys4Result<()> {
         match self {
-            Self::St(runtime) => {
+            Self::St(sessions) => {
+                let runtime = sessions.get_mut(owner_locus).ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible)
+                })?;
                 runtime.arm_owner_operation_rejection(
                     M8LocalDesignatedTraceContext::new(
                         envelope_id,
@@ -2897,7 +4133,10 @@ impl M8ExecutionBackend {
         tick: &str,
     ) -> Sys4Result<()> {
         match self {
-            Self::St(runtime) => {
+            Self::St(sessions) => {
+                let runtime = sessions.get_mut(evaluator_locus).ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible)
+                })?;
                 runtime.arm_designated_evaluation_rejection(
                     M8LocalDesignatedTraceContext::new(
                         envelope_id,
@@ -2962,6 +4201,438 @@ impl M8BackendTestSupport<'_> {
     }
 }
 
+/// Test/devtools evidence derived from the actual M8 sessions which back an
+/// ST fabric.  It deliberately contains no authority, witness, credential,
+/// payload, or raw M8 identifier material.
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8RuntimePartitionEvidence {
+    partitions: BTreeMap<String, M8RuntimePartition>,
+}
+
+#[cfg(test)]
+impl M8RuntimePartitionEvidence {
+    pub(crate) const fn is_observer_safe(&self) -> bool {
+        true
+    }
+
+    pub(crate) fn locus_names(&self) -> Vec<String> {
+        self.partitions.keys().cloned().collect()
+    }
+
+    pub(crate) fn partition(&self, locus: &str) -> Option<&M8RuntimePartition> {
+        self.partitions.get(locus)
+    }
+
+    pub(crate) fn changed_partitions_since(&self, before: &Self) -> Vec<String> {
+        self.partitions
+            .iter()
+            .filter(|(locus, current)| before.partitions.get(*locus) != Some(*current))
+            .map(|(locus, _)| locus.clone())
+            .collect()
+    }
+
+    pub(crate) fn all_m8_trace_occurrence_ids(&self) -> Vec<String> {
+        self.partitions
+            .values()
+            .flat_map(|partition| {
+                partition
+                    .trace_occurrences
+                    .iter()
+                    .map(|occurrence| occurrence.fabric_qualified_id.clone())
+            })
+            .collect()
+    }
+
+    pub(crate) fn all_m8_trace_occurrence_ids_are_unique(&self) -> bool {
+        let ids = self.all_m8_trace_occurrence_ids();
+        ids.iter().collect::<BTreeSet<_>>().len() == ids.len()
+    }
+
+    pub(crate) fn all_m8_trace_occurrences_resolve_in(
+        &self,
+        actual_trace: &ActualM8Trace,
+        causality: &CausalityGraph,
+    ) -> bool {
+        self.partitions.values().all(|partition| {
+            partition.trace_occurrences.iter().all(|occurrence| {
+                actual_trace
+                    .nodes
+                    .iter()
+                    .find(|node| node.node_id == occurrence.fabric_qualified_id)
+                    .is_some_and(|node| node.kind() == occurrence.kind())
+                    && causality.contains_occurrence(occurrence.fabric_qualified_id())
+            })
+        })
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8RuntimePartition {
+    session_id: String,
+    partition_id: String,
+    state_inventory: M8RuntimeStateInventory,
+    publication_inventory: M8RuntimePublicationInventory,
+    trace_occurrences: Vec<M8RuntimeOccurrence>,
+}
+
+#[cfg(test)]
+impl M8RuntimePartition {
+    fn from_m8_session(
+        locus: &str,
+        observer: M8LocalSessionObserver,
+        fabric_node_ids: &BTreeMap<String, String>,
+        request_ids: &BTreeMap<String, String>,
+        dependencies: &BTreeMap<String, Vec<String>>,
+    ) -> Self {
+        let trace_occurrences: Vec<_> = observer
+            .trace_observations()
+            .iter()
+            .map(|observation| {
+                let node_id = fabric_node_ids
+                    .get(observation.node_id())
+                    .cloned()
+                    .expect("refreshed M8 session retains each observer row's fabric identity");
+                M8RuntimeOccurrence {
+                    fabric_qualified_id: node_id.clone(),
+                    kind: observation.kind(),
+                    m8_publication_id: observation.m8_publication_id().to_string(),
+                    envelope_id: observation.envelope_id().to_string(),
+                    operation_id: observation.operation_id().to_string(),
+                    edge_ref: observation.edge_ref().to_string(),
+                    evaluator_locus: observation.evaluator_locus().to_string(),
+                    consumer_locus: observation.consumer_locus().to_string(),
+                    request_id: request_ids.get(&node_id).cloned(),
+                    qualified_dependency_graph: QualifiedM8DependencyGraph::for_root(
+                        node_id,
+                        dependencies,
+                    ),
+                    observer_safe_read_key_refs: if observation.kind()
+                        == M8LocalTraceKind::OwnerRead
+                    {
+                        observer.owner_read_key_refs_for_node(observation.node_id())
+                    } else {
+                        Vec::new()
+                    },
+                }
+            })
+            .collect();
+        let publications = trace_occurrences
+            .iter()
+            .filter(|occurrence| {
+                !occurrence.m8_publication_id.is_empty()
+                    && matches!(
+                        occurrence.kind,
+                        M8LocalTraceKind::DesignatedValuePublished
+                            | M8LocalTraceKind::DesignatedPublicationImported
+                    )
+            })
+            .map(|occurrence| (occurrence.m8_publication_id.clone(), occurrence.clone()))
+            .collect();
+        Self {
+            session_id: format!("sys4-m8-session:{locus}"),
+            partition_id: format!("sys4-m8-partition:{locus}"),
+            state_inventory: M8RuntimeStateInventory {
+                key_refs: observer.state_key_refs().to_vec(),
+                state_digest: observer.state_digest().to_string(),
+            },
+            publication_inventory: M8RuntimePublicationInventory {
+                publications,
+                published_value_refs: observer.published_value_refs().to_vec(),
+            },
+            trace_occurrences,
+        }
+    }
+
+    pub(crate) fn session_id(&self) -> &str {
+        &self.session_id
+    }
+
+    pub(crate) fn partition_id(&self) -> &str {
+        &self.partition_id
+    }
+
+    pub(crate) fn authoritative_state_key_refs(&self) -> Vec<String> {
+        self.state_inventory.key_refs()
+    }
+
+    pub(crate) fn state_digest(&self) -> &str {
+        self.state_inventory.state_digest()
+    }
+
+    pub(crate) fn state_inventory(&self) -> &M8RuntimeStateInventory {
+        &self.state_inventory
+    }
+
+    pub(crate) fn publication_inventory(&self) -> &M8RuntimePublicationInventory {
+        &self.publication_inventory
+    }
+
+    pub(crate) fn m8_trace_occurrences_for_operation(
+        &self,
+        operation: &str,
+    ) -> M8RuntimeOccurrences {
+        M8RuntimeOccurrences(
+            self.trace_occurrences
+                .iter()
+                .filter(|occurrence| occurrence.operation_id() == operation)
+                .cloned()
+                .collect(),
+        )
+    }
+
+    pub(crate) fn m8_trace_occurrences_by_kind(
+        &self,
+        kind: M8LocalTraceKind,
+    ) -> M8RuntimeOccurrences {
+        M8RuntimeOccurrences(
+            self.trace_occurrences
+                .iter()
+                .filter(|occurrence| occurrence.kind() == kind)
+                .cloned()
+                .collect(),
+        )
+    }
+
+    pub(crate) fn m8_trace_occurrence_count_for_operation(
+        &self,
+        operation: &str,
+        kind: M8LocalTraceKind,
+    ) -> usize {
+        self.m8_trace_occurrences_for_operation(operation)
+            .count_kind(kind)
+    }
+
+    pub(crate) fn has_m8_trace_occurrences_for_operation(&self, operation: &str) -> bool {
+        !self
+            .m8_trace_occurrences_for_operation(operation)
+            .is_empty()
+    }
+
+    pub(crate) fn single_m8_trace_occurrence_for_operation(
+        &self,
+        operation: &str,
+        kind: M8LocalTraceKind,
+    ) -> &M8RuntimeOccurrence {
+        let matches: Vec<_> = self
+            .trace_occurrences
+            .iter()
+            .filter(|occurrence| {
+                occurrence.operation_id() == operation && occurrence.kind() == kind
+            })
+            .collect();
+        assert_eq!(
+            matches.len(),
+            1,
+            "expected exactly one matching M8 occurrence"
+        );
+        matches[0]
+    }
+
+    pub(crate) fn single_m8_trace_occurrence_for_request(
+        &self,
+        request_id: &str,
+        kind: M8LocalTraceKind,
+    ) -> &M8RuntimeOccurrence {
+        let matches: Vec<_> = self
+            .trace_occurrences
+            .iter()
+            .filter(|occurrence| {
+                occurrence.request_id.as_deref() == Some(request_id) && occurrence.kind() == kind
+            })
+            .collect();
+        assert_eq!(
+            matches.len(),
+            1,
+            "expected exactly one request-keyed M8 occurrence"
+        );
+        matches[0]
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8RuntimeStateInventory {
+    key_refs: Vec<String>,
+    state_digest: String,
+}
+
+#[cfg(test)]
+impl M8RuntimeStateInventory {
+    pub(crate) const fn is_derived_from_m8_session(&self) -> bool {
+        true
+    }
+
+    pub(crate) fn key_refs(&self) -> Vec<String> {
+        self.key_refs.clone()
+    }
+
+    pub(crate) fn state_digest(&self) -> &str {
+        &self.state_digest
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct M8RuntimePublicationInventory {
+    publications: BTreeMap<String, M8RuntimeOccurrence>,
+    published_value_refs: Vec<String>,
+}
+
+#[cfg(test)]
+impl M8RuntimePublicationInventory {
+    pub(crate) const fn is_derived_from_m8_session(&self) -> bool {
+        true
+    }
+
+    pub(crate) fn published_value_refs(&self) -> &[String] {
+        &self.published_value_refs
+    }
+
+    pub(crate) fn contains_publication_id(&self, publication_id: &str) -> bool {
+        self.publications.contains_key(publication_id)
+    }
+
+    pub(crate) fn publication(&self, publication_id: &str) -> Option<&M8RuntimeOccurrence> {
+        self.publications.get(publication_id)
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8RuntimeOccurrence {
+    fabric_qualified_id: String,
+    kind: M8LocalTraceKind,
+    m8_publication_id: String,
+    envelope_id: String,
+    operation_id: String,
+    edge_ref: String,
+    evaluator_locus: String,
+    consumer_locus: String,
+    request_id: Option<String>,
+    qualified_dependency_graph: QualifiedM8DependencyGraph,
+    observer_safe_read_key_refs: Vec<String>,
+}
+
+#[cfg(test)]
+impl M8RuntimeOccurrence {
+    pub(crate) fn fabric_qualified_id(&self) -> &str {
+        &self.fabric_qualified_id
+    }
+
+    pub(crate) fn node_id(&self) -> &str {
+        &self.fabric_qualified_id
+    }
+
+    pub(crate) const fn kind(&self) -> M8LocalTraceKind {
+        self.kind
+    }
+
+    pub(crate) fn m8_publication_id(&self) -> &str {
+        &self.m8_publication_id
+    }
+
+    pub(crate) fn envelope_id(&self) -> &str {
+        &self.envelope_id
+    }
+
+    pub(crate) fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    pub(crate) fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+
+    pub(crate) fn evaluator_locus(&self) -> &str {
+        &self.evaluator_locus
+    }
+
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+
+    pub(crate) fn qualified_dependency_graph(&self) -> &QualifiedM8DependencyGraph {
+        &self.qualified_dependency_graph
+    }
+
+    pub(crate) fn observer_safe_read_key_refs(&self) -> Vec<String> {
+        self.observer_safe_read_key_refs.clone()
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct QualifiedM8DependencyGraph {
+    root: String,
+    predecessors: BTreeMap<String, Vec<String>>,
+}
+
+#[cfg(test)]
+impl QualifiedM8DependencyGraph {
+    fn for_root(root: String, all_predecessors: &BTreeMap<String, Vec<String>>) -> Self {
+        let mut pending = vec![root.clone()];
+        let mut predecessors = BTreeMap::new();
+        while let Some(node) = pending.pop() {
+            if predecessors.contains_key(&node) {
+                continue;
+            }
+            let node_predecessors = all_predecessors.get(&node).cloned().unwrap_or_default();
+            pending.extend(node_predecessors.iter().cloned());
+            predecessors.insert(node, node_predecessors);
+        }
+        Self { root, predecessors }
+    }
+
+    pub(crate) fn reaches(&self, predecessor: &str) -> bool {
+        let mut pending = self
+            .predecessors
+            .get(&self.root)
+            .cloned()
+            .unwrap_or_default();
+        let mut seen = BTreeSet::new();
+        while let Some(current) = pending.pop() {
+            if current == predecessor {
+                return true;
+            }
+            if seen.insert(current.clone())
+                && let Some(next) = self.predecessors.get(&current)
+            {
+                pending.extend(next.iter().cloned());
+            }
+        }
+        false
+    }
+}
+
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct M8RuntimeOccurrences(Vec<M8RuntimeOccurrence>);
+
+#[cfg(test)]
+impl M8RuntimeOccurrences {
+    pub(crate) const fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+
+    pub(crate) const fn len(&self) -> usize {
+        self.0.len()
+    }
+
+    pub(crate) fn single(&self) -> &M8RuntimeOccurrence {
+        assert_eq!(self.0.len(), 1, "expected exactly one M8 occurrence");
+        &self.0[0]
+    }
+
+    pub(crate) fn count_kind(&self, kind: M8LocalTraceKind) -> usize {
+        self.0
+            .iter()
+            .filter(|occurrence| occurrence.kind() == kind)
+            .count()
+    }
+}
+
 fn map_worker_failure(failure: Ow1WorkerFailure) -> Sys4DiagnosticKind {
     match failure {
         Ow1WorkerFailure::Designated(diagnostics) => {
@@ -3015,11 +4686,18 @@ impl CachedDelivery {
     }
 }
 
+#[derive(Clone)]
 pub(crate) struct M9AuthorityLifecycle {
     publisher: M9AuthoritySuccessorPublisher,
 }
 
 impl M9AuthorityLifecycle {
+    fn matches_generation_for_restore(&self, generation: &M9AuthorityGeneration) -> bool {
+        self.publisher
+            .current_generation_for_restore()
+            .matches_for_restore(generation)
+    }
+
     fn transition(
         &mut self,
         value_name: &str,
@@ -3178,10 +4856,24 @@ pub(crate) struct LocalFabric {
     backend: M8ExecutionBackend,
     authority_generation: M9AuthorityGeneration,
     authority_lifecycle: M9AuthorityLifecycle,
+    authority_live_floor: M9AuthorityLiveFloor,
     trace: FabricTrace,
     m8_trace: FabricM8Trace,
     actual_m8_trace: ActualM8Trace,
     m8_local_runtime_trace: M8LocalTrace,
+    m8_trace_offsets: BTreeMap<String, usize>,
+    m8_qualified_trace_nodes: BTreeMap<String, BTreeMap<String, String>>,
+    // The backend trace may be one physical OW1 history, while this fabric
+    // trace is a semantic per-locus projection.  Keep the exact dependency
+    // projection assigned when each raw row first becomes visible so later
+    // handler outcomes cannot reintroduce worker-sequencing edges.
+    m8_qualified_trace_dependencies: BTreeMap<String, BTreeMap<String, Vec<String>>>,
+    // Raw M8 node identity is scoped to a physical session. In OW1 a single
+    // session serves multiple semantic loci, so retain the locus that caused
+    // each actual row before projecting dependencies.
+    m8_raw_node_loci: BTreeMap<String, BTreeMap<String, String>>,
+    m8_locus_trace_sequences: BTreeMap<String, u64>,
+    m8_locus_sessions: BTreeMap<String, String>,
     causality: CausalityGraph,
     next_endpoint_occurrence: u64,
     route_faults: BTreeSet<String>,
@@ -3226,13 +4918,13 @@ impl LocalFabric {
                 Sys4DiagnosticKind::ProgramProjectionMismatch,
             ));
         }
-        if !matches!(
-            program.backend_eligibility(backend_profile),
-            BackendEligibility::Eligible
-        ) {
-            return Err(Sys4DispatchDiagnostics::one(
-                Sys4DiagnosticKind::BackendIneligible,
-            ));
+        if let BackendEligibility::Ineligible { reason } =
+            program.backend_eligibility(backend_profile)
+        {
+            let mut diagnostics =
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible);
+            diagnostics.context.backend_ineligibility_reason = Some(reason);
+            return Err(diagnostics);
         }
         let mut loci = BTreeMap::new();
         for locus in program.locus_names() {
@@ -3257,19 +4949,32 @@ impl LocalFabric {
                 .local_store
                 .set_int(state, index, field, *value);
         }
-        let mut m8_seed = M8LocalRuntimeSeed::new()
-            .with_authority_state(admission.authority_generation.authority_state());
-        for ((_, state, index, field), value) in &admission.initial_state_seed.ints {
-            m8_seed =
-                m8_seed.with_owner_int(M8StateKey::indexed_field(state, index, field), *value);
-        }
-        // A designated evaluator must receive its source-owner inputs through
-        // generated endpoints at dispatch time.  In particular, boot must not
-        // manufacture an input receipt from the state seed.
-        m8_seed = m8_seed.with_designated_input_receipts(M8InputReceiptSet::new());
-        let runtime = M8LocalRuntime::from_admitted(admission.instance, m8_seed);
+        let session_for_locus = |locus: &str| {
+            let mut seed = M8LocalRuntimeSeed::new()
+                .with_authority_state(admission.authority_generation.authority_state());
+            for ((seed_locus, state, index, field), value) in &admission.initial_state_seed.ints {
+                if seed_locus == locus {
+                    seed =
+                        seed.with_owner_int(M8StateKey::indexed_field(state, index, field), *value);
+                }
+            }
+            // A designated evaluator receives source-owner inputs only after
+            // the generated receipt carrier is dequeued. Boot never mints one
+            // from a seed, even when this locus owns unrelated state.
+            seed = seed.with_designated_input_receipts(M8InputReceiptSet::new());
+            M8LocalRuntime::from_admitted(admission.instance.clone(), seed)
+        };
         let backend = match backend_profile {
-            BackendProfile::St => M8ExecutionBackend::St(Box::new(runtime)),
+            BackendProfile::St => M8ExecutionBackend::St(
+                program
+                    .locus_names()
+                    .into_iter()
+                    .map(|locus| {
+                        let runtime = session_for_locus(&locus);
+                        (locus, Box::new(runtime))
+                    })
+                    .collect(),
+            ),
             BackendProfile::Ow1 => {
                 // SYS-3 has already admitted OW1 only when one logical locus
                 // combines semantic owner and designated source-owner duties.
@@ -3289,6 +4994,7 @@ impl LocalFabric {
                     .ok_or_else(|| {
                         Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible)
                     })?;
+                let runtime = session_for_locus(owner.as_str());
                 M8ExecutionBackend::Ow1(Ow1WorkerBackend::spawn(owner, runtime))
             }
         };
@@ -3313,10 +5019,17 @@ impl LocalFabric {
             authority_lifecycle: M9AuthorityLifecycle {
                 publisher: admission.authority_successor,
             },
+            authority_live_floor: admission.authority_live_floor,
             trace: FabricTrace::default(),
             m8_trace: FabricM8Trace::default(),
             actual_m8_trace: ActualM8Trace::default(),
             m8_local_runtime_trace: M8LocalTrace::default(),
+            m8_trace_offsets: BTreeMap::new(),
+            m8_qualified_trace_nodes: BTreeMap::new(),
+            m8_qualified_trace_dependencies: BTreeMap::new(),
+            m8_raw_node_loci: BTreeMap::new(),
+            m8_locus_trace_sequences: BTreeMap::new(),
+            m8_locus_sessions: BTreeMap::new(),
             causality: CausalityGraph::default(),
             next_endpoint_occurrence: 0,
             route_faults: BTreeSet::new(),
@@ -3345,6 +5058,171 @@ impl LocalFabric {
                 .collect(),
         }
     }
+
+    /// Save a bounded, process-local SYS-4 cut.  The per-locus M8 snapshots
+    /// remain the source of truth for imported designated publications;
+    /// SYS-4 retains only their sealed carrier/receipt identities for cache
+    /// replay.  OW1 deliberately fails closed until it has an acknowledged
+    /// worker-cut command rather than exposing worker-owned mutable state.
+    pub(crate) fn save_local_cut(&mut self, cut_id: impl Into<String>) -> Sys4Result<Sys4LocalCut> {
+        let cut_id = cut_id.into();
+        let m8_cuts = match self.backend.save_local_cuts(&cut_id) {
+            Ok(cuts) => cuts,
+            Err(Sys4DiagnosticKind::BackendIneligible)
+                if self.backend.profile() == BackendProfile::Ow1 =>
+            {
+                let mut diagnostics =
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible);
+                diagnostics.context.backend_ineligibility_reason =
+                    Some(BackendIneligibilityReason::Ow1WorkerCutDeferred);
+                return Err(diagnostics);
+            }
+            Err(kind) => return Err(Sys4DispatchDiagnostics::one(kind)),
+        };
+        let imported_designated_publication_state = ImportedDesignatedPublicationState {
+            entries: self
+                .cache
+                .values()
+                .map(|cached| {
+                    (
+                        cached.semantic_identity.clone(),
+                        cached.delivery_id.clone(),
+                        cached.sealed_delivery_binding_digest.clone(),
+                    )
+                })
+                .collect(),
+        };
+        let designated_receipt_state = DesignatedReceiptState {
+            entries: self
+                .cache
+                .values()
+                .map(|cached| {
+                    (
+                        cached.semantic_identity.clone(),
+                        cached.delivery_id.clone(),
+                        cached.sealed_delivery_binding.logical_tick_id().to_string(),
+                    )
+                })
+                .collect(),
+        };
+        let loci: Vec<_> = self.program.locus_names();
+        for locus in loci {
+            self.refresh_m8_local_runtime_trace(&locus);
+        }
+        Ok(Sys4LocalCut {
+            cut_id,
+            program_identity: self.program.checked_program_identity().clone(),
+            program_fingerprint: self.program.projected_fingerprint(),
+            backend_profile: self.backend.profile(),
+            loci: self
+                .loci
+                .iter()
+                .map(|(locus, runtime)| (locus.clone(), LocusRuntimeCut::capture(runtime)))
+                .collect(),
+            m8_cuts,
+            authority_generation: self.authority_generation.clone(),
+            authority_lifecycle: self.authority_lifecycle.clone(),
+            authority_live_floor: self.authority_live_floor.clone(),
+            trace: self.trace.clone(),
+            route_faults: self.route_faults.clone(),
+            in_transit_faults: self.in_transit_faults.clone(),
+            completed_receipts: self.completed_receipts.clone(),
+            local_store_read_audits: self.local_store_read_audits.clone(),
+            cache: self.cache.clone(),
+            consumption_state: self.consumption_state.clone(),
+            evaluator_publication_bindings: self.evaluator_publication_bindings.clone(),
+            imported_designated_publication_state,
+            designated_receipt_state,
+            m8_trace: self.m8_trace.clone(),
+            actual_m8_trace: self.actual_m8_trace.clone(),
+            m8_local_runtime_trace: self.m8_local_runtime_trace.clone(),
+            m8_trace_offsets: self.m8_trace_offsets.clone(),
+            m8_qualified_trace_nodes: self.m8_qualified_trace_nodes.clone(),
+            m8_qualified_trace_dependencies: self.m8_qualified_trace_dependencies.clone(),
+            m8_raw_node_loci: self.m8_raw_node_loci.clone(),
+            m8_locus_trace_sequences: self.m8_locus_trace_sequences.clone(),
+            m8_locus_sessions: self.m8_locus_sessions.clone(),
+            causality: self.causality.clone(),
+            next_endpoint_occurrence: self.next_endpoint_occurrence,
+            next_request: self.next_request,
+        })
+    }
+
+    pub(crate) fn restore_local_cut(
+        program: FabricProgram,
+        admission: SealedFabricAdmission,
+        backend_profile: BackendProfile,
+        cut: &Sys4LocalCut,
+    ) -> Sys4Result<Self> {
+        validate_sys4_local_cut(&program, backend_profile, cut)?;
+        // Re-check and hold the shared monotone floor for the whole restore
+        // critical section. Preflight alone is insufficient: another fabric
+        // could otherwise install a successor between validation and the M8
+        // candidate restore below.
+        let live_floor = cut.authority_live_floor.clone();
+        let Some(_floor_guard) = live_floor.guard_matching(&cut.authority_generation) else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let mut fabric = Self::bootstrap(program, admission, backend_profile)?;
+        fabric
+            .backend
+            .restore_local_cuts(&cut.m8_cuts, &cut.authority_generation.authority_state())
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        for (locus, locus_cut) in &cut.loci {
+            let runtime = fabric.loci.get_mut(locus).ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+            })?;
+            locus_cut.restore_into(runtime);
+        }
+        // This replacement happens only after every M8 session has restored
+        // into the fresh candidate.  A failed preflight or restore drops that
+        // candidate, so no partial fabric becomes observable.
+        fabric.authority_generation = cut.authority_generation.clone();
+        fabric.authority_lifecycle = cut.authority_lifecycle.clone();
+        fabric.authority_live_floor = live_floor.clone();
+        fabric.trace = cut.trace.clone();
+        fabric.route_faults = cut.route_faults.clone();
+        fabric.in_transit_faults = cut.in_transit_faults.clone();
+        fabric.completed_receipts = cut.completed_receipts.clone();
+        fabric.local_store_read_audits = cut.local_store_read_audits.clone();
+        fabric.cache = cut.cache.clone();
+        fabric.consumption_state = cut.consumption_state.clone();
+        fabric.evaluator_publication_bindings = cut.evaluator_publication_bindings.clone();
+        fabric.m8_trace = cut.m8_trace.clone();
+        fabric.actual_m8_trace = cut.actual_m8_trace.clone();
+        fabric.m8_local_runtime_trace = cut.m8_local_runtime_trace.clone();
+        fabric.m8_trace_offsets = cut.m8_trace_offsets.clone();
+        fabric.m8_qualified_trace_nodes = cut.m8_qualified_trace_nodes.clone();
+        fabric.m8_qualified_trace_dependencies = cut.m8_qualified_trace_dependencies.clone();
+        fabric.m8_raw_node_loci = cut.m8_raw_node_loci.clone();
+        fabric.m8_locus_trace_sequences = cut.m8_locus_trace_sequences.clone();
+        fabric.m8_locus_sessions = cut.m8_locus_sessions.clone();
+        fabric.causality = cut.causality.clone();
+        fabric.next_endpoint_occurrence = cut.next_endpoint_occurrence;
+        fabric.next_request = cut.next_request;
+        Ok(fabric)
+    }
+
+    /// Test-only interleaving seam: validate an old cut, let an independent
+    /// admitted fabric commit a successor through the same M9 floor, then
+    /// attempt the old restore. This never mutates a caller-owned fabric and
+    /// exercises the restore-side floor recheck rather than manufacturing an
+    /// authority generation in SYS-4.
+    #[cfg(test)]
+    pub(crate) fn for_test_restore_local_cut_with_authority_floor_interleaving(
+        program: FabricProgram,
+        admission: SealedFabricAdmission,
+        backend_profile: BackendProfile,
+        cut: &Sys4LocalCut,
+        transition: M9AuthorityTransition,
+    ) -> Sys4Result<Self> {
+        validate_sys4_local_cut(&program, backend_profile, cut)?;
+        let mut competing = Self::bootstrap(program.clone(), admission.clone(), backend_profile)?;
+        competing.apply_admitted_authority_lifecycle(transition)?;
+        Self::restore_local_cut(program, admission, backend_profile, cut)
+    }
     pub(crate) fn trace(&self) -> &FabricTrace {
         &self.trace
     }
@@ -3367,9 +5245,335 @@ impl LocalFabric {
         &self.m8_local_runtime_trace
     }
 
-    fn refresh_m8_local_runtime_trace(&mut self) {
-        if let Some(trace) = self.backend.local_trace_snapshot() {
-            self.m8_local_runtime_trace = trace;
+    /// Test-only partition evidence is assembled exclusively from the M8
+    /// sessions, rather than from SYS-4's observer projection.  This makes a
+    /// multi-owner ST admission mechanically distinguishable from a facade
+    /// layered over a single shared M8 runtime.
+    #[cfg(test)]
+    pub(crate) fn m8_partition_evidence(&self) -> M8RuntimePartitionEvidence {
+        let partitions = self
+            .program
+            .locus_names()
+            .into_iter()
+            .filter_map(|locus| {
+                self.backend.observer_safe_session(&locus).map(|observer| {
+                    let session_id = self
+                        .m8_locus_sessions
+                        .get(&locus)
+                        .cloned()
+                        .unwrap_or_else(|| locus.clone());
+                    let fabric_node_ids = self
+                        .m8_qualified_trace_nodes
+                        .get(&session_id)
+                        .cloned()
+                        .unwrap_or_default();
+                    let request_ids = self
+                        .actual_m8_trace
+                        .nodes
+                        .iter()
+                        .filter_map(|node| {
+                            node.request_id
+                                .as_ref()
+                                .map(|request_id| (node.node_id.clone(), request_id.clone()))
+                        })
+                        .collect();
+                    let dependencies = self
+                        .m8_qualified_trace_dependencies
+                        .get(&session_id)
+                        .cloned()
+                        .unwrap_or_default()
+                        .into_iter()
+                        .filter_map(|(raw, predecessors)| {
+                            fabric_node_ids
+                                .get(&raw)
+                                .cloned()
+                                .map(|node| (node, predecessors))
+                        })
+                        .collect();
+                    (
+                        locus.clone(),
+                        M8RuntimePartition::from_m8_session(
+                            &locus,
+                            observer,
+                            &fabric_node_ids,
+                            &request_ids,
+                            &dependencies,
+                        ),
+                    )
+                })
+            })
+            .collect();
+        M8RuntimePartitionEvidence { partitions }
+    }
+
+    fn refresh_m8_local_runtime_trace(&mut self, locus: &str) {
+        let Some((session_id, trace)) = self.backend.local_trace_snapshot(locus) else {
+            return;
+        };
+        let start = self
+            .m8_trace_offsets
+            .get(&session_id)
+            .copied()
+            .unwrap_or_default();
+        let observations = trace.observations();
+        let missing_raw_node_ids: Vec<_> = observations
+            .iter()
+            .skip(start)
+            .filter(|observation| {
+                !self
+                    .m8_qualified_trace_nodes
+                    .get(&session_id)
+                    .is_some_and(|known| known.contains_key(observation.node_id()))
+            })
+            .map(|observation| observation.node_id().to_string())
+            .collect();
+        for raw_node_id in missing_raw_node_ids {
+            let sequence = self
+                .m8_locus_trace_sequences
+                .entry(locus.to_string())
+                .or_default();
+            let qualified = format!("sys4-m8:{locus}:m8-fabric-trace-{sequence:020}");
+            *sequence += 1;
+            self.m8_qualified_trace_nodes
+                .entry(session_id.clone())
+                .or_default()
+                .insert(raw_node_id, qualified);
+        }
+        self.m8_locus_sessions
+            .insert(locus.to_string(), session_id.clone());
+        {
+            let raw_node_loci = self.m8_raw_node_loci.entry(session_id.clone()).or_default();
+            for observation in observations.iter().skip(start) {
+                raw_node_loci
+                    .entry(observation.node_id().to_string())
+                    .or_insert_with(|| {
+                        if self.backend.is_ow1() {
+                            Self::semantic_locus_for_m8_observation(locus, observation)
+                        } else {
+                            locus.to_string()
+                        }
+                    });
+            }
+        }
+        let new_dependency_projection: BTreeMap<_, _> = {
+            let raw_node_loci = self
+                .m8_raw_node_loci
+                .get(&session_id)
+                .expect("refreshed M8 session retains each raw node's semantic locus");
+            let known_nodes = self
+                .m8_qualified_trace_nodes
+                .get(&session_id)
+                .expect("refreshed M8 session retains fabric node registry");
+            observations
+                .iter()
+                .skip(start)
+                .map(|observation| {
+                    let semantic_locus = raw_node_loci
+                        .get(observation.node_id())
+                        .expect("new M8 row has a semantic locus");
+                    let dependencies = observation
+                        .predecessor_ids()
+                        .iter()
+                        .filter(|raw| raw_node_loci.get(*raw) == Some(semantic_locus))
+                        .filter_map(|raw| known_nodes.get(raw).cloned())
+                        .collect();
+                    (observation.node_id().to_string(), dependencies)
+                })
+                .collect()
+        };
+        self.m8_qualified_trace_dependencies
+            .entry(session_id.clone())
+            .or_default()
+            .extend(new_dependency_projection);
+        let known_nodes = self
+            .m8_qualified_trace_nodes
+            .get(&session_id)
+            .expect("refreshed M8 session retains fabric node registry");
+        let dependency_projection = self
+            .m8_qualified_trace_dependencies
+            .get(&session_id)
+            .expect("refreshed M8 session retains dependency projection");
+        self.m8_local_runtime_trace.append_fabric_qualified_delta(
+            &trace,
+            start,
+            known_nodes,
+            dependency_projection,
+        );
+        for observation in observations.into_iter().skip(start) {
+            let qualified = self.fabric_qualified_m8_observation(&session_id, &observation);
+            let node_id = qualified.node_id().to_string();
+            if !self.causality.contains_occurrence(&node_id) {
+                self.causality
+                    .record(node_id.clone(), qualified.predecessor_ids().to_vec());
+            }
+            // Published designated values are identified by their declared
+            // Core operation.  The context semantic identity instead names
+            // the later consumer cache key, so it must not overwrite the
+            // evaluator-side publication identity in the actual M8 trace.
+            let semantic_identity = match qualified.kind() {
+                M8LocalTraceKind::DesignatedValuePublished
+                | M8LocalTraceKind::DesignatedEvaluationIdempotent => {
+                    Some(qualified.operation_id().to_string())
+                }
+                _ => (!qualified.semantic_identity().is_empty())
+                    .then(|| qualified.semantic_identity().to_string()),
+            };
+            self.actual_m8_trace.append(
+                node_id,
+                format!("{:?}", qualified.kind()),
+                None,
+                semantic_identity,
+                (!qualified.consumer_locus().is_empty())
+                    .then(|| qualified.consumer_locus().to_string()),
+                qualified.predecessor_ids().to_vec(),
+            );
+        }
+        self.m8_trace_offsets.insert(session_id, trace.len());
+    }
+
+    /// A sole OW1 worker can execute M8 rows for more than one semantic
+    /// locus.  Preserve M8 predecessors when they remain in the same
+    /// semantic locus, but never turn physical worker FIFO order into a
+    /// cross-locus Mir dependency.  ST's independently owned sessions need
+    /// no suppression, so this classification is applied only to OW1 rows.
+    fn semantic_locus_for_m8_observation(
+        default_locus: &str,
+        observation: &M8LocalTraceObservation,
+    ) -> String {
+        match observation.kind() {
+            M8LocalTraceKind::DesignatedPublicationImported
+            | M8LocalTraceKind::DesignatedConsumerAuthorityValidated
+            | M8LocalTraceKind::DesignatedValueConsumed
+            | M8LocalTraceKind::DesignatedConsumptionRejected
+            | M8LocalTraceKind::DesignatedCacheValidated => {
+                if !observation.consumer_locus().is_empty() {
+                    observation.consumer_locus().to_string()
+                } else {
+                    default_locus.to_string()
+                }
+            }
+            M8LocalTraceKind::DesignatedInputReceiptValidated
+            | M8LocalTraceKind::DesignatedValuePublished
+            | M8LocalTraceKind::DesignatedEvaluationIdempotent
+            | M8LocalTraceKind::DesignatedEvaluationRejected => {
+                if !observation.evaluator_locus().is_empty() {
+                    observation.evaluator_locus().to_string()
+                } else {
+                    default_locus.to_string()
+                }
+            }
+            // A remote input read executes at its source owner but belongs to
+            // neither that owner's RMW lane nor the evaluator's M8 decision
+            // lane.  Give it a stable generated service lane so OW1 physical
+            // FIFO cannot manufacture an S-RMW→read or read→E-evaluation M8
+            // dependency.  The explicit generated carrier/receipt supplies
+            // the semantic S→E order instead.
+            M8LocalTraceKind::OwnerRead if !observation.evaluator_locus().is_empty() => {
+                format!(
+                    "designated-source-read:{}→{}",
+                    observation.owner_locus(),
+                    observation.evaluator_locus()
+                )
+            }
+            _ => {
+                if !observation.owner_locus().is_empty() {
+                    observation.owner_locus().to_string()
+                } else {
+                    default_locus.to_string()
+                }
+            }
+        }
+    }
+
+    fn fabric_qualified_m8_observation(
+        &self,
+        session_id: &str,
+        observation: &M8LocalTraceObservation,
+    ) -> M8LocalTraceObservation {
+        let known_nodes = self
+            .m8_qualified_trace_nodes
+            .get(session_id)
+            .expect("refreshed M8 session retains fabric node registry");
+        let node_id = known_nodes
+            .get(observation.node_id())
+            .cloned()
+            .expect("refreshed M8 observation has a fabric node identity");
+        let dependencies = self
+            .m8_qualified_trace_dependencies
+            .get(session_id)
+            .and_then(|known| known.get(observation.node_id()))
+            .cloned()
+            .expect("refreshed M8 observation retains dependency projection");
+        observation.fabric_rekeyed(node_id, dependencies)
+    }
+
+    fn fabric_qualified_m8_observation_for_locus(
+        &self,
+        locus: &str,
+        observation: &M8LocalTraceObservation,
+    ) -> M8LocalTraceObservation {
+        let session_id = self
+            .m8_locus_sessions
+            .get(locus)
+            .expect("M8 result is qualified only after its session refresh");
+        self.fabric_qualified_m8_observation(session_id, observation)
+    }
+
+    /// Associate every M8 row that carries this exact immutable envelope
+    /// context with the fabric request.  In particular, owner queue reads are
+    /// emitted by M8 between the returned enqueue/serve rows, so request
+    /// evidence must come from the row's context rather than an operation-wide
+    /// summary or a latest-observation lookup.
+    fn associate_m8_envelope_request(&mut self, envelope: &MailboxEnvelope) {
+        let observations: Vec<_> = self
+            .m8_local_runtime_trace
+            .observations()
+            .into_iter()
+            .filter(|observation| observation.envelope_id() == envelope.envelope_id())
+            .collect();
+        for observation in observations {
+            let node_id = observation.node_id().to_string();
+            self.causality
+                .record(node_id.clone(), observation.predecessor_ids().to_vec());
+            self.actual_m8_trace.append(
+                node_id,
+                format!("{:?}", observation.kind()),
+                Some(envelope.request_id.clone()),
+                (!observation.semantic_identity().is_empty())
+                    .then(|| observation.semantic_identity().to_string()),
+                (!observation.consumer_locus().is_empty())
+                    .then(|| observation.consumer_locus().to_string()),
+                observation.predecessor_ids().to_vec(),
+            );
+        }
+    }
+
+    fn fabric_qualified_m8_node_for_locus(&self, locus: &str, raw_node_id: &str) -> String {
+        let session_id = self
+            .m8_locus_sessions
+            .get(locus)
+            .expect("M8 node is qualified only after its session refresh");
+        self.m8_qualified_trace_nodes
+            .get(session_id)
+            .and_then(|known| known.get(raw_node_id))
+            .cloned()
+            .expect("refreshed M8 node has a fabric identity")
+    }
+
+    /// Backend outcomes retain the raw M8 observation until their owner
+    /// session has been refreshed.  Once refreshed, SYS-4 can only expose the
+    /// fabric-qualified occurrence, never a second raw-id view of the same
+    /// M8-owned event.
+    fn fabric_qualified_m8_failure_for_locus(
+        &self,
+        locus: &str,
+        failure: M8BackendFailure,
+    ) -> M8BackendFailure {
+        M8BackendFailure {
+            kind: failure.kind,
+            observation: failure.observation.map(|observation| {
+                Box::new(self.fabric_qualified_m8_observation_for_locus(locus, &observation))
+            }),
         }
     }
 
@@ -3379,7 +5583,9 @@ impl LocalFabric {
 
     pub(crate) fn m8_owner_queue_depth(&self, owner_locus: &str) -> usize {
         match &self.backend {
-            M8ExecutionBackend::St(runtime) => runtime.pending_owner_fifo(owner_locus).len(),
+            M8ExecutionBackend::St(sessions) => sessions
+                .get(owner_locus)
+                .map_or(0, |runtime| runtime.pending_owner_fifo(owner_locus).len()),
             M8ExecutionBackend::Ow1(_) => 0,
         }
     }
@@ -3420,9 +5626,25 @@ impl LocalFabric {
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         }
+        // Clone the Arc before taking its guard so Rust can keep the floor
+        // lock while this fabric mutates its disjoint backend/generation
+        // fields. A competing fabric must therefore lose before any local M8
+        // authority inventory is refreshed.
+        let live_floor = self.authority_live_floor.clone();
+        let Some(mut floor_guard) = live_floor.guard_matching(&self.authority_generation) else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        if !floor_guard.accepts_successor(&self.authority_generation, &transition.generation) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
         self.backend
             .refresh_authority(&transition.generation)
             .map_err(Sys4DispatchDiagnostics::one)?;
+        floor_guard.commit_successor(&transition.generation);
         self.authority_generation = transition.generation;
         Ok(())
     }
@@ -3584,9 +5806,18 @@ impl LocalFabric {
     ) -> Sys4Result<MailboxEnvelope> {
         let envelope_id = self.next_mailbox_token("envelope");
         let carrier_id = self.next_mailbox_token("carrier");
+        // A cache retry is consumer-local execution, but it still retains the
+        // exact E→C delivery edge and sealed publication binding that it
+        // revalidates. Record that local ingress as an endpoint pair so a
+        // whole-fabric cut never contains an unaccounted pending inbox.
+        let source_record_id = self.next_mailbox_token("cache-retry-source-record");
+        let source_dispatch_occurrence = self.next_mailbox_token("cache-retry-source-dispatch");
         let mailbox_record_id = self.next_mailbox_token("inbox-record");
         let occurrence = self.next_mailbox_token("inbox-enqueue");
-        self.causality.record(occurrence.clone(), Vec::new());
+        self.causality
+            .record(source_dispatch_occurrence.clone(), Vec::new());
+        self.causality
+            .record(occurrence.clone(), vec![source_dispatch_occurrence.clone()]);
         let m8_publication_id = immutable_delivery_binding
             .as_ref()
             .map(|binding| binding.m8_publication_id().to_string());
@@ -3625,9 +5856,53 @@ impl LocalFabric {
             logical_tick_frontier,
             payload,
         };
+        let source_record = EndpointCarrierRecord {
+            record_id: source_record_id,
+            carrier_id: envelope.carrier_id.clone(),
+            request_id: envelope.request_id.clone(),
+            edge_kind: envelope.edge_kind,
+            edge_ref: envelope.edge_ref.clone(),
+            source_locus: envelope.source_locus.clone(),
+            target_locus: envelope.target_locus.clone(),
+            enqueue_occurrence_id: None,
+            dequeue_occurrence_id: Some(source_dispatch_occurrence),
+            request_carrier_id: None,
+            input_receipt_carrier_id: None,
+            source_ref: envelope.source_ref.clone(),
+            core_ref: envelope.core_ref.clone(),
+            source_fragment_ref: envelope.source_fragment_ref.clone(),
+            target_fragment_ref: envelope.target_fragment_ref.clone(),
+        };
+        let target_record = EndpointCarrierRecord {
+            record_id: envelope.mailbox_record_id.clone(),
+            carrier_id: envelope.carrier_id.clone(),
+            request_id: envelope.request_id.clone(),
+            edge_kind: envelope.edge_kind,
+            edge_ref: envelope.edge_ref.clone(),
+            source_locus: envelope.source_locus.clone(),
+            target_locus: envelope.target_locus.clone(),
+            enqueue_occurrence_id: Some(envelope.mailbox_enqueue_occurrence_id.clone()),
+            dequeue_occurrence_id: None,
+            request_carrier_id: None,
+            input_receipt_carrier_id: None,
+            source_ref: envelope.source_ref.clone(),
+            core_ref: envelope.core_ref.clone(),
+            source_fragment_ref: envelope.source_fragment_ref.clone(),
+            target_fragment_ref: envelope.target_fragment_ref.clone(),
+        };
+        self.loci
+            .get_mut(edge.source_locus())
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::WrongTargetLocus))?
+            .outgoing_endpoint
+            .append(source_record);
         self.loci
             .get_mut(edge.target_locus())
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::WrongTargetLocus))?
+            .incoming_endpoint
+            .append(target_record);
+        self.loci
+            .get_mut(edge.target_locus())
+            .expect("validated target retains its local inbox")
             .incoming_mailbox
             .pending
             .push_back(envelope.clone());
@@ -3939,7 +6214,7 @@ impl LocalFabric {
             let mut moved = envelope.clone();
             match fault.kind {
                 FaultInjectionKind::StripIntPayload => match &mut moved.payload {
-                    MailboxPayload::DesignatedDelivery { value } => *value = None,
+                    MailboxPayload::DesignatedDelivery { value, .. } => *value = None,
                     MailboxPayload::DesignatedInputReceipt { source_value, .. } => {
                         *source_value = None
                     }
@@ -3955,6 +6230,19 @@ impl LocalFabric {
                 }
                 FaultInjectionKind::CorruptM8PublicationId => {
                     moved.m8_publication_id = fault.replacement_m8_publication_id;
+                }
+                FaultInjectionKind::CorruptSourceRef => {
+                    moved.source_ref = fault
+                        .replacement_source_ref
+                        .expect("source-ref fault retains its replacement");
+                }
+                FaultInjectionKind::CorruptVisibility => {
+                    if let Some(binding) = &mut moved.immutable_delivery_binding {
+                        binding.m8_visibility_label = fault
+                            .replacement_visibility_label
+                            .expect("visibility fault retains its replacement");
+                        moved.immutable_delivery_digest = Some(format!("{binding:?}"));
+                    }
                 }
                 FaultInjectionKind::CorruptCacheBindingDigest => {
                     moved.immutable_delivery_digest =
@@ -4238,7 +6526,8 @@ impl LocalFabric {
                 let execution = match self.backend.enqueue_and_serve(locus, request, context) {
                     Ok(execution) => execution,
                     Err(failure) => {
-                        self.refresh_m8_local_runtime_trace();
+                        self.refresh_m8_local_runtime_trace(locus);
+                        let failure = self.fabric_qualified_m8_failure_for_locus(locus, failure);
                         let mut diagnostic =
                             self.quarantine(locus, &envelope, failure.kind, &envelope.request_id);
                         diagnostic.context.endpoint_dequeue_occurrence_id =
@@ -4267,30 +6556,35 @@ impl LocalFabric {
                 // before interpreting either a successful RMW or an M8
                 // declared failure so both backends expose the exact rows that
                 // were returned by the typed backend outcome.
-                self.refresh_m8_local_runtime_trace();
-                self.causality.record(
-                    execution.request_node_id.clone(),
-                    vec![dequeue_occurrence.clone()],
+                self.refresh_m8_local_runtime_trace(locus);
+                self.associate_m8_envelope_request(&envelope);
+                let request_observation = self.fabric_qualified_m8_observation_for_locus(
+                    locus,
+                    &execution.request_observation,
                 );
-                self.causality.record(
-                    execution.serve_node_id.clone(),
-                    vec![execution.request_node_id.clone()],
-                );
+                let serve_observation = self
+                    .fabric_qualified_m8_observation_for_locus(locus, &execution.serve_observation);
+                let request_node_id = request_observation.node_id().to_string();
+                let serve_node_id = serve_observation.node_id().to_string();
+                self.causality
+                    .record(request_node_id.clone(), vec![dequeue_occurrence.clone()]);
+                self.causality
+                    .record(serve_node_id.clone(), vec![request_node_id.clone()]);
                 self.actual_m8_trace.append(
-                    execution.request_node_id.clone(),
+                    request_node_id.clone(),
                     "OwnerRequest",
                     Some(envelope.request_id.clone()),
                     Some(envelope.operation_id.clone()),
                     Some(locus.to_string()),
-                    self.causality.predecessor_ids(&execution.request_node_id),
+                    self.causality.predecessor_ids(&request_node_id),
                 );
                 self.actual_m8_trace.append(
-                    execution.serve_node_id.clone(),
+                    serve_node_id.clone(),
                     "OwnerServe",
                     Some(envelope.request_id.clone()),
                     Some(envelope.operation_id.clone()),
                     Some(locus.to_string()),
-                    self.causality.predecessor_ids(&execution.serve_node_id),
+                    self.causality.predecessor_ids(&serve_node_id),
                 );
                 if execution.outcome.failure().is_some() {
                     let mut diagnostic = self.quarantine(
@@ -4301,9 +6595,8 @@ impl LocalFabric {
                     );
                     diagnostic.context.endpoint_dequeue_occurrence_id =
                         Some(dequeue_occurrence.clone());
-                    diagnostic.context.m8_trace_node_id = Some(execution.serve_node_id.clone());
-                    diagnostic.context.backend_m8_failure =
-                        Some(Box::new(execution.serve_observation.clone()));
+                    diagnostic.context.m8_trace_node_id = Some(serve_node_id.clone());
+                    diagnostic.context.backend_m8_failure = Some(Box::new(serve_observation));
                     return Err(diagnostic);
                 }
                 let mut reads = Vec::new();
@@ -4406,7 +6699,7 @@ impl LocalFabric {
                     None,
                     None,
                     None,
-                    vec![execution.serve_node_id.clone()],
+                    vec![serve_node_id.clone()],
                 )?;
                 let mut step = base(
                     LocusM9Validation::Owner {
@@ -4414,8 +6707,8 @@ impl LocalFabric {
                     },
                     None,
                 );
-                step.m8_request_node_id = Some(execution.request_node_id);
-                step.m8_serve_node_id = Some(execution.serve_node_id);
+                step.m8_request_node_id = Some(request_node_id);
+                step.m8_serve_node_id = Some(serve_node_id);
                 step.reply_envelope_id = Some(reply.envelope_id);
                 Ok(step)
             }
@@ -4496,6 +6789,7 @@ impl LocalFabric {
                 let (source_value, read_observation) = match self
                     .backend
                     .read_owner_int_with_context(
+                        locus,
                         source_key.clone(),
                         read.source_ref().clone(),
                         read_context,
@@ -4510,11 +6804,13 @@ impl LocalFabric {
                         ));
                     }
                     Err(kind) => {
-                        self.refresh_m8_local_runtime_trace();
+                        self.refresh_m8_local_runtime_trace(locus);
                         return Err(self.quarantine(locus, &envelope, kind, &envelope.request_id));
                     }
                 };
-                self.refresh_m8_local_runtime_trace();
+                self.refresh_m8_local_runtime_trace(locus);
+                let read_observation =
+                    self.fabric_qualified_m8_observation_for_locus(locus, &read_observation);
                 let audit = LocalStoreReadAudit {
                     occurrence_id: read_observation.node_id().to_string(),
                     reads: vec![RuntimeStoreRead::int(
@@ -4630,7 +6926,10 @@ impl LocalFabric {
                         )
                         .with_int_value(value),
                 );
-                if let Err(kind) = self.backend.replace_designated_input_receipts(receipts) {
+                if let Err(kind) = self
+                    .backend
+                    .replace_designated_input_receipts(locus, receipts)
+                {
                     return Err(self.quarantine(locus, &envelope, kind, &envelope.request_id));
                 }
                 let authority = self
@@ -4680,6 +6979,7 @@ impl LocalFabric {
                 .with_evaluator_locus(locus)
                 .with_edge_ref(delivery_edge.edge_ref());
                 let execution = match self.backend.evaluate_designated(
+                    locus,
                     M8DesignatedEvaluationRequest::for_value(&envelope.operation_id)
                         .with_tick(
                             M8DesignatedTick::new(tick.clone())
@@ -4690,7 +6990,8 @@ impl LocalFabric {
                 ) {
                     Ok(execution) => execution,
                     Err(failure) => {
-                        self.refresh_m8_local_runtime_trace();
+                        self.refresh_m8_local_runtime_trace(locus);
+                        let failure = self.fabric_qualified_m8_failure_for_locus(locus, failure);
                         let mut diagnostic =
                             self.quarantine(locus, &envelope, failure.kind, &envelope.request_id);
                         diagnostic.context.endpoint_dequeue_occurrence_id =
@@ -4715,11 +7016,18 @@ impl LocalFabric {
                         return Err(diagnostic);
                     }
                 };
+                self.refresh_m8_local_runtime_trace(locus);
                 let published = execution.published;
-                let input_node = execution.input_observation.node_id().to_string();
+                let input_observation = self
+                    .fabric_qualified_m8_observation_for_locus(locus, &execution.input_observation);
+                let evaluation_observation = self.fabric_qualified_m8_observation_for_locus(
+                    locus,
+                    &execution.evaluation_observation,
+                );
+                let input_node = input_observation.node_id().to_string();
                 self.causality
                     .record(input_node.clone(), vec![dequeue_occurrence.clone()]);
-                let evaluation_node = execution.evaluation_observation.node_id().to_string();
+                let evaluation_node = evaluation_observation.node_id().to_string();
                 self.causality
                     .record(evaluation_node.clone(), vec![input_node.clone()]);
                 self.actual_m8_trace.append(
@@ -4763,6 +7071,10 @@ impl LocalFabric {
                         "{:?}",
                         delivery_edge.carrier_contract().visibility_policy()
                     ),
+                    m8_visibility_label: published.visibility_label().as_str().to_string(),
+                    m8_visibility_class: published.visibility_label().security_class(),
+                    m8_redaction: published.redaction().as_str().to_string(),
+                    m8_source_ref: SourceRefView::new(published.source_ref()),
                     m8_publication_id: published.value_id().to_string(),
                     logical_tick_id: tick.clone(),
                     logical_tick_frontier: frontier.clone(),
@@ -4773,6 +7085,7 @@ impl LocalFabric {
                     &envelope.request_id,
                     MailboxPayload::DesignatedDelivery {
                         value: published.int_value(),
+                        publication: Box::new(published.clone()),
                     },
                     None,
                     Some(envelope.carrier_id.clone()),
@@ -4798,7 +7111,6 @@ impl LocalFabric {
                 {
                     queued.m8_evaluation_node_id = Some(evaluation_node.clone());
                 }
-                self.refresh_m8_local_runtime_trace();
                 self.trace.append(
                     format!("publish:{}", published.value_id()),
                     Some(published.value_id().to_string()),
@@ -4839,9 +7151,25 @@ impl LocalFabric {
             }
             (
                 CommunicationEdgeKind::DesignatedResultDelivery,
-                MailboxPayload::DesignatedDelivery { value },
+                MailboxPayload::DesignatedDelivery { .. },
             ) => {
                 let binding = envelope.immutable_delivery_binding().clone();
+                let expected_edge = self
+                    .program
+                    .projection
+                    .communication_plan()
+                    .edges()
+                    .iter()
+                    .find(|edge| edge.edge_ref() == envelope.edge_ref)
+                    .expect("dequeued generated carrier retains its projected edge");
+                if envelope.source_ref != expected_edge.source_ref() {
+                    return Err(self.quarantine(
+                        locus,
+                        &envelope,
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                        &envelope.request_id,
+                    ));
+                }
                 if binding.redaction_policy
                     != format!("{:?}", envelope.carrier_contract.visibility_policy())
                 {
@@ -4860,27 +7188,7 @@ impl LocalFabric {
                         &envelope.request_id,
                     ));
                 }
-                if !self.evaluator_publication_bindings.matches(
-                    &envelope.operation_id,
-                    envelope.m8_publication_id(),
-                    &binding,
-                ) {
-                    return Err(self.quarantine(
-                        locus,
-                        &envelope,
-                        Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
-                        &envelope.request_id,
-                    ));
-                }
-                let value = value.ok_or_else(|| {
-                    self.quarantine(
-                        locus,
-                        &envelope,
-                        Sys4DiagnosticKind::MissingTypedDesignatedValue,
-                        &envelope.request_id,
-                    )
-                })?;
-                self.consume_delivery(locus, &envelope, &dequeue_occurrence, value, binding, false)
+                self.consume_delivery(locus, &envelope, &dequeue_occurrence, false)
                     .map(|mut step| {
                         step.consumed_envelope_id = envelope.envelope_id.clone();
                         step.locus_dequeue_record_id = envelope.mailbox_record_id.clone();
@@ -4905,10 +7213,31 @@ impl LocalFabric {
         locus: &str,
         envelope: &MailboxEnvelope,
         dequeue_occurrence: &str,
-        value: i64,
-        binding: SealedDeliveryBinding,
         cache_retry: bool,
     ) -> Sys4Result<LocusStep> {
+        let (value, publication) = match &envelope.payload {
+            MailboxPayload::DesignatedDelivery {
+                value: Some(value),
+                publication,
+            } => (*value, publication.as_ref()),
+            MailboxPayload::DesignatedDelivery { value: None, .. } => {
+                return Err(self.quarantine(
+                    locus,
+                    envelope,
+                    Sys4DiagnosticKind::MissingTypedDesignatedValue,
+                    &envelope.request_id,
+                ));
+            }
+            _ => {
+                return Err(self.quarantine(
+                    locus,
+                    envelope,
+                    Sys4DiagnosticKind::M8ExecutionRejected,
+                    &envelope.request_id,
+                ));
+            }
+        };
+        let binding = envelope.immutable_delivery_binding().clone();
         let semantic_identity = envelope.semantic_identity().to_string();
         // A fixed result version can legitimately make a second evaluator
         // occurrence idempotent, but it cannot make a new tick/frontier a
@@ -4940,16 +7269,84 @@ impl LocalFabric {
                 &envelope.request_id,
             ));
         }
-        let publication_exists = match self
-            .backend
-            .has_designated_publication_id(&envelope.operation_id, envelope.m8_publication_id())
+        if binding.m8_source_ref != publication.source_ref() {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                &envelope.request_id,
+            ));
+        }
+        if binding.m8_visibility_label != publication.visibility_label().as_str()
+            || binding.m8_visibility_class != publication.visibility_label().security_class()
         {
-            Ok(exists) => exists,
-            Err(kind) => {
-                return Err(self.quarantine(locus, envelope, kind, &envelope.request_id));
-            }
-        };
-        if !publication_exists {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::CarrierVisibilityMismatch,
+                &envelope.request_id,
+            ));
+        }
+        if binding.m8_redaction != publication.redaction().as_str()
+            || binding.redaction_policy
+                != format!("{:?}", envelope.carrier_contract.visibility_policy())
+        {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::CarrierRedactionMismatch,
+                &envelope.request_id,
+            ));
+        }
+        // A designated delivery is a sealed concrete publication, not a
+        // lookup of the evaluator's latest value.  Validate every value that
+        // crossed this exact endpoint before M9, M8 consumption, cache, or
+        // local semantic state can observe it.
+        let publication_matches_carrier = publication.value_name() == envelope.operation_id
+            && publication.value_id() == envelope.m8_publication_id()
+            && publication.evaluator() == envelope.source_locus
+            && publication.int_value() == Some(value)
+            && publication.logical_tick().id() == envelope.logical_tick_id()
+            && publication.logical_tick().input_frontier() == envelope.logical_tick_frontier()
+            && binding
+                .input_frontier()
+                .is_some_and(|frontier| frontier == publication.input_frontier())
+            && binding
+                .result_frontier()
+                .is_some_and(|frontier| frontier == publication.result_frontier())
+            && publication.result_version() == binding.result_version()
+            && binding
+                .policy_stamp()
+                .is_some_and(|stamp| stamp == publication.policy_stamp())
+            && envelope
+                .carrier_contract
+                .observation_policy()
+                .is_some_and(|policy| policy == publication.observation_policy());
+        if !publication_matches_carrier {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
+                &envelope.request_id,
+            ));
+        }
+        if !self.evaluator_publication_bindings.matches(
+            &envelope.operation_id,
+            envelope.m8_publication_id(),
+            &binding,
+        ) {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
+                &envelope.request_id,
+            ));
+        }
+        let admitted_m8_contract_matches = self
+            .backend
+            .validates_generated_designated_publication(locus, publication.clone())
+            .map_err(|kind| self.quarantine(locus, envelope, kind, &envelope.request_id))?;
+        if !admitted_m8_contract_matches {
             return Err(self.quarantine(
                 locus,
                 envelope,
@@ -4997,7 +7394,76 @@ impl LocalFabric {
                     &envelope.request_id,
                 )
             })?;
+        // Consumer authority must be checked before importing the payload:
+        // a revoked/missing membership, capability, or witness has no C-side
+        // M8 row, cache mutation, or publication materialization.
+        let mut imported_node_id = None;
+        if !cache_retry {
+            let import_context = M8LocalDesignatedTraceContext::new(
+                envelope.envelope_id(),
+                &semantic_identity,
+                locus,
+                envelope.m8_publication_id(),
+                envelope.logical_tick_id(),
+                envelope.logical_tick_frontier(),
+            )
+            .with_operation_id(&envelope.operation_id)
+            .with_evaluator_locus(&envelope.source_locus)
+            .with_edge_ref(&envelope.edge_ref);
+            let import_observation = match self.backend.import_designated_publication(
+                locus,
+                publication.clone(),
+                import_context,
+            ) {
+                Ok(observation) => observation,
+                Err(kind) => {
+                    self.refresh_m8_local_runtime_trace(locus);
+                    return Err(self.quarantine(locus, envelope, kind, &envelope.request_id));
+                }
+            };
+            self.refresh_m8_local_runtime_trace(locus);
+            if let Some(import_observation) = import_observation {
+                let import_observation =
+                    self.fabric_qualified_m8_observation_for_locus(locus, &import_observation);
+                let import_node = import_observation.node_id().to_string();
+                self.causality.record(
+                    import_node.clone(),
+                    vec![
+                        dequeue_occurrence.to_string(),
+                        envelope.m8_evaluation_node_id().to_string(),
+                    ],
+                );
+                self.actual_m8_trace.append(
+                    import_node.clone(),
+                    "DesignatedPublicationImported",
+                    Some(envelope.request_id.clone()),
+                    Some(semantic_identity.clone()),
+                    Some(locus.to_string()),
+                    self.causality.predecessor_ids(import_observation.node_id()),
+                );
+                imported_node_id = Some(import_node);
+            }
+        }
+        let publication_exists = match self.backend.has_designated_publication_id(
+            locus,
+            &envelope.operation_id,
+            envelope.m8_publication_id(),
+        ) {
+            Ok(exists) => exists,
+            Err(kind) => {
+                return Err(self.quarantine(locus, envelope, kind, &envelope.request_id));
+            }
+        };
+        if !publication_exists {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
+                &envelope.request_id,
+            ));
+        }
         let (consumed, consumption_observation) = match self.backend.consume_designated(
+            locus,
             M8ConsumeRequest::for_value(&envelope.operation_id)
                 .with_consumer(locus)
                 .with_delivery_id(envelope.m8_publication_id())
@@ -5015,7 +7481,8 @@ impl LocalFabric {
         ) {
             Ok(value) => value,
             Err(failure) => {
-                self.refresh_m8_local_runtime_trace();
+                self.refresh_m8_local_runtime_trace(locus);
+                let failure = self.fabric_qualified_m8_failure_for_locus(locus, failure);
                 let mut diagnostic =
                     self.quarantine(locus, envelope, failure.kind, &envelope.request_id);
                 diagnostic.context.endpoint_dequeue_occurrence_id =
@@ -5039,15 +7506,19 @@ impl LocalFabric {
                 return Err(diagnostic);
             }
         };
-        self.refresh_m8_local_runtime_trace();
+        self.refresh_m8_local_runtime_trace(locus);
+        let consumption_observation =
+            self.fabric_qualified_m8_observation_for_locus(locus, &consumption_observation);
         let node = consumption_observation.node_id().to_string();
-        self.causality.record(
-            node.clone(),
-            vec![
-                dequeue_occurrence.to_string(),
-                validation.occurrence_id().to_string(),
-            ],
-        );
+        let mut consumption_predecessors = vec![
+            dequeue_occurrence.to_string(),
+            validation.occurrence_id().to_string(),
+        ];
+        if let Some(import_node) = imported_node_id {
+            consumption_predecessors.push(import_node);
+        }
+        self.causality
+            .record(node.clone(), consumption_predecessors);
         self.actual_m8_trace.append(
             node.clone(),
             "DesignatedValueConsumed",
@@ -5241,9 +7712,10 @@ impl LocalFabric {
                     &envelope.request_id,
                 )
             })?;
-        let node = self
+        let raw_node = self
             .backend
             .validate_designated_non_consuming(
+                locus,
                 M8ConsumeRequest::for_value(&envelope.operation_id)
                     .with_consumer(locus)
                     .with_delivery_id(&cached.delivery_id)
@@ -5258,7 +7730,8 @@ impl LocalFabric {
                 ),
             )
             .map_err(|kind| self.quarantine(locus, envelope, kind, &envelope.request_id))?;
-        self.refresh_m8_local_runtime_trace();
+        self.refresh_m8_local_runtime_trace(locus);
+        let node = self.fabric_qualified_m8_node_for_locus(locus, &raw_node);
         self.causality.record(
             node.clone(),
             vec![
@@ -5521,6 +7994,8 @@ impl LocalFabric {
                         kind: fault.kind,
                         target_locus: fault.target_locus.clone(),
                         replacement_m8_publication_id: fault.replacement_m8_publication_id.clone(),
+                        replacement_source_ref: fault.replacement_source_ref.clone(),
+                        replacement_visibility_label: fault.replacement_visibility_label.clone(),
                     });
                 }
                 let fault_id = self.next_request_id();
@@ -5643,6 +8118,10 @@ fn projection_delivery_binding(
             .map(|value| format!("{value:?}")),
         visibility_policy: edge.carrier_contract().visibility_policy().clone(),
         redaction_policy: format!("{:?}", edge.carrier_contract().visibility_policy()),
+        m8_visibility_label: observed.m8_visibility_label.clone(),
+        m8_visibility_class: observed.m8_visibility_class,
+        m8_redaction: observed.m8_redaction.clone(),
+        m8_source_ref: observed.m8_source_ref.clone(),
         m8_publication_id: observed.m8_publication_id.clone(),
         logical_tick_id: observed.logical_tick_id.clone(),
         logical_tick_frontier: observed.logical_tick_frontier.clone(),

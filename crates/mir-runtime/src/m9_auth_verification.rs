@@ -1464,6 +1464,10 @@ impl M9RuntimeExecutionSeam {
     pub(crate) fn test_real_admitted_sys4_fabric_seam(
         checked: &CheckedSurfaceV0,
     ) -> Result<Self, String> {
+        let owner = checked
+            .evaluations()
+            .iter()
+            .find(|evaluation| evaluation.owner_rmw_core().is_some());
         if let Some(designated) = checked
             .evaluations()
             .iter()
@@ -1472,6 +1476,25 @@ impl M9RuntimeExecutionSeam {
             let result = designated.result_name().ok_or_else(|| {
                 "SYS-4 designated evaluation lacks checked result name".to_string()
             })?;
+            if let Some(owner) = owner {
+                let owner_core = owner
+                    .owner_rmw_core()
+                    .expect("selected owner evaluation retains Core");
+                // This stays on the normal typed M9 route: the combined
+                // source needs both the owner RMW lineage and the designated
+                // remote-input release inventory.  Choosing only the latter
+                // would make SYS-4's projection-completeness check correctly
+                // reject an otherwise admitted combined program.
+                return Self::test_real_admitted_owner_and_designated_remote_input_seam_for_kernel(
+                    checked,
+                    owner.name(),
+                    owner.actor_authority_origin(),
+                    owner_core.owner_locus(),
+                    designated.name(),
+                    result,
+                    0,
+                );
+            }
             return Self::test_real_admitted_designated_seam_for_kernel(
                 checked,
                 designated.name(),
@@ -1481,13 +1504,9 @@ impl M9RuntimeExecutionSeam {
             );
         }
 
-        let owner = checked
-            .evaluations()
-            .iter()
-            .find(|evaluation| evaluation.owner_rmw_core().is_some())
-            .ok_or_else(|| {
-                "SYS-4 source has no admitted owner or designated fragment".to_string()
-            })?;
+        let owner = owner.ok_or_else(|| {
+            "SYS-4 source has no admitted owner or designated fragment".to_string()
+        })?;
         let owner_locus = owner
             .owner_rmw_core()
             .expect("selected owner evaluation retains Core")
@@ -1614,6 +1633,7 @@ impl M9RuntimeExecutionSeam {
             .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
             .ok_or_else(|| "kernel test source lacks AuthDeferred".to_string())?;
         let mut authority = base.authority_runtime();
+        let primary_principal = owners[0].1;
         let mut final_lineage = None;
         let mut remote_release_issued = false;
         for (owner_index, (operation, principal, owner_locus)) in owners.into_iter().enumerate() {
@@ -1720,41 +1740,6 @@ impl M9RuntimeExecutionSeam {
                 && !remote_release_issued
                 && dependency.source_owner_locus() == owner_locus
             {
-                let evaluation_capability = authority
-                    .authorize_capability(
-                        M9CapabilityGrantRequest::new(format!(
-                            "kernel-test-designated-evaluation:{evaluator}:{result}:{input_frontier}"
-                        ))
-                        .with_membership_ref(membership.ref_id())
-                        .with_scope(M9CapabilityScope::designated_evaluation(
-                            evaluator,
-                            result,
-                            input_frontier,
-                        ))
-                        .with_lineage_epoch(membership.epoch())
-                        .with_source_ref(auth_residual.source_ref().clone()),
-                    )
-                    .map_err(|diagnostics| {
-                        format!(
-                            "kernel test M9 designated capability: {:?}",
-                            diagnostics.primary().kind()
-                        )
-                    })?;
-                let _evaluation_witness = authority
-                    .materialize_witness(
-                        M9WitnessRequest::new(format!(
-                            "kernel-test-designated-evaluation-witness:{evaluator}:{result}:{input_frontier}"
-                        ))
-                        .with_membership_ref(membership.ref_id())
-                        .with_capability_ref(evaluation_capability.ref_id())
-                        .with_source_ref(auth_residual.source_ref().clone()),
-                    )
-                    .map_err(|diagnostics| {
-                        format!(
-                            "kernel test M9 designated witness: {:?}",
-                            diagnostics.primary().kind()
-                        )
-                    })?;
                 let read = dependency.typed_state_read();
                 let release_label = canonical_designated_remote_input_release_label(
                     read.namespace(),
@@ -1809,6 +1794,108 @@ impl M9RuntimeExecutionSeam {
             return Err(
                 "kernel test remote release source owner lacks admitted owner lineage".to_string(),
             );
+        }
+        // A combined owner+designated source still has three independent
+        // authority sites.  The owner loop above admits S and its source
+        // release; evaluator E and consumer C must be admitted through their
+        // own normal M9 memberships rather than borrowing S's lineage.
+        if let Some((evaluator, result, _, _, input_frontier)) = remote_dependency {
+            let evaluator_membership = test_kernel_issue_membership(
+                &mut authority,
+                primary_principal,
+                evaluator,
+                "epoch-evaluator-1",
+                auth_residual.name(),
+                auth_residual.source_ref(),
+            )?;
+            let evaluation_capability = authority
+                .authorize_capability(
+                    M9CapabilityGrantRequest::new(format!(
+                        "kernel-test-designated-evaluation:{evaluator}:{result}:{input_frontier}"
+                    ))
+                    .with_membership_ref(evaluator_membership.ref_id())
+                    .with_scope(M9CapabilityScope::designated_evaluation(
+                        evaluator,
+                        result,
+                        input_frontier,
+                    ))
+                    .with_lineage_epoch(evaluator_membership.epoch())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated capability: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let _evaluation_witness = authority
+                .materialize_witness(
+                    M9WitnessRequest::new(format!(
+                        "kernel-test-designated-evaluation-witness:{evaluator}:{result}:{input_frontier}"
+                    ))
+                    .with_membership_ref(evaluator_membership.ref_id())
+                    .with_capability_ref(evaluation_capability.ref_id())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated witness: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            if let Some(consumer_evaluation) = checked.evaluations().iter().find(|evaluation| {
+                evaluation
+                    .designated_result_consumer_core()
+                    .is_some_and(|core| core.evaluator() == evaluator && core.result() == result)
+            }) {
+                let consumer_core = consumer_evaluation
+                    .designated_result_consumer_core()
+                    .expect("selected designated consumer retains Core");
+                let consumer_locus = consumer_core.consumer_locus();
+                let consumer_membership = test_kernel_issue_membership(
+                    &mut authority,
+                    primary_principal,
+                    consumer_locus,
+                    "epoch-consumer-1",
+                    auth_residual.name(),
+                    auth_residual.source_ref(),
+                )?;
+                let consumer_capability = authority
+                    .authorize_capability(
+                        M9CapabilityGrantRequest::new(format!(
+                            "kernel-test-designated-consumption:{consumer_locus}:{evaluator}:{result}"
+                        ))
+                        .with_membership_ref(consumer_membership.ref_id())
+                        .with_scope(M9CapabilityScope::designated_consumption(
+                            consumer_locus,
+                            format!("{evaluator}.{result}"),
+                            consumer_core.result_version().value(),
+                        ))
+                        .with_lineage_epoch(consumer_membership.epoch())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated consumer capability: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+                let _consumer_witness = authority
+                    .materialize_witness(
+                        M9WitnessRequest::new(format!(
+                            "kernel-test-designated-consumption-witness:{consumer_locus}:{evaluator}:{result}"
+                        ))
+                        .with_membership_ref(consumer_membership.ref_id())
+                        .with_capability_ref(consumer_capability.ref_id())
+                        .with_source_ref(auth_residual.source_ref().clone()),
+                    )
+                    .map_err(|diagnostics| {
+                        format!(
+                            "kernel test M9 designated consumer witness: {:?}",
+                            diagnostics.primary().kind()
+                        )
+                    })?;
+            }
         }
         let (membership, contract_capability, contract_witness) = final_lineage
             .ok_or_else(|| "kernel test owner admission lacks final lineage".to_string())?;
@@ -2459,6 +2546,49 @@ impl M9RuntimeExecutionSeam {
     }
 }
 
+/// Test-only convenience around the normal M9 membership attestation and
+/// authentication sequence.  It deliberately returns the authority-owned
+/// membership fact rather than constructing a SYS-4-side inventory entry.
+#[cfg(test)]
+fn test_kernel_issue_membership(
+    authority: &mut M9AuthorityRuntime,
+    principal: &str,
+    locus: &str,
+    epoch: &str,
+    residual_name: &str,
+    residual_source_ref: &SourceRef,
+) -> Result<M9MembershipAuth, String> {
+    let incarnation = format!("incarnation:{principal}:{locus}:{epoch}");
+    let attestation = authority
+        .issue_membership_attestation(
+            principal,
+            locus,
+            epoch,
+            incarnation.clone(),
+            residual_name,
+            residual_source_ref.clone(),
+        )
+        .map_err(|diagnostics| {
+            format!(
+                "kernel test M9 membership attestation: {:?}",
+                diagnostics.primary().kind()
+            )
+        })?;
+    authority
+        .authenticate_membership(
+            M9MembershipRequest::new(principal, locus, epoch)
+                .with_incarnation(incarnation)
+                .with_auth_residual(residual_name, residual_source_ref.clone())
+                .with_issued_provider_attestation(attestation),
+        )
+        .map_err(|diagnostics| {
+            format!(
+                "kernel test M9 membership: {:?}",
+                diagnostics.primary().kind()
+            )
+        })
+}
+
 impl M9AuthorityGeneration {
     /// A kernel-reference profile has no M8 authority inventory.  It exists
     /// only for deterministic crate tests that do not enter an admitted M9
@@ -2495,6 +2625,19 @@ impl M9AuthorityGeneration {
 
     pub(crate) fn generation_ref(&self) -> &str {
         &self.generation_ref
+    }
+
+    /// Exact internal restore identity for a sealed M9 generation.  SYS-4
+    /// uses this only to bind a process-local cut to the M9-owned successor
+    /// lifecycle; it exposes neither credentials nor an authority minting
+    /// path.
+    pub(crate) fn matches_for_restore(&self, other: &Self) -> bool {
+        self.program_identity == other.program_identity
+            && self.generation == other.generation
+            && self.generation_ref == other.generation_ref
+            && self.authority_state == other.authority_state
+            && self.preserves_tombstones_from(other)
+            && other.preserves_tombstones_from(self)
     }
 
     pub(crate) fn authority_state(&self) -> M8AuthorityState {
@@ -2950,6 +3093,13 @@ impl M9AuthorityGeneration {
 }
 
 impl M9AuthoritySuccessorPublisher {
+    /// Clone the publisher's current sealed generation for an internal
+    /// process-local cut.  The publisher itself remains the only transition
+    /// authority after restore.
+    pub(crate) fn current_generation_for_restore(&self) -> M9AuthorityGeneration {
+        self.current.clone()
+    }
+
     pub(crate) fn current_inspection(&self) -> M9AuthorityInspection {
         self.current.sealed_inspection()
     }

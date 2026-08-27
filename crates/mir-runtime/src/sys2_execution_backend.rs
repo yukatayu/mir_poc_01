@@ -29,6 +29,9 @@ use crate::{
     semantic_runtime_kernel::{LocusRef, RequestIdentity},
 };
 
+#[cfg(test)]
+use crate::m8_runtime_local_cut::M8LocalSessionObserver;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum ExecutionProfile {
     St,
@@ -230,6 +233,15 @@ enum Ow1Command {
         context: Box<M8LocalDesignatedTraceContext>,
         reply: SyncSender<Result<Ow1ContextualDesignatedConsumption, Ow1WorkerFailure>>,
     },
+    ImportDesignatedPublicationWithContext {
+        publication: Box<M8PublishedDesignatedValue>,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<Result<Option<M8LocalTraceObservation>, ()>, Ow1WorkerFailure>>,
+    },
+    ValidateGeneratedDesignatedPublication {
+        publication: Box<M8PublishedDesignatedValue>,
+        reply: SyncSender<bool>,
+    },
     ValidateDesignatedNonConsuming {
         request: M8ConsumeRequest,
         context: Box<M8LocalDesignatedTraceContext>,
@@ -263,6 +275,10 @@ enum Ow1Command {
     },
     TraceSnapshot {
         reply: SyncSender<M8LocalTrace>,
+    },
+    #[cfg(test)]
+    ObserverSessionSnapshot {
+        reply: SyncSender<M8LocalSessionObserver>,
     },
     #[cfg(test)]
     ArmOwnerOperationRejection {
@@ -402,6 +418,41 @@ impl Ow1WorkerBackend {
             .map_err(|_| Ow1WorkerFailure::Disconnected)?
     }
 
+    /// Admit a generated evaluator→consumer carrier inside the sole
+    /// worker-owned M8 session.  The nested outcome is deliberate: a
+    /// conflicting exact publication is a typed semantic rejection, whereas
+    /// the outer outcome is worker/liveness failure.
+    pub(crate) fn import_designated_publication_with_context(
+        &self,
+        publication: M8PublishedDesignatedValue,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Result<Option<M8LocalTraceObservation>, ()>, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ImportDesignatedPublicationWithContext {
+            publication: Box::new(publication),
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    /// Query the worker-owned admitted M8 plan before a generated delivery is
+    /// imported.  The coordinator receives only a typed boolean, never the
+    /// worker's semantic state or publication payload.
+    pub(crate) fn validates_generated_designated_publication(
+        &self,
+        publication: M8PublishedDesignatedValue,
+    ) -> Result<bool, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ValidateGeneratedDesignatedPublication {
+            publication: Box::new(publication),
+            reply,
+        })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
     pub(crate) fn validate_designated_non_consuming(
         &self,
         request: M8ConsumeRequest,
@@ -497,6 +548,16 @@ impl Ow1WorkerBackend {
     pub(crate) fn local_trace_snapshot(&self) -> Result<M8LocalTrace, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::TraceSnapshot { reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    /// Test-only redacted observer view of the sole worker-owned M8 session.
+    /// This is a request/response snapshot from the worker, never an extracted
+    /// mutable runtime or a coordinator-owned mirror.
+    #[cfg(test)]
+    pub(crate) fn observer_safe_session(&self) -> Result<M8LocalSessionObserver, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ObserverSessionSnapshot { reply })?;
         receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
     }
 
@@ -651,6 +712,19 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                 let outcome = runtime.consume_published_value_with_context(request, *context);
                 let _ = reply.send(Ok(outcome));
             }
+            Ow1Command::ImportDesignatedPublicationWithContext {
+                publication,
+                context,
+                reply,
+            } => {
+                let source_ref = publication.source_ref().clone();
+                let outcome =
+                    runtime.import_designated_publication(*publication, source_ref, *context);
+                let _ = reply.send(Ok(outcome));
+            }
+            Ow1Command::ValidateGeneratedDesignatedPublication { publication, reply } => {
+                let _ = reply.send(runtime.accepts_generated_designated_publication(&publication));
+            }
             Ow1Command::ValidateDesignatedNonConsuming {
                 request,
                 context,
@@ -700,6 +774,10 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
             }
             Ow1Command::TraceSnapshot { reply } => {
                 let _ = reply.send(runtime.trace());
+            }
+            #[cfg(test)]
+            Ow1Command::ObserverSessionSnapshot { reply } => {
+                let _ = reply.send(runtime.observer_safe_session());
             }
             #[cfg(test)]
             Ow1Command::ArmOwnerOperationRejection { context, reply } => {

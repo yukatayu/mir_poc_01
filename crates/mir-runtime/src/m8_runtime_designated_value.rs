@@ -323,6 +323,13 @@ impl M8DesignatedTick {
     pub fn input_frontier(&self) -> &str {
         self.input_frontier.as_deref().unwrap_or("")
     }
+
+    /// Crate-internal transport refinement needs to retain the evaluator's
+    /// exact tick identity in a generated carrier.  The Surface does not see
+    /// this accessor and it does not create a new clock value.
+    pub(crate) fn id(&self) -> &str {
+        &self.id
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -722,6 +729,12 @@ impl M8PublishedDesignatedValue {
         &self.occurrence_id
     }
 
+    /// Provenance follows an evaluated value through the generated delivery
+    /// carrier; consumer-side import never invents a replacement source span.
+    pub(crate) fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+
     pub const fn input_security_class_join(&self) -> M8SecurityClass {
         self.input_security_class_join
     }
@@ -786,6 +799,36 @@ impl M8DesignatedResultStore {
             value,
         );
     }
+
+    /// Admit an already evaluated, generated delivery at a consumer-local M8
+    /// session.  The only accepted replay is structural equality with the
+    /// existing versioned publication; a same-key disagreement is never
+    /// merged or replaced.
+    pub(crate) fn import_exact(
+        &mut self,
+        value: M8PublishedDesignatedValue,
+    ) -> Result<M8ExactPublicationImport, ()> {
+        let key = M8PublishedValueKey {
+            value_name: value.value_name.clone(),
+            result_version: value.result_version,
+        };
+        match self.values.get(&key) {
+            Some(existing) if existing == &value => Ok(M8ExactPublicationImport::AlreadyPresent),
+            Some(_) => Err(()),
+            None => {
+                self.values.insert(key, value);
+                Ok(M8ExactPublicationImport::Inserted)
+            }
+        }
+    }
+}
+
+/// Result of a narrow generated-carrier publication import.  It never
+/// represents evaluation: a present equal value is an idempotent no-op.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum M8ExactPublicationImport {
+    Inserted,
+    AlreadyPresent,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -1281,6 +1324,24 @@ impl M8DesignatedRuntime {
             result_version,
             authority,
         })
+    }
+
+    /// Import an exact publication that arrived through a generated internal
+    /// carrier.  This is intentionally narrower than evaluation: it cannot
+    /// compute a value, issue authority, or replace a locally known version.
+    pub(crate) fn import_exact_publication(
+        &mut self,
+        publication: M8PublishedDesignatedValue,
+    ) -> Result<M8ExactPublicationImport, ()> {
+        let value_name = publication.value_name.clone();
+        let result_version = publication.result_version;
+        let outcome = self.result_store.import_exact(publication)?;
+        if matches!(outcome, M8ExactPublicationImport::Inserted) {
+            self.version_store
+                .versions
+                .insert(value_name, result_version);
+        }
+        Ok(outcome)
     }
 
     pub fn attach_presentation_interpolation(

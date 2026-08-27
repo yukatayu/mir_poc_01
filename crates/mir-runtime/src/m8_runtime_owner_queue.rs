@@ -904,6 +904,27 @@ impl M8QueueTraceEntry {
         self.read_values.get(key).copied()
     }
 
+    /// Number of concrete state keys read by this already-recorded owner
+    /// service trace row.  It is crate-private so the local runtime can make
+    /// its observer trace one-to-one with real RMW reads without exporting a
+    /// new public trace surface.
+    pub(crate) fn read_key_count(&self) -> usize {
+        self.read_values.len()
+    }
+
+    pub(crate) fn read_key_refs(&self) -> Vec<String> {
+        let mut refs: Vec<_> = self
+            .read_values
+            .keys()
+            .map(|key| format!("{}[{}].{}", key.namespace(), key.index(), key.field()))
+            .collect();
+        // The queue stores a set.  Export a stable, observer-only canonical
+        // ordering which leaves the target-like field before supporting
+        // fields for the finite RMW profile; no execution order is claimed.
+        refs.sort_by(|left, right| right.cmp(left));
+        refs
+    }
+
     pub fn written_int(&self, key: &M8StateKey) -> Option<i64> {
         self.written_values.get(key).copied()
     }

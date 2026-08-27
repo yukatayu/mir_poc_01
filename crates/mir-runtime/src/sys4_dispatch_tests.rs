@@ -26,7 +26,7 @@ use crate::{
         FabricReceipt, FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection,
         LocalFabric, MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue,
         SealedDeliveryBinding, SealedFabricAdmission, SourceAction, Sys4DiagnosticKind,
-        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4TraceEntry, Sys4TraceKind,
+        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut, Sys4TraceEntry, Sys4TraceKind,
     },
 };
 
@@ -93,6 +93,48 @@ fn four_locus_checked() -> CheckedSurfaceV0 {
     load_checked_fixture(FOUR_LOCUS_FIXTURE)
 }
 
+fn checked_inline(relative: &str, source: &str) -> CheckedSurfaceV0 {
+    check_and_elaborate_surface_v0(FixtureSource::new(relative, source.to_string()))
+        .expect("inline SYS-4 source is parsed, checked, and elaborated by the real M7 pipeline")
+}
+
+fn combined_owner_designated_checked() -> CheckedSurfaceV0 {
+    checked_inline(
+        "tests/inline/sys4_combined_owner_designated_same_source_owner.mir",
+        r#"
+module Combat.Sys4.CombinedOwnerDesignatedSameSourceOwner
+
+locus A
+locus S
+locus E
+locus C
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at A {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 1
+designated consume E.result at C
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#,
+    )
+}
+
 fn owner_endpoint_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["A", "S"])
 }
@@ -107,6 +149,10 @@ fn relation_only_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResul
 
 fn four_locus_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["A", "S", "T", "V"])
+}
+
+fn combined_owner_designated_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
+    project_fixture(checked, ["A", "S", "E", "C"])
 }
 
 fn fabric_program(projection: GlobalProjectionResult) -> FabricProgram {
@@ -188,6 +234,13 @@ fn boot_with_admission(
     backend: BackendProfile,
 ) -> LocalFabric {
     LocalFabric::bootstrap(program, admission, backend).expect("fabric bootstrap succeeds")
+}
+
+fn save_sys4_local_cut(
+    fabric: &mut LocalFabric,
+    cut_id: &str,
+) -> Result<Sys4LocalCut, Sys4DispatchDiagnostics> {
+    fabric.save_local_cut(cut_id)
 }
 
 fn assert_sys4_diag<T: Debug>(
@@ -758,6 +811,10 @@ fn publish_designated_action_with_tick(tick: &str) -> SourceAction {
 
 fn consume_designated_action() -> SourceAction {
     SourceAction::consume_designated_result("E.result")
+}
+
+fn owner_attack_action_with_target(operation: &str, target: &str) -> SourceAction {
+    SourceAction::owner_operation(operation).with_argument("target", target)
 }
 
 fn designated_replay_log() -> Vec<SourceAction> {
@@ -1553,6 +1610,210 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
         !compact_sys4.contains("St(Box<M8LocalRuntime>)"),
         "a single unpartitioned ST M8LocalRuntime cannot be the SYS-4 runtime shape for a four-locus two-owner fabric"
     );
+}
+
+#[test]
+fn sequential_st_owner_ops_retain_prior_write_dependency_but_ow1_physical_cross_locus_does_not() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut st = boot(&checked, program, BackendProfile::St);
+
+    let first = st
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("first same-owner operation dispatches");
+    let after_first = st.m8_partition_evidence();
+    let first_write = after_first
+        .partition("S")
+        .expect("S partition exists")
+        .single_m8_trace_occurrence_for_request(first.request_id(), M8LocalTraceKind::OwnerWrite);
+    assert_eq!(first_write.operation_id(), "attack");
+
+    let second = st
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("second same-owner operation dispatches");
+    let after_second = st.m8_partition_evidence();
+    let second_write = after_second
+        .partition("S")
+        .expect("S partition exists")
+        .single_m8_trace_occurrence_for_request(second.request_id(), M8LocalTraceKind::OwnerWrite);
+    assert_eq!(second_write.operation_id(), "attack");
+    assert!(
+        second_write
+            .qualified_dependency_graph()
+            .reaches(first_write.fabric_qualified_id()),
+        "the second same-owner/same-locus owner write must retain the first write as a semantic M8 predecessor"
+    );
+    assert!(
+        causality_reaches(
+            st.causality(),
+            second_write.fabric_qualified_id(),
+            first_write.fabric_qualified_id()
+        ),
+        "SYS-4 causality must mirror the qualified M8 dependency edge from second write back to first write"
+    );
+
+    let combined = combined_owner_designated_checked();
+    let combined_program = fabric_program(combined_owner_designated_projection(&combined));
+    assert_eq!(
+        combined_program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible,
+        "combined fixture has one semantic owner/source-owner worker locus S"
+    );
+    let mut ow1 = boot(&combined, combined_program, BackendProfile::Ow1);
+    let owner_submitted = ow1
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("OW1 owner attack submits before the designated source read");
+    let owner_request = ow1
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(owner_request.envelope_id(), owner_submitted.envelope_id());
+    ow1.step_transport("A", "S", owner_request.envelope_id())
+        .expect("OW1 owner request crosses A→S endpoint");
+    let owner_step = ow1
+        .step_locus("S")
+        .expect("OW1 worker serves the owner request");
+    assert_owner_m8_context_observation(
+        &ow1,
+        owner_step.m8_request_node_id(),
+        &owner_request,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerEnqueued,
+    );
+    assert_owner_m8_context_observation(
+        &ow1,
+        owner_step.m8_serve_node_id(),
+        &owner_request,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerWrite,
+    );
+    let owner_write = m8_owned_observation(&ow1, owner_step.m8_serve_node_id());
+
+    let submitted = ow1
+        .submit_source_action(publish_designated_action_with_tick(
+            "tick:F:ow1-physical-red",
+        ))
+        .expect("designated publish submits E→S input request");
+    let input = ow1
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input.envelope_id(), submitted.envelope_id());
+    ow1.step_transport("E", "S", input.envelope_id())
+        .expect("input request transports to S");
+    let source_step = ow1.step_locus("S").expect("S worker reads source input");
+    let source_read_audit = source_step
+        .local_store_read_audit()
+        .expect("source read audit exists");
+    let source_read = m8_local_runtime_trace(&ow1)
+        .latest_observation_for_occurrence(
+            M8LocalTraceKind::OwnerRead,
+            source_read_audit.occurrence_id(),
+        )
+        .expect("source read audit occurrence resolves to M8-owned OwnerRead row");
+    assert_eq!(source_read.operation_id(), "E.result");
+    assert_eq!(source_read_audit.occurrence_id(), source_read.node_id());
+    assert!(
+        !source_read
+            .predecessor_ids()
+            .contains(&owner_write.node_id().to_string()),
+        "OW1 worker FIFO order alone must not create a cross-semantic-locus M8 predecessor from owner mutation to remote input read"
+    );
+    assert!(
+        !causality_reaches(
+            ow1.causality(),
+            source_read.node_id(),
+            owner_write.node_id()
+        ),
+        "SYS-4 causality must not retain a physical-only OW1 predecessor across independent semantic operations"
+    );
+}
+
+#[test]
+fn same_operation_owner_reads_expose_per_occurrence_read_sets_not_union() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let seed = initial_state_seed(checked.program_identity())
+        .with_int("S", "player", "target", "hp", 2222);
+    let admission =
+        SealedFabricAdmission::from_m9_execution_seam(&program, m9_fabric_seam(&checked), seed)
+            .expect("explicit target seed admits the source-first owner fixture");
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+
+    let self_receipt = fabric
+        .dispatch_source_action(owner_attack_action_with_target("attack", "self"))
+        .expect("self-target owner attack dispatches");
+    let target_receipt = fabric
+        .dispatch_source_action(owner_attack_action_with_target("attack", "target"))
+        .expect("target owner attack dispatches with same operation identity");
+    let evidence = fabric.m8_partition_evidence();
+    let partition = evidence.partition("S").expect("S partition exists");
+    let self_read = partition.single_m8_trace_occurrence_for_request(
+        self_receipt.request_id(),
+        M8LocalTraceKind::OwnerRead,
+    );
+    let target_read = partition.single_m8_trace_occurrence_for_request(
+        target_receipt.request_id(),
+        M8LocalTraceKind::OwnerRead,
+    );
+    assert_eq!(self_read.operation_id(), "attack");
+    assert_eq!(target_read.operation_id(), "attack");
+    assert_eq!(
+        self_read.observer_safe_read_key_refs(),
+        vec!["player[self].hp", "player[self].atk"],
+        "first OwnerRead occurrence must expose only its concrete read-set"
+    );
+    assert_eq!(
+        target_read.observer_safe_read_key_refs(),
+        vec!["player[target].hp", "player[self].atk"],
+        "second OwnerRead occurrence must expose only its concrete read-set, not the union for operation 'attack'"
+    );
+}
+
+#[test]
+fn observer_safe_partition_evidence_redacts_seeded_literal_payload_values() {
+    let checked = four_locus_checked();
+    let projection = four_locus_projection(&checked);
+    let program = fabric_program(projection);
+    let seed = Sys4InitialStateSeed::for_checked_program(checked.program_identity().clone())
+        .with_int("S", "player", "self", "hp", 8_675_309)
+        .with_int("S", "player", "self", "atk", 3_141_592)
+        .with_int("T", "shield", "self", "hp", 4_242_424)
+        .with_int("T", "shield", "self", "atk", 2_718_281);
+    let admission = SealedFabricAdmission::from_m9_execution_seam(
+        &program,
+        m9_four_locus_multi_owner_seam(&checked),
+        seed,
+    )
+    .expect("distinctive literal seed admits the four-locus fixture");
+    let fabric = boot_with_admission(program, admission, BackendProfile::St);
+    let evidence = fabric.m8_partition_evidence();
+    assert!(evidence.is_observer_safe());
+
+    let debug_export = format!("{evidence:?}");
+    for literal in ["8675309", "3141592", "4242424", "2718281"] {
+        assert!(
+            !debug_export.contains(literal),
+            "observer-safe partition evidence Debug/export must not leak seeded payload literal {literal}"
+        );
+        for locus in ["S", "T"] {
+            assert!(
+                !evidence
+                    .partition(locus)
+                    .expect("owner partition exists")
+                    .state_digest()
+                    .contains(literal),
+                "{locus} observer-safe partition digest must not include seeded payload literal {literal}"
+            );
+        }
+    }
 }
 
 #[test]
@@ -3175,6 +3436,1008 @@ fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_c
 }
 
 #[test]
+fn imported_designated_publication_and_receipt_survive_sys4_local_cut_restore() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery crosses to C");
+    let consumed = fabric
+        .step_locus("C")
+        .expect("C imports and consumes before the cut");
+    let receipt = consumed
+        .receipt()
+        .expect("C consume returns receipt")
+        .clone();
+    assert_eq!(
+        receipt_m8_publication_id(&receipt),
+        delivery.m8_publication_id()
+    );
+    let before_cut_evidence = fabric.m8_partition_evidence();
+    let c_before_cut = before_cut_evidence
+        .partition("C")
+        .expect("C partition exists");
+    assert!(
+        c_before_cut
+            .publication_inventory()
+            .contains_publication_id(delivery.m8_publication_id()),
+        "pre-cut C partition contains the imported E publication"
+    );
+    assert_eq!(
+        c_before_cut
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+            .len(),
+        1
+    );
+    assert_eq!(
+        c_before_cut
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+            .len(),
+        1
+    );
+
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-imported-designated-publication-cut")
+        .expect("ST whole-fabric cut saves imported designated publication state");
+    assert!(
+        cut.imported_designated_publication_state().contains_exact(
+            delivery.semantic_identity(),
+            delivery.m8_publication_id(),
+            delivery.immutable_delivery_digest()
+        ),
+        "SYS-4 local cut must persist exact imported publication identity/digest, not only a coordinator cache flag"
+    );
+    assert!(
+        cut.designated_receipt_state().contains_exact_receipt(
+            receipt.semantic_consumption_identity(),
+            receipt_m8_publication_id(&receipt),
+            receipt_logical_tick_id(&receipt)
+        ),
+        "SYS-4 local cut must persist the exact imported publication receipt needed for retry semantics"
+    );
+
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("local cut restores through the same source-first program/admission path");
+    let restored_evidence = restored.m8_partition_evidence();
+    let c_restored = restored_evidence
+        .partition("C")
+        .expect("C partition exists after restore");
+    assert_eq!(
+        c_restored.publication_inventory(),
+        c_before_cut.publication_inventory(),
+        "restored C partition must retain exact imported publication state"
+    );
+    assert_eq!(
+        c_restored
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+            .len(),
+        1,
+        "restore must not require a second import trace for an already persisted exact publication"
+    );
+    let retry = restored
+        .dispatch_source_action(consume_designated_action())
+        .expect("post-restore retry uses persisted publication/receipt state");
+    assert_eq!(retry.typed_value(), receipt.typed_value());
+    assert_eq!(
+        receipt_m8_publication_id(&retry),
+        receipt_m8_publication_id(&receipt)
+    );
+    let c_after_retry = restored
+        .m8_partition_evidence()
+        .partition("C")
+        .expect("C partition exists after retry")
+        .clone();
+    assert_eq!(
+        c_after_retry
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+            .len(),
+        1,
+        "post-restore exact retry must not re-import the persisted publication"
+    );
+    assert_eq!(
+        c_after_retry
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+            .len(),
+        1,
+        "post-restore exact retry must not re-consume the persisted delivery"
+    );
+}
+
+#[test]
+fn sys4_local_cut_restores_pending_owner_request_endpoint_mailbox_and_continues_once() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("source-first owner request submits a generated A outbox carrier");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(request.envelope_id(), submitted.envelope_id());
+
+    let outbox_cut = save_sys4_local_cut(&mut fabric, "sys4-cut-owner-request-a-outbox")
+        .expect("ST cut with pending owner request in A outbox succeeds");
+    let mut restored_outbox = LocalFabric::restore_local_cut(
+        program.clone(),
+        admission.clone(),
+        BackendProfile::St,
+        &outbox_cut,
+    )
+    .expect("pending A outbox owner request restores");
+    assert_eq!(
+        restored_outbox
+            .locus_runtime("A")
+            .expect("A exists after restore")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single(),
+        request,
+        "restore must preserve the exact A outbox owner-request envelope"
+    );
+
+    let request_transport = restored_outbox
+        .step_transport("A", "S", request.envelope_id())
+        .expect("restored request transports exactly once");
+    let inbox_request = restored_outbox
+        .locus_runtime("S")
+        .expect("S exists after request transport")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(inbox_request.envelope_id(), request.envelope_id());
+    assert_eq!(inbox_request.carrier_id(), request.carrier_id());
+    assert_eq!(
+        restored_outbox
+            .locus_runtime("A")
+            .expect("A exists")
+            .outgoing_endpoint()
+            .single(CommunicationEdgeKind::OwnerRequest, "A", "S")
+            .carrier_id(),
+        request.carrier_id()
+    );
+    assert_eq!(
+        restored_outbox
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_endpoint()
+            .single(CommunicationEdgeKind::OwnerRequest, "A", "S")
+            .carrier_id(),
+        request.carrier_id()
+    );
+
+    let inbox_cut = save_sys4_local_cut(&mut restored_outbox, "sys4-cut-owner-request-s-inbox")
+        .expect("ST cut with pending owner request in S inbox succeeds");
+    let mut restored_inbox =
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &inbox_cut)
+            .expect("pending S inbox owner request restores");
+    assert_eq!(
+        restored_inbox
+            .locus_runtime("S")
+            .expect("S exists after second restore")
+            .incoming_mailbox()
+            .pending_envelopes()
+            .single(),
+        inbox_request,
+        "restore must preserve the exact S inbox owner-request envelope"
+    );
+    assert_eq!(
+        restored_inbox
+            .locus_runtime("A")
+            .expect("A exists after second restore")
+            .outgoing_endpoint()
+            .single(CommunicationEdgeKind::OwnerRequest, "A", "S")
+            .carrier_id(),
+        request.carrier_id(),
+        "restore must preserve the source endpoint dequeue history matching S inbox"
+    );
+    assert_eq!(
+        restored_inbox
+            .locus_runtime("S")
+            .expect("S exists after second restore")
+            .incoming_endpoint()
+            .single(CommunicationEdgeKind::OwnerRequest, "A", "S")
+            .carrier_id(),
+        request.carrier_id(),
+        "restore must preserve the target endpoint enqueue history matching S inbox"
+    );
+
+    let owner_step = restored_inbox
+        .step_locus("S")
+        .expect("restored S inbox request serves once");
+    assert_eq!(
+        owner_step.locus_dequeue_record_id(),
+        request_transport.target_inbox_enqueue_record_id()
+    );
+    assert_owner_m8_context_observation(
+        &restored_inbox,
+        owner_step.m8_request_node_id(),
+        &inbox_request,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerEnqueued,
+    );
+    assert_owner_m8_context_observation(
+        &restored_inbox,
+        owner_step.m8_serve_node_id(),
+        &inbox_request,
+        "attack",
+        "S",
+        M8LocalTraceKind::OwnerWrite,
+    );
+    let reply = restored_inbox
+        .locus_runtime("S")
+        .expect("S exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let reply_transport = restored_inbox
+        .step_transport("S", "A", reply.envelope_id())
+        .expect("restored owner reply transports once");
+    let receipt_step = restored_inbox
+        .step_locus("A")
+        .expect("A consumes restored owner reply once");
+    assert_eq!(
+        receipt_step.locus_dequeue_record_id(),
+        reply_transport.target_inbox_enqueue_record_id()
+    );
+    assert_eq!(
+        restored_inbox
+            .m8_actual_trace()
+            .owner_request_node_count("attack", "S"),
+        1,
+        "restored owner request must not be served twice"
+    );
+}
+
+#[test]
+fn sys4_local_cut_restores_inflight_designated_delivery_and_consumes_once() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-designated-delivery-e-outbox")
+        .expect("ST cut with E→C delivery in flight succeeds");
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("in-flight E→C designated delivery restores");
+    assert_eq!(
+        restored
+            .locus_runtime("E")
+            .expect("E exists after restore")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single(),
+        delivery,
+        "restore must preserve the exact E outbox designated delivery carrier"
+    );
+
+    restored
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("restored delivery transports to C once");
+    let consumed = restored
+        .step_locus("C")
+        .expect("C imports and consumes restored delivery once");
+    let receipt = consumed
+        .receipt()
+        .expect("restored delivery consume returns receipt");
+    assert_eq!(
+        receipt_m8_publication_id(receipt),
+        delivery.m8_publication_id()
+    );
+    assert_eq!(
+        restored
+            .m8_actual_trace()
+            .value_consumed_count(delivery.semantic_identity(), "C"),
+        1,
+        "restored designated delivery must not consume twice"
+    );
+    assert_eq!(
+        restored
+            .designated_consumption_state()
+            .semantic_consumption_count(delivery.semantic_identity(), "C"),
+        1
+    );
+}
+
+#[test]
+fn sys4_local_cut_preserves_m9_successor_tombstone_for_revoked_cache_retry() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery crosses E→C");
+    fabric
+        .step_locus("C")
+        .expect("C imports and consumes before revocation");
+
+    let current_m9 = fabric.current_m9_authority_inspection();
+    let transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("M9 lifecycle produces designated consumer revocation");
+    let transition_view = transition.sealed_m9_inspection();
+    assert_eq!(transition_view.prior_generation(), current_m9.generation());
+    let successor_generation = transition_view.successor_generation().clone();
+    let expected_consumer_lineage = transition_view.consumer_lineage().clone();
+    fabric
+        .apply_admitted_authority_lifecycle(transition)
+        .expect("fabric installs M9 successor before cut");
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-after-consumer-revocation")
+        .expect("ST cut after M9 revocation preserves authority lifecycle state");
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("post-revocation cut restores");
+    assert_eq!(
+        restored.current_m9_authority_inspection().generation(),
+        successor_generation,
+        "restore must keep the M9 successor generation and tombstone, not revert to initial admission"
+    );
+
+    let semantic_identity = delivery.semantic_identity().to_string();
+    let before_retry_state = restored.semantic_snapshot();
+    let before_retry_cache = restored.designated_cache_snapshot();
+    let before_retry_consumed = restored
+        .m8_actual_trace()
+        .value_consumed_count(&semantic_identity, "C");
+    let before_retry_m8_cache_validations = m8_backend_trace_count(
+        &restored,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    let submitted = restored
+        .submit_source_action(consume_designated_action())
+        .expect("cache retry submits after restore");
+    let rejected = assert_sys4_diag(
+        restored.step_locus("C"),
+        Sys4DiagnosticKind::MissingConsumerCapability,
+    );
+    assert_eq!(rejected.rejected_request_id(), Some(submitted.request_id()));
+    let failure = rejected
+        .m9_failure_inspection()
+        .expect("restored revocation rejection exposes sealed M9 failure");
+    assert_eq!(failure.installed_generation(), successor_generation);
+    assert_eq!(failure.consumer_lineage(), &expected_consumer_lineage);
+    assert_eq!(failure.semantic_identity(), semantic_identity);
+    assert_eq!(failure.consumer_locus(), "C");
+    assert!(rejected.m8_non_consuming_validation_node_id().is_none());
+    assert_eq!(
+        m8_backend_trace_count(
+            &restored,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C"
+        ),
+        before_retry_m8_cache_validations,
+        "revoked restored retry must fail before M8 non-consuming cache validation"
+    );
+    assert_eq!(
+        restored
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        before_retry_consumed
+    );
+    assert!(restored.semantic_snapshot().same_state(&before_retry_state));
+    assert_eq!(restored.designated_cache_snapshot(), before_retry_cache);
+}
+
+#[test]
+fn sys4_local_cut_restores_next_request_and_endpoint_counters_without_collision() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let first = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("first owner request submits before cut");
+    let first_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-next-id-counters")
+        .expect("ST cut captures request and endpoint counters");
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("counter cut restores");
+    let second = restored
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("second owner request submits after restore");
+    let second_envelope = restored
+        .locus_runtime("A")
+        .expect("A exists after restore")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .for_request(second.request_id());
+
+    assert_ne!(first.request_id(), second.request_id());
+    assert_ne!(first.envelope_id(), second.envelope_id());
+    assert_ne!(first.carrier_id(), second.carrier_id());
+    assert_ne!(first_envelope.envelope_id(), second_envelope.envelope_id());
+    assert_ne!(first_envelope.carrier_id(), second_envelope.carrier_id());
+    assert_ne!(
+        first_envelope.mailbox_record_id(),
+        second_envelope.mailbox_record_id(),
+        "post-restore endpoint/mailbox record IDs must not collide with pre-cut pending carrier state"
+    );
+}
+
+#[test]
+fn sys4_local_cut_restores_owner_read_observer_safe_read_key_evidence_exactly() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(publish_designated_action())
+        .expect("designated publish submits E→S input request");
+    let input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_request.envelope_id(), submitted.envelope_id());
+    fabric
+        .step_transport("E", "S", input_request.envelope_id())
+        .expect("input request transports to S");
+    let source_step = fabric
+        .step_locus("S")
+        .expect("S validates source release and reads local source value");
+    let read_audit_digest = source_step
+        .local_store_read_audit()
+        .expect("source read exposes read audit")
+        .stable_digest();
+    let before_cut_evidence = fabric.m8_partition_evidence();
+    let before_read = before_cut_evidence
+        .partition("S")
+        .expect("S partition exists before cut")
+        .m8_trace_occurrences_by_kind(M8LocalTraceKind::OwnerRead)
+        .single()
+        .clone();
+    assert_eq!(
+        before_read.observer_safe_read_key_refs(),
+        vec!["player[self].atk"],
+        "read-key evidence must name only the source-derived key and no payload"
+    );
+
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-owner-read-key-evidence")
+        .expect("ST cut with source-owner read evidence succeeds");
+    let restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("source-owner read evidence restores");
+    assert_eq!(
+        restored.local_store_read_audit("S").stable_digest(),
+        read_audit_digest,
+        "restore must preserve the exact per-occurrence local read audit"
+    );
+    let after_cut_evidence = restored.m8_partition_evidence();
+    let after_read = after_cut_evidence
+        .partition("S")
+        .expect("S partition exists after restore")
+        .m8_trace_occurrences_by_kind(M8LocalTraceKind::OwnerRead)
+        .single()
+        .clone();
+    assert_eq!(
+        after_read.fabric_qualified_id(),
+        before_read.fabric_qualified_id()
+    );
+    assert_eq!(
+        after_read.observer_safe_read_key_refs(),
+        before_read.observer_safe_read_key_refs(),
+        "restore must preserve exact observer-safe read-key evidence for the same M8 OwnerRead occurrence"
+    );
+}
+
+#[test]
+fn sys4_local_cut_ow1_returns_typed_backend_ineligible_without_panic_or_mutation() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+    let before = fabric.semantic_snapshot();
+    let before_trace = fabric.m8_actual_trace().stable_digest();
+
+    let _diagnostics = assert_sys4_diag(
+        save_sys4_local_cut(&mut fabric, "sys4-cut-ow1-typed-reject"),
+        Sys4DiagnosticKind::BackendIneligible,
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.m8_actual_trace().stable_digest(), before_trace);
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_receive_without_matching_send_endpoint_record() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request submits before cut tamper");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("A", "S", request.envelope_id())
+        .expect("request reaches S inbox before cut tamper");
+    let mut cut = save_sys4_local_cut(&mut fabric, "sys4-cut-tampered-receive-without-send")
+        .expect("ST cut captures matched A send and S receive before tamper");
+    cut.for_test_drop_outgoing_endpoint_record("A", submitted.request_id(), request.carrier_id());
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_receive_record_drop_with_pending_inbox_and_source_send() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request submits before cut tamper");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let transport = fabric
+        .step_transport("A", "S", request.envelope_id())
+        .expect("request reaches S inbox before cut tamper");
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_mailbox()
+            .pending_envelopes()
+            .single()
+            .envelope_id(),
+        request.envelope_id()
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("A")
+            .expect("A exists")
+            .outgoing_endpoint()
+            .carrier_history_for_request(submitted.request_id())
+            .carrier_history_len(),
+        1,
+        "source send record is present before target receive tamper"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_endpoint()
+            .carrier_history_for_request(submitted.request_id())
+            .carrier_history_len(),
+        1,
+        "target receive record is present before tamper"
+    );
+
+    let mut cut = save_sys4_local_cut(&mut fabric, "sys4-cut-tampered-receive-record-drop")
+        .expect("ST cut captures matched source send, target receive, and S inbox before tamper");
+    cut.for_test_drop_incoming_endpoint_record(
+        "S",
+        submitted.request_id(),
+        request.carrier_id(),
+        transport.target_inbox_enqueue_record_id(),
+    );
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_older_cut_against_later_m9_generation() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery crosses E→C before old cut");
+    fabric.step_locus("C").expect("C consumes before old cut");
+    let old_cut = save_sys4_local_cut(&mut fabric, "sys4-cut-before-m9-revocation")
+        .expect("old cut saves before later M9 successor");
+
+    let transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("M9 lifecycle produces later successor after old cut");
+    fabric
+        .apply_admitted_authority_lifecycle(transition)
+        .expect("live fabric advances past old cut generation");
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &old_cut),
+        Sys4DiagnosticKind::ProgramAdmissionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_authority_floor_advance_between_preflight_and_install() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut live = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut live);
+    let delivery = live
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    live.step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery crosses E→C before cut");
+    live.step_locus("C").expect("C consumes before cut");
+    let old_cut = save_sys4_local_cut(&mut live, "sys4-cut-authority-floor-race-g0")
+        .expect("old cut saves at G0 before interleaved floor advance");
+
+    let live_generation_before_race = live.current_m9_authority_inspection().generation();
+    let live_semantic_before_race = live.semantic_snapshot();
+    let live_m8_before_race = live.m8_actual_trace().stable_digest();
+    let transition = live
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("M9 lifecycle produces competing G1 transition for restore race");
+    let successor_generation = transition
+        .sealed_m9_inspection()
+        .successor_generation()
+        .clone();
+    assert_ne!(successor_generation, live_generation_before_race);
+
+    assert_sys4_diag(
+        LocalFabric::for_test_restore_local_cut_with_authority_floor_interleaving(
+            program,
+            admission,
+            BackendProfile::St,
+            &old_cut,
+            transition,
+        ),
+        Sys4DiagnosticKind::ProgramAdmissionMismatch,
+    );
+    assert_eq!(
+        live.current_m9_authority_inspection().generation(),
+        live_generation_before_race,
+        "a restore losing the authority-floor race must not install stale or competing authority into the live fabric"
+    );
+    assert!(
+        live.semantic_snapshot()
+            .same_state(&live_semantic_before_race),
+        "a restore losing the authority-floor race must not mutate live semantic state"
+    );
+    assert_eq!(
+        live.m8_actual_trace().stable_digest(),
+        live_m8_before_race,
+        "a restore losing the authority-floor race must not mutate the live backend/M8 trace"
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_duplicate_pending_inbox_receive_mapping() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request submits before duplicate cut tamper");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let transport = fabric
+        .step_transport("A", "S", request.envelope_id())
+        .expect("request reaches S inbox before duplicate tamper");
+    let inbox = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(inbox.envelope_id(), request.envelope_id());
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack", "S"),
+        0,
+        "pre-restore duplicate cut is taken before S can serve the request"
+    );
+
+    let mut cut = save_sys4_local_cut(&mut fabric, "sys4-cut-duplicate-pending-inbox")
+        .expect("ST cut captures one valid pending S inbox owner request");
+    cut.for_test_duplicate_pending_inbox_envelope_and_receive_record(
+        "S",
+        submitted.request_id(),
+        request.carrier_id(),
+        transport.target_inbox_enqueue_record_id(),
+    );
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_counter_rollback_below_retained_ids() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let first = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("first request submits before counter rollback tamper");
+    let first_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let mut cut = save_sys4_local_cut(&mut fabric, "sys4-cut-counter-rollback")
+        .expect("ST cut captures retained request and endpoint IDs");
+    cut.for_test_set_next_request_below_retained_max(first.request_id());
+    cut.for_test_set_next_endpoint_occurrence_below_retained_max(
+        first_envelope.mailbox_record_id(),
+    );
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_fault_only_request_counter_rollback_without_endpoint_carrier() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let owner_request_edge = projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("projection has owner request edge");
+    let owner_reply_edge = projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("projection has owner reply edge");
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let first_fault = fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::route_unavailable_for_edge(owner_request_edge.edge_ref()),
+        ))
+        .expect("route fault is source-derived and allocates a retained fabric request id");
+    assert!(first_fault.is_fault());
+    assert_eq!(
+        fabric.trace().for_fault(first_fault.fault_id()).kinds(),
+        vec![Sys4TraceKind::RequestAdmitted],
+        "fault-only external actions retain a FabricTrace request row even without any endpoint carrier"
+    );
+    for locus in ["A", "S"] {
+        let runtime = fabric.locus_runtime(locus).expect("locus exists");
+        assert_eq!(
+            runtime
+                .outgoing_endpoint()
+                .carrier_history_for_request(first_fault.fault_id())
+                .carrier_history_len(),
+            0,
+            "fault-only action must not synthesize an outgoing endpoint carrier at {locus}"
+        );
+        assert_eq!(
+            runtime
+                .incoming_endpoint()
+                .carrier_history_for_request(first_fault.fault_id())
+                .carrier_history_len(),
+            0,
+            "fault-only action must not synthesize an incoming endpoint carrier at {locus}"
+        );
+    }
+
+    let valid_cut = save_sys4_local_cut(&mut fabric, "sys4-cut-fault-only-request-retained")
+        .expect("ST cut captures retained fault trace request id");
+    let mut tampered = valid_cut.clone();
+    tampered.for_test_set_next_request_below_retained_max(first_fault.fault_id());
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(
+            program.clone(),
+            admission.clone(),
+            BackendProfile::St,
+            &tampered,
+        ),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+
+    let mut restored =
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &valid_cut)
+            .expect("untampered cut restores with the retained fault request floor");
+    let second_fault = restored
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::route_unavailable_for_edge(owner_reply_edge.edge_ref()),
+        ))
+        .expect("a later fault allocates a fresh request id after restore");
+    assert_ne!(
+        second_fault.fault_id(),
+        first_fault.fault_id(),
+        "restored next_request must not reuse a retained fault-only FabricTrace request id"
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_missing_derived_m8_trace_or_causality_row() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let receipt = fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("owner request serves before trace tamper cut");
+    let evidence = fabric.m8_partition_evidence();
+    let owner_write = evidence
+        .partition("S")
+        .expect("S partition exists")
+        .single_m8_trace_occurrence_for_request(receipt.request_id(), M8LocalTraceKind::OwnerWrite)
+        .clone();
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .node(owner_write.fabric_qualified_id())
+            .kind(),
+        M8LocalTraceKind::OwnerWrite
+    );
+    assert!(
+        fabric
+            .causality()
+            .contains_occurrence(owner_write.fabric_qualified_id())
+    );
+
+    let mut missing_actual = save_sys4_local_cut(&mut fabric, "sys4-cut-missing-actual-m8-row")
+        .expect("ST cut captures M8 cut plus derived trace rows");
+    missing_actual.for_test_drop_actual_m8_trace_row(owner_write.fabric_qualified_id());
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(
+            program.clone(),
+            admission.clone(),
+            BackendProfile::St,
+            &missing_actual,
+        ),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+
+    let mut missing_causality = save_sys4_local_cut(&mut fabric, "sys4-cut-missing-causality-row")
+        .expect("ST cut captures M8 cut plus causality rows");
+    missing_causality.for_test_drop_causality_row(owner_write.fabric_qualified_id());
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &missing_causality),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_actual_m8_predecessor_not_in_causality_or_raw_dependencies() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), BackendProfile::St);
+
+    let first = fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("first owner request serves before trace predecessor tamper");
+    let second = fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("second owner request provides an unrelated existing M8 occurrence");
+    let evidence = fabric.m8_partition_evidence();
+    let s_partition = evidence.partition("S").expect("S partition exists");
+    let first_write = s_partition
+        .single_m8_trace_occurrence_for_request(first.request_id(), M8LocalTraceKind::OwnerWrite)
+        .clone();
+    let second_write = s_partition
+        .single_m8_trace_occurrence_for_request(second.request_id(), M8LocalTraceKind::OwnerWrite)
+        .clone();
+    assert_ne!(
+        first_write.fabric_qualified_id(),
+        second_write.fabric_qualified_id()
+    );
+    assert!(
+        !fabric
+            .causality()
+            .predecessor_ids(first_write.fabric_qualified_id())
+            .contains(&second_write.fabric_qualified_id().to_string()),
+        "the later owner write is not a semantic or raw-M8 predecessor of the first write"
+    );
+
+    let mut cut = save_sys4_local_cut(&mut fabric, "sys4-cut-actual-m8-predecessor-forgery")
+        .expect("ST cut captures exact actual M8 trace and causality rows");
+    cut.for_test_add_actual_m8_trace_predecessor(
+        first_write.fabric_qualified_id(),
+        second_write.fabric_qualified_id(),
+    );
+
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+}
+
+#[test]
 fn ow1_designated_source_owner_read_is_m8_worker_owned_and_causally_acks_reply() {
     let checked = designated_checked();
     let projection = designated_projection(&checked);
@@ -4322,6 +5585,151 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
             .diagnostic_kind(),
         delivery_publication_identity_mismatch_diag()
     );
+}
+
+#[test]
+fn forged_designated_carrier_provenance_visibility_or_redaction_quarantines_before_c_import() {
+    enum ForgeryCase {
+        SourceRef,
+        Visibility,
+        Redaction,
+    }
+
+    for case in [
+        ForgeryCase::SourceRef,
+        ForgeryCase::Visibility,
+        ForgeryCase::Redaction,
+    ] {
+        let checked = designated_checked();
+        let projection = designated_projection(&checked);
+        let delivery_edge = projection
+            .communication_plan()
+            .single_edge(
+                "E.result",
+                CommunicationEdgeKind::DesignatedResultDelivery,
+                "E",
+                "C",
+            )
+            .expect("projection has result delivery edge");
+        let program = fabric_program(projection);
+        let mut fabric = boot(&checked, program, BackendProfile::St);
+
+        stage_designated_publish_until_delivery_outbox(&mut fabric);
+        let delivery = fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single();
+        let semantic_identity = delivery.semantic_identity().to_string();
+        let before = fabric.semantic_snapshot();
+        let cache_before = fabric.designated_cache_snapshot();
+        let c_partition_before = fabric
+            .m8_partition_evidence()
+            .partition("C")
+            .expect("C partition exists")
+            .clone();
+        let m8_digest_before = fabric.m8_actual_trace().stable_digest();
+        let expected = match case {
+            ForgeryCase::SourceRef => {
+                fabric
+                    .dispatch_external_action(ExternalAction::fault_event(
+                        FaultInjection::corrupt_in_transit_envelope_source_ref_for_edge(
+                            delivery_edge.edge_ref(),
+                            delivery.envelope_id(),
+                            "tests/forged/sys4_source_ref.mir",
+                        ),
+                    ))
+                    .expect("source-ref forgery fault targets the exact delivery edge/envelope");
+                Sys4DiagnosticKind::CarrierProvenanceMismatch
+            }
+            ForgeryCase::Visibility => {
+                fabric
+                    .dispatch_external_action(ExternalAction::fault_event(
+                        FaultInjection::corrupt_in_transit_envelope_visibility_for_edge(
+                            delivery_edge.edge_ref(),
+                            delivery.envelope_id(),
+                            "sys4-forged-visibility",
+                        ),
+                    ))
+                    .expect("visibility forgery fault targets the exact delivery edge/envelope");
+                Sys4DiagnosticKind::CarrierVisibilityMismatch
+            }
+            ForgeryCase::Redaction => {
+                fabric
+                    .dispatch_external_action(ExternalAction::fault_event(
+                        FaultInjection::corrupt_in_transit_envelope_redaction_for_edge(
+                            delivery_edge.edge_ref(),
+                            delivery.envelope_id(),
+                        ),
+                    ))
+                    .expect("redaction forgery fault targets the exact delivery edge/envelope");
+                Sys4DiagnosticKind::CarrierRedactionMismatch
+            }
+        };
+
+        fabric
+            .step_transport("E", "C", delivery.envelope_id())
+            .expect("forged delivery still crosses endpoint before C rejects it");
+        let rejected = assert_sys4_diag(fabric.step_locus("C"), expected);
+        assert_eq!(
+            rejected.rejected_envelope_id(),
+            Some(delivery.envelope_id())
+        );
+        assert!(rejected.m8_trace_node_id().is_none());
+        assert!(!rejected.exposes_raw_payload());
+        assert!(fabric.semantic_snapshot().same_state(&before));
+        assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+        assert_eq!(
+            fabric.m8_actual_trace().stable_digest(),
+            m8_digest_before,
+            "carrier forgery must be rejected before C import or consume mutates M8 trace"
+        );
+        let c_partition_after = fabric
+            .m8_partition_evidence()
+            .partition("C")
+            .expect("C partition exists")
+            .clone();
+        assert_eq!(
+            c_partition_after.publication_inventory(),
+            c_partition_before.publication_inventory(),
+            "forged carrier must not import or mutate C's publication inventory"
+        );
+        assert_eq!(
+            c_partition_after
+                .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+                .len(),
+            c_partition_before
+                .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+                .len(),
+            "forged carrier must not create a C import occurrence"
+        );
+        assert_eq!(
+            c_partition_after
+                .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+                .len(),
+            c_partition_before
+                .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+                .len(),
+            "forged carrier must not create a C consume occurrence"
+        );
+        assert_eq!(
+            fabric
+                .m8_actual_trace()
+                .value_consumed_count(&semantic_identity, "C"),
+            0
+        );
+        assert_eq!(
+            fabric
+                .locus_runtime("C")
+                .expect("C exists")
+                .incoming_mailbox()
+                .terminal_rejected_envelope(delivery.envelope_id())
+                .expect("forged delivery is terminally quarantined")
+                .diagnostic_kind(),
+            expected
+        );
+    }
 }
 
 #[test]

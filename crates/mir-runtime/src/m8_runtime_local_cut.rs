@@ -25,8 +25,9 @@ use crate::{
         M8ConsumeRequest, M8ConsumedDesignatedValue, M8ConsumptionState, M8DesignatedAuthorityUse,
         M8DesignatedDiagnosticKind, M8DesignatedDiagnostics, M8DesignatedEvaluationRequest,
         M8DesignatedResultStore, M8DesignatedRuntime, M8DesignatedSeed, M8DesignatedTrace,
-        M8DesignatedTraceKind, M8InputReceiptSet, M8PresentationInterpolation,
-        M8PublishedDesignatedValue, M8ReceiptState, M8ResultVersionStore,
+        M8DesignatedTraceKind, M8ExactPublicationImport, M8InputReceiptSet,
+        M8PresentationInterpolation, M8PublishedDesignatedValue, M8ReceiptState,
+        M8ResultVersionStore,
     },
     m8_runtime_owner_queue::{
         M8AuthorityUse, M8EnqueueDiagnosticKind, M8EnqueueDiagnostics, M8EntityPresenceRegistry,
@@ -174,6 +175,9 @@ pub enum M8LocalTraceKind {
     DesignatedAuthorityValidated,
     DesignatedInputReceiptValidated,
     DesignatedValuePublished,
+    /// A consumer-local session accepted an exact publication carried from
+    /// the evaluator. It is distinct from evaluation and from consumption.
+    DesignatedPublicationImported,
     DesignatedEvaluationIdempotent,
     DesignatedConsumerAuthorityValidated,
     DesignatedValueConsumed,
@@ -191,6 +195,48 @@ pub enum M8LocalTraceKind {
     DesignatedEvaluationRejected,
     DesignatedConsumptionRejected,
     EntityPresenceSynchronized,
+}
+
+/// Observer-safe facts derived from one actual M8 local session.  Authority
+/// references and raw payload material remain in the session; callers only
+/// receive state-key names, a structural digest, trace observations, and
+/// published value identities.
+#[cfg(test)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8LocalSessionObserver {
+    state_key_refs: Vec<String>,
+    semantic_mutation_revision: String,
+    published_value_refs: Vec<String>,
+    trace_observations: Vec<M8LocalTraceObservation>,
+    owner_read_key_refs_by_node: BTreeMap<String, Vec<String>>,
+}
+
+#[cfg(test)]
+impl M8LocalSessionObserver {
+    pub(crate) fn state_key_refs(&self) -> &[String] {
+        &self.state_key_refs
+    }
+
+    pub(crate) fn state_digest(&self) -> &str {
+        // Retained as a test-only compatibility name. This is deliberately a
+        // payload-free mutation revision, never a canonical state dump.
+        &self.semantic_mutation_revision
+    }
+
+    pub(crate) fn published_value_refs(&self) -> &[String] {
+        &self.published_value_refs
+    }
+
+    pub(crate) fn trace_observations(&self) -> &[M8LocalTraceObservation] {
+        &self.trace_observations
+    }
+
+    pub(crate) fn owner_read_key_refs_for_node(&self, raw_node_id: &str) -> Vec<String> {
+        self.owner_read_key_refs_by_node
+            .get(raw_node_id)
+            .cloned()
+            .unwrap_or_default()
+    }
 }
 
 /// Local-only references retained in K8/H.  They never cross the runtime
@@ -497,6 +543,11 @@ impl M8LocalDesignatedTraceContext {
         self.edge_ref = edge_ref.into();
         self
     }
+
+    fn with_m8_publication_id(mut self, publication_id: impl Into<String>) -> Self {
+        self.m8_publication_id = publication_id.into();
+        self
+    }
 }
 
 #[cfg_attr(not(test), allow(dead_code))]
@@ -567,6 +618,20 @@ impl M8LocalTraceObservation {
     pub(crate) fn predecessor_ids(&self) -> &[String] {
         &self.dependencies
     }
+
+    /// Re-key a raw local observation for the fabric namespace.  The caller
+    /// supplies a deterministic per-locus identity registry; raw M8 IDs stay
+    /// unchanged in their owning local session.
+    pub(crate) fn fabric_rekeyed(&self, node_id: String, dependencies: Vec<String>) -> Self {
+        let raw_node_id = self.node_id.clone();
+        let mut rekeyed = self.clone();
+        rekeyed.node_id = node_id.clone();
+        rekeyed.dependencies = dependencies;
+        if rekeyed.occurrence_id.as_deref() == Some(raw_node_id.as_str()) {
+            rekeyed.occurrence_id = Some(node_id);
+        }
+        rekeyed
+    }
 }
 
 /// Sealed M9-to-M8 entity-presence synchronization evidence. It carries only
@@ -613,6 +678,13 @@ impl M8LocalTrace {
         self.entries.len()
     }
 
+    pub(crate) fn observations(&self) -> Vec<M8LocalTraceObservation> {
+        self.entries
+            .iter()
+            .map(Self::observation_for_entry)
+            .collect()
+    }
+
     pub fn is_empty(&self) -> bool {
         self.entries.is_empty()
     }
@@ -636,6 +708,42 @@ impl M8LocalTrace {
         Self {
             entries,
             next_node_index,
+        }
+    }
+
+    /// Append the newly observed part of one local session as an observer
+    /// fabric view.  Raw M8 identities are left in the source session; only
+    /// the aggregate receives locus-qualified node/occurrence identities.
+    /// `known_nodes` and `dependency_projection` are computed by SYS-4 from
+    /// actual session rows.  The latter preserves same-semantic-locus M8
+    /// dependencies across refreshes while excluding only physical OW1 worker
+    /// chaining across semantic loci.
+    pub(crate) fn append_fabric_qualified_delta(
+        &mut self,
+        source: &Self,
+        start: usize,
+        known_nodes: &BTreeMap<String, String>,
+        dependency_projection: &BTreeMap<String, Vec<String>>,
+    ) {
+        for source_entry in source.entries.iter().skip(start) {
+            let raw_node_id = source_entry.node_id.clone();
+            let qualified_node_id = known_nodes
+                .get(&raw_node_id)
+                .cloned()
+                .expect("SYS-4 registered each actual M8 node before projection");
+            let mut entry = source_entry.clone();
+            entry.node_index = self.next_node_index;
+            self.next_node_index += 1;
+            entry.node_id = qualified_node_id.clone();
+            entry.dependencies = dependency_projection
+                .get(&raw_node_id)
+                .cloned()
+                .map(BTreeSet::from_iter)
+                .expect("SYS-4 projected exact dependencies for each actual M8 node");
+            if entry.occurrence_id.as_deref() == Some(raw_node_id.as_str()) {
+                entry.occurrence_id = Some(qualified_node_id);
+            }
+            self.entries.push(entry);
         }
     }
 
@@ -892,6 +1000,13 @@ impl M8LocalTrace {
         Some(Self::observation_for_entry(entry))
     }
 
+    fn has_designated_import_context(&self, context: &M8LocalDesignatedTraceContext) -> bool {
+        self.entries.iter().any(|entry| {
+            entry.kind == M8LocalTraceKind::DesignatedPublicationImported
+                && entry.designated.as_ref() == Some(context)
+        })
+    }
+
     #[cfg_attr(not(test), allow(dead_code))]
     fn append_designated(
         &mut self,
@@ -973,6 +1088,9 @@ pub struct M8LocalSavePayload {
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
     entity_presence_external_controls: Vec<M8EntityPresenceExternalControl>,
+    // Read-set evidence is keyed by the exact M8 OwnerRead occurrence.  It
+    // is part of the local semantic/devtools state, not a SYS-4 aggregate.
+    owner_read_key_refs_by_node: BTreeMap<String, Vec<String>>,
 }
 
 /// A cut-local causal witness carried by each saved local cut. It uses the
@@ -1389,6 +1507,34 @@ impl M8LiveFloor {
         }
     }
 
+    /// Construct a restore floor for a fresh local runtime from the exact
+    /// saved semantic payload, while binding authority exclusively to the
+    /// currently sealed M9 generation supplied by the caller.  This is not a
+    /// `same_current` shortcut: a cut whose M8 inventory differs from the
+    /// live M9-derived inventory is rejected by `try_restore_local_cut`
+    /// before any payload is installed.
+    pub(crate) fn for_restoration_with_live_authority(
+        cut: &M8LocalCut,
+        authority_inventory: M8AuthorityState,
+    ) -> Self {
+        Self {
+            authority_inventory,
+            entity_presence: cut
+                .payload
+                .shared_snapshot
+                .entity_presence_registry()
+                .clone(),
+            lease_inventory: cut.lease_inventory().clone(),
+            consumption_floor: cut.designated_consumption_state().clone(),
+            version_floor: cut.designated_version_store().clone(),
+            relation_floor: cut.payload.shared_snapshot.relations.clone(),
+            stale_memberships: BTreeSet::new(),
+            revoked_capabilities: BTreeSet::new(),
+            stale_witnesses: BTreeSet::new(),
+            expired_leases: BTreeSet::new(),
+        }
+    }
+
     pub fn with_stale_membership(mut self, reference: impl Into<String>) -> Self {
         self.stale_memberships.insert(reference.into());
         self
@@ -1432,6 +1578,7 @@ pub struct M8LocalRuntime {
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
     entity_presence_external_controls: Vec<M8EntityPresenceExternalControl>,
+    owner_read_key_refs_by_node: BTreeMap<String, Vec<String>>,
     trace: RefCell<M8LocalTrace>,
     #[cfg(test)]
     designated_consume_test_rejection: Option<M8LocalDesignatedTraceContext>,
@@ -1480,6 +1627,7 @@ impl M8LocalRuntime {
             lease_inventory: live_leases,
             patch_lifecycle: M8LocalPatchLifecycle::default(),
             entity_presence_external_controls: Vec::new(),
+            owner_read_key_refs_by_node: BTreeMap::new(),
             trace: RefCell::new(M8LocalTrace::default()),
             #[cfg(test)]
             designated_consume_test_rejection: None,
@@ -1566,7 +1714,114 @@ impl M8LocalRuntime {
             .trace
             .borrow_mut()
             .append_contextual_owner_read(source_ref, context);
+        // This path does not enter the owner FIFO, so it cannot inherit the
+        // queue row's recorded read-set.  Retain the one source-derived key
+        // on the exact M8-owned observation instead of asking SYS-4 to infer
+        // or synthesize observer evidence later.
+        self.owner_read_key_refs_by_node.insert(
+            observation.node_id().to_string(),
+            vec![format!(
+                "{}[{}].{}",
+                key.namespace(),
+                key.index(),
+                key.field()
+            )],
+        );
         Some((value, observation))
+    }
+
+    /// Admit an exact designated publication already produced by a remote
+    /// evaluator session.  No expression is re-run and no authority is
+    /// minted; equal replay is idempotent while a conflicting version fails
+    /// closed for the caller to quarantine its carrier.
+    pub(crate) fn import_designated_publication(
+        &mut self,
+        publication: M8PublishedDesignatedValue,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Option<M8LocalTraceObservation>, ()> {
+        if !self.accepts_generated_designated_publication(&publication) {
+            return Err(());
+        }
+        match self.designated.import_exact_publication(publication)? {
+            // `AlreadyPresent` is the persisted publication result for an
+            // OW1 C-side import when E and C share one physical M8 session.
+            // The exact carrier context has not yet been recorded there, so
+            // retain one M8-owned import occurrence.  Re-delivery with the
+            // same context is a persisted trace fact and remains idempotent.
+            M8ExactPublicationImport::Inserted | M8ExactPublicationImport::AlreadyPresent
+                if !self.trace.borrow().has_designated_import_context(&context) =>
+            {
+                Ok(Some(self.trace.borrow_mut().append_designated(
+                    M8LocalTraceKind::DesignatedPublicationImported,
+                    source_ref,
+                    context,
+                    None,
+                )))
+            }
+            M8ExactPublicationImport::Inserted | M8ExactPublicationImport::AlreadyPresent => {
+                Ok(None)
+            }
+        }
+    }
+
+    /// Verify the source and visibility evidence against the exact admitted
+    /// M8 execution plan.  This is a read-only check and never imports,
+    /// evaluates, or grants authority.
+    pub(crate) fn accepts_generated_designated_publication(
+        &self,
+        publication: &M8PublishedDesignatedValue,
+    ) -> bool {
+        self.admitted
+            .designated_execution_plans()
+            .iter()
+            .find(|plan| plan.name() == publication.value_name())
+            .is_some_and(|plan| {
+                plan.source_ref() == publication.source_ref()
+                    && plan.visibility_label() == publication.visibility_label()
+                    && plan.redaction() == publication.redaction()
+            })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn observer_safe_session(&self) -> M8LocalSessionObserver {
+        let state_projection = self.shared_snapshot.canonical_store_projection();
+        let mut state_key_refs: Vec<_> = state_projection
+            .lines()
+            .filter_map(|line| {
+                let mut fields = line.split('|');
+                (fields.next() == Some("int"))
+                    .then(|| {
+                        let state = fields.next()?;
+                        let index = fields.next()?;
+                        let field = fields.next()?;
+                        Some(format!("{state}[{index}].{field}"))
+                    })
+                    .flatten()
+            })
+            .collect();
+        state_key_refs.sort();
+        let mut published_value_refs: Vec<_> = self
+            .designated_result_store()
+            .published_value_observations()
+            .into_iter()
+            .map(|publication| format!("{}:{}", publication.value_name, publication.occurrence_id))
+            .collect();
+        published_value_refs.sort();
+        let trace_observations = self.trace.borrow().observations();
+        // Keep read keys keyed by the actual raw M8 OwnerRead occurrence.
+        // They are never merged through operation names, which could conflate
+        // two distinct RMW reads during observer inspection.
+        let owner_read_key_refs_by_node = self.owner_read_key_refs_by_node.clone();
+        M8LocalSessionObserver {
+            state_key_refs,
+            semantic_mutation_revision: observer_safe_semantic_mutation_revision(
+                &trace_observations,
+            ),
+            published_value_refs,
+            trace_observations,
+            owner_read_key_refs_by_node,
+        }
     }
 
     pub fn serve_next_owner(
@@ -1911,9 +2166,26 @@ impl M8LocalRuntime {
         let start = self.designated.trace().kinds().len();
         let outcome = self.with_designated_snapshot(|runtime| runtime.evaluate_designated(request));
         let trace_rows = self.append_designated_trace_since(start);
-        let rows = self.attach_context_to_rows(trace_rows, context);
+        let mut rows = self.attach_context_to_rows(trace_rows, context.clone());
         match outcome {
             Ok(value) => {
+                // M8 selected the publication identity.  Attach that exact
+                // returned identity to its already-allocated evaluation row;
+                // SYS-4 never fills it from a latest-result lookup.
+                let publication_context = context.with_m8_publication_id(value.value_id());
+                for row in &mut rows {
+                    if matches!(
+                        row.kind(),
+                        M8LocalTraceKind::DesignatedValuePublished
+                            | M8LocalTraceKind::DesignatedEvaluationIdempotent
+                    ) {
+                        *row = self
+                            .trace
+                            .borrow_mut()
+                            .attach_designated_context(row.node_id(), publication_context.clone())
+                            .expect("M8 evaluation row remains present");
+                    }
+                }
                 let input = designated_context_row(
                     &rows,
                     M8LocalTraceKind::DesignatedInputReceiptValidated,
@@ -2237,6 +2509,7 @@ impl M8LocalRuntime {
             lease_inventory: self.lease_inventory.clone(),
             patch_lifecycle: self.patch_lifecycle.clone(),
             entity_presence_external_controls: self.entity_presence_external_controls.clone(),
+            owner_read_key_refs_by_node: self.owner_read_key_refs_by_node.clone(),
         }
     }
 
@@ -2502,6 +2775,15 @@ impl M8LocalRuntime {
                     failure,
                     None,
                 );
+                if kind == M8LocalTraceKind::OwnerRead {
+                    // Retain the concrete keys from the single actual M8
+                    // queue row.  Observer evidence may expose this finite
+                    // read-set, but must not split it into synthetic rows.
+                    let key_refs = entry.read_key_refs();
+                    debug_assert_eq!(entry.read_key_count(), key_refs.len());
+                    self.owner_read_key_refs_by_node
+                        .insert(observation.node_id().to_string(), key_refs);
+                }
                 observations.push(observation);
             }
         }
@@ -2608,6 +2890,7 @@ impl M8LocalRuntime {
         self.lease_inventory = payload.lease_inventory.clone();
         self.patch_lifecycle = payload.patch_lifecycle.clone();
         self.entity_presence_external_controls = payload.entity_presence_external_controls.clone();
+        self.owner_read_key_refs_by_node = payload.owner_read_key_refs_by_node.clone();
     }
 }
 
@@ -2620,6 +2903,34 @@ fn owner_context_row(
         .find(|row| row.kind() == kind)
         .cloned()
         .expect("M8 owner execution emitted its required contextual trace row")
+}
+
+/// A deterministic observer token for semantic mutation progress.  It is
+/// derived from M8-owned trace kinds and ordinals only: no state value,
+/// authority, credential, raw occurrence id, or source payload crosses this
+/// observer boundary.
+#[cfg(test)]
+fn observer_safe_semantic_mutation_revision(observations: &[M8LocalTraceObservation]) -> String {
+    let mutations: Vec<_> = observations
+        .iter()
+        .enumerate()
+        .filter(|(_, observation)| {
+            matches!(
+                observation.kind(),
+                M8LocalTraceKind::OwnerWrite
+                    | M8LocalTraceKind::RelationPrimaryInvalidated
+                    | M8LocalTraceKind::RelationOptionAdvanced
+                    | M8LocalTraceKind::RelationFallbackFrozen
+                    | M8LocalTraceKind::RelationFreshLineageReacquired
+                    | M8LocalTraceKind::DesignatedValuePublished
+                    | M8LocalTraceKind::DesignatedPublicationImported
+                    | M8LocalTraceKind::PatchStateInitialized
+                    | M8LocalTraceKind::EntityPresenceSynchronized
+            )
+        })
+        .map(|(ordinal, observation)| format!("{ordinal}:{:?}", observation.kind()))
+        .collect::<Vec<_>>();
+    format!("m8-observer-semantic-mutation-revision:{mutations:?}")
 }
 
 fn designated_context_row(
